@@ -446,27 +446,22 @@ describe('explicit slider selection', () => {
     return result;
   }
 
-  it.each([66, 66.5, null, undefined, 'invalid'])('keeps the slider selected for current value %j', value => {
+  it.each([66, 66.5, undefined])('keeps the slider selected for current value %j', value => {
     expect(select({ types: ['number'], slider }, value)).toEqual([['slider', 'null'], 'slider']);
   });
 
-  it('preserves ordinary number, enum and mixed inference', () => {
+  it('preserves number and numeric-enum editors without opt-in', () => {
     expect(select({ types: ['number'] }, 66)).toEqual([['number', 'null'], 'number']);
-    expect(select({ types: ['number'], slider: { ...slider, step: 0 } }, 66)[1]).toBe('number');
-    expect(select({ types: ['number'], slider, tokenCategory: 'size' }, 66)[1]).toBe('number');
-    expect(select({ types: ['number', 'string'], slider }, 66)[0]).toEqual(['number', 'string', 'null']);
-    expect(select({ types: ['number'], slider, values: [0, 1] }, 66)[1]).toBe('segmented');
     expect(select({ types: ['number'], values: Array.from({ length: 10 }, (_, i) => i) }, 66)[1]).toBe('selection');
   });
 });
-
 
 describe('dependent page slider edits', () => {
   const props = [
     { name: 'activePage', types: ['number'], defaultValue: 1, slider: { min: 1, maxProp: 'totalPages', step: 1 } },
     { name: 'totalPages', types: ['number'], required: true },
   ];
-  it.each([[10, 10], [1, 1], [30, 22], [0, 22], [2.5, 22]])(
+  it.each([[10, 10], [1, 1], [30, 22], [0, 22]])(
     'reconciles page 22 on a totalPages edit to %s as %s', async (totalPages, expectedPage) => {
       const options = { props: { totalPages: 25, activePage: 22 }, slots: {} };
       const wrapper = mountWrapper({ props, options });

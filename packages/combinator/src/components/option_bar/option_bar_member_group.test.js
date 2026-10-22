@@ -432,7 +432,6 @@ describe('slider argument forwarding', () => {
   });
 });
 
-
 it('updates slider bounds from sibling values while retaining slider selection for invalid totals', async () => {
   const wrapper = mount(DtcOptionBarMemberGroup, {
     props: {
@@ -445,11 +444,11 @@ it('updates slider bounds from sibling values while retaining slider selection f
     },
   });
   const control = () => wrapper.findComponent({ name: 'DtcOptionBarControl' });
-  expect(control().props('args').sliderConfig.max).toBe(25);
+  expect(control().find('input[type=range]').attributes('max')).toBe('25');
   await wrapper.setProps({ propValues: { totalPages: 10 } });
-  expect(control().props('args').sliderConfig.max).toBe(10);
+  expect(control().find('input[type=range]').attributes('max')).toBe('10');
   await wrapper.setProps({ propValues: { totalPages: 0 } });
-  expect(control().props('args').sliderConfig).toBeNull();
+  expect(control().find('input').exists()).toBe(false);
   expect(control().findComponent({ name: 'DtcControlSlider' }).exists()).toBe(true);
   expect(wrapper.emitted('update:member')).toBeUndefined();
   wrapper.unmount();
