@@ -322,7 +322,7 @@ function extendMember (member) {
     clearable,
     deprecated,
     disableControl: inactive,
-    sliderConfig: getSliderControlConfig(member),
+    sliderConfig: getSliderControlConfig(member, props.propValues),
   };
 }
 

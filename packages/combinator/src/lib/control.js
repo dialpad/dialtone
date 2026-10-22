@@ -119,12 +119,11 @@ export function getControlByMemberType (type, args) {
 
   if (isMixedBooleanEnum(values)) return 'segmented';
   if (type === 'boolean') return 'boolean';
+  if (type === 'number' && getSliderControlConfig(args)) return 'slider';
 
   if (values.length > 0) {
     return shouldUseSegmented(values) ? 'segmented' : 'selection';
   }
-
-  if (type === 'number' && getSliderControlConfig(args)) return 'slider';
 
   return type === 'string' ? 'string' : type;
 }

@@ -2,6 +2,7 @@ import * as components from '@dialpad/dialtone-vue';
 import documentation from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
 import variants from '@/src/variants/variants';
 import { getSliderControlConfig, isSliderControlValue } from './slider_control';
+import { shouldDisable } from './exclusion_rules';
 import { buildVariantInfo, listVariantNames } from './variant_state';
 
 const slider = { min: 0, max: 100, step: 1, suffix: '%' };
@@ -28,7 +29,7 @@ describe('slider control eligibility', () => {
 
   it.each([
     { types: ['string'] }, { types: ['number', 'string'] }, { types: ['number[]'] },
-    { values: [0, 1] }, { tokenCategory: 'size' },
+    { tokenCategory: 'size' },
   ])('rejects ineligible member %j', override => {
     expect(getSliderControlConfig({ ...member, ...override })).toBeNull();
   });
@@ -52,22 +53,80 @@ describe('slider control eligibility', () => {
 
 describe('real variant bank slider declarations', () => {
   const bank = variants();
+  const adopted = [
+    'DtAvatar.variant', 'DtPagination.activePage', 'DtPagination.maxVisible',
+    'DtProgressCircle.progress', 'DtText.maxLines',
+  ];
+  const infoFor = (name, preset) =>
+    buildVariantInfo(components[name], documentation.find(d => d.displayName === name), bank[name], preset);
 
-  it('opts in only ProgressCircle progress', () => {
+  it('opts in only the adopted properties', () => {
     const declarations = Object.entries(bank).flatMap(([name, componentVariants]) =>
       Object.values(componentVariants).flatMap(variant =>
         Object.entries(variant.props ?? {})
           .filter(([, metadata]) => metadata.slider)
           .map(([prop]) => `${name}.${prop}`)));
-    expect([...new Set(declarations)]).toEqual(['DtProgressCircle.progress']);
+    expect([...new Set(declarations)].sort()).toEqual(adopted);
   });
 
-  it.each(listVariantNames(bank.DtProgressCircle))('accepts the %s preset initial value', preset => {
-    const doc = documentation.find(d => d.displayName === 'DtProgressCircle');
-    const info = buildVariantInfo(components.DtProgressCircle, doc, bank.DtProgressCircle, preset);
-    const member = info.props.find(p => p.name === 'progress');
-    const config = getSliderControlConfig(member);
-    expect(config).not.toBeNull();
-    expect(isSliderControlValue(member.initialValue, config, member.validator)).toBe(true);
+  it('keeps Avatar variant unset by default while opting in to the slider', () => {
+    const variant = infoFor('DtAvatar', 'default').props.find(p => p.name === 'variant');
+    expect(variant.initialValue).toBeUndefined();
+    expect(getSliderControlConfig(variant)).toEqual({ min: 0, max: 9, step: 1, suffix: '' });
+  });
+
+  const cases = [...new Set(adopted.map(prop => prop.split('.')[0]))].flatMap(name => listVariantNames(bank[name])
+    .map(preset => ({ name, preset, members: infoFor(name, preset).props.filter(p => p.slider) }))
+    .filter(({ members }) => members.length));
+  it.each(cases)('$name $preset has safe effective slider settings', ({ name, preset, members }) => {
+    const values = Object.fromEntries(infoFor(name, preset).props.map(p => [p.name, p.initialValue ?? p.defaultValue]));
+    for (const member of members) {
+      const config = getSliderControlConfig(member, values);
+      expect(config).not.toBeNull();
+      if (member.initialValue == null) {
+        expect([null, undefined]).toContain(member.defaultValue);
+        expect(member.required).toBeFalsy();
+      } else {
+        expect(isSliderControlValue(member.initialValue, config, member.validator)).toBe(true);
+      }
+    }
+  });
+
+  it('preserves Pagination zero as a selectable preset outside the odd slider grid', () => {
+    const member = infoFor('DtPagination', 'without page numbers').props.find(p => p.name === 'maxVisible');
+    expect(member.initialValue).toBe(0);
+    expect(getSliderControlConfig(member)).toBeNull();
+  });
+
+  it('disables Avatar variant when its color effect is absent', () => {
+    const rules = bank.DtAvatar.exclusions;
+    expect(shouldDisable('variant', 'props', rules, { imageSrc: 'photo.png' }, {})).toBe(true);
+    expect(shouldDisable('variant', 'props', rules, {}, { icon: '<dt-icon-user />' })).toBe(true);
+  });
+});
+
+describe('explicit numeric enum grids', () => {
+  const enumMember = { types: ['number'], slider: { min: 0, max: 2, step: 1 }, values: ['2', '0', '1'] };
+  it('accepts complete numeric docgen grids without changing docgen values', () => {
+    expect(getSliderControlConfig(enumMember)).toEqual({ min: 0, max: 2, step: 1, suffix: '' });
+    expect(enumMember.values).toEqual(['2', '0', '1']);
+  });
+  it.each([[['0', '2']], [['0', '1', '1']], [['0', '1', 'other']], [['0', '1', '3']]])(
+    'rejects incomplete, duplicate, nonnumeric or out-of-grid values %j', values => {
+      expect(getSliderControlConfig({ ...enumMember, values })).toBeNull();
+    },
+  );
+});
+
+
+describe('prop-dependent slider maximum', () => {
+  const member = { types: ['number'], slider: { min: 1, maxProp: 'totalPages', step: 1 } };
+  it('keeps the opt-in eligible and resolves current bounds, including a single value', () => {
+    expect(getSliderControlConfig(member)).not.toBeNull();
+    expect(getSliderControlConfig(member, { totalPages: 25 })).toEqual({ min: 1, max: 25, step: 1, suffix: '' });
+    expect(getSliderControlConfig(member, { totalPages: 1 })).toEqual({ min: 1, max: 1, step: 1, suffix: '' });
+  });
+  it.each([undefined, null, 0, -1, 2.5, Infinity, '25'])('rejects unusable runtime maximum %j', totalPages => {
+    expect(getSliderControlConfig(member, { totalPages })).toBeNull();
   });
 });

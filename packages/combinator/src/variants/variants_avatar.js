@@ -5,10 +5,19 @@ export default {
     props: {
       size: { tokenCategory: 'component-size:avatar' },
       family: { tokenCategory: 'color:d-avatar[data-avatar-family]:backgroundColor' },
+      variant: { slider: { min: 0, max: 9, step: 1 } },
     },
   },
 
   exclusions: [
+    {
+      when: { imageSrc: hasValue },
+      disable: { props: ['variant'] },
+    },
+    {
+      whenSlots: { icon: hasValue },
+      disable: { props: ['variant'] },
+    },
     {
       when: { iconOnly: true },
       hide: {
@@ -41,6 +50,16 @@ export default {
       ...disableAndClearProps(['clickable']),
     },
   ],
+
+  'color exploration': {
+    props: {
+      fullName: { initialValue: 'Daniel Parker' },
+      seed: { initialValue: 'color-exploration' },
+      family: { initialValue: 8 },
+      variant: { initialValue: 4 },
+      size: { initialValue: '500' },
+    },
+  },
 
   default: {
     props: {

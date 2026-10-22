@@ -1,12 +1,13 @@
 import { mount } from '@vue/test-utils';
 import { DtSlider } from '@dialpad/dialtone-vue';
 import DtcControlSlider from './control_slider.vue';
+import { ADD_BUTTON_SELECTOR, REMOVE_BUTTON_SELECTOR } from '@/src/lib/test/utils_test';
 
 const sliderConfig = { min: 0, max: 100, step: 1, suffix: '%' };
 let wrapper;
 const mountControl = (props = {}) => {
   wrapper = mount(DtcControlSlider, {
-    props: { value: 66, sliderConfig, label: 'Progress', ...props },
+    props: { value: 66, sliderConfig, label: 'Progress', clearable: false, ...props },
     slots: { default: '<span>Progress heading</span>' },
   });
   return wrapper;
@@ -61,4 +62,43 @@ describe('slider adapter', () => {
     mountControl({ sliderConfig: null });
     expect(wrapper.find('input').exists()).toBe(false);
   });
+});
+
+describe('optional slider values', () => {
+  it('only materializes a value on Add, preserves zero, and removes to undefined', async () => {
+    mountControl({ value: undefined, clearable: true, defaultValue: 0 });
+    expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
+    expect(wrapper.emitted('update:value')).toBeUndefined();
+    await wrapper.get(ADD_BUTTON_SELECTOR).trigger('click');
+    expect(wrapper.emitted('update:value')).toEqual([[0]]);
+    await wrapper.setProps({ value: 0 });
+    expect(wrapper.findComponent(DtSlider).exists()).toBe(true);
+    await wrapper.get(REMOVE_BUTTON_SELECTOR).trigger('click');
+    expect(wrapper.emitted('update:value')).toEqual([[0], [undefined]]);
+    await wrapper.setProps({ value: undefined });
+    expect(wrapper.find(ADD_BUTTON_SELECTOR).exists()).toBe(true);
+  });
+
+  it('uses the grid minimum for explicit Add without a default and blocks unusable activation', async () => {
+    mountControl({ value: null, clearable: true, sliderConfig: { min: 1, max: 10, step: 1 } });
+    await wrapper.get(ADD_BUTTON_SELECTOR).trigger('click');
+    expect(wrapper.emitted('update:value')).toEqual([[1]]);
+    await wrapper.setProps({ disabled: true });
+    expect(wrapper.get(ADD_BUTTON_SELECTOR).element.disabled).toBe(true);
+    await wrapper.setProps({ disabled: false, defaultValue: 1.5 });
+    expect(wrapper.get(ADD_BUTTON_SELECTOR).element.disabled).toBe(true);
+    expect(wrapper.emitted('update:value')).toEqual([[1]]);
+  });
+});
+
+
+it('keeps a single-page range noninteractive without emitting', async () => {
+  mountControl({ value: 1, sliderConfig: { min: 1, max: 1, step: 1, suffix: '' } });
+  expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
+  expect(wrapper.text()).toContain('1');
+  await wrapper.setProps({ sliderConfig: { min: 1, max: 10, step: 1, suffix: '' } });
+  expect(wrapper.findComponent(DtSlider).exists()).toBe(true);
+  await wrapper.setProps({ value: 9, sliderConfig: { min: 1, max: 5, step: 1, suffix: '' } });
+  expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
+  expect(wrapper.emitted('update:value')).toBeUndefined();
 });

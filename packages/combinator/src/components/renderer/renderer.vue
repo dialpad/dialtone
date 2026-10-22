@@ -1,5 +1,6 @@
 <template>
   <dtc-renderer-target
+    :key="sliderBoundsKey"
     :component="component"
     :bindings="options.bindings.get()"
     :events="info.events"
@@ -79,6 +80,12 @@ const emit = defineEmits([
  *
  * @type {ComputedRef<object>}
  */
+// Bound changes can alter a target's internal selection without emitting a
+// prop update. Recreate that preview from canonical options when bounds change.
+const sliderBoundsKey = computed(() => JSON.stringify((props.info.props ?? [])
+  .filter(member => member.slider?.maxProp)
+  .map(member => props.options.props?.[member.slider.maxProp])));
+
 const renderedSlots = computed(() => nonEmptySlots(props.options.slots));
 
 </script>

@@ -1,11 +1,17 @@
 <template>
   <dtc-control-clearable-shell
     :label="label"
-    :empty="false"
-    :clearable="false"
-    :disabled="disabled"
+    :empty="isEmpty"
+    :clearable="clearable"
+    :required="required"
+    :disabled="disabled || (isEmpty && !canAdd)"
     align="center"
+    @add="addValue"
+    @clear="clearValue"
   >
+    <template #label>
+      <slot />
+    </template>
     <template #expanded-label>
       <dt-text
         kind="label"
@@ -18,6 +24,7 @@
     </template>
     <dt-slider
       v-if="canEdit"
+      ref="sliderRef"
       :key="configKey"
       class="d-w100p"
       :model-value="value"
@@ -35,13 +42,14 @@
       as="div"
       tone="secondary"
     >
-      {{ String(value) }} — unavailable for this slider
+      {{ String(value) }} — {{ unavailableReason }}
     </dt-text>
   </dtc-control-clearable-shell>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, nextTick, ref } from 'vue';
+import { useClearableState } from '@/src/lib/utils_vue';
 import { DtSlider, DtText } from '@dialpad/dialtone-vue';
 import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
@@ -53,11 +61,34 @@ const props = defineProps({
   label: { type: String, default: '' },
   disabled: { type: Boolean, default: false },
   validator: { type: Function, default: undefined },
+  defaultValue: { type: Number, default: undefined },
+  clearable: { type: Boolean, default: true },
+  required: { type: Boolean, default: false },
 });
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
-const canEdit = computed(() => isSliderControlValue(props.value, props.sliderConfig, props.validator));
+const sliderRef = ref(null);
+const { isEmpty, clearDisabled } = useClearableState(props);
+const addValueCandidate = computed(() => props.defaultValue ?? props.sliderConfig?.min);
+const canAdd = computed(() => isSliderControlValue(addValueCandidate.value, props.sliderConfig, props.validator));
+const canEdit = computed(() => props.sliderConfig?.max > props.sliderConfig?.min &&
+  isSliderControlValue(props.value, props.sliderConfig, props.validator));
+const unavailableReason = computed(() =>
+  props.sliderConfig && props.value === props.sliderConfig.min && props.sliderConfig.min === props.sliderConfig.max
+    ? 'only available value'
+    : 'unavailable for this slider');
 // Recreate on configuration changes so DtSlider cannot normalize its old internal value.
 const configKey = computed(() => JSON.stringify(props.sliderConfig));
+
+async function addValue () {
+  emit(VALUE_UPDATE_EVENT, addValueCandidate.value);
+  await nextTick();
+  sliderRef.value?.focus();
+}
+
+function clearValue () {
+  if (clearDisabled.value) return;
+  emit(VALUE_UPDATE_EVENT, undefined);
+}
 
 function updateValue (value) {
   if (props.disabled || !isSliderControlValue(value, props.sliderConfig, props.validator)) return;
