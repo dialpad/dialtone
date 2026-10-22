@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import { shouldExclude, shouldDisable, shouldClear, getDisabledValues } from './exclusion_rules';
+import { shouldExclude, shouldDisable, shouldClear, getDisabledValues, getHiddenValues } from './exclusion_rules';
 import variantsAvatar from '@/src/variants/variants_avatar';
 import variantsBadge from '@/src/variants/variants_badge';
 import variantsBox, { INSET_PROPS } from '@/src/variants/variants_box';
@@ -30,6 +30,19 @@ function expectEnabled (memberName, exclusionRules, propValues = {}, slotValues 
 }
 
 describe('exclusion_rules', function () {
+  describe('getHiddenValues', function () {
+    it('should collect values from hideValues rules whose conditions match', function () {
+      const rule = { when: { kind: 'body' }, hideValues: { props: { size: ['500', 600] } } };
+
+      expect(getHiddenValues('size', [rule], { kind: 'body' })).toEqual(new Set(['500', '600']));
+      expect(getHiddenValues('size', [rule], { kind: 'headline' }).size).toBe(0);
+    });
+
+    it('should not treat disableValues as hidden', function () {
+      expect(getHiddenValues('size', [EQUALITY_RULE], { kind: 'body' }).size).toBe(0);
+    });
+  });
+
   describe('getDisabledValues', function () {
     it('should return empty Set when no rules', function () {
       expect(getDisabledValues('size', [], { kind: 'body' }).size).toBe(0);
@@ -116,15 +129,17 @@ describe('exclusion_rules', function () {
       expect(variantsBadge.defaults.props.variant.initialValue).toBe('neutral');
     });
 
-    it('should only offer the variants of the selected DtBadge kind', function () {
-      const disabled = kind => getDisabledValues('variant', variantsBadge.exclusions, { kind });
+    it('should only list the variants of the selected DtBadge kind', function () {
+      const hidden = kind => getHiddenValues('variant', variantsBadge.exclusions, { kind });
 
-      expect(disabled('status').has('neutral')).toBe(false);
-      expect(disabled('status').has('count')).toBe(true);
-      expect(disabled('counter').has('mention')).toBe(false);
-      expect(disabled('counter').has('critical')).toBe(true);
-      expect(disabled('lifecycle').has('early-access')).toBe(false);
-      expect(disabled('lifecycle').has('neutral')).toBe(true);
+      expect(hidden('status').has('neutral')).toBe(false);
+      expect(hidden('status').has('count')).toBe(true);
+      expect(hidden('counter').has('mention')).toBe(false);
+      expect(hidden('counter').has('critical')).toBe(true);
+      expect(hidden('release').has('pre-release')).toBe(false);
+      expect(hidden('release').has('neutral')).toBe(true);
+      expect(hidden('lifecycle').has('published')).toBe(false);
+      expect(hidden('lifecycle').has('pre-release')).toBe(true);
     });
 
     it('should clear a DtBadge variant that does not belong to the selected kind', function () {

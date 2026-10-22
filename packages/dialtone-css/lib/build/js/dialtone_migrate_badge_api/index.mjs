@@ -26,8 +26,8 @@ const BADGE_OPEN_TAG_SOURCE = `<((?:dt-badge|DtBadge)(?=[\\s/>]))(${QUOTE_AWARE_
 const BADGE_OPEN_TAG_RE = new RegExp(`^${BADGE_OPEN_TAG_SOURCE}`);
 const BADGE_ANY_OPEN_TAG_RE = new RegExp(BADGE_OPEN_TAG_SOURCE, 'g');
 
-// Badges are organized in groups (status, counter, lifecycle). `kind` names the group and defaults to status.
-const GROUPS = ['status', 'counter', 'lifecycle'];
+// Badges are organized in groups (status, counter, release, lifecycle). `kind` names the group and defaults to status.
+const GROUPS = ['status', 'counter', 'release', 'lifecycle'];
 
 // Released (v10) `type` values -> group + variant.
 const STATIC_TYPE_MAP = {
@@ -36,10 +36,10 @@ const STATIC_TYPE_MAP = {
   positive: { kind: 'status', variant: 'positive' },
   warning: { kind: 'status', variant: 'warning' },
   critical: { kind: 'status', variant: 'critical' },
-  bulletin: { kind: 'lifecycle', variant: 'new' },
+  bulletin: { kind: 'release', variant: 'pre-release' },
 };
 
-// Interim (pre-group) `variant` values -> group + variant. `lifecycle` depends on emphasis, see below.
+// Interim (pre-group) `variant` values -> group + variant. `lifecycle` is handled as a release below.
 const INTERIM_VARIANT_MAP = {
   base: { kind: 'status', variant: 'neutral' },
   info: { kind: 'status', variant: 'info' },
@@ -47,24 +47,24 @@ const INTERIM_VARIANT_MAP = {
   warning: { kind: 'status', variant: 'warning' },
   critical: { kind: 'status', variant: 'critical' },
   count: { kind: 'counter', variant: 'count' },
-  new: { kind: 'lifecycle', variant: 'new' },
 };
 
 // Variant names that are already part of the grouped API but are missing `kind`.
 const GROUPED_VARIANT_MAP = {
   neutral: { kind: 'status', variant: 'neutral' },
   mention: { kind: 'counter', variant: 'mention' },
-  internal: { kind: 'lifecycle', variant: 'internal' },
-  'early-access': { kind: 'lifecycle', variant: 'early-access' },
-  recent: { kind: 'lifecycle', variant: 'recent' },
-  familiar: { kind: 'lifecycle', variant: 'familiar' },
 };
 
-// Interim `variant="lifecycle"` carried the stage in its emphasis: subtle = alpha, base = beta, strong = GA.
-const INTERIM_LIFECYCLE_BY_EMPHASIS = {
-  subtle: 'internal',
-  base: 'early-access',
-  strong: 'new',
+// Interim lifecycle variants -> release group. Both release variants default to strong emphasis now,
+// so the ones that used to default to base (internal, early-access, familiar) get an explicit base emphasis.
+// These are also migrated when `kind="lifecycle"` is set, because lifecycle now holds content states
+// (draft, published, ...), which are never touched.
+const RELEASE_VARIANT_MAP = {
+  new: { kind: 'release', variant: 'pre-release' },
+  internal: { kind: 'release', variant: 'pre-release', emphasis: 'base' },
+  'early-access': { kind: 'release', variant: 'pre-release', emphasis: 'base' },
+  recent: { kind: 'release', variant: 'release' },
+  familiar: { kind: 'release', variant: 'release', emphasis: 'base' },
 };
 
 function stripQuotedValues (attrs) {
@@ -132,6 +132,11 @@ function replaceOrInsertVariant (attrs, variant) {
   return insertAttr(attrs, `variant="${variant}"`);
 }
 
+// Puts emphasis right after variant, on the same line or the next one, matching how the variant is laid out.
+function insertEmphasisAfterVariant (attrs, emphasis) {
+  return attrs.replace(/(\s+)(variant\s*=\s*(?:"[^"]*"|'[^']*'))/, `$1$2$1emphasis="${emphasis}"`);
+}
+
 function replaceOrInsertKind (attrs, kind) {
   if (hasStaticAttr(attrs, 'kind')) {
     return attrs.replace(/(\skind\s*=\s*)(?:"[^"]*"|'[^']*')/, `$1"${kind}"`);
@@ -176,15 +181,20 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
 
   // Infer the group (kind) and variant from what the badge uses today.
   let target = null;
-  if (GROUPS.includes(kindValue) || hasDynamicKind) {
+  if (kindValue === 'lifecycle' && RELEASE_VARIANT_MAP[variantValue]) {
+    target = RELEASE_VARIANT_MAP[variantValue]; // interim release variant under the old lifecycle group
+  } else if (GROUPS.includes(kindValue) || hasDynamicKind) {
     target = null; // already has a group
   } else if (hasDynamicGroupSource) {
     warnings.push(`BADGE_API_DYNAMIC_KIND file=${filePath}`);
   } else if (variantValue) {
     if (variantValue === 'lifecycle') {
-      target = { kind: 'lifecycle', variant: INTERIM_LIFECYCLE_BY_EMPHASIS[emphasisValue] || 'early-access' };
-    } else if (INTERIM_VARIANT_MAP[variantValue] || GROUPED_VARIANT_MAP[variantValue]) {
-      target = INTERIM_VARIANT_MAP[variantValue] || GROUPED_VARIANT_MAP[variantValue];
+      // The interim lifecycle variant stored the stage in emphasis, which is kept. With none it was early-access.
+      target = RELEASE_VARIANT_MAP['early-access'];
+    } else if (RELEASE_VARIANT_MAP[variantValue] || INTERIM_VARIANT_MAP[variantValue]
+      || GROUPED_VARIANT_MAP[variantValue]) {
+      target = RELEASE_VARIANT_MAP[variantValue] || INTERIM_VARIANT_MAP[variantValue]
+        || GROUPED_VARIANT_MAP[variantValue];
     } else {
       warnings.push(`BADGE_API_UNKNOWN_VARIANT file=${filePath} variant=${variantValue}`);
     }
@@ -210,9 +220,8 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
     attrs = removeAttr(attrs, 'kind');
     if (target.variant) attrs = replaceOrInsertVariant(attrs, target.variant);
     attrs = replaceOrInsertKind(attrs, target.kind);
-    // The interim lifecycle variant stored the stage in emphasis; the stage is the variant now.
-    if (variantValue === 'lifecycle' && emphasisValue === 'subtle') attrs = replaceOrInsertEmphasis(attrs, 'subtle');
-    if (variantValue === 'lifecycle' && emphasisValue === 'base') attrs = removeAttr(attrs, 'emphasis');
+    // Keep the old default look: without an explicit emphasis these used to render as base, not strong.
+    if (target.emphasis && !hasAttr(attrs, 'emphasis')) attrs = insertEmphasisAfterVariant(attrs, target.emphasis);
     if (emphasisValue === 'clear') {
       warnings.push(`BADGE_API_CLEAR_UNSUPPORTED file=${filePath}`);
       attrs = removeAttr(attrs, 'emphasis');

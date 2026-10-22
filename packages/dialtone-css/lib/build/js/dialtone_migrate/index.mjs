@@ -207,7 +207,8 @@ const MIGRATIONS = [
   {
     id: 'badge-api',
     name: 'DtBadge API Updates',
-    description: 'DtBadge adds kind (status/counter/lifecycle) and moves to variant/emphasis/label; type/text are deprecated.',
+    description: 'DtBadge adds kind (status/counter/release/lifecycle) and moves to variant/emphasis/label; '
+      + 'type/text are deprecated.',
     category: 'required',
     type: 'standalone',
     scriptDir: 'dialtone_migrate_badge_api',
@@ -218,6 +219,11 @@ const MIGRATIONS = [
       new RegExp(
         '<(?:dt-badge|DtBadge)(?=[\\s/>])(?![^>]*\\s(?::|v-bind:)?kind\\b)[^>]*\\svariant\\s*=\\s*["\'](?:'
         + 'base|lifecycle|new|count|mention|internal|early-access|recent|familiar)["\']',
+      ),
+      // The interim lifecycle variants that now belong to the release group
+      new RegExp(
+        '<(?:dt-badge|DtBadge)(?=[\\s/>])(?=[^>]*\\skind\\s*=\\s*["\']lifecycle["\'])[^>]*\\svariant\\s*=\\s*["\'](?:'
+        + 'new|internal|early-access|recent|familiar)["\']',
       ),
     ],
     fileExtensions: ['.vue'],

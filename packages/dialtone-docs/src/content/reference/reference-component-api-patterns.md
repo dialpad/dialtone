@@ -80,7 +80,7 @@ Color or semantic variant. Values vary per component:
 - DtButton: `default`, `muted`, `critical`, `positive`, `inverted`, `unstyled`
 - DtModal: `default`, `critical`
 - DtNotice: `base`, `critical`, `info`, `positive`, `warning`
-- DtBadge: grouped by `kind` (`status`, `counter`, `lifecycle`). `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `lifecycle`: `internal`, `early-access`, `new`, `recent`, `familiar`
+- DtBadge: grouped by `kind` (`status`, `counter`, `release`, `lifecycle`). `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `release`: `pre-release`, `release`. `lifecycle`: `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled`
 - DtChip: `default`, `people`
 
 For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text compositions.

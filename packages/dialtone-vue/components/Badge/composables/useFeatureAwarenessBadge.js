@@ -11,16 +11,16 @@ function normalizeInteger (value) {
 
 function validateThresholds (thresholds) {
   const newThreshold = normalizeInteger(thresholds.new);
-  const lifecycleThreshold = normalizeInteger(thresholds.lifecycle);
+  const releaseThreshold = normalizeInteger(thresholds.release);
   const hiddenThreshold = normalizeInteger(thresholds.hidden);
 
   if (
     newThreshold === null ||
-    lifecycleThreshold === null ||
+    releaseThreshold === null ||
     hiddenThreshold === null ||
     newThreshold < 0 ||
-    lifecycleThreshold <= newThreshold ||
-    hiddenThreshold <= lifecycleThreshold
+    releaseThreshold <= newThreshold ||
+    hiddenThreshold <= releaseThreshold
   ) {
     console.warn(
       'DtBadge warning: feature awareness thresholds must be ascending non-negative integers. ' +
@@ -31,7 +31,7 @@ function validateThresholds (thresholds) {
 
   return {
     new: newThreshold,
-    lifecycle: lifecycleThreshold,
+    release: releaseThreshold,
     hidden: hiddenThreshold,
   };
 }
@@ -87,7 +87,7 @@ export function useFeatureAwarenessBadge (options = {}) {
 
   const stage = computed(() => {
     if (exposureCount.value >= thresholds.value.hidden) return 'hidden';
-    if (exposureCount.value >= thresholds.value.lifecycle) return 'lifecycle';
+    if (exposureCount.value >= thresholds.value.release) return 'release';
     return 'new';
   });
 
