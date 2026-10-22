@@ -51,16 +51,6 @@ export default {
     },
   ],
 
-  'color exploration': {
-    props: {
-      fullName: { initialValue: 'Daniel Parker' },
-      seed: { initialValue: 'color-exploration' },
-      family: { initialValue: 8 },
-      variant: { initialValue: 4 },
-      size: { initialValue: '500' },
-    },
-  },
-
   default: {
     props: {
       fullName: {
