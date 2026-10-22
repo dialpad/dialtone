@@ -310,6 +310,14 @@ describe('dialtone-migrate-badge-api', () => {
       assert.ok(warnings(input).some(warning => warning.startsWith('BADGE_API_DYNAMIC_KIND')));
     });
 
+    it('leaves text in place and warns when the badge already has a label', () => {
+      const input = '<dt-badge text="Old" label="Current" />';
+
+      assert.ok(run(input).includes('text="Old"'));
+      assert.equal((run(input).match(/label=/g) ?? []).length, 1);
+      assert.ok(warnings(input).some(warning => warning.startsWith('BADGE_API_TEXT_AND_LABEL')));
+    });
+
     it('warns for dynamic type bindings', () => {
       const input = '<dt-badge :type="badgeType" text="Badge" />';
 

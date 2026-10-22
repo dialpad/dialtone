@@ -212,17 +212,20 @@ const MIGRATIONS = [
     category: 'required',
     type: 'standalone',
     scriptDir: 'dialtone_migrate_badge_api',
+    // DT_TAG_ATTRS skips quoted values, so `v-if="count > 0"` doesn't end the tag early.
     detectPatterns: [
-      /<(?:dt-badge|DtBadge)(?=[\s/>])[^>]*\s(?::|v-bind:)?(?:type|text)\s*=/,
-      /<(?:dt-badge|DtBadge)(?=[\s/>])[^>]*\skind\s*=\s*["'](?:count|label)["']/,
+      new RegExp(`<(?:dt-badge|DtBadge)(?=[\\s/>])${DT_TAG_ATTRS}\\s(?::|v-bind:)?(?:type|text)\\s*=`),
+      new RegExp(`<(?:dt-badge|DtBadge)(?=[\\s/>])${DT_TAG_ATTRS}\\skind\\s*=\\s*["'](?:count|label)["']`),
       // A variant that now belongs to another group, with no kind (kind defaults to status)
       new RegExp(
-        '<(?:dt-badge|DtBadge)(?=[\\s/>])(?![^>]*\\s(?::|v-bind:)?kind\\b)[^>]*\\svariant\\s*=\\s*["\'](?:'
+        `<(?:dt-badge|DtBadge)(?=[\\s/>])(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?kind\\b)`
+        + `${DT_TAG_ATTRS}\\svariant\\s*=\\s*["'](?:`
         + 'base|lifecycle|new|count|mention|internal|early-access|recent|familiar)["\']',
       ),
       // The interim lifecycle variants that now belong to the release group
       new RegExp(
-        '<(?:dt-badge|DtBadge)(?=[\\s/>])(?=[^>]*\\skind\\s*=\\s*["\']lifecycle["\'])[^>]*\\svariant\\s*=\\s*["\'](?:'
+        `<(?:dt-badge|DtBadge)(?=[\\s/>])(?=${DT_TAG_ATTRS}\\skind\\s*=\\s*["']lifecycle["'])`
+        + `${DT_TAG_ATTRS}\\svariant\\s*=\\s*["'](?:`
         + 'new|internal|early-access|recent|familiar)["\']',
       ),
     ],

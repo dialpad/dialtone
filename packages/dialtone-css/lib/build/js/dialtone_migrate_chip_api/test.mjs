@@ -111,6 +111,12 @@ describe('dialtone-migrate-chip-api', () => {
     assert.equal(run(input), input);
   });
 
+  it('renames an unquoted slot attribute value without adding quotes', () => {
+    const output = run('<dt-chip size="300"><span slot=avatar>A</span></dt-chip>');
+
+    assert.ok(output.includes('<span slot=startAvatar>'));
+  });
+
   it('renames v-slot and slot attribute forms only on direct children', () => {
     const input = [
       '<dt-chip size="300">',

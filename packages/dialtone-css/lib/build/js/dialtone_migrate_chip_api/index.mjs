@@ -123,7 +123,8 @@ function renameSlotAttrs (attrs) {
     } else if (token.name === 'slot' && token.value !== null && SLOT_RENAMES[unquote(token.value)]) {
       oldSlot = unquote(token.value);
       const eq = result.slice(token.start + token.name.length, token.end - token.value.length);
-      replacement = `slot${eq}${token.value[0]}${SLOT_RENAMES[oldSlot]}${token.value[0]}`;
+      const quote = /^["']/.test(token.value) ? token.value[0] : '';
+      replacement = `slot${eq}${quote}${SLOT_RENAMES[oldSlot]}${quote}`;
     }
     if (oldSlot) {
       found[oldSlot] = true;
