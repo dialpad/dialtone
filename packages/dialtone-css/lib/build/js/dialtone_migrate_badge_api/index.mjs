@@ -199,7 +199,12 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
     warnings.push(`BADGE_API_DECORATION file=${filePath}`);
   }
 
-  attrs = renameAttr(attrs, 'text', 'label');
+  // Renaming text to label would duplicate an existing label. Leave text for the author to resolve.
+  if (hasAttr(attrs, 'text') && (hasAttr(attrs, 'label') || hasDynamicAttr(attrs, 'label'))) {
+    warnings.push(`BADGE_API_TEXT_AND_LABEL file=${filePath}`);
+  } else {
+    attrs = renameAttr(attrs, 'text', 'label');
+  }
   const typeValue = getStaticAttrValue(attrs, 'type');
   const kindValue = getStaticAttrValue(attrs, 'kind');
   const variantValue = getStaticAttrValue(attrs, 'variant');

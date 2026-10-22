@@ -137,6 +137,13 @@ describe('--health-check', () => {
     assert.match(badge, /\[PENDING\].*DtBadge API Updates \(badge-api\)/);
   });
 
+  it('flags a legacy badge prop that follows a quoted attribute containing >', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-badge v-if="count > 0" type="info" /></template>',
+    });
+    assert.match(output, /\[PENDING\].*DtBadge API Updates \(badge-api\)/);
+  });
+
   it('still flags show= on a Dialtone component as component-props', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-modal show="isOpen"></dt-modal></template>',
