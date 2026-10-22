@@ -122,7 +122,8 @@ progress: { slider: { min: 0, max: 100, step: 1, suffix: '%' } },
 Numeric type or choice count alone never opts in; keep segmented controls for
 small choice sets and selection controls for categorical values. See
 `packages/combinator/.github/documentation/internal/CONTROLS.md#explicit-slider-opt-in`
-for eligibility rules and editor behavior.
+for eligibility rules and editor behavior. Explicit scalar numeric enums must
+cover the complete configured grid.
 
 ## Logical naming
 
