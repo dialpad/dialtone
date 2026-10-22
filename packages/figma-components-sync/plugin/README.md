@@ -1,4 +1,4 @@
-# Dialtone Spec Builder — Figma dev plugin
+# Dialtone Components Sync — Figma dev plugin
 
 Builds component pages in Figma directly from the measured specs, with no payload
 copying. Everything it needs is already generated; you only run it.
@@ -12,9 +12,9 @@ step in this pipeline with an undetectable failure mode. A real dev plugin *does
 a local server itself.
 
 `code.js` is **generated** from `sync-scripts/generic-builder.js` by
-`sync-scripts/build-plugin.mjs` — never edit it by hand. Several bugs in this project
-were drift between a versioned builder and what actually ran; generating removes that
-class of bug entirely.
+`sync-scripts/build-plugin.mjs` into this directory — never edit it by hand. Several
+bugs in this project were drift between a versioned builder and what actually ran;
+generating removes that class of bug entirely.
 
 ## One-time setup (about a minute)
 
@@ -24,9 +24,9 @@ class of bug entirely.
    (if it rejects the manifest, re-run `build-plugin.mjs` — the manifest is generated,
    and an older one allowlisted an IP literal that Figma refuses)
 4. Choose:
-   `packages/figma-components-sync/sync-scripts/figma-plugin/manifest.json`
+   `packages/figma-components-sync/plugin/manifest.json`
 
-That registers "Dialtone Spec Builder" under Plugins → Development. You only do this
+That registers "Dialtone Components Sync" under Plugins → Development. You only do this
 once; it survives restarts.
 
 ## Each run — one command
@@ -98,14 +98,16 @@ of this.
    It serves `build-data/` on `http://127.0.0.1:8931` and waits for the plugin to POST
    its results back.
 
-3. **Run the plugin** in Figma: Plugins → Development → **Dialtone Spec Builder**.
+3. **Run the plugin** in Figma: Plugins → Development → **Dialtone Components Sync**,
+   then click **Build** in its UI.
 
    It fetches `index.json`, builds each shard onto its own page (clearing the page on
    the first shard of each component), combines the loose components into one variant
-   set named `Dt<Page>`, and POSTs a report. A toast names each shard as it goes.
+   set named `Dt<Page>`, and POSTs a report. A toast names each shard as it goes; the
+   plugin's own UI then shows the same report as a results view, with a Close button —
+   it no longer closes itself automatically.
 
-4. **Read the report.** The plugin closes with one line per component, and the server
-   writes the same thing to `sync-scripts/build-data/plugin-results.json`:
+4. **Read the report.** The server writes it to `sync-scripts/build-data/plugin-results.json`:
 
    ```json
    [{ "component": "toggle", "page": "Toggle", "built": 72,

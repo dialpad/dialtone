@@ -713,7 +713,12 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
     ...(node.dataSlot ? { dataSlot: node.dataSlot } : {}),
     // The Dialtone icon name, so the encoder can resolve this node to an icon-library
     // component and the builder can place a swappable instance of it.
-    ...(node.dataName ? { iconName: node.dataName } : {}),
+    // `anatomySwap.icon` falls back to a class match when nothing rendered through the real
+    // `<dt-icon>` mechanism (and so left no `data-name`) — DtLoader's masked arc, which is a
+    // plain `<svg>`, not an icon-component usage. A real `data-name` wins where both exist.
+    ...(node.dataName ? { iconName: node.dataName }
+      : anatomySwap && anatomySwap.icon && node.classes && node.classes.includes(anatomySwap.selector)
+        ? { iconName: anatomySwap.icon } : {}),
     /**
      * In the ORDINARY sweep, a filled slot's content is a visible, swappable node — the same
      * shape as a REPLACEMENT slot, so it reuses that marker: an INSTANCE_SWAP property and
@@ -728,6 +733,19 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
     // one. Carried as the declared combo; encode-build turns it into a node id.
     ...(node.dataSlot && slotSwapTargets[node.dataSlot]
       ? { slotSwapTo: slotSwapTargets[node.dataSlot] } : {}),
+    // `cfg.anatomySwap`'s class-matched counterpart — same `slotSwapTo` shape, so
+    // encode-build's resolution needs no changes to also handle this. Only for a
+    // COMPONENT swap; an icon swap (above) uses `iconName` instead.
+    ...(anatomySwap && anatomySwap.component && node.classes && node.classes.includes(anatomySwap.selector)
+      ? { slotSwapTo: { component: anatomySwap.component, variant: anatomySwap.variant } } : {}),
+    // A third `anatomySwap` kind: paint this node with a hand-tuned ANGULAR gradient instead
+    // of its measured flat colour — DtLoader's arc, whose real look is a CSS conic-gradient
+    // mask this pipeline cannot reproduce as a mask, but can reproduce as a gradient PAINT on
+    // the arc's own geometry (see `gradientFill` in generic-builder.js for why this replaced
+    // an earlier icon-library substitution: that fixed the missing fade but not the mismatched
+    // stroke width, because it was a different hand-authored asset).
+    ...(anatomySwap && anatomySwap.gradient && node.classes && node.classes.includes(anatomySwap.selector)
+      ? { gradFill: true } : {}),
     layout: {
       display: s.display,
       direction: s.flexDirection === 'column' ? 'VERTICAL' : 'HORIZONTAL',
@@ -813,6 +831,17 @@ async function forceState (pseudoClasses) {
 let darkBySelector = new Map();
 /** slot name -> declared swap target, for the combo currently being measured. */
 let slotSwapTargets = {};
+/**
+ * A FIXED SWAP, for a piece of a component's own anatomy rather than a designer-facing slot.
+ *
+ * `slotSwapTargets` above is keyed by a `data-slot` the harness injects around a CONFIG-
+ * declared slot's exemplar content — it has no way to reach ordinary internal markup a
+ * component always renders itself (DtButton's `.d-loader` while loading is never a slot).
+ * `cfg.anatomySwap`, where declared, names a CSS class and a swap target directly; resolved
+ * once per combo here, exactly like `slotSwapTargets`, and matched against `node.classes`
+ * below instead of a `data-slot` attribute.
+ */
+let anatomySwap = null;
 const indexDark = (node, into) => {
   if (!node) return into;
   if (node.selector) into.set(node.selector, node.style || {});
@@ -1024,6 +1053,7 @@ async function measure (combo, slots) {
   const sc = cfg.slotContent ? cfg.slotContent(combo) : {};
   slotSwapTargets = Object.fromEntries(
     Object.entries(sc).filter(([, v]) => v && v.swapTo).map(([k, v]) => [k, v.swapTo]));
+  anatomySwap = cfg.anatomySwap ? cfg.anatomySwap(combo) : null;
   await page.evaluate(([c, p, o]) => window.__setProps(c, p, o),
     [cfg.component, cfg.props(combo), { label: cfg.label, slots, slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
   activeCombo = combo;

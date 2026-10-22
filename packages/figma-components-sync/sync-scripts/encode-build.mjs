@@ -319,6 +319,9 @@ function encodeNode (n) {
     out.box = [n.box ? n.box.w : 0, n.box ? n.box.h : 0];
     if (n.rel && (n.rel.x || n.rel.y)) out.rel = [n.rel.x, n.rel.y];
     if (n.absolute) out.abs = 1;
+    // `g` = paint this glyph with the hand-tuned angular gradient instead of a flat fill.
+    // See `anatomySwap.gradient` in build-spec.mjs and `gradientFill` in generic-builder.js.
+    if (n.gradFill) out.g = 1;
     if (n.currentColor && n.currentColor.rgba) {
     out.cc = [ci(n.currentColor.rgba), ti(n.currentColor.token)];
     // Third slot, exactly as for the colour props: a glyph colour CSS computes needs a
@@ -337,8 +340,14 @@ function encodeNode (n) {
      *
      * Three separate fixes went to the frame branch, the instance branch and the builder's
      * SVG branch before it turned out the values never left the encoder.
+     *
+     * `opacity` belongs here for the same reason: DtLoader's track ring is an ordinary
+     * `<svg>` with a perfectly ordinary `opacity: var(--dt-opacity-200)` rule — nothing
+     * masked, nothing exotic — and it still came back fully opaque on the built canvas,
+     * because this branch returns before the generic `NUM_KEYS` loop below (which is where
+     * `opacity` is normally copied) ever runs.
      */
-    for (const k of ['width', 'height']) {
+    for (const k of ['width', 'height', 'opacity']) {
       if (p[k] && p[k].value != null) out[k] = [p[k].value, ti(p[k].token)];
     }
     return out;

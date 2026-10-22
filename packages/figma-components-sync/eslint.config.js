@@ -35,7 +35,7 @@ export default [
     },
   },
   {
-    // `sync-scripts/` (minus the plugin-sandbox fragments and figma-plugin/code.js,
+    // `sync-scripts/` (minus the plugin-sandbox fragments and plugin/code.js,
     // both excluded below) is ported verbatim from a working, 51/51-checks-passing
     // pipeline (see its own README's provenance section) — not rewritten to this
     // package's lint bar. Rewriting logic this proven to satisfy quotes/max-len/
@@ -63,7 +63,7 @@ export default [
       'sync-scripts/generic-builder.js',
       'sync-scripts/icon-builder.js',
       'sync-scripts/slot-properties.js',
-      'sync-scripts/figma-plugin/code.js',
+      'plugin/code.js',
       'sync-scripts/superseded/**',
     ],
   },

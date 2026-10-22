@@ -24,7 +24,7 @@
  */
 import './pin-cwd.mjs';
 import { createServer } from 'http';
-import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, statSync, readdirSync } from 'fs';
 import { extname, normalize } from 'path';
 import { execFileSync, spawnSync } from 'child_process';
 
@@ -53,9 +53,18 @@ const run = (script, argv, opts = {}) =>
 // encode-build refuses a spec older than the code that produced it, and rightly: a
 // stale spec silently encodes yesterday's measurements. But refusing is only the right
 // answer when a human is watching — here the fix is mechanical, so do it and say so.
+// `component-axes.mjs` and each `configs/*.mjs` are producers too — they're WHAT gets
+// measured (axes, invalid combinations, props), not just HOW. Missing here once already:
+// adding Button's circle/link/linkKind/linkUnderline axes left the spec reporting
+// "current" at the old 2,240-variant count, because nothing watched the one file that
+// actually changed.
+const CONFIG_DIR = `${HERE}/configs`;
+const configFiles = existsSync(CONFIG_DIR)
+  ? readdirSync(CONFIG_DIR).filter(f => f.endsWith('.mjs')).map(f => `${CONFIG_DIR}/${f}`)
+  : [];
 const PRODUCERS = ['build-spec.mjs', 'verify-harness/main.js', 'figma-mapping.mjs',
-  'cdp-provenance.mjs']
-  .map(f => `${HERE}/${f}`).filter(existsSync);
+  'cdp-provenance.mjs', 'component-axes.mjs']
+  .map(f => `${HERE}/${f}`).filter(existsSync).concat(configFiles);
 const newestProducer = Math.max(...PRODUCERS.map(f => statSync(f).mtimeMs));
 
 // `<component>-merged` is the SAME component measured twice, slots empty and slots filled,
@@ -302,9 +311,9 @@ servers[0].on('listening', () => {
   console.log(`  http://localhost:${PORT}  •  ${what.join('  •  ')}`);
   console.log('\n── 5. YOUR TURN ' + '─'.repeat(54));
   console.log('  In the Figma DESKTOP app, in the scratch file:');
-  console.log('      Plugins → Development → Dialtone Spec Builder');
+  console.log('      Plugins → Development → Dialtone Components Sync');
   console.log('\n  (First time only: Plugins → Development → Import plugin from manifest…');
-  console.log('   → sync-scripts/figma-plugin/manifest.json)');
+  console.log('   → plugin/manifest.json)');
   console.log('\n  Waiting for the plugin to report back…  ctrl-C to abandon.');
 });
 

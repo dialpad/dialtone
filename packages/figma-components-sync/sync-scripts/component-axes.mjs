@@ -128,7 +128,7 @@ const BUILT_IN = {
     stateTarget: c => (c.state.startsWith('close') ? '.d-chip__close' : '.d-chip__label'),
   },
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '286:48418',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '401:47085',
     /**
      * SLOT PRESENCE IS A VARIANT AXIS HERE, not a BOOLEAN component property.
      *
@@ -156,17 +156,59 @@ const BUILT_IN = {
       loading: [false,true],
       startIcon: [false, true],
       endIcon: [false, true],
+      // Icon-only circular shape. Crossed with kind/importance like any other shape axis —
+      // `isInvalidPropCombination`'s own two circle-specific rejections (ButtonConstants.js's
+      // `INVALID_COMBINATION`) are added to `invalid` below; its third and fourth entries
+      // are `kind: 'muted', importance: 'primary'` for BOTH circle values, already covered
+      // by the existing muted/primary rule regardless of circle.
+      circle: [false, true],
+      /**
+       * LINK-STYLED is a SEPARATE BRANCH, not another crossed axis.
+       *
+       * `buttonClasses()` returns early when `link` is true — `d-link`/`linkKind`/
+       * `linkUnderline` classes entirely REPLACE `d-btn`/`kind`/`importance`/`circle`, which
+       * never get read at all. Crossing `linkKind`/`linkUnderline` against every kind/
+       * importance/circle combination (and vice versa) would measure the same render
+       * dozens of times over under different irrelevant labels. `invalid` below collapses
+       * each side to one representative value of the other, the same way DtBadge's
+       * `decoration` axis is gated to avoid multiplying against axes it cannot affect.
+       */
+      link: [false, true],
+      linkKind: ['default','critical','warning','positive','info','muted','mention'],
+      linkUnderline: [true, false],
     },
     // muted/primary is rejected by the component; hover and active are not
     // reachable while loading because the button is pointer-events:none.
     // Icons are NOT excluded while loading: measured, both render — the spinner sits
     // alongside them rather than replacing them.
     invalid: c => (c.kind === 'muted' && c.importance === 'primary')
-      || (c.loading === true && ['hover','active'].includes(c.state)),
+      || (c.loading === true && ['hover','active'].includes(c.state))
+      || (c.circle === true && c.kind === 'default' && c.importance === 'primary')
+      || (c.circle === true && c.kind === 'critical' && c.importance === 'outlined')
+      // link=true: kind/importance/circle are dead props — collapse to one representative.
+      || (c.link === true && (c.circle !== false || c.kind !== 'default' || c.importance !== 'primary'))
+      // link=false: linkKind/linkUnderline are dead props — collapse to one representative.
+      || (c.link === false && (c.linkKind !== 'default' || c.linkUnderline !== true))
+      /**
+       * link + an icon slot genuinely computes NEGATIVE padding — not a measurement bug.
+       *
+       * `.d-btn__icon--left/--right:not(:only-child)` (button.less) pulls an icon in with
+       * `margin-inline-start/end: var(--dt-spacing-25-negative)`, applied whenever
+       * `kind !== 'unstyled'` regardless of `link` — but `link.less`'s own padding is 0,
+       * so there is no positive base padding left to absorb that negative margin into.
+       * `Button.vue`'s own `validatePropCombination` doesn't warn on this combination
+       * either, so it isn't confirmed unsupported at the component level — but Figma
+       * cannot represent a negative padding at all, and clamping it to 0 would silently
+       * under-represent a real edge collision the actual CSS produces. Excluded rather
+       * than guessed at; revisit if DtButton ever states this combination is supported.
+       */
+      || (c.link === true && (c.startIcon === true || c.endIcon === true)),
     variantName: c => `kind=${c.kind}, importance=${c.importance}, size=${c.size}, state=${c.state}, `
-      + `loading=${c.loading}, startIcon=${c.startIcon}, endIcon=${c.endIcon}`,
+      + `loading=${c.loading}, startIcon=${c.startIcon}, endIcon=${c.endIcon}, circle=${c.circle}, `
+      + `link=${c.link}, linkKind=${c.linkKind}, linkUnderline=${c.linkUnderline}`,
     props: c => ({
       kind: c.kind, importance: c.importance, size: Number(c.size),
+      circle: c.circle, link: c.link, linkKind: c.linkKind, linkUnderline: c.linkUnderline,
       ...(c.state === 'active' ? { active: true } : {}),
       ...(c.state === 'disabled' ? { disabled: true } : {}),
       ...(c.loading ? { loading: true } : {}),
@@ -174,6 +216,25 @@ const BUILT_IN = {
     // Which named slots this variant fills. The ordinary sweep reads this, so no second
     // build and no merge is involved at all.
     slots: c => [...(c.startIcon ? ['startIcon'] : []), ...(c.endIcon ? ['endIcon'] : [])],
+    /**
+     * WHILE LOADING, `.d-loader` IS AN INSTANCE OF A REAL COMPONENT — not re-measured anatomy.
+     *
+     * DtLoader's spinner look comes from a CSS `mask-image: conic-gradient(...)` cutting the
+     * arc out of a solid ring, which nothing in this pipeline can reproduce (no concept of a
+     * CSS mask). Rather than importing the two identical rings this measures and getting a
+     * plain circle, `.d-loader` becomes an instance of DtLoader itself — built separately
+     * (`configs/loader.mjs`), where the arc is a deliberate stand-in for an icon-library glyph
+     * instead. DtLoader must be built BEFORE Button for this to resolve.
+     *
+     * `BUTTON_ICON_SIZES` (ButtonConstants.js) is the same map `loaderSize()` in button.vue
+     * uses at runtime — Button's 100/200 both collapse to Loader's 200, there is no Loader
+     * size below it.
+     */
+    anatomySwap: c => ({
+      selector: 'd-loader',
+      component: 'loader',
+      variant: { size: { 100: 200, 200: 200, 300: 300, 400: 400, 500: 500 }[c.size] },
+    }),
     // only these two need the CDP override; active/disabled are class-driven
     pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
     // No `slotPass`: slot presence is swept above, so the two-set path and the merged path

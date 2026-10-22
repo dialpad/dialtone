@@ -16,7 +16,8 @@ component, not a token lookup) and warrants its own build/test/release surface.
 
 | Path | Contents |
 | --- | --- |
-| `sync-scripts/` | The full pipeline: measurement (`cdp-provenance.mjs`, `build-spec.mjs`), Figma construction (`encode-build.mjs`, `build-plugin.mjs`), verification (`check-all.mjs`, `verify-components.mjs`, `negative-control.mjs`, `visual-compare.mjs`), per-component `configs/`, the Figma dev plugin (`figma-plugin/`), and the raster-verification harness (`verify-harness/`) |
+| `plugin/` | The Figma dev plugin ("Dialtone Components Sync"): generated `code.js` + `manifest.json`, and a hand-authored `ui.html` |
+| `sync-scripts/` | The full pipeline: measurement (`cdp-provenance.mjs`, `build-spec.mjs`), Figma construction (`encode-build.mjs`, `build-plugin.mjs`), verification (`check-all.mjs`, `verify-components.mjs`, `negative-control.mjs`, `visual-compare.mjs`), per-component `configs/`, and the raster-verification harness (`verify-harness/`) |
 | `sync-scripts/superseded/` | Retired approaches, kept for reference with their own README explaining what replaced each one and why |
 
 See [`sync-scripts/README.md`](sync-scripts/README.md) for the full pipeline — how a
