@@ -32,6 +32,7 @@
             ref="chips"
             :key="`${index}-${item}`"
             :interactive="true"
+            :show-close="true"
             :label-class="['d-chip__label--focus-always']"
             :class="[
               'd-combobox-multi-select__chip',

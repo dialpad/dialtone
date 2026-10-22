@@ -89,8 +89,16 @@ For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text c
 Visual variant or complete composition. Values vary per component.
 
 - DtBadge: per `kind` group. `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `release`: `pre-release`, `release`. `lifecycle`: `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled`
+- DtChip: `default`, `people`
 
 DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
+
+### Emphasis
+
+Visual weight within a variant. Values vary per component:
+
+- DtBadge: `base`, `strong`. The `release` group also supports `subtle` (outline).
+- DtChip: `subtle`, `base`, `strong`
 
 ### Importance
 

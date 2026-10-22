@@ -11,14 +11,34 @@
       "description": "Default chip styling"
     },
     {
+      "class": "d-chip__label--people",
+      "applies": ".d-chip__label",
+      "description": "Applies people classification styling."
+    },
+    {
+      "class": "d-chip__label--subtle",
+      "applies": ".d-chip__label",
+      "description": "Applies content-only subtle styling."
+    },
+    {
+      "class": "d-chip__label--strong",
+      "applies": ".d-chip__label",
+      "description": "Applies strong emphasis styling."
+    },
+    {
+      "class": "d-chip__label--size-{$size}",
+      "applies": ".d-chip__label",
+      "description": "Applies the numeric size (100 to 700)."
+    },
+    {
       "class": "d-chip__label--sm",
       "applies": ".d-chip",
-      "description": "Applies small size."
+      "description": "Deprecated alias for size 200."
     },
     {
       "class": "d-chip__label--xs",
       "applies": ".d-chip",
-      "description": "Applies extra small size."
+      "description": "Deprecated alias for size 100."
     },
     {
       "class": "d-chip__label--focus-always",
@@ -46,9 +66,24 @@
       "description": "Extra small close button."
     },
     {
+      "class": "d-chip__leading",
+      "applies": "Child of .d-chip__label",
+      "description": "Freeform leading content."
+    },
+    {
+      "class": "d-chip__trailing",
+      "applies": "Child of .d-chip__label",
+      "description": "Freeform trailing content."
+    },
+    {
       "class": "d-chip__icon",
-      "applies": "N/A",
-      "description": "Applies positioning and styling for the chip icon."
+      "applies": "Child of .d-chip__label",
+      "description": "Start icon container."
+    },
+    {
+      "class": "d-chip__end-icon",
+      "applies": "Child of .d-chip__label",
+      "description": "End icon container."
     }
   ]
 }

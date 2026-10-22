@@ -38,19 +38,19 @@ function selectedCount (output) {
 describe('migration selection', () => {
   it('--all selects the required migrations only (excludes opt-in)', () => {
     const output = runDryRun(['--all']);
-    assert.equal(selectedCount(output), 13);
+    assert.equal(selectedCount(output), 14);
     assert.ok(!output.includes('[OPT-IN]'), '--all must not select opt-in migrations');
   });
 
   it('--all --include-opt-in selects every migration', () => {
     const output = runDryRun(['--all', '--include-opt-in']);
-    assert.equal(selectedCount(output), 21);
+    assert.equal(selectedCount(output), 22);
     assert.ok(output.includes('[OPT-IN]'), 'opt-in migrations should be selected');
   });
 
   it('--include-opt-in on its own also selects every migration', () => {
     const output = runDryRun(['--include-opt-in']);
-    assert.equal(selectedCount(output), 21);
+    assert.equal(selectedCount(output), 22);
   });
 });
 
@@ -135,6 +135,39 @@ describe('--health-check', () => {
 
     const badge = runHealthCheck({ 'App.vue': '<template><dt-badge text="x" /></template>' });
     assert.match(badge, /\[PENDING\].*DtBadge API Updates \(badge-api\)/);
+  });
+
+  it('flags a chip without size as chip-api, but not dt-chip-group or a chip that has a size', () => {
+    const pattern = /DtChip API Updates \(chip-api\)/;
+    const pending = html => runHealthCheck({ 'App.vue': `<template>${html}</template>` });
+
+    for (const html of ['<dt-chip>Label</dt-chip>', '<DtChip />', '<dt-chip class="a"\n  >Label</dt-chip>',
+      '<dt-chip :label="count > 0" />']) {
+      assert.match(pending(html), new RegExp(`\\[PENDING\\].*${pattern.source}`), html);
+    }
+    for (const html of ['<dt-chip-group>x</dt-chip-group>', '<dt-chip size="300">x</dt-chip>',
+      '<dt-chip :size="s">x</dt-chip>', '<dt-chip v-bind:size="s" />', '<dt-chip v-bind="chipProps" />',
+      '<dt-chip :label="count > 0" size="200" />']) {
+      assert.match(pending(html), new RegExp(`\\[DONE\\].*${pattern.source}`), html);
+    }
+  });
+
+  it('flags a chip whose only size-like text is inside a quoted value', () => {
+    const output = runHealthCheck({ 'App.vue': '<template><dt-chip label=" size=1 ">x</dt-chip></template>' });
+    assert.match(output, /\[PENDING\].*DtChip API Updates \(chip-api\)/);
+  });
+
+  it('flags chip class props and legacy slot forms that earlier patterns missed', () => {
+    const pending = html => runHealthCheck({ 'App.vue': `<template>${html}</template>` });
+    const chip = /\[PENDING\].*DtChip API Updates \(chip-api\)/;
+
+    assert.match(pending('<dt-chip :label="a > b" size="200" icon-class="x">Label</dt-chip>'), chip);
+    assert.match(pending('<dt-chip size="200"><template v-slot:icon>i</template></dt-chip>'), chip);
+    assert.match(pending('<dt-chip size="200"><span slot="avatar">a</span></dt-chip>'), chip);
+    assert.match(
+      pending('<dt-chip-group icon-class="x" /><dt-chip size="200">x</dt-chip>'),
+      /\[DONE\].*DtChip API Updates \(chip-api\)/,
+    );
   });
 
   it('flags a legacy badge prop that follows a quoted attribute containing >', () => {
