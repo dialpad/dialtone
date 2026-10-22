@@ -29,18 +29,18 @@
       data-qa="dt-badge-start-icon"
     >
       <!-- @slot Slot for start icon, icon-size slot prop defaults to '200' -->
+      <template v-if="showsMentionPrefix()">{{ MENTION_PREFIX }}</template>
       <slot
-        v-if="$slots.startIcon"
+        v-else-if="$slots.startIcon"
         name="startIcon"
         :icon-size="iconSize"
       />
       <!-- @slot @deprecated Use startIcon -->
       <slot
-        v-else-if="$slots.leftIcon"
+        v-else
         name="leftIcon"
         :icon-size="iconSize"
       />
-      <template v-else>{{ MENTION_PREFIX }}</template>
     </span>
     <span :class="['d-badge__label', labelClass]">
       <!-- @slot Slot for badge content, defaults to label prop -->
@@ -277,10 +277,15 @@ export default {
 
   computed: {
     resolvedVariant () {
-      if (this.variant !== undefined) return this.variant;
+      const group = BADGE_GROUPS[this.resolvedKind];
+      // A variant that belongs to another group falls back to the group default
+      // (validateGroup warns about it). `ai` is a legacy type with no group.
+      if (this.variant != null) {
+        return group.variants.includes(this.variant) || this.variant === 'ai' ? this.variant : group.defaultVariant;
+      }
       // Deprecated alias for the variant.
-      if (this.type !== undefined && BADGE_TYPE_TO_VARIANT[this.type]) return BADGE_TYPE_TO_VARIANT[this.type];
-      return BADGE_GROUPS[this.resolvedKind].defaultVariant;
+      if (this.type != null && BADGE_TYPE_TO_VARIANT[this.type]) return BADGE_TYPE_TO_VARIANT[this.type];
+      return group.defaultVariant;
     },
 
     // Falls back to status so an invalid kind still renders; the prop validator reports it.
@@ -383,10 +388,10 @@ export default {
     validateGroup () {
       const group = BADGE_GROUPS[this.kind];
 
-      if (group && this.resolvedVariant !== 'ai' && !group.variants.includes(this.resolvedVariant)) {
+      if (group && this.variant != null && this.variant !== 'ai' && !group.variants.includes(this.variant)) {
         console.warn(
-          `DtBadge warning: variant="${this.resolvedVariant}" does not belong to the ${this.kind} group. ` +
-          `Use one of: ${group.variants.join(', ')}.`,
+          `DtBadge warning: variant="${this.variant}" does not belong to the ${this.kind} group. ` +
+          `Rendering variant="${group.defaultVariant}". Use one of: ${group.variants.join(', ')}.`,
         );
       }
     },

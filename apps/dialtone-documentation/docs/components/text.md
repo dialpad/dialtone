@@ -555,7 +555,7 @@ Text box trim will only affect elements with block or inline-block styled contex
       </dt-stack>
     </dt-stack>
     <dt-text variant="body-sm" tone="tertiary">3:23 pm</dt-text>
-    <dt-badge kind="counter" variant="count" label="6" />
+    <dt-badge kind="counter" variant="count" emphasis="strong" label="6" />
   </dt-stack>
 </dt-stack>
 ```

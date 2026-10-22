@@ -143,7 +143,7 @@ const awareness = useFeatureAwarenessBadge({
     kind="release"
     :variant="awareness.variant.value"
     :emphasis="awareness.emphasis.value"
-    :label="$t('feature.new')"
+    label="New"
   />
 </template>
 ```

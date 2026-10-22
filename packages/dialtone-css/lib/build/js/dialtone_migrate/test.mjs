@@ -129,6 +129,14 @@ describe('--health-check', () => {
     assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
   });
 
+  it('does not flag a dt-badge-group sibling as badge-api, but flags dt-badge', () => {
+    const group = runHealthCheck({ 'App.vue': '<template><dt-badge-group text="x" /></template>' });
+    assert.match(group, /\[DONE\].*DtBadge API Updates \(badge-api\)/);
+
+    const badge = runHealthCheck({ 'App.vue': '<template><dt-badge text="x" /></template>' });
+    assert.match(badge, /\[PENDING\].*DtBadge API Updates \(badge-api\)/);
+  });
+
   it('still flags show= on a Dialtone component as component-props', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-modal show="isOpen"></dt-modal></template>',

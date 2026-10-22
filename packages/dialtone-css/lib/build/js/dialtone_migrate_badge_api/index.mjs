@@ -67,44 +67,78 @@ const RELEASE_VARIANT_MAP = {
   familiar: { kind: 'release', variant: 'release', emphasis: 'base' },
 };
 
-function stripQuotedValues (attrs) {
-  return attrs.replace(/"[^"]*"|'[^']*'/g, match => (match[0] === '"' ? '""' : '\'\''));
+// Attributes are tokenized so that quoted values (labels, classes, expressions) are never mistaken for attributes.
+// Each token covers the whole attribute: name plus `=value` when present. A trailing "/" is not a token.
+const ATTR_RE = /([^\s"'=<>/]+)(?:\s*=\s*("[^"]*"|'[^']*'|[^\s"'>]+))?/g;
+
+function parseAttrs (attrs) {
+  return [...attrs.matchAll(ATTR_RE)].map(match => ({
+    name: match[1],
+    value: match[2] ?? null,
+    start: match.index,
+    end: match.index + match[0].length,
+  }));
+}
+
+const isQuoted = value => value !== null && /^["']/.test(value);
+const attrNames = prop => [prop, `:${prop}`, `v-bind:${prop}`];
+const boundNames = prop => [`:${prop}`, `v-bind:${prop}`];
+
+function findAttr (attrs, prop) {
+  return parseAttrs(attrs).find(token => token.name === prop);
 }
 
 function hasAttr (attrs, prop) {
-  const stripped = stripQuotedValues(attrs);
-  return new RegExp(`(?:^|\\s)(?::|v-bind:)?${prop}(?:\\s*=|\\s|\\/|>|$)`).test(stripped);
+  return parseAttrs(attrs).some(token => attrNames(prop).includes(token.name));
+}
+
+function hasBareAttr (attrs, prop) {
+  return parseAttrs(attrs).some(token => token.name === prop && token.value === null);
+}
+
+function hasDynamicAttr (attrs, prop) {
+  return parseAttrs(attrs).some(token => boundNames(prop).includes(token.name) && token.value !== null);
 }
 
 function hasStaticAttr (attrs, prop) {
-  return new RegExp(`(?:^|\\s)${prop}\\s*=\\s*("[^"]*"|'[^']*')`).test(attrs);
+  return isQuoted(findAttr(attrs, prop)?.value ?? null);
 }
 
 function getStaticAttrValue (attrs, prop) {
-  const match = attrs.match(new RegExp(`(?:^|\\s)${prop}\\s*=\\s*(?:"([^"]*)"|'([^']*)')`));
-  return match?.[1] ?? match?.[2] ?? null;
+  const value = findAttr(attrs, prop)?.value ?? null;
+  return isQuoted(value) ? value.slice(1, -1) : null;
+}
+
+function removeAttrTokens (attrs, shouldRemove) {
+  let result = attrs;
+  // Back to front so earlier token offsets stay valid.
+  for (const token of parseAttrs(attrs).filter(shouldRemove).reverse()) {
+    const gap = result.slice(0, token.start).match(/\s*$/)[0].length;
+    result = result.slice(0, token.start - gap) + result.slice(token.end);
+  }
+  return result;
 }
 
 function removeAttr (attrs, prop) {
-  return attrs
-    .replace(new RegExp(`\\s+${prop}\\s*=\\s*"[^"]*"`, 'g'), '')
-    .replace(new RegExp(`\\s+${prop}\\s*=\\s*'[^']*'`, 'g'), '')
-    .replace(new RegExp(`\\s+:${prop}\\s*=\\s*"[^"]*"`, 'g'), '')
-    .replace(new RegExp(`\\s+:${prop}\\s*=\\s*'[^']*'`, 'g'), '')
-    .replace(new RegExp(`\\s+v-bind:${prop}\\s*=\\s*"[^"]*"`, 'g'), '')
-    .replace(new RegExp(`\\s+v-bind:${prop}\\s*=\\s*'[^']*'`, 'g'), '')
-    .replace(new RegExp(`\\s+${prop}(?=\\s|$)`, 'g'), '');
+  return removeAttrTokens(attrs, token => attrNames(prop).includes(token.name));
 }
 
 function removeBooleanAttr (attrs, prop) {
-  return attrs.replace(new RegExp(`\\s+${prop}(?=\\s|\\/|$)`, 'g'), '');
+  return removeAttrTokens(attrs, token => token.name === prop && token.value === null);
 }
 
 function renameAttr (attrs, oldProp, newProp) {
-  return attrs
-    .replace(new RegExp(`(?<=\\s)${oldProp}(?=\\s*=)`, 'g'), newProp)
-    .replace(new RegExp(`(?<=\\s:)${oldProp}(?=\\s*=)`, 'g'), newProp)
-    .replace(new RegExp(`(?<=\\sv-bind:)${oldProp}(?=\\s*=)`, 'g'), newProp);
+  const renames = new Map(attrNames(oldProp).map((name, i) => [name, attrNames(newProp)[i]]));
+  let result = attrs;
+  for (const token of parseAttrs(attrs).filter(t => t.value !== null && renames.has(t.name)).reverse()) {
+    result = result.slice(0, token.start) + renames.get(token.name) + result.slice(token.start + token.name.length);
+  }
+  return result;
+}
+
+function replaceStaticValue (attrs, prop, value) {
+  const token = findAttr(attrs, prop);
+  return `${attrs.slice(0, token.end - token.value.length)}"${value}"${attrs.slice(token.end)}`;
 }
 
 // Attributes the Vue style guide (vue/attributes-order) puts before regular props.
@@ -126,28 +160,25 @@ function insertAttr (attrs, attr) {
 }
 
 function replaceOrInsertVariant (attrs, variant) {
-  if (hasStaticAttr(attrs, 'variant')) {
-    return attrs.replace(/(\svariant\s*=\s*)(?:"[^"]*"|'[^']*')/, `$1"${variant}"`);
-  }
+  if (hasStaticAttr(attrs, 'variant')) return replaceStaticValue(attrs, 'variant', variant);
   return insertAttr(attrs, `variant="${variant}"`);
 }
 
 // Puts emphasis right after variant, on the same line or the next one, matching how the variant is laid out.
 function insertEmphasisAfterVariant (attrs, emphasis) {
-  return attrs.replace(/(\s+)(variant\s*=\s*(?:"[^"]*"|'[^']*'))/, `$1$2$1emphasis="${emphasis}"`);
+  const token = findAttr(attrs, 'variant');
+  if (!isQuoted(token?.value ?? null)) return attrs;
+  const gap = attrs.slice(0, token.start).match(/\s*$/)[0] || ' ';
+  return `${attrs.slice(0, token.end)}${gap}emphasis="${emphasis}"${attrs.slice(token.end)}`;
 }
 
 function replaceOrInsertKind (attrs, kind) {
-  if (hasStaticAttr(attrs, 'kind')) {
-    return attrs.replace(/(\skind\s*=\s*)(?:"[^"]*"|'[^']*')/, `$1"${kind}"`);
-  }
+  if (hasStaticAttr(attrs, 'kind')) return replaceStaticValue(attrs, 'kind', kind);
   return insertAttr(attrs, `kind="${kind}"`);
 }
 
 function replaceOrInsertEmphasis (attrs, emphasis) {
-  if (hasStaticAttr(attrs, 'emphasis')) {
-    return attrs.replace(/(\semphasis\s*=\s*)(?:"[^"]*"|'[^']*')/, `$1"${emphasis}"`);
-  }
+  if (hasStaticAttr(attrs, 'emphasis')) return replaceStaticValue(attrs, 'emphasis', emphasis);
   return insertAttr(attrs, `emphasis="${emphasis}"`);
 }
 
@@ -159,7 +190,7 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
   let attrs = originalAttrs;
 
   for (const prop of ['type', 'kind', 'text']) {
-    if (new RegExp(`(?:^|\\s)(?::|v-bind:)${prop}\\s*=`).test(attrs)) {
+    if (hasDynamicAttr(attrs, prop)) {
       warnings.push(`BADGE_API_DYNAMIC_PROP file=${filePath} prop=${prop}`);
     }
   }
@@ -173,18 +204,27 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
   const kindValue = getStaticAttrValue(attrs, 'kind');
   const variantValue = getStaticAttrValue(attrs, 'variant');
   const emphasisValue = getStaticAttrValue(attrs, 'emphasis');
-  const hasDynamicKind = new RegExp('(?:^|\\s)(?::|v-bind:)kind\\s*=').test(attrs);
+  const hasDynamicKind = hasDynamicAttr(attrs, 'kind');
   // A v-bind object spread can carry type/variant/kind from data this script can't see.
-  const hasSpread = /(?:^|\s)v-bind\s*=/.test(attrs);
-  const hasDynamicGroupSource = hasSpread || ['variant', 'type']
-    .some(prop => new RegExp(`(?:^|\\s)(?::|v-bind:)${prop}\\s*=`).test(attrs));
+  const hasSpread = findAttr(attrs, 'v-bind')?.value != null;
+  const hasDynamicGroupSource = hasSpread || ['variant', 'type'].some(prop => hasDynamicAttr(attrs, prop));
 
   // Infer the group (kind) and variant from what the badge uses today.
   let target = null;
   if (kindValue === 'lifecycle' && RELEASE_VARIANT_MAP[variantValue]) {
     target = RELEASE_VARIANT_MAP[variantValue]; // interim release variant under the old lifecycle group
   } else if (GROUPS.includes(kindValue) || hasDynamicKind) {
-    target = null; // already has a group
+    // Already has a group. A legacy static type still carries the look: map it when it fits that group.
+    if (typeValue && typeValue !== 'ai' && !variantValue && !hasDynamicKind && !hasDynamicGroupSource) {
+      const mapped = STATIC_TYPE_MAP[typeValue];
+      if (!mapped) {
+        warnings.push(`BADGE_API_UNKNOWN_TYPE file=${filePath} type=${typeValue}`);
+      } else if (mapped.kind === kindValue) {
+        target = { kind: kindValue, variant: mapped.variant };
+      } else {
+        warnings.push(`BADGE_API_TYPE_KIND_CONFLICT file=${filePath} kind=${kindValue} type=${typeValue}`);
+      }
+    }
   } else if (hasDynamicGroupSource) {
     warnings.push(`BADGE_API_DYNAMIC_KIND file=${filePath}`);
   } else if (variantValue) {
@@ -228,10 +268,19 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
     }
   }
 
+  const hasSubtle = hasBareAttr(attrs, 'subtle');
+  const hasOutlined = hasBareAttr(attrs, 'outlined');
+
+  if (!target) {
+    // Nothing was resolved, so the legacy props are the only record of the badge's look: keep them.
+    const kept = [typeValue && typeValue !== 'ai' && 'type', hasSubtle && 'subtle', hasOutlined && 'outlined']
+      .filter(Boolean);
+    if (kept.length) warnings.push(`BADGE_API_LEGACY_PROP_KEPT file=${filePath} props=${kept.join(',')}`);
+    return `<${tagName}${attrs}${closer}`;
+  }
+
   if (typeValue && typeValue !== 'ai') attrs = removeAttr(attrs, 'type');
 
-  const hasSubtle = /\ssubtle(?=\s|\/|$)/.test(attrs);
-  const hasOutlined = /\soutlined(?=\s|\/|$)/.test(attrs);
   if (hasSubtle || hasOutlined) {
     const hasExplicitEmphasis = hasAttr(attrs, 'emphasis');
     attrs = removeBooleanAttr(removeBooleanAttr(attrs, 'subtle'), 'outlined');

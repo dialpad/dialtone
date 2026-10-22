@@ -5,6 +5,7 @@
     :variant="$attrs.variant"
     :emphasis="$attrs.emphasis"
     :size="$attrs.size"
+    :icon-size="$attrs.iconSize"
     :decoration="$attrs.decoration"
     :label-class="$attrs.labelClass"
     :leading-class="$attrs.leadingClass"
@@ -13,24 +14,24 @@
     :end-icon-class="$attrs.endIconClass"
   >
     <template
-      #startIcon
+      #startIcon="{ iconSize }"
     >
       <dt-icon
         v-if="$attrs.startIcon"
         :name="$attrs.startIcon"
-        size="200"
+        :size="iconSize"
       />
     </template>
     <template v-if="defaultSlot">
       {{ defaultSlot }}
     </template>
     <template
-      #endIcon
+      #endIcon="{ iconSize }"
     >
       <dt-icon
         v-if="$attrs.endIcon"
         :name="$attrs.endIcon"
-        size="200"
+        :size="iconSize"
       />
     </template>
   </dt-badge>

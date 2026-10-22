@@ -1,4 +1,4 @@
-import { computed, hasInjectionContext, inject, provide, unref } from 'vue';
+import { computed, getCurrentInstance, inject, provide, unref } from 'vue';
 import {
   FEATURE_AWARENESS_BADGE_DEFAULTS,
   FEATURE_AWARENESS_BADGE_DEFAULTS_KEY,
@@ -72,7 +72,8 @@ export function provideFeatureAwarenessBadgeDefaults (defaults) {
  * @returns {{variant: import('vue').ComputedRef<string>, emphasis: import('vue').ComputedRef<string>, stage: import('vue').ComputedRef<string>, isVisible: import('vue').ComputedRef<boolean>}}
  */
 export function useFeatureAwarenessBadge (options = {}) {
-  const injectedDefaults = hasInjectionContext()
+  // getCurrentInstance works on every supported Vue 3 version; hasInjectionContext needs 3.3.
+  const injectedDefaults = getCurrentInstance()
     ? inject(FEATURE_AWARENESS_BADGE_DEFAULTS_KEY, null)
     : null;
 

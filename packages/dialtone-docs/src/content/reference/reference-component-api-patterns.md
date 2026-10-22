@@ -73,16 +73,22 @@ Use logical names in public component APIs. Documentation may mention physical e
 
 DtBox positioning props cover container positioning: `position`, logical inset props, and `zIndex`. Logical inset props accept documented coordinate values, including negative spacing coordinates and side-specific `50p` / `100p` percentage coordinates. Keep CSS utility classes available for responsive modifiers, calc coordinates, CSS-wide reset values, arbitrary coordinates, and non-DtBox elements.
 
-### Variant
+### Kind
 
 Color or semantic variant. Values vary per component:
 
 - DtButton: `default`, `muted`, `critical`, `positive`, `inverted`, `unstyled`
 - DtModal: `default`, `critical`
 - DtNotice: `base`, `critical`, `info`, `positive`, `warning`
-- DtBadge: grouped by `kind` (`status`, `counter`, `release`, `lifecycle`). `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `release`: `pre-release`, `release`. `lifecycle`: `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled`
+- DtBadge: `kind` selects a group (`status`, `counter`, `release`, `lifecycle`). The variants are listed under Variant.
 
 For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text compositions.
+
+### Variant
+
+Visual variant or complete composition. Values vary per component.
+
+- DtBadge: per `kind` group. `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `release`: `pre-release`, `release`. `lifecycle`: `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled`
 
 DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
 
