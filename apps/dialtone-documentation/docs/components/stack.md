@@ -1147,7 +1147,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-t
       </dt-stack>
     </dt-stack>
     <dt-text kind="body" :size="200" tone="tertiary" numeric>3:23 pm</dt-text>
-    <dt-badge kind="counter" variant="count" label="6" />
+    <dt-badge kind="counter" variant="count" emphasis="strong" label="6" />
   </dt-stack>
 </dt-stack>
 ```

@@ -109,6 +109,7 @@ export const argTypesData = {
   },
 
   type: {
+    description: 'Deprecated. Use `variant` instead.',
     table: {
       disable: true,
     },
@@ -118,13 +119,14 @@ export const argTypesData = {
     control: {
       type: 'select',
       labels: {
-        undefined: '(from variant)',
+        undefined: '(default: status)',
       },
     },
     options: [undefined, ...Object.keys(BADGE_GROUPS)],
   },
 
   decoration: {
+    description: 'Deprecated. Use a DtChip for categories instead.',
     control: {
       type: 'select',
       labels: {
@@ -142,7 +144,12 @@ export const argTypesData = {
     },
   },
 
+  label: {
+    control: { type: 'text' },
+  },
+
   text: {
+    description: 'Deprecated. Use `label` instead.',
     control: { type: 'text' },
   },
 

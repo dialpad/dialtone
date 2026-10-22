@@ -240,6 +240,24 @@ describe('DtBadge Tests', () => {
         expect(badge.classes(BADGE_VARIANT_MODIFIERS[variant])).toBe(true);
       });
 
+      it('should render the group default when the variant belongs to another group', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { kind: 'status', variant: 'count' };
+        updateWrapper();
+
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS.neutral)).toBe(true);
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS.count)).toBe(false);
+        warn.mockRestore();
+      });
+
+      it('should treat a null variant as unset', () => {
+        mockProps = { kind: 'release', variant: null };
+        updateWrapper();
+
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS['pre-release'])).toBe(true);
+      });
+
       it('should warn once when the variant does not belong to the group', async () => {
         const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
@@ -313,6 +331,15 @@ describe('DtBadge Tests', () => {
 
         expect(start.find('[data-qa="mention-icon"]').exists()).toBe(true);
         expect(start.text()).not.toContain('@');
+      });
+
+      it('should still show the @ when the startIcon slot renders nothing', () => {
+        mockProps = { kind: 'counter', variant: 'mention', label: '2' };
+        mockSlots = { startIcon: '<!-- empty -->' };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-badge-start-icon"]').text()).toBe('@');
       });
 
       it('should not render an @ for other variants', () => {
@@ -429,7 +456,7 @@ describe('DtBadge Tests', () => {
       });
 
       it('should not render the icon wrappers', () => {
-        expect(wrapper.find('.d-badge__icon-left').exists()).toBe(false);
+        expect(wrapper.find('[data-qa="dt-badge-start-icon"]').exists()).toBe(false);
       });
     });
 
@@ -452,11 +479,16 @@ describe('DtBadge Tests', () => {
 
     describe('When another badge is passed to the trailing slot', () => {
       it('should render it inside the trailing container', () => {
-        mockSlots = { trailing: '<dt-badge kind="counter" variant="mention" label="2" />' };
+        wrapper = mount(DtBadge, {
+          props: { kind: 'counter', variant: 'count', label: '99' },
+          slots: { trailing: '<dt-badge kind="counter" variant="mention" label="2" />' },
+          global: { components: { DtBadge } },
+        });
 
-        updateWrapper();
+        const nested = wrapper.find('[data-qa="dt-badge-trailing"] [data-qa="dt-badge"]');
 
-        expect(wrapper.find('[data-qa="dt-badge-trailing"]').exists()).toBe(true);
+        expect(nested.exists()).toBe(true);
+        expect(nested.classes(BADGE_VARIANT_MODIFIERS.mention)).toBe(true);
       });
     });
 
@@ -468,7 +500,7 @@ describe('DtBadge Tests', () => {
       });
 
       it('should render the left icon wrapper', () => {
-        expect(wrapper.find('.d-badge__icon-left').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="dt-badge-start-icon"]').exists()).toBe(true);
       });
     });
 
@@ -480,7 +512,7 @@ describe('DtBadge Tests', () => {
       });
 
       it('should render the right icon wrapper', () => {
-        expect(wrapper.find('.d-badge__icon-right').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="dt-badge-end-icon"]').exists()).toBe(true);
       });
     });
 
@@ -493,7 +525,7 @@ describe('DtBadge Tests', () => {
         });
 
         it('should render the left icon wrapper', () => {
-          expect(wrapper.find('.d-badge__icon-left').exists()).toBe(true);
+          expect(wrapper.find('[data-qa="dt-badge-start-icon"]').exists()).toBe(true);
         });
       });
 
@@ -505,7 +537,7 @@ describe('DtBadge Tests', () => {
         });
 
         it('should render the right icon wrapper', () => {
-          expect(wrapper.find('.d-badge__icon-right').exists()).toBe(true);
+          expect(wrapper.find('[data-qa="dt-badge-end-icon"]').exists()).toBe(true);
         });
       });
 
@@ -518,7 +550,7 @@ describe('DtBadge Tests', () => {
 
           updateWrapper();
 
-          const leftIconWrapper = wrapper.find('.d-badge__icon-left');
+          const leftIconWrapper = wrapper.find('[data-qa="dt-badge-start-icon"]');
 
           expect(leftIconWrapper.exists()).toBe(true);
           expect(leftIconWrapper.text()).toContain('new');

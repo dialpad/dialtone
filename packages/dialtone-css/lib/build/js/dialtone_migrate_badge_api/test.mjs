@@ -189,6 +189,54 @@ describe('dialtone-migrate-badge-api', () => {
     });
   });
 
+  describe('legacy props on a badge that already has a group', () => {
+    it('maps a static type to its variant when it fits the kind', () => {
+      assert.equal(run('<dt-badge kind="status" type="critical" label="Late" />'),
+        '<dt-badge kind="status" variant="critical" label="Late" />');
+      assert.equal(run('<dt-badge kind="status" type="default" label="Draft" />'),
+        '<dt-badge kind="status" variant="neutral" label="Draft" />');
+      assert.equal(run('<dt-badge kind="release" type="bulletin" label="Beta" />'),
+        '<dt-badge kind="release" variant="pre-release" label="Beta" />');
+    });
+
+    it('keeps type and warns when it conflicts with the kind', () => {
+      const input = '<dt-badge kind="counter" type="critical" label="3" />';
+
+      assert.equal(run(input), input);
+      assert.ok(warnings(input).some(warning => warning.startsWith('BADGE_API_TYPE_KIND_CONFLICT')));
+      assert.ok(warnings(input).some(warning => warning.endsWith('props=type')));
+    });
+
+    it('keeps type, subtle and outlined and warns when no target can be resolved', () => {
+      const input = '<dt-badge :kind="group" type="info" subtle outlined label="X" />';
+
+      assert.equal(run(input), input);
+      assert.ok(warnings(input).some(warning => warning.endsWith('props=type,subtle,outlined')));
+    });
+  });
+
+  describe('quoted attribute values', () => {
+    it('does not treat words inside quoted values as the boolean outlined or subtle props', () => {
+      const input = '<dt-badge type="info" text="not outlined here" class="subtle" />';
+
+      assert.equal(run(input), '<dt-badge kind="status" variant="info" label="not outlined here" class="subtle" />');
+      assert.equal(warnings(input).filter(warning => warning.startsWith('BADGE_API_OUTLINE_UNSUPPORTED')).length, 0);
+    });
+
+    it('still removes a real outlined prop next to a quoted one', () => {
+      const input = '<dt-badge type="bulletin" text="an outlined label" outlined />';
+
+      assert.equal(run(input), '<dt-badge emphasis="subtle" kind="release" variant="pre-release" label="an outlined label" />');
+    });
+
+    it('inserts emphasis after the real variant attribute, not after variant= inside a label', () => {
+      const input = '<dt-badge label="Choose variant=\'internal\'" variant="internal" />';
+
+      assert.equal(run(input),
+        '<dt-badge kind="release" label="Choose variant=\'internal\'" variant="pre-release" emphasis="base" />');
+    });
+  });
+
   describe('safety', () => {
     it('leaves a badge with a dynamic kind unchanged and does not warn', () => {
       const input = '<dt-badge :kind="group" :variant="variant" label="Badge" />';
