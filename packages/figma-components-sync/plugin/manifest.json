@@ -1,8 +1,9 @@
 {
-  "name": "Dialtone Spec Builder",
-  "id": "dialtone-spec-builder",
+  "name": "Dialtone Components Sync",
+  "id": "dialtone-components-sync",
   "api": "1.0.0",
   "main": "code.js",
+  "ui": "ui.html",
   "editorType": [
     "figma"
   ],

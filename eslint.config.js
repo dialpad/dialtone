@@ -87,7 +87,7 @@ export default [
       'packages/figma-components-sync/sync-scripts/generic-builder.js',
       'packages/figma-components-sync/sync-scripts/icon-builder.js',
       'packages/figma-components-sync/sync-scripts/slot-properties.js',
-      'packages/figma-components-sync/sync-scripts/figma-plugin/code.js',
+      'packages/figma-components-sync/plugin/code.js',
       'packages/figma-components-sync/sync-scripts/superseded/**',
     ],
   },

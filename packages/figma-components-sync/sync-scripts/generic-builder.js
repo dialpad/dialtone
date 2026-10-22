@@ -245,6 +245,57 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     return base;
   };
   /**
+   * THE SPINNER'S COMET-TAIL, as a real gradient — not a swapped-in static glyph.
+   *
+   * DtLoader's arc gets its look from a CSS `mask-image: conic-gradient(...)` that this
+   * pipeline has no way to reproduce as a mask. Figma's ANGULAR gradient paint type is the
+   * direct equivalent — no masking needed — applied to the arc's OWN measured geometry
+   * (rather than substituting a different hand-authored icon-library glyph, the first fix
+   * tried) so the stroke width always matches the track underneath it exactly, whatever the
+   * measured geometry turns out to be.
+   *
+   * IMPORTANT, hard-won: the arc's raw path is NOT a full ring the way the track is — it
+   * already has a real geometric gap baked in (confirmed via `vectorNetwork`: material spans
+   * ~288° with a round-cap bulge at EACH end, not one continuous circle). Two earlier
+   * attempts assumed a full ring and got the proportions backwards relative to this shape —
+   * one left only ~135° solid, reading as mostly flat track; a second, still eyeballed, had
+   * the fade spanning roughly half the ring. Neither was caught by a 48×48 thumbnail; both
+   * needed a scaled-up render and the actual vertex angles to diagnose.
+   *
+   * These stops are NOT the CSS mask's degrees converted — an earlier pass tried that
+   * (computing `(deg − 15) / 360` from the real `conic-gradient` values) and it was still
+   * wrong on this vector: the gap ended up roughly twice as wide as it should be. Figma's
+   * ANGULAR gradient apparently does not map position 0–1 onto a plain 0–360° sweep the same
+   * way CSS's `conic-gradient` does for this shape, and chasing the exact reason stopped
+   * being worth it once a value tuned directly in the Figma UI (not computed) looked right:
+   * transparent at 0%, opaque for a 70%-of-the-turn plateau (20%→90%), a near-hard cut back
+   * to transparent (90%→91%), then transparent through 100% (wrapping cleanly, since both
+   * ends of the 0–1 range are transparent). If this ever needs re-tuning, tune it live in
+   * Figma's own gradient editor against a real render and read the percentages back — do not
+   * re-derive them from the CSS degrees again.
+   *
+   * The absolute ROTATION (where position 0 actually lands on screen for a given vector) was
+   * not worth chasing either: the real spinner rotates continuously in use, so a few degrees
+   * of static-pose rotation isn't visible the way a wrong width or wrong proportions are.
+   *
+   * Colour is a LITERAL, not bound to a variable: Figma's plugin API has no per-gradient-stop
+   * variable binding, only whole-SOLID-paint binding. Traded away deliberately — this one
+   * decorative fill won't re-tint on a mode switch — rather than leave the far more visible
+   * width/fade mismatch unfixed while chasing a binding path that does not exist.
+   */
+  const gradientFill = (ccSpec) => {
+    const c = D.cols[ccSpec[0]];
+    const rgb = { r: c[0], g: c[1], b: c[2] };
+    const stop = (position, a) => ({ position, color: { ...rgb, a } });
+    return {
+      type: 'GRADIENT_ANGULAR',
+      gradientTransform: [[1, 0, 0], [0, 1, 0]],
+      gradientStops: [
+        stop(0, 0), stop(0.20, 1), stop(0.90, 1), stop(0.91, 0), stop(1, 0),
+      ],
+    };
+  };
+  /**
    * Bind a numeric field to its token — but ONLY when the variable actually holds the
    * measured value.
    *
@@ -447,6 +498,11 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
        */
       if (d.width) bindNum(node, 'width', d.width);
       if (d.height) bindNum(node, 'height', d.height);
+      // B-33: opacity is read as a PERCENTAGE when bound, so it is always a literal — same
+      // rule the FRAME branch already follows. DtLoader's track ring needed exactly this: the
+      // encoder now carries its opacity (see encode-build.mjs's SVG branch), but nothing here
+      // ever applied it to the node.
+      if (d.opacity) node.opacity = d.opacity[0];
       // An inline SVG fills from the element's `color`; carry that onto every vector
       // inside so a currentColor glyph is not left black.
       if (d.cc) {
@@ -474,7 +530,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         node.fills = [];
         for (const v of node.findAll(n => 'fills' in n)) {
           if (v.type === 'FRAME' || v.type === 'GROUP') v.fills = [];
-          else v.fills = [p];
+          else v.fills = [d.g ? gradientFill(d.cc) : p];
         }
       }
       return node;
@@ -486,6 +542,27 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       t.name = d.n;
       t.fontName = await useFont(weight, d.ty[3]);
       t.characters = d.tx || ' ';
+      /**
+       * A TEXT COMPONENT PROPERTY MUST RESIZE ITSELF WHEN ITS OWN CONTENT CHANGES.
+       *
+       * `figma.createText()` defaults to `textAutoResize: 'NONE'` — a FIXED box. That box is
+       * sized correctly once, at creation, to fit `d.tx`, which is why every build so far has
+       * looked right: nothing had edited the text yet. But `d.tp` marks this node as a bound
+       * TEXT property (see `build()` below, and slot-properties.js), which a consumer DOES
+       * retype in Figma — and `NONE` means the node never recomputes after that, so the new
+       * characters simply overflow its frozen box while every ancestor, hugging a child size
+       * that never changed, stays the same width too. DtButton's root pinned FIXED for an
+       * unrelated reason first (the invisible-border fix above), and fixing that only
+       * uncovered this: the text itself still didn't grow.
+       *
+       * `WIDTH_AND_HEIGHT`, not `HEIGHT`, because every `d.tp` label in this pipeline today is
+       * a short, single-line, non-wrapping string (Button/Badge/Chip/Link/Toggle labels,
+       * segmented-control/tab-group items) — confirmed by checking every `spec.label` this
+       * project currently declares. A future WRAPPING text property (multi-line body copy at
+       * a fixed width) would need `HEIGHT` instead; nothing today is that, so this is not yet
+       * a case this builder has to distinguish.
+       */
+      if (d.tp) t.textAutoResize = 'WIDTH_AND_HEIGHT';
       // A style is applied only when one matches size AND weight AND line-height AND
       // FAMILY. A near-match would silently change the rendering — Button's labels are
       // Medium at sizes no style covers, so they carry raw typography instead.
@@ -571,25 +648,27 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     // `pad` below), but still needed: the stroke counts toward the layout size, so the size
     // prediction has to include it — and on an asymmetric border the two axes differ.
     /**
-     * ONLY THE STROKES THAT WILL ACTUALLY BE PAINTED.
+     * EVERY DECLARED BORDER WIDTH COUNTS, PAINTED OR NOT.
      *
-     * The stroke is written further down only `if (d.borderColor && …)`, because a border
-     * whose colour is transparent has no paint to give Figma. But this prediction counted
-     * the WEIGHTS regardless, so on a node with a transparent border it reserved two pixels
-     * the frame never got: the hug looked exact, so the axis stayed AUTO, and Figma hugged
-     * to 2px less than the browser measured.
+     * CSS reserves border-box space for a border whose colour is fully transparent exactly
+     * as it does for an opaque one — only the paint disappears, not the width. This used to
+     * gate on `d.borderColor` (dropped by build-spec whenever alpha < 0.005) and count 0 for
+     * an invisible border, which was motivated by DtSegmentedControl's `importance: clear`
+     * items: with no stroke painted, Figma's own hug naturally excludes the border from its
+     * size, so the prediction had to agree with that to avoid a false "hug matches" verdict —
+     * otherwise the hugged frame came out 2px smaller than the browser measured (200 height
+     * and 40 width findings, D-7).
      *
-     * DtSegmentedControl's items are DtButtons at `importance: clear`, which carry a 1px
-     * transparent border purely to keep the box size constant across importances (D-7).
-     * 200 height and 40 width findings, every one of them this.
-     *
-     * A more faithful model exists — paint a fully transparent stroke and let
-     * `strokesIncludedInLayout` count it, so the frame keeps hugging — and it is written up
-     * in the follow-ups. This is the smaller fix: stop the prediction lying to itself, and
-     * let the axis pin to the measured box the way it already does for every other size CSS
-     * expresses and auto-layout cannot.
+     * That traded the bug away rather than fixing it: it made the *prediction* honest about
+     * a frame with no stroke, but a frame with no stroke is itself the wrong output whenever
+     * the border-reserved space is real — which pinned DtButton's own root FIXED instead of
+     * letting it hug, so retyping its label in Figma left the text overflowing a box that
+     * never resized. The actual fix is below, where the stroke is now always painted (fully
+     * transparent when there is no border colour), so `strokesIncludedInLayout` gives the
+     * border its real width whether or not anything is visible — which means this count no
+     * longer has to pretend the border isn't there to stay honest.
      */
-    const swOf = (k) => (d.borderColor && d[k] ? d[k][0] : 0);
+    const swOf = (k) => (d[k] ? d[k][0] : 0);
     const bwX = swOf('strokeLeftWeight') + swOf('strokeRightWeight');
     const bwY = swOf('strokeTopWeight') + swOf('strokeBottomWeight');
 
@@ -646,8 +725,30 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       // `pw`/`ph`: CSS declared an explicit size on this axis. That is a direct answer
       // where the prediction below can only infer one, and it is the only way to catch a
       // frame whose CSS box is right but whose TEXT Figma shapes to a different height.
-      fixW = !!(d.box && d.box[0]) && (!!d.pw || Math.abs((d.box[0] - padX) - contentW) > 1);
-      fixH = !!(d.box && d.box[1]) && (!!d.ph || Math.abs((d.box[1] - padY) - contentH) > 1);
+      /**
+       * A TEXT CHILD HAS NO `box` IN THE PAYLOAD, AND THE MISMATCH THAT MAKES IS NOT REAL.
+       *
+       * encode-build's TEXT branch never sets `out.box` — a text node's Figma size comes
+       * from font-shaping (`ty`/`tx`), not a measured CSS box the way a frame's does — so
+       * `kidRects` reads it as `[0, 0]` (`k.box || [0, 0]`, above). A frame that hugs a bare
+       * label therefore predicts `contentW = 0` regardless of the label's real width, the
+       * comparison against the frame's own measured box always misses by more than 1px, and
+       * `fixW`/`fixH` pin it FIXED at the size the ORIGINAL label happened to produce.
+       *
+       * DtButton's `base-button__label` is exactly this: a frame around nothing but the
+       * Label text property. Retyping the label in Figma correctly grew the text itself
+       * (`textAutoResize`, fixed above) and correctly grew DtButton's root (whose own child
+       * is this frame, with a real measured box) — but this frame stayed pinned to the
+       * ORIGINAL label's width, clipping every character past it.
+       *
+       * The frame's measured box already reflects whatever its real children (ANY of them,
+       * one of which cannot be statically sized here) actually produced, so a text-bearing
+       * frame is left alone — `d.pw`/`d.ph` can still pin it when CSS truly declares a fixed
+       * size, but a text child's unknowable static width no longer counts as a mismatch.
+       */
+      const hasTextKid = defaultKids.some(i => D.nodes[i].t === 'TEXT');
+      fixW = !!(d.box && d.box[0]) && (!!d.pw || (!hasTextKid && Math.abs((d.box[0] - padX) - contentW) > 1));
+      fixH = !!(d.box && d.box[1]) && (!!d.ph || (!hasTextKid && Math.abs((d.box[1] - padY) - contentH) > 1));
 
       f.layoutMode = isRow ? 'HORIZONTAL' : 'VERTICAL';
       /**
@@ -735,8 +836,18 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       f[c] = d[c][0];
       bindNum(f, c, d[c]);
     }
-    if (d.borderColor && SIDE_WEIGHTS.some(k => d[k] && d[k][0] > 0)) {
-      f.strokes = [paint(d.borderColor)];
+    /**
+     * A STROKE EVEN WHEN NOTHING WILL BE VISIBLE.
+     *
+     * `d.borderColor` is absent whenever build-spec dropped a fully transparent colour, but
+     * the width is still real (see `swOf` above) and `strokesIncludedInLayout` only reserves
+     * space for a stroke that EXISTS — so a hugging frame with no stroke object at all hugs
+     * 2px smaller than the browser measured, same as DtButton's root did before this. A fully
+     * transparent literal paints nothing while still giving the layout engine something to
+     * include.
+     */
+    if (SIDE_WEIGHTS.some(k => d[k] && d[k][0] > 0)) {
+      f.strokes = [d.borderColor ? paint(d.borderColor) : { type: 'SOLID', color: { r: 0, g: 0, b: 0 }, opacity: 0 }];
       f.strokeAlign = 'INSIDE';
       // Assigned per side BEFORE binding: writing `strokeWeight` first would collapse the
       // four back to one, and Figma keeps the last write.
@@ -937,6 +1048,19 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   });
   f.clipsContent = insetPresent && (hug || childrenFit);
 
+  /**
+   * CENTER CONSTRAINTS ARE APPLIED AFTER THIS FRAME HAS ITS REAL SIZE, NOT ITS DEFAULT.
+   *
+   * `figma.createFrame()` starts at Figma's default 100×100 before anything below resizes
+   * it to `d.box`. A CENTER constraint recomputes a child's position from its distance to
+   * the parent's CURRENT center the moment it is assigned — so setting it here, inside this
+   * loop, measured the child against the 100×100 default rather than the real box: DtLoader
+   * at size=100 (a 12×12 frame) got its 12×12 child centered against a 100×100 square and
+   * landed at x=-44, nowhere near its own 12×12 parent. The MIN/MAX inset case doesn't share
+   * this bug (an edge-pinned child doesn't move on a top-left-anchored resize), so only the
+   * CENTER assignment is deferred — collected here, applied once the real resize below runs.
+   */
+  const centerConstraints = [];
   for (const kidIdx of d.kids || []) {
       const kid = await build(kidIdx);
       f.appendChild(kid);
@@ -955,6 +1079,29 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         // anchored from the inline-end edge? keep it there when the parent resizes
         if (kd.inset && kd.inset[1] && kd.inset[1] !== 'auto' && (!kd.inset[0] || kd.inset[0] === 'auto')) {
           kid.constraints = { horizontal: 'MAX', vertical: 'MIN' };
+        } else if (kd.abs) {
+          /**
+           * A CHILD MEASURED CENTERED STAYS CENTERED WHEN THE PARENT RESIZES.
+           *
+           * Scoped to `kd.abs` only: a NONE-layout parent's non-absolute children (CSS grid
+           * stacking two layers in one cell, say) trivially satisfy "centered" whenever they
+           * exactly fill the parent — DtLoader's track and arc both do, on every size — and
+           * have no business getting a live-recomputing constraint at all; they are already
+           * exactly where they belong and should stay pinned there like any other flowed
+           * child. Only a genuinely absolutely-positioned child (CSS `position: absolute`)
+           * can have been centered via `justify-content`/`align-items: center` or `inset: 0`
+           * with auto margins in the first place.
+           *
+           * Detected from the measured geometry alone (within the same 1px tolerance the hug
+           * prediction uses elsewhere): a child whose own midpoint lands on the parent's
+           * midpoint, on either axis, is centered on that axis and gets told so explicitly.
+           */
+          const pBox = d.box || [0, 0];
+          const kBox = kd.box || [0, 0];
+          const centered = (axis) => !!pBox[axis] && Math.abs((rel[axis] + kBox[axis] / 2) - pBox[axis] / 2) <= 1;
+          const horizontal = centered(0) ? 'CENTER' : 'MIN';
+          const vertical = centered(1) ? 'CENTER' : 'MIN';
+          if (horizontal === 'CENTER' || vertical === 'CENTER') centerConstraints.push({ kid, horizontal, vertical });
         }
       }
     }
@@ -977,6 +1124,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       f.resize(fixW ? (d.box[0] || 1) + foldW : f.width,
                fixH ? (d.box[1] || 1) + foldH : f.height);
     }
+    // Now that `f` holds its real size rather than createFrame's 100×100 default, a CENTER
+    // constraint measures each child against the center that actually matters.
+    for (const { kid, horizontal, vertical } of centerConstraints) kid.constraints = { horizontal, vertical };
     /**
      * THE STRUCTURAL SIZE, AS A VARIABLE.
      *

@@ -25,7 +25,7 @@ Everything except one click:
 | 2 | encode, shard, regenerate the plugin from `generic-builder.js` |
 | 3 | preflight every payload, before anything is written |
 | 4 | serve on `localhost:8931` and wait |
-| **5** | **you: Figma desktop → Plugins → Development → Dialtone Spec Builder** |
+| **5** | **you: Figma desktop → Plugins → Development → Dialtone Components Sync → click Build** |
 | 6 | write each returned set id into the configs and record its build fingerprint, **as it lands** |
 | 7 | run `check-all` |
 
@@ -50,7 +50,7 @@ sequenceDiagram
     RB->>RB: preflight every payload
     Note over RB: a failure here stops the run<br/>before anything is written
     RB->>HTTP: serve shards, wait
-    You->>PL: Plugins → Development → Dialtone Spec Builder
+    You->>PL: Plugins → Development → Dialtone Components Sync → click Build
     PL->>HTTP: GET /shards/index.json
 
     opt icon library present
@@ -96,7 +96,7 @@ flowchart TD
     ENC["encode-build.mjs<br/><i>dedupe nodes, intern tokens/colours/SVGs,<br/>synthesise variables for computed colours</i>"]
     ENCJSON[("build-data/&lt;name&gt;-build.json")]
     PLUG["build-plugin.mjs<br/><i>inlines the three builder files</i>"]
-    OUT[("figma-plugin: manifest.json + code.js<br/>build-data/shards/*.json + index.json")]
+    OUT[("plugin/: manifest.json + code.js + ui.html<br/>build-data/shards/*.json + index.json")]
     PRE{{"preflight.mjs<br/>13 assertions, all fatal"}}
     RUN["run-batch.mjs"]
     FIGMA["Figma desktop<br/><b>the one manual step</b>"]
@@ -112,7 +112,7 @@ flowchart TD
 Provenance comes from the browser's own cascade rather than a reimplementation of it, which is
 what makes the spec an independent reading instead of a restatement of our assumptions.
 
-Three files are inlined into `figma-plugin/code.js` by `build-plugin.mjs`:
+Three files are inlined into `plugin/code.js` by `build-plugin.mjs`:
 `generic-builder.js` (component bodies), `icon-builder.js` (the icon library) and
 `slot-properties.js` (component properties). Edit those, never `code.js`. All three are
 hashed into the build fingerprint.

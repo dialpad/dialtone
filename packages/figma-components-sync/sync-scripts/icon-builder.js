@@ -1,5 +1,5 @@
 /**
- * Build Dialtone's icons as Figma components. Inlined into figma-plugin/code.js by
+ * Build Dialtone's icons as Figma components. Inlined into plugin/code.js by
  * build-plugin.mjs, exactly like generic-builder.js — so it is versioned and fingerprinted
  * rather than pasted somewhere by hand.
  *

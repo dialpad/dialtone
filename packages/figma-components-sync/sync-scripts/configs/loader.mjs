@@ -14,7 +14,7 @@
  */
 export default {
   component: 'DtLoader', label: '', page: 'Loader',
-  figmaSetId: '286:6150',
+  figmaSetId: '421:16401',
 
   axes: {
     // The full ICON_SIZE_MODIFIERS scale, which is what the prop validates against.
@@ -25,4 +25,23 @@ export default {
   invalid: () => false,
   props: c => ({ size: c.size }),
   variantName: c => `size=${c.size}`,
+
+  /**
+   * THE ARC IS PAINTED WITH A GRADIENT, not swapped for a different asset.
+   *
+   * `.d-loader__icon`'s real look comes from `mask-image: conic-gradient(...)` (loader.less)
+   * cutting a ~65° gap out of an otherwise full ring — this pipeline has no concept of a CSS
+   * mask, so importing the raw SVG gives a second, solid, indistinguishable ring on top of
+   * the track. An earlier version of this fix swapped the arc for the icon library's
+   * hand-authored `time/loading` glyph instead — that fixed the missing fade but introduced a
+   * NEW mismatch, because it is a different asset with its own stroke-width-to-diameter
+   * ratio: the arc came out visibly thinner than the track underneath it.
+   *
+   * Painting the arc's OWN measured geometry with a Figma ANGULAR gradient (the direct
+   * equivalent of a conic-gradient mask, no masking needed) fixes both at once — the stroke
+   * width is identical to the track by construction, since it IS the track ring's own shape,
+   * and the gradient reproduces the fade. See `gradientFill` in generic-builder.js for the
+   * actual stops (tuned by eye against the real component).
+   */
+  anatomySwap: () => ({ selector: 'd-loader__icon', gradient: true }),
 };
