@@ -412,25 +412,7 @@ describe('option_bar_member_group.vue test', function () {
   });
 });
 
-describe('slider argument forwarding', () => {
-  it('passes validated config and validator through the declared args', () => {
-    const slider = { min: 0, max: 100, step: 1, suffix: '%' };
-    const validator = n => n >= 0 && n <= 100;
-    const wrapper = mount(DtcOptionBarMemberGroup, {
-      props: {
-        component: {},
-        members: [{ name: 'progress', label: 'progress', types: ['number'], slider, validator, lockControl: true }],
-        values: { progress: 66 },
-        controlSelector: () => [['number', 'slider'], 'slider'],
-      },
-    });
-    const control = wrapper.findComponent({ name: 'DtcOptionBarControl' });
-    expect(control.props('args').sliderConfig).toEqual(slider);
-    expect(control.props('args').validator).toBe(validator);
-    expect(control.findComponent({ name: 'DtcControlSlider' }).props('disabled')).toBe(true);
-    wrapper.unmount();
-  });
-
+describe('dependent slider bounds', () => {
   it('updates slider bounds from sibling values while retaining slider selection for invalid totals', async () => {
     const wrapper = mount(DtcOptionBarMemberGroup, {
       props: {

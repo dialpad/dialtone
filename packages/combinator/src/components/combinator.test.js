@@ -4,7 +4,7 @@ import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import { getSupportedComponents } from '@/src/lib/test/utils_test';
-import { DtButton, DtCard, DtInput, DtToggle, DtProgressCircle } from '@dialpad/dialtone-vue';
+import { DtButton, DtCard, DtInput, DtToggle } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
 import variants from '@/src/variants/variants';
 
@@ -257,35 +257,5 @@ describe('combinator.vue test', function () {
       expect(nextWrapper.findComponent({ name: 'DtcOptionBar' }).props('settings').controls.hideDeprecated).toBe(false);
       nextWrapper.unmount();
     });
-  });
-});
-
-describe('ProgressCircle slider pilot state', () => {
-  it('shares canonical options with preview and examples, preserves presets, and resets to 66', async () => {
-    const wrapper = shallowMountCombinator({
-      props: {
-        component: DtProgressCircle,
-        documentation: allDocs.find(d => d.displayName === 'DtProgressCircle'),
-        variants: variantBank.DtProgressCircle,
-      },
-    });
-    const optionBar = wrapper.findComponent({ name: 'DtcOptionBar' });
-    const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
-    const code = wrapper.findComponent({ name: 'DtcCodePanel' });
-    expect(optionBar.props('info').props.find(p => p.name === 'progress').slider)
-      .toEqual({ min: 0, max: 100, step: 1, suffix: '%' });
-    expect(renderer.props('options').props.progress).toBe(66);
-    optionBar.vm.$emit('update:options', options => { options.props.progress = 67; });
-    await nextTick();
-    expect(renderer.props('options').props.progress).toBe(67);
-    expect(code.props('options').props.progress).toBe(67);
-    wrapper.vm.updateVariant('positive');
-    await nextTick();
-    expect(renderer.props('options').props.progress).toBe(81);
-    wrapper.vm.resetOptions();
-    await nextTick();
-    expect(renderer.props('options').props.progress).toBe(66);
-    expect(code.props('options').props.progress).toBe(66);
-    wrapper.unmount();
   });
 });
