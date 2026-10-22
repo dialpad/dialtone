@@ -16,7 +16,8 @@ export default {
       // and drop a selected variant that doesn't belong to it.
       status: ['neutral', 'info', 'positive', 'warning', 'critical'],
       counter: ['count', 'mention'],
-      lifecycle: ['internal', 'early-access', 'new', 'recent', 'familiar'],
+      release: ['pre-release', 'release'],
+      lifecycle: ['draft', 'edited', 'unsaved', 'saved', 'published', 'archived', 'scheduled'],
     }).flatMap(([kind, own], _, groups) => {
       const others = groups.flatMap(([, variants]) => variants).filter(v => !own.includes(v));
       return [
@@ -33,8 +34,8 @@ export default {
       hide: { props: ['decoration'] },
     },
     {
-      // `subtle` (outline) is a lifecycle emphasis; status and counter variants support base and strong.
-      when: { variant: v => !['internal', 'early-access', 'new', 'recent', 'familiar'].includes(v) },
+      // `subtle` (outline) is a release emphasis; the other groups support base and strong.
+      when: { variant: v => !['pre-release', 'release'].includes(v) },
       disableValues: { props: { emphasis: ['subtle'] } },
     },
     {
@@ -95,8 +96,8 @@ export default {
 
   new: {
     props: {
-      kind: { initialValue: 'lifecycle' },
-      variant: { initialValue: 'new' },
+      kind: { initialValue: 'release' },
+      variant: { initialValue: 'pre-release' },
     },
     slots: {
       default: { initialValue: 'New' },
@@ -143,12 +144,22 @@ export default {
 
   alpha: {
     props: {
-      kind: { initialValue: 'lifecycle' },
-      variant: { initialValue: 'internal' },
+      kind: { initialValue: 'release' },
+      variant: { initialValue: 'pre-release' },
       emphasis: { initialValue: 'subtle' },
     },
     slots: {
       default: { initialValue: 'Alpha' },
+    },
+  },
+
+  draft: {
+    props: {
+      kind: { initialValue: 'lifecycle' },
+      variant: { initialValue: 'draft' },
+    },
+    slots: {
+      default: { initialValue: 'Draft' },
     },
   },
 };

@@ -217,7 +217,8 @@ describe('DtBadge Tests', () => {
       it.each([
         ['status', 'critical'],
         ['counter', 'mention'],
-        ['lifecycle', 'early-access'],
+        ['release', 'pre-release'],
+        ['lifecycle', 'published'],
       ])('should render the %s group variant %s', (kind, variant) => {
         mockProps = { kind, variant };
 
@@ -229,7 +230,8 @@ describe('DtBadge Tests', () => {
       it.each([
         ['status', 'neutral'],
         ['counter', 'count'],
-        ['lifecycle', 'new'],
+        ['release', 'pre-release'],
+        ['lifecycle', 'draft'],
       ])('should use the default variant of the %s group (%s) when variant is omitted', (kind, variant) => {
         mockProps = { kind };
 
@@ -241,7 +243,7 @@ describe('DtBadge Tests', () => {
       it('should warn once when the variant does not belong to the group', async () => {
         const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-        mockProps = { kind: 'status', variant: 'early-access' };
+        mockProps = { kind: 'status', variant: 'pre-release' };
         updateWrapper();
         await wrapper.setProps({ size: 300 });
 
@@ -251,8 +253,8 @@ describe('DtBadge Tests', () => {
     });
 
     describe('When emphasis is subtle', () => {
-      it.each(['internal', 'early-access', 'new', 'recent', 'familiar'])(
-        'should render the outlined style for the lifecycle variant %s',
+      it.each(['pre-release', 'release'])(
+        'should render the outlined style for the release variant %s',
         (variant) => {
           mockProps = { kind: kindFor(variant), variant, emphasis: 'subtle' };
 
@@ -263,7 +265,7 @@ describe('DtBadge Tests', () => {
         },
       );
 
-      it.each(['info', 'count'])('should fall back to base and warn once for the %s variant', async (variant) => {
+      it.each(['info', 'count', 'draft'])('should fall back to base and warn once for the %s variant', async (variant) => {
         const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
         mockProps = { kind: kindFor(variant), variant, emphasis: 'subtle' };
@@ -280,7 +282,7 @@ describe('DtBadge Tests', () => {
       it('should not be supported by any group', async () => {
         const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-        mockProps = { kind: 'lifecycle', variant: 'new', emphasis: 'clear' };
+        mockProps = { kind: 'release', variant: 'pre-release', emphasis: 'clear' };
         updateWrapper();
 
         expect(warn.mock.calls.filter(([message]) => message.includes('emphasis="clear"'))).toHaveLength(1);
@@ -325,11 +327,11 @@ describe('DtBadge Tests', () => {
     describe('When emphasis is omitted', () => {
       it.each([
         ['neutral', false],
-        ['new', true],
-        ['recent', true],
-        ['familiar', false],
-        ['internal', false],
-        ['early-access', false],
+        ['pre-release', true],
+        ['release', true],
+        ['draft', false],
+        ['saved', false],
+        ['published', true],
       ])('should default the %s variant to strong emphasis: %s', (variant, isStrong) => {
         mockProps = { kind: kindFor(variant), variant };
 
@@ -339,9 +341,9 @@ describe('DtBadge Tests', () => {
       });
     });
 
-    describe('When variant is new and emphasis is omitted', () => {
+    describe('When variant is pre-release and emphasis is omitted', () => {
       it('should default to strong emphasis', async () => {
-        await wrapper.setProps({ kind: 'lifecycle', variant: 'new' });
+        await wrapper.setProps({ kind: 'release', variant: 'pre-release' });
 
         expect(badge.classes(BADGE_EMPHASIS_MODIFIERS.strong)).toBe(true);
       });

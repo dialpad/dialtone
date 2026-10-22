@@ -1,6 +1,6 @@
 ---
 title: Badge
-description: Compact marker for status, counts, and feature lifecycle.
+description: Compact marker for status, counts, release stage, and content lifecycle.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--default
@@ -9,7 +9,7 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 combinator: DtBadge
 ---
 
-A badge is a small, non-interactive marker that sits next to the item it describes. It shows the status of that item, a count, or where a feature is in its lifecycle. For categories or labels that people create, use [Chip](/components/chip.html).
+A badge is a small, non-interactive marker that sits next to the item it describes. It shows the status of that item, a count, where a feature is in its release, or where a piece of content is in its lifecycle. For categories or labels that people create, use [Chip](/components/chip.html).
 
 ```vue demo
 <!-- @wrapper -->
@@ -17,7 +17,7 @@ A badge is a small, non-interactive marker that sits next to the item it describ
   <dt-badge label="Draft" />
   <dt-badge variant="positive" label="Resolved" />
   <dt-badge kind="counter" variant="count" label="12" />
-  <dt-badge kind="lifecycle" variant="early-access" label="Beta" emphasis="base" />
+  <dt-badge kind="release" variant="pre-release" label="Beta" emphasis="base" />
 </dt-stack>
 ```
 
@@ -28,7 +28,8 @@ A badge is a small, non-interactive marker that sits next to the item it describ
 
 - Show the status of the item next to it, such as Overdue or Resolved.
 - Show a count, such as unread messages.
-- Mark where a feature is in its lifecycle, such as Alpha, Beta, or New.
+- Mark where a feature is in its release, such as Alpha, Beta, or New.
+- Show the state of a piece of content, such as Draft or Published.
 </template>
 
 <template #dont>
@@ -56,9 +57,10 @@ A badge is a small, non-interactive marker that sits next to the item it describ
 | --- | --- | --- | --- |
 | `status` | The status of the item it sits next to | `neutral`, `info`, `positive`, `warning`, `critical` | `base`, `strong` |
 | `counter` | A number | `count`, `mention` | `base`, `strong` |
-| `lifecycle` | Who can use a feature and how long ago it launched | `internal`, `early-access`, `new`, `recent`, `familiar` | `subtle`, `base`, `strong` |
+| `release` | Whether a feature has launched | `pre-release`, `release` | `subtle`, `base`, `strong` |
+| `lifecycle` | The state of a piece of content | `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled` | `base`, `strong` |
 
-`kind` defaults to `status`, so you only set it for `counter` and `lifecycle`. A variant that doesn't belong to the `kind`, or an emphasis the group doesn't support, falls back to the default and logs a warning in development.
+`kind` defaults to `status`, so you only set it for `counter`, `release`, and `lifecycle`. A variant that doesn't belong to the `kind`, or an emphasis the group doesn't support, falls back to the default and logs a warning in development.
 
 ### Status
 
@@ -106,20 +108,20 @@ A badge nested inside another badge restyles itself in CSS, so there's nothing t
 > [!INFO] Nested styling is provisional
 > The nested look (shorter, smaller radius) is a first pass. Design hasn't settled how nested badges should be colored.
 
-### Lifecycle
+### Release
 
-Variants are named for the audience a feature is available to: `internal` (alpha), `early-access` (beta), and `new` (general availability). After launch, a feature fades from `new` (solid purple) to `recent` (dark gray, the same as neutral status with `strong` emphasis) to `familiar` (light gray), and then you remove the badge. Your team decides when each stage happens, such as after a number of days, visits, or clicks.
+`pre-release` is for features that aren't generally available yet, such as internal (alpha), early access (beta), and new features. `release` is for features that have launched. After launch, a feature fades from `pre-release` (solid purple) to `release` with `strong` emphasis (dark gray, the same as neutral status with `strong` emphasis) to `release` with `base` emphasis (light gray), and then you remove the badge. Your team decides when each stage happens, such as after a number of days, visits, or clicks.
 
 Emphasis shows how important the feature is. `subtle` is an outline, `base` is a light fill, and `strong` is a solid fill. The label stays your product's word, such as "Alpha," "Beta," or "New."
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
-  <dt-badge kind="lifecycle" variant="internal" label="Alpha" emphasis="subtle" />
-  <dt-badge kind="lifecycle" variant="early-access" label="Beta" emphasis="base" />
-  <dt-badge kind="lifecycle" variant="new" label="New" emphasis="strong" />
-  <dt-badge kind="lifecycle" variant="recent" label="New" />
-  <dt-badge kind="lifecycle" variant="familiar" label="New" emphasis="base" />
+  <dt-badge kind="release" variant="pre-release" label="Alpha" emphasis="subtle" />
+  <dt-badge kind="release" variant="pre-release" label="Beta" emphasis="base" />
+  <dt-badge kind="release" variant="pre-release" label="New" emphasis="strong" />
+  <dt-badge kind="release" variant="release" label="New" emphasis="strong" />
+  <dt-badge kind="release" variant="release" label="New" emphasis="base" />
 </dt-stack>
 ```
 
@@ -131,14 +133,14 @@ import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
 
 const awareness = useFeatureAwarenessBadge({
   exposureCount: 2,
-  thresholds: { new: 0, lifecycle: 3, hidden: 10 },
+  thresholds: { new: 0, release: 3, hidden: 10 },
 });
 </script>
 
 <template>
   <dt-badge
     v-if="awareness.isVisible.value"
-    kind="lifecycle"
+    kind="release"
     :variant="awareness.variant.value"
     :emphasis="awareness.emphasis.value"
     :label="$t('feature.new')"
@@ -146,10 +148,38 @@ const awareness = useFeatureAwarenessBadge({
 </template>
 ```
 
-Pass a `stages` option to set the variant and emphasis for each stage. By default the first stage is `new` with `strong` emphasis, and the next is `recent` with `base`.
+Pass a `stages` option to set the variant and emphasis for each stage. By default the first stage is `new`, which is `pre-release` with `strong` emphasis, and the next is `release`, which is `release` with `base` emphasis.
 
-> [!INFO] The look of `new` may change
+> [!INFO] The look of `pre-release` may change
 > Pick the variant and emphasis for the stage you mean, and don't rely on how a variant looks today.
+
+### Lifecycle
+
+Use `lifecycle` for the state of a piece of content as it moves from writing to publishing, such as a document, a message, or a campaign. Each variant takes a status color: `draft` and `archived` are neutral, `edited` and `scheduled` are info, `unsaved` is warning, and `saved` and `published` are positive. `published` defaults to `strong` emphasis so it stands apart from `saved`. The label is your product's word for the state.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <dt-stack direction="row" gap="100">
+    <dt-badge kind="lifecycle" variant="draft" label="Draft" />
+    <dt-badge kind="lifecycle" variant="edited" label="Edited" />
+    <dt-badge kind="lifecycle" variant="unsaved" label="Unsaved" />
+    <dt-badge kind="lifecycle" variant="saved" label="Saved" />
+    <dt-badge kind="lifecycle" variant="published" label="Published" />
+    <dt-badge kind="lifecycle" variant="archived" label="Archived" />
+    <dt-badge kind="lifecycle" variant="scheduled" label="Scheduled" />
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge kind="lifecycle" variant="draft" label="Draft" emphasis="strong" />
+    <dt-badge kind="lifecycle" variant="edited" label="Edited" emphasis="strong" />
+    <dt-badge kind="lifecycle" variant="unsaved" label="Unsaved" emphasis="strong" />
+    <dt-badge kind="lifecycle" variant="saved" label="Saved" emphasis="strong" />
+    <dt-badge kind="lifecycle" variant="published" label="Published" />
+    <dt-badge kind="lifecycle" variant="archived" label="Archived" emphasis="strong" />
+    <dt-badge kind="lifecycle" variant="scheduled" label="Scheduled" emphasis="strong" />
+  </dt-stack>
+</dt-stack>
+```
 
 ## Examples
 

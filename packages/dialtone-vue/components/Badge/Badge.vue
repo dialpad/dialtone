@@ -107,8 +107,9 @@ export default {
      * Defaults to the default variant of the group (`neutral` for status).
      * - status: neutral, info, positive, warning, critical
      * - counter: count, mention
-     * - lifecycle: internal, early-access, new, recent, familiar
-     * @values neutral, info, positive, warning, critical, count, mention, internal, early-access, new, recent, familiar
+     * - release: pre-release, release
+     * - lifecycle: draft, edited, unsaved, saved, published, archived, scheduled
+     * @values neutral, info, positive, warning, critical, count, mention, pre-release, release, draft, edited, unsaved, saved, published, archived, scheduled
      */
     variant: {
       type: String,
@@ -118,10 +119,10 @@ export default {
 
     /**
      * The visual emphasis of the badge.
-     * Each group supports its own levels: status and counter support base and strong;
-     * lifecycle supports subtle (outline), base (light fill) and strong (solid fill) and
+     * Each group supports its own levels: status, counter and lifecycle support base and strong;
+     * release supports subtle (outline), base (light fill) and strong (solid fill) and
      * means how important the feature is. Unsupported levels render the default.
-     * Defaults to strong for variant new, otherwise base.
+     * Defaults to strong for the release variants and published, otherwise base.
      * @values base, strong, subtle
      */
     emphasis: {
@@ -170,7 +171,7 @@ export default {
     /**
      * The group the badge belongs to. It decides which variants and emphasis levels are valid.
      * Defaults to status, so a plain badge is a neutral status badge.
-     * @values status, counter, lifecycle
+     * @values status, counter, release, lifecycle
      */
     kind: {
       type: String,

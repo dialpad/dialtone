@@ -109,26 +109,33 @@
 
   //  VARIANTS AND EMPHASIS
   //  --------------------------------------------------------------------------
-  //  Badges come in groups (status, counter, lifecycle). Colors come from the
+  //  Badges come in groups (status, counter, release, lifecycle). Colors come from the
   //  component tokens (--dt-badge-color-*), which point at semantic tokens where
   //  one exists.
   //
   //  STATUS: neutral, info, positive, warning, critical. Emphasis: base, strong.
-  &--neutral {
+  &--neutral,
+  &--draft,
+  &--archived {
     --badge-color-text: var(--dt-badge-color-foreground-default);
     --badge-color-background: var(--dt-badge-color-background-default);
   }
 
-  &--info {
+  &--info,
+  &--edited,
+  &--scheduled {
     --badge-color-background: var(--dt-badge-color-background-info);
   }
 
   &--positive,
-  &--success {
+  &--success,
+  &--saved,
+  &--published {
     --badge-color-background: var(--dt-badge-color-background-positive);
   }
 
-  &--warning {
+  &--warning,
+  &--unsaved {
     --badge-color-background: var(--dt-badge-color-background-warning);
   }
 
@@ -136,15 +143,13 @@
     --badge-color-background: var(--dt-badge-color-background-critical);
   }
 
-  //  LIFECYCLE: internal, early-access, new, recent, familiar.
+  //  RELEASE: pre-release, release.
   //  Emphasis (how important the feature is): subtle = outline, base = light
-  //  fill, strong = solid fill. The first three are purple; recent and familiar
-  //  fade to gray once a feature has launched. Teams decide when a badge moves
-  //  from one stage to the next. "bulletin" is the legacy name for new.
+  //  fill, strong = solid fill. pre-release is purple; release fades to gray
+  //  once a feature has launched. Teams decide when a badge moves from one
+  //  stage to the next. "bulletin" is the legacy name for pre-release.
   &--bulletin,
-  &--internal,
-  &--early-access,
-  &--new {
+  &--pre-release {
     --badge-color-text: var(--dt-badge-color-foreground-bulletin);
     --badge-color-background: var(--dt-badge-color-background-bulletin);
     --badge-color-outline: var(--dt-badge-color-background-bulletin);
@@ -157,19 +162,20 @@
     }
   }
 
-  &--recent,
-  &--familiar {
+  &--release {
     --badge-color-text: var(--dt-badge-color-foreground-default);
     --badge-color-background: var(--dt-badge-color-background-default);
   }
 
+  //  LIFECYCLE: draft, edited, unsaved, saved, published, archived, scheduled.
+  //  The state of a piece of content. Each variant uses a status color (see
+  //  STATUS above): draft and archived are neutral, edited and scheduled are
+  //  info, unsaved is warning, saved and published are positive.
+
   //  subtle: outline, no fill
   &--bulletin&--outlined,
-  &--internal&--outlined,
-  &--early-access&--outlined,
-  &--new&--outlined,
-  &--recent&--outlined,
-  &--familiar&--outlined {
+  &--pre-release&--outlined,
+  &--release&--outlined {
     --badge-color-background: var(--dt-color-neutral-transparent);
   }
 
@@ -178,8 +184,9 @@
   }
 
   &--neutral&--strong,
-  &--recent&--strong,
-  &--familiar&--strong {
+  &--draft&--strong,
+  &--archived&--strong,
+  &--release&--strong {
     --badge-color-background: var(--dt-badge-color-background-default-strong);
   }
 
@@ -189,15 +196,20 @@
     --badge-color-background: var(--badge-count-strong-background, var(--dt-badge-color-background-count-strong));
   }
 
-  &--info&--strong {
+  &--info&--strong,
+  &--edited&--strong,
+  &--scheduled&--strong {
     --badge-color-background: var(--dt-badge-color-background-info-strong);
   }
 
-  &--positive&--strong {
+  &--positive&--strong,
+  &--saved&--strong,
+  &--published&--strong {
     --badge-color-background: var(--dt-badge-color-background-positive-strong);
   }
 
-  &--warning&--strong {
+  &--warning&--strong,
+  &--unsaved&--strong {
     --badge-color-text: var(--dt-badge-color-foreground-warning-strong);
     --badge-color-background: var(--dt-badge-color-background-warning-strong);
   }

@@ -12,13 +12,21 @@ export const BADGE_GROUPS = {
     variants: ['count', 'mention'],
     emphasis: ['base', 'strong'],
   },
-  // Who can use a feature and, after launch, how long ago it landed. Variants are
-  // named for the stage; the badge text stays the product's word ("Alpha", "Beta", "New").
+  // Where a feature is in its rollout. `pre-release` is for features that aren't generally available
+  // (internal, alpha, beta, new). `release` is for features that have launched and are fading from view.
+  // The badge text stays the product's word ("Alpha", "Beta", "New").
   // Emphasis here is how important the feature is: subtle (outline), base (light fill), strong (solid fill).
-  lifecycle: {
-    defaultVariant: 'new',
-    variants: ['internal', 'early-access', 'new', 'recent', 'familiar'],
+  release: {
+    defaultVariant: 'pre-release',
+    variants: ['pre-release', 'release'],
     emphasis: ['subtle', 'base', 'strong'],
+  },
+  // The state of a piece of content as it moves through authoring and publishing.
+  // Variants reuse the status colors.
+  lifecycle: {
+    defaultVariant: 'draft',
+    variants: ['draft', 'edited', 'unsaved', 'saved', 'published', 'archived', 'scheduled'],
+    emphasis: ['base', 'strong'],
   },
 };
 
@@ -30,11 +38,15 @@ export const BADGE_VARIANT_MODIFIERS = {
   critical: 'd-badge--critical',
   count: 'd-badge--count',
   mention: 'd-badge--mention',
-  internal: 'd-badge--internal',
-  'early-access': 'd-badge--early-access',
-  new: 'd-badge--new',
-  recent: 'd-badge--recent',
-  familiar: 'd-badge--familiar',
+  'pre-release': 'd-badge--pre-release',
+  release: 'd-badge--release',
+  draft: 'd-badge--draft',
+  edited: 'd-badge--edited',
+  unsaved: 'd-badge--unsaved',
+  saved: 'd-badge--saved',
+  published: 'd-badge--published',
+  archived: 'd-badge--archived',
+  scheduled: 'd-badge--scheduled',
 };
 
 export const BADGE_EMPHASIS_MODIFIERS = {
@@ -49,8 +61,9 @@ export const BADGE_MENTION_PREFIX = '@';
 
 // Emphasis used when none is given. Variants not listed here default to base.
 export const BADGE_DEFAULT_EMPHASIS = {
-  new: 'strong',
-  recent: 'strong',
+  'pre-release': 'strong',
+  release: 'strong',
+  published: 'strong',
 };
 
 export const BADGE_SIZE_MODIFIERS = {
@@ -77,7 +90,7 @@ export const BADGE_TYPE_TO_VARIANT = {
   positive: 'positive',
   warning: 'warning',
   critical: 'critical',
-  bulletin: 'new',
+  bulletin: 'pre-release',
   ai: 'ai',
 };
 
@@ -109,16 +122,16 @@ export const BADGE_DECORATION_MODIFIERS = {
 export const FEATURE_AWARENESS_BADGE_DEFAULTS = {
   thresholds: {
     new: 0,
-    lifecycle: 3,
+    release: 3,
     hidden: 10,
   },
   stages: {
     new: {
-      variant: 'new',
+      variant: 'pre-release',
       emphasis: 'strong',
     },
-    lifecycle: {
-      variant: 'recent',
+    release: {
+      variant: 'release',
       emphasis: 'base',
     },
   },

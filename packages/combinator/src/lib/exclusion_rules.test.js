@@ -123,8 +123,10 @@ describe('exclusion_rules', function () {
       expect(disabled('status').has('count')).toBe(true);
       expect(disabled('counter').has('mention')).toBe(false);
       expect(disabled('counter').has('critical')).toBe(true);
-      expect(disabled('lifecycle').has('early-access')).toBe(false);
-      expect(disabled('lifecycle').has('neutral')).toBe(true);
+      expect(disabled('release').has('pre-release')).toBe(false);
+      expect(disabled('release').has('neutral')).toBe(true);
+      expect(disabled('lifecycle').has('published')).toBe(false);
+      expect(disabled('lifecycle').has('pre-release')).toBe(true);
     });
 
     it('should clear a DtBadge variant that does not belong to the selected kind', function () {

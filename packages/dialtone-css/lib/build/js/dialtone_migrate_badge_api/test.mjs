@@ -30,22 +30,22 @@ describe('dialtone-migrate-badge-api', () => {
       });
     }
 
-    it('maps type="bulletin" to the lifecycle group', () => {
+    it('maps type="bulletin" to the pre-release variant of the release group', () => {
       const input = '<dt-badge text="Beta" type="bulletin" />';
 
-      assert.equal(run(input), '<dt-badge kind="lifecycle" variant="new" label="Beta" />');
+      assert.equal(run(input), '<dt-badge kind="release" variant="pre-release" label="Beta" />');
     });
 
     it('keeps the look of a subtle bulletin badge as the base emphasis', () => {
       const input = '<dt-badge text="Beta" type="bulletin" subtle />';
 
-      assert.equal(run(input), '<dt-badge emphasis="base" kind="lifecycle" variant="new" label="Beta" />');
+      assert.equal(run(input), '<dt-badge emphasis="base" kind="release" variant="pre-release" label="Beta" />');
     });
 
     it('keeps the look of an outlined bulletin badge as the subtle emphasis', () => {
       const input = '<dt-badge text="Alpha" type="bulletin" outlined />';
 
-      assert.equal(run(input), '<dt-badge emphasis="subtle" kind="lifecycle" variant="new" label="Alpha" />');
+      assert.equal(run(input), '<dt-badge emphasis="subtle" kind="release" variant="pre-release" label="Alpha" />');
     });
 
     it('drops outlined on non-bulletin types and warns, since status badges have no outline', () => {
@@ -108,21 +108,25 @@ describe('dialtone-migrate-badge-api', () => {
       assert.equal(run('<dt-badge variant="count" label="9" />'), '<dt-badge kind="counter" variant="count" label="9" />');
     });
 
-    it('maps new to the lifecycle group and keeps its emphasis', () => {
+    it('maps new to the release group and keeps its emphasis', () => {
       const input = '<dt-badge variant="new" emphasis="base" label="New" />';
 
-      assert.equal(run(input), '<dt-badge kind="lifecycle" variant="new" emphasis="base" label="New" />');
+      assert.equal(run(input), '<dt-badge kind="release" variant="pre-release" emphasis="base" label="New" />');
     });
 
-    for (const [emphasis, variant] of [['subtle', 'internal'], ['base', 'early-access'], ['strong', 'new']]) {
-      it(`maps lifecycle with ${emphasis} emphasis to the ${variant} variant`, () => {
+    for (const emphasis of ['subtle', 'base', 'strong']) {
+      it(`maps lifecycle with ${emphasis} emphasis to pre-release and keeps the emphasis`, () => {
         const input = `<dt-badge variant="lifecycle" emphasis="${emphasis}" label="Beta" />`;
-        const output = run(input);
 
-        assert.ok(output.includes('kind="lifecycle"'));
-        assert.ok(output.includes(`variant="${variant}"`));
+        assert.equal(run(input), `<dt-badge kind="release" variant="pre-release" emphasis="${emphasis}" label="Beta" />`);
       });
     }
+
+    it('maps lifecycle with no emphasis to pre-release with base emphasis', () => {
+      const input = '<dt-badge variant="lifecycle" label="Beta" />';
+
+      assert.equal(run(input), '<dt-badge kind="release" variant="pre-release" emphasis="base" label="Beta" />');
+    });
 
     it('removes the clear emphasis and warns, since no group supports it', () => {
       const input = '<dt-badge variant="new" emphasis="clear" label="New" />';
@@ -133,20 +137,56 @@ describe('dialtone-migrate-badge-api', () => {
   });
 
   describe('grouped variant names without kind', () => {
-    for (const [variant, kind] of [
-      ['neutral', 'status'],
-      ['mention', 'counter'],
-      ['internal', 'lifecycle'],
-      ['early-access', 'lifecycle'],
-      ['recent', 'lifecycle'],
-      ['familiar', 'lifecycle'],
-    ]) {
+    for (const [variant, kind] of [['neutral', 'status'], ['mention', 'counter']]) {
       it(`adds kind="${kind}" to variant="${variant}"`, () => {
         const input = `<dt-badge variant="${variant}" label="Label" />`;
 
         assert.equal(run(input), `<dt-badge kind="${kind}" variant="${variant}" label="Label" />`);
       });
     }
+  });
+
+  describe('interim lifecycle variants to the release group', () => {
+    // Both release variants default to strong now. internal, early-access and familiar used to default
+    // to base, so they get an explicit base emphasis. new and recent already defaulted to strong.
+    for (const [from, to, emphasis] of [
+      ['new', 'pre-release', ''],
+      ['internal', 'pre-release', ' emphasis="base"'],
+      ['early-access', 'pre-release', ' emphasis="base"'],
+      ['recent', 'release', ''],
+      ['familiar', 'release', ' emphasis="base"'],
+    ]) {
+      for (const kind of ['', 'kind="lifecycle" ']) {
+        it(`maps ${kind || 'no kind'} variant="${from}" to ${to}`, () => {
+          const input = `<dt-badge ${kind}variant="${from}" label="Label" />`;
+
+          assert.equal(run(input), `<dt-badge kind="release" variant="${to}"${emphasis} label="Label" />`);
+        });
+      }
+    }
+
+    it('preserves an explicit emphasis', () => {
+      const input = '<dt-badge kind="lifecycle" variant="internal" emphasis="subtle" label="Alpha" />';
+
+      assert.equal(run(input), '<dt-badge kind="release" variant="pre-release" emphasis="subtle" label="Alpha" />');
+    });
+
+    it('keeps one attribute per line when adding the base emphasis', () => {
+      const input = ['<dt-badge', '  variant="familiar"', '  label="Label"', '/>'].join('\n');
+      const expected = ['<dt-badge', '  kind="release"', '  variant="release"', '  emphasis="base"', '  label="Label"', '/>']
+        .join('\n');
+
+      assert.equal(run(input), expected);
+    });
+
+    it('leaves the lifecycle content states unchanged', () => {
+      for (const variant of ['draft', 'edited', 'unsaved', 'saved', 'published', 'archived', 'scheduled']) {
+        const input = `<dt-badge kind="lifecycle" variant="${variant}" label="Label" />`;
+
+        assert.equal(run(input), input);
+        assert.equal(warnings(input).length, 0);
+      }
+    });
   });
 
   describe('safety', () => {

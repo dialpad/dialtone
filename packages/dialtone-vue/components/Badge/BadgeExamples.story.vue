@@ -123,9 +123,9 @@
       align="center"
     >
       <dt-badge
-        kind="lifecycle"
+        kind="release"
         label="Live"
-        variant="new"
+        variant="pre-release"
       />
       <dt-badge
         kind="status"

@@ -11,14 +11,19 @@
       "description": "Applies count variant shape."
     },
     {
-      "class": "d-badge--lifecycle",
+      "class": "d-badge--pre-release",
       "applies": ".d-badge",
-      "description": "Applies lifecycle status colors."
+      "description": "Applies pre-release (purple) colors."
     },
     {
-      "class": "d-badge--new",
+      "class": "d-badge--release",
       "applies": ".d-badge",
-      "description": "Applies new feature status colors."
+      "description": "Applies release (gray) colors."
+    },
+    {
+      "class": "d-badge--{$lifecycle}",
+      "applies": ".d-badge",
+      "description": "Applies the status color for a lifecycle variant: draft, edited, unsaved, saved, published, archived, or scheduled."
     },
     {
       "class": "d-badge--strong",
@@ -53,7 +58,7 @@
     {
       "class": "d-badge--bulletin",
       "applies": ".d-badge",
-      "description": "Deprecated alias for lifecycle styling."
+      "description": "Deprecated alias for pre-release styling."
     },
     {
       "class": "d-badge--ai",

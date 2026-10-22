@@ -34,19 +34,19 @@ describe('useFeatureAwarenessBadge', () => {
     vi.restoreAllMocks();
   });
 
-  it('should return new stage before lifecycle threshold', () => {
+  it('should return new stage before release threshold', () => {
     const result = mountComposable({ exposureCount: 0 });
 
     expect(result.stage.value).toBe('new');
-    expect(result.variant.value).toBe('new');
+    expect(result.variant.value).toBe('pre-release');
     expect(result.emphasis.value).toBe('strong');
     expect(result.isVisible.value).toBe(true);
   });
 
-  it('should return lifecycle stage at lifecycle threshold', () => {
+  it('should return release stage at release threshold', () => {
     const result = mountComposable({ exposureCount: 3 });
 
-    expect(result.stage.value).toBe('lifecycle');
+    expect(result.stage.value).toBe('release');
   });
 
   it('should hide at hidden threshold', () => {
@@ -59,10 +59,10 @@ describe('useFeatureAwarenessBadge', () => {
   it('should use provided defaults', () => {
     const result = mountComposable(
       { exposureCount: 2 },
-      { thresholds: { new: 0, lifecycle: 2, hidden: 4 } },
+      { thresholds: { new: 0, release: 2, hidden: 4 } },
     );
 
-    expect(result.stage.value).toBe('lifecycle');
+    expect(result.stage.value).toBe('release');
   });
 
   it('should react to exposure count changes', async () => {
@@ -72,17 +72,17 @@ describe('useFeatureAwarenessBadge', () => {
     exposureCount.value = 3;
     await Promise.resolve();
 
-    expect(result.stage.value).toBe('lifecycle');
+    expect(result.stage.value).toBe('release');
   });
 
   it('should warn and fall back when thresholds are invalid', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const result = mountComposable({
       exposureCount: 3,
-      thresholds: { new: 0, lifecycle: 10, hidden: 4 },
+      thresholds: { new: 0, release: 10, hidden: 4 },
     });
 
-    expect(result.stage.value).toBe('lifecycle');
+    expect(result.stage.value).toBe('release');
     expect(warn).toHaveBeenCalled();
   });
 });
