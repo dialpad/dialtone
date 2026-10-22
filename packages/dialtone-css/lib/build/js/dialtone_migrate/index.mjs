@@ -238,6 +238,13 @@ const MIGRATIONS = [
     detectPatterns: [
       /<(?:dt-chip|DtChip)\b[^>]*\s(?::|v-bind:)?(?:icon-class|iconClass|avatar-class|avatarClass)\s*=/,
       /<(?:dt-chip|DtChip)\b[\s\S]*?<template\s+#(?:icon|avatar)\b/,
+      // The codemod adds an explicit size="300" to any chip without size, so those chips are pending too.
+      // (?=[\s/>]) keeps dt-chip-group out; a size, :size, v-bind:size or v-bind spread means it is done.
+      new RegExp(
+        `<(?:dt-chip|DtChip)(?=[\\s/>])`
+        + `(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?size(?:[\\s=/>]))`
+        + `(?!${DT_TAG_ATTRS}\\sv-bind(?:[\\s=/>]))${DT_TAG_ATTRS}>`,
+      ),
     ],
     fileExtensions: ['.vue'],
   },

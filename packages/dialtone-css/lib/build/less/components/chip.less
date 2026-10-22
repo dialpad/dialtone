@@ -214,7 +214,9 @@
 
     //  Hover moves one step deeper than the resting fill. A strong chip is already
     //  at the moderate step, so it goes a step further to stay distinct from base.
-    &--strong:is(a, button, [role='button'], [role='link']):hover {
+    //  Excluding pressed and focused keeps their dark fill, which this rule would
+    //  otherwise override at equal specificity.
+    &--strong:is(a, button, [role='button'], [role='link']):hover:not(:active, :focus-visible, .d-chip__label--focus-always:focus) {
       --chip-color-background: var(--dt-color-surface-bold-opaque);
     }
 
@@ -299,11 +301,11 @@
   }
 
   &__icon {
-    padding-inline-end: var(--dt-spacing-50);
+    padding-inline-end: var(--chip-gap);
   }
 
   &__end-icon {
-    padding-inline-start: var(--dt-spacing-50);
+    padding-inline-start: var(--chip-gap);
   }
 
   &__text {

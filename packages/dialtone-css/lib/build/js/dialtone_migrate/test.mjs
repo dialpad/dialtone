@@ -137,6 +137,26 @@ describe('--health-check', () => {
     assert.match(badge, /\[PENDING\].*DtBadge API Updates \(badge-api\)/);
   });
 
+  it('flags a chip without size as chip-api, but not dt-chip-group or a chip that has a size', () => {
+    const pattern = /DtChip API Updates \(chip-api\)/;
+    const pending = html => runHealthCheck({ 'App.vue': `<template>${html}</template>` });
+
+    for (const html of ['<dt-chip>Label</dt-chip>', '<DtChip />', '<dt-chip class="a"\n  >Label</dt-chip>',
+      '<dt-chip :label="count > 0" />']) {
+      assert.match(pending(html), new RegExp(`\\[PENDING\\].*${pattern.source}`), html);
+    }
+    for (const html of ['<dt-chip-group>x</dt-chip-group>', '<dt-chip size="300">x</dt-chip>',
+      '<dt-chip :size="s">x</dt-chip>', '<dt-chip v-bind:size="s" />', '<dt-chip v-bind="chipProps" />',
+      '<dt-chip :label="count > 0" size="200" />']) {
+      assert.match(pending(html), new RegExp(`\\[DONE\\].*${pattern.source}`), html);
+    }
+  });
+
+  it('flags a chip whose only size-like text is inside a quoted value', () => {
+    const output = runHealthCheck({ 'App.vue': '<template><dt-chip label=" size=1 ">x</dt-chip></template>' });
+    assert.match(output, /\[PENDING\].*DtChip API Updates \(chip-api\)/);
+  });
+
   it('still flags show= on a Dialtone component as component-props', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-modal show="isOpen"></dt-modal></template>',

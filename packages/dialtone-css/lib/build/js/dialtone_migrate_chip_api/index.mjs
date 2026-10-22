@@ -14,24 +14,48 @@ import readline from 'readline';
 import { fileURLToPath } from 'node:url';
 
 const QUOTE_AWARE_ATTRS = '(?:[^>"\']|"[^"]*"|\'[^\']*\')*';
-const CHIP_BLOCK_RE = new RegExp(
-  `<(?:dt-chip|DtChip)\\b${QUOTE_AWARE_ATTRS}>[\\s\\S]*?<\\/(?:dt-chip|DtChip)>|` +
-  `<(?:dt-chip|DtChip)\\b${QUOTE_AWARE_ATTRS}\\/>`,
-  'g',
-);
-const CHIP_OPEN_TAG_RE = new RegExp(`^<((?:dt-chip|DtChip)\\b)(${QUOTE_AWARE_ATTRS})(\\s*\\/?>)`);
+const CHIP_NAMES = ['dt-chip', 'DtChip'];
+const CHIP_OPEN_TAG_RE = new RegExp(`^<((?:dt-chip|DtChip)(?=[\\s/>]))(${QUOTE_AWARE_ATTRS})(\\s*\\/?>)`);
+// Any open, close or self-closing tag. Groups: closing slash, name, attributes, self-closing slash.
+const TAG_RE = new RegExp(`<(\\/?)([A-Za-z][\\w.:-]*)(${QUOTE_AWARE_ATTRS}?)(\\/?)>`, 'g');
+const VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr',
+]);
 
-function stripQuotedValues (attrs) {
-  return attrs.replace(/"[^"]*"|'[^']*'/g, match => (match[0] === '"' ? '""' : '\'\''));
+// Old slot name -> new slot name.
+const SLOT_RENAMES = { icon: 'startIcon', avatar: 'startAvatar' };
+
+// Attributes are tokenized so that quoted values (labels, classes, expressions) are never mistaken for attributes.
+// Each token covers the whole attribute: name plus `=value` when present. A trailing "/" is not a token.
+const ATTR_RE = /([^\s"'=<>/]+)(?:\s*=\s*("[^"]*"|'[^']*'|[^\s"'>]+))?/g;
+
+function parseAttrs (attrs) {
+  return [...attrs.matchAll(ATTR_RE)].map(match => ({
+    name: match[1],
+    value: match[2] ?? null,
+    start: match.index,
+    end: match.index + match[0].length,
+  }));
 }
 
+const unquote = value => value.replace(/^(["'])(.*)\1$/, '$2');
+const attrNames = prop => [prop, `:${prop}`, `v-bind:${prop}`];
+const boundNames = prop => [`:${prop}`, `v-bind:${prop}`];
+
 function hasAttr (attrs, prop) {
-  const stripped = stripQuotedValues(attrs);
-  return new RegExp(`(?:^|\\s)(?::|v-bind:)?${prop}(?:\\s*=|\\s|\\/|>|$)`).test(stripped);
+  return parseAttrs(attrs).some(token => attrNames(prop).includes(token.name));
 }
 
 function hasDynamicAttr (attrs, prop) {
-  return new RegExp(`(?:^|\\s)(?::|v-bind:)${prop}\\s*=`).test(attrs);
+  return parseAttrs(attrs).some(token => boundNames(prop).includes(token.name) && token.value !== null);
+}
+
+// An explicit literal false (interactive="false", :interactive="false") means the chip is not interactive.
+// Any other value, including a dynamic expression, is treated as possibly interactive.
+function isInteractive (attrs) {
+  return parseAttrs(attrs)
+    .filter(token => attrNames('interactive').includes(token.name))
+    .some(token => token.value === null || unquote(token.value).trim() !== 'false');
 }
 
 function insertAttr (attrs, attr) {
@@ -41,10 +65,13 @@ function insertAttr (attrs, attr) {
 }
 
 function renameAttr (attrs, oldProp, newProp) {
-  return attrs
-    .replace(new RegExp(`(?<=\\s)${oldProp}(?=\\s*=)`, 'g'), newProp)
-    .replace(new RegExp(`(?<=\\s:)${oldProp}(?=\\s*=)`, 'g'), newProp)
-    .replace(new RegExp(`(?<=\\sv-bind:)${oldProp}(?=\\s*=)`, 'g'), newProp);
+  const renames = new Map(attrNames(oldProp).map((name, i) => [name, attrNames(newProp)[i]]));
+  let result = attrs;
+  // Back to front so earlier token offsets stay valid.
+  for (const token of parseAttrs(attrs).filter(t => t.value !== null && renames.has(t.name)).reverse()) {
+    result = result.slice(0, token.start) + renames.get(token.name) + result.slice(token.start + token.name.length);
+  }
+  return result;
 }
 
 function transformChipOpenTag (tag, warnings, filePath) {
@@ -54,13 +81,13 @@ function transformChipOpenTag (tag, warnings, filePath) {
   const [, tagName, originalAttrs, closer] = match;
   let attrs = originalAttrs;
   const hasShowClose = hasAttr(attrs, 'show-close') || hasAttr(attrs, 'showClose');
-  const hasInteractive = hasAttr(attrs, 'interactive');
+  const hasInteractiveAttr = hasAttr(attrs, 'interactive');
 
   if (!hasAttr(attrs, 'size')) {
     attrs = insertAttr(attrs, 'size="300"');
   }
 
-  if (!hasShowClose && !hasInteractive) {
+  if (!hasShowClose && !hasInteractiveAttr) {
     warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE file=${filePath}`);
   }
 
@@ -68,7 +95,7 @@ function transformChipOpenTag (tag, warnings, filePath) {
     warnings.push(`CHIP_API_DYNAMIC_SHOW_CLOSE file=${filePath}`);
   }
 
-  if (hasShowClose && !hasInteractive) {
+  if (hasShowClose && !isInteractive(attrs)) {
     warnings.push(`CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE file=${filePath}`);
   }
 
@@ -80,30 +107,77 @@ function transformChipOpenTag (tag, warnings, filePath) {
   return `<${tagName}${attrs}${closer}`;
 }
 
-function transformChipSlots (block, warnings, filePath) {
-  let result = block;
-  const hasIconSlot = /#icon\b|v-slot:icon\b|slot="icon"/.test(result);
-  const hasAvatarSlot = /#avatar\b|v-slot:avatar\b|slot="avatar"/.test(result);
-  const before = result;
-
-  result = result
-    .replace(/#icon\b/g, '#startIcon')
-    .replace(/#avatar\b/g, '#startAvatar')
-    .replace(/v-slot:icon\b/g, 'v-slot:startIcon')
-    .replace(/v-slot:avatar\b/g, 'v-slot:startAvatar')
-    .replace(/slot="icon"/g, 'slot="startIcon"')
-    .replace(/slot="avatar"/g, 'slot="startAvatar"');
-
-  if (result !== before) warnings.push(`CHIP_API_SLOT_RENAMED file=${filePath}`);
-  if (hasIconSlot && hasAvatarSlot) warnings.push(`CHIP_API_ICON_AVATAR_CONFLICT file=${filePath}`);
-
-  return result;
+// Renames the old slot names on one direct child of a chip: `#icon`, `v-slot:icon` and `slot="icon"`.
+function renameSlotAttrs (attrs) {
+  const found = { icon: false, avatar: false };
+  let result = attrs;
+  for (const token of parseAttrs(attrs).reverse()) {
+    let oldSlot = null;
+    let replacement = null;
+    if (token.name.startsWith('#') && SLOT_RENAMES[token.name.slice(1)]) {
+      oldSlot = token.name.slice(1);
+      replacement = `#${SLOT_RENAMES[oldSlot]}${result.slice(token.start + token.name.length, token.end)}`;
+    } else if (token.name.startsWith('v-slot:') && SLOT_RENAMES[token.name.slice(7)]) {
+      oldSlot = token.name.slice(7);
+      replacement = `v-slot:${SLOT_RENAMES[oldSlot]}${result.slice(token.start + token.name.length, token.end)}`;
+    } else if (token.name === 'slot' && token.value !== null && SLOT_RENAMES[unquote(token.value)]) {
+      oldSlot = unquote(token.value);
+      const eq = result.slice(token.start + token.name.length, token.end - token.value.length);
+      replacement = `slot${eq}${token.value[0]}${SLOT_RENAMES[oldSlot]}${token.value[0]}`;
+    }
+    if (oldSlot) {
+      found[oldSlot] = true;
+      result = result.slice(0, token.start) + replacement + result.slice(token.end);
+    }
+  }
+  return { attrs: result, found };
 }
 
-function transformChipBlock (block, warnings, filePath) {
-  return transformChipSlots(block, warnings, filePath).replace(CHIP_OPEN_TAG_RE, tag => {
-    return transformChipOpenTag(tag, warnings, filePath);
-  });
+// Walks the tags once, tracking nesting, so that only the chip's own opening tag and its direct
+// children's slots are touched. Slots of nested components (an avatar's #icon, a button's #icon) stay as is.
+function transformChips (content, warnings, filePath) {
+  const edits = [];
+  const stack = [];
+
+  for (const match of content.matchAll(TAG_RE)) {
+    const [tag, closing, name, attrs, selfClosing] = match;
+    const start = match.index;
+
+    if (closing) {
+      const idx = stack.findLastIndex(entry => entry.name === name);
+      if (idx !== -1) stack.length = idx;
+      continue;
+    }
+
+    const parent = stack[stack.length - 1];
+    const isChip = CHIP_NAMES.includes(name);
+    let text = tag;
+    if (parent?.chip) {
+      const { attrs: newAttrs, found } = renameSlotAttrs(attrs);
+      text = `<${name}${newAttrs}${selfClosing}>`;
+      if (newAttrs !== attrs && !parent.chip.renamed) warnings.push(`CHIP_API_SLOT_RENAMED file=${filePath}`);
+      parent.chip.renamed ||= newAttrs !== attrs;
+      parent.chip.icon ||= found.icon;
+      parent.chip.avatar ||= found.avatar;
+      if (parent.chip.icon && parent.chip.avatar && !parent.chip.conflict) {
+        parent.chip.conflict = true;
+        warnings.push(`CHIP_API_ICON_AVATAR_CONFLICT file=${filePath}`);
+      }
+    }
+    if (isChip) text = transformChipOpenTag(text, warnings, filePath);
+    if (text !== tag) edits.push({ start, end: start + tag.length, text });
+
+    if (!selfClosing && !VOID_ELEMENTS.has(name.toLowerCase())) {
+      stack.push({ name, chip: isChip ? { renamed: false, icon: false, avatar: false, conflict: false } : null });
+    }
+  }
+
+  let result = content;
+  // Back to front so earlier offsets stay valid.
+  for (const edit of edits.reverse()) {
+    result = result.slice(0, edit.start) + edit.text + result.slice(edit.end);
+  }
+  return result;
 }
 
 function maskInertContent (content) {
@@ -128,7 +202,7 @@ export function transformContent (content, opts = {}) {
   if (!/(?:dt-chip|DtChip)/.test(content)) return { transformed: content, warnings };
 
   const { masked, segments, token } = maskInertContent(content);
-  const transformed = masked.replace(CHIP_BLOCK_RE, block => transformChipBlock(block, warnings, filePath));
+  const transformed = transformChips(masked, warnings, filePath);
 
   return { transformed: unmaskInertContent(transformed, segments, token), warnings };
 }

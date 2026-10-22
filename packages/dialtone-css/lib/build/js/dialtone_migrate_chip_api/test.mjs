@@ -82,4 +82,100 @@ describe('dialtone-migrate-chip-api', () => {
 
     assert.equal(run(input), input);
   });
+  it('does not rename slots of a component nested in the avatar slot', () => {
+    const input = [
+      '<dt-chip size="300">',
+      '  <template #avatar>',
+      '    <dt-avatar>',
+      '      <template #icon><dt-icon /></template>',
+      '    </dt-avatar>',
+      '  </template>',
+      '  Chip',
+      '</dt-chip>',
+    ].join('\n');
+    const output = run(input);
+
+    assert.ok(output.includes('<template #startAvatar>'));
+    assert.ok(output.includes('<template #icon><dt-icon /></template>'));
+    assert.ok(!output.includes('#startIcon'));
+    assert.ok(!warnings(input).some(warning => warning.startsWith('CHIP_API_ICON_AVATAR_CONFLICT')));
+  });
+
+  it('does not rename the icon slot of a dt-button nested in the chip', () => {
+    const input = [
+      '<dt-chip size="300">',
+      '  <dt-button><template #icon><dt-icon /></template></dt-button>',
+      '</dt-chip>',
+    ].join('\n');
+
+    assert.equal(run(input), input);
+  });
+
+  it('renames v-slot and slot attribute forms only on direct children', () => {
+    const input = [
+      '<dt-chip size="300">',
+      '  <template v-slot:icon="props"><dt-icon /></template>',
+      '  <span slot="avatar">A</span>',
+      '  <dt-button><template v-slot:icon>x</template></dt-button>',
+      '</dt-chip>',
+    ].join('\n');
+    const output = run(input);
+
+    assert.ok(output.includes('<template v-slot:startIcon="props">'));
+    assert.ok(output.includes('<span slot="startAvatar">'));
+    assert.ok(output.includes('<template v-slot:icon>x</template>'));
+  });
+
+  it('does not rename slot-like text inside quoted attribute values', () => {
+    const input = '<dt-chip size="300"><template #default><i class="#icon" title="slot=\'icon\'" /></template>'
+      + '</dt-chip>';
+
+    assert.equal(run(input), input);
+  });
+
+  it('does not treat dt-chip-group as a chip', () => {
+    const input = '<dt-chip-group><template #icon>x</template></dt-chip-group>';
+
+    assert.equal(run(input), input);
+  });
+
+  it('only renames class props on the chip opening tag', () => {
+    const input = '<dt-chip size="300"><dt-avatar avatar-class="foo" /></dt-chip>';
+
+    assert.equal(run(input), input);
+  });
+
+  it('transforms a self-closing chip and a following paired chip independently', () => {
+    const input = '<dt-chip /><dt-chip icon-class="foo">Chip</dt-chip>';
+    const expected = '<dt-chip size="300" /><dt-chip size="300" start-icon-class="foo">Chip</dt-chip>';
+
+    assert.equal(run(input), expected);
+  });
+
+  it('transforms every chip in a list, including nested ones', () => {
+    const input = '<dt-chip><dt-chip>Inner</dt-chip></dt-chip><DtChip>Next</DtChip>';
+    const expected = '<dt-chip size="300"><dt-chip size="300">Inner</dt-chip></dt-chip>'
+      + '<DtChip size="300">Next</DtChip>';
+
+    assert.equal(run(input), expected);
+  });
+
+  it('warns for show-close with an explicitly false interactive binding', () => {
+    for (const interactive of [':interactive="false"', 'interactive="false"', 'v-bind:interactive="false"']) {
+      const input = `<dt-chip show-close ${interactive}>Chip</dt-chip>`;
+
+      assert.ok(
+        warnings(input).some(warning => warning.startsWith('CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE')),
+        interactive,
+      );
+    }
+  });
+
+  it('does not warn for show-close on interactive or dynamically interactive chips', () => {
+    for (const interactive of ['interactive', ':interactive="true"', ':interactive="isOn"']) {
+      const input = `<dt-chip show-close ${interactive}>Chip</dt-chip>`;
+
+      assert.ok(!warnings(input).some(warning => warning.startsWith('CHIP_API_SHOW_CLOSE')), interactive);
+    }
+  });
 });

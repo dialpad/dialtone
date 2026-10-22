@@ -66,6 +66,14 @@ export const argTypesData = {
     },
   },
 
+  startAvatar: {
+    control: false,
+    description: 'Avatar at the start of the chip',
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
   leading: {
     control: false,
     description: 'Freeform content at the start of the chip',
@@ -102,6 +110,29 @@ export const argTypesData = {
   },
   showClose: {
     control: 'boolean',
+  },
+  removeButtonAriaLabel: {
+    control: 'text',
+  },
+  leadingClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  trailingClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  startIconClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  startAvatarClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  endIconClass: {
+    control: 'text',
+    table: { category: 'props' },
   },
   interactive: {
     control: 'boolean',

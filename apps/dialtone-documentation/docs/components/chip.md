@@ -85,7 +85,9 @@ Chips are static by default. An interactive chip renders as a button. Hovering i
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
-  <dt-chip interactive @click="() => {}">Clickable</dt-chip>
+  <dt-chip interactive :emphasis="selected ? 'strong' : 'base'" @click="selected = !selected">
+    {{ selected ? 'Selected' : 'Select me' }}
+  </dt-chip>
   <dt-chip interactive show-close remove-button-aria-label="Remove label name">Removable</dt-chip>
   <dt-chip variant="people" interactive show-close remove-button-aria-label="Remove First Last">First Last</dt-chip>
 </dt-stack>
@@ -176,6 +178,12 @@ To truncate text, use DtText's `truncate` prop and set the width of the chip con
 ```
 
 If you're upgrading from the v10 API, run `npx dialtone-migrate-chip-api` to rename the `icon` and `avatar` slots and their class props. The [migration guide](/guides/migration/badge-chip-api/) lists every change.
+
+<script setup>
+import { ref } from 'vue'
+
+const selected = ref(false)
+</script>
 
 ## Vue API
 
