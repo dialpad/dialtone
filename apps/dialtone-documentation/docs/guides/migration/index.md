@@ -38,7 +38,7 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 12 | [Logical Naming](./logical-naming/) | Deprecation | `dialtone-migration-helper` | Slots, props, events: `left`/`right` becomes `start`/`end`. |
 | 13 | [Removal of Dialtone Recipes](./recipes-to-ui-kits/) | **Yes** | Migration script | All `DtRecipe*` components have been removed. Use standalone `@dialpad/` UI Kit packages instead. |
 | 14 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames (including DtBox `surface`/`bc`, DtText `tone-strong`, DtButton `link-kind`), `show` becomes `open`, `hide-*` inversion, `title` becomes `header-text`, event/slot renames, `rootClass` removal. |
-| 15 | [Badge API updates](./badge-chip-api/) | **Yes** | `dialtone-migrate-badge-api` | Badge gains `kind` groups (`status`, `counter`, `lifecycle`) and moves to `variant`/`emphasis`/`label`, with `startIcon`, `endIcon`, `leading` and `trailing` slots. |
+| 15 | [Badge and Chip API updates](./badge-chip-api/) | **Yes** | `dialtone-migrate-badge-api`, `dialtone-migrate-chip-api` | Badge moves to `variant`/`emphasis`/`label`; Chip moves to `variant`/`emphasis`/`start`/`end`, defaults `showClose` to `false`, and makes removal interactive-only. |
 | 16 | [DtChip interactive default](./chip-interactive/) | **Yes** | `dialtone-migrate-chip-interactive` | `interactive` prop default changed from `true` to `false`. Chips that need click/keyboard behavior must opt in with `:interactive="true"`. |
 | 17 | [Scrollbar :never → :always](./scrollbar-always/) | **Yes** | `dialtone-migrate-scrollbar-always` | `v-dt-scrollbar:never` renamed to `v-dt-scrollbar:always`; `DtBox` `scrollbar="never"` renamed to `scrollbar="always"`. |
 | 18 | [DtModal Native Dialog](./modal-native-dialog/) | No | — | `DtModal` now uses a native `<dialog>` element. Popovers and tooltips inside modals auto-append to the dialog. Only affects consumers targeting internal DOM structure. |
@@ -137,8 +137,9 @@ npx dialtone-migration-helper --cwd ./src
 # 13. Component props, events, and slots
 npx dialtone-migrate-props --cwd ./src
 
-# 14. Badge API updates
+# 14. Badge and Chip API updates
 npx dialtone-migrate-badge-api --cwd ./src
+npx dialtone-migrate-chip-api --cwd ./src
 
 # 15. DtChip interactive default (adds :interactive="true" to clickable chips)
 npx dialtone-migrate-chip-interactive --cwd ./src

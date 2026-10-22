@@ -38,19 +38,19 @@ function selectedCount (output) {
 describe('migration selection', () => {
   it('--all selects the required migrations only (excludes opt-in)', () => {
     const output = runDryRun(['--all']);
-    assert.equal(selectedCount(output), 13);
+    assert.equal(selectedCount(output), 14);
     assert.ok(!output.includes('[OPT-IN]'), '--all must not select opt-in migrations');
   });
 
   it('--all --include-opt-in selects every migration', () => {
     const output = runDryRun(['--all', '--include-opt-in']);
-    assert.equal(selectedCount(output), 21);
+    assert.equal(selectedCount(output), 22);
     assert.ok(output.includes('[OPT-IN]'), 'opt-in migrations should be selected');
   });
 
   it('--include-opt-in on its own also selects every migration', () => {
     const output = runDryRun(['--include-opt-in']);
-    assert.equal(selectedCount(output), 21);
+    assert.equal(selectedCount(output), 22);
   });
 });
 

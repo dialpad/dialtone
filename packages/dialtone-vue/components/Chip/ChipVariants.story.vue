@@ -2,9 +2,9 @@
 <template>
   <dt-stack gap="100">
     <div>
-      <h4>With Icon</h4>
+      <h4>With Start</h4>
       <dt-chip>
-        <template #icon>
+        <template #startIcon>
           <dt-icon
             name="lock-filled"
             size="200"
@@ -17,8 +17,8 @@
     </div>
     <div>
       <h4>With Avatar</h4>
-      <dt-chip>
-        <template #avatar>
+      <dt-chip variant="people">
+        <template #startAvatar>
           <dt-avatar
             size="200"
             full-name="Jaqueline Nackos"
@@ -31,10 +31,10 @@
       </dt-chip>
     </div>
     <div>
-      <h4>Interactive</h4>
+      <h4>Interactive with remove</h4>
       <dt-chip
-        :interactive="true"
-        :show-close="false"
+        interactive
+        show-close
       >
         <template #default>
           Chip

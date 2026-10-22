@@ -81,6 +81,7 @@ Color or semantic variant. Values vary per component:
 - DtModal: `default`, `critical`
 - DtNotice: `base`, `critical`, `info`, `positive`, `warning`
 - DtBadge: grouped by `kind` (`status`, `counter`, `lifecycle`). `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `lifecycle`: `internal`, `early-access`, `new`, `recent`, `familiar`
+- DtChip: `default`, `people`
 
 For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text compositions.
 

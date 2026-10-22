@@ -223,6 +223,19 @@ const MIGRATIONS = [
     fileExtensions: ['.vue'],
   },
   {
+    id: 'chip-api',
+    name: 'DtChip API Updates',
+    description: 'DtChip moves to variant/emphasis/start/end; showClose now defaults to false.',
+    category: 'required',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_chip_api',
+    detectPatterns: [
+      /<(?:dt-chip|DtChip)\b[^>]*\s(?::|v-bind:)?(?:icon-class|iconClass|avatar-class|avatarClass)\s*=/,
+      /<(?:dt-chip|DtChip)\b[\s\S]*?<template\s+#(?:icon|avatar)\b/,
+    ],
+    fileExtensions: ['.vue'],
+  },
+  {
     id: 'scrollbar-always',
     name: 'Scrollbar :never → :always',
     description: 'v-dt-scrollbar:never renamed to v-dt-scrollbar:always.',

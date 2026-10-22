@@ -1,9 +1,15 @@
 import { mount } from '@vue/test-utils';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
 import { DtChip } from '@/components/Chip';
+import {
+  CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
+  CHIP_EMPHASIS_MODIFIERS,
+  CHIP_SIZE_MODIFIERS,
+  CHIP_VARIANT_MODIFIERS,
+} from './ChipConstants';
 
 const MOCK_DEFAULT_TEXT = 'TEXT';
-const MOCK_LOCALIZED_CLOSE_BUTTON_ARIA_LABEL = 'Click to close';
+const MOCK_LOCALIZED_REMOVE_BUTTON_ARIA_LABEL = 'Remove chip';
 
 const baseProps = {};
 const baseSlots = {};
@@ -56,8 +62,8 @@ describe('DtChip Tests', () => {
         expect(chip.exists()).toBeTruthy();
       });
 
-      it('should render remove button', () => {
-        expect(remove.exists()).toBeTruthy();
+      it('should not render remove button by default', () => {
+        expect(remove.exists()).toBe(false);
       });
 
       it('should render label', () => {
@@ -84,18 +90,61 @@ describe('DtChip Tests', () => {
         expect('aria-labelledby' in chip.attributes()).toBeTruthy();
       });
 
-      it('button should have aria-label', () => {
-        expect(remove.attributes('aria-label')).toBe(MOCK_LOCALIZED_CLOSE_BUTTON_ARIA_LABEL);
+    });
+
+    describe('When size is omitted', () => {
+      it('should render the 300 size class', () => {
+        expect(chip.classes()).toContain(CHIP_SIZE_MODIFIERS[300]);
       });
     });
 
     describe('When size is numeric', () => {
-      it('should render correct size class', () => {
-        mockProps = { size: 100 };
+      it.each([100, 200, 300, 400, 500, 600, 700])('should render the size %s class', (size) => {
+        mockProps = { size };
 
         updateWrapper();
 
-        expect(chip.classes()).toContain('d-chip__label--xs');
+        expect(chip.classes()).toContain(CHIP_SIZE_MODIFIERS[size]);
+      });
+    });
+
+    describe('When the chip has a close button', () => {
+      it.each([100, 300, 600])('should size the close button for chip size %s', (size) => {
+        mockProps = { size, showClose: true, interactive: true };
+
+        updateWrapper();
+
+        expect(remove.classes()).toContain(CHIP_CLOSE_BUTTON_SIZE_MODIFIERS[size]);
+      });
+    });
+
+    describe('When variant is people', () => {
+      it('should render correct variant class', () => {
+        mockProps = { variant: 'people' };
+
+        updateWrapper();
+
+        expect(chip.classes()).toContain(CHIP_VARIANT_MODIFIERS.people);
+      });
+    });
+
+    describe('When emphasis is strong', () => {
+      it('should render correct emphasis class', () => {
+        mockProps = { emphasis: 'strong' };
+
+        updateWrapper();
+
+        expect(chip.classes()).toContain(CHIP_EMPHASIS_MODIFIERS.strong);
+      });
+    });
+
+    describe('When emphasis is subtle and interactive', () => {
+      it('should render base emphasis fallback', () => {
+        mockProps = { emphasis: 'subtle', interactive: true };
+
+        updateWrapper();
+
+        expect(chip.classes()).not.toContain(CHIP_EMPHASIS_MODIFIERS.subtle);
       });
     });
 
@@ -119,9 +168,45 @@ describe('DtChip Tests', () => {
       });
     });
 
+    describe('When showClose is true and interactive is false', () => {
+      it('should not render remove button', () => {
+        mockProps = { showClose: true, interactive: false };
+
+        updateWrapper();
+
+        expect(remove.exists()).toBe(false);
+      });
+    });
+
+    describe('When showClose is true and interactive is true', () => {
+      beforeEach(() => {
+        mockProps = { showClose: true, interactive: true };
+
+        updateWrapper();
+      });
+
+      it('should render remove button', () => {
+        expect(remove.exists()).toBeTruthy();
+      });
+
+      it('button should have localized aria-label', () => {
+        expect(remove.attributes('aria-label')).toBe(MOCK_LOCALIZED_REMOVE_BUTTON_ARIA_LABEL);
+      });
+    });
+
+    describe('When removeButtonAriaLabel is provided', () => {
+      it('should render custom close aria-label', () => {
+        mockProps = { showClose: true, interactive: true, removeButtonAriaLabel: 'Remove person' };
+
+        updateWrapper();
+
+        expect(remove.attributes('aria-label')).toBe('Remove person');
+      });
+    });
+
     describe('When disabled', () => {
       beforeEach(() => {
-        mockProps = { disabled: true };
+        mockProps = { disabled: true, showClose: true, interactive: true };
 
         updateWrapper();
       });
@@ -135,9 +220,63 @@ describe('DtChip Tests', () => {
         expect(chip.attributes('tabindex')).toBe('-1');
       });
 
-      it('should set aria-disabled and tabindex on close button', () => {
+      it('should set aria-disabled and tabindex on remove button', () => {
         expect(remove.attributes('aria-disabled')).toBe('true');
         expect(remove.attributes('tabindex')).toBe('-1');
+      });
+
+      it('should not emit click', async () => {
+        await chip.trigger('click');
+
+        expect(wrapper.emitted('click')).toBeUndefined();
+      });
+
+      it('should not emit close when backspace is pressed', async () => {
+        await chip.trigger('keydown', { key: 'Backspace' });
+
+        expect(wrapper.emitted('close')).toBeUndefined();
+      });
+
+      it('should not emit close when the remove button is clicked', async () => {
+        await remove.trigger('click');
+
+        expect(wrapper.emitted('close')).toBeUndefined();
+      });
+    });
+
+    describe('When the startIcon slot is toggled after mount', () => {
+      it('should add and remove the start icon wrapper', async () => {
+        const Parent = {
+          components: { DtChip },
+          props: { showStart: Boolean },
+          template: '<dt-chip><template v-if="showStart" #startIcon><span>S</span></template>Label</dt-chip>',
+        };
+        const parent = mount(Parent, { props: { showStart: false } });
+        const startSelector = '[data-qa="dt-chip-icon"]';
+
+        expect(parent.find(startSelector).exists()).toBe(false);
+
+        await parent.setProps({ showStart: true });
+        expect(parent.find(startSelector).exists()).toBe(true);
+
+        await parent.setProps({ showStart: false });
+        expect(parent.find(startSelector).exists()).toBe(false);
+      });
+    });
+
+    describe('When a deprecated slot is used and the chip re-renders', () => {
+      it('should warn only once per instance', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockSlots = { default: MOCK_DEFAULT_TEXT, icon: EmptyComponentFixture };
+        updateWrapper();
+        await wrapper.setProps({ size: 300 });
+        await wrapper.setProps({ size: 100 });
+
+        const iconWarnings = warn.mock.calls.filter(([message]) => message.includes('icon slot is deprecated'));
+
+        expect(iconWarnings).toHaveLength(1);
+        warn.mockRestore();
       });
     });
 
@@ -160,11 +299,66 @@ describe('DtChip Tests', () => {
         expect(icon.exists()).toBeTruthy();
       });
     });
+
+    describe('With startIcon and deprecated icon slots', () => {
+      it('should render startIcon and suppress the deprecated icon', () => {
+        mockSlots = { startIcon: '<span>start</span>', icon: '<span>icon</span>' };
+
+        updateWrapper();
+
+        const start = wrapper.find('[data-qa="dt-chip-icon"]');
+        expect(start.text()).toBe('start');
+      });
+    });
+
+    describe('With startAvatar slot', () => {
+      it('should render the start avatar wrapper', () => {
+        mockSlots = { startAvatar: '<span>avatar</span>' };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-chip-avatar"]').text()).toBe('avatar');
+      });
+    });
+
+    describe('With endIcon slot', () => {
+      it('should render the end icon wrapper with its class', () => {
+        mockSlots = { endIcon: '<span>end</span>' };
+        mockProps = { endIconClass: 'custom-end' };
+
+        updateWrapper();
+
+        const end = wrapper.find('[data-qa="dt-chip-end-icon"]');
+        expect(end.text()).toBe('end');
+        expect(end.classes()).toContain('custom-end');
+      });
+    });
+
+    describe('With leading and trailing slots', () => {
+      it('should render freeform content in the leading and trailing containers', () => {
+        mockSlots = { leading: '<span>lead</span>', trailing: '<span>trail</span>' };
+        mockProps = { leadingClass: 'custom-leading', trailingClass: 'custom-trailing' };
+
+        updateWrapper();
+
+        const leading = wrapper.find('[data-qa="dt-chip-leading"]');
+        const trailing = wrapper.find('[data-qa="dt-chip-trailing"]');
+
+        expect(leading.text()).toBe('lead');
+        expect(leading.classes()).toEqual(expect.arrayContaining(['d-chip__leading', 'custom-leading']));
+        expect(trailing.text()).toBe('trail');
+        expect(trailing.classes()).toEqual(expect.arrayContaining(['d-chip__trailing', 'custom-trailing']));
+      });
+    });
   });
 
   describe('Interactivity Tests', () => {
     describe('When close button is clicked', () => {
       it('should emit close event', async () => {
+        mockProps = { showClose: true, interactive: true };
+
+        updateWrapper();
+
         await remove.trigger('click');
 
         expect('close' in wrapper.emitted()).toBeTruthy();
@@ -173,9 +367,43 @@ describe('DtChip Tests', () => {
 
     describe('When delete is pressed on a chip', () => {
       it('should emit close event', async () => {
+        mockProps = { showClose: true, interactive: true };
+
+        updateWrapper();
+
         await chip.trigger('keydown', { code: 'DELETE' });
 
         expect('close' in wrapper.emitted()).toBeTruthy();
+      });
+
+      it('should emit close event without a visible close button', async () => {
+        mockProps = { interactive: true };
+
+        updateWrapper();
+
+        await chip.trigger('keydown', { code: 'DELETE' });
+
+        expect('close' in wrapper.emitted()).toBeTruthy();
+      });
+    });
+
+    describe('When backspace is pressed on a chip', () => {
+      it('should emit close event', async () => {
+        mockProps = { showClose: true, interactive: true };
+
+        updateWrapper();
+
+        await chip.trigger('keydown', { key: 'Backspace' });
+
+        expect('close' in wrapper.emitted()).toBeTruthy();
+      });
+    });
+
+    describe('When interactive is false', () => {
+      it('should not emit click', async () => {
+        await chip.trigger('click');
+
+        expect('click' in wrapper.emitted()).toBe(false);
       });
     });
   });
