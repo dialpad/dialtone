@@ -34,6 +34,9 @@
       :suffix="sliderConfig.suffix"
       :label="label"
       :show-label="false"
+      show-marks
+      :show-ticks="sliderConfig.showTicks"
+      readout="always"
       :disabled="disabled"
       @update:model-value="updateValue"
     />

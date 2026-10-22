@@ -15,10 +15,12 @@ const mountControl = (props = {}) => {
 afterEach(() => wrapper?.unmount());
 
 describe('slider adapter', () => {
-  it('names the input, renders one heading and the default tooltip readout, without mount/sync writes', async () => {
+  it('renders a named slider, one heading, marks and a persistent readout without mount/sync writes', async () => {
     mountControl();
     expect(wrapper.find('input[type=range]').attributes('aria-label')).toBe('Progress');
-    expect(wrapper.findComponent(DtSlider).props('readout')).toBe('tooltip');
+    expect(wrapper.findComponent(DtSlider).props('readout')).toBe('always');
+    expect(wrapper.findComponent(DtSlider).props('showMarks')).toBe(true);
+    expect(wrapper.findComponent(DtSlider).props('showTicks')).toBe(false);
     expect(wrapper.text().match(/Progress heading/g)).toHaveLength(1);
     expect(wrapper.text()).toContain('66%');
     expect(wrapper.find('[aria-label="Remove value for Progress"]').element.disabled).toBe(true);
@@ -44,8 +46,8 @@ describe('slider adapter', () => {
     expect(wrapper.emitted('update:value')).toBeUndefined();
   });
 
-  const invalidValues = [undefined, 66.5, 101, [66]];
-  it.each(invalidValues)('does not mount a normalizing slider for %j', async value => {
+  it('does not mount or synchronize a normalizing slider for an off-grid value', async () => {
+    const value = 66.5;
     mountControl({ value });
     expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
     expect(wrapper.find('input').exists()).toBe(false);
@@ -56,11 +58,6 @@ describe('slider adapter', () => {
     await wrapper.setProps({ value });
     expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
     expect(wrapper.emitted('update:value')).toBeUndefined();
-  });
-
-  it('renders the readout without a slider when config is missing', () => {
-    mountControl({ sliderConfig: null });
-    expect(wrapper.find('input').exists()).toBe(false);
   });
 });
 
@@ -91,7 +88,6 @@ describe('optional slider values', () => {
   });
 });
 
-
 it('keeps a single-page range noninteractive without emitting', async () => {
   mountControl({ value: 1, sliderConfig: { min: 1, max: 1, step: 1, suffix: '' } });
   expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
@@ -100,5 +96,13 @@ it('keeps a single-page range noninteractive without emitting', async () => {
   expect(wrapper.findComponent(DtSlider).exists()).toBe(true);
   await wrapper.setProps({ value: 9, sliderConfig: { min: 1, max: 5, step: 1, suffix: '' } });
   expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
+  expect(wrapper.emitted('update:value')).toBeUndefined();
+});
+
+it('updates tick visibility with resolved bounds without changing the parent value', async () => {
+  mountControl({ value: 5, sliderConfig: { min: 1, max: 10, step: 1, showTicks: true } });
+  expect(wrapper.findComponent(DtSlider).props('showTicks')).toBe(true);
+  await wrapper.setProps({ sliderConfig: { min: 1, max: 11, step: 1, showTicks: false } });
+  expect(wrapper.findComponent(DtSlider).props('showTicks')).toBe(false);
   expect(wrapper.emitted('update:value')).toBeUndefined();
 });

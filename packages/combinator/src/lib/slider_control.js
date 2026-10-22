@@ -49,6 +49,9 @@ export function getSliderControlConfig (member, propValues) {
     config.max = propValues[maxProp];
     if (!validConfig(config, true)) return null;
   }
+  if (member.slider.showTicks === true) {
+    config.showTicks = (config.max - config.min) / config.step + 1 <= 10;
+  }
   return config;
 }
 

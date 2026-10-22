@@ -70,9 +70,13 @@ component state follows the canonical values after recovery from invalid bounds.
 Pagination uses this for `activePage`; its preview navigation event behavior
 is unchanged.
 
-DtSlider is the sole value editor, with its default tooltip readout and native
+DtSlider is the sole value editor, with marks, an always-visible readout and native
 keyboard operation. It writes numeric values through the existing options
-model. Off-grid or invalid parent values show a non-editable readout; they
+model. Optional `showTicks: true` metadata shows ticks when the resolved grid
+has at most 10 selectable values. Pagination opts in for both sliders:
+`maxVisible` always has five stops; `activePage` shows ticks only for totals
+up to 10. Other sliders retain their existing presentation.
+Off-grid or invalid parent values show a non-editable readout; they
 never mount a normalizing slider or fall back to manual entry. Presets and
 Reset can restore a valid value.
 
@@ -102,7 +106,7 @@ when an image or icon slot masks the color.
 - `event`: displays event data when used by latent event-console code.
 - `selection`: searchable value selection.
 - `segmented`: compact selection for small enums.
-- `slider`: explicitly opted-in scalar scale using DtSlider and its tooltip readout.
+- `slider`: explicitly opted-in scalar scale using DtSlider with marks and an always-visible readout.
 - `icon-slot`: searchable Dialtone icon picker for icon-like slots.
 - `suggestion`: standalone suggestion input used by the demo app's component
   picker. It delegates input behavior to the string control, including label,

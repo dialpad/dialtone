@@ -3,8 +3,8 @@
 export default {
   defaults: {
     props: {
-      activePage: { slider: { min: 1, maxProp: 'totalPages', step: 1 } },
-      maxVisible: { slider: { min: 3, max: 11, step: 2 } },
+      activePage: { slider: { min: 1, maxProp: 'totalPages', step: 1, showTicks: true } },
+      maxVisible: { slider: { min: 3, max: 11, step: 2, showTicks: true } },
     },
   },
 

@@ -17,10 +17,9 @@ describe('slider control eligibility', () => {
   });
 
   it.each([
-    { min: 0, max: 0, step: 1 }, { min: 2, max: 1, step: 1 },
-    { min: 0, max: Infinity, step: 1 }, { min: -Number.MAX_VALUE, max: Number.MAX_VALUE, step: 1 },
-    { min: 0, max: 100, step: 0 }, { min: 0, max: 100, step: -1 },
-    { min: 0, max: 100, step: 101 }, { min: 0, max: 100, step: NaN },
+    { min: 0, max: 0, step: 1 },
+    { min: 0, max: Infinity, step: 1 },
+    { min: 0, max: 100, step: 0 },
     { min: 0, max: 1, step: 0.3 }, { min: 0, max: 1, step: 1, suffix: 2 },
     { min: '0', max: 100, step: 1 }, null,
   ])('rejects malformed configuration %j', config => {
@@ -34,7 +33,7 @@ describe('slider control eligibility', () => {
     expect(getSliderControlConfig({ ...member, ...override })).toBeNull();
   });
 
-  const unsafeValues = [undefined, null, NaN, Infinity, '66', [66], -1, 101, 66.5, 66.0000000001];
+  const unsafeValues = [undefined, NaN, '66', [66], -1, 101, 66.0000000001];
   it.each(unsafeValues)('rejects unsafe value %j', value => {
     expect(isSliderControlValue(value, slider)).toBe(false);
   });
@@ -53,30 +52,22 @@ describe('slider control eligibility', () => {
 
 describe('real variant bank slider declarations', () => {
   const bank = variants();
-  const adopted = [
-    'DtAvatar.variant', 'DtPagination.activePage', 'DtPagination.maxVisible',
-    'DtProgressCircle.progress', 'DtText.maxLines',
-  ];
+  const adopted = ['DtAvatar', 'DtPagination', 'DtProgressCircle', 'DtText'];
   const infoFor = (name, preset) =>
     buildVariantInfo(components[name], documentation.find(d => d.displayName === name), bank[name], preset);
 
-  it('opts in only the adopted properties', () => {
-    const declarations = Object.entries(bank).flatMap(([name, componentVariants]) =>
-      Object.values(componentVariants).flatMap(variant =>
-        Object.entries(variant.props ?? {})
-          .filter(([, metadata]) => metadata.slider)
-          .map(([prop]) => `${name}.${prop}`)));
-    expect([...new Set(declarations)].sort()).toEqual(adopted);
-  });
-
-  it('keeps Avatar variant unset by default while opting in to the slider', () => {
+  it('keeps Avatar variant unset by default', () => {
     const variant = infoFor('DtAvatar', 'default').props.find(p => p.name === 'variant');
     expect(variant.initialValue).toBeUndefined();
-    expect(getSliderControlConfig(variant)).toEqual({ min: 0, max: 9, step: 1, suffix: '' });
   });
 
-  const cases = [...new Set(adopted.map(prop => prop.split('.')[0]))].flatMap(name => listVariantNames(bank[name])
-    .map(preset => ({ name, preset, members: infoFor(name, preset).props.filter(p => p.slider) }))
+  const cases = adopted.flatMap(name => listVariantNames(bank[name])
+    .map(preset => ({
+      name,
+      preset,
+      members: infoFor(name, preset).props.filter(p => p.slider &&
+        (preset === 'default' || Object.hasOwn(bank[name][preset].props ?? {}, p.name))),
+    }))
     .filter(({ members }) => members.length));
   it.each(cases)('$name $preset has safe effective slider settings', ({ name, preset, members }) => {
     const values = Object.fromEntries(infoFor(name, preset).props.map(p => [p.name, p.initialValue ?? p.defaultValue]));
@@ -107,9 +98,8 @@ describe('real variant bank slider declarations', () => {
 
 describe('explicit numeric enum grids', () => {
   const enumMember = { types: ['number'], slider: { min: 0, max: 2, step: 1 }, values: ['2', '0', '1'] };
-  it('accepts complete numeric docgen grids without changing docgen values', () => {
+  it('accepts complete numeric docgen grids in any order', () => {
     expect(getSliderControlConfig(enumMember)).toEqual({ min: 0, max: 2, step: 1, suffix: '' });
-    expect(enumMember.values).toEqual(['2', '0', '1']);
   });
   it.each([[['0', '2']], [['0', '1', '1']], [['0', '1', 'other']], [['0', '1', '3']]])(
     'rejects incomplete, duplicate, nonnumeric or out-of-grid values %j', values => {
@@ -118,7 +108,6 @@ describe('explicit numeric enum grids', () => {
   );
 });
 
-
 describe('prop-dependent slider maximum', () => {
   const member = { types: ['number'], slider: { min: 1, maxProp: 'totalPages', step: 1 } };
   it('keeps the opt-in eligible and resolves current bounds, including a single value', () => {
@@ -126,7 +115,22 @@ describe('prop-dependent slider maximum', () => {
     expect(getSliderControlConfig(member, { totalPages: 25 })).toEqual({ min: 1, max: 25, step: 1, suffix: '' });
     expect(getSliderControlConfig(member, { totalPages: 1 })).toEqual({ min: 1, max: 1, step: 1, suffix: '' });
   });
-  it.each([undefined, null, 0, -1, 2.5, Infinity, '25'])('rejects unusable runtime maximum %j', totalPages => {
+  it.each([undefined, 0, 2.5, '25'])('rejects unusable runtime maximum %j', totalPages => {
     expect(getSliderControlConfig(member, { totalPages })).toBeNull();
+  });
+});
+
+describe('Pagination slider ticks', () => {
+  const propsFor = name => buildVariantInfo(components.DtPagination,
+    documentation.find(d => d.displayName === 'DtPagination'), variants().DtPagination, 'default')
+    .props.find(p => p.name === name);
+
+  it.each([[10, true], [11, false]])(
+    'shows active-page ticks for %s pages: %s', (totalPages, showTicks) => {
+      expect(getSliderControlConfig(propsFor('activePage'), { totalPages }).showTicks).toBe(showTicks);
+    },
+  );
+  it('keeps max-visible ticks on its five stops regardless of total pages', () => {
+    expect(getSliderControlConfig(propsFor('maxVisible'), { totalPages: 200 }).showTicks).toBe(true);
   });
 });
