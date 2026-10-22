@@ -40,14 +40,19 @@ For a property suited to exploration along a numeric scale, add editor metadata:
 progress: { slider: { min: 0, max: 100, step: 1, suffix: '%' } },
 ```
 
-Search the variant files for `slider:` to find current adoptions. Eligibility
-requires a scalar number without token metadata. An explicit numeric enum may
-opt in only when its documented values cover the complete configured grid,
-with no gaps or duplicates. Docgen reports those values as strings, so the
-grid check converts them locally; other controls still receive the strings
-(known debt, not intended design). Bounds and step must be finite, with a
-positive finite span, a positive step no larger than the span, and a maximum
-exactly reconstructable on the step grid. The optional suffix is a string.
+Search the variant files for `slider:` to find current adoptions.
+
+Eligibility requires a scalar number without token metadata. An explicit
+numeric enum may opt in only when its documented values cover the complete
+configured grid, with no gaps or duplicates. Docgen reports those values as
+strings, so the grid check converts them locally; other controls still receive
+the strings (known debt, not intended design).
+
+Bounds and step must be finite, with a positive finite span, a positive step
+no larger than the span, and a maximum exactly reconstructable on the step
+grid. The optional suffix is a string. Optional `showTicks: true` shows ticks
+when the resolved grid has at most 10 selectable values.
+
 Named presets replace this settings object shallowly; supply the complete
 configuration when overriding it, or set `slider: null` to opt a preset out.
 Metadata does not set a prop value.
@@ -67,17 +72,11 @@ clamped within the new bounds in the same options update. Mounting, preset
 selection, Reset, and external synchronization never trigger reconciliation.
 The preview is recreated when a declared bound prop changes, so internal
 component state follows the canonical values after recovery from invalid bounds.
-Pagination uses this for `activePage`; its preview navigation event behavior
-is unchanged.
 
-DtSlider is the sole value editor, with marks, an always-visible readout and native
-keyboard operation. It writes numeric values through the existing options
-model. Optional `showTicks: true` metadata shows ticks when the resolved grid
-has at most 10 selectable values. Pagination opts in for both sliders:
-`maxVisible` always has five stops; `activePage` shows ticks only for totals
-up to 10. Other sliders retain their existing presentation.
-Off-grid or invalid parent values show a non-editable readout; they
-never mount a normalizing slider or fall back to manual entry. Presets and
+DtSlider is the sole value editor, with marks, an always-visible readout, and
+native keyboard operation. It writes numeric values through the existing
+options model. Off-grid or invalid parent values show a non-editable readout;
+they never mount a normalizing slider or fall back to manual entry. Presets and
 Reset can restore a valid value.
 
 The slider uses the shared clearable shell, which handles required, disabled,
@@ -88,12 +87,10 @@ zero remains a concrete value.
 
 Keep segmented controls for small choice sets and selection controls for
 categorical values. Numeric type or choice count alone never opts in.
-Datepicker, Skeleton, and MotionText retain their existing controls.
 
 Slider bounds define useful playground ranges, not new restrictions on
-component APIs. Pagination's `without page numbers` preset uses 0, which is
-off the odd 3–11 grid, so it opts out of the slider. Avatar disables `variant`
-when an image or icon slot masks the color.
+component APIs. A preset whose value falls off the grid, such as Pagination's
+`without page numbers` (0), sets `slider: null`.
 
 ## Current controls
 
