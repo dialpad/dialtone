@@ -12,7 +12,7 @@ export default {
 
   exclusions: [
     ...Object.entries({
-      // Each kind (group) owns its variants; offer only the ones that belong to the selected kind
+      // Each kind (group) owns its variants; list only the ones that belong to the selected kind
       // and drop a selected variant that doesn't belong to it.
       status: ['neutral', 'info', 'positive', 'warning', 'critical'],
       counter: ['count', 'mention'],
@@ -21,7 +21,7 @@ export default {
     }).flatMap(([kind, own], _, groups) => {
       const others = groups.flatMap(([, variants]) => variants).filter(v => !own.includes(v));
       return [
-        { when: { kind }, disableValues: { props: { variant: others } } },
+        { when: { kind }, hideValues: { props: { variant: others } } },
         { when: { kind, variant: v => hasValue(v) && !own.includes(v) }, clear: { props: ['variant'] } },
       ];
     }),
