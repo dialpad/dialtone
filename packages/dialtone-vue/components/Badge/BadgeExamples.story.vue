@@ -1,29 +1,37 @@
 <template>
   <dt-stack gap="100">
-    <h2>Kind: Label</h2>
+    <h2>Variant: Base</h2>
     <dt-stack
       direction="row"
       gap="100"
       align="center"
     >
       <dt-badge
-        text="Co-host"
+        kind="status"
+        variant="neutral"
+        label="Co-host"
       />
       <dt-badge
-        text="Customer"
+        kind="status"
+        variant="neutral"
+        label="Customer"
       />
       <dt-badge
-        text="Locked"
+        kind="status"
+        variant="neutral"
+        label="Locked"
       >
-        <template #startIcon="{ iconSize }">
-          <dt-icon-lock :size="iconSize" />
+        <template #startIcon>
+          <dt-icon-lock size="200" />
         </template>
       </dt-badge>
       <dt-badge
-        text="Chat log"
+        kind="status"
+        variant="neutral"
+        label="Chat log"
       >
-        <template #startIcon="{ iconSize }">
-          <dt-icon-message :size="iconSize" />
+        <template #startIcon>
+          <dt-icon-message size="200" />
         </template>
       </dt-badge>
     </dt-stack>
@@ -33,15 +41,21 @@
       align="center"
     >
       <dt-badge
-        text="Label"
+        kind="status"
+        variant="neutral"
+        label="Label"
         decoration="black-900"
       />
       <dt-badge
-        text="Support"
+        kind="status"
+        variant="neutral"
+        label="Support"
         decoration="blue-400"
       />
       <dt-badge
-        text="Complaint"
+        kind="status"
+        variant="neutral"
+        label="Complaint"
         decoration="red-400"
       />
     </dt-stack>
@@ -51,26 +65,19 @@
       align="center"
     >
       <dt-badge
-        text="In progress"
-        type="info"
+        kind="status"
+        label="In progress"
+        variant="info"
       />
       <dt-badge
-        text="Beta"
-        type="info"
+        kind="status"
+        label="Beta"
+        variant="info"
       />
       <dt-badge
-        text="Draft"
-        type="info"
-      />
-    </dt-stack>
-    <dt-stack
-      direction="row"
-      gap="100"
-      align="center"
-    >
-      <dt-badge
-        text="Overdue"
-        type="warning"
+        kind="status"
+        label="Draft"
+        variant="info"
       />
     </dt-stack>
     <dt-stack
@@ -79,8 +86,9 @@
       align="center"
     >
       <dt-badge
-        text="Resolved"
-        type="positive"
+        kind="status"
+        label="Overdue"
+        variant="warning"
       />
     </dt-stack>
     <dt-stack
@@ -89,11 +97,23 @@
       align="center"
     >
       <dt-badge
-        text="Recording"
-        type="critical"
+        kind="status"
+        label="Resolved"
+        variant="positive"
+      />
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="100"
+      align="center"
+    >
+      <dt-badge
+        kind="status"
+        label="Recording"
+        variant="critical"
       >
-        <template #startIcon="{ iconSize }">
-          <dt-icon-record-filled :size="iconSize" />
+        <template #startIcon>
+          <dt-icon-record-filled size="200" />
         </template>
       </dt-badge>
     </dt-stack>
@@ -103,12 +123,14 @@
       align="center"
     >
       <dt-badge
-        text="Live"
-        type="bulletin"
+        kind="lifecycle"
+        label="Live"
+        variant="new"
       />
       <dt-badge
-        text="Presenter"
-        type="bulletin"
+        kind="status"
+        label="Presenter"
+        variant="neutral"
       />
     </dt-stack>
     <dt-stack
@@ -117,24 +139,28 @@
       align="center"
     >
       <dt-badge
-        text="Ai Notes"
-        type="ai"
+        kind="status"
+        label="Ai Notes"
+        variant="neutral"
       />
       <dt-badge
-        text="Ai Suggestion"
-        type="ai"
+        kind="status"
+        label="Ai Suggestion"
+        variant="neutral"
       />
       <dt-badge
-        text="Ai on"
-        type="ai"
+        kind="status"
+        label="Ai on"
+        variant="neutral"
       />
       <dt-badge
-        text="Ai Transcript"
-        type="ai"
+        kind="status"
+        label="Ai Transcript"
+        variant="neutral"
       />
     </dt-stack>
     <h2 class="d-mbs-400">
-      Kind: Count
+      Variant: Count
     </h2>
     <dt-stack
       direction="row"
@@ -142,12 +168,13 @@
       align="center"
     >
       <dt-badge
-        text="5%"
-        kind="count"
-        type="positive"
+        kind="counter"
+        label="5%"
+        variant="count"
+        emphasis="strong"
       >
-        <template #startIcon="{ iconSize }">
-          <dt-icon-arrow-up :size="iconSize" />
+        <template #startIcon>
+          <dt-icon-arrow-up size="200" />
         </template>
       </dt-badge>
     </dt-stack>
@@ -157,12 +184,13 @@
       align="center"
     >
       <dt-badge
-        text="-12%"
-        kind="count"
-        type="critical"
+        kind="counter"
+        label="-12%"
+        variant="count"
+        emphasis="strong"
       >
-        <template #startIcon="{ iconSize }">
-          <dt-icon-arrow-down :size="iconSize" />
+        <template #startIcon>
+          <dt-icon-arrow-down size="200" />
         </template>
       </dt-badge>
     </dt-stack>
@@ -172,19 +200,19 @@
       align="center"
     >
       <dt-badge
-        text="1"
-        kind="count"
-        type="bulletin"
+        kind="counter"
+        label="1"
+        variant="count"
       />
       <dt-badge
-        text="18"
-        kind="count"
-        type="bulletin"
+        kind="counter"
+        label="18"
+        variant="count"
       />
       <dt-badge
-        text="99+"
-        kind="count"
-        type="bulletin"
+        kind="counter"
+        label="99+"
+        variant="count"
       />
     </dt-stack>
   </dt-stack>

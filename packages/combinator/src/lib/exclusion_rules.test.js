@@ -111,7 +111,30 @@ describe('exclusion_rules', function () {
       expect(shouldDisable('decoration', 'props', [HIDE_RULE], { kind: 'count' })).toBe(true);
     });
 
-    it('should disable DtBadge icon size when no icon slot is provided', function () {
+    it('should default DtBadge to the status kind', function () {
+      expect(variantsBadge.defaults.props.kind.initialValue).toBe('status');
+      expect(variantsBadge.defaults.props.variant.initialValue).toBe('neutral');
+    });
+
+    it('should only offer the variants of the selected DtBadge kind', function () {
+      const disabled = kind => getDisabledValues('variant', variantsBadge.exclusions, { kind });
+
+      expect(disabled('status').has('neutral')).toBe(false);
+      expect(disabled('status').has('count')).toBe(true);
+      expect(disabled('counter').has('mention')).toBe(false);
+      expect(disabled('counter').has('critical')).toBe(true);
+      expect(disabled('lifecycle').has('early-access')).toBe(false);
+      expect(disabled('lifecycle').has('neutral')).toBe(true);
+    });
+
+    it('should clear a DtBadge variant that does not belong to the selected kind', function () {
+      const clears = values => shouldClear('variant', 'props', variantsBadge.exclusions, values);
+
+      expect(clears({ kind: 'counter', variant: 'neutral' })).toBe(true);
+      expect(clears({ kind: 'counter', variant: 'mention' })).toBe(false);
+    });
+
+    it('should disable DtBadge icon size when no start or end icon is provided', function () {
       expect(shouldDisable('iconSize', 'props', variantsBadge.exclusions, {
         startIcon: '',
         endIcon: '',
@@ -126,23 +149,24 @@ describe('exclusion_rules', function () {
       })).toBe(false);
     });
 
-    it('should disable DtBadge icon class props when their icon slots are empty', function () {
-      expect(shouldDisable('startIconClass', 'props', variantsBadge.exclusions, {}, {
-        startIcon: '',
-        endIcon: '',
-      })).toBe(true);
-      expect(shouldDisable('endIconClass', 'props', variantsBadge.exclusions, {}, {
-        startIcon: '',
-        endIcon: '',
-      })).toBe(true);
-      expect(shouldDisable('startIconClass', 'props', variantsBadge.exclusions, {}, {
-        startIcon: '<dt-icon-lock :size="iconSize" />',
-        endIcon: '',
-      })).toBe(false);
-      expect(shouldDisable('endIconClass', 'props', variantsBadge.exclusions, {}, {
-        startIcon: '<dt-icon-lock :size="iconSize" />',
-        endIcon: '',
-      })).toBe(true);
+    it('should disable DtBadge icon class props when their slots are empty', function () {
+      const empty = { startIcon: '', endIcon: '' };
+      const slots = { startIcon: '<dt-icon-lock :size="iconSize" />', endIcon: '' };
+      const disabled = (prop, values) => shouldDisable(prop, 'props', variantsBadge.exclusions, {}, values);
+
+      expect(disabled('startIconClass', empty)).toBe(true);
+      expect(disabled('startIconClass', slots)).toBe(false);
+      expect(disabled('endIconClass', slots)).toBe(true);
+    });
+
+    it('should disable DtBadge leading and trailing class props when their slots are empty', function () {
+      const empty = { leading: '', trailing: '' };
+      const slots = { leading: '<dt-badge />', trailing: '' };
+      const disabled = (prop, values) => shouldDisable(prop, 'props', variantsBadge.exclusions, {}, values);
+
+      expect(disabled('leadingClass', empty)).toBe(true);
+      expect(disabled('leadingClass', slots)).toBe(false);
+      expect(disabled('trailingClass', slots)).toBe(true);
     });
   });
 

@@ -13,13 +13,16 @@
           <span :class="isSupportedComponent(value) ? '' : 'd-fc-muted'">{{ value }}</span>
           <dt-badge
             v-if="!isSupportedComponent(value)"
+            kind="status"
+            variant="warning"
             class="d-mis-75"
-            type="warning"
           >
             Unsupported
           </dt-badge>
           <dt-badge
             v-if="value === DEFAULT_COMPONENT"
+            kind="status"
+            variant="neutral"
           >
             Default
           </dt-badge>

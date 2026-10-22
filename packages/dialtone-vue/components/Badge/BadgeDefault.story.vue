@@ -1,32 +1,36 @@
 <template>
   <dt-badge
-    :text="$attrs.text"
-    :type="$attrs.type"
+    :label="$attrs.label"
     :kind="$attrs.kind"
+    :variant="$attrs.variant"
+    :emphasis="$attrs.emphasis"
+    :size="$attrs.size"
     :decoration="$attrs.decoration"
     :label-class="$attrs.labelClass"
-    :subtle="$attrs.subtle"
-    :outlined="$attrs.outlined"
+    :leading-class="$attrs.leadingClass"
+    :trailing-class="$attrs.trailingClass"
+    :start-icon-class="$attrs.startIconClass"
+    :end-icon-class="$attrs.endIconClass"
   >
     <template
-      v-if="$attrs.startIcon"
-      #startIcon="{ iconSize }"
+      #startIcon
     >
       <dt-icon
+        v-if="$attrs.startIcon"
         :name="$attrs.startIcon"
-        :size="iconSize"
+        size="200"
       />
     </template>
     <template v-if="defaultSlot">
       {{ defaultSlot }}
     </template>
     <template
-      v-if="$attrs.endIcon"
-      #endIcon="{ iconSize }"
+      #endIcon
     >
       <dt-icon
+        v-if="$attrs.endIcon"
         :name="$attrs.endIcon"
-        :size="iconSize"
+        size="200"
       />
     </template>
   </dt-badge>

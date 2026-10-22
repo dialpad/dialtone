@@ -1,6 +1,6 @@
 ---
 title: Badge
-description: Compact marker for status, metadata, or short labels.
+description: Compact marker for status, counts, and feature lifecycle.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--default
@@ -9,360 +9,210 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 combinator: DtBadge
 ---
 
+A badge is a small, non-interactive marker that sits next to the item it describes. It shows the status of that item, a count, or where a feature is in its lifecycle. For categories or labels that people create, use [Chip](/components/chip.html).
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-badge label="Draft" />
+  <dt-badge variant="positive" label="Resolved" />
+  <dt-badge kind="counter" variant="count" label="12" />
+  <dt-badge kind="lifecycle" variant="early-access" label="Beta" emphasis="base" />
+</dt-stack>
+```
+
 ## Usage
 
 <dialtone-usage>
 <template #do>
 
-- To flag and draw awareness to a specific element or feature of focus. For example, something is unique about that separates it from other like content.
-- As a notification system with minimal footprint.
+- Show the status of the item next to it, such as Overdue or Resolved.
+- Show a count, such as unread messages.
+- Mark where a feature is in its lifecycle, such as Alpha, Beta, or New.
 </template>
 
 <template #dont>
 
-- To indicate that interaction by the user is required.
+- Ask the user to take an action. Use a [Button](/components/button.html) or a [DtLink](/components/link.html) instead.
+- Show labels or tags that people create. Use a [Chip](/components/chip.html) instead.
+- Add color to the UI when there's no status, count, or stage to show.
 </template>
 
 </dialtone-usage>
 
-### Best Practices
+## Best practices
 
-- While the color variant used should not be the sole indicator of information, choose color patterns that users can quickly scan and identify its intention.
-- Avoid long values, favoring a brief scannable word.
+- Keep labels short, ideally one or two words. The label describes the item next to the badge or that item's status, such as "Overdue" or "Out of stock."
+- Write status labels in the past tense, for example "Refunded" instead of "Refund."
+- Choose the variant for what it means. Critical needs action now, warning needs attention, positive is a good outcome, info is context, and neutral has no particular state. Use the same variant for the same status everywhere in your product.
+- Make sure the label says what the color says. Color shouldn't be the only signal.
+- Use strong emphasis for the one badge that should stand out. Base emphasis suits most lists and tables.
+- Place a badge next to what it describes: near the title in a list item, or in its own column in a table.
+- Give a badge an accessible name when its text is a bare value, such as `12`. Use `aria-label` or `aria-labelledby`.
 
-## Accessibility
+## Groups
 
-- Since a Badge may often reflect a value within an implied label, ensure a label is announced. For example, via `aria-label` or `aria-labeledby`.
+| `kind` | Describes | Variants | Emphasis |
+| --- | --- | --- | --- |
+| `status` | The status of the item it sits next to | `neutral`, `info`, `positive`, `warning`, `critical` | `base`, `strong` |
+| `counter` | A number | `count`, `mention` | `base`, `strong` |
+| `lifecycle` | Who can use a feature and how long ago it launched | `internal`, `early-access`, `new`, `recent`, `familiar` | `subtle`, `base`, `strong` |
 
-## Kind
+`kind` defaults to `status`, so you only set it for `counter` and `lifecycle`. A variant that doesn't belong to the `kind`, or an emphasis the group doesn't support, falls back to the default and logs a warning in development.
 
-### Label
-
-```vue demo
-<dt-badge text="Label" />
-```
-
-### Count
-
-```vue demo
-<dt-badge kind="count" text="1" />
-```
-
-## Type
-
-<table class="d-table dialtone-doc-table d-mbe-200">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th class="d-ws-nowrap">Kind: <span class="d-fw-normal">Label</span></th>
-      <th class="d-ws-nowrap">Kind: <span class="d-fw-normal">Count</span></th>
-      <th>Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th class="d-ta-left">Default</th>
-      <td>
-        <dt-badge text="Label"></dt-badge>
-      </td>
-      <td>
-        <dt-badge kind="count" text="1"></dt-badge>
-      </td>
-      <td>Default general purpose callout when no implicit semantic meaning applies.</td>
-    </tr>
-    <tr>
-      <th class="d-ta-left">Info</th>
-      <td>
-        <dt-badge type="info" text="Label"></dt-badge>
-      </td>
-      <td>
-        <dt-badge kind="count" type="info" text="2"></dt-badge>
-      </td>
-      <td>Used to convey general information that isn't critical or requires action on the user's part.</td>
-    </tr>
-    <tr>
-      <th class="d-ta-left">Positive</th>
-      <td>
-        <dt-badge type="positive" text="Label"></dt-badge>
-      </td>
-      <td>
-        <dt-badge kind="count" type="positive" text="3"></dt-badge>
-      </td>
-      <td>Accompanying a successful or otherwise positive action or message</td>
-    </tr>
-    <tr>
-      <th class="d-ta-left">Warning</th>
-      <td>
-        <dt-badge type="warning" text="Label"></dt-badge>
-      </td>
-      <td>
-        <dt-badge kind="count" type="warning" text="4"></dt-badge>
-      </td>
-      <td>When a users attention is needed, or action may be required.</td>
-    </tr>
-    <tr>
-      <th class="d-ta-left">Critical</th>
-      <td>
-        <dt-badge type="critical" text="Label"></dt-badge>
-      </td>
-      <td>
-        <dt-badge kind="count" type="critical" text="5"></dt-badge>
-      </td>
-      <td>To communicate conditions deemed critical, negative, or dangerous. For example, sensitive state (e.g. recording), must be resolved, or something has failed.</td>
-    </tr>
-    <tr>
-      <th class="d-ta-left">Bulletin</th>
-      <td>
-        <dt-badge type="bulletin" text="Label"></dt-badge>
-      </td>
-      <td>
-        <dt-badge kind="count" type="bulletin" text="6"></dt-badge>
-      </td>
-      <td>Used to provide temporary feedback to specific items in the interface, like live activity, notifications, and unread counts. </td>
-    </tr>
-    <tr>
-      <th class="d-ta-left">Ai</th>
-      <td>
-        <dt-badge type="ai" text="Label" kind="label"></dt-badge>
-      </td>
-      <td><abbr class="d-fc-muted d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
-      <td>To call out Dialpad Ai features.</td>
-    </tr>
-  </tbody>
-</table>
-
-```vue code-only
-<dt-badge kind="label" text="Label" />
-<dt-badge type="info" kind="label" text="Label" />
-<dt-badge type="positive" kind="label" text="Label" />
-<dt-badge type="warning" kind="label" text="Label" />
-<dt-badge type="critical" kind="label" text="Label" />
-<dt-badge type="bulletin" kind="label" text="Label" />
-<dt-badge type="ai" text="Label" kind="label" />
-<dt-badge type="default" text="1" kind="count" />
-<dt-badge type="info" text="2" kind="count" />
-<dt-badge type="positive" text="3" kind="count" />
-<dt-badge type="warning" text="4" kind="count" />
-<dt-badge type="critical" text="5" kind="count" />
-<dt-badge type="bulletin" text="6" kind="count" />
-```
-
-## Outlined
+### Status
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack direction="row" gap="100">
-  <dt-badge text="Label" outlined />
-  <dt-badge text="Label" type="info" outlined />
-  <dt-badge text="Label" type="positive" outlined />
-  <dt-badge text="Label" type="warning" outlined />
-  <dt-badge text="Label" type="critical" outlined />
-  <dt-badge text="1" kind="count" outlined />
-  <dt-badge text="1" type="info" kind="count" outlined />
-  <dt-badge text="1" type="positive" kind="count" outlined />
-  <dt-badge text="1" type="warning" kind="count" outlined />
-  <dt-badge text="1" type="critical" kind="count" outlined />
+<dt-stack gap="100">
+  <dt-stack direction="row" gap="100">
+    <dt-badge variant="neutral" label="Draft" />
+    <dt-badge variant="info" label="In progress" />
+    <dt-badge variant="positive" label="Resolved" />
+    <dt-badge variant="warning" label="Overdue" />
+    <dt-badge variant="critical" label="Failed" />
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge variant="neutral" label="Draft" emphasis="strong" />
+    <dt-badge variant="info" label="In progress" emphasis="strong" />
+    <dt-badge variant="positive" label="Resolved" emphasis="strong" />
+    <dt-badge variant="warning" label="Overdue" emphasis="strong" />
+    <dt-badge variant="critical" label="Failed" emphasis="strong" />
+  </dt-stack>
 </dt-stack>
 ```
 
-## Subtle
+### Counter
 
-At the moment, only the `bulletin` type has a subtle variant.
+`count` shows a number. `mention` puts an `@` before the number. The `@` is text by default, and the `startIcon` slot replaces it with an icon.
 
-```vue demo
-<!-- @wrapper -->
-<dt-stack direction="row" gap="100">
-  <dt-badge text="Label" type="bulletin" subtle />
-  <dt-badge text="Label" type="bulletin" subtle outlined />
-  <dt-badge text="1" type="bulletin" subtle kind="count" />
-  <dt-badge text="1" type="bulletin" subtle kind="count" outlined />
-</dt-stack>
-```
-
-## Icon
+A badge nested inside another badge restyles itself in CSS, so there's nothing to configure. Nest one only when it qualifies the outer badge, such as the mentions inside an unread count.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack direction="row" gap="100">
-  <dt-badge type="default" text="Label" kind="label">
-    <template #startIcon="{ iconSize }">
-      <dt-icon-lightning-bolt :size="iconSize" />
-    </template>
-  </dt-badge>
-  <dt-badge type="default" text="Label" kind="label">
-    <template #endIcon="{ iconSize }">
-      <dt-icon-lightning-bolt :size="iconSize" />
-    </template>
-  </dt-badge>
-  <dt-badge type="default" text="Label" kind="label">
-    <template #startIcon="{ iconSize }">
-      <dt-icon-lightning-bolt :size="iconSize" />
-    </template>
-    <template #endIcon="{ iconSize }">
-      <dt-icon-lightning-bolt :size="iconSize" />
+<dt-stack direction="row" gap="100" align="center">
+  <dt-badge kind="counter" variant="count" label="99" />
+  <dt-badge kind="counter" variant="count" label="99" emphasis="strong" />
+  <dt-badge kind="counter" variant="mention" label="2" />
+  <dt-badge kind="counter" variant="mention" label="2" emphasis="strong" />
+  <dt-badge kind="counter" variant="count" label="99" emphasis="strong">
+    <template #trailing>
+      <dt-badge kind="counter" variant="mention" label="2" emphasis="strong" />
     </template>
   </dt-badge>
 </dt-stack>
 ```
 
-## Decorative
+> [!INFO] Nested styling is provisional
+> The nested look (shorter, smaller radius) is a first pass. Design hasn't settled how nested badges should be colored.
 
-Decorative badges label and classify items for quick recognition.
+### Lifecycle
+
+Variants are named for the audience a feature is available to: `internal` (alpha), `early-access` (beta), and `new` (general availability). After launch, a feature fades from `new` (solid purple) to `recent` (dark gray, the same as neutral status with `strong` emphasis) to `familiar` (light gray), and then you remove the badge. Your team decides when each stage happens, such as after a number of days, visits, or clicks.
+
+Emphasis shows how important the feature is. `subtle` is an outline, `base` is a light fill, and `strong` is a solid fill. The label stays your product's word, such as "Alpha," "Beta," or "New."
 
 ```vue demo
-<dt-stack direction="row" gap="200" align="baseline">
-  <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Black</dt-text>
-    <dt-badge text="Label" decoration="black-400" />
-    <dt-badge text="Label" decoration="black-500" />
-    <dt-badge text="Label" decoration="black-900" />
-  </dt-stack>
-  <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Red</dt-text>
-    <dt-badge text="Label" decoration="red-200" />
-    <dt-badge text="Label" decoration="red-300" />
-    <dt-badge text="Label" decoration="red-400" />
-  </dt-stack>
-  <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Purple</dt-text>
-    <dt-badge text="Label" decoration="purple-200" />
-    <dt-badge text="Label" decoration="purple-300" />
-    <dt-badge text="Label" decoration="purple-400" />
-    <dt-badge text="Label" decoration="purple-500" />
-  </dt-stack>
-  <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Blue</dt-text>
-    <dt-badge text="Label" decoration="blue-200" />
-    <dt-badge text="Label" decoration="blue-300" />
-    <dt-badge text="Label" decoration="blue-400" />
-  </dt-stack>
-  <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Green</dt-text>
-    <dt-badge text="Label" decoration="green-300" />
-    <dt-badge text="Label" decoration="green-400" />
-    <dt-badge text="Label" decoration="green-500" />
-  </dt-stack>
-  <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Gold</dt-text>
-    <dt-badge text="Label" decoration="gold-300" />
-    <dt-badge text="Label" decoration="gold-400" />
-    <dt-badge text="Label" decoration="gold-500" />
-  </dt-stack>
-  <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Magenta</dt-text>
-    <dt-badge text="Label" decoration="magenta-200" />
-    <dt-badge text="Label" decoration="magenta-300" />
-    <dt-badge text="Label" decoration="magenta-400" />
-  </dt-stack>
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-badge kind="lifecycle" variant="internal" label="Alpha" emphasis="subtle" />
+  <dt-badge kind="lifecycle" variant="early-access" label="Beta" emphasis="base" />
+  <dt-badge kind="lifecycle" variant="new" label="New" emphasis="strong" />
+  <dt-badge kind="lifecycle" variant="recent" label="New" />
+  <dt-badge kind="lifecycle" variant="familiar" label="New" emphasis="base" />
 </dt-stack>
-<!-- @code -->
-<dt-badge text="Label" decoration="black-400" />
-<dt-badge text="Label" decoration="black-500" />
-<dt-badge text="Label" decoration="black-900" />
-<dt-badge text="Label" decoration="red-200" />
-...
 ```
 
-<dialtone-usage>
-<template #do>
+`useFeatureAwarenessBadge` steps through the fade from an exposure count. It returns the variant and emphasis for the current stage, and your app supplies the label, persistence, and counting.
 
-- Use for categories of items with a limited number of options (eg. call categories, AI moments).
+```vue
+<script setup>
+import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
+
+const awareness = useFeatureAwarenessBadge({
+  exposureCount: 2,
+  thresholds: { new: 0, lifecycle: 3, hidden: 10 },
+});
+</script>
+
+<template>
+  <dt-badge
+    v-if="awareness.isVisible.value"
+    kind="lifecycle"
+    :variant="awareness.variant.value"
+    :emphasis="awareness.emphasis.value"
+    :label="$t('feature.new')"
+  />
 </template>
+```
 
-<template #dont>
+Pass a `stages` option to set the variant and emphasis for each stage. By default the first stage is `new` with `strong` emphasis, and the next is `recent` with `base`.
 
-- Use for categories of items with an unlimited or unknown number of options (eg. user-defined contact labels, RTA cards, contact centers).
-- Use for single items that are not part of a larger group.
-- Use for decoration only, to bring attention to part of the UI by using colors.
-- Use with `kind=count`, nor with any `type` that is not `default`.
-- Use in combination with an icon.
-- Change the customize the Badge's background color text style,
-- Extend the decorative slot color beyond what Dialtone provides.
-</template>
-
-</dialtone-usage>
-
-### Best Practices
-
-- Favor lighter shades over darker ones.
-- Use each color hue before using the next available shade.
+> [!INFO] The look of `new` may change
+> Pick the variant and emphasis for the stage you mean, and don't rely on how a variant looks today.
 
 ## Examples
 
-### Label
+### Icons
 
-```vue demo-only
-<dt-stack gap="200">
-  <dt-stack direction="row" gap="100">
-    <dt-badge text="Co-host" />
-    <dt-badge text="Customer" />
-    <dt-badge text="Locked">
-      <template #startIcon="{ iconSize }">
-        <dt-icon-lock :size="iconSize" />
-      </template>
-    </dt-badge>
-    <dt-badge text="Chat log">
-      <template #startIcon="{ iconSize }">
-        <dt-icon-message :size="iconSize" />
-      </template>
-    </dt-badge>
-  </dt-stack>
-  <dt-stack direction="row" gap="00">
-    <dt-badge text="In progress" type="info" />
-    <dt-badge text="Beta" type="info" />
-    <dt-badge text="Draft" type="info" />
-  </dt-stack>
-  <dt-stack direction="row" gap="100">
-    <dt-badge text="Overdue" type="warning" />
-  </dt-stack>
-  <dt-stack direction="row" gap="100">
-    <dt-badge text="Resolved" type="positive" />
-  </dt-stack>
-  <dt-stack direction="row" gap="100">
-    <dt-badge text="Recording" type="critical">
-      <template #startIcon="{ iconSize }">
-        <dt-icon-record-filled :size="iconSize" />
-      </template>
-    </dt-badge>
-  </dt-stack>
-  <dt-stack direction="row" gap="100">
-    <dt-badge text="Live" type="bulletin" />
-    <dt-badge text="Presenter" type="bulletin" />
-  </dt-stack>
-  <dt-stack direction="row" gap="100">
-    <dt-badge type="ai" text="Ai Notes" />
-    <dt-badge type="ai" text="Ai Suggestion" />
-    <dt-badge type="ai" text="Ai enabled" />
-    <dt-badge type="ai" text="Ai Transcript" />
-  </dt-stack>
+Use the `startIcon` and `endIcon` slots for icons, and set the icon `size` to `200`. Use the `leading` and `trailing` slots for freeform content, such as the nested badge in the counter example.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-badge variant="critical" label="Recording">
+    <template #startIcon>
+      <dt-icon-record-filled size="200" />
+    </template>
+  </dt-badge>
+  <dt-badge label="Locked">
+    <template #startIcon>
+      <dt-icon-lock size="200" />
+    </template>
+  </dt-badge>
+  <dt-badge kind="counter" variant="count" label="5%" emphasis="strong">
+    <template #startIcon>
+      <dt-icon-arrow-up size="200" />
+    </template>
+  </dt-badge>
 </dt-stack>
 ```
 
-### Count
+### Sizes
 
-```vue demo-only
-<dt-stack gap="200">
-  <dt-stack direction="row" gap="100">
-    <dt-badge kind="count" type="positive" text="5%">
-      <template #startIcon="{ iconSize }">
-        <dt-icon-arrow-up :size="iconSize" />
-      </template>
-    </dt-badge>
-  </dt-stack>
-  <dt-stack direction="row" gap="100">
-    <dt-badge kind="count" type="critical" text="-12%">
-      <template #startIcon="{ iconSize }">
-        <dt-icon-arrow-down :size="iconSize" />
-      </template>
-    </dt-badge>
-  </dt-stack>
-  <dt-stack direction="row" gap="100">
-    <dt-badge kind="count" type="bulletin" text="1" />
-    <dt-badge kind="count" type="bulletin" text="18" />
-    <dt-badge kind="count" type="bulletin" text="99+" />
-  </dt-stack>
+Sizes run from `100` to `500`, and `200` is the default. Font size, height, padding, and corner radius step up together. `count` and `mention` badges keep a minimum width equal to their height.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100" align="center">
+  <dt-badge label="100" :size="100" />
+  <dt-badge label="200" :size="200" />
+  <dt-badge label="300" :size="300" />
+  <dt-badge label="400" :size="400" />
+  <dt-badge label="500" :size="500" />
 </dt-stack>
 ```
+
+### Label or slot
+
+Use the `label` prop for plain text and the default slot for markup. The slot wins when both are set.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-badge variant="info" label="In progress" />
+  <dt-badge variant="info">In <strong>progress</strong></dt-badge>
+</dt-stack>
+```
+
+## Theming
+
+Badge colors come from the `--dt-badge-color-*` component tokens. Each token points at a semantic token where one exists, so badges follow the theme and dark mode. Set the variant and emphasis instead of overriding the tokens.
+
+> [!WARNING] `decoration` is deprecated
+> The `decoration` prop and its `d-badge--decorate-*` colors remain for this major only. Use `dt-chip` for categorical labels. Don't add new uses, and don't combine `decoration` with an icon or with any variant other than `neutral`.
+
+If you're upgrading from the v10 API, run `npx dialtone-migrate-badge-api` to replace `type` and `text` and to add `kind`. The [migration guide](/guides/migration/badge-chip-api/) lists every change.
 
 ## Vue API
 
@@ -374,11 +224,8 @@ Decorative badges label and classify items for quick recognition.
 
 <script setup>
   import {
-    DtIconLightningBolt,
     DtIconLock,
-    DtIconMessage,
     DtIconRecordFilled,
     DtIconArrowUp,
-    DtIconArrowDown,
   } from '@dialpad/dialtone-icons/vue';
 </script>

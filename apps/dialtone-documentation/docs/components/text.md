@@ -40,7 +40,7 @@ Use `DtText` for individual text elements that you author in a Vue template, suc
 
 Use `DtText` in place of manually applying Text Styles. Avoid:
 
-- Applying Text Styles classes, e.g. `class="d-text-body--md"`
+- Applying Text Styles classes, e.g. `class="d-text-body--300"`
 - Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
 - Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
 
@@ -555,7 +555,7 @@ Text box trim will only affect elements with block or inline-block styled contex
       </dt-stack>
     </dt-stack>
     <dt-text variant="body-sm" tone="tertiary">3:23 pm</dt-text>
-    <dt-badge kind="count" type="bulletin" text="6" />
+    <dt-badge kind="counter" variant="count" label="6" />
   </dt-stack>
 </dt-stack>
 ```

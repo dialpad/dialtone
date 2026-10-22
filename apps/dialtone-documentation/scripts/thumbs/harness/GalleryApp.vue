@@ -74,7 +74,7 @@
             <dt-text as="p" kind="label" size="400" tone="tertiary">
               {{ cell.slug }}
             </dt-text>
-            <dt-badge v-if="cell.hasOverride" text="override" />
+            <dt-badge v-if="cell.hasOverride" kind="status" variant="neutral" label="override" />
           </dt-stack>
         </dt-stack>
       </dt-link>
@@ -86,7 +86,7 @@
       <template #header>
         <dt-stack direction="row" gap="100" align="baseline" justify="space-between">
           {{ openSlug || '' }}
-          <dt-badge v-if="openSlug && modifiedSlugs.has(openSlug)" text="Modified" type="info" />
+          <dt-badge v-if="openSlug && modifiedSlugs.has(openSlug)" kind="status" variant="info" label="Modified" />
         </dt-stack>
       </template>
       <dt-box padding-block="400">

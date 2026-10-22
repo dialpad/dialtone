@@ -2,11 +2,12 @@
   <span
     :class="[
       'd-badge',
-      BADGE_TYPE_MODIFIERS[type],
-      BADGE_KIND_MODIFIERS[kind],
+      resolvedVariantClass,
+      resolvedEmphasisClass,
+      resolvedSizeClass,
       BADGE_DECORATION_MODIFIERS[decoration],
-      { 'd-badge--subtle': subtle },
-      { 'd-badge--outlined': outlined },
+      { 'd-badge--subtle': shouldRenderLegacySubtle },
+      { 'd-badge--outlined': shouldRenderLegacyOutlined },
     ]"
     data-qa="dt-badge"
   >
@@ -15,8 +16,17 @@
       class="d-badge__decorative"
     />
     <span
-      v-if="hasLeftIcon"
+      v-if="hasLeading()"
+      :class="['d-badge__leading', leadingClass]"
+      data-qa="dt-badge-leading"
+    >
+      <!-- @slot Optional freeform content at the start of the badge, such as another badge -->
+      <slot name="leading" />
+    </span>
+    <span
+      v-if="hasStartIcon()"
       :class="['d-badge__icon-left', startIconClass]"
+      data-qa="dt-badge-start-icon"
     >
       <!-- @slot Slot for start icon, icon-size slot prop defaults to '200' -->
       <slot
@@ -26,20 +36,22 @@
       />
       <!-- @slot @deprecated Use startIcon -->
       <slot
-        v-else
+        v-else-if="$slots.leftIcon"
         name="leftIcon"
         :icon-size="iconSize"
       />
+      <template v-else>{{ MENTION_PREFIX }}</template>
     </span>
     <span :class="['d-badge__label', labelClass]">
-      <!-- @slot Slot for badge content, defaults to text prop -->
+      <!-- @slot Slot for badge content, defaults to label prop -->
       <slot>
-        {{ text }}
+        {{ resolvedLabel }}
       </slot>
     </span>
     <span
-      v-if="hasRightIcon"
+      v-if="hasEndIcon()"
       :class="['d-badge__icon-right', endIconClass]"
+      data-qa="dt-badge-end-icon"
     >
       <!-- @slot Slot for end icon, icon-size slot prop defaults to '200' -->
       <slot
@@ -54,11 +66,29 @@
         :icon-size="iconSize"
       />
     </span>
+    <span
+      v-if="hasTrailing()"
+      :class="['d-badge__trailing', trailingClass]"
+      data-qa="dt-badge-trailing"
+    >
+      <!-- @slot Optional freeform content at the end of the badge, such as a nested badge -->
+      <slot name="trailing" />
+    </span>
   </span>
 </template>
 
 <script>
-import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './BadgeConstants';
+import {
+  BADGE_VARIANT_MODIFIERS,
+  BADGE_EMPHASIS_MODIFIERS,
+  BADGE_SIZE_MODIFIERS,
+  BADGE_GROUPS,
+  BADGE_DEFAULT_EMPHASIS,
+  BADGE_MENTION_PREFIX,
+  BADGE_TYPE_MODIFIERS,
+  BADGE_TYPE_TO_VARIANT,
+  BADGE_DECORATION_MODIFIERS,
+} from './BadgeConstants';
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 import { hasSlotContent } from '@/common/utils/index.js';
 import { ordinalSizeValidator } from '@/common/validators';
@@ -73,7 +103,53 @@ export default {
 
   props: {
     /**
-     * The size of the left and right icons.
+     * The variant of the badge within its group `kind`. Each variant owns its look.
+     * Defaults to the default variant of the group (`neutral` for status).
+     * - status: neutral, info, positive, warning, critical
+     * - counter: count, mention
+     * - lifecycle: internal, early-access, new, recent, familiar
+     * @values neutral, info, positive, warning, critical, count, mention, internal, early-access, new, recent, familiar
+     */
+    variant: {
+      type: String,
+      default: undefined,
+      validator: (variant) => Object.keys(BADGE_VARIANT_MODIFIERS).includes(variant),
+    },
+
+    /**
+     * The visual emphasis of the badge.
+     * Each group supports its own levels: status and counter support base and strong;
+     * lifecycle supports subtle (outline), base (light fill) and strong (solid fill) and
+     * means how important the feature is. Unsupported levels render the default.
+     * Defaults to strong for variant new, otherwise base.
+     * @values base, strong, subtle
+     */
+    emphasis: {
+      type: String,
+      default: undefined,
+      validator: (emphasis) => emphasis === undefined || Object.keys(BADGE_EMPHASIS_MODIFIERS).includes(emphasis),
+    },
+
+    /**
+     * Text for the badge content. The default slot takes precedence.
+     */
+    label: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * The label typography size of the badge.
+     * @values 100, 200, 300, 400, 500
+     */
+    size: {
+      type: [String, Number],
+      default: 200,
+      validator: (size) => Object.keys(BADGE_SIZE_MODIFIERS).includes(String(size)),
+    },
+
+    /**
+     * The size of the start and end icons, passed to the icon slots as the icon-size slot prop.
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     iconSize: {
@@ -84,36 +160,40 @@ export default {
 
     /**
      * Text for the badge content
+     * @deprecated Use label instead.
      */
     text: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
-     * The kind of badge which determines the styling
-     * @values label, count
+     * The group the badge belongs to. It decides which variants and emphasis levels are valid.
+     * Defaults to status, so a plain badge is a neutral status badge.
+     * @values status, counter, lifecycle
      */
     kind: {
       type: String,
-      default: 'label',
-      validator: (kind) => Object.keys(BADGE_KIND_MODIFIERS).includes(kind),
+      default: 'status',
+      validator: (kind) => Object.keys(BADGE_GROUPS).includes(kind),
     },
 
     /**
      * Color for the badge background
+     * @deprecated Use variant instead.
      * @values default, info, positive, warning, critical, bulletin, ai
      */
     type: {
       type: String,
-      default: 'default',
+      default: undefined,
       validator: (type) => Object.keys(BADGE_TYPE_MODIFIERS).includes(type),
     },
 
     /**
-     * Decoration for the badge. This can be only used with kind: label and type: default
-     * with no left and right icons
-     * @values black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
+     * Decoration for the badge. This can be only used with kind: status and variant: neutral
+     * with no icons or leading and trailing content
+     * @deprecated Use DtChip variant="default" for categorization.
+     * @values default, black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
      * purple-300, purple-400, purple-500, blue-200, blue-300, blue-400, green-300, green-400,
      * green-500, gold-300, gold-400, gold-500, magenta-200, magenta-300, magenta-400
      */
@@ -127,6 +207,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the leading container
+     */
+    leadingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the trailing container
+     */
+    trailingClass: {
       type: [String, Array, Object],
       default: '',
     },
@@ -150,62 +246,179 @@ export default {
     /**
      * Shows a subtle appearance for the badge
      * Currently only affects the badge when type is bulletin.
+     * @deprecated Use emphasis instead.
      */
     subtle: {
       type: Boolean,
-      default: false,
+      default: null,
     },
 
     /**
      * Outlines the badge with a border
+     * @deprecated Use emphasis instead.
      */
     outlined: {
       type: Boolean,
-      default: false,
+      default: null,
     },
   },
 
   data () {
     return {
+      BADGE_VARIANT_MODIFIERS,
+      BADGE_EMPHASIS_MODIFIERS,
+      BADGE_SIZE_MODIFIERS,
       BADGE_TYPE_MODIFIERS,
-      BADGE_KIND_MODIFIERS,
       BADGE_DECORATION_MODIFIERS,
+      MENTION_PREFIX: BADGE_MENTION_PREFIX,
     };
   },
 
   computed: {
-    hasLeftIcon () {
-      return hasSlotContent(this.$slots.startIcon) || hasSlotContent(this.$slots.leftIcon);
+    resolvedVariant () {
+      if (this.variant !== undefined) return this.variant;
+      // Deprecated alias for the variant.
+      if (this.type !== undefined && BADGE_TYPE_TO_VARIANT[this.type]) return BADGE_TYPE_TO_VARIANT[this.type];
+      return BADGE_GROUPS[this.resolvedKind].defaultVariant;
     },
 
-    hasRightIcon () {
-      return hasSlotContent(this.$slots.endIcon) || hasSlotContent(this.$slots.rightIcon);
+    // Falls back to status so an invalid kind still renders; the prop validator reports it.
+    resolvedKind () {
+      return BADGE_GROUPS[this.kind] ? this.kind : 'status';
     },
 
-    hasIcons () {
-      return this.hasLeftIcon || this.hasRightIcon;
+    resolvedEmphasis () {
+      if (this.emphasis !== undefined && !this.isUnsupportedEmphasis) return this.emphasis;
+      return BADGE_DEFAULT_EMPHASIS[this.resolvedVariant] || 'base';
+    },
+
+    isUnsupportedEmphasis () {
+      return this.emphasis !== undefined && !BADGE_GROUPS[this.resolvedKind].emphasis.includes(this.emphasis);
+    },
+
+    resolvedLabel () {
+      return this.label ?? this.text ?? '';
+    },
+
+    resolvedVariantClass () {
+      if (this.resolvedVariant === 'ai') return BADGE_TYPE_MODIFIERS.ai;
+      return BADGE_VARIANT_MODIFIERS[this.resolvedVariant];
+    },
+
+    resolvedEmphasisClass () {
+      return BADGE_EMPHASIS_MODIFIERS[this.resolvedEmphasis];
+    },
+
+    resolvedSizeClass () {
+      return BADGE_SIZE_MODIFIERS[String(this.size)];
+    },
+
+    shouldRenderLegacySubtle () {
+      return this.subtle && this.emphasis === undefined;
+    },
+
+    shouldRenderLegacyOutlined () {
+      return this.outlined && this.emphasis === undefined;
     },
   },
 
-  mounted () {
-    this.validateProps();
-  },
-
-  updated () {
+  created () {
     this.validateProps();
   },
 
   methods: {
+    // $slots is not reactive, so slot-dependent values are methods called at render time, not computed.
+    // The mention variant shows a text @ before the number unless a start icon replaces it.
+    showsMentionPrefix () {
+      return this.resolvedVariant === 'mention' &&
+        !hasSlotContent(this.$slots.startIcon) &&
+        !hasSlotContent(this.$slots.leftIcon);
+    },
+
+    hasStartIcon () {
+      return hasSlotContent(this.$slots.startIcon) ||
+        hasSlotContent(this.$slots.leftIcon) ||
+        this.showsMentionPrefix();
+    },
+
+    hasEndIcon () {
+      return hasSlotContent(this.$slots.endIcon) ||
+        hasSlotContent(this.$slots.rightIcon);
+    },
+
+    hasLeading () {
+      return hasSlotContent(this.$slots.leading);
+    },
+
+    hasTrailing () {
+      return hasSlotContent(this.$slots.trailing);
+    },
+
+    hasContentBesideLabel () {
+      return this.hasStartIcon() || this.hasEndIcon() || this.hasLeading() || this.hasTrailing();
+    },
+
     validateProps () {
+      if (process.env.NODE_ENV === 'production') return;
+
+      this.warnDeprecatedAliases();
       this.validateTypePropCombination();
       this.validateDecorationPropCombination();
+      this.validateEmphasis();
+      this.validateGroup();
+    },
+
+    validateEmphasis () {
+      if (this.isUnsupportedEmphasis) {
+        const supported = BADGE_GROUPS[this.resolvedKind].emphasis.join(', ');
+
+        console.warn(
+          `DtBadge warning: emphasis="${this.emphasis}" is not supported by the ${this.resolvedKind} group ` +
+          `(supports: ${supported}). Rendering emphasis="${this.resolvedEmphasis}".`,
+        );
+      }
+    },
+
+    validateGroup () {
+      const group = BADGE_GROUPS[this.kind];
+
+      if (group && this.resolvedVariant !== 'ai' && !group.variants.includes(this.resolvedVariant)) {
+        console.warn(
+          `DtBadge warning: variant="${this.resolvedVariant}" does not belong to the ${this.kind} group. ` +
+          `Use one of: ${group.variants.join(', ')}.`,
+        );
+      }
+    },
+
+    warnDeprecatedAliases () {
+      [
+        ['type', 'variant'],
+        ['text', 'label'],
+        ['subtle', 'emphasis'],
+        ['outlined', 'emphasis'],
+        ['decoration', 'DtChip variant="default"'],
+      ].forEach(([propName, replacement]) => {
+        if (this[propName] !== undefined && this[propName] !== null) {
+          console.warn(`DtBadge warning: ${propName} is deprecated. Use ${replacement} instead.`);
+        }
+      });
+
+      [
+        ['leftIcon', 'startIcon'],
+        ['rightIcon', 'endIcon'],
+      ].forEach(([slotName, replacement]) => {
+        if (hasSlotContent(this.$slots[slotName])) {
+          console.warn(`DtBadge warning: ${slotName} slot is deprecated. Use ${replacement} instead.`);
+        }
+      });
+
+      if (this.type === 'ai') {
+        console.warn('DtBadge warning: type="ai" is deprecated. Use DtChip emphasis="subtle" for AI attribution.');
+      }
     },
 
     validateTypePropCombination () {
-      if (this.type === 'ai' && this.kind === 'count') {
-        console.error('DtBadge error: type: \'ai\' with kind: \'count\' is an invalid combination.');
-      }
-      if (this.type !== 'bulletin' && this.subtle) {
+      if (this.type !== 'bulletin' && this.subtle && this.emphasis === undefined) {
         console.error('DtBadge error: subtle can only be used with type \'bulletin\'');
       }
     },
@@ -213,12 +426,12 @@ export default {
     validateDecorationPropCombination () {
       if (!this.decoration) return;
 
-      if (this.kind !== 'label' || this.type !== 'default') {
-        console.error('DtBadge error: decoration prop can only be used with kind: \'label\' and type: \'default\'.');
+      if (this.kind !== 'status' || this.resolvedVariant !== 'neutral') {
+        console.error('DtBadge error: decoration prop can only be used with kind: \'status\' and variant: \'neutral\'.');
       }
 
-      if (this.hasIcons) {
-        console.error('DtBadge error: decoration prop cannot be used with startIcon or endIcon.');
+      if (this.hasContentBesideLabel()) {
+        console.error('DtBadge error: decoration prop cannot be used with icons or leading and trailing content.');
       }
     },
   },

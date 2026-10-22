@@ -212,7 +212,7 @@ export default {
     },
     slots: {
       default: { initialValue: 'Place Call' },
-      leading: { initialValue: '<dt-badge kind="count" text="3" />' },
+      leading: { initialValue: '<dt-badge kind="counter" variant="count" label="3" />' },
       dropdownList: {
         initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>\n<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>\n<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
       },

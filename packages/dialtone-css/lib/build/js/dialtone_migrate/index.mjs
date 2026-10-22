@@ -205,6 +205,24 @@ const MIGRATIONS = [
     fileExtensions: ['.vue'],
   },
   {
+    id: 'badge-api',
+    name: 'DtBadge API Updates',
+    description: 'DtBadge adds kind (status/counter/lifecycle) and moves to variant/emphasis/label; type/text are deprecated.',
+    category: 'required',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_badge_api',
+    detectPatterns: [
+      /<(?:dt-badge|DtBadge)\b[^>]*\s(?::|v-bind:)?(?:type|text)\s*=/,
+      /<(?:dt-badge|DtBadge)\b[^>]*\skind\s*=\s*["'](?:count|label)["']/,
+      // A variant that now belongs to another group, with no kind (kind defaults to status)
+      new RegExp(
+        '<(?:dt-badge|DtBadge)(?=[\\s/>])(?![^>]*\\s(?::|v-bind:)?kind\\b)[^>]*\\svariant\\s*=\\s*["\'](?:'
+        + 'base|lifecycle|new|count|mention|internal|early-access|recent|familiar)["\']',
+      ),
+    ],
+    fileExtensions: ['.vue'],
+  },
+  {
     id: 'scrollbar-always',
     name: 'Scrollbar :never → :always',
     description: 'v-dt-scrollbar:never renamed to v-dt-scrollbar:always.',

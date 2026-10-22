@@ -8,7 +8,9 @@
       Subtitle
     </template>
     <template #bottom>
-      <dt-badge>Content</dt-badge>
+      <dt-badge kind="status" variant="neutral">
+        Content
+      </dt-badge>
     </template>
     <template #end>
       <dt-icon size="200" name="share" />
