@@ -430,26 +430,26 @@ describe('slider argument forwarding', () => {
     expect(control.findComponent({ name: 'DtcControlSlider' }).props('disabled')).toBe(true);
     wrapper.unmount();
   });
-});
 
-it('updates slider bounds from sibling values while retaining slider selection for invalid totals', async () => {
-  const wrapper = mount(DtcOptionBarMemberGroup, {
-    props: {
-      component: {},
-      members: [{ name: 'activePage', label: 'active page', types: ['number'], defaultValue: 1,
-        slider: { min: 1, maxProp: 'totalPages', step: 1 } }],
-      values: { activePage: 5, totalPages: 25 },
-      propValues: { activePage: 5, totalPages: 25 },
-      controlSelector: () => [['slider', 'null'], 'slider'],
-    },
+  it('updates slider bounds from sibling values while retaining slider selection for invalid totals', async () => {
+    const wrapper = mount(DtcOptionBarMemberGroup, {
+      props: {
+        component: {},
+        members: [{ name: 'activePage', label: 'active page', types: ['number'], defaultValue: 1,
+          slider: { min: 1, maxProp: 'totalPages', step: 1 } }],
+        values: { activePage: 5, totalPages: 25 },
+        propValues: { activePage: 5, totalPages: 25 },
+        controlSelector: () => [['slider', 'null'], 'slider'],
+      },
+    });
+    const control = () => wrapper.findComponent({ name: 'DtcOptionBarControl' });
+    expect(control().find('input[type=range]').attributes('max')).toBe('25');
+    await wrapper.setProps({ propValues: { totalPages: 10 } });
+    expect(control().find('input[type=range]').attributes('max')).toBe('10');
+    await wrapper.setProps({ propValues: { totalPages: 0 } });
+    expect(control().find('input').exists()).toBe(false);
+    expect(control().findComponent({ name: 'DtcControlSlider' }).exists()).toBe(true);
+    expect(wrapper.emitted('update:member')).toBeUndefined();
+    wrapper.unmount();
   });
-  const control = () => wrapper.findComponent({ name: 'DtcOptionBarControl' });
-  expect(control().find('input[type=range]').attributes('max')).toBe('25');
-  await wrapper.setProps({ propValues: { totalPages: 10 } });
-  expect(control().find('input[type=range]').attributes('max')).toBe('10');
-  await wrapper.setProps({ propValues: { totalPages: 0 } });
-  expect(control().find('input').exists()).toBe(false);
-  expect(control().findComponent({ name: 'DtcControlSlider' }).exists()).toBe(true);
-  expect(wrapper.emitted('update:member')).toBeUndefined();
-  wrapper.unmount();
 });

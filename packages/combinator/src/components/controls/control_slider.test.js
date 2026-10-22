@@ -88,21 +88,23 @@ describe('optional slider values', () => {
   });
 });
 
-it('keeps a single-page range noninteractive without emitting', async () => {
-  mountControl({ value: 1, sliderConfig: { min: 1, max: 1, step: 1, suffix: '' } });
-  expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
-  expect(wrapper.text()).toContain('1');
-  await wrapper.setProps({ sliderConfig: { min: 1, max: 10, step: 1, suffix: '' } });
-  expect(wrapper.findComponent(DtSlider).exists()).toBe(true);
-  await wrapper.setProps({ value: 9, sliderConfig: { min: 1, max: 5, step: 1, suffix: '' } });
-  expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
-  expect(wrapper.emitted('update:value')).toBeUndefined();
-});
+describe('resolved bounds', () => {
+  it('keeps a single-page range noninteractive without emitting', async () => {
+    mountControl({ value: 1, sliderConfig: { min: 1, max: 1, step: 1, suffix: '' } });
+    expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
+    expect(wrapper.text()).toContain('1');
+    await wrapper.setProps({ sliderConfig: { min: 1, max: 10, step: 1, suffix: '' } });
+    expect(wrapper.findComponent(DtSlider).exists()).toBe(true);
+    await wrapper.setProps({ value: 9, sliderConfig: { min: 1, max: 5, step: 1, suffix: '' } });
+    expect(wrapper.findComponent(DtSlider).exists()).toBe(false);
+    expect(wrapper.emitted('update:value')).toBeUndefined();
+  });
 
-it('updates tick visibility with resolved bounds without changing the parent value', async () => {
-  mountControl({ value: 5, sliderConfig: { min: 1, max: 10, step: 1, showTicks: true } });
-  expect(wrapper.findComponent(DtSlider).props('showTicks')).toBe(true);
-  await wrapper.setProps({ sliderConfig: { min: 1, max: 11, step: 1, showTicks: false } });
-  expect(wrapper.findComponent(DtSlider).props('showTicks')).toBe(false);
-  expect(wrapper.emitted('update:value')).toBeUndefined();
+  it('updates tick visibility with resolved bounds without changing the parent value', async () => {
+    mountControl({ value: 5, sliderConfig: { min: 1, max: 10, step: 1, showTicks: true } });
+    expect(wrapper.findComponent(DtSlider).props('showTicks')).toBe(true);
+    await wrapper.setProps({ sliderConfig: { min: 1, max: 11, step: 1, showTicks: false } });
+    expect(wrapper.findComponent(DtSlider).props('showTicks')).toBe(false);
+    expect(wrapper.emitted('update:value')).toBeUndefined();
+  });
 });

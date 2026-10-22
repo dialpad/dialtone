@@ -73,12 +73,12 @@ const sliderRef = ref(null);
 const { isEmpty, clearDisabled } = useClearableState(props);
 const addValueCandidate = computed(() => props.defaultValue ?? props.sliderConfig?.min);
 const canAdd = computed(() => isSliderControlValue(addValueCandidate.value, props.sliderConfig, props.validator));
-const canEdit = computed(() => props.sliderConfig?.max > props.sliderConfig?.min &&
+const isSingleValue = computed(() => props.sliderConfig != null && props.sliderConfig.min === props.sliderConfig.max);
+const canEdit = computed(() => !isSingleValue.value &&
   isSliderControlValue(props.value, props.sliderConfig, props.validator));
-const unavailableReason = computed(() =>
-  props.sliderConfig && props.value === props.sliderConfig.min && props.sliderConfig.min === props.sliderConfig.max
-    ? 'only available value'
-    : 'unavailable for this slider');
+const unavailableReason = computed(() => isSingleValue.value && props.value === props.sliderConfig.min
+  ? 'only available value'
+  : 'unavailable for this slider');
 // Recreate on configuration changes so DtSlider cannot normalize its old internal value.
 const configKey = computed(() => JSON.stringify(props.sliderConfig));
 

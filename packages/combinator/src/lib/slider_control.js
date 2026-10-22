@@ -14,10 +14,13 @@ function validConfig (config, allowSingleValue = false) {
   if (!config || typeof config !== 'object') return false;
   const { min, max, step, suffix = '' } = config;
   const span = max - min;
-  return [min, max, step, span].every(Number.isFinite) &&
-    (span > 0 || (allowSingleValue && span === 0)) && step > 0 &&
+  return [min, max, step, span].every(Number.isFinite) && step > 0 &&
     (step <= span || (allowSingleValue && span === 0)) && typeof suffix === 'string' &&
     gridValue(max, config) === max;
+}
+
+function stopCount ({ min, max, step }) {
+  return Math.round((max - min) / step) + 1;
 }
 
 // Docgen reports numeric enum values as strings; blank strings must not become 0.
@@ -28,7 +31,7 @@ function toNumber (value) {
 // An explicit enum opts in only when its values are exactly the configured grid.
 function coversGrid (values, config) {
   const numbers = values.map(toNumber);
-  const count = Math.round((config.max - config.min) / config.step) + 1;
+  const count = stopCount(config);
   return numbers.length === count && new Set(numbers).size === count &&
     numbers.every(value => isSliderControlValue(value, config));
 }
@@ -50,9 +53,14 @@ export function getSliderControlConfig (member, propValues) {
     if (!validConfig(config, true)) return null;
   }
   if (member.slider.showTicks === true) {
-    config.showTicks = (config.max - config.min) / config.step + 1 <= 10;
+    config.showTicks = stopCount(config) <= 10;
   }
   return config;
+}
+
+// Sibling props that set a slider's bounds, in member order.
+export function getSliderBoundProps (members) {
+  return members.map(member => member.slider?.maxProp).filter(prop => typeof prop === 'string');
 }
 
 // Called only inside the canonical options transaction for an explicit prop edit.

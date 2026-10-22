@@ -50,11 +50,12 @@ describe('slider control eligibility', () => {
   });
 });
 
+const bank = variants();
+const infoFor = (name, preset) =>
+  buildVariantInfo(components[name], documentation.find(d => d.displayName === name), bank[name], preset);
+
 describe('real variant bank slider declarations', () => {
-  const bank = variants();
   const adopted = ['DtAvatar', 'DtPagination', 'DtProgressCircle', 'DtText'];
-  const infoFor = (name, preset) =>
-    buildVariantInfo(components[name], documentation.find(d => d.displayName === name), bank[name], preset);
 
   it('keeps Avatar variant unset by default', () => {
     const variant = infoFor('DtAvatar', 'default').props.find(p => p.name === 'variant');
@@ -62,15 +63,15 @@ describe('real variant bank slider declarations', () => {
   });
 
   const cases = adopted.flatMap(name => listVariantNames(bank[name])
-    .map(preset => ({
-      name,
-      preset,
-      members: infoFor(name, preset).props.filter(p => p.slider &&
-        (preset === 'default' || Object.hasOwn(bank[name][preset].props ?? {}, p.name))),
-    }))
+    .map(preset => {
+      const { props } = infoFor(name, preset);
+      const members = props.filter(p => p.slider &&
+        (preset === 'default' || Object.hasOwn(bank[name][preset].props ?? {}, p.name)));
+      return { name, preset, props, members };
+    })
     .filter(({ members }) => members.length));
-  it.each(cases)('$name $preset has safe effective slider settings', ({ name, preset, members }) => {
-    const values = Object.fromEntries(infoFor(name, preset).props.map(p => [p.name, p.initialValue ?? p.defaultValue]));
+  it.each(cases)('$name $preset has safe effective slider settings', ({ props, members }) => {
+    const values = Object.fromEntries(props.map(p => [p.name, p.initialValue ?? p.defaultValue]));
     for (const member of members) {
       const config = getSliderControlConfig(member, values);
       expect(config).not.toBeNull();
@@ -88,7 +89,9 @@ describe('real variant bank slider declarations', () => {
     expect(member.initialValue).toBe(0);
     expect(getSliderControlConfig(member)).toBeNull();
   });
+});
 
+describe('Avatar variant exclusions', () => {
   it('disables Avatar variant when its color effect is absent', () => {
     const rules = bank.DtAvatar.exclusions;
     expect(shouldDisable('variant', 'props', rules, { imageSrc: 'photo.png' }, {})).toBe(true);
@@ -121,9 +124,7 @@ describe('prop-dependent slider maximum', () => {
 });
 
 describe('Pagination slider ticks', () => {
-  const propsFor = name => buildVariantInfo(components.DtPagination,
-    documentation.find(d => d.displayName === 'DtPagination'), variants().DtPagination, 'default')
-    .props.find(p => p.name === name);
+  const propsFor = name => infoFor('DtPagination', 'default').props.find(p => p.name === name);
 
   it.each([[10, true], [11, false]])(
     'shows active-page ticks for %s pages: %s', (totalPages, showTicks) => {

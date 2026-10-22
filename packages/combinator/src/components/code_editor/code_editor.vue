@@ -94,6 +94,7 @@ import { DtButton, DtStack } from '@dialpad/dialtone-vue';
 
 import { OPTIONS_UPDATE_EVENT, SETTINGS_INDENT_KEY, DEFAULT_SLOT_NAME } from '@/src/lib/constants';
 import { stringifyDocValue } from '@/src/lib/parse';
+import { isOmittedBindingValue } from '@/src/lib/utils';
 import { ref, computed, provide } from 'vue';
 import { paramCase, camelCase } from 'change-case';
 
@@ -199,7 +200,7 @@ const copyText = computed(() => {
     })
     .filter(member => {
       if (props.disabledMembers.has(member.name)) return false;
-      if (member.value == null || (typeof member.value === 'number' && isNaN(member.value))) return false;
+      if (isOmittedBindingValue(member.value)) return false;
       if (props.verbose) return true;
       return JSON.stringify(member.defaultValue) !== JSON.stringify(member.value);
     });
