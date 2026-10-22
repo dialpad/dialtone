@@ -111,6 +111,14 @@ describe('dialtone-migrate-chip-api', () => {
     assert.equal(run(input), input);
   });
 
+  it('warns when show-close is omitted, including on an interactive chip', () => {
+    const omitted = input => warnings(input).some(w => w.startsWith('CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE'));
+
+    assert.ok(omitted('<dt-chip size="300" interactive>Label</dt-chip>'));
+    assert.ok(omitted('<dt-chip size="300">Label</dt-chip>'));
+    assert.ok(!omitted('<dt-chip size="300" interactive show-close>Label</dt-chip>'));
+  });
+
   it('renames an unquoted slot attribute value without adding quotes', () => {
     const output = run('<dt-chip size="300"><span slot=avatar>A</span></dt-chip>');
 

@@ -231,7 +231,7 @@
     }
 
     &--people:is(a, button, [role='button'], [role='link']):is(:active, :focus-visible),
-    &--people:where(.d-chip__label--focus-always):focus {
+    &--people:is(.d-chip__label--focus-always):focus {
       --chip-color-background: var(--dt-color-surface-brand-strong);
     }
   }

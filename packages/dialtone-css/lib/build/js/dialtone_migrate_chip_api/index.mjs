@@ -81,13 +81,12 @@ function transformChipOpenTag (tag, warnings, filePath) {
   const [, tagName, originalAttrs, closer] = match;
   let attrs = originalAttrs;
   const hasShowClose = hasAttr(attrs, 'show-close') || hasAttr(attrs, 'showClose');
-  const hasInteractiveAttr = hasAttr(attrs, 'interactive');
 
   if (!hasAttr(attrs, 'size')) {
     attrs = insertAttr(attrs, 'size="300"');
   }
 
-  if (!hasShowClose && !hasInteractiveAttr) {
+  if (!hasShowClose) {
     warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE file=${filePath}`);
   }
 

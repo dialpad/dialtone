@@ -157,6 +157,19 @@ describe('--health-check', () => {
     assert.match(output, /\[PENDING\].*DtChip API Updates \(chip-api\)/);
   });
 
+  it('flags chip class props and legacy slot forms that earlier patterns missed', () => {
+    const pending = html => runHealthCheck({ 'App.vue': `<template>${html}</template>` });
+    const chip = /\[PENDING\].*DtChip API Updates \(chip-api\)/;
+
+    assert.match(pending('<dt-chip :label="a > b" size="200" icon-class="x">Label</dt-chip>'), chip);
+    assert.match(pending('<dt-chip size="200"><template v-slot:icon>i</template></dt-chip>'), chip);
+    assert.match(pending('<dt-chip size="200"><span slot="avatar">a</span></dt-chip>'), chip);
+    assert.match(
+      pending('<dt-chip-group icon-class="x" /><dt-chip size="200">x</dt-chip>'),
+      /\[DONE\].*DtChip API Updates \(chip-api\)/,
+    );
+  });
+
   it('flags a legacy badge prop that follows a quoted attribute containing >', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-badge v-if="count > 0" type="info" /></template>',
