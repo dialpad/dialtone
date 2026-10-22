@@ -1,6 +1,13 @@
 /* eslint-disable max-len */
 
 export default {
+  defaults: {
+    slots: {
+      // Inserted when the slot is added in the playground, so it doesn't start empty.
+      startAvatar: { starterValue: '<dt-avatar full-name="Jaqueline Nackos" seed="0" />' },
+    },
+  },
+
   default: {
     props: {
       interactive: { initialValue: false },
