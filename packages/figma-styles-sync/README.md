@@ -102,3 +102,13 @@ compensate, or every diagonal gradient's stops land too close to the center
 (verified at 135°: a 10%/90% stop pair rendered at ~22%/~78% instead).
 Confirmed by rendering both sides and reading pixels back before using the
 corrected formula on the real gradients.
+
+**Square shapes only.** CSS's line-length formula (`|W·sin(θ)| + |H·cos(θ)|`)
+genuinely depends on the target's width and height, not just the gradient's
+angle — a square is the one case where it matches the unit-square formula
+this sync actually uses. A Figma paint style has no target shape to measure;
+it's one shared matrix applied to whatever gets styled with it. Verified:
+135° on a 400×100 rectangle puts CSS's left-midpoint stop at 10%; this sync
+puts it at 25%. Every diagonal gradient here is affected on a non-square
+target — accepted, not fixed, since fixing it would need a target shape a
+paint style doesn't have.

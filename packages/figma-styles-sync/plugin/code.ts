@@ -57,6 +57,30 @@ function indexVariablesByName (vars: Variable[]): Map<string, Variable | 'ambigu
 }
 
 /**
+ * Same shape as `indexVariablesByName`, for the same reason: Figma permits
+ * duplicate style names, so collapsing `existingStyles` straight into
+ * `Map(name -> style)` would let whichever duplicate iterates last silently
+ * win. The other one is then invisible to this sync entirely — never
+ * matched, never updated, never flagged — and the next run reports
+ * "unchanged" with no hint that a second style with the same name exists.
+ * Recording the collision instead and failing loudly on lookup turns that
+ * into a clear per-spec error instead of a silent orphan.
+ */
+function indexStylesByName<T extends { name: string }> (styles: readonly T[]): Map<string, T | 'ambiguous'> {
+  const index = new Map<string, T | 'ambiguous'>();
+  for (const s of styles) index.set(s.name, index.has(s.name) ? 'ambiguous' : s);
+  return index;
+}
+
+function resolveExistingStyle<T> (index: Map<string, T | 'ambiguous'>, name: string): T | undefined {
+  const found = index.get(name);
+  if (found === 'ambiguous') {
+    throw new Error(`"${name}" matches more than one existing style — rename the duplicates in Figma before syncing`);
+  }
+  return found;
+}
+
+/**
  * A right-named, unambiguous variable can still be the wrong Figma type — a
  * stray manual edit, or a variable recreated with the wrong type during some
  * other cleanup, both leave the name intact. `setBoundVariable` rejects a
@@ -100,7 +124,7 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
 
   const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalTextStylesAsync();
-  const styleByName = new Map(existingStyles.map(s => [s.name, s]));
+  const styleByName = indexStylesByName(existingStyles);
 
   const created: string[] = [];
   const updated: string[] = [];
@@ -111,14 +135,35 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
     let isNew = false;
     let style: TextStyle | undefined;
     try {
-      // Resolve every variable before touching the document: an existing
-      // style must come away untouched if any lookup below fails, and a
-      // newly-created one must not be left behind empty.
+      // Resolve every variable before touching the document.
       const famVar = resolveVariable(varIndex, spec.fontFamily.variable, 'STRING');
       const sizeVar = resolveVariable(varIndex, spec.fontSize.variable, 'FLOAT');
       const weightVar = resolveVariable(varIndex, spec.fontWeight.variable, 'FLOAT');
+      const multiplier = Number.parseFloat(String(spec.lineHeight.value));
+      const textCase = TEXT_CASE[spec.textCase] ?? 'ORIGINAL';
 
-      const existing = styleByName.get(spec.name);
+      // A resolved, right-typed variable can still be rejected by the
+      // setter itself for a reason the preflight above can't see — and
+      // unlike a new style, an existing one has no transaction to roll
+      // back. Confirmed directly: rejecting fontSize left a shared style
+      // with the new font family bound but the old size, lineHeight, and
+      // textCase, reported as a failure regardless. Proving the entire
+      // write sequence on a disposable scratch style first means the real
+      // style — new or existing — is never touched until success is
+      // already certain.
+      const probe = figma.createTextStyle();
+      try {
+        probe.fontName = { family: spec.figmaFamily, style: spec.fontStyleName };
+        probe.setBoundVariable('fontFamily', famVar);
+        probe.setBoundVariable('fontSize', sizeVar);
+        probe.setBoundVariable('fontWeight', weightVar);
+        probe.lineHeight = { unit: 'PERCENT', value: multiplier * 100 };
+        probe.textCase = textCase;
+      } finally {
+        probe.remove();
+      }
+
+      const existing = resolveExistingStyle(styleByName, spec.name);
       isNew = !existing;
       style = existing ?? figma.createTextStyle();
 
@@ -140,11 +185,8 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
       style.setBoundVariable('fontFamily', famVar);
       style.setBoundVariable('fontSize', sizeVar);
       style.setBoundVariable('fontWeight', weightVar);
-
-      const multiplier = Number.parseFloat(String(spec.lineHeight.value));
       style.lineHeight = { unit: 'PERCENT', value: multiplier * 100 };
-
-      style.textCase = TEXT_CASE[spec.textCase] ?? 'ORIGINAL';
+      style.textCase = textCase;
 
       if (isNew) {
         created.push(style.name);
@@ -270,7 +312,7 @@ function effectsFingerprint (effects: readonly Effect[]): string {
 async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffectStylesResult> {
   const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalEffectStylesAsync();
-  const styleByName = new Map(existingStyles.map(s => [s.name, s]));
+  const styleByName = indexStylesByName(existingStyles);
 
   const created: string[] = [];
   const updated: string[] = [];
@@ -301,7 +343,7 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
         return effect;
       });
 
-      const existing = styleByName.get(spec.name);
+      const existing = resolveExistingStyle(styleByName, spec.name);
       isNew = !existing;
       style = existing ?? figma.createEffectStyle();
       const before = isNew ? null : effectsFingerprint(style.effects);
@@ -351,6 +393,18 @@ interface CreatePaintStylesResult {
  * fraction here. The perpendicular row stays a plain unit rotation — no
  * length correction needed, since nothing about it depends on the box's
  * aspect ratio along the gradient axis.
+ *
+ * Square shapes only, by construction, not just by the numbers above: CSS's
+ * line-length formula is `|W·sin(θ)| + |H·cos(θ)|`, genuinely dependent on
+ * the box's own width and height, not just its angle — a real square is the
+ * one case where that reduces to the unit-square formula this function
+ * actually computes. A Figma paint STYLE has no shape to measure; it's a
+ * single shared matrix applied to whatever gets styled with it, square or
+ * not, so there's no (W, H) to plug in even in principle. Verified: 135° on
+ * a 400×100 rectangle puts CSS's left-midpoint stop at 10%; this formula
+ * puts it at 25%. Every diagonal gradient here is affected on a non-square
+ * target — accepted, not fixed, since fixing it would need a target shape
+ * this style doesn't have.
  */
 function gradientTransform (angleDeg: number): Transform {
   const rad = angleDeg * Math.PI / 180;
@@ -428,7 +482,7 @@ async function resolveColor (variable: Variable): Promise<RGBA> {
 async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintStylesResult> {
   const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalPaintStylesAsync();
-  const styleByName = new Map(existingStyles.map(s => [s.name, s]));
+  const styleByName = indexStylesByName(existingStyles);
 
   const created: string[] = [];
   const updated: string[] = [];
@@ -463,7 +517,7 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
         blendMode: 'NORMAL',
       }];
 
-      const existing = styleByName.get(spec.name);
+      const existing = resolveExistingStyle(styleByName, spec.name);
       isNew = !existing;
       style = existing ?? figma.createPaintStyle();
       const before = isNew ? null : paintsFingerprint(style.paints);
