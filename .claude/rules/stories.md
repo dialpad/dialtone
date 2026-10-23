@@ -9,11 +9,9 @@ paths:
 
 ## File Structure
 
-Per component:
-- `component_name.stories.js` — story definitions (this rules file)
-- `component_name_default.story.vue` — default template
-- `component_name_variants.story.vue` — variants template (when applicable)
-- `component_name.mdx` — long-form Storybook docs (optional)
+Use the file layout and optional-artifact guidance in
+`.agents/resources/rules/vue-components.md`. Follow the component's existing
+story and story-template naming rather than a second scaffold list here.
 
 ## Required Exports
 
@@ -53,7 +51,7 @@ Every prop, slot, event, and HTML attribute should have an entry in `argTypesDat
 
 ### Options from constants
 
-Never hardcode the valid values for a `select` control. Import from `*_constants.js`:
+Never hardcode the valid values for a `select` control. Use the component constants identified by the shared Vue conventions:
 
 ```javascript
 options: Object.keys(SELECT_SIZE_MODIFIERS),

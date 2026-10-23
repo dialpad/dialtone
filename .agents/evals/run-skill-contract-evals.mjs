@@ -132,7 +132,7 @@ const claudeRuleParityAllowlist = new Map([
   ['dialtone-query-core', 'Skip exact-name parity'],
   ['general-rules', 'Skip exact-name parity'],
   ['link-and-button-navigation', 'Defer'],
-  ['slot-class-props', 'Defer'],
+  ['slot-class-props', 'Skip exact-name parity'],
 ]);
 
 const agentRuleParityAllowlist = new Map([
@@ -426,6 +426,43 @@ for (const [skillName, config] of Object.entries(skills)) {
 const ruleMap = read('.agents/resources/rule-map.md');
 const codexToolingRules = read('.agents/resources/rules/codex-tooling.md');
 const agentToolingParity = read('.agents/resources/agent-tooling-parity.md');
+assert(
+  read('CLAUDE.md').startsWith('@AGENTS.md\n'),
+  'CLAUDE.md must import the shared root AGENTS.md policy',
+  failures,
+);
+const componentInstructions = 'packages/dialtone-vue/components/CLAUDE.md';
+const sharedVueRule = '.agents/resources/rules/vue-components.md';
+assert(
+  existsSync(join(repoRoot, componentInstructions)) &&
+    read(componentInstructions).trim() === `@../../../${sharedVueRule}` &&
+    existsSync(
+      resolve(
+        repoRoot,
+        dirname(componentInstructions),
+        `../../../${sharedVueRule}`,
+      ),
+    ),
+  `${componentInstructions} must import the shared Vue policy`,
+  failures,
+);
+for (const ruleName of ['vue-components', 'slot-class-props']) {
+  const adapter = `.claude/rules/${ruleName}.md`;
+  assert(
+    /^---\npaths:\n {2}- ["']packages\/dialtone-vue\/components\/\*\*["']\n---/.test(
+      read(adapter),
+    ),
+    `${adapter} must remain scoped to Vue component files`,
+    failures,
+  );
+  assert(
+    read(adapter).includes(`](../../${sharedVueRule})`) &&
+      existsSync(join(repoRoot, sharedVueRule)) &&
+      ruleMap.includes(sharedVueRule),
+    `${adapter} and the Codex rule map must route to ${sharedVueRule}`,
+    failures,
+  );
+}
 const badRuleParityFixture = `
 | Claude rule | Codex peer or status | Decision | Rationale |
 | --- | --- | --- | --- |

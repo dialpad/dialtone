@@ -1,5 +1,5 @@
 ---
-description: "Full commit workflow with Jira integration and scope auto-detection. Use when committing changes or when the user says 'commit', 'ready to commit', 'stage changes', etc."
+description: "Commit workflow with explicit ticket selection and scope detection. Use when committing changes or when the user says 'commit', 'ready to commit', 'stage changes', etc."
 ---
 
 # /commit - Dialtone Commit Workflow
@@ -39,13 +39,12 @@ git diff            # if nothing staged yet
 
 ### 4. Resolve Jira Ticket
 
-Priority order:
+Use the ticket from the current branch or the user's task. Preserve an explicit
+`NO-JIRA` decision. If the branch and task disagree, or neither establishes a
+ticket mode, resolve that choice with the user before staging.
 
-1. **Branch name**: Extract `DLT-\d+` from `git branch --show-current`
-2. **Recent commits**: Look for `DLT-\d+` in `git log --oneline -10`
-3. **User input**: Ticket mentioned in conversation
-4. **Create new**: Via `mcp__atlassian__createJiraIssue` with `projectKey: "DLT"`, `issueTypeName: "Task"`
-5. **Fallback**: `NO-JIRA`
+Do not infer a ticket from unrelated recent commits, create a Jira issue, or
+silently fall back to `NO-JIRA`. Ticket creation is a separate explicit action.
 
 ### 5. Stage and Commit
 
