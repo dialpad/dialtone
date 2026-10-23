@@ -14,7 +14,7 @@ paths:
 ## Props
 
 - Use `validator` — NEVER `validate`. Vue silently ignores `validate`.
-- Import allowed values from `*_constants.js`. Never hardcode valid value arrays inline.
+- Import allowed values from `*Constants.js`. Never hardcode valid value arrays inline.
 - Add JSDoc with `@values` annotation.
 - Boolean visibility toggles: use positive polarity (`showClose`, `showHeader`, `showArrow`). Never use negative names (`hideX`, `preventX`, `skipX`).
 
@@ -40,7 +40,7 @@ paths:
 - Text headline extends the scale: `500` (xl), `600` (2xl), `700` (3xl).
 - Icons: separate numeric scale `100`–`800`, distinct from the `100`-`500` component scale (do not remap icon values onto the component scale). Icon-family `size` props (`Icon`, `Loader`, `Emoji`, `EmojiTextWrapper`, `ProgressCircle`, `ToastLayoutAlternateIcon`) still use `[String, Number]`.
 - Shared scale definition: `packages/dialtone-vue/common/constants/sizes.js`.
-- Export from `*_constants.js`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
+- Export from `*Constants.js`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
 
 ## Separation of Concerns
 
@@ -50,14 +50,14 @@ paths:
 
 ## File Structure (per component directory)
 
-- `component_name.vue` — implementation
-- `component_name_constants.js` — exported constants
-- `component_name.test.js` — Vitest tests
-- `component_name.stories.js` — Storybook stories
-- `component_name.mdx` — Storybook docs
+- `<Name>.vue` — implementation
+- `<Name>Constants.js` (or `.ts` where used) — exported constants, when needed
+- `<Name>.test.js` — Vitest tests
+- `<Name>.stories.js` and related `.story.vue` files — Storybook stories
+- `<Name>.mdx` — additional Storybook docs, where used
 - `index.js` — barrel export
-- `utils.js` — utility/helper functions (optional)
-- `validators.js` — prop/value validators (optional)
+- `Utils.js` — utility/helper functions (optional)
+- `Validators.js` — prop/value validators (optional)
 - `modules/` — sub-components for complex components (optional, e.g. emoji_picker, datepicker)
 - `composables/` — composition functions (optional, e.g. `useCalendar.js`, `useKeyboardNavigation.js`)
 
@@ -67,7 +67,7 @@ The root `CLAUDE.md` Documentation Pipeline is the canonical, complete list (it 
 
 1. Vue source in `packages/dialtone-vue/components/`
 2. Tests (`.test.js`) using Vitest + @vue/test-utils
-3. Storybook stories (`.stories.js` + `.mdx`)
+3. Storybook stories (`.stories.js`, `.story.vue` and existing `.mdx` where used)
 4. Component docs JSON via `scripts/build-dialtone-vue-docs.mjs`
 5. VuePress page in `apps/dialtone-documentation/docs/components/`
 6. MCP server data via `pnpm nx run dialtone-mcp-server:build`

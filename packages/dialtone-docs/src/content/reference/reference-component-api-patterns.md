@@ -20,45 +20,27 @@ keywords:
     logical-props,
   ]
 ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
-last_updated: 2026-09-24
+last_updated: 2026-10-23
 related_packages: [dialtone-vue]
 ---
 
 # Component API Patterns
 
-Every Vue component in `packages/dialtone-vue/components/` follows shared conventions. This document describes the implicit contract so you know what to expect from any component without reading its source.
+This reference explains recurring API patterns, not a universal contract for every component. Follow the [current Vue requirements](../../../../../.agents/resources/rules/vue-components.md) and inspect the selected component's props, emits, slots and validators before relying on an example. The size and filename guidance below is checked against current source; other component examples are navigation aids, not a complete API inventory.
 
 ## Constants File Pattern
 
-Every component has a `{component_name}_constants.js` file that exports modifier maps. These map prop values to CSS class names:
+Components that need exported value maps use a PascalCase file such as [ButtonConstants.js](../../../../dialtone-vue/components/Button/ButtonConstants.js). A constants file is not required when the component has no such definitions.
 
-```javascript
-// button_constants.js
-export const BUTTON_SIZE_MODIFIERS = {
-  xs: 'd-btn--xs',
-  sm: 'd-btn--sm',
-  md: '', // default size — no modifier class needed
-  lg: 'd-btn--lg',
-  xl: 'd-btn--xl',
-};
-```
-
-The Vue component validates props against these maps and applies the corresponding class. The empty string `''` convention means "default, no extra class."
-
-Constants are also re-exported from each component's `index.js` so consumers can import them.
+The component's validator and class binding use these maps; an empty class string can represent the default appearance. Some constants are re-exported through the component's `index.js`. Check that barrel before assuming a constant is public. Keep allowed/deprecated values in the owning source instead of copying the map into another reference.
 
 ## Standard Prop Patterns
 
 ### Size
 
-Most sizable components accept a `size` prop with values: `xs`, `sm`, `md`, `lg`, `xl`. Default is usually `md`.
+Component ordinal sizes prefer numeric values. [The shared scale](../../../../dialtone-vue/common/constants/sizes.js) defines the common stops, while each component's constants and validator determine its supported subset and default. For example, [Button](../../../../dialtone-vue/components/Button/Button.vue) accepts numeric sizes with default `300`; t-shirt keys in its constants are deprecated compatibility aliases, not the preferred values for new code.
 
-Exceptions exist:
-
-- DtModal has no `size` prop. Use the `fullscreen` boolean instead (`fullscreen: true` for a fullscreen modal, `false` for the default size).
-- DtText uses numeric font-size token stops for raw font-size control when paired with `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
-
-DtText `size` must be paired with `variant`, or with legacy `kind` while older code migrates. DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.
+Do not apply one size contract to every component. Modal's fullscreen behavior, typography sizes and icon-family scales are separate APIs. For typography, inspect [Text.vue](../../../../dialtone-vue/components/Text/Text.vue) before combining `variant`, numeric `size` or legacy `kind`.
 
 ### Logical Geometry Props
 
@@ -96,7 +78,7 @@ Visual weight. Currently specific to DtButton: `clear`, `outlined`, `primary`. O
 
 ### Class Customization
 
-All components accept class override props typed as `[String, Array, Object]`:
+Components expose class customization where their API defines it. Examples include:
 
 - DtButton → `labelClass`
 - DtInput → `inputClass`
@@ -162,28 +144,9 @@ Icon slots pass sizing data via slot props:
 
 ## Icon Size Mapping
 
-Each component with icons maps its `size` prop to an icon scale via a `*_ICON_SIZES` constant. The mapping is component-specific, not global:
+Icon sizing is component-specific. Read the owning maps in [ButtonConstants.js](../../../../dialtone-vue/components/Button/ButtonConstants.js), [InputConstants.js](../../../../dialtone-vue/components/Input/InputConstants.js) or [AvatarConstants.js](../../../../dialtone-vue/components/Avatar/AvatarConstants.js) instead of reusing a global component-to-icon table. A component ordinal and an icon-size value are distinct scales.
 
-| Component size | Button icon | Input icon | Avatar icon |
-| -------------- | ----------- | ---------- | ----------- |
-| xs             | 200         | 100        | 100         |
-| sm             | 200         | 200        | 200         |
-| md             | 300         | 200        | 300         |
-| lg             | 400         | 400        | 500         |
-| xl             | 500         | 500        | 600         |
-
-Icon scale values correspond to pixel sizes defined in `packages/dialtone-icons/src/constants.js`:
-
-| Scale | Pixels |
-| ----- | ------ |
-| 100   | 12px   |
-| 200   | 14px   |
-| 300   | 18px   |
-| 400   | 20px   |
-| 500   | 24px   |
-| 600   | 32px   |
-| 700   | 38px   |
-| 800   | 48px   |
+Follow the icon slot's documented `iconSize` binding and current icon implementation for its rendering size. Do not infer pixels or another component's mapping from a matching ordinal.
 
 ## Provide/Inject for Group Components
 
@@ -237,4 +200,4 @@ Some components validate prop combinations at runtime and log warnings. There is
 - DtTooltip: warns when both `enabled` and `show` props are set
 - DtSlider: warns (dev-only `console.info`) when range mode (array `modelValue`) has no `getValueText`, and when there's no accessible name from `label`, a non-empty `label` slot, `aria-label`, or `aria-labelledby`
 
-Check each component's source or `_constants.js` for the full list of invalid combinations.
+Check each component's source, validators and `*Constants.js` file for its invalid combinations.

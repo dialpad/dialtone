@@ -13,3 +13,7 @@ Cross-cutting rules that apply to every changed file regardless of package. Alwa
 - Is the code written in a way that is easily human readable?
 - Is the code maintainable — easy to extend or change without rewriting?
 - Does complex code have a comment explaining the WHY, not the what?
+
+## Contributor reference lookup
+
+For repository authoring or maintenance questions, read the [shared Contributor tasks table](../../.agents/resources/rule-map.md#contributor-tasks), then its selected reference and owning requirements. Keep this as a route to the shared table; a Markdown link does not automatically load its contents.

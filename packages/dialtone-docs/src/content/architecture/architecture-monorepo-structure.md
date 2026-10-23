@@ -3,7 +3,7 @@ type: architecture
 category: architecture
 keywords: [monorepo, pnpm, nx, packages, apps, dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons, workspace]
 ai_summary: Overview of the Dialtone pnpm+NX monorepo structure, its 12 packages, 1 app, and how they relate to each other.
-last_updated: 2026-03-04
+last_updated: 2026-10-23
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons, dialtone-emojis, dialtone-mcp-server]
 ---
 
@@ -23,7 +23,7 @@ dialtone/
 ├── apps/            # Deployable applications
 ├── scripts/         # Shared build scripts
 ├── common/          # Shared config files across packages
-├── generator-dialtone/  # Yeoman generator for scaffolding new packages
+├── generator-dialtone/  # Legacy Yeoman generator for scaffolding Vue components
 └── .github/         # CI workflows, contributing guides
 ```
 

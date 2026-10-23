@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [branch, staging, production, alpha, beta, PR, pull-request, merge, hotfix, deploy, preview, branch-naming]
 ai_summary: Dialtone branch strategy — staging as main dev branch, PRs target staging, production auto-updated after each release.
-last_updated: 2026-03-04
+last_updated: 2026-10-23
 related_packages: []
 ---
 
@@ -14,8 +14,8 @@ Dialtone uses a `staging`-first branch model. All development flows through `sta
 ## Long-Lived Branches
 
 | Branch | Purpose |
-|--------|---------|
-| `staging` | Main development branch. All feature PRs target this branch. All releases originate here. |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `staging` | Default development base and PR target. Explicit user instructions and the actual PR target govern exceptions. |
 | `production` | Stable released branch. Only updated by the release workflow via `git merge --ff-only origin/staging`. Never committed to directly. |
 | `alpha` | Pre-release channel for early-access features. Published to npm with `alpha` dist-tag. |
 | `beta` | Pre-release channel for stabilization before production. Published to npm with `beta` dist-tag. |
@@ -25,7 +25,7 @@ All other branches are short-lived feature branches created per change and delet
 
 ## Where PRs Go
 
-**All PRs target `staging`.** Never open a PR directly to `production`, `alpha`, `beta`, or `next`.
+`staging` is the default base and PR target. Follow an explicit user instruction or the actual PR target when it differs; do not change release branches directly. The [root safeguards](../../../../../AGENTS.md) govern branch safety and user-work preservation.
 
 The flow:
 1. Create a branch off `staging`
@@ -39,7 +39,7 @@ The flow:
 
 ## Branch Naming
 
-Branches use kebab-case. No strict prefix is enforced but the convention from existing branches is:
+Use the repository's ticketed branch convention, or `NO-JIRA` only when explicitly chosen. Examples:
 
 ```
 feat/DLT-1234-short-description
@@ -48,7 +48,7 @@ docs/DLT-9012-what-is-documented
 chore/NO-JIRA-maintenance-task
 ```
 
-The JIRA ticket number in the branch name is optional but helps traceability. The branch name does not affect the release — only commit messages do.
+Branch names do not select a package release; current commit/release configuration determines that behavior. Do not infer ticket authorization from branch history.
 
 ## How Production Gets Updated
 
