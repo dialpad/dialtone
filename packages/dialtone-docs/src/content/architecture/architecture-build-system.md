@@ -257,7 +257,7 @@ The `inputs` and `outputs` fields tell NX what files to watch for cache invalida
 
 ### Step 4 — release-ci.config.cjs
 
-Required for `semantic-release` to version and publish the package correctly:
+Required when the package has a release target, so `semantic-release` can version and publish it:
 
 ```javascript
 const name = 'dialtone-{feature}';
@@ -289,7 +289,7 @@ The `tagFormat` must use the package name as prefix (e.g., `dialtone-docs/v1.0.1
 
 ### Step 5 — .lintstagedrc.cjs
 
-Required for pre-commit hooks to run linting on staged files in this package:
+Optional. The root hook runs `lint-staged`, which uses the closest configuration for each staged file. The root `.lintstagedrc.js` applies when no nearer config exists. Add a package-local `.lintstagedrc.cjs` only for package-specific rules; import the root configuration when its shared rules should also apply:
 
 ```javascript
 const baseConfig = require('../../.lintstagedrc.js');
@@ -328,8 +328,8 @@ pnpm nx run dialtone-{feature}:build
 |------|---------|----------|
 | `package.json` | Package identity, exports, dependencies | Yes |
 | `project.json` | NX targets — build, test, publish, release | Yes |
-| `release-ci.config.cjs` | Semantic-release versioning config | Yes |
-| `.lintstagedrc.cjs` | Pre-commit lint hook config | Yes |
+| `release-ci.config.cjs` | Semantic-release versioning config | For packages with a release target |
+| `.lintstagedrc.cjs` | Package-specific staged-file rules | Only for package-specific rules |
 | `vite.config.js` | Vite build config (if using Vite) | If using Vite |
 | `tsconfig.json` | TypeScript config (if using TypeScript) | If using TypeScript |
 
