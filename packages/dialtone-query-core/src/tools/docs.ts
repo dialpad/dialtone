@@ -3,7 +3,7 @@
 // ============================================================================
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
-import { keywordMatcher, normalizeKeywordText, matchesDiscoveryWord } from '../keyword-matching.js';
+import { discoveryPhraseCoverage, keywordMatcher, normalizeKeywordText, matchesDiscoveryWord } from '../keyword-matching.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponentName } from '../component-identity.js';
 import { componentDocumentation } from '../data.js';
@@ -191,7 +191,7 @@ export function searchDocumentation(
     const contextKeywords = directives.length > 0 || namedSubject ? []
       : matchInContext(record.frontmatter.keywords).filter(keyword => !wholeKeywords.includes(keyword));
     const contextTerms = new Set(contextKeywords.flatMap(keyword => normalizeKeywordText(keyword).split(' ')));
-    const contextCoverage = [...queryTokens].filter(term => [...contextTerms].some(part => matchesDiscoveryWord(term, part))).length;
+    const contextCoverage = discoveryPhraseCoverage([...queryTokens], contextKeywords);
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
     const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
     const actualCount = sectionRegexes.filter(regex => regex.test(fullBlob)).length;

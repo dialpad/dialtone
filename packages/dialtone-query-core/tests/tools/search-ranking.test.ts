@@ -163,6 +163,14 @@ describe('curated public-page discovery', () => {
     expect(searchComponents(query, components, componentDocumentation).results[0].name).toBe(expected);
   });
 
+  test('prefers one contextual phrase over separate keywords covering the same terms', () => {
+    const separate = { ...doc('guides/separate', 'Separate', 'Semantic typography.'), frontmatter: { keywords: ['font', 'strength'] } };
+    const phrase = { ...doc('guides/phrase', 'Phrase', 'Semantic typography.'), frontmatter: { keywords: ['font strength'] } };
+    for (const corpus of [[separate, phrase], [phrase, separate]]) {
+      expect(searchDocumentation('font strength for a form', corpus).results[0].details.docId).toBe(phrase.docId);
+    }
+  });
+
   test('selects a source section rather than repeating page keywords as section evidence', () => {
     const usage = { ...doc('components/text', 'Text', 'Semantic typography.'), frontmatter: { keywords: ['font', 'strength'] } };
     const strength = { ...usage, id: 'components/text#strength', headingPath: ['Variants', 'Strength'], content: 'Choose font weight using strength.' };

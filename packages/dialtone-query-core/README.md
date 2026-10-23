@@ -40,7 +40,7 @@ All search functions return `{ results: SearchResult[]; notes: string[] }`. `sea
 | `searchTokens(query, tokens, options?)` | `TokensData` | Token search with optional `{ includeHsl: boolean }` |
 | `searchUtilityClasses(query, utilityClasses)` | `UtilityClassesData` | CSS class search with automatic px/rem conversion |
 | `searchIcons(query, icons)` | `IconsData` | Icon search by name, category, and keywords |
-| `searchDocumentation(query, documentation)` | `DocumentationRecord[]` | Search reference sections; preserve exact-title, whole-query keyword and title priority. Named API subjects retain source ranking; contextual keywords help discover other pages, whose strongest source section is selected. Explicit directive identifiers retain scoped section ranking. |
+| `searchDocumentation(query, documentation)` | `DocumentationRecord[]` | Search reference sections; preserve exact-title, whole-query keyword and title priority. Named API subjects retain source ranking; contextual keywords help discover other pages, whose strongest source section is selected. Contextual coverage ties use the strongest single authored phrase. Explicit directive identifiers retain scoped section ranking. |
 
 Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` return no component results, with a note directing callers to documentation search. Use `searchDocumentation` for their contracts.
 
