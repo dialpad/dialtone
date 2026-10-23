@@ -19,6 +19,8 @@ Prefer `--format json` when processing results programmatically. Prefer `prompt`
 
 Use the project-scoped Dialtone MCP server configured in `.codex/config.toml` when CLI output is insufficient or when MCP tools are already available in the session.
 
+With a normal workspace install, this repository's configured executable runs the local MCP build. If its reported version is stale or expected tools are missing, run `pnpm nx run dialtone-mcp-server:build` from the repository root and restart the Codex session.
+
 - `search_documentation`: usage guidance, recipes, accessibility, migration notes, design principles, and how-to questions.
 - `search_components`: discover candidate components; API summaries can be incomplete.
 - `get_component`: retrieve the selected component's available API using its canonical name, for example `{ "component": "DtToggle" }`. Keywords and fuzzy candidates are not exact selections.
@@ -27,7 +29,7 @@ Use the project-scoped Dialtone MCP server configured in `.codex/config.toml` wh
 - `search_utility_classes`: CSS utility lookup.
 - `search_icons`: icon lookup.
 
-Follow returned continuation tool calls and arguments when results are incomplete. Component details can page by section; documentation uses `textOffset` and `textLimit` in Unicode code points. Missing metadata is unknown, not proof that an API is absent.
+Follow returned continuation tool calls and arguments when results are incomplete. Component details page by `offset`/`limit` within the selected `projection`; narrow requests with `projection` or `field`. An incomplete result without a continuation cannot be paged further. Documentation uses `textOffset` and `textLimit` in Unicode code points. Missing metadata is unknown, not proof that an API is absent.
 
 MCP currently uses bundled data; it does not verify the project's installed compatibility. Inspect source versions, hashes and missing-metadata notes. Documentation links are latest references, not version-matched guarantees. Verify code examples and required setup against local source.
 
