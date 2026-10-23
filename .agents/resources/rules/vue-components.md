@@ -7,7 +7,7 @@ Apply to `packages/dialtone-vue/components/**`.
 - New components use Composition API with `<script setup lang="ts">`.
 - Existing Options API components keep Options API and `compatConfig: { MODE: 3 }` unless the user explicitly asks to convert them.
 - Prop validators use `validator`, never `validate`.
-- Enum-like prop values come from the component's current constants file (for example `ButtonConstants.js`); do not inline arrays in components or tests.
+- Enum-like prop values come from the component's current constants module or an existing shared constants module (for example `ButtonConstants.js`); do not inline arrays in components or tests.
 
 ## Events, Slots, And Sizes
 

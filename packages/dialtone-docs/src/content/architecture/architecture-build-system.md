@@ -257,7 +257,7 @@ The `inputs` and `outputs` fields tell NX what files to watch for cache invalida
 
 ### Step 4 — release-ci.config.cjs
 
-Required when the package has a release target; the example below versions the package and commits release metadata:
+Required when the package has a release target. Follow the configuration paths used by that target; a package may need multiple release configs. The example below versions the package and commits release metadata:
 
 ```javascript
 const name = 'dialtone-{feature}';
@@ -328,7 +328,7 @@ pnpm nx run dialtone-{feature}:build
 |------|---------|----------|
 | `package.json` | Package identity, exports, dependencies | Yes |
 | `project.json` | NX targets — build, test, publish, release | Yes |
-| `release-ci.config.cjs` | Semantic-release versioning config | For packages with a release target |
+| `release-ci.config.cjs` at target-defined paths | Semantic-release versioning config | For packages with a release target |
 | `.lintstagedrc.cjs` | Package-specific staged-file rules | Only for package-specific rules |
 | `vite.config.js` | Vite build config (if using Vite) | If using Vite |
 | `tsconfig.json` | TypeScript config (if using TypeScript) | If using TypeScript |

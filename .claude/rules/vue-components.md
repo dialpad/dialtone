@@ -14,7 +14,7 @@ paths:
 ## Props
 
 - Use `validator` — NEVER `validate`. Vue silently ignores `validate`.
-- Import allowed values from `*Constants.js`. Never hardcode valid value arrays inline.
+- Import allowed values from the component's current constants module (`*Constants.js` or `*Constants.ts`) or an existing shared constants module. Never hardcode valid value arrays inline.
 - Add JSDoc with `@values` annotation.
 - Boolean visibility toggles: use positive polarity (`showClose`, `showHeader`, `showArrow`). Never use negative names (`hideX`, `preventX`, `skipX`).
 

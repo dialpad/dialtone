@@ -53,7 +53,7 @@ Release eligibility and channel depend on the selected branch; see the [release 
 
 ## How Production Gets Updated
 
-After the release workflow runs on `staging` and all packages have been versioned, the `update-production` job runs automatically:
+The release workflow supports manual selection of packages; it does not require every package to receive a new version. Its `update-production` job defines the staging-to-production fast-forward below. The current job reads `needs.get-branch-name.outputs.current_branch`, but its `needs` lists only `release`. GitHub exposes only [direct dependency outputs](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#needs-context), so automatic execution of this job remains unverified until that dependency is resolved:
 
 ```bash
 git checkout production
