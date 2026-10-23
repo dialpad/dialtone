@@ -1,6 +1,19 @@
  
 
 export default {
+  defaults: {
+    props: {
+      activePage: { slider: { min: 1, maxProp: 'totalPages', step: 1, showTicks: true } },
+      maxVisible: { slider: { min: 3, max: 11, step: 2, showTicks: true } },
+    },
+  },
+
+  'without page numbers': {
+    props: {
+      totalPages: { initialValue: 25 },
+      maxVisible: { initialValue: 0, slider: null },
+    },
+  },
   default: {
     props: {
       totalPages: {

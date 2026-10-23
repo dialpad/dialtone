@@ -81,4 +81,42 @@ describe('code_editor.vue test', function () {
 
     expect(wrapper.text()).not.toContain('class=""');
   });
+
+  it.each([false, true])('omits removed values from displayed and copied examples (verbose=%s)', async verbose => {
+    const wrapper = mountWrapper();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('navigator', { clipboard: { writeText } });
+    vi.useFakeTimers();
+    try {
+      await wrapper.setProps({
+        verbose,
+        info: {
+          displayName: 'DtText',
+          slots: [],
+          bindings: { get: () => [
+            { name: 'maxLines', label: 'max-lines', defaultValue: null },
+            { name: 'progress', label: 'progress', defaultValue: 1 },
+            { name: 'disabled', label: 'disabled', defaultValue: true },
+          ] },
+        },
+        options: {
+          slots: {},
+          bindings: { get: () => ({ maxLines: undefined, progress: 0, disabled: false }) },
+        },
+      });
+      expect(wrapper.text()).not.toContain('max-lines');
+      expect(wrapper.text()).toContain(':progress="0"');
+      expect(wrapper.text()).toContain(':disabled="false"');
+      await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
+      const copied = writeText.mock.calls[0][0];
+      expect(copied).not.toContain('max-lines');
+      expect(copied).toContain(':progress="0"');
+      expect(copied).toContain(':disabled="false"');
+      await vi.runAllTimersAsync();
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    }
+  });
 });

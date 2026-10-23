@@ -3,11 +3,13 @@
     <div
       v-show="isOpen"
       class="d-emoji-picker__skin-list"
+      data-qa="dt-emoji-picker-skin-list"
     >
       <button
         v-for="(skin, index) in skinList"
         :ref="el => { if (el) setSkinsRef(el) }"
         :key="skin.name"
+        data-qa="dt-emoji-picker-skin-option"
         :class="{
           'selected': skinSelected.skinCode === skin.skinCode,
         }"
@@ -32,6 +34,7 @@
         <template #anchor>
           <button
             ref="skinSelectorRef"
+            data-qa="dt-emoji-picker-skin-toggle"
             :aria-label="skinSelectorButtonTooltipLabel"
             tabindex="-1"
             @click="toggleSkinList"
@@ -43,6 +46,7 @@
               :aria-label="skinSelected.name"
               :title="skinSelected.name"
               :src="`${CDN_URL + skinSelected.unicode_output}.png`"
+              data-qa="dt-emoji-picker-skin-image"
             >
           </button>
         </template>

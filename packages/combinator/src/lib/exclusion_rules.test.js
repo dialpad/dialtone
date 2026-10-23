@@ -7,6 +7,7 @@ import variantsButton from '@/src/variants/variants_button';
 import variantsItemLayout from '@/src/variants/variants_item_layout';
 import variantsLink from '@/src/variants/variants_link';
 import variantsPopover from '@/src/variants/variants_popover';
+import variantsSlider from '@/src/variants/variants_slider';
 import variantsSplitButton from '@/src/variants/variants_split_button';
 import variantsTabGroup from '@/src/variants/variants_tab_group';
 import variantsText from '@/src/variants/variants_text';
@@ -167,6 +168,15 @@ describe('exclusion_rules', function () {
   });
 
   describe('conditional prop exclusions', function () {
+    it.each([
+      ['always', false],
+      ['tooltip', true],
+      ['never', true],
+    ])('should disable DtSlider readoutClass for readout=%s: %s', function (readout, disabled) {
+      expect(shouldDisable('readoutClass', 'props', variantsSlider.exclusions, { readout })).toBe(disabled);
+      expect(shouldDisable('bodyClass', 'props', variantsSlider.exclusions, { readout })).toBe(false);
+    });
+
     it('should keep DtBox inset props inactive unless position is set and non-static', function () {
       expect.hasAssertions();
       INSET_PROPS.forEach(prop => {

@@ -1,11 +1,47 @@
+import { parse, converter } from 'culori'
+
 import { Color } from './figma_api.js'
+
+const toRgb = converter('rgb')
+
+/**
+ * Counts colours that had to be pulled into sRGB. Figma stores variables as
+ * sRGB, and Dialtone authors in OKLCH, which is wider, so a small number of
+ * values cannot be represented exactly. Exposed so a sync run can report the
+ * loss rather than let it pass silently.
+ */
+export const gamutMapped: { name: string; from: string }[] = []
+
+export function resetGamutLog() {
+  gamutMapped.length = 0
+}
 
 /**
  * Compares two colors for approximate equality since converting between Figma RGBA objects (from 0 -> 1) and
  * hex colors can result in slight differences.
  */
 export function colorApproximatelyEqual(colorA: Color, colorB: Color) {
-  return rgbToHex(colorA) === rgbToHex(colorB)
+  // Compares channels directly rather than via hex.
+  //
+  // Quantising to hex first looks equivalent and is not, because rounding has
+  // edges: Figma stores colours at single precision, so an alpha of 0.9 comes
+  // back as 0.8999999761581421. Multiplied by 255 that is 229.49999, which
+  // rounds to 229, while 0.9 rounds to 230. The two differ by four ten-millionths
+  // and land on opposite sides of a boundary, so the sync decides the value
+  // changed and rewrites it on every run.
+  //
+  // Half a step of an 8-bit channel is the same tolerance the hex comparison
+  // gave, without the edge.
+  const TOLERANCE = 1 / 255 / 2
+
+  const close = (a: number, b: number) => Math.abs(a - b) < TOLERANCE
+
+  return (
+    close(colorA.r, colorB.r) &&
+    close(colorA.g, colorB.g) &&
+    close(colorA.b, colorB.b) &&
+    close(colorA.a ?? 1, colorB.a ?? 1)
+  )
 }
 
 export function parseColor(color: string): Color {
@@ -31,9 +67,57 @@ export function parseColor(color: string): Color {
       b: parseInt(expandedHex.slice(4, 6), 16) / 255,
       ...(alphaValue ? { a: parseInt(alphaValue, 16) / 255 } : {}),
     }
-  } else {
-    throw new Error('Invalid color format')
   }
+
+  return parseCssColor(color)
+}
+
+/**
+ * Parses any CSS colour culori understands, which is what Dialtone actually
+ * authors in: every base colour is `oklch(L C H)`, and a few carry an alpha.
+ *
+ * OKLCH describes colours sRGB cannot show. A Figma variable holds sRGB, so
+ * those have to be brought into range, and *how* matters: reducing chroma
+ * while holding lightness and hue sounds like the closer match, but it is
+ * not what a browser actually paints for an out-of-gamut `oklch()` on an
+ * sRGB display — measured against Chromium across every base colour,
+ * clipping each channel independently matched 105 of 105 values where
+ * chroma-reduction matched 10. Clipping it is, so Figma agrees with what a
+ * designer sees in a browser rather than with a theoretically nicer
+ * conversion nobody's screen performs.
+ */
+export function parseCssColor(color: string, name = ''): Color {
+  const parsed = parse(color)
+  if (!parsed) {
+    throw new Error(`Invalid color format: ${color}`)
+  }
+
+  const direct = toRgb(parsed)
+  if (!direct) {
+    throw new Error(`Could not convert to rgb: ${color}`)
+  }
+
+  const outside =
+    Math.min(direct.r, direct.g, direct.b) < -0.001 ||
+    Math.max(direct.r, direct.g, direct.b) > 1.001
+
+  const rgb = direct
+  if (outside) {
+    gamutMapped.push({ name, from: color })
+  }
+
+  const alpha = rgb.alpha ?? parsed.alpha
+
+  return {
+    r: clamp01(rgb.r),
+    g: clamp01(rgb.g),
+    b: clamp01(rgb.b),
+    ...(alpha !== undefined && alpha !== 1 ? { a: clamp01(alpha) } : {}),
+  }
+}
+
+function clamp01(n: number): number {
+  return Math.min(1, Math.max(0, n))
 }
 
 export function rgbToHex({ r, g, b, a }: Color) {

@@ -139,6 +139,14 @@ export interface DocumentationRecord {
   content: string;
   frontmatter: DocumentationFrontmatter;
   filePath: string;
+  example?: {
+    source: { id: string; filePath: string; headingPath: string[]; hash: string; package: string; version: string };
+    components: ComponentIdentity[];
+    directives: string[];
+    profile: { id: string; dependencies: Record<string, string> };
+    validation: { payloadHash: string; consumerBuild: string; api?: string; [key: string]: unknown };
+    manualReview: string;
+  };
 }
 
 export interface SearchPage {

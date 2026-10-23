@@ -1,13 +1,22 @@
 <template>
-  <dl :class="['d-description-list', getDirectionClass, getGapClass]">
+  <dl
+    :class="['d-description-list', getDirectionClass, getGapClass]"
+    data-qa="dt-description-list"
+  >
     <template
       v-for="(item, index) in items"
       :key="`${index}-${item.term}`"
     >
-      <dt :class="dtClass">
+      <dt
+        :class="dtClass"
+        data-qa="dt-description-list-term"
+      >
         {{ item.term }}
       </dt>
-      <dd :class="ddClass">
+      <dd
+        :class="ddClass"
+        data-qa="dt-description-list-description"
+      >
         {{ item.description }}
       </dd>
     </template>

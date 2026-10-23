@@ -19,6 +19,24 @@ test('failed project selection keeps bundled discovery and honest exact/no-match
   assert.equal(unknown.match, 'no-match');
   assert.equal(unknown.continuation.tool, 'search_components');
 });
+test('example discovery follows subjects/source sections and unknown IDs retain recovery', () => {
+  const context = resolveProjectData();
+  for (const query of ['stack', 'layout', 'flex row gap', 'link']) {
+    const text = module.executeQueryTool('search_components', { query }, context).content[0].text;
+    assert.doesNotMatch(text, /Source examples/);
+  }
+  for (const query of ['button example', 'button with a tooltip', 'tooltip on a disabled button', 'complete button example with setup', 'I need a complete working Vue 3 example of a disabled Dialtone button that shows a tooltip on hover']) {
+    const text = module.executeQueryTool('search_components', { query }, context).content[0].text;
+    assert.match(text, /examples\/button-/);
+  }
+  const docs = module.executeQueryTool('search_documentation', { query: 'how do I show a tooltip on a disabled button' }, context).content[0].text;
+  assert.match(docs, /examples\/button-disabled-tooltip/);
+  const missing = module.executeQueryTool('get_documentation', { id: 'examples/button-defualt' }, context).structuredContent;
+  assert.equal(missing.match, 'no-match');
+  assert.deepEqual(missing.items, []);
+  assert.ok(missing.notes.some(note => note.includes('examples/button-default')));
+  assert.equal(missing.continuation.tool, 'search_documentation');
+});
 async function fixture(run) {
   const server = new McpServer(
     { name: 'test-dialtone', version: '1.5.0' },
@@ -320,6 +338,8 @@ test('all five searches retain readable domain facts, notes and provenance witho
           text.includes(`import { DtButton } from '@dialpad/dialtone-vue'`),
         );
         assert.ok(text.includes('get_component'));
+        assert.ok(text.includes('- examples/button-default: `get_documentation({"id":"examples/button-default"})`'));
+        assert.ok(!text.includes('dialtone docs --id'));
         assert.match(text, /sample|preview/i);
       } else if (domain === 'icons') {
         assert.ok(text.includes('**voicemail**'));

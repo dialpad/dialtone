@@ -49,6 +49,16 @@ export function getUniqueString (prefix = DEFAULT_PREFIX) {
 }
 
 /**
+ * Whether a binding value is left out of generated code: unset or NaN.
+ *
+ * @param {*} value - The binding value.
+ * @returns {boolean} If the value is omitted.
+ */
+export function isOmittedBindingValue (value) {
+  return value == null || Number.isNaN(value);
+}
+
+/**
  * Gets specific type name from a value, intended to be used with value from a 'member'.
  * Gives some more specific type names such as 'array' etc...
  *
@@ -130,10 +140,12 @@ export function isClassProp (member) {
 const SLOT_CLASS_PROP_DEPENDENCIES = new Map([
   ['blockEndIconClass', 'blockEndIcon'],
   ['blockStartIconClass', 'blockStartIcon'],
+  ['endClass', 'end'],
   ['endIconClass', 'endIcon'],
   ['iconClass', 'icon'],
   ['leadingClass', 'leading'],
   ['markerClass', 'marker'],
+  ['startClass', 'start'],
   ['startIconClass', 'startIcon'],
   ['trailingClass', 'trailing'],
 ]);

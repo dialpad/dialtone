@@ -169,3 +169,7 @@ MCP servers communicate over stdout — any stray `console.log` will break the J
 - `console.log` anywhere in `src/` — breaks MCP transport.
 - Omitting `.js` extensions in TS imports — breaks ESM build output.
 - Exporting helper functions from tool files just to test them — refactor or test through the public surface.
+
+## Source example retrieval
+
+Associate example discovery with authored component-page subjects and related directive contracts, never every imported layout component. Keep complete payloads out of ordinary rankings; append bounded exact-ID hints and preserve existing search facts. Reuse source-section IDs and existing detail routes for full lists/recovery. Keep assembly imports and source/profile/manual-evidence qualification separate from discovery. See `packages/dialtone-mcp-server/RETRIEVAL.md` for the transport contract.

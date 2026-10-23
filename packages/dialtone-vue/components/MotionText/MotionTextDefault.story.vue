@@ -4,7 +4,9 @@
     align="center"
     class="d-hmn-400 d-p-300"
   >
+    <!-- Keyed on the animation settings so changing a control replays the animation -->
     <dt-motion-text
+      :key="replayKey"
       ref="motionText"
       :text="text"
       :animation-mode="animationMode"
@@ -13,13 +15,15 @@
       :loop="loop"
       :respects-reduced-motion="respectsReducedMotion"
       :screen-reader-text="screenReaderText"
-      class="d-headline--lg"
+      class="d-headline--xl"
       @start="onStart"
       @complete="onComplete"
       @progress="onProgress"
       @pause="onPause"
       @resume="onResume"
-    />
+    >
+      {{ $props.default }}
+    </dt-motion-text>
   </dt-stack>
 </template>
 
@@ -37,7 +41,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: 'Welcome to Dialtone Motion Text',
+      default: 'The AI platform for customer experience',
     },
 
     animationMode: {
@@ -46,8 +50,8 @@ export default {
     },
 
     speed: {
-      type: String,
-      default: 'md',
+      type: [String, Number],
+      default: '300',
     },
 
     autoStart: {
@@ -66,6 +70,11 @@ export default {
     },
 
     screenReaderText: {
+      type: String,
+      default: '',
+    },
+
+    default: {
       type: String,
       default: '',
     },
@@ -93,6 +102,12 @@ export default {
     onResume: {
       type: Function,
       default: () => {},
+    },
+  },
+
+  computed: {
+    replayKey () {
+      return [this.text, this.$props.default, this.animationMode, this.speed, this.loop].join('|');
     },
   },
 };

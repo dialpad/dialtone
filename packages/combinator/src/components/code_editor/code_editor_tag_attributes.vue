@@ -39,6 +39,7 @@ import DtcCodeEditorIndent from './code_editor_indent.vue';
 
 import { computed } from 'vue';
 import { stringifyDocValue } from '@/src/lib/parse';
+import { isOmittedBindingValue } from '@/src/lib/utils';
 
 const props = defineProps({
   /**
@@ -98,7 +99,7 @@ const bindingMap = computed(() => {
  */
 function isMemberVisible (name, member) {
   if (props.disabledMembers.has(name)) { return false; }
-  if (member.value === null || (typeof member.value === 'number' && isNaN(member.value))) { return false; }
+  if (isOmittedBindingValue(member.value)) { return false; }
   if (props.verbose) { return true; }
 
   const defaultString = JSON.stringify(member.defaultValue);

@@ -1,5 +1,8 @@
 <template>
-  <div class="d-emoji-picker__tabset">
+  <div
+    class="d-emoji-picker__tabset"
+    data-qa="dt-emoji-picker-tabset"
+  >
     <dt-tab-group
       :selected="selectedTab"
       :size="200"

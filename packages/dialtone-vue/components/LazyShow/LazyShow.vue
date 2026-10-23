@@ -7,6 +7,7 @@
   >
     <div
       v-show="show"
+      data-qa="dt-lazy-show"
       v-bind="$attrs"
     >
       <!-- @slot Slot for main content -->

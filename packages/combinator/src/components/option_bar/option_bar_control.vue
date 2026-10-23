@@ -79,6 +79,7 @@
         v-model="rawText"
         type="textarea"
         :size="100"
+        :disabled="locked || disabled"
         spellcheck="false"
         class="d-mbs-75"
       />
@@ -91,7 +92,7 @@ import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
 import { DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref, watch } from 'vue';
-import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
+import { deserializeControlValue, getControlByValue, serializeControlValue } from '@/src/lib/control';
 import { parseDocValue } from '@/src/lib/parse';
 import JSON5 from 'json5-with-undefined';
 
@@ -171,7 +172,7 @@ const props = defineProps({
    */
   args: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
 });
 
@@ -245,34 +246,89 @@ function updateValue (e) {
 
 const showRawToggle = computed(() => {
   const name = props.controlData.component?.name;
-  return name === 'DtcControlArray' || name === 'DtcControlObject';
+  if (name === 'DtcControlArray' || name === 'DtcControlObject') return true;
+  // Also show for props that accept array/object in addition to other types (e.g. Number | Number[]).
+  // Excludes anything that also accepts 'string' — every *Class prop is typed
+  // string|array|object, so without this exclusion the toggle would show up
+  // on virtually every class-override control in the library, not just the
+  // genuinely array/object-shaped props (like Slider's modelValue) it's meant for.
+  return !props.validControls.includes('string') && props.validControls.some(c => c === 'array' || c === 'object');
 });
 
 const rawMode = ref(false);
 const rawText = ref('');
 let rawEditInProgress = false;
+// Set right before rawText is assigned programmatically (entering raw mode,
+// or the props.value watcher below reformatting it) — the rawText watcher
+// checks and clears it to skip emitting for that one seeded change, so
+// opening/reformatting raw mode never re-emits the value it just displayed.
+let suppressNextEmit = false;
 
 function formatRawValue (val) {
   return JSON5.stringify(val, null, 2);
 }
 
+// Only set suppressNextEmit when the seeded text actually differs from what
+// rawText already holds — Vue's watch() only invokes its callback on a real
+// change, so seeding with an UNCHANGED value (e.g. reopening raw mode
+// without having edited anything) would otherwise set the flag with no
+// watcher run left to consume and clear it. That stale `true` then silently
+// discarded the user's next genuine edit — the callback saw a leftover flag
+// from a seed that never actually reached it.
+function seedRawText (formatted) {
+  if (formatted !== rawText.value) suppressNextEmit = true;
+  rawText.value = formatted;
+}
+
 watch(() => props.value, (val) => {
   if (rawMode.value && !rawEditInProgress) {
-    rawText.value = formatRawValue(val);
+    seedRawText(formatRawValue(val));
   }
 }, { deep: true });
 
 function toggleRawMode () {
   rawMode.value = !rawMode.value;
   if (rawMode.value) {
-    rawText.value = formatRawValue(props.value);
+    seedRawText(formatRawValue(props.value));
   }
 }
 
 watch(rawText, (val) => {
+  if (suppressNextEmit) {
+    suppressNextEmit = false;
+    return;
+  }
+  // The textarea is disabled via :disabled above, but that alone doesn't stop
+  // rawText from being reassigned by other means (e.g. a test driving
+  // setValue() directly, bypassing the disabled attribute) — belt-and-braces
+  // so a locked/disabled member can never emit a RAW-mode edit either way.
+  if (props.locked || props.disabled) return;
   try {
     rawEditInProgress = true;
     const parsed = parseDocValue(val);
+    // A control only accepts certain value shapes (validControls) — RAW mode
+    // lets a consumer type arbitrary JSON5, so without this check a string
+    // typed for a number|array control (e.g. Slider's modelValue) would
+    // reach the component unchanged and break it. 'null' is normally allowed
+    // regardless of validControls — it's how a control's value gets cleared —
+    // except when the member isn't clearable: option_bar_member_group.vue
+    // already computes clearable: false both for required members AND for
+    // optional members with a meaningful non-nullish default or an explicit
+    // clearable: false override (see its own clearable computation), and
+    // threads that through as args.clearable. RAW mode typing 'null' directly
+    // would otherwise bypass either restriction.
+    const parsedControl = getControlByValue(parsed);
+    if (parsedControl === 'null') {
+      if (props.required || props.args.clearable === false) return;
+    } else {
+      if (!props.validControls.includes(parsedControl)) return;
+      // validControls only checks the value's coarse shape (e.g. 'array') — a shape
+      // can still be internally invalid (e.g. Slider's modelValue accepts an array
+      // only when it has exactly 2 elements). Reuse the live component's own prop
+      // validator when one was threaded through via args, so RAW mode can't emit
+      // a value the component itself would reject.
+      if (props.args.validator && !props.args.validator(parsed)) return;
+    }
     emit(VALUE_UPDATE_EVENT, parsed);
   } catch {
     // Invalid JSON5 — don't emit until syntax is valid

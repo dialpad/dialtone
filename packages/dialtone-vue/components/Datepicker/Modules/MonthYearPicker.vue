@@ -64,6 +64,7 @@
     <div
       id="calendar-heading"
       class="d-datepicker__month-year-title"
+      data-qa="dt-datepicker-heading"
     >
       {{ formattedMonth(selectMonth) }}
 
