@@ -5,10 +5,19 @@ export default {
     props: {
       size: { tokenCategory: 'component-size:avatar' },
       family: { tokenCategory: 'color:d-avatar[data-avatar-family]:backgroundColor' },
+      variant: { slider: { min: 0, max: 9, step: 1 } },
     },
   },
 
   exclusions: [
+    {
+      when: { imageSrc: hasValue },
+      disable: { props: ['variant'] },
+    },
+    {
+      whenSlots: { icon: hasValue },
+      disable: { props: ['variant'] },
+    },
     {
       when: { iconOnly: true },
       hide: {

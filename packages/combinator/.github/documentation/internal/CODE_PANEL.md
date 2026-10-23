@@ -37,14 +37,15 @@ The editor shows:
 
 ## Visible attributes
 
-`code_editor_tag_attributes.vue` hides bindings when:
+Displayed and copied bindings are omitted when:
 
-- the value is `null`;
+- the value is `null` or `undefined`;
 - the value is `NaN`;
 - the value matches the member default and verbose mode is off;
 - the member name is in `disabledMembers`.
 
-Verbose mode shows default-value bindings but still respects disabled members.
+Verbose mode shows default-value bindings but still omits `null`, `undefined`,
+and `NaN` values and disabled members.
 
 ## Slots
 

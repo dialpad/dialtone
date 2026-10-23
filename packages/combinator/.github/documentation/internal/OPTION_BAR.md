@@ -111,3 +111,14 @@ args include:
 Member value updates emit `update:member` from `DtcOptionBarMemberGroup`, then
 `DtcOptionBar` writes into the correct `options` group through the root
 `update:options` function.
+
+## Slider property controls
+
+`getControlByMemberType` selects `slider` for a scalar number with validated
+per-property `slider` metadata; absent or malformed settings retain existing
+controls. The selected control remains stable when a parent value is invalid.
+The member group forwards `sliderConfig` and the target validator through the
+wrapper's declared arguments. Existing options, preview, generated examples,
+presets, Reset, labels, and disabled/locked behavior use the same paths. See
+[CONTROLS](CONTROLS.md#explicit-slider-opt-in) for eligibility and editor
+behavior.

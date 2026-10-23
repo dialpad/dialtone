@@ -33,7 +33,7 @@ export default {
       },
       align: { searchKeywords: ['text align'] },
       truncate: { searchKeywords: ['ellipsis', 'single line'] },
-      maxLines: { searchKeywords: ['line clamp'] },
+      maxLines: { searchKeywords: ['line clamp'], slider: { min: 1, max: 10, step: 1 } },
       strength: { searchKeywords: ['font weight'] },
       family: { searchKeywords: ['font family'] },
     },
@@ -162,7 +162,7 @@ export default {
         initialValue: 'body-md',
       },
       maxLines: {
-        initialValue: '3',
+        initialValue: 3,
       },
     },
   },

@@ -107,11 +107,23 @@ Do not write exclusions for simple parent-off, child-disabled cases. The Combina
 
 ## Control type
 
-Control type is inferred from the prop type and values by
-`packages/combinator/src/lib/control.js`; you do not set it in the variant file.
-To change which values are selectable, edit the component's prop constants and
-JSDoc. See `packages/combinator/.github/documentation/internal/CONTROLS.md` for
-the inference rules.
+Control type is normally inferred from the prop type and values by
+`packages/combinator/src/lib/control.js`. To change selectable values, edit the
+component's prop constants and JSDoc. The narrow slider exception follows.
+
+## Explicit slider opt-in
+
+For a property suited to exploration along a numeric scale, add editor metadata:
+
+```js
+progress: { slider: { min: 0, max: 100, step: 1, suffix: '%' } },
+```
+
+Numeric type or choice count alone never opts in; keep segmented controls for
+small choice sets and selection controls for categorical values. See
+`packages/combinator/.github/documentation/internal/CONTROLS.md#explicit-slider-opt-in`
+for eligibility rules and editor behavior. Explicit scalar numeric enums must
+cover the complete configured grid.
 
 ## Logical naming
 
