@@ -1,0 +1,25 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  s_c53fc7e8528985::t_5643c7bc58460f 256,332,341-346
+  s_c53fc7e8528985::t_b74350f718612b 52,66-67,90,92,171-186,268,293-294,298-300,302
+  s_c53fc7e8528985::t_5a0bd3cf8d52fa 65,91,187-200,269-271,295-297,301
+  s_c53fc7e8528985::t_88f66e81512623 303
+  s_c53fc7e8528985::t_e99d4c097ebdd5 330-331
+  s_c53fc7e8528985::t_356d4f4dae8953 333-335,338-340
+  s_c53fc7e8528985::t_c81d62577eaa39 347
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "98e82e8da0561dacb80ef48d0004e0406d9bd960",
+  "prompts": {},
+  "sessions": {
+    "s_c53fc7e8528985": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a05e6f-6ef5-7743-adce-1046368a8659",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
