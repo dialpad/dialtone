@@ -1,0 +1,24 @@
+packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md
+  s_355402be618789::t_4b10d1e129c84a 45
+packages/dialtone-docs/src/content/workflows/workflow-figma-sync.md
+  s_355402be618789::t_024ef746e590d9 46
+  s_355402be618789::t_8469f13340417e 107
+packages/dialtone-tokens/sync-scripts/build_variables.ts
+  s_355402be618789::t_88a7c07925ed21 172-187,203
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ca64b9557943eb5d7ee87860a50f9be579cecf53",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

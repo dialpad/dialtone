@@ -1,0 +1,22 @@
+apps/dialtone-documentation/project.json
+  s_35758a979f0a53::t_6e19f8abc8f8fb 20,31,53
+  s_35758a979f0a53::t_1c2be0cd999696 21-27
+apps/dialtone-documentation/scripts/generate-data.mjs
+  s_35758a979f0a53::t_8d6bfc4a7aa744 11,31,36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "0ad4abad2a651129187d214ac70b5e4cbf3b32ca",
+  "prompts": {},
+  "sessions": {
+    "s_35758a979f0a53": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e95815f4-bd6d-4938-b966-268ab186f0b7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
