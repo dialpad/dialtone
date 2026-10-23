@@ -8,6 +8,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
+      - 'packages/figma-styles-sync/**'
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
@@ -40,6 +41,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
+      - 'packages/figma-styles-sync/**'
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
@@ -80,6 +82,7 @@ jobs:
     outputs:
       vue: ${{ steps.filter.outputs.vue }}
       tokens: ${{ steps.filter.outputs.tokens }}
+      figma_styles_sync: ${{ steps.filter.outputs.figma_styles_sync }}
       combinator: ${{ steps.filter.outputs.combinator }}
       cli: ${{ steps.filter.outputs.cli }}
       lint_plugins: ${{ steps.filter.outputs.lint_plugins }}
@@ -92,6 +95,12 @@ jobs:
             vue:
               - 'packages/dialtone-vue/**'
             tokens:
+              - 'packages/dialtone-tokens/**'
+            # Imports dialtone-tokens' sync-scripts and reads its token data
+            # directly across the package boundary, so either side changing
+            # can break it — not just sync-scripts/**.
+            figma_styles_sync:
+              - 'packages/figma-styles-sync/**'
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
@@ -162,6 +171,28 @@ jobs:
 
       - name: Run dialtone-tokens tests
         run: pnpm nx run dialtone-tokens:test
+
+  test-figma-styles-sync:
+    needs: changes
+    if: needs.changes.outputs.figma_styles_sync == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Lint figma-styles-sync
+        run: pnpm nx run figma-styles-sync:lint
+
+      - name: Typecheck figma-styles-sync
+        run: pnpm nx run figma-styles-sync:typecheck
+
+      - name: Run figma-styles-sync tests
+        run: pnpm nx run figma-styles-sync:test
 
   test-combinator:
     needs: changes
