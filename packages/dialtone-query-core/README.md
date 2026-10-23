@@ -35,19 +35,19 @@ const iconResults = searchIcons('notification', icons);
 All search functions return `{ results: SearchResult[]; notes: string[] }`. `searchComponents` also returns `exactMatch: boolean` and `warning: string | null`, the deprecation or discouragement note for the component the query names (also included in `notes`).
 
 | Function | Data Parameter | Description |
-|----------|---------------|-------------|
-| `searchComponents(query, components, catalog?)` | `Component[]`, optional `ComponentDocCatalog` | Priority search by name, curated page keywords (when a catalog is passed), description, props, events and slots. An exact name match comes first. Keywords reach only public API components present in `components`. |
+| ---------- | --------------- | ------------- |
+| `searchComponents(query, components, catalog?, options?)` | `Component[]`, optional `ComponentDocCatalog` | Complete name/keyword matches lead; complete description, prop, event and slot matches precede partial contextual candidates. Exact-name candidates are preserved. Within each discovery tier, one complete phrase determines coverage; regular plurals are discovery only. `{ includePartialContext: false }` keeps complete matches for broad CLI value ordering. Text notes identify retained evidence. Keywords require a catalog and reach only public API components present in `components`. |
 | `searchTokens(query, tokens, options?)` | `TokensData` | Token search with optional `{ includeHsl: boolean }` |
 | `searchUtilityClasses(query, utilityClasses)` | `UtilityClassesData` | CSS class search with automatic px/rem conversion |
 | `searchIcons(query, icons)` | `IconsData` | Icon search by name, category, and keywords |
-| `searchDocumentation(query, documentation)` | `DocumentationRecord[]` | Search reference sections; exact page titles, then curated page keywords, rank first; explicit directive identifiers scope results to named directives and component comparisons |
+| `searchDocumentation(query, documentation)` | `DocumentationRecord[]` | Search reference sections; preserve exact-title, whole-query keyword and title priority. Named API subjects retain source ranking; contextual keywords help discover other pages, whose strongest source section is selected. Contextual coverage ties use the strongest single authored phrase. Explicit directive identifiers retain scoped section ranking. |
 
 Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` return no component results, with a note directing callers to documentation search. Use `searchDocumentation` for their contracts.
 
 ### Format Functions
 
 | Function | Description |
-|----------|-------------|
+| ---------- | ------------- |
 | `formatResults(results, query, page?: SearchPage)` | Format utility class results as markdown |
 | `formatTokenResults(results, query, page?: SearchPage)` | Format token results as markdown |
 | `formatComponentResults(results, query, page?: SearchPage)` | Format component results as markdown |
@@ -81,7 +81,7 @@ These functions select source records; they do not resolve a consuming project's
 Pre-loaded design system data, bundled at build time:
 
 | Export | Type | Source |
-|--------|------|--------|
+| -------- | ------ | -------- |
 | `utilityClasses` | `UtilityClassesData` | `@dialpad/dialtone-css` |
 | `tokens` | `TokensData` | `@dialpad/dialtone-css` |
 | `components` | `Component[]` | `@dialpad/dialtone-vue` |
@@ -95,7 +95,7 @@ Bundled provenance identifies the data supplied to the adapters. It does not est
 ### Utilities
 
 | Export | Description |
-|--------|-------------|
+| -------- | ------------- |
 | `applySmartFilter(results, data)` | Remove deprecated items, swap discouraged with alternatives |
 | `buildCompoundPropertiesSet(data)` | Build compound CSS property index for query parsing |
 | `extractKeywords(query, compoundProperties)` | Parse query into keywords with compound property detection |
