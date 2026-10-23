@@ -126,15 +126,15 @@ update:invalid      — validation state changed (DtInput)
 
 ## Slot Conventions
 
-| Slot name                | Used by               | Purpose                 |
-| ------------------------ | --------------------- | ----------------------- |
-| `default`                | All components        | Primary content         |
-| `icon`                   | Button, Badge, Avatar | Single icon placement   |
-| `leftIcon` / `rightIcon` | Input                 | Directional icon slots  |
-| `header` / `footer`      | Modal                 | Section slots           |
-| `banner`                 | Modal                 | Top banner area         |
-| `anchor`                 | Tooltip, Popover      | Trigger element         |
-| `description`            | Input, Checkbox       | Helper/description text |
+| Slot name                | Used by                   | Purpose                 |
+| ------------------------ | ------------------------- | ----------------------- |
+| `default`                | Components that expose it | Primary content         |
+| `icon`                   | Button, Badge, Avatar     | Single icon placement   |
+| `leftIcon` / `rightIcon` | Input                     | Directional icon slots  |
+| `header` / `footer`      | Modal                     | Section slots           |
+| `banner`                 | Modal                     | Top banner area         |
+| `anchor`                 | Tooltip, Popover          | Trigger element         |
+| `description`            | Input, Checkbox           | Helper/description text |
 
 Icon slots pass sizing data via slot props:
 
@@ -200,4 +200,4 @@ Some components validate prop combinations at runtime and log warnings. There is
 - DtTooltip: warns when both `enabled` and `show` props are set
 - DtSlider: warns (dev-only `console.info`) when range mode (array `modelValue`) has no `getValueText`, and when there's no accessible name from `label`, a non-empty `label` slot, `aria-label`, or `aria-labelledby`
 
-Check each component's source, validators and `*Constants.js` file for its invalid combinations.
+Check each component's source and validators for invalid combinations; inspect its constants file when present.
