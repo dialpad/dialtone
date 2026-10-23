@@ -214,6 +214,22 @@ Directive documentation includes source code snippets and registration guidance.
 
 The five search tools return readable Markdown only, with bundled package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
 
+### Retrieve a selected example
+
+Use the existing exact-ID tool for complete source-derived examples:
+
+```json
+{"id":"examples/button-default"}
+```
+
+Pass this object to `get_documentation`; `examples/button-disabled-tooltip` retrieves the existing disabled Button Tooltip pattern. For a longer request, use `search_documentation`, for example `{"query":"button with a tooltip"}`. Matching source sections supply example IDs and fetch calls. Component search also supplies hints for the requested subject; assembly imports alone do not make an example relevant. Discovery shows at most three IDs and the total; the matching source or component detail exposes its full `exampleIds` list. Complete example records stay out of ordinary search rankings.
+
+The record contains all five application files, dependency pins and setup instructions. Follow every `textOffset` continuation and concatenate content in order before copying it; a continued fragment is not a runnable application. Unknown example IDs retain `no-match`, list available IDs and offer documentation-search recovery.
+
+The two existing Button documentation examples use the tested `dt10-pinned` profile (umbrella 10.5.1, icons 5.2.0, Vue 3.5.18); other installations remain unverified. Source package/version, section and hash remain separate. Source or assembled-file changes invalidate recorded validation until rechecked. Read the delivered state/event responsibilities and manual-review status. Consumers must prevent disabled actions in their handlers and verify interaction/accessibility in their own application; a successful build establishes compilation only. These display examples provide no application state or action handlers. Check the record's browser, keyboard and screen-reader evidence separately.
+
+Example generation runs in `dialtone-docs:build`; query-core and adapter builds bundle that output into packed packages. Documentation deployment and source merges do not update an installed server: the existing release selection, publication and package-update path still applies. Packed candidates are separate from published packages and verified consumer delivery.
+
 ### Icons
 
 **Tool:** `search_icons`

@@ -6,6 +6,7 @@ import type { DocumentationRecord, SearchResult } from '../types.js';
 import { keywordMatcher } from '../keyword-matching.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponentName } from '../component-identity.js';
+import { componentDocumentation } from '../data.js';
 
 const CONTENT_EXCERPT_MAX = 500;
 const DIRECTIVE_PREFIX = 'directives/';
@@ -164,6 +165,7 @@ export function searchDocumentation(
   const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean; exactTitle: boolean; keywordMatch: boolean }> = [];
 
   for (const record of data) {
+    if (record.example) continue;
     const isDirective = record.docId.startsWith(DIRECTIVE_PREFIX);
     const selectedDirective = isDirective && directives.includes(record.docId.slice(DIRECTIVE_PREFIX.length).toLowerCase());
     if (directives.length > 0 && isDirective && !selectedDirective) continue;
@@ -294,4 +296,22 @@ export function getDocumentationDetail(args: { id: string; textOffset?: number; 
     contentCounts: { total: points.length, returned: selected.length, offset: textOffset },
     next: hasMore ? { id: record.id, textOffset: textOffset + selected.length, textLimit } : null,
   };
+}
+
+/** Example subjects/source sections are discovery associations; imports are assembly only. */
+export function getDocumentationExampleIds(subject: string, data: DocumentationRecord[]): string[] {
+  const examples = data.filter(record => record.example);
+  const exact = examples.filter(record => record.example!.source.id === subject);
+  if (exact.length) return exact.map(record => record.id);
+  const source = data.find(record => record.id === subject);
+  const key = normalizeComponentName(source
+    ? source.docId.startsWith(DIRECTIVE_PREFIX) ? source.docId.slice(DIRECTIVE_PREFIX.length) : source.docTitle
+    : subject);
+  const pages = new Set(componentDocumentation.pages.filter(page => page.components.some(reference =>
+    ['api', 'companion'].includes(reference.relation) && normalizeComponentName(reference.canonicalName) === key))
+    .map(page => page.docId));
+  return examples.filter(record => record.docId === (source?.docId ?? subject) || pages.has(record.docId)
+    || record.example!.directives.some(name => directiveIdentifiers(name).some(directive =>
+      normalizeComponentName(directive) === key || directiveIdentifiers(subject).includes(directive))))
+    .map(record => record.id);
 }

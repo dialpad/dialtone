@@ -63,7 +63,8 @@ These functions select source records; they do not resolve a consuming project's
 | Export | Description |
 | --- | --- |
 | `getComponentDetail(args, components)` | Select a canonical component or unique alias, then project `all`, `props`, `events`, `slots`, `methods` or `expose`. `args.component` is required; `projection` and a selected `field` are optional. Returns complete available contracts, alternatives and missing-field information. |
-| `getDocumentationDetail(args, documentation)` | Select an exact section `id`; optional `textOffset` and `textLimit` page its prose by Unicode code points. Returns content counts and the next text page. |
+| `getDocumentationDetail(args, documentation)` | Select an exact record `id`, including selected examples; optional `textOffset` and `textLimit` page its content by Unicode code points. Returns content counts and the next text page. |
+| `getDocumentationExampleIds(subject, documentation)` | Return exact example IDs for a source section, source page, authored component-page subject or related directive. Assembly imports alone do not establish relevance. Adapters render fetch syntax. |
 | `getValueDetail(name, tokens)` | Select an exact token name and retain every named theme record and available metadata. |
 | `formatTokenThemes(name, metadata, page)` | Render a selected page of token theme records as Markdown. |
 | `getComponentDocumentation(identity, componentDocumentation)` | Join verified public identity to authored page associations; qualify missing or ambiguous links and latest-documentation scope. |
@@ -72,6 +73,8 @@ These functions select source records; they do not resolve a consuming project's
 | `formatRetrievalEnvelope(envelope)` | Render qualification text and the envelope JSON with the same facts as structured detail output. |
 
 `COMPONENT_DETAIL_LIMIT` is the shared default of 20 selected records. `COMPONENT_SECTIONS` lists component projections. `MATCH_STATES` lists `exact`, `candidate`, `no-match`, `unavailable` and `unverified`. `RETRIEVAL_BUDGETS` defines envelope budgets using an estimate of UTF-8 JSON bytes divided by four, rounded up. MCP applies the detail budget only to its new detail tools; its five existing searches remain text-only and preserve their result limits. See the [MCP retrieval contract](../dialtone-mcp-server/RETRIEVAL.md) for adapter validation, defaults and continuation.
+
+`DocumentationRecord.example` optionally identifies a selected source-derived example, assembly component imports, a tested profile, payload validation and manual-review status. `searchDocumentation` excludes these complete records; retrieve their exact IDs with `getDocumentationDetail` and follow its continuation to obtain all files. The initial two Button records do not imply coverage of every documentation example or installed-version compatibility.
 
 ### Data Exports
 
@@ -83,7 +86,7 @@ Pre-loaded design system data, bundled at build time:
 | `tokens` | `TokensData` | `@dialpad/dialtone-css` |
 | `components` | `Component[]` | `@dialpad/dialtone-vue` |
 | `icons` | `IconsData` | `@dialpad/dialtone-icons` |
-| `documentation` | `DocumentationRecord[]` | Generated public prose in `@dialpad/dialtone-docs` |
+| `documentation` | `DocumentationRecord[]` | Generated public reference sections and selected complete examples in `@dialpad/dialtone-docs` |
 | `componentDocumentation` | `ComponentDocCatalog` | Generated associations between public identities and authored documentation pages |
 | `bundledProvenance` | `BundledProvenance` | Build-time package/schema versions and exact-artifact/canonical-content hashes for bundled domains |
 
