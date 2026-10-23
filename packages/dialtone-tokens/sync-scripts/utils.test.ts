@@ -30,6 +30,20 @@ describe('collectionTargets', () => {
     expect(targets.map(t => t.fileKey)).toEqual(['a', 'b'])
   })
 
+  it('drops the configured unrestricted file when --file-key points the sync at a scratch file', () => {
+    vi.stubEnv('FILE_KEY', 'restricted-file')
+    vi.stubEnv('UNRESTRICTED_FILE_KEY', 'unrestricted-file')
+
+    expect(collectionTargets('X', ['--file-key', 'scratch']).map(t => t.fileKey)).toEqual(['scratch'])
+  })
+
+  it('rejects the same file for both collections', () => {
+    vi.stubEnv('FILE_KEY', 'same-file')
+    vi.stubEnv('UNRESTRICTED_FILE_KEY', 'same-file')
+
+    expect(() => collectionTargets('X', [])).toThrow('same file')
+  })
+
   it('skips the unrestricted collection when it has no file configured', () => {
     vi.stubEnv('FILE_KEY', 'restricted-file')
     vi.stubEnv('UNRESTRICTED_FILE_KEY', '')

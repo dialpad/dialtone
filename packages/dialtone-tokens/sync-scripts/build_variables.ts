@@ -469,7 +469,9 @@ async function main (target: CollectionTarget): Promise<void> {
 
   console.log(`\npayload         : ${countPayload(payload as never)}`);
 
-  const out = flag('out');
+  // One file per target, so the unrestricted pass doesn't overwrite the restricted payload.
+  const outFlag = flag('out');
+  const out = outFlag && target.publishAll ? outFlag.replace(/(\.[^./\\]+)?$/, '.unrestricted$1') : outFlag;
   if (out) {
     writeFileSync(out, JSON.stringify(payload, null, 2));
     console.log(`written         : ${out}`);

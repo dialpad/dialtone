@@ -41,6 +41,12 @@ export interface CollectionTarget { name: string; publishAll: boolean; fileKey: 
  * the sibling follows that name. The unrestricted file is skipped, out loud,
  * when no key is configured, so a machine or job without one still syncs the
  * restricted file.
+ *
+ * `--file-key` points the restricted sync at a scratch file, so it also drops
+ * the configured unrestricted file unless `--unrestricted-file-key` is given
+ * too; otherwise inspecting a scratch file would write to the real one. Both
+ * files being the same would publish the unrestricted variables from the
+ * restricted library, so that throws.
  */
 export function collectionTargets(
   base = process.env.COLLECTION_NAME ?? 'Dialtone 2026',
@@ -50,12 +56,16 @@ export function collectionTargets(
     const i = args.indexOf(`--${name}`)
     return i >= 0 ? args[i + 1] : undefined
   }
-  const unrestrictedKey = flag('unrestricted-file-key') ?? process.env.UNRESTRICTED_FILE_KEY
+  const restrictedKey = flag('file-key') ?? process.env.FILE_KEY
+  const unrestrictedKey = flag('unrestricted-file-key')
+    ?? (flag('file-key') ? undefined : process.env.UNRESTRICTED_FILE_KEY)
   if (!unrestrictedKey) {
-    console.log('UNRESTRICTED_FILE_KEY is not set, skipping the unrestricted collection\n')
+    console.log('No unrestricted file key (UNRESTRICTED_FILE_KEY, or --unrestricted-file-key alongside --file-key), skipping the unrestricted collection\n')
+  } else if (unrestrictedKey === restrictedKey) {
+    throw new Error('The restricted and unrestricted file keys are the same file; the unrestricted collection would be published from the restricted library.')
   }
   return [
-    { name: base, publishAll: false, fileKey: flag('file-key') ?? process.env.FILE_KEY },
+    { name: base, publishAll: false, fileKey: restrictedKey },
     ...(unrestrictedKey
       ? [{ name: `${base} Unrestricted`, publishAll: true, fileKey: unrestrictedKey }]
       : []),
