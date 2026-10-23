@@ -2,14 +2,14 @@
 type: architecture
 category: architecture
 keywords: [monorepo, pnpm, nx, packages, apps, dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons, workspace]
-ai_summary: Overview of the Dialtone pnpm+NX monorepo structure, its 12 packages, 1 app, and how they relate to each other.
+ai_summary: Overview of the Dialtone pnpm and Nx workspace layout, package roles, and relationships; current membership and versions are defined in source.
 last_updated: 2026-10-23
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons, dialtone-emojis, dialtone-mcp-server]
 ---
 
 # Monorepo Structure
 
-Dialtone is a **pnpm workspace monorepo** managed by **NX 19**. All design system libraries, tooling, and documentation live in a single repository at `dialpad/dialtone`. The root package is `@dialpad/dialtone` (v9) which re-exports all packages as a convenience bundle.
+Dialtone is a **pnpm workspace monorepo** managed by **NX 19**. All design system libraries, tooling, and documentation live in a single repository at `dialpad/dialtone`. The [root package](../../../../../package.json), `@dialpad/dialtone`, re-exports packages as a convenience bundle; its manifest records the current version.
 
 ## Why a Monorepo
 
@@ -39,7 +39,7 @@ These four packages form the foundation. They have a strict dependency order:
 
 **`@dialpad/dialtone-css`** (v8) — utility classes and component styles built with LESS, Gulp, and PostCSS. Depends on `dialtone-tokens` for all CSS variables. Outputs to `lib/dist/`.
 
-**`@dialpad/dialtone-vue`** (v3) — 87 Vue 3 components. Depends on `dialtone-icons` and `dialtone-emojis` directly, and on `dialtone-css` and `dialtone-tokens` as peer dependencies. Component API docs are auto-generated via `vue-docgen-api` during the build step using `scripts/build-dialtone-vue-docs.mjs`. Outputs ESM and CJS formats to `dist/`.
+**`@dialpad/dialtone-vue`** — Vue 3 components; its [package manifest](../../../../dialtone-vue/package.json) records the current package version. Depends on `dialtone-icons` and `dialtone-emojis` directly, and on `dialtone-css` and `dialtone-tokens` as peer dependencies. Component API docs are auto-generated via `vue-docgen-api` during the build step using `scripts/build-dialtone-vue-docs.mjs`. Outputs ESM and CJS formats to `dist/`.
 
 **`@dialpad/dialtone-icons`** (v4) — 594 SVG icons available as raw SVG files and as Vue 3 components. Also exports a JSON keyword index for search. Has no internal Dialtone dependencies.
 

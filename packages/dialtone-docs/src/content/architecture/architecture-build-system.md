@@ -3,7 +3,7 @@ type: architecture
 category: architecture
 keywords: [nx, pnpm, build, workspace, project.json, package.json, gulp, semantic-release, new-package, add-package, workspace-protocol]
 ai_summary: How the Dialtone build system works with NX and pnpm, and the exact steps to add a new package to the monorepo.
-last_updated: 2026-03-04
+last_updated: 2026-10-23
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
@@ -117,7 +117,7 @@ It generates the `.vue` file, `index.js`, Vitest tests, Storybook stories, and M
 
 ## Adding a New Package
 
-This is the complete process for adding a publishable package to the Dialtone monorepo. Every step is required. Missing any one of them causes NX to fail, releases to break, or pre-commit hooks to not run.
+Use this checklist when adding a publishable package to the Dialtone monorepo. Apply the targets and configuration needed by that package, following current workspace configuration and comparable packages; not every illustrated file or step applies.
 
 ### Step 1 — Create the directory
 

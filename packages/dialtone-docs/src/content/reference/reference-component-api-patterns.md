@@ -19,7 +19,7 @@ keywords:
     dt-box,
     logical-props,
   ]
-ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
+ai_summary: Recurring Dialtone Vue props, events, slots, and API patterns; supported values and exceptions depend on the selected component.
 last_updated: 2026-10-23
 related_packages: [dialtone-vue]
 ---

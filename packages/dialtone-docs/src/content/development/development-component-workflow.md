@@ -13,7 +13,7 @@ This reference explains component files, scaffolding and export/build steps in `
 
 ## What Lives in a Component
 
-Current tracked component directories, implementations and related filenames use PascalCase without the `Dt` prefix. For example, the current Button directory contains:
+Follow the existing component directory's layout and casing. Button illustrates PascalCase implementation, constants and story filenames without the `Dt` prefix; helper and module filenames can differ:
 
 ```text
 components/Button/
@@ -26,7 +26,7 @@ components/Button/
 └── index.js
 ```
 
-This is an example, not a fixed artifact count. Constants, extra stories, MDX, `Utils.js`, `Validators.js`, modules and composables depend on the component. Review the current artifact requirements when adding or changing a public API; an optional MDX file does not make documentation optional.
+This is an example, not a fixed artifact count. Constants, extra stories, MDX, helper files, modules and composables depend on the component. Preserve existing helper and module names or casing. Review the current artifact requirements when adding or changing a public API; an optional MDX file does not make documentation optional.
 
 ## Naming Conventions
 
@@ -64,7 +64,7 @@ After generation, add one line to `packages/dialtone-vue/index.js`:
 export * from './components/MyNewComponent';
 ```
 
-Without the root export, the component is not available to consumers of `@dialpad/dialtone-vue`. Generation also does not complete the required API, styles, tests, public documentation, Combinator or thumbnail work. Use the current artifact checklist rather than treating a successful scaffold as a finished component.
+Without the root export, the component is not available to consumers of `@dialpad/dialtone-vue`. Generation also does not complete the required API, styles, tests, public documentation, Combinator or thumbnail work. Use the [component workflow](../../../../../.agents/skills/component-work/SKILL.md#workflow) to review affected artifacts rather than treating a successful scaffold as a finished component.
 
 ## API Style
 
@@ -181,7 +181,7 @@ Keep local imports and the component's `index.js` exports aligned when renaming 
 
 ## data-qa Attributes
 
-Use the existing component and testing rules to choose stable `data-qa` selectors. A Button selector example is:
+Add `data-qa` to important elements for QA and automation, following the [Vue contributing guidance](../../../../dialtone-vue/.github/CONTRIBUTING.md#data-qa-attributes). Use the existing testing rules to choose stable selectors. A Button selector example is:
 
 ```vue
 <button data-qa="dt-button">
@@ -203,7 +203,7 @@ Stories use CSF3 format. The `Button.stories.js` file defines metadata, controls
 
 `argsData` sets default prop values for interactive controls. `argTypesData` defines what controls appear in the Storybook panel:
 
-Use the current [Button stories](../../../../dialtone-vue/components/Button/Button.stories.js) as the control example. Keep preferred numeric size choices separate from deprecated aliases instead of copying every constants key into a new control.
+Use the current [Button stories](../../../../dialtone-vue/components/Button/Button.stories.js) as the control example. Button's size control currently lists all keys in `BUTTON_SIZE_MODIFIERS`, including deprecated aliases.
 
 ## Build and Test
 
