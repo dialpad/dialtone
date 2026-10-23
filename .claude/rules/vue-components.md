@@ -40,7 +40,7 @@ paths:
 - Text headline extends the scale: `500` (xl), `600` (2xl), `700` (3xl).
 - Icons: separate numeric scale `100`–`800`, independent of component-specific supported values (do not remap icon values onto the component scale). Icon-family `size` props (`Icon`, `Loader`, `Emoji`, `EmojiTextWrapper`, `ProgressCircle`, `ToastLayoutAlternateIcon`) still use `[String, Number]`.
 - Shared scale definition: `packages/dialtone-vue/common/constants/sizes.js`.
-- Export from `*Constants.js`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
+- Use component-specific size exports, such as `BUTTON_SIZE_MODIFIERS` from `ButtonConstants.js`; follow each component's actual symbol and import path.
 
 ## Separation of Concerns
 

@@ -257,7 +257,7 @@ The `inputs` and `outputs` fields tell NX what files to watch for cache invalida
 
 ### Step 4 — release-ci.config.cjs
 
-Required when the package has a release target, so `semantic-release` can version and publish it:
+Required when the package has a release target; the example below versions the package and commits release metadata:
 
 ```javascript
 const name = 'dialtone-{feature}';
