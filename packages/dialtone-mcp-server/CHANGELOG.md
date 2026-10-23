@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.7.0...dialtone-mcp-server/v1.8.0) (2026-10-20)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core, Dialtone Docs:** DLT-3085 retrieve directive guidance ([#1463](https://github.com/dialpad/dialtone/issues/1463)) ([d28b2f7](https://github.com/dialpad/dialtone/commit/d28b2f70c004937758ebb85070a525d0a4b4c8ef))
+
+
+### Features
+
+* **Dialtone Query Core:** DLT-3659 share curated discovery keywords ([#1472](https://github.com/dialpad/dialtone/issues/1472)) ([1033549](https://github.com/dialpad/dialtone/commit/1033549e2ec8087fee4adced26c9293d04a02953))
+
 # [1.7.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.6.0...dialtone-mcp-server/v1.7.0) (2026-10-15)
 
 

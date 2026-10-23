@@ -15,7 +15,7 @@ VuePress 2 site at `apps/dialtone-documentation/docs/`. Pages organized under `c
 
 ## Required Frontmatter
 
-Every page needs: `title`, `description`, `status` (ready | planned | deprecated). Optional: `thumb`, `image`, `storybook`, `figma_url`.
+Every page needs: `title`, `description`, `status` (ready | planned | deprecated | new | beta). `new` and `beta` render a badge (see `docs/.vuepress/theme/constants/statusBadges.js`) — use `new` for a recently-shipped component, `ready` once it's no longer newsworthy. Optional: `thumb`, `image`, `storybook`, `figma_url`.
 
 ## Global Components
 

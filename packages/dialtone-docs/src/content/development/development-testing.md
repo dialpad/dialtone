@@ -3,7 +3,7 @@ type: development
 category: development
 keywords: [vitest, testing, vue-test-utils, jsdom, coverage, mount, shallowMount, fixtures, assertions, dialtone-vue, co-located, thresholds]
 ai_summary: How testing works in dialtone-vue with Vitest and Vue Test Utils — file structure, coverage thresholds, test patterns, and utilities.
-last_updated: 2026-03-04
+last_updated: 2026-09-24
 related_packages: [dialtone-vue]
 ---
 
@@ -64,14 +64,14 @@ simulatePaste(content, type, dispatchElement)
 Test files live next to the component they test:
 
 ```
-components/button/
-├── button.vue
-├── button.test.js      ← same directory
-├── button_constants.js
+components/Button/
+├── Button.vue
+├── Button.test.js      ← same directory
+├── ButtonConstants.js
 └── index.js
 ```
 
-Test file naming: `{component-name}.test.js` (snake_case, matching the component file).
+Test file naming: `{ComponentName}.test.js`, matching the component file's own PascalCase, for both legacy Options API components (`Button.test.js`) and newer Composition API components (`Slider.test.js`, `Resizable.test.js`, `TextList.test.js`).
 
 ## Standard Test Pattern
 
@@ -79,7 +79,7 @@ Every component test follows this structure:
 
 ```javascript
 import { mount } from '@vue/test-utils';
-import DtButton from './button.vue';
+import DtButton from './Button.vue';
 
 // Constants — uppercase MOCK_ prefix for fixed stubs
 const MOCK_CLICK_STUB = vi.fn();
@@ -303,7 +303,7 @@ pnpm test:watch
 
 # Run a single test file
 cd packages/dialtone-vue
-pnpm exec vitest run components/button/button.test.js
+pnpm exec vitest run components/Button/Button.test.js
 
 # Run with coverage report
 pnpm exec vitest run --coverage

@@ -435,3 +435,51 @@ describe('option_bar.vue test', function () {
     ).toBeTruthy();
   });
 });
+
+describe('explicit slider selection', () => {
+  const slider = { min: 0, max: 100, step: 1 };
+  function select (member, value) {
+    const wrapper = mountWrapper({ props: [{ name: 'progress', ...member }] });
+    const selector = wrapper.findComponent({ name: 'DtcOptionBarMemberGroup' }).props('controlSelector');
+    const result = selector(member, value);
+    wrapper.unmount();
+    return result;
+  }
+
+  it('selects the opted-in editor for invalid values while preserving ordinary controls', () => {
+    expect(select({ types: ['number'], slider }, 66.5)).toEqual([['slider', 'null'], 'slider']);
+    expect(select({ types: ['number'] }, 66)).toEqual([['number', 'null'], 'number']);
+    expect(select({ types: ['number'], values: Array.from({ length: 10 }, (_, i) => i) }, 66)[1]).toBe('selection');
+  });
+});
+
+describe('dependent page slider edits', () => {
+  const props = [
+    { name: 'activePage', types: ['number'], defaultValue: 1, slider: { min: 1, maxProp: 'totalPages', step: 1 } },
+    { name: 'totalPages', types: ['number'], required: true },
+  ];
+  it.each([[10, 10], [30, 22]])(
+    'reconciles page 22 on a totalPages edit to %s as %s', async (totalPages, expectedPage) => {
+      const options = { props: { totalPages: 25, activePage: 22 }, slots: {} };
+      const wrapper = mountWrapper({ props, options });
+      expect(wrapper.emitted('update:options')).toBeUndefined();
+      await getMemberGroups(wrapper)[0].vm.$emit('update:member', { member: 'totalPages', value: totalPages });
+      wrapper.emitted('update:options')[0][0](options);
+      expect(options.props).toEqual({ totalPages, activePage: expectedPage });
+      wrapper.unmount();
+    },
+  );
+  it('preserves the page on synchronization, invalid totals, and unrelated edits', async () => {
+    const options = { props: { totalPages: 10, activePage: 22 }, slots: {} };
+    const wrapper = mountWrapper({ props, options });
+    await wrapper.setProps({ options: { props: { totalPages: 5, activePage: 22 }, slots: {} } });
+    expect(wrapper.emitted('update:options')).toBeUndefined();
+    await getMemberGroups(wrapper)[0].vm.$emit('update:member', { member: 'totalPages', value: 0 });
+    wrapper.emitted('update:options')[0][0](options);
+    expect(options.props.activePage).toBe(22);
+    await getMemberGroups(wrapper)[0].vm.$emit('update:member', { member: 'activePage', value: 4.5 });
+    wrapper.emitted('update:options')[1][0](options);
+    expect(options.props.activePage).toBe(4.5);
+    wrapper.unmount();
+  });
+});

@@ -63,6 +63,8 @@ Dialtone provides five options for `kind`, with three levels of `importance`. Us
 
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
 
+<!-- example-id: examples/button-default -->
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
@@ -146,6 +148,8 @@ This style's use should be rare. When in doubt, use the [default button style](#
 Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d-btn--disabled`. Use the attribute when a button should appear disabled and not receive focus; use the class when a button should appear disabled but still receive focus (i.e. a disabled button with a tooltip).
 
 Using the class also requires `aria-disabled`, and additional javascript implementation is required to prevent events.
+
+<!-- example-id: examples/button-disabled-tooltip -->
 
 ```vue demo
 <dt-stack

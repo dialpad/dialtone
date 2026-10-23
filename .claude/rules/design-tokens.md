@@ -51,4 +51,4 @@ Reference semantic tokens (e.g., `dtColorForegroundPrimary`), not base palette t
 - Build: `pnpm nx run dialtone-tokens:build`
 - Verify CSS output, docs JSON, iOS/Android platform outputs
 - Use `search_tokens` MCP tool to check for duplicates and verify discoverability
-- If edited manually (not via Figma sync), `sync:tokens-to-figma` may be needed
+- After editing tokens, `pnpm sync:variables` (in `packages/dialtone-tokens`) pushes them to the Figma variables collection. Code is the source of truth; the Figma-to-code direction is not authoritative

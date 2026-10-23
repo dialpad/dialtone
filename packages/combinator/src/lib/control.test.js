@@ -49,3 +49,11 @@ describe('control.js test', function () {
     });
   });
 });
+
+describe('slider selection precedence', () => {
+  it('selects an explicitly opted-in complete numeric enum grid', () => {
+    expect(getControlByMemberType('number', {
+      types: ['number'], values: ['0', '1', '2'], slider: { min: 0, max: 2, step: 1 },
+    })).toBe('slider');
+  });
+});

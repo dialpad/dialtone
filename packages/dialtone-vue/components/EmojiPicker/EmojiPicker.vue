@@ -1,8 +1,12 @@
 <template>
   <div
     class="d-emoji-picker"
+    data-qa="dt-emoji-picker"
   >
-    <div class="d-emoji-picker--header">
+    <div
+      class="d-emoji-picker--header"
+      data-qa="dt-emoji-picker-header"
+    >
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="internalSearchQuery"
@@ -18,7 +22,10 @@
         @keydown.esc="emits('close')"
       />
     </div>
-    <div class="d-emoji-picker--body">
+    <div
+      class="d-emoji-picker--body"
+      data-qa="dt-emoji-picker-body"
+    >
       <emoji-search
         v-if="showSearch"
         ref="searchInputRef"
@@ -48,7 +55,10 @@
         @scroll-bottom-reached="emits('scroll-bottom-reached')"
       />
     </div>
-    <div class="d-emoji-picker--footer">
+    <div
+      class="d-emoji-picker--footer"
+      data-qa="dt-emoji-picker-footer"
+    >
       <dt-button
         v-if="showAddEmojiButton && !highlightedEmoji"
         importance="outlined"

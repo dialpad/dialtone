@@ -1,5 +1,8 @@
 <template>
-  <span :class="['d-emoji d-icon', emojiSize]">
+  <span
+    :class="['d-emoji d-icon', emojiSize]"
+    data-qa="dt-emoji"
+  >
     <dt-skeleton
       v-show="imgLoading && showSkeleton"
       :offset="0"
@@ -9,6 +12,7 @@
     <img
       v-show="!imgLoading"
       ref="emojiImg"
+      data-qa="dt-emoji-image"
       :class="['d-icon', emojiSize, imgClass]"
       :aria-label="emojiLabel"
       :alt="emojiAlt"

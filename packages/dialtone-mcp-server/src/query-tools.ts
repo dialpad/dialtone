@@ -26,6 +26,7 @@ import {
   getValueDetail,
   formatTokenThemes,
   getComponentDocumentation,
+  getDocumentationExampleIds,
   getDocumentationDetail,
   COMPONENT_SECTIONS,
   COMPONENT_DETAIL_LIMIT,
@@ -42,7 +43,7 @@ import type {
 
 /** Routing only; policy remains in the existing client-rules resource. */
 export const ROUTING_INSTRUCTIONS =
-  'Search with search_components, search_icons, search_tokens, search_utility_classes or search_documentation for readable summaries. Component API and token themes are samples. Use get_component for complete selected APIs or named fields, get_documentation for exact section prose, and search_tokens projection themes for all named theme records. Follow continuation calls. Results use bundled data; installed compatibility is not checked. Inspect source packages, versions, hashes and missing metadata. Import hints verify stated exports only. Documentation links are latest references. Verify availability and behavior against installed packages. Client-rules remains a separate resource.';
+  'Search with search_components, search_icons, search_tokens, search_utility_classes or search_documentation for summaries. Component APIs and token themes are samples. Use get_component for selected APIs, get_documentation for exact prose or source-example IDs, and search_tokens projection themes for named themes. Search documentation for longer example requests; source sections give example IDs. Follow continuations. Results use bundled data; installed compatibility is not checked. Inspect versions, hashes and missing metadata. Import hints verify exports only. Documentation links are latest references. Verify installed behavior. Client-rules remains separate.';
 /** Runtime fallback for an omitted or zero search limit; matches the schema default. */
 const DEFAULT_LIMIT = 15;
 const query = z.string().max(256).trim().min(1);
@@ -103,7 +104,7 @@ const specs: Record<string, SearchSpec> = {
   search_components: {
     domain: 'components',
     description:
-      'Search components by name or feature with descriptions, sampled props/events/slots and import hints. Use get_component for the complete selected API.',
+      'Search components by name or feature with sampled APIs and import hints. Use get_component for complete APIs. Source-example hints accompany matching subjects; use search_documentation for longer example requests.',
     search: (text) => searchComponents(text, components, componentDocumentation),
     format: formatComponentResults,
     followUp: {
@@ -123,7 +124,7 @@ const specs: Record<string, SearchSpec> = {
   search_documentation: {
     domain: 'documentation',
     description:
-      'Search documentation prose about usage, accessibility, migrations or design guidance. Use get_documentation with an exact returned section ID for complete prose.',
+      'Search documentation prose about usage, accessibility, migrations or design guidance, including longer example requests. Source sections list available examples/* IDs. Use get_documentation for complete prose or an exact example.',
     search: (text) => searchDocumentation(text, documentation),
     format: formatDocumentationResults,
     followUp: {
@@ -270,7 +271,7 @@ export function queryToolDefinitions() {
     {
       name: 'get_documentation',
       description:
-        'Retrieve complete available prose for an exact documentation section ID. Follow the returned textOffset continuation to read remaining content. Offsets count Unicode code points. This corpus contains prose; code examples require their own verification.',
+        'Retrieve complete available prose for an exact documentation section ID. Follow the returned textOffset continuation to read remaining content. Offsets count Unicode code points. Selected examples/* IDs include complete source-derived files and setup; check their pinned consumer profile and validation limits. A continued fragment is not a complete runnable example.',
       inputSchema: {
         type: 'object' as const,
         properties: {
@@ -314,6 +315,10 @@ function sourceText(name: string) {
   const source = bundledProvenance.domains[specs[name].domain];
   return `**Source:** bundled; installed compatibility not checked. ${source.package}@${source.version}; SHA256 ${source.hash}.`;
 }
+function exampleHints(ids: string[]) {
+  if (!ids.length) return '';
+  return `\n\nSource examples (${Math.min(ids.length, 3)} of ${ids.length}; check profile and validation limits):\n${ids.slice(0, 3).map(id => `- ${id}: ${callText('get_documentation', { id })}`).join('\n')}${ids.length > 3 ? '\nRetrieve the matching source section for its full exampleIds list.' : ''}`;
+}
 function searchFooter(
   name: string,
   args: { query: string; limit: number; offset: number; projection?: string },
@@ -334,6 +339,8 @@ export function executeQueryTool(name: string, input: unknown) {
     if (name === 'get_documentation') {
       const args = docsSchema.parse(input ?? {});
       const selected = getDocumentationDetail(args, documentation);
+      const missingExample = !selected.record && args.id.startsWith('examples/');
+      const availableExamples = documentation.filter(record => record.example).map(record => record.id);
       return reply(
         createRetrievalEnvelope(
           {
@@ -343,15 +350,15 @@ export function executeQueryTool(name: string, input: unknown) {
             domain: 'documentation',
             match: selected.match,
             items: selected.record ? [selected.record] : [],
-            detail: { id: args.id, contentCounts: selected.contentCounts },
+            detail: { id: args.id, contentCounts: selected.contentCounts, exampleIds: selected.record && !selected.record.example ? getDocumentationExampleIds(selected.record.id, documentation) : [] },
             omissions: selected.next ? ['remaining_content'] : [],
-            continuation: selected.next && {
+            continuation: selected.next ? {
               tool: name,
               arguments: selected.next,
-            },
+            } : missingExample ? { tool: 'search_documentation', arguments: { query: args.id.slice('examples/'.length).replace(/-/g, ' ') } } : null,
             notes: selected.record
               ? []
-              : [
+              : missingExample ? [`No exact example ID matched. Available example IDs (${Math.min(availableExamples.length, 3)} of ${availableExamples.length}): ${availableExamples.slice(0, 3).join(', ')}. Call get_documentation with a chosen ID.`] : [
                   'No exact section ID matched. Use search_documentation and pass its returned ID.',
                 ],
           },
@@ -409,6 +416,7 @@ export function executeQueryTool(name: string, input: unknown) {
             notes,
             detail: {
               projection: args.projection,
+              exampleIds: component ? getDocumentationExampleIds(component.displayName, documentation) : [],
               field: args.field ?? null,
               description: component?.description ?? null,
               metadata: component?.metadata ?? null,
@@ -471,6 +479,16 @@ export function executeQueryTool(name: string, input: unknown) {
         ? { total: found.results.length, offset: pageArgs.offset }
         : undefined,
     );
+    if (name === 'search_components') {
+      let ids = getDocumentationExampleIds(pageArgs.query, documentation);
+      if (!ids.length) {
+        const source = searchDocumentation(pageArgs.query, documentation).results[0];
+        if (source) ids = getDocumentationExampleIds(source.details.id, documentation);
+      }
+      output += exampleHints(ids);
+    } else if (name === 'search_documentation') {
+      output += exampleHints([...new Set(page.flatMap(result => getDocumentationExampleIds(result.details.id, documentation)))]);
+    }
     if (found.notes.length) output += `\n\n${found.notes.join('\n')}`;
     if (page.length && spec.followUp)
       output +=

@@ -21,3 +21,7 @@ Apply to `packages/dialtone-query-core/**` and shared search/data behavior.
 
 - Run query-core tests and build after search/data changes.
 - Run MCP acceptance scenarios when documentation search behavior changes.
+
+## Source example retrieval
+
+Associate example discovery with authored component-page subjects and related directive contracts, never every imported layout component. Keep complete payloads out of ordinary rankings; append bounded exact-ID hints and preserve existing search facts. Reuse source-section IDs and existing detail routes for full lists/recovery. Keep assembly imports and source/profile/manual-evidence qualification separate from discovery. See `packages/dialtone-mcp-server/RETRIEVAL.md` for the transport contract.

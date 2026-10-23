@@ -32,6 +32,66 @@ represents an intentional `undefined`.
 `getControlByValue(value)` applies when the current value already implies a
 better active control. `null`, `undefined`, and `UNSET` map to `null`.
 
+## Explicit slider opt-in
+
+For a property suited to exploration along a numeric scale, add editor metadata:
+
+```js
+progress: { slider: { min: 0, max: 100, step: 1, suffix: '%' } },
+```
+
+Search the variant files for `slider:` to find current adoptions.
+
+Eligibility requires a scalar number without token metadata. An explicit
+numeric enum may opt in only when its documented values cover the complete
+configured grid, with no gaps or duplicates. Docgen reports those values as
+strings, so the grid check converts them locally; other controls still receive
+the strings (known debt, not intended design).
+
+Bounds and step must be finite, with a positive finite span, a positive step
+no larger than the span, and a maximum exactly reconstructable on the step
+grid. The optional suffix is a string. Optional `showTicks: true` shows ticks
+when the resolved grid has at most 10 selectable values.
+
+Named presets replace this settings object shallowly; supply the complete
+configuration when overriding it, or set `slider: null` to opt a preset out.
+Metadata does not set a prop value.
+
+A sibling prop can supply the maximum instead of a fixed `max`:
+
+```js
+activePage: { slider: { min: 1, maxProp: 'totalPages', step: 1 } },
+```
+
+`maxProp` reads the current canonical sibling value. It is mutually exclusive
+with `max` and does not support enum properties. Missing, nonnumeric, off-grid,
+or below-minimum maxima leave the editor noninteractive; a maximum equal to
+the minimum shows the sole value without mounting DtSlider. On an explicit
+edit to that sibling prop, an out-of-range numeric value on the step grid is
+clamped within the new bounds in the same options update. Mounting, preset
+selection, Reset, and external synchronization never trigger reconciliation.
+The preview is recreated when a declared bound prop changes, so internal
+component state follows the canonical values after recovery from invalid bounds.
+
+DtSlider is the sole value editor, with marks, an always-visible readout, and
+native keyboard operation. It writes numeric values through the existing
+options model. Off-grid or invalid parent values show a non-editable readout;
+they never mount a normalizing slider or fall back to manual entry. Presets and
+Reset can restore a valid value.
+
+The slider uses the shared clearable shell, which handles required, disabled,
+locked, and clearable state like other controls. Optional unset values show
+Add. Only an explicit Add writes a value: the validated preset/default value,
+or the grid minimum. Remove writes undefined to restore the component default;
+zero remains a concrete value.
+
+Keep segmented controls for small choice sets and selection controls for
+categorical values. Numeric type or choice count alone never opts in.
+
+Slider bounds define useful playground ranges, not new restrictions on
+component APIs. A preset whose value falls off the grid, such as Pagination's
+`without page numbers` (0), sets `slider: null`.
+
 ## Current controls
 
 - `base`: fallback string control for unsupported values. It forwards label,
@@ -43,6 +103,7 @@ better active control. `null`, `undefined`, and `UNSET` map to `null`.
 - `event`: displays event data when used by latent event-console code.
 - `selection`: searchable value selection.
 - `segmented`: compact selection for small enums.
+- `slider`: explicitly opted-in scalar scale using DtSlider with marks and an always-visible readout.
 - `icon-slot`: searchable Dialtone icon picker for icon-like slots.
 - `suggestion`: standalone suggestion input used by the demo app's component
   picker. It delegates input behavior to the string control, including label,

@@ -1,5 +1,6 @@
 <template>
   <dtc-renderer-target
+    :key="sliderBoundsKey"
     :component="component"
     :bindings="options.bindings.get()"
     :events="info.events"
@@ -26,6 +27,7 @@ import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
 import DtcRendererTarget from '@/src/components/renderer/renderer_target.vue';
 import DtcNode from '@/src/components/tools/node.vue';
 import { nonEmptySlots } from '@/src/lib/utils';
+import { getSliderBoundProps } from '@/src/lib/slider_control';
 
 const props = defineProps({
   /**
@@ -73,6 +75,11 @@ const emit = defineEmits([
   SETTINGS_UPDATE_EVENT,
   'event',
 ]);
+
+// Bound changes can alter a target's internal selection without emitting a
+// prop update. Recreate that preview from canonical options when bounds change.
+const sliderBoundsKey = computed(() => JSON.stringify(getSliderBoundProps(props.info.props ?? [])
+  .map(prop => props.options.props?.[prop])));
 
 /**
  * Filtered slots that contain content.

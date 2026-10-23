@@ -8,6 +8,7 @@ import DtcControlDynamic from '@/src/components/controls/control_dynamic.vue';
 import DtcControlObject from '@/src/components/controls/control_object.vue';
 import DtcControlArray from '@/src/components/controls/control_array.vue';
 import DtcControlBoolean from '@/src/components/controls/control_boolean.vue';
+import DtcControlSlider from '@/src/components/controls/control_slider.vue';
 import DtcControlNumber from '@/src/components/controls/control_number.vue';
 import DtcControlSelection from '@/src/components/controls/control_selection.vue';
 import DtcControlString from '@/src/components/controls/control_string.vue';
@@ -17,6 +18,7 @@ import DtcControlIconSlot from '@/src/components/controls/control_icon_slot.vue'
 import DtcControlSegmented from '@/src/components/controls/control_segmented.vue';
 
 import { typeOfMemberValue } from '@/src/lib/utils';
+import { getSliderControlConfig } from '@/src/lib/slider_control';
 
 const MAX_SEGMENTED_COUNT = 5;
 const MAX_SEGMENTED_LABEL_LENGTH = 4;
@@ -70,6 +72,10 @@ export const controlMap = Object.freeze({
     component: DtcControlString,
     default () { return getControlDataDefault(this); },
   },
+  slider: {
+    component: DtcControlSlider,
+    default () { return getControlDataDefault(this); },
+  },
   number: {
     component: DtcControlNumber,
     default () { return getControlDataDefault(this); },
@@ -113,6 +119,7 @@ export function getControlByMemberType (type, args) {
 
   if (isMixedBooleanEnum(values)) return 'segmented';
   if (type === 'boolean') return 'boolean';
+  if (type === 'number' && getSliderControlConfig(args)) return 'slider';
 
   if (values.length > 0) {
     return shouldUseSegmented(values) ? 'segmented' : 'selection';
