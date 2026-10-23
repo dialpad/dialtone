@@ -59,7 +59,7 @@ Never select by CSS class or bare tag name — these are brittle.
 
 ## Constants
 
-Import valid values from `*_constants.js`. Never hardcode strings like `'md'` — use `COMPONENT_SIZE_DEFAULT`.
+Import valid-value sets from the component's current constants file (for example `ButtonConstants.js`). Inspect the component contract to choose an independent expected default; do not assume a universal default-size export.
 
 ## Required Test Categories
 
