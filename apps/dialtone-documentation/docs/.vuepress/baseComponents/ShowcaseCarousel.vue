@@ -1,52 +1,69 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div ref="carouselContainerRef" class="showcase-carousel">
-    <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
-      <div
-        v-for="item in showcaseItems"
-        :key="item.name"
-        :style="{
-          alignSelf: item.alignSelf,
-          inlineSize: item.sizes,
-        }"
-        class="showcase-carousel__item"
-      >
-        <!-- For video tiles this lazy, responsive still doubles as the poster: shown
-             before playback and under reduced motion, without an eager poster request. -->
-        <picture class="d-d-block">
-          <source :srcset="item.avifSrcset" :sizes="item.sizes" type="image/avif">
-          <source :srcset="item.webpSrcset" :sizes="item.sizes" type="image/webp">
-          <img
-            :src="item.fallbackSrc"
+  <div class="showcase-carousel-wrapper">
+    <div ref="carouselContainerRef" class="showcase-carousel">
+      <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
+        <div
+          v-for="item in showcaseItems"
+          :key="item.name"
+          :style="{
+            alignSelf: item.alignSelf,
+            inlineSize: item.sizes,
+          }"
+          class="showcase-carousel__item"
+        >
+          <!-- For video tiles this lazy, responsive still doubles as the poster: shown
+               before playback and under reduced motion, without an eager poster request. -->
+          <picture class="d-d-block">
+            <source :srcset="item.avifSrcset" :sizes="item.sizes" type="image/avif">
+            <source :srcset="item.webpSrcset" :sizes="item.sizes" type="image/webp">
+            <img
+              :src="item.fallbackSrc"
+              :width="item.sourceWidth"
+              :height="item.sourceHeight"
+              class="d-bar-500 d-d-block showcase-carousel__image"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              draggable="false"
+            >
+          </picture>
+          <video
+            v-if="item.type === 'video'"
             :width="item.sourceWidth"
             :height="item.sourceHeight"
-            class="d-bar-500 d-d-block showcase-carousel__image"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            fetchpriority="low"
+            class="d-bar-500 d-d-block showcase-carousel__video"
+            aria-hidden="true"
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            preload="none"
             draggable="false"
           >
-        </picture>
-        <video
-          v-if="item.type === 'video'"
-          :width="item.sourceWidth"
-          :height="item.sourceHeight"
-          class="d-bar-500 d-d-block showcase-carousel__video"
-          aria-hidden="true"
-          muted
-          loop
-          playsinline
-          disablepictureinpicture
-          preload="none"
-          draggable="false"
-        >
-          <!-- Tiles keep fixed widths at every breakpoint, so pick the encode by pixel density. -->
-          <source :src="item.videoSrc2x" type="video/mp4" media="(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2)">
-          <source :src="item.videoSrc1x" type="video/mp4">
-        </video>
-      </div>
-    </dt-stack>
+            <!-- Tiles keep fixed widths at every breakpoint, so pick the encode by pixel density. -->
+            <source :src="item.videoSrc2x" type="video/mp4" media="(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2)">
+            <source :src="item.videoSrc1x" type="video/mp4">
+          </video>
+        </div>
+      </dt-stack>
+    </div>
+    <!-- WCAG 2.2.2: the carousel and its videos move on their own, so give everyone a way to stop them. -->
+    <div class="showcase-carousel__controls">
+      <dt-button
+        v-dt-tooltip="isPaused ? 'Play showcase' : 'Pause showcase'"
+        :aria-label="isPaused ? 'Play showcase' : 'Pause showcase'"
+        kind="muted"
+        importance="outlined"
+        size="300"
+        @click="togglePause"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon :name="isPaused ? 'play' : 'pause'" :size="iconSize" />
+        </template>
+      </dt-button>
+    </div>
   </div>
 </template>
 
@@ -55,9 +72,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { withBase } from 'vuepress/client';
 
 import {
-  canUseHoverSteering,
+  advanceScrollPosition,
   getCarouselPeriod,
-  getHoverVelocity,
   getLoopedScrollPosition,
   smoothCarouselVelocity,
 } from './showcaseCarouselMotion.js';
@@ -122,20 +138,25 @@ const showcaseItems = [
   createShowcaseImage({ name: '09', alignSelf: 'flex-start', renderedWidth: 438, sourceWidth: 1440, sourceHeight: 1344, candidateWidths: [438, 876, 1440] }),
 ];
 
-const DEFAULT_VELOCITY = 0.12;
-const DEAD_ZONE = 0.01;
-const MAX_HOVER_VELOCITY = 1.2;
-const CURVE_EXPONENT = 2.5;
-const SMOOTHING_ACTIVE = 0.5;
-const SMOOTHING_INACTIVE = 0.15;
+// Scroll speed in px/ms (35px/s). Also sets the CSS autoplay duration on touch devices.
+const DEFAULT_VELOCITY = 0.035;
+// Eases speed back up after a touch scroll; the carousel otherwise runs at a constant speed.
+const VELOCITY_SMOOTHING = 0.15;
 const MAX_FRAME_DURATION = 50;
 const TOUCH_SCROLL_IDLE_FALLBACK = 200;
 const RESIZE_DEBOUNCE = 150;
 
 const carouselContainerRef = ref(null);
 const carouselTrackRef = ref(null);
+const isPaused = ref(false);
 
 let cleanupCarousel = () => {};
+let applyPauseState = () => {};
+
+const togglePause = () => {
+  isPaused.value = !isPaused.value;
+  applyPauseState();
+};
 
 onMounted(() => {
   const carouselContainer = carouselContainerRef.value;
@@ -155,6 +176,8 @@ onMounted(() => {
 
     const fineHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // The pause control, reduced motion, and a hidden page all stop the scroll and the videos.
+    const isMotionStopped = () => isPaused.value || reducedMotionQuery.matches || document.hidden;
 
     // Clones don't inherit Vue's `muted` prop binding, and browsers block
     // unmuted autoplay, so mute every video (originals and clones) explicitly.
@@ -172,7 +195,7 @@ onMounted(() => {
     });
 
     const playVideo = (video) => {
-      if (reducedMotionQuery.matches || document.hidden) return;
+      if (isMotionStopped()) return;
       video.play().catch(() => {});
     };
 
@@ -196,7 +219,7 @@ onMounted(() => {
     // paused on their posters. IntersectionObserver doesn't report a hidden tab,
     // so page visibility is checked here too (and re-synced on visibilitychange).
     const syncVideoPlayback = () => {
-      if (!videoObserver || reducedMotionQuery.matches || document.hidden) {
+      if (!videoObserver || isMotionStopped()) {
         carouselVideos.forEach(video => video.pause());
         return;
       }
@@ -212,10 +235,8 @@ onMounted(() => {
     let maxScrollPosition = 0;
     let animationId = null;
     let lastFrameTime = null;
-    let targetVelocity = DEFAULT_VELOCITY;
     let currentVelocity = DEFAULT_VELOCITY;
-    let isHovering = false;
-    let hoverRect = null;
+    let scrollPosition = 0;
     let isTouchScrolling = false;
     let isNativeScrolling = false;
     let isTouchActive = false;
@@ -258,7 +279,6 @@ onMounted(() => {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         measureCarouselPeriod();
-        if (isHovering) hoverRect = carouselContainer.getBoundingClientRect();
       }, RESIZE_DEBOUNCE);
     };
 
@@ -280,18 +300,20 @@ onMounted(() => {
 
       if (lastFrameTime !== null) {
         const elapsedTime = Math.min(timestamp - lastFrameTime, MAX_FRAME_DURATION);
-        const smoothingFactor = isHovering ? SMOOTHING_ACTIVE : SMOOTHING_INACTIVE;
         currentVelocity = smoothCarouselVelocity(
           currentVelocity,
-          targetVelocity,
-          smoothingFactor,
+          DEFAULT_VELOCITY,
+          VELOCITY_SMOOTHING,
           elapsedTime,
         );
-        carouselContainer.scrollLeft = getLoopedScrollPosition(
-          carouselContainer.scrollLeft + currentVelocity * elapsedTime,
+        scrollPosition = advanceScrollPosition(
+          scrollPosition,
+          carouselContainer.scrollLeft,
+          currentVelocity * elapsedTime,
           carouselPeriod,
           maxScrollPosition,
         );
+        carouselContainer.scrollLeft = scrollPosition;
       }
 
       lastFrameTime = timestamp;
@@ -299,12 +321,7 @@ onMounted(() => {
     };
 
     const startAnimation = () => {
-      if (
-        !isVisible ||
-        isTouchScrolling ||
-        reducedMotionQuery.matches ||
-        carouselPeriod <= 0
-      ) return;
+      if (!isVisible || isTouchScrolling || isMotionStopped() || carouselPeriod <= 0) return;
 
       if (usesCompositorAutoplay) {
         carousel.classList.remove('showcase-carousel__track--autoplay-paused');
@@ -315,8 +332,10 @@ onMounted(() => {
       animationId = requestAnimationFrame(animateCarousel);
     };
 
-    const handleReducedMotionChange = () => {
-      if (reducedMotionQuery.matches) {
+    // Re-applies motion state after a pause toggle, a reduced-motion change, or a page
+    // visibility change, including the compositor animation on touch devices.
+    const syncMotion = () => {
+      if (isMotionStopped()) {
         stopAnimation();
       } else {
         startAnimation();
@@ -324,31 +343,7 @@ onMounted(() => {
       syncVideoPlayback();
     };
 
-    const handlePointerEnter = (event) => {
-      if (!canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
-      isHovering = true;
-      targetVelocity = 0;
-      hoverRect = carouselContainer.getBoundingClientRect();
-      startAnimation();
-    };
-
-    const handlePointerMove = (event) => {
-      if (!isHovering || !canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
-
-      const relativePosition = (event.clientX - hoverRect.left - hoverRect.width / 2) / (hoverRect.width / 2);
-      targetVelocity = getHoverVelocity(
-        relativePosition,
-        DEAD_ZONE,
-        MAX_HOVER_VELOCITY,
-        CURVE_EXPONENT,
-      );
-    };
-
-    const handlePointerLeave = (event) => {
-      if (!canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
-      isHovering = false;
-      targetVelocity = DEFAULT_VELOCITY;
-    };
+    applyPauseState = syncMotion;
 
     const clearScrollIdleTimer = () => {
       if (scrollIdleTimer === null) return;
@@ -363,7 +358,6 @@ onMounted(() => {
       isTouchScrolling = false;
       isNativeScrolling = false;
       currentVelocity = 0;
-      targetVelocity = DEFAULT_VELOCITY;
       startAnimation();
     };
 
@@ -382,9 +376,7 @@ onMounted(() => {
       clearScrollIdleTimer();
       isTouchScrolling = true;
       isNativeScrolling = false;
-      isHovering = false;
       currentVelocity = 0;
-      targetVelocity = DEFAULT_VELOCITY;
       stopAnimation();
     };
 
@@ -415,8 +407,6 @@ onMounted(() => {
       if (isVisible) {
         startAnimation();
       } else {
-        isHovering = false;
-        targetVelocity = DEFAULT_VELOCITY;
         stopAnimation();
       }
     };
@@ -431,16 +421,13 @@ onMounted(() => {
     measureCarouselPeriod();
     syncVideoPlayback();
 
-    carouselContainer.addEventListener('pointerenter', handlePointerEnter);
-    carouselContainer.addEventListener('pointermove', handlePointerMove);
-    carouselContainer.addEventListener('pointerleave', handlePointerLeave);
     carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
     carouselContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
     carouselContainer.addEventListener('touchcancel', handleTouchEnd, { passive: true });
     carouselContainer.addEventListener('scroll', handleScroll, { passive: true });
     carouselContainer.addEventListener('scrollend', handleScrollEnd);
-    reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
-    document.addEventListener('visibilitychange', syncVideoPlayback);
+    reducedMotionQuery.addEventListener('change', syncMotion);
+    document.addEventListener('visibilitychange', syncMotion);
     window.addEventListener('resize', handleResize);
 
     if ('IntersectionObserver' in window) {
@@ -461,22 +448,22 @@ onMounted(() => {
         video.pause();
         video.removeEventListener('playing', revealVideo);
       });
-      carouselContainer.removeEventListener('pointerenter', handlePointerEnter);
-      carouselContainer.removeEventListener('pointermove', handlePointerMove);
-      carouselContainer.removeEventListener('pointerleave', handlePointerLeave);
       carouselContainer.removeEventListener('touchstart', handleTouchStart);
       carouselContainer.removeEventListener('touchend', handleTouchEnd);
       carouselContainer.removeEventListener('touchcancel', handleTouchEnd);
       carouselContainer.removeEventListener('scroll', handleScroll);
       carouselContainer.removeEventListener('scrollend', handleScrollEnd);
-      reducedMotionQuery.removeEventListener('change', handleReducedMotionChange);
-      document.removeEventListener('visibilitychange', syncVideoPlayback);
+      reducedMotionQuery.removeEventListener('change', syncMotion);
+      document.removeEventListener('visibilitychange', syncMotion);
       window.removeEventListener('resize', handleResize);
     };
   }
 });
 
-onUnmounted(() => cleanupCarousel());
+onUnmounted(() => {
+  cleanupCarousel();
+  applyPauseState = () => {};
+});
 </script>
 
 <style scoped>
@@ -491,6 +478,20 @@ onUnmounted(() => cleanupCarousel());
   touch-action: pan-x pan-y;
   user-select: none;
   -webkit-overflow-scrolling: touch;
+}
+
+.showcase-carousel__controls {
+  display: flex;
+  justify-content: flex-end;
+  padding-block-start: var(--dt-space-400);
+  padding-inline: var(--dt-space-500);
+}
+
+/* Nothing moves under reduced motion, so there's nothing to pause. */
+@media (prefers-reduced-motion: reduce) {
+  .showcase-carousel__controls {
+    display: none;
+  }
 }
 
 .showcase-carousel::-webkit-scrollbar {
