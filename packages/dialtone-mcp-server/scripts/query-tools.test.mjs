@@ -14,6 +14,7 @@ test('failed project selection keeps bundled discovery and honest exact/no-match
   const button = module.executeQueryTool('get_component', { component: 'DtButton' }, context).structuredContent;
   assert.equal(button.match, 'exact');
   assert.equal(button.source.selection, 'bundled');
+  assert.ok(button.canonicalIdentity.imports.length > 0);
   assert.ok(button.canonicalIdentity.imports.every(route => route.verification === 'source-export'));
   const unknown = module.executeQueryTool('get_component', { component: 'DtMadeUp' }, context).structuredContent;
   assert.equal(unknown.match, 'no-match');
