@@ -122,4 +122,26 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(r.status).toBe(0);
     expect(r.stderr).not.toMatch(DEBUG_TAG);
   });
+
+  test('docs exact-ID selection is additive and returns the full record in the existing JSON array shape', () => {
+    const exact = run(['docs', '--id', 'examples/button-disabled-tooltip', '--format', 'json']);
+    expect(exact.status).toBe(0);
+    const records = JSON.parse(exact.stdout);
+    expect(records).toHaveLength(1);
+    expect(records[0].content).toContain('<span v-dt-tooltip="`Tooltip example`" tabindex="0">');
+    expect(records[0].content).toContain('app.use(DtTooltipDirective)');
+    const unknown = run(['docs', '--id', 'examples/unknown']);
+    expect(unknown.status).toBe(1);
+    expect(unknown.stderr).toContain('examples/button-default');
+    expect(run(['docs', 'button', '--id', 'examples/button-default']).status).toBe(1);
+  });
+
+  test('component examples point to exact example IDs with CLI syntax', () => {
+    const r = run(['component', 'DtButton', '--examples']);
+    expect(r.status).toBe(0);
+    expect(r.stdout).toContain('examples/button-default: dialtone docs --id examples/button-default');
+    expect(r.stdout).not.toContain('get_documentation');
+    expect(run(['component', 'DtStack', '--examples']).stdout).not.toContain('examples/button-');
+    expect(run(['docs', 'how do I show a tooltip on a disabled button']).stdout).toContain('examples/button-disabled-tooltip');
+  });
 });

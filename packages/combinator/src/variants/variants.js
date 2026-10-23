@@ -35,6 +35,7 @@ import DtListItemGroup from './variants_list_item_group.js';
 import DtLoader from './variants_loader.js';
 import DtModal from './variants_modal.js';
 import DtModeIsland from './variants_mode_island.js';
+import DtMotionText from './variants_motion_text.js';
 import DtNotice from './variants_notice.js';
 import DtPagination from './variants_pagination.js';
 import DtPopover from './variants_popover.js';
@@ -49,6 +50,7 @@ import DtScroller from './variants_scroller.js';
 import DtSegmentedControl from './variants_segmented_control.js';
 import DtSelectMenu from './variants_select_menu.js';
 import DtSkeleton from './variants_skeleton.js';
+import DtSlider from './variants_slider.js';
 import DtSplitButton from './variants_split_button.js';
 import DtStack from './variants_stack.js';
 import DtTabGroup from './variants_tab_group.js';
@@ -98,6 +100,7 @@ export default function variants () {
     DtLoader,
     DtModal,
     DtModeIsland,
+    DtMotionText,
     DtNotice,
     DtPagination,
     DtPopover,
@@ -112,6 +115,7 @@ export default function variants () {
     DtSegmentedControl,
     DtSelectMenu,
     DtSkeleton,
+    DtSlider,
     DtSplitButton,
     DtStack,
     DtTabGroup,

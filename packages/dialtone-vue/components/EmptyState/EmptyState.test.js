@@ -5,7 +5,7 @@ import { DtIcon } from '@/components/Icon';
 
 const MOCK_HEADER_TEXT = 'Nothing to see here';
 const MOCK_BODY_TEXT = 'Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque.';
-const MOCK_BODY_SLOT = '<h2>Custom body slot</h2>';
+const MOCK_BODY_SLOT = '<h2 data-qa="empty-state-body">Custom body slot</h2>';
 const MOCK_ICON_SLOT = '<dt-icon name="accessibility" />';
 const MOCK_ILLUSTRATION_SLOT = '<dt-illustration name="mind" />';
 
@@ -43,9 +43,8 @@ describe('DtIllustration Tests', () => {
 
     illustration = wrapper.find('[data-qa="dt-illustration"]');
     icon = wrapper.find('[data-qa="dt-icon"]');
-    headerText = wrapper.find('.d-empty-state__header-text');
-    bodyText = wrapper.find('.d-empty-state__body-text');
-    bodySlot = wrapper.find('h2');
+    [headerText, bodyText] = wrapper.findAll('[data-qa="dt-text"]');
+    bodySlot = wrapper.find('[data-qa="empty-state-body"]');
   };
 
   beforeEach(async () => {
@@ -71,6 +70,7 @@ describe('DtIllustration Tests', () => {
     });
 
     it('Should render size classes in wrapper', () => {
+      expect(wrapper.attributes('data-qa')).toBe('dt-stack');
       expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-lg')).toBe(true);
     });
 
@@ -101,22 +101,18 @@ describe('DtIllustration Tests', () => {
         expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-md')).toBe(true);
       });
 
-      it('Should update headline classes in header text', () => {
+      it('Should update headline classes in header text', async () => {
         mockProps = { size: 'md' };
 
-        updateWrapper();
-
-        headerText = wrapper.find('.d-empty-state__header-text');
+        await updateWrapper();
 
         expect(headerText.classes().includes('d-text-headline--xl')).toBe(true);
       });
 
-      it('Should update body classes in body text', () => {
+      it('Should update body classes in body text', async () => {
         mockProps = { size: 'md' };
 
-        updateWrapper();
-
-        bodyText = wrapper.find('.d-empty-state__body-text');
+        await updateWrapper();
 
         expect(bodyText.classes().includes('d-text-body--md')).toBe(true);
       });
@@ -220,7 +216,7 @@ describe('DtIllustration Tests', () => {
 
       await updateWrapper();
 
-      const illustrationWrapper = wrapper.find('.d-empty-state__illustration');
+      const illustrationWrapper = wrapper.find('[data-qa="dt-empty-state-illustration"]');
 
       expect(illustrationWrapper.classes()).toContain('my-illustration-class');
     });
@@ -231,7 +227,7 @@ describe('DtIllustration Tests', () => {
 
       await updateWrapper();
 
-      const iconWrapper = wrapper.find('.d-empty-state__icon');
+      const iconWrapper = wrapper.find('[data-qa="dt-empty-state-icon"]');
 
       expect(iconWrapper.classes()).toContain('my-icon-class');
     });
@@ -242,10 +238,11 @@ describe('DtIllustration Tests', () => {
 
       await updateWrapper();
 
-      const bodyWrapper = wrapper.find('.my-body-class');
+      const bodyWrapper = wrapper.find('[data-qa="dt-empty-state-body-slot"]');
 
       expect(bodyWrapper.exists()).toBe(true);
-      expect(bodyWrapper.find('h2').exists()).toBe(true);
+      expect(bodyWrapper.classes()).toContain('my-body-class');
+      expect(bodyWrapper.find('[data-qa="empty-state-body"]').exists()).toBe(true);
     });
   });
 

@@ -7,9 +7,12 @@
         "script": "build"
       },
       "inputs": [
-        "{projectRoot}/src/**",
         "{projectRoot}/package.json",
+        { "externalDependencies": ["markdown-it"] },
+        "{projectRoot}/src/**",
         "{workspaceRoot}/apps/dialtone-documentation/package.json",
+        "{workspaceRoot}/apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js",
+        "{workspaceRoot}/scripts/retrieval/profiles.mjs",
         "{workspaceRoot}/apps/dialtone-documentation/docs/**/*.md",
         "{workspaceRoot}/scripts/lib/vue-component-identity.mjs",
         "{workspaceRoot}/scripts/lib/component-name.mjs",

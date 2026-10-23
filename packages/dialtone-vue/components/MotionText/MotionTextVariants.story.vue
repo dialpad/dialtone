@@ -43,7 +43,6 @@
               text="Quick brown fox jumps"
               animation-mode="gradient-in"
               :speed="speed.value"
-              :auto-start="false"
               class="d-body--lg"
             />
           </dt-stack>
@@ -89,9 +88,7 @@
             <dt-motion-text
               :ref="el => { if (el) sizeRefs[size.class] = el }"
               text="Animated text"
-              animation-mode="fade-in"
-              :speed="300"
-              :auto-start="false"
+              animation-mode="slide-in-gradient"
               :class="size.class"
             />
           </dt-stack>
@@ -112,8 +109,6 @@
         <dt-motion-text
           text="This text loops continuously"
           animation-mode="slide-in"
-          :speed="200"
-          :auto-start="true"
           :loop="true"
           class="d-headline--md"
         />
@@ -134,39 +129,13 @@
           class="d-fw-wrap"
         >
           <dt-button
+            v-for="control in manualControls"
+            :key="control.method"
             :size="200"
             importance="outlined"
-            @click="manualRef?.start()"
+            @click="runManualControl(control.method)"
           >
-            Start
-          </dt-button>
-          <dt-button
-            :size="200"
-            importance="outlined"
-            @click="manualRef?.pause()"
-          >
-            Pause
-          </dt-button>
-          <dt-button
-            :size="200"
-            importance="outlined"
-            @click="manualRef?.resume()"
-          >
-            Resume
-          </dt-button>
-          <dt-button
-            :size="200"
-            importance="outlined"
-            @click="manualRef?.reset()"
-          >
-            Reset
-          </dt-button>
-          <dt-button
-            :size="200"
-            importance="outlined"
-            @click="manualRef?.skipToEnd()"
-          >
-            Skip to End
+            {{ control.label }}
           </dt-button>
         </dt-stack>
         <dt-stack
@@ -205,7 +174,6 @@ export default {
     return {
       speedRefs: {},
       sizeRefs: {},
-      manualRef: null,
       speeds: MOTION_TEXT_SPEEDS.map(speed => ({
         value: speed,
         label: this.getSpeedLabel(speed),
@@ -220,29 +188,25 @@ export default {
         { class: 'd-body--md', label: 'Body Medium' },
         { class: 'd-body--sm', label: 'Body Small' },
       ],
-    };
-  },
 
-  mounted () {
-    // Start all animations on mount
-    Object.values(this.speedRefs).forEach(ref => {
-      if (ref) {
-        setTimeout(() => ref.start(), 100);
-      }
-    });
-    Object.values(this.sizeRefs).forEach(ref => {
-      if (ref) {
-        setTimeout(() => ref.start(), 100);
-      }
-    });
+      manualControls: [
+        { method: 'start', label: 'Start' },
+        { method: 'pause', label: 'Pause' },
+        { method: 'resume', label: 'Resume' },
+        { method: 'reset', label: 'Reset' },
+        { method: 'skipToEnd', label: 'Skip to End' },
+      ],
+    };
   },
 
   methods: {
     getSpeedLabel (speed) {
       const labels = {
-        sm: 'Small (Fast)',
-        md: 'Medium',
-        lg: 'Large (Slow)',
+        100: 'Fastest',
+        200: 'Fast',
+        300: 'Default',
+        400: 'Slow',
+        500: 'Slowest',
       };
       return labels[speed] || speed;
     },
@@ -252,8 +216,12 @@ export default {
       const ref = refs[key];
       if (ref) {
         ref.reset();
-        setTimeout(() => ref.start(), 100);
+        this.$nextTick(() => ref.start());
       }
+    },
+
+    runManualControl (method) {
+      this.$refs.manualRef?.[method]();
     },
   },
 };

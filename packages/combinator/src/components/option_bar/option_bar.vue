@@ -205,6 +205,7 @@ import DtcOptionBarSettings from './option_bar_settings.vue';
 import { computed, ref, nextTick } from 'vue';
 import { OPTIONS_UPDATE_EVENT, SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
+import { reconcileSliderControlValues } from '@/src/lib/slider_control';
 import { isIconSlot } from '@/src/lib/icons';
 import { isClassProp } from '@/src/lib/utils';
 import { LOGICAL_ALIASES } from '@/src/lib/logical_aliases';
@@ -390,6 +391,7 @@ function updateMember (memberGroup, { member, value }) {
   emit(OPTIONS_UPDATE_EVENT, (options) => {
     options[memberGroup] = options[memberGroup] || {};
     options[memberGroup][member] = value;
+    if (memberGroup === 'props') reconcileSliderControlValues(props.info.props ?? [], options.props, member);
   });
 }
 

@@ -55,6 +55,8 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       ['apps/dialtone-documentation/docs/components/button.md', 'docs: clarify button usage', 'patch'],
       ['packages/dialtone-vue/directives/tooltip/tooltip.mdx', 'docs(tooltip): clarify registration', 'patch'],
       ['packages/dialtone-docs/src/generators/build-public-docs.mjs', 'fix(docs): preserve literal markup', 'patch'],
+      ['apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js', 'docs(examples): adjust authored fence parsing', 'patch'],
+      ['scripts/retrieval/profiles.mjs', 'chore(examples): update the tested consumer profile', 'patch'],
       ['packages/dialtone-icons/src/keywords-icons.json', 'build(icons): update search keywords', 'patch'],
       ['packages/dialtone-icons/src/svg/icons/bell.svg', 'feat(icons): add an icon', 'minor'],
       ['packages/dialtone-css/lib/build/less/utilities/padding.less', 'style(css): correct a utility declaration', 'patch'],

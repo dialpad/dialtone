@@ -5,6 +5,7 @@
     <span
       v-if="showIllustration"
       :class="['d-empty-state__illustration', illustrationClass]"
+      data-qa="dt-empty-state-illustration"
     >
       <!-- @slot Slot for the illustration. Displays when size is 'lg' or 'md'. Overrides icon. -->
       <slot name="illustration" />
@@ -13,6 +14,7 @@
     <span
       v-if="showIcon"
       :class="['d-empty-state__icon', iconClass]"
+      data-qa="dt-empty-state-icon"
     >
       <!-- @slot Slot for the icon. Displayed if illustration is not provided. -->
       <slot
@@ -53,6 +55,7 @@
     <div
       v-if="hasSlotContent(slots.body)"
       :class="bodyClass"
+      data-qa="dt-empty-state-body-slot"
     >
       <slot name="body" />
     </div>

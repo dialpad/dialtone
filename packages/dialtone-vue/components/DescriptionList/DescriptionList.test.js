@@ -61,21 +61,27 @@ describe('DtDescriptionList Tests', () => {
 
   describe('Accessibility Tests', () => {
     beforeEach(() => {
-      MOCK_LIST = wrapper.find('dl');
-
       updateWrapper();
+      MOCK_LIST = wrapper.find('[data-qa="dt-description-list"]');
     });
 
     it('Should render a <dl> tag', () => {
       expect(MOCK_LIST.exists()).toBe(true);
+      expect(MOCK_LIST.element.tagName).toBe('DL');
     });
 
     it('Should contain two <dt> tags', () => {
-      expect(MOCK_LIST.findAll('dt').length).toBe(2);
+      const terms = MOCK_LIST.findAll('[data-qa="dt-description-list-term"]');
+
+      expect(terms.length).toBe(2);
+      expect(terms.every(term => term.element.tagName === 'DT')).toBe(true);
     });
 
     it('Should contain two <dd> tags', () => {
-      expect(MOCK_LIST.findAll('dd').length).toBe(2);
+      const descriptions = MOCK_LIST.findAll('[data-qa="dt-description-list-description"]');
+
+      expect(descriptions.length).toBe(2);
+      expect(descriptions.every(description => description.element.tagName === 'DD')).toBe(true);
     });
   });
 
@@ -132,7 +138,7 @@ describe('DtDescriptionList Tests', () => {
 
         updateWrapper();
 
-        const dtElement = wrapper.find('dt');
+        const dtElement = wrapper.find('[data-qa="dt-description-list-term"]');
 
         expect(dtElement.classes().includes(customClass)).toBe(true);
       });
@@ -144,7 +150,7 @@ describe('DtDescriptionList Tests', () => {
 
         updateWrapper();
 
-        const ddElement = wrapper.find('dd');
+        const ddElement = wrapper.find('[data-qa="dt-description-list-description"]');
 
         expect(ddElement.classes().includes(customClass)).toBe(true);
       });

@@ -2,6 +2,7 @@
   <component
     :is="as"
     class="d-mode-island"
+    data-qa="dt-mode-island"
     :data-dt-mode="computedMode"
     :data-mode-island-inverted="invertedAttribute"
     :data-dt-contrast="currentContrast"

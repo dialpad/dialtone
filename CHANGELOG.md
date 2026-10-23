@@ -1,3 +1,22 @@
+# [10.8.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.7.0...dialtone/v10.8.0) (2026-10-20)
+
+
+### Bug Fixes
+
+* **Dialtone Docs:** DLT-3653 preserve documentation contracts ([#1460](https://github.com/dialpad/dialtone/issues/1460)) ([a46ac06](https://github.com/dialpad/dialtone/commit/a46ac063beb0bd07239b9f03d6a013d7983764e3))
+* **Dialtone Query Core, Dialtone Docs:** DLT-3085 retrieve directive guidance ([#1463](https://github.com/dialpad/dialtone/issues/1463)) ([d28b2f7](https://github.com/dialpad/dialtone/commit/d28b2f70c004937758ebb85070a525d0a4b4c8ef))
+
+
+### Documentation
+
+* **Dialtone Documentation:** DLT-3665 clarify CLI and MCP guides ([#1470](https://github.com/dialpad/dialtone/issues/1470)) ([1450a8d](https://github.com/dialpad/dialtone/commit/1450a8d70536891ae1d4c7837232e867f4776a72))
+* **Foundations:** DLT-3662 align brand guidance with resolve brand ([#1467](https://github.com/dialpad/dialtone/issues/1467)) ([c6e12aa](https://github.com/dialpad/dialtone/commit/c6e12aa9e378c65a060857c12f9e457ffa6c2719))
+
+
+### Features
+
+* **Dialtone Query Core:** DLT-3659 share curated discovery keywords ([#1472](https://github.com/dialpad/dialtone/issues/1472)) ([1033549](https://github.com/dialpad/dialtone/commit/1033549e2ec8087fee4adced26c9293d04a02953))
+
 # [10.7.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.6.0...dialtone/v10.7.0) (2026-10-15)
 
 

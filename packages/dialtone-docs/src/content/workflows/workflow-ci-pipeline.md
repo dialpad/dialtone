@@ -63,6 +63,8 @@ The lookup job also checks generated utility metadata and recommendation strings
 
 Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`; the documentation suite runs once and includes source-derived link checks.
 
+The shared fenced-demo parser (`fenced-demo-shared.js`) also feeds example generation. Parser-only changes trigger the lookup job on pull requests and staging pushes.
+
 Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scripts/retrieval/run.mjs` exercises query-core, CLI JSON and live MCP tool responses. The retrieval harness disables optional registry update-check I/O for deterministic lookup checks. Known retrieval failures carry a precise assertion, owning issue and removal condition; an unrelated failure or unexpected pass fails the job. These checks do not establish startup/network behavior or consumer build compatibility.
 
 The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also depends on its build, so startup and shutdown checks run against a built server. The release-path suite (`pnpm --dir packages/dialtone-mcp-server test:release-paths`) checks source selection, tool-versus-producer release severity and exclusion of release-bookkeeping notes for both adapters using the installed release implementation without publishing packages. Changes to their shared policy, `lookup-release.config.cjs`, route to this job on PRs and staging. The documentation app's manifest also routes here because it supplies the link generator's parser dependencies; both documentation manifests participate in the docs build hash.
@@ -244,9 +246,9 @@ Secrets required: `SMARTLING_API_USER`, `SMARTLING_API_SECRET`, `SMARTLING_PROJE
 
 ---
 
-### `sync-figma-to-tokens.yml` / `sync-tokens-to-figma.yml`
+### `sync-figma-to-tokens.yml` / `sync-variables-to-figma.yml`
 
-Manual-only workflows (`workflow_dispatch`). See `workflow-figma-sync.md` for full documentation.
+`sync-figma-to-tokens.yml` is manual-only (`workflow_dispatch`), pulling Figma variables back into the repo. `sync-variables-to-figma.yml` is the other direction — code to Figma — triggered by a push to `staging` touching `packages/dialtone-tokens/tokens/**` or `packages/dialtone-tokens/sync-scripts/**`, or a `/sync-tokens` comment on a pull request. See `workflow-figma-sync.md` for full documentation.
 
 ---
 

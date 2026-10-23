@@ -35,6 +35,8 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'packages/dialtone-docs/src/generators/build-public-docs.mjs',
     'apps/dialtone-documentation/docs/components/tooltip.md',
     'apps/dialtone-documentation/package.json',
+    'apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js',
+    'scripts/retrieval/profiles.mjs',
     'scripts/build-dialtone-vue-docs.mjs',
     'scripts/lib/vue-component-identity.mjs',
     'lookup-release.config.cjs',

@@ -1,5 +1,8 @@
 <template>
-  <div class="d-emoji-picker__search d-emoji-picker__alignment">
+  <div
+    class="d-emoji-picker__search d-emoji-picker__alignment"
+    data-qa="dt-emoji-picker-search"
+  >
     <dt-input
       id="searchInput"
       ref="searchInput"

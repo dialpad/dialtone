@@ -40,6 +40,8 @@ const commitPaths = [
   'apps/dialtone-documentation/package.json',
   ':(glob)apps/dialtone-documentation/docs/**/*.md',
   'apps/dialtone-documentation/docs/.vuepress/site-reference.js',
+  'apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js',
+  'scripts/retrieval/profiles.mjs',
   'apps/dialtone-documentation/scripts/lib/frontmatter.mjs',
   'apps/dialtone-documentation/scripts/lib/source-page.mjs',
   'scripts/build-dialtone-vue-docs.mjs',

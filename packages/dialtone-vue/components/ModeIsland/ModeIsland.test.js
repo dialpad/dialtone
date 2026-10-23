@@ -52,6 +52,7 @@ describe('DtModeIsland Tests', () => {
       });
 
       it('should have correct data attributes', () => {
+        expect(wrapper.attributes('data-qa')).toBe('dt-mode-island');
         expect(wrapper.attributes('data-dt-mode')).toBeDefined();
         expect(wrapper.attributes('data-dt-contrast')).toBeDefined();
         expect(wrapper.attributes('data-dt-material')).toBeDefined();
