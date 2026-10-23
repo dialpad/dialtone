@@ -4,7 +4,7 @@ Use Dialtone lookup tools before guessing about public component APIs, tokens, u
 
 ## First Choice
 
-Use the local Dialtone CLI first for version-sensitive work. The CLI resolves against the installed or workspace Dialtone version, which is important on forward branches such as Dialtone Next.
+Use the local Dialtone CLI first for version-sensitive work. Run it from the project directory that owns Dialtone. Inspect the reported source and version: lookup can use installed data or fall back to bundled data, which matters on forward branches such as Dialtone Next.
 
 - `./node_modules/.bin/dialtone search "<query>" --format json`
 - `./node_modules/.bin/dialtone component <name> --format json`
@@ -20,15 +20,21 @@ Prefer `--format json` when processing results programmatically. Prefer `prompt`
 Use the project-scoped Dialtone MCP server configured in `.codex/config.toml` when CLI output is insufficient or when MCP tools are already available in the session.
 
 - `search_documentation`: usage guidance, recipes, accessibility, migration notes, design principles, and how-to questions.
-- `search_components`: Vue component discovery and public API lookup.
+- `search_components`: discover candidate components; API summaries can be incomplete.
+- `get_component`: retrieve the selected component's available API using its canonical name, for example `{ "component": "DtToggle" }`. Keywords and fuzzy candidates are not exact selections.
+- `get_documentation`: retrieve exact section prose using the `id` returned by `search_documentation`. Do not invent section IDs.
 - `search_tokens`: design token lookup.
 - `search_utility_classes`: CSS utility lookup.
 - `search_icons`: icon lookup.
+
+Follow returned continuation tool calls and arguments when results are incomplete. Component details can page by section; documentation uses `textOffset` and `textLimit` in Unicode code points. Missing metadata is unknown, not proof that an API is absent.
+
+MCP currently uses bundled data; it does not verify the project's installed compatibility. Inspect source versions, hashes and missing-metadata notes. Documentation links are latest references, not version-matched guarantees. Verify code examples and required setup against local source.
 
 ## Constraints
 
 - Do not use lookup output as a substitute for reading changed source files.
 - Verify local source when implementing behavior changes.
 - Treat lookup results as public design-system context; do not add private Dialpad context to prompts, commits, or PRs.
-- If CLI and MCP results disagree, prefer the CLI for installed-version behavior and verify against local source before editing.
+- If CLI and MCP results disagree, check their reported sources. Prefer CLI evidence from installed data for version-sensitive work, and verify local source before editing.
 - If the CLI fails, use MCP as a fallback and report the CLI failure in the validation or handoff.

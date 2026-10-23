@@ -11,5 +11,7 @@ enabled_tools = [
   "search_components",
   "search_icons",
   "search_documentation",
+  "get_component",
+  "get_documentation",
 ]
 default_tools_approval_mode = "approve"
