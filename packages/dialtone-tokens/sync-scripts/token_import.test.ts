@@ -689,6 +689,56 @@ describe('generatePostVariablesPayload', () => {
     ])
   })
 
+  it('noops on a description Figma returns HTML-escaped', () => {
+    const description = `Don't bind "1.4" here & there <ever>`
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'collection',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:2:1': {
+            id: 'VariableID:2:1',
+            name: 'font/lineHeight/100',
+            key: 'variable_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'FLOAT',
+            valuesByMode: { '1:0': 1.4 },
+            remote: false,
+            description: 'Don&#39;t bind &quot;1.4&quot; here &amp; there &lt;ever&gt;',
+            hiddenFromPublishing: false,
+            scopes: ['LINE_HEIGHT'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokensByFile: FlattenedTokensByFile = {
+      'collection.mode1.json': {
+        'font/lineHeight/100': {
+          $type: 'number',
+          $value: 1.4,
+          $description: description,
+          $extensions: { 'com.figma': { scopes: ['LINE_HEIGHT'] } },
+        },
+      },
+    }
+
+    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+
+    expect(result.variables).toEqual([])
+  })
+
   it('noops on a composed colour already stored with the same alias and opacity', () => {
     const localVariablesResponse: ApiGetLocalVariablesResponse = {
       status: 200,
