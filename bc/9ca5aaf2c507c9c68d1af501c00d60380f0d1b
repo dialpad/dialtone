@@ -1,0 +1,25 @@
+packages/dialtone-vue/components/Slider/Composables/UseSliderDevWarnings.js
+  s_0d6a81bc191862::t_9ae4631f921e13 10,26-28
+packages/dialtone-vue/components/Slider/Slider.stories.js
+  s_0d6a81bc191862::t_9ae4631f921e13 173
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_0d6a81bc191862::t_9ae4631f921e13 656-659,758
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_0d6a81bc191862::t_278e6f81c56870 1032-1049
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bc9ca5aaf2c507c9c68d1af501c00d60380f0d1b",
+  "prompts": {},
+  "sessions": {
+    "s_0d6a81bc191862": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1462f-99ab-7d80-940e-c2556bf66597",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": null
+    }
+  }
+}

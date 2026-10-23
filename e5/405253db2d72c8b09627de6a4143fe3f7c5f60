@@ -1,0 +1,59 @@
+packages/dialtone-vue/components/Slider/Composables/UseSliderValue.js
+  s_f1b6a2e8befce4::t_5dfd903a41bcf7 17-21
+  s_f1b6a2e8befce4::t_cbd678a6538bb8 95-97
+  s_f1b6a2e8befce4::t_67aec6faf1de19 177-178
+  s_f1b6a2e8befce4::t_ec0d5658e5e4d2 3-6
+  s_f1b6a2e8befce4::t_9c78397fb6a541 58-62
+  s_f1b6a2e8befce4::t_2501cd7eca38bc 142-144,147-150
+  s_f1b6a2e8befce4::t_826a24b82c8cf9 160-163
+  s_f1b6a2e8befce4::t_0f94b5113288f7 39-41
+  s_f1b6a2e8befce4::t_ece70a0d03436d 110-114
+packages/dialtone-vue/components/Slider/Composables/UseSliderCollisionAvoidance.js
+  s_f1b6a2e8befce4::t_56f297dd09f7a9 49-53
+  s_f1b6a2e8befce4::t_b26a1b62b3e072 3-7
+  s_f1b6a2e8befce4::t_d5c2725426c772 42-46
+  s_f1b6a2e8befce4::t_17b5d6d0c5f00f 181-184
+  s_f1b6a2e8befce4::t_7953b007a93285 117-124
+packages/dialtone-vue/components/Slider/Composables/UseSliderMarksAndTicks.js
+  s_f1b6a2e8befce4::t_cd63d7fdeafe2b 14-17
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_f1b6a2e8befce4::t_abada316345b92 1006-1009
+  s_f1b6a2e8befce4::t_099bb1e071c424 19-26
+  s_f1b6a2e8befce4::t_600d3d6dc99f52 2135-2139
+  s_f1b6a2e8befce4::t_614274d015839e 1553-1556
+packages/dialtone-vue/components/Slider/Composables/UseSliderInteraction.js
+  s_f1b6a2e8befce4::t_bf698f908fcb0f 253-255
+  s_f1b6a2e8befce4::t_2b60cde0d633f5 167-172,178-180
+  s_f1b6a2e8befce4::t_0b19bf174ddad8 247-248
+  s_f1b6a2e8befce4::t_45d3b7590f7ce9 3-5
+  s_f1b6a2e8befce4::t_eca3655c8cfe65 236-239
+  s_f1b6a2e8befce4::t_cb0984523dcc65 85-88
+packages/dialtone-vue/components/Slider/Composables/UseSliderDevWarnings.js
+  s_f1b6a2e8befce4::t_6ab0030834461d 3-9
+  s_f1b6a2e8befce4::t_468262584d7c61 25-27
+packages/dialtone-vue/components/Slider/Composables/UseSliderGeometry.js
+  s_f1b6a2e8befce4::t_f56d5f0bf81c63 26-31
+  s_f1b6a2e8befce4::t_29d86e1cc381c5 16-19
+packages/dialtone-vue/components/Slider/Composables/UseSliderMagneticSnap.js
+  s_f1b6a2e8befce4::t_26c43f3c102b42 39-44
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_f1b6a2e8befce4::t_890fdac09048da 532-534
+  s_f1b6a2e8befce4::t_750b26210d7a48 540-542
+  s_f1b6a2e8befce4::t_7635d854e1c5ee 105-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "e5405253db2d72c8b09627de6a4143fe3f7c5f60",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

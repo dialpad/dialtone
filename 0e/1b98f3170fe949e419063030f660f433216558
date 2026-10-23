@@ -1,0 +1,19 @@
+.husky/pre-commit
+  s_e63122f46d819f::t_3720aae85d8948 21-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0e1b98f3170fe949e419063030f660f433216558",
+  "prompts": {},
+  "sessions": {
+    "s_e63122f46d819f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cbbe41d3-b1cd-455c-a7b1-d92e1d514157",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
