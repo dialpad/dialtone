@@ -11,8 +11,9 @@ const themes = JSON.parse(readFileSync(join(tokenRoot, '$themes.json'), 'utf8'))
 // Excluded by identity, not by shape: `dp` is the base every brand layers on,
 // and `expressive` is a display-scale variant with no dark counterpart. Naming
 // them means a brand that loses its dark.json fails here instead of silently
-// dropping out of the suite.
-const NOT_BRAND_THEMES = ['dp', 'expressive'];
+// dropping out of the suite. 'mobile-tmo' is a mobile-only theme that builds
+// upon 'dp' and 'tmo' themes.
+const NOT_BRAND_THEMES = ['dp', 'expressive', 'mobile-tmo'];
 
 const themeGroups = readdirSync(join(tokenRoot, 'theme'), { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && !NOT_BRAND_THEMES.includes(entry.name))
