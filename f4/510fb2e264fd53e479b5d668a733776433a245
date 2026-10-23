@@ -1,0 +1,53 @@
+packages/dialtone-cli/rollup.config.js
+  s_e047833b0467d1::t_640985bd144355 17-18
+packages/dialtone-cli/tests/formatters.test.ts
+  s_e047833b0467d1::t_95ae83fe442b4a 1-19,21-53
+  s_e047833b0467d1::t_e7247957a1c023 20
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_e047833b0467d1::t_037e6d3a07ef73 75
+  s_e047833b0467d1::t_581208548934b1 1,3-5,12,14-16
+  s_e047833b0467d1::t_e07d41180e4120 37
+  s_e047833b0467d1::t_9d93e6b3d1cd2f 62
+  s_e047833b0467d1::t_730cd3e1c4798c 40
+  s_e047833b0467d1::t_314791cda07ee1 28-36,38-39,41-45
+  s_e047833b0467d1::t_fb8d8f7e361d6f 63-74,76-80
+packages/dialtone-cli/src/formatters.ts
+  s_e047833b0467d1::t_6492c223a26146 257
+  s_e047833b0467d1::t_031d260462ea55 277
+  s_e047833b0467d1::t_d85c497d34f474 15,19-24
+  s_e047833b0467d1::t_5ce35a15ac335c 214
+  s_e047833b0467d1::t_ea8b3641fa1c99 280-281
+  s_e047833b0467d1::t_8b1d09eb4ed4ab 245
+  s_e047833b0467d1::t_fd9cfdf08f6230 26-29
+  s_e047833b0467d1::t_eefafda38fc320 96
+  s_e047833b0467d1::t_2af19a9ea63b1e 119
+  s_e047833b0467d1::t_3db91feae23919 194
+  s_e047833b0467d1::t_c14b1630c7adc0 168
+  s_e047833b0467d1::t_04ac4747852662 266
+  s_e047833b0467d1::t_9629877b36e988 25
+packages/dialtone-cli/src/commands/component.ts
+  s_e047833b0467d1::t_389235d52feb20 91,96
+  s_e047833b0467d1::t_0d7b4976273934 5
+  s_e047833b0467d1::t_20683c9538a328 36,38
+packages/dialtone-cli/src/commands/prompt.ts
+  s_e047833b0467d1::t_7e3514968fba4d 30
+  s_e047833b0467d1::t_583572974ba2d4 5
+  s_e047833b0467d1::t_36cb613c030f68 14,16
+  s_e047833b0467d1::t_587bfb26da0dbc 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f4510fb2e264fd53e479b5d668a733776433a245",
+  "prompts": {},
+  "sessions": {
+    "s_e047833b0467d1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "90490e85-57d5-47c7-8023-19393fdb46f5",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

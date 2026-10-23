@@ -1,0 +1,33 @@
+packages/dialtone-vue/components/ImageViewer/ImageViewer.test.js
+  s_b93b519d657e1f::t_31e0858ee01f12 249-255
+  s_b93b519d657e1f::t_f09b614dc0037e 248,256-273
+  s_b93b519d657e1f::t_0dc244b9de34f9 4
+  s_b93b519d657e1f::t_6028027615526c 275-289,300,303
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_b93b519d657e1f::t_8b5861de364eca 1168-1169
+  s_b93b519d657e1f::t_00981d0a24f0cc 654-657
+  s_b93b519d657e1f::t_6a7ece6277e65c 651-653
+  s_b93b519d657e1f::t_1637eb7d4a6247 1119-1138
+  s_b93b519d657e1f::t_560fc2ed90c3eb 6
+packages/dialtone-vue/components/ImageViewer/ImageViewer.vue
+  s_b93b519d657e1f::t_a9e7f13716d9ca 106
+  s_b93b519d657e1f::t_82a70732f8aac2 79
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_b93b519d657e1f::t_dfb2d9865d9365 729-773
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "74a00d78b98f77a508750dfac08a872ca9d97da9",
+  "prompts": {},
+  "sessions": {
+    "s_b93b519d657e1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5a784a33-91fd-4aa2-b8fd-2a4b9f8d093d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

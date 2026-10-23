@@ -1,0 +1,19 @@
+packages/dialtone-icons/src/svg/icons/general/circle-half-filled.svg
+  s_65713884737ac4::t_315fc428383ba7 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "52068159bc6467dc424ff95bde35011a3279d63a",
+  "prompts": {},
+  "sessions": {
+    "s_65713884737ac4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3e290ad0-61b8-4d1e-a025-3b72aa3eeeca",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "bhawkins-dialpad <bradley.hawkins@dialpad.com>"
+    }
+  }
+}

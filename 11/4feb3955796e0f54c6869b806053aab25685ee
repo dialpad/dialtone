@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.vue
+  s_2436873d8da844::t_f3208550de035b 1004-1020
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "114feb3955796e0f54c6869b806053aab25685ee",
+  "prompts": {},
+  "sessions": {
+    "s_2436873d8da844": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a083f570-3604-4dc1-943a-afdc03654f21",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
