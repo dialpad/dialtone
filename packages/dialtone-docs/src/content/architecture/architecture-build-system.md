@@ -9,7 +9,7 @@ related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 
 # Build System
 
-Dialtone uses **NX 19** as the task orchestrator and **pnpm 9** as the package manager. NX handles build ordering, caching, and parallel execution. pnpm handles dependency installation and workspace linking.
+Dialtone uses **NX 19** as the task orchestrator and **pnpm** as the package manager. Use the pnpm version pinned by `packageManager` in the [root manifest](../../../../../package.json). NX handles build ordering, caching, and parallel execution. pnpm handles dependency installation and workspace linking.
 
 ## How NX Works Here
 

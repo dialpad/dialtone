@@ -35,13 +35,13 @@ dialtone/
 
 These four packages form the foundation. They have a strict dependency order:
 
-**`@dialpad/dialtone-tokens`** (v1) — the bottom of the stack. Design tokens generated from Figma via Style Dictionary. Outputs CSS custom properties, LESS variables, PostCSS variables, and JavaScript theme objects. Has no internal Dialtone dependencies.
+**`@dialpad/dialtone-tokens`** — the bottom of the stack. Design tokens generated from Figma via Style Dictionary. Outputs CSS custom properties, LESS variables, PostCSS variables, and JavaScript theme objects. Has no internal Dialtone dependencies. Its [package manifest](../../../../dialtone-tokens/package.json) records the current version.
 
-**`@dialpad/dialtone-css`** (v8) — utility classes and component styles built with LESS, Gulp, and PostCSS. Depends on `dialtone-tokens` for all CSS variables. Outputs to `lib/dist/`.
+**`@dialpad/dialtone-css`** — utility classes and component styles built with LESS, Gulp, and PostCSS. Depends on `dialtone-tokens` for all CSS variables. Outputs to `lib/dist/`. Its [package manifest](../../../../dialtone-css/package.json) records the current version.
 
 **`@dialpad/dialtone-vue`** — Vue 3 components; its [package manifest](../../../../dialtone-vue/package.json) records the current package version. Depends on `dialtone-icons` and `dialtone-emojis` directly, and on `dialtone-css` and `dialtone-tokens` as peer dependencies. Component API docs are auto-generated via `vue-docgen-api` during the build step using `scripts/build-dialtone-vue-docs.mjs`. Outputs ESM and CJS formats to `dist/`.
 
-**`@dialpad/dialtone-icons`** (v4) — 594 SVG icons available as raw SVG files and as Vue 3 components. Also exports a JSON keyword index for search. Has no internal Dialtone dependencies.
+**`@dialpad/dialtone-icons`** — 594 SVG icons available as raw SVG files and as Vue 3 components. Also exports a JSON keyword index for search. Has no internal Dialtone dependencies. Its [package manifest](../../../../dialtone-icons/package.json) records the current version.
 
 ### Supporting Packages
 
