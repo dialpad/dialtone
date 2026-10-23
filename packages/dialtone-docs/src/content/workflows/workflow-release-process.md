@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [release, semantic-release, versioning, changelog, tags, tuesday, cron, staging, production, npm-publish]
 ai_summary: How Dialtone releases work — Tuesday cron, semantic-release per package, tag format, changelogs, and staging-to-production merge.
-last_updated: 2026-10-06
+last_updated: 2026-10-18
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
@@ -53,7 +53,13 @@ Examples:
 
 Tags are what NX and semantic-release use to determine what has changed since the last release. The tag prefix is what lets semantic-release distinguish which package a tag belongs to in the monorepo — missing or wrong `tagFormat` breaks the release for that package.
 
-The CLI and MCP server bundle query-core. Their release configurations include `packages/dialtone-query-core` in `commitPaths`, so release-triggering shared-core commits also select both adapters for release. `semantic-release-plus` passes these paths to `git log` as Git pathspecs. Test-only or documentation-only commits retain the usual no-release behavior.
+The CLI and MCP server bundle query-core and its generated datasets. Both release configurations use `lookup-release.config.cjs` beside the root release configuration to select the consumed component, utility/token, icon/keyword, public documentation and generator sources. `semantic-release-plus` passes these paths to `git log` as Git pathspecs. Source-family selection is conservative: a matching source change can qualify even when it leaves a dataset unchanged. Unrelated packages and test-only paths are excluded.
+
+For these selected commits, `build`, `chore`, `ci`, `docs` and `style` request a patch release. Nonbreaking `feat` commits request minors; `fix`, `perf` and `refactor` request patches. A breaking change confined to an upstream producer refreshes the bundled data with a tool patch. A commit touching the adapter itself, shared query-core or the shared runtime component-name helper retains normal breaking-footer semantics. Mixed source/tool changes retain those semantics too. Test paths do not count as contract changes.
+
+The shared module delegates commit analysis and notes to the installed release libraries. It omits automated `chore(release)` commits from both steps, including copied breaking notes. Upstream breaking notices appear under **Bundled Dialtone data changes**, separate from tool contract notices. Normal `test` commits do not request a release.
+
+The documentation app's manifest supplies parser dependencies, so it participates in release selection, lookup CI routing and the docs build hash. When adding a new consumed producer, update the shared source policy and the existing release-path suite; do not add artificial adapter commits to trigger publication.
 
 ## Packages Released
 
@@ -102,7 +108,7 @@ Actual npm publishing is done by a separate `publish-web.yml` workflow, which tr
 
 `dialtone-icons` and `dialtone-emojis` have additional `releaseRules` that trigger patch releases for `build`, `chore`, `ci`, `docs`, `style`, and `test` commit types. This is intentional — icon and emoji additions often arrive via those commit types and should increment the version.
 
-All other packages only release on `feat`, `fix`, `perf`, `refactor`, and `BREAKING CHANGE`.
+The CLI and MCP server have the source-qualified patch rules described above. Other packages retain their existing `feat`, `fix`, `perf`, `refactor` and `BREAKING CHANGE` rules.
 
 ## Release Commit Format
 

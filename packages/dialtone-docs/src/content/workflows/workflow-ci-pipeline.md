@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-14
+last_updated: 2026-10-18
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -67,7 +67,7 @@ The shared fenced-demo parser (`fenced-demo-shared.js`) also feeds example gener
 
 Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scripts/retrieval/run.mjs` exercises query-core, CLI JSON and live MCP tool responses. The retrieval harness disables optional registry update-check I/O for deterministic lookup checks. Known retrieval failures carry a precise assertion, owning issue and removal condition; an unrelated failure or unexpected pass fails the job. These checks do not establish startup/network behavior or consumer build compatibility.
 
-The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also depends on its build, so startup and shutdown checks run against a built server. The release-path suite (`pnpm --dir packages/dialtone-mcp-server test:release-paths`) checks commit selection using the installed release implementation without publishing packages.
+The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also depends on its build, so startup and shutdown checks run against a built server. The release-path suite (`pnpm --dir packages/dialtone-mcp-server test:release-paths`) checks source selection, tool-versus-producer release severity and exclusion of release-bookkeeping notes for both adapters using the installed release implementation without publishing packages. Changes to their shared policy, `lookup-release.config.cjs`, route to this job on PRs and staging. The documentation app's manifest also routes here because it supplies the link generator's parser dependencies; both documentation manifests participate in the docs build hash.
 
 ---
 
