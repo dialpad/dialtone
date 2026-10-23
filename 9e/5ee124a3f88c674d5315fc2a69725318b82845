@@ -1,0 +1,25 @@
+packages/combinator/src/components/combinator.test.js
+  s_bda95360f3cca1::t_73a0aa0160acc5 7
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_bda95360f3cca1::t_26d1888e872bf7 449-450,461,472,477,479-481
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_bda95360f3cca1::t_bc50bffee15954 415
+packages/combinator/src/lib/slider_control.test.js
+  s_bda95360f3cca1::t_49a988727bb286 2,7-8,11-12,15-21,24-28,31,38-42,45-46,48-50,53-62,64-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9e5ee124a3f88c674d5315fc2a69725318b82845",
+  "prompts": {},
+  "sessions": {
+    "s_bda95360f3cca1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16057-cde5-76a0-a857-9178e5a8799c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

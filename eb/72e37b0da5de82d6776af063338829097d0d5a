@@ -1,0 +1,21 @@
+packages/dialtone-icons/src/svg/icons/controls/stop-stroke.svg
+  s_22978f81eaeea4::t_8070a9e88969b0 1-3
+packages/dialtone-icons/src/keywords-icons.json
+  s_22978f81eaeea4::t_cb1a6fd8d45902 1032-1036
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eb72e37b0da5de82d6776af063338829097d0d5a",
+  "prompts": {},
+  "sessions": {
+    "s_22978f81eaeea4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "141bcbd3-bdc6-4ff0-82c1-9cefcaa7af9c",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

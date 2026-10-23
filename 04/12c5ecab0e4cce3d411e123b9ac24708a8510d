@@ -1,0 +1,48 @@
+packages/dialtone-tokens/sync-scripts/build_materials.ts
+  s_355402be618789::t_b8a38bde445208 41
+  s_355402be618789::t_47efdf0fe212bc 179
+  s_355402be618789::t_34b0bf8004e88b 322
+  s_355402be618789::t_3a69e92585998d 25-36
+  s_355402be618789::t_8a49b5791d7545 169,178,180-183,190
+packages/dialtone-tokens/sync-scripts/build_variables.ts
+  s_355402be618789::t_fd2d9fdad47980 446
+  s_355402be618789::t_6a06728f989f95 359
+  s_355402be618789::t_6198df3f713083 32
+  s_355402be618789::t_c1aebd396c41af 407
+  s_355402be618789::t_0a07da6d9e487b 451
+  s_355402be618789::t_d343c95a376890 15-26
+  s_355402be618789::t_5fa2d085018218 445,447-448
+packages/dialtone-tokens/sync-scripts/figma_api.ts
+  s_355402be618789::t_33de73e9ec602b 108-155
+  s_355402be618789::t_689027e0ab94ff 2
+  s_f1b6a2e8befce4::t_e488ed0517a105 156-157
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0412c5ecab0e4cce3d411e123b9ac24708a8510d",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
