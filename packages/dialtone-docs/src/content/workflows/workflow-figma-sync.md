@@ -46,6 +46,8 @@ The sync resolves the token sets itself, so it does not need `dialtone-tokens:bu
 
 `sync:materials` writes the five material collections, which extend the main one. It reads the main collection to find the variables it overrides, so run it after `sync:variables`, never before.
 
+Both scripts write two parent collections from the same tokens, each to its own Figma file: "Dialtone 2026" in `FILE_KEY`, which keeps each token's `hiddenFromPublishing` flag, and "Dialtone 2026 Unrestricted" in `UNRESTRICTED_FILE_KEY`, which publishes every emitted variable for people building libraries on Dialtone. Each has its own five material collections ("Dialtone 2026 Unrestricted / Steel", and so on). Separate files keep the two libraries apart, so published names never collide and a designer only sees the library they link. When `COLLECTION_NAME` is set, as in the preview file, the Unrestricted name follows it. If `UNRESTRICTED_FILE_KEY` is not set, the unrestricted collection is skipped with a message and the restricted file syncs as before. `--unrestricted-file-key` overrides it, and `--local-snapshot` applies to the restricted file only. The `:check` scripts verify both collections.
+
 ### Getting it into Figma, once this reaches `staging`
 
 The push trigger takes over. Open the pull request, and if you want to see the change in Figma before it merges, comment `/sync-tokens` on it: that syncs to a separate preview file. Merging to `staging` syncs the main file.
