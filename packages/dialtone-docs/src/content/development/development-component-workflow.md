@@ -68,7 +68,7 @@ Without the root export, the component is not available to consumers of `@dialpa
 
 ## API Style
 
-New components use Composition API with `<script setup>` under the current Vue requirements. Existing Options API components retain their style unless conversion is explicitly requested. The following illustrates an existing Options API component, not a new-component scaffold:
+New components use Composition API with `<script setup lang="ts">` under the current Vue requirements. Existing Options API components retain their style unless conversion is explicitly requested. The following illustrates an existing Options API component, not a new-component scaffold:
 
 ```javascript
 export default {

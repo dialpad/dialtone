@@ -27,7 +27,8 @@ All other branches are short-lived feature branches created per change and delet
 
 `staging` is the default base and PR target. Follow an explicit user instruction or the actual PR target when it differs; do not change release branches directly. The [root safeguards](../../../../../AGENTS.md) govern branch safety and user-work preservation.
 
-The flow:
+When `staging` is the selected target, the flow is:
+
 1. Create a branch off `staging`
 2. Do the work, push commits
 3. Open a PR into `staging`
@@ -48,7 +49,7 @@ docs/DLT-9012-what-is-documented
 chore/NO-JIRA-maintenance-task
 ```
 
-Branch names do not select a package release; current commit/release configuration determines that behavior. Do not infer ticket authorization from branch history.
+Release eligibility and channel depend on the selected branch; see the [release workflow](../../../../../.github/workflows/release.yml). Commit and package release configuration determine which packages and versions are released. Do not infer ticket authorization from branch history.
 
 ## How Production Gets Updated
 
