@@ -2,9 +2,11 @@
   <pre
     class="d-codeblock"
     :class="{ 'd-codeblock--bordered': bordered }"
+    data-qa="dt-codeblock"
   ><code
     class="d-codeblock__code"
     :class="`d-codeblock__code--${sizeClass}`"
+    data-qa="dt-codeblock-code"
   >{{ text }}</code></pre> <!-- this must be a single line -->
 </template>
 

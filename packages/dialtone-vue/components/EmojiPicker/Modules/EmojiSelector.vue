@@ -1,6 +1,7 @@
 <template>
   <div
     class="d-emoji-picker__selector"
+    data-qa="dt-emoji-picker-selector"
   >
     <div
       id="d-emoji-picker-list"
@@ -10,6 +11,7 @@
       <p
         v-if="emojiFilter"
         class="d-emoji-picker__search-label d-emoji-picker__alignment"
+        data-qa="dt-emoji-picker-search-results-label"
       >
         {{ filteredEmojis.length > 0 ? searchResultsLabel : searchNoResultsLabel }}
       </p>
@@ -18,7 +20,7 @@
         ref="tabCategoryRef"
         class="d-emoji-picker__category d-emoji-picker__alignment"
       >
-        <p>
+        <p data-qa="dt-emoji-picker-sticky-label">
           {{ fixedLabel }}
         </p>
       </div>
@@ -27,6 +29,7 @@
         v-show="!emojiFilter"
         :key="indexTab"
         :ref="tabLabel.ref"
+        data-qa="dt-emoji-picker-group"
         class="d-emoji-picker__alignment"
       >
         <p
@@ -42,6 +45,7 @@
             (emojis[tabs[indexTab] + skinTone] ? emojis[tabs[indexTab] + skinTone] : emojis[tabs[indexTab]])"
             :key="emoji.shortname"
             :ref="el => { if (el) setEmojiRef(el, indexTab, indexEmoji) }"
+            data-qa="dt-emoji-picker-emoji"
             type="button"
             :aria-label="emoji.name"
             @click="event => selectEmoji(emoji, event)"
@@ -74,6 +78,7 @@
             v-for="(emoji, index) in filteredEmojis"
             :key="emoji.shortname"
             :ref="el => { if (el) setFilteredRef(el, index) }"
+            data-qa="dt-emoji-picker-emoji"
             type="button"
             :aria-label="emoji.name"
             :class="{

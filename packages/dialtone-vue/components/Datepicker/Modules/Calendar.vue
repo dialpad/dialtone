@@ -2,6 +2,7 @@
   <table
     class="d-datepicker__calendar"
     aria-labelledby="calendar-heading"
+    data-qa="dt-datepicker-calendar"
   >
     <thead>
       <tr>
@@ -13,6 +14,7 @@
         >
           <span
             class="d-datepicker__weekday"
+            data-qa="dt-datepicker-weekday"
             :title="day"
             :aria-label="day"
           > {{ day }}</span>
@@ -23,6 +25,7 @@
       <tr
         v-for="(week, indexWeek) in calendarDays"
         :key="indexWeek"
+        data-qa="dt-datepicker-week"
       >
         <td
           v-for="(day, indexDays) in week.days"
