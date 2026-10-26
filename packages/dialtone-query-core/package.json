@@ -32,5 +32,18 @@
     "url": "https://github.com/dialpad/dialtone.git",
     "directory": "packages/dialtone-query-core"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js",
+      "default": "./build/index.js"
+    },
+    "./node": {
+      "types": "./build/node-data-resolver.d.ts",
+      "import": "./build/node-data-resolver.js",
+      "default": "./build/node-data-resolver.js"
+    },
+    "./*": "./*"
+  }
 }

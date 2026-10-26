@@ -61,6 +61,38 @@ const detail = (
   components = records,
 ) => getComponentDetail(args, components);
 
+it.each([
+  ['DtText', null, 'unverified'],
+  ['DtText', [], 'unavailable'],
+  ['DtTooltipDirective', ['DtTooltipDirective'], 'no-match'],
+  ['ARROW_KEYS', ['ARROW_KEYS'], 'unverified'],
+  ['DtButon', [], 'no-match'],
+] as const)('missing metadata for %s is qualified by actual export evidence', (component, names, match) => {
+  expect(getComponentDetail({ component }, [], names).match).toBe(match);
+});
+
+it('refuses retained metadata when the verified installed entry omits its export', () => {
+  const internal: Component = {
+    ...records[0],
+    identity: { ...identity('DtButton'), kind: 'internal', imports: [] },
+  };
+  for (const record of [internal, records[0]]) {
+    expect(getComponentDetail({ component: 'DtButton' }, [record], ['DtText']))
+      .toMatchObject({
+        match: 'unavailable',
+        reason: 'not-exported',
+        component: null,
+        items: [],
+        available: [],
+        unknown: [],
+        unknownContractFields: [],
+      });
+  }
+  expect(getComponentDetail({ component: 'DtButton' }, [internal]).match).toBe('exact');
+  const aliased: Component = { ...records[0], identity: { ...identity('DtButton'), aliases: ['ActionButton'] } };
+  expect(getComponentDetail({ component: 'ActionButton' }, [aliased], ['DtButton']).match).toBe('exact');
+});
+
 describe('selected component contract', () => {
   it('constrains kind to Button and retains complete values/default/deprecation tags', () => {
     const result = detail({

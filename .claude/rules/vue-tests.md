@@ -59,7 +59,7 @@ Never select by CSS class or bare tag name — these are brittle.
 
 ## Constants
 
-Import valid values from `*_constants.js`. Never hardcode strings like `'md'` — use `COMPONENT_SIZE_DEFAULT`.
+Import valid values from the component constants identified by the shared Vue conventions. Never hardcode strings like `'md'` — use `COMPONENT_SIZE_DEFAULT`.
 
 ## Required Test Categories
 

@@ -16,26 +16,13 @@ Before scaffolding, verify the component name is available:
 
 ### 2. Scaffold Component Files
 
-New components use **Composition API** with `<script setup lang="ts">`, `defineProps`, `defineEmits`, and `withDefaults`. See path-scoped rules for conventions. Create the following files under `packages/dialtone-vue/components/<name>/`:
-
-- **`<name>.vue`** — Component implementation (Composition API, ARIA attributes, keyboard navigation)
-- **`<name>_constants.js`** — Exported size modifiers, variant kinds, validation arrays (imported by component, tests, stories)
-- **`<name>.test.js`** — Vitest + `@vue/test-utils` tests (rendering, props, events, slots, a11y)
-- **`<name>.stories.js`** — Storybook stories for variant/size combinations with interactive controls
-- **`<name>.mdx`** — MDX documentation page with usage examples and API table
-- **`index.js`** — Barrel export:
-
-```js
-export { default as Dt<Name> } from './<name>.vue';
-export * from './<name>_constants';
-```
-
-**Optional files for complex components:**
-
-- **`utils.js`** — Utility/helper functions specific to this component
-- **`validators.js`** — Custom prop or value validators
-- **`modules/`** — Directory for sub-components (e.g. emoji_picker has `emoji_search.vue`, `emoji_selector.vue`)
-- **`composables/`** — Directory for composition functions (e.g. `useCalendar.js`, `useKeyboardNavigation.js`)
+Read `.agents/resources/rules/vue-components.md` for the maintained API conventions,
+file layout, constants naming and optional artifacts before scaffolding. The
+component-local CLAUDE import supplies the same policy during component work.
+Include appropriate ARIA attributes, keyboard behavior, observable Vitest tests
+and interactive Storybook stories. Follow an existing component's `index.js`
+for its barrel export pattern; do not create mandatory MDX or rename existing
+files merely to match an example.
 
 ### 3. Update Barrel Exports
 

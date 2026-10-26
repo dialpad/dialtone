@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-18
+last_updated: 2026-10-23
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -61,7 +61,7 @@ Directive MDX sources (`packages/dialtone-vue/directives/**/*.mdx`) also feed th
 
 The lookup job also checks generated utility metadata and recommendation strings with `node --test scripts/tests/dialtone-recommendations.test.mjs packages/dialtone-css/postcss/dialtone-docs.test.cjs`. A separate `test-lint-plugins` job checks generated migration guidance against the unchanged helper configs and runs Stylelint. ESLint runs once in `test-cli`.
 
-Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`; the documentation suite runs once and includes source-derived link checks.
+Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm nx run dialtone-mcp-server:test-protocol`, whose target depends on the MCP build; the documentation suite runs once and includes source-derived link checks.
 
 The shared fenced-demo parser (`fenced-demo-shared.js`) also feeds example generation. Parser-only changes trigger the lookup job on pull requests and staging pushes.
 
