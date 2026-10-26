@@ -39,10 +39,17 @@ If breaking changes found: ensure `BREAKING CHANGE:` footer in commits, suggest 
 
 ### 3. Documentation Completeness
 
-For each changed component, verify all 6 documentation artifacts are updated per project rules.
+For each changed component, read `.agents/resources/rules/vue-components.md`
+and assess its Component Artifact Pipeline, including CLI/MCP lookup data and
+Combinator outputs.
+Record which artifacts changed and why others need no change.
 
 - **New utilities**: verify docs JSON inclusion and documentation page
 - **New tokens**: verify platform outputs generated and documentation page
+
+Apply the instruction-maintenance procedure in
+`.agents/resources/agent-tooling-parity.md` when assessing contributor guidance
+and public guides for PR readiness.
 
 ### 4. Test Verification
 
@@ -66,7 +73,7 @@ Ensure new additions don't duplicate existing functionality:
 
 ### 6. Separation of Concerns
 
-Scan changed Vue files for anti-patterns per project conventions (`.claude/rules/vue-components.md`): complex template expressions, inline styles, raw CSS values that should use tokens.
+Scan changed Vue files for anti-patterns per project conventions (`.agents/resources/rules/vue-components.md`): complex template expressions, inline styles, raw CSS values that should use tokens.
 
 ## Output Format
 

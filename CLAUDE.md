@@ -1,3 +1,5 @@
+@AGENTS.md
+
 # Dialtone Design System
 
 Dialtone is Dialpad's design system — a monorepo providing tokens, CSS utilities, Vue components, documentation, and developer tooling for building consistent UIs across Dialpad products.
@@ -48,64 +50,23 @@ All builds use Nx. Run from the repo root:
 
 ## Commit Convention
 
-Format: `<type>(<scope>): <jira> <subject>`
-
-See [COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md) for full details.
-
-**Types**: `build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`, `revert`, `style`, `test`
-
-**Scope**: Lowercase kebab-case. Use component name, package name, or omit. Multiple scopes separated by comma.
-
-**Jira**: Required. Use `DLT-XXX` ticket ID, or `NO-JIRA` if none.
-
-**Subject**: Imperative, present tense. No capitalized first letter. No trailing period.
-
-**Examples**:
-
-```text
-feat(select-menu): DLT-123 add leftIcon prop
-fix(combobox, combobox-with-popover): DLT-456 fix keyboard navigation
-chore: NO-JIRA update dependencies
-```
-
-**Release-triggering types**: `feat` (MINOR), `fix`/`perf`/`refactor` (PATCH). `BREAKING CHANGE:` in footer → MAJOR.
+Read [.github/COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md) before preparing a commit or PR title. The imported contributor guide owns ticket selection and shared safeguards; the Claude commit reference supplies its workflow steps.
 
 ## PR Conventions
 
 - PR title must follow the same commit convention format
 - Use `/pr-fill` to auto-generate PR description from the template
-- Never include `Co-Authored-By` lines in commits or PR bodies
 - When changes span multiple packages, note cross-package impact in the PR description
 
 ## Jira
 
 - Project: **DLT** (Dialtone)
-- All work requires a Jira ticket — create one via the Atlassian MCP if none exists
 - The Atlassian MCP server is not bundled with this project — it must be configured per-user in your Claude Code MCP settings
-- Ticket URL format: `https://dialpad.atlassian.net/browse/DLT-XXX`
+- Use the plain ticket key in public PR bodies; follow the shared public-repo and ticket-selection policy in `AGENTS.md`.
 
-## Vue Conventions (Summary)
+## Vue Conventions and Component Artifacts
 
-- **New components**: Composition API with `<script setup lang="ts">`
-- **Existing components**: Options API with `compatConfig: { MODE: 3 }` — do NOT convert unless explicitly asked
-- **Props**: Use `validator` (NOT `validate` — Vue silently ignores `validate`)
-- **Events**: `update:modelValue` for v-model; `update:open` for all overlay visibility (Modal, Tooltip, Toast, Popover, Dropdown, etc.)
-
-Detailed conventions are in path-scoped rules (`.claude/rules/vue-components.md`) that activate automatically when editing component files.
-
-## Documentation Pipeline (9 Artifacts)
-
-When creating or updating a component, ALL must stay in sync:
-
-1. **Vue source**: `packages/dialtone-vue/components/`
-2. **Tests**: `.test.js` using Vitest + @vue/test-utils
-3. **Storybook stories**: `.stories.js` + `.mdx`
-4. **Component docs JSON**: via `scripts/build-dialtone-vue-docs.mjs`
-5. **VuePress documentation**: `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
-6. **MCP server data**: `packages/dialtone-mcp-server/src/data.ts`
-7. **Combinator variant file**: `packages/combinator/src/variants/variants_<component>.js` plus registration in `packages/combinator/src/variants/variants.js`. Required for prop, slot, value, and visual-state changes. See `.claude/rules/combinator-variants.md`.
-8. **Component wall thumbnail**: auto-generated PNG at `apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/<slug>-{light,dark}.png`. Run `pnpm nx run dialtone-documentation:thumbs` to regen (pre-commit hook fires automatically on relevant staged changes). If the Combinator default doesn't render well as a thumbnail, author an override at `apps/dialtone-documentation/thumbs/<slug>.vue`; see `apps/dialtone-documentation/thumbs/README.md`. Preview live at `pnpm nx run dialtone-documentation:thumbs:preview` (picker at `/`, full grid at `/?gallery`).
-9. **Public docs JSON**: `packages/dialtone-docs/dist/public-docs.json`, built by `packages/dialtone-docs/src/generators/build-public-docs.mjs` from `apps/dialtone-documentation/docs/**/*.md` and the public directives' MDX pages. Directive references also read their `.stories.js` titles, `dialtone-vue/index.js` exports, `dialtone-vue/package.json` and the shared `SITE_URL`. Consumed by `dialtone-mcp-server` (`search_documentation`) and `dialtone-cli` (`dialtone docs`) via `@dialpad/dialtone-query-core`. Rebuilt by `pnpm nx run dialtone-docs:build`; Nx inputs include these sources.
+Before component work, read the [shared Vue conventions and complete artifact pipeline](.agents/resources/rules/vue-components.md). The component-local `packages/dialtone-vue/components/CLAUDE.md` imports that resource when Claude reads, writes or edits component files; scoped rule adapters retain their existing names. API policy and the artifact list are maintained there, including Combinator variants, thumbnails and CLI/MCP lookup data.
 
 ## Release Process
 
@@ -116,7 +77,7 @@ When creating or updating a component, ALL must stay in sync:
 
 ## Doc Sync Tooling
 
-Hooks and tools that keep `packages/dialtone-docs/src/content/` in sync with source code changes. Requires the `dialtone-docs` package (PR #1051) to be merged.
+Hooks and tools that keep `packages/dialtone-docs/src/content/` in sync with source code changes.
 
 ### How it works
 

@@ -1,5 +1,5 @@
 ---
-description: "End-to-end component pipeline orchestrator. Invoked when a component is created or significantly updated. Verifies all 6 documentation artifacts are in sync."
+description: "End-to-end component pipeline orchestrator. Invoked when a component is created or significantly updated. Verifies applicable component artifacts against the shared Vue pipeline."
 tools:
   - Bash
   - Read
@@ -14,7 +14,7 @@ memory:
 
 # Component Orchestrator Agent
 
-Ensures all 6 artifacts are consistent when a Vue component is created or significantly modified: source, tests, docs JSON, Storybook stories, VuePress page, and downstream tool data (MCP server + language server). Memory tracks past pipeline results and known pre-existing failures.
+Before running this workflow, read `.agents/resources/rules/vue-components.md` and use its complete Component Artifact Pipeline for artifact selection and reporting. Keep applicable artifacts consistent when a Vue component is created or significantly modified. Memory tracks past pipeline results and known pre-existing failures.
 
 ## Pipeline Steps
 
@@ -60,7 +60,7 @@ Generate a summary table with PASS/FAIL/SKIP status for each artifact:
 | Source (props/events)  | PASS   |       |
 | Test file              | PASS   |       |
 | Docs JSON              | PASS   |       |
-| ... (all 10 artifacts) |        |       |
+| ... (applicable artifacts) |        |       |
 
 Manual steps: visual Storybook review, Figma sync verification, accessibility audit.
 ```
