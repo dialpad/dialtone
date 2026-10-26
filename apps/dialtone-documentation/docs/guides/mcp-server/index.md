@@ -11,11 +11,9 @@ keywords:
   ]
 ---
 
-The Dialtone MCP Server lets compatible AI clients search Dialtone through Model Context Protocol (MCP) tools. Use the [Dialtone CLI](/guides/cli/) for direct terminal queries, shell scripts, or lookups that should match the Dialtone version installed in your project.
+The Dialtone MCP Server lets compatible AI clients search Dialtone through Model Context Protocol (MCP) tools. Use the [Dialtone CLI](/guides/cli/) for direct terminal queries or shell scripts. MCP can select installed lookup data when configured with an explicit dependency root; otherwise it uses bundled data.
 
 ## What It Does
-
-The Dialtone MCP Server searches data bundled with the installed server package. Replies identify source packages, versions, and hashes; the server does not check compatibility with your project's installed Dialtone packages.
 
 Search across:
 
@@ -98,6 +96,37 @@ The packaged server uses stdio. Configure your MCP client to launch the server p
 
 > [!INFO] Version Checking
 > Startup does not wait for the update check. A successful check writes a version or update notice to stderr; failed or malformed responses are ignored. The check is cancelled after two seconds or during shutdown.
+
+<a id="select-installed-project-data"></a>
+
+## Configure MCP to use your installed Dialtone version
+
+The project root setting, `DIALTONE_PROJECT_ROOT`, tells the MCP server which installed Dialtone version to use. Set it to the absolute directory containing your application's `package.json` and dependency installation. The server does not infer this directory from its launch location, scan for nested applications, or request client workspace roots.
+
+For a nested application, point at the application rather than the repository root:
+
+```json
+{
+  "mcpServers": {
+    "dialtone": {
+      "command": "dialtone-mcp-server",
+      "env": {
+        "DIALTONE_PROJECT_ROOT": "/absolute/path/repo/apps/web"
+      }
+    }
+  }
+}
+```
+
+For dependencies hoisted into an ancestor workspace, also set `DIALTONE_LOOKUP_ROOT` to that absolute workspace directory. Package and data realpaths must stay inside the authorized boundary; lookup does not cross a separate Git repository. Symlinks into that boundary are supported. Dependencies linked outside it remain unverified. Use separate named server configurations for separate applications.
+
+In pnpm workspaces, and other layouts where package symlinks resolve outside the application folder, also set `DIALTONE_LOOKUP_ROOT` to the workspace root.
+
+A declared `@dialpad/dialtone` takes precedence over standalone packages. Otherwise, declared standalone Vue, CSS and icon packages supply installed data. With an explicit lookup root, declarations can come from the nearest ancestor workspace manifest inside that boundary; the closest manifest declaring Dialtone packages wins. Missing or malformed domains fall back separately to bundled data with a reason. Documentation, component-page links and client rules remain bundled references. Without configuration, existing bundled lookups continue; invalid configuration never silently falls back to the launch directory.
+
+Search replies remain Markdown, with actual source package versions, hashes and fallback reasons. Structured detail reports per-domain installed or bundled sources. Resource JSON uses the same selected data, with source information in the result's `_meta.dialtone`. A statically verified entry can establish that a component is not exported; absent metadata alone cannot. Bundled fallback retains its source-verified component names and import hints; it does not verify your installation. Startup stderr and search/detail replies report fallback and version-mismatch warnings. Bundled documentation is an expected latest reference, so it is not labelled as a failed installed-data lookup. These checks do not run application imports or verify peers, runtime behavior or the active theme.
+
+Restart the server after changing configuration or dependencies. It captures one context at startup and does not watch installations for changes. This feature requires a server package version containing it; a source merge does not update an existing installed server. Check a component detail response after setup: its selected source should name the installed package/version, or explain the bundled fallback. A server version that predates this feature can ignore the new environment settings.
 
 ## Search Tools
 
@@ -182,7 +211,7 @@ Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not com
 - Component names, descriptions, the first five props and sampled event/slot names
 - Deprecation metadata and verified export hints where available
 - Exact detail and pagination continuation calls
-- Bundled data package versions and hashes; installed compatibility is not checked
+- Selected data package versions and hashes; installed runtime compatibility is not checked
 
 **Parameters:**
 
@@ -218,7 +247,7 @@ Search returns exact section IDs, 500-character excerpts and detail calls. Pass 
 
 Directive documentation includes source code snippets and registration guidance. Component documentation can omit code fences or page-level scripts, so retrieving a complete record does not necessarily return a complete working example. Check required imports, CSS/theme setup, state, and behavior against your application before using a snippet.
 
-The five search tools return readable Markdown only, with bundled package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
+The five search tools return readable Markdown only, with selected package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
 
 ### Retrieve a selected example
 
@@ -378,7 +407,7 @@ To request the latest published package when the server starts, use `npx -y @dia
 
 After updating, restart your Claude Code conversation to load the new version.
 
-Updating the server refreshes its bundled data. It does not verify your application's installed APIs or example behavior. A change merged into Dialtone source reaches an installed server only after publication and an update to that package. Docs-only keyword edits can reach the site first: server release commit selection watches server and query-core changes, so maintainers must explicitly arrange a server publication through the existing release process. Local generation, builds, and source merge do not publish keyword updates.
+Updating the server refreshes its bundled data. It does not update your application's Dialtone packages or verify runtime or example behavior. A change merged into Dialtone source reaches an installed server only after publication and an update to that package. Docs-only keyword edits can reach the site first: server release commit selection watches server and query-core changes, so maintainers must explicitly arrange a server publication through the existing release process. Local generation, builds, and source merge do not publish keyword updates.
 
 ### Managing Connections
 

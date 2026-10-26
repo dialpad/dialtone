@@ -39,11 +39,11 @@ done
 
 ### 3. Prop Naming Consistency
 
-Check prop/event/slot naming against conventions defined in project rules (`.claude/rules/vue-components.md`). Flag deviations from established patterns.
+Check prop/event/slot naming against conventions defined in project rules (`.agents/resources/rules/vue-components.md`). Flag deviations from established patterns.
 
 ### 4. Constants Coverage
 
-Each component with enum-like props should have a `*_constants.js` file.
+Each component with enum-like props should have a `*Constants.js` or `*Constants.ts` file.
 
 - Verify constants files exist and are imported in prop validators
 - Check for inline arrays in validators that should reference constants

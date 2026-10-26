@@ -60,6 +60,14 @@ The second is to check with the Dialtone team (in the #dialtone Dialpad channel)
 
 ## How to contribute
 
+### Working with coding assistants
+
+Dialtone's [shared contributor guide](../AGENTS.md) is read by Codex and imported
+by [Claude Code's entrypoint](../CLAUDE.md). Each client retains its own task routing and workflows.
+The [loading and coverage matrix](../.agents/resources/agent-tooling-parity.md)
+explains which files each client uses, what has been checked and how to maintain
+the affected guidance with your change.
+
 ### Feature request
 
 To request a new Dialtone feature or enhancement, submit a [feature request](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10975&pid=12508) to our Jira.
@@ -96,7 +104,7 @@ This is why it is important to evaluate the change carefully and assess its impa
 Any new components or updates to existing components require the following:
 
 - Unit tests covering the entire change.
-- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://dialtone.dialpad.com/vue/?path=/docs/docs-storybook-getting-started--docs)
+- Storybook stories with a live-rendered component and controls. Maintain MDX documentation where the component already uses it. See [the documentation](https://dialtone.dialpad.com/vue/?path=/docs/docs-storybook-getting-started--docs)
 - Component is accessible according to requirements.
   - Navigable by keyboard.
   - Read by a screen reader.

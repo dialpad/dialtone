@@ -14,6 +14,8 @@ export interface DomainStamp {
   schemaVersion: number;
   hash: string;
   contentHash?: string;
+  selection?: 'bundled' | 'installed';
+  fallbackReason?: string | null;
 }
 export interface BundledProvenance {
   schemaVersion: number;
@@ -84,15 +86,20 @@ export function createRetrievalEnvelope(
   const domains = Object.fromEntries(
     selectedDomains.map((domain) => [domain, provenance.domains[domain]]),
   );
+  const selections = selectedDomains.map(domain => provenance.domains[domain]?.selection ?? 'bundled');
+  // A context-wide fallback stamps every domain with the same reason; report it once.
+  const fallbackReasons = new Set(selectedDomains.map(domain => provenance.domains[domain]?.fallbackReason).filter(Boolean));
+  const selection = selections.every(value => value === 'installed') ? 'installed'
+    : selections.some(value => value === 'installed') ? 'mixed' : 'bundled';
   const envelope: RetrievalEnvelope = {
     schemaVersion: 1,
     mode: options.mode,
     match: options.match,
     canonicalIdentity: options.canonicalIdentity ?? null,
     source: {
-      selection: 'bundled',
+      selection,
       installedCompatibility: 'not_checked',
-      fallbackReason: null,
+      fallbackReason: [...fallbackReasons].join('; ') || null,
       buildHash: provenance.buildHash,
       domains,
     },
@@ -173,6 +180,6 @@ export function createRetrievalEnvelope(
 /** JSON text retains every fact clients can read in structuredContent. */
 export function formatRetrievalEnvelope(result: RetrievalEnvelope): string {
   const qualification =
-    'Source: bundled data; installed compatibility not checked. Documentation links are latest references.';
+    `Source: ${result.source.selection} data; installed compatibility not checked. Documentation links are latest references.`;
   return `${result.mode === 'detail' ? 'Selected detail' : 'Discovery'}: ${result.match}. ${qualification}\n${JSON.stringify(result)}`;
 }
