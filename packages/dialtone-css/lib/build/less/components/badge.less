@@ -98,10 +98,23 @@
 
   &--ai {
     --badge-color-text: var(--dt-badge-color-foreground-ai);
-    --badge-color-background: var(--dt-color-brand-magenta); // fallback to gradient
+    --badge-color-background: transparent;
 
-    text-shadow: calc(var(--dt-spacing-1) / 2) calc(var(--dt-spacing-1) / 2) 0 oklch(from var(--dt-color-neutral-black) l c h / 0.6);
-    background-image: var(--dt-badge-color-background-ai);
+    position: relative;
+
+    // The gradient stroke lives on a masked pseudo-element: border-image ignores
+    // border-radius, and a padding-box fill would cover the surface behind the badge.
+    &::before {
+      position: absolute;
+      inset: 0;
+      padding: var(--dt-size-border-100);
+      background: var(--dt-badge-color-border-ai);
+      border-radius: inherit;
+      content: '';
+      pointer-events: none;
+      mask: linear-gradient(var(--dt-color-neutral-black) 0 0) content-box, linear-gradient(var(--dt-color-neutral-black) 0 0);
+      mask-composite: exclude;
+    }
   }
 
   &--outlined {
