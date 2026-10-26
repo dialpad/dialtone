@@ -261,6 +261,8 @@ For programmatic use, prefer `--format json` instead of parsing the default term
 
 ## Data sources
 
+MCP uses [explicit project configuration](/guides/mcp-server/#select-installed-project-data). Its environment settings do not configure CLI commands, which resolve from their working directory or use `--bundled`.
+
 The CLI looks for installed packages the way Node does, in the `node_modules` folders in and above the directory you run it from:
 
 1. If a `package.json` at or above your directory, up to the repository root, depends on `@dialpad/dialtone`, the CLI uses that package's component, token, and utility data, and the icons package it depends on.

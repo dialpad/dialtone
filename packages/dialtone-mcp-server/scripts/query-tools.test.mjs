@@ -4,19 +4,35 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { components, bundledProvenance } from '@dialpad/dialtone-query-core';
+import { resolveProjectData } from '@dialpad/dialtone-query-core/node';
 import * as module from '../src/query-tools.ts';
+test('failed project selection keeps bundled discovery and honest exact/no-match recovery', () => {
+  const context = resolveProjectData('relative/app');
+  const search = module.executeQueryTool('search_components', { query: 'spinner' }, context);
+  assert.match(search.content[0].text, /\*\*DtLoader\*\*/);
+  assert.match(search.content[0].text, /Using bundled references/);
+  const button = module.executeQueryTool('get_component', { component: 'DtButton' }, context).structuredContent;
+  assert.equal(button.match, 'exact');
+  assert.equal(button.source.selection, 'bundled');
+  assert.ok(button.canonicalIdentity.imports.length > 0);
+  assert.ok(button.canonicalIdentity.imports.every(route => route.verification === 'source-export'));
+  const unknown = module.executeQueryTool('get_component', { component: 'DtMadeUp' }, context).structuredContent;
+  assert.equal(unknown.match, 'no-match');
+  assert.equal(unknown.continuation.tool, 'search_components');
+});
 test('example discovery follows subjects/source sections and unknown IDs retain recovery', () => {
+  const context = resolveProjectData();
   for (const query of ['stack', 'layout', 'flex row gap', 'link']) {
-    const text = module.executeQueryTool('search_components', { query }).content[0].text;
+    const text = module.executeQueryTool('search_components', { query }, context).content[0].text;
     assert.doesNotMatch(text, /Source examples/);
   }
   for (const query of ['button example', 'button with a tooltip', 'tooltip on a disabled button', 'complete button example with setup', 'I need a complete working Vue 3 example of a disabled Dialtone button that shows a tooltip on hover']) {
-    const text = module.executeQueryTool('search_components', { query }).content[0].text;
+    const text = module.executeQueryTool('search_components', { query }, context).content[0].text;
     assert.match(text, /examples\/button-/);
   }
-  const docs = module.executeQueryTool('search_documentation', { query: 'how do I show a tooltip on a disabled button' }).content[0].text;
+  const docs = module.executeQueryTool('search_documentation', { query: 'how do I show a tooltip on a disabled button' }, context).content[0].text;
   assert.match(docs, /examples\/button-disabled-tooltip/);
-  const missing = module.executeQueryTool('get_documentation', { id: 'examples/button-defualt' }).structuredContent;
+  const missing = module.executeQueryTool('get_documentation', { id: 'examples/button-defualt' }, context).structuredContent;
   assert.equal(missing.match, 'no-match');
   assert.deepEqual(missing.items, []);
   assert.ok(missing.notes.some(note => note.includes('examples/button-default')));
@@ -27,7 +43,7 @@ async function fixture(run) {
     { name: 'test-dialtone', version: '1.5.0' },
     { instructions: module.ROUTING_INSTRUCTIONS, capabilities: { tools: {} } },
   );
-  module.registerQueryTools(server);
+  module.registerQueryTools(server, resolveProjectData());
   const client = new Client({
     name: 'dialtone-protocol-fixture',
     version: '1.0.0',

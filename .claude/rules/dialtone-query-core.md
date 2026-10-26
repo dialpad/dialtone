@@ -23,7 +23,8 @@ Transports must NOT contain search logic. New search behavior, ranking changes, 
 ```text
 packages/dialtone-query-core/
 ├── src/
-│   ├── index.ts       # Public API barrel — only exports listed here are public
+│   ├── index.ts       # Shared public API barrel
+│   ├── node-data-resolver.ts # Node-only installed-data entry (./node)
 │   ├── types.ts       # All TypeScript interfaces
 │   ├── data.ts        # JSON imports from workspace deps
 │   ├── tools/         # search + format functions per domain
@@ -50,7 +51,7 @@ ESM only (`"type": "module"` in `package.json`).
 
 ## Public API Surface
 
-`src/index.ts` is the ONLY public entry point. Helper functions inside tool files (e.g., `splitCamelCase`, `removeDuplicates`, `searchByName`) stay private — do not export them.
+`src/index.ts` is the shared public entry point. `@dialpad/dialtone-query-core/node` exposes the Node-only installed-data resolver; filesystem imports stay out of the root runtime barrel. The `./*` package export preserves existing deep-import compatibility; new callers use the root or `./node`, not build-file paths. Helper functions inside tool files (e.g., `splitCamelCase`, `removeDuplicates`, `searchByName`) stay private.
 
 When adding a new search tool:
 1. Implement it in `src/tools/<domain>.ts`.
@@ -142,13 +143,14 @@ MCP servers communicate over stdout — any stray `console.log` will break the J
 ## Test Patterns
 
 - Vitest only (`describe`, `test`, `expect`). No other frameworks.
-- Tests use **in-memory fixtures**, never the production JSON files — keeps tests fast, deterministic, and isolated from data churn:
+- Search tests use **in-memory fixtures**, never the production JSON files — keeps tests fast, deterministic, and isolated from data churn:
   ```typescript
   const fixture: DocumentationRecord[] = [
     { id: 'button#usage', docId: 'button', /* ... */ },
     // small, focused records that exercise the behavior under test
   ];
   ```
+- Node resolver boundary tests use temporary C5 filesystem fixtures. Keep lookup-only, installed, and built evidence distinct.
 - Test files live under `tests/<area>/<file>.test.ts` mirroring `src/<area>/<file>.ts`.
 - Run: `pnpm nx run dialtone-query-core:test` or `pnpm nx run dialtone-query-core:test --watch`.
 
