@@ -37,7 +37,7 @@ describe('DtSkeleton Tests', () => {
 
   describe('Presentation Tests', () => {
     it('should render the component', () => {
-      expect(wrapper.exists()).toBe(true);
+      expect(wrapper.find('[data-qa="dt-skeleton"]').exists()).toBe(true);
     });
 
     describe('Skeleton text', () => {

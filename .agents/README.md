@@ -1,26 +1,26 @@
 # Dialtone Agent Resources
 
-Use this as the routing table for repo-local Codex skills. Keep default context small: load a skill only when its trigger matches the task, then load only the resources that skill references.
+Use this as the routing table for repo-local Codex skills. Shared contributor policy in `AGENTS.md` and `resources/rules/vue-components.md` also serves Claude; keep client-specific workflows separate. Keep default context small: load a skill only when its trigger matches the task, then load only the resources that skill references.
 
 For repository authoring or maintenance questions, read the [Contributor tasks table](resources/rule-map.md#contributor-tasks) and then the selected reference and owning requirements. The table is a lookup route; linked files are not automatically loaded instructions.
 
 ## Skills
 
-| Skill             | Trigger                                            | Purpose                                                                                         | Key resources                                                      | Eval     |
-| ----------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
-| `project-start`   | `$project-start`, starting a task, branch setup    | Decide ticket mode, create/propose a Dialtone-style branch, and record the immediate work path. | `package-map.md`, `agent-tooling-parity.md`                        | behavior |
-| `merge-next`      | `$merge-next`, merge or sync `staging` into `next` | Preserve merge history, resolve conflicts, refresh artifacts, validate, and gate commit/push approval. | `package-map.md`, `agent-tooling-parity.md`                    | behavior |
-| `dialtone-lookup` | Dialtone API, docs, token, utility, or icon lookup | Ground design-system decisions in Dialtone MCP or CLI lookup tools before guessing.             | `dialtone-lookup.md`                                               | contract |
-| `review`          | `$review`, "review my changes", "check this code"  | Report-only local review with lazy rule loading.                                                | `rule-map.md`                                                      | contract |
-| `validate`        | `$validate`, "run checks", before commit/PR        | Map changed files to focused validation commands.                                               | `validation.md`, `package-map.md`                                  | fixture  |
-| `commit`          | "stage", "commit", "ready to commit"               | Stage explicit files and create Dialtone-convention commits.                                    | `pr-template.md`                                                   | contract |
-| `pr-prep`         | before opening/updating a PR                       | Report-only PR readiness check.                                                                 | `package-map.md`, `validation.md`, `doc-sync.md`, `pr-template.md` | contract |
-| `pr-create`       | `$pr-create`, "open a PR", "fill PR body"          | Prepare and optionally create/update a PR after readiness is clear.                             | `pr-template.md`, `package-map.md`                                 | fixture  |
-| `pr-comments`     | `$pr-comments`, `$address-review`, review feedback | Fetch real inline review comments, plan fixes, validate, and reply safely.                      | `rule-map.md`                                                      | fixture  |
-| `pr-complete`     | after PR merge, branch closeout                    | Verify merge state, return to `staging`, and handle `NO-JIRA` closeout safely.                  | `package-map.md`                                                   | fixture  |
-| `doc-sync-check`  | source changes that may affect AI docs             | Report missing/stale `dialtone-docs` updates and offer apply mode.                              | `doc-sync.md`                                                      | fixture  |
-| `component-work`  | component creation/update, component API changes   | Keep Vue component, tests, stories, docs, and downstream data in sync.                          | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
-| `component-variant` | Combinator variant authoring for component changes | Keep `packages/combinator/src/variants/**` aligned with component props, slots, values, and thumbnails. | `rules/combinator-variants.md`, `package-map.md`, `rule-map.md` | contract |
+| Skill               | Trigger                                            | Purpose                                                                                                 | Key resources                                                      | Eval     |
+| ------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| `project-start`     | `$project-start`, starting a task, branch setup    | Decide ticket mode, create/propose a Dialtone-style branch, and record the immediate work path.         | `package-map.md`, `agent-tooling-parity.md`                        | behavior |
+| `merge-next`        | `$merge-next`, merge or sync `staging` into `next` | Preserve merge history, resolve conflicts, refresh artifacts, validate, and gate commit/push approval.  | `package-map.md`, `agent-tooling-parity.md`                        | behavior |
+| `dialtone-lookup`   | Dialtone API, docs, token, utility, or icon lookup | Ground design-system decisions in Dialtone MCP or CLI lookup tools before guessing.                     | `dialtone-lookup.md`                                               | contract |
+| `review`            | `$review`, "review my changes", "check this code"  | Report-only local review with lazy rule loading.                                                        | `rule-map.md`                                                      | contract |
+| `validate`          | `$validate`, "run checks", before commit/PR        | Map changed files to focused validation commands.                                                       | `validation.md`, `package-map.md`                                  | fixture  |
+| `commit`            | "stage", "commit", "ready to commit"               | Stage explicit files and create Dialtone-convention commits.                                            | `pr-template.md`                                                   | contract |
+| `pr-prep`           | before opening/updating a PR                       | Report-only PR readiness check.                                                                         | `package-map.md`, `validation.md`, `doc-sync.md`, `pr-template.md` | contract |
+| `pr-create`         | `$pr-create`, "open a PR", "fill PR body"          | Prepare and optionally create/update a PR after readiness is clear.                                     | `pr-template.md`, `package-map.md`                                 | fixture  |
+| `pr-comments`       | `$pr-comments`, `$address-review`, review feedback | Fetch real inline review comments, plan fixes, validate, and reply safely.                              | `rule-map.md`                                                      | fixture  |
+| `pr-complete`       | after PR merge, branch closeout                    | Verify merge state, return to `staging`, and handle `NO-JIRA` closeout safely.                          | `package-map.md`                                                   | fixture  |
+| `doc-sync-check`    | source changes that may affect AI docs             | Report missing/stale `dialtone-docs` updates and offer apply mode.                                      | `doc-sync.md`                                                      | fixture  |
+| `component-work`    | component creation/update, component API changes   | Keep Vue component, tests, stories, docs, and downstream data in sync.                                  | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
+| `component-variant` | Combinator variant authoring for component changes | Keep `packages/combinator/src/variants/**` aligned with component props, slots, values, and thumbnails. | `rules/combinator-variants.md`, `package-map.md`, `rule-map.md`    | contract |
 
 ## Resources
 
@@ -32,6 +32,10 @@ For repository authoring or maintenance questions, read the [Contributor tasks t
 - `resources/doc-sync.md`: source package to `packages/dialtone-docs/src/content` mapping.
 - `resources/pr-template.md`: PR title/body and public-safety expectations.
 - `resources/agent-tooling-parity.md`: peer-harness decisions for Codex alongside existing agent tooling.
+
+## Instruction Maintenance
+
+Follow the root contributor guide and the [instruction-maintenance procedure](resources/agent-tooling-parity.md#instruction-maintenance) during planning, PR readiness and material review/integration changes. Update shared policy once and keep the required client routes valid.
 
 ## Eval Commands
 

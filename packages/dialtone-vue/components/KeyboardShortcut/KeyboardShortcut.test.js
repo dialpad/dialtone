@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import { DtKeyboardShortcut } from '@/components/KeyboardShortcut';
-import { DtText } from '@/components/Text';
 import { SHORTCUTS_ALIASES_LIST } from './KeyboardShortcutConstants';
 
 const baseProps = {
@@ -31,7 +30,7 @@ describe('DtKeyboardShortcut Tests', () => {
 
   describe('Presentation Tests', () => {
     it('should render the component', () => {
-      expect(wrapper.exists()).toBe(true);
+      expect(wrapper.find('[data-qa="dt-keyboard-shortcut"]').exists()).toBe(true);
     });
 
     it('should render 13 icons', () => {
@@ -45,7 +44,7 @@ describe('DtKeyboardShortcut Tests', () => {
 
       updateWrapper();
 
-      const dtText = wrapper.findComponent(DtText);
+      const dtText = wrapper.findComponent('[data-qa="dt-text"]');
 
       expect(dtText.exists()).toBe(true);
       expect(dtText.props('tone')).toBe('tertiary');
@@ -56,7 +55,7 @@ describe('DtKeyboardShortcut Tests', () => {
 
       updateWrapper();
 
-      const dtText = wrapper.findComponent(DtText);
+      const dtText = wrapper.findComponent('[data-qa="dt-text"]');
 
       expect(dtText.exists()).toBe(true);
       expect(dtText.props('tone')).toBe('tertiary');
@@ -71,7 +70,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Command plus X');
       });
 
@@ -81,7 +80,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Control plus Alt plus Delete');
       });
 
@@ -91,7 +90,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Command plus Control plus X');
       });
 
@@ -101,7 +100,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Up Arrow plus Down Arrow');
       });
 
@@ -111,7 +110,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Windows plus D');
       });
 
@@ -121,7 +120,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Option plus C');
       });
     });
@@ -134,7 +133,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Custom accessible text');
       });
 
@@ -144,7 +143,7 @@ describe('DtKeyboardShortcut Tests', () => {
         };
         updateWrapper();
 
-        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        const srOnlySpan = wrapper.find('[data-qa="dt-keyboard-shortcut-sr-text"]');
         expect(srOnlySpan.text()).toBe('Command plus X');
       });
     });

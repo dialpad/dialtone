@@ -5,11 +5,11 @@ Apply to `AGENTS.md`, `.agents/**`, and `.codex/**`.
 ## Harness Independence
 
 - Codex tooling is a first-class harness alongside Claude tooling, not a replacement project.
-- Active Codex skills and resources should reference `.agents/**` runtime files.
+- Active Codex skills and resources should reference `.agents/**` resources. Root `AGENTS.md` and the shared Vue resource contain client-neutral policy; Claude may import or explicitly read them without depending on Codex runtime configuration.
 - Use `.codex/**` only for Codex runtime configuration such as MCP registration, hooks, command approval rules, permission profiles, or custom subagents.
 - Existing `.claude/**` files may be source material or comparative evidence, but should not be required by Codex skills at runtime.
 - Do not gate Codex validation on `.claude/**`; validate the Codex harness independently and update `.agents/resources/agent-tooling-parity.md` when a workflow intentionally mirrors or diverges from Claude behavior.
-- Rule parity is the explicit cross-tree exception: when `.claude/rules/*.md` is added or renamed, add the peer `.agents/resources/rules/*.md` file or record a Defer/Skip decision in `.agents/resources/agent-tooling-parity.md`.
+- Shared-baseline and rule-parity contract checks are the explicit cross-tree exceptions: when `.claude/rules/*.md` is added or renamed, add the peer `.agents/resources/rules/*.md` file or record a Defer/Skip decision in `.agents/resources/agent-tooling-parity.md`.
 
 ## Context Cost
 

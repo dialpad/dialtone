@@ -4,22 +4,6 @@ description: "Vue component conventions reference for Dialtone. Use '/vue-conven
 
 # Vue Component Conventions
 
-Detailed rules are applied automatically via path-scoped rules when editing component files. This skill provides an interactive quick-reference.
+Read the maintained conventions in [.agents/resources/rules/vue-components.md](../../.agents/resources/rules/vue-components.md), including API style, constants, sizes, events, slots and component artifacts. Claude imports that policy through the component-local CLAUDE.md when working in the component subtree.
 
-## Quick Reference
-
-| Topic | Convention |
-|---|---|
-| New components | Composition API + `<script setup lang="ts">` |
-| Existing components | Options API + `compatConfig: { MODE: 3 }` |
-| Prop validation | `validator` (NEVER `validate` — Vue silently ignores it) |
-| Constants | Export from `*_constants.js`, import in component + tests |
-| v-model event | `update:modelValue` |
-| Open/close | `update:open` (Modal, Tooltip, Toast, Popover, Collapsible, ImageViewer, FilterPill) |
-| Overlay slots | `headerContent` / `footerContent` |
-| Structural slots | `header` / `footer` |
-| Sizes (interactive) | `xs`, `sm`, `md`, `lg`, `xl` |
-| Sizes (icons) | `100`–`800` numeric |
-| Visibility toggles | `showX` positive polarity |
-| Styles | `<style scoped>` or `d-*` utility classes, `var(--dt-*)` tokens only |
-| Shared behavior | Composables for new, mixins for legacy in `packages/dialtone-vue/common/mixins/` (`InputMixin`, `CheckableMixin`, `GroupableMixin`, `MessagesMixin`) |
+This legacy workflow reference supplies a named entrypoint; keep the policy in the shared resource rather than a second quick-reference table here.

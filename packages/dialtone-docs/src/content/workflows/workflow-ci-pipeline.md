@@ -63,6 +63,8 @@ The lookup job also checks generated utility metadata and recommendation strings
 
 Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`; the documentation suite runs once and includes source-derived link checks.
 
+The shared fenced-demo parser (`fenced-demo-shared.js`) also feeds example generation. Parser-only changes trigger the lookup job on pull requests and staging pushes.
+
 Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scripts/retrieval/run.mjs` exercises query-core, CLI JSON and live MCP tool responses. The retrieval harness disables optional registry update-check I/O for deterministic lookup checks. Known retrieval failures carry a precise assertion, owning issue and removal condition; an unrelated failure or unexpected pass fails the job. These checks do not establish startup/network behavior or consumer build compatibility.
 
 The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also depends on its build, so startup and shutdown checks run against a built server. The release-path suite (`pnpm --dir packages/dialtone-mcp-server test:release-paths`) checks commit selection using the installed release implementation without publishing packages.

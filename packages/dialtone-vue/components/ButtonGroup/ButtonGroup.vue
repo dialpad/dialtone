@@ -5,6 +5,7 @@
       BUTTON_GROUP_ALIGNMENT[alignment],
     ]"
     role="group"
+    data-qa="dt-button-group"
   >
     <!-- @slot Default slot for button items -->
     <slot />

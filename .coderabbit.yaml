@@ -75,7 +75,7 @@ reviews:
           Existing components use Options API with compatConfig MODE 3 — do not convert.
 
         - Props must use `validator` (never `validate` — Vue silently ignores it).
-          Import allowed values from *_constants.js.
+          Import allowed values from *Constants.js or *Constants.ts.
 
         - Events: `update:modelValue` for v-model, `update:open` for new overlays.
 
@@ -85,14 +85,14 @@ reviews:
           --dt-color-*, --dt-space-*, --dt-size-*, --dt-z-index-*, --dt-radius-* tokens.
 
         - Boolean props: general booleans use is/has/show prefixes.
-          Visibility toggles use hideX negative polarity (hideClose, hideHeader).
+          Visibility toggles use positive showX names (showClose, showHeader).
 
         - Component styles must live in packages/dialtone-css, not inline.
           Templates should use Dialtone utility classes (d-*).
 
-        - Check that all 6 artifacts stay in sync: Vue source, tests (.test.js),
-          Storybook stories (.stories.js + .mdx), component docs JSON,
-          VuePress page, MCP server data.
+        - Assess the complete Component Artifact Pipeline in
+          .agents/resources/rules/vue-components.md, including generated CLI/MCP
+          lookup data, Combinator variants and component-wall thumbnails.
 
         - Accessibility: ARIA correctness, keyboard navigation, focus management
           in modals/overlays, screen reader announcements via aria-live.
@@ -100,7 +100,7 @@ reviews:
         - New user-facing strings must use FTL localization keys
           (packages/dialtone-vue/localization). Flag hardcoded English.
 
-        Follow the conventions in .claude/rules/vue-components.md.
+        Follow the conventions in .agents/resources/rules/vue-components.md.
 
     # Vue tests
     - path: 'packages/dialtone-vue/**/*.test.js'

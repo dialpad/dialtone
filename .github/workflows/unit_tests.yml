@@ -29,6 +29,7 @@ on:
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js'
       - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
       - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
   push:
@@ -61,6 +62,7 @@ on:
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js'
       - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
       - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
 
@@ -121,6 +123,7 @@ jobs:
               - 'packages/dialtone-vue/**'
               - 'scripts/build-dialtone-vue-docs.mjs'
               - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+              - 'apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js'
               - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
               - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
             lint_plugins:

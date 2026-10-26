@@ -1,5 +1,6 @@
 <template>
   <div
+    data-qa="dt-skeleton"
     aria-busy="true"
     role="status"
     :aria-label="ariaLabel"
