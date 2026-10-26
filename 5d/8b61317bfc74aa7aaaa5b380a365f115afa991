@@ -1,0 +1,28 @@
+packages/combinator/src/variants/variants_text_list.js
+  h_c15b5755534093 154-156
+packages/dialtone-css/lib/build/less/components/text-list.less
+  s_2c9bf7a91b8fa5::t_49dbda099c1740 85
+apps/dialtone-documentation/docs/utilities/typography/lists.md
+  s_2c9bf7a91b8fa5::t_51b73639426801 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "5d8b61317bfc74aa7aaaa5b380a365f115afa991",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_2c9bf7a91b8fa5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "996319e4-ffde-4045-b12a-986ae83372d8",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
