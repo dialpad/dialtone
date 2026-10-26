@@ -37,6 +37,13 @@ describe('collectionTargets', () => {
     expect(collectionTargets('X', ['--file-key', 'scratch']).map(t => t.fileKey)).toEqual(['scratch'])
   })
 
+  it('skips the unrestricted file before any pass runs when --local-snapshot is given', () => {
+    vi.stubEnv('FILE_KEY', 'restricted-file')
+    vi.stubEnv('UNRESTRICTED_FILE_KEY', 'unrestricted-file')
+
+    expect(collectionTargets('X', ['--local-snapshot', 'snap.json']).map(t => t.name)).toEqual(['X'])
+  })
+
   it('rejects the same file for both collections', () => {
     vi.stubEnv('FILE_KEY', 'same-file')
     vi.stubEnv('UNRESTRICTED_FILE_KEY', 'same-file')

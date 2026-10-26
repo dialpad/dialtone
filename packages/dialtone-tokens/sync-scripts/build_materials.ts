@@ -157,7 +157,7 @@ function overridesFor (
   return { overrides: out, unconvertible };
 }
 
-async function main (PARENT: string, fileKey: string | undefined, publishAll: boolean): Promise<void> {
+async function main (PARENT: string, fileKey: string | undefined): Promise<void> {
   const args = process.argv.slice(2);
   const flag = (name: string): string | undefined => {
     const i = args.indexOf(`--${name}`);
@@ -165,9 +165,6 @@ async function main (PARENT: string, fileKey: string | undefined, publishAll: bo
   };
   const dryRun = args.includes('--dry-run');
   const localSnapshot = flag('local-snapshot');
-  if (localSnapshot && publishAll) {
-    throw new Error('--local-snapshot describes one file and cannot be used for the unrestricted file; unset UNRESTRICTED_FILE_KEY to recover the restricted one.');
-  }
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
   if (!pat || !fileKey) {
     console.error('PERSONAL_ACCESS_TOKEN and FILE_KEY are required, in .env or via --file-key');
@@ -349,7 +346,7 @@ async function main (PARENT: string, fileKey: string | undefined, publishAll: bo
 }
 
 (async () => {
-  for (const { name, fileKey, publishAll } of collectionTargets()) await main(name, fileKey, publishAll);
+  for (const { name, fileKey } of collectionTargets()) await main(name, fileKey);
 })().catch((error: { response?: { status?: number; data?: unknown }; message?: string }) => {
   console.error(`failed: ${error.response?.status ?? ''} ${JSON.stringify(error.response?.data ?? error.message).slice(0, 1000)}`);
   process.exit(1);

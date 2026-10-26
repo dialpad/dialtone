@@ -361,9 +361,6 @@ async function main (target: CollectionTarget): Promise<void> {
   };
   const dryRun = args.includes('--dry-run');
   const localSnapshot = flag('local-snapshot');
-  if (localSnapshot && target.publishAll) {
-    throw new Error('--local-snapshot describes one file and cannot be used for the unrestricted file; unset UNRESTRICTED_FILE_KEY to recover the restricted one.');
-  }
   const fileKey = target.fileKey;
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
 
