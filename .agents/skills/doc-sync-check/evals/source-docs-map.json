@@ -1,9 +1,7 @@
 [
   {
     "id": "vue_source",
-    "changedFiles": [
-      "packages/dialtone-vue/components/button/button.vue"
-    ],
+    "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/development/development-component-workflow.md",
       "packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md",
@@ -23,9 +21,7 @@
   },
   {
     "id": "tokens",
-    "changedFiles": [
-      "packages/dialtone-tokens/tokens/base/default.json"
-    ],
+    "changedFiles": ["packages/dialtone-tokens/tokens/base/default.json"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/development/development-design-tokens.md",
       "packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md"
@@ -33,45 +29,35 @@
   },
   {
     "id": "icons",
-    "changedFiles": [
-      "packages/dialtone-icons/src/svg/add.svg"
-    ],
+    "changedFiles": ["packages/dialtone-icons/src/svg/add.svg"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/development/development-icons.md"
     ]
   },
   {
     "id": "github_workflow",
-    "changedFiles": [
-      ".github/workflows/unit_tests.yml"
-    ],
+    "changedFiles": [".github/workflows/unit_tests.yml"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md"
     ]
   },
   {
     "id": "commit_convention",
-    "changedFiles": [
-      ".github/COMMIT_CONVENTION.md"
-    ],
+    "changedFiles": [".github/COMMIT_CONVENTION.md"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md"
     ]
   },
   {
     "id": "release_config",
-    "changedFiles": [
-      ".releaserc"
-    ],
+    "changedFiles": [".releaserc"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/workflows/workflow-release-process.md"
     ]
   },
   {
     "id": "branch_strategy",
-    "changedFiles": [
-      "AGENTS.md"
-    ],
+    "changedFiles": ["AGENTS.md"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md",
       ".agents/resources/doc-sync.md",
@@ -80,9 +66,7 @@
   },
   {
     "id": "cli_source",
-    "changedFiles": [
-      "packages/dialtone-cli/src/commands/docs.ts"
-    ],
+    "changedFiles": ["packages/dialtone-cli/src/commands/docs.ts"],
     "expectedDocs": [
       "apps/dialtone-documentation/docs/guides/cli/index.md",
       "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
@@ -91,9 +75,7 @@
   },
   {
     "id": "mcp_source",
-    "changedFiles": [
-      "packages/dialtone-mcp-server/src/query-tools.ts"
-    ],
+    "changedFiles": ["packages/dialtone-mcp-server/src/query-tools.ts"],
     "expectedDocs": [
       "apps/dialtone-documentation/docs/guides/cli/index.md",
       "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
@@ -102,9 +84,7 @@
   },
   {
     "id": "query_core_source",
-    "changedFiles": [
-      "packages/dialtone-query-core/src/tools/docs.ts"
-    ],
+    "changedFiles": ["packages/dialtone-query-core/src/tools/docs.ts"],
     "expectedDocs": [
       "apps/dialtone-documentation/docs/guides/cli/index.md",
       "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
@@ -113,9 +93,7 @@
   },
   {
     "id": "root_nx_project",
-    "changedFiles": [
-      "project.json"
-    ],
+    "changedFiles": ["project.json"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/architecture/architecture-build-system.md",
       "packages/dialtone-docs/src/content/architecture/architecture-monorepo-structure.md"
@@ -123,9 +101,7 @@
   },
   {
     "id": "vue3_generator",
-    "changedFiles": [
-      "generator-dialtone/generators/vue3/index.js"
-    ],
+    "changedFiles": ["generator-dialtone/generators/vue3/index.js"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/development/development-component-workflow.md"
     ]
