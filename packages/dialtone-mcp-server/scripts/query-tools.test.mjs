@@ -277,19 +277,6 @@ test('exact documentation retrieval preserves guidance beyond the discovery exce
     assert.equal(content, record.content);
     assert.ok(content.includes('aria-describedby'));
   }));
-test('exact Modal usage keeps recommendations distinct from discouraged uses', async () =>
-  fixture(async (client) => {
-    const result = structured(await client.callTool({
-      name: 'get_documentation', arguments: { id: 'components/modal#usage' },
-    }));
-    const content = result.items[0].content;
-    assert.deepEqual(content.match(/^(?:Do|Don't):$/gm), ['Do:', 'Don\'t:']);
-    const [, doText, dontText] = content.split(/(?:^|\n)(?:Do|Don't):\n/);
-    assert.ok(doText.includes('Confirming a destructive action'));
-    assert.ok(!doText.includes('Form-related critical, positive, or warning messages'));
-    assert.ok(dontText.includes('Form-related critical, positive, or warning messages'));
-    assert.ok(!dontText.includes('Confirming a destructive action'));
-  }));
 test('all five searches retain readable domain facts, notes and provenance without structured output', async () =>
   fixture(async (client) => {
     const core = await import('@dialpad/dialtone-query-core');

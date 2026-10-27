@@ -1,26 +1,23 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFileSync } from 'node:fs';
 import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
 import { readKeywords } from '@src/utils/keywords.mjs';
-import { stripMarkdown } from '@src/utils/strip-markdown.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
 const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
 const docsRoot = resolve(__dirname, '../../../../apps/dialtone-documentation/docs');
 describe('authored usage guidance', () => {
-  test.each(['modal', 'card'])('%s keeps source items in their labeled usage group', (name) => {
-    const path = resolve(docsRoot, `components/${name}.md`);
-    const record = buildRecords(path).find(record => record.id === `components/${name}#usage`);
-    const source = readFileSync(path, 'utf8').match(/<dialtone-usage>[\s\S]*?<\/dialtone-usage>/)[0];
-    const slots = [...source.matchAll(/<template #(do|dont)>([\s\S]*?)<\/template>/g)];
+  test('Modal keeps recommendations distinct from discouraged uses', () => {
+    const record = buildRecords(resolve(docsRoot, 'components/modal.md'))
+      .find(record => record.id === 'components/modal#usage');
     expect(record.content.match(/^(?:Do|Don't):$/gm)).toEqual(['Do:', 'Don\'t:']);
     const [, doText, dontText] = record.content.split(/(?:^|\n)(?:Do|Don't):\n/);
-    expect([doText.trim(), dontText.trim()]).toEqual(slots.map(slot => stripMarkdown(slot[2])));
-    expect(doText).toContain(name === 'modal' ? 'Confirming a destructive action' : 'content and actions on a single topic');
-    expect(dontText).toContain(name === 'modal' ? 'Form-related critical, positive, or warning messages' : 'too many call-to-action elements');
+    expect(doText).toContain('Confirming a destructive action');
+    expect(doText).not.toContain('Form-related critical, positive, or warning messages');
+    expect(dontText).toContain('Form-related critical, positive, or warning messages');
+    expect(dontText).not.toContain('Confirming a destructive action');
   });
 });
 

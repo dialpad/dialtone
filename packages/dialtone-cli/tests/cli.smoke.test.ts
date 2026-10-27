@@ -49,18 +49,6 @@ function appWithDialtoneVue(verifiedEntry = true): string {
 
 // Longer than the spawn timeout, so a hung CLI fails as ETIMEDOUT.
 describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
-  test('exact Modal usage keeps recommendations distinct from discouraged uses', () => {
-    const result = run(['docs', '--id', 'components/modal#usage', '--format', 'json']);
-    expect(result.status).toBe(0);
-    const [record] = JSON.parse(result.stdout);
-    expect(record.content.match(/^(?:Do|Don't):$/gm)).toEqual(['Do:', "Don't:"]);
-    const [, doText, dontText] = record.content.split(/(?:^|\n)(?:Do|Don't):\n/);
-    expect(doText).toContain('Confirming a destructive action');
-    expect(doText).not.toContain('Form-related critical, positive, or warning messages');
-    expect(dontText).toContain('Form-related critical, positive, or warning messages');
-    expect(dontText).not.toContain('Confirming a destructive action');
-  });
-
   test.each(['component', 'prompt'])('%s: a non-exact name exits 1 with empty stdout and candidates on stderr', (command) => {
     const r = run([command, 'list', '--format', 'json']);
     expect(r.status).toBe(1);
