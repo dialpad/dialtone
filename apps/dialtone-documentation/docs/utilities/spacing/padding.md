@@ -63,7 +63,7 @@ It is highly recommended to use the [DtBox component](/components/box.md) before
                   <span v-else>d-p-{{ val }}</span>
                 </span>
                 <span>
-                  <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+                  <dt-badge v-if="deprecated" variant="critical" label="Deprecated" />
                 </span>
               </dt-stack>
             </th>
@@ -93,7 +93,7 @@ It is highly recommended to use the [DtBox component](/components/box.md) before
               <span v-else>d-p-unset</span>
             </span>
             <span>
-              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+              <dt-badge v-if="deprecated" variant="critical" label="Deprecated" />
             </span>
           </dt-stack>
         </th>
@@ -120,7 +120,7 @@ It is highly recommended to use the [DtBox component](/components/box.md) before
           <dt-stack gap="50">
             <span class="d-code--sm d-docsite-code">d-p{{ suffix }}{{ val }}</span>
             <span>
-              <dt-badge type="critical" kind="label" text="Deprecated" />
+              <dt-badge variant="critical" label="Deprecated" />
             </span>
           </dt-stack>
         </th>

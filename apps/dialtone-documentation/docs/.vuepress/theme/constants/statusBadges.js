@@ -3,9 +3,9 @@
  * page's lifecycle status, so a new status or a renamed badge type is one edit.
  */
 export const STATUS_BADGES = Object.freeze({
-  beta: { type: 'info', text: 'Beta' },
-  new: { type: 'bulletin', text: 'New' },
-  planned: { text: 'Planned' },
+  beta: { variant: 'info', label: 'Beta' },
+  new: { kind: 'release', variant: 'pre-release', label: 'New' },
+  planned: { label: 'Planned' },
 });
 
 export const getStatusBadge = (status) => STATUS_BADGES[status];

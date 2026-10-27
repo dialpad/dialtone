@@ -83,6 +83,7 @@ import {
   BADGE_EMPHASIS_MODIFIERS,
   BADGE_SIZE_MODIFIERS,
   BADGE_GROUPS,
+  BADGE_LEGACY_KINDS,
   BADGE_DEFAULT_EMPHASIS,
   BADGE_MENTION_PREFIX,
   BADGE_TYPE_MODIFIERS,
@@ -171,12 +172,13 @@ export default {
     /**
      * The group the badge belongs to. It decides which variants and emphasis levels are valid.
      * Defaults to status, so a plain badge is a neutral status badge.
+     * Legacy `count` and `label` still render as `counter` and `status` and log a deprecation warning.
      * @values status, counter, release, lifecycle
      */
     kind: {
       type: String,
       default: 'status',
-      validator: (kind) => Object.keys(BADGE_GROUPS).includes(kind),
+      validator: (kind) => Object.keys(BADGE_GROUPS).includes(kind) || kind in BADGE_LEGACY_KINDS,
     },
 
     /**
@@ -283,6 +285,8 @@ export default {
       if (this.variant != null) {
         return group.variants.includes(this.variant) || this.variant === 'ai' ? this.variant : group.defaultVariant;
       }
+      // Legacy kind="count" was a shape, so it keeps the count variant whatever `type` says.
+      if (this.kind === 'count') return 'count';
       // Deprecated alias for the variant.
       if (this.type != null && BADGE_TYPE_TO_VARIANT[this.type]) return BADGE_TYPE_TO_VARIANT[this.type];
       return group.defaultVariant;
@@ -290,11 +294,14 @@ export default {
 
     // Falls back to status so an invalid kind still renders; the prop validator reports it.
     resolvedKind () {
+      if (BADGE_LEGACY_KINDS[this.kind]) return BADGE_LEGACY_KINDS[this.kind];
       return BADGE_GROUPS[this.kind] ? this.kind : 'status';
     },
 
     resolvedEmphasis () {
       if (this.emphasis !== undefined && !this.isUnsupportedEmphasis) return this.emphasis;
+      // Legacy kind="count" with type="bulletin" was the purple count badge.
+      if (this.kind === 'count' && this.type === 'bulletin') return 'strong';
       return BADGE_DEFAULT_EMPHASIS[this.resolvedVariant] || 'base';
     },
 
@@ -368,6 +375,7 @@ export default {
       if (process.env.NODE_ENV === 'production') return;
 
       this.warnDeprecatedAliases();
+      this.validateKind();
       this.validateTypePropCombination();
       this.validateDecorationPropCombination();
       this.validateEmphasis();
@@ -381,6 +389,20 @@ export default {
         console.warn(
           `DtBadge warning: emphasis="${this.emphasis}" is not supported by the ${this.resolvedKind} group ` +
           `(supports: ${supported}). Rendering emphasis="${this.resolvedEmphasis}".`,
+        );
+      }
+    },
+
+    validateKind () {
+      if (BADGE_LEGACY_KINDS[this.kind]) {
+        console.warn(
+          `DtBadge warning: kind="${this.kind}" is deprecated. Use kind="${BADGE_LEGACY_KINDS[this.kind]}"` +
+          `${this.kind === 'count' ? ' with variant="count"' : ''} instead. Run dialtone-migrate-badge-api.`,
+        );
+      } else if (!BADGE_GROUPS[this.kind]) {
+        console.warn(
+          `DtBadge warning: kind="${this.kind}" is not a badge group. Rendering kind="status". ` +
+          `Use one of: ${Object.keys(BADGE_GROUPS).join(', ')}.`,
         );
       }
     },
