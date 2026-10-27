@@ -97,11 +97,14 @@ Component and documentation discovery reuse curated page keywords. Try familiar 
 
 ```bash
 dialtone search "spinner"
+dialtone search "add a loader to the settings page"
 dialtone docs "text-field"
 dialtone component DtLoader
 ```
 
-`spinner` leads with `DtLoader`; `blank slate` finds `DtEmptyState`; `text field`, `text-field`, and `textbox` find `DtInput`; `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` presents `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority, followed by curated keywords and incidental API matches. Documentation ranks exact titles before keywords and incidental prose.
+`spinner` leads with `DtLoader`; `blank slate` finds `DtEmptyState`; `text field`, `text-field`, and `textbox` find `DtInput`; `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` presents `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority. Longer requests recognize complete keyword phrases and public names, including regular plurals. Complete name, keyword and API-text matches lead before partial contextual candidates; separate keywords do not combine into a complete phrase. Text notes identify the matched keywords or names. Unrecognized context is not a supported feature claim. Documentation preserves named subjects and selects sections using their source evidence; keywords help discover pages.
+
+In broad CLI search, matching token or utility facts appear before partial component hints. All candidates remain available with `--limit 0`.
 
 Keywords are discovery terms. `dialtone component spinner` still exits with no selected component; `component switch` rejects the name and suggests `DtToggle`. Use the canonical result for API lookup.
 

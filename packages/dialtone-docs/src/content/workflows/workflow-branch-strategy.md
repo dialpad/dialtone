@@ -2,21 +2,21 @@
 type: workflow
 category: workflows
 keywords: [branch, staging, production, alpha, beta, PR, pull-request, merge, hotfix, deploy, preview, branch-naming]
-ai_summary: Dialtone branch strategy — staging as main dev branch, PRs target staging, production auto-updated after each release.
-last_updated: 2026-03-04
+ai_summary: Dialtone branch strategy — staging-first development, PR routing, and the currently skipped automatic production-promotion job.
+last_updated: 2026-10-23
 related_packages: []
 ---
 
 # Branch Strategy
 
-Dialtone uses a `staging`-first branch model. All development flows through `staging`. `production` is never committed to directly — it only moves forward via fast-forward merge after a successful release from `staging`.
+Dialtone uses a `staging`-first branch model. All development flows through `staging`. Never commit directly to `production`; promotion uses a fast-forward merge from `staging`. The configured automatic promotion job is currently skipped because of its dependency guard, as described below.
 
 ## Long-Lived Branches
 
 | Branch | Purpose |
-|--------|---------|
-| `staging` | Main development branch. All feature PRs target this branch. All releases originate here. |
-| `production` | Stable released branch. Only updated by the release workflow via `git merge --ff-only origin/staging`. Never committed to directly. |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `staging` | Default development base and PR target. Explicit user instructions and the actual PR target govern exceptions. |
+| `production` | Stable released branch. Promotion uses `git merge --ff-only origin/staging`; its configured automatic job is currently skipped. Never committed to directly. |
 | `alpha` | Pre-release channel for early-access features. Published to npm with `alpha` dist-tag. |
 | `beta` | Pre-release channel for stabilization before production. Published to npm with `beta` dist-tag. |
 | `next` | Future release candidates. Published to npm with `next` dist-tag. |
@@ -25,9 +25,10 @@ All other branches are short-lived feature branches created per change and delet
 
 ## Where PRs Go
 
-**All PRs target `staging`.** Never open a PR directly to `production`, `alpha`, `beta`, or `next`.
+`staging` is the default base and PR target. Follow an explicit user instruction or the actual PR target when it differs; do not change release branches directly. The [root safeguards](../../../../../AGENTS.md) govern branch safety and user-work preservation.
 
-The flow:
+When `staging` is the selected target, the flow is:
+
 1. Create a branch off `staging`
 2. Do the work, push commits
 3. Open a PR into `staging`
@@ -35,11 +36,11 @@ The flow:
 5. Merge (squash merge into `staging`)
 6. Branch is deleted
 
-`production` receives the change automatically after the next release run.
+The configured automatic promotion job is currently skipped; the next release run does not automatically move these changes to `production`.
 
 ## Branch Naming
 
-Branches use kebab-case. No strict prefix is enforced but the convention from existing branches is:
+Use the repository's ticketed branch convention, or `NO-JIRA` only when explicitly chosen. Examples:
 
 ```
 feat/DLT-1234-short-description
@@ -48,11 +49,11 @@ docs/DLT-9012-what-is-documented
 chore/NO-JIRA-maintenance-task
 ```
 
-The JIRA ticket number in the branch name is optional but helps traceability. The branch name does not affect the release — only commit messages do.
+Release eligibility and channel depend on the selected branch; see the [release workflow](../../../../../.github/workflows/release.yml). Commit and package release configuration determine which packages and versions are released. Do not infer ticket authorization from branch history.
 
 ## How Production Gets Updated
 
-After the release workflow runs on `staging` and all packages have been versioned, the `update-production` job runs automatically:
+The release workflow supports manual selection of packages; it does not require every package to receive a new version. Its `update-production` job is currently skipped: the branch condition reads `needs.get-branch-name.outputs.current_branch`, but `needs` lists only `release`. GitHub exposes only [direct dependency outputs](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#needs-context); the missing branch output is empty, so the comparison with `staging` evaluates false. The intended fast-forward step is:
 
 ```bash
 git checkout production
@@ -93,7 +94,7 @@ There is no dedicated hotfix branch. For urgent fixes:
 3. Submit a PR to `staging` with normal review
 4. After merge, trigger a manual release via `workflow_dispatch` in GitHub Actions rather than waiting for Tuesday
 
-Do not commit directly to `production`. The fast-forward merge from `staging` ensures any release from `staging` automatically includes the fix.
+Do not commit directly to `production`. Releasing the package containing the fix does not currently trigger production promotion. Once the dependency guard is corrected, the staging-to-production fast-forward can include the merged fix.
 
 ## Required Checks Before Merge
 

@@ -3,7 +3,7 @@ title: Scrollbar
 description: Directive for adding a custom overlay scrollbar to scrollable regions.
 status: ready
 thumb: true
-keywords: ["scrollable", "d-scrollbar", "v-dt-scrollbar", "DtScrollbarDirective", "custom scrollbar", "scroll container", "directive"]
+keywords: ["scrollable", "d-scrollbar", "v-dt-scrollbar", "DtScrollbarDirective", "custom scrollbar", "scroll container", "scroll area", "directive"]
 ---
 
 ## Scrollbar Directive

@@ -2,37 +2,39 @@
 type: development
 category: development
 keywords: [vue-component, yeoman, generator, dialtone-vue, storybook, vitest, props, slots, events, jsdoc, constants]
-ai_summary: How to create a new Vue component in dialtone-vue using the Yeoman generator, what files are created, and the manual steps required after generation.
-last_updated: 2026-03-04
+ai_summary: Current Vue component files, legacy generator limitations, source-owned API conventions, and export and build steps.
+last_updated: 2026-10-23
 related_packages: [dialtone-vue, dialtone-css]
 ---
 
 # Component Development Workflow
 
-This document covers the full lifecycle of creating a new Vue component in `packages/dialtone-vue` — from scaffolding with the Yeoman generator through documentation and export.
+This reference explains component files, scaffolding and export/build steps in `packages/dialtone-vue`. Follow the [current Vue requirements](../../../../../.agents/resources/rules/vue-components.md) for authoring policy and the component source for its API. The generator output described below is legacy scaffolding, not the current component contract.
 
 ## What Lives in a Component
 
-Each component lives in its own directory under `packages/dialtone-vue/components/`. A complete component has exactly 8 files:
+Follow the existing component directory's layout and casing. Button illustrates PascalCase implementation, constants and story filenames without the `Dt` prefix; helper and module filenames can differ:
 
+```text
+components/Button/
+├── Button.vue
+├── ButtonConstants.js
+├── Button.test.js
+├── Button.stories.js
+├── ButtonDefault.story.vue
+├── ButtonVariants.story.vue
+└── index.js
 ```
-components/button/
-├── button.vue                   # Component template + logic (Options API)
-├── button_constants.js          # Exported constants for prop values and CSS class maps
-├── button.test.js               # Vitest tests
-├── button.stories.js            # Storybook CSF3 configuration and controls
-├── button_default.story.vue     # Interactive default story template
-├── button_variants.story.vue    # Variants overview story template
-├── button.mdx                   # Storybook documentation page
-└── index.js                     # Barrel export for the component and its constants
-```
+
+This is an example, not a fixed artifact count. Constants, extra stories, MDX, helper files, modules and composables depend on the component. Preserve existing helper and module names or casing. Review the current artifact requirements when adding or changing a public API; an optional MDX file does not make documentation optional.
 
 ## Naming Conventions
 
 | Thing | Convention | Example |
-|-------|-----------|---------|
+| ---------------------------- | ---------------------------------- | ---------------------------------- |
 | Component class name | PascalCase, `Dt` prefix | `DtButton` |
-| Directory and file names | snake_case, no prefix | `button/`, `button.vue` |
+| Directory | PascalCase, no prefix | `Button/` |
+| Implementation and constants | PascalCase, no `Dt` prefix | `Button.vue`, `ButtonConstants.js` |
 | Template tag | kebab-case, `dt-` prefix | `<dt-button>` |
 | CSS base class | `d-{name}` | `d-btn` |
 | CSS modifier class | `d-{name}--{variant}` | `d-btn--primary`, `d-btn--lg` |
@@ -52,21 +54,21 @@ The generator asks:
 1. **Component name** (PascalCase) — Must start with `Dt` (e.g., `DtMyNewComponent`).
 2. **Human-readable name** — Used in Storybook labels (e.g., `My New Component`).
 
-The generator creates all 8 files with boilerplate already in place: an empty `.vue`, an empty `_constants.js`, a test scaffold, Storybook config, two story templates, MDX docs, and the `index.js` barrel.
+The [current Vue 3 generator](../../../../../generator-dialtone/generators/vue3/index.js) creates eight snake_case files, including MDX and an Options API implementation. Its [component template](../../../../../generator-dialtone/generators/vue3/templates/component.ejs) does not implement the current new-component conventions. Treat it as a legacy starting point: rename the generated directory/files and update imports, replace the new implementation with the required Composition API structure, and review the artifacts before committing. Do not apply that conversion to existing Options API components without explicit authorization.
 
 ## Step 2 — Add to Root Index (Manual)
 
 After generation, add one line to `packages/dialtone-vue/index.js`:
 
 ```javascript
-export * from './components/my-new-component';
+export * from './components/MyNewComponent';
 ```
 
-This is the **only manual step** the generator does not handle. Without it, the component will not be available to consumers of `@dialpad/dialtone-vue`.
+Without the root export, the component is not available to consumers of `@dialpad/dialtone-vue`. Generation also does not complete the required API, styles, tests, public documentation, Combinator or thumbnail work. Use the [component workflow](../../../../../.agents/skills/component-work/SKILL.md#workflow) to review affected artifacts rather than treating a successful scaffold as a finished component.
 
-## Component Structure (Options API)
+## API Style
 
-All Dialtone Vue components use the Options API. The canonical structure is:
+New components use Composition API with `<script setup lang="ts">` under the current Vue requirements. Existing Options API components retain their style unless conversion is explicitly requested. The following illustrates an existing Options API component, not a new-component scaffold:
 
 ```javascript
 export default {
@@ -116,19 +118,18 @@ props: {
 
   /**
    * Size of the button.
-   * @values xs, sm, md, lg, xl
+   * @values 100, 200, 300, 400, 500
    */
   size: {
-    type: String,
-    default: 'md',
+    type: [String, Number],
+    default: 300,
+    validator: ordinalSizeValidator(BUTTON_SIZE_MODIFIERS),
   },
 
-  /**
-   * @deprecated Use `importance` instead.
-   */
-  type: String,
 }
 ```
+
+This Options API excerpt uses Button's current constants and `ordinalSizeValidator` from [the shared validators](../../../../dialtone-vue/common/validators/index.js). Import those helpers when using the excerpt. Numeric size values are preferred; inspect the selected component before assuming a common scale or default.
 
 Supported JSDoc tags:
 - `@values` — comma-separated list of valid values (rendered in API table)
@@ -174,41 +175,13 @@ emits: [
 
 ## Constants File
 
-`button_constants.js` holds all valid value maps so validators and templates can reference them without hardcoded strings:
+Use the component's current constants and validators instead of copying a value map from this reference. [ButtonConstants.js](../../../../dialtone-vue/components/Button/ButtonConstants.js) contains Button's modifier maps and deprecated aliases; [Button.vue](../../../../dialtone-vue/components/Button/Button.vue) selects its numeric default and ordinal validator. The shared scale is defined in [sizes.js](../../../../dialtone-vue/common/constants/sizes.js), but each component decides which values it accepts.
 
-```javascript
-export const BUTTON_SIZE_MODIFIERS = {
-  xs: 'd-btn--xs',
-  sm: 'd-btn--sm',
-  md: '',           // Default — no modifier class
-  lg: 'd-btn--lg',
-  xl: 'd-btn--xl',
-};
-
-export const BUTTON_IMPORTANCE_MODIFIERS = {
-  clear: '',
-  outlined: 'd-btn--outlined',
-  primary: 'd-btn--primary',
-};
-```
-
-Validators in the component use these objects:
-
-```javascript
-validator: (v) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(v)
-```
-
-The constants are re-exported through `index.js` so consumers can import them alongside the component:
-
-```javascript
-// index.js
-export { default as DtButton } from './button.vue';
-export { BUTTON_SIZE_MODIFIERS, BUTTON_IMPORTANCE_MODIFIERS } from './button_constants.js';
-```
+Keep local imports and the component's `index.js` exports aligned when renaming or adding files. Only export the constants intended to be public; use the existing barrel as the reference.
 
 ## data-qa Attributes
 
-Every meaningful DOM element must have a `data-qa` attribute. This is required for test selectors and for downstream teams automating against the component:
+Add `data-qa` to important elements for QA and automation, following the [Vue contributing guidance](../../../../dialtone-vue/.github/CONTRIBUTING.md#data-qa-attributes). Use the existing testing rules to choose stable selectors. A Button selector example is:
 
 ```vue
 <button data-qa="dt-button">
@@ -226,22 +199,11 @@ icon   = wrapper.find('[data-qa="dt-button-icon"]');
 
 ## Storybook Stories
 
-Stories use CSF3 format. The `button.stories.js` file defines metadata, controls, and story references. Actual story templates live in the two `.story.vue` files.
+Stories use CSF3 format. The `Button.stories.js` file defines metadata, controls, and story references. Story templates live in the component's `.story.vue` files; their number varies.
 
 `argsData` sets default prop values for interactive controls. `argTypesData` defines what controls appear in the Storybook panel:
 
-```javascript
-export const argTypesData = {
-  // Props
-  size: { control: 'select', options: Object.keys(BUTTON_SIZE_MODIFIERS) },
-
-  // Slots
-  default: { table: { type: { summary: 'VNode' } }, control: { type: 'text' } },
-
-  // Events — disable duplicates that Vue emits
-  onClick: { table: { disable: true } },
-};
-```
+Use the current [Button stories](../../../../dialtone-vue/components/Button/Button.stories.js) as the control example. Button's size control currently lists all keys in `BUTTON_SIZE_MODIFIERS`, including deprecated aliases.
 
 ## Build and Test
 
@@ -256,4 +218,4 @@ cd packages/dialtone-vue && pnpm test:watch
 pnpm nx run dialtone-vue:build
 ```
 
-The build runs two commands sequentially: Vite compiles components to `dist/`, then `scripts/build-dialtone-vue-docs.mjs` runs `vue-docgen-api` to extract JSDoc into `dist/component-documentation.json`. That JSON file is what the public documentation site uses for the API reference tables.
+The current [Vue build target](../../../../dialtone-vue/project.json) compiles components and runs `scripts/build-dialtone-vue-docs.mjs` to extract API documentation into `dist/component-documentation.json`. Generated output does not replace the authored public page, stories or API source.
