@@ -8,7 +8,8 @@
       "packages/dialtone-docs/src/content/development/development-component-workflow.md",
       "packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md",
       "packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md",
-      "packages/dialtone-docs/src/content/development/development-testing.md"
+      "packages/dialtone-docs/src/content/development/development-testing.md",
+      ".agents/resources/rules/vue-components.md"
     ]
   },
   {
@@ -72,7 +73,9 @@
       "AGENTS.md"
     ],
     "expectedDocs": [
-      "packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md"
+      "packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md",
+      ".agents/resources/doc-sync.md",
+      ".agents/resources/agent-tooling-parity.md"
     ]
   },
   {
@@ -82,7 +85,8 @@
     ],
     "expectedDocs": [
       "apps/dialtone-documentation/docs/guides/cli/index.md",
-      "apps/dialtone-documentation/docs/guides/mcp-server/index.md"
+      "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
+      "packages/dialtone-query-core/README.md"
     ]
   },
   {
@@ -92,7 +96,8 @@
     ],
     "expectedDocs": [
       "apps/dialtone-documentation/docs/guides/cli/index.md",
-      "apps/dialtone-documentation/docs/guides/mcp-server/index.md"
+      "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
+      "packages/dialtone-query-core/README.md"
     ]
   },
   {
@@ -102,7 +107,8 @@
     ],
     "expectedDocs": [
       "apps/dialtone-documentation/docs/guides/cli/index.md",
-      "apps/dialtone-documentation/docs/guides/mcp-server/index.md"
+      "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
+      "packages/dialtone-query-core/README.md"
     ]
   },
   {
@@ -111,7 +117,8 @@
       "project.json"
     ],
     "expectedDocs": [
-      "packages/dialtone-docs/src/content/architecture/architecture-build-system.md"
+      "packages/dialtone-docs/src/content/architecture/architecture-build-system.md",
+      "packages/dialtone-docs/src/content/architecture/architecture-monorepo-structure.md"
     ]
   },
   {

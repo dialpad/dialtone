@@ -549,13 +549,12 @@ const docCases = JSON.parse(
 );
 for (const testCase of docCases) {
   const docs = docsForChangedFiles(testCase.changedFiles);
-  for (const expectedDoc of testCase.expectedDocs) {
-    assert(
-      docs.includes(expectedDoc),
-      `${testCase.id} missing doc mapping ${expectedDoc}`,
-      failures,
-    );
-  }
+  const expectedDocs = [...new Set(testCase.expectedDocs)];
+  assert(
+    docs.length === expectedDocs.length && expectedDocs.every((expectedDoc) => docs.includes(expectedDoc)),
+    `${testCase.id} expected doc mappings ${JSON.stringify(expectedDocs)}, got ${JSON.stringify(docs)}`,
+    failures,
+  );
 }
 
 const prCreateCases = JSON.parse(
