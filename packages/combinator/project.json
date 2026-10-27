@@ -12,9 +12,7 @@
         "{projectRoot}/src/**/*",
         "{projectRoot}/vite.config.js"
       ],
-      "outputs": [
-        "{projectRoot}/dist"
-      ],
+      "outputs": [ "{projectRoot}/dist" ],
       "options": {
         "cwd": "{projectRoot}",
         "command": "vite build"
@@ -82,9 +80,7 @@
           "transitive": true
         }
       ],
-      "outputs": [
-        "{projectRoot}/.generated/preset-examples.json"
-      ],
+      "outputs": [ "{projectRoot}/.generated/preset-examples.json" ],
       "options": {
         "cwd": "{projectRoot}",
         "command": "node scripts/generate-preset-examples.mjs"
