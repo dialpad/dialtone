@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # Existing PreToolUse entry point; documentation review is advisory.
 # The edit tracker remains available to its other consumers.
 node "$(dirname "${BASH_SOURCE[0]}")/doc-review-adapter.mjs" || {

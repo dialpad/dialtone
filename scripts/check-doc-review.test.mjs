@@ -96,11 +96,17 @@ test('merge-base excludes upstream-only changes while direct comparison reports 
     merge.changes.map((c) => c.path),
     ['a/source'],
   );
+  const mergeText = f.run(['--base', upstream, '--head', head, '--merge-base']).stdout;
+  assert.ok(mergeText.includes(f.base), 'default report shows the effective merge base');
+  assert.ok(mergeText.includes(head), 'default report shows the resolved head');
   const direct = f.report(['--base', upstream, '--head', head, '--direct']);
   assert.deepEqual(
     direct.changes.map((c) => c.path),
     ['a/source', 'b/source'],
   );
+  const directText = f.run(['--base', upstream, '--head', head, '--direct']).stdout;
+  assert.ok(directText.includes(upstream), 'direct report shows the chosen base');
+  assert.ok(directText.includes(head), 'direct report shows the resolved head');
 });
 
 test('index and worktree inputs remain separate; touched prose never clears a review candidate', (t) => {

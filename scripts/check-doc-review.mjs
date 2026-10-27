@@ -182,8 +182,10 @@ export function analyze(options, cwd = process.cwd()) {
   };
 }
 export function formatReport(report) {
+  const base = report.boundary.effectiveBase ?? report.boundary.base ?? report.boundary.head;
   const lines = [
     `Advisory documentation review (${report.boundary.mode}); target context: ${report.targetContext}.`,
+    `Comparison: ${base} -> ${report.targetContext}.`,
     'Candidates require source/prose inspection; this report does not prove review or correctness.',
   ];
   for (const c of report.candidates) {
