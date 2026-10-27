@@ -273,6 +273,7 @@ async function build() {
 
   mkdirSync(distDir, { recursive: true });
   writeFileSync(outputPath, JSON.stringify(allRecords, null, 2), 'utf8');
+  coverage.sort((a, b) => a.filePath < b.filePath ? -1 : a.filePath > b.filePath ? 1 : 0);
   const report = { schemaVersion: 1, pages: coverage, summary: {
     pages: coverage.length, liveCandidates: coverage.reduce((sum, page) => sum + page.liveCandidates, 0),
     delivered: coverage.reduce((sum, page) => sum + page.deliveredIds.length, 0),
