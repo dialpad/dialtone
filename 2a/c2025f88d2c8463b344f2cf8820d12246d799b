@@ -1,0 +1,35 @@
+packages/dialtone-tokens/sync-scripts/resolve_tokens.ts
+  s_355402be618789::t_eacfc23f293de2 475-488
+  s_355402be618789::t_810f2f52ea6641 489
+packages/dialtone-tokens/sync-scripts/figma_order.json
+  s_355402be618789::t_f6f046f66364c8 1093-1100
+  s_355402be618789::t_adce9c0a349c2e 17
+  s_355402be618789::t_412df06f6ee353 19-20,22,58,60,62,245-247,249-252
+  s_355402be618789::t_0cb39ba68b8622 57
+  s_355402be618789::t_cb0c070ab61fd8 255-257
+packages/dialtone-tokens/sync-scripts/resolve_tokens.test.ts
+  s_355402be618789::t_5df5e59c6ff9da 208-213,222-223,225-226
+  s_355402be618789::t_e7f1ec7908c654 214-220
+  s_355402be618789::t_58a432223a5a94 207,221,224,227-229
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2ac2025f88d2c8463b344f2cf8820d12246d799b",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

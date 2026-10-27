@@ -1,0 +1,32 @@
+packages/dialtone-tokens/postcss/constants.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 15-17
+  h_c15b5755534093 27
+packages/dialtone-tokens/postcss/layered-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 4,53-64
+packages/dialtone-tokens/postcss/dialtone-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 7,96-108
+packages/dialtone-css/postcss/dialtone-generators.cjs
+  s_be0c6411b4addc::t_f7ad12dcbb5e9e 1173
+  s_be0c6411b4addc::t_97c0f4ad2dc0b1 1164
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "295503eee70e3be6cb2326122083c8cc2b38d5a7",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_be0c6411b4addc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f80b4-22bf-7f21-8386-5ab135d7ea3d",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

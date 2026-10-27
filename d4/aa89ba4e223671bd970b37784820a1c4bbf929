@@ -1,0 +1,16 @@
+packages/dialtone-css/lib/build/less/utilities/interactivity.less
+  h_c15b5755534093 56-60
+packages/dialtone-tokens/tokens/base/default.json
+  h_c15b5755534093 1039,1045,1052-1056
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "d4aa89ba4e223671bd970b37784820a1c4bbf929",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
