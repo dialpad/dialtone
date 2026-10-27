@@ -140,6 +140,8 @@ export interface DocumentationRecord {
   frontmatter: DocumentationFrontmatter;
   filePath: string;
   example?: {
+    representation?: 'vue-app' | 'static-html';
+    utilities?: string[];
     source: { id: string; filePath: string; headingPath: string[]; hash: string; package: string; version: string };
     components: ComponentIdentity[];
     directives: string[];

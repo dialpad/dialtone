@@ -1,5 +1,5 @@
 import { defineCommand } from 'citty';
-import { searchUtilityClasses } from '@dialpad/dialtone-query-core';
+import { searchUtilityClasses, getDocumentationExampleIds } from '@dialpad/dialtone-query-core';
 import type { SearchResult, ValueObject } from '@dialpad/dialtone-query-core';
 import { getContext } from '../context.js';
 import { type Format } from '../formatters.js';
@@ -61,5 +61,7 @@ export const utilityCommand = defineCommand({
       console.log('');
       notes.forEach(n => console.log(`Note: ${n}`));
     }
+    const ids = [...new Set(shown.flatMap(result => getDocumentationExampleIds(result.name, getContext().documentation)))];
+    if (ids.length) console.log(`\nSource examples (${Math.min(ids.length, 3)} of ${ids.length}; bundled documentation, check profile and validation limits):\n${ids.slice(0, 3).map(id => `${id}: dialtone docs --id ${id}`).join('\n')}${ids.length > 3 ? '\nRetrieve the matching source section with --id for its full example list.' : ''}`);
   },
 });

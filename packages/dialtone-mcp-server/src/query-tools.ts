@@ -498,6 +498,8 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
       output += exampleHints(ids);
     } else if (name === 'search_documentation') {
       output += exampleHints([...new Set(page.flatMap(result => getDocumentationExampleIds(result.details.id, data.documentation)))]);
+    } else if (name === 'search_utility_classes') {
+      output += exampleHints([...new Set(page.flatMap(result => getDocumentationExampleIds(result.name, data.documentation)))]);
     }
     if (found.notes.length) output += `\n\n${found.notes.join('\n')}`;
     if (page.length && spec.followUp)
