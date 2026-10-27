@@ -17,7 +17,7 @@ Apply to `packages/dialtone-vue/**/*.test.js`.
 ## Selectors And Fixtures
 
 - Prefer `data-qa` selectors.
-- Import valid values from the component constants identified by the shared Vue conventions; do not duplicate valid-value arrays.
+- Follow the [shared Vue conventions](vue-components.md#props) for production constants and independently authored validator-test expectations.
 - Use `it.each` for repeated behavior across value sets.
 
 ## Test Shape

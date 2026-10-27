@@ -59,7 +59,7 @@ Never select by CSS class or bare tag name — these are brittle.
 
 ## Constants
 
-Import valid values from the component constants identified by the shared Vue conventions. Never hardcode strings like `'md'` — use `COMPONENT_SIZE_DEFAULT`.
+Follow the [shared Vue conventions](../../.agents/resources/rules/vue-components.md#props) for production constants and independently authored validator-test expectations. Inspect the component contract to choose an expected default; do not assume a universal default-size export.
 
 ## Required Test Categories
 

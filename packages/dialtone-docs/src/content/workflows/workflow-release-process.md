@@ -2,14 +2,14 @@
 type: workflow
 category: workflows
 keywords: [release, semantic-release, versioning, changelog, tags, tuesday, cron, staging, production, npm-publish]
-ai_summary: How Dialtone releases work — Tuesday cron, semantic-release per package, tag format, changelogs, and staging-to-production merge.
-last_updated: 2026-10-06
+ai_summary: How Dialtone releases work, including package versioning, changelogs and the currently skipped production-promotion job.
+last_updated: 2026-10-26
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
 # Release Process
 
-Dialtone releases are fully automated via `semantic-release`. Releases run on a scheduled Tuesday cadence from the `staging` branch and can also be triggered manually at any time.
+Dialtone uses `semantic-release` to version packages. Releases run on a scheduled Tuesday cadence from the `staging` branch and can also be triggered manually at any time.
 
 ## Release Schedule
 
@@ -27,14 +27,7 @@ The release workflow only executes on these branches: `staging`, `alpha`, `beta`
 
 Releases from `staging` are tagged as `latest`. Releases from `alpha`, `beta`, or `next` are tagged with the branch name.
 
-After a successful release from `staging`, the workflow automatically fast-forward merges `staging` into `production`:
-
-```bash
-git merge --ff-only origin/staging
-git push
-```
-
-This keeps `production` always at exactly the last released commit.
+The configured `update-production` job is currently skipped because its condition reads a branch output from a job that is not listed in `needs`. A successful staging release therefore does not automatically fast-forward `production`. See [How Production Gets Updated](workflow-branch-strategy.md#how-production-gets-updated) for the dependency guard and intended fast-forward promotion step.
 
 ## Per-Package Versioning
 

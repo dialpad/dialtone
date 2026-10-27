@@ -3,13 +3,13 @@ type: architecture
 category: architecture
 keywords: [nx, pnpm, build, workspace, project.json, package.json, gulp, semantic-release, new-package, add-package, workspace-protocol]
 ai_summary: How the Dialtone build system works with NX and pnpm, and the exact steps to add a new package to the monorepo.
-last_updated: 2026-03-04
+last_updated: 2026-10-23
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
 # Build System
 
-Dialtone uses **NX 19** as the task orchestrator and **pnpm 9** as the package manager. NX handles build ordering, caching, and parallel execution. pnpm handles dependency installation and workspace linking.
+Dialtone uses **NX 19** as the task orchestrator and **pnpm** as the package manager. Use the pnpm version pinned by `packageManager` in the [root manifest](../../../../../package.json). NX handles build ordering, caching, and parallel execution. pnpm handles dependency installation and workspace linking.
 
 ## How NX Works Here
 
@@ -117,7 +117,7 @@ It generates the `.vue` file, `index.js`, Vitest tests, Storybook stories, and M
 
 ## Adding a New Package
 
-This is the complete process for adding a publishable package to the Dialtone monorepo. Every step is required. Missing any one of them causes NX to fail, releases to break, or pre-commit hooks to not run.
+Use this checklist when adding a publishable package to the Dialtone monorepo. Apply the targets and configuration needed by that package, following current workspace configuration and comparable packages; not every illustrated file or step applies.
 
 ### Step 1 — Create the directory
 
@@ -257,7 +257,7 @@ The `inputs` and `outputs` fields tell NX what files to watch for cache invalida
 
 ### Step 4 — release-ci.config.cjs
 
-Required for `semantic-release` to version and publish the package correctly:
+Required when the package has a release target. Follow the configuration paths used by that target; a package may need multiple release configs. The example below versions the package and commits release metadata:
 
 ```javascript
 const name = 'dialtone-{feature}';
@@ -289,7 +289,7 @@ The `tagFormat` must use the package name as prefix (e.g., `dialtone-docs/v1.0.1
 
 ### Step 5 — .lintstagedrc.cjs
 
-Required for pre-commit hooks to run linting on staged files in this package:
+Optional. The root hook runs `lint-staged`, which uses the closest configuration for each staged file. The root `.lintstagedrc.js` applies when no nearer config exists. Add a package-local `.lintstagedrc.cjs` only for package-specific rules; import the root configuration when its shared rules should also apply:
 
 ```javascript
 const baseConfig = require('../../.lintstagedrc.js');
@@ -328,8 +328,8 @@ pnpm nx run dialtone-{feature}:build
 |------|---------|----------|
 | `package.json` | Package identity, exports, dependencies | Yes |
 | `project.json` | NX targets — build, test, publish, release | Yes |
-| `release-ci.config.cjs` | Semantic-release versioning config | Yes |
-| `.lintstagedrc.cjs` | Pre-commit lint hook config | Yes |
+| `release-ci.config.cjs` at target-defined paths | Semantic-release versioning config | For packages with a release target |
+| `.lintstagedrc.cjs` | Package-specific staged-file rules | Only for package-specific rules |
 | `vite.config.js` | Vite build config (if using Vite) | If using Vite |
 | `tsconfig.json` | TypeScript config (if using TypeScript) | If using TypeScript |
 

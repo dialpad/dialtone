@@ -2,6 +2,8 @@
 
 Use this as the routing table for repo-local Codex skills. Shared contributor policy in `AGENTS.md` and `resources/rules/vue-components.md` also serves Claude; keep client-specific workflows separate. Keep default context small: load a skill only when its trigger matches the task, then load only the resources that skill references.
 
+For repository authoring or maintenance questions, read the [Contributor tasks table](resources/rule-map.md#contributor-tasks) and then the selected reference and owning requirements. The table is a lookup route; linked files are not automatically loaded instructions.
+
 ## Skills
 
 | Skill               | Trigger                                            | Purpose                                                                                                 | Key resources                                                      | Eval     |

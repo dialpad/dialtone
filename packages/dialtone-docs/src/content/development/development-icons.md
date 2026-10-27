@@ -3,7 +3,7 @@ type: development
 category: development
 keywords: [icons, svg, dialtone-icons, gulp, vue-components, keywords, categories, accessibility, naming]
 ai_summary: How to add SVG icons to dialtone-icons — SVG requirements, categories, keywords, Gulp pipeline, and generated Vue components.
-last_updated: 2026-03-04
+last_updated: 2026-10-23
 related_packages: [dialtone-icons, dialtone-vue]
 ---
 
@@ -78,7 +78,7 @@ Keywords power the icon search in the Dialtone documentation site and in any ico
 
 ```bash
 cd packages/dialtone-icons
-pnpm run gulp
+pnpm exec gulp
 ```
 
 Or from the monorepo root:
@@ -87,15 +87,9 @@ Or from the monorepo root:
 pnpm nx run dialtone-icons:build
 ```
 
-### Step 4 — Commit Generated Files
+### Step 4 — Commit Tracked Sources
 
-The build modifies several generated files. Commit all of them:
-
-- `src/icons/my-new-icon.vue` — generated Vue component
-- `dist/svg/icons/my-new-icon.svg` — processed SVG output
-- `dist/icons.js` — updated icon name list
-- `dist/keywords-icons.json` — updated keyword index
-- `index.js` — updated exports file
+Commit the source SVG and authored keyword changes. The current repository ignores generated `src/icons/`, `dist/`, root exports and platform build output; do not force-add those files. Check `git status` and the owning [icon build target](../../../../dialtone-icons/project.json) after building, and stage only intended tracked sources. The [repository ignore rules](../../../../../.gitignore) control what is generated rather than committed.
 
 ## What the Build Does
 

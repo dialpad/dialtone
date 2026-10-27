@@ -11,7 +11,7 @@ Apply to `packages/dialtone-vue/components/**`. These are shared authoring rules
 ## Props
 
 - Use `validator` — NEVER `validate`. Vue silently ignores `validate`.
-- Import allowed values from `*Constants.js` or `*Constants.ts` in component validators; never hardcode valid value arrays in components. Validator tests may declare expected public values independently of production constants.
+- Import allowed values from the component's current constants module (`*Constants.js` or `*Constants.ts`) or an existing shared constants module in component validators; never hardcode valid value arrays in components. Validator tests may declare expected public values independently of production constants.
 - Add JSDoc with `@values` annotation.
 - Boolean visibility toggles: use positive polarity (`showClose`, `showHeader`, `showArrow`). Never use negative names (`hideX`, `preventX`, `skipX`).
 
@@ -96,12 +96,12 @@ When adding or reviewing a slot:
 
 ## Sizes
 
-- All component size props use a numeric ordinal scale: `100` (xs), `200` (sm), `300` (md), `400` (lg), `500` (xl).
+- Prefer numeric ordinal sizes. Supported values are component-specific; use each component's constants, validator and API documentation.
 - Prop type: `[String, Number]`. Default: numeric (e.g., `default: 300`).
 - T-shirt aliases (`xs`, `sm`, `md`, `lg`, `xl`) remain in constants for backward compat but are deprecated.
 - `@values` JSDoc: list numeric only (e.g., `@values 100, 200, 300, 400, 500`). Do not list t-shirt aliases.
 - Text headline extends the scale: `500` (xl), `600` (2xl), `700` (3xl).
-- Icons: separate numeric scale `100`–`800`, distinct from the `100`-`500` component scale (do not remap icon values onto the component scale). Icon-family `size` props (`Icon`, `Loader`, `Emoji`, `EmojiTextWrapper`, `ProgressCircle`, `ToastLayoutAlternateIcon`) still use `[String, Number]`.
+- Icons: separate numeric scale `100`–`800`, independent of component-specific supported values (do not remap icon values onto the component scale). Icon-family `size` props (`Icon`, `Loader`, `Emoji`, `EmojiTextWrapper`, `ProgressCircle`, `ToastLayoutAlternateIcon`) still use `[String, Number]`.
 - Use each component's constants for supported values.
 - Shared scale definition: `packages/dialtone-vue/common/constants/sizes.js`.
 - Export a component-specific `<COMPONENT>_SIZE_MODIFIERS` object (e.g., `BUTTON_SIZE_MODIFIERS`) from `*Constants.js` or `*Constants.ts`, with numeric and t-shirt keys. `COMPONENT_SIZES` is the shared scale mapping.
