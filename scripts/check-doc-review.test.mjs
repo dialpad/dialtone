@@ -193,6 +193,12 @@ test('Claude adapter reports without a session cache or marker and never makes a
   assert.equal(output.hookSpecificOutput.hookEventName, 'PreToolUse');
   assert.equal(output.hookSpecificOutput.permissionDecision, undefined);
   assert.match(output.hookSpecificOutput.additionalContext, /guide-a.md/);
+  for (let i = 0; i < 400; i++) f.put(`a/large-change-${i}-${'x'.repeat(30)}`);
+  f.git('add', 'a/');
+  const bounded = JSON.parse(invoke('git push').stdout).hookSpecificOutput.additionalContext;
+  assert.ok(bounded.length <= 9000);
+  assert.match(bounded, /truncated; run scripts\/check-doc-review\.mjs/);
+  assert.match(bounded, /Use \.agents\/resources\/doc-sync\.md/);
   f.git('update-ref', '-d', 'refs/remotes/origin/staging');
   const error = invoke('gh pr create');
   assert.equal(error.status, 0);

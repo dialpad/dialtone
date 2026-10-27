@@ -29,14 +29,14 @@ try {
           );
         }
       }
-      if (messages.length)
-        emit(
-          (
-            'Repository advisory review uses local origin/staging...HEAD (merge-base), the index and tracked worktree separately. It does not parse command-specific repositories or network state.\n' +
-            messages.join('\n\n') +
-            '\nUse .agents/resources/doc-sync.md to record a current semantic review. Existing task authorization still governs any edits.'
-          ).slice(0, 9000),
-        );
+      if (messages.length) {
+        const header = 'Repository advisory review uses local origin/staging...HEAD (merge-base), the index and tracked worktree separately. It does not parse command-specific repositories or network state.\n';
+        const footer = '\nUse .agents/resources/doc-sync.md to record a current semantic review. Existing task authorization still governs any edits.';
+        const marker = '\n[truncated; run scripts/check-doc-review.mjs for the full selected-boundary report]';
+        const budget = 9000 - header.length - footer.length;
+        const body = messages.join('\n\n');
+        emit(header + (body.length > budget ? body.slice(0, budget - marker.length) + marker : body) + footer);
+      }
     }
   }
 } catch (error) {
