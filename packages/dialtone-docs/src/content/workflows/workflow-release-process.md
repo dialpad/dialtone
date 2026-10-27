@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [release, semantic-release, versioning, changelog, tags, tuesday, cron, staging, production, npm-publish]
 ai_summary: How Dialtone releases work, including package versioning, changelogs and the currently skipped production-promotion job.
-last_updated: 2026-10-26
+last_updated: 2026-10-27
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
@@ -75,7 +75,7 @@ The release workflow covers 12 packages:
 
 ## What semantic-release Does
 
-Each package runs `pnpm nx run {packageName}:release`, which executes the plugins in order defined in `release-ci.config.cjs`:
+Each package runs `pnpm nx run {packageName}:release`, which executes the plugins in its `release-ci.config.cjs`. Most packages use the following sequence. The CLI and MCP server use `lookup-release.config.cjs` in place of steps 1–2; it delegates commit analysis and release-note generation while applying the source-qualified release and breaking-change rules described above. Both adapters then run the common steps 3–7 unchanged:
 
 1. **`@semantic-release/commit-analyzer`** — Analyzes commits since the last tag. Determines version bump: `feat` → minor, `fix`/`perf`/`refactor` → patch, `BREAKING CHANGE` footer → major. If no release-triggering commits exist, no release happens.
 
