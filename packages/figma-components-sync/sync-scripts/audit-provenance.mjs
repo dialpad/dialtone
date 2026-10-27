@@ -25,6 +25,8 @@ import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { converter, parse as parseColor } from 'culori';
+import { loadLibrary } from './remote-variables.mjs';
+import { exemplarSlots } from './exemplar-slots.mjs';
 import { figmaChildParts } from './figma-mapping.mjs';
 import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken, shadowLayerColorTokens } from './cdp-provenance.mjs';
 
@@ -38,6 +40,9 @@ const args = process.argv.slice(2);
 const which = args.find(a => !a.startsWith('--'));
 const setId = args[args.indexOf('--set') + 1];
 const cfg = COMPONENTS[which];
+const EXEMPLAR_SLOTS = exemplarSlots(cfg);
+/** Declared exemplar slots, skipped and counted. */
+const exemplars = [];
 if (!cfg || !setId) throw new Error('usage: audit-provenance.mjs <component> --set <nodeId>');
 
 async function figmaGet (path) {
@@ -51,7 +56,10 @@ async function figmaGet (path) {
 
 const varsRes = await figmaGet(`/v1/files/${FILE_KEY}/variables/local`);
 const VM = varsRes.meta.variables;
-const varName = id => (VM[id] ? VM[id].name : `«unknown ${id}»`);
+const LIB = await loadLibrary(figmaGet, process.env.TOKENS_FILE_KEY);
+// A remote variable is named through the library file by its key; an id with no key
+// prefix that this file does not hold is an id local to the library.
+const varName = id => (VM[id] ?? LIB?.fromRemote(id) ?? LIB?.VM[id])?.name ?? `«unknown ${id}»`;
 // A variable that declares itself DERIVED is a deliberate stand-in for a value the
 // CSS computes or hardcodes and Dialtone has no token for. Binding one is the
 // intended outcome, not a mis-binding — but it is counted, never hidden.
@@ -291,7 +299,17 @@ function flattenDom (node) {
 
 /** Walk DOM (via CDP node ids) and Figma in parallel, comparing token identity. */
 async function compare (variant, domNodeId, fig, path, domInfo) {
+  // A declared exemplar is a real instance of another component, restyled by this one in
+  // the browser and not in Figma, so its tokens legitimately differ from the measured render.
+  // Not walked into: its Figma node may also be a native SLOT, one level the DOM does not have.
+  if (domInfo && domInfo.dataSlot && EXEMPLAR_SLOTS.has(domInfo.dataSlot)) {
+    exemplars.push({ variant, path, slot: domInfo.dataSlot });
+    return;
+  }
   if (!fig) return;
+  // A native SLOT wraps the content it holds, a level the DOM does not have: the content is
+  // what is compared. (A declared exemplar returned above, before this.)
+  if (fig && fig.type === 'SLOT' && (fig.children || []).length === 1) fig = fig.children[0];
   const { tokens, computed, own, chain } = await tokensFor(cdp, domNodeId);
   // Figma binds shadow FIELDS; the CSS names one composite. Compare like with like.
   const compositeEffect = tokens.effect;
@@ -520,6 +538,7 @@ console.log(`bindings compared : ${stats.compared}  (agree ${stats.agree})`);
 console.log(`css-computed, no single token : ${stats.cssComputed}`);
 console.log(`inherited via currentColor     : ${stats.currentColor}`);
 console.log(`bound to a DERIVED variable    : ${stats.derived}`);
+if (exemplars.length) console.log(`declared exemplar slots         : ${exemplars.length}  (not compared)`);
 if (allowances.length) {
   const by = {};
   for (const a of allowances) {

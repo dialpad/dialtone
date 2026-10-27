@@ -543,5 +543,55 @@ export function shadowLayerColorTokens (compositeToken, own, chain) {
   });
 }
 
-/** '--dt-color-link-primary' -> 'color/link/primary' (Figma variable naming) */
-export const toFigmaName = t => t.replace(/^--dt-/, '').split('-').join('/');
+/**
+ * '--dt-color-link-primary-hover' -> 'color.link.primary-hover'
+ *
+ * A compiled CSS custom property has already lost the distinction between a dot (a
+ * real path level) and a hyphen that's part of a token's own name ('primary-hover',
+ * 'focus-inset') — dialtone-tokens kebab-cases the whole dotted path into one string
+ * before either reaches the browser, the same transform check_against_css.ts's
+ * cssNameFor() uses to validate the built CSS. Guessing which hyphen was which from
+ * the flattened string alone cannot recover that, so this inverts the real transform
+ * over every live token instead — regenerated from the current token set on every
+ * run, so a newly added token needs no update here.
+ */
+async function buildCssVarToPathMap () {
+  const cssNameFor = (path) => path.split('.')
+    .map(seg => seg.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase())
+    .join('-');
+
+  // resolve_tokens.ts reads token files relative to process.cwd() — both at
+  // import time AND on every resolveModes() call, so the chdir has to stay in
+  // place for both, then get restored before this module hands control back to
+  // the rest of the pipeline (which reads its own files relative to ITS cwd).
+  const originalCwd = process.cwd();
+  process.chdir(new URL('../../dialtone-tokens', import.meta.url).pathname);
+  let map;
+  try {
+    const { resolveModes } = await import('../../dialtone-tokens/sync-scripts/resolve_tokens.ts');
+    // Same GROUPS/MODES build_variables.ts resolves to build the real 837
+    // published variables — confirmed 1:1 against them (837/837 names matched).
+    const { tokens: base } = await resolveModes('base', ['light', 'dark']);
+    const { tokens: dp } = await resolveModes('dp', ['light', 'dark']);
+    map = new Map([...base, ...dp].map(t => [`--dt-${cssNameFor(t.name)}`, t.name]));
+  } finally {
+    process.chdir(originalCwd);
+  }
+  return map;
+}
+
+const CSS_VAR_TO_PATH = await buildCssVarToPathMap();
+
+/**
+ * '--dt-color-link-primary-hover' -> 'color/link/primary-hover' (Figma variable naming).
+ *
+ * Looks the measured CSS variable up against every real token's own dotted path
+ * first — exact, since it reverses dialtone-tokens' own transform rather than
+ * guessing. Falls back to the old blind hyphen-split only for a name absent from
+ * the current token set entirely (e.g. a token that doesn't exist yet), so an
+ * unmapped name still produces a best-effort guess instead of nothing.
+ */
+export const toFigmaName = t => {
+  const path = CSS_VAR_TO_PATH.get(t);
+  return path ? path.split('.').join('/') : t.replace(/^--dt-/, '').split('-').join('/');
+};

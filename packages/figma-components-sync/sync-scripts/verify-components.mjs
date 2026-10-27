@@ -20,6 +20,8 @@ import { fileURLToPath } from 'url';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
 import { converter, parse as parseColor, clampChroma, displayable, differenceCiede2000 } from 'culori';
+import { loadLibrary } from './remote-variables.mjs';
+import { exemplarSlots } from './exemplar-slots.mjs';
 
 const API = 'https://api.figma.com';
 const EPS = 0.6;              // px — Figma stores floats, CSS rounds
@@ -74,19 +76,7 @@ import { matchedFor, resolveDeclared } from './cdp-provenance.mjs';
 import { marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const cfg = COMPONENTS[which];
-/**
- * Slots whose content the config declares as a swappable exemplar (`slotContent(...).swapTo`).
- * Combo-independent: a slot either is an exemplar or is not, so the first combo answers it.
- */
-const EXEMPLAR_SLOTS = new Set();
-if (cfg && cfg.slotContent) {
-  try {
-    const probe = Object.fromEntries(Object.keys(cfg.axes).map(a => [a, cfg.axes[a][0]]));
-    for (const [slot, spec] of Object.entries(cfg.slotContent(probe) || {})) {
-      if (spec && spec.swapTo) EXEMPLAR_SLOTS.add(slot);
-    }
-  } catch { /* a config that cannot be probed declares no exemplars */ }
-}
+const EXEMPLAR_SLOTS = exemplarSlots(cfg);
 if (IS_CLI && !cfg) throw new Error(`no verifier config for "${which}"`);
 
 // ── figma ───────────────────────────────────────────────────────────────────
@@ -100,6 +90,7 @@ async function figmaGet (path) {
 }
 const varsRes = await figmaGet(`/v1/files/${FILE_KEY}/variables/local`);
 const VM = varsRes.meta.variables, VC = varsRes.meta.variableCollections;
+const LIB = await loadLibrary(figmaGet, process.env.TOKENS_FILE_KEY);
 /**
  * Resolve a variable in a NAMED mode.
  *
@@ -108,12 +99,23 @@ const VM = varsRes.meta.variables, VC = varsRes.meta.variableCollections;
  * default mode would silently read Light values while claiming to check Dark —
  * the same class of false-green this file exists to prevent.
  */
-function varValue (id, modeName, d = 0) {
-  const v = VM[id]; if (!v || d > 8) return null;
-  const coll = VC[v.variableCollectionId];
+function varValue (id, modeName, d = 0, inLibrary = false) {
+  if (d > 8) return null;
+  // A remote id is resolved in the library file, where the whole alias chain lives; the
+  // aliases inside it are ids local to that file (see remote-variables.mjs).
+  const remote = !inLibrary && LIB && LIB.fromRemote(id);
+  const lib = inLibrary || !!remote;
+  const v = remote || (lib ? LIB.VM[id] : VM[id]); if (!v) return null;
+  const coll = (lib ? LIB.VC : VC)[v.variableCollectionId];
   const mode = coll.modes.find(m => m.name === modeName);
   const val = v.valuesByMode[(mode || { modeId: coll.defaultModeId }).modeId];
-  if (val && val.type === 'VARIABLE_ALIAS') return varValue(val.id, modeName, d + 1);
+  if (val && val.type === 'VARIABLE_ALIAS') return varValue(val.id, modeName, d + 1, lib);
+  // A COMPOSED colour is an alias for the colour plus a separate opacity, in percent: how the
+  // variables sync stores a token that is another colour at some alpha.
+  if (val && val.color && val.color.type === 'VARIABLE_ALIAS') {
+    const c = varValue(val.color.id, modeName, d + 1, lib);
+    return c && 'r' in c ? { ...c, a: (c.a ?? 1) * (val.opacity ?? 100) / 100 } : null;
+  }
   return val;
 }
 /** Returns the paint's colour in `modeName`, plus whether it is variable-bound. */
@@ -336,6 +338,9 @@ function compareNode (variant, dom, fig, path, MODE, figParentBox) {
     return;
   }
 
+  // A native SLOT wraps the content it holds, a level the DOM does not have: the content is
+  // what is compared. (A declared exemplar returned above, before this.)
+  if (fig && fig.type === 'SLOT' && (fig.children || []).length === 1) fig = fig.children[0];
   if (!fig) { rec(variant, path, 'existence', dom.classes.join('.') || dom.tag, 'no figma node'); return; }
   const s = dom.style;
 

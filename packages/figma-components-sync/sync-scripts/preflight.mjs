@@ -10,6 +10,7 @@
 import './pin-cwd.mjs';   // launch directory must not matter
 import 'dotenv/config';
 import { readFileSync, existsSync } from 'fs';
+import { fetchPublishedTokenKeys } from './library-tokens.mjs';
 
 const TOKEN = process.env.PERSONAL_ACCESS_TOKEN;
 const FILE_KEY = process.env.FILE_KEY;
@@ -21,6 +22,13 @@ if (!res.ok) throw new Error(`variables fetch -> ${res.status}`);
 const META = (await res.json()).meta;
 const VM = META.variables;
 const varNames = new Set(Object.values(VM).map(v => v.name));
+
+// This file links the Dialtone Design Tokens library rather than owning the
+// variables locally — see library-tokens.mjs. A name resolvable that way is just
+// as buildable as a local one, so it counts here too.
+for (const name of (await fetchPublishedTokenKeys(TOKEN, process.env.TOKENS_FILE_KEY)).keys()) {
+  varNames.add(name);
+}
 
 let failed = 0;
 for (const name of process.argv.slice(2)) {

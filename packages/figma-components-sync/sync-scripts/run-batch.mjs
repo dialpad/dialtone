@@ -24,7 +24,7 @@
  */
 import './pin-cwd.mjs';
 import { createServer } from 'http';
-import { readFileSync, writeFileSync, existsSync, statSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, utimesSync } from 'fs';
 import { extname, normalize } from 'path';
 import { execFileSync, spawnSync } from 'child_process';
 
@@ -121,6 +121,20 @@ if (!preflightNames.length) {
  * Replacements are anchored on the component name so a second component's id can
  * never be overwritten by a loose match.
  */
+/**
+ * Write a config file WITHOUT changing its modified time.
+ *
+ * The producers list below treats a newer config as a reason to re-measure, and rightly:
+ * an edit to the axes changes what is measured. But recording a built set's Figma id is not
+ * such an edit, and it was writing into those same files, so every successful build made
+ * the next run re-measure for about six minutes for nothing.
+ */
+function writeKeepingMtime (path, content) {
+  const { atime, mtime } = statSync(path);
+  writeFileSync(path, content);
+  utimesSync(path, atime, mtime);
+}
+
 function writeSetId (component, setId) {
   // A merged build writes `figmaMergedSetId` and deliberately does NOT touch `figmaSetId`: it
   // lands on its own page, and overwriting the id would point every existing check at a set
@@ -134,7 +148,7 @@ function writeSetId (component, setId) {
       s = new RegExp(`${key}:\\s*'[^']*'`).test(s)
         ? s.replace(new RegExp(`${key}:\\s*'[^']*'`), `${key}: '${setId}'`)
         : s.replace(/(\n\s*figmaSetId:\s*'[^']*',)/, `$1\n  ${key}: '${setId}',`);
-      writeFileSync(perFile, s);
+      writeKeepingMtime(perFile, s);
       return `configs/${base}.mjs (${key})`;
     }
     const axes = `${HERE}/component-axes.mjs`;
@@ -147,7 +161,7 @@ function writeSetId (component, setId) {
       if (!anchor.test(s)) throw new Error(`cannot find a config for ${dt} to attach ${key}`);
       s = s.replace(anchor, `$1 ${key}: '${setId}',`);
     }
-    writeFileSync(axes, s);
+    writeKeepingMtime(axes, s);
     return `component-axes.mjs (${key})`;
   }
 
@@ -183,7 +197,7 @@ function writeSetId (component, setId) {
       throw new Error(`could not write figmaSetId into configs/${component}.mjs — `
         + `no 'figmaSetId' and no \`page: '…',\` to anchor to. Set id was ${setId}.`);
     }
-    writeFileSync(perFile, s);
+    writeKeepingMtime(perFile, s);
     return `configs/${component}.mjs`;
   }
 
@@ -199,7 +213,7 @@ function writeSetId (component, setId) {
     if (!noId.test(s)) throw new Error(`cannot find a config for ${dt} in component-axes.mjs`);
     s = s.replace(noId, `$1 figmaSetId: '${setId}',`);
   }
-  writeFileSync(axes, s);
+  writeKeepingMtime(axes, s);
   return 'component-axes.mjs';
 }
 
