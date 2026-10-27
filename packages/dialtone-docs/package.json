@@ -4,7 +4,8 @@
   "description": "Documentation generation and validation for Dialtone",
   "type": "module",
   "scripts": {
-    "build": "node src/generators/build-ai-docs.mjs && node src/generators/build-public-docs.mjs && node src/generators/build-component-doc-links.mjs",
+    "build": "pnpm --workspace-root exec nx run dialtone-docs:build",
+    "build:content": "node src/generators/build-ai-docs.mjs && node src/generators/build-public-docs.mjs && node src/generators/build-component-doc-links.mjs",
     "check-freshness": "node src/generators/check-freshness.mjs",
     "test": "vitest run",
     "test:watch": "vitest"

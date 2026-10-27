@@ -5,7 +5,7 @@
       "executor": "nx:run-script",
       "dependsOn": ["dialtone-combinator:generate-examples"],
       "options": {
-        "script": "build"
+        "script": "build:content"
       },
       "inputs": [
         { "dependentTasksOutputFiles": "**/.generated/preset-examples.json", "transitive": true },
