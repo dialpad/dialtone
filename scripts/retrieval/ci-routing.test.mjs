@@ -63,6 +63,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
       'scripts/build-dialtone-vue-docs.mjs',
       'scripts/lib/vue-component-identity.mjs',
       'scripts/tests/vue-component-identity.test.mjs',
+      'scripts/retrieval/profiles.mjs',
       'common/utils/server.mjs',
       '.github/workflows/dialtone-documentation-tests.yml',
     ],
