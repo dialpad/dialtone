@@ -1,0 +1,21 @@
+packages/dialtone-docs/src/content/development/development-component-workflow.md
+  s_7f1d1d64baa803::t_aca80f0db4d173 71
+packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md
+  s_7f1d1d64baa803::t_0f4be1870ae16d 30-31,52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "aedf4fc96fcaf45c8be2feda6647102a5bb881a7",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+packages/combinator/src/lib/variant_state.js
+  s_f672c31256c957::t_da8671bca343ca 106-108,114-116,118-119,121-126,130-134,136-140
+  s_f672c31256c957::t_ad8abb961ef61a 141-169
+  s_c3b12373d86df3::t_1ca32f592cd0d9 92-95,99,102
+  s_f672c31256c957::t_828cd39d47d2d0 78,88
+  s_f672c31256c957::t_d884b4e48e25b7 109-113,117,120,127-129,135
+  s_c3b12373d86df3::t_28cc93f11c512d 18
+  s_f672c31256c957::t_4e8f9718516b86 3,5
+  s_f672c31256c957::t_4b68ac3129ed5e 4
+  s_c3b12373d86df3::t_2752f863631bb4 1
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_f672c31256c957::t_abc516d3548f4c 8,20
+  s_f672c31256c957::t_29727c63c8937f 96-108
+  s_f672c31256c957::t_78692724e4207d 14
+packages/combinator/src/lib/utils.js
+  s_c3b12373d86df3::t_5da3b421ce8ec2 3
+  s_c3b12373d86df3::t_09f5c69b4e05c0 4-13
+packages/combinator/src/components/renderer/renderer_spec_sheet_cell.vue
+  s_f672c31256c957::t_6c6fa92b4f9bfc 118
+  s_f672c31256c957::t_cf3d227504768a 1-104,108-117,119-186
+  s_f672c31256c957::t_596fffd0cf46ed 105-107
+packages/combinator/src/lib/variant_state.test.js
+  s_f672c31256c957::t_570d591d849238 2
+  s_f672c31256c957::t_acfdf2fecbf9d6 62-104
+  s_f672c31256c957::t_1337b5f6a6880f 1,3-61,105
+packages/combinator/src/components/renderer/renderer.vue
+  s_c3b12373d86df3::t_c95120dd0c806d 82
+  s_c3b12373d86df3::t_629bb76973cdd1 2-12,14-20
+  s_c3b12373d86df3::t_f14262b5513a16 28
+packages/combinator/src/components/renderer/renderer_spec_sheet.vue
+  s_c3b12373d86df3::t_5f6825dbcee42c 69
+  s_f672c31256c957::t_0686864e94c337 2
+  s_f672c31256c957::t_4ff2e8c0213e63 4,7-13,20-21,57,59-60
+  h_65afbd07a56b87 90
+  s_c3b12373d86df3::t_ea319d36244165 19
+packages/combinator/src/components/combinator.vue
+  s_f672c31256c957::t_0b0bf8bf51121c 541
+  s_f672c31256c957::t_68fa4c0a35cccc 434-435,437
+  s_f672c31256c957::t_e61530c691c269 96
+  s_f672c31256c957::t_327f973b669bc4 98-99
+  s_f672c31256c957::t_8ea49796f418e6 457-460,466-472
+  s_f672c31256c957::t_fc3e2c8c3c0f15 295
+  s_f672c31256c957::t_bf47f7b443e81b 42,44
+  s_f672c31256c957::t_134d06b3d27be4 213-219
+  s_c3b12373d86df3::t_02504bd54b916b 26,28-30,32-41,43,45-95,97,100-112,153,163-170,173,179,187-190,208,238,289,450-453,455,461,463-465
+  s_f672c31256c957::t_823f824b8c2ed8 290
+  s_f672c31256c957::t_5ce2f20a68cd3a 476,486
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "b1f559971b24b25081df33ff1b9c761ad5506ddc",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_f672c31256c957": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9cc40e93-82f2-4b7d-b85d-ff4d3f97ff36",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+packages/dialtone-docs/src/content/architecture/architecture-build-system.md
+  s_7f1d1d64baa803::t_ed9decca3b0863 6,120
+packages/dialtone-docs/src/content/architecture/architecture-monorepo-structure.md
+  s_7f1d1d64baa803::t_4679472c7eaa72 5,12,42
+packages/dialtone-docs/src/content/development/development-component-workflow.md
+  s_7f1d1d64baa803::t_93ab4821c97565 16,29,67,184,206
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_7f1d1d64baa803::t_f41c825e3aa705 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "feb5febaff4d3e382531a68608503b9c734e04dd",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
