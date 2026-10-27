@@ -73,7 +73,7 @@ import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { matchedFor, resolveDeclared } from './cdp-provenance.mjs';
-import { marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
+import { borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const cfg = COMPONENTS[which];
 const EXEMPLAR_SLOTS = exemplarSlots(cfg);
@@ -267,7 +267,9 @@ const COMPARED = new Set(['flexWrap', 'backgroundColor', 'color', 'borderTopColo
   'columnGap', 'rowGap', 'minWidth', 'minHeight', 'height', 'fontSize', 'fontWeight',
   'lineHeight', 'opacity', 'boxShadow', 'fill', 'fontFamily', 'outlineStyle',
   'marginTop', 'marginRight', 'marginBottom', 'marginLeft',
-  'outlineColor', 'outlineWidth', 'outlineOffset']);
+  'outlineColor', 'outlineWidth', 'outlineOffset',
+  // The other three side colours: read so the DRAWN side can be chosen (borderColorKey).
+  'borderRightColor', 'borderBottomColor', 'borderLeftColor']);
 {
   const harness = readFileSync(new URL('./verify-harness/main.js', import.meta.url), 'utf8');
   const block = /const READ = \[([\s\S]*?)\];/.exec(harness);
@@ -526,7 +528,7 @@ function compareNode (variant, dom, fig, path, MODE, figParentBox) {
     // those as transparent strokes and omits others. Neither paints anything, so
     // neither should register — while a genuinely missing border still does.
     // Figma also reports strokeWeight: 1 on nodes carrying no strokes at all.
-    const domBorderVisible = (col(s.borderTopColor)?.a ?? 0) >= 0.005;
+    const domBorderVisible = (col(s[borderColorKey(s)])?.a ?? 0) >= 0.005;
     // A transparent border that offsets an inset shadow IS reproduced in Figma — as a
     // stroke in the background colour (see transparentBorderFold). Expect it, or the
     // fix reads as a defect and the defect reads as correctness.
@@ -575,7 +577,7 @@ function compareNode (variant, dom, fig, path, MODE, figParentBox) {
       if (!near(domSide, figSide)) rec(variant, path, figKey, domSide, figSide);
     }
     if (domW > 0) {
-      const domBd = tbf ? col(s.backgroundColor) : col(s.borderTopColor);
+      const domBd = tbf ? col(s.backgroundColor) : col(s[borderColorKey(s)]);
       if (!nearC(domBd, figStroke)) {
         rec(variant, path, 'borderColor', fmt(domBd), fmt(figStroke), figStroke && !figStroke.bound ? 'baked literal' : undefined);
       }

@@ -7,6 +7,23 @@
  * cancelled and read as correctness. One definition, three importers.
  */
 
+const BORDER_SIDES = [['borderTopWidth', 'borderTopColor'], ['borderRightWidth', 'borderRightColor'],
+  ['borderBottomWidth', 'borderBottomColor'], ['borderLeftWidth', 'borderLeftColor']];
+
+/**
+ * The computed-style key holding the colour of the border that is actually DRAWN.
+ *
+ * `border-top-color` stood for the whole border while borders were uniform. DtBanner draws
+ * only a block-end border (`border-bottom-color` at 17% alpha), so the top colour is the
+ * unused default — opaque `currentColor` — and Figma got a solid dark line where the browser
+ * paints a faint one. The verifier read the same wrong side, so it agreed with the build.
+ * Top still wins when it has a width, so every uniform border reads exactly as before.
+ */
+export function borderColorKey (style) {
+  const hit = BORDER_SIDES.find(([w]) => parseFloat(style[w]) > 0);
+  return hit ? hit[1] : 'borderTopColor';
+}
+
 /**
  * Can this node's CSS margin be folded into its OWN Figma frame padding?
  *
@@ -37,7 +54,7 @@ export function marginFoldable (style) {
   const m = margins(style);
   if (m.top < 0 || m.right < 0 || m.bottom < 0 || m.left < 0) return false;
   const painted = alpha(style.backgroundColor) >= 0.005
-    || (parseFloat(style.borderTopWidth) > 0 && alpha(style.borderTopColor) >= 0.005)
+    || (BORDER_SIDES.some(([w]) => parseFloat(style[w]) > 0) && alpha(style[borderColorKey(style)]) >= 0.005)
     || (style.boxShadow && style.boxShadow !== 'none');
   return !painted;
 }

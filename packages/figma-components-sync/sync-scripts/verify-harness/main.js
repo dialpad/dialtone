@@ -198,6 +198,9 @@ window.__anatomy = () => {
     'borderTopRightRadius','borderBottomRightRadius','borderBottomLeftRadius',
     'paddingTop','paddingRight','paddingBottom','paddingLeft','columnGap','rowGap',
     'borderLeftWidth','borderRightWidth','borderBottomWidth',
+    // The colour of each side, for the same reason as the widths: a border drawn on one
+    // edge has its colour on THAT edge, and border-top-color is then just the default.
+    'borderRightColor','borderBottomColor','borderLeftColor',
     // A CSS margin is real spacing that Figma has no per-child equivalent for. It was
     // never captured, so Notice silently lost 28px between its icon and its content —
     // the box was right, the gap was gone, and nothing could see it.

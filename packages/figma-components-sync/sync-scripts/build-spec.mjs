@@ -23,7 +23,7 @@ import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
   shadowLayerColorTokens } from './cdp-provenance.mjs';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
-import { marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
+import { borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
 const toRgb = converter('rgb');
@@ -174,7 +174,7 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
   for (const [css, key] of Object.entries(COLOR_PROPS)) {
     // only record what this node actually paints
     if (key === 'textColor' && !paintsText) continue;
-    const rgba = toFigmaRGB(s[css]);
+    const rgba = toFigmaRGB(s[css === 'borderTopColor' ? borderColorKey(s) : css]);
     if (!rgba) continue;
     if (rgba.a < 0.005) continue;                        // transparent is an absence
     /**

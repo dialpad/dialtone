@@ -461,7 +461,8 @@ for (const r of report.filter(x => (x.slots && x.slots.length) || (x.texts && x.
   for (const sl of r.slots) {
     const bits = [];
     if (sl.boolProp) bits.push(`toggle "${sl.boolProp}"`);
-    if (sl.swapProp) bits.push(`swap "${sl.swapProp}"`);
+    if (sl.swapAxis && sl.swapCount > 1) bits.push(`${sl.swapCount} swaps, one per ${sl.swapAxis}: ${sl.swapProp}`);
+    else if (sl.swapProp) bits.push(`swap "${sl.swapProp}"`);
     if (!bits.length) bits.push('NO PROPERTY CREATED');
     console.log(`  ${sl.slot.padEnd(12)} ${sl.kind.padEnd(12)} ${sl.layers} layer(s)  ${bits.join('  ')}`);
     if (sl.error) console.log(`     ✗ could not add the property: ${sl.error}`);

@@ -57,17 +57,21 @@ async function applySlotProperties (set, slotLayers, textLayers) {
    * componentId, not the value it resolves to through a bound property. Only the plugin API,
    * read after the property was removed, matched what Figma actually renders.
    *
-   * So the property is created only where every layer wants the SAME component. Where the
-   * content varies per variant the layers stay plain instances: still swappable by selecting
-   * one, which is a click deeper but correct.
+   * So where the content varies, ONE PROPERTY PER DEFAULT, each bound only to the layers that
+   * want that default, named for the axis value that explains it: "Icon choice · critical".
+   * That is how the hand-built DtChip does it per size, and it gives every variant its own
+   * glyph while keeping a panel control. See splitByAxis for when this applies.
+   *
+   * When no single axis separates the defaults (the icon depends on a combination of axes),
+   * the old trade stands: one property, one default, and the count is reported so the
+   * trade is visible on every build rather than remembered.
    */
   for (const info of Object.values(bySlot)) {
-    const targets = new Set(info.layers.map(L => L.swapDefaultId).filter(Boolean));
-    // DELIBERATE: where the content varies, the property still gets made and every variant
-    // shows its single default. Suppressing it instead kept the per-variant glyphs but left
-    // no way to change them from the panel, and a panel control is what was asked for.
-    // The count is reported so the trade is visible on every build rather than remembered.
-    if (targets.size > 1) info.varies = targets.size;
+    const ids = [...new Set(info.layers.map(L => L.swapDefaultId).filter(Boolean))];
+    if (ids.length > 1) {
+      const split = splitByAxis(info.layers, ids);
+      if (split) info.swapGroups = split; else info.varies = ids.length;
+    }
   }
   for (const [slot, info] of Object.entries(bySlot)) {
     const label = humanise(slot);
@@ -75,7 +79,13 @@ async function applySlotProperties (set, slotLayers, textLayers) {
       if (info.kind === 'additive') {
         info.boolProp = set.addComponentProperty(label, 'BOOLEAN', false);
       }
-      if (info.swapDefault) {
+      if (info.swapGroups) {
+        info.swapProps = info.swapGroups.groups.map(g => ({
+          g,
+          prop: set.addComponentProperty(label + ' choice · ' + g.values.join('/'), 'INSTANCE_SWAP', g.defaultId),
+        }));
+        info.swapProp = info.swapProps.map(x => x.prop).join(', ');
+      } else if (info.swapDefault) {
         info.swapProp = set.addComponentProperty(label + ' choice', 'INSTANCE_SWAP', info.swapDefault);
       }
     } catch (e) {
@@ -91,8 +101,11 @@ async function applySlotProperties (set, slotLayers, textLayers) {
           if (n) n.componentPropertyReferences = Object.assign({}, n.componentPropertyReferences || {}, { visible: info.boolProp });
         }
         if (info.swapProp && L.swapLayerId) {
-          const n = await figma.getNodeByIdAsync(L.swapLayerId);
-          if (n) n.componentPropertyReferences = Object.assign({}, n.componentPropertyReferences || {}, { mainComponent: info.swapProp });
+          // The property for THIS layer's default: one per group when the content varies.
+          const mine = info.swapProps ? info.swapProps.find(x => x.g.defaultId === L.swapDefaultId) : null;
+          const prop = info.swapProps ? (mine && mine.prop) : info.swapProp;
+          const n = prop ? await figma.getNodeByIdAsync(L.swapLayerId) : null;
+          if (n) n.componentPropertyReferences = Object.assign({}, n.componentPropertyReferences || {}, { mainComponent: prop });
         }
         // Named like the hand-built DtBadge and DtChip: the wrapper takes the slot's name and
         // the instance inside it is "icon". Layer names come from the DOM class otherwise, and
@@ -143,6 +156,8 @@ async function applySlotProperties (set, slotLayers, textLayers) {
 
   const slots = Object.entries(bySlot).map(([slot, i]) => ({
     slot, kind: i.kind, layers: i.layers.length, varies: i.varies || 0,
+    swapAxis: i.swapGroups ? i.swapGroups.axis : null,
+    swapCount: i.swapProps ? i.swapProps.length : (i.swapProp ? 1 : 0),
     boolProp: i.boolProp || null, swapProp: i.swapProp || null,
     swapDefault: i.swapDefault || null, error: i.error || null, bindError: i.bindError || null,
   }));
@@ -153,6 +168,47 @@ async function applySlotProperties (set, slotLayers, textLayers) {
  * "startIcon" becomes "Start icon". The one name a slot has in Figma: its property, and
  * the layer that holds it (see build() in generic-builder.js).
  */
+/**
+ * Does ONE variant axis explain why the layers of a slot default to different components?
+ *
+ * Reads each layer's row (the variant name, "kind=critical, important=false, ...") and looks
+ * for an axis where every value maps to exactly one default. DtNotice's glyph is that case:
+ * kind=critical is always the alert circle, kind=info always the info circle. The axis with
+ * the fewest values wins, and each default is named by the values that lead to it.
+ *
+ * Returns null when no axis separates them, which means the icon depends on a combination of
+ * axes and a single property per default would be wrong for some variants.
+ */
+function splitByAxis (layers, ids) {
+  const rows = layers.filter(L => L.swapDefaultId).map(L => {
+    const a = {};
+    for (const part of String(L.row).split(', ')) {
+      const i = part.indexOf('=');
+      if (i > 0) a[part.slice(0, i)] = part.slice(i + 1);
+    }
+    return { id: L.swapDefaultId, a };
+  });
+  if (!rows.length) return null;
+  let best = null;
+  for (const axis of Object.keys(rows[0].a)) {
+    const byValue = {};
+    let usable = true;
+    for (const r of rows) {
+      const v = r.a[axis];
+      if (v === undefined) { usable = false; break; }
+      (byValue[v] = byValue[v] || new Set()).add(r.id);
+    }
+    if (!usable || !Object.values(byValue).every(s => s.size === 1)) continue;
+    const count = Object.keys(byValue).length;
+    if (!best || count < best.count) best = { axis, byValue, count };
+  }
+  if (!best) return null;
+  const groups = ids
+    .map(id => ({ defaultId: id, values: Object.entries(best.byValue).filter(([, s]) => s.has(id)).map(([v]) => v) }))
+    .filter(g => g.values.length);
+  return { axis: best.axis, groups };
+}
+
 function slotLabel (key) {
   return key.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, c => c.toUpperCase());
 }

@@ -20,7 +20,7 @@ export default {
   component: 'DtNotice',
   label: 'Notice',
   page: 'Notice',
-  figmaSetId: '523:22898',
+  figmaSetId: '554:5291',
 
   axes: {
     // Each kind repaints the surface AND swaps the default icon glyph

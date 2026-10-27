@@ -16,7 +16,7 @@ export default {
   component: 'DtBanner',
   label: 'Banner',
   page: 'Banner',
-  figmaSetId: '531:28095',
+  figmaSetId: '558:5452',
 
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of
