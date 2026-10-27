@@ -256,7 +256,14 @@ async function build() {
   }
 
   const presetPath = resolve(repoRoot, 'packages/combinator/.generated/preset-examples.json');
-  const presets = buildPresetExampleRecords(JSON.parse(readFileSync(presetPath, 'utf8')), { records: allRecords, vuePackage });
+  let presetReport;
+  try {
+    presetReport = JSON.parse(readFileSync(presetPath, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') throw new Error('Missing preset intermediate; run dialtone-combinator:generate-examples');
+    throw error;
+  }
+  const presets = buildPresetExampleRecords(presetReport, { records: allRecords, vuePackage });
   allRecords.push(...presets.records);
 
   const ids = new Set();
