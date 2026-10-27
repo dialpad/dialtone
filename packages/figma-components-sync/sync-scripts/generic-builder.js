@@ -1067,6 +1067,21 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   f.clipsContent = insetPresent && (hug || childrenFit);
 
   /**
+   * AND NOT ON A FRAME WITH NO FILL EITHER.
+   *
+   * Proven by isolation on a clear focus Button: no fill and a fully transparent fill (opacity
+   * 0) both draw nothing, while a fill at 1%, 0.4%, 0.2% or 0.1% draws the whole ring. The
+   * effect data matched the browser on all 1,040 focus variants and the numeric checks passed;
+   * only the clear and outlined ones, which CSS paints no background on, had no ring on the
+   * canvas. A near-invisible fill gives the shadow a shape to be drawn inside.
+   *
+   * 0.1%, below the 0.5% the checks read as "no background", so it is still reported as none.
+   */
+  if (insetPresent && !f.fills.some(p => p.visible !== false && (p.opacity === undefined || p.opacity > 0))) {
+    f.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 }, opacity: 0.001 }];
+  }
+
+  /**
    * CENTER CONSTRAINTS ARE APPLIED AFTER THIS FRAME HAS ITS REAL SIZE, NOT ITS DEFAULT.
    *
    * `figma.createFrame()` starts at Figma's default 100×100 before anything below resizes

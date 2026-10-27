@@ -135,7 +135,7 @@ const BUILT_IN = {
     stateTarget: c => (c.state.startsWith('close') ? '.d-chip__close' : '.d-chip__label'),
   },
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '536:77428',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '543:117394',
     /**
      * SLOT PRESENCE IS A VARIANT AXIS HERE, not a BOOLEAN component property.
      *

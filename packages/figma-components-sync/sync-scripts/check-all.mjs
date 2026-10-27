@@ -38,9 +38,20 @@ const lightOnly = args.includes('--light-only');
 const wanted = args.filter(a => !a.startsWith('--'));
 const names = wanted.length ? wanted : Object.keys(COMPONENTS);
 
+/**
+ * `<component>-merged` names a MERGED build, which is how run-batch builds, records and stamps
+ * one (its slots live behind component properties, so it lands on its own page with its own
+ * set id, `figmaMergedSetId`). It is checked as itself: against that set, in both slot states,
+ * and not as the ordinary set of the same component, which it replaces for those checks.
+ */
+const baseOf = (n) => n.replace(/-merged$/, '');
+const isMerged = (n) => n.endsWith('-merged');
+const cfgOf = (n) => COMPONENTS[baseOf(n)];
+const setIdOf = (n) => (isMerged(n) ? cfgOf(n).figmaMergedSetId : cfgOf(n).figmaSetId);
+
 for (const n of names) {
-  if (!COMPONENTS[n]) throw new Error(`unknown component "${n}" — known: ${Object.keys(COMPONENTS).join(', ')}`);
-  if (!COMPONENTS[n].figmaSetId) throw new Error(`${n} has no figmaSetId`);
+  if (!cfgOf(n)) throw new Error(`unknown component "${n}" — known: ${Object.keys(COMPONENTS).join(', ')}`);
+  if (!setIdOf(n)) throw new Error(`${n} has no ${isMerged(n) ? 'figmaMergedSetId' : 'figmaSetId'}`);
 }
 
 /**
@@ -60,8 +71,8 @@ try {
     const was = stamp[n];
     const now = index.components.find(c => c.component === n);
     if (!was) { staleness.push(`${n}: never recorded as built — cannot tell which payload the set came from`); continue; }
-    if (was.setId !== COMPONENTS[n].figmaSetId) {
-      staleness.push(`${n}: config points at ${COMPONENTS[n].figmaSetId} but the build recorded ${was.setId}`);
+    if (was.setId !== setIdOf(n)) {
+      staleness.push(`${n}: config points at ${setIdOf(n)} but the build recorded ${was.setId}`);
     }
     if (!now) continue;
     const nowFp = now.shards.map(s => s.fingerprint).join(',');
@@ -165,6 +176,14 @@ function summarise (out) {
 const jobs = [];
 const skipped = [];
 for (const name of names) {
+  if (isMerged(name)) {
+    // One set, both states: the values pass reads it with slots empty, then filled.
+    jobs.push({ component: name, pass: 'merged', script: 'verify-components.mjs',
+                argv: [baseOf(name), '--set', setIdOf(name), '--merged', ...(lightOnly ? ['--light-only'] : [])] });
+    jobs.push({ component: name, pass: 'identity', script: 'audit-provenance.mjs',
+                argv: [baseOf(name), '--set', setIdOf(name)] });
+    continue;
+  }
   const cfg = COMPONENTS[name];
   const setId = cfg.figmaSetId;
   jobs.push({ component: name, pass: 'values', script: 'verify-components.mjs',
