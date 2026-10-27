@@ -24,6 +24,7 @@
  * Options:
  *   --dry-run                report what would change, post nothing
  *   --file-key KEY            override FILE_KEY from .env
+ *   --unrestricted-file-key KEY   override UNRESTRICTED_FILE_KEY from .env
  *   --local-snapshot FILE     skip the REST read of existing variables and use
  *                             this file instead — a JSON dump shaped like
  *                             ApiGetLocalVariablesResponse (same recovery
@@ -44,10 +45,7 @@ import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
 import { staleOverrides } from './stale_overrides.js';
-
-// See the matching override in build_variables.ts: the preview file names
-// its collection differently so its CI job can't collide with the main file's.
-const PARENT = process.env.COLLECTION_NAME ?? 'Dialtone 2026';
+import { collectionTargets } from './utils.js';
 
 /** Sandstone is the default and lives in the parent, so it is not a material here. */
 const MATERIALS = ['steel', 'graphite', 'iron', 'amethyst', 'jade'];
@@ -56,7 +54,7 @@ const MODES = { light: 'Light', dark: 'Dark' } as const;
 const GROUPS = ['base', 'dp'];
 
 /** `steel` becomes `Dialtone 2026 / Steel`. */
-function collectionNameFor (material: string): string {
+function collectionNameFor (PARENT: string, material: string): string {
   return `${PARENT} / ${material[0].toUpperCase()}${material.slice(1)}`;
 }
 
@@ -159,7 +157,7 @@ function overridesFor (
   return { overrides: out, unconvertible };
 }
 
-async function main (): Promise<void> {
+async function main (PARENT: string, fileKey: string | undefined): Promise<void> {
   const args = process.argv.slice(2);
   const flag = (name: string): string | undefined => {
     const i = args.indexOf(`--${name}`);
@@ -168,7 +166,6 @@ async function main (): Promise<void> {
   const dryRun = args.includes('--dry-run');
   const localSnapshot = flag('local-snapshot');
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
-  const fileKey = flag('file-key') ?? process.env.FILE_KEY;
   if (!pat || !fileKey) {
     console.error('PERSONAL_ACCESS_TOKEN and FILE_KEY are required, in .env or via --file-key');
     process.exit(2);
@@ -213,7 +210,7 @@ async function main (): Promise<void> {
   };
 
   for (const material of MATERIALS) {
-    const name = collectionNameFor(material);
+    const name = collectionNameFor(PARENT, material);
     const tokens = await resolveAll([`base/material/${material}`]);
     const { overrides, unconvertible: unconvertibleOverrides } = overridesFor(parent, tokens, types);
 
@@ -348,7 +345,9 @@ async function main (): Promise<void> {
   }
 }
 
-main().catch((error: { response?: { status?: number; data?: unknown }; message?: string }) => {
+(async () => {
+  for (const { name, fileKey } of collectionTargets()) await main(name, fileKey);
+})().catch((error: { response?: { status?: number; data?: unknown }; message?: string }) => {
   console.error(`failed: ${error.response?.status ?? ''} ${JSON.stringify(error.response?.data ?? error.message).slice(0, 1000)}`);
   process.exit(1);
 });

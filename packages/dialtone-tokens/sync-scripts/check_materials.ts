@@ -28,10 +28,8 @@ import { parseColor, colorApproximatelyEqual } from './color.js';
 import { Color } from './figma_api.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
+import { collectionTargets } from './utils.js';
 
-// See the matching override in build_variables.ts: the preview file names
-// its collection differently so its CI job can't collide with the main file's.
-const PARENT = process.env.COLLECTION_NAME ?? 'Dialtone 2026';
 const MATERIALS = ['steel', 'graphite', 'iron', 'amethyst', 'jade'];
 const MODES = { light: 'Light', dark: 'Dark' } as const;
 const GROUPS = ['base', 'dp'];
@@ -94,9 +92,8 @@ async function resolveAll (extraSets?: string[]): Promise<ResolvedToken[]> {
 
 interface Finding { material: string; pass: string; name: string; mode: string; expected: string; got: string }
 
-async function main (): Promise<void> {
+async function main (PARENT: string, fileKey: string | undefined): Promise<number> {
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
-  const fileKey = process.env.FILE_KEY;
   if (!pat || !fileKey) {
     console.error('PERSONAL_ACCESS_TOKEN and FILE_KEY are required');
     process.exit(2);
@@ -223,13 +220,22 @@ async function main (): Promise<void> {
   // counters while findings.length stays 0 — that must fail, not pass.
   if (resolutionChecks === 0 || writeChecks === 0) {
     console.error('\nNo comparisons were made; the check cannot pass.');
-    process.exit(2);
+    return 2;
   }
 
-  process.exit(findings.length ? 1 : 0);
+  return findings.length ? 1 : 0;
 }
 
-main().catch((error: { response?: { status?: number; data?: unknown }; message?: string }) => {
+(async () => {
+  // Every parent is checked, and the worst exit code wins, so a failure in the
+  // restricted collection is not masked by a clean unrestricted one.
+  let code = 0;
+  for (const { name, fileKey } of collectionTargets()) {
+    console.log(`\n== ${name} ==`);
+    code = Math.max(code, await main(name, fileKey));
+  }
+  process.exit(code);
+})().catch((error: { response?: { status?: number; data?: unknown }; message?: string }) => {
   console.error(`failed: ${error.response?.status ?? ''} ${JSON.stringify(error.response?.data ?? error.message).slice(0, 500)}`);
   process.exit(1);
 });
