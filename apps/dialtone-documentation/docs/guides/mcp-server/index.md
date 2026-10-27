@@ -372,7 +372,7 @@ The server checks for updates after connecting. If the registry check succeeds a
 
    To update:
    1. npm install -D @dialpad/dialtone-mcp-server@latest
-   2. Restart this conversation
+   2. Restart the server or MCP client
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -403,7 +403,7 @@ To request the latest published package when the server starts, use `npx -y @dia
 
 After updating the package and any version pin in your client configuration, restart the server or MCP client. A running server keeps the data it loaded at startup.
 
-Replies identify installed or bundled sources and versions. Updating the server refreshes its bundled data; it does not update your application's Dialtone packages or verify runtime or example behavior. Source and keyword changes reach an installed server only after package publication, an update and a server restart. Local generation, builds and source merge do not publish updates.
+Replies identify installed or bundled sources and versions. Updating the server refreshes its bundled data; it does not update your application's Dialtone packages or verify runtime or example behavior. Bundled source and keyword changes reach an installed server only after package publication, an update and a server restart. Changes to data selected from your installed project can be loaded by restarting the server; those local changes do not require publishing or updating the MCP package. Local generation, builds and source merge do not publish bundled updates.
 
 ### Managing Connections
 

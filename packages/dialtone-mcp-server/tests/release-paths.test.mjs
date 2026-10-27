@@ -112,6 +112,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       'packages/dialtone-query-core-extra/src/data.ts',
       'scripts/unrelated.mjs',
     ]) commit(path, 'fix(test): coverage or unrelated source');
+    commit('packages/dialtone-mcp-server/test-search.js', 'chore(test): exercise MCP search');
     const ignored = [
       commit(`packages/${adapter}/package.json`, `chore(release): NO-JIRA ${adapter}/v1.0.1`),
       commit('packages/dialtone-vue/package.json', 'chore(release): NO-JIRA dialtone-vue/v4.0.1'),

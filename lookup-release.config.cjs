@@ -12,6 +12,7 @@ const testPaths = [
   ':(exclude,glob)**/__fixtures__/**',
   ':(exclude,glob)**/*.test.*',
   ':(exclude,glob)**/*.spec.*',
+  ':(exclude)packages/dialtone-mcp-server/test-search.js',
 ];
 
 // Git pathspecs for the sources consumed by both lookup bundles.
