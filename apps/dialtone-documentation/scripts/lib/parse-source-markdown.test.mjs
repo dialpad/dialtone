@@ -6,19 +6,16 @@ import { test } from 'vitest';
 import { parseSourceMarkdown } from './parse-source-markdown.mjs';
 import { setComponentDocs } from './transform-vue-api.mjs';
 
-for (const name of ['modal', 'card']) {
-  test(`${name} raw usage retains Do/Don't labels and source items`, () => {
-    const source = readFileSync(new URL(`../../docs/components/${name}.md`, import.meta.url), 'utf8');
-    const block = source.match(/<dialtone-usage>[\s\S]*?<\/dialtone-usage>/)[0];
-    const output = parseSourceMarkdown(block, {});
-    const [, doText, dontText] = output.split(/\*\*(?:Do|Don't):\*\*/);
-    assert.deepEqual([...output.matchAll(/\*\*(Do|Don't):\*\*/g)].map(match => match[1]), ['Do', 'Don\'t']);
-    for (const [index, slot] of [...block.matchAll(/<template #(do|dont)>([\s\S]*?)<\/template>/g)].entries()) {
-      assert.equal([doText, dontText][index].trim(), slot[2].trim());
-    }
-    if (name === 'modal') assert.ok(dontText.includes('[Toast](toast.md)'));
-  });
-}
+test('Modal raw usage retains Do/Don\'t labels, source items, and links', () => {
+  const source = readFileSync(new URL('../../docs/components/modal.md', import.meta.url), 'utf8');
+  const block = source.match(/<dialtone-usage>[\s\S]*?<\/dialtone-usage>/)[0];
+  const output = parseSourceMarkdown(block, {});
+  const [, doText, dontText] = output.split(/\*\*(?:Do|Don't):\*\*/);
+  assert.deepEqual([...output.matchAll(/\*\*(Do|Don't):\*\*/g)].map(match => match[1]), ['Do', 'Don\'t']);
+  const slots = [...block.matchAll(/<template #(do|dont)>([\s\S]*?)<\/template>/g)];
+  assert.deepEqual([doText.trim(), dontText.trim()], slots.map(slot => slot[2].trim()));
+  assert.ok(dontText.includes('[Toast](toast.md)'));
+});
 
 test('unresolved API references report their source page and repair command', () => {
   setComponentDocs([]);

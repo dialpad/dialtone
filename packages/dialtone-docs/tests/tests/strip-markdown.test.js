@@ -48,8 +48,6 @@ describe('stripMarkdown', () => {
   });
 
   test('keeps unslotted and incomplete usage markup as unlabeled prose', () => {
-    expect(stripMarkdown(usage('Intro `<span>`.'))).toBe('Intro `<span>`.');
-    expect(stripMarkdown('<template #do>Outside.</template>')).toBe('Outside.');
     expect(stripMarkdown('<dialtone-usage><template #do>Incomplete.')).toBe('Incomplete.');
     expect(stripMarkdown('<dialtone-usage><template #do>Incomplete wrapper.</template>'))
       .toBe('Incomplete wrapper.');

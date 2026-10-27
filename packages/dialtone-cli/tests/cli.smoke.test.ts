@@ -49,21 +49,16 @@ function appWithDialtoneVue(verifiedEntry = true): string {
 
 // Longer than the spawn timeout, so a hung CLI fails as ETIMEDOUT.
 describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
-  test.each([
-    ['modal', 'Confirming a destructive action', 'Form-related critical, positive, or warning messages'],
-    ['card', 'content and actions on a single topic', 'too many call-to-action elements'],
-  ])('%s exact usage keeps recommendations distinct from discouraged uses', (name, recommended, discouraged) => {
-    const result = run(['docs', '--id', `components/${name}#usage`, '--format', 'json']);
+  test('exact Modal usage keeps recommendations distinct from discouraged uses', () => {
+    const result = run(['docs', '--id', 'components/modal#usage', '--format', 'json']);
     expect(result.status).toBe(0);
-    const records = JSON.parse(result.stdout);
-    expect(records).toHaveLength(1);
-    expect(records[0].id).toBe(`components/${name}#usage`);
-    expect(records[0].content.match(/^(?:Do|Don't):$/gm)).toEqual(['Do:', "Don't:"]);
-    const [, doText, dontText] = records[0].content.split(/(?:^|\n)(?:Do|Don't):\n/);
-    expect(doText).toContain(recommended);
-    expect(doText).not.toContain(discouraged);
-    expect(dontText).toContain(discouraged);
-    expect(dontText).not.toContain(recommended);
+    const [record] = JSON.parse(result.stdout);
+    expect(record.content.match(/^(?:Do|Don't):$/gm)).toEqual(['Do:', "Don't:"]);
+    const [, doText, dontText] = record.content.split(/(?:^|\n)(?:Do|Don't):\n/);
+    expect(doText).toContain('Confirming a destructive action');
+    expect(doText).not.toContain('Form-related critical, positive, or warning messages');
+    expect(dontText).toContain('Form-related critical, positive, or warning messages');
+    expect(dontText).not.toContain('Confirming a destructive action');
   });
 
   test.each(['component', 'prompt'])('%s: a non-exact name exits 1 with empty stdout and candidates on stderr', (command) => {

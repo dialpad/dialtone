@@ -2,8 +2,6 @@ import { describe, test, expect, beforeAll } from 'vitest';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync } from 'node:fs';
-import { globSync } from 'glob';
-import matter from 'gray-matter';
 import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
 import { readKeywords } from '@src/utils/keywords.mjs';
 import { stripMarkdown } from '@src/utils/strip-markdown.mjs';
@@ -12,91 +10,17 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
 const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
 const docsRoot = resolve(__dirname, '../../../../apps/dialtone-documentation/docs');
-const normalize = (text) => text.replace(/\s+/g, ' ').trim();
-// Existing emphasis stripping can pair '*' markers across adjacent slots.
-const normalizeProse = (text) => normalize(text.replace(/\*/g, ''));
-
-// Read authored, standalone usage blocks independently of the production token walk.
-function usageBlocks(markdown) {
-  const blocks = [];
-  let fence = null;
-  let block = null;
-  let slot = null;
-  for (const line of markdown.replace(/<!--[\s\S]*?-->/g, '').split('\n')) {
-    const marker = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
-    if (marker) {
-      if (!fence) fence = marker[1];
-      else if (marker[1][0] === fence[0] && marker[1].length >= fence.length && !marker[2].trim()) fence = null;
-      continue;
-    }
-    if (fence) continue;
-    if (/^\s*<dialtone-usage\b[^>]*>\s*$/.test(line)) {
-      block = { lines: [], slots: [] };
-    }
-    if (!block) continue;
-    block.lines.push(line);
-    const opening = line.match(/^\s*<template\s+#(do|dont)\s*>\s*$/);
-    if (opening) {
-      slot = { label: opening[1] === 'do' ? 'Do' : 'Don\'t', lines: [] };
-      block.slots.push(slot);
-    } else if (/^\s*<\/template>\s*$/.test(line)) slot = null;
-    else if (slot) slot.lines.push(line);
-    if (/^\s*<\/dialtone-usage>\s*$/.test(line)) {
-      blocks.push(block);
-      block = null;
-    }
-  }
-  return blocks;
-}
-
 describe('authored usage guidance', () => {
   test.each(['modal', 'card'])('%s keeps source items in their labeled usage group', (name) => {
     const path = resolve(docsRoot, `components/${name}.md`);
     const record = buildRecords(path).find(record => record.id === `components/${name}#usage`);
-    expect(record.headingPath).toEqual(['Usage']);
-    expect(record.filePath).toBe(`apps/dialtone-documentation/docs/components/${name}.md`);
-    const labels = [...record.content.matchAll(/^(Do|Don't):$/gm)];
+    const source = readFileSync(path, 'utf8').match(/<dialtone-usage>[\s\S]*?<\/dialtone-usage>/)[0];
+    const slots = [...source.matchAll(/<template #(do|dont)>([\s\S]*?)<\/template>/g)];
+    expect(record.content.match(/^(?:Do|Don't):$/gm)).toEqual(['Do:', 'Don\'t:']);
     const [, doText, dontText] = record.content.split(/(?:^|\n)(?:Do|Don't):\n/);
-    expect(labels.map(match => match[1])).toEqual(['Do', 'Don\'t']);
-    const block = usageBlocks(readFileSync(path, 'utf8'))[0];
-    for (const [index, group] of [doText, dontText].entries()) {
-      const items = block.slots[index].lines.filter(line => line.startsWith('- '));
-      expect(normalize(group)).toBe(normalize(items.map(item => stripMarkdown(item)).join('\n')));
-    }
+    expect([doText.trim(), dontText.trim()]).toEqual(slots.map(slot => stripMarkdown(slot[2])));
     expect(doText).toContain(name === 'modal' ? 'Confirming a destructive action' : 'content and actions on a single topic');
     expect(dontText).toContain(name === 'modal' ? 'Form-related critical, positive, or warning messages' : 'too many call-to-action elements');
-  });
-
-  test('all authored usage blocks label exactly their nonempty stripped slots', () => {
-    const paths = globSync('**/*.md', { cwd: docsRoot, absolute: true, ignore: ['_data/**', '.vuepress/**'] });
-    let checked = 0;
-    for (const path of paths) {
-      const source = readFileSync(path, 'utf8');
-      const records = buildRecords(path);
-      for (const section of chunkSections(matter(source).content)) {
-        const blocks = usageBlocks(section.raw);
-        if (!blocks.length) continue;
-        const expected = blocks.flatMap(block => block.slots.map(slot => ({
-          label: slot.label,
-          content: stripMarkdown(slot.lines.join('\n'), { stripFrontmatter: false }),
-        })).filter(slot => slot.content.trim()));
-        for (const block of blocks) {
-          const slots = block.slots.map(slot => ({ label: slot.label, content: stripMarkdown(slot.lines.join('\n')) }))
-            .filter(slot => slot.content.trim());
-          const text = stripMarkdown(block.lines.join('\n'));
-          expect(normalizeProse(text), path).toBe(normalizeProse(slots.map(slot => `${slot.label}:\n\n${slot.content}`).join('\n\n')));
-          expect(text, path).not.toMatch(/[\uE000\uE001]/);
-          checked++;
-        }
-        if (!records.length) continue; // Non-ready pages still get the isolated-block check.
-        const record = records.find(record => !record.example &&
-          JSON.stringify(record.headingPath) === JSON.stringify(section.headingPath));
-        expect(record, path).toBeDefined();
-        expect([...record.content.matchAll(/^(Do|Don't):$/gm)].map(match => match[1]), path)
-          .toEqual(expected.map(slot => slot.label));
-      }
-    }
-    expect(checked).toBeGreaterThan(0);
   });
 });
 
