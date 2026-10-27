@@ -296,6 +296,61 @@ describe('DtBadge Tests', () => {
       });
     });
 
+    describe('When kind is a legacy value', () => {
+      it('should render kind="count" as a count badge', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { kind: 'count', type: 'info', text: '3' };
+        updateWrapper();
+
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS.count)).toBe(true);
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS.info)).toBe(false);
+        warn.mockRestore();
+      });
+
+      it('should render kind="count" with type="bulletin" as a strong count badge', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { kind: 'count', type: 'bulletin', text: '3' };
+        updateWrapper();
+
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS.count)).toBe(true);
+        expect(badge.classes(BADGE_EMPHASIS_MODIFIERS.strong)).toBe(true);
+        warn.mockRestore();
+      });
+
+      it('should render kind="label" as a status badge', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { kind: 'label', text: 'Label' };
+        updateWrapper();
+
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS.neutral)).toBe(true);
+        warn.mockRestore();
+      });
+
+      it.each(['count', 'label'])('should warn that kind="%s" is deprecated', (kind) => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { kind };
+        updateWrapper();
+
+        expect(warn.mock.calls.some(([message]) => String(message).includes(`kind="${kind}" is deprecated`))).toBe(true);
+        warn.mockRestore();
+      });
+
+      it('should warn and render a status badge for an unknown kind', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { kind: 'mystery' };
+        updateWrapper();
+
+        expect(badge.classes(BADGE_VARIANT_MODIFIERS.neutral)).toBe(true);
+        expect(warn.mock.calls.some(([message]) => String(message).includes('is not a badge group'))).toBe(true);
+        warn.mockRestore();
+      });
+    });
+
     describe('When emphasis is clear', () => {
       it('should not be supported by any group', async () => {
         const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});

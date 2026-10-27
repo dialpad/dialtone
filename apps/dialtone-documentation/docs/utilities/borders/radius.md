@@ -134,7 +134,7 @@ Use `d-bar-unset` to reset the border-radius on all four corners to `unset`.
               <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
                 .d-{{ scope.legacyPrefix }}<template v-if="val.legacyPx === 'pill' || val.legacyPx === 'circle'">-</template>{{ val.legacyPx }}
               </dt-text>
-              <dt-badge type="critical" kind="label" text="Deprecated" />
+              <dt-badge variant="critical" label="Deprecated" />
             </dt-stack>
           </th>
           <td class="d-code--sm">

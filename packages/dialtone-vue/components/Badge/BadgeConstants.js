@@ -30,6 +30,12 @@ export const BADGE_GROUPS = {
   },
 };
 
+// Values `kind` took before groups existed. They still render, mapped to the group that replaced them.
+export const BADGE_LEGACY_KINDS = {
+  count: 'counter',
+  label: 'status',
+};
+
 export const BADGE_VARIANT_MODIFIERS = {
   neutral: 'd-badge--neutral',
   info: 'd-badge--info',

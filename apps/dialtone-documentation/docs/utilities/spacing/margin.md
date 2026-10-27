@@ -83,7 +83,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
               <span v-else>d-m-{{ val }}</span>
             </span>
             <span>
-              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+              <dt-badge v-if="deprecated" variant="critical" label="Deprecated" />
             </span>
           </dt-stack>
         </th>
@@ -113,7 +113,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
               <span v-else>d-m-n{{ val }}</span>
             </span>
             <span>
-              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+              <dt-badge v-if="deprecated" variant="critical" label="Deprecated" />
             </span>
           </dt-stack>
         </th>
@@ -139,7 +139,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
         <th scope="row" class="d-code--sm d-docsite-code">
           <span v-if="dir !== 'All'">d-m{{ suffix }}-auto</span>
           <span v-else>d-m-auto</span>
-          <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+          <dt-badge v-if="deprecated" variant="critical" label="Deprecated" />
         </th>
         <td class="d-code--sm">
           <span v-if="dir == 'y'">
@@ -163,7 +163,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
         <th scope="row" class="d-code--sm d-docsite-code">
           <span v-if="dir !== 'All'">d-m{{ suffix }}-unset</span>
           <span v-else>d-m-unset</span>
-          <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+          <dt-badge v-if="deprecated" variant="critical" label="Deprecated" />
         </th>
         <td class="d-code--sm">
           <span v-if="dir == 'y'">
@@ -188,7 +188,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
           <dt-stack gap="50">
             <span class="d-code--sm d-docsite-code">d-m{{ suffix }}{{ val }}</span>
             <span>
-              <dt-badge type="critical" kind="label" text="Deprecated" />
+              <dt-badge variant="critical" label="Deprecated" />
             </span>
           </dt-stack>
         </th>
@@ -215,7 +215,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
           <dt-stack gap="50">
             <span class="d-code--sm d-docsite-code">d-m{{ suffix }}n{{ val }}</span>
             <span>
-              <dt-badge type="critical" kind="label" text="Deprecated" />
+              <dt-badge variant="critical" label="Deprecated" />
             </span>
           </dt-stack>
         </th>

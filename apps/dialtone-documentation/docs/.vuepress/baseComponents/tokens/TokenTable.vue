@@ -59,7 +59,7 @@
               />
             </td>
             <th scope="row">
-              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+              <dt-badge v-if="deprecated" variant="critical" label="Deprecated" />
               <dt-stack
                 direction="row"
                 gap="50"
