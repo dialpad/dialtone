@@ -344,7 +344,7 @@ The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alp
   >
     Place Call
     <template #leading>
-      <dt-badge kind="count" text="3" />
+      <dt-badge kind="counter" variant="count" label="3" />
     </template>
   </dt-split-button>
 </dt-stack>

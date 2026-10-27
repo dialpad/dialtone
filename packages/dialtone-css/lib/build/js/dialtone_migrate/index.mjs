@@ -205,6 +205,33 @@ const MIGRATIONS = [
     fileExtensions: ['.vue'],
   },
   {
+    id: 'badge-api',
+    name: 'DtBadge API Updates',
+    description: 'DtBadge adds kind (status/counter/release/lifecycle) and moves to variant/emphasis/label; '
+      + 'type/text are deprecated.',
+    category: 'required',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_badge_api',
+    // DT_TAG_ATTRS skips quoted values, so `v-if="count > 0"` doesn't end the tag early.
+    detectPatterns: [
+      new RegExp(`<(?:dt-badge|DtBadge)(?=[\\s/>])${DT_TAG_ATTRS}\\s(?::|v-bind:)?(?:type|text)\\s*=`),
+      new RegExp(`<(?:dt-badge|DtBadge)(?=[\\s/>])${DT_TAG_ATTRS}\\skind\\s*=\\s*["'](?:count|label)["']`),
+      // A variant that now belongs to another group, with no kind (kind defaults to status)
+      new RegExp(
+        `<(?:dt-badge|DtBadge)(?=[\\s/>])(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?kind\\b)`
+        + `${DT_TAG_ATTRS}\\svariant\\s*=\\s*["'](?:`
+        + 'base|lifecycle|new|count|mention|internal|early-access|recent|familiar)["\']',
+      ),
+      // The interim lifecycle variants that now belong to the release group
+      new RegExp(
+        `<(?:dt-badge|DtBadge)(?=[\\s/>])(?=${DT_TAG_ATTRS}\\skind\\s*=\\s*["']lifecycle["'])`
+        + `${DT_TAG_ATTRS}\\svariant\\s*=\\s*["'](?:`
+        + 'new|internal|early-access|recent|familiar)["\']',
+      ),
+    ],
+    fileExtensions: ['.vue'],
+  },
+  {
     id: 'scrollbar-always',
     name: 'Scrollbar :never → :always',
     description: 'v-dt-scrollbar:never renamed to v-dt-scrollbar:always.',

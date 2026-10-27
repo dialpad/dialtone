@@ -312,13 +312,13 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
       <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pie-100">
         Inbox
         <template #trailing>
-          <dt-badge kind="count" type="bulletin" text="9" />
+          <dt-badge kind="counter" variant="count" emphasis="strong" label="9" />
         </template>
       </dt-tab>
       <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pie-100">
         Archive
         <template #trailing>
-          <dt-badge kind="count" text="99+" />
+          <dt-badge kind="counter" variant="count" label="99+" />
         </template>
       </dt-tab>
       <dt-tab id="lt5" panel-id="lt6">

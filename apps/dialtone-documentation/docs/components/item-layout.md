@@ -24,7 +24,7 @@ By default, item layout includes custom styling, like paddings, sizes, colors, e
       Subtitle
     </template>
     <template #bottom>
-      <dt-badge>Content</dt-badge>
+      <dt-badge kind="status" variant="neutral">Content</dt-badge>
     </template>
     <template #end>
       <dt-icon size="300" name="share" />
@@ -54,7 +54,7 @@ This way you can utilize the layout and customize your own styling using utility
       Subtitle
     </template>
     <template #bottom>
-      <dt-badge>Content</dt-badge>
+      <dt-badge kind="status" variant="neutral">Content</dt-badge>
     </template>
     <template #end>
       <dt-icon size="300" name="share" />

@@ -161,11 +161,11 @@ export default {
     slots: {
       tabs: {
         initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected trailing-class="d-pie-100">
-  <template #trailing><dt-badge kind="count" type="bulletin" text="9" /></template>
+  <template #trailing><dt-badge kind="counter" variant="count" emphasis="strong" label="9" /></template>
   Inbox
 </dt-tab>
 <dt-tab id="tab-2" panel-id="panel-2" trailing-class="d-pie-100">
-  <template #trailing><dt-badge kind="count" text="99+" /></template>
+  <template #trailing><dt-badge kind="counter" variant="count" label="99+" /></template>
   Archive
 </dt-tab>
 <dt-tab id="tab-3" panel-id="panel-3">Drafts</dt-tab>`,

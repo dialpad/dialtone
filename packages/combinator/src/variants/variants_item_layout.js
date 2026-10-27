@@ -58,7 +58,7 @@ export default {
       start: { initialValue: '<dt-icon size="200" name="lock" />' },
       default: { initialValue: 'Layout title' },
       subtitle: { initialValue: 'Subtitle' },
-      bottom: { initialValue: '<dt-badge>Content</dt-badge>' },
+      bottom: { initialValue: '<dt-badge kind="status" variant="neutral">Content</dt-badge>' },
       end: { initialValue: '<dt-icon size="200" name="share" />' },
       selected: { initialValue: '<dt-icon size="200" name="check" />' },
     },
