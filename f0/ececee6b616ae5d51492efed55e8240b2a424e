@@ -1,0 +1,57 @@
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_b053b05b31199c 123-124
+packages/dialtone-query-core/src/component-detail.ts
+  s_7f1d1d64baa803::t_b053b05b31199c 6-7,63-70
+packages/dialtone-query-core/tests/project-data.test.ts
+  s_7f1d1d64baa803::t_cdad13bc65ad8f 14-23,47,53,59,71,103
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_7f1d1d64baa803::t_b053b05b31199c 374,401
+packages/dialtone-query-core/src/node-data-resolver.ts
+  s_7f1d1d64baa803::t_b053b05b31199c 254-260,369-370,388,409-410
+packages/dialtone-mcp-server/RETRIEVAL.md
+  s_7f1d1d64baa803::t_b053b05b31199c 29-30
+apps/dialtone-documentation/scripts/generate-raw-markdown.mjs
+  s_7f1d1d64baa803::t_0a16860fc15204 208-218,665-668
+apps/dialtone-documentation/scripts/lib/component-handlers.mjs
+  s_7f1d1d64baa803::t_35c02535c49de1 65
+apps/dialtone-documentation/scripts/lib/parse-source-markdown.mjs
+  s_7f1d1d64baa803::t_ddff7419b98bba 736
+apps/dialtone-documentation/scripts/lib/parse-source-markdown.test.mjs
+  s_7f1d1d64baa803::t_4706344f66dbd9 6-12
+apps/dialtone-documentation/scripts/lib/transform-vue-api.mjs
+  s_7f1d1d64baa803::t_219d9e4fa79ac4 9,12,29,31,47-87,112-113,115-124,133,136-137,142-147,151-153,157-158,162-164
+apps/dialtone-documentation/scripts/lib/transform-vue-api.test.mjs
+  s_7f1d1d64baa803::t_4ea55094769806 4,11,15,18,20-21,31,47,54-124
+apps/dialtone-documentation/scripts/lib/utils.mjs
+  s_7f1d1d64baa803::t_35cff527ba5a5b 15,19-23,37,44-45,48-52,57-67
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_7f1d1d64baa803::t_5557ab03b3a203 52-54
+packages/dialtone-docs/src/utils/strip-markdown.mjs
+  s_7f1d1d64baa803::t_7d4e540a7ae7e8 13,15-52,54,56-57,77,91-92,106
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_7f1d1d64baa803::t_dd0061e785a9ef 185-194
+packages/dialtone-docs/tests/tests/strip-markdown.test.js
+  s_7f1d1d64baa803::t_99a04a1459e315 25,27,52-103
+packages/dialtone-mcp-server/scripts/project-context.test.mjs
+  s_7f1d1d64baa803::t_d1ed9184591f43 28,49-58
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_8f6b8771d2a682 15
+scripts/retrieval/cases.mjs
+  s_7f1d1d64baa803::t_cf484875d7d2f3 263
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f0ececee6b616ae5d51492efed55e8240b2a424e",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

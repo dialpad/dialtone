@@ -1,0 +1,21 @@
+packages/combinator/src/components/tools/node.test.js
+  s_c8bb1bc8e0154a::t_bb5ff749b5f6bc 3
+  s_c8bb1bc8e0154a::t_e57bf5a13588ef 33
+  s_c8bb1bc8e0154a::t_cfa8074fd7c882 59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "206fac50959f0c44f33861f195a750faf2dda2e1",
+  "prompts": {},
+  "sessions": {
+    "s_c8bb1bc8e0154a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "26cc1112-ee2c-4d75-ad24-dac4c82f4710",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
