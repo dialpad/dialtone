@@ -164,6 +164,7 @@ describe('--health-check', () => {
     assert.match(pending('<dt-chip :label="a > b" size="200" icon-class="x">Label</dt-chip>'), chip);
     assert.match(pending('<dt-chip size="200"><template v-slot:icon>i</template></dt-chip>'), chip);
     assert.match(pending('<dt-chip size="200"><span slot="avatar">a</span></dt-chip>'), chip);
+    assert.match(pending('<dt-chip size="200"><span slot = "avatar">a</span></dt-chip>'), chip);
     assert.match(
       pending('<dt-chip-group icon-class="x" /><dt-chip size="200">x</dt-chip>'),
       /\[DONE\].*DtChip API Updates \(chip-api\)/,

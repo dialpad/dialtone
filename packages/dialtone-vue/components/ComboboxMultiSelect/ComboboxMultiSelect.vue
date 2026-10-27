@@ -42,7 +42,6 @@
             :size="CHIP_SIZES[String(size)]"
             :disabled="disabled"
             v-on="chipListeners"
-            @keydown.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
           >
             {{ item }}

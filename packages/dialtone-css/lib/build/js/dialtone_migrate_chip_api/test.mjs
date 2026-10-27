@@ -111,12 +111,74 @@ describe('dialtone-migrate-chip-api', () => {
     assert.equal(run(input), input);
   });
 
-  it('warns when show-close is omitted, including on an interactive chip', () => {
-    const omitted = input => warnings(input).some(w => w.startsWith('CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE'));
+  describe('omitted show-close', () => {
+    const omittedWarning = (input, name = '') => warnings(input)
+      .filter(w => w.startsWith(`CHIP_API_OMITTED_SHOW_CLOSE${name}`));
 
-    assert.ok(omitted('<dt-chip size="300" interactive>Label</dt-chip>'));
-    assert.ok(omitted('<dt-chip size="300">Label</dt-chip>'));
-    assert.ok(!omitted('<dt-chip size="300" interactive show-close>Label</dt-chip>'));
+    it('adds show-close after interactive for statically interactive chips', () => {
+      for (const interactive of ['interactive', 'interactive="true"', ':interactive="true"',
+        'v-bind:interactive="true"']) {
+        const input = `<dt-chip size="300" ${interactive}>Chip</dt-chip>`;
+
+        assert.equal(run(input), `<dt-chip size="300" ${interactive} show-close>Chip</dt-chip>`, interactive);
+        assert.deepEqual(omittedWarning(input), [], interactive);
+      }
+    });
+
+    it('adds size and show-close together on an interactive chip with neither', () => {
+      assert.equal(
+        run('<dt-chip interactive>Chip</dt-chip>'),
+        '<dt-chip size="300" interactive show-close>Chip</dt-chip>',
+      );
+    });
+
+    it('keeps a multi-line tag one attribute per line', () => {
+      const input = '<dt-chip\n  interactive\n  size="200"\n>Chip</dt-chip>';
+
+      assert.equal(run(input), '<dt-chip\n  interactive\n  show-close\n  size="200"\n>Chip</dt-chip>');
+    });
+
+    it('skips a chip with a v-bind object spread and warns', () => {
+      const input = '<dt-chip size="300" interactive v-bind="chipProps">Chip</dt-chip>';
+
+      assert.equal(run(input), input);
+      assert.equal(omittedWarning(input, '_SPREAD').length, 1);
+    });
+
+    it('only warns for chips that are not interactive, naming interactive as required', () => {
+      for (const attrs of ['', ' interactive="false"', ' :interactive="false"']) {
+        const input = `<dt-chip size="300"${attrs}>Chip</dt-chip>`;
+        const found = omittedWarning(input);
+
+        assert.equal(run(input), input, attrs);
+        assert.equal(found.length, 1, attrs);
+        assert.match(found[0], /^CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE .*needs both interactive and show-close/);
+      }
+    });
+
+    it('does not guess for a dynamic interactive binding and warns', () => {
+      const input = '<dt-chip size="300" :interactive="isOn">Chip</dt-chip>';
+
+      assert.equal(run(input), input);
+      assert.equal(omittedWarning(input, '_DYNAMIC_INTERACTIVE').length, 1);
+    });
+
+    it('leaves chips that already have show-close or showClose untouched and silent', () => {
+      for (const attrs of ['interactive show-close', 'interactive showClose', 'interactive :show-close="canRemove"',
+        'show-close']) {
+        const input = `<dt-chip size="300" ${attrs}>Chip</dt-chip>`;
+
+        assert.equal(run(input), input, attrs);
+        assert.deepEqual(omittedWarning(input), [], attrs);
+      }
+    });
+
+    it('is idempotent', () => {
+      const input = '<dt-chip interactive>A</dt-chip><dt-chip>B</dt-chip><dt-chip :interactive="x" />';
+      const once = run(input);
+
+      assert.equal(run(once), once);
+    });
   });
 
   it('renames an unquoted slot attribute value without adding quotes', () => {

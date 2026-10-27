@@ -5,15 +5,16 @@ export const MULTI_SELECT_SIZES = {
   DEFAULT: 'md',
 };
 
+// Chip sizes 100 to 700 are numeric; multi-select only uses the three smallest.
 export const CHIP_SIZES = {
   // Numeric (preferred)
-  100: 'xs',
-  200: 'xs',
-  300: 'sm',
+  100: 100,
+  200: 100,
+  300: 200,
   // T-shirt aliases (deprecated)
-  xs: 'xs',
-  sm: 'xs',
-  md: 'sm',
+  xs: 100,
+  sm: 100,
+  md: 200,
 };
 
 /**

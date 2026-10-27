@@ -21,6 +21,12 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+//  Elements a chip label can render as when it is interactive.
+@chip-interactive: ~"a, button, [role='button'], [role='link']";
+
+//  States that keep the dark fill. Hover rules must not override them.
+@chip-engaged: ~":focus-visible, :active, .d-chip__label--focus-always:focus";
+
 @layer dialtone.components {
 .d-chip {
   //  Component CSS Vars
@@ -114,7 +120,7 @@
   }
 
   //  A focused or pressed clickable chip inverts its text, and the close icon follows it.
-  &:has(> .d-chip__label:is(a, button, [role='button'], [role='link']):is(:focus-visible, :active)),
+  &:has(> .d-chip__label:is(@{chip-interactive}):is(:focus-visible, :active)),
   &:has(> .d-chip__label--focus-always:focus) {
     --chip-color-text: var(--dt-color-foreground-primary-inverted);
   }
@@ -147,7 +153,7 @@
     cursor: default;
 
     //  These properties are only set if d-chip is interactive (ex: a button).
-    &:is(a, button, [role='button'], [role='link']) {
+    &:is(@{chip-interactive}) {
       text-decoration: none;
       cursor: pointer;
 
@@ -216,21 +222,21 @@
     //  at the moderate step, so it goes a step further to stay distinct from base.
     //  Excluding pressed and focused keeps their dark fill, which this rule would
     //  otherwise override at equal specificity.
-    &--strong:is(a, button, [role='button'], [role='link']):hover:not(:active, :focus-visible, .d-chip__label--focus-always:focus) {
+    &--strong:is(@{chip-interactive}):hover:not(@{chip-engaged}) {
       --chip-color-background: var(--dt-color-surface-bold-opaque);
     }
 
     //  A hovered people chip deepens its purple tint. A strong people chip already
     //  has that fill, so it darkens its border instead. A focused or pressed one uses the brand fill.
-    &--people:is(a, button, [role='button'], [role='link']):hover {
+    &--people:is(@{chip-interactive}):hover {
       --chip-color-background: var(--dt-color-surface-brand);
     }
 
-    &--people.d-chip__label--strong:is(a, button, [role='button'], [role='link']):hover {
+    &--people.d-chip__label--strong:is(@{chip-interactive}):hover {
       --chip-color-border: var(--dt-color-border-brand);
     }
 
-    &--people:is(a, button, [role='button'], [role='link']):is(:active, :focus-visible),
+    &--people:is(@{chip-interactive}):is(:active, :focus-visible),
     &--people:is(.d-chip__label--focus-always):focus {
       --chip-color-background: var(--dt-color-surface-brand-strong);
     }
@@ -243,7 +249,7 @@
   //  label. The chip keeps its hover fill while the pointer is anywhere on it, and
   //  the close button's own highlight sits on top. A focused or pressed label keeps
   //  its dark fill.
-  &:has(> .d-chip__close:hover:not(:disabled, .d-btn--disabled)) > .d-chip__label:is(a, button, [role='button'], [role='link']):not(.d-chip--disabled, :focus-visible, :active, .d-chip__label--focus-always:focus) {
+  &:has(> .d-chip__close:hover:not(:disabled, .d-btn--disabled)) > .d-chip__label:is(@{chip-interactive}):not(.d-chip--disabled, @{chip-engaged}) {
     --chip-color-background: var(--dt-color-surface-moderate-opaque);
 
     &.d-chip__label--strong {

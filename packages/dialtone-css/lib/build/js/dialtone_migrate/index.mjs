@@ -244,7 +244,7 @@ const MIGRATIONS = [
         + '\\s(?::|v-bind:)?(?:icon-class|iconClass|avatar-class|avatarClass)\\s*=',
       ),
       // The old icon and avatar slots in their #, v-slot: and slot= forms.
-      /<(?:dt-chip|DtChip)(?=[\s/>])[\s\S]*?\s(?:#|v-slot:|slot=["']?)(?:icon|avatar)(?![\w-])/,
+      /<(?:dt-chip|DtChip)(?=[\s/>])[\s\S]*?\s(?:#|v-slot:|slot\s*=\s*["']?)(?:icon|avatar)(?![\w-])/,
       // The codemod adds an explicit size="300" to any chip without size, so those chips are pending too.
       // (?=[\s/>]) keeps dt-chip-group out; a size, :size, v-bind:size or v-bind spread means it is done.
       new RegExp(

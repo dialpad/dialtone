@@ -61,7 +61,28 @@ function isInteractive (attrs) {
 function insertAttr (attrs, attr) {
   const leadingSpace = attrs.match(/^\s*/)[0];
   const rest = attrs.slice(leadingSpace.length).trimStart();
-  return `${leadingSpace || ' '}${attr}${rest ? ` ${rest}` : ''}`;
+  // Keep multi-line tags one attribute per line.
+  const separator = leadingSpace.includes('\n') ? leadingSpace : ' ';
+  return `${leadingSpace || ' '}${attr}${rest ? `${separator}${rest}` : ''}`;
+}
+
+// Inserts right after the `after` attribute, on the same line or the next one, matching how it is laid out.
+function insertAttrAfter (attrs, after, attr) {
+  const token = parseAttrs(attrs).find(t => attrNames(after).includes(t.name));
+  if (!token) return insertAttr(attrs, attr);
+  const gap = attrs.slice(0, token.start).match(/\s*$/)[0] || ' ';
+  return `${attrs.slice(0, token.end)}${gap}${attr}${attrs.slice(token.end)}`;
+}
+
+// 'static' for a literal true (bare, "" or "true"), 'false' for a literal false, 'dynamic' for any other
+// expression, 'none' when the chip has no interactive attribute.
+function interactiveState (attrs) {
+  const token = parseAttrs(attrs).find(t => attrNames('interactive').includes(t.name));
+  if (!token) return 'none';
+  if (token.value === null) return 'static';
+  const value = unquote(token.value).trim();
+  if (value === 'false') return 'false';
+  return value === '' || value === 'true' ? 'static' : 'dynamic';
 }
 
 function renameAttr (attrs, oldProp, newProp) {
@@ -87,7 +108,20 @@ function transformChipOpenTag (tag, warnings, filePath) {
   }
 
   if (!hasShowClose) {
-    warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE file=${filePath}`);
+    const state = interactiveState(attrs);
+    const hasSpread = parseAttrs(attrs).some(token => token.name === 'v-bind' && token.value !== null);
+    if (state === 'static' && !hasSpread) {
+      // showClose now defaults to false, so an interactive chip keeps its close button only with show-close.
+      attrs = insertAttrAfter(attrs, 'interactive', 'show-close');
+    } else if (state === 'static') {
+      warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_SPREAD file=${filePath} (v-bind object may supply show-close)`);
+    } else if (state === 'dynamic') {
+      warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_DYNAMIC_INTERACTIVE file=${filePath}`
+        + ' (add show-close if the chip can be interactive)');
+    } else {
+      warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE file=${filePath}`
+        + ' (the close button needs both interactive and show-close)');
+    }
   }
 
   if (hasDynamicAttr(attrs, 'show-close') || hasDynamicAttr(attrs, 'showClose')) {

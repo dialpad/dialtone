@@ -20,6 +20,28 @@ export default {
     },
   },
 
+  exclusions: [
+    // A remove button only renders on an interactive chip.
+    {
+      when: { interactive: v => !v },
+      disable: { props: ['showClose'] },
+      clear: { props: ['showClose'] },
+    },
+    // `subtle` is text only, so it can't be interactive (Chip falls back to base and warns).
+    {
+      when: { interactive: true },
+      disableValues: { props: { emphasis: ['subtle'] } },
+    },
+    {
+      when: { interactive: true, emphasis: 'subtle' },
+      clear: { props: ['emphasis'] },
+    },
+    {
+      when: { emphasis: 'subtle' },
+      disable: { props: ['interactive'] },
+    },
+  ],
+
   'interactive': {
     props: {
       interactive: { initialValue: true },
@@ -27,6 +49,49 @@ export default {
     },
     slots: {
       default: { initialValue: 'I can be clicked' },
+    },
+  },
+
+  'removable': {
+    props: {
+      interactive: { initialValue: true },
+      showClose: { initialValue: true },
+    },
+    slots: {
+      default: { initialValue: 'Remove me' },
+    },
+  },
+
+  'strong': {
+    props: {
+      emphasis: { initialValue: 'strong' },
+    },
+    slots: {
+      default: { initialValue: 'Selected' },
+    },
+  },
+
+  'subtle': {
+    props: {
+      emphasis: { initialValue: 'subtle' },
+    },
+    slots: {
+      default: { initialValue: 'Subtle' },
+    },
+  },
+
+  'with end icon': {
+    slots: {
+      endIcon: { initialValue: '<dt-icon-chevron-down size="200" />' },
+      default: { initialValue: 'Chip' },
+    },
+  },
+
+  'with leading and trailing': {
+    slots: {
+      leading: { initialValue: '<dt-badge kind="status" variant="info" label="New" :size="100" />' },
+      trailing: { initialValue: '<dt-badge kind="counter" variant="count" emphasis="strong" label="4" :size="100" />' },
+      default: { initialValue: 'Inbox' },
     },
   },
 
