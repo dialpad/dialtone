@@ -277,6 +277,33 @@ test('exact documentation retrieval preserves guidance beyond the discovery exce
     assert.equal(content, record.content);
     assert.ok(content.includes('aria-describedby'));
   }));
+test('exact usage retrieval keeps Do/Don\'t grouping through continuation', async () =>
+  fixture(async (client) => {
+    const { documentation } = await import('@dialpad/dialtone-query-core');
+    for (const [name, recommended, discouraged] of [
+      ['modal', 'Confirming a destructive action', 'Form-related critical, positive, or warning messages'],
+      ['card', 'content and actions on a single topic', 'too many call-to-action elements'],
+    ]) {
+      const id = `components/${name}#usage`;
+      let call = { name: 'get_documentation', arguments: { id, textLimit: 100 } };
+      let content = '';
+      for (let page = 0; page < 40; page++) {
+        const result = structured(await client.callTool(call));
+        assert.equal(result.match, 'exact');
+        assert.equal(result.items[0].id, id);
+        content += result.items[0].content;
+        if (!result.continuation) break;
+        call = { name: result.continuation.tool, arguments: result.continuation.arguments };
+      }
+      assert.equal(content, documentation.find(record => record.id === id).content);
+      assert.deepEqual(content.match(/^(?:Do|Don't):$/gm), ['Do:', 'Don\'t:']);
+      const [, doText, dontText] = content.split(/(?:^|\n)(?:Do|Don't):\n/);
+      assert.ok(doText.includes(recommended));
+      assert.ok(!doText.includes(discouraged));
+      assert.ok(dontText.includes(discouraged));
+      assert.ok(!dontText.includes(recommended));
+    }
+  }));
 test('all five searches retain readable domain facts, notes and provenance without structured output', async () =>
   fixture(async (client) => {
     const core = await import('@dialpad/dialtone-query-core');
