@@ -12,7 +12,9 @@
         "{projectRoot}/src/**/*",
         "{projectRoot}/vite.config.js"
       ],
-      "outputs": [ "{projectRoot}/dist" ],
+      "outputs": [
+        "{projectRoot}/dist"
+      ],
       "options": {
         "cwd": "{projectRoot}",
         "command": "vite build"
@@ -52,6 +54,40 @@
       "options": {
         "command": "pnpm semantic-release-plus --extends ./packages/combinator/release-ci.config.cjs && sleep 3",
         "parallel": false
+      }
+    },
+    "generate-examples": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-vue:build",
+        "dialtone-icons:build"
+      ],
+      "inputs": [
+        "{projectRoot}/src/**/*",
+        "{projectRoot}/scripts/generate-preset-examples.mjs",
+        "{projectRoot}/vite.config.js",
+        "{projectRoot}/package.json",
+        "{workspaceRoot}/package.json",
+        "{workspaceRoot}/pnpm-lock.yaml",
+        "{workspaceRoot}/scripts/lib/**/*.mjs",
+        "{workspaceRoot}/scripts/build-dialtone-vue-docs.mjs",
+        "{workspaceRoot}/packages/dialtone-vue/{common,components,directives,prototypes}/**/*",
+        "{workspaceRoot}/packages/dialtone-vue/index.js",
+        "{workspaceRoot}/packages/dialtone-vue/package.json",
+        "{workspaceRoot}/packages/dialtone-vue/dist/component-documentation.json",
+        "{workspaceRoot}/packages/dialtone-icons/src/**/*.svg",
+        "{workspaceRoot}/packages/dialtone-icons/package.json",
+        {
+          "dependentTasksOutputFiles": "**/dist/**/*",
+          "transitive": true
+        }
+      ],
+      "outputs": [
+        "{projectRoot}/.generated/preset-examples.json"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node scripts/generate-preset-examples.mjs"
       }
     }
   }

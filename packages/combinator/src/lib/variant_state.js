@@ -2,7 +2,7 @@ import { reactive } from 'vue';
 import { getComponentInfo } from '@/src/lib/info';
 import { shouldDisable } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { shouldDisableSlotClassProp } from '@/src/lib/utils';
+import { shouldDisableSlotClassProp, enumerateGroups } from '@/src/lib/utils';
 
 const MEMBER_GROUPS = ['slots', 'props', 'attributes', 'events'];
 
@@ -74,6 +74,39 @@ export function getInitialValues (info) {
   return values;
 }
 
+/** Lazy getters retain the UI's current reactive values after reset/replacement. */
+export function createVariantBindings (getInfo, getOptions) {
+  const infoBindings = {
+    get () {
+      const bindings = [];
+      this.enumerate((_, binding) => bindings.push(binding));
+      return bindings;
+    },
+    enumerate (handler) {
+      const info = getInfo();
+      enumerateGroups(handler, {
+        props: info.props,
+        attributes: info.attributes?.filter(attribute => attribute),
+      });
+    },
+  };
+  const optionBindings = {
+    get () {
+      const bindings = [];
+      this.enumerate((_, binding) => bindings.push(binding));
+      return Object.fromEntries(bindings);
+    },
+    enumerate (handler) {
+      const options = getOptions();
+      enumerateGroups(handler, {
+        props: options.props ? Object.entries(options.props) : null,
+        attributes: options.attributes ? Object.entries(options.attributes) : null,
+      });
+    },
+  };
+  return { infoBindings, optionBindings };
+}
+
 /**
  * Builds a renderable `{ info, options }` pair for a single variant. Used by the
  * spec sheet to render every variant at once; `options` exposes the same
@@ -92,14 +125,9 @@ export function buildVariantState (component, documentation, variants, variantNa
   // `options` is made reactive before the bindings closure captures it, so that
   // `options.props` reads inside `get()` go through Vue's dependency tracking.
   // Without this, onCellEvent mutations would not trigger re-renders in the spec sheet.
-  const options = reactive({
-    ...values,
-    bindings: {
-      get () {
-        return { ...(options.props ?? {}), ...(options.attributes ?? {}) };
-      },
-    },
-  });
+  const bindings = createVariantBindings(() => info, () => options);
+  info.bindings = bindings.infoBindings;
+  const options = reactive({ ...values, bindings: bindings.optionBindings });
 
   return { info, options };
 }

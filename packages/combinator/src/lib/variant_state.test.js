@@ -1,5 +1,6 @@
 import { expect } from 'vitest';
-import { computeDisabledMembers, listVariantNames, writeUpdateEvent } from './variant_state';
+import { computed, reactive, shallowRef } from 'vue';
+import { computeDisabledMembers, listVariantNames, writeUpdateEvent, createVariantBindings } from './variant_state';
 
 // `link` is a boolean prop, so `linkKind` is inferred as its dependent child
 // (boolean-prefix matching). The first exclusion rule hides target/rel/type
@@ -134,4 +135,18 @@ describe('variant_state', function () {
       expect(() => writeUpdateEvent({}, 'update:x', 1)).not.toThrow();
     });
   });
+  it('keeps copied bindings reactive across value changes and reset replacements', () => {
+    const info = shallowRef(Object.freeze({ props: [{ name: 'size' }], attributes: [undefined, { name: 'class' }] }));
+    const options = shallowRef(reactive({ props: { size: 300 }, attributes: { class: 'd-w100p' } }));
+    const bindings = createVariantBindings(() => info.value, () => options.value);
+    const values = computed(() => bindings.optionBindings.get());
+    expect(values.value).toEqual({ size: 300, class: 'd-w100p' });
+    options.value.props.size = 400;
+    expect(values.value.size).toBe(400);
+    options.value = reactive({ props: { size: 500 }, attributes: {} });
+    expect(values.value).toEqual({ size: 500 });
+    info.value = Object.freeze({ props: [{ name: 'label' }], attributes: [] });
+    expect(bindings.infoBindings.get().map(member => member.name)).toEqual(['label']);
+  });
+
 });

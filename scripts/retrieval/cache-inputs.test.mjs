@@ -22,7 +22,7 @@ const generatorInputs = [
   'scripts/lib/vue-component-identity.mjs',
   'common/utils/server.mjs',
 ];
-function inputs(name) {
+function inputs(name, target = 'build') {
   const root = `packages/${name}`;
   const config = JSON.parse(
     readFileSync(new URL(`../../${root}/project.json`, import.meta.url)),
@@ -33,8 +33,8 @@ function inputs(name) {
   };
   return getInputs(
     {
-      id: `${name}:build`,
-      target: { project: name, target: 'build' },
+      id: `${name}:${target}`,
+      target: { project: name, target },
       overrides: {},
     },
     graph,
@@ -50,8 +50,8 @@ function covered(paths, patterns) {
   ).map((value) => value.file);
 }
 // Workspace-relative file patterns from a project's own build inputs.
-function selfPatterns(name) {
-  return inputs(name)
+function selfPatterns(name, target = 'build') {
+  return inputs(name, target)
     .selfInputs.filter((input) => input.fileset)
     .map((input) =>
       input.fileset
@@ -167,4 +167,22 @@ test('core and adapters hash the generated data they consume through dependency 
     if (name !== 'dialtone-query-core')
       assert.deepEqual(covered(coreOutputs, outputs), coreOutputs, name);
   }
+});
+
+test('preset generation hashes authored presets, serializers and component defaults', () => {
+  const paths = [
+    'packages/combinator/src/variants/variants_button.js',
+    'packages/combinator/src/lib/code_copy.js',
+    'packages/combinator/src/lib/variant_state.js',
+    'packages/combinator/src/components/code_editor/code_editor.vue',
+    'packages/combinator/scripts/generate-preset-examples.mjs',
+    'packages/combinator/vite.config.js',
+    'packages/combinator/package.json',
+    'packages/dialtone-vue/components/button/Button.vue',
+    'packages/dialtone-vue/dist/component-documentation.json',
+    'scripts/lib/vue-component-identity.mjs',
+    'package.json',
+    'pnpm-lock.yaml',
+  ];
+  assert.deepEqual(covered(paths, selfPatterns('combinator', 'generate-examples')), paths);
 });
