@@ -60,7 +60,7 @@ describe('selected documentation examples', () => {
     try {
       for (const field of ['date', 'reviewer', 'browser', 'os', 'assistiveTechnology']) {
         evidence = structuredClone(saved);
-        delete evidence['examples/button-default'].manualReview[field];
+        delete evidence.examples['examples/button-default'].manualReview[field];
         vi.resetModules();
         const { buildExampleRecords: build } = await import('../src/generators/documentation-examples.mjs');
         const [record] = assemble(readFileSync(source, 'utf8'), build);

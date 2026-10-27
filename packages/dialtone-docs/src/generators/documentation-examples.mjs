@@ -196,7 +196,9 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
       const dependencies = staticHtml ? { '@dialpad/dialtone': profile.dependencies['@dialpad/dialtone'] } : profile.dependencies;
       const sourceHash = hash(rawFile);
       const payload = payloadHash({ files, dependencies });
-      const saved = evidence[id];
+      const { run: savedRun, ...perExample } = evidence.examples[id] ?? {};
+      const run = evidence.runs[savedRun];
+      const saved = run ? { ...perExample, ...run } : undefined;
       const artifact = profile.artifacts[saved?.artifact?.package];
       const matchesProfile = saved?.profile === profile.id && artifact &&
         saved.artifact.version === artifact.version && saved.artifact.integrity === artifact.integrity;
