@@ -25,6 +25,7 @@ export function checkTemplateApi(ast, metadata, directives) {
       for (const attribute of node.props) {
         const directive = attribute.type === NodeTypes.DIRECTIVE;
         if (directive) assert.ok(allowedDirectives.has(attribute.name), `Unhandled directive ${attribute.name}`);
+        if (directive && attribute.name === 'bind') assert.ok(attribute.arg, 'Object-form v-bind is not supported');
         if (directive && attribute.name === 'on') {
           const event = attribute.arg?.content;
           assert.ok(event && component.events?.some(entry => entry.name === event), `${name} event ${event}`);

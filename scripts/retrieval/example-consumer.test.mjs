@@ -12,3 +12,7 @@ test('consumer API checks normalize kebab props and require a supported v-model 
   assert.throws(() => checkTemplateApi(baseParse('<dt-toggle invalid-prop />'), metadata, []), /invalid-prop/);
   assert.throws(() => checkTemplateApi(baseParse('<dt-toggle v-model="checked" />'), [{ ...metadata[0], events: [] }], []), /update:modelValue/);
 });
+
+test('consumer API validation rejects opaque object-form prop bindings', () => {
+  assert.throws(() => checkTemplateApi(baseParse('<dt-toggle v-bind="{ invalidProp: true }" />'), metadata, []), /Object-form v-bind/);
+});
