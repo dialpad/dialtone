@@ -11,14 +11,18 @@ export function consumerTuple(manifest) {
 }
 
 /** Validate only documented source contracts, not installed runtime compatibility. */
-export function checkTemplateApi(ast, metadata, directives) {
+export function checkTemplateApi(ast, metadata, directives, icons = {}) {
   const allowedDirectives = new Set(['bind', 'model', 'on', ...directives.map(name => name.replace(/Directive$/, '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase())]);
   const normalizeProp = name => name.replace(/-/g, '').toLowerCase();
   const checked = [];
   function visit(node) {
     if (node.type === NodeTypes.ELEMENT && /^(dt-|Dt[A-Z])/.test(node.tag)) {
+      const icon = Object.entries(icons)
+        .find(([name]) => normalizeComponentName(name) === normalizeComponentName(node.tag));
       const component = metadata.find(component =>
-        normalizeComponentName(component.displayName) === normalizeComponentName(node.tag));
+        normalizeComponentName(component.displayName) === normalizeComponentName(node.tag)) ?? (icon && {
+        displayName: icon[0], props: Object.keys(icon[1].props ?? {}).map(name => ({ name })), slots: [], events: [],
+      });
       assert.ok(component, node.tag);
       const name = component.displayName;
       assert.ok(!component.tags?.deprecated && !component.metadata?.deprecated, `${name} deprecated`);

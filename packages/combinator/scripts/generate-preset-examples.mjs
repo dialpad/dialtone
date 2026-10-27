@@ -165,6 +165,7 @@ try {
   const report = {
     schemaVersion: 1,
     inputsHash,
+    inputs: inputFiles,
     sourceVersions: {
       combinator: manifest(resolve(packageRoot, 'package.json')).version,
       vueComponents: vuePackage.version,

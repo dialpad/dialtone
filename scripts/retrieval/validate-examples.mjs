@@ -47,6 +47,7 @@ run('npm', ['install', '--ignore-scripts', '--registry=https://registry.npmjs.or
 const consumerRequire = createRequire(resolve(consumer, 'package.json'));
 const { parse } = consumerRequire('@vue/compiler-sfc');
 const { baseParse } = consumerRequire('@vue/compiler-dom');
+const installedIcons = await import(consumerRequire.resolve('@dialpad/dialtone-icons/vue'));
 const metadata = JSON.parse(readFileSync(consumerRequire.resolve('@dialpad/dialtone/vue3/component-documentation.json')));
 const lintRequire = createRequire(resolve(root, 'package.json'));
 const { ESLint } = lintRequire('eslint');
@@ -58,7 +59,7 @@ const reports = [];
 for (const record of selected) {
   const { id } = record;
   const files = deliveredFiles.get(id);
-  assert.match(id, /^examples\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/);
+  assert.match(id, /^examples\/(?:[a-z0-9-]+|presets\/Dt[A-Za-z0-9]+\/[^/]+)$/);
   if (record.example.representation === 'static-html') {
     const classes = assertStaticHtml(files['example.html']);
     assert.equal(record.example.profile.dependencies['@dialpad/dialtone'], pkg.dependencies['@dialpad/dialtone']);
@@ -91,7 +92,7 @@ for (const record of selected) {
   assert.deepEqual(sfc.errors, []);
   const ast = baseParse(sfc.descriptor.template.content);
   assertTemplateBindings(sfc.descriptor.template.content, sfc.descriptor.scriptSetup?.content ?? '');
-  const checked = checkTemplateApi(ast, metadata, record.example.directives);
+  const checked = checkTemplateApi(ast, metadata, record.example.directives, installedIcons);
   const lint = await eslint.lintFiles([resolve(exampleDir, 'App.vue')]);
   const lintErrors = lint.reduce((total, result) => total + result.errorCount + result.warningCount, 0);
   assert.equal(lintErrors, 0, JSON.stringify(lint));

@@ -185,4 +185,9 @@ test('preset generation hashes authored presets, serializers and component defau
     'pnpm-lock.yaml',
   ];
   assert.deepEqual(covered(paths, selfPatterns('combinator', 'generate-examples')), paths);
+  const docs = JSON.parse(readFileSync(new URL('../../packages/dialtone-docs/project.json', import.meta.url)));
+  assert.ok(docs.targets.build.dependsOn?.includes('dialtone-combinator:generate-examples'));
+  const generated = ['packages/combinator/.generated/preset-examples.json'];
+  assert.deepEqual(covered(generated, inputs('dialtone-docs').depsOutputs.map(input => input.dependentTasksOutputFiles)), generated);
+
 });

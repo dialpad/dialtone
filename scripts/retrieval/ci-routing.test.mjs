@@ -24,6 +24,9 @@ function assertRouted(label, paths, patternLists) {
 }
 test('lookup source, data, adapter and harness changes route to the mandatory suites on PRs and staging', () => {
   const paths = [
+    'packages/combinator/src/variants/variants_button.js',
+    'packages/combinator/src/lib/code_copy.js',
+    'packages/combinator/scripts/generate-preset-examples.mjs',
     'nx.json',
     'package.json',
     'pnpm-lock.yaml',

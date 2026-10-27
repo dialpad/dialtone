@@ -155,3 +155,5 @@ when the component becomes viable, and keep the reason short and user-facing.
 - Exclusions prevent known invalid combinations.
 - Names match component docgen output.
 - Token-numbered values stay strings.
+
+For generated lookup presets, follow the [shared materialization and delivery lifecycle](../documentation-examples.md#combinator-presets). Regenerate accounting and revalidate selected payloads after preset, API/default or support changes; selection does not imply full coverage.

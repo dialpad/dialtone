@@ -265,6 +265,8 @@ Initial coverage retains the two Button examples and adds Loader, Toggle and one
 
 `search_utility_classes` with `{"query":"d-ww-normal"}` supplies the static utility example ID; retrieve it with `get_documentation`. Hints use actual selected utility results and bundled documentation. Check each representation and validation status; this first batch is not full coverage.
 
+Selected Combinator presets are also source examples: `examples/presets/DtLoader/default`, `examples/presets/DtButton/start%20icon` and `examples/presets/DtToggle/default`. Use the same exact-ID retrieval route above. These preserve current copied markup with imports and CSS setup. Toggle is an initial-state fixture; it supplies no update handler or persistence. Source package/version and bank hash identify the preset separately from its pinned consumer validation. Unsupported or deprecated presets are excluded; these three examples are not full preset coverage.
+
 Example generation runs in `dialtone-docs:build`; query-core and adapter builds bundle that output into packed packages. Documentation deployment and source merges do not update an installed server: the existing release selection, publication and package-update path still applies. Packed candidates are separate from published packages and verified consumer delivery.
 
 ### Icons

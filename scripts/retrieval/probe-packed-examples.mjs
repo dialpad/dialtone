@@ -45,7 +45,10 @@ try {
       id: record.id, payloadHash: record.example.validation.payloadHash, pages, characters: Array.from(content).length,
     });
   }
-  assert.throws(() => run(['docs', '--id', 'examples/unknown']), /No documentation found/);
+  for (const id of ['examples/unknown', 'examples/presets/DtModal/default', 'examples/presets/DtButton/block%20start%20icon']) {
+    assert.throws(() => run(['docs', '--id', id]), /No documentation found/);
+    assert.equal((await client.callTool({ name: 'get_documentation', arguments: { id } })).structuredContent.match, 'no-match');
+  }
   const missing = await client.callTool({ name: 'get_documentation', arguments: { id: 'examples/unknown' } });
   assert.equal(missing.structuredContent.match, 'no-match');
   assert.ok(missing.structuredContent.notes.some(note => note.includes('examples/button-default')));

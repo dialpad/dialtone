@@ -3,6 +3,7 @@ import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { buildExampleRecords, buildExampleCoverage, selectedExampleIds } from './documentation-examples.mjs';
+import { buildPresetExampleRecords } from './preset-examples.mjs';
 import { glob } from 'glob';
 import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
@@ -254,6 +255,10 @@ async function build() {
     coverage.push(buildExampleCoverage({ rawFile: readFileSync(file, 'utf8'), filePath: relative(repoRoot, file).replace(/\\/g, '/'), records }));
   }
 
+  const presetPath = resolve(repoRoot, 'packages/combinator/.generated/preset-examples.json');
+  const presets = buildPresetExampleRecords(JSON.parse(readFileSync(presetPath, 'utf8')), { records: allRecords, vuePackage });
+  allRecords.push(...presets.records);
+
   const ids = new Set();
   for (const record of allRecords) {
     if (ids.has(record.id)) throw new Error(`Duplicate documentation ID: ${record.id}`);
@@ -280,6 +285,7 @@ async function build() {
     remaining: coverage.reduce((sum, page) => sum + page.remaining, 0),
     completePages: coverage.filter(page => page.complete).map(page => page.filePath),
   } };
+  writeFileSync(resolve(distDir, 'preset-example-coverage.json'), JSON.stringify(presets.coverage, null, 2), 'utf8');
   writeFileSync(resolve(distDir, 'example-coverage.json'), JSON.stringify(report, null, 2), 'utf8');
   console.info(`public-docs.json built: ${allRecords.length} sections → ${outputPath}`);
 }
