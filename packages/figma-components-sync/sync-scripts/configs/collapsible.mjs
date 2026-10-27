@@ -17,7 +17,7 @@
  */
 export default {
   component: 'DtCollapsible', label: 'Content', page: 'Collapsible',
-  figmaSetId: '286:6214',
+  figmaSetId: '533:31194',
 
   axes: {
     open: [false, true],
@@ -38,6 +38,8 @@ export default {
   slotContent: () => ({
     content: { component: 'DtText', props: { as: 'p' }, text: 'Collapsible content' },
   }),
+  // Free-form content, so a native Figma slot holding the example text, not a one-value swap.
+  nativeSlots: ['content'],
 
   variantName: c => `open=${c.open}`,
 };

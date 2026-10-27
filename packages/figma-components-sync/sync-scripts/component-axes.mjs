@@ -77,14 +77,16 @@ const BUILT_IN = {
     rootClass: 'd-g-200',
   },
   chip: {
-    component: 'DtChip', label: 'Chip', page: 'Chip', figmaSetId: '286:14642',
+    component: 'DtChip', label: 'Chip', page: 'Chip', figmaSetId: '286:14642', figmaMergedSetId: '523:7999',
     axes: {
       size: [100, 200, 300],
       disabled: [false, true],
       showClose: [true, false],
       // No prop behind this: the `icon` and `avatar` slots are mutually exclusive
-      // (v-else-if) and each changes real geometry, so it is a real visual axis.
-      leading: ['none', 'icon', 'avatar'],
+      // (v-else-if). The avatar changes the label's OWN padding (4px left instead of 8), which
+      // no Figma component property can do, so it stays a variant. The icon does not: it
+      // carries its own 4px right padding and the label keeps 8/8, so it is a slot (below).
+      leading: ['none', 'avatar'],
       // Label states and CLOSE-BUTTON states are separate: the close button's
       // hover/active/focus rules are NOT gated on `interactive`, so they are
       // reachable on a static chip that merely has a close button.
@@ -111,7 +113,12 @@ const BUILT_IN = {
       showClose: c.showClose,
       interactive: ['hover', 'active', 'focus'].includes(c.state),
     }),
-    slots: c => (c.leading === 'none' ? [] : [c.leading]),
+    slots: c => (c.leading === 'avatar' ? ['avatar'] : []),
+    // The icon is added in a MERGED build's second render, which becomes a Start icon
+    // boolean and swap. The avatar variants are excluded: icon and avatar are mutually
+    // exclusive, so there is nothing for the boolean to show.
+    slotPass: ['icon'],
+    slotInvalid: c => c.leading === 'avatar',
     // A pointer press cannot happen without hover, so `active` means hover+active.
     // It is not cosmetic: on the close button, :active alone paints a purple glyph
     // while hover+active paints near-black, because .d-chip__close:hover and :active
@@ -128,7 +135,7 @@ const BUILT_IN = {
     stateTarget: c => (c.state.startsWith('close') ? '.d-chip__close' : '.d-chip__label'),
   },
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '401:47085',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '536:77428',
     /**
      * SLOT PRESENCE IS A VARIANT AXIS HERE, not a BOOLEAN component property.
      *
@@ -162,20 +169,6 @@ const BUILT_IN = {
       // are `kind: 'muted', importance: 'primary'` for BOTH circle values, already covered
       // by the existing muted/primary rule regardless of circle.
       circle: [false, true],
-      /**
-       * LINK-STYLED is a SEPARATE BRANCH, not another crossed axis.
-       *
-       * `buttonClasses()` returns early when `link` is true — `d-link`/`linkKind`/
-       * `linkUnderline` classes entirely REPLACE `d-btn`/`kind`/`importance`/`circle`, which
-       * never get read at all. Crossing `linkKind`/`linkUnderline` against every kind/
-       * importance/circle combination (and vice versa) would measure the same render
-       * dozens of times over under different irrelevant labels. `invalid` below collapses
-       * each side to one representative value of the other, the same way DtBadge's
-       * `decoration` axis is gated to avoid multiplying against axes it cannot affect.
-       */
-      link: [false, true],
-      linkKind: ['default','critical','warning','positive','info','muted','mention'],
-      linkUnderline: [true, false],
     },
     // muted/primary is rejected by the component; hover and active are not
     // reachable while loading because the button is pointer-events:none.
@@ -184,31 +177,11 @@ const BUILT_IN = {
     invalid: c => (c.kind === 'muted' && c.importance === 'primary')
       || (c.loading === true && ['hover','active'].includes(c.state))
       || (c.circle === true && c.kind === 'default' && c.importance === 'primary')
-      || (c.circle === true && c.kind === 'critical' && c.importance === 'outlined')
-      // link=true: kind/importance/circle are dead props — collapse to one representative.
-      || (c.link === true && (c.circle !== false || c.kind !== 'default' || c.importance !== 'primary'))
-      // link=false: linkKind/linkUnderline are dead props — collapse to one representative.
-      || (c.link === false && (c.linkKind !== 'default' || c.linkUnderline !== true))
-      /**
-       * link + an icon slot genuinely computes NEGATIVE padding — not a measurement bug.
-       *
-       * `.d-btn__icon--left/--right:not(:only-child)` (button.less) pulls an icon in with
-       * `margin-inline-start/end: var(--dt-spacing-25-negative)`, applied whenever
-       * `kind !== 'unstyled'` regardless of `link` — but `link.less`'s own padding is 0,
-       * so there is no positive base padding left to absorb that negative margin into.
-       * `Button.vue`'s own `validatePropCombination` doesn't warn on this combination
-       * either, so it isn't confirmed unsupported at the component level — but Figma
-       * cannot represent a negative padding at all, and clamping it to 0 would silently
-       * under-represent a real edge collision the actual CSS produces. Excluded rather
-       * than guessed at; revisit if DtButton ever states this combination is supported.
-       */
-      || (c.link === true && (c.startIcon === true || c.endIcon === true)),
+      || (c.circle === true && c.kind === 'critical' && c.importance === 'outlined'),
     variantName: c => `kind=${c.kind}, importance=${c.importance}, size=${c.size}, state=${c.state}, `
-      + `loading=${c.loading}, startIcon=${c.startIcon}, endIcon=${c.endIcon}, circle=${c.circle}, `
-      + `link=${c.link}, linkKind=${c.linkKind}, linkUnderline=${c.linkUnderline}`,
+      + `loading=${c.loading}, startIcon=${c.startIcon}, endIcon=${c.endIcon}, circle=${c.circle}`,
     props: c => ({
-      kind: c.kind, importance: c.importance, size: Number(c.size),
-      circle: c.circle, link: c.link, linkKind: c.linkKind, linkUnderline: c.linkUnderline,
+      kind: c.kind, importance: c.importance, size: Number(c.size), circle: c.circle,
       ...(c.state === 'active' ? { active: true } : {}),
       ...(c.state === 'disabled' ? { disabled: true } : {}),
       ...(c.loading ? { loading: true } : {}),

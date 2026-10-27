@@ -17,6 +17,7 @@
 import { readFileSync, writeFileSync, mkdirSync, statSync, existsSync, rmSync, readdirSync} from 'fs';
 import { execFileSync } from 'child_process';
 import { createHash } from 'crypto';
+import { COMPONENTS } from './component-axes.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const HERE = `${ROOT}/sync-scripts`;
@@ -51,6 +52,27 @@ const enc = (name, extra = []) =>
 const built = (name, k, n) =>
   `${HERE}/build-data/${name}${n > 1 ? `-${k}of${n}` : ''}-build.json`;
 
+/**
+ * The description a hand-built set carries ("DtChip. Props: variant (default | people), …
+ * Slots: …"), written from the axes and slots this set was actually built from, so it
+ * cannot drift from them.
+ */
+function describeSet (name, page, slotKeys) {
+  const cfg = COMPONENTS[name] || COMPONENTS[name.replace(/-(merged|slots)$/, '')];
+  if (!cfg) return null;
+  const values = (vals) => {
+    const nums = vals.every(v => typeof v === 'number');
+    return nums && vals.length > 2 ? `${vals[0]} to ${vals[vals.length - 1]}` : vals.join(' | ');
+  };
+  const label = (key) => key.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, c => c.toUpperCase());
+  const props = Object.entries(cfg.axes).map(([axis, vals]) => `${axis} (${values(vals)})`).join(', ');
+  const order = Object.keys(cfg.axes);
+  const rank = (k) => (order.includes(k) ? order.indexOf(k) : order.length);
+  const slots = [...slotKeys].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)).map(label);
+  return `Dt${page}. Props: ${props}.`
+    + (slots.length ? ` Slots: ${slots.join(', ')} (icon swaps), label.` : ' Slots: label.');
+}
+
 const manifest = [];
 for (const name of names) {
   enc(name);
@@ -61,6 +83,7 @@ for (const name of names) {
 
   let offset = 0;
   const entry = { component: name, shards: [] };
+  const slotKeys = new Set();
   for (let k = 1; k <= shards; k++) {
     const src = built(name, k, shards);
     const p = JSON.parse(readFileSync(src, 'utf8'));
@@ -68,6 +91,7 @@ for (const name of names) {
     const body = JSON.stringify(p);
     writeFileSync(`${SHARD_DIR}/${file}`, body);
     entry.page = p.page;
+    for (const n of p.nodes) { if (n.sl) slotKeys.add(n.sl); if (n.sw) slotKeys.add(n.sw); }
     // A CONTENT FINGERPRINT per shard. The pipeline already refuses a spec older than
     // the code that produced it, but nothing said whether the Figma set on screen was
     // built from the payload now on disk — and after a long session that question came
@@ -79,6 +103,7 @@ for (const name of names) {
     offset += p.rows.length;
   }
   entry.variants = offset;
+  entry.description = describeSet(name, entry.page, slotKeys);
   manifest.push(entry);
   console.log(`${name.padEnd(9)} page=${entry.page.padEnd(9)} ${offset} variants in ${shards} shard(s)`);
 }
@@ -302,6 +327,7 @@ async function main () {
       // Match the sets already built by hand: DtNotice, DtBanner, DtRadio, DtLink…
       // Naming it after the page instead would leave the file with two conventions.
       set.name = 'Dt' + comp.page;
+      if (comp.description) set.description = comp.description;
       set.x = 0; set.y = 0;
       setId = set.id; variants = set.children.length;
       spreadAfterCombine = spreadsOf(firstWithEffects(set.children));

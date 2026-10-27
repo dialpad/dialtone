@@ -20,7 +20,7 @@ export default {
   component: 'DtNotice',
   label: 'Notice',
   page: 'Notice',
-  figmaSetId: '286:20666',
+  figmaSetId: '523:22898',
 
   axes: {
     // Each kind repaints the surface AND swaps the default icon glyph
@@ -105,6 +105,9 @@ export default {
   // separate piece of work — until then the icon is correct but not swappable, which the
   // build report says out loud rather than implying.
   slots: c => (c.action ? ['action'] : []),
+  // The action slot takes ANY content (its own doc offers a link as the example), so it is a
+  // native Figma slot with the exemplar button as its default content, not a one-value swap.
+  nativeSlots: ['action'],
   /**
    * WHAT EACH SLOT IS RENDERED WITH — A CHOSEN EXEMPLAR, NOT A DERIVED FACT.
    *

@@ -32,6 +32,21 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   // ─── lookups ────────────────────────────────────────────────────────────────
   const allVars = await figma.variables.getLocalVariablesAsync();
   const varByName = new Map(allVars.map(v => [v.name, v]));
+
+  // This file links the Dialtone Design Tokens library rather than owning these
+  // variables locally. D.tokKeys (from encode-build.mjs's REST lookup against the
+  // library's own source file) carries the import key for exactly the names this
+  // file can't resolve on its own — import and cache them the same way a local
+  // variable is found, so every binding below stays a plain varByName lookup.
+  for (const name of D.toks) {
+    if (!name || varByName.has(name)) continue;
+    const key = (D.tokKeys || {})[name];
+    if (!key) continue;
+    try {
+      varByName.set(name, await figma.variables.importVariableByKeyAsync(key));
+    } catch (e) { /* leave unresolved; reported by the missing-variables check below */ }
+  }
+
   const missing = D.toks.filter(t => t && !varByName.has(t));
   if (missing.length) throw new Error('missing variables: ' + missing.join(', '));
   
@@ -414,6 +429,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         kind: d.sl ? 'additive' : 'replacement',
         row: currentRow,
         boolLayerId: d.sl ? node.id : null,
+        // The slot's own node, for a native slot whose content is not an instance (see the
+        // native-slot block where each component is created).
+        rootId: node.id,
         swapLayerId: inst ? inst.id : null,
         swapDefaultId: inst ? (instanceMain[inst.id] || null) : null,
       });
@@ -1170,6 +1188,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   for (let i = 0; i < rows.length; i++) {
     const [combo, rootIdx] = rows[i];
     currentRow = (D.rowNames && D.rowNames[SLICE_START + i]) || String(SLICE_START + i);
+    const slotsBefore = slotLayers.length;
     const root = await build(rootIdx);
 
     // Convert the built frame INTO a component rather than copying its properties onto
@@ -1188,6 +1207,43 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     // on 30 Badge variants and left the set permanently errored.
     comp.name = (D.rowNames && D.rowNames[SLICE_START + i])
       || D.axisNames.map((a, k) => `${a}=${D.axisVals[k][combo[k]]}`).join(', ');
+
+    /**
+     * NATIVE SLOTS, created HERE and not after the variants are combined.
+     *
+     * Measured: `createSlot()` creates the component property too, and on a component that is
+     * already in a set each variant gets a property of its own (4 variants, 4 properties).
+     * On standalone components, same-named slots merge into ONE set property when combined.
+     *
+     * The slot goes INSIDE the wrapper that holds the exemplar, and the exemplar moves into
+     * it as its default content. The wrapper is untouched, so its layout and token bindings
+     * stay what the checks expect; the slot only adds a level.
+     */
+    for (const L of slotLayers.slice(slotsBefore)) {
+      if (!(D.nativeSlots || []).includes(L.slot)) continue;
+      // An exemplar instance when there is one, otherwise the slot's own node (plain content,
+      // like a collapsible's text).
+      const inst = await figma.getNodeByIdAsync(L.swapLayerId || L.rootId);
+      const host = inst && inst.parent;
+      if (!inst || !host) continue;
+      // Read BEFORE moving: a FILL child keeps filling, so the slot around it must too.
+      const sizeH = 'layoutSizingHorizontal' in inst ? inst.layoutSizingHorizontal : 'HUG';
+      const sizeV = 'layoutSizingVertical' in inst ? inst.layoutSizingVertical : 'HUG';
+      const slot = comp.createSlot();
+      slot.name = slotLabel(L.slot) + ' (Slot)';
+      host.insertChild(host.children.indexOf(inst), slot);
+      slot.layoutMode = 'HORIZONTAL';
+      slot.primaryAxisSizingMode = 'AUTO';
+      slot.counterAxisSizingMode = 'AUTO';
+      slot.fills = [];
+      slot.appendChild(inst);
+      if (sizeH === 'FILL') { slot.layoutSizingHorizontal = 'FILL'; inst.layoutSizingHorizontal = 'FILL'; }
+      if (sizeV === 'FILL') { slot.layoutSizingVertical = 'FILL'; inst.layoutSizingVertical = 'FILL'; }
+      // The exemplar is slot content now, not a swap target: no INSTANCE_SWAP for it.
+      L.native = true;
+      L.swapLayerId = null;
+      L.swapDefaultId = null;
+    }
 
     made.push(comp);
   }

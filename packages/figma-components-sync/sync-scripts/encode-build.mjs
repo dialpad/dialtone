@@ -12,8 +12,10 @@
  *   node encode-build.mjs <component>     -> build-data/<component>-build.json
  */
 import './pin-cwd.mjs';   // launch directory must not matter
+import 'dotenv/config';
 import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import { COMPONENTS } from './component-axes.mjs';
+import { fetchPublishedTokenKeys } from './library-tokens.mjs';
 
 const which = process.argv[2];
 if (!which) throw new Error('usage: encode-build.mjs <component>');
@@ -244,6 +246,17 @@ for (const full of Object.keys(ICON_LIB.ids || {})) {
  */
 const swapTargets = new Map();     // "component|variantName" -> node id
 const swapUnresolved = new Set();
+/**
+ * The variant name a swap target is stored AND looked up under, so the two cannot differ.
+ *
+ * An axis the config does not name takes its DEFAULT (first value). Button gained circle,
+ * link, linkKind and linkUnderline after Banner and Notice named their action variant, and
+ * a name built without them matched nothing: the action silently lost its swap.
+ */
+function swapVariantName (target, variant) {
+  const defaults = Object.fromEntries(Object.entries(target.axes).map(([a, vals]) => [a, vals[0]]));
+  return target.variantName({ ...defaults, ...variant });
+}
 async function resolveSwapTargets (nodes) {
   const wanted = new Map();        // component key -> Set(variantName)
   for (const n of nodes) {
@@ -251,7 +264,7 @@ async function resolveSwapTargets (nodes) {
     const cfgKey = n.slotSwapTo.component;
     const target = COMPONENTS[cfgKey];
     if (!target || !target.figmaSetId) { swapUnresolved.add(`${cfgKey}: no config or no figmaSetId`); continue; }
-    const vn = target.variantName(n.slotSwapTo.variant);
+    const vn = swapVariantName(target, n.slotSwapTo.variant);
     if (!wanted.has(cfgKey)) wanted.set(cfgKey, new Set());
     wanted.get(cfgKey).add(vn);
   }
@@ -307,7 +320,7 @@ function encodeNode (n) {
   // a rebuilt copy of the anatomy that was measured.
   if (n.slotSwapTo) {
     const t = COMPONENTS[n.slotSwapTo.component];
-    const hit = t && swapTargets.get(`${n.slotSwapTo.component}|${t.variantName(n.slotSwapTo.variant)}`);
+    const hit = t && swapTargets.get(`${n.slotSwapTo.component}|${swapVariantName(t, n.slotSwapTo.variant)}`);
     if (hit) out.ic = hit;
   }
 
@@ -509,7 +522,18 @@ const rows = spec.variants.map(v => [
 // know that '' means 'none', and a name Figma rejects poisons the whole component set.
 const rowNames = spec.variants.map(v => v.name);
 
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, toks, cols, svgs, imgs, nodes, rows, rowNames, dvars };
+// This file consumes the Dialtone Design Tokens library rather than owning the
+// variables locally (see library-tokens.mjs), so the plugin needs the import key
+// for any token this file cannot resolve on its own — restricted to names this
+// payload actually uses, not the library's full 837.
+const publishedKeys = await fetchPublishedTokenKeys(process.env.PERSONAL_ACCESS_TOKEN, process.env.TOKENS_FILE_KEY);
+const tokKeys = Object.fromEntries(toks
+  .filter(t => publishedKeys.has(t))
+  .map(t => [t, publishedKeys.get(t)]));
+
+// Slots the builder makes NATIVE (Figma SLOT) instead of an INSTANCE_SWAP, per the config.
+const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, toks, tokKeys, nativeSlots, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';
 const outPath = `sync-scripts/build-data/${which}${shardSuffix}-build.json`;
 writeFileSync(outPath, JSON.stringify(payload));

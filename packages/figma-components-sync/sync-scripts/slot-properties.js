@@ -18,9 +18,9 @@ async function applySlotProperties (set, slotLayers, textLayers) {
    * both what Figma supports and what a designer expects — toggling "Show start icon"
    * should not have to be repeated per size.
    *
-   * Named so the panel reads as instructions: a "Show start icon" toggle beside a
-   * "Start icon" swap. Naming both identically would put two rows with one label in the
-   * panel and leave nobody able to tell which is which.
+   * Named like the hand-built DtBadge and DtChip: a "Start icon" toggle beside a
+   * "Start icon choice" swap. The two rows share a stem but not a label, so nobody has to
+   * tell which is which.
    *
    * NOTE: no backticks anywhere in this block. It is generated INSIDE a template
    * literal, so a backtick here ends the template and the generator stops parsing —
@@ -31,22 +31,13 @@ async function applySlotProperties (set, slotLayers, textLayers) {
    * swap replaces it; a toggle there would offer to hide something the component
    * actually renders.
    */
-  // Built from code points rather than written literally: this block is generated inside
-  // a template literal, and an emoji pasted through several layers of quoting is one
-  // mojibake away from a property name nobody can match.
-  const EYE = String.fromCodePoint(0x1F441, 0xFE0F);   // eye, as the old library uses
-  const SWAP = String.fromCodePoint(0x21AA);           // rightwards arrow with hook
-  // The hand-built Dialtone library prefixes its property names by KIND — an eye for a
-  // visibility toggle, an arrow for an instance swap — so the panel reads at a glance
-  // and the two libraries look like one. Matching it here rather than inventing a
-  // second convention in the same file.
+  // Plain names, matching the hand-built DtBadge and DtChip: a visibility toggle is
+  // "Start icon", an instance swap is "Start icon choice". The earlier eye and arrow
+  // prefixes copied the old library, which is being replaced by that convention.
   //
-  // What is NOT matched is its direction words: the old Button says "Icon Left", this
-  // says "Start icon". Slot names come from the Vue API, which is already logical, and
+  // Direction words stay logical: slot names come from the Vue API, and
   // .claude/rules/logical-naming.md forbids introducing a physical name in anything new.
-  // A deliberate divergence, not an oversight.
-  const humanise = (k) => k.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase()
-    .replace(/^./, c => c.toUpperCase());
+  const humanise = slotLabel;
   const bySlot = {};
   for (const L of slotLayers) {
     bySlot[L.slot] = bySlot[L.slot] || { kind: L.kind, layers: [], swapDefault: null };
@@ -82,10 +73,10 @@ async function applySlotProperties (set, slotLayers, textLayers) {
     const label = humanise(slot);
     try {
       if (info.kind === 'additive') {
-        info.boolProp = set.addComponentProperty(EYE + ' ' + label, 'BOOLEAN', false);
+        info.boolProp = set.addComponentProperty(label, 'BOOLEAN', false);
       }
       if (info.swapDefault) {
-        info.swapProp = set.addComponentProperty(SWAP + ' ' + label, 'INSTANCE_SWAP', info.swapDefault);
+        info.swapProp = set.addComponentProperty(label + ' choice', 'INSTANCE_SWAP', info.swapDefault);
       }
     } catch (e) {
       info.error = (e && e.message) ? e.message : String(e);
@@ -102,6 +93,19 @@ async function applySlotProperties (set, slotLayers, textLayers) {
         if (info.swapProp && L.swapLayerId) {
           const n = await figma.getNodeByIdAsync(L.swapLayerId);
           if (n) n.componentPropertyReferences = Object.assign({}, n.componentPropertyReferences || {}, { mainComponent: info.swapProp });
+        }
+        // Named like the hand-built DtBadge and DtChip: the wrapper takes the slot's name and
+        // the instance inside it is "icon". Layer names come from the DOM class otherwise, and
+        // nothing looks a layer up by name.
+        if (L.swapLayerId) {
+          const inst = await figma.getNodeByIdAsync(L.swapLayerId);
+          const wrap = inst && inst.parent;
+          if (inst && wrap && wrap.type === 'FRAME' && wrap.children.length === 1) {
+            wrap.name = humanise(slot);
+            inst.name = 'icon';
+          } else if (inst) {
+            inst.name = humanise(slot);
+          }
         }
       } catch (e) {
         info.bindError = (e && e.message) ? e.message : String(e);
@@ -143,4 +147,12 @@ async function applySlotProperties (set, slotLayers, textLayers) {
     swapDefault: i.swapDefault || null, error: i.error || null, bindError: i.bindError || null,
   }));
   return { slots, texts };
+}
+
+/**
+ * "startIcon" becomes "Start icon". The one name a slot has in Figma: its property, and
+ * the layer that holds it (see build() in generic-builder.js).
+ */
+function slotLabel (key) {
+  return key.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, c => c.toUpperCase());
 }

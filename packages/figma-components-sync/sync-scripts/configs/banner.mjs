@@ -16,7 +16,7 @@ export default {
   component: 'DtBanner',
   label: 'Banner',
   page: 'Banner',
-  figmaSetId: '286:22915',
+  figmaSetId: '531:28095',
 
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of
@@ -75,6 +75,9 @@ export default {
   // two anatomies matched exactly. So the slot has to be filled for the axis to mean
   // anything, and left empty for the false half.
   slots: c => (c.showAction ? ['action'] : []),
+  // Takes any content, like Notice's action: a native Figma slot with the exemplar button as
+  // its default content, not a one-value swap.
+  nativeSlots: ['action'],
 
   // `icon` overrides the kind's default glyph (DtNoticeIcon renders <slot> with the
   // kindToIcon component as its fallback) — an instance swap in Figma, so it is only
