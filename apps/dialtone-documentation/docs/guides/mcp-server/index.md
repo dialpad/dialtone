@@ -184,7 +184,13 @@ Readable Markdown results preserve three named theme samples and token usage, la
 
 Discover Vue component candidates by UI element or name. Select a canonical component and use `get_component` to retrieve its available API contract.
 
-Component and documentation discovery reuse curated page keywords. `spinner` leads with `DtLoader`, `blank slate` with `DtEmptyState`, and `text field`, `text-field`, or `textbox` with `DtInput`. `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` exposes `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority, followed by curated keywords and incidental API matches. Documentation ranks exact titles before keywords and incidental prose.
+Component and documentation discovery reuse curated page keywords. `spinner` leads with `DtLoader`, `blank slate` with `DtEmptyState`, and `text field`, `text-field`, or `textbox` with `DtInput`. `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` exposes `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority. Longer requests recognize complete keyword phrases and public names, including regular plurals. Complete name, keyword and API-text matches lead before partial contextual candidates; separate keywords do not combine into a complete phrase. Text notes identify the matched keywords or names. Unrecognized context is not a supported feature claim. Documentation preserves named subjects and selects sections using their source evidence; keywords help discover pages.
+
+For a longer request:
+
+```json
+{ "query": "add a loader to the settings page" }
+```
 
 For example, call `search_components` with `{ "query": "spinner" }`, then `get_component` with `{ "component": "DtLoader" }`. Use `search_documentation` with `{ "query": "blank slate" }` for Empty State guidance. Keywords never become component export aliases: `get_component` with `{ "component": "spinner" }` returns no match.
 
