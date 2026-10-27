@@ -120,10 +120,14 @@ function clamp01(n: number): number {
   return Math.min(1, Math.max(0, n))
 }
 
-/** True when the colour has an alpha below 1, within rounding. */
+/**
+ * True when the colour has any alpha below 1. Strict on purpose: the caller
+ * flattens a translucent target, which is always correct, whereas treating a
+ * near-opaque one as opaque would compose it and let Figma keep its alpha.
+ */
 export function isTranslucent(color: string): boolean {
   const { a } = parseColor(color)
-  return a !== undefined && a < 0.999
+  return a !== undefined && a < 1
 }
 
 /**

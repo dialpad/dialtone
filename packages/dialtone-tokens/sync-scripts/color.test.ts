@@ -8,6 +8,10 @@ describe('isTranslucent', () => {
     expect(isTranslucent('#00000080')).toBe(true)
   })
 
+  it('is true for a near-opaque alpha', () => {
+    expect(isTranslucent('oklch(0.8 0.01 80 / 0.9995)')).toBe(true)
+  })
+
   it('is false for an opaque colour, with or without an alpha', () => {
     expect(isTranslucent('oklch(0.8 0.01 80)')).toBe(false)
     expect(isTranslucent('oklch(0.8 0.01 80 / 1)')).toBe(false)
