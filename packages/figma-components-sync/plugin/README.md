@@ -19,7 +19,7 @@ generating removes that class of bug entirely.
 ## One-time setup (about a minute)
 
 1. Open the **Figma desktop app** (browser Figma cannot load a local plugin).
-2. Open the scratch file: `https://figma.com/design/o9ouJpvThZclLpyGpsDG9z`
+2. Open the scratch file, the one whose key is `FILE_KEY` in this package's `.env`
 3. Menu → **Plugins → Development → Import plugin from manifest…**
    (if it rejects the manifest, re-run `build-plugin.mjs` — the manifest is generated,
    and an older one allowlisted an IP literal that Figma refuses)
