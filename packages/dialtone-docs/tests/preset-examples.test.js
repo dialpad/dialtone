@@ -103,10 +103,12 @@ describe('Combinator source delivery', () => {
     expect(() => presets.buildPresetExampleRecords(stale, { records, vuePackage })).toThrow(/stale/i);
     const malformed = fixture(); malformed.entries[0].disposition = 'misspelled';
     expect(() => presets.buildPresetExampleRecords(malformed, { records, vuePackage })).toThrow(/intermediate/i);
-    for (const version of [undefined, '0.0.0']) {
-      const corruptVersion = fixture(); corruptVersion.sourceVersions.combinator = version;
-      expect(() => presets.buildPresetExampleRecords(corruptVersion, { records, vuePackage }))
-        .toThrow(/source version/i);
+    for (const field of ['combinator', 'vueComponents']) {
+      for (const version of [undefined, '0.0.0']) {
+        const corruptVersion = fixture(); corruptVersion.sourceVersions[field] = version;
+        expect(() => presets.buildPresetExampleRecords(corruptVersion, { records, vuePackage }))
+          .toThrow(/intermediate|source version/i);
+      }
     }
     const changed = fixture(); changed.entries[0].source.hash = 'old-bank';
     expect(() => presets.buildPresetExampleRecords(changed, { records, vuePackage })).toThrow(/source/i);

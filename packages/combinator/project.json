@@ -75,8 +75,9 @@
         "{workspaceRoot}/packages/dialtone-vue/index.js",
         "{workspaceRoot}/packages/dialtone-vue/package.json",
         "{workspaceRoot}/packages/dialtone-vue/dist/component-documentation.json",
-        "{workspaceRoot}/packages/dialtone-icons/src/**/*.svg",
-        "{workspaceRoot}/packages/dialtone-icons/package.json",
+        "{workspaceRoot}/packages/dialtone-icons/*.{cjs,mjs,js,json}",
+        "{workspaceRoot}/packages/dialtone-icons/src/**/*.{cjs,mjs,js,json,svg,vue}",
+        "{workspaceRoot}/packages/dialtone-icons/vue/*.{cjs,mjs,js,json}",
         {
           "dependentTasksOutputFiles": "**/dist/**/*",
           "transitive": true

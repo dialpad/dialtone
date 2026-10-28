@@ -24,7 +24,8 @@ export function buildPresetExampleRecords(report, { records, vuePackage }) {
   const currentHash = hash(JSON.stringify(report.inputs.map(path => [path, hash(read(path))])));
   if (currentHash !== report.inputsHash) throw new Error('Stale preset intermediate; rerun dialtone-combinator:generate-examples');
   const sourcePackage = JSON.parse(read('packages/combinator/package.json'));
-  if (report.sourceVersions.combinator !== sourcePackage.version) {
+  if (report.sourceVersions.combinator !== sourcePackage.version
+    || report.sourceVersions.vueComponents !== vuePackage.version) {
     throw new Error('Preset source version mismatch; rerun dialtone-combinator:generate-examples');
   }
   const ids = new Set();
