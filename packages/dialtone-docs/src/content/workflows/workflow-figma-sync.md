@@ -2,9 +2,9 @@
 type: workflow
 category: workflows
 keywords: [figma, figma-sync, sync-scripts, design-tokens, figma-variables, style-dictionary, figma-api, personal-access-token, tokens-studio]
-ai_summary: How Dialtone tokens reach Figma variables — the resolver, the scope policy, the CSS check, how to run it locally, and how CI triggers it.
-last_updated: 2026-08-27
-related_packages: [dialtone-tokens]
+ai_summary: How Dialtone tokens reach Figma variables, how to run it locally and in CI, and where the separate component sync fits.
+last_updated: 2026-10-28
+related_packages: [dialtone-tokens, figma-components-sync]
 ---
 
 # Figma Sync Workflow
@@ -138,6 +138,14 @@ Two more things change on the way across:
 
 - **Font families.** A token holds a CSS stack. Figma needs one resolvable family, so the stack is mapped to the face it renders as on macOS.
 - **Colours outside sRGB.** Tokens are authored in OKLCH, which is wider than the sRGB a Figma variable stores. Those values are gamut-mapped by clipping each channel independently — measured against Chromium, that matches what a browser actually paints for an out-of-gamut `oklch()` far more often than reducing chroma while holding lightness and hue does.
+
+## Components
+
+Component variant sets are a separate pipeline in `packages/figma-components-sync`. It renders the real Vue components in a headless browser, reads the browser's own computed styles, and builds matching Figma component sets from that, bound to the same variables this sync writes. Code is again the source of truth.
+
+Unlike the token sync it does not run in CI. Figma only lets a person launch a plugin, so one step is manual: run the "Dialtone Components Sync" dev plugin in the scratch file and click **Build**. Checks then compare the result against the browser (values, token bindings, a raster screenshot diff), and the check output is what a pull request records.
+
+The variables it binds come from the published library, so a token change reaches components only after this sync has run and the library has been republished. For how to run it, what each check catches and its known limits, see the [package README](https://github.com/dialpad/dialtone/blob/staging/packages/figma-components-sync/sync-scripts/README.md).
 
 ## The other direction
 
