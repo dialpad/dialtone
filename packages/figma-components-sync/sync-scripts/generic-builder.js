@@ -293,15 +293,19 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
    * not worth chasing either: the real spinner rotates continuously in use, so a few degrees
    * of static-pose rotation isn't visible the way a wrong width or wrong proportions are.
    *
-   * Colour is a LITERAL, not bound to a variable: Figma's plugin API has no per-gradient-stop
-   * variable binding, only whole-SOLID-paint binding. Traded away deliberately — this one
-   * decorative fill won't re-tint on a mode switch — rather than leave the far more visible
-   * width/fade mismatch unfixed while chasing a binding path that does not exist.
+   * The OPAQUE stops bind to the glyph colour's variable when there is one, so the spinner
+   * follows a mode switch: the Plugin API's ColorStop carries `boundVariables`, which this
+   * comment once claimed did not exist (the glyph stayed 37,35,32 in dark mode and the
+   * verifier reported it, 8 findings). The transparent stops stay literal: a bound stop takes
+   * the variable's own alpha, which would fill in the fade the gradient exists to draw.
    */
-  const gradientFill = (ccSpec) => {
+  const gradientFill = (ccSpec, bound) => {
     const c = D.cols[ccSpec[0]];
     const rgb = { r: c[0], g: c[1], b: c[2] };
-    const stop = (position, a) => ({ position, color: { ...rgb, a } });
+    const stop = (position, a) => ({
+      position, color: { ...rgb, a },
+      ...(bound && a === 1 ? { boundVariables: { color: bound } } : {}),
+    });
     return {
       type: 'GRADIENT_ANGULAR',
       gradientTransform: [[1, 0, 0], [0, 1, 0]],
@@ -548,7 +552,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         node.fills = [];
         for (const v of node.findAll(n => 'fills' in n)) {
           if (v.type === 'FRAME' || v.type === 'GROUP') v.fills = [];
-          else v.fills = [d.g ? gradientFill(d.cc) : p];
+          else v.fills = [d.g ? gradientFill(d.cc, p.boundVariables && p.boundVariables.color) : p];
         }
       }
       return node;

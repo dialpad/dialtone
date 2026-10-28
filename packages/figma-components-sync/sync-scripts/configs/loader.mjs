@@ -14,7 +14,7 @@
  */
 export default {
   component: 'DtLoader', label: '', page: 'Loader',
-  figmaSetId: '421:16401',
+  figmaSetId: '575:12434',
 
   axes: {
     // The full ICON_SIZE_MODIFIERS scale, which is what the prop validates against.

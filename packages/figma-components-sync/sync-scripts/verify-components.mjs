@@ -432,6 +432,22 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox) {
         // Strokes count too: a line icon carries its colour there, and the question is
         // whether the colour is present at all, not which property holds it.
         for (const f of [...(n.fills || []), ...(n.strokes || [])]) {
+          /**
+           * A GRADIENT PAINT IS PAINT. paintRGBA has no single colour for one, so DtLoader's
+           * spinner (a gradient from the glyph colour out to transparent) read as "no paint
+           * anywhere" on all 16 of its checks while the raster showed it drawn correctly. The
+           * glyph colour has to appear as one of its stops, which is what is compared.
+           */
+          if (f && typeof f.type === 'string' && f.type.startsWith('GRADIENT')) {
+            for (const st of (f.gradientStops || [])) {
+              const bv = st.boundVariables?.color;
+              const v = bv ? varValue(bv.id, MODE) : st.color;
+              if (!v || !('r' in v)) continue;
+              const a = (v.a ?? 1) * (f.opacity ?? 1);
+              if (a >= 0.005) paints.push({ r: v.r, g: v.g, b: v.b, a, bound: !!bv });
+            }
+            continue;
+          }
           const p = paintRGBA(f, MODE);
           if (p && (p.a ?? 1) >= 0.005) paints.push(p);
         }
