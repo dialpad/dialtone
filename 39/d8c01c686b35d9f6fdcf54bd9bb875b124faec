@@ -1,0 +1,36 @@
+packages/dialtone-docs/project.json
+  s_7f1d1d64baa803::t_29dec3a860c1ff 10-11
+packages/dialtone-docs/package.json
+  s_7f1d1d64baa803::t_29dec3a860c1ff 15
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_8843cb09b812a8 37
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_29dec3a860c1ff 66-67
+packages/dialtone-docs/tests/documentation-examples.test.js
+  s_7f1d1d64baa803::t_8843cb09b812a8 1,6,11,13,44-59
+  s_7f1d1d64baa803::t_c76309a346c602 60-61
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_29dec3a860c1ff 32,65,126
+packages/dialtone-docs/src/generators/documentation-examples.mjs
+  s_7f1d1d64baa803::t_29dec3a860c1ff 2,108-112
+scripts/retrieval/validate-examples.mjs
+  s_7f1d1d64baa803::t_29dec3a860c1ff 17
+pnpm-lock.yaml
+  s_7f1d1d64baa803::t_89af712a3c1cdf 654-656
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "39d8c01c686b35d9f6fdcf54bd9bb875b124faec",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

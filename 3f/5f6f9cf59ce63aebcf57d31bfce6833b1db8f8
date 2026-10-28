@@ -1,0 +1,33 @@
+.agents/resources/rules/vue-components.md
+  s_7f1d1d64baa803::t_1097af3a128dbf 10
+.claude/rules/vue-components.md
+  s_7f1d1d64baa803::t_37655cfb04db98 17
+packages/dialtone-docs/src/content/architecture/architecture-build-system.md
+  s_7f1d1d64baa803::t_bc749966a1ab67 260,331
+packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md
+  s_c63ae579d2b70f::t_edae7baf46df85 56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3f5f6f9cf59ce63aebcf57d31bfce6833b1db8f8",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_c63ae579d2b70f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13b33-d487-7a93-82f2-0c4fcd158093",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

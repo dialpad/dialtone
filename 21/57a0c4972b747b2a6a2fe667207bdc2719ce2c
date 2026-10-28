@@ -1,0 +1,52 @@
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-checkbox-radio.vue
+  s_93aeca3805a6ee::t_601ba47aecc38e 33
+  s_93aeca3805a6ee::t_e13a9155b7fa85 1-32,34-51
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-empty-state.vue
+  s_93aeca3805a6ee::t_e7daa8e82c8a48 1-20
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-banner-toast.vue
+  s_93aeca3805a6ee::t_e3bfc92d6a10b8 1-2,9-10,12-15,17-25,28,30-41
+  s_93aeca3805a6ee::t_575c28d6ecb634 16
+  s_93aeca3805a6ee::t_09cb3355bf220e 42-49
+  s_93aeca3805a6ee::t_ba218eb1b8c51d 3-8,11,26-27,29
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-keyboard-shortcut.vue
+  s_93aeca3805a6ee::t_1871c79630b0ff 1-16
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-pagination.vue
+  s_93aeca3805a6ee::t_141a7d908f8ab8 1-20
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-filter-pill.vue
+  s_93aeca3805a6ee::t_f83e8c0083a4d6 1,5-30
+  s_93aeca3805a6ee::t_69a6488d1d1914 2-4
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-button.vue
+  s_93aeca3805a6ee::t_4380a0686739a0 32-40
+apps/dialtone-documentation/docs/guides/migration/visual-changes/index.md
+  s_93aeca3805a6ee::t_6bbeb9d557a0b5 110
+  s_93aeca3805a6ee::t_29e34a5138d5de 210-269
+  s_93aeca3805a6ee::t_ea59ee196e7979 180-199
+  s_93aeca3805a6ee::t_5f38d748009ffa 136-143
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-select.vue
+  s_93aeca3805a6ee::t_7b164566b56d50 1-10,12,30-32,45-47
+  s_93aeca3805a6ee::t_f38b955d377980 13-16,33
+  s_93aeca3805a6ee::t_7d4efab72a5432 11,17-29,34-44
+apps/dialtone-documentation/scripts/visual-guide/generate.mjs
+  s_93aeca3805a6ee::t_889cf0ffc45ee3 67-74
+  s_93aeca3805a6ee::t_3fc6582f9759f0 75
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-presence.vue
+  s_93aeca3805a6ee::t_ff765301d70893 1-36
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-breadcrumbs.vue
+  s_93aeca3805a6ee::t_0fa0172d9f1d05 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "2157a0c4972b747b2a6a2fe667207bdc2719ce2c",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

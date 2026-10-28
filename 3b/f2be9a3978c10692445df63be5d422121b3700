@@ -1,0 +1,21 @@
+.claude/rules/vue-components.md
+  s_7f1d1d64baa803::t_8072b026c85130 43
+packages/dialtone-docs/src/content/architecture/architecture-build-system.md
+  s_7f1d1d64baa803::t_57b0ec07d90cf3 260
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3bf2be9a3978c10692445df63be5d422121b3700",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
