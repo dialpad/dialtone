@@ -57,6 +57,19 @@ describe('Combinator source delivery', () => {
   });
 
 
+  it('imports the Vue illustration wrapper from its component export, not generated icons', () => {
+    const report = fixture();
+    const filePath = 'packages/combinator/src/variants/variants_illustration.js';
+    report.entries = [{ ...report.entries[0], id: 'examples/presets/DtIllustration/default',
+      component: 'DtIllustration', template: '<dt-illustration name="nothing-to-see-here" />', imports: ['DtIllustration'],
+      source: { kind: 'combinator-preset', filePath, hash: hash(read(filePath)) } }];
+    const page = { ...records[0], docTitle: 'DtIllustration', docId: 'components/illustration' };
+    const result = presets.buildPresetExampleRecords(report, { records: [page], vuePackage }).records[0];
+    expect(result.content).toContain('import { DtIllustration } from \'@dialpad/dialtone/vue\'');
+    expect(result.content).not.toContain('import { DtIllustration } from \'@dialpad/dialtone-icons/vue\'');
+    expect(result.example.components.map(component => component.canonicalName)).toEqual(['DtIllustration']);
+  });
+
   it('follows source addition, payload edits, rename and removal without another membership list', () => {
     const report = fixture();
     report.entries = [{ ...report.entries[0], preset: 'new / preset (wide)', id: 'examples/presets/DtLoader/new%20%2F%20preset%20%28wide%29' }];

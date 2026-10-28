@@ -142,7 +142,7 @@ function assertDeclaredUsage(id, template, definition) {
   if (missing.length) throw new Error(`Example ${id} uses unconfigured ${[...new Set(missing)].join(', ')}`);
 }
 
-function publicIdentities(vuePackage) {
+export function publicIdentities(vuePackage) {
   const vueRoot = resolve(root, 'packages/dialtone-vue');
   publicExports ??= readPublicComponentExports(vueRoot);
   return [...publicExports].map(([file]) => withComponentIdentity({ displayName: '' }, file, publicExports, vueRoot, vuePackage).identity);

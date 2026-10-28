@@ -4,7 +4,7 @@ import { resolve, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
 import { presetExampleId } from '../../../../scripts/lib/preset-example-id.mjs';
-import { assembleExampleRecord } from './documentation-examples.mjs';
+import { assembleExampleRecord, publicIdentities } from './documentation-examples.mjs';
 import { assertTemplateBindings } from './example-template.mjs';
 
 const root = fileURLToPath(new URL('../../../../', import.meta.url));
@@ -25,6 +25,8 @@ export function buildPresetExampleRecords(report, { records, vuePackage }) {
   const sourcePackage = JSON.parse(read('packages/combinator/package.json'));
   const ids = new Set();
   const delivered = [];
+  const publicComponents = new Set(publicIdentities(vuePackage)
+    .filter(identity => identity.kind === 'public').map(identity => identity.canonicalName));
   const dispositions = new Set(['eligible/setup-needed', 'unresolved', 'policy-excluded', 'deprecated']);
   const classified = report.entries.map(entry => {
     if (!entry || !['id', 'component', 'preset'].every(key => typeof entry[key] === 'string' && entry[key])
@@ -61,8 +63,8 @@ export function buildPresetExampleRecords(report, { records, vuePackage }) {
       entry.reasons.push(error.message);
       continue;
     }
-    const icons = entry.imports.filter(name => /^Dt(?:Icon|Illustration)/.test(name));
-    const components = entry.imports.filter(name => !icons.includes(name));
+    const components = entry.imports.filter(name => publicComponents.has(name));
+    const icons = entry.imports.filter(name => !publicComponents.has(name));
     const definition = {
       components, icons, directives: [], sourceKind: 'combinator-preset', preset: entry.preset,
       responsibilities: `Initial-state fixture from Combinator copy. No application update handlers or persistence are supplied. ${(entry.requiredContext ?? []).join(' ')}`,

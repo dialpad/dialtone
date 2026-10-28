@@ -52,7 +52,7 @@ test('does not carry stale human proof or accept a human pass from a machine rep
 
 function staticFixture() {
   const { record, report } = fixture();
-  const dependencies = { '@dialpad/dialtone': '10.5.1' };
+  const dependencies = { '@dialpad/dialtone': record.example.profile.dependencies['@dialpad/dialtone'] };
   const files = { 'example.html': '<div class="d-ww-normal">Wrap</div>\n' };
   const html = { id: 'examples/utility-fixture', content: '## example.html\n\n```html\n' + files['example.html'] + '```', example: { representation: 'static-html', profile: { id: 'dt10-pinned', dependencies }, validation: { payloadHash: payloadHash({ files, dependencies }) } } };
   report.verification = 'lookup-data-only';

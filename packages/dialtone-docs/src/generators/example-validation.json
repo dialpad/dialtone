@@ -245,6 +245,15 @@
       "checked": [
         "DtLoader.size"
       ]
+    },
+    "examples/presets/DtIllustration/default": {
+      "run": "dt10-pinned-1e7a4819e6b36a0b",
+      "payloadHash": "bd0a7346ec53bf95092c9ebc10de1440ec4bebcdbbfca5957e83a7bb7f3dac7f",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtIllustration.name"
+      ]
     }
   }
 }
