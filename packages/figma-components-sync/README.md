@@ -24,20 +24,27 @@ See [`sync-scripts/README.md`](sync-scripts/README.md) for the full pipeline —
 run works end to end, what each check actually catches, and the failure modes this
 project has already hit once.
 
-## Provenance
+## Status
 
-Ported from a working, uncommitted spike (26 components, 4,569 variants, 51/51 checks
-passing as of its last run) that lived only in one branch's working directory and was
-never previously tracked in this repo — this package is that same code, given a real
-home. The excluded parts: three `audit-*.mjs` scripts the original README flagged as
-"look maintained and are not — imported by nothing" (not ported; saved out of the repo
-for reference), and files that already have a proper, committed home in
-`packages/dialtone-tokens/sync-scripts/` (`color.ts`, `figma_api.ts`, `token_*.ts`,
-`transform.ts`, `utils.ts`, `sync_*.ts`) rather than being duplicated here — nothing in
-`sync-scripts/` ever imported them, so nothing needed rewiring.
+Not in CI: it needs a real browser, a Figma desktop session (the plugin can only be launched by
+a person) and a scratch file. Reviewers rely on the check output recorded in the PR.
 
-**Before running this against a real Figma file**: the two Figma personal access tokens
-used during the original spike were pasted into a chat transcript and need rotating —
-treat any credential from that era as already compromised, and issue fresh ones for the
-`.env` this package reads (`PERSONAL_ACCESS_TOKEN`, `FILE_KEY`), never reusing the old
-values.
+Built with the current model and checked clean: Button, ButtonLink, Notice, Banner,
+Collapsible and Loader. The other registered configs predate that model (older property
+names, no native slots, no token-library binding) and need a rebuild and a check before they
+are trusted. `mode_island` is registered and deliberately unbuilt.
+
+## Setup
+
+The pipeline reads a gitignored `.env` in this package. Never commit it or paste a token
+into a chat, a PR or a log.
+
+| Variable | What |
+| --- | --- |
+| `PERSONAL_ACCESS_TOKEN` | A Figma personal access token that can read files and variables |
+| `FILE_KEY` | The scratch file the components are built into. Nobody's source of truth |
+| `TOKENS_FILE_KEY` | The file that holds the published Dialtone variables (the unrestricted collection). Library variables are resolved from it by name and imported by key |
+
+Files that already have a committed home in `packages/dialtone-tokens/sync-scripts/`
+(`color.ts`, `figma_api.ts`, `token_*.ts`, `transform.ts`, `utils.ts`, `sync_*.ts`) are not
+duplicated here.

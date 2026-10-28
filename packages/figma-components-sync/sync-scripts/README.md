@@ -3,13 +3,16 @@
 Builds Figma component sets from the real rendered Dialtone components, then proves the result
 matches. The codebase is the source of truth. Figma is the output.
 
-26 components, 4,569 variants, each measured in light and dark. `mode_island` is registered
-and deliberately unbuilt. It renders both modes at once, which needs per-node variable modes
-(see `docs/plans/figma-sync-followups.md`).
+Each variant is measured in light and dark. Button (4,160 variants), ButtonLink (560), Notice,
+Banner, Collapsible and Loader are built with the model described here and checked clean.
+The other registered configs predate it and need a rebuild and a check before they are
+trusted. `mode_island` is registered and deliberately unbuilt: it renders both modes at once,
+which needs per-node variable modes.
 
 Not in CI. It needs a browser, a Figma PAT, and a scratch file that is nobody's source of
 truth. Credentials live in `packages/figma-components-sync/.env` (`PERSONAL_ACCESS_TOKEN`,
-`FILE_KEY`), mode 600, gitignored.
+`FILE_KEY`, `TOKENS_FILE_KEY`), mode 600, gitignored. See the package README for what each
+one is.
 
 ## The one command
 
@@ -267,14 +270,14 @@ flowchart TD
     MERGED -->|throws MERGE_INVARIANT| AXIS["<b>presence as a variant axis</b><br/>each state measured in its own right"]
     MERGED -->|builds| BOOL["<b>merged</b><br/>presence as a BOOLEAN property"]
 
-    AXIS --> AXISW["Button, Notice, Banner<br/><i>560 → 2240 variants,<br/>buys exactness + single-icon combos</i>"]
+    AXIS --> AXISW["Button<br/><i>icons stay variants: padding changes<br/>by 2px a side, which no property can do</i>"]
     BOOL --> BOOLW["Badge<br/><i>one set, toggled in the panel</i>"]
 
     KIND{"does the component draw<br/>its own default there?"}
     AXISW --> KIND
     BOOLW --> KIND
-    KIND -->|no, nothing renders when empty| ADD["<b>additive</b><br/>👁️ BOOLEAN + ↪ INSTANCE_SWAP"]
-    KIND -->|yes| REP["<b>replacement</b><br/>↪ INSTANCE_SWAP only<br/><i>a toggle would offer to hide<br/>something the component renders</i>"]
+    KIND -->|no, nothing renders when empty| ADD["<b>additive</b><br/>BOOLEAN (Start icon) + INSTANCE_SWAP (Start icon choice)"]
+    KIND -->|yes| REP["<b>replacement</b><br/>INSTANCE_SWAP only<br/><i>a toggle would offer to hide<br/>something the component renders</i>"]
 ```
 
 The guard is the decision. A Figma property can hide a layer and swap an instance; it cannot
@@ -283,12 +286,13 @@ fills, the merged model cannot express it and `--merged` refuses to build.
 
 **Slot presence as a variant axis.** Add the slot names to `axes` as `[false, true]`, give the
 config a `slots(combo)` function, and extend `variantName`. Each state is measured in its own
-right. No merge, no hidden layers. This is what Button, Notice and Banner use.
+right. No merge, no hidden layers. This is what Button uses for its icons.
 
 **Merged, presence as a BOOLEAN property.** `build-spec --merged` measures each variant twice
 and emits one tree: shared nodes keep their base geometry, inserted subtrees carry their filled
 geometry and a slot marker. The builder places the content hidden, and after
-`combineAsVariants` attaches `👁️ <Slot>` (BOOLEAN → `visible`) to the SET. Only Badge uses this.
+`combineAsVariants` attaches a `<Slot>` BOOLEAN (→ `visible`) to the SET, named like the
+hand-built components ("Start icon", with its swap "Start icon choice"). Only Badge uses this.
 
 `button.less` cuts x-padding by 2px a side when an icon is present, so all 560 Button
 combinations diverged and the guard refused the build, which is how Button ended up on the
@@ -308,12 +312,41 @@ A layer bound to an `INSTANCE_SWAP` property shows that property's single value 
 variant** of the set. Per-variant content and a panel property are mutually exclusive for the
 same layer. Proven in both orderings: bind-then-swap and swap-then-bind.
 
-So a swap property is exactly right where the content is identical in every variant (Badge and
-Button both use `general/close`) and a trade where it is not. DtNotice draws five different kind
-glyphs and two action-button kinds; binding them means the set shows one of each, changeable
-from the panel. That trade was taken deliberately, and `run-batch` prints it on every build,
-because no numeric check sees it. SVG internals are never compared shape-for-shape, so a bell
-where the browser draws an alert-circle produces zero findings. Only the raster notices.
+So one swap property is exactly right where the content is identical in every variant (Badge
+and Button both use `general/close`). Where it differs, binding every layer to one property made
+DtNotice show a single glyph for all five kinds: 64 of 80 icons wrong, and no numeric check saw
+it, because SVG internals are never compared shape-for-shape. Only the raster did.
+
+So where the default differs, the slot gets **one swap property per default**, each bound only
+to the layers that want it and named for the axis value that explains it: `Icon choice ·
+critical`, `Icon choice · info`. `slot-properties.js` finds that axis (`splitByAxis`): the one
+where every value maps to exactly one default, fewest values winning. When no single axis
+separates the defaults (the icon depends on a combination), it falls back to one property with
+one default, and `run-batch` prints how many layers that leaves wrong.
+
+### Native slots for free-form content
+
+Where a slot holds arbitrary content (Notice and Banner's `action`, Collapsible's `content`),
+list it in the config's `nativeSlots` and it becomes a Figma `SLOT` node a designer can drop
+anything into, instead of a swap property that can only pick one component. The measured
+content stays inside the slot as the default. Two facts cost a build each:
+
+- Same-named slots merge into one set-level slot property only when the slots exist **before**
+  `combineAsVariants`, so the builder creates them per component first.
+- The checks treat a `SLOT` node as transparent (one child is compared as that child) and skip
+  a slot holding a declared exemplar, for the reason in the next section.
+
+### Names follow the hand-built components
+
+Properties read "Start icon" (a visibility toggle) and "Start icon choice" (the swap), and the
+layers they bind are named "Start icon" with an inner `icon`. A set's description is generated
+from its axes and slots (`describeSet` in `build-plugin.mjs`). Direction words stay logical
+(`start`/`end`), as `.claude/rules/logical-naming.md` requires.
+
+DtButton's link mode is its own set, **DtButtonLink** (`configs/button_link.mjs`, which pins
+`link: true`). In code it is still one component, but in Figma it has no `kind`, `importance`,
+icons or `circle`, and folding it into Button added three axes and took the set from 4,160
+variants to 4,720. The two are different design surfaces.
 
 ### Slot content is declared, not inferred
 
@@ -472,8 +505,19 @@ These appear in every run's allowances. A divergence nobody can see is the failu
 - Computed colours (`color-mix()`, relative colour, an oklch hue expression) have no token, so
   they get a synthesised variable in `Dialtone Derived (synthesised by sync)` with both modes
   measured. A literal cannot follow the mode.
-- A swap property shows one value across the set. See above.
+- A swap property shows one value across the variants bound to it, so a slot whose default
+  differs gets one property per default. See above.
 - A declared exemplar's internals are not compared against the render.
+- Figma sets text slightly wider than Chrome (`SF Pro Text` against the system font Chrome
+  renders): about 5% on bold, 3% on regular. Text width is reported, not failed. It shows as a
+  tight gap where a fixed-width text frame overflows into it.
+- An in-gamut colour that differs by dE00 <= 1.0 is accepted and recorded. The built CSS rounds
+  an alpha-modified `oklch` token to two decimals (`oklch(0.91 0.09 165 / 0.45)`) while Figma
+  holds the exact primitive (`oklch(0.9148 0.0923 165.26)`), a difference of 1-2 in 255. This is
+  rounding, not gamut mapping: both colours are inside sRGB.
+- A gradient paint is checked by its stops: the glyph colour must appear as one. DtLoader's
+  opaque stops are bound to the glyph colour variable; the transparent ones stay literal,
+  because a bound stop takes the variable's own alpha and would fill in the fade.
 - In a merged build's filled sub-pass, REST reports a frame holding a hidden slot layer at its
   DEFAULT size, so its grown box is covered by `slotAxisSizing` instead of numerically.
 - `insetEnd` is the one comparison the negative control cannot exercise. Its precondition needs
@@ -503,13 +547,8 @@ These appear in every run's allowances. A divergence nobody can see is the failu
 | `figma-variants.mjs` | fetch a set's variants with their full subtrees |
 | `negative-control.mjs` | check the checks |
 | `visual-compare.mjs` | look at it |
-| `audit-variables.mjs`, `audit-styles.mjs`, `audit-text-styles.mjs` | the token layer, separately. **Imported by nothing**: 1055 lines that look maintained and are not. Wire them into `check-all` or delete them |
-| `build-data/` | generated; see its README |
+| `build-data/` | generated and gitignored: specs, payloads, shards, build fingerprints, contact sheets |
 | `superseded/` | retired, kept for the reasoning |
 
-The full history is `docs/plans/2026-08-20-figma-tokens-experiment-log.md`: every bug, with the
-evidence that found it and the reasoning that fixed it. When a line here looks arbitrary, that
-file says why it is not.
-
-`docs/plans/figma-sync-followups.md` is the worklist: Dialtone-side issues this sync found,
-components deliberately deferred and why, and the housekeeping above.
+The guards table above carries the reasoning behind each check. When a line here looks
+arbitrary, it was added after the failure it names.
