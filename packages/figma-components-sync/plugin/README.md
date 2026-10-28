@@ -32,7 +32,7 @@ once; it survives restarts.
 ## Each run — one command
 
 ```
-node packages/figma-components-sync/sync-scripts/run-batch.mjs toggle badge chip button avatar
+node packages/figma-components-sync/sync-scripts/run-batch.mjs toggle badge button avatar
 ```
 
 That does everything except the click:
@@ -76,7 +76,7 @@ of this.
 1. **Regenerate the payloads** for whatever you want built (from the repo root):
 
    ```
-   node packages/figma-components-sync/sync-scripts/build-plugin.mjs toggle badge chip button avatar
+   node packages/figma-components-sync/sync-scripts/build-plugin.mjs toggle badge button avatar
    ```
 
    Named components only — omitting the list falls back to an older default set. It
@@ -116,12 +116,12 @@ of this.
 
 5. **Wire the set IDs into the configs** — the checks need them:
    - `sync-scripts/configs/<name>.mjs` → `figmaSetId` (avatar)
-   - `sync-scripts/component-axes.mjs` → `figmaSetId` (button, badge, link, toggle, chip)
+   - `sync-scripts/component-axes.mjs` → `figmaSetId` (button, badge, link, toggle)
 
 6. **Verify.** This is the part that matters:
 
    ```
-   node packages/figma-components-sync/sync-scripts/check-all.mjs toggle badge chip button avatar
+   node packages/figma-components-sync/sync-scripts/check-all.mjs toggle badge button avatar
    ```
 
    Three passes per component — rendered values in both light and dark, token identity,

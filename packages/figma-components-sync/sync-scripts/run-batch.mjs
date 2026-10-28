@@ -1,7 +1,7 @@
 /**
  * One command for a whole build batch. The only manual step left is clicking Run.
  *
- *   node sync-scripts/run-batch.mjs toggle badge chip button avatar
+ *   node sync-scripts/run-batch.mjs toggle badge button avatar
  *
  * WHAT IS AND IS NOT AUTOMATABLE
  * A Figma dev plugin can only be launched from the desktop UI — there is no API to

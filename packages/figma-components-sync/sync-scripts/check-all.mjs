@@ -19,7 +19,7 @@
  * of the label, and nothing was looking at the toggled state.
  *
  *   node sync-scripts/check-all.mjs              # everything
- *   node sync-scripts/check-all.mjs badge chip   # just these
+ *   node sync-scripts/check-all.mjs badge button   # just these
  *   node sync-scripts/check-all.mjs --light-only # faster while iterating
  *
  * Deliberately NOT a CI job yet: it needs a browser, a Figma PAT, and a scratch file

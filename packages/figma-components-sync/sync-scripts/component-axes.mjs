@@ -76,64 +76,6 @@ const BUILT_IN = {
     // nobody ships. See D-15.
     rootClass: 'd-g-200',
   },
-  chip: {
-    component: 'DtChip', label: 'Chip', page: 'Chip', figmaSetId: '286:14642', figmaMergedSetId: '523:7999',
-    axes: {
-      size: [100, 200, 300],
-      disabled: [false, true],
-      showClose: [true, false],
-      // No prop behind this: the `icon` and `avatar` slots are mutually exclusive
-      // (v-else-if). The avatar changes the label's OWN padding (4px left instead of 8), which
-      // no Figma component property can do, so it stays a variant. The icon does not: it
-      // carries its own 4px right padding and the label keeps 8/8, so it is a slot (below).
-      leading: ['none', 'avatar'],
-      // Label states and CLOSE-BUTTON states are separate: the close button's
-      // hover/active/focus rules are NOT gated on `interactive`, so they are
-      // reachable on a static chip that merely has a close button.
-      state: ['default', 'hover', 'active', 'focus', 'closeHover', 'closeActive', 'closeFocus'],
-    },
-    // `interactive` is deliberately NOT an axis. Measured across all 36 remaining
-    // combinations, interactive=false and interactive=true are byte-identical at
-    // rest — same computed styles, same boxes, same children. Its only effects are
-    // the element tag, the cursor, and enabling the label's interaction states.
-    // Including it would put 36 pairs of pixel-identical variants in the picker.
-    invalid: c => {
-      const labelState = ['hover', 'active', 'focus'].includes(c.state);
-      const closeState = c.state.startsWith('close');
-      if (labelState && c.disabled === true) return true;          // pointer-events: none
-      if (closeState && (c.disabled === true || c.showClose === false)) return true;
-      return false;
-    },
-    variantName: c => `size=${c.size}, disabled=${c.disabled}, showClose=${c.showClose}, leading=${c.leading}, state=${c.state}`,
-    // interactive is forced true whenever a label state is under test, since that is
-    // the only way the state is reachable at all.
-    props: c => ({
-      size: Number(c.size),
-      disabled: c.disabled,
-      showClose: c.showClose,
-      interactive: ['hover', 'active', 'focus'].includes(c.state),
-    }),
-    slots: c => (c.leading === 'avatar' ? ['avatar'] : []),
-    // The icon is added in a MERGED build's second render, which becomes a Start icon
-    // boolean and swap. The avatar variants are excluded: icon and avatar are mutually
-    // exclusive, so there is nothing for the boolean to show.
-    slotPass: ['icon'],
-    slotInvalid: c => c.leading === 'avatar',
-    // A pointer press cannot happen without hover, so `active` means hover+active.
-    // It is not cosmetic: on the close button, :active alone paints a purple glyph
-    // while hover+active paints near-black, because .d-chip__close:hover and :active
-    // have identical specificity and hover is later in source. :active alone is only
-    // reachable by keyboard (Space/Enter on a focused button) — a real but far rarer
-    // state, deliberately not given its own variant.
-    pseudo: (c) => {
-      const map = { hover: ['hover'], active: ['hover', 'active'], focus: ['focus-visible'],
-                    closeHover: ['hover'], closeActive: ['hover', 'active'], closeFocus: ['focus-visible'] };
-      return map[c.state] || [];
-    },
-    // The state lands on different elements depending on which one is under test —
-    // forcing it on the wrong element makes the rule never match at all (B-22).
-    stateTarget: c => (c.state.startsWith('close') ? '.d-chip__close' : '.d-chip__label'),
-  },
   button: {
     component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '561:49545',
     /**

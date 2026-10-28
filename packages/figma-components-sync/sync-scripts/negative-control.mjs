@@ -38,8 +38,8 @@
  * the same thing as a comparison that is dead.
  *
  *   node sync-scripts/negative-control.mjs badge
- *   node sync-scripts/negative-control.mjs chip --mode Dark
- *   node sync-scripts/negative-control.mjs chip --set 98:915 --variants 20
+ *   node sync-scripts/negative-control.mjs button --mode Dark
+ *   node sync-scripts/negative-control.mjs button --set 561:49545 --variants 20
  */
 import './pin-cwd.mjs';   // launch directory must not matter
 import 'dotenv/config';
