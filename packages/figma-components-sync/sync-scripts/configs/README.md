@@ -9,6 +9,7 @@ Optional: `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotCont
 written by `run-batch` after a build, not by hand. `nativeSlots` names slots that become Figma
 `SLOT` nodes (see the Slots section of `../README.md`).
 
-See the five built-in configs at the top of `component-axes.mjs` for worked examples —
+See the built-in Button config at the top of `component-axes.mjs` and the configs in this
+directory for worked examples —
 in particular how axes come from the prop API, how `invalid` encodes reachability, and
 how `stateTarget` names the element a pseudo-state actually lands on.

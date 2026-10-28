@@ -1,7 +1,7 @@
 /**
  * One command for a whole build batch. The only manual step left is clicking Run.
  *
- *   node sync-scripts/run-batch.mjs toggle badge button avatar
+ *   node sync-scripts/run-batch.mjs button button_link notice banner
  *
  * WHAT IS AND IS NOT AUTOMATABLE
  * A Figma dev plugin can only be launched from the desktop UI — there is no API to
@@ -116,7 +116,7 @@ if (!preflightNames.length) {
 /**
  * A component's `figmaSetId` lives in one of two shapes, and the id must land in the
  * one that `check-all` actually reads:
- *   configs/<name>.mjs        — one file per component (avatar, banner, checkbox, …)
+ *   configs/<name>.mjs        — one file per component (banner, button_link, collapsible, …)
  *   component-axes.mjs        — the built-in configs on a single line each
  * Replacements are anchored on the component name so a second component's id can
  * never be overwritten by a loose match.

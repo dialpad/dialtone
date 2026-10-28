@@ -32,13 +32,13 @@ once; it survives restarts.
 ## Each run — one command
 
 ```
-node packages/figma-components-sync/sync-scripts/run-batch.mjs toggle badge button avatar
+node packages/figma-components-sync/sync-scripts/run-batch.mjs button button_link notice banner
 ```
 
 That does everything except the click:
 
-1. **re-measures** any spec older than the code that produces it (Button and Avatar take
-   a few minutes each; anything current is skipped)
+1. **re-measures** any spec older than the code that produces it (Button takes
+   a few minutes; anything current is skipped)
 2. **encodes, shards, and regenerates** `code.js` from `generic-builder.js`
 3. **preflights every payload** — cheaper to fail here than to leave a half-built page,
    because a plugin run is not atomic the way a `use_figma` call is
@@ -76,17 +76,17 @@ of this.
 1. **Regenerate the payloads** for whatever you want built (from the repo root):
 
    ```
-   node packages/figma-components-sync/sync-scripts/build-plugin.mjs toggle badge button avatar
+   node packages/figma-components-sync/sync-scripts/build-plugin.mjs button button_link notice banner
    ```
 
-   Named components only — omitting the list falls back to an older default set. It
+   Named components only; omitting the list builds the six components in the registry. It
    re-encodes each one, shards anything large, writes
    `sync-scripts/build-data/shards/` plus `index.json`, and regenerates `code.js`.
 
    If it stops with *"this spec is OLDER than build-spec.mjs"*, that guard is doing its
    job: the measured spec predates a pipeline change. Re-measure first —
    `node packages/figma-components-sync/sync-scripts/build-spec.mjs <name>` — then repeat.
-   Button and Avatar take a few minutes each.
+   Button takes a few minutes.
 
 2. **Start the server** and leave it running — `serve-build-data.mjs`, this step's
    original standalone script, is retired (see `sync-scripts/superseded/README.md`).
@@ -110,18 +110,18 @@ of this.
 4. **Read the report.** The server writes it to `sync-scripts/build-data/plugin-results.json`:
 
    ```json
-   [{ "component": "toggle", "page": "Toggle", "built": 72,
-      "setId": "178:386", "variants": 72, "properties": ["modelValue", "size", …] }]
+   [{ "component": "button", "page": "Button", "built": 4160,
+      "setId": "1:2", "variants": 4160, "properties": ["Label", "Start icon choice", …] }]
    ```
 
 5. **Wire the set IDs into the configs** — the checks need them:
-   - `sync-scripts/configs/<name>.mjs` → `figmaSetId` (avatar)
-   - `sync-scripts/component-axes.mjs` → `figmaSetId` (button, badge, link, toggle)
+   - `sync-scripts/configs/<name>.mjs` → `figmaSetId` (banner, button_link, collapsible, loader, notice)
+   - `sync-scripts/component-axes.mjs` → `figmaSetId` (button)
 
 6. **Verify.** This is the part that matters:
 
    ```
-   node packages/figma-components-sync/sync-scripts/check-all.mjs toggle badge button avatar
+   node packages/figma-components-sync/sync-scripts/check-all.mjs button button_link notice banner
    ```
 
    Three passes per component — rendered values in both light and dark, token identity,
@@ -129,7 +129,7 @@ of this.
    the same as it rendering right:
 
    ```
-   node packages/figma-components-sync/sync-scripts/visual-compare.mjs toggle --set <id> --zoom 6
+   node packages/figma-components-sync/sync-scripts/visual-compare.mjs button --set <id> --zoom 6
    ```
 
 7. Stop the server with ctrl-C.

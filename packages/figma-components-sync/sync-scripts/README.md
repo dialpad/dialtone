@@ -4,10 +4,8 @@ Builds Figma component sets from the real rendered Dialtone components, then pro
 matches. The codebase is the source of truth. Figma is the output.
 
 Each variant is measured in light and dark. Button (4,160 variants), ButtonLink (560), Notice,
-Banner, Collapsible and Loader are built with the model described here and checked clean.
-The other registered configs predate it and need a rebuild and a check before they are
-trusted. `mode_island` is registered and deliberately unbuilt: it renders both modes at once,
-which needs per-node variable modes.
+Banner, Collapsible and Loader are the components registered so far, built with the model
+described here and checked clean. More are added in batches, each with its rebuild and check.
 
 Not in CI. It needs a browser, a Figma PAT, and a scratch file that is nobody's source of
 truth. Credentials live in `packages/figma-components-sync/.env` (`PERSONAL_ACCESS_TOKEN`,
@@ -17,7 +15,7 @@ one is.
 ## The one command
 
 ```bash
-node sync-scripts/run-batch.mjs badge button notice banner
+node sync-scripts/run-batch.mjs button button_link notice banner
 ```
 
 Everything except one click:
@@ -172,9 +170,9 @@ white icons, a double spinner and a solid purple disc, all of which passed every
 
 ```bash
 node sync-scripts/check-all.mjs                  # everything, slow
-node sync-scripts/check-all.mjs badge --light-only
-node sync-scripts/check-all.mjs badge --stale-ok # inspect a stale set deliberately
-node sync-scripts/visual-compare.mjs badge --set 1:2 --limit 8 --zoom 3
+node sync-scripts/check-all.mjs button --light-only
+node sync-scripts/check-all.mjs button --stale-ok # inspect a stale set deliberately
+node sync-scripts/visual-compare.mjs button --set 1:2 --limit 8 --zoom 3
 ```
 
 `check-all` refuses to run when it cannot tell which payload built a set, and prints the
@@ -184,8 +182,8 @@ work nobody is looking at, in the same words it uses for work that is current.
 ### Proving the checks work
 
 ```bash
-node sync-scripts/negative-control.mjs badge --list-fields   # cheap, no browser
-node sync-scripts/negative-control.mjs badge --variants 24
+node sync-scripts/negative-control.mjs button --list-fields   # cheap, no browser
+node sync-scripts/negative-control.mjs button --variants 24
 ```
 
 It parses `verify-components.mjs` for every field name the comparison can emit, perturbs each
@@ -271,7 +269,7 @@ flowchart TD
     MERGED -->|builds| BOOL["<b>merged</b><br/>presence as a BOOLEAN property"]
 
     AXIS --> AXISW["Button<br/><i>icons stay variants: padding changes<br/>by 2px a side, which no property can do</i>"]
-    BOOL --> BOOLW["Badge<br/><i>one set, toggled in the panel</i>"]
+    BOOL --> BOOLW["No registered component yet<br/><i>one set, toggled in the panel</i>"]
 
     KIND{"does the component draw<br/>its own default there?"}
     AXISW --> KIND
@@ -292,7 +290,8 @@ right. No merge, no hidden layers. This is what Button uses for its icons.
 and emits one tree: shared nodes keep their base geometry, inserted subtrees carry their filled
 geometry and a slot marker. The builder places the content hidden, and after
 `combineAsVariants` attaches a `<Slot>` BOOLEAN (→ `visible`) to the SET, named like the
-hand-built components ("Start icon", with its swap "Start icon choice"). Only Badge uses this.
+hand-built components ("Start icon", with its swap "Start icon choice"). No registered
+component uses this form yet (Badge and Chip did, before they were taken out of the set).
 
 `button.less` cuts x-padding by 2px a side when an icon is present, so all 560 Button
 combinations diverged and the guard refused the build, which is how Button ended up on the

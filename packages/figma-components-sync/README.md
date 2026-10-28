@@ -29,10 +29,9 @@ project has already hit once.
 Not in CI: it needs a real browser, a Figma desktop session (the plugin can only be launched by
 a person) and a scratch file. Reviewers rely on the check output recorded in the PR.
 
-Built with the current model and checked clean: Button, ButtonLink, Notice, Banner,
-Collapsible and Loader. The other registered configs predate that model (older property
-names, no native slots, no token-library binding) and need a rebuild and a check before they
-are trusted. `mode_island` is registered and deliberately unbuilt.
+Registered so far, built with the current model and checked clean: Button, ButtonLink,
+Notice, Banner, Collapsible and Loader. More components are added in batches, each with its
+own rebuild and check.
 
 ## Setup
 

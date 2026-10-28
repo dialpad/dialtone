@@ -11,7 +11,7 @@
  * `plugin/code.js` is GENERATED from generic-builder.js so the two cannot drift.
  * Six of today's bugs were drift between a versioned file and what actually ran.
  *
- *   node sync-scripts/build-plugin.mjs                     # banner avatar radio
+ *   node sync-scripts/build-plugin.mjs                     # the six built components
  *   node sync-scripts/build-plugin.mjs badge link toggle …  # any subset
  */
 import { readFileSync, writeFileSync, mkdirSync, statSync, existsSync, rmSync, readdirSync} from 'fs';
@@ -36,7 +36,7 @@ const NO_COMPONENTS = argv.includes('--no-components');
 const explicit = argv.filter(a => !a.startsWith('--'));
 const names = NO_COMPONENTS ? []
   : explicit.length ? explicit
-  : ['checkbox', 'notice', 'banner', 'avatar', 'radio'];
+  : ['button', 'button_link', 'notice', 'banner', 'collapsible', 'loader'];
 
 // Component shards are regenerated every run, so they are cleared. Icon shards are NOT:
 // they are produced by build-icon-library.mjs, which runs BEFORE this script so that its
