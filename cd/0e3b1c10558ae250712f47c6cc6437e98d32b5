@@ -1,0 +1,33 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  h_576f6bf65f4cb7 33
+  s_ba49952ad44f26::t_8496220886805a 9,22,59,71,118,125,130,172,192,200,203-207,209,226-228,230,254-255
+  s_ba49952ad44f26::t_7df16674088ecd 50
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointShaders.js
+  s_ba49952ad44f26::t_7fe07eeed66a46 1-3,5,9,29,31-34,40,43,57,60-68,72-79,84-87,90-92,97-126,128-130,132,134-137,139,141-148,150
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointRenderer.js
+  s_ba49952ad44f26::t_ffcffc1e569b00 109,114-115,117-123,126
+  s_ba49952ad44f26::t_27a9f72c0db537 176,324
+  s_ba49952ad44f26::t_44c60172cd7606 1-11,17-64,67-108,110-113,116,124-125,127-175,177-323,325-351
+  s_ba49952ad44f26::t_7fe07eeed66a46 12-16,65-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cd0e3b1c10558ae250712f47c6cc6437e98d32b5",
+  "prompts": {},
+  "humans": {
+    "h_576f6bf65f4cb7": {
+      "author": "iropolo <ignacio.ropolo@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_ba49952ad44f26": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a111ee-35c8-7ad3-bc36-25e45b697101",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "iropolo <ignacio.ropolo@dialpad.com>"
+    }
+  }
+}

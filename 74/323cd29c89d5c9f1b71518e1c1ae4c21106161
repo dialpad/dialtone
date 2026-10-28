@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/MotionText/MotionText.test.js
+  s_179e5bad29f60f::t_e09d313c1cb47e 845-851,853-863,866-874,876-878,880-882,885-894,896-902,905-913,915-921
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "74323cd29c89d5c9f1b71518e1c1ae4c21106161",
+  "prompts": {},
+  "sessions": {
+    "s_179e5bad29f60f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "febf809e-180f-4ba2-8dfb-38a07a6a2c26",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+AGENTS.md
+  s_7f1d1d64baa803::t_610950affb1abd 13-14,20
+.claude/agents/pr-prep-coordinator.md
+  s_7f1d1d64baa803::t_610950affb1abd 42-44,49-52
+  s_7f1d1d64baa803::t_9bcb3d6cbd24f9 53
+.claude/skills/commit.md
+  s_7f1d1d64baa803::t_610950affb1abd 2,42-44,46-47
+.github/CONTRIBUTING.md
+  s_7f1d1d64baa803::t_610950affb1abd 63-70
+.agents/resources/rules/vue-components.md
+  s_7f1d1d64baa803::t_610950affb1abd 17,19
+CLAUDE.md
+  s_7f1d1d64baa803::t_610950affb1abd 5-12,91,113,127
+.claude/rules/claude-config.md
+  s_7f1d1d64baa803::t_610950affb1abd 96-99,102-103,121-122,138,143-144
+  s_7f1d1d64baa803::t_fda20d19ab8c94 41,52,62,77,79,86
+.agents/resources/agent-tooling-parity.md
+  s_7f1d1d64baa803::t_d6194136a86ed0 5-60
+  s_7f1d1d64baa803::t_b052fe36a0fc21 61-68,70-78
+.agents/README.md
+  s_7f1d1d64baa803::t_1eab61f72352e6 7-21,34-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "efa85c2e6622327357afe10f0e3feb2baa94b4f7",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

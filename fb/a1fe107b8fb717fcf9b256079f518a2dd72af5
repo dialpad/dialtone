@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/Hovercard/Hovercard.test.js
+  s_6c4531dba4d27f::t_9f6783f1ae1cea 174,177
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fba1fe107b8fb717fcf9b256079f518a2dd72af5",
+  "prompts": {},
+  "sessions": {
+    "s_6c4531dba4d27f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "929c7e0f-caa2-4f8d-af3a-6d37fdc940c0",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Steven Shao <steven.shao@dialpad.com>"
+    }
+  }
+}
