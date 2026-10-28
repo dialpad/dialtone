@@ -21,7 +21,7 @@
  */
 export default {
   component: 'DtButton', label: 'Button', page: 'ButtonLink',
-  figmaSetId: '536:37497',
+  figmaSetId: '570:6303',
   axes: {
     size: [100, 200, 300, 400, 500],
     // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'

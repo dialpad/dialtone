@@ -371,6 +371,8 @@ function encodeNode (n) {
     out.tx = n.text;
     const ty = n.typography || {};
     out.ty = [ty.fontSize ?? null, ty.fontWeight ?? null, ty.lineHeightPct ?? null];
+    // Omitted when there is none, like every other default here.
+    if (ty.decoration) out.td = ty.decoration;
     // A fourth slot, pushed only when the family is not the builder's default — same
     // omit-the-default rule as everywhere else here, so ordinary text stays three long.
     if (ty.family && ty.family !== 'SF Pro Text') out.ty.push(ty.family);

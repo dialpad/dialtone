@@ -658,6 +658,9 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
         // node in one hardcoded family and DtCodeblock's monospace label came out in SF Pro
         // Text — a difference the values pass could see and the builder could not.
         family: figmaFamilyFor(s.fontFamily),
+        // Painted decoration, propagated from an ancestor if need be (see the harness).
+        decoration: /underline/.test(s.textDecorationLine || '') ? 'UNDERLINE'
+          : /line-through/.test(s.textDecorationLine || '') ? 'STRIKETHROUGH' : null,
       },
       props: { textColor: props.textColor },
       children: [],

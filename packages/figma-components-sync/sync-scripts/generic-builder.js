@@ -600,6 +600,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         t.fontSize = size;
         if (lhPct) t.lineHeight = { unit: 'PERCENT', value: lhPct };
       }
+      if (d.td) t.textDecoration = d.td;
       if (d.textColor) t.fills = [paint(d.textColor)];
       return t;
     }

@@ -145,6 +145,9 @@ const toRgb = converter('rgb');
 const toOklch = converter('oklch');
 const col = s => { if (!s) return null; const c = parseColor(s); if (!c) return null; const r = toRgb(c); return { r: r.r, g: r.g, b: r.b, a: r.alpha ?? 1 }; };
 const px = s => (typeof s === 'string' && s.endsWith('px') ? parseFloat(s) : null);
+/** The painted decoration in Figma's vocabulary; the harness resolves it through ancestors. */
+const decorationOf = s => (/underline/.test(s.textDecorationLine || '') ? 'UNDERLINE'
+  : /line-through/.test(s.textDecorationLine || '') ? 'STRIKETHROUGH' : 'NONE');
 const near = (a, b) => a != null && b != null && Math.abs(a - b) <= EPS;
 const dE = differenceCiede2000();
 const FIGMA_WEIGHT = { Thin: 100, ExtraLight: 200, Light: 300, Regular: 400, Medium: 500,
@@ -172,7 +175,21 @@ const nearC = (a, b) => {
   if (Math.abs((a.a ?? 1) - (b.a ?? 1)) > 0.02) return false;
   if (['r','g','b'].every(k => Math.abs(a[k] - b[k]) <= CEPS)) return true;
   const ac = { mode: 'rgb', r: a.r, g: a.g, b: a.b };
-  if (displayable(ac)) return false;                 // in gamut: strict result stands
+  if (displayable(ac)) {
+    /**
+     * IN GAMUT, ONE KNOWN CAUSE: the built CSS rounds a computed colour to two decimals.
+     *
+     * `surface/positive-opaque` is `{color.green.200}` at 45% alpha. Figma holds the exact
+     * primitive, oklch(0.9148 0.0923 165.26) = 167,247,212; the CSS build emits the literal
+     * oklch(0.91 0.09 165 / 0.45) = 167.5,244.9,210.5, and Chrome paints that. Both are inside
+     * sRGB, so this is not gamut mapping, only the rounding, and it is off by 1-2 of 255.
+     * Accepted when the difference is below the just-noticeable threshold (dE00 <= 1.0) and
+     * RECORDED, so it is visible in every run instead of silently absorbed.
+     */
+    if (dE(ac, { mode: 'rgb', r: b.r, g: b.g, b: b.b }) > 1.0) return false;
+    if (curCtx) allowed.push({ ...curCtx, reason: 'colour differs by dE00 <= 1.0 (1-2 of 255), in gamut: the built CSS rounds oklch to two decimals while Figma holds the exact token' });
+    return true;
+  }
   // 'oklch', not 'rgb': culori binary-searches the chroma channel of the mode named
   // here, and an rgb object has none — so 'rgb' degenerated to per-channel clipping
   // and compared against a colour neither side produces (8 ΔE00 off on a saturated red).
@@ -311,8 +328,16 @@ const sizeSpread = { width: 0, height: 0 };
 const rec = (variant, path, field, expected, actual, note) =>
   findings.push({ variant, path, field, expected, actual, note });
 
+/** Which variant and node a colour comparison belongs to, so an accepted difference can be recorded. */
+let curCtx = null;
+function compareNode (...args) {
+  const prev = curCtx;
+  curCtx = { variant: args[0], path: args[3] };
+  try { return compareNodeInner(...args); } finally { curCtx = prev; }
+}
+
 /** Walk DOM node and Figma node in parallel; Figma nodes hidden by a component property are skipped. */
-function compareNode (variant, dom, fig, path, MODE, figParentBox) {
+function compareNodeInner (variant, dom, fig, path, MODE, figParentBox) {
   // FIRST, before any comparison: a declared exemplar is not the measured render. Placed
   // last once already, which let the colour comparisons fire before it was reached.
   /**
@@ -508,6 +533,9 @@ function compareNode (variant, dom, fig, path, MODE, figParentBox) {
     if (domWeight && typeof figWeight === 'number' && Math.abs(domWeight - figWeight) > 1) {
       rec(variant, path, 'fontWeight', domWeight, figWeight);
     }
+    // Underline and strike-through were never captured, so never compared.
+    const domDeco = decorationOf(s), figDeco = fig.style?.textDecoration || 'NONE';
+    if (domDeco !== figDeco) rec(variant, path, 'textDecoration', domDeco, figDeco);
     // lineHeight was in COMPARED but only ever checked on the OTHER text branch, so
     // the coverage guard read green while this path never looked at it. The same
     // shape as paddingRight: present in the compared set, dead on the branch that runs.
@@ -1166,6 +1194,8 @@ function compareNode (variant, dom, fig, path, MODE, figParentBox) {
     if (domW2 && typeof figW2 === 'number' && Math.abs(domW2 - figW2) > 1) {
       rec(variant, `${path}/label`, 'fontWeight', domW2, figW2);
     }
+    const domDeco2 = decorationOf(s), figDeco2 = figText.style?.textDecoration || 'NONE';
+    if (domDeco2 !== figDeco2) rec(variant, `${path}/label`, 'textDecoration', domDeco2, figDeco2);
     const domLh = px(s.lineHeight), figLh = figText.style?.lineHeightPx;
     if (domLh != null && figLh != null && !near(domLh, figLh)) rec(variant, `${path}/label`, 'lineHeight', domLh, figLh);
     checkFontFamily(variant, `${path}/label`, s, figText);

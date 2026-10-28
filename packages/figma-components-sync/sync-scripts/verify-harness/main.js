@@ -297,6 +297,19 @@ window.__anatomy = () => {
     const s = getComputedStyle(el);
     const style = {};
     for (const k of READ) style[k] = s[k];
+    /**
+     * The decoration PAINTED on this node's text, which is not the node's own computed value.
+     *
+     * CSS does not inherit text-decoration, it propagates it down to descendant text, so
+     * DtLink's underline sits on the root and the label inside reads `none`. Reading each
+     * node's own value saw no underline anywhere and ButtonLink shipped to Figma without one.
+     * Walk up to the first ancestor that declares one (stopping at the mount point).
+     */
+    style.textDecorationLine = 'none';
+    for (let e = el; e && e.id !== 'root'; e = e.parentElement) {
+      const line = getComputedStyle(e).textDecorationLine;
+      if (line && line !== 'none') { style.textDecorationLine = line; break; }
+    }
     const box = el.getBoundingClientRect();
     // An <svg> is handed to Figma whole via createNodeFromSvg, so its internals are
     // never walked. Descending into it emitted `defs`, `clipPath` and zero-size
