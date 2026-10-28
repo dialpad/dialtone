@@ -16,7 +16,7 @@ function fixture() {
   const inputs = ['package.json'];
   return {
     schemaVersion: 1, inputs, inputsHash: hash(JSON.stringify(inputs.map(path => [path, hash(read(path))]))),
-    sourceVersions: { combinator: '1.3.0' },
+    sourceVersions: { combinator: '1.3.0', vueComponents: vuePackage.version },
     entries: definitions.map(([component, preset, slug, template, imports]) => {
       const filePath = `packages/combinator/src/variants/variants_${slug}.js`;
       return { id: `examples/presets/${component}/${encodeURIComponent(preset)}`, component, preset,
@@ -70,7 +70,7 @@ describe('Combinator source delivery', () => {
     expect(result.example.components.map(component => component.canonicalName)).toEqual(['DtIllustration']);
   });
 
-  it('follows source addition, payload edits, rename and removal without another membership list', () => {
+  it('assembler follows source addition, payload edits, rename and removal without another membership list', () => {
     const report = fixture();
     report.entries = [{ ...report.entries[0], preset: 'new / preset (wide)', id: 'examples/presets/DtLoader/new%20%2F%20preset%20%28wide%29' }];
     const first = presets.buildPresetExampleRecords(report, { records, vuePackage });

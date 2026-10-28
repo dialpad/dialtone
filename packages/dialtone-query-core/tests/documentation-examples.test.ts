@@ -1,4 +1,5 @@
 import { it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { documentation, getDocumentationDetail, getDocumentationExampleIds, searchDocumentation } from '../src/index.js';
 
 it('keeps selected examples exact-addressable without changing broad discovery', () => {
@@ -10,7 +11,12 @@ it('keeps selected examples exact-addressable without changing broad discovery',
   }
   const presetIds = (component: string) => examples.filter(record =>
     record.id.startsWith(`examples/presets/${component}/`)).map(record => record.id);
-  for (const id of ['examples/unknown', 'examples/presets/DtModal/default', 'examples/presets/DtButton/block%20start%20icon'])
+  const canary = 'examples/presets/DtLoader/default';
+  expect(getDocumentationDetail({ id: canary }, documentation).match).toBe('exact');
+  expect(getDocumentationExampleIds('DtLoader', documentation)).toContain(canary);
+  const coverage = JSON.parse(readFileSync(new URL('../../dialtone-docs/dist/preset-example-coverage.json', import.meta.url), 'utf8'));
+  const excluded = coverage.entries.filter((entry: { id: string; disposition: string }) => entry.disposition !== 'delivered');
+  for (const id of ['examples/unknown', ...excluded.map((entry: { id: string }) => entry.id)])
     expect(getDocumentationDetail({ id }, documentation).match).toBe('no-match');
   expect(getDocumentationExampleIds('DtButton', documentation).sort()).toEqual(['examples/button-default', 'examples/button-disabled-tooltip', ...presetIds('DtButton')].sort());
   expect(getDocumentationExampleIds('DtStack', documentation).sort()).toEqual(presetIds('DtStack').sort());

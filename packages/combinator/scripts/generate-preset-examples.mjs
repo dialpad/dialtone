@@ -7,15 +7,13 @@ import { createServer } from 'vite';
 import { glob } from 'glob';
 import config from '../vite.config.js';
 import { readPublicComponentExports, withComponentIdentity } from '../../../scripts/lib/vue-component-identity.mjs';
-import { normalizeComponentName } from '../../../scripts/lib/component-name.mjs';
 import { presetExampleId } from '../../../scripts/lib/preset-example-id.mjs';
-import { checkTemplateApi } from '../../../scripts/retrieval/example-consumer.mjs';
+import { classifyPresetExample } from './classify-preset-example.mjs';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const root = resolve(packageRoot, '../..');
 const require = createRequire(resolve(packageRoot, 'package.json'));
 const vueRequire = createRequire(require.resolve('vue/package.json'));
-const { baseParse, NodeTypes, ElementTypes, parserOptions } = vueRequire('@vue/compiler-dom');
 const hash = (value) => createHash('sha256').update(value).digest('hex');
 const manifest = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const copyOptions = { verbose: false, indentSpaces: 2 };
@@ -77,12 +75,6 @@ try {
     .map(module => [module.ssrModule.default, module.file]));
   const runtime = await server.ssrLoadModule('@dialpad/dialtone-vue');
   const icons = await server.ssrLoadModule('@dialpad/dialtone-icons/vue');
-  const iconNames = new Map(
-    Object.keys(icons)
-      .filter((name) => /^Dt(?:Icon|Illustration)/.test(name))
-      .map((name) => [normalizeComponentName(name), name]),
-  );
-  const components = new Map(documentation.map((record) => [normalizeComponentName(record.displayName), record]));
   const ids = new Set();
   for (const component of Object.keys(registry).sort()) {
     const bankFile = bankFiles.get(registry[component]);
@@ -97,65 +89,17 @@ try {
         preset,
         source: { kind: 'combinator-preset', filePath: relative(root, bankFile), hash: hash(readFileSync(bankFile)) },
         copyOptions,
-        disposition: 'unresolved',
-        reasons: [],
-        requiredContext: [],
-      };
-      const doc = components.get(normalizeComponentName(component));
-      if (!publicNames.has(component) || !runtime[component] || !doc)
-        entry.reasons.push('Public runtime component or metadata unavailable.');
-      else if (!isSupportedComponent(component, documentation)) {
-        entry.disposition = 'policy-excluded';
-        entry.reasons.push(getUnsupportedComponentReason(component));
-      } else if (doc.tags?.deprecated || doc.metadata?.deprecated) {
-        entry.disposition = 'deprecated';
-        entry.reasons.push(`${component} is deprecated.`);
-      } else {
-        try {
-          const materialized = state.buildVariantState(runtime[component], doc, registry[component], preset);
-          const disabledMembers = state.computeDisabledMembers(
-            materialized.info,
-            materialized.options.props,
-            materialized.options.slots,
-          );
-          entry.template = serializeExampleTemplate({ ...materialized, disabledMembers, ...copyOptions });
-          const imports = new Set();
-          const unknown = new Set();
-          const deprecated = new Set();
-          function visit(node) {
-            if (node.type === NodeTypes.ELEMENT && node.tagType === ElementTypes.COMPONENT) {
-              const name = normalizeComponentName(node.tag);
-              const nested = components.get(name);
-              if (nested && publicNames.has(nested.displayName)) {
-                imports.add(nested.displayName);
-                if (nested.tags?.deprecated || nested.metadata?.deprecated) deprecated.add(nested.displayName);
-              } else if (iconNames.has(name)) imports.add(iconNames.get(name));
-              else unknown.add(node.tag);
-            }
-            for (const child of node.children ?? []) visit(child);
-          }
-          const ast = baseParse(entry.template, parserOptions);
-          visit(ast);
-          entry.imports = [...imports].sort();
-          if (deprecated.size) {
-            entry.disposition = 'deprecated';
-            entry.reasons.push(`Deprecated nested source: ${[...deprecated].sort().join(', ')}.`);
-          } else if (unknown.size) entry.reasons.push(`Unresolved source tags: ${[...unknown].sort().join(', ')}.`);
-          else {
-            checkTemplateApi(ast, documentation, [], icons);
-            entry.disposition = 'eligible/setup-needed';
-            entry.requiredContext.push(
-              'Source fixture only; consumer compatibility and interaction/accessibility remain separately qualified.',
+        ...classifyPresetExample({ component, documentation, publicNames, runtime, icons,
+          policyReason: isSupportedComponent(component, documentation) ? '' : getUnsupportedComponentReason(component),
+          materialize: doc => {
+            const materialized = state.buildVariantState(runtime[component], doc, registry[component], preset);
+            const disabledMembers = state.computeDisabledMembers(
+              materialized.info, materialized.options.props, materialized.options.slots,
             );
-            if (component === 'DtToggle')
-              entry.requiredContext.push(
-                'Initial-state fixture; copied markup does not supply application update handling.',
-              );
-          }
-        } catch (error) {
-          entry.reasons.push(`Materialization unavailable: ${error.message}`);
-        }
-      }
+            return serializeExampleTemplate({ ...materialized, disabledMembers, ...copyOptions });
+          },
+        }),
+      };
       entries.push(entry);
     }
   }

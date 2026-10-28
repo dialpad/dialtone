@@ -188,6 +188,8 @@ export function assembleExampleRecord({ id, template, definition, rawFile = '', 
   const matchesProfile = saved?.profile === profile.id && artifact &&
     saved.artifact.version === artifact.version && saved.artifact.integrity === artifact.integrity;
   const savedValidation = saved?.payloadHash === payload && matchesProfile ? saved : { payloadHash: payload, consumerBuild: 'unverified' };
+  const unverifiedPreset = definition.sourceKind === 'combinator-preset'
+    && !(savedValidation.consumerBuild === 'built' && savedValidation.api === 'passed');
   const manual = savedValidation.manualReview;
   const manualPassed = manual?.status === 'passed' &&
     ['date', 'reviewer', 'browser', 'os', 'assistiveTechnology'].every(key => manual[key]);
@@ -210,10 +212,13 @@ export function assembleExampleRecord({ id, template, definition, rawFile = '', 
     `## example.html\n\n\`\`\`html\n${files['example.html']}\`\`\``,
   ].join('\n\n') : [
     `# ${id}`,
-    `Source: ${filePath} — ${headingPath.join(' > ')} (${source.id}). SHA-256: ${sourceHash}.`,
+    `Source: ${filePath} — ${headingPath.join(' > ')} (${definition.sourceKind === 'combinator-preset' ? 'provenance: ' : ''}${source.id}). SHA-256: ${sourceHash}.`,
+    ...(definition.materializationVersion ? [`Materialization source: @dialpad/dialtone-vue@${definition.materializationVersion}. This source version can differ from the pinned consumer profile.`] : []),
     `Consumer profile: ${profile.id}. Exact pins: ${Object.entries(profile.dependencies).map(([name, version]) => `${name}@${version}`).join(', ')}. Other installations are unverified.`,
     `Language: Vue 3 JavaScript SFC. CSS and default theme are imported in main.js. ${definition.directives.length ? `Register ${definition.directives.join(', ')} with app.use; these are directive plugins, not components.` : 'Components are imported locally; no plugin is needed.'}`,
-    'Setup: copy all five files below into an empty directory. Run npm install, npm run build and npm run dev. package.json pins the consumer dependencies and Vite SFC build tooling; main.js includes component, directive and CSS/theme setup.',
+    unverifiedPreset
+      ? 'Setup: this source fixture is not verified against the pinned dependencies; those versions may lack its components or APIs. To validate it, copy the five files into an empty directory and try npm install and npm run build before running npm run dev.'
+      : 'Setup: copy all five files below into an empty directory. Run npm install, npm run build and npm run dev. package.json pins the consumer dependencies and Vite SFC build tooling; main.js includes component, directive and CSS/theme setup.',
     `State/events: ${setup ? 'Authored local state is included below; no hidden handlers.' : 'No external state or hidden handlers.'} ${definition.responsibilities}`,
     `Validation: consumer build ${validation.consumerBuild}; API/export/deprecation checks ${validation.api ?? 'unverified'}. Validation is tied to payload SHA-256 ${payload}.`,
     `Interaction/accessibility: ${manualSummary} ${definition.interaction}`,

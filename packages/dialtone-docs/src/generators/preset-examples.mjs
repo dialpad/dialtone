@@ -17,7 +17,8 @@ const read = path => {
 /** Plain JSON is the only bridge from the Vue-aware producer to documentation generation. */
 export function buildPresetExampleRecords(report, { records, vuePackage }) {
   if (report?.schemaVersion !== 1 || !Array.isArray(report.inputs)
-    || !report.inputs.length || !Array.isArray(report.entries)) {
+    || !report.inputs.length || !Array.isArray(report.entries)
+    || typeof report.sourceVersions?.vueComponents !== 'string') {
     throw new Error('Missing preset intermediate; run dialtone-combinator:generate-examples');
   }
   const currentHash = hash(JSON.stringify(report.inputs.map(path => [path, hash(read(path))])));
@@ -52,7 +53,7 @@ export function buildPresetExampleRecords(report, { records, vuePackage }) {
       && normalizeComponentName(record.docTitle) === normalizeComponentName(entry.component));
     if (!page) {
       entry.disposition = 'unresolved';
-      entry.reasons.push(`No public documentation subject for ${entry.component}`);
+      entry.reasons.push(`Documentation subject unavailable: ${entry.component}`);
       continue;
     }
     try {
@@ -60,13 +61,14 @@ export function buildPresetExampleRecords(report, { records, vuePackage }) {
     } catch (error) {
       if (!error.message.startsWith('Unresolved template bindings:')) throw error;
       entry.disposition = 'unresolved';
-      entry.reasons.push(error.message);
+      entry.reasons.push(`Bindings unresolved: ${error.message}`);
       continue;
     }
     const components = entry.imports.filter(name => publicComponents.has(name));
     const icons = entry.imports.filter(name => !publicComponents.has(name));
     const definition = {
       components, icons, directives: [], sourceKind: 'combinator-preset', preset: entry.preset,
+      materializationVersion: report.sourceVersions.vueComponents,
       responsibilities: `Initial-state fixture from Combinator copy. No application update handlers or persistence are supplied. ${(entry.requiredContext ?? []).join(' ')}`,
       interaction: 'Copied presentation is not an interaction or accessibility result; verify the containing application.',
     };

@@ -45,7 +45,10 @@ try {
       id: record.id, payloadHash: record.example.validation.payloadHash, pages, characters: Array.from(content).length,
     });
   }
-  for (const id of ['examples/unknown', 'examples/presets/DtModal/default', 'examples/presets/DtButton/block%20start%20icon']) {
+  const coverage = JSON.parse(readFileSync(resolve(root, 'packages/dialtone-docs/dist/preset-example-coverage.json')));
+  const excluded = new Map(coverage.entries.filter(entry => entry.disposition !== 'delivered')
+    .map(entry => [entry.disposition, entry.id]));
+  for (const id of ['examples/unknown', ...excluded.values()]) {
     assert.throws(() => run(['docs', '--id', id]), /No documentation found/);
     assert.equal((await client.callTool({ name: 'get_documentation', arguments: { id } })).structuredContent.match, 'no-match');
   }

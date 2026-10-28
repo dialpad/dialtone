@@ -62,7 +62,7 @@
       ],
       "inputs": [
         "{projectRoot}/src/**/*",
-        "{projectRoot}/scripts/generate-preset-examples.mjs",
+        "{projectRoot}/scripts/*.mjs",
         "{projectRoot}/vite.config.js",
         "{projectRoot}/package.json",
         "{workspaceRoot}/package.json",
