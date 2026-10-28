@@ -23,7 +23,7 @@ import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
   shadowLayerColorTokens } from './cdp-provenance.mjs';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
-import { borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
+import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
 const toRgb = converter('rgb');
@@ -128,7 +128,6 @@ const COLOR_PROPS = { backgroundColor: 'background', color: 'textColor', borderT
  * and the rest assumed to match it.
  */
 /** The CSS side widths, in the order the Figma keys below list them. */
-const SIDE_CSS_WIDTHS = ['borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth'];
 const SIDE_WIDTHS = {
   borderTopWidth: 'strokeTopWeight', borderRightWidth: 'strokeRightWeight',
   borderBottomWidth: 'strokeBottomWeight', borderLeftWidth: 'strokeLeftWeight',
@@ -659,8 +658,7 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
         // Text — a difference the values pass could see and the builder could not.
         family: figmaFamilyFor(s.fontFamily),
         // Painted decoration, propagated from an ancestor if need be (see the harness).
-        decoration: /underline/.test(s.textDecorationLine || '') ? 'UNDERLINE'
-          : /line-through/.test(s.textDecorationLine || '') ? 'STRIKETHROUGH' : null,
+        decoration: figmaTextDecoration(s) === 'NONE' ? null : figmaTextDecoration(s),
       },
       props: { textColor: props.textColor },
       children: [],

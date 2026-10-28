@@ -10,6 +10,23 @@
 const BORDER_SIDES = [['borderTopWidth', 'borderTopColor'], ['borderRightWidth', 'borderRightColor'],
   ['borderBottomWidth', 'borderBottomColor'], ['borderLeftWidth', 'borderLeftColor']];
 
+/** The four border-width keys, in the same order as BORDER_SIDES. */
+export const SIDE_CSS_WIDTHS = BORDER_SIDES.map(([w]) => w);
+
+/**
+ * The text decoration Figma should paint, from a node's resolved `textDecorationLine`.
+ *
+ * One definition for the spec builder and the verifier: they used to spell the same mapping
+ * out separately, which is how a mapping drifts. The harness resolves the line through the
+ * node's ancestors first, because CSS propagates a decoration rather than inheriting it.
+ */
+export function figmaTextDecoration (style) {
+  const line = (style && style.textDecorationLine) || '';
+  if (/underline/.test(line)) return 'UNDERLINE';
+  if (/line-through/.test(line)) return 'STRIKETHROUGH';
+  return 'NONE';
+}
+
 /**
  * The computed-style key holding the colour of the border that is actually DRAWN.
  *

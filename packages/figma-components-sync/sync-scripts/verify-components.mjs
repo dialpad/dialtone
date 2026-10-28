@@ -73,7 +73,7 @@ import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { matchedFor, resolveDeclared } from './cdp-provenance.mjs';
-import { borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
+import { figmaTextDecoration as decorationOf, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const cfg = COMPONENTS[which];
 const EXEMPLAR_SLOTS = exemplarSlots(cfg);
@@ -145,9 +145,6 @@ const toRgb = converter('rgb');
 const toOklch = converter('oklch');
 const col = s => { if (!s) return null; const c = parseColor(s); if (!c) return null; const r = toRgb(c); return { r: r.r, g: r.g, b: r.b, a: r.alpha ?? 1 }; };
 const px = s => (typeof s === 'string' && s.endsWith('px') ? parseFloat(s) : null);
-/** The painted decoration in Figma's vocabulary; the harness resolves it through ancestors. */
-const decorationOf = s => (/underline/.test(s.textDecorationLine || '') ? 'UNDERLINE'
-  : /line-through/.test(s.textDecorationLine || '') ? 'STRIKETHROUGH' : 'NONE');
 const near = (a, b) => a != null && b != null && Math.abs(a - b) <= EPS;
 const dE = differenceCiede2000();
 const FIGMA_WEIGHT = { Thin: 100, ExtraLight: 200, Light: 300, Regular: 400, Medium: 500,
