@@ -21,6 +21,7 @@
         "{workspaceRoot}/apps/dialtone-documentation/docs/**/*.md",
         "{workspaceRoot}/scripts/lib/vue-component-identity.mjs",
         "{workspaceRoot}/scripts/lib/component-name.mjs",
+        "{workspaceRoot}/scripts/lib/preset-example-id.mjs",
         "{workspaceRoot}/packages/dialtone-vue/index.js",
         "{workspaceRoot}/packages/dialtone-vue/components/**/index.js",
         "{workspaceRoot}/packages/dialtone-vue/package.json",

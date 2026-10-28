@@ -19,7 +19,7 @@ function fixture() {
     sourceVersions: { combinator: '1.3.0' },
     entries: definitions.map(([component, preset, slug, template, imports]) => {
       const filePath = `packages/combinator/src/variants/variants_${slug}.js`;
-      return { id: `examples/presets/${component}/${encodeURIComponent(preset)}`, component, preset, selected: true,
+      return { id: `examples/presets/${component}/${encodeURIComponent(preset)}`, component, preset,
         source: { kind: 'combinator-preset', filePath, hash: hash(read(filePath)) }, template, imports,
         disposition: 'eligible/setup-needed', reasons: [], requiredContext: [] };
     }),
@@ -30,10 +30,16 @@ const records = definitions.map(([component, , slug]) => ({ id: `components/${sl
   docTitle: component, category: 'components', headingPath: [], frontmatter: {}, filePath: `components/${slug}.md` }));
 
 describe('Combinator source delivery', () => {
-  it('delivers only selected eligible presets with root association, real icon imports and honest state', () => {
+  it('delivers registered eligible presets with root association, real icon imports and honest state', () => {
     const report = fixture();
-    report.entries.push({ id: 'examples/presets/DtModal/default', component: 'DtModal', selected: false, disposition: 'policy-excluded' },
-      { id: 'examples/presets/DtButton/block%20start%20icon', component: 'DtButton', selected: false, disposition: 'deprecated' });
+    for (const [component, preset, slug, disposition] of [
+      ['DtModal', 'default', 'modal', 'policy-excluded'],
+      ['DtButton', 'block start icon', 'button', 'deprecated'],
+    ]) {
+      const filePath = `packages/combinator/src/variants/variants_${slug}.js`;
+      report.entries.push({ id: `examples/presets/${component}/${encodeURIComponent(preset)}`, component, preset,
+        disposition, reasons: [], requiredContext: [], source: { kind: 'combinator-preset', filePath, hash: hash(read(filePath)) } });
+    }
     const result = presets.buildPresetExampleRecords(report, { records, vuePackage });
     expect(result.records.map(record => record.id)).toEqual(definitions.map(([component, preset]) => `examples/presets/${component}/${encodeURIComponent(preset)}`));
     expect(result.records[1].docId).toBe('components/button');
@@ -50,17 +56,49 @@ describe('Combinator source delivery', () => {
     expect(result.coverage.entries.find(entry => entry.component === 'DtModal').disposition).toBe('policy-excluded');
   });
 
+
+  it('follows source addition, payload edits, rename and removal without another membership list', () => {
+    const report = fixture();
+    report.entries = [{ ...report.entries[0], preset: 'new / preset (wide)', id: 'examples/presets/DtLoader/new%20%2F%20preset%20%28wide%29' }];
+    const first = presets.buildPresetExampleRecords(report, { records, vuePackage });
+    expect(first.records.map(record => record.id)).toEqual(['examples/presets/DtLoader/new%20%2F%20preset%20%28wide%29']);
+    report.entries[0].template = '<dt-loader aria-label="Saving" size="500" />';
+    const edited = presets.buildPresetExampleRecords(report, { records, vuePackage });
+    expect(edited.records[0].example.validation.payloadHash).not.toBe(first.records[0].example.validation.payloadHash);
+    expect(edited.records[0].example.validation.consumerBuild).toBe('unverified');
+    report.entries[0].preset = 'renamed';
+    report.entries[0].id = 'examples/presets/DtLoader/renamed';
+    const renamed = presets.buildPresetExampleRecords(report, { records, vuePackage });
+    expect(renamed.records.map(record => record.id)).toEqual(['examples/presets/DtLoader/renamed']);
+    report.entries = [];
+    expect(presets.buildPresetExampleRecords(report, { records, vuePackage }).records).toEqual([]);
+  });
+
+  it('reports missing source context without suppressing other eligible fixtures', () => {
+    const report = fixture();
+    report.entries[0].template = '<dt-loader :size="missingSize" />';
+    const result = presets.buildPresetExampleRecords(report, { records, vuePackage });
+    expect(result.records.map(record => record.id)).toEqual(['examples/presets/DtButton/start%20icon', 'examples/presets/DtToggle/default']);
+    expect(result.coverage.entries[0].disposition).toBe('unresolved');
+    expect(result.coverage.entries[0].reasons.join(' ')).toContain('missingSize');
+    expect(result.coverage.summary.remaining).toBe(1);
+  });
+
   it('fails stale intermediate/source identity instead of delivering old code', () => {
     const stale = fixture(); stale.inputsHash = 'stale';
     expect(() => presets.buildPresetExampleRecords(stale, { records, vuePackage })).toThrow(/stale/i);
+    const malformed = fixture(); malformed.entries[0].disposition = 'misspelled';
+    expect(() => presets.buildPresetExampleRecords(malformed, { records, vuePackage })).toThrow(/intermediate/i);
     const changed = fixture(); changed.entries[0].source.hash = 'old-bank';
     expect(() => presets.buildPresetExampleRecords(changed, { records, vuePackage })).toThrow(/source/i);
   });
 
-  it('rejects duplicate identity or selected policy exclusions rather than promoting them', () => {
+  it('rejects duplicate identity and accounts for policy changes without publishing them', () => {
     const duplicate = fixture(); duplicate.entries.push(duplicate.entries[0]);
     expect(() => presets.buildPresetExampleRecords(duplicate, { records, vuePackage })).toThrow(/duplicate/i);
     const excluded = fixture(); excluded.entries[0].disposition = 'policy-excluded';
-    expect(() => presets.buildPresetExampleRecords(excluded, { records, vuePackage })).toThrow(/eligible/i);
+    const result = presets.buildPresetExampleRecords(excluded, { records, vuePackage });
+    expect(result.records.some(record => record.id === excluded.entries[0].id)).toBe(false);
+    expect(result.coverage.entries[0].disposition).toBe('policy-excluded');
   });
 });

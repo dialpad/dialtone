@@ -159,4 +159,4 @@ when the component becomes viable, and keep the reason short and user-facing.
 - Names match component docgen output.
 - Token-numbered values stay strings.
 
-For generated lookup presets, follow the [shared materialization and delivery lifecycle](../../.agents/resources/documentation-examples.md#combinator-presets). Regenerate accounting and revalidate selected payloads after preset, API/default or support changes; selection does not imply full coverage.
+For generated lookup presets, follow the [shared materialization and delivery lifecycle](../../.agents/resources/documentation-examples.md#combinator-presets). Registry curation drives retrieval without another publishing list. Regenerate accounting after additions, edits, renames, removals or API/support changes; revalidate affected payloads. Source delivery does not imply consumer or full-portfolio qualification.

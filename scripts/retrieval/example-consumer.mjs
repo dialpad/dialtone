@@ -58,7 +58,19 @@ export function checkTemplateApi(ast, metadata, directives, icons = {}) {
         }
         checked.push(`${name}.${prop.name}`);
       }
-      if (node.children.some(child => child.type === NodeTypes.ELEMENT || (child.type === NodeTypes.TEXT && child.content.trim()))) assert.ok(component.slots?.some(slot => slot.name === 'default'), `${name} default slot`);
+      let defaultContent = false;
+      for (const child of node.children) {
+        const slot = child.type === NodeTypes.ELEMENT && child.tag === 'template'
+          ? child.props.find(prop => prop.type === NodeTypes.DIRECTIVE && prop.name === 'slot') : null;
+        if (slot) {
+          const slotName = slot.arg?.content ?? 'default';
+          assert.ok(!slot.arg || slot.arg.isStatic, `${name} dynamic slot`);
+          assert.ok(component.slots?.some(entry => entry.name === slotName), `${name} slot ${slotName}`);
+          checked.push(`${name}#${slotName}`);
+        } else if (child.type === NodeTypes.ELEMENT || child.type === NodeTypes.INTERPOLATION
+          || (child.type === NodeTypes.TEXT && child.content.trim())) defaultContent = true;
+      }
+      if (defaultContent) assert.ok(component.slots?.some(slot => slot.name === 'default'), `${name} default slot`);
     }
     for (const child of node.children ?? []) visit(child);
   }

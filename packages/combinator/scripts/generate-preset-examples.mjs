@@ -8,6 +8,8 @@ import { glob } from 'glob';
 import config from '../vite.config.js';
 import { readPublicComponentExports, withComponentIdentity } from '../../../scripts/lib/vue-component-identity.mjs';
 import { normalizeComponentName } from '../../../scripts/lib/component-name.mjs';
+import { presetExampleId } from '../../../scripts/lib/preset-example-id.mjs';
+import { checkTemplateApi } from '../../../scripts/retrieval/example-consumer.mjs';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const root = resolve(packageRoot, '../..');
@@ -16,7 +18,6 @@ const vueRequire = createRequire(require.resolve('vue/package.json'));
 const { baseParse, NodeTypes, ElementTypes, parserOptions } = vueRequire('@vue/compiler-dom');
 const hash = (value) => createHash('sha256').update(value).digest('hex');
 const manifest = (path) => JSON.parse(readFileSync(path, 'utf8'));
-const selected = new Set(['DtLoader/default', 'DtButton/start icon', 'DtToggle/default']);
 const copyOptions = { verbose: false, indentSpaces: 2 };
 const documentation = manifest(resolve(root, 'packages/dialtone-vue/dist/component-documentation.json'));
 const vuePackage = manifest(resolve(root, 'packages/dialtone-vue/package.json'));
@@ -26,14 +27,6 @@ const publicNames = new Set(
   [...exports].map(
     ([file]) => withComponentIdentity({ displayName: '' }, file, exports, vueRoot, vuePackage).identity.canonicalName,
   ),
-);
-const registryPath = resolve(packageRoot, 'src/variants/variants.js');
-const registrySource = readFileSync(registryPath, 'utf8');
-const bankFiles = new Map(
-  [...registrySource.matchAll(/import\s+(Dt\w+)\s+from\s+['"](\.[^'"]+)['"]/g)].map((match) => [
-    match[1],
-    resolve(dirname(registryPath), match[2]),
-  ]),
 );
 const inputFiles = (
   await glob(
@@ -48,6 +41,8 @@ const inputFiles = (
       'packages/dialtone-icons/src/**/*.svg',
       'packages/dialtone-icons/package.json',
       'scripts/lib/**/*.mjs',
+      'scripts/retrieval/example-consumer.mjs',
+      'packages/dialtone-docs/src/generators/example-template.mjs',
       'scripts/build-dialtone-vue-docs.mjs',
       'packages/dialtone-vue/dist/component-documentation.json',
       'package.json',
@@ -75,6 +70,11 @@ try {
     '/src/lib/component_support.js',
   );
   const registry = (await server.ssrLoadModule('/src/variants/variants.js')).default();
+  // Match loaded exports by identity, so import aliases and re-exports do not become source policy.
+  const bankFiles = new Map([...server.environments.ssr.moduleGraph.idToModuleMap.values()]
+    .filter(module => module.file && module.ssrModule?.default
+      && ![...module.importedModules].some(child => child.ssrModule?.default === module.ssrModule.default))
+    .map(module => [module.ssrModule.default, module.file]));
   const runtime = await server.ssrLoadModule('@dialpad/dialtone-vue');
   const icons = await server.ssrLoadModule('@dialpad/dialtone-icons/vue');
   const iconNames = new Map(
@@ -85,17 +85,16 @@ try {
   const components = new Map(documentation.map((record) => [normalizeComponentName(record.displayName), record]));
   const ids = new Set();
   for (const component of Object.keys(registry).sort()) {
-    const bankFile = bankFiles.get(component);
-    if (!bankFile) throw new Error(`No authored bank import for ${component}`);
+    const bankFile = bankFiles.get(registry[component]);
+    if (!bankFile) throw new Error(`No loaded bank source for ${component}`);
     for (const preset of state.listVariantNames(registry[component]).sort()) {
-      const id = `examples/presets/${encodeURIComponent(component)}/${encodeURIComponent(preset)}`;
+      const id = presetExampleId(component, preset);
       if (ids.has(id)) throw new Error(`Duplicate preset ID: ${id}`);
       ids.add(id);
       const entry = {
         id,
         component,
         preset,
-        selected: selected.has(`${component}/${preset}`),
         source: { kind: 'combinator-preset', filePath: relative(root, bankFile), hash: hash(readFileSync(bankFile)) },
         copyOptions,
         disposition: 'unresolved',
@@ -135,16 +134,18 @@ try {
             }
             for (const child of node.children ?? []) visit(child);
           }
-          visit(baseParse(entry.template, parserOptions));
+          const ast = baseParse(entry.template, parserOptions);
+          visit(ast);
           entry.imports = [...imports].sort();
           if (deprecated.size) {
             entry.disposition = 'deprecated';
             entry.reasons.push(`Deprecated nested source: ${[...deprecated].sort().join(', ')}.`);
           } else if (unknown.size) entry.reasons.push(`Unresolved source tags: ${[...unknown].sort().join(', ')}.`);
           else {
+            checkTemplateApi(ast, documentation, [], icons);
             entry.disposition = 'eligible/setup-needed';
             entry.requiredContext.push(
-              'Source copy only; shared assembly/API/binding/profile validation is required before delivery.',
+              'Source fixture only; consumer compatibility and interaction/accessibility remain separately qualified.',
             );
             if (component === 'DtToggle')
               entry.requiredContext.push(
@@ -158,10 +159,6 @@ try {
       entries.push(entry);
     }
   }
-  for (const key of selected)
-    if (!entries.some((entry) => `${entry.component}/${entry.preset}` === key)) {
-      throw new Error(`Required selected preset removed or renamed: ${key}`);
-    }
   const report = {
     schemaVersion: 1,
     inputsHash,
@@ -176,7 +173,6 @@ try {
     summary: {
       banks: Object.keys(registry).length,
       presets: entries.length,
-      selected: entries.filter((entry) => entry.selected).length,
       dispositions: Object.fromEntries(
         [...new Set(entries.map((entry) => entry.disposition))]
           .sort()

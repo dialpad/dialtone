@@ -23,3 +23,11 @@ test('consumer icon API checks use installed exports and declared props', () => 
   assert.throws(() => checkTemplateApi(baseParse('<dt-icon-phone invalid-prop />'), metadata, [], icons), /invalid-prop/);
   assert.throws(() => checkTemplateApi(baseParse('<dt-icon-missing />'), metadata, [], icons), /dt-icon-missing/);
 });
+
+
+test('consumer API checks distinguish named-slot templates from default content', () => {
+  const avatar = [{ displayName: 'DtAvatar', props: [], slots: [{ name: 'icon' }] }];
+  assert.doesNotThrow(() => checkTemplateApi(baseParse('<dt-avatar><template #icon><span>Icon</span></template></dt-avatar>'), avatar, []));
+  assert.throws(() => checkTemplateApi(baseParse('<dt-avatar>Default content</dt-avatar>'), avatar, []), /default slot/);
+  assert.throws(() => checkTemplateApi(baseParse('<dt-avatar><template #unknown>Icon</template></dt-avatar>'), avatar, []), /unknown/);
+});

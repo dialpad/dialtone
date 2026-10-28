@@ -144,7 +144,11 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(records[0].content).toContain('app.use(DtTooltipDirective)');
     const unknown = run(['docs', '--id', 'examples/unknown']);
     expect(unknown.status).toBe(1);
-    expect(unknown.stderr).toContain('examples/button-default');
+    const recovery = unknown.stderr.split('\n').find(line => line.includes('Available example IDs')) ?? '';
+    const ids = recovery.match(/examples\/\S+?(?=, |\.(?:\s|$)|$)/g) ?? [];
+    expect(ids.length).toBeGreaterThan(0);
+    expect(ids.length).toBeLessThanOrEqual(3);
+    for (const id of ids) expect(run(['docs', '--id', id, '--format', 'json']).status).toBe(0);
     expect(run(['docs', 'button', '--id', 'examples/button-default']).status).toBe(1);
   });
 
