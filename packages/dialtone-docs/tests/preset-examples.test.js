@@ -16,7 +16,7 @@ function fixture() {
   const inputs = ['package.json'];
   return {
     schemaVersion: 1, inputs, inputsHash: hash(JSON.stringify(inputs.map(path => [path, hash(read(path))]))),
-    sourceVersions: { combinator: '1.3.0', vueComponents: vuePackage.version },
+    sourceVersions: { combinator: combinatorPackage.version, vueComponents: vuePackage.version },
     entries: definitions.map(([component, preset, slug, template, imports]) => {
       const filePath = `packages/combinator/src/variants/variants_${slug}.js`;
       return { id: `examples/presets/${component}/${encodeURIComponent(preset)}`, component, preset,
@@ -26,6 +26,7 @@ function fixture() {
   };
 }
 const vuePackage = JSON.parse(read('packages/dialtone-vue/package.json'));
+const combinatorPackage = JSON.parse(read('packages/combinator/package.json'));
 const records = definitions.map(([component, , slug]) => ({ id: `components/${slug}#intro`, docId: `components/${slug}`,
   docTitle: component, category: 'components', headingPath: [], frontmatter: {}, filePath: `components/${slug}.md` }));
 
@@ -102,6 +103,11 @@ describe('Combinator source delivery', () => {
     expect(() => presets.buildPresetExampleRecords(stale, { records, vuePackage })).toThrow(/stale/i);
     const malformed = fixture(); malformed.entries[0].disposition = 'misspelled';
     expect(() => presets.buildPresetExampleRecords(malformed, { records, vuePackage })).toThrow(/intermediate/i);
+    for (const version of [undefined, '0.0.0']) {
+      const corruptVersion = fixture(); corruptVersion.sourceVersions.combinator = version;
+      expect(() => presets.buildPresetExampleRecords(corruptVersion, { records, vuePackage }))
+        .toThrow(/source version/i);
+    }
     const changed = fixture(); changed.entries[0].source.hash = 'old-bank';
     expect(() => presets.buildPresetExampleRecords(changed, { records, vuePackage })).toThrow(/source/i);
   });
