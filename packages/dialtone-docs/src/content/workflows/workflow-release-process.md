@@ -52,7 +52,7 @@ For these selected commits, `build`, `chore`, `ci`, `docs` and `style` request a
 
 The shared module delegates commit analysis and notes to the installed release libraries. It omits automated `chore(release)` commits from both steps, including copied breaking notes. Upstream breaking notices appear under **Bundled Dialtone data changes**, separate from tool contract notices. Normal `test` commits do not request a release.
 
-The documentation app's manifest supplies parser dependencies, so it participates in release selection, lookup CI routing and the docs build hash. When adding a new consumed producer, update the shared source policy and the existing release-path suite; do not add artificial adapter commits to trigger publication.
+`apps/dialtone-documentation/package.json` supplies parser dependencies, so it participates in release selection, lookup CI routing and the docs build hash. When adding a new consumed producer, update the shared source policy and the existing release-path suite; do not add artificial adapter commits to trigger publication.
 
 ## Packages Released
 
