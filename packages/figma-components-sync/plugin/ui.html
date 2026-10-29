@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --dt-brand: #7C52FF;
+    --dt-fg-primary: #1C1C1C;
+    --dt-fg-secondary: #3A3A3A;
+    --dt-surface: #FFFFFF;
+    --dt-surface-secondary: #F9F9F9;
+    --dt-border: rgba(28, 28, 28, 0.17);
+    --dt-radius-md: 0.8rem;
+    --dt-font: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI Adjusted", "Segoe UI", SFMono,
+      "Helvetica Neue", Cantarell, Ubuntu, Roboto, Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --dt-font-mono: SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body { block-size: 100%; }
+  body {
+    font: 0.75rem/1.4 var(--dt-font);
+    margin: 0;
+    padding: 1rem;
+    overflow-y: auto;
+    color: var(--dt-fg-primary);
+    background: var(--dt-surface);
+  }
+  .logo { display: flex; align-items: center; gap: 0.5rem; margin-block-end: 1rem; }
+  .logo svg { inline-size: 5.5rem; block-size: auto; }
+  .logo span {
+    /* translateY, not top: Figma's embedded renderer silently ignores
+       inset-block-start, and this repo's pre-commit hook auto-rewrites a
+       physical top back into it — transform isn't in that rewrite map. */
+    transform: translateY(0.18rem);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--dt-fg-secondary);
+  }
+  .intro {
+    margin: 0 0 1rem;
+    color: var(--dt-fg-secondary);
+  }
+  button {
+    inline-size: 100%;
+    padding: 0.5rem 0.75rem;
+    margin-block-end: 0.5rem;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    border-radius: var(--dt-radius-md);
+    border: 1px solid var(--dt-border);
+    background: var(--dt-surface);
+    color: var(--dt-fg-primary);
+    transition: background-color 0.1s ease, border-color 0.1s ease;
+  }
+  button:hover:not(:disabled) { background: var(--dt-surface-secondary); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button#build-btn {
+    background: var(--dt-brand);
+    border-color: var(--dt-brand);
+    color: #FFFFFF;
+  }
+  button#build-btn:hover:not(:disabled) { background: #6a42e0; }
+  #log {
+    white-space: pre-wrap;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-block-start: 0.5rem;
+    color: var(--dt-fg-secondary);
+  }
+  #log code {
+    white-space: nowrap;
+    font-family: var(--dt-font-mono);
+    font-size: 0.6875rem;
+    color: #5c5c5c;
+    background: var(--dt-surface-secondary);
+    border: 1px solid var(--dt-border);
+    border-radius: 0.3rem;
+    padding: 0.05rem 0.3rem;
+  }
+  .results-intro { margin: 0 0 1rem; color: var(--dt-fg-secondary); }
+  .result-item { margin-block-end: 1rem; }
+  .result-item__header { display: flex; align-items: center; gap: 0.5rem; margin-block-end: 0.25rem; }
+  .result-item__label { font-weight: 600; }
+  .result-item__detail { margin: 0; color: var(--dt-fg-secondary); }
+  .result-item__detail.err { color: #c0392b; }
+  .result-item__issues {
+    margin: 0.4rem 0 0;
+    padding-inline-start: 1.1rem;
+    color: #a3690a;
+  }
+  .result-item__issues li { margin-block-end: 0.25rem; }
+  .result-item__issues code {
+    font-family: var(--dt-font-mono);
+    font-size: 0.6875rem;
+    color: #5c5c5c;
+    background: var(--dt-surface-secondary);
+    border: 1px solid var(--dt-border);
+    border-radius: 0.3rem;
+    padding: 0.05rem 0.3rem;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .badge.ok { background: rgba(10, 124, 47, 0.12); color: #0a7c2f; }
+  .badge.warn { background: rgba(163, 105, 10, 0.12); color: #a3690a; }
+  .badge.err { background: rgba(192, 57, 43, 0.12); color: #c0392b; }
+  .actions { display: flex; gap: 0.5rem; margin-block-start: 1rem; }
+  .actions button { margin-block-end: 0; }
+</style>
+</head>
+<body>
+  <div class="logo">
+    <svg width="110" height="38" viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.9624 31.993C16.445 31.993 13.2 28.3477 13.2 23.3593C13.2 18.371 16.445 14.7576 20.9624 14.7576C23.0621 14.7576 25.0664 15.8129 25.9571 17.1878V8.29835H29.6475V31.6733H25.9571V29.5308C25.0664 30.9058 23.0621 31.993 20.9624 31.993ZM21.5669 28.7634C23.9529 28.7634 25.7344 26.9087 25.9571 24.3826V22.2721C25.7344 19.746 23.9529 17.9873 21.5669 17.9873C18.8946 17.9873 16.9858 20.1297 16.9858 23.3274C16.9858 26.525 18.8946 28.7634 21.5669 28.7634Z" fill="#1C1C1C"/>
+      <path d="M35.5531 31.6733H31.831V15.0774H35.5531V31.6733ZM33.6443 12.807C32.34 12.807 31.3538 11.7838 31.3538 10.4728C31.3538 9.19369 32.34 8.17044 33.6443 8.17044C35.0123 8.17044 36.0303 9.19369 36.0303 10.4728C36.0303 11.7838 35.0123 12.807 33.6443 12.807Z" fill="#1C1C1C"/>
+      <path d="M57.4412 31.6733H53.7191V8.29835H57.4412V31.6733Z" fill="#1C1C1C"/>
+      <path d="M59.7069 37.6529V15.0774H63.4291V17.2198C64.288 15.8448 66.2923 14.7576 68.4874 14.7576C72.9412 14.7576 76.1862 18.403 76.1862 23.3913C76.1862 28.3797 72.9412 31.993 68.4237 31.993C66.2923 31.993 64.288 30.9058 63.4291 29.5308V37.6529H59.7069ZM67.8193 28.7634C70.4598 28.7634 72.4004 26.6209 72.4004 23.4233C72.4004 20.2256 70.4598 17.9873 67.8829 17.9873C65.4015 17.9873 63.6518 19.8419 63.4291 22.3681V24.4785C63.6199 27.0047 65.4015 28.7634 67.8193 28.7634Z" fill="#1C1C1C"/>
+      <path d="M101.315 31.993C96.7975 31.993 93.5526 28.3477 93.5526 23.3593C93.5526 18.371 96.7975 14.7576 101.315 14.7576C103.415 14.7576 105.419 15.8129 106.31 17.1878V8.29835H110V31.6733H106.31V29.5308C105.419 30.9058 103.415 31.993 101.315 31.993ZM101.919 28.7634C104.305 28.7634 106.087 26.9087 106.31 24.3826V22.2721C106.087 19.746 104.305 17.9873 101.919 17.9873C99.2471 17.9873 97.3383 20.1297 97.3383 23.3274C97.3383 26.525 99.2471 28.7634 101.919 28.7634Z" fill="#1C1C1C"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M77.4333 27.1646C77.4333 29.9465 79.8511 31.993 83.1915 31.993C84.9731 31.993 86.8182 31.3215 88.0271 29.4988V31.6733H91.7175V20.9291C91.7175 17.0599 88.9179 14.7576 84.814 14.7576C80.7958 14.7576 78.4855 16.9955 77.7039 19.4901L81.2343 19.9549C81.747 18.5754 82.9114 17.6355 84.814 17.6355C86.6592 17.6355 88.0271 18.7227 88.0271 20.7053V21.2809L83.2233 21.9843C79.5966 22.496 77.4333 24.2547 77.4333 27.1646ZM83.8278 29.2111C82.2371 29.2111 81.2191 28.2518 81.2191 27.0047C81.2191 25.6616 82.1417 24.9262 83.8278 24.6384L88.0271 23.9029V25.9175C87.4545 27.6442 86.0547 29.2111 83.8278 29.2111Z" fill="#1C1C1C"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M37.2483 27.1645C37.2483 29.9464 39.6661 31.9929 43.0065 31.9929C44.7881 31.9929 46.6332 31.3214 47.8421 29.4988V31.6732H51.5325V20.929C51.5325 17.0599 48.7329 14.7576 44.629 14.7576C40.6108 14.7576 38.3005 16.9954 37.5189 19.4901L41.0493 19.9548C41.562 18.5754 42.7264 17.6354 44.629 17.6354C46.4742 17.6354 47.8421 18.7227 47.8421 20.7052V21.2808L43.0383 21.9843C39.4116 22.4959 37.2483 24.2546 37.2483 27.1645ZM43.6428 29.211C42.0521 29.211 41.0341 28.2517 41.0341 27.0046C41.0341 25.6616 41.9567 24.9261 43.6428 24.6383L47.8421 23.9029V25.9174C47.2695 27.6441 45.8697 29.211 43.6428 29.211Z" fill="#1C1C1C"/>
+      <path d="M16.7963 8.12782C17.0327 8.18068 17.0795 8.56646 16.8585 8.66699C12.5926 10.1191 9.23484 13.8317 7.48158 18.774C7.38563 19.0136 6.96469 18.9558 6.92513 18.7001C6.32538 14.8238 3.64729 11.7289 0.197235 10.8938C-0.0313905 10.8385 -0.074564 10.4793 0.138252 10.3776C4.51838 8.57543 7.8103 4.87854 9.33139 0.155355C9.42639 -0.0910761 9.88536 -0.0288374 9.92442 0.23297C10.5141 4.1865 13.2641 7.33793 16.7963 8.12782Z" fill="#7C52FF"/>
+    </svg>
+    <span>Dialtone Components Sync</span>
+  </div>
+
+  <div id="view-form">
+    <p class="intro">Builds component pages in the current Figma file from locally measured specs —
+      real Dialtone Vue components rendered and re-assembled as Figma variant sets.</p>
+    <button id="build-btn">Build</button>
+    <div id="log">Requires the local <code>figma-components-sync</code> server to be running. Run
+      <code>pnpm run-batch &lt;component names&gt;</code> from <code>packages/figma-components-sync</code>,
+      then click Build above.</div>
+  </div>
+
+  <div id="view-results" hidden>
+    <div id="results-content"></div>
+    <div class="actions">
+      <button id="back-btn">Back</button>
+      <button id="close-btn">Close</button>
+    </div>
+  </div>
+  <script>
+    const buildButton = document.getElementById('build-btn');
+    const viewForm = document.getElementById('view-form');
+    const viewResults = document.getElementById('view-results');
+    const resultsContent = document.getElementById('results-content');
+    const backButton = document.getElementById('back-btn');
+    const closeButton = document.getElementById('close-btn');
+
+    onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+      if (msg.type === 'result') {
+        buildButton.textContent = 'Build';
+        buildButton.disabled = false;
+        showResults(msg);
+      } else if (msg.type === 'error') {
+        buildButton.textContent = 'Build';
+        buildButton.disabled = false;
+        showError(msg.error);
+      }
+    };
+
+    // ONE definition of "this component needs a look", shared by the per-item badge and the
+    // overall "All done!" line. They used to be written out twice, and the overall line left
+    // out the icon-instance failures, so a run where only those failed said "All done!" above
+    // a warning badge.
+    function componentIssues (r) {
+      const issues = [];
+      if (r.skippedBindings && r.skippedBindings.length) {
+        const count = r.skippedBindings.reduce((a, s) => a + s.count, 0);
+        issues.push(`${count} binding(s) skipped (token disagreed with the measured value)`);
+      }
+      if (r.provenanceTraded && r.provenanceTraded.length) {
+        const count = r.provenanceTraded.reduce((a, s) => a + s.count, 0);
+        issues.push(`${count} trade(s) made to keep the render correct`);
+      }
+      if (r.iconInstanceFailed && r.iconInstanceFailed.length) {
+        issues.push(`${r.iconInstanceFailed.length} icon(s) could not be resolved`);
+      }
+      return issues;
+    }
+
+    function createComponentItem (r) {
+      const item = document.createElement('div');
+      item.className = 'result-item';
+
+      const header = document.createElement('div');
+      header.className = 'result-item__header';
+      const badge = document.createElement('span');
+      const labelEl = document.createElement('span');
+      labelEl.className = 'result-item__label';
+      labelEl.textContent = r.page || r.component;
+      header.append(badge, labelEl);
+
+      const detail = document.createElement('p');
+      detail.className = 'result-item__detail';
+      item.append(header, detail);
+
+      const issues = componentIssues(r);
+
+      if (!r.setId) {
+        badge.className = 'badge err';
+        badge.textContent = 'No set';
+        detail.classList.add('err');
+        detail.textContent = `${r.built} built, but combining into a variant set failed — `
+          + 'check for a duplicate variant name.';
+      } else if (issues.length) {
+        badge.className = 'badge warn';
+        badge.textContent = 'Needs a look';
+        detail.textContent = `${r.built} built, set ${r.setId} (${r.variants} variants).`;
+      } else {
+        badge.className = 'badge ok';
+        badge.textContent = 'Built';
+        detail.textContent = `${r.built} built, set ${r.setId} (${r.variants} variants).`;
+      }
+
+      if (issues.length) {
+        const list = document.createElement('ul');
+        list.className = 'result-item__issues';
+        for (const issue of issues) {
+          const li = document.createElement('li');
+          li.textContent = issue;
+          list.append(li);
+        }
+        item.append(list);
+      }
+
+      return item;
+    }
+
+    function createIconItem (iconReport) {
+      const item = document.createElement('div');
+      item.className = 'result-item';
+
+      const header = document.createElement('div');
+      header.className = 'result-item__header';
+      const badge = document.createElement('span');
+      const labelEl = document.createElement('span');
+      labelEl.className = 'result-item__label';
+      labelEl.textContent = 'Icons';
+      header.append(badge, labelEl);
+
+      const detail = document.createElement('p');
+      detail.className = 'result-item__detail';
+      item.append(header, detail);
+
+      const failed = iconReport.failures.length;
+      if (failed) {
+        badge.className = 'badge warn';
+        badge.textContent = 'Needs a look';
+      } else {
+        badge.className = 'badge ok';
+        badge.textContent = 'Built';
+      }
+      detail.textContent = `${iconReport.built}/${iconReport.expected} `
+        + `(${iconReport.created} new, ${iconReport.updated} updated`
+        + (failed ? `, ${failed} FAILED` : '') + ').';
+
+      if (failed) {
+        const list = document.createElement('ul');
+        list.className = 'result-item__issues';
+        for (const f of iconReport.failures.slice(0, 10)) {
+          const li = document.createElement('li');
+          const code = document.createElement('code');
+          code.textContent = f.id || f.name || JSON.stringify(f);
+          li.append(code);
+          list.append(li);
+        }
+        item.append(list);
+      }
+
+      return item;
+    }
+
+    function showResults ({ report, iconReport }) {
+      const items = [];
+      if (iconReport) items.push(createIconItem(iconReport));
+      for (const r of report) items.push(createComponentItem(r));
+
+      const anyProblem = (iconReport && iconReport.failures.length)
+        || report.some(r => !r.setId || componentIssues(r).length);
+      const intro = document.createElement('p');
+      intro.className = 'results-intro';
+      intro.textContent = anyProblem
+        ? "Built, but a couple of things need a look."
+        : "All done! Here's what got built.";
+      resultsContent.replaceChildren(intro, ...items);
+      viewForm.hidden = true;
+      viewResults.hidden = false;
+    }
+
+    function showError (message) {
+      const intro = document.createElement('p');
+      intro.className = 'results-intro';
+      intro.textContent = 'The build failed.';
+      const item = document.createElement('div');
+      item.className = 'result-item';
+      const detail = document.createElement('p');
+      detail.className = 'result-item__detail err';
+      detail.textContent = message;
+      item.append(detail);
+      resultsContent.replaceChildren(intro, item);
+      viewForm.hidden = true;
+      viewResults.hidden = false;
+    }
+
+    function showForm () {
+      viewResults.hidden = true;
+      viewForm.hidden = false;
+    }
+
+    buildButton.onclick = () => {
+      buildButton.disabled = true;
+      buildButton.textContent = 'Building…';
+      parent.postMessage({ pluginMessage: { type: 'build' } }, '*');
+    };
+
+    backButton.onclick = () => showForm();
+    closeButton.onclick = () => parent.postMessage({ pluginMessage: { type: 'close' } }, '*');
+  </script>
+</body>
+</html>
