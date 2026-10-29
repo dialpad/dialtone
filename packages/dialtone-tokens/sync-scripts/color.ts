@@ -120,6 +120,42 @@ function clamp01(n: number): number {
   return Math.min(1, Math.max(0, n))
 }
 
+/**
+ * True when the colour has any alpha below 1. Strict on purpose: the caller
+ * flattens a translucent target, which is always correct, whereas treating a
+ * near-opaque one as opaque would compose it and let Figma keep its alpha.
+ */
+export function isTranslucent(color: string): boolean {
+  const { a } = parseColor(color)
+  return a !== undefined && a < 1
+}
+
+/**
+ * The Figma composed colour (alias + opacity) for an `alpha`-modified token, or
+ * undefined when it has to stay a plain colour.
+ *
+ * Figma applies a composed colour's opacity only over an OPAQUE target. Over a
+ * translucent one it keeps the target's own alpha and ignores the opacity, where
+ * CSS (`oklch(from <target> l c h / <alpha>)`) replaces the alpha. So
+ * `muted/active` (`muted/hover` at 60%, itself `moderate-opaque` at 45%) renders
+ * 0.45 in Figma and 0.60 in CSS. A translucent target therefore gets no
+ * composed colour, and the caller flattens it to the resolved literal, which
+ * matches the CSS by construction.
+ *
+ * `targetResolved` is the target's resolved value in the same mode as the token.
+ */
+export function composedColorFor(
+  from: { target: string; modifier: { type: string; value: string } } | undefined,
+  targetResolved: string,
+): { colorAlias: string; opacity: number } | undefined {
+  if (from?.modifier.type !== 'alpha') return undefined
+  if (isTranslucent(targetResolved)) return undefined
+  // Rounded to 4 decimal places: ".07" * 100 is 7.000000000000001 in floating
+  // point, which is noise in the payload and in every log line.
+  const opacity = Math.round(Number.parseFloat(from.modifier.value) * 100 * 1e4) / 1e4
+  return Number.isFinite(opacity) ? { colorAlias: from.target, opacity } : undefined
+}
+
 export function rgbToHex({ r, g, b, a }: Color) {
   if (a === undefined) {
     a = 1

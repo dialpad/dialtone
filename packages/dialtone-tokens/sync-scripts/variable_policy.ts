@@ -215,12 +215,13 @@ export const SCOPES: ScopeRule[] = [
   // The trailing `(-[a-z0-9-]+)?` catches state suffixes: a role can be spelled
   // `color.background.hover` or `color.background-hover` depending on the set.
   { label: 'background', match: /(^|\.)color\.(surface|background)(-[a-z0-9-]+)?($|\.)|(^|\.)background(-[a-z0-9-]+)?($|\.)/, scopes: ['FRAME_FILL', 'SHAPE_FILL'] },
-  // `SHAPE_FILL` as well as `TEXT_FILL`, because a Dialtone icon inherits the
-  // foreground colour and an icon in Figma is a vector, which is a shape and
-  // not text. Text-only scoping would leave every icon unable to reach the
-  // colour it is supposed to take. Frames are deliberately not included: a
-  // foreground colour has no business filling a container.
-  { label: 'foreground', match: /(^|\.)color\.(foreground|link)(-[a-z0-9-]+)?($|\.)|(^|\.)foreground(-[a-z0-9-]+)?($|\.)/, scopes: ['TEXT_FILL', 'SHAPE_FILL'] },
+  // `SHAPE_FILL` and `STROKE_COLOR` as well as `TEXT_FILL`, because a Dialtone
+  // icon inherits the foreground colour and an icon in Figma is a vector, which
+  // is a shape and not text, and an outline icon takes its colour from a
+  // stroke. Text-only scoping would leave every icon unable to reach the colour
+  // it is supposed to take. Frames are deliberately not included: a foreground
+  // colour has no business filling a container.
+  { label: 'foreground', match: /(^|\.)color\.(foreground|link)(-[a-z0-9-]+)?($|\.)|(^|\.)foreground(-[a-z0-9-]+)?($|\.)/, scopes: ['TEXT_FILL', 'SHAPE_FILL', 'STROKE_COLOR'] },
   // The bare `border` alternative has to stay behind a `color` segment.
   // Without that it also matches `size.border.100`, which is a FLOAT, and
   // Figma rejects the whole payload for one colour scope on a number.

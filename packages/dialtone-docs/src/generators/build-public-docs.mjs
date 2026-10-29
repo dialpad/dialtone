@@ -52,8 +52,9 @@ function extractTitle(frontmatter, body) {
  * Returns: Array<{ headingPath: string[], raw: string }>
  *
  * NOTE: stripMarkdown consumes fenced code, comments and script/style blocks in
- * extractProse before htmlTag strips VuePress directives. Keep extractProse first
- * in strip-markdown.mjs.
+ * extractProse before htmlTag strips VuePress directives. Usage-slot boundaries
+ * are protected there too; labels are finalized only after stripping empty slots.
+ * Keep extractProse first in strip-markdown.mjs.
  */
 export function chunkSections(body) {
   const lines = body.split('\n');
