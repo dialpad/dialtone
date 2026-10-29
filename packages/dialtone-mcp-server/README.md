@@ -84,7 +84,7 @@ Find icons from Dialtone's icon library.
 
 **MCP server not connecting:**
 1. Check the client-specific configuration and its selected scope. Claude Code uses project `.mcp.json` or local/user entries in `~/.claude.json`; Codex uses its TOML configuration.
-2. From the installation directory, check `npm ls @dialpad/dialtone-mcp-server`. A workspace may hoist the package outside the application's own `node_modules`.
+2. For a project or dedicated installation, run `npm ls @dialpad/dialtone-mcp-server` from its installation directory; use `npm ls -g @dialpad/dialtone-mcp-server` for a global installation. For `npx`, check the connected server version; `npm ls` does not identify a cached selection. A workspace may hoist the package outside the application's own `node_modules`.
 3. Inspect client status/logs and available tools. `claude mcp list` and `claude mcp get dialtone` inspect registration and can health-check a server; Codex has its own MCP status. Neither proves model tool selection.
 4. Check absolute installed-data roots and the selected source/fallback in a detail reply. Preserve existing trust, permission and exposure settings.
 
