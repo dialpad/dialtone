@@ -72,7 +72,7 @@ The loader inherits the text color of its parent through `currentColor`, so insi
 
 - You can add an `aria-label` attribute to the loader to indicate a custom label.
 - If no `aria-label` is provided, the default value is "loading".
-- When the user prefers reduced motion, the default loader's dots stop moving and gently pulse in opacity instead.
+- When the user prefers reduced motion, the loader stops moving and gently pulses in opacity instead. This applies to both the dots and the spinner.
 
 ## Vue API
 

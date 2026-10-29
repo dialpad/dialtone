@@ -4,7 +4,7 @@
     :aria-label="ariaLabel || 'loading'"
     data-qa="dt-loader"
   >
-    <template v-if="kind === 'spinner'">
+    <template v-if="isSpinner">
       <svg
         :class="['d-icon', `d-icon--size-${size}`, 'd-loader__icon-track']"
         data-qa="dt-loader-icon-track"
@@ -58,6 +58,11 @@
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
+      <!--
+        Rest positions and radii in the 24-unit viewBox. They must stay in sync
+        with the keyframes in loader.less, which include a 5% outward spread and
+        a 0.9655 scale on top of the Figma spec.
+      -->
       <circle
         class="d-loader__dot d-loader__dot--1"
         data-qa="dt-loader-dot"
@@ -130,8 +135,12 @@ export default {
   },
 
   computed: {
+    isSpinner () {
+      return this.kind === 'spinner';
+    },
+
     loaderKindClass () {
-      return LOADER_KIND_MODIFIERS[this.kind];
+      return this.isSpinner ? LOADER_KIND_MODIFIERS.spinner : LOADER_KIND_MODIFIERS.dots;
     },
   },
 };

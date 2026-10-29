@@ -81,8 +81,11 @@ describe('DtLoader Tests', function () {
         expect(wrapper.classes()).toContain('d-loader--spinner');
       });
 
-      it('Should render the track and the spinning icon', () => {
+      it('Should render the track', () => {
         expect(wrapper.find('[data-qa="dt-loader-icon-track"]').exists()).toBe(true);
+      });
+
+      it('Should render the spinning icon', () => {
         expect(loadingIcon.exists()).toBe(true);
       });
 
@@ -90,11 +93,18 @@ describe('DtLoader Tests', function () {
         expect(wrapper.findAll('[data-qa="dt-loader-dot"]').length).toBe(0);
       });
 
-      it('Should apply the size to both SVGs', () => {
-        mockProps = { kind: 'spinner', size: '200' };
-        updateWrapper();
-        expect(wrapper.find('[data-qa="dt-loader-icon-track"]').classes()).toContain('d-icon--size-200');
-        expect(loadingIcon.classes()).toContain('d-icon--size-200');
+      describe('When size prop is set', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ size: '200' });
+        });
+
+        it('Should apply the size to the track', () => {
+          expect(wrapper.find('[data-qa="dt-loader-icon-track"]').classes()).toContain('d-icon--size-200');
+        });
+
+        it('Should apply the size to the spinning icon', () => {
+          expect(loadingIcon.classes()).toContain('d-icon--size-200');
+        });
       });
     });
   });
@@ -113,6 +123,27 @@ describe('DtLoader Tests', function () {
 
       it('Has custom aria label', () => {
         expect(wrapper.attributes('aria-label')).toBe('custom aria label');
+      });
+    });
+
+    describe('When rendered with the default kind', () => {
+      it('Hides its SVG from assistive technology', () => {
+        expect(wrapper.findAll('svg').map(svg => svg.attributes('aria-hidden'))).toEqual(['true']);
+      });
+    });
+
+    describe('When kind is spinner', () => {
+      beforeEach(() => {
+        mockProps = { kind: 'spinner' };
+        updateWrapper();
+      });
+
+      it('Keeps the default aria label', () => {
+        expect(wrapper.attributes('aria-label')).toBe(MOCK_DEFAULT_ARIA_LABEL);
+      });
+
+      it('Hides both SVGs from assistive technology', () => {
+        expect(wrapper.findAll('svg').map(svg => svg.attributes('aria-hidden'))).toEqual(['true', 'true']);
       });
     });
   });

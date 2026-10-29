@@ -549,13 +549,17 @@
 
 //  ============================================================================
 //  $   REDUCED MOTION
-//      Drop the orbit and scale, keep a gentle opacity pulse so the loader
-//      still reads as active.
+//      Drop the dots' orbit and scale and the spinner's rotation, and keep a
+//      gentle opacity pulse so the loader still reads as active.
 //  ----------------------------------------------------------------------------
 @media (prefers-reduced-motion: reduce) {
   .d-loader__dot {
     animation-name: d-loader-pulse;
     animation-timing-function: var(--ttf-in-out);
+  }
+
+  .d-loader--spinner .d-loader__icon {
+    animation: d-loader-pulse var(--loader-duration) var(--ttf-in-out) infinite;
   }
 }
 }
