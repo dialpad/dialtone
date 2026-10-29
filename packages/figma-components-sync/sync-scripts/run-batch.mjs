@@ -524,6 +524,7 @@ if (iconReport) {
     console.log(`  ✓ ${iconReport.repaired} untouched icon(s) had an unbound fill and were bound in place`);
   }
   if (iconReport.updated) {
+    console.log(`  ⚠ replaced: ${(iconReport.updatedNames || []).slice(0, 20).join(', ') || '(not named by this plugin build)'}`);
     console.log(`  ⚠ ${iconReport.updated} icon(s) had their artwork replaced — any component `
       + `placing them needs rebuilding, or its icons keep the library's own colour`);
   }

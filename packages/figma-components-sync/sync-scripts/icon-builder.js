@@ -42,6 +42,7 @@ async function buildIcons ({ D }) {
 
   const ids = {};
   let created = 0, updated = 0, unchanged = 0, bound = 0, repaired = 0;
+  const updatedNames = [];
   /** Marks the description as ours, so a human-written description is never mistaken for one. */
   const HASH_PREFIX = 'dt-icon-content:';
   const failures = [];
@@ -130,6 +131,7 @@ async function buildIcons ({ D }) {
         comp.description = HASH_PREFIX + it.hash;
         tmp.remove();
         updated++;
+        updatedNames.push(it.name);
       } else {
         comp = figma.createComponentFromNode(tmp);
         comp.name = it.name;
@@ -146,6 +148,6 @@ async function buildIcons ({ D }) {
     }
   }
 
-  return { page: D.page, created, updated, unchanged, repaired, boundFills: bound,
+  return { page: D.page, created, updated, updatedNames, unchanged, repaired, boundFills: bound,
            defaultFillVar: fillVar ? DEFAULT_FILL_VAR : null, ids, failures };
 }

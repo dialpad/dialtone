@@ -240,17 +240,19 @@ async function main () {
     const ids = {};
     let created = 0, updated = 0, unchanged = 0, repaired = 0, boundFills = 0, defaultFillVar = null;
     const failures = [];
+    const updatedNames = [];
     for (const s of index.icons.shards) {
       const D = await (await fetch(BASE + '/shards/' + s.file)).json();
       figma.notify('icons ' + s.file, { timeout: 400 });
       const r = await buildIcons({ D });
       Object.assign(ids, r.ids);
       created += r.created; updated += r.updated; unchanged += r.unchanged || 0; repaired += r.repaired || 0; boundFills += r.boundFills;
+      for (const n of (r.updatedNames || [])) updatedNames.push(n);
       defaultFillVar = r.defaultFillVar;
       for (const f of r.failures) failures.push(f);
     }
     iconReport = runIcons = { page: index.icons.page, expected: index.icons.total,
-                   created, updated, unchanged, repaired, boundFills, defaultFillVar,
+                   created, updated, updatedNames, unchanged, repaired, boundFills, defaultFillVar,
                    built: Object.keys(ids).length, ids, failures };
   }
 
