@@ -133,12 +133,12 @@ description: "Dialtone design system lookups"
 
 # Dialtone Design System
 
-When working with Dialtone components, tokens, or utility classes, use the `dialtone` CLI for lookups:
+Run these commands from the application directory. When working with Dialtone components, tokens, or utility classes, use the `dialtone` CLI for lookups:
 
-- Component API: `dialtone component <name> --props`
-- Single prop: `dialtone component <name> --prop <prop>`
-- Token lookup: `dialtone token "<query>"`
-- Utility classes: `dialtone utility "<query>"`
+- Component API: `npm exec --no -- dialtone component <name> --props`
+- Single prop: `npm exec --no -- dialtone component <name> --prop <prop>`
+- Token lookup: `npm exec --no -- dialtone token "<query>"`
+- Utility classes: `npm exec --no -- dialtone utility "<query>"`
 - Structured data: add `--format json` to any command
 
 Prefer the CLI over reading source files for design system information. It searches
@@ -159,9 +159,11 @@ description: "Look up a Dialtone component. Use when referencing component props
 
 # Dialtone Lookup
 
-1. Run `dialtone component <name> --format json` to get full component data
-2. If you need specific prop values, run `dialtone component <name> --prop <prop>`
-3. For LLM-optimized context, run `dialtone prompt <name>`
+Run these commands from the application directory.
+
+1. Run `npm exec --no -- dialtone component <name> --format json` to get full component data
+2. If you need specific prop values, run `npm exec --no -- dialtone component <name> --prop <prop>`
+3. For LLM-optimized context, run `npm exec --no -- dialtone prompt <name>`
 ```
 
 ### Agents
@@ -173,13 +175,13 @@ An agent can call the CLI via Bash to research design system questions:
 description: "Research Dialtone design system components, tokens, and utilities."
 ---
 
-Use the `dialtone` CLI to look up design system information:
+Run these commands from the application directory. Use the `dialtone` CLI to look up design system information:
 
-- `dialtone search "<query>"` — broad search across all domains
-- `dialtone search "<term1>|<term2>"` — OR search across multiple terms
-- `dialtone component <name> --format json` — full component data
-- `dialtone token "<query>" --format json` — token data
-- `dialtone utility "<query>" --format json` — utility class data
+- `npm exec --no -- dialtone search "<query>"` — broad search across all domains
+- `npm exec --no -- dialtone search "<term1>|<term2>"` — OR search across multiple terms
+- `npm exec --no -- dialtone component <name> --format json` — full component data
+- `npm exec --no -- dialtone token "<query>" --format json` — token data
+- `npm exec --no -- dialtone utility "<query>" --format json` — utility class data
 
 Always use `--format json` when processing results programmatically.
 ```

@@ -37,6 +37,7 @@ Restart the server or reconnect/restart the client after package, configuration 
 ## What You Can Search
 
 ### 1. Utility Classes
+
 Find CSS utility classes for styling HTML elements.
 
 **Example queries:**
@@ -47,6 +48,7 @@ Find CSS utility classes for styling HTML elements.
 - `text align center` → d-ta-center
 
 ### 2. Design Tokens
+
 Search for design tokens (CSS variables).
 
 **Example queries:**
@@ -56,6 +58,7 @@ Search for design tokens (CSS variables).
 - `font weight bold` → --dt-font-weight-bold
 
 ### 3. Components
+
 Discover Vue components with props, events, and slots.
 
 **Example queries:**
@@ -64,6 +67,7 @@ Discover Vue components with props, events, and slots.
 - `checkbox` → DtCheckbox, DtCheckboxGroup, DtRadio
 
 ### 4. Icons
+
 Find icons from Dialtone's icon library.
 
 **Example queries:**

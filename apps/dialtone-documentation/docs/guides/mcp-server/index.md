@@ -4,6 +4,7 @@ description: Search Dialtone's design system with AI assistants using the Model 
 keywords:
   [
     "model context protocol",
+    "mcp server configuration",
     "ai assistant",
     "documentation search",
     "agent",
