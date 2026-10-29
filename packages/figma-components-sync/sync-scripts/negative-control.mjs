@@ -321,6 +321,11 @@ const PERTURBATIONS = [
     target: n => n.type !== 'TEXT' && !SHAPES.includes(n.type) && !!(n.fills || [])[0],
     apply: n => hostilePaint(n.fills[0]),
     domPre: d => alpha(d.style.backgroundColor) >= 0.005 },
+  // The other direction: a fill Figma paints where the browser paints none.
+  { expect: 'background', what: 'a visible fill added to a frame the browser leaves transparent',
+    target: n => n.type !== 'TEXT' && !SHAPES.includes(n.type) && !(n.fills || []).some(f => f.visible !== false),
+    apply: (n) => { n.fills = [{ type: 'SOLID', visible: true, color: { r: 1, g: 0, b: 0 }, opacity: 1 }]; return true; },
+    domPre: d => alpha(d.style.backgroundColor) < 0.005 },
   { expect: 'svgFill', what: 'shape fill -> hostile colour (hue flipped)',
     target: n => SHAPES.includes(n.type) && !!(n.fills || [])[0],
     apply: n => hostilePaint(n.fills[0]),
@@ -560,6 +565,15 @@ const PERTURBATIONS = [
     target: n => (n.effects || []).length > 0,
     apply: (n) => { n.effects = []; return true; },
     domPre: d => d.style.boxShadow && d.style.boxShadow !== 'none' && !/inset/.test(d.style.boxShadow) },
+  // An effect no CSS layer claims, on a node that DOES have a matching shadow layer.
+  { expect: 'shadow', what: 'an extra DROP_SHADOW added beside the matching one',
+    target: n => (n.effects || []).length > 0,
+    apply: (n) => {
+      n.effects = [...n.effects, { type: 'DROP_SHADOW', visible: true, color: { r: 0, g: 0, b: 0, a: 0.5 },
+        offset: { x: 0, y: 9 }, radius: 9, blendMode: 'NORMAL' }];
+      return true;
+    },
+    domPre: d => d.style.boxShadow && d.style.boxShadow !== 'none' },
   { expect: 'shadow', what: 'a DROP_SHADOW effect added',
     target: n => (n.effects || []).length === 0,
     apply: (n) => {
@@ -978,5 +992,7 @@ if (caveats.length) {
 
 console.log('gaps (a comparison that exists and does not fire):');
 console.log(gaps.length ? gaps.map(g => `  ${g}`).join('\n') : '  none');
-console.log(gaps.length ? '\n❌ FAIL' : '\n✅ every reachable comparison fired');
+const notExercised = results.filter(r => !r.caught).length;
+console.log(gaps.length ? '\n❌ FAIL'
+  : `\n✅ no gaps: every comparison that could be exercised on this data fired${notExercised ? ` (${notExercised} not exercised here, listed above)` : ''}`);
 process.exit(gaps.length ? 1 : 0);

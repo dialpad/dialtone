@@ -3,8 +3,8 @@
 Measures real rendered Dialtone Vue components — via a headless browser and the Chrome
 DevTools Protocol, reading the browser's own computed-style cascade as ground truth,
 not a reimplementation of it — and builds matching Figma component variant sets through
-a dev plugin. Four independent verification passes (values, token identity, slot
-correctness, and a raster screenshot diff) check the result, plus a negative-control
+a dev plugin. Verification passes (values, token identity, both slot states of a merged
+set, and a raster screenshot diff) check the result, plus a negative-control
 pass that perturbs every comparable field to prove the checks themselves actually fire.
 
 Sibling to [`@dialpad/dialtone-figma-styles-sync`](../figma-styles-sync/README.md),
@@ -35,6 +35,11 @@ own rebuild and check.
 ## Setup
 
 It needs Node 22.18 or newer, because the provenance step loads TypeScript from the tokens package with native type stripping.
+
+The measurement harness imports the built `dialtone-vue`, `dialtone-icons` and `dialtone-css`
+packages and the token CSS, so build them first (`pnpm nx run dialtone-vue:build` and
+`pnpm nx run dialtone-css:build` cover them). `dialtone-tokens` is also an implicit dependency:
+its `resolve_tokens.ts` is loaded at runtime.
 
 The pipeline reads a gitignored `.env` in this package. Never commit it or paste a token
 into a chat, a PR or a log.

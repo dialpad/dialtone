@@ -25,7 +25,7 @@ import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
   shadowLayerColorTokens } from './cdp-provenance.mjs';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
-import { defaultCombo } from './default-variant.mjs';
+import { defaultCombo, wantedDefaults } from './default-variant.mjs';
 import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
@@ -1120,6 +1120,17 @@ for (const combo of combos) {
 const propDefaults = await page.evaluate(n => window.__propDefaults(n), cfg.component);
 const defaultComboFound = defaultCombo(cfg, variants.map(v => v.combo), propDefaults);
 const defaultVariant = defaultComboFound ? variants.find(v => v.combo === defaultComboFound) : null;
+// The code's exact default can be a combination the component rejects (default/primary is invalid for
+// the circular button), and the closest valid variant is then used. Say so, not silently.
+const exactDefault = wantedDefaults(cfg, propDefaults);
+const defaultAdjusted = defaultComboFound
+  && Object.keys(exactDefault).some(a => String(defaultComboFound[a]) !== String(exactDefault[a]))
+  ? { wanted: exactDefault, used: Object.fromEntries(Object.keys(exactDefault).map(a => [a, defaultComboFound[a]])) }
+  : null;
+if (defaultAdjusted) {
+  console.log(`default    : the code's default ${JSON.stringify(exactDefault)} is not a valid variant here; `
+    + `using the closest, ${JSON.stringify(defaultAdjusted.used)}`);
+}
 // Figma's default variant is the TOP-LEFT one on the canvas, and the builder lays variants out in
 // row order, so the default goes first. Everything else keeps its order.
 if (defaultVariant) { variants.splice(variants.indexOf(defaultVariant), 1); variants.unshift(defaultVariant); }
@@ -1190,6 +1201,7 @@ const out = { component: which, vue: cfg.component,
   // clean, and a merged set that turns out wrong would have cost the good one.
   page: cfg.page + (MERGED_TRIAL ? ' Merged' : ''), axes: cfg.axes,
   defaultVariant: defaultVariant ? defaultVariant.name : null,
+  defaultAdjusted: defaultAdjusted || undefined,
   slotDrift: slotDrift.length ? slotDrift : undefined, variants };
 
 /**

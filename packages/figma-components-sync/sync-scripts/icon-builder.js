@@ -41,7 +41,7 @@ async function buildIcons ({ D }) {
   }
 
   const ids = {};
-  let created = 0, updated = 0, unchanged = 0, bound = 0;
+  let created = 0, updated = 0, unchanged = 0, bound = 0, repaired = 0;
   /** Marks the description as ours, so a human-written description is never mistaken for one. */
   const HASH_PREFIX = 'dt-icon-content:';
   const failures = [];
@@ -81,6 +81,9 @@ async function buildIcons ({ D }) {
         }
       }
 
+      // The GLOBAL slot, not the index within this shard: every shard restarts `i` at 0, so each
+      // later shard was placed on top of the cells the earlier ones had already filled.
+      const slot = (D.indexOffset || 0) + i;
       let comp = existing.get(it.name);
       if (comp) {
         /**
@@ -101,8 +104,24 @@ async function buildIcons ({ D }) {
           tmp.remove();
           unchanged++;
           ids[it.name] = comp.id;
-          comp.x = (i % COLS) * CELL;
-          comp.y = Math.floor(i / COLS) * CELL;
+          /**
+           * BIND AN UNBOUND FILL IN PLACE. The skip above is keyed on the SVG content alone, so an
+           * icon first built while the default fill variable could not be found was saved with a
+           * literal black fill, its hash recorded, and never revisited once the variable became
+           * available. Binding the existing vectors changes no child and no node id, so instance
+           * overrides survive, which is the point of leaving unchanged icons alone.
+           */
+          if (it.mono && fillVar) {
+            for (const n of comp.findAll(x => x.type === 'VECTOR')) {
+              const bv = n.boundVariables && n.boundVariables.fills;
+              if (bv && bv.length) continue;
+              n.fills = [figma.variables.setBoundVariableForPaint(
+                { type: 'SOLID', color: { r: 0, g: 0, b: 0 }, opacity: 1 }, 'color', fillVar)];
+              bound++; repaired++;
+            }
+          }
+          comp.x = (slot % COLS) * CELL;
+          comp.y = Math.floor(slot / COLS) * CELL;
           continue;
         }
         for (const c of comp.children.slice()) c.remove();
@@ -118,9 +137,6 @@ async function buildIcons ({ D }) {
         existing.set(it.name, comp);
         created++;
       }
-      // The GLOBAL slot, not the index within this shard: every shard restarts `i` at 0, so
-      // each later shard was placed on top of the cells the earlier ones had already filled.
-      const slot = (D.indexOffset || 0) + i;
       comp.x = (slot % COLS) * CELL;
       comp.y = Math.floor(slot / COLS) * CELL;
       ids[it.name] = comp.id;
@@ -130,6 +146,6 @@ async function buildIcons ({ D }) {
     }
   }
 
-  return { page: D.page, created, updated, unchanged, boundFills: bound,
+  return { page: D.page, created, updated, unchanged, repaired, boundFills: bound,
            defaultFillVar: fillVar ? DEFAULT_FILL_VAR : null, ids, failures };
 }

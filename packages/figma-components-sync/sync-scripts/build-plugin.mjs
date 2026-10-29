@@ -145,6 +145,8 @@ writeFileSync(`${PLUGIN_DIR}/code.js`, `/**
 // an allowlisted entry. The server binds BOTH loopback stacks, because localhost
 // resolves to ::1 first on macOS and an IPv4-only bind would look like "server down".
 const BASE = 'http://localhost:8931';
+// A per-run secret the server hands out in index.json and requires on every POST.
+let runToken = '';
 
 figma.showUI(__html__, { width: 360, height: 420 });
 
@@ -228,6 +230,7 @@ async function main () {
                     spreadProbe: await probeSpreadWrite() };
   runRuntime = runtime;
   const index = await (await fetch(BASE + '/shards/index.json')).json();
+  runToken = index.runToken || '';
   const report = runReport;
 
   // Icons FIRST: a component that places an icon instance needs the icon component to
@@ -235,19 +238,19 @@ async function main () {
   let iconReport = null;
   if (index.icons) {
     const ids = {};
-    let created = 0, updated = 0, unchanged = 0, boundFills = 0, defaultFillVar = null;
+    let created = 0, updated = 0, unchanged = 0, repaired = 0, boundFills = 0, defaultFillVar = null;
     const failures = [];
     for (const s of index.icons.shards) {
       const D = await (await fetch(BASE + '/shards/' + s.file)).json();
       figma.notify('icons ' + s.file, { timeout: 400 });
       const r = await buildIcons({ D });
       Object.assign(ids, r.ids);
-      created += r.created; updated += r.updated; unchanged += r.unchanged || 0; boundFills += r.boundFills;
+      created += r.created; updated += r.updated; unchanged += r.unchanged || 0; repaired += r.repaired || 0; boundFills += r.boundFills;
       defaultFillVar = r.defaultFillVar;
       for (const f of r.failures) failures.push(f);
     }
     iconReport = runIcons = { page: index.icons.page, expected: index.icons.total,
-                   created, updated, unchanged, boundFills, defaultFillVar,
+                   created, updated, unchanged, repaired, boundFills, defaultFillVar,
                    built: Object.keys(ids).length, ids, failures };
   }
 
@@ -378,7 +381,7 @@ async function main () {
     try {
       await fetch(BASE + '/progress', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-Run-Token': runToken },
         body: JSON.stringify({ runtime: runtime, component: report[report.length - 1] }),
       });
     } catch (e) { /* server gone, or the run is being watched rather than driven */ }
@@ -389,7 +392,7 @@ async function main () {
   try {
     await fetch(BASE + '/results', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-Run-Token': runToken },
       body: JSON.stringify({ runtime, components: report, icons: iconReport }),
     });
   } catch (e) { /* server may be gone; the closePlugin message still carries it */ }
@@ -418,7 +421,7 @@ figma.ui.onmessage = async (msg) => {
     try {
       await fetch(BASE + '/results', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-Run-Token': runToken },
         body: JSON.stringify({ runtime: runRuntime, components: runReport, icons: runIcons,
                                aborted: msgText }),
       });

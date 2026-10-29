@@ -40,7 +40,8 @@ async function applySlotProperties (set, slotLayers, textLayers) {
   const humanise = slotLabel;
   const bySlot = {};
   for (const L of slotLayers) {
-    bySlot[L.slot] = bySlot[L.slot] || { kind: L.kind, layers: [], swapDefault: null };
+    bySlot[L.slot] = bySlot[L.slot] || { kind: L.kind, kinds: new Set(), layers: [], swapDefault: null };
+    bySlot[L.slot].kinds.add(L.kind);
     bySlot[L.slot].layers.push(L);
     if (!bySlot[L.slot].swapDefault && L.swapDefaultId) bySlot[L.slot].swapDefault = L.swapDefaultId;
   }
@@ -155,7 +156,7 @@ async function applySlotProperties (set, slotLayers, textLayers) {
   }));
 
   const slots = Object.entries(bySlot).map(([slot, i]) => ({
-    slot, kind: i.kind, layers: i.layers.length, varies: i.varies || 0,
+    slot, kind: i.kind, mixedKinds: i.kinds.size > 1, layers: i.layers.length, varies: i.varies || 0,
     swapAxis: i.swapGroups ? i.swapGroups.axis : null,
     swapCount: i.swapProps ? i.swapProps.length : (i.swapProp ? 1 : 0),
     boolProp: i.boolProp || null, swapProp: i.swapProp || null,

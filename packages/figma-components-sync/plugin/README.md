@@ -79,7 +79,7 @@ of this.
    node packages/figma-components-sync/sync-scripts/build-plugin.mjs button button_link notice banner
    ```
 
-   Named components only; omitting the list builds the six components in the registry. It
+   Named components only; omitting the list builds every registered component. It
    re-encodes each one, shards anything large, writes
    `sync-scripts/build-data/shards/` plus `index.json`, and regenerates `code.js`.
 
@@ -119,7 +119,7 @@ of this.
    before the failure are still listed.
 
 5. **Wire the set IDs into the configs** — the checks need them:
-   - `sync-scripts/configs/<name>.mjs` → `figmaSetId` (banner, button_link, collapsible, loader, notice)
+   - `sync-scripts/configs/<name>.mjs` → `figmaSetId` (every file in that directory, for example `banner`, `button_icon`, `button_stacked`)
    - `sync-scripts/component-axes.mjs` → `figmaSetId` (button)
 
 6. **Verify.** This is the part that matters:
@@ -128,8 +128,8 @@ of this.
    node packages/figma-components-sync/sync-scripts/check-all.mjs button button_link notice banner
    ```
 
-   Three passes per component — rendered values in both light and dark, token identity,
-   and slots where a slot set exists. Then look at it, because numbers agreeing is not
+   Two passes per component — rendered values in both light and dark (both slot states for a
+   merged set), and token identity. Then look at it, because numbers agreeing is not
    the same as it rendering right:
 
    ```

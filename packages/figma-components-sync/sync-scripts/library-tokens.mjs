@@ -1,7 +1,7 @@
 /**
  * Name → key for variables published by the Dialtone Design Tokens 2026 library.
  *
- * This experiment file has the library LINKED, not its variables created locally —
+ * The scratch file has the library LINKED, not its variables created locally —
  * `getLocalVariablesAsync()` / `GET /v1/files/:key/variables/local` only ever see
  * variables a file owns itself, never ones it merely consumes. The library's own
  * source file (`dialtone-tokens`' FILE_KEY, here as TOKENS_FILE_KEY) still answers

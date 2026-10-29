@@ -9,7 +9,7 @@ described here and checked clean. More are added in batches, each with its rebui
 
 Not in CI. It needs a browser, a Figma PAT, and a scratch file that is nobody's source of
 truth. Credentials live in `packages/figma-components-sync/.env` (`PERSONAL_ACCESS_TOKEN`,
-`FILE_KEY`, `TOKENS_FILE_KEY`), mode 600, gitignored. See the package README for what each
+`FILE_KEY`, `TOKENS_FILE_KEY`), gitignored. Keep it private to your user. See the package README for what each
 one is.
 
 ## The one command
@@ -490,6 +490,12 @@ Each was added after the failure it prevents. The log has the evidence.
 | `paint()` refuses a colour binding whose variable holds a different colour, but only when EVERY mode is a concrete colour | a misattributed token painting the wrong colour. The mode qualifier is not fussiness: without it, a variable that aliases in one mode was compared against the other mode's value, and 64 correct bindings became literals that were wrong in dark |
 | `run-batch` refuses a batch that rebuilds a swap target together with a component that swaps to it | the dependent's payload pointing at variant ids the rebuild just deleted. Build the target first, then the dependent in its own run |
 | `run-batch` records a reported set id only for a component in the batch and only if it has the shape of a node id | the local server answers any origin, and the id is written into config source that `check-all` imports |
+| `run-batch`'s server answers only loopback hosts, a browser Origin of `null` (what a Figma plugin sends) and POSTs carrying a per-run token handed out in `index.json` | a web page the user has open, or a DNS-rebinding page, ending a run early or pointing a config at an unrelated set. Probed live: a web Origin, a wrong Host, a missing or wrong token, a malformed body and a forged id are all refused |
+| `preflight.mjs` refuses to run with no component names | "all payloads clean" printed for a run that checked nothing |
+| the values pass flags a fill Figma paints where the browser paints none, an effect no CSS layer claims, and only reads the first VISIBLE paint | one-directional comparisons: a spurious fill or extra shadow, or a hidden first fill, passing |
+| `check-all` exits non-zero when a pass was skipped (`--allow-skips` to accept) | a component whose toggled state was never checked ending as "all passes clean" |
+| `slotSpacingDrift` is matched against what `build-spec` recorded: the same node, the same property, the empty value in Figma and the filled value in the browser | a 2px error on another node, or in the other direction, hiding as an allowance |
+| the centred-child allowance needs the parent to have grown (more than 0.5px) and the child to have moved the same way | a plain x error of a few pixels passing in the filled state |
 | `combosFor()` is the only expansion of a config's axes | the measure and the checks disagreeing about which variants exist. Five files had a verbatim copy; making `invalid` optional needed five edits and got one, and all ten checks died after a plugin run on work that was already correct |
 | the one-variable-one-number sweep in `build-spec` | binding a token that resolves to different numbers in different places. `--dt-layout-100-percent` holds 28 distinct pixel values across DtAvatar |
 
@@ -550,6 +556,9 @@ These appear in every run's allowances. A divergence nobody can see is the failu
 - Computed colours (`color-mix()`, relative colour, an oklch hue expression) have no token, so
   they get a synthesised variable in `Dialtone Derived (synthesised by sync)` with both modes
   measured. A literal cannot follow the mode.
+- A bound paint's alpha is the variable's own alpha. Figma's reported paint `opacity` mirrors it, so
+  multiplying the two counts it twice: tried, wrong, and checked against rendered pixels (a
+  synthesised variable at a = 0.65 renders at 166/255, not 0.4225).
 - A swap property shows one value across the variants bound to it, so a slot whose default
   differs gets one property per default. See above.
 - A declared exemplar's internals are not compared against the render.
@@ -570,13 +579,12 @@ These appear in every run's allowances. A divergence nobody can see is the failu
 - `use_figma` has no `fetch`, so the image import is plugin-only.
 - The identity pass fails on a DISAGREEMENT and on a zero denominator, **not** on
   "declared but unbound". A component can report `every binding matches the declared token`
-  with several hundred declarations baked as literals. DtToggle does, with 540. Some of those
-  look like exemptions not reaching pseudo-element nodes rather than real misses; unresolved,
-  and written up in the follow-ups.
+  with several hundred declarations baked as literals (it prints the count as "declared but
+  unbound"). The values pass catches a literal colour only where Dark differs from Light, so a
+  mode-independent literal (a spacing, radius or size) is not caught by either.
 - Native controls are not represented inside their box. A `<select>`'s options live in a UA
   popup and measure 0×0, so the harness treats `<select>` as an opaque leaf. The options are
-  still passed, because Chrome sizes the control to its widest one. `configs/input.mjs` excludes
-  the native date, time, file and colour inputs for the same reason.
+  still passed, because Chrome sizes the control to its widest one.
 
 ## Files
 

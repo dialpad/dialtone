@@ -124,6 +124,9 @@ function varValue (id, modeName, d = 0, inLibrary = false) {
   }
   return val;
 }
+/** The first paint that is actually drawn. `fills[0]` can be hidden while a later one paints. */
+const firstVisible = (paints) => (paints || []).find(p => p && p.visible !== false);
+
 /** Returns the paint's colour in `modeName`, plus whether it is variable-bound. */
 function paintRGBA (p, modeName) {
   if (!p) return null;
@@ -131,6 +134,12 @@ function paintRGBA (p, modeName) {
   if (bv) {
     const v = varValue(bv.id, modeName);
     if (!v || !('r' in v)) return null;
+    // The variable's alpha IS the paint's alpha. A review suggested multiplying in `p.opacity`, and
+    // that was tried and was wrong: for a bound paint Figma's reported `opacity` mirrors the
+    // variable's own alpha, so multiplying counts it twice (it reported 0.25 for a fill that
+    // renders at 0.50). Checked against rendered pixels over REST: a disabled button's fill, a
+    // synthesised variable with a = 0.65 and paint opacity 0.65, renders at alpha 166/255 = 0.65,
+    // not 0.4225; a composed-colour hover fill at 0.5 renders 128/255 = 0.50.
     return { r: v.r, g: v.g, b: v.b, a: v.a ?? 1, bound: true };
   }
   // NOT EVERY PAINT HAS A COLOUR. An IMAGE paint (and a gradient) has none, and this
@@ -279,6 +288,19 @@ const EXEMPT = {
 // about 3-5% wider; the box spread reports it), and the centred-child arithmetic halves it. Half
 // of the largest width spread measured (6.70px, on Button's size 500), with headroom, in px.
 const CENTRE_SHAPING_SLACK = 4;
+
+/** The spacing drift build-spec recorded for a merged component (`slotDrift` in its spec), or []. */
+const driftCache = new Map();
+function slotDriftOf (component) {
+  if (!driftCache.has(component)) {
+    let list = [];
+    for (const f of [`sync-scripts/build-data/${component}-spec.json`, `sync-scripts/build-data/${component}-merged-spec.json`]) {
+      try { list = JSON.parse(readFileSync(f, 'utf8')).slotDrift || []; if (list.length) break; } catch (e) { /* no spec */ }
+    }
+    driftCache.set(component, list);
+  }
+  return driftCache.get(component);
+}
 const COMPARED = new Set(['flexWrap', 'backgroundColor', 'color', 'borderTopColor',
   // Each side and each corner, separately. The three non-top widths sat in EXEMPT
   // ("folded into padding; compared via borderTopWidth") — both halves of which have
@@ -460,7 +482,9 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         }
         if (d > 0) for (const k of (n.children || [])) collect(k, d - 1);
       };
-      collect(fig, 6);
+      // The glyph's paint, not its container's: a wrong-coloured glyph must not pass because the
+      // wrapper frame carries the right fill.
+      if (['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE'].includes(fig.type)) { for (const k of (fig.children || [])) collect(k, 5); } else collect(fig, 6);
       if (!paints.length) {
         /**
          * NO PAINT ANYWHERE. Two very different situations, and they must not share an
@@ -501,10 +525,14 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
 
   // background — Figma paints it on the frame
   const domBg = col(s.backgroundColor);
-  const figBg = paintRGBA((fig.fills || [])[0], MODE);
+  const figBg = paintRGBA(firstVisible(fig.fills), MODE);
   const bgTransparent = !domBg || (domBg.a ?? 1) < 0.005;
   if (!bgTransparent && !nearC(domBg, figBg)) {
     rec(variant, path, 'background', fmt(domBg), fmt(figBg), figBg && !figBg.bound ? 'baked literal' : undefined);
+  } else if (bgTransparent && figBg && (figBg.a ?? 1) >= 0.01) {
+    // One-directional until now: a transparent browser background was never compared, so a frame
+    // carrying a spurious fill passed. (The 0.1% fill the builder gives a ring frame is below this.)
+    rec(variant, path, 'background', 'transparent', fmt(figBg), 'Figma paints a fill the browser does not');
   }
 
   /**
@@ -547,7 +575,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
 
   // text colour lives on the TEXT node in Figma
   if (dom.text && fig.type === 'TEXT') {
-    const domFg = col(s.color), figFg = paintRGBA((fig.fills || [])[0], MODE);
+    const domFg = col(s.color), figFg = paintRGBA(firstVisible(fig.fills), MODE);
     if (!nearC(domFg, figFg)) rec(variant, path, 'textColor', fmt(domFg), fmt(figFg), figFg && !figFg.bound ? 'baked literal' : undefined);
     if (!near(px(s.fontSize), fig.style?.fontSize)) rec(variant, path, 'fontSize', px(s.fontSize), fig.style?.fontSize);
     // A bold label would otherwise pass as regular: weight was captured, never compared.
@@ -590,7 +618,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       hasBackground: (col(s.backgroundColor)?.a ?? 0) >= 0.005,
     });
     const domW = (domBorderVisible || tbf) ? (px(s.borderTopWidth) || 0) : 0;
-    const figStroke = paintRGBA((fig.strokes || [])[0], MODE);
+    const figStroke = paintRGBA(firstVisible(fig.strokes), MODE);
     const figVisible = !!figStroke && (figStroke.a ?? 1) >= 0.005;
     /**
      * EACH SIDE COMPARED SEPARATELY.
@@ -779,10 +807,14 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
          * allowance and shown in every run. Outside the bound, or on any other property, it is
          * still a finding.
          */
-        const bound = (cfg.slotSpacingDrift && cfg.slotSpacingDrift[k]) || 0;
-        if (SLOT_PASS && bound && Math.abs(domV - figV) <= bound + 0.01) {
+        // Only what build-spec RECORDED: the same node, the same property, the empty value in Figma
+        // and the filled value in the browser. Any other 2px (a different node, the other direction)
+        // is still a finding.
+        const recorded = SLOT_PASS && slotDriftOf(which).find(e => e.path === path && e.prop === k
+          && near(figV, e.empty) && near(domV, e.filled));
+        if (recorded) {
           allowed.push({ variant, path,
-            reason: `slot-filled spacing drift: ${k} ${domV} in the browser, ${figV} in the merged set (slotSpacingDrift, at most ${bound})` });
+            reason: `slot-filled spacing drift: ${k} ${domV} in the browser, ${figV} in the merged set (recorded by build-spec as ${recorded.empty} empty vs ${recorded.filled} filled)` });
         } else {
           rec(variant, path, k, domV, figV);
         }
@@ -867,9 +899,12 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       const halfGrowth = domParentBox && typeof domParentBox.w === 'number'
         ? (domParentBox.w - figParentBox.width) / 2 : null;
       if (SLOT_PASS && fig.constraints && fig.constraints.horizontal === 'CENTER'
-          && halfGrowth !== null && Math.abs(dom.expectedRel.x - gotX - halfGrowth) <= CENTRE_SHAPING_SLACK) {
+          && halfGrowth !== null && halfGrowth > 0.5 && (dom.expectedRel.x - gotX) > 0
+          && Math.abs(dom.expectedRel.x - gotX - halfGrowth) <= CENTRE_SHAPING_SLACK) {
+        // A parent that did not grow (or a child that moved the wrong way) is not this case, so a
+        // plain x error of a few pixels cannot hide here. The size of what was accepted is recorded.
         allowed.push({ variant, path,
-          reason: 'centred child of a frame the filled state grows: REST reports the default size, Figma re-centres it (CENTER constraint)' });
+          reason: `centred child of a frame the filled state grows (parent +${(halfGrowth * 2).toFixed(1)}px): REST reports the default size, Figma re-centres it (CENTER constraint); offset ${(dom.expectedRel.x - gotX).toFixed(1)}px accepted` });
       } else {
         rec(variant, path, 'x', dom.expectedRel.x, +gotX.toFixed(2));
       }
@@ -1112,6 +1147,13 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         }
       }
     }
+    // The loop above only goes forward (every CSS layer must have an effect). An effect that no
+    // CSS layer claims was never flagged while at least one layer matched.
+    const extra = (fig.effects || []).filter(x => ['INNER_SHADOW', 'DROP_SHADOW'].includes(x.type)
+      && x.visible !== false && !claimed.has(x));
+    if (layers.length && extra.length) {
+      rec(variant, path, 'shadow', `${layers.length} layer(s)`, `${layers.length} + ${extra.length} extra (${extra.map(x => x.type).join('+')})`);
+    }
   } else if (!wantOutline && (fig.effects || []).some(x => ['INNER_SHADOW', 'DROP_SHADOW'].includes(x.type))) {
     rec(variant, path, 'shadow', 'none', (fig.effects || []).map(x => x.type).join('+'));
   }
@@ -1245,7 +1287,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
   // than reporting a phantom childCount mismatch.
   if (dom.text && !domKids.length && figKids.length === 1 && figKids[0].type === 'TEXT') {
     const figText = figKids[0];
-    const domFg = col(s.color), figFg = paintRGBA((figText.fills || [])[0], MODE);
+    const domFg = col(s.color), figFg = paintRGBA(firstVisible(figText.fills), MODE);
     if (!nearC(domFg, figFg)) rec(variant, `${path}/label`, 'textColor', fmt(domFg), fmt(figFg), figFg && !figFg.bound ? 'baked literal' : undefined);
     if (!near(px(s.fontSize), figText.style?.fontSize)) rec(variant, `${path}/label`, 'fontSize', px(s.fontSize), figText.style?.fontSize);
     // The mirror of the gap above: this branch checked lineHeight and not weight.

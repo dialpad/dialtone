@@ -301,5 +301,10 @@ for (const r of rows.filter(x => !x.ok)) {
 }
 
 const skipNote = skipped.length ? ` (${skipped.length} skipped)` : '';
-console.log(failed ? `\n❌ ${failed} of ${rows.length} passes failed${skipNote}` : `\n✅ all ${rows.length} passes clean${skipNote}`);
-process.exit(failed ? 1 : 0);
+// A SKIPPED pass is a pass that did not run: a component whose toggled state was never checked
+// must not end the run as "all clean". It fails unless `--allow-skips` says it is deliberate.
+const skipFails = skipped.length > 0 && !process.argv.includes('--allow-skips');
+console.log(failed ? `\n❌ ${failed} of ${rows.length} passes failed${skipNote}`
+  : skipFails ? `\n❌ ${rows.length} passes clean, but ${skipped.length} did not run${skipNote} (--allow-skips to accept)`
+  : `\n✅ all ${rows.length} passes clean${skipNote}`);
+process.exit(failed || skipFails ? 1 : 0);

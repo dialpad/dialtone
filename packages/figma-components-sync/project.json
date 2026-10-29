@@ -1,5 +1,6 @@
 {
   "name": "figma-components-sync",
+  "implicitDependencies": ["dialtone-tokens"],
   "targets": {
     "lint": {
       "executor": "nx:run-commands",

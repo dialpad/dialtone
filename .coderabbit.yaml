@@ -284,12 +284,11 @@ reviews:
 
         - Don't suggest duplicating color.ts, token_*.ts, transform.ts, utils.ts, or
           figma_api.ts here — the real versions live in
-          packages/dialtone-tokens/sync-scripts/ and nothing in this package imports
-          them today, so there's no reason to add a second copy.
+          packages/dialtone-tokens/sync-scripts/. This package only loads resolve_tokens.ts
+          and the built token CSS from that package, so there's no reason to add a second copy.
 
         - Credentials (Figma PAT, file key) belong in a gitignored .env, never inline
-          or in a commit. Flag any literal token/key — this package's own predecessor
-          leaked two PATs into a chat transcript, which is why this rule exists.
+          or in a commit. Flag any literal token/key.
 
     # CI workflows
     - path: '.github/workflows/**'

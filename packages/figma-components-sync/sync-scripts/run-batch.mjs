@@ -25,6 +25,7 @@
 import './pin-cwd.mjs';
 import { fileURLToPath } from 'url';
 import { createServer } from 'http';
+import { randomBytes } from 'crypto';
 import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, utimesSync } from 'fs';
 import { extname, normalize } from 'path';
 import { execFileSync, spawnSync } from 'child_process';
@@ -147,8 +148,8 @@ const index = JSON.parse(readFileSync(`${DIR}shards/index.json`, 'utf8'));
 const preflightNames = index.components.flatMap(c =>
   c.shards.length === 1 ? [c.component] : c.shards.map((_, i) => `${c.component}-${i + 1}of${c.shards.length}`));
 console.log('\n── 3. preflight ' + '─'.repeat(54));
-// With no components, `preflight.mjs` with no arguments checks EVERY payload on disk —
-// which would report on whatever was built last, not on this run. An icons-only build has
+// With no components there is nothing to hand preflight, and it now refuses to run with no
+// names (it used to check nothing and print "all payloads clean"). An icons-only build has
 // nothing here to check: build-icon-library.mjs validates its own payload at generation,
 // where the data is, and refuses to write one it cannot vouch for.
 if (!preflightNames.length) {
@@ -277,6 +278,8 @@ function writeSetId (component, setId) {
 const TYPES = { '.json': 'application/json', '.png': 'image/png' };
 let resolveReport;
 const reported = new Promise((r) => { resolveReport = r; });
+/** Components whose built default variant is not the one the code renders: a failed run, not a note. */
+const defaultMismatches = [];
 
 /**
  * ONLY A COMPONENT IN THIS BATCH, AND ONLY A NODE ID, MAY BE RECORDED.
@@ -335,10 +338,35 @@ function recordBuilt (r) {
 /** Components that reported individually, so a run that never reaches /results is not lost. */
 const progress = [];
 
+/**
+ * WHO MAY TALK TO THIS SERVER.
+ *
+ * It answers on localhost, receives results from a Figma plugin and writes set ids into source
+ * files that `check-all` then imports, so it is not a service to leave open. It used to answer any
+ * origin (`Access-Control-Allow-Origin: *`) and accept any well-formed POST, which let any web page
+ * the user had open (or a DNS-rebinding page) end a run early or point a config at an unrelated set.
+ *
+ * Three narrow gates instead:
+ *   - the Host header must be this machine's loopback name and port (defeats DNS rebinding);
+ *   - a browser Origin, when present, must be `null`, which is what a Figma plugin sends, and
+ *     never an http(s) page;
+ *   - a POST must carry the per-run token the plugin read out of index.json.
+ * A sandboxed iframe on another site also sends `Origin: null`, which is why the token exists on
+ * top of the origin check, and why index.json is the only place it is ever handed out.
+ */
+const RUN_TOKEN = randomBytes(16).toString('hex');
+const ALLOWED_HOSTS = new Set([`localhost:${PORT}`, `127.0.0.1:${PORT}`, `[::1]:${PORT}`]);
+
 const handler = (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  const origin = req.headers.origin;
+  if (!ALLOWED_HOSTS.has(String(req.headers.host || '').toLowerCase())
+      || (origin !== undefined && origin !== 'null')) {
+    res.writeHead(403); return res.end('forbidden');
+  }
+  if (origin === 'null') res.setHeader('Access-Control-Allow-Origin', 'null');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Run-Token');
   if (req.method === 'OPTIONS') { res.writeHead(204); return res.end(); }
+  const tokenOk = () => req.headers['x-run-token'] === RUN_TOKEN;
 
   /**
    * One component, posted the moment it finished. Deliberately does NOT resolve the run:
@@ -346,15 +374,19 @@ const handler = (req, res) => {
    * the run after the first component reported.
    */
   if (req.method === 'POST' && req.url === '/progress') {
+    if (!tokenOk()) { res.writeHead(403); return res.end('forbidden'); }
     let body = '';
     req.on('data', d => { body += d; });
     req.on('end', () => {
       res.writeHead(200); res.end('ok');
       let one = null;
       try { one = JSON.parse(body).component; } catch (e) { return; }
-      if (!one) return;
+      if (!one || typeof one !== 'object') return;
       progress.push(one);
-      const where = recordBuilt(one);
+      // A write that throws (an unanchorable config) must not take the server down while the
+      // plugin is still building: the components already reported would then have no recorded id.
+      let where = null;
+      try { where = recordBuilt(one); } catch (e) { console.log(`  ! could not record ${String(one.component)}: ${e && e.message}`); }
       console.log(`  ${String(one.component).padEnd(18)} ${String(one.built).padStart(4)} built`
         + `  set ${one.setId}${where ? '  → ' + where : '  (NO SET)'}`);
     });
@@ -362,15 +394,32 @@ const handler = (req, res) => {
   }
 
   if (req.method === 'POST' && req.url === '/results') {
+    if (!tokenOk()) { res.writeHead(403); return res.end('forbidden'); }
     let body = '';
     req.on('data', d => { body += d; });
     req.on('end', () => {
+      let parsed = null;
+      try { parsed = JSON.parse(body); } catch (e) { /* reported below */ }
+      // The shape the run depends on: an object with a components array of objects, or a bare
+      // array of them (an older plugin). Anything else is refused and does NOT end the run.
+      const list = Array.isArray(parsed) ? parsed : (parsed && parsed.components);
+      if (!Array.isArray(list) || list.some(r => !r || typeof r !== 'object')) {
+        res.writeHead(400); return res.end('bad request');
+      }
       writeFileSync(`${DIR}plugin-results.json`, body);
       res.writeHead(200); res.end('ok');
-      try { resolveReport(JSON.parse(body)); }
-      catch (e) { resolveReport({ parseError: String(e), body }); }
+      resolveReport(parsed);
     });
     return;
+  }
+
+  // index.json is where the per-run token is handed out, so it is served live with the token added.
+  if (req.method === 'GET' && (req.url || '').split('?')[0] === '/shards/index.json') {
+    try {
+      const idx = JSON.parse(readFileSync(`${DIR}shards/index.json`, 'utf8'));
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ...idx, runToken: RUN_TOKEN }));
+    } catch (e) { res.writeHead(404); return res.end('not found'); }
   }
 
   // A malformed escape (`/%E0`) makes decodeURIComponent throw URIError. Thrown inside the
@@ -423,8 +472,14 @@ servers[0].on('listening', () => {
 // already disagreed once (strokesIncludedInLayout, B-82) and a runtime difference is
 // invisible from this side. A bare array is still accepted so an older plugin build works.
 const posted = await reported;
-const report = Array.isArray(posted) ? posted
+const reportRaw = Array.isArray(posted) ? posted
   : (posted && Array.isArray(posted.components) ? posted.components : null);
+// The server already refused a non-object entry; an entry without a string component name would
+// still throw in the loops below, so it is dropped here (and said, not silently).
+const report = reportRaw ? reportRaw.filter(r => r && typeof r.component === 'string') : null;
+if (reportRaw && report.length !== reportRaw.length) {
+  console.log(`  ! ignored ${reportRaw.length - report.length} malformed entr${reportRaw.length - report.length === 1 ? 'y' : 'ies'} in the plugin's report`);
+}
 const runtime = (posted && !Array.isArray(posted) && posted.runtime) || null;
 /**
  * The plugin now posts on its way out of a FAILURE too, carrying whatever it had built.
@@ -465,6 +520,9 @@ if (iconReport) {
   // An UPDATED icon has had its children replaced, which discards every instance override
   // that pointed at them. Untouched icons keep theirs. Saying which is which is the only
   // warning anyone gets before a component's icons silently revert to the library colour.
+  if (iconReport.repaired) {
+    console.log(`  ✓ ${iconReport.repaired} untouched icon(s) had an unbound fill and were bound in place`);
+  }
   if (iconReport.updated) {
     console.log(`  ⚠ ${iconReport.updated} icon(s) had their artwork replaced — any component `
       + `placing them needs rebuilding, or its icons keep the library's own colour`);
@@ -475,7 +533,7 @@ if (iconReport) {
   if (iconReport.built !== iconReport.expected) {
     console.log(`  ⚠ ${iconReport.expected - iconReport.built} icon(s) did not build`);
   }
-  for (const f of iconReport.failures.slice(0, 10)) console.log(`     ✗ ${f.name}: ${f.error}`);
+  for (const f of (iconReport.failures || []).slice(0, 10)) console.log(`     ✗ ${f.name}: ${f.error}`);
   if (!iconReport.defaultFillVar) {
     console.log('  ⚠ a bare icon instance will carry a literal black fill, not a themed one');
   }
@@ -533,9 +591,12 @@ for (const r of report) {
   // The variant a designer gets on dropping the component in. Printed either way, because a
   // default that silently stayed on the first value of every axis looks fine on the canvas.
   if (r.defaultVariantWanted) {
-    console.log(r.defaultVariant === r.defaultVariantWanted
-      ? `             default variant: ${r.defaultVariant}`
-      : `             ⚠ default variant is ${r.defaultVariant || 'unreadable'}, wanted ${r.defaultVariantWanted}`);
+    if (r.defaultVariant === r.defaultVariantWanted) {
+      console.log(`             default variant: ${r.defaultVariant}`);
+    } else {
+      console.log(`             ⚠ default variant is ${r.defaultVariant || 'unreadable'}, wanted ${r.defaultVariantWanted}`);
+      defaultMismatches.push(r.component);
+    }
   }
   built.push(r.component);
 }
@@ -571,6 +632,9 @@ for (const r of report.filter(x => (x.slots && x.slots.length) || (x.texts && x.
       console.log(`     ⚠ shows ONE default across all variants, though the component renders `
         + `${sl.varies} different ones (accepted: a panel control was preferred to per-variant `
         + `accuracy here). No numeric check sees this — only the raster.`);
+    }
+    if (sl.mixedKinds) {
+      console.log(`     ⚠ this slot is additive in some variants and a replacement in others; it was built as ${sl.kind} from the first layer`);
     }
     if (!sl.swapProp) {
       console.log(`     ⚠ no swap property — this slot's content cannot be changed`);
@@ -615,7 +679,7 @@ if (SKIP_VERIFY || !built.length) {
   console.log(`\nskipping verification${why}.`);
   // An aborted run lists only the components that finished, so `built` can equal `report`
   // exactly when the run failed.
-  process.exit(built.length === report.length && !aborted ? 0 : 1);
+  process.exit(built.length === report.length && !aborted && !defaultMismatches.length ? 0 : 1);
 }
 console.log('\n── 7. verifying ' + '─'.repeat(54));
 // STREAM it. Capturing stdout buffers every progress line until the child exits, and
@@ -645,4 +709,4 @@ if (WANT_VISUAL) {
   }
 }
 
-process.exit(chk.status === 0 && built.length === report.length && !aborted ? 0 : 1);
+process.exit(chk.status === 0 && built.length === report.length && !aborted && !defaultMismatches.length ? 0 : 1);

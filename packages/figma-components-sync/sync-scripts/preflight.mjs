@@ -30,6 +30,12 @@ for (const name of (await fetchPublishedTokenKeys(TOKEN, process.env.TOKENS_FILE
   varNames.add(name);
 }
 
+// No names is a usage error: the loop below would check nothing and print "all payloads clean".
+if (!process.argv.slice(2).length) {
+  console.error('usage: preflight.mjs <component…>');
+  process.exit(2);
+}
+
 let failed = 0;
 for (const name of process.argv.slice(2)) {
   const path = `sync-scripts/build-data/${name}-build.json`;

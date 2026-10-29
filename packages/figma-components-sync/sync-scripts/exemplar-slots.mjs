@@ -14,7 +14,10 @@ export function exemplarSlots (cfg) {
       for (const [slot, spec] of Object.entries(cfg.slotContent(probe) || {})) {
         if (spec && spec.swapTo) slots.add(slot);
       }
-    } catch { /* a config that cannot be probed declares no exemplars */ }
+    } catch (e) {
+      // Quietly declaring no exemplars would make the checks treat a swap slot as ordinary content.
+      console.warn(`exemplarSlots: could not probe ${cfg.component} slotContent (${e && e.message}); treating it as declaring none`);
+    }
   }
   return slots;
 }
