@@ -1,0 +1,24 @@
+.agents/resources/rules/logical-naming.md
+  s_0deedfec899a67::t_e2888233f263e7 12-14,16,18-21,23-100
+  s_0deedfec899a67::t_87fa25dcc9500c 9-11
+  s_0deedfec899a67::t_0c275cd0d60e30 3,5,7
+.agents/resources/rule-map.md
+  s_0deedfec899a67::t_e2888233f263e7 5-6
+  s_0deedfec899a67::t_bd7d654e91156e 7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0188a06d9bc8721020e80dca525484d7a6df0ffb",
+  "prompts": {},
+  "sessions": {
+    "s_0deedfec899a67": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f24dc-c4e6-7560-9f4a-625c9c8673a7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

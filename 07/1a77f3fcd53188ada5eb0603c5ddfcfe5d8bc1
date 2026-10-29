@@ -1,0 +1,26 @@
+packages/dialtone-tokens/sync-scripts/utils.ts
+  s_87d0f63b120eb7::t_66b2404b6c9a85 44-49
+  s_87d0f63b120eb7::t_0fd652ba11d87e 59-61,63-65,68
+packages/dialtone-docs/src/content/workflows/workflow-figma-sync.md
+  s_87d0f63b120eb7::t_76f79dfd85d13d 49
+packages/dialtone-tokens/sync-scripts/build_variables.ts
+  s_87d0f63b120eb7::t_0fa9df717b3bd2 472-474
+packages/dialtone-tokens/sync-scripts/utils.test.ts
+  s_87d0f63b120eb7::t_a0717d00b5fb6f 33-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "071a77f3fcd53188ada5eb0603c5ddfcfe5d8bc1",
+  "prompts": {},
+  "sessions": {
+    "s_87d0f63b120eb7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "442e71ed-9091-44b6-b09c-e8116970a462",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
