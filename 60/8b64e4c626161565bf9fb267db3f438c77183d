@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/guides/migration/flex-to-stack/index.md
+  s_e485a78f32e0fd::t_98b4232ef4eab1 14,224,409,415,418,524
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "608b64e4c626161565bf9fb267db3f438c77183d",
+  "prompts": {},
+  "sessions": {
+    "s_e485a78f32e0fd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a11798-8213-7b60-8ed4-6436ce2f40fc",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
