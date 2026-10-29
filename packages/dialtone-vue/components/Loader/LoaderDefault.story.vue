@@ -1,6 +1,7 @@
 <template>
   <dt-loader
     :aria-label="$attrs.ariaLabel"
+    :kind="$attrs.kind"
     :size="$attrs.size"
   />
 </template>
