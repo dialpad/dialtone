@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-9-16.md
+  h_c15b5755534093 278-309
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2c337d5de06a679d799a234576c80a3cc57df38b",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

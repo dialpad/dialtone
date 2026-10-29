@@ -1,0 +1,31 @@
+packages/combinator/.github/documentation/internal/OPTION_BAR.md
+  s_53ce6bf944760d::t_a6ac6b6a558d7b 20-21
+packages/combinator/.github/documentation/internal/EXCLUSIONS.md
+  s_53ce6bf944760d::t_a6ac6b6a558d7b 95-96
+.agents/resources/rules/vue-components.md
+  s_53ce6bf944760d::t_a6ac6b6a558d7b 14-16
+.agents/resources/rules/combinator-variants.md
+  s_53ce6bf944760d::t_a6ac6b6a558d7b 106
+.claude/rules/vue-components.md
+  s_53ce6bf944760d::t_a6ac6b6a558d7b 23-25
+packages/combinator/.github/documentation/internal/CONTROLS.md
+  s_53ce6bf944760d::t_a6ac6b6a558d7b 37-38,48-49
+.claude/rules/combinator-variants.md
+  s_53ce6bf944760d::t_a6ac6b6a558d7b 109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "2b895e095b34845ac43b51df209d74c669a2e4d1",
+  "prompts": {},
+  "sessions": {
+    "s_53ce6bf944760d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0592-371a-7cc2-9cb7-97b530325041",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

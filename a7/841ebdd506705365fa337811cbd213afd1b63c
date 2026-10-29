@@ -1,0 +1,23 @@
+packages/dialtone-css/project.json
+  s_7f1d1d64baa803::t_46d4f69d571c4e 16-17
+packages/dialtone-query-core/tests/tools/search-ranking.test.ts
+  s_7f1d1d64baa803::t_f3d9358fe5bb72 34-39
+packages/dialtone-query-core/src/tools/utility-classes.ts
+  s_7f1d1d64baa803::t_46d4f69d571c4e 198
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a7841ebdd506705365fa337811cbd213afd1b63c",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
