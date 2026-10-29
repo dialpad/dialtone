@@ -3,7 +3,7 @@
 Builds Figma component sets from the real rendered Dialtone components, then proves the result
 matches. The codebase is the source of truth. Figma is the output.
 
-Each variant is measured in light and dark. Button (4,160 variants), ButtonLink (560), Notice,
+Each variant is measured in light and dark. Button (560 variants), ButtonIcon (480), ButtonLink (560), Notice,
 Banner, Collapsible and Loader are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
@@ -15,12 +15,14 @@ one is.
 ## The one command
 
 ```bash
-node sync-scripts/run-batch.mjs button button_link loader   # Button first
-node sync-scripts/run-batch.mjs notice banner               # they swap to Button, so a separate run
+node sync-scripts/run-batch.mjs loader collapsible            # nothing depends on these
+node sync-scripts/run-batch.mjs button button_icon button_link # Button's spinner is an instance of Loader
+node sync-scripts/run-batch.mjs notice banner                 # their action is an instance of Button
 ```
 
-Notice and Banner carry the id of a Button variant, and building Button clears its page, so a
-batch that contains both is refused. Build Button, then the components that swap to it.
+A component that is an INSTANCE of another carries that component's variant ids, and building the
+other clears its page, so a batch that holds both is refused. Build the target first, then what
+uses it, in a separate run.
 
 Everything except one click:
 
@@ -272,13 +274,13 @@ flowchart TD
     MERGED -->|throws MERGE_INVARIANT| AXIS["<b>presence as a variant axis</b><br/>each state measured in its own right"]
     MERGED -->|builds| BOOL["<b>merged</b><br/>presence as a BOOLEAN property"]
 
-    AXIS --> AXISW["Button<br/><i>icons stay variants: padding changes<br/>by 2px a side, which no property can do</i>"]
-    BOOL --> BOOLW["No registered component yet<br/><i>one set, toggled in the panel</i>"]
+    AXIS --> AXISW["No registered component<br/><i>exact, but multiplies the variants</i>"]
+    BOOL --> BOOLW["Button<br/><i>one set, toggled in the panel</i>"]
 
     KIND{"does the component draw<br/>its own default there?"}
     AXISW --> KIND
     BOOLW --> KIND
-    KIND -->|no, nothing renders when empty| ADD["<b>additive</b><br/>BOOLEAN (Start icon) + INSTANCE_SWAP (Start icon choice)"]
+    KIND -->|no, nothing renders when empty| ADD["<b>additive</b><br/>BOOLEAN (Start Icon) + INSTANCE_SWAP (Start Icon Choice)"]
     KIND -->|yes| REP["<b>replacement</b><br/>INSTANCE_SWAP only<br/><i>a toggle would offer to hide<br/>something the component renders</i>"]
 ```
 
@@ -288,21 +290,26 @@ fills, the merged model cannot express it and `--merged` refuses to build.
 
 **Slot presence as a variant axis.** Add the slot names to `axes` as `[false, true]`, give the
 config a `slots(combo)` function, and extend `variantName`. Each state is measured in its own
-right. No merge, no hidden layers. This is what Button uses for its icons.
+right. No merge, no hidden layers. Nothing registered uses it now: Button did, until its icons
+became toggles to keep the set under Figma's 1,000-variant performance warning.
 
 **Merged, presence as a BOOLEAN property.** `build-spec --merged` measures each variant twice
 and emits one tree: shared nodes keep their base geometry, inserted subtrees carry their filled
 geometry and a slot marker. The builder places the content hidden, and after
 `combineAsVariants` attaches a `<Slot>` BOOLEAN (→ `visible`) to the SET, named like the
-hand-built components ("Start icon", with its swap "Start icon choice"). No registered
-component uses this form yet (Badge and Chip did, before they were taken out of the set).
+hand-built components ("Start Icon", with its swap "Start Icon Choice"). Button uses this form
+(`merged: true` in its config, so it builds merged by default under its own name and page).
 
-`button.less` cuts x-padding by 2px a side when an icon is present, so all 560 Button
-combinations diverged and the guard refused the build, which is how Button ended up on the
-axis form rather than by anyone deciding it should.
+`button.less` cuts x-padding by 2px a side when an icon is present, which no component property
+can reproduce, so the guard refuses a merged Button. A config can accept that divergence by name:
+`slotSpacingDrift: { paddingLeft: 2, paddingRight: 2, itemSpacing: 2 }` lists the properties and the
+largest difference (px) it accepts, and the merged set keeps the EMPTY render's spacing, so the
+default state is exact and an icon state is up to 2px wider per side than the code. `build-spec`
+prints each accepted divergence (`drift`), and the verifier records each one in the filled
+sub-pass as an allowance. A larger difference, or any property not named, is still refused.
 
-The axis form costs variants (Button 560 → 2,240) and buys exactness plus the two single-icon
-combinations, which a slots-filled render cannot produce because it fills every slot at once.
+The axis form is exact and costs variants: Button as axes was 4,160, past Figma's warning at
+1,000 ("Components with more than 1000 variants may experience performance issues").
 
 There was a third way, retired: a `-slots` build that produced a second variant set holding the
 filled render. It verified those nodes but a designer could not toggle anything, and once every
@@ -321,8 +328,8 @@ DtNotice show a single glyph for all five kinds: 64 of 80 icons wrong, and no nu
 it, because SVG internals are never compared shape-for-shape. Only the raster did.
 
 So where the default differs, the slot gets **one swap property per default**, each bound only
-to the layers that want it and named for the axis value that explains it: `Icon choice ·
-critical`, `Icon choice · info`. `slot-properties.js` finds that axis (`splitByAxis`): the one
+to the layers that want it and named for the axis value that explains it: `Icon Choice ·
+critical`, `Icon Choice · info`. `slot-properties.js` finds that axis (`splitByAxis`): the one
 where every value maps to exactly one default, fewest values winning. When no single axis
 separates the defaults (the icon depends on a combination), it falls back to one property with
 one default, and `run-batch` prints how many layers that leaves wrong.
@@ -341,15 +348,38 @@ content stays inside the slot as the default. Two facts cost a build each:
 
 ### Names follow the hand-built components
 
-Properties read "Start icon" (a visibility toggle) and "Start icon choice" (the swap), and the
-layers they bind are named "Start icon" with an inner `icon`. A set's description is generated
+Every property a designer sees is human-friendly, Title Case with spaces, as in the docs-site
+Combinator: "Link Kind", "Show Close", "Start Icon" (a visibility toggle) and "Start Icon Choice"
+(the swap). A config keeps the Vue prop names (`linkKind`, `showClose`), because the browser side
+needs them, and `component-axes.mjs` humanises them once by wrapping `variantName`, the one
+function the builder, the verifier, the identity audit and the swap targets all use to name or
+find a variant. Values are left as they are (`default`, `true`, `100`). The layers the
+properties bind are named "Start Icon" with an inner `icon`. A set's description is generated
 from its axes and slots (`describeSet` in `build-plugin.mjs`). Direction words stay logical
 (`start`/`end`), as `.claude/rules/logical-naming.md` requires.
 
-DtButton's link mode is its own set, **DtButtonLink** (`configs/button_link.mjs`, which pins
-`link: true`). In code it is still one component, but in Figma it has no `kind`, `importance`,
-icons or `circle`, and folding it into Button added three axes and took the set from 4,160
-variants to 4,720. The two are different design surfaces.
+DtButton in Figma is three sets, in code one component:
+
+- **DtButton** (560 variants): the labelled button, icons behind toggles (see above).
+- **DtButtonIcon** (`configs/button_icon.mjs`, 480): the circular, icon-only button, `circle` with
+  no label and one icon. `circle` is documented "use only with icon-only buttons", so it is a
+  different design surface and has nothing to toggle.
+- **DtButtonLink** (`configs/button_link.mjs`, 560): link mode, which pins `link: true` and has no
+  `kind`, `importance`, icons or `circle`.
+
+Folded into one set they were 4,720 variants. Split they are 1,600, each under Figma's
+1,000-variant warning.
+
+### The default variant comes from the code
+
+The variant a designer gets on dropping the component in is the set's default variant, and Figma
+makes that the TOP-LEFT variant on the canvas, not the first layer. It should be the one the
+component renders with no props: each axis takes the component's own prop default
+(`importance: 'primary'`, `size: 300`), `default` for a `state` axis and the first value
+otherwise (`default-variant.mjs`, with the defaults read from the Vue runtime by the harness).
+`build-spec` lays that variant out first so it lands top-left, the plugin reads back
+`set.defaultVariant` and `run-batch` prints it, and the verifier compares each variant
+property's default in the built set against the same function.
 
 ### Slot content is declared, not inferred
 

@@ -20,7 +20,7 @@ export default {
   component: 'DtNotice',
   label: 'Notice',
   page: 'Notice',
-  figmaSetId: '554:5291',
+  figmaSetId: '591:7732',
 
   axes: {
     // Each kind repaints the surface AND swaps the default icon glyph
@@ -146,7 +146,7 @@ export default {
       // nothing is inferred. Resolved to a node id at encode time against DtButton's set.
       swapTo: { component: 'button', variant: {
         kind: c.important ? 'inverted' : 'muted', importance: 'outlined', size: 200,
-        state: 'default', loading: false, startIcon: false, endIcon: false,
+        state: 'default', loading: false,
       } },
     },
   }),

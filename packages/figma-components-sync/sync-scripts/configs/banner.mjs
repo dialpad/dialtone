@@ -16,7 +16,7 @@ export default {
   component: 'DtBanner',
   label: 'Banner',
   page: 'Banner',
-  figmaSetId: '558:5452',
+  figmaSetId: '591:10653',
 
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of
@@ -129,7 +129,7 @@ export default {
       // nothing is inferred. Resolved to a node id at encode time against DtButton's set.
       swapTo: { component: 'button', variant: {
         kind: c.important ? 'inverted' : 'muted', importance: 'outlined', size: 200,
-        state: 'default', loading: false, startIcon: false, endIcon: false,
+        state: 'default', loading: false,
       } },
     },
   }),

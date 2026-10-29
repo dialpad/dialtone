@@ -78,6 +78,7 @@ import { combosFor } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { matchedFor, resolveDeclared } from './cdp-provenance.mjs';
 import { flagValue } from './cli-args.mjs';
+import { defaultCombo, defaultVariantFindings } from './default-variant.mjs';
 import { figmaTextDecoration as decorationOf, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const cfg = COMPONENTS[which];
@@ -274,6 +275,10 @@ const EXEMPT = {
   flexDirection: 'compared as direction on auto-layout frames',
   flexWrap: 'gates whether rowGap is meaningful; not itself a painted value',
 };
+// The browser's default-state width and Figma's differ by the text-shaping gap (Figma sets text
+// about 3-5% wider; the box spread reports it), and the centred-child arithmetic halves it. Half
+// of the largest width spread measured (6.70px, on Button's size 500), with headroom, in px.
+const CENTRE_SHAPING_SLACK = 4;
 const COMPARED = new Set(['flexWrap', 'backgroundColor', 'color', 'borderTopColor',
   // Each side and each corner, separately. The three non-top widths sat in EXEMPT
   // ("folded into padding; compared via borderTopWidth") — both halves of which have
@@ -339,7 +344,7 @@ function compareNode (...args) {
 }
 
 /** Walk DOM node and Figma node in parallel; Figma nodes hidden by a component property are skipped. */
-function compareNodeInner (variant, dom, fig, path, MODE, figParentBox) {
+function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParentBox) {
   // FIRST, before any comparison: a declared exemplar is not the measured render. Placed
   // last once already, which let the colour comparisons fire before it was reached.
   /**
@@ -763,7 +768,25 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox) {
       // Corners are compared below, one at a time.
     ]) {
       if (k == null || domV == null) continue;
-      if (!near(domV, figV)) rec(variant, path, k, domV, figV);
+      if (!near(domV, figV)) {
+        /**
+         * A DECLARED, BOUNDED DIVERGENCE: the merged set keeps the EMPTY render's spacing.
+         *
+         * `cfg.slotSpacingDrift` names the properties a component moves itself when its slots
+         * fill (Button's x-padding, 2px a side), which no component property can reproduce. In
+         * the filled sub-pass the browser then differs from Figma by exactly that, so a
+         * difference on a NAMED property, within the declared bound, is recorded as an
+         * allowance and shown in every run. Outside the bound, or on any other property, it is
+         * still a finding.
+         */
+        const bound = (cfg.slotSpacingDrift && cfg.slotSpacingDrift[k]) || 0;
+        if (SLOT_PASS && bound && Math.abs(domV - figV) <= bound + 0.01) {
+          allowed.push({ variant, path,
+            reason: `slot-filled spacing drift: ${k} ${domV} in the browser, ${figV} in the merged set (slotSpacingDrift, at most ${bound})` });
+        } else {
+          rec(variant, path, k, domV, figV);
+        }
+      }
     }
 
     /**
@@ -830,7 +853,26 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox) {
       const got = (figParentBox.x + figParentBox.width) - (fb.x + fb.width);
       if (!Number.isNaN(want) && !near(want, got)) rec(variant, path, 'insetEnd', want, +got.toFixed(2));
     } else if (!near(dom.expectedRel.x, fb.x - figParentBox.x)) {
-      rec(variant, path, 'x', dom.expectedRel.x, +(fb.x - figParentBox.x).toFixed(2));
+      /**
+       * A CENTRE-CONSTRAINED CHILD FOLLOWS ITS PARENT'S GROWTH, WHICH REST CANNOT SHOW.
+       *
+       * DtButton's spinner is centred in the button. In the merged set's filled sub-pass the
+       * browser's button is wider (an icon is showing) while REST reports the frame at its
+       * DEFAULT size, so the spinner's offset differs by exactly half the growth. Figma moves
+       * it itself, because the builder gave it CENTER constraints, so what is checked here is
+       * the constraint and the arithmetic: a horizontal CENTER constraint, and a difference
+       * equal to half the parent's growth. Anything else is still an `x` finding.
+       */
+      const gotX = fb.x - figParentBox.x;
+      const halfGrowth = domParentBox && typeof domParentBox.w === 'number'
+        ? (domParentBox.w - figParentBox.width) / 2 : null;
+      if (SLOT_PASS && fig.constraints && fig.constraints.horizontal === 'CENTER'
+          && halfGrowth !== null && Math.abs(dom.expectedRel.x - gotX - halfGrowth) <= CENTRE_SHAPING_SLACK) {
+        allowed.push({ variant, path,
+          reason: 'centred child of a frame the filled state grows: REST reports the default size, Figma re-centres it (CENTER constraint)' });
+      } else {
+        rec(variant, path, 'x', dom.expectedRel.x, +gotX.toFixed(2));
+      }
     }
     if (!near(dom.expectedRel.y, fb.y - figParentBox.y)) {
       rec(variant, path, 'y', dom.expectedRel.y, +(fb.y - figParentBox.y).toFixed(2));
@@ -1243,7 +1285,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox) {
         `dom [${domKids.map(k => k.classes.join('.') || k.tag).join(', ')}] vs figma [${figKids.map(k => k.name).join(', ')}]`);
   }
   const n = Math.min(figKids.length, domKids.length);
-  for (let i = 0; i < n; i++) compareNode(variant, domKids[i], figKids[i], `${path}/${domKids[i].classes.join('.') || domKids[i].tag}`, MODE, fig.absoluteBoundingBox);
+  for (let i = 0; i < n; i++) compareNode(variant, domKids[i], figKids[i], `${path}/${domKids[i].classes.join('.') || domKids[i].tag}`, MODE, fig.absoluteBoundingBox, dom.box);
 }
 
 // ── exported surface ────────────────────────────────────────────────────────
@@ -1353,6 +1395,21 @@ if (IS_CLI) {
   }
 
     const allCombos = combosFor(cfg);
+
+  /**
+   * THE SET'S DEFAULT VARIANT MUST BE THE ONE THE CODE RENDERS WITH NO PROPS.
+   *
+   * Dropping the component into a design gives the set's first child, and each variant property's
+   * default is read from it. Nothing compared it, so Button came out defaulting to a small clear
+   * button while the code's defaults are primary and medium. Compared by name, and per property so
+   * the finding says which default is off.
+   */
+  {
+    const propDefaults = await page.evaluate(n => window.__propDefaults(n), cfg.component);
+    const want = defaultCombo(cfg, allCombos, propDefaults);
+    const wantName = want ? cfg.variantName(want) : null;
+    findings.push(...defaultVariantFindings(wantName, figByName.setNode ? figByName.setNode.definitions : {}));
+  }
   /**
    * A MERGED set holds BOTH renders in one place, so it takes both to check.
    *

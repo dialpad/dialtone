@@ -1,7 +1,7 @@
 /**
  * One command for a whole build batch. The only manual step left is clicking Run.
  *
- *   node sync-scripts/run-batch.mjs button button_link loader
+ *   node sync-scripts/run-batch.mjs loader collapsible
  *
  * WHAT IS AND IS NOT AUTOMATABLE
  * A Figma dev plugin can only be launched from the desktop UI — there is no API to
@@ -73,8 +73,20 @@ function swapTargetsOf (name) {
   for (const combo of combosFor(cfg)) walk(cfg.slotContent(combo));
   return out;
 }
+// An `anatomySwap` makes part of the render an INSTANCE of another component (Button's loading
+// spinner is a DtLoader), which is the same dependency by another route.
+function anatomyTargetsOf (name) {
+  const cfg = COMPONENTS[name.endsWith('-merged') ? name.slice(0, -'-merged'.length) : name];
+  const out = new Set();
+  if (!cfg || typeof cfg.anatomySwap !== 'function') return out;
+  for (const combo of combosFor(cfg)) {
+    const a = cfg.anatomySwap(combo);
+    if (a && a.component) out.add(a.component);
+  }
+  return out;
+}
 for (const dependent of names) {
-  for (const target of swapTargetsOf(dependent)) {
+  for (const target of [...swapTargetsOf(dependent), ...anatomyTargetsOf(dependent)]) {
     if (target !== dependent && names.includes(target)) {
       console.error(`${dependent} swaps to ${target}, and building ${target} in the same run clears its `
         + `variants, so ${dependent}'s payload would point at ids that no longer exist.\n`
@@ -517,6 +529,13 @@ for (const r of report) {
   for (const s of (r.skippedBindings || [])) {
     console.log(`             ! ${s.count}x binding skipped (token cannot hold the measured value)`);
     for (const ex of (s.examples || []).slice(0, 2)) console.log(`                 ${ex}`);
+  }
+  // The variant a designer gets on dropping the component in. Printed either way, because a
+  // default that silently stayed on the first value of every axis looks fine on the canvas.
+  if (r.defaultVariantWanted) {
+    console.log(r.defaultVariant === r.defaultVariantWanted
+      ? `             default variant: ${r.defaultVariant}`
+      : `             ⚠ default variant is ${r.defaultVariant || 'unreadable'}, wanted ${r.defaultVariantWanted}`);
   }
   built.push(r.component);
 }

@@ -32,7 +32,7 @@ once; it survives restarts.
 ## Each run — one command
 
 ```
-node packages/figma-components-sync/sync-scripts/run-batch.mjs button button_link loader
+node packages/figma-components-sync/sync-scripts/run-batch.mjs loader collapsible
 ```
 
 That does everything except the click:
@@ -111,7 +111,7 @@ of this.
    ```json
    { "runtime": { … },
      "components": [{ "component": "button", "page": "Button", "built": 4160,
-                      "setId": "1:2", "variants": 4160, "properties": ["Label", "Start icon choice", …] }],
+                      "setId": "1:2", "variants": 560, "properties": ["Label", "Start Icon Choice", …] }],
      "icons": { … } }
    ```
 

@@ -545,7 +545,7 @@ const tokKeys = Object.fromEntries(toks
 
 // Slots the builder makes NATIVE (Figma SLOT) instead of an INSTANCE_SWAP, per the config.
 const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, toks, tokKeys, nativeSlots, cols, svgs, imgs, nodes, rows, rowNames, dvars };
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';
 const outPath = `sync-scripts/build-data/${which}${shardSuffix}-build.json`;
 writeFileSync(outPath, JSON.stringify(payload));

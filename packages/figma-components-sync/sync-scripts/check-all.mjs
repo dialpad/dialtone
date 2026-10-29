@@ -175,8 +175,11 @@ function summarise (out) {
 // cost wall-clock.
 const jobs = [];
 const skipped = [];
+// A config with `merged: true` IS its merged build (one set, one id, built under its own name),
+// so it is checked as one: both slot states, against `figmaSetId`.
+const mergedPrimary = (n) => !isMerged(n) && !!cfgOf(n).merged;
 for (const name of names) {
-  if (isMerged(name)) {
+  if (isMerged(name) || mergedPrimary(name)) {
     // One set, both states: the values pass reads it with slots empty, then filled.
     jobs.push({ component: name, pass: 'merged', script: 'verify-components.mjs',
                 argv: [baseOf(name), '--set', setIdOf(name), '--merged', ...(lightOnly ? ['--light-only'] : [])] });

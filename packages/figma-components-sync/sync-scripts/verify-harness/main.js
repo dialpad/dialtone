@@ -425,6 +425,26 @@ window.__anatomy = () => {
   return walk(root);
 };
 
+/**
+ * A component's own prop defaults, as the Vue runtime holds them.
+ *
+ * The Figma default variant should be the one the code produces with no props set, and the code
+ * is the only authority on that, so it is read from the component rather than written into each
+ * config. A function default (Vue's form for object and array props) is called; a prop whose
+ * TYPE is Function keeps its function. Anything that cannot be turned into plain data is left out.
+ */
+window.__propDefaults = (name) => {
+  const C = dialtoneVue[name];
+  const out = {};
+  for (const [key, def] of Object.entries((C && C.props) || {})) {
+    if (!def || typeof def !== 'object' || !('default' in def)) continue;
+    let v = def.default;
+    if (typeof v === 'function' && def.type !== Function) { try { v = v(); } catch (e) { continue; } }
+    if (['string', 'number', 'boolean'].includes(typeof v)) out[key] = v;
+  }
+  return out;
+};
+
 window.__read = () => {
   const el = document.querySelector('#root .d-btn') || document.querySelector('#root > *');
   if (!el) return null;

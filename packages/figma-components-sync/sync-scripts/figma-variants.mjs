@@ -109,5 +109,11 @@ export async function fetchVariantsByName (figmaGet, fileKey, setId, { batch = 4
     throw new Error(`set ${setId}: ${ids.length} variants collapsed to ${byName.size} names `
       + `— duplicate variant names in the set`);
   }
+  // The set itself, which the variants alone cannot say: its default variant is its FIRST child,
+  // and its variant properties carry the default each one resolves to.
+  byName.setNode = {
+    defaultVariantName: (entry.document.children[0] || {}).name || null,
+    definitions: entry.document.componentPropertyDefinitions || {},
+  };
   return byName;
 }

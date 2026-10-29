@@ -51,6 +51,7 @@ import { parse as parseColor } from 'culori';
 
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
+import { defaultVariantFindings } from './default-variant.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { matchedFor } from './cdp-provenance.mjs';
 // The REAL comparison engine, never a copy. A copy would only ever verify the copy.
@@ -346,6 +347,16 @@ const PERTURBATIONS = [
       + 'DOM node that carries text directly. It was once only on the first, the mirror of '
       + 'the lineHeight hole; both are closed, and this note records that the pair is now '
       + 'checked wherever text is' },
+  // Added with the comparison itself: it was emittable and never perturbed, so this control
+  // refused to run at all until it was covered.
+  { expect: 'textDecoration', what: 'TEXT decoration flipped (none <-> UNDERLINE)',
+    target: n => n.type === 'TEXT',
+    apply: (n) => {
+      n.style = n.style || {};
+      n.style.textDecoration = (n.style.textDecoration && n.style.textDecoration !== 'NONE') ? 'NONE' : 'UNDERLINE';
+      return true;
+    },
+    domPre: d => !!d.text },
   { expect: 'lineHeight', what: 'TEXT lineHeightPx +6px',
     target: n => n.type === 'TEXT' && typeof n.style?.lineHeightPx === 'number',
     apply: n => bump(n.style, 'lineHeightPx', 6),
@@ -666,6 +677,14 @@ const PERTURBATIONS = [
   }
   const stale = [...covered].filter(f => !EMITTED.includes(f));
   if (stale.length) throw new Error(`perturbations for fields the engine no longer emits: ${stale.join(', ')}`);
+}
+
+// SET-LEVEL CHECKS are made once per set, outside the per-node walk the perturbations below
+// mutate, so they cannot be perturbed through a node. Each is a pure function, and this proves
+// both directions: it flags a wrong answer and stays quiet on a right one.
+const sizeDef = (v) => ({ Size: { type: 'VARIANT', defaultValue: v } });
+if (!defaultVariantFindings('Size=300', sizeDef('100')).length || defaultVariantFindings('Size=300', sizeDef('300')).length) {
+  throw new Error('the set-level defaultVariant comparison does not behave: it must flag a wrong default and accept the right one');
 }
 
 // `--list-fields` answers "what can the engine report, and is each one perturbed?"

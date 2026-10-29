@@ -28,8 +28,8 @@ project has already hit once.
 Not in CI: it needs a real browser, a Figma desktop session (the plugin can only be launched by
 a person) and a scratch file. Reviewers rely on the check output recorded in the PR.
 
-Registered so far, built with the current model and checked clean: Button, ButtonLink,
-Notice, Banner, Collapsible and Loader. More components are added in batches, each with its
+Registered so far, built with the current model and checked clean: Button, ButtonIcon,
+ButtonLink, Notice, Banner, Collapsible and Loader. More components are added in batches, each with its
 own rebuild and check.
 
 ## Setup

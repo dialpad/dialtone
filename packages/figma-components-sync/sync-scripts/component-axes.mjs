@@ -6,25 +6,27 @@
  */
 const BUILT_IN = {
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '561:49545',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '589:35574',
     /**
-     * SLOT PRESENCE IS A VARIANT AXIS HERE, not a BOOLEAN component property.
+     * ICONS ARE BOOLEAN PROPERTIES; THE CIRCULAR BUTTON IS ITS OWN SET (`button_icon`).
      *
-     * `button.less` reduces horizontal padding when an icon is present, so the optical
-     * spacing stays even — every one of the 560 combinations differs, by 2px a side, and
-     * some change `itemSpacing` too. No Figma component property can change a frame's
-     * padding, so a single variant carrying its icons behind a toggle is wrong in one of the
-     * two states whichever padding it is given. Measured as a merged set it produced 2,660
-     * findings; the guard in build-spec now refuses that build outright.
+     * Button's icons used to be variant axes (startIcon, endIcon), because `button.less` cuts the
+     * x-padding by 2px a side when an icon is present and no component property can change a
+     * frame's padding. That was exact, and it made the set 4,160 variants, past the point where
+     * Figma warns about performance (1,000).
      *
-     * As an axis, each state is measured in its own right and is exact. Figma renders a
-     * two-value variant property as a control that reads much like a toggle, so almost
-     * nothing is lost in use — and the two SINGLE-icon combinations, which `slotPass` could
-     * never produce because it fills every slot at once, exist for the first time.
-     *
-     * DtBadge keeps the BOOLEAN model: its padding does not respond to its icons, which the
-     * merged pass confirms with 0 findings in both states.
+     * Now the set is built MERGED: one variant per combination of the remaining axes, with the
+     * icons behind "Start Icon" / "End Icon" toggles. The padding is fixed at the NO-ICON value
+     * (`slotSpacingDrift` below), so the default state is exact and an icon state is 2px wider per
+     * side than the code. That is a recorded divergence, listed in every run, not an unnoticed one.
+     * The circular, icon-only button (no label, one icon) has nothing to toggle and is a different
+     * design surface, so it is its own set, `DtButtonIcon`.
      */
+    merged: true,
+    slotPass: ['startIcon', 'endIcon'],
+    // Property -> the largest difference (px) between the empty and the icon-filled render that is
+    // accepted. Measured: see the `drift` lines build-spec prints. Anything larger is still refused.
+    slotSpacingDrift: { paddingLeft: 2, paddingRight: 2, itemSpacing: 2 },
     axes: {
       kind: ['default','muted','critical','positive','inverted'],
       importance: ['clear','outlined','primary'],
@@ -32,34 +34,23 @@ const BUILT_IN = {
       // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'
       state: ['default','hover','active','focus','disabled'],
       loading: [false,true],
-      startIcon: [false, true],
-      endIcon: [false, true],
-      // Icon-only circular shape. Crossed with kind/importance like any other shape axis —
-      // `isInvalidPropCombination`'s own two circle-specific rejections (ButtonConstants.js's
-      // `INVALID_COMBINATION`) are added to `invalid` below; its third and fourth entries
-      // are `kind: 'muted', importance: 'primary'` for BOTH circle values, already covered
-      // by the existing muted/primary rule regardless of circle.
-      circle: [false, true],
     },
     // muted/primary is rejected by the component; hover and active are not
     // reachable while loading because the button is pointer-events:none.
     // Icons are NOT excluded while loading: measured, both render — the spinner sits
     // alongside them rather than replacing them.
     invalid: c => (c.kind === 'muted' && c.importance === 'primary')
-      || (c.loading === true && ['hover','active'].includes(c.state))
-      || (c.circle === true && c.kind === 'default' && c.importance === 'primary')
-      || (c.circle === true && c.kind === 'critical' && c.importance === 'outlined'),
+      || (c.loading === true && ['hover','active'].includes(c.state)),
     variantName: c => `kind=${c.kind}, importance=${c.importance}, size=${c.size}, state=${c.state}, `
-      + `loading=${c.loading}, startIcon=${c.startIcon}, endIcon=${c.endIcon}, circle=${c.circle}`,
+      + `loading=${c.loading}`,
     props: c => ({
-      kind: c.kind, importance: c.importance, size: Number(c.size), circle: c.circle,
+      kind: c.kind, importance: c.importance, size: Number(c.size),
       ...(c.state === 'active' ? { active: true } : {}),
       ...(c.state === 'disabled' ? { disabled: true } : {}),
       ...(c.loading ? { loading: true } : {}),
     }),
-    // Which named slots this variant fills. The ordinary sweep reads this, so no second
-    // build and no merge is involved at all.
-    slots: c => [...(c.startIcon ? ['startIcon'] : []), ...(c.endIcon ? ['endIcon'] : [])],
+    // No slots in the ordinary render: the merged build's second render fills `slotPass`.
+    slots: () => [],
     /**
      * WHILE LOADING, `.d-loader` IS AN INSTANCE OF A REAL COMPONENT — not re-measured anatomy.
      *
@@ -81,8 +72,6 @@ const BUILT_IN = {
     }),
     // only these two need the CDP override; active/disabled are class-driven
     pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
-    // No `slotPass`: slot presence is swept above, so the two-set path and the merged path
-    // are both redundant here. The old sets (223:10810, 241:41867) are superseded.
   },
 };
 
@@ -106,4 +95,25 @@ for (const f of files.sort()) {
   discovered[key] = cfg;
 }
 
-export const COMPONENTS = { ...BUILT_IN, ...discovered };
+/**
+ * VARIANT PROPERTY NAMES ARE HUMAN-FRIENDLY IN FIGMA, CODE-STYLE EVERYWHERE ELSE.
+ *
+ * A config's axes and `variantName` use the Vue prop names (`showClose`, `linkKind`), which is
+ * what the browser side needs. In Figma those become the labels a designer reads in the
+ * properties panel, so they are Title Case with spaces, as in the docs-site Combinator
+ * ("Link Kind", "Assertive On Focus"). Done ONCE, here, by wrapping `variantName`, because that
+ * function is the single authority the builder, the verifier, the identity audit and the swap
+ * targets all use to name or find a variant: renaming at the Figma end only would have each of
+ * them looking for a name nobody wrote. Values are left alone (`default`, `true`, `100`).
+ */
+export const humanKey = (key) => key.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, c => c.toUpperCase());
+export const humaniseVariantName = (name) =>
+  name.replace(/(^|, )([A-Za-z][A-Za-z0-9]*)=/g, (m, pre, key) => `${pre}${humanKey(key)}=`);
+
+const ALL = { ...BUILT_IN, ...discovered };
+for (const cfg of Object.values(ALL)) {
+  const authored = cfg.variantName
+    || (c => Object.keys(cfg.axes).map(a => `${a}=${c[a]}`).join(', '));
+  cfg.variantName = c => humaniseVariantName(authored(c));
+}
+export const COMPONENTS = ALL;

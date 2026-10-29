@@ -25,6 +25,7 @@ import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
   shadowLayerColorTokens } from './cdp-provenance.mjs';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
+import { defaultCombo } from './default-variant.mjs';
 import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
@@ -41,7 +42,11 @@ if (!cfg) throw new Error(`no build config for "${which}"`);
 // --merged measures BOTH renders per variant and emits one tree, with the slot content
 // marked. That is what lets a single Figma set carry the slot layers behind a BOOLEAN
 // property instead of needing a second set nobody can toggle into.
-const MERGED = process.argv.includes('--merged');
+// A config with `merged: true` is built merged by default and lands on its OWN page under its
+// own name (no ' Merged' suffix, no `-merged` file); `--merged` on any other component builds the
+// separate trial set it always did.
+const MERGED = process.argv.includes('--merged') || !!cfg.merged;
+const MERGED_TRIAL = MERGED && !cfg.merged;
 if (MERGED && !cfg.slotPass) throw new Error(`${which} declares no slotPass, so there is nothing to merge`);
 
 // ── colour handling ─────────────────────────────────────────────────────────
@@ -1111,6 +1116,14 @@ for (const combo of combos) {
   });
 }
 
+// The variant the code renders with no props set. See default-variant.mjs.
+const propDefaults = await page.evaluate(n => window.__propDefaults(n), cfg.component);
+const defaultComboFound = defaultCombo(cfg, variants.map(v => v.combo), propDefaults);
+const defaultVariant = defaultComboFound ? variants.find(v => v.combo === defaultComboFound) : null;
+// Figma's default variant is the TOP-LEFT one on the canvas, and the builder lays variants out in
+// row order, so the default goes first. Everything else keeps its order.
+if (defaultVariant) { variants.splice(variants.indexOf(defaultVariant), 1); variants.unshift(defaultVariant); }
+
 await browser.close();
 await server.close();
 
@@ -1123,6 +1136,31 @@ await server.close();
  * so each state is measured in its own right — so say that here rather than build the set
  * and report 2,660 findings afterwards.
  */
+/**
+ * A NAMED EXCEPTION TO THE MERGE GUARD: `cfg.slotSpacingDrift`.
+ *
+ * Button cuts its x-padding by 2px a side when an icon is present, and a BOOLEAN cannot change a
+ * padding, so a merged Button is wrong by that much in one of its two states. The guard refuses
+ * that by default (see above). A config that has chosen to accept it names the properties; the
+ * merged tree keeps the EMPTY render's spacing (the default state is then exact), and every
+ * accepted divergence is counted here and written into the spec, so the verifier can expect
+ * exactly it and every run can list it. Anything not named is still a blocker.
+ */
+const driftBound = cfg.slotSpacingDrift || {};   // { property: largest accepted difference in px }
+const acceptedDrift = {};
+for (let i = mergeBlockers.length - 1; i >= 0; i--) {
+  const b = mergeBlockers[i];
+  const bound = driftBound[b.prop];
+  if (!bound || b.empty == null || b.filled == null || Math.abs(b.empty - b.filled) > bound + 0.01) continue;
+  const k = `${b.path}|${b.prop}|${b.empty}|${b.filled}`;
+  acceptedDrift[k] = (acceptedDrift[k] || 0) + 1;
+  mergeBlockers.splice(i, 1);
+}
+const slotDrift = Object.entries(acceptedDrift).map(([k, count]) => {
+  const [path, prop, empty, filled] = k.split('|');
+  return { path, prop, empty: Number(empty), filled: Number(filled), count };
+});
+
 if (MERGED && mergeBlockers.length) {
   const byProp = {};
   for (const b of mergeBlockers) {
@@ -1150,7 +1188,9 @@ const out = { component: which, vue: cfg.component,
   // A merged build goes to its OWN page while the mechanism is being proven. Writing it
   // straight onto `cfg.page` would clear and replace a set that is currently verified
   // clean, and a merged set that turns out wrong would have cost the good one.
-  page: cfg.page + (MERGED ? ' Merged' : ''), axes: cfg.axes, variants };
+  page: cfg.page + (MERGED_TRIAL ? ' Merged' : ''), axes: cfg.axes,
+  defaultVariant: defaultVariant ? defaultVariant.name : null,
+  slotDrift: slotDrift.length ? slotDrift : undefined, variants };
 
 /**
  * A VARIABLE CANNOT HOLD TWO NUMBERS.
@@ -1205,7 +1245,7 @@ const out = { component: which, vue: cfg.component,
 // ONE canonical location. Writing here while encode-build.mjs preferred a copy in
 // build-data/ meant a fresh spec was silently ignored in favour of a stale one — the
 // checkbox glyph work rebuilt cleanly and then encoded from a spec that predated it.
-const file = `sync-scripts/build-data/${which}${MERGED ? '-merged' : ''}-spec.json`;
+const file = `sync-scripts/build-data/${which}${MERGED_TRIAL ? '-merged' : ''}-spec.json`;
 if (MERGED) {
   // Counted per KIND, because they become different Figma properties: an additive layer
   // gets a BOOLEAN and starts hidden, a replacement point gets only an INSTANCE_SWAP and
@@ -1222,6 +1262,10 @@ if (MERGED) {
   console.log(`merged     : ${carrying} of ${variants.length} variant(s) carry slots `
     + `(${t.additive} additive layer(s), ${t.replacement} replacement swap point(s)); `
     + `${slotless.length} cannot (slotInvalid)`);
+  for (const d of slotDrift) {
+    console.log(`drift      : ${String(d.count).padStart(4)}x ${d.path} ${d.prop} ${d.empty} (empty) vs ${d.filled} (filled) `
+      + `— accepted by slotSpacingDrift, the merged set keeps ${d.empty}`);
+  }
 }
 mkdirSync(dirname(file), { recursive: true });   // a standalone build may run before build-data exists
 writeFileSync(file, JSON.stringify(out));

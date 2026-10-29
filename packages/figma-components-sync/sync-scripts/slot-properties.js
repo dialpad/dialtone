@@ -82,11 +82,11 @@ async function applySlotProperties (set, slotLayers, textLayers) {
       if (info.swapGroups) {
         info.swapProps = info.swapGroups.groups.map(g => ({
           g,
-          prop: set.addComponentProperty(label + ' choice · ' + g.values.join('/'), 'INSTANCE_SWAP', g.defaultId),
+          prop: set.addComponentProperty(label + ' Choice · ' + g.values.join('/'), 'INSTANCE_SWAP', g.defaultId),
         }));
         info.swapProp = info.swapProps.map(x => x.prop).join(', ');
       } else if (info.swapDefault) {
-        info.swapProp = set.addComponentProperty(label + ' choice', 'INSTANCE_SWAP', info.swapDefault);
+        info.swapProp = set.addComponentProperty(label + ' Choice', 'INSTANCE_SWAP', info.swapDefault);
       }
     } catch (e) {
       info.error = (e && e.message) ? e.message : String(e);
@@ -210,5 +210,9 @@ function splitByAxis (layers, ids) {
 }
 
 function slotLabel (key) {
-  return key.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, c => c.toUpperCase());
+  // Title Case, like the variant properties ("Start Icon", "Link Kind"): these are the labels a
+  // designer reads in the properties panel, and the panel mixed code-style and sentence-style
+  // names before.
+  return key.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, c => c.toUpperCase())
+    .replace(/ ([a-z])/g, (m, c) => ' ' + c.toUpperCase());
 }

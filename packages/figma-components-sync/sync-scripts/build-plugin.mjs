@@ -18,7 +18,7 @@ import { readFileSync, writeFileSync, mkdirSync, statSync, existsSync, rmSync, r
 import { fileURLToPath } from 'url';
 import { execFileSync } from 'child_process';
 import { createHash } from 'crypto';
-import { COMPONENTS } from './component-axes.mjs';
+import { COMPONENTS, humanKey } from './component-axes.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url)).replace(/\/$/, '');
 const HERE = `${ROOT}/sync-scripts`;
@@ -37,7 +37,7 @@ const NO_COMPONENTS = argv.includes('--no-components');
 const explicit = argv.filter(a => !a.startsWith('--'));
 const names = NO_COMPONENTS ? []
   : explicit.length ? explicit
-  : ['button', 'button_link', 'notice', 'banner', 'collapsible', 'loader'];
+  : ['loader', 'collapsible', 'button', 'button_icon', 'button_link', 'notice', 'banner'];
 
 // Component shards are regenerated every run, so they are cleared. Icon shards are NOT:
 // they are produced by build-icon-library.mjs, which runs BEFORE this script so that its
@@ -65,8 +65,8 @@ function describeSet (name, page, slotKeys) {
     const nums = vals.every(v => typeof v === 'number');
     return nums && vals.length > 2 ? `${vals[0]} to ${vals[vals.length - 1]}` : vals.join(' | ');
   };
-  const label = (key) => key.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, c => c.toUpperCase());
-  const props = Object.entries(cfg.axes).map(([axis, vals]) => `${axis} (${values(vals)})`).join(', ');
+  const label = humanKey;
+  const props = Object.entries(cfg.axes).map(([axis, vals]) => `${humanKey(axis)} (${values(vals)})`).join(', ');
   const order = Object.keys(cfg.axes);
   const rank = (k) => (order.includes(k) ? order.indexOf(k) : order.length);
   const slots = [...slotKeys].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)).map(label);
@@ -92,6 +92,7 @@ for (const name of names) {
     const body = JSON.stringify(p);
     writeFileSync(`${SHARD_DIR}/${file}`, body);
     entry.page = p.page;
+    if (p.defaultVariant) entry.defaultVariant = p.defaultVariant;
     for (const n of p.nodes) { if (n.sl) slotKeys.add(n.sl); if (n.sw) slotKeys.add(n.sw); }
     // A CONTENT FINGERPRINT per shard. The pipeline already refuses a spec older than
     // the code that produced it, but nothing said whether the Figma set on screen was
@@ -323,12 +324,25 @@ async function main () {
     // What a REAL built variant's effect holds, before anything is combined.
     const spreadBeforeCombine = spreadsOf(firstWithEffects(loose));
     let setId = null, variants = 0, properties = [], spreadAfterCombine = null, slotReport = null, textReport = null;
+    let defaultVariantRead = null;
     if (loose.length) {
       const set = figma.combineAsVariants(loose, page);
       // Match the sets already built by hand: DtNotice, DtBanner, DtRadio, DtLink…
       // Naming it after the page instead would leave the file with two conventions.
       set.name = 'Dt' + comp.page;
       if (comp.description) set.description = comp.description;
+      /**
+       * READ BACK THE DEFAULT VARIANT. Figma's default is the TOP-LEFT variant on the canvas, not
+       * the first layer (layer order was tried first and changed nothing: the set kept reporting
+       * the variant at the top-left). It is decided by where the builder laid the variants out,
+       * and build-spec puts the variant the code renders with no props first, so this only reports
+       * what Figma ended up with, for run-batch to compare against what was wanted.
+       */
+      let defaultVariant = null;
+      if (comp.defaultVariant) {
+        try { defaultVariant = set.defaultVariant ? set.defaultVariant.name : null; } catch (e) { defaultVariant = null; }
+        defaultVariantRead = defaultVariant;
+      }
       set.x = 0; set.y = 0;
       setId = set.id; variants = set.children.length;
       spreadAfterCombine = spreadsOf(firstWithEffects(set.children));
@@ -344,6 +358,7 @@ async function main () {
       textReport = applied.texts;
     }
     report.push({ component: comp.component, page: comp.page, built: total, setId, variants, properties,
+                  defaultVariant: defaultVariantRead, defaultVariantWanted: comp.defaultVariant || null,
                   fontFallbacks: fontFallbacks,
                   skippedBindings: skipped, provenanceTraded: traded, derivedVars: derived,
                   spreadBeforeCombine, spreadAfterCombine, slots: slotReport, texts: textReport,
