@@ -1,4 +1,5 @@
 import './pin-cwd.mjs';   // launch directory must not matter
+import { fileURLToPath } from 'url';
 /**
  * Rasterise the SAME variants from the harness and from Figma, side by side.
  *
@@ -64,7 +65,7 @@ if (MODE) console.log('NOTE: Figma image export uses the default variable mode; 
 const imgs = await api(`/v1/images/${FILE_KEY}?ids=${pairs.map(p => encodeURIComponent(p.id)).join(',')}&format=png&scale=2`);
 
 // ── harness screenshots of the same variants ────────────────────────────────
-const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
+const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js', server: { port: 0 }, logLevel: 'error' });
 await server.listen();
 const browser = await chromium.launch();

@@ -15,11 +15,12 @@
  *   node sync-scripts/build-plugin.mjs badge link toggle …  # any subset
  */
 import { readFileSync, writeFileSync, mkdirSync, statSync, existsSync, rmSync, readdirSync} from 'fs';
+import { fileURLToPath } from 'url';
 import { execFileSync } from 'child_process';
 import { createHash } from 'crypto';
 import { COMPONENTS } from './component-axes.mjs';
 
-const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
+const ROOT = fileURLToPath(new URL('..', import.meta.url)).replace(/\/$/, '');
 const HERE = `${ROOT}/sync-scripts`;
 const SHARD_DIR = `${HERE}/build-data/shards`;
 const PLUGIN_DIR = `${ROOT}/plugin`;

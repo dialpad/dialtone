@@ -14,6 +14,7 @@
 import './pin-cwd.mjs';   // launch directory must not matter
 import 'dotenv/config';
 import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
+import { fileURLToPath } from 'url';
 import { COMPONENTS } from './component-axes.mjs';
 import { fetchPublishedTokenKeys } from './library-tokens.mjs';
 
@@ -35,7 +36,10 @@ const spec = JSON.parse(readFileSync(specPath, 'utf8'));
   const specAge = statSync(specPath).mtimeMs;
   const newer = ['build-spec.mjs', 'verify-harness/main.js', 'figma-mapping.mjs',
   'cdp-provenance.mjs']
-    .map(f => new URL(`./${f}`, import.meta.url).pathname)
+    // fileURLToPath, not `.pathname`: that stays percent-encoded, so under a checkout path with a
+    // space `existsSync` was false for every file, `newer` was always empty, and a stale spec was
+    // encoded without an error, which is the failure this block exists to stop.
+    .map(f => fileURLToPath(new URL(`./${f}`, import.meta.url)))
     .filter(f => existsSync(f) && statSync(f).mtimeMs > specAge);
   console.log(`spec: ${specPath}  (${new Date(specAge).toISOString().slice(0, 19).replace('T', ' ')})`);
   if (newer.length) {

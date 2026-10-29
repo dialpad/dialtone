@@ -1,7 +1,7 @@
 /**
  * One command for a whole build batch. The only manual step left is clicking Run.
  *
- *   node sync-scripts/run-batch.mjs button button_link notice banner
+ *   node sync-scripts/run-batch.mjs button button_link loader
  *
  * WHAT IS AND IS NOT AUTOMATABLE
  * A Figma dev plugin can only be launched from the desktop UI — there is no API to
@@ -23,6 +23,7 @@
  * set — which reads as a clean pass on work that was never looked at.
  */
 import './pin-cwd.mjs';
+import { fileURLToPath } from 'url';
 import { createServer } from 'http';
 import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, utimesSync } from 'fs';
 import { extname, normalize } from 'path';
@@ -30,7 +31,7 @@ import { execFileSync, spawnSync } from 'child_process';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
 
-const HERE = new URL('.', import.meta.url).pathname.replace(/\/$/, '');
+const HERE = fileURLToPath(new URL('.', import.meta.url)).replace(/\/$/, '');
 const DIR = `${HERE}/build-data/`;
 const PORT = Number(process.env.PORT || 8931);
 
@@ -360,7 +361,15 @@ const handler = (req, res) => {
     return;
   }
 
-  const rel = normalize(decodeURIComponent((req.url || '/').split('?')[0])).replace(/^(\.\.[/\\])+/, '');
+  // A malformed escape (`/%E0`) makes decodeURIComponent throw URIError. Thrown inside the
+  // request listener it is an uncaught exception that ends the batch while it waits for the
+  // plugin, and the server answers any origin, so any local page could do it with one GET.
+  let rel;
+  try {
+    rel = normalize(decodeURIComponent((req.url || '/').split('?')[0])).replace(/^(\.\.[/\\])+/, '');
+  } catch (e) {
+    res.writeHead(400); return res.end('bad request');
+  }
   const file = DIR + rel.replace(/^\//, '');
   // .png as well as .json: the plugin fetches the avatar bytes from here, because
   // base64 in the payload would be larger than everything else in a shard combined.

@@ -15,8 +15,12 @@ one is.
 ## The one command
 
 ```bash
-node sync-scripts/run-batch.mjs button button_link notice banner
+node sync-scripts/run-batch.mjs button button_link loader   # Button first
+node sync-scripts/run-batch.mjs notice banner               # they swap to Button, so a separate run
 ```
+
+Notice and Banner carry the id of a Button variant, and building Button clears its page, so a
+batch that contains both is refused. Build Button, then the components that swap to it.
 
 Everything except one click:
 

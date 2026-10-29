@@ -17,6 +17,7 @@
  *   node audit-provenance.mjs button --set 49:1142 --json out.json
  */
 import './pin-cwd.mjs';   // launch directory must not matter
+import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import { writeFileSync } from 'fs';
 import { chromium } from 'playwright';
@@ -32,7 +33,7 @@ import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken, shadowLayerC
 import { flagValue } from './cli-args.mjs';
 
 const API = 'https://api.figma.com';
-const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
+const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 const TOKEN = process.env.PERSONAL_ACCESS_TOKEN;
 const FILE_KEY = process.env.FILE_KEY;
 if (!TOKEN || !FILE_KEY) throw new Error('PERSONAL_ACCESS_TOKEN and FILE_KEY required');

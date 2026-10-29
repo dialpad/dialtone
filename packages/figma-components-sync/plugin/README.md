@@ -32,7 +32,7 @@ once; it survives restarts.
 ## Each run — one command
 
 ```
-node packages/figma-components-sync/sync-scripts/run-batch.mjs button button_link notice banner
+node packages/figma-components-sync/sync-scripts/run-batch.mjs button button_link loader
 ```
 
 That does everything except the click:

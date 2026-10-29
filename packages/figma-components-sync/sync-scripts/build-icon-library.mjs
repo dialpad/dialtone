@@ -115,9 +115,11 @@ for (const ic of icons) {
 if (cur.length) shards.push(cur);
 
 const manifest = { page: PAGE, total: icons.length, shards: [] };
+let indexOffset = 0;   // icons in the shards before this one: the builder places each icon by its GLOBAL slot
 shards.forEach((group, i) => {
   const file = `icons-${i + 1}of${shards.length}.json`;
-  const body = JSON.stringify({ page: PAGE, clear: i === 0, fillVarKey, icons: group });
+  const body = JSON.stringify({ page: PAGE, clear: i === 0, fillVarKey, indexOffset, icons: group });
+  indexOffset += group.length;
   writeFileSync(`${SHARD_DIR}/${file}`, body);
   manifest.shards.push({
     file, count: group.length, clear: i === 0,

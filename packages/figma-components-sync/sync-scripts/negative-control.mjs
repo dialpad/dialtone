@@ -42,6 +42,7 @@
  *   node sync-scripts/negative-control.mjs button --set 561:49545 --variants 20
  */
 import './pin-cwd.mjs';   // launch directory must not matter
+import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import { readFileSync, writeFileSync } from 'fs';
 import { chromium } from 'playwright';
@@ -62,7 +63,7 @@ import {
 // inherited from whatever flags happen to be on THIS script's argv.
 setSlotPass(false);
 
-const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
+const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 const FILE_KEY = process.env.FILE_KEY;
 
 // ── args ────────────────────────────────────────────────────────────────────

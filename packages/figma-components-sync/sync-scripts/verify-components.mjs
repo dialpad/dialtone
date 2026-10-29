@@ -31,7 +31,7 @@ const SIZE_EPS = 1.0;         // px — Chrome and Figma shape text slightly dif
 // tolerance exists to forgive — and it failed on 320 variants for want of this slop.
 const FLOAT_SLOP = 0.01;
 const CEPS = 1.5 / 255;       // ~one 8-bit step
-const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
+const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 
 const TOKEN = process.env.PERSONAL_ACCESS_TOKEN;
 const FILE_KEY = process.env.FILE_KEY;
@@ -51,10 +51,14 @@ const IS_CLI = (() => {
 })();
 
 const args = process.argv.slice(2);
-const which = args.find(a => !a.startsWith('--'));
-// `indexOf(...) + 1` is 0 when the flag is absent, so a forgotten --set silently used
-// the COMPONENT NAME as a node id and failed with a REST 400 instead of the usage line.
-const setId = args.includes('--set') ? args[args.indexOf('--set') + 1] : undefined;
+// The component is the first argument that is not a flag AND not a flag's value. This module is
+// also imported by negative-control.mjs, whose argv can lead with `--set <id>`: taking the first
+// non-`--` argument then read the node id as the component name.
+const VALUED_FLAGS = new Set(['--set', '--json', '--mode', '--variants']);
+const which = args.find((a, i) => !a.startsWith('--') && !VALUED_FLAGS.has(args[i - 1]));
+// flagValue (not `indexOf(...) + 1`, which is 0 when the flag is absent, and not a bare
+// `args[i + 1]`, which accepts the next flag): a forgotten --set must hit the usage line.
+const setId = flagValue(args, '--set');
 if (IS_CLI && (!which || !setId)) throw new Error('usage: verify-components.mjs <component> --set <nodeId>');
 
 /**
@@ -73,6 +77,7 @@ import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { matchedFor, resolveDeclared } from './cdp-provenance.mjs';
+import { flagValue } from './cli-args.mjs';
 import { figmaTextDecoration as decorationOf, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const cfg = COMPONENTS[which];

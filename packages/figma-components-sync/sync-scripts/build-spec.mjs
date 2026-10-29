@@ -15,6 +15,7 @@
  *   node build-spec.mjs link          -> link-spec.json
  */
 import './pin-cwd.mjs';   // launch directory must not matter
+import { fileURLToPath } from 'url';
 import { writeFileSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
 import { chromium } from 'playwright';
@@ -26,7 +27,7 @@ import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
 import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
-const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
+const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 const toRgb = converter('rgb');
 
 const which = process.argv[2];

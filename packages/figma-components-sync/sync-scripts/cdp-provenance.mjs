@@ -180,8 +180,16 @@ function foldRules (matchedCSSRules = []) {
       // CDP keeps `!important` inside the value string, which breaks the
       // "exactly one var() reference" test and silently drops the token for every
       // utility-class declaration.
+      //
+      // IMPORTANCE IS NOT ORDER. matchedCSSRules arrive by specificity and source order, but a
+      // later NORMAL declaration never beats an earlier `!important` one in the cascade, so
+      // remember it and refuse to let a normal declaration replace it. (An important one still
+      // replaces another important one, which is the order the rules arrived in.)
+      const important = d.important === true || /\s*!important\s*$/i.test(String(d.value));
+      const prev = out[d.name];
+      if (prev && prev.important && !important) continue;
       out[d.name] = { value: String(d.value).replace(/\s*!important\s*$/i, ''),
-                      selector: (m.rule.selectorList || {}).text || '' };
+                      selector: (m.rule.selectorList || {}).text || '', important };
     }
   }
   return out;

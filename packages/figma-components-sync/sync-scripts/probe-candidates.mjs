@@ -1,10 +1,11 @@
 // Which components render with PLAUSIBLE props? Empirical, because guessing a prop API
 // from a props block missed that DtInput's control carries `d-textarea` not `d-input`.
 import './pin-cwd.mjs';
+import { fileURLToPath } from 'url';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
 
-const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
+const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js',
   server: { port: 0 }, logLevel: 'error' });
 await server.listen();

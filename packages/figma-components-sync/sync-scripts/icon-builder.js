@@ -118,8 +118,11 @@ async function buildIcons ({ D }) {
         existing.set(it.name, comp);
         created++;
       }
-      comp.x = (i % COLS) * CELL;
-      comp.y = Math.floor(i / COLS) * CELL;
+      // The GLOBAL slot, not the index within this shard: every shard restarts `i` at 0, so
+      // each later shard was placed on top of the cells the earlier ones had already filled.
+      const slot = (D.indexOffset || 0) + i;
+      comp.x = (slot % COLS) * CELL;
+      comp.y = Math.floor(slot / COLS) * CELL;
       ids[it.name] = comp.id;
     } catch (e) {
       // One bad icon must not cost the other 616, but it must not vanish either.
