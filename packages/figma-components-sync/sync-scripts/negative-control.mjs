@@ -50,7 +50,7 @@ import { createServer } from 'vite';
 import { parse as parseColor } from 'culori';
 
 import { COMPONENTS } from './component-axes.mjs';
-import { combosFor } from './combos.mjs';
+import { combosFor, containerClassOf } from './combos.mjs';
 import { defaultVariantFindings } from './default-variant.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { matchedFor } from './cdp-provenance.mjs';
@@ -782,7 +782,7 @@ async function capture () {
           // As the verifier renders it: without the declared slot content a component like Notice
           // is captured without its action button, and the perturbations run against a tree the
           // verifier never sees.
-          slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
+          slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass, containerClass: containerClassOf(cfg, combo) }]);
     activeCombo = combo;
     if (!await forceState(cfg.pseudo ? cfg.pseudo(combo) : [])) continue;
     await page.evaluate(() => { void document.querySelector('#root > *').offsetWidth; });

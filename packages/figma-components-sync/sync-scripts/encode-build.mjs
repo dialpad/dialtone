@@ -254,6 +254,7 @@ for (const full of Object.keys(ICON_LIB.ids || {})) {
  * Absent or unresolvable is fine and reported: the slot then has no swap property, which
  * run-batch already says out loud per slot.
  */
+const textPropsOf = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textProps || {};
 const swapTargets = new Map();     // "component|variantName" -> node id
 const swapUnresolved = new Set();
 /**
@@ -324,6 +325,11 @@ function encodeNode (n) {
   // at any depth (DtBadge nests it two frames down), and guessing by depth would bind the
   // property to whatever text happened to be there.
   if (n.text && spec.label && n.text === spec.label) out.tp = 'Label';
+  // More TEXT properties than the label, named by the config: `textProps: { 'Notice title': 'Title' }`
+  // maps a text the harness injected (a prop value such as `headerText`) to the property it becomes.
+  // Matched on the injected text for the same reason as the label: guessing by position would bind
+  // the property to whatever text happened to be there.
+  else if (n.text && textPropsOf[n.text]) out.tp = textPropsOf[n.text];
   const icId = iconIdFor(n.iconName);
   if (icId) out.ic = icId;
   // A declared swap target wins: the node becomes an instance of that component rather than

@@ -17,7 +17,7 @@
  */
 export default {
   component: 'DtCollapsible', label: 'Content', page: 'Collapsible',
-  figmaSetId: '586:25877',
+  figmaSetId: '592:5477',
 
   axes: {
     open: [false, true],
@@ -42,4 +42,6 @@ export default {
   nativeSlots: ['content'],
 
   variantName: c => `open=${c.open}`,
+  // `anchorText` is a prop in the code, so its text is a property in Figma.
+  textProps: { More: 'Anchor Text' },
 };

@@ -21,36 +21,42 @@
  */
 export default {
   component: 'DtButton', label: 'Button', page: 'ButtonLink',
-  figmaSetId: '589:42184',
+  figmaSetId: '592:21746',
   axes: {
     size: [100, 200, 300, 400, 500],
     // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'
     state: ['default', 'hover', 'active', 'focus', 'disabled'],
-    loading: [false, true],
     linkKind: ['default', 'critical', 'warning', 'positive', 'info', 'muted', 'mention'],
     linkUnderline: [true, false],
+    // Links for dark backgrounds: every kind has an inverted colour (LINK_KIND_MODIFIERS_INVERTED).
+    // Measured on a dark CONTAINER that is not part of the component, so the tree holds only the
+    // link and its colours.
+    linkInverted: [false, true],
   },
-  // Hover and active are not reachable while loading: the button is pointer-events:none.
-  invalid: c => c.loading === true && ['hover', 'active'].includes(c.state),
-  variantName: c => `size=${c.size}, state=${c.state}, loading=${c.loading}, `
-    + `linkKind=${c.linkKind}, linkUnderline=${c.linkUnderline}`,
+  /**
+   * NO `loading` AXIS, deliberately.
+   *
+   * Crossing `linkInverted` with `loading` took the set to about 1,120 variants, past Figma's
+   * 1,000-variant performance warning ("Components with more than 1000 variants may experience
+   * performance issues"). Without it the set is 700. The cost is real and chosen: this set no
+   * longer shows the loading spinner. DtButton's own loading state is covered by DtButton and
+   * DtButtonIcon.
+   */
+  invalid: () => false,
+  variantName: c => `size=${c.size}, state=${c.state}, linkKind=${c.linkKind}, `
+    + `linkUnderline=${c.linkUnderline}, linkInverted=${c.linkInverted}`,
   // kind and importance are dead props in link mode; they are pinned to the values the
   // component defaults to so the render is the one a consumer gets by writing `link`.
   props: c => ({
     link: true, kind: 'default', importance: 'primary', circle: false,
     size: Number(c.size), linkKind: c.linkKind, linkUnderline: c.linkUnderline,
+    linkInverted: c.linkInverted,
     ...(c.state === 'active' ? { active: true } : {}),
     ...(c.state === 'disabled' ? { disabled: true } : {}),
-    ...(c.loading ? { loading: true } : {}),
   }),
+  // A dark container for the inverted links, outside the measured tree.
+  containerClass: c => (c.linkInverted ? 'd-bgc-black-900' : ''),
   slots: () => [],
-  // While loading, `.d-loader` is an instance of the real DtLoader, exactly as in Button
-  // (see button's anatomySwap in component-axes.mjs). DtLoader must be built first.
-  anatomySwap: c => ({
-    selector: 'd-loader',
-    component: 'loader',
-    variant: { size: { 100: 200, 200: 200, 300: 300, 400: 400, 500: 500 }[c.size] },
-  }),
   // only these two need the CDP override; active/disabled are class-driven
   pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
 };

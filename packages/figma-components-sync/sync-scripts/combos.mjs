@@ -24,3 +24,16 @@ export function combosFor (cfg) {
   // and should not have to say so.
   return cfg.invalid ? combos.filter(c => !cfg.invalid(c)) : combos;
 }
+
+/**
+ * The class for the container the harness mounts a component in, or ''.
+ *
+ * Some variants only make sense on a particular surface (a link for dark backgrounds). The
+ * container is NOT part of the measured tree, so the spec holds only the component and its colours;
+ * it only gives the browser the surface the colours were designed for. A config declares it as a
+ * string or as a function of the combo.
+ */
+export function containerClassOf (cfg, combo) {
+  const c = cfg.containerClass;
+  return (typeof c === 'function' ? c(combo) : c) || '';
+}

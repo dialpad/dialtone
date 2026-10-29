@@ -23,7 +23,7 @@ import { writeFileSync } from 'fs';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
 import { COMPONENTS } from './component-axes.mjs';
-import { combosFor } from './combos.mjs';
+import { combosFor, containerClassOf } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { converter, parse as parseColor } from 'culori';
 import { loadLibrary } from './remote-variables.mjs';
@@ -511,7 +511,7 @@ for (const combo of combos) {
   const fig = figByName.get(name);
   if (!fig) continue;
   await page.evaluate(([c, p, o]) => window.__setProps(c, p, o),
-    [cfg.component, cfg.props(combo), { label: cfg.label, slots: cfg.slots ? cfg.slots(combo) : [], slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
+    [cfg.component, cfg.props(combo), { label: cfg.label, slots: cfg.slots ? cfg.slots(combo) : [], slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass, containerClass: containerClassOf(cfg, combo) }]);
   activeCombo = combo;
   // forceState returns the node it FORCED, which is the stateTarget when a component
   // declares one — Toggle forces on `.d-toggle`, not the wrapper. Using that as the

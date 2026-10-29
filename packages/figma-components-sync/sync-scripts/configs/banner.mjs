@@ -15,8 +15,10 @@
 export default {
   component: 'DtBanner',
   label: 'Banner',
+  // The title's text is a property, like the label: `headerText` is a prop in the code.
+  textProps: { 'Optional title': 'Title' },
   page: 'Banner',
-  figmaSetId: '591:10653',
+  figmaSetId: '592:10999',
 
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of

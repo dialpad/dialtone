@@ -20,7 +20,7 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
 import { COMPONENTS } from './component-axes.mjs';
-import { combosFor } from './combos.mjs';
+import { combosFor, containerClassOf } from './combos.mjs';
 import { flagValue } from './cli-args.mjs';
 
 const args = process.argv.slice(2);
@@ -95,7 +95,7 @@ for (const p of pairs) {
       // The same render the builder and the verifier use. Without it the harness side of the
       // sheet omits a declared slot's content (Notice's and Banner's action button), so the
       // Figma side looked like it had something extra.
-      slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
+      slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass, containerClass: containerClassOf(cfg, combo) }]);
   await forceState(cfg.pseudo ? cfg.pseudo(combo) : [], combo);
   await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
   const el = await page.$('#root > *');

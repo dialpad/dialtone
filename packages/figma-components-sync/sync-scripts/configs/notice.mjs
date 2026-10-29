@@ -20,7 +20,7 @@ export default {
   component: 'DtNotice',
   label: 'Notice',
   page: 'Notice',
-  figmaSetId: '591:7732',
+  figmaSetId: '592:8398',
 
   axes: {
     // Each kind repaints the surface AND swaps the default icon glyph
@@ -55,7 +55,7 @@ export default {
      * pins it. A pinned frame cannot grow, so the toggle would reveal the button without
      * making room for it. `slotAxisSizing` caught exactly that, 80 times.
      */
-    action: [false, true],
+    showAction: [false, true],
   },
 
   // Nothing to exclude. Notice rejects no combination of these props, and with no
@@ -65,7 +65,7 @@ export default {
   invalid: () => false,
 
   variantName: c => `kind=${c.kind}, important=${c.important}, header=${c.header}, `
-    + `showIcon=${c.showIcon}, showClose=${c.showClose}, action=${c.action}`,
+    + `showIcon=${c.showIcon}, showClose=${c.showClose}, showAction=${c.showAction}`,
 
   props: c => ({
     kind: c.kind,
@@ -104,10 +104,12 @@ export default {
   // needs every icon to become an instance of the icon-library component, which is a
   // separate piece of work — until then the icon is correct but not swappable, which the
   // build report says out loud rather than implying.
-  slots: c => (c.action ? ['action'] : []),
+  slots: c => (c.showAction ? ['action'] : []),
   // The action slot takes ANY content (its own doc offers a link as the example), so it is a
   // native Figma slot with the exemplar button as its default content, not a one-value swap.
   nativeSlots: ['action'],
+  // The title's text is a property, like the label: `headerText` is a prop in the code.
+  textProps: { 'Notice title': 'Title' },
   /**
    * WHAT EACH SLOT IS RENDERED WITH — A CHOSEN EXEMPLAR, NOT A DERIVED FACT.
    *

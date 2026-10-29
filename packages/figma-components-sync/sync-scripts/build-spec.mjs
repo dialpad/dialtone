@@ -24,7 +24,7 @@ import { converter, parse as parseColor, clampChroma, displayable } from 'culori
 import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
   shadowLayerColorTokens } from './cdp-provenance.mjs';
 import { COMPONENTS } from './component-axes.mjs';
-import { combosFor } from './combos.mjs';
+import { combosFor, containerClassOf } from './combos.mjs';
 import { defaultCombo } from './default-variant.mjs';
 import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
@@ -1063,7 +1063,7 @@ async function measure (combo, slots) {
     Object.entries(sc).filter(([, v]) => v && v.swapTo).map(([k, v]) => [k, v.swapTo]));
   anatomySwap = cfg.anatomySwap ? cfg.anatomySwap(combo) : null;
   await page.evaluate(([c, p, o]) => window.__setProps(c, p, o),
-    [cfg.component, cfg.props(combo), { label: cfg.label, slots, slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
+    [cfg.component, cfg.props(combo), { label: cfg.label, slots, slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass, containerClass: containerClassOf(cfg, combo) }]);
   activeCombo = combo;
   // Re-forced after every remount: changing the slots remounts the component, which
   // invalidates the CDP node id the previous force was applied to.

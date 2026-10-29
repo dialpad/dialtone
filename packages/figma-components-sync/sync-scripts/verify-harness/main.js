@@ -154,6 +154,9 @@ window.__setProps = async (component, props, opts = {}) => {
   state.slots = opts.slots || [];
   state.slotContent = opts.slotContent || {};
   state.rootClass = opts.rootClass || null;
+  // The surface the component sits on: outside the measured tree (`#root > *`), so it cannot be
+  // measured as part of the component.
+  document.getElementById('root').className = opts.containerClass || '';
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   // Any root element counts. The old check looked for .d-btn/button/a, which is
   // false for a <span> component like Badge — callers then read stale anatomy.

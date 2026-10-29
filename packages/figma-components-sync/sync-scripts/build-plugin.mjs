@@ -37,7 +37,7 @@ const NO_COMPONENTS = argv.includes('--no-components');
 const explicit = argv.filter(a => !a.startsWith('--'));
 const names = NO_COMPONENTS ? []
   : explicit.length ? explicit
-  : ['loader', 'collapsible', 'button', 'button_icon', 'button_link', 'notice', 'banner'];
+  : ['loader', 'collapsible', 'button', 'button_icon', 'button_stacked', 'button_link', 'notice', 'banner'];
 
 // Component shards are regenerated every run, so they are cleared. Icon shards are NOT:
 // they are produced by build-icon-library.mjs, which runs BEFORE this script so that its

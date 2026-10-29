@@ -3,7 +3,7 @@
 Builds Figma component sets from the real rendered Dialtone components, then proves the result
 matches. The codebase is the source of truth. Figma is the output.
 
-Each variant is measured in light and dark. Button (560 variants), ButtonIcon (480), ButtonLink (560), Notice,
+Each variant is measured in light and dark. Button (560 variants), ButtonIcon (480), ButtonStacked (700), ButtonLink (700), Notice,
 Banner, Collapsible and Loader are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
@@ -358,17 +358,27 @@ properties bind are named "Start Icon" with an inner `icon`. A set's description
 from its axes and slots (`describeSet` in `build-plugin.mjs`). Direction words stay logical
 (`start`/`end`), as `.claude/rules/logical-naming.md` requires.
 
-DtButton in Figma is three sets, in code one component:
+DtButton in Figma is four sets, in code one component:
 
 - **DtButton** (560 variants): the labelled button, icons behind toggles (see above).
 - **DtButtonIcon** (`configs/button_icon.mjs`, 480): the circular, icon-only button, `circle` with
   no label and one icon. `circle` is documented "use only with icon-only buttons", so it is a
   different design surface and has nothing to toggle.
-- **DtButtonLink** (`configs/button_link.mjs`, 560): link mode, which pins `link: true` and has no
-  `kind`, `importance`, icons or `circle`.
+- **DtButtonStacked** (`configs/button_stacked.mjs`, 700): the icon above or below the label
+  (`blockStartIcon` / `blockEndIcon`). That flips the layout to a column and changes the spacing,
+  which no property can do, so it is an axis (`blockIcon`) of its own set. No `loading` axis.
+- **DtButtonLink** (`configs/button_link.mjs`, 700): link mode, which pins `link: true` and has no
+  `kind`, `importance`, icons or `circle`. It carries `linkInverted` (links for dark backgrounds)
+  and no `loading` axis, so the set stays under the warning.
 
-Folded into one set they were 4,720 variants. Split they are 1,600, each under Figma's
-1,000-variant warning.
+Folded into one set they were well past 6,000 variants. Split, each is under Figma's 1,000-variant
+warning. `loading` is dropped from the two sets that would otherwise cross it, a chosen cost:
+DtButton and DtButtonIcon show the loading state.
+
+Not modelled, and why: Button's `leading` and `trailing` slots and ButtonLink's icons both rely on
+NEGATIVE margins (full-bleed content, an icon pulled over zero padding), which Figma cannot hold.
+Notice's `truncateText` is byte-identical at rest, so it would be a pixel-identical twin of every
+variant.
 
 ### The default variant comes from the code
 

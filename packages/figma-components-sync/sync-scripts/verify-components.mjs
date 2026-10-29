@@ -74,7 +74,7 @@ const MERGED = args.includes('--merged');
 export const setSlotPass = (v) => { SLOT_PASS = !!v; };
 
 import { COMPONENTS } from './component-axes.mjs';
-import { combosFor } from './combos.mjs';
+import { combosFor, containerClassOf } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { matchedFor, resolveDeclared } from './cdp-provenance.mjs';
 import { flagValue } from './cli-args.mjs';
@@ -1447,7 +1447,7 @@ if (IS_CLI) {
       const name = cfg.variantName(combo);
       const fig = figByName.get(name);
       if (!fig) { if (MODE === MODES[0]) rec(name, '', 'existence', 'variant present', 'MISSING'); continue; }
-      await page.evaluate(([c, p, o]) => window.__setProps(c, p, o), [cfg.component, cfg.props(combo), { label: cfg.label, slots: SLOT_PASS ? cfg.slotPass : (cfg.slots ? cfg.slots(combo) : []), slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
+      await page.evaluate(([c, p, o]) => window.__setProps(c, p, o), [cfg.component, cfg.props(combo), { label: cfg.label, slots: SLOT_PASS ? cfg.slotPass : (cfg.slots ? cfg.slots(combo) : []), slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass, containerClass: containerClassOf(cfg, combo) }]);
         activeCombo = combo;
       const pseudo = cfg.pseudo ? cfg.pseudo(combo) : [];
       if (!await forceState(pseudo)) { rec(name, '', 'render', 'a rendered component', 'nothing'); continue; }
