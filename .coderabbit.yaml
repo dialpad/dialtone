@@ -270,8 +270,7 @@ reviews:
           or in a commit. Flag any literal token/key.
 
     # Figma components sync (full component variant sets — browser-measured via CDP,
-    # not a token lookup; ported from an uncommitted spike, see its README's
-    # Provenance section)
+    # not a token lookup; see the package README's Status and Setup sections)
     - path: 'packages/figma-components-sync/**'
       instructions: >
         - Not in CI — needs a real browser, a Figma PAT, and a scratch file; changes
@@ -282,9 +281,6 @@ reviews:
           fragments inlined into a generated plugin code.js by build-plugin.mjs — never
           hand-edit code.js, and a bare top-level `return` in these three is intentional,
           not a bug.
-
-        - sync-scripts/superseded/** is retired-on-purpose (see its own README for what
-          replaced each file and why) — don't suggest reviving or importing from it.
 
         - Don't suggest duplicating color.ts, token_*.ts, transform.ts, utils.ts, or
           figma_api.ts here — the real versions live in

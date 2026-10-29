@@ -18,7 +18,6 @@ component, not a token lookup) and warrants its own build/test/release surface.
 | --- | --- |
 | `plugin/` | The Figma dev plugin ("Dialtone Components Sync"): generated `code.js` + `manifest.json`, and a hand-authored `ui.html` |
 | `sync-scripts/` | The full pipeline: measurement (`cdp-provenance.mjs`, `build-spec.mjs`), Figma construction (`encode-build.mjs`, `build-plugin.mjs`), verification (`check-all.mjs`, `verify-components.mjs`, `negative-control.mjs`, `visual-compare.mjs`), per-component `configs/`, and the raster-verification harness (`verify-harness/`) |
-| `sync-scripts/superseded/` | Retired approaches, kept for reference with their own README explaining what replaced each one and why |
 
 See [`sync-scripts/README.md`](sync-scripts/README.md) for the full pipeline — how a
 run works end to end, what each check actually catches, and the failure modes this
@@ -34,6 +33,8 @@ Notice, Banner, Collapsible and Loader. More components are added in batches, ea
 own rebuild and check.
 
 ## Setup
+
+It needs Node 22.18 or newer, because the provenance step loads TypeScript from the tokens package with native type stripping.
 
 The pipeline reads a gitignored `.env` in this package. Never commit it or paste a token
 into a chat, a PR or a log.

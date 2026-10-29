@@ -27,6 +27,8 @@ import { createServer } from 'http';
 import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, utimesSync } from 'fs';
 import { extname, normalize } from 'path';
 import { execFileSync, spawnSync } from 'child_process';
+import { COMPONENTS } from './component-axes.mjs';
+import { combosFor } from './combos.mjs';
 
 const HERE = new URL('.', import.meta.url).pathname.replace(/\/$/, '');
 const DIR = `${HERE}/build-data/`;
@@ -44,6 +46,41 @@ if (!names.length && !WANT_ICONS) {
   console.error('usage: run-batch.mjs <component…> [--no-verify] [--visual]');
   console.error('       run-batch.mjs --icons            (build the icon component library)');
   process.exit(2);
+}
+
+/**
+ * REFUSE A BATCH THAT REBUILDS A SWAP TARGET TOGETHER WITH ITS DEPENDENTS.
+ *
+ * A component whose slot declares `swapTo: { component: 'button', … }` carries the node id of
+ * that Button variant, resolved when the payload was ENCODED. The first shard of a rebuilt
+ * component clears its page, which deletes those variants and creates new ones with new ids.
+ * Built in the same run, the dependent's payload would point at nodes that no longer exist.
+ * Built in a LATER run, it re-resolves against the fresh set, which is why the fix is to
+ * split the batch rather than to reorder it.
+ */
+function swapTargetsOf (name) {
+  const cfg = COMPONENTS[name.endsWith('-merged') ? name.slice(0, -'-merged'.length) : name];
+  const out = new Set();
+  if (!cfg || typeof cfg.slotContent !== 'function') return out;
+  const walk = (x) => {
+    if (Array.isArray(x)) x.forEach(walk);
+    else if (x && typeof x === 'object') {
+      if (x.swapTo && x.swapTo.component) out.add(x.swapTo.component);
+      Object.values(x).forEach(walk);
+    }
+  };
+  for (const combo of combosFor(cfg)) walk(cfg.slotContent(combo));
+  return out;
+}
+for (const dependent of names) {
+  for (const target of swapTargetsOf(dependent)) {
+    if (target !== dependent && names.includes(target)) {
+      console.error(`${dependent} swaps to ${target}, and building ${target} in the same run clears its `
+        + `variants, so ${dependent}'s payload would point at ids that no longer exist.\n`
+        + `Build ${target} first, then ${dependent} in a separate run.`);
+      process.exit(2);
+    }
+  }
 }
 
 const run = (script, argv, opts = {}) =>
@@ -144,10 +181,16 @@ function writeSetId (component, setId) {
     const key = 'figmaMergedSetId';
     const perFile = `${HERE}/configs/${base}.mjs`;
     if (existsSync(perFile)) {
-      let s = readFileSync(perFile, 'utf8');
-      s = new RegExp(`${key}:\\s*'[^']*'`).test(s)
-        ? s.replace(new RegExp(`${key}:\\s*'[^']*'`), `${key}: '${setId}'`)
-        : s.replace(/(\n\s*figmaSetId:\s*'[^']*',)/, `$1\n  ${key}: '${setId}',`);
+      const before = readFileSync(perFile, 'utf8');
+      const s = new RegExp(`${key}:\\s*'[^']*'`).test(before)
+        ? before.replace(new RegExp(`${key}:\\s*'[^']*'`), `${key}: '${setId}'`)
+        : before.replace(/(\n\s*figmaSetId:\s*'[^']*',)/, `$1\n  ${key}: '${setId}',`);
+      // Same rule as the plain branch below: never report a write that did not happen. With
+      // neither a ${key} nor a `figmaSetId: '…',` line to anchor to, both replaces are no-ops.
+      if (s === before && !new RegExp(`${key}:\\s*'${setId}'`).test(before)) {
+        throw new Error(`could not write ${key} into configs/${base}.mjs — `
+          + `no ${key} and no \`figmaSetId: '…',\` line to anchor to. Set id was ${setId}.`);
+      }
       writeKeepingMtime(perFile, s);
       return `configs/${base}.mjs (${key})`;
     }
@@ -223,6 +266,24 @@ let resolveReport;
 const reported = new Promise((r) => { resolveReport = r; });
 
 /**
+ * ONLY A COMPONENT IN THIS BATCH, AND ONLY A NODE ID, MAY BE RECORDED.
+ *
+ * The server answers any origin (Access-Control-Allow-Origin: *, which the plugin's iframe
+ * needs) and parses the body whatever its Content-Type, so a web page the user happens to
+ * have open can POST to /progress or /results while a batch waits, with no preflight.
+ * `recordBuilt` writes `component` into a file path and `setId` into JavaScript source that
+ * `check-all` then imports, so both are checked before they go anywhere near either: the
+ * component must be one this batch built, and the id must have the shape of a Figma node id.
+ * That also keeps `$` and regex metacharacters out of the String.replace and RegExp below.
+ */
+const NODE_ID = /^\d+:\d+$/;
+function acceptableResult (r) {
+  return !!r && typeof r.component === 'string' && typeof r.setId === 'string'
+    && NODE_ID.test(r.setId)
+    && index.components.some(c => c.component === r.component);
+}
+
+/**
  * MAKE ONE COMPONENT'S BUILD DURABLE.
  *
  * Two writes decide whether a built set can be found again: its id in the config, and its
@@ -238,6 +299,11 @@ const reported = new Promise((r) => { resolveReport = r; });
  */
 function recordBuilt (r) {
   if (!r || !r.setId) return null;
+  if (!acceptableResult(r)) {
+    console.log(`  ! ignored a report for ${JSON.stringify(String(r.component).slice(0, 40))} `
+      + `(set ${JSON.stringify(String(r.setId).slice(0, 40))}): not a component in this batch, or not a node id`);
+    return null;
+  }
   const where = writeSetId(r.component, r.setId);
   const stamp = existsSync(`${DIR}built-from.json`)
     ? JSON.parse(readFileSync(`${DIR}built-from.json`, 'utf8'))
@@ -458,7 +524,7 @@ if (built.length) {
 // vanishes on the path that needs it most is worse than no report.
 for (const r of report.filter(x => (x.slots && x.slots.length) || (x.texts && x.texts.length))) {
   console.log(`\n── properties: ${r.component} ` + '─'.repeat(Math.max(4, 45 - r.component.length)));
-  for (const sl of r.slots) {
+  for (const sl of (r.slots || [])) {
     const bits = [];
     if (sl.boolProp) bits.push(`toggle "${sl.boolProp}"`);
     if (sl.swapAxis && sl.swapCount > 1) bits.push(`${sl.swapCount} swaps, one per ${sl.swapAxis}: ${sl.swapProp}`);
@@ -505,11 +571,11 @@ for (const r of report.filter(x => (x.slots && x.slots.length) || (x.texts && x.
   }
 }
 
-// check-all speaks in COMPONENT names: `badge-slots` and `badge-merged` are other builds of
-// `badge`, and check-all decides which passes to run from the ids on the config. A merged
-// build now HAS a check — `verify-components --merged`, reading `figmaMergedSetId` — so it
-// is verified like anything else rather than excluded with a warning.
-const toVerify = [...new Set(built.map(n => mergedOf(n) || n))];
+// check-all accepts a merged build by its own name (`badge-merged`): for those it runs the
+// merged and identity passes against `figmaMergedSetId` and checks the build stamp under the
+// merged name. Mapping it back to the base name verified the BASE set instead, so a merged
+// build was reported clean on the strength of a set nobody had just built.
+const toVerify = [...new Set(built)];
 
 // ── 7. verify ──────────────────────────────────────────────────────────────
 if (SKIP_VERIFY || !built.length) {
@@ -519,7 +585,9 @@ if (SKIP_VERIFY || !built.length) {
     : iconReport ? ' (icons have no browser render to verify against)'
     : ' (nothing was built)';
   console.log(`\nskipping verification${why}.`);
-  process.exit(built.length === report.length ? 0 : 1);
+  // An aborted run lists only the components that finished, so `built` can equal `report`
+  // exactly when the run failed.
+  process.exit(built.length === report.length && !aborted ? 0 : 1);
 }
 console.log('\n── 7. verifying ' + '─'.repeat(54));
 // STREAM it. Capturing stdout buffers every progress line until the child exits, and
@@ -549,4 +617,4 @@ if (WANT_VISUAL) {
   }
 }
 
-process.exit(chk.status === 0 && built.length === report.length ? 0 : 1);
+process.exit(chk.status === 0 && built.length === report.length && !aborted ? 0 : 1);

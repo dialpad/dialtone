@@ -758,7 +758,11 @@ async function capture () {
     if (!fig) continue;
     await page.evaluate(([c, p, o]) => window.__setProps(c, p, o),
       [cfg.component, cfg.props(combo),
-        { label: cfg.label, slots: cfg.slots ? cfg.slots(combo) : [], rootClass: cfg.rootClass }]);
+        { label: cfg.label, slots: cfg.slots ? cfg.slots(combo) : [],
+          // As the verifier renders it: without the declared slot content a component like Notice
+          // is captured without its action button, and the perturbations run against a tree the
+          // verifier never sees.
+          slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
     activeCombo = combo;
     if (!await forceState(cfg.pseudo ? cfg.pseudo(combo) : [])) continue;
     await page.evaluate(() => { void document.querySelector('#root > *').offsetWidth; });

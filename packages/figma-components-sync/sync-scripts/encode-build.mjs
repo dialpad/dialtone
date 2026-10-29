@@ -97,24 +97,30 @@ const si = (src) => {
 };
 const key = (v) => JSON.stringify(v);
 
+// Interning is by MAP, not `findIndex(x => key(x) === k)`: that re-serialised every entry already
+// in the table on every lookup, which is quadratic in the table size and showed on the larger
+// components. The arrays stay the source of order and the Maps only answer "where is it".
+const tokIndex = new Map();
+const colIndex = new Map();
+const nodeIndex = new Map();
 const ti = (t) => {
   if (!t) return -1;
-  let i = toks.indexOf(t);
-  if (i < 0) { toks.push(t); i = toks.length - 1; }
+  let i = tokIndex.get(t);
+  if (i === undefined) { toks.push(t); i = toks.length - 1; tokIndex.set(t, i); }
   return i;
 };
 const ci = (c) => {
   if (!c) return -1;
   const v = [+c.r.toFixed(6), +c.g.toFixed(6), +c.b.toFixed(6), +(c.a ?? 1).toFixed(4)];
   const k = key(v);
-  let i = cols.findIndex(x => key(x) === k);
-  if (i < 0) { cols.push(v); i = cols.length - 1; }
+  let i = colIndex.get(k);
+  if (i === undefined) { cols.push(v); i = cols.length - 1; colIndex.set(k, i); }
   return i;
 };
 const ni = (node) => {
   const k = key(node);
-  let i = nodes.findIndex(x => key(x) === k);
-  if (i < 0) { nodes.push(node); i = nodes.length - 1; }
+  let i = nodeIndex.get(k);
+  if (i === undefined) { nodes.push(node); i = nodes.length - 1; nodeIndex.set(k, i); }
   return i;
 };
 

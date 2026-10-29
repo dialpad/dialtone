@@ -53,8 +53,8 @@ export default [
     // that package), never a repo-root invocation like the pre-commit hook's
     // lint-staged run, which lands here instead. Mirrors that package's own
     // config (see it for the full reasoning): browser/figma globals this
-    // ported, uncommitted-until-now pipeline needs, and relaxed severities for
-    // code that's proven working but wasn't authored against this lint bar.
+    // pipeline needs, and relaxed severities for code that's proven working
+    // but wasn't authored against this lint bar.
     files: ['packages/figma-components-sync/sync-scripts/**/*.{js,mjs}'],
     languageOptions: {
       globals: {
@@ -88,7 +88,6 @@ export default [
       'packages/figma-components-sync/sync-scripts/icon-builder.js',
       'packages/figma-components-sync/sync-scripts/slot-properties.js',
       'packages/figma-components-sync/plugin/code.js',
-      'packages/figma-components-sync/sync-scripts/superseded/**',
     ],
   },
 ];

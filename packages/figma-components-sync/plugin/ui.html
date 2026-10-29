@@ -171,6 +171,26 @@
       }
     };
 
+    // ONE definition of "this component needs a look", shared by the per-item badge and the
+    // overall "All done!" line. They used to be written out twice, and the overall line left
+    // out the icon-instance failures, so a run where only those failed said "All done!" above
+    // a warning badge.
+    function componentIssues (r) {
+      const issues = [];
+      if (r.skippedBindings && r.skippedBindings.length) {
+        const count = r.skippedBindings.reduce((a, s) => a + s.count, 0);
+        issues.push(`${count} binding(s) skipped (token disagreed with the measured value)`);
+      }
+      if (r.provenanceTraded && r.provenanceTraded.length) {
+        const count = r.provenanceTraded.reduce((a, s) => a + s.count, 0);
+        issues.push(`${count} trade(s) made to keep the render correct`);
+      }
+      if (r.iconInstanceFailed && r.iconInstanceFailed.length) {
+        issues.push(`${r.iconInstanceFailed.length} icon(s) could not be resolved`);
+      }
+      return issues;
+    }
+
     function createComponentItem (r) {
       const item = document.createElement('div');
       item.className = 'result-item';
@@ -187,18 +207,7 @@
       detail.className = 'result-item__detail';
       item.append(header, detail);
 
-      const issues = [];
-      if (r.skippedBindings && r.skippedBindings.length) {
-        const count = r.skippedBindings.reduce((a, s) => a + s.count, 0);
-        issues.push(`${count} binding(s) skipped (token disagreed with the measured value)`);
-      }
-      if (r.provenanceTraded && r.provenanceTraded.length) {
-        const count = r.provenanceTraded.reduce((a, s) => a + s.count, 0);
-        issues.push(`${count} trade(s) made to keep the render correct`);
-      }
-      if (r.iconInstanceFailed && r.iconInstanceFailed.length) {
-        issues.push(`${r.iconInstanceFailed.length} icon(s) could not be resolved`);
-      }
+      const issues = componentIssues(r);
 
       if (!r.setId) {
         badge.className = 'badge err';
@@ -280,8 +289,7 @@
       for (const r of report) items.push(createComponentItem(r));
 
       const anyProblem = (iconReport && iconReport.failures.length)
-        || report.some(r => !r.setId || (r.skippedBindings && r.skippedBindings.length)
-          || (r.provenanceTraded && r.provenanceTraded.length));
+        || report.some(r => !r.setId || componentIssues(r).length);
       const intro = document.createElement('p');
       intro.className = 'results-intro';
       intro.textContent = anyProblem

@@ -88,15 +88,14 @@ of this.
    `node packages/figma-components-sync/sync-scripts/build-spec.mjs <name>` — then repeat.
    Button takes a few minutes.
 
-2. **Start the server** and leave it running — `serve-build-data.mjs`, this step's
-   original standalone script, is retired (see `sync-scripts/superseded/README.md`).
-   There's no standalone replacement: `run-batch.mjs` (the "one command" at the top of
-   this README) now does its own serving internally as steps 4/5, listening on the same
-   port, so driving this step by hand means running the full `run-batch.mjs <names>` and
-   leaving steps 3 onward below to describe what happens while it's serving.
+2. **Start the server** and leave it running. There is no standalone server script:
+   `run-batch.mjs` (the "one command" at the top of this README) serves internally as
+   steps 4/5, so driving this step by hand means running the full
+   `run-batch.mjs <names>` and leaving steps 3 onward below to describe what happens
+   while it's serving.
 
-   It serves `build-data/` on `http://127.0.0.1:8931` and waits for the plugin to POST
-   its results back.
+   It serves `build-data/` on `localhost:8931` (both loopback stacks, matching the
+   manifest's allowlist) and waits for the plugin to POST its results back.
 
 3. **Run the plugin** in Figma: Plugins → Development → **Dialtone Components Sync**,
    then click **Build** in its UI.
@@ -110,9 +109,14 @@ of this.
 4. **Read the report.** The server writes it to `sync-scripts/build-data/plugin-results.json`:
 
    ```json
-   [{ "component": "button", "page": "Button", "built": 4160,
-      "setId": "1:2", "variants": 4160, "properties": ["Label", "Start icon choice", …] }]
+   { "runtime": { … },
+     "components": [{ "component": "button", "page": "Button", "built": 4160,
+                      "setId": "1:2", "variants": 4160, "properties": ["Label", "Start icon choice", …] }],
+     "icons": { … } }
    ```
+
+   `aborted` is added to the object when a run fails partway; the components that finished
+   before the failure are still listed.
 
 5. **Wire the set IDs into the configs** — the checks need them:
    - `sync-scripts/configs/<name>.mjs` → `figmaSetId` (banner, button_link, collapsible, loader, notice)

@@ -444,6 +444,8 @@ Each was added after the failure it prevents. The log has the evidence.
 | `writeSetId` distinguishes "already this id" from "nothing matched" | a second, idempotent write throwing. Not a hypothetical: incremental reporting calls it twice per component by design |
 | `bindNum` refuses a numeric binding whose variable disagrees with the measured literal | a bound variable overwriting the number underneath it |
 | `paint()` refuses a colour binding whose variable holds a different colour, but only when EVERY mode is a concrete colour | a misattributed token painting the wrong colour. The mode qualifier is not fussiness: without it, a variable that aliases in one mode was compared against the other mode's value, and 64 correct bindings became literals that were wrong in dark |
+| `run-batch` refuses a batch that rebuilds a swap target together with a component that swaps to it | the dependent's payload pointing at variant ids the rebuild just deleted. Build the target first, then the dependent in its own run |
+| `run-batch` records a reported set id only for a component in the batch and only if it has the shape of a node id | the local server answers any origin, and the id is written into config source that `check-all` imports |
 | `combosFor()` is the only expansion of a config's axes | the measure and the checks disagreeing about which variants exist. Five files had a verbatim copy; making `invalid` optional needed five edits and got one, and all ten checks died after a plugin run on work that was already correct |
 | the one-variable-one-number sweep in `build-spec` | binding a token that resolves to different numbers in different places. `--dt-layout-100-percent` holds 28 distinct pixel values across DtAvatar |
 
@@ -547,7 +549,6 @@ These appear in every run's allowances. A divergence nobody can see is the failu
 | `negative-control.mjs` | check the checks |
 | `visual-compare.mjs` | look at it |
 | `build-data/` | generated and gitignored: specs, payloads, shards, build fingerprints, contact sheets |
-| `superseded/` | retired, kept for the reasoning |
 
 The guards table above carries the reasoning behind each check. When a line here looks
 arbitrary, it was added after the failure it names.

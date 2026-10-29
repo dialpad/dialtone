@@ -15,7 +15,9 @@
 
 import './pin-cwd.mjs';
 import { readdirSync, readFileSync, writeFileSync, statSync, mkdirSync } from 'fs';
+import 'dotenv/config';
 import { createHash } from 'crypto';
+import { fetchPublishedTokenKeys } from './library-tokens.mjs';
 import { prepareIcon, themeableFills } from './icon-svg.mjs';
 
 const ICONS_PKG = '../dialtone-icons';
@@ -37,6 +39,8 @@ const themeable = themeableFills(`${ICONS_PKG}/gulpfile.cjs`);
 const files = walk(SRC);
 if (!files.length) throw new Error(`no icons under ${SRC}`);
 
+/** See the note on the hash below. */
+const ICON_BUILDER_VERSION = 1;
 const icons = [];
 const problems = [];
 for (const f of files) {
@@ -48,8 +52,20 @@ for (const f of files) {
     // A content hash, so a rebuild can leave an unchanged component completely alone.
     // See the note in icon-builder.js: replacing a component's children destroys every
     // instance override that pointed at them.
+    //
+    // Every input that changes the BUILT component belongs in the hash, or a change to it
+    // leaves a stale icon looking current. `flatten` already implies `mono`, so `mono` is added
+    // only where flatten does not carry it (a themeable icon that has real clips and is
+    // therefore not flattened), and the builder version only once it moves past 1, so adding
+    // either does not invalidate the 600-odd icons it would not change. Bump
+    // ICON_BUILDER_VERSION whenever icon-builder.js changes what it writes: every icon is then
+    // rebuilt on the next run, which replaces each one's children, so rebuild the components
+    // that use them afterwards.
     const hash = createHash('sha256')
-      .update(`${p.svg}|${p.flatten}|${p.width}x${p.height}`).digest('hex').slice(0, 16);
+      .update(`${p.svg}|${p.flatten}|${p.width}x${p.height}`
+        + (p.mono && !p.flatten ? '|mono' : '')
+        + (ICON_BUILDER_VERSION > 1 ? `|v${ICON_BUILDER_VERSION}` : ''))
+      .digest('hex').slice(0, 16);
     icons.push({ name: rel, svg: p.svg, flatten: p.flatten, mono: p.mono, w: p.width, h: p.height, hash });
   } catch (e) { problems.push(`${rel}: ${e.message}`); }
 }
@@ -74,6 +90,20 @@ for (const ic of icons) {
 }
 if (bad.length) throw new Error(`icon payload rejected (${bad.length}):\n  ` + bad.join('\n  '));
 
+// The default fill variable, by its published key, for a file that links the tokens library
+// rather than owning the variables (see icon-builder.js). Without credentials the icons are
+// still built, with a literal fill, and that is said out loud.
+const FILL_VAR_NAME = 'color/foreground/primary';   // must match DEFAULT_FILL_VAR in icon-builder.js
+let fillVarKey = null;
+if (process.env.PERSONAL_ACCESS_TOKEN && process.env.TOKENS_FILE_KEY) {
+  fillVarKey = (await fetchPublishedTokenKeys(process.env.PERSONAL_ACCESS_TOKEN, process.env.TOKENS_FILE_KEY))
+    .get(FILL_VAR_NAME) || null;
+}
+if (!fillVarKey) {
+  console.log(`note         : no published key for ${FILL_VAR_NAME} (set PERSONAL_ACCESS_TOKEN and TOKENS_FILE_KEY); `
+    + 'icons fall back to the local variable, or a literal fill');
+}
+
 mkdirSync(SHARD_DIR, { recursive: true });
 const shards = [];
 let cur = [], curBytes = 0;
@@ -87,7 +117,7 @@ if (cur.length) shards.push(cur);
 const manifest = { page: PAGE, total: icons.length, shards: [] };
 shards.forEach((group, i) => {
   const file = `icons-${i + 1}of${shards.length}.json`;
-  const body = JSON.stringify({ page: PAGE, clear: i === 0, icons: group });
+  const body = JSON.stringify({ page: PAGE, clear: i === 0, fillVarKey, icons: group });
   writeFileSync(`${SHARD_DIR}/${file}`, body);
   manifest.shards.push({
     file, count: group.length, clear: i === 0,

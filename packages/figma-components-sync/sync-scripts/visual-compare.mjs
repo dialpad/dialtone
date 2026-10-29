@@ -20,17 +20,18 @@ import { chromium } from 'playwright';
 import { createServer } from 'vite';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
+import { flagValue } from './cli-args.mjs';
 
 const args = process.argv.slice(2);
 const which = args.find(a => !a.startsWith('--'));
-const setId = args[args.indexOf('--set') + 1];
-const LIMIT = Number(args[args.indexOf('--limit') + 1] || 12);
+const setId = flagValue(args, '--set');
+const LIMIT = Number(flagValue(args, '--limit') || 12);
 const MODE = args.includes('--dark') ? 'dark' : null;
 // A 16px component tells you nothing at 1:1. --zoom scales BOTH sides equally with
 // nearest-neighbour, which is what makes a 2px focus ring on a checkbox visible at
 // all — the first sheet looked like the ring was missing when it was simply too small.
-const ZOOM = Number(args[args.indexOf('--zoom') + 1] || 1) || 1;
-const MATCH = args.includes('--match') ? new RegExp(args[args.indexOf('--match') + 1]) : null;
+const ZOOM = Number(flagValue(args, '--zoom') || 1) || 1;
+const MATCH = flagValue(args, '--match') ? new RegExp(flagValue(args, '--match')) : null;
 if (!which || !setId) throw new Error('usage: visual-compare.mjs <component> --set <nodeId> [--limit N] [--dark]');
 
 const cfg = COMPONENTS[which];
@@ -89,7 +90,11 @@ const rows = [];
 for (const p of pairs) {
   const combo = byName.get(p.name);
   await page.evaluate(([c, pr, o]) => window.__setProps(c, pr, o),
-    [cfg.component, cfg.props(combo), { label: cfg.label, slots: cfg.slots ? cfg.slots(combo) : [], rootClass: cfg.rootClass }]);
+    [cfg.component, cfg.props(combo), { label: cfg.label, slots: cfg.slots ? cfg.slots(combo) : [],
+      // The same render the builder and the verifier use. Without it the harness side of the
+      // sheet omits a declared slot's content (Notice's and Banner's action button), so the
+      // Figma side looked like it had something extra.
+      slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass }]);
   await forceState(cfg.pseudo ? cfg.pseudo(combo) : [], combo);
   await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
   const el = await page.$('#root > *');

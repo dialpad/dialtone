@@ -14,6 +14,8 @@
  * Used as an ORACLE: independent of our own parser, so it catches derivation
  * errors, not just write errors.
  */
+import { fileURLToPath } from 'url';
+
 
 /** Properties whose declared token we care about, mapped to Figma's vocabulary. */
 export const PAINTED = {
@@ -564,8 +566,13 @@ async function buildCssVarToPathMap () {
   // import time AND on every resolveModes() call, so the chdir has to stay in
   // place for both, then get restored before this module hands control back to
   // the rest of the pipeline (which reads its own files relative to ITS cwd).
+  //
+  // The import below loads TypeScript from plain Node, which needs native type stripping
+  // (unflagged from Node 22.18, hence `engines` in package.json). fileURLToPath, not the
+  // URL's `.pathname`: the latter stays percent-encoded, so a checkout under a path with a
+  // space made chdir throw.
   const originalCwd = process.cwd();
-  process.chdir(new URL('../../dialtone-tokens', import.meta.url).pathname);
+  process.chdir(fileURLToPath(new URL('../../dialtone-tokens', import.meta.url)));
   let map;
   try {
     const { resolveModes } = await import('../../dialtone-tokens/sync-scripts/resolve_tokens.ts');

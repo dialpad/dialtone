@@ -15,7 +15,8 @@
  *   node build-spec.mjs link          -> link-spec.json
  */
 import './pin-cwd.mjs';   // launch directory must not matter
-import { writeFileSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
+import { dirname } from 'path';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
 import { converter, parse as parseColor, clampChroma, displayable } from 'culori';
@@ -1221,6 +1222,7 @@ if (MERGED) {
     + `(${t.additive} additive layer(s), ${t.replacement} replacement swap point(s)); `
     + `${slotless.length} cannot (slotInvalid)`);
 }
+mkdirSync(dirname(file), { recursive: true });   // a standalone build may run before build-data exists
 writeFileSync(file, JSON.stringify(out));
 
 // coverage report — how much of the geometry and colour is token-backed

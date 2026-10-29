@@ -64,7 +64,6 @@ export default [
       'sync-scripts/icon-builder.js',
       'sync-scripts/slot-properties.js',
       'plugin/code.js',
-      'sync-scripts/superseded/**',
     ],
   },
 ];

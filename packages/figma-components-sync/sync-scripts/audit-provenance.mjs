@@ -29,6 +29,7 @@ import { loadLibrary } from './remote-variables.mjs';
 import { exemplarSlots } from './exemplar-slots.mjs';
 import { figmaChildParts } from './figma-mapping.mjs';
 import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken, shadowLayerColorTokens } from './cdp-provenance.mjs';
+import { flagValue } from './cli-args.mjs';
 
 const API = 'https://api.figma.com';
 const HARNESS = new URL('./verify-harness/', import.meta.url).pathname;
@@ -38,7 +39,7 @@ if (!TOKEN || !FILE_KEY) throw new Error('PERSONAL_ACCESS_TOKEN and FILE_KEY req
 
 const args = process.argv.slice(2);
 const which = args.find(a => !a.startsWith('--'));
-const setId = args[args.indexOf('--set') + 1];
+const setId = flagValue(args, '--set');
 const cfg = COMPONENTS[which];
 const EXEMPLAR_SLOTS = exemplarSlots(cfg);
 /** Declared exemplar slots, skipped and counted. */
