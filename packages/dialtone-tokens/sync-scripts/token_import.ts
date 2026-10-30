@@ -299,6 +299,18 @@ function isCodeSyntaxEqual(a: VariableCodeSyntax, b: VariableCodeSyntax) {
  * a particular property, we do not include it in the differences object to avoid
  * touching that property in Figma.
  */
+// The REST read returns a description HTML-escaped (`variable&#39;s`, `&quot;`),
+// so comparing it to the raw text re-sent a description with an apostrophe or
+// quote on every run, even when Figma already held it.
+function decodeHtmlEntities(text: string) {
+  return text
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+}
+
 function tokenAndVariableDifferences(token: Token, variable: Variable | null) {
   const differences: Partial<
     Omit<VariableChange, 'id' | 'name' | 'variableCollectionId' | 'resolvedType' | 'action'>
@@ -306,7 +318,7 @@ function tokenAndVariableDifferences(token: Token, variable: Variable | null) {
 
   if (
     token.$description !== undefined &&
-    (!variable || token.$description !== variable.description)
+    (!variable || token.$description !== decodeHtmlEntities(variable.description))
   ) {
     differences.description = token.$description
   }

@@ -1,3 +1,16 @@
+# [1.9.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.8.0...dialtone-mcp-server/v1.9.0) (2026-10-27)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core:** DLT-3672 find components in contextual keyword searches ([#1476](https://github.com/dialpad/dialtone/issues/1476)) ([81bb86d](https://github.com/dialpad/dialtone/commit/81bb86d55312cc5675cd5e9ef95f14cfdb554c7e))
+
+
+### Features
+
+* **Dialtone Cli, Dialtone Mcp Server:** DLT-2711 retrieve documentation examples with complete setup ([#1473](https://github.com/dialpad/dialtone/issues/1473)) ([f4d6b67](https://github.com/dialpad/dialtone/commit/f4d6b67967ddbe0c811943a9f543fdcc602a35bb))
+* **Dialtone Mcp Server:** DLT-3654 resolve installed project data ([#1471](https://github.com/dialpad/dialtone/issues/1471)) ([d098c6b](https://github.com/dialpad/dialtone/commit/d098c6bd2636cf9efaa12cee1a6c51177fc2b2f4))
+
 # [1.8.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.7.0...dialtone-mcp-server/v1.8.0) (2026-10-20)
 
 

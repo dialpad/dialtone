@@ -32,10 +32,10 @@ pageClass: dialpad-design-home
   >
     <dt-stack gap="550" align="center">
       <dt-box max-inline-size="1200">
-        <dt-text as="h2" kind="headline" wrap="balance" align="center" strength="normal" density="200" class="home-section-title">Setting the tone</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" strength="semibold" density="200" class="home-section-title">Setting the tone</dt-text>
       </dt-box>
       <dt-box max-inline-size="1200">
-        <dt-text as="p" align="center" wrap="balance" kind="headline" size="500" strength="normal">A shared design language shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
+        <dt-text as="p" align="center" wrap="balance" kind="body" strength="medium" class="home-type-lead">A shared design language shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
       </dt-box>
     </dt-stack>
   </dt-box>
@@ -51,34 +51,34 @@ pageClass: dialpad-design-home
         <dt-link to="./foundations/brand/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" name="home-foundations-01" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">Brand</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">Brand</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./foundations/colors/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <img src="/assets/images/home-foundations-02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">Colors</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">Colors</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./foundations/typography/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <img src="/assets/images/home-foundations-03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">Typography</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">Typography</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./foundations/motion/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" name="home-foundations-04" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">Motion</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">Motion</dt-text>
           </dt-box>
         </dt-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
-        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">Foundations</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="semibold" class="home-section-title">Foundations</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The building blocks of Dialtone... Color, Type, Layout & Spacing, Icons, and more.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" strength="medium" class="home-type-lead">The building blocks of Dialtone... Color, Type, Layout & Spacing, Icons, and more.</dt-text>
         </dt-box>
-        <dt-button size="400" to="./foundations/">
+        <dt-button size="400" class="home-type-button" to="./foundations/">
           View all Foundations
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
@@ -99,34 +99,34 @@ pageClass: dialpad-design-home
         <dt-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <img src="/assets/images/home-system--01.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">Components</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">Components</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./utilities/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <img src="/assets/images/home-system--02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">CSS Utilities</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">CSS Utilities</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./tokens/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <img src="/assets/images/home-system--03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">Design Tokens</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">Design Tokens</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./ui-kits/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <img src="/assets/images/home-system--04.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
-            <dt-text as="p" kind="body" size="300">UI Kits</dt-text>
+            <dt-text as="p" kind="body" strength="medium" class="home-type-body">UI Kits</dt-text>
           </dt-box>
         </dt-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" align="center" density="200" class="home-section-title">Design System</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" strength="semibold" align="center" density="200" class="home-section-title">Design System</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" strength="medium" class="home-type-lead">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</dt-text>
         </dt-box>
-        <dt-button :size="400" to="./dialtone/">
+        <dt-button :size="400" class="home-type-button" to="./dialtone/">
           View all Documentation
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
@@ -144,9 +144,9 @@ pageClass: dialpad-design-home
   >
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" gap="550" align="center">
-        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">What's New</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="semibold" class="home-section-title">What's New</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The latest from Dialpad Design.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" strength="medium" class="home-type-lead">The latest from Dialpad Design.</dt-text>
         </dt-box>
         <dt-box class="d-d-grid d-g-300 d-g-cols1 xl:d-g-cols3 d-ai-stretch home-section-blog-preview">
           <dt-link
@@ -160,14 +160,14 @@ pageClass: dialpad-design-home
           >
             <dt-stack gap="100">
               <dt-link class="d-d-inline">
-                <dt-text as="h3" kind="headline" :size="400" strength="semibold" wrap="pretty">{{ post.heading }}</dt-text>
+                <dt-text as="h3" kind="headline" strength="semibold" wrap="pretty" class="home-type-card-title">{{ post.heading }}</dt-text>
               </dt-link>
-              <dt-text as="time" kind="body" :size="200" tone="tertiary">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
-              <dt-text as="p" kind="body" :size="300" tone="primary" wrap="pretty">{{ post.excerpt }}</dt-text>
+              <dt-text as="time" kind="body" strength="medium" tone="tertiary" class="home-type-body">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
+              <dt-text as="p" kind="body" strength="medium" tone="primary" wrap="pretty" class="home-type-body">{{ post.excerpt }}</dt-text>
             </dt-stack>
           </dt-link>
         </dt-box>
-        <dt-button :size="400" to="./dialtone/whats-new/">
+        <dt-button :size="400" class="home-type-button" to="./dialtone/whats-new/">
           View all
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
@@ -177,13 +177,7 @@ pageClass: dialpad-design-home
     </dt-stack>
   </dt-box>
 </dt-box>
-<halftone-surface flip-x class="home-halftone-footer d-h-500 d-pbs-800">
-  <dt-stack align="center" justify="center" class="d-h50p home-halftone-footer__content">
-    <dt-box inline-size="1200" max-inline-size="80p" padding-inline-end="200">
-      <svg-loader name="footer-dialpad-design" />
-    </dt-box>
-  </dt-stack>
-</halftone-surface>
+<halftone-surface flip-x class="home-halftone-footer d-h-600 d-pbs-800" />
 
 <style lang="less">
 .dialpad-design-home {
@@ -191,12 +185,58 @@ pageClass: dialpad-design-home
   background-color: var(--dt-color-surface-primary);
 }
 
-.home-section-title {
-  font-size: 36px;
-  font-family: "Season Sans", var(--dt-font-family-body);
+/* Resolve brand type spec: Season Sans (Dialtone's name for Season VF Sans), sizes from
+   the brand ramp stepping up at 640px, headlines 600, body 500, buttons 600. Scoped to the
+   page class so these win over DtText's size and strength classes. */
+.dialpad-design-home {
+  .home-section-title,
+  .home-type-lead,
+  .home-type-body,
+  .home-type-card-title,
+  .home-type-button {
+    font-family: "Season Sans", var(--dt-font-family-body);
+  }
 
-  @media screen and (min-width: 640px) {
-    font-size: 48px;
+  .home-section-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+
+    @media screen and (min-width: 640px) {
+      font-size: 32px;
+    }
+  }
+
+  .home-type-lead {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    @media screen and (min-width: 640px) {
+      font-size: 20px;
+    }
+  }
+
+  .home-type-body {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .home-type-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+
+    @media screen and (min-width: 640px) {
+      font-size: 24px;
+    }
+  }
+
+  .home-type-button {
+    font-size: 16px;
+    font-weight: 600;
   }
 }
 
@@ -208,10 +248,9 @@ pageClass: dialpad-design-home
   max-inline-size: 1200px;
 }
 
-.home-halftone-footer__content {
-  position: relative;
-  z-index: 1;
-  opacity: .4;
+/* The footer halftone fades out before the container's top edge instead of being cut off there. */
+.home-halftone-footer .halftone-surface__shader {
+  mask-image: linear-gradient(to top, #000 45%, transparent 90%);
 }
 
 </style>

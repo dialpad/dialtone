@@ -30,6 +30,7 @@ jobs:
     env:
       HUSKY: 0
       FILE_KEY: ${{ vars.FILE_KEY }}
+      UNRESTRICTED_FILE_KEY: ${{ vars.UNRESTRICTED_FILE_KEY }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup Environment
@@ -145,6 +146,7 @@ jobs:
     env:
       HUSKY: 0
       FILE_KEY: ${{ vars.FILE_KEY }}
+      UNRESTRICTED_FILE_KEY: ${{ vars.UNRESTRICTED_FILE_KEY }}
       COLLECTION_NAME: ${{ vars.COLLECTION_NAME }}
     steps:
       - uses: actions/checkout@v4

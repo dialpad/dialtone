@@ -7,6 +7,19 @@ import { readKeywords } from '@src/utils/keywords.mjs';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
 const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
+const docsRoot = resolve(__dirname, '../../../../apps/dialtone-documentation/docs');
+describe('authored usage guidance', () => {
+  test('Modal keeps recommendations distinct from discouraged uses', () => {
+    const record = buildRecords(resolve(docsRoot, 'components/modal.md'))
+      .find(record => record.id === 'components/modal#usage');
+    expect(record.content.match(/^(?:Do|Don't):$/gm)).toEqual(['Do:', 'Don\'t:']);
+    const [, doText, dontText] = record.content.split(/(?:^|\n)(?:Do|Don't):\n/);
+    expect(doText).toContain('Confirming a destructive action');
+    expect(doText).not.toContain('Form-related critical, positive, or warning messages');
+    expect(dontText).toContain('Form-related critical, positive, or warning messages');
+    expect(dontText).not.toContain('Confirming a destructive action');
+  });
+});
 
 describe('public directive MDX records', () => {
   test.each(['tooltip', 'scrollbar', 'mode', 'focusgroup', 'focustrap'])('%s retains its public contract and source reference', (name) => {

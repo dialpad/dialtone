@@ -1,3 +1,16 @@
+# [4.5.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.4.1...dialtone-vue/v4.5.0) (2026-10-27)
+
+
+### Bug Fixes
+
+* **Dialtone Vue:** DLT-3102 add data-qa hooks and migrate selectors ([#1475](https://github.com/dialpad/dialtone/issues/1475)) ([cc927a9](https://github.com/dialpad/dialtone/commit/cc927a94c879e9ba78e42def6ff94e01896d4d4f))
+
+
+### Features
+
+* **Motion Text, Dialtone Tokens:** DLT-3648 match figma motion spec and add slide-in-gradient mode ([#1457](https://github.com/dialpad/dialtone/issues/1457)) ([0a1371e](https://github.com/dialpad/dialtone/commit/0a1371e5c9b4de584ac046dd5548e9131baa81c4))
+* **Slider:** DLT-1974 add DtSlider component ([#1420](https://github.com/dialpad/dialtone/issues/1420)) ([6f0e7b5](https://github.com/dialpad/dialtone/commit/6f0e7b5bf2949c1bffdcc2cabffece8e51f03590))
+
 ## [4.4.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.4.0...dialtone-vue/v4.4.1) (2026-10-20)
 
 

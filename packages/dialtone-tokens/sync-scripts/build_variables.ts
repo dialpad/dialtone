@@ -14,6 +14,7 @@
  * Options:
  *   --dry-run                report what would change, post nothing
  *   --file-key KEY            override FILE_KEY from .env
+ *   --unrestricted-file-key KEY   override UNRESTRICTED_FILE_KEY from .env
  *   --out FILE                also write the payload to a file, for inspection
  *   --local-snapshot FILE     skip the REST read of existing variables and use
  *                             this file instead — a JSON dump shaped like
@@ -31,21 +32,17 @@ import { writeFileSync } from 'fs';
 
 import FigmaApi, { ApiGetLocalVariablesResponse, loadLocalSnapshot } from './figma_api.js';
 import { generatePostVariablesPayload, FlattenedTokensByFile } from './token_import.js';
-import { gamutMapped, resetGamutLog } from './color.js';
+import { gamutMapped, resetGamutLog, composedColorFor } from './color.js';
 import { resolveModes, compareTokenNames, ResolvedToken, ValueOf, TokenValue } from './resolve_tokens.js';
 import {
   classify, Classified, ScopeViolation, figmaFontFamily, LINE_HEIGHT_FAMILY,
   FigmaType, VariableScope,
 } from './variable_policy.js';
 import type { Token } from './token_types.js';
-import { toNumber as toNumberWithUnits } from './utils.js';
+import { toNumber as toNumberWithUnits, collectionTargets, CollectionTarget } from './utils.js';
 
 const toNumber = (value: unknown): number | null => toNumberWithUnits(value, 'px|rem|em|%');
 
-// The preview file holds a same-shaped collection under a different name, so
-// its own CI job doesn't collide with the main file's — see COLLECTION_NAME
-// in the preview job of sync-variables-to-figma.yml.
-const COLLECTION = process.env.COLLECTION_NAME ?? 'Dialtone 2026';
 const MODES = { light: 'Light', dark: 'Dark' } as const;
 
 /** The theme groups to compose. `base` holds the primitives, `dp` the semantics. */
@@ -174,7 +171,7 @@ export function codeSyntaxFor (cssName: string): { WEB: string; ANDROID: string;
   };
 }
 
-export function convert (classified: Classified[]): Conversion {
+export function convert (classified: Classified[], { name: collection, publishAll }: CollectionTarget): Conversion {
   const modesList = Object.keys(MODES) as (keyof typeof MODES)[];
   const flattened: Conversion['flattened'] = [];
   const unconvertible: Conversion['unconvertible'] = [];
@@ -260,10 +257,11 @@ export function convert (classified: Classified[]): Conversion {
 
   const usable = classified.filter(c => !dropped.has(c.token.name));
   const emitted = new Set(usable.map(c => c.token.name));
+  const emittedByName = new Map(usable.map(c => [c.token.name, c.token]));
   const files: FlattenedTokensByFile = {};
 
   for (const mode of modesList) {
-    const fileName = `${COLLECTION}.${MODES[mode]}.json`;
+    const fileName = `${collection}.${MODES[mode]}.json`;
     files[fileName] = {};
 
     for (const entry of usable) {
@@ -298,18 +296,12 @@ export function convert (classified: Classified[]): Conversion {
           // colour cannot express (it only decouples colour from opacity), so
           // those stay flattened literals; this checks specifically for
           // `alpha` and does nothing for the others.
-          if (
-            figmaType === 'COLOR' && modeValue.from?.modifier.type === 'alpha'
-            && emitted.has(modeValue.from.target)
-          ) {
-            // Rounded to 4 decimal places — ".07" * 100 is 7.000000000000001
-            // in floating point, which is real noise in the payload and in
-            // every log line, not a value anyone authored.
-            const opacity = Math.round(Number.parseFloat(modeValue.from.modifier.value) * 100 * 1e4) / 1e4;
-            if (Number.isFinite(opacity)) {
-              composedColor = { colorAlias: modeValue.from.target, opacity };
-              composed.push({ name: token.name, mode, target: modeValue.from.target });
-            }
+          //
+          // Only over an OPAQUE target; see `composedColorFor` for why.
+          if (figmaType === 'COLOR' && modeValue.from && emitted.has(modeValue.from.target)) {
+            const targetResolved = String(emittedByName.get(modeValue.from.target)!.modes[mode].resolved);
+            composedColor = composedColorFor(modeValue.from, targetResolved);
+            if (composedColor) composed.push({ name: token.name, mode, target: modeValue.from.target });
           }
         } else if (figmaType === 'BOOLEAN') {
           value = modeValue.resolved === true || modeValue.resolved === 'true';
@@ -338,7 +330,7 @@ export function convert (classified: Classified[]): Conversion {
             // Always sent, never omitted — same reasoning as $description
             // above. A token moving out of a hidden group later needs this
             // to actually flip back, not just stay silently true forever.
-            hiddenFromPublishing: hidden,
+            hiddenFromPublishing: hidden && !publishAll,
           },
         },
       };
@@ -355,7 +347,8 @@ function countPayload (payload: Record<string, unknown[]>): string {
     .join(', ') || 'nothing';
 }
 
-async function main (): Promise<void> {
+async function main (target: CollectionTarget): Promise<void> {
+  const COLLECTION = target.name;
   const args = process.argv.slice(2);
   const flag = (name: string): string | undefined => {
     const i = args.indexOf(`--${name}`);
@@ -363,7 +356,7 @@ async function main (): Promise<void> {
   };
   const dryRun = args.includes('--dry-run');
   const localSnapshot = flag('local-snapshot');
-  const fileKey = flag('file-key') ?? process.env.FILE_KEY;
+  const fileKey = target.fileKey;
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
 
   if (!pat || !fileKey) {
@@ -405,12 +398,12 @@ async function main (): Promise<void> {
     process.exit(1);
   }
 
-  const { files, flattened, unconvertible, unresolvedFonts, composed } = convert(emit);
+  const { files, flattened, unconvertible, unresolvedFonts, composed } = convert(emit, target);
 
   console.log(`resolved        : ${all.length}`);
   console.log(`excluded        : ${excluded.length}`);
   console.log(`variables       : ${emit.length}`);
-  console.log(`hidden          : ${emit.filter(e => e.hidden).length} (hiddenFromPublishing — theme, inverted, raw colour/material ramps, line-height)`);
+  console.log(`hidden          : ${target.publishAll ? 0 : emit.filter(e => e.hidden).length} (hiddenFromPublishing — theme, inverted, raw colour/material ramps, line-height)`);
   console.log(`unscoped        : ${unscoped.length}`);
   console.log(`flattened alias : ${flattened.length / Object.keys(MODES).length} (target is resolution-only)`);
   console.log(`composed colour : ${composed.length} (alpha-modified, now a real alias + opacity)`);
@@ -468,7 +461,9 @@ async function main (): Promise<void> {
 
   console.log(`\npayload         : ${countPayload(payload as never)}`);
 
-  const out = flag('out');
+  // One file per target, so the unrestricted pass doesn't overwrite the restricted payload.
+  const outFlag = flag('out');
+  const out = outFlag && target.publishAll ? outFlag.replace(/(\.[^./\\]+)?$/, '.unrestricted$1') : outFlag;
   if (out) {
     writeFileSync(out, JSON.stringify(payload, null, 2));
     console.log(`written         : ${out}`);
@@ -502,7 +497,9 @@ async function main (): Promise<void> {
   }
 }
 
-main().catch(error => {
+(async () => {
+  for (const target of collectionTargets()) await main(target);
+})().catch(error => {
   const e = error as { response?: { status?: number; data?: unknown }; message?: string };
   console.error(`failed: ${e.response?.status ?? ''} ${JSON.stringify(e.response?.data ?? e.message ?? error)}`.slice(0, 2000));
   process.exit(1);

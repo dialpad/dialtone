@@ -10,11 +10,20 @@ const PATTERNS = {
   emphasis: /[*_]{1,2}([^*_]+)[*_]{1,2}/g,
 };
 
-function extractProse (markdown, inlineCode, preserveFencedCode) {
+function extractProse (markdown, inlineCode, preserveFencedCode, usageLabels) {
   const output = [];
   // Consume blocks before scanning their contents, so apparent fences in a
   // comment/script and apparent HTML inside inline code have no special meaning.
-  const tokens = /^ {0,3}(`{3,})[^`\n]*$|^ {0,3}(~{3,})[^\n]*$|<!--|<(script|style)(?![\w-])[^>]*>|(?<!`)(`+)(?!`)/gmi;
+  const tokens = new RegExp([
+    /^ {0,3}(`{3,})[^`\n]*$|^ {0,3}(~{3,})[^\n]*$/,
+    /<!--|<(script|style)(?![\w-])[^>]*>|(?<!`)(`+)(?!`)/,
+    /(<\/?dialtone-usage(?![\w-])[^>]*>)/,
+    /(<\/?template(?![\w-])[^>]*>)/,
+  ].map(pattern => pattern.source).join('|'), 'gmi');
+  let usageDepth = 0;
+  let wrapperStart = 0;
+  let nestedUsage = false;
+  const templates = [];
   let cursor = 0;
   let match;
   // Unclosed blocks run to the end of the input.
@@ -36,6 +45,40 @@ function extractProse (markdown, inlineCode, preserveFencedCode) {
       cursor = skipPast(/-->/g);
     } else if (match[3]) {
       cursor = skipPast(new RegExp(`</${match[3]}\\s*>`, 'gi'));
+    } else if (match[5]) {
+      if (/^<\//.test(match[0])) {
+        usageDepth = Math.max(0, usageDepth - 1);
+        if (!usageDepth) {
+          templates.length = 0;
+          for (let index = wrapperStart; index < usageLabels.length; index++) {
+            usageLabels[index].valid = !nestedUsage;
+          }
+        }
+      } else {
+        if (!usageDepth) {
+          wrapperStart = usageLabels.length;
+          nestedUsage = false;
+        } else {
+          nestedUsage = true;
+        }
+        usageDepth++;
+      }
+      output.push(match[0]);
+    } else if (match[6]) {
+      if (usageDepth) {
+        if (/^<\//.test(match[0])) {
+          const slot = templates.pop();
+          if (slot != null) output.push(`\uE000usage-end-${slot}\uE001`);
+        } else {
+          const namedSlot = match[0].match(/^<template\s+#(do|dont)\s*>$/i);
+          const slot = usageDepth === 1 && templates.length === 0 && namedSlot
+            ? usageLabels.push({ label: namedSlot[1].toLowerCase() === 'do' ? 'Do' : 'Don\'t', valid: false }) - 1
+            : null;
+          templates.push(slot);
+          if (slot != null) output.push(`\uE000usage-start-${slot}\uE001`);
+        }
+      }
+      output.push(match[0]);
     } else {
       const closing = new RegExp('(?<!`)' + match[4] + '(?!`)', 'g');
       closing.lastIndex = cursor;
@@ -75,7 +118,8 @@ export function stripFrontmatter(markdown) {
 /**
  * Strip markdown syntax, returning searchable plain text.
  * Removes frontmatter, fenced code blocks, layout HTML, link syntax, heading markers,
- * emphasis markers, and excess whitespace.
+ * emphasis markers, and excess whitespace. Usage slots retain Do/Don't labels
+ * only when their stripped content is nonempty.
  *
  * This is the canonical text used in ai-docs.json `content` fields — keeping
  * the generator output and test assertions in sync by design.
@@ -89,7 +133,9 @@ export function stripFrontmatter(markdown) {
 export function stripMarkdown(markdown, options = {}) {
   const { stripFrontmatter: strip = true, preserveFencedCode = false } = options;
   const inlineCode = [];
-  let text = extractProse(strip ? stripFrontmatter(markdown) : markdown, inlineCode, preserveFencedCode);
+  const usageLabels = [];
+  const restoreCode = (text) => text.replace(/\uE000inline-code-(\d+)\uE001/g, (_match, index) => inlineCode[index]);
+  let text = extractProse(strip ? stripFrontmatter(markdown) : markdown, inlineCode, preserveFencedCode, usageLabels);
 
   text = text
     .replace(PATTERNS.image, '$1')
@@ -103,5 +149,13 @@ export function stripMarkdown(markdown, options = {}) {
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  return text.replace(/\uE000inline-code-(\d+)\uE001/g, (_match, index) => inlineCode[index]);
+  // Decide emptiness after stripping layout, but keep code protected through
+  // final whitespace cleanup so retained examples remain verbatim.
+  text = text.replace(/\uE000usage-start-(\d+)\uE001([\s\S]*?)\uE000usage-end-\1\uE001/g,
+    (_match, index, content) => {
+      if (!usageLabels[index].valid) return content;
+      return restoreCode(content).trim() ? `\n\n${usageLabels[index].label}:\n\n${content.trim()}\n\n` : '';
+    });
+  text = text.replace(/\uE000usage-(?:start|end)-\d+\uE001/g, '').replace(/\n{3,}/g, '\n\n').trim();
+  return restoreCode(text);
 }

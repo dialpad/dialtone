@@ -1,3 +1,11 @@
+# [9.2.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.1.1...dialtone-css/v9.2.0) (2026-10-27)
+
+
+### Features
+
+* **Motion Text, Dialtone Tokens:** DLT-3648 match figma motion spec and add slide-in-gradient mode ([#1457](https://github.com/dialpad/dialtone/issues/1457)) ([0a1371e](https://github.com/dialpad/dialtone/commit/0a1371e5c9b4de584ac046dd5548e9131baa81c4))
+* **Slider:** DLT-1974 add DtSlider component ([#1420](https://github.com/dialpad/dialtone/issues/1420)) ([6f0e7b5](https://github.com/dialpad/dialtone/commit/6f0e7b5bf2949c1bffdcc2cabffece8e51f03590))
+
 ## [9.1.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.1.0...dialtone-css/v9.1.1) (2026-10-15)
 
 

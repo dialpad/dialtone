@@ -1,3 +1,28 @@
+# [10.9.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.8.0...dialtone/v10.9.0) (2026-10-27)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core:** DLT-3672 find components in contextual keyword searches ([#1476](https://github.com/dialpad/dialtone/issues/1476)) ([81bb86d](https://github.com/dialpad/dialtone/commit/81bb86d55312cc5675cd5e9ef95f14cfdb554c7e))
+* **Dialtone Vue:** DLT-3102 add data-qa hooks and migrate selectors ([#1475](https://github.com/dialpad/dialtone/issues/1475)) ([cc927a9](https://github.com/dialpad/dialtone/commit/cc927a94c879e9ba78e42def6ff94e01896d4d4f))
+
+
+### Documentation
+
+* **Dialtone Docs:** DLT-3447 repair contributor references and routing ([#1487](https://github.com/dialpad/dialtone/issues/1487)) ([a9887c1](https://github.com/dialpad/dialtone/commit/a9887c14d7067d84b410f58c44d9dc16716e6a9e))
+
+
+### Features
+
+* **Combinator:** DLT-3679 add opt-in slider property controls ([#1485](https://github.com/dialpad/dialtone/issues/1485)) ([f853c79](https://github.com/dialpad/dialtone/commit/f853c79adb8f3e9f062fe5ce0c29a03f879d5af9))
+* **Dialtone Cli, Dialtone Mcp Server:** DLT-2711 retrieve documentation examples with complete setup ([#1473](https://github.com/dialpad/dialtone/issues/1473)) ([f4d6b67](https://github.com/dialpad/dialtone/commit/f4d6b67967ddbe0c811943a9f543fdcc602a35bb))
+* **Dialtone Icons:** DP-211072 add globe icon ([#1484](https://github.com/dialpad/dialtone/issues/1484)) ([04e1640](https://github.com/dialpad/dialtone/commit/04e1640d608fdcdabc9208603cef04b7ed52ae65))
+* **Dialtone Mcp Server:** DLT-3654 resolve installed project data ([#1471](https://github.com/dialpad/dialtone/issues/1471)) ([d098c6b](https://github.com/dialpad/dialtone/commit/d098c6bd2636cf9efaa12cee1a6c51177fc2b2f4))
+* **Dialtone Tokens:** DLT-3577 sync tokens to figma variables ([#1411](https://github.com/dialpad/dialtone/issues/1411)) ([f4d93c0](https://github.com/dialpad/dialtone/commit/f4d93c05aedfbbbcb5cf287552a2923f892a9d91))
+* **Dialtone Tokens:** DLT-3681 sync an unrestricted variable collection to its own file ([#1488](https://github.com/dialpad/dialtone/issues/1488)) ([7141053](https://github.com/dialpad/dialtone/commit/7141053ad3d9a775f2649b607d3684ef7afac98d))
+* **Motion Text, Dialtone Tokens:** DLT-3648 match figma motion spec and add slide-in-gradient mode ([#1457](https://github.com/dialpad/dialtone/issues/1457)) ([0a1371e](https://github.com/dialpad/dialtone/commit/0a1371e5c9b4de584ac046dd5548e9131baa81c4))
+* **Slider:** DLT-1974 add DtSlider component ([#1420](https://github.com/dialpad/dialtone/issues/1420)) ([6f0e7b5](https://github.com/dialpad/dialtone/commit/6f0e7b5bf2949c1bffdcc2cabffece8e51f03590))
+
 # [10.8.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.7.0...dialtone/v10.8.0) (2026-10-20)
 
 

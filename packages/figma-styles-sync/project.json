@@ -1,0 +1,29 @@
+{
+  "name": "figma-styles-sync",
+  "targets": {
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm lint"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm typecheck"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-tokens:build"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm test"
+      }
+    }
+  }
+}

@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.3...dialtone-tokens/v2.1.0) (2026-10-27)
+
+
+### Features
+
+* **Dialtone Tokens:** DLT-3577 sync tokens to figma variables ([#1411](https://github.com/dialpad/dialtone/issues/1411)) ([f4d93c0](https://github.com/dialpad/dialtone/commit/f4d93c05aedfbbbcb5cf287552a2923f892a9d91))
+* **Dialtone Tokens:** DLT-3681 sync an unrestricted variable collection to its own file ([#1488](https://github.com/dialpad/dialtone/issues/1488)) ([7141053](https://github.com/dialpad/dialtone/commit/7141053ad3d9a775f2649b607d3684ef7afac98d))
+* **Motion Text, Dialtone Tokens:** DLT-3648 match figma motion spec and add slide-in-gradient mode ([#1457](https://github.com/dialpad/dialtone/issues/1457)) ([0a1371e](https://github.com/dialpad/dialtone/commit/0a1371e5c9b4de584ac046dd5548e9131baa81c4))
+
 ## [2.0.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.2...dialtone-tokens/v2.0.3) (2026-10-15)
 
 

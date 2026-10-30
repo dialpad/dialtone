@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.3.0...dialtone-icons/v5.4.0) (2026-10-27)
+
+
+### Features
+
+* **Dialtone Icons:** DP-211072 add globe icon ([#1484](https://github.com/dialpad/dialtone/issues/1484)) ([04e1640](https://github.com/dialpad/dialtone/commit/04e1640d608fdcdabc9208603cef04b7ed52ae65))
+
 # [5.3.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.2.1...dialtone-icons/v5.3.0) (2026-10-15)
 
 
