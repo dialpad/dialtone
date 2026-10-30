@@ -54,7 +54,7 @@ const deepest = (n, d = 0) => (n.children || []).reduce((m, c) => Math.max(m, de
  *                  passing it in keeps this module free of credentials.
  * @returns Map<variantName, node> with every descendant present.
  */
-export async function fetchVariantsByName (figmaGet, fileKey, setId, { batch = 40 } = {}) {
+export async function fetchVariantsByName (figmaGet, fileKey, setId, { batch = 40, transform = null } = {}) {
   /**
    * A SET THE PLUGIN JUST CREATED MAY NOT BE VISIBLE TO REST YET.
    *
@@ -83,6 +83,9 @@ export async function fetchVariantsByName (figmaGet, fileKey, setId, { batch = 4
   if (!ids.length) throw new Error(`set ${setId} returned no variants`);
 
   const byName = new Map();
+  // The variants exactly as Figma returned them, for a caller that passed a `transform` (the
+  // edge-slot flattening) and still needs the original shape to check the structure itself.
+  byName.raw = new Map();
   let maxDepth = 0;
   for (let i = 0; i < ids.length; i += batch) {
     const chunk = ids.slice(i, i + batch);
@@ -95,7 +98,8 @@ export async function fetchVariantsByName (figmaGet, fileKey, setId, { batch = 4
       // unexplained gap, and every check downstream would report all of its nodes
       // as MISSING. Fail here, where the cause is still visible.
       if (!doc) throw new Error(`variant ${id} of set ${setId} missing from batch response`);
-      byName.set(doc.name, doc);
+      byName.raw.set(doc.name, doc);
+      byName.set(doc.name, transform ? transform(doc) : doc);
       maxDepth = Math.max(maxDepth, deepest(doc));
     }
   }

@@ -574,7 +574,9 @@ const tokKeys = Object.fromEntries(toks
 const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn, cols, svgs, imgs, nodes, rows, rowNames, dvars };
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn,
+  // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.
+  edgeSlots: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).edgeSlots || null, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';
 const outPath = `sync-scripts/build-data/${which}${shardSuffix}-build.json`;
 writeFileSync(outPath, JSON.stringify(payload));

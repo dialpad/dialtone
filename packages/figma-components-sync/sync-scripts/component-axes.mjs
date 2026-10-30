@@ -6,7 +6,7 @@
  */
 const BUILT_IN = {
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '589:35574',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2025:91781',
     /**
      * ICONS ARE BOOLEAN PROPERTIES; THE CIRCULAR BUTTON IS ITS OWN SET (`button_icon`).
      *
@@ -24,6 +24,14 @@ const BUILT_IN = {
      */
     merged: true,
     slotPass: ['startIcon', 'endIcon'],
+    /**
+     * LEADING AND TRAILING: native slots flush with the border, built as a wrapper plus two slots
+     * whose default content is a padding spacer (see `edgeSlots` in generic-builder.js). `gap` is
+     * the slot's own inline margin on the content side: `margin-inline: … var(--dt-spacing-25)` in
+     * button.less, 2px, added to the flex gap. The rendered default state has neither slot, so
+     * nothing here changes what is measured.
+     */
+    edgeSlots: { gap: 2 },
     // Property -> the largest difference (px) between the empty and the icon-filled render that is
     // accepted. Measured: see the `drift` lines build-spec prints. Anything larger is still refused.
     slotSpacingDrift: { paddingLeft: 2, paddingRight: 2, itemSpacing: 2 },

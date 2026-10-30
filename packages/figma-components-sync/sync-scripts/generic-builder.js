@@ -1311,6 +1311,96 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       L.swapDefaultId = null;
     }
 
+    /**
+     * EDGE SLOTS (`edgeSlots`): LEADING AND TRAILING BLOCKS THAT SIT FLUSH WITH THE BORDER.
+     *
+     * The CSS pulls them over the button's padding with negative margins, which Figma cannot
+     * hold, and a boolean cannot change padding. So the padding moves off the root:
+     *
+     *   root (no padding, clips to its corners)
+     *     Leading (Slot)   empty, but as wide as the padding minus the gap (its minimum width)
+     *     content          the vertical padding, the gap and every existing child
+     *     Trailing (Slot)  mirror
+     *
+     * `content` carries the gap the code puts next to a slot (flex gap + the slot's own margin)
+     * as inline padding, so the slot's minimum width is the REST of the normal padding: empty,
+     * the button is exactly the size it always was, and a designer who drops content in gets it
+     * flush at the edge, centred on the height, with the code's gap after it. Measured against
+     * the real component in all 16 icon x slot combinations: the slots add no error.
+     */
+    if (D.edgeSlots) {
+      const padL = comp.paddingLeft, padR = comp.paddingRight;
+      const gapAfter = comp.itemSpacing + D.edgeSlots.gap;
+      // A plain frame: `figma.createAutoLayout` exists only in the MCP runtime, not in the plugin.
+      const wrapper = figma.createFrame();
+      wrapper.name = 'content';
+      wrapper.layoutMode = 'HORIZONTAL';
+      wrapper.primaryAxisSizingMode = 'AUTO';
+      wrapper.counterAxisSizingMode = 'AUTO';
+      wrapper.fills = [];
+      wrapper.counterAxisAlignItems = comp.counterAxisAlignItems;
+      wrapper.itemSpacing = comp.itemSpacing;
+      wrapper.paddingTop = comp.paddingTop; wrapper.paddingBottom = comp.paddingBottom;
+      wrapper.paddingLeft = Math.min(gapAfter, padL); wrapper.paddingRight = Math.min(gapAfter, padR);
+      // The bindings travel with the numbers: the vertical padding and the gap keep their tokens.
+      const bound = comp.boundVariables || {};
+      for (const field of ['paddingTop', 'paddingBottom', 'itemSpacing']) {
+        const alias = bound[field];
+        if (!alias) continue;
+        const v = await figma.variables.getVariableByIdAsync(alias.id);
+        if (v) wrapper.setBoundVariable(field, v);
+      }
+      // Absolutely-positioned children (the loading spinner, centred on the button) are placed
+      // against the ROOT, not against the content: they stay where they were, and the wrapper
+      // takes the slot of the first child it adopted so the child order is unchanged.
+      const flowing = [...comp.children].filter(k => k.layoutPositioning !== 'ABSOLUTE');
+      const wrapperAt = comp.children.filter(k => k.layoutPositioning === 'ABSOLUTE'
+        && comp.children.indexOf(k) < comp.children.indexOf(flowing[0])).length;
+      for (const k of flowing) wrapper.appendChild(k);
+      comp.insertChild(wrapperAt, wrapper);
+      for (const field of ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight', 'itemSpacing']) {
+        if (bound[field]) comp.setBoundVariable(field, null);
+        comp[field] = 0;
+      }
+      comp.clipsContent = true;
+      const mkSlot = (name, padW) => {
+        const slot = comp.createSlot();
+        slot.name = name;
+        slot.layoutMode = 'HORIZONTAL';
+        slot.primaryAxisSizingMode = 'AUTO';
+        slot.counterAxisSizingMode = 'AUTO';
+        // `align-items: center` on `.d-btn__leading` / `.d-btn__trailing`: what a designer drops in
+        // is centred on the button's height.
+        slot.counterAxisAlignItems = 'CENTER';
+        slot.fills = [];
+        /**
+         * THE PADDING IS THE SLOT'S MINIMUM WIDTH, NOT A SPACER A DESIGNER HAS TO DELETE.
+         *
+         * A spacer child stayed beside whatever was dropped in (measured: a 16px dot sat 3.5px in
+         * from the border). With `minWidth` the empty slot is exactly the padding, and a slot with
+         * content is as wide as the content — the minimum is not added to it.
+         *
+         * An EMPTY auto-layout frame snaps to Figma's 100px, so the slot keeps a 0.01px
+         * placeholder: invisible, harmless beside real content, and it stops the slot being empty.
+         */
+        slot.minWidth = Math.max(0, padW - gapAfter);
+        const spacer = figma.createFrame();
+        spacer.name = 'padding';
+        spacer.fills = [];
+        spacer.resize(0.01, 1);
+        slot.appendChild(spacer);
+        return { slot, spacer };
+      };
+      const lead = mkSlot('Leading (Slot)', padL);
+      const trail = mkSlot('Trailing (Slot)', padR);
+      comp.insertChild(0, lead.slot);
+      comp.appendChild(trail.slot);
+      for (const s of [lead, trail]) s.slot.layoutSizingVertical = 'FILL';
+      if (padL < gapAfter || padR < gapAfter) {
+        skippedBindings.push(`${comp.name} · edge slots: padding ${padL}/${padR} is below the slot gap ${gapAfter}; the gap was clamped to the padding`);
+      }
+    }
+
     made.push(comp);
   }
 

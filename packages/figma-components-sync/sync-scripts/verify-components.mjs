@@ -22,6 +22,7 @@ import { createServer } from 'vite';
 import { converter, parse as parseColor, clampChroma, displayable, differenceCiede2000 } from 'culori';
 import { loadLibrary } from './remote-variables.mjs';
 import { exemplarSlots } from './exemplar-slots.mjs';
+import { flattenEdgeSlots, edgeSlotFindings } from './edge-slots.mjs';
 
 const API = 'https://api.figma.com';
 const EPS = 0.6;              // px — Figma stores floats, CSS rounds
@@ -1369,7 +1370,10 @@ if (IS_CLI) {
 // Variants are fetched RE-ROOTED, in batches — see figma-variants.mjs. Fetching
   // the set itself caps the depth five levels below each variant and truncates
   // silently, which reads downstream as a defect in the work (B-101).
-  const figByName = await fetchVariantsByName(figmaGet, FILE_KEY, setId);
+  // An edge-slot config is compared in its FLAT shape (see edge-slots.mjs); the raw shape is kept
+  // for the structure check below.
+  const figByName = await fetchVariantsByName(figmaGet, FILE_KEY, setId,
+    { transform: cfg.edgeSlots ? flattenEdgeSlots : null });
 
   const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js', server: { port: 0 }, logLevel: 'error' });
   await server.listen();
@@ -1517,6 +1521,11 @@ if (IS_CLI) {
       await annotateAnchors(dom);
       seen++;
       compareNode(name, dom, fig, 'root', MODE);
+      // The flat shape the comparison just used hides the wrapper and the slots, so their
+      // structure is checked on the variant as Figma returned it.
+      if (cfg.edgeSlots && !SLOT_PASS) {
+        for (const f of edgeSlotFindings(figByName.raw.get(name), cfg.edgeSlots)) rec(name, f.path, f.field, f.want, f.got);
+      }
     }
     for (let i = before; i < findings.length; i++) findings[i].mode = stateLabel + MODE;
     perMode[stateLabel + MODE] = { variants: seen, findings: findings.length - before };
