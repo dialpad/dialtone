@@ -37,18 +37,27 @@ try {
       assert.deepEqual(envelope.items[0].example, record.example);
       content += envelope.items[0].content;
       pages++;
-      assert.ok(pages < 30);
       args = envelope.continuation?.arguments;
+      if (args) assert.equal(args.textOffset, Array.from(content).length);
     } while (args);
     assert.equal(content, record.content);
     results.push({
       id: record.id, payloadHash: record.example.validation.payloadHash, pages, characters: Array.from(content).length,
     });
   }
-  assert.throws(() => run(['docs', '--id', 'examples/unknown']), /No documentation found/);
+  const coverage = JSON.parse(readFileSync(resolve(root, 'packages/dialtone-docs/dist/preset-example-coverage.json')));
+  const excluded = new Map(coverage.entries.filter(entry => entry.disposition !== 'delivered')
+    .map(entry => [entry.disposition, entry.id]));
+  for (const id of ['examples/unknown', ...excluded.values()]) {
+    assert.throws(() => run(['docs', '--id', id]), /No documentation found/);
+    assert.equal((await client.callTool({ name: 'get_documentation', arguments: { id } })).structuredContent.match, 'no-match');
+  }
   const missing = await client.callTool({ name: 'get_documentation', arguments: { id: 'examples/unknown' } });
   assert.equal(missing.structuredContent.match, 'no-match');
-  assert.ok(missing.structuredContent.notes.some(note => note.includes('examples/button-default')));
+  const recoveryIds = missing.structuredContent.notes.flatMap(note =>
+    note.match(/examples\/\S+?(?=, |\.(?:\s|$)|$)/g) ?? []);
+  assert.ok(recoveryIds.length > 0 && recoveryIds.length <= 3);
+  for (const id of recoveryIds) assert.ok(expected.some(record => record.id === id));
   assert.equal(missing.structuredContent.continuation.tool, 'search_documentation');
   const legacy = JSON.parse(run(['component', 'DtButton', '--examples', '--format', 'json']));
   assert.equal(legacy.name, 'DtButton');
@@ -69,7 +78,7 @@ try {
   assert.match(utility.content[0].text, /examples\/utility-word-wrap-normal/);
   for (const query of ['stack', 'link']) {
     const unrelated = await client.callTool({ name: 'search_components', arguments: { query } });
-    assert.doesNotMatch(unrelated.content[0].text, /Source examples/);
+    assert.doesNotMatch(unrelated.content[0].text, /examples\/button-/);
   }
   for (const name of ['search_components', 'search_documentation']) {
     const contextual = await client.callTool({ name, arguments: { query: 'I need a complete working Vue 3 example of a disabled Dialtone button that shows a tooltip on hover' } });

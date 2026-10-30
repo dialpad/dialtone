@@ -112,6 +112,7 @@ jobs:
               - 'packages/combinator/**'
             # Lookup adapters, their source datasets/generators, and the shared retrieval fixtures.
             cli:
+              - 'packages/combinator/**'
               - 'nx.json'
               - 'package.json'
               - 'pnpm-lock.yaml'

@@ -63,3 +63,5 @@ Create or update the Combinator variant file that represents a Dialtone Vue comp
 - `.claude/rules/combinator-variants.md`
 - `packages/combinator/.github/documentation/internal/EXCLUSIONS.md`
 - `apps/dialtone-documentation/thumbs/README.md`
+
+For lookup-preset effects, read the [shared source lifecycle](../../.agents/resources/documentation-examples.md#combinator-presets) and regenerate the owning producer/accounting. Keep setup, support/deprecation and remaining coverage explicit.
