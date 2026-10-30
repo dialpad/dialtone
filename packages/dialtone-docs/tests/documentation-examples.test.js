@@ -15,6 +15,14 @@ function assemble(raw, build = buildExampleRecords) {
 const live = '### Renamed\n<!-- example-id: examples/button-default -->\n\n```vue demo\n<!-- @wrapper -->\n<dt-button>Live</dt-button>\n<!-- @code -->\n<dt-button {props}>Shortened</dt-button>\n```';
 
 describe('selected documentation examples', () => {
+  it('retains matching validation when only unrelated page prose changes', () => {
+    const [before] = examples();
+    const [after] = assemble(readFileSync(source, 'utf8') + '\nUnrelated editorial note.\n');
+    expect(after.example.source.hash).not.toBe(before.example.source.hash);
+    expect(after.example.validation.payloadHash).toBe(before.example.validation.payloadHash);
+    expect(after.example.manualReview).toBe('passed');
+  });
+
   it('assembles both authored IDs, literal live markup, identities and setup', () => {
     const records = examples();
     expect(records.map(record => record.id)).toEqual(['examples/button-default', 'examples/button-disabled-tooltip']);
@@ -52,7 +60,7 @@ describe('selected documentation examples', () => {
     try {
       for (const field of ['date', 'reviewer', 'browser', 'os', 'assistiveTechnology']) {
         evidence = structuredClone(saved);
-        delete evidence['examples/button-default'].manualReview[field];
+        delete evidence.examples['examples/button-default'].manualReview[field];
         vi.resetModules();
         const { buildExampleRecords: build } = await import('../src/generators/documentation-examples.mjs');
         const [record] = assemble(readFileSync(source, 'utf8'), build);
@@ -99,6 +107,7 @@ describe('selected documentation examples', () => {
     ['a code-only fence', live.replace('vue demo', 'vue code-only'), 'live Vue demo'],
     ['an undeclared component', live.replace('<dt-button>Live</dt-button>', '<dt-input />'), 'unconfigured dt-input'],
     ['an undeclared directive', live.replace('<dt-button>Live</dt-button>', '<dt-button v-dt-mode:dark>Live</dt-button>'), 'unconfigured v-dt-mode'],
+    ['an unknown custom component', live.replace('<dt-button>Live</dt-button>', '<app-widget />'), 'unconfigured app-widget'],
   ])('rejects %s', (_, raw, message) => {
     expect(() => assemble(raw)).toThrow(message);
   });

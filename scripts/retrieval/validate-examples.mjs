@@ -7,8 +7,9 @@ import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
 import { createConsumerFixture, fingerprintArtifact, sha256 } from './fixtures.mjs';
 import { getProfile } from './profiles.mjs';
-import { normalizeComponentName } from '../lib/component-name.mjs';
 import { payloadHash } from '../../packages/dialtone-docs/src/generators/documentation-examples.mjs';
+import { assertTemplateBindings, assertStaticHtml } from '../../packages/dialtone-docs/src/generators/example-template.mjs';
+import { checkTemplateApi, consumerTuple } from './example-consumer.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const run = (file, args, cwd) => execFileSync(file, args, { cwd, stdio: 'pipe', encoding: 'utf8', timeout: 240000 });
@@ -27,12 +28,12 @@ function extractFiles(record) {
   for (let index = 0; index < tokens.length; index++) {
     if (tokens[index].type !== 'fence') continue;
     const name = tokens[index - 2]?.content;
-    assert.ok(filenames.includes(name), `Unexpected file ${name}`);
+    assert.ok((record.example.representation === 'static-html' ? ['example.html'] : filenames).includes(name), `Unexpected file ${name}`);
     files[name] = tokens[index].content;
   }
-  assert.deepEqual(Object.keys(files).sort(), filenames);
+  assert.deepEqual(Object.keys(files).sort(), record.example.representation === 'static-html' ? ['example.html'] : filenames);
   const deliveredHash = payloadHash({
-    files, dependencies: record.example.profile.dependencies, sourceHash: record.example.source.hash,
+    files, dependencies: record.example.profile.dependencies,
   });
   assert.equal(deliveredHash, record.example.validation.payloadHash);
   return files;
@@ -40,12 +41,12 @@ function extractFiles(record) {
 const fixture = await createConsumerFixture(destination, PROFILE_ID);
 const consumer = fixture.dependencyRoot;
 const deliveredFiles = new Map(selected.map(record => [record.id, extractFiles(record)]));
-const pkg = JSON.parse(deliveredFiles.get(selected[0].id)['package.json']);
+const pkg = JSON.parse(deliveredFiles.get(selected.find(record => record.example.representation !== 'static-html').id)['package.json']);
 writeFileSync(resolve(consumer, 'package.json'), JSON.stringify(pkg, null, 2));
 run('npm', ['install', '--ignore-scripts', '--registry=https://registry.npmjs.org', '--@dialpad:registry=https://registry.npmjs.org', '--no-audit', '--no-fund', '--cache', resolve(destination, 'npm-cache')], consumer);
 const consumerRequire = createRequire(resolve(consumer, 'package.json'));
 const { parse } = consumerRequire('@vue/compiler-sfc');
-const { baseParse, NodeTypes } = consumerRequire('@vue/compiler-dom');
+const { baseParse } = consumerRequire('@vue/compiler-dom');
 const metadata = JSON.parse(readFileSync(consumerRequire.resolve('@dialpad/dialtone/vue3/component-documentation.json')));
 const lintRequire = createRequire(resolve(root, 'package.json'));
 const { ESLint } = lintRequire('eslint');
@@ -53,52 +54,44 @@ const vueParser = createRequire(lintRequire.resolve('eslint-plugin-vue'))('vue-e
 const plugin = lintRequire('./packages/eslint-plugin-dialtone');
 const eslint = new ESLint({ overrideConfigFile: true, ignore: false, overrideConfig: [{ files: ['**/*.vue'], languageOptions: { parser: vueParser }, plugins: { dialtone: plugin }, rules: Object.fromEntries(Object.keys(plugin.rules).filter(name => name.startsWith('deprecated-')).map(name => [`dialtone/${name}`, 'error'])) }] });
 
-/** Check delivered tags, props, values and default slots against installed metadata. */
-function checkTemplateApi(ast, directives) {
-  // Registered directive plugins (DtTooltipDirective) appear in templates as v-dt-tooltip.
-  const allowedDirectives = new Set(['bind', ...directives.map(name => name.replace(/Directive$/, '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase())]);
-  const checked = [];
-  function visit(node) {
-    if (node.type === NodeTypes.ELEMENT && node.tag.startsWith('dt-')) {
-      const tag = normalizeComponentName(node.tag);
-      const component = metadata.find(component => normalizeComponentName(component.displayName) === tag);
-      assert.ok(component, node.tag);
-      const name = component.displayName;
-      assert.ok(!component.tags?.deprecated && !component.metadata?.deprecated, `${name} deprecated`);
-      for (const attribute of node.props) {
-        const propName = attribute.type === NodeTypes.ATTRIBUTE ? attribute.name : attribute.name === 'bind' ? attribute.arg?.content : null;
-        if (attribute.type === NodeTypes.DIRECTIVE && !allowedDirectives.has(attribute.name)) throw new Error(`Unhandled directive/event ${attribute.name}`);
-        if (!propName || ['class', 'tabindex'].includes(propName) || propName.startsWith('aria-')) continue;
-        const prop = component.props?.find(prop => prop.name === propName);
-        assert.ok(prop, `${name}.${propName}`);
-        assert.ok(!prop.tags?.deprecated, `${name}.${propName} deprecated`);
-        if (attribute.type === NodeTypes.ATTRIBUTE && attribute.value && prop.values?.length) assert.ok(prop.values.includes(attribute.value.content), `${name}.${propName}=${attribute.value.content}`);
-        if (propName === 'direction' && attribute.type === NodeTypes.DIRECTIVE) {
-          assert.equal(attribute.exp.content, '{ \'default\': \'column\', \'md\': \'row\' }');
-          for (const value of ['column', 'row']) assert.ok(prop.values.includes(value));
-        }
-        checked.push(`${name}.${propName}`);
-      }
-      if (node.children.some(child => child.type === NodeTypes.ELEMENT || (child.type === NodeTypes.TEXT && child.content.trim()))) assert.ok(component.slots?.some(slot => slot.name === 'default'), `${name} default slot`);
-    }
-    for (const child of node.children ?? []) visit(child);
-  }
-  visit(ast);
-  return checked;
-}
-
 const reports = [];
 for (const record of selected) {
   const { id } = record;
   const files = deliveredFiles.get(id);
-  assert.deepEqual(JSON.parse(files['package.json']), pkg, `${id} package.json differs from installed consumer manifest`);
-  const exampleDir = resolve(consumer, id.split('/')[1]);
-  mkdirSync(exampleDir);
+  assert.match(id, /^examples\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/);
+  if (record.example.representation === 'static-html') {
+    const classes = assertStaticHtml(files['example.html']);
+    assert.equal(record.example.profile.dependencies['@dialpad/dialtone'], pkg.dependencies['@dialpad/dialtone']);
+    const cssPath = consumerRequire.resolve('@dialpad/dialtone/css');
+    const css = readFileSync(cssPath, 'utf8');
+    const postcss = createRequire(consumerRequire.resolve('vite'))('postcss');
+    const selectors = [];
+    const subjectRules = [];
+    postcss.parse(css).walkRules(rule => {
+      selectors.push(...rule.selectors);
+      if (record.example.utilities.some(name => rule.selectors.includes(`.${name}`))) subjectRules.push(rule);
+    });
+    const missingClasses = classes.filter(name => {
+      const escaped = name.replace(/[^a-zA-Z0-9_-]/g, character => `\\${character}`);
+      return !selectors.includes(`.${escaped}`);
+    });
+    for (const subject of record.example.utilities) {
+      assert.ok(classes.includes(subject), `Selected utility ${subject} absent from HTML`);
+      assert.ok(!missingClasses.includes(subject), `Selected utility ${subject} absent from CSS`);
+    }
+    assert.ok(subjectRules.some(rule => rule.nodes.some(node => node.prop === 'overflow-wrap' && node.value === 'normal')), 'Selected word-wrap declaration differs');
+    reports.push({ id, payloadHash: record.example.validation.payloadHash, consumerBuild: 'not-applicable', api: 'not-applicable', css: missingClasses.length ? 'partial' : 'passed', missingClasses, cssHash: sha256(readFileSync(cssPath)), checked: classes.filter(name => !missingClasses.includes(name)) });
+    continue;
+  }
+  assert.deepEqual(consumerTuple(JSON.parse(files['package.json'])), consumerTuple(pkg), `${id} runtime/tooling tuple differs from installed consumer manifest`);
+  const exampleDir = resolve(consumer, ...id.split('/'));
+  mkdirSync(exampleDir, { recursive: true });
   for (const [name, content] of Object.entries(files)) writeFileSync(resolve(exampleDir, name), content);
   const sfc = parse(files['App.vue']);
   assert.deepEqual(sfc.errors, []);
   const ast = baseParse(sfc.descriptor.template.content);
-  const checked = checkTemplateApi(ast, record.example.directives);
+  assertTemplateBindings(sfc.descriptor.template.content, sfc.descriptor.scriptSetup?.content ?? '');
+  const checked = checkTemplateApi(ast, metadata, record.example.directives);
   const lint = await eslint.lintFiles([resolve(exampleDir, 'App.vue')]);
   const lintErrors = lint.reduce((total, result) => total + result.errorCount + result.warningCount, 0);
   assert.equal(lintErrors, 0, JSON.stringify(lint));
@@ -112,6 +105,7 @@ const installed = JSON.parse(lock).packages;
 const profile = getProfile(PROFILE_ID);
 for (const [name, version] of Object.entries(profile.dependencies)) assert.equal(installed[`node_modules/${name}`].version, version);
 assert.equal(installed['node_modules/@dialpad/dialtone'].integrity, profile.artifacts['@dialpad/dialtone'].integrity);
+artifact.integrity = installed['node_modules/@dialpad/dialtone'].integrity;
 const report = { fixture, artifact, verification: 'built', node: process.version, tooling: pkg.devDependencies, lockHash: sha256(lock), reports };
 writeFileSync(resolve(destination, 'example-consumer-report.json'), JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));

@@ -30,6 +30,8 @@ combinator: DtLoader
 
 The base loader should be the go-to loader for most of your needs. When in doubt, use this style.
 
+<!-- example-id: examples/loader-default -->
+
 ```vue demo
 <dt-loader></dt-loader>
 ```
@@ -45,6 +47,8 @@ The circular spinner from earlier versions of Dialtone. Use `kind="spinner"` onl
 ## Sizes
 
 The base loader size is 24px and should be used in most cases.
+
+<!-- example-id: examples/loader-sizes -->
 
 ```vue demo
 <dt-stack

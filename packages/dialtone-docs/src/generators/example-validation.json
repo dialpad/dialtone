@@ -1,87 +1,154 @@
 {
-  "examples/button-default": {
-    "payloadHash": "ab1895a162e82763a807ae52c838c0984f032334698b5ac24ea4293c61450dd3",
-    "consumerBuild": "built",
-    "api": "passed",
-    "profile": "dt10-pinned",
-    "node": "v24.5.0",
-    "tooling": {
-      "vite": "8.0.3",
-      "@vitejs/plugin-vue": "6.0.5"
-    },
-    "verifiedOn": "2026-10-17",
-    "lockHash": "e2bf66e909dcb4e4859e4377544f308bfa50a6c04f8c31e754f2dd0124ec11fb",
-    "artifact": {
-      "package": "@dialpad/dialtone",
-      "version": "10.5.1",
-      "data": [
-        {
-          "path": "dist/vue3/component-documentation.json",
-          "sha256": "e981bd0057ab2f7bb6d7ae1fa4cb63702dc98af18cd59135503aa81323057f3d",
-          "shape": "array",
-          "records": 94,
-          "schemaVersions": [
-            null
-          ]
-        }
-      ],
-      "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
-    },
-    "manualReview": {
-      "status": "passed",
-      "reviewer": "francisrupert",
-      "date": "2026-10-17",
-      "browser": "Google Chrome 154.0.8037.99 (Official Build) (arm64)",
-      "os": "macOS 15.7.4 (24G517)",
-      "assistiveTechnology": "VoiceOver 10",
-      "basis": "Reviewer confirmation of the supplied manual spot checks, not a full accessibility audit.",
-      "checks": [
-        "Keyboard focus, visible focus, Enter/Space and accessible names",
-        "Representative VoiceOver button names"
-      ],
-      "qualification": "Presentational example; no application action handler. Class/aria-disabled does not itself prevent consuming application actions."
+  "runs": {
+    "dt10-pinned-2026-10-26": {
+      "profile": "dt10-pinned",
+      "node": "v24.5.0",
+      "tooling": {
+        "vite": "8.0.3",
+        "@vitejs/plugin-vue": "6.0.5"
+      },
+      "verifiedOn": "2026-10-26",
+      "lockHash": "ed75f6ada483dfe68d5a1b514db4bcc08d6915771c0a1ce5d8ad50119255be54",
+      "artifact": {
+        "contractVersion": 1,
+        "profile": "dt10-pinned",
+        "package": "@dialpad/dialtone",
+        "version": "10.5.1",
+        "verification": "lookup-data-only",
+        "data": [
+          {
+            "path": "dist/vue3/component-documentation.json",
+            "sha256": "e981bd0057ab2f7bb6d7ae1fa4cb63702dc98af18cd59135503aa81323057f3d",
+            "shape": "array",
+            "records": 94,
+            "schemaVersions": [
+              null
+            ]
+          }
+        ],
+        "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+      }
     }
   },
-  "examples/button-disabled-tooltip": {
-    "payloadHash": "8bd5bbdc50955371ff2bfa5593a826d3dcbc556c2d7238048fdd3daaa0d64586",
-    "consumerBuild": "built",
-    "api": "passed",
-    "profile": "dt10-pinned",
-    "node": "v24.5.0",
-    "tooling": {
-      "vite": "8.0.3",
-      "@vitejs/plugin-vue": "6.0.5"
+  "examples": {
+    "examples/button-default": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "b5c4769785a1596da87d9ff0a1e5ac50dddd28a7a5b31ae1bf58c9fd73cb772a",
+      "consumerBuild": "built",
+      "api": "passed",
+      "manualReview": {
+        "status": "passed",
+        "reviewer": "francisrupert",
+        "date": "2026-10-17",
+        "browser": "Google Chrome 154.0.8037.99 (Official Build) (arm64)",
+        "os": "macOS 15.7.4 (24G517)",
+        "assistiveTechnology": "VoiceOver 10",
+        "basis": "Reviewer confirmation of the supplied manual spot checks, not a full accessibility audit.",
+        "checks": [
+          "Keyboard focus, visible focus, Enter/Space and accessible names",
+          "Representative VoiceOver button names"
+        ],
+        "qualification": "Presentational example; no application action handler. Class/aria-disabled does not itself prevent consuming application actions."
+      },
+      "checked": [
+        "DtStack.direction",
+        "DtStack.gap",
+        "DtButton.importance"
+      ]
     },
-    "verifiedOn": "2026-10-17",
-    "lockHash": "e2bf66e909dcb4e4859e4377544f308bfa50a6c04f8c31e754f2dd0124ec11fb",
-    "artifact": {
-      "package": "@dialpad/dialtone",
-      "version": "10.5.1",
-      "data": [
-        {
-          "path": "dist/vue3/component-documentation.json",
-          "sha256": "e981bd0057ab2f7bb6d7ae1fa4cb63702dc98af18cd59135503aa81323057f3d",
-          "shape": "array",
-          "records": 94,
-          "schemaVersions": [
-            null
-          ]
-        }
-      ],
-      "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+    "examples/button-disabled-tooltip": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "f2296426f9c9213858a0516c5ab7f4e636de834de7636710a11e7e6660d690d0",
+      "consumerBuild": "built",
+      "api": "passed",
+      "manualReview": {
+        "status": "passed",
+        "reviewer": "francisrupert",
+        "date": "2026-10-17",
+        "browser": "Google Chrome 154.0.8037.99 (Official Build) (arm64)",
+        "os": "macOS 15.7.4 (24G517)",
+        "assistiveTechnology": "VoiceOver 10",
+        "basis": "Reviewer confirmation of the supplied manual spot checks, not a full accessibility audit.",
+        "checks": [
+          "Native-disabled button skipped; wrapper focus; tooltip on focus and hover; Escape dismissal; representative VoiceOver names, disabled state and description"
+        ],
+        "qualification": "Presentational example; no application action handler. Class/aria-disabled does not itself prevent consuming application actions."
+      },
+      "checked": [
+        "DtStack.gap",
+        "DtStack.direction",
+        "DtButton.disabled"
+      ]
     },
-    "manualReview": {
-      "status": "passed",
-      "reviewer": "francisrupert",
-      "date": "2026-10-17",
-      "browser": "Google Chrome 154.0.8037.99 (Official Build) (arm64)",
-      "os": "macOS 15.7.4 (24G517)",
-      "assistiveTechnology": "VoiceOver 10",
-      "basis": "Reviewer confirmation of the supplied manual spot checks, not a full accessibility audit.",
-      "checks": [
-        "Native-disabled button skipped; wrapper focus; tooltip on focus and hover; Escape dismissal; representative VoiceOver names, disabled state and description"
+    "examples/loader-default": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "3f714d5eb0d3a4dc309c83b5758e368579e0aa2d8ad0df92a1517c04d8c32b74",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": []
+    },
+    "examples/loader-sizes": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "b4a1989cfa53d42d50741e368d63b119000fde65e7eec5dc24672698f05e1f73",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtStack.gap",
+        "DtStack.direction",
+        "DtLoader.size"
+      ]
+    },
+    "examples/toggle-base-styles": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "46f1ab4fb13cf9ea3bc93bdf3d4624acfe35cfbfedc6024d7d5acf57f1d8cf43",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtStack.as",
+        "DtStack.gap",
+        "DtToggle.modelValue",
+        "DtToggle.disabled",
+        "DtToggle.showIcon"
+      ]
+    },
+    "examples/toggle-sizes": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "71a944e2149d4e1260d9243abe4162a73df7d7cb2c49f3c47a5383ff0c6285d1",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtStack.as",
+        "DtStack.gap",
+        "DtToggle.size"
+      ]
+    },
+    "examples/toggle-v-model": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "d439741cd2e9fc0ddb1587e4dc7dc4874b27728288c13631a565802d62447f12",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtToggle.modelValue"
+      ]
+    },
+    "examples/utility-word-wrap-normal": {
+      "run": "dt10-pinned-2026-10-26",
+      "payloadHash": "157452e69a91b5b4ef96aa5b4b4428bf3841295b1eb2d1a6b766d0a496f20062",
+      "consumerBuild": "not-applicable",
+      "api": "not-applicable",
+      "css": "partial",
+      "missingClasses": [
+        "lg:d-w-350"
       ],
-      "qualification": "Presentational example; no application action handler. Class/aria-disabled does not itself prevent consuming application actions."
+      "cssHash": "4fcff0a99818b1d60693e2ef19b4a18f77ab5c3a450768bf5147e0604dc18167",
+      "checked": [
+        "d-bgc-moderate",
+        "d-py-100",
+        "d-px-200",
+        "d-bar-400",
+        "d-w-500",
+        "d-ww-normal"
+      ]
     }
   }
 }

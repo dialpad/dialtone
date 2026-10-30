@@ -156,4 +156,9 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(run(['component', 'DtStack', '--examples']).stdout).not.toContain('examples/button-');
     expect(run(['docs', 'how do I show a tooltip on a disabled button']).stdout).toContain('examples/button-disabled-tooltip');
   });
+
+  test('utility discovery provides its selected source example command', () => {
+    expect(run(['utility', 'd-ww-normal']).stdout)
+      .toContain('examples/utility-word-wrap-normal: dialtone docs --id examples/utility-word-wrap-normal');
+  });
 });
