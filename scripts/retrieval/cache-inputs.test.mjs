@@ -197,6 +197,7 @@ test('preset generation hashes authored presets, serializers and component defau
     'packages/combinator/vite.config.js',
     'packages/combinator/package.json',
     'packages/dialtone-vue/components/Button/Button.vue',
+    'packages/dialtone-vue/vite.config.js',
     'packages/dialtone-vue/dist/component-documentation.json',
     'scripts/lib/vue-component-identity.mjs',
     'package.json',

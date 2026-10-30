@@ -34,6 +34,7 @@ const inputFiles = (
       'packages/combinator/vite.config.js',
       'packages/combinator/package.json',
       'packages/dialtone-vue/{common,components,directives,prototypes}/**/*.{js,vue,json}',
+      'packages/dialtone-vue/vite.config.js',
       'packages/dialtone-vue/index.js',
       'packages/dialtone-vue/package.json',
       'packages/dialtone-icons/*.{cjs,mjs,js,json}',
