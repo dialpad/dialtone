@@ -209,3 +209,16 @@ test('preset generation hashes authored presets, serializers and component defau
   assert.deepEqual(covered(generated, inputs('dialtone-docs').depsOutputs.map(input => input.dependentTasksOutputFiles)), generated);
 
 });
+
+test('icon Vue builds hash tracked generator sources', () => {
+  const paths = [
+    'packages/dialtone-icons/src/svg/icons/alerts/alert-circle.svg',
+    'packages/dialtone-icons/src/IconTemplate.vue',
+    'packages/dialtone-icons/src/IllustrationTemplate.vue',
+    'packages/dialtone-icons/src/utils.js',
+    'packages/dialtone-icons/transformSVGtoVue.cjs',
+    'packages/dialtone-icons/gulpfile.cjs',
+    'packages/dialtone-icons/vue/vite.config.js',
+  ];
+  assert.deepEqual(covered(paths, selfPatterns('dialtone-icons/vue')), paths);
+});

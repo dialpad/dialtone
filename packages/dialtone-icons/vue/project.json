@@ -12,8 +12,9 @@
       "executor": "nx:run-commands",
       "dependsOn": ["clean-dist"],
       "inputs": [
-        "{workspaceRoot}/packages/dialtone-icons/src/icons/*",
-        "{workspaceRoot}/packages/dialtone-icons/src/illustrations/*",
+        "{workspaceRoot}/packages/dialtone-icons/src/**/*.{cjs,mjs,js,json,svg,vue}",
+        "{workspaceRoot}/packages/dialtone-icons/transformSVGtoVue.cjs",
+        "{workspaceRoot}/packages/dialtone-icons/gulpfile.cjs",
         "{projectRoot}/vite.config.js"
       ],
       "outputs": ["{projectRoot}/dist"],
