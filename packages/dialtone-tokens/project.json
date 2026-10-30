@@ -13,6 +13,7 @@
         "{projectRoot}/build-ios.js",
         "{projectRoot}/build-sd-transforms.js",
         "{projectRoot}/build-sd-transforms-layered.js",
+        "{projectRoot}/mobile-theme-utils.js",
         "{projectRoot}/build-layered.js",
         "{projectRoot}/dialtone-transforms.js",
         "{projectRoot}/generate-themes.js",
@@ -40,7 +41,7 @@
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
-          "cp ./AndroidManifest.xml dist/android",
+          "cp ./AndroidManifest.xml dist/android/src",
           "./gradlew publishToMavenLocal"
         ],
         "parallel": false
