@@ -491,6 +491,13 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
             wrote: p && p.color ? [p.color.r, p.color.g, p.color.b] : null,
             read: got && got.color ? [got.color.r, got.color.g, got.color.b] : null });
         }
+        // A host that recolours its slot content (Notice's action label follows the notice text
+        // colour): repaint the instance's text and glyphs with the measured colour. Only where
+        // the payload carries one — an instance otherwise keeps its own variant's colours.
+        if (d.oc) {
+          const p = paint(d.oc);
+          for (const v of inst.findAll(n => n.type === 'TEXT' || n.type === 'VECTOR')) v.fills = [p];
+        }
         instanceMain[inst.id] = d.ic;
         return inst;
       }
@@ -584,7 +591,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
        * a fixed width) would need `HEIGHT` instead; nothing today is that, so this is not yet
        * a case this builder has to distinguish.
        */
-      if (d.tp) t.textAutoResize = 'WIDTH_AND_HEIGHT';
+      if (d.tp || D.flexLayout) t.textAutoResize = 'WIDTH_AND_HEIGHT';
       // A style is applied only when one matches size AND weight AND line-height AND
       // FAMILY. A near-match would silently change the rendering — Button's labels are
       // Medium at sizes no style covers, so they carry raw typography instead.
@@ -622,7 +629,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       if (hash) f.fills = [{ type: 'IMAGE', scaleMode: d.im[1] ? 'FILL' : 'FIT', imageHash: hash }];
     }
   
-    const [mode, align, justify, wrapFlag] = d.lay;
+    let [mode, align, justify, wrapFlag] = d.lay;
     // Hug is only meaningful when there is content to hug. An EMPTY auto-layout frame
     // snaps to Figma's 100x100 minimum — which is how an 8x8 decorative dot came out
     // 100x100 on the first generic build. A childless node is always fixed at the box
@@ -666,6 +673,19 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     // `defaultKids`, not `layoutKids`: a frame whose only children are hidden slot layers
     // hugs NOTHING in its default state, and an empty auto-layout frame snaps to Figma's
     // 100x100 minimum.
+    /**
+     * A BLOCK FRAME THAT HOLDS ONLY TEXT HUGS ITS WIDTH, AND KEEPS ITS MEASURED HEIGHT (`flexLayout`).
+     *
+     * `display: block` maps to a NONE frame pinned at the measured box, which is why retyping
+     * Notice's title or message left the text overflowing a frame that never grew. Width now
+     * hugs the text. Height stays the measured number on purpose: the CSS trims the text box
+     * (`text-box-trim`), so one line measures 18px where Figma's own line box is 19, and a
+     * hugging height would make every notice taller than Dialtone. The price is that long text
+     * does not wrap onto a second line.
+     */
+    const textOnlyBlock = !!D.flexLayout && mode === 'N' && layoutKids.length > 0
+      && layoutKids.every(i => D.nodes[i].t === 'TEXT');
+    if (textOnlyBlock) mode = 'V';
     const hug = mode !== 'N' && defaultKids.length > 0 && !kidsOverlap;
     // The stroke's contribution to each axis, per side. No longer folded into padding (see
     // `pad` below), but still needed: the stroke counts toward the layout size, so the size
@@ -770,8 +790,11 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
        * size, but a text child's unknowable static width no longer counts as a mismatch.
        */
       const hasTextKid = defaultKids.some(i => D.nodes[i].t === 'TEXT');
-      fixW = !!(d.box && d.box[0]) && (!!d.pw || (!hasTextKid && Math.abs((d.box[0] - padX) - contentW) > 1));
-      fixH = !!(d.box && d.box[1]) && (!!d.ph || (!hasTextKid && Math.abs((d.box[1] - padY) - contentH) > 1));
+      // `flexLayout`: a frame with a maximum width hugs up to it instead of pinning the width the
+      // harness happened to measure (CSS `inline-size: 100%`); a text-only block keeps its height.
+      fixW = !!(d.box && d.box[0]) && (!!d.pw || (!hasTextKid && Math.abs((d.box[0] - padX) - contentW) > 1))
+        && !(D.flexLayout && d.mw);
+      fixH = !!(d.box && d.box[1]) && (!!d.ph || textOnlyBlock || (!hasTextKid && Math.abs((d.box[1] - padY) - contentH) > 1));
 
       f.layoutMode = isRow ? 'HORIZONTAL' : 'VERTICAL';
       /**
@@ -1103,6 +1126,24 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       const kid = await build(kidIdx);
       f.appendChild(kid);
       const kd = D.nodes[kidIdx];
+      /**
+       * `flexLayout`: HOW A FLEX CHILD TAKES ITS SIZE AND WHERE IT SITS ACROSS THE ROW.
+       *
+       * `flex-grow` fills the row's main axis. `align-self: center` has no per-child equivalent
+       * in Figma auto-layout, so the child is stretched to the row's height and its own content
+       * is centred inside it — the same result on screen, without an extra wrapper node.
+       */
+      if (D.flexLayout && f.layoutMode === 'HORIZONTAL' && !kd.abs) {
+        // Only where the row has a width of its own to fill. A FILL child of a HUGGING row
+        // collapses to its minimum (measured: Notice's content came out 34px beside 44px of text,
+        // which then overlapped the action), and a hugging row already grows with its content.
+        if (kd.gr && f.primaryAxisSizingMode === 'FIXED') kid.layoutGrow = 1;
+        if (kd.sc) {
+          kid.layoutSizingVertical = 'FILL';
+          if (kid.layoutMode === 'VERTICAL') kid.primaryAxisAlignItems = 'CENTER';
+          else if (kid.layoutMode === 'HORIZONTAL') kid.counterAxisAlignItems = 'CENTER';
+        }
+      }
       // A frame with layoutMode NONE places nothing for itself, so EVERY child needs
       // its measured offset — not just the absolutely-positioned ones. CSS block flow
       // stacks siblings; Figma's NONE layout does not, and they pile up at 0,0.
@@ -1183,6 +1224,11 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     // variable that would move the geometry never reaches the node in the first place.
     if (d.width && (!hug || fixW)) bindNum(f, 'width', d.width);
     if (d.height && (!hug || fixH)) bindNum(f, 'height', d.height);
+    // `flexLayout`: hug up to the CSS maximum, then stop — what `max-inline-size` does.
+    if (D.flexLayout && d.mw && f.layoutMode !== 'NONE') {
+      f.maxWidth = d.mw[0];
+      bindNum(f, 'maxWidth', d.mw);
+    }
     return f;
   }
   

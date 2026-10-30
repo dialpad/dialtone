@@ -12,13 +12,21 @@
  * `.d-banner--error` / `.d-banner--success` exist in dialtone.css as legacy
  * aliases but are NOT in NOTICE_KINDS and no prop value can reach them.
  */
+// Combinator puts the same muted outlined button in the action slot of every variant (see
+// notice.mjs): its translucent border blends into any surface, and the label follows the
+// notice's text colour, which the builder mirrors onto the instance (`oc`).
+const actionKind = () => 'muted';
+
 export default {
   component: 'DtBanner',
   label: 'Banner',
   // The title's text is a property, like the label: `headerText` is a prop in the code.
   textProps: { 'Optional title': 'Title' },
   page: 'Banner',
-  figmaSetId: '592:10999',
+  figmaSetId: '2021:51126',
+
+  // Flex fill and align-self centring, as for Notice (see the generic builder).
+  flexLayout: true,
 
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of
@@ -125,12 +133,12 @@ export default {
   slotContent: c => ({
     action: {
       component: 'DtButton',
-      props: { size: 200, importance: 'outlined', kind: c.important ? 'inverted' : 'muted' },
+      props: { size: 200, importance: 'outlined', kind: actionKind(c) },
       text: 'Action',
       // The Figma component a designer starts from, stated as a full variant combo so
       // nothing is inferred. Resolved to a node id at encode time against DtButton's set.
       swapTo: { component: 'button', variant: {
-        kind: c.important ? 'inverted' : 'muted', importance: 'outlined', size: 200,
+        kind: actionKind(c), importance: 'outlined', size: 200,
         state: 'default', loading: false,
       } },
     },

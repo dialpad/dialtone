@@ -277,12 +277,14 @@ const EXEMPT = {
   // size — which decides whether a size token may be bound. Figma has maxWidth/maxHeight
   // fields, but the builder sets neither: a clamp that is already binding has been folded
   // into the measured box, and one that is not would need a larger box to have any effect.
-  maxWidth: 'used to decide whether a declared size token is bindable; never written to Figma',
+  maxWidth: 'used to decide whether a declared size token is bindable; written to Figma only for `flexLayout` configs (their root hugs up to it), where the hug is not compared',
   maxHeight: 'used to decide whether a declared size token is bindable; never written to Figma',
   alignItems: 'compared as counterAxisAlign on auto-layout frames',
   justifyContent: 'compared as primaryAxisAlign on auto-layout frames',
   flexDirection: 'compared as direction on auto-layout frames',
   flexWrap: 'gates whether rowGap is meaningful; not itself a painted value',
+  flexGrow: 'read by `flexLayout` configs only: the builder fills the main axis, and the filled width is a hug, which the box check does not pin',
+  alignSelf: 'compared as the centring check on `align-self: center` frames (stretch + centred content); other values are not built',
 };
 // The browser's default-state width and Figma's differ by the text-shaping gap (Figma sets text
 // about 3-5% wider; the box spread reports it), and the centred-child arithmetic halves it. Half
@@ -1016,6 +1018,21 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
     // different things. Recorded as an allowance, not skipped silently.
     if (s.display === 'inline') {
       allowed.push({ variant, path, reason: 'display:inline — DOM measures the content box, Figma the line box' });
+    } else if (s.alignSelf === 'center' && (fig.layoutAlign === 'STRETCH' || fig.layoutSizingVertical === 'FILL') && figParentBox) {
+      /**
+       * `align-self: center` IS BUILT AS STRETCH + CENTRED CONTENT, so the frame's own height is
+       * the row's, not the content's. What the CSS promises is the centring, so that is what is
+       * checked: the frame's midpoint against its parent's (the padding is symmetrical), and the
+       * frame's own height against the row it stretches across — never smaller than the content.
+       */
+      const fb = fig.absoluteBoundingBox;
+      const off = (fb.y + fb.height / 2) - (figParentBox.y + figParentBox.height / 2);
+      if (Math.abs(off) > 1 || fb.height + SIZE_EPS + FLOAT_SLOP < dom.box.h) {
+        rec(variant, path, 'alignSelf:center', `centred, height >= ${dom.box.h}`, `offset ${off.toFixed(2)}, height ${fb.height}`);
+      } else {
+        allowed.push({ variant, path,
+          reason: `align-self: center built as stretch + centred content (frame ${fb.height}px, content ${dom.box.h}px, centred within ${Math.abs(off).toFixed(1)}px)` });
+      }
     } else if (hDiff > SIZE_EPS + FLOAT_SLOP) {
       rec(variant, path, 'height', dom.box.h + fm.top + fm.bottom, fig.absoluteBoundingBox.height);
     }

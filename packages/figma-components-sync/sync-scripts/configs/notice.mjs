@@ -16,11 +16,22 @@
  * page at kind=muted, importance=clear, size=200. So there is no `state` axis,
  * and therefore no `pseudo` / `stateTarget` either.
  */
+// Combinator puts the same muted outlined button in the action slot of every variant. Its
+// border is a translucent dark, so it blends into any surface, and `.d-notice__actions .d-btn`
+// recolours its label to the notice's text colour; the builder mirrors that colour onto the
+// instance (`oc`).
+const actionKind = () => 'muted';
+
 export default {
   component: 'DtNotice',
   label: 'Notice',
   page: 'Notice',
-  figmaSetId: '592:8398',
+  figmaSetId: '2021:48525',
+
+  // Flex fill, align-self centring and a maximum width (see the generic builder): the content
+  // grows to fill the row, centres itself against a taller action, and the root hugs up to
+  // `max-inline-size` instead of being pinned at the width the harness measured.
+  flexLayout: true,
 
   axes: {
     // Each kind repaints the surface AND swaps the default icon glyph
@@ -142,12 +153,12 @@ export default {
   slotContent: c => ({
     action: {
       component: 'DtButton',
-      props: { size: 200, importance: 'outlined', kind: c.important ? 'inverted' : 'muted' },
+      props: { size: 200, importance: 'outlined', kind: actionKind(c) },
       text: 'Action',
       // The Figma component a designer starts from, stated as a full variant combo so
       // nothing is inferred. Resolved to a node id at encode time against DtButton's set.
       swapTo: { component: 'button', variant: {
-        kind: c.important ? 'inverted' : 'muted', importance: 'outlined', size: 200,
+        kind: actionKind(c), importance: 'outlined', size: 200,
         state: 'default', loading: false,
       } },
     },

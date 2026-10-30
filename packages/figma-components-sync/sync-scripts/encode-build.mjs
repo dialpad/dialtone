@@ -255,6 +255,7 @@ for (const full of Object.keys(ICON_LIB.ids || {})) {
  * run-batch already says out loud per slot.
  */
 const textPropsOf = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textProps || {};
+const flexLayoutOn = !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).flexLayout;
 const swapTargets = new Map();     // "component|variantName" -> node id
 const swapUnresolved = new Set();
 /**
@@ -337,7 +338,19 @@ function encodeNode (n) {
   if (n.slotSwapTo) {
     const t = COMPONENTS[n.slotSwapTo.component];
     const hit = t && swapTargets.get(`${n.slotSwapTo.component}|${swapVariantName(t, n.slotSwapTo.variant)}`);
-    if (hit) out.ic = hit;
+    if (hit) {
+      out.ic = hit;
+      // The host recolours the exemplar (`.d-notice__actions .d-btn { color: … }`), so its label
+      // carries the HOST's text colour, not the Button variant's own. Measured on the first
+      // text descendant; the builder repaints the instance's text and glyphs with it (`oc`).
+      const firstText = (m) => (m.isText ? m : (m.children || []).map(firstText).find(Boolean));
+      const t0 = firstText(n);
+      const c0 = t0 && t0.props && t0.props.textColor;
+      if (c0 && c0.rgba) {
+        out.oc = [ci(c0.rgba), ti(c0.token)];
+        if (!c0.token && c0.rgbaDark) out.oc.push(dvarFor('textColor', c0));
+      }
+    }
   }
 
   if (n.tag === 'svg' && n.svg) {
@@ -465,6 +478,14 @@ function encodeNode (n) {
   // builder guards the same condition, which is defence in depth rather than duplication —
   // this one keeps the instruction out, that one survives a payload that has it anyway.
   if (lay.wrap && out.lay[0] === 'H') out.lay.push('W');
+  // `gr` fills the parent's main axis (flex-grow), `sc` centres on the cross axis
+  // (align-self: center). Only for configs that opt in, so the payloads of every other
+  // component stay byte-identical.
+  if (flexLayoutOn) {
+    if (lay.grow) out.gr = 1;
+    if (lay.self === 'center') out.sc = 1;
+    if (p.maxWidth) out.mw = [p.maxWidth.value, ti(p.maxWidth.token)];
+  }
   out.box = [n.box ? n.box.w : 0, n.box ? n.box.h : 0];
   // The measured parent-relative offset is carried for EVERY node, not only absolute
   // ones. A `display: block` container becomes a Figma frame with layoutMode NONE,
@@ -551,7 +572,9 @@ const tokKeys = Object.fromEntries(toks
 
 // Slots the builder makes NATIVE (Figma SLOT) instead of an INSTANCE_SWAP, per the config.
 const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, cols, svgs, imgs, nodes, rows, rowNames, dvars };
+// `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
+// maximum width. Off for every other component, so their built sets are unchanged.
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';
 const outPath = `sync-scripts/build-data/${which}${shardSuffix}-build.json`;
 writeFileSync(outPath, JSON.stringify(payload));

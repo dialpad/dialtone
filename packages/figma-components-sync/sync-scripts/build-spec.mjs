@@ -280,6 +280,24 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
     props[axis] = { value: used, token: toFigmaName(declared[axis]) };
   }
 
+  /**
+   * A FINITE MAXIMUM WIDTH, for configs that opt in with `flexLayout`.
+   *
+   * `inline-size: 100%` pins the root, and the harness measures it shrink-wrapped, so the
+   * builder fixed it at a width that never grows with its content. With a maximum the frame
+   * can hug up to it, then wrap — which is what the CSS does. The token is read from the
+   * declaration itself: the provenance map tracks no maxima, and adding one would make every
+   * other component's identity audit expect a binding it never had.
+   */
+  {
+    const mx = cfg.flexLayout ? px(s.maxWidth) : null;
+    if (mx != null && Number.isFinite(mx) && mx > 0 && s.maxWidth !== 'none') {
+      const decl = prov.own['max-inline-size'] || prov.own['max-width'];
+      const m = decl && /var\(\s*(--dt-[a-z0-9-]+)/i.exec(String(decl.value));
+      props.maxWidth = { value: mx, token: m ? toFigmaName(m[1]) : null };
+    }
+  }
+
   for (const [css, key] of Object.entries(NUM_PROPS)) {
     if (key === 'fontSize' && !paintsText) continue;
     const n = px(s[css]);
@@ -762,6 +780,10 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
       // Figma needs `layoutWrap: WRAP` before a counterAxisSpacing means anything, so the
       // flag has to reach the builder rather than being inferred from the gap's presence.
       wrap: /wrap/.test(s.flexWrap || '') && s.flexWrap !== 'nowrap',
+      // Only read by configs that opt in (`flexLayout`); a node that fills its parent's main
+      // axis, or centres itself on the cross axis.
+      grow: parseFloat(s.flexGrow) > 0,
+      self: s.alignSelf,
     },
     box: node.box,
     rel: node.rel,

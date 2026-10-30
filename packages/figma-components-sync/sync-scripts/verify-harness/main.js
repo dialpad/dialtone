@@ -209,6 +209,10 @@ window.__anatomy = () => {
     // the box was right, the gap was gone, and nothing could see it.
     'marginTop','marginRight','marginBottom','marginLeft',
     'display','flexDirection','flexWrap','alignItems','justifyContent','position','boxShadow',
+    // How a flex child takes its main-axis size and where it sits on the cross axis. Read for
+    // configs that opt in with `flexLayout` (Notice: its content fills and wraps, and centres
+    // itself against a taller action).
+    'flexGrow','alignSelf',
     // `outline` was exempted on the belief that Dialtone always paints focus with
     // box-shadow. Checkbox's checked focus ring is a real outline, so the exemption
     // was a claim about the design system that the design system does not honour.
