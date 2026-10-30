@@ -18,7 +18,7 @@ For repository authoring or maintenance questions, read the [Contributor tasks t
 | `pr-create`         | `$pr-create`, "open a PR", "fill PR body"          | Prepare and optionally create/update a PR after readiness is clear.                                     | `pr-template.md`, `package-map.md`                                 | fixture  |
 | `pr-comments`       | `$pr-comments`, `$address-review`, review feedback | Fetch real inline review comments, plan fixes, validate, and reply safely.                              | `rule-map.md`                                                      | fixture  |
 | `pr-complete`       | after PR merge, branch closeout                    | Verify merge state, return to `staging`, and handle `NO-JIRA` closeout safely.                          | `package-map.md`                                                   | fixture  |
-| `doc-sync-check`    | source changes that may affect AI docs             | Report missing/stale `dialtone-docs` updates and offer apply mode.                                      | `doc-sync.md`                                                      | fixture  |
+| `doc-sync-check`    | source changes that may affect contributor guidance             | Report review candidates and record current semantic decisions.                                      | `doc-sync.md`                                                      | fixture  |
 | `component-work`    | component creation/update, component API changes   | Keep Vue component, tests, stories, docs, and downstream data in sync.                                  | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
 | `component-variant` | Combinator variant authoring for component changes | Keep `packages/combinator/src/variants/**` aligned with component props, slots, values, and thumbnails. | `rules/combinator-variants.md`, `package-map.md`, `rule-map.md`    | contract |
 
@@ -29,7 +29,7 @@ For repository authoring or maintenance questions, read the [Contributor tasks t
 - `resources/validation.md`: changed-path to validation-command mapping.
 - `resources/rule-map.md`: lazy loading map for Codex-owned rule resources.
 - `resources/rules/*.md`: focused review rules loaded by `rule-map.md`.
-- `resources/doc-sync.md`: source package to `packages/dialtone-docs/src/content` mapping.
+- `resources/doc-sync.md`: shared source-review workflow and its single maintained map.
 - `resources/pr-template.md`: PR title/body and public-safety expectations.
 - `resources/agent-tooling-parity.md`: peer-harness decisions for Codex alongside existing agent tooling.
 

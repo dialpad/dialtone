@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "id": "tokens",
+      "prefixes": ["packages/dialtone-tokens/"]
+    },
+    {
+      "id": "css",
+      "prefixes": ["packages/dialtone-css/"]
+    },
+    {
+      "id": "vue",
+      "prefixes": ["packages/dialtone-vue/"]
+    },
+    {
+      "id": "combinator",
+      "prefixes": ["packages/combinator/"]
+    },
+    {
+      "id": "docs-site",
+      "prefixes": ["apps/dialtone-documentation/"]
+    },
+    {
+      "id": "docs-package",
+      "prefixes": ["packages/dialtone-docs/"]
+    },
+    {
+      "id": "query-core",
+      "prefixes": ["packages/dialtone-query-core/"]
+    },
+    {
+      "id": "mcp",
+      "prefixes": ["packages/dialtone-mcp-server/"]
+    },
+    {
+      "id": "cli",
+      "prefixes": ["packages/dialtone-cli/"]
+    },
+    {
+      "id": "icons",
+      "prefixes": ["packages/dialtone-icons/"]
+    },
+    {
+      "id": "language-server",
+      "prefixes": ["packages/language-server/"]
+    },
+    {
+      "id": "eslint",
+      "prefixes": ["packages/eslint-plugin-dialtone/"]
+    },
+    {
+      "id": "stylelint",
+      "prefixes": ["packages/stylelint-plugin-dialtone/"]
+    },
+    {
+      "id": "responsive",
+      "prefixes": ["packages/postcss-responsive-variations/"]
+    },
+    {
+      "id": "github",
+      "prefixes": [".github/"]
+    },
+    {
+      "id": "agents",
+      "prefixes": [".agents/"]
+    },
+    {
+      "id": "claude",
+      "prefixes": [".claude/"]
+    },
+    {
+      "id": "codex",
+      "prefixes": [".codex/"]
+    },
+    {
+      "id": "scripts",
+      "prefixes": ["scripts/"]
+    },
+    {
+      "id": "root-policy-build",
+      "paths": [
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "nx.json",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "commitlint.config.cjs",
+        "parser-preset.cjs",
+        ".releaserc",
+        ".releaserc.json",
+        "lookup-release.config.cjs",
+        "project.json"
+      ]
+    },
+    {
+      "id": "generator",
+      "prefixes": ["generator-dialtone/"]
+    }
+  ],
+  "mappings": [
+    {
+      "id": "vue",
+      "prefixes": ["packages/dialtone-vue/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/development/development-component-workflow.md",
+          "section": "API Style",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": "packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md",
+          "section": "Standard Prop Patterns",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": "packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md",
+          "section": "Component Accessibility Checklist",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": "packages/dialtone-docs/src/content/development/development-testing.md",
+          "section": "Standard Test Pattern",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": ".agents/resources/rules/vue-components.md",
+          "section": "Component Artifact Pipeline",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "tokens",
+      "prefixes": ["packages/dialtone-tokens/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/development/development-design-tokens.md",
+          "section": "Build Steps After Adding Tokens",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": "packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md",
+          "section": "All Token Outputs at a Glance",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "css",
+      "prefixes": ["packages/dialtone-css/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/development/development-css-utilities.md",
+          "section": "Gulp Build Pipeline",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "icons",
+      "prefixes": ["packages/dialtone-icons/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/development/development-icons.md",
+          "section": "How to Add a New Icon",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "combinator",
+      "prefixes": ["packages/combinator/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": ".agents/resources/rules/combinator-variants.md",
+          "section": "Review checks",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "docs-site",
+      "prefixes": ["apps/dialtone-documentation/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": ".agents/resources/rules/documentation-site.md",
+          "section": "Updates",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "docs-generation",
+      "prefixes": ["packages/dialtone-docs/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": ".agents/resources/rules/documentation-site.md",
+          "section": "Updates",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": ".agents/resources/validation.md",
+          "section": "Path To Commands",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "lookup",
+      "prefixes": ["packages/dialtone-query-core/", "packages/dialtone-cli/", "packages/dialtone-mcp-server/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": "apps/dialtone-documentation/docs/guides/cli/index.md",
+          "section": "Commands",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
+          "section": "Search Tools",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": "packages/dialtone-query-core/README.md",
+          "section": "API",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "workspace",
+      "prefixes": [],
+      "paths": ["package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", "nx.json", "project.json"],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/architecture/architecture-build-system.md",
+          "section": "Adding a New Package",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": "packages/dialtone-docs/src/content/architecture/architecture-monorepo-structure.md",
+          "section": "Top-Level Layout",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "ci",
+      "prefixes": [".github/workflows/"],
+      "paths": [],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md",
+          "section": "Workflow Reference",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "prefixes": [],
+      "paths": [
+        "packages/combinator/release-ci.config.cjs",
+        "packages/dialtone-cli/release-ci.config.cjs",
+        "packages/dialtone-css/release-ci.config.cjs",
+        "packages/dialtone-emojis/release-ci.config.cjs",
+        "packages/dialtone-icons/release-ci.config.cjs",
+        "packages/dialtone-mcp-server/release-ci.config.cjs",
+        "packages/dialtone-tokens/release-ci.config.cjs",
+        "packages/dialtone-vue/release-ci.config.cjs",
+        "packages/eslint-plugin-dialtone/release-ci.config.cjs",
+        "packages/language-server/server/release-ci.config.cjs",
+        "packages/language-server/vscode/release-ci.config.cjs",
+        "packages/postcss-responsive-variations/release-ci.config.cjs",
+        "packages/stylelint-plugin-dialtone/release-ci.config.cjs",
+        "release-ci.config.cjs",
+        ".releaserc",
+        ".releaserc.json",
+        "lookup-release.config.cjs"
+      ],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/workflows/workflow-release-process.md",
+          "section": "Per-Package Versioning",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "branch",
+      "prefixes": [],
+      "paths": ["AGENTS.md"],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md",
+          "section": "Where PRs Go",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "commit",
+      "prefixes": [],
+      "paths": [".github/COMMIT_CONVENTION.md", "commitlint.config.cjs", "parser-preset.cjs"],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md",
+          "section": "Commit Format",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "instructions",
+      "prefixes": [".agents/", ".claude/", ".codex/"],
+      "paths": ["AGENTS.md", "CLAUDE.md"],
+      "targets": [
+        {
+          "path": ".agents/resources/doc-sync.md",
+          "section": "Review decisions",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        },
+        {
+          "path": ".agents/resources/agent-tooling-parity.md",
+          "section": "Instruction Maintenance",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "doc-review",
+      "prefixes": [],
+      "paths": ["scripts/check-doc-review.mjs", "scripts/check-doc-review.test.mjs"],
+      "targets": [
+        {
+          "path": ".agents/resources/doc-sync.md",
+          "section": "Review decisions",
+          "reason": "Compare changed behavior with this maintained explanation or owning requirement."
+        }
+      ]
+    },
+    {
+      "id": "vue3-generator",
+      "prefixes": ["generator-dialtone/generators/vue3/"],
+      "targets": [
+        {
+          "path": "packages/dialtone-docs/src/content/development/development-component-workflow.md",
+          "section": "Step 1 \u2014 Generate the Component",
+          "reason": "Compare actual generator/template behavior with the documented scaffold limitations."
+        }
+      ]
+    }
+  ]
+}
