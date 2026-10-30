@@ -1,9 +1,5 @@
 const REFERENCE_FRAME_DURATION = 1000 / 60;
 
-export function canUseHoverSteering (pointerType, supportsFineHover) {
-  return pointerType === 'mouse' && supportsFineHover;
-}
-
 export function getCarouselPeriod (firstOriginal, firstClone) {
   if (!firstOriginal || !firstClone) return 0;
   return firstClone.offsetLeft - firstOriginal.offsetLeft;
@@ -20,13 +16,22 @@ export function getLoopedScrollPosition (position, period, maxPosition) {
   return position;
 }
 
-export function getHoverVelocity (relativePosition, deadZone, maxVelocity, curveExponent) {
-  const distanceFromCenter = Math.min(Math.abs(relativePosition), 1);
-  if (distanceFromCenter <= deadZone) return 0;
+// Only a jump larger than this (touch, trackpad, or recentering) counts as an outside scroll;
+// smaller differences are the browser rounding scrollLeft.
+const SCROLL_RESYNC_THRESHOLD = 1.5;
 
-  const adjustedPosition = (distanceFromCenter - deadZone) / (1 - deadZone);
-  const velocity = Math.pow(adjustedPosition, curveExponent) * maxVelocity;
-  return velocity * Math.sign(relativePosition);
+/**
+ * Advances the carousel's floating-point scroll position by `distance`. Safari truncates
+ * scrollLeft to whole pixels, so reading it back each frame drops slow sub-pixel progress
+ * (0.035px/ms is ~0.58px per frame at 60Hz). The float position carries that progress and
+ * only resyncs to scrollLeft after an outside scroll moves it.
+ */
+export function advanceScrollPosition (position, renderedScrollLeft, distance, period, maxPosition) {
+  const start = Math.abs(renderedScrollLeft - position) > SCROLL_RESYNC_THRESHOLD
+    ? renderedScrollLeft
+    : position;
+
+  return getLoopedScrollPosition(start + distance, period, maxPosition);
 }
 
 export function smoothCarouselVelocity (current, target, smoothingFactor, elapsedTime) {
