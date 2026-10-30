@@ -90,6 +90,7 @@ function candidateSyntax(token, rawFile, id, filePath) {
 export function buildExampleCoverage({ rawFile, filePath, records }) {
   const { data, content } = matter(rawFile);
   const tokens = markdown.parse(content, {});
+  const lineOffset = rawFile.slice(0, rawFile.length - content.length).split('\n').length - 1;
   const exclusion = /\/scratch[^/]*\.md$/.test(filePath) ? 'scratch source'
     : filePath.endsWith('.mdx') ? 'MDX markers not supported'
       : ['planned', 'beta', 'wip'].includes(String(data.status).toLowerCase()) ? 'not-ready source' : null;
@@ -105,7 +106,7 @@ export function buildExampleCoverage({ rawFile, filePath, records }) {
       }
       const id = tokens[index - 1]?.content?.trim().match(/^<!-- example-id: (examples\/[a-z0-9-]+) -->$/)?.[1] ?? null;
       candidates.push({
-        sourceLine: token.map[0] + 1, id, displayTwin: directives.codeSeparatorIndex >= 0,
+        sourceLine: token.map[0] + 1 + lineOffset, id, displayTwin: directives.codeSeparatorIndex >= 0,
         syntax: candidateSyntax(token, rawFile, id, filePath),
         disposition: exclusion ? 'excluded' : deliveredIds.includes(id) ? 'delivered' : 'remaining' });
     } else if (token.type === 'fence' || (token.type === 'html_block' && /<(?:example-|div\b|p\b|dt-)/.test(token.content))) referenceCandidates++;
