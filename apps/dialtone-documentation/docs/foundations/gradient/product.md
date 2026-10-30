@@ -26,11 +26,11 @@ In product, the gradient is limited to the app icon, AI treatments such as the A
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <h2 class="d-docsite--header-3">DtBadge</h2>
-      <p class="d-docsite--paragraph">The AI badge uses the gradient surface to mark AI features in product UI.</p>
+      <p class="d-docsite--paragraph">The AI badge outlines its label with a gradient stroke to mark AI features in product UI.</p>
     </div>
     <div class="d-gc2">
-      <figure>
-        <img src="/assets/images/gradient--product-02.png" alt="" class="d-d-block d-w100p d-bar-500">
+      <figure class="d-d-flex d-ai-center d-jc-center d-w100p d-py-800 d-bgc-secondary d-bar-500">
+        <dt-badge type="ai" text="Ai Notes" />
       </figure>
     </div>
   </div>

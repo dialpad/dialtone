@@ -37,7 +37,8 @@
         },
         "ai": {
           "value": "{color.gradient.gold-red-magenta-purple}",
-          "type": "color"
+          "type": "color",
+          "$deprecated": "The ai badge no longer has a fill. Use border.ai instead."
         }
       },
       "foreground": {
@@ -63,13 +64,17 @@
           "type": "color"
         },
         "ai": {
-          "value": "{color.neutral.white}",
+          "value": "{badge.color.foreground.default}",
           "type": "color"
         }
       },
       "border": {
         "default": {
           "value": "{color.border.subtle}",
+          "type": "color"
+        },
+        "ai": {
+          "value": "{color.border.ai}",
           "type": "color"
         },
         "bulletin-subtle": {
