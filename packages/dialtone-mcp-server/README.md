@@ -16,9 +16,9 @@ Install a locked project dependency from the application directory:
 npm install --save-dev --save-exact @dialpad/dialtone-mcp-server
 ```
 
-Installation does not register a client connection. Follow the [MCP setup guide](https://dialtone.dialpad.com/guides/mcp-server/#installation) for Claude Code's `.mcp.json`/local/user scopes and Codex's trusted-project or user `config.toml`. It includes a package-manager runner and a resolved-entry alternative that handles hoisted installations. A bare local bin is not guaranteed to be on the client's PATH.
+Installation does not register a client connection. Follow the [MCP setup guide](https://dialtone.dialpad.com/guides/mcp-server/#installation) for Claude Code's `.mcp.json`/local/user scopes and Codex's complete user `config.toml` entry. It includes a package-manager runner and a resolved-entry alternative that handles hoisted installations. A bare local bin is not guaranteed to be on the client's PATH.
 
-The shared example uses bundled references. Installed mode needs an absolute `DIALTONE_PROJECT_ROOT`, with an absolute `DIALTONE_LOOKUP_ROOT` where required. cwd or a launcher prefix does not select installed data. Check a detail response's selected source/version and fallback reason after connecting; see [installed project selection](./RETRIEVAL.md#installed-project-selection).
+A launcher's cwd or prefix does not select installed data. Check a detail response's selected source/version and fallback reason after connecting.
 
 Keep existing trust, approvals and tool allowlists. Connection, raw server inventory, client-filtered exposure and actual tool calls are separate checks. Other clients, including the Claude Desktop development recipe below, need their own verification; no all-client compatibility claim is made here.
 
@@ -31,6 +31,8 @@ npm install --save-dev --save-exact @dialpad/dialtone-mcp-server@latest
 ```
 
 Review and commit the manifest/lockfile change. Update a dedicated personal installation in its directory; use `npm install -g @dialpad/dialtone-mcp-server@latest` for a global one. `npx` can use a local or cached package or download one; it does not guarantee the latest release. Update any configured version pin deliberately.
+
+The startup notice currently suggests a project-dev install without `--save-exact`. Use the command for your installation mode above to preserve the intended pin and installation directory.
 
 Restart the server or reconnect/restart the client after package, configuration or Dialtone dependency changes. A new conversation alone may reuse the old process. The advisory startup check does not install updates and writes notices to stderr, preserving MCP stdout. See [updates and connection checks](https://dialtone.dialpad.com/guides/mcp-server/#configuration).
 
