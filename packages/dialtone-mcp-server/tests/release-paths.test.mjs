@@ -60,6 +60,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       ['packages/combinator/src/variants/variants_loader.js', 'fix(combinator): update a curated preset', 'patch'],
       ['scripts/retrieval/example-consumer.mjs', 'fix(examples): correct preset API validation', 'patch'],
       ['packages/dialtone-icons/src/IconTemplate.vue', 'fix(icons): correct generated icon props', 'patch'],
+      ['packages/dialtone-icons/vue/vite.config.js', 'build(icons): update the Vue icon bundle', 'patch'],
       ['packages/combinator/src/variants/variants_loader.js', 'refactor(combinator): retire a source preset\n\nBREAKING CHANGE: upstream preset ID retired', 'patch'],
       ['packages/dialtone-icons/src/keywords-icons.json', 'build(icons): update search keywords', 'patch'],
       ['packages/dialtone-icons/src/svg/icons/bell.svg', 'feat(icons): add an icon', 'minor'],
