@@ -1224,6 +1224,26 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     // variable that would move the geometry never reaches the node in the first place.
     if (d.width && (!hug || fixW)) bindNum(f, 'width', d.width);
     if (d.height && (!hug || fixH)) bindNum(f, 'height', d.height);
+    /**
+     * `edgeSlots`: A NEGATIVE INLINE MARGIN, HELD AS AN OVERHANG.
+     *
+     * Button's icons carry `margin-inline-start: -2px` (start) and `margin-inline-end: -2px`
+     * (end): the icon box is 18px and sits 2px outside the padding, but the layout only gives it
+     * 16. Figma has no negative margin, so the frame is the 16px the layout sees and its one
+     * child, absolutely positioned, hangs 2px over the outer edge. Everything after it lands where
+     * the code puts it — the label at 33.5px, not 35.5px.
+     */
+    if (D.edgeSlots && d.ov && f.layoutMode !== 'NONE' && f.children.length === 1) {
+      const [os, oe] = d.ov;
+      const kid = f.children[0];
+      const w = f.width, h = f.height;
+      kid.layoutPositioning = 'ABSOLUTE';
+      f.primaryAxisSizingMode = 'FIXED';
+      f.counterAxisSizingMode = 'FIXED';
+      f.resize(Math.max(0.01, w - os - oe), h);
+      kid.x = -os;
+      kid.y = 0;
+    }
     // `flexLayout`: hug up to the CSS maximum, then stop — what `max-inline-size` does.
     if (D.flexLayout && d.mw && f.layoutMode !== 'NONE') {
       f.maxWidth = d.mw[0];

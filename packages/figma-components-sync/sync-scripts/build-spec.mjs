@@ -772,6 +772,11 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
     // stroke width, because it was a different hand-authored asset).
     ...(anatomySwap && anatomySwap.gradient && node.classes && node.classes.includes(anatomySwap.selector)
       ? { gradFill: true } : {}),
+    // A NEGATIVE inline margin (Button's icons pull 2px outward) cannot be folded into padding, so
+    // it travels as an overhang: the frame occupies its box minus the margin and the content hangs
+    // over the edge. Only for configs that opt in with `edgeSlots`.
+    ...(cfg.edgeSlots && (m.left < 0 || m.right < 0)
+      ? { overhang: { start: m.left < 0 ? -m.left : 0, end: m.right < 0 ? -m.right : 0 } } : {}),
     layout: {
       display: s.display,
       direction: s.flexDirection === 'column' ? 'VERTICAL' : 'HORIZONTAL',

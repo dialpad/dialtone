@@ -23,7 +23,9 @@ padding; a `content` wrapper carries the vertical padding, the gap and the exist
 each slot is empty but as wide as the padding minus the gap (its minimum width), with its content
 centred on the height. Dropped-in content is flush at the edge with the code's gap after it, and
 nothing has to be deleted. `gap` is the slot's own margin on the content side (2px, `spacing-25`).
-The checks fold the built shape back into the DOM's flat one (`edge-slots.mjs`) and check the
+The same flag holds a negative inline margin as an overhang: the frame is the box the layout sees
+and its one child hangs over the outer edge (Button's icons, `-2px`), so the icon states match the
+code. The checks fold the built shape back into the DOM's flat one (`edge-slots.mjs`) and check the
 structure separately. Used by DtButton.
 `containerClass` (a string or a function of the combo) is the surface the component is mounted on,
 outside the measured tree, for variants that only make sense on one (links for dark backgrounds).

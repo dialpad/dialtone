@@ -30,6 +30,18 @@ const spacerWidth = (slot) => {
   return b ? b.width : null;
 };
 
+/**
+ * A frame that holds a negative inline margin as an OVERHANG (see `ov` in the builder): the frame
+ * is the box the layout sees and its one absolutely-positioned child hangs over the edge. The
+ * browser's element is the whole icon box, so the frame is given the child's box — the box the
+ * code measures — and its position and width then compare as they always did.
+ */
+function unhang (c) {
+  const kid = c.type === 'FRAME' && (c.children || []).length === 1 ? c.children[0] : null;
+  if (!kid || kid.layoutPositioning !== 'ABSOLUTE' || !kid.absoluteBoundingBox || !c.absoluteBoundingBox) return c;
+  return { ...c, absoluteBoundingBox: kid.absoluteBoundingBox };
+}
+
 /** The flat node, or the original when it is not in the edge-slot shape. */
 export function flattenEdgeSlots (node) {
   const kids = node.children || [];
@@ -49,7 +61,7 @@ export function flattenEdgeSlots (node) {
   // spinner, placed against the root) stays where it is, so the order is the DOM's order.
   const children = [];
   for (const c of kids) {
-    if (c === wrapper) children.push(...(wrapper.children || []));
+    if (c === wrapper) children.push(...(wrapper.children || []).map(unhang));
     else if (c !== lead && c !== trail) children.push(c);
   }
   return {

@@ -6,7 +6,7 @@
  */
 const BUILT_IN = {
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2025:91781',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2027:104347',
     /**
      * ICONS ARE BOOLEAN PROPERTIES; THE CIRCULAR BUTTON IS ITS OWN SET (`button_icon`).
      *
@@ -16,9 +16,11 @@ const BUILT_IN = {
      * Figma warns about performance (1,000).
      *
      * Now the set is built MERGED: one variant per combination of the remaining axes, with the
-     * icons behind "Start Icon" / "End Icon" toggles. The padding is fixed at the NO-ICON value
-     * (`slotSpacingDrift` below), so the default state is exact and an icon state is 2px wider per
-     * side than the code. That is a recorded divergence, listed in every run, not an unnoticed one.
+     * icons behind "Start Icon" / "End Icon" toggles. The code pulls each icon 2px outward with a
+     * negative margin, which the build holds as an OVERHANG (the icon frame is 16px and the 18px
+     * icon hangs over its outer edge; see `edgeSlots`), so an icon state is laid out exactly as the
+     * code lays it out. `slotSpacingDrift` below is only what the spec builder accepts between the
+     * empty and the filled MEASUREMENT, where the margin shows up as folded padding.
      * The circular, icon-only button (no label, one icon) has nothing to toggle and is a different
      * design surface, so it is its own set, `DtButtonIcon`.
      */

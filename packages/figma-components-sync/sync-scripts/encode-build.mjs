@@ -481,6 +481,9 @@ function encodeNode (n) {
   // `gr` fills the parent's main axis (flex-grow), `sc` centres on the cross axis
   // (align-self: center). Only for configs that opt in, so the payloads of every other
   // component stay byte-identical.
+  // `ov`: a negative inline margin the frame cannot hold. Its box is the measured one minus the
+  // overhang, and its single child hangs over that edge (see `edgeSlots` in the builder).
+  if (n.overhang && (n.overhang.start || n.overhang.end)) out.ov = [n.overhang.start, n.overhang.end];
   if (flexLayoutOn) {
     if (lay.grow) out.gr = 1;
     if (lay.self === 'center') out.sc = 1;

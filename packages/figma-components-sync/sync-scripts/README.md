@@ -300,13 +300,17 @@ geometry and a slot marker. The builder places the content hidden, and after
 hand-built components ("Start Icon", with its swap "Start Icon Choice"). Button uses this form
 (`merged: true` in its config, so it builds merged by default under its own name and page).
 
-`button.less` cuts x-padding by 2px a side when an icon is present, which no component property
-can reproduce, so the guard refuses a merged Button. A config can accept that divergence by name:
+Button's icons carry a negative inline margin (`margin-inline-start: -2px` on the start icon,
+`margin-inline-end: -2px` on the end icon), which the filled measurement reads as 2px less padding
+and gap than the empty one, and which no component property can reproduce, so the guard refuses a
+merged Button. A config can accept that difference between the two MEASUREMENTS by name:
 `slotSpacingDrift: { paddingLeft: 2, paddingRight: 2, itemSpacing: 2 }` lists the properties and the
-largest difference (px) it accepts, and the merged set keeps the EMPTY render's spacing, so the
-default state is exact and an icon state is up to 2px wider per side than the code. `build-spec`
-prints each accepted divergence (`drift`), and the verifier records each one in the filled
-sub-pass as an allowance. A larger difference, or any property not named, is still refused.
+largest difference (px) it accepts; `build-spec` prints each one (`drift`), and the verifier records
+each in the filled sub-pass as an allowance. A larger difference, or any property not named, is
+still refused. The BUILT set does not inherit the divergence: with `edgeSlots` the margin is held
+as an overhang (the icon frame is the 16px the layout sees and the 18px icon hangs 2px over its
+outer edge), so an icon state is laid out as the code lays it out. Measured in Figma against
+Chrome, every icon state differs only by the text-shaping gap.
 
 The axis form is exact and costs variants: Button as axes was 4,160, past Figma's warning at
 1,000 ("Components with more than 1000 variants may experience performance issues").
