@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync, mkdirSync, renameSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
 import { createConsumerFixture, fingerprintArtifact, sha256 } from './fixtures.mjs';
@@ -31,7 +31,7 @@ run('npm', ['install', '--ignore-scripts', '--registry=https://registry.npmjs.or
 const consumerRequire = createRequire(resolve(consumer, 'package.json'));
 const { parse } = consumerRequire('@vue/compiler-sfc');
 const { baseParse } = consumerRequire('@vue/compiler-dom');
-const installedIcons = await import(consumerRequire.resolve('@dialpad/dialtone-icons/vue'));
+const installedIcons = await import(pathToFileURL(consumerRequire.resolve('@dialpad/dialtone-icons/vue')).href);
 const metadata = JSON.parse(readFileSync(consumerRequire.resolve('@dialpad/dialtone/vue3/component-documentation.json')));
 const lintRequire = createRequire(resolve(root, 'package.json'));
 const { ESLint } = lintRequire('eslint');
