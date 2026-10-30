@@ -376,6 +376,8 @@ You can install both. The MCP server handles tool calls from an AI client, while
 
 ### Updating the Server
 
+Changes to the component, utility, token, icon and documentation sources bundled by the server are eligible for an MCP server release through the normal release process. A source change or documentation-site deployment does not update an installed server.
+
 Update the package in the directory where it was installed, using the same installation mode. For a project dependency:
 
 ```bash
@@ -386,7 +388,7 @@ Review and commit the manifest/lockfile change. For a dedicated personal install
 
 Restart the MCP server or reconnect/restart its client after package, configuration or Dialtone dependency changes. Starting a new conversation does not necessarily restart a long-lived server. The advisory startup version check does not update packages for you.
 
-Updating the server refreshes bundled references. It does not update the application's Dialtone dependencies or establish runtime/example compatibility. A source merge or local build does not publish a package. Docs-only keyword edits can reach the site before the server: current release selection watches server and query-core changes, so maintainers must arrange publication through the existing release process.
+Replies identify installed or bundled sources and versions. Updating the server refreshes its bundled data; it does not update your application's Dialtone packages or verify runtime or example behavior. Bundled source and keyword changes reach an installed server only after package publication, an update and a server restart. Changes to data selected from your installed project can be loaded by restarting the server; those local changes do not require publishing or updating the MCP package. Local generation, builds and source merge do not publish bundled updates.
 
 ### Managing Connections
 
