@@ -59,6 +59,10 @@ function selfPatterns(name) {
         .replace('{projectRoot}', `packages/${name}`),
     );
 }
+test('documentation assembly hashes compiler/parser declarations, pins and source helpers', () => {
+  const paths = ['package.json', 'pnpm-lock.yaml', 'apps/dialtone-documentation/package.json', 'packages/dialtone-css/package.json', 'packages/dialtone-docs/src/generators/example-template.mjs'];
+  assert.deepEqual(covered(paths, selfPatterns('dialtone-docs')), paths);
+});
 test('Vue generator and its shared helpers participate in the build hash', () => {
   assert.deepEqual(
     covered(generatorInputs, selfPatterns('dialtone-vue')),

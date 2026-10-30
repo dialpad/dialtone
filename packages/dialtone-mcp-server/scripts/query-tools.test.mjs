@@ -38,6 +38,12 @@ test('example discovery follows subjects/source sections and unknown IDs retain 
   assert.ok(missing.notes.some(note => note.includes('examples/button-default')));
   assert.equal(missing.continuation.tool, 'search_documentation');
 });
+
+test('utility discovery links its selected static source example', () => {
+  const utility = module.executeQueryTool('search_utility_classes', { query: 'd-ww-normal' }, resolveProjectData());
+  assert.match(utility.content[0].text, /examples\/utility-word-wrap-normal/);
+});
+
 async function fixture(run) {
   const server = new McpServer(
     { name: 'test-dialtone', version: '1.5.0' },

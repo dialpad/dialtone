@@ -1,5 +1,5 @@
 ---
-description: Update dialtone-docs content files to reflect source code changes made this session
+description: Review maintained guidance against an explicit Git diff; report first
 ---
 
-Run the **doc-sync-enforcer** skill to update documentation in `packages/dialtone-docs/src/content/`.
+Run the **doc-sync-enforcer** skill using the shared workflow in `.agents/resources/doc-sync.md`.

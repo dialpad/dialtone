@@ -64,6 +64,9 @@ try {
   }
   const search = await client.callTool({ name: 'search_components', arguments: { query: 'DtButton' } });
   assert.match(search.content[0].text, /examples\/button-default/);
+  assert.match(run(['utility', 'd-ww-normal']), /examples\/utility-word-wrap-normal/);
+  const utility = await client.callTool({ name: 'search_utility_classes', arguments: { query: 'd-ww-normal' } });
+  assert.match(utility.content[0].text, /examples\/utility-word-wrap-normal/);
   for (const query of ['stack', 'link']) {
     const unrelated = await client.callTool({ name: 'search_components', arguments: { query } });
     assert.doesNotMatch(unrelated.content[0].text, /Source examples/);

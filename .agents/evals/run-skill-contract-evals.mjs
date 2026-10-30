@@ -2,6 +2,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadMap, matchChangedPaths } from '../../scripts/check-doc-review.mjs';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -261,79 +262,9 @@ function commandsForChangedFiles(files) {
   return [...commands];
 }
 
-function isReleaseConfig(file) {
-  return (
-    file.includes('release') ||
-    file === '.releaserc' ||
-    file === '.releaserc.json'
-  );
-}
-
-function isBranchStrategy(file) {
-  return file.includes('branch') || file === 'AGENTS.md';
-}
-
-function isCommitConvention(file) {
-  return file === '.github/COMMIT_CONVENTION.md';
-}
-
 function docsForChangedFiles(files) {
-  const docs = new Set();
-  for (const file of files) {
-    if (file.startsWith('packages/dialtone-vue/')) {
-      docs.add(
-        'packages/dialtone-docs/src/content/development/development-component-workflow.md',
-      );
-      docs.add(
-        'packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md',
-      );
-      docs.add(
-        'packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md',
-      );
-      docs.add(
-        'packages/dialtone-docs/src/content/development/development-testing.md',
-      );
-    }
-    if (file.startsWith('packages/dialtone-tokens/')) {
-      docs.add(
-        'packages/dialtone-docs/src/content/development/development-design-tokens.md',
-      );
-      docs.add(
-        'packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md',
-      );
-    }
-    if (file.startsWith('packages/dialtone-css/')) {
-      docs.add(
-        'packages/dialtone-docs/src/content/development/development-css-utilities.md',
-      );
-    }
-    if (file.startsWith('packages/dialtone-icons/')) {
-      docs.add(
-        'packages/dialtone-docs/src/content/development/development-icons.md',
-      );
-    }
-    if (file.startsWith('.github/workflows/')) {
-      docs.add(
-        'packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md',
-      );
-    }
-    if (isReleaseConfig(file)) {
-      docs.add(
-        'packages/dialtone-docs/src/content/workflows/workflow-release-process.md',
-      );
-    }
-    if (isBranchStrategy(file)) {
-      docs.add(
-        'packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md',
-      );
-    }
-    if (isCommitConvention(file)) {
-      docs.add(
-        'packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md',
-      );
-    }
-  }
-  return [...docs];
+  const candidates = matchChangedPaths(files, loadMap(repoRoot)).candidates;
+  return [...new Set(candidates.flatMap(candidate => candidate.targets.map(target => target.path)))];
 }
 
 function prCreatePolicy(caseData) {
@@ -618,13 +549,12 @@ const docCases = JSON.parse(
 );
 for (const testCase of docCases) {
   const docs = docsForChangedFiles(testCase.changedFiles);
-  for (const expectedDoc of testCase.expectedDocs) {
-    assert(
-      docs.includes(expectedDoc),
-      `${testCase.id} missing doc mapping ${expectedDoc}`,
-      failures,
-    );
-  }
+  const expectedDocs = [...new Set(testCase.expectedDocs)];
+  assert(
+    docs.length === expectedDocs.length && expectedDocs.every((expectedDoc) => docs.includes(expectedDoc)),
+    `${testCase.id} expected doc mappings ${JSON.stringify(expectedDocs)}, got ${JSON.stringify(docs)}`,
+    failures,
+  );
 }
 
 const prCreateCases = JSON.parse(

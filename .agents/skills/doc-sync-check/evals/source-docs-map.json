@@ -6,7 +6,8 @@
       "packages/dialtone-docs/src/content/development/development-component-workflow.md",
       "packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md",
       "packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md",
-      "packages/dialtone-docs/src/content/development/development-testing.md"
+      "packages/dialtone-docs/src/content/development/development-testing.md",
+      ".agents/resources/rules/vue-components.md"
     ]
   },
   {
@@ -58,7 +59,51 @@
     "id": "branch_strategy",
     "changedFiles": ["AGENTS.md"],
     "expectedDocs": [
-      "packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md"
+      "packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md",
+      ".agents/resources/doc-sync.md",
+      ".agents/resources/agent-tooling-parity.md"
+    ]
+  },
+  {
+    "id": "cli_source",
+    "changedFiles": ["packages/dialtone-cli/src/commands/docs.ts"],
+    "expectedDocs": [
+      "apps/dialtone-documentation/docs/guides/cli/index.md",
+      "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
+      "packages/dialtone-query-core/README.md"
+    ]
+  },
+  {
+    "id": "mcp_source",
+    "changedFiles": ["packages/dialtone-mcp-server/src/query-tools.ts"],
+    "expectedDocs": [
+      "apps/dialtone-documentation/docs/guides/cli/index.md",
+      "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
+      "packages/dialtone-query-core/README.md"
+    ]
+  },
+  {
+    "id": "query_core_source",
+    "changedFiles": ["packages/dialtone-query-core/src/tools/docs.ts"],
+    "expectedDocs": [
+      "apps/dialtone-documentation/docs/guides/cli/index.md",
+      "apps/dialtone-documentation/docs/guides/mcp-server/index.md",
+      "packages/dialtone-query-core/README.md"
+    ]
+  },
+  {
+    "id": "root_nx_project",
+    "changedFiles": ["project.json"],
+    "expectedDocs": [
+      "packages/dialtone-docs/src/content/architecture/architecture-build-system.md",
+      "packages/dialtone-docs/src/content/architecture/architecture-monorepo-structure.md"
+    ]
+  },
+  {
+    "id": "vue3_generator",
+    "changedFiles": ["generator-dialtone/generators/vue3/index.js"],
+    "expectedDocs": [
+      "packages/dialtone-docs/src/content/development/development-component-workflow.md"
     ]
   }
 ]

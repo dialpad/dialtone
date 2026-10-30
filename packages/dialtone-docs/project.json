@@ -8,6 +8,10 @@
       },
       "inputs": [
         "{projectRoot}/package.json",
+        "{workspaceRoot}/package.json",
+        "{workspaceRoot}/pnpm-lock.yaml",
+        "{workspaceRoot}/apps/dialtone-documentation/package.json",
+        "{workspaceRoot}/packages/dialtone-css/package.json",
         { "externalDependencies": ["markdown-it"] },
         "{projectRoot}/src/**",
         "{workspaceRoot}/apps/dialtone-documentation/package.json",

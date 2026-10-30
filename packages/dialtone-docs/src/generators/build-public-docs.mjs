@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
-import { buildExampleRecords } from './documentation-examples.mjs';
+import { buildExampleRecords, buildExampleCoverage, selectedExampleIds } from './documentation-examples.mjs';
 import { glob } from 'glob';
 import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
@@ -247,14 +247,20 @@ async function build() {
   files.push(...await glob(directiveGlobs, { cwd: repoRoot, absolute: true }));
 
   const allRecords = [];
+  const coverage = [];
   for (const file of files) {
-    allRecords.push(...buildRecords(file));
+    const records = buildRecords(file);
+    allRecords.push(...records);
+    coverage.push(buildExampleCoverage({ rawFile: readFileSync(file, 'utf8'), filePath: relative(repoRoot, file).replace(/\\/g, '/'), records }));
   }
 
   const ids = new Set();
   for (const record of allRecords) {
     if (ids.has(record.id)) throw new Error(`Duplicate documentation ID: ${record.id}`);
     ids.add(record.id);
+  }
+  for (const id of selectedExampleIds) {
+    if (!ids.has(id)) throw new Error(`Selected example source missing: ${id}; retire or update its definition deliberately`);
   }
 
   // Sort alphabetically by docId; Array.sort is stable in V8, so section order
@@ -267,6 +273,14 @@ async function build() {
 
   mkdirSync(distDir, { recursive: true });
   writeFileSync(outputPath, JSON.stringify(allRecords, null, 2), 'utf8');
+  coverage.sort((a, b) => a.filePath < b.filePath ? -1 : a.filePath > b.filePath ? 1 : 0);
+  const report = { schemaVersion: 1, pages: coverage, summary: {
+    pages: coverage.length, liveCandidates: coverage.reduce((sum, page) => sum + page.liveCandidates, 0),
+    delivered: coverage.reduce((sum, page) => sum + page.deliveredIds.length, 0),
+    remaining: coverage.reduce((sum, page) => sum + page.remaining, 0),
+    completePages: coverage.filter(page => page.complete).map(page => page.filePath),
+  } };
+  writeFileSync(resolve(distDir, 'example-coverage.json'), JSON.stringify(report, null, 2), 'utf8');
   console.info(`public-docs.json built: ${allRecords.length} sections → ${outputPath}`);
 }
 

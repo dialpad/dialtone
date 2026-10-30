@@ -8,6 +8,8 @@ keywords: ["overflow wrap", "break word", "long url"]
 
 Use `d-ww-normal` to break words only at allowed break points.
 
+<!-- example-id: examples/utility-word-wrap-normal -->
+
 ```vue demo
 <div class="d-bgc-moderate d-py-100 d-px-200 d-bar-400 lg:d-w-350 d-w-500">
   <p class="d-ww-normal">Here's an example sentence to show how word-wrap works. Thisisasignlewordtodenotethedifferencebetweenthedifferentwaytowrapaword. Vivamus ullamcorperatduiaultrices eu lobortis nulla, sed vulputate orci. 这是一个中文例句，以举例说明断字的工作方式。単語分割の動作の例を示す日本語のサンプル文は次のとおりです。다음은 단어 분리 작동 방식의 예를 제공하는 한국어 샘플 문장입니다.</p>

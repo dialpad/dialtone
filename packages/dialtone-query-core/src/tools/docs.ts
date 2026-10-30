@@ -332,7 +332,8 @@ export function getDocumentationExampleIds(subject: string, data: DocumentationR
   const pages = new Set(componentDocumentation.pages.filter(page => page.components.some(reference =>
     ['api', 'companion'].includes(reference.relation) && normalizeComponentName(reference.canonicalName) === key))
     .map(page => page.docId));
-  return examples.filter(record => record.docId === (source?.docId ?? subject) || pages.has(record.docId)
+  return examples.filter(record => record.example!.utilities?.includes(subject.trim())
+    || record.docId === (source?.docId ?? subject) || pages.has(record.docId)
     || record.example!.directives.some(name => directiveIdentifiers(name).some(directive =>
       normalizeComponentName(directive) === key || directiveIdentifiers(subject).includes(directive))))
     .map(record => record.id);

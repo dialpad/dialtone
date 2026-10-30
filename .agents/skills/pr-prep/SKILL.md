@@ -37,7 +37,7 @@ Catch readiness, validation, docs, public-safety, and cross-package gaps before 
 2. Map changed files to packages and downstream impact.
 3. Check ticket mode and PR title readiness.
 4. Select validation commands and note pass/fail/skip status if already run.
-5. Run or invoke `doc-sync-check` logic for source areas that map to AI docs.
+5. Run `doc-sync-check` using `.agents/resources/doc-sync.md` and the actual PR comparison. Record current reviewed/not-relevant/review-needed decisions and recheck affected decisions after source, prose or map changes.
 6. Report blocking issues, warnings, and ready-to-create status.
 
 ## Done When
