@@ -1,0 +1,61 @@
+scripts/retrieval/cache-inputs.test.mjs
+  s_7f1d1d64baa803::t_93fbf83b09ddd4 1-155
+  s_7f1d1d64baa803::t_9a5aa5f97431a4 156-164
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_7e6a679d2b6514 1-41
+scripts/retrieval/cases.mjs
+  s_7f1d1d64baa803::t_928bc7b550854e 12-17,38,42,64,68,84,88,111,115
+  s_7f1d1d64baa803::t_180ad22d49a704 1-11,18-37,39-41,43-63,65-67,69-83,85-87,89-110,112-114,116-289
+scripts/retrieval/run.mjs
+  s_7f1d1d64baa803::t_d13a17d418f2c9 1-312
+  s_7f1d1d64baa803::t_869aa761bb398d 313
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_d13a17d418f2c9 1-70
+scripts/retrieval/cases.test.mjs
+  s_7f1d1d64baa803::t_c10e79089eb6e7 24-29,32-36
+  s_7f1d1d64baa803::t_180ad22d49a704 7-12,18-23
+  s_7f1d1d64baa803::t_182fd0a39b20e7 1-6,13-17,30-31,37-66
+packages/dialtone-vue/release-ci.config.cjs
+  s_7f1d1d64baa803::t_d13a17d418f2c9 14
+  s_7f1d1d64baa803::t_e569420a4c264c 11-13,15-17
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_3da5c5050cd78c 11-20,31-40,73,77-88,156-173
+packages/dialtone-cli/project.json
+  s_7f1d1d64baa803::t_4224cdb1887cc7 11-12
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_dc7c7a87e4cfd2 6,44,46,48-53,57-59
+packages/dialtone-mcp-server/project.json
+  s_7f1d1d64baa803::t_286caaeb0eec63 9,12-13
+packages/dialtone-query-core/project.json
+  s_7f1d1d64baa803::t_46a81f4ab642fe 10-11
+packages/dialtone-vue/project.json
+  s_7f1d1d64baa803::t_8b14872662a49e 15-18
+scripts/retrieval/assertions.mjs
+  s_7f1d1d64baa803::t_602b3ccc277cfb 1-63
+scripts/retrieval/assertions.test.mjs
+  s_7f1d1d64baa803::t_550d58eb93e49a 1-58
+scripts/retrieval/fixtures.mjs
+  s_7f1d1d64baa803::t_0df4e67fff8c5f 1-113
+scripts/retrieval/fixtures.test.mjs
+  s_7f1d1d64baa803::t_22bb12951bb394 1-105
+scripts/retrieval/offline-registry.mjs
+  s_7f1d1d64baa803::t_606cffc177e8f9 1-7
+scripts/retrieval/profiles.mjs
+  s_7f1d1d64baa803::t_b4ed70bf4db90e 1-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "be203d335b18a2421951bcf4701f91101c7ab604",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

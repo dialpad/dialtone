@@ -1,0 +1,23 @@
+apps/dialtone-documentation/docs/guides/migration/css-cascade-layers/index.md
+  s_e9445e5afc8ec0::t_6873d37585ea20 130,133,136,139
+  s_e9445e5afc8ec0::t_48b902f40ce521 140
+packages/dialtone-tokens/README.md
+  s_e9445e5afc8ec0::t_b712e7274dd113 39,42,45,48
+  s_e9445e5afc8ec0::t_99bee305d410ff 49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7a370abc26bf86cf827333ed694ed5129e90b6b1",
+  "prompts": {},
+  "sessions": {
+    "s_e9445e5afc8ec0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "eee9c514-d220-4821-88ca-43e89257f152",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

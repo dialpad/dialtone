@@ -1,0 +1,19 @@
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_7f1d1d64baa803::t_1e6205cd9ea852 129-137,203
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "60d340562012bd73b17c2dc99bf7114df66acd65",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
