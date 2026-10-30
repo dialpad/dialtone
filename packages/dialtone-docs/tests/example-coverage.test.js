@@ -6,13 +6,16 @@ const filePath = 'apps/dialtone-documentation/docs/utilities/typography/word-wra
 
 describe('authored example coverage', () => {
   it('accounts for live/display twins once and keeps partial coverage explicit', () => {
-    const rawFile = `## Normal\n<!-- example-id: examples/utility-word-wrap-normal -->\n${fence('<p class="d-ww-normal">Text</p>')}\n## Other\n${fence('<p>Live</p>\n<!-- @code -->\n<p>Display</p>')}`;
-    const page = buildExampleCoverage({ rawFile, filePath, records: [{ id: 'examples/utility-word-wrap-normal', example: {} }] });
-    expect(page.liveCandidates).toBe(2);
-    expect(page.deliveredIds).toEqual(['examples/utility-word-wrap-normal']);
-    expect(page.remaining).toBe(1);
-    expect(page.complete).toBe(false);
-    expect(page.candidates[1].displayTwin).toBe(true);
+    for (const frontmatter of ['', '---\ntitle: Word wrap\n---\n']) {
+      const rawFile = frontmatter + `## Normal\n<!-- example-id: examples/utility-word-wrap-normal -->\n${fence('<p class="d-ww-normal">Text</p>')}\n## Other\n${fence('<p>Live</p>\n<!-- @code -->\n<p>Display</p>')}`;
+      const page = buildExampleCoverage({ rawFile, filePath, records: [{ id: 'examples/utility-word-wrap-normal', example: {} }] });
+      expect(page.liveCandidates).toBe(2);
+      expect(page.deliveredIds).toEqual(['examples/utility-word-wrap-normal']);
+      expect(page.remaining).toBe(1);
+      expect(page.complete).toBe(false);
+      expect(page.candidates[1].displayTwin).toBe(true);
+      for (const candidate of page.candidates) expect(rawFile.split('\n')[candidate.sourceLine - 1]).toBe('```vue demo');
+    }
   });
 
   it('does not claim scratch, non-ready or MDX sources are supported', () => {
