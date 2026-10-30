@@ -1,0 +1,24 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_45d48c2158c493::t_f43f313e58ca70 415
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "90f60d1487b7331559a91e3df54f7ca8b75cddd7",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_45d48c2158c493": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a0d028-a2df-7522-a882-5148ad6458f9",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

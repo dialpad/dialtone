@@ -1,0 +1,14 @@
+packages/dialtone-css/lib/build/less/components/slider.less
+  h_c15b5755534093 86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6c7e47a1b110b76010d820e900bb05e822b39902",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
