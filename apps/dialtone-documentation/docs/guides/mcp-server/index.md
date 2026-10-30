@@ -106,7 +106,7 @@ The packaged server uses stdio. Configure your MCP client to launch the server p
 
 ## Configure MCP to use your installed Dialtone version
 
-The project root setting, `DIALTONE_PROJECT_ROOT`, tells the MCP server which installed Dialtone version to use. Set it to the absolute directory containing your application's `package.json` and dependency installation. Use a Claude Code local registration or the complete Codex user entry above; keep machine-specific absolute paths out of shared project files. A relative value, including `.`, cannot select installed data. The server does not infer this directory from its launch location, scan for nested applications, or request client workspace roots.
+The project root setting, `DIALTONE_PROJECT_ROOT`, tells the MCP server which application's installed Dialtone data to select. Set it to the absolute directory containing your application's `package.json`. Dependencies may be hoisted into an ancestor workspace when `DIALTONE_LOOKUP_ROOT` authorizes that search, as described below. Use a Claude Code local registration or the complete Codex user entry above; keep machine-specific absolute paths out of shared project files. A relative value, including `.`, cannot select installed data. The server does not infer this directory from its launch location, scan for nested applications, or request client workspace roots.
 
 For Claude Code, run this from the project root where you launch the client. This example selects a nested application at `apps/web`:
 

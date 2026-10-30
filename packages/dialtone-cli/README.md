@@ -11,7 +11,7 @@ npm install --save-dev --save-exact @dialpad/dialtone-cli
 npm exec --no -- dialtone --help
 ```
 
-Commit the manifest and lockfile. Run the examples below as `npm exec --no -- dialtone ...` from that directory, or install globally with `npm install -g @dialpad/dialtone-cli` and use `dialtone` directly. A bare local bin is not guaranteed to be on an assistant's PATH. See [installation and data selection](https://dialtone.dialpad.com/guides/cli/#installation).
+Commit the manifest and lockfile. The command blocks below use the shorter `dialtone` form and require a global installation (`npm install -g @dialpad/dialtone-cli`). For a project-local install, replace bare `dialtone` with `npm exec --no -- dialtone` and run it from the application directory. A bare local bin is not guaranteed to be on an assistant's PATH. See [installation and data selection](https://dialtone.dialpad.com/guides/cli/#installation).
 
 ## Commands
 
