@@ -336,7 +336,7 @@ For a project dependency, run `npm exec --no -- dialtone --help` from the applic
 
 ### Results do not match the project
 
-Run the command from inside the project. The source line names the package and version each kind of data came from; `bundled` means the CLI couldn't find installed data for it. A version warning means the installed packages don't match `package.json`; reinstall dependencies.
+Run the command from inside the project. The source line names the package and version each kind of data came from. `--bundled` intentionally selects the CLI's bundled data. Without that option, a `bundled` source means the CLI couldn't select installed data for that domain. A version warning means the installed packages don't match `package.json`; reinstall dependencies.
 
 ### A search returns no useful results
 
