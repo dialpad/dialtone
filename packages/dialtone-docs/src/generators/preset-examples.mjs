@@ -2,7 +2,6 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
 import { presetExampleId } from '../../../../scripts/lib/preset-example-id.mjs';
 import { assembleExampleRecord, publicIdentities } from './documentation-examples.mjs';
 import { assertTemplateBindings } from './example-template.mjs';
@@ -15,7 +14,7 @@ const read = path => {
 };
 
 /** Plain JSON is the only bridge from the Vue-aware producer to documentation generation. */
-export function buildPresetExampleRecords(report, { records, vuePackage }) {
+export function buildPresetExampleRecords(report, { records, vuePackage, componentPages }) {
   if (report?.schemaVersion !== 1 || !Array.isArray(report.inputs)
     || !report.inputs.length || !Array.isArray(report.entries)
     || typeof report.sourceVersions?.vueComponents !== 'string') {
@@ -53,8 +52,10 @@ export function buildPresetExampleRecords(report, { records, vuePackage }) {
     }
     if (hash(read(entry.source.filePath)) !== entry.source.hash) throw new Error(`Preset source changed: ${entry.id}`);
     if (entry.disposition !== 'eligible/setup-needed') continue;
+    const docId = componentPages.find(page => page.components.some(reference =>
+      reference.relation === 'api' && reference.canonicalName === entry.component))?.docId;
     const page = records.find(record => !record.example && record.category === 'components'
-      && normalizeComponentName(record.docTitle) === normalizeComponentName(entry.component));
+      && record.docId === docId);
     if (!page) {
       entry.disposition = 'unresolved';
       entry.reasons.push(`Documentation subject unavailable: ${entry.component}`);
