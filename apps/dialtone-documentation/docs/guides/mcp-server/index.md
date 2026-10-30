@@ -73,7 +73,7 @@ claude mcp add --scope user dialtone -- npm --prefix /absolute/path/to/mcp-tools
 
 Claude Code stores user-scoped entries in `~/.claude.json`; local entries in that file apply to one project. Project-scoped entries live in `.mcp.json`. For duplicate names, local scope takes precedence over project, then user scope. Managed settings can also constrain the connection; see [Claude's MCP documentation](https://code.claude.com/docs/en/mcp).
 
-A global installation is another option if the client's PATH contains its bin directory. For `npx`, choose an explicit package version when repeatability matters. It may use an installed package or install into npm's cache; an unqualified name does not guarantee the newest release. `npm exec --no` declines a requested installation, but may still use an ancestor workspace bin or a cached package.
+A global installation is another option if the client's PATH contains its bin directory. For `npx`, choose an explicit package version when repeatability matters. It may use an installed package or install into npm's cache; an unqualified name does not guarantee the newest release. `npm exec --no` declines a requested installation, but may still use an ancestor `node_modules/.bin`, npm's global bin or a cached package.
 
 Check a project or dedicated installation with `npm ls @dialpad/dialtone-mcp-server` from its installation directory; use `npm ls -g @dialpad/dialtone-mcp-server` for a global installation. For `npx`, check the connected server version; `npm ls` does not identify a cached selection. Use a resolved absolute entry when you need a fixed executable path.
 

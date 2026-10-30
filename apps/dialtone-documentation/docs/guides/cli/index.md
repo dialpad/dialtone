@@ -27,7 +27,7 @@ npm install --save-dev --save-exact @dialpad/dialtone-cli
 npm exec --no -- dialtone --help
 ```
 
-Commit the dependency manifest and lockfile. Use `npm exec --no -- dialtone ...` from that directory for the examples below. The runner can find hoisted workspace bins and declines a requested installation, but may still use an ancestor workspace bin or a cached package. Check `npm ls @dialpad/dialtone-cli` and the selected command/version. A package prefix selects an executable location; it does not make the CLI inspect that application's data from another working directory.
+Commit the dependency manifest and lockfile. Use `npm exec --no -- dialtone ...` from that directory for the examples below. The runner can find hoisted workspace bins and declines a requested installation, but may still use an ancestor `node_modules/.bin`, npm's global bin or a cached package. Check `npm ls @dialpad/dialtone-cli` and the selected command/version. A package prefix selects an executable location; it does not make the CLI inspect that application's data from another working directory.
 
 A global installation is optional:
 
