@@ -1,0 +1,21 @@
+.github/workflows/dialtone-documentation-tests.yml
+  s_7f1d1d64baa803::t_9c6e1484ed0fa6 16,28
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_9239eb305e34f2 66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6e230995e0d703ca5a5aa9f59b98ab381da12aa0",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
