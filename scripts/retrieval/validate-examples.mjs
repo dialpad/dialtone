@@ -10,6 +10,7 @@ import { getProfile } from './profiles.mjs';
 import { payloadHash } from '../../packages/dialtone-docs/src/generators/documentation-examples.mjs';
 import { assertTemplateBindings, assertStaticHtml } from '../../packages/dialtone-docs/src/generators/example-template.mjs';
 import { checkTemplateApi, consumerTuple } from './example-consumer.mjs';
+import { checkStaticCss } from './static-example.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const run = (file, args, cwd) => execFileSync(file, args, { cwd, stdio: 'pipe', encoding: 'utf8', timeout: 240000 });
@@ -65,22 +66,8 @@ for (const record of selected) {
     const cssPath = consumerRequire.resolve('@dialpad/dialtone/css');
     const css = readFileSync(cssPath, 'utf8');
     const postcss = createRequire(consumerRequire.resolve('vite'))('postcss');
-    const selectors = [];
-    const subjectRules = [];
-    postcss.parse(css).walkRules(rule => {
-      selectors.push(...rule.selectors);
-      if (record.example.utilities.some(name => rule.selectors.includes(`.${name}`))) subjectRules.push(rule);
-    });
-    const missingClasses = classes.filter(name => {
-      const escaped = name.replace(/[^a-zA-Z0-9_-]/g, character => `\\${character}`);
-      return !selectors.includes(`.${escaped}`);
-    });
-    for (const subject of record.example.utilities) {
-      assert.ok(classes.includes(subject), `Selected utility ${subject} absent from HTML`);
-      assert.ok(!missingClasses.includes(subject), `Selected utility ${subject} absent from CSS`);
-    }
-    assert.ok(subjectRules.some(rule => rule.nodes.some(node => node.prop === 'overflow-wrap' && node.value === 'normal')), 'Selected word-wrap declaration differs');
-    reports.push({ id, payloadHash: record.example.validation.payloadHash, consumerBuild: 'not-applicable', api: 'not-applicable', css: missingClasses.length ? 'partial' : 'passed', missingClasses, cssHash: sha256(readFileSync(cssPath)), checked: classes.filter(name => !missingClasses.includes(name)) });
+    const result = checkStaticCss(classes, record.example.utilities, postcss.parse(css));
+    reports.push({ id, payloadHash: record.example.validation.payloadHash, consumerBuild: 'not-applicable', api: 'not-applicable', ...result, cssHash: sha256(readFileSync(cssPath)) });
     continue;
   }
   assert.deepEqual(consumerTuple(JSON.parse(files['package.json'])), consumerTuple(pkg), `${id} runtime/tooling tuple differs from installed consumer manifest`);
