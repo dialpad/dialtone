@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [conventional-commits, commitlint, semantic-release, commit-format, jira, breaking-change, version-bump, scope, angular-preset]
 ai_summary: Dialtone commit format rules — type, optional scope, required JIRA ID, and how each type maps to a semantic version bump in the release pipeline.
-last_updated: 2026-03-04
+last_updated: 2026-10-18
 related_packages: []
 ---
 
@@ -63,7 +63,9 @@ chore: NO-JIRA upgrade vitest to v2
 
 *Exception: `dialtone-icons` and `dialtone-emojis` also trigger a **patch** release for `build`, `chore`, `ci`, `docs`, `style`, and `test` types. This covers icon additions that arrive via non-`feat` commits.
 
-Any commit type triggers a **major** release if the footer contains `BREAKING CHANGE:`.
+CLI and MCP also trigger patch releases for `build`, `chore`, `ci`, `docs` and `style` commits selected by their consumed lookup-source paths. Test-only paths, unrelated packages and automated `chore(release)` commits do not trigger these releases. See [the release process](./workflow-release-process.md) for the shared selection.
+
+Any commit type triggers a **major** release if the footer contains `BREAKING CHANGE:`, except for CLI/MCP producer-only data refreshes described in the release process.
 
 ## Scope
 
@@ -94,7 +96,7 @@ The JIRA validator pattern: `/^(NO-JIRA|[A-Z]{2,}-\d+)(?: [A-Z]{2,}-\d+)*/`
 
 ## Breaking Changes
 
-A breaking change forces a **major** version bump regardless of the commit type. Declare it in the footer with an empty line before:
+A breaking change forces a **major** version bump regardless of the commit type. For CLI/MCP, breaking changes confined to upstream data producers request patches; tool/shared-core contract changes retain major semantics. Declare the change in the footer with an empty line before:
 
 ```
 feat(tokens): DLT-9999 rename color token categories
@@ -127,6 +129,8 @@ This means squash-merging a PR produces one commit whose message is the PR title
 4. Only non-releasing types present → **no release**
 
 The highest level wins. One `feat` and five `fix` commits → minor bump.
+
+CLI/MCP apply the source-ownership exception described above before delegating to the installed analyzer. Other packages keep their existing rules.
 
 ## @dialpad/conventional-changelog-angular
 

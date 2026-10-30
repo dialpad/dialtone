@@ -368,6 +368,8 @@ You can install both. The MCP server handles tool calls from an AI client, while
 
 ### Updating the Server
 
+Changes to the component, utility, token, icon and documentation sources bundled by the server are eligible for an MCP server release through the normal release process. A source change or documentation-site deployment does not update an installed server.
+
 The server checks for updates after connecting. If the registry check succeeds and a different version is available, it writes this notice to stderr:
 
 ```text
@@ -378,7 +380,7 @@ The server checks for updates after connecting. If the registry check succeeds a
 
    To update:
    1. npm install -D @dialpad/dialtone-mcp-server@latest
-   2. Restart this conversation
+   2. Restart the server or MCP client
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -407,9 +409,9 @@ npm update -g @dialpad/dialtone-mcp-server
 
 To request the latest published package when the server starts, use `npx -y @dialpad/dialtone-mcp-server@latest` in your client configuration.
 
-After updating, restart your Claude Code conversation to load the new version.
+After updating the package and any version pin in your client configuration, restart the server or MCP client. A running server keeps the data it loaded at startup.
 
-Updating the server refreshes its bundled data. It does not update your application's Dialtone packages or verify runtime or example behavior. A change merged into Dialtone source reaches an installed server only after publication and an update to that package. Docs-only keyword edits can reach the site first: server release commit selection watches server and query-core changes, so maintainers must explicitly arrange a server publication through the existing release process. Local generation, builds, and source merge do not publish keyword updates.
+Replies identify installed or bundled sources and versions. Updating the server refreshes its bundled data; it does not update your application's Dialtone packages or verify runtime or example behavior. Bundled source and keyword changes reach an installed server only after package publication, an update and a server restart. Changes to data selected from your installed project can be loaded by restarting the server; those local changes do not require publishing or updating the MCP package. Local generation, builds and source merge do not publish bundled updates.
 
 ### Managing Connections
 

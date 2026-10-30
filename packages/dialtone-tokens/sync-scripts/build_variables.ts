@@ -32,7 +32,7 @@ import { writeFileSync } from 'fs';
 
 import FigmaApi, { ApiGetLocalVariablesResponse, loadLocalSnapshot } from './figma_api.js';
 import { generatePostVariablesPayload, FlattenedTokensByFile } from './token_import.js';
-import { gamutMapped, resetGamutLog } from './color.js';
+import { gamutMapped, resetGamutLog, composedColorFor } from './color.js';
 import { resolveModes, compareTokenNames, ResolvedToken, ValueOf, TokenValue } from './resolve_tokens.js';
 import {
   classify, Classified, ScopeViolation, figmaFontFamily, LINE_HEIGHT_FAMILY,
@@ -257,6 +257,7 @@ export function convert (classified: Classified[], { name: collection, publishAl
 
   const usable = classified.filter(c => !dropped.has(c.token.name));
   const emitted = new Set(usable.map(c => c.token.name));
+  const emittedByName = new Map(usable.map(c => [c.token.name, c.token]));
   const files: FlattenedTokensByFile = {};
 
   for (const mode of modesList) {
@@ -295,18 +296,12 @@ export function convert (classified: Classified[], { name: collection, publishAl
           // colour cannot express (it only decouples colour from opacity), so
           // those stay flattened literals; this checks specifically for
           // `alpha` and does nothing for the others.
-          if (
-            figmaType === 'COLOR' && modeValue.from?.modifier.type === 'alpha'
-            && emitted.has(modeValue.from.target)
-          ) {
-            // Rounded to 4 decimal places — ".07" * 100 is 7.000000000000001
-            // in floating point, which is real noise in the payload and in
-            // every log line, not a value anyone authored.
-            const opacity = Math.round(Number.parseFloat(modeValue.from.modifier.value) * 100 * 1e4) / 1e4;
-            if (Number.isFinite(opacity)) {
-              composedColor = { colorAlias: modeValue.from.target, opacity };
-              composed.push({ name: token.name, mode, target: modeValue.from.target });
-            }
+          //
+          // Only over an OPAQUE target; see `composedColorFor` for why.
+          if (figmaType === 'COLOR' && modeValue.from && emitted.has(modeValue.from.target)) {
+            const targetResolved = String(emittedByName.get(modeValue.from.target)!.modes[mode].resolved);
+            composedColor = composedColorFor(modeValue.from, targetResolved);
+            if (composedColor) composed.push({ name: token.name, mode, target: modeValue.from.target });
           }
         } else if (figmaType === 'BOOLEAN') {
           value = modeValue.resolved === true || modeValue.resolved === 'true';

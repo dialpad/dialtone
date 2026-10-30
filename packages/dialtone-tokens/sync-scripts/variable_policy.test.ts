@@ -173,16 +173,17 @@ describe('scope inference', () => {
     expect(scopesFor(token('color.border.default'))).toEqual(['STROKE_COLOR'])
   })
 
-  it('lets foreground reach shapes as well as text, so icons can use it', () => {
+  it('lets foreground reach shapes and strokes as well as text, so icons can use it', () => {
     // A Dialtone icon inherits the foreground colour, and an icon in Figma is a
-    // vector. Text-only scoping would leave every icon unable to reach it.
-    expect(scopesFor(token('color.foreground.primary'))).toEqual(['TEXT_FILL', 'SHAPE_FILL'])
-    expect(scopesFor(token('color.link.primary'))).toEqual(['TEXT_FILL', 'SHAPE_FILL'])
+    // vector whose colour is a fill or a stroke. Text-only scoping would leave
+    // every icon unable to reach it.
+    expect(scopesFor(token('color.foreground.primary'))).toEqual(['TEXT_FILL', 'SHAPE_FILL', 'STROKE_COLOR'])
+    expect(scopesFor(token('color.link.primary'))).toEqual(['TEXT_FILL', 'SHAPE_FILL', 'STROKE_COLOR'])
   })
 
   it('matches a role that ends the path as well as one that continues', () => {
     expect(scopesFor(token('shell.base.color.surface'))).toEqual(['FRAME_FILL', 'SHAPE_FILL'])
-    expect(scopesFor(token('shell.base.color.foreground'))).toEqual(['TEXT_FILL', 'SHAPE_FILL'])
+    expect(scopesFor(token('shell.base.color.foreground'))).toEqual(['TEXT_FILL', 'SHAPE_FILL', 'STROKE_COLOR'])
   })
 
   it('matches a role carrying a state suffix', () => {

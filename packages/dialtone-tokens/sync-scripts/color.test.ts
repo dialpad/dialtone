@@ -1,6 +1,58 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 
-import { colorApproximatelyEqual, parseColor, parseCssColor, rgbToHex, gamutMapped, resetGamutLog } from './color.js'
+import { colorApproximatelyEqual, parseColor, parseCssColor, rgbToHex, gamutMapped, resetGamutLog, isTranslucent, composedColorFor } from './color.js'
+
+describe('isTranslucent', () => {
+  it('is true for a colour with an alpha below 1', () => {
+    expect(isTranslucent('oklch(0.8 0.01 80 / 0.45)')).toBe(true)
+    expect(isTranslucent('#00000080')).toBe(true)
+  })
+
+  it('is true for a near-opaque alpha', () => {
+    expect(isTranslucent('oklch(0.8 0.01 80 / 0.9995)')).toBe(true)
+  })
+
+  it('is false for an opaque colour, with or without an alpha', () => {
+    expect(isTranslucent('oklch(0.8 0.01 80)')).toBe(false)
+    expect(isTranslucent('oklch(0.8 0.01 80 / 1)')).toBe(false)
+    expect(isTranslucent('#000000')).toBe(false)
+  })
+})
+
+describe('composedColorFor', () => {
+  const alpha = (target: string, value: string) => ({ target, modifier: { type: 'alpha', value } })
+
+  it('composes over an opaque target, with the opacity as a percentage', () => {
+    expect(composedColorFor(alpha('color.surface.bold', '.6'), 'oklch(0.8 0.01 80)'))
+      .toEqual({ colorAlias: 'color.surface.bold', opacity: 60 })
+  })
+
+  it('rounds away floating point noise in the opacity', () => {
+    expect(composedColorFor(alpha('a.b', '.07'), '#000000')?.opacity).toBe(7)
+  })
+
+  // muted/active is muted/hover at 60%, and muted/hover is 45% itself: Figma
+  // would render 0.45 where the CSS has 0.60.
+  it('returns nothing over a translucent target, so the caller flattens', () => {
+    expect(composedColorFor(alpha('action.color.background.muted.hover', '.6'), 'oklch(0.8 0.01 80 / 0.45)'))
+      .toBeUndefined()
+  })
+
+  it('decides per call, so one token can compose in one mode and flatten in the other', () => {
+    const from = alpha('color.surface.moderate-opaque', '.6')
+    expect(composedColorFor(from, 'oklch(0.8 0.01 80)')).toBeDefined()
+    expect(composedColorFor(from, 'oklch(0.3 0.01 80 / 0.5)')).toBeUndefined()
+  })
+
+  it('ignores modifiers other than alpha, which change the colour itself', () => {
+    expect(composedColorFor({ target: 'a.b', modifier: { type: 'lighten', value: '.1' } }, '#000000')).toBeUndefined()
+    expect(composedColorFor(undefined, '#000000')).toBeUndefined()
+  })
+
+  it('returns nothing for a non-numeric opacity', () => {
+    expect(composedColorFor(alpha('a.b', 'nope'), '#000000')).toBeUndefined()
+  })
+})
 
 describe('colorApproximatelyEqual', () => {
   it('compares by hex value', () => {

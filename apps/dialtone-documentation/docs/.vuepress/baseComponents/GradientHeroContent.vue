@@ -16,7 +16,7 @@
     <dt-text
       as="h1"
       kind="headline"
-      strength="medium"
+      strength="semibold"
       density="200"
       align="center"
       class="d-p-400 home-gradient-hero-title d-wmx-1300 d-mx-auto"
@@ -25,15 +25,10 @@
     </dt-text>
     <dt-text
       as="p"
-      variant="body-md"
-      :size="viewport.pick({
-        default: '200',
-        md: '350',
-      })"
+      kind="body"
       align="center"
       strength="medium"
-      density="300"
-      class="d-px-500 d-o80 d-wmx-1000 d-mx-auto"
+      class="d-px-500 d-o80 d-wmx-1000 d-mx-auto home-type-lead"
       wrap="balance"
     >
       Start with the system of components, design tokens, and guidance that make good design the default.
@@ -42,6 +37,7 @@
       <dt-button
         to="/dialtone/"
         :size="400"
+        class="home-type-button"
       >
         Docs
       </dt-button>
@@ -50,7 +46,7 @@
         :size="400"
         kind="muted"
         importance="outlined"
-        class="d-bgc-primary h:d-bgc-secondary d-fc-primary d-bc-moderate"
+        class="d-bgc-primary h:d-bgc-secondary d-fc-primary d-bc-moderate home-type-button"
       >
         What's New
       </dt-button>
@@ -78,14 +74,19 @@ const viewport = useViewportBreakpoints();
   opacity: var(--text-opacity);
 }
 
-.home-gradient-hero-title {
-  font-size: var(--dt-text-headline-3xl-font-size);
+/* Brand hero headline: 32px → 48px, weight 600, line height 1.0, -0.01em tracking.
+   Page-scoped so it wins over DtText's size and density classes. */
+.dialpad-design-home .home-gradient-hero-title {
+  font-size: 32px;
   font-family: "Season Sans", var(--dt-font-family-body);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
   text-wrap: balance;
   transition: none;
 
   @media screen and (min-width: 640px) {
-    font-size: var(--dt-font-size-650);
+    font-size: 48px;
   }
 }
 </style>
