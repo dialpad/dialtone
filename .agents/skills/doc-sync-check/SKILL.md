@@ -1,13 +1,13 @@
 ---
 name: doc-sync-check
-description: Check whether source changes need Dialtone AI docs updates. Use before PR prep/create or when source package behavior changes.
+description: Review maintained contributor guidance from an explicit source diff. Use before PR prep/create or when source package behavior changes.
 ---
 
 # Dialtone Doc Sync Check
 
 ## Goal
 
-Report whether changed source files require updates to `packages/dialtone-docs/src/content/**`, suggest grounded updates, and ask before applying them.
+Report maintained guidance that needs source review, record current semantic decisions, and ask before applying updates outside existing task authorization.
 
 ## Trigger
 
@@ -24,25 +24,25 @@ Report whether changed source files require updates to `packages/dialtone-docs/s
 ## Constraints
 
 - Default mode is report-only.
-- Do not edit docs unless the user explicitly confirms apply mode.
+- Apply edits only within existing explicit task authorization; otherwise ask for apply mode.
 - Suggestions must be grounded in actual source diff and existing docs.
 - Do not invent functionality.
 - Preserve frontmatter and human-authored content.
 
 ## Workflow
 
-1. Map changed files to docs using `doc-sync.md`.
-2. Read source diff and expected docs.
-3. Classify each mapping as `up to date`, `likely stale`, `missing`, or `not needed`.
-4. Suggest concrete sections or updates.
-5. Ask whether Codex should apply updates.
-6. In apply mode, patch docs and update `last_updated` when content changes.
+1. Follow `.agents/resources/doc-sync.md`: run the command with an explicit merge-base/direct, staged or worktree boundary.
+2. Read the relevant source diff and selected target sections from the reported context.
+3. Record `reviewed`, `not-relevant` or `review-needed`, with resolved boundary, mapping ID, inspected locations and reason.
+4. Reassess after relevant source, prose or map changes; a touched doc does not prove review.
+5. Respect existing task authorization; ask before applying updates when necessary.
+6. Preserve content/frontmatter and update `last_updated` for changed corpus prose.
 
 ## Done When
 
-- Every mapped source area has a doc-sync classification.
+- Mapped and unmapped recognized paths have a current review outcome or explicit outstanding disposition.
 - Suggested updates name the target docs and source evidence.
-- No docs were edited unless apply mode was explicitly confirmed.
+- Any applied edit was within explicit task authorization.
 
 ## Verification
 

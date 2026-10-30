@@ -39,6 +39,8 @@ If breaking changes found: ensure `BREAKING CHANGE:` footer in commits, suggest 
 
 ### 3. Documentation Completeness
 
+Follow `.agents/resources/doc-sync.md` for the actual PR comparison and current semantic review decisions. Reassess after relevant source, prose or map changes.
+
 For each changed component, read `.agents/resources/rules/vue-components.md`
 and assess its Component Artifact Pipeline, including CLI/MCP lookup data and
 Combinator outputs.
