@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { createGuidanceManifest, selectGuidance, validateGuidanceResult } from '../src/generators/example-guidance.mjs';
+import { applyGuidance, createGuidanceManifest, selectGuidance, validateGuidanceResult } from '../src/generators/example-guidance.mjs';
+
+import { buildRecords } from '../src/generators/build-public-docs.mjs';
+import { fileURLToPath } from 'node:url';
 
 const config = { model: 'test-model', toolingHash: 'a'.repeat(64) };
 const facts = { id: 'examples/docs/components/button/default', sources: [
@@ -15,6 +18,19 @@ function artifact(input, notes) {
 }
 
 describe('generated example guidance', () => {
+  it('adds guidance to retrieval prose without changing consumer proof or source records', () => {
+    const records = buildRecords(fileURLToPath(new URL('../../../apps/dialtone-documentation/docs/components/button.md', import.meta.url))).filter(record => record.example);
+    const data = createGuidanceManifest([{ id: records[0].id, sources: [{ id: 'example', text: '<dt-button>Save</dt-button>' }], dependencies: [] }], { model: 'test-model', toolingHash: 'a'.repeat(64) });
+    const input = data.entries[0];
+    const notes = [{ text: 'Use a literal $& action label.', references: [{ source: 'example', quote: 'Save' }] }];
+    const selection = selectGuidance(data, [{ schemaVersion: 1, entries: [{ id: input.id, inputHash: input.inputHash, notes, status: 'complete' }] }]);
+    const [enriched] = applyGuidance(records, selection);
+    expect(enriched.content).toContain('Use a literal $& action label.');
+    expect(enriched.example).toEqual(records[0].example);
+    expect(records[0].content).not.toContain('Use a literal $& action label.');
+    expect(enriched.content).not.toContain(input.inputHash);
+  });
+
   it('reuses equivalent facts but invalidates changed source or model', () => {
     const [input] = manifest([facts]).entries;
     const reordered = { dependencies: facts.dependencies, sources: facts.sources, id: facts.id };

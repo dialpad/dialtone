@@ -21,20 +21,6 @@ describe('authored usage guidance', () => {
     expect(formatBuildError(error, false)).toContain('Two demos\nAdd a key');
   });
 
-  test('collects guidance inputs for the same examples emitted by the public page producer', () => {
-    const inputs = [];
-    const records = buildRecords(resolve(docsRoot, 'components/button.md'), { onGuidanceInput: value => inputs.push(value) });
-    expect(inputs.length).toBeGreaterThan(0);
-    expect(inputs.map(value => value.id)).toEqual(records.filter(record => record.example).map(record => record.id));
-    for (const input of inputs) {
-      const record = records.find(record => record.id === input.id);
-      expect(record.content).toContain(input.template);
-      expect(input.components).toEqual(record.example.components.map(component => component.canonicalName));
-      expect(input).not.toHaveProperty('validation');
-      expect(input).not.toHaveProperty('manualReview');
-    }
-  });
-
   test('Modal keeps recommendations distinct from discouraged uses', () => {
     const record = buildRecords(resolve(docsRoot, 'components/modal.md'))
       .find(record => record.id === 'components/modal#usage');

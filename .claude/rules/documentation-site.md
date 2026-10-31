@@ -29,7 +29,7 @@ Components registered in `docs/.vuepress/client.js` are available in all markdow
 
 ## Curated discovery keywords
 
-For documentation examples, read the [shared source-example authoring and maintenance contract](../../.agents/resources/documentation-examples.md). Preserve stable IDs, source-derived setup, generated-only guidance, representation-specific validation and explicit remaining coverage.
+For documentation examples, read the [shared source-example authoring and maintenance contract](../../.agents/resources/documentation-examples.md). Preserve stable IDs, source-derived setup, representation-specific validation and explicit remaining coverage.
 
 Use page frontmatter `keywords` as the maintained source for alternate names or interaction phrases. Add a nonempty string array only when likely searches are not already covered; do not copy synonyms into component descriptions, export aliases, or agent API inventories. The site search and CLI/MCP discovery reuse these terms. CLI/MCP also recognize complete keyword phrases inside longer requests. Regular plural discovery does not require repeated keywords. Generic filler is not contextual evidence, and separate entries do not form a new phrase. Prefer distinctive, useful concepts; avoid uninformative generic words or another component's name when that would mislead. Related concepts can remain when they help distinguish legitimate choices.
 

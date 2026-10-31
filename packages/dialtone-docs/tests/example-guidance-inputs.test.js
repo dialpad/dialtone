@@ -2,6 +2,8 @@ import { expect, it } from 'vitest';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
+import { buildRecords } from '../src/generators/build-public-docs.mjs';
+import { fileURLToPath } from 'node:url';
 import { prepareGuidanceFacts } from '../src/generators/example-guidance-inputs.mjs';
 import { createGuidanceManifest } from '../src/generators/example-guidance.mjs';
 
@@ -30,3 +32,17 @@ it('follows component source imports and fingerprints changed helpers without re
     expect(createGuidanceManifest([facts()], config).entries[0].inputHash).not.toBe(withAsset);
   } finally { rmSync(root, { recursive: true }); }
 });
+
+it('collects guidance inputs for the same examples emitted by the public page producer', () => {
+    const inputs = [];
+    const records = buildRecords(fileURLToPath(new URL('../../../apps/dialtone-documentation/docs/components/button.md', import.meta.url)), { onGuidanceInput: value => inputs.push(value) });
+    expect(inputs.length).toBeGreaterThan(0);
+    expect(inputs.map(value => value.id)).toEqual(records.filter(record => record.example).map(record => record.id));
+    for (const input of inputs) {
+      const record = records.find(record => record.id === input.id);
+      expect(record.content).toContain(input.template);
+      expect(input.components).toEqual(record.example.components.map(component => component.canonicalName));
+      expect(input).not.toHaveProperty('validation');
+      expect(input).not.toHaveProperty('manualReview');
+    }
+  });
