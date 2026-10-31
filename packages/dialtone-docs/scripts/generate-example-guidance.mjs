@@ -53,7 +53,12 @@ export async function generateGuidance(manifest, {
       usage.estimatedUsd = usd(usage.inputTokens, usage.outputTokens);
       if (data.stop_reason !== 'end_turn') throw new Error(`Provider stopped: ${data.stop_reason}`);
       const text = data.content?.filter(block => block.type === 'text').map(block => block.text).join('') ?? '';
-      const result = validateGuidanceResult(input, JSON.parse(text));
+      let result;
+      try { result = validateGuidanceResult(input, JSON.parse(text)); }
+      catch (error) {
+        failure = error instanceof SyntaxError ? 'Provider returned invalid JSON' : error.message;
+        throw error;
+      }
       entries.push({ ...result, status: result.notes.length ? 'complete' : 'completed-empty', responseHash: guidanceHash(result), ...(origin ? { origin } : {}) });
     } catch (error) {
       // Do not persist arbitrary provider bodies, credential values or model reasoning.

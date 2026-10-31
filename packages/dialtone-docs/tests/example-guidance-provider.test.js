@@ -41,6 +41,7 @@ it('records invalid output as an error without retrying or promoting evidence', 
     return { ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify({ ...answer(data), validation: 'passed' }) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
   } });
   expect(output.entries[0].status).toBe('error');
+  expect(output.entries[0].error).toContain('Invalid guidance fields');
   expect(output.entries[0]).not.toHaveProperty('validation');
   expect(calls).toBe(1);
 });

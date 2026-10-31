@@ -70,7 +70,7 @@ jobs:
         run: >-
           node packages/dialtone-docs/scripts/generate-example-guidance.mjs
           inputs/example-guidance-inputs.json example-guidance.json
-          --limit 3 --budget-usd 1
+          --limit 3 --budget-usd 0.6
           --ids examples/button-default,examples/button-disabled-tooltip,examples/toggle-v-model
       - uses: actions/upload-artifact@v4
         if: always()
