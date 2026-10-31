@@ -381,7 +381,8 @@ The server checks for updates after connecting. If the registry check succeeds a
    Latest:  v1.2.1
 
    To update:
-   1. npm install -D @dialpad/dialtone-mcp-server@latest
+   1. Follow the update steps for your installation:
+      https://dialtone.dialpad.com/guides/mcp-server/#configuration
    2. Restart the server or MCP client
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

@@ -114,7 +114,8 @@ for (const scenario of ['offline', 'http-error', 'invalid-json', 'missing', 'inv
 test('valid update and current-version notices stay on stderr', { timeout: 8000 }, async t => {
   const updateNotice = await probe(t, 'update');
   assert.match(updateNotice, /Update Available[\s\S]*Latest: {2}v99\.0\.0/);
-  assert.match(updateNotice, /1\. npm install -D @dialpad\/dialtone-mcp-server@latest/);
+  assert.match(updateNotice, /https:\/\/dialtone\.dialpad\.com\/guides\/mcp-server\/#configuration/);
+  assert.doesNotMatch(updateNotice, /\bnpm (?:install|update)\b/);
   assert.match(updateNotice, /2\. Restart the server or MCP client/);
   assert.match(await probe(t, 'current'), /up to date/);
 });
