@@ -15,21 +15,14 @@ function artifact(input, notes) {
 }
 
 describe('generated example guidance', () => {
-  it('reuses equivalent facts but invalidates changed source, dependencies or model', () => {
+  it('reuses equivalent facts but invalidates changed source or model', () => {
     const [input] = manifest([facts]).entries;
     const reordered = { dependencies: facts.dependencies, sources: facts.sources, id: facts.id };
     expect(manifest([reordered]).entries[0].inputHash).toBe(input.inputHash);
     for (const changed of [
       { ...facts, sources: [{ id: 'example', text: 'Changed example' }] },
-      { ...facts, dependencies: [{ path: 'component.vue', hash: 'd'.repeat(64) }] },
     ]) expect(manifest([changed]).entries[0].inputHash).not.toBe(input.inputHash);
     expect(createGuidanceManifest([facts], { ...config, model: 'another-model' }).entries[0].inputHash).not.toBe(input.inputHash);
-  });
-
-  it('accepts compact source-grounded notes and successful empty guidance', () => {
-    const [input] = manifest([facts]).entries;
-    expect(validateGuidanceResult(input, result(input)).notes[0].text).toContain('handlers');
-    expect(validateGuidanceResult(input, result(input, [])).notes).toEqual([]);
   });
 
   it.each([

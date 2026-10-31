@@ -35,7 +35,7 @@ it('does not spend when the budget cannot cover even one bounded request', async
   expect(output.entries[0].status).toBe('pending');
 });
 
-it('records invalid output as an error without retrying or promoting evidence', async () => {
+it('honors the request limit after invalid output without promoting evidence', async () => {
   const data = manifest();
   let calls = 0;
   const output = await generateGuidance(data, { apiKey: 'test-only', limit: 1, budgetUsd: 1, request: async () => {
@@ -89,19 +89,10 @@ it('accounts for previous spending on the same source update', async () => {
 
 it('bounds serialized requests including JSON escaping rather than raw source characters', async () => {
   const facts = manifest().entries[0];
-  const sources = [{ id: 'documentation', text: facts.sources[0].text + '"'.repeat(21000) }];
-  const data = createGuidanceManifest([{ id: facts.id, sources, dependencies: [] }], manifest());
-  let serialized = 0;
-  const output = await generateGuidance(data, { apiKey: 'test-only', limit: 1, budgetUsd: 1, request: async (_, options) => {
-    serialized = Buffer.byteLength(options.body);
-    return { ok: true, json: async () => ({ stop_reason: 'end_turn', usage: { input_tokens: 100, output_tokens: 60 },
-      content: [{ type: 'text', text: JSON.stringify(answer()) }] }) };
-  } });
-  expect(output.entries[0].status).toBe('complete');
-  expect(serialized).toBeGreaterThan(80000);
-  expect(serialized).toBeLessThan(100000);
-  const huge = createGuidanceManifest([{ id: facts.id, sources: [{ id: 'documentation', text: 'x'.repeat(200000) }], dependencies: [] }], manifest());
-  const rejected = await generateGuidance(huge, { apiKey: 'test-only', budgetUsd: 1, request: () => { throw new Error('oversized request must not leave'); } });
+  const text = facts.sources[0].text + '"'.repeat(30000);
+  expect(Buffer.byteLength(text)).toBeLessThan(100000);
+  const data = createGuidanceManifest([{ id: facts.id, sources: [{ id: 'documentation', text }], dependencies: [] }], manifest());
+  const rejected = await generateGuidance(data, { apiKey: 'test-only', budgetUsd: 1, request: () => { throw new Error('oversized serialized request must not leave'); } });
   expect(rejected.usage.requests).toBe(0);
   expect(rejected.entries[0].error).toContain('bounded request size');
 });

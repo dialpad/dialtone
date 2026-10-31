@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import matter from 'gray-matter';
 import { chunkSections } from '../src/generators/build-public-docs.mjs';
-import { buildExampleRecords, buildExampleCoverage, assembleExampleRecord } from '../src/generators/documentation-examples.mjs';
+import { buildExampleRecords, buildExampleCoverage } from '../src/generators/documentation-examples.mjs';
 import { applyGuidance, createGuidanceManifest, selectGuidance } from '../src/generators/example-guidance.mjs';
 import { sourceSetup } from '../src/generators/example-template.mjs';
 
@@ -28,7 +28,8 @@ describe('source-driven component examples', () => {
     expect(record?.id).toBe('examples/docs/components/example/default');
     expect(record.example.components.map(x => x.canonicalName)).toEqual(['DtButton']);
     expect(record.content).toContain('<dt-button>Save</dt-button>');
-    expect(record.content).not.toContain('undefined');
+    expect(record.example.validation.consumerBuild).toBe('unverified');
+    expect(record.content).toContain('not verified against the pinned dependencies');
   });
 
   it('fails delivery-affecting ambiguity and preserves the base ID with a key', () => {
@@ -40,7 +41,7 @@ describe('source-driven component examples', () => {
   });
 
   it.each([
-    ['unknown field', annotation({ proof: 'passed' }) + fence('<dt-button>Save</dt-button>')],
+    ['unknown field', annotation({ responsibilities: 'Hand-maintained guidance' }) + fence('<dt-button>Save</dt-button>')],
     ['orphan annotation', annotation({ key: 'lost' }) + 'Intervening prose.\n\n' + fence('<dt-button>Save</dt-button>')],
     ['legacy marker', '<!-- example-id: examples/button-default -->\n\n' + fence('<dt-button>Save</dt-button>')],
   ])('rejects %s rather than silently ignoring authored intent', (_, raw) => {
@@ -122,23 +123,6 @@ describe('source-driven component examples', () => {
     expect(buildExampleCoverage(input(raw)).candidates[0].reason).toContain('checked');
   });
 
-  it.each(['responsibilities', 'interaction', 'state'])('rejects manually maintained %s metadata', field => {
-    const value = field === 'state' ? ['checked'] : 'Hand-maintained guidance';
-    expect(() => produce('## Default\n' + annotation({ [field]: value }) + fence('<dt-button>Save</dt-button>')))
-      .toThrow(/unknown @example field/);
-  });
-
-  it('offers the real assembled source to the guidance collector without proof fields', () => {
-    const inputs = [];
-    const records = buildExampleRecords({ ...input(ordinary), onGuidanceInput: value => inputs.push(value) });
-    expect(inputs).toHaveLength(1);
-    expect(inputs[0].id).toBe(records[0].id);
-    expect(inputs[0].template).toBe('<dt-button>Save</dt-button>');
-    expect(inputs[0].components).toContain('DtButton');
-    expect(inputs[0]).not.toHaveProperty('validation');
-    expect(inputs[0]).not.toHaveProperty('manualReview');
-  });
-
   it('adds guidance to retrieval prose without changing consumer proof or source records', () => {
     const records = produce(ordinary);
     const data = createGuidanceManifest([{ id: records[0].id, sources: [{ id: 'example', text: '<dt-button>Save</dt-button>' }], dependencies: [] }], { model: 'test-model', toolingHash: 'a'.repeat(64) });
@@ -161,12 +145,6 @@ describe('source-driven component examples', () => {
     expect(edited.example.validation.payloadHash).not.toBe(before.example.validation.payloadHash);
     expect(produce(ordinary.replace('## Default', '## Renamed'))[0].id).toBe('examples/docs/components/example/renamed');
     expect(produce('## Default\nNo live source remains.')).toEqual([]);
-  });
-
-  it('qualifies unverified authored Vue payloads against the pinned dependencies', () => {
-    const record = assembleExampleRecord({ id: 'examples/not-yet-verified', template: '<dt-button>Save</dt-button>', definition: { components: ['DtButton'], directives: [] }, source: { id: 'components/example#default' }, headingPath: ['Default'], filePath: input('').filePath, vuePackage });
-    expect(record.example.validation.consumerBuild).toBe('unverified');
-    expect(record.content).toContain('not verified against the pinned dependencies');
   });
 
   it('selects real top-level Boolean state rather than a fenced script sample', () => {

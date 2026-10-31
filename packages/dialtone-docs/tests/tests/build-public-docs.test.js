@@ -26,6 +26,13 @@ describe('authored usage guidance', () => {
     const records = buildRecords(resolve(docsRoot, 'components/button.md'), { onGuidanceInput: value => inputs.push(value) });
     expect(inputs.length).toBeGreaterThan(0);
     expect(inputs.map(value => value.id)).toEqual(records.filter(record => record.example).map(record => record.id));
+    for (const input of inputs) {
+      const record = records.find(record => record.id === input.id);
+      expect(record.content).toContain(input.template);
+      expect(input.components).toEqual(record.example.components.map(component => component.canonicalName));
+      expect(input).not.toHaveProperty('validation');
+      expect(input).not.toHaveProperty('manualReview');
+    }
   });
 
   test('Modal keeps recommendations distinct from discouraged uses', () => {
