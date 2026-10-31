@@ -22,5 +22,11 @@ it('follows component source imports and fingerprints changed helpers without re
     expect(createGuidanceManifest([facts()], config).entries[0].inputHash).toBe(before);
     writeFileSync(helper, 'export default true;');
     expect(createGuidanceManifest([facts()], config).entries[0].inputHash).not.toBe(before);
+    const asset = resolve(root, 'packages/dialtone-vue/asset.bin');
+    writeFileSync(helper, 'import "./asset.bin"; export default true;');
+    writeFileSync(asset, Buffer.from([255]));
+    const withAsset = createGuidanceManifest([facts()], config).entries[0].inputHash;
+    writeFileSync(asset, Buffer.from([254]));
+    expect(createGuidanceManifest([facts()], config).entries[0].inputHash).not.toBe(withAsset);
   } finally { rmSync(root, { recursive: true }); }
 });

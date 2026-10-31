@@ -2,7 +2,7 @@
 
 Keep example markup in its authored VuePress page. Ready public component pages automatically deliver self-contained `vue demo` and `vue demo-only` fences when their imports resolve to public APIs, supported source state is available and the source API checker passes. No page or example publishing list is maintained. A comment is not an opt-in: most deliverable fences need no annotation. Source-valid delivery does not prove compatibility with the pinned consumer packages.
 
-The default ID is `examples/docs/<docId>/<section-slug>`, using the H2/H3 path before prose duplicate suffixes. A second unkeyed live demo in a deliverable section fails the build. Give the additional demo a source-adjacent key, or use an exact ID to preserve an identity across a move:
+The default ID is `examples/docs/<docId>/<section-slug>`, using the H2/H3 path before prose duplicate suffixes. A second unkeyed live demo in a deliverable section fails the build and CI. The diagnostic identifies the page, section and fence lines, gives a copyable key example and appears as a clickable CI annotation. Keep the existing section to preserve its ID; give the added demo a key or distinct heading. Give the additional demo a source-adjacent key, or use an exact ID to preserve an identity across a move:
 
 ```html
 <!-- @example {"key":"compact"} -->

@@ -29,7 +29,9 @@ it('keeps source examples exact-addressable without changing broad discovery', (
   expect(getDocumentationExampleIds('utilities/typography/word-wrap#normal', documentation)).toEqual(['examples/utility-word-wrap-normal']);
   expect(getDocumentationExampleIds('DtTooltipDirective', documentation)).toContain('examples/button-disabled-tooltip');
   expect(getDocumentationExampleIds('DtTooltip', documentation)).toContain('examples/button-disabled-tooltip');
-  expect(getDocumentationExampleIds('components/button#variants-disabled', documentation)).toEqual(['examples/button-disabled-tooltip']);
+  const disabledExamples = getDocumentationExampleIds('components/button#variants-disabled', documentation);
+  expect(disabledExamples).toContain('examples/button-disabled-tooltip');
+  expect(disabledExamples).not.toContain('examples/button-default');
   expect(getDocumentationExampleIds('components/button#loading', documentation)).toEqual(expect.arrayContaining(['examples/button-default', authoredCanary]));
   expect(searchDocumentation('button', documentation)).toEqual(searchDocumentation('button', documentation.filter(record => !record.example)));
 });

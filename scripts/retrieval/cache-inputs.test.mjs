@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -62,6 +62,26 @@ function selfPatterns(name, target = 'build') {
 test('documentation assembly hashes compiler/parser declarations, pins and source helpers', () => {
   const paths = ['package.json', 'pnpm-lock.yaml', 'apps/dialtone-documentation/package.json', 'packages/dialtone-css/package.json', 'packages/dialtone-docs/src/generators/example-template.mjs', 'packages/dialtone-docs/src/generators/source-examples.mjs', 'scripts/retrieval/example-consumer.mjs', 'packages/dialtone-vue/directives/tooltip_directive/index.js'];
   assert.deepEqual(covered(paths, selfPatterns('dialtone-docs')), paths);
+});
+test('ignored guidance results participate in the documentation runtime cache key', async t => {
+  const runtime = inputs('dialtone-docs').selfInputs.find(input => input.runtime?.includes('--cache-key'))?.runtime;
+  assert.ok(runtime, 'documentation has no runtime input for ignored guidance');
+  const directory = await mkdtemp(join(tmpdir(), 'dialtone-guidance-cache-'));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  for (const file of ['scripts/check-example-guidance.mjs', 'src/generators/example-guidance.mjs']) {
+    const target = join(directory, 'packages/dialtone-docs', file);
+    await mkdir(dirname(target), { recursive: true });
+    await copyFile(new URL(`../../packages/dialtone-docs/${file}`, import.meta.url), target);
+  }
+  const key = () => execFileSync(process.execPath, runtime.split(' ').slice(1), { cwd: directory, encoding: 'utf8' }).trim();
+  assert.equal(key(), 'absent');
+  const file = join(directory, 'packages/dialtone-docs/.generated/example-guidance/reviewed.json');
+  await mkdir(dirname(file), { recursive: true });
+  await writeFile(file, JSON.stringify({ entries: [{ notes: [{ text: 'First reviewed note.' }] }] }));
+  const first = key();
+  assert.notEqual(first, 'absent');
+  await writeFile(file, JSON.stringify({ entries: [{ notes: [{ text: 'Changed reviewed note.' }] }] }));
+  assert.notEqual(key(), first);
 });
 test('Vue generator and its shared helpers participate in the build hash', () => {
   assert.deepEqual(

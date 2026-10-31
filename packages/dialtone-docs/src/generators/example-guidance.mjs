@@ -6,13 +6,12 @@ Return zero, one or two plain-text notes, at most 240 Unicode characters combine
 Explain concrete adoption responsibilities or limitations; omit generic setup and accessibility checklists.
 Never claim testing, compatibility, runtime, browser or human-review proof. Never invent code, imports or dependencies.
 Each note needs a short exact supporting quotation from a supplied source. Do not quote source hashes.
-Return only the requested JSON object, with the supplied example ID and input hash.`;
+Return only the requested notes JSON object. Identity and provenance are supplied by the caller.`;
 
 export const GUIDANCE_SCHEMA = {
   type: 'object', additionalProperties: false,
-  required: ['id', 'inputHash', 'notes'],
+  required: ['notes'],
   properties: {
-    id: { type: 'string' }, inputHash: { type: 'string' },
     notes: { type: 'array', items: {
       type: 'object', additionalProperties: false, required: ['text', 'references'],
       properties: {
@@ -109,7 +108,8 @@ export function selectGuidance(manifest, artifacts = [], { strict = false } = {}
   if (strict && entries.some(entry => !['complete', 'completed-empty'].includes(entry.status))) {
     throw new Error(`Matching successful guidance required for ${entries.filter(entry => !['complete', 'completed-empty'].includes(entry.status)).length} examples`);
   }
-  return { schemaVersion: 1, manifestHash: manifest.hash, entries,
+  return { schemaVersion: 1, manifestHash: manifest.hash,
+    model: manifest.model, policyHash: manifest.policyHash, toolingHash: manifest.toolingHash, entries,
     digest: guidanceHash(entries), summary: Object.fromEntries(['pending', 'error', 'completed-empty', 'complete']
       .map(status => [status, entries.filter(entry => entry.status === status).length])) };
 }
@@ -121,6 +121,7 @@ export function applyGuidance(records, selection) {
     const entry = byId.get(record.id);
     if (entry?.status !== 'complete' || !entry.notes.length) return record;
     const text = `Usage notes: ${entry.notes.map(note => note.text).join(' ')}`;
-    return { ...record, content: record.content.replace(/\n\n(## (?:package\.json|example\.html)\n)/, `\n\n${text}\n\n$1`) };
+    return { ...record, content: record.content.replace(/\n\n(## (?:package\.json|example\.html)\n)/,
+      (_, heading) => `\n\n${text}\n\n${heading}`) };
   });
 }

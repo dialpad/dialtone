@@ -9,12 +9,13 @@
         "{projectRoot}/package.json",
         "{projectRoot}/tsconfig.json",
         "{projectRoot}/rollup.config.js",
+        "{workspaceRoot}/packages/dialtone-docs/scripts/check-example-guidance.mjs",
         { "dependentTasksOutputFiles": "**/*.{js,json,d.ts}", "transitive": true }
       ],
       "outputs": ["{projectRoot}/build"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "pnpm exec rollup -c"
+        "command": "pnpm exec rollup -c && node ../dialtone-docs/scripts/check-example-guidance.mjs --copy-to dialtone-cli"
       }
     },
     "test": {

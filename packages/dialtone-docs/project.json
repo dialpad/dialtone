@@ -16,6 +16,7 @@
         "{workspaceRoot}/packages/dialtone-css/package.json",
         { "externalDependencies": ["markdown-it"] },
         "{projectRoot}/src/**",
+        "{projectRoot}/scripts/**",
         "{workspaceRoot}/apps/dialtone-documentation/package.json",
         "{workspaceRoot}/apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js",
         "{workspaceRoot}/scripts/retrieval/profiles.mjs",
@@ -36,11 +37,10 @@
         "{workspaceRoot}/scripts/retrieval/example-consumer.mjs",
         { "dependentTasksOutputFiles": "**/dist/component-documentation.json", "transitive": true },
         { "dependentTasksOutputFiles": "**/vue/dist/**/*", "transitive": true },
-        "{projectRoot}/.generated/example-guidance/*.json",
+        { "runtime": "node packages/dialtone-docs/scripts/check-example-guidance.mjs --cache-key" },
         { "env": "EXAMPLE_GUIDANCE_MODEL" },
-        "{workspaceRoot}/packages/dialtone-vue/**/*.js",
-        "{workspaceRoot}/packages/dialtone-vue/**/*.vue",
-        "{workspaceRoot}/common/**/*.js"
+        "{workspaceRoot}/packages/dialtone-vue/**/*",
+        "{workspaceRoot}/common/**"
       ],
       "outputs": [
         "{projectRoot}/dist/**"

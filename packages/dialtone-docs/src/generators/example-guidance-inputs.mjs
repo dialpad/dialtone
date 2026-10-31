@@ -15,9 +15,10 @@ function moduleFiles(entry, root, seen) {
   const path = relative(root, absolute).replaceAll('\\', '/');
   if (path.startsWith('../') || path === '..') throw new Error('Guidance source dependency leaves the repository');
   if (seen.has(path)) return;
-  const source = readFileSync(absolute, 'utf8');
-  seen.set(path, hash(source));
+  const bytes = readFileSync(absolute);
+  seen.set(path, hash(bytes));
   if (!codeExtensions.has(extname(path))) return;
+  const source = bytes.toString('utf8');
   const scripts = path.endsWith('.vue')
     ? Object.values(parse(source).descriptor).filter(value => value && typeof value === 'object' && value.type === 'script').map(value => value.content)
     : [source];

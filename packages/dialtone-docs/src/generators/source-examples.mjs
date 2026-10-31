@@ -211,7 +211,19 @@ export function readSourceExamples(options) {
   for (const candidate of candidates) {
     if (candidate.unkeyed && candidates.filter(other => other.baseId === candidate.baseId && other.unkeyed).length > 1
       && candidates.some(other => other.baseId === candidate.baseId && other.eligible && other.unkeyed)) {
-      throw new Error(`${filePath}:${candidate.sourceLine}: ambiguous example section; add an @example key or id`);
+      const lines = candidates.filter(other => other.baseId === candidate.baseId && other.unkeyed)
+        .map(other => other.sourceLine).join(', ');
+      const error = new Error([
+        `${filePath}:${candidate.sourceLine}: ambiguous example section "${candidate.headingPath.join(' > ')}"; live fences at lines ${lines}.`,
+        `These demos would share the derived ID ${candidate.baseId}.`,
+        'To preserve an existing demo ID, keep its section and give the added demo a distinct key.',
+        'Add a distinct heading, or put this comment immediately before the added demo opening fence:',
+        '<!-- @example {"key":"short-name"} -->',
+        'Replace short-name with a meaningful unique name. Only whitespace may separate the comment and fence.',
+        'Re-run: pnpm nx run dialtone-docs:build',
+      ].join('\n'));
+      Object.assign(error, { code: 'AMBIGUOUS_EXAMPLE_ID', filePath, sourceLine: candidate.sourceLine });
+      throw error;
     }
   }
   const unique = new Set();

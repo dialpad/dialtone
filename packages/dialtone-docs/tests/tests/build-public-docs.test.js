@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildRecords, chunkSections, buildReadyComponentPage } from '@src/generators/build-public-docs.mjs';
+import { buildRecords, chunkSections, buildReadyComponentPage, formatBuildError } from '@src/generators/build-public-docs.mjs';
 import { readKeywords } from '@src/utils/keywords.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -9,6 +9,18 @@ const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
 const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
 const docsRoot = resolve(__dirname, '../../../../apps/dialtone-documentation/docs');
 describe('authored usage guidance', () => {
+  test('makes source ambiguity a clickable, escaped CI diagnostic', () => {
+    const error = Object.assign(new Error('Two demos\nAdd a key: 100% source metadata'), {
+      code: 'AMBIGUOUS_EXAMPLE_ID', filePath: 'docs/components/example.md', sourceLine: 12,
+    });
+    const annotation = formatBuildError(error, true);
+    expect(annotation).toContain('::error file=docs/components/example.md,line=12,');
+    expect(annotation).toContain('%0A');
+    expect(annotation).toContain('100%25');
+    expect(annotation).not.toContain('\n');
+    expect(formatBuildError(error, false)).toContain('Two demos\nAdd a key');
+  });
+
   test('collects guidance inputs for the same examples emitted by the public page producer', () => {
     const inputs = [];
     const records = buildRecords(resolve(docsRoot, 'components/button.md'), { onGuidanceInput: value => inputs.push(value) });

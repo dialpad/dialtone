@@ -33,7 +33,8 @@ describe('source-driven component examples', () => {
 
   it('fails delivery-affecting ambiguity and preserves the base ID with a key', () => {
     const second = fence('<dt-button>Cancel</dt-button>');
-    expect(() => produce(ordinary + '\n' + second)).toThrow(/key|ambig/i);
+    expect(() => produce(ordinary + '\n' + second)).toThrow(/example.md:\d+.*Default.*lines \d+, \d+/);
+    expect(() => produce(ordinary + '\n' + second)).toThrow('<!-- @example {"key":"short-name"} -->');
     const records = produce(ordinary + '\n' + annotation({ key: 'compact' }) + second);
     expect(records.map(x => x.id)).toEqual(['examples/docs/components/example/default', 'examples/docs/components/example/default/compact']);
   });
@@ -142,12 +143,12 @@ describe('source-driven component examples', () => {
     const records = produce(ordinary);
     const data = createGuidanceManifest([{ id: records[0].id, sources: [{ id: 'example', text: '<dt-button>Save</dt-button>' }], dependencies: [] }], { model: 'test-model', toolingHash: 'a'.repeat(64) });
     const input = data.entries[0];
-    const notes = [{ text: 'Use a meaningful action label.', references: [{ source: 'example', quote: 'Save' }] }];
+    const notes = [{ text: 'Use a literal $& action label.', references: [{ source: 'example', quote: 'Save' }] }];
     const selection = selectGuidance(data, [{ schemaVersion: 1, entries: [{ id: input.id, inputHash: input.inputHash, notes, status: 'complete' }] }]);
     const [enriched] = applyGuidance(records, selection);
-    expect(enriched.content).toContain('Use a meaningful action label.');
+    expect(enriched.content).toContain('Use a literal $& action label.');
     expect(enriched.example).toEqual(records[0].example);
-    expect(records[0].content).not.toContain('Use a meaningful action label.');
+    expect(records[0].content).not.toContain('Use a literal $& action label.');
     expect(enriched.content).not.toContain(input.inputHash);
   });
 

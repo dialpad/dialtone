@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
@@ -214,8 +214,8 @@ async function build() {
   const manifest = createGuidanceManifest(facts, {
     model: process.env.EXAMPLE_GUIDANCE_MODEL || 'claude-sonnet-5-5', toolingHash,
   });
-  const guidanceFiles = await glob('packages/dialtone-docs/.generated/example-guidance/*.json', { cwd: repoRoot, absolute: true });
-  const guidance = selectGuidance(manifest, guidanceFiles.sort().map(file => JSON.parse(readFileSync(file, 'utf8'))));
+  const guidanceFile = resolve(repoRoot, 'packages/dialtone-docs/.generated/example-guidance/reviewed.json');
+  const guidance = selectGuidance(manifest, existsSync(guidanceFile) ? [JSON.parse(readFileSync(guidanceFile, 'utf8'))] : []);
   allRecords = applyGuidance(allRecords, guidance);
 
   const presetPath = resolve(repoRoot, 'packages/combinator/.generated/preset-examples.json');
@@ -261,11 +261,18 @@ async function build() {
   console.info(`public-docs.json built: ${allRecords.length} sections → ${outputPath}`);
 }
 
+export function formatBuildError(error, githubActions = process.env.GITHUB_ACTIONS === 'true') {
+  if (!githubActions || error.code !== 'AMBIGUOUS_EXAMPLE_ID') return `Build failed: ${error.message}`;
+  const data = value => String(value).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
+  const property = value => data(value).replaceAll(':', '%3A').replaceAll(',', '%2C');
+  return `::error file=${property(error.filePath)},line=${error.sourceLine},title=Ambiguous example IDs::${data(error.message)}`;
+}
+
 // Execute only when run as a script, not when imported as a module (e.g. by tests)
 const isMain = process.argv[1] === __filename;
 if (isMain) {
   build().catch(err => {
-    console.error('Build failed:', err.message);
+    console.error(formatBuildError(err));
     process.exit(1);
   });
 }
