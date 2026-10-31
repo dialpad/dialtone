@@ -93,3 +93,31 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
       `missing mandatory suite ${required}`,
     );
 });
+
+
+test('guidance reuses the latest available source artifact after a partial Unit Tests rerun', async () => {
+  const guidance = readWorkflow('example-guidance.yml');
+  const script = guidance.jobs.generate.steps.find(step => step.id === 'source').with.script;
+  const head = 'a'.repeat(40);
+  const outputs = new Map();
+  const github = { rest: {
+    actions: { getWorkflowRun: async () => ({ data: {
+      conclusion: 'success', event: 'pull_request', path: '.github/workflows/unit_tests.yml', head_sha: head, run_attempt: 2,
+    } }), listWorkflowRunArtifacts: () => {} },
+    repos: { listPullRequestsAssociatedWithCommit: async () => ({ data: [
+      { state: 'open', base: { repo: { full_name: 'dialpad/dialtone' } }, head: { sha: head }, number: 1504 },
+    ] }) },
+  }, paginate: async () => [
+    { name: 'example-guidance-inputs-1', expired: false },
+    { name: 'example-guidance-inputs-2', expired: true },
+    { name: 'example-guidance-inputs-3', expired: false },
+    { name: 'unrelated', expired: false },
+  ] };
+  const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+  await new AsyncFunction('github', 'context', 'core', 'process', script)(github,
+    { eventName: 'workflow_run', payload: { workflow_run: { id: 12 } }, repo: { owner: 'dialpad', repo: 'dialtone' } },
+    { setOutput: (key, value) => outputs.set(key, value), notice: () => {} },
+    { env: { TOOLING_REF: head, GITHUB_REPOSITORY: 'dialpad/dialtone' } });
+  assert.equal(outputs.get('enabled'), 'true');
+  assert.equal(outputs.get('attempt'), '1');
+});

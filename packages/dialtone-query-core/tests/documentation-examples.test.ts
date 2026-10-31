@@ -16,6 +16,7 @@ it('keeps source examples exact-addressable without changing broad discovery', (
   const excluded = coverage.entries.filter((entry: { id: string; disposition: string }) => entry.disposition !== 'delivered');
   for (const id of ['examples/unknown', ...excluded.map((entry: { id: string }) => entry.id)])
     expect(getDocumentationDetail({ id }, documentation).match).toBe('no-match');
+  // DLT-3710: source additions may grow associations; preserve legacy links and wrong-section negatives.
   const authoredCanary = 'examples/docs/components/button/variants-critical';
   expect(getDocumentationDetail({ id: authoredCanary }, documentation).match).toBe('exact');
   expect(getDocumentationExampleIds('DtButton', documentation)).toEqual(expect.arrayContaining([

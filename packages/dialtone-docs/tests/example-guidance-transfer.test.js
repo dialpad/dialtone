@@ -46,7 +46,7 @@ const receiptFor = (id, attempt, amount) => ({ schemaVersion: 1, entries: [], us
 const mergedSource = [{ number: 1504, merged_at: '2026-10-31', head: { sha: sourceHead } }];
 
 it('restores beyond the first history page and counts previous attempts of the current run', () => {
-  const skipped = Array.from({ length: 100 }, (_, id) => oldRun(1000 + id, { conclusion: 'skipped', display_title: 'Unrelated source' }));
+  const skipped = Array.from({ length: 100 }, (_, id) => oldRun(1000 + id, { conclusion: 'skipped' }));
   const request = endpoint => {
     if (endpoint.includes('runs?') && endpoint.endsWith('page=1')) return { total_count: 102, workflow_runs: skipped };
     if (endpoint.includes('runs?') && endpoint.endsWith('page=2')) return { total_count: 102, workflow_runs: [oldRun(12, { run_attempt: 2 }), oldRun(11)] };
@@ -79,4 +79,22 @@ it('authenticates the executing dispatch workflow independently of a claimed too
 it('fails closed when the server reports an incomplete workflow history', () => {
   expect(() => restoreActionGuidance('dialpad/dialtone', { generation: true, toolingRef,
     request: () => ({ total_count: 2, workflow_runs: [] }) })).toThrow('Incomplete guidance workflow history');
+});
+
+
+it('charges missing receipts only when a completed run could have reached the model', () => {
+  const request = endpoint => {
+    if (endpoint.includes('runs?')) return { total_count: 3, workflow_runs: [oldRun(12), oldRun(11), oldRun(10)] };
+    if (endpoint.includes('/12/attempts/1/jobs?')) return { total_count: 1, jobs: [{ name: 'generate', steps: [
+      { name: 'Generate changed notes within the remaining authorization', conclusion: 'skipped', started_at: '2026-10-31T15:00:00Z' },
+    ] }] };
+    if (endpoint.includes('/11/attempts/1/jobs?')) return { total_count: 1, jobs: [{ name: 'generate', steps: [
+      { name: 'Generate changed notes within the remaining authorization', conclusion: 'failure', started_at: '2026-10-31T15:00:00Z' },
+    ] }] };
+    throw new Error(`Unavailable endpoint ${endpoint}`);
+  };
+  const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead, currentRun: '13',
+    toolingRef, request, readArtifact: () => { throw new Error('No receipt'); } });
+  // A skipped model step spent nothing; started and unverifiable attempts remain conservative.
+  expect(result.spentUsd).toBe(2);
 });

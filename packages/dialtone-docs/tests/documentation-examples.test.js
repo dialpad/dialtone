@@ -109,6 +109,7 @@ describe('authored documentation example evidence', () => {
     expect(() => assemble(raw)).toThrow(message);
   });
 
+  // DLT-3710 resolves public imports dynamically; unknown APIs remain unresolved.
   it('keeps unknown APIs unresolved instead of inventing an import', () => {
     expect(assemble(live.replace('<dt-button>Live</dt-button>', '<app-widget />'))).toEqual([]);
   });

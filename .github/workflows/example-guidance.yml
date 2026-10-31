@@ -104,11 +104,16 @@ jobs:
               return;
             }
             const available = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {...context.repo, run_id: sourceRun, per_page: 100});
-            if (!available.some(artifact => artifact.name === `example-guidance-inputs-${attempt}` && !artifact.expired)) {
+            const sourceAttempt = available.filter(artifact => !artifact.expired)
+              .map(artifact => Number(/^example-guidance-inputs-(\d+)$/.exec(artifact.name)?.[1]))
+              .filter(value => Number.isSafeInteger(value) && value > 0 && value <= attempt)
+              .sort((a, b) => b - a)[0];
+            if (!sourceAttempt) {
               core.setOutput('enabled', 'false');
               core.notice('No lookup source manifest; no inference needed.');
               return;
             }
+            attempt = sourceAttempt;
             core.setOutput('enabled', 'true');
             const corpus = process.env.BOOTSTRAP_HEAD === head;
             core.setOutput('run', String(sourceRun));

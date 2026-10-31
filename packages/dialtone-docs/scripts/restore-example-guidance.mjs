@@ -72,6 +72,21 @@ function allPages(endpoint, key, request = api) {
   }
 }
 
+// Missing receipts remain charged unless complete job metadata proves the model never ran.
+function modelCouldHaveRun(repository, run, request) {
+  if (!run.conclusion) return true;
+  try {
+    const jobs = allPages(`repos/${repository}/actions/runs/${run.id}/attempts/${run.run_attempt ?? 1}/jobs`, 'jobs', request);
+    return jobs.filter(job => job.name === 'generate').some(job => {
+      if (job.conclusion === 'skipped') return false;
+      if (!Array.isArray(job.steps)) return true;
+      const step = job.steps.find(step => step.name === 'Generate changed notes within the remaining authorization');
+      return !step || (step.conclusion !== 'skipped' && (step.started_at === undefined
+        || Boolean(step.started_at && !step.started_at.startsWith('0001-'))));
+    });
+  } catch { return true; }
+}
+
 function reviewedSource(repository, head, pullRequest, publication, request = api) {
   const pulls = request(`repos/${repository}/commits/${head}/pulls`);
   return pulls.some(pr => {
@@ -106,6 +121,7 @@ export function restoreActionGuidance(repository, {
       if (String(latest.id) === String(currentRun) && attempt === currentAttempt) continue;
       const run = attempt === (latest.run_attempt ?? 1) ? latest
         : request(`repos/${repository}/actions/runs/${latest.id}/attempts/${attempt}`);
+      if (run.conclusion === 'skipped') continue;
       let receipt;
       try {
         if (!['success', 'failure', 'cancelled'].includes(run.conclusion)) continue;
@@ -126,7 +142,10 @@ export function restoreActionGuidance(repository, {
       } catch {
         console.warn(`Guidance artifact ${run.id}/${attempt} unavailable; exact archived bytes or a visible refresh may be needed.`);
       } finally {
-        if (generation) spentUsd += guidanceSpend(run, receipt, sourceHead, currentRun, currentAttempt, budgetUsd);
+        if (generation) {
+          const charge = guidanceSpend(run, receipt, sourceHead, currentRun, currentAttempt, budgetUsd);
+          if (charge && (receipt || modelCouldHaveRun(repository, run, request))) spentUsd += charge;
+        }
       }
     }
   }
