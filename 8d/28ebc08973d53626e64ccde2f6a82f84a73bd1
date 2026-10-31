@@ -1,0 +1,66 @@
+packages/dialtone-vue/components/Modal/Modal.test.js
+  s_b007f3976ebd62::t_9a3a2a82bbaca0 131-138,141-143,145-160,162-169
+  s_b007f3976ebd62::t_f45ec6bcf266d3 230-232
+  s_b007f3976ebd62::t_84ef5f9578a80a 181-185,187-189,191-192
+  s_b007f3976ebd62::t_2ffb0d6c4b4927 33-35,43
+  s_b007f3976ebd62::t_a426e1a888a5a2 236-237,240
+  s_b007f3976ebd62::t_670e22489c99d5 170-180,186,190,193-194
+  s_b007f3976ebd62::t_7cd591668e55b5 121-130,220-229,233-235,238-239,241
+  s_b007f3976ebd62::t_3ba0202035c9cd 139-140
+  s_b007f3976ebd62::t_a8e28ea40596b2 144
+  s_b007f3976ebd62::t_cbaf0ea8ca87e8 161
+  s_b007f3976ebd62::t_3b4f4c1787176f 200-202,208-215,217-219
+  s_b007f3976ebd62::t_a8e2b886d70c90 196-199,203-205
+  s_b007f3976ebd62::t_fc07adca8a39f0 216
+  s_b007f3976ebd62::t_fe7fb256acb338 195
+  s_b007f3976ebd62::t_fb0b4618d1f0ce 206-207
+packages/dialtone-vue/components/Modal/Modal.vue
+  s_b007f3976ebd62::t_9ae54224c5428d 576
+  s_b007f3976ebd62::t_dde45e759de177 578
+  s_b007f3976ebd62::t_2d3ebfcb9c1a3f 585,587-588,591-592
+  s_b007f3976ebd62::t_13715d444239a0 607-609
+  s_b007f3976ebd62::t_0e826f24ca7f5b 440-456
+  s_b007f3976ebd62::t_b70d785aa64f9e 605-606,610-612
+  s_b007f3976ebd62::t_927cfed5fc17a6 156,158,198,199-200,215-216
+  s_b007f3976ebd62::t_3a059c92743736 18
+  s_b007f3976ebd62::t_2647ab1bce10c5 554-563
+  s_b007f3976ebd62::t_9c74fe430db46b 574-575,577,579-581
+  s_b007f3976ebd62::t_58e7d0296231cd 537
+  s_b007f3976ebd62::t_1ebe069926eaf1 151
+  s_b007f3976ebd62::t_e212edfd671418 538
+  s_b007f3976ebd62::t_a948980a67ec65 586
+  s_b007f3976ebd62::t_7780b257de0971 582-584
+  s_b007f3976ebd62::t_af4e9b4d53cdca 152-155,157-161,174-177,179-197,201-214
+  s_b007f3976ebd62::t_f379d1c9f1f348 589-590
+  s_b007f3976ebd62::t_1f63901ed3be23 162-167,171-173,178
+  s_b007f3976ebd62::t_bf18d8edbd12e7 168-170
+apps/dialtone-documentation/docs/guides/migration/modal-native-dialog/index.md
+  s_b007f3976ebd62::t_eea1ef96a63ac6 42
+  s_b007f3976ebd62::t_d0c9395ba3dabf 119
+  s_b007f3976ebd62::t_cf59a2c40fbca0 10-12
+  s_b007f3976ebd62::t_88f65d77698db1 69-71
+  s_b007f3976ebd62::t_550baa2dd8dfbf 74-89,94-98
+  s_b007f3976ebd62::t_5147131027e5a6 91-93
+  s_b007f3976ebd62::t_898dffce3c9ed6 105
+  s_b007f3976ebd62::t_db2a06def7b0b2 116
+  s_b007f3976ebd62::t_3043f9ca429eba 90
+  s_b007f3976ebd62::t_147c7746d29e33 13-14
+packages/dialtone-vue/components/Modal/ModalDefault.story.vue
+  s_b007f3976ebd62::t_bbce5a2fedb90b 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "8d28ebc08973d53626e64ccde2f6a82f84a73bd1",
+  "prompts": {},
+  "sessions": {
+    "s_b007f3976ebd62": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b3ae57f-2175-41e8-9a71-42894bdfcac2",
+        "model": "claude-opus-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}

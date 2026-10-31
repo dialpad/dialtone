@@ -1,0 +1,25 @@
+.agents/evals/run-skill-contract-evals.mjs
+  s_7f1d1d64baa803::t_2dd613f203e0b4 459-462
+.claude/rules/claude-config.md
+  s_7f1d1d64baa803::t_ff3d23340c0b39 18
+.github/CONTRIBUTING.md
+  s_7f1d1d64baa803::t_1cac82772af6ca 107
+.github/pull_request_template.md
+  s_7f1d1d64baa803::t_af79c0ec8a4bf9 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e1a831fba05d7af269e55607d4186a2088fb67fd",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
