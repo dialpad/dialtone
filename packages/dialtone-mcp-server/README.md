@@ -10,95 +10,36 @@ Set `DIALTONE_PROJECT_ROOT` to an absolute application dependency directory to s
 
 ## Installation
 
-There are three ways to install the Dialtone MCP Server. **Project-scoped installation takes priority** over user-scoped when both exist.
-
-### Project-Scoped (Recommended for Teams)
-
-Best for team collaboration - everyone uses the same version via version control.
+Install a locked project dependency from the application directory:
 
 ```bash
-npm install -D @dialpad/dialtone-mcp-server
+npm install --save-dev --save-exact @dialpad/dialtone-mcp-server
 ```
 
-Create or update `.mcp.json` in your project root:
+Installation does not register a client connection. Follow the [MCP setup guide](https://dialtone.dialpad.com/guides/mcp-server/#installation) for Claude Code's `.mcp.json`/local/user scopes and Codex's complete user `config.toml` entry. It includes a package-manager runner and a resolved-entry alternative that handles hoisted installations. A bare local bin is not guaranteed to be on the client's PATH.
 
-```json
-{
-  "mcpServers": {
-    "dialtone": {
-      "command": "dialtone-mcp-server"
-    }
-  }
-}
-```
+A launcher's cwd or prefix does not select installed data. Check a detail response's selected source/version and fallback reason after connecting.
 
-Commit `.mcp.json` to version control. Restart Claude Code to connect.
-
-**Priority:** Project-scoped beats user-scoped. The `dialtone-mcp-server` command resolves from `node_modules/.bin/` first.
-
-### User-Scoped (Personal, All Projects)
-
-Available across all your projects. Choose one method:
-
-**Option A: Install locally in your user directory**
-
-```bash
-# Install in a dedicated directory
-mkdir -p ~/.mcp-servers
-cd ~/.mcp-servers
-npm install @dialpad/dialtone-mcp-server
-
-# Add to Claude Code
-claude mcp add dialtone --scope user dialtone-mcp-server
-```
-
-**Option B: Install globally**
-
-```bash
-npm install -g @dialpad/dialtone-mcp-server
-claude mcp add dialtone --scope user dialtone-mcp-server
-```
-
-**Option C: Use npx (no installation)**
-
-```bash
-claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
-```
-
-This stores configuration in `~/.claude/mcp.json`.
-
-**Version checking:** The server connects to stdio before checking npm for updates. The advisory check is cancelled after two seconds or on shutdown. Offline, failed, or malformed registry replies are ignored. Valid version notices appear on stderr, keeping stdout available for MCP messages. On stdin EOF, SIGINT, or SIGTERM, the server closes its transport, flushes queued output, and exits even if an aborted registry connection retains a handle.
+Keep existing trust, approvals and tool allowlists. Connection, raw server inventory, client-filtered exposure and actual tool calls are separate checks. Other clients, including the Claude Desktop development recipe below, need their own verification; no all-client compatibility claim is made here.
 
 ## Updating
 
-**Project-scoped:**
+From the project installation directory:
 
 ```bash
-npm install -D @dialpad/dialtone-mcp-server@latest
+npm install --save-dev --save-exact @dialpad/dialtone-mcp-server@latest
 ```
 
-**User-scoped (local directory):**
+Review and commit the manifest/lockfile change. Update a dedicated personal installation in its directory; use `npm install -g @dialpad/dialtone-mcp-server@latest` for a global one. `npx` can use a local or cached package or download one; it does not guarantee the latest release. Update any configured version pin deliberately.
 
-```bash
-cd ~/.mcp-servers
-npm update @dialpad/dialtone-mcp-server
-```
+If your startup notice suggests a project-dev install without `--save-exact`, use the command for your installation mode above to preserve the intended pin and installation directory.
 
-**User-scoped (global):**
-
-```bash
-npm update -g @dialpad/dialtone-mcp-server
-```
-
-**User-scoped (npx):**
-
-No action needed - npx always uses the latest version.
-
-After updating, restart your Claude Code conversation to pick up the new version.
+Restart the server or reconnect/restart the client after package, configuration or Dialtone dependency changes. A new conversation alone may reuse the old process. The advisory startup check does not install updates and writes notices to stderr, preserving MCP stdout. See [updates and connection checks](https://dialtone.dialpad.com/guides/mcp-server/#configuration).
 
 ## What You Can Search
 
-### 1. Utility Classes (3,315 classes)
+### 1. Utility Classes
+
 Find CSS utility classes for styling HTML elements.
 
 **Example queries:**
@@ -108,7 +49,8 @@ Find CSS utility classes for styling HTML elements.
 - `margin top auto` → d-mt-auto
 - `text align center` → d-ta-center
 
-### 2. Design Tokens (5,691 tokens)
+### 2. Design Tokens
+
 Search for design tokens (CSS variables).
 
 **Example queries:**
@@ -117,15 +59,17 @@ Search for design tokens (CSS variables).
 - `font family` → --dt-font-family-body, --dt-font-family-expressive
 - `font weight bold` → --dt-font-weight-bold
 
-### 3. Components (87 components)
+### 3. Components
+
 Discover Vue components with props, events, and slots.
 
 **Example queries:**
-- `button` → DtButton, DtButtonGroup, DtBanner (29 results)
-- `modal` → DtModal, DtBanner, DtDropdown (6 results)
+- `button` → DtButton, DtButtonGroup, DtBanner
+- `modal` → DtModal, DtBanner, DtDropdown
 - `checkbox` → DtCheckbox, DtCheckboxGroup, DtRadio
 
-### 4. Icons (594 icons)
+### 4. Icons
+
 Find icons from Dialtone's icon library.
 
 **Example queries:**
@@ -136,27 +80,15 @@ Find icons from Dialtone's icon library.
 
 ## Troubleshooting
 
-**Version check shows old version:**
-- Restart your Claude Code conversation after updating
-- The server loads once at conversation start
+**Version check shows an old version:**
+- Check the actual package selected by the configured runner or entry path.
+- Restart the server/client after updating; a new conversation may reuse a process.
 
 **MCP server not connecting:**
-
-For project-scoped:
-1. Verify `.mcp.json` is in your project root with correct format
-2. Check package is installed: `npm list @dialpad/dialtone-mcp-server`
-3. Verify bin command exists: `ls node_modules/.bin/dialtone-mcp-server`
-4. Restart Claude Code completely
-
-For user-scoped:
-1. List configured servers: `claude mcp list`
-2. Check if dialtone is listed and enabled
-3. Test the server: `claude mcp get dialtone`
-4. Check configuration: `cat ~/.claude/mcp.json`
-
-General:
-- Check Claude Code logs for connection errors
-- Remember: Project-scoped configuration overrides user-scoped
+1. Check the client-specific configuration and its selected scope. Claude Code uses project `.mcp.json` or local/user entries in `~/.claude.json`; Codex uses its TOML configuration.
+2. For a project or dedicated installation, run `npm ls @dialpad/dialtone-mcp-server` from its installation directory; use `npm ls -g @dialpad/dialtone-mcp-server` for a global installation. For `npx`, check the connected server version; `npm ls` does not identify a cached selection. A workspace may hoist the package outside the application's own `node_modules`.
+3. Inspect client status/logs and available tools. `claude mcp list` and `claude mcp get dialtone` inspect registration and can health-check a server; Codex has its own MCP status. Neither proves model tool selection.
+4. Check absolute installed-data roots and the selected source/fallback in a detail reply. Preserve existing trust, permission and exposure settings.
 
 ## Resources
 
@@ -225,9 +157,11 @@ node packages/dialtone-mcp-server/test-search.js
 
 Expected: `Overall Success Rate: 100%` (77/77 tests)
 
-### Configure with Claude Desktop (for testing)
+### Configure with Claude Desktop (development reference)
 
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (MacOS) or `%APPDATA%/Claude/claude_desktop_config.json` (Windows):
+This recipe has not been verified in a Claude Desktop session. For the repository build, build the server first and use its actual absolute entry path. Follow the client's current setup instructions; the locations below are client-specific, not Claude Code configuration.
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%/Claude/claude_desktop_config.json` (Windows):
 
 ```json
 {
@@ -245,7 +179,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (MacOS)
 **Important:**
 - Use the absolute path to your dialtone repo
 - Restart Claude Desktop completely after updating the config
-- Look for the 🔌 icon to confirm connection
+- Check client status and available tools after restarting
 
 **Finding your absolute path:**
 ```bash

@@ -4,9 +4,14 @@ A command-line tool for searching and exploring the [Dialtone Design System](htt
 
 ## Installation
 
+For a project-local installation, run in the application directory:
+
 ```bash
-npm install -g @dialpad/dialtone-cli
+npm install --save-dev --save-exact @dialpad/dialtone-cli
+npm exec --no -- dialtone --help
 ```
+
+Commit the manifest and lockfile. The command blocks below use the shorter `dialtone` form and require a global installation (`npm install -g @dialpad/dialtone-cli`). For a project-local install, replace bare `dialtone` with `npm exec --no -- dialtone` and run it from the application directory. A bare local bin is not guaranteed to be on an assistant's PATH. See [installation and data selection](https://dialtone.dialpad.com/guides/cli/#installation).
 
 ## Commands
 
@@ -103,17 +108,19 @@ DIALTONE_DEBUG=1 dialtone search button
 
 ## Updating
 
-The CLI checks for updates automatically. To update:
+Update a project-local dependency from the application directory:
 
 ```bash
-npm install -g @dialpad/dialtone-cli@latest
+npm install --save-dev --save-exact @dialpad/dialtone-cli@latest
 ```
 
-Run from a project, the CLI uses the Dialtone data installed there (components, tokens, utilities, icons). Anything it can't find comes from data bundled with the CLI at build time, and documentation search always uses bundled content. Updating the CLI refreshes that bundled data. See [Data sources](https://dialtone.dialpad.com/guides/cli/#data-sources) for how the CLI finds a project's data.
+Review and commit the manifest/lockfile change. For global installations, use `npm install -g @dialpad/dialtone-cli@latest`. If your CLI notice prints a global command, choose the update command matching your installation. Restart a long-lived client after changing its PATH or environment.
+
+The CLI selects data from its invocation directory; updating the CLI refreshes bundled documentation and fallback data, not the application's Dialtone dependencies. Check the reported sources and versions. See [data sources](https://dialtone.dialpad.com/guides/cli/#data-sources).
 
 ## Claude Code Integration
 
-The CLI can be used by Claude Code skills, hooks, and agents in any Dialpad repo. This is the recommended way to give Claude access to Dialtone when the MCP server isn't configured.
+A coding assistant can invoke the CLI through its shell tool when that command is available and permitted. The following Claude Code examples are optional integrations; loading guidance does not establish that a session called the CLI. For project-local installs, use the runner described above from the application directory.
 
 ### Rules
 
@@ -126,12 +133,12 @@ description: "Dialtone design system lookups"
 
 # Dialtone Design System
 
-When working with Dialtone components, tokens, or utility classes, use the `dialtone` CLI for lookups:
+Run these commands from the application directory. When working with Dialtone components, tokens, or utility classes, use the `dialtone` CLI for lookups:
 
-- Component API: `dialtone component <name> --props`
-- Single prop: `dialtone component <name> --prop <prop>`
-- Token lookup: `dialtone token "<query>"`
-- Utility classes: `dialtone utility "<query>"`
+- Component API: `npm exec --no -- dialtone component <name> --props`
+- Single prop: `npm exec --no -- dialtone component <name> --prop <prop>`
+- Token lookup: `npm exec --no -- dialtone token "<query>"`
+- Utility classes: `npm exec --no -- dialtone utility "<query>"`
 - Structured data: add `--format json` to any command
 
 Prefer the CLI over reading source files for design system information. It searches
@@ -152,26 +159,11 @@ description: "Look up a Dialtone component. Use when referencing component props
 
 # Dialtone Lookup
 
-1. Run `dialtone component <name> --format json` to get full component data
-2. If you need specific prop values, run `dialtone component <name> --prop <prop>`
-3. For LLM-optimized context, run `dialtone prompt <name>`
-```
+Run these commands from the application directory.
 
-### Hooks
-
-Use a `UserPromptSubmit` hook to auto-inject Dialtone context when a user mentions a component:
-
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "matcher": "(?:Dt[A-Z]\\w+|dialtone\\s+component)",
-        "command": "dialtone prompt \"$MATCH\" --format json 2>/dev/null || true"
-      }
-    ]
-  }
-}
+1. Run `npm exec --no -- dialtone component <name> --format json` to get full component data
+2. If you need specific prop values, run `npm exec --no -- dialtone component <name> --prop <prop>`
+3. For LLM-optimized context, run `npm exec --no -- dialtone prompt <name>`
 ```
 
 ### Agents
@@ -183,29 +175,25 @@ An agent can call the CLI via Bash to research design system questions:
 description: "Research Dialtone design system components, tokens, and utilities."
 ---
 
-Use the `dialtone` CLI to look up design system information:
+Run these commands from the application directory. Use the `dialtone` CLI to look up design system information:
 
-- `dialtone search "<query>"` — broad search across all domains
-- `dialtone search "<term1>|<term2>"` — OR search across multiple terms
-- `dialtone component <name> --format json` — full component data
-- `dialtone token "<query>" --format json` — token data
-- `dialtone utility "<query>" --format json` — utility class data
+- `npm exec --no -- dialtone search "<query>"` — broad search across all domains
+- `npm exec --no -- dialtone search "<term1>|<term2>"` — OR search across multiple terms
+- `npm exec --no -- dialtone component <name> --format json` — full component data
+- `npm exec --no -- dialtone token "<query>" --format json` — token data
+- `npm exec --no -- dialtone utility "<query>" --format json` — utility class data
 
 Always use `--format json` when processing results programmatically.
 ```
 
 ### CLI vs MCP Server
 
-Install both. They're complementary — the CLI for fast lookups, the MCP server for deep exploration.
-
-**CLI** — token-efficient plain text. Best for direct lookups: "what props does this component have?", "what tokens match this query?" Returns compact output that costs minimal context window tokens.
-
-**MCP server** — structured data + resources protocol. Best when the LLM needs to pull full datasets, cross-reference components with tokens, or reason through complex design system questions. The resources (`dialtone://components`, `dialtone://tokens`) give access to the complete data.
+Use the CLI for explicit terminal queries and scripts. Use the MCP server when a compatible client should call Dialtone tools. Both use the same search engine; neither interface guarantees lower token use, better reasoning or installed compatibility.
 
 | Use case | Recommended |
 |----------|-------------|
 | Quick lookups (props, tokens, classes) | CLI |
-| Deep reasoning across the design system | MCP server |
+| Client-managed tool calls | MCP server |
 | Shell scripts and automation | CLI |
 | Piping context into AI tools | CLI (`dialtone prompt`) |
-| Non-Claude MCP clients (Cursor, Windsurf) | MCP server |
+| Other MCP clients | Check the client's stdio support and configuration |
