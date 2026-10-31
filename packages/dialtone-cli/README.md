@@ -53,7 +53,9 @@ dialtone docs --id examples/button-disabled-tooltip --format json
 
 Use `--id <id>` instead of a query to retrieve a complete documentation record. Minimal and Markdown formats print its content; JSON returns a one-record array with its metadata. Missing IDs, an empty ID, or combining a query with `--id` exit with an error. `--limit` controls search results, not exact-ID content.
 
-Selected documentation and Combinator preset examples include complete application files and pinned dependencies; static utility examples contain standalone HTML. This selection is not full coverage. Their pinned profile does not establish installed-project compatibility; read each record's build/API and manual-review status and environment. `component --examples` text output lists available example IDs; complete example records stay out of documentation search. See [Retrieve a selected example](https://dialtone.dialpad.com/guides/cli/#retrieve-a-selected-example) for setup and qualification.
+Ready public component-page Vue demos are included automatically when public imports and supported source state resolve and the source API check passes. Default IDs use `examples/docs/<docId>/<section-slug>`; source identity overrides preserve the earlier exact IDs or distinguish demos under the same heading. Removed or renamed IDs return no-match unless an explicit ID is retained.
+
+Vue documentation and curated Combinator preset examples include complete application files and pinned dependencies; static utility examples contain standalone HTML. Other source forms remain outside this automatic rule, so this is not full coverage. Their pinned profile does not establish installed-project compatibility; read each record's build/API and manual-review status and environment. `component --examples` text output lists available example IDs; complete example records stay out of documentation search. See [Retrieve a selected example](https://dialtone.dialpad.com/guides/cli/#retrieve-a-selected-example) for setup and qualification.
 
 ### `dialtone token [query]`
 

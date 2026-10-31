@@ -93,6 +93,8 @@ To customize a non-animating Skeleton background color modify the `--placeholder
 
 Customize an animating Skeleton by modifying the `--placeholder-from-color` and `--placeholder-to-color` variables with an inline `style`.
 
+<!-- @example {"key":"animated"} -->
+
 ```vue demo
 <!-- @wrapper -->
 <div class="d-w-400">

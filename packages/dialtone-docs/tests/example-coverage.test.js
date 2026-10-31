@@ -7,7 +7,7 @@ const filePath = 'apps/dialtone-documentation/docs/utilities/typography/word-wra
 describe('authored example coverage', () => {
   it('accounts for live/display twins once and keeps partial coverage explicit', () => {
     for (const frontmatter of ['', '---\ntitle: Word wrap\n---\n']) {
-      const rawFile = frontmatter + `## Normal\n<!-- example-id: examples/utility-word-wrap-normal -->\n${fence('<p class="d-ww-normal">Text</p>')}\n## Other\n${fence('<p>Live</p>\n<!-- @code -->\n<p>Display</p>')}`;
+      const rawFile = frontmatter + `## Normal\n<!-- @example {"id":"examples/utility-word-wrap-normal","representation":"static-html","targetUtilities":["d-ww-normal"]} -->\n${fence('<p class="d-ww-normal">Text</p>')}\n## Other\n${fence('<p>Live</p>\n<!-- @code -->\n<p>Display</p>')}`;
       const page = buildExampleCoverage({ rawFile, filePath, records: [{ id: 'examples/utility-word-wrap-normal', example: {} }] });
       expect(page.liveCandidates).toBe(2);
       expect(page.deliveredIds).toEqual(['examples/utility-word-wrap-normal']);

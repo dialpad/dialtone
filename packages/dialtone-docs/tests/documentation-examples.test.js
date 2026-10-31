@@ -1,23 +1,23 @@
 import { describe, it, expect, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { buildRecords, chunkSections } from '../src/generators/build-public-docs.mjs';
+import { chunkSections } from '../src/generators/build-public-docs.mjs';
 import { buildExampleRecords } from '../src/generators/documentation-examples.mjs';
 import { getProfile } from '../../../scripts/retrieval/profiles.mjs';
 
 const source = resolve('../../apps/dialtone-documentation/docs/components/button.md');
 const vuePackage = JSON.parse(readFileSync(resolve('../dialtone-vue/package.json')));
-const examples = () => buildRecords(source).filter(record => record.example);
+const examples = () => assemble(readFileSync(source, 'utf8')).filter(record => ['examples/button-default', 'examples/button-disabled-tooltip'].includes(record.id));
 function assemble(raw, build = buildExampleRecords) {
   const sections = chunkSections(raw);
-  return build({ rawFile: raw, sections, records: sections.map(({ headingPath }) => ({ id: 'source#renamed', headingPath })), filePath: 'source.md', vuePackage });
+  return build({ rawFile: raw, sections, records: sections.map(({ headingPath }) => ({ id: 'source#renamed', docId: 'components/button', headingPath })), filePath: 'apps/dialtone-documentation/docs/components/button.md', vuePackage, componentPage: { components: [{ canonicalName: 'DtButton', relation: 'api' }] } });
 }
-const live = '### Renamed\n<!-- example-id: examples/button-default -->\n\n```vue demo\n<!-- @wrapper -->\n<dt-button>Live</dt-button>\n<!-- @code -->\n<dt-button {props}>Shortened</dt-button>\n```';
+const live = '### Renamed\n<!-- @example {"id":"examples/button-default"} -->\n\n```vue demo\n<!-- @wrapper -->\n<dt-button>Live</dt-button>\n<!-- @code -->\n<dt-button {props}>Shortened</dt-button>\n```';
 
-describe('selected documentation examples', () => {
+describe('authored documentation example evidence', () => {
   it('retains matching validation when only unrelated page prose changes', () => {
     const [before] = examples();
-    const [after] = assemble(readFileSync(source, 'utf8') + '\nUnrelated editorial note.\n');
+    const after = assemble(readFileSync(source, 'utf8') + '\nUnrelated editorial note.\n').find(record => record.id === before.id);
     expect(after.example.source.hash).not.toBe(before.example.source.hash);
     expect(after.example.validation.payloadHash).toBe(before.example.validation.payloadHash);
     expect(after.example.manualReview).toBe('passed');
@@ -42,7 +42,7 @@ describe('selected documentation examples', () => {
 
   it('reverts changed source to unverified and pending review', () => {
     const [current] = examples();
-    const [stale] = assemble('<!-- example-id: examples/button-default -->\n\n```vue demo\n<dt-button>Changed</dt-button>\n```');
+    const [stale] = assemble('<!-- @example {"id":"examples/button-default"} -->\n\n```vue demo\n<dt-button>Changed</dt-button>\n```');
     expect(stale.example.validation.consumerBuild).toBe('unverified');
     expect(stale.example.manualReview).toBe('pending');
     expect(stale.example.validation.manualReview).toBeUndefined();
@@ -63,7 +63,7 @@ describe('selected documentation examples', () => {
         delete evidence.examples['examples/button-default'].manualReview[field];
         vi.resetModules();
         const { buildExampleRecords: build } = await import('../src/generators/documentation-examples.mjs');
-        const [record] = assemble(readFileSync(source, 'utf8'), build);
+        const record = assemble(readFileSync(source, 'utf8'), build).find(record => record.id === 'examples/button-default');
         expect(record.example.validation.consumerBuild).toBe('built');
         expect(record.example.validation.api).toBe('passed');
         expect(record.example.manualReview).toBe('pending');
@@ -84,7 +84,7 @@ describe('selected documentation examples', () => {
     vi.doMock('../../../scripts/retrieval/profiles.mjs', () => ({ getProfile: () => profile }));
     try {
       const { buildExampleRecords: build } = await import('../src/generators/documentation-examples.mjs');
-      const [record] = assemble(readFileSync(source, 'utf8'), build);
+      const record = assemble(readFileSync(source, 'utf8'), build).find(record => record.id === 'examples/button-default');
       expect(record.example.validation.payloadHash).toBe(examples()[0].example.validation.payloadHash);
       expect(record.example.validation.consumerBuild).toBe('unverified');
       expect(record.example.manualReview).toBe('pending');
@@ -105,10 +105,12 @@ describe('selected documentation examples', () => {
   it.each([
     ['a repeated ID', live + '\n' + live, 'Duplicate example ID'],
     ['a code-only fence', live.replace('vue demo', 'vue code-only'), 'live Vue demo'],
-    ['an undeclared component', live.replace('<dt-button>Live</dt-button>', '<dt-input />'), 'unconfigured dt-input'],
-    ['an undeclared directive', live.replace('<dt-button>Live</dt-button>', '<dt-button v-dt-mode:dark>Live</dt-button>'), 'unconfigured v-dt-mode'],
-    ['an unknown custom component', live.replace('<dt-button>Live</dt-button>', '<app-widget />'), 'unconfigured app-widget'],
   ])('rejects %s', (_, raw, message) => {
     expect(() => assemble(raw)).toThrow(message);
+  });
+
+  // DLT-3710 resolves public imports dynamically; unknown APIs remain unresolved.
+  it('keeps unknown APIs unresolved instead of inventing an import', () => {
+    expect(assemble(live.replace('<dt-button>Live</dt-button>', '<app-widget />'))).toEqual([]);
   });
 });
