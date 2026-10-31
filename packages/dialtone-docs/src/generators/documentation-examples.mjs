@@ -8,7 +8,7 @@ import { getProfile } from '../../../../scripts/retrieval/profiles.mjs';
 import matter from 'gray-matter';
 import { readSourceExamples } from './source-examples.mjs';
 import { chunkSections } from './source-sections.mjs';
-import { assertTemplateBindings, assertStaticHtml, sourceSetup, componentTags } from './example-template.mjs';
+import { assertTemplateBindings, assertStaticHtml, sourceSetupForTemplate, componentTags } from './example-template.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const profile = getProfile('dt10-pinned');
@@ -59,12 +59,14 @@ function consumerFiles(names, template, directives, setup = '', id = 'examples/b
 }
 
 /** Shared assembly and payload-bound qualification for authored fences and materialized presets. */
-export function assembleExampleRecord({ id, template, definition, rawFile = '', source, headingPath, filePath, vuePackage, sourceHash = hash(rawFile), sourcePackage }) {
+export function assembleExampleRecord({ id, template, definition, rawFile = '', source, headingPath, filePath, vuePackage, sourceHash = hash(rawFile), sourcePackage, onGuidanceInput }) {
   assertDeclaredUsage(id, template, definition);
-  const setup = sourceSetup(rawFile, definition.state);
   const staticHtml = definition.representation === 'static-html';
+  const setup = staticHtml ? '' : sourceSetupForTemplate(rawFile, template);
   if (staticHtml) assertStaticHtml(template);
   else assertTemplateBindings(template, setup);
+  onGuidanceInput?.({ id, template, setup, components: definition.components, directives: definition.directives,
+    rawFile, headingPath, filePath });
   const names = definition.components;
   const identities = publicIdentities(vuePackage);
   const components = names.map(name => {
@@ -99,7 +101,6 @@ export function assembleExampleRecord({ id, template, definition, rawFile = '', 
     `Representation: authored static HTML. Utility subject: ${definition.utilities.join(', ')}.`,
     `Consumer profile: ${profile.id}; ${Object.entries(dependencies).map(([name, version]) => `${name}@${version}`).join(', ')}. Other installations are unverified.`,
     'Setup: include @dialpad/dialtone/css and @dialpad/dialtone/css-default-theme in the containing page using its existing asset setup. This is an HTML fragment, not a Vue application. No App.vue, main.js, Vue dependency or page script is supplied.',
-    definition.responsibilities,
     `Validation: CSS ${validation.css ?? 'unverified'}; application build not applicable. Payload SHA-256: ${payload}. No browser/layout or assistive-technology result is claimed.`,
     ...(validation.missingClasses?.length ? [`Unverified source wrapper classes in the pinned stylesheet: ${validation.missingClasses.join(', ')}. Supply or verify the required responsive CSS before relying on that layout. The authored HTML is retained unchanged.`] : []),
     `## example.html\n\n\`\`\`html\n${files['example.html']}\`\`\``,
@@ -112,9 +113,9 @@ export function assembleExampleRecord({ id, template, definition, rawFile = '', 
     unverifiedVue
       ? 'Setup: this source fixture is not verified against the pinned dependencies; those versions may lack its components or APIs. To validate it, copy the five files into an empty directory and try npm install and npm run build before running npm run dev.'
       : 'Setup: copy all five files below into an empty directory. Run npm install, npm run build and npm run dev. package.json pins the consumer dependencies and Vite SFC build tooling; main.js includes component, directive and CSS/theme setup.',
-    `State/events: ${setup ? 'Authored local state is included below; no hidden handlers.' : 'No external state or hidden handlers.'} ${definition.responsibilities ?? ''}`,
+    `State/events: ${setup ? 'Authored local state is included below; no hidden handlers.' : 'No external state or hidden handlers.'}${definition.sourceKind === 'combinator-preset' ? ` ${definition.responsibilities ?? ''}` : ''}`,
     `Validation: consumer build ${validation.consumerBuild}; API/export/deprecation checks ${validation.api ?? 'unverified'}. Validation is tied to payload SHA-256 ${payload}.`,
-    `Interaction/accessibility: ${manualSummary} ${definition.interaction ?? ''}`,
+    `Interaction/accessibility: ${manualSummary}${definition.sourceKind === 'combinator-preset' ? ` ${definition.interaction ?? ''}` : ''}`,
     ...Object.entries(files).map(([name, code]) => `## ${name}\n\n\`\`\`${name.split('.').pop()}\n${code}\`\`\``),
   ].join('\n\n');
   return { ...source, id, category: 'examples', content, example: {
@@ -146,7 +147,8 @@ export function buildSourceExamples(options) {
     if (!candidate.eligible) continue;
     const record = assembleExampleRecord({
       id: candidate.id, template: candidate.template, definition: candidate.definition,
-      rawFile, source: candidate.source, headingPath: candidate.headingPath, filePath, vuePackage });
+      rawFile, source: candidate.source, headingPath: candidate.headingPath, filePath, vuePackage,
+      onGuidanceInput: candidate.definition.representation === 'static-html' ? undefined : options.onGuidanceInput });
     delivered.push(record);
     candidate.disposition = 'delivered';
   }

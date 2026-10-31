@@ -9,6 +9,13 @@ const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
 const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
 const docsRoot = resolve(__dirname, '../../../../apps/dialtone-documentation/docs');
 describe('authored usage guidance', () => {
+  test('collects guidance inputs for the same examples emitted by the public page producer', () => {
+    const inputs = [];
+    const records = buildRecords(resolve(docsRoot, 'components/button.md'), { onGuidanceInput: value => inputs.push(value) });
+    expect(inputs.length).toBeGreaterThan(0);
+    expect(inputs.map(value => value.id)).toEqual(records.filter(record => record.example).map(record => record.id));
+  });
+
   test('Modal keeps recommendations distinct from discouraged uses', () => {
     const record = buildRecords(resolve(docsRoot, 'components/modal.md'))
       .find(record => record.id === 'components/modal#usage');

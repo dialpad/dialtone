@@ -19,7 +19,7 @@ Apply to `apps/dialtone-documentation/**`.
 
 ## Source examples
 
-For documentation examples, read the [shared source-example authoring and maintenance contract](../documentation-examples.md). Preserve stable IDs, authored setup, representation-specific validation and explicit remaining coverage.
+For documentation examples, read the [shared source-example authoring and maintenance contract](../documentation-examples.md). Preserve stable IDs, source-derived setup, generated-only guidance, representation-specific validation and explicit remaining coverage.
 
 ## Curated discovery keywords
 

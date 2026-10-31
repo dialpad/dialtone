@@ -63,7 +63,7 @@ Dialtone provides five options for `kind`, with three levels of `importance`. Us
 
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
 
-<!-- @example {"id":"examples/button-default","responsibilities":"Add application click handlers for real actions; retain meaningful button text.","interaction":"Check Tab order, visible focus, Enter/Space activation and accessible names; the three importance variants share the same interaction pattern."} -->
+<!-- @example {"id":"examples/button-default"} -->
 
 ```vue demo
 <!-- @wrapper -->
@@ -149,7 +149,7 @@ Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d
 
 Using the class also requires `aria-disabled`, and additional javascript implementation is required to prevent events.
 
-<!-- @example {"id":"examples/button-disabled-tooltip","responsibilities":"The source uses both native disabled and a focusable span wrapping an aria-disabled button. The class and aria-disabled do not themselves prevent application actions; consumers must prevent disabled actions in their handlers. The wrapper remains literal source markup.","interaction":"Check wrapper focus, tooltip on keyboard focus/hover, Escape dismissal, accessible name/description relationship and disabled-action prevention before recommending this pattern."} -->
+<!-- @example {"id":"examples/button-disabled-tooltip"} -->
 
 ```vue demo
 <dt-stack

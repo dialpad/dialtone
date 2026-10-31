@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import matter from 'gray-matter';
 import { chunkSections } from '../src/generators/build-public-docs.mjs';
 import { buildExampleRecords, buildExampleCoverage, assembleExampleRecord } from '../src/generators/documentation-examples.mjs';
+import { applyGuidance, createGuidanceManifest, selectGuidance } from '../src/generators/example-guidance.mjs';
 import { sourceSetup } from '../src/generators/example-template.mjs';
 
 const vuePackage = JSON.parse(readFileSync(new URL('../../dialtone-vue/package.json', import.meta.url)));
@@ -101,6 +102,53 @@ describe('source-driven component examples', () => {
     const script = '<script setup>\nimport { ref } from "vue";\nconst checked = ref(true);\n</script>';
     const raw = kind === 'commented' ? '<!--\n' + script + '\n-->' : '<div>\n' + script + '\n</div>';
     expect(() => sourceSetup(raw, ['checked'])).toThrow(/Missing/);
+  });
+
+  it('infers referenced Boolean state without a source annotation', () => {
+    const raw = '<script setup>\nimport { ref } from "vue";\nconst checked = ref(false);\nconst unused = ref("outside this cohort");\n</script>\n\n## Model\n'
+      + fence('<dt-toggle v-model="checked">Enable alerts</dt-toggle>');
+    const [record] = produce(raw);
+    expect(record).toBeDefined();
+    expect(record.content).toContain('const checked = ref(false);');
+    expect(record.content).not.toContain('outside this cohort');
+    expect(record.example.validation.consumerBuild).toBe('unverified');
+  });
+
+  it('keeps unsupported referenced state pending instead of inventing setup', () => {
+    const raw = '<script setup>\nimport { ref } from "vue";\nconst checked = ref(loadSettings());\n</script>\n\n## Model\n'
+      + fence('<dt-toggle v-model="checked">Enable alerts</dt-toggle>');
+    expect(produce(raw)).toEqual([]);
+    expect(buildExampleCoverage(input(raw)).candidates[0].reason).toContain('checked');
+  });
+
+  it.each(['responsibilities', 'interaction', 'state'])('rejects manually maintained %s metadata', field => {
+    const value = field === 'state' ? ['checked'] : 'Hand-maintained guidance';
+    expect(() => produce('## Default\n' + annotation({ [field]: value }) + fence('<dt-button>Save</dt-button>')))
+      .toThrow(/unknown @example field/);
+  });
+
+  it('offers the real assembled source to the guidance collector without proof fields', () => {
+    const inputs = [];
+    const records = buildExampleRecords({ ...input(ordinary), onGuidanceInput: value => inputs.push(value) });
+    expect(inputs).toHaveLength(1);
+    expect(inputs[0].id).toBe(records[0].id);
+    expect(inputs[0].template).toBe('<dt-button>Save</dt-button>');
+    expect(inputs[0].components).toContain('DtButton');
+    expect(inputs[0]).not.toHaveProperty('validation');
+    expect(inputs[0]).not.toHaveProperty('manualReview');
+  });
+
+  it('adds guidance to retrieval prose without changing consumer proof or source records', () => {
+    const records = produce(ordinary);
+    const data = createGuidanceManifest([{ id: records[0].id, sources: [{ id: 'example', text: '<dt-button>Save</dt-button>' }], dependencies: [] }], { model: 'test-model', toolingHash: 'a'.repeat(64) });
+    const input = data.entries[0];
+    const notes = [{ text: 'Use a meaningful action label.', references: [{ source: 'example', quote: 'Save' }] }];
+    const selection = selectGuidance(data, [{ schemaVersion: 1, entries: [{ id: input.id, inputHash: input.inputHash, notes, status: 'complete' }] }]);
+    const [enriched] = applyGuidance(records, selection);
+    expect(enriched.content).toContain('Use a meaningful action label.');
+    expect(enriched.example).toEqual(records[0].example);
+    expect(records[0].content).not.toContain('Use a meaningful action label.');
+    expect(enriched.content).not.toContain(input.inputHash);
   });
 
   it('flows edits, heading renames and removals through the actual source reader', () => {

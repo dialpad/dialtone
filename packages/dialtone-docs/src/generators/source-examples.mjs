@@ -8,12 +8,12 @@ import { fileURLToPath } from 'node:url';
 import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
 import { checkTemplateApi, TemplateApiError } from '../../../../scripts/retrieval/example-consumer.mjs';
 import { parseDirectives, trimBlankLines } from '../../../../apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js';
-import { baseParse, parserOptions, componentTags, sourceSetup, assertTemplateBindings, assertStaticHtml } from './example-template.mjs';
+import { baseParse, parserOptions, componentTags, sourceSetupForTemplate, assertTemplateBindings, assertStaticHtml } from './example-template.mjs';
 
 const markdown = new MarkdownIt({ html: true });
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const require = createRequire(resolve(root, 'packages/combinator/package.json'));
-const fields = new Set(['id', 'key', 'state', 'responsibilities', 'interaction', 'representation', 'targetUtilities', 'exclude']);
+const fields = new Set(['id', 'key', 'representation', 'targetUtilities', 'exclude']);
 const text = value => typeof value === 'string' && value.trim().length > 0;
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 let sourceApi;
@@ -48,14 +48,11 @@ function metadata(token, location) {
   if (value.id !== undefined) validateId(value.id, location);
   if (value.key !== undefined && (typeof value.key !== 'string' || !slug.test(value.key))) throw new Error(`${location}: invalid example key`);
   if (value.id !== undefined && value.key !== undefined) throw new Error(`${location}: use either id or key`);
-  for (const key of ['responsibilities', 'interaction']) {
-    if (value[key] !== undefined && !text(value[key])) throw new Error(`${location}: ${key} must be nonempty text`);
+  if (value.targetUtilities !== undefined && (!Array.isArray(value.targetUtilities) || !value.targetUtilities.length
+    || value.targetUtilities.some(entry => !text(entry))
+    || new Set(value.targetUtilities).size !== value.targetUtilities.length)) {
+    throw new Error(`${location}: invalid targetUtilities`);
   }
-  for (const key of ['state', 'targetUtilities']) {
-    if (value[key] !== undefined && (!Array.isArray(value[key]) || !value[key].length
-      || value[key].some(entry => !text(entry)) || new Set(value[key]).size !== value[key].length)) throw new Error(`${location}: invalid ${key}`);
-  }
-  if (value.state?.some(name => !/^[A-Za-z_$][\w$]*$/.test(name))) throw new Error(`${location}: invalid state name`);
   if (value.representation !== undefined && value.representation !== 'static-html') throw new Error(`${location}: unsupported representation`);
   if (value.targetUtilities && value.representation !== 'static-html') throw new Error(`${location}: targetUtilities requires static-html`);
   if (value.representation === 'static-html' && !value.targetUtilities) throw new Error(`${location}: static-html requires targetUtilities`);
@@ -99,7 +96,7 @@ function definitionFor(candidate, options) {
   }
   if (options.filePath.includes('/utilities/')) return { kind: 'needs-static-representation', reason: 'Utility markup requires an authored static representation and semantic subject.' };
   try {
-    assertTemplateBindings(template, sourceSetup(options.rawFile, annotation.state));
+    assertTemplateBindings(template, sourceSetupForTemplate(options.rawFile, template));
   } catch (error) {
     return { kind: 'needs-authored-setup', reason: error.message };
   }

@@ -35,7 +35,12 @@
         "{workspaceRoot}/packages/dialtone-icons/package.json",
         "{workspaceRoot}/scripts/retrieval/example-consumer.mjs",
         { "dependentTasksOutputFiles": "**/dist/component-documentation.json", "transitive": true },
-        { "dependentTasksOutputFiles": "**/vue/dist/**/*", "transitive": true }
+        { "dependentTasksOutputFiles": "**/vue/dist/**/*", "transitive": true },
+        "{projectRoot}/.generated/example-guidance/*.json",
+        { "env": "EXAMPLE_GUIDANCE_MODEL" },
+        "{workspaceRoot}/packages/dialtone-vue/**/*.js",
+        "{workspaceRoot}/packages/dialtone-vue/**/*.vue",
+        "{workspaceRoot}/common/**/*.js"
       ],
       "outputs": [
         "{projectRoot}/dist/**"

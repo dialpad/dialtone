@@ -48,7 +48,7 @@ export function sourceSetup(rawFile, names = []) {
 }
 
 /** Compiler bindings plus parser references preserve v-for/slot lexical scopes and Vue public properties. */
-export function assertTemplateBindings(template, setup = '') {
+function missingTemplateBindings(template, setup = '') {
   const sfc = `${setup ? `<script setup>\n${setup}</script>` : ''}<template>${template}</template>`;
   const { descriptor } = parse(sfc);
   const bindings = setup ? compileScript(descriptor, { id: 'source-example' }).bindings : {};
@@ -70,7 +70,17 @@ export function assertTemplateBindings(template, setup = '') {
     }
   }
   visit(ast.templateBody);
-  if (missing.size) throw new Error(`Unresolved template bindings: ${[...missing].join(', ')}`);
+  return [...missing];
+}
+
+/** Infer only supported declarations actually referenced by this template. */
+export function sourceSetupForTemplate(rawFile, template) {
+  return sourceSetup(rawFile, missingTemplateBindings(template));
+}
+
+export function assertTemplateBindings(template, setup = '') {
+  const missing = missingTemplateBindings(template, setup);
+  if (missing.length) throw new Error(`Unresolved template bindings: ${missing.join(', ')}`);
 }
 
 /** Static HTML is authored markup, never Vue rendering or a copied page script. */

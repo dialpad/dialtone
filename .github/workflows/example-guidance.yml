@@ -1,0 +1,94 @@
+name: Example guidance
+
+# The immutable tooling ref is approved separately from untrusted source inputs.
+# This push path bootstraps the first pilot before workflow_dispatch exists on staging.
+on:
+  push:
+    paths:
+      - '.github/workflows/example-guidance.yml'
+      - 'packages/dialtone-docs/scripts/generate-example-guidance.mjs'
+      - 'packages/dialtone-docs/src/generators/example-guidance*.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+  actions: read
+
+concurrency:
+  group: example-guidance-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.sha == vars.EXAMPLE_GUIDANCE_TOOLING_REF
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HUSKY: 0
+      NX_DAEMON: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-environment
+      - name: Prepare source-bound inputs without a model credential
+        run: pnpm nx run dialtone-docs:build --skip-nx-cache
+      - uses: actions/upload-artifact@v4
+        with:
+          name: example-guidance-inputs
+          path: packages/dialtone-docs/dist/example-guidance-inputs.json
+          retention-days: 90
+
+  pilot:
+    needs: prepare
+    if: github.sha == vars.EXAMPLE_GUIDANCE_TOOLING_REF
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Fetch only the approved immutable tool, without dependencies or PR scripts
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            packages/dialtone-docs/scripts/generate-example-guidance.mjs
+            packages/dialtone-docs/src/generators/example-guidance.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/download-artifact@v4
+        with:
+          name: example-guidance-inputs
+          path: inputs
+      - name: Three-example pilot, no automatic retry or corpus generation
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GUIDANCE_SOURCE_HEAD: ${{ github.sha }}
+          GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+        run: >-
+          node packages/dialtone-docs/scripts/generate-example-guidance.mjs
+          inputs/example-guidance-inputs.json example-guidance.json
+          --limit 3 --budget-usd 1
+          --ids examples/button-default,examples/button-disabled-tooltip,examples/toggle-v-model
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: example-guidance-${{ github.run_id }}
+          path: example-guidance.json
+          retention-days: 90
+      - name: Summarize reviewable notes and measured usage
+        if: always()
+        run: |
+          node --input-type=module <<'JS' >> "$GITHUB_STEP_SUMMARY"
+          import { readFileSync } from 'node:fs';
+          const result = JSON.parse(readFileSync('example-guidance.json', 'utf8'));
+          console.log('## Three-example guidance pilot');
+          console.log('This is a pilot; it does not qualify or generate the remaining corpus.');
+          for (const entry of result.entries) {
+            console.log(`\n- ${entry.id}: ${entry.status}`);
+            for (const note of entry.notes ?? []) console.log(`  - ${note.text}`);
+          }
+          console.log(`\nUsage: ${JSON.stringify(result.usage)}`);
+          JS

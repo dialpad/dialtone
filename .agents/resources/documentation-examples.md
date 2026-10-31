@@ -1,6 +1,6 @@
 # Source documentation examples
 
-Keep example markup in its authored VuePress page. Ready public component pages automatically deliver self-contained `vue demo` and `vue demo-only` fences when their imports resolve to public APIs, supported source state is available and the source API checker passes. No page or example publishing list is maintained. Source-valid delivery does not prove compatibility with the pinned consumer packages.
+Keep example markup in its authored VuePress page. Ready public component pages automatically deliver self-contained `vue demo` and `vue demo-only` fences when their imports resolve to public APIs, supported source state is available and the source API checker passes. No page or example publishing list is maintained. A comment is not an opt-in: most deliverable fences need no annotation. Source-valid delivery does not prove compatibility with the pinned consumer packages.
 
 The default ID is `examples/docs/<docId>/<section-slug>`, using the H2/H3 path before prose duplicate suffixes. A second unkeyed live demo in a deliverable section fails the build. Give the additional demo a source-adjacent key, or use an exact ID to preserve an identity across a move:
 
@@ -10,7 +10,9 @@ The default ID is `examples/docs/<docId>/<section-slug>`, using the H2/H3 path b
 
 Use one JSON comment in its own HTML block immediately before the live fence, with only whitespace between them. `key` is a lowercase hyphenated slug; `id` is an exact lowercase slug path under `examples/`, outside `examples/presets/`. Use one or the other. IDs must fit the 256-character retrieval limit. Unknown fields, orphaned/stacked annotations and legacy `example-id` comments fail the build. Future reference/MDX kinds must use separate identity scopes.
 
-Optional metadata: `state` lists named Boolean `ref` declarations from the page's actual top-level script setup; `responsibilities` describes required application work; `interaction` records guidance, never proof. Do not copy page scripts or author component/import/pin/proof inventories. Imports come from source usage and public exports, ordered by the page's used API relations before layout companions. Unsupported state, bindings or APIs stay unresolved.
+Supported Boolean `ref` setup is derived from the declarations the template actually references in the page's top-level script. Do not add state inventories or per-example `responsibilities`/`interaction` paragraphs. Imports come from source usage and public exports, ordered by the page's used API relations before layout companions. Unsupported state, bindings or APIs stay unresolved.
+
+Concise usage notes are generated from source-bound inputs into ignored build artifacts, then included in CLI/MCP output. They are guidance, not consumer or human-review proof. Contributors maintain the example and its documentation; saving or committing does not invoke a local model or rewrite Markdown. Offline builds can omit unavailable notes and report pending guidance. Publication requires matching successful artifacts, including an explicit empty result when no note is useful. Review the generated artifact alongside the PR; publication must reuse its exact matching notes. No tracked prose sidecar or model account is required for ordinary contributor builds.
 
 An explicit `representation: "static-html"` requires `targetUtilities`, whose classes must appear literally in the markup. The consumer validator owns CSS and property checks. Preserve the existing Word Wrap fragment; other automatic static subjects, directive pages, MDX, references and richer setup remain later work. Migration, before/after and negative guidance retain their context. What's New is outside this component rule and remains pending.
 
