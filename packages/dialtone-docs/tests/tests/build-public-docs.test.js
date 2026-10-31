@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
+import { buildRecords, chunkSections, buildReadyComponentPage } from '@src/generators/build-public-docs.mjs';
 import { readKeywords } from '@src/utils/keywords.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -273,5 +273,25 @@ describe('readKeywords', () => {
 
   test.each([['spinner'], [['spinner', 42]], [[' ']], [[]]])('rejects malformed keywords %j', (keywords) => {
     expect(() => readKeywords(keywords, 'loader.md')).toThrow(/Invalid keywords in loader\.md: expected an array of nonempty strings/);
+  });
+});
+
+describe('component associations for published examples', () => {
+  const identities = [{ identity: { canonicalName: 'DtButton', aliases: [], kind: 'public' } }];
+  const unresolved = '<component-vue-api component-name="missing" />';
+
+  test.each(['planned', ' BETA ', 'WIP'])('does not resolve references in a %s page', async (status) => {
+    const raw = `---\nstatus: ${JSON.stringify(status)}\n---\n${unresolved}`;
+    await expect(buildReadyComponentPage('components/preview.md', raw, identities)).resolves.toBeUndefined();
+  });
+
+  test.each([undefined, 'experimental'])('still rejects unresolved references for published status %s', async (status) => {
+    const raw = status ? `---\nstatus: ${status}\n---\n${unresolved}` : unresolved;
+    await expect(buildReadyComponentPage('components/preview.md', raw, identities)).rejects.toThrow(/Unresolved/);
+  });
+
+  test('resolves a valid ready page for example association', async () => {
+    const page = await buildReadyComponentPage('components/button.md', '<component-vue-api component-name="button" />', identities);
+    expect(page.components.map(reference => [reference.canonicalName, reference.relation])).toEqual([['DtButton', 'api']]);
   });
 });

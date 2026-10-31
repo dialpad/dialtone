@@ -162,6 +162,13 @@ export function buildRecords(absolutePath) {
   return readPage(absolutePath).records;
 }
 
+export async function buildReadyComponentPage(filePathRelative, source, identities) {
+  if (!filePathRelative.startsWith('components/')) return undefined;
+  const status = String(matter(source).data.status ?? '').trim().toLowerCase();
+  if (NON_READY_STATUSES.has(status)) return undefined;
+  return buildComponentPage(filePathRelative, source, identities);
+}
+
 async function build() {
   const files = await glob('apps/dialtone-documentation/docs/**/*.md', {
     cwd: repoRoot,
@@ -188,8 +195,7 @@ async function build() {
   const identities = publicIdentities(vuePackage).map(identity => ({ identity }));
   for (const file of files) {
     const rawFile = readFileSync(file, 'utf8');
-    const componentPage = relative(docsRoot, file).replace(/\\/g, '/').startsWith('components/')
-      ? await buildComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities) : undefined;
+    const componentPage = await buildReadyComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities);
     if (componentPage) componentPages.push(componentPage);
     const page = readPage(file, componentPage);
     allRecords.push(...page.records);
