@@ -4,7 +4,8 @@
   "description": "Dialtone vue component combinator",
   "scripts": {
     "lint": "eslint --fix src",
-    "test": "vitest run"
+    "test": "vitest run",
+    "generate-examples": "node scripts/generate-preset-examples.mjs"
   },
   "bugs": {
     "email": "dialtone@dialpad.com"

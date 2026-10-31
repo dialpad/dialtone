@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(new URL('../../../../apps/dialtone-documentation/package.json', import.meta.url));
 const { parse, compileScript } = require('vue/compiler-sfc');
 const { baseParse, NodeTypes, ElementTypes, parserOptions } = createRequire(require.resolve('vue/package.json'))('@vue/compiler-dom');
-export { NodeTypes };
+export { baseParse, NodeTypes, ElementTypes, parserOptions };
 const { isGloballyAllowed } = createRequire(require.resolve('vue/package.json'))('@vue/shared');
 const rootRequire = createRequire(new URL('../../../../package.json', import.meta.url));
 const parser = createRequire(rootRequire.resolve('eslint-plugin-vue'))('vue-eslint-parser');

@@ -22,7 +22,7 @@ const generatorInputs = [
   'scripts/lib/vue-component-identity.mjs',
   'common/utils/server.mjs',
 ];
-function inputs(name) {
+function inputs(name, target = 'build') {
   const root = `packages/${name}`;
   const config = JSON.parse(
     readFileSync(new URL(`../../${root}/project.json`, import.meta.url)),
@@ -33,8 +33,8 @@ function inputs(name) {
   };
   return getInputs(
     {
-      id: `${name}:build`,
-      target: { project: name, target: 'build' },
+      id: `${name}:${target}`,
+      target: { project: name, target },
       overrides: {},
     },
     graph,
@@ -50,8 +50,8 @@ function covered(paths, patterns) {
   ).map((value) => value.file);
 }
 // Workspace-relative file patterns from a project's own build inputs.
-function selfPatterns(name) {
-  return inputs(name)
+function selfPatterns(name, target = 'build') {
+  return inputs(name, target)
     .selfInputs.filter((input) => input.fileset)
     .map((input) =>
       input.fileset
@@ -176,4 +176,50 @@ test('core and adapters hash the generated data they consume through dependency 
     if (name !== 'dialtone-query-core')
       assert.deepEqual(covered(coreOutputs, outputs), coreOutputs, name);
   }
+});
+
+test('preset generation hashes authored presets, serializers and component defaults', () => {
+  const paths = [
+    'packages/combinator/src/variants/variants_button.js',
+    'packages/combinator/src/lib/code_copy.js',
+    'packages/combinator/src/lib/variant_state.js',
+    'packages/combinator/src/components/code_editor/code_editor.vue',
+    'packages/combinator/scripts/generate-preset-examples.mjs',
+    'packages/combinator/scripts/classify-preset-example.mjs',
+    'packages/dialtone-icons/gulpfile.cjs',
+    'packages/dialtone-icons/transformSVGtoVue.cjs',
+    'packages/dialtone-icons/src/IconTemplate.vue',
+    'packages/dialtone-icons/src/IllustrationTemplate.vue',
+    'packages/dialtone-icons/src/utils.js',
+    'packages/dialtone-icons/src/constants.js',
+    'packages/dialtone-icons/vue/vite.config.js',
+    'packages/dialtone-icons/vue/package.json',
+    'packages/combinator/vite.config.js',
+    'packages/combinator/package.json',
+    'packages/dialtone-vue/components/Button/Button.vue',
+    'packages/dialtone-vue/vite.config.js',
+    'packages/dialtone-vue/dist/component-documentation.json',
+    'scripts/lib/vue-component-identity.mjs',
+    'package.json',
+    'pnpm-lock.yaml',
+  ];
+  assert.deepEqual(covered(paths, selfPatterns('combinator', 'generate-examples')), paths);
+  const docs = JSON.parse(readFileSync(new URL('../../packages/dialtone-docs/project.json', import.meta.url)));
+  assert.ok(docs.targets.build.dependsOn?.includes('dialtone-combinator:generate-examples'));
+  const generated = ['packages/combinator/.generated/preset-examples.json'];
+  assert.deepEqual(covered(generated, inputs('dialtone-docs').depsOutputs.map(input => input.dependentTasksOutputFiles)), generated);
+
+});
+
+test('icon Vue builds hash tracked generator sources', () => {
+  const paths = [
+    'packages/dialtone-icons/src/svg/icons/alerts/alert-circle.svg',
+    'packages/dialtone-icons/src/IconTemplate.vue',
+    'packages/dialtone-icons/src/IllustrationTemplate.vue',
+    'packages/dialtone-icons/src/utils.js',
+    'packages/dialtone-icons/transformSVGtoVue.cjs',
+    'packages/dialtone-icons/gulpfile.cjs',
+    'packages/dialtone-icons/vue/vite.config.js',
+  ];
+  assert.deepEqual(covered(paths, selfPatterns('dialtone-icons/vue')), paths);
 });

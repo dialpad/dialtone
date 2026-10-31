@@ -2,7 +2,9 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
-import { buildExampleRecords, buildExampleCoverage, selectedExampleIds } from './documentation-examples.mjs';
+import { buildExampleRecords, buildExampleCoverage, selectedExampleIds, publicIdentities } from './documentation-examples.mjs';
+import { buildPresetExampleRecords } from './preset-examples.mjs';
+import { buildComponentPage } from './build-component-doc-links.mjs';
 import { glob } from 'glob';
 import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
@@ -248,11 +250,28 @@ async function build() {
 
   const allRecords = [];
   const coverage = [];
+  const componentPages = [];
+  const identities = publicIdentities(vuePackage).map(identity => ({ identity }));
   for (const file of files) {
     const records = buildRecords(file);
     allRecords.push(...records);
-    coverage.push(buildExampleCoverage({ rawFile: readFileSync(file, 'utf8'), filePath: relative(repoRoot, file).replace(/\\/g, '/'), records }));
+    const rawFile = readFileSync(file, 'utf8');
+    coverage.push(buildExampleCoverage({ rawFile, filePath: relative(repoRoot, file).replace(/\\/g, '/'), records }));
+    if (records.some(record => record.category === 'components')) {
+      componentPages.push(await buildComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities));
+    }
   }
+
+  const presetPath = resolve(repoRoot, 'packages/combinator/.generated/preset-examples.json');
+  let presetReport;
+  try {
+    presetReport = JSON.parse(readFileSync(presetPath, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') throw new Error('Missing preset intermediate; run dialtone-combinator:generate-examples');
+    throw error;
+  }
+  const presets = buildPresetExampleRecords(presetReport, { records: allRecords, vuePackage, componentPages });
+  allRecords.push(...presets.records);
 
   const ids = new Set();
   for (const record of allRecords) {
@@ -280,6 +299,7 @@ async function build() {
     remaining: coverage.reduce((sum, page) => sum + page.remaining, 0),
     completePages: coverage.filter(page => page.complete).map(page => page.filePath),
   } };
+  writeFileSync(resolve(distDir, 'preset-example-coverage.json'), JSON.stringify(presets.coverage, null, 2), 'utf8');
   writeFileSync(resolve(distDir, 'example-coverage.json'), JSON.stringify(report, null, 2), 'utf8');
   console.info(`public-docs.json built: ${allRecords.length} sections → ${outputPath}`);
 }

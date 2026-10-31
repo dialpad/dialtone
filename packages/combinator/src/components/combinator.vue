@@ -230,6 +230,7 @@ import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
 import {
   buildVariantInfo,
+  createVariantBindings,
   computeDisabledMembers,
   getInitialValues,
   listVariantNames,
@@ -336,6 +337,8 @@ const variantOptions = computed(() => {
   }));
 });
 
+const { infoBindings, optionBindings } = createVariantBindings(() => info.value, () => options.value);
+
 /**
  * Container for all extended component information for the target component.
  * Immutable.
@@ -355,19 +358,7 @@ const info = computed(() => {
         });
       },
     },
-    bindings: {
-      get() {
-        const bindings = [];
-        this.enumerate((_, binding) => bindings.push(binding));
-        return bindings;
-      },
-      enumerate(handler) {
-        enumerateGroups(handler, {
-          props: info.value.props,
-          attributes: info.value.attributes?.filter((attribute) => attribute),
-        });
-      },
-    },
+    bindings: infoBindings,
   });
 });
 
@@ -382,23 +373,7 @@ const options = computedModel(
     _forceReset.value; // force recompute on reset
     return reactive({
       ...getInitialValues(info.value),
-      bindings: {
-        get() {
-          const bindings = [];
-          this.enumerate((_, binding) => bindings.push(binding));
-          return Object.fromEntries(bindings);
-        },
-        enumerate(handler) {
-          enumerateGroups(handler, {
-            props: options.value.props
-              ? Object.entries(options.value.props)
-              : null,
-            attributes: options.value.attributes
-              ? Object.entries(options.value.attributes)
-              : null,
-          });
-        },
-      },
+      bindings: optionBindings,
     });
   }),
   /**
