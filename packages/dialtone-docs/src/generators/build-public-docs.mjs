@@ -39,20 +39,13 @@ function extractTitle(frontmatter, body) {
 }
 
 /**
- * Split a markdown body into heading-bounded sections.
- * H2 headings start a new top-level section; H3 headings nest under the current H2.
- * Headings inside fenced code blocks are treated as plain content and do NOT split.
- * Returns: Array<{ headingPath: string[], raw: string }>
+ * Build a page's DocumentationRecord[] and its example coverage from one source read.
+ * Non-ready statuses (planned, beta, wip) publish no records but still report coverage.
  *
  * NOTE: stripMarkdown consumes fenced code, comments and script/style blocks in
  * extractProse before htmlTag strips VuePress directives. Usage-slot boundaries
  * are protected there too; labels are finalized only after stripping empty slots.
  * Keep extractProse first in strip-markdown.mjs.
- */
-
-/**
- * Build DocumentationRecord[] from a single markdown file.
- * Returns an empty array for files with non-ready statuses (planned, beta, wip).
  *
  * NOTE: VuePress markdown frontmatter uses snake_case (figma_url) by convention.
  * The output JSON uses camelCase (figmaUrl) to match TypeScript/JavaScript conventions —

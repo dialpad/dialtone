@@ -62,7 +62,8 @@ describe('source-driven component examples', () => {
     ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
     ['unresolved', '## 🧪\n' + fence('<dt-button :disabled="missing">Save</dt-button>'), 'components', 'remaining', 'missing'],
     ['outside the enabled area', '## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
-  ])('keeps %s candidates with non-publishable derived IDs in coverage', (_, raw, area, disposition, reason) => {
+    ['identity-override', '## Default\n' + annotation({ id: 'examples/guide-demo' }) + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
+  ])('keeps %s candidates undelivered and accounted for in coverage',(_, raw, area, disposition, reason) => {
     const options = input(raw);
     options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
     expect(buildExampleRecords(options)).toEqual([]);
@@ -90,13 +91,6 @@ describe('source-driven component examples', () => {
     const raw = '## Usage\n<dialtone-usage>\n<template #dont>\n\n' + fence('<dt-button>Delete</dt-button>') + '\n\n</template>\n</dialtone-usage>';
     expect(produce(raw)).toEqual([]);
     expect(buildExampleCoverage(input(raw)).candidates[0].reason).toContain('Contextual');
-  });
-
-  it('does not let an identity override enroll a Vue demo outside the component rule', () => {
-    const options = input('## Default\n' + annotation({ id: 'examples/guide-demo' }) + fence('<dt-button>Save</dt-button>'));
-    options.filePath = 'apps/dialtone-documentation/docs/guides/example.md';
-    expect(buildExampleRecords(options)).toEqual([]);
-    expect(buildExampleCoverage(options).candidates[0].reason).toContain('outside');
   });
 
   it.each(['commented', 'nested'])('rejects %s scripts as authored top-level state', kind => {

@@ -30,6 +30,11 @@ function apiContext() {
   return sourceApi;
 }
 
+/** Dialtone directive names (`dt-…`) applied in markup; comments are ignored. */
+export function directiveNames(template) {
+  return [...template.replace(/<!--[\s\S]*?-->/g, '').matchAll(/\sv-(dt-[a-z0-9-]+)/g)].map(match => match[1]);
+}
+
 function validateId(id, location) {
   if (typeof id !== 'string' || !/^examples\/(?:[a-z0-9_-]+\/)*[a-z0-9_-]+$/.test(id)
     || id.startsWith('examples/presets/') || id === 'examples/presets' || id.length > 256) {
@@ -113,8 +118,7 @@ function definitionFor(candidate, options) {
     else if (icon) icons.push(icon);
     else return { kind: 'unresolved-api', reason: `API unknown-component: ${tag}` };
   }
-  const directiveNames = [...template.replace(/<!--[\s\S]*?-->/g, '').matchAll(/\sv-(dt-[a-z0-9-]+)/g)].map(match => match[1]);
-  for (const directive of directiveNames) {
+  for (const directive of directiveNames(template)) {
     const name = context.directives.find(name => normalizeComponentName(name) === normalizeComponentName(`${directive}-directive`));
     if (!name) return { kind: 'unresolved-api', reason: `API unknown-directive: ${directive}` };
     if (!definition.directives.includes(name)) definition.directives.push(name);
@@ -142,6 +146,7 @@ export function readSourceExamples(options) {
     : filePath.endsWith('.mdx') ? 'MDX markers not supported'
       : NON_READY_STATUSES.has(String(data.status).trim().toLowerCase()) ? 'not-ready source' : null;
   const automatic = filePath.startsWith('apps/dialtone-documentation/docs/components/');
+  const pathDocId = filePath.replace(/^apps\/dialtone-documentation\/docs\//, '').replace(/\.mdx?$/, '');
   const candidates = [];
   let referenceCandidates = 0;
   let usageDepth = 0;
@@ -149,7 +154,8 @@ export function readSourceExamples(options) {
     const tokens = markdown.parse(section.raw, {});
     let pending;
     for (const token of tokens) {
-      const location = `${filePath}:${lineOffset + (section.sourceStartLine ?? 0) + (token.map?.[0] ?? 0) + 1}`;
+      const line = lineOffset + (section.sourceStartLine ?? 0) + (token.map?.[0] ?? 0) + 1;
+      const location = `${filePath}:${line}`;
       if (token.type === 'html_block' && /<!--\s*example-id:/.test(token.content)) throw new Error(`${location}: migrate legacy example-id to @example JSON`);
       if (token.type === 'html_block' && /<!--\s*@example\b/.test(token.content)) {
         if (pending) throw new Error(`${location}: duplicate or orphan @example`);
@@ -177,12 +183,11 @@ export function readSourceExamples(options) {
         continue;
       }
       const source = records.find(record => record.headingPath === section.headingPath) ?? records[sectionIndex] ?? {
-        id: `${filePath}#${section.baseSlug}`, docId: filePath.replace(/^apps\/dialtone-documentation\/docs\//, '').replace(/\.mdx?$/, ''), headingPath: section.headingPath,
+        id: `${filePath}#${section.baseSlug}`, docId: pathDocId, headingPath: section.headingPath,
       };
-      const docId = source.docId ?? filePath.replace(/^apps\/dialtone-documentation\/docs\//, '').replace(/\.mdx?$/, '');
-      const baseId = `examples/docs/${docId}/${section.baseSlug}`;
+      const baseId = `examples/docs/${source.docId ?? pathDocId}/${section.baseSlug}`;
       const id = annotation.id ?? `${baseId}${annotation.key ? `/${annotation.key}` : ''}`;
-      const candidate = { id, sourceLine: lineOffset + (section.sourceStartLine ?? 0) + token.map[0] + 1,
+      const candidate = { id, sourceLine: line,
         headingPath: section.headingPath, displayTwin: live.displayTwin ?? false, template: live.template, annotation,
         baseId, unkeyed: !annotation.id && !annotation.key, source, disposition: 'remaining', eligible: false };
       if (exclusion || annotation.exclude) {
@@ -208,11 +213,15 @@ export function readSourceExamples(options) {
     }
     if (pending) throw new Error(`${pending.location}: orphan @example at section end`);
   }
+  // Unkeyed demos in one section share a derived ID; that only matters once one of them is delivered.
+  const unkeyed = new Map();
   for (const candidate of candidates) {
-    if (candidate.unkeyed && candidates.filter(other => other.baseId === candidate.baseId && other.unkeyed).length > 1
-      && candidates.some(other => other.baseId === candidate.baseId && other.eligible && other.unkeyed)) {
-      const lines = candidates.filter(other => other.baseId === candidate.baseId && other.unkeyed)
-        .map(other => other.sourceLine).join(', ');
+    if (candidate.unkeyed) unkeyed.set(candidate.baseId, [...(unkeyed.get(candidate.baseId) ?? []), candidate]);
+  }
+  for (const group of unkeyed.values()) {
+    if (group.length > 1 && group.some(other => other.eligible)) {
+      const [candidate] = group;
+      const lines = group.map(other => other.sourceLine).join(', ');
       const error = new Error([
         `${filePath}:${candidate.sourceLine}: ambiguous example section "${candidate.headingPath.join(' > ')}"; live fences at lines ${lines}.`,
         `These demos would share the derived ID ${candidate.baseId}.`,
