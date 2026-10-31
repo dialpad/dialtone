@@ -2,13 +2,16 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
-import { buildExampleRecords, buildExampleCoverage, selectedExampleIds, publicIdentities } from './documentation-examples.mjs';
+import { buildSourceExamples, publicIdentities } from './documentation-examples.mjs';
 import { buildPresetExampleRecords } from './preset-examples.mjs';
 import { buildComponentPage } from './build-component-doc-links.mjs';
 import { glob } from 'glob';
 import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
+
+import { chunkSections, slugify, NON_READY_STATUSES } from './source-sections.mjs';
+export { chunkSections } from './source-sections.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,18 +24,6 @@ const vuePackage = JSON.parse(readFileSync(resolve(vueRoot, 'package.json'), 'ut
 const distDir = resolve(packageRoot, 'dist');
 const outputPath = resolve(distDir, 'public-docs.json');
 
-// Statuses that indicate a doc is NOT yet production-ready.
-// Files with no status field are treated as published (guides, design pages, whats-new).
-// NOTE: this is a blacklist, not a whitelist — any unrecognized status is included.
-// If a new non-ready status is added to the corpus, add it here explicitly.
-const NON_READY_STATUSES = new Set(['planned', 'beta', 'wip']);
-
-function slugify(text) {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
 
 function extractTitle(frontmatter, body) {
   if (frontmatter.title) return String(frontmatter.title);
@@ -58,72 +49,6 @@ function extractTitle(frontmatter, body) {
  * are protected there too; labels are finalized only after stripping empty slots.
  * Keep extractProse first in strip-markdown.mjs.
  */
-export function chunkSections(body) {
-  const lines = body.split('\n');
-  const sections = [];
-  let currentH2 = null;
-  let currentH3 = null;
-  let currentLines = [];
-  let inFence = false;
-  let fenceChar = null;
-  let fenceLength = 0;
-
-  function flush() {
-    const raw = currentLines.join('\n').trim();
-    if (!raw) return;
-    const headingPath = [];
-    if (currentH2) headingPath.push(currentH2);
-    if (currentH3) headingPath.push(currentH3);
-    sections.push({ headingPath, raw });
-  }
-
-  for (const line of lines) {
-    // Track fenced code blocks (3+ backticks or tildes)
-    const fenceMatch = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
-    if (fenceMatch) {
-      const char = fenceMatch[1][0];
-      const len = fenceMatch[1].length;
-      const trailing = fenceMatch[2];
-      if (!inFence) {
-        inFence = true;
-        fenceChar = char;
-        fenceLength = len;
-      } else if (char === fenceChar && len >= fenceLength && /^[ \t]*$/.test(trailing)) {
-        // CommonMark §4.5: closing fences must have no trailing text (info strings are only valid on openers)
-        inFence = false;
-        fenceChar = null;
-        fenceLength = 0;
-      }
-      currentLines.push(line);
-      continue;
-    }
-
-    if (inFence) {
-      currentLines.push(line);
-      continue;
-    }
-
-    // Check for H2 before H3 — H3 regex (###) is a subset of H2 (##)
-    const h2 = line.match(/^##(?!#)\s+(.+)$/);
-    const h3 = !h2 && line.match(/^###(?!#)\s+(.+)$/);
-
-    if (h2) {
-      flush();
-      currentH2 = h2[1].replace(/[*_`]/g, '').trim();
-      currentH3 = null;
-      currentLines = [];
-    } else if (h3) {
-      flush();
-      // H3 inherits the current H2 context (or stands alone if no H2 seen yet)
-      currentH3 = h3[1].replace(/[*_`]/g, '').trim();
-      currentLines = [];
-    } else {
-      currentLines.push(line);
-    }
-  }
-  flush();
-  return sections;
-}
 
 /**
  * Build DocumentationRecord[] from a single markdown file.
@@ -133,7 +58,7 @@ export function chunkSections(body) {
  * The output JSON uses camelCase (figmaUrl) to match TypeScript/JavaScript conventions —
  * same pattern as build-ai-docs.mjs (e.g. ai_summary → summary, last_updated → lastUpdated).
  */
-export function buildRecords(absolutePath) {
+function readPage(absolutePath, componentPage) {
   const rawFile = readFileSync(absolutePath, 'utf8');
   const { data: frontmatter, content } = matter(rawFile);
   const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
@@ -147,7 +72,7 @@ export function buildRecords(absolutePath) {
   const status = typeof frontmatter.status === 'string'
     ? frontmatter.status.trim().toLowerCase()
     : '';
-  if (status && NON_READY_STATUSES.has(status)) return [];
+  const excluded = status && NON_READY_STATUSES.has(status);
 
   const name = basename(absolutePath).replace(/\.mdx?$/, '');
 
@@ -194,7 +119,7 @@ export function buildRecords(absolutePath) {
   if (sections.length === 0) {
     // No H2/H3 headings — emit one record for the whole body
     const content = stripMarkdown(body, { stripFrontmatter: false, preserveFencedCode: isDirective });
-    return [{
+    return { records: excluded ? [] : [{
       id: docId,
       docId,
       docTitle,
@@ -203,13 +128,14 @@ export function buildRecords(absolutePath) {
       content,
       frontmatter: fm,
       filePath,
-    }];
+    }], coverage: buildSourceExamples({
+      rawFile, sections, records: [], filePath, vuePackage, componentPage,
+    }).coverage };
   }
 
   const usedSlugs = new Map();
-  const records = sections.map(({ headingPath, raw }) => {
+  const records = sections.map(({ headingPath, raw, baseSlug }) => {
     const content = stripMarkdown(raw, { stripFrontmatter: false, preserveFencedCode: isDirective });
-    const baseSlug = headingPath.length > 0 ? slugify(headingPath.join('-')) : 'intro';
     const count = usedSlugs.get(baseSlug) ?? 0;
     usedSlugs.set(baseSlug, count + 1);
     const slug = count === 0 ? baseSlug : `${baseSlug}-${count}`;
@@ -225,7 +151,22 @@ export function buildRecords(absolutePath) {
       filePath,
     };
   }).filter(record => !isDirective || record.content.trim().length > 0);
-  return [...records, ...buildExampleRecords({ rawFile, sections, records, filePath, vuePackage })];
+  const lineOffset = rawFile.slice(0, rawFile.length - content.length + headingStart).split('\n').length - 1;
+  const sourceExamples = buildSourceExamples({
+    rawFile, sections, records, filePath, vuePackage, componentPage, lineOffset,
+  });
+  return { records: excluded ? [] : [...records, ...sourceExamples.records], coverage: sourceExamples.coverage };
+}
+
+export function buildRecords(absolutePath) {
+  return readPage(absolutePath).records;
+}
+
+export async function buildReadyComponentPage(filePathRelative, source, identities) {
+  if (!filePathRelative.startsWith('components/')) return undefined;
+  const status = String(matter(source).data.status ?? '').trim().toLowerCase();
+  if (NON_READY_STATUSES.has(status)) return undefined;
+  return buildComponentPage(filePathRelative, source, identities);
 }
 
 async function build() {
@@ -253,13 +194,12 @@ async function build() {
   const componentPages = [];
   const identities = publicIdentities(vuePackage).map(identity => ({ identity }));
   for (const file of files) {
-    const records = buildRecords(file);
-    allRecords.push(...records);
     const rawFile = readFileSync(file, 'utf8');
-    coverage.push(buildExampleCoverage({ rawFile, filePath: relative(repoRoot, file).replace(/\\/g, '/'), records }));
-    if (records.some(record => record.category === 'components')) {
-      componentPages.push(await buildComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities));
-    }
+    const componentPage = await buildReadyComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities);
+    if (componentPage) componentPages.push(componentPage);
+    const page = readPage(file, componentPage);
+    allRecords.push(...page.records);
+    if (page.coverage) coverage.push(page.coverage);
   }
 
   const presetPath = resolve(repoRoot, 'packages/combinator/.generated/preset-examples.json');
@@ -278,9 +218,7 @@ async function build() {
     if (ids.has(record.id)) throw new Error(`Duplicate documentation ID: ${record.id}`);
     ids.add(record.id);
   }
-  for (const id of selectedExampleIds) {
-    if (!ids.has(id)) throw new Error(`Selected example source missing: ${id}; retire or update its definition deliberately`);
-  }
+
 
   // Sort alphabetically by docId; Array.sort is stable in V8, so section order
   // within each doc is preserved.
@@ -304,11 +242,18 @@ async function build() {
   console.info(`public-docs.json built: ${allRecords.length} sections → ${outputPath}`);
 }
 
+export function formatBuildError(error, githubActions = process.env.GITHUB_ACTIONS === 'true') {
+  if (!githubActions || error.code !== 'AMBIGUOUS_EXAMPLE_ID') return `Build failed: ${error.message}`;
+  const data = value => String(value).replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
+  const property = value => data(value).replaceAll(':', '%3A').replaceAll(',', '%2C');
+  return `::error file=${property(error.filePath)},line=${error.sourceLine},title=Ambiguous example IDs::${data(error.message)}`;
+}
+
 // Execute only when run as a script, not when imported as a module (e.g. by tests)
 const isMain = process.argv[1] === __filename;
 if (isMain) {
   build().catch(err => {
-    console.error('Build failed:', err.message);
+    console.error(formatBuildError(err));
     process.exit(1);
   });
 }

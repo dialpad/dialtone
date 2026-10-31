@@ -1,3 +1,4 @@
+import MarkdownIt from 'markdown-it';
 import { createRequire } from 'node:module';
 
 const require = createRequire(new URL('../../../../apps/dialtone-documentation/package.json', import.meta.url));
@@ -22,8 +23,12 @@ export function componentTags(template) {
 /** Keep only the named source declarations and their Vue ref import for this cohort. */
 export function sourceSetup(rawFile, names = []) {
   if (!names.length) return '';
-  const script = rawFile.match(/<script\s+setup\s*>([\s\S]*?)<\/script>/)?.[1];
-  if (!script) throw new Error(`Missing authored setup for ${names.join(', ')}`);
+  const scripts = new MarkdownIt({ html: true }).parse(rawFile, {})
+    .filter(token => token.type === 'html_block' && token.level === 0)
+    .map(token => token.content.match(/^\s*<script\s+setup\s*>([\s\S]*?)<\/script>\s*$/)?.[1])
+    .filter(script => script !== undefined);
+  if (scripts.length !== 1) throw new Error(`Missing or ambiguous authored setup for ${names.join(', ')}`);
+  const [script] = scripts;
   const { descriptor } = parse(`<script setup>${script}</script>`);
   const compiled = compileScript(descriptor, { id: 'source-example' });
   const declarations = names.map(name => {
@@ -43,7 +48,7 @@ export function sourceSetup(rawFile, names = []) {
 }
 
 /** Compiler bindings plus parser references preserve v-for/slot lexical scopes and Vue public properties. */
-export function assertTemplateBindings(template, setup = '') {
+function missingTemplateBindings(template, setup = '') {
   const sfc = `${setup ? `<script setup>\n${setup}</script>` : ''}<template>${template}</template>`;
   const { descriptor } = parse(sfc);
   const bindings = setup ? compileScript(descriptor, { id: 'source-example' }).bindings : {};
@@ -65,7 +70,17 @@ export function assertTemplateBindings(template, setup = '') {
     }
   }
   visit(ast.templateBody);
-  if (missing.size) throw new Error(`Unresolved template bindings: ${[...missing].join(', ')}`);
+  return [...missing];
+}
+
+/** Infer only supported declarations actually referenced by this template. */
+export function sourceSetupForTemplate(rawFile, template) {
+  return sourceSetup(rawFile, missingTemplateBindings(template));
+}
+
+export function assertTemplateBindings(template, setup = '') {
+  const missing = missingTemplateBindings(template, setup);
+  if (missing.length) throw new Error(`Unresolved template bindings: ${missing.join(', ')}`);
 }
 
 /** Static HTML is authored markup, never Vue rendering or a copied page script. */

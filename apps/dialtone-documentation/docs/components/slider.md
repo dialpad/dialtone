@@ -57,6 +57,8 @@ A slider is appropriate when the exact value is less important than the relative
 
 Set `min-gap-steps` to keep a minimum separation between range values. It's a number of steps, not a raw value gap — the actual minimum gap enforced between the thumbs' values is `minGapSteps * step`; for example, 5 steps of size 10 require a gap of 50:
 
+<!-- @example {"key":"minimum-gap"} -->
+
 ```vue demo
 <dt-slider
   :model-value="[20, 70]"
@@ -123,6 +125,8 @@ Pair a range slider with number inputs for precise entry. Bind the slider to an 
 
 Icon-only content works the same way — give it an `aria-label` so the meaning still reaches screen readers:
 
+<!-- @example {"key":"icons"} -->
+
 ```vue demo
 <!-- @wrapper -->
 <dt-slider :model-value="50" label="Mood">
@@ -154,6 +158,8 @@ When the `showTicks` interval equals `step`, every value the thumb can land on g
 
 When they differ, ticks become checkpoints along a finer scale rather than a mark for every stop — the thumb still moves by `step`, ticks just call out the notable positions:
 
+<!-- @example {"key":"interval"} -->
+
 ```vue demo
 <dt-slider
   :model-value="42"
@@ -184,6 +190,8 @@ Pass a number for an evenly spaced interval:
 ```
 
 Pass an array for arbitrary snap values — unlike an interval, they don't need to be evenly spaced:
+
+<!-- @example {"key":"custom-points"} -->
 
 ```vue demo
 <dt-slider
@@ -222,6 +230,8 @@ Pass an array of numbers to label positions automatically:
 
 Pass `{ value, text }` objects when the label at a position isn't just the number itself — `value` still positions the mark on the track, but `text` can be any string. The readout doesn't read from `marks`, so pair it with `getValueText` or `suffix` to keep it consistent with what the marks say:
 
+<!-- @example {"key":"named-marks"} -->
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
@@ -247,6 +257,8 @@ Pass `{ value, text }` objects when the label at a position isn't just the numbe
 ```
 
 Marks and ticks are independent — a mark doesn't need a tick at the same position and vice versa, so dense ticks pair well with sparser marks:
+
+<!-- @example {"key":"ticks-and-marks"} -->
 
 ```vue demo
 <!-- @wrapper -->
@@ -301,11 +313,15 @@ Use `readout-class` to style the individual and merged readouts in `always` mode
 
 Use `prefix`/`suffix` to decorate the raw number wherever it's displayed — the readout, marks, and each thumb's `aria-valuetext` all pick it up:
 
+<!-- @example {"key":"percent"} -->
+
 ```vue demo
 <dt-slider :model-value="58" label="Traffic split" suffix="%" />
 ```
 
 For anything beyond a fixed prefix/suffix, pass `getValueText` — it takes precedence and receives the thumb index too, so range sliders can give each thumb distinct text:
+
+<!-- @example {"key":"range"} -->
 
 ```vue demo
 <dt-slider
@@ -317,6 +333,8 @@ For anything beyond a fixed prefix/suffix, pass `getValueText` — it takes prec
 ```
 
 To render the value somewhere custom outside the component instead, set `readout="never"` and drive your own display off the same `v-model`:
+
+<!-- @example {"key":"application-state"} -->
 
 ```vue demo
 <!-- @wrapper -->
@@ -395,6 +413,8 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 
 Customize the track length with a CSS utility class directly on the component:
 
+<!-- @example {"key":"fixed-height"} -->
+
 ```vue demo
 <!-- @class d-hmn-600 -->
 <dt-slider
@@ -429,6 +449,8 @@ Use `dt-text` with `variant="label-md"` and `tone="secondary"` to match the defa
   </template>
 </dt-slider>
 ```
+
+<!-- @example {"key":"playback-speed"} -->
 
 ```vue demo
 <dt-slider

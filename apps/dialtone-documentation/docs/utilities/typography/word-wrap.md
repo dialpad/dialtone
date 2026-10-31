@@ -8,7 +8,7 @@ keywords: ["overflow wrap", "break word", "long url"]
 
 Use `d-ww-normal` to break words only at allowed break points.
 
-<!-- example-id: examples/utility-word-wrap-normal -->
+<!-- @example {"id":"examples/utility-word-wrap-normal","representation":"static-html","targetUtilities":["d-ww-normal"]} -->
 
 ```vue demo
 <div class="d-bgc-moderate d-py-100 d-px-200 d-bar-400 lg:d-w-350 d-w-500">
