@@ -196,7 +196,12 @@ export function readSourceExamples(options) {
         if (annotation.exclude) candidate.owner = annotation.exclude.owner;
         candidate.syntax = { kind: 'excluded-source' };
       } else {
-        const syntax = live.error ? { kind: 'unsupported-source-syntax', reason: live.error } : definitionFor(candidate, options);
+        let syntax;
+        try {
+          syntax = live.error ? { kind: 'unsupported-source-syntax', reason: live.error } : definitionFor(candidate, options);
+        } catch (error) {
+          throw new Error(`${location}: ${error.message}`, { cause: error });
+        }
         const { definition, ...classification } = syntax;
         candidate.syntax = classification;
         candidate.reason = classification.reason;

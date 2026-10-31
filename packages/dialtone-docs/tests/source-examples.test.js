@@ -93,6 +93,17 @@ describe('source-driven component examples', () => {
     expect(() => produce(raw)).toThrow(/invalid example ID/);
   });
 
+  it('locates invalid static source and preserves the underlying error', () => {
+    const options = input('## Default\n'
+      + annotation({ representation: 'static-html', targetUtilities: ['d-ww-normal'] })
+      + fence('<p class="d-ww-normal">{{ label }}</p>'));
+    options.filePath = 'apps/dialtone-documentation/docs/utilities/typography/word-wrap.md';
+    expect(() => buildExampleRecords(options)).toThrowError(expect.objectContaining({
+      message: expect.stringMatching(/word-wrap.md:\d+:.*interpolation/),
+      cause: expect.objectContaining({ message: expect.stringContaining('interpolation') }),
+    }));
+  });
+
   it('does not let a future reference fence change a live demo address', () => {
     const records = produce(ordinary + '\n```vue code-only\n<dt-button>Reference</dt-button>\n```');
     expect(records.map(x => x.id)).toEqual(['examples/docs/components/example/default']);
