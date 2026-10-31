@@ -134,9 +134,8 @@ function readPage(absolutePath, componentPage) {
   }
 
   const usedSlugs = new Map();
-  const records = sections.map(({ headingPath, raw }) => {
+  const records = sections.map(({ headingPath, raw, baseSlug }) => {
     const content = stripMarkdown(raw, { stripFrontmatter: false, preserveFencedCode: isDirective });
-    const baseSlug = headingPath.length > 0 ? slugify(headingPath.join('-')) : 'intro';
     const count = usedSlugs.get(baseSlug) ?? 0;
     usedSlugs.set(baseSlug, count + 1);
     const slug = count === 0 ? baseSlug : `${baseSlug}-${count}`;
