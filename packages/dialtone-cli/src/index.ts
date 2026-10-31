@@ -25,7 +25,8 @@ async function checkVersion() {
     if (data.version && data.version !== pkg.version) {
       console.error('');
       console.error(`  Update available: v${pkg.version} → v${data.version}`);
-      console.error(`  Run: npm install -g ${pkg.name}@latest`);
+      console.error('  Update using your installation method:');
+      console.error('  https://dialtone.dialpad.com/guides/cli/#update-the-cli');
       console.error('');
     }
   } catch {
