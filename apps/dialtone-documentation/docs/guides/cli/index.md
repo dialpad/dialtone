@@ -20,17 +20,23 @@ Use the CLI for direct lookups, shell scripts, and compact context for coding ag
 
 ## Installation
 
-Install the CLI globally:
+For a repeatable project-local installation, run these commands in the application directory:
+
+```bash
+npm install --save-dev --save-exact @dialpad/dialtone-cli
+npm exec --no -- dialtone --help
+```
+
+Commit the dependency manifest and lockfile. Use `npm exec --no -- dialtone ...` from that directory for the examples below. The runner can find hoisted workspace bins and declines a requested installation, but may still use an ancestor `node_modules/.bin`, npm's global bin or a cached package. Check `npm ls @dialpad/dialtone-cli` and the selected command/version. A package prefix selects an executable location; it does not make the CLI inspect that application's data from another working directory.
+
+A global installation is optional:
 
 ```bash
 npm install -g @dialpad/dialtone-cli
-```
-
-Confirm the installation:
-
-```bash
 dialtone --help
 ```
+
+The remaining examples use the shorter `dialtone` form and require a global installation. For a project-local install, replace bare `dialtone` with `npm exec --no -- dialtone`. A coding assistant's shell needs the same executable resolution and permission to run it; installing the package does not load assistant instructions.
 
 Run CLI commands from your project. The CLI prints one line on stderr naming the Dialtone data it uses:
 
@@ -314,11 +320,13 @@ You can install both. The CLI handles explicit terminal queries; the MCP server 
 
 ## Update the CLI
 
-The CLI checks npm for a newer version in the background, and gives up after 3 seconds. Update it globally when an update is available:
+The CLI checks npm for a newer version in the background and gives up after three seconds. Update a project-local dependency from its application directory:
 
 ```bash
-npm install -g @dialpad/dialtone-cli@latest
+npm install --save-dev --save-exact @dialpad/dialtone-cli@latest
 ```
+
+Review and commit the manifest/lockfile change. For a global installation, use `npm install -g @dialpad/dialtone-cli@latest`. The current CLI notice prints that global command even for a local installation; choose the command matching your installation. The notice does not update packages automatically.
 
 Updating refreshes bundled documentation, discovery keywords, and the fallback data used outside a Dialtone project. Docs-only keyword edits are eligible for a CLI release through the normal release process. They can reach the site before publication and a CLI update. Source merge and local builds do not update installed tools.
 
@@ -326,15 +334,11 @@ Updating refreshes bundled documentation, discovery keywords, and the fallback d
 
 ### The command is not found
 
-Install the package globally, then restart your terminal so it can resolve the `dialtone` executable:
-
-```bash
-npm install -g @dialpad/dialtone-cli
-```
+For a project dependency, run `npm exec --no -- dialtone --help` from the application directory and verify the dependency is installed. For a global installation, check that npm's global bin directory is on the terminal or client PATH. Restart the affected client after changing its environment.
 
 ### Results do not match the project
 
-Run the command from inside the project. The source line names the package and version each kind of data came from; `bundled` means the CLI couldn't find installed data for it. A version warning means the installed packages don't match `package.json`; reinstall dependencies.
+Run the command from inside the project. The source line names the package and version each kind of data came from. `--bundled` intentionally selects the CLI's bundled data. Documentation is always bundled; for domains that support installed data, `bundled` without that option means installed data was not selected. A version warning means the installed packages don't match `package.json`; reinstall dependencies.
 
 ### A search returns no useful results
 
