@@ -213,7 +213,7 @@ In `Backbone` we are not using `border-box` by default. Because Dialtone expects
 
 ## AI-Assisted Development
 
-Use the [Dialtone CLI](/guides/cli/) for explicit terminal lookups, or connect the [Dialtone MCP Server](/guides/mcp-server/#installation) to Claude Code or Codex. Follow the tool guide's installation and client configuration steps; installing a package alone does not connect an assistant or load its instructions.
+Use the [Dialtone CLI](/guides/cli/) for explicit terminal lookups, or connect the [Dialtone MCP Server](/guides/mcp-server/#installation) to Claude Code or Codex. Follow the Dialtone MCP Server guide's installation and client configuration steps; installing a package alone does not connect an assistant or load its instructions.
 
 MCP uses bundled references unless you configure an absolute application data root. Check the selected source/version after connecting, and restart the server after configuration or dependency changes. Keep your project's existing assistant guidance and permission controls.
 
