@@ -1,0 +1,30 @@
+packages/dialtone-vue/components/Modal/Modal.vue
+  s_32c01086376731::t_6b15407df901bb 432
+  s_32c01086376731::t_56c4ad657a2bbe 511-514
+  s_32c01086376731::t_83d60d02f78237 23
+  s_32c01086376731::t_4ca12c38543205 24
+  s_32c01086376731::t_40b02931a987a4 515-518
+  s_32c01086376731::t_034944917b5491 433
+  s_32c01086376731::t_c6763a240882fe 520-521
+packages/dialtone-vue/components/Modal/Modal.test.js
+  s_32c01086376731::t_12b37be8d4d2a7 265,273,278,280,284-286
+  s_32c01086376731::t_6639746ff48b2b 287-288
+  s_32c01086376731::t_e415aa30757fd2 266,274,276-277,279,281-283
+  s_32c01086376731::t_5cf8e2c9bfa969 275
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c6fb6ef70e24515a21706eeb848968e24a13c319",
+  "prompts": {},
+  "sessions": {
+    "s_32c01086376731": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4ec3c734-c801-4973-a796-99e567ac7962",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "ninarepetto <nina.repetto@dialpad.com>"
+    }
+  }
+}

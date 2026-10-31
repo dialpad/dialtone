@@ -1,0 +1,40 @@
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_eb6477f639b6fd::t_32538df40b6146 55-57
+packages/dialtone-docs/tests/tests/strip-markdown.test.js
+  s_eb6477f639b6fd::t_2042b8b384798f 16,21,31,37
+  s_eb6477f639b6fd::t_9209ab39df0331 54-55
+  s_eb6477f639b6fd::t_8ce8248fb2ef8b 12-15,17-20,22-30,32-36,38-50,51,66-67
+  s_eb6477f639b6fd::t_ede82e654a5fc1 52-53,56-65
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_eb6477f639b6fd::t_8ce8248fb2ef8b 10,11,16,21-22
+  s_7f1d1d64baa803::t_4e67d56729a12c 15
+  s_7f1d1d64baa803::t_9d93cdae93f340 12-14,17-20
+packages/dialtone-docs/src/utils/strip-markdown.mjs
+  s_eb6477f639b6fd::t_cb9813a4771812 17-22
+  s_eb6477f639b6fd::t_4ed2cddfcd6e9d 13,23,26,48-50,57,64-74,76-81,121-122,136-138,152-154,159-160
+  s_eb6477f639b6fd::t_6556a79b86c4a9 24-25,51-56,58-63,75,155-158
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a5736c4d88ccdaa4631afcac96176bdce54e4d7b",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_eb6477f639b6fd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17ceb-cf17-7e53-b2b0-55fe8b565080",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+scripts/check-doc-review.mjs
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 1-226
+.claude/skills/doc-sync-enforcer.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 3,6,8,10,12
+.agents/skills/pr-prep/SKILL.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 40
+.claude/agents/pr-prep-coordinator.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 42-43
+.claude/hooks/pre-push-pr-guard.sh
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 3-6,8
+.claude/hooks/doc-review-adapter.mjs
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 1-44
+.agents/resources/source-docs-map.json
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 1-363
+scripts/check-doc-review.test.mjs
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 1-213
+.agents/skills/doc-sync-check/SKILL.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 3,10,27,34-39,43,45
+.agents/skills/doc-sync-check/evals/source-docs-map.json
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 9-10,62-106
+CLAUDE.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 80,82
+.agents/resources/agent-tooling-parity.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 89
+.agents/evals/run-skill-contract-evals.mjs
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 5,266-267,552-557
+.agents/resources/doc-sync.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 1-40
+.claude/commands/doc-sync-enforcer.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 2,5
+.agents/README.md
+  s_7f1d1d64baa803::t_d728d62ccc0f9c 21,32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b8e168d2b09b2d436afe713ac53499c43094b64b",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
