@@ -48,7 +48,7 @@ describe('source-driven component examples', () => {
   });
 
   it('retains a source-owned exclusion and physical location in coverage', () => {
-    const rawFile = '---\ntitle: Example\n---\n\n## Default\n' + annotation({ exclude: { reason: 'Needs an application service.', owner: 'Component owner' } }) + fence('<dt-button>Save</dt-button>');
+    const rawFile = '---\ntitle: Example\n---\n\n## Default\n' + annotation({ id: 'examples/guide-demo', exclude: { reason: 'Needs an application service.', owner: 'Component owner' } }) + fence('<dt-button>Save</dt-button>');
     const options = input(rawFile);
     const records = buildExampleRecords(options);
     const coverage = buildExampleCoverage({ ...options, records });
@@ -59,10 +59,9 @@ describe('source-driven component examples', () => {
   });
 
   it.each([
-    ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
+    ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + annotation({ id: 'examples/planned-demo' }) + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
     ['unresolved', '## 🧪\n' + fence('<dt-button :disabled="missing">Save</dt-button>'), 'components', 'remaining', 'missing'],
     ['outside the enabled area', '## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
-    ['identity-override', '## Default\n' + annotation({ id: 'examples/guide-demo' }) + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
   ])('keeps %s candidates undelivered and accounted for in coverage',(_, raw, area, disposition, reason) => {
     const options = input(raw);
     options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
@@ -70,6 +69,18 @@ describe('source-driven component examples', () => {
     const coverage = buildExampleCoverage(options);
     expect(coverage.candidates[0].disposition).toBe(disposition);
     expect(coverage.candidates[0].reason).toContain(reason);
+  });
+
+  it.each([
+    ['deprecated API', 'Default', '<dt-text kind="body">Text</dt-text>', 'components', /deprecated/i],
+    ['contextual guidance', 'Avoid this', '<dt-button>Save</dt-button>', 'components', /Contextual/],
+    ['outside the enabled area', 'Default', '<dt-button>Save</dt-button>', 'guides', /outside/],
+  ])('fails instead of silently retiring an explicit ID with %s', (_, heading, markup, area, reason) => {
+    const options = input(`## ${heading}\n` + annotation({ id: 'examples/guide-demo' }) + fence(markup));
+    options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
+    expect(() => buildExampleRecords(options)).toThrow(/example.md:\d+:.*examples\/guide-demo/);
+    expect(() => buildExampleRecords(options)).toThrow(reason);
+    expect(() => buildExampleRecords(options)).toThrow(/fix.*source.*exclude/i);
   });
 
   it('rejects non-publishable derived IDs when the candidate would be delivered', () => {

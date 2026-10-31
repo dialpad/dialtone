@@ -208,6 +208,9 @@ export function readSourceExamples(options) {
         candidate.definition = definition;
         if (contextual) candidate.reason = 'Contextual migration/before-after/negative guidance is not a standalone recommendation.';
         else if (definition && !candidate.eligible) candidate.reason = 'Source area is outside the enabled component-page rule.';
+        if (annotation.id && !candidate.eligible) {
+          throw new Error(`${location}: explicit example ID ${annotation.id} is not deliverable: ${candidate.reason} Fix the source or add exclude with a reason and owner to retire it deliberately.`);
+        }
       }
       candidates.push(candidate);
     }
