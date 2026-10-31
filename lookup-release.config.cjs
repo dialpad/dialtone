@@ -33,6 +33,7 @@ const commitPaths = [
   ':(glob)packages/dialtone-icons/*',
   'packages/dialtone-icons/vue',
   'packages/dialtone-docs/src/generators',
+  'packages/dialtone-docs/scripts',
   'packages/dialtone-docs/src/utils',
   'packages/dialtone-docs/package.json',
   'packages/dialtone-docs/project.json',

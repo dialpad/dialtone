@@ -59,12 +59,14 @@ function consumerFiles(names, template, directives, setup = '', id = 'examples/b
 }
 
 /** Shared assembly and payload-bound qualification for authored fences and materialized presets. */
-export function assembleExampleRecord({ id, template, definition, rawFile = '', source, headingPath, filePath, vuePackage, sourceHash = hash(rawFile), sourcePackage }) {
+export function assembleExampleRecord({ id, template, definition, rawFile = '', source, headingPath, filePath, vuePackage, sourceHash = hash(rawFile), sourcePackage, onGuidanceInput }) {
   assertDeclaredUsage(id, template, definition);
   const staticHtml = definition.representation === 'static-html';
   const setup = staticHtml ? '' : sourceSetupForTemplate(rawFile, template);
   if (staticHtml) assertStaticHtml(template);
   else assertTemplateBindings(template, setup);
+  onGuidanceInput?.({ id, template, setup, components: definition.components, directives: definition.directives,
+    rawFile, headingPath, filePath });
   const names = definition.components;
   const identities = publicIdentities(vuePackage);
   const components = names.map(name => {
@@ -145,7 +147,8 @@ export function buildSourceExamples(options) {
     if (!candidate.eligible) continue;
     const record = assembleExampleRecord({
       id: candidate.id, template: candidate.template, definition: candidate.definition,
-      rawFile, source: candidate.source, headingPath: candidate.headingPath, filePath, vuePackage });
+      rawFile, source: candidate.source, headingPath: candidate.headingPath, filePath, vuePackage,
+      onGuidanceInput: candidate.definition.representation === 'static-html' ? undefined : options.onGuidanceInput });
     delivered.push(record);
     candidate.disposition = 'delivered';
   }

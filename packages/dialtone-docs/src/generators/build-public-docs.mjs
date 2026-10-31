@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
@@ -6,6 +6,8 @@ import { buildSourceExamples, publicIdentities } from './documentation-examples.
 import { buildPresetExampleRecords } from './preset-examples.mjs';
 import { buildComponentPage } from './build-component-doc-links.mjs';
 import { glob } from 'glob';
+import { createGuidanceManifest, guidanceHash, selectGuidance, applyGuidance } from './example-guidance.mjs';
+import { prepareGuidanceFacts } from './example-guidance-inputs.mjs';
 import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
@@ -58,7 +60,7 @@ function extractTitle(frontmatter, body) {
  * The output JSON uses camelCase (figmaUrl) to match TypeScript/JavaScript conventions —
  * same pattern as build-ai-docs.mjs (e.g. ai_summary → summary, last_updated → lastUpdated).
  */
-function readPage(absolutePath, componentPage) {
+function readPage(absolutePath, componentPage, onGuidanceInput) {
   const rawFile = readFileSync(absolutePath, 'utf8');
   const { data: frontmatter, content } = matter(rawFile);
   const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
@@ -128,7 +130,7 @@ function readPage(absolutePath, componentPage) {
       content,
       frontmatter: fm,
       filePath,
-    }], coverage: buildSourceExamples({
+    }], coverage: buildSourceExamples({ onGuidanceInput,
       rawFile, sections, records: [], filePath, vuePackage, componentPage,
     }).coverage };
   }
@@ -152,14 +154,14 @@ function readPage(absolutePath, componentPage) {
     };
   }).filter(record => !isDirective || record.content.trim().length > 0);
   const lineOffset = rawFile.slice(0, rawFile.length - content.length + headingStart).split('\n').length - 1;
-  const sourceExamples = buildSourceExamples({
+  const sourceExamples = buildSourceExamples({ onGuidanceInput,
     rawFile, sections, records, filePath, vuePackage, componentPage, lineOffset,
   });
   return { records: excluded ? [] : [...records, ...sourceExamples.records], coverage: sourceExamples.coverage };
 }
 
-export function buildRecords(absolutePath) {
-  return readPage(absolutePath).records;
+export function buildRecords(absolutePath, { onGuidanceInput } = {}) {
+  return readPage(absolutePath, undefined, onGuidanceInput).records;
 }
 
 export async function buildReadyComponentPage(filePathRelative, source, identities) {
@@ -189,7 +191,8 @@ async function build() {
     .map(match => `packages/dialtone-vue/${match[1]}/*.mdx`);
   files.push(...await glob(directiveGlobs, { cwd: repoRoot, absolute: true }));
 
-  const allRecords = [];
+  let allRecords = [];
+  const guidanceInputs = [];
   const coverage = [];
   const componentPages = [];
   const identities = publicIdentities(vuePackage).map(identity => ({ identity }));
@@ -197,10 +200,23 @@ async function build() {
     const rawFile = readFileSync(file, 'utf8');
     const componentPage = await buildReadyComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities);
     if (componentPage) componentPages.push(componentPage);
-    const page = readPage(file, componentPage);
+    const page = readPage(file, componentPage, input => guidanceInputs.push(input));
     allRecords.push(...page.records);
     if (page.coverage) coverage.push(page.coverage);
   }
+
+  const metadataPath = resolve(vueRoot, 'dist/component-documentation.json');
+  const metadata = JSON.parse(readFileSync(metadataPath, 'utf8'));
+  const tooling = ['source-examples.mjs', 'example-template.mjs', 'example-guidance.mjs',
+    'example-guidance-inputs.mjs', 'source-sections.mjs', '../../scripts/generate-example-guidance.mjs'];
+  const toolingHash = guidanceHash(tooling.map(file => [file, readFileSync(resolve(__dirname, file), 'utf8')]));
+  const facts = guidanceInputs.map(input => prepareGuidanceFacts(input, { root: repoRoot, metadata }));
+  const manifest = createGuidanceManifest(facts, {
+    model: process.env.EXAMPLE_GUIDANCE_MODEL || 'claude-sonnet-5-5', toolingHash,
+  });
+  const guidanceFile = resolve(repoRoot, 'packages/dialtone-docs/.generated/example-guidance/reviewed.json');
+  const guidance = selectGuidance(manifest, existsSync(guidanceFile) ? [JSON.parse(readFileSync(guidanceFile, 'utf8'))] : []);
+  allRecords = applyGuidance(allRecords, guidance);
 
   const presetPath = resolve(repoRoot, 'packages/combinator/.generated/preset-examples.json');
   let presetReport;
@@ -230,6 +246,8 @@ async function build() {
 
   mkdirSync(distDir, { recursive: true });
   writeFileSync(outputPath, JSON.stringify(allRecords, null, 2), 'utf8');
+  writeFileSync(resolve(distDir, 'example-guidance-inputs.json'), JSON.stringify(manifest, null, 2), 'utf8');
+  writeFileSync(resolve(distDir, 'example-guidance.json'), JSON.stringify(guidance, null, 2), 'utf8');
   coverage.sort((a, b) => a.filePath < b.filePath ? -1 : a.filePath > b.filePath ? 1 : 0);
   const report = { schemaVersion: 1, pages: coverage, summary: {
     pages: coverage.length, liveCandidates: coverage.reduce((sum, page) => sum + page.liveCandidates, 0),
@@ -239,6 +257,7 @@ async function build() {
   } };
   writeFileSync(resolve(distDir, 'preset-example-coverage.json'), JSON.stringify(presets.coverage, null, 2), 'utf8');
   writeFileSync(resolve(distDir, 'example-coverage.json'), JSON.stringify(report, null, 2), 'utf8');
+  console.info(`Example guidance: ${JSON.stringify(guidance.summary)}`);
   console.info(`public-docs.json built: ${allRecords.length} sections → ${outputPath}`);
 }
 

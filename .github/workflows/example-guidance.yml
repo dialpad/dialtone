@@ -1,0 +1,210 @@
+name: Example guidance
+run-name: Example guidance ${{ inputs.source_head || github.event.workflow_run.head_sha || github.sha }}
+
+on:
+  push:
+    paths:
+      - '.github/workflows/example-guidance.yml'
+      - 'packages/dialtone-docs/scripts/**'
+      - 'packages/dialtone-docs/src/generators/example-guidance*.mjs'
+  workflow_run:
+    workflows: ['Unit Tests']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      source_run:
+        description: Successful Unit Tests run containing the source manifest
+        required: true
+      source_head:
+        description: Exact source head from that run
+        required: true
+
+permissions:
+  contents: read
+  packages: read
+  actions: read
+
+concurrency:
+  group: example-guidance-${{ inputs.source_head || github.event.workflow_run.head_sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  # Only the first bootstrap needs a separate build. Normal PRs reuse Unit Tests.
+  prepare:
+    if: github.event_name == 'push' && github.sha == vars.EXAMPLE_GUIDANCE_TOOLING_REF
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HUSKY: 0
+      NX_DAEMON: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-environment
+      - name: Prepare source-bound inputs without a model credential
+        run: pnpm nx run dialtone-docs:build --skip-nx-cache
+      - uses: actions/upload-artifact@v4
+        with:
+          name: example-guidance-inputs-${{ github.run_attempt }}
+          path: packages/dialtone-docs/dist/example-guidance-inputs.json
+          retention-days: 90
+
+  generate:
+    permissions:
+      contents: read
+      actions: read
+      checks: write
+    needs: prepare
+    if: >-
+      always() && vars.EXAMPLE_GUIDANCE_TOOLING_REF != '' &&
+      ((github.event_name == 'push' && needs.prepare.result == 'success') ||
+       (github.event_name == 'workflow_run' && vars.EXAMPLE_GUIDANCE_AUTO_ENABLED == 'true' &&
+        github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request' &&
+        github.event.workflow_run.head_repository.full_name == github.repository) ||
+       github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Resolve server-provided source identity and authorized limits
+        id: source
+        uses: actions/github-script@v7
+        env:
+          SOURCE_RUN: ${{ inputs.source_run }}
+          SOURCE_HEAD: ${{ inputs.source_head }}
+          BOOTSTRAP_HEAD: ${{ vars.EXAMPLE_GUIDANCE_BOOTSTRAP_HEAD }}
+          TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          CURRENT_ATTEMPT: ${{ github.run_attempt }}
+        with:
+          script: |
+            if (!/^[a-f0-9]{40}$/.test(process.env.TOOLING_REF || '')) throw new Error('Tooling ref must be an approved immutable SHA');
+            const bootstrap = context.eventName === 'push';
+            let sourceRun = context.runId;
+            let head = context.sha;
+            let attempt = Number(process.env.CURRENT_ATTEMPT);
+            if (!bootstrap) {
+              const id = context.payload.workflow_run?.id || Number(process.env.SOURCE_RUN);
+              if (!Number.isSafeInteger(id) || id <= 0) throw new Error('Invalid source run');
+              const {data: run} = await github.rest.actions.getWorkflowRun({...context.repo, run_id: id});
+              if (run.conclusion !== 'success' || run.event !== 'pull_request' ||
+                  run.path.split('@')[0] !== '.github/workflows/unit_tests.yml') {
+                throw new Error('Expected a successful PR Unit Tests source run');
+              }
+              sourceRun = id;
+              head = run.head_sha;
+              attempt = run.run_attempt;
+              if (process.env.SOURCE_HEAD && process.env.SOURCE_HEAD !== head) throw new Error('Source head mismatch');
+            }
+            if (!/^[a-f0-9]{40}$/.test(head)) throw new Error('Invalid source head');
+            const {data: prs} = await github.rest.repos.listPullRequestsAssociatedWithCommit({...context.repo, commit_sha: head});
+            const pr = prs.find(pr => pr.state === 'open' && pr.base.repo.full_name === process.env.GITHUB_REPOSITORY);
+            if (!pr || pr.head.sha !== head) {
+              core.setOutput('enabled', 'false');
+              core.notice('Source PR is closed or superseded; no inference needed.');
+              return;
+            }
+            const available = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {...context.repo, run_id: sourceRun, per_page: 100});
+            const sourceAttempt = available.filter(artifact => !artifact.expired)
+              .map(artifact => Number(/^example-guidance-inputs-(\d+)$/.exec(artifact.name)?.[1]))
+              .filter(value => Number.isSafeInteger(value) && value > 0 && value <= attempt)
+              .sort((a, b) => b - a)[0];
+            if (!sourceAttempt) {
+              core.setOutput('enabled', 'false');
+              core.notice('No lookup source manifest; no inference needed.');
+              return;
+            }
+            attempt = sourceAttempt;
+            core.setOutput('enabled', 'true');
+            const corpus = process.env.BOOTSTRAP_HEAD === head;
+            core.setOutput('run', String(sourceRun));
+            core.setOutput('attempt', String(attempt));
+            core.setOutput('head', head);
+            core.setOutput('pr', String(pr.number));
+            core.setOutput('limit', corpus ? '500' : '20');
+            core.setOutput('budget', corpus ? '15' : '1');
+      - name: Fetch only approved immutable tooling; no PR scripts or dependency installation
+        if: steps.source.outputs.enabled == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            packages/dialtone-docs/scripts/generate-example-guidance.mjs
+            packages/dialtone-docs/scripts/restore-example-guidance.mjs
+            packages/dialtone-docs/src/generators/example-guidance.mjs
+      - uses: actions/setup-node@v4
+        if: steps.source.outputs.enabled == 'true'
+        with:
+          node-version: '24'
+      - name: Read only the validated source JSON without extracting PR-controlled paths
+        if: steps.source.outputs.enabled == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_RUN: ${{ steps.source.outputs.run }}
+          SOURCE_ATTEMPT: ${{ steps.source.outputs.attempt }}
+        run: node packages/dialtone-docs/scripts/restore-example-guidance.mjs --source-run "$SOURCE_RUN" --source-attempt "$SOURCE_ATTEMPT"
+      - name: Restore matching notes and previous spending without a model credential
+        if: steps.source.outputs.enabled == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GUIDANCE_PULL_REQUEST: ${{ steps.source.outputs.pr }}
+          GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          GUIDANCE_SOURCE_HEAD: ${{ steps.source.outputs.head }}
+          GUIDANCE_BUDGET_USD: ${{ steps.source.outputs.budget }}
+        run: node packages/dialtone-docs/scripts/restore-example-guidance.mjs --generation
+      - name: Generate changed notes within the remaining authorization
+        timeout-minutes: 45
+        if: steps.source.outputs.enabled == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GUIDANCE_SOURCE_HEAD: ${{ steps.source.outputs.head }}
+          GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          REQUEST_LIMIT: ${{ steps.source.outputs.limit }}
+          BUDGET_USD: ${{ steps.source.outputs.budget }}
+        run: |
+          SPENT_USD=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).spentUsd")
+          node packages/dialtone-docs/scripts/generate-example-guidance.mjs \
+            packages/dialtone-docs/dist/example-guidance-inputs.json example-guidance.json \
+            --limit "$REQUEST_LIMIT" --budget-usd "$BUDGET_USD" --spent-usd "$SPENT_USD" \
+            --cache packages/dialtone-docs/.generated/example-guidance/reviewed.json
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.source.outputs.enabled == 'true'
+        with:
+          name: example-guidance-${{ github.run_id }}-${{ github.run_attempt }}
+          path: example-guidance.json
+          retention-days: 90
+      - name: Summarize reviewable notes and usage
+        if: always() && steps.source.outputs.enabled == 'true'
+        run: |
+          node --input-type=module <<'JS' >> "$GITHUB_STEP_SUMMARY"
+          import { readFileSync } from 'node:fs';
+          const result = JSON.parse(readFileSync('example-guidance.json', 'utf8'));
+          console.log('## Generated example guidance');
+          console.log('Source-based guidance; no consumer or human-validation proof is created.');
+          for (const entry of result.entries) {
+            console.log(`\n- ${entry.id}: ${entry.status}`);
+            for (const note of entry.notes ?? []) console.log(`  - ${note.text}`);
+          }
+          console.log(`\nUsage: ${JSON.stringify(result.usage)}`);
+          JS
+      - name: Report guidance result on the actual source PR head
+        if: always() && steps.source.outputs.enabled == 'true'
+        uses: actions/github-script@v7
+        env:
+          SOURCE_HEAD: ${{ steps.source.outputs.head }}
+          GENERATION_STATUS: ${{ job.status }}
+        with:
+          script: |
+            await github.rest.checks.create({
+              ...context.repo,
+              name: 'Generated example guidance',
+              head_sha: process.env.SOURCE_HEAD,
+              status: 'completed',
+              conclusion: process.env.GENERATION_STATUS === 'success' ? 'success' : 'failure',
+              details_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              output: {
+                title: 'Source-bound example guidance',
+                summary: 'Review the generated notes and usage receipt in this workflow. Generation does not create consumer or human-validation proof.',
+              },
+            });

@@ -55,6 +55,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       ['apps/dialtone-documentation/docs/components/button.md', 'docs: clarify button usage', 'patch'],
       ['packages/dialtone-vue/directives/tooltip/tooltip.mdx', 'docs(tooltip): clarify registration', 'patch'],
       ['packages/dialtone-docs/src/generators/build-public-docs.mjs', 'fix(docs): preserve literal markup', 'patch'],
+      ['packages/dialtone-docs/scripts/generate-example-guidance.mjs', 'fix(docs): correct guidance generation', 'patch'],
       ['apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js', 'docs(examples): adjust authored fence parsing', 'patch'],
       ['scripts/retrieval/profiles.mjs', 'chore(examples): update the tested consumer profile', 'patch'],
       ['packages/combinator/src/variants/variants_loader.js', 'fix(combinator): update a curated preset', 'patch'],

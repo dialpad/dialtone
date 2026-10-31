@@ -114,6 +114,8 @@ jobs:
             registry_url: //registry.npmjs.org/
     runs-on: ubuntu-latest
     permissions:
+      contents: read
+      actions: read
       packages: write
       id-token: write
     steps:
@@ -154,6 +156,13 @@ jobs:
         if: matrix.package == 'dialtone-vue'
         run: sleep 15s
         shell: bash
+
+      - name: Require reviewed source-matching guidance before publishing lookup adapters
+        if: matrix.package == 'dialtone-cli' || matrix.package == 'dialtone-mcp-server'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+        run: node packages/dialtone-docs/scripts/check-example-guidance.mjs --prepare-publication
 
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}

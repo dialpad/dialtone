@@ -241,6 +241,13 @@ jobs:
       - name: Build lookup adapters and source datasets
         run: pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server
 
+      - name: Retain source-bound guidance inputs for the isolated reasoning workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: example-guidance-inputs-${{ github.run_attempt }}
+          path: packages/dialtone-docs/dist/example-guidance-inputs.json
+          retention-days: 90
+
       - name: Run query-core, CLI, documentation and ESLint suites
         run: |
           pnpm --dir packages/dialtone-query-core test
