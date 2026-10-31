@@ -4,6 +4,8 @@ import { documentation, getDocumentationDetail, getDocumentationExampleIds, sear
 
 it('keeps source examples exact-addressable without changing broad discovery', () => {
   const examples = documentation.filter(record => record.example);
+  const presetIds = (component: string) => examples.filter(record =>
+    record.id.startsWith(`examples/presets/${component}/`)).map(record => record.id);
   for (const record of examples) {
     const detail = getDocumentationDetail({ id: record.id, textLimit: 100000 }, documentation);
     expect(detail.record).toEqual(record);
@@ -19,11 +21,16 @@ it('keeps source examples exact-addressable without changing broad discovery', (
   // DLT-3710: source additions may grow associations; preserve legacy links and wrong-section negatives.
   const authoredCanary = 'examples/docs/components/button/variants-critical';
   expect(getDocumentationExampleIds('DtButton', documentation)).toEqual(expect.arrayContaining([
-    'examples/button-default', 'examples/button-disabled-tooltip', authoredCanary,
+    'examples/button-default', 'examples/button-disabled-tooltip', authoredCanary, ...presetIds('DtButton'),
   ]));
+  expect(getDocumentationExampleIds('DtStack', documentation)).toEqual(expect.arrayContaining(presetIds('DtStack')));
   expect(getDocumentationExampleIds('DtStack', documentation)).not.toContain('examples/button-default');
-  expect(getDocumentationExampleIds('DtLoader', documentation)).toEqual(expect.arrayContaining(['examples/loader-default', 'examples/loader-sizes']));
-  expect(getDocumentationExampleIds('DtToggle', documentation)).toContain('examples/toggle-v-model');
+  expect(getDocumentationExampleIds('DtLoader', documentation)).toEqual(expect.arrayContaining([
+    'examples/loader-default', 'examples/loader-sizes', ...presetIds('DtLoader'),
+  ]));
+  expect(getDocumentationExampleIds('DtToggle', documentation)).toEqual(expect.arrayContaining([
+    'examples/toggle-base-styles', 'examples/toggle-sizes', 'examples/toggle-v-model', ...presetIds('DtToggle'),
+  ]));
   expect(getDocumentationExampleIds('d-ww-normal', documentation)).toEqual(['examples/utility-word-wrap-normal']);
   expect(getDocumentationExampleIds('d-ww-anywhere', documentation)).toEqual([]);
   expect(getDocumentationExampleIds('utilities/typography/word-wrap#normal', documentation)).toEqual(['examples/utility-word-wrap-normal']);
