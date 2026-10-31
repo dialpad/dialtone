@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/components/hovercard.md
+  h_c15b5755534093 34-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "152057549a73bce9662228386e5aae488ab3ccc7",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
