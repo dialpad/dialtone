@@ -1,0 +1,16 @@
+packages/dialtone-docs/src/generators/documentation-examples.mjs
+  h_c15b5755534093 93,109
+packages/dialtone-docs/tests/example-coverage.test.js
+  h_c15b5755534093 9-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d6b7898a2e3b6713b56b7c44bfcaa1b07e1f0db8",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
