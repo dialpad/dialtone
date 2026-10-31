@@ -64,8 +64,8 @@ Search for design tokens (CSS variables).
 Discover Vue components with props, events, and slots.
 
 **Example queries:**
-- `button` → DtButton, DtButtonGroup, DtBanner (29 results)
-- `modal` → DtModal, DtBanner, DtDropdown (6 results)
+- `button` → DtButton, DtButtonGroup, DtBanner
+- `modal` → DtModal, DtBanner, DtDropdown
 - `checkbox` → DtCheckbox, DtCheckboxGroup, DtRadio
 
 ### 4. Icons
