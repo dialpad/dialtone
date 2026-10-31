@@ -28,6 +28,64 @@
         ],
         "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
       }
+    },
+    "dt10-presets-2026-10-27": {
+      "profile": "dt10-pinned",
+      "node": "v24.5.0",
+      "tooling": {
+        "vite": "8.0.3",
+        "@vitejs/plugin-vue": "6.0.5"
+      },
+      "verifiedOn": "2026-10-27",
+      "lockHash": "d57d071d8ced54b4a56dd2749600527fe6fce11c71e77d4c2b746b8ead6ad61b",
+      "artifact": {
+        "contractVersion": 1,
+        "profile": "dt10-pinned",
+        "package": "@dialpad/dialtone",
+        "version": "10.5.1",
+        "verification": "lookup-data-only",
+        "data": [
+          {
+            "path": "dist/vue3/component-documentation.json",
+            "sha256": "e981bd0057ab2f7bb6d7ae1fa4cb63702dc98af18cd59135503aa81323057f3d",
+            "shape": "array",
+            "records": 94,
+            "schemaVersions": [
+              null
+            ]
+          }
+        ],
+        "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+      }
+    },
+    "dt10-pinned-1e7a4819e6b36a0b": {
+      "profile": "dt10-pinned",
+      "node": "v24.5.0",
+      "tooling": {
+        "vite": "8.0.3",
+        "@vitejs/plugin-vue": "6.0.5"
+      },
+      "verifiedOn": "2026-10-28",
+      "lockHash": "6973025359a41369770a23f39c39ea94c05d909daa0c309ca4e236ae168d45d1",
+      "artifact": {
+        "contractVersion": 1,
+        "profile": "dt10-pinned",
+        "package": "@dialpad/dialtone",
+        "version": "10.5.1",
+        "verification": "lookup-data-only",
+        "data": [
+          {
+            "path": "dist/vue3/component-documentation.json",
+            "sha256": "e981bd0057ab2f7bb6d7ae1fa4cb63702dc98af18cd59135503aa81323057f3d",
+            "shape": "array",
+            "records": 94,
+            "schemaVersions": [
+              null
+            ]
+          }
+        ],
+        "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+      }
     }
   },
   "examples": {
@@ -148,6 +206,53 @@
         "d-bar-400",
         "d-w-500",
         "d-ww-normal"
+      ]
+    },
+    "examples/presets/DtButton/start%20icon": {
+      "run": "dt10-presets-2026-10-27",
+      "payloadHash": "a55d04d3df2792043b84680f762bdaa38cb0138336fda1fe3a4512c9764e02af",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtButton.importance",
+        "DtIconPhone.size"
+      ]
+    },
+    "examples/presets/DtLoader/default": {
+      "run": "dt10-presets-2026-10-27",
+      "payloadHash": "ae61f9182b4565cfa86b2b2ef77ee75107fac100f0bbf13f1595311a776bdd21",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtLoader.size"
+      ]
+    },
+    "examples/presets/DtToggle/default": {
+      "run": "dt10-presets-2026-10-27",
+      "payloadHash": "e292b1f1ee3da159a45ff2122da9b632c320482a37c4cd5a0db6dd7eb9220e22",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtToggle.modelValue",
+        "DtToggle.labelClass"
+      ]
+    },
+    "examples/presets/DtLoader/large": {
+      "run": "dt10-pinned-1e7a4819e6b36a0b",
+      "payloadHash": "07e49bebe979eeae64126a2f0b4411616d43b4ef060db0e3bb069cf274a7aeab",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtLoader.size"
+      ]
+    },
+    "examples/presets/DtIllustration/default": {
+      "run": "dt10-pinned-1e7a4819e6b36a0b",
+      "payloadHash": "bd0a7346ec53bf95092c9ebc10de1440ec4bebcdbbfca5957e83a7bb7f3dac7f",
+      "consumerBuild": "built",
+      "api": "passed",
+      "checked": [
+        "DtIllustration.name"
       ]
     }
   }

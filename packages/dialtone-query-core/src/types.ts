@@ -142,7 +142,8 @@ export interface DocumentationRecord {
   example?: {
     representation?: 'vue-app' | 'static-html';
     utilities?: string[];
-    source: { id: string; filePath: string; headingPath: string[]; hash: string; package: string; version: string };
+    icons?: string[];
+    source: { kind?: 'combinator-preset'; preset?: string; id: string; filePath: string; headingPath: string[]; hash: string; package: string; version: string };
     components: ComponentIdentity[];
     directives: string[];
     profile: { id: string; dependencies: Record<string, string> };

@@ -119,4 +119,39 @@ describe('code_editor.vue test', function () {
       vi.unstubAllGlobals();
     }
   });
+  it.each([
+    { name: 'simple', info: createInfo(), options: createOptions(), disabled: [], expected: '<dt-card />' },
+    {
+      name: 'scoped slots and excluded members',
+      info: {
+        displayName: 'DtButton',
+        slots: [{ name: 'startIcon', bindings: [{ name: 'icon-size' }] }, { name: 'default' }, { name: 'hidden' }],
+        bindings: { get: () => [{ name: 'disabled', label: 'disabled', defaultValue: false }] },
+      },
+      options: {
+        slots: { startIcon: '<dt-icon-wrench :size="iconSize" />', default: 'Save', hidden: 'Hidden' },
+        bindings: { get: () => ({ disabled: true }) },
+      },
+      disabled: ['hidden'],
+      expected: '<dt-button\n  disabled\n>\n' +
+        '  <template #startIcon="{ iconSize }">\n    <dt-icon-wrench :size="iconSize" />\n' +
+        '  </template>\n  Save\n</dt-button>',
+    },
+  ])('preserves actual clipboard output for $name', async ({ info, options, disabled, expected }) => {
+    const wrapper = mountWrapper();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('navigator', { clipboard: { writeText } });
+    vi.useFakeTimers();
+    try {
+      await wrapper.setProps({ info, options, disabledMembers: new Set(disabled) });
+      await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
+      expect(writeText.mock.calls[0][0]).toBe(expected);
+      await vi.runAllTimersAsync();
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    }
+  });
+
 });

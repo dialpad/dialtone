@@ -24,7 +24,7 @@ test('example discovery follows subjects/source sections and unknown IDs retain 
   const context = resolveProjectData();
   for (const query of ['stack', 'layout', 'flex row gap', 'link']) {
     const text = module.executeQueryTool('search_components', { query }, context).content[0].text;
-    assert.doesNotMatch(text, /Source examples/);
+    assert.doesNotMatch(text, /examples\/button-/);
   }
   for (const query of ['button example', 'button with a tooltip', 'tooltip on a disabled button', 'complete button example with setup', 'I need a complete working Vue 3 example of a disabled Dialtone button that shows a tooltip on hover']) {
     const text = module.executeQueryTool('search_components', { query }, context).content[0].text;
@@ -35,7 +35,9 @@ test('example discovery follows subjects/source sections and unknown IDs retain 
   const missing = module.executeQueryTool('get_documentation', { id: 'examples/button-defualt' }, context).structuredContent;
   assert.equal(missing.match, 'no-match');
   assert.deepEqual(missing.items, []);
-  assert.ok(missing.notes.some(note => note.includes('examples/button-default')));
+  const ids = missing.notes.flatMap(note => note.match(/examples\/\S+?(?=, |\.(?:\s|$)|$)/g) ?? []);
+  assert.ok(ids.length > 0 && ids.length <= 3);
+  for (const id of ids) assert.equal(module.executeQueryTool('get_documentation', { id }, context).structuredContent.match, 'exact');
   assert.equal(missing.continuation.tool, 'search_documentation');
 });
 

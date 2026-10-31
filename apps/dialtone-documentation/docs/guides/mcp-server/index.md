@@ -265,6 +265,8 @@ Initial coverage retains the two Button examples and adds Loader, Toggle and one
 
 `search_utility_classes` with `{"query":"d-ww-normal"}` supplies the static utility example ID; retrieve it with `get_documentation`. Hints use actual selected utility results and bundled documentation. Check each representation and validation status; this first batch is not full coverage.
 
+Combinator’s curated registry drives preset examples through the same exact-ID route. For example, retrieve `examples/presets/DtLoader/default` or `examples/presets/DtButton/start%20icon`. Supported sources with complete assembly context appear without a second publishing list; unresolved, unsupported and deprecated sources remain excluded. Read each record’s consumer-build and manual-review status: source delivery alone does not establish compatibility or a working application. Source versions and bank hashes identify the preset separately from its consumer proof. A rename or removal retires the old ID. Curation changes reach installed tools through generation, package publication and updates; an MCP server also needs a restart.
+
 Example generation runs in `dialtone-docs:build`; query-core and adapter builds bundle that output into packed packages. Documentation deployment and source merges do not update an installed server: the existing release selection, publication and package-update path still applies. Packed candidates are separate from published packages and verified consumer delivery.
 
 ### Icons
