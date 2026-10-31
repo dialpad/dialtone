@@ -114,7 +114,7 @@ Update a project-local dependency from the application directory:
 npm install --save-dev --save-exact @dialpad/dialtone-cli@latest
 ```
 
-Review and commit the manifest/lockfile change. For global installations, use `npm install -g @dialpad/dialtone-cli@latest`. The current CLI update notice prints the global command for either mode; use the one matching your installation. Restart a long-lived client after changing its PATH or environment.
+Review and commit the manifest/lockfile change. For global installations, use `npm install -g @dialpad/dialtone-cli@latest`. If your CLI notice prints a global command, choose the update command matching your installation. Restart a long-lived client after changing its PATH or environment.
 
 The CLI selects data from its invocation directory; updating the CLI refreshes bundled documentation and fallback data, not the application's Dialtone dependencies. Check the reported sources and versions. See [data sources](https://dialtone.dialpad.com/guides/cli/#data-sources).
 

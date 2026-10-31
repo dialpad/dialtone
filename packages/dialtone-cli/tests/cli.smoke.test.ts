@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const CLI = fileURLToPath(new URL('../build/index.js', import.meta.url));
 // Any debug tag, not just the ones silenceDebug knows, so a new core tag that leaks fails here.
@@ -49,6 +49,20 @@ function appWithDialtoneVue(verifiedEntry = true): string {
 
 // Longer than the spawn timeout, so a hung CLI fails as ETIMEDOUT.
 describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
+  test('update advice preserves stdout and does not choose an installation mode', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'dialtone-update-notice-'));
+    onTestFinished(() => rmSync(directory, { recursive: true, force: true }));
+    const registry = join(directory, 'registry.mjs');
+    writeFileSync(registry, "globalThis.fetch = async () => new Response(JSON.stringify({ version: '99.0.0' }));\n");
+    const result = run(['token', '--name=--dt-spacing-100', '--format', 'json'], {
+      env: { NODE_OPTIONS: `--import=${pathToFileURL(registry).href}` },
+    });
+    expect(result.status).toBe(0);
+    expect(() => JSON.parse(result.stdout)).not.toThrow();
+    expect(result.stderr).toContain('https://dialtone.dialpad.com/guides/cli/#update-the-cli');
+    expect(result.stderr).not.toMatch(/\bnpm (?:install|update)\b/);
+  });
+
   test.each(['component', 'prompt'])('%s: a non-exact name exits 1 with empty stdout and candidates on stderr', (command) => {
     const r = run([command, 'list', '--format', 'json']);
     expect(r.status).toBe(1);

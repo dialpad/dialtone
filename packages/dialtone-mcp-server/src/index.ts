@@ -37,7 +37,8 @@ async function checkVersion(signal: AbortSignal) {
       console.error(`   Latest:  v${latestVersion}`);
       console.error('');
       console.error('   To update:');
-      console.error('   1. npm install -D @dialpad/dialtone-mcp-server@latest');
+      console.error('   1. Follow the update steps for your installation:');
+      console.error('      https://dialtone.dialpad.com/guides/mcp-server/#configuration');
       console.error('   2. Restart the server or MCP client');
       console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       console.error('');

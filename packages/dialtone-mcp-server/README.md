@@ -32,7 +32,7 @@ npm install --save-dev --save-exact @dialpad/dialtone-mcp-server@latest
 
 Review and commit the manifest/lockfile change. Update a dedicated personal installation in its directory; use `npm install -g @dialpad/dialtone-mcp-server@latest` for a global one. `npx` can use a local or cached package or download one; it does not guarantee the latest release. Update any configured version pin deliberately.
 
-The startup notice currently suggests a project-dev install without `--save-exact`. Use the command for your installation mode above to preserve the intended pin and installation directory.
+If your startup notice suggests a project-dev install without `--save-exact`, use the command for your installation mode above to preserve the intended pin and installation directory.
 
 Restart the server or reconnect/restart the client after package, configuration or Dialtone dependency changes. A new conversation alone may reuse the old process. The advisory startup check does not install updates and writes notices to stderr, preserving MCP stdout. See [updates and connection checks](https://dialtone.dialpad.com/guides/mcp-server/#configuration).
 

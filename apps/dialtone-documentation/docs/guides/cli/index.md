@@ -328,7 +328,7 @@ The CLI checks npm for a newer version in the background and gives up after thre
 npm install --save-dev --save-exact @dialpad/dialtone-cli@latest
 ```
 
-Review and commit the manifest/lockfile change. For a global installation, use `npm install -g @dialpad/dialtone-cli@latest`. The current CLI notice prints that global command even for a local installation; choose the command matching your installation. The notice does not update packages automatically.
+Review and commit the manifest/lockfile change. For a global installation, use `npm install -g @dialpad/dialtone-cli@latest`. If your CLI notice prints a global command, choose the update command matching your installation. The notice does not update packages automatically.
 
 Updating refreshes bundled documentation, discovery keywords, and the fallback data used outside a Dialtone project. Docs-only keyword edits are eligible for a CLI release through the normal release process. They can reach the site before publication and a CLI update. Source merge and local builds do not update installed tools.
 
