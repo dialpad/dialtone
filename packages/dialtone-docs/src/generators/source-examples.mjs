@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it';
+import { NON_READY_STATUSES } from './source-sections.mjs';
 import matter from 'gray-matter';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -142,7 +143,7 @@ export function readSourceExamples(options) {
   const { data } = matter(rawFile);
   const exclusion = /\/scratch[^/]*\.md$/.test(filePath) ? 'scratch source'
     : filePath.endsWith('.mdx') ? 'MDX markers not supported'
-      : ['planned', 'beta', 'wip'].includes(String(data.status).trim().toLowerCase()) ? 'not-ready source' : null;
+      : NON_READY_STATUSES.has(String(data.status).trim().toLowerCase()) ? 'not-ready source' : null;
   const automatic = filePath.startsWith('apps/dialtone-documentation/docs/components/');
   const candidates = [];
   let referenceCandidates = 0;
@@ -183,7 +184,7 @@ export function readSourceExamples(options) {
       };
       const docId = source.docId ?? filePath.replace(/^apps\/dialtone-documentation\/docs\//, '').replace(/\.mdx?$/, '');
       const baseId = `examples/docs/${docId}/${section.baseSlug}`;
-      const id = validateId(annotation.id ?? `${baseId}${annotation.key ? `/${annotation.key}` : ''}`, location);
+      const id = annotation.id ?? `${baseId}${annotation.key ? `/${annotation.key}` : ''}`;
       const candidate = { id, sourceLine: lineOffset + (section.sourceStartLine ?? 0) + token.map[0] + 1,
         headingPath: section.headingPath, displayTwin: live.displayTwin ?? false, template: live.template, annotation,
         baseId, unkeyed: !annotation.id && !annotation.key, source, disposition: 'remaining', eligible: false };
@@ -201,6 +202,7 @@ export function readSourceExamples(options) {
         candidate.eligible = Boolean(definition) && !contextual
           && (automatic || (annotation.representation === 'static-html'
             && filePath.startsWith('apps/dialtone-documentation/docs/utilities/')));
+        if (candidate.eligible) validateId(candidate.id, location);
         candidate.definition = definition;
         if (contextual) candidate.reason = 'Contextual migration/before-after/negative guidance is not a standalone recommendation.';
         else if (definition && !candidate.eligible) candidate.reason = 'Source area is outside the enabled component-page rule.';

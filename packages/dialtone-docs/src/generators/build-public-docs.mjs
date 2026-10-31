@@ -10,7 +10,7 @@ import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
 
-import { chunkSections, slugify } from './source-sections.mjs';
+import { chunkSections, slugify, NON_READY_STATUSES } from './source-sections.mjs';
 export { chunkSections } from './source-sections.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,12 +23,6 @@ const vueRoot = resolve(repoRoot, 'packages/dialtone-vue');
 const vuePackage = JSON.parse(readFileSync(resolve(vueRoot, 'package.json'), 'utf8'));
 const distDir = resolve(packageRoot, 'dist');
 const outputPath = resolve(distDir, 'public-docs.json');
-
-// Statuses that indicate a doc is NOT yet production-ready.
-// Files with no status field are treated as published (guides, design pages, whats-new).
-// NOTE: this is a blacklist, not a whitelist — any unrecognized status is included.
-// If a new non-ready status is added to the corpus, add it here explicitly.
-const NON_READY_STATUSES = new Set(['planned', 'beta', 'wip']);
 
 
 function extractTitle(frontmatter, body) {

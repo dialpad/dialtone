@@ -1,3 +1,6 @@
+// Missing and unknown statuses remain published.
+export const NON_READY_STATUSES = new Set(['planned', 'beta', 'wip']);
+
 export function slugify(text) {
   return text
     .toLowerCase()

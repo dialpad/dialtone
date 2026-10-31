@@ -56,6 +56,29 @@ describe('source-driven component examples', () => {
     expect(rawFile.split('\n')[coverage.candidates[0].sourceLine - 1]).toBe('```vue demo');
   });
 
+  it.each([
+    ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
+    ['unresolved', '## 🧪\n' + fence('<dt-button :disabled="missing">Save</dt-button>'), 'components', 'remaining', 'missing'],
+    ['outside the enabled area', '## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
+  ])('keeps %s candidates with non-publishable derived IDs in coverage', (_, raw, area, disposition, reason) => {
+    const options = input(raw);
+    options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
+    expect(buildExampleRecords(options)).toEqual([]);
+    const coverage = buildExampleCoverage(options);
+    expect(coverage.candidates[0].disposition).toBe(disposition);
+    expect(coverage.candidates[0].reason).toContain(reason);
+  });
+
+  it('rejects non-publishable derived IDs when the candidate would be delivered', () => {
+    expect(() => produce('## 🧪\n' + fence('<dt-button>Save</dt-button>'))).toThrow(/invalid example ID/);
+  });
+
+  it('validates explicit IDs even when the source is excluded', () => {
+    const raw = '---\nstatus: planned\n---\n\n## Default\n'
+      + annotation({ id: 'examples/Invalid' }) + fence('<dt-button>Save</dt-button>');
+    expect(() => produce(raw)).toThrow(/invalid example ID/);
+  });
+
   it('does not let a future reference fence change a live demo address', () => {
     const records = produce(ordinary + '\n```vue code-only\n<dt-button>Reference</dt-button>\n```');
     expect(records.map(x => x.id)).toEqual(['examples/docs/components/example/default']);
