@@ -1,0 +1,20 @@
+packages/dialtone-css/lib/build/less/components/radio-checkbox.less
+  h_c15b5755534093 200-201,308
+  h_c15b5755534093 205-212,309-312
+apps/dialtone-documentation/docs/scratch.md
+  h_c15b5755534093 7-23,25-75
+  h_c15b5755534093 6,24
+packages/dialtone-css/lib/build/less/components/toggle.less
+  h_c15b5755534093 154-158
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "4fe1a255403a6b9c8e2e373b5065de22dcaea954",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

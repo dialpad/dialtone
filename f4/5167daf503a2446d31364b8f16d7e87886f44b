@@ -1,0 +1,51 @@
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_18547bca72b16a::t_5587fd0be72374 411
+  s_18547bca72b16a::t_8a9e324af93aed 704-715
+  s_18547bca72b16a::t_45e5632f163373 444,944-949,959,971-972
+  s_18547bca72b16a::t_ceae4e32f2f9f4 395,399-410,425-443
+  s_18547bca72b16a::t_1e256c25b7a9d8 445,1615-1637,1641-1680,1682-1734
+  s_18547bca72b16a::t_8c1e730a7bbf62 1638-1640
+  s_18547bca72b16a::t_80899ad1390443 950-958,960-970
+  s_18547bca72b16a::t_ce91b30908b369 1681
+  s_18547bca72b16a::t_91781a5c2200bc 609-652
+  s_18547bca72b16a::t_d4859d8e172cce 446
+packages/dialtone-css/lib/build/less/components/slider.less
+  s_18547bca72b16a::t_d0d137277890a6 47-50
+  s_18547bca72b16a::t_70435affa75c86 29-35
+packages/dialtone-vue/components/Slider/Slider.mdx
+  s_18547bca72b16a::t_fccc854548d4b3 125-126
+apps/dialtone-documentation/docs/components/slider.md
+  s_18547bca72b16a::t_5f572ed7fc3756 386-387
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_18547bca72b16a::t_e7f04e9664ddf4 3
+  s_18547bca72b16a::t_c95a8f4ada120f 711-754
+  s_18547bca72b16a::t_ef2fc7a05e6e1e 614-626
+  s_18547bca72b16a::t_1d7ea3f427b6da 1206-1216,1220-1221
+  s_18547bca72b16a::t_5b36eb8ed06a31 597
+  s_18547bca72b16a::t_8a75932dfcdcca 780-784
+  s_18547bca72b16a::t_46c4db75c56289 676-683,685,687-688
+  s_18547bca72b16a::t_a5c7f5762cb647 1480-1491,1493-1494
+  s_18547bca72b16a::t_5f40e0f6f9b5cb 110-112,117-120
+  s_18547bca72b16a::t_3e894f2edaa323 1144-1151
+  s_18547bca72b16a::t_de838793b6fb85 1245
+  s_18547bca72b16a::t_51fd0ce14d8527 532-589
+  s_18547bca72b16a::t_cecf402e614031 400-403
+  s_18547bca72b16a::t_dc318304d7d1ca 1217-1219
+  s_18547bca72b16a::t_9b07c732aaca25 762-778,787-790
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f45167daf503a2446d31364b8f16d7e87886f44b",
+  "prompts": {},
+  "sessions": {
+    "s_18547bca72b16a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34090d3c-5c78-4979-93a5-69ff10aaa88a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

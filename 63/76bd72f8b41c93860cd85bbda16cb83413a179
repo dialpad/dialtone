@@ -1,0 +1,23 @@
+.agents/resources/doc-sync.md
+  s_7f1d1d64baa803::t_10649e70b36f8b 20
+.claude/hooks/doc-review-adapter.mjs
+  s_7f1d1d64baa803::t_f555c3be01f781 32-39
+scripts/check-doc-review.test.mjs
+  s_7f1d1d64baa803::t_30e009d5b3cb78 196-201
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6376bd72f8b41c93860cd85bbda16cb83413a179",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
