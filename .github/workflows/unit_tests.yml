@@ -244,7 +244,7 @@ jobs:
       - name: Retain source-bound guidance inputs for the isolated reasoning workflow
         uses: actions/upload-artifact@v4
         with:
-          name: example-guidance-inputs
+          name: example-guidance-inputs-${{ github.run_attempt }}
           path: packages/dialtone-docs/dist/example-guidance-inputs.json
           retention-days: 90
 

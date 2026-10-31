@@ -1,11 +1,11 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createGuidanceManifest, GUIDANCE_PROMPT, GUIDANCE_SCHEMA, guidanceHash, selectGuidance, validateGuidanceResult } from '../src/generators/example-guidance.mjs';
 
 const MODEL = 'claude-sonnet-5-5';
 const MAX_OUTPUT = 1536;
-const MAX_INPUT_BYTES = 80_000;
+const MAX_INPUT_BYTES = 100_000;
 const usd = (input, output) => (input * 2 + output * 10) / 1_000_000;
 const factsFor = entry => ({ id: entry.id, sources: entry.sources, dependencies: entry.dependencies });
 const failed = (input, error, retryable = false) => ({
@@ -28,6 +28,7 @@ async function attempt(input, options, usage, correction) {
   if (!options.apiKey) return failed(input, 'Approved provider credential is unavailable');
   usage.requests++;
   usage.reservedUsd += reservation;
+  options.checkpoint();
   let data;
   try {
     const response = await options.request('https://api.anthropic.com/v1/messages', {
@@ -64,7 +65,7 @@ async function attempt(input, options, usage, correction) {
 
 /** One bounded repair is explicit; transport, credential and refusal failures are never retried. */
 export async function generateGuidance(manifest, {
-  apiKey, artifacts = [], request = fetch, limit = 3, budgetUsd = 1, spentUsd = 0, origin,
+  apiKey, artifacts = [], request = fetch, limit = 3, budgetUsd = 1, spentUsd = 0, origin, onProgress,
 } = {}) {
   const rebuilt = createGuidanceManifest(manifest.entries.map(factsFor), manifest);
   if (guidanceHash(rebuilt) !== guidanceHash(manifest) || manifest.model !== MODEL) throw new Error('Unapproved model or invalid guidance manifest');
@@ -73,16 +74,25 @@ export async function generateGuidance(manifest, {
   const selected = selectGuidance(manifest, artifacts);
   const entries = [];
   const usage = { requests: 0, inputTokens: 0, outputTokens: 0, estimatedUsd: 0, reservedUsd: 0 };
-  const options = { apiKey, request, limit, budgetUsd, spentUsd, origin };
+  const snapshot = () => ({
+    schemaVersion: 1, model: MODEL, manifestHash: manifest.hash, policyHash: manifest.policyHash,
+    toolingHash: manifest.toolingHash, entries: [...entries], usage: { ...usage }, ...(origin ? { origin } : {}) });
+  const checkpoint = () => onProgress?.(snapshot());
+  const options = { apiKey, request, limit, budgetUsd, spentUsd, origin, checkpoint };
+  checkpoint();
   for (const input of manifest.entries) {
     const cached = selected.entries.find(entry => entry.id === input.id);
-    if (['complete', 'completed-empty'].includes(cached.status)) { entries.push(cached); continue; }
+    if (['complete', 'completed-empty'].includes(cached.status)) {
+      entries.push(cached);
+      checkpoint();
+      continue;
+    }
     let result = await attempt(input, options, usage);
     if (result?.retryable) result = await attempt(input, options, usage, result.error) ?? result;
     entries.push(result ?? { ...cached, status: 'pending' });
+    checkpoint();
   }
-  return { schemaVersion: 1, model: MODEL, manifestHash: manifest.hash, policyHash: manifest.policyHash,
-    toolingHash: manifest.toolingHash, entries, usage, ...(origin ? { origin } : {}) };
+  return snapshot();
 }
 
 async function main() {
@@ -104,12 +114,15 @@ async function main() {
   const artifacts = options['--cache'] ? [JSON.parse(readFileSync(options['--cache'], 'utf8'))] : [];
   const result = await generateGuidance(manifest, {
     apiKey: process.env.ANTHROPIC_API_KEY, artifacts,
+    onProgress: value => {
+      writeFileSync(`${outputPath}.tmp`, JSON.stringify(value, null, 2) + '\n');
+      renameSync(`${outputPath}.tmp`, outputPath);
+    },
     limit: Number(options['--limit'] ?? 3), budgetUsd: Number(options['--budget-usd'] ?? 1),
     spentUsd: Number(options['--spent-usd'] ?? 0),
     origin: { head: process.env.GUIDANCE_SOURCE_HEAD ?? process.env.GITHUB_SHA ?? 'local',
-      runId: process.env.GITHUB_RUN_ID ?? null, toolingRef: process.env.GUIDANCE_TOOLING_REF ?? 'local' },
+      runId: process.env.GITHUB_RUN_ID ?? null, runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT ?? 1), toolingRef: process.env.GUIDANCE_TOOLING_REF ?? 'local' },
   });
-  writeFileSync(outputPath, JSON.stringify(result, null, 2) + '\n');
   console.info(JSON.stringify({ ...result.usage, statuses: result.entries.map(({ id, status }) => ({ id, status })) }));
   if (result.entries.some(entry => !['complete', 'completed-empty'].includes(entry.status))) process.exitCode = 1;
 }

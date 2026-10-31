@@ -46,7 +46,7 @@ jobs:
         run: pnpm nx run dialtone-docs:build --skip-nx-cache
       - uses: actions/upload-artifact@v4
         with:
-          name: example-guidance-inputs
+          name: example-guidance-inputs-${{ github.run_attempt }}
           path: packages/dialtone-docs/dist/example-guidance-inputs.json
           retention-days: 90
 
@@ -73,11 +73,15 @@ jobs:
           SOURCE_RUN: ${{ inputs.source_run }}
           SOURCE_HEAD: ${{ inputs.source_head }}
           BOOTSTRAP_HEAD: ${{ vars.EXAMPLE_GUIDANCE_BOOTSTRAP_HEAD }}
+          TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          CURRENT_ATTEMPT: ${{ github.run_attempt }}
         with:
           script: |
+            if (!/^[a-f0-9]{40}$/.test(process.env.TOOLING_REF || '')) throw new Error('Tooling ref must be an approved immutable SHA');
             const bootstrap = context.eventName === 'push';
             let sourceRun = context.runId;
             let head = context.sha;
+            let attempt = Number(process.env.CURRENT_ATTEMPT);
             if (!bootstrap) {
               const id = context.payload.workflow_run?.id || Number(process.env.SOURCE_RUN);
               if (!Number.isSafeInteger(id) || id <= 0) throw new Error('Invalid source run');
@@ -88,6 +92,7 @@ jobs:
               }
               sourceRun = id;
               head = run.head_sha;
+              attempt = run.run_attempt;
               if (process.env.SOURCE_HEAD && process.env.SOURCE_HEAD !== head) throw new Error('Source head mismatch');
             }
             if (!/^[a-f0-9]{40}$/.test(head)) throw new Error('Invalid source head');
@@ -98,15 +103,16 @@ jobs:
               core.notice('Source PR is closed or superseded; no inference needed.');
               return;
             }
-            const {data: available} = await github.rest.actions.listWorkflowRunArtifacts({...context.repo, run_id: sourceRun});
-            if (!available.artifacts.some(artifact => artifact.name === 'example-guidance-inputs' && !artifact.expired)) {
+            const available = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {...context.repo, run_id: sourceRun, per_page: 100});
+            if (!available.some(artifact => artifact.name === `example-guidance-inputs-${attempt}` && !artifact.expired)) {
               core.setOutput('enabled', 'false');
               core.notice('No lookup source manifest; no inference needed.');
               return;
             }
             core.setOutput('enabled', 'true');
-            const corpus = bootstrap && process.env.BOOTSTRAP_HEAD === head;
+            const corpus = process.env.BOOTSTRAP_HEAD === head;
             core.setOutput('run', String(sourceRun));
+            core.setOutput('attempt', String(attempt));
             core.setOutput('head', head);
             core.setOutput('pr', String(pr.number));
             core.setOutput('limit', corpus ? '500' : '20');
@@ -131,7 +137,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE_RUN: ${{ steps.source.outputs.run }}
-        run: node packages/dialtone-docs/scripts/restore-example-guidance.mjs --source-run "$SOURCE_RUN"
+          SOURCE_ATTEMPT: ${{ steps.source.outputs.attempt }}
+        run: node packages/dialtone-docs/scripts/restore-example-guidance.mjs --source-run "$SOURCE_RUN" --source-attempt "$SOURCE_ATTEMPT"
       - name: Restore matching notes and previous spending without a model credential
         if: steps.source.outputs.enabled == 'true'
         env:
@@ -139,8 +146,10 @@ jobs:
           GUIDANCE_PULL_REQUEST: ${{ steps.source.outputs.pr }}
           GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
           GUIDANCE_SOURCE_HEAD: ${{ steps.source.outputs.head }}
+          GUIDANCE_BUDGET_USD: ${{ steps.source.outputs.budget }}
         run: node packages/dialtone-docs/scripts/restore-example-guidance.mjs --generation
       - name: Generate changed notes within the remaining authorization
+        timeout-minutes: 45
         if: steps.source.outputs.enabled == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -157,7 +166,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always() && steps.source.outputs.enabled == 'true'
         with:
-          name: example-guidance-${{ github.run_id }}
+          name: example-guidance-${{ github.run_id }}-${{ github.run_attempt }}
           path: example-guidance.json
           retention-days: 90
       - name: Summarize reviewable notes and usage

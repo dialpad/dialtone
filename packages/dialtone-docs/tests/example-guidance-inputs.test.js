@@ -9,7 +9,7 @@ it('follows component source imports and fingerprints changed helpers without re
   const root = mkdtempSync(resolve(tmpdir(), 'dialtone-guidance-'));
   try {
     mkdirSync(resolve(root, 'packages/dialtone-vue'), { recursive: true });
-    writeFileSync(resolve(root, 'packages/dialtone-vue/Button.vue'), '<script>import x from "./helper.js"; export default {x}</script><template><button /></template>');
+    writeFileSync(resolve(root, 'packages/dialtone-vue/Button.vue'), '<script>import x from "@/helper.js"; export default {x}</script><template><button /></template>');
     const helper = resolve(root, 'packages/dialtone-vue/helper.js');
     writeFileSync(helper, 'export default false;');
     const input = { id: 'examples/button-default', template: '<dt-button>Save</dt-button>', setup: '', components: ['DtButton'], directives: [], filePath: 'docs/button.md', headingPath: ['Default'], rawFile: '# Button\nUse a meaningful button label.' };

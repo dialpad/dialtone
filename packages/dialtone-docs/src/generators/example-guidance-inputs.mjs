@@ -38,8 +38,9 @@ function moduleFiles(entry, root, seen) {
     }
   }
   for (const script of scripts) visit(babelParse(script, { sourceType: 'module', plugins: ['typescript'] }));
-  for (const specifier of imports.filter(name => name.startsWith('.'))) {
-    const target = resolve(dirname(absolute), specifier.split(/[?#]/)[0]);
+  for (const specifier of imports.filter(name => name.startsWith('.') || name.startsWith('@/'))) {
+    const name = specifier.split(/[?#]/)[0];
+    const target = name.startsWith('@/') ? resolve(root, 'packages/dialtone-vue', name.slice(2)) : resolve(dirname(absolute), name);
     const next = [target, `${target}.js`, `${target}.ts`, `${target}.vue`, resolve(target, 'index.js')]
       .find(candidate => { try { return statSync(candidate).isFile(); } catch { return false; } });
     if (!next) throw new Error(`Missing guidance source dependency: ${path} imports ${specifier}`);

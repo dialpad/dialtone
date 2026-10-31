@@ -8,9 +8,9 @@ import { selectGuidance, createGuidanceManifest, guidanceHash } from '../src/gen
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
-const api = endpoint => JSON.parse(execFileSync('gh', ['api', endpoint], { encoding: 'utf8', maxBuffer: 10_000_000 }));
+const api = endpoint => JSON.parse(execFileSync('gh', ['api', endpoint], { encoding: 'utf8', maxBuffer: 10_000_000, timeout: 30_000 }));
 
-const MAX_ARTIFACT_BYTES = 10_000_000;
+const MAX_ARTIFACT_BYTES = 32_000_000;
 
 /** Inspect one known JSON member; never extract source-controlled artifact paths. */
 export function readGuidanceArchive(archive, member) {
@@ -29,8 +29,8 @@ export function readGuidanceArchive(archive, member) {
 }
 
 function fromAction(repository, runId, name, member) {
-  const { artifacts } = api(`repos/${repository}/actions/runs/${runId}/artifacts?per_page=100`);
-  const artifact = artifacts.find(item => item.name === name && !item.expired);
+  const matches = allPages(`repos/${repository}/actions/runs/${runId}/artifacts`, 'artifacts').filter(item => item.name === name && !item.expired);
+  const artifact = matches.length === 1 ? matches[0] : undefined;
   if (!artifact || artifact.size_in_bytes > MAX_ARTIFACT_BYTES) throw new Error('Guidance artifact unavailable or too large');
   const archive = execFileSync('gh', ['api', `repos/${repository}/actions/artifacts/${artifact.id}/zip`], {
     maxBuffer: MAX_ARTIFACT_BYTES, timeout: 60_000,
@@ -38,64 +38,95 @@ function fromAction(repository, runId, name, member) {
   return readGuidanceArchive(archive, member);
 }
 
-export function trustedGuidanceRun(run, origin, repository, { allowFailed = false, toolingTrusted = false } = {}) {
-  return toolingTrusted && (run.conclusion === 'success' || (allowFailed && ['failure', 'cancelled'].includes(run.conclusion))) && run.path?.split('@')[0] === '.github/workflows/example-guidance.yml'
+export function trustedGuidanceRun(run, origin, repository, {
+  allowFailed = false, toolingTrusted = false, workflowTrusted = false,
+} = {}) {
+  return toolingTrusted && (run.conclusion === 'success' || (allowFailed && ['failure', 'cancelled'].includes(run.conclusion)))
+    && run.path?.split('@')[0] === '.github/workflows/example-guidance.yml'
     && run.repository?.full_name === repository && run.head_repository?.full_name === repository
-    && String(run.id) === String(origin?.runId) && sha(origin?.head) && sha(origin?.toolingRef)
+    && String(run.id) === String(origin?.runId) && Number(origin?.runAttempt) === Number(run.run_attempt ?? 1)
+    && sha(origin?.head) && sha(origin?.toolingRef) && sha(run.head_sha)
     && (run.event === 'push' ? run.head_sha === origin.head && run.head_sha === origin.toolingRef
-      : ['workflow_run', 'workflow_dispatch'].includes(run.event));
+      : ['workflow_run', 'workflow_dispatch'].includes(run.event) && workflowTrusted);
 }
 
-export function guidanceSpend(run, receipt, head, currentRun) {
-  if (run.display_title !== `Example guidance ${head}` || String(run.id) === String(currentRun)) return 0;
+export function guidanceSpend(run, receipt, head, currentRun, currentAttempt = 1, budgetUsd = 1) {
+  if (run.display_title !== `Example guidance ${head}` ||
+      (String(run.id) === String(currentRun) && Number(run.run_attempt ?? 1) === Number(currentAttempt))) return 0;
   const amount = receipt?.usage?.reservedUsd;
-  return Number.isFinite(amount) && amount >= 0 ? amount : run.event === 'push' ? 15 : 1;
+  return Number.isFinite(amount) && amount >= 0 ? amount : budgetUsd;
 }
 
-function artifactOrigin(artifact) {
-  if (artifact.origin) return artifact.origin;
-  const origins = [...new Map(artifact.entries.filter(entry => entry.origin)
-    .map(entry => [JSON.stringify(entry.origin), entry.origin])).values()];
-  return origins.length === 1 ? origins[0] : undefined;
+function allPages(endpoint, key, request = api) {
+  const values = new Map();
+  let total = 0;
+  for (let page = 1; ; page++) {
+    const response = request(`${endpoint}?per_page=100&page=${page}`);
+    if (!Array.isArray(response[key]) || !Number.isInteger(response.total_count)) throw new Error('Invalid guidance history');
+    total = Math.max(total, response.total_count);
+    for (const item of response[key]) values.set(item.id, item);
+    if (response[key].length < 100) {
+      if (values.size < total) throw new Error(`Incomplete guidance ${key === 'workflow_runs' ? 'workflow history' : 'artifact history'}`);
+      return [...values.values()];
+    }
+  }
 }
 
-function reviewedSource(repository, head, pullRequest, publication) {
-  const pulls = api(`repos/${repository}/commits/${head}/pulls`);
+function reviewedSource(repository, head, pullRequest, publication, request = api) {
+  const pulls = request(`repos/${repository}/commits/${head}/pulls`);
   return pulls.some(pr => {
     if (!pr.merged_at && (publication || pr.number !== pullRequest)) return false;
     if (pr.head.sha === head) return true;
-    const comparison = api(`repos/${repository}/compare/${head}...${pr.head.sha}`);
+    const comparison = request(`repos/${repository}/compare/${head}...${pr.head.sha}`);
     return ['ahead', 'identical'].includes(comparison.status);
   });
 }
 
-function fromActions(repository, pullRequest, publication, generation) {
-  const runs = api(`repos/${repository}/actions/workflows/example-guidance.yml/runs?per_page=30`).workflow_runs;
+export function restoreActionGuidance(repository, {
+  pullRequest = 0, publication = false, generation = false,
+  sourceHead = process.env.GUIDANCE_SOURCE_HEAD, currentRun = process.env.GITHUB_RUN_ID,
+  currentAttempt = Number(process.env.GITHUB_RUN_ATTEMPT ?? 1), toolingRef = process.env.GUIDANCE_TOOLING_REF,
+  budgetUsd = Number(process.env.GUIDANCE_BUDGET_USD ?? 1), request = api, readArtifact = fromAction,
+} = {}) {
+  if (!sha(toolingRef) || ![1, 15].includes(budgetUsd)) throw new Error('Invalid approved guidance configuration');
+  const runs = allPages(`repos/${repository}/actions/workflows/example-guidance.yml/runs`, 'workflow_runs', request);
   const artifacts = [];
   const trustedRefs = new Map();
+  const workflowBlobs = new Map();
+  const blob = ref => {
+    if (!sha(ref)) return undefined;
+    if (!workflowBlobs.has(ref)) {
+      workflowBlobs.set(ref, request(`repos/${repository}/contents/.github/workflows/example-guidance.yml?ref=${ref}`).sha);
+    }
+    return workflowBlobs.get(ref);
+  };
   let spentUsd = 0;
-  for (const run of runs) {
-    let receipt;
-    try {
-      const artifact = fromAction(repository, run.id, `example-guidance-${run.id}`, 'example-guidance.json');
-      const origin = artifactOrigin(artifact);
-      if (!origin || !sha(origin.toolingRef)) continue;
-      if (!trustedRefs.has(origin.toolingRef)) {
-        trustedRefs.set(origin.toolingRef, origin.toolingRef === process.env.GUIDANCE_TOOLING_REF
-          || reviewedSource(repository, origin.toolingRef, 0, true));
-      }
-      if (!trustedGuidanceRun(run, origin, repository, {
-        allowFailed: generation,
-        toolingTrusted: trustedRefs.get(origin.toolingRef),
-      })) continue;
-      receipt = artifact;
-      if (!reviewedSource(repository, origin.head, pullRequest, publication)) continue;
-      artifacts.push(artifact);
-    } catch {
-      console.warn(`Guidance artifact ${run.id} unavailable; exact archived bytes or a visible refresh may be needed.`);
-    } finally {
-      if (generation) {
-        spentUsd += guidanceSpend(run, receipt, process.env.GUIDANCE_SOURCE_HEAD, process.env.GITHUB_RUN_ID);
+  for (const latest of runs) {
+    for (let attempt = 1; attempt <= (latest.run_attempt ?? 1); attempt++) {
+      if (String(latest.id) === String(currentRun) && attempt === currentAttempt) continue;
+      const run = attempt === (latest.run_attempt ?? 1) ? latest
+        : request(`repos/${repository}/actions/runs/${latest.id}/attempts/${attempt}`);
+      let receipt;
+      try {
+        if (!['success', 'failure', 'cancelled'].includes(run.conclusion)) continue;
+        const artifact = readArtifact(repository, run.id, `example-guidance-${run.id}-${attempt}`, 'example-guidance.json');
+        const origin = artifact.origin;
+        if (!origin || !sha(origin.toolingRef)) continue;
+        if (!trustedRefs.has(origin.toolingRef)) {
+          trustedRefs.set(origin.toolingRef, origin.toolingRef === toolingRef
+            || reviewedSource(repository, origin.toolingRef, 0, true, request));
+        }
+        const workflowTrusted = run.head_sha === origin.toolingRef
+          || (sha(blob(run.head_sha)) && blob(run.head_sha) === blob(origin.toolingRef));
+        if (!trustedGuidanceRun(run, origin, repository, {
+          allowFailed: generation, toolingTrusted: trustedRefs.get(origin.toolingRef), workflowTrusted,
+        })) continue;
+        receipt = artifact;
+        if (reviewedSource(repository, origin.head, pullRequest, publication, request)) artifacts.push(artifact);
+      } catch {
+        console.warn(`Guidance artifact ${run.id}/${attempt} unavailable; exact archived bytes or a visible refresh may be needed.`);
+      } finally {
+        if (generation) spentUsd += guidanceSpend(run, receipt, sourceHead, currentRun, currentAttempt, budgetUsd);
       }
     }
   }
@@ -148,7 +179,9 @@ async function main() {
   if (process.argv[2] === '--source-run') {
     const runId = Number(process.argv[3]);
     if (!Number.isSafeInteger(runId) || runId <= 0) throw new Error('Invalid source run');
-    const manifest = fromAction(repository, runId, 'example-guidance-inputs', 'example-guidance-inputs.json');
+    const attempt = Number(process.argv[5]);
+    if (process.argv[4] !== '--source-attempt' || !Number.isSafeInteger(attempt) || attempt <= 0) throw new Error('Invalid source attempt');
+    const manifest = fromAction(repository, runId, `example-guidance-inputs-${attempt}`, 'example-guidance-inputs.json');
     const facts = manifest.entries.map(({ id, sources, dependencies }) => ({ id, sources, dependencies }));
     if (guidanceHash(createGuidanceManifest(facts, manifest)) !== guidanceHash(manifest)) throw new Error('Invalid source manifest');
     mkdirSync(dirname(manifestPath), { recursive: true });
@@ -159,7 +192,7 @@ async function main() {
   const artifacts = await fromPublishedPackages();
   let spentUsd = 0;
   try {
-    const restored = fromActions(repository, pullRequest, publication, generation);
+    const restored = restoreActionGuidance(repository, { pullRequest, publication, generation });
     artifacts.push(...restored.artifacts);
     spentUsd = restored.spentUsd;
   } catch {
