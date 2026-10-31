@@ -40,7 +40,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### Base Styles
 
-<!-- example-id: examples/toggle-base-styles -->
+<!-- @example {"id":"examples/toggle-base-styles","responsibilities":"Source fixture only. The source fieldset has no legend; supply appropriate grouping and application state/actions before adopting it.","interaction":"Check names, switch states, disabled behavior and keyboard activation. This fixture does not demonstrate application side effects."} -->
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
@@ -56,7 +56,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### Sizes
 
-<!-- example-id: examples/toggle-sizes -->
+<!-- @example {"id":"examples/toggle-sizes","responsibilities":"Source fixture only. The source fieldset has no legend; provide an appropriate group label and application state/actions.","interaction":"Check names, focus, switch state and keyboard activation. Size comparison is not a complete settings form."} -->
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
@@ -67,7 +67,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### With v-model
 
-<!-- example-id: examples/toggle-v-model -->
+<!-- @example {"id":"examples/toggle-v-model","state":["checked"],"responsibilities":"The authored ref(false) supplies local checked state. Connect real application side effects separately.","interaction":"Check label, focus, switch state and keyboard activation; no persistence or remote action is supplied."} -->
 
 ```vue demo
 <dt-toggle v-model="checked" class="d-g-200">Toggle</dt-toggle>

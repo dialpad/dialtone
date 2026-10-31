@@ -56,7 +56,7 @@ Standalone Vue release commit selection also includes those generator/shared-hel
 
 ## Selected example consumer and packed delivery checks
 
-The two opt-in Button example IDs are authored with `<!-- example-id: examples/button-default -->` and `<!-- example-id: examples/button-disabled-tooltip -->` immediately before their live Vue demo fences. `documentation-examples.mjs` supplies explicit assembly dependencies, component/directive associations and behavior responsibilities; it does not copy the example markup. Additional documentation fences require authored selection and setup. Combinator presets instead derive from their curated registry; missing context and unsupported APIs remain explicit exclusions. Delivery is separate from consumer proof.
+Ready component-page live Vue fences are delivered automatically when their public imports, supported source state and source API checks are complete. IDs derive from page/section; source-adjacent `<!-- @example {"key":"compact"} -->` metadata handles ambiguity, stable overrides, application responsibilities and bounded setup. No publishing list is maintained. The eight earlier exact IDs are preserved as source overrides. Follow the [source authoring contract](../../.agents/resources/documentation-examples.md) for the single syntax, retirement, static subjects and exclusions. Other source forms remain explicit coverage gaps. Combinator membership continues to come from its curated registry. All delivery remains separate from consumer proof.
 
 After building the adapters, run the optional real-install consumer check in an owned scratch directory:
 

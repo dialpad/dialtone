@@ -17,9 +17,9 @@ Apply to `apps/dialtone-documentation/**`.
 
 - Run documentation lint/build checks when docs-site structure, nav, frontmatter, or VuePress components change.
 
-## Selected source examples
+## Source examples
 
-For marked examples, read the [shared source-example authoring and maintenance contract](../documentation-examples.md). Preserve stable IDs, authored setup, representation-specific validation and explicit remaining coverage.
+For documentation examples, read the [shared source-example authoring and maintenance contract](../documentation-examples.md). Preserve stable IDs, authored setup, representation-specific validation and explicit remaining coverage.
 
 ## Curated discovery keywords
 

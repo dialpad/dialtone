@@ -30,7 +30,7 @@ combinator: DtLoader
 
 The base loader should be the go-to loader for most of your needs. When in doubt, use this style.
 
-<!-- example-id: examples/loader-default -->
+<!-- @example {"id":"examples/loader-default","responsibilities":"Provide a meaningful loading label when the default loading label is insufficient.","interaction":"Presentational loading indicator; no application action or keyboard interaction is supplied."} -->
 
 ```vue demo
 <dt-loader></dt-loader>
@@ -48,7 +48,7 @@ The circular spinner from earlier versions of Dialtone. Use `kind="spinner"` onl
 
 The base loader size is 24px and should be used in most cases.
 
-<!-- example-id: examples/loader-sizes -->
+<!-- @example {"id":"examples/loader-sizes","responsibilities":"DtStack is layout setup, not the subject of this example. Verify supported sizes against the selected installed API.","interaction":"Presentational size comparison; no application action or keyboard interaction is supplied."} -->
 
 ```vue demo
 <dt-stack

@@ -1,3 +1,4 @@
+import MarkdownIt from 'markdown-it';
 import { createRequire } from 'node:module';
 
 const require = createRequire(new URL('../../../../apps/dialtone-documentation/package.json', import.meta.url));
@@ -22,8 +23,12 @@ export function componentTags(template) {
 /** Keep only the named source declarations and their Vue ref import for this cohort. */
 export function sourceSetup(rawFile, names = []) {
   if (!names.length) return '';
-  const script = rawFile.match(/<script\s+setup\s*>([\s\S]*?)<\/script>/)?.[1];
-  if (!script) throw new Error(`Missing authored setup for ${names.join(', ')}`);
+  const scripts = new MarkdownIt({ html: true }).parse(rawFile, {})
+    .filter(token => token.type === 'html_block' && token.level === 0)
+    .map(token => token.content.match(/^\s*<script\s+setup\s*>([\s\S]*?)<\/script>\s*$/)?.[1])
+    .filter(script => script !== undefined);
+  if (scripts.length !== 1) throw new Error(`Missing or ambiguous authored setup for ${names.join(', ')}`);
+  const [script] = scripts;
   const { descriptor } = parse(`<script setup>${script}</script>`);
   const compiled = compileScript(descriptor, { id: 'source-example' });
   const declarations = names.map(name => {
