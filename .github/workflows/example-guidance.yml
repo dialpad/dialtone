@@ -1,4 +1,4 @@
-name: Example guidance
+name: Docs Example Guidance
 run-name: Example guidance ${{ inputs.source_head || github.event.workflow_run.head_sha || github.sha }}
 
 on:
@@ -27,10 +27,12 @@ permissions:
 concurrency:
   group: example-guidance-${{ github.repository }}
   cancel-in-progress: false
+  queue: max
 
 jobs:
   # Only the first bootstrap needs a separate build. Normal PRs reuse Unit Tests.
   prepare:
+    name: Prepare example inputs
     if: github.event_name == 'push' && github.sha == vars.EXAMPLE_GUIDANCE_TOOLING_REF
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -51,6 +53,7 @@ jobs:
           retention-days: 90
 
   generate:
+    name: Generate usage notes
     permissions:
       contents: read
       actions: read
@@ -220,7 +223,7 @@ jobs:
           script: |
             await github.rest.checks.create({
               ...context.repo,
-              name: 'Generated example guidance',
+              name: 'Docs Example Guidance / Validate usage notes',
               head_sha: process.env.SOURCE_HEAD,
               status: 'completed',
               conclusion: process.env.GENERATION_STATUS === 'success' ? 'success' : 'failure',

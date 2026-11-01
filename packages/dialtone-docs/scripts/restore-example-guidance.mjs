@@ -80,7 +80,7 @@ function modelCouldHaveRun(repository, run, request) {
   try {
     const jobs = allPages(`repos/${repository}/actions/runs/${run.id}/attempts/${run.run_attempt ?? 1}/jobs`, 'jobs', request);
     if (run.conclusion === 'cancelled' && jobs.length === 0) return false;
-    const generating = jobs.filter(job => job.name === 'generate');
+    const generating = jobs.filter(job => ['generate', 'Generate usage notes'].includes(job.name));
     if (!generating.length) return true;
     return generating.some(job => {
       if (job.conclusion === 'skipped') return false;

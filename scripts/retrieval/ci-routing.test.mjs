@@ -195,16 +195,18 @@ test('guidance serializes repository spending while preserving per-head recovery
     'dialpad/dialtone', { toolingTrusted: true }), true);
   assert.equal(guidanceSpend(run, undefined, head), 1);
   const paid = Object.entries(guidance.jobs).flatMap(([job, config]) => config.steps
-    .filter(step => step.env?.ANTHROPIC_API_KEY).map(step => ({ job, step: step.name })));
+    .filter(step => step.env?.ANTHROPIC_API_KEY).map(step => ({ job: config.name ?? job, step: step.name })));
   assert.equal(paid.length, 1);
-  for (const [conclusion, expectedSpend] of [['skipped', 0], ['failure', 1]]) {
-    const restored = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead: head,
-      currentRun: '99', toolingRef: head, readArtifact: () => undefined,
-      request: endpoint => endpoint.includes('/jobs?') ? { total_count: 1, jobs: [{ name: paid[0].job,
-        steps: [{ name: paid[0].step, conclusion, started_at: '2026-11-01T00:00:00Z' }],
-      }] } : { total_count: 1, workflow_runs: [run] },
-    });
-    assert.equal(restored.spentUsd, expectedSpend);
+  for (const jobName of new Set(['generate', paid[0].job])) {
+    for (const [conclusion, expectedSpend] of [['skipped', 0], ['failure', 1]]) {
+      const restored = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead: head,
+        currentRun: '99', toolingRef: head, readArtifact: () => undefined,
+        request: endpoint => endpoint.includes('/jobs?') ? { total_count: 1, jobs: [{ name: jobName,
+          steps: [{ name: paid[0].step, conclusion, started_at: '2026-11-01T00:00:00Z' }],
+        }] } : { total_count: 1, workflow_runs: [run] },
+      });
+      assert.equal(restored.spentUsd, expectedSpend);
+    }
   }
 });
 
