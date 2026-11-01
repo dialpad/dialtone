@@ -99,6 +99,8 @@ describe('generated example guidance', () => {
 
 it.each([
   ['link', '[Open](https://example.invalid)'],
+  ['nested-label link', '[usage [guide]](/elsewhere)'],
+  ['escaped-bracket link', String.raw`[usage \[guide\]](/elsewhere)`],
   ['HTML', '<a href="https://example.invalid">Open</a>'],
   ['emphasis', '**Keep labels**'],
   ['underscore emphasis', '_Keep labels_'],

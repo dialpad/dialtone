@@ -56,10 +56,23 @@ function fields(value, expected) {
   }
 }
 
+function hasMarkdownLink(text) {
+  let depth = 0;
+  for (let index = 0; index < text.length; index++) {
+    if (text[index] === '\\') index++;
+    else if (text[index] === '[') depth++;
+    else if (text[index] === ']' && depth > 0) {
+      depth--;
+      if (/^(?:\([^)]*\)|\[[^\]]*\])/u.test(text.slice(index + 1))) return true;
+    }
+  }
+  return false;
+}
+
 // Pinned provider tooling has no installed parser dependencies.
 function hasMarkup(text) {
   return /`|<(?:!--|[!?][^<>]*>|\/?[A-Za-z][^<>]*>)/u.test(text)
-    || /\[[^\]]*\](?:\([^)]*\)|\[[^\]]*\])/u.test(text)
+    || hasMarkdownLink(text)
     || /^(?:#{1,6}|>|[-+*]|\d+[.)])\s/u.test(text)
     || /(\*{1,3}|~~)(?=\S).+?\1/u.test(text)
     || /(?<![\p{L}\p{N}_])(_{1,3})(?=\S).+?\1(?![\p{L}\p{N}_])/u.test(text);
