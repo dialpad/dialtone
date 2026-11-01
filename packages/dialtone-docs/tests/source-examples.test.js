@@ -47,19 +47,20 @@ describe('source-driven component examples', () => {
     expect(() => produce('## Default\n' + raw)).toThrow();
   });
 
-  it('retains a source-owned exclusion and physical location in coverage', () => {
-    const rawFile = '---\ntitle: Example\n---\n\n## Default\n' + annotation({ id: 'examples/guide-demo', exclude: { reason: 'Needs an application service.', owner: 'Component owner' } }) + fence('<dt-button>Save</dt-button>');
+  it.each([undefined, 'planned'])('retains an owned exclusion and physical location with status %s', status => {
+    const rawFile = `---\ntitle: Example\n${status ? `status: ${status}\n` : ''}---\n\n## Default\n` + annotation({ id: 'examples/guide-demo', exclude: { reason: 'Needs an application service.', owner: 'Component owner' } }) + fence('<dt-button>Save</dt-button>');
     const options = input(rawFile);
     const records = buildExampleRecords(options);
     const coverage = buildExampleCoverage({ ...options, records });
     expect(records).toEqual([]);
     expect(coverage.candidates[0].disposition).toBe('excluded');
-    expect(coverage.candidates[0].reason).toContain('application service');
+    expect(coverage.candidates[0].reason).toBe('Needs an application service.');
+    expect(coverage.candidates[0].owner).toBe('Component owner');
     expect(rawFile.split('\n')[coverage.candidates[0].sourceLine - 1]).toBe('```vue demo');
   });
 
   it.each([
-    ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + annotation({ id: 'examples/planned-demo' }) + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
+    ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
     ['unresolved', '## 🧪\n' + fence('<dt-button :disabled="missing">Save</dt-button>'), 'components', 'remaining', 'missing'],
     ['outside the enabled area', '## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
   ])('keeps %s candidates undelivered and accounted for in coverage',(_, raw, area, disposition, reason) => {
@@ -75,8 +76,11 @@ describe('source-driven component examples', () => {
     ['deprecated API', 'Default', '<dt-text kind="body">Text</dt-text>', 'components', /deprecated/i],
     ['contextual guidance', 'Avoid this', '<dt-button>Save</dt-button>', 'components', /Contextual/],
     ['outside the enabled area', 'Default', '<dt-button>Save</dt-button>', 'guides', /outside/],
-  ])('fails instead of silently retiring an explicit ID with %s', (_, heading, markup, area, reason) => {
-    const options = input(`## ${heading}\n` + annotation({ id: 'examples/guide-demo' }) + fence(markup));
+    ['planned page', 'Default', '<dt-button>Save</dt-button>', 'components', /not-ready/, '---\nstatus: planned\n---\n\n'],
+    ['beta page', 'Default', '<dt-button>Save</dt-button>', 'components', /not-ready/, '---\nstatus: beta\n---\n\n'],
+    ['wip page', 'Default', '<dt-button>Save</dt-button>', 'components', /not-ready/, '---\nstatus: wip\n---\n\n'],
+  ])('fails instead of silently retiring an explicit ID with %s', (_, heading, markup, area, reason, frontmatter = '') => {
+    const options = input(`${frontmatter}## ${heading}\n` + annotation({ id: 'examples/guide-demo' }) + fence(markup));
     options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
     expect(() => buildExampleRecords(options)).toThrow(/example.md:\d+:.*examples\/guide-demo/);
     expect(() => buildExampleRecords(options)).toThrow(reason);
