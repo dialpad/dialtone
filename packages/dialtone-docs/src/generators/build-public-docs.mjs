@@ -92,7 +92,7 @@ function readPage(absolutePath, componentPage) {
     status: frontmatter.status ?? null,
     figmaUrl: frontmatter.figma_url ?? null,
     storybook: frontmatter.storybook ?? null,
-    keywords: readKeywords(frontmatter.keywords, filePath),
+    keywords: excluded ? undefined : readKeywords(frontmatter.keywords, filePath),
   };
   if (isDirective) {
     const storiesImport = rawFile.match(/^import \* as \w+ from ['"](.+\.stories\.js)['"]/m);

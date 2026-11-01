@@ -3,6 +3,8 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildRecords, chunkSections, buildReadyComponentPage, formatBuildError } from '@src/generators/build-public-docs.mjs';
 import { readKeywords } from '@src/utils/keywords.mjs';
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
@@ -188,6 +190,20 @@ describe('buildRecords — complete.md', () => {
 // ─── Status filter tests ─────────────────────────────────────────────────────
 
 describe('buildRecords — status filter (blacklist)', () => {
+  test.each([
+    ['excluded page', 'planned', '', undefined],
+    ['excluded retained ID', 'planned', '<!-- @example {"id":"examples/retained"} -->\n\n', /explicit example ID.*examples\/retained/],
+    ['published page', 'ready', '', /Invalid keywords/],
+  ])('validates only published record metadata while preserving coverage: %s', (_, status, annotation, error) => {
+    const directory = mkdtempSync(resolve(tmpdir(), 'source-keywords-'));
+    try {
+      const file = resolve(directory, 'example.md');
+      writeFileSync(file, `---\nstatus: ${status}\nkeywords: []\n---\n\n## Default\n${annotation}\`\`\`vue demo\n<dt-button>Save</dt-button>\n\`\`\``);
+      if (error) expect(() => buildRecords(file)).toThrow(error);
+      else expect(buildRecords(file)).toEqual([]);
+    } finally { rmSync(directory, { recursive: true, force: true }); }
+  });
+
   test('status:beta file produces zero records', () => {
     expect(buildRecords(resolve(fixtureDir, 'beta.md'))).toHaveLength(0);
   });
