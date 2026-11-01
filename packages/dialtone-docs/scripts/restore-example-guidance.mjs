@@ -118,6 +118,7 @@ export function restoreActionGuidance(repository, {
     return workflowBlobs.get(ref);
   };
   let spentUsd = 0;
+  const artifactCutoff = Date.now() - 91 * 24 * 60 * 60 * 1000;
   for (const latest of runs) {
     for (let attempt = 1; attempt <= (latest.run_attempt ?? 1); attempt++) {
       if (String(latest.id) === String(currentRun) && attempt === currentAttempt) continue;
@@ -127,7 +128,8 @@ export function restoreActionGuidance(repository, {
       let receipt;
       try {
         if (!['success', 'failure', 'cancelled'].includes(run.conclusion)) continue;
-        const artifact = readArtifact(repository, run.id, `example-guidance-${run.id}-${attempt}`, 'example-guidance.json');
+        const artifact = Date.parse(run.run_started_at) < artifactCutoff ? undefined
+          : readArtifact(repository, run.id, `example-guidance-${run.id}-${attempt}`, 'example-guidance.json');
         if (artifact === undefined) continue;
         if (artifact === null || typeof artifact !== 'object' || Array.isArray(artifact)) throw new Error('Invalid guidance artifact');
         const origin = artifact.origin;

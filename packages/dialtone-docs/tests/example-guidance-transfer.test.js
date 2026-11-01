@@ -68,6 +68,28 @@ it('restores beyond the first history page and counts previous attempts of the c
   expect(result.artifacts).toHaveLength(2);
 });
 
+it('skips expired attempt downloads without losing spend or recent rerun artifacts', () => {
+  vi.spyOn(Date, 'now').mockReturnValue(Date.parse('2026-11-01T12:00:00Z'));
+  try {
+    const old = '2026-07-01T12:00:00Z';
+    const recent = oldRun(12, { run_attempt: 2, created_at: old, run_started_at: '2026-11-01T10:00:00Z' });
+    const request = endpoint => {
+      if (endpoint.includes('runs?')) return { total_count: 2, workflow_runs: [recent, oldRun(11)] };
+      if (endpoint.endsWith('/12/attempts/1')) return oldRun(12, { run_started_at: old });
+      if (endpoint.includes('/jobs?')) return { total_count: 1, jobs: [{ name: 'generate' }] };
+      if (endpoint.includes('/pulls')) return mergedSource;
+      throw new Error(`Unexpected endpoint ${endpoint}`);
+    };
+    const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead,
+      currentRun: '99', toolingRef, request, readArtifact: (_, id, name) => {
+        if (name === 'example-guidance-12-1') throw new Error('Expired attempt must not download an artifact');
+        return receiptFor(id, id === 12 ? 2 : 1, id === 12 ? 0.2 : 0.25);
+      } });
+    expect(result.artifacts).toHaveLength(2);
+    expect(result.spentUsd).toBeCloseTo(1.45);
+  } finally { vi.restoreAllMocks(); }
+});
+
 it('authenticates the executing dispatch workflow independently of a claimed tooling ref', () => {
   const run = oldRun(12, { event: 'workflow_dispatch', head_sha: 'b'.repeat(40) });
   const request = trusted => endpoint => {

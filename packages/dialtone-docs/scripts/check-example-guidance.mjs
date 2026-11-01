@@ -40,12 +40,13 @@ function main() {
   }
   if (args[0] === '--copy-to' && args.length === 2) { copyTo(args[1]); return; }
   if (args.length && (args.length !== 1 || args[0] !== '--prepare-publication')) throw new Error('Unknown guidance check option');
-  const run = (command, parameters) => execFileSync(command, parameters, { cwd: root, stdio: 'inherit',
-    env: { ...process.env, pnpm_config_verify_deps_before_run: 'warn', NX_DAEMON: 'false' } });
+  const { GH_TOKEN, ...buildEnv } = process.env;
+  const run = (command, parameters, extraEnv = {}) => execFileSync(command, parameters, { cwd: root, stdio: 'inherit',
+    env: { ...buildEnv, ...extraEnv, pnpm_config_verify_deps_before_run: 'warn', NX_DAEMON: 'false' } });
   if (args[0] === '--prepare-publication') {
     run('pnpm', ['nx', 'run', 'dialtone-docs:build']);
     run('node', ['packages/dialtone-docs/src/generators/build-public-docs.mjs']);
-    run('node', ['packages/dialtone-docs/scripts/restore-example-guidance.mjs', '--publication']);
+    run('node', ['packages/dialtone-docs/scripts/restore-example-guidance.mjs', '--publication'], { GH_TOKEN });
     run('pnpm', ['nx', 'run-many', '-t', 'build', '-p', ...adapters]);
     // Re-read source facts after cached tasks; offline cache output cannot authorize publication.
     run('node', ['packages/dialtone-docs/src/generators/build-public-docs.mjs']);
