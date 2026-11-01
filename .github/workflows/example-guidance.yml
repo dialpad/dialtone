@@ -93,7 +93,8 @@ jobs:
               sourceRun = id;
               head = run.head_sha;
               attempt = run.run_attempt;
-              if (process.env.SOURCE_HEAD && process.env.SOURCE_HEAD !== head) throw new Error('Source head mismatch');
+              if ((context.eventName === 'workflow_dispatch' || process.env.SOURCE_HEAD) &&
+                  process.env.SOURCE_HEAD !== head) throw new Error('Source head mismatch');
             }
             if (!/^[a-f0-9]{40}$/.test(head)) throw new Error('Invalid source head');
             const {data: prs} = await github.rest.repos.listPullRequestsAssociatedWithCommit({...context.repo, commit_sha: head});
@@ -180,11 +181,14 @@ jobs:
           node --input-type=module <<'JS' >> "$GITHUB_STEP_SUMMARY"
           import { readFileSync } from 'node:fs';
           const result = JSON.parse(readFileSync('example-guidance.json', 'utf8'));
+          const literal = value => String(value)
+            .replace(/[\p{Cc}\p{Cf}\p{Zl}\p{Zp}]/gu, character => `\\u{${character.codePointAt(0).toString(16)}}`)
+            .replace(/[\x21-\x2f\x3a-\x40\x5b-\x60\x7b-\x7e]/g, character => `&#${character.codePointAt(0)};`);
           console.log('## Generated example guidance');
           console.log('Source-based guidance; no consumer or human-validation proof is created.');
           for (const entry of result.entries) {
-            console.log(`\n- ${entry.id}: ${entry.status}`);
-            for (const note of entry.notes ?? []) console.log(`  - ${note.text}`);
+            console.log(`\n- ${literal(entry.id)}: ${literal(entry.status)}`);
+            for (const note of entry.notes ?? []) console.log(`  - ${literal(note.text)}`);
           }
           console.log(`\nUsage: ${JSON.stringify(result.usage)}`);
           JS

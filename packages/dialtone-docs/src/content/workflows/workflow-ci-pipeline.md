@@ -3,13 +3,13 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-23
+last_updated: 2026-11-01
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
 # CI Pipeline
 
-Dialtone uses GitHub Actions for all CI. Workflows live in `.github/workflows/`. Every workflow uses a shared composite action at `.github/actions/setup-environment/` that installs the correct pnpm and Node.js versions and runs `pnpm install`.
+Dialtone uses GitHub Actions for all CI. Workflows live in `.github/workflows/`. Most workflows use the shared composite action at `.github/actions/setup-environment/` to install the correct pnpm and Node.js versions and run `pnpm install`. The credentialed Example guidance job instead checks out approved immutable tooling without installing dependencies.
 
 ## Environment Versions
 
@@ -38,6 +38,8 @@ These checks are required on every PR:
 ---
 
 ## Workflow Reference
+
+The `example-guidance.yml` workflow prepares source-bound usage notes separately from offline lookup builds. Manual dispatch requires the exact source head; archive failures and conflicting results stop the workflow. Follow the [generation, review and recovery instructions](../../../../../scripts/retrieval/README.md#generated-usage-notes) before generation, merge or publication.
 
 ### `unit_tests.yml`
 

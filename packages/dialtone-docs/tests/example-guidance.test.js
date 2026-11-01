@@ -54,6 +54,16 @@ describe('generated example guidance', () => {
     expect(() => validateGuidanceResult(input, change(result(input)))).toThrow();
   });
 
+  it.each([
+    ['bidi formatting', '\u202e'], ['zero-width formatting', '\u200b'],
+    ['line separators', '\u2028'], ['paragraph separators', '\u2029'], ['control characters', '\u007f'],
+  ])('rejects %s in guidance', (_, character) => {
+    const [input] = manifest([facts]).entries;
+    const value = result(input);
+    value.notes[0].text = `Prevent${character} disabled actions.`;
+    expect(() => validateGuidanceResult(input, value)).toThrow(/plain text/);
+  });
+
   it('distinguishes pending, error and completed-empty, with strict publication rejection', () => {
     const data = manifest([facts]);
     const [input] = data.entries;
@@ -75,6 +85,13 @@ describe('generated example guidance', () => {
 
   it('fails conflicting outputs for identical inputs rather than choosing unreviewed prose', () => {
     const data = manifest([facts]);
-    expect(() => selectGuidance(data, [artifact(data.entries[0]), artifact(data.entries[0], [])])).toThrow(/conflict/i);
+    const conflicting = [artifact(data.entries[0]), artifact(data.entries[0], [])];
+    expect(() => selectGuidance(data, conflicting)).toThrow(/conflict/i);
+    const corrected = manifest([{ ...facts, sources: facts.sources.map(source => source.id === 'documentation'
+      ? { ...source, text: source.text + ' Guard handlers when aria-disabled is true.' } : source) }]);
+    expect(() => selectGuidance(corrected, conflicting, { strict: true })).toThrow(/successful guidance/);
+    const fresh = artifact(corrected.entries[0]);
+    const selected = selectGuidance(corrected, [...conflicting, fresh], { strict: true });
+    expect(selected.entries[0].notes).toEqual(fresh.entries[0].notes);
   });
 });

@@ -72,8 +72,9 @@ function allPages(endpoint, key, request = api) {
   }
 }
 
-// Missing receipts remain charged unless complete job metadata proves the model never ran.
+// Missing receipts remain charged unless attempt state or complete job metadata proves no model work ran.
 function modelCouldHaveRun(repository, run, request) {
+  if (!run.conclusion && ['queued', 'pending', 'waiting', 'requested'].includes(run.status)) return false;
   if (!run.conclusion) return true;
   try {
     const jobs = allPages(`repos/${repository}/actions/runs/${run.id}/attempts/${run.run_attempt ?? 1}/jobs`, 'jobs', request);
@@ -152,10 +153,12 @@ export function restoreActionGuidance(repository, {
   return { artifacts, spentUsd };
 }
 
-async function bytes(url, maximum) {
+async function bytes(url, maximum, allowMissing = false) {
   if (new URL(url).origin !== 'https://registry.npmjs.org') throw new Error('Unexpected guidance archive host');
   const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
-  if (!response.ok || new URL(response.url).origin !== 'https://registry.npmjs.org') throw new Error('Guidance archive unavailable');
+  if (new URL(response.url).origin !== 'https://registry.npmjs.org') throw new Error('Unexpected guidance archive host');
+  if (allowMissing && response.status === 404) return undefined;
+  if (!response.ok) throw new Error('Guidance archive unavailable');
   const chunks = [];
   let size = 0;
   for await (const chunk of response.body) {
@@ -167,23 +170,35 @@ async function bytes(url, maximum) {
 }
 
 /** Public npm integrity binds the previously published archive; no package scripts are executed. */
-async function fromPublishedPackages() {
+export async function fromPublishedPackages() {
   const artifacts = [];
   for (const name of ['dialtone-cli', 'dialtone-mcp-server']) {
     const directory = mkdtempSync(resolve(tmpdir(), 'dialtone-guidance-published-'));
     try {
-      const metadata = JSON.parse(await bytes(`https://registry.npmjs.org/@dialpad%2f${name}/latest`, 1_000_000));
+      const published = await bytes(`https://registry.npmjs.org/@dialpad%2f${name}/latest`, 1_000_000, true);
+      if (!published) {
+        console.info(`No published ${name} package yet; no guidance archive to restore.`);
+        continue;
+      }
+      const metadata = JSON.parse(published);
       const archive = await bytes(metadata.dist.tarball, 20_000_000);
       const integrity = `sha512-${createHash('sha512').update(archive).digest('base64')}`;
       if (integrity !== metadata.dist.integrity) throw new Error('Guidance package integrity mismatch');
       const file = resolve(directory, 'package.tgz');
       writeFileSync(file, archive);
+      const members = execFileSync('tar', ['-tzf', file], {
+        encoding: 'utf8', maxBuffer: 1_000_000, timeout: 30_000, stdio: ['ignore', 'pipe', 'pipe'],
+      }).split('\n');
+      if (!members.includes('package/build/example-guidance.json')) {
+        console.info(`Published ${name} predates guidance archives; no notes to restore.`);
+        continue;
+      }
       const content = execFileSync('tar', ['-xOzf', file, 'package/build/example-guidance.json'], {
         maxBuffer: 10_000_000, timeout: 30_000, stdio: ['ignore', 'pipe', 'pipe'],
       });
       artifacts.push(JSON.parse(content));
     } catch {
-      console.warn(`No reusable published ${name} guidance archive; this is expected before the first guidance release.`);
+      throw new Error(`Cannot verify published ${name} guidance archive; stop and resolve registry/archive access before retrying.`);
     } finally { rmSync(directory, { recursive: true, force: true }); }
   }
   return artifacts;

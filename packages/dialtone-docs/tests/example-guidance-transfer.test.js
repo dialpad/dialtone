@@ -1,4 +1,10 @@
-import { expect, it } from 'vitest';
+import { expect, it, vi } from 'vitest';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import * as transfer from '../scripts/restore-example-guidance.mjs';
 import { trustedGuidanceRun, readGuidanceArchive, restoreActionGuidance } from '../scripts/restore-example-guidance.mjs';
 
 it('accepts successful immutable-tooling runs and rejects failed, foreign or unrelated artifacts', () => {
@@ -96,3 +102,62 @@ it('charges missing receipts only when a completed run could have reached the mo
   // A skipped model step spent nothing; started and unverifiable attempts remain conservative.
   expect(result.spentUsd).toBe(2);
 });
+
+
+it('does not reserve spend for unstarted attempts, while running and unknown attempts remain conservative', () => {
+  const runs = ['queued', 'pending', 'waiting', 'requested', 'in_progress', undefined]
+    .map((status, index) => oldRun(20 + index, { status, conclusion: null }));
+  const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead, currentRun: '99', toolingRef,
+    request: () => ({ total_count: runs.length, workflow_runs: runs }),
+    readArtifact: () => { throw new Error('No unstarted/running receipt should be read'); },
+  });
+  expect(result.spentUsd).toBe(2);
+});
+
+function publishedFixture({ legacy = false, content = '{"schemaVersion":1,"entries":[]}' } = {}) {
+  const directory = mkdtempSync(join(tmpdir(), 'guidance-package-'));
+  try {
+    mkdirSync(join(directory, 'package/build'), { recursive: true });
+    writeFileSync(join(directory, legacy ? 'package/package.json' : 'package/build/example-guidance.json'), content);
+    const archive = execFileSync('tar', ['-czf', '-', '-C', directory, 'package']);
+    const metadata = { dist: { tarball: 'https://registry.npmjs.org/guidance-fixture.tgz',
+      integrity: `sha512-${createHash('sha512').update(archive).digest('base64')}` } };
+    return { archive, metadata };
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+}
+
+function mockRegistry(fixture, { metadataStatus = 200, tarballStatus = 200, offline = false } = {}) {
+  vi.stubGlobal('fetch', async url => {
+    if (offline) throw new Error('Simulated registry outage');
+    const metadata = url.endsWith('/latest');
+    const response = new Response(metadata ? JSON.stringify(fixture.metadata) : fixture.archive,
+      { status: metadata ? metadataStatus : tarballStatus });
+    Object.defineProperty(response, 'url', { value: url });
+    return response;
+  });
+}
+
+it.each([
+  ['valid published guidance', {}, {}, 2],
+  ['a valid older package without guidance', { legacy: true }, {}, 0],
+  ['a package not published yet', {}, { metadataStatus: 404 }, 0],
+])('restores %s without inventing replacement notes', async (_, archiveOptions, responseOptions, count) => {
+  mockRegistry(publishedFixture(archiveOptions), responseOptions);
+  try { expect(await transfer.fromPublishedPackages()).toHaveLength(count); }
+  finally { vi.unstubAllGlobals(); }
+});
+
+it.each(['transport', 'registry HTTP', 'tarball HTTP', 'integrity', 'invalid JSON', 'invalid tar'])(
+  'stops on %s failure instead of treating published guidance as absent', async kind => {
+    const fixture = publishedFixture({ content: kind === 'invalid JSON' ? '{broken' : undefined });
+    if (kind === 'integrity') fixture.metadata.dist.integrity = 'sha512-mismatched';
+    if (kind === 'invalid tar') {
+      fixture.archive = Buffer.from('not a tar archive');
+      fixture.metadata.dist.integrity = `sha512-${createHash('sha512').update(fixture.archive).digest('base64')}`;
+    }
+    mockRegistry(fixture, { offline: kind === 'transport', metadataStatus: kind === 'registry HTTP' ? 503 : 200,
+      tarballStatus: kind === 'tarball HTTP' ? 404 : 200 });
+    try { await expect(transfer.fromPublishedPackages()).rejects.toThrow(/published.*guidance/i); }
+    finally { vi.unstubAllGlobals(); }
+  },
+);
