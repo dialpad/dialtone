@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from 'nod
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { selectGuidance, assertGuidanceManifest, GUIDANCE_POLICY_HASH } from '../src/generators/example-guidance.mjs';
+import { selectGuidance, assertGuidanceManifest, GUIDANCE_POLICY_HASH, GUIDANCE_MONTHLY_BUDGET_USD, guidanceMonth } from '../src/generators/example-guidance.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
@@ -79,7 +79,10 @@ function modelCouldHaveRun(repository, run, request) {
   if (!run.conclusion) return true;
   try {
     const jobs = allPages(`repos/${repository}/actions/runs/${run.id}/attempts/${run.run_attempt ?? 1}/jobs`, 'jobs', request);
-    return jobs.filter(job => job.name === 'generate').some(job => {
+    if (run.conclusion === 'cancelled' && jobs.length === 0) return false;
+    const generating = jobs.filter(job => job.name === 'generate');
+    if (!generating.length) return true;
+    return generating.some(job => {
       if (job.conclusion === 'skipped') return false;
       if (!Array.isArray(job.steps)) return true;
       const step = job.steps.find(step => step.name === 'Generate changed notes within the remaining authorization');
@@ -103,7 +106,7 @@ export function restoreActionGuidance(repository, {
   pullRequest = 0, publication = false, generation = false,
   sourceHead = process.env.GUIDANCE_SOURCE_HEAD, currentRun = process.env.GITHUB_RUN_ID,
   currentAttempt = Number(process.env.GITHUB_RUN_ATTEMPT ?? 1), toolingRef = process.env.GUIDANCE_TOOLING_REF,
-  budgetUsd = Number(process.env.GUIDANCE_BUDGET_USD ?? 1), request = api, readArtifact = fromAction,
+  budgetUsd = Number(process.env.GUIDANCE_BUDGET_USD ?? 1), request = api, readArtifact = fromAction, now = Date.now(),
 } = {}) {
   if (!sha(toolingRef) || ![1, 15].includes(budgetUsd)) throw new Error('Invalid approved guidance configuration');
   const runs = allPages(`repos/${repository}/actions/workflows/example-guidance.yml/runs`, 'workflow_runs', request);
@@ -118,7 +121,9 @@ export function restoreActionGuidance(repository, {
     return workflowBlobs.get(ref);
   };
   let spentUsd = 0;
-  const artifactCutoff = Date.now() - 91 * 24 * 60 * 60 * 1000;
+  let monthlySpentUsd = 0;
+  const month = guidanceMonth(now);
+  const artifactCutoff = now - 91 * 24 * 60 * 60 * 1000;
   for (const latest of runs) {
     for (let attempt = 1; attempt <= (latest.run_attempt ?? 1); attempt++) {
       if (String(latest.id) === String(currentRun) && attempt === currentAttempt) continue;
@@ -148,12 +153,20 @@ export function restoreActionGuidance(repository, {
       } finally {
         if (generation) {
           const charge = guidanceSpend(run, receipt, sourceHead, budgetUsd);
-          if (charge && (receipt || modelCouldHaveRun(repository, run, request))) spentUsd += charge;
+          const ended = Date.parse(run.updated_at);
+          // Unknown or cross-month attempts remain charged; only a proven earlier end excludes them.
+          const inMonth = !Number.isFinite(ended) || guidanceMonth(ended) >= month;
+          if ((charge || inMonth) && (receipt || modelCouldHaveRun(repository, run, request))) {
+            spentUsd += charge;
+            const amount = receipt?.usage?.reservedUsd;
+            // A missing receipt may have used the largest authorized corpus allowance.
+            if (inMonth) monthlySpentUsd += Number.isFinite(amount) && amount >= 0 ? amount : 15;
+          }
         }
       }
     }
   }
-  return { artifacts, spentUsd };
+  return { artifacts, spentUsd, monthlySpentUsd, month };
 }
 
 async function bytes(url, maximum) {
@@ -231,7 +244,7 @@ async function main() {
   const directory = resolve(root, 'packages/dialtone-docs/.generated/example-guidance');
   mkdirSync(directory, { recursive: true });
   writeFileSync(resolve(directory, 'reviewed.json'), JSON.stringify(selected, null, 2) + '\n');
-  writeFileSync(resolve(directory, 'previous-spend.json'), JSON.stringify({ spentUsd }) + '\n');
+  writeFileSync(resolve(directory, 'previous-spend.json'), JSON.stringify({ spentUsd, monthlySpentUsd: restored.monthlySpentUsd, month: restored.month, monthlyLimitUsd: GUIDANCE_MONTHLY_BUDGET_USD }) + '\n');
   console.info(`Restored guidance: ${JSON.stringify(selected.summary)}`);
   if (publication) selectGuidance(manifest, [selected], { strict: true });
 }

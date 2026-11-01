@@ -111,19 +111,20 @@ it('fails closed when the server reports an incomplete workflow history', () => 
 
 it('charges missing receipts only when a completed run could have reached the model', () => {
   const request = endpoint => {
-    if (endpoint.includes('runs?')) return { total_count: 3, workflow_runs: [oldRun(12), oldRun(11), oldRun(10)] };
+    if (endpoint.includes('runs?')) return { total_count: 4, workflow_runs: [oldRun(12), oldRun(11), oldRun(10), oldRun(9)] };
     if (endpoint.includes('/12/attempts/1/jobs?')) return { total_count: 1, jobs: [{ name: 'generate', steps: [
       { name: 'Generate changed notes within the remaining authorization', conclusion: 'skipped', started_at: '2026-10-31T15:00:00Z' },
     ] }] };
     if (endpoint.includes('/11/attempts/1/jobs?')) return { total_count: 1, jobs: [{ name: 'generate', steps: [
       { name: 'Generate changed notes within the remaining authorization', conclusion: 'failure', started_at: '2026-10-31T15:00:00Z' },
     ] }] };
+    if (endpoint.includes('/9/attempts/1/jobs?')) return { total_count: 0, jobs: [] };
     throw new Error(`Unavailable endpoint ${endpoint}`);
   };
   const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead, currentRun: '13',
     toolingRef, request, readArtifact: () => undefined });
   // A skipped model step spent nothing; started and unverifiable attempts remain conservative.
-  expect(result.spentUsd).toBe(2);
+  expect(result.spentUsd).toBe(3);
 });
 
 
@@ -262,4 +263,52 @@ if (endpoint.includes('/actions/workflows/')) {
       expect(JSON.parse(readFileSync(reviewed, 'utf8')).entries[0].inputHash).toBe(input.inputHash);
     }
   } finally { rmSync(directory, { recursive: true, force: true }); }
+});
+
+
+it.each([
+  ['verified no jobs', false, 0],
+  ['unavailable job history', true, 15],
+])('charges a cancelled attempt conservatively unless it has %s', (_, unavailable, expected) => {
+  const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead, currentRun: '99', toolingRef,
+    now: Date.parse('2026-11-15T12:00:00Z'), readArtifact: () => undefined,
+    request: endpoint => {
+      if (endpoint.includes('runs?')) return { total_count: 1, workflow_runs: [oldRun(40, {
+        status: 'completed', conclusion: 'cancelled', updated_at: '2026-11-15T10:00:00Z',
+      })] };
+      if (unavailable) throw new Error('Job history unavailable');
+      return { total_count: 0, jobs: [] };
+    },
+  });
+  expect(result.monthlySpentUsd).toBe(expected);
+  expect(result.spentUsd).toBe(unavailable ? 1 : 0);
+});
+
+it('accounts all source heads in the Chicago month and reserves unknown spending conservatively', () => {
+  const heads = [sourceHead, ...['d', 'e', 'f', '1'].map(value => value.repeat(40))];
+  const endings = ['2026-11-10T12:00:00Z', '2026-11-10T12:00:00Z',
+    '2026-11-01T04:59:59Z', '2026-11-01T05:00:00Z', undefined];
+  const runs = heads.map((head, index) => oldRun(20 + index, {
+    display_title: `Example guidance ${head}`, updated_at: endings[index],
+  }));
+  const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead, currentRun: '99', toolingRef,
+    now: Date.parse('2026-11-15T12:00:00Z'),
+    request: endpoint => {
+      if (endpoint.includes('runs?')) return { total_count: runs.length, workflow_runs: runs };
+      if (endpoint.includes('/jobs?')) return { total_count: 1, jobs: [{ name: 'generate' }] };
+      const match = /commits\/([a-f0-9]{40})\/pulls/.exec(endpoint);
+      if (match) return [{ number: 1504, merged_at: '2026-11-01', head: { sha: match[1] } }];
+      throw new Error(`Unexpected endpoint ${endpoint}`);
+    },
+    readArtifact: (_, id) => {
+      const index = id - 20;
+      if (index === 4) return undefined;
+      const receipt = receiptFor(id, 1, [0.2, 0.3, 0.7, 0.4][index]);
+      receipt.origin.head = heads[index];
+      return receipt;
+    },
+  });
+  expect(result.spentUsd).toBeCloseTo(0.2);
+  expect(result.month).toBe('2026-11');
+  expect(result.monthlySpentUsd).toBeCloseTo(15.9);
 });

@@ -177,10 +177,13 @@ test('guidance summary preserves visible model text without Markdown formatting 
 });
 
 
-test('guidance concurrency and recovery preserve the same spending identity', async () => {
+test('guidance serializes repository spending while preserving per-head recovery identity', async () => {
   const guidance = readWorkflow('example-guidance.yml');
   const expression = guidance['run-name'].slice('Example guidance '.length);
-  assert.equal(guidance.concurrency.group, `example-guidance-${expression}`);
+  assert.equal(guidance.concurrency.group, 'example-guidance-${{ github.repository }}');
+  assert.ok(guidance.jobs.generate.steps.find(step => step.env?.ANTHROPIC_API_KEY).run.includes('--monthly-spent-usd'));
+  assert.ok(guidance.jobs.generate.steps.find(step => step.env?.ANTHROPIC_API_KEY).run.includes('--month'));
+  assert.ok(expression.includes('inputs.source_head'));
   const { trustedGuidanceRun, guidanceSpend, restoreActionGuidance } =
     await import('../../packages/dialtone-docs/scripts/restore-example-guidance.mjs');
   const head = 'a'.repeat(40);

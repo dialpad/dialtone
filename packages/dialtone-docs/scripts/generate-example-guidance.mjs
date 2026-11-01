@@ -2,8 +2,9 @@ import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  assertGuidanceManifest, createGuidanceManifest, GUIDANCE_MODEL, GUIDANCE_PROMPT, GUIDANCE_SCHEMA, guidanceFacts,
-  guidanceHash, isSettled, selectGuidance, settledStatus, validateGuidanceResult,
+  assertGuidanceManifest, createGuidanceManifest, GUIDANCE_MODEL, GUIDANCE_MONTHLY_BUDGET_USD,
+  GUIDANCE_PROMPT, GUIDANCE_SCHEMA, guidanceFacts, guidanceMonth, guidanceHash,
+  isSettled, selectGuidance, settledStatus, validateGuidanceResult,
 } from '../src/generators/example-guidance.mjs';
 
 const DRIVER_HASH = guidanceHash(readFileSync(fileURLToPath(import.meta.url), 'utf8'));
@@ -23,8 +24,10 @@ async function attempt(input, options, usage, correction) {
   const json = JSON.stringify(body);
   const bytes = Buffer.byteLength(json);
   if (bytes > MAX_INPUT_BYTES) return failed(input, 'Guidance input exceeds the bounded request size');
+  if (guidanceMonth(options.now()) !== options.month) return failed(input, 'Guidance budget month changed; restore spending again');
   const reservation = usd(bytes + 8192, MAX_OUTPUT) * 1.25;
-  if (usage.requests >= options.limit || options.spentUsd + usage.reservedUsd + reservation > options.budgetUsd) {
+  if (usage.requests >= options.limit || options.spentUsd + usage.reservedUsd + reservation > options.budgetUsd
+    || options.monthlySpentUsd + usage.reservedUsd + reservation > GUIDANCE_MONTHLY_BUDGET_USD) {
     return undefined;
   }
   if (!options.apiKey) return failed(input, 'Approved provider credential is unavailable');
@@ -68,12 +71,16 @@ async function attempt(input, options, usage, correction) {
 /** One bounded repair is explicit; transport, credential and refusal failures are never retried. */
 export async function generateGuidance(manifest, {
   apiKey, artifacts = [], request = fetch, limit = 3, budgetUsd = 1, spentUsd = 0, origin, onProgress,
+  monthlySpentUsd = 0, month, now = Date.now,
 } = {}) {
   if (manifest.driverHash !== DRIVER_HASH) throw new Error('Guidance provider driver mismatch; approve matching pinned tooling before generation or reuse');
   if (manifest.model !== GUIDANCE_MODEL) throw new Error('Unapproved guidance model');
   assertGuidanceManifest(manifest);
   if (!Number.isInteger(limit) || limit < 0 || limit > 500 || !Number.isFinite(budgetUsd) || budgetUsd < 0
     || budgetUsd > 15 || !Number.isFinite(spentUsd) || spentUsd < 0) throw new Error('Invalid guidance request/spend limit');
+  if (!Number.isFinite(monthlySpentUsd) || monthlySpentUsd < 0) throw new Error('Invalid monthly guidance spending');
+  month ??= guidanceMonth(now());
+  if (month !== guidanceMonth(now())) throw new Error('Guidance budget month changed; restore spending again');
   const selected = selectGuidance(manifest, artifacts);
   const entries = [];
   const usage = { requests: 0, inputTokens: 0, outputTokens: 0, estimatedUsd: 0, reservedUsd: 0 };
@@ -82,7 +89,7 @@ export async function generateGuidance(manifest, {
     toolingHash: manifest.toolingHash, driverHash: DRIVER_HASH,
     entries: [...entries], usage: { ...usage }, ...(origin ? { origin } : {}) });
   const checkpoint = () => onProgress?.(snapshot());
-  const options = { apiKey, request, limit, budgetUsd, spentUsd, origin, checkpoint };
+  const options = { apiKey, request, limit, budgetUsd, spentUsd, monthlySpentUsd, month, now, origin, checkpoint };
   checkpoint();
   for (const input of manifest.entries) {
     const cached = selected.entries.find(entry => entry.id === input.id);
@@ -101,11 +108,11 @@ export async function generateGuidance(manifest, {
 
 async function main() {
   const [inputPath, outputPath, ...args] = process.argv.slice(2);
-  if (!inputPath || !outputPath || args.length % 2) throw new Error('Usage: generate-example-guidance.mjs INPUT.json OUTPUT.json [--limit N] [--budget-usd N] [--ids ID,ID] [--cache FILE] [--spent-usd N]');
+  if (!inputPath || !outputPath || args.length % 2) throw new Error('Usage: generate-example-guidance.mjs INPUT.json OUTPUT.json [--limit N] [--budget-usd N] [--ids ID,ID] [--cache FILE] [--spent-usd N] --monthly-spent-usd N --month YYYY-MM');
   const pairs = Array.from({ length: args.length / 2 }, (_, index) => args.slice(index * 2, index * 2 + 2));
   const options = Object.fromEntries(pairs);
   for (const key of Object.keys(options)) {
-    if (!['--limit', '--budget-usd', '--ids', '--cache', '--spent-usd'].includes(key)) throw new Error(`Unknown option: ${key}`);
+    if (!['--limit', '--budget-usd', '--ids', '--cache', '--spent-usd', '--monthly-spent-usd', '--month'].includes(key)) throw new Error(`Unknown option: ${key}`);
   }
   // Validate the full manifest before a pilot subset is rebuilt under the current policy.
   let manifest = assertGuidanceManifest(JSON.parse(readFileSync(inputPath, 'utf8')));
@@ -124,6 +131,7 @@ async function main() {
     },
     limit: Number(options['--limit'] ?? 3), budgetUsd: Number(options['--budget-usd'] ?? 1),
     spentUsd: Number(options['--spent-usd'] ?? 0),
+    monthlySpentUsd: Number(options['--monthly-spent-usd']), month: options['--month'],
     origin: { head: process.env.GUIDANCE_SOURCE_HEAD ?? process.env.GITHUB_SHA ?? 'local',
       runId: process.env.GITHUB_RUN_ID ?? null, runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT ?? 1), toolingRef: process.env.GUIDANCE_TOOLING_REF ?? 'local' },
   });

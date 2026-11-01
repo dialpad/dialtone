@@ -25,7 +25,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: example-guidance-${{ inputs.source_head || github.event.workflow_run.head_sha || github.sha }}
+  group: example-guidance-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
@@ -170,9 +170,12 @@ jobs:
           BUDGET_USD: ${{ steps.source.outputs.budget }}
         run: |
           SPENT_USD=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).spentUsd")
+          MONTHLY_SPENT_USD=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).monthlySpentUsd")
+          BUDGET_MONTH=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).month")
           node packages/dialtone-docs/scripts/generate-example-guidance.mjs \
             packages/dialtone-docs/dist/example-guidance-inputs.json example-guidance.json \
             --limit "$REQUEST_LIMIT" --budget-usd "$BUDGET_USD" --spent-usd "$SPENT_USD" \
+            --monthly-spent-usd "$MONTHLY_SPENT_USD" --month "$BUDGET_MONTH" \
             --cache packages/dialtone-docs/.generated/example-guidance/reviewed.json
       - uses: actions/upload-artifact@v4
         if: always() && steps.source.outputs.enabled == 'true'

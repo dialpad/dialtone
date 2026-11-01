@@ -69,6 +69,7 @@ it('uses a bounded tool-less request and preserves a cache hit without another m
 it.each([
   ['the budget cannot cover one bounded request', { limit: 3, budgetUsd: 0 }],
   ['previous spending on the same source update exhausts it', { limit: 2, budgetUsd: 0.05, spentUsd: 0.05 }],
+  ['the repository monthly allowance is exhausted', { limit: 2, budgetUsd: 1, monthlySpentUsd: 25 }],
 ])('does not spend when %s', async (_, limits) => {
   const output = await generateGuidance(manifest(), { apiKey: 'test-only', request: () => { throw new Error('must not call'); }, ...limits });
   expect(output.usage.requests).toBe(0);
@@ -152,4 +153,31 @@ it('checkpoints completed notes and the next request reservation before spending
   expect(observed[1]?.usage.reservedUsd).toBeGreaterThan(observed[0].usage.estimatedUsd);
   expect(latest).toEqual(output);
   expect(JSON.stringify(latest)).not.toContain('test-only');
+});
+
+
+it('reserves from the shared monthly remainder before each real provider request', async () => {
+  const first = manifest();
+  const data = createGuidanceManifest([first.entries[0], { ...first.entries[0], id: 'examples/second' }].map(guidanceFacts), first);
+  const output = await generateGuidance(data, { apiKey: 'test-only', limit: 2, budgetUsd: 15, monthlySpentUsd: 24.95,
+    request: async () => ({ ok: true, json: async () => ({ stop_reason: 'end_turn',
+      content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 10000, output_tokens: 1000 } }) }) });
+  expect(output.usage.requests).toBe(1);
+  expect(output.entries[0].status).toBe('complete');
+  expect(output.entries[1].status).toBe('pending');
+});
+
+it('stops at a Chicago calendar-month boundary until spending is restored again', async () => {
+  const first = manifest();
+  const data = createGuidanceManifest([first.entries[0], { ...first.entries[0], id: 'examples/second' }].map(guidanceFacts), first);
+  let time = Date.parse('2026-12-01T05:59:59Z');
+  const output = await generateGuidance(data, { apiKey: 'test-only', limit: 2, budgetUsd: 1,
+    month: '2026-11', now: () => time,
+    request: async () => {
+      time = Date.parse('2026-12-01T06:00:01Z');
+      return { ok: true, json: async () => ({ stop_reason: 'end_turn',
+        content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
+    } });
+  expect(output.usage.requests).toBe(1);
+  expect(output.entries[1].error).toMatch(/month changed/i);
 });
