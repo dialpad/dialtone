@@ -1,0 +1,139 @@
+.github/CODEOWNERS
+  s_1b5266149b436d::t_8aea4e837c64a8 1
+.github/workflows/dialtone-documentation-tests.yml
+  s_1b5266149b436d::t_d6fa4996d8e2a7 13-17,24-28
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_6ad65cbf78a504 6-8,17-26,34-36,45-54,89,91-93,99-105,107-109,181,184-192,194-198,208-210
+.husky/pre-commit
+  s_1b5266149b436d::t_ba6d5b44f9ff79 21-33
+CHANGELOG.json
+  s_1b5266149b436d::t_204ae47dd28a85 1
+CHANGELOG.md
+  s_1b5266149b436d::t_67aee35e8ed2c9 1-21
+apps/dialtone-documentation/scripts/thumbs/generate.mjs
+  s_1b5266149b436d::t_0a1e0dea748d5c 35,45-51,188,228-245,262
+apps/dialtone-documentation/thumbs/README.md
+  s_1b5266149b436d::t_b5a37931fa0c68 105-108
+apps/dialtone-documentation/thumbs/motion-text.vue
+  s_1b5266149b436d::t_949736957812e2 2-8
+package.json
+  s_1b5266149b436d::t_fbc725fd40a024 3,120,160,183
+packages/combinator/CHANGELOG.json
+  s_1b5266149b436d::t_89d1a9dc6454c4 1
+packages/combinator/CHANGELOG.md
+  s_1b5266149b436d::t_54575f1d1021a0 1-7
+packages/combinator/package.json
+  s_1b5266149b436d::t_52aa39496d96e7 3
+packages/dialtone-cli/CHANGELOG.json
+  s_1b5266149b436d::t_c0e13e71e7b213 1
+packages/dialtone-cli/CHANGELOG.md
+  s_1b5266149b436d::t_de8ebb14e13888 1-13
+packages/dialtone-cli/package.json
+  s_1b5266149b436d::t_01b395af23908b 3
+packages/dialtone-cli/project.json
+  s_1b5266149b436d::t_987156e7f518ca 11-12
+packages/dialtone-css/CHANGELOG.json
+  s_1b5266149b436d::t_4570bb92883feb 1
+packages/dialtone-css/CHANGELOG.md
+  s_1b5266149b436d::t_9fb3ff7f6d86af 1-7
+packages/dialtone-css/package.json
+  s_1b5266149b436d::t_eb7787db49eb53 3
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_fcc8809ea6113a 44,46,48-53,57,59,61,63,65-71
+packages/dialtone-emojis/CHANGELOG.json
+  s_1b5266149b436d::t_9f2ef6fb6d4269 1
+packages/dialtone-emojis/CHANGELOG.md
+  s_1b5266149b436d::t_955deeaa6b9568 1-2
+packages/dialtone-emojis/package.json
+  s_1b5266149b436d::t_32b9ec13a5b70a 3
+packages/dialtone-icons/CHANGELOG.json
+  s_1b5266149b436d::t_9d7960fb898974 1
+packages/dialtone-icons/CHANGELOG.md
+  s_1b5266149b436d::t_3e7fa04c34023a 1-2
+packages/dialtone-icons/android/gradle.properties
+  s_1b5266149b436d::t_b9a90e07a0a92b 2
+packages/dialtone-icons/package.json
+  s_1b5266149b436d::t_11e6b09493006d 3
+packages/dialtone-mcp-server/CHANGELOG.json
+  s_1b5266149b436d::t_cdd59ac0c896b7 1
+packages/dialtone-mcp-server/CHANGELOG.md
+  s_1b5266149b436d::t_4ce84100588d6f 1-14
+packages/dialtone-mcp-server/package.json
+  s_1b5266149b436d::t_e07bfedea84be4 3
+packages/dialtone-mcp-server/project.json
+  s_7f1d1d64baa803::t_e306fc4eb9042e 6,9,13,15,31
+packages/dialtone-query-core/project.json
+  s_7f1d1d64baa803::t_3055722cfc93aa 6,14,25
+packages/dialtone-vue/CHANGELOG.json
+  s_1b5266149b436d::t_28171e9145e8be 1
+packages/dialtone-vue/CHANGELOG.md
+  s_1b5266149b436d::t_3396f0e178a952 1-12
+packages/dialtone-vue/package.json
+  s_1b5266149b436d::t_bd5b0239c10319 3
+packages/dialtone-vue/project.json
+  s_1b5266149b436d::t_cfea8cb7da0b10 15-18
+packages/dialtone-vue/release-ci.config.cjs
+  s_1b5266149b436d::t_0d4804d890a4c6 11-16
+packages/eslint-plugin-dialtone/CHANGELOG.json
+  s_1b5266149b436d::t_307a0bc646e6a3 1
+packages/eslint-plugin-dialtone/CHANGELOG.md
+  s_1b5266149b436d::t_0cab4305ecc72d 1-7
+packages/eslint-plugin-dialtone/package.json
+  s_1b5266149b436d::t_07ff263e88f5f0 3
+scripts/retrieval/README.md
+  s_1b5266149b436d::t_054eb488fa5f4e 1-55
+scripts/retrieval/assertions.mjs
+  s_1b5266149b436d::t_0f8405eae21d61 1-65
+scripts/retrieval/assertions.test.mjs
+  s_1b5266149b436d::t_cfda9542ee0216 1-58
+scripts/retrieval/cache-inputs.test.mjs
+  s_1b5266149b436d::t_55924c925724f9 1-158
+scripts/retrieval/cases.mjs
+  s_1b5266149b436d::t_0d09ea8521a5b1 1-289
+scripts/retrieval/cases.test.mjs
+  s_1b5266149b436d::t_91f50d46b96222 1-73
+scripts/retrieval/ci-routing.test.mjs
+  s_1b5266149b436d::t_effcfbf45bed4d 1-87
+scripts/retrieval/fixtures.mjs
+  s_1b5266149b436d::t_d919dc994a765b 1-113
+scripts/retrieval/fixtures.test.mjs
+  s_1b5266149b436d::t_5731475d1bfa55 1-108
+scripts/retrieval/legacy-button.json
+  s_1b5266149b436d::t_8208d7b48db72c 1-33
+scripts/retrieval/offline-registry.mjs
+  s_1b5266149b436d::t_26a2d42acbb54b 1-7
+scripts/retrieval/profiles.mjs
+  s_1b5266149b436d::t_0ac69b3c44efd0 1-109
+scripts/retrieval/run.mjs
+  s_1b5266149b436d::t_fd48ee0d048b27 1-418
+scripts/retrieval/run.test.mjs
+  s_1b5266149b436d::t_d93c27b0dfa925 1-71
+scripts/retrieval/source-state.mjs
+  s_7f1d1d64baa803::t_f91cb720b35156 1-37
+scripts/retrieval/source-state.test.mjs
+  s_1b5266149b436d::t_da263b529f03a7 1-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0db50ae3c6b31ff4a0a19965689b3b0f676a9acf",
+  "prompts": {},
+  "sessions": {
+    "s_1b5266149b436d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

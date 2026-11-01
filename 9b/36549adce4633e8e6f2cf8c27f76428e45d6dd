@@ -1,0 +1,47 @@
+packages/dialtone-mcp-server/scripts/query-tools.test.mjs
+  s_7f1d1d64baa803::t_d4288bd13a7aa1 8-12,14-24
+  s_7f1d1d64baa803::t_32929270636184 13
+packages/dialtone-query-core/tests/documentation-examples.test.ts
+  s_7f1d1d64baa803::t_26b5d285197951 14-18
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_7f1d1d64baa803::t_31e1ae26f97f6c 46,107,127,318-321,342-343,353,355,358,361,419,483-490
+scripts/retrieval/probe-packed-examples.mjs
+  s_7f1d1d64baa803::t_617438a42c9a34 51-52,67-76
+packages/dialtone-cli/src/commands/docs.ts
+  s_7f1d1d64baa803::t_31e1ae26f97f6c 2,29-32,36-39,63-64
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_d4288bd13a7aa1 133-135,144-145
+packages/dialtone-cli/src/commands/component.ts
+  s_7f1d1d64baa803::t_31e1ae26f97f6c 94
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_61aee857a4d642 9,301-306,310-315
+  s_7f1d1d64baa803::t_32929270636184 307-309
+.agents/resources/rules/query-core.md
+  s_7f1d1d64baa803::t_927fcefaf66ba5 24-27
+.claude/rules/dialtone-query-core.md
+  s_7f1d1d64baa803::t_bfa6ebe80f94b4 170-173
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_62ff6fe56a04ab 220,222,224
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_b3904a9df4614b 225,227,229
+packages/dialtone-mcp-server/RETRIEVAL.md
+  s_7f1d1d64baa803::t_c0a00444ea805d 15
+packages/dialtone-query-core/README.md
+  s_7f1d1d64baa803::t_6d51bcf64d8558 67,77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9b36549adce4633e8e6f2cf8c27f76428e45d6dd",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
