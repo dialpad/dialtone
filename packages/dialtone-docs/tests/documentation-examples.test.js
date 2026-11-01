@@ -103,7 +103,7 @@ describe('authored documentation example evidence', () => {
   });
 
   it.each([
-    ['a repeated ID', live + '\n' + live, 'Duplicate example ID'],
+    ['a repeated ID', live + '\n' + live, /button\.md:\d+: Duplicate example ID/],
     ['a code-only fence', live.replace('vue demo', 'vue code-only'), 'live Vue demo'],
   ])('rejects %s', (_, raw, message) => {
     expect(() => assemble(raw)).toThrow(message);

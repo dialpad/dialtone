@@ -297,8 +297,8 @@ describe('component associations for published examples', () => {
     await expect(buildReadyComponentPage('components/preview.md', raw, identities)).resolves.toBeUndefined();
   });
 
-  test.each([undefined, 'experimental'])('still rejects unresolved references for published status %s', async (status) => {
-    const raw = status ? `---\nstatus: ${status}\n---\n${unresolved}` : unresolved;
+  test.each([[undefined], ['experimental'], [['beta']]])('still rejects unresolved references for published status %s', async (status) => {
+    const raw = status === undefined ? unresolved : `---\nstatus: ${JSON.stringify(status)}\n---\n${unresolved}`;
     await expect(buildReadyComponentPage('components/preview.md', raw, identities)).rejects.toThrow(/Unresolved/);
   });
 

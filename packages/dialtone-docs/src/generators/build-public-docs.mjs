@@ -10,7 +10,7 @@ import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
 
-import { chunkSections, slugify, NON_READY_STATUSES } from './source-sections.mjs';
+import { chunkSections, slugify, isNonReadyStatus } from './source-sections.mjs';
 export { chunkSections } from './source-sections.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -62,10 +62,7 @@ function readPage(absolutePath, componentPage) {
   const body = content.slice(headingStart);
 
   // Blacklist filter: skip explicitly non-ready docs (case-insensitive against canonical lowercase set)
-  const status = typeof frontmatter.status === 'string'
-    ? frontmatter.status.trim().toLowerCase()
-    : '';
-  const excluded = status && NON_READY_STATUSES.has(status);
+  const excluded = isNonReadyStatus(frontmatter.status);
 
   const name = basename(absolutePath).replace(/\.mdx?$/, '');
 
@@ -157,8 +154,7 @@ export function buildRecords(absolutePath) {
 
 export async function buildReadyComponentPage(filePathRelative, source, identities) {
   if (!filePathRelative.startsWith('components/')) return undefined;
-  const status = String(matter(source).data.status ?? '').trim().toLowerCase();
-  if (NON_READY_STATUSES.has(status)) return undefined;
+  if (isNonReadyStatus(matter(source).data.status)) return undefined;
   return buildComponentPage(filePathRelative, source, identities);
 }
 
