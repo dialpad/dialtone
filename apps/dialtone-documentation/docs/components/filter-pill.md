@@ -313,6 +313,8 @@ Using the `default` scoped slot, you can display a count of active filters along
 
 Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2").
 
+<!-- @example {"key":"overflow"} -->
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
@@ -336,6 +338,8 @@ Shows the first active filter name using `activeFilterList`, with overflow count
 
 Combining the `default` and `content` slots with a radio group creates a single-select filter.
 The label updates to show the selected option, and a clear button resets to the default.
+
+<!-- @example {"key":"conversation-type"} -->
 
 ```vue demo
 <!-- @wrapper -->

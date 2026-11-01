@@ -30,7 +30,12 @@
         "{workspaceRoot}/apps/dialtone-documentation/scripts/lib/source-page.mjs",
         "{workspaceRoot}/apps/dialtone-documentation/docs/.vuepress/site-reference.js",
         "{workspaceRoot}/packages/dialtone-vue/directives/**/*.mdx",
-        "{workspaceRoot}/packages/dialtone-vue/directives/**/*.stories.js"
+        "{workspaceRoot}/packages/dialtone-vue/directives/**/*.stories.js",
+        "{workspaceRoot}/packages/dialtone-vue/directives/**/index.js",
+        "{workspaceRoot}/packages/dialtone-icons/package.json",
+        "{workspaceRoot}/scripts/retrieval/example-consumer.mjs",
+        { "dependentTasksOutputFiles": "**/dist/component-documentation.json", "transitive": true },
+        { "dependentTasksOutputFiles": "**/vue/dist/**/*", "transitive": true }
       ],
       "outputs": [
         "{projectRoot}/dist/**"

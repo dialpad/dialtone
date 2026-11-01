@@ -28,6 +28,8 @@ Default tooltip directive uses top as default placement
 
 It's possible to change the tooltip default placement with directive arguments, possible values: bottom, bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end, top, top-start, top-end.
 
+<!-- @example {"key":"placement"} -->
+
 ```vue demo
 <dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder Button</dt-button>
 ```
@@ -36,6 +38,8 @@ It's possible to change the tooltip default placement with directive arguments, 
 
 It's possible to change any property of the tooltip with object syntax. Object syntax also accepts `showArrow: false` to hide the tooltip arrow.
 
+<!-- @example {"key":"options"} -->
+
 ```vue demo
 <dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
 ```
@@ -43,6 +47,8 @@ It's possible to change any property of the tooltip with object syntax. Object s
 #### Content Mode
 
 Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode` modifier or object property to apply a color mode to the tooltip content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<!-- @example {"key":"inverted"} -->
 
 ```vue demo
 <!-- @wrapper -->

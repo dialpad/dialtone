@@ -112,6 +112,8 @@ Add `disabled` to a specific tab.
 
 Add `disabled` to the tab group to disable all.
 
+<!-- @example {"key":"interactive"} -->
+
 ```vue demo
 <example-tabs disabled />
 <!-- @code -->

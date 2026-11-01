@@ -1,14 +1,28 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
+import { buildRecords, chunkSections, buildReadyComponentPage, formatBuildError } from '@src/generators/build-public-docs.mjs';
 import { readKeywords } from '@src/utils/keywords.mjs';
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
 const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
 const docsRoot = resolve(__dirname, '../../../../apps/dialtone-documentation/docs');
 describe('authored usage guidance', () => {
+  test('makes source ambiguity a clickable, escaped CI diagnostic', () => {
+    const error = Object.assign(new Error('Two demos\nAdd a key: 100% source metadata'), {
+      code: 'AMBIGUOUS_EXAMPLE_ID', filePath: 'docs/components/example.md', sourceLine: 12,
+    });
+    const annotation = formatBuildError(error, true);
+    expect(annotation).toContain('::error file=docs/components/example.md,line=12,');
+    expect(annotation).toContain('%0A');
+    expect(annotation).toContain('100%25');
+    expect(annotation).not.toContain('\n');
+    expect(formatBuildError(error, false)).toContain('Two demos\nAdd a key');
+  });
+
   test('Modal keeps recommendations distinct from discouraged uses', () => {
     const record = buildRecords(resolve(docsRoot, 'components/modal.md'))
       .find(record => record.id === 'components/modal#usage');
@@ -176,6 +190,20 @@ describe('buildRecords — complete.md', () => {
 // ─── Status filter tests ─────────────────────────────────────────────────────
 
 describe('buildRecords — status filter (blacklist)', () => {
+  test.each([
+    ['excluded page', 'planned', '', undefined],
+    ['excluded retained ID', 'planned', '<!-- @example {"id":"examples/retained"} -->\n\n', /explicit example ID.*examples\/retained/],
+    ['published page', 'ready', '', /Invalid keywords/],
+  ])('validates only published record metadata while preserving coverage: %s', (_, status, annotation, error) => {
+    const directory = mkdtempSync(resolve(tmpdir(), 'source-keywords-'));
+    try {
+      const file = resolve(directory, 'example.md');
+      writeFileSync(file, `---\nstatus: ${status}\nkeywords: []\n---\n\n## Default\n${annotation}\`\`\`vue demo\n<dt-button>Save</dt-button>\n\`\`\``);
+      if (error) expect(() => buildRecords(file)).toThrow(error);
+      else expect(buildRecords(file)).toEqual([]);
+    } finally { rmSync(directory, { recursive: true, force: true }); }
+  });
+
   test('status:beta file produces zero records', () => {
     expect(buildRecords(resolve(fixtureDir, 'beta.md'))).toHaveLength(0);
   });
@@ -273,5 +301,25 @@ describe('readKeywords', () => {
 
   test.each([['spinner'], [['spinner', 42]], [[' ']], [[]]])('rejects malformed keywords %j', (keywords) => {
     expect(() => readKeywords(keywords, 'loader.md')).toThrow(/Invalid keywords in loader\.md: expected an array of nonempty strings/);
+  });
+});
+
+describe('component associations for published examples', () => {
+  const identities = [{ identity: { canonicalName: 'DtButton', aliases: [], kind: 'public' } }];
+  const unresolved = '<component-vue-api component-name="missing" />';
+
+  test.each(['planned', ' BETA ', 'WIP'])('does not resolve references in a %s page', async (status) => {
+    const raw = `---\nstatus: ${JSON.stringify(status)}\n---\n${unresolved}`;
+    await expect(buildReadyComponentPage('components/preview.md', raw, identities)).resolves.toBeUndefined();
+  });
+
+  test.each([[undefined], ['experimental'], [['beta']]])('still rejects unresolved references for published status %s', async (status) => {
+    const raw = status === undefined ? unresolved : `---\nstatus: ${JSON.stringify(status)}\n---\n${unresolved}`;
+    await expect(buildReadyComponentPage('components/preview.md', raw, identities)).rejects.toThrow(/Unresolved/);
+  });
+
+  test('resolves a valid ready page for example association', async () => {
+    const page = await buildReadyComponentPage('components/button.md', '<component-vue-api component-name="button" />', identities);
+    expect(page.components.map(reference => [reference.canonicalName, reference.relation])).toEqual([['DtButton', 'api']]);
   });
 });

@@ -60,7 +60,7 @@ function selfPatterns(name, target = 'build') {
     );
 }
 test('documentation assembly hashes compiler/parser declarations, pins and source helpers', () => {
-  const paths = ['package.json', 'pnpm-lock.yaml', 'apps/dialtone-documentation/package.json', 'packages/dialtone-css/package.json', 'packages/dialtone-docs/src/generators/example-template.mjs'];
+  const paths = ['package.json', 'pnpm-lock.yaml', 'apps/dialtone-documentation/package.json', 'packages/dialtone-css/package.json', 'packages/dialtone-docs/src/generators/example-template.mjs', 'packages/dialtone-docs/src/generators/source-examples.mjs', 'scripts/retrieval/example-consumer.mjs', 'packages/dialtone-vue/directives/tooltip_directive/index.js'];
   assert.deepEqual(covered(paths, selfPatterns('dialtone-docs')), paths);
 });
 test('Vue generator and its shared helpers participate in the build hash', () => {

@@ -938,6 +938,8 @@ Stacks column at small screen size and column reverse at large screen
 
 Set `200` as the default gap, `300` for small and larger, `400` for medium, `500` for large, and `600` for extra large. Learn more about how our breakpoints work in the [Responsive Breakpoints documentation](/utilities/responsive/breakpoints.md).
 
+<!-- @example {"key":"gap"} -->
+
 ```vue demo
 <dt-stack
   :gap="{ default: '200', xl: '600', lg: '500', md: '400', sm: '300' }"
@@ -1041,6 +1043,8 @@ Like `direction` and `gap`, the `align` and `justify` props support responsive o
 ```
 
 Resize your browser to see the alignment change at different breakpoints.
+
+<!-- @example {"key":"justify"} -->
 
 ```vue demo
 <dt-stack

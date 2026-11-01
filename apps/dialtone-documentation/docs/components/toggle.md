@@ -40,7 +40,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### Base Styles
 
-<!-- example-id: examples/toggle-base-styles -->
+<!-- @example {"id":"examples/toggle-base-styles"} -->
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
@@ -56,7 +56,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### Sizes
 
-<!-- example-id: examples/toggle-sizes -->
+<!-- @example {"id":"examples/toggle-sizes"} -->
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
@@ -67,7 +67,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### With v-model
 
-<!-- example-id: examples/toggle-v-model -->
+<!-- @example {"id":"examples/toggle-v-model"} -->
 
 ```vue demo
 <dt-toggle v-model="checked" class="d-g-200">Toggle</dt-toggle>
