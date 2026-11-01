@@ -1,21 +1,22 @@
 import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createGuidanceManifest, GUIDANCE_PROMPT, GUIDANCE_SCHEMA, guidanceHash, selectGuidance, validateGuidanceResult } from '../src/generators/example-guidance.mjs';
+import {
+  assertGuidanceManifest, createGuidanceManifest, GUIDANCE_MODEL, GUIDANCE_PROMPT, GUIDANCE_SCHEMA, guidanceFacts,
+  guidanceHash, isSettled, selectGuidance, settledStatus, validateGuidanceResult,
+} from '../src/generators/example-guidance.mjs';
 
-const MODEL = 'claude-sonnet-5-5';
 const DRIVER_HASH = guidanceHash(readFileSync(fileURLToPath(import.meta.url), 'utf8'));
 const MAX_OUTPUT = 1536;
 const MAX_INPUT_BYTES = 100_000;
 const usd = (input, output) => (input * 2 + output * 10) / 1_000_000;
-const factsFor = entry => ({ id: entry.id, sources: entry.sources, dependencies: entry.dependencies });
 const failed = (input, error, retryable = false) => ({
   id: input.id, inputHash: input.inputHash, status: 'error', error, retryable,
 });
 
 async function attempt(input, options, usage, correction) {
   const body = {
-    model: MODEL, max_tokens: MAX_OUTPUT, system: GUIDANCE_PROMPT,
+    model: GUIDANCE_MODEL, max_tokens: MAX_OUTPUT, system: GUIDANCE_PROMPT,
     messages: [{ role: 'user', content: JSON.stringify({ id: input.id, sources: input.sources, correction }) }],
     output_config: { format: { type: 'json_schema', schema: GUIDANCE_SCHEMA } },
   };
@@ -57,7 +58,7 @@ async function attempt(input, options, usage, correction) {
     const value = JSON.parse(text);
     if (!value || Object.keys(value).length !== 1 || !('notes' in value)) throw new Error('Invalid guidance fields from model');
     const result = validateGuidanceResult(input, { id: input.id, inputHash: input.inputHash, notes: value.notes });
-    return { ...result, status: result.notes.length ? 'complete' : 'completed-empty',
+    return { ...result, status: settledStatus(result.notes),
       responseHash: guidanceHash(result), ...(options.origin ? { origin: options.origin } : {}) };
   } catch (error) {
     return failed(input, error instanceof SyntaxError ? 'Provider returned invalid JSON' : error.message, true);
@@ -69,15 +70,15 @@ export async function generateGuidance(manifest, {
   apiKey, artifacts = [], request = fetch, limit = 3, budgetUsd = 1, spentUsd = 0, origin, onProgress,
 } = {}) {
   if (manifest.driverHash !== DRIVER_HASH) throw new Error('Guidance provider driver mismatch; approve matching pinned tooling before generation or reuse');
-  const rebuilt = createGuidanceManifest(manifest.entries.map(factsFor), manifest);
-  if (guidanceHash(rebuilt) !== guidanceHash(manifest) || manifest.model !== MODEL) throw new Error('Unapproved model or invalid guidance manifest');
+  if (manifest.model !== GUIDANCE_MODEL) throw new Error('Unapproved guidance model');
+  assertGuidanceManifest(manifest);
   if (!Number.isInteger(limit) || limit < 0 || limit > 500 || !Number.isFinite(budgetUsd) || budgetUsd < 0
     || budgetUsd > 15 || !Number.isFinite(spentUsd) || spentUsd < 0) throw new Error('Invalid guidance request/spend limit');
   const selected = selectGuidance(manifest, artifacts);
   const entries = [];
   const usage = { requests: 0, inputTokens: 0, outputTokens: 0, estimatedUsd: 0, reservedUsd: 0 };
   const snapshot = () => ({
-    schemaVersion: 1, model: MODEL, manifestHash: manifest.hash, policyHash: manifest.policyHash,
+    schemaVersion: 1, model: GUIDANCE_MODEL, manifestHash: manifest.hash, policyHash: manifest.policyHash,
     toolingHash: manifest.toolingHash, driverHash: DRIVER_HASH,
     entries: [...entries], usage: { ...usage }, ...(origin ? { origin } : {}) });
   const checkpoint = () => onProgress?.(snapshot());
@@ -85,7 +86,7 @@ export async function generateGuidance(manifest, {
   checkpoint();
   for (const input of manifest.entries) {
     const cached = selected.entries.find(entry => entry.id === input.id);
-    if (['complete', 'completed-empty'].includes(cached.status)) {
+    if (isSettled(cached)) {
       entries.push(cached);
       checkpoint();
       continue;
@@ -106,13 +107,13 @@ async function main() {
   for (const key of Object.keys(options)) {
     if (!['--limit', '--budget-usd', '--ids', '--cache', '--spent-usd'].includes(key)) throw new Error(`Unknown option: ${key}`);
   }
-  let manifest = JSON.parse(readFileSync(inputPath, 'utf8'));
-  const full = createGuidanceManifest(manifest.entries.map(factsFor), manifest);
-  if (guidanceHash(full) !== guidanceHash(manifest)) throw new Error('Invalid guidance manifest');
+  // Validate the full manifest before a pilot subset is rebuilt under the current policy.
+  let manifest = assertGuidanceManifest(JSON.parse(readFileSync(inputPath, 'utf8')));
   if (options['--ids']) {
     const ids = options['--ids'].split(',');
     if (ids.some(id => !manifest.entries.some(entry => entry.id === id))) throw new Error('Pilot ID absent from current manifest');
-    manifest = createGuidanceManifest(manifest.entries.filter(entry => ids.includes(entry.id)).map(factsFor), manifest);
+    const pilot = manifest.entries.filter(entry => ids.includes(entry.id));
+    manifest = createGuidanceManifest(pilot.map(guidanceFacts), manifest);
   }
   const artifacts = options['--cache'] ? [JSON.parse(readFileSync(options['--cache'], 'utf8'))] : [];
   const result = await generateGuidance(manifest, {
@@ -127,7 +128,7 @@ async function main() {
       runId: process.env.GITHUB_RUN_ID ?? null, runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT ?? 1), toolingRef: process.env.GUIDANCE_TOOLING_REF ?? 'local' },
   });
   console.info(JSON.stringify({ ...result.usage, statuses: result.entries.map(({ id, status }) => ({ id, status })) }));
-  if (result.entries.some(entry => !['complete', 'completed-empty'].includes(entry.status))) process.exitCode = 1;
+  if (!result.entries.every(isSettled)) process.exitCode = 1;
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

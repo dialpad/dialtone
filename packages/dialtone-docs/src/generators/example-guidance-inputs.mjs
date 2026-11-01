@@ -10,15 +10,26 @@ const { parse, babelParse } = require('vue/compiler-sfc');
 const hash = text => createHash('sha256').update(text).digest('hex');
 const codeExtensions = new Set(['.js', '.mjs', '.ts', '.vue']);
 
-function moduleFiles(entry, root, seen) {
-  const absolute = realpathSync(entry);
+/** Reads, hashes and resolves one module once per build; examples share most of the component graph. */
+function moduleNode(absolute, root, modules) {
+  if (modules.has(absolute)) return modules.get(absolute);
   const path = relative(root, absolute).replaceAll('\\', '/');
   if (path.startsWith('../') || path === '..') throw new Error('Guidance source dependency leaves the repository');
-  if (seen.has(path)) return;
   const bytes = readFileSync(absolute);
-  seen.set(path, hash(bytes));
-  if (!codeExtensions.has(extname(path))) return;
-  const source = bytes.toString('utf8');
+  const node = { path, hash: hash(bytes), next: [] };
+  if (codeExtensions.has(extname(path))) node.next = moduleImports(bytes.toString('utf8'), absolute, path, root);
+  modules.set(absolute, node);
+  return node;
+}
+
+function moduleFiles(entry, root, seen, modules) {
+  const node = moduleNode(realpathSync(entry), root, modules);
+  if (seen.has(node.path)) return;
+  seen.set(node.path, node.hash);
+  for (const next of node.next) moduleFiles(next, root, seen, modules);
+}
+
+function moduleImports(source, absolute, path, root) {
   const scripts = path.endsWith('.vue')
     ? Object.values(parse(source).descriptor).filter(value => value && typeof value === 'object' && value.type === 'script').map(value => value.content)
     : [source];
@@ -38,18 +49,18 @@ function moduleFiles(entry, root, seen) {
     }
   }
   for (const script of scripts) visit(babelParse(script, { sourceType: 'module', plugins: ['typescript'] }));
-  for (const specifier of imports.filter(name => name.startsWith('.') || name.startsWith('@/'))) {
+  return imports.filter(name => name.startsWith('.') || name.startsWith('@/')).map(specifier => {
     const name = specifier.split(/[?#]/)[0];
     const target = name.startsWith('@/') ? resolve(root, 'packages/dialtone-vue', name.slice(2)) : resolve(dirname(absolute), name);
     const next = [target, `${target}.js`, `${target}.ts`, `${target}.vue`, resolve(target, 'index.js')]
       .find(candidate => { try { return statSync(candidate).isFile(); } catch { return false; } });
     if (!next) throw new Error(`Missing guidance source dependency: ${path} imports ${specifier}`);
-    moduleFiles(next, root, seen);
-  }
+    return next;
+  });
 }
 
 /** Facts come from the owning assembler, never a second example parser or inventory. */
-export function prepareGuidanceFacts(input, { root, metadata }) {
+export function prepareGuidanceFacts(input, { root, metadata, modules = new Map() }) {
   root = realpathSync(root);
   const sources = [
     { id: 'example', text: `${input.setup ? `<script setup>\n${input.setup}</script>\n` : ''}<template>\n${input.template}\n</template>` },
@@ -63,18 +74,19 @@ export function prepareGuidanceFacts(input, { root, metadata }) {
     sources.push({ id: `api:${name}`, text: JSON.stringify(contract) });
     for (const file of api.sourceFiles ?? []) {
       const absolute = resolve(root, file);
-      moduleFiles(absolute, root, dependencies);
+      moduleFiles(absolute, root, dependencies, modules);
       sources.push({ id: `implementation:${relative(root, absolute).replaceAll('\\', '/')}`, text: readFileSync(absolute, 'utf8') });
     }
   }
+  const packageRoot = resolve(root, 'packages/dialtone-vue');
+  const directiveFiles = input.directives.length
+    ? [...readFileSync(resolve(packageRoot, 'index.js'), 'utf8').matchAll(/export \* from ['"]\.\/(directives\/[^'"]+)['"]/g)]
+      .map(match => resolve(packageRoot, match[1], 'index.js'))
+    : [];
   for (const name of input.directives) {
-    const packageRoot = resolve(root, 'packages/dialtone-vue');
-    const barrel = readFileSync(resolve(packageRoot, 'index.js'), 'utf8');
-    const files = [...barrel.matchAll(/export \* from ['"]\.\/(directives\/[^'"]+)['"]/g)]
-      .map(match => resolve(packageRoot, match[1], 'index.js'));
-    const file = files.find(file => new RegExp(`default\\s+as\\s+${name}\\b`).test(readFileSync(file, 'utf8')));
+    const file = directiveFiles.find(file => new RegExp(`default\\s+as\\s+${name}\\b`).test(readFileSync(file, 'utf8')));
     if (!file) throw new Error(`Missing guidance directive contract: ${name}`);
-    moduleFiles(file, root, dependencies);
+    moduleFiles(file, root, dependencies, modules);
   }
   const uniqueSources = sources.filter((source, index) => sources.findIndex(other => other.id === source.id) === index);
   return { id: input.id, sources: uniqueSources,

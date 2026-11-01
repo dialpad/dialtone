@@ -6,7 +6,7 @@ import { buildSourceExamples, publicIdentities } from './documentation-examples.
 import { buildPresetExampleRecords } from './preset-examples.mjs';
 import { buildComponentPage } from './build-component-doc-links.mjs';
 import { glob } from 'glob';
-import { createGuidanceManifest, guidanceHash, selectGuidance, applyGuidance } from './example-guidance.mjs';
+import { createGuidanceManifest, guidanceHash, selectGuidance, applyGuidance, GUIDANCE_MODEL } from './example-guidance.mjs';
 import { prepareGuidanceFacts } from './example-guidance-inputs.mjs';
 import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
@@ -204,10 +204,9 @@ async function build() {
     'example-guidance-inputs.mjs', 'source-sections.mjs', '../../scripts/generate-example-guidance.mjs'];
   const toolingHash = guidanceHash(tooling.map(file => [file, readFileSync(resolve(__dirname, file), 'utf8')]));
   const driverHash = guidanceHash(readFileSync(resolve(__dirname, '../../scripts/generate-example-guidance.mjs'), 'utf8'));
-  const facts = guidanceInputs.map(input => prepareGuidanceFacts(input, { root: repoRoot, metadata }));
-  const manifest = createGuidanceManifest(facts, {
-    model: process.env.EXAMPLE_GUIDANCE_MODEL || 'claude-sonnet-5-5', toolingHash, driverHash,
-  });
+  const modules = new Map();
+  const facts = guidanceInputs.map(input => prepareGuidanceFacts(input, { root: repoRoot, metadata, modules }));
+  const manifest = createGuidanceManifest(facts, { model: GUIDANCE_MODEL, toolingHash, driverHash });
   const guidanceFile = resolve(repoRoot, 'packages/dialtone-docs/.generated/example-guidance/reviewed.json');
   const guidance = selectGuidance(manifest, existsSync(guidanceFile) ? [JSON.parse(readFileSync(guidanceFile, 'utf8'))] : []);
   allRecords = applyGuidance(allRecords, guidance);

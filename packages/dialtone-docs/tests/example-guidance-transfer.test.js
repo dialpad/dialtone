@@ -19,11 +19,9 @@ it('reserves a prior run conservatively if its spending receipt is unavailable',
   const { guidanceSpend } = await import('../scripts/restore-example-guidance.mjs');
   const head = 'a'.repeat(40);
   const run = { id: 12, event: 'workflow_run', display_title: `Example guidance ${head}` };
-  expect(guidanceSpend(run, undefined, head, '13')).toBe(1);
-  expect(guidanceSpend(run, { usage: { reservedUsd: 0.12 } }, head, '13')).toBe(0.12);
-  expect(guidanceSpend(run, undefined, 'b'.repeat(40), '13')).toBe(0);
-  expect(guidanceSpend({ ...run, run_attempt: 1 }, undefined, head, '12', 2)).toBe(1);
-  expect(guidanceSpend({ ...run, run_attempt: 2 }, undefined, head, '12', 2)).toBe(0);
+  expect(guidanceSpend(run, undefined, head)).toBe(1);
+  expect(guidanceSpend(run, { usage: { reservedUsd: 0.12 } }, head)).toBe(0.12);
+  expect(guidanceSpend(run, undefined, 'b'.repeat(40))).toBe(0);
 });
 
 

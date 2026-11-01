@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from 'nod
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { selectGuidance, createGuidanceManifest, guidanceHash, GUIDANCE_POLICY_HASH } from '../src/generators/example-guidance.mjs';
+import { selectGuidance, assertGuidanceManifest, GUIDANCE_POLICY_HASH } from '../src/generators/example-guidance.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
@@ -50,9 +50,9 @@ export function trustedGuidanceRun(run, origin, repository, {
       : ['workflow_run', 'workflow_dispatch'].includes(run.event) && workflowTrusted);
 }
 
-export function guidanceSpend(run, receipt, head, currentRun, currentAttempt = 1, budgetUsd = 1) {
-  if (run.display_title !== `Example guidance ${head}` ||
-      (String(run.id) === String(currentRun) && Number(run.run_attempt ?? 1) === Number(currentAttempt))) return 0;
+/** The caller excludes the current attempt; only prior attempts for this source head are charged. */
+export function guidanceSpend(run, receipt, head, budgetUsd = 1) {
+  if (run.display_title !== `Example guidance ${head}`) return 0;
   const amount = receipt?.usage?.reservedUsd;
   return Number.isFinite(amount) && amount >= 0 ? amount : budgetUsd;
 }
@@ -143,7 +143,7 @@ export function restoreActionGuidance(repository, {
         console.warn(`Guidance artifact ${run.id}/${attempt} unavailable; exact archived bytes or a visible refresh may be needed.`);
       } finally {
         if (generation) {
-          const charge = guidanceSpend(run, receipt, sourceHead, currentRun, currentAttempt, budgetUsd);
+          const charge = guidanceSpend(run, receipt, sourceHead, budgetUsd);
           if (charge && (receipt || modelCouldHaveRun(repository, run, request))) spentUsd += charge;
         }
       }
@@ -200,9 +200,7 @@ async function main() {
     if (!Number.isSafeInteger(runId) || runId <= 0) throw new Error('Invalid source run');
     const attempt = Number(process.argv[5]);
     if (process.argv[4] !== '--source-attempt' || !Number.isSafeInteger(attempt) || attempt <= 0) throw new Error('Invalid source attempt');
-    const manifest = fromAction(repository, runId, `example-guidance-inputs-${attempt}`, 'example-guidance-inputs.json');
-    const facts = manifest.entries.map(({ id, sources, dependencies }) => ({ id, sources, dependencies }));
-    if (guidanceHash(createGuidanceManifest(facts, manifest)) !== guidanceHash(manifest)) throw new Error('Invalid source manifest');
+    const manifest = assertGuidanceManifest(fromAction(repository, runId, `example-guidance-inputs-${attempt}`, 'example-guidance-inputs.json'));
     mkdirSync(dirname(manifestPath), { recursive: true });
     writeFileSync(manifestPath, JSON.stringify(manifest) + '\n');
     return;

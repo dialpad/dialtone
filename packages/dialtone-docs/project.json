@@ -38,7 +38,6 @@
         { "dependentTasksOutputFiles": "**/dist/component-documentation.json", "transitive": true },
         { "dependentTasksOutputFiles": "**/vue/dist/**/*", "transitive": true },
         { "runtime": "node packages/dialtone-docs/scripts/check-example-guidance.mjs --cache-key" },
-        { "env": "EXAMPLE_GUIDANCE_MODEL" },
         "{workspaceRoot}/packages/dialtone-vue/**/*",
         "{workspaceRoot}/common/**"
       ],

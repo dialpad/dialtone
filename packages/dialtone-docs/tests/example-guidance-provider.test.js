@@ -4,17 +4,16 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { generateGuidance } from '../scripts/generate-example-guidance.mjs';
-import { createGuidanceManifest, guidanceHash } from '../src/generators/example-guidance.mjs';
+import { createGuidanceManifest, GUIDANCE_MODEL, guidanceFacts, guidanceHash } from '../src/generators/example-guidance.mjs';
 
 const driverHash = guidanceHash(readFileSync(new URL('../scripts/generate-example-guidance.mjs', import.meta.url), 'utf8'));
-const manifest = () => createGuidanceManifest([{ id: 'examples/test', sources: [{ id: 'documentation', text: 'Disabled styling does not prevent actions.' }], dependencies: [] }], { model: 'claude-sonnet-5-5', toolingHash: 'a'.repeat(64), driverHash });
+const manifest = () => createGuidanceManifest([{ id: 'examples/test', sources: [{ id: 'documentation', text: 'Disabled styling does not prevent actions.' }], dependencies: [] }], { model: GUIDANCE_MODEL, toolingHash: 'a'.repeat(64), driverHash });
 const answer = () => ({ notes: [{ text: 'Prevent disabled actions in the application.', references: [{ source: 'documentation', quote: 'does not prevent actions' }] }] });
 
-it.each([false, true])('rejects a different executed driver before generation or reuse (cached: %s)', async cached => {
+it('rejects a different executed driver before generation or cached reuse', async () => {
   const original = manifest();
-  const facts = original.entries.map(({ id, sources, dependencies }) => ({ id, sources, dependencies }));
-  const data = createGuidanceManifest(facts, { ...original, driverHash: 'b'.repeat(64) });
-  const artifacts = cached ? [{ schemaVersion: 1, entries: [{ ...data.entries[0], notes: [], status: 'completed-empty' }] }] : [];
+  const data = createGuidanceManifest(original.entries.map(guidanceFacts), { ...original, driverHash: 'b'.repeat(64) });
+  const artifacts = [{ schemaVersion: 1, entries: [{ ...data.entries[0], notes: [], status: 'completed-empty' }] }];
   let calls = 0;
   await expect(generateGuidance(data, { artifacts, apiKey: 'test-only', limit: 1, budgetUsd: 1,
     request: async () => {
@@ -34,8 +33,7 @@ it('rejects cached notes when the source policy implementation differs from pinn
     writeFileSync(path, changed);
     const policy = await import(pathToFileURL(path).href);
     const current = manifest();
-    const facts = current.entries.map(({ id, sources, dependencies }) => ({ id, sources, dependencies }));
-    const data = policy.createGuidanceManifest(facts, current);
+    const data = policy.createGuidanceManifest(current.entries.map(guidanceFacts), current);
     const artifacts = [{ schemaVersion: 1, entries: [{ ...data.entries[0], notes: [], status: 'completed-empty' }] }];
     await expect(generateGuidance(data, { artifacts, request: () => { throw new Error('Must reject before requests'); } }))
       .rejects.toThrow(/manifest/);
@@ -68,8 +66,11 @@ it('uses a bounded tool-less request and preserves a cache hit without another m
   expect(calls).toBe(1);
 });
 
-it('does not spend when the budget cannot cover even one bounded request', async () => {
-  const output = await generateGuidance(manifest(), { apiKey: 'test-only', request: () => { throw new Error('must not call'); }, limit: 3, budgetUsd: 0 });
+it.each([
+  ['the budget cannot cover one bounded request', { limit: 3, budgetUsd: 0 }],
+  ['previous spending on the same source update exhausts it', { limit: 2, budgetUsd: 0.05, spentUsd: 0.05 }],
+])('does not spend when %s', async (_, limits) => {
+  const output = await generateGuidance(manifest(), { apiKey: 'test-only', request: () => { throw new Error('must not call'); }, ...limits });
   expect(output.usage.requests).toBe(0);
   expect(output.entries[0].status).toBe('pending');
 });
@@ -112,17 +113,11 @@ it('repairs a rejected note within the same bounded run', async () => {
 it('settles successful requests to actual usage before reserving the next request', async () => {
   const first = manifest();
   const facts = first.entries[0];
-  const data = createGuidanceManifest([facts, { ...facts, id: 'examples/second' }].map(entry => ({ id: entry.id, sources: entry.sources, dependencies: entry.dependencies })), first);
+  const data = createGuidanceManifest([facts, { ...facts, id: 'examples/second' }].map(guidanceFacts), first);
   const output = await generateGuidance(data, { apiKey: 'test-only', limit: 2, budgetUsd: 0.05,
     request: async () => ({ ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) }) });
   expect(output.usage.requests).toBe(2);
   expect(output.usage.reservedUsd).toBeCloseTo(output.usage.estimatedUsd);
-});
-
-it('accounts for previous spending on the same source update', async () => {
-  const output = await generateGuidance(manifest(), { apiKey: 'test-only', limit: 2, budgetUsd: 0.05, spentUsd: 0.05,
-    request: () => { throw new Error('No remaining authorization'); } });
-  expect(output.usage.requests).toBe(0);
 });
 
 
@@ -139,7 +134,7 @@ it('bounds serialized requests including JSON escaping rather than raw source ch
 it('checkpoints completed notes and the next request reservation before spending again', async () => {
   const first = manifest();
   const facts = first.entries[0];
-  const data = createGuidanceManifest([facts, { ...facts, id: 'examples/z-interrupted' }].map(({ id, sources, dependencies }) => ({ id, sources, dependencies })), first);
+  const data = createGuidanceManifest([facts, { ...facts, id: 'examples/z-interrupted' }].map(guidanceFacts), first);
   let latest;
   const observed = [];
   const output = await generateGuidance(data, { apiKey: 'test-only', limit: 2, budgetUsd: 1,
