@@ -100,7 +100,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
 });
 
 
-async function resolveGuidanceSource(eventName = 'workflow_run', sourceHead, bootstrapHead) {
+async function resolveGuidanceSource(eventName = 'workflow_run', sourceHead, bootstrapHead, pilot) {
   const guidance = readWorkflow('example-guidance.yml');
   const script = guidance.jobs.generate.steps.find(step => step.id === 'source').with.script;
   const head = 'a'.repeat(40);
@@ -122,7 +122,7 @@ async function resolveGuidanceSource(eventName = 'workflow_run', sourceHead, boo
   await new AsyncFunction('github', 'context', 'core', 'process', script)(github,
     { eventName, runId: 12, sha: eventName === 'push' ? head : 'd'.repeat(40), payload: eventName === 'workflow_run' ? { workflow_run: { id: 12 } } : {}, repo: { owner: 'dialpad', repo: 'dialtone' } },
     { setOutput: (key, value) => outputs.set(key, value), notice: () => {} },
-    { env: { TOOLING_REF: head, SOURCE_RUN: '12', SOURCE_HEAD: sourceHead, BOOTSTRAP_HEAD: bootstrapHead, CURRENT_ATTEMPT: '2', GITHUB_REPOSITORY: 'dialpad/dialtone' } });
+    { env: { TOOLING_REF: head, SOURCE_RUN: '12', SOURCE_HEAD: sourceHead, BOOTSTRAP_HEAD: bootstrapHead, PILOT: pilot, CURRENT_ATTEMPT: '2', GITHUB_REPOSITORY: 'dialpad/dialtone' } });
   return outputs;
 }
 
@@ -205,5 +205,19 @@ test('guidance serializes repository spending while preserving per-head recovery
       }] } : { total_count: 1, workflow_runs: [run] },
     });
     assert.equal(restored.spentUsd, expectedSpend);
+  }
+});
+
+test('the comparison pilot requires an exact approved push head and 21 unique IDs with a combined one-dollar cap', async () => {
+  const ids = Array.from({ length: 21 }, (_, index) => `examples/${index}`);
+  const approved = JSON.stringify({ head: 'a'.repeat(40), ids });
+  const outputs = await resolveGuidanceSource('push', undefined, undefined, approved);
+  assert.equal(outputs.get('enabled'), 'true');
+  assert.equal(outputs.get('pilot'), ids.join(','));
+  assert.equal(outputs.get('budget'), '1');
+  assert.equal(outputs.get('limit'), '84');
+  for (const pilot of [JSON.stringify({ head: 'b'.repeat(40), ids }), JSON.stringify({ head: 'a'.repeat(40), ids: ids.slice(1) })]) {
+    const output = await resolveGuidanceSource('push', undefined, undefined, pilot);
+    assert.equal(output.get('enabled'), 'false');
   }
 });

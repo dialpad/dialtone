@@ -59,6 +59,13 @@ function moduleImports(source, absolute, path, root) {
   });
 }
 
+function contractText(value, path = '') {
+  if (value && typeof value === 'object' && Object.keys(value).length) {
+    return Object.entries(value).map(([key, child]) => contractText(child, path ? `${path}.${key}` : key)).join('\n');
+  }
+  return `${path}: ${typeof value === 'string' ? value : JSON.stringify(value)}`;
+}
+
 /** Facts come from the owning assembler, never a second example parser or inventory. */
 export function prepareGuidanceFacts(input, { root, metadata, modules = new Map() }) {
   root = realpathSync(root);
@@ -71,7 +78,7 @@ export function prepareGuidanceFacts(input, { root, metadata, modules = new Map(
     const api = metadata.find(entry => entry.identity?.canonicalName === name || entry.displayName === name);
     if (!api) throw new Error(`Missing guidance API contract: ${name}`);
     const contract = Object.fromEntries(['displayName', 'description', 'tags', 'props', 'events', 'slots'].filter(key => api[key] !== undefined).map(key => [key, api[key]]));
-    sources.push({ id: `api:${name}`, text: JSON.stringify(contract) });
+    sources.push({ id: `api:${name}`, text: contractText(contract) });
     for (const file of api.sourceFiles ?? []) {
       const absolute = resolve(root, file);
       moduleFiles(absolute, root, dependencies, modules);

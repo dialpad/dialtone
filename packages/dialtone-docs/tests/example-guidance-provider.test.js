@@ -3,8 +3,9 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import * as provider from '../scripts/generate-example-guidance.mjs';
 import { generateGuidance } from '../scripts/generate-example-guidance.mjs';
-import { createGuidanceManifest, GUIDANCE_MODEL, guidanceFacts, guidanceHash } from '../src/generators/example-guidance.mjs';
+import { createGuidanceManifest, GUIDANCE_MODEL, guidanceFacts, guidanceHash, selectGuidance } from '../src/generators/example-guidance.mjs';
 
 const driverHash = guidanceHash(readFileSync(new URL('../scripts/generate-example-guidance.mjs', import.meta.url), 'utf8'));
 const manifest = () => createGuidanceManifest([{ id: 'examples/test', sources: [{ id: 'documentation', text: 'Disabled styling does not prevent actions.' }], dependencies: [] }], { model: GUIDANCE_MODEL, toolingHash: 'a'.repeat(64), driverHash });
@@ -99,18 +100,35 @@ it('reports a credential rejection without exposing the provider body', async ()
 });
 
 
-it('repairs a rejected note within the same bounded run', async () => {
-  let calls = 0;
-  const output = await generateGuidance(manifest(), { apiKey: 'test-only', limit: 2, budgetUsd: 1,
-    request: async () => {
-      calls++;
-      const value = answer();
-      if (calls === 1) value.notes[0].text = 'x'.repeat(241);
-      return { ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(value) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
+it('gives its one repair the rejected answer and every actionable validation problem', async () => {
+  const data = manifest();
+  const rejected = answer();
+  rejected.notes[0].text = 'x'.repeat(241);
+  rejected.notes[0].references = [{ source: 'invented', quote: 'not a real quote' }];
+  const bodies = [];
+  const output = await generateGuidance(data, { apiKey: 'test-only', limit: 2, budgetUsd: 1,
+    request: async (_, options) => {
+      bodies.push(JSON.parse(options.body));
+      return { ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(bodies.length === 1 ? rejected : answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
     } });
+  const blocks = bodies[1].messages[0].content;
+  expect(Array.isArray(blocks)).toBe(true);
+  expect(blocks.some(block => block.text.includes('Disabled styling does not prevent actions.'))).toBe(true);
+  const feedback = JSON.parse(blocks.at(-1).text);
+  expect(feedback.rejectedAnswer).toEqual(rejected);
+  expect(feedback.diagnostics).toMatchObject({ noteLengths: [241], characters: 241, limit: 240, validSourceIds: ['documentation'] });
+  expect(feedback.diagnostics.problems).toEqual(expect.arrayContaining([
+    expect.objectContaining({ reason: 'unknown-source', source: 'invented', quote: 'not a real quote' }),
+    expect.objectContaining({ reason: 'length' }),
+  ]));
   expect(output.entries[0].status).toBe('complete');
-  expect(output.entries[0].notes[0].text).not.toContain('xxx');
   expect(output.usage.requests).toBe(2);
+  expect(output.diagnostics).toHaveLength(2);
+  expect(output.diagnostics[0]).toMatchObject({ id: data.entries[0].id, accepted: false, stopReason: 'end_turn' });
+  expect(output.diagnostics[1].accepted).toBe(true);
+  const selected = selectGuidance(data, [output]);
+  expect(selected.entries[0].notes).toEqual(answer().notes);
+  expect(JSON.stringify(selected)).not.toContain('rejectedAnswer');
 });
 
 it('settles successful requests to actual usage before reserving the next request', async () => {
@@ -126,7 +144,7 @@ it('settles successful requests to actual usage before reserving the next reques
 
 it('bounds serialized requests including JSON escaping rather than raw source characters', async () => {
   const facts = manifest().entries[0];
-  const text = facts.sources[0].text + '"'.repeat(30000);
+  const text = facts.sources[0].text + '"'.repeat(50000);
   expect(Buffer.byteLength(text)).toBeLessThan(100000);
   const data = createGuidanceManifest([{ id: facts.id, sources: [{ id: 'documentation', text }], dependencies: [] }], manifest());
   const rejected = await generateGuidance(data, { apiKey: 'test-only', budgetUsd: 1, request: () => { throw new Error('oversized serialized request must not leave'); } });
@@ -182,4 +200,25 @@ it('stops at a Chicago calendar-month boundary until spending is restored again'
     } });
   expect(output.usage.requests).toBe(1);
   expect(output.entries[1].error).toMatch(/month changed/i);
+});
+
+it('keeps comparison results unpublishable and reconciles both model prices inside one spend cap', async () => {
+  const data = manifest();
+  const models = [];
+  const comparison = await provider.compareGuidance(data, [data.entries[0].id], { apiKey: 'test-only', limit: 4, budgetUsd: 1,
+    request: async (_, options) => {
+      models.push(JSON.parse(options.body).model);
+      return { ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
+    } });
+  expect(models).toEqual(['claude-haiku-5-5', 'claude-sonnet-5-5']);
+  expect(comparison.usage.estimatedUsd).toBeCloseTo(0.00084);
+  expect(comparison.usage.reservedUsd).toBeCloseTo(0.00084);
+  expect(comparison.usage.requests).toBe(2);
+  expect(comparison.pilot.map(arm => arm.entries[0].status)).toEqual(['complete', 'complete']);
+  expect(comparison.entries).toEqual([]);
+  expect(() => selectGuidance(data, [comparison], { strict: true })).toThrow(/successful guidance/);
+  const exhausted = await provider.compareGuidance(data, [data.entries[0].id], { apiKey: 'test-only', budgetUsd: 1, spentUsd: 1,
+    request: () => { throw new Error('must not spend again'); } });
+  expect(exhausted.usage.requests).toBe(0);
+  await expect(provider.compareGuidance(data, [data.entries[0].id], { budgetUsd: 1.01 })).rejects.toThrow(/pilot/i);
 });

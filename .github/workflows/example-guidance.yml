@@ -73,6 +73,7 @@ jobs:
           SOURCE_RUN: ${{ inputs.source_run }}
           SOURCE_HEAD: ${{ inputs.source_head }}
           BOOTSTRAP_HEAD: ${{ vars.EXAMPLE_GUIDANCE_BOOTSTRAP_HEAD }}
+          PILOT: ${{ vars.EXAMPLE_GUIDANCE_PILOT }}
           TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
           CURRENT_ATTEMPT: ${{ github.run_attempt }}
         with:
@@ -97,7 +98,11 @@ jobs:
                   process.env.SOURCE_HEAD !== head) throw new Error('Source head mismatch');
             }
             if (!/^[a-f0-9]{40}$/.test(head)) throw new Error('Invalid source head');
-            if (bootstrap && process.env.BOOTSTRAP_HEAD !== head) {
+            const pilot = process.env.PILOT ? JSON.parse(process.env.PILOT) : undefined;
+            const pilotIds = bootstrap && pilot?.head === head && Array.isArray(pilot.ids)
+              && pilot.ids.length === 21 && new Set(pilot.ids).size === 21
+              && pilot.ids.every(id => typeof id === 'string' && /^examples\/[a-zA-Z0-9/_-]+$/.test(id)) ? pilot.ids : undefined;
+            if (bootstrap && process.env.BOOTSTRAP_HEAD !== head && !pilotIds) {
               core.setOutput('enabled', 'false');
               core.notice('Push bootstrap head is not separately authorized; no inference permitted.');
               return;
@@ -121,12 +126,13 @@ jobs:
             }
             attempt = sourceAttempt;
             core.setOutput('enabled', 'true');
-            const corpus = process.env.BOOTSTRAP_HEAD === head;
+            const corpus = !pilotIds && process.env.BOOTSTRAP_HEAD === head;
+            core.setOutput('pilot', pilotIds?.join(',') ?? '');
             core.setOutput('run', String(sourceRun));
             core.setOutput('attempt', String(attempt));
             core.setOutput('head', head);
             core.setOutput('pr', String(pr.number));
-            core.setOutput('limit', corpus ? '500' : '20');
+            core.setOutput('limit', pilotIds ? '84' : corpus ? '500' : '20');
             core.setOutput('budget', corpus ? '15' : '1');
       - name: Fetch only approved immutable tooling; no PR scripts or dependency installation
         if: steps.source.outputs.enabled == 'true'
@@ -166,15 +172,18 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GUIDANCE_SOURCE_HEAD: ${{ steps.source.outputs.head }}
           GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          PILOT_IDS: ${{ steps.source.outputs.pilot }}
           REQUEST_LIMIT: ${{ steps.source.outputs.limit }}
           BUDGET_USD: ${{ steps.source.outputs.budget }}
         run: |
           SPENT_USD=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).spentUsd")
           MONTHLY_SPENT_USD=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).monthlySpentUsd")
           BUDGET_MONTH=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).month")
+          PILOT_ARGS=()
+          if [ -n "$PILOT_IDS" ]; then PILOT_ARGS=(--pilot-ids "$PILOT_IDS"); fi
           node packages/dialtone-docs/scripts/generate-example-guidance.mjs \
             packages/dialtone-docs/dist/example-guidance-inputs.json example-guidance.json \
-            --limit "$REQUEST_LIMIT" --budget-usd "$BUDGET_USD" --spent-usd "$SPENT_USD" \
+            "${PILOT_ARGS[@]}" --limit "$REQUEST_LIMIT" --budget-usd "$BUDGET_USD" --spent-usd "$SPENT_USD" \
             --monthly-spent-usd "$MONTHLY_SPENT_USD" --month "$BUDGET_MONTH" \
             --cache packages/dialtone-docs/.generated/example-guidance/reviewed.json
       - uses: actions/upload-artifact@v4
@@ -194,6 +203,7 @@ jobs:
             .replace(/[\x21-\x2f\x3a-\x40\x5b-\x60\x7b-\x7e]/g, character => `&#${character.codePointAt(0)};`);
           console.log('## Generated example guidance');
           console.log('Source-based guidance; no consumer or human-validation proof is created.');
+          if (result.pilot) console.log("Measurement-only model comparison; no corpus or publication readiness is established.");
           for (const entry of result.entries) {
             console.log(`\n- ${literal(entry.id)}: ${literal(entry.status)}`);
             for (const note of entry.notes ?? []) console.log(`  - ${literal(note.text)}`);
@@ -201,7 +211,7 @@ jobs:
           console.log(`\nUsage: ${JSON.stringify(result.usage)}`);
           JS
       - name: Report guidance result on the actual source PR head
-        if: always() && steps.source.outputs.enabled == 'true'
+        if: always() && steps.source.outputs.enabled == 'true' && steps.source.outputs.pilot == ''
         uses: actions/github-script@v7
         env:
           SOURCE_HEAD: ${{ steps.source.outputs.head }}
