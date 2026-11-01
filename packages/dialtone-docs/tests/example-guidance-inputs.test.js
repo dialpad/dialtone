@@ -1,10 +1,11 @@
 import { expect, it } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, renameSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { buildRecords } from '../src/generators/build-public-docs.mjs';
 import { fileURLToPath } from 'node:url';
 import { prepareGuidanceFacts } from '../src/generators/example-guidance-inputs.mjs';
+import { withComponentIdentity } from '../../../scripts/lib/vue-component-identity.mjs';
 import { createGuidanceManifest } from '../src/generators/example-guidance.mjs';
 
 it('follows component source imports and fingerprints changed helpers without release-version noise', () => {
@@ -49,3 +50,29 @@ it('collects guidance inputs for the same examples emitted by the public page pr
       expect(input).not.toHaveProperty('manualReview');
     }
   });
+
+it('reads cached component metadata after its producing checkout has moved', () => {
+  const original = mkdtempSync(resolve(tmpdir(), 'guidance-producer-'));
+  const moved = `${original}-consumer`;
+  try {
+    const packageRoot = resolve(original, 'packages/dialtone-vue');
+    mkdirSync(packageRoot, { recursive: true });
+    const file = resolve(packageRoot, 'Button.vue');
+    writeFileSync(file, '<template><button>Save</button></template>');
+    mkdirSync(resolve(packageRoot, 'parts'));
+    writeFileSync(resolve(packageRoot, 'parts/Button.vue'), '<template><span>Part</span></template>');
+    const metadata = [withComponentIdentity({ displayName: 'Button',
+      sourceFiles: [file, 'packages/dialtone-vue/parts/Button.vue'] }, file,
+      new Map([[file, ['DtButton']]]), packageRoot, { name: '@example/ui', version: '1.0.0' })];
+    const input = { id: 'examples/portable', template: '<dt-button>Save</dt-button>', setup: '',
+      components: ['DtButton'], directives: [], rawFile: '# Button\nUse a meaningful label.' };
+    const before = prepareGuidanceFacts(input, { root: original, metadata });
+    renameSync(original, moved);
+    const after = prepareGuidanceFacts(input, { root: moved, metadata });
+    expect(after).toEqual(before);
+    expect(metadata[0].sourceFiles).toEqual(['packages/dialtone-vue/Button.vue', 'packages/dialtone-vue/parts/Button.vue']);
+  } finally {
+    rmSync(original, { recursive: true, force: true });
+    rmSync(moved, { recursive: true, force: true });
+  }
+});

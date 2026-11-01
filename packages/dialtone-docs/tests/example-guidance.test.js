@@ -96,3 +96,25 @@ describe('generated example guidance', () => {
     expect(selected.entries[0].notes).toEqual(fresh.entries[0].notes);
   });
 });
+
+it.each([
+  ['link', '[Open](https://example.invalid)'],
+  ['HTML', '<a href="https://example.invalid">Open</a>'],
+  ['emphasis', '**Keep labels**'],
+  ['underscore emphasis', '_Keep labels_'],
+  ['inline code', 'Set `modelValue`'],
+  ['reference link', '[Open][target]'],
+  ['heading', '# Guidance'],
+])('rejects generated %s instead of publishing formatting', (_, text) => {
+  const [input] = manifest([facts]).entries;
+  const value = result(input);
+  value.notes[0].text = text;
+  expect(() => validateGuidanceResult(input, value)).toThrow(/plain text/);
+});
+
+it('preserves plain API identifiers, array indexing and comparisons', () => {
+  const [input] = manifest([facts]).entries;
+  const value = result(input);
+  value.notes[0].text = 'Keep model_value and item_value in selected[0]; require a < b && b > c.';
+  expect(validateGuidanceResult(input, value)).toEqual(value);
+});

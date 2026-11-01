@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
-import { basename, dirname, join, relative, resolve } from 'node:path';
+import { basename, dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import ts from 'typescript';
 
 /** Normalize scan/export paths before deduplication and identity lookup. */
@@ -87,6 +87,8 @@ export function withComponentIdentity (doc, file, publicExports, packageRoot, ma
   const canonicalName = exportedNames.find(name => /^Dt[A-Z]/.test(name)) ?? exportedNames[0] ?? doc.displayName;
   return {
     ...doc,
+    sourceFiles: doc.sourceFiles?.map(source => (isAbsolute(source)
+      ? relative(resolve(packageRoot, '../..'), source) : source).replaceAll('\\', '/')),
     displayName: canonicalName,
     schemaVersion: 2,
     identity: {
