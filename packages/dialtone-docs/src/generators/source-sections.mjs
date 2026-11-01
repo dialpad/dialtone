@@ -1,6 +1,10 @@
 // Missing and unknown statuses remain published.
 export const NON_READY_STATUSES = new Set(['planned', 'beta', 'wip']);
 
+export function isNonReadyStatus(status) {
+  return typeof status === 'string' && NON_READY_STATUSES.has(status.trim().toLowerCase());
+}
+
 export function slugify(text) {
   return text
     .toLowerCase()

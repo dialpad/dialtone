@@ -1,5 +1,5 @@
 import MarkdownIt from 'markdown-it';
-import { NON_READY_STATUSES } from './source-sections.mjs';
+import { isNonReadyStatus } from './source-sections.mjs';
 import matter from 'gray-matter';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -144,7 +144,7 @@ export function readSourceExamples(options) {
   const { data } = matter(rawFile);
   const exclusion = /\/scratch[^/]*\.md$/.test(filePath) ? 'scratch source'
     : filePath.endsWith('.mdx') ? 'MDX markers not supported'
-      : NON_READY_STATUSES.has(String(data.status).trim().toLowerCase()) ? 'not-ready source' : null;
+      : isNonReadyStatus(data.status) ? 'not-ready source' : null;
   const automatic = filePath.startsWith('apps/dialtone-documentation/docs/components/');
   const pathDocId = filePath.replace(/^apps\/dialtone-documentation\/docs\//, '').replace(/\.mdx?$/, '');
   const candidates = [];
@@ -206,13 +206,13 @@ export function readSourceExamples(options) {
         candidate.syntax = classification;
         candidate.reason = classification.reason;
         const contextual = usageDepth > 0 || /\b(migration|migrating|before|after|avoid|incorrect|deprecated|do not|don't)\b/i.test(section.headingPath.join(' '));
-        candidate.eligible = Boolean(definition) && !contextual
-          && (automatic || (annotation.representation === 'static-html'
-            && filePath.startsWith('apps/dialtone-documentation/docs/utilities/')));
+        const inEnabledArea = annotation.representation === 'static-html'
+          ? filePath.startsWith('apps/dialtone-documentation/docs/utilities/') : automatic;
+        candidate.eligible = Boolean(definition) && !contextual && inEnabledArea;
         if (candidate.eligible) validateId(candidate.id, location);
         candidate.definition = definition;
         if (contextual) candidate.reason = 'Contextual migration/before-after/negative guidance is not a standalone recommendation.';
-        else if (definition && !candidate.eligible) candidate.reason = 'Source area is outside the enabled component-page rule.';
+        else if (definition && !candidate.eligible) candidate.reason = 'Source area or representation is outside the enabled delivery rule.';
       }
       if (annotation.id && !candidate.eligible && !annotation.exclude) {
         throw new Error(`${location}: explicit example ID ${annotation.id} is not deliverable: ${candidate.reason} Fix the source or add exclude with a reason and owner to retire it deliberately.`);
@@ -245,7 +245,7 @@ export function readSourceExamples(options) {
   }
   const unique = new Set();
   for (const candidate of candidates) {
-    if (candidate.eligible && unique.has(candidate.id)) throw new Error(`Duplicate example ID: ${candidate.id}`);
+    if (candidate.eligible && unique.has(candidate.id)) throw new Error(`${filePath}:${candidate.sourceLine}: Duplicate example ID: ${candidate.id}`);
     if (candidate.eligible) unique.add(candidate.id);
     delete candidate.annotation;
     delete candidate.baseId;

@@ -63,6 +63,7 @@ describe('source-driven component examples', () => {
     ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
     ['unresolved', '## 🧪\n' + fence('<dt-button :disabled="missing">Save</dt-button>'), 'components', 'remaining', 'missing'],
     ['outside the enabled area', '## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
+    ['static representation on a component page', '## Default\n' + annotation({ representation: 'static-html', targetUtilities: ['d-ww-normal'] }) + fence('<p class="d-ww-normal">Wrap</p>'), 'components', 'remaining', 'outside'],
   ])('keeps %s candidates undelivered and accounted for in coverage',(_, raw, area, disposition, reason) => {
     const options = input(raw);
     options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
@@ -70,6 +71,11 @@ describe('source-driven component examples', () => {
     const coverage = buildExampleCoverage(options);
     expect(coverage.candidates[0].disposition).toBe(disposition);
     expect(coverage.candidates[0].reason).toContain(reason);
+  });
+
+  it('keeps a non-string readiness value published like the prose reader', () => {
+    const [record] = produce('---\nstatus: [beta]\n---\n\n' + ordinary);
+    expect(record?.id).toBe('examples/docs/components/example/default');
   });
 
   it.each([
