@@ -22,5 +22,6 @@ it('requires the selected bytes to match both current inputs and served prose', 
   expect(() => assertGuidanceBuild(data, { ...guidance, manifestHash: 'stale' }, records)).toThrow();
   expect(() => assertGuidanceBuild(data, { ...guidance, digest: 'corrupt' }, records)).toThrow();
   expect(() => assertGuidanceBuild(data, { ...guidance, driverHash: 'e'.repeat(64) }, records)).toThrow(/driverHash/);
+  expect(() => assertGuidanceBuild(data, { ...guidance, policyHash: 'e'.repeat(64) }, records)).toThrow(/policyHash/);
   expect(() => assertGuidanceBuild(data, guidance, [{ id: 'examples/test', content: 'Note omitted' }])).toThrow();
 });

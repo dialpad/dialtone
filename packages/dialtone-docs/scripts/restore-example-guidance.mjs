@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from 'nod
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { selectGuidance, createGuidanceManifest, guidanceHash } from '../src/generators/example-guidance.mjs';
+import { selectGuidance, createGuidanceManifest, guidanceHash, GUIDANCE_POLICY_HASH } from '../src/generators/example-guidance.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
@@ -208,6 +208,9 @@ async function main() {
     return;
   }
   const manifest = JSON.parse(readFileSync(manifestPath));
+  if (manifest.policyHash !== GUIDANCE_POLICY_HASH) {
+    throw new Error('Guidance policy implementation mismatch; use matching approved tooling');
+  }
   const artifacts = await fromPublishedPackages();
   let spentUsd = 0;
   try {

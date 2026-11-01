@@ -14,7 +14,7 @@ Supported Boolean `ref` setup is derived from the declarations the template actu
 
 Concise usage notes are generated from source-bound inputs into ignored build artifacts, then included in CLI/MCP output. They are guidance, not consumer or human-review proof. Contributors maintain the example and its documentation; saving or committing does not invoke a local model or rewrite Markdown. Offline builds can omit unavailable notes and report pending guidance. Publication requires matching successful artifacts, including an explicit empty result when no note is useful. Review the generated artifact alongside the PR; publication must reuse its exact matching notes. No tracked prose sidecar or model account is required for ordinary contributor builds.
 
-Generation verifies the executed provider driver's bytes against the source manifest before making requests or reusing notes. A driver change needs matching approved pinned tooling; mismatches fail without spending. The driver identity also binds note freshness and publication provenance.
+Generation and restoration require the source manifest to match the pinned provider driver and shared policy implementation before requests or note reuse. Their identities bind note freshness and publication provenance; mismatches stop without spending.
 
 An explicit `representation: "static-html"` requires `targetUtilities`, whose classes must appear literally in the markup. The consumer validator owns CSS and property checks. Preserve the existing Word Wrap fragment; other automatic static subjects, directive pages, MDX, references and richer setup remain later work. Migration, before/after and negative guidance retain their context. What's New is outside this component rule and remains pending.
 

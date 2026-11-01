@@ -1,5 +1,8 @@
 import { expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { generateGuidance } from '../scripts/generate-example-guidance.mjs';
 import { createGuidanceManifest, guidanceHash } from '../src/generators/example-guidance.mjs';
 
@@ -19,6 +22,26 @@ it.each([false, true])('rejects a different executed driver before generation or
       return { ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
     } })).rejects.toThrow(/driver.*mismatch/i);
   expect(calls).toBe(0);
+});
+
+it('rejects cached notes when the source policy implementation differs from pinned tooling', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'guidance-policy-'));
+  try {
+    const path = join(directory, 'example-guidance.mjs');
+    const source = readFileSync(new URL('../src/generators/example-guidance.mjs', import.meta.url), 'utf8');
+    const changed = source.replace('note.references.length > 2', 'note.references.length > 1');
+    expect(changed).not.toBe(source);
+    writeFileSync(path, changed);
+    const policy = await import(pathToFileURL(path).href);
+    const current = manifest();
+    const facts = current.entries.map(({ id, sources, dependencies }) => ({ id, sources, dependencies }));
+    const data = policy.createGuidanceManifest(facts, current);
+    const artifacts = [{ schemaVersion: 1, entries: [{ ...data.entries[0], notes: [], status: 'completed-empty' }] }];
+    await expect(generateGuidance(data, { artifacts, request: () => { throw new Error('Must reject before requests'); } }))
+      .rejects.toThrow(/manifest/);
+    expect(data.driverHash).toBe(current.driverHash);
+    expect(data.policyHash).not.toBe(current.policyHash);
+  } finally { rmSync(directory, { recursive: true, force: true }); }
 });
 
 it('uses a bounded tool-less request and preserves a cache hit without another model call', async () => {
