@@ -194,8 +194,8 @@ export async function fromPublishedPackages() {
         maxBuffer: 10_000_000, timeout: 30_000, stdio: ['ignore', 'pipe', 'pipe'],
       });
       artifacts.push(JSON.parse(content));
-    } catch {
-      throw new Error(`Cannot verify published ${name} guidance archive; stop and resolve registry/archive access before retrying.`);
+    } catch (error) {
+      throw new Error(`Cannot verify published ${name} guidance archive (${error.message}); stop and resolve registry/archive access before retrying.`, { cause: error });
     } finally { rmSync(directory, { recursive: true, force: true }); }
   }
   return artifacts;

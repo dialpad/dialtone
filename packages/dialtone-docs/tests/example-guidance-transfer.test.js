@@ -179,7 +179,16 @@ it.each(['transport', 'registry HTTP', 'registry 404', 'tarball HTTP', 'integrit
     }
     mockRegistry(fixture, { offline: kind === 'transport', metadataStatus: kind === 'registry HTTP' ? 503 : kind === 'registry 404' ? 404 : 200,
       tarballStatus: kind === 'tarball HTTP' ? 404 : 200 });
-    try { await expect(transfer.fromPublishedPackages()).rejects.toThrow(/published.*guidance/i); }
+    try {
+      const result = transfer.fromPublishedPackages();
+      await expect(result).rejects.toThrow(/published.*guidance/i);
+      if (kind === 'transport') {
+        await expect(result).rejects.toMatchObject({
+          message: expect.stringContaining('Simulated registry outage'),
+          cause: expect.objectContaining({ message: 'Simulated registry outage' }),
+        });
+      }
+    }
     finally { vi.unstubAllGlobals(); }
   },
 );
