@@ -6,7 +6,7 @@ import { readPublicComponentExports, withComponentIdentity } from '../../../../s
 import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
 import { getProfile } from '../../../../scripts/retrieval/profiles.mjs';
 import matter from 'gray-matter';
-import { readSourceExamples } from './source-examples.mjs';
+import { readSourceExamples, directiveNames } from './source-examples.mjs';
 import { chunkSections } from './source-sections.mjs';
 import { assertTemplateBindings, assertStaticHtml, sourceSetupForTemplate, componentTags } from './example-template.mjs';
 
@@ -28,7 +28,7 @@ function assertDeclaredUsage(id, template, definition) {
   const missing = [
     ...componentTags(markup)
       .filter(name => !declared([...definition.components, ...(definition.icons ?? [])], name)),
-    ...[...markup.matchAll(/\sv-(dt-[a-z0-9-]+)/g)].map(match => match[1])
+    ...directiveNames(markup)
       .filter(name => !declared(definition.directives, `${name}-directive`)).map(name => `v-${name}`),
   ];
   if (missing.length) throw new Error(`Example ${id} uses unconfigured ${[...new Set(missing)].join(', ')}`);
@@ -113,9 +113,9 @@ export function assembleExampleRecord({ id, template, definition, rawFile = '', 
     unverifiedVue
       ? 'Setup: this source fixture is not verified against the pinned dependencies; those versions may lack its components or APIs. To validate it, copy the five files into an empty directory and try npm install and npm run build before running npm run dev.'
       : 'Setup: copy all five files below into an empty directory. Run npm install, npm run build and npm run dev. package.json pins the consumer dependencies and Vite SFC build tooling; main.js includes component, directive and CSS/theme setup.',
-    `State/events: ${setup ? 'Authored local state is included below; no hidden handlers.' : 'No external state or hidden handlers.'}${definition.sourceKind === 'combinator-preset' ? ` ${definition.responsibilities ?? ''}` : ''}`,
+    `State/events: ${setup ? 'Authored local state is included below; no hidden handlers.' : 'No external state or hidden handlers.'}${definition.responsibilities ? ` ${definition.responsibilities}` : ''}`,
     `Validation: consumer build ${validation.consumerBuild}; API/export/deprecation checks ${validation.api ?? 'unverified'}. Validation is tied to payload SHA-256 ${payload}.`,
-    `Interaction/accessibility: ${manualSummary}${definition.sourceKind === 'combinator-preset' ? ` ${definition.interaction ?? ''}` : ''}`,
+    `Interaction/accessibility: ${manualSummary}${definition.interaction ? ` ${definition.interaction}` : ''}`,
     ...Object.entries(files).map(([name, code]) => `## ${name}\n\n\`\`\`${name.split('.').pop()}\n${code}\`\`\``),
   ].join('\n\n');
   return { ...source, id, category: 'examples', content, example: {

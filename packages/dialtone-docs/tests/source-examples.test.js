@@ -48,7 +48,7 @@ describe('source-driven component examples', () => {
   });
 
   it('retains a source-owned exclusion and physical location in coverage', () => {
-    const rawFile = '---\ntitle: Example\n---\n\n## Default\n' + annotation({ exclude: { reason: 'Needs an application service.', owner: 'Component owner' } }) + fence('<dt-button>Save</dt-button>');
+    const rawFile = '---\ntitle: Example\n---\n\n## Default\n' + annotation({ id: 'examples/guide-demo', exclude: { reason: 'Needs an application service.', owner: 'Component owner' } }) + fence('<dt-button>Save</dt-button>');
     const options = input(rawFile);
     const records = buildExampleRecords(options);
     const coverage = buildExampleCoverage({ ...options, records });
@@ -59,16 +59,28 @@ describe('source-driven component examples', () => {
   });
 
   it.each([
-    ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
+    ['excluded', '---\nstatus: planned\n---\n\n## 🧪\n' + annotation({ id: 'examples/planned-demo' }) + fence('<dt-button>Save</dt-button>'), 'components', 'excluded', 'not-ready'],
     ['unresolved', '## 🧪\n' + fence('<dt-button :disabled="missing">Save</dt-button>'), 'components', 'remaining', 'missing'],
     ['outside the enabled area', '## 🧪\n' + fence('<dt-button>Save</dt-button>'), 'guides', 'remaining', 'outside'],
-  ])('keeps %s candidates with non-publishable derived IDs in coverage', (_, raw, area, disposition, reason) => {
+  ])('keeps %s candidates undelivered and accounted for in coverage',(_, raw, area, disposition, reason) => {
     const options = input(raw);
     options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
     expect(buildExampleRecords(options)).toEqual([]);
     const coverage = buildExampleCoverage(options);
     expect(coverage.candidates[0].disposition).toBe(disposition);
     expect(coverage.candidates[0].reason).toContain(reason);
+  });
+
+  it.each([
+    ['deprecated API', 'Default', '<dt-text kind="body">Text</dt-text>', 'components', /deprecated/i],
+    ['contextual guidance', 'Avoid this', '<dt-button>Save</dt-button>', 'components', /Contextual/],
+    ['outside the enabled area', 'Default', '<dt-button>Save</dt-button>', 'guides', /outside/],
+  ])('fails instead of silently retiring an explicit ID with %s', (_, heading, markup, area, reason) => {
+    const options = input(`## ${heading}\n` + annotation({ id: 'examples/guide-demo' }) + fence(markup));
+    options.filePath = `apps/dialtone-documentation/docs/${area}/example.md`;
+    expect(() => buildExampleRecords(options)).toThrow(/example.md:\d+:.*examples\/guide-demo/);
+    expect(() => buildExampleRecords(options)).toThrow(reason);
+    expect(() => buildExampleRecords(options)).toThrow(/fix.*source.*exclude/i);
   });
 
   it('rejects non-publishable derived IDs when the candidate would be delivered', () => {
@@ -81,6 +93,17 @@ describe('source-driven component examples', () => {
     expect(() => produce(raw)).toThrow(/invalid example ID/);
   });
 
+  it('locates invalid static source and preserves the underlying error', () => {
+    const options = input('## Default\n'
+      + annotation({ representation: 'static-html', targetUtilities: ['d-ww-normal'] })
+      + fence('<p class="d-ww-normal">{{ label }}</p>'));
+    options.filePath = 'apps/dialtone-documentation/docs/utilities/typography/word-wrap.md';
+    expect(() => buildExampleRecords(options)).toThrowError(expect.objectContaining({
+      message: expect.stringMatching(/word-wrap.md:\d+:.*interpolation/),
+      cause: expect.objectContaining({ message: expect.stringContaining('interpolation') }),
+    }));
+  });
+
   it('does not let a future reference fence change a live demo address', () => {
     const records = produce(ordinary + '\n```vue code-only\n<dt-button>Reference</dt-button>\n```');
     expect(records.map(x => x.id)).toEqual(['examples/docs/components/example/default']);
@@ -90,13 +113,6 @@ describe('source-driven component examples', () => {
     const raw = '## Usage\n<dialtone-usage>\n<template #dont>\n\n' + fence('<dt-button>Delete</dt-button>') + '\n\n</template>\n</dialtone-usage>';
     expect(produce(raw)).toEqual([]);
     expect(buildExampleCoverage(input(raw)).candidates[0].reason).toContain('Contextual');
-  });
-
-  it('does not let an identity override enroll a Vue demo outside the component rule', () => {
-    const options = input('## Default\n' + annotation({ id: 'examples/guide-demo' }) + fence('<dt-button>Save</dt-button>'));
-    options.filePath = 'apps/dialtone-documentation/docs/guides/example.md';
-    expect(buildExampleRecords(options)).toEqual([]);
-    expect(buildExampleCoverage(options).candidates[0].reason).toContain('outside');
   });
 
   it.each(['commented', 'nested'])('rejects %s scripts as authored top-level state', kind => {

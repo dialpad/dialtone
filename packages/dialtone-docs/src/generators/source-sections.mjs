@@ -8,7 +8,12 @@ export function slugify(text) {
     .replace(/^-+|-+$/g, '');
 }
 
-
+/**
+ * Split a markdown body into heading-bounded sections.
+ * H2 headings start a new top-level section; H3 headings nest under the current H2.
+ * Headings inside fenced code blocks are treated as plain content and do NOT split.
+ * Returns: Array<{ headingPath: string[], raw: string, baseSlug: string, sourceStartLine: number }>
+ */
 export function chunkSections(body) {
   const lines = body.split('\n');
   const sections = [];
