@@ -192,7 +192,7 @@ export function readSourceExamples(options) {
         baseId, unkeyed: !annotation.id && !annotation.key, source, disposition: 'remaining', eligible: false };
       if (exclusion || annotation.exclude) {
         candidate.disposition = 'excluded';
-        candidate.reason = exclusion ?? annotation.exclude.reason;
+        candidate.reason = annotation.exclude?.reason ?? exclusion;
         if (annotation.exclude) candidate.owner = annotation.exclude.owner;
         candidate.syntax = { kind: 'excluded-source' };
       } else {
@@ -213,9 +213,9 @@ export function readSourceExamples(options) {
         candidate.definition = definition;
         if (contextual) candidate.reason = 'Contextual migration/before-after/negative guidance is not a standalone recommendation.';
         else if (definition && !candidate.eligible) candidate.reason = 'Source area is outside the enabled component-page rule.';
-        if (annotation.id && !candidate.eligible) {
-          throw new Error(`${location}: explicit example ID ${annotation.id} is not deliverable: ${candidate.reason} Fix the source or add exclude with a reason and owner to retire it deliberately.`);
-        }
+      }
+      if (annotation.id && !candidate.eligible && !annotation.exclude) {
+        throw new Error(`${location}: explicit example ID ${annotation.id} is not deliverable: ${candidate.reason} Fix the source or add exclude with a reason and owner to retire it deliberately.`);
       }
       candidates.push(candidate);
     }
