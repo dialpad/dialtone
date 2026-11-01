@@ -182,7 +182,7 @@ jobs:
           import { readFileSync } from 'node:fs';
           const result = JSON.parse(readFileSync('example-guidance.json', 'utf8'));
           const literal = value => String(value)
-            .replace(/[\p{Cc}\p{Cf}\p{Zl}\p{Zp}]/gu, character => `\\u{${character.codePointAt(0).toString(16)}}`)
+            .replace(/[\p{Cc}\p{Cf}\p{Zl}\p{Zp}\p{Default_Ignorable_Code_Point}]/gu, character => `\\u{${character.codePointAt(0).toString(16)}}`)
             .replace(/[\x21-\x2f\x3a-\x40\x5b-\x60\x7b-\x7e]/g, character => `&#${character.codePointAt(0)};`);
           console.log('## Generated example guidance');
           console.log('Source-based guidance; no consumer or human-validation proof is created.');

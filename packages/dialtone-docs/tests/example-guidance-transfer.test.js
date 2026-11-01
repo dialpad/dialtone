@@ -1,9 +1,10 @@
 import { expect, it, vi } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, realpathSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { createGuidanceManifest, GUIDANCE_MODEL } from '../src/generators/example-guidance.mjs';
 import * as transfer from '../scripts/restore-example-guidance.mjs';
 import { trustedGuidanceRun, readGuidanceArchive, restoreActionGuidance } from '../scripts/restore-example-guidance.mjs';
 
@@ -98,7 +99,7 @@ it('charges missing receipts only when a completed run could have reached the mo
     throw new Error(`Unavailable endpoint ${endpoint}`);
   };
   const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead, currentRun: '13',
-    toolingRef, request, readArtifact: () => { throw new Error('No receipt'); } });
+    toolingRef, request, readArtifact: () => undefined });
   // A skipped model step spent nothing; started and unverifiable attempts remain conservative.
   expect(result.spentUsd).toBe(2);
 });
@@ -140,14 +141,13 @@ function mockRegistry(fixture, { metadataStatus = 200, tarballStatus = 200, offl
 it.each([
   ['valid published guidance', {}, {}, 2],
   ['a valid older package without guidance', { legacy: true }, {}, 0],
-  ['a package not published yet', {}, { metadataStatus: 404 }, 0],
 ])('restores %s without inventing replacement notes', async (_, archiveOptions, responseOptions, count) => {
   mockRegistry(publishedFixture(archiveOptions), responseOptions);
   try { expect(await transfer.fromPublishedPackages()).toHaveLength(count); }
   finally { vi.unstubAllGlobals(); }
 });
 
-it.each(['transport', 'registry HTTP', 'tarball HTTP', 'integrity', 'invalid JSON', 'invalid tar'])(
+it.each(['transport', 'registry HTTP', 'registry 404', 'tarball HTTP', 'integrity', 'invalid JSON', 'invalid tar'])(
   'stops on %s failure instead of treating published guidance as absent', async kind => {
     const fixture = publishedFixture({ content: kind === 'invalid JSON' ? '{broken' : undefined });
     if (kind === 'integrity') fixture.metadata.dist.integrity = 'sha512-mismatched';
@@ -155,9 +155,80 @@ it.each(['transport', 'registry HTTP', 'tarball HTTP', 'integrity', 'invalid JSO
       fixture.archive = Buffer.from('not a tar archive');
       fixture.metadata.dist.integrity = `sha512-${createHash('sha512').update(fixture.archive).digest('base64')}`;
     }
-    mockRegistry(fixture, { offline: kind === 'transport', metadataStatus: kind === 'registry HTTP' ? 503 : 200,
+    mockRegistry(fixture, { offline: kind === 'transport', metadataStatus: kind === 'registry HTTP' ? 503 : kind === 'registry 404' ? 404 : 200,
       tarballStatus: kind === 'tarball HTTP' ? 404 : 200 });
     try { await expect(transfer.fromPublishedPackages()).rejects.toThrow(/published.*guidance/i); }
     finally { vi.unstubAllGlobals(); }
   },
 );
+
+
+it.each(['generation', 'publication'])('propagates earlier-head artifact failures during %s', mode => {
+  expect(() => restoreActionGuidance('dialpad/dialtone', {
+    [mode]: true, toolingRef, sourceHead: 'd'.repeat(40), currentRun: '99',
+    request: () => ({ total_count: 1, workflow_runs: [oldRun(12)] }),
+    readArtifact: () => { throw new Error('Artifact transport failed'); },
+  })).toThrow('Artifact transport failed');
+});
+
+it.each([['null', null], ['primitive', false], ['array', []]])('rejects malformed Actions artifact JSON: %s', (_, artifact) => {
+  expect(() => restoreActionGuidance('dialpad/dialtone', { generation: true,
+    toolingRef, sourceHead: 'd'.repeat(40), currentRun: '99',
+    request: () => ({ total_count: 1, workflow_runs: [oldRun(12)] }),
+    readArtifact: () => artifact,
+  })).toThrow('Invalid guidance artifact');
+});
+
+it.each([['unreadable', 1], ['genuinely absent', 0]])('publication CLI handles %s Actions artifacts without masking errors', (state, expectedStatus) => {
+  const directory = realpathSync(mkdtempSync(join(tmpdir(), 'guidance-publication-')));
+  try {
+    const docs = join(directory, 'packages/dialtone-docs');
+    mkdirSync(join(docs, 'scripts'), { recursive: true });
+    mkdirSync(join(docs, 'dist'), { recursive: true });
+    mkdirSync(join(docs, '.generated/example-guidance'), { recursive: true });
+    mkdirSync(join(directory, 'bin'));
+    const manifest = createGuidanceManifest([{ id: 'examples/test',
+      sources: [{ id: 'documentation', text: 'Prevent disabled actions.' }], dependencies: [],
+    }], { model: GUIDANCE_MODEL, toolingHash: 'a'.repeat(64), driverHash: 'b'.repeat(64) });
+    const input = manifest.entries[0];
+    const fixture = publishedFixture({ content: JSON.stringify({ schemaVersion: 1, entries: [{
+      id: input.id, inputHash: input.inputHash, status: 'completed-empty', notes: [],
+    }] }) });
+    writeFileSync(join(docs, 'dist/example-guidance-inputs.json'), JSON.stringify(manifest));
+    const reviewed = join(docs, '.generated/example-guidance/reviewed.json');
+    writeFileSync(reviewed, '{"preserve":"reviewed bytes"}');
+    const script = readFileSync(new URL('../scripts/restore-example-guidance.mjs', import.meta.url), 'utf8')
+      .replace('\'../src/generators/example-guidance.mjs\'',
+        JSON.stringify(new URL('../src/generators/example-guidance.mjs', import.meta.url).href));
+    const scriptPath = join(docs, 'scripts/restore-example-guidance.mjs');
+    writeFileSync(scriptPath, script);
+    const preload = join(directory, 'registry.mjs');
+    writeFileSync(preload, `const metadata = ${JSON.stringify(fixture.metadata)};
+const archive = Buffer.from(${JSON.stringify(fixture.archive.toString('base64'))}, 'base64');
+globalThis.fetch = async url => {
+  const response = new Response(url.endsWith('/latest') ? JSON.stringify(metadata) : archive);
+  Object.defineProperty(response, 'url', { value: url });
+  return response;
+};`);
+    writeFileSync(join(directory, 'bin/gh'), `#!${process.execPath}
+const endpoint = process.argv[3];
+if (endpoint.includes('/actions/workflows/')) {
+  console.log(${JSON.stringify(JSON.stringify({ total_count: 1, workflow_runs: [oldRun(12)] }))});
+} else if (${JSON.stringify(state)} === 'unreadable') {
+  console.error('Simulated Actions read failure'); process.exitCode = 1;
+} else { console.log('{"total_count":0,"artifacts":[]}'); }
+`, { mode: 0o700 });
+    const env = { ...process.env, PATH: `${join(directory, 'bin')}:${process.env.PATH}`,
+      GUIDANCE_TOOLING_REF: toolingRef, GUIDANCE_BUDGET_USD: '1', GITHUB_REPOSITORY: 'dialpad/dialtone' };
+    for (const key of ['ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'GH_TOKEN', 'GITHUB_TOKEN']) delete env[key];
+    const result = spawnSync(process.execPath, ['--import', preload, scriptPath, '--publication'],
+      { cwd: directory, env, encoding: 'utf8' });
+    expect(result.status).toBe(expectedStatus);
+    if (expectedStatus) {
+      expect(result.stderr).toContain('Simulated Actions read failure');
+      expect(readFileSync(reviewed, 'utf8')).toBe('{"preserve":"reviewed bytes"}');
+    } else {
+      expect(JSON.parse(readFileSync(reviewed, 'utf8')).entries[0].inputHash).toBe(input.inputHash);
+    }
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+});

@@ -57,6 +57,7 @@ describe('generated example guidance', () => {
   it.each([
     ['bidi formatting', '\u202e'], ['zero-width formatting', '\u200b'],
     ['line separators', '\u2028'], ['paragraph separators', '\u2029'], ['control characters', '\u007f'],
+    ['variation selectors', '\ufe0f'], ['Hangul fillers', '\u3164'],
   ])('rejects %s in guidance', (_, character) => {
     const [input] = manifest([facts]).entries;
     const value = result(input);

@@ -146,7 +146,7 @@ test('guidance summary preserves visible model text without Markdown formatting 
   try {
     writeFileSync(join(directory, 'example-guidance.json'), JSON.stringify({ entries: [{
       id: 'examples/test', status: 'complete', notes: [{
-        text: '[review](https://example.invalid) **approved** <details>hidden</details>\u202e',
+        text: '[review](https://example.invalid) **approved** <details>hidden</details>\u202e\ufe0f\u3164',
       }, { text: '# Reviewed' }],
     }], usage: { requests: 0 } }));
     const command = readWorkflow('example-guidance.yml').jobs.generate.steps.find(step => step.name === 'Summarize reviewable notes and usage').run;
@@ -161,6 +161,35 @@ test('guidance summary preserves visible model text without Markdown formatting 
     assert.ok(!rendered.includes('<strong>'));
     assert.ok(!rendered.includes('<details>'));
     assert.ok(rendered.includes('https://example.invalid'));
-    assert.ok(!output.stdout.includes('\u202e'));
+    for (const character of ['\u202e', '\ufe0f', '\u3164']) assert.ok(!output.stdout.includes(character));
   } finally { rmSync(directory, { recursive: true, force: true }); }
+});
+
+
+test('guidance concurrency and recovery preserve the same spending identity', async () => {
+  const guidance = readWorkflow('example-guidance.yml');
+  const expression = guidance['run-name'].slice('Example guidance '.length);
+  assert.equal(guidance.concurrency.group, `example-guidance-${expression}`);
+  const { trustedGuidanceRun, guidanceSpend, restoreActionGuidance } =
+    await import('../../packages/dialtone-docs/scripts/restore-example-guidance.mjs');
+  const head = 'a'.repeat(40);
+  const run = { id: 12, run_attempt: 1, conclusion: 'success', event: 'push', head_sha: head,
+    path: '.github/workflows/example-guidance.yml',
+    display_title: guidance['run-name'].replace(/\$\{\{[^}]+\}\}/, head),
+    repository: { full_name: 'dialpad/dialtone' }, head_repository: { full_name: 'dialpad/dialtone' } };
+  assert.equal(trustedGuidanceRun(run, { runId: '12', runAttempt: 1, head, toolingRef: head },
+    'dialpad/dialtone', { toolingTrusted: true }), true);
+  assert.equal(guidanceSpend(run, undefined, head), 1);
+  const paid = Object.entries(guidance.jobs).flatMap(([job, config]) => config.steps
+    .filter(step => step.env?.ANTHROPIC_API_KEY).map(step => ({ job, step: step.name })));
+  assert.equal(paid.length, 1);
+  for (const [conclusion, expectedSpend] of [['skipped', 0], ['failure', 1]]) {
+    const restored = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead: head,
+      currentRun: '99', toolingRef: head, readArtifact: () => undefined,
+      request: endpoint => endpoint.includes('/jobs?') ? { total_count: 1, jobs: [{ name: paid[0].job,
+        steps: [{ name: paid[0].step, conclusion, started_at: '2026-11-01T00:00:00Z' }],
+      }] } : { total_count: 1, workflow_runs: [run] },
+    });
+    assert.equal(restored.spentUsd, expectedSpend);
+  }
 });

@@ -30,8 +30,9 @@ export function readGuidanceArchive(archive, member) {
 
 function fromAction(repository, runId, name, member) {
   const matches = allPages(`repos/${repository}/actions/runs/${runId}/artifacts`, 'artifacts').filter(item => item.name === name && !item.expired);
-  const artifact = matches.length === 1 ? matches[0] : undefined;
-  if (!artifact || artifact.size_in_bytes > MAX_ARTIFACT_BYTES) throw new Error('Guidance artifact unavailable or too large');
+  if (matches.length === 0) return undefined;
+  const artifact = matches[0];
+  if (matches.length !== 1 || artifact.size_in_bytes > MAX_ARTIFACT_BYTES) throw new Error('Guidance artifact ambiguous or too large');
   const archive = execFileSync('gh', ['api', `repos/${repository}/actions/artifacts/${artifact.id}/zip`], {
     maxBuffer: MAX_ARTIFACT_BYTES, timeout: 60_000,
   });
@@ -127,6 +128,8 @@ export function restoreActionGuidance(repository, {
       try {
         if (!['success', 'failure', 'cancelled'].includes(run.conclusion)) continue;
         const artifact = readArtifact(repository, run.id, `example-guidance-${run.id}-${attempt}`, 'example-guidance.json');
+        if (artifact === undefined) continue;
+        if (artifact === null || typeof artifact !== 'object' || Array.isArray(artifact)) throw new Error('Invalid guidance artifact');
         const origin = artifact.origin;
         if (!origin || !sha(origin.toolingRef)) continue;
         if (!trustedRefs.has(origin.toolingRef)) {
@@ -140,8 +143,6 @@ export function restoreActionGuidance(repository, {
         })) continue;
         receipt = artifact;
         if (reviewedSource(repository, origin.head, pullRequest, publication, request)) artifacts.push(artifact);
-      } catch {
-        console.warn(`Guidance artifact ${run.id}/${attempt} unavailable; exact archived bytes or a visible refresh may be needed.`);
       } finally {
         if (generation) {
           const charge = guidanceSpend(run, receipt, sourceHead, budgetUsd);
@@ -153,11 +154,10 @@ export function restoreActionGuidance(repository, {
   return { artifacts, spentUsd };
 }
 
-async function bytes(url, maximum, allowMissing = false) {
+async function bytes(url, maximum) {
   if (new URL(url).origin !== 'https://registry.npmjs.org') throw new Error('Unexpected guidance archive host');
   const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
   if (new URL(response.url).origin !== 'https://registry.npmjs.org') throw new Error('Unexpected guidance archive host');
-  if (allowMissing && response.status === 404) return undefined;
   if (!response.ok) throw new Error('Guidance archive unavailable');
   const chunks = [];
   let size = 0;
@@ -175,12 +175,7 @@ export async function fromPublishedPackages() {
   for (const name of ['dialtone-cli', 'dialtone-mcp-server']) {
     const directory = mkdtempSync(resolve(tmpdir(), 'dialtone-guidance-published-'));
     try {
-      const published = await bytes(`https://registry.npmjs.org/@dialpad%2f${name}/latest`, 1_000_000, true);
-      if (!published) {
-        console.info(`No published ${name} package yet; no guidance archive to restore.`);
-        continue;
-      }
-      const metadata = JSON.parse(published);
+      const metadata = JSON.parse(await bytes(`https://registry.npmjs.org/@dialpad%2f${name}/latest`, 1_000_000));
       const archive = await bytes(metadata.dist.tarball, 20_000_000);
       const integrity = `sha512-${createHash('sha512').update(archive).digest('base64')}`;
       if (integrity !== metadata.dist.integrity) throw new Error('Guidance package integrity mismatch');
@@ -215,7 +210,9 @@ async function main() {
     if (!Number.isSafeInteger(runId) || runId <= 0) throw new Error('Invalid source run');
     const attempt = Number(process.argv[5]);
     if (process.argv[4] !== '--source-attempt' || !Number.isSafeInteger(attempt) || attempt <= 0) throw new Error('Invalid source attempt');
-    const manifest = assertGuidanceManifest(fromAction(repository, runId, `example-guidance-inputs-${attempt}`, 'example-guidance-inputs.json'));
+    const source = fromAction(repository, runId, `example-guidance-inputs-${attempt}`, 'example-guidance-inputs.json');
+    if (!source) throw new Error('Source guidance manifest artifact not found');
+    const manifest = assertGuidanceManifest(source);
     mkdirSync(dirname(manifestPath), { recursive: true });
     writeFileSync(manifestPath, JSON.stringify(manifest) + '\n');
     return;
@@ -225,15 +222,9 @@ async function main() {
     throw new Error('Guidance policy implementation mismatch; use matching approved tooling');
   }
   const artifacts = await fromPublishedPackages();
-  let spentUsd = 0;
-  try {
-    const restored = restoreActionGuidance(repository, { pullRequest, publication, generation });
-    artifacts.push(...restored.artifacts);
-    spentUsd = restored.spentUsd;
-  } catch {
-    if (generation) throw new Error('Cannot verify previous model spending; generation is stopped');
-    console.warn('Guidance Actions lookup unavailable; publication still requires exact matching archived results.');
-  }
+  const restored = restoreActionGuidance(repository, { pullRequest, publication, generation });
+  artifacts.push(...restored.artifacts);
+  const spentUsd = restored.spentUsd;
   const selected = selectGuidance(manifest, artifacts);
   const directory = resolve(root, 'packages/dialtone-docs/.generated/example-guidance');
   mkdirSync(directory, { recursive: true });

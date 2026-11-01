@@ -91,7 +91,7 @@ export function validateGuidanceResult(input, result) {
   let characters = 0;
   for (const note of result.notes) {
     fields(note, ['text', 'references']);
-    if (typeof note.text !== 'string' || !note.text.trim() || note.text !== note.text.trim() || /[\p{Cc}\p{Cf}\p{Zl}\p{Zp}]/u.test(note.text)) throw new Error('Guidance must be single-line plain text');
+    if (typeof note.text !== 'string' || !note.text.trim() || note.text !== note.text.trim() || /[\p{Cc}\p{Cf}\p{Zl}\p{Zp}\p{Default_Ignorable_Code_Point}]/u.test(note.text)) throw new Error('Guidance must be single-line plain text');
     characters += [...note.text].length;
     if (!Array.isArray(note.references) || !note.references.length || note.references.length > 2) throw new Error('Guidance needs source references');
     for (const reference of note.references) {
