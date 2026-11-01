@@ -97,6 +97,11 @@ jobs:
                   process.env.SOURCE_HEAD !== head) throw new Error('Source head mismatch');
             }
             if (!/^[a-f0-9]{40}$/.test(head)) throw new Error('Invalid source head');
+            if (bootstrap && process.env.BOOTSTRAP_HEAD !== head) {
+              core.setOutput('enabled', 'false');
+              core.notice('Push bootstrap head is not separately authorized; no inference permitted.');
+              return;
+            }
             const {data: prs} = await github.rest.repos.listPullRequestsAssociatedWithCommit({...context.repo, commit_sha: head});
             const pr = prs.find(pr => pr.state === 'open' && pr.base.repo.full_name === process.env.GITHUB_REPOSITORY);
             if (!pr || pr.head.sha !== head) {

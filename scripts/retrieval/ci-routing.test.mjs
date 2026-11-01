@@ -55,6 +55,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'packages/eslint-plugin-dialtone/lib/rules/deprecated-class-props.js',
     'scripts/retrieval/cases.mjs',
     '.github/workflows/unit_tests.yml',
+    '.github/workflows/example-guidance.yml',
     '.github/workflows/dialtone-documentation-tests.yml',
   ];
   assertRouted('lookup', paths, [
@@ -99,7 +100,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
 });
 
 
-async function resolveGuidanceSource(eventName = 'workflow_run', sourceHead) {
+async function resolveGuidanceSource(eventName = 'workflow_run', sourceHead, bootstrapHead) {
   const guidance = readWorkflow('example-guidance.yml');
   const script = guidance.jobs.generate.steps.find(step => step.id === 'source').with.script;
   const head = 'a'.repeat(40);
@@ -119,9 +120,9 @@ async function resolveGuidanceSource(eventName = 'workflow_run', sourceHead) {
   ] };
   const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
   await new AsyncFunction('github', 'context', 'core', 'process', script)(github,
-    { eventName, sha: 'd'.repeat(40), payload: eventName === 'workflow_run' ? { workflow_run: { id: 12 } } : {}, repo: { owner: 'dialpad', repo: 'dialtone' } },
+    { eventName, runId: 12, sha: eventName === 'push' ? head : 'd'.repeat(40), payload: eventName === 'workflow_run' ? { workflow_run: { id: 12 } } : {}, repo: { owner: 'dialpad', repo: 'dialtone' } },
     { setOutput: (key, value) => outputs.set(key, value), notice: () => {} },
-    { env: { TOOLING_REF: head, SOURCE_RUN: '12', SOURCE_HEAD: sourceHead, GITHUB_REPOSITORY: 'dialpad/dialtone' } });
+    { env: { TOOLING_REF: head, SOURCE_RUN: '12', SOURCE_HEAD: sourceHead, BOOTSTRAP_HEAD: bootstrapHead, CURRENT_ATTEMPT: '2', GITHUB_REPOSITORY: 'dialpad/dialtone' } });
   return outputs;
 }
 
@@ -139,6 +140,16 @@ test('manual guidance dispatch requires the exact source head used for its spend
   const outputs = await resolveGuidanceSource('workflow_dispatch', 'a'.repeat(40));
   assert.equal(outputs.get('enabled'), 'true');
   assert.equal(outputs.get('head'), 'a'.repeat(40));
+});
+
+test('push guidance requires its separately authorized bootstrap head', async () => {
+  for (const bootstrapHead of [undefined, '', 'b'.repeat(40)]) {
+    const outputs = await resolveGuidanceSource('push', undefined, bootstrapHead);
+    assert.equal(outputs.get('enabled'), 'false');
+  }
+  const outputs = await resolveGuidanceSource('push', undefined, 'a'.repeat(40));
+  assert.equal(outputs.get('enabled'), 'true');
+  assert.equal(outputs.get('budget'), '15');
 });
 
 test('guidance summary preserves visible model text without Markdown formatting or hidden controls', () => {
