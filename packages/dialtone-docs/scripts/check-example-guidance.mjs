@@ -12,7 +12,7 @@ const json = name => JSON.parse(readFileSync(resolve(docs, name), 'utf8'));
 export function assertGuidanceBuild(manifest, guidance, records) {
   if (guidance.manifestHash !== manifest.hash) throw new Error('Guidance manifest is stale');
   const selected = selectGuidance(manifest, [guidance], { strict: true });
-  for (const key of ['model', 'policyHash', 'toolingHash']) {
+  for (const key of ['model', 'policyHash', 'toolingHash', 'driverHash']) {
     if (guidance[key] !== manifest[key]) throw new Error(`Guidance ${key} provenance mismatch`);
   }
   if (selected.digest !== guidance.digest) throw new Error('Guidance digest does not match selected bytes');

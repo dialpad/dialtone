@@ -1,9 +1,25 @@
 import { expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { generateGuidance } from '../scripts/generate-example-guidance.mjs';
-import { createGuidanceManifest } from '../src/generators/example-guidance.mjs';
+import { createGuidanceManifest, guidanceHash } from '../src/generators/example-guidance.mjs';
 
-const manifest = () => createGuidanceManifest([{ id: 'examples/test', sources: [{ id: 'documentation', text: 'Disabled styling does not prevent actions.' }], dependencies: [] }], { model: 'claude-sonnet-5-5', toolingHash: 'a'.repeat(64) });
+const driverHash = guidanceHash(readFileSync(new URL('../scripts/generate-example-guidance.mjs', import.meta.url), 'utf8'));
+const manifest = () => createGuidanceManifest([{ id: 'examples/test', sources: [{ id: 'documentation', text: 'Disabled styling does not prevent actions.' }], dependencies: [] }], { model: 'claude-sonnet-5-5', toolingHash: 'a'.repeat(64), driverHash });
 const answer = () => ({ notes: [{ text: 'Prevent disabled actions in the application.', references: [{ source: 'documentation', quote: 'does not prevent actions' }] }] });
+
+it.each([false, true])('rejects a different executed driver before generation or reuse (cached: %s)', async cached => {
+  const original = manifest();
+  const facts = original.entries.map(({ id, sources, dependencies }) => ({ id, sources, dependencies }));
+  const data = createGuidanceManifest(facts, { ...original, driverHash: 'b'.repeat(64) });
+  const artifacts = cached ? [{ schemaVersion: 1, entries: [{ ...data.entries[0], notes: [], status: 'completed-empty' }] }] : [];
+  let calls = 0;
+  await expect(generateGuidance(data, { artifacts, apiKey: 'test-only', limit: 1, budgetUsd: 1,
+    request: async () => {
+      calls++;
+      return { ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
+    } })).rejects.toThrow(/driver.*mismatch/i);
+  expect(calls).toBe(0);
+});
 
 it('uses a bounded tool-less request and preserves a cache hit without another model call', async () => {
   const data = manifest();

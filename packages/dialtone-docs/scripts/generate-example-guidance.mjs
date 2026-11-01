@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createGuidanceManifest, GUIDANCE_PROMPT, GUIDANCE_SCHEMA, guidanceHash, selectGuidance, validateGuidanceResult } from '../src/generators/example-guidance.mjs';
 
 const MODEL = 'claude-sonnet-5-5';
+const DRIVER_HASH = guidanceHash(readFileSync(fileURLToPath(import.meta.url), 'utf8'));
 const MAX_OUTPUT = 1536;
 const MAX_INPUT_BYTES = 100_000;
 const usd = (input, output) => (input * 2 + output * 10) / 1_000_000;
@@ -67,6 +68,7 @@ async function attempt(input, options, usage, correction) {
 export async function generateGuidance(manifest, {
   apiKey, artifacts = [], request = fetch, limit = 3, budgetUsd = 1, spentUsd = 0, origin, onProgress,
 } = {}) {
+  if (manifest.driverHash !== DRIVER_HASH) throw new Error('Guidance provider driver mismatch; approve matching pinned tooling before generation or reuse');
   const rebuilt = createGuidanceManifest(manifest.entries.map(factsFor), manifest);
   if (guidanceHash(rebuilt) !== guidanceHash(manifest) || manifest.model !== MODEL) throw new Error('Unapproved model or invalid guidance manifest');
   if (!Number.isInteger(limit) || limit < 0 || limit > 500 || !Number.isFinite(budgetUsd) || budgetUsd < 0
@@ -76,7 +78,8 @@ export async function generateGuidance(manifest, {
   const usage = { requests: 0, inputTokens: 0, outputTokens: 0, estimatedUsd: 0, reservedUsd: 0 };
   const snapshot = () => ({
     schemaVersion: 1, model: MODEL, manifestHash: manifest.hash, policyHash: manifest.policyHash,
-    toolingHash: manifest.toolingHash, entries: [...entries], usage: { ...usage }, ...(origin ? { origin } : {}) });
+    toolingHash: manifest.toolingHash, driverHash: DRIVER_HASH,
+    entries: [...entries], usage: { ...usage }, ...(origin ? { origin } : {}) });
   const checkpoint = () => onProgress?.(snapshot());
   const options = { apiKey, request, limit, budgetUsd, spentUsd, origin, checkpoint };
   checkpoint();

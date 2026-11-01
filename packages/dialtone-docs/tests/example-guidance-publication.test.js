@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { assertGuidanceBuild } from '../scripts/check-example-guidance.mjs';
 import { createGuidanceManifest, selectGuidance } from '../src/generators/example-guidance.mjs';
 
-const manifest = () => createGuidanceManifest([{ id: 'examples/test', sources: [{ id: 'source', text: 'Disabled styling does not prevent events.' }], dependencies: [] }], { model: 'test-model', toolingHash: 'a'.repeat(64) });
+const manifest = () => createGuidanceManifest([{ id: 'examples/test', sources: [{ id: 'source', text: 'Disabled styling does not prevent events.' }], dependencies: [] }], { model: 'test-model', toolingHash: 'a'.repeat(64), driverHash: 'd'.repeat(64) });
 function complete(data) {
   const input = data.entries[0];
   const notes = [{ text: 'Prevent disabled events in application code.', references: [{ source: 'source', quote: 'does not prevent events' }] }];
@@ -21,5 +21,6 @@ it('requires the selected bytes to match both current inputs and served prose', 
   expect(() => assertGuidanceBuild(data, guidance, records)).not.toThrow();
   expect(() => assertGuidanceBuild(data, { ...guidance, manifestHash: 'stale' }, records)).toThrow();
   expect(() => assertGuidanceBuild(data, { ...guidance, digest: 'corrupt' }, records)).toThrow();
+  expect(() => assertGuidanceBuild(data, { ...guidance, driverHash: 'e'.repeat(64) }, records)).toThrow(/driverHash/);
   expect(() => assertGuidanceBuild(data, guidance, [{ id: 'examples/test', content: 'Note omitted' }])).toThrow();
 });

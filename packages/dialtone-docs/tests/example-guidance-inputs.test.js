@@ -16,7 +16,7 @@ it('follows component source imports and fingerprints changed helpers without re
     writeFileSync(helper, 'export default false;');
     const input = { id: 'examples/button-default', template: '<dt-button>Save</dt-button>', setup: '', components: ['DtButton'], directives: [], filePath: 'docs/button.md', headingPath: ['Default'], rawFile: '# Button\nUse a meaningful button label.' };
     const metadata = [{ displayName: 'DtButton', props: [], sourceFiles: [resolve(root, 'packages/dialtone-vue/Button.vue')], identity: { package: { version: '4.5.0' } } }];
-    const config = { model: 'test-model', toolingHash: 'a'.repeat(64) };
+    const config = { model: 'test-model', toolingHash: 'a'.repeat(64), driverHash: 'd'.repeat(64) };
     const facts = () => prepareGuidanceFacts(input, { root, metadata });
     const before = createGuidanceManifest([facts()], config).entries[0].inputHash;
     expect(facts().dependencies.some(x => x.path.endsWith('helper.js'))).toBe(true);

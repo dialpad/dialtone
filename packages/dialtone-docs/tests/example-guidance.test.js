@@ -4,7 +4,7 @@ import { applyGuidance, createGuidanceManifest, selectGuidance, validateGuidance
 import { buildRecords } from '../src/generators/build-public-docs.mjs';
 import { fileURLToPath } from 'node:url';
 
-const config = { model: 'test-model', toolingHash: 'a'.repeat(64) };
+const config = { model: 'test-model', toolingHash: 'a'.repeat(64), driverHash: 'd'.repeat(64) };
 const facts = { id: 'examples/docs/components/button/default', sources: [
   { id: 'example', text: '<dt-button aria-disabled="true">Call</dt-button>' },
   { id: 'documentation', text: 'Disabled styling does not suppress application handlers.' },
@@ -20,7 +20,7 @@ function artifact(input, notes) {
 describe('generated example guidance', () => {
   it('adds guidance to retrieval prose without changing consumer proof or source records', () => {
     const records = buildRecords(fileURLToPath(new URL('../../../apps/dialtone-documentation/docs/components/button.md', import.meta.url))).filter(record => record.example);
-    const data = createGuidanceManifest([{ id: records[0].id, sources: [{ id: 'example', text: '<dt-button>Save</dt-button>' }], dependencies: [] }], { model: 'test-model', toolingHash: 'a'.repeat(64) });
+    const data = createGuidanceManifest([{ id: records[0].id, sources: [{ id: 'example', text: '<dt-button>Save</dt-button>' }], dependencies: [] }], config);
     const input = data.entries[0];
     const notes = [{ text: 'Use a literal $& action label.', references: [{ source: 'example', quote: 'Save' }] }];
     const selection = selectGuidance(data, [{ schemaVersion: 1, entries: [{ id: input.id, inputHash: input.inputHash, notes, status: 'complete' }] }]);
@@ -31,7 +31,7 @@ describe('generated example guidance', () => {
     expect(enriched.content).not.toContain(input.inputHash);
   });
 
-  it('reuses equivalent facts but invalidates changed source or model', () => {
+  it('reuses equivalent facts but invalidates changed source, model or provider driver', () => {
     const [input] = manifest([facts]).entries;
     const reordered = { dependencies: facts.dependencies, sources: facts.sources, id: facts.id };
     expect(manifest([reordered]).entries[0].inputHash).toBe(input.inputHash);
@@ -39,6 +39,8 @@ describe('generated example guidance', () => {
       { ...facts, sources: [{ id: 'example', text: 'Changed example' }] },
     ]) expect(manifest([changed]).entries[0].inputHash).not.toBe(input.inputHash);
     expect(createGuidanceManifest([facts], { ...config, model: 'another-model' }).entries[0].inputHash).not.toBe(input.inputHash);
+    const changedDriver = createGuidanceManifest([facts], { ...config, driverHash: 'e'.repeat(64) });
+    expect(selectGuidance(changedDriver, [artifact(input)]).entries[0].status).toBe('pending');
   });
 
   it.each([

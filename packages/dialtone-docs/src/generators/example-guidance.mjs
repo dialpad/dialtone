@@ -41,8 +41,8 @@ function fields(value, expected) {
   }
 }
 
-export function createGuidanceManifest(facts, { model, toolingHash }) {
-  if (typeof model !== 'string' || !model || !/^[a-f0-9]{64}$/.test(toolingHash)) throw new Error('Guidance requires an explicit model and tooling hash');
+export function createGuidanceManifest(facts, { model, toolingHash, driverHash }) {
+  if (typeof model !== 'string' || !model || ![toolingHash, driverHash].every(hash => /^[a-f0-9]{64}$/.test(hash))) throw new Error('Guidance requires an explicit model, tooling hash and driver hash');
   const entries = facts.map(input => {
     fields(input, ['id', 'sources', 'dependencies']);
     if (typeof input.id !== 'string' || !input.id.startsWith('examples/') || !Array.isArray(input.sources) || !input.sources.length
@@ -57,11 +57,11 @@ export function createGuidanceManifest(facts, { model, toolingHash }) {
       fields(dependency, ['path', 'hash']);
       if (typeof dependency.path !== 'string' || !dependency.path || !/^[a-f0-9]{64}$/.test(dependency.hash)) throw new Error('Invalid guidance dependency');
     }
-    const inputHash = guidanceHash({ ...input, model, toolingHash, policyHash: GUIDANCE_POLICY_HASH });
+    const inputHash = guidanceHash({ ...input, model, toolingHash, driverHash, policyHash: GUIDANCE_POLICY_HASH });
     return { ...input, inputHash };
   }).sort((a, b) => a.id.localeCompare(b.id));
   if (new Set(entries.map(entry => entry.id)).size !== entries.length) throw new Error('Duplicate guidance input ID');
-  const header = { schemaVersion: 1, model, toolingHash, policyHash: GUIDANCE_POLICY_HASH };
+  const header = { schemaVersion: 1, model, toolingHash, driverHash, policyHash: GUIDANCE_POLICY_HASH };
   return { ...header, hash: guidanceHash({ ...header, entries }), entries };
 }
 
@@ -109,7 +109,8 @@ export function selectGuidance(manifest, artifacts = [], { strict = false } = {}
     throw new Error(`Matching successful guidance required for ${entries.filter(entry => !['complete', 'completed-empty'].includes(entry.status)).length} examples`);
   }
   return { schemaVersion: 1, manifestHash: manifest.hash,
-    model: manifest.model, policyHash: manifest.policyHash, toolingHash: manifest.toolingHash, entries,
+    model: manifest.model, policyHash: manifest.policyHash, toolingHash: manifest.toolingHash,
+    driverHash: manifest.driverHash, entries,
     digest: guidanceHash(entries), summary: Object.fromEntries(['pending', 'error', 'completed-empty', 'complete']
       .map(status => [status, entries.filter(entry => entry.status === status).length])) };
 }
