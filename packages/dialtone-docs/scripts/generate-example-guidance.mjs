@@ -19,7 +19,8 @@ async function attempt(input, options, usage, correction) {
   const body = {
     model: GUIDANCE_MODEL, max_tokens: MAX_OUTPUT, system: GUIDANCE_PROMPT,
     messages: [{ role: 'user', content: JSON.stringify({ id: input.id, sources: input.sources, correction }) }],
-    output_config: { format: { type: 'json_schema', schema: GUIDANCE_SCHEMA } },
+    thinking: { type: 'adaptive' },
+    output_config: { effort: 'high', format: { type: 'json_schema', schema: GUIDANCE_SCHEMA } },
   };
   const json = JSON.stringify(body);
   const bytes = Buffer.byteLength(json);

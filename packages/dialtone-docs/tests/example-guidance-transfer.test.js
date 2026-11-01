@@ -1,10 +1,10 @@
 import { expect, it, vi } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, realpathSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, realpathSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { createGuidanceManifest, GUIDANCE_MODEL } from '../src/generators/example-guidance.mjs';
+import { createGuidanceManifest, GUIDANCE_MODEL, guidanceHash } from '../src/generators/example-guidance.mjs';
 import * as transfer from '../scripts/restore-example-guidance.mjs';
 import { trustedGuidanceRun, readGuidanceArchive, restoreActionGuidance } from '../scripts/restore-example-guidance.mjs';
 
@@ -211,7 +211,11 @@ it.each([['null', null], ['primitive', false], ['array', []]])('rejects malforme
   })).toThrow('Invalid guidance artifact');
 });
 
-it.each([['unreadable', 1], ['genuinely absent', 0]])('publication CLI handles %s Actions artifacts without masking errors', (state, expectedStatus) => {
+it.each([
+  ['unreadable', 1, 'Simulated Actions read failure'],
+  ['genuinely absent', 0],
+  ['mismatched driver', 1, 'Guidance provider driver mismatch'],
+])('publication CLI handles %s before replacing reviewed results', (state, expectedStatus, expectedError) => {
   const directory = realpathSync(mkdtempSync(join(tmpdir(), 'guidance-publication-')));
   try {
     const docs = join(directory, 'packages/dialtone-docs');
@@ -219,9 +223,12 @@ it.each([['unreadable', 1], ['genuinely absent', 0]])('publication CLI handles %
     mkdirSync(join(docs, 'dist'), { recursive: true });
     mkdirSync(join(docs, '.generated/example-guidance'), { recursive: true });
     mkdirSync(join(directory, 'bin'));
+    const driver = readFileSync(new URL('../scripts/generate-example-guidance.mjs', import.meta.url), 'utf8');
+    writeFileSync(join(docs, 'scripts/generate-example-guidance.mjs'), driver);
     const manifest = createGuidanceManifest([{ id: 'examples/test',
       sources: [{ id: 'documentation', text: 'Prevent disabled actions.' }], dependencies: [],
-    }], { model: GUIDANCE_MODEL, toolingHash: 'a'.repeat(64), driverHash: 'b'.repeat(64) });
+    }], { model: GUIDANCE_MODEL, toolingHash: 'a'.repeat(64),
+      driverHash: state === 'mismatched driver' ? 'b'.repeat(64) : guidanceHash(driver) });
     const input = manifest.entries[0];
     const fixture = publishedFixture({ content: JSON.stringify({ schemaVersion: 1, entries: [{
       id: input.id, inputHash: input.inputHash, status: 'completed-empty', notes: [],
@@ -235,9 +242,12 @@ it.each([['unreadable', 1], ['genuinely absent', 0]])('publication CLI handles %
     const scriptPath = join(docs, 'scripts/restore-example-guidance.mjs');
     writeFileSync(scriptPath, script);
     const preload = join(directory, 'registry.mjs');
-    writeFileSync(preload, `const metadata = ${JSON.stringify(fixture.metadata)};
+    const registryRead = join(directory, 'registry-read');
+    writeFileSync(preload, `import { writeFileSync } from 'node:fs';
+const metadata = ${JSON.stringify(fixture.metadata)};
 const archive = Buffer.from(${JSON.stringify(fixture.archive.toString('base64'))}, 'base64');
 globalThis.fetch = async url => {
+  writeFileSync(${JSON.stringify(registryRead)}, 'called');
   const response = new Response(url.endsWith('/latest') ? JSON.stringify(metadata) : archive);
   Object.defineProperty(response, 'url', { value: url });
   return response;
@@ -257,7 +267,8 @@ if (endpoint.includes('/actions/workflows/')) {
       { cwd: directory, env, encoding: 'utf8' });
     expect(result.status).toBe(expectedStatus);
     if (expectedStatus) {
-      expect(result.stderr).toContain('Simulated Actions read failure');
+      expect(result.stderr).toContain(expectedError);
+      if (state === 'mismatched driver') expect(existsSync(registryRead)).toBe(false);
       expect(readFileSync(reviewed, 'utf8')).toBe('{"preserve":"reviewed bytes"}');
     } else {
       expect(JSON.parse(readFileSync(reviewed, 'utf8')).entries[0].inputHash).toBe(input.inputHash);

@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from 'nod
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { selectGuidance, assertGuidanceManifest, GUIDANCE_POLICY_HASH, GUIDANCE_MONTHLY_BUDGET_USD, guidanceMonth } from '../src/generators/example-guidance.mjs';
+import { selectGuidance, assertGuidanceManifest, guidanceHash, GUIDANCE_POLICY_HASH, GUIDANCE_MONTHLY_BUDGET_USD, guidanceMonth } from '../src/generators/example-guidance.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
@@ -236,6 +236,8 @@ async function main() {
   if (manifest.policyHash !== GUIDANCE_POLICY_HASH) {
     throw new Error('Guidance policy implementation mismatch; use matching approved tooling');
   }
+  const driverHash = guidanceHash(readFileSync(new URL('./generate-example-guidance.mjs', import.meta.url), 'utf8'));
+  if (manifest.driverHash !== driverHash) throw new Error('Guidance provider driver mismatch; use matching approved tooling');
   const artifacts = await fromPublishedPackages();
   const restored = restoreActionGuidance(repository, { pullRequest, publication, generation });
   artifacts.push(...restored.artifacts);

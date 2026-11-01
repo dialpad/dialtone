@@ -51,6 +51,8 @@ it('uses a bounded tool-less request and preserves a cache hit without another m
     const body = JSON.parse(options.body);
     expect(body.tools).toBeUndefined();
     expect(body.max_tokens).toBe(1536);
+    expect(body.thinking).toEqual({ type: 'adaptive' });
+    expect(body.output_config.effort).toBe('high');
     expect(body.model).toBe(data.model);
     return { ok: true, json: async () => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
   };
