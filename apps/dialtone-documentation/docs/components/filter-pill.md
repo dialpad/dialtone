@@ -86,7 +86,7 @@ combinator: DtFilterPill
 - Don't use as a general-purpose action button — filter pills are for narrowing data, not triggering commands.
 - Don't use for binary on/off settings — use a [Toggle](toggle.md).
 - Don't omit `label` and the `default` slot — the pill must always have visible text identifying the filter category.
-- Don't replace the array with `map` when toggling active state — mutate objects in-place with `forEach` to keep the pill's internal copy in sync.
+- Don't replace the array with `map` when toggling active state — mutate objects in-place with `forEach` to keep the pill's internal reference in sync.
 </template>
 
 </dialtone-usage>

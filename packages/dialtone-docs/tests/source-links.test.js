@@ -23,6 +23,8 @@ describe('authored context links', () => {
     ['/components/presence.md', `${origin}/components/presence.html`, 'components/presence'],
     ['./presence.md?view=compact#status', `${origin}/components/presence.html?view=compact#status`, 'components/presence'],
     ['../utilities/', `${origin}/utilities/`, 'utilities/index'],
+    ['/utilities/index.html', `${origin}/utilities/`, 'utilities/index'],
+    ['../utilities/index.html#1-links', `${origin}/utilities/#_1-links`, 'utilities/index'],
     ['/components/mode-island.html#positioned-components', `${origin}/components/mode-island.html#positioned-components`, 'components/mode-island'],
     [`${origin}/components/presence.html`, `${origin}/components/presence.html`, 'components/presence'],
     ['#usage', `${origin}/components/example.html#usage`, 'components/example'],

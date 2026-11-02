@@ -1,5 +1,10 @@
 import MarkdownIt from 'markdown-it';
 import { posix } from 'node:path';
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
+
+const appRequire = createRequire(new URL('../../../../apps/dialtone-documentation/package.json', import.meta.url));
+const { inferRoutePath } = await import(pathToFileURL(appRequire.resolve('vuepress/shared')));
 
 const markdown = new MarkdownIt({ html: true });
 
@@ -32,7 +37,7 @@ function resolveLink(href, page, pageMap) {
   const sourcePath = posix.normalize(rooted ? path.slice(1) : posix.join(posix.dirname(page.sourcePath), path));
   const candidates = path.endsWith('.md')
     ? pageMap.bySource.get(sourcePath)
-    : pageMap.byRoute.get(`/${sourcePath}`);
+    : pageMap.byRoute.get(path.endsWith('.html') ? inferRoutePath(`/${sourcePath}`) : `/${sourcePath}`);
   if (candidates?.length !== 1) return unresolved;
   const target = candidates[0];
   const qualifiedSuffix = /(?:\/|\.md|\.html)$/.test(rawPath) ? suffix.replace(/^#(\d)/, '#_$1') : suffix;
