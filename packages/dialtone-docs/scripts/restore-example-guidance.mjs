@@ -106,9 +106,13 @@ export function restoreActionGuidance(repository, {
   pullRequest = 0, publication = false, generation = false,
   sourceHead = process.env.GUIDANCE_SOURCE_HEAD, currentRun = process.env.GITHUB_RUN_ID,
   currentAttempt = Number(process.env.GITHUB_RUN_ATTEMPT ?? 1), toolingRef = process.env.GUIDANCE_TOOLING_REF,
+  spendingToolingRefs = JSON.parse(process.env.GUIDANCE_SPENDING_TOOLING_REFS || '[]'),
   budgetUsd = Number(process.env.GUIDANCE_BUDGET_USD ?? 1), request = api, readArtifact = fromAction, now = Date.now(),
 } = {}) {
-  if (!sha(toolingRef) || ![1, 15].includes(budgetUsd)) throw new Error('Invalid approved guidance configuration');
+  if (!sha(toolingRef) || ![1, 15].includes(budgetUsd)
+    || !Array.isArray(spendingToolingRefs) || !spendingToolingRefs.every(sha)) {
+    throw new Error('Invalid approved guidance configuration');
+  }
   const runs = allPages(`repos/${repository}/actions/workflows/example-guidance.yml/runs`, 'workflow_runs', request);
   const artifacts = [];
   const trustedRefs = new Map();
@@ -144,13 +148,17 @@ export function restoreActionGuidance(repository, {
           trustedRefs.set(origin.toolingRef, origin.toolingRef === toolingRef
             || reviewedSource(repository, origin.toolingRef, 0, true, request));
         }
+        const noteToolingTrusted = trustedRefs.get(origin.toolingRef);
+        const billingToolingTrusted = generation && spendingToolingRefs.includes(origin.toolingRef);
         const workflowTrusted = run.head_sha === origin.toolingRef
           || (sha(blob(run.head_sha)) && blob(run.head_sha) === blob(origin.toolingRef));
         if (!trustedGuidanceRun(run, origin, repository, {
-          allowFailed: generation, toolingTrusted: trustedRefs.get(origin.toolingRef), workflowTrusted,
+          allowFailed: generation, toolingTrusted: noteToolingTrusted || billingToolingTrusted, workflowTrusted,
         })) continue;
         receipt = artifact;
-        if (reviewedSource(repository, origin.head, pullRequest, publication, request)) artifacts.push(artifact);
+        if (noteToolingTrusted && reviewedSource(repository, origin.head, pullRequest, publication, request)) {
+          artifacts.push(artifact);
+        }
       } finally {
         if (generation) {
           const sameHead = run.display_title === `Example guidance ${sourceHead}`;

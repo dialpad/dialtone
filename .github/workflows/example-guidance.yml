@@ -165,6 +165,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GUIDANCE_PULL_REQUEST: ${{ steps.source.outputs.pr }}
           GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
+          GUIDANCE_SPENDING_TOOLING_REFS: ${{ vars.EXAMPLE_GUIDANCE_SPENDING_TOOLING_REFS }}
           GUIDANCE_SOURCE_HEAD: ${{ steps.source.outputs.head }}
           GUIDANCE_BUDGET_USD: ${{ steps.source.outputs.budget }}
         run: node packages/dialtone-docs/scripts/restore-example-guidance.mjs --generation
