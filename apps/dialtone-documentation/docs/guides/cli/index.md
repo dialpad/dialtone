@@ -238,7 +238,7 @@ Find related guidance without guessing section IDs:
 dialtone docs --id examples/toggle-base-styles --context
 ```
 
-This lists source/page sections, authored API subjects, explicit directives/utilities and documentation links. Follow the commands you need. Context uses `--limit` 1–50 (default20) and `--offset` (default0); follow its continuation. `--context --format json` returns a retrieval envelope; ordinary exact/search JSON remains an array. References do not establish installed compatibility, and page links describe the latest documentation.
+This lists source/page sections, authored API subjects, explicit directives/utilities and documentation links. Follow the commands you need. Context uses `--limit` 1–50 (default 20) and `--offset` (default 0); follow its continuation. `--context --format json` returns a retrieval envelope; ordinary exact/search JSON remains an array. References do not establish installed compatibility, and page links describe the latest documentation.
 
 Vue-app exact-ID output contains all five source-derived application files, dependency pins, imports, styling/theme setup and any directive registration. Static-HTML records contain the authored HTML fragment and CSS/theme prerequisites, without a Vue application scaffold. Follow the setup instructions in that record. JSON retains the documentation command's array shape. Unknown example IDs fail with a no-match diagnostic and a bounded list of available IDs.
 

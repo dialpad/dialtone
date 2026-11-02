@@ -26,7 +26,8 @@ function resolveLink(href, page, pageMap) {
   if (!page.url) return unresolved;
   const [, rawPath, suffix = ''] = href.match(/^([^?#]*)(.*)$/);
   if (!rawPath) {
-    return { url: absolute.href, targetDocId: page.directive && href.startsWith('?') ? null : page.docId };
+    const url = page.directive ? absolute.href : new URL(href.replace(/^#(\d)/, '#_$1'), page.url).href;
+    return { url, targetDocId: page.directive && href.startsWith('?') ? null : page.docId };
   }
   if (page.directive && !explicitUrl && !rawPath.startsWith('/')) return unresolved;
   let path;

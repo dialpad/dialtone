@@ -200,3 +200,16 @@ test('docs context has bounded native continuation while ordinary JSON remains a
     expect(run(['docs', ...args]).status).toBe(1);
   }
 });
+
+test.each(['0x10', '1e1', ' 5 ', '', '1.5', '10abc', '01'])('docs rejects malformed pagination %j', (value) => {
+  for (const args of [
+    ['docs', 'toggle', '--limit', value],
+    ['docs', '--id', 'examples/toggle-base-styles', '--context', '--limit', value],
+    ['docs', '--id', 'examples/toggle-base-styles', '--context', '--offset', value],
+  ]) {
+    const result = run(args);
+    expect(result.status).toBe(1);
+    expect(result.stdout).toBe('');
+    expect(result.stderr).toContain(args.includes('--offset') ? '--offset' : '--limit');
+  }
+});

@@ -315,7 +315,7 @@ Directive replies identify the source package and version and link to the Storyb
 
 To find related guidance, call `get_documentation` with the selected ID and `projection: "context"`. It lists source/page sections, authored API subjects, explicit directive/utility targets and documentation links without repeating their content. Follow relevant documentation IDs with `get_documentation`, components with `get_component`, utilities with `search_utility_classes`, and link `targetDocId` values with documentation context.
 
-Context uses reference `limit` 1–50 (default20) and `offset` (default0); follow its continuation. Content mode retains Unicode `textOffset`/`textLimit` pagination. A preset's synthetic provenance is not a documentation ID. References stay bundled/latest-qualified and do not prove installed API or CSS availability.
+Context uses reference `limit` 1–50 (default 20) and `offset` (default 0); follow its continuation. Content mode retains Unicode `textOffset`/`textLimit` pagination. A preset's synthetic provenance is not a documentation ID. References stay bundled/latest-qualified and do not prove installed API or CSS availability.
 
 ## Usage Examples
 

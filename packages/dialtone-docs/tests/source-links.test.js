@@ -28,6 +28,7 @@ describe('authored context links', () => {
     ['/components/mode-island.html#positioned-components', `${origin}/components/mode-island.html#positioned-components`, 'components/mode-island'],
     [`${origin}/components/presence.html`, `${origin}/components/presence.html`, 'components/presence'],
     ['#usage', `${origin}/components/example.html#usage`, 'components/example'],
+    ['#1-state', `${origin}/components/example.html#_1-state`, 'components/example'],
     ['/components/presence.md#1-state', `${origin}/components/presence.html#_1-state`, 'components/presence'],
     ['/components/missing.md', null, null],
     ['https://example.org/guide#part', 'https://example.org/guide#part', null],

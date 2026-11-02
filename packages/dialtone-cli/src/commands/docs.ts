@@ -26,9 +26,12 @@ export const docsCommand = defineCommand({
     offset: { type: 'string', description: 'Context reference offset (default 0)' },
   },
   run({ args }) {
+    const integer = /^(0|[1-9]\d*)$/;
+    const limitText = args.limit ?? (args.context ? '20' : '10');
+    const limit = integer.test(limitText) ? Number(limitText) : NaN;
     if (args.context) {
-      const limit = Number(args.limit ?? 20);
-      const offset = Number(args.offset ?? 0);
+      const offsetText = args.offset ?? '0';
+      const offset = integer.test(offsetText) ? Number(offsetText) : NaN;
       if (!args.id?.trim() || args.query || !Number.isInteger(limit) || limit < 1 || limit > 50
         || !Number.isInteger(offset) || offset < 0 || offset > 100000) {
         console.error('Use --id <id> --context with --limit 1-50 and --offset 0-100000; no positional query.');
@@ -57,7 +60,6 @@ export const docsCommand = defineCommand({
       console.error('--offset is only available with --id <id> --context.');
       process.exit(1);
     }
-    const limit = Number.parseInt(args.limit ?? '10', 10);
     if (!Number.isInteger(limit) || limit < 0) {
       console.error(`Invalid --limit value "${args.limit}". Expected a non-negative integer (0 = no limit).`);
       process.exit(1);
