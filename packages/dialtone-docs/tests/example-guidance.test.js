@@ -120,3 +120,16 @@ it('preserves plain API identifiers, array indexing and comparisons', () => {
   value.notes[0].text = 'Keep model_value and item_value in selected[0]; require a < b && b > c.';
   expect(validateGuidanceResult(input, value)).toEqual(value);
 });
+
+
+it.each([
+  [[], { reason: 'reference-count', actual: 0, minimum: 1, maximum: 2 }],
+  [null, { reason: 'references' }],
+])('reports actionable feedback for invalid references %j', (references, problem) => {
+  const [input] = manifest([facts]).entries;
+  const value = result(input);
+  value.notes[0].references = references;
+  let failure;
+  try { validateGuidanceResult(input, value); } catch (error) { failure = error; }
+  expect(failure?.feedback?.problems).toContainEqual(expect.objectContaining(problem));
+});

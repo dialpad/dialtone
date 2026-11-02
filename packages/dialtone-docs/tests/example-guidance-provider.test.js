@@ -105,7 +105,11 @@ it('gives its one repair the rejected answer and every actionable validation pro
   const data = manifest();
   const rejected = answer();
   rejected.notes[0].text = 'x'.repeat(241);
-  rejected.notes[0].references = [{ source: 'invented', quote: 'not a real quote' }];
+  rejected.notes[0].references = [
+    { source: 'invented', quote: 'not a real quote' },
+    { source: 'documentation', quote: 'does not prevent actions' },
+    { source: 'documentation', quote: 'not the source wording' },
+  ];
   const bodies = [];
   const output = await generateGuidance(data, { apiKey: 'test-only', limit: 2, budgetUsd: 1,
     request: async (_, options) => {
@@ -119,7 +123,9 @@ it('gives its one repair the rejected answer and every actionable validation pro
   expect(feedback.rejectedAnswer).toEqual(rejected);
   expect(feedback.diagnostics).toMatchObject({ noteLengths: [241], characters: 241, limit: 240, validSourceIds: ['documentation'] });
   expect(feedback.diagnostics.problems).toEqual(expect.arrayContaining([
+    expect.objectContaining({ reason: 'reference-count', actual: 3, minimum: 1, maximum: 2 }),
     expect.objectContaining({ reason: 'unknown-source', source: 'invented', quote: 'not a real quote' }),
+    expect.objectContaining({ reason: 'quote-not-found', source: 'documentation', quote: 'not the source wording' }),
     expect.objectContaining({ reason: 'length' }),
   ]));
   expect(output.entries[0].status).toBe('complete');
