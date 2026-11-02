@@ -120,73 +120,11 @@ Review and commit the manifest/lockfile change. For global installations, use `n
 
 The CLI selects data from its invocation directory; updating the CLI refreshes bundled documentation and fallback data, not the application's Dialtone dependencies. Check the reported sources and versions. See [data sources](https://dialtone.dialpad.com/guides/cli/#data-sources).
 
-## Claude Code Integration
+## Assistant integration
 
-A coding assistant can invoke the CLI through its shell tool when that command is available and permitted. The following Claude Code examples are optional integrations; loading guidance does not establish that a session called the CLI. For project-local installs, use the runner described above from the application directory.
+A coding assistant can invoke the CLI through its shell tool when the command is available and permitted. For project-local installs, use the runner described above from the application directory.
 
-### Rules
-
-Add a rule to your project's `.claude/rules/` that teaches Claude about the CLI:
-
-```markdown
----
-description: "Dialtone design system lookups"
----
-
-# Dialtone Design System
-
-Run these commands from the application directory. When working with Dialtone components, tokens, or utility classes, use the `dialtone` CLI for lookups:
-
-- Component API: `npm exec --no -- dialtone component <name> --props`
-- Single prop: `npm exec --no -- dialtone component <name> --prop <prop>`
-- Token lookup: `npm exec --no -- dialtone token "<query>"`
-- Utility classes: `npm exec --no -- dialtone utility "<query>"`
-- Structured data: add `--format json` to any command
-
-Prefer the CLI over reading source files for design system information. It searches
-the generated API and leaves deprecated items out of general discovery. Exact
-legacy component, utility or token names retain their contract. Use `--format json`
-to inspect utility migration metadata. Token lookups print migration notes to stderr
-in all formats; add `--values --format json` for structured metadata.
-```
-
-### Skills
-
-Wrap CLI commands in a skill for common workflows:
-
-```markdown
----
-description: "Look up a Dialtone component. Use when referencing component props, events, or slots."
----
-
-# Dialtone Lookup
-
-Run these commands from the application directory.
-
-1. Run `npm exec --no -- dialtone component <name> --format json` to get full component data
-2. If you need specific prop values, run `npm exec --no -- dialtone component <name> --prop <prop>`
-3. For LLM-optimized context, run `npm exec --no -- dialtone prompt <name>`
-```
-
-### Agents
-
-An agent can call the CLI via Bash to research design system questions:
-
-```markdown
----
-description: "Research Dialtone design system components, tokens, and utilities."
----
-
-Run these commands from the application directory. Use the `dialtone` CLI to look up design system information:
-
-- `npm exec --no -- dialtone search "<query>"` — broad search across all domains
-- `npm exec --no -- dialtone search "<term1>|<term2>"` — OR search across multiple terms
-- `npm exec --no -- dialtone component <name> --format json` — full component data
-- `npm exec --no -- dialtone token "<query>" --format json` — token data
-- `npm exec --no -- dialtone utility "<query>" --format json` — utility class data
-
-Always use `--format json` when processing results programmatically.
-```
+Merge the [shared lookup instruction](https://dialtone.dialpad.com/guides/getting-started/#ai-assisted-development) into a project file your client loads. It covers Codex and Claude Code loading routes, CLI-only access, selected-version checks and unavailable-tool behavior. Preserve existing project guidance and permission settings. A dependency README does not load itself into the assistant's context; confirm an actual CLI call and returned source/version in the consuming session.
 
 ### CLI vs MCP Server
 

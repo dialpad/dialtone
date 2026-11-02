@@ -217,6 +217,34 @@ Use the [Dialtone CLI](/guides/cli/) for explicit terminal lookups, or connect t
 
 MCP uses bundled references unless you configure an absolute application data root. Check the selected source/version after connecting, and restart the server after configuration or dependency changes. Keep your project's existing assistant guidance and permission controls.
 
+### Add the lookup instruction
+
+Merge this instruction into a file your assistant loads in the consuming project:
+
+```text
+Before choosing or changing Dialtone components, tokens, CSS utilities, icons,
+or usage patterns, consult the available Dialtone lookup tools.
+
+With MCP, follow the connected Dialtone server's routing instructions. With
+CLI-only access, use the installed CLI from the application directory. For a
+project-local install, start with `npm exec --no -- dialtone --help`, then use
+the relevant command. Retrieve the selected component API and documentation;
+search summaries alone may omit details.
+
+Check the returned source and version against the project's installed packages.
+Bundled documentation and example validation do not prove project compatibility.
+
+If lookup tools are unavailable or fail, say so. Use existing project guidance
+and public Dialtone documentation, identify unverified details, and do not
+invent Dialtone APIs or claim a lookup succeeded.
+```
+
+For **Codex**, add it to the applicable project `AGENTS.md`. An `AGENTS.override.md` in the same directory takes precedence; nested instructions can also change the effective guidance. Start a new session in the intended project or application. See [Codex instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
+
+For **Claude Code**, add it to the project's existing `CLAUDE.md`. If you keep shared guidance in a sibling `AGENTS.md`, import it from `CLAUDE.md` with `@AGENTS.md`; a prose link alone does not load it. Native `AGENTS.md` loading depends on the client version, settings and existing `CLAUDE.md` files. Preserve those files and settings; see [Claude Code instruction loading](https://code.claude.com/docs/en/memory). In a fresh session, use `/context` to inspect loaded memory files.
+
+Installing a package or reading its README does not load this instruction into another project. After setup, confirm an actual lookup call and its returned source/version in your assistant's session. A connection or visible tool list alone does not prove the assistant used it. When updating this copied instruction, review it alongside your project's own guidance.
+
 ## Build Dialtone Locally
 
 We're excited you want to install Dialtone locally as this most likely means you'll be contributing soon! Before you get to get started though,  **please make sure you've read our [contributing docs](https://github.com/dialpad/dialtone/blob/master/.github/CONTRIBUTING.md)**.
