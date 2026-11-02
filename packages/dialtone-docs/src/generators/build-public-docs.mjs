@@ -9,6 +9,9 @@ import { glob } from 'glob';
 import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
+import { resolveSourcePagePath } from '../../../../apps/dialtone-documentation/scripts/lib/source-page.mjs';
+import { enrichDocumentationRecords } from './source-links.mjs';
+export { enrichDocumentationRecords } from './source-links.mjs';
 
 import { chunkSections, slugify, isNonReadyStatus } from './source-sections.mjs';
 export { chunkSections } from './source-sections.mjs';
@@ -105,11 +108,13 @@ function readPage(absolutePath, componentPage) {
   }
 
   const sections = chunkSections(body);
+  const context = { docId, sourcePath: relToDocsRoot, body, directive: isDirective, sections: [] };
 
   if (sections.length === 0) {
     // No H2/H3 headings — emit one record for the whole body
     const content = stripMarkdown(body, { stripFrontmatter: false, preserveFencedCode: isDirective });
-    return { records: excluded ? [] : [{
+    context.sections.push({ id: docId, raw: body });
+    return { context, records: excluded ? [] : [{
       id: docId,
       docId,
       docTitle,
@@ -130,6 +135,7 @@ function readPage(absolutePath, componentPage) {
     usedSlugs.set(baseSlug, count + 1);
     const slug = count === 0 ? baseSlug : `${baseSlug}-${count}`;
     const id = `${docId}#${slug}`;
+    context.sections.push({ id, raw });
     return {
       id,
       docId,
@@ -145,7 +151,8 @@ function readPage(absolutePath, componentPage) {
   const sourceExamples = buildSourceExamples({
     rawFile, sections, records, filePath, vuePackage, componentPage, lineOffset,
   });
-  return { records: excluded ? [] : [...records, ...sourceExamples.records], coverage: sourceExamples.coverage };
+  return { context, records: excluded ? [] : [...records, ...sourceExamples.records],
+    coverage: sourceExamples.coverage };
 }
 
 export function buildRecords(absolutePath) {
@@ -178,7 +185,8 @@ async function build() {
     .map(match => `packages/dialtone-vue/${match[1]}/*.mdx`);
   files.push(...await glob(directiveGlobs, { cwd: repoRoot, absolute: true }));
 
-  const allRecords = [];
+  let allRecords = [];
+  const pageContexts = [];
   const coverage = [];
   const componentPages = [];
   const identities = publicIdentities(vuePackage).map(identity => ({ identity }));
@@ -187,6 +195,11 @@ async function build() {
     const componentPage = await buildReadyComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities);
     if (componentPage) componentPages.push(componentPage);
     const page = readPage(file, componentPage);
+    if (page.records.length) {
+      page.context.url = page.context.directive ? page.records[0].frontmatter.storybook
+        : new URL(await resolveSourcePagePath(page.context.sourcePath, matter(rawFile).data), SITE_URL).href;
+      pageContexts.push(page.context);
+    }
     allRecords.push(...page.records);
     if (page.coverage) coverage.push(page.coverage);
   }
@@ -216,6 +229,8 @@ async function build() {
   if (allRecords.length === 0) {
     throw new Error('Zero records produced — check status filter and glob path');
   }
+
+  allRecords = enrichDocumentationRecords(allRecords, pageContexts);
 
   mkdirSync(distDir, { recursive: true });
   writeFileSync(outputPath, JSON.stringify(allRecords, null, 2), 'utf8');
