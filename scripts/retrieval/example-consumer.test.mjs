@@ -31,3 +31,28 @@ test('consumer API checks distinguish named-slot templates from default content'
   assert.throws(() => checkTemplateApi(baseParse('<dt-avatar>Default content</dt-avatar>'), avatar, []), /default slot/);
   assert.throws(() => checkTemplateApi(baseParse('<dt-avatar><template #unknown>Icon</template></dt-avatar>'), avatar, []), /unknown/);
 });
+
+test('consumer API checks accept explicitly documented native attributes', () => {
+  const input = [{ displayName: 'DtInput', props: [], slots: [], events: [],
+    tags: { property: [{ name: 'placeholder', description: 'attribute' }] } }];
+  for (const attribute of ['placeholder="Hint"', ':placeholder="hint"']) {
+    assert.deepEqual(checkTemplateApi(baseParse(`<dt-input ${attribute} />`), input, []), ['DtInput.placeholder']);
+  }
+  for (const attribute of ['placehoder="Hint"', 'autocomplete="off"', 'v-model:placeholder="hint"', ':[placeholder]="hint"']) {
+    assert.throws(() => checkTemplateApi(baseParse(`<dt-input ${attribute} />`), input, []), /DtInput/);
+  }
+  for (const tags of [{}, { property: [{ name: 'placeholder', description: 'component property' }] }]) {
+    assert.throws(() => checkTemplateApi(baseParse('<dt-input placeholder="Hint" />'), [{ ...input[0], tags }], []), /DtInput.placeholder/);
+  }
+});
+
+test('documented native attributes cannot bypass declared prop restrictions', () => {
+  const input = { displayName: 'DtInput', slots: [], events: [],
+    tags: { property: [{ name: 'placeholder', description: 'attribute' }] } };
+  for (const [prop, error] of [
+    [{ name: 'placeholder', tags: { deprecated: true } }, /deprecated/],
+    [{ name: 'placeholder', values: ['Only allowed'] }, /Hint/],
+  ]) {
+    assert.throws(() => checkTemplateApi(baseParse('<dt-input placeholder="Hint" />'), [{ ...input, props: [prop] }], []), error);
+  }
+});

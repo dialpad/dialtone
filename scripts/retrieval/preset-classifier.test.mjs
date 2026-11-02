@@ -51,3 +51,16 @@ test('policy exclusion cannot enter materialization or delivery', () => {
   assert.equal(result.disposition, 'policy-excluded');
   assert.equal(result.template, undefined);
 });
+
+test('source classification admits a documented native attribute without allowing unknown attributes', () => {
+  const input = { displayName: 'DtInput', props: [], slots: [], events: [],
+    tags: { property: [{ name: 'placeholder', description: 'attribute' }] } };
+  const options = { component: 'DtInput', documentation: [input],
+    publicNames: new Set(['DtInput']), runtime: { DtInput: {} } };
+  const valid = classify(() => '<dt-input placeholder="Placeholder" />', options);
+  assert.equal(valid.disposition, 'eligible/setup-needed');
+  assert.deepEqual(valid.imports, ['DtInput']);
+  const invalid = classify(() => '<dt-input placehoder="Placeholder" />', options);
+  assert.equal(invalid.disposition, 'unresolved');
+  assert.match(invalid.reasons[0], /^API unknown-member: DtInput.placehoder$/);
+});
