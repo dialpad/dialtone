@@ -26,6 +26,10 @@ export const docsCommand = defineCommand({
     offset: { type: 'string', description: 'Context reference offset (default 0)' },
   },
   run({ args }) {
+    if (!['minimal', 'markdown', 'json'].includes(args.format)) {
+      console.error(`Invalid --format value "${args.format}". Expected minimal, markdown, or json.`);
+      process.exit(1);
+    }
     const integer = /^(0|[1-9]\d*)$/;
     const limitText = args.limit ?? (args.context ? String(COMPONENT_DETAIL_LIMIT) : '10');
     const limit = integer.test(limitText) ? Number(limitText) : NaN;

@@ -201,6 +201,19 @@ test('docs context has bounded native continuation while ordinary JSON remains a
   }
 });
 
+test.each([
+  { mode: 'search', args: ['toggle'] },
+  { mode: 'exact ID', args: ['--id', 'examples/toggle-base-styles'] },
+  { mode: 'context', args: ['--id', 'examples/toggle-base-styles', '--context'] },
+])('docs rejects unsupported formats in $mode mode', ({ args }) => {
+  const result = run(['docs', ...args, '--format', 'yaml']);
+  expect(result.status).toBe(1);
+  expect(result.stdout).toBe('');
+  expect(result.stderr).toContain('--format');
+  expect(result.stderr).toContain('yaml');
+  expect(result.stderr).toMatch(/minimal.*markdown.*json/);
+});
+
 test.each(['0x10', '1e1', ' 5 ', '', '1.5', '10abc', '01'])('docs rejects malformed pagination %j', (value) => {
   for (const args of [
     ['docs', 'toggle', '--limit', value],
