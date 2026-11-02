@@ -1,0 +1,29 @@
+packages/dialtone-vue/components/Slider/Composables/UseSliderCollisionAvoidance.js
+  s_f1b6a2e8befce4::t_5ed7f5250b10ff 157
+  s_f1b6a2e8befce4::t_44d04cca02430f 2
+  s_f1b6a2e8befce4::t_d4c995762bd8cc 61,71,73-83
+packages/dialtone-vue/components/Slider/SliderConstants.ts
+  s_f1b6a2e8befce4::t_d20ab20b4a0af5 16-22
+  s_f1b6a2e8befce4::t_f9d76519ec8e52 9-14
+packages/dialtone-vue/components/Slider/Composables/UseSliderGeometry.js
+  s_f1b6a2e8befce4::t_5e85657792744c 2
+  s_f1b6a2e8befce4::t_bcd8cc76cdceba 83,91
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_f1b6a2e8befce4::t_69b147ac629116 472-500
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "41973497196628251fcdf9e7c215bc7793cf61d2",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

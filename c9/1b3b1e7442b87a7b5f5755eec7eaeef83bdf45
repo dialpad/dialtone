@@ -1,0 +1,36 @@
+packages/dialtone-tokens/sync-scripts/utils.test.ts
+  s_87d0f63b120eb7::t_ba753b68b09dd9 1-14
+  s_87d0f63b120eb7::t_997620e67bb5e2 15-17
+  s_87d0f63b120eb7::t_76613292a7bbf3 18-39
+packages/dialtone-tokens/sync-scripts/utils.ts
+  s_87d0f63b120eb7::t_9c40cd4652318a 30-47
+  s_87d0f63b120eb7::t_824a71889d6c54 48-63
+packages/dialtone-tokens/sync-scripts/build_variables.ts
+  s_87d0f63b120eb7::t_9c40cd4652318a 42,174,263,338,355-356,364-367,409,414,506-508
+  s_87d0f63b120eb7::t_94fc998971a75e 17
+packages/dialtone-docs/src/content/workflows/workflow-figma-sync.md
+  s_87d0f63b120eb7::t_c2de7c62a63173 49-50
+packages/dialtone-tokens/sync-scripts/check_materials.ts
+  s_87d0f63b120eb7::t_df289d46841528 31,95,223,226,229-238
+packages/dialtone-tokens/sync-scripts/build_materials.ts
+  s_87d0f63b120eb7::t_9c40cd4652318a 48,57,160,168-170,216,351-353
+  s_87d0f63b120eb7::t_a138af1bfedf5d 27
+.github/workflows/sync-variables-to-figma.yml
+  s_87d0f63b120eb7::t_976ff6ca4f3dcf 33,149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c91b3b1e7442b87a7b5f5755eec7eaeef83bdf45",
+  "prompts": {},
+  "sessions": {
+    "s_87d0f63b120eb7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "442e71ed-9091-44b6-b09c-e8116970a462",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    }
+  }
+}
