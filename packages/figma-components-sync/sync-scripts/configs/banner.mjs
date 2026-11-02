@@ -23,7 +23,7 @@ export default {
   // The title's text is a property, like the label: `headerText` is a prop in the code.
   textProps: { 'Optional title': 'Title' },
   page: 'Banner',
-  figmaSetId: '2021:51126',
+  figmaSetId: '2033:142343',
 
   // Flex fill and align-self centring, as for Notice (see the generic builder).
   flexLayout: true,

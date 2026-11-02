@@ -160,6 +160,21 @@ A colour CSS computes (`color-mix()`, a relative colour, an oklch hue expression
 token to name, so a variable is **synthesised** into `Dialtone Derived (synthesised by sync)`
 holding both measured modes. A literal would be right in one mode and wrong in the other.
 
+**Text** uses the Dialtone library's published text styles, imported by key at the start of each
+build (`build-data/text-styles.json`, read from the library file with `use_figma`: the REST styles
+endpoint needs a token scope the experiment token lacks). A style is applied only when size,
+weight, family and line height ALL match the measurement; anything else stays raw rather than being
+rounded to the nearest style. That leaves some text raw on purpose:
+
+- Button sizes xs, sm and xl render Medium in the code, but the library's styles for them are
+  Semibold (xs, sm) and Regular (xl). The code and the library disagree there; the sync follows
+  the code.
+- Notice and Banner titles set `line-height` over `headline-md` (Bold 16 at 120%), a combination
+  no style holds, and the action button's own label is `button-sm` at Medium.
+- ButtonLink (`textStyles: false`). Its underline is an axis, and with a library style applied,
+  labels bound to the same Label property share their text formatting: underlining one underlined
+  all 700 (measured in the plugin and in the MCP runtime). Without a style each label keeps its own.
+
 ## The checks
 
 Each catches what the others structurally cannot.

@@ -5,11 +5,13 @@ One file per component, default-exporting its config. Discovered automatically b
 
 Required: `component` (the Dt* name), `label`, `page`, `axes`, `invalid`, `variantName`, `props`.
 Optional: `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
-`slotDefaults`, `nativeSlots`, `textProps`, `flexLayout`, `edgeSlots`, `rootClass`,
+`slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `flexLayout`, `edgeSlots`, `rootClass`,
 `containerClass`, `figmaSetId`, `figmaMergedSetId`. `figmaSetId` is
 written by `run-batch` after a build, not by hand. `nativeSlots` names slots that become Figma
 `SLOT` nodes (see the Slots section of `../README.md`). `textProps` maps a text the harness
 injected (`{ 'Notice title': 'Title' }`) to the TEXT property it becomes, besides the label.
+`textStyles: false` keeps a component's text raw instead of applying the Dialtone library's text
+styles (ButtonLink: its underline axis conflicts with a shared Label property, see the README).
 `flexLayout: true` opts a component into three layout behaviours the builder otherwise leaves
 out, so every other set stays as built: a flex child with `flex-grow` fills a row that has a fixed
 width, `align-self: center` is built as a stretched frame with centred content (the verifier checks

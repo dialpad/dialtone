@@ -233,6 +233,16 @@ function dvarFor (key, p) {
 let ICON_LIB = { ids: {} };
 try { ICON_LIB = JSON.parse(readFileSync('sync-scripts/build-data/icon-library.json', 'utf8')); }
 catch { /* library not built yet */ }
+/**
+ * The Dialtone library's published TEXT styles, by key. A style from a library has to be imported
+ * before it can be applied, and the file has none of its own, so without these every text layer
+ * carried raw size, weight and line height. Absent file = none imported (the old behaviour).
+ * The list is read from the library file; the REST styles endpoint needs a token scope the
+ * experiment token does not have.
+ */
+let TEXT_STYLE_KEYS = [];
+try { TEXT_STYLE_KEYS = JSON.parse(readFileSync('sync-scripts/build-data/text-styles.json', 'utf8')).styles.map(s => s.key); }
+catch { /* no styles recorded */ }
 const ICON_BY_SLUG = new Map();
 for (const full of Object.keys(ICON_LIB.ids || {})) {
   const leaf = full.split('/')[1];
@@ -578,6 +588,8 @@ const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).na
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
 const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn,
+  // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
+  textStyleKeys: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textStyles === false ? [] : TEXT_STYLE_KEYS,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.
   edgeSlots: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).edgeSlots || null, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';

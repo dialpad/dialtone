@@ -155,6 +155,12 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   }
 
   const textStyles = await figma.getLocalTextStylesAsync();
+  // The library's published text styles, imported once per run. An imported style reads back its
+  // resolved size, weight, family and line height, so the matching below treats it like a local one.
+  for (const key of D.textStyleKeys || []) {
+    try { textStyles.push(await figma.importStyleByKeyAsync(key)); }
+    catch (e) { skippedBindings.push(`text style ${key}: ${e && e.message ? e.message : e}`); }
+  }
   const effectStyles = await figma.getLocalEffectStylesAsync();
   const WEIGHT = { 100: 'Thin', 200: 'ExtraLight', 300: 'Light', 400: 'Regular',
                    500: 'Medium', 600: 'Semibold', 700: 'Bold', 800: 'ExtraBold', 900: 'Black' };
@@ -1451,7 +1457,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     flowX += w + GAP;
     if (h > rowH) rowH = h;
   }
-  
+
   return { built: made.length, page: page.name, pageChildren: page.children.length,
            slotLayers, textLayers,
            iconInstanceFailed: [...new Set(iconInstanceFailed)].slice(0, 10),

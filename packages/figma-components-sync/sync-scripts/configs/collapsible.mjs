@@ -17,7 +17,7 @@
  */
 export default {
   component: 'DtCollapsible', label: 'Content', page: 'Collapsible',
-  figmaSetId: '592:5477',
+  figmaSetId: '2033:130653',
 
   axes: {
     open: [false, true],

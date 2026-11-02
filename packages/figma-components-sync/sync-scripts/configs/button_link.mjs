@@ -20,8 +20,15 @@
  * supported.
  */
 export default {
+  /**
+   * RAW TYPOGRAPHY, NOT THE LIBRARY'S TEXT STYLES. `linkUnderline` is an axis, so the label's
+   * underline differs between variants — and with a library text style applied, labels bound to
+   * the same Label property share their text formatting: underlining one underlined all 700
+   * (measured). Without a style each label keeps its own. Every other set uses the styles.
+   */
+  textStyles: false,
   component: 'DtButton', label: 'Button', page: 'ButtonLink',
-  figmaSetId: '592:21746',
+  figmaSetId: '2040:6969',
   axes: {
     size: [100, 200, 300, 400, 500],
     // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'

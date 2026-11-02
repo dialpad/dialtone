@@ -6,7 +6,7 @@
  */
 const BUILT_IN = {
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2027:104347',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2033:122926',
     /**
      * ICONS ARE BOOLEAN PROPERTIES; THE CIRCULAR BUTTON IS ITS OWN SET (`button_icon`).
      *

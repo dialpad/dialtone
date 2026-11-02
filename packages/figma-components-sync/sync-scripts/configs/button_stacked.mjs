@@ -16,7 +16,7 @@
  */
 export default {
   component: 'DtButton', label: 'Button', page: 'ButtonStacked',
-  figmaSetId: '592:18916',
+  figmaSetId: '2033:127827',
   axes: {
     kind: ['default', 'muted', 'critical', 'positive', 'inverted'],
     importance: ['clear', 'outlined', 'primary'],
