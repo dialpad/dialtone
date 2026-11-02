@@ -61,10 +61,11 @@ export function getDocumentationContext(
   documentation: DocumentationRecord[],
   componentDocumentation: ComponentDocCatalog,
 ): DocumentationContextResult {
-  const selected = documentation.find(record => record.id === args.id);
-  const docId = selected?.docId ?? args.id;
+  const id = args.id.trim();
+  const selected = documentation.find(record => record.id === id);
+  const docId = selected?.docId ?? id;
   const prose = documentation.filter(record => !record.example && record.docId === docId);
-  const result: DocumentationContextResult = { match: 'no-match', id: args.id, docId: null,
+  const result: DocumentationContextResult = { match: 'no-match', id, docId: null,
     sourceSectionId: null, documentation: null, items: [], notes: [] };
   if (!selected && !prose.length) return result;
   result.match = 'exact';

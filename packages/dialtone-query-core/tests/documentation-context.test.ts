@@ -47,6 +47,7 @@ it('accepts real page selectors and heading-free records, with honest missing so
   const records = [prose('components/toggle#usage'), prose('plain', { headingPath: [] }), example()];
   expect(lookup('components/toggle', records).sourceSectionId).toBeNull();
   expect(lookup('plain', records).sourceSectionId).toBe('plain');
+  expect(lookup(' plain ', records).sourceSectionId).toBe('plain');
   const missing = lookup('examples/toggle', records);
   expect(missing.sourceSectionId).toBeNull();
   expect(missing.notes.join(' ')).toMatch(/source/i);

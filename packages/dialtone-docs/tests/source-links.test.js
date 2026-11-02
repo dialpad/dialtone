@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import * as builder from '../src/generators/build-public-docs.mjs';
+import { enrichDocumentationRecords } from '../src/generators/source-links.mjs';
 
 const origin = 'https://dialtone.dialpad.com';
 const record = (id, extra = {}) => ({ id, docId: id.split('#')[0], content: 'Authored prose.', headingPath: [], ...extra });
@@ -8,7 +8,6 @@ const page = (docId, sourcePath, path, raw, extra = {}) => ({
   sections: [{ id: `${docId}#usage`, raw }], ...extra,
 });
 function enrich(raw, extra = {}) {
-  expect(builder.enrichDocumentationRecords).toBeTypeOf('function');
   const pages = [
     page('components/example', 'components/example.md', '/components/example.html', raw, extra),
     page('components/presence', 'components/presence.md', '/components/presence.html', ''),
@@ -16,7 +15,7 @@ function enrich(raw, extra = {}) {
     page('utilities/index', 'utilities/index.md', '/utilities/', ''),
   ];
   const records = pages.map(p => record(`${p.docId}#usage`));
-  return builder.enrichDocumentationRecords(records, pages)[0];
+  return enrichDocumentationRecords(records, pages)[0];
 }
 
 describe('authored context links', () => {
@@ -48,19 +47,17 @@ describe('authored context links', () => {
   });
 
   test('leaves ambiguous local routes unresolved', () => {
-    expect(builder.enrichDocumentationRecords).toBeTypeOf('function');
-    const pages = [page('a', 'a.md', '/same.html', '[Target](/same.html)'), page('b', 'b.md', '/same.html', '')];
-    const result = builder.enrichDocumentationRecords([record('a#usage'), record('b#usage')], pages);
+      const pages = [page('a', 'a.md', '/same.html', '[Target](/same.html)'), page('b', 'b.md', '/same.html', '')];
+    const result = enrichDocumentationRecords([record('a#usage'), record('b#usage')], pages);
     expect(result[0].links[0]).toMatchObject({ url: null, targetDocId: null });
   });
 
   test('enriches heading-free prose once per page after assembly and preserves source/preset payloads', () => {
-    expect(builder.enrichDocumentationRecords).toBeTypeOf('function');
-    const source = record('a#usage');
+      const source = record('a#usage');
     const records = [source, record('a#other'), record('examples/a', { example: { source: { id: 'a#usage' } } }), record('examples/presets/a', { example: { source: { kind: 'combinator-preset', id: 'combinator/a' } } }), record('plain')];
     const before = structuredClone(records);
     const pages = [page('a', 'a.md', '/a.html', ''), page('plain', 'plain.md', '/plain.html', '[Other](a.md)', { sections: [{ id: 'plain', raw: '[Other](a.md)' }] })];
-    const result = builder.enrichDocumentationRecords(records, pages);
+    const result = enrichDocumentationRecords(records, pages);
     expect(records).toEqual(before);
     expect(result.map(r => r.id)).toEqual(before.map(r => r.id));
     expect(result[0].documentation).toEqual({ url: `${origin}/a.html`, versionScope: 'latest', installedCompatibility: 'not_checked' });

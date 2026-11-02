@@ -173,3 +173,5 @@ MCP servers communicate over stdout — any stray `console.log` will break the J
 ## Source example retrieval
 
 Associate example discovery with authored component-page subjects and related directive contracts, never every imported layout component. Keep complete payloads out of ordinary rankings; append bounded exact-ID hints and preserve existing search facts. Reuse source-section IDs and existing detail routes for full lists/recovery. Keep assembly imports and source/profile/manual-evidence qualification separate from discovery. See `packages/dialtone-mcp-server/RETRIEVAL.md` for the transport contract.
+
+For selected documentation context, follow the [shared lookup routing](../../.agents/resources/dialtone-lookup.md). Keep full prose on demand and preserve ordinary CLI JSON/content continuations; context mode lists compact references.

@@ -180,3 +180,23 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
       .toContain('examples/utility-word-wrap-normal: dialtone docs --id examples/utility-word-wrap-normal');
   });
 });
+
+test('docs context has bounded native continuation while ordinary JSON remains an array', () => {
+  const id = 'examples/toggle-base-styles';
+  const first = run(['docs', '--id', id, '--context', '--limit', '1', '--format', 'json']);
+  expect(first.status).toBe(0);
+  const result = JSON.parse(first.stdout);
+  expect(result.match).toBe('exact');
+  expect(result.items).toHaveLength(1);
+  expect(result.continuation).toMatchObject({ tool: 'dialtone docs', arguments: { id, context: true, limit: 1, offset: 1 } });
+  const next = run(['docs', '--id', id, '--context', '--limit', '1', '--offset', '1', '--format', 'json']);
+  expect(next.status).toBe(0);
+  expect(JSON.parse(next.stdout).items[0]).not.toEqual(result.items[0]);
+  const plain = run(['docs', '--id', id, '--format', 'json']);
+  expect(Array.isArray(JSON.parse(plain.stdout))).toBe(true);
+  const search = run(['docs', 'toggle accessibility', '--limit', '1']);
+  expect(search.stdout).toMatch(/dialtone docs --id components\/toggle#/);
+  for (const args of [['--context'], ['--offset', '1', '--id', id], ['--id', id, '--context', '--limit', '2x']]) {
+    expect(run(['docs', ...args]).status).toBe(1);
+  }
+});

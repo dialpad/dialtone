@@ -11,7 +11,6 @@ import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
 import { resolveSourcePagePath } from '../../../../apps/dialtone-documentation/scripts/lib/source-page.mjs';
 import { enrichDocumentationRecords } from './source-links.mjs';
-export { enrichDocumentationRecords } from './source-links.mjs';
 
 import { chunkSections, slugify, isNonReadyStatus } from './source-sections.mjs';
 export { chunkSections } from './source-sections.mjs';

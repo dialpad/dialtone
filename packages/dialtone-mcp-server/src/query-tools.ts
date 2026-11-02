@@ -23,6 +23,7 @@ import {
   getComponentDocumentation,
   getDocumentationExampleIds,
   getDocumentationDetail,
+  getDocumentationContext,
   COMPONENT_SECTIONS,
   COMPONENT_DETAIL_LIMIT,
   MATCH_STATES,
@@ -146,13 +147,24 @@ const detailSchema = z
     offset,
   })
   .strict();
-const docsSchema = z
-  .object({
-    id: query,
-    textOffset: z.number().int().min(0).max(1000000).default(0),
-    textLimit: z.number().int().min(1).max(10000).default(6000),
-  })
-  .strict();
+const docsSchema = z.object({
+  id: query,
+  projection: z.enum(['content', 'context']).optional(),
+  textOffset: z.number().int().min(0).max(1000000).optional(),
+  textLimit: z.number().int().min(1).max(10000).optional(),
+  limit: z.number().int().min(1).max(50).optional(),
+  offset: z.number().int().min(0).max(100000).optional(),
+}).strict().superRefine((args, ctx) => {
+  const incompatible = args.projection === 'context'
+    ? [['textOffset', args.textOffset, 0], ['textLimit', args.textLimit, 6000]]
+    : [['limit', args.limit, 20], ['offset', args.offset, 0]];
+  for (const [key, value, defaultValue] of incompatible) {
+    if (value !== undefined && value !== defaultValue) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: [String(key)],
+        message: 'Pagination does not belong to the selected documentation projection.' });
+    }
+  }
+});
 const stringSchema = {
   type: 'string',
   minLength: 1,
@@ -273,22 +285,25 @@ export function queryToolDefinitions() {
     {
       name: 'get_documentation',
       description:
-        'Retrieve complete available prose for an exact documentation section ID. Follow the returned textOffset continuation to read remaining content. Offsets count Unicode code points. Selected examples/* IDs include complete source-derived files and setup; check their pinned consumer profile and validation limits. A continued fragment is not a complete runnable example.',
+        'Retrieve complete available prose for an exact documentation section ID. Use projection context for compact related source, API, directive, utility and authored-link references (limit/offset). Follow documentation IDs with get_documentation, component-api names with get_component, utility names with search_utility_classes, and link targetDocId with get_documentation projection context. Links are latest references, not installed compatibility. Content uses textOffset/textLimit (default 0/6000). Follow the returned textOffset continuation to read remaining content. Offsets count Unicode code points. Selected examples/* IDs include complete source-derived files and setup; check their pinned consumer profile and validation limits. A continued fragment is not a complete runnable example.',
       inputSchema: {
         type: 'object' as const,
         properties: {
           id: stringSchema,
+          projection: { type: 'string', enum: ['content', 'context'] },
+          limit: { type: 'integer', minimum: 1, maximum: 50, description: 'Context reference count; default 20.' },
+          offset: { type: 'integer', minimum: 0, maximum: 100000, description: 'Context reference offset; default 0.' },
           textOffset: {
             type: 'integer',
             minimum: 0,
             maximum: 1000000,
-            default: 0,
+            description: 'Content text offset; default 0.',
           },
           textLimit: {
             type: 'integer',
             minimum: 1,
             maximum: 10000,
-            default: 6000,
+            description: 'Content text limit; default 6000.',
           },
         },
         required: ['id'],
@@ -343,7 +358,19 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
   const { data, provenance } = context;
   try {
     if (name === 'get_documentation') {
-      const args = docsSchema.parse(input ?? {});
+      const inputArgs = docsSchema.parse(input ?? {});
+      if (inputArgs.projection === 'context') {
+        const args = { id: inputArgs.id, projection: 'context',
+          limit: inputArgs.limit ?? 20, offset: inputArgs.offset ?? 0 };
+        const selected = getDocumentationContext(args, data.documentation, componentDocumentation);
+        return reply(createRetrievalEnvelope({
+          tool: name, args, mode: 'detail', domain: ['documentation', 'componentDocumentation'],
+          match: selected.match, items: selected.items, notes: selected.notes,
+          detail: { id: args.id, docId: selected.docId, sourceSectionId: selected.sourceSectionId,
+            documentation: selected.documentation },
+        }, provenance));
+      }
+      const args = { id: inputArgs.id, textOffset: inputArgs.textOffset ?? 0, textLimit: inputArgs.textLimit ?? 6000 };
       const selected = getDocumentationDetail(args, data.documentation);
       const missingExample = !selected.record && args.id.startsWith('examples/');
       const availableExamples = data.documentation.filter(record => record.example).map(record => record.id);
@@ -356,7 +383,9 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
             domain: 'documentation',
             match: selected.match,
             items: selected.record ? [selected.record] : [],
-            detail: { id: args.id, contentCounts: selected.contentCounts, exampleIds: selected.record && !selected.record.example ? getDocumentationExampleIds(selected.record.id, data.documentation) : [] },
+            detail: { id: args.id, contentCounts: selected.contentCounts,
+              ...(selected.record ? { contextRequest: { tool: name, arguments: { id: args.id, projection: 'context' } } } : {}),
+              exampleIds: selected.record && !selected.record.example ? getDocumentationExampleIds(selected.record.id, data.documentation) : [] },
             omissions: selected.next ? ['remaining_content'] : [],
             continuation: selected.next ? {
               tool: name,
