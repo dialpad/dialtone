@@ -72,6 +72,7 @@ it('uses a bounded tool-less request and preserves a cache hit without another m
 it.each([
   ['the budget cannot cover one bounded request', { limit: 3, budgetUsd: 0 }],
   ['previous spending on the same source update exhausts it', { limit: 2, budgetUsd: 0.05, spentUsd: 0.05 }],
+  ['previous requests on the same source update exhaust it', { limit: 1, budgetUsd: 1, spentRequests: 1 }],
   ['the repository monthly allowance is exhausted', { limit: 2, budgetUsd: 1, monthlySpentUsd: 25 }],
 ])('does not spend when %s', async (_, limits) => {
   const output = await generateGuidance(manifest(), { apiKey: 'test-only', request: () => { throw new Error('must not call'); }, ...limits });
@@ -221,4 +222,15 @@ it('keeps comparison results unpublishable and reconciles both model prices insi
     request: () => { throw new Error('must not spend again'); } });
   expect(exhausted.usage.requests).toBe(0);
   await expect(provider.compareGuidance(data, [data.entries[0].id], { budgetUsd: 1.01 })).rejects.toThrow(/pilot/i);
+});
+
+
+it('shares the remaining historical request allowance across both comparison arms', async () => {
+  const data = manifest();
+  const output = await provider.compareGuidance(data, [data.entries[0].id], { apiKey: 'test-only', limit: 84, spentRequests: 83, budgetUsd: 1,
+    request: async () => ({ ok: true, json: async () => ({ stop_reason: 'end_turn',
+      content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) }),
+  });
+  expect(output.usage.requests).toBe(1);
+  expect(output.pilot.map(arm => arm.entries[0].status)).toEqual(['complete', 'pending']);
 });

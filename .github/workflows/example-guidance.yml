@@ -180,13 +180,14 @@ jobs:
           BUDGET_USD: ${{ steps.source.outputs.budget }}
         run: |
           SPENT_USD=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).spentUsd")
+          SPENT_REQUESTS=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).spentRequests")
           MONTHLY_SPENT_USD=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).monthlySpentUsd")
           BUDGET_MONTH=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).month")
           PILOT_ARGS=()
           if [ -n "$PILOT_IDS" ]; then PILOT_ARGS=(--pilot-ids "$PILOT_IDS"); fi
           node packages/dialtone-docs/scripts/generate-example-guidance.mjs \
             packages/dialtone-docs/dist/example-guidance-inputs.json example-guidance.json \
-            "${PILOT_ARGS[@]}" --limit "$REQUEST_LIMIT" --budget-usd "$BUDGET_USD" --spent-usd "$SPENT_USD" \
+            "${PILOT_ARGS[@]}" --limit "$REQUEST_LIMIT" --budget-usd "$BUDGET_USD" --spent-usd "$SPENT_USD" --spent-requests "$SPENT_REQUESTS" \
             --monthly-spent-usd "$MONTHLY_SPENT_USD" --month "$BUDGET_MONTH" \
             --cache packages/dialtone-docs/.generated/example-guidance/reviewed.json
       - uses: actions/upload-artifact@v4

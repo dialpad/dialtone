@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { readFileSync, mkdtempSync, writeFileSync, rmSync, mkdirSync, realpathSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -222,4 +222,30 @@ test('the comparison pilot requires an exact approved push head and 21 unique ID
     const output = await resolveGuidanceSource('push', undefined, undefined, pilot);
     assert.equal(output.get('enabled'), 'false');
   }
+});
+
+
+test('the paid workflow step carries restored request usage through the real driver CLI', async () => {
+  const directory = realpathSync(mkdtempSync(join(tmpdir(), 'guidance-request-cap-')));
+  try {
+    const docs = join(directory, 'packages/dialtone-docs');
+    for (const path of ['scripts', 'src/generators', 'dist', '.generated/example-guidance']) mkdirSync(join(docs, path), { recursive: true });
+    const driver = readFileSync(new URL('../../packages/dialtone-docs/scripts/generate-example-guidance.mjs', import.meta.url), 'utf8');
+    writeFileSync(join(docs, 'scripts/generate-example-guidance.mjs'), driver);
+    writeFileSync(join(docs, 'src/generators/example-guidance.mjs'), readFileSync(new URL('../../packages/dialtone-docs/src/generators/example-guidance.mjs', import.meta.url)));
+    const { createGuidanceManifest, guidanceHash, guidanceMonth, GUIDANCE_MODEL } = await import('../../packages/dialtone-docs/src/generators/example-guidance.mjs');
+    const manifest = createGuidanceManifest([{ id: 'examples/request-cap', sources: [{ id: 'source', text: 'Save' }], dependencies: [] }],
+      { model: GUIDANCE_MODEL, toolingHash: 'a'.repeat(64), driverHash: guidanceHash(driver) });
+    writeFileSync(join(docs, 'dist/example-guidance-inputs.json'), JSON.stringify(manifest));
+    writeFileSync(join(docs, '.generated/example-guidance/reviewed.json'), JSON.stringify({ schemaVersion: 1, entries: [] }));
+    writeFileSync(join(docs, '.generated/example-guidance/previous-spend.json'), JSON.stringify({ spentUsd: 0, spentRequests: 2, monthlySpentUsd: 0, month: guidanceMonth() }));
+    const step = readWorkflow('example-guidance.yml').jobs.generate.steps.find(step => step.env?.ANTHROPIC_API_KEY);
+    const env = { ...process.env, REQUEST_LIMIT: '2', BUDGET_USD: '1', PILOT_IDS: '' };
+    for (const key of ['ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'GH_TOKEN', 'GITHUB_TOKEN', 'NODE_AUTH_TOKEN']) delete env[key];
+    const run = spawnSync('bash', ['-e', '-c', step.run], { cwd: directory, env, encoding: 'utf8' });
+    assert.equal(run.status, 1, run.stderr);
+    const output = JSON.parse(readFileSync(join(directory, 'example-guidance.json')));
+    assert.equal(output.usage.requests, 0);
+    assert.equal(output.entries[0].status, 'pending');
+  } finally { rmSync(directory, { recursive: true, force: true }); }
 });

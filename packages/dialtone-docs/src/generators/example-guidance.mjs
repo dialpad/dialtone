@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 /** The production model; comparison pilots do not change this selection. */
 export const GUIDANCE_MODEL = 'claude-sonnet-5-5';
 export const GUIDANCE_MONTHLY_BUDGET_USD = 25;
+export const GUIDANCE_MAX_REQUESTS = 500;
 export const guidanceMonth = (time = Date.now()) => new Intl.DateTimeFormat('sv-SE', {
   timeZone: 'America/Chicago', year: 'numeric', month: '2-digit',
 }).format(new Date(time));

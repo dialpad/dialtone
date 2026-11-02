@@ -46,7 +46,8 @@ const toolingRef = 'a'.repeat(40);
 const oldRun = (id, changes = {}) => ({ id, run_attempt: 1, conclusion: 'success', event: 'workflow_run',
   display_title: `Example guidance ${sourceHead}`, path: '.github/workflows/example-guidance.yml', head_sha: toolingRef,
   repository: { full_name: 'dialpad/dialtone' }, head_repository: { full_name: 'dialpad/dialtone' }, ...changes });
-const receiptFor = (id, attempt, amount) => ({ schemaVersion: 1, entries: [], usage: { reservedUsd: amount },
+const receiptFor = (id, attempt, amount, requests = 1) => ({
+  schemaVersion: 1, entries: [], usage: { reservedUsd: amount, requests },
   origin: { runId: String(id), runAttempt: attempt, head: sourceHead, toolingRef } });
 const mergedSource = [{ number: 1504, merged_at: '2026-10-31', head: { sha: sourceHead } }];
 
@@ -62,9 +63,10 @@ it('restores beyond the first history page and counts previous attempts of the c
   const result = restoreActionGuidance('dialpad/dialtone', { generation: true, sourceHead, currentRun: '12', currentAttempt: 2,
     toolingRef, request, readArtifact: (_, id, name) => {
       expect(name).toBe(`example-guidance-${id}-1`);
-      return receiptFor(id, 1, id === 12 ? 0.2 : 0.25);
+      return receiptFor(id, 1, id === 12 ? 0.2 : 0.25, id === 12 ? 2 : 3);
     } });
   expect(result.spentUsd).toBeCloseTo(0.45);
+  expect(result.spentRequests).toBe(5);
   expect(result.artifacts).toHaveLength(2);
 });
 
@@ -136,6 +138,7 @@ it('does not reserve spend for unstarted attempts, while running and unknown att
     readArtifact: () => { throw new Error('No unstarted/running receipt should be read'); },
   });
   expect(result.spentUsd).toBe(2);
+  expect(result.spentRequests).toBe(1000);
 });
 
 function publishedFixture({ legacy = false, content = '{"schemaVersion":1,"entries":[]}' } = {}) {

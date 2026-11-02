@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from 'nod
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { selectGuidance, assertGuidanceManifest, guidanceHash, GUIDANCE_POLICY_HASH, GUIDANCE_MONTHLY_BUDGET_USD, guidanceMonth } from '../src/generators/example-guidance.mjs';
+import { selectGuidance, assertGuidanceManifest, guidanceHash, GUIDANCE_POLICY_HASH, GUIDANCE_MONTHLY_BUDGET_USD, GUIDANCE_MAX_REQUESTS, guidanceMonth } from '../src/generators/example-guidance.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
@@ -121,6 +121,7 @@ export function restoreActionGuidance(repository, {
     return workflowBlobs.get(ref);
   };
   let spentUsd = 0;
+  let spentRequests = 0;
   let monthlySpentUsd = 0;
   const month = guidanceMonth(now);
   const artifactCutoff = now - 91 * 24 * 60 * 60 * 1000;
@@ -152,12 +153,17 @@ export function restoreActionGuidance(repository, {
         if (reviewedSource(repository, origin.head, pullRequest, publication, request)) artifacts.push(artifact);
       } finally {
         if (generation) {
+          const sameHead = run.display_title === `Example guidance ${sourceHead}`;
           const charge = guidanceSpend(run, receipt, sourceHead, budgetUsd);
           const ended = Date.parse(run.updated_at);
           // Unknown or cross-month attempts remain charged; only a proven earlier end excludes them.
           const inMonth = !Number.isFinite(ended) || guidanceMonth(ended) >= month;
-          if ((charge || inMonth) && (receipt || modelCouldHaveRun(repository, run, request))) {
+          if ((sameHead || inMonth) && (receipt || modelCouldHaveRun(repository, run, request))) {
             spentUsd += charge;
+            if (sameHead) {
+              const requests = receipt?.usage?.requests;
+              spentRequests += Number.isSafeInteger(requests) && requests >= 0 ? requests : GUIDANCE_MAX_REQUESTS;
+            }
             const amount = receipt?.usage?.reservedUsd;
             // A missing receipt may have used the largest authorized corpus allowance.
             if (inMonth) monthlySpentUsd += Number.isFinite(amount) && amount >= 0 ? amount : 15;
@@ -166,7 +172,7 @@ export function restoreActionGuidance(repository, {
       }
     }
   }
-  return { artifacts, spentUsd, monthlySpentUsd, month };
+  return { artifacts, spentUsd, spentRequests, monthlySpentUsd, month };
 }
 
 async function bytes(url, maximum) {
@@ -246,7 +252,7 @@ async function main() {
   const directory = resolve(root, 'packages/dialtone-docs/.generated/example-guidance');
   mkdirSync(directory, { recursive: true });
   writeFileSync(resolve(directory, 'reviewed.json'), JSON.stringify(selected, null, 2) + '\n');
-  writeFileSync(resolve(directory, 'previous-spend.json'), JSON.stringify({ spentUsd, monthlySpentUsd: restored.monthlySpentUsd, month: restored.month, monthlyLimitUsd: GUIDANCE_MONTHLY_BUDGET_USD }) + '\n');
+  writeFileSync(resolve(directory, 'previous-spend.json'), JSON.stringify({ spentUsd, spentRequests: restored.spentRequests, monthlySpentUsd: restored.monthlySpentUsd, month: restored.month, monthlyLimitUsd: GUIDANCE_MONTHLY_BUDGET_USD }) + '\n');
   console.info(`Restored guidance: ${JSON.stringify(selected.summary)}`);
   if (publication) selectGuidance(manifest, [selected], { strict: true });
 }
