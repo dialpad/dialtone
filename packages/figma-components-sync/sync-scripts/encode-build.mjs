@@ -17,7 +17,7 @@ import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { COMPONENTS } from './component-axes.mjs';
 import { fetchPublishedTokenKeys } from './library-tokens.mjs';
-import { snapPayload, SNAP_TOKEN_NAMES, PILL } from './token-snap.mjs';
+import { snapPayload, SNAP_TOKEN_NAMES, PILL, TEXT_TOKEN_NAMES, textTokenPayload } from './token-snap.mjs';
 
 const which = process.argv[2];
 if (!which) throw new Error('usage: encode-build.mjs <component>');
@@ -272,6 +272,8 @@ const flexLayoutOn = !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {})
 // snaps to, and for the slot numbers it derives itself.
 const snapOn = !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).snapTokens;
 if (snapOn) for (const name of SNAP_TOKEN_NAMES) ti(name);
+// Text with no matching library style binds font size, weight and family to the font variables.
+for (const name of TEXT_TOKEN_NAMES) ti(name);
 const swapTargets = new Map();     // "component|variantName" -> node id
 const swapUnresolved = new Set();
 /**
@@ -596,7 +598,7 @@ const tokKeys = Object.fromEntries(toks
 const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn, snap: snapOn ? snapPayload() : null,
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
   textStyleKeys: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textStyles === false ? [] : TEXT_STYLE_KEYS,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.

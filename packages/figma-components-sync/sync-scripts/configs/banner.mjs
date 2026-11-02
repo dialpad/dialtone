@@ -23,7 +23,7 @@ export default {
   // The title's text is a property, like the label: `headerText` is a prop in the code.
   textProps: { 'Optional title': 'Title' },
   page: 'Banner',
-  figmaSetId: '2043:59785',
+  figmaSetId: '2045:92151',
   // Computed spacing and the minimum height at the nearest token (token-snap.mjs).
   snapTokens: true,
 

@@ -26,7 +26,7 @@ export default {
   component: 'DtNotice',
   label: 'Notice',
   page: 'Notice',
-  figmaSetId: '2043:56784',
+  figmaSetId: '2045:89150',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
 

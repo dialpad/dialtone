@@ -649,6 +649,24 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       else {
         t.fontSize = size;
         if (lhPct) t.lineHeight = { unit: 'PERCENT', value: lhPct };
+        /**
+         * NO STYLE, SO THE TOKENS: font size, weight and family bound to the font variables by value.
+         * Line height stays a percentage: a bound line-height variable is read in pixels (measured),
+         * and the library's own text styles leave it unbound too. A value no variable holds stays
+         * a literal and is reported.
+         */
+        const T = D.textTokens;
+        if (T) {
+          const bindText = (field, list, want, label) => {
+            const hit = list.find(([, x]) => (typeof x === 'number' ? Math.abs(x - want) < 0.01 : x === want));
+            const v = hit && varByName.get(hit[0]);
+            if (!v) { if (want != null) skippedBindings.push(`${d.n} · ${label}: no font variable for ${want}`); return; }
+            try { t.setBoundVariable(field, v); } catch (e) { skippedBindings.push(`${d.n} · ${label}: ${e && e.message ? e.message : e}`); }
+          };
+          bindText('fontSize', T.size, size, 'fontSize');
+          bindText('fontWeight', T.weight, weight, 'fontWeight');
+          bindText('fontFamily', T.family.map(([fam, name]) => [name, fam]), wantFamily, 'fontFamily');
+        }
       }
       if (d.td) t.textDecoration = d.td;
       if (d.textColor) t.fills = [paint(d.textColor)];

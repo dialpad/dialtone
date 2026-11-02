@@ -16,7 +16,7 @@
  */
 export default {
   component: 'DtButton', label: 'Button', page: 'ButtonStacked',
-  figmaSetId: '2042:38236',
+  figmaSetId: '2045:83262',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
   axes: {

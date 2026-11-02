@@ -180,17 +180,26 @@ six sets (about 11,000 layer properties) and 20 percentage corners, now 0 unboun
 **Text** uses the Dialtone library's published text styles, imported by key at the start of each
 build (`build-data/text-styles.json`, read from the library file with `use_figma`: the REST styles
 endpoint needs a token scope the experiment token lacks). A style is applied only when size,
-weight, family and line height ALL match the measurement; anything else stays raw rather than being
-rounded to the nearest style. That leaves some text raw on purpose:
+weight, family and line height ALL match the measurement; a style is never rounded to the nearest.
 
-- Button sizes xs, sm and xl render Medium in the code, but the library's styles for them are
-  Semibold (xs, sm) and Regular (xl). The code and the library disagree there; the sync follows
-  the code.
-- Notice and Banner titles set `line-height` over `headline-md` (Bold 16 at 120%), a combination
-  no style holds, and the action button's own label is `button-sm` at Medium.
+**Text with no matching style is bound to the font variables instead**, so no text layer is a
+hard-coded value: font size, weight and family are bound by value to the primitive variables
+(`font/size/*`, `font/weight/*`, `font/family/*`; each value maps to exactly one). Line height stays a
+percentage, because a bound line-height variable is read in pixels (measured); the library's own
+text styles leave it unbound for the same reason. This covers:
+
+- Button sizes xs, sm and xl. The code renders them Medium (`button.less` forces
+  `font-weight: var(--dt-font-weight-medium)` after the typography token), but the library's styles
+  for them are Semibold (xs, sm) and Regular (xl), so no style matches. They bind `font/weight/medium`,
+  which is the variable the code names.
+- Notice and Banner titles (`headline-md` with a 120% line-height override, which no style holds) and
+  the action button's label.
 - ButtonLink (`textStyles: false`). Its underline is an axis, and with a library style applied,
   labels bound to the same Label property share their text formatting: underlining one underlined
   all 700 (measured in the plugin and in the MCP runtime). Without a style each label keeps its own.
+
+Measured: of 2,443 text layers across the six sets, 827 use a library style and 1,616 are bound to
+the font variables; none is a literal.
 
 ## The checks
 

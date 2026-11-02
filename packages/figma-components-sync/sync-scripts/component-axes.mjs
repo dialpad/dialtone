@@ -6,7 +6,7 @@
  */
 const BUILT_IN = {
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2042:50751',
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2045:78361',
     // Computed spacing (padding = token minus the border, gap = half the padding) is built at the
     // nearest token and bound to it; see token-snap.mjs.
     snapTokens: true,
