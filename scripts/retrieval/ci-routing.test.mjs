@@ -150,6 +150,7 @@ test('push guidance requires its separately authorized bootstrap head', async ()
   const outputs = await resolveGuidanceSource('push', undefined, 'a'.repeat(40));
   assert.equal(outputs.get('enabled'), 'true');
   assert.equal(outputs.get('budget'), '15');
+  assert.equal(outputs.get('limit'), '500');
 });
 
 test('guidance summary preserves visible model text without Markdown formatting or hidden controls', () => {
@@ -221,9 +222,19 @@ test('the comparison pilot requires an exact approved push head and 21 unique ID
   const sonnet = await resolveGuidanceSource('push', undefined, undefined, JSON.stringify({ head: 'a'.repeat(40), ids, model: 'claude-sonnet-5-5' }));
   assert.equal(sonnet.get('pilot-model'), 'claude-sonnet-5-5');
   assert.equal(sonnet.get('limit'), '42');
-  for (const pilot of [JSON.stringify({ head: 'b'.repeat(40), ids }), JSON.stringify({ head: 'a'.repeat(40), ids: ids.slice(1) }), JSON.stringify({ head: 'a'.repeat(40), ids, model: 'unapproved' })]) {
-    const output = await resolveGuidanceSource('push', undefined, undefined, pilot);
-    assert.equal(output.get('enabled'), 'false');
+  for (const event of ['workflow_run', 'workflow_dispatch']) {
+    const ordinary = await resolveGuidanceSource(event, 'a'.repeat(40), 'a'.repeat(40));
+    assert.equal(ordinary.get('budget'), '1');
+    assert.equal(ordinary.get('limit'), '20');
+  }
+  const wrongHead = await resolveGuidanceSource('push', undefined, undefined,
+    JSON.stringify({ head: 'b'.repeat(40), ids }));
+  assert.equal(wrongHead.get('enabled'), 'false');
+  for (const pilot of [JSON.stringify({ head: 'a'.repeat(40), ids: ids.slice(1) }),
+    JSON.stringify({ head: 'a'.repeat(40), ids, model: 'unapproved' })]) {
+    for (const bootstrap of [undefined, 'a'.repeat(40)]) {
+      await assert.rejects(resolveGuidanceSource('push', undefined, bootstrap, pilot), /invalid.*pilot|pilot.*invalid/i);
+    }
   }
 });
 

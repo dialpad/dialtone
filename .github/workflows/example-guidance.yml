@@ -106,6 +106,7 @@ jobs:
               && (pilot.model === undefined || pilot.model === 'claude-sonnet-5-5')
               && pilot.ids.length === 21 && new Set(pilot.ids).size === 21
               && pilot.ids.every(id => typeof id === 'string' && /^examples\/[a-zA-Z0-9/_-]+$/.test(id)) ? pilot.ids : undefined;
+            if (bootstrap && pilot?.head === head && !pilotIds) throw new Error('Invalid pilot authorization');
             if (bootstrap && process.env.BOOTSTRAP_HEAD !== head && !pilotIds) {
               core.setOutput('enabled', 'false');
               core.notice('Push bootstrap head is not separately authorized; no inference permitted.');
@@ -130,7 +131,7 @@ jobs:
             }
             attempt = sourceAttempt;
             core.setOutput('enabled', 'true');
-            const corpus = !pilotIds && process.env.BOOTSTRAP_HEAD === head;
+            const corpus = bootstrap && !pilotIds && process.env.BOOTSTRAP_HEAD === head;
             core.setOutput('pilot', pilotIds?.join(',') ?? '');
             core.setOutput('pilot-model', pilotIds ? pilot.model ?? '' : '');
             core.setOutput('run', String(sourceRun));
