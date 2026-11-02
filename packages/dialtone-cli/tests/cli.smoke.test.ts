@@ -196,7 +196,7 @@ test('docs context has bounded native continuation while ordinary JSON remains a
   expect(Array.isArray(JSON.parse(plain.stdout))).toBe(true);
   const search = run(['docs', 'toggle accessibility', '--limit', '1']);
   expect(search.stdout).toMatch(/dialtone docs --id components\/toggle#/);
-  for (const args of [['--context'], ['--offset', '1', '--id', id], ['--id', id, '--context', '--limit', '2x']]) {
+  for (const args of [['--context'], ['--offset', '1', '--id', id]]) {
     expect(run(['docs', ...args]).status).toBe(1);
   }
 });

@@ -1,5 +1,5 @@
 import { defineCommand } from 'citty';
-import { searchDocumentation, formatDocumentationResults, getDocumentationDetail, getDocumentationExampleIds, getDocumentationContext, componentDocumentation, bundledProvenance, createRetrievalEnvelope } from '@dialpad/dialtone-query-core';
+import { searchDocumentation, formatDocumentationResults, getDocumentationDetail, getDocumentationExampleIds, getDocumentationContext, componentDocumentation, bundledProvenance, createRetrievalEnvelope, COMPONENT_DETAIL_LIMIT } from '@dialpad/dialtone-query-core';
 import type { DocumentationRecord, DocumentationContextReference } from '@dialpad/dialtone-query-core';
 import { getContext } from '../context.js';
 
@@ -27,7 +27,7 @@ export const docsCommand = defineCommand({
   },
   run({ args }) {
     const integer = /^(0|[1-9]\d*)$/;
-    const limitText = args.limit ?? (args.context ? '20' : '10');
+    const limitText = args.limit ?? (args.context ? String(COMPONENT_DETAIL_LIMIT) : '10');
     const limit = integer.test(limitText) ? Number(limitText) : NaN;
     if (args.context) {
       const offsetText = args.offset ?? '0';

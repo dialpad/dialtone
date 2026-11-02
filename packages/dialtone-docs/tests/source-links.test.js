@@ -56,17 +56,21 @@ describe('authored context links', () => {
   });
 
   test('enriches heading-free prose once per page after assembly and preserves source/preset payloads', () => {
-      const source = record('a#usage');
-    const records = [source, record('a#other'), record('examples/a', { example: { source: { id: 'a#usage' } } }), record('examples/presets/a', { example: { source: { kind: 'combinator-preset', id: 'combinator/a' } } }), record('plain')];
+    // Examples share their page docId and precede its prose, so only the example guard keeps them unchanged.
+    const records = [
+      record('examples/a', { docId: 'a', example: { source: { id: 'a#usage' } } }),
+      record('examples/presets/a', { docId: 'a', example: { source: { kind: 'combinator-preset', id: 'combinator/a' } } }),
+      record('a#usage'), record('a#other'), record('plain'),
+    ];
     const before = structuredClone(records);
     const pages = [page('a', 'a.md', '/a.html', ''), page('plain', 'plain.md', '/plain.html', '[Other](a.md)', { sections: [{ id: 'plain', raw: '[Other](a.md)' }] })];
     const result = enrichDocumentationRecords(records, pages);
     expect(records).toEqual(before);
     expect(result.map(r => r.id)).toEqual(before.map(r => r.id));
-    expect(result[0].documentation).toEqual({ url: `${origin}/a.html`, versionScope: 'latest', installedCompatibility: 'not_checked' });
-    expect(result[0].links).toBeUndefined();
-    expect(result[1].documentation).toBeUndefined();
-    expect(result.slice(2, 4)).toEqual(before.slice(2, 4));
+    expect(result.slice(0, 2)).toEqual(before.slice(0, 2));
+    expect(result[2].documentation).toEqual({ url: `${origin}/a.html`, versionScope: 'latest', installedCompatibility: 'not_checked' });
+    expect(result[2].links).toBeUndefined();
+    expect(result[3].documentation).toBeUndefined();
     expect(result[4].links[0].targetDocId).toBe('a');
   });
 });

@@ -7,6 +7,8 @@ const appRequire = createRequire(new URL('../../../../apps/dialtone-documentatio
 const { inferRoutePath } = await import(pathToFileURL(appRequire.resolve('vuepress/shared')));
 
 const markdown = new MarkdownIt({ html: true });
+/** VuePress prefixes heading anchors that start with a digit. */
+const siteHash = suffix => suffix.replace(/^#(\d)/, '#_$1');
 
 function addTarget(map, key, page) {
   const targets = map.get(key) ?? [];
@@ -26,7 +28,7 @@ function resolveLink(href, page, pageMap) {
   if (!page.url) return unresolved;
   const [, rawPath, suffix = ''] = href.match(/^([^?#]*)(.*)$/);
   if (!rawPath) {
-    const url = page.directive ? absolute.href : new URL(href.replace(/^#(\d)/, '#_$1'), page.url).href;
+    const url = page.directive ? absolute.href : new URL(siteHash(href), page.url).href;
     return { url, targetDocId: page.directive && href.startsWith('?') ? null : page.docId };
   }
   if (page.directive && !explicitUrl && !rawPath.startsWith('/')) return unresolved;
@@ -41,11 +43,11 @@ function resolveLink(href, page, pageMap) {
     : pageMap.byRoute.get(path.endsWith('.html') ? inferRoutePath(`/${sourcePath}`) : `/${sourcePath}`);
   if (candidates?.length !== 1) return unresolved;
   const target = candidates[0];
-  const qualifiedSuffix = /(?:\/|\.md|\.html)$/.test(rawPath) ? suffix.replace(/^#(\d)/, '#_$1') : suffix;
+  const qualifiedSuffix = /(?:\/|\.md|\.html)$/.test(rawPath) ? siteHash(suffix) : suffix;
   return { url: new URL(qualifiedSuffix || target.url, target.url).href, targetDocId: target.docId };
 }
 
-export function readSectionLinks(sectionRaw, environment, page, pageMap) {
+function readSectionLinks(sectionRaw, environment, page, pageMap) {
   const links = [];
   const seen = new Set();
   for (const token of markdown.parse(sectionRaw, environment)) {

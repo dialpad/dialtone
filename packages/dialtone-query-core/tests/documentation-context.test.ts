@@ -17,7 +17,6 @@ const example = (extra = {}) => prose('examples/toggle', { docId: 'components/to
   source: { id: 'components/toggle#base' }, components: [{ canonicalName: 'DtStack' }], directives: [], ...extra,
 } });
 function lookup(id: string, records: DocumentationRecord[], associations = catalog) {
-  expect(core.getDocumentationContext).toBeTypeOf('function');
   return core.getDocumentationContext({ id }, records, associations);
 }
 

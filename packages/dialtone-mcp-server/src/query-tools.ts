@@ -147,6 +147,9 @@ const detailSchema = z
     offset,
   })
   .strict();
+// Each projection's defaults; an echoed default for the other projection is ignored.
+const CONTENT_DEFAULTS = { textOffset: 0, textLimit: 6000 };
+const CONTEXT_DEFAULTS = { limit: COMPONENT_DETAIL_LIMIT, offset: 0 };
 const docsSchema = z.object({
   id: query,
   projection: z.enum(['content', 'context']).optional(),
@@ -155,12 +158,11 @@ const docsSchema = z.object({
   limit: z.number().int().min(1).max(50).optional(),
   offset: z.number().int().min(0).max(100000).optional(),
 }).strict().superRefine((args, ctx) => {
-  const incompatible = args.projection === 'context'
-    ? [['textOffset', args.textOffset, 0], ['textLimit', args.textLimit, 6000]]
-    : [['limit', args.limit, 20], ['offset', args.offset, 0]];
-  for (const [key, value, defaultValue] of incompatible) {
+  const incompatible: Record<string, number> = args.projection === 'context' ? CONTENT_DEFAULTS : CONTEXT_DEFAULTS;
+  for (const [key, defaultValue] of Object.entries(incompatible)) {
+    const value = args[key as keyof typeof args];
     if (value !== undefined && value !== defaultValue) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, path: [String(key)],
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key],
         message: 'Pagination does not belong to the selected documentation projection.' });
     }
   }
@@ -361,7 +363,7 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
       const inputArgs = docsSchema.parse(input ?? {});
       if (inputArgs.projection === 'context') {
         const args = { id: inputArgs.id, projection: 'context',
-          limit: inputArgs.limit ?? 20, offset: inputArgs.offset ?? 0 };
+          limit: inputArgs.limit ?? CONTEXT_DEFAULTS.limit, offset: inputArgs.offset ?? CONTEXT_DEFAULTS.offset };
         const selected = getDocumentationContext(args, data.documentation, componentDocumentation);
         return reply(createRetrievalEnvelope({
           tool: name, args, mode: 'detail', domain: ['documentation', 'componentDocumentation'],
@@ -370,7 +372,8 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
             documentation: selected.documentation },
         }, provenance));
       }
-      const args = { id: inputArgs.id, textOffset: inputArgs.textOffset ?? 0, textLimit: inputArgs.textLimit ?? 6000 };
+      const args = { id: inputArgs.id, textOffset: inputArgs.textOffset ?? CONTENT_DEFAULTS.textOffset,
+        textLimit: inputArgs.textLimit ?? CONTENT_DEFAULTS.textLimit };
       const selected = getDocumentationDetail(args, data.documentation);
       const missingExample = !selected.record && args.id.startsWith('examples/');
       const availableExamples = data.documentation.filter(record => record.example).map(record => record.id);

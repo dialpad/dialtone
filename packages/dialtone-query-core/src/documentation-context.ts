@@ -71,12 +71,12 @@ export function getDocumentationContext(
   result.match = 'exact';
   result.docId = docId;
   const example = selected?.example;
-  const source = example ? example.source.kind === 'combinator-preset' ? undefined
-    : prose.find(record => record.id === example.source.id) : selected;
+  const preset = example?.source.kind === 'combinator-preset';
+  const source = !example ? selected : preset ? undefined : prose.find(record => record.id === example.source.id);
   if (source) {
     result.sourceSectionId = source.id;
     result.items.push(documentationReference(source, 'source'));
-  } else if (example && example.source.kind !== 'combinator-preset') {
+  } else if (example && !preset) {
     result.notes.push('The example source section is unavailable; available page context is listed instead.');
   }
   result.items.push(...apiReferences(docId, componentDocumentation));
@@ -85,11 +85,8 @@ export function getDocumentationContext(
     kind: 'utility' as const, relation: 'target' as const, name,
   })));
   const referenced = new Set(result.items.flatMap(item => item.kind === 'documentation' ? [item.id] : []));
-  for (const record of prose) {
-    if (referenced.has(record.id) || !record.content.trim()) continue;
-    result.items.push(documentationReference(record, 'sibling'));
-    referenced.add(record.id);
-  }
+  result.items.push(...prose.filter(record => !referenced.has(record.id) && record.content.trim())
+    .map(record => documentationReference(record, 'sibling')));
   const linkKeys = new Set<string>();
   const ordered = source ? [source, ...prose.filter(record => record.id !== source.id)] : prose;
   for (const record of ordered) {
