@@ -17,7 +17,9 @@
  */
 export default {
   component: 'DtCollapsible', label: 'Content', page: 'Collapsible',
-  figmaSetId: '2033:130653',
+  figmaSetId: '2042:10192',
+  // Computed spacing at the nearest token (token-snap.mjs).
+  snapTokens: true,
 
   axes: {
     open: [false, true],

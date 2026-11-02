@@ -347,6 +347,39 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     }
     node.setBoundVariable(field, v);
   };
+
+  /**
+   * `snapTokens`: A COMPUTED VALUE MOVES TO THE NEAREST TOKEN.
+   *
+   * What gets WRITTEN is snapped; the layout PREDICTIONS (hug or pin) keep reading the measured
+   * numbers, so no frame changes how it sizes. A tie goes to the larger token. Returns the spec
+   * unchanged when there is nothing to snap: not a snapping config, already a token, or zero.
+   * The scales and the token indices come in the payload (see token-snap.mjs).
+   */
+  const SNAP_FAMILY = {
+    paddingTop: 'spacing', paddingRight: 'spacing', paddingBottom: 'spacing', paddingLeft: 'spacing',
+    itemSpacing: 'spacing', counterAxisSpacing: 'spacing',
+    topLeftRadius: 'radius', topRightRadius: 'radius', bottomRightRadius: 'radius', bottomLeftRadius: 'radius',
+    minWidth: 'layout', minHeight: 'layout',
+  };
+  const snapSpec = (field, spec) => {
+    if (!D.snap || !spec || spec[1] >= 0 || !(spec[0] > 0)) return spec;
+    const scale = D.snap[SNAP_FAMILY[field]];
+    if (!scale) return spec;
+    let best = null;
+    for (const [name, x] of scale) {
+      const dist = Math.abs(x - spec[0]);
+      if (!best || dist < best.dist - 1e-9 || (Math.abs(dist - best.dist) < 1e-9 && x > best.x)) best = { name, x, dist };
+    }
+    const idx = D.toks.indexOf(best.name);
+    return idx < 0 ? spec : [best.x, idx];
+  };
+  /** A number the builder derived itself, bound to the token of that exact value if there is one. */
+  const bindByValue = (node, field, value, family) => {
+    if (!D.snap || !(value > 0)) return;
+    const hit = (D.snap[family] || []).find(([, x]) => Math.abs(x - value) < 0.01);
+    if (hit) bindNum(node, field, [value, D.toks.indexOf(hit[0])]);
+  };
   
   /**
    * The effect style the shadow's own TOKEN names — or null.
@@ -860,6 +893,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
      */
     const pad = (side, spec) => {
       if (!spec) return;
+      spec = snapSpec(side, spec);
       f[side] = spec[0];
       bindNum(f, side, spec);
     };
@@ -868,7 +902,11 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     // `column-gap` is reported by getComputedStyle even on a non-flex box, where it
     // paints nothing. Figma rejects itemSpacing on a frame that is not auto-layout, so
     // setting it from that inert value would throw mid-build.
-    if (d.itemSpacing && hug) { f.itemSpacing = d.itemSpacing[0]; bindNum(f, 'itemSpacing', d.itemSpacing); }
+    if (d.itemSpacing && hug) {
+      const sp = snapSpec('itemSpacing', d.itemSpacing);
+      f.itemSpacing = sp[0];
+      bindNum(f, 'itemSpacing', sp);
+    }
   
     /**
      * EACH CORNER AND EACH SIDE ON ITS OWN.
@@ -885,8 +923,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
      */
     for (const c of CORNERS) {
       if (!d[c]) continue;
-      f[c] = d[c][0];
-      bindNum(f, c, d[c]);
+      const sc = snapSpec(c, d[c]);
+      f[c] = sc[0];
+      bindNum(f, c, sc);
     }
     /**
      * A STROKE EVEN WHEN NOTHING WILL BE VISIBLE.
@@ -918,8 +957,8 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     // Bound, not just set: `min-inline-size: var(--dt-layout-...)` names the floor in the
     // same structural scale as a width, and a literal here is the same baked number the
     // width binding below exists to avoid.
-    if (d.minWidth && hug) { f.minWidth = d.minWidth[0]; bindNum(f, 'minWidth', d.minWidth); }
-    if (d.minHeight && hug) { f.minHeight = d.minHeight[0]; bindNum(f, 'minHeight', d.minHeight); }
+    if (d.minWidth && hug) { const mw = snapSpec('minWidth', d.minWidth); f.minWidth = mw[0]; bindNum(f, 'minWidth', mw); }
+    if (d.minHeight && hug) { const mh = snapSpec('minHeight', d.minHeight); f.minHeight = mh[0]; bindNum(f, 'minHeight', mh); }
   
     // Prefer a token-carrying effect STYLE; fall back to raw effects when the shadow
     // has more layers than any single style can express. A multi-part box-shadow
@@ -1368,6 +1407,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       wrapper.itemSpacing = comp.itemSpacing;
       wrapper.paddingTop = comp.paddingTop; wrapper.paddingBottom = comp.paddingBottom;
       wrapper.paddingLeft = Math.min(gapAfter, padL); wrapper.paddingRight = Math.min(gapAfter, padR);
+      // With `snapTokens` these are token values (gap 6 + 2 = 8): bound, not literal.
+      bindByValue(wrapper, 'paddingLeft', wrapper.paddingLeft, 'spacing');
+      bindByValue(wrapper, 'paddingRight', wrapper.paddingRight, 'spacing');
       // The bindings travel with the numbers: the vertical padding and the gap keep their tokens.
       const bound = comp.boundVariables || {};
       for (const field of ['paddingTop', 'paddingBottom', 'itemSpacing']) {
@@ -1410,6 +1452,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
          * placeholder: invisible, harmless beside real content, and it stops the slot being empty.
          */
         slot.minWidth = Math.max(0, padW - gapAfter);
+        bindByValue(slot, 'minWidth', slot.minWidth, 'spacing');
         const spacer = figma.createFrame();
         spacer.name = 'padding';
         spacer.fills = [];
@@ -1425,6 +1468,23 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       if (padL < gapAfter || padR < gapAfter) {
         skippedBindings.push(`${comp.name} · edge slots: padding ${padL}/${padR} is below the slot gap ${gapAfter}; the gap was clamped to the padding`);
       }
+    }
+
+    /**
+     * CENTRED ABSOLUTE CHILDREN ARE CENTRED AGAINST THE FINAL SIZE.
+     *
+     * A child centred by `justify-content` / `align-items` (DtButton's loading spinner) is placed at
+     * the offset measured in the browser, and its CENTER constraint only follows a RESIZE, not the
+     * reflow of an auto-layout parent that hugs its content. Anything that makes the parent a little
+     * wider than measured (text shaping, and token snapping, which rounds paddings up) left the
+     * child off-centre by half the difference: 4px on the size-500 button. Re-centred here, once
+     * the component has the size it will keep.
+     */
+    for (const k of comp.findAll(n => n.layoutPositioning === 'ABSOLUTE' && n.constraints)) {
+      const p = k.parent;
+      if (!p || !('width' in p) || p.type === 'PAGE') continue;
+      if (k.constraints.horizontal === 'CENTER') k.x = (p.width - k.width) / 2;
+      if (k.constraints.vertical === 'CENTER') k.y = (p.height - k.height) / 2;
     }
 
     made.push(comp);

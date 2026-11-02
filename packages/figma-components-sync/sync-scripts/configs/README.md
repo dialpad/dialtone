@@ -5,11 +5,14 @@ One file per component, default-exporting its config. Discovered automatically b
 
 Required: `component` (the Dt* name), `label`, `page`, `axes`, `invalid`, `variantName`, `props`.
 Optional: `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
-`slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `flexLayout`, `edgeSlots`, `rootClass`,
-`containerClass`, `figmaSetId`, `figmaMergedSetId`. `figmaSetId` is
+`slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `flexLayout`, `edgeSlots`,
+`rootClass`, `containerClass`, `figmaSetId`, `figmaMergedSetId`. `figmaSetId` is
 written by `run-batch` after a build, not by hand. `nativeSlots` names slots that become Figma
 `SLOT` nodes (see the Slots section of `../README.md`). `textProps` maps a text the harness
 injected (`{ 'Notice title': 'Title' }`) to the TEXT property it becomes, besides the label.
+`snapTokens: true` builds the spacing, corners and minimum sizes the CSS COMPUTES at the nearest
+Dialtone token and binds them (an 8px token that yields 7px is the 8px token); a circle is bound to
+the pill token. See "What gets bound" in `../README.md`.
 `textStyles: false` keeps a component's text raw instead of applying the Dialtone library's text
 styles (ButtonLink: its underline axis conflicts with a shared Label property, see the README).
 `flexLayout: true` opts a component into three layout behaviours the builder otherwise leaves

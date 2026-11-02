@@ -23,7 +23,9 @@ export default {
   // The title's text is a property, like the label: `headerText` is a prop in the code.
   textProps: { 'Optional title': 'Title' },
   page: 'Banner',
-  figmaSetId: '2033:142343',
+  figmaSetId: '2043:59785',
+  // Computed spacing and the minimum height at the nearest token (token-snap.mjs).
+  snapTokens: true,
 
   // Flex fill and align-self centring, as for Notice (see the generic builder).
   flexLayout: true,

@@ -23,6 +23,7 @@ import { converter, parse as parseColor, clampChroma, displayable, differenceCie
 import { loadLibrary } from './remote-variables.mjs';
 import { exemplarSlots } from './exemplar-slots.mjs';
 import { flattenEdgeSlots, edgeSlotFindings } from './edge-slots.mjs';
+import { snappedValue, PILL } from './token-snap.mjs';
 
 const API = 'https://api.figma.com';
 const EPS = 0.6;              // px — Figma stores floats, CSS rounds
@@ -31,6 +32,14 @@ const SIZE_EPS = 1.0;         // px — Chrome and Figma shape text slightly dif
 // and fails a `> 1.0` test. Radio's label is 23.39 against 22.39 — one pixel, which this
 // tolerance exists to forgive — and it failed on 320 variants for want of this slop.
 const FLOAT_SLOP = 0.01;
+/**
+ * `snapTokens` configs build computed spacing at the nearest token, so a box is a pixel or two off
+ * the browser's by construction (a button's padding 7 -> 8 grows it 2px). The values themselves are
+ * still compared exactly, against the snapped token; only the boxes and the offsets that follow from
+ * them get this bounded allowance, and each use is recorded.
+ */
+const SNAP_SIZE_EPS = 4.5;
+const SNAP_POS_EPS = 2.5;
 const CEPS = 1.5 / 255;       // ~one 8-bit step
 const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 
@@ -799,7 +808,9 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       // Corners are compared below, one at a time.
     ]) {
       if (k == null || domV == null) continue;
-      if (!near(domV, figV)) {
+      // The value the build is expected to hold: the browser's, moved to its token when the config snaps.
+      const wantV = cfg.snapTokens ? snappedValue(k, domV) : domV;
+      if (!near(wantV, figV)) {
         /**
          * A DECLARED, BOUNDED DIVERGENCE: the merged set keeps the EMPTY render's spacing.
          *
@@ -814,13 +825,15 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         // and the filled value in the browser. Any other 2px (a different node, the other direction)
         // is still a finding.
         const recorded = SLOT_PASS && slotDriftOf(which).find(e => e.path === path && e.prop === k
-          && near(figV, e.empty) && near(domV, e.filled));
+          && near(figV, cfg.snapTokens ? snappedValue(k, e.empty) : e.empty) && near(domV, e.filled));
         if (recorded) {
           allowed.push({ variant, path,
             reason: `slot-filled spacing drift: ${k} ${domV} in the browser, ${figV} in the merged set (recorded by build-spec as ${recorded.empty} empty vs ${recorded.filled} filled)` });
         } else {
-          rec(variant, path, k, domV, figV);
+          rec(variant, path, k, wantV, figV);
         }
+      } else if (cfg.snapTokens && !near(domV, figV)) {
+        allowed.push({ variant, path, reason: `token-snapped: ${k} ${domV} in the browser, ${figV} in Figma (the nearest token)` });
       }
     }
 
@@ -867,7 +880,21 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         const fromArray = rcr ? rcr[CORNER_ORDER.indexOf(figKey)] : undefined;
         const figR = typeof fromArray === 'number' ? fromArray
           : (typeof fig[figKey] === 'number' ? fig[figKey] : uniformR);
-        if (!near(domR, figR)) rec(variant, path, figKey, domR, figR);
+        // A snapping config builds a circle (`border-radius: 50%`) with the pill token: Figma clamps
+        // the radius to half the size, so it draws the same circle. Accepted when the browser's
+        // corner is that half, and recorded once per node.
+        if (cfg.snapTokens && figR >= PILL.value - FLOAT_SLOP && dom.box
+            && domR >= Math.min(dom.box.w, dom.box.h) / 2 - 0.6) {
+          if (figKey === 'topLeftRadius') {
+            allowed.push({ variant, path, reason: `circle: ${domR}px (50%) built as the pill token, which Figma clamps to half the size` });
+          }
+          continue;
+        }
+        const wantR = cfg.snapTokens ? snappedValue(figKey, domR) : domR;
+        if (!near(wantR, figR)) rec(variant, path, figKey, wantR, figR);
+        else if (cfg.snapTokens && !near(domR, figR)) {
+          allowed.push({ variant, path, reason: `token-snapped: ${figKey} ${domR} in the browser, ${figR} in Figma (the nearest token)` });
+        }
       }
     }
   }
@@ -887,7 +914,8 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       const want = parseFloat(anchor.inlineEnd);
       const got = (figParentBox.x + figParentBox.width) - (fb.x + fb.width);
       if (!Number.isNaN(want) && !near(want, got)) rec(variant, path, 'insetEnd', want, +got.toFixed(2));
-    } else if (!near(dom.expectedRel.x, fb.x - figParentBox.x)) {
+    } else if (!(cfg.snapTokens ? Math.abs(dom.expectedRel.x - (fb.x - figParentBox.x)) <= SNAP_POS_EPS
+      : near(dom.expectedRel.x, fb.x - figParentBox.x))) {
       /**
        * A CENTRE-CONSTRAINED CHILD FOLLOWS ITS PARENT'S GROWTH, WHICH REST CANNOT SHOW.
        *
@@ -901,7 +929,22 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       const gotX = fb.x - figParentBox.x;
       const halfGrowth = domParentBox && typeof domParentBox.w === 'number'
         ? (domParentBox.w - figParentBox.width) / 2 : null;
-      if (SLOT_PASS && fig.constraints && fig.constraints.horizontal === 'CENTER'
+      // A snapping config is a little wider than the browser (rounded-up paddings, text shaping), so
+      // a CENTRED child sits at a different absolute x in a parent that is wider. What the CSS says is
+      // that it is centred, so that is what is compared: its offset from the centre, which must
+      // agree whatever the parent's width.
+      const centred = cfg.snapTokens && fig.constraints && fig.constraints.horizontal === 'CENTER'
+        && domParentBox && typeof domParentBox.w === 'number' && dom.box && typeof dom.box.w === 'number';
+      if (centred) {
+        const domOff = dom.expectedRel.x - (domParentBox.w - dom.box.w) / 2;
+        const figOff = gotX - (figParentBox.width - fb.width) / 2;
+        if (Math.abs(domOff - figOff) <= EPS + FLOAT_SLOP) {
+          allowed.push({ variant, path,
+            reason: `centred child: compared by its offset from the centre (${domOff.toFixed(2)} in the browser, ${figOff.toFixed(2)} in Figma), not by x, because the snapped parent is wider` });
+        } else {
+          rec(variant, path, 'x from centre', +domOff.toFixed(2), +figOff.toFixed(2));
+        }
+      } else if (SLOT_PASS && fig.constraints && fig.constraints.horizontal === 'CENTER'
           && halfGrowth !== null && halfGrowth > 0.5 && (dom.expectedRel.x - gotX) > 0
           && Math.abs(dom.expectedRel.x - gotX - halfGrowth) <= CENTRE_SHAPING_SLACK) {
         // A parent that did not grow (or a child that moved the wrong way) is not this case, so a
@@ -912,7 +955,8 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         rec(variant, path, 'x', dom.expectedRel.x, +gotX.toFixed(2));
       }
     }
-    if (!near(dom.expectedRel.y, fb.y - figParentBox.y)) {
+    if (!(cfg.snapTokens ? Math.abs(dom.expectedRel.y - (fb.y - figParentBox.y)) <= SNAP_POS_EPS
+      : near(dom.expectedRel.y, fb.y - figParentBox.y))) {
       rec(variant, path, 'y', dom.expectedRel.y, +(fb.y - figParentBox.y).toFixed(2));
     }
   }
@@ -1034,7 +1078,9 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         allowed.push({ variant, path,
           reason: `align-self: center built as stretch + centred content (frame ${fb.height}px, content ${dom.box.h}px, centred within ${Math.abs(off).toFixed(1)}px)` });
       }
-    } else if (hDiff > SIZE_EPS + FLOAT_SLOP) {
+    } else if (cfg.snapTokens && hDiff > SIZE_EPS + FLOAT_SLOP && hDiff <= SNAP_SIZE_EPS) {
+      allowed.push({ variant, path, reason: `token-snapped spacing: height ${dom.box.h} in the browser, ${fig.absoluteBoundingBox.height} in Figma` });
+    } else if (hDiff > (cfg.snapTokens ? SNAP_SIZE_EPS : SIZE_EPS) + FLOAT_SLOP) {
       rec(variant, path, 'height', dom.box.h + fm.top + fm.bottom, fig.absoluteBoundingBox.height);
     }
 
@@ -1058,7 +1104,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
     const pinnedWidth = !fig.layoutMode || fig.layoutMode === 'NONE'
       || (fig.layoutMode === 'HORIZONTAL' && fig.primaryAxisSizingMode === 'FIXED')
       || (fig.layoutMode === 'VERTICAL' && fig.counterAxisSizingMode === 'FIXED');
-    if (pinnedWidth && s.display !== 'inline' && wDiff > SIZE_EPS + FLOAT_SLOP) {
+    if (pinnedWidth && s.display !== 'inline' && wDiff > (cfg.snapTokens ? SNAP_SIZE_EPS : SIZE_EPS) + FLOAT_SLOP) {
       rec(variant, path, 'width', dom.box.w + fm.left + fm.right, fig.absoluteBoundingBox.width);
     }
   }

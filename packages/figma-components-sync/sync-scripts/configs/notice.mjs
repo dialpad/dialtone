@@ -26,7 +26,9 @@ export default {
   component: 'DtNotice',
   label: 'Notice',
   page: 'Notice',
-  figmaSetId: '2033:139342',
+  figmaSetId: '2043:56784',
+  // Computed spacing at the nearest token (token-snap.mjs).
+  snapTokens: true,
 
   // Flex fill, align-self centring and a maximum width (see the generic builder): the content
   // grows to fill the row, centres itself against a taller action, and the root hugs up to

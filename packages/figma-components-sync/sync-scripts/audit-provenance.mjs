@@ -399,6 +399,13 @@ async function compare (variant, domNodeId, fig, path, domInfo) {
         stats.agree++;
         allowances.push({ variant, path, key, declared, bound });
       }
+      // A circle: the CSS names `size/radius/circle` (50%), which is a percentage and so has no
+      // Figma variable. A snapping config binds the pill token, which Figma clamps to half the
+      // size, so the same circle is drawn. Recorded, not hidden.
+      else if (cfg.snapTokens && /Radius$/.test(key) && declared === 'size/radius/circle' && bound === 'size/radius/pill') {
+        stats.agree++;
+        allowances.push({ variant, path, key, declared, bound });
+      }
       else findings.push({ variant, path, key, declared, bound, kind: 'wrong-token' });
     } else if (declared && !bound) {
       // "Declared but unbound" was ONE bucket of 9,760 on Radio, which is exactly the
@@ -549,7 +556,7 @@ if (allowances.length) {
     const k = `${a.path} · ${a.key}: figma binds ${a.bound} where css names ${a.declared}`;
     by[k] = (by[k] || 0) + 1;
   }
-  console.log(`recorded allowances            : ${allowances.length}  (transparent-border fold)`);
+  console.log(`recorded allowances            : ${allowances.length}  (transparent-border fold; circle radius as the pill token)`);
   for (const [k, n] of Object.entries(by).sort((a, b) => b[1] - a[1])) {
     console.log(`     ${String(n).padStart(5)}x  ${k}`);
   }

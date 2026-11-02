@@ -160,6 +160,23 @@ A colour CSS computes (`color-mix()`, a relative colour, an oklch hue expression
 token to name, so a variable is **synthesised** into `Dialtone Derived (synthesised by sync)`
 holding both measured modes. A literal would be right in one mode and wrong in the other.
 
+**Computed spacing is built at the nearest token** (`snapTokens: true`, `token-snap.mjs`). A
+stylesheet that writes `calc(var(--dt-spacing-150) - var(--button-border-width))` renders 11px, and
+no variable holds 11. Dialtone is happy to use the token the calculation started from, so padding,
+gap, corner radius and minimum size are moved to the nearest token on the spacing, radius or layout
+scale and bound to it; a tie goes to the larger token (7 -> 8, 11 -> 12, 5 -> 6). Button's padding,
+which the CSS writes as the token minus the 1px border, is therefore the token itself, and its gap
+(half the padding) is the token for half. A circle (`border-radius: 50%`) has no pixel token, so it
+is bound to `size/radius/pill`, which Figma clamps to half the size.
+
+The builder snaps what it WRITES and keeps predicting layout from what was MEASURED, so no frame
+changes how it sizes. The verifier snaps what it EXPECTS with the same function, so these values are
+still compared exactly, now against the token. What the snapping moves, a button or a notice a pixel
+or two bigger than the browser's, gets a bounded allowance (`SNAP_SIZE_EPS`, `SNAP_POS_EPS`), and
+every use is recorded in the run's allowances. A centred child (the loading spinner) is compared by its
+offset from the centre, since the parent is wider. Measured: 91 distinct calc-derived values across
+six sets (about 11,000 layer properties) and 20 percentage corners, now 0 unbound in Figma.
+
 **Text** uses the Dialtone library's published text styles, imported by key at the start of each
 build (`build-data/text-styles.json`, read from the library file with `use_figma`: the REST styles
 endpoint needs a token scope the experiment token lacks). A style is applied only when size,

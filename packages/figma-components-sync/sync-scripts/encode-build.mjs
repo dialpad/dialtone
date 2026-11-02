@@ -17,6 +17,7 @@ import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { COMPONENTS } from './component-axes.mjs';
 import { fetchPublishedTokenKeys } from './library-tokens.mjs';
+import { snapPayload, SNAP_TOKEN_NAMES, PILL } from './token-snap.mjs';
 
 const which = process.argv[2];
 if (!which) throw new Error('usage: encode-build.mjs <component>');
@@ -266,6 +267,11 @@ for (const full of Object.keys(ICON_LIB.ids || {})) {
  */
 const textPropsOf = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textProps || {};
 const flexLayoutOn = !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).flexLayout;
+// `snapTokens`: computed spacing, corners and minimum sizes move to the nearest token (token-snap.mjs).
+// Every scale token is registered up front so the builder can find the variable for whatever a value
+// snaps to, and for the slot numbers it derives itself.
+const snapOn = !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).snapTokens;
+if (snapOn) for (const name of SNAP_TOKEN_NAMES) ti(name);
 const swapTargets = new Map();     // "component|variantName" -> node id
 const swapUnresolved = new Set();
 /**
@@ -441,6 +447,9 @@ function encodeNode (n) {
 
   for (const k of NUM_KEYS) {
     if (!p[k] || p[k].value == null) continue;
+    // A circle (`border-radius: 50%`) has no pixel token. Figma clamps a radius to half the size, so
+    // the pill token draws the same circle.
+    if (snapOn && p[k].fromPercent && /Radius$/.test(k)) { out[k] = [PILL.value, ti(PILL.name)]; continue; }
     out[k] = [p[k].value, ti(p[k].token)];
     // Third slot: how much of this padding is the node's OWN margin, folded in. The
     // builder's hug prediction needs it, because a folded margin grows the node BEYOND
@@ -587,7 +596,7 @@ const tokKeys = Object.fromEntries(toks
 const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn,
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn, snap: snapOn ? snapPayload() : null,
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
   textStyleKeys: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textStyles === false ? [] : TEXT_STYLE_KEYS,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.
