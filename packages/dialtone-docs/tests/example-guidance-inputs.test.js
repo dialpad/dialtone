@@ -76,3 +76,29 @@ it('reads cached component metadata after its producing checkout has moved', () 
     rmSync(moved, { recursive: true, force: true });
   }
 });
+
+
+it('binds fieldset guidance to the current form section without unrelated guide noise', () => {
+  const root = mkdtempSync(resolve(tmpdir(), 'guidance-form-context-'));
+  try {
+    const directory = resolve(root, 'apps/dialtone-documentation/docs/guides/accessibility');
+    mkdirSync(directory, { recursive: true });
+    const guide = resolve(directory, 'index.md');
+    const text = '# Accessibility\n## Development\n### Form Best Practices\nName the fieldset group with a legend.\n### Other\nFirst outside paragraph.';
+    writeFileSync(guide, text);
+    const input = { id: 'examples/group', template: '<fieldset><input type="checkbox"></fieldset>', setup: '',
+      rawFile: '# Group', components: [], directives: [] };
+    const config = { model: 'test', toolingHash: 'a'.repeat(64), driverHash: 'd'.repeat(64) };
+    const facts = () => prepareGuidanceFacts(input, { root, metadata: [] });
+    const fingerprint = () => createGuidanceManifest([facts()], config).entries[0].inputHash;
+    expect(facts().sources).toContainEqual({ id: 'guidance:guides/accessibility#development-form-best-practices',
+      text: 'Name the fieldset group with a legend.' });
+    const before = fingerprint();
+    writeFileSync(guide, text.replace('First outside paragraph.', 'Different outside paragraph.'));
+    expect(fingerprint()).toBe(before);
+    writeFileSync(guide, text.replace('Name the fieldset group with a legend.', 'Give each fieldset a descriptive legend.'));
+    expect(fingerprint()).not.toBe(before);
+    writeFileSync(guide, text.replace('Form Best Practices', 'Renamed'));
+    expect(facts).toThrow(/Form Best Practices/);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

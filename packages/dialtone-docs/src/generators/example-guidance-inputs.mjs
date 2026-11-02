@@ -4,6 +4,7 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import matter from 'gray-matter';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
+import { chunkSections } from './source-sections.mjs';
 
 const require = createRequire(new URL('../../../../apps/dialtone-documentation/package.json', import.meta.url));
 const { parse, babelParse } = require('vue/compiler-sfc');
@@ -73,6 +74,13 @@ export function prepareGuidanceFacts(input, { root, metadata, modules = new Map(
     { id: 'example', text: `${input.setup ? `<script setup>\n${input.setup}</script>\n` : ''}<template>\n${input.template}\n</template>` },
     { id: 'documentation', text: stripMarkdown(matter(input.rawFile).content) },
   ];
+  if (/\bfieldset\b/i.test(input.template)) {
+    const guide = resolve(root, 'apps/dialtone-documentation/docs/guides/accessibility/index.md');
+    const section = chunkSections(matter(readFileSync(guide, 'utf8')).content)
+      .find(section => section.headingPath.at(-1) === 'Form Best Practices');
+    if (!section) throw new Error(`${guide}: missing Form Best Practices section required for example guidance`);
+    sources.push({ id: `guidance:guides/accessibility#${section.baseSlug}`, text: stripMarkdown(section.raw) });
+  }
   const dependencies = new Map();
   for (const name of input.components) {
     const api = metadata.find(entry => entry.identity?.canonicalName === name || entry.displayName === name);
