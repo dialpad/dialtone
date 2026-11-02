@@ -218,7 +218,10 @@ test('the comparison pilot requires an exact approved push head and 21 unique ID
   assert.equal(outputs.get('pilot'), ids.join(','));
   assert.equal(outputs.get('budget'), '1');
   assert.equal(outputs.get('limit'), '84');
-  for (const pilot of [JSON.stringify({ head: 'b'.repeat(40), ids }), JSON.stringify({ head: 'a'.repeat(40), ids: ids.slice(1) })]) {
+  const sonnet = await resolveGuidanceSource('push', undefined, undefined, JSON.stringify({ head: 'a'.repeat(40), ids, model: 'claude-sonnet-5-5' }));
+  assert.equal(sonnet.get('pilot-model'), 'claude-sonnet-5-5');
+  assert.equal(sonnet.get('limit'), '42');
+  for (const pilot of [JSON.stringify({ head: 'b'.repeat(40), ids }), JSON.stringify({ head: 'a'.repeat(40), ids: ids.slice(1) }), JSON.stringify({ head: 'a'.repeat(40), ids, model: 'unapproved' })]) {
     const output = await resolveGuidanceSource('push', undefined, undefined, pilot);
     assert.equal(output.get('enabled'), 'false');
   }
@@ -240,12 +243,28 @@ test('the paid workflow step carries restored request usage through the real dri
     writeFileSync(join(docs, '.generated/example-guidance/reviewed.json'), JSON.stringify({ schemaVersion: 1, entries: [] }));
     writeFileSync(join(docs, '.generated/example-guidance/previous-spend.json'), JSON.stringify({ spentUsd: 0, spentRequests: 2, monthlySpentUsd: 0, month: guidanceMonth() }));
     const step = readWorkflow('example-guidance.yml').jobs.generate.steps.find(step => step.env?.ANTHROPIC_API_KEY);
-    const env = { ...process.env, REQUEST_LIMIT: '2', BUDGET_USD: '1', PILOT_IDS: '' };
+    const env = { ...process.env, REQUEST_LIMIT: '2', BUDGET_USD: '1' };
     for (const key of ['ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'GH_TOKEN', 'GITHUB_TOKEN', 'NODE_AUTH_TOKEN']) delete env[key];
-    const run = spawnSync('bash', ['-e', '-c', step.run], { cwd: directory, env, encoding: 'utf8' });
-    assert.equal(run.status, 1, run.stderr);
-    const output = JSON.parse(readFileSync(join(directory, 'example-guidance.json')));
-    assert.equal(output.usage.requests, 0);
-    assert.equal(output.entries[0].status, 'pending');
+    for (const model of ['', GUIDANCE_MODEL]) {
+      const run = spawnSync('bash', ['-e', '-c', step.run], { cwd: directory,
+        env: { ...env, PILOT_IDS: model ? manifest.entries[0].id : '', PILOT_MODEL: model }, encoding: 'utf8' });
+      assert.equal(run.status, 1, run.stderr);
+      const output = JSON.parse(readFileSync(join(directory, 'example-guidance.json')));
+      assert.equal(output.usage.requests, 0);
+      if (model) {
+        assert.equal(output.pilot.length, 1);
+        assert.equal(output.pilot[0].model, GUIDANCE_MODEL);
+        assert.equal(output.pilot[0].entries[0].status, 'pending');
+        assert.deepEqual(output.entries, []);
+      } else assert.equal(output.entries[0].status, 'pending');
+    }
+    const rejected = join(directory, 'rejected.json');
+    const blank = spawnSync('node', [join(docs, 'scripts/generate-example-guidance.mjs'),
+      join(docs, 'dist/example-guidance-inputs.json'), rejected,
+      '--pilot-ids', manifest.entries[0].id, '--pilot-model', '',
+      '--monthly-spent-usd', '0', '--month', guidanceMonth()], { env, encoding: 'utf8' });
+    assert.equal(blank.status, 1);
+    assert.match(blank.stderr, /Invalid pilot/i);
+    assert.throws(() => readFileSync(rejected), { code: 'ENOENT' });
   } finally { rmSync(directory, { recursive: true, force: true }); }
 });

@@ -103,6 +103,7 @@ jobs:
             if (!/^[a-f0-9]{40}$/.test(head)) throw new Error('Invalid source head');
             const pilot = process.env.PILOT ? JSON.parse(process.env.PILOT) : undefined;
             const pilotIds = bootstrap && pilot?.head === head && Array.isArray(pilot.ids)
+              && (pilot.model === undefined || pilot.model === 'claude-sonnet-5-5')
               && pilot.ids.length === 21 && new Set(pilot.ids).size === 21
               && pilot.ids.every(id => typeof id === 'string' && /^examples\/[a-zA-Z0-9/_-]+$/.test(id)) ? pilot.ids : undefined;
             if (bootstrap && process.env.BOOTSTRAP_HEAD !== head && !pilotIds) {
@@ -131,11 +132,12 @@ jobs:
             core.setOutput('enabled', 'true');
             const corpus = !pilotIds && process.env.BOOTSTRAP_HEAD === head;
             core.setOutput('pilot', pilotIds?.join(',') ?? '');
+            core.setOutput('pilot-model', pilotIds ? pilot.model ?? '' : '');
             core.setOutput('run', String(sourceRun));
             core.setOutput('attempt', String(attempt));
             core.setOutput('head', head);
             core.setOutput('pr', String(pr.number));
-            core.setOutput('limit', pilotIds ? '84' : corpus ? '500' : '20');
+            core.setOutput('limit', pilotIds ? pilot.model ? '42' : '84' : corpus ? '500' : '20');
             core.setOutput('budget', corpus ? '15' : '1');
       - name: Fetch only approved immutable tooling; no PR scripts or dependency installation
         if: steps.source.outputs.enabled == 'true'
@@ -177,6 +179,7 @@ jobs:
           GUIDANCE_SOURCE_HEAD: ${{ steps.source.outputs.head }}
           GUIDANCE_TOOLING_REF: ${{ vars.EXAMPLE_GUIDANCE_TOOLING_REF }}
           PILOT_IDS: ${{ steps.source.outputs.pilot }}
+          PILOT_MODEL: ${{ steps.source.outputs.pilot-model }}
           REQUEST_LIMIT: ${{ steps.source.outputs.limit }}
           BUDGET_USD: ${{ steps.source.outputs.budget }}
         run: |
@@ -186,6 +189,7 @@ jobs:
           BUDGET_MONTH=$(node -p "JSON.parse(require('fs').readFileSync('packages/dialtone-docs/.generated/example-guidance/previous-spend.json')).month")
           PILOT_ARGS=()
           if [ -n "$PILOT_IDS" ]; then PILOT_ARGS=(--pilot-ids "$PILOT_IDS"); fi
+          if [ -n "$PILOT_MODEL" ]; then PILOT_ARGS+=(--pilot-model "$PILOT_MODEL"); fi
           node packages/dialtone-docs/scripts/generate-example-guidance.mjs \
             packages/dialtone-docs/dist/example-guidance-inputs.json example-guidance.json \
             "${PILOT_ARGS[@]}" --limit "$REQUEST_LIMIT" --budget-usd "$BUDGET_USD" --spent-usd "$SPENT_USD" --spent-requests "$SPENT_REQUESTS" \

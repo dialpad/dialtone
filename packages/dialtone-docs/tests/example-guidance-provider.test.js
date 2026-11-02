@@ -234,3 +234,22 @@ it('shares the remaining historical request allowance across both comparison arm
   expect(output.usage.requests).toBe(1);
   expect(output.pilot.map(arm => arm.entries[0].status)).toEqual(['complete', 'pending']);
 });
+
+
+it('runs only the explicitly approved Sonnet arm without making pilot notes publishable', async () => {
+  const data = manifest();
+  const models = [];
+  const output = await provider.compareGuidance(data, [data.entries[0].id], {
+    model: GUIDANCE_MODEL, apiKey: 'test-only', limit: 42, budgetUsd: 1,
+    request: async (_, options) => {
+      models.push(JSON.parse(options.body).model);
+      return { ok: true, json: async () => ({ stop_reason: 'end_turn',
+        content: [{ type: 'text', text: JSON.stringify(answer()) }], usage: { input_tokens: 100, output_tokens: 60 } }) };
+    },
+  });
+  expect(models).toEqual(['claude-sonnet-5-5']);
+  expect(output.pilot.map(arm => arm.entries[0].status)).toEqual(['complete']);
+  expect(output.entries).toEqual([]);
+  await expect(provider.compareGuidance(data, [data.entries[0].id], { model: 'unapproved', budgetUsd: 1 }))
+    .rejects.toThrow(/pilot/i);
+});

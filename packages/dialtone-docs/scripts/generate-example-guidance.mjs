@@ -138,6 +138,7 @@ export async function generateGuidance(manifest, {
 export async function compareGuidance(manifest, ids, options = {}) {
   if (!Array.isArray(ids) || !ids.length || ids.length > 21 || new Set(ids).size !== ids.length
     || !Number.isFinite(options.budgetUsd) || options.budgetUsd < 0 || options.budgetUsd > 1
+    || (options.model !== undefined && options.model !== GUIDANCE_MODEL)
     || !Number.isInteger(options.limit ?? 84) || (options.limit ?? 84) > 84) throw new Error('Invalid pilot limits');
   assertGuidanceManifest(manifest);
   const inputs = ids.map(id => {
@@ -151,7 +152,7 @@ export async function compareGuidance(manifest, ids, options = {}) {
     usage: Object.fromEntries(['requests', 'inputTokens', 'outputTokens', 'estimatedUsd', 'reservedUsd']
       .map(key => [key, pilot.reduce((sum, arm) => sum + arm.usage[key], 0)])),
   });
-  for (const model of [PILOT_MODEL, GUIDANCE_MODEL]) {
+  for (const model of options.model ? [options.model] : [PILOT_MODEL, GUIDANCE_MODEL]) {
     const prior = snapshot().usage;
     const subset = createGuidanceManifest(inputs, { ...manifest, model });
     const index = pilot.length;
@@ -171,7 +172,7 @@ async function main() {
   const pairs = Array.from({ length: args.length / 2 }, (_, index) => args.slice(index * 2, index * 2 + 2));
   const options = Object.fromEntries(pairs);
   for (const key of Object.keys(options)) {
-    if (!['--limit', '--budget-usd', '--ids', '--cache', '--spent-usd', '--spent-requests', '--monthly-spent-usd', '--month', '--pilot-ids'].includes(key)) throw new Error(`Unknown option: ${key}`);
+    if (!['--limit', '--budget-usd', '--ids', '--cache', '--spent-usd', '--spent-requests', '--monthly-spent-usd', '--month', '--pilot-ids', '--pilot-model'].includes(key)) throw new Error(`Unknown option: ${key}`);
   }
   // Validate the full manifest before a pilot subset is rebuilt under the current policy.
   let manifest = assertGuidanceManifest(JSON.parse(readFileSync(inputPath, 'utf8')));
@@ -184,9 +185,11 @@ async function main() {
   const artifacts = options['--cache'] ? [JSON.parse(readFileSync(options['--cache'], 'utf8'))] : [];
   const pilotIds = options['--pilot-ids']?.split(',');
   if (pilotIds && options['--ids']) throw new Error('Use one pilot subset');
+  if (options['--pilot-model'] !== undefined && !pilotIds) throw new Error('Pilot model requires pilot IDs');
   const generate = pilotIds ? (data, config) => compareGuidance(data, pilotIds, config) : generateGuidance;
   const result = await generate(manifest, {
     apiKey: process.env.ANTHROPIC_API_KEY, artifacts,
+    ...(options['--pilot-model'] !== undefined ? { model: options['--pilot-model'] } : {}),
     onProgress: value => {
       writeFileSync(`${outputPath}.tmp`, JSON.stringify(value, null, 2) + '\n');
       renameSync(`${outputPath}.tmp`, outputPath);
