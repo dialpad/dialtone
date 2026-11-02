@@ -39,9 +39,10 @@ function resolveLink(href, page, pageMap) {
   } catch { return authoredUrl; }
   const rooted = path.startsWith('/');
   const sourcePath = posix.normalize(rooted ? path.slice(1) : posix.join(posix.dirname(page.sourcePath), path));
+  const routePath = path.endsWith('.html') ? inferRoutePath(`/${sourcePath}`) : `/${sourcePath}`;
   const candidates = path.endsWith('.md')
     ? pageMap.bySource.get(sourcePath)
-    : pageMap.byRoute.get(path.endsWith('.html') ? inferRoutePath(`/${sourcePath}`) : `/${sourcePath}`);
+    : pageMap.byRoute.get(new URL(routePath, page.url).pathname);
   if (candidates?.length !== 1) return authoredUrl;
   const target = candidates[0];
   const qualifiedSuffix = !target.directive && /(?:\/|\.md|\.html)$/.test(rawPath) ? siteHash(suffix) : suffix;

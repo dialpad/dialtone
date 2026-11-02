@@ -1,5 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { enrichDocumentationRecords } from '../src/generators/source-links.mjs';
+import { resolveSourcePagePath } from '../../../apps/dialtone-documentation/scripts/lib/source-page.mjs';
 
 const origin = 'https://dialtone.dialpad.com';
 const record = (id, extra = {}) => ({ id, docId: id.split('#')[0], content: 'Authored prose.', headingPath: [], ...extra });
@@ -13,6 +14,7 @@ function enrich(raw, extra = {}) {
     page('components/presence', 'components/presence.md', '/components/presence.html', ''),
     page('components/mode-island', 'components/mode-island.md', '/components/mode-island.html', ''),
     page('utilities/index', 'utilities/index.md', '/utilities/', ''),
+    page('index', 'index.md', '/', ''),
   ];
   const records = pages.map(p => record(`${p.docId}#usage`));
   return enrichDocumentationRecords(records, pages)[0];
@@ -27,6 +29,7 @@ describe('authored context links', () => {
     ['../utilities/index.html#1-links', `${origin}/utilities/#_1-links`, 'utilities/index'],
     ['/components/mode-island.html#positioned-components', `${origin}/components/mode-island.html#positioned-components`, 'components/mode-island'],
     [`${origin}/components/presence.html`, `${origin}/components/presence.html`, 'components/presence'],
+    [origin, `${origin}/`, 'index'],
     ['#usage', `${origin}/components/example.html#usage`, 'components/example'],
     ['#1-state', `${origin}/components/example.html#_1-state`, 'components/example'],
     ['/components/presence.md#1-state', `${origin}/components/presence.html#_1-state`, 'components/presence'],
@@ -49,6 +52,21 @@ describe('authored context links', () => {
   test('uses the known Storybook base for directive query links', () => {
     const result = enrich('[Example](?path=/story/tooltip--default)', { directive: true, url: `${origin}/vue/?path=/docs/tooltip--docs` });
     expect(result.links[0]).toEqual({ label: 'Example', href: '?path=/story/tooltip--default', url: `${origin}/vue/?path=/story/tooltip--default`, targetDocId: null });
+  });
+
+  test('matches encoded HTML and directory routes to actual VuePress page paths', async () => {
+    const raw = '[MD](./café.md) [HTML](./café.html) [Directory](../utilities/café/)';
+    const pages = [
+      page('components/example', 'components/example.md', '/components/example.html', raw),
+      page('components/café', 'components/café.md', await resolveSourcePagePath('components/café.md', {}), ''),
+      page('utilities/café/index', 'utilities/café/index.md', await resolveSourcePagePath('utilities/café/index.md', {}), ''),
+    ];
+    const result = enrichDocumentationRecords(pages.map(p => record(`${p.docId}#usage`)), pages);
+    expect(result[0].links).toEqual([
+      { label: 'MD', href: './caf%C3%A9.md', url: `${origin}/components/caf%C3%A9.html`, targetDocId: 'components/café' },
+      { label: 'HTML', href: './caf%C3%A9.html', url: `${origin}/components/caf%C3%A9.html`, targetDocId: 'components/café' },
+      { label: 'Directory', href: '../utilities/caf%C3%A9/', url: `${origin}/utilities/caf%C3%A9/`, targetDocId: 'utilities/café/index' },
+    ]);
   });
 
   test('retains a source page URL without inventing an unavailable retrieval target', () => {
