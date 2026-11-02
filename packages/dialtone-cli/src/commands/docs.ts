@@ -4,7 +4,7 @@ import type { DocumentationRecord, DocumentationContextReference } from '@dialpa
 import { getContext } from '../context.js';
 
 function shellArgument(value: string): string {
-  return /^[\w./#:-]+$/.test(value) ? value : "'" + value.replaceAll("'", "'\\''") + "'";
+  return /^[\w./:-]+$/.test(value) ? value : "'" + value.replaceAll("'", "'\\''") + "'";
 }
 
 function referenceCommand(item: DocumentationContextReference): string {
@@ -43,6 +43,7 @@ export const docsCommand = defineCommand({
         domain: ['documentation', 'componentDocumentation'], match: selected.match, items: selected.items, notes: selected.notes,
         detail: { id: args.id, docId: selected.docId, sourceSectionId: selected.sourceSectionId, documentation: selected.documentation },
       }, bundledProvenance);
+      if (envelope.match === 'no-match') console.error(`No documentation context found with ID "${args.id}". Use dialtone docs <query> to find an ID.`);
       if (args.format === 'json') console.log(JSON.stringify(envelope, null, 2));
       else {
         console.log(`Context for ${args.id}: ${envelope.counts.returned} of ${envelope.counts.total} references (bundled; installed compatibility not checked).`);

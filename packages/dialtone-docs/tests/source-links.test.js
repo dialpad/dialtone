@@ -32,6 +32,8 @@ describe('authored context links', () => {
     ['/components/presence.md#1-state', `${origin}/components/presence.html#_1-state`, 'components/presence'],
     ['/components/missing.md', null, null],
     ['https://example.org/guide#part', 'https://example.org/guide#part', null],
+    [`${origin}/vue/?path=/story/components-icon--default`, `${origin}/vue/?path=/story/components-icon--default`, null],
+    [`${origin}/components/icon`, `${origin}/components/icon`, null],
     ['https://user:password@example.org/', null, null],
     ['mailto:help@example.org', null, null],
   ])('resolves %s through real source/page mappings', (href, url, targetDocId) => {
@@ -47,6 +49,30 @@ describe('authored context links', () => {
   test('uses the known Storybook base for directive query links', () => {
     const result = enrich('[Example](?path=/story/tooltip--default)', { directive: true, url: `${origin}/vue/?path=/docs/tooltip--docs` });
     expect(result.links[0]).toEqual({ label: 'Example', href: '?path=/story/tooltip--default', url: `${origin}/vue/?path=/story/tooltip--default`, targetDocId: null });
+  });
+
+  test('retains a source page URL without inventing an unavailable retrieval target', () => {
+    const pages = [
+      page('components/example', 'components/example.md', '/components/example.html', '[Preview](/components/preview.md)'),
+      page('components/preview', 'components/preview.md', '/components/preview.html', 'Unindexed prose.'),
+    ];
+    const result = enrichDocumentationRecords([record('components/example#usage')], pages);
+    expect(result).toHaveLength(1);
+    expect(result[0].links[0]).toEqual({ label: 'Preview', href: '/components/preview.md',
+      url: `${origin}/components/preview.html`, targetDocId: null });
+  });
+
+  test.each([
+    ['/vue/?path=/story/tooltip--default', `${origin}/vue/?path=/story/tooltip--default`],
+    ['/vue/index.html?path=/story/tooltip--default', `${origin}/vue/?path=/story/tooltip--default`],
+    ['/vue/#1-story', `${origin}/vue/#1-story`],
+  ])('uses the existing Storybook route for %s without a local documentation ID', (href, url) => {
+    const pages = [
+      page('components/example', 'components/example.md', '/components/example.html', `[Story](${href})`),
+      page('directives/tooltip', 'directives/tooltip.mdx', '/vue/?path=/docs/tooltip--docs', '', { directive: true }),
+    ];
+    const result = enrichDocumentationRecords([record('components/example#usage'), record('directives/tooltip#usage')], pages);
+    expect(result[0].links[0]).toEqual({ label: 'Story', href, url, targetDocId: null });
   });
 
   test('leaves ambiguous local routes unresolved', () => {

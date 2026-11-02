@@ -1,6 +1,6 @@
 import { describe, test, expect, onTestFinished } from 'vitest';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -195,7 +195,7 @@ test('docs context has bounded native continuation while ordinary JSON remains a
   const plain = run(['docs', '--id', id, '--format', 'json']);
   expect(Array.isArray(JSON.parse(plain.stdout))).toBe(true);
   const search = run(['docs', 'toggle accessibility', '--limit', '1']);
-  expect(search.stdout).toMatch(/dialtone docs --id components\/toggle#/);
+  expect(search.stdout).toMatch(/dialtone docs --id '?components\/toggle#/);
   for (const args of [['--context'], ['--offset', '1', '--id', id]]) {
     expect(run(['docs', ...args]).status).toBe(1);
   }
@@ -212,4 +212,23 @@ test.each(['0x10', '1e1', ' 5 ', '', '1.5', '10abc', '01'])('docs rejects malfor
     expect(result.stdout).toBe('');
     expect(result.stderr).toContain(args.includes('--offset') ? '--offset' : '--limit');
   }
+});
+
+test.skipIf(!existsSync('/bin/zsh'))('printed documentation section arguments work with zsh extendedglob', () => {
+  const prefix = 'dialtone docs --id ';
+  const search = run(['docs', 'toggle accessibility', '--limit', '1']);
+  const command = search.stdout.split('\n').find(line => line.startsWith(prefix) && line.includes('components/toggle#'));
+  expect(command).toBeDefined();
+  const result = spawnSync('/bin/zsh', ['-f', '-o', 'extendedglob', '-c', `print -r -- ${command!.slice(prefix.length)}`], { encoding: 'utf8' });
+  expect(result.status).toBe(0);
+  expect(result.stdout.trim()).toMatch(/^components\/toggle#/);
+});
+
+test('missing documentation context explains recovery on stderr and retains JSON no-match', () => {
+  const id = 'components/not-a-real-context-id';
+  const result = run(['docs', '--id', id, '--context', '--format', 'json']);
+  expect(result.status).toBe(1);
+  expect(JSON.parse(result.stdout)).toMatchObject({ match: 'no-match', items: [] });
+  expect(result.stderr).toContain(id);
+  expect(result.stderr).toContain('dialtone docs');
 });

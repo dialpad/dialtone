@@ -194,7 +194,7 @@ async function build() {
     const componentPage = await buildReadyComponentPage(relative(docsRoot, file).replace(/\\/g, '/'), rawFile, identities);
     if (componentPage) componentPages.push(componentPage);
     const page = readPage(file, componentPage);
-    if (page.records.length) {
+    if (page.records.length || !page.context.directive) {
       page.context.url = page.context.directive ? page.records[0].frontmatter.storybook
         : new URL(await resolveSourcePagePath(page.context.sourcePath, matter(rawFile).data), SITE_URL).href;
       pageContexts.push(page.context);

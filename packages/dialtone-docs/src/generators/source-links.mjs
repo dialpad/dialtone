@@ -22,6 +22,7 @@ function resolveLink(href, page, pageMap) {
   try { absolute = new URL(href, page.url ?? 'https://invalid.local'); } catch { return unresolved; }
   if (!['http:', 'https:'].includes(absolute.protocol) || absolute.username || absolute.password) return unresolved;
   const explicitUrl = /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(href);
+  const authoredUrl = explicitUrl ? { url: absolute.href, targetDocId: null } : unresolved;
   if (explicitUrl && (!page.url || absolute.origin !== new URL(page.url).origin)) {
     return { url: absolute.href, targetDocId: null };
   }
@@ -35,16 +36,16 @@ function resolveLink(href, page, pageMap) {
   let path;
   try {
     path = decodeURI(explicitUrl ? absolute.pathname : rawPath);
-  } catch { return unresolved; }
+  } catch { return authoredUrl; }
   const rooted = path.startsWith('/');
   const sourcePath = posix.normalize(rooted ? path.slice(1) : posix.join(posix.dirname(page.sourcePath), path));
   const candidates = path.endsWith('.md')
     ? pageMap.bySource.get(sourcePath)
     : pageMap.byRoute.get(path.endsWith('.html') ? inferRoutePath(`/${sourcePath}`) : `/${sourcePath}`);
-  if (candidates?.length !== 1) return unresolved;
+  if (candidates?.length !== 1) return authoredUrl;
   const target = candidates[0];
-  const qualifiedSuffix = /(?:\/|\.md|\.html)$/.test(rawPath) ? siteHash(suffix) : suffix;
-  return { url: new URL(qualifiedSuffix || target.url, target.url).href, targetDocId: target.docId };
+  const qualifiedSuffix = !target.directive && /(?:\/|\.md|\.html)$/.test(rawPath) ? siteHash(suffix) : suffix;
+  return { url: new URL(qualifiedSuffix || target.url, target.url).href, targetDocId: target.targetDocId };
 }
 
 function readSectionLinks(sectionRaw, environment, page, pageMap) {
@@ -76,14 +77,19 @@ export function enrichDocumentationRecords(records, pageContexts) {
   const pageMap = { bySource: new Map(), byRoute: new Map() };
   const contexts = new Map();
   for (const page of pageContexts) {
+    if (page.url) {
+      // Storybook is a known site route, with no single documentation selector.
+      const target = page.directive
+        ? { ...page, docId: null, targetDocId: null, url: new URL(new URL(page.url).pathname, page.url).href }
+        : { ...page, targetDocId: available.has(page.docId) ? page.docId : null };
+      addTarget(pageMap.byRoute, new URL(target.url).pathname, target);
+      if (!page.directive) addTarget(pageMap.bySource, page.sourcePath, target);
+    }
     if (!available.has(page.docId)) continue;
     const environment = {};
     markdown.parse(page.body, environment);
     const sections = new Map(page.sections.map(section => [section.id, section.raw]));
     contexts.set(page.docId, { page, environment, sections });
-    if (page.directive || !page.url) continue;
-    addTarget(pageMap.bySource, page.sourcePath, page);
-    addTarget(pageMap.byRoute, new URL(page.url).pathname, page);
   }
   const referenced = new Set();
   return records.map(record => {
