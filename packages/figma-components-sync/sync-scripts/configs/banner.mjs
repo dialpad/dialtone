@@ -23,12 +23,14 @@ export default {
   // The title's text is a property, like the label: `headerText` is a prop in the code.
   textProps: { 'Optional title': 'Title' },
   page: 'Banner',
-  figmaSetId: '2045:92151',
+  figmaSetId: '2045:98224',
   // Computed spacing and the minimum height at the nearest token (token-snap.mjs).
   snapTokens: true,
 
   // Flex fill and align-self centring, as for Notice (see the generic builder).
   flexLayout: true,
+  // The outer `display: block` frame is a vertical auto-layout, not coordinates (see the builder).
+  blockLayout: true,
 
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of

@@ -598,7 +598,9 @@ const tokKeys = Object.fromEntries(toks
 const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn,
+  // `blockLayout`: a block that only stacks its children is a vertical auto-layout (see the builder).
+  blockLayout: !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).blockLayout, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
   textStyleKeys: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textStyles === false ? [] : TEXT_STYLE_KEYS,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.

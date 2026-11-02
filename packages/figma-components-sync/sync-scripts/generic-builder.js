@@ -743,6 +743,33 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     const textOnlyBlock = !!D.flexLayout && mode === 'N' && layoutKids.length > 0
       && layoutKids.every(i => D.nodes[i].t === 'TEXT');
     if (textOnlyBlock) mode = 'V';
+    /**
+     * `blockLayout`: A BLOCK THAT JUST STACKS ITS CHILDREN IS A VERTICAL AUTO-LAYOUT.
+     *
+     * `display: block` used to fall back to coordinate placement (layoutMode NONE), which is why
+     * DtBanner's outer frame and DtCollapsible's wrappers were not auto-layout. Block flow is a
+     * column, so a block whose in-flow children share one left edge and follow each other with no
+     * gap or overlap becomes VERTICAL, as the browser lays it out. Anything else (children side by
+     * side, overlapping, or spaced by margins this does not model) keeps coordinates.
+     */
+    const stacksAsColumn = () => {
+      if (!D.blockLayout || mode !== 'N' || textOnlyBlock || layoutKids.length === 0) return false;
+      if (layoutKids.length === 1) return true;
+      const ks = layoutKids.map(i => D.nodes[i]);
+      if (ks.some(k => !k.box || !k.box[1])) return false;
+      const x0 = (ks[0].rel || [0, 0])[0];
+      for (let i = 0; i < ks.length; i++) {
+        const r = ks[i].rel || [0, 0];
+        if (Math.abs(r[0] - x0) > 0.6) return false;
+        if (i > 0) {
+          const p = ks[i - 1], pr = p.rel || [0, 0];
+          if (Math.abs(r[1] - (pr[1] + p.box[1])) > 0.6) return false;
+        }
+      }
+      return true;
+    };
+    const blockColumn = stacksAsColumn();
+    if (blockColumn) mode = 'V';
     const hug = mode !== 'N' && defaultKids.length > 0 && !kidsOverlap;
     // The stroke's contribution to each axis, per side. No longer folded into padding (see
     // `pad` below), but still needed: the stroke counts toward the layout size, so the size
@@ -1206,6 +1233,16 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
           if (kid.layoutMode === 'VERTICAL') kid.primaryAxisAlignItems = 'CENTER';
           else if (kid.layoutMode === 'HORIZONTAL') kid.counterAxisAlignItems = 'CENTER';
         }
+      }
+      /**
+       * `blockLayout`: a block's children fill its width, as block flow does — but only where the
+       * parent HAS a width of its own (a FILL child of a hugging parent collapses to its minimum,
+       * measured on Notice's content), and only a frame whose own width CSS did not pin.
+       */
+      if (blockColumn && !kd.abs && f.layoutMode === 'VERTICAL' && f.counterAxisSizingMode === 'FIXED'
+          && kid.type === 'FRAME' && !kd.pw && kd.box
+          && kd.box[0] + (d.paddingLeft ? d.paddingLeft[0] : 0) + (d.paddingRight ? d.paddingRight[0] : 0) + bwX >= d.box[0] - 0.6) {
+        kid.layoutSizingHorizontal = 'FILL';
       }
       // A frame with layoutMode NONE places nothing for itself, so EVERY child needs
       // its measured offset — not just the absolutely-positioned ones. CSS block flow
