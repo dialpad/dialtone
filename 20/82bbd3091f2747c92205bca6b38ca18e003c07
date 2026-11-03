@@ -1,0 +1,21 @@
+packages/dialtone-tokens/sync-scripts/color.ts
+  s_5d2334d8ddfccd::t_b05aaeb0dc2b76 123-127,130
+packages/dialtone-tokens/sync-scripts/color.test.ts
+  s_5d2334d8ddfccd::t_4cf4d9c6a04360 11-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2082bbd3091f2747c92205bca6b38ca18e003c07",
+  "prompts": {},
+  "sessions": {
+    "s_5d2334d8ddfccd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1100f13f-d407-455f-9a3f-b7d9e3e20482",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

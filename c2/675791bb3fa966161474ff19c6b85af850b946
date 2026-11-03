@@ -1,0 +1,31 @@
+apps/dialtone-documentation/docs/components/slider.md
+  s_7f1d1d64baa803::t_8c413a42e63a62 124,130,133,418-419,423,437,440,443,497
+packages/combinator/src/variants/variants_slider.js
+  s_0d6a81bc191862::t_22a83cc2c8d20c 21-23,27,29-31,34-35,39,41-47,51,53-60,64,66-67,69-72,75-76,84-85,88,90-98
+packages/dialtone-vue/components/Slider/SliderVariants.story.vue
+  s_0d6a81bc191862::t_fce845e4b1fa18 199-204,269-274,288-293,320-325,350-355,375-380,404-409,435-440,465-470,506,511
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c2675791bb3fa966161474ff19c6b85af850b946",
+  "prompts": {},
+  "sessions": {
+    "s_0d6a81bc191862": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1462f-99ab-7d80-940e-c2556bf66597",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
