@@ -1,6 +1,7 @@
 ---
 title: Input
 description: Text field for entering short or long-form values.
+last_updated: "2026-11-03"
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
@@ -85,7 +86,7 @@ An input is normally paired with a label, but there are times when it can be use
 
 ### With Validation States
 
-Provides feedback to the user based on their interaction, or lack thereof, with an input. When a DtInput has an error message, it displays a red border to indicate the invalid state. The red border and error message appear when you pass a message with `type: "error"` to the `messages` prop. Success states show a green border, and warnings show a yellow border.
+Provides feedback to the user based on their interaction, or lack thereof, with an input. When a DtInput has an error message, it displays a red border to indicate the invalid state. The red border and error message appear when you pass a message with `type: "critical"` to the `messages` prop. Success states show a green border, and warnings show a yellow border.
 
 ```vue demo
 <!-- @wrapper -->
