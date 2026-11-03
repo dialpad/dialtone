@@ -11,6 +11,8 @@ combinator: DtValidationMessages
 
 ## Usage
 
+Strings in `validationMessages` render as HTML. Supply trusted content or sanitize untrusted content before passing it.
+
 Validation messages are typically paired with an input element. They are currently built in to some of our shared input components such as `dt-input` and `dt-radio-group`.
 
 ## Variants

@@ -1,6 +1,6 @@
 import { describe, test, expect, onTestFinished } from 'vitest';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -179,4 +179,69 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(run(['utility', 'd-ww-normal']).stdout)
       .toContain('examples/utility-word-wrap-normal: dialtone docs --id examples/utility-word-wrap-normal');
   });
+});
+
+test('docs context has bounded native continuation while ordinary JSON remains an array', () => {
+  const id = 'examples/toggle-base-styles';
+  const first = run(['docs', '--id', id, '--context', '--limit', '1', '--format', 'json']);
+  expect(first.status).toBe(0);
+  const result = JSON.parse(first.stdout);
+  expect(result.match).toBe('exact');
+  expect(result.items).toHaveLength(1);
+  expect(result.continuation).toMatchObject({ tool: 'dialtone docs', arguments: { id, context: true, limit: 1, offset: 1 } });
+  const next = run(['docs', '--id', id, '--context', '--limit', '1', '--offset', '1', '--format', 'json']);
+  expect(next.status).toBe(0);
+  expect(JSON.parse(next.stdout).items[0]).not.toEqual(result.items[0]);
+  const plain = run(['docs', '--id', id, '--format', 'json']);
+  expect(Array.isArray(JSON.parse(plain.stdout))).toBe(true);
+  const search = run(['docs', 'toggle accessibility', '--limit', '1']);
+  expect(search.stdout).toMatch(/dialtone docs --id '?components\/toggle#/);
+  for (const args of [['--context'], ['--offset', '1', '--id', id]]) {
+    expect(run(['docs', ...args]).status).toBe(1);
+  }
+});
+
+test.each([
+  { mode: 'search', args: ['toggle'] },
+  { mode: 'exact ID', args: ['--id', 'examples/toggle-base-styles'] },
+  { mode: 'context', args: ['--id', 'examples/toggle-base-styles', '--context'] },
+])('docs rejects unsupported formats in $mode mode', ({ args }) => {
+  const result = run(['docs', ...args, '--format', 'yaml']);
+  expect(result.status).toBe(1);
+  expect(result.stdout).toBe('');
+  expect(result.stderr).toContain('--format');
+  expect(result.stderr).toContain('yaml');
+  expect(result.stderr).toMatch(/minimal.*markdown.*json/);
+});
+
+test.each(['0x10', '1e1', ' 5 ', '', '1.5', '10abc', '01'])('docs rejects malformed pagination %j', (value) => {
+  for (const args of [
+    ['docs', 'toggle', '--limit', value],
+    ['docs', '--id', 'examples/toggle-base-styles', '--context', '--limit', value],
+    ['docs', '--id', 'examples/toggle-base-styles', '--context', '--offset', value],
+  ]) {
+    const result = run(args);
+    expect(result.status).toBe(1);
+    expect(result.stdout).toBe('');
+    expect(result.stderr).toContain(args.includes('--offset') ? '--offset' : '--limit');
+  }
+});
+
+test.skipIf(!existsSync('/bin/zsh'))('printed documentation section arguments work with zsh extendedglob', () => {
+  const prefix = 'dialtone docs --id ';
+  const search = run(['docs', 'toggle accessibility', '--limit', '1']);
+  const command = search.stdout.split('\n').find(line => line.startsWith(prefix) && line.includes('components/toggle#'));
+  expect(command).toBeDefined();
+  const result = spawnSync('/bin/zsh', ['-f', '-o', 'extendedglob', '-c', `print -r -- ${command!.slice(prefix.length)}`], { encoding: 'utf8' });
+  expect(result.status).toBe(0);
+  expect(result.stdout.trim()).toMatch(/^components\/toggle#/);
+});
+
+test('missing documentation context explains recovery on stderr and retains JSON no-match', () => {
+  const id = 'components/not-a-real-context-id';
+  const result = run(['docs', '--id', id, '--context', '--format', 'json']);
+  expect(result.status).toBe(1);
+  expect(JSON.parse(result.stdout)).toMatchObject({ match: 'no-match', items: [] });
+  expect(result.stderr).toContain(id);
+  expect(result.stderr).toContain('dialtone docs');
 });

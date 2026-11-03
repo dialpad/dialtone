@@ -462,3 +462,37 @@ test('selected detail tools retain strict schemas and budgets', async () =>
       detail.budget.estimatedTokens <= detail.budget.maximumEstimatedTokens,
     );
   }));
+
+test('documentation context paginates real references and preserves legacy content/default handling', () => {
+  const context = resolveProjectData();
+  const id = 'examples/toggle-base-styles';
+  const content = module.executeQueryTool('get_documentation', { id, textLimit: 40 }, context).structuredContent;
+  assert.deepEqual(content.continuation.arguments, { id, textOffset: 40, textLimit: 40 });
+  assert.deepEqual(content.detail.contextRequest, { tool: 'get_documentation', arguments: { id, projection: 'context' } });
+  let args = { id, projection: 'context', limit: 1, offset: 0, textOffset: 0, textLimit: 6000 };
+  const items = [];
+  for (let count = 0; count < 100; count++) {
+    const result = module.executeQueryTool('get_documentation', args, context).structuredContent;
+    assert.equal(result.match, 'exact');
+    assert.equal(result.source.selection, 'bundled');
+    assert.equal(result.source.installedCompatibility, 'not_checked');
+    assert.ok(result.budget.estimatedTokens <= result.budget.maximumEstimatedTokens);
+    items.push(...result.items);
+    if (!result.continuation) break;
+    assert.equal(result.continuation.arguments.projection, 'context');
+    assert.ok(result.continuation.arguments.offset > args.offset);
+    args = result.continuation.arguments;
+  }
+  assert.ok(items.some(item => item.kind === 'documentation' && item.relation === 'source'));
+  assert.ok(items.some(item => item.kind === 'component-api' && item.component === 'DtToggle'));
+  const access = items.find(item => item.kind === 'documentation' && /accessibility/.test(item.id));
+  assert.ok(access);
+  assert.equal(module.executeQueryTool('get_documentation', { id: access.id }, context).structuredContent.match, 'exact');
+  for (const bad of [{ projection: 'context', textOffset: 1 }, { projection: 'context', textLimit: 40 }, { limit: 2 }, { projection: 'context', extra: true }]) {
+    assert.equal(module.executeQueryTool('get_documentation', { id, ...bad }, context).isError, true);
+  }
+  const utility = module.executeQueryTool('get_documentation', { id: 'examples/utility-word-wrap-normal', projection: 'context' }, context).structuredContent;
+  const target = utility.items.find(item => item.kind === 'utility');
+  assert.equal(target.name, 'd-ww-normal');
+  assert.match(module.executeQueryTool('search_utility_classes', { query: target.name }, context).content[0].text, /d-ww-normal/);
+});
