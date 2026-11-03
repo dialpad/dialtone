@@ -140,6 +140,13 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(result.stdout).toContain('Deprecated: Use tone');
   });
 
+  test('props-only Markdown output includes the deprecation notice in its table', () => {
+    const result = run(['component', 'DtLink', '--props', '--format', 'markdown']);
+    expect(result.status).toBe(0);
+    expect(result.stdout).toMatch(/^\| Prop \| Type \| Description \| Values \|\r?\n/);
+    expect(result.stdout).toContain('| kind | string | Deprecated: Use tone |  |');
+  });
+
   test('single-prop JSON preserves tags without adding display text', () => {
     const result = run(['component', 'DtLink', '--prop', 'kind', '--format', 'json']);
     expect(result.status).toBe(0);

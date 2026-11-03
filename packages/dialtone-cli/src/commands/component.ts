@@ -3,7 +3,7 @@ import { getDocumentationExampleIds } from '@dialpad/dialtone-query-core';
 import type { ComponentProp } from '@dialpad/dialtone-query-core';
 import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
-import { formatComponentOutput, propDeprecation, propsTable, eventsTable, slotsTable, type Format } from '../formatters.js';
+import { formatComponentOutput, propDeprecation, eventsTable, slotsTable, type Format } from '../formatters.js';
 
 function formatSingleProp(prop: ComponentProp): string {
   const lines: string[] = [];
@@ -60,11 +60,7 @@ export const componentCommand = defineCommand({
 
     // --props: props table only
     if (args.props) {
-      if (format === 'json') {
-        console.log(JSON.stringify(result.details.props || [], null, 2));
-      } else {
-        console.log(propsTable(result.details.props || [], args.describe));
-      }
+      console.log(formatComponentOutput(result, format, 'props', { describe: args.describe, importFrom }));
       return;
     }
 
