@@ -52,6 +52,11 @@ export function checkTemplateApi(ast, metadata, directives, icons = {}) {
         const propName = !directive ? attribute.name : attribute.name === 'model' ? attribute.arg?.content ?? 'modelValue' : attribute.name === 'bind' ? attribute.arg?.content : null;
         if (!propName || ['class', 'style', 'id', 'role', 'tabindex'].includes(propName) || /^(aria-|data-)/.test(propName)) continue;
         const prop = component.props?.find(prop => normalizeProp(prop.name) === normalizeProp(propName));
+        if (!prop && (!directive || (attribute.name === 'bind' && attribute.arg.isStatic))
+          && component.tags?.property?.some(entry => entry.name === propName && entry.description === 'attribute')) {
+          checked.push(`${name}.${propName}`);
+          continue;
+        }
         requireApi(prop, 'unknown-member', `${name}.${propName}`);
         requireApi(!prop.tags?.deprecated, 'deprecated', `${name}.${propName} deprecated`);
         if (directive && attribute.name === 'model') {

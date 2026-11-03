@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createRequire } from 'node:module';
+import { readFileSync } from 'node:fs';
 import { checkTemplateApi } from './example-consumer.mjs';
 
 const require = createRequire(new URL('../../apps/dialtone-documentation/package.json', import.meta.url));
@@ -30,4 +31,29 @@ test('consumer API checks distinguish named-slot templates from default content'
   assert.doesNotThrow(() => checkTemplateApi(baseParse('<dt-avatar><template #icon><span>Icon</span></template></dt-avatar>'), avatar, []));
   assert.throws(() => checkTemplateApi(baseParse('<dt-avatar>Default content</dt-avatar>'), avatar, []), /default slot/);
   assert.throws(() => checkTemplateApi(baseParse('<dt-avatar><template #unknown>Icon</template></dt-avatar>'), avatar, []), /unknown/);
+});
+
+test('consumer API checks accept documented native attributes from generated Input metadata', () => {
+  const documentation = JSON.parse(readFileSync(new URL('../../packages/dialtone-vue/dist/component-documentation.json', import.meta.url), 'utf8'));
+  const input = [documentation.find(component => component.displayName === 'DtInput')];
+  for (const attribute of ['placeholder="Placeholder"', ':placeholder="hint"']) {
+    assert.deepEqual(checkTemplateApi(baseParse(`<dt-input label="Label" ${attribute} />`), input, []), ['DtInput.label', 'DtInput.placeholder']);
+  }
+  for (const attribute of ['placehoder="Hint"', 'autocomplete="off"', 'v-model:placeholder="hint"', ':[placeholder]="hint"']) {
+    assert.throws(() => checkTemplateApi(baseParse(`<dt-input ${attribute} />`), input, []), /DtInput/);
+  }
+  for (const tags of [{}, { property: [{ name: 'placeholder', description: 'component property' }] }]) {
+    assert.throws(() => checkTemplateApi(baseParse('<dt-input placeholder="Hint" />'), [{ ...input[0], tags }], []), /DtInput.placeholder/);
+  }
+});
+
+test('documented native attributes cannot bypass declared prop restrictions', () => {
+  const input = { displayName: 'DtInput', slots: [], events: [],
+    tags: { property: [{ name: 'placeholder', description: 'attribute' }] } };
+  for (const [prop, error] of [
+    [{ name: 'placeholder', tags: { deprecated: true } }, /deprecated/],
+    [{ name: 'placeholder', values: ['Only allowed'] }, /Hint/],
+  ]) {
+    assert.throws(() => checkTemplateApi(baseParse('<dt-input placeholder="Hint" />'), [{ ...input, props: [prop] }], []), error);
+  }
 });

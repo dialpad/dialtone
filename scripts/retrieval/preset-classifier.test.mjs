@@ -51,3 +51,13 @@ test('policy exclusion cannot enter materialization or delivery', () => {
   assert.equal(result.disposition, 'policy-excluded');
   assert.equal(result.template, undefined);
 });
+
+test('source classification admits a documented native attribute', () => {
+  const input = { displayName: 'DtInput', props: [], slots: [], events: [],
+    tags: { property: [{ name: 'placeholder', description: 'attribute' }] } };
+  const result = classify(() => '<dt-input placeholder="Placeholder" />', {
+    component: 'DtInput', documentation: [input],
+    publicNames: new Set(['DtInput']), runtime: { DtInput: {} },
+  });
+  assert.equal(result.disposition, 'eligible/setup-needed');
+});
