@@ -38,6 +38,8 @@ dialtone --help
 
 The remaining examples use the shorter `dialtone` form and require a global installation. For a project-local install, replace bare `dialtone` with `npm exec --no -- dialtone`. A coding assistant's shell needs the same executable resolution and permission to run it; installing the package does not load assistant instructions.
 
+For assistant use, add the [shared lookup instruction](/guides/getting-started/#ai-assisted-development) to a file your client loads. That section covers Codex and Claude Code loading routes, CLI-only access and unavailable-tool behavior. Preserve existing project guidance and permissions.
+
 Run CLI commands from your project. The CLI prints one line on stderr naming the Dialtone data it uses:
 
 ```text

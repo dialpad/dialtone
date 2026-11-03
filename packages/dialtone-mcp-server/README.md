@@ -22,6 +22,8 @@ A launcher's cwd or prefix does not select installed data. Check a detail respon
 
 Keep existing trust, approvals and tool allowlists. Connection, raw server inventory, client-filtered exposure and actual tool calls are separate checks. Other clients, including the Claude Desktop development recipe below, need their own verification; no all-client compatibility claim is made here.
 
+For ongoing assistant use, merge the [shared lookup instruction](https://dialtone.dialpad.com/guides/getting-started/#ai-assisted-development) into a project file your client loads. It covers Claude Code/Codex loading routes and unavailable-tool behavior. The connected server supplies the MCP routing instructions during initialization; do not maintain a second routing sequence in project rules. Confirm actual lookup calls and selected source/version in the consuming session.
+
 ## Updating
 
 From the project installation directory:

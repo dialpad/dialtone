@@ -99,6 +99,10 @@ Codex also supports trusted-project `.codex/config.toml` for portable server def
 
 The packaged server uses stdio. Configure your MCP client to launch the server process, as shown above.
 
+### Assistant instructions
+
+Add the [shared lookup instruction](/guides/getting-started/#ai-assisted-development) to a project instruction file your client loads. The connected server supplies its own routing instructions during MCP initialization; keep that workflow with the server rather than copying it into project rules. Installation, loaded project guidance, server connection, exposed tools and actual tool calls are separate checks. Confirm a lookup call and its selected source/version in the consuming session.
+
 > [!INFO] Version Checking
 > Startup does not wait for the update check. A successful check writes a version or update notice to stderr; failed or malformed responses are ignored. The check is cancelled after two seconds or during shutdown.
 
