@@ -130,7 +130,21 @@ export interface DocumentationFrontmatter {
   sourceVersion?: string;
 }
 
+export interface DocumentationLink {
+  label: string;
+  href: string;
+  url: string | null;
+  targetDocId: string | null;
+}
+export interface DocumentationPageReference {
+  url: string;
+  versionScope: 'latest';
+  installedCompatibility: 'not_checked';
+}
+
 export interface DocumentationRecord {
+  links?: DocumentationLink[];
+  documentation?: DocumentationPageReference;
   id: string;
   docId: string;
   docTitle: string;

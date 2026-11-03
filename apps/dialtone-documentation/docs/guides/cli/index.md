@@ -234,6 +234,14 @@ dialtone docs --id examples/button-default
 dialtone docs --id examples/button-disabled-tooltip --format json
 ```
 
+Find related guidance without guessing section IDs:
+
+```sh
+dialtone docs --id examples/toggle-base-styles --context
+```
+
+This lists source/page sections, authored API subjects, explicit directives/utilities and documentation links. Follow the commands you need. Context uses `--limit` 1–50 (default 20) and `--offset` (default 0); follow its continuation. `--context --format json` returns a retrieval envelope; ordinary exact/search JSON remains an array. References do not establish installed compatibility, and page links describe the latest documentation.
+
 Vue-app exact-ID output contains all five source-derived application files, dependency pins, imports, styling/theme setup and any directive registration. Static-HTML records contain the authored HTML fragment and CSS/theme prerequisites, without a Vue application scaffold. Follow the setup instructions in that record. JSON retains the documentation command's array shape. Unknown example IDs fail with a no-match diagnostic and a bounded list of available IDs.
 
 Ready component-page live Vue examples are included automatically when public imports, supported source state and source API checks are complete. Their IDs use `examples/docs/<doc-path>/<section>`, where `<doc-path>` is the page path under `docs/` without its extension, for example `examples/docs/components/button/variants-critical`. Source-authored keys append a final segment where needed. Existing Button, Loader, Toggle and Word Wrap IDs remain available. A source edit updates the fixture; a heading rename or removal retires its derived ID. Source delivery does not prove that the pinned packages support the fixture. Unverified records qualify their setup instructions; read the validation status before using them.

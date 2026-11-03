@@ -51,7 +51,14 @@ dialtone docs --id examples/button-default
 dialtone docs --id examples/button-disabled-tooltip --format json
 ```
 
-Use `--id <id>` instead of a query to retrieve a complete documentation record. Minimal and Markdown formats print its content; JSON returns a one-record array with its metadata. Missing IDs, an empty ID, or combining a query with `--id` exit with an error. `--limit` controls search results, not exact-ID content.
+Use `--id <id>` instead of a query to retrieve a complete documentation record. Minimal and Markdown formats print its content; JSON returns a one-record array with its metadata. Missing IDs, an empty ID, or combining a query with `--id` exit with an error. `--limit` controls search results or context-reference pages, not ordinary exact-ID content.
+
+Use `dialtone docs --id <id> --context` to list related source sections, page guidance, APIs, directives, declared utilities and authored links without copying their content. Follow the returned commands for the context you need. Context accepts `--limit` 1–50 (default 20) and `--offset` (default 0); follow `Continue` for remaining references. Context JSON is a retrieval envelope; ordinary exact/search JSON remains an array. Page links are latest references, not installed-compatibility guarantees.
+
+```sh
+dialtone docs --id examples/toggle-base-styles --context
+dialtone docs --id examples/utility-word-wrap-normal --context --format json
+```
 
 Ready public component-page Vue demos are included automatically when public imports and supported source state resolve and the source API check passes. Default IDs use `examples/docs/<docId>/<section-slug>`; source identity overrides preserve the earlier exact IDs or distinguish demos under the same heading. Removed or renamed IDs return no-match unless an explicit ID is retained.
 
@@ -72,7 +79,7 @@ dialtone token --name=--dt-spacing-100 --values # canonical CSS token identifier
 
 ### `dialtone utility <query>`
 
-Search CSS utility classes.
+Search CSS utility classes. General searches filter deprecated utilities; exact legacy names retain their contract and migration metadata in `--format json` output.
 
 ```bash
 dialtone utility "padding 8px"

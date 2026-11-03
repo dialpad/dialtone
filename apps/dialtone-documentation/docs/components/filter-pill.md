@@ -70,7 +70,7 @@ combinator: DtFilterPill
 - `v-model` expects an array of `{ name, active? }` objects. The pill is "active" when any item has `active: true`.
 - The `default` scoped slot overrides the pill label and receives: `{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }`.
 - The `content` slot overrides the popover body, replacing the default checkbox list with custom content (e.g., radio groups).
-- **In-place mutation**: The pill copies the `modelValue` array at mount. To keep active state in sync, mutate objects with `forEach` rather than replacing the array with `map`.
+- **In-place mutation**: The pill keeps the initial `modelValue` array reference. Mutate its objects in place with `forEach`; replacing the array with `map` does not update the pill's internal reference.
 
 <dialtone-usage>
 <template #do>
@@ -86,7 +86,7 @@ combinator: DtFilterPill
 - Don't use as a general-purpose action button — filter pills are for narrowing data, not triggering commands.
 - Don't use for binary on/off settings — use a [Toggle](toggle.md).
 - Don't omit `label` and the `default` slot — the pill must always have visible text identifying the filter category.
-- Don't replace the array with `map` when toggling active state — mutate objects in-place with `forEach` to keep the pill's internal copy in sync.
+- Don't replace the array with `map` when toggling active state — mutate objects in-place with `forEach` to keep the pill's internal reference in sync.
 </template>
 
 </dialtone-usage>

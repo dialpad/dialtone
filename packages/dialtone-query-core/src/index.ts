@@ -21,6 +21,8 @@ export type {
   IconsData,
   DocumentationFrontmatter,
   DocumentationRecord,
+  DocumentationLink,
+  DocumentationPageReference,
   SearchResult,
   SearchPage
 } from './types.js';
@@ -76,3 +78,6 @@ export { getValueDetail, formatTokenThemes } from './value-retrieval.js';
 export type { TokenThemeRecord } from './value-retrieval.js';
 
 export { parseComponentExports } from './component-exports.js';
+
+export { getDocumentationContext } from './documentation-context.js';
+export type { DocumentationContextArgs, DocumentationContextResult, DocumentationContextReference } from './documentation-context.js';
