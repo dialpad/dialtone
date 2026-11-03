@@ -1,3 +1,11 @@
+## [2.1.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.1.0...dialtone-tokens/v2.1.1) (2026-11-03)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** DLT-3682 flatten alpha-modified colours whose target is translucent ([#1489](https://github.com/dialpad/dialtone/issues/1489)) ([c82fb4a](https://github.com/dialpad/dialtone/commit/c82fb4a2649b2bb995e045fc119e0a2f0e3ad061))
+* **Dialtone Tokens:** DLT-3697 scope foreground colours for strokes ([#1495](https://github.com/dialpad/dialtone/issues/1495)) ([0222d48](https://github.com/dialpad/dialtone/commit/0222d481b0a2fa0b9e7f6b63bdf12d73d100f298))
+
 # [2.1.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.3...dialtone-tokens/v2.1.0) (2026-10-27)
 
 
