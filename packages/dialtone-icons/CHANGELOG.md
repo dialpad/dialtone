@@ -1,3 +1,10 @@
+# [5.5.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.4.0...dialtone-icons/v5.5.0) (2026-11-03)
+
+
+### Features
+
+* **Dialtone Docs:** DLT-3667 generate Combinator preset examples from curated sources ([#1493](https://github.com/dialpad/dialtone/issues/1493)) ([6749f8a](https://github.com/dialpad/dialtone/commit/6749f8afed5fea8fce082e513015ed610ae44c74))
+
 # [5.4.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.3.0...dialtone-icons/v5.4.0) (2026-10-27)
 
 
