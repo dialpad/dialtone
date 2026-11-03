@@ -19,12 +19,13 @@
     <template #anchor="anchorAttrs">
       <div
         v-if="$attrs.anchor"
-        v-bind="anchorAttrs"
         v-html="$attrs.anchor"
       />
       <dt-button
         v-else
-        v-bind="anchorAttrs"
+        :aria-expanded="anchorAttrs['aria-expanded']"
+        :aria-controls="anchorAttrs['aria-controls']"
+        :aria-haspopup="anchorAttrs['aria-haspopup']"
       >
         Click to open
       </dt-button>

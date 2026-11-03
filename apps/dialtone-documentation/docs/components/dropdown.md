@@ -15,7 +15,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
 
 - The dropdown component provides accessibility controls when using with List item component.
 - The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
-- The **anchor** slot contains the element that controls the dropdown's visibility. It supplies `aria-expanded`, `aria-controls`, and `aria-haspopup` directly as slot props. Bind the complete object to the trigger with `#anchor="anchorAttrs"` and `v-bind="anchorAttrs"`. `aria-controls` refers to the popup element with `role="menu"`.
+- The **anchor** slot contains the element that controls the dropdown's visibility. It supplies `aria-expanded`, `aria-controls`, and `aria-haspopup` directly as slot props. Bind those three attributes explicitly to the trigger to preserve consumer refs; do not forward the internal `ref` slot prop. `aria-controls` refers to the popup element with `role="menu"`.
 - The **list** slot contains a list of items to show as dropdown menu items.
 
 ## Variants and Examples
@@ -25,7 +25,11 @@ Use the Dropdown component when you have a list of links or actions that can be 
 ```vue demo
 <dt-dropdown navigation-type="arrow-keys">
   <template #anchor="anchorAttrs">
-    <dt-button v-bind="anchorAttrs">
+    <dt-button
+      :aria-expanded="anchorAttrs['aria-expanded']"
+      :aria-controls="anchorAttrs['aria-controls']"
+      :aria-haspopup="anchorAttrs['aria-haspopup']"
+    >
       Click to open
     </dt-button>
   </template>
@@ -48,7 +52,11 @@ Use the Dropdown component when you have a list of links or actions that can be 
 ```vue demo
 <dt-dropdown navigation-type="arrow-keys">
   <template #anchor="anchorAttrs">
-    <dt-button v-bind="anchorAttrs">
+    <dt-button
+      :aria-expanded="anchorAttrs['aria-expanded']"
+      :aria-controls="anchorAttrs['aria-controls']"
+      :aria-haspopup="anchorAttrs['aria-haspopup']"
+    >
       Click to open
     </dt-button>
   </template>
@@ -92,13 +100,12 @@ Use the Dropdown component when you have a list of links or actions that can be 
 
 ### Context Menu
 
-Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior.
+Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior. This example retains an existing context-menu accessibility gap: the focusable wrapper does not receive the popup ARIA attributes.
 
 ```vue demo
 <dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
-  <template #anchor="anchorAttrs">
+  <template #anchor>
     <div
-      v-bind="anchorAttrs"
       class="d-ba d-bas-dashed d-w-400 d-py-600 d-ta-center d-bgc-black-300"
     >
       Right click to open
@@ -125,7 +132,14 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 ```vue demo
 <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
   <template #anchor="anchorAttrs">
-    <dt-button v-bind="anchorAttrs" :size="200" kind="muted" importance="outlined">
+    <dt-button
+      :aria-expanded="anchorAttrs['aria-expanded']"
+      :aria-controls="anchorAttrs['aria-controls']"
+      :aria-haspopup="anchorAttrs['aria-haspopup']"
+      :size="200"
+      kind="muted"
+      importance="outlined"
+    >
       Inverted Dropdown
       <template #endIcon="{ iconSize }">
         <dt-icon name="chevron-down" :size="iconSize" />

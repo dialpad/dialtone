@@ -156,11 +156,20 @@ Use inline HTML comments in the template:
 For slot props passed through `v-bind="attributes"`, document each public binding with `@binding` in the same `@slot` comment. The documentation generator merges these declarations by binding name with inferred bindings:
 
 ```vue
-<!--
-  @slot Trigger element.
-  @binding {string} aria-expanded Whether the popup is open.
--->
-<slot name="anchor" v-bind="attributes" />
+<template>
+  <!--
+    @slot Trigger element.
+    @binding {string} aria-expanded Whether the popup is open.
+  -->
+  <slot name="anchor" v-bind="attributes" />
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+
+const props = defineProps({ open: Boolean });
+const attributes = computed(() => ({ 'aria-expanded': String(props.open) }));
+</script>
 ```
 
 ## Documenting Events

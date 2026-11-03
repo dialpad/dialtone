@@ -1,5 +1,10 @@
 
 export default {
+  defaults: {
+    slots: {
+      anchor: { scopeName: 'anchorAttrs' },
+    },
+  },
   default: {
     props: {
       navigationType: { initialValue: 'arrow-keys' },
@@ -8,6 +13,9 @@ export default {
     },
     slots: {
       anchor: { initialValue: `<dt-button
+  :aria-expanded="anchorAttrs['aria-expanded']"
+  :aria-controls="anchorAttrs['aria-controls']"
+  :aria-haspopup="anchorAttrs['aria-haspopup']"
   importance="clear"
   kind="muted"
 >
@@ -33,6 +41,9 @@ export default {
     },
     slots: {
       anchor: { initialValue: `<dt-button
+  :aria-expanded="anchorAttrs['aria-expanded']"
+  :aria-controls="anchorAttrs['aria-controls']"
+  :aria-haspopup="anchorAttrs['aria-haspopup']"
   importance="clear"
   kind="muted"
 >

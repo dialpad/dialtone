@@ -16,7 +16,11 @@
         @highlight="$attrs.onHighlight"
       >
         <template #anchor="anchorAttrs">
-          <dt-button v-bind="anchorAttrs">
+          <dt-button
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
+          >
             {{ variant }} aligned dropdown
           </dt-button>
         </template>
@@ -49,12 +53,13 @@
         <template #anchor="anchorAttrs">
           <div
             v-if="$attrs.anchor"
-            v-bind="anchorAttrs"
             v-html="$attrs.anchor"
           />
           <dt-button
             v-else
-            v-bind="anchorAttrs"
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
           >
             with sections
           </dt-button>
@@ -105,12 +110,13 @@
         <template #anchor="anchorAttrs">
           <div
             v-if="$attrs.anchor"
-            v-bind="anchorAttrs"
             v-html="$attrs.anchor"
           />
           <dt-button
             v-else
-            v-bind="anchorAttrs"
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
           >
             with sections and headings
           </dt-button>
@@ -159,7 +165,11 @@
         :open="$attrs.open"
       >
         <template #anchor="anchorAttrs">
-          <dt-button v-bind="anchorAttrs">
+          <dt-button
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
+          >
             with footer
           </dt-button>
         </template>
@@ -201,9 +211,8 @@
           :open-on-context="true"
           :transition="$attrs.transition"
         >
-          <template #anchor="anchorAttrs">
+          <template #anchor>
             <div
-              v-bind="anchorAttrs"
               class="d-ba d-bas-dashed d-w264 d-py-600 d-ta-center d-bgc-black-300"
             >
               Right click to open

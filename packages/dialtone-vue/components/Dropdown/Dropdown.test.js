@@ -1,4 +1,5 @@
 import { config, mount } from '@vue/test-utils';
+import { h } from 'vue';
 import DtDropdown from './Dropdown.vue';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { DtPopover } from '@/components/Popover';
@@ -10,7 +11,13 @@ const baseProps = {
   open: true,
 };
 const baseSlots = {
-  anchor: `<template #anchor="attrs"><a id="anchor" href="#" v-bind="attrs">Link</a></template>`,
+  anchor: anchorAttrs => h('button', {
+    id: 'anchor',
+    ref: element => { consumerTrigger = element; },
+    'aria-expanded': anchorAttrs['aria-expanded'],
+    'aria-controls': anchorAttrs['aria-controls'],
+    'aria-haspopup': anchorAttrs['aria-haspopup'],
+  }, 'Open menu'),
   list: `<ul id="list">
     <li role="menuitem">1</li>
     <li role="menuitem">2</li>
@@ -19,6 +26,7 @@ const baseSlots = {
 };
 const baseAttrs = {};
 
+let consumerTrigger;
 let mockProps = {};
 let mockSlots = {};
 let mockAttrs = {};
@@ -114,8 +122,11 @@ describe('DtDropdown Tests', () => {
     });
 
     describe('When the dropdown is open', () => {
-      it('aria-expanded should be "true"', () => {
+      it('should forward popup attributes without overwriting the consumer ref', () => {
         expect(anchorElement.attributes('aria-expanded')).toBe('true');
+        expect(anchorElement.attributes('aria-controls')).toBe(popoverContent.attributes('id'));
+        expect(anchorElement.attributes('aria-haspopup')).toBe('menu');
+        expect(consumerTrigger).toBe(anchorElement.element);
       });
     });
   });
