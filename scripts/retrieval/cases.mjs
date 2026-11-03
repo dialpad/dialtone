@@ -172,10 +172,8 @@ export const cases = [
     'documentation',
     'modal outside click',
     [
-      contains(
-        'intentional-dismissal',
-        'clicking outside the DtModal dialog does not close it',
-      ),
+      contains('default-backdrop-dismissal', 'clicking the backdrop closes DtModal'),
+      contains('disable-backdrop-dismissal', 'to prevent backdrop dismissal'),
     ],
     { limit: 1 },
   ),
