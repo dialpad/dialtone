@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/dialpad/dialtone/compare/combinator/v1.4.0...combinator/v1.5.0) (2026-11-03)
+
+
+### Features
+
+* **Dialtone Docs:** DLT-3667 generate Combinator preset examples from curated sources ([#1493](https://github.com/dialpad/dialtone/issues/1493)) ([6749f8a](https://github.com/dialpad/dialtone/commit/6749f8afed5fea8fce082e513015ed610ae44c74))
+* **Loader:** DLT-3619 replace spinner with dot loader ([#1464](https://github.com/dialpad/dialtone/issues/1464)) ([0c46fc6](https://github.com/dialpad/dialtone/commit/0c46fc67f79fd9a881dd4cf98f219edb0ce4ed6e))
+
 # [1.4.0](https://github.com/dialpad/dialtone/compare/combinator/v1.3.0...combinator/v1.4.0) (2026-10-27)
 
 
