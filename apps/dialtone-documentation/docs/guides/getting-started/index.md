@@ -239,7 +239,7 @@ and public Dialtone documentation, identify unverified details, and do not
 invent Dialtone APIs or claim a lookup succeeded.
 ```
 
-For **Codex**, add it to the applicable project `AGENTS.md`. An `AGENTS.override.md` in the same directory takes precedence; nested instructions can also change the effective guidance. Start a new session in the intended project or application. See [Codex instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
+For **Codex**, merge it into the project instruction file Codex loads: use an existing `AGENTS.override.md` in that directory if it has content; otherwise use `AGENTS.md`. Codex selects at most one instruction file per directory, so when the override is selected, its sibling `AGENTS.md` is not loaded. Nested instructions can also change the effective guidance. Start a new session in the intended project or application. See [Codex instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
 
 For **Claude Code**, add it to the project's existing `CLAUDE.md`. If you keep shared guidance in a sibling `AGENTS.md`, import it from `CLAUDE.md` with `@AGENTS.md`; a prose link alone does not load it. Native `AGENTS.md` loading depends on the client version, settings and existing `CLAUDE.md` files. Preserve those files and settings; see [Claude Code instruction loading](https://code.claude.com/docs/en/memory). In a fresh session, use `/context` to inspect loaded memory files.
 
