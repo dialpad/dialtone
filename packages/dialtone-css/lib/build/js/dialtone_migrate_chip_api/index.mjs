@@ -132,6 +132,11 @@ function transformChipOpenTag (tag, warnings, filePath) {
     warnings.push(`CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE file=${filePath}`);
   }
 
+  // The persistent selected fill was removed with no replacement, so there is nothing to rewrite it to.
+  if (attrs.includes('d-chip__label--active')) {
+    warnings.push(`CHIP_API_ACTIVE_LABEL_CLASS file=${filePath} (d-chip__label--active no longer styles the chip)`);
+  }
+
   attrs = renameAttr(attrs, 'icon-class', 'start-icon-class');
   attrs = renameAttr(attrs, 'iconClass', 'startIconClass');
   attrs = renameAttr(attrs, 'avatar-class', 'start-avatar-class');

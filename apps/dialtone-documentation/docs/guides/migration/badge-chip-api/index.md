@@ -68,6 +68,7 @@ The migration script leaves dynamic `:variant`/`:type` bindings untouched and wa
 | omitted `size` | explicit `size="300"` from the codemod |
 | omitted `showClose` | default is now `false` |
 | `show-close` without `interactive` | warns and renders no remove button |
+| `labelClass="d-chip__label--active"` | removed; warns, and nothing replaces the persistent selected fill |
 
 ```vue
 <!-- Before -->
@@ -97,4 +98,6 @@ Removal is part of the interactive contract:
 </dt-chip>
 ```
 
-The migration script warns for omitted `showClose`/`interactive`, explicit `show-close` without `interactive`, dynamic `show-close`, and files that provide both old `icon` and `avatar` slots.
+The migration script warns for omitted `showClose`/`interactive`, explicit `show-close` without `interactive`, dynamic `show-close`, `d-chip__label--active` in a chip's attributes, and files that provide both old `icon` and `avatar` slots.
+
+The `d-chip__label--active` class gave a chip a fixed filled look at rest. It is removed: a chip is highlighted only while it is hovered, focused or pressed, and the script can't rewrite the class to anything, so delete it where the warning points.

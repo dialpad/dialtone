@@ -34,10 +34,8 @@
   //  Every knob is declared once here with its default (size 300) value. The
   //  size modifiers below re-tune them on the root (via :has) so the label and
   //  the close button, which are siblings, always read the same values.
-  //  SHORTCUT: block sizes and line heights are literal rem values (1rem = 10px);
-  //  no size tokens exist for them. Upgrade when a control block-size scale is added.
-  --chip-block-size: 2.6rem;
-  --chip-line-height: 2.2rem;
+  --chip-block-size: var(--dt-chip-size-300-block-size);
+  --chip-line-height: var(--dt-chip-size-300-line-height);
   --chip-text-size: var(--dt-font-size-100);
   --chip-padding-inline: var(--dt-spacing-75);
   --chip-padding-inline-start: var(--chip-padding-inline);
@@ -59,8 +57,8 @@
   //  chip-only. xs and sm are the deprecated aliases for 100 and 200, and md is
   //  the 300 default.
   &:has(.d-chip__label--xs, .d-chip__label--size-100) {
-    --chip-block-size: 2.2rem;
-    --chip-line-height: 1.8rem;
+    --chip-block-size: var(--dt-chip-size-100-block-size);
+    --chip-line-height: var(--dt-chip-size-100-line-height);
     --chip-text-size: var(--dt-font-size-50);
     --chip-padding-inline: var(--dt-spacing-50);
     --chip-border-radius: var(--dt-size-radius-350);
@@ -69,28 +67,28 @@
   }
 
   &:has(.d-chip__label--sm, .d-chip__label--size-200) {
-    --chip-block-size: 2.4rem;
-    --chip-line-height: 2rem;
+    --chip-block-size: var(--dt-chip-size-200-block-size);
+    --chip-line-height: var(--dt-chip-size-200-line-height);
     --chip-text-size: var(--dt-font-size-75);
     --chip-icon-size: var(--dt-icon-size-100);
   }
 
   &:has(.d-chip__label--size-400) {
-    --chip-block-size: 2.8rem;
-    --chip-line-height: 2.4rem;
+    --chip-block-size: var(--dt-chip-size-400-block-size);
+    --chip-line-height: var(--dt-chip-size-400-line-height);
     --chip-text-size: var(--dt-font-size-150);
   }
 
   &:has(.d-chip__label--size-500) {
-    --chip-block-size: 3rem;
-    --chip-line-height: 2.8rem;
+    --chip-block-size: var(--dt-chip-size-500-block-size);
+    --chip-line-height: var(--dt-chip-size-500-line-height);
     --chip-text-size: var(--dt-font-size-200);
     --chip-padding-inline: var(--dt-spacing-100);
   }
 
   &:has(.d-chip__label--size-600) {
-    --chip-block-size: 3.2rem;
-    --chip-line-height: 3.2rem;
+    --chip-block-size: var(--dt-chip-size-600-block-size);
+    --chip-line-height: var(--dt-chip-size-600-line-height);
     --chip-text-size: var(--dt-font-size-250);
     --chip-padding-inline: var(--dt-spacing-100);
     --chip-border-radius: var(--dt-size-radius-450);
@@ -98,8 +96,8 @@
   }
 
   &:has(.d-chip__label--size-700) {
-    --chip-block-size: 3.6rem;
-    --chip-line-height: 3.6rem;
+    --chip-block-size: var(--dt-chip-size-700-block-size);
+    --chip-line-height: var(--dt-chip-size-700-line-height);
     --chip-text-size: var(--dt-font-size-300);
     --chip-padding-inline: var(--dt-spacing-100);
     --chip-border-radius: var(--dt-size-radius-450);
@@ -183,12 +181,6 @@
 
       overflow: hidden;
       border-radius: var(--dt-size-radius-circle) !important;
-    }
-
-    //  Sets the property directly — not --chip-color-background — so the
-    //  active (selected) surface is immune to the focus variable swap above.
-    &--active {
-      background-color: var(--dt-color-surface-bold-opaque);
     }
 
     //  ========================================================================
@@ -353,6 +345,7 @@
     &.d-btn--active:not(:disabled, .d-btn--disabled),
     &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
       --chip-close-highlight: color-mix(in oklch, var(--chip-color-text) 16%, transparent);
+      --button-color-text: var(--chip-color-text);
       --button-color-background: var(--chip-close-highlight);
 
       box-shadow: 0 0 0 var(--dt-spacing-25) var(--chip-close-highlight);

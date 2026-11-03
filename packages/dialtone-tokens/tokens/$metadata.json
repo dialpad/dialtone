@@ -46,6 +46,7 @@
     "components/badge/default-prota-deuter",
     "components/button/default",
     "components/checkbox/default",
+    "components/chip/default",
     "components/icon/default",
     "components/presence/default",
     "components/presence/dark",

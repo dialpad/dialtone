@@ -58,6 +58,8 @@ Exceptions exist:
 - DtModal has no `size` prop. Use the `fullscreen` boolean instead (`fullscreen: true` for a fullscreen modal, `false` for the default size).
 - DtText uses numeric font-size token stops for raw font-size control when paired with `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
 
+- DtChip uses numeric sizes `100` to `700`, with `300` as the default. `xs`, `sm` and `md` remain as deprecated aliases for `100`, `200` and `300`.
+
 DtText `size` must be paired with `variant`, or with legacy `kind` while older code migrates. DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.
 
 ### Logical Geometry Props

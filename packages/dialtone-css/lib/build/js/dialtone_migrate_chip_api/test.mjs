@@ -77,6 +77,19 @@ describe('dialtone-migrate-chip-api', () => {
     assert.ok(warnings(input).some(warning => warning.startsWith('CHIP_API_DYNAMIC_SHOW_CLOSE')));
   });
 
+  it('warns when label-class uses the removed d-chip__label--active class', () => {
+    const input = '<dt-chip label-class="d-chip__label--active">Chip</dt-chip>';
+
+    assert.ok(warnings(input).some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
+  });
+
+  it('does not warn about the active label class on other label classes or on non-chip tags', () => {
+    assert.ok(!warnings('<dt-chip label-class="d-chip__label--strong">Chip</dt-chip>')
+      .some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
+    assert.ok(!warnings('<dt-badge label-class="d-chip__label--active">Badge</dt-badge>')
+      .some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
+  });
+
   it('does not transform non-chip icon slots', () => {
     const input = '<dt-button><template #icon><dt-icon /></template></dt-button>';
 
