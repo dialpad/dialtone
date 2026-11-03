@@ -16,14 +16,14 @@
     @highlight="$attrs.onHighlight"
     @opened="$attrs.onOpened"
   >
-    <template #anchor="{ attrs }">
+    <template #anchor="anchorAttrs">
       <div
         v-if="$attrs.anchor"
         v-html="$attrs.anchor"
       />
       <dt-button
         v-else
-        v-bind="attrs"
+        v-bind="anchorAttrs"
       >
         Click to open
       </dt-button>

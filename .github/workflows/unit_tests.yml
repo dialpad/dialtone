@@ -248,8 +248,8 @@ jobs:
           pnpm --dir packages/dialtone-docs test
           pnpm --dir packages/eslint-plugin-dialtone test
 
-      - name: Test source-generated public component identity
-        run: node --test scripts/tests/vue-component-identity.test.mjs
+      - name: Test source-generated component metadata
+        run: node --test scripts/tests/vue-component-identity.test.mjs scripts/tests/vue-slot-bindings.test.mjs
 
       - name: Run shared fixture and cache contracts
         run: node --test scripts/retrieval/*.test.mjs

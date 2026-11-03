@@ -12,6 +12,7 @@ module.exports = {
     `${srcRoot}/*`,
     'scripts/build-dialtone-vue-docs.mjs',
     'scripts/lib/vue-component-identity.mjs',
+    'scripts/lib/vue-slot-bindings.mjs',
     'common/utils/server.mjs',
   ],
   plugins: [

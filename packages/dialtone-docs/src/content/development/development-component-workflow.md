@@ -3,7 +3,7 @@ type: development
 category: development
 keywords: [vue-component, yeoman, generator, dialtone-vue, storybook, vitest, props, slots, events, jsdoc, constants]
 ai_summary: Current Vue component files, legacy generator limitations, source-owned API conventions, and export and build steps.
-last_updated: 2026-10-23
+last_updated: 2026-11-03
 related_packages: [dialtone-vue, dialtone-css]
 ---
 
@@ -51,6 +51,7 @@ pnpm exec yo dialtone
 ```
 
 The generator asks:
+
 1. **Component name** (PascalCase) — Must start with `Dt` (e.g., `DtMyNewComponent`).
 2. **Human-readable name** — Used in Storybook labels (e.g., `My New Component`).
 
@@ -132,6 +133,7 @@ props: {
 This Options API excerpt uses Button's current constants and `ordinalSizeValidator` from [the shared validators](../../../../dialtone-vue/common/validators/index.js). Import those helpers when using the excerpt. Numeric size values are preferred; inspect the selected component before assuming a common scale or default.
 
 Supported JSDoc tags:
+
 - `@values` — comma-separated list of valid values (rendered in API table)
 - `@deprecated` — marks the prop deprecated, shows suggested alternative
 - `@default` — explicit default when the prop default is computed
@@ -149,6 +151,16 @@ Use inline HTML comments in the template:
   <!-- @slot Optional icon, receives { iconSize } -->
   <slot name="icon" :icon-size="iconSize" />
 </template>
+```
+
+For slot props passed through `v-bind="attributes"`, document each public binding with `@binding` in the same `@slot` comment. The documentation generator merges these declarations by binding name with inferred bindings:
+
+```vue
+<!--
+  @slot Trigger element.
+  @binding {string} aria-expanded Whether the popup is open.
+-->
+<slot name="anchor" v-bind="attributes" />
 ```
 
 ## Documenting Events

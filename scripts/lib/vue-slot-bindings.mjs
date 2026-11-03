@@ -1,0 +1,23 @@
+import { getDoclets } from 'vue-docgen-api';
+
+function declaredBindings (node, siblings) {
+  const comment = siblings.slice(0, siblings.indexOf(node))
+    .findLast(sibling => sibling.type !== 2 || sibling.content.trim());
+  if (comment?.type !== 3) return [];
+  const tags = getDoclets(comment.content).tags || [];
+  return tags.some(tag => tag.title === 'slot') ? tags.filter(tag => tag.title === 'binding') : [];
+}
+
+// vue-docgen can drop declared bindings beside inferred ones on a spread slot.
+export function preserveDeclaredSlotBindings (documentation, node, siblings) {
+  if (node.tag !== 'slot') return;
+  if (node.props.some(prop => prop.type === 7 && prop.arg?.content === 'name')) return;
+  const declared = declaredBindings(node, siblings);
+  if (!declared.length) return;
+  const name = node.props.find(prop => prop.type === 6 && prop.name === 'name');
+  const slot = documentation.getSlotDescriptor(name?.value?.content || 'default');
+  slot.bindings = [...new Map([
+    ...(slot.bindings || []).map(binding => [binding.name, binding]),
+    ...declared.map(binding => [binding.name, binding]),
+  ]).values()];
+}
