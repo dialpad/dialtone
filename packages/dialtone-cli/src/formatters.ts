@@ -42,7 +42,7 @@ export function propDeprecation(prop: ComponentProp): string {
   const deprecated = prop.tags?.deprecated;
   if (!deprecated) return '';
   const description = Array.isArray(deprecated)
-    ? deprecated.map(tag => tag?.description).filter(Boolean).join(' ')
+    ? deprecated.map(tag => tag?.description).filter(description => typeof description === 'string' && description).join(' ')
     : typeof deprecated === 'string' ? deprecated : '';
   return description ? `Deprecated: ${description}` : 'Deprecated';
 }

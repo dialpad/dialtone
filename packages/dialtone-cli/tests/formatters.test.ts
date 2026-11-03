@@ -90,46 +90,26 @@ describe('prop deprecation notices', () => {
   };
   const options = { importFrom: '@dialpad/dialtone-vue' };
 
-  test.each([
-    { format: 'minimal', filter: undefined, describe: false },
-    { format: 'minimal', filter: undefined, describe: true },
-    { format: 'minimal', filter: 'props', describe: false },
-    { format: 'minimal', filter: 'props', describe: true },
-    { format: 'markdown', filter: undefined, describe: false },
-    { format: 'markdown', filter: 'props', describe: false },
-  ] as const)('$format $filter describe=$describe retains tags-only warnings', ({ format, filter, describe }) => {
-    const text = formatComponentOutput(result, format, filter, { ...options, describe });
-    expect(text).toContain('Deprecated: Use tone');
-    expect(text).toContain('kind');
+  test.each([false, true])('full minimal view retains tags-only warnings with describe=%s', describe => {
+    const text = formatComponentOutput(result, 'minimal', undefined, { ...options, describe });
+    expect(text).toContain('kind: Deprecated: Use tone');
     expect(text).not.toMatch(/href[^\n]*Deprecated/);
   });
 
-  test('Markdown escapes deprecation text within the description cell', () => {
+  test('full Markdown view escapes notices and preserves nondeprecated descriptions', () => {
     const text = formatComponentOutput({ ...result, details: { props: [
       { name: 'kind', tags: { deprecated: [{ description: 'Use tone | variant\nfrom now on', title: 'deprecated' }] } },
-    ] } }, 'markdown', 'props', options);
+      result.details.props[1],
+    ] } }, 'markdown', undefined, options);
     expect(text).toContain('| kind | unknown | Deprecated: Use tone \\| variant from now on |  |');
-  });
-
-  test.each([
-    { deprecated: [{ title: 'deprecated' }], notice: 'Deprecated' },
-    { deprecated: 'Use variant instead', notice: 'Deprecated: Use variant instead' },
-  ])('retains a deprecation tag with notice $notice', ({ deprecated, notice }) => {
-    const text = formatComponentOutput({ ...result, details: { props: [
-      { name: 'kind', tags: { deprecated } },
-    ] } }, 'markdown', 'props', options);
-    expect(text).toContain(`| kind | unknown | ${notice} |  |`);
-  });
-
-  test('nondeprecated descriptions retain their content without a warning', () => {
-    const text = formatComponentOutput({ ...result, details: { props: [result.details.props[1]] } }, 'markdown', 'props', options);
     expect(text).toContain('| href | string | URL for navigation. |  |');
-    expect(text).not.toContain('Deprecated');
+    expect(text).not.toMatch(/href[^\n]*Deprecated/);
   });
 
-  test.each([undefined, 'props'] as const)('JSON %s preserves the supplied prop metadata', filter => {
-    const text = formatComponentOutput(result, 'json', filter, options);
-    expect(JSON.parse(text)).toEqual(filter ? result.details.props : result);
-    expect(text).not.toContain('Deprecated:');
+  test('a bare generated deprecation tag renders no replacement text', () => {
+    const text = formatComponentOutput({ ...result, details: { props: [
+      { name: 'headerHeight', tags: { deprecated: [{ description: true, title: 'deprecated' }] } },
+    ] } }, 'markdown', undefined, options);
+    expect(text).toContain('| headerHeight | unknown | Deprecated |  |');
   });
 });

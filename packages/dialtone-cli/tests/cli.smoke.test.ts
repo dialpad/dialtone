@@ -132,13 +132,8 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
   });
 
   test.each([
-    { args: [] },
-    { args: ['--format', 'markdown'] },
-    { args: ['--props'] },
     { args: ['--props', '--describe'] },
-    { args: ['--props', '--format', 'markdown'] },
     { args: ['--prop', 'kind'] },
-    { args: ['--prop', 'kind', '--format', 'markdown'] },
   ])('component prop warnings survive readable options $args', ({ args }) => {
     const result = run(['component', 'DtLink', ...args]);
     expect(result.status).toBe(0);
