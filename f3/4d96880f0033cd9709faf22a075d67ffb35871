@@ -1,0 +1,35 @@
+packages/combinator/src/components/combinator.vue
+  h_c15b5755534093 614
+packages/combinator/src/components/controls/control_selection.vue
+  s_9f61fa9161643f::t_34d15a686c6902 29-30,234,304,318,326,328-329,344,352-355
+  s_9f61fa9161643f::t_8981485cc197ba 327
+packages/combinator/src/components/option_bar/option_bar_control.vue
+  h_c15b5755534093 48
+packages/combinator/src/components/controls/control_iterable.vue
+  h_c15b5755534093 12,59
+packages/combinator/src/components/option_bar/option_bar.vue
+  h_c15b5755534093 10,49,92,115
+packages/combinator/src/components/controls/control_selection.test.js
+  s_9f61fa9161643f::t_0486b1f0044729 246-254
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "f34d96880f0033cd9709faf22a075d67ffb35871",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
