@@ -38,8 +38,22 @@ function makeTable(head: string[], rows: string[][], colWidths?: number[]): stri
 
 // ── Props / Events / Slots tables ───────────────────────────────────────────
 
+export function propDeprecation(prop: ComponentProp): string {
+  const deprecated = prop.tags?.deprecated;
+  if (!deprecated) return '';
+  const description = Array.isArray(deprecated)
+    ? deprecated.map(tag => tag?.description).filter(description => typeof description === 'string' && description).join(' ')
+    : typeof deprecated === 'string' ? deprecated : '';
+  return description ? `Deprecated: ${description}` : 'Deprecated';
+}
+
 export function propsTable(props: ComponentProp[], describe = false): string {
   if (!props.length) return 'No props.';
+  const notices = props.flatMap(prop => {
+    const notice = propDeprecation(prop);
+    return notice ? [`${prop.name}: ${notice}`] : [];
+  });
+  const suffix = notices.length ? `\n\n${notices.join('\n')}` : '';
 
   if (describe) {
     return makeTable(
@@ -51,7 +65,7 @@ export function propsTable(props: ComponentProp[], describe = false): string {
         p.values?.join(', ') || '',
       ]),
       [22, 22, 52, 32],
-    );
+    ) + suffix;
   }
 
   return makeTable(
@@ -62,7 +76,7 @@ export function propsTable(props: ComponentProp[], describe = false): string {
       p.values?.join(', ') || '',
     ]),
     [22, 22, 42],
-  );
+  ) + suffix;
 }
 
 export function eventsTable(events: ComponentEvent[]): string {
@@ -154,7 +168,7 @@ function markdownPropsTable(props: ComponentProp[]): string {
   const lines = ['| Prop | Type | Description | Values |', '|------|------|-------------|--------|'];
   props.forEach((p: ComponentProp) => {
     const type = p.type?.name || 'unknown';
-    const desc = (p.description || '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
+    const desc = [p.description, propDeprecation(p)].filter(Boolean).join(' ').replace(/\|/g, '\\|').replace(/\n/g, ' ');
     const values = (p.values || []).join(', ').replace(/\|/g, '\\|');
     lines.push(`| ${p.name} | ${type} | ${desc} | ${values} |`);
   });
