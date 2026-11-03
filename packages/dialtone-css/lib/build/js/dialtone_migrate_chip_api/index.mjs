@@ -22,6 +22,8 @@ const VOID_ELEMENTS = new Set([
   'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr',
 ]);
 
+const ACTIVE_LABEL_CLASS = 'd-chip__label--active';
+
 // Old slot name -> new slot name.
 const SLOT_RENAMES = { icon: 'startIcon', avatar: 'startAvatar' };
 
@@ -95,7 +97,7 @@ function renameAttr (attrs, oldProp, newProp) {
   return result;
 }
 
-function transformChipOpenTag (tag, warnings, filePath) {
+function transformChipOpenTag (tag, warnings, filePath, activeClassInFile) {
   const match = tag.match(CHIP_OPEN_TAG_RE);
   if (!match) return tag;
 
@@ -133,8 +135,11 @@ function transformChipOpenTag (tag, warnings, filePath) {
   }
 
   // The persistent selected fill was removed with no replacement, so there is nothing to rewrite it to.
-  if (attrs.includes('d-chip__label--active')) {
-    warnings.push(`CHIP_API_ACTIVE_LABEL_CLASS file=${filePath} (d-chip__label--active no longer styles the chip)`);
+  if (attrs.includes(ACTIVE_LABEL_CLASS)) {
+    warnings.push(`CHIP_API_ACTIVE_LABEL_CLASS file=${filePath} (${ACTIVE_LABEL_CLASS} no longer styles the chip)`);
+  } else if (activeClassInFile && (hasDynamicAttr(attrs, 'label-class') || hasDynamicAttr(attrs, 'labelClass'))) {
+    warnings.push(`CHIP_API_ACTIVE_LABEL_CLASS file=${filePath} (a bound label-class may supply ${ACTIVE_LABEL_CLASS},`
+      + ' which no longer styles the chip)');
   }
 
   attrs = renameAttr(attrs, 'icon-class', 'start-icon-class');
@@ -174,7 +179,7 @@ function renameSlotAttrs (attrs) {
 
 // Walks the tags once, tracking nesting, so that only the chip's own opening tag and its direct
 // children's slots are touched. Slots of nested components (an avatar's #icon, a button's #icon) stay as is.
-function transformChips (content, warnings, filePath) {
+function transformChips (content, warnings, filePath, activeClassInFile) {
   const edits = [];
   const stack = [];
 
@@ -203,7 +208,7 @@ function transformChips (content, warnings, filePath) {
         warnings.push(`CHIP_API_ICON_AVATAR_CONFLICT file=${filePath}`);
       }
     }
-    if (isChip) text = transformChipOpenTag(text, warnings, filePath);
+    if (isChip) text = transformChipOpenTag(text, warnings, filePath, activeClassInFile);
     if (text !== tag) edits.push({ start, end: start + tag.length, text });
 
     if (!selfClosing && !VOID_ELEMENTS.has(name.toLowerCase())) {
@@ -241,7 +246,9 @@ export function transformContent (content, opts = {}) {
   if (!/(?:dt-chip|DtChip)/.test(content)) return { transformed: content, warnings };
 
   const { masked, segments, token } = maskInertContent(content);
-  const transformed = transformChips(masked, warnings, filePath);
+  // Scripts are masked, so a bound label-class can only be matched to the class by looking at the whole file.
+  const activeClassInFile = content.includes(ACTIVE_LABEL_CLASS);
+  const transformed = transformChips(masked, warnings, filePath, activeClassInFile);
 
   return { transformed: unmaskInertContent(transformed, segments, token), warnings };
 }

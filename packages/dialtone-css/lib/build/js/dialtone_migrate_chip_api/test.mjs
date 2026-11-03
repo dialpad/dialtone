@@ -83,6 +83,21 @@ describe('dialtone-migrate-chip-api', () => {
     assert.ok(warnings(input).some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
   });
 
+  it('warns for a bound label-class when the file mentions the removed active class', () => {
+    const input = [
+      '<template><dt-chip :label-class="selectedClass">Chip</dt-chip></template>',
+      '<script>const selectedClass = "d-chip__label--active";</script>',
+    ].join('\n');
+
+    assert.ok(warnings(input).some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
+  });
+
+  it('does not warn for a bound label-class when the file never mentions the active class', () => {
+    const input = '<dt-chip :label-class="extraClass">Chip</dt-chip>';
+
+    assert.ok(!warnings(input).some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
+  });
+
   it('does not warn about the active label class on other label classes or on non-chip tags', () => {
     assert.ok(!warnings('<dt-chip label-class="d-chip__label--strong">Chip</dt-chip>')
       .some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
