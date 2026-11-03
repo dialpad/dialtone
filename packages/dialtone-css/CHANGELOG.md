@@ -1,3 +1,10 @@
+# [9.3.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.2.0...dialtone-css/v9.3.0) (2026-11-03)
+
+
+### Features
+
+* **Loader:** DLT-3619 replace spinner with dot loader ([#1464](https://github.com/dialpad/dialtone/issues/1464)) ([0c46fc6](https://github.com/dialpad/dialtone/commit/0c46fc67f79fd9a881dd4cf98f219edb0ce4ed6e))
+
 # [9.2.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.1.1...dialtone-css/v9.2.0) (2026-10-27)
 
 
