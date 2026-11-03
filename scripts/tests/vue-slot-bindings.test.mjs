@@ -10,6 +10,7 @@ const fixture = `<template>
       @binding {string} aria-expanded Whether the popup is open.
       @binding {string} aria-controls The popup ID.
     -->
+    <!-- eslint-disable-next-line vue/no-unused-refs -->
     <slot name="anchor" ref="anchor" :aria-expanded="open" v-bind="attrs" />
     <!-- @slot Ordinary content. -->
     <slot name="content" :close="close" />
@@ -19,7 +20,7 @@ const fixture = `<template>
 export default { name: 'PopupFixture' };
 </script>`;
 
-test('slot declarations preserve each binding beside inferred attributes and raw spreads', async () => {
+test('slot declarations survive adjacent comments beside inferred attributes and raw spreads', async () => {
   const doc = await parseSource(fixture, 'PopupFixture.vue', { addTemplateHandlers: [preserveDeclaredSlotBindings] });
   const anchor = doc.slots.find(slot => slot.name === 'anchor');
   assert.deepEqual(anchor.bindings.map(binding => binding.name).sort(), ['aria-controls', 'aria-expanded', 'ref']);

@@ -19,6 +19,7 @@
     <template #anchor="anchorAttrs">
       <div
         v-if="$attrs.anchor"
+        v-bind="anchorAttrs"
         v-html="$attrs.anchor"
       />
       <dt-button
