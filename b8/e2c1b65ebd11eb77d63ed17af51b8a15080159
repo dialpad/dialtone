@@ -1,0 +1,22 @@
+packages/dialtone-vue/components/Slider/Composables/UseSliderGeometry.js
+  s_f1b6a2e8befce4::t_455a25bdd81131 175-179,181-182
+  s_f1b6a2e8befce4::t_b28b339cccaf0f 180
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_f1b6a2e8befce4::t_e295d19321ad01 3989-4017
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b8e2c1b65ebd11eb77d63ed17af51b8a15080159",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
