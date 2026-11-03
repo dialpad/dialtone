@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.5.0...dialtone-vue/v4.6.0) (2026-11-03)
+
+
+### Features
+
+* **Loader:** DLT-3619 replace spinner with dot loader ([#1464](https://github.com/dialpad/dialtone/issues/1464)) ([0c46fc6](https://github.com/dialpad/dialtone/commit/0c46fc67f79fd9a881dd4cf98f219edb0ce4ed6e))
+
 # [4.5.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.4.1...dialtone-vue/v4.5.0) (2026-10-27)
 
 
