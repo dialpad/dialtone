@@ -104,6 +104,39 @@ logical-alias search corpus.
 
 See [internal/EXCLUSIONS.md](internal/EXCLUSIONS.md) for exclusion mechanics.
 
+### Selecting a preset
+
+Use `preset` to select an existing variant by its exact name, or bind it with
+`v-model:preset` to track selections:
+
+```vue
+<dtc-combinator
+  v-model:preset="selectedPreset"
+  :component="DtButton"
+  :documentation="componentDocumentation"
+  :variants="buttonVariants"
+/>
+```
+
+The prop defaults to `default`. Unknown names and an empty name at mount also
+load `default`. Dropdown selections, spec-sheet selections, and reset actions
+emit `update:preset` with the selected name. Edits emit an empty string to mark
+custom options; echoing that value through the prop preserves those edits.
+An unchanged model value emitted by the preview does not mark it custom.
+Without a binding, the playground continues to manage its own selection.
+
+The documentation site maps these names to URL slugs, such as
+`avatar.html?preset=with-presence-no-icon`. Selecting a preset replaces the
+query while preserving other query values and the current browser hash.
+Choosing `default` removes only the `preset` parameter instead of writing
+`preset=default`; other query parameters and the hash remain intact.
+Custom edits remove the preset query; they are not serialized into the URL.
+Missing or invalid queries load `default`, and slug matching ignores case.
+Empty or colliding slugs receive a deterministic suffix so links remain unique.
+Appending a colliding name preserves the first declared preset's clean link.
+The docs authoring tests reject fallback slugs in shipped preset banks; choose
+distinct names before publishing. Keep preset names stable to preserve their URLs.
+
 ## Blueprint mode
 
 Blueprint mode hides the option bar and forces code verbose mode off. It keeps

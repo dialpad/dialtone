@@ -65,6 +65,18 @@ export default {
 };
 ```
 
+## Preset names and shared URLs
+
+Preset names are public deep-link identifiers on documentation pages. For example,
+`with presence` becomes `?preset=with-presence`; the default preset uses the page URL
+without a preset parameter.
+
+- Keep existing names stable. Renaming or deleting a preset breaks its shared links.
+- Choose names that normalize to nonempty, distinct slugs. Case, spaces and punctuation
+  can make different names collide. Runtime `~` fallbacks are rejected for shipped
+  banks by the docs playground tests.
+- After changing a bank, run `pnpm nx run dialtone-documentation:test-playground`.
+
 ## Member values
 
 - Use `initialValue` for values a preset applies to a prop, attribute, or slot.
@@ -152,6 +164,7 @@ when the component becomes viable, and keep the reason short and user-facing.
   `unsupported_components.json` with a reason.
 - `default` renders a useful component-wall thumbnail, or an override exists.
 - Presets cover common states without becoming a storybook replacement.
+- Existing preset names stay stable, and shipped slugs need no `~` fallback.
 - Exclusions prevent known invalid combinations.
 - Names match component docgen output.
 - Token-numbered values stay strings.

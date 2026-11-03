@@ -10,6 +10,7 @@ import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref, onMounted } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 import { syncBrowserThemeColor } from './utils/browserThemeColor.js';
+import { getPageScrollPosition } from './utils/pageToc.js';
 
 // Layered Theming System - Base layers (always loaded). Material override CSS
 // is no longer imported here — setMaterialConfig (see useThemeManager.js)
@@ -156,7 +157,7 @@ export default defineClientConfig({
       //
       // Non-hash navigation still resets the document here; the inner container is reset
       // by Layout.vue's own route watcher.
-      router.options.scrollBehavior = (to) => (to.hash ? false : { top: 0 });
+      router.options.scrollBehavior = getPageScrollPosition;
     }
   },
   setup () {

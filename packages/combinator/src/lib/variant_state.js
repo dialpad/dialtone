@@ -1,4 +1,4 @@
-import { reactive } from 'vue';
+import { reactive, toRaw } from 'vue';
 import { getComponentInfo } from '@/src/lib/info';
 import { shouldDisable } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
@@ -58,7 +58,7 @@ export function buildVariantInfo (component, documentation, variants, variantNam
 }
 
 /**
- * Gets the initial values for each member group from an info object.
+ * Gets detached initial values so live edits cannot mutate preset defaults.
  *
  * @param {object} info - The info object.
  * @returns {object} A map of member group -> { memberName: initialValue }.
@@ -71,7 +71,7 @@ export function getInitialValues (info) {
       values[group][member.name] = member.initialValue;
     }
   }
-  return values;
+  return copyOptionValue(values);
 }
 
 /** Lazy getters retain the UI's current reactive values after reset/replacement. */
@@ -177,6 +177,65 @@ export function computeDisabledMembers (info, propValues, slotValues) {
  */
 export function listVariantNames (variants) {
   return Object.keys(variants ?? {}).filter(key => key !== 'exclusions' && key !== 'defaults');
+}
+
+/**
+ * Compares model echoes without serializing away functions, undefined or symbols.
+ * Only arrays and plain objects compare by content; other instances keep identity semantics.
+ *
+ * @param {*} previous - The current option value.
+ * @param {*} next - The emitted value.
+ * @param {WeakMap<object, object>} [compared] - Already compared object pairs.
+ * @returns {boolean} Whether the event leaves the option unchanged.
+ */
+export function areOptionValuesEqual (previous, next, compared = new WeakMap()) {
+  if (Object.is(previous, next)) return true;
+  if (!previous || !next || typeof previous !== 'object' || typeof next !== 'object') return false;
+  const prototype = Object.getPrototypeOf(previous);
+  if (prototype !== Object.getPrototypeOf(next)) return false;
+  if (!Array.isArray(previous) && prototype !== Object.prototype && prototype !== null) return false;
+  if (compared.has(previous)) return compared.get(previous) === next;
+  compared.set(previous, next);
+  const keys = Reflect.ownKeys(previous);
+  return keys.length === Reflect.ownKeys(next).length && keys.every(key =>
+    Object.prototype.hasOwnProperty.call(next, key) && areOptionValuesEqual(previous[key], next[key], compared),
+  );
+}
+
+/**
+ * Records component values before a child can mutate a prop and emit the same reference.
+ * Raw reads keep this baseline independent of the options model's reactive dependencies.
+ *
+ * @param {object} options - The current options model.
+ * @returns {object} Detached prop and attribute values.
+ */
+export function captureComponentValues (options) {
+  const { props, attributes } = toRaw(options);
+  return copyOptionValue({ props, attributes });
+}
+
+function isPlainOptionCollection (value) {
+  const prototype = Object.getPrototypeOf(value);
+  return Array.isArray(value) || prototype === Object.prototype || prototype === null;
+}
+
+function copyOptionValue (value, copies = new WeakMap()) {
+  if (!value || typeof value !== 'object') return value;
+  const raw = toRaw(value);
+  if (!isPlainOptionCollection(raw)) return value;
+  if (copies.has(raw)) return copies.get(raw);
+  const copy = Array.isArray(raw) ? [] : Object.create(Object.getPrototypeOf(raw));
+  copies.set(raw, copy);
+  for (const key of Reflect.ownKeys(raw)) {
+    const descriptor = Object.getOwnPropertyDescriptor(raw, key);
+    Object.defineProperty(copy, key, {
+      value: copyOptionValue(raw[key], copies),
+      enumerable: descriptor.enumerable,
+      configurable: descriptor.configurable,
+      writable: true,
+    });
+  }
+  return copy;
 }
 
 /**

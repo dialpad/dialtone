@@ -10,6 +10,9 @@ on:
   pull_request:
     paths:
       - 'apps/dialtone-documentation/**'
+      - 'packages/combinator/**'
+      - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-icons/**'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'scripts/lib/**/*.mjs'
       - 'scripts/tests/**'
@@ -22,6 +25,9 @@ on:
       - staging
     paths:
       - 'apps/dialtone-documentation/**'
+      - 'packages/combinator/**'
+      - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-icons/**'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'scripts/lib/**/*.mjs'
       - 'scripts/tests/**'

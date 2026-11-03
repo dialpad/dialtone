@@ -113,6 +113,11 @@ describe('pageToc route hash utilities', () => {
     const skippedHashes = [];
     const router = {
       options: { scrollBehavior: () => {} },
+      currentRoute: { value: null },
+      async replace (location) {
+        calls.push({ ...location, replace: true });
+        this.currentRoute.value = location;
+      },
       async push (location) {
         calls.push(location);
       },
@@ -128,8 +133,14 @@ describe('pageToc route hash utilities', () => {
 
     await writeRouteHash(router, route, '#accessibility', guard, { currentHash: '#classes' });
 
-    assert.deepEqual(skippedHashes, ['#accessibility']);
+    assert.deepEqual(skippedHashes, ['#classes', '#accessibility']);
     assert.deepEqual(calls, [
+      {
+        path: '/components/toggle.html',
+        query: {},
+        hash: '#classes',
+        replace: true,
+      },
       {
         path: '/components/toggle.html',
         query: {},

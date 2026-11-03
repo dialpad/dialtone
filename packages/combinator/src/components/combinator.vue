@@ -229,6 +229,8 @@ import {
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
 import {
+  areOptionValuesEqual,
+  captureComponentValues,
   buildVariantInfo,
   createVariantBindings,
   computeDisabledMembers,
@@ -289,6 +291,14 @@ const props = defineProps({
     default: () => ({}),
   },
   /**
+   * Selected preset name. An empty string preserves custom edits after initialization.
+   * Missing, unknown, or initially empty names use the default preset.
+   */
+  preset: {
+    type: String,
+    default: 'default',
+  },
+  /**
    * Activate 'blueprint' mode, to use a simple version of the combinator.
    * Used to display the component but provided limited options for interaction.
    */
@@ -309,7 +319,7 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const emit = defineEmits(['update:fullScreen']);
+const emit = defineEmits(['update:fullScreen', 'update:preset']);
 
 const selectedVariant = ref('default');
 const activeVariant = ref('default');
@@ -362,6 +372,8 @@ const info = computed(() => {
   });
 });
 
+let componentValues;
+
 /**
  * The options data object is the main reactive object that allows interactivity with the target component.
  * Reactive.
@@ -371,10 +383,12 @@ const info = computed(() => {
 const options = computedModel(
   computed(() => {
     _forceReset.value; // force recompute on reset
-    return reactive({
+    const model = reactive({
       ...getInitialValues(info.value),
       bindings: optionBindings,
     });
+    componentValues = captureComponentValues(model);
+    return model;
   }),
   /**
    * Catch errors when updating member values,
@@ -387,8 +401,10 @@ const options = computedModel(
   (e, model) => {
     try {
       e(model);
-      if (!_presetChanging) {
+      componentValues = captureComponentValues(model);
+      if (!_presetChanging && selectedVariant.value !== '') {
         selectedVariant.value = '';
+        emit('update:preset', '');
       }
     } catch (exception) {
       console.warn('Update options warning: \n', exception);
@@ -475,22 +491,41 @@ function onComponentEvent(name, value) {
   // Guard before assigning options.value: a non-update event must not run the
   // computedModel setter (which would clear selectedVariant / mark "custom").
   if (!name?.startsWith('update:')) return;
+  const prop = name.slice('update:'.length);
+  const group = ['props', 'attributes'].find(name => options.value[name] && prop in options.value[name]);
+  // Components may echo their initial value asynchronously (for example, an editor's create event).
+  if (!group || areOptionValuesEqual(componentValues[group]?.[prop], value)) return;
   options.value = (model) => writeUpdateEvent(model, name, value);
 }
 
-function updateVariant(e) {
+function updateVariant(e, notify = true) {
   _presetChanging = true;
   selectedVariant.value = e;
   if (e !== '') {
     activeVariant.value = e;
     _forceReset.value++;
   }
+  if (notify) emit('update:preset', e);
   nextTick(() => {
     _presetChanging = false;
   });
 }
 
-watch(() => props.component.name, resetOptions);
+watch(
+  [() => props.component.name, () => props.preset],
+  ([componentName, preset], [previousComponentName] = []) => {
+    const isCustom = preset === '' && componentName === previousComponentName;
+    const nextPreset = isCustom
+      ? ''
+      : listVariantNames(props.variants).includes(preset) ? preset : 'default';
+
+    if (componentName !== previousComponentName || nextPreset !== selectedVariant.value) {
+      updateVariant(nextPreset, false);
+      if (nextPreset && componentName === previousComponentName) viewMode.value = 'single';
+    }
+  },
+  { immediate: true },
+);
 
 function toggleViewMode() {
   viewMode.value = viewMode.value === 'grid' ? 'single' : 'grid';
@@ -548,7 +583,7 @@ const hasChanges = computed(() => {
     const members = referenceInfo[group];
     if (!members) continue;
     for (const member of members) {
-      if (options.value[group]?.[member.name] !== member.initialValue)
+      if (!areOptionValuesEqual(options.value[group]?.[member.name], member.initialValue))
         return true;
     }
   }

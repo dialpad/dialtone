@@ -6,18 +6,64 @@ import {
   createRouteHashScrollGuard,
   flattenHeadersWithDepth,
   getCurrentBrowserHash,
+  getPageScrollPosition,
   getRightRailTocViewportValues,
   findPageStickyHeader,
   getLinkedHeaders,
   getScrollOffset,
   getTargetScrollTop,
   hashToId,
+  listenForPageAnchorNavigation,
   scrollRouteToTop,
   shouldSyncActiveHeaderFromRouteWatch,
   shouldScrollRouteToTop,
+  suppressRouteHashScroll,
 } from './pageToc.js';
 
 describe('pageToc utilities', () => {
+  it('suppresses document scrolling only for the marked navigation or hash links', () => {
+    const presetWrite = { hash: '' };
+    suppressRouteHashScroll(presetWrite);
+    assert.equal(getPageScrollPosition(presetWrite), false);
+    assert.equal(getPageScrollPosition({ hash: '#props' }), false);
+    assert.deepEqual(getPageScrollPosition({ hash: '' }), { top: 0 });
+  });
+
+  it('routes plain anchors through history and removes its listener on cleanup', async () => {
+    const listeners = new Map();
+    const document = {
+      addEventListener: (name, fn) => listeners.set(name, fn),
+      removeEventListener: name => listeners.delete(name),
+    };
+    const location = new URL('https://dialtone.example/components/avatar.html?other=keep#usage');
+    const calls = [];
+    const navigate = async (event, item) => calls.push(item.link);
+    const anchor = { href: '#props', target: '', hasAttribute: () => false };
+    let prevented = false;
+    const event = { button: 0, target: { closest: () => anchor }, preventDefault: () => { prevented = true; } };
+    const stop = listenForPageAnchorNavigation(navigate, document, location);
+    await listeners.get('click')(event);
+    assert.equal(prevented, true);
+    assert.deepEqual(calls, ['#props']);
+    const modifiedClicks = [
+      { ctrlKey: true }, { metaKey: true }, { shiftKey: true }, { altKey: true },
+      { button: 1 }, { defaultPrevented: true },
+    ];
+    for (const overrides of modifiedClicks) {
+      await listeners.get('click')({ ...event, ...overrides });
+    }
+    const nativeLinks = [
+      { href: 'https://elsewhere.example/#props' }, { href: '?other=changed#props' },
+      { href: 'http://' }, { target: '_blank' }, { hasAttribute: () => true },
+    ];
+    for (const overrides of nativeLinks) {
+      await listeners.get('click')({ ...event, target: { closest: () => ({ ...anchor, ...overrides }) } });
+    }
+    assert.equal(calls.length, 1);
+    stop();
+    assert.equal(listeners.size, 0);
+  });
+
   it('uses a docs-owned page scroll container selector', () => {
     assert.equal(PAGE_SCROLL_CONTAINER_SELECTOR, '.dialtone-doc-page-scroll-container');
   });
