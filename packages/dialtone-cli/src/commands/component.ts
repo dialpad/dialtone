@@ -3,12 +3,14 @@ import { getDocumentationExampleIds } from '@dialpad/dialtone-query-core';
 import type { ComponentProp } from '@dialpad/dialtone-query-core';
 import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
-import { formatComponentOutput, propsTable, eventsTable, slotsTable, type Format } from '../formatters.js';
+import { formatComponentOutput, propDeprecation, propsTable, eventsTable, slotsTable, type Format } from '../formatters.js';
 
 function formatSingleProp(prop: ComponentProp): string {
   const lines: string[] = [];
   lines.push(prop.name);
   lines.push(`  Type: ${prop.type?.name || 'unknown'}`);
+  const notice = propDeprecation(prop);
+  if (notice) lines.push(`  ${notice}`);
   if (prop.description) {
     lines.push(`  ${prop.description}`);
   }

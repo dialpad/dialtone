@@ -131,6 +131,34 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(r.stderr).toContain('No directive documentation found for "nope".');
   });
 
+  test.each([
+    { args: [] },
+    { args: ['--format', 'markdown'] },
+    { args: ['--props'] },
+    { args: ['--props', '--describe'] },
+    { args: ['--props', '--format', 'markdown'] },
+    { args: ['--prop', 'kind'] },
+    { args: ['--prop', 'kind', '--format', 'markdown'] },
+  ])('component prop warnings survive readable options $args', ({ args }) => {
+    const result = run(['component', 'DtLink', ...args]);
+    expect(result.status).toBe(0);
+    expect(result.stdout).toContain('Deprecated: Use tone');
+  });
+
+  test('single-prop JSON preserves tags without adding display text', () => {
+    const result = run(['component', 'DtLink', '--prop', 'kind', '--format', 'json']);
+    expect(result.status).toBe(0);
+    const prop = JSON.parse(result.stdout);
+    expect(prop).toMatchObject({ name: 'kind', tags: { deprecated: [{ description: 'Use tone', title: 'deprecated' }] } });
+    expect(result.stdout).not.toContain('Deprecated:');
+  });
+
+  test('nondeprecated single-prop output has no warning', () => {
+    const result = run(['component', 'DtLink', '--prop', 'href']);
+    expect(result.status).toBe(0);
+    expect(result.stdout).not.toContain('Deprecated');
+  });
+
   test('prints no debug lines by default', () => {
     const r = run(['search', 'button']);
     expect(r.status).toBe(0);
