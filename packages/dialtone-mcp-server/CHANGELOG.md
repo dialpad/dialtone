@@ -1,3 +1,34 @@
+# [1.10.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.9.0...dialtone-mcp-server/v1.10.0) (2026-11-03)
+
+
+### Bug Fixes
+
+* **Cli,mcp:** DLT-3708 link update notices to installation guidance ([#1503](https://github.com/dialpad/dialtone/issues/1503)) ([8eb270a](https://github.com/dialpad/dialtone/commit/8eb270aee38bb4cd9ee3ebc948a0a629f7a1e0fa))
+* **Dialtone Cli, Dialtone Mcp Server:** DLT-3670 release bundled data when its sources change ([#1474](https://github.com/dialpad/dialtone/issues/1474)) ([3a9e0bc](https://github.com/dialpad/dialtone/commit/3a9e0bcd4d1e2831c2f8357675593cbda909fe26))
+* **Dialtone Docs:** DLT-3692 preserve usage recommendation labels ([#1494](https://github.com/dialpad/dialtone/issues/1494)) ([a5736c4](https://github.com/dialpad/dialtone/commit/a5736c4d88ccdaa4631afcac96176bdce54e4d7b))
+* **Dialtone Tokens:** DLT-3682 flatten alpha-modified colours whose target is translucent ([#1489](https://github.com/dialpad/dialtone/issues/1489)) ([c82fb4a](https://github.com/dialpad/dialtone/commit/c82fb4a2649b2bb995e045fc119e0a2f0e3ad061))
+* **Dialtone Tokens:** DLT-3697 scope foreground colours for strokes ([#1495](https://github.com/dialpad/dialtone/issues/1495)) ([0222d48](https://github.com/dialpad/dialtone/commit/0222d481b0a2fa0b9e7f6b63bdf12d73d100f298))
+* **Docs:** DLT-3669 accept documented native attributes ([#1508](https://github.com/dialpad/dialtone/issues/1508)) ([b628395](https://github.com/dialpad/dialtone/commit/b628395ac0248df5e3670c34d7576b919a83687d))
+
+
+### Documentation
+
+* **Cli,mcp:** DLT-3709 centralize assistant lookup instructions ([#1509](https://github.com/dialpad/dialtone/issues/1509)) ([fadcaa6](https://github.com/dialpad/dialtone/commit/fadcaa6b59cb3e5fbe597464d7c8a27f5733a2fc))
+* **Dialtone Documentation:** DLT-3673 add DtSlider What's New post ([#1501](https://github.com/dialpad/dialtone/issues/1501)) ([d83bccd](https://github.com/dialpad/dialtone/commit/d83bccdd1f6498b9999636093c6fb43441d56f1a))
+* **Dialtone Documentation:** NO-JIRA add Figma styles What's New post ([#1497](https://github.com/dialpad/dialtone/issues/1497)) ([2bd2dba](https://github.com/dialpad/dialtone/commit/2bd2dbad6cc7fa07950b78f6195bf6fcc6ca4070))
+* **Dialtone Documentation:** NO-JIRA publish Figma variables What's New post ([#1496](https://github.com/dialpad/dialtone/issues/1496)) ([46fc1eb](https://github.com/dialpad/dialtone/commit/46fc1eb28b31b64188b74b48143ba9958ecfa911))
+* **Dialtone:** DLT-3695 repair public assistant setup ([#1500](https://github.com/dialpad/dialtone/issues/1500)) ([25e11cb](https://github.com/dialpad/dialtone/commit/25e11cb616e340dae69f61958bf2a69732bedbc4))
+* DLT-3662 homepage brand follow-ups ([#1479](https://github.com/dialpad/dialtone/issues/1479)) ([6b1f946](https://github.com/dialpad/dialtone/commit/6b1f94625e0fa59775b574f646e6c4cc5db056cf))
+
+
+### Features
+
+* **Cli,mcp:** DLT-3711 connect examples to existing documentation ([#1507](https://github.com/dialpad/dialtone/issues/1507)) ([46f1351](https://github.com/dialpad/dialtone/commit/46f13512e786a374a7cce6bb9c1099507fc06e4f))
+* **Dialtone Docs:** DLT-3666 extend source example delivery and coverage ([#1491](https://github.com/dialpad/dialtone/issues/1491)) ([f90b20d](https://github.com/dialpad/dialtone/commit/f90b20dfbe055d88124108d702cc75ebb9309cca))
+* **Dialtone Docs:** DLT-3667 generate Combinator preset examples from curated sources ([#1493](https://github.com/dialpad/dialtone/issues/1493)) ([6749f8a](https://github.com/dialpad/dialtone/commit/6749f8afed5fea8fce082e513015ed610ae44c74))
+* **Dialtone Docs:** DLT-3710 deliver source-driven component examples ([#1505](https://github.com/dialpad/dialtone/issues/1505)) ([945ded7](https://github.com/dialpad/dialtone/commit/945ded7084f2662936669f8bf25330643eb90f32))
+* **Loader:** DLT-3619 replace spinner with dot loader ([#1464](https://github.com/dialpad/dialtone/issues/1464)) ([0c46fc6](https://github.com/dialpad/dialtone/commit/0c46fc67f79fd9a881dd4cf98f219edb0ce4ed6e))
+
 # [1.9.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.8.0...dialtone-mcp-server/v1.9.0) (2026-10-27)
 
 
