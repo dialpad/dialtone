@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { resolve, dirname, relative } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { readKeywords } from '../utils/keywords.mjs';
 import { parseMarkdownFrontmatter } from '../../../../apps/dialtone-documentation/scripts/lib/frontmatter.mjs';
-import { mapOutputPath } from '../../../../apps/dialtone-documentation/scripts/lib/source-page.mjs';
+import { mapOutputPath, resolveSourcePagePath } from '../../../../apps/dialtone-documentation/scripts/lib/source-page.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
 import {
   readPublicComponentExports,
@@ -17,10 +17,6 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const appRequire = createRequire(
   resolve(root, 'apps/dialtone-documentation/package.json'),
 );
-const { inferPagePath, resolvePagePath } = await import(
-  pathToFileURL(appRequire.resolve('vuepress/core'))
-);
-
 const MarkdownIt = appRequire('markdown-it');
 const markdown = new MarkdownIt({ html: true });
 
@@ -80,17 +76,7 @@ export async function buildComponentPage(filePathRelative, source, identities) {
   const { data, content } = parseMarkdownFrontmatter(source, {
     filePath: filePathRelative,
   });
-  const { pathInferred } = inferPagePath({
-    app: { siteData: { locales: {} } },
-    filePathRelative,
-  });
-  if (data.permalinkPattern)
-    throw new Error(`Unsupported page permalinkPattern in ${filePathRelative}`);
-  const pagePath = resolvePagePath({
-    permalink: data.permalink ?? null,
-    pathInferred,
-    options: {},
-  });
+  const pagePath = await resolveSourcePagePath(filePathRelative, data);
   const offset = source.indexOf(content);
   const lineBase = source.slice(0, offset).split('\n').length - 1;
   const components = [];

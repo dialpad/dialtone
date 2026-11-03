@@ -24,12 +24,12 @@ With a normal workspace install, this repository's configured executable runs th
 - `search_documentation`: usage guidance, recipes, accessibility, migration notes, design principles, and how-to questions.
 - `search_components`: discover candidate components; API summaries can be incomplete.
 - `get_component`: retrieve the selected component's available API using its canonical name, for example `{ "component": "DtToggle" }`. Keywords and fuzzy candidates are not exact selections.
-- `get_documentation`: retrieve exact section prose or a source example using its returned `id`. Do not invent section IDs.
+- `get_documentation`: retrieve exact section prose or a source example using its returned `id`. Use `projection: "context"` for compact related source/page/API/directive/utility references; follow only the relevant targets. Do not invent section IDs.
 - `search_tokens`: design token lookup.
 - `search_utility_classes`: CSS utility lookup.
 - `search_icons`: icon lookup.
 
-Follow returned continuation tool calls and arguments when results are incomplete. Component details page by `offset`/`limit` within the selected `projection`; narrow requests with `projection` or `field`. An incomplete result without a continuation cannot be paged further. Documentation uses `textOffset` and `textLimit` in Unicode code points. Missing metadata is unknown, not proof that an API is absent.
+Follow returned continuation tool calls and arguments when results are incomplete. Component details page by `offset`/`limit` within the selected `projection`; narrow requests with `projection` or `field`. An incomplete result without a continuation cannot be paged further. Documentation content uses `textOffset` and `textLimit` in Unicode code points; context references use `offset`/`limit`. CLI equivalent: `dialtone docs --id <id> --context`; ordinary CLI JSON remains an array, context JSON is an envelope. Missing metadata is unknown, not proof that an API is absent.
 
 MCP reports installed or bundled source selection per domain when project roots are configured. Documentation and source examples remain bundled; their tested profile does not verify the project's installed compatibility. Inspect source versions, hashes and missing-metadata notes. Documentation links are latest references, not version-matched guarantees. Verify code examples and required setup against local source.
 
