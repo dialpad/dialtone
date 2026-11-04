@@ -84,6 +84,8 @@ import {
   BADGE_SIZE_MODIFIERS,
   BADGE_GROUPS,
   BADGE_LEGACY_KINDS,
+  isBadgeGroup,
+  isLegacyBadgeKind,
   BADGE_DEFAULT_EMPHASIS,
   BADGE_MENTION_PREFIX,
   BADGE_TYPE_MODIFIERS,
@@ -178,7 +180,7 @@ export default {
     kind: {
       type: String,
       default: 'status',
-      validator: (kind) => Object.keys(BADGE_GROUPS).includes(kind) || kind in BADGE_LEGACY_KINDS,
+      validator: (kind) => isBadgeGroup(kind) || isLegacyBadgeKind(kind),
     },
 
     /**
@@ -294,8 +296,8 @@ export default {
 
     // Falls back to status so an invalid kind still renders; the prop validator reports it.
     resolvedKind () {
-      if (BADGE_LEGACY_KINDS[this.kind]) return BADGE_LEGACY_KINDS[this.kind];
-      return BADGE_GROUPS[this.kind] ? this.kind : 'status';
+      if (isLegacyBadgeKind(this.kind)) return BADGE_LEGACY_KINDS[this.kind];
+      return isBadgeGroup(this.kind) ? this.kind : 'status';
     },
 
     resolvedEmphasis () {
@@ -394,12 +396,12 @@ export default {
     },
 
     validateKind () {
-      if (BADGE_LEGACY_KINDS[this.kind]) {
+      if (isLegacyBadgeKind(this.kind)) {
         console.warn(
           `DtBadge warning: kind="${this.kind}" is deprecated. Use kind="${BADGE_LEGACY_KINDS[this.kind]}"` +
           `${this.kind === 'count' ? ' with variant="count"' : ''} instead. Run dialtone-migrate-badge-api.`,
         );
-      } else if (!BADGE_GROUPS[this.kind]) {
+      } else if (!isBadgeGroup(this.kind)) {
         console.warn(
           `DtBadge warning: kind="${this.kind}" is not a badge group. Rendering kind="status". ` +
           `Use one of: ${Object.keys(BADGE_GROUPS).join(', ')}.`,
@@ -408,7 +410,7 @@ export default {
     },
 
     validateGroup () {
-      const group = BADGE_GROUPS[this.kind];
+      const group = isBadgeGroup(this.kind) ? BADGE_GROUPS[this.kind] : null;
 
       if (group && this.variant != null && this.variant !== 'ai' && !group.variants.includes(this.variant)) {
         console.warn(

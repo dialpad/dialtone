@@ -349,6 +349,19 @@ describe('DtBadge Tests', () => {
         expect(warn.mock.calls.some(([message]) => String(message).includes('is not a badge group'))).toBe(true);
         warn.mockRestore();
       });
+
+      it('should render a status badge, without throwing, for a kind that is an inherited object key', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        for (const kind of ['toString', 'constructor', '__proto__']) {
+          mockProps = { kind, variant: 'info' };
+          updateWrapper();
+
+          expect(badge.classes(BADGE_VARIANT_MODIFIERS.info), kind).toBe(true);
+        }
+
+        warn.mockRestore();
+      });
     });
 
     describe('When emphasis is clear', () => {

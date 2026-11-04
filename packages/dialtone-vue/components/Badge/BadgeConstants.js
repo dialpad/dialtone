@@ -36,6 +36,11 @@ export const BADGE_LEGACY_KINDS = {
   label: 'status',
 };
 
+// Own-property checks, so an inherited key such as "toString" or "__proto__" is never taken for a kind.
+const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
+export const isBadgeGroup = kind => hasOwn(BADGE_GROUPS, kind);
+export const isLegacyBadgeKind = kind => hasOwn(BADGE_LEGACY_KINDS, kind);
+
 export const BADGE_VARIANT_MODIFIERS = {
   neutral: 'd-badge--neutral',
   info: 'd-badge--info',

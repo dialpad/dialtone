@@ -56,6 +56,27 @@ describe('useFeatureAwarenessBadge', () => {
     expect(result.isVisible.value).toBe(false);
   });
 
+  it('should return the release kind', () => {
+    expect(mountComposable({ exposureCount: 0 }).kind.value).toBe('release');
+  });
+
+  it('should keep the release stage look, not an invalid variant, once hidden', () => {
+    const result = mountComposable({ exposureCount: 10 });
+
+    expect(result.variant.value).toBe('release');
+    expect(result.emphasis.value).toBe('base');
+  });
+
+  it('should keep a custom release stage look once hidden', () => {
+    const result = mountComposable({
+      exposureCount: 10,
+      stages: { release: { variant: 'release', emphasis: 'subtle' } },
+    });
+
+    expect(result.variant.value).toBe('release');
+    expect(result.emphasis.value).toBe('subtle');
+  });
+
   it('should use provided defaults', () => {
     const result = mountComposable(
       { exposureCount: 2 },

@@ -125,7 +125,7 @@ Emphasis shows how important the feature is. `subtle` is an outline, `base` is a
 </dt-stack>
 ```
 
-`useFeatureAwarenessBadge` steps through the fade from an exposure count. It returns the variant and emphasis for the current stage, and your app supplies the label, persistence, and counting.
+`useFeatureAwarenessBadge` steps through the fade from an exposure count. It returns the `kind`, variant and emphasis for the current stage, and your app supplies the label, persistence, and counting.
 
 ```vue
 <script setup>
@@ -140,7 +140,7 @@ const awareness = useFeatureAwarenessBadge({
 <template>
   <dt-badge
     v-if="awareness.isVisible.value"
-    kind="release"
+    :kind="awareness.kind.value"
     :variant="awareness.variant.value"
     :emphasis="awareness.emphasis.value"
     label="New"

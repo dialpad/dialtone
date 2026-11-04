@@ -69,7 +69,7 @@ export function provideFeatureAwarenessBadgeDefaults (defaults) {
  * @param {object} options
  * @param {number} options.exposureCount Count owned by the consuming app.
  * @param {object} options.thresholds Ascending stage thresholds.
- * @returns {{variant: import('vue').ComputedRef<string>, emphasis: import('vue').ComputedRef<string>, stage: import('vue').ComputedRef<string>, isVisible: import('vue').ComputedRef<boolean>}}
+ * @returns {{kind: import('vue').ComputedRef<string>, variant: import('vue').ComputedRef<string>, emphasis: import('vue').ComputedRef<string>, stage: import('vue').ComputedRef<string>, isVisible: import('vue').ComputedRef<boolean>}}
  */
 export function useFeatureAwarenessBadge (options = {}) {
   // getCurrentInstance works on every supported Vue 3 version; hasInjectionContext needs 3.3.
@@ -94,21 +94,25 @@ export function useFeatureAwarenessBadge (options = {}) {
 
   const isVisible = computed(() => stage.value !== 'hidden');
 
+  // A hidden badge has no stage of its own, so it keeps the last stage's look. "base" is not a variant.
+  const lookStage = computed(() => (isVisible.value ? stage.value : 'release'));
+
+  // Every variant here belongs to the release group, so a badge using it needs kind="release".
+  const kind = computed(() => 'release');
+
   const variant = computed(() => {
-    if (!isVisible.value) return 'base';
-    return resolvedOptions.value.stages[stage.value]?.variant ||
-      FEATURE_AWARENESS_BADGE_DEFAULTS.stages[stage.value].variant;
+    return resolvedOptions.value.stages[lookStage.value]?.variant ||
+      FEATURE_AWARENESS_BADGE_DEFAULTS.stages[lookStage.value].variant;
   });
 
   const emphasis = computed(() => {
-    if (!isVisible.value) return 'base';
-    return resolvedOptions.value.stages[stage.value]?.emphasis ||
-      FEATURE_AWARENESS_BADGE_DEFAULTS.stages[stage.value].emphasis;
+    return resolvedOptions.value.stages[lookStage.value]?.emphasis ||
+      FEATURE_AWARENESS_BADGE_DEFAULTS.stages[lookStage.value].emphasis;
   });
 
   return {
-    variant,
-    emphasis,
+    kind,
+    variant,    emphasis,
     stage,
     isVisible,
   };
