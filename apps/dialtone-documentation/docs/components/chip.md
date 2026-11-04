@@ -91,6 +91,13 @@ Chips are static by default. An interactive chip renders as a button. Hovering i
   <dt-chip interactive show-close remove-button-aria-label="Remove label name">Removable</dt-chip>
   <dt-chip variant="people" interactive show-close remove-button-aria-label="Remove First Last">First Last</dt-chip>
 </dt-stack>
+<!-- @code -->
+<dt-stack direction="row" gap="100">
+  <dt-chip interactive emphasis="base">Select me</dt-chip>
+  <dt-chip interactive emphasis="strong">Selected</dt-chip>
+  <dt-chip interactive show-close remove-button-aria-label="Remove label name">Removable</dt-chip>
+  <dt-chip variant="people" interactive show-close remove-button-aria-label="Remove First Last">First Last</dt-chip>
+</dt-stack>
 ```
 
 `show-close` needs `interactive`. Without it, Chip warns in development and doesn't render the button.

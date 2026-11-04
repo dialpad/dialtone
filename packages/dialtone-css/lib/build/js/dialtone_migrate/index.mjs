@@ -252,6 +252,15 @@ const MIGRATIONS = [
         + `(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?size(?:[\\s=/>]))`
         + `(?!${DT_TAG_ATTRS}\\sv-bind(?:[\\s=/>]))${DT_TAG_ATTRS}>`,
       ),
+      // A statically interactive chip without show-close loses its remove button, since showClose now defaults
+      // to false. A show-close, a v-bind spread or a legacy hide-close (left to the props migration) means it is done.
+      new RegExp(
+        `<(?:dt-chip|DtChip)(?=[\\s/>])`
+        + `(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?(?:show-close|showClose)(?:[\\s=/>]))`
+        + `(?!${DT_TAG_ATTRS}\\s(?:hide-close|hideClose)(?:[\\s=/>]))`
+        + `(?!${DT_TAG_ATTRS}\\sv-bind(?:[\\s=/>]))`
+        + `${DT_TAG_ATTRS}\\s(?:interactive(?=[\\s/>])|interactive\\s*=\\s*(["'])(?:true)?\\1|(?::|v-bind:)interactive\\s*=\\s*(["'])true\\2)`,
+      ),
     ],
     fileExtensions: ['.vue'],
   },

@@ -171,6 +171,21 @@ describe('--health-check', () => {
     );
   });
 
+  it('flags an interactive chip that has a size but no show-close', () => {
+    const pending = html => runHealthCheck({ 'App.vue': `<template>${html}</template>` });
+    const chipPending = /\[PENDING\].*DtChip API Updates \(chip-api\)/;
+    const chipDone = /\[DONE\].*DtChip API Updates \(chip-api\)/;
+
+    for (const attrs of ['interactive', 'interactive=""', 'interactive="true"', ':interactive="true"']) {
+      assert.match(pending(`<dt-chip size="300" ${attrs}>Label</dt-chip>`), chipPending, attrs);
+    }
+
+    for (const attrs of ['interactive show-close', 'interactive :show-close="x"', 'interactive hide-close',
+      'interactive v-bind="props"', ':interactive="false"', 'interactive-label="a"']) {
+      assert.match(pending(`<dt-chip size="300" ${attrs}>Label</dt-chip>`), chipDone, attrs);
+    }
+  });
+
   it('flags a legacy badge prop that follows a quoted attribute containing >', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-badge v-if="count > 0" type="info" /></template>',

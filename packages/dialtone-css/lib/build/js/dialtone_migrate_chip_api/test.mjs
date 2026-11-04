@@ -105,6 +105,32 @@ describe('dialtone-migrate-chip-api', () => {
       .some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
   });
 
+  it('treats a plain interactive="false" as interactive, since the string is truthy', () => {
+    assert.equal(
+      run('<dt-chip size="300" interactive="false">Chip</dt-chip>'),
+      '<dt-chip size="300" interactive="false" show-close>Chip</dt-chip>',
+    );
+    assert.ok(!warnings('<dt-chip size="300" show-close interactive="false">Chip</dt-chip>')
+      .some(warning => warning.startsWith('CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE')));
+  });
+
+  it('leaves a legacy hide-close to the props migration instead of adding show-close', () => {
+    for (const hide of ['hide-close', 'hideClose', ':hide-close="hidden"']) {
+      const input = `<dt-chip size="300" interactive ${hide}>Chip</dt-chip>`;
+
+      assert.equal(run(input), input, hide);
+      assert.ok(!warnings(input).some(warning => warning.startsWith('CHIP_API_OMITTED_SHOW_CLOSE')), hide);
+    }
+  });
+
+  it('warns about the removed active class and points at emphasis strong', () => {
+    const found = warnings('<dt-chip label-class="d-chip__label--active">Chip</dt-chip>')
+      .filter(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS'));
+
+    assert.equal(found.length, 1);
+    assert.ok(found[0].includes('emphasis="strong"'));
+  });
+
   it('does not transform non-chip icon slots', () => {
     const input = '<dt-button><template #icon><dt-icon /></template></dt-button>';
 
@@ -174,7 +200,7 @@ describe('dialtone-migrate-chip-api', () => {
     });
 
     it('only warns for chips that are not interactive, naming interactive as required', () => {
-      for (const attrs of ['', ' interactive="false"', ' :interactive="false"']) {
+      for (const attrs of ['', ' :interactive="false"', ' v-bind:interactive="false"']) {
         const input = `<dt-chip size="300"${attrs}>Chip</dt-chip>`;
         const found = omittedWarning(input);
 
@@ -265,7 +291,7 @@ describe('dialtone-migrate-chip-api', () => {
   });
 
   it('warns for show-close with an explicitly false interactive binding', () => {
-    for (const interactive of [':interactive="false"', 'interactive="false"', 'v-bind:interactive="false"']) {
+    for (const interactive of [':interactive="false"', 'v-bind:interactive="false"']) {
       const input = `<dt-chip show-close ${interactive}>Chip</dt-chip>`;
 
       assert.ok(

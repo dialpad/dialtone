@@ -335,13 +335,14 @@ export default {
         },
 
         keydown: event => {
+          // Always emitted, so keydown listeners still see Backspace and Delete before the chip closes.
+          this.$emit('keydown', event);
+
           const key = event.key?.toLowerCase();
           const code = event.code?.toLowerCase();
 
           if (key === 'backspace' || key === 'delete' || code === 'backspace' || code === 'delete') {
             this.onClose();
-          } else {
-            this.$emit('keydown', event);
           }
         },
 

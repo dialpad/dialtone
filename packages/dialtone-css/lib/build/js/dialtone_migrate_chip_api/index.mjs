@@ -52,12 +52,16 @@ function hasDynamicAttr (attrs, prop) {
   return parseAttrs(attrs).some(token => boundNames(prop).includes(token.name) && token.value !== null);
 }
 
-// An explicit literal false (interactive="false", :interactive="false") means the chip is not interactive.
+// Only a bound literal false (:interactive="false") means the chip is not interactive. A plain
+// interactive="false" is the string "false", which Vue leaves as is on a Boolean prop, so it is truthy.
 // Any other value, including a dynamic expression, is treated as possibly interactive.
+const isBoundFalse = token => boundNames('interactive').includes(token.name)
+  && token.value !== null && unquote(token.value).trim() === 'false';
+
 function isInteractive (attrs) {
   return parseAttrs(attrs)
     .filter(token => attrNames('interactive').includes(token.name))
-    .some(token => token.value === null || unquote(token.value).trim() !== 'false');
+    .some(token => !isBoundFalse(token));
 }
 
 function insertAttr (attrs, attr) {
@@ -76,12 +80,13 @@ function insertAttrAfter (attrs, after, attr) {
   return `${attrs.slice(0, token.end)}${gap}${attr}${attrs.slice(token.end)}`;
 }
 
-// 'static' for a literal true (bare, "" or "true"), 'false' for a literal false, 'dynamic' for any other
-// expression, 'none' when the chip has no interactive attribute.
+// 'static' for a literal true (bare, "" or "true") or any plain string, 'false' for a bound literal false,
+// 'dynamic' for any other expression, 'none' when the chip has no interactive attribute.
 function interactiveState (attrs) {
   const token = parseAttrs(attrs).find(t => attrNames('interactive').includes(t.name));
   if (!token) return 'none';
   if (token.value === null) return 'static';
+  if (!boundNames('interactive').includes(token.name)) return 'static';
   const value = unquote(token.value).trim();
   if (value === 'false') return 'false';
   return value === '' || value === 'true' ? 'static' : 'dynamic';
@@ -109,7 +114,10 @@ function transformChipOpenTag (tag, warnings, filePath, activeClassInFile) {
     attrs = insertAttr(attrs, 'size="300"');
   }
 
-  if (!hasShowClose) {
+  // dialtone-migrate-props turns a legacy hide-close into show-close, so adding show-close here would duplicate it.
+  const hasHideClose = hasAttr(attrs, 'hide-close') || hasAttr(attrs, 'hideClose');
+
+  if (!hasShowClose && !hasHideClose) {
     const state = interactiveState(attrs);
     const hasSpread = parseAttrs(attrs).some(token => token.name === 'v-bind' && token.value !== null);
     if (state === 'static' && !hasSpread) {
@@ -134,12 +142,13 @@ function transformChipOpenTag (tag, warnings, filePath, activeClassInFile) {
     warnings.push(`CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE file=${filePath}`);
   }
 
-  // The persistent selected fill was removed with no replacement, so there is nothing to rewrite it to.
+  // The class has no one-to-one replacement (emphasis="strong" is close but not identical), so it is only reported.
   if (attrs.includes(ACTIVE_LABEL_CLASS)) {
-    warnings.push(`CHIP_API_ACTIVE_LABEL_CLASS file=${filePath} (${ACTIVE_LABEL_CLASS} no longer styles the chip)`);
+    warnings.push(`CHIP_API_ACTIVE_LABEL_CLASS file=${filePath} (${ACTIVE_LABEL_CLASS} no longer styles the chip;`
+      + ' use emphasis="strong" for a persistent selected look)');
   } else if (activeClassInFile && (hasDynamicAttr(attrs, 'label-class') || hasDynamicAttr(attrs, 'labelClass'))) {
     warnings.push(`CHIP_API_ACTIVE_LABEL_CLASS file=${filePath} (a bound label-class may supply ${ACTIVE_LABEL_CLASS},`
-      + ' which no longer styles the chip)');
+      + ' which no longer styles the chip; use emphasis="strong" for a persistent selected look)');
   }
 
   attrs = renameAttr(attrs, 'icon-class', 'start-icon-class');

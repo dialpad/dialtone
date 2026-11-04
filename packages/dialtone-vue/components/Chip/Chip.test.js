@@ -399,6 +399,20 @@ describe('DtChip Tests', () => {
       });
     });
 
+    describe('When backspace or delete closes a chip', () => {
+      it('should also emit keydown before close', async () => {
+        mockProps = { showClose: true, interactive: true };
+
+        updateWrapper();
+
+        await chip.trigger('keydown', { key: 'Backspace' });
+        await chip.trigger('keydown', { code: 'DELETE' });
+
+        expect(wrapper.emitted('keydown')).toHaveLength(2);
+        expect(wrapper.emitted('close')).toHaveLength(2);
+      });
+    });
+
     describe('When interactive is false', () => {
       it('should not emit click', async () => {
         await chip.trigger('click');
