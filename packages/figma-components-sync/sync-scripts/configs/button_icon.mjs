@@ -13,7 +13,8 @@ export default {
   // Computed spacing at the nearest token; the circle's 50% radius is the pill token (token-snap.mjs).
   snapTokens: true,
   axes: {
-    kind: ['default', 'muted', 'critical', 'positive', 'inverted'],
+    // No `inverted`: DtButton deprecates it in favour of the v-dt-mode directive.
+    kind: ['default', 'muted', 'critical', 'positive'],
     importance: ['clear', 'outlined', 'primary'],
     size: [100, 200, 300, 400, 500],
     // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'

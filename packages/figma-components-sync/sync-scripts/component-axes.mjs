@@ -41,7 +41,8 @@ const BUILT_IN = {
     // accepted. Measured: see the `drift` lines build-spec prints. Anything larger is still refused.
     slotSpacingDrift: { paddingLeft: 2, paddingRight: 2, itemSpacing: 2 },
     axes: {
-      kind: ['default','muted','critical','positive','inverted'],
+      // No `inverted`: DtButton deprecates it in favour of the v-dt-mode directive.
+      kind: ['default','muted','critical','positive'],
       importance: ['clear','outlined','primary'],
       size: [100,200,300,400,500],
       // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'
