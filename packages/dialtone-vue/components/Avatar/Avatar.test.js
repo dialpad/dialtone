@@ -110,6 +110,32 @@ describe('DtAvatar Tests', () => {
       });
     });
 
+    describe('When the icon slot content toggles without remounting', () => {
+      const ToggleHost = {
+        components: { DtAvatar, DtIconUser },
+        props: { showIcon: Boolean },
+        template: `
+          <dt-avatar full-name="Jaqueline Nackos">
+            <template v-if="showIcon" #icon><dt-icon-user /></template>
+          </dt-avatar>
+        `,
+      };
+
+      it('should switch between initials and icon reactively', async () => {
+        const host = mount(ToggleHost, { props: { showIcon: false } });
+
+        expect(host.find('[data-qa="dt-avatar-icon"]').exists()).toBe(false);
+        expect(host.text()).toBe(MOCK_INITIALS);
+
+        await host.setProps({ showIcon: true });
+        expect(host.find('[data-qa="dt-avatar-icon"]').exists()).toBe(true);
+
+        await host.setProps({ showIcon: false });
+        expect(host.find('[data-qa="dt-avatar-icon"]').exists()).toBe(false);
+        expect(host.text()).toBe(MOCK_INITIALS);
+      });
+    });
+
     describe('With no imageSrc or iconName is provided', () => {
       it('should display initials', () => {
         expect(wrapper.text()).toBe(MOCK_INITIALS);

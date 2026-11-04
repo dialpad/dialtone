@@ -3,9 +3,9 @@
     :is="resolvedInteractive ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
-    :style="avatarStyles"
-    :data-avatar-family="!iconOnly ? computedFamily : undefined"
-    :data-avatar-variant="!iconOnly ? computedVariant : undefined"
+    :style="avatarStyles()"
+    :data-avatar-family="!iconOnly ? getFamily() : undefined"
+    :data-avatar-variant="!iconOnly ? getVariant() : undefined"
     data-qa="dt-avatar"
     :type="resolvedInteractive ? 'button' : undefined"
     @click="handleClick"
@@ -28,7 +28,7 @@
           :alt="imageAlt"
         >
         <div
-          v-else-if="isIconType"
+          v-else-if="isIconType()"
           :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
           :aria-label="resolvedInteractive ? iconAriaLabel : ''"
           :data-qa="iconDataQa"
@@ -45,12 +45,12 @@
       </div>
     </div>
     <div
-      v-if="hasOverlayIcon || overlayText"
-      :class="overlayClasses"
+      v-if="hasOverlayIcon() || overlayText"
+      :class="overlayClasses()"
     >
       <!-- @slot Slot for overlay icon. -->
       <slot
-        v-if="hasOverlayIcon"
+        v-if="hasOverlayIcon()"
         name="overlayIcon"
       />
       <p
@@ -350,58 +350,8 @@ export default {
       return this.clickable ?? this.interactive;
     },
 
-    hasOverlayIcon () {
-      return hasSlotContent(this.$slots.overlayIcon);
-    },
-
-    isIconType () {
-      return hasSlotContent(this.$slots.icon);
-    },
-
     iconDataQa () {
       return 'dt-avatar-icon';
-    },
-
-    /**
-     * Compute family from props, color prop, or random
-     */
-    computedFamily () {
-      // Icon-type avatars don't use color
-      if (this.isIconType) return undefined;
-
-      // Explicit family prop takes precedence
-      if (this.family !== undefined) return this.family;
-
-      // Color prop (converted to family/variant)
-      if (this.color !== undefined) {
-        const parsed = colorToFamilyVariant(this.color);
-        if (parsed) return parsed.family;
-      }
-
-      // Random based on seed
-      const random = getRandomFamilyVariant(this.seed);
-      return random.family;
-    },
-
-    /**
-     * Compute variant from props, color prop, or random
-     */
-    computedVariant () {
-      // Icon-type avatars don't use color
-      if (this.isIconType) return undefined;
-
-      // Explicit variant prop takes precedence
-      if (this.variant !== undefined) return this.variant;
-
-      // Color prop (converted to family/variant)
-      if (this.color !== undefined) {
-        const parsed = colorToFamilyVariant(this.color);
-        if (parsed) return parsed.variant;
-      }
-
-      // Random based on seed
-      const random = getRandomFamilyVariant(this.seed);
-      return random.variant;
     },
 
     avatarClasses () {
@@ -418,29 +368,6 @@ export default {
           'd-avatar--icon-only': this.iconOnly,
           'd-avatar--deactivated': this.deactivated,
         },
-      ];
-    },
-
-    /**
-     * Compute inline styles for fallback color in browsers that don't support oklch()
-     */
-    avatarStyles () {
-      const baseStyles = [];
-
-      // Only compute hex fallback for browsers that don't support oklch()
-      if (!supportsOklch && !this.isIconType && this.computedFamily && this.computedVariant !== undefined) {
-        const fallbackHex = computeAvatarHex(this.computedFamily, this.computedVariant, this.anchorHue);
-        baseStyles.push({ '--avatar-color-background': fallbackHex });
-      }
-
-      return baseStyles.length > 0 ? baseStyles : undefined;
-    },
-
-    overlayClasses () {
-      return [
-        'd-avatar__overlay',
-        this.overlayClass,
-        { 'd-avatar__overlay-icon': this.hasOverlayIcon },
       ];
     },
 
@@ -509,6 +436,80 @@ export default {
   },
 
   methods: {
+    // These read $slots, which is not reactive, so they must not be cached as computeds.
+    hasOverlayIcon () {
+      return hasSlotContent(this.$slots.overlayIcon);
+    },
+
+    isIconType () {
+      return hasSlotContent(this.$slots.icon);
+    },
+
+    /**
+     * Compute family from props, color prop, or random
+     */
+    getFamily () {
+      // Icon-type avatars don't use color
+      if (this.isIconType()) return undefined;
+
+      // Explicit family prop takes precedence
+      if (this.family !== undefined) return this.family;
+
+      // Color prop (converted to family/variant)
+      if (this.color !== undefined) {
+        const parsed = colorToFamilyVariant(this.color);
+        if (parsed) return parsed.family;
+      }
+
+      // Random based on seed
+      const random = getRandomFamilyVariant(this.seed);
+      return random.family;
+    },
+
+    /**
+     * Compute variant from props, color prop, or random
+     */
+    getVariant () {
+      // Icon-type avatars don't use color
+      if (this.isIconType()) return undefined;
+
+      // Explicit variant prop takes precedence
+      if (this.variant !== undefined) return this.variant;
+
+      // Color prop (converted to family/variant)
+      if (this.color !== undefined) {
+        const parsed = colorToFamilyVariant(this.color);
+        if (parsed) return parsed.variant;
+      }
+
+      // Random based on seed
+      const random = getRandomFamilyVariant(this.seed);
+      return random.variant;
+    },
+
+    /**
+     * Compute inline styles for fallback color in browsers that don't support oklch()
+     */
+    avatarStyles () {
+      const baseStyles = [];
+
+      // Only compute hex fallback for browsers that don't support oklch()
+      if (!supportsOklch && !this.isIconType() && this.getFamily() && this.getVariant() !== undefined) {
+        const fallbackHex = computeAvatarHex(this.getFamily(), this.getVariant(), this.anchorHue);
+        baseStyles.push({ '--avatar-color-background': fallbackHex });
+      }
+
+      return baseStyles.length > 0 ? baseStyles : undefined;
+    },
+
+    overlayClasses () {
+      return [
+        'd-avatar__overlay',
+        this.overlayClass,
+        { 'd-avatar__overlay-icon': this.hasOverlayIcon() },
+      ];
+    },
+
     async setImageListeners () {
       await this.$nextTick();
       const el = this.$refs.avatarImage;
