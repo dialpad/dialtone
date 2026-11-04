@@ -52,7 +52,7 @@ export default {
   props: {
     /**
      * HTML tag or component used for rendering.
-     * @values span, p, h1, h2, h3, h4, h5, h6, label, div, component
+     * @values span, p, strong, h1, h2, h3, h4, h5, h6, label, div, component
      */
     as: {
       type: String,
