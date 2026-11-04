@@ -6,7 +6,10 @@ One file per component, default-exporting its config. Discovered automatically b
 Required: `component` (the Dt* name), `label`, `page`, `axes`, `invalid`, `variantName`, `props`.
 Optional: `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
 `slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `flexLayout`, `blockLayout`,
-`edgeSlots`, `rootClass`, `containerClass`, `figmaSetId`, `figmaMergedSetId`. `figmaSetId` is
+`edgeSlots`, `rootClass`, `containerClass`, `effectiveDefaults`, `figmaSetId`, `figmaMergedSetId`.
+`effectiveDefaults: { axis: value }` names the rendered default of an axis that is not its prop
+default (`open: true` for a collapsible whose `open` prop is `null`; `showAction: false` where the
+flag is true but no slot content is supplied), read by `default-variant.mjs`. `figmaSetId` is
 written by `run-batch` after a build, not by hand. `nativeSlots` names slots that become Figma
 `SLOT` nodes (see the Slots section of `../README.md`). `textProps` maps a text the harness
 injected (`{ 'Notice title': 'Title' }`) to the TEXT property it becomes, besides the label.

@@ -1400,6 +1400,46 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
  * a copy would only ever verify the copy.
  */
 export { compareNode, figmaGet, findings, allowed, sizeSpread, varValue, paintRGBA };
+/**
+ * Which edge an absolutely-positioned element is anchored to.
+ *
+ * Chrome resolves BOTH inset-inline-start and -end to used values once the element
+ * has a definite width, so computed styles cannot tell the two apart: the chip's
+ * close button reports start=41.34 end=2, and the toggle's glyph reports
+ * start=24 end=6. Only the DECLARED property says which one the author meant, and
+ * that distinction matters because Figma's hug width differs from Chrome's, so
+ * exactly one of the two offsets is stable.
+ *
+ * Takes the CDP session and document explicitly (it used to close over the CLI's), so the
+ * negative control can annotate its captures exactly as the sweep does.
+ */
+export async function annotateAnchors (cdp, cdpDoc, node) {
+  // Also: is this node's outline colour an OS SYSTEM colour? getComputedStyle
+  // resolves `CanvasText` to rgb(0,0,0), so the rendered value alone cannot tell —
+  // only the declaration can, and Figma has no way to represent it. Without this
+  // the checkbox's dark focus ring reads as a defect rather than as a platform limit.
+  if (node.style && node.selector && (parseFloat(node.style.outlineWidth) || 0) > 0) {
+    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
+    if (nodeId) {
+      const { own, chain } = await matchedFor(cdp, nodeId);
+      // Use the SAME resolver the spec builder uses. Hand-parsing the declaration
+      // missed the `outline` shorthand path that resolveDeclared already handles.
+      const sys = (resolveDeclared(own, chain).computed.outlineColor || {}).systemColor;
+      if (sys) node.systemColorOutline = sys;
+    }
+  }
+  if (node.style && node.style.position === 'absolute' && node.selector) {
+    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
+    if (nodeId) {
+      const { own } = await matchedFor(cdp, nodeId);
+      const declaredEnd = own['inset-inline-end'] || own['right'] || (own.inset ? { value: own.inset.value } : null);
+      const declaredStart = own['inset-inline-start'] || own['left'];
+      node.anchor = declaredStart ? 'start' : (declaredEnd ? 'end' : 'start');
+    }
+  }
+  for (const c of node.children || []) await annotateAnchors(cdp, cdpDoc, c);
+}
+
 /** Wipe the accumulators so one process can run the comparison many times over. */
 export function resetComparisonState () {
   findings.length = 0;
@@ -1463,43 +1503,6 @@ if (IS_CLI) {
     return true;
   }
 
-  /**
-   * Which edge an absolutely-positioned element is anchored to.
-   *
-   * Chrome resolves BOTH inset-inline-start and -end to used values once the element
-   * has a definite width, so computed styles cannot tell the two apart: the chip's
-   * close button reports start=41.34 end=2, and the toggle's glyph reports
-   * start=24 end=6. Only the DECLARED property says which one the author meant, and
-   * that distinction matters because Figma's hug width differs from Chrome's, so
-   * exactly one of the two offsets is stable.
-   */
-  async function annotateAnchors (node) {
-    // Also: is this node's outline colour an OS SYSTEM colour? getComputedStyle
-    // resolves `CanvasText` to rgb(0,0,0), so the rendered value alone cannot tell —
-    // only the declaration can, and Figma has no way to represent it. Without this
-    // the checkbox's dark focus ring reads as a defect rather than as a platform limit.
-    if (node.style && node.selector && (parseFloat(node.style.outlineWidth) || 0) > 0) {
-      const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
-      if (nodeId) {
-        const { own, chain } = await matchedFor(cdp, nodeId);
-        // Use the SAME resolver the spec builder uses. Hand-parsing the declaration
-        // missed the `outline` shorthand path that resolveDeclared already handles.
-        const sys = (resolveDeclared(own, chain).computed.outlineColor || {}).systemColor;
-        if (sys) node.systemColorOutline = sys;
-      }
-    }
-    if (node.style && node.style.position === 'absolute' && node.selector) {
-      const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
-      if (nodeId) {
-        const { own } = await matchedFor(cdp, nodeId);
-        const declaredEnd = own['inset-inline-end'] || own['right'] || (own.inset ? { value: own.inset.value } : null);
-        const declaredStart = own['inset-inline-start'] || own['left'];
-        node.anchor = declaredStart ? 'start' : (declaredEnd ? 'end' : 'start');
-      }
-    }
-    for (const c of node.children || []) await annotateAnchors(c);
-  }
-
     const allCombos = combosFor(cfg);
 
   /**
@@ -1561,7 +1564,7 @@ if (IS_CLI) {
       await page.evaluate(() => { void document.querySelector('#root > *').offsetWidth; });
       const dom = await page.evaluate(() => window.__anatomy());
       if (!dom) { rec(name, '', 'render', 'a rendered component', 'nothing'); continue; }
-      await annotateAnchors(dom);
+      await annotateAnchors(cdp, cdpDoc, dom);
       seen++;
       compareNode(name, dom, fig, 'root', MODE);
       // The flat shape the comparison just used hides the wrapper and the slots, so their

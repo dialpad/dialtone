@@ -57,7 +57,7 @@ import { flattenEdgeSlots } from './edge-slots.mjs';
 import { matchedFor } from './cdp-provenance.mjs';
 // The REAL comparison engine, never a copy. A copy would only ever verify the copy.
 import {
-  compareNode, figmaGet, findings, resetComparisonState, paintRGBA, setSlotPass,
+  compareNode, figmaGet, findings, resetComparisonState, paintRGBA, setSlotPass, annotateAnchors,
 } from './verify-components.mjs';
 
 // This harness never runs the slot pass: it is measuring which comparisons fire, and
@@ -71,7 +71,9 @@ const FILE_KEY = process.env.FILE_KEY;
 // ── args ────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
 const flag = (name, dflt) => { const i = argv.indexOf(`--${name}`); return i < 0 ? dflt : argv[i + 1]; };
-const VALUED = new Set(['--set', '--mode', '--variants']);
+// Same set as verify-components.mjs's VALUED_FLAGS: that module is imported here and derives its own
+// `which` from this process's argv, so the two must skip the same flag values.
+const VALUED = new Set(['--set', '--json', '--mode', '--variants']);
 const positional = argv.filter((a, i) => !a.startsWith('--') && !VALUED.has(argv[i - 1]));
 const which = positional[0];
 if (!which) throw new Error(`usage: negative-control.mjs <component> [--set <nodeId>] [--mode Light|Dark] [--variants N]`);
@@ -841,6 +843,9 @@ async function capture () {
     await page.evaluate(() => { void document.querySelector('#root > *').offsetWidth; });
     const dom = await page.evaluate(() => window.__anatomy());
     if (!dom) continue;
+    // Exactly as the sweep does before compareNode: sets `anchor` (insetEnd vs x) and
+    // `systemColorOutline`. Without it those two comparisons were never exercised here.
+    await annotateAnchors(cdp, cdpDoc, dom);
     out.push({ name, dom, fig });
   }
 

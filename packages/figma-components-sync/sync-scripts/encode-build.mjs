@@ -254,12 +254,14 @@ for (const full of Object.keys(ICON_LIB.ids || {})) {
  * Absent or unresolvable is fine and reported: the slot then has no swap property, which
  * run-batch already says out loud per slot.
  */
-const textPropsOf = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textProps || {};
-const flexLayoutOn = !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).flexLayout;
+// This payload's own config, resolved once (`<name>-merged` / `<name>-slots` use `<name>`'s).
+const cfg = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {});
+const textPropsOf = cfg.textProps || {};
+const flexLayoutOn = !!cfg.flexLayout;
 // `snapTokens`: computed spacing, corners and minimum sizes move to the nearest token (token-snap.mjs).
 // Every scale token is registered up front so the builder can find the variable for whatever a value
 // snaps to, and for the slot numbers it derives itself.
-const snapOn = !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).snapTokens;
+const snapOn = !!cfg.snapTokens;
 if (snapOn) for (const name of SNAP_TOKEN_NAMES) ti(name);
 // Text with no matching library style binds font size, weight and family to the font variables.
 for (const name of TEXT_TOKEN_NAMES) ti(name);
@@ -575,7 +577,7 @@ const rows = spec.variants.map(v => [
 const rowNames = spec.variants.map(v => v.name);
 
 // Slots the builder makes NATIVE (Figma SLOT) instead of an INSTANCE_SWAP, per the config.
-const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
+const nativeSlots = cfg.nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
 const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, nativeSlots, flexLayout: flexLayoutOn,
@@ -584,11 +586,11 @@ const payload = { component: spec.component, page: spec.page, axisNames, axisVal
   // The pages this build may clear and rebuild: its own components' and the icons'. Nothing else.
   ownedPages: [...new Set([...Object.values(COMPONENTS).map(c => c.page), 'Icons'])],
   // `blockLayout`: a block that only stacks its children is a vertical auto-layout (see the builder).
-  blockLayout: !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).blockLayout, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
+  blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
-  useTextStyles: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textStyles !== false,
+  useTextStyles: cfg.textStyles !== false,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.
-  edgeSlots: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).edgeSlots || null, cols, svgs, imgs, nodes, rows, rowNames, dvars };
+  edgeSlots: cfg.edgeSlots || null, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';
 const outPath = `sync-scripts/build-data/${which}${shardSuffix}-build.json`;
 writeFileSync(outPath, JSON.stringify(payload));

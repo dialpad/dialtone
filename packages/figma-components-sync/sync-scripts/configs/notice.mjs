@@ -70,6 +70,12 @@ export default {
     showAction: [false, true],
   },
 
+  // `showAction` defaults to true, but it only gates `<slot v-if="showAction" />` in NoticeAction:
+  // with no action slot content (the out-of-the-box render) there is no action. Every other
+  // axis follows its prop default (kind base, important false, showIcon / showClose true) and
+  // `header` is absent without `headerText`, which the first-value rule already gives (false).
+  effectiveDefaults: { showAction: false },
+
   // Nothing to exclude. Notice rejects no combination of these props, and with no
   // interaction states there is no reachability rule to encode (the disabled-cannot-
   // be-hovered class of constraint has no analogue here). The hook is still required

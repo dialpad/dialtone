@@ -63,6 +63,13 @@ export default {
     showAction: [true, false],
   },
 
+  // Out of the box a Banner has no title and no action: `headerText` defaults to undefined
+  // (hasHeader is false without it or a `header` slot), and `showAction` (default true) only
+  // gates `<slot v-if="showAction" />`, so with no action slot content there is no action. The
+  // `header` axis lists true first, so the first-value rule would pick the wrong one.
+  // kind base, important false, showIcon and showClose true follow their prop defaults.
+  effectiveDefaults: { header: false, showAction: false },
+
   // Every combination renders, and every one is a shipped configuration: the two
   // colour axes are fully orthogonal (measured across all 10 kind x important
   // pairs), and the three region gates only ever add or remove a box. There is no

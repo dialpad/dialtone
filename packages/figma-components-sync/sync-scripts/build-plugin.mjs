@@ -34,6 +34,13 @@ const argv = process.argv.slice(2);
 // set" — so the empty case needs a way to say so out loud. Without it, `--icons` re-encoded
 // five unrelated components and died on a staleness guard that was entirely correct.
 const NO_COMPONENTS = argv.includes('--no-components');
+// The icon manifest is attached to index.json only when this run asked for icons: the manifest
+// file outlives the run that built it, and attaching it to every later run would make the plugin
+// re-process every icon shard each time. Components read icon ids from per-target state instead.
+const WITH_ICONS = argv.includes('--with-icons');
+// Minted by run-batch.mjs and baked into the plugin below, so it never has to be served.
+const RUN_TOKEN = process.env.FIGMA_SYNC_RUN_TOKEN || '';
+if (!RUN_TOKEN) console.warn('FIGMA_SYNC_RUN_TOKEN is not set: the generated plugin cannot POST to run-batch.mjs.');
 const explicit = argv.filter(a => !a.startsWith('--'));
 const names = NO_COMPONENTS ? []
   : explicit.length ? explicit
@@ -123,7 +130,7 @@ const builderHash = createHash('sha256')
 // The icon library is OPTIONAL and independent: it is built once, and every later
 // component build reads its ids rather than rebuilding it. Its absence is normal.
 let icons = null;
-try { icons = JSON.parse(readFileSync(`${HERE}/build-data/icons-manifest.json`, 'utf8')); }
+if (WITH_ICONS) try { icons = JSON.parse(readFileSync(`${HERE}/build-data/icons-manifest.json`, 'utf8')); }
 catch { /* not generated; components build without it */ }
 writeFileSync(`${SHARD_DIR}/index.json`,
   JSON.stringify({ builder: builderHash, components: manifest, icons }, null, 2));
@@ -145,8 +152,9 @@ writeFileSync(`${PLUGIN_DIR}/code.js`, `/**
 // an allowlisted entry. The server binds BOTH loopback stacks, because localhost
 // resolves to ::1 first on macOS and an IPv4-only bind would look like "server down".
 const BASE = 'http://localhost:8931';
-// A per-run secret the server hands out in index.json and requires on every POST.
-let runToken = '';
+// A per-run secret baked in when this file is generated; the server requires it on every POST
+// and never serves it, so a page that can only read from localhost cannot learn it.
+const runToken = ${JSON.stringify(RUN_TOKEN)};
 
 figma.showUI(__html__, { width: 360, height: 420 });
 
@@ -230,7 +238,6 @@ async function main () {
                     spreadProbe: await probeSpreadWrite() };
   runRuntime = runtime;
   const index = await (await fetch(BASE + '/shards/index.json')).json();
-  runToken = index.runToken || '';
   const report = runReport;
 
   // Icons FIRST: a component that places an icon instance needs the icon component to

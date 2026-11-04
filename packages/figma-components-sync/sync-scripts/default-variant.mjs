@@ -8,10 +8,23 @@
  * `size: 300`), `default` for a `state` axis, and the first value otherwise (slot-presence axes
  * have no prop and start at false). When that exact combination cannot exist, the closest variant
  * that can is used, so a default the component rejects never leaves the set without one.
+ *
+ * A config's `effectiveDefaults` ({ axis: value }) overrides that rule for an axis whose rendered
+ * default is not its prop default: a prop defaulting to `null` that the component resolves to
+ * something else (DtCollapsible `open`), or a flag that is true by default but gates a slot
+ * nobody filled (DtNotice `showAction`). It is the one place the three consumers (spec builder,
+ * verifier, run-batch's mismatch check) read, so they cannot disagree about it.
  */
 export function wantedDefaults (cfg, propDefaults) {
   const out = {};
+  const effective = cfg.effectiveDefaults || {};
   for (const [axis, vals] of Object.entries(cfg.axes)) {
+    if (axis in effective) {
+      const hit = vals.find(v => String(v) === String(effective[axis]));
+      if (hit === undefined) throw new Error(`${cfg.component}: effectiveDefaults.${axis}=${effective[axis]} is not one of the axis values (${vals.join(', ')})`);
+      out[axis] = hit;
+      continue;
+    }
     const fromProp = propDefaults[axis];
     const hit = fromProp === undefined ? undefined : vals.find(v => String(v) === String(fromProp));
     out[axis] = hit !== undefined ? hit

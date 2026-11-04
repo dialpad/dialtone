@@ -147,6 +147,8 @@ const newestProducer = Math.max(...PRODUCERS.map(f => statSync(f).mtimeMs));
 // It replaced a `-slots` suffix that built a second set nobody could toggle.
 const mergedOf = (name) => (name.endsWith('-merged') ? name.slice(0, -'-merged'.length) : null);
 
+const RUN_TOKEN = randomBytes(16).toString('hex');
+
 console.log('── 1. specs ' + '─'.repeat(58));
 for (const name of names) {
   const spec = `${DIR}${name}-spec.json`;
@@ -163,7 +165,13 @@ for (const name of names) {
 // ── 2. encode + shard + regenerate the plugin ───────────────────────────────
 console.log('\n── 2. payloads ' + '─'.repeat(55));
 if (WANT_ICONS) process.stdout.write(run('build-icon-library.mjs', []));
-process.stdout.write(run('build-plugin.mjs', names.length ? names : ['--no-components']));
+// The per-run token is minted HERE, before the plugin is generated, because build-plugin bakes it
+// into plugin/code.js. `--with-icons` is the only way the icon manifest reaches index.json: a
+// manifest left over from an earlier `--icons` run must not make every later component run
+// re-process all the icon shards.
+process.stdout.write(run('build-plugin.mjs',
+  [...(names.length ? names : ['--no-components']), ...(WANT_ICONS ? ['--with-icons'] : [])],
+  { env: { ...process.env, FIGMA_SYNC_RUN_TOKEN: RUN_TOKEN } }));
 
 // ── 3. preflight before anyone clicks ──────────────────────────────────────
 // Cheaper to fail here than to leave a half-built page behind: a plugin run is not
@@ -276,11 +284,11 @@ const progress = [];
  *   - the Host header must be this machine's loopback name and port (defeats DNS rebinding);
  *   - a browser Origin, when present, must be `null`, which is what a Figma plugin sends, and
  *     never an http(s) page;
- *   - a POST must carry the per-run token the plugin read out of index.json.
+ *   - a POST must carry the per-run token that was baked into plugin/code.js when it was generated.
  * A sandboxed iframe on another site also sends `Origin: null`, which is why the token exists on
- * top of the origin check, and why index.json is the only place it is ever handed out.
+ * top of the origin check, and why no GET response ever carries it: it only exists in the
+ * generated plugin file and in this process.
  */
-const RUN_TOKEN = randomBytes(16).toString('hex');
 const ALLOWED_HOSTS = new Set([`localhost:${PORT}`, `127.0.0.1:${PORT}`, `[::1]:${PORT}`]);
 
 const handler = (req, res) => {
@@ -337,15 +345,6 @@ const handler = (req, res) => {
       resolveReport(parsed);
     });
     return;
-  }
-
-  // index.json is where the per-run token is handed out, so it is served live with the token added.
-  if (req.method === 'GET' && (req.url || '').split('?')[0] === '/shards/index.json') {
-    try {
-      const idx = JSON.parse(readFileSync(`${DIR}shards/index.json`, 'utf8'));
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      return res.end(JSON.stringify({ ...idx, runToken: RUN_TOKEN }));
-    } catch (e) { res.writeHead(404); return res.end('not found'); }
   }
 
   // A malformed escape (`/%E0`) makes decodeURIComponent throw URIError. Thrown inside the
@@ -604,9 +603,16 @@ if (SKIP_VERIFY || !built.length) {
     : iconReport ? ' (icons have no browser render to verify against)'
     : ' (nothing was built)';
   console.log(`\nskipping verification${why}.`);
+  // An icons-only run has no components to count, so a failed icon build has to fail it here.
+  const iconsFailed = iconReport
+    && (iconReport.built !== iconReport.expected || (iconReport.failures || []).length > 0);
+  if (iconsFailed) {
+    console.log(`✗ icons: ${iconReport.built}/${iconReport.expected} built, `
+      + `${(iconReport.failures || []).length} failed - exiting non-zero.`);
+  }
   // An aborted run lists only the components that finished, so `built` can equal `report`
   // exactly when the run failed.
-  process.exit(built.length === report.length && !aborted && !defaultMismatches.length ? 0 : 1);
+  process.exit(built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed ? 0 : 1);
 }
 console.log('\n── 7. verifying ' + '─'.repeat(54));
 // STREAM it. Capturing stdout buffers every progress line until the child exits, and

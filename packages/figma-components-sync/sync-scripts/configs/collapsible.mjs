@@ -26,6 +26,10 @@ export default {
     open: [false, true],
   },
 
+  // `open: null` (the prop default, which the default-variant rule cannot use) starts EXPANDED:
+  // Collapsible.vue `data()` has `isOpen: true` and the `open` watcher only runs for non-null.
+  effectiveDefaults: { open: true },
+
   invalid: () => false,
   props: c => ({ anchorText: 'More', open: c.open }),
 

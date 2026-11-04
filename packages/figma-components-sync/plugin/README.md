@@ -19,7 +19,8 @@ generating removes that class of bug entirely.
 ## One-time setup (about a minute)
 
 1. Open the **Figma desktop app** (browser Figma cannot load a local plugin).
-2. Open the scratch file, the one whose key is `FILE_KEY` in this package's `.env`
+2. Open the Figma file you are building into: the one whose key is `PREVIEW_FILE_KEY` or
+   `MAIN_FILE_KEY` in this package's `.env`, whichever you pass as `--target`
 3. Menu → **Plugins → Development → Import plugin from manifest…**
    (if it rejects the manifest, re-run `build-plugin.mjs` — the manifest is generated,
    and an older one allowlisted an IP literal that Figma refuses)
@@ -32,8 +33,12 @@ once; it survives restarts.
 ## Each run — one command
 
 ```
-node packages/figma-components-sync/sync-scripts/run-batch.mjs loader collapsible
+node packages/figma-components-sync/sync-scripts/run-batch.mjs loader collapsible --target preview
 ```
+
+`--target <name>` is required (`preview` or `main`; `main` also needs `--yes`). Nothing picks a
+file for you, and the run stops with `no target: pass --target` if it is missing. The same goes
+for `check-all`, `visual-compare` and `negative-control`.
 
 That does everything except the click:
 
@@ -44,12 +49,13 @@ That does everything except the click:
    because a plugin run is not atomic the way a `use_figma` call is
 4. **serves** the payloads and waits
 5. → **you click Run in Figma** (the one step no API can do) ←
-6. **writes the returned set ids** into the right config — `configs/<name>.mjs` for the
-   per-file configs, `component-axes.mjs` for the built-ins. This is the step most worth
-   automating: it used to be a hand copy of ids read off a screen into two different
-   files, and a wrong id makes the checks verify the *wrong set*, which reads as a clean
-   pass on work nobody looked at. It also records each component's payload fingerprints
-   in `build-data/built-from.json`.
+6. **writes the returned set ids** to `sync-scripts/build-data/<target>/set-ids.json`, one
+   entry per component. This is the step most worth automating: it used to be a hand copy
+   of ids read off a screen, and a wrong id makes the checks verify the *wrong set*, which
+   reads as a clean pass on work nobody looked at. The config files are not touched, so a
+   build leaves no change in tracked source. It also records each component's payload
+   fingerprints in `build-data/<target>/built-from.json`, and a `--icons` run writes the
+   icon library to `build-data/<target>/icon-library.json`.
 7. **runs `check-all`** on whatever was built and prints the result
 
 Step 6 also prints anything the builder **traded away** to keep the render correct — an
@@ -76,8 +82,10 @@ of this.
 1. **Regenerate the payloads** for whatever you want built (from the repo root):
 
    ```
-   node packages/figma-components-sync/sync-scripts/build-plugin.mjs button button_link notice banner
+   SYNC_TARGET=preview node packages/figma-components-sync/sync-scripts/build-plugin.mjs button button_link notice banner
    ```
+
+   `build-plugin.mjs` reads the target from `SYNC_TARGET` rather than `--target`.
 
    Named components only; omitting the list builds every registered component. It
    re-encodes each one, shards anything large, writes
@@ -118,14 +126,15 @@ of this.
    `aborted` is added to the object when a run fails partway; the components that finished
    before the failure are still listed.
 
-5. **Wire the set IDs into the configs** — the checks need them:
-   - `sync-scripts/configs/<name>.mjs` → `figmaSetId` (every file in that directory, for example `banner`, `button_icon`, `button_stacked`)
-   - `sync-scripts/component-axes.mjs` → `figmaSetId` (button)
+5. **Check the set IDs.** `run-batch.mjs` records them in
+   `sync-scripts/build-data/<target>/set-ids.json` as each component lands, and the checks
+   read them from there. Nothing to copy by hand. If that file is corrupt, the next read
+   stops and names it: delete it (the next build rewrites it) or restore it.
 
 6. **Verify.** This is the part that matters:
 
    ```
-   node packages/figma-components-sync/sync-scripts/check-all.mjs button button_link notice banner
+   node packages/figma-components-sync/sync-scripts/check-all.mjs button button_link notice banner --target preview
    ```
 
    Two passes per component — rendered values in both light and dark (both slot states for a
@@ -133,7 +142,7 @@ of this.
    the same as it rendering right:
 
    ```
-   node packages/figma-components-sync/sync-scripts/visual-compare.mjs button --set <id> --zoom 6
+   node packages/figma-components-sync/sync-scripts/visual-compare.mjs button --set <id> --zoom 6 --target preview
    ```
 
 7. Stop the server with ctrl-C.
