@@ -1,7 +1,5 @@
 const { injectAxe, checkA11y, configureAxe } = require('axe-playwright');
 
-const { getStoryContext } = require('@storybook/test-runner');
-
 /*
  * See https://storybook.js.org/docs/react/writing-tests/test-runner#test-hook-api-experimental
  * to learn more about the test-runner hooks API.
@@ -11,6 +9,7 @@ module.exports = {
     await injectAxe(page);
   },
   async postRender (page, context) {
+    const { getStoryContext } = await import('@storybook/test-runner');
     // Get the entire context of a story, including parameters, args, argTypes, etc.
     const storyContext = await getStoryContext(page, context);
 

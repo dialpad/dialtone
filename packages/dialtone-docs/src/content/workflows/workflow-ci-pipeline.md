@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-23
+last_updated: 2026-11-04
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -15,11 +15,11 @@ Dialtone uses GitHub Actions for all CI. Workflows live in `.github/workflows/`.
 
 The setup action reads these from the repo:
 
-| Tool | Version | Source |
-|------|---------|--------|
-| Node.js | 24 | `.nvmrc` |
-| pnpm | 9.9.0 | `packageManager` in root `package.json` |
-| NX | 19.8.0 | `nx.json` |
+| Tool    | Version | Source                                |
+| ------- | ------- | ------------------------------------- |
+| Node.js | 24      | `.nvmrc`                              |
+| pnpm    | 11.9.0  | `packageManager` in root `package.json` |
+| NX      | 19.8.0  | `nx.json`                             |
 
 All workflows set `HUSKY: 0` to disable git hooks in CI.
 
@@ -98,12 +98,12 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 
 ### `a11y_tests.yml`
 
-**Trigger:** Push to `staging` or `production` (paths: `packages/dialtone-vue/**`), PR (same paths)
+**Trigger:** Push to `staging` or `production`, and pull requests touching `packages/dialtone-vue/**`, root `package.json`/`pnpm-lock.yaml`/`pnpm-workspace.yaml`, `.nvmrc`, the shared setup action or this workflow.
 
 **What it does:**
-1. Setup environment
-2. `pnpm exec playwright install --with-deps` — installs Playwright browsers
-3. `pnpm nx run dialtone-vue:test:a11y`
+1. Set up the environment and report the runner OS and browser-tool versions.
+2. `pnpm exec playwright install --with-deps` installs the browsers matching the locked Playwright version.
+3. `pnpm nx run dialtone-vue:test:a11y` runs the existing Storybook accessibility suite and returns its exit status; the temporary server is stopped on exit.
 
 Uses Playwright to run accessibility checks in a real browser. Required check on all PRs touching dialtone-vue.
 
