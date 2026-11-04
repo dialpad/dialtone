@@ -121,17 +121,38 @@ describe('DtAvatar Tests', () => {
         `,
       };
 
-      it('should switch between initials and icon reactively', async () => {
-        const host = mount(ToggleHost, { props: { showIcon: false } });
+      const mountHost = (showIcon) => mount(ToggleHost, { props: { showIcon } });
+      const findIcon = (host) => host.find('[data-qa="dt-avatar-icon"]');
 
-        expect(host.find('[data-qa="dt-avatar-icon"]').exists()).toBe(false);
-        expect(host.text()).toBe(MOCK_INITIALS);
+      it('should not render the icon initially when the slot is absent', () => {
+        expect(findIcon(mountHost(false)).exists()).toBe(false);
+      });
+
+      it('should render initials initially when the slot is absent', () => {
+        expect(mountHost(false).text()).toBe(MOCK_INITIALS);
+      });
+
+      it('should render the icon after the slot is provided', async () => {
+        const host = mountHost(false);
 
         await host.setProps({ showIcon: true });
-        expect(host.find('[data-qa="dt-avatar-icon"]').exists()).toBe(true);
+
+        expect(findIcon(host).exists()).toBe(true);
+      });
+
+      it('should not render the icon after the slot is removed again', async () => {
+        const host = mountHost(true);
 
         await host.setProps({ showIcon: false });
-        expect(host.find('[data-qa="dt-avatar-icon"]').exists()).toBe(false);
+
+        expect(findIcon(host).exists()).toBe(false);
+      });
+
+      it('should render initials again after the slot is removed again', async () => {
+        const host = mountHost(true);
+
+        await host.setProps({ showIcon: false });
+
         expect(host.text()).toBe(MOCK_INITIALS);
       });
     });
