@@ -14,4 +14,4 @@ trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || 
 
 pnpm exec wait-on --timeout 30000 "$server_directory/url"
 kill -0 "$server_pid"
-pnpm exec test-storybook --url "$(cat "$server_directory/url")"
+pnpm exec test-storybook --url "$(cat "$server_directory/url")" "$@"
