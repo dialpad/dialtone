@@ -171,13 +171,15 @@ export const cases = [
     'modal-dismissal',
     'documentation',
     'modal outside click',
-    [
-      contains(
-        'intentional-dismissal',
-        'clicking outside the DtModal dialog does not close it',
-      ),
-    ],
-    { limit: 1 },
+    [contains('default-backdrop-dismissal', 'clicking the backdrop closes DtModal')],
+    {
+      limit: 1,
+      checksByAdapter: {
+        core: [contains('disable-backdrop-dismissal', ':close-on-click="false"')],
+        cli: [contains('disable-backdrop-dismissal', ':close-on-click=\\"false\\"')],
+        mcp: [contains('disable-backdrop-dismissal', ':close-on-click="false"')],
+      },
+    },
   ),
   baseline(
     'checkbox-accessibility-literal',

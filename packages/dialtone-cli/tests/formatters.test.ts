@@ -79,3 +79,37 @@ describe('unverified import guidance', () => {
     expect(text).toContain('unverified');
   });
 });
+
+describe('prop deprecation notices', () => {
+  const result: SearchResult = {
+    type: 'component', name: 'DtLink', metadata: null,
+    details: { props: [
+      { name: 'kind', type: { name: 'string' }, tags: { deprecated: [{ description: 'Use tone', title: 'deprecated' }] } },
+      { name: 'href', type: { name: 'string' }, description: 'URL for navigation.' },
+    ] },
+  };
+  const options = { importFrom: '@dialpad/dialtone-vue' };
+
+  test.each([false, true])('full minimal view retains tags-only warnings with describe=%s', describe => {
+    const text = formatComponentOutput(result, 'minimal', undefined, { ...options, describe });
+    expect(text).toContain('kind: Deprecated: Use tone');
+    expect(text).not.toMatch(/href[^\n]*Deprecated/);
+  });
+
+  test('full Markdown view escapes notices and preserves nondeprecated descriptions', () => {
+    const text = formatComponentOutput({ ...result, details: { props: [
+      { name: 'kind', tags: { deprecated: [{ description: 'Use tone | variant\nfrom now on', title: 'deprecated' }] } },
+      result.details.props[1],
+    ] } }, 'markdown', undefined, options);
+    expect(text).toContain('| kind | unknown | Deprecated: Use tone \\| variant from now on |  |');
+    expect(text).toContain('| href | string | URL for navigation. |  |');
+    expect(text).not.toMatch(/href[^\n]*Deprecated/);
+  });
+
+  test('a bare generated deprecation tag renders no replacement text', () => {
+    const text = formatComponentOutput({ ...result, details: { props: [
+      { name: 'headerHeight', tags: { deprecated: [{ description: true, title: 'deprecated' }] } },
+    ] } }, 'markdown', undefined, options);
+    expect(text).toContain('| headerHeight | unknown | Deprecated |  |');
+  });
+});

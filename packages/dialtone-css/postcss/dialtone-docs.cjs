@@ -115,7 +115,7 @@ function generateUtilityClassDocumentation (docs, rule) {
   const classNames = rule.selector
     .split(',')
     .map(sel => sel.trim().split(/\s+/)[0])
-    .filter(sel => PLAIN_CLASS_SELECTOR.test(sel))
+    .filter(sel => /^\.(d-|\w{2}\\:)/.test(sel) && PLAIN_CLASS_SELECTOR.test(sel))
     .map(sel => sel.slice(1));
 
   if (classNames.length === 0) return;
@@ -286,7 +286,7 @@ module.exports = () => {
       });
     },
     async Rule (rule) {
-      if (!/^\.(d-|\w{2}\\:)/.test(rule.selector) || exclusionRegex.test(rule.selector)) return;
+      if (exclusionRegex.test(rule.selector)) return;
       generateUtilityClassDocumentation(tokensDocs, rule);
     },
     async OnceExit () {

@@ -6,13 +6,21 @@ const path = require('node:path');
 const postcss = require('node:module').createRequire(path.resolve(__dirname, '../../dialtone-tokens/package.json'))('postcss');
 const plugin = require('./dialtone-docs.cjs');
 
-test('generated metadata carries safe legacy migrations and source token deprecation', async () => {
+async function generateDocumentation (source) {
   // Capture the generator's actual output boundary; leave fresh build data intact.
   const outputs = {};
   const writeFile = fs.promises.writeFile;
   fs.promises.writeFile = async (file, value) => { outputs[path.basename(file)] = JSON.parse(value); };
   try {
-    await postcss([plugin()]).process(`
+    await postcss([plugin()]).process(source, { from: undefined });
+  } finally {
+    fs.promises.writeFile = writeFile;
+  }
+  return outputs;
+}
+
+test('generated metadata carries safe legacy migrations and source token deprecation', async () => {
+  const outputs = await generateDocumentation(`
       .d-p8, .d-p-100 { padding: var(--dt-spacing-100) !important; }
       .d-bar6, .d-bar-350 { border-radius: var(--dt-size-radius-350) !important; }
       .d-bar-pill, .d-btr-pill { border-radius: var(--dt-size-radius-pill) !important; }
@@ -21,10 +29,7 @@ test('generated metadata carries safe legacy migrations and source token depreca
       ${fs.readFileSync(path.resolve(__dirname, '../lib/build/less/utilities/flex.less'), 'utf8').match(/\.d-flg2 > \* \{[^}]+\}/)[0]}
       .d-g8 > *, .d-cg8 > * { --fl-gap: var(--dt-spacing-100); margin: unset; }
       .d-pt96 { padding-block-start: 6rem !important; }
-    `, { from: undefined });
-  } finally {
-    fs.promises.writeFile = writeFile;
-  }
+    `);
   const utilities = outputs['dialtone-docs.json'];
   for (const [legacy, current] of [['d-p8', 'd-p-100'], ['d-bar6', 'd-bar-350'], ['d-flg8', 'd-g-100']]) {
     assert.deepEqual(utilities[legacy]?.metadata?.alternatives, [current]);
@@ -60,4 +65,28 @@ test('generated metadata carries safe legacy migrations and source token depreca
   }
   assert.equal(tokens['--dt-color-foreground-success']?.metadata?.deprecated, true);
   assert.match(tokens['--dt-color-foreground-success'].metadata.reason, /positive/);
+});
+
+test('catalogs the public utility after a non-public selector with all source declarations', async () => {
+  const layout = fs.readFileSync(path.resolve(__dirname, '../lib/build/less/utilities/layout.less'), 'utf8');
+  const source = layout.match(/\.sr-only,\s*\.d-vi-visible-sr\s*\{[^}]+\}/)[0];
+  const expectedValues = postcss.parse(source).first.nodes.map(node => ({ prop: node.prop, value: node.value }));
+  const outputs = await generateDocumentation(source);
+  const utilities = outputs['dialtone-docs.json'];
+  assert.deepEqual(utilities['d-vi-visible-sr']?.values.map(({ prop, value }) => ({ prop, value })), expectedValues);
+  assert.equal(utilities['sr-only'], undefined);
+});
+
+test('preserves grouped component exclusions and filters non-public and state selectors', async () => {
+  const outputs = await generateDocumentation(`
+      .d-d-block, .unprefixed { display: block !important; }
+      .d-input, .d-textarea { appearance: none; }
+      .sm\\:d-d-inline, .d-fc-primary:hover, .d-d-inline { display: inline !important; }
+    `);
+  const utilities = outputs['dialtone-docs.json'];
+  assert.deepEqual(utilities['d-d-block']?.values, [{ prop: 'display', value: 'block !important' }]);
+  assert.deepEqual(utilities['d-d-inline']?.values, [{ prop: 'display', value: 'inline !important' }]);
+  for (const name of ['d-input', 'd-textarea', 'unprefixed', 'sm\\:d-d-inline', 'd-fc-primary:hover']) {
+    assert.equal(utilities[name], undefined);
+  }
 });

@@ -1,6 +1,7 @@
 ---
 title: Modal
 description: Blocking dialog for focused tasks or decisions.
+last_updated: "2026-11-03"
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
@@ -13,7 +14,7 @@ keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-m
 
 ## Usage
 
-Modals disable underlying content and are used to present a short-term task the user needs to perform without losing the context of the underlying page. Users won't be able to interact with the page until they close the modal. By design, clicking outside the DtModal dialog does not close it — this is intentional behavior to prevent accidental dismissal of important tasks. Users must explicitly click the close button or trigger a close action to dismiss the modal.
+Modals disable underlying content and are used to present a short-term task the user needs to perform without losing the context of the underlying page. Users won't be able to interact with the page until they close the modal. By default, clicking the backdrop closes DtModal. Set `:close-on-click="false"` to prevent backdrop dismissal when a task needs an explicit close action.
 
 Although highly versatile, this doesn't mean modal dialogs are fit for all purposes. Modals are purposefully disruptive and should be used thoughtfully and sparingly, specifically in moments where focus is required or an action must be taken.
 
