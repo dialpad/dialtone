@@ -187,7 +187,7 @@ export default {
       endTooltipText: { initialValue: 'More calling options' },
     },
     slots: {
-      startIcon: { initialValue: '<dt-icon-phone :size="iconSize" />' },
+      startIcon: { initialValue: '<dt-icon-phone :size="size" />' },
       default: { initialValue: 'Place call' },
     },
   },
@@ -200,7 +200,7 @@ export default {
       startTooltipText: { initialValue: 'Place call' },
     },
     slots: {
-      startIcon: { initialValue: '<dt-icon-phone :size="iconSize" />' },
+      startIcon: { initialValue: '<dt-icon-phone :size="size" />' },
     },
   },
 
