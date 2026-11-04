@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import { computed, reactive, shallowRef } from 'vue';
+import { computed, reactive, readonly, shallowRef } from 'vue';
 import {
   areOptionValuesEqual,
   captureComponentValues,
@@ -155,6 +155,26 @@ describe('variant_state', function () {
   });
 
   describe('model echo equality', () => {
+    it.each([['reactive', reactive], ['readonly', readonly]])(
+      'preserves instance identity through a %s proxy', (proxyType, createProxy) => {
+        class Choice {}
+        const value = new Choice();
+        const proxy = createProxy(value);
+        expect(areOptionValuesEqual(value, proxy)).toBe(true);
+        expect(areOptionValuesEqual(proxy, value)).toBe(true);
+        expect(areOptionValuesEqual(proxy, createProxy(new Choice()))).toBe(false);
+      },
+    );
+
+    it('preserves a nested instance echo while detecting a replacement instance', () => {
+      class Choice {}
+      const model = reactive({ props: { value: { choice: new Choice() } }, attributes: {} });
+      const baseline = captureComponentValues(model).props.value;
+      expect(areOptionValuesEqual(baseline, model.props.value)).toBe(true);
+      model.props.value.choice = new Choice();
+      expect(areOptionValuesEqual(baseline, model.props.value)).toBe(false);
+    });
+
     it('keeps a detached baseline when a reactive prop is mutated before its event', () => {
       const model = reactive({ props: { modelValue: ['apple'] }, attributes: {} });
       let captures = 0;

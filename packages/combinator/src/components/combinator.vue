@@ -205,7 +205,7 @@
           :dev-mode="devMode"
           :has-changes="hasChanges"
           :full-screen="isFullScreen"
-          @update:options="(e) => e(options)"
+          @update:options="(e) => options = e"
         />
       </div>
     </div>

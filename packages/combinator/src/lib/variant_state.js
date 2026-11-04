@@ -191,6 +191,7 @@ export function listVariantNames (variants) {
 export function areOptionValuesEqual (previous, next, compared = new WeakMap()) {
   if (Object.is(previous, next)) return true;
   if (!previous || !next || typeof previous !== 'object' || typeof next !== 'object') return false;
+  if (Object.is(toRaw(previous), toRaw(next))) return true;
   const prototype = Object.getPrototypeOf(previous);
   if (prototype !== Object.getPrototypeOf(next)) return false;
   if (!Array.isArray(previous) && prototype !== Object.prototype && prototype !== null) return false;

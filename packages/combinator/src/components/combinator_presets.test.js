@@ -101,6 +101,28 @@ describe('Combinator preset control', () => {
     expect(wrapper.emitted('update:preset')).toEqual([['']]);
   });
 
+  it('marks an editable code-panel slot change as custom', async () => {
+    wrapper = mount(DtcCombinator, {
+      attachTo: document.body,
+      props: {
+        component: DtButton,
+        documentation: buttonDoc,
+        variants: variantBank.DtButton,
+        preset: 'render as warning link text',
+      },
+      global: { stubs: { DtcOptionBar: true }, directives: { 'dt-scrollbar': {} } },
+    });
+    await nextTick();
+    const slot = wrapper.findAllComponents({ name: 'DtcCodeEditorSlot' })
+      .find(component => component.props('name') === 'default');
+    const input = slot.find('[contenteditable]');
+    input.element.textContent = 'Edited label';
+    await input.trigger('input');
+    expect(wrapper.vm.selectedVariant).toBe('');
+    expect(wrapper.emitted('update:preset')).toEqual([['']]);
+    expect(wrapper.findComponent({ name: 'DtcRenderer' }).text()).toContain('Edited label');
+  });
+
   it('tracks a real CheckboxGroup push while ignoring an unchanged array echo', async () => {
     let group;
     const observedGroup = {

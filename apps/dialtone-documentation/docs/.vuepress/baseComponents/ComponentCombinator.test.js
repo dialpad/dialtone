@@ -55,6 +55,21 @@ it('removes the preset query on custom edits without resetting edited options', 
   expect(options.props.imageSrc).toBe('/assets/images/person.png');
 });
 
+it('removes only preset on a code-panel slot edit and preserves the live hash', async () => {
+  await mountDocs({ preset: 'icon-avatar', other: 'keep', filter: ['a', 'b'], flag: null });
+  const url = '/components/avatar.html?preset=icon-avatar&other=keep&filter=a&filter=b&flag#props';
+  window.history.replaceState(null, '', url);
+  combinator.findComponent({ name: 'DtcCodePanel' }).vm.$emit('update:options', options => {
+    options.slots.icon = '<span>Edited icon</span>';
+  });
+  await settle();
+  expect(router.currentRoute.value.query).toEqual({ other: 'keep', filter: ['a', 'b'], flag: null });
+  expect(router.currentRoute.value.hash).toBe('#props');
+  expect(combinator.vm.selectedVariant).toBe('');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').slots.icon)
+    .toBe('<span>Edited icon</span>');
+});
+
 it('preserves a cleared browser hash instead of restoring the stale route hash', async () => {
   await mountDocs();
   window.history.replaceState(null, '', '/components/avatar.html?preset=image&other=keep');
