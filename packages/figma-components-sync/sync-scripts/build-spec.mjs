@@ -201,7 +201,9 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
     // mode-invariant computed colour is served perfectly well by a literal.
     if (!props[key].token) {
       const ds = darkBySelector.get(node.selector);
-      const darkRgba = ds ? toFigmaRGB(ds[css]) : null;
+      // The drawn side's colour, as for the light value above: the top edge is transparent on a
+      // component that only draws a block-end border.
+      const darkRgba = ds ? toFigmaRGB(ds[css === 'borderTopColor' ? borderColorKey(ds) : css]) : null;
       if (darkRgba && !sameRGBA(rgba, darkRgba)) {
         props[key].rgbaDark = darkRgba;
         // The tokens the CSS expression is BUILT from. Not a binding — provenance, so a

@@ -234,7 +234,7 @@ function splitTernary (e) {
 function expandExpr (expr, depth = 0, at = ENGINE_SRC.length) {
   const e = String(expr).trim();
   if (!e || depth > 5) return [];
-  const lit = /^'([A-Za-z]+)'$/.exec(e);
+  const lit = /^'([A-Za-z][A-Za-z :]*)'$/.exec(e);
   if (lit) return [lit[1]];
   const tern = splitTernary(e);
   if (tern) return [...new Set([...expandExpr(tern.a, depth + 1, at), ...expandExpr(tern.b, depth + 1, at)])];
@@ -281,6 +281,15 @@ const num = s => !Number.isNaN(parseFloat(s));
 /** A node the walk will give an `expectedRel` to, and therefore compare a coordinate for. */
 const positionedChild = d => !d.__isRoot && d.style.position === 'absolute'
   && (d.__isPseudo ? (d.__painted && num(d.inset?.inlineStart) && num(d.inset?.blockStart)) : true);
+/**
+ * An absolute child with no declared inset sits at its static position, which a browser reports as
+ * a resolved pixel offset; in a centring flex parent that is the middle (DtButton's loader). The
+ * builder constrains such a child CENTER from the measured geometry, which only exists once the
+ * walk has run, so this reads the same fact from the capture (within a border's width).
+ */
+const centredAcross = d => !d.__isPseudo && !!d.__parentBox && typeof d.__parentBox.w === 'number'
+  && !!d.box && num(d.inset?.inlineStart)
+  && Math.abs(parseFloat(d.inset.inlineStart) + d.box.w / 2 - d.__parentBox.w / 2) <= 1.5;
 const SVG_TAGS = ['path', 'svg', 'circle', 'rect', 'polygon', 'ellipse'];
 const isAuto = n => n.layoutMode === 'HORIZONTAL' || n.layoutMode === 'VERTICAL';
 
@@ -403,19 +412,25 @@ const PERTURBATIONS = [
     domPre: d => px(d.style[css]) != null })),
 
   { expect: 'borderColor', what: 'stroke paint -> hostile colour (hue flipped)',
-    target: n => n.type !== 'TEXT' && !!(n.strokes || [])[0],
+    // A transparent border (a button's, folded into the frame) paints nothing and is not compared.
+    target: n => n.type !== 'TEXT' && !!(n.strokes || [])[0] && (paintRGBA(n.strokes[0], MODE)?.a ?? 0) >= 0.005,
     apply: n => hostilePaint(n.strokes[0]),
     domPre: d => px(d.style.borderTopWidth) > 0 && alpha(d.style.borderTopColor) >= 0.005 },
   ...['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].map(k => ({
     expect: k, what: `${k} +5px`,
-    target: n => n.type !== 'TEXT',
+    // REST does not report padding on a frame without auto-layout and the engine skips it there
+    // (the offset is checked on the children instead), so only an auto-layout frame can fire.
+    target: n => n.type !== 'TEXT' && isAuto(n),
     apply: n => bump(n, k, 5),
     domPre: () => true,
   })),
   { expect: 'itemSpacing', what: 'itemSpacing +5px',
     target: n => n.type !== 'TEXT',
     apply: n => bump(n, 'itemSpacing', 5),
-    domPre: d => px(d.style.columnGap) != null },
+    // The engine compares a gap only on a flex/grid box with two or more flow children; with one
+    // there is nothing for the gap to sit between, so the same gate is the precondition here.
+    domPre: d => px(d.style.columnGap) != null && /flex|grid/.test(d.style.display || '')
+      && (d.children || []).filter(c => c.style.position !== 'absolute').length > 1 },
   /**
    * THE SLOT ASSERTIONS. These four exist because of B-108: the merged Badge built, toggled,
    * and put the icon on top of the label, and every value check passed because the DEFAULT
@@ -477,9 +492,11 @@ const PERTURBATIONS = [
     note: 'an icon nobody can change is a slot in name only; the INSTANCE is fabricated '
       + 'because it is the precondition, not the defect' },
   { expect: 'counterAxisSpacing', what: 'layoutWrap -> WRAP with counterAxisSpacing +7px',
-    target: n => isAuto(n),
+    // Figma holds `layoutWrap` on a HORIZONTAL layout only, and the engine compares it only there.
+    target: n => n.layoutMode === 'HORIZONTAL',
     apply: (n) => { n.layoutWrap = 'WRAP'; return bump(n, 'counterAxisSpacing', 7); },
-    domPre: d => px(d.style.rowGap) != null,
+    // Only a CSS row builds a HORIZONTAL frame, the one Figma can wrap, and its cross-axis gap is `row-gap`.
+    domPre: d => d.style.flexDirection !== 'column' && px(d.style.rowGap) != null,
     note: 'the comparison is gated on layoutWrap, so the perturbation has to open the gate '
       + 'as well as change the value — both are Figma-side data a build could get wrong' },
   // AUTO-LAYOUT only, on both sides. Figma accepts a minimum solely on an auto-layout
@@ -530,10 +547,25 @@ const PERTURBATIONS = [
     target: n => !!n.absoluteBoundingBox,
     apply: n => bump(n.absoluteBoundingBox, 'x', 6),
     domPre: d => positionedChild(d) && d.anchor === 'end' },
+  // A centred child of a snapping config is compared as `x from centre` (below), so only the nodes
+  // the plain comparison still covers are perturbed here.
   { expect: 'x', what: 'absoluteBoundingBox.x +6px',
-    target: n => !!n.absoluteBoundingBox,
+    target: n => !!n.absoluteBoundingBox
+      && !(cfg.snapTokens && n.constraints && n.constraints.horizontal === 'CENTER'),
     apply: n => bump(n.absoluteBoundingBox, 'x', 6),
-    domPre: d => positionedChild(d) && d.anchor !== 'end' },
+    domPre: d => positionedChild(d) && d.anchor !== 'end' && !(cfg.snapTokens && centredAcross(d)) },
+  // A snapping config compares a CENTRED child by its offset from the centre, not by x (the snapped
+  // parent is wider), so for those nodes this is the comparison that has to fire.
+  { expect: 'x from centre', what: 'absoluteBoundingBox.x +6px on a horizontally centred child',
+    target: n => !!n.absoluteBoundingBox && n.constraints && n.constraints.horizontal === 'CENTER',
+    apply: n => bump(n.absoluteBoundingBox, 'x', 6),
+    domPre: d => !!cfg.snapTokens && positionedChild(d) && centredAcross(d) },
+  // `align-self: center` is built as stretch + centred content and checked by the frame's midpoint
+  // against its parent's, so moving the frame off-centre is what has to fire.
+  { expect: 'alignSelf:center', what: 'absoluteBoundingBox.y +6px on a stretched, centred frame',
+    target: n => !!n.absoluteBoundingBox && (n.layoutAlign === 'STRETCH' || n.layoutSizingVertical === 'FILL'),
+    apply: n => bump(n.absoluteBoundingBox, 'y', 6),
+    domPre: d => d.style.alignSelf === 'center' },
   { expect: 'y', what: 'absoluteBoundingBox.y +6px',
     target: n => !!n.absoluteBoundingBox,
     apply: n => bump(n.absoluteBoundingBox, 'y', 6),
@@ -605,7 +637,12 @@ const PERTURBATIONS = [
   { expect: 'width', what: 'absoluteBoundingBox.width +6px on a PINNED axis',
     // Compared only where the width is a number the builder wrote rather than one the
     // text engine produced: layout NONE, or a FIXED axis.
-    target: n => !!n.absoluteBoundingBox
+    // Never TEXT: the engine skips a text node's size (its width is the text engine's, not a number
+    // the builder wrote), so perturbing one cannot produce a finding.
+    // Nor an icon INSTANCE: an icon is an inline SVG imported whole, which the engine skips for size.
+    // Other instances (DtLoader, a Button inside a Notice) are block boxes and are compared.
+    target: n => !!n.absoluteBoundingBox && n.type !== 'TEXT' && !(n.type === 'INSTANCE' && /icon/i.test(n.name))
+      && !SHAPES.includes(n.type)
       && (!n.layoutMode || n.layoutMode === 'NONE'
         || (n.layoutMode === 'HORIZONTAL' && n.primaryAxisSizingMode === 'FIXED')
         || (n.layoutMode === 'VERTICAL' && n.counterAxisSizingMode === 'FIXED')),
@@ -616,7 +653,7 @@ const PERTURBATIONS = [
   // gone. So the fault to inject is switching it off, not on.
   { expect: 'strokesIncludedInLayout', what: 'strokesIncludedInLayout -> false on a stroked auto-layout frame',
     target: n => n.type !== 'TEXT' && !!n.layoutMode && n.layoutMode !== 'NONE'
-      && !!(n.strokes || []).length,
+      && !!(n.strokes || []).length && (paintRGBA(n.strokes[0], MODE)?.a ?? 0) >= 0.005,
     apply: (n) => { n.strokesIncludedInLayout = false; return true; },
     domPre: d => px(d.style.borderTopWidth) > 0 && alpha(d.style.borderTopColor) >= 0.005 },
   { expect: 'clipsContent', what: 'clipsContent -> false on a frame carrying an inset ring',
@@ -852,14 +889,14 @@ const nodeAt = (root, path) => path.reduce((n, i) => n.children[i], root);
  * it. Pseudo-elements are real painted boxes with no DOM node, and whether one is
  * PAINTED decides whether the walk treats it as a child at all.
  */
-const flatDom = (d, out = [], isRoot = true) => {
-  out.push({ ...d, __isRoot: isRoot, __isPseudo: false, __painted: true });
+const flatDom = (d, out = [], isRoot = true, parent = null) => {
+  out.push({ ...d, __isRoot: isRoot, __isPseudo: false, __painted: true, __parentBox: parent && parent.box });
   for (const pe of d.pseudos || []) {
     const painted = alpha(pe.style.backgroundColor) >= 0.005 || (pe.style.boxShadow && pe.style.boxShadow !== 'none');
     out.push({ ...pe, tag: pe.pseudo, classes: [pe.pseudo], children: [], text: null,
       __isRoot: false, __isPseudo: true, __painted: !!painted });
   }
-  (d.children || []).forEach(c => flatDom(c, out, false));
+  (d.children || []).forEach(c => flatDom(c, out, false, d));
   return out;
 };
 const key = f => `${f.variant}|${f.path}|${f.field}`;
@@ -879,8 +916,7 @@ const baselineKeys = new Set(baseline.map(key));
 
 const results = [];
 for (const p of PERTURBATIONS) {
-  const domOpportunities = captured.reduce((n, c) => n + flatDom(c.dom).filter(p.domPre).length, 0);
-  let applications = 0, reached = 0, caught = null;
+  const domOpportunities = captured.reduce((n, c) => n + flatDom(c.dom).filter(p.domPre).length, 0);  let applications = 0, reached = 0, caught = null;
   const otherFields = new Set();
 
   outer:

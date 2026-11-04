@@ -623,7 +623,11 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       hasInsetShadow: /inset/.test(s.boxShadow || ''),
       hasBackground: (col(s.backgroundColor)?.a ?? 0) >= 0.005,
     });
-    const domW = (domBorderVisible || tbf) ? (px(s.borderTopWidth) || 0) : 0;
+    // The widest side, not the top: Banner draws only a block-end border, and gating on the top edge
+    // left its colour (and whether the stroke counts in the layout) unchecked.
+    const domW = (domBorderVisible || tbf)
+      ? Math.max(...['borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth'].map(k => px(s[k]) || 0))
+      : 0;
     const figStroke = paintRGBA(firstVisible(fig.strokes), MODE);
     const figVisible = !!figStroke && (figStroke.a ?? 1) >= 0.005;
     /**
@@ -683,8 +687,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
      * a hard-coded 10 where the stylesheet says `spacing/75` is exactly what this pipeline
      * exists to avoid.
      */
-    if (!fig.strokesIncludedInLayout && fig.layoutMode && fig.layoutMode !== 'NONE' && domW > 0
-        && (px(s.borderTopWidth) || px(s.borderLeftWidth))) {
+    if (!fig.strokesIncludedInLayout && fig.layoutMode && fig.layoutMode !== 'NONE' && domW > 0) {
       rec(variant, path, 'strokesIncludedInLayout',
         'true (a CSS border adds to a shrink-to-fit box, so the stroke must count)', false);
     }

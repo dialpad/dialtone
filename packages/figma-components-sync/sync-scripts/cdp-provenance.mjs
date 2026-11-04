@@ -427,7 +427,10 @@ export function resolveDeclared (own, chain) {
         const nonStyle = parts.filter(x => !STYLE_WORDS.has(x.toLowerCase()));
         if (!nonStyle.length) continue;
         for (const k of keys) recordExact(k, expand(nonStyle[0], own, chain));
-        if (nonStyle.length > 1 && keys.length === 4 && !tokens.borderColor) {
+        // A shorthand for ONE side carries the colour of the edge that is drawn (DtBanner's
+        // `border-block-end`), and Figma has a single stroke colour, so it counts the same.
+        // Without it that colour had no token and was baked into a synthesised variable.
+        if (nonStyle.length > 1 && !tokens.borderColor) {
           record('borderColor', expand(nonStyle[nonStyle.length - 1], own, chain));
         }
         continue;
