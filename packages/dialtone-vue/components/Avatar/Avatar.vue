@@ -350,6 +350,14 @@ export default {
       return this.clickable ?? this.interactive;
     },
 
+    /**
+     * Random family/variant, cached so unseeded avatars keep one color
+     * instead of re-rolling on every render. Recomputes only when seed changes.
+     */
+    randomFamilyVariant () {
+      return getRandomFamilyVariant(this.seed);
+    },
+
     iconDataQa () {
       return 'dt-avatar-icon';
     },
@@ -462,7 +470,7 @@ export default {
       }
 
       // Random based on seed
-      const random = getRandomFamilyVariant(this.seed);
+      const random = this.randomFamilyVariant;
       return random.family;
     },
 
@@ -483,7 +491,7 @@ export default {
       }
 
       // Random based on seed
-      const random = getRandomFamilyVariant(this.seed);
+      const random = this.randomFamilyVariant;
       return random.variant;
     },
 
