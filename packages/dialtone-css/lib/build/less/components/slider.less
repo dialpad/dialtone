@@ -161,6 +161,20 @@
     // DtSelectMenu) when stacked at the same gap.
     /* stylelint-disable-next-line meowtec/no-px */
     overflow-clip-margin: 32px;
+
+    // Safari/WebKit doesn't support overflow-clip-margin, so `overflow: clip`
+    // above would clip flush at this ~20px-tall box and cut off everything
+    // painted below it (marks, the inline readout), plus the outer part of
+    // the 44px thumb hit area and the focus ring at 0%/100%. Let it all paint
+    // instead, and use layout containment to keep the overhang from growing
+    // an ancestor's scrollWidth: contained overflow is ink overflow, painted
+    // and hit-testable but never counted as scrollable. (Clipping only one
+    // axis would cut the hit area and focus ring, and plain `visible` would
+    // bring back the scrollbar this clip exists to prevent.)
+    @supports not (overflow-clip-margin: 1px) {
+        overflow: visible;
+        contain: layout;
+    }
 }
 
 //  $$  TRACK
@@ -621,6 +635,9 @@
         // the horizontal clip above guards against — so there's no equivalent
         // growing-scrollWidth risk here. Restore full visibility.
         overflow: visible;
+        // Undo the horizontal control's Safari-fallback containment (above)
+        // so vertical overflow stays scrollable overflow, exactly as before.
+        contain: none;
     }
 
     .d-slider__track {
