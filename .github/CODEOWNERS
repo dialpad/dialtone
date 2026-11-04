@@ -1,1 +1,5 @@
 *       @iropolo @francisrupert @braddialpad @belumontoya @jeverhart-dialpad @paulojreis-dialpad
+
+# dialtone-react only. Loop PRs touch nothing but this package and are opened from this account,
+# so they request no reviews. Decide this package's owners when dialtone-react merges into staging.
+/packages/dialtone-react/ @paulojreis-dialpad
