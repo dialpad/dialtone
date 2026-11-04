@@ -10,7 +10,6 @@
  */
 export default {
   component: 'DtButton', label: '', page: 'ButtonIcon',
-  figmaSetId: '2042:14696',
   // Computed spacing at the nearest token; the circle's 50% radius is the pill token (token-snap.mjs).
   snapTokens: true,
   axes: {

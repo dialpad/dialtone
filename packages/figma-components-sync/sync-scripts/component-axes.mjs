@@ -6,7 +6,7 @@
  */
 const BUILT_IN = {
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '2045:78361',
+    component: 'DtButton', label: 'Button', page: 'Button',
     // Computed spacing (padding = token minus the border, gap = half the padding) is built at the
     // nearest token and bound to it; see token-snap.mjs.
     snapTokens: true,
@@ -128,5 +128,21 @@ for (const cfg of Object.values(ALL)) {
   const authored = cfg.variantName
     || (c => Object.keys(cfg.axes).map(a => `${a}=${c[a]}`).join(', '));
   cfg.variantName = c => humaniseVariantName(authored(c));
+}
+/**
+ * THE SET IDS OF THE FILE BEING BUILT, from the target's own state (see state.mjs).
+ *
+ * A built set's Figma id is a fact about one file, so it is not written into these configs: it used
+ * to be, which changed tracked source on every build. With no target in play (measuring a spec needs
+ * none) a config simply has no id.
+ */
+const TARGET_NAME = process.env.SYNC_TARGET;
+if (TARGET_NAME) {
+  const { readState } = await import('./state.mjs');
+  const ids = readState(TARGET_NAME, 'set-ids.json');
+  for (const [key, cfg] of Object.entries(ALL)) {
+    if (ids[key] && ids[key].figmaSetId) cfg.figmaSetId = ids[key].figmaSetId;
+    if (ids[key] && ids[key].figmaMergedSetId) cfg.figmaMergedSetId = ids[key].figmaMergedSetId;
+  }
 }
 export const COMPONENTS = ALL;

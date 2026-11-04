@@ -1,4 +1,4 @@
-import './pin-cwd.mjs';   // launch directory must not matter
+import './target.mjs';   // the file this run works on; also pins the launch directory
 import { fileURLToPath } from 'url';
 /**
  * Rasterise the SAME variants from the harness and from Figma, side by side.

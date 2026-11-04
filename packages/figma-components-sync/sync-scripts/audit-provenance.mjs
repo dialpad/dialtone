@@ -16,7 +16,7 @@
  *   node audit-provenance.mjs link --set 79:231
  *   node audit-provenance.mjs button --set 49:1142 --json out.json
  */
-import './pin-cwd.mjs';   // launch directory must not matter
+import './target.mjs';   // the file this run works on; also pins the launch directory
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import { writeFileSync } from 'fs';
@@ -27,7 +27,6 @@ import { combosFor, containerClassOf } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
 import { flattenEdgeSlots } from './edge-slots.mjs';
 import { converter, parse as parseColor } from 'culori';
-import { loadLibrary } from './remote-variables.mjs';
 import { exemplarSlots } from './exemplar-slots.mjs';
 import { figmaChildParts } from './figma-mapping.mjs';
 import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken, shadowLayerColorTokens } from './cdp-provenance.mjs';
@@ -59,10 +58,7 @@ async function figmaGet (path) {
 
 const varsRes = await figmaGet(`/v1/files/${FILE_KEY}/variables/local`);
 const VM = varsRes.meta.variables;
-const LIB = await loadLibrary(figmaGet, process.env.TOKENS_FILE_KEY);
-// A remote variable is named through the library file by its key; an id with no key
-// prefix that this file does not hold is an id local to the library.
-const varName = id => (VM[id] ?? LIB?.fromRemote(id) ?? LIB?.VM[id])?.name ?? `«unknown ${id}»`;
+const varName = id => VM[id]?.name ?? `«unknown ${id}»`;
 // A variable that declares itself DERIVED is a deliberate stand-in for a value the
 // CSS computes or hardcodes and Dialtone has no token for. Binding one is the
 // intended outcome, not a mis-binding — but it is counted, never hidden.

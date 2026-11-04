@@ -25,7 +25,8 @@
  * Deliberately NOT a CI job yet: it needs a browser, a Figma PAT, and a scratch file
  * that is nobody's source of truth. Wire it up once this lives somewhere real.
  */
-import './pin-cwd.mjs';   // launch directory must not matter
+import { TARGET } from './target.mjs';   // also pins the launch directory, which must not matter
+import { readState } from './state.mjs';
 import { spawn } from 'child_process';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
@@ -65,7 +66,7 @@ for (const n of names) {
  */
 const staleness = [];
 try {
-  const stamp = JSON.parse(readFileSync(join(HERE, 'build-data/built-from.json'), 'utf8'));
+  const stamp = readState(TARGET.name, 'built-from.json');
   const index = JSON.parse(readFileSync(join(HERE, 'build-data/shards/index.json'), 'utf8'));
   for (const n of names) {
     const was = stamp[n];

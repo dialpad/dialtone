@@ -41,7 +41,7 @@
  *   node sync-scripts/negative-control.mjs button --mode Dark
  *   node sync-scripts/negative-control.mjs button --set 561:49545 --variants 20
  */
-import './pin-cwd.mjs';   // launch directory must not matter
+import './target.mjs';   // the file this run works on; also pins the launch directory
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import { readFileSync, writeFileSync } from 'fs';

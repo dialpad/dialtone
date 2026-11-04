@@ -11,12 +11,12 @@
  *
  *   node encode-build.mjs <component>     -> build-data/<component>-build.json
  */
-import './pin-cwd.mjs';   // launch directory must not matter
+import { TARGET } from './target.mjs';   // the file this run works on; also pins the launch directory
+import { readState } from './state.mjs';
 import 'dotenv/config';
 import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { COMPONENTS } from './component-axes.mjs';
-import { fetchPublishedTokenKeys } from './library-tokens.mjs';
 import { snapPayload, SNAP_TOKEN_NAMES, PILL, TEXT_TOKEN_NAMES, textTokenPayload } from './token-snap.mjs';
 
 const which = process.argv[2];
@@ -231,19 +231,8 @@ function dvarFor (key, p) {
  * happen is resolving to the WRONG icon, so an ambiguous name is reported rather than
  * guessed — `close` exists once, but a last-segment match is only safe while that holds.
  */
-let ICON_LIB = { ids: {} };
-try { ICON_LIB = JSON.parse(readFileSync('sync-scripts/build-data/icon-library.json', 'utf8')); }
-catch { /* library not built yet */ }
-/**
- * The Dialtone library's published TEXT styles, by key. A style from a library has to be imported
- * before it can be applied, and the file has none of its own, so without these every text layer
- * carried raw size, weight and line height. Absent file = none imported (the old behaviour).
- * The list is read from the library file; the REST styles endpoint needs a token scope the
- * experiment token does not have.
- */
-let TEXT_STYLE_KEYS = [];
-try { TEXT_STYLE_KEYS = JSON.parse(readFileSync('sync-scripts/build-data/text-styles.json', 'utf8')).styles.map(s => s.key); }
-catch { /* no styles recorded */ }
+// The icon ids of the file being built: they are component ids in THAT file (see state.mjs).
+const ICON_LIB = readState(TARGET.name, 'icon-library.json', { ids: {} });
 const ICON_BY_SLUG = new Map();
 for (const full of Object.keys(ICON_LIB.ids || {})) {
   const leaf = full.split('/')[1];
@@ -585,24 +574,19 @@ const rows = spec.variants.map(v => [
 // know that '' means 'none', and a name Figma rejects poisons the whole component set.
 const rowNames = spec.variants.map(v => v.name);
 
-// This file consumes the Dialtone Design Tokens library rather than owning the
-// variables locally (see library-tokens.mjs), so the plugin needs the import key
-// for any token this file cannot resolve on its own — restricted to names this
-// payload actually uses, not the library's full 837.
-const publishedKeys = await fetchPublishedTokenKeys(process.env.PERSONAL_ACCESS_TOKEN, process.env.TOKENS_FILE_KEY);
-const tokKeys = Object.fromEntries(toks
-  .filter(t => publishedKeys.has(t))
-  .map(t => [t, publishedKeys.get(t)]));
-
 // Slots the builder makes NATIVE (Figma SLOT) instead of an INSTANCE_SWAP, per the config.
 const nativeSlots = (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, tokKeys, nativeSlots, flexLayout: flexLayoutOn,
+const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, nativeSlots, flexLayout: flexLayoutOn,
+  // The target's file owns the Dialtone collection: the synthesised colours are created in it, hidden.
+  homeCollection: TARGET.homeCollection,
+  // The pages this build may clear and rebuild: its own components' and the icons'. Nothing else.
+  ownedPages: [...new Set([...Object.values(COMPONENTS).map(c => c.page), 'Icons'])],
   // `blockLayout`: a block that only stacks its children is a vertical auto-layout (see the builder).
   blockLayout: !!(COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).blockLayout, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
-  textStyleKeys: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textStyles === false ? [] : TEXT_STYLE_KEYS,
+  useTextStyles: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).textStyles !== false,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.
   edgeSlots: (COMPONENTS[which.replace(/-(merged|slots)$/, '')] || {}).edgeSlots || null, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';

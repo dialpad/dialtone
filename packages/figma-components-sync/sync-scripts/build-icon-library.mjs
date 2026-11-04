@@ -13,11 +13,10 @@
  * icon-svg.mjs, with the measurements that settled them.
  */
 
-import './pin-cwd.mjs';
+import './target.mjs';   // the file this run works on; also pins the launch directory
 import { readdirSync, readFileSync, writeFileSync, statSync, mkdirSync } from 'fs';
 import 'dotenv/config';
 import { createHash } from 'crypto';
-import { fetchPublishedTokenKeys } from './library-tokens.mjs';
 import { prepareIcon, themeableFills } from './icon-svg.mjs';
 
 const ICONS_PKG = '../dialtone-icons';
@@ -90,20 +89,6 @@ for (const ic of icons) {
 }
 if (bad.length) throw new Error(`icon payload rejected (${bad.length}):\n  ` + bad.join('\n  '));
 
-// The default fill variable, by its published key, for a file that links the tokens library
-// rather than owning the variables (see icon-builder.js). Without credentials the icons are
-// still built, with a literal fill, and that is said out loud.
-const FILL_VAR_NAME = 'color/foreground/primary';   // must match DEFAULT_FILL_VAR in icon-builder.js
-let fillVarKey = null;
-if (process.env.PERSONAL_ACCESS_TOKEN && process.env.TOKENS_FILE_KEY) {
-  fillVarKey = (await fetchPublishedTokenKeys(process.env.PERSONAL_ACCESS_TOKEN, process.env.TOKENS_FILE_KEY))
-    .get(FILL_VAR_NAME) || null;
-}
-if (!fillVarKey) {
-  console.log(`note         : no published key for ${FILL_VAR_NAME} (set PERSONAL_ACCESS_TOKEN and TOKENS_FILE_KEY); `
-    + 'icons fall back to the local variable, or a literal fill');
-}
-
 mkdirSync(SHARD_DIR, { recursive: true });
 const shards = [];
 let cur = [], curBytes = 0;
@@ -118,7 +103,7 @@ const manifest = { page: PAGE, total: icons.length, shards: [] };
 let indexOffset = 0;   // icons in the shards before this one: the builder places each icon by its GLOBAL slot
 shards.forEach((group, i) => {
   const file = `icons-${i + 1}of${shards.length}.json`;
-  const body = JSON.stringify({ page: PAGE, clear: i === 0, fillVarKey, indexOffset, icons: group });
+  const body = JSON.stringify({ page: PAGE, clear: i === 0, indexOffset, icons: group });
   indexOffset += group.length;
   writeFileSync(`${SHARD_DIR}/${file}`, body);
   manifest.shards.push({

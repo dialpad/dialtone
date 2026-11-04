@@ -22,18 +22,22 @@
  * a screen into two different files, and a wrong id makes the checks verify the wrong
  * set — which reads as a clean pass on work that was never looked at.
  */
-import './pin-cwd.mjs';
+import { TARGET } from './target.mjs';
+import { stateDir, readState, writeState, recordSetId } from './state.mjs';
 import { fileURLToPath } from 'url';
 import { createServer } from 'http';
 import { randomBytes } from 'crypto';
-import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, utimesSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, statSync, readdirSync } from 'fs';
 import { extname, normalize } from 'path';
 import { execFileSync, spawnSync } from 'child_process';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor } from './combos.mjs';
 
 const HERE = fileURLToPath(new URL('.', import.meta.url)).replace(/\/$/, '');
+// Specs and payloads are shared and regenerated every run; what a build records ABOUT A FILE (set ids,
+// icon ids, fingerprints) lives in the target's own folder (see state.mjs).
 const DIR = `${HERE}/build-data/`;
+const STATE = stateDir(TARGET.name);
 const PORT = Number(process.env.PORT || 8931);
 
 const args = process.argv.slice(2);
@@ -45,9 +49,29 @@ const WANT_VISUAL = args.includes('--visual');
 // click) or be built alone with no component names at all.
 const WANT_ICONS = args.includes('--icons');
 if (!names.length && !WANT_ICONS) {
-  console.error('usage: run-batch.mjs <component…> [--no-verify] [--visual]');
-  console.error('       run-batch.mjs --icons            (build the icon component library)');
+  console.error('usage: run-batch.mjs <component…> --target <name> [--yes] [--no-verify] [--visual]');
+  console.error('       run-batch.mjs --icons --target <name>   (build the icon component library)');
   process.exit(2);
+}
+
+/**
+ * SAY WHICH FILE THIS WRITES TO, AND REFUSE TO GUESS.
+ *
+ * A build clears and rebuilds the pages it owns, so the file is the one thing that must never be
+ * a surprise. The name comes from Figma itself, so a wrong or inaccessible key fails here, before
+ * anything is built; a target marked `confirm` (the real file) also needs `--yes`.
+ */
+{
+  const r = await fetch(`https://api.figma.com/v1/files/${TARGET.fileKey}?depth=1`,
+    { headers: { 'X-Figma-Token': process.env.PERSONAL_ACCESS_TOKEN || '' } })
+    .catch((e) => { console.error(`cannot reach Figma to check the target file: ${e.cause ? e.cause.code || e.cause.message : e.message}`); process.exit(2); });
+  if (!r.ok) { console.error(`target "${TARGET.name}": Figma answered ${r.status} for its file key (${TARGET.fileKeyEnv})`); process.exit(2); }
+  const meta = await r.json();
+  console.log(`target: ${TARGET.name}  (${TARGET.label}: "${meta.name}", home collection "${TARGET.homeCollection}")`);
+  if (TARGET.confirm && !args.includes('--yes')) {
+    console.error(`"${TARGET.name}" is a real file: add --yes to build into it`);
+    process.exit(2);
+  }
 }
 
 /**
@@ -163,115 +187,19 @@ if (!preflightNames.length) {
   }
 }
 
-// ── 6. write the returned set ids into the configs ─────────────────────────
+// ── 6. record the returned set ids ─────────────────────────────────────────
 /**
- * A component's `figmaSetId` lives in one of two shapes, and the id must land in the
- * one that `check-all` actually reads:
- *   configs/<name>.mjs        — one file per component (banner, button_link, collapsible, …)
- *   component-axes.mjs        — the built-in configs on a single line each
- * Replacements are anchored on the component name so a second component's id can
- * never be overwritten by a loose match.
- */
-/**
- * Write a config file WITHOUT changing its modified time.
+ * A built set's id is a fact about ONE file, so it goes in that target's state (state.mjs), not
+ * into the configs: writing tracked source on every build was noisy, and with several targets there
+ * is no single right id to write. `check-all` reads it back through `component-axes.mjs`.
  *
- * The producers list below treats a newer config as a reason to re-measure, and rightly:
- * an edit to the axes changes what is measured. But recording a built set's Figma id is not
- * such an edit, and it was writing into those same files, so every successful build made
- * the next run re-measure for about six minutes for nothing.
+ * A merged build records `figmaMergedSetId` and deliberately NOT `figmaSetId`: it lands on its
+ * own page, and overwriting the id would point every existing check at a set nothing had verified.
  */
-function writeKeepingMtime (path, content) {
-  const { atime, mtime } = statSync(path);
-  writeFileSync(path, content);
-  utimesSync(path, atime, mtime);
-}
-
 function writeSetId (component, setId) {
-  // A merged build writes `figmaMergedSetId` and deliberately does NOT touch `figmaSetId`: it
-  // lands on its own page, and overwriting the id would point every existing check at a set
-  // nothing had verified yet.
   const base = component.endsWith('-merged') ? component.slice(0, -'-merged'.length) : null;
-  if (base) {
-    const key = 'figmaMergedSetId';
-    const perFile = `${HERE}/configs/${base}.mjs`;
-    if (existsSync(perFile)) {
-      const before = readFileSync(perFile, 'utf8');
-      const s = new RegExp(`${key}:\\s*'[^']*'`).test(before)
-        ? before.replace(new RegExp(`${key}:\\s*'[^']*'`), `${key}: '${setId}'`)
-        : before.replace(/(\n\s*figmaSetId:\s*'[^']*',)/, `$1\n  ${key}: '${setId}',`);
-      // Same rule as the plain branch below: never report a write that did not happen. With
-      // neither a ${key} nor a `figmaSetId: '…',` line to anchor to, both replaces are no-ops.
-      if (s === before && !new RegExp(`${key}:\\s*'${setId}'`).test(before)) {
-        throw new Error(`could not write ${key} into configs/${base}.mjs — `
-          + `no ${key} and no \`figmaSetId: '…',\` line to anchor to. Set id was ${setId}.`);
-      }
-      writeKeepingMtime(perFile, s);
-      return `configs/${base}.mjs (${key})`;
-    }
-    const axes = `${HERE}/component-axes.mjs`;
-    let s = readFileSync(axes, 'utf8');
-    const dt = 'Dt' + base[0].toUpperCase() + base.slice(1);
-    const line = new RegExp(`(component:\\s*'${dt}'[^\\n]*?${key}:\\s*')[^']*(')`);
-    if (line.test(s)) s = s.replace(line, `$1${setId}$2`);
-    else {
-      const anchor = new RegExp(`(component:\\s*'${dt}'[^\\n]*?figmaSetId:\\s*'[^']*',)`);
-      if (!anchor.test(s)) throw new Error(`cannot find a config for ${dt} to attach ${key}`);
-      s = s.replace(anchor, `$1 ${key}: '${setId}',`);
-    }
-    writeKeepingMtime(axes, s);
-    return `component-axes.mjs (${key})`;
-  }
-
-  const perFile = `${HERE}/configs/${component}.mjs`;
-  if (existsSync(perFile)) {
-    const before = readFileSync(perFile, 'utf8');
-    let s = before;
-    if (/figmaSetId:\s*'[^']*'/.test(s)) {
-      s = s.replace(/figmaSetId:\s*'[^']*'/, `figmaSetId: '${setId}'`);
-    } else if (/^\s*\/\/\s*figmaSetId:.*$/m.test(s)) {
-      s = s.replace(/^(\s*)\/\/\s*figmaSetId:.*$/m, `$1figmaSetId: '${setId}',`);
-    } else {
-      // Insert after `page: '…',` WHEREVER it sits. The previous pattern required a
-      // newline before it, so a config written as
-      //   component: 'DtPresence', label: '', page: 'Presence',
-      // matched nothing at all — and this function then wrote the file back unchanged
-      // and reported success. Six components built correctly and check-all refused to
-      // start because not one id had been recorded.
-      s = s.replace(/(page:\s*'[^']*',)/, `$1\n  figmaSetId: '${setId}',`);
-    }
-    /**
-     * NEVER report a write that did not happen. A silent no-op here costs a whole rebuild
-     * to discover, and the failure surfaces far from its cause.
-     *
-     * "Unchanged because the value is ALREADY this id" is a different thing from
-     * "unchanged because nothing matched", and treating them the same made this function
-     * throw the moment it was called twice with the same id — which is exactly what
-     * incremental reporting does, once from `/progress` and once from the final loop.
-     * Checked against the id rather than against a flag, so it is true no matter who
-     * wrote it or when.
-     */
-    if (s === before && !new RegExp(`figmaSetId:\\s*'${setId}'`).test(before)) {
-      throw new Error(`could not write figmaSetId into configs/${component}.mjs — `
-        + `no 'figmaSetId' and no \`page: '…',\` to anchor to. Set id was ${setId}.`);
-    }
-    writeKeepingMtime(perFile, s);
-    return `configs/${component}.mjs`;
-  }
-
-  const axes = `${HERE}/component-axes.mjs`;
-  let s = readFileSync(axes, 'utf8');
-  const dt = 'Dt' + component[0].toUpperCase() + component.slice(1);
-  // Anchor on `component: 'DtX'` and rewrite only the id on that same line.
-  const line = new RegExp(`(component:\\s*'${dt}'[^\\n]*?figmaSetId:\\s*')[^']*(')`);
-  if (line.test(s)) {
-    s = s.replace(line, `$1${setId}$2`);
-  } else {
-    const noId = new RegExp(`(component:\\s*'${dt}',[^\\n]*?page:\\s*'[^']*',)`);
-    if (!noId.test(s)) throw new Error(`cannot find a config for ${dt} in component-axes.mjs`);
-    s = s.replace(noId, `$1 figmaSetId: '${setId}',`);
-  }
-  writeKeepingMtime(axes, s);
-  return 'component-axes.mjs';
+  recordSetId(TARGET.name, base || component, !!base, setId);
+  return `${TARGET.name} state (${base ? 'figmaMergedSetId' : 'figmaSetId'})`;
 }
 
 // ── 4/5. serve, and wait for the one manual step ───────────────────────────
@@ -321,9 +249,7 @@ function recordBuilt (r) {
     return null;
   }
   const where = writeSetId(r.component, r.setId);
-  const stamp = existsSync(`${DIR}built-from.json`)
-    ? JSON.parse(readFileSync(`${DIR}built-from.json`, 'utf8'))
-    : {};
+  const stamp = readState(TARGET.name, 'built-from.json');
   const entry = index.components.find(c => c.component === r.component);
   stamp[r.component] = {
     setId: r.setId,
@@ -331,7 +257,7 @@ function recordBuilt (r) {
     fingerprints: (entry ? entry.shards : []).map(s => s.fingerprint),
     builder: index.builder || null,
   };
-  writeFileSync(`${DIR}built-from.json`, JSON.stringify(stamp, null, 2));
+  writeState(TARGET.name, 'built-from.json', stamp);
   return where;
 }
 
@@ -508,13 +434,13 @@ if (!report) {
 const iconReport = (posted && !Array.isArray(posted) && posted.icons) || null;
 if (iconReport) {
   console.log('\n── icons ' + '─'.repeat(61));
-  const LIB = `${DIR}icon-library.json`;
+  const LIB = `${STATE}icon-library.json`;
   let lib = { page: iconReport.page, defaultFillVar: iconReport.defaultFillVar, ids: {} };
   try { lib = { ...lib, ...JSON.parse(readFileSync(LIB, 'utf8')) }; } catch { /* first build */ }
   lib.ids = { ...lib.ids, ...iconReport.ids };
   lib.page = iconReport.page;
   lib.defaultFillVar = iconReport.defaultFillVar;
-  writeFileSync(LIB, JSON.stringify(lib, null, 2));
+  writeState(TARGET.name, 'icon-library.json', lib);
   console.log(`  ${iconReport.built}/${iconReport.expected} on page "${iconReport.page}"`
     + `  (${iconReport.created} new, ${iconReport.updated} updated, ${iconReport.unchanged || 0} untouched)`);
   // An UPDATED icon has had its children replaced, which discards every instance override
@@ -530,7 +456,7 @@ if (iconReport) {
   }
   console.log(`  ${iconReport.boundFills} vector fill(s) bound to `
     + (iconReport.defaultFillVar || 'NOTHING — the default colour variable was not found'));
-  console.log(`  ${Object.keys(lib.ids).length} icon id(s) on record -> build-data/icon-library.json`);
+  console.log(`  ${Object.keys(lib.ids).length} icon id(s) on record -> build-data/${TARGET.name}/icon-library.json`);
   if (iconReport.built !== iconReport.expected) {
     console.log(`  ⚠ ${iconReport.expected - iconReport.built} icon(s) did not build`);
   }
@@ -605,7 +531,7 @@ for (const r of report) {
 // `recordBuilt` has already written each component's id and fingerprint — once as it
 // landed, and again in the loop above. This only says so.
 if (built.length) {
-  console.log(`\n  recorded payload fingerprints → build-data/built-from.json`);
+  console.log(`\n  recorded payload fingerprints → build-data/${TARGET.name}/built-from.json`);
 }
 
 // Reported BEFORE the verification guard. Both of these blocks used to sit after it,

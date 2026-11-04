@@ -17,7 +17,6 @@
  */
 export default {
   component: 'DtCollapsible', label: 'Content', page: 'Collapsible',
-  figmaSetId: '2045:95223',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
   // Its `display: block` wrappers are vertical auto-layouts, not coordinates (see the builder).

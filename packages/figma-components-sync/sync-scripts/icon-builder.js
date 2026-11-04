@@ -31,14 +31,9 @@ async function buildIcons ({ D }) {
   // readable while looking like it might mean something.
   if (D.clear) for (const n of page.children.slice()) if (n.type !== 'COMPONENT') n.remove();
 
+  // The file being built owns the Dialtone variables (see targets.mjs), so the default fill is local.
   const vars = await figma.variables.getLocalVariablesAsync();
-  let fillVar = vars.find(v => v.name === DEFAULT_FILL_VAR && v.resolvedType === 'COLOR') || null;
-  // A file that LINKS the tokens library owns none of its variables, so the local lookup above
-  // finds nothing there and every themeable icon was left with a literal black fill ("fill(s)
-  // bound to NOTHING"). The payload carries the published key; local stays the first choice.
-  if (!fillVar && D.fillVarKey) {
-    try { fillVar = await figma.variables.importVariableByKeyAsync(D.fillVarKey); } catch (e) { fillVar = null; }
-  }
+  const fillVar = vars.find(v => v.name === DEFAULT_FILL_VAR && v.resolvedType === 'COLOR') || null;
 
   const ids = {};
   let created = 0, updated = 0, unchanged = 0, bound = 0, repaired = 0;

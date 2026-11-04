@@ -30,22 +30,13 @@
 // variants differ in size and a global index does not.
 async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_END }) {
   // ─── lookups ────────────────────────────────────────────────────────────────
+  /**
+   * The file being built OWNS the Dialtone variables (see targets.mjs), so every token is found by
+   * name among the local ones. The brand extension collections (Steel, Graphite, ...) are not listed
+   * by `getLocalVariablesAsync`: only the base collection's variables are, so a name is unambiguous.
+   */
   const allVars = await figma.variables.getLocalVariablesAsync();
   const varByName = new Map(allVars.map(v => [v.name, v]));
-
-  // This file links the Dialtone Design Tokens library rather than owning these
-  // variables locally. D.tokKeys (from encode-build.mjs's REST lookup against the
-  // library's own source file) carries the import key for exactly the names this
-  // file can't resolve on its own — import and cache them the same way a local
-  // variable is found, so every binding below stays a plain varByName lookup.
-  for (const name of D.toks) {
-    if (!name || varByName.has(name)) continue;
-    const key = (D.tokKeys || {})[name];
-    if (!key) continue;
-    try {
-      varByName.set(name, await figma.variables.importVariableByKeyAsync(key));
-    } catch (e) { /* leave unresolved; reported by the missing-variables check below */ }
-  }
 
   const missing = D.toks.filter(t => t && !varByName.has(t));
   if (missing.length) throw new Error('missing variables: ' + missing.join(', '));
@@ -75,10 +66,13 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
    */
   const derivedReport = { created: 0, updated: 0, reused: 0, collection: null };
   if ((D.dvars || []).length) {
-    const COLL = 'Dialtone Derived (synthesised by sync)';
+    // The synthesised variables live in the file's own Dialtone collection, hidden from publishing,
+    // and not in a collection of their own: a second collection with a Light and a Dark mode is a
+    // second appearance toggle for whoever uses the components.
+    const COLL = D.homeCollection;
     const collections = await figma.variables.getLocalVariableCollectionsAsync();
-    let coll = collections.find(c => c.name === COLL);
-    if (!coll) coll = figma.variables.createVariableCollection(COLL);
+    const coll = collections.find(c => c.name === COLL && !c.rootVariableCollectionId);
+    if (!coll) throw new Error(`home collection "${COLL}" not found in this file: is this the tokens file the target names?`);
     /**
      * Both modes must exist and be NAMED, because the checks resolve a variable per mode
      * by mode name (verify-components.varValue) — an unnamed or missing mode would read
@@ -119,6 +113,7 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       // picker in the file, which is exactly what nobody wants from generated data.
       if (dv.scopes && dv.scopes.length) v.scopes = dv.scopes;
       if (dv.desc) v.description = dv.desc;
+      v.hiddenFromPublishing = true;
       if (!fresh) { if (changed) derivedReport.updated++; else derivedReport.reused++; }
       varByName.set(dv.name, v);
     }
@@ -154,14 +149,42 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     }
   }
 
-  const textStyles = await figma.getLocalTextStylesAsync();
-  // The library's published text styles, imported once per run. An imported style reads back its
-  // resolved size, weight, family and line height, so the matching below treats it like a local one.
-  for (const key of D.textStyleKeys || []) {
-    try { textStyles.push(await figma.importStyleByKeyAsync(key)); }
-    catch (e) { skippedBindings.push(`text style ${key}: ${e && e.message ? e.message : e}`); }
-  }
+  // `textStyles: false` (ButtonLink) keeps a config's text raw: with a style applied, labels bound to the
+  // same Label property share their text formatting, so an underline set on one lands on all.
+  const textStyles = D.useTextStyles === false ? [] : await figma.getLocalTextStylesAsync();
   const effectStyles = await figma.getLocalEffectStylesAsync();
+  /**
+   * WHAT A SINGLE-EFFECT STYLE RENDERS, with bound variables resolved.
+   *
+   * A style whose spread, blur and offsets are bound to variables (every effect style in the tokens
+   * file) reads back 0 for each bound field through the plugin API; the real number is the
+   * variable's. Comparing the raw field made `shadow/focus-inset` (spread variable = 2) look like a
+   * spread-0 style, so it was rejected for the very variants it matches. A style imported from a
+   * library reads resolved, so this only matters where the file owns the style.
+   */
+  const resolveFloat = async (alias) => {
+    let v = alias && alias.id ? await figma.variables.getVariableByIdAsync(alias.id) : null;
+    for (let i = 0; v && i < 6; i++) {
+      const val = Object.values(v.valuesByMode)[0];
+      if (val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS') { v = await figma.variables.getVariableByIdAsync(val.id); continue; }
+      return typeof val === 'number' ? val : null;
+    }
+    return null;
+  };
+  const styleFx = new Map();
+  for (const s of effectStyles) {
+    if (s.effects.length !== 1) continue;
+    const e = s.effects[0], bv = e.boundVariables || {};
+    const pick = async (field, raw) => {
+      const a = Array.isArray(bv[field]) ? bv[field][0] : bv[field];
+      const r = a ? await resolveFloat(a) : null;
+      return r == null ? raw : r;
+    };
+    styleFx.set(s.id, {
+      x: await pick('offsetX', e.offset ? e.offset.x : 0), y: await pick('offsetY', e.offset ? e.offset.y : 0),
+      blur: await pick('radius', e.radius || 0), spread: await pick('spread', e.spread || 0),
+    });
+  }
   const WEIGHT = { 100: 'Thin', 200: 'ExtraLight', 300: 'Light', 400: 'Regular',
                    500: 'Medium', 600: 'Semibold', 700: 'Bold', 800: 'ExtraBold', 900: 'Black' };
   const FAMILY = 'SF Pro Text';
@@ -409,14 +432,16 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     const [inset, , x, y, blur, spread] = layer;
     const e = st.effects.length === 1 ? st.effects[0] : null;
     if (!e) return null;
+    // The numbers the style RENDERS (bound variables resolved), not the placeholder the API reads back.
+    const n = styleFx.get(st.id) || { x: e.offset ? e.offset.x : 0, y: e.offset ? e.offset.y : 0, blur: e.radius || 0, spread: e.spread || 0 };
     const agrees = e.type === (inset ? 'INNER_SHADOW' : 'DROP_SHADOW')
-      && Math.abs((e.offset ? e.offset.x : 0) - (x || 0)) < 0.01
-      && Math.abs((e.offset ? e.offset.y : 0) - (y || 0)) < 0.01
-      && Math.abs((e.radius || 0) - (blur || 0)) < 0.01
-      && Math.abs((e.spread || 0) - (spread || 0)) < 0.01;
+      && Math.abs(n.x - (x || 0)) < 0.01
+      && Math.abs(n.y - (y || 0)) < 0.01
+      && Math.abs(n.blur - (blur || 0)) < 0.01
+      && Math.abs(n.spread - (spread || 0)) < 0.01;
     if (!agrees) {
-      styleRejected.push(`${base}: style ${e.type} off ${e.offset ? e.offset.x + ',' + e.offset.y : '0,0'} `
-        + `blur ${e.radius || 0} spread ${e.spread || 0}  vs measured spread ${spread || 0} blur ${blur || 0}`);
+      styleRejected.push(`${base}: style ${e.type} off ${n.x},${n.y} `
+        + `blur ${n.blur} spread ${n.spread}  vs measured spread ${spread || 0} blur ${blur || 0}`);
       return null;
     }
     return st;
@@ -1359,7 +1384,26 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   // CLEAR and SLICE_START are deliberately SEPARATE. Overloading SLICE_START to mean
   // "this is not the first shard" also skipped that shard's first row, silently losing
   // one variant per shard.
-  if (CLEAR) for (const c of [...page.children]) c.remove();
+  if (CLEAR) {
+    /**
+     * A BUILD REBUILDS ITS OWN PAGES AND NOTHING ELSE.
+     *
+     * Clearing is what makes a rebuild idempotent, and in a file that owns the tokens it is also the
+     * way to destroy something somebody made by hand. So the page must be one this build owns, and
+     * it must hold only what a build puts there (component sets); anything else is somebody's work,
+     * and the build stops instead of deleting it.
+     */
+    if (D.ownedPages && !D.ownedPages.includes(D.page)) {
+      throw new Error(`page "${D.page}" is not one this build owns (${D.ownedPages.join(', ')})`);
+    }
+    const foreign = page.children.filter(c => c.type !== 'COMPONENT_SET' && c.type !== 'COMPONENT');
+    if (foreign.length) {
+      throw new Error(`page "${D.page}" holds ${foreign.length} node(s) a build did not make `
+        + `(${[...new Set(foreign.map(c => c.type))].join(', ')}): "${foreign.slice(0, 3).map(c => c.name).join('", "')}". `
+        + 'Move or remove them, or rename the component page, before building here.');
+    }
+    for (const c of [...page.children]) c.remove();
+  }
 
   // Where this shard's flow starts. Measured from what is ALREADY on the page, before
   // building anything, because every frame this builder creates lands on the current

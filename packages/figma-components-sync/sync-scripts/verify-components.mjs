@@ -13,14 +13,13 @@
  *   node verify-components.mjs badge --set <nodeId>
  *   node verify-components.mjs button --set <nodeId>
  */
-import './pin-cwd.mjs';   // launch directory must not matter
+import './target.mjs';   // the file this run works on; also pins the launch directory
 import 'dotenv/config';
 import { writeFileSync, readFileSync, realpathSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
 import { converter, parse as parseColor, clampChroma, displayable, differenceCiede2000 } from 'culori';
-import { loadLibrary } from './remote-variables.mjs';
 import { exemplarSlots } from './exemplar-slots.mjs';
 import { flattenEdgeSlots, edgeSlotFindings } from './edge-slots.mjs';
 import { snappedValue, PILL } from './token-snap.mjs';
@@ -106,7 +105,6 @@ async function figmaGet (path) {
 }
 const varsRes = await figmaGet(`/v1/files/${FILE_KEY}/variables/local`);
 const VM = varsRes.meta.variables, VC = varsRes.meta.variableCollections;
-const LIB = await loadLibrary(figmaGet, process.env.TOKENS_FILE_KEY);
 /**
  * Resolve a variable in a NAMED mode.
  *
@@ -115,21 +113,17 @@ const LIB = await loadLibrary(figmaGet, process.env.TOKENS_FILE_KEY);
  * default mode would silently read Light values while claiming to check Dark —
  * the same class of false-green this file exists to prevent.
  */
-function varValue (id, modeName, d = 0, inLibrary = false) {
+function varValue (id, modeName, d = 0) {
   if (d > 8) return null;
-  // A remote id is resolved in the library file, where the whole alias chain lives; the
-  // aliases inside it are ids local to that file (see remote-variables.mjs).
-  const remote = !inLibrary && LIB && LIB.fromRemote(id);
-  const lib = inLibrary || !!remote;
-  const v = remote || (lib ? LIB.VM[id] : VM[id]); if (!v) return null;
-  const coll = (lib ? LIB.VC : VC)[v.variableCollectionId];
+  const v = VM[id]; if (!v) return null;
+  const coll = VC[v.variableCollectionId];
   const mode = coll.modes.find(m => m.name === modeName);
   const val = v.valuesByMode[(mode || { modeId: coll.defaultModeId }).modeId];
-  if (val && val.type === 'VARIABLE_ALIAS') return varValue(val.id, modeName, d + 1, lib);
+  if (val && val.type === 'VARIABLE_ALIAS') return varValue(val.id, modeName, d + 1);
   // A COMPOSED colour is an alias for the colour plus a separate opacity, in percent: how the
   // variables sync stores a token that is another colour at some alpha.
   if (val && val.color && val.color.type === 'VARIABLE_ALIAS') {
-    const c = varValue(val.color.id, modeName, d + 1, lib);
+    const c = varValue(val.color.id, modeName, d + 1);
     return c && 'r' in c ? { ...c, a: (c.a ?? 1) * (val.opacity ?? 100) / 100 } : null;
   }
   return val;
