@@ -59,28 +59,32 @@ it('moves focus to the anchor target without asking focus to scroll the document
   expect(target.tabIndex).toBe(-1);
 });
 
-it('keeps native preview placeholders inert without creating a pop or resetting edits', async () => {
-  await mountAnchors({ preset: 'image', other: 'keep' }, { history: createWebHistory() });
-  combinator.vm.onComponentEvent('update:fullName', 'EDITED');
-  await settle();
-  const preview = document.createElement('div');
-  preview.className = 'dialtone-playground';
-  preview.innerHTML = '<a href="#">Preview link</a>';
-  scroller.append(preview);
-  const before = window.location.href;
-  const pop = vi.fn();
-  window.addEventListener('popstate', pop);
-  const event = new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
-  preview.querySelector('a').dispatchEvent(event);
-  await settle();
-  await new Promise(resolve => window.setTimeout(resolve, 0));
-  window.removeEventListener('popstate', pop);
-  expect(event.defaultPrevented).toBe(true);
-  expect(pop).not.toHaveBeenCalled();
-  expect(window.location.href).toBe(before);
-  expect(combinator.vm.selectedVariant).toBe('');
-  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('EDITED');
-});
+it.each(['playground', 'content demo'])(
+  'keeps %s placeholders inert without creating a pop or resetting edits', async location => {
+    await mountAnchors({ preset: 'image', other: 'keep' }, { history: createWebHistory() });
+    combinator.vm.onComponentEvent('update:fullName', 'EDITED');
+    await settle();
+    const container = location === 'playground' ? combinator.find('div').element : document.createElement('section');
+    const anchor = document.createElement('a');
+    anchor.href = '#';
+    anchor.textContent = 'Demo link';
+    container.append(anchor);
+    scroller.append(container);
+    const before = window.location.href;
+    const pop = vi.fn();
+    window.addEventListener('popstate', pop);
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
+    anchor.dispatchEvent(event);
+    await settle();
+    await new Promise(resolve => window.setTimeout(resolve, 0));
+    window.removeEventListener('popstate', pop);
+    expect(event.defaultPrevented).toBe(true);
+    expect(pop).not.toHaveBeenCalled();
+    expect(window.location.href).toBe(before);
+    expect(combinator.vm.selectedVariant).toBe('');
+    expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('EDITED');
+  },
+);
 
 it('keeps the pre-existing TOC focus behavior when the page has no playground', async () => {
   await mountAnchors();

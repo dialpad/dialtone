@@ -64,6 +64,23 @@ describe('pageToc utilities', () => {
     assert.equal(listeners.size, 0);
   });
 
+  it('keeps placeholder links inert without requiring component markup', () => {
+    let onClick;
+    const document = { addEventListener: (name, handler) => { onClick = handler; } };
+    const location = new URL('https://dialtone.example/components/breadcrumbs.html?other=keep#usage');
+    const anchor = { href: '#', target: '', hasAttribute: () => false };
+    let prevented = false;
+    let navigated = false;
+    listenForPageAnchorNavigation(() => { navigated = true; }, document, location);
+    onClick({
+      button: 0,
+      target: { closest: () => anchor },
+      preventDefault: () => { prevented = true; },
+    });
+    assert.equal(prevented, true);
+    assert.equal(navigated, false);
+  });
+
   it('uses a docs-owned page scroll container selector', () => {
     assert.equal(PAGE_SCROLL_CONTAINER_SELECTOR, '.dialtone-doc-page-scroll-container');
   });

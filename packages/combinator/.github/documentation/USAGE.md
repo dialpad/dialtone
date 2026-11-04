@@ -120,9 +120,12 @@ Use `preset` to select an existing variant by its exact name, or bind it with
 
 The prop defaults to `default`. Unknown names and an empty name at mount also
 load `default`. Dropdown selections, spec-sheet selections, and reset actions
-emit `update:preset` with the selected name. Edits emit an empty string to mark
-custom options; echoing that value through the prop preserves those edits.
-An unchanged model value emitted by the preview does not mark it custom.
+emit `update:preset` with the selected name. Option-bar edits emit an empty string
+to mark custom options; echoing that value through the prop preserves those edits.
+Preview model events compare with a snapshot of their previous values, so an
+unchanged echo preserves the preset. In-place changes to plain objects and arrays
+count as edits; those collections compare by content. Other object instances
+compare by identity.
 Without a binding, the playground continues to manage its own selection.
 
 The documentation site maps these names to URL slugs, such as

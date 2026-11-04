@@ -31,7 +31,7 @@ export function listenForPageAnchorNavigation (navigate, document = window.docum
     // Native hash entries can reuse the router's history position, hiding Back/Forward.
     // Route these clicks while a playground is mounted so every entry has a position.
     event.preventDefault();
-    // Placeholder links in interactive previews must not navigate or create history entries.
+    // Placeholder demos anywhere on a playground page must not create native history entries.
     if (navigation.placeholder) return;
     Promise.resolve(navigate(event, { link: navigation.hash })).catch(() => {});
   };
@@ -43,7 +43,7 @@ function getSamePageAnchorNavigation (anchor, location) {
   const target = getSamePageAnchorUrl(anchor, location);
   if (!target) return null;
   if (target.hash) return { hash: target.hash };
-  return target.href.endsWith('#') && anchor.closest?.('.dialtone-playground') ? { placeholder: true } : null;
+  return target.href.endsWith('#') ? { placeholder: true } : null;
 }
 
 function getSamePageAnchorUrl (anchor, location) {

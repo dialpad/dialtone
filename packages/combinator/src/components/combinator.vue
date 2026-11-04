@@ -387,6 +387,7 @@ const options = computedModel(
       ...getInitialValues(info.value),
       bindings: optionBindings,
     });
+    // Record the baseline when this model is created/reset, before a child can mutate its values.
     componentValues = captureComponentValues(model);
     return model;
   }),
@@ -492,7 +493,7 @@ function onComponentEvent(name, value) {
   // computedModel setter (which would clear selectedVariant / mark "custom").
   if (!name?.startsWith('update:')) return;
   const prop = name.slice('update:'.length);
-  const group = ['props', 'attributes'].find(name => options.value[name] && prop in options.value[name]);
+  const group = ['props', 'attributes'].find(groupName => options.value[groupName] && prop in options.value[groupName]);
   // Components may echo their initial value asynchronously (for example, an editor's create event).
   if (!group || areOptionValuesEqual(componentValues[group]?.[prop], value)) return;
   options.value = (model) => writeUpdateEvent(model, name, value);
