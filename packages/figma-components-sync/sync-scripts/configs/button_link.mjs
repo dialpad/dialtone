@@ -32,17 +32,15 @@ export default {
     size: [100, 200, 300, 400, 500],
     // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'
     state: ['default', 'hover', 'active', 'focus', 'disabled'],
+    loading: [false, true],
     linkKind: ['default', 'critical', 'warning', 'positive', 'info', 'muted', 'mention'],
     linkUnderline: [true, false],
     // No `linkInverted`: DtButton deprecates it in favour of the v-dt-mode directive.
   },
-  /**
-   * NO `loading` AXIS: this set shows the link, not the spinner. DtButton's own loading state is
-   * covered by DtButton and DtButtonIcon.
-   */
-  invalid: () => false,
-  variantName: c => `size=${c.size}, state=${c.state}, linkKind=${c.linkKind}, `
-    + `linkUnderline=${c.linkUnderline}`,
+  // Hover and active are not reachable while loading: the button is pointer-events:none.
+  invalid: c => c.loading === true && ['hover', 'active'].includes(c.state),
+  variantName: c => `size=${c.size}, state=${c.state}, loading=${c.loading}, `
+    + `linkKind=${c.linkKind}, linkUnderline=${c.linkUnderline}`,
   // kind and importance are dead props in link mode; they are pinned to the values the
   // component defaults to so the render is the one a consumer gets by writing `link`.
   props: c => ({
@@ -50,8 +48,16 @@ export default {
     size: Number(c.size), linkKind: c.linkKind, linkUnderline: c.linkUnderline,
     ...(c.state === 'active' ? { active: true } : {}),
     ...(c.state === 'disabled' ? { disabled: true } : {}),
+    ...(c.loading ? { loading: true } : {}),
   }),
   slots: () => [],
+  // While loading, `.d-loader` is an instance of the real DtLoader, exactly as in Button
+  // (see button's anatomySwap in component-axes.mjs). DtLoader must be built first.
+  anatomySwap: c => ({
+    selector: 'd-loader',
+    component: 'loader',
+    variant: { size: { 100: 200, 200: 200, 300: 300, 400: 400, 500: 500 }[c.size] },
+  }),
   // only these two need the CDP override; active/disabled are class-driven
   pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
 };

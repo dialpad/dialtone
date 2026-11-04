@@ -3,7 +3,7 @@
 Builds Figma component sets from the real rendered Dialtone components, then proves the result
 matches. The codebase is the source of truth. Figma is the output.
 
-Each variant is measured in light and dark. Button (440 variants), ButtonIcon (360), ButtonStacked (550), ButtonLink (350), Notice,
+Each variant is measured in light and dark. Button (440 variants), ButtonIcon (360), ButtonStacked (550), ButtonLink (560), Notice,
 Banner, Collapsible and Loader are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
@@ -416,11 +416,11 @@ DtButton in Figma is four sets, in code one component:
 - **DtButtonStacked** (`configs/button_stacked.mjs`, 550): the icon above or below the label
   (`blockStartIcon` / `blockEndIcon`). That flips the layout to a column and changes the spacing,
   which no property can do, so it is an axis (`blockIcon`) of its own set. No `loading` axis.
-- **DtButtonLink** (`configs/button_link.mjs`, 350): link mode, which pins `link: true` and has no
-  `kind`, `importance`, icons or `circle`, and no `loading` axis.
+- **DtButtonLink** (`configs/button_link.mjs`, 560): link mode, which pins `link: true` and has no
+  `kind`, `importance`, icons or `circle`.
 
 Folded into one set they were well past 6,000 variants. Split, each is under Figma's 1,000-variant
-warning. DtButton and DtButtonIcon show the loading state; DtButtonStacked and DtButtonLink do not.
+warning. DtButtonStacked is the only set without a `loading` axis.
 
 **Deprecated API is not exposed.** A prop or a prop value that the Vue component marks deprecated
 is not a Figma property or variant value, so designers are not steered to it. Button's `kind:
