@@ -1,0 +1,43 @@
+packages/dialtone-query-core/src/tools/tokens.ts
+  s_7f1d1d64baa803::t_dffbd843a94332 161-168
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_dffbd843a94332 199,201
+packages/dialtone-query-core/src/tools/components.ts
+  s_7f1d1d64baa803::t_dffbd843a94332 291
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_2b4d87eb2fb63b 124-126,128,149,152,170,177-178,193,207,235-236,257
+packages/dialtone-mcp-server/README.md
+  s_7f1d1d64baa803::t_a515033f256aca 7
+packages/dialtone-mcp-server/RETRIEVAL.md
+  s_7f1d1d64baa803::t_8e36e1b4c1c5d1 3,5,7,9,11,13,15,17,19,21,23
+packages/dialtone-mcp-server/scripts/query-tools.test.mjs
+  s_7f1d1d64baa803::t_b65ef99fc509d0 58-60,103-120,122-139,141-155,157-158,160-163,165-177,181,242,244-250,252-253,255-257,259-277,279-287,289-299,301,303-312,314-323,325-349,351-372,374-386,389-416
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_7f1d1d64baa803::t_27cba09687c620 20-24,40,43-47,52,57,62,67,72,176-177,179,183,190,255-293,339,399,402-403,407,410-442,445-447,456-501,511-517
+packages/dialtone-query-core/src/index.ts
+  s_7f1d1d64baa803::t_01bb5fed4a81cb 74
+packages/dialtone-query-core/src/value-retrieval.ts
+  s_7f1d1d64baa803::t_7025cfa485279c 1,3-4,10-16
+packages/dialtone-query-core/tests/tools/docs.test.ts
+  s_7f1d1d64baa803::t_ba5308b891b1bc 223-226
+packages/dialtone-query-core/tests/tools/tokens.test.ts
+  s_7f1d1d64baa803::t_7d046495555746 1-14
+packages/dialtone-query-core/tests/value-retrieval.test.ts
+  s_7f1d1d64baa803::t_7249d8148a5d93 2,4-5,7-8,10-15,19-23,25,32-33,35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b27b8a66f0713ec08593e747ba495f49ea6fb29c",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

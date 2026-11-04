@@ -1,0 +1,26 @@
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.vue
+  s_c36d8df9f9b2e4::t_dcd8d6246b93c1 720
+  s_c36d8df9f9b2e4::t_07cb1052389a8e 1104,1114-1120,1125-1127,1129-1137,1157-1163
+  s_c36d8df9f9b2e4::t_9264d779af4651 1155-1156
+  s_c36d8df9f9b2e4::t_f68193ed45050d 72-73
+  s_c36d8df9f9b2e4::t_d61ab3dffb113f 1105-1113,1121-1124,1128,1138-1154
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.test.js
+  s_c36d8df9f9b2e4::t_1c2f521e59bb91 1817,1850
+  s_c36d8df9f9b2e4::t_6d3039b767dd00 1807-1816,1818-1849,1851-1853
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7d1d30e54bf94ccd67a0b36558c228e828e27a74",
+  "prompts": {},
+  "sessions": {
+    "s_c36d8df9f9b2e4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3adcdd3d-432d-430a-abbf-0295687cfa55",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
