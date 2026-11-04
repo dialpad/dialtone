@@ -6,6 +6,27 @@ const unsupportedComponent = { name: 'DtDropdown', props: {} };
 
 describe('info.js test', function () {
   describe('getComponentInfo', function () {
+    it('preserves union types and a usable initial value for forwarded attributes', function () {
+      const info = getComponentInfo(supportedComponent, {
+        displayName: 'DtCard',
+        props: [],
+        tags: {
+          property: [{
+            name: 'trailingClass',
+            description: 'attribute',
+            type: {
+              name: 'union',
+              elements: [{ name: 'String' }, { name: 'Array' }, { name: 'Object' }],
+            },
+          }],
+        },
+      });
+
+      const attribute = info.attributes.find(attribute => attribute.name === 'trailingClass');
+      expect(attribute.types).toEqual(['string', 'array', 'object']);
+      expect(attribute.initialValue).toBe('');
+    });
+
     it('supports prop default factories that read raw props', function () {
       const component = {
         props: {

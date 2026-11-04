@@ -32,6 +32,11 @@ represents an intentional `undefined`.
 `getControlByValue(value)` applies when the current value already implies a
 better active control. `null`, `undefined`, and `UNSET` map to `null`.
 
+Forwarded attributes use component-level JSDoc, for example
+`@property {String|Array|Object} trailingClass attribute`. Attribute decoding
+preserves the declared types and initializes the value from the first type's
+control default. The component remains responsible for forwarding the attribute.
+
 ## Explicit slider opt-in
 
 For a property suited to exploration along a numeric scale, add editor metadata:
