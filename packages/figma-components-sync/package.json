@@ -4,6 +4,7 @@
   "description": "Measures real rendered Dialtone Vue components and builds matching Figma component variant sets via the Plugin API",
   "scripts": {
     "lint": "eslint --fix sync-scripts",
+    "test": "node --test sync-scripts/",
     "build-spec": "node sync-scripts/build-spec.mjs",
     "run-batch": "node sync-scripts/run-batch.mjs",
     "check-all": "node sync-scripts/check-all.mjs",

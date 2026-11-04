@@ -7,17 +7,22 @@ Each variant is measured in light and dark. Button (560 variants), ButtonIcon (4
 Banner, Collapsible and Loader are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
-Not in CI. It needs a browser, a Figma PAT, and a scratch file that is nobody's source of
-truth. Credentials live in `packages/figma-components-sync/.env` (`PERSONAL_ACCESS_TOKEN`,
-`FILE_KEY`, `TOKENS_FILE_KEY`), gitignored. Keep it private to your user. See the package README for what each
-one is.
+Not in CI. It needs a browser, a Figma PAT, and a tokens file to build into. Credentials live in
+`packages/figma-components-sync/.env` (`PERSONAL_ACCESS_TOKEN`, `PREVIEW_FILE_KEY`,
+`MAIN_FILE_KEY`), gitignored. Keep it private to your user. See the package README for what each
+one is and for how targets work.
 
 ## The one command
 
+Every command takes `--target preview|main`; the file it names owns the Dialtone variables.
+The run prints the target and the file's name before it does anything.
+
 ```bash
-node sync-scripts/run-batch.mjs loader collapsible            # nothing depends on these
-node sync-scripts/run-batch.mjs button button_icon button_link # Button's spinner is an instance of Loader
-node sync-scripts/run-batch.mjs notice banner                 # their action is an instance of Button
+node sync-scripts/run-batch.mjs --icons --target preview                 # first: the icon library
+node sync-scripts/run-batch.mjs loader collapsible --target preview      # nothing depends on these
+node sync-scripts/run-batch.mjs button --target preview                  # Button's spinner is an instance of Loader
+node sync-scripts/run-batch.mjs button_icon button_link --target preview # same dependency, separate run
+node sync-scripts/run-batch.mjs notice banner --target preview           # their action is an instance of Button
 ```
 
 A component that is an INSTANCE of another carries that component's variant ids, and building the
@@ -177,10 +182,9 @@ every use is recorded in the run's allowances. A centred child (the loading spin
 offset from the centre, since the parent is wider. Measured: 91 distinct calc-derived values across
 six sets (about 11,000 layer properties) and 20 percentage corners, now 0 unbound in Figma.
 
-**Text** uses the Dialtone library's published text styles, imported by key at the start of each
-build (`build-data/text-styles.json`, read from the library file with `use_figma`: the REST styles
-endpoint needs a token scope the experiment token lacks). A style is applied only when size,
-weight, family and line height ALL match the measurement; a style is never rounded to the nearest.
+**Text** uses the text styles that live in the target file (the styles sync writes them there). A
+style is applied only when size, weight, family and line height ALL match the measurement; a style
+is never rounded to the nearest.
 
 **Text with no matching style is bound to the font variables instead**, so no text layer is a
 hard-coded value: font size, weight and family are bound by value to the primitive variables

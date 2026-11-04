@@ -26,7 +26,7 @@ project has already hit once.
 ## Status
 
 Not in CI: it needs a real browser, a Figma desktop session (the plugin can only be launched by
-a person) and a scratch file. Reviewers rely on the check output recorded in the PR.
+a person) and write access to a tokens file. Reviewers rely on the check output recorded in the PR.
 
 Registered so far, built with the current model and checked clean: Button, ButtonIcon, ButtonStacked,
 ButtonLink, Notice, Banner, Collapsible and Loader. More components are added in batches, each with its
@@ -47,8 +47,31 @@ into a chat, a PR or a log.
 | Variable | What |
 | --- | --- |
 | `PERSONAL_ACCESS_TOKEN` | A Figma personal access token that can read files and variables |
-| `FILE_KEY` | The scratch file the components are built into. Nobody's source of truth |
-| `TOKENS_FILE_KEY` | The file that holds the published Dialtone variables (the unrestricted collection). Library variables are resolved from it by name and imported by key |
+| `PREVIEW_FILE_KEY` | The preview tokens file (target `preview`) |
+| `MAIN_FILE_KEY` | The main tokens file (target `main`) |
+
+## Targets
+
+Components are built into the Figma file that **owns** the Dialtone variable collection, so
+the hidden tokens bind locally and a file that consumes the components sees one Appearance
+toggle. Pick the file with `--target preview` or `--target main` on every command (or set
+`SYNC_TARGET`). There is no default target.
+
+| Target | File | Notes |
+| --- | --- | --- |
+| `preview` | the preview tokens file, home collection "Dialtone 2026 Preview" | Safe to rebuild; start here |
+| `main` | the main tokens file, home collection "Dialtone 2026" | Asks for `--yes` before it writes |
+
+Each target keeps its own state under `sync-scripts/build-data/<target>/` (component set ids,
+build fingerprints, the icon library), so building into one never touches the other. To point
+at another file, copy the shape of `sync-scripts/targets.mjs` into the gitignored
+`sync-scripts/targets.local.mjs`.
+
+Build order within a target: Icons (`--icons`), Loader, Button, then the other sets (a set that
+uses another needs it built first). The tokens in the target file must be current: sync the
+variables first (`pnpm --filter dialtone-tokens sync:variables`; for the preview file add
+`--file-key <preview key>` and set `COLLECTION_NAME="Dialtone 2026 Preview"`, otherwise it would
+create a second collection), or a stale composed colour fails the checks.
 
 Files that already have a committed home in `packages/dialtone-tokens/sync-scripts/`
 (`color.ts`, `figma_api.ts`, `token_*.ts`, `transform.ts`, `utils.ts`, `sync_*.ts`) are not

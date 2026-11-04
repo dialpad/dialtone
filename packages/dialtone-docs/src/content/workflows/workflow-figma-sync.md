@@ -143,9 +143,9 @@ Two more things change on the way across:
 
 Component variant sets are a separate pipeline in `packages/figma-components-sync`. It renders the real Vue components in a headless browser, reads the browser's own computed styles, and builds matching Figma component sets from that, bound to the same variables this sync writes. Code is again the source of truth.
 
-Unlike the token sync it does not run in CI. Figma only lets a person launch a plugin, so one step is manual: run the "Dialtone Components Sync" dev plugin in the scratch file and click **Build**. Checks then compare the result against the browser (values in both colour modes, token bindings, both slot states of a merged set, and a raster screenshot diff), and the check output is what a pull request records.
+Unlike the token sync it does not run in CI. Figma only lets a person launch a plugin, so one step is manual: run the "Dialtone Components Sync" dev plugin in the target tokens file and click **Build**. Checks then compare the result against the browser (values in both colour modes, token bindings, both slot states of a merged set, and a raster screenshot diff), and the check output is what a pull request records.
 
-The variables it binds come from the published library, so a token change reaches components only after this sync has run and the library has been republished. For how to run it, what each check catches and its known limits, see the [sync-scripts README](https://github.com/dialpad/dialtone/blob/staging/packages/figma-components-sync/sync-scripts/README.md).
+Components are built into the tokens file that owns the Dialtone collection (`--target preview` or `--target main`), so they bind to its variables directly and there is one Appearance toggle, not two. A token change reaches components only after this sync has run in that file. For how to run it, what each check catches and its known limits, see the [sync-scripts README](https://github.com/dialpad/dialtone/blob/staging/packages/figma-components-sync/sync-scripts/README.md).
 
 ## The other direction
 
