@@ -158,17 +158,23 @@ describe('DtAvatar Tests', () => {
     });
 
     describe('When no seed, family, variant or color is provided', () => {
-      it('should keep the same random color across re-renders', async () => {
-        const family = wrapper.find('[data-qa="dt-avatar"]').attributes('data-avatar-family');
-        const variant = wrapper.find('[data-qa="dt-avatar"]').attributes('data-avatar-variant');
+      it('should keep the same random color after every re-render', async () => {
+        const readColor = () => {
+          const el = wrapper.find('[data-qa="dt-avatar"]');
+          return {
+            family: el.attributes('data-avatar-family'),
+            variant: el.attributes('data-avatar-variant'),
+          };
+        };
+        const initialColor = readColor();
+        const colors = [];
 
         for (let i = 0; i < 5; i++) {
           await wrapper.setProps({ fullName: `Jaqueline Nackos ${i}`, size: i % 2 ? 'lg' : 'sm' });
+          colors.push(readColor());
         }
 
-        const el = wrapper.find('[data-qa="dt-avatar"]');
-        expect(el.attributes('data-avatar-family')).toBe(family);
-        expect(el.attributes('data-avatar-variant')).toBe(variant);
+        expect(colors).toEqual(Array(5).fill(initialColor));
       });
     });
 

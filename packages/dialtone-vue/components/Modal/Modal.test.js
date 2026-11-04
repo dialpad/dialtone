@@ -225,6 +225,49 @@ describe('DtModal Tests', () => {
       });
     });
 
+    describe('When the footer slot content toggles without remounting', () => {
+      const ToggleHost = {
+        components: { DtModal },
+        props: { showFooter: Boolean },
+        template: `
+          <dt-modal header-text="Header" copy="Copy" open>
+            <template v-if="showFooter" #footer><span data-qa="test-footer" /></template>
+          </dt-modal>
+        `,
+      };
+      const mountHost = (showFooter) => mount(ToggleHost, {
+        props: { showFooter },
+        global: { plugins: [DtFocustrapDirective] },
+        attachTo: document.body,
+      });
+      const findFooter = (host) => host.find('[data-qa="test-footer"]');
+
+      it('should not render the footer initially when the slot is absent', () => {
+        const host = mountHost(false);
+
+        expect(findFooter(host).exists()).toBe(false);
+        host.unmount();
+      });
+
+      it('should render the footer after the slot is provided', async () => {
+        const host = mountHost(false);
+
+        await host.setProps({ showFooter: true });
+
+        expect(findFooter(host).exists()).toBe(true);
+        host.unmount();
+      });
+
+      it('should not render the footer after the slot is removed again', async () => {
+        const host = mountHost(true);
+
+        await host.setProps({ showFooter: false });
+
+        expect(findFooter(host).exists()).toBe(false);
+        host.unmount();
+      });
+    });
+
     describe('When slots are provided', () => {
       it('Should display slotted header instead of headerText', () => {
         mockSlots = {
