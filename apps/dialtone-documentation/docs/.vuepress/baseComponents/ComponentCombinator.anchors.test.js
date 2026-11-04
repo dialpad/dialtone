@@ -60,11 +60,11 @@ it('moves focus to the anchor target without asking focus to scroll the document
 });
 
 it.each(['playground', 'content demo'])(
-  'keeps %s placeholders inert without creating a pop or resetting edits', async location => {
+  'keeps %s placeholders inert without creating a pop or resetting edits', async placement => {
     await mountAnchors({ preset: 'image', other: 'keep' }, { history: createWebHistory() });
     combinator.vm.onComponentEvent('update:fullName', 'EDITED');
     await settle();
-    const container = location === 'playground' ? combinator.find('div').element : document.createElement('section');
+    const container = placement === 'playground' ? combinator.find('div').element : document.createElement('section');
     const anchor = document.createElement('a');
     anchor.href = '#';
     anchor.textContent = 'Demo link';
