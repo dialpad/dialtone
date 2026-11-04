@@ -67,6 +67,11 @@ import {
   SEGMENTED_CONTROL_SIZE_DEFAULT,
 } from './SegmentedControlConstants.js';
 
+/**
+ * A choice within DtSegmentedControl. Additional attributes are forwarded to DtButton.
+ * trailingClass customizes the trailing slot container and accepts a string, array or object.
+ * @property {String|Array|Object} trailingClass attribute
+ */
 defineOptions({
   name: 'DtSegmentedControlItem',
   inheritAttrs: false,
