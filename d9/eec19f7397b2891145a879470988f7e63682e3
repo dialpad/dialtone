@@ -1,0 +1,16 @@
+packages/dialtone-vue/components/Chip/ChipVariants.story.vue
+  h_c15b5755534093 23,34,36,44-78
+apps/dialtone-documentation/docs/components/chip.md
+  h_c15b5755534093 85-87,90-91,93-101,106-107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "d9eec19f7397b2891145a879470988f7e63682e3",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
