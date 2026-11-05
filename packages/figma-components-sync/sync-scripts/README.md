@@ -4,7 +4,7 @@ Builds Figma component sets from the real rendered Dialtone components, then pro
 matches. The codebase is the source of truth. Figma is the output.
 
 Each variant is measured in light and dark. Button (440 variants), ButtonIcon (360), ButtonStacked (550), ButtonLink (560), Notice,
-Banner, Collapsible, Loader, Input (560) and InputTextarea (140) are the components registered so far, built with the model
+Banner, Collapsible, Loader, Input (560), InputTextarea (140) and SplitButton (220) are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
 Not in CI. It needs a browser, a Figma PAT, and a tokens file to build into. Credentials live in
