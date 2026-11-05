@@ -132,8 +132,12 @@ const builderHash = createHash('sha256')
 let icons = null;
 if (WITH_ICONS) try { icons = JSON.parse(readFileSync(`${HERE}/build-data/icons-manifest.json`, 'utf8')); }
 catch { /* not generated; components build without it */ }
+// The name of the file this run builds into, passed by run-batch from Figma's own answer. The plugin
+// cannot be pointed at a file: it builds into whichever one is open, so it checks the name itself.
+// Absent (build-plugin run on its own), nothing is checked.
+const expectFile = process.env.FIGMA_SYNC_EXPECT_FILE || null;
 writeFileSync(`${SHARD_DIR}/index.json`,
-  JSON.stringify({ builder: builderHash, components: manifest, icons }, null, 2));
+  JSON.stringify({ builder: builderHash, expectFile, components: manifest, icons }, null, 2));
 
 // ── generate code.js from the versioned builder ─────────────────────────────
 const builder = readFileSync(`${HERE}/generic-builder.js`, 'utf8');
@@ -238,6 +242,12 @@ async function main () {
                     spreadProbe: await probeSpreadWrite() };
   runRuntime = runtime;
   const index = await (await fetch(BASE + '/shards/index.json')).json();
+  // A build clears and rebuilds the pages it owns, and the plugin builds into whichever file is
+  // open, so refuse before anything is written when that is not the file the run targets.
+  if (index.expectFile && figma.root.name !== index.expectFile) {
+    throw new Error('wrong file: this run builds into "' + index.expectFile + '" but the open file is "'
+      + figma.root.name + '". Nothing was built. Open the right file and run the command again.');
+  }
   const report = runReport;
 
   // Icons FIRST: a component that places an icon instance needs the icon component to

@@ -60,13 +60,19 @@ if (!names.length && !WANT_ICONS) {
  * A build clears and rebuilds the pages it owns, so the file is the one thing that must never be
  * a surprise. The name comes from Figma itself, so a wrong or inaccessible key fails here, before
  * anything is built; a target marked `confirm` (the real file) also needs `--yes`.
+ *
+ * The name is also handed to the plugin (see `FIGMA_SYNC_EXPECT_FILE` below), which refuses to build
+ * when the open file is not this one: a plugin builds into whichever file is open, and clicking
+ * Build in the wrong one would otherwise write there.
  */
+let TARGET_FILE_NAME = null;
 {
   const r = await fetch(`https://api.figma.com/v1/files/${TARGET.fileKey}?depth=1`,
     { headers: { 'X-Figma-Token': process.env.PERSONAL_ACCESS_TOKEN || '' } })
     .catch((e) => { console.error(`cannot reach Figma to check the target file: ${e.cause ? e.cause.code || e.cause.message : e.message}`); process.exit(2); });
   if (!r.ok) { console.error(`target "${TARGET.name}": Figma answered ${r.status} for its file key (${TARGET.fileKeyEnv})`); process.exit(2); }
   const meta = await r.json();
+  TARGET_FILE_NAME = meta.name || null;
   console.log(`target: ${TARGET.name}  (${TARGET.label}: "${meta.name}", home collection "${TARGET.homeCollection}")`);
   if (TARGET.confirm && !args.includes('--yes')) {
     console.error(`"${TARGET.name}" is a real file: add --yes to build into it`);
@@ -171,7 +177,7 @@ if (WANT_ICONS) process.stdout.write(run('build-icon-library.mjs', []));
 // re-process all the icon shards.
 process.stdout.write(run('build-plugin.mjs',
   [...(names.length ? names : ['--no-components']), ...(WANT_ICONS ? ['--with-icons'] : [])],
-  { env: { ...process.env, FIGMA_SYNC_RUN_TOKEN: RUN_TOKEN } }));
+  { env: { ...process.env, FIGMA_SYNC_RUN_TOKEN: RUN_TOKEN, FIGMA_SYNC_EXPECT_FILE: TARGET_FILE_NAME || '' } }));
 
 // ── 3. preflight before anyone clicks ──────────────────────────────────────
 // Cheaper to fail here than to leave a half-built page behind: a plugin run is not
