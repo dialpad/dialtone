@@ -1,0 +1,42 @@
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 434-453
+packages/combinator/src/lib/slider_control.test.js
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 53-56,66-71,73-74,92,94,127
+packages/combinator/src/components/controls/control_slider.vue
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 76-77,79-81
+packages/combinator/src/lib/utils.js
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 52-60
+  s_bf7dc52eb2ba4c::t_3375e78d6451ec 51
+packages/combinator/src/components/code_editor/code_editor.vue
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 97,203
+packages/combinator/src/components/code_editor/code_editor_tag_attributes.vue
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 42,102
+packages/combinator/src/components/controls/control_slider.test.js
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 91-101,103-109
+packages/combinator/src/lib/control.test.js
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 53
+packages/combinator/src/components/renderer/renderer.vue
+  s_bf7dc52eb2ba4c::t_1c1dfd8c16792c 30
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 79-83
+packages/combinator/src/lib/slider_control.js
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 17,22-25,34,56,61-64
+  s_bf7dc52eb2ba4c::t_31a3ef665c8678 65
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 85-121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "afb57216147da409b84a1ed9f07c7fe37158ce11",
+  "prompts": {},
+  "sessions": {
+    "s_bf7dc52eb2ba4c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09189915-dc49-412a-9fd6-f1205383ecd0",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
