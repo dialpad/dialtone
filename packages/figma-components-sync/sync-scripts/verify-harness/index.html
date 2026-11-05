@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Verify Harness</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff}
+  /* max-content, not the viewport. #root was a full-width block, so a block-level
+     component root (DtCheckbox, DtNotice) measured 1200px — the harness width — and
+     was emitted as a 1200px-wide Figma component. Inline-level roots hug either way. */
+  #root{padding:40px;inline-size:max-content}
+  /* .d-btn transitions background-color, border and box-shadow. Without this,
+     getComputedStyle reads INTERPOLATED mid-transition values and every colour
+     comparison drifts by an arbitrary alpha. */
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+</style>
+</head><body><div id="root"></div><script type="module" src="./main.js"></script></body></html>
