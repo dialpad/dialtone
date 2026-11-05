@@ -1249,6 +1249,15 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         // collapses to its minimum (measured: Notice's content came out 34px beside 44px of text,
         // which then overlapped the action), and a hugging row already grows with its content.
         if (kd.gr && f.primaryAxisSizingMode === 'FIXED') kid.layoutGrow = 1;
+        /**
+         * `align-items: stretch` (SplitButton: `.d-split-btn`) makes every child as tall as the
+         * tallest, whatever it measured. The end half is measured at the browser's height, but the
+         * start half hugs its label and its padding snaps to a token, so the row ends up taller
+         * than the end half and the end half sits short at the top. FILL gives the end half the
+         * row's height, as the stretch does. Not a child with a height of its own (`ph`), its own
+         * `align-self` (`ns`, `sc`) or an absolutely positioned one.
+         */
+        if (d.st && !kd.sc && !kd.ns && !kd.ph) kid.layoutSizingVertical = 'FILL';
         if (kd.sc) {
           kid.layoutSizingVertical = 'FILL';
           if (kid.layoutMode === 'VERTICAL') kid.primaryAxisAlignItems = 'CENTER';

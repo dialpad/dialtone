@@ -500,6 +500,11 @@ function encodeNode (n) {
   if (flexLayoutOn) {
     if (lay.grow) out.gr = 1;
     if (lay.self === 'center') out.sc = 1;
+    // `st`: a ROW that stretches its children on the cross axis (`align-items: stretch`, which
+    // the `lay` slot above drops as a no-op). `ns`: a child that opts out with its own
+    // `align-self` (centre is `sc`). The builder fills the row's height with the rest.
+    if (lay.align === 'stretch' && lay.direction !== 'VERTICAL') out.st = 1;
+    if (['flex-start', 'start', 'flex-end', 'end', 'baseline', 'self-start', 'self-end'].includes(lay.self)) out.ns = 1;
     if (p.maxWidth) out.mw = [p.maxWidth.value, ti(p.maxWidth.token)];
   }
   out.box = [n.box ? n.box.w : 0, n.box ? n.box.h : 0];

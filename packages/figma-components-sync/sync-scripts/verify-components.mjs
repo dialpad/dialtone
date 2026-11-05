@@ -1386,6 +1386,26 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
     }
   }
 
+  /**
+   * STRETCHED SIBLINGS SHARE ONE HEIGHT. `align-items: stretch` makes a row's children as tall as
+   * the tallest, and the builder gives them that through FILL. Each node's own height still
+   * matches its browser measurement when the hugging sibling's padding snaps to a token, so
+   * every per-node check passed while DtSplitButton's end half sat 2px short of the start half.
+   * Compared with each other rather than with the browser: the browser's heights are all equal.
+   */
+  if (s.alignItems === 'stretch' && /flex/.test(s.display || '') && s.flexDirection !== 'column'
+      && figKids.length === domKids.length) {
+    const tall = Math.max(...domKids.map(k => k.box.h));
+    const hs = domKids
+      .map((k, i) => (Math.abs(k.box.h - tall) < 0.6 && k.style?.position !== 'absolute'
+        ? figKids[i].absoluteBoundingBox?.height : null))
+      .filter(h => h != null);
+    if (hs.length > 1 && Math.max(...hs) - Math.min(...hs) > 0.6) {
+      rec(variant, path, 'stretchedHeight', `all ${hs.length} children ${Math.max(...hs)}`,
+        hs.join(' / '), 'children of an align-items: stretch row differ in height');
+    }
+  }
+
   if (figKids.length !== domKids.length) {
     rec(variant, path, 'childCount', domKids.length, figKids.length,
         `dom [${domKids.map(k => k.classes.join('.') || k.tag).join(', ')}] vs figma [${figKids.map(k => k.name).join(', ')}]`);

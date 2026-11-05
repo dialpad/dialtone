@@ -28,13 +28,17 @@ stacks children in one cell (DtLoader's rings) is deliberately not auto-layout. 
 Collapsible, whose outer frames were not auto-layout before.
 `textStyles: false` keeps a component's text raw instead of applying the Dialtone library's text
 styles (ButtonLink: its underline axis conflicts with a shared Label property, see the README).
-`flexLayout: true` opts a component into three layout behaviours the builder otherwise leaves
+`flexLayout: true` opts a component into four layout behaviours the builder otherwise leaves
 out, so every other set stays as built: a flex child with `flex-grow` fills a row that has a fixed
 width, `align-self: center` is built as a stretched frame with centred content (the verifier checks
-the midpoint, not the height), and a root with a finite `max-inline-size` hugs up to it. Text-only
+the midpoint, not the height), a root with a finite `max-inline-size` hugs up to it, and the
+children of a row with `align-items: stretch` fill its height (the payload's `st` on the row, `ns`
+on a child that opts out with its own `align-self`). That last one is what keeps DtSplitButton's
+end half as tall as its start half once the start half's padding snaps to a token; the verifier's
+`stretchedHeight` check compares the siblings with each other, since each still matches the browser. Text-only
 block frames hug their width and keep the measured height, so retyped text grows the component but
 does not wrap: Figma has no equivalent of the CSS `text-box-trim`, and a hugging height would make
-the component taller than Dialtone. Used by Notice and Banner.
+the component taller than Dialtone. Used by Notice, Banner, Input, InputTextarea and SplitButton.
 `edgeSlots: { gap }` builds a Leading and a Trailing native slot that sit flush with the border, as
 Button's `leading` / `trailing` do through negative margins Figma cannot hold. The root loses its
 padding; a `content` wrapper carries the vertical padding, the gap and the existing children, and
