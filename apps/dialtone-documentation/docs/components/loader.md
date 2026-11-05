@@ -74,8 +74,9 @@ The loader inherits the text color of its parent through `currentColor`, so insi
 
 ## Accessibility
 
-- You can add an `aria-label` attribute to the loader to indicate a custom label.
-- If no `aria-label` is provided, the default value is "loading".
+- The loader has `role="img"` and an accessible name of "loading" by default. Use `aria-label` for a custom name or `aria-labelledby` to reference visible loading text.
+- Use `aria-hidden="true"` when nearby content already communicates the loading state. Explicit `role="none"` or `role="presentation"` also omits the loader's `aria-label`.
+- Caller-provided roles are preserved. The loader does not create a live region; the containing interface controls loading announcements.
 - When the user prefers reduced motion, the loader stops moving and gently pulses in opacity instead. This applies to both the dots and the spinner.
 
 ## Vue API

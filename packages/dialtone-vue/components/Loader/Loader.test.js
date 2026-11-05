@@ -6,6 +6,7 @@ const MOCK_DEFAULT_ARIA_LABEL = 'loading';
 const baseProps = {};
 
 let mockProps = {};
+let mockAttrs = {};
 
 describe('DtLoader Tests', function () {
   /**
@@ -18,6 +19,7 @@ describe('DtLoader Tests', function () {
   const updateWrapper = () => {
     wrapper = mount(DtLoader, {
       props: { ...baseProps, ...mockProps },
+      attrs: mockAttrs,
     });
 
     loadingIcon = wrapper.find('[data-qa="dt-loader-icon"]');
@@ -33,6 +35,7 @@ describe('DtLoader Tests', function () {
    */
   afterEach(() => {
     mockProps = {};
+    mockAttrs = {};
   });
 
   describe('Presentation Tests', () => {
@@ -112,8 +115,39 @@ describe('DtLoader Tests', function () {
   describe('Accessibility Tests', () => {
     describe('When ariaLabel is not set', () => {
       it('Has default aria label', () => {
+        expect(wrapper.attributes('role')).toBe('img');
         expect(wrapper.attributes('aria-label')).toBe(MOCK_DEFAULT_ARIA_LABEL);
+        expect(wrapper.attributes('aria-live')).toBeUndefined();
       });
+    });
+
+    it('Preserves a caller-provided role and label reference', () => {
+      mockAttrs = { role: 'progressbar', 'aria-labelledby': 'loading-label' };
+      updateWrapper();
+
+      expect(wrapper.attributes('role')).toBe('progressbar');
+      expect(wrapper.attributes('aria-labelledby')).toBe('loading-label');
+    });
+
+    it('Preserves a caller-hidden loader', () => {
+      mockAttrs = { 'aria-hidden': 'true' };
+      updateWrapper();
+
+      expect(wrapper.attributes('aria-hidden')).toBe('true');
+    });
+
+    it.each(['none', 'presentation'])('Omits the accessible label for role="%s"', async role => {
+      mockAttrs = { role };
+      updateWrapper();
+
+      expect(wrapper.attributes('role')).toBe(role);
+      expect(wrapper.attributes('aria-label')).toBeUndefined();
+
+      await wrapper.setProps({ role: 'img' });
+      expect(wrapper.attributes('aria-label')).toBe(MOCK_DEFAULT_ARIA_LABEL);
+
+      await wrapper.setProps({ role });
+      expect(wrapper.attributes('aria-label')).toBeUndefined();
     });
 
     describe('When ariaLabel is set', () => {

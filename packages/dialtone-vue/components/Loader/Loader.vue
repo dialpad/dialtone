@@ -1,7 +1,8 @@
 <template>
   <div
     :class="['d-loader', loaderKindClass]"
-    :aria-label="ariaLabel || 'loading'"
+    role="img"
+    :aria-label="accessibleLabel"
     data-qa="dt-loader"
   >
     <template v-if="isSpinner">
@@ -135,6 +136,11 @@ export default {
   },
 
   computed: {
+    accessibleLabel () {
+      if (['none', 'presentation'].includes(this.$attrs.role)) return undefined;
+      return this.ariaLabel || 'loading';
+    },
+
     isSpinner () {
       return this.kind === 'spinner';
     },
