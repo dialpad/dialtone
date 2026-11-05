@@ -16,11 +16,15 @@ const REF_LIST_ATTRS = new Set(['for', 'headers', 'list', 'form', 'aria-activede
 export const ROOT_ID = 'parity-root';
 
 // What id generators produce: Vue's getUniqueString (a prefix plus a module-level counter: dt12,
-// DtPopover__anchor3) and React's useId (:r0: in 18, «r0» in 19.0–19.1, _r_0_ from 19.2). Only these, and values
-// seen to change between two renders, are canonicalized when nothing has them as an id: any other dangling
-// reference is compared literally, so a port that points aria-controls at the wrong name fails.
-const GENERATED = /^(?:(?:dt|Dt[A-Za-z]+__[A-Za-z]+)\d+|:[rR]\w*:|«[rR]\w*»|_[rR]_\w*_)$/;
-export const looksGenerated = token => GENERATED.test(token);
+// DtPopover__anchor3) and React's useId (:r0: in 18, «r0» in 19.0–19.1, _r_0_ from 19.2). Components build ids
+// from them (`listbox-${useId()}`, `${id}-panel`), so a token counts as generated when a React marker appears
+// anywhere in it, or when one of its dash-separated parts is a Vue counter id. Only these, and values seen to change
+// between two renders, are canonicalized when nothing has them as an id. The React side renders once, so it can't
+// rely on the second check. Any other dangling reference is compared literally, so a port that points
+// aria-controls at the wrong name fails.
+const VUE_COUNTER_ID = /^(?:dt|Dt[A-Za-z]+__[A-Za-z]+)\d+$/;
+const REACT_ID_MARKER = /:[rR]\w*:|«[rR]\w*»|_[rR]_\w*_/;
+export const looksGenerated = token => REACT_ID_MARKER.test(token) || token.split('-').some(part => VUE_COUNTER_ID.test(part));
 
 const unwrapRoot = node => node.nodeType === 1 && (node.id === ROOT_ID || node.hasAttribute('data-v-app'))
   ? [...node.childNodes].flatMap(unwrapRoot)
