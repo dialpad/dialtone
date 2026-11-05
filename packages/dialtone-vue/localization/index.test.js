@@ -9,6 +9,21 @@ describe('DialtoneLocalization Tests', () => {
   });
 
   describe('getPreferredLocale', () => {
+    it.each(['access', 'read'])('falls back to English when storage %s throws', failure => {
+      const storage = failure === 'access'
+        ? vi.spyOn(window, 'localStorage', 'get')
+        : vi.spyOn(Storage.prototype, 'getItem');
+      storage.mockImplementation(() => {
+        throw new DOMException('Storage is blocked', 'SecurityError');
+      });
+
+      try {
+        expect(DialtoneLocalization.getPreferredLocale()).toBe('en-US');
+      } finally {
+        storage.mockRestore();
+      }
+    });
+
     it('returns the stored locale when it is supported', () => {
       window.localStorage.setItem(localeManagerStorageKey, 'fr-FR');
 
@@ -28,5 +43,22 @@ describe('DialtoneLocalization Tests', () => {
 
       expect(DialtoneLocalization.getPreferredLocale()).toBe('de-DE');
     });
+  });
+
+  it('initializes with blocked storage without replacing the host handler', () => {
+    const previousHandler = window.onstorage;
+    const hostHandler = () => {};
+    window.onstorage = hostHandler;
+    const storage = vi.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
+      throw new DOMException('Storage is blocked', 'SecurityError');
+    });
+
+    try {
+      new DialtoneLocalization();
+      expect(window.onstorage).toBe(hostHandler);
+    } finally {
+      storage.mockRestore();
+      window.onstorage = previousHandler;
+    }
   });
 });
