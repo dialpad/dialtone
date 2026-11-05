@@ -19,7 +19,7 @@ Run these from the repo root.
 
 ### The comparison
 
-- **Sidebar.** `compare/generate-stories.mjs` reads Vue's `index.json` and writes one story per Vue story into `compare/generated/` (gitignored), with the same title and export name. So the sidebar and every story id match Vue's. It runs each time the comparison starts. Restart the comparison to pick up stories added to Vue since.
+- **Sidebar.** `compare/generate-stories.mjs` reads Vue's `index.json` and writes one story per Vue story into `compare/generated/` (gitignored), with the same title and export name, so the sidebar and every generated story's id match Vue's. It skips any Vue story it can't reproduce (no export name, an export name that isn't a plain identifier, or one that doesn't give Vue's id) and lists those in its output. It runs each time the comparison starts. Restart the comparison to pick up stories added to Vue since.
 - **Frames.** Each story shows Vue's and React's preview of the same story id side by side. The React side says "Not ported yet" when React's Storybook has no story with that id. If React has stories under the same component id, title or story file name, it lists them ("React has: …"): a ported story with a wrong title or export name shows up there. The generator also logs every React story id Vue doesn't have, when React's Storybook is up by then.
 - **Hidden stories.** A Vue story hidden from the dev sidebar (`tags: ['!dev']`) is hidden in the comparison too.
 - **Theme.** The Theme and Contrast toolbars go into both frames' URLs. The dark-mode toggle is sent to each frame when it renders.

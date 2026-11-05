@@ -8,9 +8,9 @@ import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 import { ArgControls } from './ArgControls';
 import type { ArgType } from './ArgControls';
 import {
-  argsParam,
   fetchStories,
   iframeUrl,
+  overridesParam,
   parseChannelMessage,
   postChannelEvent,
   storybookUrl,
@@ -67,16 +67,30 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
   // ref; the dark-mode effect below keeps it current.
   const isDarkRef = useRef(isDark);
 
+  // React's Storybook can come up after this page, or restart: while its index
+  // doesn't answer, check again every 2s, so the pane picks it up without a reload.
   useEffect(() => {
     let cancelled = false;
-    void fetchStories('react').then((stories) => {
-      if (cancelled) return;
-      setReactStatus(!stories ? 'unreachable' : stories.has(storyId) ? 'ported' : 'missing');
-      if (stories && !stories.has(storyId)) {
-        setLookalikes(findLookalikes(stories, { id: storyId, title, importPath: vueImportPath }));
-      }
-    });
-    return () => { cancelled = true; };
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const check = () => {
+      void fetchStories('react').then((stories) => {
+        if (cancelled) return;
+        if (!stories) {
+          setReactStatus('unreachable');
+          timer = setTimeout(check, 2000);
+          return;
+        }
+        setReactStatus(stories.has(storyId) ? 'ported' : 'missing');
+        if (!stories.has(storyId)) {
+          setLookalikes(findLookalikes(stories, { id: storyId, title, importPath: vueImportPath }));
+        }
+      });
+    };
+    check();
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, [storyId, title, vueImportPath]);
 
   useEffect(() => {
@@ -112,7 +126,7 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
 
   const initialArgs = vue?.initialArgs ?? {};
   const values = { ...initialArgs, ...overrides };
-  const args = argsParam(initialArgs, values);
+  const args = overridesParam(overrides);
   const overridden = new Set(Object.keys(overrides));
   // Storybook silently drops a URL arg the story doesn't declare, or can't map
   // to the arg's type (e.g. a React prop typed `X | null`); a story can also
@@ -125,10 +139,9 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
   const changeArgs = (next: Args) => {
     setOverrides(next);
     // A changed args string reloads both frames, so their earlier reports no
-    // longer apply. An unchanged one (the value equals the story's own, or
-    // Storybook's encoding dropped it) reloads nothing: keep the reports, so a
-    // dropped value shows up as not applied.
-    if (argsParam(initialArgs, { ...initialArgs, ...next }) !== args) setApplied({});
+    // longer apply. An unchanged one (Storybook's encoding dropped the value)
+    // reloads nothing: keep the reports, so a dropped value shows up as not applied.
+    if (overridesParam(next) !== args) setApplied({});
   };
   const showControls = vue && !vue.parameters?.controls?.disable;
 
@@ -217,7 +230,10 @@ function NotPorted ({ status, storyId, lookalikes }: { status: ReactStatus; stor
         : (
           <>
             <strong>React Storybook not running</strong>
-            <span>Nothing answers on :{ports.react}. Start it with <code>pnpm nx run dialtone-react:storybook</code>.</span>
+            <span>
+              Nothing answers on :{ports.react}. Start it with <code>pnpm nx run dialtone-react:storybook</code>;
+              {' '}this pane picks it up once it answers.
+            </span>
           </>
         )}
     </div>

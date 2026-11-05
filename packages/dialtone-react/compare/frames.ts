@@ -10,7 +10,15 @@ export const origin = (side: Side) => `http://localhost:${ports[side]}`;
 // Storybook's own URL encoding (the manager's), which drops values it deems
 // unsafe: strings other than letters, digits, spaces, `_` and `-`, numbers or
 // colours, plus anything not serialisable.
-export const argsParam = (initialArgs: Args, args: Args) => buildArgsParam(initialArgs, args);
+//
+// Every override goes into the URL, even one equal to Vue's initial value:
+// React's story may start from another. An unset override is diffed against
+// null, so it's sent as `key:!undefined`; against a missing key the encoder
+// would leave it out.
+export const overridesParam = (overrides: Args) => buildArgsParam(
+  Object.fromEntries(Object.keys(overrides).filter(key => overrides[key] === undefined).map(key => [key, null])),
+  overrides,
+);
 
 export const isUrlSafe = (key: string, value: unknown) =>
   value === undefined || buildArgsParam({}, { [key]: value }) !== '';
