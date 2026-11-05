@@ -4,7 +4,7 @@ Builds Figma component sets from the real rendered Dialtone components, then pro
 matches. The codebase is the source of truth. Figma is the output.
 
 Each variant is measured in light and dark. Button (440 variants), ButtonIcon (360), ButtonStacked (550), ButtonLink (560), Notice,
-Banner, Collapsible and Loader are the components registered so far, built with the model
+Banner, Collapsible, Loader, Input (560) and InputTextarea (140) are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
 Not in CI. It needs a browser, a Figma PAT, and a tokens file to build into. Credentials live in
@@ -213,6 +213,15 @@ text styles leave it unbound for the same reason. This covers:
 
 Measured: of 2,443 text layers across the six sets, 827 use a library style and 1,616 are bound to
 the font variables; none is a literal.
+
+**A native control's value** (DtInput's `<input>` and `<textarea>`) is painted by the browser from a
+property, not from a text node, so the walk saw a bare box. The harness adds a synthetic text child
+(`nativeValueNode` in `verify-harness/main.js`) at the position the browser draws the value, with the
+control's font and colour, and the config maps it to a TEXT property (`textProps: { Value: 'Value' }`).
+It has its own `selector` for the spec's style maps and a `cdpSelector` for browser lookups, and
+`tokenKeys` limits it to the text tokens, so the control's radius and padding tokens are not applied to
+a text node. Only the text-like types are read: a password shows bullets, and date, time, file and color
+draw widgets Figma cannot reproduce.
 
 ## The checks
 
