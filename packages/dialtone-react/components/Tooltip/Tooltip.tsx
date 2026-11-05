@@ -414,7 +414,9 @@ export function DtTooltip ({
     const anchorEl = externalAnchorElement;
     if (!anchorEl) return undefined;
     const onEnter = (event: Event) => onExternalAnchorEnter(event.type);
-    const onLeave = (event: Event) => onExternalAnchorLeave(event.type, event instanceof KeyboardEvent ? event.code : undefined);
+    // Not `instanceof KeyboardEvent`: an anchor in another realm (an iframe) has its own KeyboardEvent constructor.
+    const onLeave = (event: Event) =>
+      onExternalAnchorLeave(event.type, 'code' in event ? (event as KeyboardEvent).code : undefined);
     const enterEvents = ['focusin', 'mouseenter'];
     const leaveEvents = ['focusout', 'mouseleave', 'keydown'];
     enterEvents.forEach(type => anchorEl.addEventListener(type, onEnter));
