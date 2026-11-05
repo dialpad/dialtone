@@ -14,8 +14,7 @@
  * Options:
  *   --dry-run                report what would change, post nothing
  *   --file-key KEY            override FILE_KEY from .env
- *   --unrestricted-file-key KEY   override UNRESTRICTED_FILE_KEY from .env
- *   --out FILE                also write the payload to a file, for inspection
+ *   --out FILE               also write the payload to a file, for inspection
  *   --local-snapshot FILE     skip the REST read of existing variables and use
  *                             this file instead — a JSON dump shaped like
  *                             ApiGetLocalVariablesResponse. Recovery valve for
@@ -39,7 +38,7 @@ import {
   FigmaType, VariableScope,
 } from './variable_policy.js';
 import type { Token } from './token_types.js';
-import { toNumber as toNumberWithUnits, collectionTargets, CollectionTarget } from './utils.js';
+import { toNumber as toNumberWithUnits, collectionTarget, CollectionTarget } from './utils.js';
 
 const toNumber = (value: unknown): number | null => toNumberWithUnits(value, 'px|rem|em|%');
 
@@ -171,7 +170,7 @@ export function codeSyntaxFor (cssName: string): { WEB: string; ANDROID: string;
   };
 }
 
-export function convert (classified: Classified[], { name: collection, publishAll }: CollectionTarget): Conversion {
+export function convert (classified: Classified[], { name: collection }: CollectionTarget): Conversion {
   const modesList = Object.keys(MODES) as (keyof typeof MODES)[];
   const flattened: Conversion['flattened'] = [];
   const unconvertible: Conversion['unconvertible'] = [];
@@ -330,7 +329,7 @@ export function convert (classified: Classified[], { name: collection, publishAl
             // Always sent, never omitted — same reasoning as $description
             // above. A token moving out of a hidden group later needs this
             // to actually flip back, not just stay silently true forever.
-            hiddenFromPublishing: hidden && !publishAll,
+            hiddenFromPublishing: hidden,
           },
         },
       };
@@ -403,7 +402,7 @@ async function main (target: CollectionTarget): Promise<void> {
   console.log(`resolved        : ${all.length}`);
   console.log(`excluded        : ${excluded.length}`);
   console.log(`variables       : ${emit.length}`);
-  console.log(`hidden          : ${target.publishAll ? 0 : emit.filter(e => e.hidden).length} (hiddenFromPublishing — theme, inverted, raw colour/material ramps, line-height)`);
+  console.log(`hidden          : ${emit.filter(e => e.hidden).length} (hiddenFromPublishing — theme, inverted, raw colour/material ramps, line-height)`);
   console.log(`unscoped        : ${unscoped.length}`);
   console.log(`flattened alias : ${flattened.length / Object.keys(MODES).length} (target is resolution-only)`);
   console.log(`composed colour : ${composed.length} (alpha-modified, now a real alias + opacity)`);
@@ -461,9 +460,7 @@ async function main (target: CollectionTarget): Promise<void> {
 
   console.log(`\npayload         : ${countPayload(payload as never)}`);
 
-  // One file per target, so the unrestricted pass doesn't overwrite the restricted payload.
-  const outFlag = flag('out');
-  const out = outFlag && target.publishAll ? outFlag.replace(/(\.[^./\\]+)?$/, '.unrestricted$1') : outFlag;
+  const out = flag('out');
   if (out) {
     writeFileSync(out, JSON.stringify(payload, null, 2));
     console.log(`written         : ${out}`);
@@ -498,7 +495,7 @@ async function main (target: CollectionTarget): Promise<void> {
 }
 
 (async () => {
-  for (const target of collectionTargets()) await main(target);
+  await main(collectionTarget());
 })().catch(error => {
   const e = error as { response?: { status?: number; data?: unknown }; message?: string };
   console.error(`failed: ${e.response?.status ?? ''} ${JSON.stringify(e.response?.data ?? e.message ?? error)}`.slice(0, 2000));
