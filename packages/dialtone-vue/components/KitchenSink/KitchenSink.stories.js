@@ -5,6 +5,7 @@ const componentLoaders = import.meta.glob(['../**/*.stories.js', '!../kitchen_si
 
 export default {
   title: 'Kitchen Sink',
+  // DLT-3722: this aggregate gallery is for browsing; individual component stories retain tests.
   tags: ['!autodocs', '!test'],
   parameters: {
     options: { showPanel: false },

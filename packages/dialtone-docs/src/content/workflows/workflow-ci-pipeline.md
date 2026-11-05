@@ -25,7 +25,7 @@ All workflows set `HUSKY: 0` to disable git hooks in CI.
 
 ## Required Checks (Must Pass Before Merge to `staging`)
 
-The checks below run when their workflow triggers and path filters match. Branch protection determines which checks must pass before merge.
+Workflow triggers, path filters and job-level conditions determine which checks run. Branch protection determines which checks must pass before merge.
 
 | Check | Workflow | Command |
 |-------|---------|---------|
