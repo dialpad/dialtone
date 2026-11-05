@@ -19,7 +19,16 @@ const pkg = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const vueRoot = path.resolve(pkg, '../dialtone-vue');
 const name = pascal(unit);
 const reactDir = path.join(pkg, 'components', name);
-const vueDir = path.join(vueRoot, 'components', name);
+// The Vue component is components/*/<Name>.vue, one level deep: usually components/<Name>/, but DtTabGroup is in
+// components/Tab/. Its Vue tests are the .test.js files next to it. A unit with no .vue (a composable, a mixin) keeps
+// components/<Name>/, where any tests it has would be.
+const vueHomes = fs.readdirSync(path.join(vueRoot, 'components'), { withFileTypes: true })
+  .filter(d => d.isDirectory() && fs.existsSync(path.join(vueRoot, 'components', d.name, `${name}.vue`))).map(d => d.name);
+if (vueHomes.length > 1 && !vueHomes.includes(name)) {
+  console.error(`gate: ${name}.vue is in more than one directory: ${vueHomes.join(', ')}`);
+  process.exit(2);
+}
+const vueDir = path.join(vueRoot, 'components', vueHomes.includes(name) ? name : (vueHomes[0] ?? name));
 const tmp = fs.mkdtempSync(path.join(process.env.PARITY_TMP ?? os.tmpdir(), `parity-${unit}-`));
 const rows = [];
 const details = [];
@@ -96,7 +105,7 @@ else if (failing.length || unitRun.broken) {
 
 const vueTestFiles = fs.existsSync(vueDir) ? fs.readdirSync(vueDir).filter(f => f.endsWith('.test.js')) : [];
 const vueRun = vueTestFiles.length
-  ? vitest(vueRoot, ['vitest', 'run', ...vueTestFiles.map(f => `components/${name}/${f}`)], path.join(tmp, 'vue-tests.json'))
+  ? vitest(vueRoot, ['vitest', 'run', ...vueTestFiles.map(f => path.relative(vueRoot, path.join(vueDir, f)))], path.join(tmp, 'vue-tests.json'))
   : { tests: [], error: '', broken: '' };
 const vueTests = vueRun.tests.filter(t => t.status === 'passed');
 // A red Vue suite would silently shrink what the React tests are checked against, so it fails the check.
@@ -172,8 +181,14 @@ if (isComponent) {
     const deviations = readJson(path.join(reactDir, 'deviations.json')) ?? {};
     const caseResults = reactDom.filter(t => cases.some(c => t.title === `${unit} › ${c.name}`));
     const failed = reactDom.filter(t => t.status !== 'passed');
-    const matched = caseResults.filter(t => t.status === 'passed' && !deviations[t.title.slice(unit.length + 3)]).length;
-    const summary = `${matched}/${cases.length} cases match Vue · ${Object.keys(deviations).length} deviations`;
+    // A deviation that only waives the Math.random check (noRandom) still compares the DOM, so its case matches.
+    const domMatches = d => !d || (d.noRandom && !d.skip && d.react === undefined);
+    const matched = caseResults.filter(t => t.status === 'passed' && domMatches(deviations[t.title.slice(unit.length + 3)])).length;
+    // Slots whose output depends on context the component injects reach React with Vue's context already applied,
+    // so whether the port provides it isn't compared. Said in the row so a reviewer checks it by hand.
+    const contextSlots = cases.reduce((n, c) => n + (c.slotContext?.length ?? 0), 0);
+    const summary = `${matched}/${cases.length} cases match Vue · ${Object.keys(deviations).length} deviations`
+      + (contextSlots ? ` · ${contextSlots} slots static (injected context not compared)` : '');
     if (!reactDom.length) bad('DOM parity', 'React side didn\'t run', block(reactRun.error));
     else if (failed.length || caseResults.length !== cases.length || reactRun.broken) {
       bad('DOM parity', summary, [
