@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtLoader from './Loader.vue';
+import { DialtoneLocalization } from '@/localization';
 
 const MOCK_DEFAULT_ARIA_LABEL = 'loading';
 
@@ -113,6 +114,29 @@ describe('DtLoader Tests', function () {
   });
 
   describe('Accessibility Tests', () => {
+    it.each([undefined, null])('Uses image semantics when a forwarded role is %s', role => {
+      mockAttrs = { role };
+      updateWrapper();
+
+      expect(wrapper.attributes('role')).toBe('img');
+      expect(wrapper.attributes('aria-label')).toBe(MOCK_DEFAULT_ARIA_LABEL);
+    });
+
+    it('Localizes the default label while preserving a custom label', async () => {
+      const translate = vi.spyOn(DialtoneLocalization.prototype, '$t')
+        .mockImplementation(key => key === 'DIALTONE_LOADING' ? 'En cours de chargement' : key);
+
+      try {
+        updateWrapper();
+        expect(wrapper.attributes('aria-label')).toBe('En cours de chargement');
+
+        await wrapper.setProps({ ariaLabel: 'Loading messages' });
+        expect(wrapper.attributes('aria-label')).toBe('Loading messages');
+      } finally {
+        translate.mockRestore();
+      }
+    });
+
     describe('When ariaLabel is not set', () => {
       it('Has default aria label', () => {
         expect(wrapper.attributes('role')).toBe('img');
@@ -122,11 +146,18 @@ describe('DtLoader Tests', function () {
     });
 
     it('Preserves a caller-provided role and label reference', () => {
-      mockAttrs = { role: 'progressbar', 'aria-labelledby': 'loading-label' };
+      mockAttrs = {
+        role: 'progressbar',
+        'aria-labelledby': 'loading-label',
+        'data-qa': 'caller-loader',
+        class: 'caller-loader',
+      };
       updateWrapper();
 
       expect(wrapper.attributes('role')).toBe('progressbar');
       expect(wrapper.attributes('aria-labelledby')).toBe('loading-label');
+      expect(wrapper.attributes('data-qa')).toBe('caller-loader');
+      expect(wrapper.classes()).toContain('caller-loader');
     });
 
     it('Preserves a caller-hidden loader', () => {
