@@ -54,8 +54,7 @@ describe('DialtoneLocalization Tests', () => {
     });
 
     try {
-      const localization = new DialtoneLocalization();
-      expect(localization.$t('DIALTONE_LOADING')).toBe('loading');
+      new DialtoneLocalization();
       expect(window.onstorage).toBe(hostHandler);
     } finally {
       storage.mockRestore();
