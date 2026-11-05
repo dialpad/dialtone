@@ -1,0 +1,23 @@
+packages/dialtone-docs/src/generators/documentation-examples.mjs
+  s_dbbbcf857f247d::t_3956da441e29ed 93,109
+packages/dialtone-docs/tests/example-coverage.test.js
+  s_dbbbcf857f247d::t_42a32524446951 9-18
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_dbbbcf857f247d::t_6a28cd1b4389b5 62-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "348c92e91fbce025f110c876b8c1250ddbebe7a0",
+  "prompts": {},
+  "sessions": {
+    "s_dbbbcf857f247d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d3b-b72b-72f1-adf9-9f3c1f12d8ae",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
