@@ -1,4 +1,5 @@
 import DtcCodeEditor from './code_editor.vue';
+import JSON5 from 'json5-with-undefined';
 
 import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
@@ -137,15 +138,62 @@ describe('code_editor.vue test', function () {
         '  <template #startIcon="{ iconSize }">\n    <dt-icon-wrench :size="iconSize" />\n' +
         '  </template>\n  Save\n</dt-button>',
     },
-  ])('preserves actual clipboard output for $name', async ({ info, options, disabled, expected }) => {
+    {
+      name: 'raw scoped-slot alias',
+      info: {
+        displayName: 'DtDropdown',
+        slots: [{
+          name: 'anchor',
+          scopeName: 'anchorAttrs',
+          bindings: [{ name: 'ref' }, { name: 'aria-expanded' }, { name: 'aria-controls' }, { name: 'aria-haspopup' }],
+        }],
+        bindings: { get: () => [] },
+      },
+      options: {
+        slots: {
+          anchor: '<dt-button\n' +
+            '  :aria-expanded="anchorAttrs[\'aria-expanded\']"\n' +
+            '  :aria-controls="anchorAttrs[\'aria-controls\']"\n' +
+            '  :aria-haspopup="anchorAttrs[\'aria-haspopup\']"\n' +
+            '>\n  Actions\n</dt-button>',
+        },
+        bindings: { get: () => ({}) },
+      },
+      disabled: [],
+      displayedScope: '#anchor="anchorAttrs"',
+      expected: '<dt-dropdown>\n  <template #anchor="anchorAttrs">\n' +
+        '    <dt-button\n' +
+        '  :aria-expanded="anchorAttrs[\'aria-expanded\']"\n' +
+        '  :aria-controls="anchorAttrs[\'aria-controls\']"\n' +
+        '  :aria-haspopup="anchorAttrs[\'aria-haspopup\']"\n' +
+        '>\n  Actions\n</dt-button>\n' +
+        '  </template>\n</dt-dropdown>',
+    },
+  ])('preserves actual clipboard output for $name', async ({ info, options, disabled, expected, displayedScope }) => {
     const wrapper = mountWrapper();
     const writeText = vi.fn().mockResolvedValue(undefined);
     vi.stubGlobal('navigator', { clipboard: { writeText } });
     vi.useFakeTimers();
     try {
-      await wrapper.setProps({ info, options, disabledMembers: new Set(disabled) });
+      await wrapper.setProps({
+        info,
+        options,
+        disabledMembers: new Set(disabled),
+        devMode: Boolean(displayedScope),
+        hasChanges: Boolean(displayedScope),
+      });
+      if (displayedScope) expect.soft(wrapper.text()).toContain(displayedScope);
       await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
-      expect(writeText.mock.calls[0][0]).toBe(expected);
+      expect.soft(writeText.mock.calls[0][0]).toBe(expected);
+      if (displayedScope) {
+        await wrapper.findAll('button')
+          .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
+        const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
+        expect(preset.slots.anchor).toEqual({
+          initialValue: options.slots.anchor,
+          scopeName: 'anchorAttrs',
+        });
+      }
       await vi.runAllTimersAsync();
     } finally {
       wrapper.unmount();
