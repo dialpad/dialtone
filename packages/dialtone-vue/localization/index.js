@@ -1,4 +1,4 @@
-import { LocaleManager, RawBundleSource } from '@dialpad/i18n';
+import { LocaleManager, RawBundleSource, MemoryStorageWrapper } from '@dialpad/i18n';
 
 import enUS from './en-US.ftl?raw';
 import zhCN from './zh-CN.ftl?raw';
@@ -68,13 +68,20 @@ export class DialtoneLocalization {
       ]),
     });
 
-    const localeManager = new LocaleManager({
+    const localeOptions = {
       bundleSource,
       allowedLocales: Object.values(allowedLocales),
       fallbackLocale,
       preferredLocale: this._locale,
       namespaces: [dialtoneNamespace],
-    });
+    };
+    let localeManager;
+    try {
+      localeManager = new LocaleManager(localeOptions);
+    } catch (error) {
+      if (error.name !== 'SecurityError') throw error;
+      localeManager = new LocaleManager({ ...localeOptions, storageWrapper: new MemoryStorageWrapper() });
+    }
 
     DialtoneLocalization.instance = this;
     this.i18n = localeManager.useI18N(dialtoneNamespace);
@@ -85,11 +92,11 @@ export class DialtoneLocalization {
        * When the browser storage changes, update the current locale
        * @param event
        */
-      window.onstorage = (event) => {
+      window.addEventListener('storage', (event) => {
         if (event.key === localeManagerStorageKey) {
           this.currentLocale = event.newValue;
         }
-      };
+      });
     }
 
     return this;
@@ -103,14 +110,22 @@ export class DialtoneLocalization {
     /**
      * Early return if we're not in the browser or if localStorage is not available
      */
-    if (typeof window === 'undefined' || !window.localStorage) {
+    if (typeof window === 'undefined') {
+      return fallbackLocale;
+    }
+
+    let storedLanguage;
+    try {
+      const storage = window.localStorage;
+      if (!storage) return fallbackLocale;
+      storedLanguage = storage.getItem(localeManagerStorageKey);
+    } catch {
       return fallbackLocale;
     }
 
     // Only trust the stored locale if it's one Dialtone actually ships a bundle for.
     // Callers (e.g. UC/UV) may allow locales Dialtone doesn't support, which would
     // otherwise crash the LocaleManager during render.
-    const storedLanguage = window.localStorage.getItem(localeManagerStorageKey);
     const localStorageLanguage = Object.values(allowedLocales).includes(storedLanguage)
       ? storedLanguage
       : null;
