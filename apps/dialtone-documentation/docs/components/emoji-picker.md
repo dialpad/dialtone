@@ -72,6 +72,7 @@ combinator: DtEmojiPicker
 >
   <template #anchor>
     <dt-button
+      aria-label="Choose an emoji"
       :size="200"
       circle
       importance="clear"
