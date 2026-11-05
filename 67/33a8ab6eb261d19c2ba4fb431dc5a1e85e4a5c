@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_d6ce5f37f48da7::t_335138909058d7 75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6733a8ab6eb261d19c2ba4fb431dc5a1e85e4a5c",
+  "prompts": {},
+  "sessions": {
+    "s_d6ce5f37f48da7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ad47-b8f1-7182-8a70-97450505de94",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
