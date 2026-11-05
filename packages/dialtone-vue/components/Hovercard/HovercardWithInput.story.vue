@@ -141,8 +141,8 @@ const emit = defineEmits(['opened']);
 const activatedOpen = ref(null);
 const inputValue = ref('');
 
-function openCard () {
-  if (props.open == null) activatedOpen.value = true;
+function openCard (event) {
+  if (event.detail === 0 && props.open == null) activatedOpen.value = true;
 }
 
 function onOpened (isOpen) {

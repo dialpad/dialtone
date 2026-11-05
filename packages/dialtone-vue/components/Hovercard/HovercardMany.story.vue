@@ -32,7 +32,7 @@
               interactive
               :aria-label="`Show ${data.name} profile`"
               v-bind="slotProps"
-              @click="openCard(data)"
+              @click="openCard(data, $event)"
             />
           </template>
           <template #content>
@@ -176,8 +176,8 @@ const cardData = reactive([{
   aliquet elementum venenatis quisque.</p>`,
 }]);
 
-function openCard (card) {
-  if (attrs.open == null) card.open = true;
+function openCard (card, event) {
+  if (event.detail === 0 && attrs.open == null) card.open = true;
 }
 
 function onOpened (card, isOpen) {
