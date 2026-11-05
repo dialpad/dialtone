@@ -5,7 +5,7 @@ One file per component, default-exporting its config. Discovered automatically b
 
 Required: `component` (the Dt* name), `label`, `page`, `axes`, `variantName`, `props`.
 Optional: `invalid` (combos that cannot exist; leave it out when every combination is reachable), `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
-`slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `flexLayout`, `blockLayout`,
+`slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `noSnap`, `flexLayout`, `blockLayout`,
 `edgeSlots`, `rootClass`, `containerClass`, `effectiveDefaults`.
 `effectiveDefaults: { axis: value }` names the rendered default of an axis that is not its prop
 default (`open: true` for a collapsible whose `open` prop is `null`; `showAction: false` where the
@@ -14,6 +14,9 @@ flag is true but no slot content is supplied), read by `default-variant.mjs`. Se
 loads, so do not add or edit `figmaSetId` or `figmaMergedSetId` in a config file. `nativeSlots` names slots that become Figma
 `SLOT` nodes (see the Slots section of `../README.md`). `textProps` maps a text the harness
 injected (`{ 'Notice title': 'Title' }`) to the TEXT property it becomes, besides the label.
+`noSnap: ['minHeight']` lists fields a snapping config leaves exact, for a value that is not near any
+token on that field's scale (a textarea's 40px minimum would otherwise become 48). It is passed to the
+builder in the payload and read by the verifier, so both agree.
 `snapTokens: true` builds the spacing, corners and minimum sizes the CSS COMPUTES at the nearest
 Dialtone token and binds them (an 8px token that yields 7px is the 8px token); a circle is bound to
 the pill token. See "What gets bound" in `../README.md`.

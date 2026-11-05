@@ -588,7 +588,7 @@ const payload = { component: spec.component, page: spec.page, axisNames, axisVal
   // A `<name>-merged` trial lands on its own `<page> Merged` page (see buildPage), which is owned too.
   ownedPages: [...new Set([...Object.values(COMPONENTS).map(c => c.page), ...(cfg.page ? [buildPage(cfg, /-merged$/.test(which))] : []), 'Icons'])],
   // `blockLayout`: a block that only stacks its children is a vertical auto-layout (see the builder).
-  blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
+  blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload(cfg.noSnap || []) : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
   useTextStyles: cfg.textStyles !== false,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.

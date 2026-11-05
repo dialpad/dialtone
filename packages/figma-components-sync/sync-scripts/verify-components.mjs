@@ -91,6 +91,9 @@ import { defaultCombo, defaultVariantFindings } from './default-variant.mjs';
 import { figmaTextDecoration as decorationOf, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, flowChildren, figmaChildParts, transparentBorderFoldOf, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
 
 const cfg = COMPONENTS[which];
+// Whether a field is moved to its nearest token for this config: a snapping config, except for the
+// fields it lists in `noSnap` (the builder gets the same list through the payload).
+const snapsField = (field) => !!cfg && !!cfg.snapTokens && !(cfg.noSnap || []).includes(field);
 const EXEMPLAR_SLOTS = exemplarSlots(cfg);
 if (IS_CLI && !cfg) throw new Error(`no verifier config for "${which}"`);
 
@@ -806,7 +809,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
     ]) {
       if (k == null || domV == null) continue;
       // The value the build is expected to hold: the browser's, moved to its token when the config snaps.
-      const wantV = cfg.snapTokens ? snappedValue(k, domV) : domV;
+      const wantV = snapsField(k) ? snappedValue(k, domV) : domV;
       if (!near(wantV, figV)) {
         /**
          * A DECLARED, BOUNDED DIVERGENCE: the merged set keeps the EMPTY render's spacing.
@@ -822,7 +825,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         // and the filled value in the browser. Any other 2px (a different node, the other direction)
         // is still a finding.
         const recorded = SLOT_PASS && slotDriftOf(which).find(e => e.path === path && e.prop === k
-          && near(figV, cfg.snapTokens ? snappedValue(k, e.empty) : e.empty) && near(domV, e.filled));
+          && near(figV, snapsField(k) ? snappedValue(k, e.empty) : e.empty) && near(domV, e.filled));
         if (recorded) {
           allowed.push({ variant, path,
             reason: `slot-filled spacing drift: ${k} ${domV} in the browser, ${figV} in the merged set (recorded by build-spec as ${recorded.empty} empty vs ${recorded.filled} filled)` });
@@ -887,7 +890,7 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
           }
           continue;
         }
-        const wantR = cfg.snapTokens ? snappedValue(figKey, domR) : domR;
+        const wantR = snapsField(figKey) ? snappedValue(figKey, domR) : domR;
         if (!near(wantR, figR)) rec(variant, path, figKey, wantR, figR);
         else if (cfg.snapTokens && !near(domR, figR)) {
           allowed.push({ variant, path, reason: `token-snapped: ${figKey} ${domR} in the browser, ${figR} in Figma (the nearest token)` });
@@ -1419,7 +1422,7 @@ export async function annotateAnchors (cdp, cdpDoc, node) {
   // only the declaration can, and Figma has no way to represent it. Without this
   // the checkbox's dark focus ring reads as a defect rather than as a platform limit.
   if (node.style && node.selector && (parseFloat(node.style.outlineWidth) || 0) > 0) {
-    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
+    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.cdpSelector || node.selector });
     if (nodeId) {
       const { own, chain } = await matchedFor(cdp, nodeId);
       // Use the SAME resolver the spec builder uses. Hand-parsing the declaration
@@ -1429,7 +1432,7 @@ export async function annotateAnchors (cdp, cdpDoc, node) {
     }
   }
   if (node.style && node.style.position === 'absolute' && node.selector) {
-    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
+    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.cdpSelector || node.selector });
     if (nodeId) {
       const { own } = await matchedFor(cdp, nodeId);
       const declaredEnd = own['inset-inline-end'] || own['right'] || (own.inset ? { value: own.inset.value } : null);

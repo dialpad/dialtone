@@ -169,8 +169,14 @@ const NUM_PROPS = {
  * paint no text and bind them to a token they never referenced.
  */
 async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
-  const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
-  const prov = nodeId ? await tokensFor(cdp, nodeId) : { tokens: {}, computed: {}, own: {}, chain: [] };
+  const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.cdpSelector || node.selector });
+  const prov0 = nodeId ? await tokensFor(cdp, nodeId) : { tokens: {}, computed: {}, own: {}, chain: [] };
+  // A synthetic node (a native control's value) shares its control's provenance but paints only its
+  // text, so it takes only the tokens it names (`tokenKeys`). Without this the control's radius token
+  // landed on a text node whose radius is 0, and the one token then held two values and was dropped.
+  const only = (o) => (node.tokenKeys
+    ? Object.fromEntries(Object.entries(o || {}).filter(([k]) => node.tokenKeys.includes(k))) : o);
+  const prov = node.tokenKeys ? { ...prov0, tokens: only(prov0.tokens), computed: only(prov0.computed) } : prov0;
   const declared = prov.tokens;
   const s = node.style;
   const props = {};
