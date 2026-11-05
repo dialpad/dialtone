@@ -1,0 +1,25 @@
+packages/dialtone-vue/components/EmptyState/EmptyState.test.js
+  s_3008ff139913ef::t_2d0628fdaa29ae 46-47,74,110,120
+packages/dialtone-vue/components/Datepicker/Datepicker.test.js
+  s_3008ff139913ef::t_2d0628fdaa29ae 50-53,66,113,119,125,158,174,182,194,202,214,226,277,287,296,307,318,327,338,371,398,407,416,425,435,467,476,485,494,504,513,520,529,543,550,568,575
+packages/dialtone-vue/components/EmojiPicker/EmojiPicker.test.js
+  s_3008ff139913ef::t_2d0628fdaa29ae 187,289
+packages/dialtone-vue/components/KeyboardShortcut/KeyboardShortcut.test.js
+  s_3008ff139913ef::t_2d0628fdaa29ae 47,58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b525cad52332fd8f5b8f1396f6e1657a230eda93",
+  "prompts": {},
+  "sessions": {
+    "s_3008ff139913ef": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a155eb-b80d-7863-812c-94a3c9cda4c9",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

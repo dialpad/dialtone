@@ -1,0 +1,25 @@
+.coderabbit.yaml
+  s_355402be618789::t_594ab16f176508 257-264
+.github/workflows/unit_tests.yml
+  s_355402be618789::t_eb9212a72644ca 44
+  s_355402be618789::t_59f6cd181c51fd 99-103
+  s_355402be618789::t_4ad123d323b6b3 174-195
+  s_355402be618789::t_5ad3573684840f 85
+  s_355402be618789::t_cde497e0605504 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "33973f75a0a80f93a159b3b6d7bbca3c2f6ba27e",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
