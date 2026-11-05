@@ -1,0 +1,19 @@
+packages/dialtone-css/lib/build/less/components/slider.less
+  s_cfda0fd8d1a291::t_9c3694275e1538 165-169
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d47d3c4bca09ddf8f8cb2273dd06a894a56d7267",
+  "prompts": {},
+  "sessions": {
+    "s_cfda0fd8d1a291": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a1007d6-e12a-49b8-9261-a379c0c3d4fe",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

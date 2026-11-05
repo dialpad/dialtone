@@ -1,0 +1,37 @@
+packages/combinator/src/settings.json
+  s_c3b12373d86df3::t_d7b3a60cd45ca6 13-16
+packages/combinator/src/main.js
+  s_c3b12373d86df3::t_78fd7bec9ecaa6 11-17
+packages/combinator/src/components/renderer/renderer_theme_menu.vue
+  s_c3b12373d86df3::t_9f49b75e218668 10
+  s_c3b12373d86df3::t_c9b41ce0b70a67 1-9,11-189
+packages/combinator/src/components/renderer/renderer.vue
+  s_c3b12373d86df3::t_0c998e6018370a 2-4,6-11,13-25
+  s_c3b12373d86df3::t_92c07e195e4a66 97-103,108-109,112-117,124,126-140,143,145-152
+  s_c3b12373d86df3::t_3626dcdd63549b 164-172
+  s_c3b12373d86df3::t_aa16a36f255a96 104-107,110-111,118-120,122-123,141-142,144,153
+  s_c3b12373d86df3::t_e99060b1e31027 29-31
+packages/combinator/src/components/combinator.vue
+  s_c3b12373d86df3::t_272d1d9a91bd8a 160
+  s_c3b12373d86df3::t_015fbefcde3f87 170,172-173
+  s_c3b12373d86df3::t_3e733446865424 82
+  s_c3b12373d86df3::t_95ccc949b877b2 342-344
+packages/combinator/src/lib/constants.js
+  s_c3b12373d86df3::t_f47b378ed4bee4 19-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "bfb2e013518a1754b6782762dde42a5437b8ce57",
+  "prompts": {},
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
