@@ -1,3 +1,4 @@
+import type { ElementType } from 'react';
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { DtText, resetHeadlineSemanticInfoFlag, type DtTextProps } from './Text';
@@ -15,17 +16,20 @@ import {
   TEXT_ITALIC_CLASS,
 } from './TextConstants';
 
+// The tests vary `as` at runtime, so they use the widest props type.
+type AnyTextProps = DtTextProps<ElementType>;
+
 // The Vue tests pass unsupported values on purpose, which DtTextProps' literal unions would reject.
-const unsupported = (props: Record<string, unknown>) => props as DtTextProps;
+const unsupported = (props: Record<string, unknown>) => props as AnyTextProps;
 
 describe('DtText', () => {
   const slotContent = 'Sample text';
 
-  const mountComponent = (props: DtTextProps = {}) => {
+  const mountComponent = (props: AnyTextProps = {}) => {
     const { rerender } = render(<DtText {...props}>{slotContent}</DtText>);
     return {
       element: () => screen.getByText(slotContent),
-      setProps: (next: DtTextProps) => rerender(<DtText {...props} {...next}>{slotContent}</DtText>),
+      setProps: (next: AnyTextProps) => rerender(<DtText {...props} {...next}>{slotContent}</DtText>),
     };
   };
 
@@ -513,6 +517,21 @@ describe('DtText', () => {
       const wrapper = mountComponent(unsupported({ family: 'invalid-family' }));
 
       expect(wrapper.element()).not.toHaveClass('d-text--ff-invalid-family');
+    });
+  });
+
+  describe('polymorphic props', () => {
+    it('accepts the props of the element named by as', () => {
+      render(<DtText as="a" href="/home" variant="body-md">Home</DtText>);
+      expect(screen.getByText('Home')).toHaveAttribute('href', '/home');
+    });
+
+    it('accepts the props of a component named by as', () => {
+      const Badge = ({ label, className }: { label: string; className?: string }) => (
+        <b className={className}>{label}</b>
+      );
+      render(<DtText as={Badge} label="New" variant="label-sm" />);
+      expect(screen.getByText('New')).toHaveClass('d-text');
     });
   });
 

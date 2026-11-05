@@ -1,4 +1,4 @@
-import { useEffect, useMemo, type CSSProperties, type ElementType, type HTMLAttributes, type Ref } from 'react';
+import { useEffect, useMemo, type ComponentPropsWithRef, type CSSProperties, type ElementType } from 'react';
 import { cx } from '../../common/cx';
 import {
   TEXT_KIND_MODIFIERS,
@@ -40,12 +40,12 @@ export const resetHeadlineSemanticInfoFlag = () => {
   hasEmittedHeadlineSemanticInfo = false;
 };
 
-interface DtTextOwnProps {
+interface DtTextOwnProps<T extends ElementType> {
   /**
    * HTML tag or component used for rendering.
    * @values span, p, h1, h2, h3, h4, h5, h6, label, div, component
    */
-  as?: ElementType;
+  as?: T;
 
   /**
    * Typography kind mapping to headline/body/label/code token sets.
@@ -121,10 +121,9 @@ interface DtTextOwnProps {
   density?: TextDensity | null;
 }
 
-export interface DtTextProps extends DtTextOwnProps, Omit<HTMLAttributes<HTMLElement>, keyof DtTextOwnProps> {
-  /** The rendered element. */
-  ref?: Ref<HTMLElement>;
-}
+/** Own props plus those of the element or component named by `as` (e.g. `href` for `as="a"`). */
+export type DtTextProps<T extends ElementType = 'span'> =
+  DtTextOwnProps<T> & Omit<ComponentPropsWithRef<T>, keyof DtTextOwnProps<T>>;
 
 type ModifierMap = Readonly<Record<string, string>>;
 
@@ -148,7 +147,7 @@ function getModifierClass (value: string | number | null | undefined, modifiers:
   return className;
 }
 
-type ClassInputs = Required<Omit<DtTextOwnProps, 'as'>>;
+type ClassInputs = Required<Omit<DtTextOwnProps<ElementType>, 'as'>>;
 
 function getVariantClass ({ kind, variant, size }: ClassInputs): string | null {
   if (variant) {
@@ -251,8 +250,8 @@ type TextStyle = CSSProperties & { '--dt-text-line-clamp'?: number };
  * Dialtone text primitive that applies typography tokens based on semantic props.
  * @see https://dialtone.dialpad.com/components/text.html
  */
-export function DtText ({
-  as = 'span',
+export function DtText<T extends ElementType = 'span'> ({
+  as = 'span' as T,
   kind = null,
   variant = null,
   size = null,
@@ -271,7 +270,7 @@ export function DtText ({
   style,
   children,
   ...rest
-}: DtTextProps) {
+}: DtTextProps<T>) {
   // Memoized like Vue's computed: an unsupported value warns once per change, not on every render.
   const textClasses = useMemo(
     () => getTextClasses({ kind, variant, size, family, italic, tone, align, truncate, maxLines, numeric, wrap, textBoxTrim, strength, density }),
@@ -292,7 +291,7 @@ export function DtText ({
     }
   }, [usesHeadlineVisualStyle, isSemanticHeading]);
 
-  const Component = as;
+  const Component: ElementType = as;
   return (
     <Component
       data-qa="dt-text"
