@@ -596,6 +596,14 @@ for (const r of report.filter(x => (x.slots && x.slots.length) || (x.texts && x.
 const toVerify = [...new Set(built)];
 
 // ── 7. verify ──────────────────────────────────────────────────────────────
+// A failed icon build has to fail the run on EVERY exit path: an icons-only run has no components
+// to count, and a run that builds icons and components would otherwise exit 0 on passing checks.
+const iconsFailed = !!iconReport
+  && (iconReport.built !== iconReport.expected || (iconReport.failures || []).length > 0);
+if (iconsFailed) {
+  console.log(`✗ icons: ${iconReport.built}/${iconReport.expected} built, `
+    + `${(iconReport.failures || []).length} failed - exiting non-zero.`);
+}
 if (SKIP_VERIFY || !built.length) {
   // "nothing was built" is wrong for an icons-only run, and a misleading summary is how a
   // half-finished build gets mistaken for a finished one.
@@ -603,13 +611,6 @@ if (SKIP_VERIFY || !built.length) {
     : iconReport ? ' (icons have no browser render to verify against)'
     : ' (nothing was built)';
   console.log(`\nskipping verification${why}.`);
-  // An icons-only run has no components to count, so a failed icon build has to fail it here.
-  const iconsFailed = iconReport
-    && (iconReport.built !== iconReport.expected || (iconReport.failures || []).length > 0);
-  if (iconsFailed) {
-    console.log(`✗ icons: ${iconReport.built}/${iconReport.expected} built, `
-      + `${(iconReport.failures || []).length} failed - exiting non-zero.`);
-  }
   // An aborted run lists only the components that finished, so `built` can equal `report`
   // exactly when the run failed.
   process.exit(built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed ? 0 : 1);
@@ -642,4 +643,4 @@ if (WANT_VISUAL) {
   }
 }
 
-process.exit(chk.status === 0 && built.length === report.length && !aborted && !defaultMismatches.length ? 0 : 1);
+process.exit(chk.status === 0 && built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed ? 0 : 1);
