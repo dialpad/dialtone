@@ -1,0 +1,127 @@
+/* The comparison host: two frames side by side, the args underneath. */
+body {
+  margin: 0;
+  background: var(--dt-color-surface-primary);
+  color: var(--dt-color-foreground-primary);
+  font-family: var(--dt-font-family-body, system-ui, sans-serif);
+  font-size: var(--dt-font-size-200, 14px);
+}
+
+.compare {
+  display: flex;
+  flex-direction: column;
+  block-size: 100vh;
+}
+
+.compare__panes {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1fr 1fr;
+  min-block-size: 0;
+}
+
+.compare__pane {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.compare__pane + .compare__pane {
+  border-inline-start: 1px solid var(--dt-color-border-default);
+}
+
+.compare__pane-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 12px;
+  border-block-end: 1px solid var(--dt-color-border-subtle);
+  background: var(--dt-color-surface-secondary);
+  font-size: var(--dt-font-size-100, 12px);
+}
+
+.compare__pane-header a {
+  color: var(--dt-color-foreground-secondary);
+}
+
+.compare__frame {
+  flex: 1;
+  inline-size: 100%;
+  border: 0;
+}
+
+.compare__empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px;
+  color: var(--dt-color-foreground-secondary);
+  text-align: center;
+}
+
+.compare-controls {
+  overflow: auto;
+  max-block-size: 40vh;
+  padding: 8px 12px 12px;
+  border-block-start: 1px solid var(--dt-color-border-default);
+  background: var(--dt-color-surface-secondary);
+}
+
+.compare-controls__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-block-end: 8px;
+  color: var(--dt-color-foreground-secondary);
+  font-size: var(--dt-font-size-100, 12px);
+}
+
+.compare-controls__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px 16px;
+}
+
+.compare-controls__row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.compare-controls__name {
+  overflow: hidden;
+  font-family: var(--dt-font-family-mono, monospace);
+  font-size: var(--dt-font-size-100, 12px);
+  text-overflow: ellipsis;
+}
+
+.compare-controls__name--changed {
+  font-weight: 600;
+}
+
+.compare-controls__value {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-inline-size: 0;
+}
+
+.compare-controls__input {
+  min-inline-size: 0;
+  font: inherit;
+}
+
+.compare-controls__note {
+  color: var(--dt-color-foreground-tertiary);
+  font-size: var(--dt-font-size-100, 12px);
+}
+
+.compare-controls__note--warning {
+  color: var(--dt-color-foreground-warning);
+}
