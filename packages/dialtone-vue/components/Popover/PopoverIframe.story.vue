@@ -1,11 +1,14 @@
 <!-- eslint-disable max-lines -->
 <template>
   <main
-    :aria-label="frameTitle"
+    :aria-labelledby="headingId"
     class="d-mis-200"
   >
-    <h1 class="d-headline--md d-mbe-100">
-      Popover in an iframe
+    <h1
+      :id="headingId"
+      class="d-headline--md d-mbe-100"
+    >
+      {{ heading }}
     </h1>
     <dt-popover
       :open="$attrs.open"
@@ -41,6 +44,7 @@
 <script>
 import { DtPopover } from '.';
 import { DtButton } from '@/components/Button';
+import { getUniqueString } from '@/common/utils';
 
 export default {
   name: 'PopoverVariantsStory',
@@ -51,8 +55,12 @@ export default {
   },
 
   data () {
-    return { frameTitle: window.frameElement?.title || 'Popover iframe example' };
+    const frame = window.frameElement;
+    const title = frame?.hasAttribute('data-is-storybook') ? null : frame?.title;
+    return {
+      headingId: getUniqueString('popover-iframe-heading'),
+      heading: title || 'Popover in an iframe',
+    };
   },
-
 };
 </script>

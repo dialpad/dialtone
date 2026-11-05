@@ -11,7 +11,7 @@
     :header-class="$attrs.headerClass"
     :footer-class="$attrs.footerClass"
     :append-to="$attrs.appendTo"
-    :open="$attrs.open ?? activatedOpen"
+    :open="props.open ?? activatedOpen"
     :enter-delay="$attrs.enterDelay"
     :leave-delay="$attrs.leaveDelay"
     @opened="onOpened"
@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { ref, useAttrs } from 'vue';
+import { ref } from 'vue';
 import DtHovercard from './Hovercard.vue';
 import defaultImage from '@/common/assets/avatar2.png';
 import DtStack from '../Stack/Stack.vue';
@@ -124,12 +124,17 @@ import DtIcon from '../Icon/Icon.vue';
 import DtButton from '../Button/Button.vue';
 import DtAvatar from '../Avatar/Avatar.vue';
 
+const props = defineProps({
+  open: {
+    type: Boolean,
+    default: null,
+  },
+});
 const emit = defineEmits(['opened']);
-const attrs = useAttrs();
 const activatedOpen = ref(null);
 
 function openCard () {
-  if (attrs.open == null) activatedOpen.value = true;
+  if (props.open == null) activatedOpen.value = true;
 }
 
 function onOpened (isOpen) {
