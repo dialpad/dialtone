@@ -77,10 +77,15 @@ export function snappedValue (field, v) {
   return s ? s.value : v;
 }
 
-/** The scales as the plugin needs them: { spacing: [[name, value], ...], ... } plus every token name. */
+/**
+ * The scales as the plugin needs them: { spacing: [[name, value], ...], ... }, plus `fields`, which
+ * scale each Figma field belongs to. The plugin is a function body that cannot import this module,
+ * so it reads both from the payload and holds no copy of either.
+ */
 export function snapPayload () {
   const out = {};
   for (const [family, scale] of Object.entries(SCALES)) out[family] = Object.entries(scale);
+  out.fields = { ...FAMILY_OF };
   return out;
 }
 export const SNAP_TOKEN_NAMES = [...Object.keys(SPACING), ...Object.keys(RADIUS), ...Object.keys(LAYOUT), PILL.name];

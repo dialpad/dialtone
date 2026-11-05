@@ -377,17 +377,13 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
    * What gets WRITTEN is snapped; the layout PREDICTIONS (hug or pin) keep reading the measured
    * numbers, so no frame changes how it sizes. A tie goes to the larger token. Returns the spec
    * unchanged when there is nothing to snap: not a snapping config, already a token, or zero.
-   * The scales and the token indices come in the payload (see token-snap.mjs).
+   * The scales, which scale each field belongs to (`D.snap.fields`) and the token indices all come in
+   * the payload (see token-snap.mjs), so the builder holds no copy of them. The nearest-token loop
+   * below mirrors `snapNumber` there; snap-rule.test.mjs fails if the two ever disagree.
    */
-  const SNAP_FAMILY = {
-    paddingTop: 'spacing', paddingRight: 'spacing', paddingBottom: 'spacing', paddingLeft: 'spacing',
-    itemSpacing: 'spacing', counterAxisSpacing: 'spacing',
-    topLeftRadius: 'radius', topRightRadius: 'radius', bottomRightRadius: 'radius', bottomLeftRadius: 'radius',
-    minWidth: 'layout', minHeight: 'layout',
-  };
   const snapSpec = (field, spec) => {
     if (!D.snap || !spec || spec[1] >= 0 || !(spec[0] > 0)) return spec;
-    const scale = D.snap[SNAP_FAMILY[field]];
+    const scale = D.snap[D.snap.fields[field]];
     if (!scale) return spec;
     let best = null;
     for (const [name, x] of scale) {
