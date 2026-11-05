@@ -23,7 +23,13 @@
     v-on="dropdownListeners"
   >
     <template #anchor="{ attrs }">
-      <!-- @slot Anchor element that activates the dropdown -->
+      <!--
+        @slot Dropdown trigger. Bind the three ARIA slot props individually to the trigger to preserve consumer refs.
+        @binding {string} ref Internal ref key. Do not forward it to the trigger.
+        @binding {string} aria-expanded Whether the dropdown is open, as "true" or "false".
+        @binding {string} aria-controls ID of the popup element with role="menu".
+        @binding {string} aria-haspopup Popup role, "menu".
+      -->
       <slot
         ref="anchor"
         name="anchor"

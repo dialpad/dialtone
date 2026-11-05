@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-04
+last_updated: 2026-11-05
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -51,7 +51,7 @@ These checks are required on every PR:
 | `test-tokens`     | `packages/dialtone-tokens/**`                                                                                       | `pnpm nx run dialtone-tokens:test`                                                                                                                                                                    |
 | `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
 | `test-lint-plugins` | Lint packages, canonical migration guidance, its generator and this workflow | Guidance generation check and Stylelint package tests |
-| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
+| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the component metadata generator suites, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
@@ -105,7 +105,7 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 2. `pnpm exec playwright install --with-deps` installs the browsers matching the locked Playwright version.
 3. `pnpm nx run dialtone-vue:test:a11y` runs the existing Storybook accessibility suite and returns its exit status; the temporary server is stopped on exit.
 
-Uses Playwright to run accessibility checks in a real browser. Required check on all PRs touching dialtone-vue.
+Uses Playwright to run accessibility checks in a browser. Each component story keeps its configured accessibility assertions. The Kitchen Sink combines independent demo pages, so it checks gallery navigation accessibility plus loading, rendering and section navigation; component semantics are checked in their individual stories. The runner waits for the parent story's completion and status before checking iframe stories; play assertion errors propagate as failures. Test failures keep their nonzero exit status. Branch protection determines which checks are required.
 
 ---
 

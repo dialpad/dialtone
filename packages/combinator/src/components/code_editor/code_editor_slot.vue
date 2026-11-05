@@ -37,7 +37,7 @@ import DtcCodeEditorInput from './code_editor_input.vue';
 import { DEFAULT_SLOT_NAME } from '@/src/lib/constants';
 import DtcCodeEditorIndent from '@/src/components/code_editor/code_editor_indent.vue';
 import { computed } from 'vue';
-import { camelCase } from 'change-case';
+import { getSlotScope } from '@/src/lib/code_copy';
 
 const props = defineProps({
   /**
@@ -61,6 +61,10 @@ const props = defineProps({
     type: Array,
     default: undefined,
   },
+  scopeName: {
+    type: String,
+    default: '',
+  },
   /**
    * The slot's template content string.
    */
@@ -70,14 +74,7 @@ const props = defineProps({
   },
 });
 
-const scopeString = computed(() => {
-  if (!props.bindings?.length || !props.content) return '';
-  const used = props.bindings
-    .map(b => camelCase(b.name))
-    .filter(name => props.content.includes(name));
-  if (!used.length) return '';
-  return `{ ${used.join(', ')} }`;
-});
+const scopeString = computed(() => getSlotScope(props, props.content));
 
 const emit = defineEmits(['update:options']);
 

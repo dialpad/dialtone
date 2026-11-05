@@ -220,26 +220,29 @@ console.log(message);</code></pre>
     <h2>Task List</h2>
     <ul>
       <li>
-        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
         <input
+          :aria-labelledby="`${taskListId}-completed`"
           type="checkbox"
           checked
           disabled
-        > Completed task
+        >
+        <span :id="`${taskListId}-completed`">Completed task</span>
       </li>
       <li>
-        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
         <input
+          :aria-labelledby="`${taskListId}-incomplete`"
           type="checkbox"
           disabled
-        > Incomplete task
+        >
+        <span :id="`${taskListId}-incomplete`">Incomplete task</span>
       </li>
       <li>
-        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
         <input
+          :aria-labelledby="`${taskListId}-another`"
           type="checkbox"
           disabled
-        > Another task to do
+        >
+        <span :id="`${taskListId}-another`">Another task to do</span>
       </li>
     </ul>
 
@@ -265,4 +268,7 @@ console.log(message);</code></pre>
 
 <script setup>
 import { DtProse } from './';
+import { getUniqueString } from '@/common/utils';
+
+const taskListId = getUniqueString();
 </script>

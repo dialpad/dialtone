@@ -29,7 +29,8 @@
             <dtc-code-editor-slot
               v-if="value && !disabledMembers.has(slot)"
               :name="slot"
-              :bindings="slotBindingsMap[slot]"
+              :bindings="slotInfoMap[slot]?.bindings"
+              :scope-name="slotInfoMap[slot]?.scopeName"
               :content="value"
               @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
             >
@@ -162,14 +163,9 @@ provide(SETTINGS_INDENT_KEY, indent);
 
 const tagName = computed(() => paramCase(props.info.displayName));
 
-const slotBindingsMap = computed(() => {
-  if (!props.info.slots) return {};
-  return Object.fromEntries(
-    props.info.slots
-      .filter(slot => slot.bindings?.length)
-      .map(slot => [slot.name, slot.bindings]),
-  );
-});
+const slotInfoMap = computed(() => Object.fromEntries(
+  (props.info.slots || []).map(slot => [slot.name, slot]),
+));
 
 const hasSlotContent = computed(() => {
   return props.options.slots
@@ -207,7 +203,10 @@ function serializeAsVariantPreset () {
       if (value === undefined || value === null || value === '') continue;
 
       if (!preset[group]) preset[group] = {};
-      preset[group][member.name] = { initialValue: value };
+      preset[group][member.name] = {
+        initialValue: value,
+        ...(group === 'slots' && member.scopeName ? { scopeName: member.scopeName } : {}),
+      };
     }
   }
 
@@ -215,7 +214,10 @@ function serializeAsVariantPreset () {
 }
 
 function formatJsValue (value, indent) {
-  if (typeof value === 'string') return `'${value.replace(/'/g, '\\\'')}'`;
+  if (typeof value === 'string') {
+    const escaped = value.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/\r/g, '\\r').replace(/\n/g, '\\n');
+    return `'${escaped}'`;
+  }
   if (typeof value === 'boolean' || typeof value === 'number') return String(value);
   if (Array.isArray(value)) return JSON.stringify(value);
   if (typeof value === 'object' && value !== null) {
@@ -238,7 +240,8 @@ function formatPresetAsJs (preset) {
     const entries = Object.entries(members)
       .map(([name, obj]) => {
         const val = formatJsValue(obj.initialValue, indent);
-        return `${indent}${name}: { initialValue: ${val} }`;
+        const scope = obj.scopeName ? `, scopeName: ${formatJsValue(obj.scopeName, indent)}` : '';
+        return `${indent}${name}: { initialValue: ${val}${scope} }`;
       })
       .join(',\n');
     sections.push(`${pad}${pad}${group}: {\n${entries},\n${pad}${pad}}`);

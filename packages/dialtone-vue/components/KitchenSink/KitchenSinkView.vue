@@ -13,6 +13,7 @@
     </div>
     <template v-else>
       <dt-stack
+        data-qa="kitchen-sink-navigation"
         class="
           d-p-400
           d-py-200
@@ -96,6 +97,7 @@
           class="d-py-400 kitchen-sink__section"
         >
           <dt-stack
+            data-qa="kitchen-sink-section-heading"
             gap="100"
             direction="row"
             justify="between"
@@ -117,6 +119,7 @@
           <dt-stack
             v-for="variant in section.variants"
             :key="variant.name"
+            data-qa="kitchen-sink-variant"
             class="d-ba d-bc-subtle d-p-200"
             gap="100"
           >

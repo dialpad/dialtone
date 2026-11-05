@@ -69,6 +69,15 @@ test('Vue generator and its shared helpers participate in the build hash', () =>
     generatorInputs,
   );
 });
+test('Vue and Storybook builds hash localization code and translations', () => {
+  const paths = [
+    'packages/dialtone-vue/localization/index.js',
+    'packages/dialtone-vue/localization/en-US.ftl',
+  ];
+  for (const target of ['build', 'build-storybook']) {
+    assert.deepEqual(covered(paths, selfPatterns('dialtone-vue', target)), paths, target);
+  }
+});
 test('standalone Vue release selection includes generator and shared-helper fixes', async () => {
   const directory = await mkdtemp(
     join(tmpdir(), 'dialtone-release-selection-'),

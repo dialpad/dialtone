@@ -53,7 +53,28 @@ and `NaN` values and disabled members.
 slot as direct content and wraps named slots in `<template #name>`.
 
 For scoped slots, `DtcCodeEditor` checks which documented bindings appear in the
-slot template string and writes the matching scope expression.
+slot template string and writes the matching scope expression. A variant can set
+`scopeName` on a named slot when its template needs the complete slot object, including
+keys such as `aria-expanded` that are not JavaScript identifiers:
+
+```js
+export default {
+  default: {
+    slots: {
+      anchor: {
+        scopeName: 'anchorAttrs',
+        initialValue: `<dt-button :aria-expanded="anchorAttrs['aria-expanded']">Actions</dt-button>`,
+      },
+    },
+  },
+};
+```
+
+Use the same slot metadata under `defaults.slots` to share it across presets.
+The single preview and spec sheet expose that name, and displayed/copied code
+uses `#anchor="anchorAttrs"`. Bind the needed fields explicitly; forwarding the
+whole object can also forward Vue-reserved fields such as `ref`. Slots without
+`scopeName` retain their existing destructured bindings.
 
 ## Copy behavior
 
@@ -62,7 +83,8 @@ The Copy button writes `copyText`, a plain-text template built from `info` and
 change clipboard output.
 
 The Copy JSON button writes a variant preset fragment from non-empty current
-options. It skips disabled members.
+options. It skips disabled members and retains each slot's `scopeName` so the
+preset keeps its binding when copied back into a variant bank.
 
 ## Latent event console
 
