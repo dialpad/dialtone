@@ -131,10 +131,15 @@ so an in-place mutation re-emitted as the same instance is not detected.
 Without a binding, the playground continues to manage its own selection.
 
 Preset names are revalidated when the available names change. An unavailable
-prop request uses `default` and is retried if that name arrives later, unless the
-user has selected or edited options since the request. Removing the selected
-name falls back to `default`; unrelated additions preserve the selection and
-custom mode. Replacing the bank still rebuilds option values from its metadata.
+prop request uses `default` and is retried if that name arrives later. Removing
+the selected name also falls back to `default`; if it is still requested by the
+`preset` prop, it is retried when it returns. A later user selection or edit
+cancels any pending retry. Automatic fallbacks and retries do not emit
+`update:preset`, so a `v-model:preset` binding retains the requested name.
+
+Unrelated additions preserve the selection and custom mode. Replacing the
+whole bank rebuilds option values from its metadata. In custom mode, this resets
+edited values while the label stays `custom`.
 
 The documentation site maps these names to URL slugs, such as
 `avatar.html?preset=with-presence-no-icon`. Selecting a preset replaces the
