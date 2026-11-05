@@ -16,6 +16,7 @@
         :template="slot"
         :library="library"
         :scope="slotBindings"
+        :scope-name="info.slots?.find(member => member.name === name)?.scopeName"
       />
     </template>
   </dtc-renderer-target>

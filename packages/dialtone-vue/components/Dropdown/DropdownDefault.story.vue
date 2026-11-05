@@ -16,14 +16,16 @@
     @highlight="$attrs.onHighlight"
     @opened="$attrs.onOpened"
   >
-    <template #anchor="{ attrs }">
+    <template #anchor="anchorAttrs">
       <div
         v-if="$attrs.anchor"
         v-html="$attrs.anchor"
       />
       <dt-button
         v-else
-        v-bind="attrs"
+        :aria-expanded="anchorAttrs['aria-expanded']"
+        :aria-controls="anchorAttrs['aria-controls']"
+        :aria-haspopup="anchorAttrs['aria-haspopup']"
       >
         Click to open
       </dt-button>

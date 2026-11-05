@@ -98,8 +98,9 @@
             {{ copy }}
           </p>
           <footer
-            v-if="hasFooterSlot"
+            v-if="hasFooterSlot()"
             :class="['d-modal__footer', footerClass]"
+            data-qa="dt-modal-footer"
           >
             <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
             <slot name="footer" />
@@ -435,10 +436,6 @@ export default {
   },
 
   computed: {
-    hasFooterSlot () {
-      return !!this.$slots.footer;
-    },
-
     bannerKindClass () {
       return MODAL_BANNER_KINDS[this.bannerKind];
     },
@@ -479,6 +476,11 @@ export default {
   },
 
   methods: {
+    // Reads $slots, which is not reactive, so it must not be cached as a computed.
+    hasFooterSlot () {
+      return !!this.$slots.footer;
+    },
+
     getScrollRoot () {
       return returnFirstEl(this.$refs.dialogEl)?.getRootNode()?.host;
     },

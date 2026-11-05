@@ -3,6 +3,14 @@ import { DEFAULT_SLOT_NAME } from './constants';
 import { stringifyDocValue } from './parse';
 import { isOmittedBindingValue } from './utils';
 
+export function getSlotScope (slot, content) {
+  if (slot?.scopeName && content.includes(slot.scopeName)) return slot.scopeName;
+  const usedBindings = (slot?.bindings || [])
+    .map(binding => camelCase(binding.name))
+    .filter(name => content.includes(name));
+  return usedBindings.length ? `{ ${usedBindings.join(', ')} }` : '';
+}
+
 /** Same markup used by the clipboard UI and build-time preset delivery. */
 export function serializeExampleTemplate ({ info, options, disabledMembers, verbose = false, indentSpaces = 2 }) {
   const pad = ' '.repeat(indentSpaces);
@@ -60,12 +68,8 @@ export function serializeExampleTemplate ({ info, options, disabledMembers, verb
         lines.push(pad + value);
       } else {
         const slotInfo = info.slots?.find(s => s.name === slot);
-        const usedBindings = (slotInfo?.bindings || [])
-          .map(b => camelCase(b.name))
-          .filter(n => value.includes(n));
-        const scope = usedBindings.length > 0
-          ? '="{ ' + usedBindings.join(', ') + ' }"'
-          : '';
+        const slotScope = getSlotScope(slotInfo, value);
+        const scope = slotScope ? `="${slotScope}"` : '';
         lines.push(pad + '<template #' + slot + scope + '>');
         lines.push(pad + pad + value);
         lines.push(pad + '</template>');

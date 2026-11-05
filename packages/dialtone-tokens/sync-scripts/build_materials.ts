@@ -24,7 +24,6 @@
  * Options:
  *   --dry-run                report what would change, post nothing
  *   --file-key KEY            override FILE_KEY from .env
- *   --unrestricted-file-key KEY   override UNRESTRICTED_FILE_KEY from .env
  *   --local-snapshot FILE     skip the REST read of existing variables and use
  *                             this file instead — a JSON dump shaped like
  *                             ApiGetLocalVariablesResponse (same recovery
@@ -45,7 +44,7 @@ import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
 import { staleOverrides } from './stale_overrides.js';
-import { collectionTargets } from './utils.js';
+import { collectionTarget } from './utils.js';
 
 /** Sandstone is the default and lives in the parent, so it is not a material here. */
 const MATERIALS = ['steel', 'graphite', 'iron', 'amethyst', 'jade'];
@@ -346,7 +345,8 @@ async function main (PARENT: string, fileKey: string | undefined): Promise<void>
 }
 
 (async () => {
-  for (const { name, fileKey } of collectionTargets()) await main(name, fileKey);
+  const { name, fileKey } = collectionTarget();
+  await main(name, fileKey);
 })().catch((error: { response?: { status?: number; data?: unknown }; message?: string }) => {
   console.error(`failed: ${error.response?.status ?? ''} ${JSON.stringify(error.response?.data ?? error.message).slice(0, 1000)}`);
   process.exit(1);

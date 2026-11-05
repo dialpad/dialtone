@@ -46,8 +46,10 @@ See [USAGE](../USAGE.md#selecting-a-preset) for comparison semantics and
 `DtcRenderer` filters empty slot values before rendering and passes each
 non-empty slot to `DtcNode` with the current slot bindings as scope.
 
-`DtcNode` recursively parses the slot template and renders HTML tags, registered
-library components, and nested content.
+`DtcNode` compiles each slot template as a Vue component with the current slot
+bindings as data. An optional slot `scopeName` also exposes the complete binding
+object under that name; existing top-level variables remain available. Both the
+single preview and spec sheet use this behavior. See [slot configuration](CODE_PANEL.md#slots).
 
 ## Latent renderer menu
 
