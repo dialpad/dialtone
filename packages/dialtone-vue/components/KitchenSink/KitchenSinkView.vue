@@ -12,11 +12,7 @@
       </dt-text>
     </div>
     <template v-else>
-      <p v-if="loadFailures">
-        Failed story imports: {{ loadFailures }}.
-      </p>
       <dt-stack
-        data-qa="kitchen-sink-navigation"
         class="
           d-p-400
           d-py-200
@@ -100,7 +96,6 @@
           class="d-py-400 kitchen-sink__section"
         >
           <dt-stack
-            data-qa="kitchen-sink-section-heading"
             gap="100"
             direction="row"
             justify="between"
@@ -122,7 +117,6 @@
           <dt-stack
             v-for="variant in section.variants"
             :key="variant.name"
-            data-qa="kitchen-sink-variant"
             class="d-ba d-bc-subtle d-p-200"
             gap="100"
           >
@@ -173,7 +167,6 @@ const props = defineProps({
 
 const sections = ref([]);
 const loading = ref(true);
-const loadFailures = ref(0);
 
 function sanitizeId (str) {
   return str.toLowerCase().replace(/[\s/_]+/g, '-');
@@ -235,7 +228,6 @@ onMounted(async () => {
     Object.values(props.loaders).map(async (loader) => loader()),
   );
 
-  loadFailures.value = results.filter(result => result.status === 'rejected').length;
   const loaded = [];
 
   for (const result of results) {

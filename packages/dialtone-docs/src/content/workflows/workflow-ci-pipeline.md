@@ -105,7 +105,7 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 2. `pnpm exec playwright install --with-deps` installs the browsers matching the locked Playwright version.
 3. `pnpm nx run dialtone-vue:test:a11y` runs the existing Storybook accessibility suite and returns its exit status; the temporary server is stopped on exit.
 
-Uses Playwright to run accessibility checks in a browser. Each component story keeps its configured accessibility assertions. The Kitchen Sink combines independent demo pages, so it checks gallery navigation accessibility plus loading, rendering and section navigation; component semantics are checked in their individual stories. The runner waits for the parent story's completion and status before checking iframe stories; play assertion errors propagate as failures. Test failures keep their nonzero exit status. Branch protection determines which checks are required.
+Uses Playwright to run accessibility checks in a browser. Component stories retain their behavior and accessibility checks. Kitchen Sink assembles those demos for browsing and is excluded from the automated run with the `!test` tag. This removes automatic gallery assembly, loading/rendering and navigation checks; individual story coverage is unchanged. The runner waits for the parent story's completion and status before checking iframe stories; play assertion errors propagate as failures. Test failures keep their nonzero exit status. Branch protection determines which checks are required.
 
 ---
 
