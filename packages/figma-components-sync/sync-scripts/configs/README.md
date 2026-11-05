@@ -3,14 +3,15 @@
 One file per component, default-exporting its config. Discovered automatically by
 `component-axes.mjs`, so parallel agents never edit a shared file.
 
-Required: `component` (the Dt* name), `label`, `page`, `axes`, `invalid`, `variantName`, `props`.
-Optional: `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
+Required: `component` (the Dt* name), `label`, `page`, `axes`, `variantName`, `props`.
+Optional: `invalid` (combos that cannot exist; leave it out when every combination is reachable), `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
 `slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `flexLayout`, `blockLayout`,
-`edgeSlots`, `rootClass`, `containerClass`, `effectiveDefaults`, `figmaSetId`, `figmaMergedSetId`.
+`edgeSlots`, `rootClass`, `containerClass`, `effectiveDefaults`.
 `effectiveDefaults: { axis: value }` names the rendered default of an axis that is not its prop
 default (`open: true` for a collapsible whose `open` prop is `null`; `showAction: false` where the
-flag is true but no slot content is supplied), read by `default-variant.mjs`. `figmaSetId` is
-written by `run-batch` after a build, not by hand. `nativeSlots` names slots that become Figma
+flag is true but no slot content is supplied), read by `default-variant.mjs`. Set ids are not part of a config: `run-batch` records them in
+`build-data/<target>/set-ids.json` and `component-axes.mjs` overlays them onto the config when it
+loads, so do not add or edit `figmaSetId` or `figmaMergedSetId` in a config file. `nativeSlots` names slots that become Figma
 `SLOT` nodes (see the Slots section of `../README.md`). `textProps` maps a text the harness
 injected (`{ 'Notice title': 'Title' }`) to the TEXT property it becomes, besides the label.
 `snapTokens: true` builds the spacing, corners and minimum sizes the CSS COMPUTES at the nearest

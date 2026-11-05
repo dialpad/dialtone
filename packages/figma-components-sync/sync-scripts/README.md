@@ -229,11 +229,17 @@ Each catches what the others structurally cannot.
 white icons, a double spinner and a solid purple disc, all of which passed every numeric check.
 
 ```bash
-node sync-scripts/check-all.mjs                  # everything, slow
-node sync-scripts/check-all.mjs button --light-only
-node sync-scripts/check-all.mjs button --stale-ok # inspect a stale set deliberately
-node sync-scripts/visual-compare.mjs button --set 1:2 --limit 8 --zoom 3
+node sync-scripts/check-all.mjs --target preview                  # everything, slow
+node sync-scripts/check-all.mjs button --light-only --target preview
+node sync-scripts/check-all.mjs button --stale-ok --target preview  # inspect a stale set deliberately
+node sync-scripts/visual-compare.mjs button --set 1:2 --limit 8 --zoom 3 --target preview
 ```
+
+`visual-compare` needs `--set <id>`, the Figma id of the set to rasterise (`1:2` above is a
+placeholder). Read the recorded one from `build-data/<target>/set-ids.json`
+(`figmaSetId`, or `figmaMergedSetId` for a merged build). Every script that reads the Figma file
+takes `--target`, or `SYNC_TARGET` in the environment; `build-spec.mjs` and `build-plugin.mjs`
+do not touch Figma and do not take it.
 
 `check-all` refuses to run when it cannot tell which payload built a set, and prints the
 `run-batch` line that fixes it. A pass over a stale canvas is worse than no pass: it reports on
@@ -242,8 +248,8 @@ work nobody is looking at, in the same words it uses for work that is current.
 ### Proving the checks work
 
 ```bash
-node sync-scripts/negative-control.mjs button --list-fields   # cheap, no browser
-node sync-scripts/negative-control.mjs button --variants 24
+node sync-scripts/negative-control.mjs button --list-fields --target preview   # cheap, no browser
+node sync-scripts/negative-control.mjs button --variants 24 --target preview
 ```
 
 It parses `verify-components.mjs` for every field name the comparison can emit, perturbs each
@@ -306,7 +312,7 @@ rationale for what is here.
    are expanded by `combosFor()` in `combos.mjs`. The measure and every check share it, so
    they cannot disagree about which variants exist.
 
-2. `node sync-scripts/build-spec.mjs <name>` then `node sync-scripts/run-batch.mjs <name>`.
+2. `node sync-scripts/build-spec.mjs <name>` then `node sync-scripts/run-batch.mjs <name> --target preview`.
 3. **Read the tree before trusting the count.** A component that renders nothing measures
    perfectly: the browser and Figma agree precisely about an empty box, and every numeric check
    passes. DtSelectMenu shipped 80 empty `<select>`s that way, DtFilterPill 32 bare chevrons,
@@ -511,7 +517,7 @@ keep recurring: the failure never looks like a failure.
 617 components on an `Icons` page, built once:
 
 ```bash
-node sync-scripts/run-batch.mjs --icons
+node sync-scripts/run-batch.mjs --icons --target preview
 ```
 
 Monochrome icons are flattened to a single vector named `Icon`. That is what makes an

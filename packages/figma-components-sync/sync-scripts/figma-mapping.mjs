@@ -232,6 +232,15 @@ export function transparentBorderFold (props) {
 }
 
 /**
+ * The Figma page a build lands on. A `--merged` build of a config that is not itself `merged: true`
+ * is a TRIAL and goes to its own `<page> Merged` page. The spec builder names the page with this and
+ * the encoder lists it as owned with this, so the page a build writes to is always one it may clear.
+ */
+export function buildPage (cfg, merged) {
+  return cfg.page + (merged && !cfg.merged ? ' Merged' : '');
+}
+
+/**
  * Does a pseudo-element actually PAINT a glyph?
  *
  * `content` is read as a literal string, so `content: ' '` — the idiom for "this
@@ -247,6 +256,22 @@ export function transparentBorderFold (props) {
  */
 export function pseudoPaintsGlyph (pe) {
   return !!(pe.text && pe.text.trim()) || !!pe.svg;
+}
+
+/**
+ * Does a pseudo-element paint anything a Figma node could carry: a background, a border, a
+ * shadow or a glyph? One answer for the spec builder (which makes the node) and for
+ * `figmaChildParts` (which expects it), so the two cannot disagree about which pseudos exist.
+ * The border test mirrors the builder: the top colour, with a width on any side.
+ *
+ * @param col  a CSS-colour parser returning {r,g,b,a}; the caller owns it.
+ */
+export function pseudoPaints (pe, col) {
+  const visible = c => !!c && (col(c)?.a ?? 0) >= 0.005;
+  return visible(pe.style.backgroundColor) ||
+    (visible(pe.style.borderTopColor) && SIDE_CSS_WIDTHS.some(w => parseFloat(pe.style[w]) > 0)) ||
+    !!(pe.style.boxShadow && pe.style.boxShadow !== 'none') ||
+    pseudoPaintsGlyph(pe);
 }
 
 /**
@@ -306,10 +331,7 @@ export function flowChildren (dom) {
  * @param col  a CSS-colour parser returning {r,g,b,a}; the caller owns it.
  */
 export function figmaChildParts (dom, col) {
-  const pseudos = (dom.pseudos || []).filter(pe =>
-    (pe.style.backgroundColor && (col(pe.style.backgroundColor)?.a ?? 0) >= 0.005) ||
-    (pe.style.boxShadow && pe.style.boxShadow !== 'none') ||
-    pseudoPaintsGlyph(pe));
+  const pseudos = (dom.pseudos || []).filter(pe => pseudoPaints(pe, col));
   const gr = dom.svgRect;
   return {
     // A glyph painted through background-image has no DOM node; Figma imports it as a

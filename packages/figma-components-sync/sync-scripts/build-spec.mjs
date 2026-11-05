@@ -26,7 +26,7 @@ import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
 import { defaultCombo, wantedDefaults } from './default-variant.mjs';
-import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor } from './figma-mapping.mjs';
+import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor, buildPage, pseudoPaints } from './figma-mapping.mjs';
 
 const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 const toRgb = converter('rgb');
@@ -587,7 +587,7 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
     // `::before` is a literal "=" with no background at all, and requiring a
     // background dropped the only thing that pseudo-element existed to draw.
     const paintsGlyph = pseudoPaintsGlyph(pe);
-    if (!paintsGlyph && !Object.keys(pProps).some(k => ['background', 'borderColor', 'shadow'].includes(k))) continue;
+    if (!pseudoPaints(pe, toFigmaRGB)) continue;
 
     /**
      * A PSEUDO HELD AT `opacity: 0` PAINTS NOTHING EITHER.
@@ -1228,7 +1228,7 @@ const out = { component: which, vue: cfg.component,
   // A merged build goes to its OWN page while the mechanism is being proven. Writing it
   // straight onto `cfg.page` would clear and replace a set that is currently verified
   // clean, and a merged set that turns out wrong would have cost the good one.
-  page: cfg.page + (MERGED_TRIAL ? ' Merged' : ''), axes: cfg.axes,
+  page: buildPage(cfg, MERGED), axes: cfg.axes,
   defaultVariant: defaultVariant ? defaultVariant.name : null,
   defaultAdjusted: defaultAdjusted || undefined,
   slotDrift: slotDrift.length ? slotDrift : undefined, variants };

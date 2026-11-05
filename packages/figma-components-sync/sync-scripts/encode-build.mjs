@@ -17,6 +17,7 @@ import 'dotenv/config';
 import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { COMPONENTS } from './component-axes.mjs';
+import { buildPage } from './figma-mapping.mjs';
 import { snapPayload, SNAP_TOKEN_NAMES, PILL, TEXT_TOKEN_NAMES, textTokenPayload } from './token-snap.mjs';
 
 const which = process.argv[2];
@@ -584,7 +585,8 @@ const payload = { component: spec.component, page: spec.page, axisNames, axisVal
   // The target's file owns the Dialtone collection: the synthesised colours are created in it, hidden.
   homeCollection: TARGET.homeCollection,
   // The pages this build may clear and rebuild: its own components' and the icons'. Nothing else.
-  ownedPages: [...new Set([...Object.values(COMPONENTS).map(c => c.page), 'Icons'])],
+  // A `<name>-merged` trial lands on its own `<page> Merged` page (see buildPage), which is owned too.
+  ownedPages: [...new Set([...Object.values(COMPONENTS).map(c => c.page), ...(cfg.page ? [buildPage(cfg, /-merged$/.test(which))] : []), 'Icons'])],
   // `blockLayout`: a block that only stacks its children is a vertical auto-layout (see the builder).
   blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).

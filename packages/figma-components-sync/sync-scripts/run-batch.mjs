@@ -476,6 +476,8 @@ if (runtime) {
 
 console.log('\n── 6. set ids ' + '─'.repeat(56));
 const built = [];
+// Entries `recordBuilt` refused: never counted as built, and they fail the run.
+const refused = [];
 for (const r of report) {
   if (!r.setId) {
     console.log(`  ${String(r.component).padEnd(9)} NO SET — ${r.built} loose components on ${r.page}.`);
@@ -483,6 +485,11 @@ for (const r of report) {
     continue;
   }
   const where = recordBuilt(r);
+  if (where === null) {
+    console.log(`  ${String(r.component).slice(0, 40).padEnd(9)} REFUSED - not a component in this batch, or set id ${JSON.stringify(String(r.setId).slice(0, 40))} is not a node id; nothing written.`);
+    refused.push(r.component);
+    continue;
+  }
   console.log(`  ${r.component.padEnd(9)} ${String(r.built).padStart(4)} built  set ${r.setId}  → ${where}`);
   // A real variant's effect spread, before and after combineAsVariants. Says whether a
   // lost spread was never written or was dropped by the combine.
@@ -613,7 +620,7 @@ if (SKIP_VERIFY || !built.length) {
   console.log(`\nskipping verification${why}.`);
   // An aborted run lists only the components that finished, so `built` can equal `report`
   // exactly when the run failed.
-  process.exit(built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed ? 0 : 1);
+  process.exit(built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed && !refused.length ? 0 : 1);
 }
 console.log('\n── 7. verifying ' + '─'.repeat(54));
 // STREAM it. Capturing stdout buffers every progress line until the child exits, and
@@ -635,7 +642,7 @@ if (WANT_VISUAL) {
   console.log('\n── 8. contact sheets ' + '─'.repeat(49));
   // Use the already-parsed report rather than re-reading the file: its shape changed
   // when the plugin started reporting runtime facts alongside the components.
-  for (const r of report.filter(x => x.setId)) {
+  for (const r of report.filter(x => x.setId && !refused.includes(x.component))) {
     const v = spawnSync(process.execPath,
       ['sync-scripts/visual-compare.mjs', r.component, '--set', r.setId, '--limit', '8', '--zoom', '4'],
       { encoding: 'utf8' });
@@ -643,4 +650,4 @@ if (WANT_VISUAL) {
   }
 }
 
-process.exit(chk.status === 0 && built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed ? 0 : 1);
+process.exit(chk.status === 0 && built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed && !refused.length ? 0 : 1);

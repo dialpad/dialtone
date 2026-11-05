@@ -202,18 +202,18 @@ function foldRules (matchedCSSRules = []) {
  */
 export async function matchedFor (cdp, nodeId) {
   const ms = await cdp.send('CSS.getMatchedStylesForNode', { nodeId });
-  const own = foldRules(ms.matchedCSSRules);
-  for (const d of (ms.inlineStyle && ms.inlineStyle.cssProperties) || []) {
-    if (d.name && d.value !== undefined && !d.disabled) own[d.name] = { value: d.value, selector: '[inline]' };
-  }
-  const chain = ((ms.inherited || []).map(entry => {
-    const folded = foldRules(entry.matchedCSSRules);
-    for (const d of (entry.inlineStyle && entry.inlineStyle.cssProperties) || []) {
-      if (d.name && d.value !== undefined && !d.disabled) folded[d.name] = { value: d.value, selector: '[inline]' };
-    }
-    return folded;
-  }));
+  const own = foldMatched(ms);
+  const chain = (ms.inherited || []).map(foldMatched);
   return { own, chain };
+}
+
+/** An element's matched rules with its inline style on top (inline wins, as in the cascade). */
+function foldMatched (entry) {
+  const folded = foldRules(entry.matchedCSSRules);
+  for (const d of (entry.inlineStyle && entry.inlineStyle.cssProperties) || []) {
+    if (d.name && d.value !== undefined && !d.disabled) folded[d.name] = { value: d.value, selector: '[inline]' };
+  }
+  return folded;
 }
 
 /**
@@ -226,8 +226,9 @@ export async function tokensForPseudo (cdp, nodeId, pseudoType) {
   const entry = (ms.pseudoElements || []).find(p => p.pseudoType === pseudoType);
   if (!entry) return { tokens: {}, computed: {} };
   const own = foldRules(entry.matches);
-  const ownerOwn = foldRules(ms.matchedCSSRules);
-  const chain = [ownerOwn, ...(ms.inherited || []).map(e => foldRules(e.matchedCSSRules))];
+  // Inline style included, as in matchedFor: a Vue `:style="{ '--x': 'var(--dt-...)' }"` on the
+  // owner or an ancestor is a custom property the pseudo-element can consume.
+  const chain = [foldMatched(ms), ...(ms.inherited || []).map(foldMatched)];
   return resolveDeclared(own, chain);
 }
 
