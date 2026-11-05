@@ -100,6 +100,7 @@
           <footer
             v-if="hasFooterSlot()"
             :class="['d-modal__footer', footerClass]"
+            data-qa="dt-modal-footer"
           >
             <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
             <slot name="footer" />

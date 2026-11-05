@@ -235,18 +235,26 @@ describe('DtModal Tests', () => {
           </dt-modal>
         `,
       };
-      const mountHost = (showFooter) => mount(ToggleHost, {
-        props: { showFooter },
-        global: { plugins: [DtFocustrapDirective] },
-        attachTo: document.body,
-      });
+      const hosts = [];
+      const mountHost = (showFooter) => {
+        const host = mount(ToggleHost, {
+          props: { showFooter },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: document.body,
+        });
+        hosts.push(host);
+        return host;
+      };
       const findFooter = (host) => host.find('[data-qa="test-footer"]');
+      const findFooterWrapper = (host) => host.find('[data-qa="dt-modal-footer"]');
+
+      // Unmount in afterEach so teleported DOM is cleaned up even when an assertion fails.
+      afterEach(() => {
+        hosts.splice(0).forEach((host) => host.unmount());
+      });
 
       it('should not render the footer initially when the slot is absent', () => {
-        const host = mountHost(false);
-
-        expect(findFooter(host).exists()).toBe(false);
-        host.unmount();
+        expect(findFooter(mountHost(false)).exists()).toBe(false);
       });
 
       it('should render the footer after the slot is provided', async () => {
@@ -255,7 +263,14 @@ describe('DtModal Tests', () => {
         await host.setProps({ showFooter: true });
 
         expect(findFooter(host).exists()).toBe(true);
-        host.unmount();
+      });
+
+      it('should render the footer wrapper after the slot is provided', async () => {
+        const host = mountHost(false);
+
+        await host.setProps({ showFooter: true });
+
+        expect(findFooterWrapper(host).exists()).toBe(true);
       });
 
       it('should not render the footer after the slot is removed again', async () => {
@@ -264,7 +279,14 @@ describe('DtModal Tests', () => {
         await host.setProps({ showFooter: false });
 
         expect(findFooter(host).exists()).toBe(false);
-        host.unmount();
+      });
+
+      it('should not render the footer wrapper after the slot is removed again', async () => {
+        const host = mountHost(true);
+
+        await host.setProps({ showFooter: false });
+
+        expect(findFooterWrapper(host).exists()).toBe(false);
       });
     });
 
