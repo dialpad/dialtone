@@ -13,7 +13,7 @@
     </div>
     <template v-else>
       <p v-if="loadFailures">
-        Failed to load {{ loadFailures }} {{ itemLabel }}.
+        Failed story imports: {{ loadFailures }}.
       </p>
       <dt-stack
         data-qa="kitchen-sink-navigation"

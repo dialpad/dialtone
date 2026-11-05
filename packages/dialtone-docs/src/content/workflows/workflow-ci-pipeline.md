@@ -98,7 +98,7 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 
 ### `a11y_tests.yml`
 
-**Trigger:** Push to `staging` or `production`, and pull requests touching `packages/dialtone-vue/**`, root `package.json`/`pnpm-lock.yaml`/`pnpm-workspace.yaml`, `.nvmrc`, the shared setup action or this workflow.
+**Trigger:** Push to `staging` or `production`, and pull requests opened or synchronized. Both triggers use path filters for `packages/dialtone-vue/**`, root `package.json`/`pnpm-lock.yaml`/`pnpm-workspace.yaml`, `.nvmrc`, the shared setup action or this workflow.
 
 **What it does:**
 1. Set up the environment and report the runner OS and browser-tool versions.
