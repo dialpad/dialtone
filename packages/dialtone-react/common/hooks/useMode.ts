@@ -14,11 +14,13 @@ const MODE_OBSERVER_CONFIG: MutationObserverInit = { attributes: true, attribute
  * dialtone-vue's ModeMixin as a hook. Resolves `contentMode` (light, dark, invert) to the attributes of a positioned
  * content element. `invert` is the opposite of the nearest ancestor mode of `getModeReferenceEl()`, which should be the
  * anchor (the content itself is moved elsewhere, e.g. into a tippy popper). Root contrast and ancestor mode changes are
- * followed through MutationObservers, as the mixin does.
+ * followed through MutationObservers, as the mixin does. Pass `referenceEl` when the reference element can be swapped for
+ * another (an external anchor): the mode is then resolved again and the observers move to the new element's ancestors.
  */
 export function useMode (
   contentMode: ContentMode | null | undefined,
   getModeReferenceEl: () => Element | null | undefined,
+  referenceEl?: Element | null,
 ): ModeAttrs {
   const [modeContrast, setModeContrast] = useState('default');
   const [modeResolved, setModeResolved] = useState<string | null>(null);
@@ -52,7 +54,7 @@ export function useMode (
       modeObserver?.disconnect();
       setModeResolved(null);
     };
-  }, [contentMode]);
+  }, [contentMode, referenceEl]);
 
   if (!contentMode) return {};
   const resolvedMode = contentMode === 'invert' ? modeResolved : contentMode;

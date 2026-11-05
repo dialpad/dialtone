@@ -210,7 +210,7 @@ export function DtTooltip ({
   // Hover and focus. One state, and every change decided in an update: like Vue's fields, it then sees every enter and
   // leave handled so far, even one not rendered yet. So a timer firing after such a leave can't show the tooltip.
   const [trigger, setTrigger] = useState<TriggerState>(() => ({ show: enabled && defaultOpen, pendingDelay: null }));
-  const show = isControlled ? enabled && open : trigger.show;
+  const show = enabled && (isControlled ? open : trigger.show);
 
   // Everything tippy is given through setProps, compared by value: an array prop mutated in place still reaches tippy on
   // the next render (Vue watches those deeply), and a new array with the same values doesn't call setProps again.
@@ -224,7 +224,7 @@ export function DtTooltip ({
     return externalAnchorElement ?? getAnchor(anchorWrapperRef.current);
   }
 
-  const { 'data-dt-mode': dtMode, 'data-dt-contrast': dtContrast } = useMode(contentMode, resolveAnchor);
+  const { 'data-dt-mode': dtMode, 'data-dt-contrast': dtContrast } = useMode(contentMode, resolveAnchor, externalAnchorElement);
 
   function resolveAppendTo (): TippyProps['appendTo'] | undefined {
     if (appendTo !== 'body') return appendTo;
@@ -254,7 +254,7 @@ export function DtTooltip ({
 
   // Vue's triggerShow, as a check.
   function canTriggerShow (type: string): boolean {
-    if (isControlled) return false;
+    if (isControlled || !enabled) return false;
     // Only show on visible focus when triggered by focus. A mouse user only wants tooltips on hover: closing a popover
     // with the mouse focuses its anchor, and that shouldn't show the anchor's tooltip.
     return type !== 'focusin' || hasVisibleFocus();
