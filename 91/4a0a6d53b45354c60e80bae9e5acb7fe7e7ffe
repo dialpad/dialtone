@@ -1,0 +1,48 @@
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_7f1d1d64baa803::t_03b2cbb87a203e 6,56-58,107
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_03b2cbb87a203e 23,56,116
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_0636b45165acba 312-313
+  s_7f1d1d64baa803::t_9ab2fed83e9214 353,355
+packages/dialtone-mcp-server/release-ci.config.cjs
+  s_7f1d1d64baa803::t_23021e90027292 4,13,17
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_7f1d1d64baa803::t_0627efe2f23581 49,58-75,79-101,108,110-111
+  s_7f1d1d64baa803::t_03b2cbb87a203e 76,102-104,106-107,109
+  s_7f1d1d64baa803::t_c0d39a6e5674d0 105
+  s_7f1d1d64baa803::t_6ac5a645934f53 77-78
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_03b2cbb87a203e 39
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_03b2cbb87a203e 6,68
+scripts/lib/lookup-release.cjs
+  s_7f1d1d64baa803::t_4eadf4fe455501 40,43-48
+  s_7f1d1d64baa803::t_23021e90027292 1-39,41,49-51
+  s_7f1d1d64baa803::t_5424b6f09c0b43 42
+packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md
+  s_7f1d1d64baa803::t_7fe6c316201445 6,66
+  s_7f1d1d64baa803::t_de539e98d708ff 67
+.github/COMMIT_CONVENTION.md
+  s_7f1d1d64baa803::t_03b2cbb87a203e 46-48
+packages/dialtone-cli/release-ci.config.cjs
+  s_7f1d1d64baa803::t_23021e90027292 4,13,17
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_03b2cbb87a203e 43-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "914a0a6d53b45354c60e80bae9e5acb7fe7e7ffe",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
