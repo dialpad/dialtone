@@ -19,6 +19,8 @@
  * Excluded rather than guessed at; revisit if DtButton ever states the combination is
  * supported.
  */
+import { loaderSwap } from '../loader-swap.mjs';
+
 export default {
   /**
    * RAW TYPOGRAPHY, NOT THE LIBRARY'S TEXT STYLES. `linkUnderline` is an axis, so the label's
@@ -53,11 +55,7 @@ export default {
   slots: () => [],
   // While loading, `.d-loader` is an instance of the real DtLoader, exactly as in Button
   // (see button's anatomySwap in component-axes.mjs). DtLoader must be built first.
-  anatomySwap: c => ({
-    selector: 'd-loader',
-    component: 'loader',
-    variant: { size: { 100: 200, 200: 200, 300: 300, 400: 400, 500: 500 }[c.size] },
-  }),
+  anatomySwap: loaderSwap,
   // only these two need the CDP override; active/disabled are class-driven
   pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
 };

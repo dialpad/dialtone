@@ -8,6 +8,8 @@
  * own set has no label, no start/end icon toggles (the icon is always there), and an icon swap
  * to choose the glyph. In code it is still one component, DtButton with `circle`.
  */
+import { loaderSwap } from '../loader-swap.mjs';
+
 export default {
   component: 'DtButton', label: '', page: 'ButtonIcon',
   // Computed spacing at the nearest token; the circle's 50% radius is the pill token (token-snap.mjs).
@@ -38,10 +40,6 @@ export default {
   // The one icon, always present: an icon-only button with no icon is not a button.
   slots: () => ['startIcon'],
   // While loading `.d-loader` is an instance of DtLoader, as in DtButton (see component-axes.mjs).
-  anatomySwap: c => ({
-    selector: 'd-loader',
-    component: 'loader',
-    variant: { size: { 100: 200, 200: 200, 300: 300, 400: 400, 500: 500 }[c.size] },
-  }),
+  anatomySwap: loaderSwap,
   pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
 };

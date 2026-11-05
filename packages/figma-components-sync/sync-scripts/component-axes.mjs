@@ -4,6 +4,8 @@
  * the .vue props block), never from <Name>Constants.js, whose keys are CSS modifier
  * names and not prop values.
  */
+import { loaderSwap } from './loader-swap.mjs';
+
 const BUILT_IN = {
   button: {
     component: 'DtButton', label: 'Button', page: 'Button',
@@ -79,11 +81,7 @@ const BUILT_IN = {
      * uses at runtime — Button's 100/200 both collapse to Loader's 200, there is no Loader
      * size below it.
      */
-    anatomySwap: c => ({
-      selector: 'd-loader',
-      component: 'loader',
-      variant: { size: { 100: 200, 200: 200, 300: 300, 400: 400, 500: 500 }[c.size] },
-    }),
+    anatomySwap: loaderSwap,
     // only these two need the CDP override; active/disabled are class-driven
     pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
   },
