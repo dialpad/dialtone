@@ -17,7 +17,7 @@ import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 import { setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 import type { BrandTheme, ContrastTheme, Mode } from '@dialpad/dialtone-tokens/themes/config';
 import { createThemeController } from '../../dialtone-vue/.storybook/theme-controller.js';
-import { BRAND_IDS, globalTypes } from './shared';
+import { BRAND_IDS, globalTypes, readStoredDarkMode } from './shared';
 import type { BrandId } from './shared';
 
 // One import per brand in shared.ts (the Record makes a missing one a type
@@ -47,19 +47,7 @@ const BRAND_IMPORTS = BRAND_IDS.map(id => [id, BRAND_LOADERS[id]()] as const);
 const highContrastImport = import('@dialpad/dialtone-tokens/themes/high-contrast');
 
 let currentContrast = 'default';
-// Initialize dark mode from localStorage (storybook-dark-mode stores it there)
-let currentDarkMode = (() => {
-  try {
-    const storedValue = localStorage.getItem('sb-addon-themes-3');
-    if (storedValue) {
-      const parsed = JSON.parse(storedValue);
-      return parsed.current === 'dark';
-    }
-  } catch {
-    // Ignore errors
-  }
-  return false; // Default to light mode
-})();
+let currentDarkMode = readStoredDarkMode();
 let currentBrandTheme = 'dp';
 
 const themeController = createThemeController({

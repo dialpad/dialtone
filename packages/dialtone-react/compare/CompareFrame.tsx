@@ -17,7 +17,7 @@ import {
 } from './frames';
 import type { Args, IndexedStory, Side } from './frames';
 import ports from './ports.json';
-import { readStoredDarkMode } from './darkMode';
+import { readStoredDarkMode } from '../.storybook/shared';
 
 interface Prepared {
   args: Args;
@@ -63,8 +63,9 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
   const isDark = useDarkMode();
   const vueFrame = useRef<HTMLIFrameElement>(null);
   const reactFrame = useRef<HTMLIFrameElement>(null);
+  // The message listener is registered once, so it reads the mode through a
+  // ref; the dark-mode effect below keeps it current.
   const isDarkRef = useRef(isDark);
-  isDarkRef.current = isDark;
 
   useEffect(() => {
     let cancelled = false;
@@ -104,6 +105,7 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
   }, []);
 
   useEffect(() => {
+    isDarkRef.current = isDark;
     postChannelEvent(vueFrame.current?.contentWindow, DARK_MODE_EVENT_NAME, [isDark]);
     postChannelEvent(reactFrame.current?.contentWindow, DARK_MODE_EVENT_NAME, [isDark]);
   }, [isDark]);

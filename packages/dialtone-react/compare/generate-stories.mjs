@@ -101,6 +101,13 @@ for (const [importPath, entries] of files) {
       mismatches.push(`${entry.id}: Vue's index has no exportName`);
       continue;
     }
+    // The export name goes into the generated source as is, so it must be a
+    // plain identifier. The id check below can't vouch for that: the index
+    // gives both, and an id can be derived from the same bad name.
+    if (!/^[A-Za-z_$][\w$]*$/.test(entry.exportName)) {
+      mismatches.push(`${entry.id}: export name ${JSON.stringify(entry.exportName)} isn't a plain identifier`);
+      continue;
+    }
     const id = toId(componentId, storyNameFromExport(entry.exportName));
     if (id !== entry.id) {
       mismatches.push(`${entry.id}: export ${entry.exportName} would give ${id}`);
@@ -123,7 +130,7 @@ await Promise.all(sources.map(([name, source]) => writeFile(join(outDir, name), 
 
 console.log(`compare: wrote ${stories.length - mismatches.length} stories in ${sources.length} files to ${outDir}`);
 if (mismatches.length) {
-  console.error(`compare: skipped ${mismatches.length} stories whose id can't be reproduced:\n  ${mismatches.join('\n  ')}`);
+  console.error(`compare: skipped ${mismatches.length} stories it can't reproduce:\n  ${mismatches.join('\n  ')}`);
 }
 
 // React stories Vue doesn't have: most likely a ported story with the wrong

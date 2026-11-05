@@ -11,8 +11,7 @@ import { addons } from 'storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 import { initDialtoneTheme, setMode } from '@dialpad/dialtone-tokens/themes/config';
 import dp from '@dialpad/dialtone-tokens/themes/dp';
-import { globalTypes } from '../../.storybook/shared';
-import { readStoredDarkMode } from '../darkMode';
+import { globalTypes, readStoredDarkMode } from '../../.storybook/shared';
 
 // The chrome follows the dark-mode toggle too, in the default Dialpad theme.
 const root = document.documentElement;
