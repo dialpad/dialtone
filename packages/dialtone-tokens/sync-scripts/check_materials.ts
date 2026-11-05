@@ -28,7 +28,7 @@ import { parseColor, colorApproximatelyEqual } from './color.js';
 import { Color } from './figma_api.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
-import { collectionTargets } from './utils.js';
+import { collectionTarget } from './utils.js';
 
 const MATERIALS = ['steel', 'graphite', 'iron', 'amethyst', 'jade'];
 const MODES = { light: 'Light', dark: 'Dark' } as const;
@@ -227,14 +227,9 @@ async function main (PARENT: string, fileKey: string | undefined): Promise<numbe
 }
 
 (async () => {
-  // Every parent is checked, and the worst exit code wins, so a failure in the
-  // restricted collection is not masked by a clean unrestricted one.
-  let code = 0;
-  for (const { name, fileKey } of collectionTargets()) {
-    console.log(`\n== ${name} ==`);
-    code = Math.max(code, await main(name, fileKey));
-  }
-  process.exit(code);
+  const { name, fileKey } = collectionTarget();
+  console.log(`\n== ${name} ==`);
+  process.exit(await main(name, fileKey));
 })().catch((error: { response?: { status?: number; data?: unknown }; message?: string }) => {
   console.error(`failed: ${error.response?.status ?? ''} ${JSON.stringify(error.response?.data ?? error.message).slice(0, 500)}`);
   process.exit(1);
