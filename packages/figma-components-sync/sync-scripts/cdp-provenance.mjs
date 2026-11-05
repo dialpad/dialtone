@@ -207,11 +207,19 @@ export async function matchedFor (cdp, nodeId) {
   return { own, chain };
 }
 
-/** An element's matched rules with its inline style on top (inline wins, as in the cascade). */
-function foldMatched (entry) {
+/**
+ * An element's matched rules with its inline style on top. A normal inline declaration beats a normal
+ * rule, but an `!important` rule beats a normal inline declaration, and an important inline one beats
+ * both, as in the cascade. The marker is stripped so token resolution sees the bare value.
+ */
+export function foldMatched (entry) {
   const folded = foldRules(entry.matchedCSSRules);
   for (const d of (entry.inlineStyle && entry.inlineStyle.cssProperties) || []) {
-    if (d.name && d.value !== undefined && !d.disabled) folded[d.name] = { value: d.value, selector: '[inline]' };
+    if (!d.name || d.value === undefined || d.disabled || d.parsedOk === false) continue;
+    const important = d.important === true || /\s*!important\s*$/i.test(String(d.value));
+    const prev = folded[d.name];
+    if (prev && prev.important && !important) continue;
+    folded[d.name] = { value: String(d.value).replace(/\s*!important\s*$/i, ''), selector: '[inline]', important };
   }
   return folded;
 }
