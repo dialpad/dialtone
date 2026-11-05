@@ -241,8 +241,13 @@ export const Positioning = {
     components: { DtBox, DtStack, DtText },
     template: `
       <dt-box
+        as="section"
         block-size="600"
         overflow="auto"
+        tabindex="0"
+        role="region"
+        aria-label="Sticky header example"
+        class="fv:d-ol-focusring"
         surface="secondary"
         border-width="100"
         border-radius="300"

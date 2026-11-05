@@ -1,6 +1,12 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-mis-200">
+  <main
+    :aria-label="frameTitle"
+    class="d-mis-200"
+  >
+    <h1 class="d-headline--md d-mbe-100">
+      Popover in an iframe
+    </h1>
     <dt-popover
       :open="$attrs.open"
       :modal="true"
@@ -29,7 +35,7 @@
         </div>
       </template>
     </dt-popover>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -43,5 +49,10 @@ export default {
     DtPopover,
     DtButton,
   },
+
+  data () {
+    return { frameTitle: window.frameElement?.title || 'Popover iframe example' };
+  },
+
 };
 </script>

@@ -11,20 +11,22 @@
     :header-class="$attrs.headerClass"
     :footer-class="$attrs.footerClass"
     :append-to="$attrs.appendTo"
-    :open="$attrs.open"
+    :open="$attrs.open ?? activatedOpen"
     :enter-delay="$attrs.enterDelay"
     :leave-delay="$attrs.leaveDelay"
-    @opened="$attrs.onOpened"
+    @opened="onOpened"
   >
     <template #anchor="slotProps">
       <dt-avatar
         full-name="Jaqueline Nackos"
         :image-src="defaultImage"
-        image-alt="Avatar person"
+        image-alt=""
         seed="JN"
         presence="busy"
-        avatar-class="d-c-pointer"
+        interactive
+        aria-label="Show Jaqueline Nackos profile"
         v-bind="slotProps"
+        @click="openCard"
       />
     </template>
     <template #content>
@@ -120,6 +122,7 @@
 </template>
 
 <script setup>
+import { ref, useAttrs } from 'vue';
 import DtHovercard from './Hovercard.vue';
 import defaultImage from '@/common/assets/avatar2.png';
 import DtStack from '../Stack/Stack.vue';
@@ -127,4 +130,18 @@ import DtIcon from '../Icon/Icon.vue';
 import DtButton from '../Button/Button.vue';
 import DtAvatar from '../Avatar/Avatar.vue';
 import DtInput from '../Input/Input.vue';
+
+const emit = defineEmits(['opened']);
+const attrs = useAttrs();
+const activatedOpen = ref(null);
+const inputValue = ref('');
+
+function openCard () {
+  if (attrs.open == null) activatedOpen.value = true;
+}
+
+function onOpened (isOpen) {
+  if (!isOpen) activatedOpen.value = null;
+  emit('opened', isOpen);
+}
 </script>

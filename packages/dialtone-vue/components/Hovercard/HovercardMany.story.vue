@@ -8,6 +8,7 @@
       <div>
         <dt-hovercard
           :id="$attrs.id"
+          :open="$attrs.open ?? data.open"
           :placement="$attrs.placement"
           :content-class="$attrs.contentClass"
           :fallback-placements="$attrs.fallbackPlacements"
@@ -20,7 +21,7 @@
           :append-to="$attrs.appendTo"
           :enter-delay="$attrs.enterDelay"
           :leave-delay="$attrs.leaveDelay"
-          @opened="$attrs.onOpened"
+          @opened="onOpened(data, $event)"
         >
           <template #anchor="slotProps">
             <dt-avatar
@@ -28,8 +29,10 @@
               :image-src="data.src"
               :seed="data.name"
               image-alt=""
-              avatar-class="d-c-pointer"
+              interactive
+              :aria-label="`Show ${data.name} profile`"
               v-bind="slotProps"
+              @click="openCard(data)"
             />
           </template>
           <template #content>
@@ -143,6 +146,7 @@
 </template>
 
 <script setup>
+import { reactive, useAttrs } from 'vue';
 import DtHovercard from './Hovercard.vue';
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';
@@ -151,22 +155,33 @@ import { DtIcon } from '@/components/Icon';
 import { DtButton } from '@/components/Button';
 import { DtAvatar } from '@/components/Avatar';
 
-const cardData = [{
-  name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+const emit = defineEmits(['opened']);
+const attrs = useAttrs();
+const cardData = reactive([{
+  open: null, name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
 },
 {
-  name: 'Joseph Lumaban', src: avatar1, time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  open: null, name: 'Joseph Lumaban', src: avatar1, time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
 },
 {
-  name: 'Purdie Afra', time: '5:16 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  open: null, name: 'Purdie Afra', time: '5:16 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
-}];
+}]);
+
+function openCard (card) {
+  if (attrs.open == null) card.open = true;
+}
+
+function onOpened (card, isOpen) {
+  if (!isOpen) card.open = null;
+  emit('opened', isOpen);
+}
 </script>
