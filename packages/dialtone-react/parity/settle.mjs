@@ -6,6 +6,12 @@ export const FAKE_TIMERS = {
   toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval', 'Date', 'requestAnimationFrame', 'cancelAnimationFrame'],
 };
 export const SETTLE_MS = 10_000;
+// What Math.random returns during every case, so components that pick at random (avatar colours) pick the same
+// on both sides and on every run. A constant rather than a seeded sequence: React's StrictMode renders twice,
+// so the two sides call Math.random a different number of times. A constant can't tell a port that hardcodes the
+// result, so the goldens note when the Vue component called Math.random and the React case fails if its port never
+// did (dom.test.tsx).
+export const FIXED_RANDOM = 0.5;
 
 /**
  * jsdom never fires transitionend, and libraries such as tippy wait for it rather than a timer. Fire it on every
