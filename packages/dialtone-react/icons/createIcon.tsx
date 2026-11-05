@@ -33,9 +33,13 @@ export function createIcon (displayName: string, attrs: Record<string, string>, 
     .filter(([name]) => name !== 'class' && name !== 'aria-hidden')
     .map(([name, value]) => [reactName(name), value]));
 
-  function Icon ({ size = 500, ariaLabel, className, 'data-qa': dataQa, ...rest }: DtIconProps) {
+  function Icon ({ size = 500, ariaLabel, 'aria-label': ariaLabelAttr, className, 'data-qa': dataQa, ...rest }: DtIconProps) {
+    // Vue maps an `aria-label` attribute onto the ariaLabel prop, so either one labels the icon and exposes it.
+    const label = ariaLabel ?? ariaLabelAttr;
     const uid = useId();
-    // Scope gradient and clip-path ids per instance, as the Vue icons do, so icons on one page don't clash.
+    // The icon's own SVG body, generated at build time from dialtone-icons: no consumer input reaches the
+    // dangerouslySetInnerHTML below. Gradient and clip-path ids are scoped per instance, as the Vue icons do,
+    // so icons on one page don't clash.
     const html = scoped
       ? inner.replace(/(clip-path|fill)="url\(#([^)]+)\)"/g, `$1="url(#${uid}$2)"`)
         .replace(/(clipPath|linearGradient|radialGradient) id="([^"]+)"/g, `$1 id="${uid}$2"`)
@@ -43,8 +47,8 @@ export function createIcon (displayName: string, attrs: Record<string, string>, 
     return (
       <svg
         {...rootProps}
-        aria-label={ariaLabel}
-        aria-hidden={ariaLabel ? 'false' : 'true'}
+        aria-label={label}
+        aria-hidden={label ? 'false' : 'true'}
         className={cx(attrs.class, ICON_SIZE_MODIFIERS[size], className)}
         data-qa={dataQa ?? 'dt-icon'}
         {...rest}

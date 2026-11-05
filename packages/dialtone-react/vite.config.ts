@@ -9,7 +9,5 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./tests/setup.ts'],
     include: ['{common,components,icons}/**/*.test.{ts,tsx}'],
-    // The package starts with no components, so no tests; the gate checks that a unit's tests ran.
-    passWithNoTests: true,
   },
 });
