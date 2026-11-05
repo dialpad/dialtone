@@ -30,7 +30,7 @@ export const Components = {
     await waitFor(() => expect(canvas.queryByText('Loading components...')).not.toBeInTheDocument(), { timeout: 10000 });
     const sections = [...canvasElement.querySelectorAll('.kitchen-sink__section')];
     expect(sections.length).toBeGreaterThan(0);
-    expect(canvas.queryByText(/Failed to render /)).not.toBeInTheDocument();
+    expect(canvas.queryByText(/Failed to (render|load) /)).not.toBeInTheDocument();
 
     const navigation = canvasElement.querySelector('[data-qa="kitchen-sink-navigation"]');
     const links = within(navigation).getAllByRole('link').filter(link => link.hash);

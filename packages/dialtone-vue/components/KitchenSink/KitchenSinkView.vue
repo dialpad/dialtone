@@ -12,6 +12,9 @@
       </dt-text>
     </div>
     <template v-else>
+      <p v-if="loadFailures">
+        Failed to load {{ loadFailures }} {{ itemLabel }}.
+      </p>
       <dt-stack
         data-qa="kitchen-sink-navigation"
         class="
@@ -170,6 +173,7 @@ const props = defineProps({
 
 const sections = ref([]);
 const loading = ref(true);
+const loadFailures = ref(0);
 
 function sanitizeId (str) {
   return str.toLowerCase().replace(/[\s/_]+/g, '-');
@@ -231,6 +235,7 @@ onMounted(async () => {
     Object.values(props.loaders).map(async (loader) => loader()),
   );
 
+  loadFailures.value = results.filter(result => result.status === 'rejected').length;
   const loaded = [];
 
   for (const result of results) {
