@@ -1,0 +1,23 @@
+packages/dialtone-vue/components/Hovercard/HovercardDefault.story.vue
+  s_7f1d1d64baa803::t_4597e08d3489a6 14,119,127-132,137
+packages/dialtone-vue/components/Popover/PopoverIframe.story.vue
+  s_7f1d1d64baa803::t_4597e08d3489a6 4,7-11,47,58-63
+packages/dialtone-vue/components/Hovercard/HovercardWithInput.story.vue
+  s_7f1d1d64baa803::t_4597e08d3489a6 14,125,134-139,145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e85ef2a377be98fe576c3ade2580b54ee6318fa0",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

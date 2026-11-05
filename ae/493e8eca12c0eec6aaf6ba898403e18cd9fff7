@@ -1,0 +1,19 @@
+.github/workflows/unit_tests.yml
+  s_5496a5e114cfcf::t_6ac6c2930f1464 8,15,33,44-45,78-93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "ae493e8eca12c0eec6aaf6ba898403e18cd9fff7",
+  "prompts": {},
+  "sessions": {
+    "s_5496a5e114cfcf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5db296a0-c4fe-47eb-97fc-bed0d42a3ead",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

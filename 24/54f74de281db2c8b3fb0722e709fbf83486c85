@@ -1,0 +1,29 @@
+gulpfile.cjs
+  s_39230a1a3e649e::t_a948032179396d 41,48
+entry/index.mjs
+  s_39230a1a3e649e::t_4008fddb64cfd7 1-6
+entry/index.cjs
+  s_39230a1a3e649e::t_1f98516f7b7880 1-6
+package.json
+  s_39230a1a3e649e::t_b8f48e395cfcba 21-25
+project.json
+  s_39230a1a3e649e::t_d4d1f91763a890 22,29-32
+entry/index.d.ts
+  s_39230a1a3e649e::t_a2cb3d488104d5 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "2454f74de281db2c8b3fb0722e709fbf83486c85",
+  "prompts": {},
+  "sessions": {
+    "s_39230a1a3e649e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0d14bb61-9c3d-4f11-a86c-02e6c451eb4c",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
