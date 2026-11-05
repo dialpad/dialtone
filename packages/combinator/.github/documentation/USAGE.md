@@ -130,6 +130,12 @@ compare by their underlying identity, including through Vue reactive proxies,
 so an in-place mutation re-emitted as the same instance is not detected.
 Without a binding, the playground continues to manage its own selection.
 
+Preset names are revalidated when the available names change. An unavailable
+prop request uses `default` and is retried if that name arrives later, unless the
+user has selected or edited options since the request. Removing the selected
+name falls back to `default`; unrelated additions preserve the selection and
+custom mode. Replacing the bank still rebuilds option values from its metadata.
+
 The documentation site maps these names to URL slugs, such as
 `avatar.html?preset=with-presence-no-icon`. Selecting a preset replaces the
 query while preserving other query values and the current browser hash.

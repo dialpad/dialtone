@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import { nextTick } from 'vue';
+import { nextTick, reactive } from 'vue';
 import { DtAvatar, DtButton, DtCheckbox, DtCheckboxGroup, DtRichTextEditor } from '@dialpad/dialtone-vue';
 import DtcCombinator from './combinator.vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
@@ -16,9 +16,9 @@ afterEach(() => {
   window.localStorage.clear();
 });
 
-function mountCombinator (preset) {
+function mountCombinator (preset, bank = variantBank.DtAvatar) {
   wrapper = shallowMount(DtcCombinator, {
-    props: { component: DtAvatar, documentation: avatarDoc, variants: variantBank.DtAvatar, preset },
+    props: { component: DtAvatar, documentation: avatarDoc, variants: bank, preset },
     global: { stubs: { teleport: false } },
   });
   return wrapper;
@@ -38,6 +38,125 @@ describe('Combinator preset control', () => {
     expect(wrapper.vm.selectedVariant).toBe('default');
     expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName)
       .toBe('Daniel Parker');
+  });
+
+  it.each(['replace', 'mutate'])('applies a pending preset when its bank arrives via %s', async mode => {
+    const bank = reactive({ default: variantBank.DtAvatar.default });
+    mountCombinator('image', bank);
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    bank.extra = {};
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    if (mode === 'replace') await wrapper.setProps({ variants: variantBank.DtAvatar });
+    else { bank.image = variantBank.DtAvatar.image; await nextTick(); }
+    expect(wrapper.vm.selectedVariant).toBe('image');
+    expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.imageSrc)
+      .toBe('/assets/images/person.png');
+    expect(wrapper.emitted('update:preset')).toBeUndefined();
+  });
+
+  it.each(['replace', 'mutate'])('falls back when the selected preset disappears via %s', async mode => {
+    const bank = reactive({ ...variantBank.DtAvatar });
+    mountCombinator('image', bank);
+    await nextTick();
+    if (mode === 'replace') {
+      const replacement = { ...bank };
+      delete replacement.image;
+      await wrapper.setProps({ variants: replacement });
+    } else { delete bank.image; await nextTick(); }
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Daniel Parker');
+    expect(wrapper.emitted('update:preset')).toBeUndefined();
+  });
+
+  it('reapplies the requested preset when a removed name returns', async () => {
+    const bank = reactive({ ...variantBank.DtAvatar });
+    mountCombinator('image', bank);
+    await nextTick();
+    delete bank.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    bank.image = variantBank.DtAvatar.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('image');
+    expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.imageSrc)
+      .toBe('/assets/images/person.png');
+  });
+
+  it('preserves spec-sheet view while revalidating a removed and restored preset', async () => {
+    const bank = reactive({ ...variantBank.DtAvatar });
+    mountCombinator('image', bank);
+    await nextTick();
+    wrapper.vm.toggleViewMode();
+    delete bank.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    expect(wrapper.vm.viewMode).toBe('grid');
+    bank.image = variantBank.DtAvatar.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('image');
+    expect(wrapper.vm.viewMode).toBe('grid');
+  });
+
+  it('falls back after an uncontrolled selection is removed without retrying that user selection later', async () => {
+    const bank = reactive({ ...variantBank.DtAvatar });
+    mountCombinator(undefined, bank);
+    wrapper.vm.updateVariant('image');
+    await nextTick();
+    delete bank.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    bank.image = variantBank.DtAvatar.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    expect(wrapper.emitted('update:preset')).toEqual([['image']]);
+  });
+
+  it.each(['replace', 'mutate'])('preserves an uncontrolled selection and spec sheet on unrelated %s', async mode => {
+    const bank = reactive({ ...variantBank.DtAvatar });
+    mountCombinator(undefined, bank);
+    wrapper.vm.updateVariant('image');
+    await nextTick();
+    wrapper.vm.toggleViewMode();
+    if (mode === 'replace') await wrapper.setProps({ variants: { ...bank, extra: {} } });
+    else { bank.extra = {}; await nextTick(); }
+    expect(wrapper.vm.selectedVariant).toBe('image');
+    expect(wrapper.vm.viewMode).toBe('grid');
+    expect(wrapper.emitted('update:preset')).toEqual([['image']]);
+  });
+
+  it.each(['default', 'selection', 'edit'])(
+    'keeps a later user %s instead of retrying an unavailable preset', async action => {
+      const bank = reactive({
+        default: variantBank.DtAvatar.default,
+        'with presence': variantBank.DtAvatar['with presence'],
+      });
+      mountCombinator('image', bank);
+      await nextTick();
+      if (action === 'default') wrapper.vm.resetOptions();
+      else if (action === 'selection') wrapper.vm.updateVariant('with presence');
+      else wrapper.vm.onComponentEvent('update:fullName', 'Edited name');
+      await nextTick();
+      bank.image = variantBank.DtAvatar.image;
+      await nextTick();
+      expect(wrapper.vm.selectedVariant).toBe({ default: 'default', selection: 'with presence', edit: '' }[action]);
+      if (action === 'edit') {
+        expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Edited name');
+      }
+    },
+  );
+
+  it('uses the newest preset prop when a previously requested name arrives', async () => {
+    const bank = reactive({ default: variantBank.DtAvatar.default });
+    mountCombinator('image', bank);
+    await wrapper.setProps({ preset: 'with presence' });
+    bank.image = variantBank.DtAvatar.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    bank['with presence'] = variantBank.DtAvatar['with presence'];
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('with presence');
   });
 
   it('applies a changed preset prop and returns from the spec sheet to single view', async () => {
