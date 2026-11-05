@@ -90,6 +90,8 @@ else if (failing.length || unitRun.broken) {
     ...failing.map(t => `- ${t.title}\n${block(tail(t.failure, 15))}`),
     unitRun.broken && `Failures outside any test:\n${block(unitRun.broken)}`,
   ].filter(Boolean).join('\n'));
+} else if (!passing.length) {
+  bad('Unit tests', `none passed (${reactTests.length} skipped or todo)`, 'Every React test of this unit is skipped or todo, so nothing was checked.');
 } else ok('Unit tests', `${passing.length} passed`);
 
 const vueTestFiles = fs.existsSync(vueDir) ? fs.readdirSync(vueDir).filter(f => f.endsWith('.test.js')) : [];
