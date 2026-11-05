@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [figma, figma-sync, sync-scripts, design-tokens, figma-variables, style-dictionary, figma-api, personal-access-token, tokens-studio]
 ai_summary: How Dialtone tokens reach Figma variables — the resolver, the scope policy, the CSS check, how to run it locally, and how CI triggers it.
-last_updated: 2026-08-27
+last_updated: 2026-11-05
 related_packages: [dialtone-tokens]
 ---
 
@@ -46,7 +46,7 @@ The sync resolves the token sets itself, so it does not need `dialtone-tokens:bu
 
 `sync:materials` writes the five material collections, which extend the main one. It reads the main collection to find the variables it overrides, so run it after `sync:variables`, never before.
 
-Both scripts write one parent collection, "Dialtone 2026", to the file in `FILE_KEY`. It keeps each token's `hiddenFromPublishing` flag, so tokens meant for internal use stay out of the published library. The five material collections extend it ("Dialtone 2026 / Steel", and so on). When `COLLECTION_NAME` is set, as in the preview file, it replaces the base name. `--file-key` points the sync at another file, such as a scratch file. `sync:variables` writes the parent collection and `sync:materials` writes its material collections. `sync:materials:check` verifies the file; `sync:variables:check` only compares the resolved values with the built CSS and never reads Figma, so it says nothing about the published collection.
+`sync:variables` writes one parent collection, "Dialtone 2026", to the file in `FILE_KEY`. It keeps each token's `hiddenFromPublishing` flag, so tokens meant for internal use stay out of the published library. `sync:materials` reads that parent and writes the five material collections that extend it ("Dialtone 2026 / Steel", and so on). When `COLLECTION_NAME` is set, as in the preview file, it replaces the base name. `--file-key` points either script at another file, such as a scratch file. `sync:materials:check` verifies the file; `sync:variables:check` only compares the resolved values with the built CSS and never reads Figma, so it says nothing about the published collection.
 
 ### Getting it into Figma, once this reaches `staging`
 
@@ -93,6 +93,7 @@ Everything lives in `packages/dialtone-tokens/sync-scripts/`.
 | `--dry-run` | Report what would change and post nothing |
 | `--file-key KEY` | Override `FILE_KEY`, for pointing at a scratch file |
 | `--out FILE` | Also write the payload to a file, for inspection |
+| `--local-snapshot FILE` | Skip the REST read of existing variables and use this JSON dump instead, shaped like the `/variables/local` response. A recovery path for when that endpoint returns a stale or wrong view; build the file from the Plugin API's live state, not from another REST call |
 
 The sync is idempotent. It reads the file first and sends only the difference, so a second run reports nothing to post.
 
