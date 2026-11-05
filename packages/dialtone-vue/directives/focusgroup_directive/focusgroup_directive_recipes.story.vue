@@ -32,12 +32,12 @@
       Up/Down cycles all visible items. Right expands a group, Left collapses or
       moves to parent. Directive owns vertical nav; consumer owns tree structure.
       Uses <code>DtCollapsible</code> for expand/collapse.
-      <code>v-dt-focusgroup="'vertical'"</code>
+      <code>selector: '[role=treeitem]'</code> keeps the collapsible content wrapper out of navigation.
     </dt-text>
     <dt-stack
-      v-dt-focusgroup="'vertical'"
+      v-dt-focusgroup="{ axis: 'vertical', selector: '[role=treeitem]' }"
       role="tree"
-      tabindex="0"
+      tabindex="-1"
       aria-label="Sidebar navigation"
       class="d-ba d-bc-subtle d-bar-400 d-w-500 d-p-50"
       @keydown.right.prevent="expandOrEnter"
@@ -60,35 +60,43 @@
         Launchpad
       </dt-button>
       <dt-collapsible
+        role="treeitem"
+        :aria-expanded="groupExpanded"
+        :aria-labelledby="groupLabelId"
+        data-tree-group="ops"
+        tabindex="-1"
+        class="d-bar-400"
         :open="groupExpanded"
         anchor-class="d-w100p"
+        @click="toggleTreeGroup('ops', $event)"
+        @keydown.enter.self.prevent="toggleGroup('ops', !groupExpanded)"
+        @keydown.space.self.prevent="toggleGroup('ops', !groupExpanded)"
         @update:open="groupExpanded = $event"
       >
-        <template
-          #anchor="{ attrs }"
-        >
-          <dt-button
-            role="treeitem"
-            kind="muted"
-            importance="clear"
-            v-bind="attrs"
-            data-tree-group="ops"
-            class="d-w100p"
-            tabindex="0"
-            label-class="d-jc-space-between"
-            @click="groupExpanded = !groupExpanded"
+        <template #anchor>
+          <dt-stack
+            direction="row"
+            justify="space-between"
+            align="center"
+            class="d-p-100 h:d-bgc-moderate-opaque d-bar-400"
           >
-            <template #endIcon>
-              <dt-icon
-                :name="groupExpanded ? 'chevron-down' : 'chevron-right'"
-                :size="200"
-              />
-            </template>
-            Operations &amp; Planning
-          </dt-button>
+            <dt-text
+              :id="groupLabelId"
+              kind="body"
+            >
+              Operations &amp; Planning
+            </dt-text>
+            <dt-icon
+              :name="groupExpanded ? 'chevron-down' : 'chevron-right'"
+              :size="200"
+            />
+          </dt-stack>
         </template>
         <template #content>
-          <dt-stack class="d-pis-150">
+          <dt-stack
+            role="group"
+            class="d-pis-150"
+          >
             <dt-button
               role="treeitem"
               kind="muted"
@@ -125,35 +133,43 @@
         </template>
       </dt-collapsible>
       <dt-collapsible
+        role="treeitem"
+        :aria-expanded="channelsExpanded"
+        :aria-labelledby="channelsLabelId"
+        data-tree-group="channels"
+        tabindex="-1"
+        class="d-bar-400"
         :open="channelsExpanded"
         anchor-class="d-w100p"
+        @click="toggleTreeGroup('channels', $event)"
+        @keydown.enter.self.prevent="toggleGroup('channels', !channelsExpanded)"
+        @keydown.space.self.prevent="toggleGroup('channels', !channelsExpanded)"
         @update:open="channelsExpanded = $event"
       >
-        <template
-          #anchor="{ attrs }"
-        >
-          <dt-button
-            role="treeitem"
-            kind="muted"
-            importance="clear"
-            v-bind="attrs"
-            data-tree-group="channels"
-            class="d-w100p"
-            tabindex="0"
-            label-class="d-jc-space-between"
-            @click="channelsExpanded = !channelsExpanded"
+        <template #anchor>
+          <dt-stack
+            direction="row"
+            justify="space-between"
+            align="center"
+            class="d-p-100 h:d-bgc-moderate-opaque d-bar-400"
           >
-            <template #endIcon>
-              <dt-icon
-                :name="channelsExpanded ? 'chevron-down' : 'chevron-right'"
-                :size="200"
-              />
-            </template>
-            Channels
-          </dt-button>
+            <dt-text
+              :id="channelsLabelId"
+              kind="body"
+            >
+              Channels
+            </dt-text>
+            <dt-icon
+              :name="channelsExpanded ? 'chevron-down' : 'chevron-right'"
+              :size="200"
+            />
+          </dt-stack>
         </template>
         <template #content>
-          <dt-stack class="d-pis-150">
+          <dt-stack
+            role="group"
+            class="d-pis-150"
+          >
             <dt-button
               role="treeitem"
               kind="muted"
@@ -615,6 +631,7 @@
 </template>
 
 <script>
+import { getUniqueString } from '@/common/utils';
 import DtStack from '@/components/Stack/Stack.vue';
 import DtText from '@/components/Text/Text.vue';
 import DtButton from '@/components/Button/Button.vue';
@@ -639,12 +656,21 @@ export default {
 
   data () {
     return {
+      groupLabelId: getUniqueString('tree-ops'),
+      channelsLabelId: getUniqueString('tree-channels'),
       groupExpanded: true,
       channelsExpanded: false,
     };
   },
 
   methods: {
+    toggleTreeGroup (groupId, event) {
+      const item = event.currentTarget;
+      if (event.target.closest('[role="treeitem"]') !== item) return;
+      item.focus();
+      this.toggleGroup(groupId, item.getAttribute('aria-expanded') !== 'true');
+    },
+
     toggleGroup (groupId, value) {
       if (groupId === 'ops') this.groupExpanded = value;
       if (groupId === 'channels') this.channelsExpanded = value;

@@ -11,20 +11,22 @@
     :header-class="$attrs.headerClass"
     :footer-class="$attrs.footerClass"
     :append-to="$attrs.appendTo"
-    :open="$attrs.open"
+    :open="props.open ?? activatedOpen"
     :enter-delay="$attrs.enterDelay"
     :leave-delay="$attrs.leaveDelay"
-    @opened="$attrs.onOpened"
+    @opened="onOpened"
   >
     <template #anchor="slotProps">
       <dt-avatar
         full-name="Jaqueline Nackos"
         :image-src="defaultImage"
-        image-alt="Avatar person"
+        image-alt=""
         seed="JN"
         presence="busy"
-        avatar-class="d-c-pointer"
+        interactive
+        aria-label="Show Jaqueline Nackos profile"
         v-bind="slotProps"
+        @click="openCard"
       />
     </template>
     <template #content>
@@ -114,10 +116,29 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import DtHovercard from './Hovercard.vue';
 import defaultImage from '@/common/assets/avatar2.png';
 import DtStack from '../Stack/Stack.vue';
 import DtIcon from '../Icon/Icon.vue';
 import DtButton from '../Button/Button.vue';
 import DtAvatar from '../Avatar/Avatar.vue';
+
+const props = defineProps({
+  open: {
+    type: Boolean,
+    default: null,
+  },
+});
+const emit = defineEmits(['opened']);
+const activatedOpen = ref(null);
+
+function openCard (event) {
+  if (event.detail === 0 && props.open == null) activatedOpen.value = !activatedOpen.value;
+}
+
+function onOpened (isOpen) {
+  if (!isOpen) activatedOpen.value = null;
+  emit('opened', isOpen);
+}
 </script>
