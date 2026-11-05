@@ -1,26 +1,26 @@
 /**
- * One command for a whole build batch. The only manual step left is clicking Run.
+ * One command for a whole build batch. The only manual step left is clicking Build.
  *
- *   node sync-scripts/run-batch.mjs loader collapsible
+ *   node sync-scripts/run-batch.mjs loader collapsible --target preview
  *
  * WHAT IS AND IS NOT AUTOMATABLE
  * A Figma dev plugin can only be launched from the desktop UI — there is no API to
  * start one, and the REST API is read-only for canvas content (which is the whole
  * reason this pipeline needs a plugin or `use_figma` at all). So exactly one step is
- * irreducibly human: Plugins → Development → Dialtone Spec Builder. Everything on
+ * irreducibly human: Plugins → Development → Dialtone Components Sync. Everything on
  * either side of it is done here:
  *
  *   1  re-measure any spec older than the code that produces it
  *   2  encode, shard, and regenerate the plugin from generic-builder.js
  *   3  preflight every payload BEFORE anyone clicks anything
  *   4  serve the payloads and wait
- *   5  … click Run in Figma …
- *   6  write the returned set ids into the right config file
+ *   5  … click Build in Figma …
+ *   6  record the returned set ids in the target's state (build-data/<target>/)
  *   7  run check-all and print the result
  *
  * Step 6 is the one that most deserves automating: it was a hand copy of ids read off
- * a screen into two different files, and a wrong id makes the checks verify the wrong
- * set — which reads as a clean pass on work that was never looked at.
+ * a screen, and a wrong id makes the checks verify the wrong set — which reads as a
+ * clean pass on work that was never looked at.
  */
 import { TARGET } from './target.mjs';
 import { stateDir, readState, writeState, recordSetId } from './state.mjs';
@@ -220,13 +220,11 @@ const defaultMismatches = [];
 /**
  * ONLY A COMPONENT IN THIS BATCH, AND ONLY A NODE ID, MAY BE RECORDED.
  *
- * The server answers any origin (Access-Control-Allow-Origin: *, which the plugin's iframe
- * needs) and parses the body whatever its Content-Type, so a web page the user happens to
- * have open can POST to /progress or /results while a batch waits, with no preflight.
- * `recordBuilt` writes `component` into a file path and `setId` into JavaScript source that
- * `check-all` then imports, so both are checked before they go anywhere near either: the
- * component must be one this batch built, and the id must have the shape of a Figma node id.
- * That also keeps `$` and regex metacharacters out of the String.replace and RegExp below.
+ * The handler below only answers a loopback Host and a `null` or absent Origin, and every POST
+ * must carry the per-run token. This is the second line: `recordBuilt` writes `component` and
+ * `setId` into the target's JSON state, and every later run reads that state back, so an
+ * accepted report must name a component this batch built and an id with the shape of a Figma
+ * node id. Anything else is refused before it is written.
  */
 const NODE_ID = /^\d+:\d+$/;
 function acceptableResult (r) {
@@ -238,8 +236,8 @@ function acceptableResult (r) {
 /**
  * MAKE ONE COMPONENT'S BUILD DURABLE.
  *
- * Two writes decide whether a built set can be found again: its id in the config, and its
- * payload fingerprint in `built-from.json` so a later check can tell whether it is
+ * Two writes decide whether a built set can be found again: its id in the target's
+ * `set-ids.json`, and its payload fingerprint in `built-from.json` so a later check can tell whether it is
  * verifying this payload or an older one. Both used to happen only after the whole run
  * reported, which meant a crash on the last component left nineteen sets on the canvas
  * that nothing on disk could name.
@@ -275,12 +273,12 @@ const progress = [];
 /**
  * WHO MAY TALK TO THIS SERVER.
  *
- * It answers on localhost, receives results from a Figma plugin and writes set ids into source
- * files that `check-all` then imports, so it is not a service to leave open. It used to answer any
- * origin (`Access-Control-Allow-Origin: *`) and accept any well-formed POST, which let any web page
- * the user had open (or a DNS-rebinding page) end a run early or point a config at an unrelated set.
+ * It answers on localhost and receives results from a Figma plugin, and what it accepts is written
+ * into the target's JSON state, which every later run trusts. So it is not a service to leave open:
+ * an open origin and an unauthenticated POST would let any web page the user had open (or a
+ * DNS-rebinding page) end a run early or point the recorded ids at an unrelated set.
  *
- * Three narrow gates instead:
+ * Three narrow gates:
  *   - the Host header must be this machine's loopback name and port (defeats DNS rebinding);
  *   - a browser Origin, when present, must be `null`, which is what a Figma plugin sends, and
  *     never an http(s) page;
@@ -630,13 +628,7 @@ console.log('\n── 7. verifying ' + '─'.repeat(54));
 const totalVariants = report.reduce((a, r) => a + (r.variants || 0), 0);
 console.log(`  ${built.length} build(s), ${totalVariants} variants, each rendered in light AND dark.`);
 console.log('  This is the slow part — expect minutes, not seconds. Progress prints per pass.\n');
-// ── slot properties ────────────────────────────────────────────────────────
-
-// check-all speaks in COMPONENT names, not payload names: `badge-slots` is a second build
-// of `badge`, and asking check-all about it would throw "unknown component". Map back to
-// the base and dedupe — verifying `badge` now also runs its slot pass, because the id this
-// run just wrote is exactly what that pass was waiting for.
-const chk = spawnSync(process.execPath, ['sync-scripts/check-all.mjs', ...toVerify], { stdio: 'inherit' });
+const chk =spawnSync(process.execPath, ['sync-scripts/check-all.mjs', ...toVerify], { stdio: 'inherit' });
 
 if (WANT_VISUAL) {
   console.log('\n── 8. contact sheets ' + '─'.repeat(49));

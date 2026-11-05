@@ -6,6 +6,7 @@
  * verifier then agreed with a Figma file that was 2px wrong — two errors that
  * cancelled and read as correctness. One definition, three importers.
  */
+import { parse as parseColor } from 'culori';
 
 const BORDER_SIDES = [['borderTopWidth', 'borderTopColor'], ['borderRightWidth', 'borderRightColor'],
   ['borderBottomWidth', 'borderBottomColor'], ['borderLeftWidth', 'borderLeftColor']];
@@ -60,11 +61,13 @@ export function borderColorKey (style) {
  * stacking and there is no coordinate to carry the margin.
  */
 export function marginFoldable (style) {
+  // Computed colours are not always rgb(): Dialtone's tokens are OKLCH and the browser can hand back
+  // `oklch(...)` or `color(srgb ...)`, so a fully transparent one must not read as opaque. A value
+  // culori cannot parse keeps the old fallback: treated as painted, so nothing is folded wrongly.
   const alpha = (c) => {
-    const m = /rgba?\(([^)]+)\)/.exec(c || '');
-    if (!m) return c && c !== 'transparent' && c !== 'none' ? 1 : 0;
-    const parts = m[1].split(/[,/\s]+/).filter(Boolean);
-    return parts.length > 3 ? parseFloat(parts[3]) : 1;
+    if (!c || c === 'none') return 0;
+    const parsed = parseColor(c);
+    return parsed ? (parsed.alpha ?? 1) : 1;
   };
   // A NEGATIVE margin pulls content outward. Figma padding cannot go below zero —
   // the value is rejected outright — so this is not foldable in either direction.
