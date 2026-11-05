@@ -1,0 +1,20 @@
+{
+  "name": "dialtone-react",
+  "targets": {
+    "test": {
+      "executor": "nx:run-script",
+      "dependsOn": ["dialtone-icons:build"],
+      "options": { "script": "test" }
+    },
+    "typecheck": {
+      "executor": "nx:run-script",
+      "dependsOn": ["dialtone-icons:build"],
+      "options": { "script": "typecheck" }
+    },
+    "gate": {
+      "executor": "nx:run-script",
+      "dependsOn": ["dialtone-icons:build"],
+      "options": { "script": "gate" }
+    }
+  }
+}
