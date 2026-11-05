@@ -142,7 +142,7 @@ const activatedOpen = ref(null);
 const inputValue = ref('');
 
 function openCard (event) {
-  if (event.detail === 0 && props.open == null) activatedOpen.value = true;
+  if (event.detail === 0 && props.open == null) activatedOpen.value = !activatedOpen.value;
 }
 
 function onOpened (isOpen) {

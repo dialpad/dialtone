@@ -177,7 +177,7 @@ const cardData = reactive([{
 }]);
 
 function openCard (card, event) {
-  if (event.detail === 0 && attrs.open == null) card.open = true;
+  if (event.detail === 0 && attrs.open == null) card.open = !card.open;
 }
 
 function onOpened (card, isOpen) {
