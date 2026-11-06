@@ -15,28 +15,11 @@ combinator: DtEmojiPicker
 ```vue demo
 <dt-emoji-picker
   skin-tone="Default"
-  skin-selector-button-tooltip-label="Change default skin tone"
-  :tab-set-labels="[
-    'Most recently used',
-    'Smileys and people',
-    'Nature',
-    'Food',
-    'Activity',
-    'Travel',
-    'Objects',
-    'Symbols',
-    'Flags',
-  ]"
   :recently-used-emojis="recentlyUsedEmojis"
-  search-results-label="Search results"
-  search-no-results-label="No results"
-  search-placeholder-label="Search..."
 />
 <!-- @code -->
 <dt-emoji-picker
-  :skin-tone="Default"
-  skin-selector-button-tooltip-label="Change default skin tone"
-  :tab-set-labels="[`Most recently used`, `Smileys and people`, ...]"
+  skin-tone="Default"
   :recently-used-emojis="[
     {
       name: `thumbs up`,
@@ -53,9 +36,6 @@ combinator: DtEmojiPicker
     }
     ...
   ]"
-  search-results-label="Search results"
-  search-no-results-label="Search results"
-  search-placeholder-label="Search..."
   @skin-tone="skinTone = $event"
   @selected-emoji="selectedEmoji"
 />
@@ -79,8 +59,7 @@ combinator: DtEmojiPicker
       @click="toggleEmojiPicker"
     >
       <template #startIcon>
-        <dt-icon
-          name="satisfied"
+        <dt-icon-satisfied
           size="300"
         />
       </template>
@@ -89,22 +68,7 @@ combinator: DtEmojiPicker
   <template #content>
     <dt-emoji-picker
       skin-tone="Default"
-      skin-selector-button-tooltip-label="Change default skin tone"
-      :tab-set-labels="[
-        'Most recently used',
-        'Smileys and people',
-        'Nature',
-        'Food',
-        'Activity',
-        'Travel',
-        'Objects',
-        'Symbols',
-        'Flags',
-      ]"
       :recently-used-emojis="recentlyUsedEmojis"
-      search-results-label="Search results"
-      search-no-results-label="No results"
-      search-placeholder-label="Search..."
     />
   </template>
 </dt-popover>
@@ -114,9 +78,9 @@ combinator: DtEmojiPicker
 
 We recommend to wrap the emoji picker in a `dt-popover` component.
 
-It is important to know the sequence of tab and emoji tabset will **not change**. You should always provide a proper `tabSetLabels` array to match the order of the emoji tabset.
+Tab and search labels are localized by the component. The emoji tab order is fixed.
 
-The 'Most recently used' tab will always be the first tab in the `tabSetLabels` array. It should be updated dynamically by the consumer by using the `recentlyUsedEmojis` prop.
+The 'Most recently used' tab is always first. Update its contents with the `recentlyUsedEmojis` prop.
 
 The `skin-tone` prop provided to the component should listen to the `skin-tone` event emitted by the skin selector button to be updated instantly.
 
@@ -153,6 +117,7 @@ This is the following sequence of the keyboard navigation with `TAB`:
 On `ESC` the emoji picker will emit the `close` event to close the emoji picker.
 
 <script setup>
+import { DtIconSatisfied } from '@dialpad/dialtone-icons/vue';
 import { ref } from 'vue';
 
 const emojiPickerOpened = ref(false);

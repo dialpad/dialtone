@@ -57,7 +57,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ```vue demo
 <dt-card class="d-w-400">
   <template #header>
-    <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
+    <dt-text as="p" variant="headline-md">Lorem ipsum</dt-text>
     <dt-button
       :size="100"
       importance="clear"
@@ -65,8 +65,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
       aria-label="Menu button"
     >
       <template #startIcon>
-        <dt-icon
-          name="more-vertical"
+        <dt-icon-more-vertical
           size="100"
         />
       </template>
@@ -111,7 +110,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ```vue demo
 <dt-card class="d-w-400" content-class="d-pie-0">
   <template #header>
-    <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
+    <dt-text as="p" variant="headline-md">Lorem ipsum</dt-text>
     <dt-button
       :size="100"
       importance="clear"
@@ -119,8 +118,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
       aria-label="Menu button"
     >
       <template #startIcon>
-        <dt-icon
-          name="more-vertical"
+        <dt-icon-more-vertical
           size="100"
         />
       </template>
@@ -149,3 +147,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 At minimum, card contains body of content. It could also have header with buttons, and footer with buttons/text.
 
 <component-class-table component-name="card"></component-class-table>
+
+<script setup>
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
+</script>

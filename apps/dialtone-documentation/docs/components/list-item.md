@@ -13,7 +13,7 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 <ul>
   <dt-list-item navigation-type="tab">
     <template #start>
-      <dt-icon size="300" name="check" />
+      <dt-icon-check size="300" />
     </template>
     <span>Default List Item</span>
     <template #subtitle>
@@ -23,7 +23,7 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
       <dt-badge text="Label" />
     </template>
     <template #end>
-      <dt-icon size="300" name="external-link" />
+      <dt-icon-external-link size="300" />
     </template>
   </dt-list-item>
 </ul>
@@ -50,7 +50,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
 <ul>
   <dt-list-item navigation-type="tab">
     <template #start>
-      <dt-icon size="300" name="check" />
+      <dt-icon-check size="300" />
     </template>
     <span>Default List Item</span>
     <template #subtitle>
@@ -60,7 +60,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
       <dt-badge text="Label" />
     </template>
     <template #end>
-      <dt-icon size="300" name="external-link" />
+      <dt-icon-external-link size="300" />
     </template>
   </dt-list-item>
 </ul>
@@ -82,14 +82,13 @@ When `type` is set to "custom" the list item will not render any styles or slots
     <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py-100 d-px-150 d-pie-100">
       <dt-stack align="baseline" direction="row" gap="400">
         <dt-text
-          kind="body"
+          variant="body-xs"
           tone="muted"
-          :size="100"
           datetime="10:00"
         >
           10:00
         </dt-text>
-        <dt-text :size="300" density="300" kind="body" tone="secondary">
+        <dt-text density="300" variant="body-md" tone="secondary">
           Custom list item example lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
         </dt-text>
       </dt-stack>
@@ -101,8 +100,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
           title="share"
         >
           <template #startIcon="{ iconSize }">
-            <dt-icon
-              name="share"
+            <dt-icon-share
               :size="iconSize"
             />
           </template>
@@ -114,8 +112,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
           title="star"
         >
           <template #startIcon="{ iconSize }">
-            <dt-icon
-              name="star"
+            <dt-icon-star
               :size="iconSize"
             />
           </template>
@@ -127,8 +124,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
           title="more"
         >
           <template #startIcon="{ iconSize }">
-            <dt-icon
-              name="more-vertical"
+            <dt-icon-more-vertical
               :size="iconSize"
             />
           </template>
@@ -142,3 +138,13 @@ When `type` is set to "custom" the list item will not render any styles or slots
 ## Vue API
 
 <component-vue-api component-name="listitem" />
+
+<script setup>
+import {
+  DtIconCheck,
+  DtIconExternalLink,
+  DtIconShare,
+  DtIconStar,
+  DtIconMoreVertical,
+} from '@dialpad/dialtone-icons/vue';
+</script>

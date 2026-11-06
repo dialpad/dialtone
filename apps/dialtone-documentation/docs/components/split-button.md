@@ -239,25 +239,25 @@ The start button supports navigation via `start-href` (renders as `<a>`) or `sta
 <dt-stack direction="row" gap="100" class="d-fw-wrap">
   <dt-split-button importance="outlined" end-tooltip-text="More calling options">
     <template #startIcon="{ size }">
-      <dt-icon name="phone" :size="size" />
+      <dt-icon-phone :size="size" />
     </template>
     Place call
   </dt-split-button>
   <dt-split-button importance="outlined" start-icon-position="blockStart" end-tooltip-text="More calling options">
     <template #startIcon="{ size }">
-      <dt-icon name="phone" :size="size" />
+      <dt-icon-phone :size="size" />
     </template>
     Place call
   </dt-split-button>
   <dt-split-button importance="outlined" start-icon-position="end" end-tooltip-text="More calling options">
     <template #startIcon="{ size }">
-      <dt-icon name="phone" :size="size" />
+      <dt-icon-phone :size="size" />
     </template>
     Place call
   </dt-split-button>
   <dt-split-button importance="outlined" start-icon-position="blockEnd" end-tooltip-text="More calling options">
     <template #startIcon="{ size }">
-      <dt-icon name="phone" :size="size" />
+      <dt-icon-phone :size="size" />
     </template>
     Place call
   </dt-split-button>
@@ -272,10 +272,10 @@ within the start button. This uses the same dual-icon pattern as [DtButton](/com
 ```vue demo
 <dt-split-button importance="outlined" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
-    <dt-icon name="phone" :size="size" />
+    <dt-icon-phone :size="size" />
   </template>
   <template #startEndIcon="{ size }">
-    <dt-icon name="arrow-down" :size="size" />
+    <dt-icon-arrow-down :size="size" />
   </template>
   Place call
 </dt-split-button>
@@ -288,10 +288,10 @@ Use `#endIcon` to replace the default chevron icon on the end (omega) button.
 ```vue demo
 <dt-split-button importance="outlined" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
-    <dt-icon name="phone" :size="size" />
+    <dt-icon-phone :size="size" />
   </template>
   <template #endIcon="{ size }">
-    <dt-icon name="more-vertical" :size="size" />
+    <dt-icon-more-vertical :size="size" />
   </template>
   Place call
 </dt-split-button>
@@ -304,17 +304,17 @@ Use `#endIcon` to replace the default chevron icon on the end (omega) button.
 <dt-stack direction="row" gap="100">
   <dt-split-button end-tooltip-text="More calling options" start-tooltip-text="Place call">
     <template #startIcon="{ size }">
-      <dt-icon name="phone" :size="size" />
+      <dt-icon-phone :size="size" />
     </template>
   </dt-split-button>
   <dt-split-button importance="outlined" kind="muted" end-tooltip-text="More calling options" start-tooltip-text="Place call">
     <template #startIcon="{ size }">
-      <dt-icon name="phone" :size="size" />
+      <dt-icon-phone :size="size" />
     </template>
   </dt-split-button>
   <dt-split-button importance="clear" kind="critical" end-tooltip-text="More calling options" start-tooltip-text="Place call">
     <template #startIcon="{ size }">
-      <dt-icon name="phone" :size="size" />
+      <dt-icon-phone :size="size" />
     </template>
   </dt-split-button>
 </dt-stack>
@@ -322,15 +322,15 @@ Use `#endIcon` to replace the default chevron icon on the end (omega) button.
 
 ## Leading & Trailing
 
-The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alpha-leading-class` and `alpha-trailing-class` to style the containers.
+The `#leading` and `#trailing` slots are forwarded to the start button. Use `start-leading-class` and `start-trailing-class` to style the containers.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
   <dt-split-button
     importance="outlined"
-    omega-tooltip-text="More calling options"
-    alpha-trailing-class="d-pie-100"
+    end-tooltip-text="More calling options"
+    start-trailing-class="d-pie-100"
   >
     Place Call
     <template #trailing>
@@ -339,8 +339,8 @@ The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alp
   </dt-split-button>
   <dt-split-button
     importance="outlined"
-    omega-tooltip-text="More calling options"
-    alpha-leading-class="d-pis-100"
+    end-tooltip-text="More calling options"
+    start-leading-class="d-pis-100"
   >
     Place Call
     <template #leading>
@@ -364,3 +364,7 @@ In addition to the [Button component's](button.md#accessibility) accessibility d
 ## Classes
 
 <component-class-table component-name="split-button" />
+
+<script setup>
+import { DtIconPhone, DtIconArrowDown, DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
+</script>

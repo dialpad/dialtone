@@ -9,7 +9,7 @@ combinator: DtMotionText
 ---
 
 ```vue demo
-<dt-text kind="headline" :size="600">
+<dt-text variant="headline-2xl">
   <dt-motion-text
     text="Welcome to Dialtone Motion Text"
     animation-mode="slide-in-gradient"
@@ -54,7 +54,7 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
     </dt-button>
   </dt-stack>
   <dt-toggle v-model="loopModes" :size="200" @update:model-value="playMode(activeMode)">Loop</dt-toggle>
-  <dt-text kind="headline" :size="600">
+  <dt-text variant="headline-2xl">
     <dt-motion-text
       :key="modeDemoKey"
       text="The AI platform for customer experience"
@@ -64,7 +64,7 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
   </dt-text>
 </dt-stack>
 <!-- @code -->
-<dt-text kind="headline" :size="600">
+<dt-text variant="headline-2xl">
   <dt-motion-text
     text="The AI platform for customer experience"
     animation-mode="{mode}"
@@ -79,13 +79,13 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
 ```vue demo
 <dt-stack gap="200">
   <dt-segmented-control :size="100" v-model="selected" aria-label="Speed Control">
-    <dt-segmented-control-item v-dt-tooltip="'Fastest (0.3×)'" value="100" :selected="selected === '100'">100</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Fast (0.6×)'" value="200" :selected="selected === '200'">200</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Designed timing (default)'" value="300" :selected="selected === '300'">300</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Slow (1.5×)'" value="400" :selected="selected === '400'">400</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Slowest (2.1×)'" value="500" :selected="selected === '500'">500</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Fastest (0.3×)'" value="100">100</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Fast (0.6×)'" value="200">200</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Designed timing (default)'" value="300">300</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Slow (1.5×)'" value="400">400</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Slowest (2.1×)'" value="500">500</dt-segmented-control-item>
   </dt-segmented-control>
-  <dt-text kind="headline" :size="600">
+  <dt-text variant="headline-2xl">
     <dt-motion-text
       :key="selected"
       text="Welcome to Dialtone Motion Text"
@@ -96,7 +96,7 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
   </dt-text>
 </dt-stack>
 <!-- @code -->
-<dt-text kind="headline" :size="600">
+<dt-text variant="headline-2xl">
   <dt-motion-text
     text="Welcome to Dialtone Motion Text"
     animation-mode="shimmer"
@@ -121,7 +121,7 @@ Until `start()` is called, the reveal modes (`gradient-in`, `fade-in`, `slide-in
     <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.reset()">Reset</dt-button>
     <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.skipToEnd()">Skip to End</dt-button>
   </dt-stack>
-  <dt-text kind="headline" :size="600">
+  <dt-text variant="headline-2xl">
     <dt-motion-text
       ref="manualDemoRef"
       text="Welcome to Dialtone Motion Text"

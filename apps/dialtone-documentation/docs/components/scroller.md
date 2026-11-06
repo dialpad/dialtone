@@ -126,8 +126,8 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
       <dt-stack gap="100" direction="row" align="start" class="d-p-50">
         <dt-avatar :size="300" :full-name="item.id" />
         <dt-stack>
-          <dt-text kind="headline" :size="200" tone="secondary">{{ item.id }}</dt-text>
-          <dt-text kind="body" :size="200" tone="primary">{{ item.message }}</dt-text>
+          <dt-text variant="headline-sm" tone="secondary">{{ item.id }}</dt-text>
+          <dt-text variant="body-sm" tone="primary">{{ item.message }}</dt-text>
         </dt-stack>
       </dt-stack>
     </template>
@@ -170,7 +170,7 @@ Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
     class="d-ba d-bar-400 d-p-50"
     >
     <template #default="{ item }">
-      <dt-stack class="d-p-150 d-ba h:d-bgc-secondary d-bc-subtle d-bar-300 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
+      <dt-stack class="d-p-150 d-ba h:d-bgc-secondary d-bc-subtle d-bar-300 d-c-default" align="center" justify="center"><dt-text variant="code-md">{{ item.name }}</dt-text></dt-stack>
     </template>
   </dt-scroller>
 </div>

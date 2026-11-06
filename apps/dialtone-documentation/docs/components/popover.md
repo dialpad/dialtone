@@ -287,7 +287,7 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
     <dt-button :size="200" kind="muted" importance="outlined">Inverted Popover</dt-button>
   </template>
   <template #content="{ close }">
-    <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+    <dt-text as="p">This Popover's content is in the <dt-text>inverted</dt-text> mode.</dt-text>
   </template>
 </dt-popover>
 <!-- @code -->
