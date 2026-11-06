@@ -3,44 +3,28 @@ import { hasNoValue, hasValue } from '@/src/lib/exclusion_rules';
 export default {
   defaults: {
     props: {
-      size: { initialValue: '200', tokenCategory: 'typography-size:label' },
-      kind: { initialValue: 'status' },
-      variant: { initialValue: 'neutral', tokenCategory: 'color:d-badge--:backgroundColor' },
+      iconSize: { tokenCategory: 'icon-size' },
+      type: { tokenCategory: 'color:d-badge--:backgroundColor' },
       decoration: { tokenCategory: 'color:d-badge--decorate-:--badge-decorative-color' },
     },
   },
 
   exclusions: [
-    ...Object.entries({
-      // Each kind (group) owns its variants; list only the ones that belong to the selected kind
-      // and drop a selected variant that doesn't belong to it.
-      status: ['neutral', 'info', 'positive', 'warning', 'critical'],
-      counter: ['count', 'mention'],
-      release: ['pre-release', 'release'],
-      lifecycle: ['draft', 'edited', 'unsaved', 'saved', 'published', 'archived', 'scheduled'],
-    }).flatMap(([kind, own], _, groups) => {
-      const others = groups.flatMap(([, variants]) => variants).filter(v => !own.includes(v));
-      return [
-        { when: { kind }, hideValues: { props: { variant: others } } },
-        { when: { kind, variant: v => hasValue(v) && !own.includes(v) }, clear: { props: ['variant'] } },
-      ];
-    }),
     {
-      when: { variant: 'count' },
+      when: { kind: 'count' },
       hide: { props: ['decoration'] },
     },
     {
-      when: { variant: v => v !== 'neutral' },
+      when: { type: v => v !== 'default' },
       hide: { props: ['decoration'] },
     },
     {
-      // `subtle` (outline) is a release emphasis; the other groups support base and strong.
-      when: { variant: v => !['pre-release', 'release'].includes(v) },
-      disableValues: { props: { emphasis: ['subtle'] } },
+      when: { type: v => v !== 'bulletin' },
+      hide: { props: ['subtle'] },
     },
     {
       when: { decoration: v => !!v },
-      hide: { slots: ['startIcon', 'endIcon', 'leading', 'trailing'] },
+      hide: { slots: ['startIcon', 'endIcon'] },
     },
     {
       whenSlots: { startIcon: hasNoValue, endIcon: hasNoValue },
@@ -55,23 +39,23 @@ export default {
       disable: { props: ['endIconClass'] },
     },
     {
-      whenSlots: { leading: hasNoValue },
-      disable: { props: ['leadingClass'] },
-    },
-    {
-      whenSlots: { trailing: hasNoValue },
-      disable: { props: ['trailingClass'] },
-    },
-    {
       whenSlots: { default: hasValue },
-      disable: { props: ['label'] },
-      clear: { props: ['label'] },
+      disable: { props: ['text'] },
+      clear: { props: ['text'] },
     },
     {
-      when: { label: hasValue },
+      when: { text: hasValue },
       whenSlots: { default: hasNoValue },
       disable: { slots: ['default'] },
       clear: { slots: ['default'] },
+    },
+    {
+      when: { kind: 'count' },
+      disableValues: { props: { type: ['ai'] } },
+    },
+    {
+      when: { type: 'ai' },
+      disableValues: { props: { kind: ['count'] } },
     },
   ],
 
@@ -85,81 +69,52 @@ export default {
 
   'label with icon': {
     props: {
-      kind: { initialValue: 'status' },
-      variant: { initialValue: 'neutral' },
-      label: { initialValue: 'Label' },
+      type: { initialValue: 'default' },
+      text: { initialValue: 'Label' },
+      kind: { initialValue: 'label' },
     },
     slots: {
-      startIcon: { initialValue: '<dt-icon-lightning-bolt size="200" />' },
+      startIcon: { initialValue: '<dt-icon-lightning-bolt :size="iconSize" />' },
     },
   },
 
-  new: {
+  ai: {
     props: {
-      kind: { initialValue: 'release' },
-      variant: { initialValue: 'pre-release' },
+      type: { initialValue: 'ai' },
     },
     slots: {
-      default: { initialValue: 'New' },
+      default: { initialValue: 'AI Notes' },
     },
   },
 
   locked: {
+    props: {
+      iconSize: { initialValue: '100' },
+    },
     slots: {
-      startIcon: { initialValue: '<dt-icon-lock size="200" />' },
+      startIcon: { initialValue: '<dt-icon-lock :size="iconSize" />' },
       default: { initialValue: 'Locked' },
     },
   },
 
   recording: {
     props: {
-      kind: { initialValue: 'status' },
-      variant: { initialValue: 'critical' },
+      iconSize: { initialValue: '100' },
+      type: { initialValue: 'critical' },
     },
     slots: {
-      startIcon: { initialValue: '<dt-icon-record-filled size="200" />' },
+      startIcon: { initialValue: '<dt-icon-record-filled :size="iconSize" />' },
       default: { initialValue: 'Recording' },
     },
   },
 
-  count: {
+  'count bulletin': {
     props: {
-      kind: { initialValue: 'counter' },
-      variant: { initialValue: 'count' },
+      kind: { initialValue: 'count' },
+      type: { initialValue: 'bulletin' },
     },
     slots: {
       default: { initialValue: '9' },
-    },
-  },
-
-  mention: {
-    props: {
-      kind: { initialValue: 'counter' },
-      variant: { initialValue: 'mention' },
-    },
-    slots: {
-      default: { initialValue: '2' },
-    },
-  },
-
-  alpha: {
-    props: {
-      kind: { initialValue: 'release' },
-      variant: { initialValue: 'pre-release' },
-      emphasis: { initialValue: 'subtle' },
-    },
-    slots: {
-      default: { initialValue: 'Alpha' },
-    },
-  },
-
-  draft: {
-    props: {
-      kind: { initialValue: 'lifecycle' },
-      variant: { initialValue: 'draft' },
-    },
-    slots: {
-      default: { initialValue: 'Draft' },
     },
   },
 };

@@ -6,24 +6,12 @@
           "value": "{color.surface.moderate-opaque}",
           "type": "color"
         },
-        "default-strong": {
-          "value": "{color.surface.contrast}",
-          "type": "color"
-        },
         "info": {
           "value": "{color.blue.200}",
           "type": "color"
         },
-        "info-strong": {
-          "value": "{color.surface.info-strong}",
-          "type": "color"
-        },
         "positive": {
           "value": "{color.green.200}",
-          "type": "color"
-        },
-        "positive-strong": {
-          "value": "{color.green.800}",
           "type": "color"
         },
         "success": {
@@ -35,24 +23,8 @@
           "value": "{color.gold.200}",
           "type": "color"
         },
-        "warning-strong": {
-          "value": "{color.gold.400}",
-          "type": "color"
-        },
         "critical": {
-          "value": "{color.surface.critical}",
-          "type": "color"
-        },
-        "critical-strong": {
-          "value": "{color.surface.critical-strong}",
-          "type": "color"
-        },
-        "count-strong": {
-          "value": "{color.surface.brand-strong}",
-          "type": "color"
-        },
-        "count-strong-nested": {
-          "value": "{color.purple.900}",
+          "value": "{color.red.200}",
           "type": "color"
         },
         "bulletin": {
@@ -60,7 +32,7 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.surface.brand}",
+          "value": "{color.purple.200}",
           "type": "color"
         },
         "ai": {
@@ -71,14 +43,6 @@
       "foreground": {
         "default": {
           "value": "{color.black.1000}",
-          "type": "color"
-        },
-        "strong": {
-          "value": "{color.foreground.primary-inverted}",
-          "type": "color"
-        },
-        "warning-strong": {
-          "value": "{badge.color.foreground.default}",
           "type": "color"
         },
         "positive": {
@@ -95,7 +59,7 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.purple.800}",
+          "value": "{color.purple.900}",
           "type": "color"
         },
         "ai": {
@@ -109,8 +73,17 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.border.brand-subtle}",
-          "type": "color"
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".5",
+                "space": "oklch"
+              }
+            }
+          }
         }
       }
     }

@@ -1,54 +1,39 @@
 <template>
   <dt-stack
     id="components-badge--variants-container"
-    gap="400"
+    direction="row"
+    gap="100"
+    align="center"
+    class="d-ff-row-wrap"
   >
-    <dt-stack
-      v-for="(group, groupName) in BADGE_GROUPS"
-      :key="groupName"
-      gap="200"
-    >
-      <h3>{{ groupName }}</h3>
-      <dt-stack
-        v-for="variant in group.variants"
-        :key="variant"
-        direction="row"
-        gap="100"
-        align="center"
-        class="d-ff-row-wrap"
-      >
-        <dt-badge
-          v-for="emphasis in group.emphasis"
-          :key="`${variant}-${emphasis}`"
-          :kind="groupName"
-          :variant="variant"
-          :emphasis="emphasis"
-          :label="getLabel(groupName, variant, emphasis)"
-        />
-      </dt-stack>
-    </dt-stack>
-    <dt-stack
-      direction="row"
-      gap="100"
-      align="center"
-      class="d-ff-row-wrap"
-    >
-      <dt-badge
-        v-for="decoration in Object.keys(BADGE_DECORATION_MODIFIERS)"
-        :key="decoration"
-        kind="status"
-        variant="neutral"
-        :decoration="decoration"
-        :label="getDecorationText(decoration)"
-      />
-    </dt-stack>
+    <dt-badge
+      v-for="type in types"
+      :key="type.value"
+      :text="type.display"
+      :type="type.value"
+    />
+    <dt-badge
+      v-for="type in types.filter(t => t.value !== 'ai')"
+      :key="`${type.value}-count`"
+      text="1"
+      :type="type.value"
+      kind="count"
+    />
+    <dt-badge
+      v-for="decoration in Object.keys(BADGE_DECORATION_MODIFIERS)"
+      :key="decoration"
+      :decoration="decoration"
+      :text="getDecorationText(decoration)"
+      type="default"
+      kind="label"
+    />
   </dt-stack>
 </template>
 
 <script>
 import DtBadge from './Badge.vue';
 import { DtStack } from '@/components/Stack';
-import { BADGE_GROUPS, BADGE_DECORATION_MODIFIERS } from './BadgeConstants';
+import { BADGE_TYPE_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './BadgeConstants';
 
 export default {
   name: 'DtBadgeVariants',
@@ -57,17 +42,22 @@ export default {
 
   data () {
     return {
-      BADGE_GROUPS,
+      BADGE_TYPE_MODIFIERS,
       BADGE_DECORATION_MODIFIERS,
     };
   },
 
-  methods: {
-    getLabel (group, variant, emphasis) {
-      if (group === 'counter') return '9';
-      return `${variant} ${emphasis}`;
+  computed: {
+    types () {
+      const typeList = [];
+      for (const key in BADGE_TYPE_MODIFIERS) {
+        typeList.push({ display: key[0].toUpperCase() + key.slice(1), value: key });
+      }
+      return typeList;
     },
+  },
 
+  methods: {
     getDecorationText (val) {
       return val.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
     },

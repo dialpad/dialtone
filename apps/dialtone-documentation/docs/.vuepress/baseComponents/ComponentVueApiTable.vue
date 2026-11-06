@@ -58,8 +58,9 @@
                 </dt-text>
                 <span v-if="item.deprecated">
                   <dt-badge
-                    variant="critical"
-                    label="Deprecated"
+                    type="critical"
+                    kind="label"
+                    text="Deprecated"
                   />
                 </span>
               </dt-stack>

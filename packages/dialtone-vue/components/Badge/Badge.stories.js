@@ -4,21 +4,17 @@ import DtBadgeDefaultTemplate from './BadgeDefault.story.vue';
 import DtBadgeVariantsTemplate from './BadgeVariants.story.vue';
 import DtBadgeExamplesTemplate from './BadgeExamples.story.vue';
 import {
-  BADGE_VARIANT_MODIFIERS,
-  BADGE_EMPHASIS_MODIFIERS,
-  BADGE_SIZE_MODIFIERS,
+  BADGE_TYPE_MODIFIERS,
+  BADGE_KIND_MODIFIERS,
   BADGE_DECORATION_MODIFIERS,
-  BADGE_GROUPS,
 } from './BadgeConstants';
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 
 const iconsList = getIconNames();
 
 export const argsData = {
-  kind: 'status',
-  variant: 'neutral',
-  emphasis: undefined,
-  size: 200,
+  type: 'default',
+  kind: 'label',
   decoration: undefined,
   startIcon: undefined,
   endIcon: undefined,
@@ -58,20 +54,6 @@ export const argTypesData = {
       },
     },
   },
-  leading: {
-    control: false,
-    description: 'Freeform content at the start of the badge, such as another badge',
-    table: {
-      type: { summary: 'VNode' },
-    },
-  },
-  trailing: {
-    control: false,
-    description: 'Freeform content at the end of the badge, such as a nested badge',
-    table: {
-      type: { summary: 'VNode' },
-    },
-  },
   leftIcon: {
     table: {
       disable: true,
@@ -84,49 +66,22 @@ export const argTypesData = {
   },
 
   // Props
-  variant: {
-    control: {
-      type: 'select',
-    },
-    options: Object.keys(BADGE_VARIANT_MODIFIERS),
-  },
-
-  emphasis: {
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
-    },
-    options: [undefined, ...Object.keys(BADGE_EMPHASIS_MODIFIERS)],
-  },
-
-  size: {
-    control: {
-      type: 'select',
-    },
-    options: Object.keys(BADGE_SIZE_MODIFIERS),
-  },
-
   type: {
-    description: 'Deprecated. Use `variant` instead.',
-    table: {
-      disable: true,
+    control: {
+      type: 'select',
     },
+    options: Object.keys(BADGE_TYPE_MODIFIERS),
   },
 
   kind: {
     control: {
       type: 'select',
-      labels: {
-        undefined: '(default: status)',
-      },
     },
-    options: [undefined, ...Object.keys(BADGE_GROUPS)],
+    options: Object.keys(BADGE_KIND_MODIFIERS),
+    if: { arg: 'type', neq: 'ai' },
   },
 
   decoration: {
-    description: 'Deprecated. Use a DtChip for categories instead.',
     control: {
       type: 'select',
       labels: {
@@ -144,12 +99,7 @@ export const argTypesData = {
     },
   },
 
-  label: {
-    control: { type: 'text' },
-  },
-
   text: {
-    description: 'Deprecated. Use `label` instead.',
     control: { type: 'text' },
   },
 
@@ -159,14 +109,6 @@ export const argTypesData = {
 
   endIconClass: {
     description: 'Pass through classes. Used to customize the end icon container',
-  },
-
-  leadingClass: {
-    description: 'Pass through classes. Used to customize the leading container',
-  },
-
-  trailingClass: {
-    description: 'Pass through classes. Used to customize the trailing container',
   },
 
   subtle: {
@@ -216,18 +158,7 @@ export const Count = {
 
   args: {
     default: '1',
-    kind: 'counter',
-    variant: 'count',
-  },
-};
-
-export const Mention = {
-  render: DefaultTemplate,
-
-  args: {
-    default: '2',
-    kind: 'counter',
-    variant: 'mention',
+    kind: 'count',
   },
 };
 

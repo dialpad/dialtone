@@ -86,9 +86,7 @@ export default {
           kind="unstyled"
         >
           <dt-badge
-            kind="status"
-            variant="neutral"
-            :label="badgeLabel"
+            :text="badgeLabel"
             contenteditable="false"
           />
         </dt-button>
@@ -114,9 +112,7 @@ export default {
     </dt-popover>
     <dt-badge
       v-else
-      kind="status"
-      variant="neutral"
-      :label="badgeLabel"
+      :text="badgeLabel"
       contenteditable="false"
     />
   </node-view-wrapper>
