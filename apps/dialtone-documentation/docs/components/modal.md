@@ -110,7 +110,6 @@ This is the default behavior that adds the scroll automatically in the modal con
   header-text="Example title"
   :open="isOpen"
   @update:open="updateOpen"
-  :showFooter="true"
   :fixed-header-footer="true"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
 >

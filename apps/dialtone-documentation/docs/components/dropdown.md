@@ -142,7 +142,7 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
     >
       Inverted Dropdown
       <template #endIcon="{ iconSize }">
-        <dt-icon name="chevron-down" :size="iconSize" />
+        <dt-icon-chevron-down :size="iconSize" />
       </template>
     </dt-button>
   </template>
@@ -175,6 +175,8 @@ A dropdown menu has well defined standard [keyboard interactions](https://www.w3
 Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the **highlight** selection changes, a highlight event is emitted with the index of the currently highlighted item. `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
 
 <script setup>
+import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';
+
 const items = [
   { name: 'Menu item 1', id: 1 },
   { name: 'Menu item 2', id: 2 },

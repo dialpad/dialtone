@@ -206,19 +206,19 @@ Use the `#startIcon` or `#endIcon` slot on `dt-segmented-control-item` to add an
   <dt-segmented-control v-model="iconSelected" aria-label="List spacing">
     <dt-segmented-control-item value="compact">
       <template #startIcon="{ iconSize }">
-        <dt-icon name="list-spacing-compact" :size="iconSize" />
+        <dt-icon-list-spacing-compact :size="iconSize" />
       </template>
       Compact
     </dt-segmented-control-item>
     <dt-segmented-control-item value="regular">
       <template #startIcon="{ iconSize }">
-        <dt-icon name="list-spacing-regular" :size="iconSize" />
+        <dt-icon-list-spacing-regular :size="iconSize" />
       </template>
       Regular
     </dt-segmented-control-item>
     <dt-segmented-control-item value="expanded">
       <template #startIcon="{ iconSize }">
-        <dt-icon name="list-spacing-expanded" :size="iconSize" />
+        <dt-icon-list-spacing-expanded :size="iconSize" />
       </template>
       Expanded
     </dt-segmented-control-item>
@@ -237,17 +237,17 @@ Omit the default slot text to create icon-only items. Use the `label` prop for a
     <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode">
       <dt-segmented-control-item value="system" label="System">
         <template #startIcon="{ iconSize }">
-          <dt-icon name="laptop-2" :size="iconSize" />
+          <dt-icon-laptop-2 :size="iconSize" />
         </template>
       </dt-segmented-control-item>
       <dt-segmented-control-item value="light" label="Light">
         <template #startIcon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+          <dt-icon-sun :size="iconSize" />
         </template>
       </dt-segmented-control-item>
       <dt-segmented-control-item value="dark" label="Dark">
         <template #startIcon="{ iconSize }">
-          <dt-icon name="moon" :size="iconSize" />
+          <dt-icon-moon :size="iconSize" />
         </template>
       </dt-segmented-control-item>
     </dt-segmented-control>
@@ -256,17 +256,17 @@ Omit the default slot text to create icon-only items. Use the `label` prop for a
     <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode" class="d-d-inline-flex">
       <dt-segmented-control-item value="system" label="System">
         <template #startIcon="{ iconSize }">
-          <dt-icon name="laptop-2" :size="iconSize" />
+          <dt-icon-laptop-2 :size="iconSize" />
         </template>
       </dt-segmented-control-item>
       <dt-segmented-control-item value="light" label="Light">
         <template #startIcon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+          <dt-icon-sun :size="iconSize" />
         </template>
       </dt-segmented-control-item>
       <dt-segmented-control-item value="dark" label="Dark">
         <template #startIcon="{ iconSize }">
-          <dt-icon name="moon" :size="iconSize" />
+          <dt-icon-moon :size="iconSize" />
         </template>
       </dt-segmented-control-item>
     </dt-segmented-control>
@@ -312,19 +312,19 @@ Set `orientation="vertical"` to stack items vertically.
       <dt-segmented-control-item value="all">
         System
         <template #startIcon="{ iconSize }">
-          <dt-icon name="laptop-2" :size="iconSize" />
+          <dt-icon-laptop-2 :size="iconSize" />
         </template>
       </dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">
         Light
         <template #startIcon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+          <dt-icon-sun :size="iconSize" />
         </template>
       </dt-segmented-control-item>
       <dt-segmented-control-item value="recent">
         Dark
         <template #startIcon="{ iconSize }">
-          <dt-icon name="moon" :size="iconSize" />
+          <dt-icon-moon :size="iconSize" />
         </template>
       </dt-segmented-control-item>
     </dt-segmented-control>
@@ -332,17 +332,17 @@ Set `orientation="vertical"` to stack items vertically.
   <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode" orientation="vertical">
     <dt-segmented-control-item value="system" label="System">
       <template #startIcon="{ iconSize }">
-        <dt-icon name="laptop-2" :size="iconSize" />
+        <dt-icon-laptop-2 :size="iconSize" />
       </template>
     </dt-segmented-control-item>
     <dt-segmented-control-item value="light" label="Light">
       <template #startIcon="{ iconSize }">
-        <dt-icon name="sun" :size="iconSize" />
+        <dt-icon-sun :size="iconSize" />
       </template>
     </dt-segmented-control-item>
     <dt-segmented-control-item value="dark" label="Dark">
       <template #startIcon="{ iconSize }">
-        <dt-icon name="moon" :size="iconSize" />
+        <dt-icon-moon :size="iconSize" />
       </template>
     </dt-segmented-control-item>
   </dt-segmented-control>
@@ -378,6 +378,14 @@ The segmented control implements the <a class="d-link" href="https://www.w3.org/
 <component-accessible-table component-name="segmented-control" />
 
 <script setup>
+import {
+  DtIconListSpacingCompact,
+  DtIconListSpacingRegular,
+  DtIconListSpacingExpanded,
+  DtIconLaptop2,
+  DtIconSun,
+  DtIconMoon,
+} from '@dialpad/dialtone-icons/vue';
 import { ref } from 'vue';
 
 const selected = ref('all');
