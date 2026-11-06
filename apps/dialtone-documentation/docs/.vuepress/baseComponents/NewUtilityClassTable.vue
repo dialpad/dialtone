@@ -26,7 +26,7 @@
                 <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
                   {{ className }}
                 </dt-text>
-                <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">
+                <dt-badge v-if="deprecated" variant="critical" class="d-ff-sans">
                   Deprecated
                 </dt-badge>
               </dt-stack>

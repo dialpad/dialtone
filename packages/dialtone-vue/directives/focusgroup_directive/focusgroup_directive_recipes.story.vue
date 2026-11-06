@@ -465,9 +465,10 @@
             3:23 pm
           </dt-text>
           <dt-badge
-            kind="count"
-            type="bulletin"
-            text="6"
+            kind="counter"
+            variant="count"
+            emphasis="strong"
+            label="6"
           />
         </dt-stack>
       </dt-stack>
@@ -604,9 +605,10 @@
             11:05 am
           </dt-text>
           <dt-badge
-            kind="count"
-            type="bulletin"
-            text="3"
+            kind="counter"
+            variant="count"
+            emphasis="strong"
+            label="3"
           />
         </dt-stack>
       </dt-stack>

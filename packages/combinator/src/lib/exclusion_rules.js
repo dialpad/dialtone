@@ -120,12 +120,31 @@ export function shouldClear (memberName, memberGroup, exclusionRules, propValues
  * @returns {Set} Set of disabled value strings.
  */
 export function getDisabledValues (propName, exclusionRules, propValues, slotValues) {
-  const disabled = new Set();
-  if (!exclusionRules?.length) return disabled;
+  return collectValues('disableValues', propName, exclusionRules, propValues, slotValues);
+}
+
+/**
+ * Collects values to remove from a prop's selectable list based on exclusion
+ * rules and the current prop and slot values. Unlike disabled values, hidden
+ * values are not shown at all.
+ *
+ * @param {string} propName - The prop to check for hidden values.
+ * @param {Array} exclusionRules - Array of exclusion rule objects.
+ * @param {object} propValues - Current prop values.
+ * @param {object} slotValues - Current slot values.
+ * @returns {Set} Set of hidden value strings.
+ */
+export function getHiddenValues (propName, exclusionRules, propValues, slotValues) {
+  return collectValues('hideValues', propName, exclusionRules, propValues, slotValues);
+}
+
+function collectValues (effect, propName, exclusionRules, propValues, slotValues) {
+  const collected = new Set();
+  if (!exclusionRules?.length) return collected;
   for (const rule of exclusionRules) {
     if (!areConditionsMet(rule, propValues, slotValues)) continue;
-    const values = rule.disableValues?.props?.[propName];
-    if (values) values.forEach(v => disabled.add(String(v)));
+    const values = rule[effect]?.props?.[propName];
+    if (values) values.forEach(v => collected.add(String(v)));
   }
-  return disabled;
+  return collected;
 }

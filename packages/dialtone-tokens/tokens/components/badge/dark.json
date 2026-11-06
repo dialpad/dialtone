@@ -13,6 +13,10 @@
         "default": {
           "value": "{color.surface.bold-opaque}",
           "type": "color"
+        },
+        "warning-strong": {
+          "value": "{color.surface.warning-strong}",
+          "type": "color"
         }
       },
       "foreground": {
@@ -28,6 +32,10 @@
               }
             }
           }
+        },
+        "warning-strong": {
+          "value": "{color.foreground.primary-inverted}",
+          "type": "color"
         }
       },
       "border": {

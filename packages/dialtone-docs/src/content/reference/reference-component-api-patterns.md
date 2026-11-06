@@ -80,13 +80,15 @@ Color or semantic variant. Values vary per component:
 - DtButton: `default`, `muted`, `critical`, `positive`, `inverted`, `unstyled`
 - DtModal: `default`, `critical`
 - DtNotice: `base`, `critical`, `info`, `positive`, `warning`
-- DtBadge: uses `type` instead (`default`, `info`, `positive`, `warning`, `critical`, `bulletin`, `ai`)
+- DtBadge: `kind` selects a group (`status`, `counter`, `release`, `lifecycle`). The variants are listed under Variant.
 
 For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text compositions.
 
 ### Variant
 
 Visual variant or complete composition. Values vary per component.
+
+- DtBadge: per `kind` group. `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `release`: `pre-release`, `release`. `lifecycle`: `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled`
 
 DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
 

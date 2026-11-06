@@ -117,6 +117,30 @@ describe('option_bar_member_group.vue test', function () {
     });
   });
 
+  describe('Control ordering for grouped components', function () {
+    it('Should render kind, variant, emphasis, then size', function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [
+            { name: 'size', label: 'size' },
+            { name: 'emphasis', label: 'emphasis' },
+            { name: 'label', label: 'label' },
+            { name: 'variant', label: 'variant' },
+            { name: 'kind', label: 'kind' },
+          ],
+          values: {},
+          controlSelector: () => [['base'], 'base'],
+        },
+      });
+
+      const labels = wrapper.findAllComponents({ name: 'DtcOptionBarControl' })
+        .map(control => control.props('label'));
+
+      expect(labels).toEqual(['kind', 'variant', 'emphasis', 'size', 'label']);
+    });
+  });
+
   describe('Deprecated controls', function () {
     it('Should hide deprecated members by default', function () {
       wrapper = mount(DtcOptionBarMemberGroup, {

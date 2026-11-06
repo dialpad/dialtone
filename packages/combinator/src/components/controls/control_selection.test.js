@@ -69,6 +69,20 @@ describe('control_selection.vue test', function () {
     });
   });
 
+  describe('hiddenValues', function () {
+    it('Should not list hidden options', function () {
+      _mountWrapper({
+        validValues: manySelections,
+        hiddenValues: new Set(['alpha']),
+      });
+
+      const values = wrapper.vm.filteredOptions.map(o => o.value);
+
+      expect(values).not.toContain('alpha');
+      expect(values).toContain('beta');
+    });
+  });
+
   describe('Clearable collapsed state', function () {
     let behaviorWrapper;
 

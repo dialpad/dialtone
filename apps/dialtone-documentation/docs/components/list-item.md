@@ -20,7 +20,7 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
       Description
     </template>
     <template #bottom>
-      <dt-badge text="Label" />
+      <dt-badge kind="status" variant="neutral" label="Label" />
     </template>
     <template #end>
       <dt-icon size="300" name="external-link" />
@@ -57,7 +57,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
       Description
     </template>
     <template #bottom>
-      <dt-badge text="Label" />
+      <dt-badge kind="status" variant="neutral" label="Label" />
     </template>
     <template #end>
       <dt-icon size="300" name="external-link" />

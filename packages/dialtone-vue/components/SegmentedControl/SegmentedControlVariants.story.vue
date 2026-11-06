@@ -245,7 +245,10 @@
           >
             Apples
             <template #trailing>
-              <dt-badge kind="count">
+              <dt-badge
+                kind="counter"
+                variant="count"
+              >
                 24
               </dt-badge>
             </template>
@@ -256,7 +259,10 @@
           >
             Oranges
             <template #trailing>
-              <dt-badge kind="count">
+              <dt-badge
+                kind="counter"
+                variant="count"
+              >
                 8
               </dt-badge>
             </template>
@@ -267,7 +273,10 @@
           >
             Bananas
             <template #trailing>
-              <dt-badge kind="count">
+              <dt-badge
+                kind="counter"
+                variant="count"
+              >
                 15
               </dt-badge>
             </template>

@@ -8,7 +8,32 @@
     {
       "class": "d-badge--count",
       "applies": ".d-badge",
-      "description": "Styles with rounded corners."
+      "description": "Applies count variant shape."
+    },
+    {
+      "class": "d-badge--pre-release",
+      "applies": ".d-badge",
+      "description": "Applies pre-release (purple) colors."
+    },
+    {
+      "class": "d-badge--release",
+      "applies": ".d-badge",
+      "description": "Applies release (gray) colors."
+    },
+    {
+      "class": "d-badge--{$lifecycle}",
+      "applies": ".d-badge",
+      "description": "Applies the status color for a lifecycle variant: draft, edited, unsaved, saved, published, archived, or scheduled."
+    },
+    {
+      "class": "d-badge--strong",
+      "applies": ".d-badge",
+      "description": "Applies strong emphasis colors."
+    },
+    {
+      "class": "d-badge--size-{$size}",
+      "applies": ".d-badge",
+      "description": "Applies numeric label typography size."
     },
     {
       "class": "d-badge--info",
@@ -33,7 +58,7 @@
     {
       "class": "d-badge--bulletin",
       "applies": ".d-badge",
-      "description": "Applies Dialpad purple background color."
+      "description": "Deprecated alias for pre-release styling."
     },
     {
       "class": "d-badge--ai",
@@ -56,14 +81,24 @@
       "description": "Decorative color shape"
     },
     {
+      "class": "d-badge__leading",
+      "applies": "Child of .d-badge",
+      "description": "Freeform leading content, such as another badge"
+    },
+    {
+      "class": "d-badge__trailing",
+      "applies": "Child of .d-badge",
+      "description": "Freeform trailing content, such as a nested badge"
+    },
+    {
       "class": "d-badge__icon-left",
       "applies": "Child of .d-badge",
-      "description": "Left icon"
+      "description": "Start icon container"
     },
     {
       "class": "d-badge__icon-right",
       "applies": "Child of .d-badge",
-      "description": "Right icon"
+      "description": "End icon container"
     }
   ]
 }

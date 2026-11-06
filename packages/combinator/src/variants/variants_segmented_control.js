@@ -61,15 +61,15 @@ export default {
       default: {
         initialValue: `<dt-segmented-control-item value="apples" trailingClass="d-pie-100">
   Apples
-  <template #trailing><dt-badge kind="count">24</dt-badge></template>
+  <template #trailing><dt-badge kind="counter" variant="count">24</dt-badge></template>
 </dt-segmented-control-item>
 <dt-segmented-control-item value="oranges" trailingClass="d-pie-100">
   Oranges
-  <template #trailing><dt-badge kind="count">8</dt-badge></template>
+  <template #trailing><dt-badge kind="counter" variant="count">8</dt-badge></template>
 </dt-segmented-control-item>
 <dt-segmented-control-item value="bananas" trailingClass="d-pie-100">
   Bananas
-  <template #trailing><dt-badge kind="count">15</dt-badge></template>
+  <template #trailing><dt-badge kind="counter" variant="count">15</dt-badge></template>
 </dt-segmented-control-item>`,
       },
     },

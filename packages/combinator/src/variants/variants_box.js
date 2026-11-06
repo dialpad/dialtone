@@ -271,7 +271,7 @@ export default {
     slots: {
       default: { initialValue: `<dt-text variant="body-sm">Relative container</dt-text>
 <dt-box position="absolute" inset-block-start="n150" inset-inline-end="n100">
-  <dt-badge icon-size="100" type="info">
+  <dt-badge kind="status" variant="info" icon-size="100">
     <template #startIcon="{ iconSize }">
       <dt-icon-lock :size="iconSize" />
     </template>
