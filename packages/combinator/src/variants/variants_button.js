@@ -226,10 +226,9 @@ export default {
       kind: { initialValue: 'muted' },
       importance: { initialValue: 'outlined' },
       size: { initialValue: '200' },
-      iconPosition: { initialValue: 'end' },
     },
     slots: {
-      icon: { initialValue: '<dt-icon name="external-link" :size="iconSize" />' },
+      endIcon: { initialValue: '<dt-icon-external-link :size="iconSize" />' },
       default: { initialValue: 'Dialtone Doc Site' },
     },
   },
@@ -260,7 +259,7 @@ export default {
       importance: { initialValue: 'outlined' },
     },
     slots: {
-      blockStartIcon: { initialValue: '<dt-icon name="phone" :size="iconSize" />' },
+      blockStartIcon: { initialValue: '<dt-icon-phone :size="iconSize" />' },
       default: { initialValue: 'Label' },
     },
   },
@@ -296,7 +295,7 @@ export default {
       default: {
         initialValue: 'Copy',
       },
-      icon: {
+      startIcon: {
         initialValue: '<dt-icon-copy :size="iconSize" />',
       },
       trailing: {

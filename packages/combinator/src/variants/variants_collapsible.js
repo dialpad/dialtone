@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 export default {
   default: {
     props: {
@@ -14,7 +13,7 @@ export default {
   border-color="subtle"
   class="d-bas-dashed"
 >
-  <dt-text as="p" kind="body" size="100" tone="tertiary" align="center">Content slot</dt-text>
+  <dt-text as="p" variant="body-xs" tone="tertiary" align="center">Content slot</dt-text>
 </dt-box>`,
       },
     },
@@ -33,7 +32,7 @@ export default {
   border-color="subtle"
   class="d-bas-dashed"
 >
-  <dt-text as="p" kind="body" size="100" tone="tertiary" align="center">This will be shown in the expanded area.</dt-text>
+  <dt-text as="p" variant="body-xs" tone="tertiary" align="center">This will be shown in the expanded area.</dt-text>
 </dt-box>`,
       },
     },
