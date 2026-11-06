@@ -44,13 +44,13 @@ describe('migration selection', () => {
 
   it('--all --include-opt-in selects every migration', () => {
     const output = runDryRun(['--all', '--include-opt-in']);
-    assert.equal(selectedCount(output), 20);
+    assert.equal(selectedCount(output), 21);
     assert.ok(output.includes('[OPT-IN]'), 'opt-in migrations should be selected');
   });
 
   it('--include-opt-in on its own also selects every migration', () => {
     const output = runDryRun(['--include-opt-in']);
-    assert.equal(selectedCount(output), 20);
+    assert.equal(selectedCount(output), 21);
   });
 });
 
@@ -232,5 +232,32 @@ describe('--health-check', () => {
       'App.vue': '<template><dt-stack class="d-stack--gap-100" :gap="\'25\'"></dt-stack></template>',
     });
     assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+});
+
+
+describe('text-variant stage', () => {
+  it('detects real pairs, protects overrides, preserves dry-run and rescans after typography', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-variant-'));
+    const file = path.join(tmp, 'App.vue');
+    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8' });
+    const source = '<template><p class="d-body--md">Copy</p><DtText :kind="\'label\'" :size="200">Label</DtText><dt-text kind="body" size="sm" variant="body-md" /></template>';
+    try {
+      fs.writeFileSync(file, source);
+      assert.match(run('--health-check'), /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
+      assert.match(run('--only', 'text-variant', '--dry-run'), /1 eligible, 1 protected, 0 manual review/);
+      assert.equal(fs.readFileSync(file, 'utf8'), source);
+      assert.deepEqual(fs.readdirSync(tmp), ['App.vue']);
+      run('--only', 'typography,text-variant', '--yes');
+      const output = fs.readFileSync(file, 'utf8');
+      assert.match(output, /as="p" variant="body-md"/);
+      assert.match(output, /variant="label-sm"/);
+      assert.match(output, /kind="body" size="sm" variant="body-md"/);
+      assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
+      run('--only', 'text-variant', '--yes');
+      assert.equal(fs.readFileSync(file, 'utf8'), output);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
   });
 });

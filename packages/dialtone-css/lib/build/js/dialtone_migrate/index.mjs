@@ -19,7 +19,7 @@
  *   --health-check     Report migration status without modifying files
  *   --all              Run all required migrations without selection prompt
  *   --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
- *   --only <ids>       Comma-separated list of migration IDs to run
+ *   --only <ids>       Comma-separated list of migration IDs to run (in supplied order)
  *   --package <name>   Package name to use for injected component imports
  *                      (default: @dialpad/dialtone-vue). Useful when running
  *                      Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
@@ -30,6 +30,7 @@
  *   npx dialtone-migrate --health-check --cwd ./src
  *   npx dialtone-migrate --all --dry-run
  *   npx dialtone-migrate --only color-stops,hsl-to-oklch
+ *   npx dialtone-migrate --only typography,text-variant --dry-run
  */
 
 import { spawn, execFileSync } from 'node:child_process';
@@ -37,6 +38,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import readline from 'readline';
 import { fileURLToPath } from 'node:url';
+import { transformContent as transformTextVariant } from '../dialtone_migrate_text_variant/index.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -361,6 +363,16 @@ const MIGRATIONS = [
     fileExtensions: ['.vue', '.html'],
   },
   {
+    id: 'text-variant',
+    name: 'Text Kind and Size to Variant',
+    description: 'Convert static DtText kind + size pairs to variant; preserve explicit variants and report uncertain inputs.',
+    category: 'opt-in',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_text_variant',
+    detectPatterns: [],
+    fileExtensions: ['.vue', '.html'],
+  },
+  {
     id: 'vue3-to-vue-imports',
     name: 'Vue 3 Import Paths',
     description: '@dialpad/dialtone/vue3, @dialpad/dialtone-icons/vue3, and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
@@ -463,7 +475,7 @@ Options:
   --health-check     Report migration status without modifying files
   --all              Run all required migrations without selection prompt
   --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
-  --only <ids>       Comma-separated list of migration IDs to run
+  --only <ids>       Comma-separated list of migration IDs to run (in supplied order)
   --package <name>   Package name to use for injected component imports
                      (default: @dialpad/dialtone-vue). Useful when running
                      Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
@@ -481,6 +493,8 @@ Examples:
   npx dialtone-migrate --all --dry-run               # Dry-run all required
   npx dialtone-migrate --all --include-opt-in --yes  # Run required + opt-in
   npx dialtone-migrate --only color-stops,hsl-to-oklch --yes
+  npx dialtone-migrate --only text-variant --dry-run --cwd ./src
+  npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
 `);
 }
 
@@ -586,6 +600,16 @@ async function healthCheck (cwd) {
 
     for (const [file, content] of fileContents) {
       if (!migration.fileExtensions.some(ext => file.endsWith(ext))) continue;
+
+      if (migration.id === 'text-variant') {
+        const result = transformTextVariant(content, { vue: file.endsWith('.vue') });
+        const pending = result.count + result.diagnostics.length;
+        if (pending) {
+          matchedFiles.add(path.relative(cwd, file));
+          matchCount += pending;
+        }
+        continue;
+      }
 
       let patterns = migration.detectPatterns;
       const alreadyMigrated = migration.skipIfPatterns?.some(pattern => pattern.test(content));
