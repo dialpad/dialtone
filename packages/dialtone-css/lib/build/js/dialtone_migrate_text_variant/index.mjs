@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'];
 const KINDS = new Set(['headline', 'body', 'label', 'code']);
 const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
-const SAFE_DIRECTIVES = /^(?:v-(?:if|else|else-if|for|show|once|memo|cloak|text|html|slot)(?:[.:]|$)|@|#|v-on(?::|$))/;
+const SAFE_DIRECTIVES = /^v-(?:(?:if|else|else-if|for|show|once|memo|cloak|text|html|slot)(?:[.:]|$)|on(?::|$))/;
 
 // Tokenize markup without reserializing it. Attribute values, comments, interpolation
 // strings and raw-text elements must never expose their quoted examples as live tags.
@@ -106,7 +106,7 @@ export function transformContent (content, { vue = false } = {}) {
     const size = literal(sizes[0]);
     const sizeIndex = /^[1-7]00$/.test(size ?? '') ? Number(size) / 100 - 1 : SIZES.indexOf(size);
     if (!reason && (kind === null || size === null)) reason = 'Nonliteral kind or size';
-    if (!reason && (!KINDS.has(kind) || !Number.isInteger(sizeIndex) || sizeIndex < 0 || sizeIndex > (kind === 'headline' ? 6 : 3))) {
+    if (!reason && (!KINDS.has(kind) || sizeIndex < 0 || (kind !== 'headline' && sizeIndex > 3))) {
       reason = 'Unsupported kind/size composition';
     }
     if (reason) {
@@ -121,15 +121,14 @@ export function transformContent (content, { vue = false } = {}) {
       text: `variant="${kind}-${SIZES[sizeIndex]}"` });
     const attributeStart = tag.start + sizeAttr.start + sizeAttr.prefix.length;
     const attributeEnd = tag.start + sizeAttr.end;
-    const lineStart = content.lastIndexOf('\n', attributeStart - 1) + 1;
     const lineEnd = content.indexOf('\n', attributeEnd);
-    const ownLine = lineEnd !== -1 &&
-      /^[ \t]*$/.test(content.slice(lineStart, attributeStart)) &&
+    const ownLine = /\n[ \t]*$/.test(sizeAttr.prefix) && lineEnd !== -1 &&
       /^[ \t\r]*$/.test(content.slice(attributeEnd, lineEnd));
-    const whitespace = sizeAttr.prefix.match(/[ \t]*$/)[0].length;
-    // Remove a newly empty attribute line, but keep inline neighbors and closing tags.
-    edits.push({ start: ownLine ? lineStart : attributeStart - whitespace,
-      end: ownLine ? lineEnd + 1 : attributeEnd, text: '' });
+    // Removing the indentation reaches the line start when size begins its own line;
+    // then also drop the line break so no empty line remains. Inline neighbors and
+    // closing tags on the same line keep their placement.
+    const indent = sizeAttr.prefix.match(/[ \t]*$/)[0].length;
+    edits.push({ start: attributeStart - indent, end: ownLine ? lineEnd + 1 : attributeEnd, text: '' });
     count++;
   }
   let transformed = content;

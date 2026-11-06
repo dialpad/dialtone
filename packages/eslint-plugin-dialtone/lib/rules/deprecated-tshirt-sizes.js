@@ -15,7 +15,6 @@ const {
   getElementName,
   getStaticAttributeValue,
   hasAttribute,
-  hasDirectiveAttribute,
   isDtTextComponent,
   removeAttributeFix,
 } = require('../util/vue-attribute-helpers');
@@ -66,16 +65,9 @@ function getDtTextVariant(node, sizeValue) {
   });
   if (uncertain || ['kind', 'size'].some(name => attributes.filter(attribute => getAttributeName(attribute) === name).length !== 1)) return null;
 
-  const variantAttribute = findStaticAttribute(node, 'variant');
-  if (variantAttribute) return null;
+  if (hasAttribute(node, 'variant')) return null;
 
-  if (
-    hasDirectiveAttribute(node, 'variant') ||
-    hasDirectiveAttribute(node, 'kind')
-  ) {
-    return null;
-  }
-
+  // A bound kind has no static attribute, so it falls through to null below.
   const kindAttribute = findStaticAttribute(node, 'kind');
   const kindValue = getStaticAttributeValue(kindAttribute);
   if (!kindValue || !DT_TEXT_KIND_SIZE_MAP[kindValue]) return null;
@@ -176,16 +168,15 @@ module.exports = {
                 return;
               }
 
-              if (hasAttribute(node, 'kind') || hasAttribute(node, 'variant')) {
-                context.report({
-                  node,
-                  messageId: 'deprecatedDtTextSizeManual',
-                  data: {
-                    oldSize: sizeValue,
-                  },
-                });
-                return;
-              }
+              // Unpaired sizes returned above, so kind or variant is present here.
+              context.report({
+                node,
+                messageId: 'deprecatedDtTextSizeManual',
+                data: {
+                  oldSize: sizeValue,
+                },
+              });
+              return;
             }
 
             context.report({
