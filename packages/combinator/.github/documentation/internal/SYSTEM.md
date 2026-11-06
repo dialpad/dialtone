@@ -74,11 +74,18 @@ Format:
 }
 ```
 
-Initial option values come from each member's `initialValue`.
+Initial option values come from each member's `initialValue`. Plain objects and
+arrays are copied so live edits do not mutate preset defaults.
 
-Child components do not mutate `options` directly. They emit a function through
-`update:options`; the root applies that function inside a guarded setter. Manual
-edits clear the selected variant label.
+Option-bar controls and code-panel slot editors emit a function through
+`update:options`; the root applies it inside a guarded setter. Outside preset
+application, the setter switches a named preset to custom and emits
+`update:preset` with an empty string.
+
+Preview `update:<prop>` events use the same setter only when their value differs
+from the previous-value snapshot. Unchanged echoes preserve the selected preset;
+in-place changes to plain objects and arrays are detected by that snapshot.
+See [RENDERER](RENDERER.md#events) for event handling.
 
 ## Settings
 

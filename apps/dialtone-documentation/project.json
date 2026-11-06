@@ -48,9 +48,25 @@
     },
     "test": {
       "executor": "nx:run-commands",
+      "dependsOn": ["test-playground", "test-playground-utils"],
       "options": {
         "cwd": "{workspaceRoot}",
         "command": "vitest run apps/dialtone-documentation/scripts"
+      }
+    },
+    "test-playground-utils": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "node --test apps/dialtone-documentation/docs/.vuepress/theme/utils/*.test.mjs"
+      }
+    },
+    "test-playground": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["dialtone-vue:build"],
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "vitest run --config apps/dialtone-documentation/vitest.config.js"
       }
     },
     "build": {

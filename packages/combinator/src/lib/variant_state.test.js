@@ -1,6 +1,14 @@
 import { expect } from 'vitest';
-import { computed, reactive, shallowRef } from 'vue';
-import { computeDisabledMembers, listVariantNames, writeUpdateEvent, createVariantBindings } from './variant_state';
+import { computed, reactive, readonly, shallowRef } from 'vue';
+import {
+  areOptionValuesEqual,
+  captureComponentValues,
+  computeDisabledMembers,
+  getInitialValues,
+  listVariantNames,
+  writeUpdateEvent,
+  createVariantBindings,
+} from './variant_state';
 
 // `link` is a boolean prop, so `linkKind` is inferred as its dependent child
 // (boolean-prefix matching). The first exclusion rule hides target/rel/type
@@ -39,6 +47,16 @@ const TEXT_LIST_ITEM_INFO = {
 };
 
 describe('variant_state', function () {
+  it('keeps live collections separate from preset defaults and other instances', () => {
+    const initialValue = { selected: ['apple'] };
+    const info = { props: [{ name: 'modelValue', initialValue }] };
+    const first = getInitialValues(info);
+    const second = getInitialValues(info);
+    first.props.modelValue.selected.push('banana');
+    expect(initialValue.selected).toEqual(['apple']);
+    expect(second.props.modelValue.selected).toEqual(['apple']);
+  });
+
   describe('computeDisabledMembers', function () {
     it('returns an empty set when no rule matches and dependents are active', function () {
       expect(computeDisabledMembers(INFO, { to: '', kind: 'body', link: true }).size).toBe(0);
@@ -133,6 +151,82 @@ describe('variant_state', function () {
 
     it('is a no-op when the target has neither props nor attributes', function () {
       expect(() => writeUpdateEvent({}, 'update:x', 1)).not.toThrow();
+    });
+  });
+
+  describe('model echo equality', () => {
+    it.each([['reactive', reactive], ['readonly', readonly]])(
+      'preserves instance identity through a %s proxy', (proxyType, createProxy) => {
+        class Choice {}
+        const value = new Choice();
+        const proxy = createProxy(value);
+        expect(areOptionValuesEqual(value, proxy)).toBe(true);
+        expect(areOptionValuesEqual(proxy, value)).toBe(true);
+        expect(areOptionValuesEqual(proxy, createProxy(new Choice()))).toBe(false);
+      },
+    );
+
+    it('preserves a nested instance echo while detecting a replacement instance', () => {
+      class Choice {}
+      const model = reactive({ props: { value: { choice: new Choice() } }, attributes: {} });
+      const baseline = captureComponentValues(model).props.value;
+      expect(areOptionValuesEqual(baseline, model.props.value)).toBe(true);
+      model.props.value.choice = new Choice();
+      expect(areOptionValuesEqual(baseline, model.props.value)).toBe(false);
+    });
+
+    it('keeps a detached baseline when a reactive prop is mutated before its event', () => {
+      const model = reactive({ props: { modelValue: ['apple'] }, attributes: {} });
+      let captures = 0;
+      const recorded = computed(() => { captures++; return captureComponentValues(model); });
+      const baseline = recorded.value;
+      model.props.modelValue.push('banana');
+      expect(recorded.value).toBe(baseline);
+      expect(captures).toBe(1);
+      expect(baseline.props.modelValue).toEqual(['apple']);
+      expect(areOptionValuesEqual(baseline.props.modelValue, model.props.modelValue)).toBe(false);
+      expect(captureComponentValues(model).props.modelValue).toEqual(['apple', 'banana']);
+    });
+
+    it('captures plain cycles and symbols while retaining callbacks and non-plain identities', () => {
+      const key = Symbol('choice');
+      const value = { callback: () => {}, date: new Date(0), [key]: [1] };
+      value.self = value;
+      const snapshot = captureComponentValues({ props: { value }, attributes: {} }).props.value;
+      expect(snapshot).not.toBe(value);
+      expect(snapshot.self).toBe(snapshot);
+      expect(snapshot[key]).not.toBe(value[key]);
+      expect(snapshot.callback).toBe(value.callback);
+      expect(snapshot.date).toBe(value.date);
+      expect(areOptionValuesEqual(snapshot, value)).toBe(true);
+      value[key].push(2);
+      expect(snapshot[key]).toEqual([1]);
+    });
+
+    it('recognizes cloned nested objects and arrays without depending on key order', () => {
+      expect(areOptionValuesEqual({ showIcon: false, values: [undefined, { size: 2 }] },
+        { values: [undefined, { size: 2 }], showIcon: false })).toBe(true);
+      expect(areOptionValuesEqual([1, 2], [2, 1])).toBe(false);
+      expect(areOptionValuesEqual({ value: undefined }, {})).toBe(false);
+    });
+
+    it('keeps callbacks, symbols and non-plain instances distinct', () => {
+      const callback = () => {};
+      const key = Symbol('option');
+      expect(areOptionValuesEqual({ callback, [key]: true }, { callback, [key]: true })).toBe(true);
+      expect(areOptionValuesEqual({ callback }, { callback: () => {} })).toBe(false);
+      expect(areOptionValuesEqual({ [key]: true }, { [key]: false })).toBe(false);
+      expect(areOptionValuesEqual(new Date(0), new Date(0))).toBe(false);
+    });
+
+    it('handles cyclic values and still detects a real change', () => {
+      const previous = { size: 2 };
+      previous.self = previous;
+      const next = { size: 2 };
+      next.self = next;
+      expect(areOptionValuesEqual(previous, next)).toBe(true);
+      next.size = 3;
+      expect(areOptionValuesEqual(previous, next)).toBe(false);
     });
   });
   it('keeps copied bindings reactive across value changes and reset replacements', () => {
