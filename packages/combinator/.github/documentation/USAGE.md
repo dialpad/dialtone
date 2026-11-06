@@ -118,6 +118,14 @@ Use `preset` to select an existing variant by its exact name, or bind it with
 />
 ```
 
+```vue
+<script setup>
+import { ref } from 'vue';
+
+const selectedPreset = ref('default');
+</script>
+```
+
 The prop defaults to `default`. Unknown names and an empty name at mount also
 load `default`. Dropdown selections, spec-sheet selections, and reset actions
 emit `update:preset` with the selected name. Option-bar edits, code-panel slot
