@@ -1,0 +1,22 @@
+packages/dialtone-css/lib/build/less/components/box.less
+  h_c15b5755534093 292-295
+packages/dialtone-css/lib/build/less/components/modal.less
+  h_c15b5755534093 104,119
+packages/dialtone-css/lib/build/less/components/scrollbar.less
+  h_c15b5755534093 57-62
+packages/dialtone-css/lib/build/less/components/scroller.less
+  h_c15b5755534093 3-4
+packages/dialtone-vue/components/Collapsible/Collapsible.vue
+  h_c15b5755534093 32-33,42-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "c79276842725585ce6ddccb27a554f703a0f5d5e",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
