@@ -813,6 +813,16 @@ describe('DtInput tests', () => {
         }
       });
 
+      it('should not write the composing text into a file input when type switches mid-composition', async () => {
+        await wrapper.setProps({ modelValue: '' });
+        await nativeInput.trigger('compositionstart');
+        nativeInput.element.value = 'テ';
+
+        await wrapper.setProps({ type: 'file' });
+
+        expect(wrapper.find('input').element.value).toBe('');
+      });
+
       it('should render modelValue again after composition ends', async () => {
         await nativeInput.trigger('compositionstart');
         nativeInput.element.value = 'テスト';
