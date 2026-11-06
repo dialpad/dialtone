@@ -1166,9 +1166,9 @@ if (defaultAdjusted) {
   console.log(`default    : the code's default ${JSON.stringify(exactDefault)} is not a valid variant here; `
     + `using the closest, ${JSON.stringify(defaultAdjusted.used)}`);
 }
-// Figma's default variant is the TOP-LEFT one on the canvas, and the builder lays variants out in
-// row order, so the default goes first. Everything else keeps its order.
-if (defaultVariant) { variants.splice(variants.indexOf(defaultVariant), 1); variants.unshift(defaultVariant); }
+// Variants stay in their natural order: that is the layer order, and so the order a property's
+// options have in Figma's dropdown (Size 100, 200, 300 … rather than the default first). The
+// default variant is Figma's TOP-LEFT one, which build-plugin arranges after every shard exists.
 
 await browser.close();
 await server.close();

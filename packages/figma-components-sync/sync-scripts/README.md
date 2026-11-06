@@ -467,8 +467,10 @@ otherwise (`default-variant.mjs`, with the defaults read from the Vue runtime by
 An axis that is not a plain prop default, such as slot presence or an initial state the component
 computes, is declared in the config as `effectiveDefaults` (Collapsible starts open although its
 `open` prop is `null`; Notice and Banner have no action or header until something fills them).
-`build-spec` lays that variant out first so it lands top-left, the plugin reads back
-`set.defaultVariant` and `run-batch` prints it, and the verifier compares each variant
+The variants keep their natural order, because the layer order is the order of a property's
+options in Figma's dropdown (Size 100 to 500, not 300 first). The plugin lays the whole page out
+as one flow with the default first, after every shard exists, so it lands top-left; it then reads
+back `set.defaultVariant`, `run-batch` prints it, and the verifier compares each variant
 property's default in the built set against the same function.
 
 ### Slot content is declared, not inferred
