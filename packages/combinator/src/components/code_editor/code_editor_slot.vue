@@ -3,7 +3,7 @@
     :level="indentLevel"
   >
     <dtc-code-editor-element
-      v-if="name !== DEFAULT_SLOT_NAME"
+      :show-tags="showTemplate"
       tag-name="template"
     >
       <template #opening>
@@ -12,7 +12,7 @@
       </template>
       <template #default>
         <dtc-code-editor-indent
-          :level="indentLevel"
+          :level="showTemplate ? indentLevel : 0"
         >
           <dtc-code-editor-input
             @input="onInput"
@@ -22,12 +22,6 @@
         </dtc-code-editor-indent>
       </template>
     </dtc-code-editor-element>
-    <dtc-code-editor-input
-      v-else
-      @input="onInput"
-    >
-      <slot />
-    </dtc-code-editor-input>
   </dtc-code-editor-indent>
 </template>
 
@@ -75,6 +69,7 @@ const props = defineProps({
 });
 
 const scopeString = computed(() => getSlotScope(props, props.content));
+const showTemplate = computed(() => props.name !== DEFAULT_SLOT_NAME || Boolean(scopeString.value));
 
 const emit = defineEmits(['update:options']);
 
@@ -88,7 +83,7 @@ function onInput (e) {
 <script>
 /**
  * The slot displays the content wrapped by 'template' tags that match the slot name.
- * The default slot is not wrapped by 'template' tags.
+ * Default slots are wrapped only when their content uses documented slot scope.
  */
 export default {
   name: 'DtcCodeEditorSlot',

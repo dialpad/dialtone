@@ -64,11 +64,11 @@ export function serializeExampleTemplate ({ info, options, disabledMembers, verb
   // Slot content
   if (hasContent) {
     for (const [slot, value] of slotEntries) {
-      if (slot === DEFAULT_SLOT_NAME) {
+      const slotInfo = info.slots?.find(s => s.name === slot);
+      const slotScope = getSlotScope(slotInfo, value);
+      if (slot === DEFAULT_SLOT_NAME && !slotScope) {
         lines.push(pad + value);
       } else {
-        const slotInfo = info.slots?.find(s => s.name === slot);
-        const slotScope = getSlotScope(slotInfo, value);
         const scope = slotScope ? `="${slotScope}"` : '';
         lines.push(pad + '<template #' + slot + scope + '>');
         lines.push(pad + pad + value);

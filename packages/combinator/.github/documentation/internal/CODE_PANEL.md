@@ -49,8 +49,10 @@ and `NaN` values and disabled members.
 
 ## Slots
 
-`DtcCodeEditor` reads slot content from `options.slots`. It renders the default
-slot as direct content and wraps named slots in `<template #name>`.
+`DtcCodeEditor` reads slot content from `options.slots`. It wraps named slots in
+`<template #name>`. Default-slot content that uses documented slot bindings gets
+`<template #default="...">` in both displayed and copied code; ordinary default
+content stays unwrapped.
 
 For scoped slots, `DtcCodeEditor` checks which documented bindings appear in the
 slot template string and writes the matching scope expression. A variant can set
