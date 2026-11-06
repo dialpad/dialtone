@@ -14,12 +14,13 @@ combinator: DtEmojiPicker
 
 ```vue demo
 <dt-emoji-picker
-  skin-tone="Default"
+  :skin-tone="skinTone"
   :recently-used-emojis="recentlyUsedEmojis"
+  @skin-tone="skinTone = $event"
 />
 <!-- @code -->
 <dt-emoji-picker
-  skin-tone="Default"
+  :skin-tone="skinTone"
   :recently-used-emojis="[
     {
       name: `thumbs up`,
@@ -39,6 +40,14 @@ combinator: DtEmojiPicker
   @skin-tone="skinTone = $event"
   @selected-emoji="selectedEmoji"
 />
+```
+
+Initialize the reactive skin tone in your component's setup. The `skin-tone` event updates the value passed back to the picker.
+
+```js
+import { ref } from 'vue';
+
+const skinTone = ref('Default');
 ```
 
 ### With Popover
@@ -67,8 +76,9 @@ combinator: DtEmojiPicker
   </template>
   <template #content>
     <dt-emoji-picker
-      skin-tone="Default"
+      :skin-tone="skinTone"
       :recently-used-emojis="recentlyUsedEmojis"
+      @skin-tone="skinTone = $event"
     />
   </template>
 </dt-popover>
@@ -120,6 +130,7 @@ On `ESC` the emoji picker will emit the `close` event to close the emoji picker.
 import { DtIconSatisfied } from '@dialpad/dialtone-icons/vue';
 import { ref } from 'vue';
 
+const skinTone = ref('Default');
 const emojiPickerOpened = ref(false);
 const toggleEmojiPicker = () => {
   emojiPickerOpened.value = !emojiPickerOpened.value;
