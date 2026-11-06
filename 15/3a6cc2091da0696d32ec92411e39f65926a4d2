@@ -1,0 +1,30 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_6e87615822f9a7::t_52791b549f5d4e 473-474,476-479,495-496,498-501
+  s_6e87615822f9a7::t_d78ff9a67f5f06 497
+  s_6e87615822f9a7::t_f3fd081c9a73a1 475
+packages/dialtone-icons/src/svg/icons/communication/mail-rejected.svg
+  h_c15b5755534093 2
+packages/dialtone-icons/src/svg/icons/communication/message-rejected.svg
+  h_c15b5755534093 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "153a6cc2091da0696d32ec92411e39f65926a4d2",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_6e87615822f9a7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8683e3d5-3e3e-42b1-836b-bb4af6f08d59",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Ted Goas <ted.goas@dialpad.com>"
+    }
+  }
+}
