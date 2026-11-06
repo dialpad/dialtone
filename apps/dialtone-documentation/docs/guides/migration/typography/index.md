@@ -138,7 +138,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 
 ## Migration Tool
 
-`dialtone-migrate-typography` scans `.vue` and `.html` files for legacy typography utility classes and converts them to `<dt-text>`. It is included with `@dialpad/dialtone-css`.
+`dialtone-migrate --only typography` scans `.vue` and `.html` files for legacy typography utility classes and converts them to `<dt-text>`. The runner is included with both `@dialpad/dialtone` and `@dialpad/dialtone-css`.
 
 > [!INFO] Tool output and the new DtText API
 > The current migration tool emits legacy-compatible `kind + size` props for composed typography classes. That output is intentionally still supported. If you are hand-authoring code or revisiting migrated output, prefer `variant` for composed text styles and use numeric `size` only with `variant` for raw font-size token overrides.
@@ -257,11 +257,11 @@ The opt-in `text-variant` stage converts supported explicit `kind + size` pairs 
 
 ```sh
 npx dialtone-migrate --only text-variant --dry-run --cwd ./src
-# Convert utilities first, then the resulting pairs:
+# Preview both stages against current files (without simulated writes):
 npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
 ```
 
-Remove `--dry-run` to apply changes; add `--yes` to skip confirmation. `--only` runs stages in the supplied order. Each stage scans again, so `text-variant` sees elements created by `typography`. Health-check reports pending pairs and manual-review cases; it does not gate stage execution.
+Remove `--dry-run` to apply changes; add `--yes` to skip confirmation. `--only` runs stages in the supplied order. During an applied combined run, each stage scans again, so `text-variant` sees elements created by `typography`. A combined dry-run previews each stage against the files currently on disk; it does not simulate earlier stages. After applying `typography`, preview `text-variant` separately to inspect its newly created pairs. Health-check reports pending pairs and manual-review cases; it does not gate stage execution.
 
 ```html
 <!-- Before -->
@@ -272,7 +272,7 @@ Remove `--dry-run` to apply changes; add `--yes` to skip confirmation. `--only` 
 
 Numeric composition sizes `100`, `200`, `300`, `400`, `500`, `600`, `700` map to `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`. Headline supports all seven; body, label and code support `xs` through `lg`. Both tag casings, static attributes and statically bound string/numeric literals are supported in Vue HTML templates and HTML files. Other source regions are preserved.
 
-Any explicit `variant`, including a bound variant, protects the entire element. An existing `variant + size` may be an intentional raw font-size override. Spreads, dynamic arguments, nonliteral expressions, conflicting props and unsupported mappings stay unchanged with file/line/column diagnostics and a manual-review action. Kind-only and size-only usages are outside this pair conversion. The stage inserts no review markers; a second run leaves converted output unchanged.
+Within `text-variant`, any explicit `variant`, including a bound variant, protects the entire element. Other selected stages have their own behavior; this guarantee does not extend to them. An existing `variant + size` may be an intentional raw font-size override. Spreads, dynamic arguments, nonliteral expressions, conflicting props and unsupported mappings stay unchanged with file/line/column diagnostics and a manual-review action. Kind-only and size-only usages are outside this pair conversion. The reported existing-variant count includes every Text element with an explicit variant, including elements converted on an earlier run; it is not a count of size overrides. The stage inserts no review markers; a second run leaves converted output unchanged.
 
 The `typography` stage still produces the legacy-compatible output shown elsewhere in this guide. Its utility mappings are separate from composition sizes: `d-body--sm` produces `kind="body" size="100"`, then `text-variant` produces `variant="body-xs"`.
 
@@ -320,7 +320,12 @@ The prompt applies or skips the whole file — it does not step through individu
 
 #### Target Specific Files
 
-The following advanced modes use the module shipped inside `@dialpad/dialtone`; they are not forwarded by the umbrella runner and have no separately published binary. Run these paths from your consumer project root.
+The following advanced modes are not forwarded by the umbrella runner and have no separately published binary. Run the module from your consumer project root using the path for your installed package:
+
+- `@dialpad/dialtone`: `node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs`
+- `@dialpad/dialtone-css`: `node node_modules/@dialpad/dialtone-css/lib/dist/js/dialtone_migrate_typography/index.mjs`
+
+The examples below use the umbrella package path. Substitute the CSS package path when that is your installation.
 
 ```bash
 # Single file

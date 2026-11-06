@@ -117,12 +117,19 @@ export function transformContent (content, { vue = false } = {}) {
     }
     const kindAttr = kinds[0];
     const sizeAttr = sizes[0];
-    edits.push({ start: tag.start + kindAttr.start, end: tag.start + kindAttr.end,
-      text: `${kindAttr.prefix}variant="${kind}-${SIZES[sizeIndex]}"` });
-    // Keep line breaks and unrelated formatting; remove only the migrated attribute
-    // and its immediately preceding horizontal space.
+    edits.push({ start: tag.start + kindAttr.start + kindAttr.prefix.length, end: tag.start + kindAttr.end,
+      text: `variant="${kind}-${SIZES[sizeIndex]}"` });
+    const attributeStart = tag.start + sizeAttr.start + sizeAttr.prefix.length;
+    const attributeEnd = tag.start + sizeAttr.end;
+    const lineStart = content.lastIndexOf('\n', attributeStart - 1) + 1;
+    const lineEnd = content.indexOf('\n', attributeEnd);
+    const ownLine = lineEnd !== -1 &&
+      /^[ \t]*$/.test(content.slice(lineStart, attributeStart)) &&
+      /^[ \t\r]*$/.test(content.slice(attributeEnd, lineEnd));
     const whitespace = sizeAttr.prefix.match(/[ \t]*$/)[0].length;
-    edits.push({ start: tag.start + sizeAttr.start + sizeAttr.prefix.length - whitespace, end: tag.start + sizeAttr.end, text: '' });
+    // Remove a newly empty attribute line, but keep inline neighbors and closing tags.
+    edits.push({ start: ownLine ? lineStart : attributeStart - whitespace,
+      end: ownLine ? lineEnd + 1 : attributeEnd, text: '' });
     count++;
   }
   let transformed = content;
@@ -165,7 +172,7 @@ async function main () {
     }
     if (result.count) changes.push({ file, ...result });
   }
-  console.log(`Text variants: ${eligible} eligible, ${protectedCount} protected, ${manual} manual review.`);
+  console.log(`Text variants: ${eligible} eligible, ${protectedCount} existing-variant elements unchanged, ${manual} manual review.`);
   if (args.includes('--dry-run')) {
     console.log('--dry-run: No files were modified.');
     return;

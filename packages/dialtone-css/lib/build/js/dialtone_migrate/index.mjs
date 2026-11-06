@@ -495,6 +495,9 @@ Examples:
   npx dialtone-migrate --only color-stops,hsl-to-oklch --yes
   npx dialtone-migrate --only text-variant --dry-run --cwd ./src
   npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
+
+Combined dry-run stages inspect current files; they do not simulate earlier writes.
+After applying typography, preview text-variant separately for newly created pairs.
 `);
 }
 

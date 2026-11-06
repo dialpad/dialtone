@@ -245,7 +245,7 @@ describe('text-variant stage', () => {
     try {
       fs.writeFileSync(file, source);
       assert.match(run('--health-check'), /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
-      assert.match(run('--only', 'text-variant', '--dry-run'), /1 eligible, 1 protected, 0 manual review/);
+      assert.match(run('--only', 'text-variant', '--dry-run'), /1 eligible, 1 existing-variant elements unchanged, 0 manual review/);
       assert.equal(fs.readFileSync(file, 'utf8'), source);
       assert.deepEqual(fs.readdirSync(tmp), ['App.vue']);
       run('--only', 'typography,text-variant', '--yes');

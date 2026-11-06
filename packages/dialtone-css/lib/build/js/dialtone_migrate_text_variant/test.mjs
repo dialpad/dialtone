@@ -74,6 +74,15 @@ it('preserves unrelated source and ignores examples outside live template region
   assert.equal(transformContent(input, { vue: true }).transformed, expected);
   assert.equal(transformContent(input, { vue: true }).count, 1);
   assert.equal(transformContent(`<script>${example}</script>${example}`).count, 1);
+  for (const [before, after] of [
+    ['<DtText\n  size="300"\n  kind="body"\n/>', '<DtText\n  variant="body-md"\n/>'],
+    ['<dt-text\n  kind="body"\n  size="300"\n  as="p"\n>Copy</dt-text>', '<dt-text\n  variant="body-md"\n  as="p"\n>Copy</dt-text>'],
+    ['<dt-text\n  kind="body"\n  size="300"\n/>', '<dt-text\n  variant="body-md"\n/>'],
+    ['<dt-text\n  kind="body"\n  size="300">Copy</dt-text>', '<dt-text\n  variant="body-md"\n>Copy</dt-text>'],
+  ]) {
+    assert.equal(transformContent(before).transformed, after);
+  }
+
 });
 
 
