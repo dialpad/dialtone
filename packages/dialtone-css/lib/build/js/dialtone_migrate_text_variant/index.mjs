@@ -6,6 +6,7 @@ import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline/promises';
 import { fileURLToPath } from 'node:url';
+import { gitEnvironment } from '../dialtone_migrate/git_environment.mjs';
 
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'];
 const KINDS = new Set(['headline', 'body', 'label', 'code']);
@@ -165,7 +166,7 @@ async function filesIn (dir) {
     const input = files.join('\0') + '\0';
     const output = execFileSync('git', ['check-ignore', '--stdin', '-z'], {
       input, cwd: dir, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'],
-      env: { ...process.env, LC_ALL: 'C' },
+      env: gitEnvironment(dir),
       maxBuffer: Math.max(1024 * 1024, Buffer.byteLength(input) + 1),
     });
     const ignored = new Set(output.split('\0'));

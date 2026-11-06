@@ -39,6 +39,7 @@ import path from 'path';
 import readline from 'readline';
 import { fileURLToPath } from 'node:url';
 import { transformContent as transformTextVariant } from '../dialtone_migrate_text_variant/index.mjs';
+import { gitEnvironment } from './git_environment.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -398,6 +399,7 @@ function getRepoRoot (cwd) {
   try {
     return execFileSync('git', ['rev-parse', '--show-toplevel'], {
       cwd,
+      env: gitEnvironment(cwd),
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
     }).trim();
@@ -535,7 +537,7 @@ function filterGitIgnored (files, cwd) {
       cwd,
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'pipe'],
-      env: { ...process.env, LC_ALL: 'C' },
+      env: gitEnvironment(cwd),
       maxBuffer: Math.max(1024 * 1024, Buffer.byteLength(input) + 1),
     });
     const ignored = new Set(output.split('\0'));

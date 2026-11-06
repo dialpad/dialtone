@@ -263,7 +263,9 @@ npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
 
 Remove `--dry-run` to apply changes; add `--yes` to skip confirmation. `--only` runs stages in the supplied order. During an applied combined run, each stage scans again, so `text-variant` sees elements created by `typography`. A combined dry-run previews each stage against the files currently on disk; it does not simulate earlier stages. After applying `typography`, preview `text-variant` separately to inspect its newly created pairs. Health-check reports pending pairs and manual-review cases; it does not gate stage execution.
 
-Health-check and `text-variant` stop at nested Git repositories, including checked-out submodules. Target each repository explicitly with `--cwd` so its own ignore rules apply; other selected stages retain their own scan behavior.
+Health-check and `text-variant` stop at nested Git repositories, including checked-out submodules. Target each repository explicitly with `--cwd` so its own ignore rules apply. Built-in exclusions still match the full path, including segments above `--cwd`; a repository under `dist` or `compiled` is not scanned.
+
+The `typography` stage has a different scan scope: it does not consult Git ignore rules and can traverse nested repositories. In a combined run, it may change files that `text-variant` then skips. Preview and inspect its output separately before applying the combined command.
 
 ```html
 <!-- Before -->

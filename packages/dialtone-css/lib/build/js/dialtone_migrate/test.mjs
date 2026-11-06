@@ -16,6 +16,13 @@ import { fileURLToPath } from 'node:url';
 
 const cli = path.join(path.dirname(fileURLToPath(import.meta.url)), 'index.mjs');
 
+// Fixture subprocesses must never inherit a caller's repository/index overrides.
+const gitEnv = { ...process.env };
+for (const name of Object.keys(gitEnv)) {
+  if (name.toUpperCase().startsWith('GIT_')) delete gitEnv[name];
+}
+const runGit = args => execFileSync('git', args, { encoding: 'utf8', env: gitEnv });
+
 // Run the CLI in --dry-run against an empty temp dir and return stdout.
 function runDryRun (flags) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-master-'));
@@ -23,7 +30,7 @@ function runDryRun (flags) {
     return execFileSync(
       process.execPath,
       [cli, '--dry-run', '--cwd', tmp, ...flags],
-      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] },
+      { encoding: 'utf8', env: gitEnv, stdio: ['ignore', 'pipe', 'ignore'] },
     );
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
@@ -60,7 +67,7 @@ describe('--package validation', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-master-'));
     try {
       execFileSync(process.execPath, [cli, '--dry-run', '--cwd', tmp, ...extraArgs],
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+        { encoding: 'utf8', env: gitEnv, stdio: ['ignore', 'pipe', 'pipe'] });
       return { status: 0, stderr: '' };
     } catch (err) {
       return { status: err.status, stderr: String(err.stderr ?? '') };
@@ -95,7 +102,7 @@ describe('--health-check', () => {
         fs.writeFileSync(path.join(tmp, name), contents);
       }
       return execFileSync(process.execPath, [cli, '--health-check', '--cwd', tmp],
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+        { encoding: 'utf8', env: gitEnv, stdio: ['ignore', 'pipe', 'ignore'] });
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });
     }
@@ -240,7 +247,7 @@ describe('text-variant stage', () => {
   it('detects real pairs, protects overrides, preserves dry-run and rescans after typography', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-variant-'));
     const file = path.join(tmp, 'App.vue');
-    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8' });
+    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8', env: gitEnv });
     const source = '<template><p class="d-body--md">Copy</p><DtText :kind="\'label\'" :size="200">Label</DtText><dt-text kind="body" size="sm" variant="body-md" /></template>';
     try {
       fs.writeFileSync(file, source);
@@ -268,37 +275,57 @@ describe('text-variant stage', () => {
     const longDirectory = Array(8).fill('nested'.repeat(13)).join('/');
     excluded.push(...Array.from({ length: 1700 }, (_, index) => `out/${longDirectory}/Ignored-${index}.vue`));
     assert.ok(Buffer.byteLength(excluded.map(name => path.join(tmp, name)).join('\0')) > 1024 * 1024);
-    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8' });
+    const scanEnv = { ...gitEnv };
+    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8', env: scanEnv });
     try {
-      execFileSync('git', ['init', '--quiet', tmp]);
-      execFileSync('git', ['-C', tmp, 'config', 'core.quotePath', 'true']);
+      runGit(['init', '--quiet', tmp]);
+      assert.equal(fs.realpathSync(runGit(['-C', tmp, 'rev-parse', '--absolute-git-dir']).trim()), fs.realpathSync(path.join(tmp, '.git')));
+      runGit(['-C', tmp, 'config', 'core.quotePath', 'true']);
       fs.writeFileSync(path.join(tmp, '.gitignore'), 'out/\n');
       for (const name of [...included, ...excluded]) {
         fs.mkdirSync(path.dirname(path.join(tmp, name)), { recursive: true });
         fs.writeFileSync(path.join(tmp, name), source);
       }
       const nested = path.join(tmp, 'vendor/nested');
-      execFileSync('git', ['init', '--quiet', nested]);
+      runGit(['init', '--quiet', nested]);
+      assert.equal(fs.realpathSync(runGit(['-C', nested, 'rev-parse', '--absolute-git-dir']).trim()), fs.realpathSync(path.join(nested, '.git')));
       fs.writeFileSync(path.join(nested, '.gitignore'), 'ignored/\n');
-      execFileSync('git', ['-C', nested, 'add', 'Text.vue', '.gitignore']);
-      execFileSync('git', ['-C', nested, '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid',
-        'commit', '--quiet', '-m', 'fixture']);
-      const nestedHead = execFileSync('git', ['-C', nested, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+      runGit(['-C', nested, 'add', 'Text.vue', '.gitignore']);
+      const hooks = path.join(tmp, 'empty-hooks');
+      fs.mkdirSync(hooks);
+      runGit(['-C', nested, '-c', `core.hooksPath=${hooks}`, '-c', 'commit.gpgsign=false',
+        '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '--quiet', '-m', 'fixture']);
+      assert.equal(runGit(['-C', nested, 'status', '--porcelain']).trim(), '');
+      const nestedHead = runGit(['-C', nested, 'rev-parse', 'HEAD']).trim();
       fs.writeFileSync(path.join(tmp, '.gitmodules'), '[submodule "vendor/nested"]\n  path = vendor/nested\n  url = ../nested-fixture\n');
-      execFileSync('git', ['-C', tmp, 'update-index', '--add', '--cacheinfo', `160000,${nestedHead},vendor/nested`]);
+      runGit(['-C', tmp, 'update-index', '--add', '--cacheinfo', `160000,${nestedHead},vendor/nested`]);
+      const foreign = path.join(tmp, 'foreign-repository');
+      fs.mkdirSync(path.join(foreign, 'out'), { recursive: true });
+      fs.writeFileSync(path.join(foreign, 'out/Generated.vue'), source);
+      runGit(['init', '--quiet', foreign]);
+      assert.equal(fs.realpathSync(runGit(['-C', foreign, 'rev-parse', '--absolute-git-dir']).trim()), fs.realpathSync(path.join(foreign, '.git')));
+      runGit(['-C', foreign, 'add', 'out/Generated.vue']);
+      const foreignIndex = path.join(foreign, '.git/index');
+      const indexBefore = fs.readFileSync(foreignIndex);
+      Object.assign(scanEnv, { GIT_DIR: path.join(foreign, '.git'), GIT_WORK_TREE: tmp, GIT_INDEX_FILE: foreignIndex });
       const health = run('--health-check');
       assert.match(health, /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
       assert.match(run('--only', 'text-variant', '--dry-run'), /3 eligible/);
       for (const name of [...included, ...excluded]) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
+      scanEnv.GIT_WORK_TREE = foreign;
       run('--only', 'text-variant', '--yes');
+      assert.equal(fs.existsSync(path.join(foreign, '.dialtone-migrations')), false);
+      assert.deepEqual(fs.readFileSync(foreignIndex), indexBefore);
       for (const name of included) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), '<template><dt-text variant="body-md">Copy</dt-text></template>');
       for (const name of excluded) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
       assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
       const nestedPreview = execFileSync(process.execPath,
-        [cli, '--cwd', nested, '--only', 'text-variant', '--dry-run'], { encoding: 'utf8' });
+        [cli, '--cwd', nested, '--only', 'text-variant', '--dry-run'], { encoding: 'utf8', env: scanEnv });
       assert.match(nestedPreview, /1 eligible/);
-      const refusedGit = { ...process.env, GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
-        GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'safe.directory', GIT_CONFIG_VALUE_0: '' };
+      const refusalConfig = path.join(tmp, 'refusal.gitconfig');
+      fs.writeFileSync(refusalConfig, '[safe]\n  directory =\n');
+      const refusedGit = { ...gitEnv, GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
+        GIT_CONFIG_GLOBAL: refusalConfig, GIT_CONFIG_NOSYSTEM: '1' };
       const stage = path.resolve(path.dirname(cli), '../dialtone_migrate_text_variant/index.mjs');
       for (const [script, flag] of [[cli, '--health-check'], [stage, '--yes']]) {
         assert.throws(() => execFileSync(process.execPath, [script, '--cwd', tmp, flag],
