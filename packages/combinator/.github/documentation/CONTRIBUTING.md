@@ -22,8 +22,10 @@ component. Use individual icon components and current prop/slot names. For
 keeping `size` alongside `variant` applies a raw font-size override. Preserve
 semantic tags, scoped slot bindings and the rendered appearance when migrating.
 
-Regenerate the preset examples and inspect the generated coverage report after
-variant changes. Deprecated or unsupported examples stay excluded from lookup
+After variant changes, run `pnpm nx run dialtone-docs:build` to regenerate preset
+examples and refresh `packages/dialtone-docs/dist/preset-example-coverage.json`
+before inspecting it. Preset generation alone does not refresh the coverage
+report. Deprecated or unsupported examples stay excluded from lookup
 recommendations; successful materialization does not make them consumer-verified.
 See [the source example lifecycle](../../../../.agents/resources/documentation-examples.md#combinator-presets).
 
