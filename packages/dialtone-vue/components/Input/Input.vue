@@ -95,7 +95,7 @@
         <input
           v-else
           ref="input"
-          :value="modelValue"
+          :value="displayValue()"
           :name="name"
           :type="type"
           :disabled="disabled"
@@ -664,6 +664,18 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+
+    // A method rather than a computed so it is re-evaluated on every render. Vue
+    // always re-patches `value` against the live DOM value, so while an IME
+    // composition is in progress this must return what the DOM already holds,
+    // otherwise any re-render would overwrite the composing text.
+    displayValue () {
+      if (this.isComposing && this.$refs.input) {
+        return this.$refs.input.value;
+      }
+      return this.modelValue;
+    },
+
     inputClasses () {
       return [
         'd-input__input',

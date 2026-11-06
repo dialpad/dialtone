@@ -783,6 +783,45 @@ describe('DtInput tests', () => {
         const inputEmissions = wrapper.emitted()['update:modelValue'];
         expect(inputEmissions[inputEmissions.length - 1][0]).toBe('hello');
       });
+
+      it('should not overwrite the composing text when the component re-renders', async () => {
+        await nativeInput.trigger('compositionstart');
+        nativeInput.element.value = 'テ';
+        await nativeInput.trigger('input');
+
+        await wrapper.setProps({ disabled: true });
+
+        expect(nativeInput.element.value).toBe('テ');
+      });
+
+      it('should not overwrite the composing text when the browser fires no input event', async () => {
+        await nativeInput.trigger('compositionstart');
+        nativeInput.element.value = 'テ';
+
+        await wrapper.setProps({ disabled: true });
+
+        expect(nativeInput.element.value).toBe('テ');
+      });
+
+      it('should keep the composing text across re-renders on every keystroke', async () => {
+        await nativeInput.trigger('compositionstart');
+        for (const val of ['t', 'te', 'tes', 'テス', 'テスト']) {
+          nativeInput.element.value = val;
+          await nativeInput.trigger('input');
+          await wrapper.setProps({ description: `length ${val.length}` });
+          expect(nativeInput.element.value).toBe(val);
+        }
+      });
+
+      it('should render modelValue again after composition ends', async () => {
+        await nativeInput.trigger('compositionstart');
+        nativeInput.element.value = 'テスト';
+        await nativeInput.trigger('compositionend');
+
+        await wrapper.setProps({ modelValue: 'external update' });
+
+        expect(nativeInput.element.value).toBe('external update');
+      });
     });
 
     describe('When type is a textarea', () => {
@@ -825,6 +864,15 @@ describe('DtInput tests', () => {
         await wrapper.setProps({ modelValue: 'external update' });
 
         expect(nativeTextarea.element.value).toBe('composing...');
+      });
+
+      it('should not overwrite the composing text when the component re-renders', async () => {
+        await nativeTextarea.trigger('compositionstart');
+        nativeTextarea.element.value = 'テ';
+
+        await wrapper.setProps({ disabled: true });
+
+        expect(nativeTextarea.element.value).toBe('テ');
       });
     });
   });
