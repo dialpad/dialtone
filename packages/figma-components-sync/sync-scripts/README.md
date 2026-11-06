@@ -4,7 +4,7 @@ Builds Figma component sets from the real rendered Dialtone components, then pro
 matches. The codebase is the source of truth. Figma is the output.
 
 Each variant is measured in light and dark. Button (440 variants), ButtonIcon (360), ButtonStacked (550), ButtonLink (560), Notice,
-Banner, Collapsible and Loader are the components registered so far, built with the model
+Banner, Collapsible, Loader, Input (560), InputTextarea (140) and SplitButton (220) are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
 Not in CI. It needs a browser, a Figma PAT, and a tokens file to build into. Credentials live in
@@ -213,6 +213,15 @@ text styles leave it unbound for the same reason. This covers:
 
 Measured: of 2,443 text layers across the six sets, 827 use a library style and 1,616 are bound to
 the font variables; none is a literal.
+
+**A native control's value** (DtInput's `<input>` and `<textarea>`) is painted by the browser from a
+property, not from a text node, so the walk saw a bare box. The harness adds a synthetic text child
+(`nativeValueNode` in `verify-harness/main.js`) at the position the browser draws the value, with the
+control's font and colour, and the config maps it to a TEXT property (`textProps: { Value: 'Value' }`).
+It has its own `selector` for the spec's style maps and a `cdpSelector` for browser lookups, and
+`tokenKeys` limits it to the text tokens, so the control's radius and padding tokens are not applied to
+a text node. Only the text-like types are read: a password shows bullets, and date, time, file and color
+draw widgets Figma cannot reproduce.
 
 ## The checks
 
@@ -458,8 +467,10 @@ otherwise (`default-variant.mjs`, with the defaults read from the Vue runtime by
 An axis that is not a plain prop default, such as slot presence or an initial state the component
 computes, is declared in the config as `effectiveDefaults` (Collapsible starts open although its
 `open` prop is `null`; Notice and Banner have no action or header until something fills them).
-`build-spec` lays that variant out first so it lands top-left, the plugin reads back
-`set.defaultVariant` and `run-batch` prints it, and the verifier compares each variant
+The variants keep their natural order, because the layer order is the order of a property's
+options in Figma's dropdown (Size 100 to 500, not 300 first). The plugin lays the whole page out
+as one flow with the default first, after every shard exists, so it lands top-left; it then reads
+back `set.defaultVariant`, `run-batch` prints it, and the verifier compares each variant
 property's default in the built set against the same function.
 
 ### Slot content is declared, not inferred

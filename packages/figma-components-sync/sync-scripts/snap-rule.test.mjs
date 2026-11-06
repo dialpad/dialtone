@@ -31,6 +31,16 @@ test('the builder snaps every field to the same token as snapNumber, ties includ
   assert.ok(checked > 3000);
 });
 
+test('a field a config lists in noSnap has no scale, so the builder leaves it exact', () => {
+  const payload = snapPayload(['minHeight']);
+  assert.equal(payload.fields.minHeight, undefined);
+  assert.equal(payload.fields.minWidth, 'layout');
+  const D = { snap: payload, toks: SNAP_TOKEN_NAMES };
+  const snapSpec = new Function('D', `${lifted[0]}\nreturn snapSpec;`)(D);
+  assert.deepEqual(snapSpec('minHeight', [40, -1]), [40, -1]);
+  assert.notDeepEqual(snapSpec('minWidth', [40, -1]), [40, -1]);
+});
+
 test('a value that is already a token, or zero, is left alone', () => {
   const D = { snap: snapPayload(), toks: SNAP_TOKEN_NAMES };
   const snapSpec = new Function('D', `${lifted[0]}\nreturn snapSpec;`)(D);

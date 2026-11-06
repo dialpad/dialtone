@@ -132,8 +132,12 @@ const builderHash = createHash('sha256')
 let icons = null;
 if (WITH_ICONS) try { icons = JSON.parse(readFileSync(`${HERE}/build-data/icons-manifest.json`, 'utf8')); }
 catch { /* not generated; components build without it */ }
+// The name of the file this run builds into, passed by run-batch from Figma's own answer. The plugin
+// cannot be pointed at a file: it builds into whichever one is open, so it checks the name itself.
+// Absent (build-plugin run on its own), nothing is checked.
+const expectFile = process.env.FIGMA_SYNC_EXPECT_FILE || null;
 writeFileSync(`${SHARD_DIR}/index.json`,
-  JSON.stringify({ builder: builderHash, components: manifest, icons }, null, 2));
+  JSON.stringify({ builder: builderHash, expectFile, components: manifest, icons }, null, 2));
 
 // ── generate code.js from the versioned builder ─────────────────────────────
 const builder = readFileSync(`${HERE}/generic-builder.js`, 'utf8');
@@ -238,6 +242,12 @@ async function main () {
                     spreadProbe: await probeSpreadWrite() };
   runRuntime = runtime;
   const index = await (await fetch(BASE + '/shards/index.json')).json();
+  // A build clears and rebuilds the pages it owns, and the plugin builds into whichever file is
+  // open, so refuse before anything is written when that is not the file the run targets.
+  if (index.expectFile && figma.root.name !== index.expectFile) {
+    throw new Error('wrong file: this run builds into "' + index.expectFile + '" but the open file is "'
+      + figma.root.name + '". Nothing was built. Open the right file and run the command again.');
+  }
   const report = runReport;
 
   // Icons FIRST: a component that places an icon instance needs the icon component to
@@ -333,6 +343,29 @@ async function main () {
     const page = figma.root.children.find(p => p.name === comp.page);
     await figma.setCurrentPageAsync(page);
     const loose = page.children.filter(c => c.type === 'COMPONENT');
+    /**
+     * THE DEFAULT VARIANT GOES TOP-LEFT; EVERYTHING ELSE KEEPS ITS LAYER ORDER.
+     *
+     * Figma's default variant is the top-left one on the canvas, while the order of a property's
+     * options in the dropdown is the layer order. The variants are built in their natural order
+     * (Size 100, 200, 300 … so the dropdown reads that way), which leaves the code's default
+     * wherever that falls. Re-laying the whole page out as one flow with the default first puts it
+     * top-left without touching the layer order. Done here, after every shard exists, because a
+     * shard only knows its own variants: the default can be in the second one. The flow is the
+     * builder's own (40px gap, 2600px rows, each row as tall as its tallest variant).
+     */
+    const wantDefault = loose.find(c => c.name === comp.defaultVariant);
+    if (wantDefault) {
+      const flow = [wantDefault].concat(loose.filter(c => c !== wantDefault));
+      let fx = 0, fy = 0, rh = 0;
+      for (const c of flow) {
+        const w = Math.ceil(c.width), h = Math.ceil(c.height);
+        if (fx > 0 && fx + w > 2600) { fx = 0; fy += rh + 40; rh = 0; }
+        c.x = fx; c.y = fy;
+        fx += w + 40;
+        if (h > rh) rh = h;
+      }
+    }
     // What a REAL built variant's effect holds, before anything is combined.
     const spreadBeforeCombine = spreadsOf(firstWithEffects(loose));
     let setId = null, variants = 0, properties = [], spreadAfterCombine = null, slotReport = null, textReport = null;
@@ -346,9 +379,9 @@ async function main () {
       /**
        * READ BACK THE DEFAULT VARIANT. Figma's default is the TOP-LEFT variant on the canvas, not
        * the first layer (layer order was tried first and changed nothing: the set kept reporting
-       * the variant at the top-left). It is decided by where the builder laid the variants out,
-       * and build-spec puts the variant the code renders with no props first, so this only reports
-       * what Figma ended up with, for run-batch to compare against what was wanted.
+       * the variant at the top-left). It is decided by where the variants are laid out, which is
+       * the flow above (the code's default first), so this only reports what Figma ended up with,
+       * for run-batch to compare against what was wanted.
        */
       let defaultVariant = null;
       if (comp.defaultVariant) {

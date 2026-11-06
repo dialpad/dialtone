@@ -81,11 +81,15 @@ export function snappedValue (field, v) {
  * The scales as the plugin needs them: { spacing: [[name, value], ...], ... }, plus `fields`, which
  * scale each Figma field belongs to. The plugin is a function body that cannot import this module,
  * so it reads both from the payload and holds no copy of either.
+ *
+ * `exclude` names fields a config leaves exact (`noSnap`): a field with no entry in `fields` has no
+ * scale, so the builder returns its value unchanged. DtInput's textarea needs it for `min-block-size`,
+ * whose values (40, and tokens such as 12 or 80 that are not on the layout scale) must not move.
  */
-export function snapPayload () {
+export function snapPayload (exclude = []) {
   const out = {};
   for (const [family, scale] of Object.entries(SCALES)) out[family] = Object.entries(scale);
-  out.fields = { ...FAMILY_OF };
+  out.fields = Object.fromEntries(Object.entries(FAMILY_OF).filter(([field]) => !exclude.includes(field)));
   return out;
 }
 export const SNAP_TOKEN_NAMES = [...Object.keys(SPACING), ...Object.keys(RADIUS), ...Object.keys(LAYOUT), PILL.name];

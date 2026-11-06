@@ -500,6 +500,11 @@ function encodeNode (n) {
   if (flexLayoutOn) {
     if (lay.grow) out.gr = 1;
     if (lay.self === 'center') out.sc = 1;
+    // `st`: a ROW that stretches its children on the cross axis (`align-items: stretch`, which
+    // the `lay` slot above drops as a no-op). `ns`: a child that opts out with its own
+    // `align-self` (centre is `sc`). The builder fills the row's height with the rest.
+    if (lay.align === 'stretch' && lay.direction !== 'VERTICAL') out.st = 1;
+    if (['flex-start', 'start', 'flex-end', 'end', 'baseline', 'self-start', 'self-end'].includes(lay.self)) out.ns = 1;
     if (p.maxWidth) out.mw = [p.maxWidth.value, ti(p.maxWidth.token)];
   }
   out.box = [n.box ? n.box.w : 0, n.box ? n.box.h : 0];
@@ -588,7 +593,7 @@ const payload = { component: spec.component, page: spec.page, axisNames, axisVal
   // A `<name>-merged` trial lands on its own `<page> Merged` page (see buildPage), which is owned too.
   ownedPages: [...new Set([...Object.values(COMPONENTS).map(c => c.page), ...(cfg.page ? [buildPage(cfg, /-merged$/.test(which))] : []), 'Icons'])],
   // `blockLayout`: a block that only stacks its children is a vertical auto-layout (see the builder).
-  blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload() : null, textTokens: textTokenPayload(),
+  blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload(cfg.noSnap || []) : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
   useTextStyles: cfg.textStyles !== false,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.

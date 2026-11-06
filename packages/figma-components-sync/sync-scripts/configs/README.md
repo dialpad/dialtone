@@ -5,7 +5,7 @@ One file per component, default-exporting its config. Discovered automatically b
 
 Required: `component` (the Dt* name), `label`, `page`, `axes`, `variantName`, `props`.
 Optional: `invalid` (combos that cannot exist; leave it out when every combination is reachable), `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
-`slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `flexLayout`, `blockLayout`,
+`slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `noSnap`, `flexLayout`, `blockLayout`,
 `edgeSlots`, `rootClass`, `containerClass`, `effectiveDefaults`.
 `effectiveDefaults: { axis: value }` names the rendered default of an axis that is not its prop
 default (`open: true` for a collapsible whose `open` prop is `null`; `showAction: false` where the
@@ -14,6 +14,9 @@ flag is true but no slot content is supplied), read by `default-variant.mjs`. Se
 loads, so do not add or edit `figmaSetId` or `figmaMergedSetId` in a config file. `nativeSlots` names slots that become Figma
 `SLOT` nodes (see the Slots section of `../README.md`). `textProps` maps a text the harness
 injected (`{ 'Notice title': 'Title' }`) to the TEXT property it becomes, besides the label.
+`noSnap: ['minHeight']` lists fields a snapping config leaves exact, for a value that is not near any
+token on that field's scale (a textarea's 40px minimum would otherwise become 48). It is passed to the
+builder in the payload and read by the verifier, so both agree.
 `snapTokens: true` builds the spacing, corners and minimum sizes the CSS COMPUTES at the nearest
 Dialtone token and binds them (an 8px token that yields 7px is the 8px token); a circle is bound to
 the pill token. See "What gets bound" in `../README.md`.
@@ -25,13 +28,17 @@ stacks children in one cell (DtLoader's rings) is deliberately not auto-layout. 
 Collapsible, whose outer frames were not auto-layout before.
 `textStyles: false` keeps a component's text raw instead of applying the Dialtone library's text
 styles (ButtonLink: its underline axis conflicts with a shared Label property, see the README).
-`flexLayout: true` opts a component into three layout behaviours the builder otherwise leaves
+`flexLayout: true` opts a component into four layout behaviours the builder otherwise leaves
 out, so every other set stays as built: a flex child with `flex-grow` fills a row that has a fixed
 width, `align-self: center` is built as a stretched frame with centred content (the verifier checks
-the midpoint, not the height), and a root with a finite `max-inline-size` hugs up to it. Text-only
+the midpoint, not the height), a root with a finite `max-inline-size` hugs up to it, and the
+children of a row with `align-items: stretch` fill its height (the payload's `st` on the row, `ns`
+on a child that opts out with its own `align-self`). That last one is what keeps DtSplitButton's
+end half as tall as its start half once the start half's padding snaps to a token; the verifier's
+`stretchedHeight` check compares the siblings with each other, since each still matches the browser. Text-only
 block frames hug their width and keep the measured height, so retyped text grows the component but
 does not wrap: Figma has no equivalent of the CSS `text-box-trim`, and a hugging height would make
-the component taller than Dialtone. Used by Notice and Banner.
+the component taller than Dialtone. Used by Notice, Banner, Input, InputTextarea and SplitButton.
 `edgeSlots: { gap }` builds a Leading and a Trailing native slot that sit flush with the border, as
 Button's `leading` / `trailing` do through negative margins Figma cannot hold. The root loses its
 padding; a `content` wrapper carries the vertical padding, the gap and the existing children, and

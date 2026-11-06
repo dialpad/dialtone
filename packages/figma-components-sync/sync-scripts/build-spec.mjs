@@ -169,8 +169,14 @@ const NUM_PROPS = {
  * paint no text and bind them to a token they never referenced.
  */
 async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
-  const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
-  const prov = nodeId ? await tokensFor(cdp, nodeId) : { tokens: {}, computed: {}, own: {}, chain: [] };
+  const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.cdpSelector || node.selector });
+  const prov0 = nodeId ? await tokensFor(cdp, nodeId) : { tokens: {}, computed: {}, own: {}, chain: [] };
+  // A synthetic node (a native control's value) shares its control's provenance but paints only its
+  // text, so it takes only the tokens it names (`tokenKeys`). Without this the control's radius token
+  // landed on a text node whose radius is 0, and the one token then held two values and was dropped.
+  const only = (o) => (node.tokenKeys
+    ? Object.fromEntries(Object.entries(o || {}).filter(([k]) => node.tokenKeys.includes(k))) : o);
+  const prov = node.tokenKeys ? { ...prov0, tokens: only(prov0.tokens), computed: only(prov0.computed) } : prov0;
   const declared = prov.tokens;
   const s = node.style;
   const props = {};
@@ -1160,9 +1166,9 @@ if (defaultAdjusted) {
   console.log(`default    : the code's default ${JSON.stringify(exactDefault)} is not a valid variant here; `
     + `using the closest, ${JSON.stringify(defaultAdjusted.used)}`);
 }
-// Figma's default variant is the TOP-LEFT one on the canvas, and the builder lays variants out in
-// row order, so the default goes first. Everything else keeps its order.
-if (defaultVariant) { variants.splice(variants.indexOf(defaultVariant), 1); variants.unshift(defaultVariant); }
+// Variants stay in their natural order: that is the layer order, and so the order a property's
+// options have in Figma's dropdown (Size 100, 200, 300 … rather than the default first). The
+// default variant is Figma's TOP-LEFT one, which build-plugin arranges after every shard exists.
 
 await browser.close();
 await server.close();
