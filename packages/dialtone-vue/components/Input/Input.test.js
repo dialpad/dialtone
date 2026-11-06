@@ -857,6 +857,16 @@ describe('DtInput tests', () => {
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
+      it('should render modelValue in the input when type switches mid-composition', async () => {
+        await wrapper.setProps({ modelValue: 'committed' });
+        await nativeTextarea.trigger('compositionstart');
+        nativeTextarea.element.value = 'committed テ';
+
+        await wrapper.setProps({ type: 'text' });
+
+        expect(wrapper.find('input').element.value).toBe('committed');
+      });
+
       it('should not override textarea value via modelValue watcher while composing', async () => {
         nativeTextarea.element.value = 'composing...';
         await nativeTextarea.trigger('compositionstart');

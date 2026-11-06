@@ -668,9 +668,10 @@ export default {
     // A method rather than a computed so it is re-evaluated on every render. Vue
     // always re-patches `value` against the live DOM value, so while an IME
     // composition is in progress this must return what the DOM already holds,
-    // otherwise any re-render would overwrite the composing text.
+    // otherwise any re-render would overwrite the composing text. The tag check
+    // skips a textarea the ref still holds while `type` switches to an input.
     displayValue () {
-      if (this.isComposing && this.$refs.input) {
+      if (this.isComposing && this.$refs.input?.tagName === 'INPUT') {
         return this.$refs.input.value;
       }
       return this.modelValue;
