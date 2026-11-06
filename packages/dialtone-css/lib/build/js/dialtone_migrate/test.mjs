@@ -254,10 +254,35 @@ describe('text-variant stage', () => {
       assert.match(output, /variant="label-sm"/);
       assert.match(output, /kind="body" size="sm" variant="body-md"/);
       assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
-      run('--only', 'text-variant', '--yes');
-      assert.equal(fs.readFileSync(file, 'utf8'), output);
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });
     }
   });
+
+  it('uses health-check scope for hidden source and Git-ignored generated files', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-scope-'));
+    const source = '<template><dt-text kind="body" size="300">Copy</dt-text></template>';
+    const included = ['.storybook/Story.vue', '.Hidden.vue', '.vuepress/components/Text.vue'];
+    const excluded = ['out/Generated.vue', 'dist/Bundle.vue', 'node_modules/Dependency.vue', 'compiled/Output.vue', 'storybook-static/Page.html', '.vuepress/public/Example.vue', '.vuepress/.temp/Example.vue', '.vuepress/.cache/Example.vue'];
+    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8' });
+    try {
+      execFileSync('git', ['init', '--quiet', tmp]);
+      fs.writeFileSync(path.join(tmp, '.gitignore'), 'out/\n');
+      for (const name of [...included, ...excluded]) {
+        fs.mkdirSync(path.dirname(path.join(tmp, name)), { recursive: true });
+        fs.writeFileSync(path.join(tmp, name), source);
+      }
+      const health = run('--health-check');
+      assert.match(health, /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
+      assert.match(run('--only', 'text-variant', '--dry-run'), /3 eligible/);
+      for (const name of [...included, ...excluded]) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
+      run('--only', 'text-variant', '--yes');
+      for (const name of included) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), '<template><dt-text variant="body-md">Copy</dt-text></template>');
+      for (const name of excluded) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
+      assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
 });

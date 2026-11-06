@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
 import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline/promises';
@@ -138,12 +139,35 @@ export function transformContent (content, { vue = false } = {}) {
   return { transformed, count, protectedCount, diagnostics };
 }
 
-async function * filesIn (dir) {
-  for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
-    if (entry.name.startsWith('.') || ['node_modules', 'dist', 'compiled', 'storybook-static'].includes(entry.name)) continue;
-    const file = path.join(dir, entry.name);
-    if (entry.isDirectory()) yield * filesIn(file);
-    else if (entry.isFile() && /\.(?:vue|html)$/.test(entry.name)) yield file;
+// Match the master runner's health-check exclusions without changing other stages.
+const IGNORE = ['node_modules', 'dist', '.git', '.vuepress/public', '.vuepress/.temp', '.vuepress/.cache', 'storybook-static', 'compiled'];
+
+async function filesIn (dir) {
+  const files = [];
+  async function walk (currentDir) {
+    let entries;
+    try {
+      entries = await fs.readdir(currentDir, { withFileTypes: true });
+    } catch { return; }
+    for (const entry of entries) {
+      const file = path.join(currentDir, entry.name);
+      const segments = '/' + file.split(path.sep).join('/') + '/';
+      if (IGNORE.some(ignored => segments.includes(`/${ignored}/`))) continue;
+      if (entry.isDirectory()) await walk(file);
+      else if (entry.isFile() && /\.(?:vue|html)$/.test(entry.name)) files.push(file);
+    }
+  }
+  await walk(dir);
+  if (!files.length) return files;
+  try {
+    const output = execFileSync('git', ['check-ignore', '--stdin', '-z'], {
+      input: files.join('\0') + '\0', cwd: dir, encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'],
+    });
+    const ignored = new Set(output.split('\0'));
+    return files.filter(file => !ignored.has(file));
+  } catch (error) {
+    if (error.status === 1 || error.status === 128 || error.code === 'ENOENT') return files;
+    throw error;
   }
 }
 
@@ -160,7 +184,7 @@ async function main () {
   let eligible = 0;
   let protectedCount = 0;
   let manual = 0;
-  for await (const file of filesIn(cwd)) {
+  for (const file of await filesIn(cwd)) {
     const content = await fs.readFile(file, 'utf8');
     const result = transformContent(content, { vue: file.endsWith('.vue') });
     eligible += result.count;

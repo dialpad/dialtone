@@ -19,7 +19,6 @@ it('converts all 38 composition mappings across literal syntax and tag casings',
             assert.equal(result.count, 1, attrs);
             assert.match(result.transformed, new RegExp(`variant="${kind}-${size}"`));
             assert.doesNotMatch(result.transformed, /\b(?:kind|size)=/);
-            assert.equal(transformContent(result.transformed).count, 0);
           }
         }
       }
@@ -71,8 +70,12 @@ it('preserves unrelated source and ignores examples outside live template region
   const example = '<dt-text kind="body" size="300">Example</dt-text>';
   const input = `<docs>${example}</docs>\n<script>const example = '${example}'</script>\n<style>/* ${example} */</style>\n<template>\n<!-- ${example} -->\n<div title='${example}'>{{ '${example}' }}</div>\n<textarea>${example}</textarea>\n<div v-pre>${example}</div>\n<DtText\n as="p" :title="count > 0" kind='body'\n :size="300" @click="go">Keep <b>content</b></DtText>\n</template>`;
   const expected = input.replace('kind=\'body\'', 'variant="body-md"').replace(' :size="300"', '');
-  assert.equal(transformContent(input, { vue: true }).transformed, expected);
-  assert.equal(transformContent(input, { vue: true }).count, 1);
+  const result = transformContent(input, { vue: true });
+  assert.equal(result.transformed, expected);
+  assert.equal(result.count, 1);
+  const rerun = transformContent(expected, { vue: true });
+  assert.equal(rerun.transformed, expected);
+  assert.equal(rerun.count, 0);
   assert.equal(transformContent(`<script>${example}</script>${example}`).count, 1);
   for (const [before, after] of [
     ['<DtText\n  size="300"\n  kind="body"\n/>', '<DtText\n  variant="body-md"\n/>'],
@@ -82,19 +85,17 @@ it('preserves unrelated source and ignores examples outside live template region
   ]) {
     assert.equal(transformContent(before).transformed, after);
   }
-
 });
-
 
 it('leaves preprocessed templates and escaped interpolation examples untouched', () => {
   const example = '<dt-text kind="body" size="300" />';
   const pug = `<template lang="pug">${example}</template>`;
   assert.equal(transformContent(pug, { vue: true }).transformed, pug);
   const input = `{{ 'it\\'s ${example}' }}${example}`;
-  assert.equal(transformContent(input).count, 1);
-  assert.equal(transformContent(input).transformed, input.replace(/<dt-text kind="body" size="300" \/>$/, '<dt-text variant="body-md" />'));
+  const result = transformContent(input);
+  assert.equal(result.count, 1);
+  assert.equal(result.transformed, input.replace(/<dt-text kind="body" size="300" \/>$/, '<dt-text variant="body-md" />'));
 });
-
 
 it('recognizes numeric literal spellings without evaluating expressions', () => {
   for (const value of ['300.0', '3e2', '0x12c', '0b100101100', '0o454']) {

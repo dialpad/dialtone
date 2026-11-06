@@ -102,7 +102,7 @@ The [migration script](#migration-script) below handles this transform alongside
 
 ## ESLint Rule
 
-`deprecated-tshirt-sizes` flags t-shirt size usage on Dialtone components and auto-fixes to numeric.
+`deprecated-tshirt-sizes` flags t-shirt size usage on Dialtone components and usually auto-fixes to numeric. For `DtText`, a supported static `kind + size` pair becomes a composed `variant` instead; both legacy props are removed. For example, `kind="body" size="sm"` becomes `variant="body-sm"`.
 
 Add to your ESLint config:
 
@@ -129,6 +129,8 @@ npx eslint --fix "src/**/*.vue"
 **The rule handles:** `size`, `label-size`, `labelSize`, and `speed` props on `dt-*` and `Dt*` components.
 
 **Skipped:** Dynamic bindings (`:size="computedValue"`), non-Dialtone components.
+
+For Text, any explicit `variant` protects the entire element from autofixes, including its size override. Spreads, dynamic arguments, conflicting composition props and uncertain directives require manual review. Unpaired Text sizes are reported without an autofix; numeric sizes paired with `variant` remain valid raw font-size overrides. T-shirt literals in Text bindings are reported for manual review rather than fixed. See the [typography migration guide](../typography/#convert-existing-kind-and-size-pairs) for the separate opt-in `text-variant` stage, which also accepts supported numeric pairs and bound literals.
 
 ## Migration Script
 
