@@ -1,0 +1,49 @@
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_9f61fa9161643f::t_34bb8babf78914 24,32,160-170,174-194,198-214,229-256
+  s_9f61fa9161643f::t_8685fc7ac3e82e 171-173,195-197
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_9f61fa9161643f::t_398f9dd10b6602 8-19
+packages/combinator/src/components/option_bar/option_bar.vue
+  s_9f61fa9161643f::t_4c38d5ff6ba5e0 40,144,151-163,272-275,287,289,294,359,372-374
+packages/combinator/src/lib/info.test.js
+  s_9f61fa9161643f::t_b5797e30ac1bfd 6,21
+  s_9f61fa9161643f::t_ec6353443c6d85 1-5,7-8,10-18,20,22-28
+  s_9f61fa9161643f::t_80481542b13557 9,19
+packages/combinator/src/lib/utils.test.js
+  s_9f61fa9161643f::t_1bd899e3eaa2ad 7
+  s_9f61fa9161643f::t_3d7a061ae76b40 6,9,12-13
+  s_9f61fa9161643f::t_ec6353443c6d85 1-5,8,10-11,14,19
+  s_9f61fa9161643f::t_80481542b13557 15-18
+packages/combinator/src/lib/utils.js
+  s_9f61fa9161643f::t_0ba1fd27b41b3b 119-120,124-125
+  s_9f61fa9161643f::t_80481542b13557 131
+  s_9f61fa9161643f::t_e3250866679b65 121-123,126-130,132-133
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_9f61fa9161643f::t_ec6353443c6d85 1-84
+packages/combinator/src/lib/info.js
+  s_9f61fa9161643f::t_72af4c7d637304 4,54-55,66,122,125-139
+  s_9f61fa9161643f::t_80481542b13557 123-124
+packages/combinator/src/components/renderer/renderer_target.test.js
+  s_9f61fa9161643f::t_ec6353443c6d85 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.13",
+  "base_commit_sha": "b8c96e288d0352254504ac795f116f76ccfb3ac5",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

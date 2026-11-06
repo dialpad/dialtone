@@ -1,0 +1,69 @@
+packages/dialtone-migration-helper/README.md
+  s_09da2a5f8124e0::t_db0dbf3a29cc5c 1-61
+  s_ec6aa0d8102679::t_cb5b6de79b4184 62-78
+packages/dialtone-migration-helper/.gitignore
+  s_09da2a5f8124e0::t_af2300ff344d45 1-3
+packages/dialtone-migration-helper/package.json
+  s_ec6aa0d8102679::t_cd2bd8d0a26a85 3
+  s_ec6aa0d8102679::t_63d66048670657 9
+  s_09da2a5f8124e0::t_ad1aef3e90ba68 1-2,4-8,10-14
+eslint.config.js
+  s_ec6aa0d8102679::t_743ce0c6d539cf 50-64
+  s_ec6aa0d8102679::t_fb65b28b0a5d81 49
+packages/dialtone-migration-helper/background.js
+  s_ec6aa0d8102679::t_d40db7dafafe08 1-203
+packages/dialtone-migration-helper/content.js
+  s_ec6aa0d8102679::t_c244ebabfa1896 1-1418
+packages/dialtone-migration-helper/docs/analysis/components.json
+  s_ec6aa0d8102679::t_58fc078c022baa 1-1136
+packages/dialtone-migration-helper/docs/analysis/dependency-graph.json
+  s_ec6aa0d8102679::t_8c7eee29d1f7c7 1-4980
+packages/dialtone-migration-helper/docs/analysis/tokens.json
+  s_ec6aa0d8102679::t_8afdd70365d4e3 1-122
+packages/dialtone-migration-helper/docs/analysis/utilities.json
+  s_ec6aa0d8102679::t_523802a8fc09c4 1-73492
+packages/dialtone-migration-helper/e2e.mjs
+  s_ec6aa0d8102679::t_501a23aa321f33 1-1420
+packages/dialtone-migration-helper/manifest.json
+  s_ec6aa0d8102679::t_743235dd026227 1-48
+packages/dialtone-migration-helper/popup.css
+  s_ec6aa0d8102679::t_570f56df326e14 1-126
+packages/dialtone-migration-helper/popup.html
+  s_ec6aa0d8102679::t_939498d6c27919 1-44
+packages/dialtone-migration-helper/popup.js
+  s_ec6aa0d8102679::t_30f76610214680 1-278
+packages/dialtone-migration-helper/rules.js
+  s_ec6aa0d8102679::t_b9dd9202cfcd62 1-258
+packages/dialtone-migration-helper/scripts/capture-components.js
+  s_ec6aa0d8102679::t_760ffa0bd81ab6 1-200
+packages/dialtone-migration-helper/scripts/diff-captures.mjs
+  s_ec6aa0d8102679::t_523addc5112278 1-159
+packages/dialtone-migration-helper/structure.js
+  s_ec6aa0d8102679::t_7cf7e4b63dd36a 1-320
+packages/dialtone-migration-helper/token-renames.js
+  s_ec6aa0d8102679::t_e2416e64bf0bc3 1-138
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "b64a6b9d25d2b3244548bfff5ede843fcd0d33d8",
+  "prompts": {},
+  "sessions": {
+    "s_09da2a5f8124e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fcf97fcc-c95b-4b92-bec6-4c378e82da2a",
+        "model": "claude-fable-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    },
+    "s_ec6aa0d8102679": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "40e33aa5-d3ac-4ed2-9023-14594af5a6b9",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}
