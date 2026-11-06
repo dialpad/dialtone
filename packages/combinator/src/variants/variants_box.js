@@ -181,8 +181,8 @@ export default {
     },
     slots: {
       default: { initialValue: `<dt-stack gap="200">
-  <dt-text as="h2" kind="headline" size="md">Card title</dt-text>
-  <dt-text as="p" kind="body" size="sm">Card body content with some descriptive text.</dt-text>
+  <dt-text as="h2" variant="headline-md">Card title</dt-text>
+  <dt-text as="p" variant="body-sm">Card body content with some descriptive text.</dt-text>
 </dt-stack>` },
     },
   },
@@ -196,7 +196,7 @@ export default {
       borderRadius: { initialValue: '500' },
     },
     slots: {
-      default: { initialValue: `<dt-text kind="body" size="sm">
+      default: { initialValue: `<dt-text variant="body-sm">
   Critical container
 </dt-text>` },
     },
@@ -212,13 +212,13 @@ export default {
     slots: {
       default: { initialValue: `<dt-stack direction="row" gap="200">
   <dt-box surface="moderate-opaque" border-radius="400" padding="100" padding-inline="150">
-    <dt-text kind="body" size="sm">First</dt-text>
+    <dt-text variant="body-sm">First</dt-text>
   </dt-box>
   <dt-box surface="moderate-opaque" border-radius="400" padding="100" padding-inline="150">
-    <dt-text kind="body" size="sm">Second</dt-text>
+    <dt-text variant="body-sm">Second</dt-text>
   </dt-box>
   <dt-box surface="moderate-opaque" border-radius="400" padding="100" padding-inline="150">
-    <dt-text kind="body" size="sm">Third</dt-text>
+    <dt-text variant="body-sm">Third</dt-text>
   </dt-box>
 </dt-stack>` },
     },
@@ -235,16 +235,16 @@ export default {
     },
     slots: {
       default: { initialValue: `<dt-stack gap="200">
-  <dt-text as="p" kind="body" size="200">Paragraph 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 2: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 3: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 4: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 5: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 6: Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 7: Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 8: Ut labore et dolore magnam aliquam quaerat voluptatem.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 9: Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</dt-text>
-  <dt-text as="p" kind="body" size="200">Paragraph 10: At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 2: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 3: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 4: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 5: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 6: Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 7: Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 8: Ut labore et dolore magnam aliquam quaerat voluptatem.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 9: Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</dt-text>
+  <dt-text as="p" variant="body-sm">Paragraph 10: At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</dt-text>
 </dt-stack>` },
     },
   },
@@ -313,7 +313,7 @@ export default {
       borderRadius: { initialValue: 'pill' },
     },
     slots: {
-      default: { initialValue: `<dt-text kind="label" size="sm">
+      default: { initialValue: `<dt-text variant="label-sm">
   Pill shape
 </dt-text>` },
     },
@@ -330,26 +330,26 @@ export default {
     slots: {
       default: { initialValue: `<dt-stack gap="200">
   <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
-    <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+    <dt-text as="h2" variant="headline-lg">Title</dt-text>
     <dt-button size="200">
       <template #endIcon="{ iconSize }">
-        <dt-icon name="chevron-down" :size="iconSize" />
+        <dt-icon-chevron-down :size="iconSize" />
       </template>
       Add Box
     </dt-button>
   </dt-stack>
   <dt-stack direction="row" align="start" gap="200">
     <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
-      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+      <dt-text as="p" variant="body-sm" align="center" tone="muted">Box 1</dt-text>
     </dt-box>
     <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
-      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+      <dt-text as="p" variant="body-sm" align="center" tone="muted">Box 2</dt-text>
     </dt-box>
     <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
-      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+      <dt-text as="p" variant="body-sm" align="center" tone="muted">Box 3</dt-text>
     </dt-box>
     <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
-      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+      <dt-text as="p" variant="body-sm" align="center" tone="muted">Box 4</dt-text>
     </dt-box>
   </dt-stack>
 </dt-stack>` },

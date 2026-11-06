@@ -153,6 +153,17 @@ Appending a colliding name preserves the first declared preset's clean link.
 The docs authoring tests reject fallback slugs in shipped preset banks; choose
 distinct names before publishing. Keep preset names stable to preserve their URLs.
 
+## Legacy examples
+
+`DtIcon/default` remains a compatibility demonstration of the deprecated generic
+icon component. Prefer individual icon components for new examples. The legacy
+preset keeps its existing name and behavior and is excluded from recommended
+lookup examples.
+
+`DtTooltip/inverted` also remains a legacy preset, excluded by the existing
+support policy. A current mode/overlay fixture is separate work; this preset does
+not establish supported Tooltip retrieval.
+
 ## Blueprint mode
 
 Blueprint mode hides the option bar and forces code verbose mode off. It keeps

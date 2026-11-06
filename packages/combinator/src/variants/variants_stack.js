@@ -20,9 +20,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 1</dt-text></dt-box>
-<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 2<br>with second line</dt-text></dt-box>
-<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 3</dt-text></dt-box>`,
+        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 1</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 2<br>with second line</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 3</dt-text></dt-box>`,
       },
     },
   },
@@ -35,9 +35,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 1</dt-text></dt-box>
-<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 2</dt-text></dt-box>
-<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 3</dt-text></dt-box>`,
+        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 1</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 2</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 3</dt-text></dt-box>`,
       },
     },
   },
@@ -74,9 +74,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 1</dt-text></dt-box>
-<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 2<br>with second line</dt-text></dt-box>
-<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 3</dt-text></dt-box>`,
+        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 1</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 2<br>with second line</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" variant="body-sm">Stack item 3</dt-text></dt-box>`,
       },
     },
   },
@@ -95,9 +95,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<div class="d-bgc-moderate-opaque d-p-100 d-bar-400"> <dt-text kind="body" :size="100">Small body</dt-text> </div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400"> <dt-text kind="headline" :size="600">2xl headline</dt-text> </div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400"> <dt-text kind="headline" :size="400">Large headline</dt-text> </div>`,
+        initialValue: `<div class="d-bgc-moderate-opaque d-p-100 d-bar-400"> <dt-text variant="body-xs">Small body</dt-text> </div>
+<div class="d-bgc-moderate-opaque d-p-200 d-bar-400"> <dt-text variant="headline-2xl">2xl headline</dt-text> </div>
+<div class="d-bgc-moderate-opaque d-p-200 d-bar-400"> <dt-text variant="headline-lg">Large headline</dt-text> </div>`,
       },
     },
   },

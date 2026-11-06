@@ -16,6 +16,19 @@ value usually requires an update to
 `packages/combinator/src/variants/variants_<component>.js` and registration in
 `packages/combinator/src/variants/variants.js`.
 
+Nested preset slot content follows the same current APIs as the target
+component. Use individual icon components and current prop/slot names. For
+`DtText` compositions, use `variant` and remove the legacy composition `size`;
+keeping `size` alongside `variant` applies a raw font-size override. Preserve
+semantic tags, scoped slot bindings and the rendered appearance when migrating.
+
+After variant changes, run `pnpm nx run dialtone-docs:build` to regenerate preset
+examples and refresh `packages/dialtone-docs/dist/preset-example-coverage.json`
+before inspecting it. Preset generation alone does not refresh the coverage
+report. Deprecated or unsupported examples stay excluded from lookup
+recommendations; successful materialization does not make them consumer-verified.
+See [the source example lifecycle](../../../../.agents/resources/documentation-examples.md#combinator-presets).
+
 ## Local commands
 
 Run commands from the monorepo root unless the command uses `--dir`.

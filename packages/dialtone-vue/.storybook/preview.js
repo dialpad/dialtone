@@ -153,6 +153,7 @@ export default {
     },
   },
   parameters: {
+    throwPlayFunctionExceptions: true,
     a11y: {
       config: {
         // This is a legitimate color contrast issue that needs to be fixed by the design team in the future.
