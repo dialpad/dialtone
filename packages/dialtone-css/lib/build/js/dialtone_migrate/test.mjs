@@ -263,10 +263,11 @@ describe('text-variant stage', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-scope-'));
     const source = '<template><dt-text kind="body" size="300">Copy</dt-text></template>';
     const included = ['.storybook/Story.vue', '.Hidden.vue', '.vuepress/components/Text.vue'];
-    const excluded = ['out/Generated.vue', 'dist/Bundle.vue', 'node_modules/Dependency.vue', 'compiled/Output.vue', 'storybook-static/Page.html', '.vuepress/public/Example.vue', '.vuepress/.temp/Example.vue', '.vuepress/.cache/Example.vue'];
+    const excluded = ['out/Generated.vue', 'out/café.vue', 'dist/Bundle.vue', 'node_modules/Dependency.vue', 'compiled/Output.vue', 'storybook-static/Page.html', '.vuepress/public/Example.vue', '.vuepress/.temp/Example.vue', '.vuepress/.cache/Example.vue'];
     const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8' });
     try {
       execFileSync('git', ['init', '--quiet', tmp]);
+      execFileSync('git', ['-C', tmp, 'config', 'core.quotePath', 'true']);
       fs.writeFileSync(path.join(tmp, '.gitignore'), 'out/\n');
       for (const name of [...included, ...excluded]) {
         fs.mkdirSync(path.dirname(path.join(tmp, name)), { recursive: true });

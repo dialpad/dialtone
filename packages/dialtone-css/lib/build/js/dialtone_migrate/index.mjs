@@ -528,14 +528,14 @@ function isIgnoredPath (fullPath) {
 function filterGitIgnored (files, cwd) {
   if (files.length === 0) return files;
   try {
-    const input = files.join('\n');
-    const output = execFileSync('git', ['check-ignore', '--stdin'], {
+    const input = files.join('\0') + '\0';
+    const output = execFileSync('git', ['check-ignore', '--stdin', '-z'], {
       input,
       cwd,
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'ignore'],
     });
-    const ignored = new Set(output.trim().split('\n').filter(Boolean));
+    const ignored = new Set(output.split('\0'));
     return files.filter(f => !ignored.has(f));
   } catch (err) {
     // status 1 → no paths ignored; status 128 → not a git repo; ENOENT → git missing
