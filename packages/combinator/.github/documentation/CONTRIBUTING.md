@@ -16,6 +16,17 @@ value usually requires an update to
 `packages/combinator/src/variants/variants_<component>.js` and registration in
 `packages/combinator/src/variants/variants.js`.
 
+Nested preset slot content follows the same current APIs as the target
+component. Use individual icon components and current prop/slot names. For
+`DtText` compositions, use `variant` and remove the legacy composition `size`;
+keeping `size` alongside `variant` applies a raw font-size override. Preserve
+semantic tags, scoped slot bindings and the rendered appearance when migrating.
+
+Regenerate the preset examples and inspect the generated coverage report after
+variant changes. Deprecated or unsupported examples stay excluded from lookup
+recommendations; successful materialization does not make them consumer-verified.
+See [the source example lifecycle](../../../../.agents/resources/documentation-examples.md#combinator-presets).
+
 ## Local commands
 
 Run commands from the monorepo root unless the command uses `--dir`.

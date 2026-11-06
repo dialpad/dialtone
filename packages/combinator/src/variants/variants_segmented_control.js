@@ -17,15 +17,15 @@ export default {
     slots: {
       default: {
         initialValue: `<dt-segmented-control-item value="compact">
-  <template #startIcon="{ iconSize }"><dt-icon name="list-spacing-compact" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-list-spacing-compact :size="iconSize" /></template>
   Compact
 </dt-segmented-control-item>
 <dt-segmented-control-item value="regular">
-  <template #startIcon="{ iconSize }"><dt-icon name="list-spacing-regular" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-list-spacing-regular :size="iconSize" /></template>
   Regular
 </dt-segmented-control-item>
 <dt-segmented-control-item value="expanded">
-  <template #startIcon="{ iconSize }"><dt-icon name="list-spacing-expanded" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-list-spacing-expanded :size="iconSize" /></template>
   Expanded
 </dt-segmented-control-item>`,
       },
@@ -40,13 +40,13 @@ export default {
     slots: {
       default: {
         initialValue: `<dt-segmented-control-item value="system" label="System">
-  <template #startIcon="{ iconSize }"><dt-icon name="laptop-2" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-laptop-2 :size="iconSize" /></template>
 </dt-segmented-control-item>
 <dt-segmented-control-item value="light" label="Light">
-  <template #startIcon="{ iconSize }"><dt-icon name="sun" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-sun :size="iconSize" /></template>
 </dt-segmented-control-item>
 <dt-segmented-control-item value="dark" label="Dark">
-  <template #startIcon="{ iconSize }"><dt-icon name="moon" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-moon :size="iconSize" /></template>
 </dt-segmented-control-item>`,
       },
     },
