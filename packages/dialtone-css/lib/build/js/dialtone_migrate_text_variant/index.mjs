@@ -149,6 +149,8 @@ async function filesIn (dir) {
     try {
       entries = await fs.readdir(currentDir, { withFileTypes: true });
     } catch { return; }
+    // Nested repositories need their own --cwd and ignore context.
+    if (currentDir !== dir && entries.some(entry => entry.name === '.git')) return;
     for (const entry of entries) {
       const file = path.join(currentDir, entry.name);
       const segments = '/' + file.split(path.sep).join('/') + '/';
@@ -178,7 +180,7 @@ async function filesIn (dir) {
 async function main () {
   const args = process.argv.slice(2);
   if (args.includes('--help')) {
-    console.log('Usage: dialtone-migrate --only text-variant [--cwd <path>] [--dry-run] [--yes]\nConvert static DtText kind + size pairs. Existing variants are protected.');
+    console.log('Usage: dialtone-migrate --only text-variant [--cwd <path>] [--dry-run] [--yes]\nConvert static DtText kind + size pairs. Existing variants are protected.\nNested Git repositories are skipped; target each explicitly with --cwd.');
     return;
   }
   const cwdIndex = args.indexOf('--cwd');

@@ -498,6 +498,7 @@ Examples:
 
 Combined dry-run stages inspect current files; they do not simulate earlier writes.
 After applying typography, preview text-variant separately for newly created pairs.
+Health-check and text-variant skip nested Git repositories; target each explicitly with --cwd.
 `);
 }
 
@@ -556,6 +557,8 @@ async function findFiles (dir, extensions) {
     try {
       entries = await fs.readdir(currentDir, { withFileTypes: true });
     } catch { return; }
+    // Nested repositories need their own --cwd and ignore context.
+    if (currentDir !== dir && entries.some(entry => entry.name === '.git')) return;
     for (const entry of entries) {
       const fullPath = path.join(currentDir, entry.name);
       if (isIgnoredPath(fullPath)) continue;

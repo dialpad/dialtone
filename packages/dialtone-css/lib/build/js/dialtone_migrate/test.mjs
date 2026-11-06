@@ -263,7 +263,7 @@ describe('text-variant stage', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-scope-'));
     const source = '<template><dt-text kind="body" size="300">Copy</dt-text></template>';
     const included = ['.storybook/Story.vue', '.Hidden.vue', '.vuepress/components/Text.vue'];
-    const excluded = ['out/Generated.vue', 'out/café.vue', 'dist/Bundle.vue', 'node_modules/Dependency.vue', 'compiled/Output.vue', 'storybook-static/Page.html', '.vuepress/public/Example.vue', '.vuepress/.temp/Example.vue', '.vuepress/.cache/Example.vue'];
+    const excluded = ['out/Generated.vue', 'out/café.vue', 'vendor/nested/Text.vue', 'vendor/nested/ignored/Generated.vue', 'dist/Bundle.vue', 'node_modules/Dependency.vue', 'compiled/Output.vue', 'storybook-static/Page.html', '.vuepress/public/Example.vue', '.vuepress/.temp/Example.vue', '.vuepress/.cache/Example.vue'];
     // Exceed Git's default child-process output buffer without a separate stress suite.
     const longDirectory = Array(8).fill('nested'.repeat(13)).join('/');
     excluded.push(...Array.from({ length: 1700 }, (_, index) => `out/${longDirectory}/Ignored-${index}.vue`));
@@ -277,6 +277,15 @@ describe('text-variant stage', () => {
         fs.mkdirSync(path.dirname(path.join(tmp, name)), { recursive: true });
         fs.writeFileSync(path.join(tmp, name), source);
       }
+      const nested = path.join(tmp, 'vendor/nested');
+      execFileSync('git', ['init', '--quiet', nested]);
+      fs.writeFileSync(path.join(nested, '.gitignore'), 'ignored/\n');
+      execFileSync('git', ['-C', nested, 'add', 'Text.vue', '.gitignore']);
+      execFileSync('git', ['-C', nested, '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid',
+        'commit', '--quiet', '-m', 'fixture']);
+      const nestedHead = execFileSync('git', ['-C', nested, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+      fs.writeFileSync(path.join(tmp, '.gitmodules'), '[submodule "vendor/nested"]\n  path = vendor/nested\n  url = ../nested-fixture\n');
+      execFileSync('git', ['-C', tmp, 'update-index', '--add', '--cacheinfo', `160000,${nestedHead},vendor/nested`]);
       const health = run('--health-check');
       assert.match(health, /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
       assert.match(run('--only', 'text-variant', '--dry-run'), /3 eligible/);
@@ -285,6 +294,9 @@ describe('text-variant stage', () => {
       for (const name of included) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), '<template><dt-text variant="body-md">Copy</dt-text></template>');
       for (const name of excluded) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
       assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
+      const nestedPreview = execFileSync(process.execPath,
+        [cli, '--cwd', nested, '--only', 'text-variant', '--dry-run'], { encoding: 'utf8' });
+      assert.match(nestedPreview, /1 eligible/);
       const refusedGit = { ...process.env, GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
         GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'safe.directory', GIT_CONFIG_VALUE_0: '' };
       const stage = path.resolve(path.dirname(cli), '../dialtone_migrate_text_variant/index.mjs');
