@@ -80,7 +80,7 @@ describe('useFeatureAwarenessBadge', () => {
   it('should use provided defaults', () => {
     const result = mountComposable(
       { exposureCount: 2 },
-      { thresholds: { new: 0, release: 2, hidden: 4 } },
+      { thresholds: { release: 2, hidden: 4 } },
     );
 
     expect(result.stage.value).toBe('release');
@@ -100,7 +100,7 @@ describe('useFeatureAwarenessBadge', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const result = mountComposable({
       exposureCount: 3,
-      thresholds: { new: 0, release: 10, hidden: 4 },
+      thresholds: { release: 10, hidden: 4 },
     });
 
     expect(result.stage.value).toBe('release');

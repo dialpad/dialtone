@@ -74,6 +74,17 @@ describe('dialtone-migrate-badge-api', () => {
       assert.equal(warnings(input).filter(warning => warning.startsWith('BADGE_API_AMBIGUOUS_COUNT_TYPE')).length, 0);
     });
 
+    it('keeps an explicit emphasis on a purple count, static or bound', () => {
+      assert.equal(
+        run('<dt-badge kind="count" type="bulletin" emphasis="base" text="6" />'),
+        '<dt-badge kind="counter" variant="count" emphasis="base" label="6" />',
+      );
+      assert.equal(
+        run('<dt-badge kind="count" type="bulletin" :emphasis="chosen" text="6" />'),
+        '<dt-badge kind="counter" variant="count" :emphasis="chosen" label="6" />',
+      );
+    });
+
     it('keeps one attribute per line in a multi-line tag', () => {
       const input = ['<dt-badge', '  type="info"', '  text="Info"', '/>'].join('\n');
       const expected = ['<dt-badge', '  kind="status"', '  variant="info"', '  label="Info"', '/>'].join('\n');
@@ -366,6 +377,42 @@ describe('dialtone-migrate-badge-api', () => {
 
       assert.ok(run(input).includes('emphasis="base"'));
       assert.ok(!/\ssubtle|\soutlined/.test(run(input)));
+    });
+
+    it('does not rename slots owned by a child component nested inside the badge', () => {
+      const input = [
+        '<dt-badge text="Locked">',
+        '  <custom-thing>',
+        '    <template #leftIcon>Child icon</template>',
+        '  </custom-thing>',
+        '  <template #leftIcon>Badge icon</template>',
+        '</dt-badge>',
+      ].join('\n');
+      const expected = [
+        '<dt-badge kind="status" variant="neutral" label="Locked">',
+        '  <custom-thing>',
+        '    <template #leftIcon>Child icon</template>',
+        '  </custom-thing>',
+        '  <template #startIcon>Badge icon</template>',
+        '</dt-badge>',
+      ].join('\n');
+
+      assert.equal(run(input), expected);
+    });
+
+    it('does not warn about a slot rename when only a nested component has the slot', () => {
+      const input = '<dt-badge text="Locked"><custom-thing><template #rightIcon>x</template></custom-thing></dt-badge>';
+
+      assert.ok(!warnings(input).some(warning => warning.startsWith('BADGE_API_SLOT_RENAMED')));
+      assert.ok(run(input).includes('#rightIcon'));
+    });
+
+    it('renames the v-slot and slot forms on the badge itself', () => {
+      const input = '<dt-badge text="x"><template v-slot:leftIcon>a</template><span slot="rightIcon">b</span></dt-badge>';
+      const output = run(input);
+
+      assert.ok(output.includes('v-slot:startIcon'));
+      assert.ok(output.includes('slot="endIcon"'));
     });
 
     it('does not transform non-badge leftIcon slots', () => {

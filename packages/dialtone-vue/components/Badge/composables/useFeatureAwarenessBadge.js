@@ -10,16 +10,13 @@ function normalizeInteger (value) {
 }
 
 function validateThresholds (thresholds) {
-  const newThreshold = normalizeInteger(thresholds.new);
   const releaseThreshold = normalizeInteger(thresholds.release);
   const hiddenThreshold = normalizeInteger(thresholds.hidden);
 
   if (
-    newThreshold === null ||
     releaseThreshold === null ||
     hiddenThreshold === null ||
-    newThreshold < 0 ||
-    releaseThreshold <= newThreshold ||
+    releaseThreshold < 0 ||
     hiddenThreshold <= releaseThreshold
   ) {
     console.warn(
@@ -30,7 +27,6 @@ function validateThresholds (thresholds) {
   }
 
   return {
-    new: newThreshold,
     release: releaseThreshold,
     hidden: hiddenThreshold,
   };
@@ -66,9 +62,17 @@ export function provideFeatureAwarenessBadgeDefaults (defaults) {
 /**
  * Resolves Badge props for staged feature awareness.
  *
- * @param {object} options
- * @param {number} options.exposureCount Count owned by the consuming app.
- * @param {object} options.thresholds Ascending stage thresholds.
+ * The badge starts in the `new` stage, moves to `release` at `thresholds.release` and is hidden at
+ * `thresholds.hidden`. The stages are looks, not statements about availability: see `stages`.
+ *
+ * @param {object | import('vue').Ref<object>} [options]
+ * @param {number | import('vue').Ref<number>} [options.exposureCount] Count owned by the consuming app. Defaults to 0.
+ * @param {object} [options.thresholds] Exposure counts that end a stage. Both are optional.
+ * @param {number} [options.thresholds.release] Count at which the badge moves to the release stage. Default 3.
+ * @param {number} [options.thresholds.hidden] Count at which the badge is hidden. Default 10.
+ * @param {object} [options.stages] Overrides for the variant and emphasis of each stage.
+ * @param {{variant?: string, emphasis?: string}} [options.stages.new] Default: pre-release, strong.
+ * @param {{variant?: string, emphasis?: string}} [options.stages.release] Default: release, base.
  * @returns {{kind: import('vue').ComputedRef<string>, variant: import('vue').ComputedRef<string>, emphasis: import('vue').ComputedRef<string>, stage: import('vue').ComputedRef<string>, isVisible: import('vue').ComputedRef<boolean>}}
  */
 export function useFeatureAwarenessBadge (options = {}) {

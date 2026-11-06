@@ -49,7 +49,29 @@ A badge is a small, non-interactive marker that sits next to the item it describ
 - Make sure the label says what the color says. Color shouldn't be the only signal.
 - Use strong emphasis for the one badge that should stand out. Base emphasis suits most lists and tables.
 - Place a badge next to what it describes: near the title in a list item, or in its own column in a table.
-- Give a badge an accessible name when its text is a bare value, such as `12`. Use `aria-label` or `aria-labelledby`.
+- Give a bare value, such as `12`, text that says what it counts. See [Accessibility](#accessibility).
+
+## Accessibility
+
+A badge renders a plain `<span>`, which has no role that can be named. `aria-label` and `aria-labelledby` aren't supported on it, so don't put them on a badge. Give a bare value such as `12` meaningful text instead.
+
+On its own, add the context as visually hidden text, such as "12 unread messages":
+
+```vue code-only
+<dt-badge kind="counter" variant="count">
+  <span>12</span>
+  <span class="d-vi-visible-sr">unread messages</span>
+</dt-badge>
+```
+
+Inside a button or link, the badge text is part of that control's accessible name, so the control's own text can supply the context:
+
+```vue code-only
+<dt-button>
+  Unread messages
+  <dt-badge kind="counter" variant="count" label="12" />
+</dt-button>
+```
 
 ## Groups
 
@@ -61,6 +83,9 @@ A badge is a small, non-interactive marker that sits next to the item it describ
 | `lifecycle` | The state of a piece of content | `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled` | `base`, `strong` |
 
 `kind` defaults to `status`, so you only set it for `counter`, `release`, and `lifecycle`. A variant that doesn't belong to the `kind`, or an emphasis the group doesn't support, falls back to the default and logs a warning in development.
+
+> [!WARNING] `variant="ai"` is deprecated
+> Use DtChip with `emphasis="subtle"` for AI attribution. `type="ai"` is deprecated for the same reason.
 
 ### Status
 
@@ -125,7 +150,7 @@ Emphasis shows how important the feature is. `subtle` is an outline, `base` is a
 </dt-stack>
 ```
 
-`useFeatureAwarenessBadge` steps through the fade from an exposure count. It returns the `kind`, variant and emphasis for the current stage, and your app supplies the label, persistence, and counting.
+`useFeatureAwarenessBadge` steps through the fade from an exposure count. It returns the `kind`, variant and emphasis for the current stage, and your app supplies the label, persistence, and counting. Its stages are looks in that fade, not statements about availability: a feature that is generally available but new to a user still starts in the `pre-release` look.
 
 ```vue
 <script setup>
@@ -133,7 +158,7 @@ import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
 
 const awareness = useFeatureAwarenessBadge({
   exposureCount: 2,
-  thresholds: { new: 0, release: 3, hidden: 10 },
+  thresholds: { release: 3, hidden: 10 },
 });
 </script>
 
@@ -147,6 +172,8 @@ const awareness = useFeatureAwarenessBadge({
   />
 </template>
 ```
+
+The badge is in the `new` stage until the exposure count reaches `thresholds.release`, in the `release` stage until it reaches `thresholds.hidden`, and then `isVisible` is false. Once hidden, the variant and emphasis stay those of the `release` stage.
 
 Pass a `stages` option to set the variant and emphasis for each stage. By default the first stage is `new`, which is `pre-release` with `strong` emphasis, and the next is `release`, which is `release` with `base` emphasis.
 
@@ -185,24 +212,24 @@ Use `lifecycle` for the state of a piece of content as it moves from writing to 
 
 ### Icons
 
-Use the `startIcon` and `endIcon` slots for icons, and set the icon `size` to `200`. Use the `leading` and `trailing` slots for freeform content, such as the nested badge in the counter example.
+Use the `startIcon` and `endIcon` slots for icons, and bind the icon `size` to the `iconSize` slot prop. It is the icon size designed for the badge `size`: `100` for badge size `100`, `300` for badge size `500`, and `200` for the sizes between. Set the `iconSize` prop on the badge to override it. Use the `leading` and `trailing` slots for freeform content, such as the nested badge in the counter example.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
   <dt-badge variant="critical" label="Recording">
-    <template #startIcon>
-      <dt-icon-record-filled size="200" />
+    <template #startIcon="{ iconSize }">
+      <dt-icon-record-filled :size="iconSize" />
     </template>
   </dt-badge>
   <dt-badge label="Locked">
-    <template #startIcon>
-      <dt-icon-lock size="200" />
+    <template #startIcon="{ iconSize }">
+      <dt-icon-lock :size="iconSize" />
     </template>
   </dt-badge>
   <dt-badge kind="counter" variant="count" label="5%" emphasis="strong">
-    <template #startIcon>
-      <dt-icon-arrow-up size="200" />
+    <template #startIcon="{ iconSize }">
+      <dt-icon-arrow-up :size="iconSize" />
     </template>
   </dt-badge>
 </dt-stack>

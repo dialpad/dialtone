@@ -7,7 +7,7 @@
       resolvedSizeClass,
       BADGE_DECORATION_MODIFIERS[decoration],
       { 'd-badge--subtle': shouldRenderLegacySubtle },
-      { 'd-badge--outlined': shouldRenderLegacyOutlined },
+      { 'd-badge--legacy-outlined': shouldRenderLegacyOutlined },
     ]"
     data-qa="dt-badge"
   >
@@ -28,18 +28,18 @@
       :class="['d-badge__icon-left', startIconClass]"
       data-qa="dt-badge-start-icon"
     >
-      <!-- @slot Slot for start icon, icon-size slot prop defaults to '200' -->
+      <!-- @slot Slot for start icon. The icon-size slot prop is the icon size for the badge size, or iconSize. -->
       <template v-if="showsMentionPrefix()">{{ MENTION_PREFIX }}</template>
       <slot
         v-else-if="$slots.startIcon"
         name="startIcon"
-        :icon-size="iconSize"
+        :icon-size="resolvedIconSize"
       />
       <!-- @slot @deprecated Use startIcon -->
       <slot
         v-else
         name="leftIcon"
-        :icon-size="iconSize"
+        :icon-size="resolvedIconSize"
       />
     </span>
     <span :class="['d-badge__label', labelClass]">
@@ -53,17 +53,17 @@
       :class="['d-badge__icon-right', endIconClass]"
       data-qa="dt-badge-end-icon"
     >
-      <!-- @slot Slot for end icon, icon-size slot prop defaults to '200' -->
+      <!-- @slot Slot for end icon. The icon-size slot prop is the icon size for the badge size, or iconSize. -->
       <slot
         v-if="$slots.endIcon"
         name="endIcon"
-        :icon-size="iconSize"
+        :icon-size="resolvedIconSize"
       />
       <!-- @slot @deprecated Use endIcon -->
       <slot
         v-else
         name="rightIcon"
-        :icon-size="iconSize"
+        :icon-size="resolvedIconSize"
       />
     </span>
     <span
@@ -91,7 +91,9 @@ import {
   BADGE_TYPE_MODIFIERS,
   BADGE_TYPE_TO_VARIANT,
   BADGE_DECORATION_MODIFIERS,
+  BADGE_ICON_SIZE_BY_SIZE,
 } from './BadgeConstants';
+import { warnOnce } from './badgeWarnings';
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 import { hasSlotContent } from '@/common/utils/index.js';
 import { ordinalSizeValidator } from '@/common/validators';
@@ -112,6 +114,7 @@ export default {
      * - counter: count, mention
      * - release: pre-release, release
      * - lifecycle: draft, edited, unsaved, saved, published, archived, scheduled
+     * - `ai` is deprecated. Use DtChip emphasis="subtle" for AI attribution.
      * @values neutral, info, positive, warning, critical, count, mention, pre-release, release, draft, edited, unsaved, saved, published, archived, scheduled
      */
     variant: {
@@ -138,7 +141,7 @@ export default {
      * Text for the badge content. The default slot takes precedence.
      */
     label: {
-      type: String,
+      type: [String, Number],
       default: undefined,
     },
 
@@ -154,11 +157,12 @@ export default {
 
     /**
      * The size of the start and end icons, passed to the icon slots as the icon-size slot prop.
+     * Defaults to the icon size designed for the badge `size`; set it to override that.
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     iconSize: {
       type: [String, Number],
-      default: 200,
+      default: undefined,
       validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 
@@ -198,7 +202,7 @@ export default {
      * Decoration for the badge. This can be only used with kind: status and variant: neutral
      * with no icons or leading and trailing content
      * @deprecated Use DtChip variant="default" for categorization.
-     * @values default, black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
+     * @values black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
      * purple-300, purple-400, purple-500, blue-200, blue-300, blue-400, green-300, green-400,
      * green-500, gold-300, gold-400, gold-500, magenta-200, magenta-300, magenta-400
      */
@@ -328,6 +332,10 @@ export default {
       return BADGE_SIZE_MODIFIERS[String(this.size)];
     },
 
+    resolvedIconSize () {
+      return this.iconSize ?? BADGE_ICON_SIZE_BY_SIZE[String(this.size)] ?? BADGE_ICON_SIZE_BY_SIZE[200];
+    },
+
     shouldRenderLegacySubtle () {
       return this.subtle && this.emphasis === undefined;
     },
@@ -388,7 +396,7 @@ export default {
       if (this.isUnsupportedEmphasis) {
         const supported = BADGE_GROUPS[this.resolvedKind].emphasis.join(', ');
 
-        console.warn(
+        warnOnce(
           `DtBadge warning: emphasis="${this.emphasis}" is not supported by the ${this.resolvedKind} group ` +
           `(supports: ${supported}). Rendering emphasis="${this.resolvedEmphasis}".`,
         );
@@ -397,12 +405,12 @@ export default {
 
     validateKind () {
       if (isLegacyBadgeKind(this.kind)) {
-        console.warn(
+        warnOnce(
           `DtBadge warning: kind="${this.kind}" is deprecated. Use kind="${BADGE_LEGACY_KINDS[this.kind]}"` +
           `${this.kind === 'count' ? ' with variant="count"' : ''} instead. Run dialtone-migrate-badge-api.`,
         );
       } else if (!isBadgeGroup(this.kind)) {
-        console.warn(
+        warnOnce(
           `DtBadge warning: kind="${this.kind}" is not a badge group. Rendering kind="status". ` +
           `Use one of: ${Object.keys(BADGE_GROUPS).join(', ')}.`,
         );
@@ -413,7 +421,7 @@ export default {
       const group = isBadgeGroup(this.kind) ? BADGE_GROUPS[this.kind] : null;
 
       if (group && this.variant != null && this.variant !== 'ai' && !group.variants.includes(this.variant)) {
-        console.warn(
+        warnOnce(
           `DtBadge warning: variant="${this.variant}" does not belong to the ${this.kind} group. ` +
           `Rendering variant="${group.defaultVariant}". Use one of: ${group.variants.join(', ')}.`,
         );
@@ -424,12 +432,12 @@ export default {
       [
         ['type', 'variant'],
         ['text', 'label'],
-        ['subtle', 'emphasis'],
-        ['outlined', 'emphasis'],
+        ['subtle', 'kind="release" variant="pre-release" emphasis="base" (emphasis="subtle" is an outline with no fill)'],
+        ['outlined', 'emphasis="subtle" (an outline with no fill)'],
         ['decoration', 'DtChip variant="default"'],
       ].forEach(([propName, replacement]) => {
         if (this[propName] !== undefined && this[propName] !== null) {
-          console.warn(`DtBadge warning: ${propName} is deprecated. Use ${replacement} instead.`);
+          warnOnce(`DtBadge warning: ${propName} is deprecated. Use ${replacement} instead.`);
         }
       });
 
@@ -438,12 +446,16 @@ export default {
         ['rightIcon', 'endIcon'],
       ].forEach(([slotName, replacement]) => {
         if (hasSlotContent(this.$slots[slotName])) {
-          console.warn(`DtBadge warning: ${slotName} slot is deprecated. Use ${replacement} instead.`);
+          warnOnce(`DtBadge warning: ${slotName} slot is deprecated. Use ${replacement} instead.`);
         }
       });
 
       if (this.type === 'ai') {
-        console.warn('DtBadge warning: type="ai" is deprecated. Use DtChip emphasis="subtle" for AI attribution.');
+        warnOnce('DtBadge warning: type="ai" is deprecated. Use DtChip emphasis="subtle" for AI attribution.');
+      }
+
+      if (this.variant === 'ai') {
+        warnOnce('DtBadge warning: variant="ai" is deprecated. Use DtChip emphasis="subtle" for AI attribution.');
       }
     },
 
@@ -456,7 +468,7 @@ export default {
     validateDecorationPropCombination () {
       if (!this.decoration) return;
 
-      if (this.kind !== 'status' || this.resolvedVariant !== 'neutral') {
+      if (this.resolvedKind !== 'status' || this.resolvedVariant !== 'neutral') {
         console.error('DtBadge error: decoration prop can only be used with kind: \'status\' and variant: \'neutral\'.');
       }
 

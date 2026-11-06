@@ -27,11 +27,9 @@
   --badge-radius: var(--dt-size-radius-350);
   --badge-font-family: var(--dt-font-family-body);
   --badge-font-size: var(--dt-font-size-75);
-  // SHORTCUT: block sizes are literal rem values (18-28px); no size tokens exist for them.
-  // Upgrade when a badge/control block-size token scale is added.
-  --badge-line-height: 2rem;
+  --badge-line-height: var(--dt-layout-20px);
   --badge-font-weight: var(--dt-font-weight-medium);
-  --badge-gap: var(--dt-spacing-1);
+  --badge-gap: calc(var(--badge-padding-x) / 2);
   --badge-letter-spacing: var(--dt-spacing-0);
   --badge-padding-y: var(--dt-spacing-0);
   --badge-padding-x: var(--dt-spacing-50);
@@ -54,6 +52,7 @@
   font-family: var(--badge-font-family);
   line-height: var(--badge-line-height);
   letter-spacing: var(--badge-letter-spacing);
+  white-space: nowrap;
   text-align: center;
   text-transform: var(--badge-text-case);
   background-color: var(--badge-color-background);
@@ -64,35 +63,35 @@
   //  --------------------------------------------------------------------------
   &--size-100 {
     --badge-font-size: var(--dt-font-size-50);
-    --badge-line-height: 1.8rem;
+    --badge-line-height: calc(var(--dt-layout-20px) - var(--dt-layout-2px));
     --badge-padding-x: var(--dt-spacing-25);
     --badge-radius: var(--dt-size-radius-350);
   }
 
   &--size-200 {
     --badge-font-size: var(--dt-font-size-75);
-    --badge-line-height: 2rem;
+    --badge-line-height: var(--dt-layout-20px);
     --badge-padding-x: var(--dt-spacing-50);
     --badge-radius: var(--dt-size-radius-350);
   }
 
   &--size-300 {
     --badge-font-size: var(--dt-font-size-100);
-    --badge-line-height: 2.2rem;
+    --badge-line-height: calc(var(--dt-layout-20px) + var(--dt-layout-2px));
     --badge-padding-x: var(--dt-spacing-50);
     --badge-radius: var(--dt-size-radius-400);
   }
 
   &--size-400 {
     --badge-font-size: var(--dt-font-size-150);
-    --badge-line-height: 2.4rem;
+    --badge-line-height: var(--dt-layout-24px);
     --badge-padding-x: var(--dt-spacing-50);
     --badge-radius: var(--dt-size-radius-400);
   }
 
   &--size-500 {
     --badge-font-size: var(--dt-font-size-200);
-    --badge-line-height: 2.8rem;
+    --badge-line-height: calc(var(--dt-layout-20px) + var(--dt-layout-8px));
     --badge-padding-x: var(--dt-spacing-75);
     // No radius token between 400 (8px) and 450 (12px).
     --badge-radius: calc(var(--dt-size-radius-400) + var(--dt-size-radius-200));
@@ -154,8 +153,7 @@
     --badge-color-background: var(--dt-badge-color-background-bulletin);
     --badge-color-outline: var(--dt-badge-color-background-bulletin);
 
-    &:not(.d-badge--strong),
-    &.d-badge--subtle {
+    &:where(:not(.d-badge--strong), .d-badge--subtle) {
       --badge-color-text: var(--dt-badge-color-foreground-bulletin-subtle);
       --badge-color-background: var(--dt-badge-color-background-bulletin-subtle);
       --badge-color-outline: var(--dt-badge-color-border-bulletin-subtle);
@@ -173,9 +171,7 @@
   //  info, unsaved is warning, saved and published are positive.
 
   //  subtle: outline, no fill
-  &--bulletin&--outlined,
-  &--pre-release&--outlined,
-  &--release&--outlined {
+  &--outlined:where(&--bulletin, &--pre-release, &--release) {
     --badge-color-background: var(--dt-color-neutral-transparent);
   }
 
@@ -183,38 +179,34 @@
     --badge-color-text: var(--dt-badge-color-foreground-strong);
   }
 
-  &--neutral&--strong,
-  &--draft&--strong,
-  &--archived&--strong,
-  &--release&--strong {
+  // Legacy subtle keeps its light-fill foreground even when default emphasis adds the strong class.
+  &--subtle:where(&--bulletin, &--pre-release) {
+    --badge-color-text: var(--dt-badge-color-foreground-bulletin-subtle);
+  }
+
+  &--strong:where(&--neutral, &--draft, &--archived, &--release) {
     --badge-color-background: var(--dt-badge-color-background-default-strong);
   }
 
-  &--count&--strong,
-  &--mention&--strong {
+  &--strong:where(&--count, &--mention) {
     // A nested counter sets --badge-count-strong-background (see NESTED BADGES) to stay distinct from its parent.
     --badge-color-background: var(--badge-count-strong-background, var(--dt-badge-color-background-count-strong));
   }
 
-  &--info&--strong,
-  &--edited&--strong,
-  &--scheduled&--strong {
+  &--strong:where(&--info, &--edited, &--scheduled) {
     --badge-color-background: var(--dt-badge-color-background-info-strong);
   }
 
-  &--positive&--strong,
-  &--saved&--strong,
-  &--published&--strong {
+  &--strong:where(&--positive, &--saved, &--published) {
     --badge-color-background: var(--dt-badge-color-background-positive-strong);
   }
 
-  &--warning&--strong,
-  &--unsaved&--strong {
+  &--strong:where(&--warning, &--unsaved) {
     --badge-color-text: var(--dt-badge-color-foreground-warning-strong);
     --badge-color-background: var(--dt-badge-color-background-warning-strong);
   }
 
-  &--critical&--strong {
+  &--strong:where(&--critical) {
     --badge-color-background: var(--dt-badge-color-background-critical-strong);
   }
 
@@ -226,7 +218,10 @@
     background-image: var(--dt-badge-color-background-ai);
   }
 
-  &--outlined {
+  //  The deprecated outlined prop keeps its old look: an outline on the existing fill.
+  //  emphasis="subtle" uses --outlined, which also clears the fill (see above).
+  &--outlined,
+  &--legacy-outlined {
     box-shadow: 0 0 0 var(--dt-size-border-100) var(--badge-color-outline) inset;
   }
 
