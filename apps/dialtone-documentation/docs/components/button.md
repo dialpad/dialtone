@@ -317,6 +317,27 @@ Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noope
   </template>
   Dialtone
 </dt-button>
+<!-- @code -->
+<script setup>
+import { DtButton } from '@dialpad/dialtone/vue';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue';
+</script>
+
+<template>
+  <dt-button
+    href="https://dialtone.dialpad.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    kind="muted"
+    importance="outlined"
+    :size="200"
+  >
+    <template #endIcon="{ iconSize }">
+      <dt-icon-external-link :size="iconSize" />
+    </template>
+    Dialtone
+  </dt-button>
+</template>
 ```
 
 ### to

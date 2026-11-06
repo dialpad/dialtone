@@ -19,36 +19,36 @@ combinator: DtEmojiPicker
   @skin-tone="skinTone = $event"
 />
 <!-- @code -->
-<dt-emoji-picker
-  :skin-tone="skinTone"
-  :recently-used-emojis="[
-    {
-      name: `thumbs up`,
-      category: `people`,
-      shortname: `:thumbsup:`,
-      shortname_alternates: [`:+1:`, `:thumsbup:`],
-      keywords: [`+1`, `hand`, `thumb`, `up`, `uc6`],
-      unicode_output: `1f44d`,
-      unicode_character: `1f44d`,
-    },
-    {
-      name: `thumbs up: medium-light skin tone`,
-      ...
-    }
-    ...
-  ]"
-  @skin-tone="skinTone = $event"
-  @selected-emoji="selectedEmoji"
-/>
-```
-
-Initialize the reactive skin tone in your component's setup. The `skin-tone` event updates the value passed back to the picker.
-
-```js
+<script setup>
 import { ref } from 'vue';
+import { DtEmojiPicker } from '@dialpad/dialtone/vue';
 
 const skinTone = ref('Default');
+const selectedEmoji = ref(null);
+</script>
+
+<template>
+  <dt-emoji-picker
+    :skin-tone="skinTone"
+    :recently-used-emojis="[
+      {
+        name: `thumbs up`,
+        category: `people`,
+        shortname: `:thumbsup:`,
+        shortname_alternates: [`:+1:`, `:thumbsup:`],
+        keywords: [`+1`, `hand`, `thumb`, `up`, `uc6`],
+        unicode_output: `1f44d`,
+        unicode_character: `1f44d`,
+      },
+    ]"
+    @skin-tone="skinTone = $event"
+    @selected-emoji="selectedEmoji = $event"
+  />
+  <p v-if="selectedEmoji">Selected: {{ selectedEmoji.name }}</p>
+</template>
 ```
+
+The Vue example initializes the skin tone and shows the selected emoji. The `skin-tone` event updates the value passed back to the picker.
 
 ### With Popover
 

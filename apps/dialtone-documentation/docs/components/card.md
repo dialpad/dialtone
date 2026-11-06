@@ -75,6 +75,34 @@ They should be easy to scan for relevant and actionable information. Elements, l
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper.
   </template>
 </dt-card>
+<!-- @code -->
+<script setup>
+import { DtCard, DtButton, DtText } from '@dialpad/dialtone/vue';
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
+</script>
+
+<template>
+  <dt-card class="d-w-400">
+    <template #header>
+      <dt-text as="p" variant="headline-md">Lorem ipsum</dt-text>
+      <dt-button
+        :size="100"
+        importance="clear"
+        kind="muted"
+        aria-label="Menu button"
+      >
+        <template #startIcon>
+          <dt-icon-more-vertical
+            size="100"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
+      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper.
+    </template>
+  </dt-card>
+</template>
 ```
 
 ### With Footer
@@ -107,6 +135,8 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 ### With Header, Footer and Scrollable Content
 
+Install the [Scrollbar directive](scrollbar.md#usage) in your app for this example.
+
 ```vue demo
 <dt-card class="d-w-400" content-class="d-pie-0">
   <template #header>
@@ -136,6 +166,42 @@ They should be easy to scan for relevant and actionable information. Elements, l
     </dt-button>
   </template>
 </dt-card>
+<!-- @code -->
+<script setup>
+import { DtCard, DtButton, DtText } from '@dialpad/dialtone/vue';
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
+</script>
+
+<template>
+  <dt-card class="d-w-400" content-class="d-pie-0">
+    <template #header>
+      <dt-text as="p" variant="headline-md">Lorem ipsum</dt-text>
+      <dt-button
+        :size="100"
+        importance="clear"
+        kind="muted"
+        aria-label="Menu button"
+      >
+        <template #startIcon>
+          <dt-icon-more-vertical
+            size="100"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
+      <div class="d-h-125 d-pie-200" v-dt-scrollbar:always>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper.</div>
+    </template>
+    <template #footer>
+      <dt-button
+        importance="outlined"
+        :size="200"
+      >
+        Button
+      </dt-button>
+    </template>
+  </dt-card>
+</template>
 ```
 
 ## Vue API
