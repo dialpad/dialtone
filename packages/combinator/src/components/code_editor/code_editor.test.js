@@ -3,6 +3,7 @@ import JSON5 from 'json5-with-undefined';
 
 import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { reactive } from 'vue';
 
 function createInfo () {
   return {
@@ -38,8 +39,9 @@ function createOptions (className = '') {
   };
 }
 
-function mountWrapper (className = '') {
+function mountWrapper (className = '', attachTo) {
   return mount(DtcCodeEditor, {
+    attachTo,
     props: {
       options: createOptions(className),
       info: createInfo(),
@@ -120,13 +122,46 @@ describe('code_editor.vue test', function () {
       vi.unstubAllGlobals();
     }
   });
+  it('keeps editing focus when default-slot scope changes', async () => {
+    const options = reactive({
+      slots: { default: '{{ label }}' },
+      bindings: { get: () => ({}) },
+    });
+    const wrapper = mountWrapper('', document.body);
+    try {
+      await wrapper.setProps({
+        info: {
+          displayName: 'DtFilterPill',
+          slots: [{ name: 'default', bindings: [{ name: 'label' }] }],
+          bindings: { get: () => [] },
+        },
+        options,
+        'onUpdate:options': update => update(options),
+      });
+      const input = wrapper.find('[contenteditable]');
+      input.element.focus();
+      for (const content of ['Plain text', '{{ label }}']) {
+        input.element.textContent = content;
+        await input.trigger('input');
+        expect(wrapper.find('[contenteditable]').element).toBe(input.element);
+        expect(document.activeElement).toBe(input.element);
+      }
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
   it.each([
     { name: 'simple', info: createInfo(), options: createOptions(), disabled: [], expected: '<dt-card />' },
     {
       name: 'scoped slots and excluded members',
       info: {
         displayName: 'DtButton',
-        slots: [{ name: 'startIcon', bindings: [{ name: 'icon-size' }] }, { name: 'default' }, { name: 'hidden' }],
+        slots: [
+          { name: 'startIcon', bindings: [{ name: 'icon-size' }] },
+          { name: 'default', bindings: [{ name: 'label' }] },
+          { name: 'hidden' },
+        ],
         bindings: { get: () => [{ name: 'disabled', label: 'disabled', defaultValue: false }] },
       },
       options: {
@@ -137,6 +172,23 @@ describe('code_editor.vue test', function () {
       expected: '<dt-button\n  disabled\n>\n' +
         '  <template #startIcon="{ iconSize }">\n    <dt-icon-wrench :size="iconSize" />\n' +
         '  </template>\n  Save\n</dt-button>',
+    },
+    {
+      name: 'scoped default slot',
+      info: {
+        displayName: 'DtFilterPill',
+        slots: [{ name: 'default', bindings: [{ name: 'label' }, { name: 'active-filters' }] }],
+        bindings: { get: () => [] },
+      },
+      options: {
+        slots: { default: '<strong>{{ label }}: {{ activeFilters.length }}</strong>' },
+        bindings: { get: () => ({}) },
+      },
+      disabled: [],
+      displayedScope: '#default="{ label, activeFilters }"',
+      expected: '<dt-filter-pill>\n  <template #default="{ label, activeFilters }">\n' +
+        '    <strong>{{ label }}: {{ activeFilters.length }}</strong>\n' +
+        '  </template>\n</dt-filter-pill>',
     },
     {
       name: 'raw scoped-slot alias',
@@ -161,6 +213,7 @@ describe('code_editor.vue test', function () {
       },
       disabled: [],
       displayedScope: '#anchor="anchorAttrs"',
+      copyJson: true,
       expected: '<dt-dropdown>\n  <template #anchor="anchorAttrs">\n' +
         '    <dt-button\n' +
         '  :aria-expanded="anchorAttrs[\'aria-expanded\']"\n' +
@@ -169,7 +222,9 @@ describe('code_editor.vue test', function () {
         '>\n  Actions\n</dt-button>\n' +
         '  </template>\n</dt-dropdown>',
     },
-  ])('preserves actual clipboard output for $name', async ({ info, options, disabled, expected, displayedScope }) => {
+  ])('preserves actual clipboard output for $name', async ({
+    info, options, disabled, expected, displayedScope, copyJson,
+  }) => {
     const wrapper = mountWrapper();
     const writeText = vi.fn().mockResolvedValue(undefined);
     vi.stubGlobal('navigator', { clipboard: { writeText } });
@@ -179,13 +234,13 @@ describe('code_editor.vue test', function () {
         info,
         options,
         disabledMembers: new Set(disabled),
-        devMode: Boolean(displayedScope),
-        hasChanges: Boolean(displayedScope),
+        devMode: Boolean(copyJson),
+        hasChanges: Boolean(copyJson),
       });
       if (displayedScope) expect.soft(wrapper.text()).toContain(displayedScope);
       await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
       expect.soft(writeText.mock.calls[0][0]).toBe(expected);
-      if (displayedScope) {
+      if (copyJson) {
         await wrapper.findAll('button')
           .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
         const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
