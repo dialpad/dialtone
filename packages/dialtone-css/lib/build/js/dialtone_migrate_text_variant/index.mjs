@@ -160,13 +160,17 @@ async function filesIn (dir) {
   await walk(dir);
   if (!files.length) return files;
   try {
+    const input = files.join('\0') + '\0';
     const output = execFileSync('git', ['check-ignore', '--stdin', '-z'], {
-      input: files.join('\0') + '\0', cwd: dir, encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'],
+      input, cwd: dir, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'],
+      env: { ...process.env, LC_ALL: 'C' },
+      maxBuffer: Math.max(1024 * 1024, Buffer.byteLength(input) + 1),
     });
     const ignored = new Set(output.split('\0'));
     return files.filter(file => !ignored.has(file));
   } catch (error) {
-    if (error.status === 1 || error.status === 128 || error.code === 'ENOENT') return files;
+    const notRepository = error.status === 128 && error.stderr?.includes('not a git repository');
+    if (error.status === 1 || notRepository || error.code === 'ENOENT') return files;
     throw error;
   }
 }

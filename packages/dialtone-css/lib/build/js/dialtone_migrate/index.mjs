@@ -533,13 +533,16 @@ function filterGitIgnored (files, cwd) {
       input,
       cwd,
       encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'ignore'],
+      stdio: ['pipe', 'pipe', 'pipe'],
+      env: { ...process.env, LC_ALL: 'C' },
+      maxBuffer: Math.max(1024 * 1024, Buffer.byteLength(input) + 1),
     });
     const ignored = new Set(output.split('\0'));
     return files.filter(f => !ignored.has(f));
   } catch (err) {
-    // status 1 → no paths ignored; status 128 → not a git repo; ENOENT → git missing
-    if (err.status === 1 || err.status === 128 || err.code === 'ENOENT') {
+    // Keep the no-repository fallback, but never bypass fatal Git access errors.
+    const notRepository = err.status === 128 && err.stderr?.includes('not a git repository');
+    if (err.status === 1 || notRepository || err.code === 'ENOENT') {
       return files;
     }
     throw err;

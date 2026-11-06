@@ -264,6 +264,10 @@ describe('text-variant stage', () => {
     const source = '<template><dt-text kind="body" size="300">Copy</dt-text></template>';
     const included = ['.storybook/Story.vue', '.Hidden.vue', '.vuepress/components/Text.vue'];
     const excluded = ['out/Generated.vue', 'out/café.vue', 'dist/Bundle.vue', 'node_modules/Dependency.vue', 'compiled/Output.vue', 'storybook-static/Page.html', '.vuepress/public/Example.vue', '.vuepress/.temp/Example.vue', '.vuepress/.cache/Example.vue'];
+    // Exceed Git's default child-process output buffer without a separate stress suite.
+    const longDirectory = Array(8).fill('nested'.repeat(13)).join('/');
+    excluded.push(...Array.from({ length: 1700 }, (_, index) => `out/${longDirectory}/Ignored-${index}.vue`));
+    assert.ok(Buffer.byteLength(excluded.map(name => path.join(tmp, name)).join('\0')) > 1024 * 1024);
     const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8' });
     try {
       execFileSync('git', ['init', '--quiet', tmp]);
@@ -281,6 +285,14 @@ describe('text-variant stage', () => {
       for (const name of included) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), '<template><dt-text variant="body-md">Copy</dt-text></template>');
       for (const name of excluded) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
       assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
+      const refusedGit = { ...process.env, GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
+        GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'safe.directory', GIT_CONFIG_VALUE_0: '' };
+      const stage = path.resolve(path.dirname(cli), '../dialtone_migrate_text_variant/index.mjs');
+      for (const [script, flag] of [[cli, '--health-check'], [stage, '--yes']]) {
+        assert.throws(() => execFileSync(process.execPath, [script, '--cwd', tmp, flag],
+          { encoding: 'utf8', env: refusedGit, stdio: ['ignore', 'pipe', 'pipe'] }), /dubious ownership/);
+      }
+      for (const name of excluded) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });
     }
