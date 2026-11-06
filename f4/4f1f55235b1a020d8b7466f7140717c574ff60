@@ -1,0 +1,34 @@
+packages/combinator/src/variants/variants_split_button.js
+  s_7f1d1d64baa803::t_7b586a6cd006e5 190,203
+packages/combinator/src/variants/variants_text_list.js
+  s_7f1d1d64baa803::t_7b586a6cd006e5 83
+packages/dialtone-css/lib/build/less/components/slider.less
+  s_cfda0fd8d1a291::t_8e25742ed9361a 164,170,173
+  s_cfda0fd8d1a291::t_04062a96ce4d15 634-636
+  s_cfda0fd8d1a291::t_87f7d386f5273f 171-172
+  s_cfda0fd8d1a291::t_9c3694275e1538 165-169
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f44f1f55235b1a020d8b7466f7140717c574ff60",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_cfda0fd8d1a291": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a1007d6-e12a-49b8-9261-a379c0c3d4fe",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    }
+  }
+}

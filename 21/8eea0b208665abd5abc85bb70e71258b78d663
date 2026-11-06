@@ -1,0 +1,21 @@
+.agents/resources/dialtone-lookup.md
+  s_7f1d1d64baa803::t_7c0fb01a5c685b 7,23-25,30-33,39
+.codex/config.toml
+  s_7f1d1d64baa803::t_9186a20803390f 14-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "218eea0b208665abd5abc85bb70e71258b78d663",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
