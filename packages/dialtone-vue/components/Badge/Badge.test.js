@@ -7,7 +7,9 @@ import {
   BADGE_TYPE_MODIFIERS,
   BADGE_GROUPS,
   BADGE_DECORATION_MODIFIERS,
+  BADGE_ICON_SIZE_BY_SIZE,
 } from './BadgeConstants';
+import { resetBadgeWarnings } from './badgeWarnings';
 
 const MOCK_SLOT_TEXT = 'Default slot text';
 const MOCK_PROP_TEXT = 'Prop text';
@@ -34,6 +36,7 @@ describe('DtBadge Tests', () => {
   };
 
   beforeEach(() => {
+    resetBadgeWarnings();
     updateWrapper();
   });
 
@@ -670,6 +673,124 @@ describe('DtBadge Tests', () => {
           expect(decorativeSpan.exists()).toBeTruthy();
           expect(badge.classes(BADGE_DECORATION_MODIFIERS['gold-300'])).toBe(true);
         });
+      });
+    });
+
+    describe('When a numeric label is provided', () => {
+      it('should render it without a prop type warning', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { kind: 'counter', variant: 'count', label: 12 };
+        updateWrapper();
+
+        expect(badge.text()).toBe('12');
+        expect(warn.mock.calls.some(([message]) => String(message).includes('Invalid prop'))).toBe(false);
+        warn.mockRestore();
+      });
+    });
+
+    describe('When a decoration is used with a legacy kind that resolves to status', () => {
+      it('should not report an invalid combination', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+        mockProps = { kind: 'label', decoration: 'black-400', label: 'Label' };
+        updateWrapper();
+
+        expect(error.mock.calls.some(([message]) => String(message).includes('decoration prop can only be used'))).toBe(false);
+        warn.mockRestore();
+        error.mockRestore();
+      });
+    });
+
+    describe('When the deprecated outlined prop is used on a bulletin badge', () => {
+      beforeEach(() => {
+        vi.spyOn(console, 'warn').mockImplementation(() => {});
+        mockProps = { type: 'bulletin', outlined: true, text: 'fuu' };
+        updateWrapper();
+      });
+
+      it('should outline the existing fill, not clear it like emphasis subtle does', () => {
+        expect(badge.classes('d-badge--legacy-outlined')).toBe(true);
+        expect(badge.classes(BADGE_EMPHASIS_MODIFIERS.subtle)).toBe(false);
+        expect(badge.classes(BADGE_EMPHASIS_MODIFIERS.strong)).toBe(true);
+      });
+    });
+
+    describe('When emphasis is subtle', () => {
+      it('should clear the fill with the outlined class', () => {
+        mockProps = { kind: 'release', variant: 'pre-release', emphasis: 'subtle' };
+        updateWrapper();
+
+        expect(badge.classes(BADGE_EMPHASIS_MODIFIERS.subtle)).toBe(true);
+        expect(badge.classes('d-badge--legacy-outlined')).toBe(false);
+      });
+    });
+
+    describe('When the deprecated subtle and outlined props are used', () => {
+      it('should name the replacement values in the warnings', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { type: 'bulletin', subtle: true, outlined: true, text: 'Beta' };
+        updateWrapper();
+
+        const messages = warn.mock.calls.map(([message]) => String(message));
+
+        expect(messages.some(message => message.includes('subtle is deprecated') &&
+          message.includes('kind="release" variant="pre-release" emphasis="base"'))).toBe(true);
+        expect(messages.some(message => message.includes('outlined is deprecated') &&
+          message.includes('emphasis="subtle"'))).toBe(true);
+        warn.mockRestore();
+      });
+    });
+
+    describe('When variant is ai', () => {
+      it('should render and warn only that it is deprecated, without an invalid prop warning', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { variant: 'ai', label: 'AI' };
+        updateWrapper();
+
+        const messages = warn.mock.calls.map(([message]) => String(message));
+
+        expect(badge.classes(BADGE_TYPE_MODIFIERS.ai)).toBe(true);
+        expect(messages.some(message => message.includes('variant="ai" is deprecated'))).toBe(true);
+        expect(messages.some(message => message.includes('Invalid prop'))).toBe(false);
+        warn.mockRestore();
+      });
+    });
+
+    describe('When many badges use the same deprecated prop', () => {
+      it('should log each deprecation warning once, not once per badge', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { text: MOCK_PROP_TEXT };
+        for (let i = 0; i < 5; i++) updateWrapper();
+
+        expect(warn.mock.calls.filter(([message]) => String(message).includes('text is deprecated'))).toHaveLength(1);
+        warn.mockRestore();
+      });
+    });
+
+    describe('When an icon slot is provided', () => {
+      const iconSizeFor = (props) => {
+        let received;
+
+        mockProps = { label: 'Badge', ...props };
+        mockSlots = { startIcon: (slotProps) => { received = slotProps.iconSize; return 'icon'; } };
+        updateWrapper();
+
+        return received;
+      };
+
+      it('should pass the icon size designed for each badge size', () => {
+        for (const [size, iconSize] of Object.entries(BADGE_ICON_SIZE_BY_SIZE)) {
+          expect(iconSizeFor({ size: Number(size) }), `size ${size}`).toBe(iconSize);
+        }
+      });
+
+      it('should pass iconSize instead when it is set', () => {
+        expect(iconSizeFor({ size: 100, iconSize: 600 })).toBe(600);
       });
     });
   });

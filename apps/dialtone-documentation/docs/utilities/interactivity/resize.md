@@ -26,7 +26,7 @@ keywords: ["resizable", "drag to resize"]
   <template #content>
     <tbody>
       <tr v-for="{ class: className, output, deprecated } in resize">
-        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }} <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge></th>
+        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }} <dt-badge v-if="deprecated" variant="critical" class="d-ff-sans">Deprecated</dt-badge></th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

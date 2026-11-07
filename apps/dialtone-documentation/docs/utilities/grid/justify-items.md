@@ -78,7 +78,7 @@ Use `d-ji-center` to justify items to the center of their inline axis.
         { class: 'auto' },
         { class: 'unset' },
       ]">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-ji-{{ cls }} <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge></th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ji-{{ cls }} <dt-badge v-if="deprecated" variant="critical" class="d-ff-sans">Deprecated</dt-badge></th>
         <td class="d-code--sm">justify-items: {{ cls }} !important;</td>
       </tr>
     </tbody>

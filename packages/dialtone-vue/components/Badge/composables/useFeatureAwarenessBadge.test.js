@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { defineComponent, h, ref } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import {
   provideFeatureAwarenessBadgeDefaults,
   useFeatureAwarenessBadge,
@@ -77,10 +77,41 @@ describe('useFeatureAwarenessBadge', () => {
     expect(result.emphasis.value).toBe('subtle');
   });
 
+  it('should keep the app-wide variant when a call sets only the emphasis of a stage', () => {
+    const result = mountComposable(
+      { exposureCount: 10, stages: { release: { emphasis: 'subtle' } } },
+      { stages: { release: { variant: 'pre-release', emphasis: 'strong' } } },
+    );
+
+    expect(result.variant.value).toBe('pre-release');
+    expect(result.emphasis.value).toBe('subtle');
+  });
+
+  it('should let a call override a stage field from the app-wide defaults', () => {
+    const result = mountComposable(
+      { exposureCount: 0, stages: { new: { variant: 'release' } } },
+      { stages: { new: { variant: 'pre-release', emphasis: 'base' } } },
+    );
+
+    expect(result.variant.value).toBe('release');
+    expect(result.emphasis.value).toBe('base');
+  });
+
+  it('should accept refs for the thresholds and follow them', async () => {
+    const release = ref(5);
+    const exposureCount = ref(3);
+    const result = mountComposable({ exposureCount, thresholds: { release, hidden: 10 } });
+
+    expect(result.stage.value).toBe('new');
+    release.value = 2;
+    await nextTick();
+    expect(result.stage.value).toBe('release');
+  });
+
   it('should use provided defaults', () => {
     const result = mountComposable(
       { exposureCount: 2 },
-      { thresholds: { new: 0, release: 2, hidden: 4 } },
+      { thresholds: { release: 2, hidden: 4 } },
     );
 
     expect(result.stage.value).toBe('release');
@@ -100,7 +131,7 @@ describe('useFeatureAwarenessBadge', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const result = mountComposable({
       exposureCount: 3,
-      thresholds: { new: 0, release: 10, hidden: 4 },
+      thresholds: { release: 10, hidden: 4 },
     });
 
     expect(result.stage.value).toBe('release');

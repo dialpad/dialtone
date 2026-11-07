@@ -249,8 +249,9 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
   } else if (kindValue === 'count') {
     target = { kind: 'counter', variant: 'count' };
     if (typeValue === 'bulletin') {
-      // A purple count in the released API is the strong count now.
-      attrs = replaceOrInsertEmphasis(attrs, 'strong');
+      // A purple count in the released API is the strong count now. The generic path below only adds it
+      // when the badge has no emphasis of its own, so an explicit one (static or bound) is kept.
+      target.emphasis = 'strong';
     } else if (typeValue && typeValue !== 'default') {
       warnings.push(`BADGE_API_AMBIGUOUS_COUNT_TYPE file=${filePath} type=${typeValue}`);
     }
@@ -301,21 +302,76 @@ function transformBadgeOpenTag (tag, warnings, filePath) {
   return `<${tagName}${attrs}${closer}`;
 }
 
-// The physical leftIcon/rightIcon slots are deprecated in favor of startIcon/endIcon.
-function transformBadgeSlots (block, warnings, filePath) {
-  const before = block;
-  const result = block
-    .replace(/#leftIcon\b/g, '#startIcon')
-    .replace(/#rightIcon\b/g, '#endIcon')
-    .replace(/v-slot:leftIcon\b/g, 'v-slot:startIcon')
-    .replace(/v-slot:rightIcon\b/g, 'v-slot:endIcon')
-    .replace(/slot="leftIcon"/g, 'slot="startIcon"')
-    .replace(/slot="rightIcon"/g, 'slot="endIcon"');
+// Any open, close or self-closing tag. Groups: closing slash, name, attributes, self-closing slash.
+const TAG_RE = new RegExp(`<(\\/?)([A-Za-z][\\w.:-]*)(${QUOTE_AWARE_ATTRS}?)(\\/?)>`, 'g');
+const VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr',
+]);
+const BADGE_NAMES = ['dt-badge', 'DtBadge'];
 
-  if (result !== before) {
-    warnings.push(`BADGE_API_SLOT_RENAMED file=${filePath}`);
+const SLOT_RENAMES = { leftIcon: 'startIcon', rightIcon: 'endIcon' };
+
+// Renames the slot declarations in a tag's attributes: #leftIcon, v-slot:leftIcon and slot="leftIcon". The
+// attributes are tokenized, so text inside a quoted value, such as label="#leftIcon", is never touched.
+function renameSlotAttrs (attrs) {
+  const edits = [];
+
+  for (const token of parseAttrs(attrs)) {
+    const named = /^(#|v-slot:)(leftIcon|rightIcon)$/.exec(token.name);
+    if (named) {
+      edits.push({ start: token.start, end: token.start + token.name.length, text: `${named[1]}${SLOT_RENAMES[named[2]]}` });
+      continue;
+    }
+
+    const legacy = token.name === 'slot' && token.value !== null && /^(["'])(leftIcon|rightIcon)\1$/.exec(token.value);
+    if (legacy) {
+      const valueStart = token.end - token.value.length;
+      edits.push({ start: valueStart, end: token.end, text: `${legacy[1]}${SLOT_RENAMES[legacy[2]]}${legacy[1]}` });
+    }
   }
 
+  // Back to front so earlier offsets stay valid.
+  return edits.reverse().reduce(
+    (result, edit) => result.slice(0, edit.start) + edit.text + result.slice(edit.end),
+    attrs,
+  );
+}
+
+// The physical leftIcon/rightIcon slots are deprecated in favor of startIcon/endIcon. Only the slots a badge
+// owns are renamed: those on its direct children. A slot of that name on a component nested inside the
+// badge belongs to that component, whose API this script can't know, so it is left as written.
+function transformBadgeSlots (block, warnings, filePath) {
+  const stack = [];
+  const edits = [];
+
+  for (const match of block.matchAll(TAG_RE)) {
+    const [tag, closing, name, attrs, selfClosing] = match;
+
+    if (closing) {
+      const idx = stack.findLastIndex(entry => entry === name);
+      if (idx !== -1) stack.length = idx;
+      continue;
+    }
+
+    if (BADGE_NAMES.includes(stack[stack.length - 1])) {
+      const renamed = renameSlotAttrs(attrs);
+      if (renamed !== attrs) {
+        edits.push({ start: match.index, end: match.index + tag.length, text: `<${name}${renamed}${selfClosing}>` });
+      }
+    }
+
+    // Only the lowercase HTML tags are void. <Input> or <Link> is a component, which has children.
+    if (!selfClosing && !VOID_ELEMENTS.has(name)) stack.push(name);
+  }
+
+  if (!edits.length) return block;
+
+  let result = block;
+  // Back to front so earlier offsets stay valid.
+  for (const edit of edits.reverse()) {
+    result = result.slice(0, edit.start) + edit.text + result.slice(edit.end);
+  }
+  warnings.push(`BADGE_API_SLOT_RENAMED file=${filePath}`);
   return result;
 }
 

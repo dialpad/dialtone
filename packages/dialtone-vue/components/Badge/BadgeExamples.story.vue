@@ -21,8 +21,8 @@
         variant="neutral"
         label="Locked"
       >
-        <template #startIcon>
-          <dt-icon-lock size="200" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon-lock :size="iconSize" />
         </template>
       </dt-badge>
       <dt-badge
@@ -30,8 +30,8 @@
         variant="neutral"
         label="Chat log"
       >
-        <template #startIcon>
-          <dt-icon-message size="200" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon-message :size="iconSize" />
         </template>
       </dt-badge>
     </dt-stack>
@@ -112,8 +112,8 @@
         label="Recording"
         variant="critical"
       >
-        <template #startIcon>
-          <dt-icon-record-filled size="200" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon-record-filled :size="iconSize" />
         </template>
       </dt-badge>
     </dt-stack>
@@ -173,8 +173,8 @@
         variant="count"
         emphasis="strong"
       >
-        <template #startIcon>
-          <dt-icon-arrow-up size="200" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon-arrow-up :size="iconSize" />
         </template>
       </dt-badge>
     </dt-stack>
@@ -189,8 +189,8 @@
         variant="count"
         emphasis="strong"
       >
-        <template #startIcon>
-          <dt-icon-arrow-down size="200" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon-arrow-down :size="iconSize" />
         </template>
       </dt-badge>
     </dt-stack>

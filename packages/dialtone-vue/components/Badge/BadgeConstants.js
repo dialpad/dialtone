@@ -14,6 +14,8 @@ export const BADGE_GROUPS = {
   },
   // Where a feature is in its rollout. `pre-release` is for features that aren't generally available
   // (internal, alpha, beta, new). `release` is for features that have launched and are fading from view.
+  // useFeatureAwarenessBadge uses the two as the looks of its stages, not as a statement about availability:
+  // a feature that is generally available but new to a user starts in the `pre-release` look.
   // The badge text stays the product's word ("Alpha", "Beta", "New").
   // Emphasis here is how important the feature is: subtle (outline), base (light fill), strong (solid fill).
   release: {
@@ -85,6 +87,15 @@ export const BADGE_SIZE_MODIFIERS = {
   500: 'd-badge--size-500',
 };
 
+// The icon size designed for each badge size, on the icon scale (100-800). Size 200 keeps the previous default.
+export const BADGE_ICON_SIZE_BY_SIZE = {
+  100: 100,
+  200: 200,
+  300: 200,
+  400: 200,
+  500: 300,
+};
+
 export const BADGE_TYPE_MODIFIERS = {
   default: '',
   info: 'd-badge--info',
@@ -132,7 +143,6 @@ export const BADGE_DECORATION_MODIFIERS = {
 
 export const FEATURE_AWARENESS_BADGE_DEFAULTS = {
   thresholds: {
-    new: 0,
     release: 3,
     hidden: 10,
   },

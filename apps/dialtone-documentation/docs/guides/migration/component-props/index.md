@@ -130,6 +130,9 @@ Prop values across the system map to a shared set of names. `danger` and `error`
 </div>
 </div>
 
+> [!WARNING] DtBadge: `type` is deprecated
+> For `dt-badge`, `type="positive"` is only the result of this step. The [Badge API migration](/guides/migration/badge-chip-api/) then moves `type` to `variant`, so the final form is `variant="positive"`. Run it after this one.
+
 ## DtBox `surface` / `bc`, DtText `tone-strong`, and DtButton `link-kind` Value Renames
 
 DtBox, DtText, and DtButton each have severity-value props that the original DLT-3157 release missed. The migration script handles all of them.
