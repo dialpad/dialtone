@@ -19,7 +19,7 @@
  *   --health-check     Report migration status without modifying files
  *   --all              Run all required migrations without selection prompt
  *   --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
- *   --only <ids>       Comma-separated list of migration IDs to run
+ *   --only <ids>       Comma-separated list of migration IDs to run (in supplied order)
  *   --package <name>   Package name to use for injected component imports
  *                      (default: @dialpad/dialtone-vue). Useful when running
  *                      Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
@@ -30,6 +30,7 @@
  *   npx dialtone-migrate --health-check --cwd ./src
  *   npx dialtone-migrate --all --dry-run
  *   npx dialtone-migrate --only color-stops,hsl-to-oklch
+ *   npx dialtone-migrate --only typography,text-variant --dry-run
  */
 
 import { spawn, execFileSync } from 'node:child_process';
@@ -37,6 +38,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import readline from 'readline';
 import { fileURLToPath } from 'node:url';
+import { transformContent as transformTextVariant } from '../dialtone_migrate_text_variant/index.mjs';
+import { gitEnvironment } from './git_environment.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -361,6 +364,16 @@ const MIGRATIONS = [
     fileExtensions: ['.vue', '.html'],
   },
   {
+    id: 'text-variant',
+    name: 'Text Kind and Size to Variant',
+    description: 'Convert static DtText kind + size pairs to variant; preserve explicit variants and report uncertain inputs.',
+    category: 'opt-in',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_text_variant',
+    detectPatterns: [],
+    fileExtensions: ['.vue', '.html'],
+  },
+  {
     id: 'vue3-to-vue-imports',
     name: 'Vue 3 Import Paths',
     description: '@dialpad/dialtone/vue3, @dialpad/dialtone-icons/vue3, and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
@@ -386,6 +399,7 @@ function getRepoRoot (cwd) {
   try {
     return execFileSync('git', ['rev-parse', '--show-toplevel'], {
       cwd,
+      env: gitEnvironment(cwd),
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
     }).trim();
@@ -463,7 +477,7 @@ Options:
   --health-check     Report migration status without modifying files
   --all              Run all required migrations without selection prompt
   --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
-  --only <ids>       Comma-separated list of migration IDs to run
+  --only <ids>       Comma-separated list of migration IDs to run (in supplied order)
   --package <name>   Package name to use for injected component imports
                      (default: @dialpad/dialtone-vue). Useful when running
                      Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
@@ -481,6 +495,12 @@ Examples:
   npx dialtone-migrate --all --dry-run               # Dry-run all required
   npx dialtone-migrate --all --include-opt-in --yes  # Run required + opt-in
   npx dialtone-migrate --only color-stops,hsl-to-oklch --yes
+  npx dialtone-migrate --only text-variant --dry-run --cwd ./src
+  npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
+
+Combined dry-run stages inspect current files; they do not simulate earlier writes.
+After applying typography, preview text-variant separately for newly created pairs.
+Health-check and text-variant skip nested Git repositories; target each explicitly with --cwd.
 `);
 }
 
@@ -511,18 +531,21 @@ function isIgnoredPath (fullPath) {
 function filterGitIgnored (files, cwd) {
   if (files.length === 0) return files;
   try {
-    const input = files.join('\n');
-    const output = execFileSync('git', ['check-ignore', '--stdin'], {
+    const input = files.join('\0') + '\0';
+    const output = execFileSync('git', ['check-ignore', '--stdin', '-z'], {
       input,
       cwd,
       encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'ignore'],
+      stdio: ['pipe', 'pipe', 'pipe'],
+      env: gitEnvironment(cwd),
+      maxBuffer: Math.max(1024 * 1024, Buffer.byteLength(input) + 1),
     });
-    const ignored = new Set(output.trim().split('\n').filter(Boolean));
+    const ignored = new Set(output.split('\0'));
     return files.filter(f => !ignored.has(f));
   } catch (err) {
-    // status 1 → no paths ignored; status 128 → not a git repo; ENOENT → git missing
-    if (err.status === 1 || err.status === 128 || err.code === 'ENOENT') {
+    // Keep the no-repository fallback, but never bypass fatal Git access errors.
+    const notRepository = err.status === 128 && err.stderr?.includes('not a git repository');
+    if (err.status === 1 || notRepository || err.code === 'ENOENT') {
       return files;
     }
     throw err;
@@ -536,6 +559,8 @@ async function findFiles (dir, extensions) {
     try {
       entries = await fs.readdir(currentDir, { withFileTypes: true });
     } catch { return; }
+    // Nested repositories need their own --cwd and ignore context.
+    if (currentDir !== dir && entries.some(entry => entry.name === '.git')) return;
     for (const entry of entries) {
       const fullPath = path.join(currentDir, entry.name);
       if (isIgnoredPath(fullPath)) continue;
@@ -586,6 +611,16 @@ async function healthCheck (cwd) {
 
     for (const [file, content] of fileContents) {
       if (!migration.fileExtensions.some(ext => file.endsWith(ext))) continue;
+
+      if (migration.id === 'text-variant') {
+        const result = transformTextVariant(content, { vue: file.endsWith('.vue') });
+        const pending = result.count + result.diagnostics.length;
+        if (pending) {
+          matchedFiles.add(path.relative(cwd, file));
+          matchCount += pending;
+        }
+        continue;
+      }
 
       let patterns = migration.detectPatterns;
       const alreadyMigrated = migration.skipIfPatterns?.some(pattern => pattern.test(content));

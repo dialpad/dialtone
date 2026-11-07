@@ -102,7 +102,7 @@ The [migration script](#migration-script) below handles this transform alongside
 
 ## ESLint Rule
 
-`deprecated-tshirt-sizes` flags t-shirt size usage on Dialtone components and auto-fixes to numeric.
+`deprecated-tshirt-sizes` flags t-shirt size usage on Dialtone components and usually auto-fixes to numeric. For `DtText`, a supported static `kind + size` pair becomes a composed `variant` instead; both legacy props are removed. For example, `kind="body" size="sm"` becomes `variant="body-sm"`.
 
 Add to your ESLint config:
 
@@ -129,6 +129,10 @@ npx eslint --fix "src/**/*.vue"
 **The rule handles:** `size`, `label-size`, `labelSize`, and `speed` props on `dt-*` and `Dt*` components.
 
 **Skipped:** Dynamic bindings (`:size="computedValue"`), non-Dialtone components.
+
+For Text, any explicit `variant` prevents autofixing its `size` prop; other size-related attributes keep their ordinary rule behavior. Text `size` conversions with spreads, dynamic arguments, conflicting composition props or uncertain directives require manual review. Unpaired Text sizes are reported without an autofix; numeric sizes paired with `variant` remain valid raw font-size overrides. Quoted t-shirt string literals in Text bindings are reported for manual review rather than fixed. See the [typography migration guide](../typography/#convert-existing-kind-and-size-pairs) for the separate opt-in `text-variant` stage, which also accepts supported numeric pairs and bound literals.
+
+For Text with `kind` or `variant`, template-literal text such as ``:size="`sm`"`` is not reported. Review these bindings manually.
 
 ## Migration Script
 
@@ -167,7 +171,7 @@ npx dialtone-migrate-tshirt-to-numeric --yes --cwd ./src
 
 ## Dynamic Bindings
 
-The ESLint rule flags t-shirt literals inside dynamic bindings (`:size="'sm'"`, `:size="condition ? 'sm' : 'md'"`), but cannot auto-fix them. The migration script skips dynamic bindings entirely. Both require manual review.
+The ESLint rule flags quoted t-shirt string literals inside dynamic bindings (`:size="'sm'"`, `:size="condition ? 'sm' : 'md'"`), but cannot auto-fix them. The migration script skips dynamic bindings entirely. Both require manual review.
 
 ### Ternary expressions
 

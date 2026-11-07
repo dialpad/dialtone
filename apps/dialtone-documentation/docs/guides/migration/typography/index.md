@@ -14,7 +14,7 @@ status: ready
 - The migration tool currently emits legacy-compatible `kind="…" size="…"`. For new manual code, prefer `variant="…"` for complete text compositions.
 - Raw font-size utilities like `d-fs-200` can now be replaced with `variant="…" size="200"` when you need a composed style plus an exact font-size override.
 - Override utilities like `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, and `d-ta-*` map to `strength`, `tone`, `density`, `truncate`, and `align` props.
-- One command does the migration: `npx dialtone-migrate-typography`.
+- Run utility conversion with `npx dialtone-migrate --only typography`. The opt-in `text-variant` follow-up converts supported explicit `kind + size` pairs.
 
 ## Overview
 
@@ -138,7 +138,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 
 ## Migration Tool
 
-`dialtone-migrate-typography` scans `.vue` and `.html` files for legacy typography utility classes and converts them to `<dt-text>`. It is included with `@dialpad/dialtone-css`.
+`dialtone-migrate --only typography` scans `.vue` and `.html` files for legacy typography utility classes and converts them to `<dt-text>`. The runner is included with both `@dialpad/dialtone` and `@dialpad/dialtone-css`.
 
 > [!INFO] Tool output and the new DtText API
 > The current migration tool emits legacy-compatible `kind + size` props for composed typography classes. That output is intentionally still supported. If you are hand-authoring code or revisiting migrated output, prefer `variant` for composed text styles and use numeric `size` only with `variant` for raw font-size token overrides.
@@ -251,30 +251,59 @@ The script also scans `<dt-text>` elements that carry residual utility classes f
 <dt-text kind="body" strength="bold" tone="secondary">...</dt-text>
 ```
 
+### Convert Existing Kind and Size Pairs
+
+The opt-in `text-variant` stage converts supported explicit `kind + size` pairs to `variant`. Check `npx dialtone-migrate --help` in your installed version before using it; this source change does not establish npm release availability.
+
+```sh
+npx dialtone-migrate --only text-variant --dry-run --cwd ./src
+# Preview both stages against current files (without simulated writes):
+npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
+```
+
+Remove `--dry-run` to apply changes; add `--yes` to skip confirmation. `--only` runs stages in the supplied order. During an applied combined run, each stage scans again, so `text-variant` sees elements created by `typography`. A combined dry-run previews each stage against the files currently on disk; it does not simulate earlier stages. After applying `typography`, preview `text-variant` separately to count its newly created eligible pairs. The `text-variant` preview reports aggregate eligible and existing-variant counts plus manual-review locations; it does not show individual eligible transformations. To inspect exact changes, create an isolated checkout with a clean Git working tree. Run `typography` there if needed and commit its changes locally; then apply `text-variant` and review the diff. Health-check reports pending pairs and manual-review cases; it does not gate stage execution.
+
+Health-check and `text-variant` stop at nested Git repositories, including checked-out submodules. Target each repository explicitly with `--cwd` so its own ignore rules apply. Built-in exclusions still match the full path, including segments above `--cwd`; a repository under `dist` or `compiled` is not scanned.
+
+The `typography` stage has a different scan scope: it does not consult Git ignore rules and can traverse nested repositories. In a combined run, it may change files that `text-variant` then skips. Preview and inspect its output separately before applying the combined command.
+
+```html
+<!-- Before -->
+<DtText as="p" :kind="'body'" :size="300">Copy</DtText>
+<!-- After: both legacy props are removed -->
+<DtText as="p" variant="body-md">Copy</DtText>
+```
+
+Numeric composition sizes `100`, `200`, `300`, `400`, `500`, `600`, `700` map to `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`. Headline supports all seven; body, label and code support `xs` through `lg`. Both tag casings, static attributes and statically bound string/numeric literals are supported in Vue HTML templates and HTML files. Other source regions are preserved.
+
+Within `text-variant`, any explicit `variant`, including a bound variant, protects the entire element. Other selected stages have their own behavior; this guarantee does not extend to them. An existing `variant + size` may be an intentional raw font-size override. Spreads, dynamic arguments, nonliteral expressions, conflicting props and unsupported mappings stay unchanged with file/line/column diagnostics and a manual-review action. Kind-only and size-only usages are outside this pair conversion. The reported existing-variant count includes every Text element with an explicit variant, including elements converted on an earlier run; it is not a count of size overrides. The stage inserts no review markers; a second run leaves converted output unchanged.
+
+The `typography` stage still produces the legacy-compatible output shown elsewhere in this guide. Its utility mappings are separate from composition sizes: `d-body--sm` produces `kind="body" size="100"`, then `text-variant` produces `variant="body-xs"`.
+
 ### Usage
 
 #### Preview Changes
 
 ```bash
-npx dialtone-migrate-typography --dry-run --cwd ./src
+npx dialtone-migrate --only typography --dry-run --cwd ./src
 ```
 
 #### Target a Directory
 
 ```bash
-npx dialtone-migrate-typography --cwd ./src/components
+npx dialtone-migrate --only typography --cwd ./src/components
 ```
 
 #### Apply All Changes
 
 ```bash
-npx dialtone-migrate-typography --yes
+npx dialtone-migrate --only typography --yes
 ```
 
 #### Interactive Mode
 
 ```bash
-npx dialtone-migrate-typography
+npx dialtone-migrate --only typography
 ```
 
 In interactive mode the tool processes one file at a time. For each file that has changes, it prints the file path and prompts once before writing:
@@ -295,12 +324,19 @@ The prompt applies or skips the whole file — it does not step through individu
 
 #### Target Specific Files
 
+The following advanced modes are not forwarded by the umbrella runner and have no separately published binary. Run the module from your consumer project root using the path for your installed package:
+
+- `@dialpad/dialtone`: `node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs`
+- `@dialpad/dialtone-css`: `node node_modules/@dialpad/dialtone-css/lib/dist/js/dialtone_migrate_typography/index.mjs`
+
+The examples below use the umbrella package path. Substitute the CSS package path when that is your installation.
+
 ```bash
 # Single file
-npx dialtone-migrate-typography --file src/components/Header.vue --dry-run
+node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs --file src/components/Header.vue --dry-run
 
 # Multiple files
-npx dialtone-migrate-typography --file Header.vue --file Footer.vue --yes
+node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs --file Header.vue --file Footer.vue --yes
 ```
 
 When using `--file`, the `--cwd` option is ignored.
@@ -308,7 +344,7 @@ When using `--file`, the `--cwd` option is ignored.
 #### Validate Existing DtText Elements
 
 ```bash
-npx dialtone-migrate-typography --validate --cwd ./src
+node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs --validate --cwd ./src
 ```
 
 `--validate` runs read-only and scans existing `<dt-text>` elements for prop bugs: object syntax (`:kind="{ … }"`), invalid prop values, and mixed CSS classes. Useful as a post-migration audit.
@@ -316,7 +352,7 @@ npx dialtone-migrate-typography --validate --cwd ./src
 #### Remove Review Markers
 
 ```bash
-npx dialtone-migrate-typography --remove-markers --cwd ./src
+node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs --remove-markers --cwd ./src
 ```
 
 Strips all `<!-- dt-text-migrate: review … -->` comments after you have reviewed and resolved each flagged pattern. Add `--dry-run` to preview which files would be cleaned.
@@ -366,7 +402,7 @@ Projects that import Dialtone components locally will instead see `import { DtTe
 If you run Dialtone under a custom package alias (for example `@dialpad/dialtone-next` while migrating incrementally), pass `--package` to force injected imports to use it:
 
 ```bash
-npx dialtone-migrate-typography --package @dialpad/dialtone-next --cwd ./src
+npx dialtone-migrate --only typography --package @dialpad/dialtone-next --cwd ./src
 ```
 
 ### Remove Review Markers
@@ -374,7 +410,7 @@ npx dialtone-migrate-typography --package @dialpad/dialtone-next --cwd ./src
 After resolving all flagged patterns, strip the marker comments:
 
 ```bash
-npx dialtone-migrate-typography --remove-markers --cwd ./src
+node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs --remove-markers --cwd ./src
 ```
 
 ### ESLint Auto-Fix
