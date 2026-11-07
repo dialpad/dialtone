@@ -253,7 +253,7 @@ const awareness = useFeatureAwarenessBadge({
 
 ### App-wide defaults
 
-Call `provideFeatureAwarenessBadgeDefaults` once, such as in your app's root component, to set the thresholds and stage looks that every `useFeatureAwarenessBadge` call below it starts from. Options passed to a single call override these defaults.
+Call `provideFeatureAwarenessBadgeDefaults` once, such as in your app's root component, to set the thresholds and stage looks that every `useFeatureAwarenessBadge` call below it starts from. Options passed to a single call override these defaults field by field. For example, a call that sets only `stages.release.emphasis` keeps the `stages.release.variant` from the app-wide defaults.
 
 ```vue code-only
 <script setup>

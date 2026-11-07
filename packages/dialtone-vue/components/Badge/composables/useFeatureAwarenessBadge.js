@@ -42,10 +42,19 @@ function resolveOptions (options, injectedDefaults) {
       ...injectedDefaults?.thresholds,
       ...options.thresholds,
     },
+    // Each stage merges field by field, like thresholds, so a call that sets only a stage's emphasis keeps
+    // the variant from the app-wide defaults.
     stages: {
-      ...FEATURE_AWARENESS_BADGE_DEFAULTS.stages,
-      ...injectedDefaults?.stages,
-      ...options.stages,
+      new: {
+        ...FEATURE_AWARENESS_BADGE_DEFAULTS.stages.new,
+        ...injectedDefaults?.stages?.new,
+        ...options.stages?.new,
+      },
+      release: {
+        ...FEATURE_AWARENESS_BADGE_DEFAULTS.stages.release,
+        ...injectedDefaults?.stages?.release,
+        ...options.stages?.release,
+      },
     },
   };
 }
@@ -60,8 +69,8 @@ function resolveOptions (options, injectedDefaults) {
 /**
  * Exposure counts that end a stage. Both are optional.
  * @typedef {object} FeatureAwarenessBadgeThresholds
- * @property {number} [release] Count at which the badge moves to the release stage. Default 3.
- * @property {number} [hidden] Count at which the badge is hidden. Default 10.
+ * @property {number | import('vue').Ref<number>} [release] Count at which the badge moves to the release stage. Default 3.
+ * @property {number | import('vue').Ref<number>} [hidden] Count at which the badge is hidden. Default 10.
  */
 
 /**

@@ -360,7 +360,8 @@ function transformBadgeSlots (block, warnings, filePath) {
       }
     }
 
-    if (!selfClosing && !VOID_ELEMENTS.has(name.toLowerCase())) stack.push(name);
+    // Only the lowercase HTML tags are void. <Input> or <Link> is a component, which has children.
+    if (!selfClosing && !VOID_ELEMENTS.has(name)) stack.push(name);
   }
 
   if (!edits.length) return block;

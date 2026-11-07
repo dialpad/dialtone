@@ -21,6 +21,7 @@ useFeatureAwarenessBadge({ exposureCount: 2 });
 useFeatureAwarenessBadge({ exposureCount: ref(2) });
 useFeatureAwarenessBadge({ exposureCount: 2, thresholds: { release: 3, hidden: 10 } });
 useFeatureAwarenessBadge({ thresholds: { hidden: 10 } });
+useFeatureAwarenessBadge({ thresholds: { release: ref(3), hidden: ref(10) } });
 useFeatureAwarenessBadge({ stages: { release: { variant: 'release', emphasis: 'subtle' } } });
 useFeatureAwarenessBadge(ref({ exposureCount: 2 }));
 provideFeatureAwarenessBadgeDefaults({ thresholds: { release: 5, hidden: 20 }, stages: { new: { emphasis: 'base' } } });
@@ -40,6 +41,8 @@ useFeatureAwarenessBadge({ exposureCount: 'wrong' });
 useFeatureAwarenessBadge({ thresholds: { releasee: 3 } });
 // @ts-expect-error wrong nested value type
 useFeatureAwarenessBadge({ thresholds: { hidden: '10' } });
+// @ts-expect-error a ref of the wrong type
+useFeatureAwarenessBadge({ thresholds: { release: ref('3') } });
 // @ts-expect-error unknown stage
 useFeatureAwarenessBadge({ stages: { hidden: { variant: 'release' } } });
 // @ts-expect-error app-wide defaults take no exposureCount
