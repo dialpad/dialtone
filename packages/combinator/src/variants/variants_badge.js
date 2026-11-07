@@ -90,7 +90,7 @@ export default {
       label: { initialValue: 'Label' },
     },
     slots: {
-      startIcon: { initialValue: '<dt-icon-lightning-bolt size="200" />' },
+      startIcon: { initialValue: '<dt-icon-lightning-bolt :size="iconSize" />' },
     },
   },
 
@@ -106,7 +106,7 @@ export default {
 
   locked: {
     slots: {
-      startIcon: { initialValue: '<dt-icon-lock size="200" />' },
+      startIcon: { initialValue: '<dt-icon-lock :size="iconSize" />' },
       default: { initialValue: 'Locked' },
     },
   },
@@ -117,7 +117,7 @@ export default {
       variant: { initialValue: 'critical' },
     },
     slots: {
-      startIcon: { initialValue: '<dt-icon-record-filled size="200" />' },
+      startIcon: { initialValue: '<dt-icon-record-filled :size="iconSize" />' },
       default: { initialValue: 'Recording' },
     },
   },
