@@ -51,9 +51,34 @@ function resolveOptions (options, injectedDefaults) {
 }
 
 /**
+ * The variant and emphasis a stage renders with. Both are optional and fall back to the Dialtone defaults.
+ * @typedef {object} FeatureAwarenessBadgeStage
+ * @property {string} [variant]
+ * @property {string} [emphasis]
+ */
+
+/**
+ * Exposure counts that end a stage. Both are optional.
+ * @typedef {object} FeatureAwarenessBadgeThresholds
+ * @property {number} [release] Count at which the badge moves to the release stage. Default 3.
+ * @property {number} [hidden] Count at which the badge is hidden. Default 10.
+ */
+
+/**
+ * Options for `useFeatureAwarenessBadge`. Every field is optional.
+ * @typedef {object} FeatureAwarenessBadgeOptions
+ * @property {number | import('vue').Ref<number>} [exposureCount] Count owned by the consuming app. Defaults to 0.
+ * @property {FeatureAwarenessBadgeThresholds} [thresholds]
+ * @property {{ new?: FeatureAwarenessBadgeStage, release?: FeatureAwarenessBadgeStage }} [stages] Overrides for the
+ * variant and emphasis of each stage. Default new: pre-release, strong. Default release: release, base.
+ */
+
+/**
  * Provide app-level feature awareness badge defaults.
  *
  * Product code still owns persistence, exposure counting, label text, and i18n.
+ *
+ * @param {Omit<FeatureAwarenessBadgeOptions, 'exposureCount'>} defaults
  */
 export function provideFeatureAwarenessBadgeDefaults (defaults) {
   provide(FEATURE_AWARENESS_BADGE_DEFAULTS_KEY, defaults);
@@ -65,14 +90,7 @@ export function provideFeatureAwarenessBadgeDefaults (defaults) {
  * The badge starts in the `new` stage, moves to `release` at `thresholds.release` and is hidden at
  * `thresholds.hidden`. The stages are looks, not statements about availability: see `stages`.
  *
- * @param {object | import('vue').Ref<object>} [options]
- * @param {number | import('vue').Ref<number>} [options.exposureCount] Count owned by the consuming app. Defaults to 0.
- * @param {object} [options.thresholds] Exposure counts that end a stage. Both are optional.
- * @param {number} [options.thresholds.release] Count at which the badge moves to the release stage. Default 3.
- * @param {number} [options.thresholds.hidden] Count at which the badge is hidden. Default 10.
- * @param {object} [options.stages] Overrides for the variant and emphasis of each stage.
- * @param {{variant?: string, emphasis?: string}} [options.stages.new] Default: pre-release, strong.
- * @param {{variant?: string, emphasis?: string}} [options.stages.release] Default: release, base.
+ * @param {FeatureAwarenessBadgeOptions | import('vue').Ref<FeatureAwarenessBadgeOptions>} [options]
  * @returns {{kind: import('vue').ComputedRef<string>, variant: import('vue').ComputedRef<string>, emphasis: import('vue').ComputedRef<string>, stage: import('vue').ComputedRef<string>, isVisible: import('vue').ComputedRef<boolean>}}
  */
 export function useFeatureAwarenessBadge (options = {}) {

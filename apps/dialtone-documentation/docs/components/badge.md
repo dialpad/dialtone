@@ -150,32 +150,7 @@ Emphasis shows how important the feature is. `subtle` is an outline, `base` is a
 </dt-stack>
 ```
 
-`useFeatureAwarenessBadge` steps through the fade from an exposure count. It returns the `kind`, variant and emphasis for the current stage, and your app supplies the label, persistence, and counting. Its stages are looks in that fade, not statements about availability: a feature that is generally available but new to a user still starts in the `pre-release` look.
-
-```vue
-<script setup>
-import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
-
-const awareness = useFeatureAwarenessBadge({
-  exposureCount: 2,
-  thresholds: { release: 3, hidden: 10 },
-});
-</script>
-
-<template>
-  <dt-badge
-    v-if="awareness.isVisible.value"
-    :kind="awareness.kind.value"
-    :variant="awareness.variant.value"
-    :emphasis="awareness.emphasis.value"
-    label="New"
-  />
-</template>
-```
-
-The badge is in the `new` stage until the exposure count reaches `thresholds.release`, in the `release` stage until it reaches `thresholds.hidden`, and then `isVisible` is false. Once hidden, the variant and emphasis stay those of the `release` stage.
-
-Pass a `stages` option to set the variant and emphasis for each stage. By default the first stage is `new`, which is `pre-release` with `strong` emphasis, and the next is `release`, which is `release` with `base` emphasis.
+To fade a Release badge for each person as they see a feature more often, see [Feature awareness](#feature-awareness).
 
 > [!INFO] The look of `pre-release` may change
 > Pick the variant and emphasis for the stage you mean, and don't rely on how a variant looks today.
@@ -206,6 +181,88 @@ Use `lifecycle` for the state of a piece of content as it moves from writing to 
     <dt-badge kind="lifecycle" variant="scheduled" label="Scheduled" emphasis="strong" />
   </dt-stack>
 </dt-stack>
+```
+
+## Feature awareness
+
+A new feature needs a badge for a short time. `useFeatureAwarenessBadge` is a composable that fades a [Release](#release) badge for each person as they see the feature more often, and then hides it. It is listed with the other [Vue utilities](/functions-and-utilities/).
+
+### When to use it
+
+- Use `useFeatureAwarenessBadge` when the badge should change for each person over time, such as a "New" badge that fades after a few visits and then goes away.
+- Use a plain `DtBadge` with `kind="release"` when the badge doesn't change, such as an "Alpha" label on a feature that stays in alpha.
+
+### What your app owns
+
+The composable only picks the look. It doesn't count or save anything. Your app owns:
+
+- The exposure count, such as visits or clicks, and keeping it between sessions.
+- The label text and its translation.
+- The thresholds that are right for your feature.
+
+### Stages
+
+The badge is in the `new` stage until the exposure count reaches `thresholds.release`, in the `release` stage until it reaches `thresholds.hidden`, and then `isVisible` is false. Once hidden, the variant and emphasis stay those of the `release` stage.
+
+It returns the `kind`, `variant` and `emphasis` for the current stage. By default the `new` stage is `pre-release` with `strong` emphasis, and the `release` stage is `release` with `base` emphasis. Pass a `stages` option to set the variant and emphasis for each stage. The stages are looks in the fade, not statements about availability: a feature that is generally available but new to a person still starts in the `pre-release` look.
+
+### Try it
+
+Add exposures to move the badge through its stages, then reset it.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="200" align="center">
+    <dt-badge
+      v-if="awareness.isVisible.value"
+      :kind="awareness.kind.value"
+      :variant="awareness.variant.value"
+      :emphasis="awareness.emphasis.value"
+      label="New"
+    />
+    <span v-else>The badge is hidden.</span>
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-button importance="outlined" @click="exposureCount += 1">Add exposure</dt-button>
+    <dt-button importance="clear" @click="exposureCount = 0">Reset</dt-button>
+  </dt-stack>
+  <dt-text as="p">Exposure count {{ exposureCount }}, stage {{ awareness.stage.value }}, variant {{ awareness.variant.value }}, emphasis {{ awareness.emphasis.value }}, visible {{ awareness.isVisible.value }}.</dt-text>
+</dt-stack>
+<!-- @code -->
+<script setup>
+import { ref } from 'vue';
+import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
+const exposureCount = ref(0);
+const awareness = useFeatureAwarenessBadge({
+  exposureCount,
+  thresholds: { release: 3, hidden: 10 },
+});
+</script>
+<template>
+  <dt-badge
+    v-if="awareness.isVisible.value"
+    :kind="awareness.kind.value"
+    :variant="awareness.variant.value"
+    :emphasis="awareness.emphasis.value"
+    label="New"
+  />
+  <dt-button @click="exposureCount += 1">Add exposure</dt-button>
+</template>
+```
+
+### App-wide defaults
+
+Call `provideFeatureAwarenessBadgeDefaults` once, such as in your app's root component, to set the thresholds and stage looks that every `useFeatureAwarenessBadge` call below it starts from. Options passed to a single call override these defaults.
+
+```vue code-only
+<script setup>
+import { provideFeatureAwarenessBadgeDefaults } from '@dialpad/dialtone-vue';
+provideFeatureAwarenessBadgeDefaults({
+  thresholds: { release: 5, hidden: 20 },
+  stages: { release: { variant: 'release', emphasis: 'subtle' } },
+});
+</script>
 ```
 
 ## Examples
@@ -280,9 +337,17 @@ If you're upgrading from the v10 API, run `npx dialtone-migrate-badge-api` to re
 <component-class-table component-name="badge"></component-class-table>
 
 <script setup>
+  import { ref } from 'vue';
+  import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
   import {
     DtIconLock,
     DtIconRecordFilled,
     DtIconArrowUp,
   } from '@dialpad/dialtone-icons/vue';
+
+  const exposureCount = ref(0);
+  const awareness = useFeatureAwarenessBadge({
+    exposureCount,
+    thresholds: { release: 3, hidden: 10 },
+  });
 </script>

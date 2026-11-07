@@ -120,7 +120,8 @@ export default {
     variant: {
       type: String,
       default: undefined,
-      validator: (variant) => Object.keys(BADGE_VARIANT_MODIFIERS).includes(variant),
+      // `ai` is deprecated but still renders, so it passes here and only warns about the deprecation.
+      validator: (variant) => Object.keys(BADGE_VARIANT_MODIFIERS).includes(variant) || variant === 'ai',
     },
 
     /**

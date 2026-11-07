@@ -407,6 +407,19 @@ describe('dialtone-migrate-badge-api', () => {
       assert.ok(run(input).includes('#rightIcon'));
     });
 
+    it('does not rename slot-like text inside a quoted attribute value', () => {
+      const input = [
+        '<dt-badge text="Locked">',
+        '  <custom-thing label="#leftIcon" title="v-slot:rightIcon" data-note=\'slot="leftIcon"\' />',
+        '  <template #leftIcon="{ iconSize }">Badge icon</template>',
+        '</dt-badge>',
+      ].join('\n');
+      const output = run(input);
+
+      assert.ok(output.includes('<custom-thing label="#leftIcon" title="v-slot:rightIcon" data-note=\'slot="leftIcon"\' />'));
+      assert.ok(output.includes('<template #startIcon="{ iconSize }">Badge icon</template>'));
+    });
+
     it('renames the v-slot and slot forms on the badge itself', () => {
       const input = '<dt-badge text="x"><template v-slot:leftIcon>a</template><span slot="rightIcon">b</span></dt-badge>';
       const output = run(input);

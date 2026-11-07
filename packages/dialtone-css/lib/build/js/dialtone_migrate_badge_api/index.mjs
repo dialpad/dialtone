@@ -309,14 +309,32 @@ const VOID_ELEMENTS = new Set([
 ]);
 const BADGE_NAMES = ['dt-badge', 'DtBadge'];
 
+const SLOT_RENAMES = { leftIcon: 'startIcon', rightIcon: 'endIcon' };
+
+// Renames the slot declarations in a tag's attributes: #leftIcon, v-slot:leftIcon and slot="leftIcon". The
+// attributes are tokenized, so text inside a quoted value, such as label="#leftIcon", is never touched.
 function renameSlotAttrs (attrs) {
-  return attrs
-    .replace(/#leftIcon\b/g, '#startIcon')
-    .replace(/#rightIcon\b/g, '#endIcon')
-    .replace(/v-slot:leftIcon\b/g, 'v-slot:startIcon')
-    .replace(/v-slot:rightIcon\b/g, 'v-slot:endIcon')
-    .replace(/slot="leftIcon"/g, 'slot="startIcon"')
-    .replace(/slot="rightIcon"/g, 'slot="endIcon"');
+  const edits = [];
+
+  for (const token of parseAttrs(attrs)) {
+    const named = /^(#|v-slot:)(leftIcon|rightIcon)$/.exec(token.name);
+    if (named) {
+      edits.push({ start: token.start, end: token.start + token.name.length, text: `${named[1]}${SLOT_RENAMES[named[2]]}` });
+      continue;
+    }
+
+    const legacy = token.name === 'slot' && token.value !== null && /^(["'])(leftIcon|rightIcon)\1$/.exec(token.value);
+    if (legacy) {
+      const valueStart = token.end - token.value.length;
+      edits.push({ start: valueStart, end: token.end, text: `${legacy[1]}${SLOT_RENAMES[legacy[2]]}${legacy[1]}` });
+    }
+  }
+
+  // Back to front so earlier offsets stay valid.
+  return edits.reverse().reduce(
+    (result, edit) => result.slice(0, edit.start) + edit.text + result.slice(edit.end),
+    attrs,
+  );
 }
 
 // The physical leftIcon/rightIcon slots are deprecated in favor of startIcon/endIcon. Only the slots a badge
@@ -337,7 +355,9 @@ function transformBadgeSlots (block, warnings, filePath) {
 
     if (BADGE_NAMES.includes(stack[stack.length - 1])) {
       const renamed = renameSlotAttrs(attrs);
-      if (renamed !== attrs) edits.push({ start: match.index, end: match.index + tag.length, text: `<${name}${renamed}${selfClosing}>` });
+      if (renamed !== attrs) {
+        edits.push({ start: match.index, end: match.index + tag.length, text: `<${name}${renamed}${selfClosing}>` });
+      }
     }
 
     if (!selfClosing && !VOID_ELEMENTS.has(name.toLowerCase())) stack.push(name);

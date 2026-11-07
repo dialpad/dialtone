@@ -745,13 +745,17 @@ describe('DtBadge Tests', () => {
     });
 
     describe('When variant is ai', () => {
-      it('should warn that it is deprecated', () => {
+      it('should render and warn only that it is deprecated, without an invalid prop warning', () => {
         const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
         mockProps = { variant: 'ai', label: 'AI' };
         updateWrapper();
 
-        expect(warn.mock.calls.some(([message]) => String(message).includes('variant="ai" is deprecated'))).toBe(true);
+        const messages = warn.mock.calls.map(([message]) => String(message));
+
+        expect(badge.classes(BADGE_TYPE_MODIFIERS.ai)).toBe(true);
+        expect(messages.some(message => message.includes('variant="ai" is deprecated'))).toBe(true);
+        expect(messages.some(message => message.includes('Invalid prop'))).toBe(false);
         warn.mockRestore();
       });
     });
