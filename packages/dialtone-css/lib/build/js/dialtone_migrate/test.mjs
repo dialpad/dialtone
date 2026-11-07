@@ -177,7 +177,7 @@ describe('--health-check', () => {
     const chipDone = /\[DONE\].*DtChip API Updates \(chip-api\)/;
 
     for (const attrs of ['interactive', 'interactive=""', 'interactive="true"', 'interactive="false"', 'interactive=false',
-      ':interactive="true"']) {
+      ':interactive="true"', ':interactive=" true "', 'v-bind:interactive=\' true\'']) {
       assert.match(pending(`<dt-chip size="300" ${attrs}>Label</dt-chip>`), chipPending, attrs);
     }
 

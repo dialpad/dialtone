@@ -261,7 +261,7 @@ const MIGRATIONS = [
         + `(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?(?:show-close|showClose)(?:[\\s=/>]))`
         + `(?!${DT_TAG_ATTRS}\\s(?:hide-close|hideClose)(?:[\\s=/>]))`
         + `(?!${DT_TAG_ATTRS}\\sv-bind(?:[\\s=/>]))`
-        + `${DT_TAG_ATTRS}\\s(?:interactive(?=[\\s/>])|interactive\\s*=\\s*(?:(["'])[^"']*\\1|[^\\s"'>/]+)|(?::|v-bind:)interactive\\s*=\\s*(["'])true\\2)`,
+        + `${DT_TAG_ATTRS}\\s(?:interactive(?=[\\s/>])|interactive\\s*=\\s*(?:(["'])[^"']*\\1|[^\\s"'>/]+)|(?::|v-bind:)interactive\\s*=\\s*(["'])\\s*true\\s*\\2)`,
       ),
     ],
     fileExtensions: ['.vue'],
