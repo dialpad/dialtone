@@ -11,6 +11,11 @@
       "description": "Applies count variant shape."
     },
     {
+      "class": "d-badge--mention",
+      "applies": ".d-badge",
+      "description": "Applies mention variant shape."
+    },
+    {
       "class": "d-badge--pre-release",
       "applies": ".d-badge",
       "description": "Applies pre-release (purple) colors."
@@ -29,6 +34,16 @@
       "class": "d-badge--strong",
       "applies": ".d-badge",
       "description": "Applies strong emphasis colors."
+    },
+    {
+      "class": "d-badge--outlined",
+      "applies": ".d-badge",
+      "description": "Outlines the badge and clears its fill. Applies to the release variants (emphasis subtle)."
+    },
+    {
+      "class": "d-badge--legacy-outlined",
+      "applies": ".d-badge",
+      "description": "Deprecated. Outlines the badge and keeps its fill. Use emphasis subtle instead."
     },
     {
       "class": "d-badge--size-{$size}",

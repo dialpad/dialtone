@@ -10,16 +10,13 @@ function normalizeInteger (value) {
 }
 
 function validateThresholds (thresholds) {
-  const newThreshold = normalizeInteger(thresholds.new);
   const releaseThreshold = normalizeInteger(thresholds.release);
   const hiddenThreshold = normalizeInteger(thresholds.hidden);
 
   if (
-    newThreshold === null ||
     releaseThreshold === null ||
     hiddenThreshold === null ||
-    newThreshold < 0 ||
-    releaseThreshold <= newThreshold ||
+    releaseThreshold < 0 ||
     hiddenThreshold <= releaseThreshold
   ) {
     console.warn(
@@ -30,7 +27,6 @@ function validateThresholds (thresholds) {
   }
 
   return {
-    new: newThreshold,
     release: releaseThreshold,
     hidden: hiddenThreshold,
   };
@@ -46,18 +42,52 @@ function resolveOptions (options, injectedDefaults) {
       ...injectedDefaults?.thresholds,
       ...options.thresholds,
     },
+    // Each stage merges field by field, like thresholds, so a call that sets only a stage's emphasis keeps
+    // the variant from the app-wide defaults.
     stages: {
-      ...FEATURE_AWARENESS_BADGE_DEFAULTS.stages,
-      ...injectedDefaults?.stages,
-      ...options.stages,
+      new: {
+        ...FEATURE_AWARENESS_BADGE_DEFAULTS.stages.new,
+        ...injectedDefaults?.stages?.new,
+        ...options.stages?.new,
+      },
+      release: {
+        ...FEATURE_AWARENESS_BADGE_DEFAULTS.stages.release,
+        ...injectedDefaults?.stages?.release,
+        ...options.stages?.release,
+      },
     },
   };
 }
 
 /**
+ * The variant and emphasis a stage renders with. Both are optional and fall back to the Dialtone defaults.
+ * @typedef {object} FeatureAwarenessBadgeStage
+ * @property {string} [variant]
+ * @property {string} [emphasis]
+ */
+
+/**
+ * Exposure counts that end a stage. Both are optional.
+ * @typedef {object} FeatureAwarenessBadgeThresholds
+ * @property {number | import('vue').Ref<number>} [release] Count at which the badge moves to the release stage. Default 3.
+ * @property {number | import('vue').Ref<number>} [hidden] Count at which the badge is hidden. Default 10.
+ */
+
+/**
+ * Options for `useFeatureAwarenessBadge`. Every field is optional.
+ * @typedef {object} FeatureAwarenessBadgeOptions
+ * @property {number | import('vue').Ref<number>} [exposureCount] Count owned by the consuming app. Defaults to 0.
+ * @property {FeatureAwarenessBadgeThresholds} [thresholds]
+ * @property {{ new?: FeatureAwarenessBadgeStage, release?: FeatureAwarenessBadgeStage }} [stages] Overrides for the
+ * variant and emphasis of each stage. Default new: pre-release, strong. Default release: release, base.
+ */
+
+/**
  * Provide app-level feature awareness badge defaults.
  *
  * Product code still owns persistence, exposure counting, label text, and i18n.
+ *
+ * @param {Omit<FeatureAwarenessBadgeOptions, 'exposureCount'>} defaults
  */
 export function provideFeatureAwarenessBadgeDefaults (defaults) {
   provide(FEATURE_AWARENESS_BADGE_DEFAULTS_KEY, defaults);
@@ -66,9 +96,10 @@ export function provideFeatureAwarenessBadgeDefaults (defaults) {
 /**
  * Resolves Badge props for staged feature awareness.
  *
- * @param {object} options
- * @param {number} options.exposureCount Count owned by the consuming app.
- * @param {object} options.thresholds Ascending stage thresholds.
+ * The badge starts in the `new` stage, moves to `release` at `thresholds.release` and is hidden at
+ * `thresholds.hidden`. The stages are looks, not statements about availability: see `stages`.
+ *
+ * @param {FeatureAwarenessBadgeOptions | import('vue').Ref<FeatureAwarenessBadgeOptions>} [options]
  * @returns {{kind: import('vue').ComputedRef<string>, variant: import('vue').ComputedRef<string>, emphasis: import('vue').ComputedRef<string>, stage: import('vue').ComputedRef<string>, isVisible: import('vue').ComputedRef<boolean>}}
  */
 export function useFeatureAwarenessBadge (options = {}) {

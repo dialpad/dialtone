@@ -3,7 +3,7 @@ title: Vue Utilities
 description: Consumer-facing directives and utilities exported by Dialtone Vue.
 status: new
 thumb: true
-keywords: ["directive", "function", "utility", "utilities", "plugin", "v-dt-focusgroup", "v-dt-mode", "v-dt-tooltip", "v-dt-scrollbar", "keyboard navigation", "roving tabindex", "dark mode", "date", "time", "localization", "i18n", "lazy show", "DtLazyShow", "accessibility", "a11y", "internationalization", "theme"]
+keywords: ["directive", "function", "utility", "utilities", "plugin", "v-dt-focusgroup", "v-dt-mode", "v-dt-tooltip", "v-dt-scrollbar", "keyboard navigation", "roving tabindex", "dark mode", "date", "time", "localization", "i18n", "lazy show", "DtLazyShow", "accessibility", "a11y", "internationalization", "theme", "composable", "feature awareness"]
 ---
 
 ## Directives
@@ -25,6 +25,14 @@ Stateless helpers for formatting and transforming data.
 | Function | Description |
 | --- | --- |
 | [Date and Time](https://dialtone.dialpad.com/vue/?path=/docs/functions-date-and-time--docs) | Format dates, relative timestamps, and durations with i18n locale support |
+
+## Composables
+
+Reactive helpers that decide what a component should show. Your app supplies the data and owns persistence.
+
+| Composable | Description |
+| --- | --- |
+| [useFeatureAwarenessBadge](/components/badge.html#feature-awareness) | Fade a Release badge from an exposure count, then hide it. Your app owns counting, saving, and the label |
 
 ## Utilities
 

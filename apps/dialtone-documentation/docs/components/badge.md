@@ -49,7 +49,29 @@ A badge is a small, non-interactive marker that sits next to the item it describ
 - Make sure the label says what the color says. Color shouldn't be the only signal.
 - Use strong emphasis for the one badge that should stand out. Base emphasis suits most lists and tables.
 - Place a badge next to what it describes: near the title in a list item, or in its own column in a table.
-- Give a badge an accessible name when its text is a bare value, such as `12`. Use `aria-label` or `aria-labelledby`.
+- Give a bare value, such as `12`, text that says what it counts. See [Accessibility](#accessibility).
+
+## Accessibility
+
+A badge renders a plain `<span>`, which has no role that can be named. `aria-label` and `aria-labelledby` aren't supported on it, so don't put them on a badge. Give a bare value such as `12` meaningful text instead.
+
+On its own, add the context as visually hidden text, such as "12 unread messages":
+
+```vue code-only
+<dt-badge kind="counter" variant="count">
+  <span>12</span>
+  <span class="d-vi-visible-sr">unread messages</span>
+</dt-badge>
+```
+
+Inside a button or link, the badge text is part of that control's accessible name, so the control's own text can supply the context:
+
+```vue code-only
+<dt-button>
+  Unread messages
+  <dt-badge kind="counter" variant="count" label="12" />
+</dt-button>
+```
 
 ## Groups
 
@@ -61,6 +83,9 @@ A badge is a small, non-interactive marker that sits next to the item it describ
 | `lifecycle` | The state of a piece of content | `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled` | `base`, `strong` |
 
 `kind` defaults to `status`, so you only set it for `counter`, `release`, and `lifecycle`. A variant that doesn't belong to the `kind`, or an emphasis the group doesn't support, falls back to the default and logs a warning in development.
+
+> [!WARNING] `variant="ai"` is deprecated
+> Use DtChip with `emphasis="subtle"` for AI attribution. `type="ai"` is deprecated for the same reason.
 
 ### Status
 
@@ -125,30 +150,7 @@ Emphasis shows how important the feature is. `subtle` is an outline, `base` is a
 </dt-stack>
 ```
 
-`useFeatureAwarenessBadge` steps through the fade from an exposure count. It returns the `kind`, variant and emphasis for the current stage, and your app supplies the label, persistence, and counting.
-
-```vue
-<script setup>
-import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
-
-const awareness = useFeatureAwarenessBadge({
-  exposureCount: 2,
-  thresholds: { new: 0, release: 3, hidden: 10 },
-});
-</script>
-
-<template>
-  <dt-badge
-    v-if="awareness.isVisible.value"
-    :kind="awareness.kind.value"
-    :variant="awareness.variant.value"
-    :emphasis="awareness.emphasis.value"
-    label="New"
-  />
-</template>
-```
-
-Pass a `stages` option to set the variant and emphasis for each stage. By default the first stage is `new`, which is `pre-release` with `strong` emphasis, and the next is `release`, which is `release` with `base` emphasis.
+To fade a Release badge for each person as they see a feature more often, see [Feature awareness](#feature-awareness).
 
 > [!INFO] The look of `pre-release` may change
 > Pick the variant and emphasis for the stage you mean, and don't rely on how a variant looks today.
@@ -181,28 +183,112 @@ Use `lifecycle` for the state of a piece of content as it moves from writing to 
 </dt-stack>
 ```
 
+## Feature awareness
+
+A new feature needs a badge for a short time. `useFeatureAwarenessBadge` is a composable that fades a [Release](#release) badge for each person as they see the feature more often, and then hides it. It is listed with the other [Vue utilities](/functions-and-utilities/).
+
+### When to use it
+
+- Use `useFeatureAwarenessBadge` when the badge should change for each person over time, such as a "New" badge that fades after a few visits and then goes away.
+- Use a plain `DtBadge` with `kind="release"` when the badge doesn't change, such as an "Alpha" label on a feature that stays in alpha.
+
+### What your app owns
+
+The composable only picks the look. It doesn't count or save anything. Your app owns:
+
+- The exposure count, such as visits or clicks, and keeping it between sessions.
+- The label text and its translation.
+- The thresholds that are right for your feature.
+
+### Stages
+
+The badge is in the `new` stage until the exposure count reaches `thresholds.release`, in the `release` stage until it reaches `thresholds.hidden`, and then `isVisible` is false. Once hidden, the variant and emphasis stay those of the `release` stage.
+
+It returns the `kind`, `variant` and `emphasis` for the current stage. By default the `new` stage is `pre-release` with `strong` emphasis, and the `release` stage is `release` with `base` emphasis. Pass a `stages` option to set the variant and emphasis for each stage. The stages are looks in the fade, not statements about availability: a feature that is generally available but new to a person still starts in the `pre-release` look.
+
+### Try it
+
+Add exposures to move the badge through its stages, then reset it.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="200" align="center">
+    <dt-badge
+      v-if="awareness.isVisible.value"
+      :kind="awareness.kind.value"
+      :variant="awareness.variant.value"
+      :emphasis="awareness.emphasis.value"
+      label="New"
+    />
+    <span v-else>The badge is hidden.</span>
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-button importance="outlined" @click="exposureCount += 1">Add exposure</dt-button>
+    <dt-button importance="clear" @click="exposureCount = 0">Reset</dt-button>
+  </dt-stack>
+  <dt-text as="p">Exposure count {{ exposureCount }}, stage {{ awareness.stage.value }}, variant {{ awareness.variant.value }}, emphasis {{ awareness.emphasis.value }}, visible {{ awareness.isVisible.value }}.</dt-text>
+</dt-stack>
+<!-- @code -->
+<script setup>
+import { ref } from 'vue';
+import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
+const exposureCount = ref(0);
+const awareness = useFeatureAwarenessBadge({
+  exposureCount,
+  thresholds: { release: 3, hidden: 10 },
+});
+</script>
+<template>
+  <dt-badge
+    v-if="awareness.isVisible.value"
+    :kind="awareness.kind.value"
+    :variant="awareness.variant.value"
+    :emphasis="awareness.emphasis.value"
+    label="New"
+  />
+  <dt-button @click="exposureCount += 1">Add exposure</dt-button>
+</template>
+```
+
+### App-wide defaults
+
+Call `provideFeatureAwarenessBadgeDefaults` once, such as in your app's root component, to set the thresholds and stage looks that every `useFeatureAwarenessBadge` call below it starts from. Options passed to a single call override these defaults field by field. For example, a call that sets only `stages.release.emphasis` keeps the `stages.release.variant` from the app-wide defaults.
+
+Thresholds merge by key too, and the merged pair must be non-negative integers with `hidden` above `release`. If it isn't, for example when a call sets only a `hidden` that is below the app-wide `release`, both thresholds fall back to the Dialtone defaults (`release` 3 and `hidden` 10) and a warning is logged to the console.
+
+```vue code-only
+<script setup>
+import { provideFeatureAwarenessBadgeDefaults } from '@dialpad/dialtone-vue';
+provideFeatureAwarenessBadgeDefaults({
+  thresholds: { release: 5, hidden: 20 },
+  stages: { release: { variant: 'release', emphasis: 'subtle' } },
+});
+</script>
+```
+
 ## Examples
 
 ### Icons
 
-Use the `startIcon` and `endIcon` slots for icons, and set the icon `size` to `200`. Use the `leading` and `trailing` slots for freeform content, such as the nested badge in the counter example.
+Use the `startIcon` and `endIcon` slots for icons, and bind the icon `size` to the `iconSize` slot prop. It is the icon size designed for the badge `size`: `100` for badge size `100`, `300` for badge size `500`, and `200` for the sizes between. Set the `iconSize` prop on the badge to override it. Use the `leading` and `trailing` slots for freeform content, such as the nested badge in the counter example.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
   <dt-badge variant="critical" label="Recording">
-    <template #startIcon>
-      <dt-icon-record-filled size="200" />
+    <template #startIcon="{ iconSize }">
+      <dt-icon-record-filled :size="iconSize" />
     </template>
   </dt-badge>
   <dt-badge label="Locked">
-    <template #startIcon>
-      <dt-icon-lock size="200" />
+    <template #startIcon="{ iconSize }">
+      <dt-icon-lock :size="iconSize" />
     </template>
   </dt-badge>
   <dt-badge kind="counter" variant="count" label="5%" emphasis="strong">
-    <template #startIcon>
-      <dt-icon-arrow-up size="200" />
+    <template #startIcon="{ iconSize }">
+      <dt-icon-arrow-up :size="iconSize" />
     </template>
   </dt-badge>
 </dt-stack>
@@ -253,9 +339,17 @@ If you're upgrading from the v10 API, run `npx dialtone-migrate-badge-api` to re
 <component-class-table component-name="badge"></component-class-table>
 
 <script setup>
+  import { ref } from 'vue';
+  import { useFeatureAwarenessBadge } from '@dialpad/dialtone-vue';
   import {
     DtIconLock,
     DtIconRecordFilled,
     DtIconArrowUp,
   } from '@dialpad/dialtone-icons/vue';
+
+  const exposureCount = ref(0);
+  const awareness = useFeatureAwarenessBadge({
+    exposureCount,
+    thresholds: { release: 3, hidden: 10 },
+  });
 </script>

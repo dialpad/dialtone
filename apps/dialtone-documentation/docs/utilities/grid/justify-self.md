@@ -74,7 +74,7 @@ Use `d-js-center` to justify an item to the center of its inline axis.
         { class: 'auto' },
         { class: 'unset' },
       ]">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-js-{{ cls }} <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge></th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-js-{{ cls }} <dt-badge v-if="deprecated" variant="critical" class="d-ff-sans">Deprecated</dt-badge></th>
         <td class="d-code--sm">justify-self: {{ cls }} !important;</td>
       </tr>
     </tbody>
