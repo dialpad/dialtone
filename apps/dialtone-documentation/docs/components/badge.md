@@ -255,6 +255,8 @@ const awareness = useFeatureAwarenessBadge({
 
 Call `provideFeatureAwarenessBadgeDefaults` once, such as in your app's root component, to set the thresholds and stage looks that every `useFeatureAwarenessBadge` call below it starts from. Options passed to a single call override these defaults field by field. For example, a call that sets only `stages.release.emphasis` keeps the `stages.release.variant` from the app-wide defaults.
 
+Thresholds merge by key too, and the merged pair must be non-negative integers with `hidden` above `release`. If it isn't, for example when a call sets only a `hidden` that is below the app-wide `release`, both thresholds fall back to the Dialtone defaults (`release` 3 and `hidden` 10) and a warning is logged to the console.
+
 ```vue code-only
 <script setup>
 import { provideFeatureAwarenessBadgeDefaults } from '@dialpad/dialtone-vue';
