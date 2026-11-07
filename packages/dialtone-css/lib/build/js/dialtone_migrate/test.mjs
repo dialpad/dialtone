@@ -322,6 +322,13 @@ describe('text-variant stage', () => {
       const nestedPreview = execFileSync(process.execPath,
         [cli, '--cwd', nested, '--only', 'text-variant', '--dry-run'], { encoding: 'utf8', env: scanEnv });
       assert.match(nestedPreview, /1 eligible/);
+      const ceilingEnv = { ...scanEnv, GIT_CEILING_DIRECTORIES: fs.realpathSync(nested) };
+      const ignoredDirectory = path.join(nested, 'ignored');
+      execFileSync(process.execPath,
+        [cli, '--cwd', ignoredDirectory, '--only', 'text-variant', '--yes'], { encoding: 'utf8', env: ceilingEnv });
+      assert.equal(fs.readFileSync(path.join(ignoredDirectory, 'Generated.vue'), 'utf8'), source);
+      assert.match(execFileSync(process.execPath,
+        [cli, '--cwd', ignoredDirectory, '--health-check'], { encoding: 'utf8', env: ceilingEnv }), /No scannable files found/);
       const refusalConfig = path.join(tmp, 'refusal.gitconfig');
       fs.writeFileSync(refusalConfig, '[safe]\n  directory =\n');
       const refusedGit = { ...gitEnv, GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
