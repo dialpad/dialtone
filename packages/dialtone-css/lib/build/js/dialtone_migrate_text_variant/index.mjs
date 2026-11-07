@@ -67,7 +67,7 @@ function parseAttributes (text, start) {
 }
 
 function propName (name) {
-  return name.replace(/^(?::|v-bind:|v-model:)/, '').split('.')[0];
+  return name.replace(/^(?::|\.|v-bind:|v-model:)/, '').split('.')[0];
 }
 
 function literal (attr) {
@@ -97,7 +97,7 @@ export function transformContent (content, { vue = false } = {}) {
     if (attrs && (!kinds.length || !sizes.length)) continue;
     let reason;
     const uncertain = attrs?.some(attr => {
-      if (attr.name.includes('[') || attr.name === 'v-bind' || attr.name.startsWith('v-bind.')) return true;
+      if (attr.name.startsWith('.') || attr.name.includes('[') || attr.name === 'v-bind' || attr.name.startsWith('v-bind.')) return true;
       if (/^(?::|v-bind:)/.test(attr.name)) return attr.name.includes('.');
       return attr.name.startsWith('v-') && !SAFE_DIRECTIVES.test(attr.name);
     });

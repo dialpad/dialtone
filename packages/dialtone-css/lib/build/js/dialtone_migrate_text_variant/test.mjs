@@ -27,7 +27,7 @@ it('converts all 38 composition mappings across literal syntax and tag casings',
 });
 
 it('protects every explicit variant and leaves incomplete pairs outside scope', () => {
-  for (const attrs of ['variant=""', ':variant="choice"', 'v-bind:variant="undefined"']) {
+  for (const attrs of ['variant=""', ':variant="choice"', 'v-bind:variant="undefined"', '.variant="choice"']) {
     const input = `<dt-text kind="body" size="sm" ${attrs}>Copy</dt-text>`;
     const result = transformContent(input);
     assert.equal(result.transformed, input);
@@ -54,6 +54,9 @@ it('leaves uncertain pairs unchanged with actionable line and column diagnostics
     'kind="body" size="sm" v-model:kind="kind"',
     'kind="body" size="sm" v-custom="props"',
     'kind="body" size="sm" :size.prop="300"',
+    `.kind="'body'" .size="'sm'"`,
+    `kind="body" .size="'sm'"`,
+    `.kind="'body'" size="sm"`,
   ]) {
     const input = `\n<dt-text ${attrs} />`;
     const result = transformContent(input);
