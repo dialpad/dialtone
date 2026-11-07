@@ -39,7 +39,7 @@ Use `d-ta-{n}` to change an element's text alignment.
       <tr v-for="i in align">
         <th class="d-code--sm d-docsite-code">
           .d-ta-{{ i.class }}
-          <dt-badge v-if="i.deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge>
+          <dt-badge v-if="i.deprecated" variant="critical" class="d-ff-sans">Deprecated</dt-badge>
         </th>
         <td class="d-code--sm">text-align: {{ i.value }} !important;</td>
       </tr>

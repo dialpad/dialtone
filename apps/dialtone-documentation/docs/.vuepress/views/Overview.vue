@@ -19,13 +19,10 @@
           <div class="dialtone-wall__details">
             <div class="dialtone-wall__title">
               <span class="dialtone-wall__title-text">{{ pageTitle(page) }}</span>
-              <span
-                v-if="badgeKindClass(page.status)"
-                class="d-badge d-tt-capitalize"
-                :class="badgeKindClass(page.status)"
-              >
-                {{ page.status }}
-              </span>
+              <dt-badge
+                v-if="wallBadge(page.status)"
+                v-bind="wallBadge(page.status)"
+              />
             </div>
             <div class="dialtone-wall__description">
               {{ page.description }}
@@ -40,6 +37,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import SvgLoader from '../baseComponents/SvgLoader.vue';
+import { getStatusBadge } from '../theme/constants/statusBadges.js';
 
 defineProps({
   pages: {
@@ -99,11 +97,9 @@ const thumbImgUrl = (fileName) => {
   return legacyPngModules[`../public/assets/images/${fileName}.png`] ?? null;
 };
 
-const BADGE_KIND_CLASSES = {
-  new: 'd-badge--bulletin',
-  beta: 'd-badge--info',
-};
-const badgeKindClass = (status) => BADGE_KIND_CLASSES[status] ?? '';
+// Only new and beta pages get a badge on the wall, with the same props as the sidebar and the page header.
+const WALL_BADGE_STATUSES = ['new', 'beta'];
+const wallBadge = (status) => (WALL_BADGE_STATUSES.includes(status) ? getStatusBadge(status) : undefined);
 const pageTitle = (page) => {
   if (page.cardTitle) return page.cardTitle;
 
