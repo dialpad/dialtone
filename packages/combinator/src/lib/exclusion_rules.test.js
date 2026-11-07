@@ -4,6 +4,7 @@ import variantsAvatar from '@/src/variants/variants_avatar';
 import variantsBadge from '@/src/variants/variants_badge';
 import variantsBox, { INSET_PROPS } from '@/src/variants/variants_box';
 import variantsButton from '@/src/variants/variants_button';
+import variantsChip from '@/src/variants/variants_chip';
 import variantsItemLayout from '@/src/variants/variants_item_layout';
 import variantsLink from '@/src/variants/variants_link';
 import variantsPopover from '@/src/variants/variants_popover';
@@ -30,6 +31,22 @@ function expectEnabled (memberName, exclusionRules, propValues = {}, slotValues 
 }
 
 describe('exclusion_rules', function () {
+  describe('DtChip variant exclusions', function () {
+    const rules = variantsChip.exclusions;
+
+    it('should only enable showClose on an interactive chip', function () {
+      expect(shouldDisable('showClose', 'props', rules, { interactive: false })).toBe(true);
+      expect(shouldDisable('showClose', 'props', rules, { interactive: true })).toBe(false);
+    });
+
+    it('should keep subtle and interactive from being combined', function () {
+      expect(getDisabledValues('emphasis', rules, { interactive: true }).has('subtle')).toBe(true);
+      expect(shouldClear('emphasis', 'props', rules, { interactive: true, emphasis: 'subtle' })).toBe(true);
+      expect(shouldClear('emphasis', 'props', rules, { interactive: true, emphasis: 'strong' })).toBe(false);
+      expect(shouldDisable('interactive', 'props', rules, { emphasis: 'subtle' })).toBe(true);
+    });
+  });
+
   describe('getHiddenValues', function () {
     it('should collect values from hideValues rules whose conditions match', function () {
       const rule = { when: { kind: 'body' }, hideValues: { props: { size: ['500', 600] } } };

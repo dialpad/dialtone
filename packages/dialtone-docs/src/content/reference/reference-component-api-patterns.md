@@ -58,6 +58,8 @@ Exceptions exist:
 - DtModal has no `size` prop. Use the `fullscreen` boolean instead (`fullscreen: true` for a fullscreen modal, `false` for the default size).
 - DtText uses numeric font-size token stops for raw font-size control when paired with `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
 
+- DtChip uses numeric sizes `100` to `700`, with `300` as the default. `xs`, `sm` and `md` remain as deprecated aliases for `100`, `200` and `300`.
+
 DtText `size` must be paired with `variant`, or with legacy `kind` while older code migrates. DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.
 
 ### Logical Geometry Props
@@ -89,8 +91,16 @@ For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text c
 Visual variant or complete composition. Values vary per component.
 
 - DtBadge: per `kind` group. `status`: `neutral`, `info`, `positive`, `warning`, `critical`. `counter`: `count`, `mention`. `release`: `pre-release`, `release`. `lifecycle`: `draft`, `edited`, `unsaved`, `saved`, `published`, `archived`, `scheduled`
+- DtChip: `default`, `people`
 
 DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
+
+### Emphasis
+
+Visual weight within a variant. Values vary per component:
+
+- DtBadge: `base`, `strong`. The `release` group also supports `subtle` (outline).
+- DtChip: `subtle`, `base`, `strong`
 
 ### Importance
 

@@ -232,6 +232,41 @@ const MIGRATIONS = [
     fileExtensions: ['.vue'],
   },
   {
+    id: 'chip-api',
+    name: 'DtChip API Updates',
+    description: 'DtChip moves to variant/emphasis and startIcon/startAvatar/endIcon; showClose now defaults to false.',
+    category: 'required',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_chip_api',
+    detectPatterns: [
+      new RegExp(
+        `<(?:dt-chip|DtChip)(?=[\\s/>])${DT_TAG_ATTRS}`
+        + '\\s(?::|v-bind:)?(?:icon-class|iconClass|avatar-class|avatarClass)\\s*=',
+      ),
+      // The old icon and avatar slots in their #, v-slot: and slot= forms.
+      /<(?:dt-chip|DtChip)(?=[\s/>])[\s\S]*?\s(?:#|v-slot:|slot\s*=\s*["']?)(?:icon|avatar)(?![\w-])/,
+      // The codemod adds an explicit size="300" to any chip without size, so those chips are pending too.
+      // (?=[\s/>]) keeps dt-chip-group out; a size, :size, v-bind:size or v-bind spread means it is done.
+      new RegExp(
+        `<(?:dt-chip|DtChip)(?=[\\s/>])`
+        + `(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?size(?:[\\s=/>]))`
+        + `(?!${DT_TAG_ATTRS}\\sv-bind(?:[\\s=/>]))${DT_TAG_ATTRS}>`,
+      ),
+      // A statically interactive chip without show-close loses its remove button, since showClose now defaults
+      // to false. Any plain interactive value counts (Vue passes interactive="false" as a truthy string), but a bound
+      // one only when it is a literal true. A show-close, a v-bind spread or a legacy hide-close (left to the props
+      // migration) means it is done.
+      new RegExp(
+        `<(?:dt-chip|DtChip)(?=[\\s/>])`
+        + `(?!${DT_TAG_ATTRS}\\s(?::|v-bind:)?(?:show-close|showClose)(?:[\\s=/>]))`
+        + `(?!${DT_TAG_ATTRS}\\s(?:hide-close|hideClose)(?:[\\s=/>]))`
+        + `(?!${DT_TAG_ATTRS}\\sv-bind(?:[\\s=/>]))`
+        + `${DT_TAG_ATTRS}\\s(?:interactive(?=[\\s/>])|interactive\\s*=\\s*(?:(["'])[^"']*\\1|[^\\s"'>/]+)|(?::|v-bind:)interactive\\s*=\\s*(["'])\\s*true\\s*\\2)`,
+      ),
+    ],
+    fileExtensions: ['.vue'],
+  },
+  {
     id: 'scrollbar-always',
     name: 'Scrollbar :never → :always',
     description: 'v-dt-scrollbar:never renamed to v-dt-scrollbar:always.',

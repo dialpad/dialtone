@@ -19,7 +19,7 @@ Previously, every `<dt-chip>` without an explicit `interactive` prop rendered as
 | Default `interactive` | `true` | `false` |
 | Hover/focus/active styles | Present by default | Only when `:interactive="true"` |
 
-The close button on chips is **unaffected** — it always renders as a `<button>` regardless of `interactive`.
+The close button renders only when both `interactive` and `showClose` are enabled — see [Close Button](#close-button).
 
 ## Migration
 
@@ -53,9 +53,9 @@ For chips flagged in warnings, decide:
 
 ## Close Button
 
-The close button (`showClose`) is not affected by this change. A chip with `showClose` and `interactive` both at their defaults renders the chip body as a `<span>` and the close button as a `<button>`.
+The close button renders only when both `interactive` and `showClose` are enabled, and `showClose` defaults to `false`. A chip with both at their defaults renders the chip body as a `<span>` and no close button.
 
 ```html
-<!-- Close button always renders as <button> regardless of interactive -->
-<dt-chip @close="onRemove">Label</dt-chip>
+<!-- Close button renders as <button> only with interactive and show-close -->
+<dt-chip interactive show-close @close="onRemove">Label</dt-chip>
 ```

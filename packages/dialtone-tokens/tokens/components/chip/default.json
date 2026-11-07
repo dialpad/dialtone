@@ -1,0 +1,90 @@
+{
+  "chip": {
+    "size": {
+      "100": {
+        "block-size": {
+          "value": "22px",
+          "type": "dimension",
+          "description": "Chip block size (aka height) at size 100"
+        },
+        "line-height": {
+          "value": "18px",
+          "type": "dimension",
+          "description": "Chip label line height at size 100"
+        }
+      },
+      "200": {
+        "block-size": {
+          "value": "24px",
+          "type": "dimension",
+          "description": "Chip block size (aka height) at size 200"
+        },
+        "line-height": {
+          "value": "20px",
+          "type": "dimension",
+          "description": "Chip label line height at size 200"
+        }
+      },
+      "300": {
+        "block-size": {
+          "value": "26px",
+          "type": "dimension",
+          "description": "Chip block size (aka height) at size 300, the default"
+        },
+        "line-height": {
+          "value": "22px",
+          "type": "dimension",
+          "description": "Chip label line height at size 300, the default"
+        }
+      },
+      "400": {
+        "block-size": {
+          "value": "28px",
+          "type": "dimension",
+          "description": "Chip block size (aka height) at size 400"
+        },
+        "line-height": {
+          "value": "24px",
+          "type": "dimension",
+          "description": "Chip label line height at size 400"
+        }
+      },
+      "500": {
+        "block-size": {
+          "value": "30px",
+          "type": "dimension",
+          "description": "Chip block size (aka height) at size 500"
+        },
+        "line-height": {
+          "value": "28px",
+          "type": "dimension",
+          "description": "Chip label line height at size 500"
+        }
+      },
+      "600": {
+        "block-size": {
+          "value": "32px",
+          "type": "dimension",
+          "description": "Chip block size (aka height) at size 600"
+        },
+        "line-height": {
+          "value": "32px",
+          "type": "dimension",
+          "description": "Chip label line height at size 600"
+        }
+      },
+      "700": {
+        "block-size": {
+          "value": "36px",
+          "type": "dimension",
+          "description": "Chip block size (aka height) at size 700"
+        },
+        "line-height": {
+          "value": "36px",
+          "type": "dimension",
+          "description": "Chip label line height at size 700"
+        }
+      }
+    }
+  }
+}
