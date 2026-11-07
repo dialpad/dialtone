@@ -16,7 +16,7 @@
         "command": "gulp"
       },
       "inputs": [
-        "{workspaceRoot}/packages/dialtone-css/dist",
+        { "dependentTasksOutputFiles": "packages/dialtone-css/lib/dist/**", "transitive": false },
         "{workspaceRoot}/packages/dialtone-tokens/dist",
         "{workspaceRoot}/packages/dialtone-vue/dist",
         "{workspaceRoot}/entry",
