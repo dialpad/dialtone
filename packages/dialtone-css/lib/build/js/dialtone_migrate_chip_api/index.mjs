@@ -220,7 +220,8 @@ function transformChips (content, warnings, filePath, activeClassInFile) {
     if (isChip) text = transformChipOpenTag(text, warnings, filePath, activeClassInFile);
     if (text !== tag) edits.push({ start, end: start + tag.length, text });
 
-    if (!selfClosing && !VOID_ELEMENTS.has(name.toLowerCase())) {
+    // Only the lowercase HTML tags are void. <Input> or <Link> is a component, which has children.
+    if (!selfClosing && !VOID_ELEMENTS.has(name)) {
       stack.push({ name, chip: isChip ? { renamed: false, icon: false, avatar: false, conflict: false } : null });
     }
   }

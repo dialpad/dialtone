@@ -136,6 +136,26 @@ describe('dialtone-migrate-chip-api', () => {
 
     assert.equal(run(input), input);
   });
+  it('does not rename slots of a PascalCase component named like a void HTML element', () => {
+    const input = [
+      '<dt-chip size="300">',
+      '  <Input>',
+      '    <template #icon>Input icon</template>',
+      '  </Input>',
+      '  <Link>',
+      '    <template #avatar>Link avatar</template>',
+      '  </Link>',
+      '  <template #icon>Chip icon</template>',
+      '  Chip',
+      '</dt-chip>',
+    ].join('\n');
+    const output = run(input);
+
+    assert.ok(output.includes('<template #icon>Input icon</template>'));
+    assert.ok(output.includes('<template #avatar>Link avatar</template>'));
+    assert.ok(output.includes('<template #startIcon>Chip icon</template>'));
+  });
+
   it('does not rename slots of a component nested in the avatar slot', () => {
     const input = [
       '<dt-chip size="300">',
