@@ -1,0 +1,19 @@
+packages/dialtone-vue/scripts/test-a11y.sh
+  s_800d8779d0019d::t_100e7065d17891 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b64d397398bfd9fd3582520fdb57cac1e499d900",
+  "prompts": {},
+  "sessions": {
+    "s_800d8779d0019d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a7e2-48a7-7b43-8080-6cf045ab6f68",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+pnpm-lock.yaml
+  h_65afbd07a56b87 1475,1479,1481,1483-1485,1488,1492,1498
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0a2719f5d375caea23770297b43de699b5f5d5a1",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

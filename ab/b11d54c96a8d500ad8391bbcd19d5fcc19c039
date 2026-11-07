@@ -1,0 +1,89 @@
+apps/dialtone-documentation/docs/components/input.md
+  s_7f1d1d64baa803::t_e676346ad65adb 4,89
+packages/dialtone-vue/components/Dropdown/DropdownVariants.story.vue
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 18,53,110,167
+  s_7f1d1d64baa803::t_9eea9a12a6436e 19-23,60-62,117-119,168-172
+  s_7f1d1d64baa803::t_5f0a35e9a133d5 214
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_615f40a55cd43a 6
+  s_7f1d1d64baa803::t_caaa43abbe5270 54
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 252
+  s_7f1d1d64baa803::t_458736088cf6ed 251
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 26,29-32
+  s_7f1d1d64baa803::t_9eea9a12a6436e 27-28
+packages/dialtone-vue/release-ci.config.cjs
+  s_7f1d1d64baa803::t_131d847364efc4 15
+packages/dialtone-vue/components/Dropdown/DropdownDefault.story.vue
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 19
+  s_7f1d1d64baa803::t_9eea9a12a6436e 26-28
+scripts/build-dialtone-vue-docs.mjs
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 5,76
+packages/dialtone-docs/src/content/development/development-component-workflow.md
+  s_7f1d1d64baa803::t_5b69f562a2e126 6,54,136,156-158
+  s_7f1d1d64baa803::t_1971ba0c7d130f 173-174
+  s_7f1d1d64baa803::t_68d140ae31b015 167
+  s_7f1d1d64baa803::t_1bbacc149f1793 159-166,168-172
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 27,41,54,119,134
+  s_7f1d1d64baa803::t_5f0a35e9a133d5 107
+  s_7f1d1d64baa803::t_9eea9a12a6436e 18,28-32,55-59,103,135-142
+scripts/lib/vue-slot-bindings.mjs
+  s_7f1d1d64baa803::t_edb67ebe6cb054 3,11-17,19
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 1-2,18,20-25
+  s_7f1d1d64baa803::t_9e411191a81888 4-10
+scripts/tests/vue-slot-bindings.test.mjs
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 4,24
+  s_7f1d1d64baa803::t_f6c88da8708c0e 26
+  s_7f1d1d64baa803::t_6cb0bb7c4914a0 1-3,5-12,14-22,25,27-29
+  s_7f1d1d64baa803::t_d9213576d04c0a 13,23
+.github/workflows/a11y_tests.yml
+  s_7f1d1d64baa803::t_271265af394b19 29
+packages/combinator/src/variants/variants_dropdown.js
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 3-7,16-18,44-46
+packages/combinator/src/components/code_editor/code_editor.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 32-33,166-168,206-209,243-244
+  s_7f1d1d64baa803::t_b566d4c1610958 217-220
+packages/combinator/src/lib/code_copy.js
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 6-13,71-72
+packages/combinator/src/components/renderer/renderer.test.js
+  s_7f1d1d64baa803::t_a57b0372b0381f 54-55
+  s_7f1d1d64baa803::t_bc5784e8690c63 1,3,5,30-53,56-84
+  s_7f1d1d64baa803::t_b61bf784b165cb 85
+packages/combinator/src/components/renderer/renderer.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 19
+packages/combinator/src/components/tools/node.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 19-22,27-29
+packages/combinator/.github/documentation/internal/RENDERER.md
+  s_7f1d1d64baa803::t_f39fd5b1de084d 44-47
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_7f1d1d64baa803::t_a3d324d0811d87 2,14-20,29,125,127-129
+packages/combinator/src/components/code_editor/code_editor_slot.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 40,64-67,77
+packages/combinator/.github/documentation/internal/CODE_PANEL.md
+  s_7f1d1d64baa803::t_f39fd5b1de084d 56,58-77,86-87
+  s_7f1d1d64baa803::t_56dadfe3d53cb3 57
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_7f1d1d64baa803::t_bc5784e8690c63 141-153,159-164,170-172,185
+  s_7f1d1d64baa803::t_27b30d9e35fb7d 178-184,187-190,196
+  s_7f1d1d64baa803::t_71f9f29c8a8cb5 2,154-158,165-169,191-195
+packages/combinator/src/components/renderer/renderer_spec_sheet_cell.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "abb11d54c96a8d500ad8391bbcd19d5fcc19c039",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
