@@ -31,6 +31,15 @@ export default {
   // The outer `display: block` frame is a vertical auto-layout, not coordinates (see the builder).
   blockLayout: true,
 
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Banner/Banner.vue',
+    slots: [{ figma: 'Action (Slot)', vue: 'action', when: { 'Show Action': true } }],
+    // Show Action decides whether the action slot holds anything; the prop stays true.
+    skipProps: ['showAction'],
+  },
+
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of
     // its own and therefore renders the default notice surface — still a distinct

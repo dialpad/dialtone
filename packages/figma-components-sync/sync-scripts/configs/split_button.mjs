@@ -16,6 +16,10 @@ export default {
   snapTokens: true,
   // `.d-split-btn` is `align-items: stretch`: the end half fills the start half's height.
   flexLayout: true,
+  // How the set reads in Dev Mode (see code-connect.mjs).
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/SplitButton/SplitButton.vue',
+  },
   axes: {
     kind: ['default', 'muted', 'critical', 'positive'],
     importance: ['clear', 'outlined', 'primary'],

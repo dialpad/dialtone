@@ -32,6 +32,16 @@ export default {
   // fills the row instead of being pinned at the width the harness measured.
   flexLayout: true,
 
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Input/Input.vue',
+    slots: [
+      { figma: 'Start Icon (Slot)', vue: 'startIcon', when: { 'Start Icon': true } },
+      { figma: 'End Icon (Slot)', vue: 'endIcon', when: { 'End Icon': true } },
+    ],
+  },
+
   axes: {
     size: [100, 200, 300, 400, 500],
     // Reachable combinations only; see `invalid`.

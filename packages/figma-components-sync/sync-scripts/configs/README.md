@@ -55,6 +55,15 @@ The same flag holds a negative inline margin as an overhang: the frame is the bo
 and its one child hangs over the outer edge (Button's icons, `-2px`), so the icon states match the
 code. The checks fold the built shape back into the DOM's flat one (`edge-slots.mjs`) and check the
 structure separately. Used by DtButton.
+`codeConnect` is what `props()` cannot say about how the set reads in Dev Mode, and `code-connect.mjs`
+generates the set's Code Connect template from it. `source` is the Vue file; `always` lists attributes
+written for every variant (`circle`, `link`, `type="textarea"`); `icons` lists icon slots as
+`{ vue, swap, toggle?, when? }` (the slot's Vue name, the Figma instance-swap property, a boolean
+visibility property, and an axis condition such as `{ 'Block Icon': 'blockStart' }`); `slots` lists native
+slots as `{ figma, vue, when }` where `when` is `'always'`, `'content'` (only if something was dropped in) or an
+axis condition; `label: false` for a component with no text content; `selfClosing`; and `skipProps` for a prop an
+axis does not really own (Notice's `showAction`). The attribute for each axis value is derived from `props()`:
+what differs from the code's default variant is written, so a new axis value needs no change here.
 `containerClass` (a string or a function of the combo) is the surface the component is mounted on,
 outside the measured tree, for variants that only make sense on one (links for dark backgrounds).
 

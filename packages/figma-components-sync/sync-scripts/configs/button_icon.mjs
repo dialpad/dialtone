@@ -14,6 +14,12 @@ export default {
   component: 'DtButton', label: '', page: 'ButtonIcon', family: 'Buttons',
   // Computed spacing at the nearest token; the circle's 50% radius is the pill token (token-snap.mjs).
   snapTokens: true,
+  // How the set reads in Dev Mode (see code-connect.mjs).
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Button/Button.vue',
+    always: ['circle'],
+    icons: [{ vue: 'startIcon', swap: 'Start Icon Choice' }],
+  },
   axes: {
     // No `inverted`: DtButton deprecates it in favour of the v-dt-mode directive.
     kind: ['default', 'muted', 'critical', 'positive'],

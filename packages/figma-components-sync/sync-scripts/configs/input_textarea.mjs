@@ -16,6 +16,14 @@ export default {
   // to: snapping moved 40 to 48 and made the control 8px too tall. It is left exact.
   noSnap: ['minHeight'],
 
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Input/Input.vue',
+    always: ['type="textarea"'],
+    selfClosing: true,
+  },
+
   axes: {
     size: [100, 200, 300, 400, 500],
     state: ['default', 'hover', 'focus', 'disabled'],

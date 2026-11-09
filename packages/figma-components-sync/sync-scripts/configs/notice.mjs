@@ -34,6 +34,15 @@ export default {
   // `max-inline-size` instead of being pinned at the width the harness measured.
   flexLayout: true,
 
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Notice/Notice.vue',
+    slots: [{ figma: 'Action (Slot)', vue: 'action', when: { 'Show Action': true } }],
+    // Show Action decides whether the action slot holds anything; the prop stays true.
+    skipProps: ['showAction'],
+  },
+
   axes: {
     // Each kind repaints the surface AND swaps the default icon glyph
     // (bell / alert-circle / info / check-circle / alert-triangle).
