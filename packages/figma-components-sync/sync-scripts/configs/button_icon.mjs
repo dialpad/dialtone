@@ -11,7 +11,7 @@
 import { loaderSwap } from '../loader-swap.mjs';
 
 export default {
-  component: 'DtButton', label: '', page: 'ButtonIcon',
+  component: 'DtButton', label: '', page: 'ButtonIcon', family: 'Buttons',
   // Computed spacing at the nearest token; the circle's 50% radius is the pill token (token-snap.mjs).
   snapTokens: true,
   axes: {

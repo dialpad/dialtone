@@ -25,7 +25,7 @@ const actionKind = () => 'muted';
 export default {
   component: 'DtNotice',
   label: 'Notice',
-  page: 'Notice',
+  page: 'Notice', family: 'Feedback',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
 

@@ -8,7 +8,7 @@
  * the control, is the state target.
  */
 export default {
-  component: 'DtInput', label: '', page: 'InputTextarea',
+  component: 'DtInput', label: '', page: 'InputTextarea', family: 'Text fields',
   snapTokens: true,
   flexLayout: true,
   // `min-block-size` is 40 at size 100 (`calc(layout-75 - spacing-100)`, no token) and a spacing or

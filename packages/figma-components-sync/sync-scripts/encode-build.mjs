@@ -17,7 +17,7 @@ import 'dotenv/config';
 import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { COMPONENTS } from './component-axes.mjs';
-import { buildPage } from './figma-mapping.mjs';
+import { buildPage, buildFamilyPage } from './figma-mapping.mjs';
 import { snapPayload, SNAP_TOKEN_NAMES, PILL, TEXT_TOKEN_NAMES, textTokenPayload } from './token-snap.mjs';
 
 const which = process.argv[2];
@@ -586,12 +586,18 @@ const rowNames = spec.variants.map(v => v.name);
 const nativeSlots = cfg.nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
-const payload = { component: spec.component, page: spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, nativeSlots, flexLayout: flexLayoutOn,
+const payload = { component: spec.component, page: spec.page, family: spec.family || spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, nativeSlots, flexLayout: flexLayoutOn,
   // The target's file owns the Dialtone collection: the synthesised colours are created in it, hidden.
   homeCollection: TARGET.homeCollection,
   // The pages this build may clear and rebuild: its own components' and the icons'. Nothing else.
   // A `<name>-merged` trial lands on its own `<page> Merged` page (see buildPage), which is owned too.
-  ownedPages: [...new Set([...Object.values(COMPONENTS).map(c => c.page), ...(cfg.page ? [buildPage(cfg, /-merged$/.test(which))] : []), 'Icons'])],
+  // Both a set's family page and its old one-set page: a rebuild moves a set from the second to the
+  // first, and may only remove it from a page it owns. `familyPages` are the ones that stay.
+  ownedPages: [...new Set([
+    ...Object.values(COMPONENTS).flatMap(c => [c.page, c.family || c.page]),
+    ...(cfg.page ? [buildPage(cfg, /-merged$/.test(which)), buildFamilyPage(cfg, /-merged$/.test(which))] : []), 'Icons'])],
+  familyPages: [...new Set([...Object.values(COMPONENTS).map(c => c.family || c.page),
+    ...(cfg.page ? [buildFamilyPage(cfg, /-merged$/.test(which))] : [])])],
   // `blockLayout`: a block that only stacks its children is a vertical auto-layout (see the builder).
   blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload(cfg.noSnap || []) : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).

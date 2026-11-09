@@ -12,7 +12,7 @@
  * hidden by a consumer.
  */
 export default {
-  component: 'DtSplitButton', label: 'Place call', page: 'SplitButton',
+  component: 'DtSplitButton', label: 'Place call', page: 'SplitButton', family: 'Buttons',
   snapTokens: true,
   // `.d-split-btn` is `align-items: stretch`: the end half fills the start half's height.
   flexLayout: true,

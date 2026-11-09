@@ -99,6 +99,7 @@ for (const name of names) {
     const body = JSON.stringify(p);
     writeFileSync(`${SHARD_DIR}/${file}`, body);
     entry.page = p.page;
+    entry.family = p.family || p.page;
     if (p.defaultVariant) entry.defaultVariant = p.defaultVariant;
     for (const n of p.nodes) { if (n.sl) slotKeys.add(n.sl); if (n.sw) slotKeys.add(n.sw); }
     // A CONTENT FINGERPRINT per shard. The pipeline already refuses a spec older than
@@ -114,7 +115,7 @@ for (const name of names) {
   entry.variants = offset;
   entry.description = describeSet(name, entry.page, slotKeys);
   manifest.push(entry);
-  console.log(`${name.padEnd(9)} page=${entry.page.padEnd(9)} ${offset} variants in ${shards} shard(s)`);
+  console.log(`${name.padEnd(9)} page=${entry.family.padEnd(11)} ${offset} variants in ${shards} shard(s)`);
 }
 // The BUILDER's own fingerprint, alongside the payloads'. What lands on the canvas is a
 // function of both, and the payload hash alone said "no rebuild needed" for three
@@ -340,7 +341,7 @@ async function main () {
 
     // Combine into one variant set. Names come from the "prop=value, …" component
     // names the builder writes, so the axis names carry over untouched.
-    const page = figma.root.children.find(p => p.name === comp.page);
+    const page = figma.root.children.find(p => p.name === (comp.family || comp.page));
     await figma.setCurrentPageAsync(page);
     const loose = page.children.filter(c => c.type === 'COMPONENT');
     /**
@@ -355,8 +356,8 @@ async function main () {
      * builder's own (40px gap, 2600px rows, each row as tall as its tallest variant).
      */
     const wantDefault = loose.find(c => c.name === comp.defaultVariant);
-    if (wantDefault) {
-      const flow = [wantDefault].concat(loose.filter(c => c !== wantDefault));
+    {
+      const flow = wantDefault ? [wantDefault].concat(loose.filter(c => c !== wantDefault)) : loose;
       let fx = 0, fy = 0, rh = 0;
       for (const c of flow) {
         const w = Math.ceil(c.width), h = Math.ceil(c.height);
@@ -388,7 +389,17 @@ async function main () {
         try { defaultVariant = set.defaultVariant ? set.defaultVariant.name : null; } catch (e) { defaultVariant = null; }
         defaultVariantRead = defaultVariant;
       }
-      set.x = 0; set.y = 0;
+      /**
+       * SETS SHARE A PAGE, SO THEY ARE STACKED, in name order, one under the other. The page is
+       * re-stacked on every build, because a rebuilt set is a new node at the end of the page: the
+       * order is the same whatever order the sets were built in.
+       */
+      {
+        const sets = page.children.filter(c => c.type === 'COMPONENT_SET');
+        sets.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+        let sy = 0;
+        for (const st of sets) { st.x = 0; st.y = sy; sy += Math.ceil(st.height) + 200; }
+      }
       setId = set.id; variants = set.children.length;
       spreadAfterCombine = spreadsOf(firstWithEffects(set.children));
       // Reporting the property names is a nicety; it must never be able to end the run.

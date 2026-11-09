@@ -4,6 +4,12 @@ One file per component, default-exporting its config. Discovered automatically b
 `component-axes.mjs`, so parallel agents never edit a shared file.
 
 Required: `component` (the Dt* name), `label`, `page`, `axes`, `variantName`, `props`.
+`page` names the set (`DtButtonLink`); `family` is the Figma page it lives on, shared with the related
+sets ("Buttons", "Text fields", "Selection controls", "Menus & pickers", "Navigation", "Feedback",
+"Overlays", "Identity & status", "Content", "Layout"). The Assets panel lists a library by page, so a
+page per set put an extra click between the panel and every component. A config with no `family`
+keeps a page of its own, named by `page`. A build replaces only its own set on the page, stacks the
+page's sets by name, and removes the same set from an older one-set page, deleting that page once it is empty.
 Optional: `invalid` (combos that cannot exist; leave it out when every combination is reachable), `pseudo`, `stateTarget`, `slots`, `slotPass`, `slotInvalid`, `slotContent`,
 `slotDefaults`, `nativeSlots`, `textProps`, `textStyles`, `snapTokens`, `noSnap`, `flexLayout`, `blockLayout`,
 `edgeSlots`, `rootClass`, `containerClass`, `effectiveDefaults`.

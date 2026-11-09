@@ -1383,31 +1383,50 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   }
   
   // ─── assemble ───────────────────────────────────────────────────────────────
-  let page = figma.root.children.find(p => p.name === D.page);
-  if (!page) { page = figma.createPage(); page.name = D.page; }
+  // The page is the set's FAMILY (several related sets share one); a payload without one keeps the
+  // page of its own that it always had.
+  const PAGE_NAME = D.family || D.page;
+  let page = figma.root.children.find(p => p.name === PAGE_NAME);
+  if (!page) { page = figma.createPage(); page.name = PAGE_NAME; }
   await figma.setCurrentPageAsync(page);
   // CLEAR and SLICE_START are deliberately SEPARATE. Overloading SLICE_START to mean
   // "this is not the first shard" also skipped that shard's first row, silently losing
   // one variant per shard.
   if (CLEAR) {
     /**
-     * A BUILD REBUILDS ITS OWN PAGES AND NOTHING ELSE.
+     * A BUILD REPLACES ITS OWN SET AND NOTHING ELSE.
      *
      * Clearing is what makes a rebuild idempotent, and in a file that owns the tokens it is also the
      * way to destroy something somebody made by hand. So the page must be one this build owns, and
      * it must hold only what a build puts there (component sets); anything else is somebody's work,
      * and the build stops instead of deleting it.
+     *
+     * A page is shared by a family of sets now, so what goes is THIS set's previous build (the set
+     * named for it, and any loose components an earlier run left behind), not the page's contents.
+     * The same set on an older one-set page is removed too, and that page with it once it is empty,
+     * so moving to families leaves no duplicate and no stray page. A page that still holds anything
+     * else is left alone.
      */
-    if (D.ownedPages && !D.ownedPages.includes(D.page)) {
-      throw new Error(`page "${D.page}" is not one this build owns (${D.ownedPages.join(', ')})`);
+    if (D.ownedPages && !D.ownedPages.includes(PAGE_NAME)) {
+      throw new Error(`page "${PAGE_NAME}" is not one this build owns (${D.ownedPages.join(', ')})`);
     }
     const foreign = page.children.filter(c => c.type !== 'COMPONENT_SET' && c.type !== 'COMPONENT');
     if (foreign.length) {
-      throw new Error(`page "${D.page}" holds ${foreign.length} node(s) a build did not make `
+      throw new Error(`page "${PAGE_NAME}" holds ${foreign.length} node(s) a build did not make `
         + `(${[...new Set(foreign.map(c => c.type))].join(', ')}): "${foreign.slice(0, 3).map(c => c.name).join('", "')}". `
         + 'Move or remove them, or rename the component page, before building here.');
     }
-    for (const c of [...page.children]) c.remove();
+    const SET_NAME = 'Dt' + D.page;
+    for (const c of [...page.children]) {
+      if (c.type === 'COMPONENT' || (c.type === 'COMPONENT_SET' && c.name === SET_NAME)) c.remove();
+    }
+    const keep = new Set([PAGE_NAME, 'Icons', ...(D.familyPages || [])]);
+    for (const p of [...figma.root.children]) {
+      if (p === page || keep.has(p.name) || !(D.ownedPages || []).includes(p.name)) continue;
+      if (p.loadAsync) await p.loadAsync();
+      for (const c of [...p.children]) if (c.type === 'COMPONENT_SET' && c.name === SET_NAME) c.remove();
+      if (!p.children.length) p.remove();
+    }
   }
 
   // Where this shard's flow starts. Measured from what is ALREADY on the page, before

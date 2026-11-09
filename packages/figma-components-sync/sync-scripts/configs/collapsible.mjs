@@ -16,7 +16,7 @@
  * inside it is a DtButton, which sweeps all five states in its own set.
  */
 export default {
-  component: 'DtCollapsible', label: 'Content', page: 'Collapsible',
+  component: 'DtCollapsible', label: 'Content', page: 'Collapsible', family: 'Layout',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
   // Its `display: block` wrappers are vertical auto-layouts, not coordinates (see the builder).

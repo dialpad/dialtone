@@ -25,7 +25,7 @@
  * validation value here.
  */
 export default {
-  component: 'DtInput', label: '', page: 'Input',
+  component: 'DtInput', label: '', page: 'Input', family: 'Text fields',
   // Computed padding and radius at the nearest token (token-snap.mjs).
   snapTokens: true,
   // The wrapper is `display: inline-flex; inline-size: 100%` with the control at `flex: 1`: it

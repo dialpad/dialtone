@@ -8,7 +8,7 @@ import { loaderSwap } from './loader-swap.mjs';
 
 const BUILT_IN = {
   button: {
-    component: 'DtButton', label: 'Button', page: 'Button',
+    component: 'DtButton', label: 'Button', page: 'Button', family: 'Buttons',
     // Computed spacing (padding = token minus the border, gap = half the padding) is built at the
     // nearest token and bound to it; see token-snap.mjs.
     snapTokens: true,

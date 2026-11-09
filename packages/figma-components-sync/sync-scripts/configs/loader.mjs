@@ -13,7 +13,7 @@
  * No `state` axis: loader.less declares no :hover, :focus or :active rule. It is not a control.
  */
 export default {
-  component: 'DtLoader', label: '', page: 'Loader',
+  component: 'DtLoader', label: '', page: 'Loader', family: 'Feedback',
 
   axes: {
     // The full ICON_SIZE_MODIFIERS scale, which is what the prop validates against.

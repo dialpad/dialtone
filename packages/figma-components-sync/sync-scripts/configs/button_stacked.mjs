@@ -15,7 +15,7 @@
  * documented case. DtButton and DtButtonIcon cover loading.
  */
 export default {
-  component: 'DtButton', label: 'Button', page: 'ButtonStacked',
+  component: 'DtButton', label: 'Button', page: 'ButtonStacked', family: 'Buttons',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
   axes: {
