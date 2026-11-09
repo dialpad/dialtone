@@ -26,6 +26,7 @@ export async function mountDocsCombinator (query = { preset: 'image', other: 'ke
       plugins: [router],
       components: { DtcCombinator },
       stubs: { DtcCombinator: false, teleport: false },
+      directives: { 'dt-scrollbar': {}, 'dt-focustrap': {} },
       provide: {
         dialtoneComponents: { DtAvatar, DtButton },
         dialtoneComponentsDocumentation: allDocs,
