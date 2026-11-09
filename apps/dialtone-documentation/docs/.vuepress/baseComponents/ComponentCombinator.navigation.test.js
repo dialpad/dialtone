@@ -150,14 +150,95 @@ it('keeps a pending preset when a TOC push uses the previously committed query',
   expect(combinator.vm.selectedVariant).toBe('image');
 });
 
-it('restores a preset on a legacy native-anchor pop with an empty direction', async () => {
+it.each([
+  'preset selection',
+  'custom edit',
+  'custom edit with repeated preset values',
+])('keeps a pending %s aligned with hash-only Back navigation', async action => {
+  const isEdit = action !== 'preset selection';
+  const hasRepeatedPreset = action === 'custom edit with repeated preset values';
+  const query = { other: 'keep', filter: ['a', 'b'], flag: null };
+  if (isEdit) query.preset = hasRepeatedPreset ? ['image', 'default'] : 'image';
+  await mountDocs(query);
+  await router.push({ query, hash: '#props' });
+  await settle();
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  let entered;
+  const waiting = new Promise(resolve => { entered = resolve; });
+  let heldOnce = false;
+  const stop = router.beforeEach(async to => {
+    const matchesWrite = isEdit ? !to.query.preset : to.query.preset === 'image';
+    if (matchesWrite && !heldOnce) { heldOnce = true; entered(); await held; }
+  });
+  try {
+    if (isEdit) combinator.vm.onComponentEvent('update:fullName', 'Pending custom edit');
+    else combinator.vm.updateVariant('image');
+    await waiting;
+    const backFinished = new Promise(resolve => {
+      const stopAfter = router.afterEach((to, from, failure) => {
+        if (!failure && to.hash === '#usage') { stopAfter(); resolve(); }
+      });
+    });
+    router.back();
+    await backFinished;
+    release();
+    await settle();
+    const expectedQuery = { other: 'keep', filter: ['a', 'b'], flag: null };
+    if (!isEdit) expectedQuery.preset = 'image';
+    expect(router.currentRoute.value.query).toEqual(expectedQuery);
+    expect(router.currentRoute.value.hash).toBe('#usage');
+    expect(combinator.vm.selectedVariant).toBe(isEdit ? '' : 'image');
+    const options = combinator.findComponent({ name: 'DtcRenderer' }).props('options');
+    expect(options.props.fullName).toBe(isEdit ? 'Pending custom edit' : 'Daniel Parker');
+    if (!hasRepeatedPreset) expect(options.props.imageSrc).toBe('/assets/images/person.png');
+  } finally {
+    release();
+    stop();
+  }
+});
+
+it('applies a different preset on Back instead of carrying a pending selection into it', async () => {
+  await mountDocs({ preset: 'with-presence', other: 'keep' });
+  await router.push({ query: { preset: 'image', other: 'keep' }, hash: '#props' });
+  await settle();
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  let entered;
+  const waiting = new Promise(resolve => { entered = resolve; });
+  const stop = router.beforeEach(async to => {
+    if (to.query.preset === 'icon-avatar') { entered(); await held; }
+  });
+  try {
+    combinator.vm.updateVariant('icon avatar');
+    await waiting;
+    const backFinished = new Promise(resolve => {
+      const stopAfter = router.afterEach((to, from, failure) => {
+        if (!failure && to.query.preset === 'with-presence') { stopAfter(); resolve(); }
+      });
+    });
+    router.back();
+    await backFinished;
+    release();
+    await settle();
+    expect(router.currentRoute.value.query).toEqual({ preset: 'with-presence', other: 'keep' });
+    expect(router.currentRoute.value.hash).toBe('#usage');
+    expect(combinator.vm.selectedVariant).toBe('with presence');
+  } finally {
+    release();
+    stop();
+  }
+});
+
+it('preserves custom edits on a legacy native-anchor pop with an empty direction', async () => {
   await mountDocs({});
   combinator.vm.onComponentEvent('update:fullName', 'Edited Name');
   await settle();
   wrapper.vm.onHistoryNavigation('/components/avatar.html#props', '', { type: 'pop', direction: '' });
   await router.push('/components/avatar.html#props');
   await settle();
-  expect(combinator.vm.selectedVariant).toBe('default');
+  expect(combinator.vm.selectedVariant).toBe('');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Edited Name');
 });
 
 it('does not invoke document scrolling for a hash-less preset write', async () => {

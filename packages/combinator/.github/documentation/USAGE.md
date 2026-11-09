@@ -155,7 +155,12 @@ query while preserving other query values and the current browser hash.
 Choosing `default` removes only the `preset` parameter instead of writing
 `preset=default`; other query parameters and the hash remain intact.
 Custom edits remove the preset query; they are not serialized into the URL.
-Missing or invalid queries load `default`, and slug matching ignores case.
+Within the same page, navigation that leaves the `preset` query unchanged keeps
+the current edits. This includes hash-only or unrelated-query changes and
+Back/Forward between identical URLs. Page or `preset` query changes apply
+URL-defined state; reloading also initializes from the URL.
+Missing or invalid preset values resolve to `default`, and slug matching ignores
+case.
 Empty or colliding slugs receive a deterministic suffix so links remain unique.
 Appending a colliding name preserves the first declared preset's clean link.
 The docs authoring tests reject fallback slugs in shipped preset banks; choose

@@ -22,6 +22,16 @@ function getNavigationOrigin (route) {
   return route?.redirectedFrom ?? route;
 }
 
+function hasSamePresetQuery (to, from) {
+  const first = to.query.preset;
+  const second = from.query.preset;
+  if (first === second) return true;
+  // Repeated query values are arrays recreated for each navigation.
+  return Array.isArray(first) && Array.isArray(second)
+    && first.length === second.length
+    && first.every((value, index) => value === second[index]);
+}
+
 export default {
   name: 'ComponentCombinator',
 
@@ -105,12 +115,12 @@ export default {
         if (!isPop && to.fullPath === this.pendingPresetNavigation?.fullPath) {
           suppressRouteHashScroll(to);
         } else {
-          const keepsPreset = to.path === this.$route.path && to.query.preset === this.$route.query.preset;
-          if (!isPop && this.pendingPresetNavigation && keepsPreset) {
-            // A TOC/query push can cancel our replacement while still carrying its old query.
+          const keepsPreset = to.path === this.$route.path && hasSamePresetQuery(to, this.$route);
+          if (this.pendingPresetNavigation && keepsPreset) {
+            // Same-preset navigation can cancel our replacement while carrying its old query.
             this.deferredPreset = { preset: this.preset, path: this.$route.path };
           }
-          this.externalNavigation = markRaw({ route: to, isPop });
+          this.externalNavigation = markRaw({ route: to });
         }
       }),
       this.$router.afterEach(this.onPresetNavigationSettled),
@@ -141,17 +151,16 @@ export default {
     onPresetNavigationSettled (to, from, failure) {
       const externalOrigin = getNavigationOrigin(this.externalNavigation?.route);
       if (externalOrigin === getNavigationOrigin(to)) {
-        const { isPop } = this.externalNavigation;
         this.externalNavigation = null;
-        if (!failure) this.applyNavigationPreset(to, from, isPop);
+        if (!failure) this.applyNavigationPreset(to, from);
         this.flushDeferredPreset();
       } else if (!failure && to.fullPath !== this.pendingPresetNavigation?.fullPath) {
-        this.applyNavigationPreset(to, from, false);
+        this.applyNavigationPreset(to, from);
       }
     },
 
-    applyNavigationPreset (to, from, isPop) {
-      if (isPop || to.path !== from.path || to.query.preset !== from.query.preset) this.readPresetRoute(to);
+    applyNavigationPreset (to, from) {
+      if (to.path !== from.path || !hasSamePresetQuery(to, from)) this.readPresetRoute(to);
     },
 
     readPresetRoute (route) {

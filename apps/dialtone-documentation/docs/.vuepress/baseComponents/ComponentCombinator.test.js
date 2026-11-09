@@ -79,13 +79,42 @@ it('preserves a cleared browser hash instead of restoring the stale route hash',
   expect(router.currentRoute.value.hash).toBe('');
 });
 
-it('restores default when Back reaches a duplicate URL without a preset, then handles Forward', async () => {
+it('preserves current custom edits across duplicate-URL Back and Forward navigation', async () => {
   await mountDocs({});
   await router.push({ query: { preset: 'image' }, hash: '#usage' });
   await settle();
   combinator.vm.onComponentEvent('update:fullName', 'Custom Name');
   await settle();
   expect(combinator.vm.selectedVariant).toBe('');
+  const backFinished = new Promise(resolve => {
+    const stop = router.afterEach(() => { stop(); resolve(); });
+  });
+  router.back();
+  await backFinished;
+  await settle();
+  expect(combinator.vm.selectedVariant).toBe('');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Custom Name');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.imageSrc)
+    .toBe('/assets/images/person.png');
+  combinator.vm.onComponentEvent('update:fullName', 'Edited after Back');
+  await settle();
+  const forwardFinished = new Promise(resolve => {
+    const stop = router.afterEach(() => { stop(); resolve(); });
+  });
+  router.forward();
+  await forwardFinished;
+  await settle();
+  expect(combinator.vm.selectedVariant).toBe('');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Edited after Back');
+});
+
+it('applies changed preset URLs on pushes, Back and Forward after custom edits', async () => {
+  await mountDocs();
+  combinator.vm.onComponentEvent('update:fullName', 'Custom Name');
+  await settle();
+  await router.push({ query: { preset: 'with-presence' }, hash: '#usage' });
+  await settle();
+  expect(combinator.vm.selectedVariant).toBe('with presence');
   const backFinished = new Promise(resolve => {
     const stop = router.afterEach(() => { stop(); resolve(); });
   });
@@ -100,19 +129,10 @@ it('restores default when Back reaches a duplicate URL without a preset, then ha
   router.forward();
   await forwardFinished;
   await settle();
-  expect(combinator.vm.selectedVariant).toBe('default');
-});
-
-it('applies a different preset URL after custom edits', async () => {
-  await mountDocs();
-  combinator.vm.onComponentEvent('update:fullName', 'Custom Name');
-  await settle();
-  await router.push({ query: { preset: 'with-presence' }, hash: '#usage' });
-  await settle();
   expect(combinator.vm.selectedVariant).toBe('with presence');
 });
 
-it.each(['hash', 'query'])('preserves custom edits on unrelated same-page %s navigation', async kind => {
+it.each(['hash', 'query'])('preserves custom edits on unrelated same-page %s pushes, Back and Forward', async kind => {
   await mountDocs();
   combinator.vm.onComponentEvent('update:fullName', 'Custom Name');
   await settle();
@@ -124,6 +144,16 @@ it.each(['hash', 'query'])('preserves custom edits on unrelated same-page %s nav
   await settle();
   expect(combinator.vm.selectedVariant).toBe('');
   expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Custom Name');
+  for (const direction of ['back', 'forward']) {
+    const finished = new Promise(resolve => {
+      const stop = router.afterEach(() => { stop(); resolve(); });
+    });
+    router[direction]();
+    await finished;
+    await settle();
+    expect(combinator.vm.selectedVariant).toBe('');
+    expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Custom Name');
+  }
 });
 
 it('does not cancel an external page navigation when a preset is selected', async () => {
@@ -204,6 +234,16 @@ it('resets custom state when the docs host navigates to another component', asyn
   await settle();
   expect(combinator.vm.selectedVariant).toBe('default');
   expect(combinator.props('component')).toBe(DtButton);
+});
+
+it('applies URL state on a page change even when the host component name stays the same', async () => {
+  await mountDocs({});
+  combinator.vm.onComponentEvent('update:fullName', 'Custom Name');
+  await settle();
+  await router.push('/components/avatar-examples.html');
+  await settle();
+  expect(combinator.vm.selectedVariant).toBe('default');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Daniel Parker');
 });
 
 it('updates the URL on spec-sheet selection and returns to single view', async () => {

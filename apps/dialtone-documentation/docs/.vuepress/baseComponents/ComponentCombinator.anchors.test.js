@@ -101,7 +101,7 @@ it('keeps the pre-existing TOC focus behavior when the page has no playground', 
   expect(target.hasAttribute('tabindex')).toBe(false);
 });
 
-it('keeps edits on an anchor click and restores URL-defined state on Back', async () => {
+it('preserves custom edits on an anchor click, Back and Forward', async () => {
   await mountAnchors({});
   combinator.vm.onComponentEvent('update:fullName', 'Edited Name');
   await settle();
@@ -114,7 +114,16 @@ it('keeps edits on an anchor click and restores URL-defined state on Back', asyn
   router.back();
   await finished;
   await settle();
-  expect(combinator.vm.selectedVariant).toBe('default');
+  expect(combinator.vm.selectedVariant).toBe('');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Edited Name');
+  const forwardFinished = new Promise(resolve => {
+    const stop = router.afterEach(() => { stop(); resolve(); });
+  });
+  router.forward();
+  await forwardFinished;
+  await settle();
+  expect(combinator.vm.selectedVariant).toBe('');
+  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Edited Name');
 });
 
 it('keeps an in-flight preset when a repeated stale anchor synchronizes and pushes its hash', async () => {
