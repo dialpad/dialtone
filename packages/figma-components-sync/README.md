@@ -26,7 +26,7 @@ project has already hit once.
 ## Status
 
 Not in CI: it needs a real browser, a Figma desktop session (the plugin can only be launched by
-a person) and write access to a tokens file. Reviewers rely on the check output recorded in the PR.
+a person) and write access to a Figma file to build into. Reviewers rely on the check output recorded in the PR.
 
 Registered so far, built with the current model and checked clean: Button, ButtonIcon, ButtonStacked,
 ButtonLink, Notice, Banner, Collapsible and Loader. More components are added in batches, each with its
@@ -47,8 +47,8 @@ into a chat, a PR or a log.
 | Variable | What |
 | --- | --- |
 | `PERSONAL_ACCESS_TOKEN` | A Figma personal access token that can read files and variables |
-| `PREVIEW_FILE_KEY` | The preview tokens file (target `preview`) |
-| `MAIN_FILE_KEY` | The main tokens file (target `main`) |
+| `PREVIEW_FILE_KEY` | The preview file, "Dialtone 2026 Preview" (target `preview`) |
+| `MAIN_FILE_KEY` | The main file, "Dialtone 2026" (target `main`) |
 
 ## Targets
 
@@ -59,8 +59,8 @@ toggle. Pick the file with `--target preview` or `--target main` on every comman
 
 | Target | File | Notes |
 | --- | --- | --- |
-| `preview` | the preview tokens file, home collection "Dialtone 2026 Preview" | Safe to rebuild; start here |
-| `main` | the main tokens file, home collection "Dialtone 2026" | Asks for `--yes` before it writes |
+| `preview` | the preview file ("Dialtone 2026 Preview"), home collection "Dialtone 2026 Preview" | Safe to rebuild; start here |
+| `main` | the main file ("Dialtone 2026"), home collection "Dialtone 2026" | Asks for `--yes` before it writes |
 
 Each target keeps its own state under `sync-scripts/build-data/<target>/` (component set ids,
 build fingerprints, the icon library), so building into one never touches the other. To point

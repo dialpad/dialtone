@@ -7,7 +7,7 @@ Each variant is measured in light and dark. Button (440 variants), ButtonIcon (3
 Banner, Collapsible, Loader, Input (560), InputTextarea (140) and SplitButton (220) are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
-Not in CI. It needs a browser, a Figma PAT, and a tokens file to build into. Credentials live in
+Not in CI. It needs a browser, a Figma PAT, and a Figma file to build into. Credentials live in
 `packages/figma-components-sync/.env` (`PERSONAL_ACCESS_TOKEN`, `PREVIEW_FILE_KEY`,
 `MAIN_FILE_KEY`), gitignored. Keep it private to your user. See the package README for what each
 one is and for how targets work.
