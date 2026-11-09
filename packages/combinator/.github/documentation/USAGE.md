@@ -159,10 +159,13 @@ Within the same page, navigation that leaves the `preset` query unchanged keeps
 the current edits. This includes hash-only changes, unrelated-query changes,
 and Back/Forward that leaves the `preset` query unchanged. Page or `preset`
 query changes apply URL-defined state; reloading also initializes from the URL.
-For Back/Forward, a pending URL write counts as the current preset state: an edit
+For Back, a pending URL write counts as the current preset state: an edit
 followed by Back to a no-preset entry keeps the edit, while selecting a named
-preset then going Back to a no-preset entry loads `default`. These outcomes are
+preset then going Back to a no-preset entry loads `default`. These Back outcomes are
 the same whether the write is pending or complete.
+A canceled write does not update its original history entry. Forward uses the
+URL actually stored there, so its outcome can depend on whether the earlier
+write completed before Back.
 Missing or invalid preset values resolve to `default`, and slug matching ignores
 case.
 Empty or colliding slugs receive a deterministic suffix so links remain unique.

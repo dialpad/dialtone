@@ -18,11 +18,13 @@ async function mountDocs (query, options) {
 }
 
 it.each([
-  ['custom edit', false],
-  ['custom edit', true],
-  ['preset selection', false],
-  ['preset selection', true],
-])('keeps Back outcomes consistent for a %s (write pending: %s)', async (action, pending) => {
+  ['custom edit', false, '', 'Keep this edit'],
+  ['custom edit', true, 'image', 'Daniel Parker'],
+  ['preset selection', false, 'image', 'Daniel Parker'],
+  ['preset selection', true, 'default', 'Daniel Parker'],
+])('keeps Back outcomes consistent for a %s (write pending: %s)', async (
+  action, pending, forwardPreset, forwardName,
+) => {
   const query = { other: 'keep', filter: ['a', 'b'], flag: null };
   await mountDocs(query);
   await router.push({ query: { ...query, preset: 'image' }, hash: '#usage' });
@@ -60,8 +62,56 @@ it.each([
     const options = combinator.findComponent({ name: 'DtcRenderer' }).props('options');
     expect(options.props.fullName).toBe(isEdit ? 'Keep this edit' : 'Daniel Parker');
     if (isEdit) expect(options.props.imageSrc).toBe('/assets/images/person.png');
+    const forwardFinished = new Promise(resolve => {
+      const stopAfter = router.afterEach((to, from, failure) => {
+        if (!failure) { stopAfter(); resolve(); }
+      });
+    });
+    router.forward();
+    await forwardFinished;
+    await settle();
+    const forwardQuery = { ...query };
+    if (forwardPreset === 'image') forwardQuery.preset = 'image';
+    expect(router.currentRoute.value.query).toEqual(forwardQuery);
+    expect(combinator.vm.selectedVariant).toBe(forwardPreset);
+    const forwardOptions = combinator.findComponent({ name: 'DtcRenderer' }).props('options');
+    expect(forwardOptions.props.fullName).toBe(forwardName);
   } finally {
     release();
+    stop();
+  }
+});
+
+it('keeps a deferred preset when a hash push supersedes a held page navigation', async () => {
+  const query = { other: 'keep', filter: ['a', 'b'], flag: null };
+  await mountDocs(query);
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  let entered;
+  const waiting = new Promise(resolve => { entered = resolve; });
+  const stop = router.beforeEach(async to => {
+    if (to.path === '/components/button.html') { entered(); await held; }
+  });
+  const navigating = router.push('/components/button.html');
+  try {
+    await waiting;
+    combinator.vm.updateVariant('image');
+    await router.push({ query, hash: '#props' });
+    await settle();
+    expect(router.currentRoute.value.query).toEqual({ ...query, preset: 'image' });
+    expect(router.currentRoute.value.hash).toBe('#props');
+    expect(combinator.vm.selectedVariant).toBe('image');
+    expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.imageSrc)
+      .toBe('/assets/images/person.png');
+    release();
+    await navigating;
+    await settle();
+    expect(router.currentRoute.value.path).toBe('/components/avatar.html');
+    expect(router.currentRoute.value.query).toEqual({ ...query, preset: 'image' });
+    expect(combinator.vm.selectedVariant).toBe('image');
+  } finally {
+    release();
+    await navigating;
     stop();
   }
 });
@@ -136,7 +186,7 @@ it('keeps edits when a repeated-preset query push supersedes the pending removal
   }
 });
 
-it('does not replay a pending edit write after Back already reaches its target query', async () => {
+it('retires a canceled edit write before its held guard returns', async () => {
   const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
   await mountDocs({ other: 'keep' }, { scrollBehavior: getPageScrollPosition });
   await router.replace({ query: { other: 'keep' }, hash: '' });
@@ -162,7 +212,6 @@ it('does not replay a pending edit write after Back already reaches its target q
     });
     router.back();
     await finished;
-    release();
     await settle();
     expect(router.currentRoute.value.query).toEqual({ other: 'keep' });
     expect(router.currentRoute.value.hash).toBe('');
@@ -172,6 +221,17 @@ it('does not replay a pending edit write after Back already reaches its target q
     expect(scroll).toHaveBeenCalledTimes(1);
     expect(scroll).toHaveBeenCalledWith({ top: 0 });
     expect(replace).toHaveBeenCalledTimes(1);
+    // Reset while the canceled guard is still held: the URL already represents default.
+    combinator.vm.updateVariant('default');
+    await settle();
+    expect(combinator.vm.selectedVariant).toBe('default');
+    expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Daniel Parker');
+    expect(replace).toHaveBeenCalledTimes(1);
+    expect(scroll).toHaveBeenCalledTimes(1);
+    release();
+    await settle();
+    expect(router.currentRoute.value.query).toEqual({ other: 'keep' });
+    expect(combinator.vm.selectedVariant).toBe('default');
   } finally {
     release();
     stop();
