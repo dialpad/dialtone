@@ -17,6 +17,7 @@ async function mountDocs (query, options) {
   ({ wrapper, router, combinator } = await mountDocsCombinator(query, options));
 }
 
+// A canceled write never updated its entry's stored URL, which determines the Forward expectations.
 it.each([
   ['custom edit', false, '', 'Keep this edit'],
   ['custom edit', true, 'image', 'Daniel Parker'],
@@ -230,6 +231,8 @@ it('retires a canceled edit write before its held guard returns', async () => {
     expect(scroll).toHaveBeenCalledTimes(1);
     release();
     await settle();
+    expect(replace).toHaveBeenCalledTimes(1);
+    expect(scroll).toHaveBeenCalledTimes(1);
     expect(router.currentRoute.value.query).toEqual({ other: 'keep' });
     expect(combinator.vm.selectedVariant).toBe('default');
   } finally {
