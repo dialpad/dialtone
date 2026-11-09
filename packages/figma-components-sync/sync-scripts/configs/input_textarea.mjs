@@ -21,13 +21,13 @@ export default {
     state: ['default', 'hover', 'focus', 'disabled'],
     validation: ['none', 'critical', 'warning', 'positive'],
     showLabel: [true, false],
-    description: [false, true],
+    showDescription: [false, true],
   },
 
   invalid: c => c.state !== 'default' && c.validation !== 'none',
 
   variantName: c => `size=${c.size}, state=${c.state}, validation=${c.validation}, `
-    + `showLabel=${c.showLabel}, description=${c.description}`,
+    + `showLabel=${c.showLabel}, showDescription=${c.showDescription}`,
 
   props: c => ({
     type: 'textarea',
@@ -35,7 +35,7 @@ export default {
     disabled: c.state === 'disabled',
     label: 'Label',
     showLabel: c.showLabel,
-    description: c.description ? 'Description' : '',
+    description: c.showDescription ? 'Description' : '',
     modelValue: 'Value',
     messages: c.validation === 'none' ? [] : [{ message: 'Validation message', type: c.validation }],
   }),

@@ -39,7 +39,7 @@ export default {
     validation: ['none', 'critical', 'warning', 'positive'],
     // Booleans that gate a real child element, kept as axes so both states are swept (B-11).
     showLabel: [true, false],
-    description: [false, true],
+    showDescription: [false, true],
     startIcon: [false, true],
     endIcon: [false, true],
   },
@@ -48,7 +48,7 @@ export default {
   invalid: c => c.state !== 'default' && c.validation !== 'none',
 
   variantName: c => `size=${c.size}, state=${c.state}, validation=${c.validation}, `
-    + `showLabel=${c.showLabel}, description=${c.description}, `
+    + `showLabel=${c.showLabel}, showDescription=${c.showDescription}, `
     + `startIcon=${c.startIcon}, endIcon=${c.endIcon}`,
 
   props: c => ({
@@ -57,7 +57,7 @@ export default {
     disabled: c.state === 'disabled',
     label: 'Label',
     showLabel: c.showLabel,
-    description: c.description ? 'Description' : '',
+    description: c.showDescription ? 'Description' : '',
     modelValue: 'Value',
     // A bare string would read as `critical`; the kind is named so each one is explicit.
     messages: c.validation === 'none' ? [] : [{ message: 'Validation message', type: c.validation }],
