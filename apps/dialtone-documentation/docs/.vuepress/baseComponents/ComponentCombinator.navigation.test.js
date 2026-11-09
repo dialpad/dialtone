@@ -154,7 +154,7 @@ it.each([
   'preset selection',
   'custom edit',
   'custom edit with repeated preset values',
-])('keeps a pending %s aligned with hash-only Back navigation', async action => {
+])('applies Back URL state when it differs from a pending %s', async action => {
   const isEdit = action !== 'preset selection';
   const hasRepeatedPreset = action === 'custom edit with repeated preset values';
   const query = { other: 'keep', filter: ['a', 'b'], flag: null };
@@ -184,14 +184,12 @@ it.each([
     await backFinished;
     release();
     await settle();
-    const expectedQuery = { other: 'keep', filter: ['a', 'b'], flag: null };
-    if (!isEdit) expectedQuery.preset = 'image';
-    expect(router.currentRoute.value.query).toEqual(expectedQuery);
+    expect(router.currentRoute.value.query).toEqual(query);
     expect(router.currentRoute.value.hash).toBe('#usage');
-    expect(combinator.vm.selectedVariant).toBe(isEdit ? '' : 'image');
+    expect(combinator.vm.selectedVariant).toBe(isEdit && !hasRepeatedPreset ? 'image' : 'default');
     const options = combinator.findComponent({ name: 'DtcRenderer' }).props('options');
-    expect(options.props.fullName).toBe(isEdit ? 'Pending custom edit' : 'Daniel Parker');
-    if (!hasRepeatedPreset) expect(options.props.imageSrc).toBe('/assets/images/person.png');
+    expect(options.props.fullName).toBe('Daniel Parker');
+    if (isEdit && !hasRepeatedPreset) expect(options.props.imageSrc).toBe('/assets/images/person.png');
   } finally {
     release();
     stop();

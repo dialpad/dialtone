@@ -156,9 +156,13 @@ Choosing `default` removes only the `preset` parameter instead of writing
 `preset=default`; other query parameters and the hash remain intact.
 Custom edits remove the preset query; they are not serialized into the URL.
 Within the same page, navigation that leaves the `preset` query unchanged keeps
-the current edits. This includes hash-only or unrelated-query changes and
-Back/Forward between identical URLs. Page or `preset` query changes apply
-URL-defined state; reloading also initializes from the URL.
+the current edits. This includes hash-only changes, unrelated-query changes,
+and Back/Forward that leaves the `preset` query unchanged. Page or `preset`
+query changes apply URL-defined state; reloading also initializes from the URL.
+For Back/Forward, a pending URL write counts as the current preset state: an edit
+followed by Back to a no-preset entry keeps the edit, while selecting a named
+preset then going Back to a no-preset entry loads `default`. These outcomes are
+the same whether the write is pending or complete.
 Missing or invalid preset values resolve to `default`, and slug matching ignores
 case.
 Empty or colliding slugs receive a deterministic suffix so links remain unique.
