@@ -1417,8 +1417,10 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         + 'Move or remove them, or rename the component page, before building here.');
     }
     const SET_NAME = 'Dt' + D.page;
+    // `keepSet`: the plugin is updating this set in place (see in-place.js), so the set stays and
+    // only loose components an earlier run left behind go.
     for (const c of [...page.children]) {
-      if (c.type === 'COMPONENT' || (c.type === 'COMPONENT_SET' && c.name === SET_NAME)) c.remove();
+      if (c.type === 'COMPONENT' || (c.type === 'COMPONENT_SET' && c.name === SET_NAME && !D.keepSet)) c.remove();
     }
     const keep = new Set([PAGE_NAME, 'Icons', ...(D.familyPages || [])]);
     for (const p of [...figma.root.children]) {
