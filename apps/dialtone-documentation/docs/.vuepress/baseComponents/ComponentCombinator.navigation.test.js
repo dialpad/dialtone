@@ -1,4 +1,5 @@
 import { vi } from 'vitest';
+import { createMemoryHistory } from 'vue-router';
 import { createRouteHashScrollGuard, getPageScrollPosition, writeRouteHash } from '../theme/utils/pageToc.js';
 import { mountDocsCombinator, settleCombinator as settle } from './combinatorTestUtils.js';
 
@@ -122,7 +123,10 @@ it.each([false, true])('recovers from a redirect to the current URL (deferred se
   stop();
   expect(router.currentRoute.value.query.preset).toBe('image');
   expect(combinator.vm.selectedVariant).toBe('image');
-  expect(wrapper.vm.externalNavigation).toBeNull();
+  combinator.vm.updateVariant('with presence');
+  await settle();
+  expect(router.currentRoute.value.query.preset).toBe('with-presence');
+  expect(combinator.vm.selectedVariant).toBe('with presence');
 });
 
 it('keeps a pending preset when a TOC push uses the previously committed query', async () => {
@@ -228,15 +232,43 @@ it('applies a different preset on Back instead of carrying a pending selection i
   }
 });
 
-it('preserves custom edits on a legacy native-anchor pop with an empty direction', async () => {
-  await mountDocs({});
-  combinator.vm.onComponentEvent('update:fullName', 'Edited Name');
+it.each(['custom edit', 'pending selection'])('handles a legacy pop with an empty direction after a %s', async action => {
+  const history = createMemoryHistory();
+  const listen = history.listen.bind(history);
+  history.listen = listener => listen((to, from, info) => listener(to, from, { ...info, direction: '' }));
+  await mountDocs({}, { history });
+  await router.push({ hash: '#props' });
   await settle();
-  wrapper.vm.onHistoryNavigation('/components/avatar.html#props', '', { type: 'pop', direction: '' });
-  await router.push('/components/avatar.html#props');
-  await settle();
-  expect(combinator.vm.selectedVariant).toBe('');
-  expect(combinator.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Edited Name');
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  let entered;
+  const waiting = new Promise(resolve => { entered = resolve; });
+  const stop = router.beforeEach(async to => {
+    if (to.query.preset === 'image') { entered(); await held; }
+  });
+  const isEdit = action === 'custom edit';
+  try {
+    if (isEdit) combinator.vm.onComponentEvent('update:fullName', 'Edited Name');
+    else combinator.vm.updateVariant('image');
+    if (isEdit) await settle();
+    else await waiting;
+    const finished = new Promise(resolve => {
+      const stopAfter = router.afterEach((to, from, failure) => {
+        if (!failure && to.hash === '#usage') { stopAfter(); resolve(); }
+      });
+    });
+    router.back();
+    await finished;
+    release();
+    await settle();
+    expect(router.currentRoute.value.query).toEqual({});
+    expect(combinator.vm.selectedVariant).toBe(isEdit ? '' : 'default');
+    const options = combinator.findComponent({ name: 'DtcRenderer' }).props('options');
+    expect(options.props.fullName).toBe(isEdit ? 'Edited Name' : 'Daniel Parker');
+  } finally {
+    release();
+    stop();
+  }
 });
 
 it('does not invoke document scrolling for a hash-less preset write', async () => {
