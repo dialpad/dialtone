@@ -9,8 +9,13 @@ const MOCK_BASE_VALIDATION_MESSAGES: ValidationMessage[] = [{
   type: VALIDATION_MESSAGE_TYPES.CRITICAL,
 }];
 
-const setFormattedValidationMessages = (type: ValidationMessageType, message: string): ValidationMessage[] => [{ message, type }];
-const addFormattedValidationMessage = (messages: ValidationMessage[], type: ValidationMessageType, message: string): ValidationMessage[] => [...messages, { message, type }];
+const setFormattedValidationMessages = (type: ValidationMessageType, message: string): ValidationMessage[] =>
+  [{ message, type }];
+const addFormattedValidationMessage = (
+  messages: ValidationMessage[],
+  type: ValidationMessageType,
+  message: string,
+): ValidationMessage[] => [...messages, { message, type }];
 
 let MOCK_VALIDATION_MESSAGES: ValidationMessage[];
 let mockProps: DtValidationMessagesProps = {};
