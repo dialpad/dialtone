@@ -25,6 +25,8 @@ import '../../../dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
 import '../../../dialtone-css/lib/dist/dialtone.css';
 // A segmented-control item's divider, for an item mounted on its own (see the file).
 import './segmented-control-divider.css';
+// A tab's selected underline, for a tab mounted on its own (see the file).
+import './tab-list.css';
 
 const state = reactive({ component: 'DtButton', props: {}, label: 'Button', slots: [], rootClass: null, provideNames: [] });
 
@@ -41,7 +43,10 @@ const provided = {};
 const Provider = defineComponent({
   props: { names: { type: Array, default: () => [] } },
   setup (props, { slots }) {
-    for (const n of props.names) provide(dialtoneVue[n], provided[n]);
+    // An exported symbol (DtSegmentedControl's context key), or else the name itself: DtTab injects
+    // 'groupContext' and 'setFocus' by string. A value of '$noop' stands for a function, which cannot
+    // cross from the config to the page.
+    for (const n of props.names) provide(dialtoneVue[n] ?? n, provided[n] === '$noop' ? () => {} : provided[n]);
     return () => slots.default();
   },
 });
@@ -174,7 +179,8 @@ window.__setProps = async (component, props, opts = {}) => {
   state.component = component;
   const { __provide: toProvide, ...ownProps } = props || {};
   for (const [name, value] of Object.entries(toProvide || {})) {
-    provided[name] = provided[name] || reactive({});
+    if (value === '$noop') { provided[name] = '$noop'; continue; }
+    if (typeof provided[name] !== 'object') provided[name] = reactive({});
     for (const k of Object.keys(provided[name])) delete provided[name][k];
     Object.assign(provided[name], value);
   }

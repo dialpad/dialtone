@@ -80,7 +80,13 @@ item's `value` from its label), `expose: [{ name, axis?, is? }]` (data handed to
 `metadata.props`) and `pick: { attr, from, when }` (the parent writes `attr` from the child whose `when` is
 true: a group's `model-value` from its selected item).
 `containerClass` (a string or a function of the combo) is the surface the component is mounted on,
-outside the measured tree, for variants that only make sense on one (links for dark backgrounds).
+outside the measured tree, for variants that only make sense on one (links for dark backgrounds). A rule on
+`#root` (the harness's `max-content` surface) needs `#root.` in front of the class to outrank it.
+`percentIsFill: true` reads a percentage width as "as wide as the parent", not a pin, so a lone item hugs its
+content (DtTab's vertical `inline-size: 100%`); its group's slot fills it.
+An absolutely positioned child outside the box (a tab's underline) stretches or stays at the end edge with
+the frame, from its measured offsets; the checks allow for the growth the filled state adds.
+The harness spec is not re-measured when only `verify-harness/` CSS changes: delete `build-data/<name>-spec.json`.
 
 See the built-in Button config at the top of `component-axes.mjs` and the configs in this
 directory for worked examples —
