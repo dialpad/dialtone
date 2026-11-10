@@ -9,6 +9,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pascal } from './cases.mjs';
+import { storyParity } from './story-parity.mjs';
+import { vueSources } from './vue-sources.mjs';
 
 const unit = process.argv[2];
 if (!unit || !/^[a-z0-9-]+$/.test(unit)) {
@@ -19,16 +21,16 @@ const pkg = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const vueRoot = path.resolve(pkg, '../dialtone-vue');
 const name = pascal(unit);
 const reactDir = path.join(pkg, 'components', name);
-// The Vue component is components/*/<Name>.vue, one level deep: usually components/<Name>/, but DtTabGroup is in
-// components/Tab/. Its Vue tests are the .test.js files next to it. A unit with no .vue (a composable, a mixin) keeps
-// components/<Name>/, where any tests it has would be.
-const vueHomes = fs.readdirSync(path.join(vueRoot, 'components'), { withFileTypes: true })
-  .filter(d => d.isDirectory() && fs.existsSync(path.join(vueRoot, 'components', d.name, `${name}.vue`))).map(d => d.name);
-if (vueHomes.length > 1 && !vueHomes.includes(name)) {
-  console.error(`gate: ${name}.vue is in more than one directory: ${vueHomes.join(', ')}`);
+// The unit's Vue sources (vue-sources.mjs): its component directory, whose .test.js files are its Vue tests, and
+// every Vue path that's part of it.
+let vue;
+try {
+  vue = vueSources(vueRoot, unit);
+} catch (error) {
+  console.error(`gate: ${error.message}`);
   process.exit(2);
 }
-const vueDir = path.join(vueRoot, 'components', vueHomes.includes(name) ? name : (vueHomes[0] ?? name));
+const vueDir = vue.dir;
 const tmp = fs.mkdtempSync(path.join(process.env.PARITY_TMP ?? os.tmpdir(), `parity-${unit}-`));
 const rows = [];
 const details = [];
@@ -70,6 +72,7 @@ function vitest (cwd, args, report, env = {}) {
 }
 const tail = (s, n = 40) => s.trim().split('\n').slice(-n).join('\n');
 const block = s => `\`\`\`\n${s}\n\`\`\``;
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 // Vitest's JSON reporter: testResults[].assertionResults[] with ancestorTitles, title and status.
 const results = report => (report?.testResults ?? []).flatMap(f => f.assertionResults
   .map(a => ({ title: [...a.ancestorTitles, a.title].join(' › '), status: a.status, failure: a.failureMessages?.join('\n') ?? '' })));
@@ -79,13 +82,32 @@ if (!fs.existsSync(reactDir)) {
   process.exit(2);
 }
 const isComponent = fs.existsSync(path.join(vueDir, `${name}.vue`));
-const reactFiles = fs.readdirSync(reactDir).map(f => path.join(reactDir, f));
-const sourceFiles = reactFiles.filter(f => /\.tsx?$/.test(f) && !/\.(test|stories|parity)\.tsx?$/.test(f));
+// Every script file in the unit's directory, nested ones too: lint and tsc check them all, so the scans below must.
+const reactFiles = fs.readdirSync(reactDir, { recursive: true, withFileTypes: true })
+  .filter(d => d.isFile() && /\.[cm]?[jt]sx?$/.test(d.name)).map(d => path.join(d.parentPath, d.name));
+const sourceFiles = reactFiles.filter(f => !/\.(test|stories|parity)\.[cm]?[jt]sx?$/.test(f));
 
 // 1. Typecheck, the whole package (a unit can break its dependents' types).
 const tsc = run(pkg, ['tsc', '-p', 'tsconfig.json']);
 if (tsc.status === 0) ok('Typecheck', 'clean');
-else bad('Typecheck', `${(tsc.stdout.match(/error TS/g) ?? []).length} errors`, block(tail(tsc.stdout)));
+else bad('Typecheck', plural((tsc.stdout.match(/error TS/g) ?? []).length, 'error'), block(tail(tsc.stdout)));
+
+// Lint, the unit's directory (CI lints the whole package). Warnings are counted, not failed.
+{
+  const lint = run(pkg, ['eslint', '--format', 'json', `components/${name}/`]);
+  let messages = null;
+  try {
+    messages = JSON.parse(lint.stdout)
+      .flatMap(f => f.messages.map(m => ({ ...m, file: path.relative(pkg, f.filePath) })));
+  } catch { /* ESLint itself failed (a config or parse error): reported below */ }
+  const errors = messages?.filter(m => m.severity === 2) ?? [];
+  const warnings = (messages?.length ?? 0) - errors.length;
+  const lines = errors.map(m => `${m.file}:${m.line}:${m.column} ${m.message.split('\n')[0]} (${m.ruleId ?? 'parse'})`);
+  const warned = warnings ? ` · ${plural(warnings, 'warning')}` : '';
+  if (!messages) bad('Lint', 'ESLint failed', block(tail(`${lint.stdout}\n${lint.stderr}`)));
+  else if (errors.length) bad('Lint', plural(errors.length, 'error') + warned, block(lines.join('\n')));
+  else ok('Lint', `clean${warned}`);
+}
 
 // 2. The unit's React tests, and 3. test parity with its Vue tests.
 const unitRun = vitest(pkg, ['vitest', 'run', `components/${name}/`], path.join(tmp, 'react-tests.json'));
@@ -199,23 +221,40 @@ if (isComponent) {
   }
 } else na('DOM parity', 'not a component');
 
-// 5. Story parity: once the React Storybook exists (Phase 0).
-if (fs.existsSync(path.join(pkg, '.storybook'))) na('Story parity', 'not wired up yet');
-else na('Story parity', 'no React Storybook yet');
+// 5. Story parity (story-parity.mjs). Base CI sets PARITY_SKIP_STAND_INS=1: a merge can leave stand-ins for the
+// component it added, which the loop's swap PRs clear (parity.md › Story parity).
+{
+  const stories = storyParity({
+    vueDir, reactDir, name, pkg, vueRoot, vuePaths: vue.paths, standIns: process.env.PARITY_SKIP_STAND_INS !== '1',
+  });
+  if (stories.status === 'ok') ok('Story parity', stories.summary);
+  else if (stories.status === 'na') na('Story parity', stories.summary);
+  else bad('Story parity', stories.summary, stories.detail);
+}
 
-// 6. Anti-gaming (parity.md): component code can't branch on the environment; tests mock only what Vue's mock.
+// 6. Anti-gaming (parity.md): component code can't branch on the environment; tests mock only what Vue's mock; no
+// file of the unit switches lint or typecheck off. @ts-expect-error stays allowed: lint requires it to say why, and
+// it fails once the error it expects is gone.
 {
   const problems = [];
   for (const f of sourceFiles) {
     const hits = fs.readFileSync(f, 'utf8').match(/import\.meta\.env|NODE_ENV|\bvitest\b|\bjsdom\b/g);
-    if (hits) problems.push(`- ${path.basename(f)} mentions ${[...new Set(hits)].join(', ')}`);
+    if (hits) problems.push(`- ${path.relative(reactDir, f)} mentions ${[...new Set(hits)].join(', ')}`);
+  }
+  // Every form: eslint-disable, -line, -next-line, and inline rule config (`/* eslint rule: off */`, quoted or not).
+  // Case-insensitive, as tsc reads its pragmas: `// @TS-NOCHECK` works. eslint.config.js also sets noInlineConfig
+  // for components/, so a spelling this misses still has no effect.
+  const SUPPRESSIONS = /eslint-disable(?:-next-line|-line)?|\/\*\s*eslint\s|@ts-ignore|@ts-nocheck/gi;
+  for (const f of reactFiles) {
+    const hits = fs.readFileSync(f, 'utf8').match(SUPPRESSIONS);
+    if (hits) problems.push(`- ${path.relative(reactDir, f)} suppresses checks: ${[...new Set(hits)].join(', ')}`);
   }
   const mocks = src => [...src.matchAll(/vi\.mock\(\s*['"`]([^'"`]+)['"`]/g)].map(m => path.basename(m[1]).replace(/\.\w+$/, ''));
   const vueMocks = new Set(mocks(vueSource));
-  for (const f of reactFiles.filter(f => /\.test\.tsx?$/.test(f))) {
-    for (const m of mocks(fs.readFileSync(f, 'utf8'))) if (!vueMocks.has(m)) problems.push(`- ${path.basename(f)} mocks ${m}, which the Vue tests don't`);
+  for (const f of reactFiles.filter(f => /\.test\.[cm]?[jt]sx?$/.test(f))) {
+    for (const m of mocks(fs.readFileSync(f, 'utf8'))) if (!vueMocks.has(m)) problems.push(`- ${path.relative(reactDir, f)} mocks ${m}, which the Vue tests don't`);
   }
-  if (problems.length) bad('Anti-gaming', `${problems.length} problems`, problems.join('\n'));
+  if (problems.length) bad('Anti-gaming', plural(problems.length, 'problem'), problems.join('\n'));
   else ok('Anti-gaming', 'clean');
 }
 
