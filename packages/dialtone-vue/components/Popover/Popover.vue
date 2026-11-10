@@ -182,6 +182,16 @@ export default {
     },
 
     /**
+     * Optional callback receiving the open boolean synchronously on logical visibility changes.
+     * Includes initial true during creation, before mount, when open=true.
+     * Does not declare or emit an open-change event.
+     */
+    visibilityChangeCallback: {
+      type: Function,
+      default: null,
+    },
+
+    /**
      * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
      * Default false preserves controlled anchor keyboard behavior.
      * @values true, false
@@ -607,20 +617,13 @@ export default {
     'update:open',
 
     /**
-     * Emitted when popover is shown or hidden
+     * Emitted after the current transition and initial focus work complete
      *
      * @event opened
      * @type {Boolean | Array}
      */
     'opened',
 
-    /**
-     * Synchronously emitted on actual logical visibility changes, before transition completion.
-     * Includes initial true during creation when mounted with open=true.
-     * @event open-change
-     * @type {Boolean}
-     */
-    'open-change',
 
     /**
      * Emitted when the mouse enters the popover
@@ -775,7 +778,7 @@ export default {
         flush: 'sync',
         handler (isOpen) {
           this.visibilityGeneration++;
-          if (!this._isUnmounting) this.$emit('open-change', isOpen);
+          if (!this._isUnmounting) this.visibilityChangeCallback?.(isOpen);
         },
       },
       {

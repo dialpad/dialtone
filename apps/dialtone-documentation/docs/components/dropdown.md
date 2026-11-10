@@ -200,11 +200,15 @@ The parent owns the committed sort order. Each radio row uses `selected` for its
 
 ## Logical Visibility and Controlled Arrow Keys
 
-`open-change(boolean)` fires synchronously when logical visibility actually changes. When mounted with `open=true`, the initial `open-change(true)` fires during component creation, before mount, and the visible menu exposes `aria-hidden="false"`. `opened` and `update:open` retain their completed-transition timing; `open=null` emits no `update:open`. Use the logical event when work must happen before the close animation finishes. A canceled transition emits no stale completion notification.
+Set `:visibility-change-callback="handleVisibilityChange"` to receive the open boolean synchronously when logical visibility changes, before the animation completes. With initial `open=true`, the callback runs during creation, before mount; the menu exposes `aria-hidden="false"`. No callback means no logical notification. Dropdown does not declare or emit `open-change`, preserving existing DOM listeners and wrapper notifications.
+
+`opened` and `update:open` report current completed transitions. Opening finishes initial focus before notifying listeners, so focus chosen by an `opened` listener is preserved. Stale completions do not notify. `open=null` emits no `update:open`.
 
 With a boolean `open` prop, anchor arrows remain silent by default. Set `forwardAnchorArrowKeys` to forward ArrowUp/ArrowDown through `keydown` without automatically toggling. On a closed opted-in Dropdown, the consumer decides whether to open and whether to prevent the key's default action; the event continues to ancestor listeners. To start with focus on the first navigable row, accept opening synchronously in Dropdown's own emitted `keydown` callback. An ancestor DOM listener or a delayed update does not carry that focus guarantee. The callback also receives content key events, so check that the event target belongs to the anchor before requesting opening; closing-content arrows must not reopen the menu. Ignored arrows do not make a later pointer opening behave like a keyboard opening. Once open, normal Dropdown navigation and key prevention apply.
 
 ## Accessibility
+
+The list wrapper uses `role="none"` to preserve the containing menu context. Use explicit `menuitem` rows for actions and `menuitemradio` for persistent single choices; `listitem` and listbox `option` rows are not Dropdown menu patterns. Hovering headings does not move menu focus or change checked state.
 
 A screen reader visible only close button is added by default.
 
@@ -220,7 +224,7 @@ A dropdown menu has well defined standard [keyboard interactions](https://www.w3
 
 Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the **highlight** selection changes, a highlight event is emitted with the index of the currently highlighted item. `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
 
-The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. A hand-authored `menuitemradio` must have a nonempty unique ID to participate in keyboard or mouse navigation; id-less radio rows are excluded. Headings and separators do not participate. Hovering them preserves the current highlight, and IDs outside the navigable collection are ignored.
+The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. A hand-authored `menuitemradio` must have a nonempty unique ID to participate in keyboard or mouse navigation; id-less radio rows are excluded. Headings and separators do not participate in Dropdown navigation. Its mouse handler ignores those targets and preserves the current highlight. Direct calls to the exported mixin's `setHighlightId` retain legacy behavior: a nonempty ID is stored even before its row renders; an unmatched ID in a rendered collection clears the highlighted index.
 
 <script setup>
 import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';

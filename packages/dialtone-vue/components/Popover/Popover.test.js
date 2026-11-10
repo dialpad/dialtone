@@ -1,4 +1,6 @@
-import { h, nextTick } from 'vue';
+import { DtDropdown } from '@/components/Dropdown';
+import { DtListItem } from '@/components/ListItem';
+import { defineComponent, h, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/Popover';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
@@ -608,13 +610,62 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  it.each([DtPopover, DtDropdown])('preserves bubbling open-change DOM events through $name', async Component => {
+    wrapper.unmount();
+    const listener = vi.fn();
+    const content = () => h(Component === DtDropdown ? DtListItem : 'button', {
+      role: Component === DtDropdown ? 'menuitem' : undefined,
+      'data-qa': 'custom-event',
+      onClick: event => event.currentTarget.dispatchEvent(new CustomEvent('open-change', {
+        bubbles: true, detail: 'consumer-state',
+      })),
+    }, Component === DtDropdown ? () => 'Dispatch' : 'Dispatch');
+    wrapper = mount(Component, {
+      props: { open: true, appendTo: 'parent', modal: false },
+      attrs: { onOpenChange: listener },
+      slots: { anchor: () => h('button', 'Open'), [Component === DtDropdown ? 'list' : 'content']: content },
+      global: { plugins: [DtFocustrapDirective], stubs: { transition: true } },
+      attachTo: document.body,
+    });
+    expect(listener).not.toHaveBeenCalled();
+    await wrapper.get('[data-qa="custom-event"]').trigger('click');
+    expect(listener.mock.calls).toEqual([[expect.objectContaining({ detail: 'consumer-state' })]]);
+  });
+
+  it.each([DtPopover, DtDropdown])('preserves an existing wrapper open-change around $name', async Component => {
+    wrapper.unmount();
+    const listener = vi.fn();
+    const Wrapper = defineComponent({
+      name: 'ExistingOverlayWrapper',
+      props: { open: Boolean },
+      watch: { open (value) { this.$emit('open-change', value); } },
+      render () {
+        return h(Component, { open: this.open }, {
+          anchor: () => h('button', 'Open'),
+          [Component === DtDropdown ? 'list' : 'content']: () => h(Component === DtDropdown ? 'li' : 'p',
+            Component === DtDropdown ? { role: 'menuitem' } : {}, 'Action'),
+        });
+      },
+    });
+    wrapper = mount(Wrapper, {
+      props: { open: false }, attrs: { onOpenChange: listener },
+      global: { plugins: [DtFocustrapDirective], stubs: { transition: true } }, attachTo: document.body,
+    });
+    await wrapper.setProps({ open: true });
+    await wrapper.setProps({ open: false });
+    expect(listener.mock.calls).toEqual([[true], [false]]);
+  });
+
   describe('logical visibility and transition generations', () => {
     let scrollWasLocked;
+    let visibilityChanges;
     beforeEach(() => {
       scrollWasLocked = document.documentElement.classList.contains('d-of-hidden');
       document.documentElement.classList.remove('d-of-hidden');
       wrapper.unmount();
       manualTransitions = true;
+      visibilityChanges = vi.fn();
+      mockProps.visibilityChangeCallback = visibilityChanges;
       mockSlots.content = ({ close }) => h('button', { 'data-qa': 'inside', onClick: close }, 'Action');
       updateWrapper();
     });
@@ -639,7 +690,7 @@ describe('DtPopover Tests', () => {
       const logicalChanges = [];
       mockProps = {
         open: true,
-        onOpenChange: value => logicalChanges.push({ value, anchorRendered }),
+        visibilityChangeCallback: value => logicalChanges.push({ value, anchorRendered }),
       };
       mockSlots.anchor = ({ attrs }) => {
         anchorRendered = true;
@@ -655,18 +706,18 @@ describe('DtPopover Tests', () => {
       await completeTransition('enter');
       expect(wrapper.emitted('opened')[0][0]).toBe(true);
       expect(wrapper.emitted('update:open')).toEqual([[true]]);
-      expect(wrapper.emitted('open-change')).toEqual([[true]]);
+      expect(logicalChanges).toHaveLength(1);
     });
 
     it('notifies actual logical changes synchronously once per change', async () => {
       const opening = button.trigger('click');
-      expect(wrapper.emitted('open-change')).toEqual([[true]]);
+      expect(visibilityChanges.mock.calls).toEqual([[true]]);
       await opening;
       const closing = popoverWindow.trigger('keydown', { key: 'Escape' });
-      expect(wrapper.emitted('open-change')).toEqual([[true], [false]]);
+      expect(visibilityChanges.mock.calls).toEqual([[true], [false]]);
       await closing;
       await popoverWindow.trigger('keydown', { key: 'Escape' });
-      expect(wrapper.emitted('open-change')).toEqual([[true], [false]]);
+      expect(visibilityChanges.mock.calls).toEqual([[true], [false]]);
       expect(wrapper.emitted('opened')).toBeUndefined();
     });
 
@@ -700,9 +751,33 @@ describe('DtPopover Tests', () => {
       await completeTransition('enter');
       await wrapper.setProps({ open: false });
       await wrapper.setProps({ open: true });
-      expect(wrapper.emitted('open-change')).toEqual([[true], [false], [true]]);
+      expect(visibilityChanges.mock.calls).toEqual([[true], [false], [true]]);
       expect(wrapper.emitted('opened')).toHaveLength(1);
       expect(popoverWindow.attributes('aria-hidden')).toBe('false');
+    });
+
+    it('finishes initial focus before notifying a consumer that chooses another target', async () => {
+      wrapper.unmount();
+      mockSlots.content = () => [
+        h('button', { 'data-qa': 'first-target' }, 'First'),
+        h('input', { 'data-qa': 'consumer-target' }),
+      ];
+      mockProps.onOpened = open => {
+        if (open) popoverWindow.get('[data-qa="consumer-target"]').element.focus();
+      };
+      updateWrapper();
+      await wrapper.setProps({ open: true });
+      await completeTransition('enter');
+      expect(document.activeElement).toBe(popoverWindow.get('[data-qa="consumer-target"]').element);
+    });
+
+    it('focuses a documented HTMLElement target inside the popover', async () => {
+      await wrapper.setProps({ open: true });
+      const target = popoverWindow.get('[data-qa="inside"]').element;
+      await wrapper.setProps({ initialFocusElement: target });
+      await completeTransition('enter');
+      expect(document.activeElement).toBe(target);
+      expect(wrapper.emitted('opened')[0][0]).toBe(true);
     });
 
     it('stops a running leave before stale focus and terminal effects after reopen', async () => {

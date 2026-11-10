@@ -213,7 +213,7 @@ export const Variants = {
 
 export const MenuRoles = {
   render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtDropdownMenuRolesTemplate),
-  args: { onOpenChange: action('open-change') },
+  args: { visibilityChangeCallback: action('logical-visibility') },
   parameters: {
     docs: {
       description: {
@@ -225,7 +225,7 @@ export const MenuRoles = {
 
 export const ControlledArrows = {
   render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtDropdownControlledArrowsTemplate),
-  args: { onOpenChange: action('open-change') },
+  args: { visibilityChangeCallback: action('logical-visibility') },
   parameters: {
     docs: {
       description: {

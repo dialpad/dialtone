@@ -196,16 +196,17 @@ export default ({
     },
 
     setHighlightId (id) {
+      if (!id) return;
       const index = this._getItemIndex(id);
-      if (index < 0) return;
       this[idKey] = id;
       this[indexKey] = index;
 
-      if (afterHighlightMethod) this[afterHighlightMethod](index);
+      if (this._itemsLength() && afterHighlightMethod) this[afterHighlightMethod](index);
     },
 
     _getItemIndex (id) {
       if (!id) return -1;
+      if (!this._getListElement()) return;
       return this._getListItemNodes()?.findIndex(item => item.id === id) ?? -1;
     },
 

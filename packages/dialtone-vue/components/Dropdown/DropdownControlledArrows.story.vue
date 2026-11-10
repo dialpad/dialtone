@@ -14,8 +14,8 @@
     <dt-dropdown
       :open="isOpen"
       forward-anchor-arrow-keys
+      :visibility-change-callback="onVisibilityChange"
       @keydown="onKeydown"
-      @open-change="onOpenChange"
       @opened="$attrs.onOpened"
     >
       <template #anchor="anchorAttrs">
@@ -78,9 +78,9 @@ export default {
       this.isOpen = true;
     },
 
-    onOpenChange (open) {
+    onVisibilityChange (open) {
       this.isOpen = open;
-      this.$attrs.onOpenChange?.(open);
+      this.$attrs.visibilityChangeCallback?.(open);
     },
   },
 };

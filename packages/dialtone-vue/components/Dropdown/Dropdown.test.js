@@ -182,13 +182,15 @@ describe('DtDropdown Tests', () => {
 
 describe('Dropdown menu roles and controlled arrow opt-in', () => {
   let wrapper;
+  let visibilityChanges;
   beforeEach(() => {
+    visibilityChanges = vi.fn();
     vi.stubGlobal('requestAnimationFrame', vi.fn());
     vi.stubGlobal('cancelAnimationFrame', vi.fn());
   });
   const mountMenu = (props = {}, onKeydown, list) => {
     wrapper = mount(DtDropdown, {
-      props: { open: true, ...props },
+      props: { open: true, visibilityChangeCallback: visibilityChanges, ...props },
       attrs: { onKeydown },
       slots: {
         anchor: attrs => h('button', {
@@ -245,7 +247,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     mountMenu({ open: true, forwardAnchorArrowKeys: true });
     await flushPromises();
     await wrapper.find('[data-qa="trigger"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
-    expect(wrapper.emitted('open-change')).toEqual([[true]]);
+    expect(visibilityChanges.mock.calls).toEqual([[true]]);
     expect(wrapper.emitted('keydown')[0][0].defaultPrevented).toBe(true);
     expect(document.activeElement.id).toBe('radio:one');
   });
@@ -324,7 +326,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     });
     await wrapper.find('[data-qa="trigger"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
     await flushPromises();
-    expect(wrapper.emitted('open-change')).toEqual([[true]]);
+    expect(visibilityChanges.mock.calls).toEqual([[true]]);
     expect(document.activeElement.id).toBe('radio:one');
   });
 

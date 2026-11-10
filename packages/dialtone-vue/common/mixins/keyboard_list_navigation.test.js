@@ -1,3 +1,4 @@
+import { DtListItem } from '@/components/ListItem';
 import { h } from 'vue';
 import keyboardNavigation from './keyboard_list_navigation';
 import { mount } from '@vue/test-utils';
@@ -185,6 +186,30 @@ describe('Keyboard navigation role collections', () => {
     }, { attachTo: document.body });
   };
   afterEach(() => wrapper.unmount());
+
+  it('retains a public highlight request made before the list renders', async () => {
+    const warning = vi.spyOn(console, 'error').mockImplementation(() => {});
+    wrapper = mount({
+      mixins: [keyboardNavigation({ listElementKey: 'getListElement', scrollToOnHighlight: false })],
+      props: { show: Boolean },
+      methods: { getListElement () { return this.$refs.list; } },
+      render () {
+        return h('div', { onKeydown: () => this.onDownKey() }, this.show
+          ? h('ul', { ref: 'list' }, ['one', 'two'].map(id =>
+            h(DtListItem, { id, role: 'option', navigationType: 'arrow-keys' }, () => id)))
+          : null);
+      },
+    });
+    try {
+      wrapper.vm.setHighlightId('two');
+      await wrapper.setProps({ show: true });
+      expect(wrapper.get('#two').attributes('aria-selected')).toBe('true');
+      await wrapper.trigger('keydown', { key: 'ArrowDown' });
+      expect(wrapper.get('#two').attributes('aria-selected')).toBe('true');
+    } finally {
+      warning.mockRestore();
+    }
+  });
 
   it('navigates a role array and special IDs while retaining the close control', async () => {
     mountList(['menuitem', 'menuitemradio']);

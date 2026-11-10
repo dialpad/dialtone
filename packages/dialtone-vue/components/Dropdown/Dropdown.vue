@@ -6,6 +6,7 @@
     :content-mode="contentMode"
     :open="open"
     :forward-anchor-arrow-keys="forwardAnchorArrowKeys"
+    :visibility-change-callback="onVisibilityChange"
     :placement="placement"
     :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
     :fallback-placements="fallbackPlacements"
@@ -113,6 +114,16 @@ export default {
      */
     open: {
       type: [Boolean, null],
+      default: null,
+    },
+
+    /**
+     * Optional callback receiving the open boolean synchronously on logical visibility changes.
+     * Includes initial true during creation, before mount, when open=true.
+     * Does not declare or emit an open-change event.
+     */
+    visibilityChangeCallback: {
+      type: Function,
       default: null,
     },
 
@@ -330,20 +341,13 @@ export default {
     'update:open',
 
     /**
-     * Event fired when dropdown is shown or hidden
+     * Event fired after the current transition and initial focus work complete
      *
      * @event opened
      * @type {Boolean | Array}
      */
     'opened',
 
-    /**
-     * Synchronously emitted when logical visibility changes, before transition completion.
-     * Includes initial true during creation when mounted with open=true.
-     * @event open-change
-     * @type {Boolean}
-     */
-    'open-change',
   ],
 
   data () {
@@ -361,11 +365,6 @@ export default {
   computed: {
     dropdownListeners () {
       return {
-
-        'open-change': isOpen => {
-          this.isLogicallyOpen = isOpen;
-          this.$emit('open-change', isOpen);
-        },
 
         'update:open': value => {
           this.$emit('update:open', value);
@@ -466,6 +465,11 @@ export default {
   },
 
   methods: {
+    onVisibilityChange (isOpen) {
+      this.isLogicallyOpen = isOpen;
+      this.visibilityChangeCallback?.(isOpen);
+    },
+
     onMouseHighlight (e) {
       const liElement = this._getListItemNodes()?.find(item => item.contains(e.target));
 

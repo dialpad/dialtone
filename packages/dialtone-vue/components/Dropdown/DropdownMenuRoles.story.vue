@@ -11,7 +11,7 @@
       </dt-list-item>
     </ul>
     <dt-dropdown
-      @open-change="$attrs.onOpenChange"
+      :visibility-change-callback="$attrs.visibilityChangeCallback"
       @opened="$attrs.onOpened"
     >
       <template #anchor="anchorAttrs">

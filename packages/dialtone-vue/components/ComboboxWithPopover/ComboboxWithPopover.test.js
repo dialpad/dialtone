@@ -1,4 +1,5 @@
 import { h } from 'vue';
+import { DtListItemGroup } from '@/components/ListItemGroup';
 import { DtListItem } from '@/components/ListItem';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import { mount, flushPromises } from '@vue/test-utils';
@@ -89,6 +90,33 @@ describe('DtComboboxWithPopover Tests', () => {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
+  });
+
+  it('clears a teleported option when hovering a group heading before Enter', async () => {
+    wrapper.unmount();
+    wrapper = mount(DtComboboxWithPopover, {
+      props: { label: 'Teams', showList: true, listId: 'teams' },
+      slots: {
+        input: ({ inputProps }) => h(DtInput, inputProps),
+        list: ({ listProps }) => h('ul', listProps, [
+          h('li', { role: 'presentation' }, h(DtListItemGroup, { id: 'team', heading: 'Teams' }, () => [
+            h(DtListItem, { id: 'sales', role: 'option', navigationType: 'arrow-keys' }, () => 'Sales'),
+          ])),
+        ]),
+      },
+      global: { plugins: [DtFocustrapDirective], stubs: { transition: true } },
+      attachTo: document.body,
+    });
+    await flushPromises();
+    const list = wrapper.findComponent(DtPopover).findComponent({ ref: 'content' });
+    list.vm.$emit('after-enter');
+    await flushPromises();
+    await list.get('#sales').trigger('mousemove');
+    expect(wrapper.get('input').attributes('aria-activedescendant')).toBe('sales');
+    await list.get('#team-heading').trigger('mousemove');
+    await wrapper.get('input').trigger('keydown', { key: 'Enter', code: 'Enter' });
+    expect(wrapper.emitted('select')).toBeUndefined();
+    expect(wrapper.get('input').attributes('aria-activedescendant')).toBeUndefined();
   });
 
   it('retains input focus and option navigation when the listbox opens', async () => {
