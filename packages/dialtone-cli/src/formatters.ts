@@ -98,6 +98,7 @@ function minimalSearchResults(results: SearchResult[]): string {
     const tag = r.type === 'component' ? 'component'
       : r.type === 'design-token' ? 'token'
       : r.type === 'icon' ? 'icon'
+      : r.type === 'documentation' ? 'docs'
       : 'class';
     return `${i + 1}. [${tag}] ${r.name}`;
   }).join('\n');
@@ -155,6 +156,7 @@ function markdownSearchResults(results: SearchResult[]): string {
     const tag = r.type === 'component' ? 'component'
       : r.type === 'design-token' ? 'token'
       : r.type === 'icon' ? 'icon'
+      : r.type === 'documentation' ? 'docs'
       : 'class';
     let line = `${i + 1}. **${r.name}** _(${tag})_`;
     if (r.type === 'component' && r.details.description) {
