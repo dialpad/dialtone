@@ -1,0 +1,142 @@
+# CI for packages/dialtone-react, on PRs into and pushes to the dialtone-react branch (the Vue → React port).
+#   check: lint, typecheck, test and build the package, and run the harness's own tests.
+#   gate:  the parity gate for every ported unit the change touches (parity/changed-units.mjs, react-migration
+#          parity.md): its React directory, any of its Vue sources, or a shared file, which gates them all.
+# The migration loop reads this workflow's result on dialtone-react before it retries anything, so keep the job names.
+name: dialtone-react
+
+on:
+  pull_request:
+    branches:
+      - dialtone-react
+    paths:
+      - 'packages/dialtone-react/**'
+      - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-emojis/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/src/variants/**'
+      - 'pnpm-lock.yaml'
+      - 'package.json'
+      - 'nx.json'
+      - '.github/actions/setup-environment/**'
+      - '.github/workflows/dialtone-react.yml'
+  push:
+    branches:
+      - dialtone-react
+    paths:
+      - 'packages/dialtone-react/**'
+      - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-emojis/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/src/variants/**'
+      - 'pnpm-lock.yaml'
+      - 'package.json'
+      - 'nx.json'
+      - '.github/actions/setup-environment/**'
+      - '.github/workflows/dialtone-react.yml'
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HUSKY: 0
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check:
+    name: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-environment
+
+      # Nx's local cache: dialtone-icons and dialtone-tokens builds, which every target here depends on.
+      - uses: actions/cache@v4
+        with:
+          path: .nx/cache
+          key: nx-dialtone-react-check-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: nx-dialtone-react-check-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+
+      - name: Lint
+        run: pnpm nx run dialtone-react:lint
+
+      - name: Typecheck
+        run: pnpm nx run dialtone-react:typecheck
+
+      - name: Test
+        run: pnpm nx run dialtone-react:test
+
+      # The harness's own tests (Node's runner): which units CI gates for a change.
+      - name: Harness tests
+        run: node --test 'packages/dialtone-react/parity/*.test.mjs'
+
+      - name: Build
+        run: pnpm nx run dialtone-react:build
+
+  gate:
+    name: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      # A PR is checked out as its merge commit, whose first parent is the base: depth 2 is enough to diff them.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Changed units
+        id: units
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # --no-renames: a rename lists only its new path, and its old one can belong to another unit.
+          list_units () { node packages/dialtone-react/parity/changed-units.mjs; }
+          if [[ $EVENT == pull_request ]]; then
+            units=$(git diff --no-renames --name-only HEAD^1 HEAD | list_units)
+          elif [[ $BEFORE =~ ^0+$ ]] || ! git fetch --no-tags --depth=1 origin "$BEFORE"; then
+            # A new branch, or a history rewrite: every ported unit.
+            units=$({ ls -d packages/dialtone-react/components/*/index.ts 2>/dev/null || true; } | list_units)
+          else
+            units=$(git diff --no-renames --name-only "$BEFORE" HEAD | list_units)
+          fi
+          echo "Units: ${units:-none}"
+          echo "list=$(echo $units)" >> "$GITHUB_OUTPUT"
+
+      - uses: ./.github/actions/setup-environment
+        if: steps.units.outputs.list != ''
+
+      - uses: actions/cache@v4
+        if: steps.units.outputs.list != ''
+        with:
+          path: .nx/cache
+          key: nx-dialtone-react-gate-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: nx-dialtone-react-gate-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+
+      # One unit after another (15-50s each), every one reported even when an earlier one fails. On dialtone-react
+      # itself, stand-ins for a component that just merged don't fail: the loop's swap PRs clear them (parity.md).
+      - name: Parity gate
+        if: steps.units.outputs.list != ''
+        env:
+          UNITS: ${{ steps.units.outputs.list }}
+          PARITY_SKIP_STAND_INS: ${{ github.event_name == 'push' && '1' || '0' }}
+          PARITY_TMP: ${{ runner.temp }}
+        run: |
+          failed=0
+          for unit in $UNITS; do
+            log="$RUNNER_TEMP/gate-$unit.log"
+            pnpm nx run dialtone-react:gate -- "$unit" | tee "$log" || failed=1
+            sed -n '/^#### Parity gate/,$p' "$log" >> "$GITHUB_STEP_SUMMARY"
+          done
+          exit $failed

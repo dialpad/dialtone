@@ -1,0 +1,46 @@
+# The migration loop's scope check, on PRs into the dialtone-react branch (the Vue → React port).
+#   scope: loop PRs (react/* branches) may only change unit files inside packages/dialtone-react/.
+# Its own workflow, with no paths filter: under dialtone-react.yml's, a loop PR that changed only files outside those
+# paths would never run it. The migration loop reads this check's result, so keep the job name.
+name: dialtone-react-scope
+
+on:
+  pull_request:
+    branches:
+      - dialtone-react
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  scope:
+    name: scope
+    if: startsWith(github.head_ref, 'react/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # A PR is checked out as its merge commit, whose first parent is the base: depth 2 is enough to diff them.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      # The loop's pre-push hook, repeated (parity.md › Anti-gaming). Keep SHARED in step with
+      # react-migration/git-hooks/pre-push. --no-renames: a rename lists only its new path, so moving a shared file
+      # into a unit's directory would pass.
+      - name: Only unit files changed
+        run: |
+          SHARED='^packages/dialtone-react/(package\.json|project\.json|index\.ts|tsconfig[^/]*\.json|[^/]*\.config\.[cm]?[jt]s|\.gitignore|\.lintstagedrc\.cjs|README\.md|parity/|scripts/|tests/|types/|common/(link|localization|transition)/|\.storybook/|compare/)'
+          changed=$(git diff --no-renames --name-only HEAD^1 HEAD)
+          bad=$( (grep -Ev '^packages/dialtone-react/' <<<"$changed"; grep -E "$SHARED" <<<"$changed") | grep -v '^$' || true)
+          if [[ -n $bad ]]; then
+            printf '::error::This loop PR changes files outside its scope:\n%s\n' "$bad"
+            exit 1
+          fi
