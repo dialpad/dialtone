@@ -1,0 +1,110 @@
+.claude/rules/documentation-site.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 40
+packages/dialtone-vue/components/Loader/LoaderVariants.story.vue
+  s_7f1d1d64baa803::t_4955bb1dc7191a 3-4,7-9,12-24,33,40
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_4955bb1dc7191a 40,42,45,69
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 373-374,385,414,416
+packages/dialtone-mcp-server/tests/startup.test.mjs
+  s_7f1d1d64baa803::t_4955bb1dc7191a 118
+apps/dialtone-documentation/thumbs/loader.vue
+  s_7f1d1d64baa803::t_4955bb1dc7191a 1-3
+scripts/retrieval/cache-inputs.test.mjs
+  s_7f1d1d64baa803::t_4955bb1dc7191a 139-147
+packages/dialtone-mcp-server/release-ci.config.cjs
+  s_7f1d1d64baa803::t_4955bb1dc7191a 4,13,15
+packages/dialtone-vue/components/Loader/LoaderDefault.story.vue
+  s_7f1d1d64baa803::t_4955bb1dc7191a 4
+packages/dialtone-tokens/sync-scripts/color.ts
+  s_7f1d1d64baa803::t_4955bb1dc7191a 123-158
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 70
+packages/dialtone-mcp-server/src/index.ts
+  s_7f1d1d64baa803::t_4955bb1dc7191a 41
+lookup-release.config.cjs
+  s_7f1d1d64baa803::t_4955bb1dc7191a 1-23,25-46,48-100
+  s_7f1d1d64baa803::t_8aff91ed6e7949 24,47
+packages/dialtone-css/lib/build/less/components/loader.less
+  s_7f1d1d64baa803::t_4955bb1dc7191a 11-13,20-21,23-44,46-53,70,75-564
+packages/dialtone-tokens/sync-scripts/build_variables.ts
+  s_7f1d1d64baa803::t_4955bb1dc7191a 35,260,299-304
+apps/dialtone-documentation/docs/.vuepress/baseComponents/showcaseCarouselMotion.test.mjs
+  s_7f1d1d64baa803::t_4955bb1dc7191a 1-70
+packages/dialtone-tokens/sync-scripts/variable_policy.test.ts
+  s_7f1d1d64baa803::t_4955bb1dc7191a 176,178-181,186
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 43-48,323
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_4955bb1dc7191a 21,24-25,57,60-61,127,130-131
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-10-28.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 1-95
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHeroContent.vue
+  s_7f1d1d64baa803::t_4955bb1dc7191a 19,28,31,40,49,77-80,82-84,89
+packages/combinator/src/variants/variants_loader.js
+  s_7f1d1d64baa803::t_4955bb1dc7191a 28-35
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_7f1d1d64baa803::t_8aff91ed6e7949 60
+  s_7f1d1d64baa803::t_4955bb1dc7191a 10,27-31,38,43-44,46-59,62-79,81-85,87-98,101-110,112-133,135-137
+  s_7f1d1d64baa803::t_3f159d8f19a0ef 61,111
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-11-2.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 1-87
+packages/dialtone-tokens/sync-scripts/variable_policy.ts
+  s_7f1d1d64baa803::t_4955bb1dc7191a 218-224
+packages/dialtone-vue/components/Loader/Loader.vue
+  s_7f1d1d64baa803::t_4955bb1dc7191a 3,7-52,54,61-92,101,116-125,136-144
+  s_7f1d1d64baa803::t_a9608171520093 145
+packages/dialtone-vue/components/Loader/index.js
+  s_7f1d1d64baa803::t_4955bb1dc7191a 2
+apps/dialtone-documentation/docs/index.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 35,38,54,60,66,72,77,79,81,102,108,114,120,125,127,129,147,149,163,165-166,170,180,188-235,237-239,251-253
+packages/dialtone-tokens/sync-scripts/color.test.ts
+  s_7f1d1d64baa803::t_4955bb1dc7191a 3-55
+.github/COMMIT_CONVENTION.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 46-50,52
+.agents/resources/rules/documentation-site.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 32
+apps/dialtone-documentation/docs/components/loader.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 7,39-46,71-74,79
+packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 6,66-68,99,133
+  s_7f1d1d64baa803::t_be6286ba6fc6c4 134
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 6,49-55,78,104
+packages/dialtone-vue/components/Loader/Loader.test.js
+  s_7f1d1d64baa803::t_4955bb1dc7191a 44-47,63-109,128-148
+.github/workflows/dialtone-documentation-tests.yml
+  s_7f1d1d64baa803::t_4955bb1dc7191a 16,28
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_7f1d1d64baa803::t_4955bb1dc7191a 3-33,36-42,45-66,75,141-144,151,154-159,179-180,198,222,239,305-306,309-312,316,324,335-338,346,429-430,456-457,463-466,483-495
+  s_7f1d1d64baa803::t_2fbd5ad05428c1 496
+apps/dialtone-documentation/docs/.vuepress/baseComponents/showcaseCarouselMotion.js
+  s_7f1d1d64baa803::t_4955bb1dc7191a 19-34
+packages/dialtone-docs/project.json
+  s_7f1d1d64baa803::t_4955bb1dc7191a 19
+packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md
+  s_7f1d1d64baa803::t_4955bb1dc7191a 6,117
+  s_7f1d1d64baa803::t_9b4fd2379246d9 118
+packages/dialtone-vue/components/Loader/Loader.stories.js
+  s_7f1d1d64baa803::t_4955bb1dc7191a 6,9-15
+packages/dialtone-vue/components/Loader/LoaderConstants.js
+  s_7f1d1d64baa803::t_4955bb1dc7191a 1-4
+packages/dialtone-cli/release-ci.config.cjs
+  s_7f1d1d64baa803::t_4955bb1dc7191a 4,13,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ad0da1536f472a933f0272c360644f12f1b18226",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
