@@ -67,7 +67,8 @@ function importClosure (root, seeds, alias, cache) {
     if (!cache.has(file)) {
       const found = [];
       const missing = [];
-      for (const [, spec] of fs.readFileSync(file, 'utf8').matchAll(SPECIFIER)) {
+      for (const [, specifier] of fs.readFileSync(file, 'utf8').matchAll(SPECIFIER)) {
+        const spec = specifier.replace(/\?.*$/, ''); // Vite's `./en-US.ftl?raw` is en-US.ftl
         const base = spec.startsWith('.') ? path.resolve(path.dirname(file), spec)
           : alias && spec.startsWith('@/') ? path.join(root, spec.slice(2)) : null;
         const candidates = base ? SUFFIXES.map(s => base + s).filter(inRoot) : [];

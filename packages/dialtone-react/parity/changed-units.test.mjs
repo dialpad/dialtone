@@ -291,6 +291,20 @@ describe('changedUnits', () => {
     deleted('packages/dialtone-vue/common/mixins/input.js', []);
   });
 
+  test('an import with a query (Vite\'s ?raw) gates on the file before it, changed or deleted', () => {
+    const dir = path.join(root, 'query');
+    const react = tree(path.join(dir, 'dialtone-react'), ['components/Pagination/index.ts']);
+    const vue = tree(path.join(dir, 'dialtone-vue'), [
+      ['components/Pagination/Pagination.vue', "<script>\nimport { t } from '@/localization';\n</script>"],
+      ['localization/index.js', "import enUS from './en-US.ftl?raw';\nimport frCA from './fr-CA.ftl?raw';"],
+      'localization/en-US.ftl',
+    ]);
+    const units = file => changedUnits([file], { pkg: react, vueRoot: vue });
+    for (const file of ['packages/dialtone-vue/localization/en-US.ftl', 'packages/dialtone-vue/localization/fr-CA.ftl']) {
+      assert.deepEqual(units(file), { units: ['pagination'], errors: [] }, file);
+    }
+  });
+
   test('icons and emoji gate every unit, but not their Markdown; tokens and other Combinator files gate none', () => {
     for (const file of ['packages/dialtone-icons/src/svg/close.svg', 'packages/dialtone-icons/package.json',
       'packages/dialtone-emojis/src/emojis.json']) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);
