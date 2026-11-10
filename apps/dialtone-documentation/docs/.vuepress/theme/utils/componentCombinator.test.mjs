@@ -29,31 +29,17 @@ test('uses lowercase hyphenated preset slugs while preserving readable names', a
 
   assert.equal(getCombinatorPresetSlug('with presence, no icon'), 'with-presence-no-icon');
   assert.equal(getCombinatorPresetSlug('  Icon Avatar  '), 'icon-avatar');
+  assert.equal(getCombinatorPresetSlug('Crème brûlée'), 'creme-brulee');
   assert.equal(getCombinatorPresetName(variants, 'image'), 'image');
   assert.equal(getCombinatorPresetName(variants, 'with-presence-no-icon'), 'with presence, no icon');
   assert.equal(getCombinatorPresetName(variants, 'With-Presence-No-Icon'), 'with presence, no icon');
 });
 
-test('gives empty and colliding slugs unique deterministic links that round-trip', async () => {
+test('maps preset names to clean slugs while excluding bank metadata', async () => {
   const { getCombinatorPresetSlugs, getCombinatorPresetName } = await loadComponentCombinatorUtils();
-  const variants = { default: {}, '!!!': {}, '你好': {}, 'same name': {}, 'same-name': {}, '': {} };
-  const slugs = getCombinatorPresetSlugs(variants);
-  assert.equal(new Set(Object.values(slugs)).size, Object.keys(variants).length);
-  assert.ok(Object.values(slugs).every(Boolean));
-  for (const [name, slug] of Object.entries(slugs)) assert.equal(getCombinatorPresetName(variants, slug), name);
-  assert.deepEqual(getCombinatorPresetSlugs(variants), slugs);
-});
-
-test('keeps existing clean links when colliding preset names are appended', async () => {
-  const { getCombinatorPresetSlugs, getCombinatorPresetName } = await loadComponentCombinatorUtils();
-  const original = { default: {}, 'same name': {} };
-  const expanded = { ...original, 'same-name': {} };
-  assert.equal(getCombinatorPresetSlugs(original)['same name'], 'same-name');
-  const slugs = getCombinatorPresetSlugs(expanded);
-  assert.equal(slugs['same name'], 'same-name');
-  assert.equal(getCombinatorPresetName(expanded, 'same-name'), 'same name');
-  assert.equal(getCombinatorPresetName(expanded, slugs['same-name']), 'same-name');
-  assert.ok(slugs['same-name'].length < 25);
+  const variants = { default: {}, 'Crème brûlée': {}, defaults: {}, exclusions: [] };
+  assert.deepEqual(getCombinatorPresetSlugs(variants), { default: 'default', 'Crème brûlée': 'creme-brulee' });
+  assert.equal(getCombinatorPresetName(variants, 'CREME-BRULEE'), 'Crème brûlée');
 });
 
 test('falls back to default for missing, unknown, reserved, or repeated preset queries', async () => {

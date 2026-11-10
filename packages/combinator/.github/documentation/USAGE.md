@@ -168,10 +168,9 @@ URL actually stored there, so its outcome can depend on whether the earlier
 write completed before Back.
 Missing or invalid preset values resolve to `default`, and slug matching ignores
 case.
-Empty or colliding slugs receive a deterministic suffix so links remain unique.
-Appending a colliding name preserves the first declared preset's clean link.
-The docs authoring tests reject fallback slugs in shipped preset banks; choose
-distinct names before publishing. Keep preset names stable to preserve their URLs.
+Preset names must normalize to nonempty, distinct slugs within each bank.
+The docs authoring tests reject empty or duplicate slugs; choose distinct names
+before publishing. Keep preset names stable to preserve their URLs.
 
 ## Legacy examples
 

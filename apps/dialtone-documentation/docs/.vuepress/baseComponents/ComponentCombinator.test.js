@@ -316,6 +316,7 @@ it('accepts case-insensitive slugs and defaults unknown, reserved, and repeated 
 it('requires clean unambiguous slugs in all shipped component preset banks', () => {
   for (const [component, bank] of Object.entries(variantBank())) {
     const slugs = Object.values(getCombinatorPresetSlugs(bank));
-    expect(slugs.filter(slug => slug.includes('~')), component).toEqual([]);
+    expect(slugs.filter(slug => !slug), `${component}: preset slugs must be nonempty`).toEqual([]);
+    expect(new Set(slugs).size, `${component}: preset slugs must be unique`).toBe(slugs.length);
   }
 });

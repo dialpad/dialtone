@@ -73,8 +73,8 @@ without a preset parameter.
 
 - Keep existing names stable. Renaming or deleting a preset breaks its shared links.
 - Choose names that normalize to nonempty, distinct slugs. Case, spaces and punctuation
-  can make different names collide. Runtime `~` fallbacks are rejected for shipped
-  banks by the docs playground tests.
+  can make different names collide. The docs playground tests reject empty or duplicate
+  slugs in shipped banks.
 - After changing a bank, run `pnpm nx run dialtone-documentation:test-playground`.
 
 ## Member values
@@ -164,7 +164,7 @@ when the component becomes viable, and keep the reason short and user-facing.
   `unsupported_components.json` with a reason.
 - `default` renders a useful component-wall thumbnail, or an override exists.
 - Presets cover common states without becoming a storybook replacement.
-- Existing preset names stay stable, and shipped slugs need no `~` fallback.
+- Existing preset names stay stable, and shipped slugs are nonempty and unique within each bank.
 - Exclusions prevent known invalid combinations.
 - Names match component docgen output.
 - Token-numbered values stay strings.
