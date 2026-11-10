@@ -44,8 +44,8 @@ export function useMode (
       modeObserver = new MutationObserver(() => setModeResolved(getOppositeMode(findParentMode(getReferenceEl()))));
       modeObserver.observe(document.documentElement, MODE_OBSERVER_CONFIG);
       // Every ancestor, since any of them can set the mode the reference element inherits.
-      for (let parent = referenceEl?.parentElement; parent && parent !== document.documentElement; parent = parent.parentElement) {
-        modeObserver.observe(parent, MODE_OBSERVER_CONFIG);
+      for (let el = referenceEl?.parentElement; el && el !== document.documentElement; el = el.parentElement) {
+        modeObserver.observe(el, MODE_OBSERVER_CONFIG);
       }
     }
 

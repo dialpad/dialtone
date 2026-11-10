@@ -214,7 +214,9 @@ export function DtTooltip ({
 
   // Everything tippy is given through setProps, compared by value: an array prop mutated in place still reaches tippy on
   // the next render (Vue watches those deeply), and a new array with the same values doesn't call setProps again.
-  const tippyPropsKey = JSON.stringify([showArrow, offset, delay, placement, sticky, inverted, theme, transition, fallbackPlacements]);
+  const tippyPropsKey = JSON.stringify([
+    showArrow, offset, delay, placement, sticky, inverted, theme, transition, fallbackPlacements,
+  ]);
 
   // Props are read from the render's scope. tippy's callbacks, the external anchor's listeners and the delay's timer
   // outlive the render that set them up, and some effects read props without reacting to them: those go through Effect
