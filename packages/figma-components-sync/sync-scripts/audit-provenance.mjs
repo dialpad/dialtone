@@ -25,7 +25,7 @@ import { createServer } from 'vite';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
-import { flattenEdgeSlots } from './edge-slots.mjs';
+import { figmaTransformFor } from './edge-slots.mjs';
 import { converter, parse as parseColor } from 'culori';
 import { exemplarSlots } from './exemplar-slots.mjs';
 import { figmaChildParts } from './figma-mapping.mjs';
@@ -142,7 +142,7 @@ function figmaBindings (node) {
 // Re-rooted, batched — see figma-variants.mjs. The set-rooted fetch this replaced
 // truncated five levels below each variant, without saying so.
 const figByName = await fetchVariantsByName(figmaGet, FILE_KEY, setId,
-  { transform: cfg.edgeSlots ? flattenEdgeSlots : null });
+  { transform: figmaTransformFor(cfg) });
 
 const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js', server: { port: 0 }, logLevel: 'error' });
 await server.listen();

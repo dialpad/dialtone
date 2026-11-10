@@ -53,7 +53,7 @@ import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
 import { defaultVariantFindings } from './default-variant.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
-import { flattenEdgeSlots } from './edge-slots.mjs';
+import { figmaTransformFor } from './edge-slots.mjs';
 import { matchedFor } from './cdp-provenance.mjs';
 // The REAL comparison engine, never a copy. A copy would only ever verify the copy.
 import {
@@ -783,7 +783,7 @@ async function capture () {
   // than the check runs on can never perturb a field that only exists deeper — it would
   // report "all comparisons fire" about data the real pass does not see.
   const figByName = await fetchVariantsByName(figmaGet, FILE_KEY, SET_ID,
-    { transform: cfg.edgeSlots ? flattenEdgeSlots : null });
+    { transform: figmaTransformFor(cfg) });
 
   const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js',
     server: { port: 0 }, logLevel: 'error' });

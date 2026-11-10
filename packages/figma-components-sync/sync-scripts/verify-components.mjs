@@ -21,7 +21,7 @@ import { chromium } from 'playwright';
 import { createServer } from 'vite';
 import { converter, parse as parseColor, clampChroma, displayable, differenceCiede2000 } from 'culori';
 import { exemplarSlots } from './exemplar-slots.mjs';
-import { flattenEdgeSlots, edgeSlotFindings } from './edge-slots.mjs';
+import { edgeSlotFindings, figmaTransformFor } from './edge-slots.mjs';
 import { snappedValue, PILL } from './token-snap.mjs';
 
 const API = 'https://api.figma.com';
@@ -1479,7 +1479,7 @@ if (IS_CLI) {
   // An edge-slot config is compared in its FLAT shape (see edge-slots.mjs); the raw shape is kept
   // for the structure check below.
   const figByName = await fetchVariantsByName(figmaGet, FILE_KEY, setId,
-    { transform: cfg.edgeSlots ? flattenEdgeSlots : null });
+    { transform: figmaTransformFor(cfg) });
 
   const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js', server: { port: 0 }, logLevel: 'error' });
   await server.listen();

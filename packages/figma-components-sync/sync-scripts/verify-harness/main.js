@@ -4,7 +4,7 @@
  * A synthetic button keeps the UA `appearance` and misses the reset, which makes
  * every colour reading wrong.
  */
-import { createApp, reactive, h } from 'vue';
+import { createApp, reactive, h, provide, defineComponent } from 'vue';
 import * as dialtoneVue from '@dialpad/dialtone-vue';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 // Theme first: it defines the --dt-* custom properties. Without it every
@@ -23,8 +23,28 @@ import '../../../dialtone-css/lib/dist/dialtone-default-theme.css';
 import '../../../dialtone-tokens/dist/css/layered/tokens-base-colors.css';
 import '../../../dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
 import '../../../dialtone-css/lib/dist/dialtone.css';
+// A segmented-control item's divider, for an item mounted on its own (see the file).
+import './segmented-control-divider.css';
 
-const state = reactive({ component: 'DtButton', props: {}, label: 'Button', slots: [], rootClass: null });
+const state = reactive({ component: 'DtButton', props: {}, label: 'Button', slots: [], rootClass: null, provideNames: [] });
+
+/**
+ * CONTEXT THE COMPONENT INJECTS FROM A PARENT IT IS NEVER MOUNTED INSIDE.
+ *
+ * DtSegmentedControlItem takes its size and its selected state from the group it sits in
+ * (`inject`), so mounted alone it is always unselected and always the default size, and the
+ * variants it exists to show cannot be rendered. A config's `props()` may carry `__provide`:
+ * { EXPORTED_KEY_NAME: value }, which is taken out of the props and provided around the component
+ * by a component that renders only its child, so the measured root is still the component.
+ */
+const provided = {};
+const Provider = defineComponent({
+  props: { names: { type: Array, default: () => [] } },
+  setup (props, { slots }) {
+    for (const n of props.names) provide(dialtoneVue[n], provided[n]);
+    return () => slots.default();
+  },
+});
 
 /**
  * Turn a config's slot spec into vnodes.
@@ -117,12 +137,15 @@ const app = createApp({
     // DtToggle has zero gap between label and switch until a class supplies one, and
     // every Dialtone doc example supplies one. Rendering without it would depict a
     // component nobody ships.
-    return h(C, {
+    const subject = () => h(C, {
       ...state.props,
       ...(state.rootClass ? { class: state.rootClass } : {}),
       id: 'subject',
       key: state.slots.join('|') + '|' + (state.rootClass || ''),
     }, slots);
+    return state.provideNames.length
+      ? h(Provider, { names: state.provideNames, key: state.provideNames.join('|') }, { default: () => [subject()] })
+      : subject();
   },
 });
 
@@ -149,7 +172,14 @@ window.__setMode = (mode) => {
 
 window.__setProps = async (component, props, opts = {}) => {
   state.component = component;
-  state.props = props;
+  const { __provide: toProvide, ...ownProps } = props || {};
+  for (const [name, value] of Object.entries(toProvide || {})) {
+    provided[name] = provided[name] || reactive({});
+    for (const k of Object.keys(provided[name])) delete provided[name][k];
+    Object.assign(provided[name], value);
+  }
+  state.provideNames = Object.keys(toProvide || {});
+  state.props = ownProps;
   if (opts.label !== undefined) state.label = opts.label;
   state.slots = opts.slots || [];
   state.slotContent = opts.slotContent || {};

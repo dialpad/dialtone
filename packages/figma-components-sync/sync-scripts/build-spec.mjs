@@ -23,6 +23,7 @@ import { createServer } from 'vite';
 import { converter, parse as parseColor, clampChroma, displayable } from 'culori';
 import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
   shadowLayerColorTokens } from './cdp-provenance.mjs';
+import { flatSlotContent } from './exemplar-slots.mjs';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
 import { defaultCombo, wantedDefaults } from './default-variant.mjs';
@@ -1095,7 +1096,7 @@ const combos = combosFor(cfg);
 async function measure (combo, slots) {
   const sc = cfg.slotContent ? cfg.slotContent(combo) : {};
   slotSwapTargets = Object.fromEntries(
-    Object.entries(sc).filter(([, v]) => v && v.swapTo).map(([k, v]) => [k, v.swapTo]));
+    Object.entries(flatSlotContent(sc)).filter(([, v]) => v && v.swapTo).map(([k, v]) => [k, v.swapTo]));
   anatomySwap = cfg.anatomySwap ? cfg.anatomySwap(combo) : null;
   await page.evaluate(([c, p, o]) => window.__setProps(c, p, o),
     [cfg.component, cfg.props(combo), { label: cfg.label, slots, slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass, containerClass: containerClassOf(cfg, combo) }]);
