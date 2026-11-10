@@ -14,9 +14,35 @@ class MockObserver {
   unobserve () {}
 }
 
+// jsdom has neither; simulatePaste (tests/helpers/clipboard.ts) dispatches a paste carrying one.
+class MockClipboardEvent extends Event {
+  clipboardData: DataTransfer | null;
+
+  constructor (type: string, options: ClipboardEventInit = {}) {
+    super(type, options);
+    this.clipboardData = options.clipboardData ?? null;
+  }
+}
+
+class MockDataTransfer {
+  types: string[] = [];
+  data = new Map<string, string>();
+
+  getData (format: string) {
+    return this.data.get(format) || '';
+  }
+
+  setData (format: string, data: string) {
+    this.data.set(format, data);
+    if (!this.types.includes(format)) this.types.push(format);
+  }
+}
+
 beforeAll(() => {
   globalThis.IntersectionObserver = MockObserver as unknown as typeof IntersectionObserver;
   globalThis.ResizeObserver = MockObserver as unknown as typeof ResizeObserver;
+  globalThis.ClipboardEvent = MockClipboardEvent as unknown as typeof ClipboardEvent;
+  globalThis.DataTransfer = MockDataTransfer as unknown as typeof DataTransfer;
 
   // :focus-visible isn't supported by jsdom (https://github.com/jsdom/jsdom/issues/3426).
   const matchesOriginal = HTMLElement.prototype.matches;
