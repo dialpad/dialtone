@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.1.1...dialtone-tokens/v2.1.2) (2026-11-10)
+
+
+### Code Refactoring
+
+* **Dialtone Tokens:** NO-JIRA stop syncing the unrestricted variable collection ([#1526](https://github.com/dialpad/dialtone/issues/1526)) ([9702d20](https://github.com/dialpad/dialtone/commit/9702d20f7613e24e8f8389f89e2f5ab975e9eacd))
+
 ## [2.1.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.1.0...dialtone-tokens/v2.1.1) (2026-11-03)
 
 
