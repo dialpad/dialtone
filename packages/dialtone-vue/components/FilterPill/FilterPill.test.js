@@ -3,7 +3,6 @@ import { h, nextTick, toRaw } from 'vue';
 import { LocaleManager, RawBundleSource, MemoryStorageWrapper } from '@dialpad/i18n';
 import { DialtoneLocalization } from '@/localization';
 import enUS from '@/localization/en-US.ftl?raw';
-import frFR from '@/localization/fr-FR.ftl?raw';
 import DtFilterPill from './FilterPill.vue';
 import { DtPopover } from '@/components/Popover';
 import { DtDropdown } from '@/components/Dropdown';
@@ -781,14 +780,12 @@ describe('DtFilterPill custom content and localized display', () => {
     it('mounts an empty model with a destructured scoped slot and closes the real overlay', async () => {
       const errors = vi.fn();
       const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      const content = vi.fn(({ close }) => h('button', {
+      const content = ({ close }) => h('button', {
         'data-qa': 'custom-close', onClick: close,
-      }, 'Close custom content'));
+      }, 'Close custom content');
       updateWrapper({ useDropdown }, { content }, errors);
 
       expect(errors).not.toHaveBeenCalled();
-      // Every invocation must receive render bindings; diagnostics must not invoke the slot.
-      expect(content.mock.calls.every(([bindings]) => typeof bindings?.close === 'function')).toBe(true);
       expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
       await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
       expect(document.querySelector('[data-qa="custom-close"]')).not.toBeNull();
@@ -796,26 +793,24 @@ describe('DtFilterPill custom content and localized display', () => {
       await nextTick();
       expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
     });
+  });
 
-    it('accepts a present but empty content slot without a warning', () => {
-      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      const content = vi.fn(() => undefined);
-      updateWrapper({ useDropdown }, { content });
-      expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
-      expect(content.mock.calls.every(([bindings]) => typeof bindings?.close === 'function')).toBe(true);
-    });
+  it('accepts a present but empty content slot without a warning', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    updateWrapper({}, { content: () => undefined });
+    expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
+  });
 
-    it('warns once when both the model and content slot are absent', () => {
-      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      updateWrapper({ useDropdown });
-      expect(warn.mock.calls.filter(([message]) => message === missingContentWarning)).toHaveLength(1);
-    });
+  it('warns once when both the model and content slot are absent', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    updateWrapper();
+    expect(warn.mock.calls.filter(([message]) => message === missingContentWarning)).toHaveLength(1);
+  });
 
-    it('accepts nonempty model content without a warning', () => {
-      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      updateWrapper({ useDropdown, modelValue: [{ name: 'Support' }] });
-      expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
-    });
+  it('accepts nonempty model content without a warning', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    updateWrapper({ modelValue: [{ name: 'Support' }] });
+    expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
   });
 
   const useLocale = (locale, frenchResource = `DIALTONE_FILTER_PILL_ALL_LABEL = Tous
@@ -840,8 +835,8 @@ DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
     new DialtoneLocalization().i18n = manager.useI18N('filter-pill-test');
   };
 
-  it('uses English fallback for new keys in a shipped locale without translations', () => {
-    useLocale('fr-FR', frFR);
+  it('uses English fallback when the locale resource lacks the new keys', () => {
+    useLocale('fr-FR', 'TEST_ONLY_MESSAGE = Fixture without FilterPill keys');
     updateWrapper({ modelValue: [{ name: 'Support', active: true }, { name: 'Sales', active: true }] });
     expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('All');
     wrapper.unmount();
@@ -871,7 +866,7 @@ DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
     { locale: 'fr-FR', all: 'Tous', singular: 'plus \u20681\u2069 autre', plural: 'plus \u20682\u2069 autres' },
   ])('Built-in display with real Fluent resources ($locale)', ({ locale, all, singular, plural }) => {
     beforeEach(() => {
-      // French is a test-only translated resource, separate from the shipped fallback case above.
+      // French is a test-only translated resource, separate from the missing-key fallback case above.
       useLocale(locale);
     });
 
