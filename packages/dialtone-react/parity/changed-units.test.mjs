@@ -263,6 +263,34 @@ describe('changedUnits', () => {
     expect(['packages/combinator/src/lib/exclusion_rules.js'], ['tab-group']);
   });
 
+  // CI checks out the change's head, so a file the change deletes is gone while `git diff` still lists it.
+  test('a deleted file a unit imports still gates it: a Combinator helper, a React or a Vue file', () => {
+    const gone = path.join(root, 'gone');
+    const react = tree(path.join(gone, 'dialtone-react'), [
+      'components/TabGroup/index.ts',
+      ['components/Tooltip/index.ts', "export * from './Tooltip';"],
+      ['components/Tooltip/Tooltip.tsx', "import { createTippy } from '../Popover/TippyUtils';"],
+    ]);
+    const vue = tree(path.join(gone, 'dialtone-vue'), [
+      'components/Tab/TabGroup.vue',
+      ['components/Tooltip/Tooltip.vue', "<script>\nimport ModeMixin from '@/common/mixins/mode';\n</script>"],
+    ]);
+    // Combinator next to it, where tab-group's presets import a helper that's gone too.
+    tree(path.join(gone, 'combinator/src'), [
+      ['variants/variants.js', "import DtTabGroup from './variants_tab_group.js';\n"],
+      ['variants/variants_tab_group.js', "import { hasValue } from '@/src/lib/exclusion_rules';"],
+    ]);
+    const deleted = (file, units) => assert.deepEqual(changedUnits([file], { pkg: react, vueRoot: vue }),
+      { units, errors: [] }, file);
+    deleted('packages/combinator/src/lib/exclusion_rules.js', ['tab-group']);
+    deleted('packages/dialtone-react/components/Popover/TippyUtils.ts', ['tooltip']);
+    deleted('packages/dialtone-vue/common/mixins/mode.js', ['tooltip']);
+    // A deleted file nothing imports still gates nothing.
+    deleted('packages/combinator/src/lib/option_bar.js', []);
+    deleted('packages/dialtone-react/components/Popover/PopoverConstants.ts', []);
+    deleted('packages/dialtone-vue/common/mixins/input.js', []);
+  });
+
   test('icons and emoji gate every unit, but not their Markdown; tokens and other Combinator files gate none', () => {
     for (const file of ['packages/dialtone-icons/src/svg/close.svg', 'packages/dialtone-icons/package.json',
       'packages/dialtone-emojis/src/emojis.json']) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);

@@ -6,8 +6,9 @@
 //     components/: directives/tooltip_directive is tooltip's, common/sr_only_close_button.vue is button's. A Vue
 //     change (a staging sync) can break parity as surely as a React one. A deleted path is placed by its shape
 //     (unitsOfPath), since the lookup only sees files that exist;
-//   - a file the unit's React or Vue sources import, directly or not: Checkbox renders DtText, so a change to Text on
-//     either side can break checkbox's parity, and Tooltip uses Popover/TippyUtils, which is no unit of its own;
+//   - a file the unit's React or Vue sources import, directly or not, deleted or not: Checkbox renders DtText, so a
+//     change to Text on either side can break checkbox's parity, and Tooltip uses Popover/TippyUtils, which is no
+//     unit of its own;
 //   - the unit's Combinator presets, which are DOM parity's cases: the variants file the registry maps it to
 //     (presetFiles), and what that file imports inside Combinator;
 //   - a shared file (SHARED): every ported unit, since the harness, foundations, configs and dependencies are
@@ -55,30 +56,41 @@ const walk = p => (isFile(p) ? [p] : fs.existsSync(p)
     .map(d => path.join(d.parentPath, d.name))
   : []);
 
-/** Every file under `root` that `seeds` (absolute paths) reach through imports, the seeds included, relative to it. */
+/**
+ * Every file under `root` that `seeds` (absolute paths) reach through imports, the seeds included, relative to it.
+ * An import that resolves to no file adds every path it could resolve to, unfollowed: CI checks out the change's
+ * head, so a file the change deletes is gone while `git diff` still lists it.
+ */
 function importClosure (root, seeds, alias, cache) {
+  const inRoot = f => !path.relative(root, f).startsWith('..');
   const importsOf = (file) => {
     if (!cache.has(file)) {
       const found = [];
+      const missing = [];
       for (const [, spec] of fs.readFileSync(file, 'utf8').matchAll(SPECIFIER)) {
         const base = spec.startsWith('.') ? path.resolve(path.dirname(file), spec)
           : alias && spec.startsWith('@/') ? path.join(root, spec.slice(2)) : null;
-        const hit = base && SUFFIXES.map(s => base + s).find(isFile);
-        if (hit && !path.relative(root, hit).startsWith('..')) found.push(hit);
+        const candidates = base ? SUFFIXES.map(s => base + s).filter(inRoot) : [];
+        const hit = candidates.find(isFile);
+        if (hit) found.push(hit);
+        else missing.push(...candidates);
       }
-      cache.set(file, found);
+      cache.set(file, { found, missing });
     }
     return cache.get(file);
   };
   const seen = new Set();
+  const gone = new Set();
   const queue = seeds.filter(f => !STORY.test(f));
   while (queue.length) {
     const file = queue.pop();
     if (seen.has(file)) continue;
     seen.add(file);
-    queue.push(...importsOf(file).filter(f => !STORY.test(f)));
+    const { found, missing } = importsOf(file);
+    queue.push(...found.filter(f => !STORY.test(f)));
+    missing.filter(f => !STORY.test(f)).forEach(f => gone.add(f));
   }
-  return new Set([...seen].map(f => path.relative(root, f)));
+  return new Set([...seen, ...gone].map(f => path.relative(root, f)));
 }
 
 /**
