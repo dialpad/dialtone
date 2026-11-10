@@ -209,13 +209,14 @@ function canonicalAttributes (el, rewrite) {
     if (holdsIdRefs(name)) v = rewrite(v);
     out.push([name, v]);
   }
-  // Form controls: live state, not attributes (frameworks set value/checked as properties).
+  // Form controls: live state, not attributes (frameworks set value/checked as properties). An option's value is what
+  // its select reports when it's chosen, so options keep theirs too (el.value: the text when there's no attribute).
   const tag = el.localName;
   if (tag === 'input' || tag === 'textarea' || tag === 'select' || tag === 'option') {
     const drop = new Set(['value', 'checked', 'selected', 'indeterminate']);
     for (let i = out.length - 1; i >= 0; i--) if (drop.has(out[i][0])) out.splice(i, 1);
-    if (tag === 'option') { if (el.selected) out.push(['data-parity-selected', 'true']); }
-    else out.push(['data-parity-value', el.value]);
+    out.push(['data-parity-value', el.value]);
+    if (tag === 'option' && el.selected) out.push(['data-parity-selected', 'true']);
     if (tag === 'input' && (el.type === 'checkbox' || el.type === 'radio')) {
       out.push(['data-parity-checked', String(el.checked)]);
       if (el.indeterminate) out.push(['data-parity-indeterminate', 'true']);
