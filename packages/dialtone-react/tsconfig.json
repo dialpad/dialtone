@@ -15,6 +15,6 @@
     "checkJs": false,
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom/vitest"]
   },
-  "include": ["index.ts", "common", "components", "icons", "parity", "tests", "vite.config.ts"],
-  "exclude": ["parity/vue"]
+  "include": ["index.ts", ".storybook/**/*", "common", "compare", "compare/.storybook/**/*", "components", "icons", "parity", "tests", "vite.config.ts"],
+  "exclude": ["parity/vue", "compare/generated"]
 }
