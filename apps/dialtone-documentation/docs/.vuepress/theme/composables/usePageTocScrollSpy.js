@@ -155,7 +155,7 @@ export function usePageTocScrollSpy (headers, { interceptAnchors = false } = {})
       await nextTick();
       if (failure) return;
       const target = scrollToHash(item.link);
-      if (target && unref(interceptAnchors)) {
+      if (target) {
         if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
         target.focus({ preventScroll: true });
       }

@@ -86,19 +86,48 @@ it.each(['playground', 'content demo'])(
   },
 );
 
-it('keeps the pre-existing TOC focus behavior when the page has no playground', async () => {
+it.each([false, true])('focuses the TOC target regardless of playground interception (%s)', async interceptAnchors => {
   await mountAnchors();
   toc.unmount();
-  toc = mountDocsToc(router, { interceptAnchors: false });
+  toc = mountDocsToc(router, { interceptAnchors });
   await settle();
   const anchor = scroller.querySelector('a');
   const target = scroller.querySelector('#image');
+  const focus = vi.spyOn(target, 'focus');
   anchor.focus();
   await toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' });
   await settle();
   expect(scroller.scrollTo).toHaveBeenCalled();
+  expect(document.activeElement).toBe(target);
+  expect(focus).toHaveBeenCalledWith({ preventScroll: true });
+  expect(target.getAttribute('tabindex')).toBe('-1');
+  expect(router.currentRoute.value.query).toEqual({ other: 'keep' });
+});
+
+it('preserves an existing TOC target tabindex when moving focus', async () => {
+  await mountAnchors();
+  const target = scroller.querySelector('#image');
+  target.setAttribute('tabindex', '0');
+  await toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' });
+  await settle();
+  expect(document.activeElement).toBe(target);
+  expect(target.getAttribute('tabindex')).toBe('0');
+});
+
+it.each(['missing target', 'cancelled navigation'])('keeps focus on the TOC link after a %s', async outcome => {
+  await mountAnchors();
+  const anchor = scroller.querySelector('a');
+  const target = scroller.querySelector('#image');
+  if (outcome === 'missing target') target.remove();
+  const stop = router.beforeEach(() => outcome !== 'cancelled navigation');
+  anchor.focus();
+  try {
+    await toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' });
+    await settle();
+  } finally {
+    stop();
+  }
   expect(document.activeElement).toBe(anchor);
-  expect(target.hasAttribute('tabindex')).toBe(false);
 });
 
 it('preserves custom edits on an anchor click, Back and Forward', async () => {
