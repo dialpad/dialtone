@@ -133,7 +133,11 @@ function modifierOf (modifiers: ModifierMap, value: string | number): string | u
   return Object.hasOwn(modifiers, key) ? modifiers[key] : undefined;
 }
 
-function getModifierClass (value: string | number | null | undefined, modifiers: ModifierMap, propName: string): string | null {
+function getModifierClass (
+  value: string | number | null | undefined,
+  modifiers: ModifierMap,
+  propName: string,
+): string | null {
   if (value === null || value === undefined) {
     return null;
   }
@@ -273,8 +277,14 @@ export function DtText<T extends ElementType = 'span'> ({
 }: DtTextProps<T>) {
   // Memoized like Vue's computed: an unsupported value warns once per change, not on every render.
   const textClasses = useMemo(
-    () => getTextClasses({ kind, variant, size, family, italic, tone, align, truncate, maxLines, numeric, wrap, textBoxTrim, strength, density }),
-    [kind, variant, size, family, italic, tone, align, truncate, maxLines, numeric, wrap, textBoxTrim, strength, density],
+    () => getTextClasses({
+      kind, variant, size, family, italic, tone, align, truncate, maxLines, numeric, wrap, textBoxTrim, strength,
+      density,
+    }),
+    [
+      kind, variant, size, family, italic, tone, align, truncate, maxLines, numeric, wrap, textBoxTrim, strength,
+      density,
+    ],
   );
   const textStyles: TextStyle | undefined = maxLines ? { '--dt-text-line-clamp': maxLines } : undefined;
 
