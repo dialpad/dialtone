@@ -59,6 +59,7 @@ it('derives a settled named selection from the URL and current bank', async () =
   const { router, sync } = await mountPresetSync(variants);
   await sync.updatePreset('image');
   expect(sync.preset.value).toBe('image');
+  await sync.updatePreset('image');
   variants.value = { default: {} };
   await nextTick();
   expect(sync.preset.value).toBe('default');
@@ -151,7 +152,14 @@ it('owns and releases its router hooks and watcher across mount cycles', async (
   expect(instances[0].preset.value).toBe('with presence');
   await instances[0].updatePreset('image');
   expect(router.currentRoute.value.query.preset).toBe('image');
-  // A retained local draft lets us detect leaked handlers/watchers without freezing a computed URL value.
+  await instances[0].updatePreset('');
+  expect(instances[0].preset.value).toBe('');
+  componentName.value = 'DtButton';
+  await nextTick();
+  expect(instances[0].preset.value).toBe('default');
+  componentName.value = 'DtAvatar';
+  await nextTick();
+  // Retain another draft for cleanup checks after verifying that a mounted host change clears it.
   await instances[0].updatePreset('');
   expect(instances[0].preset.value).toBe('');
   active.value = false;
