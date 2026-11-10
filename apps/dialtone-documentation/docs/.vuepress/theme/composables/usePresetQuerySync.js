@@ -32,6 +32,10 @@ function getDeferredPreset (to, from, intent, preset) {
   return { preset, path: intent.path, query: intent.query };
 }
 
+/**
+ * @param {import('vue').WatchSource<string>} componentName - Ref or getter for the component name.
+ * @param {import('vue').Ref<Record<string, unknown>>} variants - Ref or computed ref for the current preset bank.
+ */
 export function usePresetQuerySync (componentName, variants) {
   const router = useRouter();
   const preset = ref('default');

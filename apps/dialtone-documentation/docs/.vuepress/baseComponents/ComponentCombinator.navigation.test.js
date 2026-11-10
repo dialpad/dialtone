@@ -1,5 +1,6 @@
 import { vi } from 'vitest';
 import { createMemoryHistory } from 'vue-router';
+import { DtButton } from '@dialpad/dialtone-vue';
 import { createRouteHashScrollGuard, getPageScrollPosition, writeRouteHash } from '../theme/utils/pageToc.js';
 import { mountDocsCombinator, settleCombinator as settle } from './combinatorTestUtils.js';
 
@@ -17,6 +18,23 @@ afterEach(() => {
 async function mountDocs (query, options) {
   ({ wrapper, router, combinator } = await mountDocsCombinator(query, options));
 }
+
+it('reapplies a Button preset URL when the host component name changes', async () => {
+  await mountDocs();
+  const query = { preset: 'loading', other: 'keep' };
+  await router.push({ path: '/components/button.html', query });
+  await settle();
+  // Avatar cannot resolve this Button-only preset until the host receives its new component name.
+  expect(combinator.vm.selectedVariant).toBe('default');
+  await wrapper.setProps({ componentName: 'DtButton' });
+  await settle();
+  expect(combinator.props('component')).toBe(DtButton);
+  expect(combinator.vm.selectedVariant).toBe('loading');
+  const options = combinator.findComponent({ name: 'DtcRenderer' }).props('options');
+  expect(options.props.loading).toBe(true);
+  expect(options.slots.default).toBe('Add contact');
+  expect(router.currentRoute.value.query).toEqual(query);
+});
 
 it('continues writing presets after an external navigation throws', async () => {
   await mountDocs({});
