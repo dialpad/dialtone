@@ -72,6 +72,10 @@ combinator: DtFilterPill
 - The `content` slot overrides the popover body, replacing the default checkbox list with custom content (e.g., radio groups).
 - **In-place mutation**: The pill keeps the initial `modelValue` array reference. Mutate its objects in place with `forEach`; replacing the array with `map` does not update the pill's internal reference.
 
+The built-in label localizes the aggregate “All” selection and the overflow title (“plus 1 other” or “plus 2 others” in English). Option names are displayed as supplied, including an option named “All”. New strings use English fallback until translations are available. Fluent may surround counts with Unicode bidirectional isolation marks in the title attribute.
+
+For compatibility, the `default` slot's `activeFilterList` binding remains the literal string `'All'` when every item is active and there is more than one item. Custom labels can continue comparing this value; localize custom slot content in your application. `activeFilterOverflow` remains a string such as `'+2'`.
+
 <dialtone-usage>
 <template #do>
 
@@ -166,7 +170,7 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 
 ### Clearable
 
-A clear button appears when any filter is active. It emits the `reset` event when clicked.
+A clear button appears when any filter is active. It emits the `clear` event when clicked.
 
 ```vue demo
 <!-- @wrapper -->
@@ -182,7 +186,7 @@ A clear button appears when any filter is active. It emits the `reset` event whe
 
 ### Non clearable
 
-Setting the `:show-clear="false"` prop hides the reset/clear button.
+Setting the `:show-clear="false"` prop hides the clear button.
 
 ```vue demo
 <!-- @wrapper -->
@@ -412,7 +416,7 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 ### Keyboard interaction
 
 | Key | Action |
-|-----|--------|
+| ----- | -------- |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Opens the popover or dropdown; toggles checkboxes inside |
 | <kbd>Arrow Up</kbd> / <kbd>Arrow Down</kbd> | Opens the popover; navigates list items in dropdown mode |
 | <kbd>Escape</kbd> | Closes the popover or dropdown, discarding pending changes in deferred mode |
