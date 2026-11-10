@@ -1,4 +1,4 @@
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { getCombinatorPresetName, getCombinatorPresetSlugs } from '../utils/componentCombinator.js';
 import { getCurrentBrowserHash, suppressRouteHashScroll } from '../utils/pageToc.js';
@@ -10,26 +10,22 @@ function getNavigationOrigin (route) {
 function hasSamePresetQuery (to, from) {
   const first = to.query.preset;
   const second = from.query.preset;
-  if (first === second) return true;
   // Repeated query values are arrays recreated for each navigation.
-  return Array.isArray(first) && Array.isArray(second)
-    && first.length === second.length
-    && first.every((value, index) => value === second[index]);
+  return first === second || Array.isArray(first) && Array.isArray(second)
+    && first.length === second.length && first.every((value, index) => value === second[index]);
 }
 
 function hasSamePresetRoute (to, from) {
   return to.path === from.path && hasSamePresetQuery(to, from);
 }
 
-function getPresetNavigationFrom (to, navigation, fallback) {
-  // Redirects continue the original navigation's comparison, including its pending intent.
-  return getNavigationOrigin(navigation?.route) === getNavigationOrigin(to) ? navigation.presetFrom : fallback;
+function getPresetNavigationFrom (to, navigation, pendingFrom, route) {
+  return getNavigationOrigin(navigation?.route) === getNavigationOrigin(to)
+    ? navigation.presetFrom : pendingFrom ?? route;
 }
 
-function getDeferredPreset (to, from, intent, preset) {
-  if (!intent || intent.path !== to.path || !hasSamePresetRoute(to, from)) return null;
-  if (hasSamePresetQuery(to, intent)) return null;
-  return { preset, path: intent.path, query: intent.query };
+function shouldQueueIntent (to, from, intent) {
+  return Boolean(intent && intent.path === to.path && hasSamePresetRoute(to, from) && !hasSamePresetQuery(to, intent));
 }
 
 /**
@@ -38,117 +34,101 @@ function getDeferredPreset (to, from, intent, preset) {
  */
 export function usePresetQuerySync (componentName, variants) {
   const router = useRouter();
-  const preset = ref('default');
-
-  // UI edit -> pending replace, tagged with an id so older writes cannot clear newer intent.
-  // External navigation -> defer UI writes until settlement; replay only on their owning page.
-  // History compares with pending intent; redirects retain the original comparison.
-  // Success retires the superseded write; failure releases the external-navigation gate.
-  // Only preset is reactive. Plain bookkeeping preserves router-object identity without markRaw.
-  let presetNavigationId = 0;
-  let pendingPresetNavigation = null;
+  // Settled named selection comes from the URL. Only an unsaved edit or UI intent overrides it.
+  const localIntent = shallowRef(null);
+  const preset = computed(() => localIntent.value?.preset
+    ?? getCombinatorPresetName(variants.value, router.currentRoute.value.query.preset));
+  // Write identity retires only its own pending work; navigation owns any queued intent until it settles.
+  let pendingWrite = null;
   let externalNavigation = null;
   let historyPop = null;
-  let deferredPreset = null;
   const navigationStops = [];
 
-  function onHistoryNavigation (to, from, info) {
-    // Old native-anchor entries may have no direction because their positions match.
-    if (info.type === 'pop') {
-      historyPop = router.resolve(to).fullPath;
-    }
+  function applyNavigationPreset (to, from, write) {
+    if (pendingWrite === write) pendingWrite = null;
+    if (!hasSamePresetRoute(to, from)) localIntent.value = null;
   }
 
-  function onPresetNavigationSettled (to, from, failure) {
-    const externalOrigin = getNavigationOrigin(externalNavigation?.route);
-    if (externalOrigin === getNavigationOrigin(to)) {
-      const { presetFrom, pendingId } = externalNavigation;
+  function replayQueuedIntent (intent) {
+    if (!intent?.queued) return;
+    intent.queued = false;
+    if (intent.path === router.currentRoute.value.path) updatePreset(intent.preset);
+  }
+
+  function onNavigationSettled (to, from, failure) {
+    if (getNavigationOrigin(externalNavigation?.route) === getNavigationOrigin(to)) {
+      const navigation = externalNavigation;
+      // Keep a click made during navigation even if applying its destination clears the old page's draft.
+      const intent = localIntent.value;
       externalNavigation = null;
-      if (!failure) applyNavigationPreset(to, presetFrom, pendingId);
-      flushDeferredPreset();
-    } else if (!failure && to.fullPath !== pendingPresetNavigation?.fullPath) {
+      if (!failure) applyNavigationPreset(to, navigation.presetFrom, navigation.write);
+      replayQueuedIntent(intent);
+    } else if (!failure && to.fullPath !== pendingWrite?.fullPath) {
       applyNavigationPreset(to, from);
     }
   }
 
-  function applyNavigationPreset (to, from, pendingId) {
-    // A successful external navigation supersedes this write, even if its guard is still held.
-    if (pendingPresetNavigation?.id === pendingId) pendingPresetNavigation = null;
-    if (!hasSamePresetRoute(to, from)) readPresetRoute(to);
-  }
-
-  function readPresetRoute (route) {
-    preset.value = getCombinatorPresetName(variants.value, route.query.preset);
-  }
-
-  function flushDeferredPreset () {
-    const deferred = deferredPreset;
-    deferredPreset = null;
-    if (deferred?.path === router.currentRoute.value.path) updatePreset(deferred.preset);
-  }
-
   function updatePreset (nextPreset) {
-    preset.value = nextPreset;
-    const query = { ...router.currentRoute.value.query };
+    const route = router.currentRoute.value;
+    const query = { ...route.query };
     if (nextPreset && nextPreset !== 'default') query.preset = getCombinatorPresetSlugs(variants.value)[nextPreset];
     else delete query.preset;
-
-    if (externalNavigation) {
-      // A preset click on the departing page must not supersede its page navigation.
-      deferredPreset = { preset: nextPreset, path: router.currentRoute.value.path, query };
+    const intent = { preset: nextPreset, path: route.path, query, queued: Boolean(externalNavigation) };
+    localIntent.value = intent;
+    if (intent.queued) return;
+    if (!pendingWrite && query.preset === route.query.preset) {
+      if (nextPreset !== '') localIntent.value = null;
       return;
     }
-
-    if (!pendingPresetNavigation && query.preset === router.currentRoute.value.query.preset) return;
-    const location = { path: router.currentRoute.value.path, query, hash: getCurrentBrowserHash() };
-    const id = ++presetNavigationId;
-    pendingPresetNavigation = {
-      id, fullPath: router.resolve(location).fullPath, path: location.path, query,
-    };
-    // A newer write must still navigate when it matches the current URL: it cancels an older pending replace.
-    // Navigation error hooks restore state; DOM event handlers cannot handle a rejection.
-    return router.replace(location).catch(() => {}).finally(() => {
-      if (pendingPresetNavigation?.id === id) pendingPresetNavigation = null;
+    const location = { path: route.path, query, hash: getCurrentBrowserHash() };
+    // A fresh object distinguishes consecutive writes, including ones to the same URL.
+    const write = { ...intent, fullPath: router.resolve(location).fullPath };
+    pendingWrite = write;
+    return router.replace(location).then(() => {
+      // Settled selections return to URL ownership; queued requests and unsaved edits still need their override.
+      if (localIntent.value === intent && !intent.queued && nextPreset !== '') localIntent.value = null;
+    }).catch(() => {}).finally(() => {
+      if (pendingWrite === write) pendingWrite = null;
     });
   }
 
-  watch(componentName, () => readPresetRoute(router.currentRoute.value), { immediate: true });
+  watch(componentName, () => { localIntent.value = null; });
 
   onMounted(() => {
     navigationStops.push(
-      router.options.history.listen(onHistoryNavigation),
+      router.options.history.listen((to, from, info) => {
+        if (info.type === 'pop') historyPop = router.resolve(to).fullPath;
+      }),
       router.beforeEach(to => {
         const isPop = historyPop === to.fullPath;
         historyPop = null;
-        if (!isPop && to.fullPath === pendingPresetNavigation?.fullPath) {
+        if (!isPop && to.fullPath === pendingWrite?.fullPath) {
           suppressRouteHashScroll(to);
-        } else {
-          const intent = deferredPreset ?? pendingPresetNavigation;
-          // History restores relative to the latest UI intent, even before its URL write commits.
-          const presetFrom = getPresetNavigationFrom(
-            to, externalNavigation, isPop && intent ? intent : router.currentRoute.value,
-          );
-          // TOC/query pushes can carry the old query. A different preset discards that deferral.
-          deferredPreset = getDeferredPreset(to, presetFrom, intent, preset.value);
-          externalNavigation = { route: to, presetFrom, pendingId: pendingPresetNavigation?.id };
+          return;
         }
+        const intent = localIntent.value?.queued ? localIntent.value : pendingWrite;
+        // Redirects retain the original comparison; Back compares against the latest pending UI intent.
+        const presetFrom = getPresetNavigationFrom(
+          to, externalNavigation, isPop ? intent : null, router.currentRoute.value,
+        );
+        if (localIntent.value) {
+          // TOC/query pushes may carry the old query; an explicit different preset cancels replay.
+          localIntent.value.queued = shouldQueueIntent(to, presetFrom, intent);
+        }
+        externalNavigation = { route: to, presetFrom, write: pendingWrite };
       }),
-      router.afterEach(onPresetNavigationSettled),
+      router.afterEach(onNavigationSettled),
       router.onError((error, to) => {
-        // Registering an error hook replaces Vue Router's default error logging.
+        // Installing a hook replaces the router's default logging. Preserve failed edit writes as local drafts.
         console.error(error);
-        if (preset.value !== '' && !externalNavigation && to.fullPath === pendingPresetNavigation?.fullPath) {
-          // A failed preset selection can revert; a failed edit write must keep the user's values.
-          readPresetRoute(router.currentRoute.value);
+        if (preset.value !== '' && !externalNavigation && to.fullPath === pendingWrite?.fullPath) {
+          localIntent.value = null;
         }
-        onPresetNavigationSettled(to, null, error);
+        onNavigationSettled(to, null, error);
       }),
     );
   });
 
-  onBeforeUnmount(() => {
-    navigationStops.forEach(stop => stop());
-  });
-
+  onBeforeUnmount(() => { navigationStops.forEach(stop => stop()); });
   return { preset, updatePreset };
 }
