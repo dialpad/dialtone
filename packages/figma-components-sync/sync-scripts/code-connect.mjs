@@ -107,7 +107,7 @@ function generate (key, cfg) {
       const props = perValue[i];
       const parts = [];
       for (const prop of moves) {
-        if ((hints.skipProps || []).includes(prop)) continue;
+        if ((hints.skipProps || []).includes(prop) || prop.startsWith('__')) continue;
         const changed = JSON.stringify(props[prop]) !== JSON.stringify(baseProps[prop]);
         if (effective.has(axis)) {
           // The default is not the component's own: write what is on, never what is off.
@@ -129,7 +129,36 @@ function generate (key, cfg) {
   // The label is the default slot's text; the other text is read where an attribute uses it.
   const label = cfg.label && hints.label !== false ? textVar('Label') : null;
 
-  const attrsList = [...always, ...used].join(',\n  ');
+  /**
+   * A value the code needs and Figma has no property for. DtSegmentedControlItem's `value` is the text
+   * its group's v-model matches, so it is made from the label ("Item 1" is "item-1").
+   */
+  const derive = hints.derive || [];
+  const deriveLines = derive.map(d => `const ${d.name} = slug(${textVar(d.from)})`);
+  const deriveAttrs = derive.map(d => `${q(d.attr + '="')} + ${d.name} + ${q('"')}`);
+
+  /**
+   * Data this template hands to its PARENT's template (`metadata.props`), which reads it by running its
+   * children's templates. A group takes its selected item as v-model, while Figma keeps "selected" on each
+   * item, so the item exposes `{ value, selected }` and the group writes the one that is selected.
+   */
+  const expose = hints.expose || [];
+  const exposeLines = expose.filter(e => e.axis).map((e) => {
+    const a = axisOf(cfg, e.axis);
+    if (!a) throw new Error(`${key}: codeConnect exposes the axis "${e.axis}" the config does not have`);
+    return `const ${e.name} = instance.getEnum(${q(e.axis)}, { ${cfg.axes[a].map(v => `${q(String(v))}: ${String(v) === String(e.is)}`).join(', ')} })`;
+  });
+  const exposeProps = expose.map(e => (e.from && e.from !== e.name ? `${e.name}: ${e.from}` : e.name));
+
+  const pick = hints.pick;   // { attr, from, when }: the child whose `when` is true gives its `from`
+  const pickLines = pick ? [
+    '// The items are this group\'s children: each one\'s template says whether it is selected and what its value is.',
+    'const children = instance.findConnectedInstances((n) => true).map((c) => c.executeTemplate().metadata.props).filter(Boolean)',
+    `const chosen = children.find((p) => p.${pick.when})`,
+  ] : [];
+  const pickAttrs = pick ? [`chosen ? ${q(pick.attr + '="')} + chosen.${pick.from} + ${q('"')} : ''`] : [];
+
+  const attrsList = [...always, ...deriveAttrs, ...pickAttrs, ...used].join(',\n  ');
   const attrsLine = `const attrs = [\n  ${attrsList},\n].filter(Boolean).join(' ')`;
 
   // Icons: a swap (and, where the slot is additive, a visibility toggle).
@@ -158,7 +187,9 @@ function generate (key, cfg) {
     else if (s.when === 'content') { needsContentCheck = true; value = `slotHasContent(${q(s.figma)}) ? instance.getSlot(${q(s.figma)}) : undefined`; }
     else value = `${condition(s.when)} ? instance.getSlot(${q(s.figma)}) : undefined`;
     slotCode.push(`const slot${i + 1} = ${value}`);
-    children.push([rank(s.vue), s.vue, `\${slot${i + 1} ? figma.code\`\n  <template #${s.vue}>\${slot${i + 1}}</template>\` : ''}`]);
+    children.push([rank(s.vue), s.vue, s.vue === 'default'
+      ? `\${slot${i + 1} ? figma.code\`\n  \${slot${i + 1}}\` : ''}`
+      : `\${slot${i + 1} ? figma.code\`\n  <template #${s.vue}>\${slot${i + 1}}</template>\` : ''}`]);
   });
   if (label) children.push([rank('default'), 'default', `\n  \${${label}}`]);
   children.sort((a, b) => a[0] - b[0]);
@@ -181,6 +212,10 @@ function generate (key, cfg) {
     'const instance = figma.selectedInstance',
     '',
     ...textLines,
+    ...(derive.length || pick ? ["const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')"] : []),
+    ...deriveLines,
+    ...exposeLines,
+    ...pickLines,
     ...lines,
     attrsLine,
     '',
@@ -211,7 +246,7 @@ function generate (key, cfg) {
     `  example: ${body},`,
     `  imports: [${q(`import { ${tag} } from '@dialpad/dialtone-vue'`)}],`,
     `  id: ${q('dt-' + kebab(cfg.page))},`,
-    '  metadata: { nestable: true },',
+    `  metadata: { nestable: true${exposeProps.length ? `, props: { ${exposeProps.join(', ')} }` : ''} },`,
     '}',
     '',
   );

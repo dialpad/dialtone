@@ -64,6 +64,21 @@ slots as `{ figma, vue, when }` where `when` is `'always'`, `'content'` (only if
 axis condition; `label: false` for a component with no text content; `selfClosing`; and `skipProps` for a prop an
 axis does not really own (Notice's `showAction`). The attribute for each axis value is derived from `props()`:
 what differs from the code's default variant is written, so a new axis value needs no change here.
+`props()` may carry `__provide: { EXPORTED_KEY_NAME: value }`: context the component injects from a parent it is
+never mounted inside (DtSegmentedControlItem reads its size and selected state from its group). The harness
+takes it out of the props and provides it around the component without adding a DOM node. Pair it with
+`containerClass` when the component's CSS also needs variables or classes its parent defines.
+`slotContent` may hold a LIST for a slot (`default: [a, b, c]`); each member is named `default.0`, `default.1`…
+and can declare its own `swapTo` (with a `name` for the layer, and its label text carried over).
+`slotGroups: { 'default.0': 'items', … }` puts exemplars that are native slots (`nativeSlots`) into ONE slot, laid
+out the way their parent laid them, so a designer can add or remove any number (DtSegmentedControl's items);
+`slotLabels: { items: 'Items' }` names a slot or group in Figma instead of its key. The checks see a slot that
+holds several children as those children. A slot's default content is per variant; as swap properties the same
+exemplars would show ONE default across every variant.
+`codeConnect` also takes `derive: [{ name, attr, from }]` (an attribute made from a text property, slugged: an
+item's `value` from its label), `expose: [{ name, axis?, is? }]` (data handed to the parent's template in
+`metadata.props`) and `pick: { attr, from, when }` (the parent writes `attr` from the child whose `when` is
+true: a group's `model-value` from its selected item).
 `containerClass` (a string or a function of the combo) is the surface the component is mounted on,
 outside the measured tree, for variants that only make sense on one (links for dark backgrounds).
 
