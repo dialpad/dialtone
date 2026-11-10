@@ -1,5 +1,8 @@
 import { mount } from '@vue/test-utils';
-import { nextTick } from 'vue';
+import { h, nextTick, toRaw } from 'vue';
+import { LocaleManager, RawBundleSource, MemoryStorageWrapper } from '@dialpad/i18n';
+import { DialtoneLocalization } from '@/localization';
+import enUS from '@/localization/en-US.ftl?raw';
 import DtFilterPill from './FilterPill.vue';
 import { DtPopover } from '@/components/Popover';
 import { DtDropdown } from '@/components/Dropdown';
@@ -745,6 +748,141 @@ describe('DtFilterPill Tests', function () {
 
         expect(document.body.textContent).not.toContain('Should not appear');
       });
+    });
+  });
+});
+
+describe('DtFilterPill custom content and localized display', () => {
+  let wrapper;
+  let originalI18n;
+  const missingContentWarning = 'Please provide content through the v-model or the "content" slot.';
+  const updateWrapper = (props = {}, slots = {}, errorHandler) => {
+    wrapper = mount(DtFilterPill, {
+      props: { modelValue: [], label: 'Teams', ...props },
+      slots,
+      global: { plugins: [DtTooltipDirective], stubs: { transition: false }, config: { errorHandler } },
+      attachTo: document.body,
+    });
+  };
+
+  beforeEach(() => {
+    originalI18n = new DialtoneLocalization().i18n;
+  });
+
+  afterEach(() => {
+    wrapper?.unmount();
+    document.body.innerHTML = '';
+    new DialtoneLocalization().i18n = originalI18n;
+    vi.restoreAllMocks();
+  });
+
+  describe.each([false, true])('Custom content (useDropdown=%s)', useDropdown => {
+    it('mounts an empty model with a destructured scoped slot and closes the real overlay', async () => {
+      const errors = vi.fn();
+      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      const content = ({ close }) => h('button', {
+        'data-qa': 'custom-close', onClick: close,
+      }, 'Close custom content');
+      updateWrapper({ useDropdown }, { content }, errors);
+
+      expect(errors).not.toHaveBeenCalled();
+      expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
+      await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
+      expect(document.querySelector('[data-qa="custom-close"]')).not.toBeNull();
+      document.querySelector('[data-qa="custom-close"]').click();
+      await nextTick();
+      expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
+    });
+  });
+
+  it.each([
+    { content: 'an empty content slot', props: {}, slots: { content: () => undefined }, warns: false },
+    { content: 'a nonempty model', props: { modelValue: [{ name: 'Support' }] }, slots: {}, warns: false },
+    { content: 'no model and no content slot', props: {}, slots: {}, warns: true },
+  ])('warns about missing content only when absent ($content → $warns)', ({ props, slots, warns }) => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    updateWrapper(props, slots);
+    expect(warn.mock.calls.some(([message]) => message === missingContentWarning)).toBe(warns);
+  });
+
+  const useLocale = (locale, frenchResource = `DIALTONE_FILTER_PILL_ALL_LABEL = Tous
+DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
+  { $count ->
+    [one] plus { $count } autre
+   *[other] plus { $count } autres
+  }`) => {
+    const manager = new LocaleManager({
+      bundleSource: new RawBundleSource({
+        resources: RawBundleSource.builtResources([
+          ['en-US', 'filter-pill-test', enUS],
+          ['fr-FR', 'filter-pill-test', frenchResource],
+        ]),
+      }),
+      allowedLocales: ['en-US', 'fr-FR'],
+      fallbackLocale: 'en-US',
+      preferredLocale: locale,
+      namespaces: ['filter-pill-test'],
+      storageWrapper: new MemoryStorageWrapper(),
+    });
+    new DialtoneLocalization().i18n = manager.useI18N('filter-pill-test');
+  };
+
+  it('uses English fallback when the locale resource lacks the new keys', () => {
+    useLocale('fr-FR', 'TEST_ONLY_MESSAGE = Fixture without FilterPill keys');
+    updateWrapper({ modelValue: [
+      { name: 'Support', active: true }, { name: 'Sales', active: true }, { name: 'Engineering' },
+    ] });
+    expect(wrapper.find('.d-filter-pill__label-end-overflow').attributes('title')).toBe('plus \u20681\u2069 other');
+  });
+
+  it('renders one selected option without an aggregate or overflow', () => {
+    updateWrapper({ modelValue: [{ name: 'Support', active: true }] });
+    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('Support');
+    expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(false);
+  });
+
+  it('preserves an option literally named All in a translated subset summary', () => {
+    useLocale('fr-FR');
+    updateWrapper({ modelValue: ['All', 'Support', 'Sales'].map((name, index) => ({
+      name, active: index < 2,
+    })) });
+    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('All');
+    expect(wrapper.find('.d-filter-pill__label-end').attributes('title')).toBe('All');
+  });
+
+  describe.each([
+    { locale: 'en-US', all: 'All', singular: 'plus \u20681\u2069 other', plural: 'plus \u20682\u2069 others' },
+    { locale: 'fr-FR', all: 'Tous', singular: 'plus \u20681\u2069 autre', plural: 'plus \u20682\u2069 autres' },
+  ])('Built-in display with real Fluent resources ($locale)', ({ locale, all, singular, plural }) => {
+    beforeEach(() => {
+      // French is a test-only translated resource, separate from the missing-key fallback case above.
+      useLocale(locale);
+    });
+
+    it('localizes aggregate display while preserving literal All and model references in slot bindings', () => {
+      const modelValue = [{ name: 'Support', active: true }, { name: 'Sales', active: true }];
+      updateWrapper({ modelValue });
+      expect(wrapper.find('.d-filter-pill__label-end').text()).toBe(all);
+      expect(wrapper.find('.d-filter-pill__label-end').attributes('title')).toBe(all);
+      wrapper.unmount();
+      let bindings;
+      updateWrapper({ modelValue }, { default: data => { bindings = data; return data.activeFilterList; } });
+      expect(bindings.activeFilterList).toBe('All');
+      expect(toRaw(bindings.filters)).toBe(modelValue);
+      expect(bindings.activeFilters).toEqual(['Support', 'Sales']);
+      expect(bindings.activeFilterOverflow).toBe('');
+    });
+
+    it.each([
+      { selected: 2, overflow: '+1', title: singular },
+      { selected: 3, overflow: '+2', title: plural },
+    ])('renders $selected selected options with Fluent plural and isolation', ({ selected, overflow, title }) => {
+      updateWrapper({ modelValue: ['Support', 'Sales', 'Engineering', 'Marketing'].map((name, index) => ({
+        name, active: index < selected,
+      })) });
+      const extra = wrapper.find('.d-filter-pill__label-end-overflow');
+      expect(extra.text()).toBe(overflow);
+      expect(extra.attributes('title')).toBe(title);
     });
   });
 });
