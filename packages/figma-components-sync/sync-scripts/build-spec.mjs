@@ -234,7 +234,9 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
    * `fit-content`/`max-content`/`min-content` are hug semantics spelled out in CSS, so
    * they are NOT a pin; `auto` is the absence of one.
    */
-  const HUGGISH = /^(auto|fit-content|max-content|min-content)/;
+  // `percentIsFill`: a percentage width is "as wide as the list", which a lone item has no list to be wide as
+  // (DtTab's vertical `inline-size: 100%`); the group's slot fills it, and alone it hugs its label.
+  const HUGGISH = cfg.percentIsFill ? /^(auto|fit-content|max-content|min-content|[\d.]+%)/ : /^(auto|fit-content|max-content|min-content)/;
   const pinnedAxis = (names) => names.some((p) => {
     const decl = prov.own[p];
     return !!decl && !HUGGISH.test(String(decl.value).trim());

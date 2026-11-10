@@ -1294,7 +1294,41 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         kid.x = rel[0];
         kid.y = rel[1];
         // anchored from the inline-end edge? keep it there when the parent resizes
-        if (kd.inset && kd.inset[1] && kd.inset[1] !== 'auto' && (!kd.inset[0] || kd.inset[0] === 'auto')) {
+        /**
+         * A DECORATION OUTSIDE THE BOX FOLLOWS THE EDGE IT IS PINNED TO.
+         *
+         * DtTab's selected underline hangs below the tab (or beside it, in a vertical list) and spans the
+         * tab's own width: `inset-inline: -1px` on both sides. It is measured at the empty label's width,
+         * so a Figma tab with a longer label would keep the short underline. Pinned to both edges it
+         * STRETCHES with the frame; pinned to the end edge only, it stays there. Only a child that lies
+         * outside the box is read this way: one inside (DtLoader's arc, a Button's spinner) is already
+         * where it belongs, and a new constraint would change sets that are published.
+         */
+        const pb = d.box || [0, 0];
+        const kb = kd.box || [0, 0];
+        const outside = !!pb[0] && !!pb[1] && (rel[0] < -0.5 || rel[1] < -0.5
+          || rel[0] + kb[0] > pb[0] + 0.5 || rel[1] + kb[1] > pb[1] + 0.5);
+        const num = (v) => (v !== undefined && v !== 'auto' && v !== null && !isNaN(parseFloat(v)) ? parseFloat(v) : null);
+        const ins = kd.inset || [];
+        // Only the START offsets are measured. Pinned on both edges, with the same overhang each side, the box
+        // is the parent's size plus twice that offset; and a box whose start offset is past the parent's size
+        // is pinned to the end edge.
+        // The offset is from the PADDING box, so the box is the parent's less its borders, plus the overhang:
+        // anywhere from the parent's size less the borders (2px at most here) to its size plus the overhang.
+        const spans = (start, size, whole) => start !== null && start <= 0
+          && size >= whole - 2.5 && size <= whole - 2 * start + 0.5;
+        const stretchH = outside && spans(num(ins[0]), kb[0], pb[0]);
+        const stretchV = outside && spans(num(ins[2]), kb[1], pb[1]);
+        const startH = num(ins[0]);
+        const pinnedEnd = outside && !stretchH && startH !== null && startH >= pb[0] - 0.5;
+        if (stretchH || stretchV || pinnedEnd) {
+          // After the frame's own resize (see centerConstraints): a STRETCH child follows its parent's resize,
+          // and createFrame's 100x100 would shrink or grow it to the measured size.
+          centerConstraints.push({ kid, horizontal: stretchH ? 'STRETCH' : pinnedEnd ? 'MAX' : 'MIN', vertical: stretchV ? 'STRETCH' : 'MIN' });
+          // The frame hugs and reflows after this (slots, snapped paddings), and a STRETCH child follows each
+          // of those, so its measured box is written once more at the end (see the final pass).
+          stretchSizes.set(kid, { w: kb[0], h: kb[1], x: rel[0], y: rel[1] });
+        } else if (kd.inset && kd.inset[1] && kd.inset[1] !== 'auto' && (!kd.inset[0] || kd.inset[0] === 'auto')) {
           kid.constraints = { horizontal: 'MAX', vertical: 'MIN' };
         } else if (kd.abs) {
           /**
@@ -1664,6 +1698,17 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       if (inside || p.type === 'INSTANCE') continue;
       if (k.constraints.horizontal === 'CENTER') k.x = (p.width - k.width) / 2;
       if (k.constraints.vertical === 'CENTER') k.y = (p.height - k.height) / 2;
+      // A child that stretches or sits at the end edge (DtTab's underline) has followed every reflow of the
+      // frame since it was placed. Put back at its measured box, with the constraint set again after.
+      const want = stretchSizes.get(k);
+      if (want) {
+        const keep = k.constraints;
+        k.constraints = { horizontal: 'MIN', vertical: 'MIN' };
+        k.resize(Math.max(want.w, 0.01), Math.max(want.h, 0.01));
+        k.x = want.x;
+        k.y = want.y;
+        k.constraints = keep;
+      }
     }
 
     made.push(comp);
@@ -1719,6 +1764,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
            effectSpreadLostCount: effectSpreadLost.length };
 }
 
+// An absolute child that stretches or is pinned to the end edge, and the box it was measured at (see the
+// constraints in the frame builder and the final pass over absolute children).
+const stretchSizes = new Map();
 const results = [];
 for (const shard of SHARDS) results.push(await buildShard(shard));
 return results;

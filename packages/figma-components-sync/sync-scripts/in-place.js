@@ -57,6 +57,14 @@ async function swapVariantContents (old, fresh) {
   for (const c of fresh.children) {
     if (c.layoutPositioning === 'ABSOLUTE') placed.push([c, c.x, c.y]);
   }
+  // A child that stretches or stays at an edge (DtTab's underline) follows every reflow of the frame it is in,
+  // and the old variant collapses to its padding when its children are removed. Its size is written back at
+  // the end, once the frame has settled.
+  const followers = fresh.children
+    .filter(c => c.layoutPositioning === 'ABSOLUTE' && c.constraints
+      && (c.constraints.horizontal === 'STRETCH' || c.constraints.horizontal === 'MAX'
+        || c.constraints.vertical === 'STRETCH' || c.constraints.vertical === 'MAX'))
+    .map(c => ({ c, w: c.width, h: c.height, x: c.x, y: c.y, constraints: c.constraints }));
   for (const c of [...old.children]) c.remove();
 
   // Unbind first: a field still bound to a variable would take the new value as an override.
@@ -86,6 +94,15 @@ async function swapVariantContents (old, fresh) {
       const v = await figma.variables.getVariableByIdAsync(freshBound[k].id);
       if (v) old.setBoundVariable(k, v);
     } catch (e) { failed.push('bind ' + k); }
+  }
+  for (const f of followers) {
+    try {
+      f.c.constraints = { horizontal: 'MIN', vertical: 'MIN' };
+      f.c.resize(Math.max(f.w, 0.01), Math.max(f.h, 0.01));
+      f.c.x = f.x;
+      f.c.y = f.y;
+      f.c.constraints = f.constraints;
+    } catch (e) { failed.push('restore ' + f.c.name); }
   }
   return failed;
 }

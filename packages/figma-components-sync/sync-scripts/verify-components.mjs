@@ -297,6 +297,9 @@ const EXEMPT = {
 // about 3-5% wider; the box spread reports it), and the centred-child arithmetic halves it. Half
 // of the largest width spread measured (6.70px, on Button's size 500), with headroom, in px.
 const CENTRE_SHAPING_SLACK = 4;
+// An end-pinned child is measured against the browser's frame, which the Figma frame exceeds by its snapped
+// paddings and text shaping (5.8px on the size-500 tab), so where it lands after growth is off by that much.
+const END_PIN_SNAP_SLACK = 8;
 
 /** The spacing drift build-spec recorded for a merged component (`slotDrift` in its spec), or []. */
 const driftCache = new Map();
@@ -951,6 +954,13 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         // plain x error of a few pixels cannot hide here. The size of what was accepted is recorded.
         allowed.push({ variant, path,
           reason: `centred child of a frame the filled state grows (parent +${(halfGrowth * 2).toFixed(1)}px): REST reports the default size, Figma re-centres it (CENTER constraint); offset ${(dom.expectedRel.x - gotX).toFixed(1)}px accepted` });
+      } else if (SLOT_PASS && fig.constraints && ['MAX', 'RIGHT'].includes(fig.constraints.horizontal)
+          && halfGrowth !== null && halfGrowth > 0.25
+          && Math.abs(gotX + halfGrowth * 2 - dom.expectedRel.x) <= CENTRE_SHAPING_SLACK + END_PIN_SNAP_SLACK) {
+        // Pinned to the end edge of a frame the filled state grows: REST stores the default size, and Figma
+        // moves it by the growth (MAX constraint), which lands where the browser has it.
+        allowed.push({ variant, path,
+          reason: `end-pinned child of a frame the filled state grows (parent +${(halfGrowth * 2).toFixed(1)}px): REST reports the default size, Figma keeps it at the end edge (MAX constraint)` });
       } else {
         rec(variant, path, 'x', dom.expectedRel.x, +gotX.toFixed(2));
       }
@@ -1105,7 +1115,21 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       || (fig.layoutMode === 'HORIZONTAL' && fig.primaryAxisSizingMode === 'FIXED')
       || (fig.layoutMode === 'VERTICAL' && fig.counterAxisSizingMode === 'FIXED');
     if (pinnedWidth && s.display !== 'inline' && wDiff > (cfg.snapTokens ? SNAP_SIZE_EPS : SIZE_EPS) + FLOAT_SLOP) {
-      rec(variant, path, 'width', dom.box.w + fm.left + fm.right, fig.absoluteBoundingBox.width);
+      const growth = domParentBox && figParentBox && typeof domParentBox.w === 'number'
+        ? domParentBox.w - figParentBox.width : 0;
+      // The frame is wider in Figma than in the browser by the snapped paddings and text shaping, so the growth
+      // measured from it is off by that much: the child was measured against the browser's frame.
+      const snapGap = figParentBox ? Math.max(0, figParentBox.width - fig.absoluteBoundingBox.width) : 0;
+      // REST spells the plugin's STRETCH as LEFT_RIGHT.
+      if (SLOT_PASS && fig.constraints && ['STRETCH', 'LEFT_RIGHT'].includes(fig.constraints.horizontal) && growth > 0.25
+          && Math.abs(fig.absoluteBoundingBox.width + growth - (dom.box.w + fm.left + fm.right)) <= CENTRE_SHAPING_SLACK + snapGap) {
+        // Pinned to both edges of a frame the filled state grows (DtTab's underline): REST reports the default
+        // size, and Figma stretches it by the growth (STRETCH constraint).
+        allowed.push({ variant, path,
+          reason: `stretched child of a frame the filled state grows (parent +${growth.toFixed(1)}px): REST reports the default size, Figma stretches it (STRETCH constraint)` });
+      } else {
+        rec(variant, path, 'width', dom.box.w + fm.left + fm.right, fig.absoluteBoundingBox.width);
+      }
     }
   }
 
@@ -1164,7 +1188,19 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
   if (wantOutline?.inset || /inset/.test(s.boxShadow || '')) {
     const insetInFigma = (fig.effects || []).some(e => e.type === 'INNER_SHADOW');
     if (insetInFigma && fig.clipsContent === false) {
-      rec(variant, path, 'clipsContent', 'true (an inset shadow does not render without clipping)', false);
+      // A frame left unclipped so an absolute child OUTSIDE its box is painted (DtTab's selected underline) cannot
+      // also render its inset ring: Figma offers one or the other, and the decoration is the one kept.
+      const box = fig.absoluteBoundingBox;
+      const hangs = !!box && (fig.children || []).some((k) => {
+        const b = k.layoutPositioning === 'ABSOLUTE' ? k.absoluteBoundingBox : null;
+        return b && (b.x < box.x - 0.01 || b.y < box.y - 0.01
+          || b.x + b.width > box.x + box.width + 0.01 || b.y + b.height > box.y + box.height + 0.01);
+      });
+      if (hangs) {
+        allowed.push({ variant, path, reason: 'inset focus ring not drawn: the frame is unclipped so an absolute child outside its box (the selected underline) is painted' });
+      } else {
+        rec(variant, path, 'clipsContent', 'true (an inset shadow does not render without clipping)', false);
+      }
     }
   }
   // Recomputed here because the border block above is inside a different scope.
