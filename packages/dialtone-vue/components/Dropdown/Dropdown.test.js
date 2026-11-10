@@ -1,6 +1,7 @@
 import { config, mount } from '@vue/test-utils';
 import { h, nextTick, ref } from 'vue';
 import { flushPromises } from '@/common/utils';
+import { DtListItemGroup } from '@/components/ListItemGroup';
 import { DtListItem } from '@/components/ListItem';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import DtDropdown from './Dropdown.vue';
@@ -190,7 +191,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     vi.stubGlobal('requestAnimationFrame', vi.fn());
     vi.stubGlobal('cancelAnimationFrame', vi.fn());
   });
-  const mountMenu = (props = {}, onKeydown) => {
+  const mountMenu = (props = {}, onKeydown, list) => {
     wrapper = mount(DtDropdown, {
       props: { open: true, ...props },
       attrs: { onKeydown },
@@ -199,7 +200,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
           'data-qa': 'trigger',
           'aria-expanded': attrs['aria-expanded'],
         }, 'Choose'),
-        list: () => [
+        list: list || (() => [
           h('li', { role: 'presentation', 'data-qa': 'heading' }, 'Choices'),
           h(DtListItem, { role: 'menuitemradio', id: 'radio:one', selected: true,
             navigationType: 'arrow-keys', onClick: onActivate }, () => 'Alpha'),
@@ -209,7 +210,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
             role: 'menuitemradio', id: 'radio two', navigationType: 'arrow-keys',
           }, () => h('span', { role: 'img', 'aria-label': 'Bravo icon', 'data-qa': 'nested-role' }, 'Bravo')),
           h('li', { role: 'menuitemradio', tabindex: -1 }, 'No ID'),
-        ],
+        ]),
       },
       global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
       attachTo: document.body,
@@ -243,6 +244,61 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(document.activeElement.id).toBe('radio:one');
     await list.find('[data-qa="nested-role"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('radio two');
+  });
+
+  it('navigates and prevents in-menu arrows when initially open with the opt-in', async () => {
+    const popover = mountMenu({ open: true, forwardAnchorArrowKeys: true });
+    await flushPromises();
+    const list = popover.findComponent({ ref: 'content' }).find('[data-qa="dt-dropdown-list-wrapper"]');
+    await list.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(wrapper.emitted('open-change')).toEqual([[true]]);
+    expect(wrapper.emitted('keydown')).toHaveLength(1);
+    expect(wrapper.emitted('keydown')[0][0].defaultPrevented).toBe(true);
+    expect(document.activeElement.id).toBe('radio:one');
+  });
+
+  it('keeps the menu context through a neutral wrapper and an explicitly labelled group', async () => {
+    const popover = mountMenu({}, undefined, () => [
+      h(DtListItemGroup, { id: 'sort-group', heading: 'Sort order' }, () => [
+        h(DtListItem, { role: 'menuitemradio', selected: true, navigationType: 'arrow-keys' }, () => 'Newest'),
+      ]),
+      h(DtListItem, { role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Refresh'),
+    ]);
+    await flushPromises();
+    const menu = popover.findComponent({ ref: 'content' });
+    const list = menu.find('[data-qa="dt-dropdown-list-wrapper"]');
+    const group = list.find('[role="group"]');
+    expect(menu.attributes('role')).toBe('menu');
+    expect(list.attributes('role')).toBe('none');
+    expect(group.attributes('aria-labelledby')).toBe('sort-group-heading');
+    expect(group.find('[id="sort-group-heading"]').text()).toBe('Sort order');
+    expect(group.find('[role="menuitemradio"]').element.parentElement).toBe(group.element);
+    expect(group.element.parentElement).toBe(list.element);
+    expect(group.element.closest('[role="menu"]')).toBe(menu.element);
+    expect(group.element.parentElement.closest('ul:not([role]), ol:not([role])')).toBeNull();
+    expect(list.find('[role="menuitem"]').element.parentElement).toBe(list.element);
+  });
+
+  it('keeps closing-content arrows out of the closed-anchor opening path', async () => {
+    const popover = mountMenu({ open: true, forwardAnchorArrowKeys: true });
+    await flushPromises();
+    const content = popover.findComponent({ ref: 'content' });
+    const list = content.find('[data-qa="dt-dropdown-list-wrapper"]');
+    let releaseFocus;
+    let focusRequested;
+    const leaving = new Promise(resolve => { focusRequested = resolve; });
+    vi.spyOn(popover.vm, 'getFirstFocusableElement').mockImplementationOnce(() => {
+      focusRequested();
+      return new Promise(resolve => { releaseFocus = resolve; });
+    });
+    await wrapper.setProps({ open: false });
+    await leaving;
+    await list.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(wrapper.emitted('keydown')).toHaveLength(1);
+    expect(wrapper.emitted('keydown')[0][0].defaultPrevented).toBe(true);
+    expect(wrapper.find('[data-qa="trigger"]').attributes('aria-expanded')).toBe('false');
+    releaseFocus(wrapper.find('[data-qa="trigger"]').element);
+    await flushPromises();
   });
 
   it.each(['ArrowUp', 'ArrowDown'])('preserves first-row keyboard focus on uncontrolled %s opening', async code => {
@@ -303,19 +359,6 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     await nextTick();
     await list.trigger('keydown', { key: 'End', code: 'End' });
     expect(document.activeElement.id).toBe('action');
-  });
-
-  it('clears an unconsumed arrow when a pointer opens in the same flush', async () => {
-    mountMenu({ open: false, forwardAnchorArrowKeys: true });
-    const trigger = wrapper.find('[data-qa="trigger"]');
-    const arrow = trigger.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
-    const pointer = trigger.trigger('pointerdown');
-    const click = trigger.trigger('click');
-    const open = wrapper.setProps({ open: true });
-    await Promise.all([arrow, pointer, click, open]);
-    expect(wrapper.emitted('keydown')).toHaveLength(1);
-    await flushPromises();
-    expect(document.activeElement.getAttribute('role')).toBe('menu');
   });
 
   it('keeps controlled anchor arrows silent by default', async () => {

@@ -1,7 +1,7 @@
 import { h } from 'vue';
 import { DtListItem } from '@/components/ListItem';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
 import DtComboboxWithPopover from './ComboboxWithPopover.vue';
 import DtInput from '@/components/Input/Input.vue';
 import DtPopover from '@/components/Popover/Popover.vue';
@@ -91,7 +91,7 @@ describe('DtComboboxWithPopover Tests', () => {
     global.cancelAnimationFrame = undefined;
   });
 
-  it('retains input focus and option navigation through completed listbox transitions', async () => {
+  it('retains input focus and option navigation through listbox opening and dismissal', async () => {
     wrapper.unmount();
     wrapper = mount(DtComboboxWithPopover, {
       props: { label: 'Choose', showList: true, listId: 'focus-list' },
@@ -107,7 +107,8 @@ describe('DtComboboxWithPopover Tests', () => {
     const input = wrapper.find('input');
     input.element.focus();
     const popover = wrapper.findComponent(DtPopover);
-    await popover.vm.onEnterTransitionComplete();
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
+    await flushPromises();
     expect(document.activeElement).toBe(input.element);
     expect(popover.findComponent({ ref: 'content' }).attributes('role')).toBe('listbox');
     await input.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
@@ -116,7 +117,7 @@ describe('DtComboboxWithPopover Tests', () => {
     await input.trigger('keydown', { key: 'Escape', code: 'Escape' });
     expect(wrapper.emitted('escape')).toHaveLength(1);
     await wrapper.setProps({ showList: false });
-    await popover.vm.onLeaveTransitionComplete();
+    await flushPromises();
     expect(document.activeElement).toBe(input.element);
     expect(input.attributes('aria-expanded')).toBe('false');
   });

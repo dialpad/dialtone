@@ -111,9 +111,9 @@ Visibility-toggle components use `update:open`:
 | DtPopover  | `update:open` |
 | DtDropdown | `update:open` |
 
-Popover and Dropdown additionally emit `open-change(boolean)` synchronously when logical visibility actually changes. Their existing `opened` and `update:open` notifications retain completed-transition timing; `open=null` emits no `update:open`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
+Popover and Dropdown additionally emit `open-change(boolean)` synchronously when logical visibility actually changes. Their existing `opened` and `update:open` notifications retain completed-transition timing; `open=null` emits no `update:open`. Initial `open=true` emits logical true during creation, before mount, and the visible surface starts with `aria-hidden="false"`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
 
-With a boolean `open` prop, both components keep default anchor toggling disabled. `forwardAnchorArrowKeys` defaults to `false`; opting in forwards anchor ArrowUp/ArrowDown through `keydown` without toggling. A closed opted-in Dropdown lets the consumer handle default/propagation and records keyboard modality only for an accepted open in that flush. This does not change default controlled-overlay consumers.
+With a boolean `open` prop, both components keep default anchor toggling disabled. `forwardAnchorArrowKeys` defaults to `false`; opting in forwards anchor ArrowUp/ArrowDown through `keydown` without toggling. A closed opted-in Dropdown lets the consumer handle default/propagation and preserves first-row focus only when opening is synchronously accepted in Dropdown's own emitted `keydown` callback. Ancestor DOM listeners and delayed updates do not carry that focus guarantee; handlers should distinguish anchor targets from content targets. This does not change default controlled-overlay consumers.
 
 ## Event Naming
 

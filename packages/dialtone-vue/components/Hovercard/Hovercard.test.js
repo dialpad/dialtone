@@ -73,17 +73,20 @@ describe('DtHovercard Tests', () => {
     const trigger = wrapper.find('[data-qa="dt-button"]');
     trigger.element.focus();
     expect(wrapper.emitted('opened')).toBeUndefined();
-    await popover.vm.onEnterTransitionComplete();
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
+    await flushPromises();
     expect(wrapper.emitted('opened')).toEqual([[true]]);
     expect(document.activeElement).toBe(trigger.element);
     await wrapper.setProps({ open: false });
     await wrapper.setProps({ open: true });
     expect(wrapper.emitted('opened')).toEqual([[true]]);
     expect(trigger.attributes('aria-expanded')).toBe('true');
-    await popover.vm.onEnterTransitionComplete();
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
+    await flushPromises();
     expect(wrapper.emitted('opened')).toEqual([[true], [true]]);
     await wrapper.setProps({ open: false });
-    await popover.vm.onLeaveTransitionComplete();
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-leave');
+    await flushPromises();
     expect(wrapper.emitted('opened')).toEqual([[true], [true], [false]]);
   });
 

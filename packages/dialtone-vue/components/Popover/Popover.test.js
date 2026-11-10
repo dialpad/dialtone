@@ -1,4 +1,4 @@
-import { h } from 'vue';
+import { h, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/Popover';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
@@ -44,15 +44,7 @@ describe('DtPopover Tests', () => {
       global: {
         plugins: [DtFocustrapDirective],
         stubs: {
-          transition: false,
-          ...(manualTransitions ? {
-            DtLazyShow: {
-              props: ['show'],
-              render () {
-                return h('div', { style: { display: this.show ? '' : 'none' } }, this.$slots.default?.());
-              },
-            },
-          } : {}),
+          transition: manualTransitions,
         },
       },
       attachTo: document.body,
@@ -65,6 +57,11 @@ describe('DtPopover Tests', () => {
     headerContent = wrapper.findComponent({ ref: 'popover__header' });
     footerContent = wrapper.findComponent({ ref: 'popover__footer' });
     closeButton = popoverWindow.find('[data-qa="dt-popover-close"]');
+  };
+
+  const completeTransition = async phase => {
+    popoverWindow.vm.$emit(`after-${phase}`);
+    await flushPromises();
   };
 
   beforeAll(() => {
@@ -278,6 +275,16 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  it('completes real lazy-show enter and leave hooks', async () => {
+    await button.trigger('click');
+    await flushPromises();
+    expect(wrapper.emitted('opened')[0][0]).toBe(true);
+    await button.trigger('click');
+    await flushPromises();
+    expect(wrapper.emitted('opened')[1]).toEqual([false]);
+    expect(popoverWindow.attributes('aria-hidden')).toBe('true');
+  });
+
   describe('Popper Options Tests', () => {
     it('defaults the boundary to "clippingParents"', () => {
       const flipModifier = wrapper.vm.popperOptions().modifiers.find(modifier => modifier.name === 'flip');
@@ -441,27 +448,20 @@ describe('DtPopover Tests', () => {
         expect(document.activeElement).toBe(last);
       });
 
-      it('does not mark the dialog aria-hidden merely because isOpen became false', () => {
-        // closePopover() flips isOpen synchronously; per the fix, that alone must not hide
-        // the dialog from assistive technology, since a descendant may still hold focus and
-        // the leave transition hasn't restored it yet. Only onLeaveTransitionComplete may do
-        // that, once focus has actually moved off the dialog.
-        expect(wrapper.vm.isDialogAriaHidden).toBe(false);
-
-        wrapper.vm.closePopover();
-
-        expect(wrapper.vm.isDialogAriaHidden).toBe(false);
+      it('keeps the dialog exposed while dismissal has not restored focus', async () => {
+        expect(popoverWindow.attributes('aria-hidden')).toBe('false');
+        const dismissal = popoverWindow.trigger('keydown', { key: 'Escape' });
+        expect(popoverWindow.attributes('aria-hidden')).toBe('false');
+        await dismissal;
       });
 
-      it('marks the dialog aria-hidden only after onLeaveTransitionComplete restores focus', async () => {
+      it('hides the dialog from assistive technology after leave restores focus', async () => {
         const last = popoverWindow.find('[data-qa="trap-last"]').element;
         last.focus();
-
-        wrapper.vm.closePopover();
-        await wrapper.vm.onLeaveTransitionComplete();
-
+        await popoverWindow.trigger('keydown', { key: 'Escape' });
+        await flushPromises();
         expect(document.activeElement).toBe(button.element);
-        expect(wrapper.vm.isDialogAriaHidden).toBe(true);
+        expect(popoverWindow.attributes('aria-hidden')).toBe('true');
       });
     });
 
@@ -592,24 +592,10 @@ describe('DtPopover Tests', () => {
   });
 
   describe('When component is unmounting', () => {
-    beforeEach(() => {
-      wrapper.vm._isUnmounting = true;
-    });
-
     it('sets transition: none on content element to cancel in-flight transitions', () => {
-      const contentEl = wrapper.vm.popoverContentEl;
+      const contentEl = popoverWindow.element;
       wrapper.unmount();
       expect(contentEl.style.transition).toBe('none');
-    });
-
-    it('does not emit "opened" when leave transition completes', async () => {
-      await wrapper.vm.onLeaveTransitionComplete();
-      expect(wrapper.emitted('opened')).toBeUndefined();
-    });
-
-    it('does not emit "opened" when enter transition completes', async () => {
-      await wrapper.vm.onEnterTransitionComplete();
-      expect(wrapper.emitted('opened')).toBeUndefined();
     });
   });
 
@@ -620,19 +606,58 @@ describe('DtPopover Tests', () => {
       document.documentElement.classList.remove('d-of-hidden');
       wrapper.unmount();
       manualTransitions = true;
-      mockSlots.content = '<button data-qa="inside">Action</button>';
+      mockSlots.content = ({ close }) => h('button', { 'data-qa': 'inside', onClick: close }, 'Action');
       updateWrapper();
     });
     afterEach(() => {
       document.documentElement.classList.toggle('d-of-hidden', scrollWasLocked);
     });
 
-    it('notifies actual logical changes synchronously once per change', () => {
-      wrapper.vm.toggleOpen();
+    const suspendNextFocus = () => {
+      let release;
+      let started;
+      const requested = new Promise(resolve => { started = resolve; });
+      vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => {
+        started();
+        return new Promise(resolve => { release = resolve; });
+      });
+      return { requested, release: element => release(element) };
+    };
+
+    it('reports an initially open state during creation before terminal notifications', async () => {
+      wrapper.unmount();
+      let anchorRendered = false;
+      const logicalChanges = [];
+      mockProps = {
+        open: true,
+        onOpenChange: value => logicalChanges.push({ value, anchorRendered }),
+      };
+      mockSlots.anchor = ({ attrs }) => {
+        anchorRendered = true;
+        return h('button', { ...attrs, 'data-qa': 'dt-button' }, 'Open');
+      };
+      updateWrapper();
+      await nextTick();
+      expect(logicalChanges).toEqual([{ value: true, anchorRendered: false }]);
       expect(wrapper.emitted('open-change')).toEqual([[true]]);
-      wrapper.vm.closePopover();
+      expect(popoverWindow.attributes('aria-hidden')).toBe('false');
+      expect(button.attributes('aria-expanded')).toBe('true');
+      expect(wrapper.emitted('opened')).toBeUndefined();
+      expect(wrapper.emitted('update:open')).toBeUndefined();
+      await completeTransition('enter');
+      expect(wrapper.emitted('opened')[0][0]).toBe(true);
+      expect(wrapper.emitted('update:open')).toEqual([[true]]);
+      expect(wrapper.emitted('open-change')).toEqual([[true]]);
+    });
+
+    it('notifies actual logical changes synchronously once per change', async () => {
+      const opening = button.trigger('click');
+      expect(wrapper.emitted('open-change')).toEqual([[true]]);
+      await opening;
+      const closing = popoverWindow.trigger('keydown', { key: 'Escape' });
       expect(wrapper.emitted('open-change')).toEqual([[true], [false]]);
-      wrapper.vm.closePopover();
+      await closing;
+      await popoverWindow.trigger('keydown', { key: 'Escape' });
       expect(wrapper.emitted('open-change')).toEqual([[true], [false]]);
       expect(wrapper.emitted('opened')).toBeUndefined();
       expect(wrapper.emitted('update:open')).toBeUndefined();
@@ -640,20 +665,21 @@ describe('DtPopover Tests', () => {
 
     it.each([null, false])('retains completed transition updates with open=%s', async open => {
       await wrapper.setProps({ open });
-      wrapper.vm.toggleOpen();
-      await wrapper.vm.$nextTick();
+      if (open === null) await button.trigger('click');
+      else await wrapper.setProps({ open: true });
       expect(wrapper.emitted('opened')).toBeUndefined();
-      await wrapper.vm.onEnterTransitionComplete();
+      await completeTransition('enter');
       expect(wrapper.emitted('opened')[0][0]).toBe(true);
-      wrapper.vm.closePopover();
-      await wrapper.vm.onLeaveTransitionComplete();
+      await popoverWindow.find('[data-qa="inside"]').trigger('click');
+      expect(wrapper.emitted('opened')).toHaveLength(1);
+      await completeTransition('leave');
       expect(wrapper.emitted('opened')[1]).toEqual([false]);
       expect(wrapper.emitted('update:open')).toEqual(open === null ? undefined : [[true], [false]]);
     });
 
     it('does not treat a same-flush prop rewrite as a reopen request', async () => {
       await wrapper.setProps({ open: true });
-      wrapper.vm.closePopover();
+      await popoverWindow.trigger('keydown', { key: 'Escape' });
       wrapper.setProps({ open: false });
       await wrapper.setProps({ open: true });
       expect(button.attributes('aria-expanded')).toBe('false');
@@ -664,7 +690,7 @@ describe('DtPopover Tests', () => {
 
     it('ignores a canceled leave without requiring an after-leave callback', async () => {
       await wrapper.setProps({ open: true });
-      await wrapper.vm.onEnterTransitionComplete();
+      await completeTransition('enter');
       await wrapper.setProps({ open: false });
       await wrapper.setProps({ open: true });
       expect(wrapper.emitted('open-change')).toEqual([[true], [false], [true]]);
@@ -674,21 +700,18 @@ describe('DtPopover Tests', () => {
 
     it('stops a running leave before stale focus and terminal effects after reopen', async () => {
       await wrapper.setProps({ open: true });
-      await wrapper.vm.onEnterTransitionComplete();
+      await completeTransition('enter');
       await wrapper.setProps({ open: false });
-      let release;
-      vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => new Promise(resolve => {
-        release = resolve;
-      }));
+      const focus = suspendNextFocus();
       const contentButton = popoverWindow.find('[data-qa="inside"]').element;
-      const scrollLocked = document.documentElement.classList.contains('d-of-hidden');
-      const leave = wrapper.vm.onLeaveTransitionComplete();
+      popoverWindow.vm.$emit('after-leave');
+      await focus.requested;
       await wrapper.setProps({ open: true });
       contentButton.focus();
-      release(button.element);
-      await leave;
+      focus.release(button.element);
+      await flushPromises();
       expect(document.activeElement).toBe(contentButton);
-      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(scrollLocked);
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(true);
       expect(popoverWindow.element.isConnected).toBe(true);
       expect(wrapper.emitted('opened')).toHaveLength(1);
       expect(wrapper.emitted('update:open')).toEqual([[true]]);
@@ -697,62 +720,49 @@ describe('DtPopover Tests', () => {
 
     it('stops a running enter before stale focus and terminal effects after close', async () => {
       await wrapper.setProps({ open: true });
-      let release;
-      vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => new Promise(resolve => {
-        release = resolve;
-      }));
+      const focus = suspendNextFocus();
       button.element.focus();
-      const scrollLocked = document.documentElement.classList.contains('d-of-hidden');
-      const enter = wrapper.vm.onEnterTransitionComplete();
+      popoverWindow.vm.$emit('after-enter');
+      await focus.requested;
       await wrapper.setProps({ open: false });
-      release(popoverWindow.find('[data-qa="inside"]').element);
-      await enter;
+      focus.release(popoverWindow.find('[data-qa="inside"]').element);
+      await flushPromises();
       expect(document.activeElement).toBe(button.element);
-      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(scrollLocked);
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(false);
       expect(wrapper.emitted('opened')).toBeUndefined();
       expect(wrapper.emitted('update:open')).toBeUndefined();
     });
 
-    it.each(['enter', 'leave'])('stops stale %s completion during its final nextTick', async phase => {
+    it.each(['enter', 'leave'])('stops stale %s effects when a focus listener changes visibility', async phase => {
+      if (phase === 'enter') await wrapper.setProps({ initialFocusElement: 'dialog' });
       await wrapper.setProps({ open: true });
-      if (phase === 'leave') await wrapper.vm.onEnterTransitionComplete();
-      if (phase === 'leave') await wrapper.setProps({ open: false });
-      const notifications = wrapper.emitted('opened')?.length || 0;
-      const scrollLocked = document.documentElement.classList.contains('d-of-hidden');
-      if (phase === 'enter') {
-        vi.spyOn(wrapper.vm, 'focusInitialElement').mockImplementation(() => {
-          // Resume the completion first, then close while it awaits its final tick.
-          Promise.resolve().then(() => Promise.resolve().then(() => wrapper.vm.closePopover()));
-        });
-      } else {
-        vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockResolvedValue(button.element);
-        vi.spyOn(button.element, 'focus').mockImplementation(() => {
-          Promise.resolve().then(() => wrapper.vm.toggleOpen());
-        });
+      if (phase === 'leave') {
+        await completeTransition('enter');
+        await wrapper.setProps({ open: false });
       }
-      if (phase === 'enter') await wrapper.vm.onEnterTransitionComplete();
-      else await wrapper.vm.onLeaveTransitionComplete();
+      const notifications = wrapper.emitted('opened')?.length || 0;
+      const focusTarget = phase === 'enter' ? popoverWindow.element : button.element;
+      focusTarget.addEventListener('focus', async () => {
+        if (phase === 'enter') await nextTick();
+        await wrapper.setProps({ open: phase === 'leave' });
+      }, { once: true });
+      await completeTransition(phase);
       expect(wrapper.emitted('opened')?.length || 0).toBe(notifications);
-      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(scrollLocked);
-      await wrapper.vm.$nextTick();
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(phase === 'leave');
       expect(button.attributes('aria-expanded')).toBe(String(phase === 'leave'));
     });
 
     it.each(['enter', 'leave'])('stops a suspended %s completion after disposal', async phase => {
       await wrapper.setProps({ open: true });
       if (phase === 'leave') await wrapper.setProps({ open: false });
-      let release;
-      vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => new Promise(resolve => {
-        release = resolve;
-      }));
-      const focus = vi.spyOn(button.element, 'focus');
-      const completion = phase === 'enter'
-        ? wrapper.vm.onEnterTransitionComplete()
-        : wrapper.vm.onLeaveTransitionComplete();
+      const focus = suspendNextFocus();
+      const nativeFocus = vi.spyOn(button.element, 'focus');
+      popoverWindow.vm.$emit(`after-${phase}`);
+      await focus.requested;
       wrapper.unmount();
-      release(button.element);
-      await completion;
-      expect(focus).not.toHaveBeenCalled();
+      focus.release(button.element);
+      await flushPromises();
+      expect(nativeFocus).not.toHaveBeenCalled();
       expect(wrapper.emitted('opened')).toBeUndefined();
       expect(wrapper.emitted('update:open')).toBeUndefined();
     });

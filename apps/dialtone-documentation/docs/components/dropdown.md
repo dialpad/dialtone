@@ -162,6 +162,10 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 
 The parent owns the committed sort order. Each radio row uses `selected` for its checkmark and `aria-checked`; arrows and typeahead move focus without changing that state. ListItemGroup supplies an optional heading inside the menu. Ordinary action rows can share the menu and keep `menuitem`.
 
+The live demo requires the current menu-radio API. Its lookup fixture is withheld because the `dt10-pinned` profile uses `@dialpad/dialtone` 10.5.1, which lacks the radio role's checked state and navigation. Re-enable the fixture after a published release contains this API, the profile selects a compatible version, and consumer build, API, keyboard and accessibility qualification pass.
+
+<!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices","exclude":{"reason":"The dt10-pinned profile uses @dialpad/dialtone 10.5.1, which lacks menuitemradio checked state and navigation. Re-enable after a published compatible release, a compatible fixture profile, and consumer build, API, keyboard and accessibility qualification.","owner":"Francis Rupert"}} -->
+
 ```vue demo
 <dt-dropdown>
   <template #anchor="anchorAttrs">
@@ -198,19 +202,19 @@ The parent owns the committed sort order. Each radio row uses `selected` for its
 
 ## Logical Visibility and Controlled Arrow Keys
 
-`open-change(boolean)` fires synchronously when logical visibility actually changes. `opened` and `update:open` retain their completed-transition timing; `open=null` emits no `update:open`. Use the logical event when work must happen before the close animation finishes. A canceled transition emits no stale completion notification.
+`open-change(boolean)` fires synchronously when logical visibility actually changes. When mounted with `open=true`, the initial `open-change(true)` fires during component creation, before mount, and the visible menu exposes `aria-hidden="false"`. `opened` and `update:open` retain their completed-transition timing; `open=null` emits no `update:open`. Use the logical event when work must happen before the close animation finishes. A canceled transition emits no stale completion notification.
 
-With a boolean `open` prop, anchor arrows remain silent by default. Set `forwardAnchorArrowKeys` to forward ArrowUp/ArrowDown through `keydown` without automatically toggling. On a closed opted-in Dropdown, the consumer decides whether to open and whether to prevent the key's default action; the event continues to ancestor listeners. If the consumer opens in that flush, the menu starts with keyboard focus on its first navigable row. Ignored arrows do not make a later pointer opening behave like a keyboard opening. Once open, normal Dropdown navigation and key prevention apply.
+With a boolean `open` prop, anchor arrows remain silent by default. Set `forwardAnchorArrowKeys` to forward ArrowUp/ArrowDown through `keydown` without automatically toggling. On a closed opted-in Dropdown, the consumer decides whether to open and whether to prevent the key's default action; the event continues to ancestor listeners. To start with focus on the first navigable row, accept opening synchronously in Dropdown's own emitted `keydown` callback. An ancestor DOM listener or a delayed update does not carry that focus guarantee. The callback also receives content key events, so check that the event target belongs to the anchor before requesting opening; closing-content arrows must not reopen the menu. Ignored arrows do not make a later pointer opening behave like a keyboard opening. Once open, normal Dropdown navigation and key prevention apply.
 
 ## Accessibility
 
 A screen reader visible only close button is added by default.
 
-The dropdown menu has a role of "menu" and the list items have a role "menuitem". See [W3C guidelines](https://www.w3.org/WAI/ARIA/apg/#menubutton) for more information.
+The dropdown surface has `role="menu"`; action rows use `menuitem` and persistent mutually exclusive choices use `menuitemradio`. See [W3C guidelines](https://www.w3.org/WAI/ARIA/apg/#menubutton) for more information.
 
 ### List
 
-The Dropdown is rendered with semantic `<ul>` and `<li>`. The list slot is wrapped in `<ul>` element so make sure the items are wrapped in `<li>` element and each item has the menuitem role. It is recommended to use the [List Item component](/components/list-item.md) as it supports all the necessary accessibility props and interactions.
+The positioned surface supplies `role="menu"`. Its `<ul role="none">` list wrapper adds no implicit list role between that menu and its rows. Use `menuitem` for actions and `menuitemradio` for persistent mutually exclusive choices; optional ListItemGroup headings keep their labelled `group` context. Use [List Item](/components/list-item.md) for the row interactions.
 
 ### Focus & Keyboard
 
@@ -218,7 +222,7 @@ A dropdown menu has well defined standard [keyboard interactions](https://www.w3
 
 Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the **highlight** selection changes, a highlight event is emitted with the index of the currently highlighted item. `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
 
-The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. A hand-authored `menuitemradio` must have a nonempty unique ID to participate in keyboard or mouse navigation; id-less radio rows are excluded. Headings and separators do not participate.
+The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. A hand-authored `menuitemradio` must have a nonempty unique ID to participate in keyboard or mouse navigation; id-less radio rows are excluded. Headings and separators do not participate. Hovering them preserves the current highlight, and IDs outside the navigable collection are ignored.
 
 <script setup>
 import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';

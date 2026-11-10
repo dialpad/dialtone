@@ -57,7 +57,7 @@ For the full accessibility guide with P.O.U.R. principles and role-specific resp
 
 ### Dropdowns (DtDropdown)
 
-- `role="menu"` on the list container
+- `role="menu"` on the positioned surface; the `ul` list wrapper has `role="none"` so it does not interrupt the menu context
 - `role="menuitem"` on action items
 - Explicit `role="menuitemradio"` for persistent mutually exclusive menu choices; consumer-owned `selected` sets `aria-checked` independently of focus/highlight
 - ListItem still defaults to `listitem` for ordinary lists; listbox rows remain `option`. A checkmark never infers a radio role

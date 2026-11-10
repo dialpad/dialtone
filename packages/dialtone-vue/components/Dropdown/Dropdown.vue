@@ -22,8 +22,6 @@
     :transition="transition"
     :footer-class="footerClass"
     v-on="dropdownListeners"
-    @pointerdown.capture="clearPendingArrowOpening"
-    @click.capture="onAnchorClick"
   >
     <template #anchor="{ attrs }">
       <!--
@@ -45,6 +43,7 @@
       <ul
         :id="listId"
         ref="listWrapper"
+        role="none"
         :class="listClasses"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
@@ -119,7 +118,8 @@ export default {
 
     /**
      * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
-     * Closed arrows retain their default action and propagation for consumer handling.
+     * Closed anchor arrows retain their default action and propagation for consumer handling.
+     * Accept opening synchronously in the emitted keydown callback for first-row focus.
      */
     forwardAnchorArrowKeys: {
       type: Boolean,
@@ -338,6 +338,7 @@ export default {
 
     /**
      * Synchronously emitted when logical visibility changes, before transition completion.
+     * Includes initial true during creation when mounted with open=true.
      * @event open-change
      * @type {Boolean}
      */
@@ -379,13 +380,18 @@ export default {
           const isArrow = [EVENT_KEYNAMES.up, EVENT_KEYNAMES.arrowup,
             EVENT_KEYNAMES.down, EVENT_KEYNAMES.arrowdown].includes(eventCode);
 
-          if (isArrow && this.forwardAnchorArrowKeys && this.open !== null && !this.isLogicallyOpen) {
+          const isAnchorEvent = this.$refs.popover?.$refs.anchor?.contains(event.target);
+          if (isArrow && isAnchorEvent && this.forwardAnchorArrowKeys &&
+            this.open !== null && !this.isLogicallyOpen) {
             const pending = Symbol('arrow-opening');
             this.pendingArrowOpening = pending;
             this.openedWithKeyboard = true;
             this.$emit('keydown', event);
             this.$nextTick(() => {
-              if (this.pendingArrowOpening === pending && !this.isLogicallyOpen) this.clearPendingArrowOpening();
+              if (this.pendingArrowOpening === pending && !this.isLogicallyOpen) {
+                this.pendingArrowOpening = null;
+                this.openedWithKeyboard = false;
+              }
             });
             return;
           }
@@ -462,16 +468,6 @@ export default {
   },
 
   methods: {
-    clearPendingArrowOpening () {
-      if (!this.pendingArrowOpening) return;
-      this.pendingArrowOpening = null;
-      this.openedWithKeyboard = false;
-    },
-
-    onAnchorClick (event) {
-      if (event.detail > 0) this.clearPendingArrowOpening();
-    },
-
     onMouseHighlight (e) {
       const items = this._getListItemNodes();
       let liElement = e.target;

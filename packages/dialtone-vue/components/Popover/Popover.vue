@@ -615,6 +615,7 @@ export default {
 
     /**
      * Synchronously emitted on actual logical visibility changes, before transition completion.
+     * Includes initial true during creation when mounted with open=true.
      * @event open-change
      * @type {Boolean}
      */
@@ -767,6 +768,7 @@ export default {
       });
     },
 
+    // Register before the immediate open watcher so initial open=true notifies and exposes the dialog.
     isOpen: [
       {
         flush: 'sync',

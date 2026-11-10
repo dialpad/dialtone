@@ -100,13 +100,13 @@ describe('DtSplitButton Tests', function () {
     if (opening === 'click') await trigger.trigger('click');
     else await trigger.trigger('keydown', { key: opening, code: opening });
     expect(trigger.attributes('aria-expanded')).toBe('true');
-    await popover.vm.onEnterTransitionComplete();
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
     await flushPromises();
     expect(trigger.classes()).toContain('d-btn--active');
     await trigger.trigger('keydown', { key: 'Escape', code: 'Escape' });
     expect(trigger.attributes('aria-expanded')).toBe('false');
     expect(trigger.classes()).toContain('d-btn--active');
-    await popover.vm.onLeaveTransitionComplete();
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-leave');
     await flushPromises();
     expect(trigger.classes()).not.toContain('d-btn--active');
   });
