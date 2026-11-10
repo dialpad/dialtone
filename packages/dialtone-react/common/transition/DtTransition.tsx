@@ -404,8 +404,8 @@ export function DtTransition (props: DtTransitionProps) {
     };
   }, []);
 
-  // Bumped on unmount (StrictMode's simulated one too). A `done` handed to a hook before that does nothing, so a hook
-  // that ends its transition late changes nothing and calls no other hook.
+  // Bumped by the cleanup below. A `done` handed to a hook before that does nothing, so a hook that ends its
+  // transition late changes nothing and calls no other hook.
   const life = useRef(0);
   const call = useEffectEvent((hook: UserHook, el: HTMLElement, done?: () => void) => {
     const at = life.current;
@@ -433,6 +433,9 @@ export function DtTransition (props: DtTransitionProps) {
         transition.beforeEnter(el);
         transition.enter(el);
       }
+      // After a cleanup that kept the state (an <Activity> hid it mid-leave), that leave never ends: end it here,
+      // hidden or unmounted, without hooks. On a first mount, present already matches show.
+      if (!show) setPresent(false);
       return;
     }
     if (show) {
@@ -478,9 +481,9 @@ export function DtTransition (props: DtTransitionProps) {
     work.forEach(fn => fn());
   }, [present, generation]);
 
-  // Unmounting (and StrictMode's simulated unmount) stops everything without calling hooks, a `done` a hook still
-  // holds included, and clears the classes, so a remount starts clean. Vue's <Transition> would still end a
-  // pending transition and call its hooks on the detached element.
+  // Unmounting (StrictMode's simulated unmount and an <Activity> hiding it too) stops everything without calling
+  // hooks, a `done` a hook still holds included, and clears the classes, so a remount starts clean. Vue's
+  // <Transition> would still end a pending transition and call its hooks on the detached element.
   useLayoutEffect(() => () => {
     life.current += 1;
     tasks.current.forEach(cancel => cancel());

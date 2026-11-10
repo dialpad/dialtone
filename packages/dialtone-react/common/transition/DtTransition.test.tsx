@@ -1,4 +1,4 @@
-import { act, StrictMode, createRef, type ReactElement } from 'react';
+import { act, Activity, StrictMode, createRef, type ReactElement } from 'react';
 import { render, screen } from '@testing-library/react';
 import { DtTransition, type DtTransitionProps } from './DtTransition';
 import { SCENARIOS, run, type Scenario } from '../../parity/transition-scenarios.mjs';
@@ -193,6 +193,29 @@ describe('DtTransition', () => {
         await finishTransitions();
         expect(hook, `unmountOnLeave: ${unmountOnLeave}, css: ${css}`).not.toHaveBeenCalled();
       }
+    }
+  });
+
+  it('ends a leave hidden, without hooks, when an <Activity> hid it midway', async () => {
+    for (const unmountOnLeave of [false, true]) {
+      const onAfterLeave = vi.fn();
+      const ui = (mode: 'visible' | 'hidden', show: boolean) => (
+        <Activity mode={mode}>
+          <DtTransition show={show} name="fade" unmountOnLeave={unmountOnLeave} onAfterLeave={onAfterLeave}>
+            <div data-qa="x" />
+          </DtTransition>
+        </Activity>
+      );
+      const { rerender, unmount } = render(ui('visible', true));
+      rerender(ui('visible', false));
+      // Hiding runs DtTransition's cleanup, which stops the leave; showing runs its effects again.
+      rerender(ui('hidden', false));
+      rerender(ui('visible', false));
+      await finishTransitions();
+      if (unmountOnLeave) expect(screen.queryByTestId('x')).toBeNull();
+      else expect(screen.getByTestId('x')).toHaveStyle({ display: 'none' });
+      expect(onAfterLeave).not.toHaveBeenCalled();
+      unmount();
     }
   });
 
