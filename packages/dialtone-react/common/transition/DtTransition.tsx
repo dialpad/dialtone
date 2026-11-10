@@ -368,7 +368,7 @@ type ChildProps = { className?: string; style?: CSSProperties; ref?: Ref<HTMLEle
  * `<name>-enter-from` and `-enter-active`, swaps `-enter-from` for `-enter-to` two frames later, and removes them
  * when the element's transition or animation ends (its computed timing and `transitionend`/`animationend`, or
  * `duration`); the same for leave, after which the child is hidden (`display: none`) or unmounted. The hooks are
- * Vue's, at the same moments.
+ * Vue's, at the same moments, except that none runs once DtTransition unmounts.
  */
 export function DtTransition (props: DtTransitionProps) {
   const { show, unmountOnLeave = false, children } = props;
@@ -404,8 +404,12 @@ export function DtTransition (props: DtTransitionProps) {
     };
   }, []);
 
+  // Bumped on unmount (StrictMode's simulated one too). A `done` handed to a hook before that does nothing, so a hook
+  // that ends its transition late changes nothing and calls no other hook.
+  const life = useRef(0);
   const call = useEffectEvent((hook: UserHook, el: HTMLElement, done?: () => void) => {
-    (props[hook] as DtTransitionAsyncHook | undefined)?.(el, done ?? (() => {}));
+    const at = life.current;
+    (props[hook] as DtTransitionAsyncHook | undefined)?.(el, () => { if (done && life.current === at) done(); });
   });
   const hooks = useEffectEvent((isMounted: boolean) => transitionHooks({ props, call, scheduler }, isMounted));
   const isVIf = useEffectEvent(() => unmountOnLeave);
@@ -474,9 +478,11 @@ export function DtTransition (props: DtTransitionProps) {
     work.forEach(fn => fn());
   }, [present, generation]);
 
-  // Unmounting (and StrictMode's simulated unmount) stops everything without calling hooks, and clears the
-  // classes, so a remount starts clean.
+  // Unmounting (and StrictMode's simulated unmount) stops everything without calling hooks, a `done` a hook still
+  // holds included, and clears the classes, so a remount starts clean. Vue's <Transition> would still end a
+  // pending transition and call its hooks on the detached element.
   useLayoutEffect(() => () => {
+    life.current += 1;
     tasks.current.forEach(cancel => cancel());
     tasks.current.clear();
     queue.current = [];

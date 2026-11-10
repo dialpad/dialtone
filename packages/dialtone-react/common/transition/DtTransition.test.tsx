@@ -83,6 +83,23 @@ describe('DtTransition', () => {
     expect(onAfterEnter).toHaveBeenCalledOnce();
   });
 
+  it('runs appear once under StrictMode when its hook calls done', async () => {
+    const dones: (() => void)[] = [];
+    const onAppear = (_el: HTMLElement, done: () => void) => { dones.push(done); };
+    const onAfterEnter = vi.fn();
+    render(
+      <StrictMode>
+        <DtTransition show name="pop" appear onAppear={onAppear} onAfterEnter={onAfterEnter}><div data-qa="x" /></DtTransition>
+      </StrictMode>,
+    );
+    await finishTransitions();
+    // StrictMode's simulated unmount and remount start the appear twice; the first start's done does nothing.
+    expect(dones).toHaveLength(2);
+    dones.forEach(done => done());
+    expect(onAfterEnter).toHaveBeenCalledOnce();
+    expect(screen.getByTestId('x').className).toBe('');
+  });
+
   it('passes the element to the child\'s ref', () => {
     const ref = createRef<HTMLDivElement>();
     render(<DtTransition show><div data-qa="x" ref={ref} /></DtTransition>);
@@ -149,6 +166,34 @@ describe('DtTransition', () => {
     expect(onAfterLeave).not.toHaveBeenCalled();
     expect(onLeaveCancelled).not.toHaveBeenCalled();
     expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('ignores a done a hook still holds once unmounted', async () => {
+    // Vue would still end the transition, and call its hooks on the detached element.
+    for (const unmountOnLeave of [false, true]) {
+      for (const css of [true, false]) {
+        const dones: (() => void)[] = [];
+        const hold = (_el: HTMLElement, done: () => void) => { dones.push(done); };
+        const hook = vi.fn();
+        const ui = (show: boolean) => (
+          <DtTransition show={show} name="fade" css={css} unmountOnLeave={unmountOnLeave} onEnter={hold}
+            onLeave={hold} onAfterEnter={hook} onAfterLeave={hook} onEnterCancelled={hook} onLeaveCancelled={hook}>
+            <div data-qa="x" />
+          </DtTransition>
+        );
+        // A leave, then an enter, each unmounted before its hook calls done.
+        const leaving = render(ui(true));
+        leaving.rerender(ui(false));
+        leaving.unmount();
+        const entering = render(ui(false));
+        entering.rerender(ui(true));
+        entering.unmount();
+        expect(dones).toHaveLength(2);
+        dones.forEach(done => done());
+        await finishTransitions();
+        expect(hook, `unmountOnLeave: ${unmountOnLeave}, css: ${css}`).not.toHaveBeenCalled();
+      }
+    }
   });
 
   it('settles under the parity harness, which fires transitionend', async () => {
