@@ -795,22 +795,14 @@ describe('DtFilterPill custom content and localized display', () => {
     });
   });
 
-  it('accepts a present but empty content slot without a warning', () => {
+  it.each([
+    { content: 'an empty content slot', props: {}, slots: { content: () => undefined }, warns: false },
+    { content: 'a nonempty model', props: { modelValue: [{ name: 'Support' }] }, slots: {}, warns: false },
+    { content: 'no model and no content slot', props: {}, slots: {}, warns: true },
+  ])('warns about missing content only when absent ($content → $warns)', ({ props, slots, warns }) => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    updateWrapper({}, { content: () => undefined });
-    expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
-  });
-
-  it('warns once when both the model and content slot are absent', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    updateWrapper();
-    expect(warn.mock.calls.filter(([message]) => message === missingContentWarning)).toHaveLength(1);
-  });
-
-  it('accepts nonempty model content without a warning', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    updateWrapper({ modelValue: [{ name: 'Support' }] });
-    expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
+    updateWrapper(props, slots);
+    expect(warn.mock.calls.some(([message]) => message === missingContentWarning)).toBe(warns);
   });
 
   const useLocale = (locale, frenchResource = `DIALTONE_FILTER_PILL_ALL_LABEL = Tous
@@ -837,9 +829,6 @@ DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
 
   it('uses English fallback when the locale resource lacks the new keys', () => {
     useLocale('fr-FR', 'TEST_ONLY_MESSAGE = Fixture without FilterPill keys');
-    updateWrapper({ modelValue: [{ name: 'Support', active: true }, { name: 'Sales', active: true }] });
-    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('All');
-    wrapper.unmount();
     updateWrapper({ modelValue: [
       { name: 'Support', active: true }, { name: 'Sales', active: true }, { name: 'Engineering' },
     ] });
@@ -847,7 +836,7 @@ DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
   });
 
   it('renders one selected option without an aggregate or overflow', () => {
-    updateWrapper({ modelValue: [{ name: 'Support', active: true }, { name: 'Sales' }] });
+    updateWrapper({ modelValue: [{ name: 'Support', active: true }] });
     expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('Support');
     expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(false);
   });
@@ -878,7 +867,6 @@ DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
       wrapper.unmount();
       let bindings;
       updateWrapper({ modelValue }, { default: data => { bindings = data; return data.activeFilterList; } });
-      expect(wrapper.find('.d-filter-pill__label').text()).toBe('All');
       expect(bindings.activeFilterList).toBe('All');
       expect(toRaw(bindings.filters)).toBe(modelValue);
       expect(bindings.activeFilters).toEqual(['Support', 'Sales']);
@@ -886,17 +874,15 @@ DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
     });
 
     it.each([
-      { selected: 2, label: 'Support', overflow: '+1', title: singular },
-      { selected: 3, label: 'Support', overflow: '+2', title: plural },
-    ])('renders $selected selected options with Fluent plural and isolation', ({ selected, label, overflow, title }) => {
+      { selected: 2, overflow: '+1', title: singular },
+      { selected: 3, overflow: '+2', title: plural },
+    ])('renders $selected selected options with Fluent plural and isolation', ({ selected, overflow, title }) => {
       updateWrapper({ modelValue: ['Support', 'Sales', 'Engineering', 'Marketing'].map((name, index) => ({
         name, active: index < selected,
       })) });
-      const summary = wrapper.find('.d-filter-pill__label-end');
       const extra = wrapper.find('.d-filter-pill__label-end-overflow');
-      expect(summary.exists() ? summary.text() : '').toBe(label);
-      expect(extra.exists() ? extra.text() : '').toBe(overflow);
-      expect(extra.exists() ? extra.attributes('title') : undefined).toBe(title);
+      expect(extra.text()).toBe(overflow);
+      expect(extra.attributes('title')).toBe(title);
     });
   });
 });

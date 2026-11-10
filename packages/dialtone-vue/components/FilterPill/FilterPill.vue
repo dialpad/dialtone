@@ -550,8 +550,12 @@ export default {
       return this.filters.filter(filter => filter.active).map(filter => filter.name);
     },
 
+    allFiltersActive () {
+      return this.filters.length > 1 && this.activeFilters.length === this.filters.length;
+    },
+
     activeFilterList () {
-      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) {
+      if (this.allFiltersActive) {
         return 'All';
       }
 
@@ -559,7 +563,7 @@ export default {
     },
 
     activeFilterLabel () {
-      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) {
+      if (this.allFiltersActive) {
         return this.i18n.$t('DIALTONE_FILTER_PILL_ALL_LABEL');
       }
 
@@ -571,8 +575,7 @@ export default {
     },
 
     activeFilterOverflow () {
-      if (this.activeFilters.length <= 1) return '';
-      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) return '';
+      if (this.activeFilters.length <= 1 || this.allFiltersActive) return '';
 
       return '+' + (this.activeFilters.length - 1);
     },
