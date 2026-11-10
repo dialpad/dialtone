@@ -1,0 +1,890 @@
+{
+ "v-show, transition 1s": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "end",
+   "base|none"
+  ]
+ ],
+ "v-show, no duration": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "f",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "f",
+   "base|none"
+  ]
+ ],
+ "v-show, timeout fallback": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "t300",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "t1",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "t301",
+   "base|none"
+  ]
+ ],
+ "appear": [
+  [
+   "hook:BeforeEnter",
+   "base||false"
+  ],
+  [
+   "hook:Enter",
+   "base pop-enter-from pop-enter-active||true"
+  ],
+  [
+   "mount",
+   "base pop-enter-from pop-enter-active|"
+  ],
+  [
+   "f",
+   "base pop-enter-from pop-enter-active|"
+  ],
+  [
+   "f",
+   "base pop-enter-active pop-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "aend",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base pop-leave-from pop-leave-active||true"
+  ],
+  [
+   "hide",
+   "base pop-leave-from pop-leave-active|"
+  ],
+  [
+   "f",
+   "base pop-leave-from pop-leave-active|"
+  ],
+  [
+   "f",
+   "base pop-leave-active pop-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "aend",
+   "base|none"
+  ]
+ ],
+ "appear without appear prop": [
+  [
+   "mount",
+   "base|"
+  ],
+  [
+   "f",
+   "base|"
+  ],
+  [
+   "f",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base pop-leave-from pop-leave-active||true"
+  ],
+  [
+   "hide",
+   "base pop-leave-from pop-leave-active|"
+  ],
+  [
+   "f",
+   "base pop-leave-from pop-leave-active|"
+  ],
+  [
+   "f",
+   "base pop-leave-active pop-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "end",
+   "base|none"
+  ]
+ ],
+ "css false": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base||true"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "show",
+   "base|"
+  ],
+  [
+   "f",
+   "base|"
+  ],
+  [
+   "f",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base||true"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "hide",
+   "base|none"
+  ],
+  [
+   "f",
+   "base|none"
+  ],
+  [
+   "f",
+   "base|none"
+  ]
+ ],
+ "explicit duration": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "t299",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "t1",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "t500",
+   "base|none"
+  ]
+ ],
+ "cancel enter": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "hook:EnterCancelled",
+   "base fade-enter-from||true"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base fade-enter-from||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-enter-from fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-enter-from fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active fade-enter-to|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-enter-to fade-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base fade-enter-to|none|true"
+  ],
+  [
+   "end",
+   "base fade-enter-to|none"
+  ]
+ ],
+ "cancel leave": [
+  [
+   "mount",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-leave-to|"
+  ],
+  [
+   "hook:LeaveCancelled",
+   "base|none|true"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ]
+ ],
+ "v-if": [
+  [
+   "mount",
+   "absent"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base||false"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base||false"
+  ],
+  [
+   "end",
+   "absent"
+  ]
+ ],
+ "custom classes": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base v-enter-from d-collapsible__enter-active||true"
+  ],
+  [
+   "show",
+   "base v-enter-from d-collapsible__enter-active|"
+  ],
+  [
+   "f",
+   "base v-enter-from d-collapsible__enter-active|"
+  ],
+  [
+   "f",
+   "base d-collapsible__enter-active v-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base v-leave-from d-collapsible__leave-active||true"
+  ],
+  [
+   "hide",
+   "base v-leave-from d-collapsible__leave-active|"
+  ],
+  [
+   "f",
+   "base v-leave-from d-collapsible__leave-active|"
+  ],
+  [
+   "f",
+   "base d-collapsible__leave-active v-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "end",
+   "base|none"
+  ]
+ ],
+ "explicit done": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "end",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "t100",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base|none|true"
+  ],
+  [
+   "t100",
+   "base|none"
+  ]
+ ],
+ "type transition with animation": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "aend",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ]
+ ],
+ "v-if cancel leave": [
+  [
+   "mount",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "f",
+   "base fade-leave-active fade-leave-to|"
+  ],
+  [
+   "hook:AfterLeave",
+   "base fade-leave-active fade-leave-to||false"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base||false"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ]
+ ],
+ "cancel leave before frame": [
+  [
+   "mount",
+   "base|"
+  ],
+  [
+   "hook:BeforeLeave",
+   "base||true"
+  ],
+  [
+   "hook:Leave",
+   "base fade-leave-from fade-leave-active||true"
+  ],
+  [
+   "hide",
+   "base fade-leave-from fade-leave-active|"
+  ],
+  [
+   "hook:LeaveCancelled",
+   "base|none|true"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ]
+ ],
+ "two properties": [
+  [
+   "mount",
+   "base|none"
+  ],
+  [
+   "hook:BeforeEnter",
+   "base|none|true"
+  ],
+  [
+   "hook:Enter",
+   "base fade-enter-from fade-enter-active||true"
+  ],
+  [
+   "show",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-from fade-enter-active|"
+  ],
+  [
+   "f",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "end",
+   "base fade-enter-active fade-enter-to|"
+  ],
+  [
+   "hook:AfterEnter",
+   "base||true"
+  ],
+  [
+   "end",
+   "base|"
+  ]
+ ]
+}

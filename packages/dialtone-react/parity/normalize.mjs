@@ -130,8 +130,18 @@ export function maskedHtml (element) {
   return nodes.map(node => serialize(node, idRewriter(ids), { raw: true })).join('');
 }
 
+// Vue Test Utils stubs <transition> by default, as <transition-stub> around the child, carrying the transition's
+// props and the attrs that fell through to it (which the child has too). A browser has no such element, and the
+// React side stubs DtTransition to render its child alone (react/transition-stub.tsx), so the stub is unwrapped: its
+// attributes are neither serialized nor named, and its children stand in its place.
+const isTransitionStub = node => node.localName === 'transition-stub';
+
 const walk = (nodes, visit) => {
-  const go = node => { if (node.nodeType === 1) { visit(node); node.childNodes.forEach(go); } };
+  const go = node => {
+    if (node.nodeType !== 1) return;
+    if (!isTransitionStub(node)) visit(node);
+    node.childNodes.forEach(go);
+  };
   nodes.forEach(go);
 };
 
@@ -173,6 +183,7 @@ function serialize (node, rewrite, { raw = false } = {}) {
     return escapeText(text);
   }
   if (node.nodeType !== 1) return ''; // comments (Vue's <!--v-if-->), processing instructions
+  if (isTransitionStub(node)) return [...node.childNodes].map(c => serialize(c, rewrite, { raw })).join('');
   const tag = node.localName;
   const attrs = raw ? rawAttributes(node, rewrite) : canonicalAttributes(node, rewrite);
   const open = `<${tag}${attrs.map(([k, v]) => ` ${k}="${escapeAttr(v)}"`).join('')}>`;
