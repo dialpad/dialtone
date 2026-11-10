@@ -55,7 +55,7 @@
     },
     "storybook:all": {
       "executor": "nx:run-commands",
-      "dependsOn": ["storybook:ports", "dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build", "dialtone-vue:build-functions"],
+      "dependsOn": [{ "target": "storybook:ports" }, "dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build", "dialtone-vue:build-functions"],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
