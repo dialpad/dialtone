@@ -52,7 +52,7 @@ beforeAll(() => {
   };
 });
 
-// Every test must assert something (parity.md › Anti-gaming).
+// Every test must assert something.
 beforeEach(() => {
   expect.hasAssertions();
 });

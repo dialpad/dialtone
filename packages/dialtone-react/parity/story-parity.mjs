@@ -1,5 +1,5 @@
-// Story parity (parity.md › Story parity): every Vue story in the unit's component directory has a React story with
-// the same id, and each pair has the same arg keys, once the conventions' renames are applied. A static parse
+// Story parity: every Vue story in the unit's component directory has a React story with
+// the same id, and each pair has the same arg keys, once React's renames are applied (reactArgKey). A static parse
 // (Storybook's own CSF reader), so nothing is bundled or rendered. Also fails a stand-in for a component that's
 // already in the tree.
 import fs from 'node:fs';
@@ -100,7 +100,7 @@ const lowerFirst = s => s.charAt(0).toLowerCase() + s.slice(1);
 const isEvent = key => /^on[A-Z]/.test(key);
 
 /**
- * A Vue arg's key as the conventions name it in React (react-components.md › Vue → React): v-model's `modelValue`
+ * A Vue arg's key as the port names it in React: v-model's `modelValue`
  * becomes `value` (or the unit's parity rename, e.g. `checked`), `onUpdate:x` becomes `onXChange`, focusin and
  * focusout become onFocus and onBlur, kebab-case events become camelCase.
  */
@@ -124,7 +124,7 @@ const comparable = key => (isEvent(key) ? key.toLowerCase() : key);
  * Compares the unit's stories. Returns { status: 'ok' | 'bad' | 'na', summary, detail }.
  *   vueDir, reactDir: the unit's directories; name: its PascalCase name; pkg: packages/dialtone-react.
  *   vueRoot, vuePaths: dialtone-vue, and all the unit's Vue sources relative to it (vue-sources.mjs).
- *   standIns: false skips the stand-in check (base CI, parity.md).
+ *   standIns: false skips the stand-in check (CI on pushes to dialtone-react).
  */
 export function storyParity ({ vueDir, reactDir, name, pkg, vueRoot, vuePaths, standIns = true }) {
   const storiesIn = dir => (fs.existsSync(dir) && fs.statSync(dir).isDirectory()
@@ -177,7 +177,7 @@ export function storyParity ({ vueDir, reactDir, name, pkg, vueRoot, vuePaths, s
   }
   const reactOnly = [...react.keys()].map(id => `- ${id}`);
 
-  // A stand-in for a component that's in the tree: the loop swaps these, so base CI skips the check (parity.md).
+  // A stand-in for a component that's in the tree. CI on pushes to dialtone-react skips this: a merge can leave some.
   const staleStandIns = [];
   if (standIns) {
     for (const f of reactFiles) {
@@ -202,7 +202,7 @@ export function storyParity ({ vueDir, reactDir, name, pkg, vueRoot, vuePaths, s
       missingFiles.length && `React story files missing (one per Vue story file, next to the component):\n${missingFiles.map(f => `- components/${name}/${f}`).join('\n')}`,
       problems.length && `Story files that couldn't be read:\n${problems.join('\n')}`,
       missing.length && `Vue stories with no React story of the same id (title plus export name):\n${missing.join('\n')}`,
-      argDiffs.length && `Stories whose arg keys differ from Vue's (after the conventions' renames and the unit's \`${name}.parity.tsx\` props):\n${argDiffs.join('\n')}`,
+      argDiffs.length && `Stories whose arg keys differ from Vue's (after React's renames and the unit's \`${name}.parity.tsx\` props):\n${argDiffs.join('\n')}`,
       reactOnly.length && `React-only stories (allowed):\n${reactOnly.join('\n')}`,
       stale.length && `Stand-ins for components that are already in the tree; use the component:\n${stale.join('\n')}`,
     ].filter(Boolean).join('\n\n'),

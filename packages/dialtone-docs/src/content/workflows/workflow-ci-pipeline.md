@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook, dialtone-react, parity-gate]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-05
+last_updated: 2026-11-10
 related_packages: [dialtone-vue, dialtone-react, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -88,17 +88,7 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 | `check` | `pnpm nx run dialtone-react:lint`, `:typecheck`, `:test` and `:build`, in that order, then the harness's own tests (`node --test 'packages/dialtone-react/parity/*.test.mjs'`). |
 | `gate` | Runs the parity gate (`pnpm nx run dialtone-react:gate -- <unit>`) for each ported unit the change touches, one after another, and writes each gate's summary to the job summary. `parity/changed-units.mjs` picks the units. A ported unit is one with a React `components/<Name>/index.ts`. It's gated when its React directory changes, or any of its Vue sources (`parity/vue-sources.mjs`, the same lookup the gate uses), which include pieces outside `components/`: `directives/tooltip_directive` is tooltip's, `common/sr_only_close_button.vue` is button's, and the directive, mixin and composable units are their own files. A deleted Vue path is placed by its shape (`directives/<d>/` is `directive-<d>`'s). It's also gated when a file its React or Vue sources import, directly or not, changes: Checkbox renders DtText, so a Text change gates checkbox, and a `common/utils` change in `dialtone-vue` gates every unit that uses it. Stories' imports aren't followed. A change to a shared file gates every ported unit: the package's `parity/`, `common/`, `tests/` and `scripts/`, its `package.json`, `tsconfig*`, `vite*` and ESLint config, `pnpm-lock.yaml`, and the `dialtone-react*.yml` workflows. On a push to `dialtone-react` it sets `PARITY_SKIP_STAND_INS=1`, so a merged component's leftover story stand-ins don't fail the base branch. A run with no changed units skips the gate. |
 
-Both jobs restore Nx's local cache (`.nx/cache`) with `actions/cache`, keyed on the lockfile, so the dialtone-icons and dialtone-tokens builds they depend on are reused across runs. The migration loop reads this workflow's result on `dialtone-react` before retrying work, so keep the job names stable.
-
----
-
-### `dialtone-react-scope.yml`
-
-**Trigger:** Pull requests into the `dialtone-react` branch, with no paths filter, so a loop PR that changes only files outside `dialtone-react.yml`'s paths still runs it.
-
-| Job | What it does |
-|-----|--------------|
-| `scope` | Only for PRs from `react/*` branches (the migration loop): fails if the PR changes files outside `packages/dialtone-react/`, or the package's shared files (configs, `parity/`, `scripts/`, `tests/`, the foundations in `common/link/`, `common/localization/` and `common/transition/`, `.storybook/`, `compare/`). It repeats the loop's local pre-push hook. Both diff with `--no-renames`, so a shared file moved into a unit's directory still shows its old path. The loop reads its result, so keep the job name. |
+Both jobs restore Nx's local cache (`.nx/cache`) with `actions/cache`, keyed on the lockfile, so the dialtone-icons and dialtone-tokens builds they depend on are reused across runs.
 
 ---
 

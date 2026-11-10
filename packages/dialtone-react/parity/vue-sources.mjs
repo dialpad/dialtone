@@ -1,11 +1,10 @@
 // A unit's Vue sources: where the gate reads its Vue stories and tests, and which Vue changes CI gates it for
-// (changed-units.mjs). The rules are the loop's plan.mjs (react-migration), which CI can't read, so its two tables are
-// repeated here: keep MERGED and OWNED_FILES in step with plan.mjs' MERGES and OWNED_FILES.
+// (changed-units.mjs).
 import fs from 'node:fs';
 import path from 'node:path';
 import { pascal } from './cases.mjs';
 
-// Pieces plan.mjs folds into another unit: mutual dependencies, or pieces with no React deliverable of their own.
+// Pieces folded into another unit: mutual dependencies, or pieces with no React deliverable of their own.
 const MERGED = {
   'mode-island': ['directive-mode'],
   skeleton: ['mixin-skeleton'],
@@ -15,7 +14,7 @@ const MERGED = {
 // Shared Vue files outside any unit's directory, owned by one unit.
 const OWNED_FILES = { button: ['common/sr_only_close_button.vue'] };
 
-// plan.mjs' ids: tooltip_directive → tooltip, keyboard_list_navigation → keyboard-list-navigation,
+// Unit ids: tooltip_directive → tooltip, keyboard_list_navigation → keyboard-list-navigation,
 // useIndicatorAnimation → use-indicator-animation.
 const kebab = s => s.replace(/_directive$/, '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/_/g, '-').toLowerCase();
 const isTest = f => /\.test\.[jt]s$/.test(f);
@@ -46,7 +45,7 @@ function ownPaths (vueRoot, id) {
  *     components/*\/<Name>.vue, one level deep: usually components/<Name>/, but DtTabGroup is in components/Tab/.
  *     A unit with no .vue (a composable, a mixin) keeps components/<Name>/, which doesn't exist.
  *   paths: every Vue source, relative to dialtone-vue: dir if it exists, the unit's own directive, mixin or composable
- *     files, and what plan.mjs folds into it (directives/tooltip_directive for tooltip). The gate's Vue tests are
+ *     files, and what's folded into it (directives/tooltip_directive for tooltip). The gate's Vue tests are
  *     every test file in these, nested ones too.
  */
 export function vueSources (vueRoot, unit) {
@@ -89,7 +88,7 @@ const FOLDED_INTO = Object.fromEntries(Object.entries(MERGED).flatMap(([unit, id
  * The units a Vue path (relative to dialtone-vue) belongs to by its shape alone, whether or not it exists. vueSources
  * lists the files on disk, so it can't place a file a change deleted: components/<Dir>/ is unit <dir> (and
  * components/<Dir>/<Name>.vue unit <name>), directives/<d>/ is directive-<d>, common/mixins/<f> mixin-<f> and
- * common/composables/<f> composable-<f>, each then folded into its unit as plan.mjs does. Ids aren't checked against
+ * common/composables/<f> composable-<f>, each then folded into its unit (MERGED). Ids aren't checked against
  * anything: the caller keeps the ported ones.
  */
 export function unitsOfPath (file) {

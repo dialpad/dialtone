@@ -37,7 +37,7 @@ export default tseslint.config(
     plugins: { 'react-hooks': reactHooks },
     rules: {
       // The Rules of Hooks, plus the React Compiler checks that hold for any React code. The compiler's
-      // `immutability`, `refs` and `set-state-in-effect` are off: the conventions prescribe patterns they reject
+      // `immutability`, `refs` and `set-state-in-effect` are off: ports need patterns they reject
       // (a container element in state whose attributes a layout effect syncs; measuring in a layout effect and
       // setting state, where Vue used nextTick), and this package doesn't use the compiler. `purity` is off because
       // ports reproduce Vue's render-time Math.random (avatar colours).
@@ -58,7 +58,7 @@ export default tseslint.config(
     },
   },
   {
-    // Ports can't switch lint off (parity.md › Anti-gaming). The gate also fails a unit with an inline directive;
+    // Ports can't switch lint off. The gate also fails a unit with an inline directive;
     // this makes any spelling it misses inert.
     files: ['components/**'],
     linterOptions: { noInlineConfig: true },

@@ -8,7 +8,7 @@ Run these from the repo root. Each builds what it needs first (dialtone-icons, d
 
 | Command | What it does |
 | --- | --- |
-| `pnpm nx run dialtone-react:lint` | ESLint (`eslint.config.js`): typescript-eslint and the Rules of Hooks for `.ts`/`.tsx`, the repo's style rules for everything. Human commits also lint their staged files (husky, `.lintstagedrc.cjs`). The migration loop's workers skip husky, since the loop points `core.hooksPath` at its own hooks; the gate's Lint row and CI's `check` job catch their lint errors. |
+| `pnpm nx run dialtone-react:lint` | ESLint (`eslint.config.js`): typescript-eslint and the Rules of Hooks for `.ts`/`.tsx`, the repo's style rules for everything. Commits also lint their staged files (husky, `.lintstagedrc.cjs`) unless husky is skipped; the gate's Lint row and CI's `check` job catch lint errors either way. |
 | `pnpm nx run dialtone-react:typecheck` | `tsc` over the whole package. |
 | `pnpm nx run dialtone-react:test` | Vitest, every `*.test.ts(x)`. |
 | `pnpm nx run dialtone-react:build` | The library: ES modules and type declarations in `dist/`. Entry points: `@dialpad/dialtone-react`, `@dialpad/dialtone-react/components/<Name>` and `@dialpad/dialtone-react/icons`. React, React DOM and every runtime dependency stay external. |

@@ -1,8 +1,7 @@
 # CI for packages/dialtone-react, on PRs into and pushes to the dialtone-react branch (the Vue → React port).
 #   check: lint, typecheck, test and build the package, and run the harness's own tests.
-#   gate:  the parity gate for every ported unit the change touches (parity/changed-units.mjs, react-migration
-#          parity.md): its React directory, any of its Vue sources, or a shared file, which gates them all.
-# The migration loop reads this workflow's result on dialtone-react before it retries anything, so keep the job names.
+#   gate:  the parity gate for every ported unit the change touches (parity/changed-units.mjs): its React directory,
+#          any of its Vue sources, or a shared file, which gates them all.
 name: dialtone-react
 
 on:
@@ -125,7 +124,7 @@ jobs:
           restore-keys: nx-dialtone-react-gate-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
 
       # One unit after another (15-50s each), every one reported even when an earlier one fails. On dialtone-react
-      # itself, stand-ins for a component that just merged don't fail: the loop's swap PRs clear them (parity.md).
+      # itself, stand-ins for a component that just merged don't fail: follow-up PRs swap the component in.
       - name: Parity gate
         if: steps.units.outputs.list != ''
         env:

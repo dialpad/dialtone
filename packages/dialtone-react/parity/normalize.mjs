@@ -1,4 +1,4 @@
-// Canonical HTML for DOM parity (parity.md › DOM parity). Both runs, Vue and React, call capture() on
+// Canonical HTML for DOM parity. Both runs, Vue and React, call capture() on
 // their live jsdom document, so the same DOM always serializes to the same string.
 // Plain JS on purpose: it runs unchanged under dialtone-vue's Vitest config and dialtone-react's.
 

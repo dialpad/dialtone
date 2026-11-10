@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// The gate for one unit (parity.md › The gate). Prints a summary block that workers paste into the PR
-// verbatim, then the details of anything that failed. Exits 1 unless every check passes.
+// The gate for one unit. Prints a summary block to paste into the PR description, then the details of anything
+// that failed. Exits 1 unless every check passes.
 //   pnpm nx run dialtone-react:gate -- <unit>        e.g. -- validation-messages (builds dialtone-icons first)
 // PARITY_TMP sets where run artifacts go (default: the OS temp dir).
 import { spawnSync } from 'node:child_process';
@@ -224,7 +224,7 @@ if (isComponent) {
 } else na('DOM parity', 'not a component');
 
 // 5. Story parity (story-parity.mjs). Base CI sets PARITY_SKIP_STAND_INS=1: a merge can leave stand-ins for the
-// component it added, which the loop's swap PRs clear (parity.md › Story parity).
+// component it added, which follow-up PRs swap out.
 {
   const stories = storyParity({
     vueDir, reactDir, name, pkg, vueRoot, vuePaths: vue.paths, standIns: process.env.PARITY_SKIP_STAND_INS !== '1',
@@ -234,7 +234,7 @@ if (isComponent) {
   else bad('Story parity', stories.summary, stories.detail);
 }
 
-// 6. Anti-gaming (parity.md): component code can't branch on the environment; tests mock only what Vue's mock; no
+// 6. Anti-gaming: component code can't branch on the environment; tests mock only what Vue's mock; no
 // file of the unit switches lint or typecheck off. @ts-expect-error stays allowed: lint requires it to say why, and
 // it fails once the error it expects is gone.
 {

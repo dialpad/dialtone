@@ -1,4 +1,4 @@
-// DtTransition as Vue Test Utils stubs <transition> by default (parity.md › DOM parity): the child as v-show or v-if
+// DtTransition as Vue Test Utils stubs <transition> by default: the child as v-show or v-if
 // leaves it, with no transition classes and no hooks, settled at once. Only the DOM parity run uses it.
 import { cloneElement, type CSSProperties, type ReactElement } from 'react';
 import type { DtTransitionProps } from '../../common/transition/DtTransition';

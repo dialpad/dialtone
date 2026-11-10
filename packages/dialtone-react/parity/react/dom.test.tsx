@@ -44,7 +44,7 @@ const camel = (s: string) => s.replace(/-([a-z])/g, (_, c: string) => c.toUpperC
 const styleObject = (css: string) => Object.fromEntries(css.split(';').map(d => d.trim()).filter(Boolean)
   .map(d => { const i = d.indexOf(':'); return [camel(d.slice(0, i).trim()), d.slice(i + 1).trim()]; }));
 
-// A Vue case → React props, by the conventions: same names, class → className, style → object,
+// A Vue case → React props: same names, class → className, style → object,
 // default slot → children, named slots → props of the same name, unless the parity map says otherwise.
 function toProps (c: Case, map: ParityMap) {
   const props: Record<string, unknown> = {};

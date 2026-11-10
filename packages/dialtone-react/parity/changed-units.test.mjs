@@ -236,7 +236,6 @@ describe('changedUnits', () => {
       'packages/dialtone-react/eslint.config.js',
       'pnpm-lock.yaml',
       '.github/workflows/dialtone-react.yml',
-      '.github/workflows/dialtone-react-scope.yml',
     ]) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);
   });
 

@@ -1,5 +1,5 @@
 // Harness-owned cases, for states the Combinator presets don't reach (an open overlay, a checked box).
-// Same shape as cases.mjs produces; Vue prop names. Workers never edit this file.
+// Same shape as cases.mjs produces; Vue prop names. Ports never edit this file.
 import { STANDARD_ATTRS } from './cases.mjs';
 
 const anchor = { anchor: '<dt-button>Hover me</dt-button>' };
