@@ -201,9 +201,7 @@ export default ({
       this[idKey] = id;
       this[indexKey] = index;
 
-      if (this._itemsLength() && afterHighlightMethod) {
-        this[afterHighlightMethod](this._getItemIndex(id));
-      }
+      if (afterHighlightMethod) this[afterHighlightMethod](index);
     },
 
     _getItemIndex (id) {

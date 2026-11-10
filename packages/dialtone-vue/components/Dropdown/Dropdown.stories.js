@@ -211,7 +211,6 @@ export const Variants = {
   ],
 };
 
-
 export const MenuRoles = {
   render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtDropdownMenuRolesTemplate),
   args: { onOpenChange: action('open-change') },
@@ -223,7 +222,6 @@ export const MenuRoles = {
     },
   },
 };
-
 
 export const ControlledArrows = {
   render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtDropdownControlledArrowsTemplate),

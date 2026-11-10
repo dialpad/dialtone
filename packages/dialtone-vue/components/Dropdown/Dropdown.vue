@@ -363,7 +363,6 @@ export default {
 
         'open-change': isOpen => {
           this.isLogicallyOpen = isOpen;
-          this.pendingArrowOpening = null;
           this.$emit('open-change', isOpen);
         },
 
@@ -380,16 +379,14 @@ export default {
           const isArrow = [EVENT_KEYNAMES.up, EVENT_KEYNAMES.arrowup,
             EVENT_KEYNAMES.down, EVENT_KEYNAMES.arrowdown].includes(eventCode);
 
-          const isAnchorEvent = this.$refs.popover?.$refs.anchor?.contains(event.target);
-          if (isArrow && isAnchorEvent && this.forwardAnchorArrowKeys &&
-            this.open !== null && !this.isLogicallyOpen) {
+          if (this.forwardAnchorArrowKeys && this.open !== null && !this.isLogicallyOpen && isArrow &&
+            this.$refs.popover?.$refs.anchor?.contains(event.target)) {
             const pending = Symbol('arrow-opening');
             this.pendingArrowOpening = pending;
             this.openedWithKeyboard = true;
             this.$emit('keydown', event);
             this.$nextTick(() => {
               if (this.pendingArrowOpening === pending && !this.isLogicallyOpen) {
-                this.pendingArrowOpening = null;
                 this.openedWithKeyboard = false;
               }
             });
@@ -469,9 +466,7 @@ export default {
 
   methods: {
     onMouseHighlight (e) {
-      const items = this._getListItemNodes();
-      let liElement = e.target;
-      while (liElement && !items?.includes(liElement)) liElement = liElement.parentElement;
+      const liElement = this._getListItemNodes()?.find(item => item.contains(e.target));
 
       if (liElement && liElement.id &&
         this.highlightId !== liElement.id) {

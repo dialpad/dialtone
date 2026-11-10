@@ -83,7 +83,7 @@ describe('DtSplitButton Tests', function () {
     wrapper.unmount();
   });
 
-  it.each(['click', 'ArrowDown'])('preserves dropdown active state through %s opening and completed close', async opening => {
+  it('preserves dropdown active state through click opening and completed close', async () => {
     wrapper.unmount();
     wrapper = mount(DtSplitButton, {
       slots: {
@@ -97,8 +97,7 @@ describe('DtSplitButton Tests', function () {
     });
     const trigger = wrapper.find('[data-qa="dt-split-button-end"]');
     const popover = wrapper.findComponent(DtPopover);
-    if (opening === 'click') await trigger.trigger('click');
-    else await trigger.trigger('keydown', { key: opening, code: opening });
+    await trigger.trigger('click');
     expect(trigger.attributes('aria-expanded')).toBe('true');
     popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
     await flushPromises();

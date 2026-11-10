@@ -778,13 +778,14 @@ export default {
         },
       },
       {
-        handler (isOpen, isPrev) {
+        handler (isOpen) {
           if (isOpen) {
             this.isDialogAriaHidden = false;
+            // Initial open=true runs before mounted() resolves anchorEl; tippy needs an anchor.
             if (!this.anchorEl) return;
             this.initTippyInstance();
             this.tip?.show();
-          } else if (isPrev !== isOpen) {
+          } else {
             this.removeEventListeners();
             this.tip?.hide();
           }
@@ -812,8 +813,6 @@ export default {
         }
       },
     },
-
-
   },
 
   mounted () {
@@ -956,15 +955,13 @@ export default {
     },
 
     onArrowKeyPress (e) {
-      if (this.open !== null) {
-        if (this.forwardAnchorArrowKeys) {
-          this.$emit('keydown', e);
-        } else {
-          e.preventDefault();
-        }
+      const isControlled = this.open !== null;
+      if (isControlled && this.forwardAnchorArrowKeys) {
+        this.$emit('keydown', e);
         return;
       }
       e.preventDefault();
+      if (isControlled) return;
       if (this.openWithArrowKeys && this.anchorEl?.contains(e.target)) {
         if (!this.isOpen) {
           this.isOpen = true;
@@ -1056,13 +1053,11 @@ export default {
         const anchor = await this.getFirstFocusableElement(this.$refs.anchor);
         if (!this.isCurrentVisibility(generation, false)) return;
         anchor?.focus({ preventScroll: true });
-        if (!this.isCurrentVisibility(generation, false)) return;
         // Allow consumers to choose their own focus destination.
         await this.$nextTick();
         if (!this.isCurrentVisibility(generation, false)) return;
         this.enableScrolling();
       }
-      if (!this.isCurrentVisibility(generation, false)) return;
       this.isDialogAriaHidden = true;
       this.tip?.unmount();
       this.$emit('opened', false);
@@ -1075,7 +1070,6 @@ export default {
       const generation = this.visibilityGeneration;
       if (!this.isCurrentVisibility(generation, true)) return;
       await this.focusInitialElement(generation);
-      if (!this.isCurrentVisibility(generation, true)) return;
       // Allow consumers to choose their own focus destination.
       await this.$nextTick();
       if (!this.isCurrentVisibility(generation, true)) return;
@@ -1086,8 +1080,7 @@ export default {
       }
     },
 
-    async focusInitialElement (generation = this.visibilityGeneration) {
-      if (!this.isCurrentVisibility(generation, true)) return;
+    async focusInitialElement (generation) {
       if (this.initialFocusElement === 'dialog') {
         returnFirstEl(this.$refs.content?.$el)?.focus();
       }
@@ -1097,7 +1090,6 @@ export default {
       if (this.initialFocusElement === 'first') {
         await this.focusFirstElementIfNeeded(this.$refs.popover__content, generation);
       }
-      if (!this.isCurrentVisibility(generation, true)) return;
       if (this.initialFocusElement instanceof HTMLElement) {
         this.initialFocusElement.focus();
       }

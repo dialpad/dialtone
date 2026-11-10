@@ -270,7 +270,6 @@ describe('DtListItem tests', () => {
   });
 });
 
-
 describe('ListItem contextual roles', () => {
   it('keeps ordinary selected list content as listitem', () => {
     const item = mount(DtListItem, { props: { selected: true } });
@@ -291,6 +290,16 @@ describe('ListItem contextual roles', () => {
     expect(item.attributes('aria-checked')).toBe('true');
     await item.setProps({ selected: false });
     expect(item.attributes('aria-checked')).toBe('false');
+    item.unmount();
+  });
+
+  it.each(['Enter', 'Space'])('activates a menu radio once on %s with the default action prevented', async code => {
+    const item = mount(DtListItem, {
+      props: { id: 'radio', role: 'menuitemradio', navigationType: 'arrow-keys' },
+    });
+    await item.trigger('keydown', { key: code === 'Space' ? ' ' : code, code });
+    expect(item.emitted('click')).toHaveLength(1);
+    expect(item.emitted('click')[0][0].defaultPrevented).toBe(true);
     item.unmount();
   });
 

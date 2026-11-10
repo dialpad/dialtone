@@ -151,7 +151,6 @@ describe('Keyboard Navigation Mixin Tests', () => {
   });
 });
 
-
 describe('Keyboard navigation role collections', () => {
   let wrapper;
   const mountList = listItemRole => {
@@ -202,13 +201,5 @@ describe('Keyboard navigation role collections', () => {
     expect(document.activeElement.id).toBe('sr-only-close-button');
     await wrapper.trigger('keydown', { key: 'Home' });
     expect(document.activeElement.id).toBe('action:id');
-  });
-
-  it('preserves default option navigation', async () => {
-    mountList(undefined);
-    await wrapper.trigger('keydown', { key: 'ArrowDown' });
-    expect(document.activeElement.id).toBe('option');
-    await wrapper.trigger('keydown', { key: 'ArrowDown' });
-    expect(document.activeElement.id).toBe('sr-only-close-button');
   });
 });

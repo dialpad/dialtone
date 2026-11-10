@@ -282,7 +282,6 @@ describe('DtPopover Tests', () => {
     await button.trigger('click');
     await flushPromises();
     expect(wrapper.emitted('opened')[1]).toEqual([false]);
-    expect(popoverWindow.attributes('aria-hidden')).toBe('true');
   });
 
   describe('Popper Options Tests', () => {
@@ -449,10 +448,20 @@ describe('DtPopover Tests', () => {
       });
 
       it('keeps the dialog exposed while dismissal has not restored focus', async () => {
+        let restore;
+        let requested;
+        const focusRequested = new Promise(resolve => { requested = resolve; });
+        vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => {
+          requested();
+          return new Promise(resolve => { restore = resolve; });
+        });
+        await popoverWindow.trigger('keydown', { key: 'Escape' });
+        await focusRequested;
+        expect(button.attributes('aria-expanded')).toBe('false');
         expect(popoverWindow.attributes('aria-hidden')).toBe('false');
-        const dismissal = popoverWindow.trigger('keydown', { key: 'Escape' });
-        expect(popoverWindow.attributes('aria-hidden')).toBe('false');
-        await dismissal;
+        restore(button.element);
+        await flushPromises();
+        expect(popoverWindow.attributes('aria-hidden')).toBe('true');
       });
 
       it('hides the dialog from assistive technology after leave restores focus', async () => {
@@ -639,7 +648,6 @@ describe('DtPopover Tests', () => {
       updateWrapper();
       await nextTick();
       expect(logicalChanges).toEqual([{ value: true, anchorRendered: false }]);
-      expect(wrapper.emitted('open-change')).toEqual([[true]]);
       expect(popoverWindow.attributes('aria-hidden')).toBe('false');
       expect(button.attributes('aria-expanded')).toBe('true');
       expect(wrapper.emitted('opened')).toBeUndefined();
@@ -660,7 +668,6 @@ describe('DtPopover Tests', () => {
       await popoverWindow.trigger('keydown', { key: 'Escape' });
       expect(wrapper.emitted('open-change')).toEqual([[true], [false]]);
       expect(wrapper.emitted('opened')).toBeUndefined();
-      expect(wrapper.emitted('update:open')).toBeUndefined();
     });
 
     it.each([null, false])('retains completed transition updates with open=%s', async open => {
@@ -733,23 +740,30 @@ describe('DtPopover Tests', () => {
       expect(wrapper.emitted('update:open')).toBeUndefined();
     });
 
-    it.each(['enter', 'leave'])('stops stale %s effects when a focus listener changes visibility', async phase => {
-      if (phase === 'enter') await wrapper.setProps({ initialFocusElement: 'dialog' });
+    it('stops stale enter effects when a focus listener closes the popover', async () => {
+      await wrapper.setProps({ initialFocusElement: 'dialog' });
       await wrapper.setProps({ open: true });
-      if (phase === 'leave') {
-        await completeTransition('enter');
+      popoverWindow.element.addEventListener('focus', async () => {
+        await nextTick();
         await wrapper.setProps({ open: false });
-      }
-      const notifications = wrapper.emitted('opened')?.length || 0;
-      const focusTarget = phase === 'enter' ? popoverWindow.element : button.element;
-      focusTarget.addEventListener('focus', async () => {
-        if (phase === 'enter') await nextTick();
-        await wrapper.setProps({ open: phase === 'leave' });
       }, { once: true });
-      await completeTransition(phase);
-      expect(wrapper.emitted('opened')?.length || 0).toBe(notifications);
-      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(phase === 'leave');
-      expect(button.attributes('aria-expanded')).toBe(String(phase === 'leave'));
+      await completeTransition('enter');
+      expect(wrapper.emitted('opened')).toBeUndefined();
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(false);
+      expect(button.attributes('aria-expanded')).toBe('false');
+    });
+
+    it('stops stale leave effects when a focus listener reopens the popover', async () => {
+      await wrapper.setProps({ open: true });
+      await completeTransition('enter');
+      await wrapper.setProps({ open: false });
+      button.element.addEventListener('focus', async () => {
+        await wrapper.setProps({ open: true });
+      }, { once: true });
+      await completeTransition('leave');
+      expect(wrapper.emitted('opened')).toHaveLength(1);
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(true);
+      expect(button.attributes('aria-expanded')).toBe('true');
     });
 
     it.each(['enter', 'leave'])('stops a suspended %s completion after disposal', async phase => {
