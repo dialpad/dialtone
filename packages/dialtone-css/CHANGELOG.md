@@ -1,3 +1,16 @@
+# [9.4.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.3.0...dialtone-css/v9.4.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* **Dialtone Css:** DLT-3718 retain grouped public utility selectors ([#1513](https://github.com/dialpad/dialtone/issues/1513)) ([a1246d5](https://github.com/dialpad/dialtone/commit/a1246d5f4845f5011adbf79ce3743c2149bc6327))
+* **Dialtone Css:** DLT-3723 show slider marks in Safari without overflow-clip-margin ([#1521](https://github.com/dialpad/dialtone/issues/1521)) ([f44f1f5](https://github.com/dialpad/dialtone/commit/f44f1f55235b1a020d8b7466f7140717c574ff60))
+
+
+### Features
+
+* **Migration:** DLT-3516 convert Text kind and size to variant ([#1539](https://github.com/dialpad/dialtone/issues/1539)) ([11b76f9](https://github.com/dialpad/dialtone/commit/11b76f95401735cf96735498543df35b5df260df))
+
 # [9.3.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.2.0...dialtone-css/v9.3.0) (2026-11-03)
 
 
