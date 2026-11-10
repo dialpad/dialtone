@@ -9,7 +9,7 @@ import path from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { changedUnits } from './changed-units.mjs';
-import { vueSources } from './vue-sources.mjs';
+import { testFiles, vueSources } from './vue-sources.mjs';
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'changed-units-'));
 after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -30,6 +30,11 @@ const vueRoot = tree(path.join(root, 'dialtone-vue'), [
   ['components/Text/text.stories.js', "import { DtTooltip } from '@/components/Tooltip';"],
   ['components/Tooltip/Tooltip.vue', "<script>\nimport ModeMixin from '@/common/mixins/mode';\n</script>"],
   ['components/Tooltip/index.js', "export { default as DtTooltip } from './Tooltip.vue';"],
+  'components/Tooltip/Tooltip.test.js',
+  'components/Toast/Toast.vue',
+  'components/Toast/Toast.test.js',
+  'components/Toast/Layouts/ToastLayoutDefault.vue',
+  'components/Toast/Layouts/ToastLayoutDefault.test.js',
   ['components/Chip/Chip.vue',
     "<script>\nimport { DtText } from '@/components/Text';\nimport { x } from '@/common/utils';\n</script>"],
   'components/Tab/Tab.vue',
@@ -41,8 +46,10 @@ const vueRoot = tree(path.join(root, 'dialtone-vue'), [
   'components/TextList/TextList.vue',
   'directives/tooltip_directive/tooltip.js',
   'directives/tooltip_directive/tooltip.stories.js',
+  'directives/tooltip_directive/tooltip.test.js',
   'directives/mode_directive/mode.js',
   'directives/focustrap_directive/focustrap.js',
+  'directives/focustrap_directive/focustrap.test.js',
   'common/sr_only_close_button.vue',
   'common/mixins/index.js',
   'common/mixins/mode.js',
@@ -120,6 +127,17 @@ describe('vueSources', () => {
     assert.deepEqual(vueSources(vueRoot, 'nothing-here'), {
       dir: path.join(vueRoot, 'components/NothingHere'), paths: [],
     });
+  });
+
+  test('a unit\'s Vue tests are the test files in its sources, nested and folded-in ones too', () => {
+    const tests = unit => testFiles(vueRoot, vueSources(vueRoot, unit).paths);
+    assert.deepEqual(tests('tooltip'),
+      ['components/Tooltip/Tooltip.test.js', 'directives/tooltip_directive/tooltip.test.js']);
+    assert.deepEqual(tests('toast'),
+      ['components/Toast/Layouts/ToastLayoutDefault.test.js', 'components/Toast/Toast.test.js']);
+    assert.deepEqual(tests('directive-focustrap'), ['directives/focustrap_directive/focustrap.test.js']);
+    assert.deepEqual(tests('mixin-input'), ['common/mixins/input.test.js']);
+    assert.deepEqual(tests('text'), []);
   });
 });
 

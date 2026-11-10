@@ -1,4 +1,4 @@
-// A unit's Vue sources: where the gate reads its Vue tests and stories, and which Vue changes CI gates it for
+// A unit's Vue sources: where the gate reads its Vue stories and tests, and which Vue changes CI gates it for
 // (changed-units.mjs). The rules are the loop's plan.mjs (react-migration), which CI can't read, so its two tables are
 // repeated here: keep MERGED and OWNED_FILES in step with plan.mjs' MERGES and OWNED_FILES.
 import fs from 'node:fs';
@@ -42,11 +42,12 @@ function ownPaths (vueRoot, id) {
 
 /**
  * The unit's Vue sources. Throws when its component is in more than one directory.
- *   dir: the component directory (absolute), where the gate reads the unit's Vue tests and stories. The component
- *     is components/*\/<Name>.vue, one level deep: usually components/<Name>/, but DtTabGroup is in components/Tab/.
- *     A unit with no .vue (a composable, a mixin) keeps components/<Name>/, where any tests it has would be.
+ *   dir: the component directory (absolute), where the gate reads the unit's Vue stories. The component is
+ *     components/*\/<Name>.vue, one level deep: usually components/<Name>/, but DtTabGroup is in components/Tab/.
+ *     A unit with no .vue (a composable, a mixin) keeps components/<Name>/, which doesn't exist.
  *   paths: every Vue source, relative to dialtone-vue: dir if it exists, the unit's own directive, mixin or composable
- *     files, and what plan.mjs folds into it (directives/tooltip_directive for tooltip).
+ *     files, and what plan.mjs folds into it (directives/tooltip_directive for tooltip). The gate's Vue tests are
+ *     every test file in these, nested ones too.
  */
 export function vueSources (vueRoot, unit) {
   const name = pascal(unit);
@@ -64,6 +65,22 @@ export function vueSources (vueRoot, unit) {
     ...(OWNED_FILES[unit] ?? []),
   ];
   return { dir, paths };
+}
+
+// The files dialtone-vue's Vitest runs (vite.config.js test.include): a .test.ts would be listed but never run.
+const isRunTest = f => f.endsWith('.test.js');
+
+/** The Vue test files in `paths` (vueSources' paths), nested ones too: relative to dialtone-vue, sorted. */
+export function testFiles (vueRoot, paths) {
+  const files = paths.flatMap((p) => {
+    const abs = path.join(vueRoot, p);
+    if (!fs.existsSync(abs)) return [];
+    if (!fs.statSync(abs).isDirectory()) return isRunTest(p) ? [p] : [];
+    return fs.readdirSync(abs, { recursive: true, withFileTypes: true })
+      .filter(d => d.isFile() && isRunTest(d.name))
+      .map(d => path.relative(vueRoot, path.join(d.parentPath, d.name)));
+  });
+  return [...new Set(files)].sort();
 }
 
 const FOLDED_INTO = Object.fromEntries(Object.entries(MERGED).flatMap(([unit, ids]) => ids.map(id => [id, unit])));

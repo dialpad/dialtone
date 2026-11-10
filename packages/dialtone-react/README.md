@@ -13,7 +13,7 @@ Run these from the repo root. Each builds what it needs first (dialtone-icons, d
 | `pnpm nx run dialtone-react:test` | Vitest, every `*.test.ts(x)`. |
 | `pnpm nx run dialtone-react:build` | The library: ES modules and type declarations in `dist/`. Entry points: `@dialpad/dialtone-react`, `@dialpad/dialtone-react/components/<Name>` and `@dialpad/dialtone-react/icons`. React, React DOM and every runtime dependency stay external. |
 | `pnpm nx run dialtone-react:gate -- <unit>` | The parity gate for one unit (e.g. `-- validation-messages`). |
-| `node --test 'packages/dialtone-react/parity/*.test.mjs'` | The harness's own tests: which units CI gates for a change (`parity/changed-units.mjs`). |
+| `node --test 'packages/dialtone-react/parity/*.test.mjs'` | The harness's own tests: which units CI gates for a change (`parity/changed-units.mjs`), which Vue tests a unit has (`parity/vue-sources.mjs`), and how DOM parity serializes select options (`parity/normalize.mjs`). |
 
 Generated, gitignored files: `index.ts` (the barrel, `scripts/build-index.mjs`, from every `components/*/index.ts` and `common/*/index.ts` plus Vue's public common modules) and `icons/generated/` (`scripts/build-icons.mjs`). Build, typecheck, test and gate regenerate both; run `pnpm --filter @dialpad/dialtone-react generate` after adding a component if your editor needs the barrel.
 

@@ -10,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pascal } from './cases.mjs';
 import { storyParity } from './story-parity.mjs';
-import { vueSources } from './vue-sources.mjs';
+import { testFiles, vueSources } from './vue-sources.mjs';
 
 const unit = process.argv[2];
 if (!unit || !/^[a-z0-9-]+$/.test(unit)) {
@@ -21,8 +21,8 @@ const pkg = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const vueRoot = path.resolve(pkg, '../dialtone-vue');
 const name = pascal(unit);
 const reactDir = path.join(pkg, 'components', name);
-// The unit's Vue sources (vue-sources.mjs): its component directory, whose .test.js files are its Vue tests, and
-// every Vue path that's part of it.
+// The unit's Vue sources (vue-sources.mjs): its component directory, where its Vue stories are, and every Vue path
+// that's part of it, whose test files are its Vue tests.
 let vue;
 try {
   vue = vueSources(vueRoot, unit);
@@ -125,15 +125,17 @@ else if (failing.length || unitRun.broken) {
   bad('Unit tests', `none passed (${reactTests.length} skipped or todo)`, 'Every React test of this unit is skipped or todo, so nothing was checked.');
 } else ok('Unit tests', `${passing.length} passed`);
 
-const vueTestFiles = fs.existsSync(vueDir) ? fs.readdirSync(vueDir).filter(f => f.endsWith('.test.js')) : [];
+// Every Vue test file in the unit's Vue sources, nested ones too: Toast/Layouts, what's folded in
+// (directives/tooltip_directive for tooltip), or a directive's, mixin's or composable's own tests.
+const vueTestFiles = testFiles(vueRoot, vue.paths);
 const vueRun = vueTestFiles.length
-  ? vitest(vueRoot, ['vitest', 'run', ...vueTestFiles.map(f => path.relative(vueRoot, path.join(vueDir, f)))], path.join(tmp, 'vue-tests.json'))
+  ? vitest(vueRoot, ['vitest', 'run', ...vueTestFiles], path.join(tmp, 'vue-tests.json'))
   : { tests: [], error: '', broken: '' };
 const vueTests = vueRun.tests.filter(t => t.status === 'passed');
 // A red Vue suite would silently shrink what the React tests are checked against, so it fails the check.
 const vueFailing = vueRun.tests.filter(t => t.status === 'failed');
 const skips = readJson(path.join(reactDir, 'skips.json')) ?? {};
-const vueSource = vueTestFiles.map(f => fs.readFileSync(path.join(vueDir, f), 'utf8')).join('\n');
+const vueSource = vueTestFiles.map(f => fs.readFileSync(path.join(vueRoot, f), 'utf8')).join('\n');
 // The body of a Vue test, roughly: from its declaration to the next it/test/describe. it.each titles are
 // templates (%s, $name), so each declaration's title becomes a pattern to match the reported title against.
 const declarations = [...vueSource.matchAll(/\b(?:it|test)(?:\.each\([\s\S]{0,2000}?\)\s*)?\(\s*(['"`])(.*?)\1/g)]
