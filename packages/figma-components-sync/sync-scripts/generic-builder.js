@@ -558,6 +558,14 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
           const p = paint(d.oc);
           for (const v of inst.findAll(n => n.type === 'TEXT' || n.type === 'VECTOR')) v.fills = [p];
         }
+        // The text on the instance's label, where the payload carries one (a named exemplar).
+        if (d.lt) {
+          const labelKey = Object.keys(inst.componentProperties || {}).find(k => k.startsWith('Label#') && inst.componentProperties[k].type === 'TEXT');
+          if (labelKey) {
+            for (const t of inst.findAll(n => n.type === 'TEXT')) for (const sg of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(sg.fontName);
+            inst.setProperties({ [labelKey]: d.lt });
+          }
+        }
         instanceMain[inst.id] = d.ic;
         return inst;
       }
@@ -1475,6 +1483,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
      * it as its default content. The wrapper is untouched, so its layout and token bindings
      * stay what the checks expect; the slot only adds a level.
      */
+    // `slotGroups`: exemplars that share ONE slot (a segmented control's items), so any number can be
+    // dropped in instead of one slot per default item. The slot made for a group, by group and parent.
+    const grouped = new Map();
     for (const L of slotLayers.slice(slotsBefore)) {
       if (!(D.nativeSlots || []).includes(L.slot)) continue;
       // An exemplar instance when there is one, otherwise the slot's own node (plain content,
@@ -1482,17 +1493,50 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       const inst = await figma.getNodeByIdAsync(L.swapLayerId || L.rootId);
       const host = inst && inst.parent;
       if (!inst || !host) continue;
+      const group = (D.slotGroups || {})[L.slot];
+      const shared = group ? grouped.get(group + '|' + host.id) : null;
+      // Items in a grouped slot are measured at a fixed size, but a designer edits their text, so they
+      // hug it along the slot's direction and stretch across it, as the code's flex row or column does.
+      const fitToSlot = (slotNode, child) => {
+        // Text grows an item's WIDTH, so a row hugs along it; a column stretches the width and keeps each
+        // item's measured height (hugging it would take the snapped token height, 32 for the browser's
+        // 30.19, and three of those make the group 5px taller than the code's).
+        if (slotNode.layoutMode !== 'VERTICAL') {
+          child.layoutSizingHorizontal = 'HUG';
+          child.layoutSizingVertical = 'FILL';
+        } else {
+          child.layoutSizingHorizontal = 'FILL';
+        }
+      };
+      if (shared) {
+        shared.appendChild(inst);
+        fitToSlot(shared, inst);
+        L.native = true;
+        L.swapLayerId = null;
+        L.swapDefaultId = null;
+        continue;
+      }
       // Read BEFORE moving: a FILL child keeps filling, so the slot around it must too.
       const sizeH = 'layoutSizingHorizontal' in inst ? inst.layoutSizingHorizontal : 'HUG';
       const sizeV = 'layoutSizingVertical' in inst ? inst.layoutSizingVertical : 'HUG';
       const slot = comp.createSlot();
-      slot.name = slotLabel(L.slot) + ' (Slot)';
+      slot.name = slotLabel(group || L.slot) + ' (Slot)';
       host.insertChild(host.children.indexOf(inst), slot);
-      slot.layoutMode = 'HORIZONTAL';
+      // A grouped slot lays its children out the way their parent did (a row or a column, with its gap).
+      slot.layoutMode = group && host.layoutMode === 'VERTICAL' ? 'VERTICAL' : 'HORIZONTAL';
+      if (group) {
+        slot.itemSpacing = host.itemSpacing;
+        // The gap is the parent's token, so the slot that now holds the children keeps it bound.
+        const gapBound = host.boundVariables && host.boundVariables.itemSpacing;
+        const gapVar = gapBound ? await figma.variables.getVariableByIdAsync(gapBound.id) : null;
+        if (gapVar) slot.setBoundVariable('itemSpacing', gapVar);
+        grouped.set(group + '|' + host.id, slot);
+      }
       slot.primaryAxisSizingMode = 'AUTO';
       slot.counterAxisSizingMode = 'AUTO';
       slot.fills = [];
       slot.appendChild(inst);
+      if (group) fitToSlot(slot, inst);
       if (sizeH === 'FILL') { slot.layoutSizingHorizontal = 'FILL'; inst.layoutSizingHorizontal = 'FILL'; }
       if (sizeV === 'FILL') { slot.layoutSizingVertical = 'FILL'; inst.layoutSizingVertical = 'FILL'; }
       // The exemplar is slot content now, not a swap target: no INSTANCE_SWAP for it.
@@ -1556,6 +1600,10 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         comp[field] = 0;
       }
       comp.clipsContent = true;
+      // An absolute child that sits OUTSIDE the box (DtSegmentedControlItem's divider, in the gap before it)
+      // would be clipped away, so a component that has one does not clip.
+      if (comp.children.some(k => k.layoutPositioning === 'ABSOLUTE'
+        && (k.x < 0 || k.y < 0 || k.x + k.width > comp.width || k.y + k.height > comp.height))) comp.clipsContent = false;
       const mkSlot = (name, padW) => {
         const slot = comp.createSlot();
         slot.name = name;
@@ -1608,6 +1656,12 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     for (const k of comp.findAll(n => n.layoutPositioning === 'ABSOLUTE' && n.constraints)) {
       const p = k.parent;
       if (!p || !('width' in p) || p.type === 'PAGE') continue;
+      // Not what an INSTANCE holds: a node inside one cannot be moved (its transform cannot be
+      // overridden), and it keeps the place its own component gave it. DtSegmentedControlItem's
+      // divider is an absolute child, and the group holds three items as instances.
+      let inside = false;
+      for (let a = p; a && a.type !== 'PAGE' && a !== comp; a = a.parent) if (a.type === 'INSTANCE') { inside = true; break; }
+      if (inside || p.type === 'INSTANCE') continue;
       if (k.constraints.horizontal === 'CENTER') k.x = (p.width - k.width) / 2;
       if (k.constraints.vertical === 'CENTER') k.y = (p.height - k.height) / 2;
     }

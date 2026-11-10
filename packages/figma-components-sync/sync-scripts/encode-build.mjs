@@ -350,12 +350,16 @@ function encodeNode (n) {
     const hit = t && swapTargets.get(`${n.slotSwapTo.component}|${swapVariantName(t, n.slotSwapTo.variant)}`);
     if (hit) {
       out.ic = hit;
+      // What the layer is called in the group, and the text on its label: a config's exemplars are
+      // distinct items ("Item 1"), not the DOM's class name and the component's default text.
+      if (n.slotSwapTo.name) out.n = n.slotSwapTo.name;
       // The host recolours the exemplar (`.d-notice__actions .d-btn { color: … }`), so its label
       // carries the HOST's text colour, not the Button variant's own. Measured on the first
       // text descendant; the builder repaints the instance's text and glyphs with it (`oc`).
       const firstText = (m) => (m.isText ? m : (m.children || []).map(firstText).find(Boolean));
       const t0 = firstText(n);
       const c0 = t0 && t0.props && t0.props.textColor;
+      if (t0 && t0.text && n.slotSwapTo.name) out.lt = t0.text;
       if (c0 && c0.rgba) {
         out.oc = [ci(c0.rgba), ti(c0.token)];
         if (!c0.token && c0.rgbaDark) out.oc.push(dvarFor('textColor', c0));
@@ -586,7 +590,7 @@ const rowNames = spec.variants.map(v => v.name);
 const nativeSlots = cfg.nativeSlots || [];
 // `flexLayout` is opt-in (the Notice config): flex fill / stretch / align-self centring and a
 // maximum width. Off for every other component, so their built sets are unchanged.
-const payload = { component: spec.component, page: spec.page, family: spec.family || spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, nativeSlots, flexLayout: flexLayoutOn,
+const payload = { component: spec.component, page: spec.page, family: spec.family || spec.page, axisNames, axisVals, defaultVariant: spec.defaultVariant || null, toks, nativeSlots, slotGroups: cfg.slotGroups || {}, slotLabels: cfg.slotLabels || {}, flexLayout: flexLayoutOn,
   // The target's file owns the Dialtone collection: the synthesised colours are created in it, hidden.
   homeCollection: TARGET.homeCollection,
   // The pages this build may clear and rebuild: its own components' and the icons'. Nothing else.

@@ -100,8 +100,11 @@ for (const name of names) {
     writeFileSync(`${SHARD_DIR}/${file}`, body);
     entry.page = p.page;
     entry.family = p.family || p.page;
+    entry.slotLabels = p.slotLabels || {};
     if (p.defaultVariant) entry.defaultVariant = p.defaultVariant;
-    for (const n of p.nodes) { if (n.sl) slotKeys.add(n.sl); if (n.sw) slotKeys.add(n.sw); }
+    // A slot a config groups or names is described by that name ("Items"), not its key ("default.0").
+    const slotName = (k) => { const g = (p.slotGroups || {})[k]; return (p.slotLabels || {})[g || k] || g || k; };
+    for (const n of p.nodes) { if (n.sl) slotKeys.add(slotName(n.sl)); if (n.sw) slotKeys.add(slotName(n.sw)); }
     // A CONTENT FINGERPRINT per shard. The pipeline already refuses a spec older than
     // the code that produced it, but nothing said whether the Figma set on screen was
     // built from the payload now on disk — and after a long session that question came
@@ -163,6 +166,8 @@ const BASE = 'http://localhost:8931';
 // A per-run secret baked in when this file is generated; the server requires it on every POST
 // and never serves it, so a page that can only read from localhost cannot learn it.
 const runToken = ${JSON.stringify(RUN_TOKEN)};
+// The names a config gives its slots (read by slotLabel), set for each component as it is built.
+var SLOT_LABELS = {};
 
 figma.showUI(__html__, { width: 360, height: 420 });
 
@@ -279,6 +284,7 @@ async function main () {
   }
 
   for (const comp of index.components) {
+    SLOT_LABELS = comp.slotLabels || {};
     let total = 0;
     const skipped = [];
     const traded = [];
