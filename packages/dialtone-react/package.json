@@ -20,6 +20,11 @@
     "tippy.js": "6.3.7"
   },
   "devDependencies": {
+    "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-tokens": "workspace:*",
+    "@storybook/addon-a11y": "10.3.0",
+    "@storybook/addon-links": "10.3.0",
+    "@storybook/react-vite": "10.3.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.3.0",
@@ -27,8 +32,11 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.0",
+    "@vueless/storybook-dark-mode": "^10.0.7",
     "html-react-parser": "^5.2.0",
+    "overlayscrollbars": "2.10.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "storybook": "10.3.0"
   }
 }
