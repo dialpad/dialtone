@@ -120,6 +120,7 @@ export default {
      * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
      * Closed anchor arrows retain their default action and propagation for consumer handling.
      * Accept opening synchronously in the emitted keydown callback for first-row focus.
+     * @values true, false
      */
     forwardAnchorArrowKeys: {
       type: Boolean,

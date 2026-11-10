@@ -162,8 +162,6 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 
 The parent owns the committed sort order. Each radio row uses `selected` for its checkmark and `aria-checked`; arrows and typeahead move focus without changing that state. ListItemGroup supplies an optional heading inside the menu. Ordinary action rows can share the menu and keep `menuitem`.
 
-The live demo requires the current menu-radio API. Its lookup fixture is withheld because the `dt10-pinned` profile uses `@dialpad/dialtone` 10.5.1, which lacks the radio role's checked state and navigation. Re-enable the fixture after a published release contains this API, the profile selects a compatible version, and consumer build, API, keyboard and accessibility qualification pass.
-
 <!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices","exclude":{"reason":"The dt10-pinned profile uses @dialpad/dialtone 10.5.1, which lacks menuitemradio checked state and navigation. Re-enable after a published compatible release, a compatible fixture profile, and consumer build, API, keyboard and accessibility qualification.","owner":"Francis Rupert"}} -->
 
 ```vue demo

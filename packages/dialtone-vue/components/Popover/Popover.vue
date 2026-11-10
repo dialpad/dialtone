@@ -184,6 +184,7 @@ export default {
     /**
      * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
      * Default false preserves controlled anchor keyboard behavior.
+     * @values true, false
      */
     forwardAnchorArrowKeys: {
       type: Boolean,
