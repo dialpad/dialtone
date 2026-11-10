@@ -558,6 +558,14 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
           const p = paint(d.oc);
           for (const v of inst.findAll(n => n.type === 'TEXT' || n.type === 'VECTOR')) v.fills = [p];
         }
+        // The text on the instance's label, where the payload carries one (a named exemplar).
+        if (d.lt) {
+          const labelKey = Object.keys(inst.componentProperties || {}).find(k => k.startsWith('Label#') && inst.componentProperties[k].type === 'TEXT');
+          if (labelKey) {
+            for (const t of inst.findAll(n => n.type === 'TEXT')) for (const sg of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(sg.fontName);
+            inst.setProperties({ [labelKey]: d.lt });
+          }
+        }
         instanceMain[inst.id] = d.ic;
         return inst;
       }
@@ -1249,6 +1257,15 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         // collapses to its minimum (measured: Notice's content came out 34px beside 44px of text,
         // which then overlapped the action), and a hugging row already grows with its content.
         if (kd.gr && f.primaryAxisSizingMode === 'FIXED') kid.layoutGrow = 1;
+        /**
+         * `align-items: stretch` (SplitButton: `.d-split-btn`) makes every child as tall as the
+         * tallest, whatever it measured. The end half is measured at the browser's height, but the
+         * start half hugs its label and its padding snaps to a token, so the row ends up taller
+         * than the end half and the end half sits short at the top. FILL gives the end half the
+         * row's height, as the stretch does. Not a child with a height of its own (`ph`), its own
+         * `align-self` (`ns`, `sc`) or an absolutely positioned one.
+         */
+        if (d.st && !kd.sc && !kd.ns && !kd.ph) kid.layoutSizingVertical = 'FILL';
         if (kd.sc) {
           kid.layoutSizingVertical = 'FILL';
           if (kid.layoutMode === 'VERTICAL') kid.primaryAxisAlignItems = 'CENTER';
@@ -1277,7 +1294,41 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         kid.x = rel[0];
         kid.y = rel[1];
         // anchored from the inline-end edge? keep it there when the parent resizes
-        if (kd.inset && kd.inset[1] && kd.inset[1] !== 'auto' && (!kd.inset[0] || kd.inset[0] === 'auto')) {
+        /**
+         * A DECORATION OUTSIDE THE BOX FOLLOWS THE EDGE IT IS PINNED TO.
+         *
+         * DtTab's selected underline hangs below the tab (or beside it, in a vertical list) and spans the
+         * tab's own width: `inset-inline: -1px` on both sides. It is measured at the empty label's width,
+         * so a Figma tab with a longer label would keep the short underline. Pinned to both edges it
+         * STRETCHES with the frame; pinned to the end edge only, it stays there. Only a child that lies
+         * outside the box is read this way: one inside (DtLoader's arc, a Button's spinner) is already
+         * where it belongs, and a new constraint would change sets that are published.
+         */
+        const pb = d.box || [0, 0];
+        const kb = kd.box || [0, 0];
+        const outside = !!pb[0] && !!pb[1] && (rel[0] < -0.5 || rel[1] < -0.5
+          || rel[0] + kb[0] > pb[0] + 0.5 || rel[1] + kb[1] > pb[1] + 0.5);
+        const num = (v) => (v !== undefined && v !== 'auto' && v !== null && !isNaN(parseFloat(v)) ? parseFloat(v) : null);
+        const ins = kd.inset || [];
+        // Only the START offsets are measured. Pinned on both edges, with the same overhang each side, the box
+        // is the parent's size plus twice that offset; and a box whose start offset is past the parent's size
+        // is pinned to the end edge.
+        // The offset is from the PADDING box, so the box is the parent's less its borders, plus the overhang:
+        // anywhere from the parent's size less the borders (2px at most here) to its size plus the overhang.
+        const spans = (start, size, whole) => start !== null && start <= 0
+          && size >= whole - 2.5 && size <= whole - 2 * start + 0.5;
+        const stretchH = outside && spans(num(ins[0]), kb[0], pb[0]);
+        const stretchV = outside && spans(num(ins[2]), kb[1], pb[1]);
+        const startH = num(ins[0]);
+        const pinnedEnd = outside && !stretchH && startH !== null && startH >= pb[0] - 0.5;
+        if (stretchH || stretchV || pinnedEnd) {
+          // After the frame's own resize (see centerConstraints): a STRETCH child follows its parent's resize,
+          // and createFrame's 100x100 would shrink or grow it to the measured size.
+          centerConstraints.push({ kid, horizontal: stretchH ? 'STRETCH' : pinnedEnd ? 'MAX' : 'MIN', vertical: stretchV ? 'STRETCH' : 'MIN' });
+          // The frame hugs and reflows after this (slots, snapped paddings), and a STRETCH child follows each
+          // of those, so its measured box is written once more at the end (see the final pass).
+          stretchSizes.set(kid, { w: kb[0], h: kb[1], x: rel[0], y: rel[1] });
+        } else if (kd.inset && kd.inset[1] && kd.inset[1] !== 'auto' && (!kd.inset[0] || kd.inset[0] === 'auto')) {
           kid.constraints = { horizontal: 'MAX', vertical: 'MIN' };
         } else if (kd.abs) {
           /**
@@ -1374,31 +1425,52 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
   }
   
   // ─── assemble ───────────────────────────────────────────────────────────────
-  let page = figma.root.children.find(p => p.name === D.page);
-  if (!page) { page = figma.createPage(); page.name = D.page; }
+  // The page is the set's FAMILY (several related sets share one); a payload without one keeps the
+  // page of its own that it always had.
+  const PAGE_NAME = D.family || D.page;
+  let page = figma.root.children.find(p => p.name === PAGE_NAME);
+  if (!page) { page = figma.createPage(); page.name = PAGE_NAME; }
   await figma.setCurrentPageAsync(page);
   // CLEAR and SLICE_START are deliberately SEPARATE. Overloading SLICE_START to mean
   // "this is not the first shard" also skipped that shard's first row, silently losing
   // one variant per shard.
   if (CLEAR) {
     /**
-     * A BUILD REBUILDS ITS OWN PAGES AND NOTHING ELSE.
+     * A BUILD REPLACES ITS OWN SET AND NOTHING ELSE.
      *
      * Clearing is what makes a rebuild idempotent, and in a file that owns the tokens it is also the
      * way to destroy something somebody made by hand. So the page must be one this build owns, and
      * it must hold only what a build puts there (component sets); anything else is somebody's work,
      * and the build stops instead of deleting it.
+     *
+     * A page is shared by a family of sets now, so what goes is THIS set's previous build (the set
+     * named for it, and any loose components an earlier run left behind), not the page's contents.
+     * The same set on an older one-set page is removed too, and that page with it once it is empty,
+     * so moving to families leaves no duplicate and no stray page. A page that still holds anything
+     * else is left alone.
      */
-    if (D.ownedPages && !D.ownedPages.includes(D.page)) {
-      throw new Error(`page "${D.page}" is not one this build owns (${D.ownedPages.join(', ')})`);
+    if (D.ownedPages && !D.ownedPages.includes(PAGE_NAME)) {
+      throw new Error(`page "${PAGE_NAME}" is not one this build owns (${D.ownedPages.join(', ')})`);
     }
     const foreign = page.children.filter(c => c.type !== 'COMPONENT_SET' && c.type !== 'COMPONENT');
     if (foreign.length) {
-      throw new Error(`page "${D.page}" holds ${foreign.length} node(s) a build did not make `
+      throw new Error(`page "${PAGE_NAME}" holds ${foreign.length} node(s) a build did not make `
         + `(${[...new Set(foreign.map(c => c.type))].join(', ')}): "${foreign.slice(0, 3).map(c => c.name).join('", "')}". `
         + 'Move or remove them, or rename the component page, before building here.');
     }
-    for (const c of [...page.children]) c.remove();
+    const SET_NAME = 'Dt' + D.page;
+    // `keepSet`: the plugin is updating this set in place (see in-place.js), so the set stays and
+    // only loose components an earlier run left behind go.
+    for (const c of [...page.children]) {
+      if (c.type === 'COMPONENT' || (c.type === 'COMPONENT_SET' && c.name === SET_NAME && !D.keepSet)) c.remove();
+    }
+    const keep = new Set([PAGE_NAME, 'Icons', ...(D.familyPages || [])]);
+    for (const p of [...figma.root.children]) {
+      if (p === page || keep.has(p.name) || !(D.ownedPages || []).includes(p.name)) continue;
+      if (p.loadAsync) await p.loadAsync();
+      for (const c of [...p.children]) if (c.type === 'COMPONENT_SET' && c.name === SET_NAME) c.remove();
+      if (!p.children.length) p.remove();
+    }
   }
 
   // Where this shard's flow starts. Measured from what is ALREADY on the page, before
@@ -1445,6 +1517,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
      * it as its default content. The wrapper is untouched, so its layout and token bindings
      * stay what the checks expect; the slot only adds a level.
      */
+    // `slotGroups`: exemplars that share ONE slot (a segmented control's items), so any number can be
+    // dropped in instead of one slot per default item. The slot made for a group, by group and parent.
+    const grouped = new Map();
     for (const L of slotLayers.slice(slotsBefore)) {
       if (!(D.nativeSlots || []).includes(L.slot)) continue;
       // An exemplar instance when there is one, otherwise the slot's own node (plain content,
@@ -1452,17 +1527,50 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       const inst = await figma.getNodeByIdAsync(L.swapLayerId || L.rootId);
       const host = inst && inst.parent;
       if (!inst || !host) continue;
+      const group = (D.slotGroups || {})[L.slot];
+      const shared = group ? grouped.get(group + '|' + host.id) : null;
+      // Items in a grouped slot are measured at a fixed size, but a designer edits their text, so they
+      // hug it along the slot's direction and stretch across it, as the code's flex row or column does.
+      const fitToSlot = (slotNode, child) => {
+        // Text grows an item's WIDTH, so a row hugs along it; a column stretches the width and keeps each
+        // item's measured height (hugging it would take the snapped token height, 32 for the browser's
+        // 30.19, and three of those make the group 5px taller than the code's).
+        if (slotNode.layoutMode !== 'VERTICAL') {
+          child.layoutSizingHorizontal = 'HUG';
+          child.layoutSizingVertical = 'FILL';
+        } else {
+          child.layoutSizingHorizontal = 'FILL';
+        }
+      };
+      if (shared) {
+        shared.appendChild(inst);
+        fitToSlot(shared, inst);
+        L.native = true;
+        L.swapLayerId = null;
+        L.swapDefaultId = null;
+        continue;
+      }
       // Read BEFORE moving: a FILL child keeps filling, so the slot around it must too.
       const sizeH = 'layoutSizingHorizontal' in inst ? inst.layoutSizingHorizontal : 'HUG';
       const sizeV = 'layoutSizingVertical' in inst ? inst.layoutSizingVertical : 'HUG';
       const slot = comp.createSlot();
-      slot.name = slotLabel(L.slot) + ' (Slot)';
+      slot.name = slotLabel(group || L.slot) + ' (Slot)';
       host.insertChild(host.children.indexOf(inst), slot);
-      slot.layoutMode = 'HORIZONTAL';
+      // A grouped slot lays its children out the way their parent did (a row or a column, with its gap).
+      slot.layoutMode = group && host.layoutMode === 'VERTICAL' ? 'VERTICAL' : 'HORIZONTAL';
+      if (group) {
+        slot.itemSpacing = host.itemSpacing;
+        // The gap is the parent's token, so the slot that now holds the children keeps it bound.
+        const gapBound = host.boundVariables && host.boundVariables.itemSpacing;
+        const gapVar = gapBound ? await figma.variables.getVariableByIdAsync(gapBound.id) : null;
+        if (gapVar) slot.setBoundVariable('itemSpacing', gapVar);
+        grouped.set(group + '|' + host.id, slot);
+      }
       slot.primaryAxisSizingMode = 'AUTO';
       slot.counterAxisSizingMode = 'AUTO';
       slot.fills = [];
       slot.appendChild(inst);
+      if (group) fitToSlot(slot, inst);
       if (sizeH === 'FILL') { slot.layoutSizingHorizontal = 'FILL'; inst.layoutSizingHorizontal = 'FILL'; }
       if (sizeV === 'FILL') { slot.layoutSizingVertical = 'FILL'; inst.layoutSizingVertical = 'FILL'; }
       // The exemplar is slot content now, not a swap target: no INSTANCE_SWAP for it.
@@ -1526,6 +1634,10 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         comp[field] = 0;
       }
       comp.clipsContent = true;
+      // An absolute child that sits OUTSIDE the box (DtSegmentedControlItem's divider, in the gap before it)
+      // would be clipped away, so a component that has one does not clip.
+      if (comp.children.some(k => k.layoutPositioning === 'ABSOLUTE'
+        && (k.x < 0 || k.y < 0 || k.x + k.width > comp.width || k.y + k.height > comp.height))) comp.clipsContent = false;
       const mkSlot = (name, padW) => {
         const slot = comp.createSlot();
         slot.name = name;
@@ -1578,8 +1690,25 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
     for (const k of comp.findAll(n => n.layoutPositioning === 'ABSOLUTE' && n.constraints)) {
       const p = k.parent;
       if (!p || !('width' in p) || p.type === 'PAGE') continue;
+      // Not what an INSTANCE holds: a node inside one cannot be moved (its transform cannot be
+      // overridden), and it keeps the place its own component gave it. DtSegmentedControlItem's
+      // divider is an absolute child, and the group holds three items as instances.
+      let inside = false;
+      for (let a = p; a && a.type !== 'PAGE' && a !== comp; a = a.parent) if (a.type === 'INSTANCE') { inside = true; break; }
+      if (inside || p.type === 'INSTANCE') continue;
       if (k.constraints.horizontal === 'CENTER') k.x = (p.width - k.width) / 2;
       if (k.constraints.vertical === 'CENTER') k.y = (p.height - k.height) / 2;
+      // A child that stretches or sits at the end edge (DtTab's underline) has followed every reflow of the
+      // frame since it was placed. Put back at its measured box, with the constraint set again after.
+      const want = stretchSizes.get(k);
+      if (want) {
+        const keep = k.constraints;
+        k.constraints = { horizontal: 'MIN', vertical: 'MIN' };
+        k.resize(Math.max(want.w, 0.01), Math.max(want.h, 0.01));
+        k.x = want.x;
+        k.y = want.y;
+        k.constraints = keep;
+      }
     }
 
     made.push(comp);
@@ -1635,6 +1764,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
            effectSpreadLostCount: effectSpreadLost.length };
 }
 
+// An absolute child that stretches or is pinned to the end edge, and the box it was measured at (see the
+// constraints in the frame builder and the final pass over absolute children).
+const stretchSizes = new Map();
 const results = [];
 for (const shard of SHARDS) results.push(await buildShard(shard));
 return results;

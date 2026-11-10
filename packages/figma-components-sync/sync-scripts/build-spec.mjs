@@ -23,10 +23,11 @@ import { createServer } from 'vite';
 import { converter, parse as parseColor, clampChroma, displayable } from 'culori';
 import { tokensFor, tokensForPseudo, toFigmaName, shadowColorToken,
   shadowLayerColorTokens } from './cdp-provenance.mjs';
+import { flatSlotContent } from './exemplar-slots.mjs';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
 import { defaultCombo, wantedDefaults } from './default-variant.mjs';
-import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor, buildPage, pseudoPaints } from './figma-mapping.mjs';
+import { SIDE_CSS_WIDTHS, figmaTextDecoration, borderColorKey, marginFoldable, margins, hasMargin, outlineAsShadow, parentMarginFold, paintsNothing, transparentBorderFold, pseudoPaintsGlyph, resolvePercentRadius, figmaFamilyFor, buildPage, buildFamilyPage, pseudoPaints } from './figma-mapping.mjs';
 
 const HARNESS = fileURLToPath(new URL('./verify-harness/', import.meta.url));
 const toRgb = converter('rgb');
@@ -169,8 +170,14 @@ const NUM_PROPS = {
  * paint no text and bind them to a token they never referenced.
  */
 async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
-  const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.selector });
-  const prov = nodeId ? await tokensFor(cdp, nodeId) : { tokens: {}, computed: {}, own: {}, chain: [] };
+  const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: node.cdpSelector || node.selector });
+  const prov0 = nodeId ? await tokensFor(cdp, nodeId) : { tokens: {}, computed: {}, own: {}, chain: [] };
+  // A synthetic node (a native control's value) shares its control's provenance but paints only its
+  // text, so it takes only the tokens it names (`tokenKeys`). Without this the control's radius token
+  // landed on a text node whose radius is 0, and the one token then held two values and was dropped.
+  const only = (o) => (node.tokenKeys
+    ? Object.fromEntries(Object.entries(o || {}).filter(([k]) => node.tokenKeys.includes(k))) : o);
+  const prov = node.tokenKeys ? { ...prov0, tokens: only(prov0.tokens), computed: only(prov0.computed) } : prov0;
   const declared = prov.tokens;
   const s = node.style;
   const props = {};
@@ -227,7 +234,9 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
    * `fit-content`/`max-content`/`min-content` are hug semantics spelled out in CSS, so
    * they are NOT a pin; `auto` is the absence of one.
    */
-  const HUGGISH = /^(auto|fit-content|max-content|min-content)/;
+  // `percentIsFill`: a percentage width is "as wide as the list", which a lone item has no list to be wide as
+  // (DtTab's vertical `inline-size: 100%`); the group's slot fills it, and alone it hugs its label.
+  const HUGGISH = cfg.percentIsFill ? /^(auto|fit-content|max-content|min-content|[\d.]+%)/ : /^(auto|fit-content|max-content|min-content)/;
   const pinnedAxis = (names) => names.some((p) => {
     const decl = prov.own[p];
     return !!decl && !HUGGISH.test(String(decl.value).trim());
@@ -1089,7 +1098,7 @@ const combos = combosFor(cfg);
 async function measure (combo, slots) {
   const sc = cfg.slotContent ? cfg.slotContent(combo) : {};
   slotSwapTargets = Object.fromEntries(
-    Object.entries(sc).filter(([, v]) => v && v.swapTo).map(([k, v]) => [k, v.swapTo]));
+    Object.entries(flatSlotContent(sc)).filter(([, v]) => v && v.swapTo).map(([k, v]) => [k, v.swapTo]));
   anatomySwap = cfg.anatomySwap ? cfg.anatomySwap(combo) : null;
   await page.evaluate(([c, p, o]) => window.__setProps(c, p, o),
     [cfg.component, cfg.props(combo), { label: cfg.label, slots, slotContent: cfg.slotContent ? cfg.slotContent(combo) : undefined, rootClass: cfg.rootClass, containerClass: containerClassOf(cfg, combo) }]);
@@ -1160,9 +1169,9 @@ if (defaultAdjusted) {
   console.log(`default    : the code's default ${JSON.stringify(exactDefault)} is not a valid variant here; `
     + `using the closest, ${JSON.stringify(defaultAdjusted.used)}`);
 }
-// Figma's default variant is the TOP-LEFT one on the canvas, and the builder lays variants out in
-// row order, so the default goes first. Everything else keeps its order.
-if (defaultVariant) { variants.splice(variants.indexOf(defaultVariant), 1); variants.unshift(defaultVariant); }
+// Variants stay in their natural order: that is the layer order, and so the order a property's
+// options have in Figma's dropdown (Size 100, 200, 300 … rather than the default first). The
+// default variant is Figma's TOP-LEFT one, which build-plugin arranges after every shard exists.
 
 await browser.close();
 await server.close();
@@ -1228,7 +1237,7 @@ const out = { component: which, vue: cfg.component,
   // A merged build goes to its OWN page while the mechanism is being proven. Writing it
   // straight onto `cfg.page` would clear and replace a set that is currently verified
   // clean, and a merged set that turns out wrong would have cost the good one.
-  page: buildPage(cfg, MERGED), axes: cfg.axes,
+  page: buildPage(cfg, MERGED), family: buildFamilyPage(cfg, MERGED), axes: cfg.axes,
   defaultVariant: defaultVariant ? defaultVariant.name : null,
   defaultAdjusted: defaultAdjusted || undefined,
   slotDrift: slotDrift.length ? slotDrift : undefined, variants };

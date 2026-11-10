@@ -25,7 +25,7 @@ import { createServer } from 'vite';
 import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
-import { flattenEdgeSlots } from './edge-slots.mjs';
+import { figmaTransformFor } from './edge-slots.mjs';
 import { converter, parse as parseColor } from 'culori';
 import { exemplarSlots } from './exemplar-slots.mjs';
 import { figmaChildParts } from './figma-mapping.mjs';
@@ -142,7 +142,7 @@ function figmaBindings (node) {
 // Re-rooted, batched — see figma-variants.mjs. The set-rooted fetch this replaced
 // truncated five levels below each variant, without saying so.
 const figByName = await fetchVariantsByName(figmaGet, FILE_KEY, setId,
-  { transform: cfg.edgeSlots ? flattenEdgeSlots : null });
+  { transform: figmaTransformFor(cfg) });
 
 const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js', server: { port: 0 }, logLevel: 'error' });
 await server.listen();
@@ -310,7 +310,12 @@ async function compare (variant, domNodeId, fig, path, domInfo) {
   // A native SLOT wraps the content it holds, a level the DOM does not have: the content is
   // what is compared. (A declared exemplar returned above, before this.)
   if (fig && fig.type === 'SLOT' && (fig.children || []).length === 1) fig = fig.children[0];
-  const { tokens, computed, own, chain } = await tokensFor(cdp, domNodeId);
+  const prov = await tokensFor(cdp, domNodeId);
+  // A synthetic node (a native control's value) shares its control's provenance but paints only its
+  // text, so it takes only the tokens it names (`tokenKeys`), as in the spec builder.
+  const only = (o) => (domInfo && domInfo.tokenKeys
+    ? Object.fromEntries(Object.entries(o || {}).filter(([k]) => domInfo.tokenKeys.includes(k))) : o);
+  const tokens = only(prov.tokens), computed = only(prov.computed), { own, chain } = prov;
   // Figma binds shadow FIELDS; the CSS names one composite. Compare like with like.
   const compositeEffect = tokens.effect;
   if (tokens.effect) {
@@ -367,7 +372,7 @@ async function compare (variant, domNodeId, fig, path, domInfo) {
   const figHasKids = ((fig.children || []).filter(c => c.visible !== false)).length > 0;
   if (!figHasKids && (domInfo.children || []).length) {
     for (const desc of flattenDom(domInfo)) {
-      const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: desc.selector });
+      const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: desc.cdpSelector || desc.selector });
       if (!nodeId) continue;
       const sub = await tokensFor(cdp, nodeId);
       for (const [k, v] of Object.entries(sub.tokens)) if (!tokens[k]) tokens[k] = v;
@@ -501,7 +506,7 @@ async function compare (variant, domNodeId, fig, path, domInfo) {
       }
       continue;
     }
-    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: kid.selector });
+    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: cdpDoc.nodeId, selector: kid.cdpSelector || kid.selector });
     if (!nodeId) continue;
     await compare(variant, nodeId, figKids[i], `${path}/${kid.name}`, kid);
   }

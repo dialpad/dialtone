@@ -44,12 +44,15 @@ const args = process.argv.slice(2);
 const names = args.filter(a => !a.startsWith('--'));
 const SKIP_VERIFY = args.includes('--no-verify');
 const WANT_VISUAL = args.includes('--visual');
+// `--rebuild`: delete and rebuild each set instead of updating it in place. Needed for a structural
+// change, and the only way to start a set over; set ids change when it is used.
+const REBUILD = args.includes('--rebuild');
 // The icon library is a build of its own: 617 components with no variants, no spec and
 // nothing to verify against the browser. It can ride along with a component build (one
 // click) or be built alone with no component names at all.
 const WANT_ICONS = args.includes('--icons');
 if (!names.length && !WANT_ICONS) {
-  console.error('usage: run-batch.mjs <component…> --target <name> [--yes] [--no-verify] [--visual]');
+  console.error('usage: run-batch.mjs <component…> --target <name> [--yes] [--no-verify] [--visual] [--rebuild]');
   console.error('       run-batch.mjs --icons --target <name>   (build the icon component library)');
   process.exit(2);
 }
@@ -60,13 +63,19 @@ if (!names.length && !WANT_ICONS) {
  * A build clears and rebuilds the pages it owns, so the file is the one thing that must never be
  * a surprise. The name comes from Figma itself, so a wrong or inaccessible key fails here, before
  * anything is built; a target marked `confirm` (the real file) also needs `--yes`.
+ *
+ * The name is also handed to the plugin (see `FIGMA_SYNC_EXPECT_FILE` below), which refuses to build
+ * when the open file is not this one: a plugin builds into whichever file is open, and clicking
+ * Build in the wrong one would otherwise write there.
  */
+let TARGET_FILE_NAME = null;
 {
   const r = await fetch(`https://api.figma.com/v1/files/${TARGET.fileKey}?depth=1`,
     { headers: { 'X-Figma-Token': process.env.PERSONAL_ACCESS_TOKEN || '' } })
     .catch((e) => { console.error(`cannot reach Figma to check the target file: ${e.cause ? e.cause.code || e.cause.message : e.message}`); process.exit(2); });
   if (!r.ok) { console.error(`target "${TARGET.name}": Figma answered ${r.status} for its file key (${TARGET.fileKeyEnv})`); process.exit(2); }
   const meta = await r.json();
+  TARGET_FILE_NAME = meta.name || null;
   console.log(`target: ${TARGET.name}  (${TARGET.label}: "${meta.name}", home collection "${TARGET.homeCollection}")`);
   if (TARGET.confirm && !args.includes('--yes')) {
     console.error(`"${TARGET.name}" is a real file: add --yes to build into it`);
@@ -110,7 +119,10 @@ function anatomyTargetsOf (name) {
   }
   return out;
 }
-for (const dependent of names) {
+// Only a rebuild replaces the variants a dependent points at. A set updated in place keeps its
+// variant components and their ids, so the whole batch can go in one run; if a set has to be rebuilt
+// after all (its axes changed), the run says so and its dependents are rebuilt next.
+for (const dependent of REBUILD ? names : []) {
   for (const target of [...swapTargetsOf(dependent), ...anatomyTargetsOf(dependent)]) {
     if (target !== dependent && names.includes(target)) {
       console.error(`${dependent} swaps to ${target}, and building ${target} in the same run clears its `
@@ -171,7 +183,7 @@ if (WANT_ICONS) process.stdout.write(run('build-icon-library.mjs', []));
 // re-process all the icon shards.
 process.stdout.write(run('build-plugin.mjs',
   [...(names.length ? names : ['--no-components']), ...(WANT_ICONS ? ['--with-icons'] : [])],
-  { env: { ...process.env, FIGMA_SYNC_RUN_TOKEN: RUN_TOKEN } }));
+  { env: { ...process.env, FIGMA_SYNC_RUN_TOKEN: RUN_TOKEN, FIGMA_SYNC_EXPECT_FILE: TARGET_FILE_NAME || '', FIGMA_SYNC_REBUILD: REBUILD ? '1' : '' } }));
 
 // ── 3. preflight before anyone clicks ──────────────────────────────────────
 // Cheaper to fail here than to leave a half-built page behind: a plugin run is not
@@ -216,6 +228,8 @@ let resolveReport;
 const reported = new Promise((r) => { resolveReport = r; });
 /** Components whose built default variant is not the one the code renders: a failed run, not a note. */
 const defaultMismatches = [];
+// Sets with two properties of one name: Figma builds them and refuses to publish them.
+const propertyConflicted = [];
 
 /**
  * ONLY A COMPONENT IN THIS BATCH, AND ONLY A NODE ID, MAY BE RECORDED.
@@ -510,6 +524,27 @@ for (const r of report) {
     console.log(`             ! ${t.count}x ${t.kind}`);
     for (const ex of (t.examples || []).slice(0, 2)) console.log(`                 ${ex}`);
   }
+  if ((r.propertyConflicts || []).length) {
+    console.log(`             ❌ conflicting property names, Figma will not publish this set: ${r.propertyConflicts.join(', ')}`);
+    propertyConflicted.push(r.component);
+  }
+  // How the set was brought up to date: in place (ids kept) or from scratch (new ids). A set that was
+  // meant to be updated in place and was rebuilt says why, since that changes its ids.
+  if (r.inPlace) {
+    const ip = r.inPlace;
+    if (ip.mode === 'in place') {
+      console.log(`             in place: ${ip.updated} updated, ${ip.added.length} added, ${ip.removed.length} removed`);
+      if (ip.removed.length) console.log(`             ! variants removed: ${ip.removed.slice(0, 3).join(' | ')}${ip.removed.length > 3 ? ' …' : ''}`);
+      if (ip.failed.length) {
+        console.log(`             ! ${ip.failed.length} setting(s) could not be copied`);
+        for (const f of ip.failed.slice(0, 3)) console.log(`                 ${f}`);
+      }
+      if ((ip.unused || []).length) console.log(`             ! properties the build no longer uses were kept: ${ip.unused.join(', ')}`);
+    } else {
+      console.log(`             REBUILT from scratch, new ids: ${ip.reason}`);
+      console.log('             ! anything that swaps to this set holds its old variants: rebuild those next');
+    }
+  }
   // A font this Figma install does not have. Printed rather than buried: the component
   // renders in the wrong face and looks fine, which is the hardest kind of wrong to notice.
   if ((r.fontFallbacks || []).length) {
@@ -618,7 +653,7 @@ if (SKIP_VERIFY || !built.length) {
   console.log(`\nskipping verification${why}.`);
   // An aborted run lists only the components that finished, so `built` can equal `report`
   // exactly when the run failed.
-  process.exit(built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed && !refused.length ? 0 : 1);
+  process.exit(built.length === report.length && !aborted && !defaultMismatches.length && !propertyConflicted.length && !iconsFailed && !refused.length ? 0 : 1);
 }
 console.log('\n── 7. verifying ' + '─'.repeat(54));
 // STREAM it. Capturing stdout buffers every progress line until the child exits, and
@@ -642,4 +677,4 @@ if (WANT_VISUAL) {
   }
 }
 
-process.exit(chk.status === 0 && built.length === report.length && !aborted && !defaultMismatches.length && !iconsFailed && !refused.length ? 0 : 1);
+process.exit(chk.status === 0 && built.length === report.length && !aborted && !defaultMismatches.length && !propertyConflicted.length && !iconsFailed && !refused.length ? 0 : 1);

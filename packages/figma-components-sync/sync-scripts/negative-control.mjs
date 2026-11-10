@@ -53,7 +53,7 @@ import { COMPONENTS } from './component-axes.mjs';
 import { combosFor, containerClassOf } from './combos.mjs';
 import { defaultVariantFindings } from './default-variant.mjs';
 import { fetchVariantsByName } from './figma-variants.mjs';
-import { flattenEdgeSlots } from './edge-slots.mjs';
+import { figmaTransformFor } from './edge-slots.mjs';
 import { matchedFor } from './cdp-provenance.mjs';
 // The REAL comparison engine, never a copy. A copy would only ever verify the copy.
 import {
@@ -329,6 +329,18 @@ const PERTURBATIONS = [
     target: n => (n.children || []).length > 0,
     apply: n => { n.children.pop(); return true; },
     domPre: d => (d.children || []).length > 0 },
+  // The parent is the node perturbed: the finding is recorded where a stretched row is compared,
+  // and fires when its children no longer share one height.
+  { expect: 'stretchedHeight', what: 'make the last child of a stretching row 3px shorter than its sibling',
+    target: n => (n.children || []).length > 1
+      && (n.children || []).every(k => k.absoluteBoundingBox && typeof k.absoluteBoundingBox.height === 'number'),
+    apply: (n) => {
+      const k = n.children[n.children.length - 1];
+      k.absoluteBoundingBox = { ...k.absoluteBoundingBox, height: k.absoluteBoundingBox.height - 3 };
+      return true;
+    },
+    domPre: d => d.style.alignItems === 'stretch' && /flex/.test(d.style.display || '')
+      && d.style.flexDirection !== 'column' && (d.children || []).length > 1 },
   { expect: 'background', what: 'frame fill -> hostile colour (hue flipped)',
     target: n => n.type !== 'TEXT' && !SHAPES.includes(n.type) && !!(n.fills || [])[0],
     apply: n => hostilePaint(n.fills[0]),
@@ -771,7 +783,7 @@ async function capture () {
   // than the check runs on can never perturb a field that only exists deeper — it would
   // report "all comparisons fire" about data the real pass does not see.
   const figByName = await fetchVariantsByName(figmaGet, FILE_KEY, SET_ID,
-    { transform: cfg.edgeSlots ? flattenEdgeSlots : null });
+    { transform: figmaTransformFor(cfg) });
 
   const server = await createServer({ root: HARNESS, configFile: HARNESS + 'vite.config.js',
     server: { port: 0 }, logLevel: 'error' });

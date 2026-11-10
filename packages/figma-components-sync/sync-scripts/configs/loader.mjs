@@ -13,7 +13,14 @@
  * No `state` axis: loader.less declares no :hover, :focus or :active rule. It is not a control.
  */
 export default {
-  component: 'DtLoader', label: '', page: 'Loader',
+  component: 'DtLoader', label: '', page: 'Loader', family: 'Feedback',
+
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Loader/Loader.vue',
+    selfClosing: true,
+  },
 
   axes: {
     // The full ICON_SIZE_MODIFIERS scale, which is what the prop validates against.

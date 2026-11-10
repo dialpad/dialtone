@@ -25,7 +25,7 @@ const actionKind = () => 'muted';
 export default {
   component: 'DtNotice',
   label: 'Notice',
-  page: 'Notice',
+  page: 'Notice', family: 'Feedback',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
 
@@ -33,6 +33,15 @@ export default {
   // grows to fill the row, centres itself against a taller action, and the root hugs up to
   // `max-inline-size` instead of being pinned at the width the harness measured.
   flexLayout: true,
+
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Notice/Notice.vue',
+    slots: [{ figma: 'Action (Slot)', vue: 'action', when: { 'Show Action': true } }],
+    // Show Action decides whether the action slot holds anything; the prop stays true.
+    skipProps: ['showAction'],
+  },
 
   axes: {
     // Each kind repaints the surface AND swaps the default icon glyph

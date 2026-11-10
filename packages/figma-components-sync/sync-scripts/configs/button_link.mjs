@@ -29,7 +29,12 @@ export default {
    * (measured). Without a style each label keeps its own. Every other set uses the styles.
    */
   textStyles: false,
-  component: 'DtButton', label: 'Button', page: 'ButtonLink',
+  component: 'DtButton', label: 'Button', page: 'ButtonLink', family: 'Buttons',
+  // How the set reads in Dev Mode (see code-connect.mjs).
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Button/Button.vue',
+    always: ['link'],
+  },
   axes: {
     size: [100, 200, 300, 400, 500],
     // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'

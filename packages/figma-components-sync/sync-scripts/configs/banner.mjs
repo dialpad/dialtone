@@ -22,7 +22,7 @@ export default {
   label: 'Banner',
   // The title's text is a property, like the label: `headerText` is a prop in the code.
   textProps: { 'Optional title': 'Title' },
-  page: 'Banner',
+  page: 'Banner', family: 'Feedback',
   // Computed spacing and the minimum height at the nearest token (token-snap.mjs).
   snapTokens: true,
 
@@ -30,6 +30,15 @@ export default {
   flexLayout: true,
   // The outer `display: block` frame is a vertical auto-layout, not coordinates (see the builder).
   blockLayout: true,
+
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Banner/Banner.vue',
+    slots: [{ figma: 'Action (Slot)', vue: 'action', when: { 'Show Action': true } }],
+    // Show Action decides whether the action slot holds anything; the prop stays true.
+    skipProps: ['showAction'],
+  },
 
   axes: {
     // NOTICE_KINDS exactly. `base` maps to `.d-banner--base`, which has no rules of

@@ -4,7 +4,7 @@
  * A synthetic button keeps the UA `appearance` and misses the reset, which makes
  * every colour reading wrong.
  */
-import { createApp, reactive, h } from 'vue';
+import { createApp, reactive, h, provide, defineComponent } from 'vue';
 import * as dialtoneVue from '@dialpad/dialtone-vue';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 // Theme first: it defines the --dt-* custom properties. Without it every
@@ -23,8 +23,33 @@ import '../../../dialtone-css/lib/dist/dialtone-default-theme.css';
 import '../../../dialtone-tokens/dist/css/layered/tokens-base-colors.css';
 import '../../../dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
 import '../../../dialtone-css/lib/dist/dialtone.css';
+// A segmented-control item's divider, for an item mounted on its own (see the file).
+import './segmented-control-divider.css';
+// A tab's selected underline, for a tab mounted on its own (see the file).
+import './tab-list.css';
 
-const state = reactive({ component: 'DtButton', props: {}, label: 'Button', slots: [], rootClass: null });
+const state = reactive({ component: 'DtButton', props: {}, label: 'Button', slots: [], rootClass: null, provideNames: [] });
+
+/**
+ * CONTEXT THE COMPONENT INJECTS FROM A PARENT IT IS NEVER MOUNTED INSIDE.
+ *
+ * DtSegmentedControlItem takes its size and its selected state from the group it sits in
+ * (`inject`), so mounted alone it is always unselected and always the default size, and the
+ * variants it exists to show cannot be rendered. A config's `props()` may carry `__provide`:
+ * { EXPORTED_KEY_NAME: value }, which is taken out of the props and provided around the component
+ * by a component that renders only its child, so the measured root is still the component.
+ */
+const provided = {};
+const Provider = defineComponent({
+  props: { names: { type: Array, default: () => [] } },
+  setup (props, { slots }) {
+    // An exported symbol (DtSegmentedControl's context key), or else the name itself: DtTab injects
+    // 'groupContext' and 'setFocus' by string. A value of '$noop' stands for a function, which cannot
+    // cross from the config to the page.
+    for (const n of props.names) provide(dialtoneVue[n] ?? n, provided[n] === '$noop' ? () => {} : provided[n]);
+    return () => slots.default();
+  },
+});
 
 /**
  * Turn a config's slot spec into vnodes.
@@ -117,12 +142,15 @@ const app = createApp({
     // DtToggle has zero gap between label and switch until a class supplies one, and
     // every Dialtone doc example supplies one. Rendering without it would depict a
     // component nobody ships.
-    return h(C, {
+    const subject = () => h(C, {
       ...state.props,
       ...(state.rootClass ? { class: state.rootClass } : {}),
       id: 'subject',
       key: state.slots.join('|') + '|' + (state.rootClass || ''),
     }, slots);
+    return state.provideNames.length
+      ? h(Provider, { names: state.provideNames, key: state.provideNames.join('|') }, { default: () => [subject()] })
+      : subject();
   },
 });
 
@@ -149,7 +177,15 @@ window.__setMode = (mode) => {
 
 window.__setProps = async (component, props, opts = {}) => {
   state.component = component;
-  state.props = props;
+  const { __provide: toProvide, ...ownProps } = props || {};
+  for (const [name, value] of Object.entries(toProvide || {})) {
+    if (value === '$noop') { provided[name] = '$noop'; continue; }
+    if (typeof provided[name] !== 'object') provided[name] = reactive({});
+    for (const k of Object.keys(provided[name])) delete provided[name][k];
+    Object.assign(provided[name], value);
+  }
+  state.provideNames = Object.keys(toProvide || {});
+  state.props = ownProps;
   if (opts.label !== undefined) state.label = opts.label;
   state.slots = opts.slots || [];
   state.slotContent = opts.slotContent || {};
@@ -300,6 +336,61 @@ window.__anatomy = () => {
     return { w, h, x: +(bl + x).toFixed(2), y: +(bt + y).toFixed(2) };
   };
 
+  /**
+   * THE TEXT A NATIVE CONTROL DRAWS ITSELF, as a synthetic TEXT child.
+   *
+   * An <input> or <textarea> paints its value from a property, not from a text node, so the walk
+   * saw a bare box and the Figma field held no text at all. This returns a child carrying the value,
+   * placed where the browser puts it (the control's border and padding, centred vertically in a
+   * single-line input and top-aligned in a textarea) with the control's own font and colour.
+   *
+   * It has its own `selector`, because the spec keeps each node's style under its selector and a
+   * shared one let this node's zeroed padding overwrite the control's. `cdpSelector` is the CONTROL's:
+   * the colour and font the value is painted with are declared on the control, so a lookup in the
+   * browser (matched styles, provenance) has to go there. Only the text-like types are read; a
+   * password shows bullets, and date, time, file and color draw UA widgets.
+   */
+  const TEXT_INPUT_TYPES = ['text', 'search', 'email', 'tel', 'url', 'number'];
+  const nativeValueNode = (el, s, style, box, selector, depth) => {
+    const tag = el.tagName.toLowerCase();
+    const isArea = tag === 'textarea';
+    if (!isArea && !(tag === 'input' && TEXT_INPUT_TYPES.includes(el.type))) return null;
+    const value = (el.value || '').trim();
+    if (!value) return null;
+    // The value's size is the size of the same text set in a hidden span with the control's font.
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;left:0;top:0';
+    for (const k of ['fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'letterSpacing', 'lineHeight', 'textTransform']) {
+      probe.style[k] = s[k];
+    }
+    probe.textContent = value;
+    document.body.appendChild(probe);
+    const r = probe.getBoundingClientRect();
+    probe.remove();
+    const n = (k) => parseFloat(s[k]) || 0;
+    const x = n('borderLeftWidth') + n('paddingLeft');
+    const content = box.height - n('borderTopWidth') - n('borderBottomWidth') - n('paddingTop') - n('paddingBottom');
+    const y = n('borderTopWidth') + n('paddingTop') + (isArea ? 0 : (content - r.height) / 2);
+    // The text keeps the control's typography and colour; its own box paints nothing.
+    const vstyle = { ...style, backgroundColor: 'rgba(0, 0, 0, 0)', boxShadow: 'none', display: 'inline',
+      borderTopWidth: '0px', borderRightWidth: '0px', borderBottomWidth: '0px', borderLeftWidth: '0px',
+      paddingTop: '0px', paddingRight: '0px', paddingBottom: '0px', paddingLeft: '0px',
+      marginTop: '0px', marginRight: '0px', marginBottom: '0px', marginLeft: '0px',
+      // The control's minimum size (a textarea's) belongs to the control, not to its text.
+      minWidth: '0px', minHeight: '0px', maxWidth: 'none', maxHeight: 'none',
+      borderTopLeftRadius: '0px', borderTopRightRadius: '0px', borderBottomRightRadius: '0px', borderBottomLeftRadius: '0px' };
+    return {
+      tag: 'span', classes: ['d-native-value'], dataSlot: null, dataName: null, depth: depth + 1,
+      text: value.slice(0, 40), svg: null, svgRect: null,
+      box: { w: +r.width.toFixed(2), h: +r.height.toFixed(2) }, inset: null,
+      rel: { x: +x.toFixed(2), y: +y.toFixed(2) },
+      style: vstyle, selector: selector + '@value', cdpSelector: selector,
+      // Only the text's own tokens come from the control's provenance.
+      tokenKeys: ['textColor', 'fontSize', 'fontWeight', 'lineHeight'],
+      pseudos: [], children: [],
+    };
+  };
+
   const walk = (el, depth = 0, selector = '#root > *', parentRect = null) => {
     const s = getComputedStyle(el);
     const style = {};
@@ -426,7 +517,9 @@ window.__anatomy = () => {
         // resolves the same node in CDP after sr-only ones are dropped.
         .map((c, i) => ({ c, i }))
         .filter(({ c }) => !isSrOnly(getComputedStyle(c), c.getBoundingClientRect()))
-        .map(({ c, i }) => walk(c, depth + 1, `${selector} > *:nth-child(${i + 1})`, box)),
+        .map(({ c, i }) => walk(c, depth + 1, `${selector} > *:nth-child(${i + 1})`, box))
+        // A native control's value is its only content: it follows any element children.
+        .concat((() => { const v = nativeValueNode(el, s, style, box, selector, depth); return v ? [v] : []; })()),
     };
   };
   return walk(root);
