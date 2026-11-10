@@ -8,13 +8,51 @@
     },
     "typecheck": {
       "executor": "nx:run-script",
-      "dependsOn": ["dialtone-icons:build"],
+      "dependsOn": ["dialtone-icons:build", "dialtone-tokens:build"],
       "options": { "script": "typecheck" }
     },
     "gate": {
       "executor": "nx:run-script",
-      "dependsOn": ["dialtone-icons:build"],
+      "dependsOn": ["dialtone-icons:build", "dialtone-tokens:build"],
       "options": { "script": "gate" }
+    },
+    "storybook": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "nx watch --projects=dialtone-css,dialtone-tokens -- nx run \\$NX_PROJECT_NAME:build",
+          "node scripts/build-icons.mjs && STORYBOOK_ENV=development pnpm exec storybook dev -p 9012 --exact-port"
+        ]
+      }
+    },
+    "storybook:compare": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["dialtone-css:build", "dialtone-tokens:build"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node compare/generate-stories.mjs && pnpm exec storybook dev -c compare/.storybook -p 9013 --exact-port"
+      }
+    },
+    "storybook:ports": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node compare/check-ports.mjs"
+      }
+    },
+    "storybook:all": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["storybook:ports", "dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build", "dialtone-vue:build-functions"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "BROWSER=none nx run dialtone-vue:start",
+          "node scripts/build-icons.mjs && STORYBOOK_ENV=development pnpm exec storybook dev -p 9012 --exact-port --no-open",
+          "node compare/generate-stories.mjs && pnpm exec storybook dev -c compare/.storybook -p 9013 --exact-port"
+        ]
+      }
     }
   }
 }
