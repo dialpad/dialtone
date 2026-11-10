@@ -42,9 +42,11 @@ permissions:
   contents: read
   packages: read
 
+# A PR's newer push cancels its older run. Each push to dialtone-react runs in its own group instead: the gate diffs
+# only that push's range, so a cancelled run (or a pending one a newer push replaced) would leave units ungated.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event_name == 'push' && github.sha || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   HUSKY: 0
@@ -113,7 +115,8 @@ jobs:
             units=$(git diff --no-renames --name-only "$BEFORE" HEAD | list_units)
           fi
           echo "Units: ${units:-none}"
-          echo "list=$(echo $units)" >> "$GITHUB_OUTPUT"
+          # One line for GITHUB_OUTPUT. An empty list stays empty, so the steps below skip.
+          echo "list=${units//$'\n'/ }" >> "$GITHUB_OUTPUT"
 
       - uses: ./.github/actions/setup-environment
         if: steps.units.outputs.list != ''
