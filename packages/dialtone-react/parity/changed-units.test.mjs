@@ -90,6 +90,17 @@ const pkg = tree(path.join(root, 'dialtone-react'), [
   ['components/Chip/Chip.tsx', "import { DtText } from '../Text';\nconst lazy = () => import('../Tooltip');"],
 ]);
 const ALL = Object.values(UNITS).sort();
+// Combinator next to pkg (changedUnits' default variantsDir): its registry, three variants files, and a helper
+// one of them imports.
+tree(path.join(root, 'combinator/src'), [
+  ['variants/variants.js', "import DtText from './variants_text.js';\nimport DtTabGroup from './variants_tab_group.js';\n"
+    + "import DtCheckbox from './variants_checkbox.js';\n"],
+  'variants/variants_text.js',
+  ['variants/variants_tab_group.js', "import { hasValue } from '@/src/lib/exclusion_rules';"],
+  'variants/variants_checkbox.js',
+  'lib/exclusion_rules.js',
+  'lib/option_bar.js',
+]);
 
 const unitsFor = (...files) => changedUnits(files, { pkg, vueRoot });
 const expect = (files, units) => assert.deepEqual(unitsFor(...files), { units, errors: [] });
@@ -236,11 +247,33 @@ describe('changedUnits', () => {
       'packages/dialtone-react/eslint.config.js',
       'pnpm-lock.yaml',
       '.github/workflows/dialtone-react.yml',
+      'packages/dialtone-vue/vite.config.js',
+      'packages/dialtone-vue/tests/setupTests.js',
     ]) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);
+  });
+
+  test('a Combinator variants file gates the units whose presets it holds; the registry gates every unit', () => {
+    const variants = file => `packages/combinator/src/variants/${file}`;
+    expect([variants('variants_text.js')], ['text']);
+    expect([variants('variants_tab_group.js'), variants('variants_text.js')], ['tab-group', 'text']);
+    expect([variants('variants_checkbox.js')], []); // Checkbox isn't ported
+    expect([variants('variants_nothing.js')], []);
+    expect([variants('variants.js')], ALL);
+    // What a variants file imports inside Combinator is part of the unit's presets.
+    expect(['packages/combinator/src/lib/exclusion_rules.js'], ['tab-group']);
+  });
+
+  test('icons and emoji gate every unit, but not their Markdown; tokens and other Combinator files gate none', () => {
+    for (const file of ['packages/dialtone-icons/src/svg/close.svg', 'packages/dialtone-icons/package.json',
+      'packages/dialtone-emojis/src/emojis.json']) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);
+    expect(['packages/dialtone-icons/CHANGELOG.md', 'packages/dialtone-emojis/README.md',
+      'packages/dialtone-tokens/tokens/base/color.json', 'packages/combinator/src/lib/option_bar.js'], []);
   });
 
   test('look-alikes of shared files don\'t', () => {
     expect([
+      'packages/combinator/src/variants.js',
+      'packages/dialtone-vue/tests/other_helper.js',
       'packages/dialtone-react-native/parity/gate.mjs',
       'packages/dialtone-vue/package.json',
       '.github/workflows/unit_tests.yml',

@@ -8,8 +8,12 @@
 //     (unitsOfPath), since the lookup only sees files that exist;
 //   - a file the unit's React or Vue sources import, directly or not: Checkbox renders DtText, so a change to Text on
 //     either side can break checkbox's parity, and Tooltip uses Popover/TippyUtils, which is no unit of its own;
+//   - the unit's Combinator presets, which are DOM parity's cases: the variants file the registry maps it to
+//     (presetFiles), and what that file imports inside Combinator;
 //   - a shared file (SHARED): every ported unit, since the harness, foundations, configs and dependencies are
-//     under all of them.
+//     under all of them, and so are the icons and emoji both sides render and dialtone-vue's test config and
+//     setup. dialtone-tokens gates no unit: no component, test or parity case reads it. The Storybook themes do,
+//     and the check job's typecheck catches a change to their types in the same run.
 // The id is the kebab form the gate takes, the inverse of cases.mjs' pascal() (ValidationMessages →
 // validation-messages).
 //   git diff --no-renames --name-only <base> <head> | node packages/dialtone-react/parity/changed-units.mjs
@@ -21,17 +25,26 @@ import { containsPath, unitsOfPath, vueSources } from './vue-sources.mjs';
 
 const REACT = 'packages/dialtone-react/';
 const VUE = 'packages/dialtone-vue/';
+const COMBINATOR = 'packages/combinator/';
+const VARIANTS = `${COMBINATOR}src/variants/`;
 const SHARED = new RegExp([
   `^${REACT}(?:parity|common|tests|scripts|types)/`,
   `^${REACT}(?:package\\.json|tsconfig[^/]*|vite[^/]*|eslint\\.config\\.[^/]+)$`,
   '^pnpm-lock\\.yaml$',
   '^\\.github/workflows/dialtone-react[^/]*\\.yml$',
+  // dialtone-vue's Vitest config and setup, under every unit's Vue tests and goldens.
+  `^${VUE}(?:vite\\.config\\.js|tests/setupTests\\.js)$`,
+  // React's icons are generated from dialtone-icons' SVGs and Vue's come from its build; emoji come from
+  // dialtone-emojis. Their Markdown can't change a render.
+  '^packages/dialtone-(?:icons|emojis)/(?!.*\\.md$)',
+  // Combinator's registry, which says which variants file holds each unit's presets.
+  `^${VARIANTS}variants\\.js$`,
 ].join('|'));
 
 const kebab = name => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
 // Static imports, re-exports, dynamic imports and requires. Only relative and dialtone-vue's `@/` specifiers resolve:
-// packages are dependencies, and a dependency change is a pnpm-lock.yaml change, which is SHARED.
+// an npm dependency changes through pnpm-lock.yaml, and the workspace packages ports render from are SHARED by path.
 const SPECIFIER = /(?:\bfrom|\bimport|\brequire)\s*\(?\s*['"]([^'"\n]+)['"]/g;
 const SUFFIXES = ['', '.ts', '.tsx', '.js', '.mjs', '.jsx', '.vue', '.json', '/index.ts', '/index.tsx', '/index.js'];
 // Stories aren't followed: story parity parses them without rendering, and their demos import many components.
@@ -69,10 +82,22 @@ function importClosure (root, seeds, alias, cache) {
 }
 
 /**
- * The ported units `files` (repo-relative paths) touch: { units, errors }, units sorted by id.
- *   pkg: packages/dialtone-react; vueRoot: packages/dialtone-vue (both absolute).
+ * Which variants file holds each component's Combinator presets, by Combinator's registry (variants.js), which
+ * imports one per component as `import Dt<Name> from './variants_<x>.js'`: the lookup the Vue goldens use.
+ * A Map of <Name> → file name.
  */
-export function changedUnits (files, { pkg, vueRoot }) {
+function presetFiles (variantsDir) {
+  const registry = path.join(variantsDir, 'variants.js');
+  const text = fs.existsSync(registry) ? fs.readFileSync(registry, 'utf8') : '';
+  return new Map([...text.matchAll(/import Dt(\w+) from '\.\/(variants_\w+\.js)'/g)].map(m => [m[1], m[2]]));
+}
+
+/**
+ * The ported units `files` (repo-relative paths) touch: { units, errors }, units sorted by id.
+ *   pkg: packages/dialtone-react; vueRoot: packages/dialtone-vue; variantsDir: Combinator's src/variants (all
+ *   absolute; variantsDir defaults to the one next to pkg).
+ */
+export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(pkg, '../combinator/src/variants') }) {
   const errors = [];
   // A unit has an index.ts; a directory without one holds helpers another unit needed (Tooltip's Popover/TippyUtils).
   const ported = new Map();
@@ -88,6 +113,11 @@ export function changedUnits (files, { pkg, vueRoot }) {
 
   const reactPaths = paths.filter(f => f.startsWith(REACT)).map(f => f.slice(REACT.length));
   const vuePaths = paths.filter(f => f.startsWith(VUE)).map(f => f.slice(VUE.length));
+  const combinatorPaths = paths.filter(f => f.startsWith(COMBINATOR)).map(f => f.slice(COMBINATOR.length));
+  const combinatorRoot = path.resolve(variantsDir, '../..');
+  const presets = combinatorPaths.length ? presetFiles(variantsDir) : new Map();
+  const presetsOf = name => (presets.has(name) ? [path.join(variantsDir, presets.get(name))] : []);
+  const combinatorCache = new Map();
   const units = new Set();
   const reactCache = new Map();
   const vueCache = new Map();
@@ -108,6 +138,8 @@ export function changedUnits (files, { pkg, vueRoot }) {
     }
     const home = `components/${name}`;
     if (reactPaths.some(f => containsPath([home], f))
+      || presetsOf(name).some(f => combinatorPaths.includes(path.relative(combinatorRoot, f)))
+      || reaches(combinatorPaths, combinatorRoot, () => presetsOf(name).filter(isFile), true, combinatorCache)
       || vuePaths.some(f => containsPath(sources, f) || unitsOfPath(f).includes(id))
       || reaches(reactPaths, pkg, () => walk(path.join(pkg, home)), false, reactCache)
       || reaches(vuePaths, vueRoot, () => sources.flatMap(p => walk(path.join(vueRoot, p))), true, vueCache)) {
