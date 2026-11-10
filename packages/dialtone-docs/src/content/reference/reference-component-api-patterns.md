@@ -20,7 +20,7 @@ keywords:
     logical-props,
   ]
 ai_summary: Recurring Dialtone Vue props, events, slots, and API patterns; supported values and exceptions depend on the selected component.
-last_updated: 2026-10-23
+last_updated: 2026-11-09
 related_packages: [dialtone-vue]
 ---
 
@@ -110,6 +110,10 @@ Visibility-toggle components use `update:open`:
 | DtToast    | `update:open` |
 | DtPopover  | `update:open` |
 | DtDropdown | `update:open` |
+
+Popover and Dropdown additionally emit `open-change(boolean)` synchronously when logical visibility actually changes. Their existing `opened` and `update:open` notifications retain completed-transition timing; `open=null` emits no `update:open`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
+
+With a boolean `open` prop, both components keep default anchor toggling disabled. `forwardAnchorArrowKeys` defaults to `false`; opting in forwards anchor ArrowUp/ArrowDown through `keydown` without toggling. A closed opted-in Dropdown lets the consumer handle default/propagation and records keyboard modality only for an accepted open in that flush. This does not change default controlled-overlay consumers.
 
 ## Event Naming
 

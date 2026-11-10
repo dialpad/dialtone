@@ -48,6 +48,14 @@ The content slot will be rendered lazily when the popover is open. By default, t
 
 </dialtone-usage>
 
+### Logical Visibility and Transition Events
+
+`open-change(boolean)` is emitted synchronously on an actual logical visibility change. It is separate from `opened` and `update:open`, which continue to fire after the current enter or leave transition completes. `open=null` keeps internal trigger ownership and emits no `update:open`. Canceled transitions and stale asynchronous completions do not emit terminal state or restore obsolete focus.
+
+A boolean `open` prop keeps default anchor toggling disabled. Anchor ArrowUp/ArrowDown are not forwarded by default. Set `forwardAnchorArrowKeys` to forward those keys through `keydown` without toggling; the consumer owns any resulting open request and default-key handling. [Dropdown](dropdown.md#logical-visibility-and-controlled-arrow-keys) also preserves keyboard opening modality for an accepted request. This opt-in does not alter existing consumers.
+
+Vue batches prop updates: a same-flush rewrite back to the prior value is unchanged and does not request reopening. To reopen after dismissal while a leave transition runs, deliver `false`, let that update flush, then deliver `true` on a later tick.
+
 ### Best Practices
 
 - Popovers should be fairly small. If you are looking for more of a full size dialog solution see [Modal](modal.md)

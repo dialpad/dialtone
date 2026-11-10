@@ -1,3 +1,6 @@
+import { h } from 'vue';
+import { DtListItem } from '@/components/ListItem';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import { mount } from '@vue/test-utils';
 import DtComboboxWithPopover from './ComboboxWithPopover.vue';
 import DtInput from '@/components/Input/Input.vue';
@@ -86,6 +89,36 @@ describe('DtComboboxWithPopover Tests', () => {
     // Restore RequestAnimationFrame and cancelAnimationFrame
     global.requestAnimationFrame = undefined;
     global.cancelAnimationFrame = undefined;
+  });
+
+  it('retains input focus and option navigation through completed listbox transitions', async () => {
+    wrapper.unmount();
+    wrapper = mount(DtComboboxWithPopover, {
+      props: { label: 'Choose', showList: true, listId: 'focus-list' },
+      slots: {
+        input: ({ inputProps }) => h(DtInput, { ...inputProps, id: 'focus-input' }),
+        list: ({ listProps }) => h('ul', listProps, [
+          h(DtListItem, { role: 'option', id: 'focus-option', navigationType: 'arrow-keys' }, () => 'Alpha'),
+        ]),
+      },
+      global: { plugins: [DtFocustrapDirective], stubs: { transition: true } },
+      attachTo: document.body,
+    });
+    const input = wrapper.find('input');
+    input.element.focus();
+    const popover = wrapper.findComponent(DtPopover);
+    await popover.vm.onEnterTransitionComplete();
+    expect(document.activeElement).toBe(input.element);
+    expect(popover.findComponent({ ref: 'content' }).attributes('role')).toBe('listbox');
+    await input.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(document.activeElement).toBe(input.element);
+    expect(input.attributes('aria-activedescendant')).toBe('focus-option');
+    await input.trigger('keydown', { key: 'Escape', code: 'Escape' });
+    expect(wrapper.emitted('escape')).toHaveLength(1);
+    await wrapper.setProps({ showList: false });
+    await popover.vm.onLeaveTransitionComplete();
+    expect(document.activeElement).toBe(input.element);
+    expect(input.attributes('aria-expanded')).toBe('false');
   });
 
   describe('Presentation Tests', () => {

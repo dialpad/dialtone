@@ -1,3 +1,4 @@
+import { h } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/Popover';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
@@ -22,6 +23,7 @@ const baseSlots = {
                 '</template>',
 };
 
+let manualTransitions = false;
 let mockProps = {};
 let mockSlots = {};
 
@@ -43,6 +45,14 @@ describe('DtPopover Tests', () => {
         plugins: [DtFocustrapDirective],
         stubs: {
           transition: false,
+          ...(manualTransitions ? {
+            DtLazyShow: {
+              props: ['show'],
+              render () {
+                return h('div', { style: { display: this.show ? '' : 'none' } }, this.$slots.default?.());
+              },
+            },
+          } : {}),
         },
       },
       attachTo: document.body,
@@ -71,6 +81,8 @@ describe('DtPopover Tests', () => {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
+    manualTransitions = false;
+    vi.restoreAllMocks();
     wrapper.unmount();
   });
 
@@ -595,37 +607,164 @@ describe('DtPopover Tests', () => {
       expect(wrapper.emitted('opened')).toBeUndefined();
     });
 
-    it('emits "opened" and respects open prop when leave transition completes and not unmounting', async () => {
-      wrapper.vm._isUnmounting = false;
-      await wrapper.vm.onLeaveTransitionComplete();
-      expect(wrapper.emitted('opened')).toBeDefined();
-      expect(wrapper.emitted('opened')[0]).toEqual([false]);
-      // uncontrolled (open === null): update:open is not emitted
-      expect(wrapper.emitted('update:open')).toBeUndefined();
-      // controlled (open !== null): update:open is emitted
-      await wrapper.setProps({ open: false });
-      await wrapper.vm.onLeaveTransitionComplete();
-      expect(wrapper.emitted('update:open')).toBeDefined();
-      expect(wrapper.emitted('update:open')[0]).toEqual([false]);
-    });
-
     it('does not emit "opened" when enter transition completes', async () => {
       await wrapper.vm.onEnterTransitionComplete();
       expect(wrapper.emitted('opened')).toBeUndefined();
     });
+  });
 
-    it('emits "opened" and respects open prop when enter transition completes and not unmounting', async () => {
-      wrapper.vm._isUnmounting = false;
-      await wrapper.vm.onEnterTransitionComplete();
-      expect(wrapper.emitted('opened')).toBeDefined();
-      expect(wrapper.emitted('opened')[0][0]).toBe(true);
-      // uncontrolled (open === null): update:open is not emitted
+  describe('logical visibility and transition generations', () => {
+    let scrollWasLocked;
+    beforeEach(() => {
+      scrollWasLocked = document.documentElement.classList.contains('d-of-hidden');
+      document.documentElement.classList.remove('d-of-hidden');
+      wrapper.unmount();
+      manualTransitions = true;
+      mockSlots.content = '<button data-qa="inside">Action</button>';
+      updateWrapper();
+    });
+    afterEach(() => {
+      document.documentElement.classList.toggle('d-of-hidden', scrollWasLocked);
+    });
+
+    it('notifies actual logical changes synchronously once per change', () => {
+      wrapper.vm.toggleOpen();
+      expect(wrapper.emitted('open-change')).toEqual([[true]]);
+      wrapper.vm.closePopover();
+      expect(wrapper.emitted('open-change')).toEqual([[true], [false]]);
+      wrapper.vm.closePopover();
+      expect(wrapper.emitted('open-change')).toEqual([[true], [false]]);
+      expect(wrapper.emitted('opened')).toBeUndefined();
       expect(wrapper.emitted('update:open')).toBeUndefined();
-      // controlled (open !== null): update:open is emitted
-      await wrapper.setProps({ open: false });
+    });
+
+    it.each([null, false])('retains completed transition updates with open=%s', async open => {
+      await wrapper.setProps({ open });
+      wrapper.vm.toggleOpen();
+      await wrapper.vm.$nextTick();
+      expect(wrapper.emitted('opened')).toBeUndefined();
       await wrapper.vm.onEnterTransitionComplete();
-      expect(wrapper.emitted('update:open')).toBeDefined();
-      expect(wrapper.emitted('update:open')[0]).toEqual([true]);
+      expect(wrapper.emitted('opened')[0][0]).toBe(true);
+      wrapper.vm.closePopover();
+      await wrapper.vm.onLeaveTransitionComplete();
+      expect(wrapper.emitted('opened')[1]).toEqual([false]);
+      expect(wrapper.emitted('update:open')).toEqual(open === null ? undefined : [[true], [false]]);
+    });
+
+    it('does not treat a same-flush prop rewrite as a reopen request', async () => {
+      await wrapper.setProps({ open: true });
+      wrapper.vm.closePopover();
+      wrapper.setProps({ open: false });
+      await wrapper.setProps({ open: true });
+      expect(button.attributes('aria-expanded')).toBe('false');
+      await wrapper.setProps({ open: false });
+      await wrapper.setProps({ open: true });
+      expect(button.attributes('aria-expanded')).toBe('true');
+    });
+
+    it('ignores a canceled leave without requiring an after-leave callback', async () => {
+      await wrapper.setProps({ open: true });
+      await wrapper.vm.onEnterTransitionComplete();
+      await wrapper.setProps({ open: false });
+      await wrapper.setProps({ open: true });
+      expect(wrapper.emitted('open-change')).toEqual([[true], [false], [true]]);
+      expect(wrapper.emitted('opened')).toHaveLength(1);
+      expect(popoverWindow.attributes('aria-hidden')).toBe('false');
+    });
+
+    it('stops a running leave before stale focus and terminal effects after reopen', async () => {
+      await wrapper.setProps({ open: true });
+      await wrapper.vm.onEnterTransitionComplete();
+      await wrapper.setProps({ open: false });
+      let release;
+      vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => new Promise(resolve => {
+        release = resolve;
+      }));
+      const contentButton = popoverWindow.find('[data-qa="inside"]').element;
+      const scrollLocked = document.documentElement.classList.contains('d-of-hidden');
+      const leave = wrapper.vm.onLeaveTransitionComplete();
+      await wrapper.setProps({ open: true });
+      contentButton.focus();
+      release(button.element);
+      await leave;
+      expect(document.activeElement).toBe(contentButton);
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(scrollLocked);
+      expect(popoverWindow.element.isConnected).toBe(true);
+      expect(wrapper.emitted('opened')).toHaveLength(1);
+      expect(wrapper.emitted('update:open')).toEqual([[true]]);
+      expect(popoverWindow.attributes('aria-hidden')).toBe('false');
+    });
+
+    it('stops a running enter before stale focus and terminal effects after close', async () => {
+      await wrapper.setProps({ open: true });
+      let release;
+      vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => new Promise(resolve => {
+        release = resolve;
+      }));
+      button.element.focus();
+      const scrollLocked = document.documentElement.classList.contains('d-of-hidden');
+      const enter = wrapper.vm.onEnterTransitionComplete();
+      await wrapper.setProps({ open: false });
+      release(popoverWindow.find('[data-qa="inside"]').element);
+      await enter;
+      expect(document.activeElement).toBe(button.element);
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(scrollLocked);
+      expect(wrapper.emitted('opened')).toBeUndefined();
+      expect(wrapper.emitted('update:open')).toBeUndefined();
+    });
+
+    it.each(['enter', 'leave'])('stops stale %s completion during its final nextTick', async phase => {
+      await wrapper.setProps({ open: true });
+      if (phase === 'leave') await wrapper.vm.onEnterTransitionComplete();
+      if (phase === 'leave') await wrapper.setProps({ open: false });
+      const notifications = wrapper.emitted('opened')?.length || 0;
+      const scrollLocked = document.documentElement.classList.contains('d-of-hidden');
+      if (phase === 'enter') {
+        vi.spyOn(wrapper.vm, 'focusInitialElement').mockImplementation(() => {
+          // Resume the completion first, then close while it awaits its final tick.
+          Promise.resolve().then(() => Promise.resolve().then(() => wrapper.vm.closePopover()));
+        });
+      } else {
+        vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockResolvedValue(button.element);
+        vi.spyOn(button.element, 'focus').mockImplementation(() => {
+          Promise.resolve().then(() => wrapper.vm.toggleOpen());
+        });
+      }
+      if (phase === 'enter') await wrapper.vm.onEnterTransitionComplete();
+      else await wrapper.vm.onLeaveTransitionComplete();
+      expect(wrapper.emitted('opened')?.length || 0).toBe(notifications);
+      expect(document.documentElement.classList.contains('d-of-hidden')).toBe(scrollLocked);
+      await wrapper.vm.$nextTick();
+      expect(button.attributes('aria-expanded')).toBe(String(phase === 'leave'));
+    });
+
+    it.each(['enter', 'leave'])('stops a suspended %s completion after disposal', async phase => {
+      await wrapper.setProps({ open: true });
+      if (phase === 'leave') await wrapper.setProps({ open: false });
+      let release;
+      vi.spyOn(wrapper.vm, 'getFirstFocusableElement').mockImplementationOnce(() => new Promise(resolve => {
+        release = resolve;
+      }));
+      const focus = vi.spyOn(button.element, 'focus');
+      const completion = phase === 'enter'
+        ? wrapper.vm.onEnterTransitionComplete()
+        : wrapper.vm.onLeaveTransitionComplete();
+      wrapper.unmount();
+      release(button.element);
+      await completion;
+      expect(focus).not.toHaveBeenCalled();
+      expect(wrapper.emitted('opened')).toBeUndefined();
+      expect(wrapper.emitted('update:open')).toBeUndefined();
+    });
+
+    it('does not forward or toggle boolean anchor arrows without opt-in', async () => {
+      await wrapper.setProps({ open: false });
+      await button.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+      expect(wrapper.emitted('keydown')).toBeUndefined();
+      await wrapper.setProps({ forwardAnchorArrowKeys: true });
+      await button.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+      expect(wrapper.emitted('keydown')).toHaveLength(1);
+      expect(button.attributes('aria-expanded')).toBe('false');
     });
   });
 

@@ -11,7 +11,8 @@
       }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
-    :aria-selected="role === 'listitem' ? undefined : isHighlighted"
+    :aria-selected="ariaSelected"
+    :aria-checked="role === 'menuitemradio' ? selected : undefined"
     v-on="listItemListeners"
   >
     <dt-item-layout
@@ -48,14 +49,13 @@
 
 <script>
 import {
+  LIST_ITEM_ROLES,
   LIST_ITEM_TYPES,
   LIST_ITEM_NAVIGATION_TYPES,
 } from './ListItemConstants';
 import utils from '@/common/utils';
 import { DtIconCheck } from '@dialpad/dialtone-icons/vue';
 import { DtItemLayout } from '@/components/ItemLayout';
-
-const ROLES = ['listitem', 'menuitem', 'option'];
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
@@ -86,13 +86,15 @@ export default {
     },
 
     /**
-     * String to use for the item's role.
-     * @values listitem, menuitem, option
+     * Contextual role: listitem for ordinary lists, menuitem for menu actions,
+     * menuitemradio for persistent mutually exclusive menu choices, option for listboxes.
+     * selected never changes the role automatically.
+     * @values listitem, menuitem, option, menuitemradio
      */
     role: {
       type: String,
       default: 'listitem',
-      validator: (role) => (ROLES).includes(role),
+      validator: (role) => LIST_ITEM_ROLES.includes(role),
     },
 
     /**
@@ -127,7 +129,7 @@ export default {
     },
 
     /**
-     * Applies selected styles to the list item
+     * Shows a selected checkmark. For menuitemradio, also sets aria-checked independently of highlight.
      */
     selected: {
       type: Boolean,
@@ -188,6 +190,10 @@ export default {
   },
 
   computed: {
+    ariaSelected () {
+      return ['listitem', 'menuitemradio'].includes(this.role) ? undefined : this.isHighlighted;
+    },
+
     isDefaultType () {
       return this.type === LIST_ITEM_TYPES.DEFAULT;
     },
@@ -200,6 +206,7 @@ export default {
 
         keydown: event => {
           if (['enter', 'space'].includes(event.code.toLowerCase())) {
+            if (this.role === 'menuitemradio') event.preventDefault();
             this.onClick(event);
           }
           this.$emit('keydown', event);

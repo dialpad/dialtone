@@ -1,3 +1,7 @@
+import { h } from 'vue';
+import { DtListItem } from '@/components/ListItem';
+import { DtPopover } from '@/components/Popover';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import { flushPromises, mount } from '@vue/test-utils';
 import DtSplitButton from './SplitButton.vue';
 import SplitButtonStart from './SplitButtonStart.vue';
@@ -77,6 +81,34 @@ describe('DtSplitButton Tests', function () {
     mockSlots = {};
     mockAttrs = {};
     wrapper.unmount();
+  });
+
+  it.each(['click', 'ArrowDown'])('preserves dropdown active state through %s opening and completed close', async opening => {
+    wrapper.unmount();
+    wrapper = mount(DtSplitButton, {
+      slots: {
+        default: () => 'Send',
+        dropdownList: ({ close }) => h(DtListItem, {
+          role: 'menuitem', navigationType: 'arrow-keys', onClick: close,
+        }, () => 'Send later'),
+      },
+      global: { plugins: [DtTooltipDirective, DtFocustrapDirective], stubs: { transition: true } },
+      attachTo: document.body,
+    });
+    const trigger = wrapper.find('[data-qa="dt-split-button-end"]');
+    const popover = wrapper.findComponent(DtPopover);
+    if (opening === 'click') await trigger.trigger('click');
+    else await trigger.trigger('keydown', { key: opening, code: opening });
+    expect(trigger.attributes('aria-expanded')).toBe('true');
+    await popover.vm.onEnterTransitionComplete();
+    await flushPromises();
+    expect(trigger.classes()).toContain('d-btn--active');
+    await trigger.trigger('keydown', { key: 'Escape', code: 'Escape' });
+    expect(trigger.attributes('aria-expanded')).toBe('false');
+    expect(trigger.classes()).toContain('d-btn--active');
+    await popover.vm.onLeaveTransitionComplete();
+    await flushPromises();
+    expect(trigger.classes()).not.toContain('d-btn--active');
   });
 
   describe('Presentation Tests', () => {

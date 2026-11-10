@@ -357,6 +357,8 @@ In addition to the [Button component's](button.md#accessibility) accessibility d
 - An icon-only primary action and the secondary action require a [Tooltip](tooltip.md) to indicate its function.
 - While the secondary action is focused, pressing `Enter` or `Space` triggers its action, displaying a [Dropdown component](dropdown.md) or [Popover component](popover.md).
 
+For `dropdownList` content, use `role="menuitem"` for actions. Persistent mutually exclusive menu choices explicitly use `menuitemradio` with consumer-owned `selected` state. See [ListItem role guidance](list-item.md#roles-and-selection); a checkmark alone does not imply a radio role.
+
 ## Vue API
 
 <component-vue-api component-name="splitButton" />

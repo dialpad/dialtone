@@ -5,6 +5,7 @@
     :content-width="contentWidth"
     :content-mode="contentMode"
     :open="open"
+    :forward-anchor-arrow-keys="forwardAnchorArrowKeys"
     :placement="placement"
     :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
     :fallback-placements="fallbackPlacements"
@@ -21,6 +22,8 @@
     :transition="transition"
     :footer-class="footerClass"
     v-on="dropdownListeners"
+    @pointerdown.capture="clearPendingArrowOpening"
+    @click.capture="onAnchorClick"
   >
     <template #anchor="{ attrs }">
       <!--
@@ -85,7 +88,7 @@ export default {
       indexKey: 'highlightIndex',
       idKey: 'highlightId',
       listElementKey: 'getListElement',
-      listItemRole: 'menuitem',
+      listItemRole: ['menuitem', 'menuitemradio'],
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -112,6 +115,15 @@ export default {
     open: {
       type: [Boolean, null],
       default: null,
+    },
+
+    /**
+     * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
+     * Closed arrows retain their default action and propagation for consumer handling.
+     */
+    forwardAnchorArrowKeys: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -323,6 +335,13 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
+
+    /**
+     * Synchronously emitted when logical visibility changes, before transition completion.
+     * @event open-change
+     * @type {Boolean}
+     */
+    'open-change',
   ],
 
   data () {
@@ -331,13 +350,21 @@ export default {
       DROPDOWN_PADDING_CLASSES,
       EVENT_KEYNAMES,
       openedWithKeyboard: false,
+      pendingArrowOpening: null,
       isOpen: null,
+      isLogicallyOpen: false,
     };
   },
 
   computed: {
     dropdownListeners () {
       return {
+
+        'open-change': isOpen => {
+          this.isLogicallyOpen = isOpen;
+          this.pendingArrowOpening = null;
+          this.$emit('open-change', isOpen);
+        },
 
         'update:open': value => {
           this.$emit('update:open', value);
@@ -349,6 +376,19 @@ export default {
 
         keydown: event => {
           const eventCode = event.code;
+          const isArrow = [EVENT_KEYNAMES.up, EVENT_KEYNAMES.arrowup,
+            EVENT_KEYNAMES.down, EVENT_KEYNAMES.arrowdown].includes(eventCode);
+
+          if (isArrow && this.forwardAnchorArrowKeys && this.open !== null && !this.isLogicallyOpen) {
+            const pending = Symbol('arrow-opening');
+            this.pendingArrowOpening = pending;
+            this.openedWithKeyboard = true;
+            this.$emit('keydown', event);
+            this.$nextTick(() => {
+              if (this.pendingArrowOpening === pending && !this.isLogicallyOpen) this.clearPendingArrowOpening();
+            });
+            return;
+          }
 
           switch (eventCode) {
             case EVENT_KEYNAMES.up:
@@ -399,7 +439,8 @@ export default {
     },
 
     activeItemEl () {
-      return this.getListElement().querySelector('#' + this.highlightId);
+      if (!this.highlightId) return null;
+      return this._getListItemNodes()?.find(item => item.id === this.highlightId) || null;
     },
 
     isArrowKeyNav () {
@@ -421,10 +462,23 @@ export default {
   },
 
   methods: {
-    onMouseHighlight (e) {
-      const liElement = e.target.closest('li');
+    clearPendingArrowOpening () {
+      if (!this.pendingArrowOpening) return;
+      this.pendingArrowOpening = null;
+      this.openedWithKeyboard = false;
+    },
 
-      if (liElement && liElement.role && this.highlightId !== liElement.id) {
+    onAnchorClick (event) {
+      if (event.detail > 0) this.clearPendingArrowOpening();
+    },
+
+    onMouseHighlight (e) {
+      const items = this._getListItemNodes();
+      let liElement = e.target;
+      while (liElement && !items?.includes(liElement)) liElement = liElement.parentElement;
+
+      if (liElement && liElement.id &&
+        this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
         liElement.focus();
       }

@@ -1,3 +1,5 @@
+import { h } from 'vue';
+import keyboardNavigation from './keyboard_list_navigation';
 import { mount } from '@vue/test-utils';
 import KeyboardListNavigation, {
   KEYBOARD_LIST_NAVIGATION_TESTER_ITEMS,
@@ -146,5 +148,67 @@ describe('Keyboard Navigation Mixin Tests', () => {
         expect(wrapper.vm.highlightIndex).toBe(0);
       });
     });
+  });
+});
+
+
+describe('Keyboard navigation role collections', () => {
+  let wrapper;
+  const mountList = listItemRole => {
+    wrapper = mount({
+      mixins: [keyboardNavigation({
+        listItemRole, listElementKey: 'getListElement', activeItemKey: 'activeItemEl',
+        focusOnKeyboardNavigation: true, scrollToOnHighlight: false,
+      })],
+      computed: {
+        activeItemEl () {
+          return Array.from(this.$el.querySelectorAll('[id]')).find(item => item.id === this.highlightId);
+        },
+      },
+      methods: { getListElement () { return this.$el; } },
+      render () {
+        return h('ul', {
+          onKeydown: event => {
+            if (event.key === 'ArrowDown') this.onDownKey();
+            if (event.key === 'ArrowUp') this.onUpKey();
+            if (event.key === 'Home') this.onHomeKey();
+            if (event.key === 'End') this.onEndKey();
+          },
+        }, [
+          h('li', { role: 'presentation', id: 'heading' }, 'Heading'),
+          h('li', { role: 'menuitem', id: 'action:id', tabindex: -1 }, 'Action'),
+          h('li', { role: 'menuitemradio', id: 'radio [one]', tabindex: -1 }, 'Radio'),
+          h('li', { role: 'menuitemradio', tabindex: -1 }, 'Missing ID'),
+          h('li', { role: 'option', id: 'option', tabindex: -1 }, 'Option'),
+          h('button', { id: 'sr-only-close-button' }, 'Close'),
+        ]);
+      },
+    }, { attachTo: document.body });
+  };
+  afterEach(() => wrapper.unmount());
+
+  it('navigates a role array and special IDs while retaining the close control', async () => {
+    mountList(['menuitem', 'menuitemradio']);
+    await wrapper.trigger('keydown', { key: 'ArrowDown' });
+    expect(document.activeElement.id).toBe('action:id');
+    await wrapper.trigger('keydown', { key: 'ArrowDown' });
+    expect(document.activeElement.id).toBe('radio [one]');
+    await wrapper.trigger('keydown', { key: 'ArrowDown' });
+    expect(document.activeElement.id).toBe('sr-only-close-button');
+    wrapper.vm.setHighlightId('radio [one]');
+    await wrapper.trigger('keydown', { key: 'ArrowUp' });
+    expect(document.activeElement.id).toBe('action:id');
+    await wrapper.trigger('keydown', { key: 'End' });
+    expect(document.activeElement.id).toBe('sr-only-close-button');
+    await wrapper.trigger('keydown', { key: 'Home' });
+    expect(document.activeElement.id).toBe('action:id');
+  });
+
+  it('preserves default option navigation', async () => {
+    mountList(undefined);
+    await wrapper.trigger('keydown', { key: 'ArrowDown' });
+    expect(document.activeElement.id).toBe('option');
+    await wrapper.trigger('keydown', { key: 'ArrowDown' });
+    expect(document.activeElement.id).toBe('sr-only-close-button');
   });
 });

@@ -11,7 +11,7 @@ combinator: DtDropdown
 
 ## Usage
 
-Use the Dropdown component when you have a list of links or actions that can be performed. Use the [Select Menu](/components/select-menu.md) component to allow the users to choose one option from the list.
+Use Dropdown for menu actions or persistent menu choices. Use `role="menuitem"` for actions and explicitly choose `role="menuitemradio"` for mutually exclusive persistent choices. Use a native select or [Combobox](/components/combobox.md) for form-value selection; listbox choices keep `role="option"`.
 
 - The dropdown component provides accessibility controls when using with List item component.
 - The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
@@ -158,6 +158,50 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 <dt-dropdown content-mode="light">...</dt-dropdown>
 ```
 
+## Persistent Menu Choices
+
+The parent owns the committed sort order. Each radio row uses `selected` for its checkmark and `aria-checked`; arrows and typeahead move focus without changing that state. ListItemGroup supplies an optional heading inside the menu. Ordinary action rows can share the menu and keep `menuitem`.
+
+```vue demo
+<dt-dropdown>
+  <template #anchor="anchorAttrs">
+    <dt-button
+      :aria-expanded="anchorAttrs['aria-expanded']"
+      :aria-controls="anchorAttrs['aria-controls']"
+      :aria-haspopup="anchorAttrs['aria-haspopup']"
+    >
+      Sort order
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item-group heading="Sort order">
+      <dt-list-item
+        role="menuitemradio"
+        navigation-type="arrow-keys"
+        :selected="newestFirst"
+        @click="newestFirst = true; close()"
+      >
+        Newest first
+      </dt-list-item>
+      <dt-list-item
+        role="menuitemradio"
+        navigation-type="arrow-keys"
+        :selected="!newestFirst"
+        @click="newestFirst = false; close()"
+      >
+        Oldest first
+      </dt-list-item>
+    </dt-list-item-group>
+  </template>
+</dt-dropdown>
+```
+
+## Logical Visibility and Controlled Arrow Keys
+
+`open-change(boolean)` fires synchronously when logical visibility actually changes. `opened` and `update:open` retain their completed-transition timing; `open=null` emits no `update:open`. Use the logical event when work must happen before the close animation finishes. A canceled transition emits no stale completion notification.
+
+With a boolean `open` prop, anchor arrows remain silent by default. Set `forwardAnchorArrowKeys` to forward ArrowUp/ArrowDown through `keydown` without automatically toggling. On a closed opted-in Dropdown, the consumer decides whether to open and whether to prevent the key's default action; the event continues to ancestor listeners. If the consumer opens in that flush, the menu starts with keyboard focus on its first navigable row. Ignored arrows do not make a later pointer opening behave like a keyboard opening. Once open, normal Dropdown navigation and key prevention apply.
+
 ## Accessibility
 
 A screen reader visible only close button is added by default.
@@ -174,8 +218,13 @@ A dropdown menu has well defined standard [keyboard interactions](https://www.w3
 
 Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the **highlight** selection changes, a highlight event is emitted with the index of the currently highlighted item. `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
 
+The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. A hand-authored `menuitemradio` must have a nonempty unique ID to participate in keyboard or mouse navigation; id-less radio rows are excluded. Headings and separators do not participate.
+
 <script setup>
 import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';
+import { ref } from 'vue';
+
+const newestFirst = ref(true);
 
 const items = [
   { name: 'Menu item 1', id: 1 },

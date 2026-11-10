@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDropdown from './Dropdown.vue';
 
 import DtDropdownDefaultTemplate from './DropdownDefault.story.vue';
+import DtDropdownMenuRolesTemplate from './DropdownMenuRoles.story.vue';
 import DtDropdownVariantsTemplate from './DropdownVariants.story.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../ListItem/ListItemConstants';
 import { POPOVER_CONTENT_WIDTHS } from '../Popover';
@@ -207,4 +208,17 @@ export const Variants = {
       template: `<dt-stack direction="row" justify="center" align="center"><story /></dt-stack>`,
     }),
   ],
+};
+
+
+export const MenuRoles = {
+  render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtDropdownMenuRolesTemplate),
+  args: { onOpenChange: action('open-change') },
+  parameters: {
+    docs: {
+      description: {
+        story: 'ListItem defaults to ordinary list content. Menu actions explicitly use menuitem; persistent mutually exclusive menu choices explicitly use menuitemradio and consumer-owned selected state. Highlight moves focus without changing checked state. Listbox choices remain option.',
+      },
+    },
+  },
 };
