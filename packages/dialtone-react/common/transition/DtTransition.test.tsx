@@ -89,6 +89,39 @@ describe('DtTransition', () => {
     expect(ref.current).toBe(screen.getByTestId('x'));
   });
 
+  it('keeps a child ref\'s React 19 cleanup: it runs on unmount, and the ref is never called with null', () => {
+    const cleanup = vi.fn();
+    const nodes: (HTMLDivElement | null)[] = [];
+    const ref = (node: HTMLDivElement | null) => { nodes.push(node); return cleanup; };
+    render(<DtTransition show><div ref={ref} /></DtTransition>).unmount();
+    expect(cleanup).toHaveBeenCalledTimes(1);
+    expect(nodes).toEqual([expect.any(HTMLDivElement)]);
+  });
+
+  it('moves to a new child ref on re-render: the old ref\'s cleanup runs once, then the new ref attaches', () => {
+    const first = vi.fn();
+    const second = vi.fn();
+    const nodes: (HTMLDivElement | null)[] = [];
+    const refA = (node: HTMLDivElement | null) => { nodes.push(node); return first; };
+    const refB = (node: HTMLDivElement | null) => { nodes.push(node); return second; };
+    const { rerender, unmount } = render(<DtTransition show><div ref={refA} /></DtTransition>);
+    rerender(<DtTransition show><div ref={refB} /></DtTransition>);
+    expect(first).toHaveBeenCalledTimes(1);
+    expect(second).not.toHaveBeenCalled();
+    unmount();
+    expect(second).toHaveBeenCalledTimes(1);
+    expect(nodes).toEqual([expect.any(HTMLDivElement), expect.any(HTMLDivElement)]);
+  });
+
+  it('resets a child ref without a cleanup on unmount', () => {
+    const object = createRef<HTMLDivElement>();
+    render(<DtTransition show><div ref={object} /></DtTransition>).unmount();
+    expect(object.current).toBeNull();
+    const nodes: (HTMLDivElement | null)[] = [];
+    render(<DtTransition show><div ref={(node) => { nodes.push(node); }} /></DtTransition>).unmount();
+    expect(nodes).toEqual([expect.any(HTMLDivElement), null]);
+  });
+
   it('restores the child\'s own display when shown again', async () => {
     const ui = (show: boolean) => (
       <DtTransition show={show} name="fade"><div data-qa="x" style={{ display: 'flex' }} /></DtTransition>

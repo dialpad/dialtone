@@ -341,12 +341,23 @@ function transitionHooks (options: Options, isMounted: boolean) {
   };
 }
 
+// React 19 calls a ref callback's returned cleanup on detach instead of calling it with null, so the merged callback
+// returns one: each ref gets its own cleanup if it returned one, and null otherwise, as React would do itself.
 function mergeRefs<T> (...refs: (Ref<T> | undefined)[]) {
   return (node: T | null) => {
-    for (const ref of refs) {
-      if (typeof ref === 'function') ref(node);
-      else if (ref) ref.current = node;
-    }
+    const cleanups = refs.map((ref) => {
+      if (typeof ref === 'function') return ref(node);
+      if (ref) ref.current = node;
+      return undefined;
+    });
+    return () => {
+      refs.forEach((ref, i) => {
+        const cleanup = cleanups[i];
+        if (typeof cleanup === 'function') cleanup();
+        else if (typeof ref === 'function') ref(null);
+        else if (ref) ref.current = null;
+      });
+    };
   };
 }
 
