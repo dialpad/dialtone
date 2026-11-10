@@ -10,7 +10,7 @@ Run these from the repo root. Each builds what it needs first (dialtone-icons, d
 | --- | --- |
 | `pnpm nx run dialtone-react:lint` | ESLint (`eslint.config.js`): typescript-eslint and the Rules of Hooks for `.ts`/`.tsx`, the repo's style rules for everything. Commits also lint their staged files (husky, `.lintstagedrc.cjs`) unless husky is skipped; the gate's Lint row and CI's `check` job catch lint errors either way. |
 | `pnpm nx run dialtone-react:typecheck` | `tsc` over the whole package. |
-| `pnpm nx run dialtone-react:test` | Vitest, every `*.test.ts(x)`. |
+| `pnpm nx run dialtone-react:test` | Vitest, every `*.test.ts(x)` in `common/`, `components/`, `icons/` and `tests/`. DOM parity's tests (`parity/react/dom.test.tsx`, `parity/vue/goldens.test.js`) run in the gate, each with its own Vitest config, and `parity/vue/transition-traces.test.js` runs only by hand, to re-record DtTransition's traces. |
 | `pnpm nx run dialtone-react:build` | The library: ES modules and type declarations in `dist/`. Entry points: `@dialpad/dialtone-react`, `@dialpad/dialtone-react/components/<Name>` and `@dialpad/dialtone-react/icons`. React, React DOM and every runtime dependency stay external. |
 | `pnpm nx run dialtone-react:gate -- <unit>` | The parity gate for one unit (e.g. `-- validation-messages`). |
 | `node --test 'packages/dialtone-react/parity/*.test.mjs'` | The harness's own tests: which units CI gates for a change (`parity/changed-units.mjs`), which Vue tests a unit has (`parity/vue-sources.mjs`), and how DOM parity serializes select options (`parity/normalize.mjs`). |
