@@ -1090,6 +1090,7 @@ export default {
       if (this.initialFocusElement === 'first') {
         await this.focusFirstElementIfNeeded(this.$refs.popover__content, generation);
       }
+      if (!this.isCurrentVisibility(generation, true)) return;
       if (this.initialFocusElement instanceof HTMLElement) {
         this.initialFocusElement.focus();
       }

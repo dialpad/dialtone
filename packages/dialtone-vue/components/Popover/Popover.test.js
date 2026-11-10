@@ -740,6 +740,30 @@ describe('DtPopover Tests', () => {
       expect(wrapper.emitted('update:open')).toBeUndefined();
     });
 
+    it('keeps consumer focus when closing and replacing the initial target during enter', async () => {
+      wrapper.unmount();
+      mockProps = { modal: false };
+      mockSlots.content = () => [
+        h('button', {
+          'data-qa': 'inside',
+          onFocus: () => {
+            wrapper.setProps({
+              open: false,
+              initialFocusElement: popoverWindow.find('[data-qa="replacement-target"]').element,
+            });
+            button.element.focus();
+          },
+        }, 'First action'),
+        h('button', { 'data-qa': 'replacement-target' }, 'Next opening target'),
+      ];
+      updateWrapper();
+      await wrapper.setProps({ open: true });
+      await completeTransition('enter');
+      expect(document.activeElement).toBe(button.element);
+      expect(button.attributes('aria-expanded')).toBe('false');
+      expect(wrapper.emitted('opened')).toBeUndefined();
+    });
+
     it('stops stale enter effects when a focus listener closes the popover', async () => {
       await wrapper.setProps({ initialFocusElement: 'dialog' });
       await wrapper.setProps({ open: true });
