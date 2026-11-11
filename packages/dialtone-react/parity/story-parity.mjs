@@ -122,19 +122,20 @@ const comparable = key => (isEvent(key) ? key.toLowerCase() : key);
 
 /**
  * Compares the unit's stories. Returns { status: 'ok' | 'bad' | 'na', summary, detail }.
- *   vueDir, reactDir: the unit's directories; name: its PascalCase name; pkg: packages/dialtone-react.
+ *   vueDir, reactDir: the unit's directories (vueDir is null for a directive, mixin or composable, which has no
+ *   component directory); name: its PascalCase name; pkg: packages/dialtone-react.
  *   vueRoot, vuePaths: dialtone-vue, and all the unit's Vue sources relative to it (vue-sources.mjs).
  *   standIns: false skips the stand-in check (CI on pushes to dialtone-react).
  */
 export function storyParity ({ vueDir, reactDir, name, pkg, vueRoot, vuePaths, standIns = true }) {
   const storiesIn = dir => (fs.existsSync(dir) && fs.statSync(dir).isDirectory()
     ? fs.readdirSync(dir).filter(f => f.endsWith('.stories.js')).sort() : []);
-  const vueFiles = storiesIn(vueDir);
+  const vueFiles = vueDir ? storiesIn(vueDir) : [];
   const reactFiles = fs.readdirSync(reactDir).filter(f => /\.stories\.tsx?$/.test(f)).sort();
   // Only the component directory's stories are compared. A directive's stories would need React files of the same
   // name next to the component's, and Vue's tooltip has two tooltip.stories.js (the component's and the directive's).
   // The row names them instead, so it doesn't claim Vue has none.
-  const home = path.relative(vueRoot, vueDir);
+  const home = vueDir && path.relative(vueRoot, vueDir);
   const unchecked = vuePaths.filter(p => p !== home)
     .flatMap(p => storiesIn(path.join(vueRoot, p)).map(f => `${p}/${f}`));
   const note = unchecked.length ? `${unchecked.join(', ')} not checked yet` : '';

@@ -9,7 +9,8 @@ import path from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { changedUnits } from './changed-units.mjs';
-import { testFiles, vueSources } from './vue-sources.mjs';
+import { storyParity } from './story-parity.mjs';
+import { commonUnit, reactDir, testFiles, unitsOfPath, vueSources } from './vue-sources.mjs';
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'changed-units-'));
 after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -68,17 +69,22 @@ const UNITS = {
   Button: 'button',
   Skeleton: 'skeleton',
   ModeIsland: 'mode-island',
-  MixinInput: 'mixin-input',
-  MixinKeyboardListNavigation: 'mixin-keyboard-list-navigation',
-  DirectiveFocustrap: 'directive-focustrap',
-  ComposableUseIndicatorAnimation: 'composable-use-indicator-animation',
   Chip: 'chip',
 };
+// The directive, mixin and composable units: in common/, under their id without the prefix.
+const COMMON_UNITS = {
+  input: 'mixin-input',
+  'keyboard-list-navigation': 'mixin-keyboard-list-navigation',
+  focustrap: 'directive-focustrap',
+  'use-indicator-animation': 'composable-use-indicator-animation',
+};
 // Popover holds Tooltip's helpers and has no index.ts, so it isn't a unit; Checkbox and TextList aren't ported.
-// Chip renders Text on both sides; Text's story demos a Tooltip.
+// common/link is a foundation, no unit. Chip renders Text on both sides; Text's story demos a Tooltip.
 const pkg = tree(path.join(root, 'dialtone-react'), [
   ...Object.keys(UNITS).filter(name => !['Text', 'Tooltip', 'Chip'].includes(name))
     .map(name => `components/${name}/index.ts`),
+  ...Object.keys(COMMON_UNITS).map(name => `common/${name}/index.ts`),
+  'common/link/index.ts',
   ['components/Text/index.ts', "export * from './Text';"],
   'components/Text/Text.tsx',
   ['components/Text/Text.stories.tsx', "import { DtTooltip } from '../Tooltip';"],
@@ -89,7 +95,7 @@ const pkg = tree(path.join(root, 'dialtone-react'), [
   ['components/Chip/index.ts', "export * from './Chip';"],
   ['components/Chip/Chip.tsx', "import { DtText } from '../Text';\nconst lazy = () => import('../Tooltip');"],
 ]);
-const ALL = Object.values(UNITS).sort();
+const ALL = [...Object.values(UNITS), ...Object.values(COMMON_UNITS)].sort();
 // Combinator next to pkg (changedUnits' default variantsDir): its registry, three variants files, and a helper
 // one of them imports.
 tree(path.join(root, 'combinator/src'), [
@@ -106,14 +112,23 @@ const unitsFor = (...files) => changedUnits(files, { pkg, vueRoot });
 const expect = (files, units) => assert.deepEqual(unitsFor(...files), { units, errors: [] });
 
 describe('vueSources', () => {
-  test('a component unit is its directory', () => {
+  test('a component unit is its directory, and its .vue the file', () => {
     assert.deepEqual(vueSources(vueRoot, 'text'), {
       dir: path.join(vueRoot, 'components/Text'), paths: ['components/Text'],
+      file: path.join(vueRoot, 'components/Text/Text.vue'), own: [],
     });
   });
 
   test('a component in another unit\'s directory is found there', () => {
     assert.deepEqual(vueSources(vueRoot, 'tab-group').paths, ['components/Tab']);
+    assert.equal(vueSources(vueRoot, 'tab-group').file, path.join(vueRoot, 'components/Tab/TabGroup.vue'));
+  });
+
+  test('a component whose .vue is gone, though the rest of its directory isn\'t, has no file', () => {
+    const gone = tree(path.join(root, 'vue-without-text'), ['components/Text/index.js', 'components/Text/text.stories.js']);
+    assert.deepEqual(vueSources(gone, 'text'), {
+      dir: path.join(gone, 'components/Text'), paths: ['components/Text'], file: null, own: [],
+    });
   });
 
   test('folded-in pieces and owned files join the unit', () => {
@@ -133,11 +148,60 @@ describe('vueSources', () => {
       ['common/composables/useIndicatorAnimation.js']);
   });
 
-  test('a unit with no .vue keeps components/<Name>/ as its directory, which may not exist', () => {
-    assert.equal(vueSources(vueRoot, 'mixin-input').dir, path.join(vueRoot, 'components/MixinInput'));
+  test('a directive, mixin or composable has no component directory; a component keeps one that may not exist', () => {
+    assert.equal(vueSources(vueRoot, 'mixin-input').dir, null);
+    assert.equal(vueSources(vueRoot, 'mixin-input').file, null);
     assert.deepEqual(vueSources(vueRoot, 'nothing-here'), {
-      dir: path.join(vueRoot, 'components/NothingHere'), paths: [],
+      dir: path.join(vueRoot, 'components/NothingHere'), paths: [], file: null, own: [],
     });
+  });
+
+  test('a directive, mixin or composable is never a component, even one named like it, stories included', () => {
+    const twin = tree(path.join(root, 'vue-twin'), [
+      'components/MixinInput/MixinInput.vue',
+      'components/MixinInput/MixinInput.test.js',
+      'components/MixinInput/MixinInput.stories.js',
+      'common/mixins/input.js',
+    ]);
+    const sources = vueSources(twin, 'mixin-input');
+    assert.deepEqual(sources, {
+      dir: null, paths: ['common/mixins/input.js'], file: null, own: ['common/mixins/input.js'],
+    });
+    assert.deepEqual(unitsOfPath('components/MixinInput/MixinInput.vue'), []);
+    const reactDir = tree(path.join(root, 'react-twin/common/input'), ['index.ts']);
+    assert.deepEqual(
+      storyParity({ vueDir: sources.dir, reactDir, name: 'MixinInput', pkg, vueRoot: twin, vuePaths: sources.paths }),
+      { status: 'na', summary: 'no Vue stories' });
+  });
+
+  test('a unit\'s own files are apart from what\'s folded into it, which may outlive them', () => {
+    assert.deepEqual(vueSources(vueRoot, 'mixin-keyboard-list-navigation').own,
+      ['common/mixins/keyboard_list_navigation.js']);
+    const leftover = tree(path.join(root, 'vue-leftover'), ['common/mixins/dom.js']);
+    assert.deepEqual(vueSources(leftover, 'mixin-keyboard-list-navigation'), {
+      dir: null, paths: ['common/mixins/dom.js'], file: null, own: [],
+    });
+  });
+
+  test('a folded-in directive left without the directive itself still brings its tests', () => {
+    const orphaned = tree(path.join(root, 'vue-folded-test'), [
+      'components/Tooltip/Tooltip.vue',
+      'directives/tooltip_directive/tooltip.test.js',
+    ]);
+    const { paths } = vueSources(orphaned, 'tooltip');
+    assert.deepEqual(paths, ['components/Tooltip', 'directives/tooltip_directive']);
+    assert.deepEqual(testFiles(orphaned, paths), ['directives/tooltip_directive/tooltip.test.js']);
+  });
+
+  test('a directive\'s directory counts only while it holds the directive itself', () => {
+    const hollow = tree(path.join(root, 'vue-hollow'), [
+      'directives/focustrap_directive/index.js',
+      'directives/focustrap_directive/focustrap.test.js',
+      'directives/focustrap_directive/focustrap.stories.js',
+    ]);
+    assert.deepEqual(vueSources(hollow, 'directive-focustrap').own, []);
+    assert.deepEqual(vueSources(hollow, 'directive-focustrap').paths, []);
+    assert.equal(commonUnit(hollow, 'focustrap'), null);
   });
 
   test('a unit\'s Vue tests are the test files in its sources, nested and folded-in ones too', () => {
@@ -149,6 +213,27 @@ describe('vueSources', () => {
     assert.deepEqual(tests('directive-focustrap'), ['directives/focustrap_directive/focustrap.test.js']);
     assert.deepEqual(tests('mixin-input'), ['common/mixins/input.test.js']);
     assert.deepEqual(tests('text'), []);
+  });
+
+  test('a unit lives in components/<Name>/, or in common/ under its id without the prefix', () => {
+    for (const [unit, dir] of [
+      ['text', 'components/Text'],
+      ['tab-group', 'components/TabGroup'],
+      ['mixin-input', 'common/input'],
+      ['mixin-keyboard-list-navigation', 'common/keyboard-list-navigation'],
+      ['directive-focustrap', 'common/focustrap'],
+      ['composable-use-indicator-animation', 'common/use-indicator-animation'],
+    ]) assert.equal(reactDir(unit), dir, unit);
+  });
+
+  test('a common/ directory is the directive, mixin or composable of its name, unless that one is folded in', () => {
+    assert.equal(commonUnit(vueRoot, 'input'), 'mixin-input');
+    assert.equal(commonUnit(vueRoot, 'focustrap'), 'directive-focustrap');
+    assert.equal(commonUnit(vueRoot, 'use-indicator-animation'), 'composable-use-indicator-animation');
+    // directive-mode is part of mode-island, so common/mode is the mode mixin's.
+    assert.equal(commonUnit(vueRoot, 'mode'), 'mixin-mode');
+    // Folded into another unit, or a foundation no Vue directive, mixin or composable names.
+    for (const name of ['tooltip', 'dom', 'skeleton', 'link', 'utils']) assert.equal(commonUnit(vueRoot, name), null, name);
   });
 });
 
@@ -217,7 +302,7 @@ describe('changedUnits', () => {
   });
 
   test('a deleted Vue path, placed by its shape', () => {
-    // None of these exist in this tree.
+    // None of these exist in this tree. Nor do the other common/ units' Vue files, so those are errors here.
     const bare = tree(path.join(root, 'bare-vue'), ['components/Tooltip/Tooltip.vue']);
     const unitsIn = (...files) => changedUnits(files.map(f => `packages/dialtone-vue/${f}`), { pkg, vueRoot: bare });
     for (const [file, units] of [
@@ -231,13 +316,18 @@ describe('changedUnits', () => {
       ['common/mixins/dom.js', ['mixin-keyboard-list-navigation']],
       ['common/composables/useIndicatorAnimation.js', ['composable-use-indicator-animation']],
       ['common/mixins/index.js', []],
-    ]) assert.deepEqual(unitsIn(file), { units, errors: [] }, file);
+    ]) {
+      const { units: found, errors } = unitsIn(file);
+      assert.deepEqual(found, units, file);
+      assert.ok(errors.every(e => / matches no foundation /.test(e)), `${file}: ${errors.join('; ')}`);
+    }
   });
 
   test('a shared file gates every ported unit', () => {
     for (const file of [
       'packages/dialtone-react/parity/gate.mjs',
       'packages/dialtone-react/common/localization/index.ts',
+      'packages/dialtone-react/common/input/useInput.ts',
       'packages/dialtone-react/tests/setup.ts',
       'packages/dialtone-react/scripts/build-index.mjs',
       'packages/dialtone-react/package.json',
@@ -348,6 +438,52 @@ describe('changedUnits', () => {
     assert.equal(errors.length, 2);
     assert.match(errors[0], /^components\/DTThing has no unit id/);
     assert.match(errors[1], /^twin: Twin\.vue is in more than one directory: A, B$/);
+  });
+
+  test('a common/ directory that\'s no foundation and no unit, or a misplaced unit, is an error', () => {
+    const dir = path.join(root, 'layout');
+    const react = tree(path.join(dir, 'dialtone-react'), [
+      'components/MixinInput/index.ts',
+      'common/input/index.ts',
+      'common/focus/index.ts',
+      'common/input_group/index.ts',
+      'common/link/index.ts',
+      'common/localization/index.ts',
+      'common/orphan/index.ts',
+      'common/useIndicatorAnimation/index.ts',
+      'common/hooks/useThing.ts',
+    ]);
+    const vue = tree(path.join(dir, 'dialtone-vue'), [
+      'common/mixins/input.js',
+      'common/mixins/input_group.js',
+      'common/mixins/focus.js',
+      'directives/focus_directive/focus.js',
+      'common/mixins/link.js',
+      'common/composables/useIndicatorAnimation.js',
+    ]);
+    assert.deepEqual(changedUnits(['pnpm-lock.yaml'], { pkg: react, vueRoot: vue }), {
+      units: ['mixin-input'],
+      errors: [
+        'components/MixinInput: mixin-input belongs in common/input',
+        'common/focus could be directive-focus or mixin-focus',
+        'common/input_group: mixin-input-group belongs in common/input-group',
+        'common/link is a foundation, so mixin-link can\'t live there',
+        'common/orphan matches no foundation (link, localization, transition) and no Vue directive, mixin or composable',
+        'common/useIndicatorAnimation: composable-use-indicator-animation belongs in common/use-indicator-animation',
+      ],
+    });
+  });
+
+  test('a unit whose Vue files a change deleted is still one; a later change reports it', () => {
+    const dir = path.join(root, 'orphaned');
+    const react = tree(path.join(dir, 'dialtone-react'), ['common/input/index.ts']);
+    const vue = tree(path.join(dir, 'dialtone-vue'), ['components/Text/Text.vue']);
+    assert.deepEqual(changedUnits(['packages/dialtone-vue/common/mixins/input.js'], { pkg: react, vueRoot: vue }),
+      { units: ['mixin-input'], errors: [] });
+    assert.deepEqual(changedUnits(['packages/dialtone-react/common/input/index.ts'], { pkg: react, vueRoot: vue }), {
+      units: [],
+      errors: ['common/input matches no foundation (link, localization, transition) and no Vue directive, mixin or composable'],
+    });
   });
 });
 

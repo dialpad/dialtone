@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // The units a change touches, for CI's gate job: reads repo-relative paths (one per line) on stdin and prints, one per
-// line, the id of every ported unit (components/<Name>/index.ts in this package) the change can break:
-//   - a React path in the unit's components/<Name>/;
+// line, the id of every ported unit (an index.ts in the unit's directory in this package: components/<Name>/, or
+// common/<name>/ for a directive, mixin or composable, vue-sources.mjs' reactDir) the change can break:
+//   - a React path in the unit's directory;
 //   - a Vue path among the unit's Vue sources (vue-sources.mjs, the gate's own lookup), which reach outside
 //     components/: directives/tooltip_directive is tooltip's, common/sr_only_close_button.vue is button's. A Vue
 //     change (a staging sync) can break parity as surely as a React one. A deleted path is placed by its shape
@@ -15,14 +16,15 @@
 //     under all of them, and so are the icons and emoji both sides render and dialtone-vue's test config and
 //     setup. dialtone-tokens gates no unit: no component, test or parity case reads it. The Storybook themes do,
 //     and the check job's typecheck catches a change to their types in the same run.
-// The id is the kebab form the gate takes, the inverse of cases.mjs' pascal() (ValidationMessages →
-// validation-messages).
+// The id is the one the gate takes: the kebab form of components/<Name>, the inverse of cases.mjs' pascal()
+// (ValidationMessages → validation-messages), or the directive, mixin or composable common/<name> is for
+// (common/input → mixin-input, commonUnit).
 //   git diff --no-renames --name-only <base> <head> | node packages/dialtone-react/parity/changed-units.mjs
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pascal } from './cases.mjs';
-import { containsPath, unitsOfPath, vueSources } from './vue-sources.mjs';
+import { commonUnit, containsPath, reactDir, unitsOfPath, vueSources } from './vue-sources.mjs';
 
 const REACT = 'packages/dialtone-react/';
 const VUE = 'packages/dialtone-vue/';
@@ -43,6 +45,10 @@ const SHARED = new RegExp([
 ].join('|'));
 
 const kebab = name => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+// common/'s foundations: code the units share, which no directive, mixin or composable names. Every other common/
+// directory with an index.ts is a directive's, mixin's or composable's, so one whose Vue files are gone, or that's
+// misnamed, is an error rather than a unit nobody gates.
+const FOUNDATIONS = ['link', 'localization', 'transition'];
 
 // Static imports, re-exports, dynamic imports and requires. Only relative and dialtone-vue's `@/` specifiers resolve:
 // an npm dependency changes through pnpm-lock.yaml, and the workspace packages ports render from are SHARED by path.
@@ -112,20 +118,43 @@ function presetFiles (variantsDir) {
  */
 export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(pkg, '../combinator/src/variants') }) {
   const errors = [];
+  const paths = files.map(f => f.trim()).filter(Boolean);
+  const vuePaths = paths.filter(f => f.startsWith(VUE)).map(f => f.slice(VUE.length));
   // A unit has an index.ts; a directory without one holds helpers another unit needed (Tooltip's Popover/TippyUtils).
-  const ported = new Map();
+  // In common/, which unit a directory is comes from the Vue side, or from the paths of a change that deletes its Vue
+  // files; FOUNDATIONS are none.
+  const named = new Set(vuePaths.flatMap(unitsOfPath));
+  const ported = new Set();
   const componentsDir = path.join(pkg, 'components');
   for (const d of fs.existsSync(componentsDir) ? fs.readdirSync(componentsDir).sort() : []) {
     if (!fs.existsSync(path.join(componentsDir, d, 'index.ts'))) continue;
     const id = kebab(d);
-    if (pascal(id) === d) ported.set(d, id);
-    else errors.push(`components/${d} has no unit id that maps back to it (${id} → ${pascal(id)})`);
+    if (pascal(id) !== d) errors.push(`components/${d} has no unit id that maps back to it (${id} → ${pascal(id)})`);
+    else if (reactDir(id) !== `components/${d}`) errors.push(`components/${d}: ${id} belongs in ${reactDir(id)}`);
+    else ported.add(id);
   }
-  const paths = files.map(f => f.trim()).filter(Boolean);
-  if (paths.some(f => SHARED.test(f))) return { units: [...ported.values()].sort(), errors };
+  const commonDir = path.join(pkg, 'common');
+  for (const d of fs.existsSync(commonDir) ? fs.readdirSync(commonDir).sort() : []) {
+    if (!fs.existsSync(path.join(commonDir, d, 'index.ts'))) continue;
+    try {
+      const id = commonUnit(vueRoot, d, named);
+      if (FOUNDATIONS.includes(d)) {
+        if (id) errors.push(`common/${d} is a foundation, so ${id} can't live there`);
+      } else if (id) ported.add(id);
+      else {
+        // Named after the Vue file (common/useIndicatorAnimation, common/input_group), or no unit at all.
+        const kebabbed = kebab(d).replace(/_/g, '-');
+        const meant = kebabbed !== d && commonUnit(vueRoot, kebabbed, named);
+        errors.push(meant ? `common/${d}: ${meant} belongs in ${reactDir(meant)}`
+          : `common/${d} matches no foundation (${FOUNDATIONS.join(', ')}) and no Vue directive, mixin or composable`);
+      }
+    } catch (error) {
+      errors.push(error.message);
+    }
+  }
+  if (paths.some(f => SHARED.test(f))) return { units: [...ported].sort(), errors };
 
   const reactPaths = paths.filter(f => f.startsWith(REACT)).map(f => f.slice(REACT.length));
-  const vuePaths = paths.filter(f => f.startsWith(VUE)).map(f => f.slice(VUE.length));
   const combinatorPaths = paths.filter(f => f.startsWith(COMBINATOR)).map(f => f.slice(COMBINATOR.length));
   const combinatorRoot = path.resolve(variantsDir, '../..');
   const presets = combinatorPaths.length ? presetFiles(variantsDir) : new Map();
@@ -140,7 +169,7 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
     const reach = importClosure(root, seeds(), alias, cache);
     return changed.some(f => reach.has(f));
   };
-  for (const [name, id] of ported) {
+  for (const id of ported) {
     let sources = [];
     if (vuePaths.length) {
       try {
@@ -149,7 +178,8 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
         errors.push(`${id}: ${error.message}`);
       }
     }
-    const home = `components/${name}`;
+    const name = pascal(id);
+    const home = reactDir(id);
     if (reactPaths.some(f => containsPath([home], f))
       || presetsOf(name).some(f => combinatorPaths.includes(path.relative(combinatorRoot, f)))
       || reaches(combinatorPaths, combinatorRoot, () => presetsOf(name).filter(isFile), true, combinatorCache)
