@@ -121,12 +121,12 @@ combinator: DtBadge
       <td>Used to provide temporary feedback to specific items in the interface, like live activity, notifications, and unread counts. </td>
     </tr>
     <tr>
-      <th class="d-ta-left">Ai</th>
+      <th class="d-ta-left">AI</th>
       <td>
         <dt-badge type="ai" text="Label" kind="label"></dt-badge>
       </td>
       <td><abbr class="d-fc-muted d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
-      <td>To call out Dialpad Ai features.</td>
+      <td>To call out Dialpad AI features.</td>
     </tr>
   </tbody>
 </table>
@@ -330,10 +330,10 @@ Decorative badges label and classify items for quick recognition.
     <dt-badge text="Presenter" type="bulletin" />
   </dt-stack>
   <dt-stack direction="row" gap="100">
-    <dt-badge type="ai" text="Ai Notes" />
-    <dt-badge type="ai" text="Ai Suggestion" />
-    <dt-badge type="ai" text="Ai enabled" />
-    <dt-badge type="ai" text="Ai Transcript" />
+    <dt-badge type="ai" text="AI Notes" />
+    <dt-badge type="ai" text="AI Suggestion" />
+    <dt-badge type="ai" text="AI enabled" />
+    <dt-badge type="ai" text="AI Transcript" />
   </dt-stack>
 </dt-stack>
 ```

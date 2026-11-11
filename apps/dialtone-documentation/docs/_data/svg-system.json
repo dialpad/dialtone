@@ -21,13 +21,13 @@
     "name": "AI, glyph",
     "file": "ai-glyph",
     "vue": "IconAiGlyph",
-    "desc": "Communicates the use of Dialpad Ai."
+    "desc": "Communicates the use of Dialpad AI."
   },
   {
     "name": "AI, notes",
     "file": "ai-notes",
     "vue": "IconAiNotes",
-    "desc": "Communicates Dialpad Ai notes."
+    "desc": "Communicates Dialpad AI notes."
   },
   {
     "name": "Alarm",

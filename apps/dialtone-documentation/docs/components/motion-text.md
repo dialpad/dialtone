@@ -22,7 +22,7 @@ combinator: DtMotionText
 
 `DtMotionText` animates text word by word. Pass `text` and the effect plays as soon as the component mounts, using `gradient-in` unless you set `animation-mode`.
 
-Every effect except `shimmer` works on whole words, never individual characters. Words animate in reading order, each starting a moment after the one before it. `shimmer` instead sweeps one dimmed band left to right across the whole text, so it reads well even on a single word. The gradient effects place one continuous purple-to-orange gradient behind all of the words, so each word shows its own slice of the same sweep rather than a gradient of its own. The gradient is the `--dt-color-gradient-orange-red-magenta-purple` token, a horizontal span of the Ai gradient used by Ai surfaces and borders.
+Every effect except `shimmer` works on whole words, never individual characters. Words animate in reading order, each starting a moment after the one before it. `shimmer` instead sweeps one dimmed band left to right across the whole text, so it reads well even on a single word. The gradient effects place one continuous purple-to-orange gradient behind all of the words, so each word shows its own slice of the same sweep rather than a gradient of its own. The gradient is the `--dt-color-gradient-orange-red-magenta-purple` token, a horizontal span of the AI gradient used by AI surfaces and borders.
 
 ### Animation Modes
 
