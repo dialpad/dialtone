@@ -252,6 +252,27 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(document.activeElement.id).toBe('radio:one');
   });
 
+  it('preserves legacy highlight notifications when hovering a group heading', async () => {
+    const popover = mountMenu({}, undefined, () => [
+      h(DtListItemGroup, { id: 'sort-options', heading: 'Sort order' }, () => [
+        h(DtListItem, { id: 'newest', role: 'menuitemradio', selected: true,
+          navigationType: 'arrow-keys' }, () => 'Newest'),
+        h(DtListItem, { id: 'oldest', role: 'menuitemradio', navigationType: 'arrow-keys' }, () => 'Oldest'),
+        h(DtListItem, { id: 'refresh', role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Refresh'),
+      ]),
+    ]);
+    await flushPromises();
+    const list = popover.findComponent({ ref: 'content' });
+    await list.get('#oldest').trigger('mousemove');
+    expect(wrapper.emitted('highlight')).toEqual([[1]]);
+    await list.get('#sort-options-heading').trigger('mousemove');
+    await list.get('#sort-options-heading').trigger('mousemove');
+    expect(wrapper.emitted('highlight')).toEqual([[1], [-1]]);
+    expect(list.get('#oldest').classes()).not.toContain('d-list-item--highlighted');
+    expect(document.activeElement.id).toBe('oldest');
+    expect(list.get('#newest').attributes('aria-checked')).toBe('true');
+  });
+
   it('keeps the menu context through a neutral wrapper and an explicitly labelled group', async () => {
     const popover = mountMenu({}, undefined, () => [
       h(DtListItemGroup, { id: 'sort-group', heading: 'Sort order' }, () => [

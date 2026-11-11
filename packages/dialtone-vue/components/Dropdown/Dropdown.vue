@@ -473,11 +473,11 @@ export default {
 
     onMouseHighlight (e) {
       const liElement = this._getListItemNodes()?.find(item => item.contains(e.target));
+      const hoveredElement = liElement ?? e.target.closest('li');
 
-      if (liElement && liElement.id &&
-        this.highlightId !== liElement.id) {
-        this.setHighlightId(liElement.id);
-        liElement.focus();
+      if (hoveredElement?.role && hoveredElement.id && this.highlightId !== hoveredElement.id) {
+        this.setHighlightId(hoveredElement.id);
+        liElement?.focus();
       }
     },
 
