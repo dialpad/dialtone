@@ -126,8 +126,9 @@
           direction="row"
         >
           <dt-button
-            v-if="hasChanges"
+            v-if="hasChanges || (viewMode === 'grid' && info.metadata?.previewIdentity)"
             v-dt-tooltip="`Reset`"
+            aria-label="Reset"
             kind="muted"
             importance="clear"
             :size="200"
@@ -167,6 +168,7 @@
           :options="options"
           :library="library"
           :disabled-members="disabledMembers"
+          :reset-generation="_forceReset"
           @event="onComponentEvent"
         />
         <dtc-renderer-spec-sheet
@@ -175,6 +177,7 @@
           :documentation="documentation"
           :variants="variants"
           :library="library"
+          :reset-generation="info.metadata?.previewIdentity ? _forceReset : undefined"
           @select="onSelectVariant"
         />
         <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
@@ -548,7 +551,11 @@ const hasChanges = computed(() => {
     const members = referenceInfo[group];
     if (!members) continue;
     for (const member of members) {
-      if (options.value[group]?.[member.name] !== member.initialValue)
+      const value = options.value[group]?.[member.name];
+      const differs = info.value.metadata?.previewIdentity
+        ? JSON.stringify(value) !== JSON.stringify(member.initialValue)
+        : value !== member.initialValue;
+      if (differs)
         return true;
     }
   }

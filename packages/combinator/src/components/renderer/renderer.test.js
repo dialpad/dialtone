@@ -1,8 +1,122 @@
 import { flushPromises, mount } from '@vue/test-utils';
-import { nextTick } from 'vue';
-import { DtButton, DtDropdown, DtPagination } from '@dialpad/dialtone-vue';
+import { markRaw, nextTick } from 'vue';
+import { DtButton, DtDropdown, DtFilterPill, DtPagination } from '@dialpad/dialtone-vue';
+import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import { buildVariantState, computeDisabledMembers, writeUpdateEvent } from '@/src/lib/variant_state';
+import filterPillVariants from '@/src/variants/variants_filter_pill';
 import DtcRenderer from './renderer.vue';
 import DtcRendererSpecSheetCell from './renderer_spec_sheet_cell.vue';
+
+it.each([
+  { name: 'single', component: DtcRenderer },
+  { name: 'specsheet', component: DtcRendererSpecSheetCell },
+])('preserves an open controlled menu through selection, options and counts in $name', async ({ name, component }) => {
+  const state = buildVariantState(DtFilterPill,
+    allDocs.find(doc => doc.displayName === 'DtFilterPill'), filterPillVariants, 'controlled counts');
+  state.options.props.open = false;
+  const wrapper = mount(component, {
+    attachTo: document.body,
+    props: {
+      component: markRaw(DtFilterPill),
+      ...state,
+      library: {},
+      ...(name === 'single' ? {
+        settings: {},
+        disabledMembers: computeDisabledMembers(state.info, state.options.props, state.options.slots),
+        onEvent: (event, value) => writeUpdateEvent(state.options, event, value),
+      } : { name: 'controlled counts' }),
+    },
+    global: { directives: { 'dt-focustrap': {} } },
+  });
+  try {
+    await flushPromises();
+    const anchor = wrapper.get('[data-qa="dt-filter-pill__button"]');
+    await anchor.trigger('click');
+    await flushPromises();
+    const menuId = anchor.attributes('aria-controls');
+    const menu = document.getElementById(menuId);
+    const row = menu.querySelector('[role="menuitemradio"]');
+    row.focus();
+    state.options.props.selected = 'mentions';
+    state.options.props.options = state.options.props.options.map(option => ({
+      ...option, label: option.label + ' translated',
+    }));
+    state.options.slots.optionEnd = state.options.slots.optionEnd.replaceAll('12', '13');
+    await flushPromises();
+    expect(anchor.element.isConnected).toBe(true);
+    expect(document.getElementById(menuId)).toBe(menu);
+    expect(anchor.attributes('aria-expanded')).toBe('true');
+    expect(document.activeElement).toBe(row);
+    expect(row.textContent).toContain('All Messages translated');
+    menu.querySelectorAll('[role="menuitemradio"]')[1].click();
+    await flushPromises();
+    expect(state.options.props.selected).toBe('unread');
+    const events = wrapper.findComponent({ name: 'DtcRendererTarget' }).emitted('event');
+    expect(events.filter(([event]) => event === 'update:selected')).toEqual([['update:selected', 'unread']]);
+    expect(events.filter(([event]) => event === 'update:open')).toEqual([
+      ['update:open', true], ['update:open', false],
+    ]);
+  } finally {
+    wrapper.unmount();
+  }
+});
+
+it.each([
+  { name: 'single', component: DtcRenderer },
+  { name: 'specsheet', component: DtcRendererSpecSheetCell },
+])('updates actual Filter Pill legacy arrays and controlled options in $name', async ({ name, component }) => {
+  const warnings = vi.spyOn(console, 'warn');
+  const documentation = allDocs.find(doc => doc.displayName === 'DtFilterPill');
+  const state = buildVariantState(DtFilterPill, documentation, filterPillVariants, 'default');
+  const wrapper = mount(component, {
+    attachTo: document.body,
+    props: {
+      component: markRaw(DtFilterPill),
+      ...state,
+      library: {},
+      ...(name === 'single' ? {
+        settings: {},
+        disabledMembers: computeDisabledMembers(state.info, state.options.props, state.options.slots),
+      } : { name: 'default' }),
+    },
+    global: { directives: { 'dt-focustrap': {} } },
+  });
+  try {
+    await flushPromises();
+    const anchor = () => wrapper.get('[data-qa="dt-filter-pill__button"]');
+    expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('All');
+    expect(warnings.mock.calls.flat().join(' ')).not.toContain('modelValue is ignored');
+    const firstAnchor = anchor().element;
+    state.options.props.selected = 'unread';
+    state.options.props.options = [
+      { value: 'all', label: 'Everything', shortLabel: 'All' },
+      { value: 'unread', label: 'Unread messages', shortLabel: 'Unread' },
+    ];
+    await flushPromises();
+    expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('Unread');
+    expect(anchor().element).toBe(firstAnchor);
+
+    for (const preset of ['controlled multiple', 'legacy default', 'read only selection', 'default']) {
+      const next = buildVariantState(DtFilterPill, documentation, filterPillVariants, preset);
+      await wrapper.setProps({
+        ...next,
+        ...(name === 'single' ? {
+          disabledMembers: computeDisabledMembers(next.info, next.options.props, next.options.slots),
+        } : {}),
+      });
+      await flushPromises();
+      expect(anchor().text()).toContain({
+        'controlled multiple': 'Phone',
+        'legacy default': 'Option 3',
+        'read only selection': 'Headquarters',
+        default: 'All',
+      }[preset]);
+    }
+  } finally {
+    wrapper.unmount();
+    warnings.mockRestore();
+  }
+});
 
 it('keeps the preview on the canonical page after an invalid total recovers', async () => {
   const optionsFor = totalPages => ({

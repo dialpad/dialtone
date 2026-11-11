@@ -1,15 +1,45 @@
 import DtcRendererTarget from './renderer_target.vue';
 
 import { expect } from 'vitest';
-import { defineComponent, nextTick } from 'vue';
+import { defineComponent, markRaw, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 
-const RootClassFixture = defineComponent({
+const RootClassFixture = markRaw(defineComponent({
   name: 'RootClassFixture',
-  template: '<div class="fixture-root" data-qa="fixture-root"><slot /></div>',
-});
+  props: {
+    items: { type: Array, default: () => [] },
+    label: { type: String, default: '' },
+  },
+  template: '<div class="fixture-root" data-qa="fixture-root">{{ items[0]?.name }} {{ label }}<slot /></div>',
+}));
 
 describe('renderer_target.vue test', function () {
+  it('recreates opted-in previews for reset and reference changes while preserving ordinary updates', async () => {
+    const firstItems = [{ name: 'First' }];
+    const wrapper = mount(DtcRendererTarget, {
+      props: {
+        component: RootClassFixture,
+        bindings: { items: firstItems, label: 'Initial' },
+        events: [],
+        previewIdentity: bindings => [bindings.items],
+        resetGeneration: 0,
+      },
+    });
+    await nextTick();
+    const target = () => wrapper.get('[data-qa="fixture-root"]');
+    const first = target().element;
+    await wrapper.setProps({ bindings: { items: firstItems, label: 'Updated' } });
+    expect(target().element).toBe(first);
+    expect(target().text()).toBe('First Updated');
+    await wrapper.setProps({ bindings: { items: [{ name: 'Second' }], label: 'Updated' } });
+    expect(target().text()).toBe('Second Updated');
+    expect(target().element).not.toBe(first);
+    const second = target().element;
+    await wrapper.setProps({ resetGeneration: 1 });
+    expect(target().element).not.toBe(second);
+    wrapper.unmount();
+  });
+
   it('Should pass native class bindings to the rendered component root', async function () {
     const wrapper = mount(DtcRendererTarget, {
       attachTo: document.body,

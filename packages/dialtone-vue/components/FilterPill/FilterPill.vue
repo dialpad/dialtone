@@ -4,18 +4,23 @@
       'd-filter-pill',
       { 'd-filter-pill--read-only': readOnly },
     ]"
+    v-bind="legacyRootAttrs()"
     data-qa="dt-filter-pill"
   >
     <component
       :is="overlayComponent"
-      v-model:open="isOpen"
+      ref="overlay"
+      :open="isOpen"
       v-bind="overlayProps"
       :content-mode="contentMode"
+      @update:open="onOverlayTerminalOpen"
+      @keydown="onOverlayKeydown"
     >
       <template #anchor="slotData">
         <dt-button
+          ref="primaryButton"
           v-dt-tooltip="resolvedStartTooltipText"
-          v-bind="useDropdown ? slotData : slotData.attrs"
+          v-bind="anchorAttributes(slotData)"
           :active="isActive"
           :aria-disabled="readOnly || undefined"
           :class="[
@@ -30,7 +35,7 @@
           data-qa="dt-filter-pill__button"
           importance="outlined"
           @click="openPopover"
-          @keydown.up.down.prevent="openPopover"
+          @keydown.up.down.prevent="onAnchorArrow"
         >
           <template
             v-if="$slots.startIcon"
@@ -43,8 +48,62 @@
             />
           </template>
           <span :class="['d-filter-pill__label', labelClass]">
-            <!-- @slot Allows you to customize the label slot -->
+            <!--
+              @slot Customize the anchor label. Legacy and controlled bindings are conditional on options.
+              @binding {string} label Dimension label.
+              @binding {Array} filters Legacy filter records only.
+              @binding {Array} activeFilters Legacy selected names only.
+              @binding {string} activeFilterList Legacy first selection or All only.
+              @binding {string} activeFilterOverflow Legacy overflow only.
+              @binding {string | null | Array} selected Controlled committed snapshot only.
+              @binding {Array} selectedOptions Controlled resolved option records only.
+              @binding {string} displayLabel Controlled display summary only.
+              @binding {boolean} isActive Controlled active state only.
+            -->
             <slot
+              v-if="controlledAtBirth"
+              v-bind="controlledAnchorBindings"
+            >
+              <span class="sr-only">{{ controlledAccessibleLabel }}</span>
+              <span
+                class="d-filter-pill__label-start"
+                aria-hidden="true"
+              >{{ controlledDropdown || !isActive ? controlledDisplayLabel : controlledAccessibleLabel }}</span>
+              <span
+                v-if="controlledOverflow"
+                class="d-filter-pill__label-end-overflow"
+                :title="activeFilterOverflowTitle"
+              >{{ controlledOverflow }}</span>
+              <span
+                v-if="$slots.anchorEnd"
+                :class="['d-filter-pill__anchor-end', anchorEndClass]"
+              >
+                <!--
+                  @slot Noninteractive trailing anchor content, retaining the built-in label.
+                  @binding {string | null | Array} selected Committed selection snapshot.
+                  @binding {Array} selectedOptions Resolved committed option records.
+                  @binding {boolean} isActive Whether committed selection filters results.
+                -->
+                <slot
+                  name="anchorEnd"
+                  v-bind="controlledAnchorBindings"
+                />
+              </span>
+            </slot>
+            <!--
+              @slot Customize the anchor label. Legacy and controlled bindings are conditional on options.
+              @binding {string} label Dimension label.
+              @binding {Array} filters Legacy filter records only.
+              @binding {Array} activeFilters Legacy selected names only.
+              @binding {string} activeFilterList Legacy first selection or All only.
+              @binding {string} activeFilterOverflow Legacy overflow only.
+              @binding {string | null | Array} selected Controlled committed snapshot only.
+              @binding {Array} selectedOptions Controlled resolved option records only.
+              @binding {string} displayLabel Controlled display summary only.
+              @binding {boolean} isActive Controlled active state only.
+            -->
+            <slot
+              v-else
               :label="label"
               :filters="filters"
               :active-filters="activeFilters"
@@ -83,11 +142,69 @@
         </dt-button>
       </template>
       <template
-        v-if="!useDropdown"
+        v-if="!overlayUseDropdown"
         #content="{ close }"
       >
-        <!-- @slot Allows you to override the popover content, only use this if you need custom behavior -->
+        <!--
+          @slot Override overlay content. Bindings are conditional on the selection contract.
+          @binding {Function} close Dismiss without applying.
+          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
+          @binding {Function} cancel Dismiss and discard pending state.
+          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {string | null | Array} selected Controlled committed snapshot only.
+          @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
+          @binding {Function} setSelected Controlled explicit selection action only.
+        -->
         <slot
+          v-if="controlledAtBirth"
+          name="content"
+          v-bind="controlledContentBindings"
+        >
+          <dt-checkbox-group
+            :model-value="checkboxRenderValues"
+            :aria-label="label"
+            :name="label || 'filter-pill'"
+            :disabled="!controlledCanSelect"
+          >
+            <dt-checkbox
+              v-for="option in controlledState.options"
+              :id="controlledOptionId(option.value)"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value"
+              @update:model-value="toggleControlledOption(option.value, $event)"
+            >
+              {{ option.label }}
+              <span
+                v-if="$slots.optionEnd"
+                :class="['d-filter-pill__option-end', optionEndClass]"
+              >
+                <!--
+                  @slot Noninteractive trailing choice content, retaining its label and handler.
+                  @binding {Object} option Read-only option record.
+                  @binding {boolean} selected Whether this row is selected, using a deferred draft when open.
+                -->
+                <slot
+                  name="optionEnd"
+                  :option="option"
+                  :selected="controlledRowSelected(option.value)"
+                />
+              </span>
+            </dt-checkbox>
+          </dt-checkbox-group>
+        </slot>
+        <!--
+          @slot Override overlay content. Bindings are conditional on the selection contract.
+          @binding {Function} close Dismiss without applying.
+          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
+          @binding {Function} cancel Dismiss and discard pending state.
+          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {string | null | Array} selected Controlled committed snapshot only.
+          @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
+          @binding {Function} setSelected Controlled explicit selection action only.
+        -->
+        <slot
+          v-else
           :close="close"
           :apply="applySelection"
           :cancel="cancelSelection"
@@ -111,23 +228,25 @@
         </slot>
       </template>
       <template
-        v-if="!useDropdown && $slots.headerContent"
+        v-if="!overlayUseDropdown && $slots.headerContent"
         #headerContent="{ close }"
       >
-        <!-- @slot Allows you to customize the popover header -->
-        <slot
-          name="headerContent"
-          :close="close"
-        />
+        <div :class="['d-filter-pill__header-content', headerContentClass]">
+          <!-- @slot Customize the popover header, or supply a noninteractive controlled dropdown heading. -->
+          <slot
+            name="headerContent"
+            :close="controlledAtBirth ? closeControlled : close"
+          />
+        </div>
       </template>
       <template
-        v-if="!useDropdown && (deferSelection || $slots.footerContent)"
+        v-if="!overlayUseDropdown && (deferSelection || $slots.footerContent)"
         #footerContent="{ close }"
       >
         <!-- @slot Allows you to customize the popover footer. Receives { close, apply, cancel } bindings. -->
         <slot
           name="footerContent"
-          :close="close"
+          :close="controlledAtBirth ? closeControlled : close"
           :apply="applySelection"
           :cancel="cancelSelection"
         >
@@ -159,11 +278,82 @@
         </slot>
       </template>
       <template
-        v-if="useDropdown"
+        v-if="overlayUseDropdown"
         #list="{ close }"
       >
-        <!-- @slot Allows you to override the dropdown content -->
+        <!--
+          @slot Override overlay content. Bindings are conditional on the selection contract.
+          @binding {Function} close Dismiss without applying.
+          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
+          @binding {Function} cancel Dismiss and discard pending state.
+          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {string | null | Array} selected Controlled committed snapshot only.
+          @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
+          @binding {Function} setSelected Controlled explicit selection action only.
+        -->
         <slot
+          v-if="controlledAtBirth"
+          name="content"
+          v-bind="controlledContentBindings"
+        >
+          <li
+            v-if="$slots.headerContent"
+            role="presentation"
+            :class="['d-filter-pill__menu-heading', headerContentClass]"
+          >
+            <dt-text
+              variant="label-xs"
+              :size="100"
+              strength="medium"
+              tone="tertiary"
+              :density="500"
+            >
+              <!-- @slot Noninteractive controlled dropdown heading; popovers retain close binding. -->
+              <slot name="headerContent" />
+            </dt-text>
+          </li>
+          <dt-list-item
+            v-for="option in controlledState.options"
+            :id="controlledOptionId(option.value)"
+            :key="option.value"
+            role="menuitemradio"
+            navigation-type="arrow-keys"
+            :selected="controlledRowSelected(option.value)"
+            :aria-disabled="!controlledCanSelect || undefined"
+            @click="selectControlledOption(option.value)"
+          >
+            {{ option.label }}
+            <template
+              v-if="$slots.optionEnd"
+              #end
+            >
+              <span :class="['d-filter-pill__option-end', optionEndClass]">
+                <!--
+                  @slot Noninteractive trailing choice content, retaining its label and handler.
+                  @binding {Object} option Read-only option record.
+                  @binding {boolean} selected Whether this row is selected.
+                -->
+                <slot
+                  name="optionEnd"
+                  :option="option"
+                  :selected="controlledRowSelected(option.value)"
+                />
+              </span>
+            </template>
+          </dt-list-item>
+        </slot>
+        <!--
+          @slot Override overlay content. Bindings are conditional on the selection contract.
+          @binding {Function} close Dismiss without applying.
+          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
+          @binding {Function} cancel Dismiss and discard pending state.
+          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {string | null | Array} selected Controlled committed snapshot only.
+          @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
+          @binding {Function} setSelected Controlled explicit selection action only.
+        -->
+        <slot
+          v-else
           :close="close"
           name="content"
         >
@@ -182,6 +372,7 @@
     </component>
     <dt-button
       v-if="hasClear"
+      ref="clearButton"
       v-dt-tooltip="endTooltipText"
       :active="isActive"
       :aria-label="clearButtonAriaLabel"
@@ -217,9 +408,13 @@ import { DtCheckboxGroup } from '@/components/CheckboxGroup';
 import { DtDropdown } from '@/components/Dropdown';
 import { DtListItem } from '@/components/ListItem';
 import { DtStack } from '@/components/Stack';
+import { DtText } from '@/components/Text';
+import ControlledSelection from './FilterPillControlled';
 
 export default {
   name: 'DtFilterPill',
+
+  compatConfig: { MODE: 3 },
 
   components: {
     DtCheckboxGroup,
@@ -231,9 +426,54 @@ export default {
     DtDropdown,
     DtListItem,
     DtStack,
+    DtText,
   },
 
+  mixins: [ControlledSelection],
+
   props: {
+    /** A defined array opts into authoritative selection. Remount to change contract or controlled pattern. */
+    options: {
+      type: Array,
+      default: undefined,
+    },
+
+    /** Controlled selection: string|null in dropdowns, readonly string[] in popovers. */
+    selected: {
+      type: [String, Array],
+      default: undefined,
+    },
+
+    /** Single-selection baseline. Empty string is supported; ignored in multiple selection. */
+    neutralValue: {
+      type: String,
+      default: undefined,
+    },
+
+    /** Logical visibility synchronization for controlled selection. Null uses internal ownership. */
+    open: {
+      type: Boolean,
+      default: null,
+    },
+
+    /** Classes on the immediate noninteractive anchorEnd wrapper. */
+    anchorEndClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /** Classes on each immediate noninteractive optionEnd wrapper. */
+    optionEndClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /** Classes on the immediate headerContent wrapper. */
+    headerContentClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
     /**
      * When true, uses DtDropdown instead of DtPopover as the overlay.
      * Provides keyboard navigation (arrow keys) for list items.
@@ -248,7 +488,7 @@ export default {
     /**
      * When true, checkbox changes are held in a pending state until the user
      * clicks Apply. Cancel or closing the popover discards pending changes.
-     * Only applies to popover mode (not useDropdown).
+     * Applies to popover mode.
      */
     deferSelection: {
       type: Boolean,
@@ -401,7 +641,7 @@ export default {
 
     /**
      * Additional CSS class(es) applied to the popover content area.
-     * Only applies when useDropdown is false.
+     * Applies to popover mode.
      */
     popoverContentClass: {
       type: [String, Array, Object],
@@ -410,7 +650,7 @@ export default {
 
     /**
      * Additional CSS class(es) applied to the outer popover header element (`d-popover__header`).
-     * Only applies when useDropdown is false.
+     * Applies to popover mode.
      */
     popoverHeaderClass: {
       type: [String, Array, Object],
@@ -419,7 +659,7 @@ export default {
 
     /**
      * Additional CSS class(es) applied to the outer popover footer element (`d-popover__footer`).
-     * Only applies when useDropdown is false.
+     * Applies to popover mode.
      */
     popoverFooterClass: {
       type: [String, Array, Object],
@@ -428,7 +668,7 @@ export default {
 
     /**
      * Additional CSS class(es) applied to the popover dialog element.
-     * Only applies when useDropdown is false.
+     * Applies to popover mode.
      */
     popoverDialogClass: {
       type: [String, Array, Object],
@@ -462,6 +702,15 @@ export default {
   },
 
   emits: [
+    /** Proposed controlled value. The parent remains authoritative. @type {string | null | Array} */
+    'update:selected',
+
+    /** User action snapshot: value, previousValue, reason and changed. @type {Object} */
+    'selection-change',
+
+    /** Logical visibility synchronization when controlled open is boolean. @type {boolean} */
+    'update:open',
+
     /**
      * Emitted when clicking the clear button
      *
@@ -496,14 +745,18 @@ export default {
     return {
       isOpen: false,
       i18n: new DialtoneLocalization(),
-      filters: this.modelValue,
+      filters: this.options === undefined ? this.modelValue : [],
       pendingFilters: null,
     };
   },
 
   computed: {
+    overlayUseDropdown () {
+      return this.controlledAtBirth ? this.controlledDropdown : this.useDropdown;
+    },
+
     overlayComponent () {
-      return this.useDropdown ? 'dt-dropdown' : 'dt-popover';
+      return this.overlayUseDropdown ? 'dt-dropdown' : 'dt-popover';
     },
 
     overlayProps () {
@@ -515,7 +768,12 @@ export default {
         modal: true,
         placement: this.popoverPlacement,
       };
-      if (this.useDropdown) {
+      if (this.controlledAtBirth) {
+        props.visibilityChangeCallback = this.onControlledVisibility;
+        props.forwardAnchorArrowKeys = true;
+        if (!this.$slots.content) props['aria-label'] = this.label;
+      }
+      if (this.overlayUseDropdown) {
         props['list-class'] = this.dropdownListClass;
       } else {
         props.padding = this.popoverPadding;
@@ -543,7 +801,7 @@ export default {
     clearButtonTitle () {
       if (this.endTooltipText) return;
 
-      return this.clearButtonAriaLabel
+      return this.clearButtonAriaLabel;
     },
 
     activeFilters () {
@@ -571,7 +829,8 @@ export default {
     },
 
     activeFilterOverflowTitle () {
-      return this.i18n.$t('DIALTONE_FILTER_PILL_OVERFLOW_TITLE', { count: this.activeFilters.length - 1 });
+      const count = this.controlledAtBirth ? this.controlledState.values.length - 1 : this.activeFilters.length - 1;
+      return this.i18n.$t('DIALTONE_FILTER_PILL_OVERFLOW_TITLE', { count });
     },
 
     activeFilterOverflow () {
@@ -581,10 +840,15 @@ export default {
     },
 
     isActive () {
+      if (this.controlledAtBirth) return this.controlledState.valid && this.controlledState.isActive;
       return this.activeFilterList.length > 0;
     },
 
     hasClear () {
+      if (this.controlledAtBirth) {
+        return !this.readOnly && this.showClear && this.controlledContractValid &&
+          this.controlledState.valid && this.isActive;
+      }
       return !this.readOnly && this.showClear && this.activeFilterList.length > 0;
     },
 
@@ -613,6 +877,7 @@ export default {
 
   watch: {
     isOpen (isOpen) {
+      if (this.controlledAtBirth) return;
       this.$emit('open', isOpen);
       if (this.deferSelection) {
         if (isOpen) {
@@ -626,13 +891,13 @@ export default {
     filters: {
       deep: true,
       handler (filters) {
-        this.$emit('update:modelValue', filters);
+        if (!this.controlledAtBirth) this.$emit('update:modelValue', filters);
       },
     },
   },
 
   mounted () {
-    if (!(this.modelValue?.length || this.$slots.content)) {
+    if (!this.controlledAtBirth && !(this.modelValue?.length || this.$slots.content)) {
       console.warn('Please provide content through the v-model or the "content" slot.');
     }
     if (this.deferSelection && this.useDropdown) {
@@ -642,11 +907,19 @@ export default {
 
   methods: {
     clearFilter ($event) {
+      if (this.controlledAtBirth) {
+        const baseline = this.controlledDropdown ? (this.neutralValue ?? null) : [];
+        this.controlledDraft = null;
+        this.commitControlled(baseline, 'clear', true, $event);
+        this.reconcileCheckboxes();
+        return;
+      }
       this.filters.forEach(filter => delete filter.active);
-      this.$emit('clear', $event)
+      this.$emit('clear', $event);
     },
 
     openPopover () {
+      if (this.controlledAtBirth) { this.requestControlledOpen(true); return; }
       if (this.readOnly) return;
       this.isOpen = true;
     },
@@ -659,6 +932,7 @@ export default {
     },
 
     applySelection () {
+      if (this.controlledAtBirth) return this.applyControlledSelection();
       if (!this.pendingFilters) return;
       this.filters.forEach((filter, i) => {
         if (this.pendingFilters[i]) {
@@ -672,6 +946,7 @@ export default {
     },
 
     cancelSelection () {
+      if (this.controlledAtBirth) { this.closeControlled(); return; }
       this.isOpen = false;
     },
   },

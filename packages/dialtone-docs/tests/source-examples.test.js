@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import matter from 'gray-matter';
-import { chunkSections } from '../src/generators/build-public-docs.mjs';
+import { buildRecords, chunkSections } from '../src/generators/build-public-docs.mjs';
 import { buildExampleRecords, buildExampleCoverage } from '../src/generators/documentation-examples.mjs';
 import { sourceSetup } from '../src/generators/example-template.mjs';
 
@@ -22,6 +23,34 @@ const produce = raw => buildExampleRecords(input(raw));
 const ordinary = `## Default\n${fence('<dt-button>Save</dt-button>')}`;
 
 describe('source-driven component examples', () => {
+  it('delivers controlled FilterPill state and compatibility comments while retaining legacy IDs', () => {
+    const records = buildRecords(resolve('../../apps/dialtone-documentation/docs/components/filter-pill.md'));
+    const byId = new Map(records.filter(record => record.example).map(record => [record.id, record]));
+    for (const [id, declaration] of [
+      ['examples/docs/components/filter-pill/intro', 'const heroSelected = ref(\'all\');'],
+      ['examples/docs/components/filter-pill/controlled-single-selection', 'const selectedMessage = ref(\'all\');'],
+      ['examples/docs/components/filter-pill/controlled-multiple-selection', 'const selectedChannels = ref([]);'],
+    ]) {
+      const record = byId.get(id);
+      expect(record, id).toBeDefined();
+      expect(record.content).toContain(declaration);
+      const compatibility = record.content.match(/<!--[^]*?10\.5\.1[^]*?-->/)?.[0];
+      expect(compatibility).toContain('options/selected');
+      expect(compatibility).toContain('lacks this API');
+      expect(compatibility).toContain('compatible published release');
+      expect(record.example.profile.dependencies['@dialpad/dialtone']).toBe('10.5.1');
+      expect(record.example.validation.consumerBuild).toBe('unverified');
+      expect(record.example.manualReview).toBe('pending');
+    }
+    for (const section of [
+      'variants-base', 'variants-active', 'variants-disabled', 'variants-read-only',
+      'interaction-patterns-clearable', 'interaction-patterns-non-clearable', 'interaction-patterns-defer-selection',
+      'slots-default', 'slots-default/overflow', 'slots-content', 'content-mode',
+    ]) {
+      expect(byId.has(`examples/docs/components/filter-pill/${section}`), section).toBe(true);
+    }
+  });
+
   it('delivers an unannotated public demo with a derived exact ID', () => {
     const [record] = produce(ordinary);
     expect(record?.id).toBe('examples/docs/components/example/default');

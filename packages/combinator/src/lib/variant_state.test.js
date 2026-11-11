@@ -1,6 +1,18 @@
 import { expect } from 'vitest';
 import { computed, reactive, shallowRef } from 'vue';
-import { computeDisabledMembers, listVariantNames, writeUpdateEvent, createVariantBindings } from './variant_state';
+import {
+  computeDisabledMembers,
+  listVariantNames,
+  writeUpdateEvent,
+  createVariantBindings,
+  buildVariantInfo,
+  buildVariantState,
+  getInitialValues,
+} from './variant_state';
+import { DtButton, DtFilterPill } from '@dialpad/dialtone-vue';
+import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import filterPillVariants from '@/src/variants/variants_filter_pill';
+import { serializeExampleTemplate } from './code_copy';
 
 // `link` is a boolean prop, so `linkKind` is inferred as its dependent child
 // (boolean-prefix matching). The first exclusion rule hides target/rel/type
@@ -39,6 +51,52 @@ const TEXT_LIST_ITEM_INFO = {
 };
 
 describe('variant_state', function () {
+  it.each([false, true])('copies exactly one Filter Pill contract (verbose=%s)', verbose => {
+    const doc = allDocs.find(doc => doc.displayName === 'DtFilterPill');
+    for (const [preset, omitted, present] of [
+      ['default', 'model-value', ':options='],
+      ['legacy default', 'options', ':model-value='],
+    ]) {
+      const state = buildVariantState(DtFilterPill, doc, filterPillVariants, preset);
+      const disabledMembers = computeDisabledMembers(state.info, state.options.props, state.options.slots);
+      const template = serializeExampleTemplate({ ...state, disabledMembers, verbose });
+      expect(template).not.toMatch(new RegExp(`\\n +:?${omitted}=`));
+      expect(template).toContain(present);
+      if (preset === 'legacy default') {
+        expect(template).not.toMatch(/\n +:?(selected|neutral-value|open)=/);
+      }
+    }
+  });
+
+  it('keeps legacy popover controls available while excluding dropdown-only controls', () => {
+    const { info, options } = buildVariantState(DtFilterPill,
+      allDocs.find(doc => doc.displayName === 'DtFilterPill'), filterPillVariants, 'defer selection');
+    const disabled = computeDisabledMembers(info, options.props, options.slots);
+    expect(disabled.has('deferSelection')).toBe(false);
+    expect(disabled.has('popoverFooterClass')).toBe(false);
+    expect(disabled.has('dropdownListClass')).toBe(true);
+  });
+
+  it('keeps bank metadata separate from component members and applies named overrides', () => {
+    const previewIdentity = bindings => [bindings.kind];
+    const info = buildVariantInfo(DtButton, allDocs.find(doc => doc.displayName === 'DtButton'), {
+      defaults: { metadata: { previewIdentity, copyNotice: 'Default notice' } },
+      primary: { metadata: { copyNotice: 'Named notice' } },
+    }, 'primary');
+
+    expect(info.metadata).toEqual({ previewIdentity, copyNotice: 'Named notice' });
+    expect(info.props.some(member => member.name === 'copyNotice')).toBe(false);
+  });
+
+  it('restores owned initial arrays after mutation only for banks with a preview identity policy', () => {
+    const initialValue = [{ value: 'phone', active: true }];
+    const info = { metadata: { previewIdentity: () => [] }, props: [{ name: 'items', initialValue }] };
+    const first = getInitialValues(info);
+    first.props.items[0].active = false;
+    expect(getInitialValues(info).props.items).toEqual([{ value: 'phone', active: true }]);
+    expect(getInitialValues({ props: info.props }).props.items).toBe(initialValue);
+  });
+
   describe('computeDisabledMembers', function () {
     it('returns an empty set when no rule matches and dependents are active', function () {
       expect(computeDisabledMembers(INFO, { to: '', kind: 'body', link: true }).size).toBe(0);

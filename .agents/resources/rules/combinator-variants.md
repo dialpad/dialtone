@@ -89,6 +89,33 @@ defaults: {
 strings against `packages/combinator/src/lib/tokens.js` and existing variant
 files before adding a new form.
 
+## Optional preview and copy metadata
+
+`defaults.metadata` holds bank policy separately from component members. A named
+preset may override individual metadata fields. Metadata is never bound as a
+component prop or exposed as a slot scope.
+
+Use `previewIdentity(bindings)` only when a component keeps state that ordinary
+prop patching cannot replace. Return an array of identity factors: primitives
+compare by value, while arrays and objects compare by reference. This policy
+opts the bank into owned clones of initial arrays/objects and into remounting on
+explicit preset selection or Reset. Existing slot and slider keys still apply.
+Banks without the policy retain their existing instance and initial-value behavior.
+
+Include only changes that require a new instance. For example, Filter Pill keys
+the legacy/controlled contract, controlled single/multiple pattern, and legacy
+model array reference. Controlled selected values, option replacements, labels
+and counts must remain ordinary updates so an open overlay keeps its focus.
+Keep pattern selectors locked where changing one alone would invalidate a
+selection's scalar/array shape; provide correctly shaped presets instead.
+
+An optional string `copyNotice` explains setup responsibilities for a copied
+configuration snapshot. It appears in the code panel, a template comment in
+copied/delivered markup, and the copied preset's metadata. Link the full public
+example when interaction requires state or handlers absent from the snapshot.
+Do not claim a static snapshot is an interactive example. Leave banks without
+a notice unchanged.
+
 ## Search keywords
 
 Use `searchKeywords` only when likely user search terms are not already covered

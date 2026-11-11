@@ -31,6 +31,8 @@
           :bindings="bindings"
           :events="info.events"
           :disabled-members="disabledMembers"
+          :preview-identity="info.metadata?.previewIdentity"
+          :reset-generation="resetGeneration"
           @event="onCellEvent"
         >
           <template
@@ -95,6 +97,10 @@ const props = defineProps({
   options: {
     type: Object,
     required: true,
+  },
+  resetGeneration: {
+    type: Number,
+    default: 0,
   },
 });
 

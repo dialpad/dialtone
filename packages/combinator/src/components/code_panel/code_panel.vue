@@ -11,6 +11,12 @@
         v-dt-scrollbar:always
         :class="['dtc-theme__canvas d-p-200', { 'd-hmx-250': !fullScreen }]"
       >
+        <p
+          v-if="info.metadata?.copyNotice"
+          class="d-mt0 d-mbe-200"
+        >
+          {{ info.metadata.copyNotice }}
+        </p>
         <dtc-code-editor
           :info="info"
           :options="options"

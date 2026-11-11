@@ -1,19 +1,98 @@
 
 /* eslint-disable max-len */
 
+const messageOptions = [
+  { value: 'all', label: 'All Messages', shortLabel: 'All' },
+  { value: 'unread', label: 'Unread' },
+  { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
+];
+const channelOptions = [
+  { value: 'email', label: 'Email' },
+  { value: 'phone', label: 'Phone' },
+  { value: 'chat', label: 'Chat' },
+];
+
+function controlledPreset (props = {}, slots = {}) {
+  const single = props.useDropdown?.initialValue ?? true;
+  return {
+    metadata: {
+      copyNotice: 'Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-single-selection. Requires the options/selected feature release; the lookup profile pins Dialtone 10.5.1, which lacks this API.',
+      lookupExclude: {
+        reason: 'Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.',
+        owner: 'DLT-3736 / Dialtone component and lookup maintainers',
+      },
+    },
+    props: {
+      options: { initialValue: single ? messageOptions : channelOptions },
+      selected: { initialValue: single ? 'all' : [], types: single ? ['string', 'null'] : ['array'] },
+      neutralValue: { initialValue: single ? 'all' : undefined },
+      label: { initialValue: single ? 'Filter by' : 'Channel' },
+      useDropdown: { initialValue: single, lockControl: true },
+      endTooltipText: { initialValue: 'Clear' },
+      ...props,
+    },
+    slots,
+  };
+}
+
 export default {
+  defaults: {
+    metadata: {
+      previewIdentity: bindings => bindings.options !== undefined
+        ? ['controlled', Boolean(bindings.useDropdown)]
+        : ['legacy', bindings.modelValue],
+    },
+  },
   exclusions: [
     {
+      when: { options: value => value !== undefined },
+      hide: { props: ['modelValue'] },
+    },
+    {
+      when: { options: value => value === undefined },
+      hide: { props: ['selected', 'neutralValue', 'open'], slots: ['anchorEnd', 'optionEnd'] },
+    },
+    {
       when: { useDropdown: true },
-      disable: { props: ['deferSelection'] },
+      disable: {
+        props: ['deferSelection', 'popoverContentClass', 'popoverHeaderClass', 'popoverFooterClass', 'popoverDialogClass', 'popoverPadding'],
+        slots: ['footerContent'],
+      },
     },
     {
       when: { useDropdown: v => !v },
       disable: { props: ['dropdownListClass'] },
     },
+    {
+      when: { options: value => value !== undefined, useDropdown: value => !value },
+      hide: { props: ['neutralValue'] },
+    },
   ],
 
-  default: {
+  default: controlledPreset(),
+
+  'controlled active': controlledPreset({ selected: { initialValue: 'mentions', types: ['string', 'null'] } }),
+
+  'controlled multiple': controlledPreset({
+    useDropdown: { initialValue: false, lockControl: true },
+    selected: { initialValue: ['phone'], types: ['array'] },
+  }),
+
+  'controlled deferred': controlledPreset({
+    useDropdown: { initialValue: false, lockControl: true },
+    deferSelection: { initialValue: true },
+    popoverFooterClass: { initialValue: 'd-pie-200 d-py-150' },
+  }),
+
+  'controlled empty options': controlledPreset({ options: { initialValue: [] } }),
+
+  'controlled counts': controlledPreset({ selected: { initialValue: 'unread', types: ['string', 'null'] } }, {
+    headerContent: { initialValue: 'Filter by' },
+    anchorEnd: { initialValue: '<dt-badge v-if="selected === \'unread\'" type="bulletin" kind="count" aria-hidden="true">12</dt-badge><span v-if="selected === \'unread\'" class="d-vi-visible-sr">, 12 unread messages</span>' },
+    optionEnd: { initialValue: '<dt-badge v-if="option.value === \'unread\'" type="bulletin" kind="count" aria-hidden="true">12</dt-badge><span v-if="option.value === \'unread\'" class="d-vi-visible-sr">, 12 unread messages</span>' },
+  }),
+
+  'legacy default': {
     props: {
       label: {
         initialValue: 'Active example',

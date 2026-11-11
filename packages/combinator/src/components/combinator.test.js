@@ -1,12 +1,13 @@
 import DtcCombinator from './combinator.vue';
 
 import { expect } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
-import { nextTick } from 'vue';
+import { mount, shallowMount } from '@vue/test-utils';
+import { markRaw, nextTick } from 'vue';
 import { getSupportedComponents } from '@/src/lib/test/utils_test';
-import { DtButton, DtCard, DtInput, DtToggle } from '@dialpad/dialtone-vue';
+import { DtButton, DtCard, DtFilterPill, DtInput, DtToggle } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
 import variants from '@/src/variants/variants';
+import filterPillVariants from '@/src/variants/variants_filter_pill';
 
 const documentation = allDocs;
 const buttonDoc = allDocs.find(d => d.displayName === 'DtButton');
@@ -29,6 +30,141 @@ function shallowMountCombinator (options) {
 }
 
 describe('combinator.vue test', function () {
+  it('edits controlled scalar and array values with a locked pattern selector', async () => {
+    const doc = allDocs.find(doc => doc.displayName === 'DtFilterPill');
+    const wrapper = mount(DtcCombinator, {
+      attachTo: document.body,
+      props: {
+        component: markRaw(DtFilterPill),
+        documentation: {
+          ...doc,
+          props: doc.props.filter(prop => ['selected', 'useDropdown'].includes(prop.name)),
+          slots: [],
+          events: [],
+        },
+        variants: filterPillVariants,
+      },
+      global: {
+        directives: { 'dt-focustrap': {}, 'dt-scrollbar': {} },
+        stubs: { DtcRenderer: true, DtcCodePanel: true, DtInput: true, DtSelectMenu: true },
+      },
+    });
+    try {
+      const control = label => wrapper.findAllComponents({ name: 'DtcOptionBarControl' })
+        .find(control => control.props('label') === label);
+      expect(control('selected').findComponent({ name: 'DtcControlString' }).exists()).toBe(true);
+      expect(control('selected').props('validControls')).toContain('null');
+      expect(control('selected').props('validControls')).not.toContain('array');
+      expect(control('use-dropdown').get('[role="switch"]').element.disabled).toBe(true);
+      await wrapper.findAll('button').find(button => button.text().includes('DtFilterPill:')).trigger('click');
+      await wrapper.findAllComponents({ name: 'DtListItem' })
+        .find(item => item.text() === 'controlled multiple').trigger('click');
+      expect(control('selected').findComponent({ name: 'DtcControlArray' }).exists()).toBe(true);
+      expect(control('selected').props('validControls')).not.toContain('string');
+      expect(control('selected').props('value')).toEqual(['phone']);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('preserves an unrelated input instance across preset selection and Reset without bank metadata', async () => {
+    const wrapper = mount(DtcCombinator, {
+      attachTo: document.body,
+      props: {
+        component: markRaw(DtInput),
+        documentation: inputDoc,
+        variants: {
+          default: { props: { modelValue: { initialValue: 'Alpha' }, label: { initialValue: 'Name' } } },
+          Beta: { props: { modelValue: { initialValue: 'Beta' }, label: { initialValue: 'Name' } } },
+        },
+      },
+      global: {
+        directives: { 'dt-focustrap': {} },
+        stubs: { DtcOptionBar: true, DtcCodePanel: true },
+      },
+    });
+    try {
+      await nextTick();
+      await nextTick();
+      const input = wrapper.get('input').element;
+      await wrapper.findAll('button').find(button => button.text().includes('DtInput:')).trigger('click');
+      const preset = wrapper.findAllComponents({ name: 'DtListItem' }).find(item => item.text() === 'Beta');
+      await preset.trigger('click');
+      expect(wrapper.get('input').element).toBe(input);
+      expect(input.value).toBe('Beta');
+      await wrapper.get('[aria-label="Reset"]').trigger('click');
+      expect(wrapper.get('input').element).toBe(input);
+      expect(input.value).toBe('Alpha');
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('resets an edited grid cell to its owned preset values', async () => {
+    const wrapper = mount(DtcCombinator, {
+      attachTo: document.body,
+      props: {
+        component: markRaw(DtFilterPill),
+        documentation: allDocs.find(doc => doc.displayName === 'DtFilterPill'),
+        variants: filterPillVariants,
+      },
+      global: {
+        directives: { 'dt-focustrap': {} },
+        stubs: { DtcOptionBar: true, DtcCodePanel: true },
+      },
+    });
+    try {
+      await wrapper.get('[aria-label="Toggle spec sheet view"]').trigger('click');
+      await nextTick();
+      await nextTick();
+      const cell = () => wrapper.findAllComponents({ name: 'DtcRendererSpecSheetCell' })
+        .find(cell => cell.props('name') === 'legacy default');
+      expect(cell().text()).toContain('Option 3');
+      const first = cell().get('[data-qa="dt-filter-pill__button"]').element;
+      await cell().get('[data-qa="dt-filter-pill__clear-button"]').trigger('click');
+      expect(cell().text()).not.toContain('Option 3');
+      expect(cell().get('[data-qa="dt-filter-pill__button"]').element).toBe(first);
+      await wrapper.get('[aria-label="Reset"]').trigger('click');
+      expect(cell().text()).toContain('Option 3');
+      expect(cell().get('[data-qa="dt-filter-pill__button"]').element).not.toBe(first);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it('resets a controlled preview to its canonical neutral value with a new component instance', async () => {
+    const wrapper = mount(DtcCombinator, {
+      attachTo: document.body,
+      props: {
+        component: markRaw(DtFilterPill),
+        documentation: allDocs.find(doc => doc.displayName === 'DtFilterPill'),
+        variants: filterPillVariants,
+      },
+      global: {
+        directives: { 'dt-focustrap': {} },
+        stubs: { DtcOptionBar: true, DtcCodePanel: true },
+      },
+    });
+    try {
+      await nextTick();
+      await nextTick();
+      expect(wrapper.find('[aria-label="Reset"]').exists()).toBe(false);
+      const anchor = () => wrapper.get('[data-qa="dt-filter-pill__button"]');
+      const first = anchor().element;
+      const optionBar = wrapper.findComponent({ name: 'DtcOptionBar' });
+      optionBar.vm.$emit('update:options', model => { model.props.selected = 'unread'; });
+      await nextTick();
+      expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('Unread');
+      expect(anchor().element).toBe(first);
+      await wrapper.get('[aria-label="Reset"]').trigger('click');
+      expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('All');
+      expect(anchor().element).not.toBe(first);
+      expect(wrapper.find('[aria-label="Reset"]').exists()).toBe(false);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
   const testComponents = getSupportedComponents();
 
   let wrapper;

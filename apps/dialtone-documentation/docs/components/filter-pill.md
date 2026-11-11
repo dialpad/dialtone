@@ -9,9 +9,135 @@ combinator: DtFilterPill
 ---
 
 ```vue demo-only
+<!-- Requires the options/selected feature release. Generated lookup projects currently pin Dialtone 10.5.1, which lacks this API; install a compatible published release before running this example. -->
+<dt-filter-pill
+  v-model:selected="heroSelected"
+  :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
+  label="Filter by"
+  neutral-value="all"
+  end-tooltip-text="Clear"
+  use-dropdown
+/>
+```
+
+## Usage
+
+### Key concepts
+
+- Pass `options` to use controlled selection. Even `:options="[]"` selects this contract; omitting `options` preserves the legacy array contract.
+- With `use-dropdown`, `selected` is a string or `null`. In the checkbox popover, it is an array of strings. Bind it with `v-model:selected`, or assign it from one `selection-change` handler when the application also needs a business command.
+- Options use stable, unique string `value` identities and visible `label` text. `shortLabel` changes only the pill label. Replacing selection, options or translated labels updates the same open control without mutating supplied data.
+- `neutral-value` identifies the single-selection choice restored by Clear. It remains checked but does not activate the pill. Multiple selection clears to `[]`. Unknown nonneutral values are retained and show an unavailable-selection label until a matching option returns; no first choice is selected automatically.
+- `selection-change` includes `value`, `previousValue`, `reason` and `changed`. Activating the current radio choice still reports `changed: false`, so intentional repeated application actions remain possible. External prop updates do not emit this event. Use one application write path; do not also write selection from `clear`.
+- `v-model:open` synchronizes logical overlay visibility. A bound `false` does not veto user opening; disabling or making the control read-only closes it.
+- Keep the legacy/controlled contract and controlled `use-dropdown` pattern stable for a mounted pill. Use a keyed remount with the matching scalar/array value when switching either. Replacing a controlled option array is an ordinary update. Legacy `use-dropdown` switching retains its existing behavior.
+
+For existing callers, `v-model` still accepts `{ name, active? }[]` and keeps its initial array reference. Mutate those objects in place; replacing that legacy array does not replace the internal reference. The examples under Variants and the existing custom-slot examples retain that contract. Its `activeFilterList` slot binding remains the literal `'All'` for a complete multi-item selection, and `activeFilterOverflow` remains a string such as `'+2'`. Localize application slot text yourself; built-in aggregate and unavailable-selection text uses Dialtone localization.
+
+### Controlled single selection
+
+The built-in dropdown renders persistent radio selection separately from keyboard highlight. Moving highlight does not change the selected value. The neutral row supplies the inactive label; the dimension label remains available to assistive technology.
+
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection"} -->
+
+```vue demo
+<!-- Requires the options/selected feature release. Generated lookup projects currently pin Dialtone 10.5.1, which lacks this API; install a compatible published release before running this example. -->
+<dt-filter-pill
+  v-model:selected="selectedMessage"
+  :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
+  label="Filter by"
+  neutral-value="all"
+  end-tooltip-text="Clear"
+  use-dropdown
+/>
+```
+
+The page defines `const selectedMessage = ref('all')`. Options can be replaced with new objects while keeping these values. Use `neutral-value=""` with an empty-string neutral option when that is the application's identity; `null` is also a valid unselected scalar.
+
+### Controlled multiple selection
+
+Checkbox selection uses `ref([])` and a literal option list. `defer-selection` holds edits until Apply. Cancel, Escape and dismissal discard them. An external `selected` replacement wins over a dirty draft and rebases the open session; Apply never restores an older external value.
+
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection"} -->
+
+```vue demo
+<!-- Requires the options/selected feature release. Generated lookup projects currently pin Dialtone 10.5.1, which lacks this API; install a compatible published release before running this example. -->
+<dt-filter-pill
+  v-model:selected="selectedChannels"
+  :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }, { value: 'chat', label: 'Chat' }]"
+  label="Channel"
+  end-tooltip-text="Clear"
+  defer-selection
+/>
+```
+
+Omit `defer-selection` for immediate checkbox updates. The `content` slot exposes `pendingSelected`, `apply` and `cancel` in controlled deferred mode; legacy content keeps its existing `pendingFilters` binding. A custom Apply outside a deferred editing session does nothing.
+
+<dialtone-usage>
+<template #do>
+
+- Use to filter a list, table, or other data set by a specific attribute.
+- Use the checkbox popover for multiple selection and `use-dropdown` for one choice.
+- Provide a dimension `label` and an accessible clear-button name with `end-tooltip-text`.
+</template>
+
+<template #dont>
+
+- Don't use as a general-purpose action button or a binary on/off setting.
+- Don't mix `model-value` with controlled `options`/`selected`. For legacy arrays, mutate active flags in place.
+
+</template>
+</dialtone-usage>
+
+## Labels and counts
+
+Use `anchorEnd` and `optionEnd` for trailing content while retaining the built-in labels, selection and handlers. This example uses synthetic English counts with singular/plural handling; use the application's plural-aware translations for other locales. Hide the visual badge from assistive technology and supply its meaning as text.
+
+<!-- @example {"exclude":{"reason":"Named application handler, reactive options and computed count setup exceed bounded lookup extraction; the current Dialtone 10.5.1 consumer pin also predates options/selected.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
+```vue demo
+<dt-stack gap="200">
+  <dt-filter-pill
+    :selected="currentMessage"
+    :options="messageOptions"
+    label="Filter by"
+    neutral-value="all"
+    end-tooltip-text="Clear"
+    use-dropdown
+    @selection-change="applyMessageFilter"
+  >
+    <template #headerContent>Filter by</template>
+    <template #anchorEnd="{ selected }">
+      <template v-if="selected === 'unread' && unreadCount > 0">
+        <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+        <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+      </template>
+    </template>
+    <template #optionEnd="{ option }">
+      <template v-if="option.value === 'unread' && unreadCount > 0">
+        <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+        <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+      </template>
+    </template>
+  </dt-filter-pill>
+  <dt-stack direction="row" gap="100">
+    <dt-button :size="200" @click="unreadCount = unreadCount === 12 ? 100 : unreadCount === 100 ? 0 : 12">Change count</dt-button>
+    <dt-button :size="200" @click="currentMessage = 'mentions'">Set Mentions externally</dt-button>
+  </dt-stack>
+  <span>Application commands: {{ messageCommands }}</span>
+</dt-stack>
+```
+
+The handler assigns selection once and can perform an application command, including a deliberate same-value action. Changing the count or setting Mentions externally emits no selection command and keeps an open menu mounted. The badge caps display at `99+` and hides at zero; its accessible text keeps the complete count. A default-slot override can use `{ selected, displayLabel }` and a label map for a known value deliberately absent from the menu, without adding a hidden choice or a second selection array.
+
+## Combined filters
+
+These existing examples use the legacy array contract. Reset updates the same arrays bound to each pill.
+
+```vue demo-only
 <dt-stack direction="row" gap="100">
   <dt-filter-pill
-    :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
+    v-model="momentCount"
     label="Moment"
     end-tooltip-text="Remove"
   >
@@ -50,7 +176,7 @@ combinator: DtFilterPill
     </template>
   </dt-filter-pill>
   <dt-filter-pill
-    :model-value="[{name: 'Email'}, {name: 'Phone', active: true}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
+    v-model="deferredFilters"
     label="Channel"
     end-tooltip-text="Remove"
     popover-footer-class="d-pie-200 d-py-150"
@@ -62,38 +188,6 @@ combinator: DtFilterPill
   </dt-button>
 </dt-stack>
 ```
-
-## Usage
-
-### Key concepts
-
-- `v-model` expects an array of `{ name, active? }` objects. The pill is "active" when any item has `active: true`.
-- The `default` scoped slot overrides the pill label and receives: `{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }`.
-- The `content` slot overrides the popover body, replacing the default checkbox list with custom content (e.g., radio groups).
-- **In-place mutation**: The pill keeps the initial `modelValue` array reference. Mutate its objects in place with `forEach`; replacing the array with `map` does not update the pill's internal reference.
-
-The built-in label localizes the aggregate “All” selection and the overflow title (“plus 1 other” or “plus 2 others” in English). Option names are displayed as supplied, including an option named “All”. New strings use English fallback until translations are available. Fluent may surround counts with Unicode bidirectional isolation marks in the title attribute.
-
-For compatibility, the `default` slot's `activeFilterList` binding remains the literal string `'All'` when every item is active and there is more than one item. Custom labels can continue comparing this value; localize custom slot content in your application. `activeFilterOverflow` remains a string such as `'+2'`.
-
-<dialtone-usage>
-<template #do>
-
-- Use to filter a list, table, or other data set by a specific attribute (e.g., channel, contact center, date range).
-- Use the default checkbox popover for multi-select filters where several options can be active at once.
-- Use `use-dropdown` for single-select filters where only one option applies at a time (e.g., conversation type).
-- Provide `end-tooltip-text` on the clear button so it has an accessible name for screen readers.
-</template>
-
-<template #dont>
-
-- Don't use as a general-purpose action button — filter pills are for narrowing data, not triggering commands.
-- Don't use for binary on/off settings — use a [Toggle](toggle.md).
-- Don't omit `label` and the `default` slot — the pill must always have visible text identifying the filter category.
-- Don't replace the array with `map` when toggling active state — mutate objects in-place with `forEach` to keep the pill's internal reference in sync.
-</template>
-
-</dialtone-usage>
 
 ## Variants
 
@@ -349,7 +443,7 @@ The label updates to show the selected option, and a clear button resets to the 
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
   <dt-filter-pill
-    :model-value="[{name: 'All Conversations'}, {name: 'Only Calls'}, {name: 'Only Meetings'}, {name: 'Only Digital'}]"
+    v-model="conversationTypes"
     :start-tooltip-text="selectedConversationType !== 'All Conversations'
       ? 'Conversation type'
       : ''"
@@ -444,6 +538,25 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 
 <script setup>
 import { ref, computed, inject } from 'vue';
+
+const heroSelected = ref('all');
+const selectedMessage = ref('all');
+const selectedChannels = ref([]);
+const currentMessage = ref('all');
+const unreadCount = ref(12);
+const messageCommands = ref(0);
+const messageOptions = ref([
+  { value: 'all', label: 'All Messages', shortLabel: 'All' },
+  { value: 'unread', label: 'Unread' },
+  { value: 'starred', label: 'Starred' },
+  { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
+]);
+const countText = computed(() => unreadCount.value > 99 ? '99+' : String(unreadCount.value));
+const messageCountText = computed(() => `${unreadCount.value} unread ${unreadCount.value === 1 ? 'message' : 'messages'}`);
+function applyMessageFilter (action) {
+  currentMessage.value = action.value;
+  messageCommands.value++;
+}
 
 const heroConversationTypes = ref([
   {name: 'All Conversations'},

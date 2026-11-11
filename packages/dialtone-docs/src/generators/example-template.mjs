@@ -20,7 +20,12 @@ export function componentTags(template) {
   return tags;
 }
 
-/** Keep only the named source declarations and their Vue ref import for this cohort. */
+function supportedRefValue(node) {
+  return ['BooleanLiteral', 'StringLiteral', 'NullLiteral'].includes(node?.type)
+    || (node?.type === 'ArrayExpression' && node.elements.every(element => element?.type === 'StringLiteral'));
+}
+
+/** Keep only the named literal ref declarations and their Vue import. */
 export function sourceSetup(rawFile, names = []) {
   if (!names.length) return '';
   const scripts = new MarkdownIt({ html: true }).parse(rawFile, {})
@@ -36,7 +41,7 @@ export function sourceSetup(rawFile, names = []) {
       && node.declarations.length === 1 && node.declarations[0].id.name === name);
     const init = node?.declarations[0].init;
     if (!node || init?.type !== 'CallExpression' || init.callee.name !== 'ref'
-      || init.arguments.length !== 1 || init.arguments[0].type !== 'BooleanLiteral') {
+      || init.arguments.length !== 1 || !supportedRefValue(init.arguments[0])) {
       throw new Error(`Unsupported source setup for ${name}`);
     }
     return script.slice(node.start, node.end).trim();

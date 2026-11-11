@@ -398,6 +398,13 @@ describe('DtPopover Tests', () => {
       it('aria-labelledby should be set correctly on the content window', () => {
         expect(popoverWindow.attributes('aria-labelledby')).toBe(wrapper.vm.labelledBy);
       });
+
+      it('uses an explicit accessible label without an automatic label reference', async () => {
+        await wrapper.setProps({ ariaLabel: 'Filter by' });
+
+        expect(popoverWindow.attributes('aria-label')).toBe('Filter by');
+        expect(popoverWindow.attributes('aria-labelledby')).toBeUndefined();
+      });
     });
 
     describe('When popover is closed', () => {

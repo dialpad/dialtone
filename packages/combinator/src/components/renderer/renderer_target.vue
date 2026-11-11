@@ -54,6 +54,14 @@ const props = defineProps({
     type: Set,
     default: () => new Set(),
   },
+  previewIdentity: {
+    type: Function,
+    default: undefined,
+  },
+  resetGeneration: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const emit = defineEmits([
@@ -85,6 +93,16 @@ const events = computed(() => {
 });
 
 let currentContainer = null;
+const referenceKeys = new WeakMap();
+let nextReferenceKey = 0;
+
+function identityKey (value) {
+  if (value !== null && (typeof value === 'object' || typeof value === 'function')) {
+    if (!referenceKeys.has(value)) referenceKeys.set(value, ++nextReferenceKey);
+    return ['reference', referenceKeys.get(value)];
+  }
+  return [typeof value, value];
+}
 
 onMounted(() => {
   currentContainer = freshContainer();
@@ -133,6 +151,7 @@ function freshContainer () {
  * unmounting and remounting on every prop change.
  */
 function renderTarget () {
+  if (!wrapper.value) return;
   if (!currentContainer) {
     currentContainer = freshContainer();
   }
@@ -147,7 +166,9 @@ function renderTarget () {
     const vnode = h(props.component, {
       ...filteredBindings,
       ...events.value,
-      key: slotKey,
+      key: props.previewIdentity
+        ? JSON.stringify([slotKey, props.resetGeneration, ...props.previewIdentity(filteredBindings).map(identityKey)])
+        : slotKey,
     }, slots);
     vnode.appContext = appContext;
     render(vnode, currentContainer);

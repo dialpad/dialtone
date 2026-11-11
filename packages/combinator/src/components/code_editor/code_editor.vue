@@ -190,6 +190,8 @@ const copyText = computed(() => serializeExampleTemplate({
 
 function serializeAsVariantPreset () {
   const preset = {};
+  const { copyNotice, lookupExclude } = props.info.metadata ?? {};
+  if (copyNotice) preset.metadata = { copyNotice, ...(lookupExclude ? { lookupExclude } : {}) };
   const memberGroups = ['props', 'slots', 'attributes'];
 
   for (const group of memberGroups) {
@@ -236,6 +238,10 @@ function formatPresetAsJs (preset) {
   const sections = [];
 
   for (const [group, members] of Object.entries(preset)) {
+    if (group === 'metadata') {
+      sections.push(`${pad}${pad}metadata: ${formatJsValue(members, pad + pad)}`);
+      continue;
+    }
     const indent = pad + pad + pad;
     const entries = Object.entries(members)
       .map(([name, obj]) => {

@@ -145,6 +145,8 @@ Add `disabled` to the group to disable all items.
 
 Add `disabled` to an individual item.
 
+<!-- @example {"id":"examples/docs/components/segmented-control/variants-disabled/individual-item"} -->
+
 ```vue demo
 <!-- @wrapper -->
 <div class="d-w100p">

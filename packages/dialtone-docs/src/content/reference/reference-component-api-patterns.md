@@ -90,7 +90,7 @@ These are bound with Vue's `:class` binding on the inner element, separate from 
 
 ## v-model Contract
 
-All form components implement Vue 3 v-model via `modelValue` prop + `update:modelValue` emit:
+Most form components implement Vue 3 v-model via `modelValue` prop + `update:modelValue` emit:
 
 | Component    | modelValue type     | Notes                                        |
 | ------------ | ------------------- | -------------------------------------------- |
@@ -100,6 +100,10 @@ All form components implement Vue 3 v-model via `modelValue` prop + `update:mode
 | DtSelectMenu | `String \| Number`  |                                              |
 | DtToggle     | `Boolean \| String` | Supports `'mixed'` for indeterminate state   |
 | DtSlider     | `Number \| [Number, Number]` | A number is single-thumb mode, a 2-length array is range mode. Also emits `change` on commit only (pointer up / blur), separate from the continuous `update:modelValue` |
+
+DtFilterPill uses a separate controlled contract when `options` is defined, including `[]`: bind `v-model:selected` to `string | null` for `useDropdown=true`, or to a string array for the checkbox popover. Options and committed selection stay owned by the consumer. Omitted or `undefined` options preserve the existing mutable `modelValue` item contract; `null` options are invalid. Keep the contract and controlled `useDropdown` pattern stable for an instance; remount with a key when intentionally switching them.
+
+Use one write/side-effect path for a controlled FilterPill action. Bind `v-model:selected` to plain state and use `selection-change` for a needed side effect, or pass `:selected` and handle `selection-change` through an application setter. Do not invoke the same command from both events or from both `clear` and `selection-change`. The action payload reports a proposal, including same-value single activation; external selection changes do not emit it. See the [FilterPill source page](../../../../../apps/dialtone-documentation/docs/components/filter-pill.md) for deferred selection, neutral values, slot bindings and visibility timing. Its generated source examples remain unverified against the 10.5.1 consumer profile, which predates `options`/`selected`.
 
 Visibility-toggle components use `update:open`:
 

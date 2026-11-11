@@ -26,6 +26,15 @@ describe('utils.js test', function () {
   });
 
   describe('shouldDisableSlotClassProp', function () {
+    it.each([
+      ['anchorEndClass', 'anchorEnd'],
+      ['optionEndClass', 'optionEnd'],
+      ['headerContentClass', 'headerContent'],
+    ])('gates %s on its supplied trailing or header slot', (prop, slot) => {
+      expect(shouldDisableSlotClassProp(prop, { [slot]: '' })).toBe(true);
+      expect(shouldDisableSlotClassProp(prop, { [slot]: '<span>Count</span>' })).toBe(false);
+    });
+
     it('Should disable direct slot class props when their slot is empty', function () {
       expect(shouldDisableSlotClassProp('startIconClass', { startIcon: '' })).toBe(true);
     });

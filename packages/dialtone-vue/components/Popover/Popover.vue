@@ -712,7 +712,7 @@ export default {
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
-      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
+      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor')) || undefined;
     },
 
     modalValidationState () {

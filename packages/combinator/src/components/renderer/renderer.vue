@@ -5,6 +5,8 @@
     :bindings="options.bindings.get()"
     :events="info.events"
     :disabled-members="disabledMembers"
+    :preview-identity="info.metadata?.previewIdentity"
+    :reset-generation="resetGeneration"
     @event="(event, value) => emit('event', event, value)"
   >
     <template
@@ -69,6 +71,10 @@ const props = defineProps({
   disabledMembers: {
     type: Set,
     default: () => new Set(),
+  },
+  resetGeneration: {
+    type: Number,
+    default: 0,
   },
 });
 

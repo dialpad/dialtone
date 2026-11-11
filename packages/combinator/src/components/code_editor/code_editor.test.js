@@ -4,6 +4,10 @@ import JSON5 from 'json5-with-undefined';
 import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { reactive } from 'vue';
+import { DtFilterPill } from '@dialpad/dialtone-vue';
+import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import { buildVariantState, computeDisabledMembers } from '@/src/lib/variant_state';
+import filterPillVariants from '@/src/variants/variants_filter_pill';
 
 function createInfo () {
   return {
@@ -73,6 +77,39 @@ function mountWrapper (className = '', attachTo) {
 }
 
 describe('code_editor.vue test', function () {
+  it.each([false, true])('omits the legacy model from controlled clipboard formats (verbose=%s)', async verbose => {
+    const state = buildVariantState(DtFilterPill,
+      allDocs.find(doc => doc.displayName === 'DtFilterPill'), filterPillVariants, 'default');
+    const wrapper = mountWrapper();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('navigator', { clipboard: { writeText } });
+    vi.useFakeTimers();
+    try {
+      await wrapper.setProps({
+        ...state,
+        verbose,
+        devMode: true,
+        hasChanges: true,
+        disabledMembers: computeDisabledMembers(state.info, state.options.props, state.options.slots),
+      });
+      await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
+      expect(writeText.mock.calls[0][0]).not.toContain('model-value=');
+      expect(writeText.mock.calls[0][0]).toContain('v-model:selected');
+      await wrapper.findAll('button')
+        .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
+      const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
+      expect(preset.props).not.toHaveProperty('modelValue');
+      expect(preset.props.selected).toEqual({ initialValue: 'all' });
+      expect(preset.metadata.copyNotice).toContain('v-model:selected');
+      expect(preset.metadata.lookupExclude.owner).toBe('DLT-3736 / Dialtone component and lookup maintainers');
+      await vi.runAllTimersAsync();
+    } finally {
+      wrapper.unmount();
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('Should render native class attributes in generated code', function () {
     const wrapper = mountWrapper('d-w50p');
 
