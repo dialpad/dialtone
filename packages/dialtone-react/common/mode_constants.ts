@@ -8,3 +8,5 @@ export const CONTENT_MODE_TYPES = {
 } as const;
 
 export type ContentMode = typeof CONTENT_MODE_TYPES[keyof typeof CONTENT_MODE_TYPES];
+
+export const CONTENT_MODE_VALUES: ContentMode[] = Object.values(CONTENT_MODE_TYPES);

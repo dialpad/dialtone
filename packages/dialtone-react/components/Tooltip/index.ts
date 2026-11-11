@@ -8,3 +8,9 @@ export {
   type TooltipDirection,
   type TooltipSticky,
 } from './TooltipConstants';
+export {
+  useTooltipDirective,
+  type DtTooltipDirectiveOptions,
+  type DtTooltipDirectiveProps,
+  type DtTooltipDirectiveValue,
+} from './TooltipDirective';
