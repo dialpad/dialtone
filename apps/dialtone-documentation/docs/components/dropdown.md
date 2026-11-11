@@ -245,7 +245,7 @@ const newestFirst = ref(true);
 
 Set `:visibility-change-callback="handleVisibilityChange"` to receive the open boolean synchronously when logical visibility changes, before the animation completes. With initial `open=true`, the callback runs during creation, before mount; the menu exposes `aria-hidden="false"`. No callback means no logical notification. Dropdown does not declare or emit `open-change`, preserving existing DOM listeners and wrapper notifications.
 
-The callback runs inside a synchronous Vue watcher. To remove a modal overlay, first request closure and wait for `opened(false)`; this terminal notification follows scroll-lock release. Do not remove the modal from the early logical callback. Separately, defer a direct `app.unmount()` with `nextTick` to avoid interrupting Vue's render during prop delivery.
+The callback runs inside a synchronous Vue watcher. An already-closed modal with no pending transition can be removed immediately. For an open or closing modal, request closure if needed and wait for the closing `opened(false)` notification before removing it; that notification follows scroll-lock release. Logical `open=false` alone does not establish that the leave transition has completed. Separately, defer a direct `app.unmount()` with `nextTick` to avoid interrupting Vue's render during prop delivery.
 
 `opened` and `update:open` report current completed transitions. Opening finishes initial focus before notifying listeners, so focus chosen by an `opened` listener is preserved. Stale completions do not notify. `open=null` emits no `update:open`.
 
