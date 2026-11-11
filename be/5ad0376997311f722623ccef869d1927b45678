@@ -1,0 +1,21 @@
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_9ffcf142ac84e2::t_1ad2d155c9d343 28-29
+apps/dialtone-documentation/docs/guides/migration/component-sizes/index.md
+  s_9ffcf142ac84e2::t_1ad2d155c9d343 133-135,174
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "be5ad0376997311f722623ccef869d1927b45678",
+  "prompts": {},
+  "sessions": {
+    "s_9ffcf142ac84e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d0f7-76a3-aa19-3b9b76f40d48",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

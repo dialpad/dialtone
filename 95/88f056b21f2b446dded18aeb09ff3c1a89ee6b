@@ -1,0 +1,28 @@
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_7f1d1d64baa803::t_be4d119ef5997f 6,42,44,125-153,160-164,176-192,216,225-227
+  s_7f1d1d64baa803::t_f8eb011e523332 237-238,243
+packages/combinator/.github/documentation/internal/CODE_PANEL.md
+  s_7f1d1d64baa803::t_c5504d4df8e0a1 52-55
+packages/combinator/src/components/code_editor/code_editor_element.vue
+  s_7f1d1d64baa803::t_c05e241c1d1a3b 4,11,16,27-31
+packages/combinator/src/components/code_editor/code_editor_slot.vue
+  s_7f1d1d64baa803::t_0d2fc5bc96866e 6,15,72,86
+packages/combinator/src/lib/code_copy.js
+  s_7f1d1d64baa803::t_2ec5c5229c8339 67-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9588f056b21f2b446dded18aeb09ff3c1a89ee6b",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
