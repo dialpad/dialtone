@@ -19,7 +19,9 @@ describe('DtModeIsland Tests', () => {
 
   const updateWrapper = () => {
     cleanup();
-    result = render(<DtModeIsland {...baseProps} {...mockProps} {...baseSlots} {...mockSlots} {...baseAttrs} {...mockAttrs} />);
+    result = render(
+      <DtModeIsland {...baseProps} {...mockProps} {...baseSlots} {...mockSlots} {...baseAttrs} {...mockAttrs} />,
+    );
     island = result.container.firstElementChild as HTMLElement;
   };
 
