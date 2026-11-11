@@ -84,6 +84,21 @@ describe('Combinator preset control', () => {
       .toBe('/assets/images/person.png');
   });
 
+  it('keeps following the prop after the user reselects its current name', async () => {
+    const bank = reactive({ ...variantBank.DtAvatar });
+    mountCombinator('image', bank);
+    await nextTick();
+    wrapper.vm.updateVariant('image');
+    await nextTick();
+    delete bank.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    bank.image = variantBank.DtAvatar.image;
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('image');
+    expect(wrapper.emitted('update:preset')).toEqual([['image']]);
+  });
+
   it('preserves spec-sheet view while revalidating a removed and restored preset', async () => {
     const bank = reactive({ ...variantBank.DtAvatar });
     mountCombinator('image', bank);
@@ -198,6 +213,16 @@ describe('Combinator preset control', () => {
     await wrapper.setProps({ preset: '' });
     expect(wrapper.vm.selectedVariant).toBe('');
     expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Edited Name');
+  });
+
+  it('keeps an initially empty preset at default when the bank changes', async () => {
+    const bank = reactive({ ...variantBank.DtAvatar });
+    mountCombinator('', bank);
+    await nextTick();
+    bank.extra = {};
+    await nextTick();
+    expect(wrapper.vm.selectedVariant).toBe('default');
+    expect(wrapper.emitted('update:preset')).toBeUndefined();
   });
 
   it('ignores unchanged model echoes and unsupported update events', async () => {

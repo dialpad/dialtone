@@ -328,8 +328,8 @@ const optionBarWidth = ref(null);
 const viewMode = ref('single');
 const viewToggleRef = ref(null);
 let _presetChanging = false;
-// An unavailable prop request can be retried until the user makes a new selection or edit.
-let pendingPresetName = null;
+// Follow the prop while it still owns the selection; a different user selection or edit takes control.
+let followsPresetProp = true;
 const _forceReset = ref(0);
 
 const isFullScreen = computed({
@@ -406,7 +406,7 @@ const options = computedModel(
       e(model);
       componentValues = captureComponentValues(model);
       if (!_presetChanging && selectedVariant.value !== '') {
-        pendingPresetName = null;
+        followsPresetProp = false;
         selectedVariant.value = '';
         emit('update:preset', '');
       }
@@ -503,7 +503,7 @@ function onComponentEvent(name, value) {
 }
 
 function updateVariant(e, notify = true) {
-  if (notify) pendingPresetName = null;
+  if (notify) followsPresetProp = Boolean(e && e === props.preset);
   _presetChanging = true;
   selectedVariant.value = e;
   if (e !== '') {
@@ -519,29 +519,16 @@ function updateVariant(e, notify = true) {
 watch(
   [() => props.component.name, () => props.preset, () => listVariantNames(props.variants)],
   ([componentName, preset, names], [previousComponentName, previousPreset] = []) => {
-    const selectedName = selectedVariant.value;
-    const bankOnlyChange = componentName === previousComponentName && preset === previousPreset;
-    let nextPreset;
-    if (bankOnlyChange) {
-      if (pendingPresetName && names.includes(pendingPresetName)) {
-        nextPreset = pendingPresetName;
-        pendingPresetName = null;
-      } else if (selectedName && selectedName !== 'default' && !names.includes(selectedName)) {
-        pendingPresetName = selectedName === preset ? preset : null;
-        nextPreset = 'default';
-      } else {
-        return;
-      }
-    } else {
-      const isCustom = preset === '' && componentName === previousComponentName;
-      const isAvailable = names.includes(preset);
-      pendingPresetName = preset && preset !== 'default' && !isAvailable ? preset : null;
-      nextPreset = isCustom ? '' : isAvailable ? preset : 'default';
-    }
+    const componentChanged = componentName !== previousComponentName;
+    const requestChanged = componentChanged || preset !== previousPreset;
+    if (requestChanged) followsPresetProp = Boolean(preset);
+    const requestedName = requestChanged || followsPresetProp ? preset : selectedVariant.value;
+    const isCustom = requestedName === '' && !componentChanged;
+    const nextPreset = isCustom ? '' : names.includes(requestedName) ? requestedName : 'default';
 
-    if (componentName !== previousComponentName || nextPreset !== selectedVariant.value) {
+    if (componentChanged || nextPreset !== selectedVariant.value) {
       updateVariant(nextPreset, false);
-      if (nextPreset && componentName === previousComponentName && !bankOnlyChange) viewMode.value = 'single';
+      if (nextPreset && !componentChanged && requestChanged) viewMode.value = 'single';
     }
   },
   { immediate: true },
