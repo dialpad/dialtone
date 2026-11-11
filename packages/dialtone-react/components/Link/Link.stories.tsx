@@ -50,7 +50,7 @@ export const argTypesData = {
       type: 'select',
     },
     table: { category: 'Deprecated' },
-    description: 'Deprecated. Use tone instead.',
+    description: 'Deprecated, Vue-only alias of tone. DtLink in React does not take it; use tone instead.',
   },
   inverted: {
     table: { category: 'Deprecated' },
