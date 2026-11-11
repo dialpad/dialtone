@@ -44,12 +44,18 @@ export function commonUnit (vueRoot, name, named = new Set()) {
   return ids[0] ?? null;
 }
 
-/** A directive, mixin or composable unit's own paths (relative to dialtone-vue), or [] for any other id. */
+/**
+ * A directive, mixin or composable unit's own paths (relative to dialtone-vue), or [] for any other id. A directive's
+ * directory counts while it holds the directive itself (focustrap_directive/focustrap.js), as a component counts by its
+ * <Name>.vue.
+ */
 function ownPaths (vueRoot, id) {
   const [, kind, rest] = id.match(OWN) ?? [];
   if (kind === 'directive') {
+    const implemented = d => ['js', 'ts']
+      .some(ext => fs.existsSync(path.join(vueRoot, 'directives', d, `${d.replace(/_directive$/, '')}.${ext}`)));
     return list(path.join(vueRoot, 'directives')).filter(d => d.isDirectory() && kebab(d.name) === rest)
-      .map(d => `directives/${d.name}`);
+      .filter(d => implemented(d.name)).map(d => `directives/${d.name}`);
   }
   if (!kind) return [];
   const dir = kind === 'mixin' ? 'common/mixins' : 'common/composables';

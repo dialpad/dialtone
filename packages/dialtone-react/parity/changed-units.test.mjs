@@ -178,6 +178,17 @@ describe('vueSources', () => {
     });
   });
 
+  test('a directive\'s directory counts only while it holds the directive itself', () => {
+    const hollow = tree(path.join(root, 'vue-hollow'), [
+      'directives/focustrap_directive/index.js',
+      'directives/focustrap_directive/focustrap.test.js',
+      'directives/focustrap_directive/focustrap.stories.js',
+    ]);
+    assert.deepEqual(vueSources(hollow, 'directive-focustrap').own, []);
+    assert.deepEqual(vueSources(hollow, 'directive-focustrap').paths, []);
+    assert.equal(commonUnit(hollow, 'focustrap'), null);
+  });
+
   test('a unit\'s Vue tests are the test files in its sources, nested and folded-in ones too', () => {
     const tests = unit => testFiles(vueRoot, vueSources(vueRoot, unit).paths);
     assert.deepEqual(tests('tooltip'),
