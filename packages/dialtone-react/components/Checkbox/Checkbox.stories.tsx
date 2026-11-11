@@ -180,10 +180,12 @@ type Story = StoryObj<CheckboxStoryArgs>;
 const html = (value: string): ReactNode => <span dangerouslySetInnerHTML={{ __html: value }} />;
 
 // CheckboxDefault.story.vue. Its default slot reads `defaultSlot`, which the story never defines, so the `default`
-// arg renders nothing in Vue, and nothing here either.
+// arg renders nothing in Vue, and nothing here either. Vue's single root lets every other arg (`showLabel`,
+// `labelSize`, `showMessages`, `messagesClass`...) fall through to DtCheckbox, so the rest is spread first.
 function CheckboxDefault ({ default: _default, descriptionSlot, ...args }: CheckboxStoryArgs) {
   return (
     <DtCheckbox
+      {...args}
       label={args.label}
       name={args.name}
       value={args.value}
