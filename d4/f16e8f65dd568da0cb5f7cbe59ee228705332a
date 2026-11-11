@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_9ffcf142ac84e2::t_56f293db93b389 264
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d4f16e8f65dd568da0cb5f7cbe59ee228705332a",
+  "prompts": {},
+  "sessions": {
+    "s_9ffcf142ac84e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d0f7-76a3-aa19-3b9b76f40d48",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

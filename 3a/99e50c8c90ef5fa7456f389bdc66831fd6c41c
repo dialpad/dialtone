@@ -1,0 +1,21 @@
+package.json
+  s_2efa3f281e5a52::t_27c15f0d7cdd56 128-129
+pnpm-lock.yaml
+  s_2efa3f281e5a52::t_66cb682deb6ca0 210-215
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3a99e50c8c90ef5fa7456f389bdc66831fd6c41c",
+  "prompts": {},
+  "sessions": {
+    "s_2efa3f281e5a52": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c5dc425-2ee3-45e4-9e43-5b2bb2119897",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

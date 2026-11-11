@@ -1,0 +1,23 @@
+packages/dialtone-docs/package.json
+  s_e32db34e552e28::t_d7e427606f7d12 13
+package.json
+  s_e32db34e552e28::t_8ec8a0cda12f9d 140
+pnpm-lock.yaml
+  s_e32db34e552e28::t_dff4b58b666bde 250-251,622-623,8105,8154-8156,14281-14282,18362,23198,30747
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "f9e98c5a699ed3c537a13cfae62b83ca09d92d30",
+  "prompts": {},
+  "sessions": {
+    "s_e32db34e552e28": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c476dde5-d692-4148-9874-68c277af6fc8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

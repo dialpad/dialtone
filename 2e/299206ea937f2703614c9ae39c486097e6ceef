@@ -1,0 +1,26 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_edb6000ea1a4b6::t_e1c62f11fa6910 140-146
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_edb6000ea1a4b6::t_f47ba756880809 221-222,227-228
+  s_edb6000ea1a4b6::t_15ea23072da185 215,217-218
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/index.mjs
+  s_edb6000ea1a4b6::t_f47ba756880809 202-207
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/test.mjs
+  s_edb6000ea1a4b6::t_e1c62f11fa6910 313-320
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2e299206ea937f2703614c9ae39c486097e6ceef",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
