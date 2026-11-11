@@ -139,12 +139,13 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.emitted('selection-change')).toBeUndefined();
   });
 
-  it('rebases a dirty deferred draft on same-tick parent replacement before retained Apply', async () => {
+  it.each(['parent-first', 'apply-first'])('rebases a dirty deferred draft before Apply when %s', async order => {
     const selected = ref(['sales']);
     let controls;
     wrapper = mount({
       setup: () => () => h(DtFilterPill, {
         label: 'Teams', options, selected: selected.value, deferSelection: true,
+        'onUpdate:selected': value => { selected.value = value; },
       }, { content: bindings => {
         controls = bindings;
         return h('button', { onClick: () => bindings.setSelected(['sales', 'support']) }, 'Edit draft');
@@ -153,11 +154,13 @@ describe('DtFilterPill controlled selection', () => {
     await open();
     controls.setSelected(['sales', 'support']);
     await reconcile();
-    selected.value = ['engineering'];
+    if (order === 'parent-first') selected.value = ['engineering'];
     const applying = controls.apply();
+    if (order === 'apply-first') selected.value = ['engineering'];
     expect(applying).toBeInstanceOf(Promise);
     await applying;
     const pill = wrapper.findComponent(DtFilterPill);
+    expect(selected.value).toEqual(['engineering']);
     expect(pill.emitted('update:selected')).toBeUndefined();
     expect(pill.emitted('selection-change')).toEqual([[{
       value: ['engineering'], previousValue: ['engineering'], reason: 'apply', changed: false,
@@ -189,9 +192,13 @@ describe('DtFilterPill controlled selection', () => {
     });
   });
 
-  it('coalesces repeated Apply and cancels in-flight Apply on dismissal', async () => {
+  it.each(['close', 'cancel', 'reopen', 'dispose'])('coalesces repeated Apply and cancels in-flight Apply on %s', async boundary => {
     let controls;
-    updateWrapper({ deferSelection: true }, { content: bindings => { controls = bindings; return 'Custom'; } });
+    const actions = [];
+    const applies = [];
+    updateWrapper({ deferSelection: true }, { content: bindings => { controls = bindings; return 'Custom'; } }, {
+      onSelectionChange: action => actions.push(action), onApply: () => applies.push('apply'),
+    });
     await open();
     controls.setSelected(['support']);
     const apply = controls.apply;
@@ -202,10 +209,15 @@ describe('DtFilterPill controlled selection', () => {
     await open();
     controls.setSelected(['engineering']);
     const pendingApply = controls.apply();
-    controls.close();
+    if (boundary === 'dispose') wrapper.unmount();
+    else if (boundary === 'cancel') controls.cancel();
+    else {
+      controls.close();
+      if (boundary === 'reopen') wrapper.find('[data-qa="dt-filter-pill__button"]').element.click();
+    }
     await pendingApply;
-    expect(wrapper.emitted('selection-change')).toHaveLength(1);
-    expect(wrapper.emitted('apply')).toEqual([[]]);
+    expect(actions).toHaveLength(1);
+    expect(applies).toEqual(['apply']);
   });
 
   it('normalizes locked true once without reporting a visibility change and does not reopen on unlock', async () => {
@@ -373,25 +385,127 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
   });
 
-  it('restores ordinary and once consumed DOM listeners on bubbling legacy slot events', async () => {
-    const ordinary = vi.fn();
-    const once = vi.fn();
-    const capture = vi.fn();
-    const passive = vi.fn();
-    updateWrapper({ options: undefined, popoverAppendTo: 'parent' }, {
-      content: () => h('button', { 'data-qa': 'legacy-event' }, 'Dispatch'),
+  it.each([
+    ['onSelectionChangePassive', 'onSelectionChange', 'onSelectionChangeOnce'],
+    ['onSelectionChange', 'onSelectionChangePassive', 'onSelectionChangeOnce'],
+    ['onSelectionChangeOnce', 'onSelectionChangePassive', 'onSelectionChange'],
+    ['onOpenedPassive', 'onOpened', 'onOpenedOnce'],
+  ])('preserves forwarded legacy registration order beginning with %s', async (...keys) => {
+    const trace = [];
+    const listeners = Object.fromEntries(keys.map(key => [key, () => trace.push(key)]));
+    const eventName = keys[0].startsWith('onOpened') ? 'opened' : 'selection-change';
+    wrapper = mount({
+      setup: (_, { attrs }) => () => h(DtFilterPill, {
+        modelValue: [], label: 'Legacy', popoverAppendTo: 'parent', ...attrs,
+      }, { content: () => h('button', { 'data-qa': 'legacy-event' }, 'Dispatch') }),
     }, {
-      onSelectionChange: ordinary, onSelectionChangeOnce: once,
-      onSelectionChangeCapture: capture, onSelectionChangePassive: passive,
+      attrs: {
+        ...listeners,
+        [eventName === 'opened' ? 'onOpenedPassiveCapture' : 'onSelectionChangePassiveCapture']: () => trace.push('capture'),
+        class: 'consumer-root', style: { color: 'red' }, 'data-qa': 'consumer-root',
+      },
+      global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body,
     });
     await open();
     const target = document.querySelector('[data-qa="legacy-event"]');
-    target.dispatchEvent(new CustomEvent('selection-change', { bubbles: true }));
-    target.dispatchEvent(new CustomEvent('selection-change', { bubbles: true }));
-    expect(ordinary).toHaveBeenCalledTimes(2);
-    expect(once).toHaveBeenCalledTimes(1);
-    expect(capture).toHaveBeenCalledTimes(2);
-    expect(passive).toHaveBeenCalledTimes(2);
+    target.dispatchEvent(new CustomEvent(eventName, { bubbles: true }));
+    target.dispatchEvent(new CustomEvent(eventName, { bubbles: true }));
+    expect(trace).toEqual(['capture', ...keys, 'capture', ...keys.filter(key => !key.endsWith('Once'))]);
+    expect(wrapper.element.classList.contains('consumer-root')).toBe(true);
+    expect(wrapper.element.classList.contains('d-filter-pill')).toBe(true);
+    expect(wrapper.element.style.color).toBe('red');
+    expect(wrapper.element.getAttribute('data-qa')).toBe('consumer-root');
+    expect(wrapper.findComponent(DtFilterPill).emitted('opened')).toBeUndefined();
+  });
+
+  it.each([
+    ['onSelectionChangePassive', 'onSelectionChange'],
+    ['onSelectionChange', 'onSelectionChangePassive'],
+    ['onSelectionChangeOncePassive', 'onSelectionChangeOnce'],
+    ['onOpenedPassive', 'onOpened'],
+  ])('preserves stopImmediatePropagation from the first legacy listener %s', async (first, second) => {
+    const trace = [];
+    updateWrapper({ options: undefined, popoverAppendTo: 'parent' }, {
+      content: () => h('button', { 'data-qa': 'legacy-event' }, 'Dispatch'),
+    }, {
+      [first]: event => { trace.push(first); event.stopImmediatePropagation(); },
+      [second]: () => trace.push(second),
+    });
+    await open();
+    document.querySelector('[data-qa="legacy-event"]').dispatchEvent(new CustomEvent(
+      first.startsWith('onOpened') ? 'opened' : 'selection-change', { bubbles: true },
+    ));
+    expect(trace).toEqual([first]);
+  });
+
+  it('renders nullable optional labels and neutral values as absent without mutating options', async () => {
+    const nullableOptions = Object.freeze([Object.freeze({ value: 'sales', label: 'Sales', shortLabel: null })]);
+    updateWrapper({ useDropdown: true, options: nullableOptions, selected: 'sales', neutralValue: null });
+    expect(wrapper.find('.d-filter-pill__label').text()).toContain('Sales');
+    expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(true);
+    await wrapper.find('[data-qa="dt-filter-pill__clear-button"]').trigger('click');
+    expect(wrapper.emitted('update:selected')).toEqual([[null]]);
+    expect(nullableOptions[0].shortLabel).toBeNull();
+  });
+
+  it.each([false, true])('allows parent removal after completed focus and scroll cleanup (dropdown=%s)', async useDropdown => {
+    document.documentElement.classList.remove('d-of-hidden');
+    const trace = [];
+    const visible = ref(true);
+    let controls;
+    wrapper = mount({
+      setup: () => () => visible.value && h(DtFilterPill, {
+        label: 'Teams', options, useDropdown, selected: useDropdown ? 'sales' : ['sales'],
+        onOpened: value => {
+          trace.push({
+            value,
+            locked: document.documentElement.classList.contains('d-of-hidden'),
+            focused: document.activeElement?.getAttribute('data-qa'),
+          });
+          if (!value) visible.value = false;
+        },
+      }, { content: bindings => {
+        controls = bindings;
+        return h('button', { 'data-qa': 'inside' }, 'Inside');
+      } }),
+    }, {
+      global: { plugins: [DtTooltipDirective, DtFocustrapDirective], stubs: { transition: false } },
+      attachTo: document.body,
+    });
+    const pill = wrapper.findComponent(DtFilterPill);
+    await open();
+    await vi.waitFor(() => expect(trace).toHaveLength(1));
+    expect(trace[0].value).toBe(true);
+    expect(trace[0].locked).toBe(true);
+    controls.close();
+    expect(pill.emitted('open')).toEqual([[true], [false]]);
+    expect(trace).toHaveLength(1);
+    expect(wrapper.findComponent(DtFilterPill).exists()).toBe(true);
+    await vi.waitFor(() => expect(trace).toHaveLength(2));
+    expect(trace[1]).toEqual({ value: false, locked: false, focused: 'dt-filter-pill__button' });
+    expect(pill.emitted('opened')).toEqual([[true], [false]]);
+    expect(wrapper.findComponent(DtFilterPill).exists()).toBe(false);
+    expect(document.documentElement.classList.contains('d-of-hidden')).toBe(false);
+  });
+
+  it.each([false, true])('keeps the overlay locked through cancelled leave and only reports the final close (dropdown=%s)', async useDropdown => {
+    document.documentElement.classList.remove('d-of-hidden');
+    let controls;
+    const trace = [];
+    updateWrapper({ useDropdown, selected: useDropdown ? 'sales' : ['sales'] }, {
+      content: bindings => { controls = bindings; return h('button', { 'data-qa': 'inside' }, 'Inside'); },
+    }, { onOpened: value => trace.push(value) }, { stubs: { transition: false } });
+    await open();
+    await vi.waitFor(() => expect(trace).toEqual([true]));
+    controls.close();
+    await reconcile();
+    await open();
+    await vi.waitFor(() => expect(trace).toEqual([true, true]));
+    expect(document.documentElement.classList.contains('d-of-hidden')).toBe(true);
+    expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('true');
+    controls.close();
+    await vi.waitFor(() => expect(trace).toEqual([true, true, false]));
+    expect(document.documentElement.classList.contains('d-of-hidden')).toBe(false);
   });
 
   it('keeps the creation-time contract in both directions while legacy patterns remain reactive', async () => {

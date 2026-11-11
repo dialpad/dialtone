@@ -14,6 +14,7 @@
       v-bind="overlayProps"
       :content-mode="contentMode"
       @update:open="onOverlayTerminalOpen"
+      @opened="onOverlayOpened"
       @keydown="onOverlayKeydown"
     >
       <template #anchor="slotData">
@@ -79,7 +80,9 @@
                 :class="['d-filter-pill__anchor-end', anchorEndClass]"
               >
                 <!--
-                  @slot Noninteractive trailing anchor content, retaining the built-in label.
+                  @slot Noninteractive controlled trailing anchor content, retaining the built-in label.
+                  @binding {string} label Dimension label.
+                  @binding {string} displayLabel Committed display summary.
                   @binding {string | null | Array} selected Committed selection snapshot.
                   @binding {Array} selectedOptions Resolved committed option records.
                   @binding {boolean} isActive Whether committed selection filters results.
@@ -148,9 +151,9 @@
         <!--
           @slot Override overlay content. Bindings are conditional on the selection contract.
           @binding {Function} close Dismiss without applying.
-          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
-          @binding {Function} cancel Dismiss and discard pending state.
-          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {Function} apply Legacy popovers; controlled Promise callback (no-op outside open deferred popovers).
+          @binding {Function} cancel Discard pending state and dismiss; legacy popovers or either controlled pattern.
+          @binding {Array | null} pendingFilters Legacy popover draft records only.
           @binding {string | null | Array} selected Controlled committed snapshot only.
           @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
           @binding {Function} setSelected Controlled explicit selection action only.
@@ -196,9 +199,9 @@
         <!--
           @slot Override overlay content. Bindings are conditional on the selection contract.
           @binding {Function} close Dismiss without applying.
-          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
-          @binding {Function} cancel Dismiss and discard pending state.
-          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {Function} apply Legacy popovers; controlled Promise callback (no-op outside open deferred popovers).
+          @binding {Function} cancel Discard pending state and dismiss; legacy popovers or either controlled pattern.
+          @binding {Array | null} pendingFilters Legacy popover draft records only.
           @binding {string | null | Array} selected Controlled committed snapshot only.
           @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
           @binding {Function} setSelected Controlled explicit selection action only.
@@ -231,7 +234,9 @@
         v-if="!overlayUseDropdown && $slots.headerContent"
         #headerContent="{ close }"
       >
-        <!-- @slot Customize the popover header, or supply a noninteractive controlled dropdown heading. -->
+        <!-- @slot Popover header or noninteractive controlled dropdown heading. Absent in legacy dropdowns.
+          @binding {Function} close Dismiss without applying; popovers only.
+        -->
         <slot
           name="headerContent"
           :close="controlledAtBirth ? closeControlled : close"
@@ -282,9 +287,9 @@
         <!--
           @slot Override overlay content. Bindings are conditional on the selection contract.
           @binding {Function} close Dismiss without applying.
-          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
-          @binding {Function} cancel Dismiss and discard pending state.
-          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {Function} apply Legacy popovers; controlled Promise callback (no-op outside open deferred popovers).
+          @binding {Function} cancel Discard pending state and dismiss; legacy popovers or either controlled pattern.
+          @binding {Array | null} pendingFilters Legacy popover draft records only.
           @binding {string | null | Array} selected Controlled committed snapshot only.
           @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
           @binding {Function} setSelected Controlled explicit selection action only.
@@ -306,7 +311,7 @@
               tone="tertiary"
               :density="500"
             >
-              <!-- @slot Noninteractive controlled dropdown heading; popovers retain close binding. -->
+              <!-- @slot Popover header or noninteractive controlled dropdown heading. Absent in legacy dropdowns. -->
               <slot name="headerContent" />
             </dt-text>
           </li>
@@ -329,7 +334,7 @@
                 <!--
                   @slot Noninteractive trailing choice content, retaining its label and handler.
                   @binding {Object} option Read-only option record.
-                  @binding {boolean} selected Whether this row is selected.
+                  @binding {boolean} selected Whether this row is selected, using a deferred draft when open.
                 -->
                 <slot
                   name="optionEnd"
@@ -343,9 +348,9 @@
         <!--
           @slot Override overlay content. Bindings are conditional on the selection contract.
           @binding {Function} close Dismiss without applying.
-          @binding {Function} apply Legacy callback or controlled deferred Promise callback.
-          @binding {Function} cancel Dismiss and discard pending state.
-          @binding {Array | null} pendingFilters Legacy draft records only.
+          @binding {Function} apply Legacy popovers; controlled Promise callback (no-op outside open deferred popovers).
+          @binding {Function} cancel Discard pending state and dismiss; legacy popovers or either controlled pattern.
+          @binding {Array | null} pendingFilters Legacy popover draft records only.
           @binding {string | null | Array} selected Controlled committed snapshot only.
           @binding {Array | null} pendingSelected Controlled open deferred draft snapshot only.
           @binding {Function} setSelected Controlled explicit selection action only.
@@ -409,6 +414,13 @@ import { DtStack } from '@/components/Stack';
 import { DtText } from '@/components/Text';
 import ControlledSelection from './FilterPillControlled';
 
+/**
+ * @typedef {object} FilterPillOption
+ * @property {string} value Stable choice identity.
+ * @property {string} label Required choice label.
+ * @property {string | null} [shortLabel] Optional anchor summary; null uses label.
+ */
+
 export default {
   name: 'DtFilterPill',
 
@@ -428,21 +440,26 @@ export default {
   mixins: [ControlledSelection],
 
   props: {
-    /** An array at creation (including []) opts into authoritative selection. Remount to change contract or controlled pattern. */
+    /**
+     * An array at creation (including []) opts into authoritative selection. Remount to change contract or controlled pattern.
+     * Records require string value and label. Optional shortLabel accepts string or null; null is absent and empty string is meaningful.
+     */
     options: {
-      type: Array,
+      type: /** @type {import('vue').PropType<readonly FilterPillOption[] | null>} */ (Array),
       default: undefined,
     },
 
     /** Controlled selection: string|null in dropdowns, readonly string[] in popovers. */
     selected: {
-      type: [String, Array],
+      type: /** @type {import('vue').PropType<string | null | readonly string[]>} */ ([String, Array]),
       default: undefined,
     },
 
-    /** Single-selection baseline. Empty string is supported; ignored in multiple selection. */
+    /**
+     * Single-selection baseline. Null or omitted means absent; empty string is meaningful. Ignored in multiple selection.
+     */
     neutralValue: {
-      type: String,
+      type: /** @type {import('vue').PropType<string | null>} */ (String),
       default: undefined,
     },
 
@@ -708,6 +725,14 @@ export default {
     'update:open',
 
     /**
+     * Controlled-only completed overlay visibility, after focus and scroll cleanup.
+     * For removal, keep the modal, anchor and scroll container unchanged until opened(false).
+     * Completion does not establish global scroll-lock ownership.
+     * @type {boolean}
+     */
+    'opened',
+
+    /**
      * Emitted when clicking the clear button
      *
      * @event clear
@@ -716,9 +741,9 @@ export default {
     'clear',
 
     /**
-     * Emitted when popover is shown or hidden
+     * Logical visibility notification when the overlay is shown or dismissed
      *
-     * @event opened
+     * @event open
      * @type {Boolean | Array}
      */
     'open',

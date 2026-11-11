@@ -38,7 +38,7 @@ Reserved top-level keys:
 
 Every other top-level key is a named preset shown in the Combinator preset dropdown.
 
-Set `defaults.metadata.initialPreset` to an existing preset name only when the UI should initially show and Reset to that preset. The preference also supplies the edit-comparison baseline; it does not rename the `default` preset or its lookup ID. Banks without this metadata keep their existing behavior.
+Set `defaults.metadata.initialPreset` to an existing preset name only when the UI should initially show and Reset to that preset. The preference also supplies the edit-comparison baseline; it does not rename the `default` preset or its lookup ID. Component-wall thumbnails still use `default` unless an override exists. Banks without this metadata keep their existing behavior.
 
 ```js
 export default {
@@ -93,6 +93,10 @@ defaults: {
 `tokenCategory` enables token-aware value previews in controls. Verify category
 strings against `packages/combinator/src/lib/tokens.js` and existing variant
 files before adding a new form.
+
+## Optional preview and copy metadata
+
+Follow the [shared preview and copy metadata rules](../../.agents/resources/rules/combinator-variants.md#optional-preview-and-copy-metadata) for `previewIdentity` and `copyNotice`. For owned `metadata.lookupExclude` annotations, follow the [shared materialization and delivery lifecycle](../../.agents/resources/documentation-examples.md#combinator-presets). These fields are bank metadata, separate from component members.
 
 ## Search keywords
 

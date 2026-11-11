@@ -13,7 +13,7 @@ export function getSelectionState (options, selected, { useDropdown, neutralValu
   const issues = [];
   const validOptions = Array.isArray(options) && options.every(option =>
     option && typeof option.value === 'string' && typeof option.label === 'string' &&
-    (option.shortLabel === undefined || typeof option.shortLabel === 'string')) &&
+    (option.shortLabel == null || typeof option.shortLabel === 'string')) &&
     new Set(options.map(option => option.value)).size === options.length;
   if (!validOptions) issues.push('options must contain unique string values and string labels.');
   const resolved = selected === undefined ? (useDropdown ? null : []) : selected;
@@ -21,11 +21,11 @@ export function getSelectionState (options, selected, { useDropdown, neutralValu
     ? resolved === null || typeof resolved === 'string'
     : Array.isArray(resolved) && resolved.every(value => typeof value === 'string');
   if (!validSelected) issues.push('selected has the wrong shape for this selection pattern.');
-  const validNeutral = !useDropdown || neutralValue === undefined || typeof neutralValue === 'string';
-  if (!validNeutral) issues.push('neutralValue must be a string in single selection.');
+  const validNeutral = !useDropdown || neutralValue == null || typeof neutralValue === 'string';
+  if (!validNeutral) issues.push('neutralValue must be a string or null in single selection.');
   const value = validSelected ? (useDropdown ? resolved : [...new Set(resolved)]) : (useDropdown ? null : []);
   if (!useDropdown && validSelected && value.length !== resolved.length) issues.push('selected contains duplicate values.');
-  if (!useDropdown && neutralValue !== undefined) issues.push('neutralValue is ignored in multiple selection.');
+  if (!useDropdown && neutralValue != null) issues.push('neutralValue is ignored in multiple selection.');
   const records = validOptions ? options.map(option => Object.freeze({ ...option })) : [];
   const values = useDropdown ? (value === null ? [] : [value]) : value;
   const selectedOptions = records.filter(option => values.includes(option.value));

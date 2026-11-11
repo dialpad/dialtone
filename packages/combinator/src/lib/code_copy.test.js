@@ -1,4 +1,5 @@
 import { serializeExampleTemplate } from './code_copy';
+import filterPillVariants from '../variants/variants_filter_pill';
 
 it('retains snapshot setup responsibilities in serialized templates for clipboard and preset delivery', () => {
   const template = serializeExampleTemplate({
@@ -13,16 +14,38 @@ it('retains snapshot setup responsibilities in serialized templates for clipboar
   expect(template).toBe('<!-- Snapshot. Bind v-model:selected for interaction. -->\n<dt-filter-pill />');
 });
 
-it('keeps copy notices inside one template comment', () => {
+it.each(['-->', '--!>'])('keeps copy notices containing %s inside one template comment', terminator => {
   const template = serializeExampleTemplate({
     info: {
       displayName: 'DtButton',
-      metadata: { copyNotice: 'Snapshot --> <script>bad()</script>' },
+      metadata: { copyNotice: `Snapshot ${terminator} <script>bad()</script>` },
       bindings: { get: () => [] },
     },
     options: { bindings: { get: () => ({}) } },
     disabledMembers: new Set(),
   });
-  expect(template.match(/-->/g)).toHaveLength(1);
-  expect(template).toContain('Snapshot --&gt; <script>bad()</script>');
+  const container = document.createElement('div');
+  container.innerHTML = template;
+  expect([...container.childNodes].map(node => node.nodeName)).toEqual(['#comment', '#text', 'DT-BUTTON']);
+  expect(container.firstChild.textContent).toContain('<script>bad()</script>');
+});
+
+it.each([
+  ['controlled default', 'controlled-single-selection'],
+  ['controlled active', 'controlled-single-selection'],
+  ['controlled empty options', 'controlled-single-selection'],
+  ['controlled counts', 'controlled-single-selection'],
+  ['controlled multiple', 'controlled-multiple-selection'],
+  ['controlled deferred', 'controlled-multiple-selection'],
+])('links the %s copied snapshot to its interactive public pattern', (preset, anchor) => {
+  const template = serializeExampleTemplate({
+    info: {
+      displayName: 'DtFilterPill',
+      metadata: filterPillVariants[preset].metadata,
+      bindings: { get: () => [] },
+    },
+    options: { bindings: { get: () => ({}) } },
+    disabledMembers: new Set(),
+  });
+  expect(template).toContain(`https://dialtone.dialpad.com/components/filter-pill.html#${anchor}.`);
 });

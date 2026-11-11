@@ -38,10 +38,30 @@ describe('FilterPill controlled input normalization', () => {
     },
   );
 
-  it.each([null, 0, false])('rejects a non-string single neutral value: %j', neutralValue => {
+  it.each([0, false])('rejects a non-string single neutral value: %j', neutralValue => {
     const state = getSelectionState(options, 'a', { useDropdown: true, neutralValue });
     expect(state.valid).toBe(false);
-    expect(state.issues).toContain('neutralValue must be a string in single selection.');
+    expect(state.issues).toContain('neutralValue must be a string or null in single selection.');
+  });
+
+  it.each([undefined, null])('treats absent nullable optional fields (%j) as omitted', optional => {
+    const record = Object.freeze({ value: 'a', label: 'A', shortLabel: optional });
+    const state = getSelectionState(Object.freeze([record]), 'a', { useDropdown: true, neutralValue: optional });
+    expect(state.valid).toBe(true);
+    expect(state.isActive).toBe(true);
+    expect(state.issues).toEqual([]);
+    expect(state.selectedOptions[0].label).toBe('A');
+    expect(record.shortLabel).toBe(optional);
+    expect(getSelectionState(options, ['a'], { neutralValue: optional }).issues).toEqual([]);
+  });
+
+  it('preserves meaningful empty optional strings', () => {
+    const state = getSelectionState([{ value: '', label: 'All', shortLabel: '' }], '', {
+      useDropdown: true, neutralValue: '',
+    });
+    expect(state.valid).toBe(true);
+    expect(state.isActive).toBe(false);
+    expect(state.selectedOptions[0].shortLabel).toBe('');
   });
 
 });

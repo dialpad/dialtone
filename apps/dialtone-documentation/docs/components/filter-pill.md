@@ -29,9 +29,9 @@ combinator: DtFilterPill
 - Pass an array in `options` when mounting to use controlled selection. `:options="[]"` opts in and supports asynchronous loading. Initial omitted, `undefined`, `null` or non-array options preserve the legacy array contract. A controlled instance stays controlled if later options become invalid; invalid input disables selection until repaired.
 - With `use-dropdown`, `selected` is a string or `null`. In the checkbox popover, it is an array of strings. Bind it with `v-model:selected`, or assign it from one `selection-change` handler when the application also needs a business command.
 - Options use stable, unique string `value` identities and visible `label` text. `shortLabel` changes only the pill label. Replacing selection, options or translated labels updates the same open control without mutating supplied data.
-- `neutral-value` identifies the single-selection choice restored by Clear. It remains checked but does not activate the pill. Multiple selection clears to `[]`. Unknown nonneutral values are retained and show an unavailable-selection label until a matching option returns; no first choice is selected automatically.
+- `neutral-value` identifies the single-selection choice restored by Clear. Omitted or `null` means no neutral option; an empty string is a valid identity. A `null` `shortLabel` falls back to `label`. It remains checked but does not activate the pill. Multiple selection clears to `[]`. Unknown nonneutral values are retained and show an unavailable-selection label until a matching option returns; no first choice is selected automatically.
 - `selection-change` includes `value`, `previousValue`, `reason` and `changed`. Activating the current radio choice still reports `changed: false`, so intentional repeated application actions remain possible. External prop updates do not emit this event. Use one application write path; do not also write selection from `clear`.
-- `v-model:open` synchronizes logical overlay visibility. A bound `false` does not veto user opening; disabling or making the control read-only closes it.
+- `v-model:open` synchronizes logical overlay visibility. A bound `false` does not veto user opening; disabling or making the control read-only closes it. Controlled `opened(boolean)` reports the current completed transition separately. Wait for `opened(false)` before removing an open or closing pill.
 - Keep the legacy/controlled contract and controlled `use-dropdown` pattern stable for a mounted pill. Use a keyed remount with the matching scalar/array value when switching either. Replacing a controlled option array is an ordinary update. Legacy `use-dropdown` switching retains its existing behavior.
 
 For existing callers, `v-model` still accepts `{ name, active? }[]` and keeps its initial array reference. Mutate those objects in place; replacing that legacy array does not replace the internal reference. The examples under Variants and the existing custom-slot examples retain that contract. Its `activeFilterList` slot binding remains the literal `'All'` for a complete multi-item selection, and `activeFilterOverflow` remains a string such as `'+2'`. Localize application slot text yourself; built-in aggregate and unavailable-selection text uses Dialtone localization.
@@ -74,6 +74,34 @@ Checkbox selection uses `ref([])` and a literal option list. `defer-selection` h
 ```
 
 Omit `defer-selection` for immediate checkbox updates. The `content` slot exposes `pendingSelected`, `apply` and `cancel` in controlled deferred mode; legacy content keeps its existing `pendingFilters` binding. In a custom controlled footer, call `apply()` alone: it asynchronously commits and closes on success. Calling `apply(); close()` cancels the pending proposal. Await `apply()` before application work that depends on the proposal finishing; this does not await the closing transition or terminal overlay cleanup. A custom Apply outside a deferred editing session does nothing.
+
+### Closing before removal
+
+Controlled `open(false)` and `update:open(false)` report the start of closing. They do not signal that focus restoration or modal scroll cleanup has completed. Removing an open or closing pill at that point can leave the page scroll-locked. Keep the pill mounted, with its modal setting, anchor and scroll container unchanged, until `opened(false)` reports the current completed close. A leave cancelled by reopening does not report a completed close.
+
+Use the same sequence before navigation or rebuilding a header: record the requested application action, request closing, then perform the action after `opened(false)`. Keep one selection write path. Immediate unmount inside `selection-change`, logical `open`, or an Apply handler does not follow this sequence. This notification describes that overlay's completed transition; it does not repair ownership of locks from other overlays or changed scroll contexts.
+
+The example requests removal from an open pill's footer and returns focus to the remaining Reset control after removal. An initially closed pill that has never opened can be removed directly. Legacy `open` retains its existing timing; `opened` is a controlled-selection notification.
+
+<!-- @example {"exclude":{"reason":"Terminal close/removal uses a named application handler and component refs beyond bounded lookup setup. The current Dialtone 10.5.1 consumer profile also lacks the controlled selection and opened notification APIs.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
+```vue demo
+<dt-stack direction="row" gap="100">
+  <dt-filter-pill
+    v-if="removalPillVisible"
+    v-model:selected="removalSelection"
+    :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }]"
+    label="Channel"
+    end-tooltip-text="Clear"
+    @opened="onRemovalOpened"
+  >
+    <template #footerContent="{ close }">
+      <dt-button :size="200" @click="removalRequested = true; close()">Remove after closing</dt-button>
+    </template>
+  </dt-filter-pill>
+  <dt-button ref="removalResetButton" :size="200" @click="resetRemovalExample">Reset example</dt-button>
+</dt-stack>
+```
 
 <dialtone-usage>
 <template #do>
@@ -539,7 +567,24 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 <component-class-table component-name="filter-pill"></component-class-table>
 
 <script setup>
-import { ref, computed, inject } from 'vue';
+import { ref, computed, inject, nextTick } from 'vue';
+
+const removalPillVisible = ref(true);
+const removalRequested = ref(false);
+const removalSelection = ref(['email']);
+const removalResetButton = ref(null);
+async function onRemovalOpened (isOpen) {
+  if (isOpen || !removalRequested.value) return;
+  removalPillVisible.value = false;
+  removalRequested.value = false;
+  await nextTick();
+  removalResetButton.value?.$el?.focus();
+}
+function resetRemovalExample () {
+  removalRequested.value = false;
+  removalSelection.value = ['email'];
+  removalPillVisible.value = true;
+}
 
 const heroSelected = ref('all');
 const selectedMessage = ref('all');

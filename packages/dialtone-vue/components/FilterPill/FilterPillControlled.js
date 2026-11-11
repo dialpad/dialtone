@@ -5,10 +5,27 @@ const NEW_INPUTS = new Set([
   'options', 'selected', 'neutralValue', 'neutral-value', 'open',
   'anchorEndClass', 'anchor-end-class', 'optionEndClass', 'option-end-class',
   'headerContentClass', 'header-content-class', 'onUpdate:selected', 'onSelectionChange', 'onSelection-change',
-  'onUpdate:open',
+  'onUpdate:open', 'onOpened',
 ]);
 
 export default {
+  /**
+   * @returns {{
+   *   controlledAtBirth: boolean,
+   *   controlledDropdown: boolean | null,
+   *   controlledDraft: string[] | null,
+   *   checkboxRenderValues: string[],
+   *   draftBase: string,
+   *   draftSession: number,
+   *   reconciliation: number,
+   *   applying: boolean,
+   *   controlledDisposed: boolean,
+   *   rejectedLockedOpen: boolean,
+   *   optionIds: Map<string, string>,
+   *   controlledWarnings: Set<string>,
+   *   clearFocusCandidate: Element | null,
+   * }}
+   */
   data () {
     return {
       controlledAtBirth: Array.isArray(this.options),
@@ -193,9 +210,10 @@ export default {
     legacyRootAttrs () {
       if (this.controlledAtBirth) return {};
       return Object.fromEntries(Object.entries(this.$.vnode.props || {}).filter(([key]) => {
-        // Vue consumes declared event listeners including Once, while other modifiers remain in attrs.
-        const input = key.startsWith('on') ? key.replace(/Once$/, '') : key;
-        return NEW_INPUTS.has(input) && !Object.hasOwn(this.$attrs, key);
+        // Restore the entire new-listener family in VNode order, including modifiers
+        // Vue leaves in attrs. Automatic inheritance deduplicates identical handlers.
+        const input = key.startsWith('on') ? key.replace(/(?:Once|Passive|Capture)+$/, '') : key;
+        return NEW_INPUTS.has(input);
       }));
     },
 
@@ -305,7 +323,8 @@ export default {
         !this.isOpen || this.controlledDraft === null || !this.controlledCanSelect) return;
       this.applying = true;
       const session = this.draftSession;
-      // Deliver queued parent replacements before comparing the current draft's base.
+      // Let the caller finish same-turn parent writes before selecting Vue's pending flush.
+      await Promise.resolve();
       await this.$nextTick();
       if (this.controlledDisposed || session !== this.draftSession || !this.isOpen ||
         this.controlledDraft === null || !this.controlledCanSelect) {
@@ -340,6 +359,10 @@ export default {
 
     onControlledVisibility (next) {
       if (this.controlledAtBirth) this.requestControlledOpen(next);
+    },
+
+    onOverlayOpened (next) {
+      if (this.controlledAtBirth && !this.controlledDisposed && next === this.isOpen) this.$emit('opened', next);
     },
 
     onOverlayTerminalOpen (next) {
