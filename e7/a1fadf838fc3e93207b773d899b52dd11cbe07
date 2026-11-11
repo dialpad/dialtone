@@ -1,0 +1,36 @@
+packages/dialtone-vue/.storybook/main.js
+  s_f1e475b2b85669::t_b0cf476a8d814e 12-13
+packages/dialtone-vue/components/Hovercard/HovercardDefault.story.vue
+  s_f1e475b2b85669::t_9f3d587f7328ac 20-26
+scripts/build-dialtone-vue-docs.mjs
+  s_f1e475b2b85669::t_50e04b17848a6d 44
+packages/dialtone-css/lib/build/less/components/rich-text-editor.less
+  s_f1e475b2b85669::t_d196c14323663a 135-146
+packages/dialtone-vue/vite.config.js
+  s_f1e475b2b85669::t_2b3efcf4c3210a 110
+packages/dialtone-vue/components/Hovercard/HovercardMany.story.vue
+  s_f1e475b2b85669::t_06f9c5d25303cb 107-141
+  s_f1e475b2b85669::t_d6882ed17a2d83 3,6,8
+common/utils/server.mjs
+  s_f1e475b2b85669::t_db0d2ef22292e1 10
+packages/dialtone-vue/components/Hovercard/HovercardWithInput.story.vue
+  s_f1e475b2b85669::t_987665f5ebd8d7 20-26
+packages/dialtone-vue/components/RichTextEditor/Extensions/Mentions/MentionSuggestion.vue
+  s_f1e475b2b85669::t_0e5750c5697e91 106-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e7a1fadf838fc3e93207b773d899b52dd11cbe07",
+  "prompts": {},
+  "sessions": {
+    "s_f1e475b2b85669": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "98b44e92-f9e2-44b0-a503-6f36763110f8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

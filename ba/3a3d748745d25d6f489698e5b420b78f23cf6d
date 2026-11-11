@@ -1,0 +1,19 @@
+packages/dialtone-vue/localization/index.test.js
+  s_41e22045807353::t_7d390aeecfadbe 57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ba3a3d748745d25d6f489698e5b420b78f23cf6d",
+  "prompts": {},
+  "sessions": {
+    "s_41e22045807353": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ad41-e529-7781-9e6c-c66d2aa4c426",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

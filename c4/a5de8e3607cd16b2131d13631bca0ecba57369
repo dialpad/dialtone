@@ -1,0 +1,19 @@
+.npmrc
+  s_d5351a7708202a::t_0f0eb9f727566b 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.13",
+  "base_commit_sha": "c4a5de8e3607cd16b2131d13631bca0ecba57369",
+  "prompts": {},
+  "sessions": {
+    "s_d5351a7708202a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "72b87904-53a3-4ab2-8f93-d9f9fbe71eee",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

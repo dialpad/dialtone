@@ -1,0 +1,53 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_9ffcf142ac84e2::t_e669e10d4daedb 47,53,237-261
+  s_9ffcf142ac84e2::t_72b31f6d85b697 262-263
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_9ffcf142ac84e2::t_8c3a0a530179fc 33,41,365-374,478,496-497,604-612
+  s_9ffcf142ac84e2::t_032558d2fbc667 613
+  s_d1e586165cf49e::t_c9312cc800fa7c 22
+packages/dialtone-css/lib/build/js/dialtone_migrate_text_variant/test.mjs
+  s_9ffcf142ac84e2::t_3caeb7dec1ef57 1-53,55-72,74-77
+  s_9ffcf142ac84e2::t_cb18ccf96de5d3 54
+  s_9ffcf142ac84e2::t_10f68db991097e 78-87
+  s_9ffcf142ac84e2::t_90a3497201d8a1 88-95
+  s_9ffcf142ac84e2::t_9aaedbeee58d3e 73
+packages/dialtone-css/lib/build/js/dialtone_migrate_text_variant/index.mjs
+  s_9ffcf142ac84e2::t_6fe9471206865a 1-16,22-38,41-74,77-106,108-136,138-190
+  s_9ffcf142ac84e2::t_325113b5b2f3b5 39-40
+  s_9ffcf142ac84e2::t_080efbf514b955 17-21,75-76,107,137
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-tshirt-sizes.js
+  s_9ffcf142ac84e2::t_e669e10d4daedb 79-83,150,153-154,156,159-160
+packages/eslint-plugin-dialtone/lib/rules/deprecated-tshirt-sizes.js
+  s_9ffcf142ac84e2::t_325113b5b2f3b5 63-64
+  s_9ffcf142ac84e2::t_8c3a0a530179fc 58-62,65-68,112,179
+.claude/skills/dt-migrate.md
+  s_d1e586165cf49e::t_9171d6916f2d81 21-23
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_d1e586165cf49e::t_d7aa717fc3f376 17,254-278,284,290,296,302,323-324,327,330,338,346,396,404
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_d1e586165cf49e::t_d668a9eda70b7c 26-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d996e26482d4c6567783cf3ab1e63631b8e7382c",
+  "prompts": {},
+  "sessions": {
+    "s_9ffcf142ac84e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d0f7-76a3-aa19-3b9b76f40d48",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_d1e586165cf49e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d616-72a3-8b34-5e0edb2e4090",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
