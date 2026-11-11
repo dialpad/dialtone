@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, type RefObject } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { CONTENT_MODE_VALUES, type ContentMode } from '../../common/mode_constants';
 import { findParentMode, getOppositeMode, getRootContrast, getRootMaterial } from './Utils';
 
@@ -100,34 +100,34 @@ function release (applied: { current: AppliedMode | null }) {
  * @param mode The directive's arg: `'light'`, `'dark'` or `'invert'` (the default, the opposite of the nearest
  *   ancestor's mode). `false` is the directive's `false` value: no mode applied, and any applied one removed.
  *
+ * @param el The element, kept in state with a callback ref so attaching, detaching or swapping it re-renders.
+ *
  * @example
- * const ref = useRef<HTMLElement>(null);
- * useModeRegion(ref, 'dark');
- * return <section ref={ref}>Dark content</section>;
+ * const [el, setEl] = useState<HTMLElement | null>(null);
+ * useModeRegion(el, 'dark');
+ * return <section ref={setEl}>Dark content</section>;
  */
-export function useModeRegion (ref: RefObject<Element | null>, mode: ContentMode | false = 'invert'): void {
+export function useModeRegion (el: Element | null, mode: ContentMode | false = 'invert'): void {
   const enabled = mode !== false;
   const { mode: resolvedMode, warning } = resolveArg(mode === false ? null : mode);
   const warnedFor = useRef<string | null>(null);
   const applied = useRef<AppliedMode | null>(null);
 
-
   // Vue's mounted / updated / unmounted. Vue binds a directive to one element, so a new element is a new directive
-  // instance. A ref can point at a new element without the hook's arguments changing, so this runs after every render
-  // and sets up again only when the element, the value or the resolved mode changed: a re-render with the same
-  // arguments keeps the observers.
+  // instance. This sets up again only when the element, the value or the resolved mode changed: a re-render with the
+  // same arguments keeps the observers.
   useLayoutEffect(() => {
-    const el = enabled ? ref.current : null;
+    const target = enabled ? el : null;
     const current = applied.current;
-    if (current && current.el === el && current.mode === resolvedMode && current.warning === warning) return;
+    if (current && current.el === target && current.mode === resolvedMode && current.warning === warning) return;
     release(applied);
-    if (!el) return;
+    if (!target) return;
     // Once per invalid arg, so StrictMode's second setup doesn't repeat it.
     if (warning && warnedFor.current !== warning) {
       warnedFor.current = warning;
       console.warn(warning);
     }
-    applied.current = { el, mode: resolvedMode, warning, teardown: applyMode(el, resolvedMode) };
+    applied.current = { el: target, mode: resolvedMode, warning, teardown: applyMode(target, resolvedMode) };
   });
 
   // Unmount (and StrictMode's simulated one, after which the effect above sets up again).

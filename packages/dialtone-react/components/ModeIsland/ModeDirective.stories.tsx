@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type ReactNode } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import type { ContentMode } from '../../common/mode_constants';
@@ -21,10 +21,9 @@ function Region ({ as: Tag = 'section', mode, className, children }: {
   className: string;
   children: ReactNode;
 }) {
-  // A div ref fits both tags: the hook only needs an Element.
-  const ref = useRef<HTMLDivElement>(null);
-  useModeRegion(ref, mode);
-  return <Tag ref={ref} className={className}>{children}</Tag>;
+  const [el, setEl] = useState<HTMLElement | null>(null);
+  useModeRegion(el, mode);
+  return <Tag ref={setEl} className={className}>{children}</Tag>;
 }
 
 function Swatches () {

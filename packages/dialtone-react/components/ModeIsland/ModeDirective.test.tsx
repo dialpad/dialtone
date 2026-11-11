@@ -1,4 +1,4 @@
-import { useRef, type ElementType, type ReactNode } from 'react';
+import { useState, type ElementType, type ReactNode } from 'react';
 import { act, cleanup, render, screen, type RenderResult } from '@testing-library/react';
 import type { ContentMode } from '../../common/mode_constants';
 import { useModeRegion } from './ModeDirective';
@@ -13,9 +13,9 @@ interface RegionProps {
 }
 
 function Region ({ as: Tag = 'section', mode, qa, children }: RegionProps) {
-  const ref = useRef<HTMLElement>(null);
-  useModeRegion(ref, mode);
-  return <Tag ref={ref} data-qa={qa}>{children}</Tag>;
+  const [el, setEl] = useState<HTMLElement | null>(null);
+  useModeRegion(el, mode);
+  return <Tag ref={setEl} data-qa={qa}>{children}</Tag>;
 }
 
 const waitForObservers = () => act(() => new Promise(resolve => setTimeout(resolve, 10)));
@@ -292,8 +292,7 @@ describe('DtModeDirective Tests', () => {
       const element = document.createElement('section');
       document.body.appendChild(element);
       function External () {
-        const ref = useRef<HTMLElement>(element);
-        useModeRegion(ref, 'dark');
+        useModeRegion(element, 'dark');
         return null;
       }
 
@@ -308,7 +307,7 @@ describe('DtModeDirective Tests', () => {
       element.remove();
     });
 
-    it('should move its attributes to a new element when the ref points at one and the mode is unchanged', () => {
+    it('should move its attributes to a new element when the element changes and the mode is unchanged', () => {
       wrapper = render(<Region as="section" mode="dark" qa="target">Content</Region>);
       const first = target();
       expect(first).toHaveAttribute('data-dt-mode', 'dark');

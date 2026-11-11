@@ -338,11 +338,11 @@ const i18n = {
 const localMessage = `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`;
 
 function InvertedButton () {
-  const ref = useRef<HTMLButtonElement>(null);
-  useModeRegion(ref, 'invert');
+  const [el, setEl] = useState<HTMLButtonElement | null>(null);
+  useModeRegion(el, 'invert');
   return (
     <StandIn for="button">
-      <button ref={ref} className="base-button__button d-btn d-btn--outlined" data-qa="dt-button" type="button">
+      <button ref={setEl} className="base-button__button d-btn d-btn--outlined" data-qa="dt-button" type="button">
         <span data-qa="dt-button-label" className="base-button__label d-btn__label">Inverted</span>
       </button>
     </StandIn>
