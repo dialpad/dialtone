@@ -27,7 +27,8 @@ export default defineConfig({
     ...vueConfig.test,
     name: 'dialtone-vue-parity',
     dir: here('.'),
-    include: ['goldens.test.js'],
+    // PARITY_VUE_TESTS=transition-traces.test.js re-records DtTransition's reference traces.
+    include: [process.env.PARITY_VUE_TESTS ?? 'goldens.test.js'],
     exclude: [],
     setupFiles: [here('../../../dialtone-vue/tests/setupTests.js'), here('../dom-setup.mjs')],
     coverage: { enabled: false },

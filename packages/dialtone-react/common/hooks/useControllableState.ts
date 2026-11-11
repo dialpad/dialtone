@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 
 /**
- * State that's controlled when `value` is set and uncontrolled otherwise: Vue's v-model in React
- * (conventions › Vue → React). The setter calls `onChange` either way, with any extra arguments.
+ * State that's controlled when `value` is set and uncontrolled otherwise: Vue's v-model in React.
+ * The setter calls `onChange` either way, with any extra arguments.
  */
 export function useControllableState<T, Rest extends unknown[] = []> ({ value, defaultValue, onChange }: {
   value: T | undefined;

@@ -1,4 +1,4 @@
-// Settling, identical on both sides (parity.md › DOM parity): fake timers including requestAnimationFrame and a
+// Settling, identical on both sides of DOM parity: fake timers including requestAnimationFrame and a
 // fixed clock; advance 10s, finish CSS transitions, advance again.
 /* global document */
 export const FAKE_TIMERS = {

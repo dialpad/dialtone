@@ -1,10 +1,10 @@
 ---
 type: workflow
 category: workflows
-keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
+keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook, dialtone-react, parity-gate]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-23
-related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
+last_updated: 2026-11-10
+related_packages: [dialtone-vue, dialtone-react, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
 # CI Pipeline
@@ -76,6 +76,29 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 **Trigger:** Push to `staging` and pull requests touching `apps/dialtone-documentation/**`, the Vue docs generator, `scripts/lib/**/*.mjs`, `scripts/tests/**`, the imported common helper, this workflow, or `pnpm-lock.yaml`.
 
 **What it does:** Runs `pnpm nx run dialtone-documentation:test`, builds the documentation site with `pnpm nx run dialtone-documentation:build`, and verifies that `llms.txt` and `llms-full.txt` exist and are nonempty. Generator/helper/test routing runs the existing documentation checks. The public-identity generator suite runs after the lookup build.
+
+---
+
+### `dialtone-react.yml`
+
+**Trigger:** Pull requests into, and pushes to, the `dialtone-react` branch (the Vue → React port), touching `packages/dialtone-react/**`, `packages/dialtone-vue/**`, `packages/dialtone-icons/**`, `packages/dialtone-emojis/**`, `packages/dialtone-tokens/**`, Combinator's `src/variants/` and `src/lib/`, `pnpm-lock.yaml`, root `package.json`, `nx.json`, the setup action or this workflow. It doesn't run on `staging`. A newer push to a PR cancels the PR's older run; each push to `dialtone-react` runs in full, in its own concurrency group.
+
+| Job | What it does |
+|-----|--------------|
+| `check` | `pnpm nx run dialtone-react:lint`, `:typecheck` and `:test`, then the harness's own tests (`node --test 'packages/dialtone-react/parity/*.test.mjs'`), then `:build`. |
+| `gate` | Runs the parity gate (`pnpm nx run dialtone-react:gate -- <unit>`) for each ported unit the change touches, one after another, and writes each gate's summary to the job summary. A run with no changed units skips the gate. |
+
+`parity/changed-units.mjs` picks the gate job's units. A ported unit is one with a React `components/<Name>/index.ts`. It's gated when the change edits or deletes a file in one of these:
+
+- Its React directory.
+- Its Vue sources (`parity/vue-sources.mjs`, the same lookup the gate uses), which include pieces outside `components/`: `directives/tooltip_directive` is tooltip's, `common/sr_only_close_button.vue` is button's, and the directive, mixin and composable units are their own files. A deleted Vue path is placed by its shape (`directives/<d>/` is `directive-<d>`'s).
+- What its React or Vue sources import, directly or not: Checkbox renders DtText, so a Text change gates checkbox, and a `common/utils` change in `dialtone-vue` gates every unit that uses it. Stories' imports aren't followed, and imports are followed only within each package: React's `common/localization` reads dialtone-vue's `.ftl` files from outside its package, so a `.ftl` change gates the units whose Vue sources import `@/localization`, as every Vue source that shows translated text does.
+- Its Combinator presets (DOM parity's cases): the variants file Combinator's `variants.js` maps it to, and what that file imports inside Combinator, like `src/lib/exclusion_rules.js`.
+- The shared files, which gate every ported unit: the package's `parity/`, `common/`, `tests/`, `scripts/` and `types/`, its `package.json`, `tsconfig*`, `vite*` and ESLint config, `pnpm-lock.yaml`, the `dialtone-react*.yml` workflows, dialtone-vue's `vite.config.js` and `tests/setupTests.js`, Combinator's `variants.js`, and anything in `packages/dialtone-icons/` or `packages/dialtone-emojis/` except Markdown.
+
+A `packages/dialtone-tokens/` change gates no unit: no component, test or parity case reads it. The Storybook themes do, and the `check` job's typecheck catches a change to their types. A push that creates the branch, or whose previous commit can't be fetched after a history rewrite, has no range to diff, so the gate job runs every ported unit, whatever changed. On a push to `dialtone-react`, the gate job sets `PARITY_SKIP_STAND_INS=1`, so a merged component's leftover story stand-ins don't fail the base branch.
+
+Both jobs restore Nx's local cache (`.nx/cache`) with `actions/cache`, keyed on the lockfile, so the dialtone-icons and dialtone-tokens builds they depend on are reused across runs. The gate job sets up the environment and restores the cache only when it has units to gate.
 
 ---
 
