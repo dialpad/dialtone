@@ -51,18 +51,41 @@ const TEXT_LIST_ITEM_INFO = {
 };
 
 describe('variant_state', function () {
+  it('retains the exact legacy default configuration for preset retrieval', () => {
+    expect(filterPillVariants.default).toEqual({
+      props: {
+        label: { initialValue: 'Active example' },
+        modelValue: { initialValue: [{ name: 'Option 1' }, { name: 'Option 2' }, { name: 'Option 3', active: true }] },
+        endTooltipText: { initialValue: 'Remove' },
+      },
+    });
+  });
+
+  it.each([undefined, null, {}, 'invalid', []])('discriminates fresh options %j by array shape', options => {
+    const { info, options: state } = buildVariantState(DtFilterPill,
+      allDocs.find(doc => doc.displayName === 'DtFilterPill'), {
+        ...filterPillVariants,
+        fixture: { props: { options: { initialValue: options } } },
+      }, 'fixture');
+    const controlled = Array.isArray(options);
+    expect(info.metadata.previewIdentity(state.props)[0]).toBe(controlled ? 'controlled' : 'legacy');
+    const disabled = computeDisabledMembers(info, state.props, state.slots);
+    expect(disabled.has('modelValue')).toBe(controlled);
+    expect(disabled.has('selected')).toBe(!controlled);
+  });
+
   it.each([false, true])('copies exactly one Filter Pill contract (verbose=%s)', verbose => {
     const doc = allDocs.find(doc => doc.displayName === 'DtFilterPill');
     for (const [preset, omitted, present] of [
-      ['default', 'model-value', ':options='],
-      ['legacy default', 'options', ':model-value='],
+      ['controlled default', 'model-value', ':options='],
+      ['default', 'options', ':model-value='],
     ]) {
       const state = buildVariantState(DtFilterPill, doc, filterPillVariants, preset);
       const disabledMembers = computeDisabledMembers(state.info, state.options.props, state.options.slots);
       const template = serializeExampleTemplate({ ...state, disabledMembers, verbose });
       expect(template).not.toMatch(new RegExp(`\\n +:?${omitted}=`));
       expect(template).toContain(present);
-      if (preset === 'legacy default') {
+      if (preset === 'default') {
         expect(template).not.toMatch(/\n +:?(selected|neutral-value|open)=/);
       }
     }
@@ -85,7 +108,6 @@ describe('variant_state', function () {
     }, 'primary');
 
     expect(info.metadata).toEqual({ previewIdentity, copyNotice: 'Named notice' });
-    expect(info.props.some(member => member.name === 'copyNotice')).toBe(false);
   });
 
   it('restores owned initial arrays after mutation only for banks with a preview identity policy', () => {

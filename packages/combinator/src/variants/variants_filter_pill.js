@@ -38,18 +38,19 @@ function controlledPreset (props = {}, slots = {}) {
 export default {
   defaults: {
     metadata: {
-      previewIdentity: bindings => bindings.options !== undefined
+      initialPreset: 'controlled default',
+      previewIdentity: bindings => Array.isArray(bindings.options)
         ? ['controlled', Boolean(bindings.useDropdown)]
         : ['legacy', bindings.modelValue],
     },
   },
   exclusions: [
     {
-      when: { options: value => value !== undefined },
+      when: { options: Array.isArray },
       hide: { props: ['modelValue'] },
     },
     {
-      when: { options: value => value === undefined },
+      when: { options: value => !Array.isArray(value) },
       hide: { props: ['selected', 'neutralValue', 'open'], slots: ['anchorEnd', 'optionEnd'] },
     },
     {
@@ -64,12 +65,12 @@ export default {
       disable: { props: ['dropdownListClass'] },
     },
     {
-      when: { options: value => value !== undefined, useDropdown: value => !value },
+      when: { options: Array.isArray, useDropdown: value => !value },
       hide: { props: ['neutralValue'] },
     },
   ],
 
-  default: controlledPreset(),
+  'controlled default': controlledPreset(),
 
   'controlled active': controlledPreset({ selected: { initialValue: 'mentions', types: ['string', 'null'] } }),
 
@@ -92,7 +93,7 @@ export default {
     optionEnd: { initialValue: '<dt-badge v-if="option.value === \'unread\'" type="bulletin" kind="count" aria-hidden="true">12</dt-badge><span v-if="option.value === \'unread\'" class="d-vi-visible-sr">, 12 unread messages</span>' },
   }),
 
-  'legacy default': {
+  default: {
     props: {
       label: {
         initialValue: 'Active example',

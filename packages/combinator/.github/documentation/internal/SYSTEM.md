@@ -49,6 +49,16 @@ The Combinator merges variant data into `info` by member name. It merges
 `defaults` before the selected preset and copies `exclusions` to
 `info.exclusions`.
 
+The UI starts and resets to `default` unless the bank opts into
+`defaults.metadata.initialPreset` with a named preset. This preference also
+sets the baseline for detecting edits; it does not rename the `default` preset
+or change its generated lookup identity. Filter Pill prefers `controlled default`
+while preserving its legacy `default` configuration.
+
+Filter Pill preview identity uses the array shape of `options`. Editing an array
+to `null` (or the reverse) creates a new preview instance, matching its new
+configuration. Option replacements within controlled mode keep the same instance.
+
 ## Options
 
 `options` is the reactive value map that the renderer, option bar, and code

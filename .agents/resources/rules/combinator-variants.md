@@ -31,9 +31,11 @@ Reserved top-level keys:
 
 - `defaults`: metadata applied before every preset.
 - `exclusions`: rules that hide, disable, clear, or disable specific values.
-- `default`: the initial preset and reset target.
+- `default`: the initial preset and reset target unless the bank declares `defaults.metadata.initialPreset`.
 
 Every other top-level key is a named preset shown in the Combinator preset dropdown.
+
+Set `defaults.metadata.initialPreset` to an existing preset name only when the UI should initially show and Reset to that preset. The preference also supplies the edit-comparison baseline; it does not rename the `default` preset or its lookup ID. Banks without this metadata keep their existing behavior.
 
 ```js
 export default {

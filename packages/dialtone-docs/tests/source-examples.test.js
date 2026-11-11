@@ -23,24 +23,20 @@ const produce = raw => buildExampleRecords(input(raw));
 const ordinary = `## Default\n${fence('<dt-button>Save</dt-button>')}`;
 
 describe('source-driven component examples', () => {
-  it('delivers controlled FilterPill state and compatibility comments while retaining legacy IDs', () => {
-    const records = buildRecords(resolve('../../apps/dialtone-documentation/docs/components/filter-pill.md'));
+  it('withholds incompatible controlled starters while retaining legacy FilterPill IDs', () => {
+    const filePath = resolve('../../apps/dialtone-documentation/docs/components/filter-pill.md');
+    const records = buildRecords(filePath);
     const byId = new Map(records.filter(record => record.example).map(record => [record.id, record]));
-    for (const [id, declaration] of [
-      ['examples/docs/components/filter-pill/intro', 'const heroSelected = ref(\'all\');'],
-      ['examples/docs/components/filter-pill/controlled-single-selection', 'const selectedMessage = ref(\'all\');'],
-      ['examples/docs/components/filter-pill/controlled-multiple-selection', 'const selectedChannels = ref([]);'],
-    ]) {
-      const record = byId.get(id);
-      expect(record, id).toBeDefined();
-      expect(record.content).toContain(declaration);
-      const compatibility = record.content.match(/<!--[^]*?10\.5\.1[^]*?-->/)?.[0];
-      expect(compatibility).toContain('options/selected');
-      expect(compatibility).toContain('lacks this API');
-      expect(compatibility).toContain('compatible published release');
-      expect(record.example.profile.dependencies['@dialpad/dialtone']).toBe('10.5.1');
-      expect(record.example.validation.consumerBuild).toBe('unverified');
-      expect(record.example.manualReview).toBe('pending');
+    const options = input(readFileSync(filePath, 'utf8'));
+    options.filePath = 'apps/dialtone-documentation/docs/components/filter-pill.md';
+    const coverage = buildExampleCoverage({ ...options, records });
+    for (const section of ['intro', 'controlled-single-selection', 'controlled-multiple-selection']) {
+      const id = `examples/docs/components/filter-pill/${section}`;
+      expect(byId.has(id), id).toBe(false);
+      const candidate = coverage.candidates.find(candidate => candidate.id === id);
+      expect(candidate, id).toMatchObject({ disposition: 'excluded', owner: 'DLT-3736 / Dialtone component and lookup maintainers' });
+      expect(candidate.reason).toContain('10.5.1');
+      expect(candidate.reason).toContain('qualification');
     }
     for (const section of [
       'variants-base', 'variants-active', 'variants-disabled', 'variants-read-only',

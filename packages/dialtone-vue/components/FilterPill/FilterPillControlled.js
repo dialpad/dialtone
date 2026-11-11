@@ -11,7 +11,7 @@ const NEW_INPUTS = new Set([
 export default {
   data () {
     return {
-      controlledAtBirth: this.options !== undefined,
+      controlledAtBirth: Array.isArray(this.options),
       controlledDropdown: this.useDropdown,
       controlledDraft: null,
       checkboxRenderValues: [],
@@ -35,7 +35,7 @@ export default {
     },
 
     controlledContractValid () {
-      return this.options !== undefined && this.useDropdown === this.controlledDropdown;
+      return Array.isArray(this.options) && this.useDropdown === this.controlledDropdown;
     },
 
     controlledCanSelect () {
@@ -48,10 +48,11 @@ export default {
 
     controlledBase () {
       const state = this.controlledState;
-      return JSON.stringify([
-        state.valid, [...state.options.map(option => option.value)].sort(),
-        Array.isArray(state.value) ? [...state.value].sort() : state.value,
-      ]);
+      return JSON.stringify(Array.isArray(state.value) ? [...state.value].sort() : state.value);
+    },
+
+    controlledOptionValues () {
+      return this.controlledState.options.map(option => option.value);
     },
 
     controlledDisplayLabel () {
@@ -127,10 +128,15 @@ export default {
     disabled () { this.closeWhenLocked(); },
     readOnly () { this.closeWhenLocked(); },
 
-    options (next, previous) {
-      this.checkControlledConfiguration();
+    options () { this.checkControlledConfiguration(); },
+
+    controlledOptionValues (values, previous) {
       if (!this.controlledAtBirth) return;
       this.restoreRemovedOptionFocus(previous);
+      this.syncCheckboxRender();
+      for (const value of this.optionIds.keys()) {
+        if (!values.includes(value)) this.optionIds.delete(value);
+      }
     },
 
     useDropdown () { this.checkControlledConfiguration(); },
@@ -186,17 +192,21 @@ export default {
 
     legacyRootAttrs () {
       if (this.controlledAtBirth) return {};
-      return Object.fromEntries(Object.entries(this.$.vnode.props || {}).filter(([key]) => NEW_INPUTS.has(key)));
+      return Object.fromEntries(Object.entries(this.$.vnode.props || {}).filter(([key]) => {
+        // Vue consumes declared event listeners including Once, while other modifiers remain in attrs.
+        const input = key.startsWith('on') ? key.replace(/Once$/, '') : key;
+        return NEW_INPUTS.has(input) && !Object.hasOwn(this.$attrs, key);
+      }));
     },
 
     warnControlled (message) {
-      if (!import.meta.env.DEV || this.controlledWarnings.has(message)) return;
+      if (process.env.NODE_ENV === 'production' || this.controlledWarnings.has(message)) return;
       this.controlledWarnings.add(message);
       console.warn(`[Dialtone FilterPill] ${message}`);
     },
 
     checkControlledConfiguration () {
-      if ((this.options !== undefined) !== this.controlledAtBirth ||
+      if (Array.isArray(this.options) !== this.controlledAtBirth ||
         (this.controlledAtBirth && this.useDropdown !== this.controlledDropdown)) {
         this.warnControlled('Selection contract and controlled useDropdown cannot change in place; remount with a key.');
         if (this.controlledAtBirth) this.requestControlledOpen(false);
@@ -362,8 +372,7 @@ export default {
     async restoreRemovedOptionFocus (previous) {
       if (!this.isOpen || !Array.isArray(previous)) return;
       const active = document.activeElement;
-      const index = previous.findIndex(option =>
-        option && typeof option.value === 'string' && this.optionIds.get(option.value) === active?.id);
+      const index = previous.findIndex(value => this.optionIds.get(value) === active?.id);
       if (index < 0) return;
       const retained = this.controlledState.options.find(option => this.optionIds.get(option.value) === active.id);
       const session = this.draftSession;

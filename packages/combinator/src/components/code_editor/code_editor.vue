@@ -202,7 +202,10 @@ function serializeAsVariantPreset () {
     for (const member of infoMembers) {
       const value = optionValues[member.name];
       if (props.disabledMembers.has(member.name)) continue;
-      if (value === undefined || value === null || value === '') continue;
+      if (value === undefined || Number.isNaN(value)) continue;
+      if (group === 'slots' && !value) continue;
+      // Empty/null can be explicit identities; omit them only when already the default.
+      if ((value === '' || value === null) && value === member.defaultValue) continue;
 
       if (!preset[group]) preset[group] = {};
       preset[group][member.name] = {

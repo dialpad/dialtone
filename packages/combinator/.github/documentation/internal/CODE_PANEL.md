@@ -84,9 +84,17 @@ The Copy button writes `copyText`, a plain-text template built from `info` and
 `options`. It does not read DOM text, so layout or flex indentation does not
 change clipboard output.
 
-The Copy JSON button writes a variant preset fragment from non-empty current
-options. It skips disabled members and retains each slot's `scopeName` so the
-preset keeps its binding when copied back into a variant bank.
+The Copy JSON button writes a variant preset fragment from current options.
+It skips disabled members, undefined/NaN values, empty slots, and empty-string
+or null bindings already equal to their component default. Explicit nondefault
+empty strings and null values remain in the preset, including Filter Pill's
+`selected` and `neutralValue` identities. It retains each slot's `scopeName` so
+the preset keeps its binding when copied back into a variant bank.
+
+An optional bank `copyNotice` is copied as a template comment and retained in
+preset metadata; closing comment delimiters in the notice are escaped. The
+notice describes missing application setup. Its mention of `v-model:selected`
+does not add application state or an update handler to a configuration snapshot.
 
 ## Latent event console
 

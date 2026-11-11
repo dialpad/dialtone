@@ -67,7 +67,7 @@ it.each([
 ])('updates actual Filter Pill legacy arrays and controlled options in $name', async ({ name, component }) => {
   const warnings = vi.spyOn(console, 'warn');
   const documentation = allDocs.find(doc => doc.displayName === 'DtFilterPill');
-  const state = buildVariantState(DtFilterPill, documentation, filterPillVariants, 'default');
+  const state = buildVariantState(DtFilterPill, documentation, filterPillVariants, 'controlled default');
   const wrapper = mount(component, {
     attachTo: document.body,
     props: {
@@ -96,7 +96,7 @@ it.each([
     expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('Unread');
     expect(anchor().element).toBe(firstAnchor);
 
-    for (const preset of ['controlled multiple', 'legacy default', 'read only selection', 'default']) {
+    for (const preset of ['controlled multiple', 'default', 'read only selection', 'controlled default']) {
       const next = buildVariantState(DtFilterPill, documentation, filterPillVariants, preset);
       await wrapper.setProps({
         ...next,
@@ -107,9 +107,9 @@ it.each([
       await flushPromises();
       expect(anchor().text()).toContain({
         'controlled multiple': 'Phone',
-        'legacy default': 'Option 3',
+        default: 'Option 3',
         'read only selection': 'Headquarters',
-        default: 'All',
+        'controlled default': 'All',
       }[preset]);
     }
   } finally {

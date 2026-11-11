@@ -8,6 +8,8 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 combinator: DtFilterPill
 ---
 
+<!-- @example {"exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
 ```vue demo-only
 <!-- Requires the options/selected feature release. Generated lookup projects currently pin Dialtone 10.5.1, which lacks this API; install a compatible published release before running this example. -->
 <dt-filter-pill
@@ -24,7 +26,7 @@ combinator: DtFilterPill
 
 ### Key concepts
 
-- Pass `options` to use controlled selection. Even `:options="[]"` selects this contract; omitting `options` preserves the legacy array contract.
+- Pass an array in `options` when mounting to use controlled selection. `:options="[]"` opts in and supports asynchronous loading. Initial omitted, `undefined`, `null` or non-array options preserve the legacy array contract. A controlled instance stays controlled if later options become invalid; invalid input disables selection until repaired.
 - With `use-dropdown`, `selected` is a string or `null`. In the checkbox popover, it is an array of strings. Bind it with `v-model:selected`, or assign it from one `selection-change` handler when the application also needs a business command.
 - Options use stable, unique string `value` identities and visible `label` text. `shortLabel` changes only the pill label. Replacing selection, options or translated labels updates the same open control without mutating supplied data.
 - `neutral-value` identifies the single-selection choice restored by Clear. It remains checked but does not activate the pill. Multiple selection clears to `[]`. Unknown nonneutral values are retained and show an unavailable-selection label until a matching option returns; no first choice is selected automatically.
@@ -38,7 +40,7 @@ For existing callers, `v-model` still accepts `{ name, active? }[]` and keeps it
 
 The built-in dropdown renders persistent radio selection separately from keyboard highlight. Moving highlight does not change the selected value. The neutral row supplies the inactive label; the dimension label remains available to assistive technology.
 
-<!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection"} -->
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo
 <!-- Requires the options/selected feature release. Generated lookup projects currently pin Dialtone 10.5.1, which lacks this API; install a compatible published release before running this example. -->
@@ -56,9 +58,9 @@ The page defines `const selectedMessage = ref('all')`. Options can be replaced w
 
 ### Controlled multiple selection
 
-Checkbox selection uses `ref([])` and a literal option list. `defer-selection` holds edits until Apply. Cancel, Escape and dismissal discard them. An external `selected` replacement wins over a dirty draft and rebases the open session; Apply never restores an older external value.
+Checkbox selection uses `ref([])` and a literal option list. `defer-selection` holds edits until Apply. Cancel, Escape and dismissal discard them. A semantically changed committed `selected` value wins over a dirty draft and rebases the open session; replacing it with the same selected identities preserves edits. Adding, removing, relabelling or reordering options also preserves pending edits, including selected identities whose options are temporarily absent. Apply never restores an older external value.
 
-<!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection"} -->
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo
 <!-- Requires the options/selected feature release. Generated lookup projects currently pin Dialtone 10.5.1, which lacks this API; install a compatible published release before running this example. -->
@@ -71,7 +73,7 @@ Checkbox selection uses `ref([])` and a literal option list. `defer-selection` h
 />
 ```
 
-Omit `defer-selection` for immediate checkbox updates. The `content` slot exposes `pendingSelected`, `apply` and `cancel` in controlled deferred mode; legacy content keeps its existing `pendingFilters` binding. A custom Apply outside a deferred editing session does nothing.
+Omit `defer-selection` for immediate checkbox updates. The `content` slot exposes `pendingSelected`, `apply` and `cancel` in controlled deferred mode; legacy content keeps its existing `pendingFilters` binding. In a custom controlled footer, call `apply()` alone: it asynchronously commits and closes on success. Calling `apply(); close()` cancels the pending proposal. Await `apply()` before application work that depends on the proposal finishing; this does not await the closing transition or terminal overlay cleanup. A custom Apply outside a deferred editing session does nothing.
 
 <dialtone-usage>
 <template #do>

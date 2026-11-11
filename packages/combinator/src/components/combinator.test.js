@@ -118,7 +118,7 @@ describe('combinator.vue test', function () {
       await nextTick();
       await nextTick();
       const cell = () => wrapper.findAllComponents({ name: 'DtcRendererSpecSheetCell' })
-        .find(cell => cell.props('name') === 'legacy default');
+        .find(cell => cell.props('name') === 'default');
       expect(cell().text()).toContain('Option 3');
       const first = cell().get('[data-qa="dt-filter-pill__button"]').element;
       await cell().get('[data-qa="dt-filter-pill__clear-button"]').trigger('click');
@@ -149,6 +149,7 @@ describe('combinator.vue test', function () {
       await nextTick();
       await nextTick();
       expect(wrapper.find('[aria-label="Reset"]').exists()).toBe(false);
+      expect(wrapper.vm.selectedVariant).toBe('controlled default');
       const anchor = () => wrapper.get('[data-qa="dt-filter-pill__button"]');
       const first = anchor().element;
       const optionBar = wrapper.findComponent({ name: 'DtcOptionBar' });
@@ -159,6 +160,7 @@ describe('combinator.vue test', function () {
       await wrapper.get('[aria-label="Reset"]').trigger('click');
       expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('All');
       expect(anchor().element).not.toBe(first);
+      expect(wrapper.vm.selectedVariant).toBe('controlled default');
       expect(wrapper.find('[aria-label="Reset"]').exists()).toBe(false);
     } finally {
       wrapper.unmount();

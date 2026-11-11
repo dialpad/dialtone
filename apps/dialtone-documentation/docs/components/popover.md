@@ -341,6 +341,8 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 - Pass `aria-label`, which is the text label that will be applied to the dialog content.
 - Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
 
+When you supply `aria-label` without `aria-labelledby`, the generated anchor ID and the dialog’s `aria-labelledby` are omitted. An explicit `aria-labelledby` continues to use the supplied ID. Dropdown shares this naming behavior through Popover.
+
 ### Keyboard Support
 
 The below keyboard functionality is automatically implemented when using the popover component:

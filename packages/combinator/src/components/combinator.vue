@@ -314,8 +314,9 @@ defineOptions({
 
 const emit = defineEmits(['update:fullScreen']);
 
-const selectedVariant = ref('default');
-const activeVariant = ref('default');
+const initialPreset = computed(() => props.variants.defaults?.metadata?.initialPreset ?? 'default');
+const selectedVariant = ref(initialPreset.value);
+const activeVariant = ref(initialPreset.value);
 const internalFullScreen = ref(false);
 const optionBarWidth = ref(null);
 const viewMode = ref('single');
@@ -525,7 +526,7 @@ const defaultInfo = computed(() => {
     props.component,
     props.documentation,
     props.variants,
-    'default',
+    initialPreset.value,
   );
 });
 
@@ -563,7 +564,7 @@ const hasChanges = computed(() => {
 });
 
 function resetOptions() {
-  updateVariant('default');
+  updateVariant(initialPreset.value);
 }
 
 function startResize(e) {

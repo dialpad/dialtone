@@ -3,7 +3,7 @@ type: development
 category: development
 keywords: [vue-component, yeoman, generator, dialtone-vue, storybook, vitest, props, slots, events, jsdoc, constants]
 ai_summary: Current Vue component files, legacy generator limitations, source-owned API conventions, and export and build steps.
-last_updated: 2026-11-03
+last_updated: 2026-11-11
 related_packages: [dialtone-vue, dialtone-css]
 ---
 
@@ -73,8 +73,6 @@ New components use Composition API with `<script setup lang="ts">` under the cur
 
 ```javascript
 export default {
-  compatConfig: { MODE: 3 },  // Vue 3 compatibility flag
-
   name: 'DtButton',           // PascalCase
 
   components: {},             // Child components used in template

@@ -1,5 +1,5 @@
 import { mount, flushPromises } from '@vue/test-utils';
-import { h, nextTick, ref } from 'vue';
+import { createCommentVNode, h, nextTick, ref } from 'vue';
 import DtFilterPill from './FilterPill.vue';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
@@ -166,24 +166,30 @@ describe('DtFilterPill controlled selection', () => {
     expect(pill.emitted('open')).toEqual([[true], [false]]);
   });
 
-  it('preserves dirty draft for equal membership/labels but rebases option identity changes', async () => {
+  it('preserves dirty draft through option additions, reorder, relabelling and removals', async () => {
     updateWrapper({ deferSelection: true });
     await open();
     checks()[1].click();
     await reconcile();
-    await wrapper.setProps({ selected: ['sales'], options: options.map(option => ({ ...option, label: option.label + ' translated' })) });
-    expect(checks().map(input => input.checked)).toEqual([true, true, false]);
+    await wrapper.setProps({ selected: ['sales'], options: [
+      options[1], { value: 'new', label: 'New team' }, options[0], options[2],
+    ].map(option => ({ ...option, label: option.label + ' translated' })) });
+    expect(checks().map(input => input.checked)).toEqual([true, false, true, false]);
     expect(wrapper.find('.d-filter-pill__label').text()).not.toContain('Support');
-    await wrapper.setProps({ options: options.slice(0, 2) });
+    // Unrelated removal preserves edits; removing a pending value retains its unknown identity too.
+    await wrapper.setProps({ options: [options[0], options[1]] });
     await reconcile();
-    expect(checks().map(input => input.checked)).toEqual([true, false]);
+    expect(checks().map(input => input.checked)).toEqual([true, true]);
+    await wrapper.setProps({ options: [options[0]] });
     document.querySelector('[data-qa="dt-filter-pill__apply-button"]').click();
     await reconcile();
-    expect(wrapper.emitted('selection-change')[0][0].changed).toBe(false);
-    expect(wrapper.emitted('update:selected')).toBeUndefined();
+    expect(wrapper.emitted('update:selected')).toEqual([[['sales', 'support']]]);
+    expect(wrapper.emitted('selection-change')[0][0]).toEqual({
+      value: ['sales', 'support'], previousValue: ['sales'], reason: 'apply', changed: true,
+    });
   });
 
-  it('coalesces repeated Apply and makes retained callbacks inert after dismissal', async () => {
+  it('coalesces repeated Apply and cancels in-flight Apply on dismissal', async () => {
     let controls;
     updateWrapper({ deferSelection: true }, { content: bindings => { controls = bindings; return 'Custom'; } });
     await open();
@@ -191,6 +197,13 @@ describe('DtFilterPill controlled selection', () => {
     const apply = controls.apply;
     await Promise.all([apply(), apply()]);
     await apply();
+    expect(wrapper.emitted('selection-change')).toHaveLength(1);
+    expect(wrapper.emitted('apply')).toEqual([[]]);
+    await open();
+    controls.setSelected(['engineering']);
+    const pendingApply = controls.apply();
+    controls.close();
+    await pendingApply;
     expect(wrapper.emitted('selection-change')).toHaveLength(1);
     expect(wrapper.emitted('apply')).toEqual([[]]);
   });
@@ -260,18 +273,16 @@ describe('DtFilterPill controlled selection', () => {
     expect(modelValue).toEqual([]);
   });
 
-  it.each([null, [{ value: 'sales', label: 'Sales' }, { value: 'sales', label: 'Duplicate' }]])(
-    'disables selection for malformed options (%j)', async badOptions => {
-      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      updateWrapper({ options: badOptions });
-      expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
-      await open();
-      expect(wrapper.find('.d-filter-pill__primary').classes()).not.toContain('d-filter-pill--selected');
-      expect(warn.mock.calls.some(([message]) => message.includes('unique string values'))).toBe(true);
-      expect(checks()).toHaveLength(0);
-      expect(wrapper.emitted('selection-change')).toBeUndefined();
-    },
-  );
+  it('disables selection for duplicate option identities', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    updateWrapper({ options: [{ value: 'sales', label: 'Sales' }, { value: 'sales', label: 'Duplicate' }] });
+    expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
+    await open();
+    expect(wrapper.find('.d-filter-pill__primary').classes()).not.toContain('d-filter-pill--selected');
+    expect(warn.mock.calls.some(([message]) => message.includes('unique string values'))).toBe(true);
+    expect(checks()).toHaveLength(0);
+    expect(wrapper.emitted('selection-change')).toBeUndefined();
+  });
 
 
   it('isolates selection-change snapshots from synchronous update listeners', async () => {
@@ -310,6 +321,79 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.emitted('update:open')).toBeUndefined();
   });
 
+  it.each([undefined, null, 'invalid'])('keeps non-array initial options (%j) on the legacy contract', async initial => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const modelValue = [{ name: 'Legacy' }];
+    updateWrapper({ options: initial, modelValue, useDropdown: true });
+    await open();
+    const row = document.querySelector('[role="menuitem"]');
+    expect(row?.textContent).toContain('Legacy');
+    row.click();
+    await reconcile();
+    expect(modelValue[0].active).toBe(true);
+    expect(wrapper.emitted('update:selected')).toBeUndefined();
+  });
+
+  it.each([null, undefined, 'invalid'])('fails safe when born-controlled options become %j', async invalid => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const modelValue = [{ name: 'Legacy' }];
+    updateWrapper({ modelValue, useDropdown: true, selected: 'sales' });
+    await open();
+    await wrapper.setProps({ options: invalid });
+    await open();
+    expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
+    expect(document.querySelector('[role="menuitem"]')).toBeNull();
+    expect(modelValue).toEqual([{ name: 'Legacy' }]);
+    expect(wrapper.emitted('selection-change')).toBeUndefined();
+  });
+
+  it.each([undefined, createCommentVNode('empty')])('preserves an empty legacy header slot without padding', async content => {
+    updateWrapper({ options: undefined, modelValue: [{ name: 'Legacy' }] }, { headerContent: () => content });
+    await open();
+    expect(document.querySelector('.d-popover__header')).toBeNull();
+  });
+
+  it('keeps legacy header nodes directly in the existing styled header content', async () => {
+    updateWrapper({
+      options: undefined, modelValue: [{ name: 'Legacy' }], headerContentClass: 'header-content',
+      popoverHeaderClass: 'header-outer',
+    }, { headerContent: ({ close }) => [
+      h('h2', { 'data-qa': 'header-title' }, 'Teams'),
+      h('button', { 'data-qa': 'header-close', onClick: close }, 'Close'),
+    ] });
+    await open();
+    const title = document.querySelector('[data-qa="header-title"]');
+    const close = document.querySelector('[data-qa="header-close"]');
+    expect(title.parentElement).toBe(document.querySelector('.d-popover__header__content'));
+    expect(title.parentElement.classList.contains('header-content')).toBe(true);
+    expect(close.parentElement).toBe(title.parentElement);
+    expect(title.closest('.d-popover__header').classList.contains('header-outer')).toBe(true);
+    close.click();
+    await reconcile();
+    expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
+  });
+
+  it('restores ordinary and once consumed DOM listeners on bubbling legacy slot events', async () => {
+    const ordinary = vi.fn();
+    const once = vi.fn();
+    const capture = vi.fn();
+    const passive = vi.fn();
+    updateWrapper({ options: undefined, popoverAppendTo: 'parent' }, {
+      content: () => h('button', { 'data-qa': 'legacy-event' }, 'Dispatch'),
+    }, {
+      onSelectionChange: ordinary, onSelectionChangeOnce: once,
+      onSelectionChangeCapture: capture, onSelectionChangePassive: passive,
+    });
+    await open();
+    const target = document.querySelector('[data-qa="legacy-event"]');
+    target.dispatchEvent(new CustomEvent('selection-change', { bubbles: true }));
+    target.dispatchEvent(new CustomEvent('selection-change', { bubbles: true }));
+    expect(ordinary).toHaveBeenCalledTimes(2);
+    expect(once).toHaveBeenCalledTimes(1);
+    expect(capture).toHaveBeenCalledTimes(2);
+    expect(passive).toHaveBeenCalledTimes(2);
+  });
+
   it('keeps the creation-time contract in both directions while legacy patterns remain reactive', async () => {
     vi.spyOn(console, 'warn').mockImplementation(() => {});
     const modelValue = [{ name: 'Legacy' }];
@@ -330,9 +414,10 @@ describe('DtFilterPill controlled selection', () => {
 
   it('forwards controlled anchor arrows through the dropdown callback and prevents scrolling', async () => {
     updateWrapper({ useDropdown: true, selected: 'sales' });
-    const anchor = wrapper.find('[data-qa="dt-filter-pill__button"]').element;
-    const event = new KeyboardEvent('keydown', { key: 'ArrowDown', code: 'ArrowDown', bubbles: true, cancelable: true });
-    anchor.dispatchEvent(event);
+    const anchor = wrapper.find('[data-qa="dt-filter-pill__button"]');
+    let event;
+    anchor.element.addEventListener('keydown', nativeEvent => { event = nativeEvent; }, { once: true });
+    await anchor.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
     await reconcile();
     expect(event.defaultPrevented).toBe(true);
     expect(wrapper.emitted('open')).toEqual([[true]]);
@@ -377,6 +462,32 @@ describe('DtFilterPill controlled selection', () => {
     updateWrapper({}, {}, { 'onUpdate:modelValue': () => {} });
     await open();
     expect(warn.mock.calls.some(([message]) => message.includes('modelValue is ignored'))).toBe(false);
+  });
+
+  it('keeps controlled diagnostics quiet for a production consumer', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const previous = process.env.NODE_ENV;
+    try {
+      process.env.NODE_ENV = 'production';
+      updateWrapper({ options: [null] });
+      expect(warn.mock.calls.some(([message]) => message.includes('[Dialtone FilterPill]'))).toBe(false);
+    } finally {
+      process.env.NODE_ENV = previous;
+    }
+  });
+
+  it('diagnoses a raw legacy prop first added after creation', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const forwardLegacy = ref(false);
+    wrapper = mount({
+      setup: () => () => h(DtFilterPill, {
+        options, selected: ['sales'], label: 'Teams', ...(forwardLegacy.value ? { modelValue: undefined } : {}),
+      }),
+    }, { global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body });
+    expect(warn.mock.calls.some(([message]) => message.includes('modelValue'))).toBe(false);
+    forwardLegacy.value = true;
+    await reconcile();
+    expect(warn.mock.calls.filter(([message]) => message.includes('modelValue'))).toHaveLength(1);
   });
 
   it('supports empty controlled loading without a missing-content warning or corrective action', async () => {
@@ -463,6 +574,39 @@ describe('DtFilterPill controlled selection', () => {
     await reconcile();
     expect(document.activeElement).toBe(document.querySelector('[role="menu"]'));
     expect(wrapper.emitted('selection-change')).toBeUndefined();
+  });
+
+  it('recovers focus and subsequent navigation after in-place option reorder and removal', async () => {
+    const liveOptions = ref(options.map(option => ({ ...option })));
+    wrapper = mount({
+      setup: () => () => h(DtFilterPill, {
+        options: liveOptions.value, selected: 'support', label: 'Teams', useDropdown: true,
+      }),
+    }, {
+      global: { plugins: [DtTooltipDirective, DtFocustrapDirective], stubs: { transition: false } },
+      attachTo: document.body,
+    });
+    await open();
+    await flushPromises();
+    const row = document.querySelectorAll('[role="menuitemradio"]')[1];
+    row.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
+    row.focus();
+    liveOptions.value.unshift(...liveOptions.value.splice(1, 1));
+    await reconcile();
+    row.dispatchEvent(new KeyboardEvent('keydown', {
+      key: 'ArrowDown', code: 'ArrowDown', bubbles: true, cancelable: true,
+    }));
+    await reconcile();
+    expect(document.activeElement.textContent).toContain('Sales');
+    liveOptions.value.splice(1, 1);
+    await reconcile();
+    expect(document.activeElement.textContent).toContain('Engineering');
+    document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
+      key: 'ArrowUp', code: 'ArrowUp', bubbles: true, cancelable: true,
+    }));
+    await reconcile();
+    expect(document.activeElement.textContent).toContain('Support');
+    expect(wrapper.findComponent(DtFilterPill).emitted('selection-change')).toBeUndefined();
   });
 
   it('clears a dirty deferred session immediately in exact action order', async () => {

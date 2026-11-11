@@ -2,7 +2,7 @@ import DtcCodeEditor from './code_editor.vue';
 import JSON5 from 'json5-with-undefined';
 
 import { expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { reactive } from 'vue';
 import { DtFilterPill } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
@@ -79,7 +79,7 @@ function mountWrapper (className = '', attachTo) {
 describe('code_editor.vue test', function () {
   it.each([false, true])('omits the legacy model from controlled clipboard formats (verbose=%s)', async verbose => {
     const state = buildVariantState(DtFilterPill,
-      allDocs.find(doc => doc.displayName === 'DtFilterPill'), filterPillVariants, 'default');
+      allDocs.find(doc => doc.displayName === 'DtFilterPill'), filterPillVariants, 'controlled default');
     const wrapper = mountWrapper();
     const writeText = vi.fn().mockResolvedValue(undefined);
     vi.stubGlobal('navigator', { clipboard: { writeText } });
@@ -94,7 +94,7 @@ describe('code_editor.vue test', function () {
       });
       await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
       expect(writeText.mock.calls[0][0]).not.toContain('model-value=');
-      expect(writeText.mock.calls[0][0]).toContain('v-model:selected');
+      expect(writeText.mock.calls[0][0]).toContain('<!-- Configuration snapshot. Bind selected with v-model:selected');
       await wrapper.findAll('button')
         .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
       const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
@@ -105,6 +105,62 @@ describe('code_editor.vue test', function () {
       await vi.runAllTimersAsync();
     } finally {
       wrapper.unmount();
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it.each(['', null])('roundtrips scalar %j and empty neutral identity through Copy JSON', async selected => {
+    const doc = allDocs.find(doc => doc.displayName === 'DtFilterPill');
+    const bank = {
+      ...filterPillVariants,
+      fixture: { props: {
+        options: { initialValue: [{ value: '', label: 'All outcomes' }, { value: 'resolved', label: 'Resolved' }] },
+        selected: { initialValue: selected }, neutralValue: { initialValue: '' },
+        useDropdown: { initialValue: true }, label: { initialValue: 'Outcome' },
+      } },
+    };
+    const state = buildVariantState(DtFilterPill, doc, bank, 'fixture');
+    const editor = mountWrapper();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('navigator', { language: 'en-US', languages: ['en-US'], clipboard: { writeText } });
+    vi.useFakeTimers();
+    let pill;
+    try {
+      await editor.setProps({ ...state, devMode: true, hasChanges: true,
+        disabledMembers: computeDisabledMembers(state.info, state.options.props, state.options.slots) });
+      await editor.findAll('button')
+        .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
+      const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
+      expect(preset.props.selected).toEqual({ initialValue: selected });
+      expect(preset.props.neutralValue).toEqual({ initialValue: '' });
+      expect(preset.props).not.toHaveProperty('startTooltipText');
+      const recovered = buildVariantState(DtFilterPill, doc, { ...filterPillVariants, recovered: preset }, 'recovered');
+      const disabled = computeDisabledMembers(recovered.info, recovered.options.props, recovered.options.slots);
+      pill = mount(DtFilterPill, { attachTo: document.body,
+        props: { ...Object.fromEntries(Object.entries(recovered.options.props).filter(([name]) =>
+          !disabled.has(name))),
+        'onUpdate:selected': value => pill.setProps({ selected: value }) },
+        global: { directives: { 'dt-focustrap': {} } },
+      });
+      await pill.get('[data-qa="dt-filter-pill__button"]').trigger('click');
+      await flushPromises();
+      const menu = document.getElementById(pill.get('[data-qa="dt-filter-pill__button"]').attributes('aria-controls'));
+      expect(menu.querySelector('[role="menuitemradio"]').getAttribute('aria-checked')).toBe(String(selected === ''));
+      menu.querySelectorAll('[role="menuitemradio"]')[1].click();
+      await flushPromises();
+      await pill.get('[data-qa="dt-filter-pill__clear-button"]').trigger('click');
+      expect(pill.emitted('update:selected').at(-1)).toEqual(['']);
+      await pill.get('[data-qa="dt-filter-pill__button"]').trigger('click');
+      await flushPromises();
+      expect(menu.querySelector('[role="menuitemradio"]').getAttribute('aria-checked')).toBe('true');
+      expect(pill.get('.d-filter-pill__label-start').text()).toBe('All outcomes');
+      await pill.get('[data-qa="dt-filter-pill__button"]').trigger('click');
+      await flushPromises();
+      await vi.runAllTimersAsync();
+    } finally {
+      pill?.unmount();
+      editor.unmount();
       vi.useRealTimers();
       vi.unstubAllGlobals();
     }

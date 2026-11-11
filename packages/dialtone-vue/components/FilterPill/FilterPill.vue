@@ -231,13 +231,11 @@
         v-if="!overlayUseDropdown && $slots.headerContent"
         #headerContent="{ close }"
       >
-        <div :class="['d-filter-pill__header-content', headerContentClass]">
-          <!-- @slot Customize the popover header, or supply a noninteractive controlled dropdown heading. -->
-          <slot
-            name="headerContent"
-            :close="controlledAtBirth ? closeControlled : close"
-          />
-        </div>
+        <!-- @slot Customize the popover header, or supply a noninteractive controlled dropdown heading. -->
+        <slot
+          name="headerContent"
+          :close="controlledAtBirth ? closeControlled : close"
+        />
       </template>
       <template
         v-if="!overlayUseDropdown && (deferSelection || $slots.footerContent)"
@@ -414,8 +412,6 @@ import ControlledSelection from './FilterPillControlled';
 export default {
   name: 'DtFilterPill',
 
-  compatConfig: { MODE: 3 },
-
   components: {
     DtCheckboxGroup,
     DtCheckbox,
@@ -432,7 +428,7 @@ export default {
   mixins: [ControlledSelection],
 
   props: {
-    /** A defined array opts into authoritative selection. Remount to change contract or controlled pattern. */
+    /** An array at creation (including []) opts into authoritative selection. Remount to change contract or controlled pattern. */
     options: {
       type: Array,
       default: undefined,
@@ -745,7 +741,7 @@ export default {
     return {
       isOpen: false,
       i18n: new DialtoneLocalization(),
-      filters: this.options === undefined ? this.modelValue : [],
+      filters: Array.isArray(this.options) ? [] : this.modelValue,
       pendingFilters: null,
     };
   },
@@ -779,6 +775,7 @@ export default {
         props.padding = this.popoverPadding;
         props['content-class'] = this.popoverContentClass;
         props['header-wrapper-class'] = this.popoverHeaderClass;
+        props['header-class'] = this.headerContentClass;
         props['footer-wrapper-class'] = this.popoverFooterClass;
         props['dialog-class'] = this.popoverDialogClass;
       }
@@ -931,6 +928,7 @@ export default {
       close();
     },
 
+    /** Controlled Apply closes on success; custom footers should call apply() alone or await it. */
     applySelection () {
       if (this.controlledAtBirth) return this.applyControlledSelection();
       if (!this.pendingFilters) return;

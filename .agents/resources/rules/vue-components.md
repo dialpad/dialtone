@@ -6,7 +6,7 @@ Apply to `packages/dialtone-vue/components/**`. These are shared authoring rules
 
 - **New components**: Composition API with `<script setup lang="ts">`. Use `defineProps`, `defineEmits`, `defineSlots`.
 
-- **Existing components**: Options API with `compatConfig: { MODE: 3 }`. Do NOT convert unless explicitly asked.
+- **Existing components**: Retain their existing Options API style. Do NOT convert unless explicitly asked.
 
 ## Props
 
