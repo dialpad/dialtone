@@ -39,12 +39,12 @@ export function useMode (
 
     let modeObserver: MutationObserver | null = null;
     if (contentMode === 'invert') {
-      const referenceEl = getReferenceEl();
-      setModeResolved(getOppositeMode(findParentMode(referenceEl)));
+      const modeReferenceEl = getReferenceEl();
+      setModeResolved(getOppositeMode(findParentMode(modeReferenceEl)));
       modeObserver = new MutationObserver(() => setModeResolved(getOppositeMode(findParentMode(getReferenceEl()))));
       modeObserver.observe(document.documentElement, MODE_OBSERVER_CONFIG);
       // Every ancestor, since any of them can set the mode the reference element inherits.
-      for (let el = referenceEl?.parentElement; el && el !== document.documentElement; el = el.parentElement) {
+      for (let el = modeReferenceEl?.parentElement; el && el !== document.documentElement; el = el.parentElement) {
         modeObserver.observe(el, MODE_OBSERVER_CONFIG);
       }
     }
