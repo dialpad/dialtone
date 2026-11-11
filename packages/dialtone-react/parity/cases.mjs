@@ -1,5 +1,5 @@
-// Cases for DOM parity (parity.md › DOM parity): every Combinator preset for the unit, plus one standard
-// attrs case. Workers never choose cases; a preset that can't run fails the gate unless it's a deviation.
+// Cases for DOM parity: every Combinator preset for the unit, plus one standard attrs case. Ports never choose
+// cases; a preset that can't run fails the gate unless it's a deviation.
 
 /** Fallthrough attributes every component must route the way its Vue original does. */
 export const STANDARD_ATTRS = {

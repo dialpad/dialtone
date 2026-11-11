@@ -2,13 +2,13 @@ import type { ComponentType, ReactNode } from 'react';
 
 /**
  * How the generic DOM parity test renders a unit: components/<Name>/<Name>.parity.tsx default-exports one.
- * Names that match Vue's need no entry; only what the conventions rename does.
+ * Names that match Vue's need no entry; only renamed ones do.
  */
 export interface ParityMap {
   // The harness renders any component with props built from a Vue case, so it can't know the props type.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: ComponentType<any>;
-  /** Vue prop or attribute → React prop, where the conventions rename it (e.g. modelValue → checked). */
+  /** Vue prop or attribute → React prop, where the port renames it (e.g. modelValue → checked). */
   props?: Record<string, string>;
   /** Vue prop → value transform, where the value's shape differs. */
   values?: Record<string, (value: unknown) => unknown>;
