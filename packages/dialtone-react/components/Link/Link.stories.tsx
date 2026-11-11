@@ -155,6 +155,7 @@ function LinkDefault ({ default: defaultSlot, kind: _kind, ...args }: LinkStoryA
         inverted={args.inverted}
         underline={args.underline}
         rel={args.rel}
+        target={args.target}
         onClick={args.onClick}
         onFocus={args.onFocus}
         onBlur={args.onBlur}
