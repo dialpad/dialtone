@@ -1,0 +1,226 @@
+packages/dialtone-query-core/tests/tools/components.test.ts
+  s_be3eb79a0e6da5::t_1f40459b22e70b 84-85,88
+  s_be3eb79a0e6da5::t_1d3a32c0e704a6 106-110,113-114,117,121-122,124
+  s_be3eb79a0e6da5::t_f1aa9a8222bb85 1,3-27,30-42,60,68,74,76,80-81,92-93,96,98-99,103-104,130-131
+  s_be3eb79a0e6da5::t_47df91acdd1d15 2,28-29,43-59,61-67,69-73,75,77-78,82,86,89-90,100-102,105,111-112,115,118-119,123,125-129
+  s_be3eb79a0e6da5::t_a5f197739f98bf 79,83,87,91
+  s_be3eb79a0e6da5::t_841db933836ad2 94-95,97
+  s_be3eb79a0e6da5::t_d68553c5e98e5b 116,120
+packages/dialtone-query-core/src/tools/components.ts
+  s_be3eb79a0e6da5::t_5a476352978822 156-160,179-180,258
+  s_be3eb79a0e6da5::t_9b9f274f57a92d 161-178
+  s_be3eb79a0e6da5::t_c695323e05a7d8 37-50
+  s_be3eb79a0e6da5::t_52ccc37e4cb9c1 260-261
+  s_be3eb79a0e6da5::t_a6d9e4ac30dc3d 280
+  s_be3eb79a0e6da5::t_76319055612cf0 63,81,104,126,148
+  s_be3eb79a0e6da5::t_179f962f8a246f 225-228,231
+  s_be3eb79a0e6da5::t_c5f6abe1d8fb1d 404
+  s_be3eb79a0e6da5::t_3fc66eb7a3f61b 232
+  s_be3eb79a0e6da5::t_640434450067d7 229-230,235-236,239
+  s_be3eb79a0e6da5::t_d337cb12decc62 233-234
+  s_be3eb79a0e6da5::t_01a7a4dc1b76c9 246-247,252-256
+  s_be3eb79a0e6da5::t_ed61f3f0babd37 248
+  s_be3eb79a0e6da5::t_ec219b257dcdf8 155
+  s_be3eb79a0e6da5::t_1917046d0ff67e 257
+  s_be3eb79a0e6da5::t_8b92a2c2085e3c 184
+packages/dialtone-query-core/README.md
+  s_be3eb79a0e6da5::t_a4504d917548f4 39
+  s_be3eb79a0e6da5::t_7ea9fa4e11b691 35
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_be3eb79a0e6da5::t_a434a300d37211 2,6-8,11,22,26-27,53-55,63-64,95-96
+  s_be3eb79a0e6da5::t_7d66b27fb9e0b6 9-10,13
+  s_be3eb79a0e6da5::t_205dc46a352c45 92-94
+  s_be3eb79a0e6da5::t_eed80567b61d32 17-20,49-50
+  s_be3eb79a0e6da5::t_b9c18af026c0f0 91
+  s_be3eb79a0e6da5::t_f60b0620a6ad86 23-25,51-52,56-62
+  s_e047833b0467d1::t_037e6d3a07ef73 85
+  s_e047833b0467d1::t_581208548934b1 1,4-5,12,15-16
+  s_e047833b0467d1::t_e07d41180e4120 38
+  s_e047833b0467d1::t_9d93e6b3d1cd2f 65
+  s_e047833b0467d1::t_730cd3e1c4798c 41
+  s_e047833b0467d1::t_314791cda07ee1 28-32,35-37,39,42-43,46-48
+  s_e047833b0467d1::t_fb8d8f7e361d6f 66-77,86-90
+  s_e047833b0467d1::t_672b242c5c2d5e 3
+  s_e047833b0467d1::t_016688172fe8ec 14,21
+  s_e047833b0467d1::t_d3f9e2b1f33f22 44
+  s_e047833b0467d1::t_d593ef625770fb 33-34,40,45
+  s_e047833b0467d1::t_cdd401b5ccaf42 78-84
+.claude/rules/dialtone-query-core.md
+  s_be3eb79a0e6da5::t_a3b525fdd2b1b1 93
+packages/dialtone-cli/src/commands/component.ts
+  s_be3eb79a0e6da5::t_20434d578e5cfa 3
+  s_be3eb79a0e6da5::t_1b37558dabd12c 37
+  s_e047833b0467d1::t_389235d52feb20 90,95
+  s_e047833b0467d1::t_6fbaaad22a96a0 36
+  s_e047833b0467d1::t_03c3baf88a4416 5
+packages/dialtone-cli/src/commands/prompt.ts
+  s_be3eb79a0e6da5::t_35ba1c28f6e89f 3
+  s_be3eb79a0e6da5::t_6d8effc4c2e15c 15
+  s_e047833b0467d1::t_7e3514968fba4d 29
+  s_e047833b0467d1::t_587bfb26da0dbc 44
+  s_e047833b0467d1::t_e410f86eff0657 5
+  s_e047833b0467d1::t_e54622b47acfad 14
+packages/dialtone-cli/src/index.ts
+  s_be3eb79a0e6da5::t_f8c783eadc24eb 22-23
+packages/dialtone-cli/src/select-component.ts
+  s_be3eb79a0e6da5::t_2552bb94b9dbec 1-3,5-16,18-23,29,50
+  s_be3eb79a0e6da5::t_c15d2d182de964 17,24-28,30-49
+  s_be3eb79a0e6da5::t_80404e8e94e6ce 4
+packages/dialtone-cli/project.json
+  s_be3eb79a0e6da5::t_d13522a20822a0 19-23
+packages/dialtone-cli/tests/select-component.test.ts
+  s_be3eb79a0e6da5::t_7c25f792dd7e39 1-4,6,10,12-13,15-16,19-20,23-24,31-32,40-41,48-49,52-53,56-57
+  s_be3eb79a0e6da5::t_840915f79f14d3 5
+  s_be3eb79a0e6da5::t_82acd6435d3c10 7-9,14,17,21,25,27-30,33-37,39,42,44-45,47,50-51,54-55
+  s_be3eb79a0e6da5::t_960ca88b413ae4 18,22
+  s_be3eb79a0e6da5::t_94747fcbd7ebcc 11,26,38,43,46
+packages/dialtone-cli/tests/silence-debug.test.ts
+  s_be3eb79a0e6da5::t_aa8bf93d778643 43-44
+  s_be3eb79a0e6da5::t_7a44bff61736d0 2,5,10-11,13-14,17-18,20-22,25-28,35,37,39-42,46-49
+  s_be3eb79a0e6da5::t_b7974f549079d3 1,3-4,6-9,12,15-16,19,23-24,30-33,36,38,45
+  s_be3eb79a0e6da5::t_48031a44907667 29,34
+packages/dialtone-cli/package.json
+  s_be3eb79a0e6da5::t_719db585c36df0 16-17
+  s_be3eb79a0e6da5::t_688a041c651365 35
+  s_be3eb79a0e6da5::t_db25deaa16e2fd 36
+packages/dialtone-cli/vitest.config.ts
+  s_be3eb79a0e6da5::t_bc71c7e7309487 1-8
+packages/dialtone-cli/src/context.ts
+  s_be3eb79a0e6da5::t_e1bcf0f84d0483 15,18
+  s_be3eb79a0e6da5::t_58fdafc91b4435 6,9,11,13-14,16-17,19-22,24-27,30
+  s_be3eb79a0e6da5::t_8b036dcfeb5d4f 7
+packages/dialtone-cli/tests/source-line.test.ts
+  s_be3eb79a0e6da5::t_67957491ac22e1 1-6,8-11,13-16,18-21,23-24
+  s_be3eb79a0e6da5::t_907c0ed34b22f8 7,12,17,22
+packages/dialtone-cli/src/data-resolver.ts
+  s_be3eb79a0e6da5::t_9a009d6edea157 33
+  s_be3eb79a0e6da5::t_7595821e02547e 111,113-118
+  s_be3eb79a0e6da5::t_60aac012f6ed30 165-168,171,174,178,180-183,187-189
+  s_be3eb79a0e6da5::t_5189aa0f9756f9 17-18
+  s_be3eb79a0e6da5::t_3882c27135bd55 57,60-65
+  s_be3eb79a0e6da5::t_dccf992a174f15 172-173
+  s_be3eb79a0e6da5::t_3059f63dae3e75 193-194,200
+  s_be3eb79a0e6da5::t_4d00878417c17a 204,213
+  s_be3eb79a0e6da5::t_2d4547ad93d1e7 208-209
+  s_be3eb79a0e6da5::t_ddbef8f31bfa5e 21,23
+  s_be3eb79a0e6da5::t_a8158a90e5740d 205,207,210,212
+  s_be3eb79a0e6da5::t_0e2e74a7e864bc 75,77-78,83-87,90-91,93,99-100,109-110,112
+  s_be3eb79a0e6da5::t_414fa51931103d 217
+  s_be3eb79a0e6da5::t_ba2eaec43032ff 67-74,76,80
+  s_be3eb79a0e6da5::t_31972ae9790e2a 12-13
+  s_be3eb79a0e6da5::t_eec6f7d2e7a5d4 169
+  s_be3eb79a0e6da5::t_6921ba0c1a7b92 14-16,34-36,53,58,88-89,119,170,175,191-192,195,198,201,206,211,214-215
+  s_be3eb79a0e6da5::t_51e5bbcb4f47c9 142-145,147-150,153-156
+  s_be3eb79a0e6da5::t_02447a2fe5a469 96-98
+  s_be3eb79a0e6da5::t_274ed2f335d5cd 196-197,199
+  s_be3eb79a0e6da5::t_8eb6d943ccffa1 108
+  s_be3eb79a0e6da5::t_5717d9f0512e24 3-4,6-11,38,44,47-52,55-56,59,66,79,121,124-128,130,146,151-152,157-158,160-161,164,179,184-185,203,216
+  s_be3eb79a0e6da5::t_44c0a9ea23cb3f 37
+  s_be3eb79a0e6da5::t_f575d709971607 120
+  s_e047833b0467d1::t_16c6629f8a6f73 45-46,54
+  s_e047833b0467d1::t_becc33d74291bc 134-135,137-141
+  s_e047833b0467d1::t_283b01663e2058 136
+  s_e047833b0467d1::t_c072c53b3ec979 159
+  s_e047833b0467d1::t_d18e0724d0e764 101-102
+  s_e047833b0467d1::t_af929badcfceb0 94-95
+packages/dialtone-cli/tests/data-resolver.test.ts
+  s_be3eb79a0e6da5::t_c19d235a26f8a2 200
+  s_be3eb79a0e6da5::t_9ec2919a7da447 89
+  s_be3eb79a0e6da5::t_2912945f4cb79d 2,4-9,24-30,42-43,55,57-59,61,64-67,70-72,74,77-86,90,92,97-99,103-104,108-109,113-114,122-123,128-129,134-136,138-140,142-143,215-216
+  s_be3eb79a0e6da5::t_11d489dcec3de4 49-54
+  s_be3eb79a0e6da5::t_d044dd2ccb3463 193,195
+  s_be3eb79a0e6da5::t_218f748924e8c7 144,146-150
+  s_be3eb79a0e6da5::t_b2716b3883c250 110-111
+  s_be3eb79a0e6da5::t_d70cd84b82d4ce 145
+  s_be3eb79a0e6da5::t_883082aedf771a 162-171
+  s_be3eb79a0e6da5::t_789dc396d11ef6 31-36,38-41,44-48,56,62-63,73,75,87-88,91,93-96,100-102,105-107,112,115,118,124-127,130-133,137,141,179-180,192,194,197-198,201-211,214
+  s_be3eb79a0e6da5::t_45819533e33620 196,199
+  s_be3eb79a0e6da5::t_1840b52f9d0a3f 76
+  s_be3eb79a0e6da5::t_cf5ea56c32f858 212-213
+  s_be3eb79a0e6da5::t_d26d8f2afbcda1 151-152,154-161,172-178
+  s_be3eb79a0e6da5::t_b15bb3f70d2b90 116-117,119-121
+  s_be3eb79a0e6da5::t_21e2f46f07a270 60
+  s_be3eb79a0e6da5::t_12b11d48bc094e 1,3,10-23
+  s_e047833b0467d1::t_627804c8c545cc 68-69
+  s_e047833b0467d1::t_39f7b3ab87077c 153
+  s_e047833b0467d1::t_82b11d0ba40bae 37
+  s_e047833b0467d1::t_846d674e0e646f 181-191
+packages/dialtone-cli/rollup.config.js
+  s_e047833b0467d1::t_640985bd144355 17-18
+packages/dialtone-cli/tests/formatters.test.ts
+  s_e047833b0467d1::t_95ae83fe442b4a 1-2,4-5,8-13,15-24,26-31,33-36,38-39
+  s_e047833b0467d1::t_212942c490a389 3,6-7,14,25,32,37
+packages/dialtone-cli/src/formatters.ts
+  s_e047833b0467d1::t_6492c223a26146 249
+  s_e047833b0467d1::t_031d260462ea55 269
+  s_e047833b0467d1::t_5ce35a15ac335c 206
+  s_e047833b0467d1::t_ea8b3641fa1c99 272-273
+  s_e047833b0467d1::t_8b1d09eb4ed4ab 237
+  s_e047833b0467d1::t_fd9cfdf08f6230 18-21
+  s_e047833b0467d1::t_eefafda38fc320 88
+  s_e047833b0467d1::t_2af19a9ea63b1e 111
+  s_e047833b0467d1::t_3db91feae23919 186
+  s_e047833b0467d1::t_c14b1630c7adc0 160
+  s_e047833b0467d1::t_04ac4747852662 258
+.github/workflows/unit_tests.yml
+  s_e047833b0467d1::t_e1c7e737d2c72c 57,61-63
+  s_e047833b0467d1::t_96a4ad5a883443 9-10,21-22
+  s_e047833b0467d1::t_ffa42401db9096 58-60
+  s_e047833b0467d1::t_4262eb08407116 114-131
+  s_e047833b0467d1::t_d57366ad81fd5e 44
+  s_e047833b0467d1::t_920417baa6d43b 11-13
+  s_e047833b0467d1::t_9c3afe90624d18 23-25
+packages/dialtone-cli/README.md
+  s_e047833b0467d1::t_19b209a573c311 96
+  s_e047833b0467d1::t_a869f399eed272 122-123
+  s_e047833b0467d1::t_8782a2321a836b 25
+packages/dialtone-query-core/project.json
+  s_e047833b0467d1::t_939bd7a2d1b792 20
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_e047833b0467d1::t_a4315f6f8a8ff3 110
+  s_e047833b0467d1::t_bbab596bb1f55c 261
+  s_e047833b0467d1::t_acbed7836cab6f 211-213,216
+  s_e047833b0467d1::t_79220f20d2d8fc 215
+  s_e047833b0467d1::t_62b78b554292ce 241
+  s_e047833b0467d1::t_374ceb9dfd10b2 35,38,41
+  s_e047833b0467d1::t_53a7c1702b8982 217
+  s_e047833b0467d1::t_be21343f22e471 209
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_e047833b0467d1::t_fce0847fb9fb97 6-7
+  s_e047833b0467d1::t_98dc59a832c0f2 44
+  s_e047833b0467d1::t_7e1073a57cba22 57
+  s_e047833b0467d1::t_567ce17355987a 46-52,54-55
+  s_e047833b0467d1::t_4c2dc3f67afeee 53
+  s_e047833b0467d1::t_1e2716ba1fc62d 33
+pnpm-lock.yaml
+  h_c15b5755534093 569-571
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1c236be653cae4fa0d252f0ff88546621907f9a3",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_be3eb79a0e6da5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fe292a6f-d673-414c-890b-c397ba052ad3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_e047833b0467d1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "90490e85-57d5-47c7-8023-19393fdb46f5",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

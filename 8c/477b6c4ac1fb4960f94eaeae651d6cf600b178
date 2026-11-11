@@ -1,0 +1,23 @@
+packages/dialtone-vue/components/KitchenSink/KitchenSink.stories.js
+  s_1c86a3f0dc32fa::t_f80356ec0c8e2e 33
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_1c86a3f0dc32fa::t_f80356ec0c8e2e 101
+packages/dialtone-vue/components/KitchenSink/KitchenSinkView.vue
+  s_1c86a3f0dc32fa::t_f80356ec0c8e2e 16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8c477b6c4ac1fb4960f94eaeae651d6cf600b178",
+  "prompts": {},
+  "sessions": {
+    "s_1c86a3f0dc32fa": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1acf9-3506-74d2-be25-6034da741b82",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
