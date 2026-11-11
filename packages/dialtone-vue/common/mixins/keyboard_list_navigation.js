@@ -99,6 +99,7 @@ export default ({
         return null;
       }
 
+      // Require IDs for the new radio navigation path; preserve ID-less rows for legacy roles.
       const roles = Array.isArray(listItemRole) ? listItemRole : [listItemRole];
       const selector = roles.map(role => `[role="${role}"]`).join(', ');
       return Array.from(listElement.querySelectorAll(`${selector}, #sr-only-close-button`))

@@ -385,6 +385,7 @@ export default {
             this.pendingArrowOpening = pending;
             this.openedWithKeyboard = true;
             this.$emit('keydown', event);
+            // Let synchronous acceptance in the emitted handler flush before discarding ignored modality.
             this.$nextTick(() => {
               if (this.pendingArrowOpening === pending && !this.isLogicallyOpen) {
                 this.openedWithKeyboard = false;

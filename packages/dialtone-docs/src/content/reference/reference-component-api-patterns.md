@@ -20,7 +20,7 @@ keywords:
     logical-props,
   ]
 ai_summary: Recurring Dialtone Vue props, events, slots, and API patterns; supported values and exceptions depend on the selected component.
-last_updated: 2026-11-09
+last_updated: 2026-11-10
 related_packages: [dialtone-vue]
 ---
 
@@ -111,9 +111,11 @@ Visibility-toggle components use `update:open`:
 | DtPopover  | `update:open` |
 | DtDropdown | `update:open` |
 
-Popover and Dropdown additionally emit `open-change(boolean)` synchronously when logical visibility actually changes. Their existing `opened` and `update:open` notifications retain completed-transition timing; `open=null` emits no `update:open`. Initial `open=true` emits logical true during creation, before mount, and the visible surface starts with `aria-hidden="false"`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
+Popover and Dropdown accept an optional `visibilityChangeCallback` prop. When supplied, it receives the open boolean synchronously on logical visibility changes, including initial `true` during creation before mount when `open=true`. Neither component declares or emits `open-change`; existing custom DOM listeners retain their fallthrough behavior. The visible surface starts with `aria-hidden="false"` when initially open.
 
-With a boolean `open` prop, both components keep default anchor toggling disabled. `forwardAnchorArrowKeys` defaults to `false`; opting in forwards anchor ArrowUp/ArrowDown through `keydown` without toggling. A closed opted-in Dropdown lets the consumer handle default/propagation and preserves first-row focus only when opening is synchronously accepted in Dropdown's own emitted `keydown` callback. Ancestor DOM listeners and delayed updates do not carry that focus guarantee; handlers should distinguish anchor targets from content targets. This does not change default controlled-overlay consumers.
+`opened` and `update:open` report the current completed transition. Opening finishes initial focus before notifying listeners, so a focus choice made inside `opened` is preserved. `open=null` emits no `update:open`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
+
+With a boolean `open` prop, both components keep default anchor toggling disabled. `forwardAnchorArrowKeys` defaults to `false`; opting in forwards anchor ArrowUp/ArrowDown through `keydown` without toggling. A closed opted-in Dropdown lets the consumer handle default/propagation and preserves first-row focus only when opening is synchronously accepted in Dropdown's own emitted `keydown` callback. Ancestor DOM listeners and delayed updates do not carry that focus guarantee; handlers should distinguish anchor targets from content targets. Default anchor-arrow handling is unchanged when forwarding is disabled.
 
 ## Event Naming
 
