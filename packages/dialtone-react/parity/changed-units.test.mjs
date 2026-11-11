@@ -9,7 +9,7 @@ import path from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { changedUnits } from './changed-units.mjs';
-import { commonUnit, reactDir, testFiles, vueSources } from './vue-sources.mjs';
+import { commonUnit, reactDir, testFiles, unitsOfPath, vueSources } from './vue-sources.mjs';
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'changed-units-'));
 after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -114,7 +114,7 @@ describe('vueSources', () => {
   test('a component unit is its directory, and its .vue the file', () => {
     assert.deepEqual(vueSources(vueRoot, 'text'), {
       dir: path.join(vueRoot, 'components/Text'), paths: ['components/Text'],
-      file: path.join(vueRoot, 'components/Text/Text.vue'),
+      file: path.join(vueRoot, 'components/Text/Text.vue'), own: [],
     });
   });
 
@@ -126,7 +126,7 @@ describe('vueSources', () => {
   test('a component whose .vue is gone, though the rest of its directory isn\'t, has no file', () => {
     const gone = tree(path.join(root, 'vue-without-text'), ['components/Text/index.js', 'components/Text/text.stories.js']);
     assert.deepEqual(vueSources(gone, 'text'), {
-      dir: path.join(gone, 'components/Text'), paths: ['components/Text'], file: null,
+      dir: path.join(gone, 'components/Text'), paths: ['components/Text'], file: null, own: [],
     });
   });
 
@@ -151,7 +151,30 @@ describe('vueSources', () => {
     assert.equal(vueSources(vueRoot, 'mixin-input').dir, path.join(vueRoot, 'components/MixinInput'));
     assert.equal(vueSources(vueRoot, 'mixin-input').file, null);
     assert.deepEqual(vueSources(vueRoot, 'nothing-here'), {
-      dir: path.join(vueRoot, 'components/NothingHere'), paths: [], file: null,
+      dir: path.join(vueRoot, 'components/NothingHere'), paths: [], file: null, own: [],
+    });
+  });
+
+  test('a directive, mixin or composable is never a component, even one named like it', () => {
+    const twin = tree(path.join(root, 'vue-twin'), [
+      'components/MixinInput/MixinInput.vue',
+      'components/MixinInput/MixinInput.test.js',
+      'common/mixins/input.js',
+    ]);
+    assert.deepEqual(vueSources(twin, 'mixin-input'), {
+      dir: path.join(twin, 'components/MixinInput'), paths: ['common/mixins/input.js'], file: null,
+      own: ['common/mixins/input.js'],
+    });
+    assert.deepEqual(unitsOfPath('components/MixinInput/MixinInput.vue'), []);
+  });
+
+  test('a unit\'s own files are apart from what\'s folded into it, which may outlive them', () => {
+    assert.deepEqual(vueSources(vueRoot, 'mixin-keyboard-list-navigation').own,
+      ['common/mixins/keyboard_list_navigation.js']);
+    const leftover = tree(path.join(root, 'vue-leftover'), ['common/mixins/dom.js']);
+    assert.deepEqual(vueSources(leftover, 'mixin-keyboard-list-navigation'), {
+      dir: path.join(leftover, 'components/MixinKeyboardListNavigation'), paths: ['common/mixins/dom.js'], file: null,
+      own: [],
     });
   });
 

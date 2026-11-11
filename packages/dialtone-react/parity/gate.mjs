@@ -38,10 +38,13 @@ if (!vue.paths.length) {
   console.error(`gate: dialtone-vue has no source for ${unit}: no component, directive, mixin or composable of that name`);
   process.exit(2);
 }
-// A unit in components/ ports its <Name>.vue. With that gone (deleted or renamed) and the rest of its directory left,
-// DOM parity would have nothing to compare and be skipped, so the gate fails instead.
-if (home.startsWith('components/') && !vue.file) {
-  console.error(`gate: dialtone-vue has no ${name}.vue for ${unit}, though it has ${vue.paths.join(', ')}`);
+// A unit ports its own Vue source: a component's <Name>.vue, or a directive's, mixin's or composable's own files. With
+// that gone (deleted or renamed) and other sources left (the rest of the directory, a folded-in piece), the gate would
+// check the leftovers, and skip a component's DOM parity, so it fails instead.
+const component = home.startsWith('components/');
+if (component ? !vue.file : !vue.own.length) {
+  const own = component ? `${name}.vue` : 'file of its own';
+  console.error(`gate: dialtone-vue has no ${own} for ${unit}, though it has ${vue.paths.join(', ')}`);
   process.exit(2);
 }
 const vueDir = vue.dir;
