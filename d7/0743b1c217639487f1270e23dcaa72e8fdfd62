@@ -1,0 +1,21 @@
+packages/dialtone-query-core/tests/component-detail.test.ts
+  s_7f1d1d64baa803::t_920c7ad66ce59e 79-82,84-85
+packages/dialtone-query-core/src/component-detail.ts
+  s_7f1d1d64baa803::t_4a2351f7195bac 74,76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d70743b1c217639487f1270e23dcaa72e8fdfd62",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
