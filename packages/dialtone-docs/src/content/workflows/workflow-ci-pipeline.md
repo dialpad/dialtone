@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook, dialtone-react, parity-gate]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-10
+last_updated: 2026-11-11
 related_packages: [dialtone-vue, dialtone-react, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -88,7 +88,7 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 | `check` | `pnpm nx run dialtone-react:lint`, `:typecheck` and `:test`, then the harness's own tests (`node --test 'packages/dialtone-react/parity/*.test.mjs'`), then `:build`. |
 | `gate` | Runs the parity gate (`pnpm nx run dialtone-react:gate -- <unit>`) for each ported unit the change touches, one after another, and writes each gate's summary to the job summary. A run with no changed units skips the gate. |
 
-`parity/changed-units.mjs` picks the gate job's units. A ported unit is one with a React `components/<Name>/index.ts`. It's gated when the change edits or deletes a file in one of these:
+`parity/changed-units.mjs` picks the gate job's units. A ported unit is one with an `index.ts` in its React directory: `components/<Name>/`, or for a directive, mixin or composable unit, `common/` and its id without the prefix (`common/input/` is `mixin-input`'s). Any other `common/` directory with an `index.ts` must be a foundation (`link`, `localization`, `transition`) or a unit: one that's neither fails the job. A port whose Vue source is gone fails from the change that deletes it: that change gates the unit, and the gate fails a unit dialtone-vue has no source for. It's gated when the change edits or deletes a file in one of these:
 
 - Its React directory.
 - Its Vue sources (`parity/vue-sources.mjs`, the same lookup the gate uses), which include pieces outside `components/`: `directives/tooltip_directive` is tooltip's, `common/sr_only_close_button.vue` is button's, and the directive, mixin and composable units are their own files. A deleted Vue path is placed by its shape (`directives/<d>/` is `directive-<d>`'s).

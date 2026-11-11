@@ -59,8 +59,8 @@ export default tseslint.config(
   },
   {
     // Ports can't switch lint off. The gate also fails a unit with an inline directive;
-    // this makes any spelling it misses inert.
-    files: ['components/**'],
+    // this makes any spelling it misses inert. common/ holds the directive, mixin and composable units.
+    files: ['components/**', 'common/**'],
     linterOptions: { noInlineConfig: true },
   },
   {
