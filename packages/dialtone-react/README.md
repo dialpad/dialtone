@@ -2,6 +2,25 @@
 
 Dialtone's React components, ported from `dialtone-vue`. Private for now.
 
+## Commands
+
+Run these from the repo root. Each builds what it needs first (dialtone-icons, dialtone-tokens).
+
+| Command | What it does |
+| --- | --- |
+| `pnpm nx run dialtone-react:lint` | ESLint (`eslint.config.js`): typescript-eslint and the Rules of Hooks for `.ts`/`.tsx`, the repo's style rules for everything. Commits also lint their staged files (husky, `.lintstagedrc.cjs`) unless husky is skipped; the gate's Lint row and CI's `check` job catch lint errors either way. |
+| `pnpm nx run dialtone-react:typecheck` | `tsc` over the whole package. |
+| `pnpm nx run dialtone-react:test` | Vitest, every `*.test.ts(x)` in `common/`, `components/`, `icons/` and `tests/`. DOM parity's tests (`parity/react/dom.test.tsx`, `parity/vue/goldens.test.js`) run in the gate, each with its own Vitest config, and `parity/vue/transition-traces.test.js` runs only by hand, to re-record DtTransition's traces. |
+| `pnpm nx run dialtone-react:build` | The library: ES modules and type declarations in `dist/`. Entry points: `@dialpad/dialtone-react`, `@dialpad/dialtone-react/components/<Name>` and `@dialpad/dialtone-react/icons`. React, React DOM and every runtime dependency stay external. |
+| `pnpm nx run dialtone-react:gate -- <unit>` | The parity gate for one unit (e.g. `-- validation-messages`). |
+| `node --test 'packages/dialtone-react/parity/*.test.mjs'` | The harness's own tests: which units CI gates for a change (`parity/changed-units.mjs`), which Vue tests a unit has (`parity/vue-sources.mjs`), and how DOM parity serializes select options (`parity/normalize.mjs`). |
+
+Generated, gitignored files: `index.ts` (the barrel, `scripts/build-index.mjs`, from every `components/*/index.ts` and `common/*/index.ts` plus Vue's public common modules) and `icons/generated/` (`scripts/build-icons.mjs`). Build, typecheck, test and gate regenerate both; run `pnpm --filter @dialpad/dialtone-react generate` after adding a component if your editor needs the barrel.
+
+Shared test helpers ported from dialtone-vue are in `tests/helpers/`: `validation_messages`, `clipboard` (`simulatePaste`; `tests/setup.ts` installs the same `ClipboardEvent` and `DataTransfer` stand-ins Vue's setup does), `fixtures` (`EmptyComponentFixture`) and `node_traversal`. Two more stand in for what Vue Test Utils does by itself: `transition` (`finishTransitions`, as VTU stubs `<transition>`) and `link` (`RouterLinkStub`, `withRouterLink`).
+
+Foundations every port shares, in `common/`: `localization` (`DialtoneLocalization`, `useI18n`, `DtLocalizationProvider`, on `@fluent/bundle` over dialtone-vue's `.ftl` files), `link` (`DtLinkProvider`, `useLinkComponent`, `DtRouterLink`, for `to`) and `transition` (`DtTransition`, Vue's `<Transition>`; its tests replay Vue's recorded traces in `parity/transition-traces.json`).
+
 ## Storybook
 
 Run these from the repo root.

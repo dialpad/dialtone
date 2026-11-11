@@ -8,6 +8,6 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./tests/setup.ts'],
-    include: ['{common,components,icons}/**/*.test.{ts,tsx}'],
+    include: ['{common,components,icons,tests}/**/*.test.{ts,tsx}'],
   },
 });

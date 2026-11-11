@@ -1,4 +1,4 @@
-// Canonical HTML for DOM parity (parity.md › DOM parity). Both runs, Vue and React, call capture() on
+// Canonical HTML for DOM parity. Both runs, Vue and React, call capture() on
 // their live jsdom document, so the same DOM always serializes to the same string.
 // Plain JS on purpose: it runs unchanged under dialtone-vue's Vitest config and dialtone-react's.
 
@@ -130,8 +130,18 @@ export function maskedHtml (element) {
   return nodes.map(node => serialize(node, idRewriter(ids), { raw: true })).join('');
 }
 
+// Vue Test Utils stubs <transition> by default, as <transition-stub> around the child, carrying the transition's
+// props and the attrs that fell through to it (which the child has too). A browser has no such element, and the
+// React side stubs DtTransition to render its child alone (react/transition-stub.tsx), so the stub is unwrapped: its
+// attributes are neither serialized nor named, and its children stand in its place.
+const isTransitionStub = node => node.localName === 'transition-stub';
+
 const walk = (nodes, visit) => {
-  const go = node => { if (node.nodeType === 1) { visit(node); node.childNodes.forEach(go); } };
+  const go = node => {
+    if (node.nodeType !== 1) return;
+    if (!isTransitionStub(node)) visit(node);
+    node.childNodes.forEach(go);
+  };
   nodes.forEach(go);
 };
 
@@ -173,6 +183,7 @@ function serialize (node, rewrite, { raw = false } = {}) {
     return escapeText(text);
   }
   if (node.nodeType !== 1) return ''; // comments (Vue's <!--v-if-->), processing instructions
+  if (isTransitionStub(node)) return [...node.childNodes].map(c => serialize(c, rewrite, { raw })).join('');
   const tag = node.localName;
   const attrs = raw ? rawAttributes(node, rewrite) : canonicalAttributes(node, rewrite);
   const open = `<${tag}${attrs.map(([k, v]) => ` ${k}="${escapeAttr(v)}"`).join('')}>`;
@@ -198,13 +209,14 @@ function canonicalAttributes (el, rewrite) {
     if (holdsIdRefs(name)) v = rewrite(v);
     out.push([name, v]);
   }
-  // Form controls: live state, not attributes (frameworks set value/checked as properties).
+  // Form controls: live state, not attributes (frameworks set value/checked as properties). An option's value is what
+  // its select reports when it's chosen, so options keep theirs too (el.value: the text when there's no attribute).
   const tag = el.localName;
   if (tag === 'input' || tag === 'textarea' || tag === 'select' || tag === 'option') {
     const drop = new Set(['value', 'checked', 'selected', 'indeterminate']);
     for (let i = out.length - 1; i >= 0; i--) if (drop.has(out[i][0])) out.splice(i, 1);
-    if (tag === 'option') { if (el.selected) out.push(['data-parity-selected', 'true']); }
-    else out.push(['data-parity-value', el.value]);
+    out.push(['data-parity-value', el.value]);
+    if (tag === 'option' && el.selected) out.push(['data-parity-selected', 'true']);
     if (tag === 'input' && (el.type === 'checkbox' || el.type === 'radio')) {
       out.push(['data-parity-checked', String(el.checked)]);
       if (el.indeterminate) out.push(['data-parity-indeterminate', 'true']);
