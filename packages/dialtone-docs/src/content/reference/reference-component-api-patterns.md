@@ -113,6 +113,8 @@ Visibility-toggle components use `update:open`:
 
 Popover and Dropdown accept an optional `visibilityChangeCallback` prop. When supplied, it receives the open boolean synchronously on logical visibility changes, including initial `true` during creation before mount when `open=true`. Neither component declares or emits `open-change`; existing custom DOM listeners retain their fallthrough behavior. The visible surface starts with `aria-hidden="false"` when initially open.
 
+The callback runs inside a synchronous Vue watcher. Use reactive state to remove the overlay. If the callback must call `app.unmount()`, defer that root teardown with `nextTick`; direct root teardown during prop delivery can interrupt Vue's render.
+
 `opened` and `update:open` report the current completed transition. Opening finishes initial focus before notifying listeners, so a focus choice made inside `opened` is preserved. `open=null` emits no `update:open`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
 
 With a boolean `open` prop, both components keep default anchor toggling disabled. `forwardAnchorArrowKeys` defaults to `false`; opting in forwards anchor ArrowUp/ArrowDown through `keydown` without toggling. A closed opted-in Dropdown lets the consumer handle default/propagation and preserves first-row focus only when opening is synchronously accepted in Dropdown's own emitted `keydown` callback. Ancestor DOM listeners and delayed updates do not carry that focus guarantee; handlers should distinguish anchor targets from content targets. Default anchor-arrow handling is unchanged when forwarding is disabled.

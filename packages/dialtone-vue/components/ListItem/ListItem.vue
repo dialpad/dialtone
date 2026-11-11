@@ -12,7 +12,7 @@
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
     :aria-selected="ariaSelected"
-    :aria-checked="role === 'menuitemradio' ? selected : undefined"
+    :aria-checked="isMenuItemRadio ? selected : undefined"
     v-on="listItemListeners"
   >
     <dt-item-layout
@@ -190,8 +190,12 @@ export default {
   },
 
   computed: {
+    isMenuItemRadio () {
+      return this.role === 'menuitemradio';
+    },
+
     ariaSelected () {
-      return ['listitem', 'menuitemradio'].includes(this.role) ? undefined : this.isHighlighted;
+      return this.role === 'listitem' || this.isMenuItemRadio ? undefined : this.isHighlighted;
     },
 
     isDefaultType () {
@@ -206,7 +210,7 @@ export default {
 
         keydown: event => {
           if (['enter', 'space'].includes(event.code.toLowerCase())) {
-            if (this.role === 'menuitemradio') event.preventDefault();
+            if (this.isMenuItemRadio) event.preventDefault();
             this.onClick(event);
           }
           this.$emit('keydown', event);

@@ -121,6 +121,7 @@ export default {
      * Optional callback receiving the open boolean synchronously on logical visibility changes.
      * Includes initial true during creation, before mount, when open=true.
      * Does not declare or emit an open-change event.
+     * Use reactive state for removal; defer direct app.unmount() until Vue's next tick.
      */
     visibilityChangeCallback: {
       type: Function,
@@ -472,12 +473,11 @@ export default {
     },
 
     onMouseHighlight (e) {
-      const liElement = this._getListItemNodes()?.find(item => item.contains(e.target));
-      const hoveredElement = liElement ?? e.target.closest('li');
+      const liElement = e.target.closest('li');
 
-      if (hoveredElement?.role && hoveredElement.id && this.highlightId !== hoveredElement.id) {
-        this.setHighlightId(hoveredElement.id);
-        liElement?.focus();
+      if (liElement?.role && liElement.id && this.highlightId !== liElement.id) {
+        this.setHighlightId(liElement.id);
+        if (this._getListItemNodes()?.includes(liElement)) liElement.focus();
       }
     },
 

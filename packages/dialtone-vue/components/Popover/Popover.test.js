@@ -882,7 +882,10 @@ describe('DtPopover Tests', () => {
 
     it('does not forward or toggle boolean anchor arrows without opt-in', async () => {
       await wrapper.setProps({ open: false });
+      let arrowEvent;
+      button.element.addEventListener('keydown', event => { arrowEvent = event; }, { once: true });
       await button.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+      expect(arrowEvent.defaultPrevented).toBe(true);
       expect(wrapper.emitted('keydown')).toBeUndefined();
       await wrapper.setProps({ forwardAnchorArrowKeys: true });
       await button.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });

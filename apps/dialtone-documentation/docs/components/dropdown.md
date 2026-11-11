@@ -160,9 +160,11 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 
 ## Persistent Menu Choices
 
+Menu radio choices require `menuitemradio` support in both ListItem and Dropdown. Older packages, including `@dialpad/dialtone` 10.5.1, do not include this API. Check the supported roles in your installed package before adopting this pattern.
+
 The parent owns the committed sort order. Each radio row uses `selected` for its checkmark and `aria-checked`; arrows and typeahead move focus without changing that state. ListItemGroup supplies an optional heading inside the menu. Ordinary action rows can share the menu and keep `menuitem`.
 
-<!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices","exclude":{"reason":"The dt10-pinned profile uses @dialpad/dialtone 10.5.1, which lacks menuitemradio checked state and navigation. Re-enable after a published compatible release, a compatible fixture profile, and consumer build, API, keyboard and accessibility qualification.","owner":"Francis Rupert"}} -->
+<!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices","exclude":{"reason":"The dt10-pinned profile uses @dialpad/dialtone 10.5.1, which lacks menuitemradio checked state and navigation. Re-enable after a published compatible release, a compatible fixture profile, and consumer build, API, keyboard and accessibility qualification.","owner":"DLT-3738"}} -->
 
 ```vue demo
 <dt-dropdown>
@@ -202,6 +204,8 @@ The parent owns the committed sort order. Each radio row uses `selected` for its
 
 Set `:visibility-change-callback="handleVisibilityChange"` to receive the open boolean synchronously when logical visibility changes, before the animation completes. With initial `open=true`, the callback runs during creation, before mount; the menu exposes `aria-hidden="false"`. No callback means no logical notification. Dropdown does not declare or emit `open-change`, preserving existing DOM listeners and wrapper notifications.
 
+The callback runs inside a synchronous Vue watcher. Use reactive state to remove the overlay. If the callback must call `app.unmount()`, defer that root teardown with `nextTick`; direct root teardown during prop delivery can interrupt Vue's render.
+
 `opened` and `update:open` report current completed transitions. Opening finishes initial focus before notifying listeners, so focus chosen by an `opened` listener is preserved. Stale completions do not notify. `open=null` emits no `update:open`.
 
 With a boolean `open` prop, anchor arrows remain silent by default. Set `forwardAnchorArrowKeys` to forward ArrowUp/ArrowDown through `keydown` without automatically toggling. On a closed opted-in Dropdown, the consumer decides whether to open and whether to prevent the key's default action; the event continues to ancestor listeners. To start with focus on the first navigable row, accept opening synchronously in Dropdown's own emitted `keydown` callback. An ancestor DOM listener or a delayed update does not carry that focus guarantee. The callback also receives content key events, so check that the event target belongs to the anchor before requesting opening; closing-content arrows must not reopen the menu. Ignored arrows do not make a later pointer opening behave like a keyboard opening. Once open, normal Dropdown navigation and key prevention apply.
@@ -224,7 +228,7 @@ A dropdown menu has well defined standard [keyboard interactions](https://www.w3
 
 Pressing `ESC` key while the dropdown has focus will emit an **escape** event and will close the menu. When the **highlight** selection changes, a highlight event is emitted with the index of the currently highlighted item. `SPACE` key will open the dropdown if it's closed and select the item when it's pressed on a list item.
 
-The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. A hand-authored `menuitemradio` must have a nonempty unique ID to participate in keyboard or mouse navigation; id-less radio rows are excluded. Headings and separators stay outside the navigable collection. Hovering an ID-bearing group heading clears the navigation highlight and emits `highlight(-1)` without moving focus or changing the checked choice. Direct calls to the exported mixin's `setHighlightId` retain legacy behavior: a nonempty ID is stored even before its row renders; an unmatched ID in a rendered collection clears the highlighted index.
+The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. Use `li` rows for pointer-driven Dropdown navigation. A hand-authored `menuitemradio` must have a nonempty unique ID to participate; id-less radio rows are excluded. Non-`li` rows retain their existing pointer behavior: hover does not transfer menu focus or emit `highlight`. Headings and separators stay outside the navigable collection. Hovering an ID-bearing group heading clears the navigation highlight and emits `highlight(-1)` without moving focus or changing the checked choice. Direct calls to the exported mixin's `setHighlightId` retain legacy behavior: a nonempty ID is stored even before its row renders; an unmatched ID in a rendered collection clears the highlighted index.
 
 <script setup>
 import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';

@@ -237,10 +237,32 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(document.activeElement.id).toBe('radio:one');
     expect(list.find('[id="radio:one"]').attributes('aria-checked')).toBe('true');
     expect(list.find('[id="radio two"]').attributes('aria-checked')).toBe('false');
+  });
+
+  it('targets the owning menu row when hovering nested-role content', async () => {
+    const popover = mountMenu();
+    await flushPromises();
+    const list = popover.findComponent({ ref: 'content' });
+    await list.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
     await list.find('[data-qa="heading"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('radio:one');
     await list.find('[data-qa="nested-role"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('radio two');
+  });
+
+  it('preserves non-li rows without pointer-driven menu focus or highlight events', async () => {
+    const popover = mountMenu({}, undefined, () => [
+      h(DtListItem, { id: 'div-first', role: 'menuitem', elementType: 'div',
+        navigationType: 'arrow-keys' }, () => 'First'),
+      h(DtListItem, { id: 'div-second', role: 'menuitem', elementType: 'div',
+        navigationType: 'arrow-keys' }, () => 'Second'),
+    ]);
+    await flushPromises();
+    const content = popover.findComponent({ ref: 'content' });
+    content.element.focus();
+    await content.get('#div-second').trigger('mousemove');
+    expect(document.activeElement).toBe(content.element);
+    expect(wrapper.emitted('highlight')).toBeUndefined();
   });
 
   it('navigates anchor arrows when initially open with the opt-in', async () => {
