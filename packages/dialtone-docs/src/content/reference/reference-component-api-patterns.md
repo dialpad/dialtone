@@ -113,7 +113,7 @@ Visibility-toggle components use `update:open`:
 
 Popover and Dropdown accept an optional `visibilityChangeCallback` prop. When supplied, it receives the open boolean synchronously on logical visibility changes, including initial `true` during creation before mount when `open=true`. Neither component declares or emits `open-change`; existing custom DOM listeners retain their fallthrough behavior. The visible surface starts with `aria-hidden="false"` when initially open.
 
-The callback runs inside a synchronous Vue watcher. Use reactive state to remove the overlay. If the callback must call `app.unmount()`, defer that root teardown with `nextTick`; direct root teardown during prop delivery can interrupt Vue's render.
+The callback runs inside a synchronous Vue watcher. To remove a modal overlay, first request closure and wait for `opened(false)`; this terminal notification follows scroll-lock release. Do not remove the modal from the early logical callback. Separately, defer a direct `app.unmount()` with `nextTick` to avoid interrupting Vue's render during prop delivery.
 
 `opened` and `update:open` report the current completed transition. Opening finishes initial focus before notifying listeners, so a focus choice made inside `opened` is preserved. `open=null` emits no `update:open`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
 

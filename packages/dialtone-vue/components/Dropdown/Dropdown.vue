@@ -121,7 +121,8 @@ export default {
      * Optional callback receiving the open boolean synchronously on logical visibility changes.
      * Includes initial true during creation, before mount, when open=true.
      * Does not declare or emit an open-change event.
-     * Use reactive state for removal; defer direct app.unmount() until Vue's next tick.
+     * For modal removal, request close and wait for opened(false) after scroll-lock release.
+     * Defer direct app.unmount() until Vue's next tick.
      */
     visibilityChangeCallback: {
       type: Function,

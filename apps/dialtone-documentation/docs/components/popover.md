@@ -52,7 +52,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
 
 Set `:visibility-change-callback="handleVisibilityChange"` to receive the open boolean synchronously when logical visibility changes. With initial `open=true`, the callback runs during creation, before mount; the visible dialog starts with `aria-hidden="false"`. Without a callback, no logical notification is sent. Popover does not declare or emit `open-change`, so existing custom DOM listeners keep their fallthrough behavior.
 
-The callback runs inside a synchronous Vue watcher. Use reactive state to remove the overlay. If the callback must call `app.unmount()`, defer that root teardown with `nextTick`; direct root teardown during prop delivery can interrupt Vue's render.
+The callback runs inside a synchronous Vue watcher. To remove a modal overlay, first request closure and wait for `opened(false)`; this terminal notification follows scroll-lock release. Do not remove the modal from the early logical callback. Separately, defer a direct `app.unmount()` with `nextTick` to avoid interrupting Vue's render during prop delivery.
 
 `opened` and `update:open` run after the current transition completes. Opening now finishes initial focus before notifying listeners, so an `opened` listener can choose another focus target without it being overwritten. An `initialFocusElement` HTMLElement must be inside the popover. `open=null` keeps internal trigger ownership and emits no `update:open`. Canceled transitions and stale asynchronous completions do not emit terminal state or restore obsolete focus.
 
