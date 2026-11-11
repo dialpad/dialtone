@@ -38,6 +38,12 @@ if (!vue.paths.length) {
   console.error(`gate: dialtone-vue has no source for ${unit}: no component, directive, mixin or composable of that name`);
   process.exit(2);
 }
+// A unit in components/ ports its <Name>.vue. With that gone (deleted or renamed) and the rest of its directory left,
+// DOM parity would have nothing to compare and be skipped, so the gate fails instead.
+if (home.startsWith('components/') && !vue.file) {
+  console.error(`gate: dialtone-vue has no ${name}.vue for ${unit}, though it has ${vue.paths.join(', ')}`);
+  process.exit(2);
+}
 const vueDir = vue.dir;
 const tmp = fs.mkdtempSync(path.join(process.env.PARITY_TMP ?? os.tmpdir(), `parity-${unit}-`));
 const rows = [];
@@ -89,7 +95,7 @@ if (!fs.existsSync(reactDir)) {
   console.error(`gate: ${path.relative(process.cwd(), reactDir)} doesn't exist`);
   process.exit(2);
 }
-const isComponent = fs.existsSync(path.join(vueDir, `${name}.vue`));
+const isComponent = Boolean(vue.file);
 // Every script file in the unit's directory, nested ones too: lint and tsc check them all, so the scans below must.
 const reactFiles = fs.readdirSync(reactDir, { recursive: true, withFileTypes: true })
   .filter(d => d.isFile() && /\.[cm]?[jt]sx?$/.test(d.name)).map(d => path.join(d.parentPath, d.name));

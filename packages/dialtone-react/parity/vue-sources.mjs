@@ -71,6 +71,8 @@ function ownPaths (vueRoot, id) {
  *   paths: every Vue source, relative to dialtone-vue: dir if it exists, the unit's own directive, mixin or composable
  *     files, and what's folded into it (directives/tooltip_directive for tooltip). The gate's Vue tests are
  *     every test file in these, nested ones too.
+ *   file: the component, <Name>.vue in dir (absolute), or null: a directive, mixin or composable, or a component
+ *     whose .vue is gone while the rest of its directory isn't.
  */
 export function vueSources (vueRoot, unit) {
   const name = pascal(unit);
@@ -87,7 +89,8 @@ export function vueSources (vueRoot, unit) {
     ...[unit, ...(MERGED[unit] ?? [])].flatMap(id => ownPaths(vueRoot, id)),
     ...(OWNED_FILES[unit] ?? []),
   ];
-  return { dir, paths };
+  const file = path.join(dir, `${name}.vue`);
+  return { dir, paths, file: fs.existsSync(file) ? file : null };
 }
 
 // The files dialtone-vue's Vitest runs (vite.config.js test.include): a .test.ts would be listed but never run.

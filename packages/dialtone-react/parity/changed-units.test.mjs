@@ -111,14 +111,23 @@ const unitsFor = (...files) => changedUnits(files, { pkg, vueRoot });
 const expect = (files, units) => assert.deepEqual(unitsFor(...files), { units, errors: [] });
 
 describe('vueSources', () => {
-  test('a component unit is its directory', () => {
+  test('a component unit is its directory, and its .vue the file', () => {
     assert.deepEqual(vueSources(vueRoot, 'text'), {
       dir: path.join(vueRoot, 'components/Text'), paths: ['components/Text'],
+      file: path.join(vueRoot, 'components/Text/Text.vue'),
     });
   });
 
   test('a component in another unit\'s directory is found there', () => {
     assert.deepEqual(vueSources(vueRoot, 'tab-group').paths, ['components/Tab']);
+    assert.equal(vueSources(vueRoot, 'tab-group').file, path.join(vueRoot, 'components/Tab/TabGroup.vue'));
+  });
+
+  test('a component whose .vue is gone, though the rest of its directory isn\'t, has no file', () => {
+    const gone = tree(path.join(root, 'vue-without-text'), ['components/Text/index.js', 'components/Text/text.stories.js']);
+    assert.deepEqual(vueSources(gone, 'text'), {
+      dir: path.join(gone, 'components/Text'), paths: ['components/Text'], file: null,
+    });
   });
 
   test('folded-in pieces and owned files join the unit', () => {
@@ -140,8 +149,9 @@ describe('vueSources', () => {
 
   test('a unit with no .vue keeps components/<Name>/ as its directory, which may not exist', () => {
     assert.equal(vueSources(vueRoot, 'mixin-input').dir, path.join(vueRoot, 'components/MixinInput'));
+    assert.equal(vueSources(vueRoot, 'mixin-input').file, null);
     assert.deepEqual(vueSources(vueRoot, 'nothing-here'), {
-      dir: path.join(vueRoot, 'components/NothingHere'), paths: [],
+      dir: path.join(vueRoot, 'components/NothingHere'), paths: [], file: null,
     });
   });
 
