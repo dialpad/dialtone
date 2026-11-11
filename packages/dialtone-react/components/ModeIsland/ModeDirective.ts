@@ -38,8 +38,12 @@ function removeAttributes (el: Element) {
   el.removeAttribute('data-dt-material');
 }
 
-/** Sets the mode attributes on `el` and keeps them in sync. Returns the teardown: observers off, attributes removed. */
-function applyMode (el: Element, mode: ContentMode): () => void {
+/**
+ * Sets the mode attributes on `el` and keeps them in sync. Returns the teardown: observers off.
+ * `isActive` says whether this hook is the one that set the element last: only that one writes `data-dt-mode` when a
+ * root or ancestor mode changes, so an earlier hook's observer can't override a later hook's explicit mode.
+ */
+function applyMode (el: Element, mode: ContentMode, isActive: () => boolean): () => void {
   // Set contrast from root, and watch for contrast changes on root
   el.setAttribute('data-dt-contrast', getRootContrast());
   const contrastObserver = new MutationObserver(() => el.setAttribute('data-dt-contrast', getRootContrast()));
@@ -58,7 +62,9 @@ function applyMode (el: Element, mode: ContentMode): () => void {
     el.setAttribute('data-dt-mode', getOppositeMode(findParentMode(el)));
 
     // Watch for mode changes on root and ancestors
-    modeObserver = new MutationObserver(() => el.setAttribute('data-dt-mode', getOppositeMode(findParentMode(el))));
+    modeObserver = new MutationObserver(() => {
+      if (isActive()) el.setAttribute('data-dt-mode', getOppositeMode(findParentMode(el)));
+    });
     modeObserver.observe(document.documentElement, MODE_OBSERVER_CONFIG);
 
     // Observe all ancestor elements for data-dt-mode changes. This includes ancestors that don't yet have the
@@ -155,7 +161,11 @@ export function useModeRegion (el: Element | null, mode: ContentMode | false = '
       warnedFor.current = { el: target, warning };
       console.warn(warning);
     }
-    const entry: AppliedMode = { el: target, mode: resolvedMode, warning, stop: applyMode(target, resolvedMode) };
+    const entry: AppliedMode = { el: target, mode: resolvedMode, warning, stop: () => {} };
+    entry.stop = applyMode(target, resolvedMode, () => {
+      const onElement = appliedByElement.get(target);
+      return onElement?.[onElement.length - 1] === entry;
+    });
     applied.current = entry;
     appliedByElement.set(target, [...(appliedByElement.get(target) ?? []), entry]);
   });

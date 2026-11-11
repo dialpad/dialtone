@@ -364,5 +364,28 @@ describe('DtModeDirective Tests', () => {
       wrapper.rerender(<Shared first={false} second={false} />);
       expect(target()).not.toHaveAttribute('data-dt-mode');
     });
+
+    it('should let only the hook that set the element last write it when the root mode changes', async () => {
+      function Shared ({ first, second }: { first: ContentMode; second: ContentMode }) {
+        const [el, setEl] = useState<HTMLElement | null>(null);
+        useModeRegion(el, first);
+        useModeRegion(el, second);
+        return <section ref={setEl} data-qa="target" />;
+      }
+
+      wrapper = render(<Shared first="invert" second="dark" />);
+      expect(target()).toHaveAttribute('data-dt-mode', 'dark');
+
+      document.documentElement.setAttribute('data-dt-mode', 'dark');
+      await waitForObservers();
+      expect(target()).toHaveAttribute('data-dt-mode', 'dark');
+
+      // The other order: the invert hook is last, so it follows the root.
+      wrapper.rerender(<Shared first="dark" second="invert" />);
+      expect(target()).toHaveAttribute('data-dt-mode', 'light');
+      document.documentElement.setAttribute('data-dt-mode', 'light');
+      await waitForObservers();
+      expect(target()).toHaveAttribute('data-dt-mode', 'dark');
+    });
   });
 });
