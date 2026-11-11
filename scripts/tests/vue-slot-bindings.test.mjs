@@ -40,12 +40,12 @@ test('repeated FilterPill slots retain the declared legacy and controlled bindin
   <slot ${name === 'default' ? '' : `name="${name}"`} ${bindings} />`;
   const source = `<template><div>
     <template v-if="controlled">
-      ${slot('default', ':label="label" :selected="selected" :selectedOptions="selectedOptions" :displayLabel="displayLabel" :isActive="isActive"')}
-      ${slot('content', ':close="close" :apply="apply" :cancel="cancel" :selected="selected" :pendingSelected="pendingSelected" :setSelected="setSelected"')}
+      ${slot('default', ':label="label" :selected="selected" :selected-options="selectedOptions" :display-label="displayLabel" :is-active="isActive"')}
+      ${slot('content', ':close="close" :apply="apply" :cancel="cancel" :selected="selected" :pending-selected="pendingSelected" :set-selected="setSelected"')}
     </template>
     <template v-else>
-      ${slot('default', ':label="label" :filters="filters" :activeFilters="activeFilters" :activeFilterList="activeFilterList" :activeFilterOverflow="activeFilterOverflow"')}
-      ${slot('content', ':close="close" :apply="apply" :cancel="cancel" :pendingFilters="pendingFilters"')}
+      ${slot('default', ':label="label" :filters="filters" :active-filters="activeFilters" :active-filter-list="activeFilterList" :active-filter-overflow="activeFilterOverflow"')}
+      ${slot('content', ':close="close" :apply="apply" :cancel="cancel" :pending-filters="pendingFilters"')}
     </template>
   </div></template><script>export default { name: 'FilterPillSlotFixture' };</script>`;
   const doc = await parseSource(source, 'FilterPillSlotFixture.vue', { addTemplateHandlers: [preserveDeclaredSlotBindings] });
