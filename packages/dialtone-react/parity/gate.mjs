@@ -32,6 +32,12 @@ try {
   console.error(`gate: ${error.message}`);
   process.exit(2);
 }
+// A unit ports something dialtone-vue has. With no Vue source (a typo, or a change that deleted it), there's nothing
+// to check parity against, so the gate fails instead of passing on the React side alone. A source with no tests is fine.
+if (!vue.paths.length) {
+  console.error(`gate: dialtone-vue has no source for ${unit}: no component, directive, mixin or composable of that name`);
+  process.exit(2);
+}
 const vueDir = vue.dir;
 const tmp = fs.mkdtempSync(path.join(process.env.PARITY_TMP ?? os.tmpdir(), `parity-${unit}-`));
 const rows = [];
