@@ -465,7 +465,7 @@ export default {
 
     /** Logical visibility synchronization for controlled selection. Null uses internal ownership. */
     open: {
-      type: Boolean,
+      type: [Boolean, null],
       default: null,
     },
 

@@ -422,6 +422,50 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('Built-in menu close semantics', () => {
+    it.each([
+      { showCloseButton: false, modal: false, dialogAriaModal: 'true' },
+      { showCloseButton: false, modal: true, dialogAriaModal: 'false' },
+      { showCloseButton: true, modal: false, dialogAriaModal: 'true' },
+      { showCloseButton: true, modal: true, dialogAriaModal: 'false' },
+    ])('updates popup and native Close semantics with showCloseButton=$showCloseButton, modal=$modal',
+      async ({ showCloseButton, modal, dialogAriaModal }) => {
+        wrapper.unmount();
+        manualTransitions = true;
+        mockProps = { role: 'dialog', showCloseButton, modal };
+        updateWrapper();
+        await button.trigger('click');
+        await completeTransition('enter');
+        const close = popoverWindow.get(showCloseButton
+          ? '[data-qa="dt-popover-close"]'
+          : '[data-qa="dt-sr-only-close-button"]');
+        const nativeClose = close.element;
+        expect(popoverWindow.attributes('aria-modal')).toBe(dialogAriaModal);
+        expect(close.attributes('role')).toBeUndefined();
+        expect(nativeClose.tagName).toBe('BUTTON');
+        expect(close.attributes('aria-label')).toBe('Click to close');
+        expect(nativeClose.tabIndex).toBe(0);
+        if (!showCloseButton) expect(close.attributes('id')).toBe('sr-only-close-button');
+
+        await wrapper.setProps({ role: 'menu' });
+        expect.soft(popoverWindow.attributes('aria-modal')).toBeUndefined();
+        expect.soft(close.attributes('role')).toBe('menuitem');
+        expect(close.element).toBe(nativeClose);
+        await wrapper.setProps({ role: 'dialog' });
+        expect(popoverWindow.attributes('aria-modal')).toBe(dialogAriaModal);
+        expect(close.attributes('role')).toBeUndefined();
+        await wrapper.setProps({ role: 'menu' });
+
+        nativeClose.focus();
+        await close.trigger('click');
+        expect(button.attributes('aria-expanded')).toBe('false');
+        expect(wrapper.emitted('opened').map(([open]) => open)).toEqual([true]);
+        await completeTransition('leave');
+        expect(wrapper.emitted('opened').map(([open]) => open)).toEqual([true, false]);
+        if (modal) expect(document.activeElement).toBe(button.element);
+      });
+  });
+
   describe('Focus trapping', () => {
     const MOCK_TRAP_CONTENT =
       '<button data-qa="trap-first">One</button><button data-qa="trap-last">Two</button>';

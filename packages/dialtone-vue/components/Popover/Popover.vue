@@ -58,7 +58,7 @@
         :aria-hidden="`${isDialogAriaHidden}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"
-        :aria-modal="`${!modal}`"
+        :aria-modal="role === 'menu' ? undefined : `${!modal}`"
         :transition="transition"
         :show="isOpen"
         :appear="toAppear"
@@ -81,6 +81,7 @@
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
+          :close-role="role === 'menu' ? 'menuitem' : undefined"
           @close="closePopover"
         >
           <template #content>
@@ -123,6 +124,7 @@
         </popover-header-footer>
         <sr-only-close-button
           v-if="!showCloseButton"
+          :role="role === 'menu' ? 'menuitem' : undefined"
           @close="closePopover"
         />
       </dt-lazy-show>

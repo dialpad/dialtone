@@ -8,6 +8,8 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 combinator: DtFilterPill
 ---
 
+Controlled selection and `opened` require the FilterPill feature release. Dialtone 10.5.1 predates these APIs; use a compatible published version for the controlled examples.
+
 <!-- @example {"exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo-only
@@ -26,6 +28,8 @@ combinator: DtFilterPill
 
 ### Key concepts
 
+Controlled `options`/`selected` and the `opened` notification require the FilterPill feature release. Dialtone 10.5.1, used by the `dt10-pinned` lookup profile, predates these APIs. Use a compatible published version for the controlled examples.
+
 - Pass an array in `options` when mounting to use controlled selection. `:options="[]"` opts in and supports asynchronous loading. Initial omitted, `undefined`, `null` or non-array options preserve the legacy array contract. A controlled instance stays controlled if later options become invalid; invalid input disables selection until repaired.
 - With `use-dropdown`, `selected` is a string or `null`. In the checkbox popover, it is an array of strings. Bind it with `v-model:selected`, or assign it from one `selection-change` handler when the application also needs a business command.
 - Options use stable, unique string `value` identities and visible `label` text. `shortLabel` changes only the pill label. Replacing selection, options or translated labels updates the same open control without mutating supplied data.
@@ -34,11 +38,11 @@ combinator: DtFilterPill
 - `v-model:open` synchronizes logical overlay visibility. A bound `false` does not veto user opening; disabling or making the control read-only closes it. Controlled `opened(boolean)` reports the current completed transition separately. Wait for `opened(false)` before removing an open or closing pill.
 - Keep the legacy/controlled contract and controlled `use-dropdown` pattern stable for a mounted pill. Use a keyed remount with the matching scalar/array value when switching either. Replacing a controlled option array is an ordinary update. Legacy `use-dropdown` switching retains its existing behavior.
 
-For existing callers, `v-model` still accepts `{ name, active? }[]` and keeps its initial array reference. Mutate those objects in place; replacing that legacy array does not replace the internal reference. The examples under Variants and the existing custom-slot examples retain that contract. Its `activeFilterList` slot binding remains the literal `'All'` for a complete multi-item selection, and `activeFilterOverflow` remains a string such as `'+2'`. Localize application slot text yourself; built-in aggregate and unavailable-selection text uses Dialtone localization.
+For existing callers, `v-model` still accepts `{ name, active? }[]` and keeps its initial array reference. Mutate those objects in place; replacing that legacy array does not replace the internal reference. The examples under Variants and the existing custom-slot examples retain that contract. Its `activeFilterList` slot binding remains the literal `'All'` for a complete multi-item selection, and `activeFilterOverflow` remains a string such as `'+2'`. Localize application slot text yourself; built-in aggregate and unavailable-selection text uses Dialtone localization. Generated legacy slot metadata now uses the camelCase names `activeFilters`, `activeFilterList`, `activeFilterOverflow` and `pendingFilters`, matching the unchanged runtime bindings.
 
 ### Controlled single selection
 
-The built-in dropdown renders persistent radio selection separately from keyboard highlight. Moving highlight does not change the selected value. The neutral row supplies the inactive label; the dimension label remains available to assistive technology.
+Controlled single selection requires the feature release; Dialtone 10.5.1 predates this API. The built-in dropdown renders persistent radio selection separately from keyboard highlight. Moving highlight does not change the selected value. The neutral row supplies the inactive label; the dimension label remains available to assistive technology.
 
 <!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
@@ -58,7 +62,7 @@ The page defines `const selectedMessage = ref('all')`. Options can be replaced w
 
 ### Controlled multiple selection
 
-Checkbox selection uses `ref([])` and a literal option list. `defer-selection` holds edits until Apply. Cancel, Escape and dismissal discard them. A semantically changed committed `selected` value wins over a dirty draft and rebases the open session; replacing it with the same selected identities preserves edits. Adding, removing, relabelling or reordering options also preserves pending edits, including selected identities whose options are temporarily absent. Apply never restores an older external value.
+Controlled multiple selection requires the feature release; Dialtone 10.5.1 predates this API. Checkbox selection uses `ref([])` and a literal option list. `defer-selection` holds edits until Apply. Cancel, Escape and dismissal discard them. A semantically changed committed `selected` value wins over a dirty draft and rebases the open session; replacing it with the same selected identities preserves edits. Adding, removing, relabelling or reordering options also preserves pending edits, including selected identities whose options are temporarily absent. External selection writes made synchronously before or after calling `apply()` win over the draft. A later write after an `await` while Apply is pending can be overwritten; await `apply()` before issuing those later external writes.
 
 <!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
@@ -77,7 +81,7 @@ Omit `defer-selection` for immediate checkbox updates. The `content` slot expose
 
 ### Closing before removal
 
-Controlled `open(false)` and `update:open(false)` report the start of closing. They do not signal that focus restoration or modal scroll cleanup has completed. Removing an open or closing pill at that point can leave the page scroll-locked. Keep the pill mounted, with its modal setting, anchor and scroll container unchanged, until `opened(false)` reports the current completed close. A leave cancelled by reopening does not report a completed close.
+The controlled `opened` notification requires the feature release; Dialtone 10.5.1 predates it. Controlled `open(false)` and `update:open(false)` report the start of closing. They do not signal that focus restoration or modal scroll cleanup has completed. Removing an open or closing pill at that point can leave the page scroll-locked. Keep the pill mounted, with its modal setting, anchor and scroll container unchanged, until `opened(false)` reports the current completed close. A leave cancelled by reopening does not report a completed close.
 
 Use the same sequence before navigation or rebuilding a header: record the requested application action, request closing, then perform the action after `opened(false)`. Keep one selection write path. Immediate unmount inside `selection-change`, logical `open`, or an Apply handler does not follow this sequence. This notification describes that overlay's completed transition; it does not repair ownership of locks from other overlays or changed scroll contexts.
 
@@ -121,7 +125,7 @@ The example requests removal from an open pill's footer and returns focus to the
 
 ## Labels and counts
 
-Use `anchorEnd` and `optionEnd` for trailing content while retaining the built-in labels, selection and handlers. This example uses synthetic English counts with singular/plural handling; use the application's plural-aware translations for other locales. Hide the visual badge from assistive technology and supply its meaning as text.
+Controlled trailing slots require the feature release; Dialtone 10.5.1 predates this API. Use `anchorEnd` and `optionEnd` for trailing content while retaining the built-in labels, selection and handlers. This example uses synthetic English counts with singular/plural handling; use the application's plural-aware translations for other locales. Hide the visual badge from assistive technology and supply its meaning as text.
 
 <!-- @example {"exclude":{"reason":"Named application handler, reactive options and computed count setup exceed bounded lookup extraction; the current Dialtone 10.5.1 consumer pin also predates options/selected.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 

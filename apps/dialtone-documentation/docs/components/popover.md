@@ -310,6 +310,10 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 
 ## Accessibility
 
+When `role="menu"`, Popover omits `aria-modal` and gives its built-in Close command `role="menuitem"`, for both the visually hidden button and `showCloseButton`. Close remains a native, tabbable button with the same label, placement, activation, dismissal timing and focus restoration. In Dropdown, it remains outside the inner row list and does not join Arrow, Home/End or typeahead navigation.
+
+This menu-specific behavior does not establish complete ARIA menu-pattern conformance. Existing Tab and focus-trap behavior remains, and consumer-provided header, footer and content controls need their own appropriate semantics. Verify menu announcements, Close discovery and activation, cancellation and returned focus with assistive technology; automated checks alone do not establish accessibility. Other popup roles retain their existing behavior.
+
 Initially open Popovers expose their visible content to accessibility APIs. This also makes the options in opened ComboboxWithPopover and ComboboxMultiSelect lists reachable, because those components create an already-open Popover. Opened-state accessibility checks can now reveal existing outer-listbox role, naming, close-control and `aria-modal` issues that were previously hidden.
 
 If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal.md#accessibility). The same rules will apply here if your popover is modal.

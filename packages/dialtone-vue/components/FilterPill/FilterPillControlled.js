@@ -181,7 +181,15 @@ export default {
 
   created () {
     this.checkControlledConfiguration();
-    if (!this.controlledAtBirth) return;
+    if (!this.controlledAtBirth) {
+      // Vue skips updates for declared emit listeners. Legacy callers still own
+      // these as native root listeners, including registration and Once lifetime.
+      // Copy the instance classification; normalized options are shared by Vue.
+      const emits = { ...this.$.emitsOptions };
+      for (const event of ['update:selected', 'selection-change', 'update:open', 'opened']) delete emits[event];
+      this.$.emitsOptions = emits;
+      return;
+    }
     this.syncCheckboxRender();
     if (this.open === true) this.requestControlledOpen(true, false);
   },

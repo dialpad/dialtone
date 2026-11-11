@@ -333,6 +333,82 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.emitted('update:open')).toBeUndefined();
   });
 
+  it.each([
+    ['onOpened', 'opened', false, false, ['1:first', '2:first']],
+    ['onSelectionChange', 'selection-change', false, false, ['1:first', '2:first']],
+    ['onOpenedOnce', 'opened', false, false, ['1:first']],
+    ['onSelectionChangeOnce', 'selection-change', false, false, ['1:first']],
+    ['onOpened', 'opened', true, true, ['1:first', '1:second', '2:first', '2:second']],
+    ['onSelectionChangeOnce', 'selection-change', true, true, ['1:first', '1:second']],
+  ])('updates legacy %s parent handlers (%s, array=%s, forwarded=%s)', async (key, event, array, forwarded, expected) => {
+    const generation = ref(0);
+    const trace = [];
+    const modelValue = [{ name: 'Legacy' }];
+    const ForwardingPill = { setup: (_, { attrs }) => () => h(DtFilterPill, attrs) };
+    wrapper = mount({
+      setup: () => () => {
+        const current = generation.value;
+        const first = () => trace.push(`${current}:first`);
+        const handler = array ? [first, () => trace.push(`${current}:second`)] : first;
+        return h(forwarded ? ForwardingPill : DtFilterPill, { modelValue, label: 'Legacy', [key]: handler });
+      },
+    }, { global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body });
+    generation.value = 1;
+    await reconcile();
+    await wrapper.find('[data-qa="dt-filter-pill"]').trigger(event);
+    generation.value = 2;
+    await reconcile();
+    await wrapper.find('[data-qa="dt-filter-pill"]').trigger(event);
+    expect(trace).toEqual(expected);
+  });
+
+  it.each([
+    ['onOpenedOnce', 'onSelectionChange', 'selection-change', ['old', 'new', 'new']],
+    ['onOpenedOnce', 'onOpened', 'opened', ['old', 'new', 'new']],
+    ['onOpened', 'onOpenedOnce', 'opened', ['old', 'new']],
+  ])('updates equal-count legacy listener keys from %s to %s', async (before, after, event, expected) => {
+    const changed = ref(false);
+    const trace = [];
+    const modelValue = [{ name: 'Legacy' }];
+    wrapper = mount({
+      setup: () => () => {
+        const current = changed.value;
+        return h(DtFilterPill, {
+          modelValue, label: 'Legacy', [current ? after : before]: () => trace.push(current ? 'new' : 'old'),
+        });
+      },
+    }, { global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body });
+    const root = wrapper.find('[data-qa="dt-filter-pill"]');
+    await root.trigger('opened');
+    changed.value = true;
+    await reconcile();
+    await root.trigger(event);
+    await root.trigger(event);
+    expect(trace).toEqual(expected);
+  });
+
+  it('isolates legacy native listener classification from subsequently mounted controlled instances', async () => {
+    const legacy = [];
+    const controlled = [];
+    wrapper = mount({
+      setup: () => () => h('div', [
+        h(DtFilterPill, { label: 'Legacy', modelValue: [{ name: 'Legacy' }], onSelectionChange: event => legacy.push(event.type) }),
+        h(DtFilterPill, { label: 'Teams', options, selected: ['sales'], onSelectionChange: action => controlled.push(action) }),
+      ]),
+    }, { global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body });
+    const [legacyPill, controlledPill] = wrapper.findAllComponents(DtFilterPill);
+    await legacyPill.find('[data-qa="dt-filter-pill"]').trigger('selection-change');
+    await controlledPill.find('[data-qa="dt-filter-pill"]').trigger('selection-change');
+    expect(legacy).toEqual(['selection-change']);
+    expect(controlled).toEqual([]);
+    await controlledPill.find('[data-qa="dt-filter-pill__button"]').trigger('click');
+    checks()[1].click();
+    await reconcile();
+    expect(controlled).toEqual([{
+      value: ['sales', 'support'], previousValue: ['sales'], reason: 'toggle', changed: true,
+    }]);
+  });
+
   it.each([undefined, null, 'invalid'])('keeps non-array initial options (%j) on the legacy contract', async initial => {
     vi.spyOn(console, 'warn').mockImplementation(() => {});
     const modelValue = [{ name: 'Legacy' }];
@@ -354,7 +430,7 @@ describe('DtFilterPill controlled selection', () => {
     await wrapper.setProps({ options: invalid });
     await open();
     expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
-    expect(document.querySelector('[role="menuitem"]')).toBeNull();
+    expect(document.querySelector('[data-qa="dt-dropdown-list-wrapper"] [role^="menuitem"]')).toBeNull();
     expect(modelValue).toEqual([{ name: 'Legacy' }]);
     expect(wrapper.emitted('selection-change')).toBeUndefined();
   });

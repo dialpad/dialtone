@@ -219,7 +219,12 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
   it('navigates mixed menu roles without changing the checked row', async () => {
     const popover = mountMenu();
     await flushPromises();
-    const list = popover.findComponent({ ref: 'content' }).find('[data-qa="dt-dropdown-list-wrapper"]');
+    const content = popover.findComponent({ ref: 'content' });
+    const list = content.find('[data-qa="dt-dropdown-list-wrapper"]');
+    const close = content.get('[data-qa="dt-sr-only-close-button"]');
+    expect.soft(close.attributes('role')).toBe('menuitem');
+    expect(content.element.contains(close.element)).toBe(true);
+    expect(list.element.contains(close.element)).toBe(false);
     const send = (key, code = key) => list.trigger('keydown', { key, code });
     await send('ArrowDown');
     expect(document.activeElement.id).toBe('radio:one');
