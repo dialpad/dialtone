@@ -42,7 +42,7 @@ keywords: ["partner branding", "cobranding", "sub-brand", "product brand"]
       <div>
         <h2 class="d-docsite--header-3 d-mbs-0">Highlighting multiple products</h2>
         <p class="d-docsite--paragraph">When speaking to multiple products in one asset, communication, or view, use the product typesets as noted below.</p>
-        <p class="d-docsite--paragraph d-fc-tertiary d-fs-150">Dialpad Sell, Dialpad Support, Dialpad Connect, Dialpad Ai, Ai Scorecards, Ai Live Coach, Ai Assistant, Ai CSAT, Ai Agent, Ai Playbook, DialpadGPT</p>
+        <p class="d-docsite--paragraph d-fc-tertiary d-fs-150">Dialpad Sell, Dialpad Support, Dialpad Connect, Dialpad AI, AI Scorecards, AI Live Coach, AI Assistant, AI CSAT, AI Agent, AI Playbook, DialpadGPT</p>
       </div>
     </dt-stack>
   </div>

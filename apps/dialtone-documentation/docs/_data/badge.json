@@ -38,7 +38,7 @@
     {
       "class": "d-badge--ai",
       "applies": ".d-badge",
-      "description": "Applies Dialpad Ai's purple/magenta background gradient."
+      "description": "Applies Dialpad AI's purple/magenta background gradient."
     },
     {
       "class": "d-badge--decorate-{$color}",

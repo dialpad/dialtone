@@ -54,10 +54,10 @@
     "desc": "Full color Dialpad glyph"
   },
   {
-    "name": "Dialpad Ai",
+    "name": "Dialpad AI",
     "file": "dialpad-ai",
     "vue": "IconDialpadAi",
-    "desc": "Full color Dialpad Ai glyph"
+    "desc": "Full color Dialpad AI glyph"
   },
   {
     "name": "Dialpad Meetings",
