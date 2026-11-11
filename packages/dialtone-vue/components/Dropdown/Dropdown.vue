@@ -121,8 +121,9 @@ export default {
      * Optional callback receiving the open boolean synchronously on logical visibility changes.
      * Includes initial true during creation, before mount, when open=true.
      * Does not declare or emit an open-change event.
-     * For an open/closing modal, keep modal=true and wait for opened(false) before removal.
-     * Setting modal=false before the leave handler can retain its scroll lock.
+     * For modal removal, keep modal=true, its anchor and scroll container unchanged until opened(false).
+     * Changing modal or the anchor's scroll context after opening can retain the original lock.
+     * opened(false) reports transition completion, not global scroll-lock ownership.
      * A closed modal with no pending transition or retained scroll lock can be removed immediately.
      * Defer direct app.unmount() until Vue's next tick.
      */
