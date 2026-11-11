@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_a98638d5a5be6e::t_ec0f7f7df0c555 246
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_a98638d5a5be6e::t_86b39e97fc938e 452-453
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "71c1bab78d924f754a9e864b00c901ba37208877",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

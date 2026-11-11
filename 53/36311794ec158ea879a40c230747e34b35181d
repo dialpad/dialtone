@@ -1,0 +1,32 @@
+packages/dialtone-react/parity/gate.mjs
+  s_2defdf83601f66::t_d53fd76c6e559e 144-147
+  s_2defdf83601f66::t_56ac0a763582fa 205
+  s_2defdf83601f66::t_a9586d62848a32 82-83,86-93
+  s_2defdf83601f66::t_7df89c5b8cf3a7 30-37,39-42,44,47-48,57-59
+  s_2defdf83601f66::t_c1ff361ede1e70 49-56,60
+  s_2defdf83601f66::t_7a3a1c24f57ff2 98,100-101
+  s_2defdf83601f66::t_6534e098d1cd40 176-181
+  s_2defdf83601f66::t_49ec56929ca6ca 4
+  s_2defdf83601f66::t_877920dfb7fd7d 161-165
+packages/dialtone-react/icons/createIcon.tsx
+  s_2defdf83601f66::t_19c77a9f6188e2 50-51
+  s_2defdf83601f66::t_f3bb990561c487 36-38,40-42
+packages/dialtone-react/icons/createIcon.test.tsx
+  s_2defdf83601f66::t_ded07218b767ef 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5336311794ec158ea879a40c230747e34b35181d",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

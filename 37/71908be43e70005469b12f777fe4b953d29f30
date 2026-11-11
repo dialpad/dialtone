@@ -1,0 +1,19 @@
+.claude/rules/documentation-site.md
+  s_18547bca72b16a::t_8f72d71cb8dac6 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3771908be43e70005469b12f777fe4b953d29f30",
+  "prompts": {},
+  "sessions": {
+    "s_18547bca72b16a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34090d3c-5c78-4979-93a5-69ff10aaa88a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
