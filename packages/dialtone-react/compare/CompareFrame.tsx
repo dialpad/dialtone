@@ -67,23 +67,26 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
   // ref; the dark-mode effect below keeps it current.
   const isDarkRef = useRef(isDark);
 
-  // React's Storybook can come up after this page, or restart: while its index
-  // doesn't answer, check again every 2s, so the pane picks it up without a reload.
+  // React's Storybook can come up after this page, or restart, and a port adds
+  // its story while this page is open: until the index answers with this story,
+  // check again every 2s, so the pane picks it up without a reload.
   useEffect(() => {
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const check = () => {
       void fetchStories('react').then((stories) => {
         if (cancelled) return;
-        if (!stories) {
-          setReactStatus('unreachable');
-          timer = setTimeout(check, 2000);
+        if (stories?.has(storyId)) {
+          setReactStatus('ported');
           return;
         }
-        setReactStatus(stories.has(storyId) ? 'ported' : 'missing');
-        if (!stories.has(storyId)) {
-          setLookalikes(findLookalikes(stories, { id: storyId, title, importPath: vueImportPath }));
+        setReactStatus(stories ? 'missing' : 'unreachable');
+        if (stories) {
+          const found = findLookalikes(stories, { id: storyId, title, importPath: vueImportPath });
+          // The same list keeps the same array, so an unchanged poll doesn't re-render.
+          setLookalikes(prev => (prev.join('\n') === found.join('\n') ? prev : found));
         }
+        timer = setTimeout(check, 2000);
       });
     };
     check();

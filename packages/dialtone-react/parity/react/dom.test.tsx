@@ -10,6 +10,10 @@ import { bindScope, jsonSafe, keepIdsOf, scopeKey } from '../cases.mjs';
 import { FAKE_TIMERS, FIXED_RANDOM, settle } from '../settle.mjs';
 import type { Deviations, ParityMap, SlotContent } from '../types';
 
+// The Vue goldens render <transition> as Vue Test Utils' default stub: the child as it is, no classes, no hooks. So
+// DtTransition is stubbed the same way here (normalize.mjs unwraps Vue's <transition-stub> element).
+vi.mock('../../common/transition/DtTransition', () => import('./transition-stub'));
+
 interface Case {
   name: string;
   props: Record<string, unknown>;
@@ -40,7 +44,7 @@ const camel = (s: string) => s.replace(/-([a-z])/g, (_, c: string) => c.toUpperC
 const styleObject = (css: string) => Object.fromEntries(css.split(';').map(d => d.trim()).filter(Boolean)
   .map(d => { const i = d.indexOf(':'); return [camel(d.slice(0, i).trim()), d.slice(i + 1).trim()]; }));
 
-// A Vue case → React props, by the conventions: same names, class → className, style → object,
+// A Vue case → React props: same names, class → className, style → object,
 // default slot → children, named slots → props of the same name, unless the parity map says otherwise.
 function toProps (c: Case, map: ParityMap) {
   const props: Record<string, unknown> = {};
@@ -109,7 +113,8 @@ async function renderElement (element: ReactElement, keepIds?: ReturnType<typeof
   }
 }
 
-const renderCase = (map: ParityMap, c: Case) => renderElement(createElement(map.component, toProps(c, map)), keepIdsOf(c));
+const renderCase = (map: ParityMap, c: Case) =>
+  renderElement(createElement(map.component, toProps(c, map)), keepIdsOf(c));
 
 // React's first `await act(…)` calls Math.random once, lazily, to set up its task queue (enqueueTask), so the first
 // case of a run counted that call as the port's. Warm up with an element that never picks, then check that a second

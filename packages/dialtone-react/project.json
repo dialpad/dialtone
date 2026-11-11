@@ -1,6 +1,17 @@
 {
   "name": "dialtone-react",
   "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "dependsOn": ["dialtone-icons:build"],
+      "inputs": ["default", "^default", "{workspaceRoot}/packages/dialtone-vue/localization/*.ftl"],
+      "outputs": ["{projectRoot}/dist"],
+      "options": { "script": "build" }
+    },
+    "lint": {
+      "executor": "nx:run-script",
+      "options": { "script": "lint" }
+    },
     "test": {
       "executor": "nx:run-script",
       "dependsOn": ["dialtone-icons:build"],
@@ -44,7 +55,7 @@
     },
     "storybook:all": {
       "executor": "nx:run-commands",
-      "dependsOn": ["storybook:ports", "dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build", "dialtone-vue:build-functions"],
+      "dependsOn": [{ "target": "storybook:ports" }, "dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build", "dialtone-vue:build-functions"],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
