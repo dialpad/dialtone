@@ -5,6 +5,7 @@ import { StandIn } from '../../.storybook/StandIn';
 import { cx, type ClassValue } from '../../common/cx';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
 import { DtIconDpPhone } from '../../icons';
+import { useModeRegion } from '../ModeIsland/ModeDirective';
 import { DtTooltip, type DtTooltipProps } from './Tooltip';
 import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES, type TooltipDirection } from './TooltipConstants';
 
@@ -336,6 +337,18 @@ const i18n = {
 
 const localMessage = `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`;
 
+function InvertedButton () {
+  const ref = useRef<HTMLButtonElement>(null);
+  useModeRegion(ref, 'invert');
+  return (
+    <StandIn for="button">
+      <button ref={ref} className="base-button__button d-btn d-btn--outlined" data-qa="dt-button" type="button">
+        <span data-qa="dt-button-label" className="base-button__label d-btn__label">Inverted</span>
+      </button>
+    </StandIn>
+  );
+}
+
 function TooltipVariants ({ transition, showTooltip, customDirections }: TooltipStoryArgs) {
   const directionRows = sliceIntoChunks(customDirections || TOOLTIP_DIRECTIONS, 3);
   const [show1, setShow1] = useState(showTooltip ?? false);
@@ -506,14 +519,8 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
               message={localMessage}
               open={showTooltip}
               anchor={(
-                // v-dt-mode:invert (mode-island isn't ported): the attributes it set in Vue's default light theme.
-                <StandIn for="mode-island">
-                  <StandIn for="button">
-                    <button className="base-button__button d-btn d-btn--outlined" data-qa="dt-button" type="button" data-dt-contrast="default" data-dt-material="sandstone" data-dt-mode="dark">
-                      <span data-qa="dt-button-label" className="base-button__label d-btn__label">Inverted</span>
-                    </button>
-                  </StandIn>
-                </StandIn>
+                // v-dt-mode:invert on the button: the hook sets the mode attributes, as the directive does.
+                <InvertedButton />
               )}
             />
           </div>
