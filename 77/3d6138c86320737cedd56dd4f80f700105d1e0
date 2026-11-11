@@ -1,0 +1,19 @@
+packages/eslint-plugin-dialtone/CHANGELOG.md
+  s_c11e0676746562::t_0b3d5bb3c3ba69 14-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "773d6138c86320737cedd56dd4f80f700105d1e0",
+  "prompts": {},
+  "sessions": {
+    "s_c11e0676746562": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+packages/figma-styles-sync/src/resolve_paint_styles.ts
+  s_355402be618789::t_cdff9b5321d0c0 13-20
+packages/figma-styles-sync/src/resolve_paint_styles.test.ts
+  s_355402be618789::t_bad287ed5c25e8 45-57
+packages/figma-styles-sync/README.md
+  s_355402be618789::t_03c38cb2bb0a89 9-12
+packages/figma-styles-sync/package.json
+  s_355402be618789::t_55f93ebc11b391 7
+packages/figma-styles-sync/project.json
+  s_355402be618789::t_67bea342cdc5e6 11-17
+packages/figma-styles-sync/src/ambient.d.ts
+  s_355402be618789::t_8c34c04b960f2b 1-10
+packages/figma-styles-sync/src/resolve_text_styles.test.ts
+  s_355402be618789::t_df7eff56488703 38-46
+packages/figma-styles-sync/tsconfig.json
+  s_355402be618789::t_a7115088b9da5a 23-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "68b87a4c74d1d8f3a1f3f7d596708b96033eda69",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

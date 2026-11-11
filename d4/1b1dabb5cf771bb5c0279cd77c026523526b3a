@@ -1,0 +1,16 @@
+packages/dialtone-icons/src/svg/icons/communication/mail-rejected.svg
+  h_c15b5755534093 2
+packages/dialtone-icons/src/svg/icons/communication/message-rejected.svg
+  h_c15b5755534093 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d41b1dabb5cf771bb5c0279cd77c026523526b3a",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

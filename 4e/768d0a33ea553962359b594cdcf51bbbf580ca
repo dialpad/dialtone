@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/ModeIsland/ModeIsland.stories.js
+  s_9c8859b1133730::t_f4cd0aeb0b2e31 109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "4e768d0a33ea553962359b594cdcf51bbbf580ca",
+  "prompts": {},
+  "humans": {
+    "h_845b3749ac4e31": {
+      "author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9c8859b1133730": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a954863b-05f2-4fce-999b-c5181c837b68",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}
