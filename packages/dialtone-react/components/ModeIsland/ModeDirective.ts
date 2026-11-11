@@ -73,20 +73,44 @@ function applyMode (el: Element, mode: ContentMode): () => void {
     contrastObserver.disconnect();
     materialObserver.disconnect();
     modeObserver?.disconnect();
-    removeAttributes(el);
   };
+}
+
+/** Sets all three attributes as `applyMode` last would, for an element that keeps another hook's state. */
+function writeAttributes (el: Element, mode: ContentMode) {
+  el.setAttribute('data-dt-contrast', getRootContrast());
+  el.setAttribute('data-dt-material', getRootMaterial());
+  el.setAttribute(
+    'data-dt-mode',
+    mode === 'light' || mode === 'dark' ? mode : getOppositeMode(findParentMode(el)),
+  );
 }
 
 interface AppliedMode {
   el: Element;
   mode: ContentMode;
   warning: string | null;
-  teardown: () => void;
+  stop: () => void;
 }
 
+// Hooks currently applied to each element, in the order they set it up. Vue can't unmount one of several directives
+// on an element, so when one hook lets go while another is still on it, the element keeps the state of the one that
+// set it last, instead of losing its attributes.
+const appliedByElement = new WeakMap<Element, AppliedMode[]>();
+
 function release (applied: { current: AppliedMode | null }) {
-  applied.current?.teardown();
+  const current = applied.current;
+  if (!current) return;
   applied.current = null;
+  current.stop();
+  const remaining = (appliedByElement.get(current.el) ?? []).filter(a => a !== current);
+  if (remaining.length === 0) {
+    appliedByElement.delete(current.el);
+    removeAttributes(current.el);
+    return;
+  }
+  appliedByElement.set(current.el, remaining);
+  writeAttributes(current.el, remaining[remaining.length - 1].mode);
 }
 
 /**
@@ -131,7 +155,9 @@ export function useModeRegion (el: Element | null, mode: ContentMode | false = '
       warnedFor.current = { el: target, warning };
       console.warn(warning);
     }
-    applied.current = { el: target, mode: resolvedMode, warning, teardown: applyMode(target, resolvedMode) };
+    const entry: AppliedMode = { el: target, mode: resolvedMode, warning, stop: applyMode(target, resolvedMode) };
+    applied.current = entry;
+    appliedByElement.set(target, [...(appliedByElement.get(target) ?? []), entry]);
   });
 
   // Unmount (and StrictMode's simulated one, after which the effect above sets up again).

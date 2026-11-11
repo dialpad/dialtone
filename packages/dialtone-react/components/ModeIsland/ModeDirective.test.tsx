@@ -345,5 +345,24 @@ describe('DtModeDirective Tests', () => {
 
       expect(warnSpy).toHaveBeenCalledTimes(2);
     });
+
+    it('should keep the last remaining hook\'s state when another hook on the element lets go', () => {
+      function Shared ({ first, second }: { first: ContentMode | false; second: ContentMode | false }) {
+        const [el, setEl] = useState<HTMLElement | null>(null);
+        useModeRegion(el, first);
+        useModeRegion(el, second);
+        return <section ref={setEl} data-qa="target" />;
+      }
+
+      wrapper = render(<Shared first="light" second="dark" />);
+      expect(target()).toHaveAttribute('data-dt-mode', 'dark');
+
+      wrapper.rerender(<Shared first="light" second={false} />);
+      expect(target()).toHaveAttribute('data-dt-mode', 'light');
+      expect(target()).toHaveAttribute('data-dt-contrast', 'default');
+
+      wrapper.rerender(<Shared first={false} second={false} />);
+      expect(target()).not.toHaveAttribute('data-dt-mode');
+    });
   });
 });
