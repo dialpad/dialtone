@@ -1,21 +1,17 @@
 import { render, cleanup, type RenderResult } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { VALIDATION_MESSAGE_TYPES, type ValidationMessageType } from '../../common/constants';
+import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import { formatMessages, type ValidationMessage } from '../../common/utils';
 import { DtValidationMessages, type DtValidationMessagesProps } from './ValidationMessages';
+import {
+  setFormattedValidationMessages,
+  addFormattedValidationMessage,
+} from '../../tests/helpers/validation_messages';
 
 const MOCK_BASE_VALIDATION_MESSAGES: ValidationMessage[] = [{
   message: 'Critical',
   type: VALIDATION_MESSAGE_TYPES.CRITICAL,
 }];
-
-const setFormattedValidationMessages = (type: ValidationMessageType, message: string): ValidationMessage[] =>
-  [{ message, type }];
-const addFormattedValidationMessage = (
-  messages: ValidationMessage[],
-  type: ValidationMessageType,
-  message: string,
-): ValidationMessage[] => [...messages, { message, type }];
 
 let MOCK_VALIDATION_MESSAGES: ValidationMessage[];
 let mockProps: DtValidationMessagesProps = {};
