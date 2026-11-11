@@ -1,0 +1,33 @@
+packages/dialtone-vue/components/RichTextEditor/MarkdownRenderer.js
+  s_b3ba73eba4ad84::t_0134628cc9e8aa 2
+  s_b3ba73eba4ad84::t_f44c41a439ce67 73-78
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.test.js
+  s_b3ba73eba4ad84::t_7c31d964b486e5 483,488-491,493-498,500-503,505-507,509
+  s_224b4c85ac3c95::t_b77e4029a94ebd 484-487,492,499,504,508
+packages/dialtone-vue/components/RichTextEditor/Extensions/Emoji/Emoji.js
+  s_224b4c85ac3c95::t_63234a9001db65 70-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ae2b1dd00e0d8b0bdb87a5060e00f63c17c6d56d",
+  "prompts": {},
+  "sessions": {
+    "s_224b4c85ac3c95": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1d68906a-a092-4750-b975-44e5f06c59c4",
+        "model": "unknown"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    },
+    "s_b3ba73eba4ad84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "57e5bc16-d274-48e8-9ed0-51a6954a0967",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

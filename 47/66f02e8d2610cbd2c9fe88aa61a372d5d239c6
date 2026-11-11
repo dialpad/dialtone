@@ -1,0 +1,38 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-9-16.md
+  s_dc177bf0a9429d::t_b40cc57e7c6614 287,329,349,356
+  s_dc177bf0a9429d::t_42969839315ec4 183
+  s_dc177bf0a9429d::t_fd27161799a2f1 126,130,141,143
+  s_dc177bf0a9429d::t_7ae6852ce25dbb 114
+  s_dc177bf0a9429d::t_5dff98e66a2da2 289,291,293,295-298,300,302,304,310,312,320,322,324-327,331,335-338,340,342,344-347
+  s_dc177bf0a9429d::t_5f5ac69f96b317 69,81,83-85,91-93
+  s_dc177bf0a9429d::t_29b5a1aae834ad 32,86,112,360,362,366,374-377,381,383,387,389,391,393,396-397
+  s_dc177bf0a9429d::t_1e58aeb40f36b7 179,181-182,184-186,188
+  s_dc177bf0a9429d::t_671279193d25c7 190
+  s_dc177bf0a9429d::t_a31989b65159f8 316,318
+  s_dc177bf0a9429d::t_02ffc84eafd662 385
+  s_dc177bf0a9429d::t_2d4a26c15139e9 151,153,155
+  s_dc177bf0a9429d::t_389f437eaaa9d6 165,167,169
+  s_dc177bf0a9429d::t_81577d8e4dcc4a 201,203,205,207,210,212,216,219,221,223,225-228,230,232,234-237,239,241,243-246,248,250,252-255,261,263,265-268,270,272,274,276,278-281,283,285
+  s_dc177bf0a9429d::t_864e0a037307cd 34
+  s_dc177bf0a9429d::t_7e1f8e738efc67 103,124,149,163,177
+  s_dc177bf0a9429d::t_245a044bd0a074 88
+  s_dc177bf0a9429d::t_809c3c22181a44 333,364,370,395
+  s_dc177bf0a9429d::t_26cad2470a7ec3 90
+  s_dc177bf0a9429d::t_a7f76f9470db8a 125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "4766f02e8d2610cbd2c9fe88aa61a372d5d239c6",
+  "prompts": {},
+  "sessions": {
+    "s_dc177bf0a9429d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09cd9-0610-7db3-ae84-4054925281bf",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

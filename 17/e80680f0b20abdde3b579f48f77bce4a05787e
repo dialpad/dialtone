@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/Loader/Loader.test.js
+  s_65a25b0465c682::t_4df822765c9d20 70,85,96
+packages/dialtone-vue/components/Loader/Loader.vue
+  s_65a25b0465c682::t_4df822765c9d20 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "17e80680f0b20abdde3b579f48f77bce4a05787e",
+  "prompts": {},
+  "sessions": {
+    "s_65a25b0465c682": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a1effa2a-9c16-4a24-98c0-358c253363b7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}
