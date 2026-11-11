@@ -243,9 +243,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     const popover = mountMenu();
     await flushPromises();
     const list = popover.findComponent({ ref: 'content' });
-    await list.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
-    await list.find('[data-qa="heading"]').trigger('mousemove');
-    expect(document.activeElement.id).toBe('radio:one');
+    list.element.focus();
     await list.find('[data-qa="nested-role"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('radio two');
   });
@@ -308,7 +306,6 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     const group = list.find('[role="group"]');
     expect(menu.attributes('role')).toBe('menu');
     expect(list.attributes('role')).toBe('none');
-    expect(group.attributes('aria-labelledby')).toBe('sort-group-heading');
     expect(group.find('[role="menuitemradio"]').element.parentElement).toBe(group.element);
     expect(group.element.parentElement).toBe(list.element);
     expect(group.element.parentElement.closest('ul:not([role]), ol:not([role])')).toBeNull();

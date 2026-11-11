@@ -449,7 +449,8 @@ describe('DtPopover Tests', () => {
         expect(document.activeElement).toBe(last);
       });
 
-      it('keeps the dialog exposed while dismissal has not restored focus', async () => {
+      it('keeps the dialog exposed until dismissal restores focus', async () => {
+        popoverWindow.get('[data-qa="trap-last"]').element.focus();
         let restore;
         let requested;
         const focusRequested = new Promise(resolve => { requested = resolve; });
@@ -462,14 +463,6 @@ describe('DtPopover Tests', () => {
         expect(button.attributes('aria-expanded')).toBe('false');
         expect(popoverWindow.attributes('aria-hidden')).toBe('false');
         restore(button.element);
-        await flushPromises();
-        expect(popoverWindow.attributes('aria-hidden')).toBe('true');
-      });
-
-      it('hides the dialog from assistive technology after leave restores focus', async () => {
-        const last = popoverWindow.find('[data-qa="trap-last"]').element;
-        last.focus();
-        await popoverWindow.trigger('keydown', { key: 'Escape' });
         await flushPromises();
         expect(document.activeElement).toBe(button.element);
         expect(popoverWindow.attributes('aria-hidden')).toBe('true');
