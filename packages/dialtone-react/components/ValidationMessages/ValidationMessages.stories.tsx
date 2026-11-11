@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
+import { DtCheckbox } from '../Checkbox/Checkbox';
 import { DtIconBell } from '../../icons';
 import { DtValidationMessages, type DtValidationMessagesProps } from './ValidationMessages';
 
@@ -313,32 +314,20 @@ function InteractiveFormTemplate () {
           <fieldset className="d-input-group__fieldset" data-qa="checkbox-group">
             <legend data-qa="checkbox-group-legend" className="d-text d-text-label--md d-text--tone-secondary d-input-group__legend-text">Interests</legend>
             {INTEREST_OPTIONS.map(option => (
-              <StandIn for="checkbox" key={option.value}>
-                <div className="">
-                  <label className="d-checkbox-group">
-                    <div className="d-checkbox__input">
-                      <input
-                        type="checkbox"
-                        name="interests"
-                        className="d-checkbox"
-                        value={option.value}
-                        checked={interestsValue.includes(option.value)}
-                        onChange={(event) => {
-                          const next = event.target.checked
-                            ? [...interestsValue, option.value]
-                            : interestsValue.filter(value => value !== option.value);
-                          setInterestsValue(next);
-                          validateInterests(next);
-                        }}
-                      />
-                    </div>
-                    <div data-qa="checkbox-label" className="d-text d-text-label--md d-text--tone-primary d-text--fw-normal d-checkbox__copy d-checkbox__label">{option.label}</div>
-                  </label>
-                  <div className="d-checkbox__messages" data-qa="checkbox-description-messages">
-                    <div id={option.messagesId} aria-live="assertive" className="base-input__messages d-validation-message__container" data-qa="dt-checkbox-validation-messages"></div>
-                  </div>
-                </div>
-              </StandIn>
+              <DtCheckbox
+                key={option.value}
+                name="interests"
+                value={option.value}
+                label={option.label}
+                checked={interestsValue.includes(option.value)}
+                onChange={(event) => {
+                  const next = event.target.checked
+                    ? [...interestsValue, option.value]
+                    : interestsValue.filter(value => value !== option.value);
+                  setInterestsValue(next);
+                  validateInterests(next);
+                }}
+              />
             ))}
             <DtValidationMessages data-qa="checkbox-group-messages" validationMessages={interestsMessages} />
           </fieldset>
