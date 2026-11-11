@@ -211,7 +211,7 @@ Confirmations are provided for actions which can’t be undone or are difficult 
 
 Confirmation titles should:
 
-* Ask if users want to continue, using a concise “verb” + “noun” question
+* Name the action with a concise “verb” + “noun” phrase, or ask if users want to continue
 * Keep it to one sentence and avoid using punctuation except when using question marks
 * Avoid articles (the, a, an) to keep content short and actionable
 * Be written in sentence case
