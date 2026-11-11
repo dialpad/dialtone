@@ -28,7 +28,7 @@ Headings and subheadings are titles and subtitles that refer to interface sectio
 
 * Start meeting
 * Invite users
-* Create Ai Playbook
+* Create AI Playbook
 * Port number
 
 </template>
