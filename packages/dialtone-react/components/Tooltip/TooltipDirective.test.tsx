@@ -238,6 +238,49 @@ describe('useTooltipDirective', () => {
     expect(qa('first')!.getAttribute('data-dt-tooltip-id')).not.toBe(qa('second')!.getAttribute('data-dt-tooltip-id'));
   });
 
+  it('gives the anchor an id that no other hook instance has, across roots', () => {
+    const first = render(<Anchor qa="first" value="One" />);
+    const second = render(<Anchor qa="second" value="Two" />);
+
+    expect(qa('first')!.getAttribute('data-dt-tooltip-id')).not.toBe(qa('second')!.getAttribute('data-dt-tooltip-id'));
+    first.unmount();
+    second.unmount();
+  });
+
+  it('applies a mutated offset array', async () => {
+    const offset: [number, number] = [0, 8];
+    const { update } = renderAnchor({ message: 'Message', delay: false, offset });
+    await flushPromises();
+    mouseEnter(anchor());
+    expect(tippyProps(anchor()).offset).toEqual([0, 8]);
+
+    offset[1] = 20;
+    update({ message: 'Message', delay: false, offset });
+    await flushPromises();
+
+    expect(tippyProps(anchor()).offset).toEqual([0, 20]);
+  });
+
+  it('removes the tooltip when the anchor detaches while the owner stays mounted', async () => {
+    function Owner ({ show }: { show: boolean }) {
+      const ref = useRef<HTMLButtonElement>(null);
+      useTooltipDirective(ref, 'Message', { noDelay: true });
+      return show ? <button ref={ref} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button> : null;
+    }
+    const view = render(<Owner show />);
+    await flushPromises();
+    mouseEnter(anchor());
+    expect(tooltipContents()).toHaveLength(1);
+
+    view.rerender(<Owner show={false} />);
+    expect(tooltipContents()).toHaveLength(0);
+
+    view.rerender(<Owner show />);
+    await flushPromises();
+    mouseEnter(anchor());
+    expect(tooltipContents()).toHaveLength(1);
+  });
+
   it('renders every tooltip in one container appended to document.body', async () => {
     const options = { noDelay: true };
     render(<><Anchor qa="first" value="One" options={options} /><Anchor qa="second" value="Two" options={options} /></>);

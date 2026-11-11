@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useSyncExternalStore, type RefObject } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore, type RefObject } from 'react';
 import { createRoot } from 'react-dom/client';
 import deepEqual from 'deep-equal';
 import type { ContentMode } from '../../common/mode_constants';
@@ -6,6 +6,10 @@ import { DtTooltip, type DtTooltipProps } from './Tooltip';
 import type { TooltipDirection } from './TooltipConstants';
 
 const DEFAULT_PLACEMENT: TooltipDirection = 'top';
+
+// The store is module-wide, so its ids must be unique across React roots. `useId()` isn't: two roots without distinct
+// `identifierPrefix` values can produce the same id.
+let nextTooltipId = 0;
 
 /** DtTooltip's props, as the directive's object value takes them: the anchor is the element the hook is given. */
 export type DtTooltipDirectiveProps = Omit<DtTooltipProps, 'ref' | 'anchor' | 'children' | 'externalAnchorElement'>;
@@ -111,6 +115,17 @@ function resolveProps (value: DtTooltipDirectiveValue, options: DtTooltipDirecti
   return props;
 }
 
+// Array props (`offset`, `fallbackPlacements`) are copied, so a caller who mutates one in place and rerenders still
+// compares as changed and the tooltip receives a new array.
+function snapshotProps (props: DtTooltipDirectiveProps): DtTooltipDirectiveProps {
+  const copy: Record<string, unknown> = { ...props };
+  for (const key in copy) {
+    const value = copy[key];
+    if (Array.isArray(value)) copy[key] = [...value];
+  }
+  return copy as DtTooltipDirectiveProps;
+}
+
 /**
  * dialtone-vue's `v-dt-tooltip` directive, as a hook that takes the anchor's ref. The anchor stays where it is, with
  * no wrapper, and gets a `data-dt-tooltip-id` that stays the same across updates. The tooltip renders in a container
@@ -126,7 +141,7 @@ export function useTooltipDirective (
   value: DtTooltipDirectiveValue,
   options: DtTooltipDirectiveOptions = {},
 ) {
-  const id = useId();
+  const [id] = useState(() => `dt-tooltip-${++nextTooltipId}`);
   // What was last given to the tooltip store. Vue's `updated` hook sets up the tooltip again only when the value
   // changed (deep-equal); here that includes the options and the anchor element, which the hook reads on every render.
   const applied = useRef<{ anchor: HTMLElement; props: DtTooltipDirectiveProps | null } | null>(null);
@@ -136,21 +151,27 @@ export function useTooltipDirective (
   // Runs after every render: the anchor can change without any dependency changing, and the comparison is by value.
   useEffect(() => {
     const anchor = ref.current;
-    if (!anchor) return;
+    if (!anchor) {
+      // The anchor is gone while the owner stays mounted: drop its tooltip, and apply the next anchor's afresh.
+      applied.current = null;
+      removeTooltip(id);
+      return;
+    }
     const previous = applied.current;
     if (previous && previous.anchor === anchor && deepEqual(previous.props, props)) return;
-    applied.current = { anchor, props };
-    if (!props) {
+    const snapshot = props && snapshotProps(props);
+    applied.current = { anchor, props: snapshot };
+    if (!snapshot) {
       // As in Vue: the anchor keeps its id, so the next tooltip it gets reuses it.
       removeTooltip(id);
       return;
     }
     anchor.setAttribute('data-dt-tooltip-id', id);
-    addOrUpdateTooltip({ id, anchorElement: anchor, props });
+    addOrUpdateTooltip({ id, anchorElement: anchor, props: snapshot });
   });
 
   useEffect(() => () => {
     applied.current = null;
     removeTooltip(id);
-  }, [id, applied]);
+  }, [id]);
 }
