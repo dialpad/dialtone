@@ -243,7 +243,7 @@ describe('changedUnits', () => {
   });
 
   test('a deleted Vue path, placed by its shape', () => {
-    // None of these exist in this tree.
+    // None of these exist in this tree. Nor do the other common/ units' Vue files, so those are errors here.
     const bare = tree(path.join(root, 'bare-vue'), ['components/Tooltip/Tooltip.vue']);
     const unitsIn = (...files) => changedUnits(files.map(f => `packages/dialtone-vue/${f}`), { pkg, vueRoot: bare });
     for (const [file, units] of [
@@ -257,7 +257,11 @@ describe('changedUnits', () => {
       ['common/mixins/dom.js', ['mixin-keyboard-list-navigation']],
       ['common/composables/useIndicatorAnimation.js', ['composable-use-indicator-animation']],
       ['common/mixins/index.js', []],
-    ]) assert.deepEqual(unitsIn(file), { units, errors: [] }, file);
+    ]) {
+      const { units: found, errors } = unitsIn(file);
+      assert.deepEqual(found, units, file);
+      assert.ok(errors.every(e => / matches no foundation /.test(e)), `${file}: ${errors.join('; ')}`);
+    }
   });
 
   test('a shared file gates every ported unit', () => {
@@ -377,20 +381,25 @@ describe('changedUnits', () => {
     assert.match(errors[1], /^twin: Twin\.vue is in more than one directory: A, B$/);
   });
 
-  test('a directive, mixin or composable in components/ or under its Vue name, or a common/ name two kinds share, is an error', () => {
+  test('a common/ directory that\'s no foundation and no unit, or a misplaced unit, is an error', () => {
     const dir = path.join(root, 'layout');
     const react = tree(path.join(dir, 'dialtone-react'), [
       'components/MixinInput/index.ts',
       'common/input/index.ts',
       'common/focus/index.ts',
       'common/input_group/index.ts',
+      'common/link/index.ts',
+      'common/localization/index.ts',
+      'common/orphan/index.ts',
       'common/useIndicatorAnimation/index.ts',
+      'common/hooks/useThing.ts',
     ]);
     const vue = tree(path.join(dir, 'dialtone-vue'), [
       'common/mixins/input.js',
       'common/mixins/input_group.js',
       'common/mixins/focus.js',
       'directives/focus_directive/focus.js',
+      'common/mixins/link.js',
       'common/composables/useIndicatorAnimation.js',
     ]);
     assert.deepEqual(changedUnits(['pnpm-lock.yaml'], { pkg: react, vueRoot: vue }), {
@@ -399,8 +408,22 @@ describe('changedUnits', () => {
         'components/MixinInput: mixin-input belongs in common/input',
         'common/focus could be directive-focus or mixin-focus',
         'common/input_group: mixin-input-group belongs in common/input-group',
+        'common/link is a foundation, so mixin-link can\'t live there',
+        'common/orphan matches no foundation (link, localization, transition) and no Vue directive, mixin or composable',
         'common/useIndicatorAnimation: composable-use-indicator-animation belongs in common/use-indicator-animation',
       ],
+    });
+  });
+
+  test('a unit whose Vue files a change deleted is still one; a later change reports it', () => {
+    const dir = path.join(root, 'orphaned');
+    const react = tree(path.join(dir, 'dialtone-react'), ['common/input/index.ts']);
+    const vue = tree(path.join(dir, 'dialtone-vue'), ['components/Text/Text.vue']);
+    assert.deepEqual(changedUnits(['packages/dialtone-vue/common/mixins/input.js'], { pkg: react, vueRoot: vue }),
+      { units: ['mixin-input'], errors: [] });
+    assert.deepEqual(changedUnits(['packages/dialtone-react/common/input/index.ts'], { pkg: react, vueRoot: vue }), {
+      units: [],
+      errors: ['common/input matches no foundation (link, localization, transition) and no Vue directive, mixin or composable'],
     });
   });
 });

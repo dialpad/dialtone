@@ -45,6 +45,10 @@ const SHARED = new RegExp([
 ].join('|'));
 
 const kebab = name => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+// common/'s foundations: code the units share, which no directive, mixin or composable names. Every other common/
+// directory with an index.ts is a directive's, mixin's or composable's, so one whose Vue files are gone, or that's
+// misnamed, is an error rather than a unit nobody gates.
+const FOUNDATIONS = ['link', 'localization', 'transition'];
 
 // Static imports, re-exports, dynamic imports and requires. Only relative and dialtone-vue's `@/` specifiers resolve:
 // an npm dependency changes through pnpm-lock.yaml, and the workspace packages ports render from are SHARED by path.
@@ -117,8 +121,8 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
   const paths = files.map(f => f.trim()).filter(Boolean);
   const vuePaths = paths.filter(f => f.startsWith(VUE)).map(f => f.slice(VUE.length));
   // A unit has an index.ts; a directory without one holds helpers another unit needed (Tooltip's Popover/TippyUtils).
-  // In common/, a directory that's no directive's, mixin's or composable's is a foundation (common/link). Which one it
-  // is comes from the Vue side, or from the paths of a change that deletes its Vue files.
+  // In common/, which unit a directory is comes from the Vue side, or from the paths of a change that deletes its Vue
+  // files; FOUNDATIONS are none.
   const named = new Set(vuePaths.flatMap(unitsOfPath));
   const ported = new Set();
   const componentsDir = path.join(pkg, 'components');
@@ -134,12 +138,15 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
     if (!fs.existsSync(path.join(commonDir, d, 'index.ts'))) continue;
     try {
       const id = commonUnit(vueRoot, d, named);
-      if (id) ported.add(id);
+      if (FOUNDATIONS.includes(d)) {
+        if (id) errors.push(`common/${d} is a foundation, so ${id} can't live there`);
+      } else if (id) ported.add(id);
       else {
-        // Named after the Vue file (common/useIndicatorAnimation, common/input_group): an error, not a foundation.
+        // Named after the Vue file (common/useIndicatorAnimation, common/input_group), or no unit at all.
         const kebabbed = kebab(d).replace(/_/g, '-');
-        const misnamed = kebabbed !== d && commonUnit(vueRoot, kebabbed, named);
-        if (misnamed) errors.push(`common/${d}: ${misnamed} belongs in ${reactDir(misnamed)}`);
+        const meant = kebabbed !== d && commonUnit(vueRoot, kebabbed, named);
+        errors.push(meant ? `common/${d}: ${meant} belongs in ${reactDir(meant)}`
+          : `common/${d} matches no foundation (${FOUNDATIONS.join(', ')}) and no Vue directive, mixin or composable`);
       }
     } catch (error) {
       errors.push(error.message);
