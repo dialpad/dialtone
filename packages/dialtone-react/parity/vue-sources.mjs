@@ -47,15 +47,16 @@ export function commonUnit (vueRoot, name, named = new Set()) {
 /**
  * A directive, mixin or composable unit's own paths (relative to dialtone-vue), or [] for any other id. A directive's
  * directory counts while it holds the directive itself (focustrap_directive/focustrap.js), as a component counts by its
- * <Name>.vue.
+ * <Name>.vue, unless `whole` is false: a piece folded into another unit counts while anything of it is left, so its
+ * leftover tests still run, and fail.
  */
-function ownPaths (vueRoot, id) {
+function ownPaths (vueRoot, id, whole = true) {
   const [, kind, rest] = id.match(OWN) ?? [];
   if (kind === 'directive') {
     const implemented = d => ['js', 'ts']
       .some(ext => fs.existsSync(path.join(vueRoot, 'directives', d, `${d.replace(/_directive$/, '')}.${ext}`)));
     return list(path.join(vueRoot, 'directives')).filter(d => d.isDirectory() && kebab(d.name) === rest)
-      .filter(d => implemented(d.name)).map(d => `directives/${d.name}`);
+      .filter(d => !whole || implemented(d.name)).map(d => `directives/${d.name}`);
   }
   if (!kind) return [];
   const dir = kind === 'mixin' ? 'common/mixins' : 'common/composables';
@@ -73,8 +74,8 @@ function ownPaths (vueRoot, id) {
  * The unit's Vue sources. Throws when its component is in more than one directory.
  *   dir: the component directory (absolute), where the gate reads the unit's Vue stories. The component is
  *     components/*\/<Name>.vue, one level deep: usually components/<Name>/, but DtTabGroup is in components/Tab/.
- *     A directive, mixin or composable unit keeps components/<Name>/ and never reads it, even when a component of
- *     that name exists (a MixinInput.vue isn't the input mixin).
+ *     null for a directive, mixin or composable unit, even when a component of that name exists (a MixinInput.vue
+ *     isn't the input mixin).
  *   paths: every Vue source, relative to dialtone-vue: a component unit's dir if it exists, the unit's own directive,
  *     mixin or composable files, and what's folded into it (directives/tooltip_directive for tooltip). The gate's Vue
  *     tests are every test file in these, nested ones too.
@@ -97,11 +98,11 @@ export function vueSources (vueRoot, unit) {
   const paths = [
     ...(component && fs.existsSync(dir) ? [home] : []),
     ...own,
-    ...(MERGED[unit] ?? []).flatMap(id => ownPaths(vueRoot, id)),
+    ...(MERGED[unit] ?? []).flatMap(id => ownPaths(vueRoot, id, false)),
     ...(OWNED_FILES[unit] ?? []),
   ];
   const file = path.join(dir, `${name}.vue`);
-  return { dir, paths, file: component && fs.existsSync(file) ? file : null, own };
+  return { dir: component ? dir : null, paths, file: component && fs.existsSync(file) ? file : null, own };
 }
 
 // The files dialtone-vue's Vitest runs (vite.config.js test.include): a .test.ts would be listed but never run.

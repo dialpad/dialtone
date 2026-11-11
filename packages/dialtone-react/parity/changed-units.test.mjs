@@ -9,6 +9,7 @@ import path from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { changedUnits } from './changed-units.mjs';
+import { storyParity } from './story-parity.mjs';
 import { commonUnit, reactDir, testFiles, unitsOfPath, vueSources } from './vue-sources.mjs';
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'changed-units-'));
@@ -147,25 +148,30 @@ describe('vueSources', () => {
       ['common/composables/useIndicatorAnimation.js']);
   });
 
-  test('a unit with no .vue keeps components/<Name>/ as its directory, which may not exist', () => {
-    assert.equal(vueSources(vueRoot, 'mixin-input').dir, path.join(vueRoot, 'components/MixinInput'));
+  test('a directive, mixin or composable has no component directory; a component keeps one that may not exist', () => {
+    assert.equal(vueSources(vueRoot, 'mixin-input').dir, null);
     assert.equal(vueSources(vueRoot, 'mixin-input').file, null);
     assert.deepEqual(vueSources(vueRoot, 'nothing-here'), {
       dir: path.join(vueRoot, 'components/NothingHere'), paths: [], file: null, own: [],
     });
   });
 
-  test('a directive, mixin or composable is never a component, even one named like it', () => {
+  test('a directive, mixin or composable is never a component, even one named like it, stories included', () => {
     const twin = tree(path.join(root, 'vue-twin'), [
       'components/MixinInput/MixinInput.vue',
       'components/MixinInput/MixinInput.test.js',
+      'components/MixinInput/MixinInput.stories.js',
       'common/mixins/input.js',
     ]);
-    assert.deepEqual(vueSources(twin, 'mixin-input'), {
-      dir: path.join(twin, 'components/MixinInput'), paths: ['common/mixins/input.js'], file: null,
-      own: ['common/mixins/input.js'],
+    const sources = vueSources(twin, 'mixin-input');
+    assert.deepEqual(sources, {
+      dir: null, paths: ['common/mixins/input.js'], file: null, own: ['common/mixins/input.js'],
     });
     assert.deepEqual(unitsOfPath('components/MixinInput/MixinInput.vue'), []);
+    const reactDir = tree(path.join(root, 'react-twin/common/input'), ['index.ts']);
+    assert.deepEqual(
+      storyParity({ vueDir: sources.dir, reactDir, name: 'MixinInput', pkg, vueRoot: twin, vuePaths: sources.paths }),
+      { status: 'na', summary: 'no Vue stories' });
   });
 
   test('a unit\'s own files are apart from what\'s folded into it, which may outlive them', () => {
@@ -173,9 +179,18 @@ describe('vueSources', () => {
       ['common/mixins/keyboard_list_navigation.js']);
     const leftover = tree(path.join(root, 'vue-leftover'), ['common/mixins/dom.js']);
     assert.deepEqual(vueSources(leftover, 'mixin-keyboard-list-navigation'), {
-      dir: path.join(leftover, 'components/MixinKeyboardListNavigation'), paths: ['common/mixins/dom.js'], file: null,
-      own: [],
+      dir: null, paths: ['common/mixins/dom.js'], file: null, own: [],
     });
+  });
+
+  test('a folded-in directive left without the directive itself still brings its tests', () => {
+    const orphaned = tree(path.join(root, 'vue-folded-test'), [
+      'components/Tooltip/Tooltip.vue',
+      'directives/tooltip_directive/tooltip.test.js',
+    ]);
+    const { paths } = vueSources(orphaned, 'tooltip');
+    assert.deepEqual(paths, ['components/Tooltip', 'directives/tooltip_directive']);
+    assert.deepEqual(testFiles(orphaned, paths), ['directives/tooltip_directive/tooltip.test.js']);
   });
 
   test('a directive\'s directory counts only while it holds the directive itself', () => {
