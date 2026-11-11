@@ -27,8 +27,8 @@
         :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
         @contextmenu="onContext"
-        @keydown.up.prevent="onArrowKeyPress"
-        @keydown.down.prevent="onArrowKeyPress"
+        @keydown.up="onArrowKeyPress"
+        @keydown.down="onArrowKeyPress"
         @keydown.escape.capture="closePopover"
         @keydown.enter="$emit('keydown', $event)"
         @keydown.space="$emit('keydown', $event)"
@@ -179,6 +179,31 @@ export default {
     open: {
       type: [Boolean, null],
       default: null,
+    },
+
+    /**
+     * Optional callback receiving the open boolean synchronously on logical visibility changes.
+     * Includes initial true during creation, before mount, when open=true.
+     * Does not declare or emit an open-change event.
+     * For modal removal, keep modal=true, its anchor and scroll container unchanged until opened(false).
+     * Changing modal or the anchor's scroll context after opening can retain the original lock.
+     * opened(false) reports transition completion, not global scroll-lock ownership.
+     * A closed modal with no pending transition or retained scroll lock can be removed immediately.
+     * Defer direct app.unmount() until Vue's next tick.
+     */
+    visibilityChangeCallback: {
+      type: Function,
+      default: null,
+    },
+
+    /**
+     * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
+     * Default false preserves controlled anchor keyboard behavior.
+     * @values true, false
+     */
+    forwardAnchorArrowKeys: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -597,12 +622,13 @@ export default {
     'update:open',
 
     /**
-     * Emitted when popover is shown or hidden
+     * Emitted after the current transition and initial focus work complete
      *
      * @event opened
      * @type {Boolean | Array}
      */
     'opened',
+
 
     /**
      * Emitted when the mouse enters the popover
@@ -641,6 +667,7 @@ export default {
       mutationObserver: null,
       isOutsideViewport: false,
       isOpen: false,
+      visibilityGeneration: 0,
       // Only true once the leave transition (and any focus restoration in onLeaveTransitionComplete) has
       // finished, so aria-hidden is never applied while the dialog still holds focus or is still visible.
       isDialogAriaHidden: true,
@@ -750,6 +777,31 @@ export default {
       });
     },
 
+    // Register before the immediate open watcher so initial open=true notifies and exposes the dialog.
+    isOpen: [
+      {
+        flush: 'sync',
+        handler (isOpen) {
+          this.visibilityGeneration++;
+          if (!this._isUnmounting) this.visibilityChangeCallback?.(isOpen);
+        },
+      },
+      {
+        handler (isOpen) {
+          if (isOpen) {
+            this.isDialogAriaHidden = false;
+            // Initial open=true runs before mounted() resolves anchorEl; tippy needs an anchor.
+            if (!this.anchorEl) return;
+            this.initTippyInstance();
+            this.tip?.show();
+          } else {
+            this.removeEventListeners();
+            this.tip?.hide();
+          }
+        },
+      },
+    ],
+
     open: {
       handler: function (open) {
         if (open !== null) {
@@ -769,21 +821,6 @@ export default {
           this.toAppear = contentAppear;
         }
       },
-    },
-
-    isOpen (isOpen, isPrev) {
-      if (isOpen) {
-        this.isDialogAriaHidden = false;
-        // Guard against isOpen flipping true before mounted() has resolved an anchorEl
-        // (e.g. an immediate `open` prop watcher firing pre-mount) — creating a tippy
-        // instance with no anchor leaves a stale getReferenceClientRect wired up.
-        if (!this.anchorEl) return;
-        this.initTippyInstance();
-        this.tip?.show();
-      } else if (!isOpen && isPrev !== isOpen) {
-        this.removeEventListeners();
-        this.tip?.hide();
-      }
     },
   },
 
@@ -927,7 +964,13 @@ export default {
     },
 
     onArrowKeyPress (e) {
-      if (this.open !== null) { return; }
+      const isControlled = this.open !== null;
+      if (isControlled && this.forwardAnchorArrowKeys) {
+        this.$emit('keydown', e);
+        return;
+      }
+      e.preventDefault();
+      if (isControlled) return;
       if (this.openWithArrowKeys && this.anchorEl?.contains(e.target)) {
         if (!this.isOpen) {
           this.isOpen = true;
@@ -1008,51 +1051,55 @@ export default {
       this.addEventListeners();
     },
 
+    isCurrentVisibility (generation, isOpen) {
+      return !this._isUnmounting && this.visibilityGeneration === generation && this.isOpen === isOpen;
+    },
+
     async onLeaveTransitionComplete () {
-      if (this._isUnmounting) return;
+      const generation = this.visibilityGeneration;
+      if (!this.isCurrentVisibility(generation, false)) return;
       if (this.modal) {
-        await this.focusFirstElement(this.$refs.anchor);
-        if (this._isUnmounting) return;
-        // await next tick in case the user wants to change focus themselves.
+        const anchor = await this.getFirstFocusableElement(this.$refs.anchor);
+        if (!this.isCurrentVisibility(generation, false)) return;
+        anchor?.focus({ preventScroll: true });
+        // Allow consumers to choose their own focus destination.
         await this.$nextTick();
-        if (this._isUnmounting) return;
+        if (!this.isCurrentVisibility(generation, false)) return;
         this.enableScrolling();
       }
-      if (this._isUnmounting) return;
-      // Focus has been moved off the dialog (or was never trapped in it) by this point, so it's now
-      // safe to hide it from assistive technology without triggering a focused-descendant violation.
       this.isDialogAriaHidden = true;
       this.tip?.unmount();
       this.$emit('opened', false);
-      if (this.open !== null) {
+      if (this.isCurrentVisibility(generation, false) && this.open !== null) {
         this.$emit('update:open', false);
       }
     },
 
     async onEnterTransitionComplete () {
-      if (this._isUnmounting) return;
-      this.focusInitialElement();
-      // await next tick in case the user wants to change focus themselves.
+      const generation = this.visibilityGeneration;
+      if (!this.isCurrentVisibility(generation, true)) return;
+      await this.focusInitialElement(generation);
+      // Allow consumers to choose their own focus destination.
       await this.$nextTick();
-      if (this._isUnmounting) return;
+      if (!this.isCurrentVisibility(generation, true)) return;
       this.preventScrolling();
       this.$emit('opened', true, this.$refs.popover__content);
-      if (this.open !== null) {
+      if (this.isCurrentVisibility(generation, true) && this.open !== null) {
         this.$emit('update:open', true);
       }
     },
 
-    focusInitialElement () {
+    async focusInitialElement (generation) {
       if (this.initialFocusElement === 'dialog') {
         returnFirstEl(this.$refs.content?.$el)?.focus();
       }
-      // find by ID
-      if (this.initialFocusElement.startsWith('#')) {
+      if (typeof this.initialFocusElement === 'string' && this.initialFocusElement.startsWith('#')) {
         this.focusInitialElementById();
       }
       if (this.initialFocusElement === 'first') {
-        this.focusFirstElementIfNeeded(this.$refs.popover__content);
+        await this.focusFirstElementIfNeeded(this.$refs.popover__content, generation);
       }
+      if (!this.isCurrentVisibility(generation, true)) return;
       if (this.initialFocusElement instanceof HTMLElement) {
         this.initialFocusElement.focus();
       }
@@ -1096,10 +1143,12 @@ export default {
       this.popoverContentEl.style.width = `${this.anchorEl?.clientWidth}px`;
     },
 
-    focusFirstElementIfNeeded (domEl) {
+    async focusFirstElementIfNeeded (domEl, generation = this.visibilityGeneration) {
       const focusableElements = this._getFocusableElements(domEl, true);
       if (focusableElements.length !== 0) {
-        this.focusFirstElement(domEl);
+        const element = await this.getFirstFocusableElement(domEl);
+        if (!this.isCurrentVisibility(generation, true)) return;
+        element?.focus({ preventScroll: true });
       } else if (this.showCloseButton) {
         this.$refs.popover__header?.focusCloseButton();
       } else {

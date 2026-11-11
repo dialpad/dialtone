@@ -269,3 +269,47 @@ describe('DtListItem tests', () => {
     });
   });
 });
+
+describe('ListItem contextual roles', () => {
+  it('keeps ordinary selected list content as listitem', () => {
+    const item = mount(DtListItem, { props: { selected: true } });
+    expect(item.attributes('role')).toBe('listitem');
+    expect(item.attributes('aria-selected')).toBeUndefined();
+    expect(item.attributes('aria-checked')).toBeUndefined();
+    item.unmount();
+  });
+
+  it('keeps checked state independent of menu radio highlight', async () => {
+    const item = mount(DtListItem, {
+      props: { id: 'radio', role: 'menuitemradio', selected: true, navigationType: 'arrow-keys' },
+    });
+    expect(item.attributes('aria-checked')).toBe('true');
+    expect(item.attributes('aria-selected')).toBeUndefined();
+    await item.trigger('mousemove');
+    expect(item.classes()).toContain('d-list-item--highlighted');
+    expect(item.attributes('aria-checked')).toBe('true');
+    await item.setProps({ selected: false });
+    expect(item.attributes('aria-checked')).toBe('false');
+    item.unmount();
+  });
+
+  it.each(['Enter', 'Space'])('activates a menu radio once on %s with the default action prevented', async code => {
+    const item = mount(DtListItem, {
+      props: { id: 'radio', role: 'menuitemradio', navigationType: 'arrow-keys' },
+    });
+    await item.trigger('keydown', { key: code === 'Space' ? ' ' : code, code });
+    expect(item.emitted('click')).toHaveLength(1);
+    expect(item.emitted('click')[0][0].defaultPrevented).toBe(true);
+    item.unmount();
+  });
+
+  it.each(['menuitem', 'option'])('preserves %s highlight markup without inferring a radio', async role => {
+    const item = mount(DtListItem, { props: { role, selected: true, navigationType: 'arrow-keys' } });
+    expect(item.attributes('role')).toBe(role);
+    expect(item.attributes('aria-selected')).toBe('false');
+    expect(item.attributes('aria-checked')).toBeUndefined();
+    await item.trigger('mousemove');
+    expect(item.attributes('aria-selected')).toBe('true');
+    item.unmount();
+  });
+});

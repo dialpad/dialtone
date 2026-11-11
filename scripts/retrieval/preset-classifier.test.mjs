@@ -61,3 +61,18 @@ test('source classification admits a documented native attribute', () => {
   });
   assert.equal(result.disposition, 'eligible/setup-needed');
 });
+
+test('an owned preset exclusion prevents materialization for an incompatible consumer profile', () => {
+  const result = classify(() => { throw new Error('Excluded source was materialized'); }, {
+    exclusion: { reason: 'Pinned package lacks this API', owner: 'DLT-3738' },
+  });
+  assert.equal(result.disposition, 'policy-excluded');
+  assert.match(result.reasons[0], /Pinned package lacks this API.*DLT-3738/);
+  assert.equal(result.template, undefined);
+});
+
+test('preset exclusions require a nonempty reason and owner', () => {
+  for (const exclusion of [{ reason: 'Incompatible' }, { reason: '', owner: 'DLT-3738' }]) {
+    assert.throws(() => classify(() => '<dt-button />', { exclusion }), /reason and owner/);
+  }
+});

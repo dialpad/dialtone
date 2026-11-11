@@ -5,6 +5,8 @@
     :content-width="contentWidth"
     :content-mode="contentMode"
     :open="open"
+    :forward-anchor-arrow-keys="forwardAnchorArrowKeys"
+    :visibility-change-callback="onVisibilityChange"
     :placement="placement"
     :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
     :fallback-placements="fallbackPlacements"
@@ -42,6 +44,7 @@
       <ul
         :id="listId"
         ref="listWrapper"
+        role="none"
         :class="listClasses"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
@@ -85,7 +88,7 @@ export default {
       indexKey: 'highlightIndex',
       idKey: 'highlightId',
       listElementKey: 'getListElement',
-      listItemRole: 'menuitem',
+      listItemRole: ['menuitem', 'menuitemradio'],
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -112,6 +115,32 @@ export default {
     open: {
       type: [Boolean, null],
       default: null,
+    },
+
+    /**
+     * Optional callback receiving the open boolean synchronously on logical visibility changes.
+     * Includes initial true during creation, before mount, when open=true.
+     * Does not declare or emit an open-change event.
+     * For modal removal, keep modal=true, its anchor and scroll container unchanged until opened(false).
+     * Changing modal or the anchor's scroll context after opening can retain the original lock.
+     * opened(false) reports transition completion, not global scroll-lock ownership.
+     * A closed modal with no pending transition or retained scroll lock can be removed immediately.
+     * Defer direct app.unmount() until Vue's next tick.
+     */
+    visibilityChangeCallback: {
+      type: Function,
+      default: null,
+    },
+
+    /**
+     * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
+     * Closed anchor arrows retain their default action and propagation for consumer handling.
+     * Accept opening synchronously in the emitted keydown callback for first-row focus.
+     * @values true, false
+     */
+    forwardAnchorArrowKeys: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -317,12 +346,13 @@ export default {
     'update:open',
 
     /**
-     * Event fired when dropdown is shown or hidden
+     * Event fired after the current transition and initial focus work complete
      *
      * @event opened
      * @type {Boolean | Array}
      */
     'opened',
+
   ],
 
   data () {
@@ -331,7 +361,9 @@ export default {
       DROPDOWN_PADDING_CLASSES,
       EVENT_KEYNAMES,
       openedWithKeyboard: false,
+      pendingArrowOpening: null,
       isOpen: null,
+      isLogicallyOpen: false,
     };
   },
 
@@ -349,6 +381,23 @@ export default {
 
         keydown: event => {
           const eventCode = event.code;
+          const isArrow = [EVENT_KEYNAMES.up, EVENT_KEYNAMES.arrowup,
+            EVENT_KEYNAMES.down, EVENT_KEYNAMES.arrowdown].includes(eventCode);
+
+          if (this.forwardAnchorArrowKeys && this.open !== null && !this.isLogicallyOpen && isArrow &&
+            this.$refs.popover?.$refs.anchor?.contains(event.target)) {
+            const pending = Symbol('arrow-opening');
+            this.pendingArrowOpening = pending;
+            this.openedWithKeyboard = true;
+            this.$emit('keydown', event);
+            // Let synchronous acceptance in the emitted handler flush before discarding ignored modality.
+            this.$nextTick(() => {
+              if (this.pendingArrowOpening === pending && !this.isLogicallyOpen) {
+                this.openedWithKeyboard = false;
+              }
+            });
+            return;
+          }
 
           switch (eventCode) {
             case EVENT_KEYNAMES.up:
@@ -399,7 +448,8 @@ export default {
     },
 
     activeItemEl () {
-      return this.getListElement().querySelector('#' + this.highlightId);
+      if (!this.highlightId) return null;
+      return this._getListItemNodes()?.find(item => item.id === this.highlightId) || null;
     },
 
     isArrowKeyNav () {
@@ -421,12 +471,17 @@ export default {
   },
 
   methods: {
+    onVisibilityChange (isOpen) {
+      this.isLogicallyOpen = isOpen;
+      this.visibilityChangeCallback?.(isOpen);
+    },
+
     onMouseHighlight (e) {
       const liElement = e.target.closest('li');
 
-      if (liElement && liElement.role && this.highlightId !== liElement.id) {
+      if (liElement?.role && liElement.id && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
-        liElement.focus();
+        if (this._getListItemNodes()?.includes(liElement)) liElement.focus();
       }
     },
 

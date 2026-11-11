@@ -3,7 +3,7 @@ type: reference
 category: reference
 keywords: [accessibility, a11y, wcag, aria, focus-management, keyboard-navigation, screen-reader, data-qa, focus-visible, reduced-motion]
 ai_summary: Accessibility checklist for Dialtone components — ARIA patterns, focus management, keyboard navigation, and CSS utilities.
-last_updated: 2026-10-29
+last_updated: 2026-11-09
 related_packages: [dialtone-vue, dialtone-css]
 ---
 
@@ -57,8 +57,10 @@ For the full accessibility guide with P.O.U.R. principles and role-specific resp
 
 ### Dropdowns (DtDropdown)
 
-- `role="menu"` on the list container
-- `role="menuitem"` on individual items
+- `role="menu"` on the positioned surface; the `ul` list wrapper has `role="none"` so it does not interrupt the menu context
+- `role="menuitem"` on action items
+- Explicit `role="menuitemradio"` for persistent mutually exclusive menu choices; consumer-owned `selected` sets `aria-checked` independently of focus/highlight
+- ListItem still defaults to `listitem` for ordinary lists; listbox rows remain `option`. A checkmark never infers a radio role
 - `aria-expanded` on the trigger
 
 ## Focus Management
@@ -79,7 +81,9 @@ Focusable selector used: `button, [href], input, select, textarea, details, [tab
 `packages/dialtone-vue/common/mixins/keyboard_list_navigation.js` provides arrow-key navigation for dropdowns and selects:
 
 - Up/Down arrow keys move highlight through list items
-- `listItemRole` configurable (defaults to `'option'`)
+- `listItemRole` accepts a string or array of roles (defaults to `'option'`); Dropdown uses `menuitem` and `menuitemradio` in document order
+- Built-in ListItem IDs are stable; hand-authored `menuitemradio` rows require a nonempty unique ID to participate in keyboard/mouse navigation
+- Headings and separators stay outside the navigable collection
 - `focusOnKeyboardNavigation` flag controls whether items receive DOM focus on arrow
 - `scrollToOnHighlight` scrolls the active item into view
 

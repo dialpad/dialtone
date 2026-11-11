@@ -66,6 +66,21 @@ The **bottom** slot can be used to display content below the subtitle slot.
 </ul>
 ```
 
+## Roles and selection
+
+Choose the role from the surrounding widget. A checkmark or `selected=true` never changes the role automatically.
+
+| Context | ListItem role | State ownership |
+| --- | --- | --- |
+| Ordinary `ul` or `ol` | `listitem` (default) | `selected` shows a visual checkmark. |
+| Action inside a Dropdown menu | `menuitem` | Activating performs an action. |
+| Persistent, mutually exclusive choice inside a Dropdown menu | `menuitemradio` | The consumer sets `selected`; it controls both the checkmark and `aria-checked`. |
+| Choice inside a listbox, such as Combobox | `option` | Preserve the parent widget's selection and keyboard contract. |
+
+Menu radios are menu choices, not native form radio inputs. Keep exactly one row selected when the menu represents one committed choice. Moving keyboard or mouse highlight does not change `aria-checked`; activation requests the consumer's update. The new role omits `aria-selected`; existing roles retain their current markup.
+
+Use [Dropdown's persistent-choice example](dropdown.md#persistent-menu-choices) for the menu parent, optional ListItemGroup heading, and selection handlers. Listbox choices remain `option`, even when only one value can be selected. See also the [Menu Roles story](https://dialtone.dialpad.com/vue/?path=/story/components-dropdown--menu-roles).
+
 ## Variants
 
 ### Custom List Item

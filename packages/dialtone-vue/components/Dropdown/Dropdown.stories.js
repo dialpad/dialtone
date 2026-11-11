@@ -3,6 +3,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDropdown from './Dropdown.vue';
 
 import DtDropdownDefaultTemplate from './DropdownDefault.story.vue';
+import DtDropdownControlledArrowsTemplate from './DropdownControlledArrows.story.vue';
+import DtDropdownMenuRolesTemplate from './DropdownMenuRoles.story.vue';
 import DtDropdownVariantsTemplate from './DropdownVariants.story.vue';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../ListItem/ListItemConstants';
 import { POPOVER_CONTENT_WIDTHS } from '../Popover';
@@ -207,4 +209,28 @@ export const Variants = {
       template: `<dt-stack direction="row" justify="center" align="center"><story /></dt-stack>`,
     }),
   ],
+};
+
+export const MenuRoles = {
+  render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtDropdownMenuRolesTemplate),
+  args: { visibilityChangeCallback: action('logical-visibility') },
+  parameters: {
+    docs: {
+      description: {
+        story: 'ListItem defaults to ordinary list content. Menu actions explicitly use menuitem; persistent mutually exclusive menu choices explicitly use menuitemradio and consumer-owned selected state. Highlight moves focus without changing checked state. Listbox choices remain option.',
+      },
+    },
+  },
+};
+
+export const ControlledArrows = {
+  render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtDropdownControlledArrowsTemplate),
+  args: { visibilityChangeCallback: action('logical-visibility') },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The boolean-open menu accepts anchor arrows synchronously in its own emitted keydown callback and checks the target. Turn acceptance off to ignore arrows, then click the trigger to verify pointer opening retains dialog focus.',
+      },
+    },
+  },
 };
