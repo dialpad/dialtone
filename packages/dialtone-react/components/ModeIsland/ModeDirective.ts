@@ -77,6 +77,18 @@ function applyMode (el: Element, mode: ContentMode): () => void {
   };
 }
 
+interface AppliedMode {
+  el: Element;
+  mode: ContentMode;
+  warning: string | null;
+  teardown: () => void;
+}
+
+function release (applied: { current: AppliedMode | null }) {
+  applied.current?.teardown();
+  applied.current = null;
+}
+
 /**
  * dialtone-vue's `v-dt-mode` directive as a ref hook: applies a color mode (light, dark, or invert) to the element in
  * `ref`, with no wrapper and no surface.
@@ -97,18 +109,27 @@ export function useModeRegion (ref: RefObject<Element | null>, mode: ContentMode
   const enabled = mode !== false;
   const { mode: resolvedMode, warning } = resolveArg(mode === false ? null : mode);
   const warnedFor = useRef<string | null>(null);
+  const applied = useRef<AppliedMode | null>(null);
 
-  // Vue's mounted / updated / unmounted: set up when enabled, and only tear down and set up again when the value or
-  // the resolved mode changes, so a re-render with the same arguments keeps the observers.
+
+  // Vue's mounted / updated / unmounted. Vue binds a directive to one element, so a new element is a new directive
+  // instance. A ref can point at a new element without the hook's arguments changing, so this runs after every render
+  // and sets up again only when the element, the value or the resolved mode changed: a re-render with the same
+  // arguments keeps the observers.
   useLayoutEffect(() => {
-    if (!enabled) return undefined;
+    const el = enabled ? ref.current : null;
+    const current = applied.current;
+    if (current && current.el === el && current.mode === resolvedMode && current.warning === warning) return;
+    release(applied);
+    if (!el) return;
     // Once per invalid arg, so StrictMode's second setup doesn't repeat it.
     if (warning && warnedFor.current !== warning) {
       warnedFor.current = warning;
       console.warn(warning);
     }
-    const el = ref.current;
-    if (!el) return undefined;
-    return applyMode(el, resolvedMode);
-  }, [enabled, resolvedMode, warning, ref]);
+    applied.current = { el, mode: resolvedMode, warning, teardown: applyMode(el, resolvedMode) };
+  });
+
+  // Unmount (and StrictMode's simulated one, after which the effect above sets up again).
+  useLayoutEffect(() => () => release(applied), []);
 }

@@ -308,6 +308,22 @@ describe('DtModeDirective Tests', () => {
       element.remove();
     });
 
+    it('should move its attributes to a new element when the ref points at one and the mode is unchanged', () => {
+      wrapper = render(<Region as="section" mode="dark" qa="target">Content</Region>);
+      const first = target();
+      expect(first).toHaveAttribute('data-dt-mode', 'dark');
+
+      // A different tag is a different element, with the same arguments passed to the hook.
+      wrapper.rerender(<Region as="div" mode="dark" qa="target">Content</Region>);
+
+      const second = target();
+      expect(second).not.toBe(first);
+      expect(second).toHaveAttribute('data-dt-mode', 'dark');
+      expect(second).toHaveAttribute('data-dt-contrast', 'default');
+      expect(second).toHaveAttribute('data-dt-material', 'sandstone');
+      expect(first).not.toHaveAttribute('data-dt-mode');
+    });
+
     it('should warn once for an invalid mode across re-renders', () => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 

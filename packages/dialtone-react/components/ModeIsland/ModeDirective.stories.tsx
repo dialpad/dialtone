@@ -122,6 +122,7 @@ function ModeDirectiveDefault () {
                         aria-checked={enabled}
                         aria-disabled="false"
                         className={enabled ? 'd-toggle d-toggle--checked' : 'd-toggle'}
+                        aria-label="Enable mode"
                         {...{ label: 'Enable mode' }}
                         onClick={() => setEnabled(!enabled)}
                       >
