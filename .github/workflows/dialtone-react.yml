@@ -109,8 +109,9 @@ jobs:
           if [[ $EVENT == pull_request ]]; then
             units=$(git diff --no-renames --name-only HEAD^1 HEAD | list_units)
           elif [[ $BEFORE =~ ^0+$ ]] || ! git fetch --no-tags --depth=1 origin "$BEFORE"; then
-            # A new branch, or a history rewrite: every ported unit.
-            units=$({ ls -d packages/dialtone-react/components/*/index.ts 2>/dev/null || true; } | list_units)
+            # A new branch, or a history rewrite: every ported unit, which a shared path selects (components/ and
+            # common/ ones alike).
+            units=$(echo packages/dialtone-react/package.json | list_units)
           else
             units=$(git diff --no-renames --name-only "$BEFORE" HEAD | list_units)
           fi

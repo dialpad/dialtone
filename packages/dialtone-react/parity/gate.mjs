@@ -10,17 +10,19 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pascal } from './cases.mjs';
 import { storyParity } from './story-parity.mjs';
-import { testFiles, vueSources } from './vue-sources.mjs';
+import { reactDir as reactDirOf, testFiles, vueSources } from './vue-sources.mjs';
 
 const unit = process.argv[2];
 if (!unit || !/^[a-z0-9-]+$/.test(unit)) {
-  console.error('usage: gate.mjs <unit id>, e.g. validation-messages');
+  console.error('usage: gate.mjs <unit id>, e.g. validation-messages, or mixin-input for common/input');
   process.exit(2);
 }
 const pkg = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const vueRoot = path.resolve(pkg, '../dialtone-vue');
 const name = pascal(unit);
-const reactDir = path.join(pkg, 'components', name);
+// components/<Name>, or common/<name> for a directive, mixin or composable (vue-sources.mjs).
+const home = reactDirOf(unit);
+const reactDir = path.join(pkg, home);
 // The unit's Vue sources (vue-sources.mjs): its component directory, where its Vue stories are, and every Vue path
 // that's part of it, whose test files are its Vue tests.
 let vue;
@@ -94,7 +96,7 @@ else bad('Typecheck', plural((tsc.stdout.match(/error TS/g) ?? []).length, 'erro
 
 // Lint, the unit's directory (CI lints the whole package). Warnings are counted, not failed.
 {
-  const lint = run(pkg, ['eslint', '--format', 'json', `components/${name}/`]);
+  const lint = run(pkg, ['eslint', '--format', 'json', `${home}/`]);
   let messages = null;
   try {
     messages = JSON.parse(lint.stdout)
@@ -110,7 +112,7 @@ else bad('Typecheck', plural((tsc.stdout.match(/error TS/g) ?? []).length, 'erro
 }
 
 // 2. The unit's React tests, and 3. test parity with its Vue tests.
-const unitRun = vitest(pkg, ['vitest', 'run', `components/${name}/`], path.join(tmp, 'react-tests.json'));
+const unitRun = vitest(pkg, ['vitest', 'run', `${home}/`], path.join(tmp, 'react-tests.json'));
 const reactTests = unitRun.tests;
 const failing = reactTests.filter(t => t.status === 'failed');
 const passing = reactTests.filter(t => t.status === 'passed');
@@ -245,7 +247,7 @@ if (isComponent) {
   }
   // Every form: eslint-disable, -line, -next-line, and inline rule config (`/* eslint rule: off */`, quoted or not).
   // Case-insensitive, as tsc reads its pragmas: `// @TS-NOCHECK` works. eslint.config.js also sets noInlineConfig
-  // for components/, so a spelling this misses still has no effect.
+  // for components/ and common/, so a spelling this misses still has no effect.
   const SUPPRESSIONS = /eslint-disable(?:-next-line|-line)?|\/\*\s*eslint\s|@ts-ignore|@ts-nocheck/gi;
   for (const f of reactFiles) {
     const hits = fs.readFileSync(f, 'utf8').match(SUPPRESSIONS);

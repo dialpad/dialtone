@@ -9,7 +9,7 @@ import path from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { changedUnits } from './changed-units.mjs';
-import { testFiles, vueSources } from './vue-sources.mjs';
+import { commonUnit, reactDir, testFiles, vueSources } from './vue-sources.mjs';
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'changed-units-'));
 after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -68,17 +68,22 @@ const UNITS = {
   Button: 'button',
   Skeleton: 'skeleton',
   ModeIsland: 'mode-island',
-  MixinInput: 'mixin-input',
-  MixinKeyboardListNavigation: 'mixin-keyboard-list-navigation',
-  DirectiveFocustrap: 'directive-focustrap',
-  ComposableUseIndicatorAnimation: 'composable-use-indicator-animation',
   Chip: 'chip',
 };
+// The directive, mixin and composable units: in common/, under their id without the prefix.
+const COMMON_UNITS = {
+  input: 'mixin-input',
+  'keyboard-list-navigation': 'mixin-keyboard-list-navigation',
+  focustrap: 'directive-focustrap',
+  'use-indicator-animation': 'composable-use-indicator-animation',
+};
 // Popover holds Tooltip's helpers and has no index.ts, so it isn't a unit; Checkbox and TextList aren't ported.
-// Chip renders Text on both sides; Text's story demos a Tooltip.
+// common/link is a foundation, no unit. Chip renders Text on both sides; Text's story demos a Tooltip.
 const pkg = tree(path.join(root, 'dialtone-react'), [
   ...Object.keys(UNITS).filter(name => !['Text', 'Tooltip', 'Chip'].includes(name))
     .map(name => `components/${name}/index.ts`),
+  ...Object.keys(COMMON_UNITS).map(name => `common/${name}/index.ts`),
+  'common/link/index.ts',
   ['components/Text/index.ts', "export * from './Text';"],
   'components/Text/Text.tsx',
   ['components/Text/Text.stories.tsx', "import { DtTooltip } from '../Tooltip';"],
@@ -89,7 +94,7 @@ const pkg = tree(path.join(root, 'dialtone-react'), [
   ['components/Chip/index.ts', "export * from './Chip';"],
   ['components/Chip/Chip.tsx', "import { DtText } from '../Text';\nconst lazy = () => import('../Tooltip');"],
 ]);
-const ALL = Object.values(UNITS).sort();
+const ALL = [...Object.values(UNITS), ...Object.values(COMMON_UNITS)].sort();
 // Combinator next to pkg (changedUnits' default variantsDir): its registry, three variants files, and a helper
 // one of them imports.
 tree(path.join(root, 'combinator/src'), [
@@ -149,6 +154,27 @@ describe('vueSources', () => {
     assert.deepEqual(tests('directive-focustrap'), ['directives/focustrap_directive/focustrap.test.js']);
     assert.deepEqual(tests('mixin-input'), ['common/mixins/input.test.js']);
     assert.deepEqual(tests('text'), []);
+  });
+
+  test('a unit lives in components/<Name>/, or in common/ under its id without the prefix', () => {
+    for (const [unit, dir] of [
+      ['text', 'components/Text'],
+      ['tab-group', 'components/TabGroup'],
+      ['mixin-input', 'common/input'],
+      ['mixin-keyboard-list-navigation', 'common/keyboard-list-navigation'],
+      ['directive-focustrap', 'common/focustrap'],
+      ['composable-use-indicator-animation', 'common/use-indicator-animation'],
+    ]) assert.equal(reactDir(unit), dir, unit);
+  });
+
+  test('a common/ directory is the directive, mixin or composable of its name, unless that one is folded in', () => {
+    assert.equal(commonUnit(vueRoot, 'input'), 'mixin-input');
+    assert.equal(commonUnit(vueRoot, 'focustrap'), 'directive-focustrap');
+    assert.equal(commonUnit(vueRoot, 'use-indicator-animation'), 'composable-use-indicator-animation');
+    // directive-mode is part of mode-island, so common/mode is the mode mixin's.
+    assert.equal(commonUnit(vueRoot, 'mode'), 'mixin-mode');
+    // Folded into another unit, or a foundation no Vue directive, mixin or composable names.
+    for (const name of ['tooltip', 'dom', 'skeleton', 'link', 'utils']) assert.equal(commonUnit(vueRoot, name), null, name);
   });
 });
 
@@ -238,6 +264,7 @@ describe('changedUnits', () => {
     for (const file of [
       'packages/dialtone-react/parity/gate.mjs',
       'packages/dialtone-react/common/localization/index.ts',
+      'packages/dialtone-react/common/input/useInput.ts',
       'packages/dialtone-react/tests/setup.ts',
       'packages/dialtone-react/scripts/build-index.mjs',
       'packages/dialtone-react/package.json',
@@ -348,6 +375,33 @@ describe('changedUnits', () => {
     assert.equal(errors.length, 2);
     assert.match(errors[0], /^components\/DTThing has no unit id/);
     assert.match(errors[1], /^twin: Twin\.vue is in more than one directory: A, B$/);
+  });
+
+  test('a directive, mixin or composable in components/ or under its Vue name, or a common/ name two kinds share, is an error', () => {
+    const dir = path.join(root, 'layout');
+    const react = tree(path.join(dir, 'dialtone-react'), [
+      'components/MixinInput/index.ts',
+      'common/input/index.ts',
+      'common/focus/index.ts',
+      'common/input_group/index.ts',
+      'common/useIndicatorAnimation/index.ts',
+    ]);
+    const vue = tree(path.join(dir, 'dialtone-vue'), [
+      'common/mixins/input.js',
+      'common/mixins/input_group.js',
+      'common/mixins/focus.js',
+      'directives/focus_directive/focus.js',
+      'common/composables/useIndicatorAnimation.js',
+    ]);
+    assert.deepEqual(changedUnits(['pnpm-lock.yaml'], { pkg: react, vueRoot: vue }), {
+      units: ['mixin-input'],
+      errors: [
+        'components/MixinInput: mixin-input belongs in common/input',
+        'common/focus could be directive-focus or mixin-focus',
+        'common/input_group: mixin-input-group belongs in common/input-group',
+        'common/useIndicatorAnimation: composable-use-indicator-animation belongs in common/use-indicator-animation',
+      ],
+    });
   });
 });
 

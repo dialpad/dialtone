@@ -1,5 +1,5 @@
 // A unit's Vue sources: where the gate reads its Vue stories and tests, and which Vue changes CI gates it for
-// (changed-units.mjs).
+// (changed-units.mjs). Also where a unit lives in this package (reactDir).
 import fs from 'node:fs';
 import path from 'node:path';
 import { pascal } from './cases.mjs';
@@ -19,10 +19,34 @@ const OWNED_FILES = { button: ['common/sr_only_close_button.vue'] };
 const kebab = s => s.replace(/_directive$/, '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/_/g, '-').toLowerCase();
 const isTest = f => /\.test\.[jt]s$/.test(f);
 const list = dir => (fs.existsSync(dir) ? fs.readdirSync(dir, { withFileTypes: true }) : []);
+const OWN = /^(directive|mixin|composable)-(.+)$/;
+
+/**
+ * The unit's directory in this package, relative to it: components/<Name> for a component, and for a directive, mixin
+ * or composable, its hooks' directory: common/ and the id without its prefix (mixin-input → common/input,
+ * composable-use-indicator-animation → common/use-indicator-animation).
+ */
+export function reactDir (unit) {
+  const own = unit.match(OWN);
+  return own ? `common/${own[2]}` : `components/${pascal(unit)}`;
+}
+
+/**
+ * The directive, mixin or composable unit whose directory is common/<name>, or null when there's none (a foundation,
+ * like common/link). A piece folded into another unit is none: common/mode is mixin-mode's, since directive-mode is
+ * part of mode-island. Throws when two kinds share the name.
+ *   named: ids whose Vue files may be gone, from the paths of a change that deletes them (unitsOfPath).
+ */
+export function commonUnit (vueRoot, name, named = new Set()) {
+  const ids = ['directive', 'mixin', 'composable'].map(kind => `${kind}-${name}`)
+    .filter(id => !FOLDED_INTO[id] && (named.has(id) || ownPaths(vueRoot, id).length));
+  if (ids.length > 1) throw new Error(`common/${name} could be ${ids.join(' or ')}`);
+  return ids[0] ?? null;
+}
 
 /** A directive, mixin or composable unit's own paths (relative to dialtone-vue), or [] for any other id. */
 function ownPaths (vueRoot, id) {
-  const [, kind, rest] = id.match(/^(directive|mixin|composable)-(.+)$/) ?? [];
+  const [, kind, rest] = id.match(OWN) ?? [];
   if (kind === 'directive') {
     return list(path.join(vueRoot, 'directives')).filter(d => d.isDirectory() && kebab(d.name) === rest)
       .map(d => `directives/${d.name}`);
