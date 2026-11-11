@@ -19,6 +19,8 @@ const componentName = (name: string) => `dt-icon-${name}`.toLowerCase().split('-
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
+ * Looking an icon up by `name` pulls the whole icon catalog into the consumer's bundle. To ship only the icons an
+ * app uses, import them by name from `@dialpad/dialtone-react/icons` instead.
  * @see https://dialtone.dialpad.com/components/icon.html
  */
 export function DtIcon ({ name, size = 500, ariaLabel, 'data-qa': dataQa, ...rest }: DtIconProps) {
