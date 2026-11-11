@@ -333,5 +333,17 @@ describe('DtModeDirective Tests', () => {
 
       expect(warnSpy).toHaveBeenCalledTimes(1);
     });
+
+    it('should warn again for a new element with the same invalid mode', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      // @ts-expect-error an invalid mode: the hook warns and falls back to invert.
+      wrapper = render(<Region as="section" mode="invalid" qa="target">Content</Region>);
+      // A different tag is a new element, which starts afresh as on Vue's mounted.
+      // @ts-expect-error an invalid mode: the hook warns and falls back to invert.
+      wrapper.rerender(<Region as="div" mode="invalid" qa="target">Content</Region>);
+
+      expect(warnSpy).toHaveBeenCalledTimes(2);
+    });
   });
 });

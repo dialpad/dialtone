@@ -110,7 +110,7 @@ function release (applied: { current: AppliedMode | null }) {
 export function useModeRegion (el: Element | null, mode: ContentMode | false = 'invert'): void {
   const enabled = mode !== false;
   const { mode: resolvedMode, warning } = resolveArg(mode === false ? null : mode);
-  const warnedFor = useRef<string | null>(null);
+  const warnedFor = useRef<{ el: Element; warning: string } | null>(null);
   const applied = useRef<AppliedMode | null>(null);
 
   // Vue's mounted / updated / unmounted. Vue binds a directive to one element, so a new element is a new directive
@@ -121,10 +121,14 @@ export function useModeRegion (el: Element | null, mode: ContentMode | false = '
     const current = applied.current;
     if (current && current.el === target && current.mode === resolvedMode && current.warning === warning) return;
     release(applied);
-    if (!target) return;
-    // Once per invalid arg, so StrictMode's second setup doesn't repeat it.
-    if (warning && warnedFor.current !== warning) {
-      warnedFor.current = warning;
+    if (!target) {
+      warnedFor.current = null;
+      return;
+    }
+    // Once per element and invalid arg, so StrictMode's second setup doesn't repeat it. A new element starts afresh,
+    // as on Vue's `mounted`.
+    if (warning && (warnedFor.current?.el !== target || warnedFor.current.warning !== warning)) {
+      warnedFor.current = { el: target, warning };
       console.warn(warning);
     }
     applied.current = { el: target, mode: resolvedMode, warning, teardown: applyMode(target, resolvedMode) };
