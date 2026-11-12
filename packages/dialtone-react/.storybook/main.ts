@@ -8,7 +8,7 @@ import { mergeConfig } from 'vite';
 // free of Node types.
 const config: StorybookConfig = {
   stories: [
-    '../@(components|directives|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
+    '../@(components|common|directives|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
   ],
 
   addons: [
