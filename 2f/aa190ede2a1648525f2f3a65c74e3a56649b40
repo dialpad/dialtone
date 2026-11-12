@@ -1,0 +1,31 @@
+packages/dialtone-docs/tests/source-links.test.js
+  s_7f1d1d64baa803::t_2ed33975f3c938 26-27
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_100911eca16c78::t_91b0f2697d3f1b 89
+packages/dialtone-docs/src/generators/source-links.mjs
+  s_100911eca16c78::t_2e5e4700f0ea52 3-7,40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2faa190ede2a1648525f2f3a65c74e3a56649b40",
+  "prompts": {},
+  "sessions": {
+    "s_100911eca16c78": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19cea-2746-77a1-bbff-fbfe3a3794d2",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
