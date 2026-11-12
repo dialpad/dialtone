@@ -26,7 +26,7 @@ import { parsePhoneNumberFromString, getCountryCallingCode, isSupportedCountry }
  * @param {string} [options.defaultCountry] Two-letter country code of the viewer, passed as
  * `{ defaultCountry: 'US' }`. Numbers that share its calling code show without it, and national input
  * like `415.555.0123` is read as that country's. Unknown codes are ignored.
- * @returns {string} The formatted number, the input unchanged if it is not a valid number,
+ * @returns {string} The formatted number, the input unchanged if it fails the check above,
  * or an empty string if the input is empty or not a string
  */
 export function formatPhoneNumber (value, { defaultCountry } = {}) {
