@@ -270,7 +270,7 @@ export default {
 
     replaceLabels () {
       this.statusOptions = this.statusOptions.map(option => ({
-        ...option, label: `${option.label} updated`, shortLabel: option.shortLabel ?? option.label,
+        ...option, label: `${option.label} updated`,
       }));
     },
 
@@ -284,6 +284,7 @@ export default {
       this.teams = Object.freeze(['sales']);
       this.deferredTeams = ['sales'];
       this.latestTeams = null;
+      this.acceptTeams = false;
       this.commits = [];
     },
   },

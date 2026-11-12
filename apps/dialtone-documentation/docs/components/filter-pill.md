@@ -49,6 +49,15 @@ Choose the selection API and controlled dropdown/popover pattern when mounting. 
 </template>
 </dialtone-usage>
 
+The next two examples use this Vue setup:
+
+```js
+import { ref } from 'vue';
+
+const selectedMessage = ref('all');
+const selectedChannels = ref([]);
+```
+
 ### Controlled single selection
 
 Use a string or `null` for `selected`. Each option needs a unique string `value` and a `label`. `shortLabel` changes the pill text; `null` falls back to `label`. You can replace options or translated labels while the dropdown stays open.
@@ -71,7 +80,7 @@ Arrow keys move focus without changing selection. The filter’s label stays ava
 />
 ```
 
-`selectedMessage` starts as `ref('all')`. Use `null` when nothing is selected.
+Use `null` when nothing is selected.
 
 ### Controlled multiple selection
 

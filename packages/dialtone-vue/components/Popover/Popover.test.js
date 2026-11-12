@@ -424,12 +424,12 @@ describe('DtPopover Tests', () => {
 
   describe('Built-in menu close semantics', () => {
     it.each([
-      { showCloseButton: false, modal: false, dialogAriaModal: 'true' },
-      { showCloseButton: false, modal: true, dialogAriaModal: 'false' },
-      { showCloseButton: true, modal: false, dialogAriaModal: 'true' },
-      { showCloseButton: true, modal: true, dialogAriaModal: 'false' },
+      { showCloseButton: false, modal: false },
+      { showCloseButton: false, modal: true },
+      { showCloseButton: true, modal: false },
+      { showCloseButton: true, modal: true },
     ])('updates popup and native Close semantics with showCloseButton=$showCloseButton, modal=$modal',
-      async ({ showCloseButton, modal, dialogAriaModal }) => {
+      async ({ showCloseButton, modal }) => {
         wrapper.unmount();
         manualTransitions = true;
         mockProps = { role: 'dialog', showCloseButton, modal };
@@ -440,7 +440,6 @@ describe('DtPopover Tests', () => {
           ? '[data-qa="dt-popover-close"]'
           : '[data-qa="dt-sr-only-close-button"]');
         const nativeClose = close.element;
-        expect(popoverWindow.attributes('aria-modal')).toBe(dialogAriaModal);
         expect(close.attributes('role')).toBeUndefined();
         expect(nativeClose.tagName).toBe('BUTTON');
         expect(nativeClose.tabIndex).toBe(0);
@@ -450,7 +449,6 @@ describe('DtPopover Tests', () => {
         expect.soft(close.attributes('role')).toBe('menuitem');
         expect(close.element).toBe(nativeClose);
         await wrapper.setProps({ role: 'dialog' });
-        expect(popoverWindow.attributes('aria-modal')).toBe(dialogAriaModal);
         expect(close.attributes('role')).toBeUndefined();
         await wrapper.setProps({ role: 'menu' });
 

@@ -102,7 +102,8 @@ export default {
 
     controlledAccessibleLabel () {
       const selection = this.controlledDisplayLabel;
-      if (!this.label || this.label === selection) return selection;
+      if (!this.label) return selection || this.i18n.$t('DIALTONE_FILTER_PILL_FILTER_LABEL');
+      if (this.label === selection) return selection;
       return this.i18n.$t('DIALTONE_FILTER_PILL_SELECTION_LABEL', { label: this.label, selection });
     },
 
@@ -240,7 +241,8 @@ export default {
       }
       if (!this.controlledAtBirth) return;
       const inputs = this.$.vnode.props || {};
-      if (Object.hasOwn(inputs, 'modelValue') || Object.hasOwn(inputs, 'model-value')) {
+      if (Object.prototype.hasOwnProperty.call(inputs, 'modelValue') ||
+        Object.prototype.hasOwnProperty.call(inputs, 'model-value')) {
         this.warnControlled('modelValue is ignored when controlled options are supplied.');
       }
       this.controlledState.issues.forEach(this.warnControlled);

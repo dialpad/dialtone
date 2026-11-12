@@ -305,11 +305,13 @@ describe('DtFilterPill controlled selection', () => {
     if (overflow) expect(wrapper.get('[data-qa="dt-filter-pill__overflow"]').text()).toBe(overflow);
   });
 
-  it.each([undefined, ''])('keeps an active summary without an empty dimension when label is %j', label => {
+  it.each([undefined, ''])('keeps an active summary without an empty dimension when label is %j', async label => {
     updateWrapper({ label });
     expect(wrapper.find('[data-qa="dt-filter-pill__label-start"]').exists()).toBe(false);
     expect(wrapper.get('[data-qa="dt-filter-pill__label-end"]').text()).toBe('Sales');
     expect(wrapper.get('[data-qa="dt-filter-pill__accessible-label"]').text()).toBe('Sales');
+    await wrapper.setProps({ selected: [] });
+    expect(wrapper.get('[data-qa="dt-filter-pill__accessible-label"]').text()).toBe('Filter');
   });
 
   it.each([false, true])('updates overlay naming and heading ownership when a parent changes content (dropdown=%s)', async useDropdown => {

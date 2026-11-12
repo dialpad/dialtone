@@ -11,7 +11,7 @@ export function selectionSnapshot (value) {
 /** Normalize the controlled contract without reading or mutating the legacy model. */
 export function getSelectionState (options, selected, { useDropdown, neutralValue } = {}) {
   const issues = [];
-  const validOptions = Array.isArray(options) && options.every(option =>
+  const validOptions = Array.isArray(options) && Array.from(options).every(option =>
     option && typeof option.value === 'string' && typeof option.label === 'string' &&
     (option.shortLabel == null || typeof option.shortLabel === 'string')) &&
     new Set(options.map(option => option.value)).size === options.length;
@@ -19,7 +19,7 @@ export function getSelectionState (options, selected, { useDropdown, neutralValu
   const resolved = selected === undefined ? (useDropdown ? null : []) : selected;
   const validSelected = useDropdown
     ? resolved === null || typeof resolved === 'string'
-    : Array.isArray(resolved) && resolved.every(value => typeof value === 'string');
+    : Array.isArray(resolved) && Array.from(resolved).every(value => typeof value === 'string');
   if (!validSelected) issues.push('selected has the wrong shape for this selection pattern.');
   const validNeutral = !useDropdown || neutralValue == null || typeof neutralValue === 'string';
   if (!validNeutral) issues.push('neutralValue must be a string or null in single selection.');

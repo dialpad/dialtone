@@ -13,6 +13,7 @@ describe('FilterPill controlled input normalization', () => {
     { selected: null, useDropdown: false },
     { selected: 'a', useDropdown: false },
     { selected: ['a', 12], useDropdown: false },
+    { selected: new Array(1), useDropdown: false },
   ])('rejects the wrong selection shape: %j', ({ selected, useDropdown }) => {
     const state = getSelectionState(options, selected, { useDropdown });
     expect(state.valid).toBe(false);
@@ -30,9 +31,12 @@ describe('FilterPill controlled input normalization', () => {
     expect(Object.isFrozen(state.selectedOptions[0])).toBe(true);
   });
 
-  it.each([{ value: 2, label: 'Invalid value' }, { value: 'x', label: null }, { value: 'x', label: 'X', shortLabel: 12 }])(
-    'rejects malformed option records: %j', option => {
-      const state = getSelectionState([option], [], { useDropdown: false });
+  it.each([
+    { options: [{ value: 2, label: 'Invalid value' }] }, { options: [{ value: 'x', label: null }] },
+    { options: [{ value: 'x', label: 'X', shortLabel: 12 }] }, { options: new Array(1) },
+  ])(
+    'rejects malformed option arrays: %j', ({ options: invalidOptions }) => {
+      const state = getSelectionState(invalidOptions, [], { useDropdown: false });
       expect(state.valid).toBe(false);
       expect(state.options).toEqual([]);
     },
