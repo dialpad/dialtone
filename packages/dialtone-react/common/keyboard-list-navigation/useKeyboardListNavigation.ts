@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { scrollElementIntoViewIfNeeded } from './dom';
 import type { HighlightIdContextValue } from './HighlightIdContext';
 
@@ -43,7 +43,7 @@ export interface KeyboardListNavigationOptions {
 export interface KeyboardListNavigationState {
   /** The highlighted item's index in the list; -1 when none. */
   highlightIndex: number;
-  /** The highlighted item's id; '' when none, undefined when the item at the index has no id. */
+  /** The highlighted item's id; '' when none or when the highlighted item has no id attribute, undefined when no item exists at the index. */
   highlightId: string | undefined;
   /** Vue's `provide: { highlightId }`. Pass it to `HighlightIdContext.Provider`. */
   highlightIdContext: HighlightIdContextValue;
@@ -78,7 +78,10 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
   const [highlight, setHighlight] = useState<Highlight>({ index: -1, id: '' });
   const latestHighlight = useRef(highlight);
   const latestOptions = useRef(options);
-  latestOptions.current = options;
+  // Updated once a render commits, so an abandoned render's options never reach the methods the committed UI holds.
+  useLayoutEffect(() => {
+    latestOptions.current = options;
+  });
 
   const methods = useMemo(() => {
     const opts = () => latestOptions.current;
