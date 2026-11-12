@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { categories } from '@dialpad/dialtone-icons/keywords-icons.json';
 import { StandIn } from '../../.storybook/StandIn';
+import { DtStack } from '../Stack';
 import { useTooltipDirective } from '../Tooltip/TooltipDirective';
 import { DtIcon, type DtIconProps } from './Icon';
 import { ICON_NAMES, ICON_SIZE_MODIFIERS } from './IconConstants';
@@ -91,18 +92,16 @@ function IconVariants ({ limit }: IconStoryArgs) {
     <div>
       {Object.entries(categories).map(([category, icons]) => [
         <h2 key={`${category}-heading`} className="d-tt-capitalize d-my-200">{category}</h2>,
-        <StandIn for="stack" key={category}>
-          <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-fw-wrap">
-            {Object.keys(icons).slice(0, limit).map(icon => (
-              <IconButton
-                key={`${category}-${icon}`}
-                icon={icon}
-                copiedIcon={copiedIcon}
-                onClick={() => copyIconName(icon)}
-              />
-            ))}
-          </div>
-        </StandIn>,
+        <DtStack key={category} direction="row" className="d-fw-wrap">
+          {Object.keys(icons).slice(0, limit).map(icon => (
+            <IconButton
+              key={`${category}-${icon}`}
+              icon={icon}
+              copiedIcon={copiedIcon}
+              onClick={() => copyIconName(icon)}
+            />
+          ))}
+        </DtStack>,
       ])}
     </div>
   );
