@@ -1,0 +1,41 @@
+packages/dialtone-tokens/build.gradle
+  s_76db24c87a0be0::t_6ff65a1a158394 39-42
+  s_76db24c87a0be0::t_e3c074f6ceb5da 29-31
+  s_76db24c87a0be0::t_014bd76420d3ea 26-28
+  s_76db24c87a0be0::t_8184fb600437a8 32-34,36-38
+  s_76db24c87a0be0::t_3fd5bcc603cf95 43-45
+packages/dialtone-tokens/dialtone-transforms.js
+  s_76db24c87a0be0::t_1ff881872b1992 211
+  s_76db24c87a0be0::t_b2d545a76b2380 251
+  s_76db24c87a0be0::t_f55b03a9e2427d 270
+  s_76db24c87a0be0::t_9fdfc5a55a70a1 35,42,44-52
+  s_76db24c87a0be0::t_3e2b3a4adb7483 233
+  s_76db24c87a0be0::t_a0d467acb4ad5e 43
+  s_76db24c87a0be0::t_b851f5882f28d9 292
+  s_76db24c87a0be0::t_cb35a642f72f46 32-34
+  s_76db24c87a0be0::t_6bf5c0f9e4fcd9 36-41
+  s_76db24c87a0be0::t_5f11e5e1d83e0a 53-54
+  s_76db24c87a0be0::t_deab77c6084481 210
+  s_76db24c87a0be0::t_1780faf91d4d8c 212-214
+packages/dialtone-tokens/build-sd-transforms.js
+  s_76db24c87a0be0::t_93946424a9d1c4 10
+  s_76db24c87a0be0::t_f9f7f81124c31d 196-197
+  s_76db24c87a0be0::t_103ebfa2dddbcb 193-195
+  s_76db24c87a0be0::t_7f2b91447ab973 198-200
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "e0eb4002fb92ce14022cd22aa0f7d49b01a3bd87",
+  "prompts": {},
+  "sessions": {
+    "s_76db24c87a0be0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c38a60be-b056-423f-99cc-5d709fa6900e",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "John Parker <john.parker@dialpad.com>"
+    }
+  }
+}

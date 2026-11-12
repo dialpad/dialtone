@@ -1,0 +1,31 @@
+packages/dialtone-vue/components/EmojiPicker/EmojiPickerPopover.story.vue
+  s_7f1d1d64baa803::t_2ecd7c81f046d4 10
+packages/dialtone-vue/components/Breadcrumbs/BreadcrumbItemDefault.story.vue
+  s_7f1d1d64baa803::t_2ecd7c81f046d4 2-10
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_d6ce5f37f48da7::t_335138909058d7 75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d1501be101d4e961aa55fce629aaef8a9dff427e",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_d6ce5f37f48da7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ad47-b8f1-7182-8a70-97450505de94",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

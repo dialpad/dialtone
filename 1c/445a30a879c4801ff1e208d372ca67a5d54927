@@ -1,0 +1,27 @@
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/helpers.mjs
+  s_fe785ee032b468::t_7aec5167c2f9c3 2,4,9-15
+  s_fe785ee032b468::t_e193c325e64eb0 6
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/theme-to-mode.mjs
+  s_fe785ee032b468::t_f979874b4f246a 3-8,25-26,43-46,52-53,56,62-63,67,90,92
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/theme-to-mode.test.mjs
+  s_fe785ee032b468::t_f39c1046294292 9,11-12,14-17,20,22-25,28-31,34-37,40-43,46-49,53-55,58,60-68,71,85
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/helpers.mjs
+  s_fe785ee032b468::t_d0003fbd097470 158-169
+  s_fe785ee032b468::t_e7b81c2aab4371 73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.13",
+  "base_commit_sha": "1c445a30a879c4801ff1e208d372ca67a5d54927",
+  "prompts": {},
+  "sessions": {
+    "s_fe785ee032b468": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9e886617-a9cc-4721-80a9-dc88469965cc",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

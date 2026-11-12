@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_c53fc7e8528985::t_352a2cc06d113a 34,54,63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f3b82d5ef7c3977dfc6c84d3f39b9c323ccf202f",
+  "prompts": {},
+  "sessions": {
+    "s_c53fc7e8528985": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a05e6f-6ef5-7743-adce-1046368a8659",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+packages/dialtone-react/common/utils.ts
+  s_2defdf83601f66::t_18eae2d33d7eff 14-27,33,35,42
+packages/dialtone-react/tests/helpers/clipboard.ts
+  s_2defdf83601f66::t_c9a74a72897712 1-11
+packages/dialtone-react/tests/helpers/fixtures.tsx
+  s_2defdf83601f66::t_d300f1ab24b488 1-6
+packages/dialtone-react/tests/helpers/helpers.test.ts
+  s_2defdf83601f66::t_8ca035ea0eaa2d 1-31
+packages/dialtone-react/tests/helpers/link.tsx
+  s_2defdf83601f66::t_64fc529e2a0615 1-23
+packages/dialtone-react/tests/helpers/node_traversal.ts
+  s_2defdf83601f66::t_9da21f40cb4bf8 1-58
+packages/dialtone-react/tests/helpers/transition.ts
+  s_2defdf83601f66::t_d4af3f957cb660 1-25
+packages/dialtone-react/tests/helpers/validation_messages.ts
+  s_2defdf83601f66::t_481a09dea3fb94 1-18
+packages/dialtone-react/tests/setup.ts
+  s_2defdf83601f66::t_7b6534932d7d00 17-40,44-45
+packages/dialtone-react/vite.config.ts
+  s_2defdf83601f66::t_fe954821a2af7b 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "34e4a6929d50741e7cc8370adf7d70abf748918b",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
