@@ -1,0 +1,80 @@
+packages/dialtone-vue/components/MotionText/MotionTextModes.story.vue
+  s_179e5bad29f60f::t_f77288e4a57020 42,54-62,74-75,79,95
+  s_179e5bad29f60f::t_eaaf91a2e32995 36,41
+packages/combinator/src/variants/variants.js
+  s_179e5bad29f60f::t_a2b16b625a090a 38,102
+packages/dialtone-vue/components/MotionText/MotionTextDefault.story.vue
+  s_179e5bad29f60f::t_60c3b78d6b9ed6 111-112
+  s_179e5bad29f60f::t_a0850b90f1f280 7,9,18,24-26,44,53-54,77-81,107-110
+packages/dialtone-vue/components/MotionText/MotionText.test.js
+  s_179e5bad29f60f::t_5b2c27fcf7fea1 92-94,102,531,538-552,576,590,685,702
+  s_179e5bad29f60f::t_0f42ed86428423 322,733,821,875-877
+  s_179e5bad29f60f::t_ce4a0451fcdb82 2,4,6-44,46,48-65,67,70-78,83,85-87,91,95-101,103-110,118-119,123-129,134-135,139,142-145,149-153,155,157-159,162-168,170,172-184,187-191,194-201,205-217,220-231,234-240,243-251,255-285,287,291,294-304,309-312,314-321,323-325,328-334,337-341,344-351,354-422,425-437,440-472,475-496,502-510,513-530,532-537,553-575,577-586,589,591-597,599,659-675,678-684,686-697,700-701,703-713,716-732,734-747,749-751,784,786-788,791-796,799-805,808-814,817-820,822-823,828-835,838-840,844-864,866-874,878-879,884-946,961-962,964-981,990-999
+  s_179e5bad29f60f::t_eaaf91a2e32995 47,499-501
+  s_179e5bad29f60f::t_292cf88c0bd730 111-115,313,438-439,748
+  s_179e5bad29f60f::t_38a11bfe126a69 5,601-614,617-654,753-756,758-764,767-773,776-782,948,950-952,955-957,959-960,982-989
+apps/dialtone-documentation/thumbs/motion-text.vue
+  s_179e5bad29f60f::t_541fd5bd8c8b0b 1-8,10-20,22-44
+packages/combinator/src/variants/variants_motion_text.js
+  s_179e5bad29f60f::t_32a3e4776f0f12 1-6,8-132
+  s_179e5bad29f60f::t_eaaf91a2e32995 7
+packages/dialtone-css/lib/build/less/components/motion_text.less
+  s_179e5bad29f60f::t_56322891dd0f89 3,10,13-16,22-23,26-27,67-71,82,88,90,120,126,130,132,141,143-144
+  s_179e5bad29f60f::t_fc70b6b3d5870a 156,162,167-168
+  s_179e5bad29f60f::t_b60295d0f58695 45-46,73-74,194-196,198-200
+  s_179e5bad29f60f::t_b94335c489a73f 32,91
+  s_179e5bad29f60f::t_4c3f4a6ca3b6cb 7,33-44,47-49,75-76,145-146,149-150,153-155,159-161,165-166,171-174,177-186,193,201
+  s_179e5bad29f60f::t_afb827bfbe3849 24-25
+  s_179e5bad29f60f::t_c30250e988fa35 95-96,98-99,101,105,109-110,112,116,122
+packages/dialtone-tokens/tokens/base/default.json
+  s_179e5bad29f60f::t_4256be3ab4c8c4 712-715
+  s_179e5bad29f60f::t_afb827bfbe3849 716
+packages/dialtone-vue/components/MotionText/MotionTextConstants.js
+  s_179e5bad29f60f::t_a497148f08a665 6,14-16,45-66,71-72
+packages/dialtone-vue/components/MotionText/MotionText.stories.js
+  s_179e5bad29f60f::t_50ebef58ba5832 15-16,18,34,36,47-48,50,64,66,71,79,90-91,93,106,119,129,134,141,143,151,153,161,163,174,184,248
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_179e5bad29f60f::t_54cb697e16f18a 3-4,15,22,28-37,40-41,48,57-58,60,67-68,75-76,80-84,88,107-109,113,124,137,144-146,153-155,161,165,173-175,177,179-180,186,188,197,199-201,205,214-215,217-220,224-225,227
+  s_179e5bad29f60f::t_78082602a2e48d 23,147
+  s_179e5bad29f60f::t_2ed14f12a21e82 54
+  s_179e5bad29f60f::t_2c3adbb6898cb1 8,148-149,206-211
+  s_179e5bad29f60f::t_f5551d9cb2886b 24
+packages/dialtone-vue/components/MotionText/MotionTextVariants.story.vue
+  s_179e5bad29f60f::t_d3666a4e27e2e3 132-133,136,138,192-197,222-224
+  s_179e5bad29f60f::t_4e21b393f4572e 198-199,225
+  s_179e5bad29f60f::t_de765241abdadf 91,205-209,219
+packages/dialtone-vue/components/MotionText/MotionText.vue
+  s_179e5bad29f60f::t_60011970cf3071 53,62,64,141,147,176,180,182,200-201,218-219,222,225-232,257,271-278,282-288,296,301,306,308,320,322-323,325-333,346,393-395,404,406,478-480,483,489-490,492-493,501-502,504-507,510,512-523
+  s_179e5bad29f60f::t_eaaf91a2e32995 65-66,83,193
+  s_179e5bad29f60f::t_8853b63cfb9209 18,20-21,25,31,33-38,42,44-45,55-61,63,92,153,174-175,179,184-185,192,194-195,197,199,205,208-214,221,223-224,233,237,239-248,259,298-300,302,313,315-316,337-338,340-345,347-349,360-392,396-397,409,418,423-425,435,437,450,461-462,475,484-486,497,508-509,530-531
+  s_179e5bad29f60f::t_5b2c27fcf7fea1 3,12,23,32
+  s_179e5bad29f60f::t_3c91202b8f0992 256
+  s_179e5bad29f60f::t_b1b261d01f353d 398
+packages/dialtone-tokens/tokens/base/dark.json
+  s_179e5bad29f60f::t_4256be3ab4c8c4 607-610
+packages/dialtone-css/postcss/constants.cjs
+  s_179e5bad29f60f::t_afb827bfbe3849 11
+packages/dialtone-vue/components/MotionText/index.js
+  s_179e5bad29f60f::t_90f12a9d456429 6-7
+packages/dialtone-vue/components/MotionText/utils.js
+  s_179e5bad29f60f::t_7d3575065928d8 12-14
+  s_179e5bad29f60f::t_03ac15b29818b7 1-11,15-34
+packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md
+  s_179e5bad29f60f::t_afb827bfbe3849 179-180
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "271e3806d6bc7bc243b8e82e0c11e85ca6a0b8d7",
+  "prompts": {},
+  "sessions": {
+    "s_179e5bad29f60f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "febf809e-180f-4ba2-8dfb-38a07a6a2c26",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}
