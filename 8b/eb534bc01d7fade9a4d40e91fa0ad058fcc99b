@@ -1,0 +1,21 @@
+packages/dialtone-cli/src/silence-debug.ts
+  s_be3eb79a0e6da5::t_c9d9d6269d4e6f 14
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_be3eb79a0e6da5::t_14dab5944ff8cc 271
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8beb534bc01d7fade9a4d40e91fa0ad058fcc99b",
+  "prompts": {},
+  "sessions": {
+    "s_be3eb79a0e6da5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fe292a6f-d673-414c-890b-c397ba052ad3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
