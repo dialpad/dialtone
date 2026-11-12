@@ -50,7 +50,7 @@ export const argTypesData = {
       type: {
         detail: `null | {
           type?: string <body | heading> | 'body',
-          headingHeight?: string<sm | md | lg | xl> | 'md',
+          headingHeight?: string<sm | md | lg> | 'md',
           width?: string | '100%',
           contentClass?: string | '',
           offset?: number | 1,
