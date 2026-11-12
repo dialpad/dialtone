@@ -1,0 +1,6 @@
+{
+  "router link": {
+    "reason": "The Vue harness has no vue-router, so RouterLink doesn't resolve and Vue renders an unknown <routerlink> element with to/replace as attributes. The React harness has no DtLinkProvider, so DtRouterLink (common/link) falls back to <a href>, as the conventions prescribe. With a provider, DtLink's tests check the to/replace the app's link component receives.",
+    "react": "<a class=\"d-link\" data-qa=\"dt-link\" href=\"/components/button\">Button docs</a>"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "DtLink tests › Presentation Tests › When unstyled › renders only the unstyled class when kind is unstyled": "Tests the deprecated `kind` prop, which isn't ported: no other dialtone-vue component uses it (the `tone` case is ported).",
+  "DtLink tests › Presentation Tests › When unstyled › keeps deprecated kind precedence when both kind and tone are provided": "Tests the deprecated `kind` prop, which isn't ported: no other dialtone-vue component uses it."
+}
