@@ -14,7 +14,8 @@ describe('formatPhoneNumber', () => {
   it.each([
     ['415.555.1234', '(415) 555-1234'],
     ['18005551234', '(800) 555-1234'],
-  ])('reads national input %s as the viewer\'s country', (input, expected) => {
+    ['011 44 20 7946 0958', '+44 20 7946 0958'],
+  ])('reads %s as dialled from the viewer\'s country', (input, expected) => {
     expect(formatPhoneNumber(input, US)).toBe(expected);
   });
 
@@ -40,7 +41,10 @@ describe('formatPhoneNumber', () => {
 
   it.each([
     ['+1 555 123 4567', undefined],
+    ['+1 415 555 123', undefined],
     ['4155551234', undefined],
+    ['911', US],
+    ['1-800-FLOWERS', US],
   ])('returns invalid input %s unchanged', (input, options) => {
     expect(formatPhoneNumber(input, options)).toBe(input);
   });

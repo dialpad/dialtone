@@ -4,8 +4,15 @@ import { parsePhoneNumberFromString, getCountryCallingCode, isSupportedCountry }
  * Formats a phone number for display, following the Dialtone content guide:
  * https://dialtone.dialpad.com/guides/content/grammar-and-mechanics/#numbers
  *
- * Each country's own digit grouping is used. Invalid or partial numbers are returned unchanged.
- * To keep a number on one line, put the `d-ws-nowrap` class on the element.
+ * Input may use spaces, dots, dashes and parentheses, with an extension after `x`, `ext.` or `#`.
+ * It needs a country code (`+44 20 7946 0958`) unless `defaultCountry` is set; then national input
+ * (`(415) 555-0123`) and that country's international prefix (`011 44 …` in the US) work too.
+ * Anything that is not a full, real number is returned unchanged: the wrong number of digits, an
+ * unassigned area code such as 555, national input without `defaultCountry`, short codes like `911`,
+ * and letters (`1-800-FLOWERS`).
+ *
+ * Each country's own digit grouping is used. To keep a number on one line, put the `d-ws-nowrap`
+ * class on the element.
  *
  * @example
  * formatPhoneNumber('+18005550199'); // '+1 (800) 555-0199'
@@ -15,9 +22,9 @@ import { parsePhoneNumberFromString, getCountryCallingCode, isSupportedCountry }
  *
  * @param {string} value The phone number to format
  * @param {Object} [options]
- * @param {string} [options.defaultCountry] Two-letter country code of the viewer, such as `US`. Numbers that
- * share its calling code show without it, and national input like `415.555.0123` is read as that country's.
- * Unknown codes are ignored.
+ * @param {string} [options.defaultCountry] Two-letter country code of the viewer, passed as
+ * `{ defaultCountry: 'US' }`. Numbers that share its calling code show without it, and national input
+ * like `415.555.0123` is read as that country's. Unknown codes are ignored.
  * @returns {string} The formatted number, the input unchanged if it is not a valid number,
  * or an empty string if the input is empty or not a string
  */
