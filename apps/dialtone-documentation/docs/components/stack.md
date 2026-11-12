@@ -226,7 +226,6 @@ Use `as="span"` when you need an inline container.
         v-dt-tooltip="{ message: gapToPx(gap), delay: false }"
         :key="gap"
         :value="gap"
-        :selected="gap === selectedGap"
       >
         {{ gap }}
       </dt-segmented-control-item>
@@ -239,7 +238,7 @@ Use `as="span"` when you need an inline container.
     align="start"
   >
     <dt-stack class="d-w100p md:d-w50p" gap="50">
-      <dt-text as="h3" kind="headline" :size="300">Column</dt-text>
+      <dt-text as="h3" variant="headline-md">Column</dt-text>
       <dt-stack
         :gap="selectedGap"
         class="d-bgc-moderate-opaque d-t d-td300 d-bar-400 d-ttf-quint"
@@ -250,7 +249,7 @@ Use `as="span"` when you need an inline container.
       </dt-stack>
     </dt-stack>
     <dt-stack class="d-w100p md:d-w50p" gap="50">
-      <dt-text as="h3" kind="headline" :size="300">Row</dt-text>
+      <dt-text as="h3" variant="headline-md">Row</dt-text>
       <dt-stack
         direction="row"
         :gap="selectedGap"
@@ -636,13 +635,13 @@ Align items along their text baselines.
   class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--baseline"
 >
   <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    <dt-text kind="body" :size="100">Small body</dt-text>
+    <dt-text variant="body-xs">Small body</dt-text>
   </dt-box>
   <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    <dt-text kind="body" :size="300">Medium body</dt-text>
+    <dt-text variant="body-md">Medium body</dt-text>
   </dt-box>
   <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    <dt-text kind="headline" :size="600">Large headline</dt-text>
+    <dt-text variant="headline-2xl">Large headline</dt-text>
   </dt-box>
 </dt-stack>
 <!-- @code -->
@@ -651,9 +650,9 @@ Align items along their text baselines.
   gap="100"
   align="baseline"
 >
-  <dt-text kind="body" :size="100">Small body</dt-text>
-  <dt-text kind="body" :size="300">Medium body</dt-text>
-  <dt-text kind="headline" :size="600">Large headline</dt-text>
+  <dt-text variant="body-xs">Small body</dt-text>
+  <dt-text variant="body-md">Medium body</dt-text>
+  <dt-text variant="headline-2xl">Large headline</dt-text>
 </dt-stack>
 ```
 
@@ -1085,7 +1084,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-t
 <dt-stack gap="200">
   <dt-stack gap="100" justify="space-between">
     <dt-stack>
-      <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
+      <dt-text as="h2" variant="headline-xl" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="350">
@@ -1099,10 +1098,10 @@ View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-t
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
+      <dt-text variant="body-md" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
-      <dt-text kind="body" :size="200" density="200">
+      <dt-text variant="body-sm" density="200">
         <dt-text strength="semibold">
           6:19 am
         </dt-text> local time
@@ -1136,21 +1135,21 @@ View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-t
 
 ```vue demo
 <dt-stack gap="100" class="d-w-800">
-  <dt-text as="h2" kind="headline" :size="400">Saturday, May 24, 2025</dt-text>
+  <dt-text as="h2" variant="headline-lg">Saturday, May 24, 2025</dt-text>
   <dt-stack direction="row" gap="100" class="d-w100p">
     <dt-avatar full-name="Ashanti Trevor" />
     <dt-stack class="d-fl1">
-      <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
+      <dt-text variant="body-sm" strength="bold">Ashanti Trevor</dt-text>
       <dt-stack direction="row" gap="50">
         <dt-stack direction="row" gap="100">
-          <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-          <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
+          <dt-icon-phone-outgoing size="200" class="d-fc-tertiary" />
+          <dt-text variant="body-xs" tone="tertiary">Outgoing call</dt-text>
         </dt-stack>
-        <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
-        <dt-text kind="body" :size="100" tone="tertiary">2 minutes 10 seconds</dt-text>
+        <dt-text variant="body-xs" tone="tertiary">&bull;</dt-text>
+        <dt-text variant="body-xs" tone="tertiary">2 minutes 10 seconds</dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-text kind="body" :size="200" tone="tertiary" numeric>3:23 pm</dt-text>
+    <dt-text variant="body-sm" tone="tertiary" numeric>3:23 pm</dt-text>
     <dt-badge kind="count" type="bulletin" text="6" />
   </dt-stack>
 </dt-stack>
@@ -1165,6 +1164,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-t
 <component-class-table component-name="stack"></component-class-table>
 
 <script setup>
+  import { DtIconPhoneOutgoing } from '@dialpad/dialtone-icons/vue';
   import { ref, inject } from 'vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
   import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';

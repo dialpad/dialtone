@@ -121,12 +121,12 @@ combinator: DtBadge
       <td>Used to provide temporary feedback to specific items in the interface, like live activity, notifications, and unread counts. </td>
     </tr>
     <tr>
-      <th class="d-ta-left">Ai</th>
+      <th class="d-ta-left">AI</th>
       <td>
         <dt-badge type="ai" text="Label" kind="label"></dt-badge>
       </td>
       <td><abbr class="d-fc-muted d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
-      <td>To call out Dialpad Ai features.</td>
+      <td>To call out Dialpad AI features.</td>
     </tr>
   </tbody>
 </table>
@@ -212,44 +212,44 @@ Decorative badges label and classify items for quick recognition.
 ```vue demo
 <dt-stack direction="row" gap="200" align="baseline">
   <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Black</dt-text>
+    <dt-text variant="label-md" density="200">Black</dt-text>
     <dt-badge text="Label" decoration="black-400" />
     <dt-badge text="Label" decoration="black-500" />
     <dt-badge text="Label" decoration="black-900" />
   </dt-stack>
   <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Red</dt-text>
+    <dt-text variant="label-md" density="200">Red</dt-text>
     <dt-badge text="Label" decoration="red-200" />
     <dt-badge text="Label" decoration="red-300" />
     <dt-badge text="Label" decoration="red-400" />
   </dt-stack>
   <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Purple</dt-text>
+    <dt-text variant="label-md" density="200">Purple</dt-text>
     <dt-badge text="Label" decoration="purple-200" />
     <dt-badge text="Label" decoration="purple-300" />
     <dt-badge text="Label" decoration="purple-400" />
     <dt-badge text="Label" decoration="purple-500" />
   </dt-stack>
   <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Blue</dt-text>
+    <dt-text variant="label-md" density="200">Blue</dt-text>
     <dt-badge text="Label" decoration="blue-200" />
     <dt-badge text="Label" decoration="blue-300" />
     <dt-badge text="Label" decoration="blue-400" />
   </dt-stack>
   <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Green</dt-text>
+    <dt-text variant="label-md" density="200">Green</dt-text>
     <dt-badge text="Label" decoration="green-300" />
     <dt-badge text="Label" decoration="green-400" />
     <dt-badge text="Label" decoration="green-500" />
   </dt-stack>
   <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Gold</dt-text>
+    <dt-text variant="label-md" density="200">Gold</dt-text>
     <dt-badge text="Label" decoration="gold-300" />
     <dt-badge text="Label" decoration="gold-400" />
     <dt-badge text="Label" decoration="gold-500" />
   </dt-stack>
   <dt-stack gap="200">
-    <dt-text kind="label" :size="300" density="200">Magenta</dt-text>
+    <dt-text variant="label-md" density="200">Magenta</dt-text>
     <dt-badge text="Label" decoration="magenta-200" />
     <dt-badge text="Label" decoration="magenta-300" />
     <dt-badge text="Label" decoration="magenta-400" />
@@ -307,7 +307,7 @@ Decorative badges label and classify items for quick recognition.
       </template>
     </dt-badge>
   </dt-stack>
-  <dt-stack direction="row" gap="00">
+  <dt-stack direction="row" gap="0">
     <dt-badge text="In progress" type="info" />
     <dt-badge text="Beta" type="info" />
     <dt-badge text="Draft" type="info" />
@@ -330,10 +330,10 @@ Decorative badges label and classify items for quick recognition.
     <dt-badge text="Presenter" type="bulletin" />
   </dt-stack>
   <dt-stack direction="row" gap="100">
-    <dt-badge type="ai" text="Ai Notes" />
-    <dt-badge type="ai" text="Ai Suggestion" />
-    <dt-badge type="ai" text="Ai enabled" />
-    <dt-badge type="ai" text="Ai Transcript" />
+    <dt-badge type="ai" text="AI Notes" />
+    <dt-badge type="ai" text="AI Suggestion" />
+    <dt-badge type="ai" text="AI enabled" />
+    <dt-badge type="ai" text="AI Transcript" />
   </dt-stack>
 </dt-stack>
 ```

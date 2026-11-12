@@ -393,7 +393,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
             @click="decrementMaxLines"
           >
             <template #startIcon="{ iconSize }">
-              <dt-icon name="minus" :size="iconSize" />
+              <dt-icon-minus :size="iconSize" />
             </template>
           </dt-button>
           <dt-button
@@ -406,7 +406,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
             @click="incrementMaxLines"
           >
             <template #startIcon="{ iconSize }">
-              <dt-icon name="plus" :size="iconSize" />
+              <dt-icon-plus :size="iconSize" />
             </template>
           </dt-button>
         </dt-stack>
@@ -547,7 +547,7 @@ Text box trim will only affect elements with block or inline-block styled contex
       <dt-text variant="body-sm" strength="bold">Ashanti Trevor</dt-text>
       <dt-stack direction="row" gap="50">
         <dt-stack direction="row" gap="100">
-          <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+          <dt-icon-phone-outgoing size="200" class="d-fc-tertiary" />
           <dt-text variant="body-xs" tone="tertiary">Outgoing call</dt-text>
         </dt-stack>
         <dt-text variant="body-xs" tone="tertiary">&bull;</dt-text>
@@ -575,6 +575,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 <component-class-table component-name="text"></component-class-table>
 
 <script setup>
+import { DtIconMinus, DtIconPlus, DtIconPhoneOutgoing } from '@dialpad/dialtone-icons/vue';
 import { computed, reactive } from 'vue';
 import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 import { fontSize } from '@data/type.json';

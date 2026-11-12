@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import type { SearchResult } from '@dialpad/dialtone-query-core';
-import { formatComponentOutput, formatPrompt } from '../src/formatters.js';
+import { formatComponentOutput, formatPrompt, formatSearchOutput } from '../src/formatters.js';
 
 describe('import hints name the given package', () => {
   // Not a real Dialtone path, so a hint hard-coded to any of them fails.
@@ -111,5 +111,18 @@ describe('prop deprecation notices', () => {
       { name: 'headerHeight', tags: { deprecated: [{ description: true, title: 'deprecated' }] } },
     ] } }, 'markdown', undefined, options);
     expect(text).toContain('| headerHeight | unknown | Deprecated |  |');
+  });
+});
+
+describe('documentation search results', () => {
+  const result: SearchResult = {
+    type: 'documentation', name: 'Modal / Usage', details: {}, metadata: null,
+  };
+
+  test.each([
+    ['minimal', '1. [docs] Modal / Usage'],
+    ['markdown', '1. **Modal / Usage** _(docs)_'],
+  ] as const)('%s identifies documentation instead of a utility class', (format, expected) => {
+    expect(formatSearchOutput([result], format)).toBe(expected);
   });
 });

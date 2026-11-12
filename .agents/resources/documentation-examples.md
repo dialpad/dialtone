@@ -28,6 +28,8 @@ Check owning build/cache/CI inputs and the shared lookup release policy for new 
 
 `dialtone-combinator:generate-examples` materializes the curated registry using the UI's serializer and binding logic. Documentation consumes only its ignored `.generated/preset-examples.json`; stale source/input hashes fail the build. There is no separate preset publishing list. New registered presets are evaluated on the next build; unregistered files are not enrolled.
 
+A preset may set `metadata.lookupExclude: { reason, owner }` when its source must stay out of lookup, including known incompatibility with the pinned consumer profile. Both fields must be nonempty strings. The preset remains available in Combinator; the producer records `policy-excluded` with the owned reason and does not materialize a lookup template. Remove the exclusion only after its stated qualification condition is met. This metadata is not a component prop or a second publishing list.
+
 Inspect `packages/dialtone-docs/dist/preset-example-coverage.json`. It accounts for delivered sources, unresolved context, policy exclusions and deprecation, with separate consumer-verified and unverified totals. A safely assembled fixture can be retrieved without consumer proof; it stays unverified. Missing state or unsupported APIs keep the affected source unresolved without suppressing other fixtures. Corrupt intermediate data still fails clearly.
 
 The shared source and consumer API checker accepts exact native attribute names explicitly documented by a component's top-level `@property ... attribute` declaration. Literal attributes and static-argument `v-bind` use that contract; arbitrary forwarded attributes and attribute-only `v-model` do not. Declared props retain their value and deprecation checks.

@@ -186,19 +186,19 @@ Add some [icons](/design/icons/index.md).
 <!-- @wrapper -->
 <dt-stack direction="row" class="d-bgc-moderate d-fc-secondary d-divide-x d-divide-bold">
   <dt-stack direction="row" gap="100" class="d-p-100">
-    <dt-icon class="d-fc-muted" name="alert-triangle" size="200" />
+    <dt-icon-alert-triangle class="d-fc-muted" size="200" />
     <dt-text>Box 1</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="100" class="d-p-100">
-    <dt-icon class="d-fc-muted" name="info" size="200" />
+    <dt-icon-info class="d-fc-muted" size="200" />
     <dt-text>Box the 2nd</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="100" class="d-p-100">
-    <dt-icon class="d-fc-muted" name="alert-circle" size="200" />
+    <dt-icon-alert-circle class="d-fc-muted" size="200" />
     <dt-text>Box third</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="100" class="d-p-100">
-    <dt-icon class="d-fc-muted" name="check-circle" size="200" />
+    <dt-icon-check-circle class="d-fc-muted" size="200" />
     <dt-text>Box IV</dt-text>
   </dt-stack>
 </dt-stack>
@@ -212,15 +212,15 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-secondary">
   <dt-stack direction="row" gap="100" class="d-bgc-critical d-p-100">
-    <dt-icon name="alert-triangle" size="200" />
+    <dt-icon-alert-triangle size="200" />
     <dt-text>Critical</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="100" class="d-bgc-info d-p-100">
-    <dt-icon name="alert-circle" size="200" />
+    <dt-icon-alert-circle size="200" />
     <dt-text>Info</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="100" class="d-bgc-positive d-p-100">
-    <dt-icon name="check-circle" size="200" />
+    <dt-icon-check-circle size="200" />
     <dt-text>Positive</dt-text>
   </dt-stack>
 </dt-stack>
@@ -234,16 +234,16 @@ Use the [DtText](/components/text.html) component for text styling. It provides 
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-secondary">
   <dt-stack direction="row" gap="100" class="d-bgc-critical d-p-100">
-    <dt-icon name="alert-triangle" size="200" />
-    <dt-text kind="label" :size="200">Critical</dt-text>
+    <dt-icon-alert-triangle size="200" />
+    <dt-text variant="label-sm">Critical</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="100" class="d-bgc-info d-p-100">
-    <dt-icon name="alert-circle" size="200" />
-    <dt-text kind="label" :size="200">Info</dt-text>
+    <dt-icon-alert-circle size="200" />
+    <dt-text variant="label-sm">Info</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="100" class="d-bgc-positive d-p-100">
-    <dt-icon name="check-circle" size="200" />
-    <dt-text kind="label" :size="200">Positive</dt-text>
+    <dt-icon-check-circle size="200" />
+    <dt-text variant="label-sm">Positive</dt-text>
   </dt-stack>
 </dt-stack>
 ```
@@ -256,16 +256,16 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-secondary">
   <dt-stack direction="row" gap="50" class="d-bgc-critical d-py-50 d-px-100">
-    <dt-icon name="alert-triangle" size="200" />
-    <dt-text kind="label" :size="200">Critical</dt-text>
+    <dt-icon-alert-triangle size="200" />
+    <dt-text variant="label-sm">Critical</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="50" class="d-bgc-info d-py-50 d-px-100">
-    <dt-icon name="alert-circle" size="200" />
-    <dt-text kind="label" :size="200">Info</dt-text>
+    <dt-icon-alert-circle size="200" />
+    <dt-text variant="label-sm">Info</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="50" class="d-bgc-positive d-py-50 d-px-100">
-    <dt-icon name="check-circle" size="200" />
-    <dt-text kind="label" :size="200">Positive</dt-text>
+    <dt-icon-check-circle size="200" />
+    <dt-text variant="label-sm">Positive</dt-text>
   </dt-stack>
 </dt-stack>
 ```
@@ -278,16 +278,16 @@ Add `d-bar-300` to each item for subtle rounded corners.
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-secondary">
   <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-critical d-py-50 d-px-100">
-    <dt-icon class="d-fc-muted" name="alert-triangle" size="200" />
-    <dt-text kind="label" :size="200">Critical</dt-text>
+    <dt-icon-alert-triangle class="d-fc-muted" size="200" />
+    <dt-text variant="label-sm">Critical</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-info d-py-50 d-px-100">
-    <dt-icon class="d-fc-muted" name="alert-circle" size="200" />
-    <dt-text kind="label" :size="200">Info</dt-text>
+    <dt-icon-alert-circle class="d-fc-muted" size="200" />
+    <dt-text variant="label-sm">Info</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-positive d-py-50 d-px-100">
-    <dt-icon class="d-fc-muted" name="check-circle" size="200" />
-    <dt-text kind="label" :size="200">Positive</dt-text>
+    <dt-icon-check-circle class="d-fc-muted" size="200" />
+    <dt-text variant="label-sm">Positive</dt-text>
   </dt-stack>
 </dt-stack>
 ```
@@ -295,3 +295,7 @@ Add `d-bar-300` to each item for subtle rounded corners.
 ### Keep Exploring!
 
 View the final result in this [Codepen template](https://codepen.io/pen?template=XWYMMRY). Continue to explore using the variety of CSS utilities listed here.
+
+<script setup>
+import { DtIconAlertTriangle, DtIconInfo, DtIconAlertCircle, DtIconCheckCircle } from '@dialpad/dialtone-icons/vue';
+</script>

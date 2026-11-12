@@ -15,7 +15,6 @@ const {
   getElementName,
   getStaticAttributeValue,
   hasAttribute,
-  hasDirectiveAttribute,
   isDtTextComponent,
   removeAttributeFix,
 } = require('../util/vue-attribute-helpers');
@@ -55,16 +54,20 @@ function isDialtoneComponent(node) {
 }
 
 function getDtTextVariant(node, sizeValue) {
-  const variantAttribute = findStaticAttribute(node, 'variant');
-  if (variantAttribute) return null;
+  const attributes = node.parent.attributes;
+  const uncertain = attributes.some(attribute => {
+    if (!attribute.directive) return false;
+    const directive = attribute.key.name.name;
+    const argument = attribute.key.argument;
+    if (argument && argument.type !== 'VIdentifier') return true;
+    if (directive === 'bind') return !argument || attribute.key.modifiers.length > 0;
+    return !['if', 'else', 'else-if', 'for', 'show', 'once', 'memo', 'cloak', 'text', 'html', 'slot', 'on'].includes(directive);
+  });
+  if (uncertain || ['kind', 'size'].some(name => attributes.filter(attribute => getAttributeName(attribute) === name).length !== 1)) return null;
 
-  if (
-    hasDirectiveAttribute(node, 'variant') ||
-    hasDirectiveAttribute(node, 'kind')
-  ) {
-    return null;
-  }
+  if (hasAttribute(node, 'variant')) return null;
 
+  // A bound kind has no static attribute, so it falls through to null below.
   const kindAttribute = findStaticAttribute(node, 'kind');
   const kindValue = getStaticAttributeValue(kindAttribute);
   if (!kindValue || !DT_TEXT_KIND_SIZE_MAP[kindValue]) return null;
@@ -98,7 +101,7 @@ module.exports = {
       deprecatedDtTextSizeInBinding:
         'T-shirt size "{{oldSize}}" in DtText size binding is deprecated. Use variant for text composition, or numeric {{newSize}} only for raw font-size control.',
       unpairedDtTextSize:
-        "DtText's size must be paired with variant or legacy kind. Prefer variant for typography composition; use size only as a variant override.",
+        'DtText\'s size must be paired with variant or legacy kind. Prefer variant for typography composition; use size only as a variant override.',
     },
   },
 
@@ -165,19 +168,15 @@ module.exports = {
                 return;
               }
 
-              if (
-                hasAttribute(node, 'kind') &&
-                !hasAttribute(node, 'variant')
-              ) {
-                context.report({
-                  node,
-                  messageId: 'deprecatedDtTextSizeManual',
-                  data: {
-                    oldSize: sizeValue,
-                  },
-                });
-                return;
-              }
+              // Unpaired sizes returned above, so kind or variant is present here.
+              context.report({
+                node,
+                messageId: 'deprecatedDtTextSizeManual',
+                data: {
+                  oldSize: sizeValue,
+                },
+              });
+              return;
             }
 
             context.report({

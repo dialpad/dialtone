@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.3...eslint-plugin-dialtone/v1.15.0) (2026-11-10)
+
+
+### Features
+
+* **Migration:** DLT-3516 convert Text kind and size to variant ([#1539](https://github.com/dialpad/dialtone/issues/1539)) ([11b76f9](https://github.com/dialpad/dialtone/commit/11b76f95401735cf96735498543df35b5df260df))
+
 ## [1.14.3](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.2...eslint-plugin-dialtone/v1.14.3) (2026-10-15)
 
 

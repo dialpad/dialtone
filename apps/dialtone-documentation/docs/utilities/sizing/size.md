@@ -17,7 +17,7 @@ Use `d-size-{stop}` to set both width and height using layout token stops. The h
 <div v-dt-scrollbar:always class="d-bar-400 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
   <dt-stack gap="100" align="start">
     <div v-for="(i, index) in layout" v-dt-tooltip="{ message: `${i.px}px`, delay: false }">
-      <dt-text kind="code" size="100" class="d-w-100 d-us-all">d-size-{{i.stop}}</dt-text>
+      <dt-text variant="code-xs" class="d-w-100 d-us-all">d-size-{{i.stop}}</dt-text>
       <div class="d-bgc-moderate d-bar-300" :class="`d-size-${i.stop}`"></div>
     </div>
   </dt-stack>

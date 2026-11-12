@@ -61,6 +61,35 @@ describe('DtHovercard Tests', () => {
     wrapper.unmount();
   });
 
+  it('forwards completed visibility while a canceled leave keeps the hovercard open', async () => {
+    wrapper.unmount();
+    wrapper = mount(DtHovercard, {
+      props: { open: true },
+      slots: baseSlots,
+      global: { plugins: [DtFocustrapDirective], stubs: { transition: true } },
+      attachTo: document.body,
+    });
+    const popover = wrapper.findComponent(DtPopover);
+    const trigger = wrapper.find('[data-qa="dt-button"]');
+    trigger.element.focus();
+    expect(wrapper.emitted('opened')).toBeUndefined();
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
+    await flushPromises();
+    expect(wrapper.emitted('opened')).toEqual([[true]]);
+    expect(document.activeElement).toBe(trigger.element);
+    await wrapper.setProps({ open: false });
+    await wrapper.setProps({ open: true });
+    expect(wrapper.emitted('opened')).toEqual([[true]]);
+    expect(trigger.attributes('aria-expanded')).toBe('true');
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
+    await flushPromises();
+    expect(wrapper.emitted('opened')).toEqual([[true], [true]]);
+    await wrapper.setProps({ open: false });
+    popover.findComponent({ ref: 'content' }).vm.$emit('after-leave');
+    await flushPromises();
+    expect(wrapper.emitted('opened')).toEqual([[true], [true], [false]]);
+  });
+
   describe('Presentation Tests', () => {
     describe('When mouseenter on anchor', () => {
       beforeEach(async () => {

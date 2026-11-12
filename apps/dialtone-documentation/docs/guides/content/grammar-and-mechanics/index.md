@@ -130,7 +130,7 @@ Use sentence case for all headings. Capitalize the first word of each phrase, pr
 
 * Create an office
 * Calls to France are now even easier!
-* Activate Ai Scorecards for this contact center
+* Activate AI Scorecards for this contact center
 
 </template>
 <template #dont>
@@ -144,13 +144,13 @@ Use sentence case for all headings. Capitalize the first word of each phrase, pr
 
 ### Products and Feature Names
 
-If a product or feature isn’t unique to Dialpad, such as contact centers, teams, or offices, then don’t capitalize the name. However, if it is unique to Dialpad and we can market it as a distinct product in the market, such as Ai Scorecards or Ai Playbooks, then capitalize it.
+If a product or feature isn’t unique to Dialpad, such as contact centers, teams, or offices, then don’t capitalize the name. However, if it is unique to Dialpad and we can market it as a distinct product in the market, such as AI Scorecards or AI Playbooks, then capitalize it.
 
 <dialtone-usage>
 <template #do>
 
 * teams
-* Ai Scorecards
+* AI Scorecards
 * main line number
 
 </template>
@@ -222,7 +222,7 @@ Avoid lists with only one bullet point.
 <dialtone-usage>
 <template #do>
 
-Using Ai Playbooks provides the following benefits:
+Using AI Playbooks provides the following benefits:
 
 * Increased consistency to drive higher quality conversions
 * Monitor your team’s calls in real-time
@@ -232,7 +232,7 @@ Using Ai Playbooks provides the following benefits:
 </template>
 <template #dont>
 
-Using Ai Playbooks…
+Using AI Playbooks…
 
 * …increases consistency and drives higher quality conversions
 * …you can monitor your team’s calls in real-time! Also you can review coachable moments later

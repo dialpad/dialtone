@@ -28,7 +28,7 @@ Headings and subheadings are titles and subtitles that refer to interface sectio
 
 * Start meeting
 * Invite users
-* Create Ai Playbook
+* Create AI Playbook
 * Port number
 
 </template>
@@ -90,7 +90,7 @@ Start sentences with imperative verbs when introducing actions that can be (or n
 <template #do>
 
 * Select departments observing this holiday
-* Ensure calls are correctly routed by selecting the best option below.
+* Ensure calls are correctly routed by selecting the best option.
 
 </template>
 <template #dont>
@@ -105,7 +105,7 @@ Shorter sentences are preferred because they’re easier to scan and understand.
 
 There are times when longer sentences might be appropriate for conveying complex information. In these instances, clearly state the information in a well-structured format, using the following principles:
 
-* Avoid unnecessary long sentences
+* Avoid unnecessarily long sentences
 * Avoid subordinate clauses (e.g., “When a caller is redirected to voicemail”)
 * Change up sentence lengths to provide better text rhythm
 * Break longer sentences into shorter ones whenever possible
@@ -151,14 +151,14 @@ When using links in sentences, avoid linking the entire sentence. Only link the 
 <template #do>
 
 * [Virtual backgrounds](https://help.dialpad.com/docs/virtual-backgrounds) only work in the latest versions of Google Chrome.
-* Add a [desk phone](https://help.dialpad.com/v1/docs/en/desk-phones-and-room-phones) or forwarding number below.
+* Add a [desk phone](https://help.dialpad.com/v1/docs/en/desk-phones-and-room-phones) or forwarding number.
 
 </template>
 <template #dont>
 
 <!-- markdownlint-disable-next-line MD059 -->
 * Virtual backgrounds only work in the latest versions of Google Chrome. To learn more, [click here](https://help.dialpad.com/docs/virtual-backgrounds).
-* [Add a desk phone](https://help.dialpad.com/v1/docs/en/desk-phones-and-room-phones) or forwarding number below.
+* [Add a desk phone](https://help.dialpad.com/v1/docs/en/desk-phones-and-room-phones) or forwarding number.
 
 </template>
 </dialtone-usage>
@@ -195,8 +195,8 @@ Only add a “Learn more…” sentence if the preceding sentence addresses mult
 </template>
 <template #dont>
 
-* [Learn more about registering your SMS campaign.](https://help.dialpad.com/v1/docs/en/sms-registration-guide).
-* Dialpad retains data until it is deleted, an account is canceled, or a [retention policies](https://help.dialpad.com/v1/docs/en/data-retention-policy) is set up. [Canceled accounts](https://help.dialpad.com/v1/docs/en/dialpad-cancellation-and-refund-faqs) are deleted after 180 days.
+* [Learn more about registering your SMS campaign](https://help.dialpad.com/v1/docs/en/sms-registration-guide).
+* Dialpad retains data until it is deleted, an account is canceled, or a [retention policy](https://help.dialpad.com/v1/docs/en/data-retention-policy) is set up. [Canceled accounts](https://help.dialpad.com/v1/docs/en/dialpad-cancellation-and-refund-faqs) are deleted after 180 days.
 
 </template>
 </dialtone-usage>
@@ -206,12 +206,12 @@ Only add a “Learn more…” sentence if the preceding sentence addresses mult
 Confirmations are provided for actions which can’t be undone or are difficult to undo. These messages should:
 
 * Always give users an option to confirm or cancel the action
-* Be used for single, primary task
+* Be used for a single, primary task
 * Keep body content to a single line and not use more than two calls to action
 
 Confirmation titles should:
 
-* Ask if users want to continue, using a concise “verb” +  “noun” question
+* Name the action with a concise “verb” + “noun” phrase, or ask if users want to continue
 * Keep it to one sentence and avoid using punctuation except when using question marks
 * Avoid articles (the, a, an) to keep content short and actionable
 * Be written in sentence case
@@ -258,7 +258,7 @@ Confirmation body content should:
 Confirmations primary and secondary actions should:
 
 * Be clear and predictable: users should be able to anticipate what will happen when they click an action
-* Scannable: avoid unnecessary words and articles such as “the”, “an”, or “a”
+* Be scannable: avoid unnecessary words and articles such as “the”, “an”, or “a”
 
 Since confirmation messages appear in modals, titles and buttons are closer to each other than they normally would appear. Because of this, button text doesn’t have to follow the “verb” + “noun” pattern. Instead, one word calls to action can be used such as “Cancel” or “Delete”.
 
@@ -626,11 +626,6 @@ Use the verb “change” when users can replace an option, but not edit it. Thi
 * Change background
 
 </template>
-<template #dont>
-
-* TBA
-
-</template>
 </dialtone-usage>
 
 Use the verb “switch” when it’s important for users to know what they’re switching between like users, accounts, phone numbers, or modes. When the switch happens, the previous option is turned off, logged out, or deactivated. Always pair “switch” with a noun in titles to prevent confusion.
@@ -638,13 +633,15 @@ Use the verb “switch” when it’s important for users to know what they’re
 <dialtone-usage>
 <template #do>
 
-<img alt="Picture shows Save option at the bottom of the modal" src="/assets/images/content/switch-accounts@2x.png" class="d-w100p" />
+<img alt="Picture shows a Switch Account button next to the current user's name" src="/assets/images/content/switch-accounts@2x.png" class="d-w100p" />
+
+* Switch phone number
+* Switch account
 
 </template>
 <template #dont>
 
-* Switch phone number
-* Switch account
+* Switch
 
 </template>
 </dialtone-usage>
@@ -731,12 +728,12 @@ Use the verb “need” when telling users they’re required to do or should do
 <dialtone-usage>
 <template #do>
 
-To allow agents time to wrap-up between calls, you need to set a wrap-up time allowance.
+To allow agents time to wrap up between calls, you need to set a wrap-up time allowance.
 
 </template>
 <template #dont>
 
-To allow agents time to wrap-up between calls, you must set a wrap-up time allowance.
+To allow agents time to wrap up between calls, you must set a wrap-up time allowance.
 
 </template>
 </dialtone-usage>

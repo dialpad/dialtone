@@ -59,13 +59,13 @@
               <span
                 v-if="activeFilterList"
                 class="d-filter-pill__label-end"
-                :title="activeFilterList"
-                v-text="activeFilterList"
+                :title="activeFilterLabel"
+                v-text="activeFilterLabel"
               />
               <span
                 v-if="activeFilterOverflow"
                 class="d-filter-pill__label-end-overflow"
-                :title="`plus ${activeFilters.length - 1} others`"
+                :title="activeFilterOverflowTitle"
                 v-text="activeFilterOverflow"
               />
             </slot>
@@ -550,17 +550,32 @@ export default {
       return this.filters.filter(filter => filter.active).map(filter => filter.name);
     },
 
+    allFiltersActive () {
+      return this.filters.length > 1 && this.activeFilters.length === this.filters.length;
+    },
+
     activeFilterList () {
-      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) {
+      if (this.allFiltersActive) {
         return 'All';
       }
 
       return this.activeFilters[0] ?? '';
     },
 
+    activeFilterLabel () {
+      if (this.allFiltersActive) {
+        return this.i18n.$t('DIALTONE_FILTER_PILL_ALL_LABEL');
+      }
+
+      return this.activeFilterList;
+    },
+
+    activeFilterOverflowTitle () {
+      return this.i18n.$t('DIALTONE_FILTER_PILL_OVERFLOW_TITLE', { count: this.activeFilters.length - 1 });
+    },
+
     activeFilterOverflow () {
-      if (this.activeFilters.length <= 1) return '';
-      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) return '';
+      if (this.activeFilters.length <= 1 || this.allFiltersActive) return '';
 
       return '+' + (this.activeFilters.length - 1);
     },
@@ -617,7 +632,7 @@ export default {
   },
 
   mounted () {
-    if (!(this.modelValue?.length || (this.$slots.content && this.$slots.content()))) {
+    if (!(this.modelValue?.length || this.$slots.content)) {
       console.warn('Please provide content through the v-model or the "content" slot.');
     }
     if (this.deferSelection && this.useDropdown) {

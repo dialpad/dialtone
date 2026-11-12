@@ -92,6 +92,7 @@ try {
         source: { kind: 'combinator-preset', filePath: relative(root, bankFile), hash: hash(readFileSync(bankFile)) },
         copyOptions,
         ...classifyPresetExample({ component, documentation, publicNames, runtime, icons,
+          exclusion: registry[component][preset].metadata?.lookupExclude,
           policyReason: isSupportedComponent(component, documentation) ? '' : getUnsupportedComponentReason(component),
           materialize: doc => {
             const materialized = state.buildVariantState(runtime[component], doc, registry[component], preset);

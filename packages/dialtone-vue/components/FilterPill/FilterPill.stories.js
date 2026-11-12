@@ -3,10 +3,12 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtFilterPill from './FilterPill.vue';
 import DtFilterPillDefaultTemplate from './FilterPillDefault.story.vue';
 import DtFilterPillVariantsTemplate from './FilterPillVariants.story.vue';
+import DtFilterPillCustomContentTemplate from './FilterPillCustomContent.story.vue';
 import { action } from 'storybook/actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/Button';
 import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/Popover/index.js';
 import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { DtStack } from '@/components/Stack';
 
 // Set default values at the story level here.
 export const argsData = {
@@ -145,5 +147,36 @@ export const Default = {
 
 export const Variants = {
   render: VariantsTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
+
+export const CustomContent = {
+  render: () => ({
+    components: { DtFilterPillCustomContentTemplate },
+    template: '<dt-filter-pill-custom-content-template />',
+  }),
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
+
+export const SelectionSummaries = {
+  render: () => ({
+    components: { DtFilterPill, DtStack },
+    template: `
+      <dt-stack direction="row" gap="400">
+        <dt-filter-pill
+          label="All teams"
+          :model-value="[{ name: 'Support', active: true }, { name: 'Sales', active: true }]"
+        />
+        <dt-filter-pill
+          label="Two teams"
+          :model-value="[{ name: 'Support', active: true }, { name: 'Sales', active: true }, { name: 'Engineering' }]"
+        />
+        <dt-filter-pill
+          label="Three teams"
+          :model-value="[{ name: 'Support', active: true }, { name: 'Sales', active: true }, { name: 'Engineering', active: true }, { name: 'Marketing' }]"
+        />
+      </dt-stack>
+    `,
+  }),
   parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

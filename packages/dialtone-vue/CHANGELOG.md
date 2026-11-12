@@ -1,3 +1,19 @@
+## [4.6.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.6.0...dialtone-vue/v4.6.1) (2026-11-10)
+
+
+### Bug Fixes
+
+* **Avatar,badge,modal:** DLT-3568 re-evaluate slot presence reactively ([#1519](https://github.com/dialpad/dialtone/issues/1519)) ([6e732fe](https://github.com/dialpad/dialtone/commit/6e732feab5402f291d2479bc7516c9ebcf2ca5ee))
+* **Dropdown,combinator:** DLT-3719 correct anchor bindings and presets ([#1514](https://github.com/dialpad/dialtone/issues/1514)) ([abb11d5](https://github.com/dialpad/dialtone/commit/abb11d54c96a8d500ad8391bbcd19d5fcc19c039))
+* **Loader:** DLT-3729 name loaders for assistive technology ([#1530](https://github.com/dialpad/dialtone/issues/1530)) ([2cdaee5](https://github.com/dialpad/dialtone/commit/2cdaee5cac514a2fc47d2b00eed9b9f5c0c4c09f))
+* **Storybook:** DLT-3730 correct composed demo labels and list markup ([#1531](https://github.com/dialpad/dialtone/issues/1531)) ([d1501be](https://github.com/dialpad/dialtone/commit/d1501be101d4e961aa55fce629aaef8a9dff427e))
+* **Vue,combinator:** DLT-3669 document supported preset APIs ([#1517](https://github.com/dialpad/dialtone/issues/1517)) ([1d764e6](https://github.com/dialpad/dialtone/commit/1d764e6870eb638c9dd1b1d61f0c576cd5f80423))
+
+
+### Documentation
+
+* **Storybook:** DLT-3725 correct accessibility examples ([#1529](https://github.com/dialpad/dialtone/issues/1529)) ([2359ca5](https://github.com/dialpad/dialtone/commit/2359ca5421b53a4e18cd9c62688ec92978192ed9))
+
 # [4.6.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.5.0...dialtone-vue/v4.6.0) (2026-11-03)
 
 

@@ -170,3 +170,5 @@ when the component becomes viable, and keep the reason short and user-facing.
 - Token-numbered values stay strings.
 
 For generated lookup presets, follow the [shared materialization and delivery lifecycle](../documentation-examples.md#combinator-presets). Registry curation drives retrieval without another publishing list. Regenerate accounting after additions, edits, renames, removals or API/support changes; revalidate affected payloads. Source delivery does not imply consumer or full-portfolio qualification.
+
+A preset's optional `metadata.lookupExclude` contains a nonempty `reason` and `owner` for withholding generated lookup delivery while keeping its preview. Use this for a known incompatible pinned consumer package; remove it only after qualification. See the shared lifecycle above. The generator validates the annotation and reports an owned `policy-excluded` disposition.

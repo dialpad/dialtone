@@ -2,7 +2,7 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtListItem from './ListItem.vue';
 
-import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './ListItemConstants';
+import { LIST_ITEM_ROLES, LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './ListItemConstants';
 import DtListItemDefaultTemplate from './ListItemDefault.story.vue';
 import DtListItemCustomTemplate from './ListItemCustom.story.vue';
 
@@ -100,12 +100,14 @@ export const argTypesData = {
     },
   },
   role: {
+    description: 'listitem: ordinary list content; menuitem: menu action; menuitemradio: persistent mutually exclusive menu choice with selected/aria-checked; option: listbox choice. See Dropdown Menu Roles for parent context.',
+    options: LIST_ITEM_ROLES,
     table: {
       type: { summary: 'string' },
       defaultValue: { summary: 'listitem' },
     },
     control: {
-      type: 'text',
+      type: 'select',
     },
   },
   elementType: {

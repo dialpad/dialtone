@@ -22,7 +22,7 @@ Use `d-bgc-{name}` to control which box an element's background is clipped by.
 Use `d-bgc-text` to clip the background color(s) within the foreground text.
 
 ```vue demo
-<dt-text kind="headline" :size="700" class="d-ba d-bgc-text d-bgg-to-r d-bgg-from-magenta-500 d-bgg-to-purple-600">Magic stuff happens.</dt-text>
+<dt-text variant="headline-3xl" class="d-ba d-bgc-text d-bgg-to-r d-bgg-from-magenta-500 d-bgg-to-purple-600">Magic stuff happens.</dt-text>
 ```
 
 ## Classes
