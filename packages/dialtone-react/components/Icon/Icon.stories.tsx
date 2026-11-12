@@ -85,6 +85,7 @@ function IconVariants ({ limit }: IconStoryArgs) {
   const copyIconName = (icon: string) => {
     navigator.clipboard.writeText(icon);
     setCopiedIcon(icon);
+    clearTimeout(timeout.current);
     timeout.current = setTimeout(() => { setCopiedIcon(null); }, 1200);
   };
 
