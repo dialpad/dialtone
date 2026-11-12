@@ -1,4 +1,4 @@
-import { StrictMode, useRef, type CSSProperties } from 'react';
+import { StrictMode, useState, type CSSProperties } from 'react';
 import { act, cleanup, fireEvent, render, type RenderResult } from '@testing-library/react';
 import type { ReferenceElement } from 'tippy.js';
 import {
@@ -28,9 +28,9 @@ interface AnchorProps {
 }
 
 function Anchor ({ qa, value, options, style }: AnchorProps) {
-  const ref = useRef<HTMLButtonElement>(null);
-  useTooltipDirective(ref, value, options);
-  return <button ref={ref} data-qa={qa} style={style}>{MOCK_ANCHOR_TEXT}</button>;
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+  useTooltipDirective(anchor, value, options);
+  return <button ref={setAnchor} data-qa={qa} style={style}>{MOCK_ANCHOR_TEXT}</button>;
 }
 
 interface WrapperProps {
@@ -41,9 +41,9 @@ interface WrapperProps {
 function WrapperComponent ({ placement = 'top', tooltipText = 'foo' }: WrapperProps) {
   return (
     <div>
-      <Anchor qa="dt-tooltip-placement" value={MOCK_TOOLTIP_TEXT} options={{ placement, noDelay: true }} />
+      <Anchor qa="dt-tooltip-placement" value={MOCK_TOOLTIP_TEXT} options={{ arg: placement, noDelay: true }} />
       <Anchor qa="dt-tooltip-object" value={MOCK_TOOLTIP_PROPS} />
-      <Anchor qa="dt-tooltip-changing" value={tooltipText} options={{ placement, noDelay: true }} />
+      <Anchor qa="dt-tooltip-changing" value={tooltipText} options={{ arg: placement, noDelay: true }} />
       <Anchor qa="dt-tooltip-mode" value={MOCK_TOOLTIP_TEXT} options={{ contentMode: 'invert', noDelay: true }} />
     </div>
   );
@@ -261,11 +261,206 @@ describe('useTooltipDirective', () => {
     expect(tippyProps(anchor()).offset).toEqual([0, 20]);
   });
 
+  // A swapped-in element is a new mount, as in Vue: the element left behind loses its tooltip and keeps its id, and the
+  // new one gets its own id and a tooltip that starts closed. The child swaps on its own state, which the owner's render
+  // doesn't see; the callback ref does.
+  it('treats an element a child swaps in as a new mount', async () => {
+    function Child ({ setAnchor }: { setAnchor: (element: HTMLElement | null) => void }) {
+      const [link, setLink] = useState(false);
+      return (
+        <>
+          {link ? <a ref={setAnchor} data-qa="link" href="#x">Link</a> : <button ref={setAnchor} data-qa="anchor">Button</button>}
+          <button data-qa="swap" onClick={() => setLink(value => !value)}>Swap</button>
+        </>
+      );
+    }
+    const swap = () => fireEvent.click(qa('swap') as HTMLElement);
+    function Owner () {
+      const [element, setElement] = useState<HTMLElement | null>(null);
+      useTooltipDirective(element, 'Message', { noDelay: true });
+      return <Child setAnchor={setElement} />;
+    }
+    render(<Owner />);
+    await flushPromises();
+    const button = anchor();
+    const buttonId = button.getAttribute('data-dt-tooltip-id');
+    expect(buttonId).toBeTruthy();
+    mouseEnter(button);
+    expect(tooltipContents()).toHaveLength(1);
+
+    swap();
+    await flushPromises();
+    const link = qa('link') as HTMLElement;
+    const linkId = link.getAttribute('data-dt-tooltip-id');
+    expect(tooltipContents()).toHaveLength(0);
+    expect(linkId).toBeTruthy();
+    expect(linkId).not.toBe(buttonId);
+    expect(button.getAttribute('data-dt-tooltip-id')).toBe(buttonId);
+    mouseEnter(link);
+    expect(tooltipContents()[0]!.textContent).toBe('Message');
+
+    swap();
+    await flushPromises();
+    expect(tooltipContents()).toHaveLength(0);
+    expect([buttonId, linkId]).not.toContain(anchor().getAttribute('data-dt-tooltip-id'));
+    mouseEnter(anchor());
+    expect(tooltipContents()[0]!.textContent).toBe('Message');
+  });
+
+  // Vue's `unmounted` removes the tooltip and leaves the id. In Vue the element goes with its directive; here it can
+  // outlive the hook, and it keeps the id as it would after a nullish value.
+  it('removes the tooltip, and leaves the id, when the hook unmounts and its element stays', async () => {
+    function User ({ element }: { element: HTMLElement | null }) {
+      useTooltipDirective(element, 'Message', { noDelay: true });
+      return null;
+    }
+    function Parent ({ on }: { on: boolean }) {
+      const [element, setElement] = useState<HTMLButtonElement | null>(null);
+      return <><button ref={setElement} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button>{on && <User element={element} />}</>;
+    }
+    const view = render(<Parent on />);
+    await flushPromises();
+    const id = anchor().getAttribute('data-dt-tooltip-id');
+    mouseEnter(anchor());
+    expect(tooltipContents()).toHaveLength(1);
+
+    view.rerender(<Parent on={false} />);
+    expect(tooltipContents()).toHaveLength(0);
+    expect(anchor().getAttribute('data-dt-tooltip-id')).toBe(id);
+
+    view.rerender(<Parent on />);
+    await flushPromises();
+    mouseEnter(anchor());
+    expect(tooltipContents()).toHaveLength(1);
+    expect(anchor().getAttribute('data-dt-tooltip-id')).toBe(id);
+  });
+
+  // The last hook leaving is Vue's `unmounted`, even when another hook arrives on the element in the same commit.
+  it('closes the tooltip when the last hook leaves and another arrives on the element in the same commit', async () => {
+    function User ({ element, value }: { element: HTMLElement | null; value: string }) {
+      useTooltipDirective(element, value, { noDelay: true });
+      return null;
+    }
+    function Parent ({ which }: { which: string }) {
+      const [element, setElement] = useState<HTMLButtonElement | null>(null);
+      return (
+        <>
+          <button ref={setElement} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button>
+          <User key={which} element={element} value={which} />
+        </>
+      );
+    }
+    const view = render(<Parent which="A" />);
+    await flushPromises();
+    mouseEnter(anchor());
+    expect(tooltipContents()[0]!.textContent).toBe('A');
+
+    view.rerender(<Parent which="B" />);
+    await flushPromises();
+    expect(tooltipContents()).toHaveLength(0);
+
+    mouseEnter(anchor());
+    expect(tooltipContents()[0]!.textContent).toBe('B');
+  });
+
+  // In Vue, a directive on a component lands on its root element, which may carry its own: DtSplitButton's start and end
+  // put one on their DtButton.
+  it('gives two directives on one element one tooltip, with the last value set', async () => {
+    function Both () {
+      const [element, setElement] = useState<HTMLButtonElement | null>(null);
+      useTooltipDirective(element, 'First', { noDelay: true });
+      useTooltipDirective(element, 'Second', { noDelay: true });
+      return <button ref={setElement} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button>;
+    }
+    render(<Both />);
+    await flushPromises();
+    mouseEnter(anchor());
+
+    expect(tooltipContents()).toHaveLength(1);
+    expect(tooltipContents()[0]!.textContent).toBe('Second');
+  });
+
+  // Vue's directives on one element unmount together. A hook can leave on its own (by unmounting, or for another
+  // element), and the element keeps the tooltip of the hooks still on it, with the value set last.
+  describe('when one of two hooks on an element leaves it', () => {
+    function Other ({ element, value }: { element: HTMLElement | null; value: string }) {
+      useTooltipDirective(element, value, { noDelay: true });
+      return null;
+    }
+    function Own ({ other, otherOnOwnElement = true }: { other?: string; otherOnOwnElement?: boolean }) {
+      const [element, setElement] = useState<HTMLButtonElement | null>(null);
+      const [second, setSecond] = useState<HTMLButtonElement | null>(null);
+      useTooltipDirective(element, 'Own', { noDelay: true });
+      return (
+        <>
+          <button ref={setElement} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button>
+          <button ref={setSecond} data-qa="second">Second</button>
+          {other && <Other element={otherOnOwnElement ? element : second} value={other} />}
+        </>
+      );
+    }
+    const renderBoth = async () => {
+      const view = render(<Own other="Other" />);
+      await flushPromises();
+      view.rerender(<Own other="Other, set last" />);
+      await flushPromises();
+      mouseEnter(anchor());
+      expect(tooltipContents()).toHaveLength(1);
+      expect(tooltipContents()[0]!.textContent).toBe('Other, set last');
+      return view;
+    };
+
+    it('keeps the tooltip of the hook that stays when the other unmounts', async () => {
+      const view = await renderBoth();
+
+      view.rerender(<Own />);
+      await flushPromises();
+      mouseEnter(anchor());
+
+      expect(tooltipContents()).toHaveLength(1);
+      expect(tooltipContents()[0]!.textContent).toBe('Own');
+    });
+
+    it('keeps the tooltip of the hook that stays when the other moves to another element', async () => {
+      const view = await renderBoth();
+
+      view.rerender(<Own other="Other, set last" otherOnOwnElement={false} />);
+      await flushPromises();
+      mouseEnter(anchor());
+      mouseEnter(qa('second') as HTMLElement);
+
+      expect(Array.from(tooltipContents(), content => content.textContent)).toEqual(['Own', 'Other, set last']);
+    });
+  });
+
+  it('logs an error, and leaves the tooltip as it was, when the value becomes one Vue rejects', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const { update } = renderAnchor('Hello', { noDelay: true });
+    await flushPromises();
+    const id = anchor().getAttribute('data-dt-tooltip-id');
+    mouseEnter(anchor());
+    expect(tooltipContents()[0]!.textContent).toBe('Hello');
+
+    // @ts-expect-error The value's type rejects a number.
+    update(42);
+    // @ts-expect-error The value's type rejects a number.
+    update(42);
+    await flushPromises();
+
+    expect(error).toHaveBeenCalledTimes(1);
+    expect(tooltipContents()[0]!.textContent).toBe('Hello');
+    expect(anchor().getAttribute('data-dt-tooltip-id')).toBe(id);
+    update('Hello');
+    await flushPromises();
+    expect(tooltipContents()[0]!.textContent).toBe('Hello');
+    error.mockRestore();
+  });
+
   it('removes the tooltip when the anchor detaches while the owner stays mounted', async () => {
     function Owner ({ show }: { show: boolean }) {
-      const ref = useRef<HTMLButtonElement>(null);
-      useTooltipDirective(ref, 'Message', { noDelay: true });
-      return show ? <button ref={ref} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button> : null;
+      const [element, setElement] = useState<HTMLButtonElement | null>(null);
+      useTooltipDirective(element, 'Message', { noDelay: true });
+      return show ? <button ref={setElement} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button> : null;
     }
     const view = render(<Owner show />);
     await flushPromises();
@@ -328,28 +523,53 @@ describe('useTooltipDirective', () => {
     expect(tooltipContents()).toHaveLength(1);
   });
 
-  it('places the tooltip on top by default', async () => {
-    renderAnchor('Message', { noDelay: true });
+  // Here the element is set before the hooks mount, so StrictMode's extra cleanup and re-run release and hold it.
+  it('keeps the value set last when StrictMode re-runs the effects of hooks that mount on a set element', async () => {
+    function Users ({ element }: { element: HTMLElement | null }) {
+      useTooltipDirective(element, 'First', { noDelay: true });
+      useTooltipDirective(element, 'Second', { noDelay: true });
+      return null;
+    }
+    function Parent ({ on }: { on: boolean }) {
+      const [element, setElement] = useState<HTMLButtonElement | null>(null);
+      return <><button ref={setElement} data-qa="anchor">{MOCK_ANCHOR_TEXT}</button>{on && <Users element={element} />}</>;
+    }
+    const view = render(<StrictMode><Parent on={false} /></StrictMode>);
+    view.rerender(<StrictMode><Parent on /></StrictMode>);
     await flushPromises();
     mouseEnter(anchor());
 
-    expect(tippyProps(anchor()).placement).toBe('top');
+    expect(tooltipContents()).toHaveLength(1);
+    expect(tooltipContents()[0]!.textContent).toBe('Second');
   });
 
-  it('takes the placement option, over the placement of an object value', async () => {
-    renderAnchor({ message: 'Message', placement: 'left', delay: false }, { placement: 'bottom-end' });
+  // As in Vue: a placement modifier wins. Otherwise an object value's `placement` key wins when present, even as
+  // undefined, which leaves DtTooltip's default ('top'). Otherwise the arg, and then 'top'.
+  it.each<[string, DtTooltipDirectiveValue, DtTooltipDirectiveOptions, TooltipDirection]>([
+    ['on top by default', 'Message', {}, 'top'],
+    ['by the arg, for a string', 'Message', { arg: 'right' }, 'right'],
+    ['by the arg, for an object without a placement', { message: 'Message' }, { arg: 'right' }, 'right'],
+    ['by an object\'s placement when there is no arg', { message: 'Message', placement: 'left' }, {}, 'left'],
+    ['by an object\'s placement, over the arg', { message: 'Message', placement: 'left' }, { arg: 'right' }, 'left'],
+    [
+      'by DtTooltip\'s default when an object sets placement to undefined, over the arg',
+      { message: 'Message', placement: undefined },
+      { arg: 'right' },
+      'top',
+    ],
+    ['by a placement modifier, over the arg', 'Message', { arg: 'right', placement: 'bottom-end' }, 'bottom-end'],
+    [
+      'by a placement modifier, over an object\'s placement and the arg',
+      { message: 'Message', placement: 'left' },
+      { arg: 'right', placement: 'bottom-end' },
+      'bottom-end',
+    ],
+  ])('places the tooltip %s', async (_, value, options, placement) => {
+    renderAnchor(value, { ...options, noDelay: true });
     await flushPromises();
     mouseEnter(anchor());
 
-    expect(tippyProps(anchor()).placement).toBe('bottom-end');
-  });
-
-  it('takes the placement of an object value when there is no placement option', async () => {
-    renderAnchor({ message: 'Message', placement: 'left', delay: false });
-    await flushPromises();
-    mouseEnter(anchor());
-
-    expect(tippyProps(anchor()).placement).toBe('left');
+    expect(tippyProps(anchor()).placement).toBe(placement);
   });
 
   it('applies the inverted option', async () => {
