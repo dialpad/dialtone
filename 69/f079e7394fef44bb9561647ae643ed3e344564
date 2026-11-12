@@ -1,0 +1,22 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate/git_environment.mjs
+  s_9ffcf142ac84e2::t_0d244bf1232a5f 8
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_9ffcf142ac84e2::t_bc59a645f5dbbb 325-329
+  s_9ffcf142ac84e2::t_a4a88d7e477e44 330-331
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "69f079e7394fef44bb9561647ae643ed3e344564",
+  "prompts": {},
+  "sessions": {
+    "s_9ffcf142ac84e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d0f7-76a3-aa19-3b9b76f40d48",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+packages/dialtone-react/common/use-indicator-animation/index.ts
+  s_ee0e89791dfeac::t_20471fd7e2264c 1-8
+packages/dialtone-react/common/use-indicator-animation/useIndicatorAnimation.test.ts
+  s_ee0e89791dfeac::t_8749fcaab691dc 1-255
+packages/dialtone-react/common/use-indicator-animation/useIndicatorAnimation.ts
+  s_ee0e89791dfeac::t_7b516fed32bed2 1-169
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8d5bcc7634d710b50f2b11104a854ef683dbe3bd",
+  "prompts": {},
+  "sessions": {
+    "s_ee0e89791dfeac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "71111fe0-098e-4b7c-b46a-5e9e2f7879b7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
