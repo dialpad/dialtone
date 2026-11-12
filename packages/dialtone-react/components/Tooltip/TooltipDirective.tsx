@@ -19,7 +19,9 @@ export type DtTooltipDirectiveValue = string | DtTooltipDirectiveProps | null | 
 
 /** The directive's arg and modifiers. */
 export interface DtTooltipDirectiveOptions {
-  /** The directive's arg and placement modifier. Wins over `placement` in an object value. */
+  /** The directive's arg, the placement in `v-dt-tooltip:top-end`. An object value's own `placement` wins over it. */
+  arg?: TooltipDirection;
+  /** A placement modifier, as in `v-dt-tooltip.top-end`. Wins over the arg and over an object value's `placement`. */
   placement?: TooltipDirection;
   /** The `inverted` modifier. */
   inverted?: boolean;
@@ -107,14 +109,16 @@ function resolveProps (value: DtTooltipDirectiveValue, options: DtTooltipDirecti
 
   let props: DtTooltipDirectiveProps;
   if (typeof value === 'string') {
-    props = { message: value, placement: options.placement ?? DEFAULT_PLACEMENT };
+    props = { message: value, placement: options.arg ?? DEFAULT_PLACEMENT };
   } else if (typeof value === 'object') {
-    props = { ...value, placement: options.placement ?? value.placement ?? DEFAULT_PLACEMENT };
+    // As in Vue, the value is spread last, so its own `placement` wins over the arg.
+    props = { placement: options.arg ?? value.placement ?? DEFAULT_PLACEMENT, ...value };
   } else {
     console.error('DtTooltipDirective: binding value must be string, object, null or undefined');
     return REJECTED;
   }
 
+  if (options.placement) props.placement = options.placement;
   if (options.inverted) props.inverted = true;
   if (options.noDelay) props.delay = false;
   if (options.noTransition) props.transition = false;
@@ -200,8 +204,8 @@ function release (anchor: HTMLElement, holder: symbol) {
  * another, for `null`, or as the hook unmounts) loses its tooltip, as on Vue's `unmounted`, unless another hook is still
  * on it. Then it shows the value set last by the hooks still there.
  *
- * `v-dt-tooltip:top-end.no-delay="'Message'"` is `useTooltipDirective(anchor, 'Message', { placement: 'top-end',
- * noDelay: true })`.
+ * `v-dt-tooltip:top-end.no-delay="'Message'"` is `useTooltipDirective(anchor, 'Message', { arg: 'top-end', noDelay:
+ * true })`. A placement modifier, as in `v-dt-tooltip.top-end`, is `{ placement: 'top-end' }`.
  * @see https://dialtone.dialpad.com/directives/tooltip.html
  */
 export function useTooltipDirective (

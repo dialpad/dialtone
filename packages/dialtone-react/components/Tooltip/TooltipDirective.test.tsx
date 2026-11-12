@@ -41,9 +41,9 @@ interface WrapperProps {
 function WrapperComponent ({ placement = 'top', tooltipText = 'foo' }: WrapperProps) {
   return (
     <div>
-      <Anchor qa="dt-tooltip-placement" value={MOCK_TOOLTIP_TEXT} options={{ placement, noDelay: true }} />
+      <Anchor qa="dt-tooltip-placement" value={MOCK_TOOLTIP_TEXT} options={{ arg: placement, noDelay: true }} />
       <Anchor qa="dt-tooltip-object" value={MOCK_TOOLTIP_PROPS} />
-      <Anchor qa="dt-tooltip-changing" value={tooltipText} options={{ placement, noDelay: true }} />
+      <Anchor qa="dt-tooltip-changing" value={tooltipText} options={{ arg: placement, noDelay: true }} />
       <Anchor qa="dt-tooltip-mode" value={MOCK_TOOLTIP_TEXT} options={{ contentMode: 'invert', noDelay: true }} />
     </div>
   );
@@ -543,28 +543,33 @@ describe('useTooltipDirective', () => {
     expect(tooltipContents()[0]!.textContent).toBe('Second');
   });
 
-  it('places the tooltip on top by default', async () => {
-    renderAnchor('Message', { noDelay: true });
+  // As in Vue: a placement modifier wins. Otherwise an object value's `placement` key wins when present, even as
+  // undefined, which leaves DtTooltip's default ('top'). Otherwise the arg, and then 'top'.
+  it.each<[string, DtTooltipDirectiveValue, DtTooltipDirectiveOptions, TooltipDirection]>([
+    ['on top by default', 'Message', {}, 'top'],
+    ['by the arg, for a string', 'Message', { arg: 'right' }, 'right'],
+    ['by the arg, for an object without a placement', { message: 'Message' }, { arg: 'right' }, 'right'],
+    ['by an object\'s placement when there is no arg', { message: 'Message', placement: 'left' }, {}, 'left'],
+    ['by an object\'s placement, over the arg', { message: 'Message', placement: 'left' }, { arg: 'right' }, 'left'],
+    [
+      'by DtTooltip\'s default when an object sets placement to undefined, over the arg',
+      { message: 'Message', placement: undefined },
+      { arg: 'right' },
+      'top',
+    ],
+    ['by a placement modifier, over the arg', 'Message', { arg: 'right', placement: 'bottom-end' }, 'bottom-end'],
+    [
+      'by a placement modifier, over an object\'s placement and the arg',
+      { message: 'Message', placement: 'left' },
+      { arg: 'right', placement: 'bottom-end' },
+      'bottom-end',
+    ],
+  ])('places the tooltip %s', async (_, value, options, placement) => {
+    renderAnchor(value, { ...options, noDelay: true });
     await flushPromises();
     mouseEnter(anchor());
 
-    expect(tippyProps(anchor()).placement).toBe('top');
-  });
-
-  it('takes the placement option, over the placement of an object value', async () => {
-    renderAnchor({ message: 'Message', placement: 'left', delay: false }, { placement: 'bottom-end' });
-    await flushPromises();
-    mouseEnter(anchor());
-
-    expect(tippyProps(anchor()).placement).toBe('bottom-end');
-  });
-
-  it('takes the placement of an object value when there is no placement option', async () => {
-    renderAnchor({ message: 'Message', placement: 'left', delay: false });
-    await flushPromises();
-    mouseEnter(anchor());
-
-    expect(tippyProps(anchor()).placement).toBe('left');
+    expect(tippyProps(anchor()).placement).toBe(placement);
   });
 
   it('applies the inverted option', async () => {
