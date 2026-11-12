@@ -1,3 +1,3 @@
-import { LAYOUT_VALUES } from '@/common/constants';
+import { LAYOUT_SIZE_VALUES } from '@/common/constants';
 
-export const FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES = ['anchor', ...LAYOUT_VALUES];
+export const FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES = ['anchor', ...LAYOUT_SIZE_VALUES];

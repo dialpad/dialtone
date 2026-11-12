@@ -638,11 +638,15 @@ describe('DtFilterPill Tests', function () {
       expect(dialog.style.minInlineSize).toBe('240px');
     });
 
+    it('rejects percentage overlay minimums', () => {
+      expect(DtFilterPill.props.overlayMinInlineSize.validator('100p')).toBe(false);
+    });
+
     it('updates custom and natural sizing while retaining the maximum width cap', async () => {
       vi.spyOn(button.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 240, 32));
       await button.trigger('click');
       const dialog = document.getElementById(button.attributes('aria-controls'));
-      for (const [value, variable] of [['1px', '1px'], ['100p', '100-percent'], ['300', '300']]) {
+      for (const [value, variable] of [['1px', '1px'], ['300', '300']]) {
         await wrapper.setProps({ overlayMinInlineSize: value });
         expect(dialog.style.minInlineSize).toBe(`var(--dt-layout-${variable})`);
       }
@@ -688,7 +692,7 @@ describe('DtFilterPill Tests', function () {
 
   describe('Overlay Class Props Tests', () => {
     it.each([
-      [undefined, ['d-py-100', 'd-px-150'], 'd-pis-200'],
+      [undefined, ['d-filter-pill__popover-content'], 'd-pis-200'],
       ['large', ['d-p-200'], 'd-pis-200'],
       ['none', [], null],
     ])('Should render popover padding %s without changing header/footer defaults', async (padding, classes, edgeClass) => {
@@ -699,7 +703,9 @@ describe('DtFilterPill Tests', function () {
 
       const contentClasses = [...document.querySelector('[data-qa="dt-popover-content"]').classList];
       expect(contentClasses).toContain('d-popover__content');
-      expect(new Set(contentClasses.filter(name => /^d-p(?:[xy])?-\d+$/.test(name)))).toEqual(new Set(classes));
+      const paddingClasses = contentClasses.filter(name =>
+        /^(d-p(?:[xy])?-\d+|d-filter-pill__popover-content)$/.test(name));
+      expect(new Set(paddingClasses)).toEqual(new Set(classes));
       for (const selector of ['.d-popover__header', '.d-popover__footer']) {
         expect(document.querySelector(selector).classList.contains('d-pis-200')).toBe(edgeClass !== null);
       }
@@ -707,18 +713,17 @@ describe('DtFilterPill Tests', function () {
 
     describe('When popover class props are set', () => {
       it.each([
-        ['popoverContentClass', 'contentClass', 'custom-content-class'],
-        ['popoverHeaderClass', 'headerWrapperClass', 'custom-header-class'],
-        ['popoverFooterClass', 'footerWrapperClass', 'custom-footer-class'],
-        ['popoverDialogClass', 'dialogClass', 'custom-dialog-class'],
-      ])('Should forward %s to DtPopover', (propName, popoverPropName, className) => {
-        mockProps = { [propName]: className, popoverPadding: 'medium' };
-
+        ['popoverContentClass', '.d-popover__content', 'custom-content-class'],
+        ['popoverHeaderClass', '.d-popover__header', 'custom-header-class'],
+        ['popoverFooterClass', '.d-popover__footer', 'custom-footer-class'],
+        ['popoverDialogClass', '.d-popover__dialog', 'custom-dialog-class'],
+      ])('Should apply %s to the popover element', async (propName, selector, className) => {
+        mockProps = { [propName]: className };
+        mockSlots = { headerContent: 'Heading', footerContent: 'Footer' };
         updateWrapper();
+        await button.trigger('click');
 
-        const popover = wrapper.findComponent(DtPopover);
-
-        expect(popover.props(popoverPropName)).toBe(className);
+        expect(document.querySelector(selector).classList.contains(className)).toBe(true);
       });
     });
 

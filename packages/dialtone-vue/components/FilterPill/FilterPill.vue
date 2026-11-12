@@ -649,9 +649,9 @@ export default {
 
     /**
      * Minimum overlay inline size (aka left/right extent). Anchor uses the entire pill, including Clear.
-     * Layout values follow DtBox: 300 maps to --dt-layout-300; 0 uses natural sizing.
+     * Fixed layout values follow DtBox: 300 maps to --dt-layout-300; 0 uses natural sizing. Percentages are not supported.
      * The popoverMaxWidth cap still applies.
-     * @values anchor, 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+     * @values anchor, 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600
      */
     overlayMinInlineSize: {
       type: String,
@@ -669,7 +669,7 @@ export default {
     },
 
     /**
-     * Padding preset for the popover content. Omit for d-py-100 d-px-150.
+     * Padding preset for the popover content. Omit for compact block 100 / inline 150 spacing.
      * Set large to restore the previous content padding.
      * @values none, small, medium, large
      */
@@ -847,7 +847,7 @@ export default {
         const defaultPadding = this.popoverPadding === undefined;
         props.padding = defaultPadding ? 'none' : this.popoverPadding;
         props['content-class'] = defaultPadding
-          ? ['d-py-100 d-px-150', this.popoverContentClass]
+          ? ['d-filter-pill__popover-content', this.popoverContentClass]
           : this.popoverContentClass;
         props['header-wrapper-class'] = defaultPadding
           ? [POPOVER_HEADER_FOOTER_PADDING_CLASSES.large, this.popoverHeaderClass]
@@ -1029,7 +1029,7 @@ export default {
       if (minimum === 'anchor') {
         minimum = `${this.measureAnchorInlineSize()}px`;
       } else {
-        minimum = minimum === '0' ? '0px' : `var(--dt-layout-${minimum.replace(/p$/, '-percent')})`;
+        minimum = minimum === '0' ? '0px' : `var(--dt-layout-${minimum})`;
       }
       if (minimum && this.popoverMaxWidth && this.popoverMaxWidth !== 'none') {
         return `min(${minimum}, ${this.popoverMaxWidth})`;

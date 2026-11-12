@@ -310,10 +310,11 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 
 Both overlays default to a minimum inline size matching the entire FilterPill, including its Clear button.
 Longer content can make the overlay wider. Set `overlay-min-inline-size="300"` to use `--dt-layout-300`,
-following DtBox's layout scale. Use `overlay-min-inline-size="0"` for natural content sizing.
+following DtBox's fixed layout scale; percentage values are not supported. Use `overlay-min-inline-size="0"` for natural content sizing.
 The default is `anchor`; `popover-max-width` still caps the overlay.
 
-Popover content defaults to `d-py-100 d-px-150`. Set `popover-padding` to `none`, `small`, `medium`, or `large`
+Popover content defaults to block spacing `100` and inline spacing `150`. Padding utilities passed through
+`popover-content-class` override these defaults. Set `popover-padding` to `none`, `small`, `medium`, or `large`
 for a uniform padding preset; `large` restores the previous `d-p-200` content padding. For custom padding,
 use `popover-padding="none"` with `popover-content-class`, for example `popover-content-class="d-py-150 d-px-200"`.
 Header/footer spacing and dropdown padding are unchanged.
