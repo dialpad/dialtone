@@ -1,0 +1,46 @@
+packages/dialtone-vue/components/Dropdown/DropdownVariants.story.vue
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 18-19,49,56,104,111,159-160,202,204
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_615f40a55cd43a 6
+  s_7f1d1d64baa803::t_caaa43abbe5270 54
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 252
+  s_7f1d1d64baa803::t_458736088cf6ed 251
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 26,28-31
+  s_7f1d1d64baa803::t_8e58a8e29ce18f 27
+packages/dialtone-vue/release-ci.config.cjs
+  s_7f1d1d64baa803::t_131d847364efc4 15
+packages/dialtone-vue/components/Dropdown/DropdownDefault.story.vue
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 19,26
+scripts/build-dialtone-vue-docs.mjs
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 5,76
+packages/dialtone-docs/src/content/development/development-component-workflow.md
+  s_7f1d1d64baa803::t_5b69f562a2e126 6,54,136,156-163
+  s_7f1d1d64baa803::t_1971ba0c7d130f 164-165
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 18,27-28,37,50-51,99,101,112,127-128
+scripts/lib/vue-slot-bindings.mjs
+  s_7f1d1d64baa803::t_edb67ebe6cb054 3,6,8-15,17
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 1-2,4-5,7,16,18-23
+scripts/tests/vue-slot-bindings.test.mjs
+  s_7f1d1d64baa803::t_9bfeeb3fb31f51 4,23
+  s_7f1d1d64baa803::t_f6c88da8708c0e 25
+  s_7f1d1d64baa803::t_6cb0bb7c4914a0 1-3,5-22,24,26-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5bd82e5dc8b4c5a0e4d1e21a22cb3ff600a0e57c",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": null
+    }
+  }
+}

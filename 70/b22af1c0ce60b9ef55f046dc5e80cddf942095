@@ -1,0 +1,21 @@
+packages/dialtone-react/common/slots.test.tsx
+  s_b1d3f159399ce5::t_938737217580c4 1-27
+packages/dialtone-react/common/slots.ts
+  s_b1d3f159399ce5::t_f78c98b58b8910 1,10,12-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "70b22af1c0ce60b9ef55f046dc5e80cddf942095",
+  "prompts": {},
+  "sessions": {
+    "s_b1d3f159399ce5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bac43748-fc5f-4dae-b195-4fd2dc23b846",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
