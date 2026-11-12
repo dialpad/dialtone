@@ -2,6 +2,15 @@ import { useEffectEvent, useLayoutEffect, useState } from 'react';
 import { findParentMode, getOppositeMode, getRootContrast } from '../../components/ModeIsland/Utils';
 import type { ContentMode } from '../mode_constants';
 
+/** ModeMixin's props, for a component's props to extend. */
+export interface ModeProps {
+  /**
+   * Applies a color mode to the positioned content element. `light` and `dark` are explicit overrides. `invert`
+   * computes the opposite of the nearest ancestor's mode and stays reactive.
+   */
+  contentMode?: ContentMode | null;
+}
+
 /** What a positioned component spreads on its content element: Vue's `v-bind="modeAttrs"`. */
 export interface ModeAttrs {
   'data-dt-mode'?: string;
