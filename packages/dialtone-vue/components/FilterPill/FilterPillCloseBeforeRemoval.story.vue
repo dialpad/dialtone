@@ -1,9 +1,14 @@
 <template>
-  <dt-stack gap="500">
+  <dt-stack
+    as="section"
+    :aria-label="useDropdown ? 'Dropdown filter close before removal' : 'Popover filter close before removal'"
+    gap="500"
+  >
     <dt-filter-pill
       v-if="visible"
       v-model:open="open"
       v-model:selected="selected"
+      popover-append-to="parent"
       :use-dropdown="useDropdown"
       :options="options"
       label="Removable teams"

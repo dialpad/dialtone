@@ -1,5 +1,9 @@
 <template>
-  <dt-stack gap="500">
+  <dt-stack
+    as="section"
+    :aria-label="initialMenuOpen ? 'Initially open controlled FilterPill selection' : 'Controlled FilterPill selection'"
+    gap="500"
+  >
     <dt-stack
       direction="row"
       gap="400"
@@ -7,6 +11,7 @@
     >
       <dt-filter-pill
         v-model:open="statusOpen"
+        popover-append-to="parent"
         label="Filter by"
         use-dropdown
         :options="statusOptions"
@@ -46,6 +51,7 @@
       </dt-filter-pill>
       <dt-filter-pill
         v-model:selected="type"
+        popover-append-to="parent"
         label="Type"
         use-dropdown
         neutral-value="all"
@@ -57,6 +63,7 @@
       </dt-filter-pill>
       <dt-filter-pill
         v-model:selected="outcome"
+        popover-append-to="parent"
         label="Outcome"
         use-dropdown
         neutral-value=""
@@ -127,6 +134,7 @@
       class="d-fl-wrap"
     >
       <dt-filter-pill
+        popover-append-to="parent"
         label="Immediate teams"
         :options="teamOptions"
         :selected="teams"
@@ -134,6 +142,7 @@
       />
       <dt-filter-pill
         v-model:selected="deferredTeams"
+        popover-append-to="parent"
         label="Deferred teams"
         defer-selection
         :options="teamOptions"
