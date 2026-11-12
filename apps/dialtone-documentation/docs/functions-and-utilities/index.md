@@ -3,7 +3,7 @@ title: Vue Utilities
 description: Consumer-facing directives and utilities exported by Dialtone Vue.
 status: new
 thumb: true
-keywords: ["directive", "function", "utility", "utilities", "plugin", "v-dt-focusgroup", "v-dt-mode", "v-dt-tooltip", "v-dt-scrollbar", "keyboard navigation", "roving tabindex", "dark mode", "date", "time", "localization", "i18n", "lazy show", "DtLazyShow", "accessibility", "a11y", "internationalization", "theme"]
+keywords: ["directive", "function", "utility", "utilities", "plugin", "v-dt-focusgroup", "v-dt-mode", "v-dt-tooltip", "v-dt-scrollbar", "keyboard navigation", "roving tabindex", "dark mode", "date", "time", "phone", "phone number", "localization", "i18n", "lazy show", "DtLazyShow", "accessibility", "a11y", "internationalization", "theme"]
 ---
 
 ## Directives
@@ -25,6 +25,7 @@ Stateless helpers for formatting and transforming data.
 | Function | Description |
 | --- | --- |
 | [Date and Time](https://dialtone.dialpad.com/vue/?path=/docs/functions-date-and-time--docs) | Format dates, relative timestamps, and durations with i18n locale support |
+| [Phone Number](https://dialtone.dialpad.com/vue/?path=/docs/functions-phone-number--docs) | Format phone numbers for display, following the content guide |
 
 ## Utilities
 
