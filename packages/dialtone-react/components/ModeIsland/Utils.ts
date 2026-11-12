@@ -1,5 +1,3 @@
-// The parts of dialtone-vue's components/ModeIsland/Utils.js that useMode needs. ModeIsland ports the rest.
-
 /** Get the opposite mode (light <-> dark). */
 export function getOppositeMode (currentMode: string | null | undefined): 'light' | 'dark' {
   return currentMode === 'light' ? 'dark' : 'light';
@@ -17,6 +15,13 @@ export function getRootContrast (): string {
   if (typeof document === 'undefined') return 'default';
   const rootContrast = document.documentElement.getAttribute('data-dt-contrast');
   return rootContrast || 'default';
+}
+
+/** The material on the root HTML element, or 'sandstone'. Returns the default during SSR, where no DOM exists. */
+export function getRootMaterial (): string {
+  if (typeof document === 'undefined') return 'sandstone';
+  const rootMaterial = document.documentElement.getAttribute('data-dt-material');
+  return rootMaterial || 'sandstone';
 }
 
 /** The mode of the nearest ancestor with a data-dt-mode attribute, or the root mode. */
