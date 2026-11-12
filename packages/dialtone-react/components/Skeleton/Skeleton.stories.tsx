@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtStack } from '../Stack';
 import { DtSkeleton, type DtSkeletonProps } from './Skeleton';
 
 export const argsData = {
@@ -112,8 +112,7 @@ function SkeletonVariants (args: DtSkeletonProps) {
       <h2 className="d-mbe-400">
         Prefabricated shapes
       </h2>
-      <StandIn for="stack">
-        <section data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-mbe-800">
+      <DtStack as="section" direction="row" gap="0" className="d-mbe-800">
           <div className="d-p-50 d-fl1 d-w25p">
             <h3>Avatars</h3>
             <p className="d-mbe-300">
@@ -213,13 +212,11 @@ function SkeletonVariants (args: DtSkeletonProps) {
               ariaLabel={args.ariaLabel}
             />
           </div>
-        </section>
-      </StandIn>
+      </DtStack>
       <h2 className="d-mbe-400">
         Prefabricated combinations
       </h2>
-      <StandIn for="stack">
-        <section data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-mbe-800">
+      <DtStack as="section" direction="row" gap="0" className="d-mbe-800">
           <div className="d-p-50 d-fl1 d-w50p">
             <h3>Text List</h3>
             <p className="d-mbe-300" />
@@ -304,8 +301,7 @@ function SkeletonVariants (args: DtSkeletonProps) {
               offset={0.5}
             />
           </div>
-        </section>
-      </StandIn>
+      </DtStack>
     </div>
   );
 }
