@@ -1,0 +1,117 @@
+packages/dialtone-query-core/src/component-identity.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 1-90
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props-consumer.js
+  s_179e5bad29f60f::t_cd63da23516cf2 1-284
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentVueApi.vue
+  s_179e5bad29f60f::t_cd63da23516cf2 2,26,53,55,75,113,127
+packages/dialtone-query-core/src/data.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 6,16
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_179e5bad29f60f::t_cd63da23516cf2 168
+apps/dialtone-documentation/docs/guides/migration/flex-to-stack/index.md
+  s_179e5bad29f60f::t_cd63da23516cf2 14,224,409,415,418,524
+scripts/lib/vue-component-identity.mjs
+  s_179e5bad29f60f::t_cd63da23516cf2 1-108
+packages/dialtone-cli/tests/data-resolver.test.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 2,4,7,93-134,138
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_179e5bad29f60f::t_cd63da23516cf2 177,183-184,219-221
+packages/eslint-plugin-dialtone/lib/rules/deprecated-class-props.js
+  s_179e5bad29f60f::t_cd63da23516cf2 7,50-66,128,151-152,161
+packages/dialtone-cli/src/formatters.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 6,15,20-23,115,190-191,242,274-277
+packages/dialtone-query-core/README.md
+  s_179e5bad29f60f::t_cd63da23516cf2 71-77,81-85
+packages/dialtone-vue/components/Stack/Stack.vue
+  s_179e5bad29f60f::t_cd63da23516cf2 7,53-58
+  s_179e5bad29f60f::t_927f08da287177 59-60
+packages/dialtone-cli/src/commands/prompt.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 2,6,30-31,44
+packages/eslint-plugin-dialtone/lib/util/consumer-component-data.js
+  s_179e5bad29f60f::t_cd63da23516cf2 1-96
+apps/dialtone-documentation/scripts/lib/transform-vue-api.test.mjs
+  s_179e5bad29f60f::t_cd63da23516cf2 1-53
+packages/dialtone-vue/components/ModeIsland/ModeIsland.vue
+  s_179e5bad29f60f::t_cd63da23516cf2 26-33
+packages/dialtone-cli/tests/component-exports.test.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 1-38
+packages/dialtone-query-core/src/types.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 58-75,83-84
+packages/dialtone-query-core/tests/tools/components.test.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 4,133-261
+  s_179e5bad29f60f::t_33f957c9364b05 262
+packages/dialtone-cli/src/component-exports.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 1-52
+packages/dialtone-vue/components/Stack/Stack.stories.js
+  s_179e5bad29f60f::t_cd63da23516cf2 5,18,59-61,116-122
+  s_179e5bad29f60f::t_af12251357ff22 123-124
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  s_179e5bad29f60f::t_cd63da23516cf2 9,22,46,55,67,113,120,125,167,187,195,198-202,204,221-223,225,249-250
+.github/CODEOWNERS
+  s_179e5bad29f60f::t_cd63da23516cf2 1
+apps/dialtone-documentation/docs/components/mode-island.md
+  s_179e5bad29f60f::t_cd63da23516cf2 120-141,235,287-297,302-331,391,602-605,607,609,628
+apps/dialtone-documentation/scripts/lib/transform-vue-api.mjs
+  s_179e5bad29f60f::t_cd63da23516cf2 9,39,75-80,98
+packages/dialtone-cli/src/data-resolver.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 30,33,57-58,100,103,106-107,139-141,148-174,179,181-186,198
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointShaders.js
+  s_179e5bad29f60f::t_cd63da23516cf2 1-152
+packages/dialtone-cli/tests/formatters.test.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 8-12,34-39,43-50,52,56-80
+  s_179e5bad29f60f::t_d5b4cdba7eccdf 81
+packages/dialtone-vue/directives/mode_directive/mode.mdx
+  s_179e5bad29f60f::t_cd63da23516cf2 17-27,105-106
+apps/dialtone-documentation/docs/_data/stack.json
+  s_179e5bad29f60f::t_cd63da23516cf2 24-27
+  s_179e5bad29f60f::t_935fa58629b825 23
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props.js
+  s_179e5bad29f60f::t_cd63da23516cf2 7-8,30,221
+packages/dialtone-css/lib/build/less/components/stack.less
+  s_179e5bad29f60f::t_cd63da23516cf2 11,148-153
+  s_179e5bad29f60f::t_2806f6951abb5d 154-155
+scripts/build-dialtone-vue-docs.mjs
+  s_179e5bad29f60f::t_cd63da23516cf2 4,6,45-51,56-58,93,109-110,118
+apps/dialtone-documentation/scripts/lib/utils.mjs
+  s_179e5bad29f60f::t_cd63da23516cf2 5-30
+packages/eslint-plugin-dialtone/docs/rules/deprecated-class-props.md
+  s_179e5bad29f60f::t_cd63da23516cf2 19,23-44
+  s_179e5bad29f60f::t_cb9c0877431421 45
+packages/dialtone-query-core/src/index.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 17-18,27-28
+  s_179e5bad29f60f::t_1194694790ece8 29
+packages/dialtone-vue/components/Stack/StackDefault.story.vue
+  s_179e5bad29f60f::t_cd63da23516cf2 6
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 35,42,44,67,70,77-84
+scripts/tests/vue-component-identity.test.mjs
+  s_179e5bad29f60f::t_cd63da23516cf2 1-93
+packages/dialtone-vue/components/Stack/Stack.test.js
+  s_179e5bad29f60f::t_cd63da23516cf2 42-55
+packages/dialtone-vue/components/Stack/StackWrapping.story.vue
+  s_179e5bad29f60f::t_cd63da23516cf2 1-36
+packages/combinator/src/variants/variants_stack.js
+  s_179e5bad29f60f::t_cd63da23516cf2 45-62
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointRenderer.js
+  s_179e5bad29f60f::t_cd63da23516cf2 1-351
+apps/dialtone-documentation/docs/components/stack.md
+  s_179e5bad29f60f::t_cd63da23516cf2 131-150
+packages/dialtone-query-core/src/tools/components.ts
+  s_179e5bad29f60f::t_cd63da23516cf2 6,46-48,61-64,174,220,326-329
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "78e17bc98234bba327a6fe578beb16fec2ff212c",
+  "prompts": {},
+  "sessions": {
+    "s_179e5bad29f60f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "febf809e-180f-4ba2-8dfb-38a07a6a2c26",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}

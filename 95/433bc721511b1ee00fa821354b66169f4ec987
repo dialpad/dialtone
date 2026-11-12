@@ -1,0 +1,25 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-11-3.md
+  s_cfda0fd8d1a291::t_bdac85561d3161 1-3,5-304
+  s_cfda0fd8d1a291::t_b0533536c28b33 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "95433bc721511b1ee00fa821354b66169f4ec987",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_cfda0fd8d1a291": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a1007d6-e12a-49b8-9261-a379c0c3d4fe",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_8e6e249b1cae6d::t_2292696384c245 328
+  s_8e6e249b1cae6d::t_bb02643899c171 209
+packages/dialtone-vue/components/ModeIsland/Utils.js
+  s_8e6e249b1cae6d::t_3e8656913fb471 11-12,16,22-23,27,33-34,38
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_8e6e249b1cae6d::t_77fc47174ec497 439
+  s_8e6e249b1cae6d::t_1ed6b899eab424 517-518
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "cd174cadb8aff11fe37b33ea0a764a13a4f8e611",
+  "prompts": {},
+  "sessions": {
+    "s_8e6e249b1cae6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4c45e3b6-f876-409b-9a9a-0ca39f67abc0",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_edb6000ea1a4b6::t_21d6697d0e17de 120-143
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_edb6000ea1a4b6::t_10a1977ea74fbc 56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5513c2230d669371f572064c44330385e5ec838b",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
