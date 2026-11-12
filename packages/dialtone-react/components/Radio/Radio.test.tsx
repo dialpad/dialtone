@@ -24,7 +24,7 @@ const baseProps = {
 
 const radioWith = (props: DtRadioProps = {}) => <DtRadio {...baseProps} {...props} />;
 
-const inGroup = (ui: ReactElement, groupContext: GroupContext, setGroupValue = () => {}) => (
+const inGroup = (ui: ReactElement, groupContext: GroupContext, setGroupValue: (value: unknown) => void = () => {}) => (
   <InputGroupContext value={{ groupContext, setGroupValue }}>{ui}</InputGroupContext>
 );
 
@@ -202,15 +202,15 @@ describe('DtRadio Tests', () => {
         // Vue's test clicks the root, which never selects the radio, so it passes enabled too. The input is clicked here.
         it('no events are emitted', async () => {
           cleanup(); // the describe's beforeEach rendered a radio without the handler
-          const onValueChange = vi.fn();
-          const { rerender } = renderRadio({ disabled: true, onValueChange });
+          const onChange = vi.fn();
+          const { rerender } = renderRadio({ disabled: true, onChange });
 
           await userEvent.click(getInput());
-          expect(onValueChange).not.toHaveBeenCalled();
+          expect(onChange).not.toHaveBeenCalled();
 
-          rerender(radioWith({ onValueChange }));
+          rerender(radioWith({ onChange }));
           await userEvent.click(getInput());
-          expect(onValueChange).toHaveBeenCalledTimes(1);
+          expect(onChange).toHaveBeenCalledTimes(1);
         });
       });
     });
@@ -305,12 +305,12 @@ describe('DtRadio Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the radio is selected', () => {
         it('should emit update:modelValue event with Value', async () => {
-          const onValueChange = vi.fn();
-          renderRadio({ onValueChange });
+          const values: string[] = [];
+          renderRadio({ onChange: event => values.push(event.target.value) });
 
           await userEvent.click(getInput());
 
-          expect(onValueChange).toHaveBeenCalledWith(MOCK_VALUE);
+          expect(values).toEqual([MOCK_VALUE]);
         });
       });
     });
@@ -319,12 +319,12 @@ describe('DtRadio Tests', () => {
       describe('When there is a provided modelValue listener', () => {
         describe('When the radio is clicked', () => {
           it('Should call update:modelValue handler once', async () => {
-            const onValueChange = vi.fn();
-            renderRadio({ onValueChange });
+            const onChange = vi.fn();
+            renderRadio({ onChange });
 
             await userEvent.click(getInput());
 
-            expect(onValueChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenCalledTimes(1);
           });
         });
       });
@@ -355,10 +355,10 @@ describe('DtRadio Tests', () => {
       describe('When the radio group is disabled', () => {
         describe('When the radio is clicked', () => {
           it('no update:modelValue events are emitted', async () => {
-            const onValueChange = vi.fn();
+            const onChange = vi.fn();
             const setGroupValue = vi.fn();
             render(inGroup(
-              radioWith({ description: 'Description', onValueChange }),
+              radioWith({ description: 'Description', onChange }),
               groupContext(`not${MOCK_VALUE}`, true),
               setGroupValue,
             ));
@@ -366,7 +366,7 @@ describe('DtRadio Tests', () => {
             await userEvent.click(getInput());
 
             expect(getInput()).toBeDisabled();
-            expect(onValueChange).not.toHaveBeenCalled();
+            expect(onChange).not.toHaveBeenCalled();
             expect(setGroupValue).not.toHaveBeenCalled();
           });
         });
@@ -384,12 +384,14 @@ describe('DtRadio Tests', () => {
 
         describe('When the radio has a validation state', () => {
           it('has validation classes', () => {
+            // The radio's own state differs from the group's: the group's wins.
             render(inGroup(
-              radioWith({ description: 'Description' }),
+              radioWith({ description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.CRITICAL }),
               groupContext(MOCK_VALUE, false, VALIDATION_MESSAGE_TYPES.WARNING),
             ));
 
             expect(getInput()).toHaveClass(RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.WARNING]);
+            expect(getInput()).not.toHaveClass(RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.CRITICAL]);
           });
         });
       });
@@ -460,15 +462,23 @@ describe('DtRadio Tests', () => {
 
 // React-only: where the port had to choose, beyond what Vue's tests check.
 describe('DtRadio, React only', () => {
-  it('runs the consumer\'s onChange after onValueChange', async () => {
+  it('runs the consumer\'s onChange after reporting to the group, with the value in event.target.value', async () => {
     const calls: string[] = [];
-    renderRadio({
-      onValueChange: value => calls.push(`onValueChange ${value}`),
-      onChange: event => calls.push(`onChange ${event.currentTarget.checked}`),
-    });
+    const setGroupValue = (value: unknown) => calls.push(`group ${value}`);
+    render(inGroup(
+      radioWith({ onChange: event => calls.push(`onChange ${event.target.value}`) }),
+      { name: MOCK_GROUP_NAME, selectedValue: 'other' },
+      setGroupValue,
+    ));
     await userEvent.click(getInput());
 
-    expect(calls).toEqual([`onValueChange ${MOCK_VALUE}`, 'onChange true']);
+    expect(calls).toEqual([`group ${MOCK_VALUE}`, `onChange ${MOCK_VALUE}`]);
+  });
+
+  it('keeps a grouped radio with a numeric value checked once the group holds its string', () => {
+    render(inGroup(radioWith({ value: 2 }), { name: MOCK_GROUP_NAME, selectedValue: '2' }));
+
+    expect(getInput()).toBeChecked();
   });
 
   it('passes the consumer\'s onFocus and onBlur to the input, which Vue drops as declared emits', async () => {
@@ -507,26 +517,22 @@ describe('DtRadio, React only', () => {
     expect(getInput()).toBeChecked();
   });
 
-  it('doesn\'t call onValueChange when the group\'s selected value already equals the radio\'s', async () => {
-    const onValueChange = vi.fn();
+  it('doesn\'t report to the group when its selected value already equals the radio\'s', async () => {
     const setGroupValue = vi.fn();
-    render(inGroup(radioWith({ onValueChange }), { name: MOCK_GROUP_NAME, selectedValue: MOCK_VALUE }, setGroupValue));
+    render(inGroup(radioWith(), { name: MOCK_GROUP_NAME, selectedValue: MOCK_VALUE }, setGroupValue));
 
     await userEvent.click(getInput());
 
-    expect(onValueChange).not.toHaveBeenCalled();
     expect(setGroupValue).not.toHaveBeenCalled();
   });
 
   it('reports a click inside a group to the group, with the radio\'s value', async () => {
-    const onValueChange = vi.fn();
     const setGroupValue = vi.fn();
-    render(inGroup(radioWith({ onValueChange }), { name: MOCK_GROUP_NAME, selectedValue: 'other' }, setGroupValue));
+    render(inGroup(radioWith(), { name: MOCK_GROUP_NAME, selectedValue: 'other' }, setGroupValue));
 
     await userEvent.click(getInput());
 
     expect(setGroupValue).toHaveBeenCalledWith(MOCK_VALUE);
-    expect(onValueChange).toHaveBeenCalledWith(MOCK_VALUE);
   });
 
   it('doesn\'t put `indeterminate` on the input', () => {

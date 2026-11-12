@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
+import { DtStack } from '../Stack';
 import { DtRadio, type DtRadioProps } from './Radio';
 
 // Slots are args named as in Vue: `default` (the label) and `descriptionSlot` (the description). Vue's template
@@ -19,7 +19,7 @@ export const argsData = {
   label: 'Radio',
   description: '',
   validationState: '',
-  onValueChange: action('update:modelValue'),
+  onChange: action('update:modelValue'),
   onFocus: action('focusin'),
   onBlur: action('focusout'),
 } satisfies Partial<RadioStoryArgs>;
@@ -90,8 +90,9 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onValueChange: {
-    // Vue's `update:modelValue`: "Event fired to sync the modelValue prop with the parent component".
+  onChange: {
+    // Vue's `update:modelValue`: "Event fired to sync the modelValue prop with the parent component". The value is
+    // `event.target.value`.
     description: 'Event fired to sync the modelValue prop with the parent component',
     table: {
       type: { summary: 'event' },
@@ -149,7 +150,7 @@ function RadioDefault ({ default: _default, descriptionSlot, ...args }: RadioSto
       descriptionChildProps={args.descriptionChildProps}
       messages={args.messages}
       className={args.className}
-      onValueChange={args.onValueChange}
+      onChange={args.onChange}
       onFocus={args.onFocus}
       onBlur={args.onBlur}
     />
@@ -159,12 +160,10 @@ function RadioDefault ({ default: _default, descriptionSlot, ...args }: RadioSto
 // RadioVariants.story.vue. Vue's `checked` attribute lands on the input and leaves it free to change: defaultChecked.
 function RadioVariants () {
   return (
-    <StandIn for="stack">
-      <div
-        id="components-radio--variants-container"
-        data-qa="dt-stack"
-        className="d-stack d-stack--gap-100 d-stack--justify-start"
-      >
+    <DtStack
+      id="components-radio--variants-container"
+      gap="100"
+    >
         {/* Default */}
         <DtRadio
           name="Value"
@@ -330,8 +329,7 @@ function RadioVariants () {
           messages={[{ message: 'Positive', type: VALIDATION_MESSAGE_TYPES.POSITIVE }]}
           defaultChecked
         />
-      </div>
-    </StandIn>
+    </DtStack>
   );
 }
 

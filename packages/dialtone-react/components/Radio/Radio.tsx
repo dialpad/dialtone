@@ -49,12 +49,6 @@ interface DtRadioOwnProps
    */
   labelStrength?: TextStrength | null;
 
-  /**
-   * Vue's `update:modelValue`: the radio was selected. Called with the radio's value (the input's `value`, so always a
-   * string), unless the group's selected value already equals it.
-   */
-  onValueChange?: (value: string) => void;
-
   /** Radio label content (Vue's default slot). Defaults to `label`. */
   children?: ReactNode;
 }
@@ -65,6 +59,10 @@ interface DtRadioOwnProps
  */
 export interface DtRadioProps extends DtRadioOwnProps,
   Omit<ComponentPropsWithRef<'input'>, keyof DtRadioOwnProps | 'type'> {}
+
+/** The group stores the input's string value, so compare as strings: `value={2}` matches the group's `'2'`. */
+const isSelected = (groupValue: unknown, value: string | number) =>
+  groupValue !== undefined && groupValue !== null && String(groupValue) === String(value);
 
 const INPUT_VALIDATION_CLASSES: Readonly<Partial<Record<string, string>>> = RADIO_INPUT_VALIDATION_CLASSES;
 
@@ -92,7 +90,6 @@ export function DtRadio ({
   defaultChecked = false,
   // Vue's CheckableMixin declares `indeterminate`, which Radio never reads. Declared so it stays off the input.
   indeterminate: _indeterminate,
-  onValueChange,
   messagesClass = '',
   messagesChildProps = {},
   showMessages = true,
@@ -115,7 +112,7 @@ export function DtRadio ({
   // change, so a standalone radio is checked by the browser, and a sibling of the same name unchecks it natively.
   const isControlled = hasGroup || checked !== undefined;
   const checkedProps = isControlled
-    ? { checked: hasGroup ? radioGroupValue === value : checked }
+    ? { checked: hasGroup ? isSelected(radioGroupValue, value) : checked }
     : { defaultChecked };
 
   const resolvedLabelSize = labelSize ?? 300;
@@ -145,11 +142,8 @@ export function DtRadio ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = event.currentTarget;
-    if (inputValue !== radioGroupValue) {
-      // update provided value if injected
-      setGroupValue(inputValue);
-      onValueChange?.(inputValue);
-    }
+    // update provided value if injected, unless it already holds this one
+    if (!isSelected(radioGroupValue, inputValue)) setGroupValue(inputValue);
     onChange?.(event);
   };
 
