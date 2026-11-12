@@ -6,6 +6,7 @@ import { cx, type ClassValue } from '../../common/cx';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
 import { DtIconDpPhone } from '../../icons';
 import { useModeRegion } from '../ModeIsland/ModeDirective';
+import { DtStack } from '../Stack';
 import { DtTooltip, type DtTooltipProps } from './Tooltip';
 import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES, type TooltipDirection } from './TooltipConstants';
 
@@ -362,17 +363,14 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
   return (
     <div id="forms-radio--variants-container" className="d-pbs-200 d-px-800">
       <style>{VARIANTS_PURPLE_THEME_CSS}</style>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-stack--justify-center d-w100p d-mbe-800 d-my-400">
-          <OutlinedButton id="external-tooltip-anchor">
-            External anchor
-          </OutlinedButton>
-        </div>
-      </StandIn>
+      <DtStack direction="row" gap="0" justify="center" className="d-w100p d-mbe-800 d-my-400">
+        <OutlinedButton id="external-tooltip-anchor">
+          External anchor
+        </OutlinedButton>
+      </DtStack>
       {/* Arrow Description */}
       {directionRows.map((rowDirection, i) => (
-        <StandIn for="stack" key={i}>
-          <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-center d-my-200">
+        <DtStack key={i} direction="row" gap="0" align="center" justify="center" className="d-my-200">
             {rowDirection.map(direction => (
               <div key={direction} className="d-mx-100">
                 {direction !== null && (
@@ -390,11 +388,9 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
                 )}
               </div>
             ))}
-          </div>
-        </StandIn>
+        </DtStack>
       ))}
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-center d-w100p">
+      <DtStack direction="row" gap="0" align="center" justify="center" className="d-w100p">
           <div id="circle-button-tooltip-label">
             Circle button tooltip
           </div>
@@ -413,10 +409,8 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
               </StandIn>
             )}
           />
-        </div>
-      </StandIn>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-stack--justify-center d-w100p">
+      </DtStack>
+      <DtStack direction="row" gap="0" justify="center" className="d-w100p">
           {/* Text */}
           <DtTooltip
             className="d-my-100"
@@ -431,10 +425,8 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
               </StandIn>
             )}
           />
-        </div>
-      </StandIn>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-200 d-stack--justify-center d-w100p d-pbs-800">
+      </DtStack>
+      <DtStack direction="row" gap="200" justify="center" className="d-w100p d-pbs-800">
           {/* Without arrow */}
           <DtTooltip
             className="d-my-100"
@@ -474,10 +466,8 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
               </OutlinedButton>
             )}
           />
-        </div>
-      </StandIn>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-stack--justify-center d-w100p">
+      </DtStack>
+      <DtStack direction="row" gap="0" justify="center" className="d-w100p">
           {/* Open state */}
           <DtTooltip
             className="d-my-100"
@@ -490,10 +480,8 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
               </OutlinedButton>
             )}
           />
-        </div>
-      </StandIn>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-stack--justify-center d-w100p">
+      </DtStack>
+      <DtStack direction="row" gap="0" justify="center" className="d-w100p">
           {/* Custom Theme */}
           <DtTooltip
             className="d-my-100"
@@ -507,10 +495,8 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
               </OutlinedButton>
             )}
           />
-        </div>
-      </StandIn>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-0 d-stack--justify-center d-bgc-contrast d-py-100">
+      </DtStack>
+      <DtStack direction="row" gap="0" justify="center" className="d-bgc-contrast d-py-100">
           <div className="d-py-800">
             {/* Inverted state */}
             <DtTooltip
@@ -524,8 +510,7 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
               )}
             />
           </div>
-        </div>
-      </StandIn>
+      </DtStack>
       {/* Vue binds :transition="transition", which the template never defines, so it is unset. */}
       <DtTooltip
         externalAnchorElement={externalAnchor}
