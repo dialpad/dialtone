@@ -1,0 +1,47 @@
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_a98638d5a5be6e::t_d0ddac86cf0bbc 213
+  s_a98638d5a5be6e::t_e4e11e9e600f43 165-168,205,207,217,225
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_a98638d5a5be6e::t_537fb134fcd790 618
+  s_a98638d5a5be6e::t_e4e11e9e600f43 771
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_a98638d5a5be6e::t_9f66f929256307 1,47,62-66,278-287,451-455,458,461-462,464,596,609,616-654,656-657,659-660,668-669,671,673-675,682,693,703,705,707-708,711-712,714,723,725-726,728-729,731,736-737,739-741,743-749,751,758-761,763-765
+packages/dialtone-vue/components/Dropdown/DropdownControlledArrows.story.vue
+  s_a98638d5a5be6e::t_e4e11e9e600f43 1-87
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_a98638d5a5be6e::t_e4e11e9e600f43 46,383-385,391-394
+  s_a98638d5a5be6e::t_537fb134fcd790 121-122,341
+packages/dialtone-vue/components/ComboboxWithPopover/ComboboxWithPopover.test.js
+  s_a98638d5a5be6e::t_713d879ac09044 4,94,110-111,120
+packages/dialtone-vue/components/Dropdown/Dropdown.stories.js
+  s_a98638d5a5be6e::t_2f864ab106c420 235-238
+  s_a98638d5a5be6e::t_e4e11e9e600f43 6,226-234
+apps/dialtone-documentation/docs/components/popover.md
+  s_a98638d5a5be6e::t_e4e11e9e600f43 53,55
+packages/dialtone-vue/components/Hovercard/Hovercard.test.js
+  s_a98638d5a5be6e::t_9a65faa39d1237 76-77,84-85,88-89
+packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md
+  s_a98638d5a5be6e::t_e4e11e9e600f43 60
+packages/dialtone-vue/components/SplitButton/SplitButton.test.js
+  s_a98638d5a5be6e::t_79b8e4b6c8b74a 103,109
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_a98638d5a5be6e::t_7c4db2bae7a8b8 4,194,203,213,249-303
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_a98638d5a5be6e::t_e4e11e9e600f43 114,116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9b783053c21b9efea3cbd610b36e67063040dc64",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
