@@ -103,7 +103,7 @@ The example requests removal from an open pill's footer and returns focus to the
       <dt-button :size="200" @click="removalRequested = true; close()">Remove after closing</dt-button>
     </template>
   </dt-filter-pill>
-  <dt-button ref="removalResetButton" :size="200" @click="resetRemovalExample">Reset example</dt-button>
+  <dt-button ref="removalResetButton" kind="muted" importance="outlined" :size="200" @click="resetRemovalExample">Reset example</dt-button>
 </dt-stack>
 ```
 
@@ -155,10 +155,10 @@ Controlled trailing slots are unreleased; Dialtone 10.5.1 predates this API. Use
     </template>
   </dt-filter-pill>
   <dt-stack direction="row" gap="100">
-    <dt-button :size="200" @click="unreadCount = unreadCount === 12 ? 100 : unreadCount === 100 ? 0 : 12">Change count</dt-button>
-    <dt-button :size="200" @click="currentMessage = 'mentions'">Set Mentions externally</dt-button>
+    <dt-button kind="muted" importance="outlined" :size="200" @click="unreadCount = unreadCount === 12 ? 100 : unreadCount === 100 ? 0 : 12">Change count</dt-button>
+    <dt-button kind="muted" importance="outlined" :size="200" @click="currentMessage = 'mentions'">Set Mentions externally</dt-button>
   </dt-stack>
-  <span>Application commands: {{ messageCommands }}</span>
+  <dt-text variant="code-sm">Application commands: {{ messageCommands }}</dt-text>
 </dt-stack>
 ```
 
@@ -582,14 +582,14 @@ Controlled slots are unreleased. In the built-in controlled dropdown, `headerCon
 
 ## Content Mode
 
-Filter Pill popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+Filter Pill popover and dropdown content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 ```vue demo
-<dt-filter-pill content-mode="invert" label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" end-tooltip-text="Remove" />
+<dt-filter-pill content-mode="invert" use-dropdown label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" end-tooltip-text="Remove" />
 <!-- @code -->
-<dt-filter-pill content-mode="invert">...</dt-filter-pill>
-<dt-filter-pill content-mode="dark">...</dt-filter-pill>
-<dt-filter-pill content-mode="light">...</dt-filter-pill>
+<dt-filter-pill content-mode="invert" use-dropdown>...</dt-filter-pill>
+<dt-filter-pill content-mode="dark" use-dropdown>...</dt-filter-pill>
+<dt-filter-pill content-mode="light" use-dropdown>...</dt-filter-pill>
 ```
 
 ## Accessibility
@@ -628,6 +628,7 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 
 <script setup>
 import { ref, computed, inject, nextTick } from 'vue';
+import { DtIconCheck } from '@dialpad/dialtone-icons/vue';
 
 const removalPillVisible = ref(true);
 const removalRequested = ref(false);
