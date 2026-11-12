@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useId, useInsertionEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { ValidationMessageType } from '../constants';
 import type { ClassValue } from '../cx';
 import { useControllableState } from '../hooks/useControllableState';
@@ -75,11 +75,14 @@ export function useInputGroup (
     onChange: onValueChange,
   });
   // useControllableState's setter changes with `onValueChange`, so calls go through a ref to the latest one and the
-  // identity stays stable, since every input in the group reads the context. The ref is updated during render, not in
-  // an effect: inputs are children, and a layout effect in one runs before any effect of this hook's component, so
-  // it would still call the previous handler.
+  // identity stays stable, since every input in the group reads the context. The ref is updated in an insertion
+  // effect: it runs on commit only, so a render that never commits (a suspended transition) doesn't publish its
+  // handler, and before every layout effect, so an input's layout effect, which runs before any layout effect of
+  // this hook's component, already calls the latest handler.
   const latestSetGroupValue = useRef(setGroupValue);
-  latestSetGroupValue.current = setGroupValue;
+  useInsertionEffect(() => {
+    latestSetGroupValue.current = setGroupValue;
+  });
   const stableSetGroupValue = useCallback<SetGroupValue>(
     newValue => latestSetGroupValue.current(newValue as InputGroupValue),
     [],

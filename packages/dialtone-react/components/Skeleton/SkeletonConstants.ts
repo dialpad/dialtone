@@ -1,0 +1,53 @@
+// NOTE: RippleDuration controls how long the delay is for the animation
+// of a skeleton 1000 pixels from the top of the page. Each skeleton
+// from the top down will have a delay duration from 0 to this offset.
+// The delay of each skeleton animation is based on how far down the page
+// the skeleton is rendered. This is a linear relationship. The unit
+// is miliseconds.
+export const SKELETON_RIPPLE_DURATION = 3000000;
+
+export const SKELETON_SHAPES = {
+  circle: 'd-bar-circle',
+  square: 'd-bar-200',
+} as const;
+
+export const SKELETON_TEXT_TYPES = [
+  'body',
+  'heading',
+] as const;
+
+export const SKELETON_SHAPE_SIZES = {
+  // Numeric (preferred)
+  100: '16px',
+  200: '24px',
+  300: '32px',
+  400: '48px',
+  500: '64px',
+  // T-shirt aliases (deprecated)
+  sm: '24px',
+  md: '32px',
+  lg: '48px',
+} as const;
+
+export const SKELETON_HEADING_HEIGHTS = {
+  // Numeric (preferred)
+  200: 'd-h-25',
+  300: 'd-h-24px',
+  400: 'd-h-50',
+  // T-shirt aliases (deprecated)
+  sm: 'd-h-25',
+  md: 'd-h-24px',
+  lg: 'd-h-50',
+} as const;
+
+export type SkeletonShape = keyof typeof SKELETON_SHAPES;
+export type SkeletonTextType = typeof SKELETON_TEXT_TYPES[number];
+/** Vue's prop is a String, so numeric keys are their strings ('300'). */
+export type SkeletonHeadingHeight = `${keyof typeof SKELETON_HEADING_HEIGHTS}`;
+
+export default {
+  SKELETON_RIPPLE_DURATION,
+  SKELETON_SHAPES,
+  SKELETON_TEXT_TYPES,
+  SKELETON_HEADING_HEIGHTS,
+};

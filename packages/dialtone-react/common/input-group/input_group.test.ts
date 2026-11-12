@@ -1,4 +1,4 @@
-import { createElement, StrictMode, useLayoutEffect, type ReactNode } from 'react';
+import { createElement, StrictMode, Suspense, startTransition, useLayoutEffect, type ReactNode } from 'react';
 import { act, render as renderRTL, renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { InputGroupContext, useInputGroupContext } from '../input/InputGroupContext';
@@ -102,7 +102,7 @@ describe('useInputGroup', () => {
   it('calls the new handler when an input reports a value from a layout effect in the render that replaced it', () => {
     const first = vi.fn();
     const second = vi.fn();
-    // Inputs are children of the group, so their layout effects run before any effect of the group's own component.
+    // Inputs are children of the group, so their layout effects run before any layout effect of the group's component.
     const Input = ({ report }: { report: boolean }) => {
       const { setGroupValue } = useInputGroupContext();
       useLayoutEffect(() => {
@@ -118,6 +118,41 @@ describe('useInputGroup', () => {
     rerender(createElement(Group, { onValueChange: second, report: true }));
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalledExactlyOnceWith('b');
+  });
+
+  it('keeps calling the committed handler while a transition that replaced it is suspended', async () => {
+    const first = vi.fn();
+    const second = vi.fn();
+    let report: (value: string) => void = () => {};
+    const pending = new Promise<void>(() => {});
+    const Input = () => {
+      report = useInputGroupContext().setGroupValue as (value: string) => void;
+      return null;
+    };
+    const Suspender = ({ suspend }: { suspend: boolean }) => {
+      if (suspend) throw pending;
+      return null;
+    };
+    const Group = ({ onValueChange, suspend }: { onValueChange: () => void; suspend: boolean }) => {
+      const { contextValue } = useInputGroup({ name: 'g', legend: 'L', value: 'a', onValueChange });
+      return createElement(
+        InputGroupContext.Provider,
+        { value: contextValue },
+        createElement(Input),
+        createElement(Suspender, { suspend }),
+      );
+    };
+    const tree = (onValueChange: () => void, suspend: boolean) =>
+      createElement(Suspense, { fallback: 'loading' }, createElement(Group, { onValueChange, suspend }));
+    const { rerender } = renderRTL(tree(first, false));
+    // The transition renders the group with `second`, a child suspends, and nothing commits: the visible input
+    // still belongs to the render with `first`.
+    await act(async () => {
+      startTransition(() => rerender(tree(second, true)));
+    });
+    act(() => report('b'));
+    expect(second).not.toHaveBeenCalled();
+    expect(first).toHaveBeenCalledExactlyOnceWith('b');
   });
 
   it('uses the id it was given, or else a generated one', () => {

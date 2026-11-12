@@ -2,6 +2,7 @@ import { useId, useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import type { ContentMode } from '../../common/mode_constants';
+import { DtStack } from '../Stack/Stack';
 import { DtText } from '../Text/Text';
 import { DtValidationMessages } from '../ValidationMessages/ValidationMessages';
 import { useModeRegion } from './ModeDirective';
@@ -28,14 +29,12 @@ function Region ({ as: Tag = 'section', mode, className, children }: {
 
 function Swatches () {
   return (
-    <StandIn for="stack">
-      <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-400">
-        <span className="d-fc-primary">Primary</span>
-        <span className="d-fc-tertiary">Tertiary</span>
-        <span className="d-fc-positive">Positive</span>
-        <span className="d-fc-critical">Critical</span>
-      </div>
-    </StandIn>
+    <DtStack direction="row" gap="400">
+      <span className="d-fc-primary">Primary</span>
+      <span className="d-fc-tertiary">Tertiary</span>
+      <span className="d-fc-positive">Positive</span>
+      <span className="d-fc-critical">Critical</span>
+    </DtStack>
   );
 }
 
@@ -54,29 +53,22 @@ function ModeDirectiveDefault () {
   const toggleId = useId();
 
   return (
-    <StandIn for="stack">
-      <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-200 d-p-100">
+    <DtStack gap="200" className="d-p-100">
         <Heading>Explicit modes</Heading>
-        <StandIn for="stack">
-          <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-500">
+        <DtStack direction="row" gap="500">
             <Region mode="light" className={`${REGION} d-fl1`}>
-              <StandIn for="stack">
-                <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-400">
-                  <Body>Light mode (v-dt-mode:light)</Body>
-                  <Swatches />
-                </div>
-              </StandIn>
+              <DtStack gap="400">
+                <Body>Light mode (v-dt-mode:light)</Body>
+                <Swatches />
+              </DtStack>
             </Region>
             <Region mode="dark" className={`${REGION} d-fl1`}>
-              <StandIn for="stack">
-                <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-400">
-                  <Body>Dark mode (v-dt-mode:dark)</Body>
-                  <Swatches />
-                </div>
-              </StandIn>
+              <DtStack gap="400">
+                <Body>Dark mode (v-dt-mode:dark)</Body>
+                <Swatches />
+              </DtStack>
             </Region>
-          </div>
-        </StandIn>
+        </DtStack>
 
         <Heading>Invert mode (default)</Heading>
         <Region className={`${REGION} d-w264`}>
@@ -85,32 +77,26 @@ function ModeDirectiveDefault () {
 
         <Heading>Nested directives</Heading>
         <Region as="div" mode="dark" className={REGION}>
-          <StandIn for="stack">
-            <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-400">
-              <Body>Dark (outer)</Body>
-              <Region as="div" mode="invert" className={REGION}>
-                <StandIn for="stack">
-                  <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-400">
-                    <Body>Light — inverted from dark (inner)</Body>
-                    <Region as="div" mode="invert" className={REGION}>
-                      <Body>Dark — inverted again (deepest)</Body>
-                    </Region>
-                  </div>
-                </StandIn>
-              </Region>
-            </div>
-          </StandIn>
+          <DtStack gap="400">
+            <Body>Dark (outer)</Body>
+            <Region as="div" mode="invert" className={REGION}>
+              <DtStack gap="400">
+                <Body>Light — inverted from dark (inner)</Body>
+                <Region as="div" mode="invert" className={REGION}>
+                  <Body>Dark — inverted again (deepest)</Body>
+                </Region>
+              </DtStack>
+            </Region>
+          </DtStack>
         </Region>
 
         <Heading>Disabled (value = false)</Heading>
-        <StandIn for="stack">
-          <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-400 d-stack--align-start">
+        <DtStack direction="row" gap="400" align="start">
             <Region mode={false} className={`${REGION} d-fl1`}>
               <Body>v-dt-mode:invert=&quot;false&quot; — no mode applied</Body>
             </Region>
             <Region mode={enabled ? 'dark' : false} className={`${REGION} d-fl1`}>
-              <StandIn for="stack">
-                <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-400">
+              <DtStack gap="400">
                   <Body>v-dt-mode:dark=&quot;{String(enabled)}&quot; — toggle to compare</Body>
                   <StandIn for="toggle">
                     <div className="d-toggle-wrapper">
@@ -129,15 +115,12 @@ function ModeDirectiveDefault () {
                       </button>
                     </div>
                   </StandIn>
-                </div>
-              </StandIn>
+              </DtStack>
             </Region>
-          </div>
-        </StandIn>
+        </DtStack>
 
         <Heading>Dynamic arg</Heading>
-        <StandIn for="stack">
-          <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-400">
+        <DtStack gap="400">
             <span className="d-w-200">
               <StandIn for="select-menu">
                 <div className="">
@@ -163,10 +146,8 @@ function ModeDirectiveDefault () {
             <Region mode={dynamicMode} className={`${REGION} d-w264`}>
               <Body>v-dt-mode:{dynamicMode}</Body>
             </Region>
-          </div>
-        </StandIn>
-      </div>
-    </StandIn>
+        </DtStack>
+    </DtStack>
   );
 }
 
