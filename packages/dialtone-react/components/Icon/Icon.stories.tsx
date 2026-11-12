@@ -56,12 +56,12 @@ function IconDefault ({ size, name, ariaLabel }: IconStoryArgs) {
 // Button isn't ported: Vue's <dt-button importance="clear" kind="muted" size="lg"> with only a startIcon, as it
 // renders, with v-dt-tooltip on its element. Its startIcon scope's iconSize for size lg is '400'.
 function IconButton ({ icon, copiedIcon, onClick }: { icon: string; copiedIcon: string | null; onClick: () => void }) {
-  const ref = useRef<HTMLButtonElement>(null);
-  useTooltipDirective(ref, { message: copiedIcon === icon ? '✅ Copied!' : icon, delay: false });
+  const [el, setEl] = useState<HTMLButtonElement | null>(null);
+  useTooltipDirective(el, { message: copiedIcon === icon ? '✅ Copied!' : icon, delay: false });
   return (
     <StandIn for="button">
       <button
-        ref={ref}
+        ref={setEl}
         className="base-button__button d-btn d-btn--muted d-btn--lg d-btn--icon-only"
         data-qa="dt-button"
         type="button"
