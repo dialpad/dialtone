@@ -184,6 +184,7 @@ These existing examples use the legacy array contract. Reset updates the same ar
   </dt-filter-pill>
   <dt-filter-pill
     v-model="heroConversationTypes"
+    label="Conversation type"
     :start-tooltip-text="selectedHeroConversationType !== 'All Conversations'
       ? 'Conversation type'
       : ''"
@@ -191,9 +192,13 @@ These existing examples use the legacy array contract. Reset updates the same ar
     use-dropdown
     @clear="resetHeroConversationType"
   >
-    <template #default>
+    <template #default="{ label }">
+      <span
+        v-if="selectedHeroConversationType !== 'All Conversations'"
+        class="sr-only"
+      >{{ label }}: </span>
       {{ selectedHeroConversationType === 'All Conversations'
-        ? 'Conversation type'
+        ? label
         : selectedHeroConversationType }}
     </template>
     <template #content="{ close }">
@@ -357,6 +362,7 @@ out of the box — ideal for single-select filter patterns.
 <dt-stack direction="row" gap="100">
   <dt-filter-pill
     v-model="dropdownTypes"
+    label="Conversation type"
     :start-tooltip-text="selectedDropdownType !== 'All Conversations'
       ? 'Conversation type'
       : ''"
@@ -364,9 +370,13 @@ out of the box — ideal for single-select filter patterns.
     use-dropdown
     @clear="resetDropdownType"
   >
-    <template #default>
+    <template #default="{ label }">
+      <span
+        v-if="selectedDropdownType !== 'All Conversations'"
+        class="sr-only"
+      >{{ label }}: </span>
       {{ selectedDropdownType === 'All Conversations'
-        ? 'Conversation type'
+        ? label
         : selectedDropdownType }}
     </template>
     <template #content="{ close }">
@@ -386,6 +396,7 @@ out of the box — ideal for single-select filter patterns.
 <!-- @code -->
 <dt-filter-pill
   :model-value="[{name: &apos;All Conversations&apos;}, {name: &apos;Only Calls&apos;}, {name: &apos;Only Meetings&apos;}, {name: &apos;Only Digital&apos;}]"
+  label="Conversation type"
   :start-tooltip-text="selectedType !== &apos;All Conversations&apos;
     ? &apos;Conversation type&apos;
     : &apos;&apos;"
@@ -393,9 +404,13 @@ out of the box — ideal for single-select filter patterns.
   use-dropdown
   @clear="resetType"
 >
-  <template #default>
+  <template #default="{ label }">
+    <span
+      v-if="selectedType !== &apos;All Conversations&apos;"
+      class="sr-only"
+    >{{ label }}: </span>
     {{ selectedType === &apos;All Conversations&apos;
-      ? &apos;Conversation type&apos;
+      ? label
       : selectedType }}
   </template>
   <template #content="{ close }">
@@ -417,7 +432,7 @@ out of the box — ideal for single-select filter patterns.
 
 ### Default
 
-Using the `default` slot, you can override the `label` prop.
+The `default` slot replaces the built-in anchor-label content. Preserve the filter dimension and current selection in its accessible name; the `label` prop alone does not add that context after you replace the content. See [Labelling guidelines](#labelling-guidelines).
 
 #### Example: Count
 
@@ -478,20 +493,26 @@ The label updates to show the selected option, and a clear button resets to the 
 <dt-stack direction="row" gap="100">
   <dt-filter-pill
     v-model="conversationTypes"
+    label="Conversation type"
     :start-tooltip-text="selectedConversationType !== 'All Conversations'
       ? 'Conversation type'
       : ''"
     end-tooltip-text="Remove"
     @clear="selectedConversationType = 'All Conversations'"
   >
-    <template #default>
+    <template #default="{ label }">
+      <span
+        v-if="selectedConversationType !== 'All Conversations'"
+        class="sr-only"
+      >{{ label }}: </span>
       {{ selectedConversationType === 'All Conversations'
-        ? 'Conversation type'
+        ? label
         : selectedConversationType }}
     </template>
     <template #content>
       <dt-radio-group
         v-model="selectedConversationType"
+        aria-label="Conversation type"
         name="conversation-type-doc-filter"
       >
         <dt-radio
@@ -560,8 +581,9 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 
 ### Labelling guidelines
 
-- Always provide a `label` prop or populate the `default` slot so the pill has visible text.
-- When active filters change the visible label (e.g., radio selection patterns), set `start-tooltip-text` to the original label so the full context remains available on hover and to assistive technology.
+- Provide a meaningful dimension `label`, such as `Conversation type`. Built-in controlled labels include the dimension and current selection in the accessible name even when only the selection is visible. A separate external visual label is not required.
+- When replacing the `default` slot, include both the dimension and current selection in its accessible content. A screen-reader-only prefix, as shown in the custom-label examples, preserves context while keeping the visible label compact. Use `anchorEnd` or `optionEnd` when adding counts without replacing the built-in label.
+- Use `start-tooltip-text` to repeat the dimension on hover when helpful. The tooltip does not replace a contextual accessible name; users should still understand the filter when they return focus after selecting a value.
 - Provide `end-tooltip-text` for the clear button to give it a meaningful accessible name (e.g., "Remove filter").
 
 ## Vue API

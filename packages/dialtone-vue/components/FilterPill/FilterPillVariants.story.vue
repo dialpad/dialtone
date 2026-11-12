@@ -49,20 +49,26 @@
       <span class="d-label--sm">Custom label slot: conversation type</span>
       <dt-filter-pill
         v-model="conversationTypes"
+        label="Conversation type"
         :start-tooltip-text="selectedConversationType !== 'All Conversations'
           ? 'Conversation type'
           : ''"
         end-tooltip-text="Remove"
         @clear="selectedConversationType = 'All Conversations'"
       >
-        <template #default>
+        <template #default="{ label }">
+          <span
+            v-if="selectedConversationType !== 'All Conversations'"
+            class="sr-only"
+          >{{ label }}: </span>
           {{ selectedConversationType === 'All Conversations'
-            ? 'Conversation type'
+            ? label
             : selectedConversationType }}
         </template>
         <template #content>
           <dt-radio-group
             v-model="selectedConversationType"
+            aria-label="Conversation type"
             name="conversation-type-filter"
           >
             <dt-radio
@@ -100,14 +106,17 @@
       <span class="d-label--sm">Radio selection (always active)</span>
       <dt-filter-pill
         v-model="internalExternal"
+        label="Conversation scope"
         :show-clear="false"
       >
-        <template #default>
+        <template #default="{ label }">
+          <span class="sr-only">{{ label }}: </span>
           {{ selectedIEFilter || 'Internal and external' }}
         </template>
         <template #content>
           <dt-radio-group
             v-model="selectedIEFilter"
+            aria-label="Conversation scope"
             name="internal-external-filter"
           >
             <dt-radio
@@ -145,6 +154,7 @@
       <span class="d-label--sm">Dropdown: conversation type</span>
       <dt-filter-pill
         v-model="dropdownConversationTypes"
+        label="Conversation type"
         :start-tooltip-text="selectedDropdownType !== 'All Conversations'
           ? 'Conversation type'
           : ''"
@@ -152,9 +162,13 @@
         use-dropdown
         @clear="resetDropdownType"
       >
-        <template #default>
+        <template #default="{ label }">
+          <span
+            v-if="selectedDropdownType !== 'All Conversations'"
+            class="sr-only"
+          >{{ label }}: </span>
           {{ selectedDropdownType === 'All Conversations'
-            ? 'Conversation type'
+            ? label
             : selectedDropdownType }}
         </template>
         <template #content="{ close }">
