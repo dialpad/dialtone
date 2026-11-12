@@ -64,6 +64,7 @@ function LazyShowDefaultStory ({ show = false, appear, transition }: DtLazyShowP
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          title="Rick Astley — Never Gonna Give You Up"
         />
       </DtLazyShow>
     </div>
