@@ -50,6 +50,9 @@ concurrency:
 
 env:
   HUSKY: 0
+  # Both jobs restore .nx/cache from actions/cache, and another runner wrote it. Nx otherwise rejects such an entry
+  # ("Invalid Cache Directory ... was not generated on this machine") and fails the step after its task succeeded.
+  NX_REJECT_UNKNOWN_LOCAL_CACHE: '0'
 
 defaults:
   run:
