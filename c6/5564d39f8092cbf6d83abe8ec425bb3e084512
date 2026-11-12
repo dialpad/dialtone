@@ -1,0 +1,61 @@
+packages/dialtone-vue/components/Badge/Badge.vue
+  s_edb6000ea1a4b6::t_aeab60fc8abab1 110-112,122-123,125,174
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.js
+  s_edb6000ea1a4b6::t_58ac8deb4d38bb 14,19,22-23,34,90
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_edb6000ea1a4b6::t_6b5170fcf00b26 83
+packages/dialtone-vue/components/Badge/BadgeExamples.story.vue
+  s_edb6000ea1a4b6::t_b5e965a3c49840 126,128
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_edb6000ea1a4b6::t_c0a1a0b99aa7ce 126-129
+packages/dialtone-css/lib/build/less/components/badge.less
+  s_edb6000ea1a4b6::t_f8ebe941d307e7 112,117-119,124-126,131-133,137-138,146,148-150,152,165,170-174,177-178,187-189,199-201,205-207,211-212
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.test.js
+  s_edb6000ea1a4b6::t_58ac8deb4d38bb 37,46,49,62,65,75,82,85
+  s_edb6000ea1a4b6::t_2d6a5fe5439926 41
+packages/dialtone-vue/components/Badge/BadgeConstants.js
+  s_edb6000ea1a4b6::t_58ac8deb4d38bb 125,133
+  s_edb6000ea1a4b6::t_aeab60fc8abab1 15-17,19-21,24-30,41-49,64-66,93,130,134
+packages/combinator/src/variants/variants_badge.js
+  s_edb6000ea1a4b6::t_b5e965a3c49840 19-20,37-38,99-100,147-148,155-163
+  s_edb6000ea1a4b6::t_f19f141b3cfc9c 164
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_edb6000ea1a4b6::t_ee3fee65ddca13 41
+packages/dialtone-vue/components/Badge/Badge.test.js
+  s_edb6000ea1a4b6::t_2d6a5fe5439926 220-221,233-234,246,256-257,268,285,330-334,344,346
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/index.mjs
+  s_edb6000ea1a4b6::t_e171a2264bc507 223-224
+  s_edb6000ea1a4b6::t_fa7652ef8627ec 135-139
+  s_edb6000ea1a4b6::t_fb0ae7e912ee31 184-186,193-197
+  s_edb6000ea1a4b6::t_72bef7b7967543 29-30,39,42,58-67
+  s_edb6000ea1a4b6::t_bc9bd5979fc35b 192
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/test.mjs
+  s_edb6000ea1a4b6::t_4a327d3f3dff2e 33,36,42,48,111,114,117-118,121,125-130,140,149-189
+  s_edb6000ea1a4b6::t_9ec6e7e1ca5661 190-191
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_edb6000ea1a4b6::t_99db20c14258b3 223-227
+  s_edb6000ea1a4b6::t_8c8a8edd079d03 210-211
+apps/dialtone-documentation/docs/components/badge.md
+  s_edb6000ea1a4b6::t_978cc38c1e8bd5 3,12,20,31-32,60-61,63,111,113,120-124,136,143,151,153,156-182
+  s_edb6000ea1a4b6::t_2509495155bc35 183
+apps/dialtone-documentation/docs/_data/badge.json
+  s_edb6000ea1a4b6::t_76879139fd1bda 14,16,19,21-26,61
+apps/dialtone-documentation/docs/guides/migration/badge-chip-api/index.md
+  s_edb6000ea1a4b6::t_ee3fee65ddca13 9,24-26,44,53-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c65564d39f8092cbf6d83abe8ec425bb3e084512",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
