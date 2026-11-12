@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/KitchenSink/KitchenSink.stories.js
+  s_1c86a3f0dc32fa::t_40280d07de4185 33
+packages/dialtone-vue/components/KitchenSink/KitchenSinkView.vue
+  s_1c86a3f0dc32fa::t_40280d07de4185 15-17,176,238
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "54e65bc058896dcca93d669d27836e70ccff9006",
+  "prompts": {},
+  "sessions": {
+    "s_1c86a3f0dc32fa": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1acf9-3506-74d2-be25-6034da741b82",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

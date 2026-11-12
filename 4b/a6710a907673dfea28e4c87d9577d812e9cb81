@@ -1,0 +1,28 @@
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_2defdf83601f66::t_b807877afd578c 91
+packages/dialtone-react/parity/changed-units.test.mjs
+  s_2defdf83601f66::t_693d73dbba359b 260-264
+  s_2defdf83601f66::t_945fbb7c006a57 384,391-393,395,402,411-412,417-426
+  s_2defdf83601f66::t_10eb08740a5bcf 246
+  s_2defdf83601f66::t_e7b917ea851772 427-428
+packages/dialtone-react/parity/changed-units.mjs
+  s_2defdf83601f66::t_c2eff995dfc6aa 48-51
+  s_2defdf83601f66::t_600afe58c4edd4 124-125
+  s_2defdf83601f66::t_980ccc120b2262 141-143,145,147-149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4ba6710a907673dfea28e4c87d9577d812e9cb81",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

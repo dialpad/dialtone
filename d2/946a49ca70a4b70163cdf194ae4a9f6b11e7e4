@@ -1,0 +1,27 @@
+packages/dialtone-cli/README.md
+  s_7f1d1d64baa803::t_e6fbec5c2588cd 25,38-44
+  s_7f1d1d64baa803::t_a0093554db2479 45-46
+packages/dialtone-query-core/README.md
+  s_7f1d1d64baa803::t_e6fbec5c2588cd 43-45,55,67
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_e6fbec5c2588cd 110-112,173
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_e6fbec5c2588cd 153-154,205-216
+  s_7f1d1d64baa803::t_bdf3468f519230 217
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d2946a49ca70a4b70163cdf194ae4a9f6b11e7e4",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

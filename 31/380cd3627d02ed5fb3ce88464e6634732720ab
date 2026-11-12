@@ -1,0 +1,31 @@
+packages/dialtone-react/common/focustrap/Focustrap.stories.tsx
+  s_c16e1c48fd8563::t_f5f8a862ad8d75 1-205
+packages/dialtone-react/common/focustrap/focustrap.test.ts
+  s_c16e1c48fd8563::t_ac2b1a15c3c081 1,27-29,124-125,127
+packages/dialtone-react/common/focustrap/useFocusTrap.ts
+  s_a0b3ba1ef9ca7e::t_456663a8751eca 1,176,181-183,186-188,190,193,196,198,210,212,214-215,217-218,220,226,228-230
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "31380cd3627d02ed5fb3ce88464e6634732720ab",
+  "prompts": {},
+  "sessions": {
+    "s_a0b3ba1ef9ca7e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7e672751-8191-4797-b56a-2e0aaf81b5f6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_c16e1c48fd8563": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f621c77f-348a-495f-b2d4-843d36863e36",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

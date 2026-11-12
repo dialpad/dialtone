@@ -1,0 +1,50 @@
+packages/dialtone-react/components/Tooltip/TooltipDirective.test.tsx
+  s_2defdf83601f66::t_271772d46359d2 264-337,368-380,462
+  s_2defdf83601f66::t_852c1ca66d663c 383-458
+  s_2defdf83601f66::t_2bcdff8d24a20b 366-367
+  s_2defdf83601f66::t_9f2780f133b180 381,461,526-545
+  s_2defdf83601f66::t_469f50c545191a 338-365
+  s_2defdf83601f66::t_9d321743279703 382
+  s_2defdf83601f66::t_7174b6cd748828 463
+  s_2defdf83601f66::t_fabbb078e79617 1,31-33
+  s_2defdf83601f66::t_930996c29bbef1 548-553,560-568,572
+  s_2defdf83601f66::t_59f0af10b90b24 44,46
+  s_2defdf83601f66::t_0782d0be02ce3a 546-547
+  s_2defdf83601f66::t_f4a82b004b4fa4 554-559
+packages/dialtone-react/components/Tooltip/TooltipDirective.tsx
+  s_2defdf83601f66::t_3591ed2889397b 38-39
+  s_2defdf83601f66::t_f3d0c29e3de5d4 182
+  s_2defdf83601f66::t_e3f8cc4aaa91d5 1
+  s_2defdf83601f66::t_1145c949b5f449 101-106,118
+  s_2defdf83601f66::t_1b5aafb8700019 188,191-196,212,225-226
+  s_2defdf83601f66::t_9c173bbb479e60 200-201,203-205,216-223,229-230,237-241,245,247
+  s_2defdf83601f66::t_4d88b9b8cccd73 235-236
+  s_2defdf83601f66::t_c46e37722709b4 66,68
+  s_2defdf83601f66::t_3b22ae988d2afc 144-151,153-154,183-186,189-190,197-199,206,228,233-234
+  s_2defdf83601f66::t_6917fdaa69a12d 129-133,135-136,141-143,155-157,162-181
+  s_2defdf83601f66::t_3d327e6c00b4d2 152,158-161
+  s_2defdf83601f66::t_d5e7dae5c5a398 224
+  s_2defdf83601f66::t_9b38c7cff96741 207-208
+  s_2defdf83601f66::t_b504996642ca04 23-24
+  s_2defdf83601f66::t_9ca61d1cd2e75e 22
+  s_2defdf83601f66::t_4593975046c95f 112,114-115,121
+packages/dialtone-react/components/Tooltip/TooltipDirective.stories.tsx
+  s_2defdf83601f66::t_731483a05e706f 1,36-37,41,56,59,70
+  s_2defdf83601f66::t_8758f1e95be91a 73,81,87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "34d0df65f96585358412570c80442e790e1835ee",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
