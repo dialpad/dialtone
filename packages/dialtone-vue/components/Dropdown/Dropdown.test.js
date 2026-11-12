@@ -201,13 +201,15 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
         }, 'Choose'),
         list: list || (() => [
           h('li', { role: 'presentation', 'data-qa': 'heading' }, 'Choices'),
-          h(DtListItem, { role: 'menuitemradio', id: 'radio:one', selected: true,
+          h(DtListItem, { role: 'menuitemradio', id: 'radio:one', 'data-qa': 'radio-one', selected: true,
             navigationType: 'arrow-keys', onClick: () => actions.push('Alpha') }, () => 'Alpha'),
           h('li', { role: 'separator' }),
-          h(DtListItem, { role: 'menuitem', id: 'action', navigationType: 'arrow-keys',
+          h(DtListItem, { role: 'menuitem', id: 'action', 'data-qa': 'action-row',
+            navigationType: 'arrow-keys',
             onClick: () => actions.push('Beta') }, () => 'Beta'),
           h(DtListItem, {
-            role: 'menuitemradio', id: 'radio two', navigationType: 'arrow-keys',
+            role: 'menuitemradio', id: 'radio two', 'data-qa': 'radio-two',
+            navigationType: 'arrow-keys',
             onClick: () => actions.push('Bravo'),
           }, () => h('span', { role: 'img', 'aria-label': 'Bravo icon', 'data-qa': 'nested-role' }, 'Bravo')),
           h('li', { role: 'menuitemradio', tabindex: -1 }, 'No ID'),
@@ -280,8 +282,8 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(document.activeElement).toBe(close.element);
     await close.trigger('keydown', { key: 'Home', code: 'Home' });
     expect(document.activeElement.id).toBe('radio:one');
-    expect(list.find('[id="radio:one"]').attributes('aria-checked')).toBe('true');
-    expect(list.find('[id="radio two"]').attributes('aria-checked')).toBe('false');
+    expect(list.find('[data-qa="radio-one"]').attributes('aria-checked')).toBe('true');
+    expect(list.find('[data-qa="radio-two"]').attributes('aria-checked')).toBe('false');
     expect(wrapper.emitted('highlight')).toEqual([[0], [1], [0], [0]]);
     expect(actions).toEqual([]);
     await close.trigger('keydown', { key: 'Escape', code: 'Escape' });
@@ -297,12 +299,12 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     list.element.focus();
     await list.find('[data-qa="nested-role"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('radio two');
-    await list.get('[id="radio two"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+    await list.get('[data-qa="radio-two"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
     expect(document.activeElement).toBe(list.get('[data-qa="dt-sr-only-close-button"]').element);
-    await list.get('#action').trigger('mousemove');
+    await list.get('[data-qa="action-row"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('action');
-    await list.get('#action').trigger('keydown', { key: 'Enter', code: 'Enter' });
-    await list.get('#action').trigger('keydown', { key: ' ', code: 'Space' });
+    await list.get('[data-qa="action-row"]').trigger('keydown', { key: 'Enter', code: 'Enter' });
+    await list.get('[data-qa="action-row"]').trigger('keydown', { key: ' ', code: 'Space' });
     expect(actions).toEqual(['Beta', 'Beta']);
     expect(wrapper.emitted('highlight')).toEqual([[1]]);
   });
@@ -363,7 +365,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     async showCloseButton => {
       const foreign = mount(DtPopover, {
         props: { open: true, modal: false },
-        slots: { anchor: () => h('button', 'Another popup') },
+        slots: { anchor: () => h('button', { 'data-qa': 'foreign-trigger' }, 'Another popup') },
         global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
         attachTo: document.body,
       });
@@ -381,7 +383,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
         await flushPromises();
         expect(wrapper.get('[data-qa="trigger"]').attributes('aria-expanded')).toBe('false');
         expect(document.activeElement).toBe(wrapper.get('[data-qa="trigger"]').element);
-        expect(foreign.get('button').attributes('aria-expanded')).toBe('true');
+        expect(foreign.get('[data-qa="foreign-trigger"]').attributes('aria-expanded')).toBe('true');
         expect(wrapper.emitted('highlight')).toEqual([[-1]]);
         expect(actions).toEqual([]);
         expect(visibilityChanges.mock.calls).toEqual([[true], [false]]);

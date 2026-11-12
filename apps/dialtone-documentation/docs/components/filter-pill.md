@@ -135,6 +135,47 @@ The example then moves focus to Reset. A pill that has never opened can be remov
   </dt-filter-pill>
   <dt-button ref="removalResetButton" kind="muted" importance="outlined" :size="200" @click="resetRemovalExample">Reset example</dt-button>
 </dt-stack>
+
+<!-- @code -->
+<script setup>
+import { ref, nextTick } from 'vue';
+import { DtButton, DtFilterPill, DtStack } from '@dialpad/dialtone/vue';
+
+const removalPillVisible = ref(true);
+const removalRequested = ref(false);
+const removalSelection = ref(['email']);
+const removalResetButton = ref(null);
+async function onRemovalOpened (isOpen) {
+  if (isOpen || !removalRequested.value) return;
+  removalPillVisible.value = false;
+  removalRequested.value = false;
+  await nextTick();
+  removalResetButton.value?.$el?.focus();
+}
+function resetRemovalExample () {
+  removalRequested.value = false;
+  removalSelection.value = ['email'];
+  removalPillVisible.value = true;
+}
+</script>
+
+<template>
+  <dt-stack direction="row" gap="100">
+    <dt-filter-pill
+      v-if="removalPillVisible"
+      v-model:selected="removalSelection"
+      :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }]"
+      label="Channel"
+      end-tooltip-text="Clear"
+      @opened="onRemovalOpened"
+    >
+      <template #footerContent="{ close }">
+        <dt-button :size="200" @click="removalRequested = true; close()">Remove after closing</dt-button>
+      </template>
+    </dt-filter-pill>
+    <dt-button ref="removalResetButton" kind="muted" importance="outlined" :size="200" @click="resetRemovalExample">Reset example</dt-button>
+  </dt-stack>
+</template>
 ```
 
 ## Labels and counts
@@ -174,6 +215,61 @@ Use `anchorEnd` and `optionEnd` to add counts while keeping the built-in labels 
   </dt-stack>
   <dt-text variant="code-sm">Application commands: {{ messageCommands }}</dt-text>
 </dt-stack>
+
+<!-- @code -->
+<script setup>
+import { ref, computed } from 'vue';
+import { DtBadge, DtButton, DtFilterPill, DtStack, DtText } from '@dialpad/dialtone/vue';
+
+const currentMessage = ref('all');
+const unreadCount = ref(12);
+const messageCommands = ref(0);
+const messageOptions = ref([
+  { value: 'all', label: 'All Messages', shortLabel: 'All' },
+  { value: 'unread', label: 'Unread' },
+  { value: 'starred', label: 'Starred' },
+  { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
+]);
+const countText = computed(() => unreadCount.value > 99 ? '99+' : String(unreadCount.value));
+const messageCountText = computed(() => `${unreadCount.value} unread ${unreadCount.value === 1 ? 'message' : 'messages'}`);
+function applyMessageFilter (action) {
+  currentMessage.value = action.value;
+  messageCommands.value++;
+}
+</script>
+
+<template>
+  <dt-stack gap="200">
+    <dt-filter-pill
+      :selected="currentMessage"
+      :options="messageOptions"
+      label="Filter by"
+      neutral-value="all"
+      end-tooltip-text="Clear"
+      use-dropdown
+      @selection-change="applyMessageFilter"
+    >
+      <template #headerContent>Filter by</template>
+      <template #anchorEnd="{ selected }">
+        <template v-if="selected === 'unread' && unreadCount > 0">
+          <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+          <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+        </template>
+      </template>
+      <template #optionEnd="{ option }">
+        <template v-if="option.value === 'unread' && unreadCount > 0">
+          <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+          <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+        </template>
+      </template>
+    </dt-filter-pill>
+    <dt-stack direction="row" gap="100">
+      <dt-button kind="muted" importance="outlined" :size="200" @click="unreadCount = unreadCount === 12 ? 100 : unreadCount === 100 ? 0 : 12">Change count</dt-button>
+      <dt-button kind="muted" importance="outlined" :size="200" @click="currentMessage = 'mentions'">Set Mentions externally</dt-button>
+    </dt-stack>
+    <dt-text variant="code-sm">Application commands: {{ messageCommands }}</dt-text>
+  </dt-stack>
+</template>
 ```
 
 Use `selection-change` when choosing a filter also runs an application command. It provides `value`, `previousValue`, `reason` and `changed`. Update selection in this handler or through `v-model:selected`, using one write path. Don’t write it again from `clear`.
