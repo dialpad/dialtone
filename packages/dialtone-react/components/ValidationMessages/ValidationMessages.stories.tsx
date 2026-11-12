@@ -5,8 +5,8 @@ import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
 import { DtCheckbox } from '../Checkbox/Checkbox';
 import { DtRadio } from '../Radio/Radio';
-import { DtStack } from '../Stack/Stack';
 import { DtIconBell } from '../../icons';
+import { DtStack } from '../Stack/Stack';
 import { DtValidationMessages, type DtValidationMessagesProps } from './ValidationMessages';
 
 // Constants
