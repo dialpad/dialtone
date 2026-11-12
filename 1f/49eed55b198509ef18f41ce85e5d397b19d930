@@ -1,0 +1,40 @@
+packages/dialtone-react/common/input/useInput.ts
+  s_2defdf83601f66::t_36abb1a3ed1745 1-64
+packages/dialtone-react/common/input/useCheckable.ts
+  s_2defdf83601f66::t_21cdf0a6afa883 4-8
+  s_2defdf83601f66::t_00e9fb71a26d37 1-3,9-53
+packages/dialtone-react/common/input/index.ts
+  s_2defdf83601f66::t_9077a66b9f4239 1-13
+packages/dialtone-react/common/input/input.test.ts
+  s_2defdf83601f66::t_55b2433f3ab7ef 46-79
+  s_2defdf83601f66::t_e7cc8c01ab6f5d 2,4,7-8,12-40,42-45
+  s_2defdf83601f66::t_0b9f86c81037ce 9-11
+  s_2defdf83601f66::t_ef6b72fa93a633 41
+  s_2defdf83601f66::t_427ed329ae65c6 1,3,5-6
+packages/dialtone-react/common/input/useMessages.ts
+  s_2defdf83601f66::t_104d9136d72894 1-25
+packages/dialtone-react/common/input/InputGroupContext.ts
+  s_2defdf83601f66::t_011634b9442c8c 1-43
+packages/dialtone-react/common/input/useGroupable.ts
+  s_2defdf83601f66::t_530d4506d1a3b1 29-30
+  s_2defdf83601f66::t_307fce737ae4ba 2-26,31-42,46,49-72
+  s_2defdf83601f66::t_a3836ae45ea475 27-28
+  s_2defdf83601f66::t_2a3b52ab18e5c5 1
+  s_2defdf83601f66::t_5a0c50efac30d8 43-45,47-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1f49eed55b198509ef18f41ce85e5d397b19d930",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    }
+  }
+}

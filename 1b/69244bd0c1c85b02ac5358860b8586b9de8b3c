@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Skeleton/Skeleton.stories.tsx
+  s_0e9625a5b97323::t_dfa97971e7670d 53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1b69244bd0c1c85b02ac5358860b8586b9de8b3c",
+  "prompts": {},
+  "sessions": {
+    "s_0e9625a5b97323": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8570125d-8e05-4afd-8107-91d87412fb51",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

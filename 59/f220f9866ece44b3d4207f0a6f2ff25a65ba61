@@ -1,0 +1,50 @@
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/theme-to-mode.mjs
+  s_fe785ee032b468::t_1c9c11a28fcb5e 70
+  s_fe785ee032b468::t_73deb4a77a5a50 85
+  s_fe785ee032b468::t_71ca0d30a595d0 130,133-136
+  s_fe785ee032b468::t_fd162baaa9829a 57
+  s_fe785ee032b468::t_3f6abdfa52878b 81
+  s_fe785ee032b468::t_cb785ab20973bb 145
+  s_fe785ee032b468::t_917048e0e8e659 53
+  s_fe785ee032b468::t_e57507c7b57375 47-50,56,58-59,63,69,71-72,78,84,86-87
+  s_fe785ee032b468::t_3975952fe74f30 101-102,107-108,110,122-123
+  s_fe785ee032b468::t_0d0703ddd3618d 139
+  s_fe785ee032b468::t_03929e59a1f2db 111-115
+  s_fe785ee032b468::t_f3f31e9118e7a0 124
+  s_fe785ee032b468::t_628eaf0ff308b1 132
+  s_fe785ee032b468::t_f979874b4f246a 3-8,25-26,43-46,62,76,125,127
+  s_fe785ee032b468::t_cfd20eeb758d6b 66
+  s_fe785ee032b468::t_f687ad465de064 103-106,109,116-121
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/helpers.mjs
+  s_fe785ee032b468::t_e193c325e64eb0 6
+  s_fe785ee032b468::t_7aec5167c2f9c3 2,4,9-15
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/helpers.mjs
+  s_fe785ee032b468::t_d0003fbd097470 159-170
+  s_fe785ee032b468::t_c2e69f519fb627 73
+  s_fe785ee032b468::t_58735d78fa4ba4 74
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/theme-to-mode.test.mjs
+  s_fe785ee032b468::t_f39c1046294292 9,11-12,14-17,20,22-25,28-31,34-37,40-43,46-49,53-55,58,60-68,71,85
+  s_fe785ee032b468::t_1cf8c99607b978 89-103
+  s_fe785ee032b468::t_19573caf1f21a1 111
+  s_fe785ee032b468::t_98618740384e9b 159-208,225-226
+  s_fe785ee032b468::t_72fd7a29d69932 209-224
+  s_fe785ee032b468::t_d333040164bcda 236
+  s_fe785ee032b468::t_da5df6376f5c6c 264-270
+  s_fe785ee032b468::t_780af4a988107c 277-281
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "59f220f9866ece44b3d4207f0a6f2ff25a65ba61",
+  "prompts": {},
+  "sessions": {
+    "s_fe785ee032b468": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9e886617-a9cc-4721-80a9-dc88469965cc",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

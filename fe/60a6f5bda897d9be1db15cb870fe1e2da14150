@@ -1,0 +1,32 @@
+packages/combinator/src/components/controls/control_selection.vue
+  s_c3b12373d86df3::t_0b7b6ec0d1823c 243-256,260-263
+  s_c3b12373d86df3::t_7df08ed36956d1 67
+  s_c3b12373d86df3::t_7671b74aaa8693 15
+  s_c3b12373d86df3::t_5c73300c29a2a7 123-124,129-130
+  s_c3b12373d86df3::t_a8ccedfc0b4a00 131
+  s_c3b12373d86df3::t_8ad0cea092b92b 207
+  s_c3b12373d86df3::t_844e6919807fb9 75-88,90-106
+  s_c3b12373d86df3::t_9e5f394a3372f1 257-259
+  s_c3b12373d86df3::t_fcd0e0f39814e0 74
+  s_c3b12373d86df3::t_09c4cb6d25ed4e 128
+  s_c3b12373d86df3::t_f11d9fc6f40c68 107
+  s_c3b12373d86df3::t_8163fa7e86f1d9 218-220,222,224,227
+  s_c3b12373d86df3::t_0e64195b1895d3 204-206,208-217,221,223,225-226,228-242
+  s_c3b12373d86df3::t_3dcd040ad88ffc 57-59,61-66,69-73,108-117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "fe60a6f5bda897d9be1db15cb870fe1e2da14150",
+  "prompts": {},
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null
+    }
+  }
+}
