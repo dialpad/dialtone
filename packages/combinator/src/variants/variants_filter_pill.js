@@ -1,5 +1,6 @@
 
 /* eslint-disable max-len */
+import { watch } from 'vue';
 
 const messageOptions = [
   { value: 'all', label: 'All Messages', shortLabel: 'All' },
@@ -16,7 +17,7 @@ function controlledPreset (props = {}, slots = {}) {
   const single = props.useDropdown?.initialValue ?? true;
   return {
     metadata: {
-      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection. Requires the options/selected feature release; the lookup profile pins Dialtone 10.5.1, which lacks this API.`,
+      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection. The options/selected API is unreleased; use a compatible published release when available.`,
       lookupExclude: {
         reason: 'Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.',
         owner: 'DLT-3736 / Dialtone component and lookup maintainers',
@@ -35,10 +36,36 @@ function controlledPreset (props = {}, slots = {}) {
   };
 }
 
+// Keep the captured owner and its scroll context mounted until its own cleanup finishes.
+function beforePreviewRemount (pill, { signal }) {
+  const overlay = pill.$refs.overlay;
+  const popover = overlay?.$options.name === 'DtDropdown' ? overlay.$refs.popover : overlay;
+  if (!popover || (!pill.isOpen && !popover.isOpen && popover.isDialogAriaHidden)) return;
+
+  return new Promise(resolve => {
+    const finish = () => {
+      stop();
+      signal.removeEventListener('abort', finish);
+      resolve();
+    };
+    const stop = watch(
+      () => [pill.isOpen, popover.isOpen, popover.isDialogAriaHidden],
+      ([open, ownerOpen, hidden]) => {
+        if (open) pill.cancelSelection();
+        else if (!ownerOpen && hidden) finish();
+      },
+      { flush: 'post' },
+    );
+    signal.addEventListener('abort', finish, { once: true });
+    pill.cancelSelection();
+  });
+}
+
 export default {
   defaults: {
     metadata: {
       initialPreset: 'controlled default',
+      beforePreviewRemount,
       previewIdentity: bindings => Array.isArray(bindings.options)
         ? ['controlled', Boolean(bindings.useDropdown)]
         : ['legacy', bindings.modelValue],

@@ -48,4 +48,8 @@ it.each([
     disabledMembers: new Set(),
   });
   expect(template).toContain(`https://dialtone.dialpad.com/components/filter-pill.html#${anchor}.`);
+  expect(template).toContain('Configuration snapshot. Bind selected with v-model:selected for interaction');
+  expect(template).toContain('unreleased');
+  expect(template).not.toContain('10.5.1');
+  expect(template).not.toContain('lookup profile');
 });

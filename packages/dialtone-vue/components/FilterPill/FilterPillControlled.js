@@ -80,10 +80,10 @@ export default {
         if (option) return option.shortLabel ?? option.label;
         return state.value === this.neutralValue ? (this.label || '') : this.unavailableLabel;
       }
-      if (!state.unknownValues.length && state.options.length && state.values.length === state.options.length) {
+      if (!state.unknownValues.length && state.options.length > 1 && state.values.length === state.options.length) {
         return this.i18n.$t('DIALTONE_FILTER_PILL_ALL_LABEL');
       }
-      const first = state.options.find(option => option.value === state.value[0]);
+      const first = state.values.map(value => state.options.find(option => option.value === value)).find(Boolean);
       return first ? (first.shortLabel ?? first.label) : this.unavailableLabel;
     },
 

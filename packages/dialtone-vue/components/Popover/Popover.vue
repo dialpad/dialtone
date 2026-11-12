@@ -124,6 +124,7 @@
         </popover-header-footer>
         <sr-only-close-button
           v-if="!showCloseButton"
+          ref="popover__close-button"
           :role="role === 'menu' ? 'menuitem' : undefined"
           @close="closePopover"
         />
@@ -861,6 +862,13 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+
+    getCloseButtonElement () {
+      const closeButton = this.showCloseButton
+        ? this.$refs.popover__header?.$refs['popover__close-button']
+        : this.$refs['popover__close-button'];
+      return returnFirstEl(closeButton?.$el);
+    },
 
     getModeReferenceEl () {
       return this.$refs.anchor;

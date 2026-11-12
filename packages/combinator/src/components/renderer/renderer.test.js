@@ -1,11 +1,91 @@
 import { flushPromises, mount } from '@vue/test-utils';
-import { markRaw, nextTick } from 'vue';
+import { defineComponent, markRaw, nextTick } from 'vue';
 import { DtButton, DtDropdown, DtFilterPill, DtPagination } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
 import { buildVariantState, computeDisabledMembers, writeUpdateEvent } from '@/src/lib/variant_state';
 import filterPillVariants from '@/src/variants/variants_filter_pill';
 import DtcRenderer from './renderer.vue';
 import DtcRendererSpecSheetCell from './renderer_spec_sheet_cell.vue';
+
+
+it.each([
+  { name: 'single', component: DtcRenderer, preset: 'controlled default', nextPreset: 'default', closing: true },
+  { name: 'single', component: DtcRenderer, preset: 'defer selection', nextPreset: 'controlled default' },
+  { name: 'specsheet', component: DtcRendererSpecSheetCell, preset: 'use dropdown', nextPreset: 'controlled multiple' },
+  { name: 'specsheet', component: DtcRendererSpecSheetCell, preset: 'controlled deferred', nextPreset: 'default' },
+])('closes $preset before replacing the $name preview and retains the outgoing scroll context', async ({
+  name, component, preset, nextPreset, closing,
+}) => {
+  let pill;
+  const target = markRaw(defineComponent({
+    extends: DtFilterPill,
+    mounted () { pill = this; },
+  }));
+  const documentation = allDocs.find(doc => doc.displayName === 'DtFilterPill');
+  const state = buildVariantState(DtFilterPill, documentation, filterPillVariants, preset);
+  state.options.props.popoverAppendTo = 'parent';
+  const wrapper = mount(component, {
+    attachTo: document.body,
+    props: {
+      component: target, ...state, library: {},
+      ...(name === 'single' ? {
+        settings: {},
+        disabledMembers: computeDisabledMembers(state.info, state.options.props, state.options.slots),
+      } : { name: preset }),
+    },
+    global: { directives: { 'dt-focustrap': {} } },
+  });
+  try {
+    await flushPromises();
+    const anchor = wrapper.get('[data-qa="dt-filter-pill__button"]');
+    const originalText = anchor.text();
+    await anchor.trigger('click');
+    await flushPromises();
+    const oldPill = pill;
+    const overlay = oldPill.$refs.overlay;
+    const popover = overlay.$options.name === 'DtDropdown' ? overlay.$refs.popover : overlay;
+    // jsdom stubs CSS transitions; deliver the real owner's transition boundary explicitly.
+    await popover.onEnterTransitionComplete();
+    expect(document.documentElement.classList.contains('d-of-hidden')).toBe(true);
+    if (state.options.props.deferSelection) {
+      wrapper.get('input[type="checkbox"]').element.click();
+      await flushPromises();
+    }
+    if (closing) {
+      oldPill.cancelSelection();
+      await flushPromises();
+    }
+    const next = buildVariantState(DtFilterPill, documentation, filterPillVariants, nextPreset);
+    await wrapper.setProps({
+      ...next, resetGeneration: 1,
+      ...(name === 'single' ? {
+        disabledMembers: computeDisabledMembers(next.info, next.options.props, next.options.slots),
+      } : {}),
+    });
+    await flushPromises();
+    expect(anchor.element.isConnected).toBe(true);
+    expect(anchor.text()).toBe(originalText);
+    expect(anchor.attributes('aria-expanded')).toBe('false');
+    expect(document.documentElement.classList.contains('d-of-hidden')).toBe(true);
+    // A reopen of the retained preview must close again before it can be replaced.
+    await anchor.trigger('click');
+    await flushPromises();
+    expect(anchor.attributes('aria-expanded')).toBe('false');
+    await popover.onLeaveTransitionComplete();
+    await flushPromises();
+    expect(document.documentElement.classList.contains('d-of-hidden')).toBe(false);
+    expect(anchor.element.isConnected).toBe(false);
+    expect(wrapper.get('[data-qa="dt-filter-pill__button"]').text()).toContain({
+      default: 'Option 3', 'controlled default': 'All', 'controlled multiple': 'Phone',
+    }[nextPreset]);
+    const events = wrapper.findComponent({ name: 'DtcRendererTarget' }).emitted('event') ?? [];
+    expect(events.filter(([event]) => event === 'apply' || event === 'update:selected' ||
+      event === 'update:modelValue')).toEqual([]);
+  } finally {
+    wrapper.unmount();
+    document.documentElement.classList.remove('d-of-hidden');
+  }
+});
 
 it.each([
   { name: 'single', component: DtcRenderer },

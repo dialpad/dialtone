@@ -32,6 +32,7 @@
           :events="info.events"
           :disabled-members="disabledMembers"
           :preview-identity="info.metadata?.previewIdentity"
+          :before-preview-remount="info.metadata?.beforePreviewRemount"
           :reset-generation="resetGeneration"
           @event="onCellEvent"
         >

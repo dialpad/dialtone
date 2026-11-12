@@ -265,12 +265,76 @@ describe('DtFilterPill controlled selection', () => {
 
   it('keeps unknown selected values active and clearable without exposing raw identifiers', async () => {
     updateWrapper({ selected: ['private-id', 'sales'] });
-    expect(wrapper.find('.d-filter-pill__label').text()).toContain('Unavailable');
+    expect(wrapper.find('.d-filter-pill__label-start').text()).toBe('Teams');
+    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('Sales');
+    expect(wrapper.find('.d-filter-pill__label-end-overflow').text()).toBe('+1');
     expect(wrapper.find('.d-filter-pill__label').text()).not.toContain('private-id');
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(true);
     await open();
     expect(checks().map(input => input.checked)).toEqual([true, false, false]);
     expect(wrapper.emitted('selection-change')).toBeUndefined();
+    checks()[1].click();
+    await reconcile();
+    expect(wrapper.emitted('update:selected')).toEqual([[['private-id', 'sales', 'support']]]);
+    await wrapper.setProps({ selected: ['private-id'] });
+    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('Unavailable');
+    expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(true);
+  });
+
+  it.each([
+    [[{ value: 'sales', label: 'Sales' }], ['sales'], 'Sales', ''],
+    [options, ['private-id', 'engineering', 'sales'], 'Engineering', '+2'],
+    [options, ['engineering', 'support', 'sales'], 'All', ''],
+    [options, ['private-id', 'engineering', 'support', 'sales'], 'Engineering', '+3'],
+  ])('separates the dimension and resolved multiple summary for %j', (available, selected, summary, overflow) => {
+    updateWrapper({ options: available, selected }, { anchorEnd: () => h('span', '12 items') });
+    expect(wrapper.get('.sr-only').text()).toContain(summary);
+    expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('Teams');
+    expect(wrapper.get('.d-filter-pill__label-start').attributes('aria-hidden')).toBe('true');
+    expect(wrapper.get('.d-filter-pill__label-end').text()).toBe(summary);
+    expect(wrapper.get('.d-filter-pill__label-end').attributes('aria-hidden')).toBe('true');
+    expect(wrapper.get('.sr-only').text()).toContain('Teams');
+    expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(Boolean(overflow));
+    if (overflow) expect(wrapper.get('.d-filter-pill__label-end-overflow').text()).toBe(overflow);
+    expect(wrapper.get('.d-filter-pill__anchor-end').text()).toBe('12 items');
+  });
+
+  it.each([undefined, ''])('keeps an active summary without an empty dimension when label is %j', label => {
+    updateWrapper({ label });
+    expect(wrapper.find('.d-filter-pill__label-start').exists()).toBe(false);
+    expect(wrapper.get('.d-filter-pill__label-end').text()).toBe('Sales');
+    expect(wrapper.get('.sr-only').text()).toBe('Sales');
+  });
+
+  it.each([false, true])('updates overlay naming and heading ownership when a parent changes content (dropdown=%s)', async useDropdown => {
+    const custom = ref(false);
+    const warn = vi.spyOn(console, 'warn');
+    wrapper = mount({
+      setup: () => () => h(DtFilterPill, {
+        label: 'Teams', options, selected: useDropdown ? 'sales' : ['sales'], useDropdown,
+      }, {
+        headerContent: () => h('span', { 'data-qa': 'fallback-heading' }, 'Built-in heading'),
+        ...(custom.value ? { content: () => h(useDropdown ? 'li' : 'div', { role: 'presentation' }, [
+          h('h3', { 'data-qa': 'custom-heading' }, 'Custom heading'),
+          h('div', { role: 'group', 'aria-label': 'Custom choices' }, 'Custom choices'),
+        ]) } : {}),
+      }),
+    }, { global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body });
+    await open();
+    const overlay = () => document.querySelector(useDropdown ? '[role="menu"]' : '[role="dialog"]');
+    const initial = overlay();
+    expect(initial.getAttribute('aria-label')).toBe('Teams');
+    expect(initial.querySelectorAll('[data-qa="fallback-heading"]')).toHaveLength(1);
+    for (const next of [true, false, true]) {
+      custom.value = next;
+      await reconcile();
+      expect(overlay()).toBe(initial);
+      expect(initial.getAttribute('aria-label')).toBe(next ? null : 'Teams');
+      expect(initial.querySelectorAll('[data-qa="custom-heading"]')).toHaveLength(next ? 1 : 0);
+      expect(initial.querySelectorAll('[data-qa="fallback-heading"]')).toHaveLength(next && useDropdown ? 0 : 1);
+      if (next) expect(initial.querySelector('[role="group"]').getAttribute('aria-label')).toBe('Custom choices');
+    }
+    expect(warn.mock.calls.some(([message]) => String(message).includes('invoked outside of the render function'))).toBe(false);
   });
 
   it('ignores an explicitly supplied empty legacy modelValue when controlled', async () => {

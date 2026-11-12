@@ -18,7 +18,7 @@
     :max-width="maxWidth"
     :open-with-arrow-keys="shouldOpenWithArrowKeys"
     :open-on-context="openOnContext"
-    v-bind="$attrs"
+    v-bind="popoverAttrs"
     :tether="tether"
     :transition="transition"
     :footer-class="footerClass"
@@ -368,6 +368,16 @@ export default {
   },
 
   computed: {
+    popoverAttrs () {
+      const { dialogClass, 'dialog-class': kebabDialogClass, ...attrs } = this.$attrs;
+      return {
+        ...attrs,
+        dialogClass: [dialogClass, kebabDialogClass, {
+          'd-dropdown__menu--arrow-keys': this.isArrowKeyNav && (!('role' in attrs) || attrs.role === 'menu'),
+        }],
+      };
+    },
+
     dropdownListeners () {
       return {
 
@@ -440,11 +450,11 @@ export default {
     },
 
     beginningOfListMethod () {
-      return this.onBeginningOfList || this.jumpToEnd;
+      return this.onBeginningOfList || this.onBeginningOfMenu;
     },
 
     endOfListMethod () {
-      return this.onEndOfList || this.jumpToBeginning;
+      return this.onEndOfList || this.onEndOfMenu;
     },
 
     activeItemEl () {
@@ -489,6 +499,34 @@ export default {
       return this.$refs.listWrapper;
     },
 
+    getMenuCloseButton () {
+      const popover = this.$refs.popover;
+      return popover?.role === 'menu' ? popover.getCloseButtonElement() : null;
+    },
+
+    isMenuCloseFocused () {
+      const closeButton = this.getMenuCloseButton();
+      return closeButton && closeButton.getRootNode().activeElement === closeButton;
+    },
+
+    focusMenuClose () {
+      const closeButton = this.getMenuCloseButton();
+      if (!closeButton) return false;
+      // Close has no application row index and must not emit a choice highlight.
+      this.highlightIndex = -1;
+      this.highlightId = '';
+      closeButton.focus();
+      return true;
+    },
+
+    onBeginningOfMenu () {
+      if (!this.focusMenuClose()) this.jumpToEnd();
+    },
+
+    onEndOfMenu () {
+      if (!this.focusMenuClose()) this.jumpToBeginning();
+    },
+
     clearHighlightIndex () {
       this.setHighlightIndex(-1);
     },
@@ -506,7 +544,7 @@ export default {
 
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.isArrowKeyNav) {
-          this.setHighlightIndex(0);
+          if (this._itemsLength() || !this.focusMenuClose()) this.setHighlightIndex(0);
         }
         this.$emit('opened', true);
       } else {
@@ -534,6 +572,7 @@ export default {
         return;
       }
       if (this.isArrowKeyNav) {
+        if (this.isMenuCloseFocused()) return this.onEndKey();
         return this.onUpKey();
       }
     },
@@ -544,6 +583,7 @@ export default {
         return;
       }
       if (this.isArrowKeyNav) {
+        if (this.isMenuCloseFocused()) return this.onHomeKey();
         return this.onDownKey();
       }
     },
@@ -553,6 +593,7 @@ export default {
         return;
       }
 
+      if (!this._itemsLength() && this.focusMenuClose()) return;
       return this.onHomeKey();
     },
 
@@ -561,6 +602,7 @@ export default {
         return;
       }
 
+      if (this.focusMenuClose()) return;
       return this.onEndKey();
     },
 

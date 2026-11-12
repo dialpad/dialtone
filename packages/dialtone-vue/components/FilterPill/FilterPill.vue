@@ -12,6 +12,7 @@
       ref="overlay"
       :open="isOpen"
       v-bind="overlayProps"
+      :aria-label="controlledAtBirth && !$slots.content ? label : undefined"
       :content-mode="contentMode"
       @update:open="onOverlayTerminalOpen"
       @opened="onOverlayOpened"
@@ -67,9 +68,18 @@
             >
               <span class="sr-only">{{ controlledAccessibleLabel }}</span>
               <span
+                v-if="controlledDropdown || !isActive || label"
                 class="d-filter-pill__label-start"
                 aria-hidden="true"
-              >{{ controlledDropdown || !isActive ? controlledDisplayLabel : controlledAccessibleLabel }}</span>
+              >{{ controlledDropdown || !isActive ? controlledDisplayLabel : label }}</span>
+              <span
+                v-if="!controlledDropdown && isActive"
+                :class="[
+                  'd-filter-pill__label-end',
+                  { 'd-filter-pill__label-end--standalone': !label },
+                ]"
+                aria-hidden="true"
+              >{{ controlledDisplayLabel }}</span>
               <span
                 v-if="controlledOverflow"
                 class="d-filter-pill__label-end-overflow"
@@ -234,7 +244,8 @@
         v-if="!overlayUseDropdown && $slots.headerContent"
         #headerContent="{ close }"
       >
-        <!-- @slot Popover header or noninteractive controlled dropdown heading. Absent in legacy dropdowns.
+        <!-- @slot Popover header or noninteractive built-in controlled dropdown heading.
+          Absent in legacy dropdowns and full custom dropdown content.
           @binding {Function} close Dismiss without applying; popovers only.
         -->
         <slot
@@ -311,7 +322,8 @@
               tone="tertiary"
               :density="500"
             >
-              <!-- @slot Popover header or noninteractive controlled dropdown heading. Absent in legacy dropdowns. -->
+              <!-- @slot Popover header or noninteractive built-in controlled dropdown heading.
+                Absent in legacy dropdowns and full custom dropdown content. -->
               <slot name="headerContent" />
             </dt-text>
           </li>
@@ -792,7 +804,6 @@ export default {
       if (this.controlledAtBirth) {
         props.visibilityChangeCallback = this.onControlledVisibility;
         props.forwardAnchorArrowKeys = true;
-        if (!this.$slots.content) props['aria-label'] = this.label;
       }
       if (this.overlayUseDropdown) {
         props['list-class'] = this.dropdownListClass;

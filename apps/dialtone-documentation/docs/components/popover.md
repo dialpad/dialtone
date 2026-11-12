@@ -310,7 +310,7 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 
 ## Accessibility
 
-When `role="menu"`, Popover omits `aria-modal` and gives its built-in Close command `role="menuitem"`, for both the visually hidden button and `showCloseButton`. Close remains a native, tabbable button with the same label, placement, activation, dismissal timing and focus restoration. In Dropdown, it remains outside the inner row list and does not join Arrow, Home/End or typeahead navigation.
+When `role="menu"`, Popover omits `aria-modal` and gives its built-in Close command `role="menuitem"`, for both the visually hidden button and `showCloseButton`. Close remains a native, tabbable button with the same label, placement, activation, dismissal timing and focus restoration. [Dropdown](dropdown.md) includes its owning Close command in arrow navigation, with `END` reaching Close, while preserving application-row indexes; typeahead still targets application rows. A standalone Popover with custom menu content does not automatically manage arrow navigation for that content.
 
 This menu-specific behavior does not establish complete ARIA menu-pattern conformance. Existing Tab and focus-trap behavior remains, and consumer-provided header, footer and content controls need their own appropriate semantics. Verify menu announcements, Close discovery and activation, cancellation and returned focus with assistive technology; automated checks alone do not establish accessibility. Other popup roles retain their existing behavior.
 

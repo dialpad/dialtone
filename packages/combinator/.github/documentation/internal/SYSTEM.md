@@ -59,6 +59,23 @@ Filter Pill preview identity uses the array shape of `options`. Editing an array
 to `null` (or the reverse) creates a new preview instance, matching its new
 configuration. Option replacements within controlled mode keep the same instance.
 
+An opted-in bank may also provide `metadata.beforePreviewRemount(target,
+{ signal })`. Return nothing when replacement is safe, or a promise that resolves
+only after the outgoing target completes its cleanup. The renderer retains that
+VNode, its bindings, slots, container and anchor while waiting; it suppresses
+outgoing event write-back and applies only the latest requested replacement.
+The hook must handle reopening until completion and release its watcher/listeners
+on completion or when the abort signal fires during renderer disposal. This
+metadata is passed only to the target renderer, never to the component or copied
+preset payload.
+
+Filter Pill captures its current Popover owner (directly or through Dropdown),
+cancels selection without Apply, and waits for logical closure plus completed
+focus and scroll cleanup. Ordinary selected/options/label/count updates preserve
+the live instance. This gate covers replacement within the same renderer;
+ancestor teardown, route removal and shared scroll-lock ownership remain separate
+lifecycle responsibilities.
+
 ## Options
 
 `options` is the reactive value map that the renderer, option bar, and code

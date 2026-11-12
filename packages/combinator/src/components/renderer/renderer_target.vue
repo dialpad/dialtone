@@ -7,7 +7,6 @@
 <script setup>
 import {
   capitalize,
-  computed,
   getCurrentInstance,
   h,
   nextTick,
@@ -58,6 +57,10 @@ const props = defineProps({
     type: Function,
     default: undefined,
   },
+  beforePreviewRemount: {
+    type: Function,
+    default: undefined,
+  },
   resetGeneration: {
     type: Number,
     default: 0,
@@ -75,24 +78,11 @@ const slots = useSlots();
 // resolve globally registered components, directives, and provides.
 const { appContext } = getCurrentInstance();
 
-/**
- * Map object containing events and their respective handlers.
- *
- * @returns {ComputedRef<object>} Event map.
- */
-const events = computed(() => {
-  if (!props.events) { return {}; }
-  return Object.fromEntries(
-    props.events.map(({ name }) => {
-      return [
-        `on${capitalize(name)}`,
-        e => emit('event', name, e),
-      ];
-    }),
-  );
-});
-
 let currentContainer = null;
+let currentVNode = null;
+let currentBeforeRemount;
+let pendingRemount = null;
+let disposed = false;
 const referenceKeys = new WeakMap();
 let nextReferenceKey = 0;
 
@@ -118,6 +108,10 @@ onUpdated(renderTarget);
 // per cell and toggles via v-if, so without this each view switch orphans N
 // still-reactive component trees.
 onBeforeUnmount(() => {
+  disposed = true;
+  pendingRemount?.abort();
+  pendingRemount = null;
+  currentVNode = null;
   if (currentContainer) {
     render(null, currentContainer);
     currentContainer = null;
@@ -150,8 +144,8 @@ function freshContainer () {
  * instance (preserving DOM and Floating UI state) rather than
  * unmounting and remounting on every prop change.
  */
-function renderTarget () {
-  if (!wrapper.value) return;
+function renderTarget (completedVNode) {
+  if (disposed || !wrapper.value || pendingRemount) return;
   if (!currentContainer) {
     currentContainer = freshContainer();
   }
@@ -163,17 +157,46 @@ function renderTarget () {
   const slotKey = Object.keys(slots).sort().join(',');
 
   try {
+    const beforeRemount = props.beforePreviewRemount;
+    const handlers = Object.fromEntries((props.events ?? []).map(({ name }) => [
+      `on${capitalize(name)}`,
+      e => {
+        if (!beforeRemount || (!disposed && !pendingRemount && currentVNode === vnode)) emit('event', name, e);
+      },
+    ]));
     const vnode = h(props.component, {
       ...filteredBindings,
-      ...events.value,
+      ...handlers,
       key: props.previewIdentity
         ? JSON.stringify([slotKey, props.resetGeneration, ...props.previewIdentity(filteredBindings).map(identityKey)])
         : slotKey,
-    }, slots);
+    }, { ...slots });
     vnode.appContext = appContext;
+
+    if (currentVNode && currentVNode !== completedVNode && currentBeforeRemount &&
+      (currentVNode.key !== vnode.key || currentVNode.type !== vnode.type)) {
+      const outgoingVNode = currentVNode;
+      const controller = new AbortController();
+      pendingRemount = controller;
+      const completion = currentBeforeRemount(currentVNode.component.proxy, { signal: controller.signal });
+      if (completion) {
+        completion.then(() => {
+          if (disposed || pendingRemount !== controller) return;
+          pendingRemount = null;
+          // Read current props after cleanup so repeated requests coalesce to the latest one.
+          renderTarget(outgoingVNode);
+        });
+        return;
+      }
+      pendingRemount = null;
+    }
+
+    currentVNode = vnode;
+    currentBeforeRemount = beforeRemount;
     render(vnode, currentContainer);
   } catch (e) {
     console.warn('Rendering warning: \n', e);
+    currentVNode = null;
     currentContainer = freshContainer();
     renderError(e, currentContainer);
   }
