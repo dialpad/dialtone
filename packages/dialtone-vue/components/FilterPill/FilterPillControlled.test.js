@@ -110,7 +110,7 @@ describe('DtFilterPill controlled selection', () => {
   it('notifies deliberate same-value activation without a redundant selected update', async () => {
     updateWrapper({ useDropdown: true, selected: 'sales' });
     await open();
-    document.querySelector('[role="menuitemradio"]').click();
+    document.querySelector('[data-qa="dt-filter-pill__option"]').click();
     await reconcile();
     expect(wrapper.emitted('update:selected')).toBeUndefined();
     expect(wrapper.emitted('selection-change')).toEqual([[{
@@ -694,7 +694,7 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.get('.anchor-count').text()).toBe('12 items');
     await open();
     expect(document.querySelector('.choice-count').textContent).toBe('sales:true');
-    expect(document.querySelector('[role="menuitemradio"]').textContent).toContain('Sales');
+    expect(document.querySelector('[data-qa="dt-filter-pill__option"]').textContent).toContain('Sales');
     wrapper.unmount();
     document.body.innerHTML = '';
     updateWrapper({ useDropdown: true, selected: 'hidden', neutralValue: 'hidden' }, {
