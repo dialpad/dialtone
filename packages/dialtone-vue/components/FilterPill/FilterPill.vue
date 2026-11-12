@@ -86,7 +86,7 @@
                 :title="activeFilterOverflowTitle"
               >{{ controlledOverflow }}</span>
               <span
-                v-if="$slots.anchorEnd"
+                v-if="hasSlotContent($slots.anchorEnd, controlledAnchorBindings)"
                 :class="['d-filter-pill__anchor-end', anchorEndClass]"
               >
                 <!--
@@ -415,6 +415,7 @@ import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import { ordinalSizeValidator } from '@/common/validators';
+import { hasSlotContent } from '@/common/utils';
 import { BUTTON_SIZE_MODIFIERS, BUTTON_ICON_SIZES, DtButton } from '@/components/Button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
@@ -939,6 +940,8 @@ export default {
   },
 
   methods: {
+    hasSlotContent,
+
     clearFilter ($event) {
       if (this.controlledAtBirth) {
         const baseline = this.controlledDropdown ? (this.neutralValue ?? null) : [];

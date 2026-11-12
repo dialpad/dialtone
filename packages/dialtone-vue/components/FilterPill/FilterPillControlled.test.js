@@ -682,11 +682,15 @@ describe('DtFilterPill controlled selection', () => {
 
   it('keeps trailing slots inside built-in labels while the default slot replaces anchor content', async () => {
     updateWrapper({ useDropdown: true, selected: 'sales', anchorEndClass: 'anchor-count', optionEndClass: 'choice-count' }, {
-      anchorEnd: ({ selected }) => h('span', selected === 'sales' ? '12 items' : ''),
+      anchorEnd: ({ selected }) => selected === 'sales' ? h('span', '12 items') : createCommentVNode(),
       optionEnd: ({ option, selected }) => h('span', `${option.value}:${selected}`),
     });
     expect(wrapper.find('.anchor-count').text()).toBe('12 items');
     expect(wrapper.find('.d-filter-pill__label').text()).toContain('Sales');
+    await wrapper.setProps({ selected: 'support' });
+    expect(wrapper.find('.d-filter-pill__anchor-end').exists()).toBe(false);
+    await wrapper.setProps({ selected: 'sales' });
+    expect(wrapper.get('.anchor-count').text()).toBe('12 items');
     await open();
     expect(document.querySelector('.choice-count').textContent).toBe('sales:true');
     expect(document.querySelector('[role="menuitemradio"]').textContent).toContain('Sales');
