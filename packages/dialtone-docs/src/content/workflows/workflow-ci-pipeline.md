@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook, dialtone-react, parity-gate]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-11
+last_updated: 2026-11-12
 related_packages: [dialtone-vue, dialtone-react, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -98,7 +98,7 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 
 A `packages/dialtone-tokens/` change gates no unit: no component, test or parity case reads it. The Storybook themes do, and the `check` job's typecheck catches a change to their types. A push that creates the branch, or whose previous commit can't be fetched after a history rewrite, has no range to diff, so the gate job runs every ported unit, whatever changed. On a push to `dialtone-react`, the gate job sets `PARITY_SKIP_STAND_INS=1`, so a merged component's leftover story stand-ins don't fail the base branch.
 
-Both jobs restore Nx's local cache (`.nx/cache`) with `actions/cache`, keyed on the lockfile, so the dialtone-icons and dialtone-tokens builds they depend on are reused across runs. The gate job sets up the environment and restores the cache only when it has units to gate.
+Both jobs restore Nx's local cache (`.nx/cache`) with `actions/cache`, keyed on the lockfile, so the dialtone-icons and dialtone-tokens builds they depend on are reused across runs. The gate job sets up the environment and restores the cache only when it has units to gate. A restored entry was written on another runner, which Nx would otherwise reject, failing the step after its task succeeded. The workflow sets `NX_REJECT_UNKNOWN_LOCAL_CACHE: '0'` to accept it.
 
 ---
 

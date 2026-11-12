@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import { DtIconPhoneHangUp } from '../../icons';
@@ -33,12 +33,12 @@ function DirectiveButton ({ value, options, className = '', onClick, children, .
   'aria-label'?: string;
   children: ReactNode;
 }) {
-  const ref = useRef<HTMLButtonElement>(null);
-  useTooltipDirective(ref, value, options);
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+  useTooltipDirective(anchor, value, options);
   return (
     <StandIn for="button">
       <button
-        ref={ref}
+        ref={setAnchor}
         className={`base-button__button d-btn ${className}`.trim()}
         data-qa="dt-button"
         type="button"
@@ -53,10 +53,10 @@ function DirectiveButton ({ value, options, className = '', onClick, children, .
 
 // dialtone-vue's tooltip_directive_default.story.vue.
 function TooltipDirectiveDefault () {
-  const spanRef = useRef<HTMLSpanElement>(null);
+  const [span, setSpan] = useState<HTMLSpanElement | null>(null);
   const defaultMessage = 'This is a simple tooltip. You can set the position of the tooltip using the placement prop! Click to change content';
   const [message, setMessage] = useState(defaultMessage);
-  useTooltipDirective(spanRef, 'Default placement');
+  useTooltipDirective(span, 'Default placement');
 
   const changeOnClick = async () => {
     setMessage('Changed!');
@@ -67,10 +67,10 @@ function TooltipDirectiveDefault () {
   return (
     <StandIn for="stack">
       <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-400 d-m-800">
-        <span ref={spanRef}>Span with tooltip</span>
+        <span ref={setSpan}>Span with tooltip</span>
         <DirectiveButton
           value="Tooltip on bottom"
-          options={{ placement: 'bottom' }}
+          options={{ arg: 'bottom' }}
           className="d-btn--clear d-btn--critical d-btn--circle d-btn--icon-only"
           aria-label="example button"
         >
@@ -78,13 +78,13 @@ function TooltipDirectiveDefault () {
             <DtIconPhoneHangUp size="300" />
           </span>
         </DirectiveButton>
-        <DirectiveButton value="Tooltip on top end" options={{ placement: 'top-end' }}>
+        <DirectiveButton value="Tooltip on top end" options={{ arg: 'top-end' }}>
           <span data-qa="dt-button-label" className="base-button__label d-btn__label">Button with tooltip</span>
         </DirectiveButton>
         <DirectiveButton value={undefined}>
           <span data-qa="dt-button-label" className="base-button__label d-btn__label">Empty tooltip</span>
         </DirectiveButton>
-        <DirectiveButton value={message} options={{ placement: 'top-end' }} onClick={changeOnClick}>
+        <DirectiveButton value={message} options={{ arg: 'top-end' }} onClick={changeOnClick}>
           <span data-qa="dt-button-label" className="base-button__label d-btn__label">Change content on click</span>
         </DirectiveButton>
       </div>

@@ -1,0 +1,8 @@
+{
+  "DtItemLayout tests › Backward Compatibility Tests › When leftClass prop is provided (deprecated) › should apply the class to the start wrapper": "Tests the deprecated `leftClass` prop, which isn't ported: no other dialtone-vue component uses it (ListItem passes `startClass`).",
+  "DtItemLayout tests › Backward Compatibility Tests › When rightClass prop is provided (deprecated) › should apply the class to the end wrapper": "Tests the deprecated `rightClass` prop, which isn't ported: no other dialtone-vue component uses it (ListItem passes `endClass`).",
+  "DtItemLayout tests › Backward Compatibility Tests › When leftClass overrides startClass (deprecated takes precedence) › should use leftClass value": "Tests the deprecated `leftClass` prop, which isn't ported: no other dialtone-vue component uses it.",
+  "DtItemLayout tests › Backward Compatibility Tests › When bottomClass prop is provided (deprecated) › should apply the class to the bottom wrapper": "Tests the deprecated `bottomClass` prop, which isn't ported: no other dialtone-vue component uses it (ListItem passes `blockEndClass`).",
+  "DtItemLayout tests › Backward Compatibility Tests › When bottomClass overrides blockEndClass (deprecated takes precedence) › should use bottomClass value": "Tests the deprecated `bottomClass` prop, which isn't ported: no other dialtone-vue component uses it.",
+  "DtItemLayout tests › Backward Compatibility Tests › When rightClass overrides endClass (deprecated takes precedence) › should use rightClass value": "Tests the deprecated `rightClass` prop, which isn't ported: no other dialtone-vue component uses it."
+}

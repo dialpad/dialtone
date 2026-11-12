@@ -15,7 +15,7 @@ import {
 import { createPortal } from 'react-dom';
 import type { Instance, Placement, Props as TippyProps, ReferenceElement } from 'tippy.js';
 import { cx, type ClassValue } from '../../common/cx';
-import { useMode } from '../../common/hooks/useMode';
+import { useMode } from '../../common/mode';
 import type { ContentMode } from '../../common/mode_constants';
 import { hasContent } from '../../common/slots';
 import type { PopoverAppendTo } from '../Popover/PopoverConstants';
