@@ -1,0 +1,51 @@
+.github/workflows/dialtone-react.yml
+  s_2defdf83601f66::t_7cbe4420b2949d 3-4,127
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_2defdf83601f66::t_94e3aa61a55973 6,91
+packages/dialtone-react/.storybook/StandIn.tsx
+  s_2defdf83601f66::t_591cf7b0aac029 4,12-15
+packages/dialtone-react/README.md
+  s_2defdf83601f66::t_847bc3afacd98f 11
+packages/dialtone-react/common/hooks/useControllableState.ts
+  s_2defdf83601f66::t_e799a85f6b0ccf 4-5
+packages/dialtone-react/eslint.config.js
+  s_2defdf83601f66::t_b167b7e1805773 40,61
+packages/dialtone-react/parity/cases.mjs
+  s_2defdf83601f66::t_85a21ef0425db6 1-2
+packages/dialtone-react/parity/extra-cases.mjs
+  s_2defdf83601f66::t_bba4f35aa000cf 2
+packages/dialtone-react/parity/gate.mjs
+  s_2defdf83601f66::t_e979731d9c016e 2-3,227,237
+packages/dialtone-react/parity/normalize.mjs
+  s_2defdf83601f66::t_267d42e38f3f63 1
+packages/dialtone-react/parity/react/dom.test.tsx
+  s_2defdf83601f66::t_3fc2e0e953f0a2 47
+packages/dialtone-react/parity/react/transition-stub.tsx
+  s_2defdf83601f66::t_fe39fbe53d74f1 1
+packages/dialtone-react/parity/settle.mjs
+  s_2defdf83601f66::t_5b655675c27c61 1
+packages/dialtone-react/parity/story-parity.mjs
+  s_2defdf83601f66::t_3de2630f42217a 1-2,103,127,180,205
+packages/dialtone-react/parity/types.ts
+  s_2defdf83601f66::t_1a580a986c8000 5,11
+packages/dialtone-react/parity/vue-sources.mjs
+  s_2defdf83601f66::t_04881a04083b44 2,7,17,48,91
+packages/dialtone-react/tests/setup.ts
+  s_2defdf83601f66::t_27804c716e10bd 55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3998f626018efcef9f7155aedac6f60215af3803",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
