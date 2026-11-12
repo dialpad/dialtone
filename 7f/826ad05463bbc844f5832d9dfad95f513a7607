@@ -1,0 +1,37 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentVueApiTable.vue
+  s_edb6000ea1a4b6::t_803b9603998732 61-62
+apps/dialtone-documentation/docs/.vuepress/baseComponents/NewUtilityClassTable.vue
+  s_edb6000ea1a4b6::t_42ce66e037ceed 29
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenTable.vue
+  s_edb6000ea1a4b6::t_8f8f50ce37a7f3 62
+apps/dialtone-documentation/docs/.vuepress/theme/constants/statusBadges.js
+  s_edb6000ea1a4b6::t_a3bdcd1238f32d 6-8
+apps/dialtone-documentation/docs/utilities/borders/radius.md
+  s_edb6000ea1a4b6::t_07d7f807cfe459 137
+apps/dialtone-documentation/docs/utilities/spacing/margin.md
+  s_edb6000ea1a4b6::t_6f9d109e50eb88 86,116,142,166,191,218
+apps/dialtone-documentation/docs/utilities/spacing/padding.md
+  s_edb6000ea1a4b6::t_918c253cdecf40 66,96,123
+packages/dialtone-vue/components/Badge/Badge.test.js
+  s_edb6000ea1a4b6::t_7f2a4715ef631a 299-353
+packages/dialtone-vue/components/Badge/Badge.vue
+  s_edb6000ea1a4b6::t_ed0336eb87aa55 86,175,181,288-289,297,303-304,378,396-409
+packages/dialtone-vue/components/Badge/BadgeConstants.js
+  s_edb6000ea1a4b6::t_032a383225e94c 33-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f826ad05463bbc844f5832d9dfad95f513a7607",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

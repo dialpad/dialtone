@@ -1,0 +1,27 @@
+packages/dialtone-css/lib/build/less/components/text-list.less
+  s_70bd67c1949733::t_e2381132463aea 183
+  s_70bd67c1949733::t_8ff96e607e4a1c 120-121,124,128-133,138-173,180-181,184
+apps/dialtone-documentation/docs/components/text-list.md
+  h_c15b5755534093 26-27,73,78-130,132-182
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "50a597bbbd8440989c6493deb2e8e0e95e3655c8",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_70bd67c1949733": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f3c9e-fb6d-7a13-bf9d-512be21eb336",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

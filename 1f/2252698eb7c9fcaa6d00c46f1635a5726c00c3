@@ -1,0 +1,20 @@
+apps/dialtone-documentation/scripts/generate-raw-markdown.mjs
+  s_7f1d1d64baa803::t_25402dc2de317e 208-211,214
+  s_7f1d1d64baa803::t_b28974c369f6ff 215
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1f2252698eb7c9fcaa6d00c46f1635a5726c00c3",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
