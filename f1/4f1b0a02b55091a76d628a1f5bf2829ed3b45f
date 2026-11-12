@@ -1,0 +1,107 @@
+packages/combinator/tests/setupTests.js
+  s_5496a5e114cfcf::t_4ff82f308ff252 1-10
+packages/combinator/vite.config.js
+  s_5496a5e114cfcf::t_4abbac33023627 32-37
+packages/combinator/src/components/event_console/event_console.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,15
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_5496a5e114cfcf::t_d160eb680921c6 15
+  s_5496a5e114cfcf::t_2a1e80ec792658 54
+  s_5496a5e114cfcf::t_a3c89748e8fea9 23
+  s_5496a5e114cfcf::t_8de46f0b0e4069 31
+  s_5496a5e114cfcf::t_5a7a998921007d 39
+  s_5496a5e114cfcf::t_5b70a2189f1628 1,19,27,46,60,64,68,72
+  s_5496a5e114cfcf::t_6f8246ba35db25 11
+  s_5496a5e114cfcf::t_a928880c2e8de1 50
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,52
+  s_5496a5e114cfcf::t_e7d54ca860b861 56
+  s_5496a5e114cfcf::t_244c22b00105ad 38
+  s_5496a5e114cfcf::t_812757dd2e984c 16
+packages/combinator/src/components/combinator.vue
+  s_5496a5e114cfcf::t_372a24ef6a9bb6 499,501
+packages/combinator/src/components/controls/control_number.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,30
+  s_5496a5e114cfcf::t_c4e0679fce57f8 43
+  s_5496a5e114cfcf::t_244c22b00105ad 24
+  s_5496a5e114cfcf::t_baa8dae16efc3d 53
+packages/combinator/src/components/combinator.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,31
+packages/combinator/src/components/controls/control_boolean.test.js
+  s_5496a5e114cfcf::t_d7e23bd8f64582 2,32-33,42-43
+  s_5496a5e114cfcf::t_3069ff6dcfec79 5,13-14,29
+  s_5496a5e114cfcf::t_5b70a2189f1628 4,23
+  s_5496a5e114cfcf::t_244c22b00105ad 17
+packages/combinator/src/components/controls/control_event.test.js
+  s_5496a5e114cfcf::t_244c22b00105ad 9
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,15
+packages/combinator/src/components/option_bar/option_bar_control.test.js
+  s_5496a5e114cfcf::t_244c22b00105ad 19
+  s_5496a5e114cfcf::t_21ad2829391d3a 38
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,34
+packages/combinator/eslint.config.js
+  s_5496a5e114cfcf::t_5b11558954ff42 5
+  s_5496a5e114cfcf::t_baf22e208139d9 45
+  s_5496a5e114cfcf::t_ef933fe95b5ad9 47,53,57
+packages/combinator/src/components/controls/control_selection.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,32
+  s_5496a5e114cfcf::t_244c22b00105ad 26
+  s_5496a5e114cfcf::t_b0250fa74e50bd 4,18,36-37,39-40,46-47
+packages/combinator/project.json
+  s_5496a5e114cfcf::t_2f76795131fca0 41-49
+packages/combinator/package.json
+  s_5496a5e114cfcf::t_d6fa11b7e28aa0 7
+  s_5496a5e114cfcf::t_0362f68360ae2b 46
+  s_5496a5e114cfcf::t_a9ccd3a86aeb82 44,47-48
+packages/combinator/src/components/controls/control_base.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,15
+  s_5496a5e114cfcf::t_244c22b00105ad 9
+packages/combinator/src/components/controls/control_array.test.js
+  s_5496a5e114cfcf::t_e7d54ca860b861 50
+  s_5496a5e114cfcf::t_244c22b00105ad 31
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,37,58
+packages/combinator/src/components/controls/control_nullish.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 4,27
+  s_5496a5e114cfcf::t_d98548298fe810 2,5,16-18,33-34,38,48
+  s_5496a5e114cfcf::t_244c22b00105ad 21
+packages/combinator/src/components/controls/control_slot.test.js
+  s_5496a5e114cfcf::t_e7d54ca860b861 43,53
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,30
+  s_5496a5e114cfcf::t_244c22b00105ad 24
+packages/combinator/src/components/controls/control_string.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,34
+  s_5496a5e114cfcf::t_e7d54ca860b861 47,57
+  s_5496a5e114cfcf::t_244c22b00105ad 28
+packages/combinator/src/lib/info.js
+  s_5496a5e114cfcf::t_15b100b3834d95 89
+packages/combinator/src/components/controls/control_iterable.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,20
+  s_5496a5e114cfcf::t_244c22b00105ad 9
+packages/combinator/src/components/controls/control_object.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 3,44,69,76
+  s_5496a5e114cfcf::t_244c22b00105ad 38
+  s_5496a5e114cfcf::t_e7d54ca860b861 57-58
+packages/combinator/src/base.test.js
+  s_5496a5e114cfcf::t_5b70a2189f1628 1,9
+  s_5496a5e114cfcf::t_72348f38e45f2e 4
+packages/combinator/src/components/controls/control_dynamic.test.js
+  s_5496a5e114cfcf::t_244c22b00105ad 32
+  s_5496a5e114cfcf::t_5b70a2189f1628 6,38,56
+  s_5496a5e114cfcf::t_d1b8ba986432c5 2,7,19-22,28-29,47,51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "f14f1b0a02b55091a76d628a1f5bf2829ed3b45f",
+  "prompts": {},
+  "sessions": {
+    "s_5496a5e114cfcf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5db296a0-c4fe-47eb-97fc-bed0d42a3ead",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

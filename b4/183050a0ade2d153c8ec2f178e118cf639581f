@@ -1,0 +1,36 @@
+packages/combinator/.github/documentation/internal/CONTROLS.md
+  s_bda95360f3cca1::t_9b733bcd670316 44-45,75,82,86-87
+  s_bda95360f3cca1::t_6f95cc97650d00 55-71
+  s_bf7dc52eb2ba4c::t_018cffa730ce71 43,46-53,76-81,83,89-92
+  s_bda95360f3cca1::t_49fd4f0618c891 54
+.claude/rules/combinator-variants.md
+  s_bf7dc52eb2ba4c::t_018cffa730ce71 129
+  s_bda95360f3cca1::t_25f49fed6970df 128
+.agents/resources/rules/combinator-variants.md
+  s_bf7dc52eb2ba4c::t_018cffa730ce71 126
+  s_bda95360f3cca1::t_25f49fed6970df 125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b4183050a0ade2d153c8ec2f178e118cf639581f",
+  "prompts": {},
+  "sessions": {
+    "s_bda95360f3cca1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16057-cde5-76a0-a857-9178e5a8799c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_bf7dc52eb2ba4c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09189915-dc49-412a-9fd6-f1205383ecd0",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
