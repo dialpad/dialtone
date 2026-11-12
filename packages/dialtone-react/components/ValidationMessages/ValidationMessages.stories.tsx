@@ -4,6 +4,8 @@ import { StandIn } from '../../.storybook/StandIn';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
 import { DtCheckbox } from '../Checkbox/Checkbox';
+import { DtRadio } from '../Radio/Radio';
+import { DtStack } from '../Stack/Stack';
 import { DtIconBell } from '../../icons';
 import { DtValidationMessages, type DtValidationMessagesProps } from './ValidationMessages';
 
@@ -109,9 +111,9 @@ const COUNTRY_OPTIONS = [
   { value: 'uk', label: 'United Kingdom' },
 ];
 const CONTACT_OPTIONS = [
-  { value: 'email', label: 'Email', messagesId: 'dt7' },
-  { value: 'phone', label: 'Phone', messagesId: 'dt8' },
-  { value: 'sms', label: 'SMS', messagesId: 'dt9' },
+  { value: 'email', label: 'Email' },
+  { value: 'phone', label: 'Phone' },
+  { value: 'sms', label: 'SMS' },
 ];
 const INTEREST_OPTIONS = [
   { value: 'design', label: 'Design', messagesId: 'dt12' },
@@ -228,8 +230,7 @@ function InteractiveFormTemplate () {
   ];
 
   return (
-    <StandIn for="stack">
-      <div data-qa="dt-stack" className="d-stack d-stack--gap-500 d-stack--justify-start" style={{ maxWidth: '400px' }}>
+    <DtStack gap="500" style={{ maxWidth: '400px' }}>
         {inputs.map(input => (
           <StandIn for="input" key={input.label}>
             <div className="d-input__root" data-qa="dt-input">
@@ -283,29 +284,17 @@ function InteractiveFormTemplate () {
           <fieldset className="d-input-group__fieldset" data-qa="radio-group">
             <legend data-qa="radio-group-legend" className="d-text d-text-label--md d-text--tone-secondary d-input-group__legend-text">Preferred contact</legend>
             {CONTACT_OPTIONS.map(option => (
-              <StandIn for="radio" key={option.value}>
-                <div className="">
-                  <label className="d-radio-group">
-                    <div className="d-radio__input">
-                      <input
-                        name="contact"
-                        type="radio"
-                        className="d-radio"
-                        value={option.value}
-                        checked={contactValue === option.value}
-                        onChange={() => {
-                          setContactValue(option.value);
-                          validateContact(option.value);
-                        }}
-                      />
-                    </div>
-                    <div data-qa="radio-label" className="d-text d-text-label--md d-text--tone-primary d-text--fw-normal d-radio__copy d-radio__label">{option.label}</div>
-                  </label>
-                  <div className="d-radio__messages" data-qa="radio-description-messages">
-                    <div id={option.messagesId} aria-live="assertive" className="base-input__messages d-validation-message__container" data-qa="dt-radio-validation-messages"></div>
-                  </div>
-                </div>
-              </StandIn>
+              <DtRadio
+                key={option.value}
+                name="contact"
+                value={option.value}
+                label={option.label}
+                checked={contactValue === option.value}
+                onChange={() => {
+                  setContactValue(option.value);
+                  validateContact(option.value);
+                }}
+              />
             ))}
             <DtValidationMessages data-qa="radio-group-messages" validationMessages={contactMessages} />
           </fieldset>
@@ -337,8 +326,7 @@ function InteractiveFormTemplate () {
             <span data-qa="dt-button-label" className="base-button__label d-btn__label">Clear</span>
           </button>
         </StandIn>
-      </div>
-    </StandIn>
+    </DtStack>
   );
 }
 
