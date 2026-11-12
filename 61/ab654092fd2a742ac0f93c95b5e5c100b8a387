@@ -1,0 +1,23 @@
+packages/dialtone-tokens/tokens/base/default.json
+  s_355402be618789::t_e5269a3b6fef6a 1102-1133
+  s_355402be618789::t_b975caebaf3bd9 1163-1194
+  s_355402be618789::t_19bcea17f38ea2 1012-1043
+  s_355402be618789::t_7cbe4a000ec0a5 1057-1088
+  s_355402be618789::t_6696fc73f35303 967-998
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "61ab654092fd2a742ac0f93c95b5e5c100b8a387",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

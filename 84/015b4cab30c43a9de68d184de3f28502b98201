@@ -1,0 +1,55 @@
+apps/dialtone-documentation/docs/components/button.md
+  s_7f1d1d64baa803::t_2f10b645bac796 66-67,152-153
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_4d3ed7143c4a15 75,133,195-209
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_824dc2d68680e3 211-228
+packages/dialtone-cli/src/commands/component.ts
+  s_7f1d1d64baa803::t_d337101b0090fa 2,92-95
+packages/dialtone-cli/src/commands/docs.ts
+  s_7f1d1d64baa803::t_ed078224c33732 2,9-10,21-37
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_3fe6ce2aa89ebb 126-136
+packages/dialtone-docs/project.json
+  s_7f1d1d64baa803::t_6bbc9ba0b86ac4 11-12
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_7f1d1d64baa803::t_ff22d6470bd803 5,205,223,251-256
+packages/dialtone-docs/src/generators/documentation-examples.mjs
+  s_7f1d1d64baa803::t_d0b23b35096f89 1-99
+packages/dialtone-docs/src/generators/example-validation.json
+  s_7f1d1d64baa803::t_b457a3be17acba 1-60
+packages/dialtone-docs/tests/documentation-examples.test.js
+  s_7f1d1d64baa803::t_63c58326180f7e 1-49
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_7f1d1d64baa803::t_199b846b390351 29,274,475-478
+packages/dialtone-query-core/src/index.ts
+  s_7f1d1d64baa803::t_cdc04e53c30b8d 73
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_10f08b1dd1cc51 164,290-296
+packages/dialtone-query-core/src/types.ts
+  s_7f1d1d64baa803::t_7998a8052bc3e6 141-148
+packages/dialtone-query-core/tests/documentation-examples.test.ts
+  s_7f1d1d64baa803::t_147fe637c3fc5a 1-16
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_54d76eb465c5bd 56-75
+scripts/retrieval/probe-packed-examples.mjs
+  s_7f1d1d64baa803::t_283da06979baf2 1-68
+scripts/retrieval/validate-examples.mjs
+  s_7f1d1d64baa803::t_ead87b5f579a8b 1-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "84015b4cab30c43a9de68d184de3f28502b98201",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

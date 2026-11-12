@@ -1,0 +1,57 @@
+packages/combinator/src/lib/control.js
+  s_bf7dc52eb2ba4c::t_a7d4390761cc38 21,75-78,127
+  s_bf7dc52eb2ba4c::t_09cbc151814ee2 11,128
+packages/combinator/src/lib/slider_control.test.js
+  s_bf7dc52eb2ba4c::t_dff50e7fa6f22a 59-61
+  s_bf7dc52eb2ba4c::t_56181cd5427948 1-58,62-72
+  s_bf7dc52eb2ba4c::t_b8d6ef709c8fd4 73
+packages/combinator/src/components/controls/control_slider.test.js
+  s_bf7dc52eb2ba4c::t_56181cd5427948 29-60
+  s_bf7dc52eb2ba4c::t_07a01c798d0f7a 1-28,61-64
+packages/combinator/src/lib/control.test.js
+  s_bda95360f3cca1::t_0d2c8d89e9fb36 52-58
+  s_bda95360f3cca1::t_8b1be737797818 2
+packages/combinator/src/components/controls/control_slider.vue
+  s_bf7dc52eb2ba4c::t_fbff63f7e418a1 16,27-63
+  s_bda95360f3cca1::t_fd02af5e1528ca 10-13,15,17
+  s_bda95360f3cca1::t_a6f7554fd5cc61 14
+  s_bda95360f3cca1::t_d9123b653b2ae4 1-9,18-26,64-70
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_bf7dc52eb2ba4c::t_56181cd5427948 450
+  s_bda95360f3cca1::t_0d2c8d89e9fb36 438-440,442-449,451-453,460-461
+  s_bda95360f3cca1::t_9cafdb8c2dd3b5 441,454-459
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_bda95360f3cca1::t_0d2c8d89e9fb36 414-433
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_bf7dc52eb2ba4c::t_a7d4390761cc38 34,48,325
+packages/combinator/src/components/combinator.test.js
+  s_bf7dc52eb2ba4c::t_3d7b1ffc98834e 7,262-291
+packages/combinator/src/lib/slider_control.js
+  s_bda95360f3cca1::t_ada8ffbf9b7647 1-37
+packages/combinator/src/variants/variants_progress_circle.js
+  s_bda95360f3cca1::t_5a27be6a855260 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "465d07b627edab5c859f2a005ef71907afc7f86e",
+  "prompts": {},
+  "sessions": {
+    "s_bda95360f3cca1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16057-cde5-76a0-a857-9178e5a8799c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_bf7dc52eb2ba4c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09189915-dc49-412a-9fd6-f1205383ecd0",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
