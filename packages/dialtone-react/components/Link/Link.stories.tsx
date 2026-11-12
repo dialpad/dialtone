@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtStack } from '../Stack/Stack';
 import { DtLink, type DtLinkProps } from './Link';
 import { LINK_VARIANTS } from './LinkConstants';
 
@@ -170,26 +170,20 @@ function LinkDefault ({ default: defaultSlot, kind: _kind, ...args }: LinkStoryA
 function LinkVariants () {
   return (
     <div>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--gap-100 d-stack--justify-start">
-          <StandIn for="stack">
-            <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-100 d-stack--align-baseline d-stack--justify-start d-fw-wrap">
-              {LINK_VARIANTS.map(tone => (
-                <DtLink key={tone} href="#" tone={tone}>
-                  {tone || 'default'} link
-                </DtLink>
-              ))}
-            </div>
-          </StandIn>
-          <StandIn for="stack">
-            <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-400 d-stack--align-baseline d-stack--justify-start d-fw-wrap">
-              <DtLink href="#" underline={false}>
-                No underline link
-              </DtLink>
-            </div>
-          </StandIn>
-        </div>
-      </StandIn>
+      <DtStack gap="100">
+        <DtStack direction="row" gap="100" align="baseline" className="d-fw-wrap">
+          {LINK_VARIANTS.map(tone => (
+            <DtLink key={tone} href="#" tone={tone}>
+              {tone || 'default'} link
+            </DtLink>
+          ))}
+        </DtStack>
+        <DtStack direction="row" gap="400" align="baseline" className="d-fw-wrap">
+          <DtLink href="#" underline={false}>
+            No underline link
+          </DtLink>
+        </DtStack>
+      </DtStack>
     </div>
   );
 }
