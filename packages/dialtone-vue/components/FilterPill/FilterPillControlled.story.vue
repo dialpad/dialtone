@@ -283,6 +283,7 @@ export default {
       this.outcome = '';
       this.teams = Object.freeze(['sales']);
       this.deferredTeams = ['sales'];
+      this.latestTeams = null;
       this.commits = [];
     },
   },

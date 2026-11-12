@@ -51,6 +51,7 @@
         kind="muted"
         importance="clear"
         :size="100"
+        data-qa="dtc-code-copy-json"
         @click="copyJson"
       >
         <template #default>
@@ -69,6 +70,7 @@
         kind="muted"
         importance="clear"
         :size="100"
+        data-qa="dtc-code-copy"
         @click="copy"
       >
         <template #default>
@@ -191,7 +193,9 @@ const copyText = computed(() => serializeExampleTemplate({
 function serializeAsVariantPreset () {
   const preset = {};
   const { copyNotice, lookupExclude } = props.info.metadata ?? {};
-  if (copyNotice) preset.metadata = { copyNotice, ...(lookupExclude ? { lookupExclude } : {}) };
+  if (copyNotice || lookupExclude) {
+    preset.metadata = { ...(copyNotice ? { copyNotice } : {}), ...(lookupExclude ? { lookupExclude } : {}) };
+  }
   const memberGroups = ['props', 'slots', 'attributes'];
 
   for (const group of memberGroups) {

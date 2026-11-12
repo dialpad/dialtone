@@ -49,7 +49,10 @@
               :icon-size="iconSize"
             />
           </template>
-          <span :class="['d-filter-pill__label', labelClass]">
+          <span
+            :class="['d-filter-pill__label', labelClass]"
+            data-qa="dt-filter-pill__label"
+          >
             <!--
               @slot Customize the anchor label. Legacy and controlled bindings are conditional on options.
               @binding {string} label Dimension label.
@@ -66,10 +69,14 @@
               v-if="controlledAtBirth"
               v-bind="controlledAnchorBindings"
             >
-              <span class="sr-only">{{ controlledAccessibleLabel }}</span>
+              <span
+                class="sr-only"
+                data-qa="dt-filter-pill__accessible-label"
+              >{{ controlledAccessibleLabel }}</span>
               <span
                 v-if="controlledDropdown || !isActive || label"
                 class="d-filter-pill__label-start"
+                data-qa="dt-filter-pill__label-start"
                 aria-hidden="true"
               >{{ controlledDropdown || !isActive ? controlledDisplayLabel : label }}</span>
               <span
@@ -78,16 +85,19 @@
                   'd-filter-pill__label-end',
                   { 'd-filter-pill__label-end--standalone': !label },
                 ]"
+                data-qa="dt-filter-pill__label-end"
                 aria-hidden="true"
               >{{ controlledDisplayLabel }}</span>
               <span
                 v-if="controlledOverflow"
                 class="d-filter-pill__label-end-overflow"
+                data-qa="dt-filter-pill__overflow"
                 :title="activeFilterOverflowTitle"
               >{{ controlledOverflow }}</span>
               <span
                 v-if="hasSlotContent($slots.anchorEnd, controlledAnchorBindings)"
                 :class="['d-filter-pill__anchor-end', anchorEndClass]"
+                data-qa="dt-filter-pill__anchor-end"
               >
                 <!--
                   @slot Noninteractive controlled trailing anchor content, retaining the built-in label.
@@ -185,6 +195,7 @@
               :key="option.value"
               :label="option.label"
               :value="option.value"
+              data-qa="dt-filter-pill__checkbox"
               @update:model-value="toggleControlledOption(option.value, $event)"
             >
               {{ option.label }}
@@ -332,6 +343,7 @@
             :id="controlledOptionId(option.value)"
             :key="option.value"
             role="menuitemradio"
+            data-qa="dt-filter-pill__option"
             navigation-type="arrow-keys"
             :selected="controlledRowSelected(option.value)"
             :aria-disabled="!controlledCanSelect || undefined"

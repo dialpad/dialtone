@@ -30,7 +30,7 @@ describe('DtFilterPill controlled selection', () => {
   const open = async () => {
     await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
   };
-  const checks = () => [...document.querySelectorAll('input[type="checkbox"]')];
+  const checks = () => [...document.querySelectorAll('[data-qa="dt-filter-pill__checkbox"]')];
 
   afterEach(() => {
     wrapper?.unmount();
@@ -85,10 +85,11 @@ describe('DtFilterPill controlled selection', () => {
       'onUpdate:open': value => trace.push(['visibility', value]),
       onOpen: value => trace.push(['open', value]),
     });
-    expect(wrapper.find('.d-filter-pill__label').text()).toContain('All');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).toContain('All');
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
     await open();
-    const rows = [...document.querySelectorAll('[role="menuitemradio"]')];
+    const rows = [...document.querySelectorAll('[data-qa="dt-filter-pill__option"]')];
+    expect(rows.map(row => row.getAttribute('role'))).toEqual(['menuitemradio', 'menuitemradio']);
     expect(rows.map(row => row.getAttribute('aria-checked'))).toEqual(['true', 'false']);
     expect(rows.every(row => row.querySelector('[data-qa="dt-item-layout-selected-wrapper"]'))).toBe(true);
     expect(document.querySelector('[role="menu"]').getAttribute('aria-label')).toBe('Teams');
@@ -101,9 +102,9 @@ describe('DtFilterPill controlled selection', () => {
       ['visibility', false], ['open', false],
     ]);
     // The declined proposal leaves the authoritative neutral selection intact.
-    expect(wrapper.find('.d-filter-pill__label').text()).toContain('All');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).toContain('All');
     await wrapper.setProps({ selected: 'calls' });
-    expect(wrapper.find('.d-filter-pill__label').text()).toContain('Calls');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).toContain('Calls');
   });
 
   it('notifies deliberate same-value activation without a redundant selected update', async () => {
@@ -121,7 +122,7 @@ describe('DtFilterPill controlled selection', () => {
     updateWrapper({ useDropdown: true, selected: 'support' }, {}, {}, { stubs: { transition: false } });
     await open();
     await flushPromises();
-    const row = document.querySelectorAll('[role="menuitemradio"]')[1];
+    const row = document.querySelectorAll('[data-qa="dt-filter-pill__option"]')[1];
     row.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
     row.focus();
     expect(document.activeElement).toBe(row);
@@ -183,7 +184,7 @@ describe('DtFilterPill controlled selection', () => {
       options[1], { value: 'new', label: 'New team' }, options[0], options[2],
     ].map(option => ({ ...option, label: option.label + ' translated' })) });
     expect(checks().map(input => input.checked)).toEqual([true, false, true, false]);
-    expect(wrapper.find('.d-filter-pill__label').text()).not.toContain('Support');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).not.toContain('Support');
     // Unrelated removal preserves edits; removing a pending value retains its unknown identity too.
     await wrapper.setProps({ options: [options[0], options[1]] });
     await reconcile();
@@ -275,7 +276,7 @@ describe('DtFilterPill controlled selection', () => {
 
   it('keeps unknown selected values active and clearable without exposing raw identifiers', async () => {
     updateWrapper({ selected: ['private-id', 'sales'] });
-    expect(wrapper.find('.d-filter-pill__label').text()).not.toContain('private-id');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).not.toContain('private-id');
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(true);
     await open();
     expect(checks().map(input => input.checked)).toEqual([true, false, false]);
@@ -284,7 +285,7 @@ describe('DtFilterPill controlled selection', () => {
     await reconcile();
     expect(wrapper.emitted('update:selected')).toEqual([[['private-id', 'sales', 'support']]]);
     await wrapper.setProps({ selected: ['private-id'] });
-    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('Unavailable');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label-end"]').text()).toBe('Unavailable');
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(true);
   });
 
@@ -294,21 +295,21 @@ describe('DtFilterPill controlled selection', () => {
     [options, ['private-id', 'engineering', 'support', 'sales'], 'Engineering', '+3'],
   ])('separates the dimension and resolved multiple summary for %j', (available, selected, summary, overflow) => {
     updateWrapper({ options: available, selected });
-    expect(wrapper.get('.sr-only').text()).toContain(summary);
-    expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('Teams');
-    expect(wrapper.get('.d-filter-pill__label-start').attributes('aria-hidden')).toBe('true');
-    expect(wrapper.get('.d-filter-pill__label-end').text()).toBe(summary);
-    expect(wrapper.get('.d-filter-pill__label-end').attributes('aria-hidden')).toBe('true');
-    expect(wrapper.get('.sr-only').text()).toContain('Teams');
-    expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(Boolean(overflow));
-    if (overflow) expect(wrapper.get('.d-filter-pill__label-end-overflow').text()).toBe(overflow);
+    expect(wrapper.get('[data-qa="dt-filter-pill__accessible-label"]').text()).toContain(summary);
+    expect(wrapper.get('[data-qa="dt-filter-pill__label-start"]').text()).toBe('Teams');
+    expect(wrapper.get('[data-qa="dt-filter-pill__label-start"]').attributes('aria-hidden')).toBe('true');
+    expect(wrapper.get('[data-qa="dt-filter-pill__label-end"]').text()).toBe(summary);
+    expect(wrapper.get('[data-qa="dt-filter-pill__label-end"]').attributes('aria-hidden')).toBe('true');
+    expect(wrapper.get('[data-qa="dt-filter-pill__accessible-label"]').text()).toContain('Teams');
+    expect(wrapper.find('[data-qa="dt-filter-pill__overflow"]').exists()).toBe(Boolean(overflow));
+    if (overflow) expect(wrapper.get('[data-qa="dt-filter-pill__overflow"]').text()).toBe(overflow);
   });
 
   it.each([undefined, ''])('keeps an active summary without an empty dimension when label is %j', label => {
     updateWrapper({ label });
-    expect(wrapper.find('.d-filter-pill__label-start').exists()).toBe(false);
-    expect(wrapper.get('.d-filter-pill__label-end').text()).toBe('Sales');
-    expect(wrapper.get('.sr-only').text()).toBe('Sales');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label-start"]').exists()).toBe(false);
+    expect(wrapper.get('[data-qa="dt-filter-pill__label-end"]').text()).toBe('Sales');
+    expect(wrapper.get('[data-qa="dt-filter-pill__accessible-label"]').text()).toBe('Sales');
   });
 
   it.each([false, true])('updates overlay naming and heading ownership when a parent changes content (dropdown=%s)', async useDropdown => {
@@ -363,9 +364,9 @@ describe('DtFilterPill controlled selection', () => {
       selected: ['sales', 'support'],
     });
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
-    expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(false);
+    expect(wrapper.find('[data-qa="dt-filter-pill__overflow"]').exists()).toBe(false);
     await open();
-    expect(wrapper.find('.d-filter-pill__primary').classes()).not.toContain('d-filter-pill--selected');
+    expect(wrapper.find('[data-qa="dt-filter-pill__button"]').classes()).not.toContain('d-filter-pill--selected');
     expect(warn.mock.calls.some(([message]) => message.includes('unique string values'))).toBe(true);
     expect(checks()).toHaveLength(0);
     expect(wrapper.emitted('selection-change')).toBeUndefined();
@@ -512,7 +513,7 @@ describe('DtFilterPill controlled selection', () => {
   it.each([undefined, createCommentVNode('empty')])('preserves an empty legacy header slot without padding', async content => {
     updateWrapper({ options: undefined, modelValue: [{ name: 'Legacy' }] }, { headerContent: () => content });
     await open();
-    expect(document.querySelector('.d-popover__header')).toBeNull();
+    expect(document.querySelector('[data-qa="dt-popover-header-footer"]')).toBeNull();
   });
 
   it('keeps legacy header nodes directly in the existing styled header content', async () => {
@@ -526,10 +527,10 @@ describe('DtFilterPill controlled selection', () => {
     await open();
     const title = document.querySelector('[data-qa="header-title"]');
     const close = document.querySelector('[data-qa="header-close"]');
-    expect(title.parentElement).toBe(document.querySelector('.d-popover__header__content'));
+    expect(title.parentElement).toBe(document.querySelector('[data-qa="dt-popover-header-footer-content"]'));
     expect(title.parentElement.classList.contains('header-content')).toBe(true);
     expect(close.parentElement).toBe(title.parentElement);
-    expect(title.closest('.d-popover__header').classList.contains('header-outer')).toBe(true);
+    expect(title.closest('[data-qa="dt-popover-header-footer"]').classList.contains('header-outer')).toBe(true);
     close.click();
     await reconcile();
     expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
@@ -590,7 +591,7 @@ describe('DtFilterPill controlled selection', () => {
   it('renders nullable optional labels and neutral values as absent without mutating options', async () => {
     const nullableOptions = Object.freeze([Object.freeze({ value: 'sales', label: 'Sales', shortLabel: null })]);
     updateWrapper({ useDropdown: true, options: nullableOptions, selected: 'sales', neutralValue: null });
-    expect(wrapper.find('.d-filter-pill__label').text()).toContain('Sales');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).toContain('Sales');
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(true);
     await wrapper.find('[data-qa="dt-filter-pill__clear-button"]').trigger('click');
     expect(wrapper.emitted('update:selected')).toEqual([[null]]);
@@ -676,7 +677,7 @@ describe('DtFilterPill controlled selection', () => {
     expect(event.defaultPrevented).toBe(true);
     expect(wrapper.emitted('open')).toEqual([[true]]);
     expect(wrapper.emitted('selection-change')).toBeUndefined();
-    expect([...document.querySelectorAll('[role="menuitemradio"]')].map(row => row.getAttribute('aria-checked')))
+    expect([...document.querySelectorAll('[data-qa="dt-filter-pill__option"]')].map(row => row.getAttribute('aria-checked')))
       .toEqual(['true', 'false', 'false']);
   });
 
@@ -686,9 +687,9 @@ describe('DtFilterPill controlled selection', () => {
       optionEnd: ({ option, selected }) => h('span', `${option.value}:${selected}`),
     });
     expect(wrapper.find('.anchor-count').text()).toBe('12 items');
-    expect(wrapper.find('.d-filter-pill__label').text()).toContain('Sales');
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).toContain('Sales');
     await wrapper.setProps({ selected: 'support' });
-    expect(wrapper.find('.d-filter-pill__anchor-end').exists()).toBe(false);
+    expect(wrapper.find('[data-qa="dt-filter-pill__anchor-end"]').exists()).toBe(false);
     await wrapper.setProps({ selected: 'sales' });
     expect(wrapper.get('.anchor-count').text()).toBe('12 items');
     await open();
@@ -700,8 +701,8 @@ describe('DtFilterPill controlled selection', () => {
       default: ({ selected, displayLabel }) => selected === 'hidden' ? 'All contacts' : displayLabel,
       anchorEnd: () => 'Hidden count',
     });
-    expect(wrapper.find('.d-filter-pill__label').text()).toBe('All contacts');
-    expect(wrapper.find('.d-filter-pill__anchor-end').exists()).toBe(false);
+    expect(wrapper.find('[data-qa="dt-filter-pill__label"]').text()).toBe('All contacts');
+    expect(wrapper.find('[data-qa="dt-filter-pill__anchor-end"]').exists()).toBe(false);
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
   });
 
@@ -759,7 +760,7 @@ describe('DtFilterPill controlled selection', () => {
     ];
     updateWrapper({ useDropdown: true, options: special, selected: '', neutralValue: '' });
     await open();
-    const rows = [...document.querySelectorAll('[role="menuitemradio"]')];
+    const rows = [...document.querySelectorAll('[data-qa="dt-filter-pill__option"]')];
     const ids = rows.map(row => row.id);
     expect(new Set(ids).size).toBe(3);
     ids.forEach((id, index) => expect(document.getElementById(id)).toBe(rows[index]));
@@ -768,8 +769,8 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.emitted('update:selected')).toEqual([['a:#[]']]);
     await wrapper.setProps({ selected: '日本語' });
     await open();
-    expect([...document.querySelectorAll('[role="menuitemradio"]')].map(row => row.id)).toEqual(ids);
-    expect(document.querySelectorAll('[role="menuitemradio"]')[2].getAttribute('aria-checked')).toBe('true');
+    expect([...document.querySelectorAll('[data-qa="dt-filter-pill__option"]')].map(row => row.id)).toEqual(ids);
+    expect(document.querySelectorAll('[data-qa="dt-filter-pill__option"]')[2].getAttribute('aria-checked')).toBe('true');
   });
 
   it('keeps Apply inert in an open immediate session and lets Cancel dismiss without an action', async () => {
@@ -817,10 +818,10 @@ describe('DtFilterPill controlled selection', () => {
   it('moves focus to the nearest surviving row, then the empty overlay, without changing selection', async () => {
     updateWrapper({ useDropdown: true, selected: 'support' });
     await open();
-    document.querySelectorAll('[role="menuitemradio"]')[1].focus();
+    document.querySelectorAll('[data-qa="dt-filter-pill__option"]')[1].focus();
     await wrapper.setProps({ options: [options[0], options[2]] });
     await reconcile();
-    const remaining = [...document.querySelectorAll('[role="menuitemradio"]')];
+    const remaining = [...document.querySelectorAll('[data-qa="dt-filter-pill__option"]')];
     expect(document.activeElement).toBe(remaining[1]);
     await wrapper.setProps({ options: [] });
     await reconcile();
@@ -840,7 +841,7 @@ describe('DtFilterPill controlled selection', () => {
     });
     await open();
     await flushPromises();
-    const row = document.querySelectorAll('[role="menuitemradio"]')[1];
+    const row = document.querySelectorAll('[data-qa="dt-filter-pill__option"]')[1];
     row.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
     row.focus();
     liveOptions.value.unshift(...liveOptions.value.splice(1, 1));

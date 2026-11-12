@@ -107,7 +107,7 @@ reviews:
       instructions: >
         - Tests use Vitest + @vue/test-utils.
 
-        - One assertion per test. Use beforeAll/beforeEach to reduce repetition.
+        - One behavior per test; multiple related assertions are allowed. Use beforeAll/beforeEach to reduce repetition.
           Use it.each for similar tests with different values.
 
         - Flag tests that assert on implementation details (mock call counts)

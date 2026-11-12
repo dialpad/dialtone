@@ -92,11 +92,10 @@ describe('code_editor.vue test', function () {
         hasChanges: true,
         disabledMembers: computeDisabledMembers(state.info, state.options.props, state.options.slots),
       });
-      await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
+      await wrapper.get('[data-qa="dtc-code-copy"]').trigger('click');
       expect(writeText.mock.calls[0][0]).not.toContain('model-value=');
       expect(writeText.mock.calls[0][0]).toContain('<!-- Configuration snapshot. Bind selected with v-model:selected');
-      await wrapper.findAll('button')
-        .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
+      await wrapper.get('[data-qa="dtc-code-copy-json"]').trigger('click');
       const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
       expect(preset.props).not.toHaveProperty('modelValue');
       expect(preset.props.selected).toEqual({ initialValue: 'all' });
@@ -114,7 +113,9 @@ describe('code_editor.vue test', function () {
     const doc = allDocs.find(doc => doc.displayName === 'DtFilterPill');
     const bank = {
       ...filterPillVariants,
-      fixture: { props: {
+      fixture: {
+        metadata: { lookupExclude: { reason: 'Needs a qualified consumer profile', owner: 'Example maintainer' } },
+        props: {
         options: { initialValue: [{ value: '', label: 'All outcomes' }, { value: 'resolved', label: 'Resolved' }] },
         selected: { initialValue: selected }, neutralValue: { initialValue: '' },
         useDropdown: { initialValue: true }, label: { initialValue: 'Outcome' },
@@ -129,9 +130,9 @@ describe('code_editor.vue test', function () {
     try {
       await editor.setProps({ ...state, devMode: true, hasChanges: true,
         disabledMembers: computeDisabledMembers(state.info, state.options.props, state.options.slots) });
-      await editor.findAll('button')
-        .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
+      await editor.get('[data-qa="dtc-code-copy-json"]').trigger('click');
       const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
+      expect(preset.metadata).toEqual({ lookupExclude: bank.fixture.metadata.lookupExclude });
       expect(preset.props.selected).toEqual({ initialValue: selected });
       expect(preset.props.neutralValue).toEqual({ initialValue: '' });
       expect(preset.props).not.toHaveProperty('startTooltipText');
@@ -154,7 +155,7 @@ describe('code_editor.vue test', function () {
       await pill.get('[data-qa="dt-filter-pill__button"]').trigger('click');
       await flushPromises();
       expect(menu.querySelector('[role="menuitemradio"]').getAttribute('aria-checked')).toBe('true');
-      expect(pill.get('.d-filter-pill__label-start').text()).toBe('All outcomes');
+      expect(pill.get('[data-qa="dt-filter-pill__label-start"]').text()).toBe('All outcomes');
       await pill.get('[data-qa="dt-filter-pill__button"]').trigger('click');
       await flushPromises();
       await vi.runAllTimersAsync();
@@ -203,7 +204,7 @@ describe('code_editor.vue test', function () {
       expect(wrapper.text()).not.toContain('max-lines');
       expect(wrapper.text()).toContain(':progress="0"');
       expect(wrapper.text()).toContain(':disabled="false"');
-      await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
+      await wrapper.get('[data-qa="dtc-code-copy"]').trigger('click');
       const copied = writeText.mock.calls[0][0];
       expect(copied).not.toContain('max-lines');
       expect(copied).toContain(':progress="0"');
@@ -331,11 +332,10 @@ describe('code_editor.vue test', function () {
         hasChanges: Boolean(copyJson),
       });
       if (displayedScope) expect.soft(wrapper.text()).toContain(displayedScope);
-      await wrapper.findAll('button').find(button => button.text() === 'Copy').trigger('click');
+      await wrapper.get('[data-qa="dtc-code-copy"]').trigger('click');
       expect.soft(writeText.mock.calls[0][0]).toBe(expected);
       if (copyJson) {
-        await wrapper.findAll('button')
-          .find(button => button.text().replace(/\s+/g, ' ') === 'Copy JSON').trigger('click');
+        await wrapper.get('[data-qa="dtc-code-copy-json"]').trigger('click');
         const preset = Object.values(JSON5.parse(`{${writeText.mock.calls.at(-1)[0]}}`))[0];
         expect(preset.slots.anchor).toEqual({
           initialValue: options.slots.anchor,

@@ -59,7 +59,7 @@
         <template #default="{ label }">
           <span
             v-if="selectedConversationType !== 'All Conversations'"
-            class="sr-only"
+            class="d-vi-visible-sr"
           >{{ label }}: </span>
           {{ selectedConversationType === 'All Conversations'
             ? label
@@ -110,7 +110,7 @@
         :show-clear="false"
       >
         <template #default="{ label }">
-          <span class="sr-only">{{ label }}: </span>
+          <span class="d-vi-visible-sr">{{ label }}: </span>
           {{ selectedIEFilter || 'Internal and external' }}
         </template>
         <template #content>
@@ -165,7 +165,7 @@
         <template #default="{ label }">
           <span
             v-if="selectedDropdownType !== 'All Conversations'"
-            class="sr-only"
+            class="d-vi-visible-sr"
           >{{ label }}: </span>
           {{ selectedDropdownType === 'All Conversations'
             ? label

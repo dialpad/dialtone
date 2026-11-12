@@ -706,24 +706,26 @@ describe('DtFilterPill Tests', function () {
       const paddingClasses = contentClasses.filter(name =>
         /^(d-p(?:[xy])?-\d+|d-filter-pill__popover-content)$/.test(name));
       expect(new Set(paddingClasses)).toEqual(new Set(classes));
-      for (const selector of ['.d-popover__header', '.d-popover__footer']) {
-        expect(document.querySelector(selector).classList.contains('d-pis-200')).toBe(edgeClass !== null);
+      const edges = document.querySelectorAll('[data-qa="dt-popover-header-footer"]');
+      expect(edges).toHaveLength(2);
+      for (const edge of edges) {
+        expect(edge.classList.contains('d-pis-200')).toBe(edgeClass !== null);
       }
     });
 
     describe('When popover class props are set', () => {
       it.each([
-        ['popoverContentClass', '.d-popover__content', 'custom-content-class'],
-        ['popoverHeaderClass', '.d-popover__header', 'custom-header-class'],
-        ['popoverFooterClass', '.d-popover__footer', 'custom-footer-class'],
-        ['popoverDialogClass', '.d-popover__dialog', 'custom-dialog-class'],
-      ])('Should apply %s to the popover element', async (propName, selector, className) => {
+        ['popoverContentClass', '[data-qa="dt-popover-content"]', 0, 'custom-content-class'],
+        ['popoverHeaderClass', '[data-qa="dt-popover-header-footer"]', 0, 'custom-header-class'],
+        ['popoverFooterClass', '[data-qa="dt-popover-header-footer"]', 1, 'custom-footer-class'],
+        ['popoverDialogClass', '[data-qa="dt-popover"]', 0, 'custom-dialog-class'],
+      ])('Should apply %s to the popover element', async (propName, selector, index, className) => {
         mockProps = { [propName]: className };
         mockSlots = { headerContent: 'Heading', footerContent: 'Footer' };
         updateWrapper();
         await button.trigger('click');
 
-        expect(document.querySelector(selector).classList.contains(className)).toBe(true);
+        expect(document.querySelectorAll(selector)[index].classList.contains(className)).toBe(true);
       });
     });
 
