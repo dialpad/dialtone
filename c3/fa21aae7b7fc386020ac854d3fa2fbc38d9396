@@ -1,0 +1,96 @@
+apps/dialtone-documentation/docs/components/split-button.md
+  s_7f1d1d64baa803::t_a6135abf03c275 242,248,254,260,275,278,291,294,307,312,317,325,332-333,342-343,367-370
+apps/dialtone-documentation/docs/guides/getting-started/index.md
+  s_7f1d1d64baa803::t_a6135abf03c275 92,95,98
+apps/dialtone-documentation/docs/utilities/sizing/width.md
+  s_7f1d1d64baa803::t_a6135abf03c275 18,39
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_7f1d1d64baa803::t_88fd96f533eede 179
+  s_7f1d1d64baa803::t_a6135abf03c275 145,178
+apps/dialtone-documentation/docs/components/mode-island.md
+  s_7f1d1d64baa803::t_88fd96f533eede 631-649
+  s_7f1d1d64baa803::t_a6135abf03c275 22,28,34,48,54,61,65-69,79,83-87,97,101-105,173,175,179,181,185,187,310,318,326,350,352-354,360,364,368,372,376,382,386,396,433,448,456,464,470,477,498,519,540,575,584
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_7f1d1d64baa803::t_a6135abf03c275 209,215,221,240,245,250,259,264,269,315,321,327,335,340,345
+  s_7f1d1d64baa803::t_88fd96f533eede 381-388
+apps/dialtone-documentation/docs/components/emoji-text-wrapper.md
+  s_7f1d1d64baa803::t_a6135abf03c275 15,32,42,47
+apps/dialtone-documentation/docs/components/chip.md
+  s_7f1d1d64baa803::t_a6135abf03c275 58,71,127-130
+apps/dialtone-documentation/docs/components/text.md
+  s_7f1d1d64baa803::t_a6135abf03c275 396,409,550,578
+apps/dialtone-documentation/docs/components/box.md
+  s_7f1d1d64baa803::t_7da77416231c3f 220,225,321,338,369-370,386
+apps/dialtone-documentation/docs/utilities/backgrounds/repeat.md
+  s_7f1d1d64baa803::t_a6135abf03c275 16,20,24,28,32,36
+apps/dialtone-documentation/docs/components/tabs.md
+  s_7f1d1d64baa803::t_a6135abf03c275 282,288,291,297
+  s_7f1d1d64baa803::t_eb428052552486 399
+apps/dialtone-documentation/docs/components/keyboard-shortcut.md
+  s_7f1d1d64baa803::t_a6135abf03c275 62
+apps/dialtone-documentation/docs/utilities/sizing/size.md
+  s_7f1d1d64baa803::t_a6135abf03c275 20
+apps/dialtone-documentation/docs/utilities/index.md
+  s_7f1d1d64baa803::t_a6135abf03c275 189,193,197,201,215,219,223,237-238,241-242,245-246,259-260,263-264,267-268,281-282,285-286,289-290,298-301
+apps/dialtone-documentation/docs/utilities/sizing/height.md
+  s_7f1d1d64baa803::t_a6135abf03c275 19,37
+apps/dialtone-documentation/docs/components/input.md
+  s_7f1d1d64baa803::t_a6135abf03c275 204,217,232,237,242,245,250,255,260,263,278,281,286,289,292,294
+  s_7f1d1d64baa803::t_88fd96f533eede 342-348
+apps/dialtone-documentation/docs/components/scroller.md
+  s_7f1d1d64baa803::t_a6135abf03c275 129-130,173
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_7f1d1d64baa803::t_a6135abf03c275 22,62,81,83,120
+apps/dialtone-documentation/docs/components/popover.md
+  s_7f1d1d64baa803::t_a6135abf03c275 290
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_7f1d1d64baa803::t_a6135abf03c275 12,57,67,82-86,88,99,124
+apps/dialtone-documentation/docs/components/list-item.md
+  s_7f1d1d64baa803::t_a6135abf03c275 16,26,53,63,85,91,103,115,127,141-142,150
+  s_7f1d1d64baa803::t_88fd96f533eede 143-149
+apps/dialtone-documentation/docs/components/button.md
+  s_7f1d1d64baa803::t_88fd96f533eede 207,865-873
+  s_7f1d1d64baa803::t_0baaaa0774eb64 590-591
+  s_7f1d1d64baa803::t_a6135abf03c275 215-216,316,387,393,399,405,411,432,441,448,452,471,479,501,508,517,524,531,540,547,554,563,570,577,601,608,617,624,631,640,647,654,683-684,690-691,700-701,707-708,801,816,837-839
+apps/dialtone-documentation/docs/components/datepicker.md
+  s_7f1d1d64baa803::t_a6135abf03c275 52,266
+apps/dialtone-documentation/docs/utilities/flex/columns-layouts.md
+  s_7f1d1d64baa803::t_a6135abf03c275 17,23,30,38,47,57,68,80,93,107,122,138,164,172,180,188,196,204,212,220,228,236,244,252
+apps/dialtone-documentation/docs/utilities/backgrounds/size.md
+  s_7f1d1d64baa803::t_a6135abf03c275 16,20,24,28,32
+apps/dialtone-documentation/docs/components/text-list.md
+  s_7f1d1d64baa803::t_a6135abf03c275 163,169,175,222-225
+apps/dialtone-documentation/docs/foundations/size-and-space/index.md
+  s_7f1d1d64baa803::t_a6135abf03c275 61-63,74,77,80
+apps/dialtone-documentation/docs/utilities/backgrounds/position.md
+  s_7f1d1d64baa803::t_a6135abf03c275 16,20,24,28,32,36,40,44,48,52
+apps/dialtone-documentation/docs/components/item-layout.md
+  s_7f1d1d64baa803::t_a6135abf03c275 20,26,30,33,50,56,60,63,72-75
+apps/dialtone-documentation/docs/utilities/backgrounds/clip.md
+  s_7f1d1d64baa803::t_a6135abf03c275 25
+apps/dialtone-documentation/docs/components/stack.md
+  s_7f1d1d64baa803::t_88fd96f533eede 1167
+  s_7f1d1d64baa803::t_a6135abf03c275 241,252,638,641,644,653-655,1087,1101,1104,1138,1142,1145-1146,1148-1149,1152
+apps/dialtone-documentation/docs/utilities/borders/radius.md
+  s_7f1d1d64baa803::t_a6135abf03c275 28-37,55-58,76-79,91,104
+apps/dialtone-documentation/docs/components/badge.md
+  s_7f1d1d64baa803::t_7da77416231c3f 215,221,227,234,240,246,252,310
+apps/dialtone-documentation/docs/components/card.md
+  s_7f1d1d64baa803::t_a6135abf03c275 60,68,113,121,150-153
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c3fa21aae7b7fc386020ac854d3fa2fbc38d9396",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
