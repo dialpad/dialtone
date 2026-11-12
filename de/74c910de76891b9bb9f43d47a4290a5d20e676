@@ -1,0 +1,19 @@
+packages/combinator/src/lib/info.js
+  s_c8bb1bc8e0154a::t_3dce5d347f6c3d 1,17-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "de74c910de76891b9bb9f43d47a4290a5d20e676",
+  "prompts": {},
+  "sessions": {
+    "s_c8bb1bc8e0154a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "26cc1112-ee2c-4d75-ad24-dac4c82f4710",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

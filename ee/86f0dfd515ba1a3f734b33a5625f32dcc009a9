@@ -1,0 +1,19 @@
+packages/dialtone-icons/src/svg/icons/places/globe.svg
+  s_10056ad2684b81::t_fef3f25c15dc85 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ee86f0dfd515ba1a3f734b33a5625f32dcc009a9",
+  "prompts": {},
+  "sessions": {
+    "s_10056ad2684b81": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a164be-ca7f-7c42-b767-2a508314e5cd",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}

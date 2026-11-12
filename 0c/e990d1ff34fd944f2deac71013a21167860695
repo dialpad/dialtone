@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/components/button.md
+  h_c15b5755534093 216-245,886,888
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "0ce990d1ff34fd944f2deac71013a21167860695",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

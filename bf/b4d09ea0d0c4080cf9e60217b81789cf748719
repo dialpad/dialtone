@@ -1,0 +1,19 @@
+packages/dialtone-docs/src/content/development/development-css-utilities.md
+  s_1b5266149b436d::t_d68d1e9f564c6d 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bfb4d09ea0d0c4080cf9e60217b81789cf748719",
+  "prompts": {},
+  "sessions": {
+    "s_1b5266149b436d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

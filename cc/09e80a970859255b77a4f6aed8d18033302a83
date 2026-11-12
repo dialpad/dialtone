@@ -1,0 +1,27 @@
+packages/combinator/src/lib/info.js
+  s_7f1d1d64baa803::t_28b482dc935dc5 109-111
+packages/dialtone-vue/components/Text/Text.vue
+  s_7f1d1d64baa803::t_28b482dc935dc5 55
+packages/dialtone-vue/components/SegmentedControl/SegmentedControlItem.vue
+  s_7f1d1d64baa803::t_28b482dc935dc5 70-74
+packages/combinator/.github/documentation/internal/CONTROLS.md
+  s_7f1d1d64baa803::t_28b482dc935dc5 35-39
+packages/combinator/src/lib/info.test.js
+  s_7f1d1d64baa803::t_716e8f74fac207 9-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cc09e80a970859255b77a4f6aed8d18033302a83",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

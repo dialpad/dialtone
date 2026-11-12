@@ -1,0 +1,23 @@
+packages/dialtone-tokens/build.gradle
+  s_700242684bb16b::t_a788c6c2c64edd 100-104
+packages/dialtone-icons/android/build.gradle
+  s_700242684bb16b::t_e97e76ac1bf652 109-113
+packages/dialtone-icons/android/gradle.properties
+  s_700242684bb16b::t_e885928f9e38c3 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "a2100dc145da831892eacb8c56166b3a5d0fa5e8",
+  "prompts": {},
+  "sessions": {
+    "s_700242684bb16b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5b1bc7f7-9ffa-4c08-8152-33c92b2ac712",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
