@@ -119,8 +119,14 @@ export default {
 
   'controlled counts': controlledPreset({ selected: { initialValue: 'unread', types: ['string', 'null'] } }, {
     headerContent: { initialValue: 'Filter by' },
-    anchorEnd: { initialValue: '<dt-badge v-if="selected === \'unread\'" type="bulletin" kind="count" aria-hidden="true">12</dt-badge><span v-if="selected === \'unread\'" class="d-vi-visible-sr">, 12 unread messages</span>' },
-    optionEnd: { initialValue: '<dt-badge v-if="option.value === \'unread\'" type="bulletin" kind="count" aria-hidden="true">12</dt-badge><span v-if="option.value === \'unread\'" class="d-vi-visible-sr">, 12 unread messages</span>' },
+    anchorEnd: { initialValue: `<template v-if="selected === 'unread'">
+  <dt-badge type="bulletin" kind="count" aria-hidden="true">12</dt-badge>
+  <span class="d-vi-visible-sr">, 12 unread messages</span>
+</template>` },
+    optionEnd: { initialValue: `<template v-if="option.value === 'unread'">
+  <dt-badge type="bulletin" kind="count" aria-hidden="true">12</dt-badge>
+  <span class="d-vi-visible-sr">, 12 unread messages</span>
+</template>` },
   }),
 
   default: {
