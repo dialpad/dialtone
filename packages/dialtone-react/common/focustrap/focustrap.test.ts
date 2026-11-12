@@ -1,4 +1,4 @@
-import { act, createElement, StrictMode, useRef, type ReactNode } from 'react';
+import { act, createElement, StrictMode, useState, type ReactNode } from 'react';
 import { fireEvent, render, type RenderResult } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { FOCUSTRAP_DEFAULTS, FOCUSTRAP_STATE_KEY } from './focustrap_constants';
@@ -24,9 +24,9 @@ const defaultChildren = () => [
 
 // The element Vue's templates put `v-dt-focustrap="config"` on.
 function Dialog ({ config, role = 'dialog', label = 'Test dialog', children = defaultChildren() }: DialogProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  useFocusTrap(ref, config);
-  return createElement('div', { ref, role, 'data-qa': 'trap', 'aria-label': label }, children);
+  const [el, setEl] = useState<HTMLElement | null>(null);
+  useFocusTrap(el, config);
+  return createElement('div', { ref: setEl, role, 'data-qa': 'trap', 'aria-label': label }, children);
 }
 
 // Vue's `wrapper.setData` is a rerender with new props.
@@ -121,8 +121,10 @@ describe('DtFocustrapDirective', () => {
       await flushPromises();
 
       find('second').focus();
-      tab();
+      // fireEvent returns false when the handler cancelled the event; a middle Tab must be left to the browser.
+      const notCancelled = tab();
 
+      expect(notCancelled).toBe(true);
       expect(document.activeElement).toBe(find('second'));
     });
   });

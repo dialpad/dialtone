@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, type RefObject } from 'react';
+import { useEffect, useEffectEvent } from 'react';
 import { FOCUSTRAP_DEFAULTS, FOCUSTRAP_STATE_KEY } from './focustrap_constants';
 import { getFirstFocusCandidate, getTabbableElements } from './focustrap_utils';
 
@@ -173,26 +173,29 @@ function handleKeydown (event: KeyboardEvent, el: FocusTrapHost) {
 }
 
 /**
- * dialtone-vue's `v-dt-focustrap` directive as a hook: trap Tab/Shift+Tab within the element `ref` points to.
+ * dialtone-vue's `v-dt-focustrap` directive as a hook: trap Tab/Shift+Tab within `el`.
  *
  * Manages initial focus, Tab boundary wrapping, and focus restoration. Does NOT handle Escape or click-outside — that's
  * the component's responsibility.
  *
- * Like the directive, it binds to the element it finds when the calling component mounts, so `ref` must point to an
- * element that's rendered for as long as the component is. The trap's state lives on the element under
- * `FOCUSTRAP_STATE_KEY`, as in Vue.
+ * `el` is kept in state with a callback ref, so the trap follows the element: a new element gets fresh state, as on
+ * the directive's `mounted`, and losing one is the directive's `unmounted`. The trap's state lives on the element
+ * under `FOCUSTRAP_STATE_KEY`, as in Vue.
  *
  * @example
+ * const [el, setEl] = useState<HTMLElement | null>(null);
+ * // <div ref={setEl}>
+ *
  * // Always active (no binding value)
- * useFocusTrap(ref);
+ * useFocusTrap(el);
  *
  * // Activate when truthy
- * useFocusTrap(ref, isOpen);
+ * useFocusTrap(el, isOpen);
  *
  * // Full configuration
- * useFocusTrap(ref, { active: isOpen, initialFocus: '#name-input' });
+ * useFocusTrap(el, { active: isOpen, initialFocus: '#name-input' });
  */
-export function useFocusTrap (ref: RefObject<HTMLElement | null>, options?: FocusTrapValue): void {
+export function useFocusTrap (el: HTMLElement | null, options?: FocusTrapValue): void {
   const { active } = resolveConfig(options);
 
   // Called only from the effect below, so it reads the options of the render that activated the trap.
@@ -203,26 +206,26 @@ export function useFocusTrap (ref: RefObject<HTMLElement | null>, options?: Focu
 
   // The directive's `mounted` and `unmounted`: the state exists for as long as the element does, active or not.
   useEffect(() => {
-    const el: FocusTrapHost | null = ref.current;
     if (!el) return undefined;
+    const host: FocusTrapHost = el;
 
-    el[FOCUSTRAP_STATE_KEY] = createState();
+    host[FOCUSTRAP_STATE_KEY] = createState();
     return () => {
-      if (el[FOCUSTRAP_STATE_KEY]?.active) {
-        deactivate(el);
+      if (host[FOCUSTRAP_STATE_KEY]?.active) {
+        deactivate(host);
       }
-      cleanup(el);
-      delete el[FOCUSTRAP_STATE_KEY];
+      cleanup(host);
+      delete host[FOCUSTRAP_STATE_KEY];
     };
-  }, [ref]);
+  }, [el]);
 
   // Mounting with `active`, and the directive's `updated` for a change of `active`. It's declared after the effect that
   // creates the state, so it finds it on mount.
   useEffect(() => {
-    const el: FocusTrapHost | null = ref.current;
     if (!el || !active) return undefined;
+    const host: FocusTrapHost = el;
 
-    activateTrap(el);
-    return () => deactivate(el);
-  }, [ref, active]);
+    activateTrap(host);
+    return () => deactivate(host);
+  }, [el, active]);
 }
