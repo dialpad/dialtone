@@ -175,7 +175,7 @@
           <dt-list-item
             v-for="filter in dropdownConversationTypes"
             :key="filter.name"
-            role="menuitem"
+            role="menuitemradio"
             navigation-type="arrow-keys"
             :selected="filter.name === selectedDropdownType"
             @click="selectDropdownType(filter.name, close)"

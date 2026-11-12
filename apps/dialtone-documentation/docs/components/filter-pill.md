@@ -205,7 +205,7 @@ These existing examples use the legacy array contract. Reset updates the same ar
       <dt-list-item
         v-for="filter in heroConversationTypes"
         :key="filter.name"
-        role="menuitem"
+        role="menuitemradio"
         navigation-type="arrow-keys"
         :selected="filter.name === selectedHeroConversationType"
         @click="selectHeroConversationType(filter.name, close)"
@@ -368,7 +368,7 @@ Cancel, Escape, or clicking outside discards pending changes.
 
 Setting `use-dropdown` switches the overlay from a popover to a dropdown with keyboard-navigable
 list items. This provides arrow key navigation, highlight management, and Enter/Space selection
-out of the box — ideal for single-select filter patterns. Built-in dropdown rows reserve space for the selected checkmark. For custom content, keep a decorative checkmark in each row and use `d-vi-hidden` on unselected markers, as shown below, to retain its layout space.
+out of the box — ideal for single-select filter patterns. Use `role="menuitemradio"` with `:selected` for persistent, mutually exclusive choices; use `menuitem` for actions. The radio role exposes `aria-checked` independently of keyboard highlight. Built-in dropdown rows reserve space for the selected checkmark. For custom content, keep a decorative checkmark in each row and use `d-vi-hidden` on unselected markers, as shown below, to retain its layout space.
 
 ```vue demo
 <dt-stack direction="row" gap="100">
@@ -395,7 +395,7 @@ out of the box — ideal for single-select filter patterns. Built-in dropdown ro
       <dt-list-item
         v-for="filter in dropdownTypes"
         :key="filter.name"
-        role="menuitem"
+        role="menuitemradio"
         navigation-type="arrow-keys"
         :selected="filter.name === selectedDropdownType"
         @click="selectDropdownType(filter.name, close)"
@@ -436,7 +436,7 @@ out of the box — ideal for single-select filter patterns. Built-in dropdown ro
     <dt-list-item
       v-for="filter in conversationTypes"
       :key="filter.name"
-      role="menuitem"
+      role="menuitemradio"
       navigation-type="arrow-keys"
       :selected="filter.name === selectedType"
       @click="selectType(filter.name, close)"
