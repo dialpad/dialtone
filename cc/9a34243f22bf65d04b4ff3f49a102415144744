@@ -1,0 +1,20 @@
+packages/dialtone-vue/components/FilterPill/FilterPill.test.js
+  s_a98638d5a5be6e::t_99778f65ae7a7e 869
+  s_a98638d5a5be6e::t_4ebafc969d4ee2 783,785,796,798-802,804-808,810-813,838-839
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cc9a34243f22bf65d04b4ff3f49a102415144744",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
