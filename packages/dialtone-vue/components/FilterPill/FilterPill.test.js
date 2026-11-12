@@ -622,6 +622,23 @@ describe('DtFilterPill Tests', function () {
   });
 
   describe('Overlay Class Props Tests', () => {
+    it.each([
+      [undefined, ['d-py-100', 'd-px-150'], 'd-pis-200'],
+      ['large', ['d-p-200'], 'd-pis-200'],
+      ['none', [], null],
+    ])('Should render popover padding %s without changing header/footer defaults', async (padding, classes, edgeClass) => {
+      mockProps = { popoverPadding: padding };
+      mockSlots = { headerContent: 'Heading', footerContent: 'Footer' };
+      updateWrapper();
+      await button.trigger('click');
+
+      expect([...document.querySelector('[data-qa="dt-popover-content"]').classList])
+        .toEqual(['d-popover__content', ...classes]);
+      for (const selector of ['.d-popover__header', '.d-popover__footer']) {
+        expect(document.querySelector(selector).classList.contains('d-pis-200')).toBe(edgeClass !== null);
+      }
+    });
+
     describe('When popover class props are set', () => {
       it.each([
         ['popoverContentClass', 'contentClass', 'custom-content-class'],
@@ -629,7 +646,7 @@ describe('DtFilterPill Tests', function () {
         ['popoverFooterClass', 'footerWrapperClass', 'custom-footer-class'],
         ['popoverDialogClass', 'dialogClass', 'custom-dialog-class'],
       ])('Should forward %s to DtPopover', (propName, popoverPropName, className) => {
-        mockProps = { [propName]: className };
+        mockProps = { [propName]: className, popoverPadding: 'medium' };
 
         updateWrapper();
 

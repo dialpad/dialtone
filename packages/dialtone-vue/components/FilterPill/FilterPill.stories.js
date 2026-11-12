@@ -50,7 +50,7 @@ export const argTypesData = {
   },
   popoverPadding: {
     table: {
-      defaultValue: { summary: 'large' },
+      defaultValue: { summary: 'd-py-100 d-px-150' },
     },
     options: Object.keys(POPOVER_PADDING_CLASSES),
     control: {

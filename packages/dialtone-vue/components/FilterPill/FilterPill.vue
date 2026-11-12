@@ -425,7 +425,12 @@
 </template>
 
 <script>
-import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/Popover';
+import {
+  DtPopover,
+  POPOVER_APPEND_TO_VALUES,
+  POPOVER_HEADER_FOOTER_PADDING_CLASSES,
+  POPOVER_PADDING_CLASSES,
+} from '@/components/Popover';
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import { ordinalSizeValidator } from '@/common/validators';
@@ -651,12 +656,13 @@ export default {
     },
 
     /**
-     * Padding size class for the popover content.
+     * Padding preset for the popover content. Omit for d-py-100 d-px-150.
+     * Set large to restore the previous content padding.
      * @values none, small, medium, large
      */
     popoverPadding: {
       type: String,
-      default: 'large',
+      default: undefined,
       validator: (padding) => {
         return Object.keys(POPOVER_PADDING_CLASSES).some((item) => item === padding);
       },
@@ -824,11 +830,18 @@ export default {
       if (this.overlayUseDropdown) {
         props['list-class'] = this.dropdownListClass;
       } else {
-        props.padding = this.popoverPadding;
-        props['content-class'] = this.popoverContentClass;
-        props['header-wrapper-class'] = this.popoverHeaderClass;
+        const defaultPadding = this.popoverPadding === undefined;
+        props.padding = defaultPadding ? 'none' : this.popoverPadding;
+        props['content-class'] = defaultPadding
+          ? ['d-py-100 d-px-150', this.popoverContentClass]
+          : this.popoverContentClass;
+        props['header-wrapper-class'] = defaultPadding
+          ? [POPOVER_HEADER_FOOTER_PADDING_CLASSES.large, this.popoverHeaderClass]
+          : this.popoverHeaderClass;
         props['header-class'] = this.headerContentClass;
-        props['footer-wrapper-class'] = this.popoverFooterClass;
+        props['footer-wrapper-class'] = defaultPadding
+          ? [POPOVER_HEADER_FOOTER_PADDING_CLASSES.large, this.popoverFooterClass]
+          : this.popoverFooterClass;
         props['dialog-class'] = this.popoverDialogClass;
       }
       return props;

@@ -308,6 +308,11 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 
 ## Interaction patterns
 
+Popover content defaults to `d-py-100 d-px-150`. Set `popover-padding` to `none`, `small`, `medium`, or `large`
+for a uniform padding preset; `large` restores the previous `d-p-200` content padding. For custom padding,
+use `popover-padding="none"` with `popover-content-class`, for example `popover-content-class="d-py-150 d-px-200"`.
+Header/footer spacing and dropdown padding are unchanged.
+
 ### Clearable
 
 A clear button appears when any filter is active. It emits the `clear` event when clicked.
