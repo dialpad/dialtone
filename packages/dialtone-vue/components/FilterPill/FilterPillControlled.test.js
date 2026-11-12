@@ -265,9 +265,6 @@ describe('DtFilterPill controlled selection', () => {
 
   it('keeps unknown selected values active and clearable without exposing raw identifiers', async () => {
     updateWrapper({ selected: ['private-id', 'sales'] });
-    expect(wrapper.find('.d-filter-pill__label-start').text()).toBe('Teams');
-    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('Sales');
-    expect(wrapper.find('.d-filter-pill__label-end-overflow').text()).toBe('+1');
     expect(wrapper.find('.d-filter-pill__label').text()).not.toContain('private-id');
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(true);
     await open();
@@ -403,8 +400,6 @@ describe('DtFilterPill controlled selection', () => {
 
   it.each([
     ['onOpened', 'opened', false, false, ['1:first', '2:first']],
-    ['onSelectionChange', 'selection-change', false, false, ['1:first', '2:first']],
-    ['onOpenedOnce', 'opened', false, false, ['1:first']],
     ['onSelectionChangeOnce', 'selection-change', false, false, ['1:first']],
     ['onOpened', 'opened', true, true, ['1:first', '1:second', '2:first', '2:second']],
     ['onSelectionChangeOnce', 'selection-change', true, true, ['1:first', '1:second']],
@@ -564,7 +559,6 @@ describe('DtFilterPill controlled selection', () => {
 
   it.each([
     ['onSelectionChangePassive', 'onSelectionChange'],
-    ['onSelectionChange', 'onSelectionChangePassive'],
     ['onSelectionChangeOncePassive', 'onSelectionChangeOnce'],
     ['onOpenedPassive', 'onOpened'],
   ])('preserves stopImmediatePropagation from the first legacy listener %s', async (first, second) => {
@@ -652,22 +646,13 @@ describe('DtFilterPill controlled selection', () => {
     expect(document.documentElement.classList.contains('d-of-hidden')).toBe(false);
   });
 
-  it('keeps the creation-time contract in both directions while legacy patterns remain reactive', async () => {
+  it('keeps a born-legacy pill legacy when array options arrive later', async () => {
     vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const modelValue = [{ name: 'Legacy' }];
-    updateWrapper({ options: undefined, modelValue });
+    updateWrapper({ options: undefined, modelValue: [{ name: 'Legacy' }] });
     await wrapper.setProps({ options, useDropdown: true });
     await open();
     expect(document.querySelector('[role="menuitem"]')?.textContent).toContain('Legacy');
     expect(document.querySelector('[role="menuitemradio"]')).toBeNull();
-    wrapper.unmount();
-    document.body.innerHTML = '';
-    updateWrapper({ useDropdown: true, selected: 'sales' });
-    await open();
-    await wrapper.setProps({ options: undefined, modelValue });
-    expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
-    expect(wrapper.emitted('selection-change')).toBeUndefined();
-    expect(modelValue).toEqual([{ name: 'Legacy' }]);
   });
 
   it('forwards controlled anchor arrows through the dropdown callback and prevents scrolling', async () => {

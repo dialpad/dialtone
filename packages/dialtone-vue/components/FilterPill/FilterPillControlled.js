@@ -80,17 +80,23 @@ export default {
         if (option) return option.shortLabel ?? option.label;
         return state.value === this.neutralValue ? (this.label || '') : this.unavailableLabel;
       }
-      if (!state.unknownValues.length && state.options.length > 1 && state.values.length === state.options.length) {
-        return this.i18n.$t('DIALTONE_FILTER_PILL_ALL_LABEL');
-      }
+      if (this.controlledAllSelected) return this.i18n.$t('DIALTONE_FILTER_PILL_ALL_LABEL');
       const first = state.values.map(value => state.options.find(option => option.value === value)).find(Boolean);
       return first ? (first.shortLabel ?? first.label) : this.unavailableLabel;
     },
 
+    controlledAllSelected () {
+      const state = this.controlledState;
+      return !state.unknownValues.length && state.options.length > 1 && state.values.length === state.options.length;
+    },
+
+    controlledDraftOpen () {
+      return this.controlledDeferred && this.isOpen && this.controlledDraft !== null;
+    },
+
     controlledOverflow () {
       const state = this.controlledState;
-      if (!state.valid || this.controlledDropdown || state.value.length <= 1 ||
-        (!state.unknownValues.length && state.options.length === state.value.length)) return '';
+      if (!state.valid || this.controlledDropdown || state.value.length <= 1 || this.controlledAllSelected) return '';
       return `+${state.value.length - 1}`;
     },
 
@@ -134,12 +140,7 @@ export default {
     },
 
     deferSelection () {
-      if (!this.controlledAtBirth || !this.isOpen) return;
-      this.draftSession++;
-      this.applying = false;
-      if (this.controlledDeferred) this.rebaseControlledDraft();
-      else this.controlledDraft = null;
-      this.syncCheckboxRender();
+      if (this.controlledAtBirth && this.isOpen) this.resetControlledDraft();
     },
 
     disabled () { this.closeWhenLocked(); },
@@ -271,19 +272,15 @@ export default {
     toggleControlledOption (value, checked) {
       if (!this.controlledCanSelect) { this.reconcileCheckboxes(); return; }
       const current = this.controlledDraft ?? this.controlledState.value;
-      const next = current.filter(item => item !== value);
-      if (checked) {
-        // Keep existing order when the requested value was already present.
-        if (current.includes(value)) next.splice(current.indexOf(value), 0, value);
-        else next.push(value);
-      }
-      if (this.controlledDeferred && this.isOpen && this.controlledDraft !== null) this.controlledDraft = [...next];
+      let next = current.filter(item => item !== value);
+      if (checked) next = current.includes(value) ? [...current] : [...current, value];
+      if (this.controlledDraftOpen) this.controlledDraft = next;
       else this.commitControlled(next, 'toggle');
       this.reconcileCheckboxes();
     },
 
     selectControlledOption (value) {
-      if (this.controlledCanSelect) this.commitControlled(value, 'select', true);
+      this.commitControlled(value, 'select', true);
     },
 
     setControlledSelected (next) {
@@ -293,7 +290,7 @@ export default {
         this.warnControlled('setSelected requires the selected shape for this pattern.');
         return;
       }
-      if (this.controlledDeferred && this.isOpen && this.controlledDraft !== null) {
+      if (this.controlledDraftOpen) {
         this.controlledDraft = [...state.value];
         this.syncCheckboxRender();
       } else {
@@ -307,9 +304,7 @@ export default {
       const previousValue = selectionSnapshot(this.controlledState.value);
       const value = selectionSnapshot(next);
       const changed = !sameSelection(value, previousValue);
-      const action = {
-        value: selectionSnapshot(value), previousValue: selectionSnapshot(previousValue), reason, changed,
-      };
+      const action = { value, previousValue, reason, changed };
       if (changed) this.$emit('update:selected', selectionSnapshot(value));
       if (this.controlledDisposed) return;
       this.$emit('selection-change', action);
@@ -318,6 +313,16 @@ export default {
       if (reason === 'apply') this.$emit('apply');
       if (this.controlledDisposed) return;
       if (close) this.requestControlledOpen(false);
+    },
+
+    /** Start a new draft session for the current open state; returns its token. */
+    resetControlledDraft () {
+      const session = ++this.draftSession;
+      this.applying = false;
+      if (this.isOpen && this.controlledDeferred) this.rebaseControlledDraft();
+      else this.controlledDraft = null;
+      this.syncCheckboxRender();
+      return session;
     },
 
     rebaseControlledDraft () {
@@ -355,11 +360,7 @@ export default {
       }
       if (next === this.isOpen) return;
       this.isOpen = next;
-      const session = ++this.draftSession;
-      this.applying = false;
-      if (next && this.controlledDeferred) this.rebaseControlledDraft();
-      else this.controlledDraft = null;
-      this.syncCheckboxRender();
+      const session = this.resetControlledDraft();
       if (notify && typeof this.open === 'boolean') this.$emit('update:open', next);
       if (this.controlledDisposed || session !== this.draftSession) return;
       this.$emit('open', next);

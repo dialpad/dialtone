@@ -148,8 +148,9 @@ describe('combinator.vue test', function () {
     try {
       await nextTick();
       await nextTick();
+      const variantButton = () => wrapper.findAll('button').find(button => button.text().includes('DtFilterPill:'));
       expect(wrapper.find('[aria-label="Reset"]').exists()).toBe(false);
-      expect(wrapper.vm.selectedVariant).toBe('controlled default');
+      expect(variantButton().text()).toContain('controlled default');
       const anchor = () => wrapper.get('[data-qa="dt-filter-pill__button"]');
       const first = anchor().element;
       const optionBar = wrapper.findComponent({ name: 'DtcOptionBar' });
@@ -160,7 +161,7 @@ describe('combinator.vue test', function () {
       await wrapper.get('[aria-label="Reset"]').trigger('click');
       expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('All');
       expect(anchor().element).not.toBe(first);
-      expect(wrapper.vm.selectedVariant).toBe('controlled default');
+      expect(variantButton().text()).toContain('controlled default');
       expect(wrapper.find('[aria-label="Reset"]').exists()).toBe(false);
     } finally {
       wrapper.unmount();
