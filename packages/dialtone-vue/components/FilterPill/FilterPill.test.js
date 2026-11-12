@@ -309,6 +309,7 @@ describe('DtFilterPill Tests', function () {
         const listItems = wrapper.findAllComponents(DtListItem);
 
         expect(listItems).toHaveLength(MOCK_DROPDOWN_FILTERS.length);
+        expect(listItems.every(item => item.find('[data-qa="dt-item-layout-selected-wrapper"]').exists())).toBe(true);
       });
     });
 

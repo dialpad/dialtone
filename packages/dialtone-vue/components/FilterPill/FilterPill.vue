@@ -338,6 +338,13 @@
             @click="selectControlledOption(option.value)"
           >
             {{ option.label }}
+            <template #selected>
+              <dt-icon-check
+                size="200"
+                :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(option.value) }"
+                aria-hidden="true"
+              />
+            </template>
             <template
               v-if="$slots.optionEnd"
               #end
@@ -381,6 +388,13 @@
             @click="selectFilter(filter, close)"
           >
             {{ filter.name }}
+            <template #selected>
+              <dt-icon-check
+                size="200"
+                :class="{ 'd-filter-pill__selection-indicator--hidden': !filter.active }"
+                aria-hidden="true"
+              />
+            </template>
           </dt-list-item>
         </slot>
       </template>
@@ -417,7 +431,7 @@ import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import { ordinalSizeValidator } from '@/common/validators';
 import { hasSlotContent } from '@/common/utils';
 import { BUTTON_SIZE_MODIFIERS, BUTTON_ICON_SIZES, DtButton } from '@/components/Button';
-import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
+import { DtIconChevronDown, DtIconClose, DtIconCheck } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 import { DtCheckbox } from '@/components/Checkbox';
 import { DtCheckboxGroup } from '@/components/CheckboxGroup';
@@ -443,6 +457,7 @@ export default {
     DtPopover,
     DtButton,
     DtIconClose,
+    DtIconCheck,
     DtIconChevronDown,
     DtDropdown,
     DtListItem,

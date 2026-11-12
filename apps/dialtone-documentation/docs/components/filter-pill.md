@@ -211,6 +211,13 @@ These existing examples use the legacy array contract. Reset updates the same ar
         @click="selectHeroConversationType(filter.name, close)"
       >
         {{ filter.name }}
+        <template #selected>
+          <dt-icon-check
+            size="200"
+            :class="{ 'd-vi-hidden': filter.name !== selectedHeroConversationType }"
+            aria-hidden="true"
+          />
+        </template>
       </dt-list-item>
     </template>
   </dt-filter-pill>
@@ -356,7 +363,7 @@ Cancel, Escape, or clicking outside discards pending changes.
 
 Setting `use-dropdown` switches the overlay from a popover to a dropdown with keyboard-navigable
 list items. This provides arrow key navigation, highlight management, and Enter/Space selection
-out of the box — ideal for single-select filter patterns.
+out of the box — ideal for single-select filter patterns. Built-in dropdown rows reserve space for the selected checkmark. For custom content, keep a decorative checkmark in each row and use `d-vi-hidden` on unselected markers, as shown below, to retain its layout space.
 
 ```vue demo
 <dt-stack direction="row" gap="100">
@@ -389,6 +396,13 @@ out of the box — ideal for single-select filter patterns.
         @click="selectDropdownType(filter.name, close)"
       >
         {{ filter.name }}
+        <template #selected>
+          <dt-icon-check
+            size="200"
+            :class="{ 'd-vi-hidden': filter.name !== selectedDropdownType }"
+            aria-hidden="true"
+          />
+        </template>
       </dt-list-item>
     </template>
   </dt-filter-pill>
@@ -423,6 +437,13 @@ out of the box — ideal for single-select filter patterns.
       @click="selectType(filter.name, close)"
     >
       {{ filter.name }}
+      <template #selected>
+        <dt-icon-check
+          size="200"
+          :class="{ 'd-vi-hidden': filter.name !== selectedType }"
+          aria-hidden="true"
+        />
+      </template>
     </dt-list-item>
   </template>
 </dt-filter-pill>

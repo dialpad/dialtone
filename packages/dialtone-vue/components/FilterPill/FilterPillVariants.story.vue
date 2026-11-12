@@ -181,6 +181,13 @@
             @click="selectDropdownType(filter.name, close)"
           >
             {{ filter.name }}
+            <template #selected>
+              <dt-icon-check
+                size="200"
+                :class="{ 'd-vi-hidden': filter.name !== selectedDropdownType }"
+                aria-hidden="true"
+              />
+            </template>
           </dt-list-item>
         </template>
       </dt-filter-pill>
@@ -251,7 +258,7 @@ import { BUTTON_SIZE_MODIFIERS } from '@/components/Button';
 import { DtStack } from '@/components/Stack';
 import { DtRadioGroup } from '@/components/RadioGroup';
 import { DtRadio } from '@/components/Radio';
-import { DtIconFilter } from '@dialpad/dialtone-icons/vue';
+import { DtIconFilter, DtIconCheck } from '@dialpad/dialtone-icons/vue';
 import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue';
 
 import { DtText } from '../Text/index';
@@ -265,6 +272,7 @@ export default {
     DtFilterPill,
     DtStack,
     DtIconFilter,
+    DtIconCheck,
     DtIconBoxSelect,
     DtText,
     DtListItem,

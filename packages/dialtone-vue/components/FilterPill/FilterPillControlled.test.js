@@ -86,6 +86,7 @@ describe('DtFilterPill controlled selection', () => {
     await open();
     const rows = [...document.querySelectorAll('[role="menuitemradio"]')];
     expect(rows.map(row => row.getAttribute('aria-checked'))).toEqual(['true', 'false']);
+    expect(rows.every(row => row.querySelector('[data-qa="dt-item-layout-selected-wrapper"]'))).toBe(true);
     expect(document.querySelector('[role="menu"]').getAttribute('aria-label')).toBe('Teams');
     expect(document.querySelector('[role="menu"]').hasAttribute('aria-labelledby')).toBe(false);
     rows[1].click();
