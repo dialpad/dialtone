@@ -26,8 +26,16 @@ describe('formatPhoneNumber', () => {
     expect(formatPhoneNumber(input, options)).toBe(expected);
   });
 
-  it('appends the extension as "Ext."', () => {
-    expect(formatPhoneNumber('+1 415 555 1234 x55555')).toBe('+1 (415) 555-1234 Ext. 55555');
+  it.each([
+    ['+1 415 555 1234 x55555', '+1 (415) 555-1234 Ext. 55555'],
+    ['+44 20 7946 0958 ext. 123', '+44 20 7946 0958 Ext. 123'],
+  ])('writes the extension of %s as "Ext."', (input, expected) => {
+    expect(formatPhoneNumber(input)).toBe(expected);
+  });
+
+  it('ignores surrounding whitespace and the case of the country code', () => {
+    expect(formatPhoneNumber(' +14155551234\n')).toBe('+1 (415) 555-1234');
+    expect(formatPhoneNumber('415.555.1234', { defaultCountry: 'us' })).toBe('(415) 555-1234');
   });
 
   it.each([
@@ -37,10 +45,7 @@ describe('formatPhoneNumber', () => {
     expect(formatPhoneNumber(input, options)).toBe(input);
   });
 
-  it.each([['', undefined], [null, undefined], [undefined, undefined]])(
-    'returns an empty string for %s',
-    (input, options) => {
-      expect(formatPhoneNumber(input, options)).toBe('');
-    },
-  );
+  it.each(['', 4155551234])('returns an empty string for %o', (input) => {
+    expect(formatPhoneNumber(input)).toBe('');
+  });
 });
