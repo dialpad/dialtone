@@ -7,6 +7,8 @@
  * including why the state and validation axes are one reachability rule and why the wrapper, not
  * the control, is the state target.
  */
+import { validationMessagesSwap } from '../validation-messages-swap.mjs';
+
 export default {
   component: 'DtInput', label: '', page: 'InputTextarea', family: 'Text fields',
   snapTokens: true,
@@ -49,6 +51,9 @@ export default {
   }),
 
   textProps: { Label: 'Label', Description: 'Description', Value: 'Value' },
+
+  // The message row is an instance of DtValidationMessages (build that set first).
+  anatomySwap: validationMessagesSwap,
 
   stateTarget: '.d-input__wrapper',
   pseudo: c => (c.state === 'hover' ? ['hover']

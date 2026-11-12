@@ -24,6 +24,8 @@
  * rest. An `info` message draws no border (INPUT_STATE_CLASSES has no `info`), so it is not a
  * validation value here.
  */
+import { validationMessagesSwap } from '../validation-messages-swap.mjs';
+
 export default {
   component: 'DtInput', label: '', page: 'Input', family: 'Text fields',
   // Computed padding and radius at the nearest token (token-snap.mjs).
@@ -81,6 +83,9 @@ export default {
   // becomes a TEXT property. The value is a synthetic text layer (verify-harness `nativeValueNode`)
   // because a native control paints it from a property, not from a text node.
   textProps: { Label: 'Label', Description: 'Description', Value: 'Value' },
+
+  // The message row is an instance of DtValidationMessages (build that set first).
+  anatomySwap: validationMessagesSwap,
 
   // The styled, hoverable, focusable box is the wrapper.
   stateTarget: '.d-input__wrapper',
