@@ -75,11 +75,11 @@ export function useInputGroup (
     onChange: onValueChange,
   });
   // useControllableState's setter changes with `onValueChange`, so calls go through a ref to the latest one and the
-  // identity stays stable, since every input in the group reads the context.
+  // identity stays stable, since every input in the group reads the context. The ref is updated during render, not in
+  // an effect: inputs are children, and a layout effect in one runs before any effect of this hook's component, so
+  // it would still call the previous handler.
   const latestSetGroupValue = useRef(setGroupValue);
-  useEffect(() => {
-    latestSetGroupValue.current = setGroupValue;
-  });
+  latestSetGroupValue.current = setGroupValue;
   const stableSetGroupValue = useCallback<SetGroupValue>(
     newValue => latestSetGroupValue.current(newValue as InputGroupValue),
     [],

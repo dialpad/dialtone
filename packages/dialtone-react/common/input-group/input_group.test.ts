@@ -1,5 +1,5 @@
-import { createElement, StrictMode, type ReactNode } from 'react';
-import { act, renderHook } from '@testing-library/react';
+import { createElement, StrictMode, useLayoutEffect, type ReactNode } from 'react';
+import { act, render as renderRTL, renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { InputGroupContext, useInputGroupContext } from '../input/InputGroupContext';
 import { useInputGroup, type InputGroupProps } from './useInputGroup';
@@ -95,6 +95,27 @@ describe('useInputGroup', () => {
     expect(result.current.state.setGroupValue).toBe(setGroupValue);
     expect(result.current.state.contextValue).toBe(contextValue);
     act(() => result.current.state.setGroupValue('b'));
+    expect(first).not.toHaveBeenCalled();
+    expect(second).toHaveBeenCalledExactlyOnceWith('b');
+  });
+
+  it('calls the new handler when an input reports a value from a layout effect in the render that replaced it', () => {
+    const first = vi.fn();
+    const second = vi.fn();
+    // Inputs are children of the group, so their layout effects run before any effect of the group's own component.
+    const Input = ({ report }: { report: boolean }) => {
+      const { setGroupValue } = useInputGroupContext();
+      useLayoutEffect(() => {
+        if (report) setGroupValue('b');
+      }, [report, setGroupValue]);
+      return null;
+    };
+    const Group = ({ onValueChange, report }: { onValueChange: () => void; report: boolean }) => {
+      const { contextValue } = useInputGroup({ name: 'g', legend: 'L', value: 'a', onValueChange });
+      return createElement(InputGroupContext.Provider, { value: contextValue }, createElement(Input, { report }));
+    };
+    const { rerender } = renderRTL(createElement(Group, { onValueChange: first, report: false }));
+    rerender(createElement(Group, { onValueChange: second, report: true }));
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalledExactlyOnceWith('b');
   });

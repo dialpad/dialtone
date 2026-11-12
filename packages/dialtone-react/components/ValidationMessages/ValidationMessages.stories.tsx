@@ -5,6 +5,7 @@ import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
 import { DtCheckbox } from '../Checkbox/Checkbox';
 import { DtIconBell } from '../../icons';
+import { DtStack } from '../Stack/Stack';
 import { DtValidationMessages, type DtValidationMessagesProps } from './ValidationMessages';
 
 // Constants
@@ -228,9 +229,8 @@ function InteractiveFormTemplate () {
   ];
 
   return (
-    <StandIn for="stack">
-      <div data-qa="dt-stack" className="d-stack d-stack--gap-500 d-stack--justify-start" style={{ maxWidth: '400px' }}>
-        {inputs.map(input => (
+    <DtStack gap="500" style={{ maxWidth: '400px' }}>
+      {inputs.map(input => (
           <StandIn for="input" key={input.label}>
             <div className="d-input__root" data-qa="dt-input">
               <label className="d-input__label" data-qa="dt-input-label-wrapper">
@@ -337,8 +337,7 @@ function InteractiveFormTemplate () {
             <span data-qa="dt-button-label" className="base-button__label d-btn__label">Clear</span>
           </button>
         </StandIn>
-      </div>
-    </StandIn>
+    </DtStack>
   );
 }
 
