@@ -7,9 +7,10 @@ import { parsePhoneNumberFromString, getCountryCallingCode, isSupportedCountry }
  * Input may use spaces, dots, dashes and parentheses, with an extension after `x`, `ext.` or `#`.
  * It needs a country code (`+44 20 7946 0958`) unless `defaultCountry` is set; then national input
  * (`(415) 555-0123`) and that country's international prefix (`011 44 …` in the US) work too.
- * A number that breaks its country's numbering rules is returned unchanged: the wrong number of digits,
- * an unused area code such as 555, national input without `defaultCountry`, short codes like `911`, and
- * letters (`1-800-FLOWERS`). Only the rules are checked, not whether the number is in service.
+ * A number that fails a basic check is returned unchanged: the wrong number of digits, an unused area
+ * code such as 555, national input without `defaultCountry`, short codes like `911`, and letters
+ * (`1-800-FLOWERS`). The check uses the small `libphonenumber-js/min` data, so some numbers that are
+ * not real (wrong mobile prefix, not in service) still format.
  *
  * Each country's own digit grouping is used. To keep a number on one line, put the `d-ws-nowrap`
  * class on the element.
