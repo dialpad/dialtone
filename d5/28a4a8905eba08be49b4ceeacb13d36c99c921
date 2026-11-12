@@ -1,0 +1,23 @@
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_8529c05b1210f5::t_7ed27b0a0a88a2 1022-1023,1026-1027,1046-1047,1050-1055
+apps/dialtone-documentation/docs/.vuepress/theme/index.js
+  s_8529c05b1210f5::t_f01c5f8253def7 30,126,150-151
+  s_8529c05b1210f5::t_2d20fdb153c6f3 31-40,258-259,278,281-282,288-292,295
+  s_8529c05b1210f5::t_9eeb393acb06cc 283-287
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "d528a4a8905eba08be49b4ceeacb13d36c99c921",
+  "prompts": {},
+  "sessions": {
+    "s_8529c05b1210f5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0454-7b64-7423-a0b2-a3b838dc6e19",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

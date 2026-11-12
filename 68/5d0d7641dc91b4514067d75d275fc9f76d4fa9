@@ -1,0 +1,59 @@
+packages/combinator/src/variants/variants_slider.js
+  s_f1b6a2e8befce4::t_91472624e9c07b 6-12,20
+  s_f1b6a2e8befce4::t_33e035e40ed45a 45,60
+  s_f1b6a2e8befce4::t_749728f4bfedcd 19,44,89
+apps/dialtone-documentation/docs/components/slider.md
+  s_f1b6a2e8befce4::t_c663348f547ecc 239,242-243,251
+  s_f1b6a2e8befce4::t_666db820746133 103,105,114,127
+  s_f1b6a2e8befce4::t_7f90b18d96ac44 91
+  s_f1b6a2e8befce4::t_1a695c683fb43a 58,175,197,206,269,296,397
+  s_f1b6a2e8befce4::t_6b2a5425585c35 212,222,232
+  s_f1b6a2e8befce4::t_94373377df54e3 241,246
+  s_f1b6a2e8befce4::t_876d191a6b02e6 77
+  s_f1b6a2e8befce4::t_4730a1ac417069 42
+  s_f1b6a2e8befce4::t_324758bf00e44d 144,223,231,362
+  s_f1b6a2e8befce4::t_05e57079d71824 40
+  s_f1b6a2e8befce4::t_0045cc6b4c9da3 39
+  s_f1b6a2e8befce4::t_8fd227022b38b6 245
+packages/dialtone-vue/components/Slider/SliderVariants.story.vue
+  s_f1b6a2e8befce4::t_1a695c683fb43a 25,38,57,117,145,208,299,325,371,420
+  s_f1b6a2e8befce4::t_bad9752ec9ac6d 501
+  s_f1b6a2e8befce4::t_c5efe9f87bce50 150-157
+  s_f1b6a2e8befce4::t_9e08366aab36fd 85,146,298,324,351,370,446
+  s_f1b6a2e8befce4::t_1e7ea011afd872 147-149
+packages/dialtone-vue/components/Slider/Slider.stories.js
+  s_f1b6a2e8befce4::t_d2ebe1c0401b93 28
+  s_f1b6a2e8befce4::t_808696b72fc228 23-24
+  s_f1b6a2e8befce4::t_f9e65c98c7a532 215-216,221
+  s_f1b6a2e8befce4::t_37099384a7d2a1 5
+  s_f1b6a2e8befce4::t_a733df851b45e4 237
+  s_f1b6a2e8befce4::t_388c96fc230f23 3
+  s_f1b6a2e8befce4::t_35204af7e0475f 19
+  s_f1b6a2e8befce4::t_04c5c8dceaea2d 178-194,196-197
+  s_f1b6a2e8befce4::t_c7fe716acf779a 136,142
+  s_f1b6a2e8befce4::t_0c84d5ce0c3625 145
+  s_f1b6a2e8befce4::t_6b50d68f271fa1 195
+packages/dialtone-vue/components/Slider/SliderDefault.story.vue
+  s_f1b6a2e8befce4::t_99aeeb48050835 9
+  s_f1b6a2e8befce4::t_8ec885f46253d4 13-14
+  s_f1b6a2e8befce4::t_f61f9832d21b91 22
+packages/dialtone-vue/components/Slider/Slider.mdx
+  s_f1b6a2e8befce4::t_1a695c683fb43a 46
+  s_f1b6a2e8befce4::t_a771c9ff578ca7 61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "685d0d7641dc91b4514067d75d275fc9f76d4fa9",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
