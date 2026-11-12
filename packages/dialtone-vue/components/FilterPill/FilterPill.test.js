@@ -621,6 +621,67 @@ describe('DtFilterPill Tests', function () {
     });
   });
 
+  describe('Overlay minimum inline size', () => {
+    it.each([false, true])('matches the full pill including Clear with useDropdown=%s', async (useDropdown) => {
+      mockProps = { useDropdown, modelValue: [{ name: 'Email', active: true }, { name: 'Phone' }] };
+      updateWrapper();
+      vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 680, 32));
+      vi.spyOn(button.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 200, 32));
+      vi.spyOn(clearButton.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(200, 0, 40, 32));
+      expect(clearButton.exists()).toBe(true);
+      await button.trigger('click');
+
+      const dialog = document.getElementById(button.attributes('aria-controls'));
+      expect(dialog.style.minInlineSize).toBe('240px');
+    });
+
+    it('updates custom and natural sizing while retaining the maximum width cap', async () => {
+      vi.spyOn(button.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 240, 32));
+      await button.trigger('click');
+      const dialog = document.getElementById(button.attributes('aria-controls'));
+      for (const [value, variable] of [['1px', '1px'], ['100p', '100-percent'], ['300', '300']]) {
+        await wrapper.setProps({ overlayMinInlineSize: value });
+        expect(dialog.style.minInlineSize).toBe(`var(--dt-layout-${variable})`);
+      }
+      await wrapper.setProps({ popoverMaxWidth: '12rem' });
+      expect(dialog.style.minInlineSize).toBe('min(var(--dt-layout-300), 12rem)');
+      await wrapper.setProps({ overlayMinInlineSize: '0', popoverMaxWidth: '' });
+      expect(dialog.style.minInlineSize).toBe('0px');
+      await wrapper.setProps({ overlayMinInlineSize: 'anchor', popoverMaxWidth: '' });
+      expect(dialog.style.minInlineSize).toBe('240px');
+    });
+
+    it('tracks pill resizing and disconnects without later changing the removed dialog', async () => {
+      const observers = [];
+      vi.stubGlobal('ResizeObserver', class {
+        constructor (callback) {
+          this.callback = callback;
+          this.observe = vi.fn();
+          this.disconnect = vi.fn();
+          observers.push(this);
+        }
+      });
+      try {
+        updateWrapper();
+        const bounds = vi.spyOn(button.element, 'getBoundingClientRect')
+          .mockReturnValue(new DOMRect(0, 0, 240, 32));
+        await button.trigger('click');
+        const dialog = document.getElementById(button.attributes('aria-controls'));
+        const observer = observers.find(item => item.observe.mock.calls.some(([target]) => target === button.element));
+        expect(observer).toBeDefined();
+        bounds.mockReturnValue(new DOMRect(0, 0, 320, 32));
+        observer.callback([]);
+        expect(dialog.style.minInlineSize).toBe('320px');
+        wrapper.unmount();
+        expect(observer.disconnect).toHaveBeenCalled();
+        observer.callback([]);
+        expect(dialog.style.minInlineSize).toBe('320px');
+      } finally {
+        vi.unstubAllGlobals();
+      }
+    });
+  });
+
   describe('Overlay Class Props Tests', () => {
     it.each([
       [undefined, ['d-py-100', 'd-px-150'], 'd-pis-200'],

@@ -63,6 +63,9 @@ function beforePreviewRemount (pill, { signal }) {
 
 export default {
   defaults: {
+    props: {
+      overlayMinInlineSize: { tokenCategory: 'layout' },
+    },
     metadata: {
       initialPreset: 'controlled default',
       beforePreviewRemount,

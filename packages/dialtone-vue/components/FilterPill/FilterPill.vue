@@ -434,6 +434,7 @@ import {
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import { ordinalSizeValidator } from '@/common/validators';
+import { FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES } from './FilterPillConstants';
 import { hasSlotContent } from '@/common/utils';
 import { BUTTON_SIZE_MODIFIERS, BUTTON_ICON_SIZES, DtButton } from '@/components/Button';
 import { DtIconChevronDown, DtIconClose, DtIconCheck } from '@dialpad/dialtone-icons/vue';
@@ -647,6 +648,18 @@ export default {
     },
 
     /**
+     * Minimum overlay inline size (aka left/right extent). Anchor uses the entire pill, including Clear.
+     * Layout values follow DtBox: 300 maps to --dt-layout-300; 0 uses natural sizing.
+     * The popoverMaxWidth cap still applies.
+     * @values anchor, 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+     */
+    overlayMinInlineSize: {
+      type: String,
+      default: 'anchor',
+      validator: ordinalSizeValidator(FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES),
+    },
+
+    /**
      * Determines maximum width for the popover before overflow.
      * Possible units rem|px|%|em
      */
@@ -802,6 +815,7 @@ export default {
       i18n: new DialtoneLocalization(),
       filters: Array.isArray(this.options) ? [] : this.modelValue,
       pendingFilters: null,
+      overlayResizeObserver: /** @type {ResizeObserver | null} */ (null),
     };
   },
 
@@ -938,17 +952,25 @@ export default {
   },
 
   watch: {
-    isOpen (isOpen) {
-      if (this.controlledAtBirth) return;
-      this.$emit('open', isOpen);
-      if (this.deferSelection) {
-        if (isOpen) {
-          this.pendingFilters = JSON.parse(JSON.stringify(this.filters));
-        } else {
-          this.pendingFilters = null;
+    overlayMinInlineSize: { handler: 'observeOverlayAnchor', flush: 'post' },
+    overlayUseDropdown: { handler: 'observeOverlayAnchor', flush: 'post' },
+    hasClear: { handler: 'observeOverlayAnchor', flush: 'post' },
+    popoverMaxWidth: { handler: 'syncOverlayMinInlineSize', flush: 'post' },
+
+    isOpen: [
+      { handler: 'syncOverlayMinInlineSize', flush: 'post' },
+      function (isOpen) {
+        if (this.controlledAtBirth) return;
+        this.$emit('open', isOpen);
+        if (this.deferSelection) {
+          if (isOpen) {
+            this.pendingFilters = JSON.parse(JSON.stringify(this.filters));
+          } else {
+            this.pendingFilters = null;
+          }
         }
-      }
-    },
+      },
+    ],
 
     filters: {
       deep: true,
@@ -959,6 +981,7 @@ export default {
   },
 
   mounted () {
+    this.observeOverlayAnchor();
     if (!this.controlledAtBirth && !(this.modelValue?.length || this.$slots.content)) {
       console.warn('Please provide content through the v-model or the "content" slot.');
     }
@@ -967,8 +990,64 @@ export default {
     }
   },
 
+  beforeUnmount () {
+    this.overlayResizeObserver?.disconnect();
+  },
+
   methods: {
     hasSlotContent,
+
+    observeOverlayAnchor () {
+      this.overlayResizeObserver?.disconnect();
+      this.overlayResizeObserver = null;
+      if (this.overlayMinInlineSize === 'anchor' && typeof ResizeObserver !== 'undefined') {
+        this.overlayResizeObserver = new ResizeObserver(() => this.syncOverlayMinInlineSize());
+        [this.$el, ...this.getAnchorControls()]
+          .forEach(element => this.overlayResizeObserver.observe(element));
+      }
+      this.syncOverlayMinInlineSize();
+    },
+
+    getAnchorControls () {
+      // Legacy Dropdown slot bindings replace the primary button's ref.
+      const primary = this.$el.querySelector('[data-qa="dt-filter-pill__button"]');
+      return [primary, this.$refs.clearButton?.$el].filter(Boolean);
+    },
+
+    measureAnchorInlineSize () {
+      // The flex wrapper may stretch beyond the visible pill controls.
+      const controls = this.getAnchorControls();
+      if (!controls.length) return 0;
+      const vertical = /^(vertical|sideways)/.test(getComputedStyle(this.$el).writingMode);
+      const [start, end] = vertical ? ['top', 'bottom'] : ['left', 'right'];
+      const bounds = controls.map(element => element.getBoundingClientRect());
+      return Math.max(...bounds.map(rect => rect[end])) - Math.min(...bounds.map(rect => rect[start]));
+    },
+
+    resolveOverlayMinInlineSize () {
+      let minimum = String(this.overlayMinInlineSize ?? '0');
+      if (minimum === 'anchor') {
+        minimum = `${this.measureAnchorInlineSize()}px`;
+      } else {
+        minimum = minimum === '0' ? '0px' : `var(--dt-layout-${minimum.replace(/p$/, '-percent')})`;
+      }
+      if (minimum && this.popoverMaxWidth && this.popoverMaxWidth !== 'none') {
+        return `min(${minimum}, ${this.popoverMaxWidth})`;
+      }
+      return minimum;
+    },
+
+    syncOverlayMinInlineSize () {
+      const overlay = this.$refs.overlay;
+      if (!overlay) return;
+      const popover = this.overlayUseDropdown ? overlay.$refs.popover : overlay;
+      const dialog = popover?.popoverContentEl;
+      if (!dialog) return;
+      const minimum = this.resolveOverlayMinInlineSize();
+      if (dialog.style.minInlineSize === minimum) return;
+      dialog.style.minInlineSize = minimum;
+      popover.tip?.popperInstance?.update();
+    },
 
     clearFilter ($event) {
       if (this.controlledAtBirth) {

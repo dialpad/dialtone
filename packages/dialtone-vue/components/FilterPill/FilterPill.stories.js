@@ -1,6 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import DtFilterPill from './FilterPill.vue';
+import { FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES } from './FilterPillConstants';
 import DtFilterPillDefaultTemplate from './FilterPillDefault.story.vue';
 import DtFilterPillVariantsTemplate from './FilterPillVariants.story.vue';
 import DtFilterPillCustomContentTemplate from './FilterPillCustomContent.story.vue';
@@ -47,6 +48,13 @@ export const argTypesData = {
   size: {
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
+  },
+  overlayMinInlineSize: {
+    control: 'select',
+    options: FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES,
+    table: {
+      defaultValue: { summary: 'anchor' },
+    },
   },
   popoverPadding: {
     table: {

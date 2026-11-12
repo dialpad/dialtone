@@ -20,7 +20,7 @@ keywords:
     logical-props,
   ]
 ai_summary: Recurring Dialtone Vue props, events, slots, and API patterns; supported values and exceptions depend on the selected component.
-last_updated: 2026-11-11
+last_updated: 2026-11-12
 related_packages: [dialtone-vue]
 ---
 
@@ -100,6 +100,8 @@ Most form components implement Vue 3 v-model via `modelValue` prop + `update:mod
 | DtSelectMenu | `String \| Number`  |                                              |
 | DtToggle     | `Boolean \| String` | Supports `'mixed'` for indeterminate state   |
 | DtSlider     | `Number \| [Number, Number]` | A number is single-thumb mode, a 2-length array is range mode. Also emits `change` on commit only (pointer up / blur), separate from the continuous `update:modelValue` |
+
+FilterPill's `overlayMinInlineSize` defaults to `anchor`: both overlays have a minimum inline size matching the full pill, including Clear, while longer content may widen them. Custom values follow DtBox layout stops: `"300"` resolves to `var(--dt-layout-300)` and `"0"` restores natural content sizing. The shared layout scale and percentage stops validate these values; this prop does not accept arbitrary CSS lengths. `popoverMaxWidth` still caps the result. Shared Popover/Dropdown `contentWidth="anchor"` remains an exact trigger-width setting.
 
 Controlled DtFilterPill selection and `opened` are unreleased; use a compatible published release when available. DtFilterPill selects its controlled contract only when `Array.isArray(options)` is true at creation, including `[]`: bind `v-model:selected` to `string | null` for `useDropdown=true`, or to a string array for the checkbox popover. Initial omitted, `undefined`, `null` or other non-array options preserve the existing mutable `modelValue` item contract. A controlled instance stays controlled if its options later become invalid, with safe unchecked, disabled choices. Keep the contract and controlled `useDropdown` pattern stable for an instance; remount with a key when intentionally switching them.
 

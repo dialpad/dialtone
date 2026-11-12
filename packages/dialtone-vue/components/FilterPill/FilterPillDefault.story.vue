@@ -10,6 +10,7 @@
     :popover-fallback-placements="$attrs.popoverFallbackPlacements"
     :popover-max-height="$attrs.popoverMaxHeight"
     :popover-max-width="$attrs.popoverMaxWidth"
+    :overlay-min-inline-size="$attrs.overlayMinInlineSize"
     :popover-padding="$attrs.popoverPadding"
     :popover-placement="$attrs.popoverPlacement"
     :popover-content-class="$attrs.popoverContentClass"
