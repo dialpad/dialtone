@@ -70,7 +70,7 @@ function TooltipDirectiveDefault () {
         <span ref={setSpan}>Span with tooltip</span>
         <DirectiveButton
           value="Tooltip on bottom"
-          options={{ placement: 'bottom' }}
+          options={{ arg: 'bottom' }}
           className="d-btn--clear d-btn--critical d-btn--circle d-btn--icon-only"
           aria-label="example button"
         >
@@ -78,13 +78,13 @@ function TooltipDirectiveDefault () {
             <DtIconPhoneHangUp size="300" />
           </span>
         </DirectiveButton>
-        <DirectiveButton value="Tooltip on top end" options={{ placement: 'top-end' }}>
+        <DirectiveButton value="Tooltip on top end" options={{ arg: 'top-end' }}>
           <span data-qa="dt-button-label" className="base-button__label d-btn__label">Button with tooltip</span>
         </DirectiveButton>
         <DirectiveButton value={undefined}>
           <span data-qa="dt-button-label" className="base-button__label d-btn__label">Empty tooltip</span>
         </DirectiveButton>
-        <DirectiveButton value={message} options={{ placement: 'top-end' }} onClick={changeOnClick}>
+        <DirectiveButton value={message} options={{ arg: 'top-end' }} onClick={changeOnClick}>
           <span data-qa="dt-button-label" className="base-button__label d-btn__label">Change content on click</span>
         </DirectiveButton>
       </div>
