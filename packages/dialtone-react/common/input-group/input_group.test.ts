@@ -85,6 +85,20 @@ describe('useInputGroup', () => {
     expect(result.current.state.contextValue.groupContext.value).toBe('c');
   });
 
+  it('keeps setGroupValue and the context stable when onValueChange changes, and calls the latest handler', () => {
+    const first = vi.fn();
+    const second = vi.fn();
+    const messages = ['Bad'];
+    const { result, rerender } = render({ name: 'g', legend: 'L', value: 'a', messages, onValueChange: first });
+    const { setGroupValue, contextValue } = result.current.state;
+    rerender({ name: 'g', legend: 'L', value: 'a', messages, onValueChange: second });
+    expect(result.current.state.setGroupValue).toBe(setGroupValue);
+    expect(result.current.state.contextValue).toBe(contextValue);
+    act(() => result.current.state.setGroupValue('b'));
+    expect(first).not.toHaveBeenCalled();
+    expect(second).toHaveBeenCalledExactlyOnceWith('b');
+  });
+
   it('uses the id it was given, or else a generated one', () => {
     expect(render({ name: 'g', legend: 'L', id: 'mine' }).result.current.state.id).toBe('mine');
     expect(render({ name: 'g', legend: 'L' }).result.current.state.id).not.toBe('');

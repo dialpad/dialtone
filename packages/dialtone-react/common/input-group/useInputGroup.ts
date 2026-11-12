@@ -74,10 +74,15 @@ export function useInputGroup (
     defaultValue,
     onChange: onValueChange,
   });
-  // Stable for as long as the group is, since every input in it reads the context.
+  // useControllableState's setter changes with `onValueChange`, so calls go through a ref to the latest one and the
+  // identity stays stable, since every input in the group reads the context.
+  const latestSetGroupValue = useRef(setGroupValue);
+  useEffect(() => {
+    latestSetGroupValue.current = setGroupValue;
+  });
   const stableSetGroupValue = useCallback<SetGroupValue>(
-    newValue => setGroupValue(newValue as InputGroupValue),
-    [setGroupValue],
+    newValue => latestSetGroupValue.current(newValue as InputGroupValue),
+    [],
   );
 
   const formattedMessages = useMemo(() => formatMessages(messages), [messages]);
