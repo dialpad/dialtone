@@ -73,36 +73,48 @@
       class="d-fl-wrap"
     >
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="current = 'mentions'"
       >
         External Mentions
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="replaceLabels"
       >
         Replace labels
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="cycleCount"
       >
         Refresh count
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="statusOptions = []"
       >
         Empty options
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="statusOptions = makeStatusOptions()"
       >
         Restore options
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="statusOpen = !statusOpen"
       >
@@ -134,24 +146,32 @@
       class="d-fl-wrap"
     >
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="acceptTeams = !acceptTeams"
       >
         {{ acceptTeams ? 'Decline immediate proposals' : 'Accept immediate proposals' }}
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="acceptLatestTeams"
       >
         Accept latest proposal later
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="deferredTeams = ['engineering']"
       >
         External deferred Engineering
       </dt-button>
       <dt-button
+        kind="muted"
+        importance="outlined"
         size="200"
         @click="reset"
       >
