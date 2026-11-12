@@ -1,0 +1,21 @@
+packages/dialtone-react/components/ModeIsland/ModeDirective.stories.tsx
+  s_856151692472e8::t_be241f18349f6a 5,32-37,56,58,60-63,66-69,71,80-90,94,99,118,120,123,149-150
+packages/dialtone-react/components/ModeIsland/ModeIsland.stories.tsx
+  s_856151692472e8::t_e20451ec41e5a9 2,77-90,106,131,142,152
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "990d5698a7427f92659c31a9da22b0e5cb0f2034",
+  "prompts": {},
+  "sessions": {
+    "s_856151692472e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3d19e9cd-da37-4342-8e2c-c7f815f927bb",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

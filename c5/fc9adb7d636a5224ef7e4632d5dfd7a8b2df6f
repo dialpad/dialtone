@@ -1,0 +1,28 @@
+apps/dialtone-documentation/docs/components/slider.md
+  s_f1b6a2e8befce4::t_f5df82367fd201 33,35-37
+  s_f1b6a2e8befce4::t_71eff601af5553 337-344
+  s_f1b6a2e8befce4::t_574230d18452d8 58,68-108
+  s_f1b6a2e8befce4::t_cee9298acbac53 132,135
+  s_f1b6a2e8befce4::t_eecacbfc2ed6f5 312
+  s_f1b6a2e8befce4::t_44df24d4f05238 26
+  s_f1b6a2e8befce4::t_27ebbe21887848 503
+  s_f1b6a2e8befce4::t_8e37c4b8380d6a 513
+  s_f1b6a2e8befce4::t_985a47e2dcc4ce 294-296
+  s_f1b6a2e8befce4::t_554e72bf95b3d0 109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c5fc9adb7d636a5224ef7e4632d5dfd7a8b2df6f",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
