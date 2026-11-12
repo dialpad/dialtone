@@ -89,7 +89,7 @@ export default {
 
     controlledOverflow () {
       const state = this.controlledState;
-      if (this.controlledDropdown || state.value.length <= 1 ||
+      if (!state.valid || this.controlledDropdown || state.value.length <= 1 ||
         (!state.unknownValues.length && state.options.length === state.value.length)) return '';
       return `+${state.value.length - 1}`;
     },

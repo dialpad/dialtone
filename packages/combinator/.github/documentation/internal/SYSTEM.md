@@ -65,7 +65,12 @@ only after the outgoing target completes its cleanup. The renderer retains that
 VNode, its bindings, slots, container and anchor while waiting; it suppresses
 outgoing event write-back and applies only the latest requested replacement.
 The hook must handle reopening until completion and release its watcher/listeners
-on completion or when the abort signal fires during renderer disposal. This
+on completion or when the abort signal fires during renderer disposal. If the
+hook throws or its promise rejects, the renderer treats cleanup as incomplete:
+it logs a warning, keeps the outgoing target mounted and live (including any
+overlay or scroll lock it owns), and retries the hook on the next update or
+reset. Renderer disposal still unmounts it; a failure settling after disposal
+is ignored. This
 metadata is passed only to the target renderer, never to the component or copied
 preset payload.
 

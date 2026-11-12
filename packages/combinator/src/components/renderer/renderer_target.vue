@@ -178,14 +178,25 @@ function renderTarget (completedVNode) {
       const outgoingVNode = currentVNode;
       const controller = new AbortController();
       pendingRemount = controller;
-      const completion = currentBeforeRemount(currentVNode.component.proxy, { signal: controller.signal });
-      if (completion) {
-        completion.then(() => {
-          if (disposed || pendingRemount !== controller) return;
-          pendingRemount = null;
+      const settle = () => {
+        if (disposed || pendingRemount !== controller) return false;
+        pendingRemount = null;
+        return true;
+      };
+      // Failed cleanup is not completed cleanup: keep the outgoing target (and any
+      // overlay/lock it owns) mounted and live, so a later update retries the hook.
+      const fail = error => {
+        if (settle()) console.warn('Preview remount cleanup failed: \n', error);
+      };
+      try {
+        const completion = currentBeforeRemount(outgoingVNode.component.proxy, { signal: controller.signal });
+        if (completion) {
           // Read current props after cleanup so repeated requests coalesce to the latest one.
-          renderTarget(outgoingVNode);
-        });
+          completion.then(() => settle() && renderTarget(outgoingVNode), fail);
+          return;
+        }
+      } catch (error) {
+        fail(error);
         return;
       }
       pendingRemount = null;

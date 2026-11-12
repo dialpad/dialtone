@@ -54,6 +54,45 @@ describe('renderer_target.vue test', function () {
     }
   });
 
+  it.each(['throws', 'rejects'])('keeps the outgoing target when cleanup %s and retries later', async failure => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    let fail = true;
+    const beforePreviewRemount = () => {
+      if (!fail) return undefined;
+      const error = new Error('cleanup failed');
+      if (failure === 'throws') throw error;
+      return Promise.reject(error);
+    };
+    const wrapper = mount(DtcRendererTarget, {
+      props: {
+        component: RootClassFixture,
+        bindings: { label: 'First' },
+        events: [{ name: 'update:modelValue' }],
+        previewIdentity: () => [],
+        beforePreviewRemount,
+      },
+    });
+    try {
+      await nextTick();
+      const first = wrapper.get('[data-qa="fixture-root"]');
+      await wrapper.setProps({ bindings: { label: 'Second' }, resetGeneration: 1 });
+      await flushPromises();
+      expect(wrapper.get('[data-qa="fixture-root"]').element).toBe(first.element);
+      expect(first.text()).toBe('First');
+      expect(warn).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({ message: 'cleanup failed' }));
+      await first.trigger('click');
+      expect(wrapper.emitted('event')).toEqual([['update:modelValue', 'First']]);
+      fail = false;
+      await wrapper.setProps({ resetGeneration: 2 });
+      await flushPromises();
+      expect(wrapper.get('[data-qa="fixture-root"]').element).not.toBe(first.element);
+      expect(wrapper.get('[data-qa="fixture-root"]').text()).toBe('Second');
+    } finally {
+      wrapper.unmount();
+      warn.mockRestore();
+    }
+  });
+
   it('aborts a pending hook and cannot recreate the target after renderer disposal', async () => {
     let complete;
     let signal;

@@ -351,8 +351,12 @@ describe('DtFilterPill controlled selection', () => {
 
   it('disables selection for duplicate option identities', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    updateWrapper({ options: [{ value: 'sales', label: 'Sales' }, { value: 'sales', label: 'Duplicate' }] });
+    updateWrapper({
+      options: [{ value: 'sales', label: 'Sales' }, { value: 'sales', label: 'Duplicate' }],
+      selected: ['sales', 'support'],
+    });
     expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
+    expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(false);
     await open();
     expect(wrapper.find('.d-filter-pill__primary').classes()).not.toContain('d-filter-pill--selected');
     expect(warn.mock.calls.some(([message]) => message.includes('unique string values'))).toBe(true);
