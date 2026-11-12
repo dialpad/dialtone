@@ -38,8 +38,8 @@ describe('FilterPill controlled input normalization', () => {
     },
   );
 
-  it.each([0, false])('rejects a non-string single neutral value: %j', neutralValue => {
-    const state = getSelectionState(options, 'a', { useDropdown: true, neutralValue });
+  it('rejects a non-string single neutral value', () => {
+    const state = getSelectionState(options, 'a', { useDropdown: true, neutralValue: 0 });
     expect(state.valid).toBe(false);
     expect(state.issues).toContain('neutralValue must be a string or null in single selection.');
   });

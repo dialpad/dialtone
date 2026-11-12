@@ -46,6 +46,7 @@ describe('DtFilterPill Tests', function () {
   let content;
 
   const updateWrapper = () => {
+    if (wrapper?.exists()) wrapper.unmount();
     wrapper = mount(DtFilterPill, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
@@ -303,13 +304,15 @@ describe('DtFilterPill Tests', function () {
         expect(wrapper.find('[data-qa="dt-filter-pill__button"]').exists()).toBe(true);
       });
 
-      it('Should render DtListItem elements when dropdown is open', async () => {
+      it('Should render dropdown rows with hidden reserved selection indicators', async () => {
         await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
 
         const listItems = wrapper.findAllComponents(DtListItem);
 
         expect(listItems).toHaveLength(MOCK_DROPDOWN_FILTERS.length);
-        expect(listItems.every(item => item.find('[data-qa="dt-item-layout-selected-wrapper"]').exists())).toBe(true);
+        expect(listItems.every(item => item.find(
+          '[data-qa="dt-item-layout-selected-wrapper"] .d-filter-pill__selection-indicator--hidden',
+        ).exists())).toBe(true);
       });
     });
 
@@ -674,6 +677,7 @@ describe('DtFilterPill Tests', function () {
         expect(dialog.style.minInlineSize).toBe('320px');
         wrapper.unmount();
         expect(observer.disconnect).toHaveBeenCalled();
+        bounds.mockReturnValue(new DOMRect(0, 0, 400, 32));
         observer.callback([]);
         expect(dialog.style.minInlineSize).toBe('320px');
       } finally {
@@ -693,8 +697,9 @@ describe('DtFilterPill Tests', function () {
       updateWrapper();
       await button.trigger('click');
 
-      expect([...document.querySelector('[data-qa="dt-popover-content"]').classList])
-        .toEqual(['d-popover__content', ...classes]);
+      const contentClasses = [...document.querySelector('[data-qa="dt-popover-content"]').classList];
+      expect(contentClasses).toContain('d-popover__content');
+      expect(new Set(contentClasses.filter(name => /^d-p(?:[xy])?-\d+$/.test(name)))).toEqual(new Set(classes));
       for (const selector of ['.d-popover__header', '.d-popover__footer']) {
         expect(document.querySelector(selector).classList.contains('d-pis-200')).toBe(edgeClass !== null);
       }

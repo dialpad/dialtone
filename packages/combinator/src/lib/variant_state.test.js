@@ -13,6 +13,7 @@ import { DtButton, DtFilterPill } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
 import filterPillVariants from '@/src/variants/variants_filter_pill';
 import { serializeExampleTemplate } from './code_copy';
+import { presetExampleId } from '@workspaceRoot/scripts/lib/preset-example-id.mjs';
 
 // `link` is a boolean prop, so `linkKind` is inferred as its dependent child
 // (boolean-prefix matching). The first exclusion rule hides target/rel/type
@@ -51,7 +52,12 @@ const TEXT_LIST_ITEM_INFO = {
 };
 
 describe('variant_state', function () {
-  it('retains the exact legacy default configuration for preset retrieval', () => {
+  it('retains the legacy default lookup identity and configuration', () => {
+    const preset = listVariantNames(filterPillVariants).find(name => name === 'default');
+    expect(presetExampleId('DtFilterPill', preset)).toBe('examples/presets/DtFilterPill/default');
+    const state = buildVariantState(DtFilterPill,
+      allDocs.find(doc => doc.displayName === 'DtFilterPill'), filterPillVariants, preset);
+    expect(state.info.metadata.lookupExclude).toBeUndefined();
     expect(filterPillVariants.default).toEqual({
       props: {
         label: { initialValue: 'Active example' },
@@ -61,13 +67,17 @@ describe('variant_state', function () {
     });
   });
 
-  it.each([undefined, null, {}, 'invalid', []])('discriminates fresh options %j by array shape', options => {
+  it.each([
+    { options: undefined, controlled: false },
+    { options: null, controlled: false },
+    { options: {}, controlled: false },
+    { options: [], controlled: true },
+  ])('discriminates fresh options $options by array shape', ({ options, controlled }) => {
     const { info, options: state } = buildVariantState(DtFilterPill,
       allDocs.find(doc => doc.displayName === 'DtFilterPill'), {
         ...filterPillVariants,
         fixture: { props: { options: { initialValue: options } } },
       }, 'fixture');
-    const controlled = Array.isArray(options);
     expect(info.metadata.previewIdentity(state.props)[0]).toBe(controlled ? 'controlled' : 'legacy');
     const disabled = computeDisabledMembers(info, state.props, state.slots);
     expect(disabled.has('modelValue')).toBe(controlled);

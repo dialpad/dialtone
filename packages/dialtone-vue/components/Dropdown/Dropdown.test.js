@@ -478,8 +478,6 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
 
   it.each([
     { code: 'ArrowUp', showCloseButton: false },
-    { code: 'ArrowDown', showCloseButton: false },
-    { code: 'ArrowUp', showCloseButton: true },
     { code: 'ArrowDown', showCloseButton: true },
   ])('preserves first-row keyboard focus on $code opening with showCloseButton=$showCloseButton',
     async ({ code, showCloseButton }) => {

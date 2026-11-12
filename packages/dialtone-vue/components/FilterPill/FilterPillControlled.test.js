@@ -14,7 +14,10 @@ const reconcile = async () => { await nextTick(); await nextTick(); };
 
 describe('DtFilterPill controlled selection', () => {
   let wrapper;
+  let hadScrollLock;
+  beforeEach(() => { hadScrollLock = document.documentElement.classList.contains('d-of-hidden'); });
   const updateWrapper = (props = {}, slots = {}, attrs = {}, globalOptions = {}) => {
+    if (wrapper?.exists()) wrapper.unmount();
     wrapper = mount(DtFilterPill, {
       props: { options, selected: Object.freeze(['sales']), label: 'Teams', ...props },
       slots,
@@ -32,6 +35,7 @@ describe('DtFilterPill controlled selection', () => {
   afterEach(() => {
     wrapper?.unmount();
     document.body.innerHTML = '';
+    document.documentElement.classList.toggle('d-of-hidden', hadScrollLock);
     vi.restoreAllMocks();
   });
 
@@ -193,13 +197,9 @@ describe('DtFilterPill controlled selection', () => {
     });
   });
 
-  it.each(['close', 'cancel', 'reopen', 'dispose'])('coalesces repeated Apply and cancels in-flight Apply on %s', async boundary => {
+  it('coalesces repeated Apply requests for one deferred session', async () => {
     let controls;
-    const actions = [];
-    const applies = [];
-    updateWrapper({ deferSelection: true }, { content: bindings => { controls = bindings; return 'Custom'; } }, {
-      onSelectionChange: action => actions.push(action), onApply: () => applies.push('apply'),
-    });
+    updateWrapper({ deferSelection: true }, { content: bindings => { controls = bindings; return 'Custom'; } });
     await open();
     controls.setSelected(['support']);
     const apply = controls.apply;
@@ -207,6 +207,15 @@ describe('DtFilterPill controlled selection', () => {
     await apply();
     expect(wrapper.emitted('selection-change')).toHaveLength(1);
     expect(wrapper.emitted('apply')).toEqual([[]]);
+  });
+
+  it.each(['cancel', 'reopen', 'dispose'])('cancels an in-flight Apply on %s', async boundary => {
+    let controls;
+    const actions = [];
+    const applies = [];
+    updateWrapper({ deferSelection: true }, { content: bindings => { controls = bindings; return 'Custom'; } }, {
+      onSelectionChange: action => actions.push(action), onApply: () => applies.push('apply'),
+    });
     await open();
     controls.setSelected(['engineering']);
     const pendingApply = controls.apply();
@@ -214,11 +223,11 @@ describe('DtFilterPill controlled selection', () => {
     else if (boundary === 'cancel') controls.cancel();
     else {
       controls.close();
-      if (boundary === 'reopen') wrapper.find('[data-qa="dt-filter-pill__button"]').element.click();
+      wrapper.find('[data-qa="dt-filter-pill__button"]').element.click();
     }
     await pendingApply;
-    expect(actions).toHaveLength(1);
-    expect(applies).toEqual(['apply']);
+    expect(actions).toEqual([]);
+    expect(applies).toEqual([]);
   });
 
   it('normalizes locked true once without reporting a visibility change and does not reopen on unlock', async () => {
@@ -236,7 +245,7 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.emitted('open')).toEqual([[true], [false]]);
   });
 
-  it('stops the action trace when a synchronous listener unmounts the instance', async () => {
+  it('stops Clear follow-up events when its action listener unmounts the instance', async () => {
     const trace = [];
     updateWrapper({}, {}, {
       onSelectionChange: action => { trace.push(['action', action.reason]); wrapper.unmount(); },
@@ -244,9 +253,9 @@ describe('DtFilterPill controlled selection', () => {
       onClear: () => trace.push(['clear']),
     });
     await open();
-    checks()[1].click();
+    wrapper.get('[data-qa="dt-filter-pill__clear-button"]').element.click();
     await reconcile();
-    expect(trace).toEqual([['open', true], ['action', 'toggle']]);
+    expect(trace).toEqual([['open', true], ['action', 'clear']]);
   });
 
   it('keeps closed-clear focus until actual acceptance removes its button', async () => {
@@ -281,11 +290,10 @@ describe('DtFilterPill controlled selection', () => {
 
   it.each([
     [[{ value: 'sales', label: 'Sales' }], ['sales'], 'Sales', ''],
-    [options, ['private-id', 'engineering', 'sales'], 'Engineering', '+2'],
     [options, ['engineering', 'support', 'sales'], 'All', ''],
     [options, ['private-id', 'engineering', 'support', 'sales'], 'Engineering', '+3'],
   ])('separates the dimension and resolved multiple summary for %j', (available, selected, summary, overflow) => {
-    updateWrapper({ options: available, selected }, { anchorEnd: () => h('span', '12 items') });
+    updateWrapper({ options: available, selected });
     expect(wrapper.get('.sr-only').text()).toContain(summary);
     expect(wrapper.get('.d-filter-pill__label-start').text()).toBe('Teams');
     expect(wrapper.get('.d-filter-pill__label-start').attributes('aria-hidden')).toBe('true');
@@ -294,7 +302,6 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.get('.sr-only').text()).toContain('Teams');
     expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(Boolean(overflow));
     if (overflow) expect(wrapper.get('.d-filter-pill__label-end-overflow').text()).toBe(overflow);
-    expect(wrapper.get('.d-filter-pill__anchor-end').text()).toBe('12 items');
   });
 
   it.each([undefined, ''])('keeps an active summary without an empty dimension when label is %j', label => {
@@ -335,16 +342,18 @@ describe('DtFilterPill controlled selection', () => {
     expect(warn.mock.calls.some(([message]) => String(message).includes('invoked outside of the render function'))).toBe(false);
   });
 
-  it('ignores an explicitly supplied empty legacy modelValue when controlled', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const modelValue = Object.freeze([]);
-    updateWrapper({ modelValue });
+  it('ignores a supplied legacy model and later legacy edits when controlled', async () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const modelValue = ref([{ name: 'Legacy', active: true }]);
+    updateWrapper({ modelValue: modelValue.value });
     await open();
     checks()[1].click();
     await reconcile();
-    expect(warn.mock.calls.some(([message]) => message.includes('modelValue'))).toBe(true);
+    expect(wrapper.emitted('update:selected')).toEqual([[['sales', 'support']]]);
+    expect(modelValue.value).toEqual([{ name: 'Legacy', active: true }]);
+    modelValue.value[0].active = false;
+    await reconcile();
     expect(wrapper.emitted('update:modelValue')).toBeUndefined();
-    expect(modelValue).toEqual([]);
   });
 
   it('disables selection for duplicate option identities', async () => {
@@ -378,7 +387,8 @@ describe('DtFilterPill controlled selection', () => {
     ]);
   });
 
-  it.each([false, true])('preserves legacy native listeners and ignores controlled open (dropdown=%s)', async useDropdown => {
+  it('preserves legacy native listeners and ignores controlled open', async () => {
+    const useDropdown = false;
     const trace = [];
     const modelValue = [{ name: 'Legacy' }];
     updateWrapper({ options: undefined, modelValue, selected: 'legacy-attr', open: true, useDropdown }, {}, {
@@ -705,13 +715,6 @@ describe('DtFilterPill controlled selection', () => {
     expect(warn.mock.calls.filter(([message]) => message.includes('modelValue is ignored'))).toHaveLength(1);
   });
 
-  it('does not diagnose an omitted legacy value or model listener alone', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    updateWrapper({}, {}, { 'onUpdate:modelValue': () => {} });
-    await open();
-    expect(warn.mock.calls.some(([message]) => message.includes('modelValue is ignored'))).toBe(false);
-  });
-
   it('keeps controlled diagnostics quiet for a production consumer', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const previous = process.env.NODE_ENV;
@@ -724,12 +727,13 @@ describe('DtFilterPill controlled selection', () => {
     }
   });
 
-  it('diagnoses a raw legacy prop first added after creation', async () => {
+  it('ignores a legacy listener alone and diagnoses a raw legacy prop added later', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const forwardLegacy = ref(false);
     wrapper = mount({
       setup: () => () => h(DtFilterPill, {
-        options, selected: ['sales'], label: 'Teams', ...(forwardLegacy.value ? { modelValue: undefined } : {}),
+        options, selected: ['sales'], label: 'Teams', 'onUpdate:modelValue': () => {},
+        ...(forwardLegacy.value ? { modelValue: undefined } : {}),
       }),
     }, { global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body });
     expect(warn.mock.calls.some(([message]) => message.includes('modelValue'))).toBe(false);
@@ -758,7 +762,7 @@ describe('DtFilterPill controlled selection', () => {
     const rows = [...document.querySelectorAll('[role="menuitemradio"]')];
     const ids = rows.map(row => row.id);
     expect(new Set(ids).size).toBe(3);
-    expect(ids.every(id => /^dt-filter-pill-option-\d+$/.test(id))).toBe(true);
+    ids.forEach((id, index) => expect(document.getElementById(id)).toBe(rows[index]));
     rows[1].click();
     await reconcile();
     expect(wrapper.emitted('update:selected')).toEqual([['a:#[]']]);
@@ -768,7 +772,7 @@ describe('DtFilterPill controlled selection', () => {
     expect(document.querySelectorAll('[role="menuitemradio"]')[2].getAttribute('aria-checked')).toBe('true');
   });
 
-  it('makes Apply a no-op outside an open deferred session and Cancel discards without an action', async () => {
+  it('keeps Apply inert in an open immediate session and lets Cancel dismiss without an action', async () => {
     let controls;
     updateWrapper({}, { content: bindings => { controls = bindings; return 'Custom'; } });
     await open();

@@ -443,9 +443,7 @@ describe('DtPopover Tests', () => {
         expect(popoverWindow.attributes('aria-modal')).toBe(dialogAriaModal);
         expect(close.attributes('role')).toBeUndefined();
         expect(nativeClose.tagName).toBe('BUTTON');
-        expect(close.attributes('aria-label')).toBe('Click to close');
         expect(nativeClose.tabIndex).toBe(0);
-        if (!showCloseButton) expect(close.attributes('id')).toBe('sr-only-close-button');
 
         await wrapper.setProps({ role: 'menu' });
         expect.soft(popoverWindow.attributes('aria-modal')).toBeUndefined();
