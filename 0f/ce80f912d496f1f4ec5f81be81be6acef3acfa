@@ -1,0 +1,82 @@
+package.json
+  s_b146811d1c9582::t_5d52640225f56f 107
+pnpm-lock.yaml
+  s_b146811d1c9582::t_4ef4f8b4a4ec51 149-151
+packages/dialtone-vue/components/Stack/Validators.js
+  s_97fcf7a472e5e8::t_68eb2a4192be29 39-49
+  s_97fcf7a472e5e8::t_6b8c15e177498f 1
+packages/combinator/src/variants/variants_stack.js
+  s_97fcf7a472e5e8::t_c39260d54e6d39 104-116
+packages/dialtone-css/lib/build/less/components/stack.less
+  s_97fcf7a472e5e8::t_ce980260dc4de2 84-91
+  s_97fcf7a472e5e8::t_020782535968df 190-192,196
+  s_97fcf7a472e5e8::t_6d834c4d5c8f93 248,260,272,284
+  s_97fcf7a472e5e8::t_a782c480ca01ae 189
+  s_97fcf7a472e5e8::t_cd1ccf0c8cce06 193-195
+  s_97fcf7a472e5e8::t_10dbdb4371f75a 13
+apps/dialtone-documentation/docs/_data/stack.json
+  s_97fcf7a472e5e8::t_0b17ef976c8111 58-87,238-267,418-447,598-627,778-807
+packages/dialtone-vue/components/Stack/Stack.vue
+  s_97fcf7a472e5e8::t_355658b8b6b02d 92-94,99-107
+  s_97fcf7a472e5e8::t_7a5eb8c18daa93 23-24
+  s_97fcf7a472e5e8::t_e695e581573cdd 152-155,157
+  s_57cb89918a75ca::t_decfcfc5bd4817 91
+  s_97fcf7a472e5e8::t_05356077e7e321 12
+  s_97fcf7a472e5e8::t_79906e34b5a1ea 95-98
+packages/dialtone-vue/components/Stack/StackAlignSelf.story.vue
+  s_97fcf7a472e5e8::t_28a76c15cd9921 1-5,7-8,12,16-44,46-47
+  s_97fcf7a472e5e8::t_96018b70c4af5e 6
+  s_97fcf7a472e5e8::t_0b11b7ed562e75 9-11,13-15
+  s_97fcf7a472e5e8::t_a89691487bf777 45
+apps/dialtone-documentation/docs/components/stack.md
+  s_97fcf7a472e5e8::t_c954781a8d135e 659-662,664-689
+  s_97fcf7a472e5e8::t_a863fc5ba46065 663
+packages/dialtone-vue/components/Stack/Stack.test.js
+  s_97fcf7a472e5e8::t_28ff558f077b74 257-288
+packages/dialtone-vue/components/Stack/StackConstants.js
+  s_57cb89918a75ca::t_39082ed85b8567 35
+  s_97fcf7a472e5e8::t_0497e11c373395 36-41
+  s_97fcf7a472e5e8::t_3d973b6d3e74fb 55
+packages/dialtone-vue/components/Stack/Stack.stories.js
+  s_97fcf7a472e5e8::t_b1207af0b29930 6
+  s_97fcf7a472e5e8::t_646fd42e781486 13
+  s_97fcf7a472e5e8::t_a18e459b892b43 140-146
+  s_97fcf7a472e5e8::t_30ad3ad9f8f506 89-101
+packages/dialtone-vue/components/Stack/Utils.js
+  s_97fcf7a472e5e8::t_b98dab20a75aec 93,99
+  s_97fcf7a472e5e8::t_8e2c68c5e1bddd 1
+  s_97fcf7a472e5e8::t_9648b282c7a44b 113-117
+  s_97fcf7a472e5e8::t_83b1f4d60c8b46 75-78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0fce80f912d496f1f4ec5f81be81be6acef3acfa",
+  "prompts": {},
+  "sessions": {
+    "s_57cb89918a75ca": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "094f8b94-6b4a-4783-aead-2674d70218d1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_97fcf7a472e5e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "84244da0-1121-4609-b2fc-e77a697165d3",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    },
+    "s_b146811d1c9582": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4135defe-32ea-45a2-8816-c9589280885d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
