@@ -147,6 +147,10 @@ describe('DtComboboxMultiSelect Tests', () => {
       it('should be two chip components', () => {
         expect(chips.length).toBe(2);
       });
+
+      it('should render a remove button for each chip', () => {
+        expect(wrapper.findAll('[data-qa="dt-chip-close"]').length).toBe(2);
+      });
     });
   });
 

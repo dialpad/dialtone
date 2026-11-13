@@ -39,7 +39,9 @@ better active control. `null`, `undefined`, and `UNSET` map to `null`.
 - `null`: selects `null` or intentional `undefined`.
 - `boolean`, `number`, `string`: primitive controls.
 - `array`, `object`, `iterable`, `dynamic`: nested value controls.
-- `slot`: edits slot template strings.
+- `slot`: edits slot template strings. A variant can set `starterValue` on a slot
+  member (usually under `defaults`) to insert that template when the user adds
+  the slot, instead of starting with an empty field.
 - `event`: displays event data when used by latent event-console code.
 - `selection`: searchable value selection.
 - `segmented`: compact selection for small enums.
