@@ -264,6 +264,21 @@ describe('DtChip Tests', () => {
         expect(warn).toHaveBeenCalledTimes(1);
         warn.mockRestore();
       });
+
+      it('should keep the naming attributes on a static chip the consumer gave a role', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { role: 'img', ariaLabel: 'Online' };
+        updateWrapper();
+        expect(chip.attributes('role')).toBe('img');
+        expect(chip.attributes('aria-label')).toBe('Online');
+        expect(warn).not.toHaveBeenCalled();
+
+        mockProps = { role: 'img', 'aria-labelledby': 'other' };
+        updateWrapper();
+        expect(chip.attributes('aria-labelledby')).toBe('other');
+        warn.mockRestore();
+      });
     });
 
     describe('When showClose is true and interactive is true', () => {
@@ -544,6 +559,20 @@ describe('DtChip Tests', () => {
     it('should pass the same icon size to the endIcon and deprecated icon slots', () => {
       expect(iconSizeFor({ size: 600 }, 'endIcon')).toBe('300');
       expect(iconSizeFor({ size: 600 }, 'icon')).toBe('300');
+    });
+
+    it('should pass the icon size when it checks whether an icon slot has content', () => {
+      const calls = [];
+
+      mockSlots = {
+        startIcon: (slotProps) => { calls.push(slotProps.iconSize); return 'icon'; },
+        endIcon: (slotProps) => { calls.push(slotProps.iconSize); return 'icon'; },
+      };
+      mockProps = { size: 600 };
+      updateWrapper();
+
+      expect(calls.length).toBeGreaterThan(2);
+      expect(calls.every((iconSize) => iconSize === '300')).toBe(true);
     });
 
     it('should pass iconSize instead when it is set, and use it for the icon size cap', () => {

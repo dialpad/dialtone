@@ -52,18 +52,8 @@
     },
     {
       "class": "d-chip__close",
-      "applies": "N/A",
-      "description": "Applies positioning and styling for the chip close button."
-    },
-    {
-      "class": "d-chip__close--sm",
-      "applies": ".d-chip-close-btn",
-      "description": "Small close button."
-    },
-    {
-      "class": "d-chip__close--xs",
-      "applies": ".d-chip-close-btn",
-      "description": "Extra small close button."
+      "applies": "Child of .d-chip",
+      "description": "Applies positioning and styling for the chip close button. Its size follows the label size class through --chip-icon-size."
     },
     {
       "class": "d-chip__leading",

@@ -34,8 +34,8 @@ describe('exclusion_rules', function () {
   describe('DtChip variant exclusions', function () {
     const rules = variantsChip.exclusions;
 
-    it('should only enable showClose on an interactive chip', function () {
-      expect(shouldDisable('showClose', 'props', rules, { interactive: false })).toBe(true);
+    it('should keep showClose available on static and interactive chips', function () {
+      expect(shouldDisable('showClose', 'props', rules, { interactive: false })).toBe(false);
       expect(shouldDisable('showClose', 'props', rules, { interactive: true })).toBe(false);
     });
 

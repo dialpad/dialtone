@@ -45,7 +45,7 @@ A chip is a compact element for a label, a category, or an attribute that people
 - Use the `people` variant for names and the default variant for everything else.
 - Use `base` emphasis for most chips. Use `strong` to mark a selected chip, and `subtle` for text-only metadata that doesn't need a container.
 - Make a chip interactive only when it responds to a click. Add the remove button only to chips people can remove. A chip can have a remove button without being interactive, for a recipient or category with no label action.
-- An interactive chip is named by its label. Set `aria-label` when its content is only an icon or an avatar. A static chip is a plain `span`, which can't carry a name, so `aria-label` and `aria-labelledby` aren't applied to it. Put the name in the chip content, using visually hidden text (`sr-only`) for an icon-only or avatar-only chip.
+- An interactive chip is named by its label. Set `aria-label` when its content is only an icon or an avatar. A static chip is a plain `span`, which can't carry a name, so `aria-label` and `aria-labelledby` aren't applied to it unless you give it a role that allows a name, such as `role="img"`. Otherwise put the name in the chip content, using visually hidden text (`sr-only`) for an icon-only or avatar-only chip.
 - Set `remove-button-aria-label` so the remove button says what it removes, such as "Remove Jaqueline."
 
 ## Variants

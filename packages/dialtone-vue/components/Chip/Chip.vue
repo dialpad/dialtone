@@ -26,7 +26,7 @@
       >
         <!-- @slot Slot for start icon. The icon-size slot prop is the icon size for the chip size, or iconSize. -->
         <slot
-          v-if="hasSlotContent($slots.startIcon)"
+          v-if="hasIconSlot($slots.startIcon)"
           name="startIcon"
           :icon-size="resolvedIconSize"
         />
@@ -63,7 +63,7 @@
         <slot />
       </span>
       <span
-        v-if="hasSlotContent($slots.endIcon)"
+        v-if="hasIconSlot($slots.endIcon)"
         :class="['d-chip__end-icon', endIconClass]"
         data-qa="dt-chip-end-icon"
       >
@@ -213,7 +213,8 @@ export default {
 
     /**
      * Descriptive label for an interactive chip's content, for when the content is only an icon or an avatar.
-     * If this prop is unset the content in the default slot names the chip. A static chip ignores it.
+     * If this prop is unset the content in the default slot names the chip. A static chip ignores it
+     * unless you give it a role that allows a name, such as `role="img"`.
      */
     ariaLabel: {
       type: String,
@@ -408,8 +409,13 @@ export default {
 
   methods: {
     // $slots is not reactive, so slot-dependent values are methods called at render time, not computed.
+    // Icon slots render with icon-size, so detection passes it too.
+    hasIconSlot (slot) {
+      return hasSlotContent(slot, { iconSize: this.resolvedIconSize });
+    },
+
     hasStartIcon () {
-      return hasSlotContent(this.$slots.startIcon) || hasSlotContent(this.$slots.icon);
+      return this.hasIconSlot(this.$slots.startIcon) || this.hasIconSlot(this.$slots.icon);
     },
 
     hasStartAvatar () {
@@ -424,15 +430,17 @@ export default {
       const attrs = removeClassStyleAttrs(this.$attrs);
       delete attrs['grouped-chip'];
 
-      // A static span has no role that allows a name, so naming attributes only go on the button.
-      const labelledby = this.interactive && !this.ariaLabel ? (attrs['aria-labelledby'] ?? `${this.id}-content`) : undefined;
+      // A bare span has no role that allows a name, so naming attributes only go on the button
+      // or on a span the consumer gave a role.
+      const nameable = this.interactive || !!attrs.role;
+      const labelledby = attrs['aria-labelledby'] ?? (this.interactive ? `${this.id}-content` : undefined);
       delete attrs['aria-labelledby'];
 
       return {
         ...attrs,
         id: this.id,
-        'aria-label': this.interactive ? this.ariaLabel : undefined,
-        'aria-labelledby': labelledby,
+        'aria-label': nameable ? this.ariaLabel : undefined,
+        'aria-labelledby': nameable && !this.ariaLabel ? labelledby : undefined,
         'aria-disabled': this.disabled,
         tabindex: this.disabled ? -1 : attrs.tabindex,
       };
@@ -466,8 +474,8 @@ export default {
     validateProps () {
       if (process.env.NODE_ENV === 'production') return;
 
-      if (this.ariaLabel && !this.interactive) {
-        console.warn('DtChip warning: aria-label only names an interactive chip. Put the name in the chip content.');
+      if (this.ariaLabel && !this.interactive && !this.$attrs.role) {
+        console.warn('DtChip warning: aria-label only names an interactive chip or one with a role. Put the name in the chip content.');
       }
 
       if (this.interactive && this.emphasis === 'subtle') {
