@@ -56,6 +56,36 @@
       "description": "Aligns stack items along their baselines."
     },
     {
+      "class": "d-stack--align-self-start",
+      "applies": ".d-stack",
+      "description": "Places the stack at the start of its flex parent's cross-axis."
+    },
+    {
+      "class": "d-stack--align-self-center",
+      "applies": ".d-stack",
+      "description": "Centers the stack on its flex parent's cross-axis."
+    },
+    {
+      "class": "d-stack--align-self-end",
+      "applies": ".d-stack",
+      "description": "Places the stack at the end of its flex parent's cross-axis."
+    },
+    {
+      "class": "d-stack--align-self-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches the stack to fill its flex parent's cross-axis."
+    },
+    {
+      "class": "d-stack--align-self-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns the stack to the baseline of its flex parent's items."
+    },
+    {
+      "class": "d-stack--align-self-auto",
+      "applies": ".d-stack",
+      "description": "Uses the flex parent's align-items value for the stack."
+    },
+    {
       "class": "d-stack--justify-start",
       "applies": ".d-stack",
       "description": "Justifies stack items to the start along the main axis (default)."
@@ -204,6 +234,36 @@
       "class": "d-stack--sm-align-baseline",
       "applies": ".d-stack",
       "description": "Aligns stack items along their baselines on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-self-start",
+      "applies": ".d-stack",
+      "description": "Places the stack at the start of its flex parent's cross-axis on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-self-center",
+      "applies": ".d-stack",
+      "description": "Centers the stack on its flex parent's cross-axis on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-self-end",
+      "applies": ".d-stack",
+      "description": "Places the stack at the end of its flex parent's cross-axis on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-self-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches the stack to fill its flex parent's cross-axis on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-self-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns the stack to the baseline of its flex parent's items on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-self-auto",
+      "applies": ".d-stack",
+      "description": "Uses the flex parent's align-items value for the stack on small screens and larger."
     },
     {
       "class": "d-stack--sm-justify-start",
@@ -356,6 +416,36 @@
       "description": "Aligns stack items along their baselines on medium screens and larger."
     },
     {
+      "class": "d-stack--md-align-self-start",
+      "applies": ".d-stack",
+      "description": "Places the stack at the start of its flex parent's cross-axis on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-self-center",
+      "applies": ".d-stack",
+      "description": "Centers the stack on its flex parent's cross-axis on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-self-end",
+      "applies": ".d-stack",
+      "description": "Places the stack at the end of its flex parent's cross-axis on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-self-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches the stack to fill its flex parent's cross-axis on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-self-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns the stack to the baseline of its flex parent's items on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-self-auto",
+      "applies": ".d-stack",
+      "description": "Uses the flex parent's align-items value for the stack on medium screens and larger."
+    },
+    {
       "class": "d-stack--md-justify-start",
       "applies": ".d-stack",
       "description": "Justifies stack items to the start on medium screens and larger."
@@ -506,6 +596,36 @@
       "description": "Aligns stack items along their baselines on large screens and larger."
     },
     {
+      "class": "d-stack--lg-align-self-start",
+      "applies": ".d-stack",
+      "description": "Places the stack at the start of its flex parent's cross-axis on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-self-center",
+      "applies": ".d-stack",
+      "description": "Centers the stack on its flex parent's cross-axis on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-self-end",
+      "applies": ".d-stack",
+      "description": "Places the stack at the end of its flex parent's cross-axis on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-self-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches the stack to fill its flex parent's cross-axis on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-self-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns the stack to the baseline of its flex parent's items on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-self-auto",
+      "applies": ".d-stack",
+      "description": "Uses the flex parent's align-items value for the stack on large screens and larger."
+    },
+    {
       "class": "d-stack--lg-justify-start",
       "applies": ".d-stack",
       "description": "Justifies stack items to the start on large screens and larger."
@@ -654,6 +774,36 @@
       "class": "d-stack--xl-align-baseline",
       "applies": ".d-stack",
       "description": "Aligns stack items along their baselines on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-self-start",
+      "applies": ".d-stack",
+      "description": "Places the stack at the start of its flex parent's cross-axis on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-self-center",
+      "applies": ".d-stack",
+      "description": "Centers the stack on its flex parent's cross-axis on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-self-end",
+      "applies": ".d-stack",
+      "description": "Places the stack at the end of its flex parent's cross-axis on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-self-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches the stack to fill its flex parent's cross-axis on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-self-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns the stack to the baseline of its flex parent's items on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-self-auto",
+      "applies": ".d-stack",
+      "description": "Uses the flex parent's align-items value for the stack on extra large screens and larger."
     },
     {
       "class": "d-stack--xl-justify-start",

@@ -9,6 +9,7 @@
       defaultGap,
       defaultAlign,
       defaultJustify,
+      defaultAlignSelf,
       stackResponsive,
     ]"
   >
@@ -19,8 +20,8 @@
 
 <script>
 import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from './StackConstants';
-import { directionValidator, gapValidator, alignValidator, justifyValidator } from './Validators';
-import { getDefaultDirectionClass, getResponsiveClasses, getDefaultGapClass, getDefaultAlignClass, getDefaultJustifyClass } from './Utils';
+import { directionValidator, gapValidator, alignValidator, alignSelfValidator, justifyValidator } from './Validators';
+import { getDefaultDirectionClass, getResponsiveClasses, getDefaultGapClass, getDefaultAlignClass, getDefaultAlignSelfClass, getDefaultJustifyClass } from './Utils';
 
 export default {
   name: 'DtStack',
@@ -88,6 +89,21 @@ export default {
     },
 
     /**
+     * The alignSelf property places the stack itself along the cross axis of its flex parent
+     * (`align-self`). It does not change how the stack aligns its own children; use `align` for that.
+     * The alignSelf can be set to a string, or object with breakpoints.
+     * All the undefined breakpoints will have the 'default' value.
+     * You can override the default alignSelf with 'default' key.
+     * In case of string, it will be applied to all the breakpoints.
+     * If not specified, the parent's `align-items` applies.
+     * @values start, center, end, stretch, baseline, auto
+     */
+    alignSelf: {
+      type: [String, Object],
+      validator: (alignSelf) => alignSelfValidator(alignSelf),
+    },
+
+    /**
      * The justify property controls the justification of items along the main axis.
      * The justify can be set to a string, or object with breakpoints.
      * All the undefined breakpoints will have the 'default' value.
@@ -131,8 +147,12 @@ export default {
       return getDefaultJustifyClass(this.justify);
     },
 
+    defaultAlignSelf () {
+      return getDefaultAlignSelfClass(this.alignSelf);
+    },
+
     stackResponsive () {
-      return getResponsiveClasses(this.direction, this.gap, this.align, this.justify);
+      return getResponsiveClasses(this.direction, this.gap, this.align, this.justify, this.alignSelf);
     },
   },
 };
