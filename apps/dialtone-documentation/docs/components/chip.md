@@ -44,8 +44,9 @@ A chip is a compact element for a label, a category, or an attribute that people
 - Keep labels short, ideally one or two words. If a label can be long, truncate it and set a width on the chip content.
 - Use the `people` variant for names and the default variant for everything else.
 - Use `base` emphasis for most chips. Use `strong` to mark a selected chip, and `subtle` for text-only metadata that doesn't need a container.
-- Make a chip interactive only when it responds to a click. Add the remove button only to chips people can remove.
-- The label is the chip's accessible name. Set `aria-label` when the content is only an icon or an avatar, and set `remove-button-aria-label` so the remove button says what it removes, such as "Remove Jaqueline."
+- Make a chip interactive only when it responds to a click. Add the remove button only to chips people can remove. A chip can have a remove button without being interactive, for a recipient or category with no label action.
+- An interactive chip is named by its label. Set `aria-label` when its content is only an icon or an avatar. A static chip is a plain `span`, which can't carry a name, so `aria-label` and `aria-labelledby` aren't applied to it. Put the name in the chip content, using visually hidden text (`sr-only`) for an icon-only or avatar-only chip.
+- Set `remove-button-aria-label` so the remove button says what it removes, such as "Remove Jaqueline."
 
 ## Variants
 
@@ -85,7 +86,7 @@ Chips are static by default. An interactive chip renders as a button. Hovering i
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
-  <dt-chip interactive :emphasis="selected ? 'strong' : 'base'" @click="selected = !selected">
+  <dt-chip interactive :emphasis="selected ? 'strong' : 'base'" :aria-pressed="selected" @click="selected = !selected">
     {{ selected ? 'Selected' : 'Select me' }}
   </dt-chip>
   <dt-chip interactive show-close remove-button-aria-label="Remove label name">Removable</dt-chip>
@@ -93,14 +94,22 @@ Chips are static by default. An interactive chip renders as a button. Hovering i
 </dt-stack>
 <!-- @code -->
 <dt-stack direction="row" gap="100">
-  <dt-chip interactive emphasis="base">Select me</dt-chip>
-  <dt-chip interactive emphasis="strong">Selected</dt-chip>
+  <dt-chip interactive emphasis="base" aria-pressed="false">Select me</dt-chip>
+  <dt-chip interactive emphasis="strong" aria-pressed="true">Selected</dt-chip>
   <dt-chip interactive show-close remove-button-aria-label="Remove label name">Removable</dt-chip>
   <dt-chip variant="people" interactive show-close remove-button-aria-label="Remove First Last">First Last</dt-chip>
 </dt-stack>
 ```
 
-`show-close` needs `interactive`. Without it, Chip warns in development and doesn't render the button.
+`show-close` doesn't need `interactive`. Use `show-close` alone for a chip whose label does nothing but can be removed. The label stays static and the remove button is the only control. Use `interactive` as well when the label itself responds to a click.
+
+```vue demo
+<dt-chip show-close remove-button-aria-label="Remove Jaqueline">Jaqueline</dt-chip>
+```
+
+### Attributes
+
+Chip puts `class` and `style` on its root element and every other attribute on the label, so `aria-pressed`, `tabindex` and `data-*` reach the button. Use `aria-pressed` on an interactive chip that toggles, for example the `strong` selected chip above. Use `label-class` for classes that belong on the label.
 
 ### Disabled
 

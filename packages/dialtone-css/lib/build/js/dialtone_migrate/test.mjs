@@ -145,9 +145,9 @@ describe('--health-check', () => {
       '<dt-chip :label="count > 0" />']) {
       assert.match(pending(html), new RegExp(`\\[PENDING\\].*${pattern.source}`), html);
     }
-    for (const html of ['<dt-chip-group>x</dt-chip-group>', '<dt-chip size="300">x</dt-chip>',
-      '<dt-chip :size="s">x</dt-chip>', '<dt-chip v-bind:size="s" />', '<dt-chip v-bind="chipProps" />',
-      '<dt-chip :label="count > 0" size="200" />']) {
+    for (const html of ['<dt-chip-group>x</dt-chip-group>', '<dt-chip size="300" show-close>x</dt-chip>',
+      '<dt-chip :size="s" show-close>x</dt-chip>', '<dt-chip v-bind:size="s" show-close />',
+      '<dt-chip v-bind="chipProps" />', '<dt-chip :label="count > 0" size="200" show-close />']) {
       assert.match(pending(html), new RegExp(`\\[DONE\\].*${pattern.source}`), html);
     }
   });
@@ -166,23 +166,23 @@ describe('--health-check', () => {
     assert.match(pending('<dt-chip size="200"><span slot="avatar">a</span></dt-chip>'), chip);
     assert.match(pending('<dt-chip size="200"><span slot = "avatar">a</span></dt-chip>'), chip);
     assert.match(
-      pending('<dt-chip-group icon-class="x" /><dt-chip size="200">x</dt-chip>'),
+      pending('<dt-chip-group icon-class="x" /><dt-chip size="200" show-close>x</dt-chip>'),
       /\[DONE\].*DtChip API Updates \(chip-api\)/,
     );
   });
 
-  it('flags an interactive chip that has a size but no show-close', () => {
+  it('flags a chip that has a size but no show-close, interactive or not', () => {
     const pending = html => runHealthCheck({ 'App.vue': `<template>${html}</template>` });
     const chipPending = /\[PENDING\].*DtChip API Updates \(chip-api\)/;
     const chipDone = /\[DONE\].*DtChip API Updates \(chip-api\)/;
 
-    for (const attrs of ['interactive', 'interactive=""', 'interactive="true"', 'interactive="false"', 'interactive=false',
-      ':interactive="true"', ':interactive=" true "', 'v-bind:interactive=\' true\'']) {
+    for (const attrs of ['', 'interactive', 'interactive="false"', ':interactive="false"', ':interactive="isOn"',
+      'interactive-label="a"']) {
       assert.match(pending(`<dt-chip size="300" ${attrs}>Label</dt-chip>`), chipPending, attrs);
     }
 
-    for (const attrs of ['interactive show-close', 'interactive :show-close="x"', 'interactive hide-close',
-      'interactive v-bind="props"', ':interactive="false"', 'interactive-label="a"']) {
+    for (const attrs of ['show-close', ':show-close="x"', 'showClose', 'hide-close', 'interactive show-close',
+      'interactive v-bind="props"']) {
       assert.match(pending(`<dt-chip size="300" ${attrs}>Label</dt-chip>`), chipDone, attrs);
     }
   });

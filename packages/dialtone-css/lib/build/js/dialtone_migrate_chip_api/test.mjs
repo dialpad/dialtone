@@ -12,21 +12,21 @@ function warnings (input) {
 
 describe('dialtone-migrate-chip-api', () => {
   it('preserves omitted size as explicit 300', () => {
-    const input = '<dt-chip>Chip</dt-chip>';
-    const expected = '<dt-chip size="300">Chip</dt-chip>';
+    const input = '<dt-chip show-close>Chip</dt-chip>';
+    const expected = '<dt-chip size="300" show-close>Chip</dt-chip>';
 
     assert.equal(run(input), expected);
   });
 
   it('does not override explicit size', () => {
-    const input = '<dt-chip :size="200">Chip</dt-chip>';
+    const input = '<dt-chip :size="200" show-close>Chip</dt-chip>';
 
     assert.equal(run(input), input);
   });
 
   it('renames the icon slot to startIcon', () => {
     const input = [
-      '<dt-chip>',
+      '<dt-chip show-close>',
       '  <template #icon>',
       '    <dt-icon />',
       '  </template>',
@@ -34,7 +34,7 @@ describe('dialtone-migrate-chip-api', () => {
       '</dt-chip>',
     ].join('\n');
     const expected = [
-      '<dt-chip size="300">',
+      '<dt-chip size="300" show-close>',
       '  <template #startIcon>',
       '    <dt-icon />',
       '  </template>',
@@ -46,15 +46,15 @@ describe('dialtone-migrate-chip-api', () => {
   });
 
   it('renames iconClass to startIconClass', () => {
-    const input = '<DtChip iconClass="foo">Chip</DtChip>';
-    const expected = '<DtChip size="300" startIconClass="foo">Chip</DtChip>';
+    const input = '<DtChip iconClass="foo" show-close>Chip</DtChip>';
+    const expected = '<DtChip size="300" startIconClass="foo" show-close>Chip</DtChip>';
 
     assert.equal(run(input), expected);
   });
 
   it('renames avatar-class to start-avatar-class', () => {
-    const input = '<dt-chip avatar-class="foo">Chip</dt-chip>';
-    const expected = '<dt-chip size="300" start-avatar-class="foo">Chip</dt-chip>';
+    const input = '<dt-chip avatar-class="foo" show-close>Chip</dt-chip>';
+    const expected = '<dt-chip size="300" start-avatar-class="foo" show-close>Chip</dt-chip>';
 
     assert.equal(run(input), expected);
   });
@@ -65,10 +65,10 @@ describe('dialtone-migrate-chip-api', () => {
     assert.ok(run(input).includes('<template #startAvatar>'));
   });
 
-  it('warns for explicit show-close without interactive', () => {
-    const input = '<dt-chip show-close>Chip</dt-chip>';
-
-    assert.ok(warnings(input).some(warning => warning.startsWith('CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE')));
+  it('does not warn for show-close without interactive, since the remove button no longer needs it', () => {
+    for (const input of ['<dt-chip show-close>Chip</dt-chip>', '<dt-chip show-close :interactive="false">Chip</dt-chip>']) {
+      assert.ok(!warnings(input).some(warning => warning.startsWith('CHIP_API_SHOW_CLOSE')), input);
+    }
   });
 
   it('warns for dynamic show-close', () => {
@@ -105,13 +105,11 @@ describe('dialtone-migrate-chip-api', () => {
       .some(warning => warning.startsWith('CHIP_API_ACTIVE_LABEL_CLASS')));
   });
 
-  it('treats a plain interactive="false" as interactive, since the string is truthy', () => {
+  it('adds show-close after a plain interactive="false"', () => {
     assert.equal(
       run('<dt-chip size="300" interactive="false">Chip</dt-chip>'),
       '<dt-chip size="300" interactive="false" show-close>Chip</dt-chip>',
     );
-    assert.ok(!warnings('<dt-chip size="300" show-close interactive="false">Chip</dt-chip>')
-      .some(warning => warning.startsWith('CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE')));
   });
 
   it('leaves a legacy hide-close to the props migration instead of adding show-close', () => {
@@ -177,7 +175,7 @@ describe('dialtone-migrate-chip-api', () => {
 
   it('does not rename the icon slot of a dt-button nested in the chip', () => {
     const input = [
-      '<dt-chip size="300">',
+      '<dt-chip size="300" show-close>',
       '  <dt-button><template #icon><dt-icon /></template></dt-button>',
       '</dt-chip>',
     ].join('\n');
@@ -219,22 +217,20 @@ describe('dialtone-migrate-chip-api', () => {
       assert.equal(omittedWarning(input, '_SPREAD').length, 1);
     });
 
-    it('only warns for chips that are not interactive, naming interactive as required', () => {
+    it('adds show-close after size when the chip is not interactive, so its remove button stays', () => {
       for (const attrs of ['', ' :interactive="false"', ' v-bind:interactive="false"']) {
         const input = `<dt-chip size="300"${attrs}>Chip</dt-chip>`;
-        const found = omittedWarning(input);
 
-        assert.equal(run(input), input, attrs);
-        assert.equal(found.length, 1, attrs);
-        assert.match(found[0], /^CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE .*needs both interactive and show-close/);
+        assert.equal(run(input), `<dt-chip size="300"${attrs} show-close>Chip</dt-chip>`, attrs);
+        assert.deepEqual(omittedWarning(input), [], attrs);
       }
     });
 
-    it('does not guess for a dynamic interactive binding and warns', () => {
+    it('adds show-close for a dynamic interactive binding, since the remove button no longer depends on it', () => {
       const input = '<dt-chip size="300" :interactive="isOn">Chip</dt-chip>';
 
-      assert.equal(run(input), input);
-      assert.equal(omittedWarning(input, '_DYNAMIC_INTERACTIVE').length, 1);
+      assert.equal(run(input), '<dt-chip size="300" :interactive="isOn" show-close>Chip</dt-chip>');
+      assert.deepEqual(omittedWarning(input), []);
     });
 
     it('leaves chips that already have show-close or showClose untouched and silent', () => {
@@ -277,7 +273,7 @@ describe('dialtone-migrate-chip-api', () => {
   });
 
   it('does not rename slot-like text inside quoted attribute values', () => {
-    const input = '<dt-chip size="300"><template #default><i class="#icon" title="slot=\'icon\'" /></template>'
+    const input = '<dt-chip size="300" show-close><template #default><i class="#icon" title="slot=\'icon\'" /></template>'
       + '</dt-chip>';
 
     assert.equal(run(input), input);
@@ -290,35 +286,24 @@ describe('dialtone-migrate-chip-api', () => {
   });
 
   it('only renames class props on the chip opening tag', () => {
-    const input = '<dt-chip size="300"><dt-avatar avatar-class="foo" /></dt-chip>';
+    const input = '<dt-chip size="300" show-close><dt-avatar avatar-class="foo" /></dt-chip>';
 
     assert.equal(run(input), input);
   });
 
   it('transforms a self-closing chip and a following paired chip independently', () => {
-    const input = '<dt-chip /><dt-chip icon-class="foo">Chip</dt-chip>';
-    const expected = '<dt-chip size="300" /><dt-chip size="300" start-icon-class="foo">Chip</dt-chip>';
+    const input = '<dt-chip show-close /><dt-chip icon-class="foo" show-close>Chip</dt-chip>';
+    const expected = '<dt-chip size="300" show-close /><dt-chip size="300" start-icon-class="foo" show-close>Chip</dt-chip>';
 
     assert.equal(run(input), expected);
   });
 
   it('transforms every chip in a list, including nested ones', () => {
-    const input = '<dt-chip><dt-chip>Inner</dt-chip></dt-chip><DtChip>Next</DtChip>';
-    const expected = '<dt-chip size="300"><dt-chip size="300">Inner</dt-chip></dt-chip>'
-      + '<DtChip size="300">Next</DtChip>';
+    const input = '<dt-chip show-close><dt-chip show-close>Inner</dt-chip></dt-chip><DtChip show-close>Next</DtChip>';
+    const expected = '<dt-chip size="300" show-close><dt-chip size="300" show-close>Inner</dt-chip></dt-chip>'
+      + '<DtChip size="300" show-close>Next</DtChip>';
 
     assert.equal(run(input), expected);
-  });
-
-  it('warns for show-close with an explicitly false interactive binding', () => {
-    for (const interactive of [':interactive="false"', 'v-bind:interactive="false"']) {
-      const input = `<dt-chip show-close ${interactive}>Chip</dt-chip>`;
-
-      assert.ok(
-        warnings(input).some(warning => warning.startsWith('CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE')),
-        interactive,
-      );
-    }
   });
 
   it('does not warn for show-close on interactive or dynamically interactive chips', () => {

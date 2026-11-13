@@ -21,12 +21,6 @@ export default {
   },
 
   exclusions: [
-    // A remove button only renders on an interactive chip.
-    {
-      when: { interactive: v => !v },
-      disable: { props: ['showClose'] },
-      clear: { props: ['showClose'] },
-    },
     // `subtle` is text only, so it can't be interactive (Chip falls back to base and warns).
     {
       when: { interactive: true },
@@ -59,6 +53,16 @@ export default {
     },
     slots: {
       default: { initialValue: 'Remove me' },
+    },
+  },
+
+  // The label stays static; only the remove button is a control.
+  'removable static': {
+    props: {
+      showClose: { initialValue: true },
+    },
+    slots: {
+      default: { initialValue: 'Jaqueline' },
     },
   },
 

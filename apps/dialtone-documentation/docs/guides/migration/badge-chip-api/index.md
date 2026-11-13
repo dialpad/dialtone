@@ -6,7 +6,7 @@ description: "DtBadge gains kind groups and moves to variant/emphasis/label, and
 ## TLDR
 
 > [!WARNING] Breaking Change
-> `DtBadge` now has a `kind` (`status`, `counter`, `release` or `lifecycle`; default `status`) and uses `variant`, `emphasis`, and `label`. `DtChip` now uses `variant`, `emphasis`, `startIcon`, `startAvatar` and `endIcon`, defaults `showClose` to `false`, and only renders removal controls when `interactive` is true.
+> `DtBadge` now has a `kind` (`status`, `counter`, `release` or `lifecycle`; default `status`) and uses `variant`, `emphasis`, and `label`. `DtChip` now uses `variant`, `emphasis`, `startIcon`, `startAvatar` and `endIcon`, defaults `showClose` to `false`, and puts attributes other than `class` and `style` on the label.
 
 Run both migration tools first:
 
@@ -71,7 +71,9 @@ The migration script leaves dynamic `:variant`/`:type` bindings untouched and wa
 | `avatarClass` / `avatar-class` | `startAvatarClass` / `start-avatar-class` |
 | omitted `size` | explicit `size="300"` from the codemod |
 | omitted `showClose` | default is now `false` |
-| `show-close` without `interactive` | warns and renders no remove button |
+| `show-close` without `interactive` | renders the remove button next to a static label |
+| `aria-pressed`, `tabindex`, `data-*` and other attributes | go on the label element, not the root; `class` and `style` stay on the root |
+| `aria-label` / `aria-labelledby` on a static chip | not applied: put the name in the chip content. On an interactive chip they name the button |
 | `labelClass="d-chip__label--active"` | removed; warns. Use `emphasis="strong"` for a persistent selected look |
 
 ```vue
@@ -102,6 +104,6 @@ Removal is part of the interactive contract:
 </dt-chip>
 ```
 
-The migration script warns for omitted `showClose`/`interactive`, explicit `show-close` without `interactive`, dynamic `show-close`, `d-chip__label--active` in a chip's attributes, and files that provide both old `icon` and `avatar` slots.
+The migration script adds `show-close` to every chip that has neither `show-close` nor a legacy `hide-close`, because the old default was `true`. It warns for a chip with a `v-bind` object (it may supply `show-close`), dynamic `show-close`, `d-chip__label--active` in a chip's attributes, and files that provide both old `icon` and `avatar` slots.
 
 The `d-chip__label--active` class gave a chip a fixed filled look at rest. It is removed. Use `emphasis="strong"` for a persistent selected look, for example `:emphasis="selected ? 'strong' : 'base'"`; it may not match the old fill exactly. The script can't rewrite the class, so replace it where the warning points.

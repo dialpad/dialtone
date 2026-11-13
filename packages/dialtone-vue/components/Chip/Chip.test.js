@@ -87,8 +87,9 @@ describe('DtChip Tests', () => {
         expect(chip.element.tagName).toBe('SPAN');
       });
 
-      it('chip should have aria-labelledby', () => {
-        expect('aria-labelledby' in chip.attributes()).toBeTruthy();
+      it('chip should not have naming attributes, because a static span cannot be named', () => {
+        expect('aria-labelledby' in chip.attributes()).toBe(false);
+        expect('aria-label' in chip.attributes()).toBe(false);
       });
 
     });
@@ -170,12 +171,98 @@ describe('DtChip Tests', () => {
     });
 
     describe('When showClose is true and interactive is false', () => {
-      it('should not render remove button', () => {
+      beforeEach(() => {
         mockProps = { showClose: true, interactive: false };
 
         updateWrapper();
+      });
 
-        expect(remove.exists()).toBe(false);
+      it('should render the remove button next to a static label', () => {
+        expect(remove.exists()).toBe(true);
+        expect(chip.element.tagName).toBe('SPAN');
+      });
+
+      it('should emit close when the remove button is clicked', async () => {
+        await remove.trigger('click');
+
+        expect(wrapper.emitted('close')).toHaveLength(1);
+      });
+
+      it('should not emit close from the keyboard, since the label is not interactive', async () => {
+        await chip.trigger('keydown', { key: 'Backspace' });
+
+        expect(wrapper.emitted('close')).toBeUndefined();
+      });
+
+      it('should not warn that showClose needs interactive', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        updateWrapper();
+
+        expect(warn).not.toHaveBeenCalled();
+        warn.mockRestore();
+      });
+    });
+
+    describe('When showClose is true and the chip is disabled', () => {
+      it('should not emit close on click', async () => {
+        mockProps = { showClose: true, disabled: true };
+
+        updateWrapper();
+        await remove.trigger('click');
+
+        expect(wrapper.emitted('close')).toBeUndefined();
+      });
+    });
+
+    describe('When attributes are passed to the chip', () => {
+      it('should put class and style on the root and every other attribute on the label', () => {
+        mockProps = { interactive: true, class: 'my-class', style: 'margin: 1px', 'aria-pressed': 'true', tabindex: 0, 'data-test': 'x' };
+
+        updateWrapper();
+
+        expect(wrapper.classes()).toContain('my-class');
+        expect(wrapper.attributes('style')).toContain('margin: 1px');
+        expect(chip.classes()).not.toContain('my-class');
+        expect(chip.attributes('aria-pressed')).toBe('true');
+        expect(chip.attributes('tabindex')).toBe('0');
+        expect(chip.attributes('data-test')).toBe('x');
+        expect(wrapper.attributes('aria-pressed')).toBeUndefined();
+        expect(wrapper.attributes('tabindex')).toBeUndefined();
+      });
+
+      it('should let disabled set tabindex -1 over a consumer tabindex', () => {
+        mockProps = { interactive: true, disabled: true, tabindex: 0 };
+
+        updateWrapper();
+
+        expect(chip.attributes('tabindex')).toBe('-1');
+      });
+
+      it('should keep a consumer aria-labelledby on an interactive chip and drop it on a static one', () => {
+        mockProps = { interactive: true, 'aria-labelledby': 'other' };
+        updateWrapper();
+        expect(chip.attributes('aria-labelledby')).toBe('other');
+
+        mockProps = { 'aria-labelledby': 'other' };
+        updateWrapper();
+        expect(chip.attributes('aria-labelledby')).toBeUndefined();
+      });
+
+      it('should put aria-label on an interactive chip, and not on a static one with a warning', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = { interactive: true, ariaLabel: 'Filter' };
+        updateWrapper();
+        expect(chip.attributes('aria-label')).toBe('Filter');
+        expect(chip.attributes('aria-labelledby')).toBeUndefined();
+        expect(warn).not.toHaveBeenCalled();
+
+        mockProps = { ariaLabel: 'Filter' };
+        updateWrapper();
+        expect(chip.attributes('aria-label')).toBeUndefined();
+        expect(warn).toHaveBeenCalledTimes(1);
+        warn.mockRestore();
       });
     });
 

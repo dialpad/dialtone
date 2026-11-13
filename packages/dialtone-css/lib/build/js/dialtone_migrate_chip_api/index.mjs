@@ -52,18 +52,6 @@ function hasDynamicAttr (attrs, prop) {
   return parseAttrs(attrs).some(token => boundNames(prop).includes(token.name) && token.value !== null);
 }
 
-// Only a bound literal false (:interactive="false") means the chip is not interactive. A plain
-// interactive="false" is the string "false", which Vue leaves as is on a Boolean prop, so it is truthy.
-// Any other value, including a dynamic expression, is treated as possibly interactive.
-const isBoundFalse = token => boundNames('interactive').includes(token.name)
-  && token.value !== null && unquote(token.value).trim() === 'false';
-
-function isInteractive (attrs) {
-  return parseAttrs(attrs)
-    .filter(token => attrNames('interactive').includes(token.name))
-    .some(token => !isBoundFalse(token));
-}
-
 function insertAttr (attrs, attr) {
   const leadingSpace = attrs.match(/^\s*/)[0];
   const rest = attrs.slice(leadingSpace.length).trimStart();
@@ -78,18 +66,6 @@ function insertAttrAfter (attrs, after, attr) {
   if (!token) return insertAttr(attrs, attr);
   const gap = attrs.slice(0, token.start).match(/\s*$/)[0] || ' ';
   return `${attrs.slice(0, token.end)}${gap}${attr}${attrs.slice(token.end)}`;
-}
-
-// 'static' for a literal true (bare, "" or "true") or any plain string, 'false' for a bound literal false,
-// 'dynamic' for any other expression, 'none' when the chip has no interactive attribute.
-function interactiveState (attrs) {
-  const token = parseAttrs(attrs).find(t => attrNames('interactive').includes(t.name));
-  if (!token) return 'none';
-  if (token.value === null) return 'static';
-  if (!boundNames('interactive').includes(token.name)) return 'static';
-  const value = unquote(token.value).trim();
-  if (value === 'false') return 'false';
-  return value === '' || value === 'true' ? 'static' : 'dynamic';
 }
 
 function renameAttr (attrs, oldProp, newProp) {
@@ -118,28 +94,19 @@ function transformChipOpenTag (tag, warnings, filePath, activeClassInFile) {
   const hasHideClose = hasAttr(attrs, 'hide-close') || hasAttr(attrs, 'hideClose');
 
   if (!hasShowClose && !hasHideClose) {
-    const state = interactiveState(attrs);
     const hasSpread = parseAttrs(attrs).some(token => token.name === 'v-bind' && token.value !== null);
-    if (state === 'static' && !hasSpread) {
-      // showClose now defaults to false, so an interactive chip keeps its close button only with show-close.
-      attrs = insertAttrAfter(attrs, 'interactive', 'show-close');
-    } else if (state === 'static') {
+    const hasInteractive = parseAttrs(attrs).some(token => attrNames('interactive').includes(token.name));
+    if (hasSpread) {
       warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_SPREAD file=${filePath} (v-bind object may supply show-close)`);
-    } else if (state === 'dynamic') {
-      warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_DYNAMIC_INTERACTIVE file=${filePath}`
-        + ' (add show-close if the chip can be interactive)');
     } else {
-      warnings.push(`CHIP_API_OMITTED_SHOW_CLOSE_INTERACTIVE file=${filePath}`
-        + ' (the close button needs both interactive and show-close)');
+      // showClose now defaults to false, and the remove button no longer needs interactive, so every chip that
+      // had the old default (true) keeps its remove button only with show-close.
+      attrs = insertAttrAfter(attrs, hasInteractive ? 'interactive' : 'size', 'show-close');
     }
   }
 
   if (hasDynamicAttr(attrs, 'show-close') || hasDynamicAttr(attrs, 'showClose')) {
     warnings.push(`CHIP_API_DYNAMIC_SHOW_CLOSE file=${filePath}`);
-  }
-
-  if (hasShowClose && !isInteractive(attrs)) {
-    warnings.push(`CHIP_API_SHOW_CLOSE_WITHOUT_INTERACTIVE file=${filePath}`);
   }
 
   // The class has no one-to-one replacement (emphasis="strong" is close but not identical), so it is only reported.

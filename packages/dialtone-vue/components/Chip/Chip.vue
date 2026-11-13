@@ -1,18 +1,14 @@
 <template>
   <span
-    class="d-chip"
-    :style="iconSizeStyle"
+    :class="['d-chip', $attrs.class]"
+    :style="[iconSizeStyle, $attrs.style]"
   >
     <component
       :is="interactive ? 'button' : 'span'"
-      :id="id"
-      :aria-label="ariaLabel"
-      :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
-      :aria-disabled="disabled"
+      v-bind="labelAttrs()"
       :class="chipClasses()"
       :type="interactive && 'button'"
       data-qa="dt-chip"
-      :tabindex="disabled ? -1 : null"
       v-on="chipListeners"
     >
       <span
@@ -87,7 +83,7 @@
       </span>
     </component>
     <dt-button
-      v-if="resolvedShowClose"
+      v-if="showClose"
       :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
       :aria-label="resolvedRemoveButtonAriaLabel"
@@ -116,7 +112,7 @@ import {
   CHIP_SIZE_MODIFIERS,
   CHIP_ICON_SIZES,
 } from './ChipConstants';
-import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import { ordinalSizeValidator } from '@/common/validators';
 import { DialtoneLocalization } from '@/localization';
 
@@ -133,6 +129,9 @@ export default {
     DtButton,
     DtIconClose,
   },
+
+  // class and style stay on the root; every other attribute goes to the label, so aria-pressed and tabindex reach the button.
+  inheritAttrs: false,
 
   props: {
     /**
@@ -165,7 +164,7 @@ export default {
     },
 
     /**
-     * Shows the close button on the chip
+     * Shows the remove button. It works with or without `interactive`, so a static label can have a removable chip.
      * @values true, false
      */
     showClose: {
@@ -184,8 +183,8 @@ export default {
     },
 
     /**
-     * The interactivity of the chip.
-     * Makes chip clickable, apply hover/focus/active style, emit keyboard events etc.
+     * The interactivity of the chip's label.
+     * Makes the label a button: clickable, with hover/focus/active styles and keyboard events.
      * @values true, false
      */
     interactive: {
@@ -213,8 +212,8 @@ export default {
     },
 
     /**
-     * Descriptive label for the chip content.
-     * If this prop is unset the content in the default slot will be used as an aria-label.
+     * Descriptive label for an interactive chip's content, for when the content is only an icon or an avatar.
+     * If this prop is unset the content in the default slot names the chip. A static chip ignores it.
      */
     ariaLabel: {
       type: String,
@@ -380,10 +379,6 @@ export default {
       return this.emphasis;
     },
 
-    resolvedShowClose () {
-      return this.interactive && this.showClose;
-    },
-
     resolvedIconSize () {
       return this.iconSize ?? CHIP_ICON_SIZES[String(this.size)] ?? CHIP_ICON_SIZES[300];
     },
@@ -425,6 +420,24 @@ export default {
       return hasSlotContent(this.$slots.default);
     },
 
+    labelAttrs () {
+      const attrs = removeClassStyleAttrs(this.$attrs);
+      delete attrs['grouped-chip'];
+
+      // A static span has no role that allows a name, so naming attributes only go on the button.
+      const labelledby = this.interactive && !this.ariaLabel ? (attrs['aria-labelledby'] ?? `${this.id}-content`) : undefined;
+      delete attrs['aria-labelledby'];
+
+      return {
+        ...attrs,
+        id: this.id,
+        'aria-label': this.interactive ? this.ariaLabel : undefined,
+        'aria-labelledby': labelledby,
+        'aria-disabled': this.disabled,
+        tabindex: this.disabled ? -1 : attrs.tabindex,
+      };
+    },
+
     chipClasses () {
       return [
         this.$attrs['grouped-chip'] ? 'd-chip' : 'd-chip__label',
@@ -445,7 +458,7 @@ export default {
     },
 
     onClose () {
-      if (this.interactive && !this.disabled) {
+      if (!this.disabled) {
         this.$emit('close');
       }
     },
@@ -453,8 +466,8 @@ export default {
     validateProps () {
       if (process.env.NODE_ENV === 'production') return;
 
-      if (this.showClose && !this.interactive) {
-        console.warn('DtChip warning: showClose requires interactive. The remove button will not render.');
+      if (this.ariaLabel && !this.interactive) {
+        console.warn('DtChip warning: aria-label only names an interactive chip. Put the name in the chip content.');
       }
 
       if (this.interactive && this.emphasis === 'subtle') {

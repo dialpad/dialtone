@@ -31,6 +31,14 @@
       </dt-chip>
     </div>
     <div>
+      <h4>Static with remove</h4>
+      <dt-chip show-close>
+        <template #default>
+          Chip
+        </template>
+      </dt-chip>
+    </div>
+    <div>
       <h4>Interactive with remove</h4>
       <dt-chip
         interactive
