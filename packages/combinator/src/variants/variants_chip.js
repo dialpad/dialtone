@@ -82,7 +82,7 @@ export default {
 
   'with end icon': {
     slots: {
-      endIcon: { initialValue: '<dt-icon-chevron-down size="200" />' },
+      endIcon: { initialValue: '<dt-icon-chevron-down :size="iconSize" />' },
       default: { initialValue: 'Chip' },
     },
   },
@@ -97,7 +97,7 @@ export default {
 
   'with icon': {
     slots: {
-      startIcon: { initialValue: '<dt-icon-box-select size="200" />' },
+      startIcon: { initialValue: '<dt-icon-box-select :size="iconSize" />' },
       default: { initialValue: 'Chip' },
     },
   },

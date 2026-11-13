@@ -85,14 +85,14 @@ The migration script leaves dynamic `:variant`/`:type` bindings untouched and wa
 
 <!-- After -->
 <dt-chip size="300">
-  <template #startIcon>
-    <dt-icon name="phone" size="200" />
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="phone" :size="iconSize" />
   </template>
   Phone
 </dt-chip>
 ```
 
-New `endIcon`, `leading`, and `trailing` slots (with `endIconClass`, `leadingClass`, and `trailingClass`) add an end icon and freeform content, the same as on `DtButton`.
+New `endIcon`, `leading`, and `trailing` slots (with `endIconClass`, `leadingClass`, and `trailingClass`) add an end icon and freeform content, the same as on `DtButton`. The icon slots pass an `iconSize` slot prop, the icon size designed for the chip `size`. Set the `icon-size` prop on the chip to override it.
 
 Removal is part of the interactive contract:
 

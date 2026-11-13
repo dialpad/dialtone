@@ -180,7 +180,6 @@
       --avatar-size-shape: calc(var(--chip-block-size) - var(--dt-spacing-100));
 
       overflow: hidden;
-      border-radius: var(--dt-size-radius-circle) !important;
     }
 
     //  ========================================================================
@@ -240,8 +239,9 @@
   //  The close button is a sibling of the label, so hovering it doesn't hover the
   //  label. The chip keeps its hover fill while the pointer is anywhere on it, and
   //  the close button's own highlight sits on top. A focused or pressed label keeps
-  //  its dark fill.
-  &:has(> .d-chip__close:hover:not(:disabled, .d-btn--disabled)) > .d-chip__label:is(@{chip-interactive}):not(.d-chip--disabled, @{chip-engaged}) {
+  //  its dark fill. The conditions sit in :where() so the rule stays at the chip +
+  //  label specificity and the variant fills below can override it.
+  &:where(:has(> .d-chip__close:hover:not(:disabled, .d-btn--disabled))) > .d-chip__label:where(@{chip-interactive}):where(:not(.d-chip--disabled, @{chip-engaged})) {
     --chip-color-background: var(--dt-color-surface-moderate-opaque);
 
     &.d-chip__label--strong {

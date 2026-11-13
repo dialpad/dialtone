@@ -1,6 +1,7 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtChip from './Chip.vue';
+import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 
 import DtChipDefaultTemplate from './ChipDefault.story.vue';
 import DtChipVariantsTemplate from './ChipVariants.story.vue';
@@ -146,6 +147,12 @@ export const argTypesData = {
   },
   size: {
     options: Object.keys(CHIP_SIZE_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
+  iconSize: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
     control: {
       type: 'select',
     },

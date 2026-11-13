@@ -4,10 +4,10 @@
     <div>
       <h4>With start icon</h4>
       <dt-chip>
-        <template #startIcon>
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="lock-filled"
-            size="200"
+            :size="iconSize"
           />
         </template>
         <template #default>
@@ -44,10 +44,10 @@
     <div>
       <h4>With end icon</h4>
       <dt-chip>
-        <template #endIcon>
+        <template #endIcon="{ iconSize }">
           <dt-icon
             name="chevron-down"
-            size="200"
+            :size="iconSize"
           />
         </template>
         <template #default>

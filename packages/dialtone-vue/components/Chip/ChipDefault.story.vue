@@ -8,6 +8,7 @@
     :show-close="$attrs.showClose"
     :interactive="$attrs.interactive"
     :size="$attrs.size"
+    :icon-size="$attrs.iconSize"
     :aria-label="$attrs.ariaLabel"
     :remove-button-aria-label="$attrs.removeButtonAriaLabel"
     :content-class="$attrs.contentClass"
@@ -21,7 +22,7 @@
   >
     <template
       v-if="$attrs.startIcon"
-      #startIcon
+      #startIcon="{ iconSize }"
     >
       <dt-icon
         :name="$attrs.startIcon"
@@ -31,7 +32,7 @@
     <v-html :html="defaultSlot" />
     <template
       v-if="$attrs.endIcon"
-      #endIcon
+      #endIcon="{ iconSize }"
     >
       <dt-icon
         :name="$attrs.endIcon"
@@ -43,17 +44,11 @@
 
 <script>
 import DtChip from './Chip.vue';
-import { CHIP_ICON_SIZES } from './ChipConstants.js';
 import { DtIcon } from '@/components/Icon';
 import VHtml from '@/common/v_html';
 
 export default {
   name: 'DtChipDefault',
   components: { DtChip, DtIcon, VHtml },
-  computed: {
-    iconSize () {
-      return CHIP_ICON_SIZES[this.$attrs.size];
-    },
-  },
 };
 </script>

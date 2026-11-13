@@ -80,7 +80,7 @@ A chip that is both `interactive` and `emphasis="subtle"` warns in development a
 
 ## Interactive chips
 
-Chips are static by default. An interactive chip renders as a button. Hovering it deepens the fill, and pressing or focusing it fills the chip dark (default) or brand purple (`people`) and inverts the label. The remove button shows a soft rounded square behind the icon on hover. Add `show-close` for a remove button, which emits `close`. Backspace and Delete on a focused chip also emit `close`.
+Chips are static by default. An interactive chip renders as a button. Hovering it deepens the fill, and pressing or focusing it fills the chip dark (default) or brand purple (`people`) and inverts the label. The remove button shows a soft rounded square behind the icon on hover. Add `show-close` for a remove button, which emits `close`. Backspace and Delete on a focused chip also emit `close`, unless a `keydown` listener calls `event.preventDefault()`. Use that to take over the key, for example when you move focus or change the selection before removing the chip.
 
 ```vue demo
 <!-- @wrapper -->
@@ -114,20 +114,20 @@ Use `disabled` to disable the chip and its remove button. It sets `aria-disabled
 
 ### Icons and avatars
 
-Use `startIcon` and `endIcon` for icons, and `startAvatar` for an avatar. Set the icon `size` to match the chip: `100` for sizes 100 and 200, `200` for 300 to 500, and `300` for 600 and 700.
+Use `startIcon` and `endIcon` for icons, and `startAvatar` for an avatar. Bind the icon `size` to the `iconSize` slot prop. It is the icon size designed for the chip `size`: `100` for sizes 100 and 200, `200` for 300 to 500, and `300` for 600 and 700. Set the `icon-size` prop on the chip to override it. The remove button follows it.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
   <dt-chip>
-    <template #startIcon>
-      <dt-icon name="phone" size="200" />
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="phone" :size="iconSize" />
     </template>
     Start icon
   </dt-chip>
   <dt-chip>
-    <template #endIcon>
-      <dt-icon name="phone" size="200" />
+    <template #endIcon="{ iconSize }">
+      <dt-icon name="phone" :size="iconSize" />
     </template>
     End icon
   </dt-chip>

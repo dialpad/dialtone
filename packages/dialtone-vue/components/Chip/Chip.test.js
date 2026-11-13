@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
 import { DtChip } from '@/components/Chip';
 import {
+  CHIP_ICON_SIZES,
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_EMPHASIS_MODIFIERS,
   CHIP_SIZE_MODIFIERS,
@@ -399,6 +400,20 @@ describe('DtChip Tests', () => {
       });
     });
 
+    describe('When a keydown listener prevents the default', () => {
+      it('should emit keydown but not close', async () => {
+        mockProps = { showClose: true, interactive: true, onKeydown: (event) => event.preventDefault() };
+
+        updateWrapper();
+
+        await chip.trigger('keydown', { key: 'Backspace' });
+        await chip.trigger('keydown', { code: 'DELETE' });
+
+        expect(wrapper.emitted('keydown')).toHaveLength(2);
+        expect(wrapper.emitted('close')).toBeUndefined();
+      });
+    });
+
     describe('When backspace or delete closes a chip', () => {
       it('should also emit keydown before close', async () => {
         mockProps = { showClose: true, interactive: true };
@@ -419,6 +434,40 @@ describe('DtChip Tests', () => {
 
         expect('click' in wrapper.emitted()).toBe(false);
       });
+    });
+  });
+
+  describe('When an icon slot is provided', () => {
+    const iconSizeFor = (props, slotName = 'startIcon') => {
+      let received;
+
+      mockProps = props;
+      mockSlots = { [slotName]: (slotProps) => { received = slotProps.iconSize; return 'icon'; } };
+      updateWrapper();
+
+      return received;
+    };
+
+    it('should pass the icon size designed for each chip size', () => {
+      for (const [size, iconSize] of Object.entries(CHIP_ICON_SIZES)) {
+        expect(iconSizeFor({ size }), `size ${size}`).toBe(iconSize);
+      }
+    });
+
+    it('should pass the same icon size to the endIcon and deprecated icon slots', () => {
+      expect(iconSizeFor({ size: 600 }, 'endIcon')).toBe('300');
+      expect(iconSizeFor({ size: 600 }, 'icon')).toBe('300');
+    });
+
+    it('should pass iconSize instead when it is set, and use it for the icon size cap', () => {
+      expect(iconSizeFor({ size: 100, iconSize: 500 })).toBe(500);
+      expect(wrapper.find('.d-chip').attributes('style')).toContain('--chip-icon-size: var(--dt-icon-size-500)');
+    });
+
+    it('should not set the icon size cap when iconSize is unset', () => {
+      iconSizeFor({ size: 100 });
+
+      expect(wrapper.find('.d-chip').attributes('style')).toBeUndefined();
     });
   });
 });

@@ -1,5 +1,8 @@
 <template>
-  <span class="d-chip">
+  <span
+    class="d-chip"
+    :style="iconSizeStyle"
+  >
     <component
       :is="interactive ? 'button' : 'span'"
       :id="id"
@@ -25,15 +28,17 @@
         :class="['d-chip__icon', resolvedStartIconClass]"
         data-qa="dt-chip-icon"
       >
-        <!-- @slot Slot for start icon -->
+        <!-- @slot Slot for start icon. The icon-size slot prop is the icon size for the chip size, or iconSize. -->
         <slot
           v-if="hasSlotContent($slots.startIcon)"
           name="startIcon"
+          :icon-size="resolvedIconSize"
         />
         <!-- @slot @deprecated Use startIcon -->
         <slot
           v-else
           name="icon"
+          :icon-size="resolvedIconSize"
         />
       </span>
       <span
@@ -66,8 +71,11 @@
         :class="['d-chip__end-icon', endIconClass]"
         data-qa="dt-chip-end-icon"
       >
-        <!-- @slot Slot for end icon -->
-        <slot name="endIcon" />
+        <!-- @slot Slot for end icon. The icon-size slot prop is the icon size for the chip size, or iconSize. -->
+        <slot
+          name="endIcon"
+          :icon-size="resolvedIconSize"
+        />
       </span>
       <span
         v-if="hasSlotContent($slots.trailing)"
@@ -90,7 +98,7 @@
     >
       <template #startIcon>
         <dt-icon-close
-          :size="closeButtonIconSize"
+          :size="resolvedIconSize"
         />
       </template>
     </dt-button>
@@ -100,6 +108,7 @@
 <script>
 import { DtButton } from '@/components/Button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue';
+import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 import {
   CHIP_VARIANT_MODIFIERS,
   CHIP_EMPHASIS_MODIFIERS,
@@ -182,6 +191,17 @@ export default {
     interactive: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * The size of the start icon, end icon and remove button icon, passed to the icon slots as the
+     * icon-size slot prop. Defaults to the icon size designed for the chip `size`; set it to override that.
+     * @values 100, 200, 300, 400, 500, 600, 700, 800
+     */
+    iconSize: {
+      type: [String, Number],
+      default: undefined,
+      validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 
     /**
@@ -338,6 +358,9 @@ export default {
           // Always emitted, so keydown listeners still see Backspace and Delete before the chip closes.
           this.$emit('keydown', event);
 
+          // A listener that calls preventDefault() takes over the key, so the chip does not close.
+          if (event.defaultPrevented) return;
+
           const key = event.key?.toLowerCase();
           const code = event.code?.toLowerCase();
 
@@ -361,8 +384,14 @@ export default {
       return this.interactive && this.showClose;
     },
 
-    closeButtonIconSize () {
-      return CHIP_ICON_SIZES[String(this.size)];
+    resolvedIconSize () {
+      return this.iconSize ?? CHIP_ICON_SIZES[String(this.size)] ?? CHIP_ICON_SIZES[300];
+    },
+
+    // The stylesheet caps icons and sizes the remove button with --chip-icon-size, so an override has to set it too.
+    iconSizeStyle () {
+      if (this.iconSize === undefined) return undefined;
+      return { '--chip-icon-size': `var(--dt-icon-size-${this.iconSize})` };
     },
 
     resolvedRemoveButtonAriaLabel () {
