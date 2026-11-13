@@ -1,0 +1,21 @@
+apps/dialtone-documentation/docs/components/badge.md
+  s_f920209ec821e1::t_8e5982772024aa 258-259
+apps/dialtone-documentation/docs/.vuepress/theme/constants/statusBadges.js
+  s_f920209ec821e1::t_8e5982772024aa 6-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f3e4b4aa86a5acae17078fb10975c8efa1dec36a",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

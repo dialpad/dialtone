@@ -1,0 +1,21 @@
+packages/dialtone-react/common/hooks/useMode.ts
+  s_d68b87d7b866b0::t_f938c94ba1d4c7 17-18,23,57
+packages/dialtone-react/components/Tooltip/Tooltip.tsx
+  s_d68b87d7b866b0::t_78353b5b159215 213,227,257
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b0e20394931d9831ebddd0af3b5ef32232f671cb",
+  "prompts": {},
+  "sessions": {
+    "s_d68b87d7b866b0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "168e771e-3366-49a6-9ba7-cc557800eedc",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
