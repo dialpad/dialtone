@@ -78,6 +78,26 @@ Arrow keys move focus without changing selection. The filter’s label stays ava
   end-tooltip-text="Clear"
   use-dropdown
 />
+
+<!-- @code -->
+<script setup>
+import { ref } from 'vue';
+import { DtFilterPill } from '@dialpad/dialtone/vue';
+
+const selectedMessage = ref('all');
+</script>
+
+<template>
+  <!-- The options/selected API is unreleased. Use a compatible published release when available. -->
+  <dt-filter-pill
+    v-model:selected="selectedMessage"
+    :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
+    label="Filter by"
+    neutral-value="all"
+    end-tooltip-text="Clear"
+    use-dropdown
+  />
+</template>
 ```
 
 Use `null` when nothing is selected.
@@ -99,6 +119,25 @@ A different `selected` value replaces pending edits. Replacing it with the same 
   end-tooltip-text="Clear"
   defer-selection
 />
+
+<!-- @code -->
+<script setup>
+import { ref } from 'vue';
+import { DtFilterPill } from '@dialpad/dialtone/vue';
+
+const selectedChannels = ref([]);
+</script>
+
+<template>
+  <!-- The options/selected API is unreleased. Use a compatible published release when available. -->
+  <dt-filter-pill
+    v-model:selected="selectedChannels"
+    :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }, { value: 'chat', label: 'Chat' }]"
+    label="Channel"
+    end-tooltip-text="Clear"
+    defer-selection
+  />
+</template>
 ```
 
 The `content` slot provides `pendingSelected`, `apply` and `cancel`; the existing `v-model` API uses `pendingFilters`.

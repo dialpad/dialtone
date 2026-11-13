@@ -74,10 +74,15 @@ is ignored. This
 metadata is passed only to the target renderer, never to the component or copied
 preset payload.
 
+The cleanup promise may resolve to a synchronous after-remount callback. The renderer calls it with the actual replacement component proxy only after successfully rendering the latest requested preview. Aborted or disposed work and failed renders do not run it. A callback failure logs a warning while leaving the replacement live and later updates available. Existing hooks resolving without a value keep their behavior. Filter Pill uses this callback to preserve the initiating control or replacement anchor focus after its outgoing overlay completes cleanup; later consumer focus takes priority.
+
 Filter Pill captures its current Popover owner (directly or through Dropdown),
 cancels selection without Apply, and waits for logical closure plus completed
 focus and scroll cleanup. Ordinary selected/options/label/count updates preserve
-the live instance. This gate covers replacement within the same renderer;
+the live instance. After an open preview finishes cleanup, the bank restores
+focus to the initiating control or replacement anchor only when cleanup returned
+focus to the outgoing anchor and no other control has taken focus. This gate
+covers replacement within the same renderer;
 ancestor teardown, route removal and shared scroll-lock ownership remain separate
 lifecycle responsibilities.
 

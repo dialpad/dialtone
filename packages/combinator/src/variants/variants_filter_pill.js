@@ -42,11 +42,21 @@ function beforePreviewRemount (pill, { signal }) {
   const popover = overlay?.$options.name === 'DtDropdown' ? overlay.$refs.popover : overlay;
   if (!popover || (!pill.isOpen && !popover.isOpen && popover.isDialogAriaHidden)) return;
 
+  const anchor = pill.$el.querySelector('[data-qa="dt-filter-pill__button"]');
+  const document = anchor.ownerDocument;
+  const focused = document.activeElement;
+  const initiator = focused !== document.body && !pill.$el.contains(focused) &&
+    !popover.$refs.popover__content?.contains(focused) ? focused : null;
+
   return new Promise(resolve => {
     const finish = () => {
       stop();
       signal.removeEventListener('abort', finish);
-      resolve();
+      resolve(document.activeElement === anchor ? replacement => {
+        if (signal.aborted || (document.activeElement !== document.body && document.activeElement !== anchor)) return;
+        const destination = initiator?.isConnected ? initiator : replacement.$el.querySelector('[data-qa="dt-filter-pill__button"]');
+        if (destination?.isConnected) destination.focus({ preventScroll: true });
+      } : undefined);
     };
     const stop = watch(
       () => [pill.isOpen, popover.isOpen, popover.isDialogAriaHidden],

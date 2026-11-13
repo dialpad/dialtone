@@ -192,7 +192,17 @@ function renderTarget (completedVNode) {
         const completion = currentBeforeRemount(outgoingVNode.component.proxy, { signal: controller.signal });
         if (completion) {
           // Read current props after cleanup so repeated requests coalesce to the latest one.
-          completion.then(() => settle() && renderTarget(outgoingVNode), fail);
+          completion.then(afterRemount => {
+            if (!settle()) return;
+            const replacement = renderTarget(outgoingVNode);
+            if (disposed || pendingRemount || currentVNode !== replacement ||
+              !replacement?.component?.proxy || typeof afterRemount !== 'function') return;
+            try {
+              afterRemount(replacement.component.proxy);
+            } catch (error) {
+              console.warn('Preview after-remount callback failed: \n', error);
+            }
+          }, fail);
           return;
         }
       } catch (error) {
@@ -205,6 +215,7 @@ function renderTarget (completedVNode) {
     currentVNode = vnode;
     currentBeforeRemount = beforeRemount;
     render(vnode, currentContainer);
+    return vnode;
   } catch (e) {
     console.warn('Rendering warning: \n', e);
     currentVNode = null;

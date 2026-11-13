@@ -12,14 +12,22 @@ it.each([
   { name: 'single', component: DtcRenderer, preset: 'controlled default', nextPreset: 'default', closing: true },
   { name: 'single', component: DtcRenderer, preset: 'defer selection', nextPreset: 'controlled default' },
   { name: 'specsheet', component: DtcRendererSpecSheetCell, preset: 'use dropdown', nextPreset: 'controlled multiple' },
-  { name: 'specsheet', component: DtcRendererSpecSheetCell, preset: 'controlled deferred', nextPreset: 'default' },
+  {
+    name: 'specsheet', component: DtcRendererSpecSheetCell,
+    preset: 'controlled deferred', nextPreset: 'default', consumerFocus: true,
+  },
 ])('closes $preset before replacing the $name preview and retains the outgoing scroll context', async ({
-  name, component, preset, nextPreset, closing,
+  name, component, preset, nextPreset, closing, consumerFocus,
 }) => {
   let pill;
+  const initiatingControl = closing ? document.createElement('button') : null;
+  const consumerControl = consumerFocus ? document.createElement('button') : null;
   const target = markRaw(defineComponent({
     extends: DtFilterPill,
-    mounted () { pill = this; },
+    mounted () {
+      pill = this;
+      if (consumerControl?.isConnected) consumerControl.focus();
+    },
   }));
   const documentation = allDocs.find(doc => doc.displayName === 'DtFilterPill');
   const state = buildVariantState(DtFilterPill, documentation, filterPillVariants, preset);
@@ -55,6 +63,11 @@ it.each([
       oldPill.cancelSelection();
       await flushPromises();
     }
+    if (initiatingControl) {
+      document.body.appendChild(initiatingControl);
+      initiatingControl.focus();
+    } else anchor.element.focus();
+    if (consumerControl) document.body.appendChild(consumerControl);
     const next = buildVariantState(DtFilterPill, documentation, filterPillVariants, nextPreset);
     await wrapper.setProps({
       ...next, resetGeneration: 1,
@@ -75,6 +88,8 @@ it.each([
     await flushPromises();
     expect(document.documentElement.classList.contains('d-of-hidden')).toBe(false);
     expect(anchor.element.isConnected).toBe(false);
+    expect(document.activeElement).toBe(consumerControl || initiatingControl ||
+      wrapper.get('[data-qa="dt-filter-pill__button"]').element);
     expect(wrapper.get('[data-qa="dt-filter-pill__button"]').text()).toContain({
       default: 'Option 3', 'controlled default': 'All', 'controlled multiple': 'Phone',
     }[nextPreset]);
@@ -84,6 +99,8 @@ it.each([
   } finally {
     wrapper.unmount();
     document.documentElement.classList.remove('d-of-hidden');
+    initiatingControl?.remove();
+    consumerControl?.remove();
   }
 });
 
