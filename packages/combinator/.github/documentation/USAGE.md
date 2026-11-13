@@ -95,7 +95,7 @@ Inside the package source, the registry lives at
 
 - `defaults`, applied before the selected preset;
 - `exclusions`, evaluated against current prop and slot values;
-- `default`, the default preset and reset target;
+- `default`, the initial preset and reset target unless bank metadata selects another;
 - any number of named presets shown in the preset dropdown.
 
 Member metadata can also add control hints such as `tokenCategory` and
@@ -126,10 +126,14 @@ const selectedPreset = ref('default');
 </script>
 ```
 
-The prop defaults to `default`. Unknown names and an empty name at mount also
-load `default`. Dropdown selections, spec-sheet selections, and reset actions
-emit `update:preset` with the selected name. Option-bar edits, code-panel slot
-edits, and changed preview model events emit an empty string when switching to
+When `preset` is omitted, the bank's valid `defaults.metadata.initialPreset`
+selects the initial preset; otherwise it uses `default`. Unknown names and an
+empty name at mount use this same initial preset. An explicit name, including
+`default`, selects that exact preset even when the bank prefers another one.
+Reset returns to the preferred initial preset. Dropdown selections, spec-sheet
+selections, and reset actions emit `update:preset` with the selected name.
+Option-bar edits, code-panel slot edits, and changed preview model events emit
+an empty string when switching to
 custom options; echoing that value through the prop preserves those edits.
 Preview model events compare with a snapshot of their previous values, so an
 unchanged echo preserves the preset. In-place changes to plain objects and arrays
@@ -139,21 +143,23 @@ so an in-place mutation re-emitted as the same instance is not detected.
 Without a binding, the playground continues to manage its own selection.
 
 Preset names are revalidated when the available names change. An unavailable
-prop request uses `default` and is retried if that name arrives later. Removing
-the selected name also falls back to `default`; if it is still requested by the
-`preset` prop, it is retried when it returns. A later user selection or edit
+prop request uses the preferred initial preset and is retried if that name
+arrives later. Removing the selected name also falls back to that initial preset;
+if it is still requested by the `preset` prop, it is retried when it returns. A later user selection or edit
 cancels any pending retry. Automatic fallbacks and retries do not emit
 `update:preset`, so a `v-model:preset` binding retains the requested name.
 
 Unrelated additions preserve the selection and custom mode. Replacing the
-whole bank rebuilds option values from its metadata. In custom mode, this resets
-edited values while the label stays `custom`.
+whole bank or changing its applied metadata rebuilds option values. In custom
+mode, this resets edited values while the label stays `custom`.
 
 The documentation site maps these names to URL slugs, such as
 `avatar.html?preset=with-presence-no-icon`. Selecting a preset replaces the
 query while preserving other query values and the current browser hash.
-Choosing `default` removes only the `preset` parameter instead of writing
-`preset=default`; other query parameters and the hash remain intact.
+Choosing the preferred initial preset removes only the `preset` parameter;
+other query parameters and the hash remain intact. For ordinary banks this is
+`default`. Filter Pill prefers `controlled default`, so its bare URL opens the
+controlled example while `?preset=default` opens the distinct legacy example.
 Custom edits remove the preset query; they are not serialized into the URL.
 Within the same page, navigation that leaves the `preset` query unchanged keeps
 the current edits. This includes hash-only changes, unrelated-query changes,
@@ -161,13 +167,13 @@ and Back/Forward that leaves the `preset` query unchanged. Page or `preset`
 query changes apply URL-defined state; reloading also initializes from the URL.
 For Back, a pending URL write counts as the current preset state: an edit
 followed by Back to a no-preset entry keeps the edit, while selecting a named
-preset then going Back to a no-preset entry loads `default`. These Back outcomes are
-the same whether the write is pending or complete.
+preset then going Back to a no-preset entry loads the preferred initial preset.
+These Back outcomes are the same whether the write is pending or complete.
 A canceled write does not update its original history entry. Forward uses the
 URL actually stored there, so its outcome can depend on whether the earlier
 write completed before Back.
-Missing or invalid preset values resolve to `default`, and slug matching ignores
-case.
+Missing or invalid preset values resolve to the preferred initial preset, and
+slug matching ignores case.
 Preset names must normalize to nonempty, distinct slugs within each bank.
 The docs authoring tests reject empty or duplicate slugs; choose distinct names
 before publishing. Keep preset names stable to preserve their URLs.

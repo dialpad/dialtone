@@ -25,6 +25,79 @@ function mountCombinator (preset, bank = variantBank.DtAvatar) {
 }
 
 describe('Combinator preset control', () => {
+
+  describe('preferred initial preset', () => {
+    function preferredBank () {
+      return {
+        ...variantBank.DtAvatar,
+        defaults: { ...variantBank.DtAvatar.defaults, metadata: { initialPreset: 'image' } },
+      };
+    }
+
+    it.each([undefined, '', 'unknown'])('uses the preferred initial preset for %s', preset => {
+      mountCombinator(preset, preferredBank());
+      expect(wrapper.vm.selectedVariant).toBe('image');
+      expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.imageSrc)
+        .toBe('/assets/images/person.png');
+      expect(wrapper.emitted('update:preset')).toBeUndefined();
+    });
+
+    it('keeps explicit default distinct from the preferred initial preset and resets to the preference', async () => {
+      mountCombinator('default', preferredBank());
+      expect(wrapper.vm.selectedVariant).toBe('default');
+      wrapper.vm.resetOptions();
+      await nextTick();
+      expect(wrapper.vm.selectedVariant).toBe('image');
+      expect(wrapper.emitted('update:preset')).toEqual([['image']]);
+    });
+
+    it('retries a requested name after falling back to the preferred initial preset', async () => {
+      const bank = reactive(preferredBank());
+      mountCombinator('arriving', bank);
+      expect(wrapper.vm.selectedVariant).toBe('image');
+      bank.arriving = { props: { fullName: { initialValue: 'Arrived' } } };
+      await nextTick();
+      expect(wrapper.vm.selectedVariant).toBe('arriving');
+      expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Arrived');
+      expect(wrapper.emitted('update:preset')).toBeUndefined();
+    });
+
+    it('follows preferred metadata changes until an uncontrolled user selection takes ownership', async () => {
+      const bank = reactive(preferredBank());
+      mountCombinator(undefined, bank);
+      wrapper.vm.toggleViewMode();
+      bank.defaults.metadata.initialPreset = 'icon avatar';
+      await nextTick();
+      expect(wrapper.vm.selectedVariant).toBe('icon avatar');
+      expect(wrapper.vm.viewMode).toBe('grid');
+      wrapper.vm.updateVariant('image');
+      await nextTick();
+      bank.defaults.metadata.initialPreset = 'default';
+      await nextTick();
+      expect(wrapper.vm.selectedVariant).toBe('image');
+      expect(wrapper.vm.viewMode).toBe('grid');
+    });
+
+    it('keeps custom mode when the preferred metadata changes', async () => {
+      const bank = reactive(preferredBank());
+      mountCombinator(undefined, bank);
+      await nextTick();
+      wrapper.vm.onComponentEvent('update:fullName', 'Keep this edit');
+      await nextTick();
+      expect(wrapper.findComponent({ name: 'DtcRenderer' }).props('options').props.fullName).toBe('Keep this edit');
+      bank.defaults.metadata.initialPreset = 'icon avatar';
+      await nextTick();
+      expect(wrapper.vm.selectedVariant).toBe('');
+    });
+
+    it.each(['unknown', 'defaults', 'exclusions', ''])('ignores invalid preferred metadata %s', initialPreset => {
+      const bank = preferredBank();
+      bank.defaults.metadata.initialPreset = initialPreset;
+      mountCombinator(undefined, bank);
+      expect(wrapper.vm.selectedVariant).toBe('default');
+    });
+  });
+
   it('loads a named preset into the preview and controls on mount', () => {
     mountCombinator('image');
     expect(wrapper.vm.selectedVariant).toBe('image');

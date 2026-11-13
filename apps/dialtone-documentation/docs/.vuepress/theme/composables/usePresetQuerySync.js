@@ -1,6 +1,6 @@
 import { computed, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { getCombinatorPresetName, getCombinatorPresetSlugs } from '../utils/componentCombinator.js';
+import { getCombinatorInitialPresetName, getCombinatorPresetName, getCombinatorPresetSlugs } from '../utils/componentCombinator.js';
 import { getCurrentBrowserHash, suppressRouteHashScroll } from '../utils/pageToc.js';
 
 function getNavigationOrigin (route) {
@@ -71,7 +71,9 @@ export function usePresetQuerySync (componentName, variants) {
   function updatePreset (nextPreset) {
     const route = router.currentRoute.value;
     const query = { ...route.query };
-    if (nextPreset && nextPreset !== 'default') query.preset = getCombinatorPresetSlugs(variants.value)[nextPreset];
+    if (nextPreset && nextPreset !== getCombinatorInitialPresetName(variants.value)) {
+      query.preset = getCombinatorPresetSlugs(variants.value)[nextPreset];
+    }
     else delete query.preset;
     const intent = { preset: nextPreset, path: route.path, query, queued: Boolean(externalNavigation) };
     localIntent.value = intent;

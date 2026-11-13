@@ -15,5 +15,6 @@ export default {
   githubPages: false,
   name: 'Date and Time',
   hideBreadcrumbs: true,
+  hidePageHeader: true,
   entryPointStrategy: 'expand',
 };

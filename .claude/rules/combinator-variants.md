@@ -34,9 +34,11 @@ Reserved top-level keys:
 
 - `defaults`: metadata applied before every preset.
 - `exclusions`: rules that hide, disable, clear, or disable specific values.
-- `default`: the initial preset and reset target.
+- `default`: the initial preset and reset target unless the bank declares `defaults.metadata.initialPreset`.
 
 Every other top-level key is a named preset shown in the Combinator preset dropdown.
+
+Set `defaults.metadata.initialPreset` to an existing preset name only when the UI should initially show and Reset to that preset. The preference also supplies the edit-comparison baseline; it does not rename the `default` preset or its lookup ID. Component-wall thumbnails still use `default` unless an override exists. Banks without this metadata keep their existing behavior.
 
 ```js
 export default {
@@ -71,8 +73,10 @@ export default {
 ## Preset names and shared URLs
 
 Preset names are public deep-link identifiers on documentation pages. For example,
-`with presence` becomes `?preset=with-presence`; the default preset uses the page URL
-without a preset parameter.
+`with presence` becomes `?preset=with-presence`. The preferred initial preset
+(`defaults.metadata.initialPreset`, or `default` when unset) uses the page URL
+without a preset parameter. An explicit `default` remains linkable with
+`?preset=default` when another preset is preferred.
 
 - Keep existing names stable. Renaming or deleting a preset breaks its shared links.
 - Choose names that normalize to nonempty, distinct slugs. Case, spaces and punctuation
@@ -103,6 +107,10 @@ defaults: {
 `tokenCategory` enables token-aware value previews in controls. Verify category
 strings against `packages/combinator/src/lib/tokens.js` and existing variant
 files before adding a new form.
+
+## Optional preview and copy metadata
+
+Follow the [shared preview and copy metadata rules](../../.agents/resources/rules/combinator-variants.md#optional-preview-and-copy-metadata) for `previewIdentity` and `copyNotice`. For owned `metadata.lookupExclude` annotations, follow the [shared materialization and delivery lifecycle](../../.agents/resources/documentation-examples.md#combinator-presets). These fields are bank metadata, separate from component members.
 
 ## Search keywords
 

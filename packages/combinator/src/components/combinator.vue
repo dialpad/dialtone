@@ -126,8 +126,9 @@
           direction="row"
         >
           <dt-button
-            v-if="hasChanges"
+            v-if="hasChanges || (viewMode === 'grid' && info.metadata?.previewIdentity)"
             v-dt-tooltip="`Reset`"
+            aria-label="Reset"
             kind="muted"
             importance="clear"
             :size="200"
@@ -167,6 +168,7 @@
           :options="options"
           :library="library"
           :disabled-members="disabledMembers"
+          :reset-generation="_forceReset"
           @event="onComponentEvent"
         />
         <dtc-renderer-spec-sheet
@@ -175,6 +177,7 @@
           :documentation="documentation"
           :variants="variants"
           :library="library"
+          :reset-generation="info.metadata?.previewIdentity ? _forceReset : undefined"
           @select="onSelectVariant"
         />
         <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
@@ -292,11 +295,11 @@ const props = defineProps({
   },
   /**
    * Selected preset name. An empty string preserves custom edits after initialization.
-   * Missing, unknown, or initially empty names use the default preset.
+   * Missing, unknown, or initially empty names use the bank's preferred initial preset.
    */
   preset: {
     type: String,
-    default: 'default',
+    default: undefined,
   },
   /**
    * Activate 'blueprint' mode, to use a simple version of the combinator.
@@ -321,8 +324,12 @@ defineOptions({
 
 const emit = defineEmits(['update:fullScreen', 'update:preset']);
 
-const selectedVariant = ref('default');
-const activeVariant = ref('default');
+const initialPreset = computed(() => {
+  const preferred = props.variants.defaults?.metadata?.initialPreset;
+  return preferred && listVariantNames(props.variants).includes(preferred) ? preferred : 'default';
+});
+const selectedVariant = ref(initialPreset.value);
+const activeVariant = ref(initialPreset.value);
 const internalFullScreen = ref(false);
 const optionBarWidth = ref(null);
 const viewMode = ref('single');
@@ -503,7 +510,7 @@ function onComponentEvent(name, value) {
 }
 
 function updateVariant(e, notify = true) {
-  if (notify) followsPresetProp = Boolean(e && e === props.preset);
+  if (notify) followsPresetProp = Boolean(e && e === (props.preset ?? initialPreset.value));
   _presetChanging = true;
   selectedVariant.value = e;
   if (e !== '') {
@@ -517,14 +524,15 @@ function updateVariant(e, notify = true) {
 }
 
 watch(
-  [() => props.component.name, () => props.preset, () => listVariantNames(props.variants)],
-  ([componentName, preset, names], [previousComponentName, previousPreset] = []) => {
+  [() => props.component.name, () => props.preset, () => listVariantNames(props.variants), initialPreset],
+  ([componentName, preset, names, preferred], [previousComponentName, previousPreset] = []) => {
+    const resolvedRequest = preset ?? preferred;
     const componentChanged = componentName !== previousComponentName;
     const requestChanged = componentChanged || preset !== previousPreset;
-    if (requestChanged) followsPresetProp = Boolean(preset);
-    const requestedName = requestChanged || followsPresetProp ? preset : selectedVariant.value;
+    if (requestChanged) followsPresetProp = Boolean(resolvedRequest);
+    const requestedName = requestChanged || followsPresetProp ? resolvedRequest : selectedVariant.value;
     const isCustom = requestedName === '' && !componentChanged;
-    const nextPreset = isCustom ? '' : names.includes(requestedName) ? requestedName : 'default';
+    const nextPreset = isCustom ? '' : names.includes(requestedName) ? requestedName : preferred;
 
     if (componentChanged || nextPreset !== selectedVariant.value) {
       updateVariant(nextPreset, false);
@@ -564,7 +572,7 @@ const defaultInfo = computed(() => {
     props.component,
     props.documentation,
     props.variants,
-    'default',
+    initialPreset.value,
   );
 });
 
@@ -590,7 +598,11 @@ const hasChanges = computed(() => {
     const members = referenceInfo[group];
     if (!members) continue;
     for (const member of members) {
-      if (!areOptionValuesEqual(options.value[group]?.[member.name], member.initialValue))
+      const value = options.value[group]?.[member.name];
+      const differs = info.value.metadata?.previewIdentity
+        ? JSON.stringify(value) !== JSON.stringify(member.initialValue)
+        : !areOptionValuesEqual(value, member.initialValue);
+      if (differs)
         return true;
     }
   }
@@ -598,7 +610,7 @@ const hasChanges = computed(() => {
 });
 
 function resetOptions() {
-  updateVariant('default');
+  updateVariant(initialPreset.value);
 }
 
 function startResize(e) {

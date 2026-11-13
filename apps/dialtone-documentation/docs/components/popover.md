@@ -310,6 +310,10 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 
 ## Accessibility
 
+When `role="menu"`, Popover omits `aria-modal` and gives its built-in Close command `role="menuitem"`, for both the visually hidden button and `showCloseButton`. Close remains a native, tabbable button with the same label, placement, activation, dismissal timing and focus restoration. [Dropdown](dropdown.md) includes its owning Close command in arrow navigation, with `END` reaching Close, while preserving application-row indexes; typeahead still targets application rows. A standalone Popover with custom menu content does not automatically manage arrow navigation for that content.
+
+This menu-specific behavior does not establish complete ARIA menu-pattern conformance. Existing Tab and focus-trap behavior remains, and consumer-provided header, footer and content controls need their own appropriate semantics. Verify menu announcements, Close discovery and activation, cancellation and returned focus with assistive technology; automated checks alone do not establish accessibility. Other popup roles retain their existing behavior.
+
 Initially open Popovers expose their visible content to accessibility APIs. This also makes the options in opened ComboboxWithPopover and ComboboxMultiSelect lists reachable, because those components create an already-open Popover. Opened-state accessibility checks can now reveal existing outer-listbox role, naming, close-control and `aria-modal` issues that were previously hidden.
 
 If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal.md#accessibility). The same rules will apply here if your popover is modal.
@@ -340,6 +344,8 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 
 - Pass `aria-label`, which is the text label that will be applied to the dialog content.
 - Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
+
+When you supply `aria-label` without `aria-labelledby`, the dialog’s computed accessible name now comes from `aria-label`. Previously, an unintended `aria-labelledby="false"` could resolve to an anchor with `id="false"` and name the dialog from that anchor instead. Both generated attributes are now omitted in this case. An explicit `aria-labelledby` continues to use the supplied ID and takes precedence over `aria-label`. Dropdown shares this naming behavior through Popover.
 
 ### Keyboard Support
 

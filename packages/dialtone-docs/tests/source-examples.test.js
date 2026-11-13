@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import matter from 'gray-matter';
-import { chunkSections } from '../src/generators/build-public-docs.mjs';
+import { buildRecords, chunkSections } from '../src/generators/build-public-docs.mjs';
 import { buildExampleRecords, buildExampleCoverage } from '../src/generators/documentation-examples.mjs';
 import { sourceSetup } from '../src/generators/example-template.mjs';
 
@@ -22,6 +23,33 @@ const produce = raw => buildExampleRecords(input(raw));
 const ordinary = `## Default\n${fence('<dt-button>Save</dt-button>')}`;
 
 describe('source-driven component examples', () => {
+  it('withholds all five controlled source sections while retaining legacy FilterPill IDs', () => {
+    const filePath = resolve('../../apps/dialtone-documentation/docs/components/filter-pill.md');
+    const records = buildRecords(filePath);
+    const byId = new Map(records.filter(record => record.example).map(record => [record.id, record]));
+    const options = input(readFileSync(filePath, 'utf8'));
+    options.filePath = 'apps/dialtone-documentation/docs/components/filter-pill.md';
+    const coverage = buildExampleCoverage({ ...options, records });
+    for (const section of [
+      'intro', 'controlled-single-selection', 'controlled-multiple-selection',
+      'usage-closing-before-removal', 'labels-and-counts',
+    ]) {
+      const id = `examples/docs/components/filter-pill/${section}`;
+      expect(byId.has(id), id).toBe(false);
+      const candidate = coverage.candidates.find(candidate => candidate.id === id);
+      expect(candidate, id).toMatchObject({ disposition: 'excluded' });
+      expect(candidate.owner, id).toMatch(/\S/);
+      expect(candidate.reason, id).toMatch(/\S/);
+    }
+    for (const section of [
+      'variants-base', 'variants-active', 'variants-disabled', 'variants-read-only',
+      'interaction-patterns-clearable', 'interaction-patterns-non-clearable', 'interaction-patterns-defer-selection',
+      'slots-default', 'slots-default/overflow', 'slots-content', 'content-mode',
+    ]) {
+      expect(byId.has(`examples/docs/components/filter-pill/${section}`), section).toBe(true);
+    }
+  });
+
   it('delivers an unannotated public demo with a derived exact ID', () => {
     const [record] = produce(ordinary);
     expect(record?.id).toBe('examples/docs/components/example/default');

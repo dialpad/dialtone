@@ -20,9 +20,16 @@ export function getCombinatorPresetSlugs (variants) {
   );
 }
 
+export function getCombinatorInitialPresetName (variants) {
+  const preferred = variants.defaults?.metadata?.initialPreset;
+  return typeof preferred === 'string' && preferred && Object.hasOwn(getCombinatorPresetSlugs(variants), preferred)
+    ? preferred : 'default';
+}
+
 export function getCombinatorPresetName (variants, slug) {
-  if (typeof slug !== 'string') return 'default';
+  const initialPreset = getCombinatorInitialPresetName(variants);
+  if (typeof slug !== 'string' || !slug) return initialPreset;
 
   return Object.entries(getCombinatorPresetSlugs(variants))
-    .find(([, value]) => value === slug.toLowerCase())?.[0] ?? 'default';
+    .find(([, value]) => value === slug.toLowerCase())?.[0] ?? initialPreset;
 }

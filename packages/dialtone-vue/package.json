@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "4.6.1",
+  "version": "4.7.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -52,6 +52,7 @@
     "date-fns": "4.1.0",
     "deep-equal": "2.2.3",
     "emoji-toolkit": "9.0.1",
+    "libphonenumber-js": "1.13.15",
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",

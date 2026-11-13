@@ -138,13 +138,16 @@ export function isClassProp (member) {
 }
 
 const SLOT_CLASS_PROP_DEPENDENCIES = new Map([
+  ['anchorEndClass', 'anchorEnd'],
   ['blockEndIconClass', 'blockEndIcon'],
   ['blockStartIconClass', 'blockStartIcon'],
   ['endClass', 'end'],
   ['endIconClass', 'endIcon'],
   ['iconClass', 'icon'],
+  ['headerContentClass', 'headerContent'],
   ['leadingClass', 'leading'],
   ['markerClass', 'marker'],
+  ['optionEndClass', 'optionEnd'],
   ['startClass', 'start'],
   ['startIconClass', 'startIcon'],
   ['trailingClass', 'trailing'],

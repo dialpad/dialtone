@@ -46,6 +46,7 @@ describe('DtFilterPill Tests', function () {
   let content;
 
   const updateWrapper = () => {
+    if (wrapper?.exists()) wrapper.unmount();
     wrapper = mount(DtFilterPill, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
@@ -303,12 +304,15 @@ describe('DtFilterPill Tests', function () {
         expect(wrapper.find('[data-qa="dt-filter-pill__button"]').exists()).toBe(true);
       });
 
-      it('Should render DtListItem elements when dropdown is open', async () => {
+      it('Should render dropdown rows with hidden reserved selection indicators', async () => {
         await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
 
         const listItems = wrapper.findAllComponents(DtListItem);
 
         expect(listItems).toHaveLength(MOCK_DROPDOWN_FILTERS.length);
+        expect(listItems.every(item => item.get('[data-qa="dt-item-layout-selected-wrapper"]')
+          .get('[data-qa="dt-filter-pill__selection-indicator"]')
+          .classes().includes('d-filter-pill__selection-indicator--hidden'))).toBe(true);
       });
     });
 
@@ -620,21 +624,108 @@ describe('DtFilterPill Tests', function () {
     });
   });
 
+  describe('Overlay minimum inline size', () => {
+    it.each([false, true])('matches the full pill including Clear with useDropdown=%s', async (useDropdown) => {
+      mockProps = { useDropdown, modelValue: [{ name: 'Email', active: true }, { name: 'Phone' }] };
+      updateWrapper();
+      vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 680, 32));
+      vi.spyOn(button.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 200, 32));
+      vi.spyOn(clearButton.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(200, 0, 40, 32));
+      expect(clearButton.exists()).toBe(true);
+      await button.trigger('click');
+
+      const dialog = document.getElementById(button.attributes('aria-controls'));
+      expect(dialog.style.minInlineSize).toBe('240px');
+    });
+
+    it('rejects percentage overlay minimums', () => {
+      expect(DtFilterPill.props.overlayMinInlineSize.validator('100p')).toBe(false);
+    });
+
+    it('updates custom and natural sizing while retaining the maximum width cap', async () => {
+      vi.spyOn(button.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 240, 32));
+      await button.trigger('click');
+      const dialog = document.getElementById(button.attributes('aria-controls'));
+      for (const [value, variable] of [['1px', '1px'], ['300', '300']]) {
+        await wrapper.setProps({ overlayMinInlineSize: value });
+        expect(dialog.style.minInlineSize).toBe(`var(--dt-layout-${variable})`);
+      }
+      await wrapper.setProps({ popoverMaxWidth: '12rem' });
+      expect(dialog.style.minInlineSize).toBe('min(var(--dt-layout-300), 12rem)');
+      await wrapper.setProps({ overlayMinInlineSize: '0', popoverMaxWidth: '' });
+      expect(dialog.style.minInlineSize).toBe('0px');
+      await wrapper.setProps({ overlayMinInlineSize: 'anchor', popoverMaxWidth: '' });
+      expect(dialog.style.minInlineSize).toBe('240px');
+    });
+
+    it('tracks pill resizing and disconnects without later changing the removed dialog', async () => {
+      const observers = [];
+      vi.stubGlobal('ResizeObserver', class {
+        constructor (callback) {
+          this.callback = callback;
+          this.observe = vi.fn();
+          this.disconnect = vi.fn();
+          observers.push(this);
+        }
+      });
+      try {
+        updateWrapper();
+        const bounds = vi.spyOn(button.element, 'getBoundingClientRect')
+          .mockReturnValue(new DOMRect(0, 0, 240, 32));
+        await button.trigger('click');
+        const dialog = document.getElementById(button.attributes('aria-controls'));
+        const observer = observers.find(item => item.observe.mock.calls.some(([target]) => target === button.element));
+        expect(observer).toBeDefined();
+        bounds.mockReturnValue(new DOMRect(0, 0, 320, 32));
+        observer.callback([]);
+        expect(dialog.style.minInlineSize).toBe('320px');
+        wrapper.unmount();
+        expect(observer.disconnect).toHaveBeenCalled();
+        bounds.mockReturnValue(new DOMRect(0, 0, 400, 32));
+        observer.callback([]);
+        expect(dialog.style.minInlineSize).toBe('320px');
+      } finally {
+        vi.unstubAllGlobals();
+      }
+    });
+  });
+
   describe('Overlay Class Props Tests', () => {
+    it.each([
+      [undefined, ['d-filter-pill__popover-content'], 'd-pis-200'],
+      ['large', ['d-p-200'], 'd-pis-200'],
+      ['none', [], null],
+    ])('Should render popover padding %s without changing header/footer defaults', async (padding, classes, edgeClass) => {
+      mockProps = { popoverPadding: padding };
+      mockSlots = { headerContent: 'Heading', footerContent: 'Footer' };
+      updateWrapper();
+      await button.trigger('click');
+
+      const contentClasses = [...document.querySelector('[data-qa="dt-popover-content"]').classList];
+      expect(contentClasses).toContain('d-popover__content');
+      const paddingClasses = contentClasses.filter(name =>
+        /^(d-p(?:[xy])?-\d+|d-filter-pill__popover-content)$/.test(name));
+      expect(new Set(paddingClasses)).toEqual(new Set(classes));
+      const edges = document.querySelectorAll('[data-qa="dt-popover-header-footer"]');
+      expect(edges).toHaveLength(2);
+      for (const edge of edges) {
+        expect(edge.classList.contains('d-pis-200')).toBe(edgeClass !== null);
+      }
+    });
+
     describe('When popover class props are set', () => {
       it.each([
-        ['popoverContentClass', 'contentClass', 'custom-content-class'],
-        ['popoverHeaderClass', 'headerWrapperClass', 'custom-header-class'],
-        ['popoverFooterClass', 'footerWrapperClass', 'custom-footer-class'],
-        ['popoverDialogClass', 'dialogClass', 'custom-dialog-class'],
-      ])('Should forward %s to DtPopover', (propName, popoverPropName, className) => {
+        ['popoverContentClass', '[data-qa="dt-popover-content"]', 0, 'custom-content-class'],
+        ['popoverHeaderClass', '[data-qa="dt-popover-header-footer"]', 0, 'custom-header-class'],
+        ['popoverFooterClass', '[data-qa="dt-popover-header-footer"]', 1, 'custom-footer-class'],
+        ['popoverDialogClass', '[data-qa="dt-popover"]', 0, 'custom-dialog-class'],
+      ])('Should apply %s to the popover element', async (propName, selector, index, className) => {
         mockProps = { [propName]: className };
-
+        mockSlots = { headerContent: 'Heading', footerContent: 'Footer' };
         updateWrapper();
+        await button.trigger('click');
 
-        const popover = wrapper.findComponent(DtPopover);
-
-        expect(popover.props(popoverPropName)).toBe(className);
+        expect(document.querySelectorAll(selector)[index].classList.contains(className)).toBe(true);
       });
     });
 

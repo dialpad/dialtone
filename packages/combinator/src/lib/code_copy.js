@@ -16,6 +16,7 @@ export function serializeExampleTemplate ({ info, options, disabledMembers, verb
   const pad = ' '.repeat(indentSpaces);
   const name = paramCase(info.displayName);
   const lines = [];
+  if (info.metadata?.copyNotice) lines.push(`<!-- ${info.metadata.copyNotice.replace(/--(!?)>/g, '--$1&gt;')} -->`);
 
   // Visible bindings (same filter logic as code_editor_tag_attributes)
   const infoBindings = info.bindings.get();

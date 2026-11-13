@@ -65,6 +65,15 @@
     }
   }
 
+  &__popover-content {
+    padding-block: var(--dt-spacing-100);
+    padding-inline: var(--dt-spacing-150);
+  }
+
+  &__selection-indicator--hidden {
+    visibility: hidden;
+  }
+
   &__label {
     display: flex;
     gap: var(--dt-spacing-50);
@@ -92,6 +101,10 @@
       content: "=";
       margin-inline-end: var(--dt-spacing-50);
     }
+
+    &--standalone::before {
+      content: none;
+    }
   }
 
   &__label-end-overflow {
@@ -100,6 +113,17 @@
     font-weight: var(--dt-font-weight-bold);
     letter-spacing: var(--dt-spacing-1);
     font-variant-numeric: tabular-nums;
+  }
+
+  &__anchor-end,
+  &__option-end {
+    display: inline-flex;
+    gap: var(--dt-spacing-50);
+    align-items: center;
+  }
+
+  &__menu-heading {
+    padding: var(--dt-spacing-100);
   }
 
   &__clear {

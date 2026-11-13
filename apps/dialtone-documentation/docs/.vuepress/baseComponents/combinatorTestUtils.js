@@ -1,7 +1,7 @@
 import { flushPromises, mount, shallowMount } from '@vue/test-utils';
 import { nextTick, ref } from 'vue';
 import { createMemoryHistory, createRouter } from 'vue-router';
-import { DtAvatar, DtButton } from '@dialpad/dialtone-vue';
+import { DtAvatar, DtButton, DtFilterPill } from '@dialpad/dialtone-vue';
 import { DtcCombinator } from '@dialpad/dialtone-combinator';
 import allDocs from '@workspaceRoot/packages/dialtone-vue/dist/component-documentation.json';
 import ComponentCombinator from './ComponentCombinator.vue';
@@ -28,7 +28,7 @@ export async function mountDocsCombinator (query = { preset: 'image', other: 'ke
       stubs: { DtcCombinator: false, teleport: false },
       directives: { 'dt-scrollbar': {}, 'dt-focustrap': {} },
       provide: {
-        dialtoneComponents: { DtAvatar, DtButton },
+        dialtoneComponents: { DtAvatar, DtButton, DtFilterPill },
         dialtoneComponentsDocumentation: allDocs,
         dialtoneIcons: {},
         dialtoneIllustrations: {},

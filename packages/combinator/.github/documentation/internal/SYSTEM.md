@@ -49,6 +49,46 @@ The Combinator merges variant data into `info` by member name. It merges
 `defaults` before the selected preset and copies `exclusions` to
 `info.exclusions`.
 
+The UI starts and resets to `default` unless the bank opts into
+`defaults.metadata.initialPreset` with an existing named preset. An explicit
+`preset` prop takes precedence, including an explicit `default`. Missing or invalid
+requests use the preferred initial preset. This preference also
+sets the baseline for detecting edits; it does not rename the `default` preset
+or change its generated lookup identity. Filter Pill prefers `controlled default`
+while preserving its legacy `default` configuration and `?preset=default` link.
+The docs omit the preset query for the preferred initial preset.
+
+Filter Pill preview identity uses the array shape of `options`. Editing an array
+to `null` (or the reverse) creates a new preview instance, matching its new
+configuration. Option replacements within controlled mode keep the same instance.
+
+An opted-in bank may also provide `metadata.beforePreviewRemount(target,
+{ signal })`. Return nothing when replacement is safe, or a promise that resolves
+only after the outgoing target completes its cleanup. The renderer retains that
+VNode, its bindings, slots, container and anchor while waiting; it suppresses
+outgoing event write-back and applies only the latest requested replacement.
+The hook must handle reopening until completion and release its watcher/listeners
+on completion or when the abort signal fires during renderer disposal. If the
+hook throws or its promise rejects, the renderer treats cleanup as incomplete:
+it logs a warning, keeps the outgoing target mounted and live (including any
+overlay or scroll lock it owns), and retries the hook on the next update or
+reset. Renderer disposal still unmounts it; a failure settling after disposal
+is ignored. This
+metadata is passed only to the target renderer, never to the component or copied
+preset payload.
+
+The cleanup promise may resolve to a synchronous after-remount callback. The renderer calls it with the actual replacement component proxy only after successfully rendering the latest requested preview. Aborted or disposed work and failed renders do not run it. A callback failure logs a warning while leaving the replacement live and later updates available. Existing hooks resolving without a value keep their behavior. Filter Pill uses this callback to preserve the initiating control or replacement anchor focus after its outgoing overlay completes cleanup; later consumer focus takes priority.
+
+Filter Pill captures its current Popover owner (directly or through Dropdown),
+cancels selection without Apply, and waits for logical closure plus completed
+focus and scroll cleanup. Ordinary selected/options/label/count updates preserve
+the live instance. After an open preview finishes cleanup, the bank restores
+focus to the initiating control or replacement anchor only when cleanup returned
+focus to the outgoing anchor and no other control has taken focus. This gate
+covers replacement within the same renderer;
+ancestor teardown, route removal and shared scroll-lock ownership remain separate
+lifecycle responsibilities.
+
 ## Options
 
 `options` is the reactive value map that the renderer, option bar, and code
@@ -75,7 +115,9 @@ Format:
 ```
 
 Initial option values come from each member's `initialValue`. Plain objects and
-arrays are copied so live edits do not mutate preset defaults.
+arrays are copied in every bank so live edits do not mutate preset defaults.
+Banks with `previewIdentity` also apply their opted-in cloning policy before
+the plain-value copy.
 
 Option-bar controls and code-panel slot editors emit a function through
 `update:options`; the root applies it inside a guarded setter. Outside preset

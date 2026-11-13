@@ -72,7 +72,7 @@ reviews:
         Breaking changes silently ship as patches if not labeled with BREAKING CHANGE.
 
         - New components must use Composition API with <script setup lang="ts">.
-          Existing components use Options API with compatConfig MODE 3 — do not convert.
+          Existing Options API components retain their style — do not convert unless explicitly asked.
 
         - Props must use `validator` (never `validate` — Vue silently ignores it).
           Import allowed values from *Constants.js or *Constants.ts.
@@ -107,7 +107,7 @@ reviews:
       instructions: >
         - Tests use Vitest + @vue/test-utils.
 
-        - One assertion per test. Use beforeAll/beforeEach to reduce repetition.
+        - One behavior per test; multiple related assertions are allowed. Use beforeAll/beforeEach to reduce repetition.
           Use it.each for similar tests with different values.
 
         - Flag tests that assert on implementation details (mock call counts)

@@ -1,3 +1,22 @@
+# [1.9.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.8.0...dialtone-cli/v1.9.0) (2026-11-13)
+
+
+### Bug Fixes
+
+* **Cli:** DLT-3739 remove scratch docs and correct result labels ([#1543](https://github.com/dialpad/dialtone/issues/1543)) ([608a255](https://github.com/dialpad/dialtone/commit/608a2550b0f0a4473dea8be74d2d85e1558578b7))
+* **Filter Pill:** DLT-3735 fix custom content mounting and localize summaries ([#1541](https://github.com/dialpad/dialtone/issues/1541)) ([47f9ec2](https://github.com/dialpad/dialtone/commit/47f9ec2e208da3cbf793bb557c57e40e7b4ce37d))
+
+
+### Documentation
+
+* **Action Language:** NO-JIRA fix typos and examples that break the page's own rules ([#1547](https://github.com/dialpad/dialtone/issues/1547)) ([880af47](https://github.com/dialpad/dialtone/commit/880af47fb87911c9eca36d860ae194e994af83ee))
+
+
+### Features
+
+* **Dropdown,popover,list Item:** DLT-3738 add menu choices and logical visibility ([#1542](https://github.com/dialpad/dialtone/issues/1542)) ([8492354](https://github.com/dialpad/dialtone/commit/84923549d4a37ea1239a38dab33b98193379f995))
+* **Filter Pill:** DLT-3736 add controlled selection ([#1577](https://github.com/dialpad/dialtone/issues/1577)) ([73afd3b](https://github.com/dialpad/dialtone/commit/73afd3b6a510d412ee04c0c74171af2f1121e025))
+
 # [1.8.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.7.0...dialtone-cli/v1.8.0) (2026-11-10)
 
 

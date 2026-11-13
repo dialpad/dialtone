@@ -13,3 +13,19 @@
   }
 }
 }
+
+// Match the hiding utility's layer so the owning focus reveal wins its clipping.
+@layer dialtone.utilities {
+.d-dropdown__menu--arrow-keys[role="menu"] > .d-vi-visible-sr:focus-visible {
+  position: relative;
+  grid-row: -1;
+  justify-self: start;
+  inline-size: auto;
+  block-size: auto;
+  margin: var(--dt-spacing-100);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  overflow: visible;
+  border: var(--button-border-width) solid var(--button-color-border);
+  clip-path: none;
+}
+}

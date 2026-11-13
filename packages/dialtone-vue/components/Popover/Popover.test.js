@@ -398,6 +398,13 @@ describe('DtPopover Tests', () => {
       it('aria-labelledby should be set correctly on the content window', () => {
         expect(popoverWindow.attributes('aria-labelledby')).toBe(wrapper.vm.labelledBy);
       });
+
+      it('uses an explicit accessible label without an automatic label reference', async () => {
+        await wrapper.setProps({ ariaLabel: 'Filter by' });
+
+        expect(popoverWindow.attributes('aria-label')).toBe('Filter by');
+        expect(popoverWindow.attributes('aria-labelledby')).toBeUndefined();
+      });
     });
 
     describe('When popover is closed', () => {
@@ -413,6 +420,46 @@ describe('DtPopover Tests', () => {
         expect(popoverWindow.attributes('aria-hidden')).toBe('true');
       });
     });
+  });
+
+  describe('Built-in menu close semantics', () => {
+    it.each([
+      { showCloseButton: false, modal: false },
+      { showCloseButton: false, modal: true },
+      { showCloseButton: true, modal: false },
+      { showCloseButton: true, modal: true },
+    ])('updates popup and native Close semantics with showCloseButton=$showCloseButton, modal=$modal',
+      async ({ showCloseButton, modal }) => {
+        wrapper.unmount();
+        manualTransitions = true;
+        mockProps = { role: 'dialog', showCloseButton, modal };
+        updateWrapper();
+        await button.trigger('click');
+        await completeTransition('enter');
+        const close = popoverWindow.get(showCloseButton
+          ? '[data-qa="dt-popover-close"]'
+          : '[data-qa="dt-sr-only-close-button"]');
+        const nativeClose = close.element;
+        expect(close.attributes('role')).toBeUndefined();
+        expect(nativeClose.tagName).toBe('BUTTON');
+        expect(nativeClose.tabIndex).toBe(0);
+
+        await wrapper.setProps({ role: 'menu' });
+        expect.soft(popoverWindow.attributes('aria-modal')).toBeUndefined();
+        expect.soft(close.attributes('role')).toBe('menuitem');
+        expect(close.element).toBe(nativeClose);
+        await wrapper.setProps({ role: 'dialog' });
+        expect(close.attributes('role')).toBeUndefined();
+        await wrapper.setProps({ role: 'menu' });
+
+        nativeClose.focus();
+        await close.trigger('click');
+        expect(button.attributes('aria-expanded')).toBe('false');
+        expect(wrapper.emitted('opened').map(([open]) => open)).toEqual([true]);
+        await completeTransition('leave');
+        expect(wrapper.emitted('opened').map(([open]) => open)).toEqual([true, false]);
+        if (modal) expect(document.activeElement).toBe(button.element);
+      });
   });
 
   describe('Focus trapping', () => {

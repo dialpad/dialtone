@@ -50,3 +50,26 @@ test('falls back to default for missing, unknown, reserved, or repeated preset q
     assert.equal(getCombinatorPresetName(variants, query), 'default');
   }
 });
+
+
+test('uses a preferred initial preset without changing explicit named links', async () => {
+  const { getCombinatorPresetName } = await loadComponentCombinatorUtils();
+  const variants = {
+    defaults: { metadata: { initialPreset: 'controlled default' } },
+    default: {},
+    'controlled default': {},
+  };
+  for (const query of [undefined, null, '', 'unknown', 'defaults', ['default', 'controlled-default']]) {
+    assert.equal(getCombinatorPresetName(variants, query), 'controlled default');
+  }
+  assert.equal(getCombinatorPresetName(variants, 'default'), 'default');
+  assert.equal(getCombinatorPresetName(variants, 'CONTROLLED-DEFAULT'), 'controlled default');
+});
+
+test('ignores unavailable or reserved preferred initial names', async () => {
+  const { getCombinatorPresetName } = await loadComponentCombinatorUtils();
+  for (const initialPreset of ['', 'unknown', 'defaults', 'exclusions', 'toString']) {
+    const variants = { default: {}, defaults: { metadata: { initialPreset } } };
+    assert.equal(getCombinatorPresetName(variants, undefined), 'default');
+  }
+});
