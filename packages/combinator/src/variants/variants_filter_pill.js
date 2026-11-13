@@ -17,7 +17,7 @@ function controlledPreset (props = {}, slots = {}) {
   const single = props.useDropdown?.initialValue ?? true;
   return {
     metadata: {
-      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection. The options/selected API is unreleased; use a compatible published release when available.`,
+      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection.`,
       lookupExclude: {
         reason: 'Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.',
         owner: 'DLT-3736 / Dialtone component and lookup maintainers',

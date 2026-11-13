@@ -13,7 +13,6 @@ Controlled selection, trailing slots and `opened` are unreleased. Dialtone 10.5.
 <!-- @example {"exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo-only
-<!-- The options/selected API is unreleased. Use a compatible published release when available. -->
 <dt-filter-pill
   v-model:selected="heroSelected"
   :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
@@ -69,7 +68,6 @@ Arrow keys move focus without changing selection. The filter’s label stays ava
 <!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo
-<!-- The options/selected API is unreleased. Use a compatible published release when available. -->
 <dt-filter-pill
   v-model:selected="selectedMessage"
   :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
@@ -88,7 +86,6 @@ const selectedMessage = ref('all');
 </script>
 
 <template>
-  <!-- The options/selected API is unreleased. Use a compatible published release when available. -->
   <dt-filter-pill
     v-model:selected="selectedMessage"
     :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
@@ -111,7 +108,6 @@ A different `selected` value replaces pending edits. Replacing it with the same 
 <!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo
-<!-- The options/selected API is unreleased. Use a compatible published release when available. -->
 <dt-filter-pill
   v-model:selected="selectedChannels"
   :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }, { value: 'chat', label: 'Chat' }]"
@@ -129,7 +125,6 @@ const selectedChannels = ref([]);
 </script>
 
 <template>
-  <!-- The options/selected API is unreleased. Use a compatible published release when available. -->
   <dt-filter-pill
     v-model:selected="selectedChannels"
     :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }, { value: 'chat', label: 'Chat' }]"
