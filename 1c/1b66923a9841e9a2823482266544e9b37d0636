@@ -1,0 +1,162 @@
+scripts/tests/vue-slot-bindings.test.mjs
+  s_a98638d5a5be6e::t_a0cf7300756806 30-32,35-42,45-46,49-57
+  s_a98638d5a5be6e::t_174d3f7d3424f8 33-34,43-44,47-48
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.test.js
+  s_a98638d5a5be6e::t_a47839e10d9e10 18,20,31,40-46
+  s_a98638d5a5be6e::t_4cda62fe4bb02c 1-17,19,21-30,32-39,47
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_a98638d5a5be6e::t_a329dd2c9f302b 93,105-106
+  s_a98638d5a5be6e::t_253b6a919cffd0 104
+  s_a98638d5a5be6e::t_87f80c598d4981 107
+packages/dialtone-docs/tests/example-template.test.js
+  s_a98638d5a5be6e::t_054d1f6ef50958 23
+  s_a98638d5a5be6e::t_c0991d7b7ad1fe 6
+  s_a98638d5a5be6e::t_b6de5ed5e5169c 2,7-22,24-33
+  s_a98638d5a5be6e::t_41cec8e7ad3097 34
+.agents/resources/rules/combinator-variants.md
+  s_a98638d5a5be6e::t_b40499f8fab8ab 92-118
+packages/combinator/src/components/renderer/renderer_spec_sheet.vue
+  s_a98638d5a5be6e::t_891bb00708d4d3 12,54-57,67
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_a98638d5a5be6e::t_a329dd2c9f302b 148-149
+packages/combinator/src/components/renderer/renderer_target.test.js
+  s_a98638d5a5be6e::t_7b51b5938feebf 18-20,22-28,31,34,38,40-42
+  s_a98638d5a5be6e::t_0662e2a101aefd 4,7,14
+  s_a98638d5a5be6e::t_bfa9dc952ea9a2 9-13,17,21,29-30,32-33,35-37,39
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_a98638d5a5be6e::t_c9e9337b8b047d 491,644,653,662,671
+  s_a98638d5a5be6e::t_5496fde489d141 67,771,775,832-833,843,848-851,910,916
+  s_a98638d5a5be6e::t_94af0868209102 64-66
+  s_a98638d5a5be6e::t_0a82f5662384d7 68-70
+  s_a98638d5a5be6e::t_7b4d44b4b0219c 772-774
+  s_a98638d5a5be6e::t_56924edb2c80f9 776
+  s_a98638d5a5be6e::t_47657c96b3dfce 911-915
+packages/combinator/src/components/renderer/renderer.vue
+  s_a98638d5a5be6e::t_95ebde0b0a2428 8-9,75-77
+  s_a98638d5a5be6e::t_dd5f1dfc1060bf 78
+packages/dialtone-css/lib/build/less/components/filter-pill.less
+  s_a98638d5a5be6e::t_cd457fb8fabe56 105-115
+packages/combinator/src/components/renderer/renderer_spec_sheet_cell.vue
+  s_a98638d5a5be6e::t_0ae1f1f67cd984 34-35,101-103
+  s_a98638d5a5be6e::t_66732cbd992dec 104
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.story.vue
+  s_a98638d5a5be6e::t_0bf07d1258c4cc 3-7,19-21,24-30,36-42,54-56,65-67,70-110,112-116,131-139,141-158,161-168,205,211,219,223,230,236,241,247
+  s_a98638d5a5be6e::t_cd457fb8fabe56 1-2,8-18,22-23,31-35,43-53,57-64,68-69,111,117-130,140,159-160,169-204,206-210,212-218,220-222,224-229,231-235,237-240,242-246,248-261
+packages/combinator/src/components/combinator.test.js
+  s_a98638d5a5be6e::t_c3cd1a7d567754 4-5,7,10,135-136,138-167
+  s_a98638d5a5be6e::t_9c605358392906 34,39-44,49,58
+  s_a98638d5a5be6e::t_5c38cd55163476 33,35-38,45-48,50-57,59-69
+  s_a98638d5a5be6e::t_47d27cab2ae952 70-102
+  s_a98638d5a5be6e::t_46acca0f921677 103-125,127-134
+  s_a98638d5a5be6e::t_705ff861f0c6dd 126
+  s_a98638d5a5be6e::t_a474b78700a7b3 137
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_a98638d5a5be6e::t_101730c2ac3e96 13-29,31-32,34-87,89-91,133-136,140,179,446,542-544
+  s_a98638d5a5be6e::t_8617d7401c2ce5 88
+  s_a98638d5a5be6e::t_809ae27da2c5fb 92-132,545-559
+  s_a98638d5a5be6e::t_4e39d81d2d349c 12
+  s_a98638d5a5be6e::t_ca7650cf50e921 30,33
+  s_a98638d5a5be6e::t_fe0470a88b24ec 11
+  s_a98638d5a5be6e::t_7992819c640509 560
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_a98638d5a5be6e::t_79aa2576fd118e 2-4,6-16,18-21,23-68,440,546
+  s_a98638d5a5be6e::t_b34d06f58e54d9 421,453-509
+  s_a98638d5a5be6e::t_cd457fb8fabe56 5,152,308,370
+  s_a98638d5a5be6e::t_295c20f11d904f 1,17,22,116,118
+  s_a98638d5a5be6e::t_00d48f98f2b7d3 69-115,117,119,121,123-127,129-131,138-151,153-213,215,219-222,224-250,252,255-259,261-264,266-268,272-274,364,367-368,376,383,399,403,427,429,443-445
+  s_a98638d5a5be6e::t_138f60f8101ddf 304-307
+  s_a98638d5a5be6e::t_5496fde489d141 265,269-271,275-303,309-363
+  s_a98638d5a5be6e::t_fbaac45824c1fc 120,132-137
+  s_a98638d5a5be6e::t_bb045b33f10673 371,373,378,380,385-386,388,390-391,398,404,407,410,413,415,417,420,422-423,426,428,430,432-434,436-437,449,451,510-545
+  s_a98638d5a5be6e::t_bae55503e47962 251,253-254,260
+  s_a98638d5a5be6e::t_6c728ebcb63300 122,128,214,216-218,223,365-366,369,372,374-375,377,379,381-382,384,387,389,392-397,400-402,405-406,408-409,411-412,414,416,418-419,424-425,431,435,438-439,441-442,446-448,450,452
+packages/combinator/src/components/code_panel/code_panel.test.js
+  s_a98638d5a5be6e::t_98a8864f216510 9,11-14
+  s_a98638d5a5be6e::t_d026d849f20a93 1-8,10,15-20
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_a98638d5a5be6e::t_c43b6f96066a26 57-64,96-105,169-171
+  s_a98638d5a5be6e::t_bac64c73bcff59 154
+packages/combinator/src/lib/utils.test.js
+  s_a98638d5a5be6e::t_32a1a31ca1ce40 29-37
+packages/combinator/src/lib/code_copy.test.js
+  s_a98638d5a5be6e::t_1b62ea84a8f146 1-14
+packages/combinator/src/lib/code_copy.js
+  s_a98638d5a5be6e::t_4d83705183ef9e 19
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_a98638d5a5be6e::t_a329dd2c9f302b 270-271
+packages/dialtone-vue/components/FilterPill/FilterPill.stories.js
+  s_a98638d5a5be6e::t_cd457fb8fabe56 7,184-200
+.agents/resources/documentation-examples.md
+  s_a98638d5a5be6e::t_a329dd2c9f302b 13-15
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_a98638d5a5be6e::t_b0f6255e9ed164 1-6,8-117,127-165,167-168,170-176,180,185,187-255,260-273,277-300,303-320,322-326,328-355,360-364,369-373,376,382-385
+  s_a98638d5a5be6e::t_5496fde489d141 184,274-276
+  s_a98638d5a5be6e::t_874f5054b7fb0b 256-259,375,377
+  s_a98638d5a5be6e::t_fbaac45824c1fc 321,327,365-366
+  s_a98638d5a5be6e::t_c9e9337b8b047d 118-126
+  s_a98638d5a5be6e::t_4af07e01a84212 378-381
+  s_a98638d5a5be6e::t_e25ef967938053 7,166,169,177-179,181-183,186,301-302,356-359,367-368,374
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_a98638d5a5be6e::t_f8c426a7d26aff 80
+  s_a98638d5a5be6e::t_b9a47e0470e960 7-10,81-112
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.js
+  s_a98638d5a5be6e::t_b0f6255e9ed164 1-34,36-44
+  s_a98638d5a5be6e::t_2c3a64024eafd7 35
+packages/combinator/src/lib/utils.js
+  s_a98638d5a5be6e::t_c33f563793ece7 141,147,150
+packages/dialtone-docs/tests/source-examples.test.js
+  s_a98638d5a5be6e::t_b22e90b7d409f6 3,5,26-29,32-36,41-53
+  s_a98638d5a5be6e::t_e7807b4741ae3f 37-40
+  s_a98638d5a5be6e::t_c0991d7b7ad1fe 30-31
+packages/combinator/src/variants/variants_filter_pill.js
+  s_a98638d5a5be6e::t_4eee89c3b0ed7c 4-8,14-25,27-28,30-37,39-45,47-54,57-60,66-69,72-77,79-95
+  s_a98638d5a5be6e::t_3da2b9ceedfe04 9-13,26,29,78
+packages/combinator/src/lib/variant_state.js
+  s_a98638d5a5be6e::t_a7c4e69edee5e1 2,37-40,76
+packages/combinator/src/components/combinator.vue
+  s_a98638d5a5be6e::t_4d52e1c9845198 129,131,171,180,554-558
+packages/combinator/src/components/code_panel/code_panel.vue
+  s_a98638d5a5be6e::t_655c6a6ee8146c 14-19
+packages/dialtone-docs/src/generators/example-template.mjs
+  s_a98638d5a5be6e::t_17acf290c22175 23-28,44
+packages/combinator/src/components/code_editor/code_editor.vue
+  s_a98638d5a5be6e::t_17e437d094778d 193-194,241-244
+packages/combinator/src/lib/variant_state.test.js
+  s_a98638d5a5be6e::t_88246b82a323ee 13,80-99
+  s_a98638d5a5be6e::t_c57b48beb9c125 12,14-15,55-79
+  s_a98638d5a5be6e::t_c71c690f41b445 3-11,54
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_a98638d5a5be6e::t_a329dd2c9f302b 249-250
+packages/combinator/src/components/renderer/renderer.test.js
+  s_a98638d5a5be6e::t_003312125161e5 68,88,117
+  s_a98638d5a5be6e::t_5fc6e3da1304f5 5,10-12,14-40,44-62
+  s_a98638d5a5be6e::t_60adf483d2555f 99,109
+  s_a98638d5a5be6e::t_8bb0613db4638d 13
+  s_a98638d5a5be6e::t_5feba04c075f5e 87,96
+  s_a98638d5a5be6e::t_6f3fdca29921d0 41-43,67
+  s_a98638d5a5be6e::t_0dc519d4d2fdc5 3-4,6,63-66,69-71,73,75-81,83-86,89-95,97-98,100-108,110-116,118-119
+  s_a98638d5a5be6e::t_ca6442e2475f2a 2,72,74,82
+  s_a98638d5a5be6e::t_b5b8e993a4b21b 120
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_a98638d5a5be6e::t_bbf6ec5698586e 401-407
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_a98638d5a5be6e::t_8eb969592e8555 715
+packages/dialtone-vue/localization/en-US.ftl
+  s_a98638d5a5be6e::t_6bdce1fe32fbcd 94-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1c1b66923a9841e9a2823482266544e9b37d0636",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

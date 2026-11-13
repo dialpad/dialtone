@@ -1,0 +1,23 @@
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_a98638d5a5be6e::t_16f188a379f831 515
+  s_a98638d5a5be6e::t_1514cc4b3e5beb 187,195-199,201,365,373-377,379,399,407-411,413,435,496,503-507,509,584-586
+packages/dialtone-vue/components/FilterPill/FilterPillVariants.story.vue
+  s_a98638d5a5be6e::t_16f188a379f831 71,119
+  s_a98638d5a5be6e::t_1514cc4b3e5beb 52,59-63,65,109,112-113,157,165-169,171
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b80f71ef72f3a7581a70088d4b7c0ad3d6a1057a",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
