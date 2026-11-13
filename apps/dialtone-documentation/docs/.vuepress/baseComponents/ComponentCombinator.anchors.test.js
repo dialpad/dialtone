@@ -98,6 +98,7 @@ it.each([false, true])('focuses the TOC target regardless of playground intercep
   await toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' });
   await settle();
   expect(scroller.scrollTo).toHaveBeenCalled();
+  expect(toc.vm.activeHash).toBe('#image');
   expect(document.activeElement).toBe(target);
   expect(focus).toHaveBeenCalledWith({ preventScroll: true });
   expect(target.getAttribute('tabindex')).toBe('-1');
@@ -129,6 +130,79 @@ it.each(['missing target', 'cancelled navigation'])('keeps focus on the TOC link
   }
   expect(document.activeElement).toBe(anchor);
 });
+
+it.each(['aborted', 'thrown'])('preserves the TOC heading when navigation fails (%s)', async outcome => {
+  await mountAnchors();
+  const anchor = scroller.querySelector('a');
+  const previousHash = toc.vm.activeHash;
+  const previousUrl = window.location.href;
+  const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+  const error = new Error('TOC navigation failed');
+  const stop = router.beforeEach(() => {
+    if (outcome === 'thrown') throw error;
+    return false;
+  });
+  anchor.focus();
+  let failure;
+  try {
+    failure = await toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' }).catch(caught => caught);
+    await settle();
+  } finally {
+    stop();
+  }
+  expect(failure).toBe(outcome === 'thrown' ? error : undefined);
+  expect(toc.vm.activeHash).toBe(previousHash);
+  expect(window.location.href).toBe(previousUrl);
+  expect(scroller.scrollTo).not.toHaveBeenCalled();
+  expect(document.activeElement).toBe(anchor);
+  expect(logged).toHaveBeenCalledTimes(outcome === 'thrown' ? 1 : 0);
+  if (outcome === 'thrown') expect(logged).toHaveBeenCalledWith(error);
+});
+
+it.each(['aborted', 'thrown'])(
+  'preserves a newer TOC heading when an older navigation fails (%s)',
+  async outcome => {
+    await mountAnchors();
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const error = new Error('Older TOC navigation failed');
+    let release;
+    const held = new Promise(resolve => { release = resolve; });
+    let entered;
+    const waiting = new Promise(resolve => { entered = resolve; });
+    let heldOnce = false;
+    const stop = router.beforeEach(async () => {
+      if (heldOnce) return;
+      heldOnce = true;
+      entered();
+      await held;
+      if (outcome === 'thrown') throw error;
+      return false;
+    });
+    const olderNavigation = toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' }).catch(caught => caught);
+    let failure;
+    try {
+      await waiting;
+      // The same destination distinguishes a newer success from the older request's optimistic highlight.
+      await toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' });
+      await settle();
+      expect(toc.vm.activeHash).toBe('#image');
+      expect(window.location.hash).toBe('#image');
+      scroller.scrollTo.mockClear();
+    } finally {
+      release();
+      failure = await olderNavigation;
+      stop();
+    }
+    await settle();
+    expect(failure).toBe(outcome === 'thrown' ? error : undefined);
+    expect(toc.vm.activeHash).toBe('#image');
+    expect(window.location.hash).toBe('#image');
+    expect(scroller.scrollTo).not.toHaveBeenCalled();
+    expect(document.activeElement).toBe(scroller.querySelector('#image'));
+    expect(logged).toHaveBeenCalledTimes(outcome === 'thrown' ? 1 : 0);
+    if (outcome === 'thrown') expect(logged).toHaveBeenCalledWith(error);
+  },
+);
 
 it('preserves custom edits on an anchor click, Back and Forward', async () => {
   await mountAnchors({});

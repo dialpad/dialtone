@@ -149,11 +149,11 @@ export function usePageTocScrollSpy (headers, { interceptAnchors = false } = {})
 
   async function handleNavigate (event, item) {
     event.preventDefault();
-    activeHash.value = item.link;
     try {
       const failure = await updateRouteHash(item.link);
       await nextTick();
       if (failure) return;
+      activeHash.value = item.link;
       const target = scrollToHash(item.link);
       if (target) {
         if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
