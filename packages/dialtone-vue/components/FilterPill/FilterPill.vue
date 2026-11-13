@@ -355,6 +355,7 @@
                 size="200"
                 :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(option.value) }"
                 aria-hidden="true"
+                data-qa="dt-filter-pill__selection-indicator"
               />
             </template>
             <template
@@ -405,6 +406,7 @@
                 size="200"
                 :class="{ 'd-filter-pill__selection-indicator--hidden': !filter.active }"
                 aria-hidden="true"
+                data-qa="dt-filter-pill__selection-indicator"
               />
             </template>
           </dt-list-item>

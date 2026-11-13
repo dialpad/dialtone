@@ -173,7 +173,7 @@ export default {
       if (document.activeElement !== clear) return;
       this.clearFocusCandidate = clear;
       this.$nextTick(() => {
-        if (this.controlledDisposed || this.hasClear || this.disabled || this.readOnly) return;
+        if (this.controlledDisposed || this.hasClear || this.disabled) return;
         const active = document.activeElement;
         if (active === document.body || active === this.clearFocusCandidate) this.$refs.primaryButton?.$el?.focus();
         this.clearFocusCandidate = null;

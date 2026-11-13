@@ -310,9 +310,9 @@ describe('DtFilterPill Tests', function () {
         const listItems = wrapper.findAllComponents(DtListItem);
 
         expect(listItems).toHaveLength(MOCK_DROPDOWN_FILTERS.length);
-        expect(listItems.every(item => item.find(
-          '[data-qa="dt-item-layout-selected-wrapper"] .d-filter-pill__selection-indicator--hidden',
-        ).exists())).toBe(true);
+        expect(listItems.every(item => item.get('[data-qa="dt-item-layout-selected-wrapper"]')
+          .get('[data-qa="dt-filter-pill__selection-indicator"]')
+          .classes().includes('d-filter-pill__selection-indicator--hidden'))).toBe(true);
       });
     });
 

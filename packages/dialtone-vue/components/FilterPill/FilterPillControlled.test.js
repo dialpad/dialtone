@@ -259,7 +259,7 @@ describe('DtFilterPill controlled selection', () => {
     expect(trace).toEqual([['open', true], ['action', 'clear']]);
   });
 
-  it('keeps closed-clear focus until actual acceptance removes its button', async () => {
+  it('keeps closed-clear focus until removal and restores the surviving anchor', async () => {
     updateWrapper({ selected: ['sales'] });
     const clear = wrapper.find('[data-qa="dt-filter-pill__clear-button"]').element;
     clear.focus();
@@ -272,6 +272,11 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.emitted('selection-change')[0][0]).toEqual({
       value: [], previousValue: ['sales'], reason: 'clear', changed: true,
     });
+    await wrapper.setProps({ selected: ['sales'] });
+    wrapper.get('[data-qa="dt-filter-pill__clear-button"]').element.focus();
+    await wrapper.setProps({ readOnly: true });
+    await reconcile();
+    expect(document.activeElement).toBe(wrapper.get('[data-qa="dt-filter-pill__button"]').element);
   });
 
   it('keeps unknown selected values active and clearable without exposing raw identifiers', async () => {
@@ -809,7 +814,7 @@ describe('DtFilterPill controlled selection', () => {
     const clear = wrapper.find('[data-qa="dt-filter-pill__clear-button"]').element;
     clear.focus();
     clear.click();
-    const accepted = wrapper.setProps({ selected: [] });
+    const accepted = wrapper.setProps({ selected: [], readOnly: true });
     destination.focus();
     await accepted;
     await reconcile();
