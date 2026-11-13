@@ -1,3 +1,11 @@
+# [1.6.0](https://github.com/dialpad/dialtone/compare/combinator/v1.5.1...combinator/v1.6.0) (2026-11-13)
+
+
+### Features
+
+* **Dropdown,popover,list Item:** DLT-3738 add menu choices and logical visibility ([#1542](https://github.com/dialpad/dialtone/issues/1542)) ([8492354](https://github.com/dialpad/dialtone/commit/84923549d4a37ea1239a38dab33b98193379f995))
+* **Filter Pill:** DLT-3736 add controlled selection ([#1577](https://github.com/dialpad/dialtone/issues/1577)) ([73afd3b](https://github.com/dialpad/dialtone/commit/73afd3b6a510d412ee04c0c74171af2f1121e025))
+
 ## [1.5.1](https://github.com/dialpad/dialtone/compare/combinator/v1.5.0...combinator/v1.5.1) (2026-11-10)
 
 
