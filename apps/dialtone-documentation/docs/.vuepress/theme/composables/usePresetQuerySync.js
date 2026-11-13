@@ -82,7 +82,14 @@ export function usePresetQuerySync (componentName, variants) {
       if (nextPreset !== '') localIntent.value = null;
       return;
     }
-    const location = { path: route.path, query, hash: getCurrentBrowserHash() };
+    // Browser fragments are encoded; router object locations expect decoded text.
+    let hash = getCurrentBrowserHash();
+    try {
+      hash = decodeURIComponent(hash);
+    } catch {
+      // Treat malformed escapes as literal text and let the router encode them safely.
+    }
+    const location = { path: route.path, query, hash };
     // A fresh object distinguishes consecutive writes, including ones to the same URL.
     const write = { ...intent, fullPath: router.resolve(location).fullPath };
     pendingWrite = write;

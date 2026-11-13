@@ -69,6 +69,34 @@ it('derives a settled named selection from the URL and current bank', async () =
   expect(sync.preset.value).toBe('image');
 });
 
+it.each([
+  ['#%75sage', '#usage', '#usage'],
+  ['#some%20heading', '#some heading', '#some%20heading'],
+  ['#caf%C3%A9', '#café', '#caf%C3%A9'],
+  ['#literal%2520name', '#literal%20name', '#literal%2520name'],
+  ['#percent%25', '#percent%', '#percent%25'],
+  ['#bad%ZZ', '#bad%ZZ', '#bad%25ZZ'],
+  ['#bad%E0%A4%A', '#bad%E0%A4%A', '#bad%25E0%25A4%25A'],
+  ['#usage', '#usage', '#usage'],
+  ['', '', ''],
+])('preserves the live fragment target across preset changes (%s)', async (liveHash, routeHash, encodedHash) => {
+  const { router, sync } = await mountPresetSync();
+  const query = { other: 'keep', filter: ['a', 'b'], flag: null };
+  await router.push({ query, hash: '#stale' });
+  window.history.replaceState(null, '', `/components/avatar.html?other=keep&filter=a&filter=b&flag${liveHash}`);
+  expect(router.currentRoute.value.hash).toBe('#stale');
+  for (const preset of ['image', 'default', 'image', '']) {
+    await sync.updatePreset(preset);
+    expect(sync.preset.value).toBe(preset);
+    expect(router.currentRoute.value.query).toEqual(preset === 'image' ? { ...query, preset } : query);
+    expect(router.currentRoute.value.hash).toBe(routeHash);
+    expect(window.location.hash).toBe(encodedHash);
+    expect(router.currentRoute.value.fullPath).toBe(
+      `/components/avatar.html?other=keep&filter=a&filter=b&flag${preset === 'image' ? '&preset=image' : ''}${encodedHash}`,
+    );
+  }
+});
+
 it('returns a cancelled named selection to the committed URL', async () => {
   const { router, sync } = await mountPresetSync();
   const stop = router.beforeEach(to => to.query.preset === 'image' ? false : undefined);
