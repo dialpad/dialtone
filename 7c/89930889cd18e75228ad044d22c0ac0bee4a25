@@ -1,0 +1,25 @@
+packages/dialtone-react/common/focustrap/focustrap.test.ts
+  s_1ecb96555342e1::t_64e91125105fde 1-579
+packages/dialtone-react/common/focustrap/focustrap_constants.ts
+  s_1ecb96555342e1::t_2de241cee1acef 1-15
+packages/dialtone-react/common/focustrap/focustrap_utils.ts
+  s_1ecb96555342e1::t_fc2a221a3c416e 1-51
+packages/dialtone-react/common/focustrap/index.ts
+  s_1ecb96555342e1::t_b579f9f6d56dd7 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7c89930889cd18e75228ad044d22c0ac0bee4a25",
+  "prompts": {},
+  "sessions": {
+    "s_1ecb96555342e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e9b0d90d-6ce9-48c5-98b9-c405b4366679",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

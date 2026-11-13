@@ -1,0 +1,91 @@
+packages/dialtone-mcp-server/scripts/project-context.test.mjs
+  s_7f1d1d64baa803::t_60f5e9103b144e 19-22,31,60-63,65
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_60f5e9103b144e 187-192,388
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_7f1d1d64baa803::t_1095b91fc5ee68 109
+.agents/resources/rules/documentation-site.md
+  s_7f1d1d64baa803::t_d39fa381e90ee1 19-28
+.agents/skills/component-work/SKILL.md
+  s_7f1d1d64baa803::t_29ba645be1ed94 43-46,55
+.claude/rules/documentation-site.md
+  s_7f1d1d64baa803::t_a3b515c9e13184 9,13,17,21,25,29-38
+.claude/skills/component.md
+  s_7f1d1d64baa803::t_2f6832056de6ae 55,64-65
+apps/dialtone-documentation/docs/components/checkbox.md
+  s_7f1d1d64baa803::t_a9d2961aca5212 8
+apps/dialtone-documentation/docs/components/combobox-with-popover.md
+  s_7f1d1d64baa803::t_02c4a616131007 4
+apps/dialtone-documentation/docs/components/index.md
+  s_7f1d1d64baa803::t_0f78956fc5ce62 4
+apps/dialtone-documentation/docs/components/scrollbar.md
+  s_7f1d1d64baa803::t_4164d19216ee45 6
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_7f1d1d64baa803::t_dbf0bda2ffc988 7
+apps/dialtone-documentation/docs/components/status/index.md
+  s_7f1d1d64baa803::t_96ae581fdc0f57 4
+apps/dialtone-documentation/docs/components/table.md
+  s_7f1d1d64baa803::t_84e12c439b307d 7
+apps/dialtone-documentation/docs/components/tabs.md
+  s_7f1d1d64baa803::t_a5b7e0707e15fc 8
+apps/dialtone-documentation/docs/components/text-list.md
+  s_7f1d1d64baa803::t_109511530a69c3 18-19
+apps/dialtone-documentation/docs/components/toggle.md
+  s_7f1d1d64baa803::t_8f5bbbab364eb7 8
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_b9d4f35c0cd4c4 91-102,122-127,260-261,294
+apps/dialtone-documentation/docs/guides/migration/scrollbar-always/index.md
+  s_7f1d1d64baa803::t_b38ceb7787a27e 4
+packages/dialtone-cli/src/commands/search.ts
+  s_7f1d1d64baa803::t_a03ca5b8a2ea31 3,14
+packages/dialtone-docs/src/generators/build-component-doc-links.mjs
+  s_7f1d1d64baa803::t_015a8ebfc4f424 6,138
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_7f1d1d64baa803::t_022865f1d0c6e6 6,176
+packages/dialtone-docs/src/utils/keywords.mjs
+  s_7f1d1d64baa803::t_6a1692558dc564 1-10
+packages/dialtone-docs/tests/component-doc-links.test.js
+  s_7f1d1d64baa803::t_f38c75ab8e2d40 6-7,91-116
+packages/dialtone-docs/tests/fixtures/public-docs/complete.md
+  s_7f1d1d64baa803::t_2c8dda59339ee1 7
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_7f1d1d64baa803::t_cec8e762f053c2 5,125-128,253-264
+packages/dialtone-mcp-server/interactive-search.ts
+  s_7f1d1d64baa803::t_f3a9e70fc8356a 11,170
+packages/dialtone-query-core/README.md
+  s_7f1d1d64baa803::t_01218b459d53ae 12,15-16,39,43
+packages/dialtone-query-core/src/component-documentation.ts
+  s_7f1d1d64baa803::t_31739ff28ad770 5
+packages/dialtone-query-core/src/keyword-matching.ts
+  s_7f1d1d64baa803::t_2d719c0a4054d9 1-24
+packages/dialtone-query-core/src/tools/components.ts
+  s_7f1d1d64baa803::t_dc1178aa8ac41c 5-6,162-184,198,200,227-228,240,267,283-286
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_f516e26a87f34d 6,162-164,179-180,185,200-201,207,214-216
+packages/dialtone-query-core/src/types.ts
+  s_7f1d1d64baa803::t_949ca330b219af 123
+packages/dialtone-query-core/tests/tools/search-ranking.test.ts
+  s_7f1d1d64baa803::t_0d31bc35914c9a 5-9,110-183
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_ed30195cf0acde 11
+scripts/retrieval/cases.mjs
+  s_7f1d1d64baa803::t_04db746240d635 23-31
+scripts/retrieval/run.mjs
+  s_7f1d1d64baa803::t_d6aff67412f2c1 27,102,112,143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d70693b9f6c541f673f90c05c23139d5c56ae0bb",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

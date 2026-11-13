@@ -1,0 +1,44 @@
+packages/dialtone-css/lib/build/less/components/slider.less
+  s_18547bca72b16a::t_f4d7663190c792 176-194,198-210,212-224,226-232
+  s_18547bca72b16a::t_1ef0ab94b6fc0c 29-30,32,34,43,116,133,143,151-163,264,323-334,338-340,345-347,352-354,359-361,401
+  s_18547bca72b16a::t_8f91196f5e13d0 195-197,211,225
+  s_18547bca72b16a::t_303775d8fa6bad 120-127
+packages/combinator/src/variants/variants.js
+  s_18547bca72b16a::t_6424cc42f2ed3b 52,116
+packages/dialtone-vue/components/Slider/SliderVariants.story.vue
+  s_18547bca72b16a::t_8f4f681facb26e 118,121,124,126-138,319-420,457-458,469-472
+packages/combinator/src/variants/variants_slider.js
+  s_18547bca72b16a::t_b8b9eacd11502f 1-20,24-29,31-34,37-51,54-61,63-66,70-79
+packages/dialtone-vue/components/Slider/SliderConstants.ts
+  s_18547bca72b16a::t_f791ae82b72079 3-4
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_18547bca72b16a::t_08e5586618bd14 1,153,160-161,163-164,166-168,172-173,175-177,179-180,182-186,188-189,191-196,215-217,270-291,385-424,457-517
+  s_18547bca72b16a::t_8fe0e3f0dddee2 154-159,162,165,169-171,174,178,181,187,190,197-214
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_18547bca72b16a::t_b7b1a4152bca7d 697,699-706
+  s_18547bca72b16a::t_0c863786a87a28 22-30,96-97,168,353-354,356,358-361,416,420-429,432,443-446,453,563-566,636-645,686-696
+  s_18547bca72b16a::t_22300e70de6362 98-116
+  s_18547bca72b16a::t_d16287bf10371f 698
+apps/dialtone-documentation/docs/components/slider.md
+  s_18547bca72b16a::t_5d02b66dc18574 73-76,89-102,126-150,154,179-183,186-190,205,222,258
+pnpm-lock.yaml
+  s_18547bca72b16a::t_d28d968f101d9d 936-937,1383,1387,1389,1391-1393,1396,1400,1406,3671-3673,4849-4851,4853-4860,17927-17928,19224,19226
+packages/dialtone-vue/components/Slider/Slider.stories.js
+  s_18547bca72b16a::t_641d08f1eb9149 4,18-19,28,134-143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2584beb82acb91075e9ae98f1403fe5701e80a08",
+  "prompts": {},
+  "sessions": {
+    "s_18547bca72b16a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34090d3c-5c78-4979-93a5-69ff10aaa88a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}

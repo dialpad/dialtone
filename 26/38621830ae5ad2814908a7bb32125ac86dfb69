@@ -1,0 +1,21 @@
+scripts/lib/vue-slot-bindings.mjs
+  s_a98638d5a5be6e::t_f1cfd0e239ddb9 21,23-27
+scripts/tests/vue-slot-bindings.test.mjs
+  s_a98638d5a5be6e::t_cb4b688af7b4bd 43-44,47-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2638621830ae5ad2814908a7bb32125ac86dfb69",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
