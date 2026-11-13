@@ -594,7 +594,7 @@ Our default phone number format for designs is the North American format. In Dia
 
 * (415) 555-1234
 * +1 (800) 555-1234
-* +33 055 512345
+* +33 5 55 51 23 45
 * Ext. 55555
 
 </template>
