@@ -1,0 +1,33 @@
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_a98638d5a5be6e::t_3a292a3caa257f 80,90,104
+packages/combinator/src/components/renderer/renderer_target.test.js
+  s_a98638d5a5be6e::t_815e0628d7814b 137-138
+packages/combinator/src/lib/code_copy.test.js
+  s_a98638d5a5be6e::t_03bc45a16598f6 21-31,35,41
+packages/combinator/src/lib/variant_state.test.js
+  s_a98638d5a5be6e::t_7818f1426a8af0 16,55-60,70-75
+packages/dialtone-docs/tests/source-examples.test.js
+  s_a98638d5a5be6e::t_65dd5c060d1baf 26,33-36,40-42
+packages/dialtone-vue/components/FilterPill/FilterPill.test.js
+  s_a98638d5a5be6e::t_10b430e72ffc9e 49,307,313-315,680,700-702
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_a98638d5a5be6e::t_ea828efd8dde22 17-18,20,38,200,202,210-218,226,229-230,248,256,258,296,345-348,352-355,390-391,730,735-736,765,775
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.test.js
+  s_a98638d5a5be6e::t_ee3a0cc8fac002 41-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "45584676bd725ca636bc2b3a4e6d60c8a5b83910",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+packages/dialtone-react/parity/changed-units.test.mjs
+  s_2defdf83601f66::t_b2977f326a02db 294-307
+packages/dialtone-react/parity/changed-units.mjs
+  s_2defdf83601f66::t_c6f822749c1717 70-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "49634202c9b3b0f06c89d5452b996db65d0cac0b",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

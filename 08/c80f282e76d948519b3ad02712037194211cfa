@@ -1,0 +1,38 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/drafts/2026-10-20.md
+  h_65afbd07a56b87 11
+  s_355402be618789::t_6ab8b5c46a794e 66
+  s_355402be618789::t_d4939d72d80ad4 2
+  s_355402be618789::t_784a6f598ddcc7 67
+  s_355402be618789::t_d0af04234adb60 35
+  s_355402be618789::t_bb3486bfe3b53a 36
+  s_355402be618789::t_6810de4d79dad5 19-20
+  s_355402be618789::t_93643af6070358 56-59
+  s_355402be618789::t_06d9ea3a60cbbc 60-61
+  s_355402be618789::t_24c9ff2ef9ecab 62-65
+  s_355402be618789::t_800091624896d1 1
+  s_355402be618789::t_4a7d50fd2d961b 21-23,32-34
+  s_355402be618789::t_142f761bbcf2ed 37-39,53-55
+  s_355402be618789::t_0b9a2eddb4dfbc 68-70
+  s_355402be618789::t_e6411d63430ad4 3-10,12-18,24-31,40-52,71-96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "08c80f282e76d948519b3ad02712037194211cfa",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
