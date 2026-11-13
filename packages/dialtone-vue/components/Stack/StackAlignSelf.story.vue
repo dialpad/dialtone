@@ -42,5 +42,6 @@ import DtStack from './Stack.vue';
 export default {
   name: 'StackAlignSelf',
   components: { DtBox, DtStack },
+  inheritAttrs: false,
 };
 </script>
