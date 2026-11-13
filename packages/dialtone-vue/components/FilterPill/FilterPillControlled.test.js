@@ -831,19 +831,24 @@ describe('DtFilterPill controlled selection', () => {
     expect(wrapper.emitted('selection-change')).toBeUndefined();
   });
 
-  it('recovers focus and subsequent navigation after in-place option reorder and removal', async () => {
+  it('recovers shadow-root focus and navigation after in-place option reorder and removal', async () => {
     const liveOptions = ref(options.map(option => ({ ...option })));
+    const host = document.createElement('div');
+    document.body.appendChild(host);
+    const root = host.attachShadow({ mode: 'open' });
+    const container = document.createElement('div');
+    root.appendChild(container);
     wrapper = mount({
       setup: () => () => h(DtFilterPill, {
-        options: liveOptions.value, selected: 'support', label: 'Teams', useDropdown: true,
+        options: liveOptions.value, selected: 'support', label: 'Teams', useDropdown: true, popoverAppendTo: 'parent',
       }),
     }, {
       global: { plugins: [DtTooltipDirective, DtFocustrapDirective], stubs: { transition: false } },
-      attachTo: document.body,
+      attachTo: container,
     });
     await open();
     await flushPromises();
-    const row = document.querySelectorAll('[data-qa="dt-filter-pill__option"]')[1];
+    const row = root.querySelectorAll('[data-qa="dt-filter-pill__option"]')[1];
     row.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
     row.focus();
     liveOptions.value.unshift(...liveOptions.value.splice(1, 1));
@@ -852,15 +857,18 @@ describe('DtFilterPill controlled selection', () => {
       key: 'ArrowDown', code: 'ArrowDown', bubbles: true, cancelable: true,
     }));
     await reconcile();
-    expect(document.activeElement.textContent).toContain('Sales');
+    expect(root.activeElement.textContent).toContain('Sales');
     liveOptions.value.splice(1, 1);
     await reconcile();
-    expect(document.activeElement.textContent).toContain('Engineering');
-    document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
+    expect(root.activeElement.textContent).toContain('Engineering');
+    root.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
       key: 'ArrowUp', code: 'ArrowUp', bubbles: true, cancelable: true,
     }));
     await reconcile();
-    expect(document.activeElement.textContent).toContain('Support');
+    expect(root.activeElement.textContent).toContain('Support');
+    liveOptions.value.splice(0);
+    await reconcile();
+    expect(root.activeElement).toBe(root.querySelector('[role="menu"]'));
     expect(wrapper.findComponent(DtFilterPill).emitted('selection-change')).toBeUndefined();
   });
 

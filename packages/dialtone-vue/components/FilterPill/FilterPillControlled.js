@@ -405,19 +405,23 @@ export default {
 
     async restoreRemovedOptionFocus (previous) {
       if (!this.isOpen || !Array.isArray(previous)) return;
-      const active = document.activeElement;
+      const overlay = this.$refs.overlay;
+      const popover = this.controlledDropdown ? overlay?.$refs.popover : overlay;
+      const root = popover?.$refs.popover__content?.getRootNode();
+      const active = root?.activeElement;
       const index = previous.findIndex(value => this.optionIds.get(value) === active?.id);
       if (index < 0) return;
       const retained = this.controlledState.options.find(option => this.optionIds.get(option.value) === active.id);
       const session = this.draftSession;
       await this.$nextTick();
+      const current = root.activeElement ?? active.ownerDocument.activeElement;
       if (this.controlledDisposed || !this.isOpen || session !== this.draftSession ||
-        (document.activeElement !== document.body && document.activeElement !== active)) return;
+        ![active, active.ownerDocument.body, root.host].includes(current)) return;
       const options = this.controlledState.options;
       const nearest = retained ?? options[Math.min(index, options.length - 1)];
       const popupId = this.$refs.primaryButton?.$el?.getAttribute('aria-controls');
-      const target = nearest ? document.getElementById(this.controlledOptionId(nearest.value))
-        : document.getElementById(popupId);
+      const target = nearest ? root.getElementById(this.controlledOptionId(nearest.value))
+        : root.getElementById(popupId);
       if (this.controlledDropdown) {
         if (nearest && target) this.$refs.overlay?.setHighlightId(target.id);
         else this.$refs.overlay?.clearHighlightIndex();
