@@ -1,0 +1,53 @@
+packages/dialtone-docs/tests/tests/strip-markdown.test.js
+  s_7f1d1d64baa803::t_454d2c102b528e 29-38
+  s_7f1d1d64baa803::t_7d342987d38e6b 39-40,42,48
+  s_7f1d1d64baa803::t_e9ff13eeadfe31 49-58
+  s_7f1d1d64baa803::t_2c8c8ec2f5f202 59-63
+  s_7f1d1d64baa803::t_b719cfc992d62f 64-71
+  s_7f1d1d64baa803::t_27318366cc6965 41,43-47
+packages/dialtone-docs/src/utils/strip-markdown.mjs
+  s_7f1d1d64baa803::t_7f030211d71834 17,23-24,32-33,37
+  s_7f1d1d64baa803::t_798f2648eef3b4 41-42
+  s_7f1d1d64baa803::t_5adfd273bfbc8e 13,15-16,18-22,25-31,34-35,38-40,43-49,51,53-54,88
+  s_7f1d1d64baa803::t_c18c5e7fbb442f 14,36,50,52,55-56
+  s_7f1d1d64baa803::t_b7a4dedcc21baf 102
+  s_7f1d1d64baa803::t_af28de70de5ee7 74,87
+apps/dialtone-documentation/scripts/lib/parse-source-markdown.mjs
+  s_7f1d1d64baa803::t_af28de70de5ee7 736
+apps/dialtone-documentation/scripts/generate-raw-markdown.mjs
+  s_7f1d1d64baa803::t_fbdf83b5b88c50 678-681
+  s_7f1d1d64baa803::t_af28de70de5ee7 223-231
+apps/dialtone-documentation/scripts/lib/transform-vue-api.mjs
+  s_7f1d1d64baa803::t_fbdf83b5b88c50 9,131-136,180
+  s_7f1d1d64baa803::t_af28de70de5ee7 12,29,31,47-101,126-127,129-130,137-140,149,152-153,158-163,167-169,173-174,178-179
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_7f1d1d64baa803::t_c18c5e7fbb442f 49
+  s_7f1d1d64baa803::t_9094914cb028f9 50
+apps/dialtone-documentation/scripts/lib/component-handlers.mjs
+  s_7f1d1d64baa803::t_af28de70de5ee7 65
+apps/dialtone-documentation/scripts/lib/transform-vue-api.test.mjs
+  s_7f1d1d64baa803::t_b7a4dedcc21baf 62
+  s_7f1d1d64baa803::t_7d342987d38e6b 108-110
+  s_7f1d1d64baa803::t_454d2c102b528e 10,14,17,19-20,30,46,53-61,63-107
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_7f1d1d64baa803::t_454d2c102b528e 162-163,165-171
+  s_7f1d1d64baa803::t_d6efe94ebb2dd9 164
+apps/dialtone-documentation/scripts/lib/parse-source-markdown.test.mjs
+  s_7f1d1d64baa803::t_454d2c102b528e 6-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bf0c160de8a08a99ec3df911172f7b53e3a67343",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

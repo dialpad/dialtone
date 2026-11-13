@@ -1,0 +1,29 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_text_variant/index.mjs
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 9,169
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_9ffcf142ac84e2::t_aa1debcc3960cf 22
+  s_9ffcf142ac84e2::t_ac25af2c6c7c3a 19-21,23-25,33,70,105,250,278-279,281-283,290-291,293-299,301-310,315,317-318,323,325-328
+packages/dialtone-css/lib/build/js/dialtone_migrate/git_environment.mjs
+  s_9ffcf142ac84e2::t_aa1debcc3960cf 5,7-10
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 1-4,6,11-12
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 42,402,540
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 266-268
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f6d1a5cf5a9cd59c6dc412ada4f047e1a1bc3e6",
+  "prompts": {},
+  "sessions": {
+    "s_9ffcf142ac84e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d0f7-76a3-aa19-3b9b76f40d48",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

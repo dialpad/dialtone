@@ -1,0 +1,23 @@
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-icons.js
+  s_57cb89918a75ca::t_d995e9060f9492 40-52,83-105
+packages/eslint-plugin-dialtone/docs/rules/deprecated-icons.md
+  s_57cb89918a75ca::t_36a92ac9ea4ad7 42-47
+packages/eslint-plugin-dialtone/lib/rules/deprecated-icons.js
+  s_57cb89918a75ca::t_51da5d3ad26e0f 27-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c7707717e0f5971be654e0d4096401b8377df48e",
+  "prompts": {},
+  "sessions": {
+    "s_57cb89918a75ca": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "094f8b94-6b4a-4783-aead-2674d70218d1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
