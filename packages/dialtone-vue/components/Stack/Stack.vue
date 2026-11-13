@@ -92,8 +92,10 @@ export default {
      * The alignSelf property places the stack itself along the cross axis of its flex parent
      * (`align-self`). It does not change how the stack aligns its own children; use `align` for that.
      * The alignSelf can be set to a string, or object with breakpoints.
-     * All the undefined breakpoints will have the 'default' value.
-     * You can override the default alignSelf with 'default' key.
+     * You can set the base value with 'default' key.
+     * Each breakpoint value stays active until a later breakpoint value overrides it,
+     * so an undefined breakpoint keeps the previous value instead of resetting to 'default'.
+     * Use `auto` to reset.
      * In case of string, it will be applied to all the breakpoints.
      * If not specified, the parent's `align-items` applies.
      * @values start, center, end, stretch, baseline, auto

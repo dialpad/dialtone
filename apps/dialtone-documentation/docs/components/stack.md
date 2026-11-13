@@ -660,7 +660,7 @@ Align items along their text baselines.
 
 The `alignSelf` prop places the stack itself along the cross-axis of its flex parent, like the `d-as-*` utilities. It does not move the stack's children. Use `align` for that.
 
-Available `alignSelf` values: `start`, `center`, `end`, `stretch`, `baseline`, `auto`. It also accepts the responsive object syntax. Use `auto` to hand control back to the parent's `align-items` at a breakpoint.
+Available `alignSelf` values: `start`, `center`, `end`, `stretch`, `baseline`, `auto`. It also accepts the responsive object syntax. Each breakpoint value stays active until a later breakpoint value overrides it. Use `auto` to hand control back to the parent's `align-items` at a breakpoint.
 
 ```vue demo
 <dt-stack
