@@ -1,0 +1,30 @@
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_a98638d5a5be6e::t_fe61ed73167936 214-220,366,399-405,440-446
+packages/dialtone-css/lib/build/less/components/filter-pill.less
+  s_a98638d5a5be6e::t_bce6f1bd7162ac 68-71
+packages/dialtone-vue/components/FilterPill/FilterPill.test.js
+  s_a98638d5a5be6e::t_0a3ffeb74eb5c5 312
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_a98638d5a5be6e::t_0a3ffeb74eb5c5 89
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_a98638d5a5be6e::t_70d08af3649464 344,394
+  s_a98638d5a5be6e::t_fe61ed73167936 341-343,345-347,391-393,395-397,434,460
+packages/dialtone-vue/components/FilterPill/FilterPillVariants.story.vue
+  s_a98638d5a5be6e::t_fe61ed73167936 184-190,261,275
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "945bc516ecf920c5f45f15634ea810ed755dcf5a",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
