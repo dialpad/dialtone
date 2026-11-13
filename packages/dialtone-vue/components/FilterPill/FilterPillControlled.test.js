@@ -39,6 +39,36 @@ describe('DtFilterPill controlled selection', () => {
     vi.restoreAllMocks();
   });
 
+  it.each([
+    { useDropdown: false, empty: false },
+    { useDropdown: false, empty: true },
+    { useDropdown: true, empty: false },
+    { useDropdown: true, empty: true },
+  ])('accepts option replacement on first open (dropdown=$useDropdown, empty=$empty)', async ({ useDropdown, empty }) => {
+    const liveOptions = ref([...options]);
+    wrapper = mount({
+      setup: () => () => h(DtFilterPill, {
+        label: 'Teams', options: liveOptions.value, selected: useDropdown ? null : [], useDropdown,
+        onOpen: value => {
+          if (value) liveOptions.value = empty ? [] : [{ value: 'replacement', label: 'Replacement' }];
+        },
+      }),
+    }, { global: { plugins: [DtTooltipDirective, DtFocustrapDirective] }, attachTo: document.body });
+    await open();
+    await flushPromises();
+    const rows = document.querySelectorAll(useDropdown
+      ? '[data-qa="dt-filter-pill__option"]' : '[data-qa="dt-filter-pill__checkbox"]');
+    expect(wrapper.get('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('true');
+    expect(rows).toHaveLength(empty ? 0 : 1);
+    if (!empty) {
+      expect(document.body.textContent).toContain('Replacement');
+      rows[0].click();
+      await reconcile();
+      expect(wrapper.findComponent(DtFilterPill).emitted('update:selected'))
+        .toEqual([[useDropdown ? 'replacement' : ['replacement']]]);
+    }
+  });
+
   it('restores declined native checkbox intents without mutating frozen consumer data', async () => {
     const selected = Object.freeze(['sales']);
     updateWrapper({ selected });

@@ -409,6 +409,7 @@ export default {
       const popover = this.controlledDropdown ? overlay?.$refs.popover : overlay;
       const root = popover?.$refs.popover__content?.getRootNode();
       const active = root?.activeElement;
+      if (!active) return;
       const index = previous.findIndex(value => this.optionIds.get(value) === active?.id);
       if (index < 0) return;
       const retained = this.controlledState.options.find(option => this.optionIds.get(option.value) === active.id);
