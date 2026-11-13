@@ -1,3 +1,10 @@
+# [9.5.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.4.0...dialtone-css/v9.5.0) (2026-11-13)
+
+
+### Features
+
+* **Filter Pill:** DLT-3736 add controlled selection ([#1577](https://github.com/dialpad/dialtone/issues/1577)) ([73afd3b](https://github.com/dialpad/dialtone/commit/73afd3b6a510d412ee04c0c74171af2f1121e025))
+
 # [9.4.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.3.0...dialtone-css/v9.4.0) (2026-11-10)
 
 
