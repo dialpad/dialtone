@@ -6,6 +6,7 @@ describe('formatPhoneNumber', () => {
   it.each([
     ['+18005551234', undefined, '+1 (800) 555-1234'],
     ['+14155551234', US, '(415) 555-1234'],
+    ['+16045550123', US, '(604) 555-0123'],
     ['+14155551234', { defaultCountry: 'GB' }, '+1 (415) 555-1234'],
   ])('formats North American number %s with %o as %s', (input, options, expected) => {
     expect(formatPhoneNumber(input, options)).toBe(expected);

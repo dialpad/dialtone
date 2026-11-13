@@ -12,12 +12,17 @@ import { parsePhoneNumberFromString, getCountryCallingCode, isSupportedCountry }
  * (`1-800-FLOWERS`). The check uses the small `libphonenumber-js/min` data, so some numbers that are
  * not real (wrong mobile prefix, not in service) still format.
  *
+ * To show the viewer's own numbers without a country code, pass their country (from their account
+ * or the request) as `defaultCountry`. The US and Canada share +1, so with `US` a Canadian number
+ * also shows without it.
+ *
  * Each country's own digit grouping is used. To keep a number on one line, put the `d-ws-nowrap`
  * class on the element.
  *
  * @example
- * formatPhoneNumber('+18005550199'); // '+1 (800) 555-0199'
+ * formatPhoneNumber('+14155550123'); // '+1 (415) 555-0123'
  * formatPhoneNumber('+14155550123', { defaultCountry: 'US' }); // '(415) 555-0123'
+ * formatPhoneNumber('+16045550123', { defaultCountry: 'US' }); // '(604) 555-0123'
  * formatPhoneNumber('+442079460958'); // '+44 20 7946 0958'
  * formatPhoneNumber('+1 415 555 0123 x55555'); // '+1 (415) 555-0123 Ext. 55555'
  *
