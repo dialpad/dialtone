@@ -18,8 +18,13 @@ export function preserveDeclaredSlotBindings (documentation, node, siblings) {
   if (!declared.length) return;
   const name = node.props.find(prop => prop.type === 6 && prop.name === 'name');
   const slot = documentation.getSlotDescriptor(name?.value?.content || 'default');
+  const declaredNames = new Set(declared.map(binding => binding.name));
   slot.bindings = [...new Map([
-    ...(slot.bindings || []).map(binding => [binding.name, binding]),
+    ...(slot.bindings || []).map(binding => {
+      const camelName = binding.name.replace(/-(\w)/g, (_, letter) => letter.toUpperCase());
+      const name = declaredNames.has(camelName) ? camelName : binding.name;
+      return [name, { ...binding, name }];
+    }),
     ...declared.map(binding => [binding.name, binding]),
   ]).values()];
 }

@@ -1,9 +1,12 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import DtFilterPill from './FilterPill.vue';
+import { FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES } from './FilterPillConstants';
 import DtFilterPillDefaultTemplate from './FilterPillDefault.story.vue';
 import DtFilterPillVariantsTemplate from './FilterPillVariants.story.vue';
 import DtFilterPillCustomContentTemplate from './FilterPillCustomContent.story.vue';
+import DtFilterPillControlledTemplate from './FilterPillControlled.story.vue';
+import DtFilterPillCloseBeforeRemovalTemplate from './FilterPillCloseBeforeRemoval.story.vue';
 import { action } from 'storybook/actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/Button';
 import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/Popover/index.js';
@@ -46,9 +49,16 @@ export const argTypesData = {
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
   },
+  overlayMinInlineSize: {
+    control: 'select',
+    options: FILTER_PILL_OVERLAY_MIN_INLINE_SIZE_VALUES,
+    table: {
+      defaultValue: { summary: 'anchor' },
+    },
+  },
   popoverPadding: {
     table: {
-      defaultValue: { summary: 'large' },
+      defaultValue: { summary: 'compact (block 100 / inline 150)' },
     },
     options: Object.keys(POPOVER_PADDING_CLASSES),
     control: {
@@ -179,4 +189,37 @@ export const SelectionSummaries = {
     `,
   }),
   parameters: { options: { showPanel: false }, controls: { disable: true } },
+};
+
+
+export const ControlledSelection = {
+  render: () => ({
+    components: { DtFilterPillControlledTemplate },
+    template: '<dt-filter-pill-controlled-template />',
+  }),
+  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { context: 'body' } },
+};
+
+export const ControlledOpenMenu = {
+  render: () => ({
+    components: { DtFilterPillControlledTemplate },
+    template: '<dt-filter-pill-controlled-template initial-menu-open />',
+  }),
+  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { context: 'body' } },
+};
+
+export const ControlledCloseBeforeRemoval = {
+  render: () => ({
+    components: { DtFilterPillCloseBeforeRemovalTemplate },
+    template: '<dt-filter-pill-close-before-removal-template />',
+  }),
+  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { context: 'body' } },
+};
+
+export const ControlledDropdownCloseBeforeRemoval = {
+  render: () => ({
+    components: { DtFilterPillCloseBeforeRemovalTemplate },
+    template: '<dt-filter-pill-close-before-removal-template use-dropdown />',
+  }),
+  parameters: { options: { showPanel: false }, controls: { disable: true }, a11y: { context: 'body' } },
 };

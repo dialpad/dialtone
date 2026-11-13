@@ -58,7 +58,7 @@
         :aria-hidden="`${isDialogAriaHidden}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"
-        :aria-modal="`${!modal}`"
+        :aria-modal="role === 'menu' ? undefined : `${!modal}`"
         :transition="transition"
         :show="isOpen"
         :appear="toAppear"
@@ -81,6 +81,7 @@
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
+          :close-role="role === 'menu' ? 'menuitem' : undefined"
           @close="closePopover"
         >
           <template #content>
@@ -123,6 +124,8 @@
         </popover-header-footer>
         <sr-only-close-button
           v-if="!showCloseButton"
+          ref="popover__close-button"
+          :role="role === 'menu' ? 'menuitem' : undefined"
           @close="closePopover"
         />
       </dt-lazy-show>
@@ -712,7 +715,7 @@ export default {
     labelledBy () {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
-      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
+      return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor')) || undefined;
     },
 
     modalValidationState () {
@@ -859,6 +862,13 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+
+    getCloseButtonElement () {
+      const closeButton = this.showCloseButton
+        ? this.$refs.popover__header?.$refs['popover__close-button']
+        : this.$refs['popover__close-button'];
+      return returnFirstEl(closeButton?.$el);
+    },
 
     getModeReferenceEl () {
       return this.$refs.anchor;

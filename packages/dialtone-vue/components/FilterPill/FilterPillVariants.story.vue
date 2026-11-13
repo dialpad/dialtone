@@ -49,20 +49,26 @@
       <span class="d-label--sm">Custom label slot: conversation type</span>
       <dt-filter-pill
         v-model="conversationTypes"
+        label="Conversation type"
         :start-tooltip-text="selectedConversationType !== 'All Conversations'
           ? 'Conversation type'
           : ''"
         end-tooltip-text="Remove"
         @clear="selectedConversationType = 'All Conversations'"
       >
-        <template #default>
+        <template #default="{ label }">
+          <span
+            v-if="selectedConversationType !== 'All Conversations'"
+            class="d-vi-visible-sr"
+          >{{ label }}: </span>
           {{ selectedConversationType === 'All Conversations'
-            ? 'Conversation type'
+            ? label
             : selectedConversationType }}
         </template>
         <template #content>
           <dt-radio-group
             v-model="selectedConversationType"
+            aria-label="Conversation type"
             name="conversation-type-filter"
           >
             <dt-radio
@@ -100,14 +106,17 @@
       <span class="d-label--sm">Radio selection (always active)</span>
       <dt-filter-pill
         v-model="internalExternal"
+        label="Conversation scope"
         :show-clear="false"
       >
-        <template #default>
+        <template #default="{ label }">
+          <span class="d-vi-visible-sr">{{ label }}: </span>
           {{ selectedIEFilter || 'Internal and external' }}
         </template>
         <template #content>
           <dt-radio-group
             v-model="selectedIEFilter"
+            aria-label="Conversation scope"
             name="internal-external-filter"
           >
             <dt-radio
@@ -145,6 +154,7 @@
       <span class="d-label--sm">Dropdown: conversation type</span>
       <dt-filter-pill
         v-model="dropdownConversationTypes"
+        label="Conversation type"
         :start-tooltip-text="selectedDropdownType !== 'All Conversations'
           ? 'Conversation type'
           : ''"
@@ -152,21 +162,32 @@
         use-dropdown
         @clear="resetDropdownType"
       >
-        <template #default>
+        <template #default="{ label }">
+          <span
+            v-if="selectedDropdownType !== 'All Conversations'"
+            class="d-vi-visible-sr"
+          >{{ label }}: </span>
           {{ selectedDropdownType === 'All Conversations'
-            ? 'Conversation type'
+            ? label
             : selectedDropdownType }}
         </template>
         <template #content="{ close }">
           <dt-list-item
             v-for="filter in dropdownConversationTypes"
             :key="filter.name"
-            role="menuitem"
+            role="menuitemradio"
             navigation-type="arrow-keys"
             :selected="filter.name === selectedDropdownType"
             @click="selectDropdownType(filter.name, close)"
           >
             {{ filter.name }}
+            <template #selected>
+              <dt-icon-check
+                size="200"
+                :class="{ 'd-vi-hidden': filter.name !== selectedDropdownType }"
+                aria-hidden="true"
+              />
+            </template>
           </dt-list-item>
         </template>
       </dt-filter-pill>
@@ -237,7 +258,7 @@ import { BUTTON_SIZE_MODIFIERS } from '@/components/Button';
 import { DtStack } from '@/components/Stack';
 import { DtRadioGroup } from '@/components/RadioGroup';
 import { DtRadio } from '@/components/Radio';
-import { DtIconFilter } from '@dialpad/dialtone-icons/vue';
+import { DtIconFilter, DtIconCheck } from '@dialpad/dialtone-icons/vue';
 import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue';
 
 import { DtText } from '../Text/index';
@@ -251,6 +272,7 @@ export default {
     DtFilterPill,
     DtStack,
     DtIconFilter,
+    DtIconCheck,
     DtIconBoxSelect,
     DtText,
     DtListItem,

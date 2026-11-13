@@ -8,10 +8,318 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 combinator: DtFilterPill
 ---
 
+Controlled selection, trailing slots and `opened` are unreleased. Dialtone 10.5.1 predates these APIs; use a compatible published release when available.
+
+<!-- @example {"exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
+```vue demo-only
+<dt-filter-pill
+  v-model:selected="heroSelected"
+  :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
+  label="Filter by"
+  neutral-value="all"
+  end-tooltip-text="Clear"
+  use-dropdown
+/>
+```
+
+## Usage
+
+Pass an `options` array when the component mounts and bind `v-model:selected` to manage selection in your application. Start with `[]` while loading options.
+
+If you already use `v-model`, keep the same `{ name, active? }[]` array and update each item’s `active` value in place. Don’t combine the two selection APIs.
+
+Choose the selection API and controlled dropdown/popover pattern when mounting. Use a new `key` to switch either.
+
+<dialtone-usage>
+<template #do>
+
+- Filter a list, table or other set of results by a specific attribute.
+- Use a dropdown for one choice and a checkbox popover for multiple choices.
+- Give each filter a meaningful label and its Clear button an accessible name.
+
+</template>
+
+<template #dont>
+
+- Use a filter pill as a general-purpose action button.
+- Use a filter pill for a standalone on/off setting.
+
+</template>
+</dialtone-usage>
+
+The next two examples use this Vue setup:
+
+```js
+import { ref } from 'vue';
+
+const selectedMessage = ref('all');
+const selectedChannels = ref([]);
+```
+
+### Controlled single selection
+
+Use a string or `null` for `selected`. Each option needs a unique string `value` and a `label`. `shortLabel` changes the pill text; `null` falls back to `label`. You can replace options or translated labels while the dropdown stays open.
+
+Set `neutral-value` to the choice that Clear restores. That choice stays checked without making the pill active. Omit it or use `null` for no neutral choice; an empty string is valid. Nothing is selected automatically.
+
+Arrow keys move focus without changing selection. The filter’s label stays available to screen readers.
+
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
+```vue demo
+<dt-filter-pill
+  v-model:selected="selectedMessage"
+  :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
+  label="Filter by"
+  neutral-value="all"
+  end-tooltip-text="Clear"
+  use-dropdown
+/>
+
+<!-- @code -->
+<script setup>
+import { ref } from 'vue';
+import { DtFilterPill } from '@dialpad/dialtone/vue';
+
+const selectedMessage = ref('all');
+</script>
+
+<template>
+  <dt-filter-pill
+    v-model:selected="selectedMessage"
+    :options="[{ value: 'all', label: 'All Messages', shortLabel: 'All' }, { value: 'unread', label: 'Unread' }, { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' }]"
+    label="Filter by"
+    neutral-value="all"
+    end-tooltip-text="Clear"
+    use-dropdown
+  />
+</template>
+```
+
+Use `null` when nothing is selected.
+
+### Controlled multiple selection
+
+Use an array of strings for `selected`. Changes apply immediately unless you set `defer-selection`. Apply saves deferred edits; Cancel, Escape and dismissal discard them. Clear resets `selected` to `[]`.
+
+A different `selected` value replaces pending edits. Replacing it with the same selections, or changing the options, preserves them, including selections temporarily missing from the options.
+
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
+```vue demo
+<dt-filter-pill
+  v-model:selected="selectedChannels"
+  :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }, { value: 'chat', label: 'Chat' }]"
+  label="Channel"
+  end-tooltip-text="Clear"
+  defer-selection
+/>
+
+<!-- @code -->
+<script setup>
+import { ref } from 'vue';
+import { DtFilterPill } from '@dialpad/dialtone/vue';
+
+const selectedChannels = ref([]);
+</script>
+
+<template>
+  <dt-filter-pill
+    v-model:selected="selectedChannels"
+    :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }, { value: 'chat', label: 'Chat' }]"
+    label="Channel"
+    end-tooltip-text="Clear"
+    defer-selection
+  />
+</template>
+```
+
+The `content` slot provides `pendingSelected`, `apply` and `cancel`; the existing `v-model` API uses `pendingFilters`.
+
+In a custom footer, call `apply()` alone. It saves and closes on success. Calling `apply(); close()` cancels the pending Apply. Changes to `selected` in the same handler, before or after `apply()`, take priority. If you need to change `selected` after asynchronous work, finish `await apply()` first. Otherwise Apply may overwrite that change.
+
+Await `apply()` before work that depends on it. This does not wait for closing; use `opened(false)` before removal. Outside an open deferred-selection session, `apply()` does nothing.
+
+### Closing before removal
+
+Use `v-model:open` to keep your application’s open state in sync with the pill. People can still open it when `open` is `false`. If you handle `update:open` yourself, accept those updates; setting an unchanged `false` again cannot close it. Disabling the pill or making it read-only closes it.
+
+Before removing an open or closing pill, close it and wait for `opened(false)`. Keep its modal setting, anchor and scroll container unchanged until then. Removing it sooner can leave scrolling locked. Use the same sequence before navigation or replacing a header.
+
+`open(false)` and `update:open(false)` report that closing has started. `opened(false)` follows the completed transition and focus restoration. A cancelled close does not emit `opened(false)`. This event does not manage locks from other overlays.
+
+The example then moves focus to Reset. A pill that has never opened can be removed directly. The existing `v-model` API keeps its open-event timing.
+
+<!-- @example {"exclude":{"reason":"Terminal close/removal uses a named application handler and component refs beyond bounded lookup setup. The current Dialtone 10.5.1 consumer profile also lacks the controlled selection and opened notification APIs.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
+```vue demo
+<dt-stack direction="row" gap="100">
+  <dt-filter-pill
+    v-if="removalPillVisible"
+    v-model:selected="removalSelection"
+    :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }]"
+    label="Channel"
+    end-tooltip-text="Clear"
+    @opened="onRemovalOpened"
+  >
+    <template #footerContent="{ close }">
+      <dt-button :size="200" @click="removalRequested = true; close()">Remove after closing</dt-button>
+    </template>
+  </dt-filter-pill>
+  <dt-button ref="removalResetButton" kind="muted" importance="outlined" :size="200" @click="resetRemovalExample">Reset example</dt-button>
+</dt-stack>
+
+<!-- @code -->
+<script setup>
+import { ref, nextTick } from 'vue';
+import { DtButton, DtFilterPill, DtStack } from '@dialpad/dialtone/vue';
+
+const removalPillVisible = ref(true);
+const removalRequested = ref(false);
+const removalSelection = ref(['email']);
+const removalResetButton = ref(null);
+async function onRemovalOpened (isOpen) {
+  if (isOpen || !removalRequested.value) return;
+  removalPillVisible.value = false;
+  removalRequested.value = false;
+  await nextTick();
+  removalResetButton.value?.$el?.focus();
+}
+function resetRemovalExample () {
+  removalRequested.value = false;
+  removalSelection.value = ['email'];
+  removalPillVisible.value = true;
+}
+</script>
+
+<template>
+  <dt-stack direction="row" gap="100">
+    <dt-filter-pill
+      v-if="removalPillVisible"
+      v-model:selected="removalSelection"
+      :options="[{ value: 'email', label: 'Email' }, { value: 'phone', label: 'Phone' }]"
+      label="Channel"
+      end-tooltip-text="Clear"
+      @opened="onRemovalOpened"
+    >
+      <template #footerContent="{ close }">
+        <dt-button :size="200" @click="removalRequested = true; close()">Remove after closing</dt-button>
+      </template>
+    </dt-filter-pill>
+    <dt-button ref="removalResetButton" kind="muted" importance="outlined" :size="200" @click="resetRemovalExample">Reset example</dt-button>
+  </dt-stack>
+</template>
+```
+
+## Labels and counts
+
+Use `anchorEnd` and `optionEnd` to add counts while keeping the built-in labels and selection behavior. Hide the decorative badge from screen readers and provide its meaning as text. Translate count text with your application’s plural rules.
+
+<!-- @example {"exclude":{"reason":"Named application handler, reactive options and computed count setup exceed bounded lookup extraction; the current Dialtone 10.5.1 consumer pin also predates options/selected.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+
+```vue demo
+<dt-stack gap="200">
+  <dt-filter-pill
+    :selected="currentMessage"
+    :options="messageOptions"
+    label="Filter by"
+    neutral-value="all"
+    end-tooltip-text="Clear"
+    use-dropdown
+    @selection-change="applyMessageFilter"
+  >
+    <template #headerContent>Filter by</template>
+    <template #anchorEnd="{ selected }">
+      <template v-if="selected === 'unread' && unreadCount > 0">
+        <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+        <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+      </template>
+    </template>
+    <template #optionEnd="{ option }">
+      <template v-if="option.value === 'unread' && unreadCount > 0">
+        <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+        <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+      </template>
+    </template>
+  </dt-filter-pill>
+  <dt-stack direction="row" gap="100">
+    <dt-button kind="muted" importance="outlined" :size="200" @click="unreadCount = unreadCount === 12 ? 100 : unreadCount === 100 ? 0 : 12">Change count</dt-button>
+    <dt-button kind="muted" importance="outlined" :size="200" @click="currentMessage = 'mentions'">Set Mentions externally</dt-button>
+  </dt-stack>
+  <dt-text variant="code-sm">Application commands: {{ messageCommands }}</dt-text>
+</dt-stack>
+
+<!-- @code -->
+<script setup>
+import { ref, computed } from 'vue';
+import { DtBadge, DtButton, DtFilterPill, DtStack, DtText } from '@dialpad/dialtone/vue';
+
+const currentMessage = ref('all');
+const unreadCount = ref(12);
+const messageCommands = ref(0);
+const messageOptions = ref([
+  { value: 'all', label: 'All Messages', shortLabel: 'All' },
+  { value: 'unread', label: 'Unread' },
+  { value: 'starred', label: 'Starred' },
+  { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
+]);
+const countText = computed(() => unreadCount.value > 99 ? '99+' : String(unreadCount.value));
+const messageCountText = computed(() => `${unreadCount.value} unread ${unreadCount.value === 1 ? 'message' : 'messages'}`);
+function applyMessageFilter (action) {
+  currentMessage.value = action.value;
+  messageCommands.value++;
+}
+</script>
+
+<template>
+  <dt-stack gap="200">
+    <dt-filter-pill
+      :selected="currentMessage"
+      :options="messageOptions"
+      label="Filter by"
+      neutral-value="all"
+      end-tooltip-text="Clear"
+      use-dropdown
+      @selection-change="applyMessageFilter"
+    >
+      <template #headerContent>Filter by</template>
+      <template #anchorEnd="{ selected }">
+        <template v-if="selected === 'unread' && unreadCount > 0">
+          <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+          <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+        </template>
+      </template>
+      <template #optionEnd="{ option }">
+        <template v-if="option.value === 'unread' && unreadCount > 0">
+          <dt-badge type="bulletin" kind="count" aria-hidden="true">{{ countText }}</dt-badge>
+          <span class="d-vi-visible-sr">, {{ messageCountText }}</span>
+        </template>
+      </template>
+    </dt-filter-pill>
+    <dt-stack direction="row" gap="100">
+      <dt-button kind="muted" importance="outlined" :size="200" @click="unreadCount = unreadCount === 12 ? 100 : unreadCount === 100 ? 0 : 12">Change count</dt-button>
+      <dt-button kind="muted" importance="outlined" :size="200" @click="currentMessage = 'mentions'">Set Mentions externally</dt-button>
+    </dt-stack>
+    <dt-text variant="code-sm">Application commands: {{ messageCommands }}</dt-text>
+  </dt-stack>
+</template>
+```
+
+Use `selection-change` when choosing a filter also runs an application command. It provides `value`, `previousValue`, `reason` and `changed`. Update selection in this handler or through `v-model:selected`, using one write path. Don’t write it again from `clear`.
+
+Choosing the current radio item still emits `selection-change` with `changed: false`. Updating props or counts does not emit it or close the menu.
+
+The badge shows `99+` above 99 and hides at zero. Screen readers receive the full count.
+
+## Combined filters
+
+These examples use `v-model`. Reset updates the items in the existing arrays.
+
 ```vue demo-only
 <dt-stack direction="row" gap="100">
   <dt-filter-pill
-    :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
+    v-model="momentCount"
     label="Moment"
     end-tooltip-text="Remove"
   >
@@ -24,6 +332,7 @@ combinator: DtFilterPill
   </dt-filter-pill>
   <dt-filter-pill
     v-model="heroConversationTypes"
+    label="Conversation type"
     :start-tooltip-text="selectedHeroConversationType !== 'All Conversations'
       ? 'Conversation type'
       : ''"
@@ -31,26 +340,37 @@ combinator: DtFilterPill
     use-dropdown
     @clear="resetHeroConversationType"
   >
-    <template #default>
+    <template #default="{ label }">
+      <span
+        v-if="selectedHeroConversationType !== 'All Conversations'"
+        class="sr-only"
+      >{{ label }}: </span>
       {{ selectedHeroConversationType === 'All Conversations'
-        ? 'Conversation type'
+        ? label
         : selectedHeroConversationType }}
     </template>
     <template #content="{ close }">
       <dt-list-item
         v-for="filter in heroConversationTypes"
         :key="filter.name"
-        role="menuitem"
+        role="menuitemradio"
         navigation-type="arrow-keys"
         :selected="filter.name === selectedHeroConversationType"
         @click="selectHeroConversationType(filter.name, close)"
       >
         {{ filter.name }}
+        <template #selected>
+          <dt-icon-check
+            size="200"
+            :class="{ 'd-vi-hidden': filter.name !== selectedHeroConversationType }"
+            aria-hidden="true"
+          />
+        </template>
       </dt-list-item>
     </template>
   </dt-filter-pill>
   <dt-filter-pill
-    :model-value="[{name: 'Email'}, {name: 'Phone', active: true}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
+    v-model="deferredFilters"
     label="Channel"
     end-tooltip-text="Remove"
     popover-footer-class="d-pie-200 d-py-150"
@@ -62,38 +382,6 @@ combinator: DtFilterPill
   </dt-button>
 </dt-stack>
 ```
-
-## Usage
-
-### Key concepts
-
-- `v-model` expects an array of `{ name, active? }` objects. The pill is "active" when any item has `active: true`.
-- The `default` scoped slot overrides the pill label and receives: `{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }`.
-- The `content` slot overrides the popover body, replacing the default checkbox list with custom content (e.g., radio groups).
-- **In-place mutation**: The pill keeps the initial `modelValue` array reference. Mutate its objects in place with `forEach`; replacing the array with `map` does not update the pill's internal reference.
-
-The built-in label localizes the aggregate “All” selection and the overflow title (“plus 1 other” or “plus 2 others” in English). Option names are displayed as supplied, including an option named “All”. New strings use English fallback until translations are available. Fluent may surround counts with Unicode bidirectional isolation marks in the title attribute.
-
-For compatibility, the `default` slot's `activeFilterList` binding remains the literal string `'All'` when every item is active and there is more than one item. Custom labels can continue comparing this value; localize custom slot content in your application. `activeFilterOverflow` remains a string such as `'+2'`.
-
-<dialtone-usage>
-<template #do>
-
-- Use to filter a list, table, or other data set by a specific attribute (e.g., channel, contact center, date range).
-- Use the default checkbox popover for multi-select filters where several options can be active at once.
-- Use `use-dropdown` for single-select filters where only one option applies at a time (e.g., conversation type).
-- Provide `end-tooltip-text` on the clear button so it has an accessible name for screen readers.
-</template>
-
-<template #dont>
-
-- Don't use as a general-purpose action button — filter pills are for narrowing data, not triggering commands.
-- Don't use for binary on/off settings — use a [Toggle](toggle.md).
-- Don't omit `label` and the `default` slot — the pill must always have visible text identifying the filter category.
-- Don't replace the array with `map` when toggling active state — mutate objects in-place with `forEach` to keep the pill's internal reference in sync.
-</template>
-
-</dialtone-usage>
 
 ## Variants
 
@@ -112,7 +400,11 @@ For compatibility, the `default` slot's `activeFilterList` binding remains the l
 
 ### Active
 
-The pill becomes active when any filter item has `active: true`.
+For single selection, the neutral choice keeps the pill inactive. Any other selected value, including a value missing from `options`, makes it active and clearable.
+
+For multiple choices, the summary shows “All” only when every option is selected, more than one option exists and no selected values are unknown. Otherwise, it shows the first matching label in selection order, or “Unavailable” if none match.
+
+With `v-model`, `active: true` makes an item active.
 
 ```vue demo
 <!-- @wrapper -->
@@ -167,6 +459,17 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 ```
 
 ## Interaction patterns
+
+Both overlays default to a minimum inline size matching the entire FilterPill, including its Clear button.
+Longer content can make the overlay wider. Set `overlay-min-inline-size="300"` to use `--dt-layout-300`,
+following DtBox's fixed layout scale; percentage values are not supported. Use `overlay-min-inline-size="0"` for natural content sizing.
+The default is `anchor`; `popover-max-width` still caps the overlay.
+
+Popover content defaults to block spacing `100` and inline spacing `150`. Padding utilities passed through
+`popover-content-class` override these defaults. Set `popover-padding` to `none`, `small`, `medium`, or `large`
+for a uniform padding preset; `large` restores the previous `d-p-200` content padding. For custom padding,
+use `popover-padding="none"` with `popover-content-class`, for example `popover-content-class="d-py-150 d-px-200"`.
+Header/footer spacing and dropdown padding are unchanged.
 
 ### Clearable
 
@@ -223,12 +526,13 @@ Cancel, Escape, or clicking outside discards pending changes.
 
 Setting `use-dropdown` switches the overlay from a popover to a dropdown with keyboard-navigable
 list items. This provides arrow key navigation, highlight management, and Enter/Space selection
-out of the box — ideal for single-select filter patterns.
+out of the box — ideal for single-select filter patterns. Use `role="menuitemradio"` with `:selected` for persistent, mutually exclusive choices; use `menuitem` for actions. The radio role exposes `aria-checked` independently of keyboard highlight. Built-in dropdown rows reserve space for the selected checkmark. For custom content, keep a decorative checkmark in each row and use `d-vi-hidden` on unselected markers, as shown below, to retain its layout space.
 
 ```vue demo
 <dt-stack direction="row" gap="100">
   <dt-filter-pill
     v-model="dropdownTypes"
+    label="Conversation type"
     :start-tooltip-text="selectedDropdownType !== 'All Conversations'
       ? 'Conversation type'
       : ''"
@@ -236,21 +540,32 @@ out of the box — ideal for single-select filter patterns.
     use-dropdown
     @clear="resetDropdownType"
   >
-    <template #default>
+    <template #default="{ label }">
+      <span
+        v-if="selectedDropdownType !== 'All Conversations'"
+        class="sr-only"
+      >{{ label }}: </span>
       {{ selectedDropdownType === 'All Conversations'
-        ? 'Conversation type'
+        ? label
         : selectedDropdownType }}
     </template>
     <template #content="{ close }">
       <dt-list-item
         v-for="filter in dropdownTypes"
         :key="filter.name"
-        role="menuitem"
+        role="menuitemradio"
         navigation-type="arrow-keys"
         :selected="filter.name === selectedDropdownType"
         @click="selectDropdownType(filter.name, close)"
       >
         {{ filter.name }}
+        <template #selected>
+          <dt-icon-check
+            size="200"
+            :class="{ 'd-vi-hidden': filter.name !== selectedDropdownType }"
+            aria-hidden="true"
+          />
+        </template>
       </dt-list-item>
     </template>
   </dt-filter-pill>
@@ -258,6 +573,7 @@ out of the box — ideal for single-select filter patterns.
 <!-- @code -->
 <dt-filter-pill
   :model-value="[{name: &apos;All Conversations&apos;}, {name: &apos;Only Calls&apos;}, {name: &apos;Only Meetings&apos;}, {name: &apos;Only Digital&apos;}]"
+  label="Conversation type"
   :start-tooltip-text="selectedType !== &apos;All Conversations&apos;
     ? &apos;Conversation type&apos;
     : &apos;&apos;"
@@ -265,21 +581,32 @@ out of the box — ideal for single-select filter patterns.
   use-dropdown
   @clear="resetType"
 >
-  <template #default>
+  <template #default="{ label }">
+    <span
+      v-if="selectedType !== &apos;All Conversations&apos;"
+      class="sr-only"
+    >{{ label }}: </span>
     {{ selectedType === &apos;All Conversations&apos;
-      ? &apos;Conversation type&apos;
+      ? label
       : selectedType }}
   </template>
   <template #content="{ close }">
     <dt-list-item
       v-for="filter in conversationTypes"
       :key="filter.name"
-      role="menuitem"
+      role="menuitemradio"
       navigation-type="arrow-keys"
       :selected="filter.name === selectedType"
       @click="selectType(filter.name, close)"
     >
       {{ filter.name }}
+      <template #selected>
+        <dt-icon-check
+          size="200"
+          :class="{ 'd-vi-hidden': filter.name !== selectedType }"
+          aria-hidden="true"
+        />
+      </template>
     </dt-list-item>
   </template>
 </dt-filter-pill>
@@ -289,7 +616,7 @@ out of the box — ideal for single-select filter patterns.
 
 ### Default
 
-Using the `default` slot, you can override the `label` prop.
+The `default` slot replaces the built-in anchor-label content. Preserve the filter dimension and current selection in its accessible name; the `label` prop alone does not add that context after you replace the content. See [Labelling guidelines](#labelling-guidelines).
 
 #### Example: Count
 
@@ -315,7 +642,7 @@ Using the `default` scoped slot, you can display a count of active filters along
 
 #### Example: Active filter list
 
-Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2").
+`activeFilterList` returns the first active label, or the literal `'All'` when every item in a multi-item list is active. `activeFilterOverflow` returns text such as `'+2'`. Translate text you render through these slots; built-in controlled summaries use Dialtone translations.
 
 <!-- @example {"key":"overflow"} -->
 
@@ -349,21 +676,27 @@ The label updates to show the selected option, and a clear button resets to the 
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
   <dt-filter-pill
-    :model-value="[{name: 'All Conversations'}, {name: 'Only Calls'}, {name: 'Only Meetings'}, {name: 'Only Digital'}]"
+    v-model="conversationTypes"
+    label="Conversation type"
     :start-tooltip-text="selectedConversationType !== 'All Conversations'
       ? 'Conversation type'
       : ''"
     end-tooltip-text="Remove"
     @clear="selectedConversationType = 'All Conversations'"
   >
-    <template #default>
+    <template #default="{ label }">
+      <span
+        v-if="selectedConversationType !== 'All Conversations'"
+        class="sr-only"
+      >{{ label }}: </span>
       {{ selectedConversationType === 'All Conversations'
-        ? 'Conversation type'
+        ? label
         : selectedConversationType }}
     </template>
     <template #content>
       <dt-radio-group
         v-model="selectedConversationType"
+        aria-label="Conversation type"
         name="conversation-type-doc-filter"
       >
         <dt-radio
@@ -383,6 +716,8 @@ The label updates to show the selected option, and a clear button resets to the 
 
 Using the `content` slot, you can override the popover content with custom markup.
 
+In a controlled dropdown, `headerContent` adds a heading. If you replace `content`, provide your own headings, accessible name, roles and keyboard handling. The built-in dropdown heading is omitted. Popover headers keep their existing behavior.
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
@@ -399,14 +734,14 @@ Using the `content` slot, you can override the popover content with custom marku
 
 ## Content Mode
 
-Filter Pill popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+Filter Pill popover and dropdown content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 ```vue demo
-<dt-filter-pill content-mode="invert" label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" end-tooltip-text="Remove" />
+<dt-filter-pill content-mode="invert" use-dropdown label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" end-tooltip-text="Remove" />
 <!-- @code -->
-<dt-filter-pill content-mode="invert">...</dt-filter-pill>
-<dt-filter-pill content-mode="dark">...</dt-filter-pill>
-<dt-filter-pill content-mode="light">...</dt-filter-pill>
+<dt-filter-pill content-mode="invert" use-dropdown>...</dt-filter-pill>
+<dt-filter-pill content-mode="dark" use-dropdown>...</dt-filter-pill>
+<dt-filter-pill content-mode="light" use-dropdown>...</dt-filter-pill>
 ```
 
 ## Accessibility
@@ -430,11 +765,14 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 
 ### Labelling guidelines
 
-- Always provide a `label` prop or populate the `default` slot so the pill has visible text.
-- When active filters change the visible label (e.g., radio selection patterns), set `start-tooltip-text` to the original label so the full context remains available on hover and to assistive technology.
+- Provide a meaningful dimension `label`, such as `Conversation type`. Built-in controlled labels include the dimension and current selection in the accessible name even when only the selection is visible. A separate external visual label is not required.
+- When replacing the `default` slot, include both the dimension and current selection in its accessible content. A screen-reader-only prefix, as shown in the custom-label examples, preserves context while keeping the visible label compact. Use `anchorEnd` or `optionEnd` when adding counts without replacing the built-in label.
+- Use `start-tooltip-text` to repeat the dimension on hover when helpful. The tooltip does not replace a contextual accessible name; users should still understand the filter when they return focus after selecting a value.
 - Provide `end-tooltip-text` for the clear button to give it a meaningful accessible name (e.g., "Remove filter").
 
 ## Vue API
+
+An `options` array at mount enables controlled selection. Omitted, `undefined`, `null` or other non-array values use the existing `v-model` API. Invalid inputs disable a controlled pill until corrected; they do not switch it back to `v-model`. FilterPill does not change your option or selection data.
 
 <component-vue-api component-name="filterPill"></component-vue-api>
 
@@ -443,7 +781,44 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 <component-class-table component-name="filter-pill"></component-class-table>
 
 <script setup>
-import { ref, computed, inject } from 'vue';
+import { ref, computed, inject, nextTick } from 'vue';
+import { DtIconCheck } from '@dialpad/dialtone-icons/vue';
+
+const removalPillVisible = ref(true);
+const removalRequested = ref(false);
+const removalSelection = ref(['email']);
+const removalResetButton = ref(null);
+async function onRemovalOpened (isOpen) {
+  if (isOpen || !removalRequested.value) return;
+  removalPillVisible.value = false;
+  removalRequested.value = false;
+  await nextTick();
+  removalResetButton.value?.$el?.focus();
+}
+function resetRemovalExample () {
+  removalRequested.value = false;
+  removalSelection.value = ['email'];
+  removalPillVisible.value = true;
+}
+
+const heroSelected = ref('all');
+const selectedMessage = ref('all');
+const selectedChannels = ref([]);
+const currentMessage = ref('all');
+const unreadCount = ref(12);
+const messageCommands = ref(0);
+const messageOptions = ref([
+  { value: 'all', label: 'All Messages', shortLabel: 'All' },
+  { value: 'unread', label: 'Unread' },
+  { value: 'starred', label: 'Starred' },
+  { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
+]);
+const countText = computed(() => unreadCount.value > 99 ? '99+' : String(unreadCount.value));
+const messageCountText = computed(() => `${unreadCount.value} unread ${unreadCount.value === 1 ? 'message' : 'messages'}`);
+function applyMessageFilter (action) {
+  currentMessage.value = action.value;
+  messageCommands.value++;
+}
 
 const heroConversationTypes = ref([
   {name: 'All Conversations'},

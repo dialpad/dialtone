@@ -1,17 +1,143 @@
 
 /* eslint-disable max-len */
+import { watch } from 'vue';
+
+const messageOptions = [
+  { value: 'all', label: 'All Messages', shortLabel: 'All' },
+  { value: 'unread', label: 'Unread' },
+  { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
+];
+const channelOptions = [
+  { value: 'email', label: 'Email' },
+  { value: 'phone', label: 'Phone' },
+  { value: 'chat', label: 'Chat' },
+];
+
+function controlledPreset (props = {}, slots = {}) {
+  const single = props.useDropdown?.initialValue ?? true;
+  return {
+    metadata: {
+      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection.`,
+      lookupExclude: {
+        reason: 'Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.',
+        owner: 'DLT-3736 / Dialtone component and lookup maintainers',
+      },
+    },
+    props: {
+      options: { initialValue: single ? messageOptions : channelOptions },
+      selected: { initialValue: single ? 'all' : [], types: single ? ['string', 'null'] : ['array'] },
+      neutralValue: { initialValue: single ? 'all' : undefined },
+      label: { initialValue: single ? 'Filter by' : 'Channel' },
+      useDropdown: { initialValue: single, lockControl: true },
+      endTooltipText: { initialValue: 'Clear' },
+      ...props,
+    },
+    slots,
+  };
+}
+
+// Keep the captured owner and its scroll context mounted until its own cleanup finishes.
+function beforePreviewRemount (pill, { signal }) {
+  const overlay = pill.$refs.overlay;
+  const popover = overlay?.$options.name === 'DtDropdown' ? overlay.$refs.popover : overlay;
+  if (!popover || (!pill.isOpen && !popover.isOpen && popover.isDialogAriaHidden)) return;
+
+  const anchor = pill.$el.querySelector('[data-qa="dt-filter-pill__button"]');
+  const document = anchor.ownerDocument;
+  const focused = document.activeElement;
+  const initiator = focused !== document.body && !pill.$el.contains(focused) &&
+    !popover.$refs.popover__content?.contains(focused) ? focused : null;
+
+  return new Promise(resolve => {
+    const finish = () => {
+      stop();
+      signal.removeEventListener('abort', finish);
+      resolve(document.activeElement === anchor ? replacement => {
+        if (signal.aborted || (document.activeElement !== document.body && document.activeElement !== anchor)) return;
+        const destination = initiator?.isConnected ? initiator : replacement.$el.querySelector('[data-qa="dt-filter-pill__button"]');
+        if (destination?.isConnected) destination.focus({ preventScroll: true });
+      } : undefined);
+    };
+    const stop = watch(
+      () => [pill.isOpen, popover.isOpen, popover.isDialogAriaHidden],
+      ([open, ownerOpen, hidden]) => {
+        if (open) pill.cancelSelection();
+        else if (!ownerOpen && hidden) finish();
+      },
+      { flush: 'post' },
+    );
+    signal.addEventListener('abort', finish, { once: true });
+    pill.cancelSelection();
+  });
+}
 
 export default {
+  defaults: {
+    props: {
+      overlayMinInlineSize: { tokenCategory: 'layout' },
+    },
+    metadata: {
+      initialPreset: 'controlled default',
+      beforePreviewRemount,
+      previewIdentity: bindings => Array.isArray(bindings.options)
+        ? ['controlled', Boolean(bindings.useDropdown)]
+        : ['legacy', bindings.modelValue],
+    },
+  },
   exclusions: [
     {
+      when: { options: Array.isArray },
+      hide: { props: ['modelValue'] },
+    },
+    {
+      when: { options: value => !Array.isArray(value) },
+      hide: { props: ['selected', 'neutralValue', 'open'], slots: ['anchorEnd', 'optionEnd'] },
+    },
+    {
       when: { useDropdown: true },
-      disable: { props: ['deferSelection'] },
+      disable: {
+        props: ['deferSelection', 'popoverContentClass', 'popoverHeaderClass', 'popoverFooterClass', 'popoverDialogClass', 'popoverPadding'],
+        slots: ['footerContent'],
+      },
     },
     {
       when: { useDropdown: v => !v },
       disable: { props: ['dropdownListClass'] },
     },
+    {
+      when: { options: Array.isArray, useDropdown: value => !value },
+      hide: { props: ['neutralValue'] },
+    },
   ],
+
+  'controlled default': controlledPreset(),
+
+  'controlled active': controlledPreset({ selected: { initialValue: 'mentions', types: ['string', 'null'] } }),
+
+  'controlled multiple': controlledPreset({
+    useDropdown: { initialValue: false, lockControl: true },
+    selected: { initialValue: ['phone'], types: ['array'] },
+  }),
+
+  'controlled deferred': controlledPreset({
+    useDropdown: { initialValue: false, lockControl: true },
+    deferSelection: { initialValue: true },
+    popoverFooterClass: { initialValue: 'd-pie-200 d-py-150' },
+  }),
+
+  'controlled empty options': controlledPreset({ options: { initialValue: [] } }),
+
+  'controlled counts': controlledPreset({ selected: { initialValue: 'unread', types: ['string', 'null'] } }, {
+    headerContent: { initialValue: 'Filter by' },
+    anchorEnd: { initialValue: `<template v-if="selected === 'unread'">
+  <dt-badge type="bulletin" kind="count" aria-hidden="true">12</dt-badge>
+  <span class="d-vi-visible-sr">, 12 unread messages</span>
+</template>` },
+    optionEnd: { initialValue: `<template v-if="option.value === 'unread'">
+  <dt-badge type="bulletin" kind="count" aria-hidden="true">12</dt-badge>
+  <span class="d-vi-visible-sr">, 12 unread messages</span>
+</template>` },
+  }),
 
   default: {
     props: {

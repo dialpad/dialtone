@@ -1,7 +1,36 @@
 import { expect, it } from 'vitest';
-import { assertTemplateBindings, assertStaticHtml } from '../src/generators/example-template.mjs';
+import { assertTemplateBindings, assertStaticHtml, sourceSetupForTemplate } from '../src/generators/example-template.mjs';
 import { buildRecords } from '../src/generators/build-public-docs.mjs';
 import { resolve } from 'node:path';
+
+it.each(['true', 'false', '\'all\'', '"unread"', 'null', '[]', '[\'unread\', \'needs-review\']'])(
+  'extracts only referenced literal ref setup: %s', value => {
+    const raw = `<script setup>
+import { ref, computed } from 'vue';
+const selected = ref(${value});
+const unrelated = computed(() => loadSettings());
+</script>`;
+    const template = '<dt-filter-pill v-model:selected="selected" :options="[]" />';
+    const setup = sourceSetupForTemplate(raw, template);
+    expect(setup).toBe(`import { ref } from 'vue';\nconst selected = ref(${value});\n`);
+    expect(() => assertTemplateBindings(template, setup)).not.toThrow();
+    expect(sourceSetupForTemplate(raw, '<dt-filter-pill :options="[]" />')).toBe('');
+  },
+);
+
+it.each([
+  'ref(loadSettings())', 'computed(() => "all")', 'ref({ value: "all" })',
+  'ref(1)', 'ref()', 'ref("all", "unread")',
+  'ref(["all", null])', 'ref(["all", 1])', 'ref(["all", true])',
+  'ref([["all"]])', 'ref([...values])', 'ref([, "all"])',
+  'ref(`all`)', 'ref(defaultValue)', 'ref(() => "all")', '() => {}',
+])('keeps arbitrary setup unsupported: %s', initializer => {
+  const raw = `<script setup>
+import { ref, computed } from 'vue';
+const selected = ${initializer};
+</script>`;
+  expect(() => sourceSetupForTemplate(raw, '<p>{{ selected }}</p>')).toThrow('Unsupported source setup for selected');
+});
 
 it('rejects missing state while retaining source setup and lexical template scopes', () => {
   expect(() => assertTemplateBindings('<dt-toggle v-model="checked" />')).toThrow('checked');

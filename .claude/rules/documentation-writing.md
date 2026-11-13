@@ -141,7 +141,7 @@ Use `<!-- @custom -->` when the default demo wrapper styles (padding, width, bac
 - Never use raw HTML with component CSS classes (e.g., `<div class="d-card">`) — always use the Vue component (`<dt-card>`)
 - Use `<dt-stack>` for spacing wrappers — never `<div class="d-stack*">` or `<div class="d-flow*">` (deprecated)
 - Layout utility classes like `d-w100p` and `d-d-grid` on wrapper `<div>` elements are fine
-- Do NOT put empty lines inside fenced demo blocks — markdown-it splits the block at blank lines
+- Blank lines are supported inside fenced demo blocks. Keep fence boundaries and the `<!-- @code -->` separator intact.
 - Use `<!-- @bg classname -->` for custom background
 
 ### Legacy patterns (still supported)

@@ -20,7 +20,7 @@ keywords:
     logical-props,
   ]
 ai_summary: Recurring Dialtone Vue props, events, slots, and API patterns; supported values and exceptions depend on the selected component.
-last_updated: 2026-11-10
+last_updated: 2026-11-12
 related_packages: [dialtone-vue]
 ---
 
@@ -90,7 +90,7 @@ These are bound with Vue's `:class` binding on the inner element, separate from 
 
 ## v-model Contract
 
-All form components implement Vue 3 v-model via `modelValue` prop + `update:modelValue` emit:
+Most form components implement Vue 3 v-model via `modelValue` prop + `update:modelValue` emit:
 
 | Component    | modelValue type     | Notes                                        |
 | ------------ | ------------------- | -------------------------------------------- |
@@ -100,6 +100,18 @@ All form components implement Vue 3 v-model via `modelValue` prop + `update:mode
 | DtSelectMenu | `String \| Number`  |                                              |
 | DtToggle     | `Boolean \| String` | Supports `'mixed'` for indeterminate state   |
 | DtSlider     | `Number \| [Number, Number]` | A number is single-thumb mode, a 2-length array is range mode. Also emits `change` on commit only (pointer up / blur), separate from the continuous `update:modelValue` |
+
+FilterPill's `overlayMinInlineSize` defaults to `anchor`: both overlays have a minimum inline size matching the full pill, including Clear, while longer content may widen them. Custom values follow DtBox layout stops: `"300"` resolves to `var(--dt-layout-300)` and `"0"` restores natural content sizing. The shared fixed layout scale validates these values; this prop does not accept percentages or arbitrary CSS lengths. `popoverMaxWidth` still caps the result. Shared Popover/Dropdown `contentWidth="anchor"` remains an exact trigger-width setting.
+
+Controlled DtFilterPill selection and `opened` are unreleased; use a compatible published release when available. DtFilterPill selects its controlled contract only when `Array.isArray(options)` is true at creation, including `[]`: bind `v-model:selected` to `string | null` for `useDropdown=true`, or to a string array for the checkbox popover. Initial omitted, `undefined`, `null` or other non-array options preserve the existing mutable `modelValue` item contract. A controlled instance stays controlled if its options later become invalid, with safe unchecked, disabled choices. Keep the contract and controlled `useDropdown` pattern stable for an instance; remount with a key when intentionally switching them.
+
+Options and committed selection stay owned by the consumer. Optional `neutralValue` and option `shortLabel` treat `null` and `undefined` as absent; an empty string remains valid. Refreshing options alone preserves an open deferred draft. A semantic parent selection change replaces that draft. External writes made synchronously before or after calling `apply()` win over the draft. Writes after an `await` while Apply is pending can be overwritten; await `apply()` before issuing those later external writes. A custom controlled footer calls `apply()` alone; `apply(); close()` cancels the pending proposal. Awaiting Apply does not await terminal overlay cleanup.
+
+Use one write/side-effect path for a controlled FilterPill action. Bind `v-model:selected` to plain state and use `selection-change` for a needed side effect, or pass `:selected` and handle `selection-change` through an application setter. Do not invoke the same command from both events or from both `clear` and `selection-change`. The action payload reports a proposal, including same-value single activation; external selection changes do not emit it. See the [FilterPill guide](https://dialtone.dialpad.com/components/filter-pill.html) for deferred selection, neutral values and slot bindings. In the built-in controlled dropdown, `headerContent` supplies a noninteractive heading. A full `content` override owns its headings, accessible naming, roles and keyboard handling; popover headers retain their existing behavior.
+
+Five controlled source sections have owned lookup exclusions: the hero, single-selection and multiple-selection starters require the unreleased feature APIs, which `dt10-pinned` 10.5.1 predates. The Labels and counts section also needs application handlers, reactive options and computed counts beyond bounded setup. The Closing before removal section also needs named handlers and component refs beyond bounded setup. The six controlled Combinator presets remain withheld until compatible publication and profile qualification. Live documentation and Storybook demos remain available. All 11 legacy source-example IDs and the original `examples/presets/DtFilterPill/default` record are preserved. Generated legacy slot metadata uses the unchanged camelCase runtime binding names `activeFilters`, `activeFilterList`, `activeFilterOverflow` and `pendingFilters`.
+
+Controlled FilterPill visibility APIs are unreleased. `open` and `update:open` report logical visibility. `v-model:open` keeps parent state synchronized; a bound `false` does not veto opening, and repeatedly assigning an unchanged `false` while ignoring updates is not an observable close command. Its controlled-only `opened(boolean)` event follows the overlay's completed transition and cleanup. For removal, request closure and wait for `opened(false)`, keeping the modal, anchor and scroll container unchanged through that notification. The [FilterPill guide](https://dialtone.dialpad.com/components/filter-pill.html#closing-before-removal) shows the removal recipe.
 
 Visibility-toggle components use `update:open`:
 
@@ -115,7 +127,7 @@ Popover and Dropdown accept an optional `visibilityChangeCallback` prop. When su
 
 The callback runs inside a synchronous Vue watcher. An already-closed modal with no pending transition or retained scroll lock can be removed immediately. For an open or closing modal, keep `modal=true`, its anchor and its scroll container unchanged through the closing `opened(false)` notification: request closure if needed, then remove it after that notification. Changing `modal` or the anchor's scroll context after opening can leave the original lock active. `opened(false)` reports transition completion, not ownership of global scroll locks. Logical `open=false` alone does not establish that the leave transition has completed. Separately, defer a direct `app.unmount()` with `nextTick` to avoid interrupting Vue's render during prop delivery.
 
-`opened` and `update:open` report the current completed transition. Opening finishes initial focus before notifying listeners, so a focus choice made inside `opened` is preserved. `open=null` emits no `update:open`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
+For Popover and Dropdown, `opened` and `update:open` report the current completed transition. Opening finishes initial focus before notifying listeners, so a focus choice made inside `opened` is preserved. `open=null` emits no `update:open`. Canceled transitions and stale async completions do not notify terminal state or restore obsolete focus.
 
 With a boolean `open` prop, both components keep default anchor toggling disabled. `forwardAnchorArrowKeys` defaults to `false`; opting in forwards anchor ArrowUp/ArrowDown through `keydown` without toggling. A closed opted-in Dropdown lets the consumer handle default/propagation and preserves first-row focus only when opening is synchronously accepted in Dropdown's own emitted `keydown` callback. Ancestor DOM listeners and delayed updates do not carry that focus guarantee; handlers should distinguish anchor targets from content targets. Default anchor-arrow handling is unchanged when forwarding is disabled.
 
@@ -126,7 +138,8 @@ Native DOM events are forwarded as-is: `focus`, `blur`, `focusin`, `focusout`, `
 Custom events use the `update:{prop}` convention to stay compatible with `v-model`:
 
 ```text
-update:modelValue   — value changed
+update:modelValue   — default model value changed
+update:selected     — named selection model changed (controlled DtFilterPill)
 update:open         — visibility changed
 update:length       — input length changed (DtInput)
 update:invalid      — validation state changed (DtInput)
