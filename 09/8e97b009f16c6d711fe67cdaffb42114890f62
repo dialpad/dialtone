@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/Stack/StackAlignSelf.story.vue
+  s_97fcf7a472e5e8::t_a89691487bf777 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "098e97b009f16c6d711fe67cdaffb42114890f62",
+  "prompts": {},
+  "sessions": {
+    "s_97fcf7a472e5e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "84244da0-1121-4609-b2fc-e77a697165d3",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

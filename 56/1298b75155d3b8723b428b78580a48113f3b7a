@@ -1,0 +1,21 @@
+apps/dialtone-documentation/docs/components/stack.md
+  s_97fcf7a472e5e8::t_a863fc5ba46065 663
+packages/dialtone-vue/components/Stack/Stack.vue
+  s_97fcf7a472e5e8::t_79906e34b5a1ea 95-98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "561298b75155d3b8723b428b78580a48113f3b7a",
+  "prompts": {},
+  "sessions": {
+    "s_97fcf7a472e5e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "84244da0-1121-4609-b2fc-e77a697165d3",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
