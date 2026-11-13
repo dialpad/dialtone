@@ -37,7 +37,19 @@ ruleTester.run("deprecated-icons", rule, {
         {
             name: 'Dialtone Styles import',
             code: "import dialtoneCSS from '@dialpad/dialtone/lib/build/less/dialtone.less';",
-        }
+        },
+        {
+            name: 'Vue entry point import',
+            code: "import { DtButton } from '@dialpad/dialtone/vue';",
+        },
+        {
+            name: 'Vue component import',
+            code: "import { DtButton } from '@dialpad/dialtone/vue/lib/button';",
+        },
+        {
+            name: 'Vue component import from node_modules',
+            code: "import { DtButton } from '../node_modules/@dialpad/dialtone/vue/lib/button';",
+        },
     ],
 
     invalid: [
@@ -66,6 +78,29 @@ ruleTester.run("deprecated-icons", rule, {
                 {
                     messageId: "avoidDeprecatedImport"
                 }
+            ],
+        },
+        {
+            name: 'Old VUE icon import from node_modules',
+            code: "import IconSettings from '../node_modules/@dialpad/dialtone/vue/icons/IconSettings';",
+            errors: [
+                {
+                    messageId: "avoidDeprecatedImport"
+                }
+            ],
+        },
+        {
+            name: 'Consecutive old icon imports are all reported',
+            code: [
+                "import IconSettings from '@dialpad/dialtone/vue/icons/IconSettings';",
+                "import IconSettings2 from '@dialpad/dialtone/vue/icons/IconSettings';",
+                "import { DtButton } from '@dialpad/dialtone/vue/lib/button';",
+                "import IconSettings3 from '@dialpad/dialtone/vue/icons/IconSettings';",
+            ].join('\n'),
+            errors: [
+                { messageId: "avoidDeprecatedImport", line: 1 },
+                { messageId: "avoidDeprecatedImport", line: 2 },
+                { messageId: "avoidDeprecatedImport", line: 4 },
             ],
         },
     ],

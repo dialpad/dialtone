@@ -39,3 +39,9 @@ so this rule will not trigger if you import an icon like:
 ```js
 import dialpadAiIcon from '../../node_modules/@dialpad/dialtone/lib/build/svg/brand/dialpad-ai.svg';
 ```
+
+Imports of Vue components and the Vue entry point are not icon imports and are not reported:
+
+```js
+import { DtButton } from '@dialpad/dialtone/vue/lib/button';
+```
