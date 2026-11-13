@@ -10,6 +10,7 @@
 //  • VISUAL STYLES
 //  • WRAPPING
 //  • ALIGNMENT
+//  • ALIGN SELF
 //  • JUSTIFY
 //  • SIZES
 //  • RESPONSIVE STYLE
@@ -78,6 +79,14 @@
   &-align-baseline {
     align-items: baseline;
   }
+}
+
+.align-self-options() {
+  each(start center end stretch baseline auto, {
+    &-align-self-@{value} {
+      align-self: @value;
+    }
+  });
 }
 
 .justify-options() {
@@ -178,6 +187,14 @@
 }
 
 //  ============================================================================
+//  $   ALIGN SELF
+//  ----------------------------------------------------------------------------
+
+each(start center end stretch baseline auto, {
+  .d-stack--align-self-@{value} { align-self: @value; }
+});
+
+//  ============================================================================
 //  $   JUSTIFY
 //  ----------------------------------------------------------------------------
 
@@ -228,6 +245,7 @@ each(range(250, 800, 50), {
     .direction-options();
     .gap-options();
     .align-options();
+    .align-self-options();
     .justify-options();
   }
 }
@@ -239,6 +257,7 @@ each(range(250, 800, 50), {
     .direction-options();
     .gap-options();
     .align-options();
+    .align-self-options();
     .justify-options();
   }
 }
@@ -250,6 +269,7 @@ each(range(250, 800, 50), {
     .direction-options();
     .gap-options();
     .align-options();
+    .align-self-options();
     .justify-options();
   }
 }
@@ -261,6 +281,7 @@ each(range(250, 800, 50), {
     .direction-options();
     .gap-options();
     .align-options();
+    .align-self-options();
     .justify-options();
   }
 }

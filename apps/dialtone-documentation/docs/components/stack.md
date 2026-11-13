@@ -656,6 +656,37 @@ Align items along their text baselines.
 </dt-stack>
 ```
 
+## Align self
+
+The `alignSelf` prop places the stack itself along the cross-axis of its flex parent, like the `d-as-*` utilities. It does not move the stack's children. Use `align` for that.
+
+Available `alignSelf` values: `start`, `center`, `end`, `stretch`, `baseline`, `auto`. It also accepts the responsive object syntax. Each breakpoint value stays active until a later breakpoint value overrides it. Use `auto` to hand control back to the parent's `align-items` at a breakpoint.
+
+```vue demo
+<dt-stack
+  direction="row"
+  gap="100"
+  align="stretch"
+  class="d-h-400 d-bgc-moderate-opaque d-bar-400"
+>
+  <dt-stack align-self="end" class="d-bgc-moderate-opaque d-bar-400">
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
+  </dt-stack>
+  <dt-box surface="moderate-opaque" padding="200" border-radius="300" class="d-fl1">
+    The parent row stretches its children. The stack on the left opts out with <code>align-self="end"</code>.
+  </dt-box>
+</dt-stack>
+<!-- @code -->
+<dt-stack direction="row" gap="100" align="stretch">
+  <dt-stack align-self="end">
+    <dt-box>Item 1</dt-box>
+    <dt-box>Item 2</dt-box>
+  </dt-stack>
+  <dt-box>Sibling</dt-box>
+</dt-stack>
+```
+
 ## Justify
 
 The `justify` prop controls how items are distributed along the main axis (the direction of the stack). For row stacks, this controls horizontal distribution. For column stacks, this controls vertical distribution.

@@ -3,12 +3,14 @@ import DtStack from './Stack.vue';
 import StackDefault from './StackDefault.story.vue';
 import StackVariants from './StackVariants.story.vue';
 import StackWrapping from './StackWrapping.story.vue';
+import StackAlignSelf from './StackAlignSelf.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DT_STACK_DIRECTION,
   DT_STACK_GAP,
   DT_STACK_RESPONSIVE_BREAKPOINTS,
   DT_STACK_ALIGN,
+  DT_STACK_ALIGN_SELF,
   DT_STACK_JUSTIFY,
 } from '@/components/Stack/StackConstants';
 
@@ -84,6 +86,19 @@ Note: If not specified, alignment uses CSS implicit behavior (stretch for column
       },
     },
   },
+  alignSelf: {
+    control: 'object',
+    table: {
+      type: {
+        detail: `
+        Align Self Values: "${DT_STACK_ALIGN_SELF}"
+Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
+String: "end"
+Object: { "default": "start", "md": "center", "lg": "auto" }
+Note: Places the stack itself in a flex parent. Use \`align\` to align the stack's children.`,
+      },
+    },
+  },
   justify: {
     control: 'object',
     table: {
@@ -119,6 +134,13 @@ export const Wrapping = {
     direction: 'row',
     gap: '200',
     wrap: true,
+  },
+};
+
+export const AlignSelf = {
+  render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, StackAlignSelf),
+  args: {
+    alignSelf: 'end',
   },
 };
 
