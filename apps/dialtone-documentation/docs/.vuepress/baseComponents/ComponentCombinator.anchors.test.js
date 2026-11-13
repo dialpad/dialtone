@@ -105,14 +105,43 @@ it.each([false, true])('focuses the TOC target regardless of playground intercep
   expect(router.currentRoute.value.query).toEqual({ other: 'keep' });
 });
 
-it('preserves an existing TOC target tabindex when moving focus', async () => {
+it.each(['-1', '0', '2'])('preserves an existing TOC target tabindex of %s when moving focus', async tabindex => {
   await mountAnchors();
   const target = scroller.querySelector('#image');
-  target.setAttribute('tabindex', '0');
+  target.setAttribute('tabindex', tabindex);
   await toc.vm.handleNavigate({ preventDefault () {} }, { link: '#image' });
   await settle();
   expect(document.activeElement).toBe(target);
-  expect(target.getAttribute('tabindex')).toBe('0');
+  expect(target.getAttribute('tabindex')).toBe(tabindex);
+});
+
+it.each([
+  ['button', '<button>Action</button>'],
+  ['link', '<a href="#usage">Target</a>'],
+  ['input', '<input aria-label="Target">'],
+  ['textarea', '<textarea aria-label="Target"></textarea>'],
+  ['select', '<select aria-label="Target"><option>Option</option></select>'],
+  ['editable content', '<div contenteditable="true">Edit</div>'],
+  ['implicitly editable content', '<div contenteditable>Edit</div>'],
+  ['uppercase editable content', '<div contenteditable="TRUE">Edit</div>'],
+  ['plaintext editable content', '<div contenteditable="plaintext-only">Edit</div>'],
+  ['noneditable content', '<div contenteditable="false">Read</div>', '-1'],
+])('focuses a fragment target without changing its Tab stops (%s)', async (name, markup, tabindex = null) => {
+  await mountAnchors();
+  const fixture = document.createElement('div');
+  fixture.innerHTML = markup;
+  const target = fixture.firstElementChild;
+  target.id = 'image';
+  scroller.querySelector('#image').replaceWith(target);
+  const originalTabIndex = target.tabIndex;
+  const focus = vi.spyOn(target, 'focus');
+  scroller.querySelector('a').click();
+  await settle();
+  expect(document.activeElement).toBe(target);
+  expect(target.getAttribute('tabindex')).toBe(tabindex);
+  expect(target.tabIndex).toBe(originalTabIndex);
+  expect(focus).toHaveBeenCalledWith({ preventScroll: true });
+  expect(router.currentRoute.value.query).toEqual({ other: 'keep' });
 });
 
 it.each(['missing target', 'cancelled navigation'])('keeps focus on the TOC link after a %s', async outcome => {

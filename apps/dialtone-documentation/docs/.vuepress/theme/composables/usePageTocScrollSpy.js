@@ -156,7 +156,13 @@ export function usePageTocScrollSpy (headers, { interceptAnchors = false } = {})
       activeHash.value = item.link;
       const target = scrollToHash(item.link);
       if (target) {
-        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        const isEditingHost = target.matches(
+          '[contenteditable=""], [contenteditable="true" i], [contenteditable="plaintext-only" i]',
+        );
+        // Preserve native Tab stops; headings only need to receive programmatic focus.
+        if (!target.hasAttribute('tabindex') && target.tabIndex < 0 && !isEditingHost) {
+          target.setAttribute('tabindex', '-1');
+        }
         target.focus({ preventScroll: true });
       }
     } finally {
