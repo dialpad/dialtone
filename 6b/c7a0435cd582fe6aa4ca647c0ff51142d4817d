@@ -1,0 +1,21 @@
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_f8a9d4d66bcec5::t_3e688ffe318a45 138-178,218-272
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_f8a9d4d66bcec5::t_c96a39b10fadbc 204,207-208,211-212,285-286,302,304,306-307,368,386
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6bc7a0435cd582fe6aa4ca647c0ff51142d4817d",
+  "prompts": {},
+  "sessions": {
+    "s_f8a9d4d66bcec5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d1f2-9b39-7223-a1c8-9875f226d675",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

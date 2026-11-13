@@ -1,0 +1,307 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_9ffcf142ac84e2::t_e669e10d4daedb 54,60,244-249,251-254,256-263,316,342-344
+  s_9ffcf142ac84e2::t_72b31f6d85b697 345,347
+  s_9ffcf142ac84e2::t_1745bafc5c4b13 255
+  s_9ffcf142ac84e2::t_c3280a8f159981 268-272,280,284-288,311-314,319-321,346
+  s_9ffcf142ac84e2::t_d5d4fa95718821 264-267
+  s_9ffcf142ac84e2::t_d5387b97ccb17a 336-341
+  s_9ffcf142ac84e2::t_7348548935e42e 274-277
+  s_9ffcf142ac84e2::t_77d2b2226737fc 273,289,292,300,322,324
+  s_9ffcf142ac84e2::t_aa1debcc3960cf 22
+  s_9ffcf142ac84e2::t_ac25af2c6c7c3a 19-21,23-25,33,70,105,250,278-279,281-283,290-291,293-299,301-310,315,317-318,323,332-335
+  s_9ffcf142ac84e2::t_bc59a645f5dbbb 325-329
+  s_9ffcf142ac84e2::t_a4a88d7e477e44 330-331
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_9ffcf142ac84e2::t_8c3a0a530179fc 33,41,366-375,480,498-499,615-623
+  s_9ffcf142ac84e2::t_032558d2fbc667 624
+  s_d1e586165cf49e::t_c9312cc800fa7c 22
+  s_9ffcf142ac84e2::t_1745bafc5c4b13 500-502
+  s_9ffcf142ac84e2::t_cc0a39535712f2 534-535,543
+  s_9ffcf142ac84e2::t_c94a3494d05176 539,546-548
+  s_9ffcf142ac84e2::t_0ceba016a2c75c 541
+  s_9ffcf142ac84e2::t_b4f94609b0d678 503,562-563
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 42,402,540
+packages/dialtone-css/lib/build/js/dialtone_migrate_text_variant/test.mjs
+  s_9ffcf142ac84e2::t_3caeb7dec1ef57 1-21,22-29,31-52,54-56,60-74,82,91
+  s_9ffcf142ac84e2::t_cb18ccf96de5d3 53
+  s_9ffcf142ac84e2::t_10f68db991097e 92,93-97,101
+  s_9ffcf142ac84e2::t_90a3497201d8a1 102,103-108
+  s_9ffcf142ac84e2::t_9aaedbeee58d3e 75
+  s_9ffcf142ac84e2::t_4412e197add2ab 83-90
+  s_9ffcf142ac84e2::t_d4bbc45b7d7273 76-81,98-100
+  s_9ffcf142ac84e2::t_dd84adfd7a2c3d 30,57-59
+packages/dialtone-css/lib/build/js/dialtone_migrate_text_variant/index.mjs
+  s_9ffcf142ac84e2::t_6fe9471206865a 1-3,5-8,10-13,15-18,24-40,43-69,71-76,79-99,101-108,110,112-121,134-142,178-183,185-193,195-204,206-227
+  s_9ffcf142ac84e2::t_325113b5b2f3b5 41-42
+  s_9ffcf142ac84e2::t_080efbf514b955 19-23,77-78,109
+  s_9ffcf142ac84e2::t_1745bafc5c4b13 122-125,126,128,205
+  s_e2bb702f8b5b02::t_ca324a492e5b46 111
+  s_e2bb702f8b5b02::t_33fef4a90debbb 127,129-133
+  s_e2bb702f8b5b02::t_1dd00c0dfc8577 14
+  s_9ffcf142ac84e2::t_9d4968b0d11004 4,143-152,155-165,167,171-174,177,194
+  s_9ffcf142ac84e2::t_0ceba016a2c75c 166,170
+  s_9ffcf142ac84e2::t_c94a3494d05176 168,175-176
+  s_9ffcf142ac84e2::t_b4f94609b0d678 153-154,184
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 9,169
+  s_9ffcf142ac84e2::t_f88ad45a61596e 70,100
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-tshirt-sizes.js
+  s_9ffcf142ac84e2::t_e669e10d4daedb 79-83,150,153-154,156,159-160
+packages/eslint-plugin-dialtone/lib/rules/deprecated-tshirt-sizes.js
+  s_9ffcf142ac84e2::t_325113b5b2f3b5 62-63
+  s_9ffcf142ac84e2::t_8c3a0a530179fc 57-61,64-67,104
+  s_e2bb702f8b5b02::t_c85e24276ae641 68,70
+  s_e2bb702f8b5b02::t_2f6f671c5f3094 171-179
+.claude/skills/dt-migrate.md
+  s_d1e586165cf49e::t_9171d6916f2d81 21-22
+  s_9ffcf142ac84e2::t_1745bafc5c4b13 23
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_d1e586165cf49e::t_d7aa717fc3f376 17,254-259,261-263,269-278,280-282,288,294,300,306,333,336,339,347,355,405,413
+  s_9ffcf142ac84e2::t_1745bafc5c4b13 141,260,279,327-332
+  s_9ffcf142ac84e2::t_b4f94609b0d678 269
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 266-268
+  s_9ffcf142ac84e2::t_56f293db93b389 264
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_d1e586165cf49e::t_d668a9eda70b7c 29
+  s_9ffcf142ac84e2::t_c92ee27eb6dd07 26
+  s_9ffcf142ac84e2::t_1ad2d155c9d343 28-29
+apps/dialtone-documentation/docs/guides/migration/component-sizes/index.md
+  s_9ffcf142ac84e2::t_9d4968b0d11004 105
+  s_9ffcf142ac84e2::t_c68207ccc5c34e 136
+  s_9ffcf142ac84e2::t_1ad2d155c9d343 133-135,174
+packages/dialtone-css/lib/build/js/dialtone_migrate/git_environment.mjs
+  s_9ffcf142ac84e2::t_aa1debcc3960cf 5,7,9-11
+  s_9ffcf142ac84e2::t_85a4a5af3b82f7 1-4,6,12-13
+  s_9ffcf142ac84e2::t_0d244bf1232a5f 8
+project.json
+  s_9ffcf142ac84e2::t_387f611405b3f6 19
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_a98638d5a5be6e::t_3518b34df19ab9 208,247,249-250,337-342
+  s_a98638d5a5be6e::t_3469ddd2d4a982 207,371-372
+  s_a98638d5a5be6e::t_333ba8a33b3602 5-6,182,183-184,190,192,194-199,201-202,204-205,209,211-216,218-220,223-239,248,343-348,352,354-358,360,361-367,370,373-378
+  s_a98638d5a5be6e::t_cbf9fef8bd5944 349,351,353
+  s_a98638d5a5be6e::t_42e28c03870830 350
+  s_a98638d5a5be6e::t_a32e55025bd7f8 3,186,188-189,217,221-222,359,368,379
+  s_a98638d5a5be6e::t_7c4db2bae7a8b8 4,191,200,210,258,271-274,296-308,309-310,311-336
+  s_a42916e93fe1f0::t_ef32a21718b2c2 266-267,269
+  s_a42916e93fe1f0::t_4b43d9d0344329 203,206
+  s_a42916e93fe1f0::t_834583e84b6af2 2
+  s_719760d04fd6f6::t_1e174f257bc214 185,187,193,270,369
+  s_a98638d5a5be6e::t_590a026dc5ac76 275-295
+  s_a98638d5a5be6e::t_50a53ed561d945 240-245,251-265
+  s_a98638d5a5be6e::t_ec0f7f7df0c555 246
+packages/dialtone-vue/components/ListItem/index.js
+  s_a98638d5a5be6e::t_6c63d733dd4e3e 3
+packages/dialtone-vue/components/ListItem/ListItem.test.js
+  s_a98638d5a5be6e::t_fc30493ebcf7fa 289
+  s_a98638d5a5be6e::t_333ba8a33b3602 272,273-288,290-295,306-315
+  s_a42916e93fe1f0::t_7ee5adf2ee6a41 296-305
+packages/dialtone-vue/components/ListItem/ListItem.vue
+  s_a98638d5a5be6e::t_6c63d733dd4e3e 14,52,89-92,97,132,197,199-200
+  s_a98638d5a5be6e::t_a05b7b24ce4a58 15,193-196,198,213
+packages/dialtone-vue/components/Dropdown/Dropdown.stories.js
+  s_a98638d5a5be6e::t_9b95fdb4b87a05 7,213,214-215,217-223
+  s_a98638d5a5be6e::t_543d318855b83d 224
+  s_a98638d5a5be6e::t_2f864ab106c420 233-236
+  s_a98638d5a5be6e::t_e4e11e9e600f43 6,225,226-227,229-232
+  s_719760d04fd6f6::t_17d9022373a723 216,228
+packages/dialtone-vue/common/mixins/keyboard_list_navigation.test.js
+  s_a98638d5a5be6e::t_fc30493ebcf7fa 159-167,170-177,179-182,186,214,216-221,223-228
+  s_a98638d5a5be6e::t_333ba8a33b3602 2-3,154,155-158,168-169,178,183-185,187-189,215,222,229
+  s_a98638d5a5be6e::t_24d2ff2f8e662b 230
+  s_a98638d5a5be6e::t_b715c57d6dd540 213
+  s_a98638d5a5be6e::t_f133490bc1399d 1,190-212
+apps/dialtone-documentation/docs/components/split-button.md
+  s_a98638d5a5be6e::t_9b95fdb4b87a05 360-361
+packages/dialtone-vue/components/Dropdown/DropdownMenuRoles.story.vue
+  s_a98638d5a5be6e::t_f86ca367ed113e 2-6
+  s_a98638d5a5be6e::t_9b95fdb4b87a05 1,7-13,15-57,59-61,63-69,71-82
+  s_a98638d5a5be6e::t_cdd9b6f9ab6b81 62
+  s_a98638d5a5be6e::t_ff5667640d592d 58,70
+  s_719760d04fd6f6::t_4a62e05ac22e75 14
+packages/dialtone-vue/components/ListItem/ListItemConstants.js
+  s_a98638d5a5be6e::t_6c63d733dd4e3e 1-2,15
+packages/dialtone-vue/components/ListItem/ListItem.stories.js
+  s_a98638d5a5be6e::t_9b95fdb4b87a05 5,103-104,110
+packages/dialtone-vue/components/ComboboxWithPopover/ComboboxWithPopover.test.js
+  s_a98638d5a5be6e::t_3469ddd2d4a982 1,3-4,123-137,140,141-143
+  s_a98638d5a5be6e::t_59ce876ee15719 144-145
+  s_a98638d5a5be6e::t_713d879ac09044 5,138-139
+  s_a42916e93fe1f0::t_247cd1283ab232 122
+  s_a98638d5a5be6e::t_0d91274ff28bd2 102,104,120-121
+  s_a98638d5a5be6e::t_f133490bc1399d 2,95-101,103,105-111,114,116-119
+  s_a98638d5a5be6e::t_172457208c32e1 112-113,115
+packages/dialtone-vue/components/SplitButton/SplitButton.test.js
+  s_a98638d5a5be6e::t_3469ddd2d4a982 1-4,87-99,101,103-107,109-110
+  s_a98638d5a5be6e::t_0ba243e9837caa 111-112
+  s_a98638d5a5be6e::t_79b8e4b6c8b74a 102,108
+  s_a42916e93fe1f0::t_a4c221528b01b6 86
+  s_a42916e93fe1f0::t_fde346f439a69a 100
+packages/dialtone-vue/common/mixins/keyboard_list_navigation.js
+  s_a98638d5a5be6e::t_6c63d733dd4e3e 32,103-106,150,201,203,209,211,215
+  s_719760d04fd6f6::t_a842f6a615b927 200,205,210
+  s_a98638d5a5be6e::t_dd6394198ec124 102
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_a98638d5a5be6e::t_d9f17ef68969fe 785
+  s_a98638d5a5be6e::t_fc30493ebcf7fa 781,788,799,805
+  s_a98638d5a5be6e::t_416a67170611fd 697,790
+  s_a98638d5a5be6e::t_333ba8a33b3602 642,652,664,667,715,721,727-728,731-732,734-743,745-746,748-749,776-777,779,784,791-797,802,807,809-810,828,859-863,868,872-876,880,882-886
+  s_a98638d5a5be6e::t_ad127cefc8d9d9 28,83-84,650-651,653,655-659,663,665-666,668,716-718,723
+  s_a98638d5a5be6e::t_9f66f929256307 49,64-68,280-286,287-288,461,466,468,600,662,669-685,687-694,695-701,703-706,708-709,711-712,719-720,722,724-726,733,744,778,780,782-783,786-787,789,798,800-801,803-804,806,840,841,864-867,869-871
+  s_a42916e93fe1f0::t_8998d21b581ffa 835-836,838-839,842-858
+  s_a42916e93fe1f0::t_618732de284bc8 454-463,465-466
+  s_a98638d5a5be6e::t_3dae30d16420f1 811-834
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 762,768-770
+  s_a98638d5a5be6e::t_d549bf669f53b8 702,707,710,713,747,752-761,763-764,766-767,771-773,775
+  s_a98638d5a5be6e::t_f133490bc1399d 1-3,606-614,616-637,640-651,654,660-661,686,765,774
+  s_a98638d5a5be6e::t_172457208c32e1 615,638-639
+  s_a98638d5a5be6e::t_5fde86e93d263b 878-879,881
+  s_a98638d5a5be6e::t_86b39e97fc938e 452-453
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_a98638d5a5be6e::t_6c63d733dd4e3e 30-31,199-201,203-208,632,670,781-785,787-789,791-792,794-796,798-804,970-972,1054-1057,1059-1060,1062-1064,1065,1067,1073,1079-1081,1082,1084,1087,1096,1100,1102,1146,1149-1151
+  s_a98638d5a5be6e::t_e4e11e9e600f43 780
+  s_a42916e93fe1f0::t_946c23c3ee995e 1092
+  s_a42916e93fe1f0::t_1cb4a60145112e 790,793,797
+  s_a42916e93fe1f0::t_236bf6a71dea3b 967-969,973
+  s_a98638d5a5be6e::t_7da6b5790c95fb 1102
+  s_b748b3ee861d11::t_93df982aaaf6c6 202
+  s_719760d04fd6f6::t_8ee096c732ff55 184-187,193-198,625,786
+  s_9b81bb2b86be73::t_a4af57ffe0af44 192
+  s_9b81bb2b86be73::t_a085635958bd80 191
+  s_9b81bb2b86be73::t_3f274f95b7600d 188-190
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_a98638d5a5be6e::t_9b95fdb4b87a05 14,162,165-166,169-200,242-243,245,247,253,273,276-278
+  s_a98638d5a5be6e::t_62ca99c7c89440 161,244
+  s_a98638d5a5be6e::t_d0ddac86cf0bbc 260
+  s_a98638d5a5be6e::t_e4e11e9e600f43 166,168,252,264
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 246-247,250,256
+  s_a98638d5a5be6e::t_63a9c353973810 257
+  s_a98638d5a5be6e::t_707c68c2ec4ef5 163-164,167,249,272
+  s_9b81bb2b86be73::t_7938400a4a1e19 201-241
+  s_9b81bb2b86be73::t_6a5ed8491a0db1 248
+apps/dialtone-documentation/docs/components/list-item.md
+  s_a98638d5a5be6e::t_9b95fdb4b87a05 69-83
+apps/dialtone-documentation/docs/components/popover.md
+  s_a98638d5a5be6e::t_9b95fdb4b87a05 51-52,54,60-62
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 53,57-59
+  s_a98638d5a5be6e::t_2aa18611dd1169 314
+  s_a98638d5a5be6e::t_707c68c2ec4ef5 56,313
+  s_9b81bb2b86be73::t_2769c98d1fa211 55
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_a98638d5a5be6e::t_58b5ef4af23ccf 366
+  s_a98638d5a5be6e::t_6c63d733dd4e3e 8,91,135-136,140-145,355,364,384-386,390-392,394,398-400,451-452,477-478
+  s_a98638d5a5be6e::t_231078b87acb26 389
+  s_a98638d5a5be6e::t_e4e11e9e600f43 47,395,396-397
+  s_a98638d5a5be6e::t_537fb134fcd790 137-138
+  s_a42916e93fe1f0::t_07756473f0aa3f 387-388
+  s_b748b3ee861d11::t_93df982aaaf6c6 139
+  s_719760d04fd6f6::t_6686cdcb0a0427 9,120-123,129-134,349,474-478
+  s_a98638d5a5be6e::t_79f4b2740fe02a 393
+  s_a98638d5a5be6e::t_f12b5591cf427b 480,482-484
+  s_9b81bb2b86be73::t_a4af57ffe0af44 128
+  s_9b81bb2b86be73::t_8ccd5f674dbfde 127
+  s_9b81bb2b86be73::t_7bb081740be59c 124-126
+packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md
+  s_a98638d5a5be6e::t_326d40807586f5 6,61-63,84-86
+  s_a98638d5a5be6e::t_e4e11e9e600f43 60
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_a98638d5a5be6e::t_78b1a879069afc 115,121
+  s_a98638d5a5be6e::t_4c2b36ebd661cb 23,114,118-120
+  s_a98638d5a5be6e::t_707c68c2ec4ef5 117
+  s_9b81bb2b86be73::t_f60992129261bb 116
+packages/dialtone-vue/components/Hovercard/Hovercard.test.js
+  s_a98638d5a5be6e::t_b4e51a4c7d337d 64-75,78-83,86-87,90-92
+  s_a98638d5a5be6e::t_9a65faa39d1237 76-77,84-85,88-89
+packages/dialtone-vue/components/Dropdown/DropdownControlledArrows.story.vue
+  s_a98638d5a5be6e::t_e4e11e9e600f43 1-16,18,19-80,82,84-87
+  s_a98638d5a5be6e::t_f400625a81fe80 17,81,83
+packages/combinator/src/variants/variants_dropdown.js
+  s_a98638d5a5be6e::t_90ed1bd3e46ce9 80
+  s_a98638d5a5be6e::t_bdf5797b1d72d3 68-69,76-79,81-97,100-108
+  s_a98638d5a5be6e::t_cc6508823641ec 70-75,98-99
+scripts/retrieval/preset-classifier.test.mjs
+  s_a98638d5a5be6e::t_172457208c32e1 64-78
+packages/dialtone-vue/components/Combobox/Combobox.test.js
+  s_a98638d5a5be6e::t_2591aa42594551 77,79,90-91
+  s_a98638d5a5be6e::t_f133490bc1399d 1-3,73-76,78,80-83,85-89
+  s_a98638d5a5be6e::t_39f704d025c663 84
+packages/combinator/scripts/classify-preset-example.mjs
+  s_719760d04fd6f6::t_6153fe3fb1c693 11,14-22
+packages/combinator/scripts/generate-preset-examples.mjs
+  s_719760d04fd6f6::t_3156ebd9d4e557 95
+.agents/resources/documentation-examples.md
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 31-32
+.agents/resources/rules/combinator-variants.md
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 160-161
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "84923549d4a37ea1239a38dab33b98193379f995",
+  "prompts": {},
+  "sessions": {
+    "s_719760d04fd6f6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c700-6bac-73c0-9094-ecaf8cb3314f",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_9b81bb2b86be73": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c8a8-78e5-7461-bf3a-6200914b3252",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_9ffcf142ac84e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d0f7-76a3-aa19-3b9b76f40d48",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_a42916e93fe1f0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f052a1b-204f-4df8-b3dd-56a06a0fb509",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_b748b3ee861d11": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c645-ecb3-76a1-b027-13ab6cc9542e",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_d1e586165cf49e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d616-72a3-8b34-5e0edb2e4090",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_e2bb702f8b5b02": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4224e0b3-be98-4efd-b98b-fb7ca7f2fbaf",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

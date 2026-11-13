@@ -1,0 +1,19 @@
+packages/combinator/src/lib/tokens.js
+  s_9f61fa9161643f::t_f2d11901934737 67,69,73,91-93,238,242,265-283
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "a3ee067ab7077ea52ffe06924369ea17af50f384",
+  "prompts": {},
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/MigrationBanner.vue
+  h_c15b5755534093 11
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-9-16.md
+  h_c15b5755534093 53
+packages/combinator/src/components/code_example/code_example.vue
+  h_c15b5755534093 188-189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fb5cc4358274917fe966eea2012414517dcade21",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

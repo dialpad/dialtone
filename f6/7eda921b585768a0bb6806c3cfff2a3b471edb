@@ -1,0 +1,19 @@
+packages/dialtone-vue/common/phone/index.js
+  s_83c35bface8049::t_91938172c5668b 10-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f67eda921b585768a0bb6806c3cfff2a3b471edb",
+  "prompts": {},
+  "sessions": {
+    "s_83c35bface8049": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89e37830-2938-411b-a52c-8c6f6458ff51",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

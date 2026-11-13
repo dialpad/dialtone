@@ -1,0 +1,21 @@
+packages/dialtone-docs/tests/tests/strip-markdown.test.js
+  s_7f1d1d64baa803::t_cee27a7cdbe30c 68-76
+packages/dialtone-docs/src/utils/strip-markdown.mjs
+  s_7f1d1d64baa803::t_d887a259fe10ab 17,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8d952ed5b6c15de525c0a0a6905f1f0048d9f692",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
