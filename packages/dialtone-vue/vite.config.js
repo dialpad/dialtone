@@ -49,6 +49,7 @@ export default defineConfig({
         /^@dialpad/,
         /^@tiptap\/(?!vue-3|static-renderer)/,
         /^date-fns/,
+        /^libphonenumber-js/,
         /^emoji-toolkit/,
         /^overlayscrollbars/,
         /^prosemirror/,

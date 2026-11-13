@@ -4,6 +4,7 @@ export * from './common/constants';
 export { validationMessageValidator } from './common/validators';
 export * from './common/utils';
 export * from './common/dates';
+export * from './common/phone';
 export * from './common/emoji';
 
 // Components
