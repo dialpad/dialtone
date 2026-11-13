@@ -104,6 +104,7 @@
     "globals": "16.3.0",
     "globby": "^13.1.4",
     "inquirer": "^9.1.5",
+    "libphonenumber-js": "1.13.15",
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
