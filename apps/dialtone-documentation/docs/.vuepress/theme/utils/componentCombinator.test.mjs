@@ -22,3 +22,54 @@ test('skips the component combinator when frontmatter omits a valid component na
   assert.equal(getComponentCombinatorName({ combinator: 'Avatar' }), null);
   assert.equal(getComponentCombinatorName({ combinator: 'dt-avatar' }), null);
 });
+
+test('uses lowercase hyphenated preset slugs while preserving readable names', async () => {
+  const { getCombinatorPresetSlug, getCombinatorPresetName } = await loadComponentCombinatorUtils();
+  const variants = { default: {}, image: {}, 'with presence, no icon': {}, defaults: {}, exclusions: [] };
+
+  assert.equal(getCombinatorPresetSlug('with presence, no icon'), 'with-presence-no-icon');
+  assert.equal(getCombinatorPresetSlug('  Icon Avatar  '), 'icon-avatar');
+  assert.equal(getCombinatorPresetSlug('Crème brûlée'), 'creme-brulee');
+  assert.equal(getCombinatorPresetName(variants, 'image'), 'image');
+  assert.equal(getCombinatorPresetName(variants, 'with-presence-no-icon'), 'with presence, no icon');
+  assert.equal(getCombinatorPresetName(variants, 'With-Presence-No-Icon'), 'with presence, no icon');
+});
+
+test('maps preset names to clean slugs while excluding bank metadata', async () => {
+  const { getCombinatorPresetSlugs, getCombinatorPresetName } = await loadComponentCombinatorUtils();
+  const variants = { default: {}, 'Crème brûlée': {}, defaults: {}, exclusions: [] };
+  assert.deepEqual(getCombinatorPresetSlugs(variants), { default: 'default', 'Crème brûlée': 'creme-brulee' });
+  assert.equal(getCombinatorPresetName(variants, 'CREME-BRULEE'), 'Crème brûlée');
+});
+
+test('falls back to default for missing, unknown, reserved, or repeated preset queries', async () => {
+  const { getCombinatorPresetName } = await loadComponentCombinatorUtils();
+  const variants = { default: {}, image: {}, defaults: {}, exclusions: [] };
+
+  for (const query of [undefined, null, '', 'unknown', 'defaults', 'exclusions', ['image', 'default']]) {
+    assert.equal(getCombinatorPresetName(variants, query), 'default');
+  }
+});
+
+
+test('uses a preferred initial preset without changing explicit named links', async () => {
+  const { getCombinatorPresetName } = await loadComponentCombinatorUtils();
+  const variants = {
+    defaults: { metadata: { initialPreset: 'controlled default' } },
+    default: {},
+    'controlled default': {},
+  };
+  for (const query of [undefined, null, '', 'unknown', 'defaults', ['default', 'controlled-default']]) {
+    assert.equal(getCombinatorPresetName(variants, query), 'controlled default');
+  }
+  assert.equal(getCombinatorPresetName(variants, 'default'), 'default');
+  assert.equal(getCombinatorPresetName(variants, 'CONTROLLED-DEFAULT'), 'controlled default');
+});
+
+test('ignores unavailable or reserved preferred initial names', async () => {
+  const { getCombinatorPresetName } = await loadComponentCombinatorUtils();
+  for (const initialPreset of ['', 'unknown', 'defaults', 'exclusions', 'toString']) {
+    const variants = { default: {}, defaults: { metadata: { initialPreset } } };
+    assert.equal(getCombinatorPresetName(variants, undefined), 'default');
+  }
+});

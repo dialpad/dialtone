@@ -4,14 +4,18 @@
     :library="library"
     :documentation="componentDocumentation"
     :variants="componentVariants"
+    :preset="preset"
     :dev-mode="isDev"
     :full-screen="fullScreen"
     @update:full-screen="$emit('update:fullScreen', $event)"
+    @update:preset="updatePreset"
   />
 </template>
 
 <script>
 import { variantBank } from '@dialpad/dialtone-combinator';
+import { computed } from 'vue';
+import { usePresetQuerySync } from '../theme/composables/usePresetQuerySync.js';
 
 export default {
   name: 'ComponentCombinator',
@@ -37,6 +41,12 @@ export default {
 
   emits: ['update:fullScreen'],
 
+  setup (props) {
+    const componentVariants = computed(() => variantBank()[props.componentName] ?? {});
+    const { preset, updatePreset } = usePresetQuerySync(() => props.componentName, componentVariants);
+    return { componentVariants, preset, updatePreset };
+  },
+
   computed: {
     component () {
       return this.dialtoneComponents[this.componentName];
@@ -46,10 +56,6 @@ export default {
       return this.dialtoneComponentsDocumentation.find(
         componentInfo => componentInfo.displayName === this.componentName,
       );
-    },
-
-    componentVariants () {
-      return variantBank()[this.componentName] ?? {};
     },
 
     library () {

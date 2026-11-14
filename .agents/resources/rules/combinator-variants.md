@@ -67,6 +67,20 @@ export default {
 };
 ```
 
+## Preset names and shared URLs
+
+Preset names are public deep-link identifiers on documentation pages. For example,
+`with presence` becomes `?preset=with-presence`. The preferred initial preset
+(`defaults.metadata.initialPreset`, or `default` when unset) uses the page URL
+without a preset parameter. An explicit `default` remains linkable with
+`?preset=default` when another preset is preferred.
+
+- Keep existing names stable. Renaming or deleting a preset breaks its shared links.
+- Choose names that normalize to nonempty, distinct slugs. Case, spaces and punctuation
+  can make different names collide. The docs playground tests reject empty or duplicate
+  slugs in shipped banks.
+- After changing a bank, run `pnpm nx run dialtone-documentation:test-playground`.
+
 ## Member values
 
 - Use `initialValue` for values a preset applies to a prop, attribute, or slot.
@@ -100,9 +114,10 @@ component prop or exposed as a slot scope.
 Use `previewIdentity(bindings)` only when a component keeps state that ordinary
 prop patching cannot replace. Return an array of identity factors: primitives
 compare by value, while arrays and objects compare by reference. This policy
-opts the bank into owned clones of initial arrays/objects and into remounting on
-explicit preset selection or Reset. Existing slot and slider keys still apply.
-Banks without the policy retain their existing instance and initial-value behavior.
+opts the bank into cloning initial values and into remounting on explicit preset
+selection or Reset. All banks isolate plain initial arrays and objects from live
+edits. Banks without this policy retain their existing preview instances;
+non-plain initial values keep their identity. Existing slot and slider keys still apply.
 
 Include only changes that require a new instance. For example, Filter Pill keys
 the legacy/controlled contract, controlled single/multiple pattern, and legacy
@@ -181,6 +196,7 @@ when the component becomes viable, and keep the reason short and user-facing.
   `unsupported_components.json` with a reason.
 - `default` renders a useful component-wall thumbnail, or an override exists.
 - Presets cover common states without becoming a storybook replacement.
+- Existing preset names stay stable, and shipped slugs are nonempty and unique within each bank.
 - Exclusions prevent known invalid combinations.
 - Names match component docgen output.
 - Token-numbered values stay strings.

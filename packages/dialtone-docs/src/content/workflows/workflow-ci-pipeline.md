@@ -73,9 +73,9 @@ The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also dep
 
 ### `dialtone-documentation-tests.yml`
 
-**Trigger:** Push to `staging` and pull requests touching `apps/dialtone-documentation/**`, the Vue docs generator, `scripts/lib/**/*.mjs`, `scripts/tests/**`, the imported common helper, this workflow, or `pnpm-lock.yaml`.
+**Trigger:** Push to `staging` and pull requests touching `apps/dialtone-documentation/**`, `packages/combinator/**`, `packages/dialtone-vue/**`, `packages/dialtone-icons/**`, the Vue docs generator, `scripts/lib/**/*.mjs`, `scripts/tests/**`, `scripts/retrieval/profiles.mjs`, the imported common helper, this workflow, or `pnpm-lock.yaml`.
 
-**What it does:** Runs `pnpm nx run dialtone-documentation:test`, builds the documentation site with `pnpm nx run dialtone-documentation:build`, and verifies that `llms.txt` and `llms-full.txt` exist and are nonempty. Generator/helper/test routing runs the existing documentation checks. The public-identity generator suite runs after the lookup build.
+**What it does:** Runs `pnpm nx run dialtone-documentation:test`, builds the documentation site with `pnpm nx run dialtone-documentation:build`, and verifies that `llms.txt` and `llms-full.txt` exist and are nonempty. The documentation test target also runs playground routing, page coverage, preset lifecycle smoke tests, and theme utility tests. Generator/helper/test routing runs the existing documentation checks. The public-identity generator suite runs after the lookup build.
 
 ---
 
