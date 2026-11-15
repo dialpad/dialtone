@@ -203,6 +203,8 @@
 
     .d-avatar {
       --avatar-size-shape: calc(var(--chip-block-size) - 2 * var(--chip-avatar-inset));
+      //  Initials scale with the avatar, as DtAvatar's own size classes do (half the diameter).
+      --avatar-size-text: calc(var(--avatar-size-shape) * 0.5);
       --avatar-border-radius: max(0px, calc(var(--chip-border-radius) - var(--chip-avatar-inset)));
 
       overflow: hidden;
