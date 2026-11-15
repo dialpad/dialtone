@@ -125,6 +125,8 @@ Use `disabled` to disable the chip and its remove button. It sets `aria-disabled
 
 Use `startIcon` and `endIcon` for icons, and `startAvatar` for an avatar. Bind the icon `size` to the `iconSize` slot prop. It is the icon size designed for the chip `size`: `100` for sizes 100 and 200, `200` for 300 to 500, and `300` for 600 and 700. Set the `icon-size` prop on the chip to override it. The remove button follows it.
 
+The chip sizes the avatar for you, so you don't set its size. The avatar sits an even inset from the chip edge: 5px at sizes 100 to 500, 6px at 600 and 7px at 700. Its size is the chip height minus that inset on each side, and its corners are the chip corner minus the inset, so the two curves line up. At sizes 100 and 200 the avatar shows a colour or a photo and never an initial, because a letter doesn't read at 12 to 14px.
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">

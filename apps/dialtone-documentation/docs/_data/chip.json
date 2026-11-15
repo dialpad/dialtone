@@ -48,7 +48,7 @@
     {
       "class": "d-chip__avatar",
       "applies": "N/A",
-      "description": "Applies positioning and styling for the chip avatar."
+      "description": "Applies positioning and styling for the chip avatar. The chip sizes the avatar to its height minus an even inset on each side, and sets the corner radius to the chip radius minus that inset."
     },
     {
       "class": "d-chip__close",

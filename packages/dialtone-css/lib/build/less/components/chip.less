@@ -39,10 +39,16 @@
   --chip-text-size: var(--dt-font-size-100);
   --chip-padding-inline: var(--dt-spacing-75);
   --chip-padding-inline-start: var(--chip-padding-inline);
-  --chip-padding-inline-end: var(--chip-padding-inline);
+  --chip-padding-inline-end-extra: var(--dt-spacing-0);
+  --chip-padding-inline-end: calc(var(--chip-padding-inline) + var(--chip-padding-inline-end-extra));
   --chip-border-radius: var(--dt-size-radius-400);
   --chip-icon-size: var(--dt-icon-size-200);
   --chip-gap: var(--dt-spacing-50);
+  --chip-slot-gap: var(--chip-gap);
+  --chip-content-gap: 0;
+  --chip-close-gap: var(--chip-gap);
+  --chip-avatar-inset: calc(var(--dt-spacing-50) + var(--dt-size-border-100));
+  --chip-avatar-gap: var(--dt-spacing-75);
   --chip-color-text: var(--dt-color-foreground-primary);
 
   position: relative;
@@ -93,6 +99,7 @@
     --chip-padding-inline: var(--dt-spacing-100);
     --chip-border-radius: var(--dt-size-radius-450);
     --chip-icon-size: var(--dt-icon-size-300);
+    --chip-avatar-inset: var(--dt-spacing-75);
   }
 
   &:has(.d-chip__label--size-700) {
@@ -102,19 +109,37 @@
     --chip-padding-inline: var(--dt-spacing-100);
     --chip-border-radius: var(--dt-size-radius-450);
     --chip-icon-size: var(--dt-icon-size-300);
+    --chip-avatar-inset: calc(var(--dt-spacing-100) - var(--dt-size-border-100));
   }
 
   //  ==========================================================================
   //  $   CONTEXT ADJUSTMENTS
   //  --------------------------------------------------------------------------
-  //  An avatar sits tighter to the edge than text does.
+  //  An avatar sits an even inset from the chip edge. The inset sets the avatar
+  //  size, its corner radius and the start padding, and the label gap replaces
+  //  the padding the content slots add after themselves.
   &:has(.d-chip__avatar, .d-chip__leading > .d-avatar) {
-    --chip-padding-inline-start: var(--dt-spacing-25);
+    --chip-padding-inline-start: var(--chip-avatar-inset);
+    --chip-padding-inline-end-extra: var(--dt-spacing-50);
+    --chip-content-gap: var(--chip-avatar-gap);
+    --chip-slot-gap: 0;
   }
 
-  //  When a close button is present the label reserves space for it.
+  //  When a close button is present the label reserves space for it, and the extra end padding is not needed.
   &:has(> .d-chip__close) {
-    --chip-padding-inline-end: calc(var(--chip-padding-inline) + var(--chip-gap) + var(--chip-icon-size));
+    --chip-padding-inline-end: calc(var(--chip-padding-inline) + var(--chip-close-gap) + var(--chip-icon-size));
+  }
+
+  //  REMOVE BUTTON GAP: space between the label text and the remove button.
+  //  The selector decides which chips get the wider gap. Avatar chips only for
+  //  now; use `&:has(> .d-chip__close)` to give it to every chip with one.
+  &:has(.d-chip__avatar, .d-chip__leading > .d-avatar):has(> .d-chip__close) {
+    --chip-close-gap: var(--chip-avatar-gap);
+  }
+
+  //  A colour or photo reads at 12 to 14px; a letter does not.
+  &:has(.d-chip__label--xs, .d-chip__label--size-100, .d-chip__label--sm, .d-chip__label--size-200) :where(.d-avatar__initials) {
+    display: none;
   }
 
   //  A focused or pressed clickable chip inverts its text, and the close icon follows it.
@@ -131,13 +156,10 @@
     --chip-color-border: var(--dt-color-border-subtle);
 
     display: inline-flex;
+    gap: var(--chip-content-gap);
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    max-inline-size: var(--dt-layout-100-percent);
-    block-size: var(--chip-block-size);
-    padding-block: 0;
-    padding-inline: var(--chip-padding-inline-start) var(--chip-padding-inline-end);
     color: var(--chip-color-text);
     font-weight: var(--dt-font-weight-semi-bold);
     font-size: var(--chip-text-size);
@@ -149,6 +171,10 @@
     //  The border is an inset shadow so it sits inside the padding box, like a Figma inside stroke.
     box-shadow: inset 0 0 0 var(--dt-size-border-100) var(--chip-color-border);
     cursor: default;
+    max-inline-size: var(--dt-layout-100-percent);
+    block-size: var(--chip-block-size);
+    padding-block: 0;
+    padding-inline: var(--chip-padding-inline-start) var(--chip-padding-inline-end);
 
     //  These properties are only set if d-chip is interactive (ex: a button).
     &:is(@{chip-interactive}) {
@@ -165,10 +191,9 @@
       &:focus-visible,
       &:where(.d-chip__label--focus-always):focus {
         outline: none;
+        box-shadow: inset 0 0 0 var(--dt-size-border-100) var(--chip-color-border), var(--dt-shadow-focus);
 
         --chip-color-background: var(--dt-color-surface-contrast-opaque);
-
-        box-shadow: inset 0 0 0 var(--dt-size-border-100) var(--chip-color-border), var(--dt-shadow-focus);
       }
 
       &:active:not(:focus-visible) {
@@ -177,7 +202,8 @@
     }
 
     .d-avatar {
-      --avatar-size-shape: calc(var(--chip-block-size) - var(--dt-spacing-100));
+      --avatar-size-shape: calc(var(--chip-block-size) - 2 * var(--chip-avatar-inset));
+      --avatar-border-radius: max(0px, calc(var(--chip-border-radius) - var(--chip-avatar-inset)));
 
       overflow: hidden;
     }
@@ -261,7 +287,7 @@
   //  $   CONTENT ELEMENTS
   //  --------------------------------------------------------------------------
   &__avatar {
-    padding-inline-end: var(--chip-gap);
+    padding-inline-end: var(--chip-slot-gap);
   }
 
   //  Wrappers for the freeform leading / trailing slots.
@@ -279,11 +305,11 @@
   }
 
   &__leading {
-    padding-inline-end: var(--chip-gap);
+    padding-inline-end: var(--chip-slot-gap);
   }
 
   &__trailing {
-    padding-inline-start: var(--chip-gap);
+    padding-inline-start: var(--chip-slot-gap);
   }
 
   &__icon,
@@ -299,11 +325,11 @@
   }
 
   &__icon {
-    padding-inline-end: var(--chip-gap);
+    padding-inline-end: var(--chip-slot-gap);
   }
 
   &__end-icon {
-    padding-inline-start: var(--chip-gap);
+    padding-inline-start: var(--chip-slot-gap);
   }
 
   &__text {
