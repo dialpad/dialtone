@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-13
+last_updated: 2026-11-16
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -186,10 +186,11 @@ The 5% threshold is set via `INCREASE_THRESHOLD` environment variable.
 
 **Trigger:**
 - `workflow_dispatch` with package selector
-- Push to `production`, `alpha`, `beta`, `next` when `package.json` files change
+- Push to `production` when `package.json` files change
+- Automated dispatch from `release.yml` after successful prerelease version preparation (`alpha`, `beta`, `next`)
 
 **What it does:**
-Publishes each changed package to two registries: npm (public) and GitHub Packages (`@dialpad` scope).
+Publishes each changed package to two registries: npm (public) and GitHub Packages (`@dialpad` scope). Prerelease dispatches pass the final prepared commit and the full preparation range, so adapters and their runtime qualify together. Every package job uses that pinned commit; intermediate prerelease pushes do not publish. A failed preparation blocks the handoff and an unchanged batch publishes nothing. Dispatch success does not establish publication success; check the separate Publish Web run.
 
 1. `filter-actions` — Detects which packages have changed `package.json` (indicating a new version from semantic-release) and selects the qualified lookup packages: the umbrella, icons, emojis, tokens, CLI and MCP server
 2. `qualify` — When a qualified package is selected, packs those packages once (reusing any version a registry already holds), generates CLI/MCP examples for the exact versions, builds every delivered example against the archives and probes the installed CLI/MCP bundles. Publication waits for it; its archives and reports are uploaded as `release-qualification`

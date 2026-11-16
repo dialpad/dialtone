@@ -3,6 +3,18 @@ name: Publish Web
 on:
   workflow_dispatch:
     inputs:
+      release_sha:
+        description: 'Prepared batch final commit (automation; leave batch fields empty for one package)'
+        type: string
+        required: false
+      release_base:
+        description: 'Commit before batch version preparation'
+        type: string
+        required: false
+      release_branch:
+        description: 'Prepared batch channel: alpha, beta or next'
+        type: string
+        required: false
       package:
         description: 'Select the package you want to publish'
         required: true
@@ -23,9 +35,6 @@ on:
   push:
     branches:
       - production
-      - alpha
-      - beta
-      - next
     paths:
       - '**/package.json'
 
@@ -36,30 +45,73 @@ jobs:
   variables-setup:
     runs-on: ubuntu-latest
     outputs:
-      current_branch: ${{ steps.branch-name.outputs.current_branch }}
-      release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'latest' || steps.branch-name.outputs.current_branch }}
+      current_branch: ${{ steps.source.outputs.branch }}
+      release_tag: ${{ steps.source.outputs.tag }}
+      source_sha: ${{ steps.source.outputs.source_sha }}
     steps:
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v8
 
+      - name: Select immutable publication source
+        id: source
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          RELEASE_BASE: ${{ inputs.release_base }}
+          RELEASE_BRANCH: ${{ inputs.release_branch }}
+          EVENT_SHA: ${{ github.sha }}
+          EVENT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
+        run: |
+          if [[ -n "$RELEASE_SHA$RELEASE_BASE$RELEASE_BRANCH" ]]; then
+            [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ && "$RELEASE_BASE" =~ ^[0-9a-f]{40}$ ]] || exit 1
+            [[ "$RELEASE_BRANCH" =~ ^(alpha|beta|next)$ && "$RELEASE_BRANCH" == "$EVENT_BRANCH" ]] || exit 1
+          else
+            RELEASE_SHA="$EVENT_SHA"
+            RELEASE_BRANCH="$EVENT_BRANCH"
+          fi
+          echo "source_sha=$RELEASE_SHA" >> "$GITHUB_OUTPUT"
+          echo "branch=$RELEASE_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "tag=$([[ "$RELEASE_BRANCH" == production ]] && echo latest || echo "$RELEASE_BRANCH")" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout prepared release
+        if: ${{ inputs.release_sha != '' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.source.outputs.source_sha }}
+          fetch-depth: 0
+
+      - name: Validate prepared release range
+        if: ${{ inputs.release_sha != '' }}
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          RELEASE_BASE: ${{ inputs.release_base }}
+          RELEASE_BRANCH: ${{ inputs.release_branch }}
+        run: |
+          git cat-file -e "$RELEASE_BASE^{commit}" || exit 1
+          git cat-file -e "$RELEASE_SHA^{commit}" || exit 1
+          git merge-base --is-ancestor "$RELEASE_BASE" "$RELEASE_SHA" || exit 1
+          git merge-base --is-ancestor "$RELEASE_SHA" "origin/$RELEASE_BRANCH" || exit 1
+
   filter-actions:
+    needs: [variables-setup]
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+      packages: ${{ (inputs.release_sha != '' || github.event_name == 'push') && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
       qualified: ${{ steps.qualified.outputs.packages }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
+          fetch-depth: 0
 
       - name: Filter actions by path
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ inputs.release_sha != '' || github.event_name == 'push' }}
         uses: dorny/paths-filter@v3
         id: filter-path
         with:
-          base: ${{ github.ref }}
+          base: ${{ inputs.release_base || github.event.before }}
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
           list-files: 'json'
           filters: |
             dialtone:
@@ -86,7 +138,7 @@ jobs:
               - 'packages/dialtone-cli/package.json'
 
       - name: Filter actions by input
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ !inputs.release_sha && github.event_name == 'workflow_dispatch' }}
         id: filter-input
         run: |
           echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
@@ -95,7 +147,7 @@ jobs:
       - name: Select qualified lookup packages
         id: qualified
         env:
-          PACKAGES: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+          PACKAGES: ${{ (inputs.release_sha != '' || github.event_name == 'push') && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
         run: echo "packages=$(node scripts/retrieval/release-archives.mjs select)" >> $GITHUB_OUTPUT
 
   check-dialpad-member:
@@ -122,7 +174,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
@@ -178,7 +230,7 @@ jobs:
 
   publish:
     needs: [ variables-setup, check-dialpad-member, filter-actions, qualify ]
-    if: ${{ !cancelled() && needs.variables-setup.result == 'success' && needs.filter-actions.result == 'success' && needs.check-dialpad-member.result == 'success' && contains(fromJSON('["success", "skipped", "failure"]'), needs.qualify.result) && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]')) }}
+    if: ${{ !cancelled() && needs.variables-setup.result == 'success' && needs.filter-actions.result == 'success' && needs.check-dialpad-member.result == 'success' && contains(fromJSON('["success", "skipped", "failure"]'), needs.qualify.result) && needs.filter-actions.outputs.packages != '[]' }}
     strategy:
       fail-fast: false
       matrix:
@@ -191,13 +243,14 @@ jobs:
             registry_url: //registry.npmjs.org/
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       packages: write
       id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
@@ -286,7 +339,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment

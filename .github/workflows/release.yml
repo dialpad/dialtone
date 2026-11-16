@@ -56,6 +56,9 @@ jobs:
     needs: [get-branch-name]
     if: ${{ contains(fromJSON('["staging", "alpha", "beta", "next"]'), needs.get-branch-name.outputs.current_branch) }}
     runs-on: ubuntu-latest
+    outputs:
+      base_sha: ${{ steps.release-base.outputs.base_sha }}
+      release_sha: ${{ steps.release-final.outputs.release_sha }}
     permissions:
       contents: write
       packages: write
@@ -73,6 +76,10 @@ jobs:
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
+
+      - name: Record release base
+        id: release-base
+        run: echo "base_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       # Release to GitHub
       - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
@@ -126,6 +133,32 @@ jobs:
       - name: Release Dialtone ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
         run: pnpm nx run dialtone:release
+
+      - name: Record prepared release commit
+        id: release-final
+        run: echo "release_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  # Individual semantic-release pushes are incomplete version sets on prerelease branches.
+  publish-prerelease:
+    needs: [get-branch-name, release]
+    if: ${{ contains(fromJSON('["alpha", "beta", "next"]'), needs.get-branch-name.outputs.current_branch) && needs.release.outputs.base_sha != needs.release.outputs.release_sha }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # A top-level dispatch keeps publish-web.yml as the existing npm trusted-publisher identity.
+      - name: Dispatch prepared prerelease publication
+        env:
+          GH_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_SHA: ${{ needs.release.outputs.release_sha }}
+          RELEASE_BASE: ${{ needs.release.outputs.base_sha }}
+          RELEASE_BRANCH: ${{ needs.get-branch-name.outputs.current_branch }}
+        run: >
+          gh workflow run publish-web.yml --ref "$RELEASE_BRANCH"
+          --field "release_sha=$RELEASE_SHA"
+          --field "release_base=$RELEASE_BASE"
+          --field "release_branch=$RELEASE_BRANCH"
 
   update-production:
     needs: [ release ]
