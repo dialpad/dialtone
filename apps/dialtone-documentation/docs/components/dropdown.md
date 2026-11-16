@@ -160,11 +160,11 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 
 ## Persistent Menu Choices
 
-Menu radio choices require `menuitemradio` support in both ListItem and Dropdown. Older packages, including `@dialpad/dialtone` 10.5.1, do not include this API. Check the supported roles in your installed package before adopting this pattern.
+Menu radio choices require `menuitemradio` support in both ListItem and Dropdown, available in `@dialpad/dialtone` 10.12.0 and later.
 
 The parent owns the committed sort order. Each radio row uses `selected` for its checkmark and `aria-checked`; arrows and typeahead move focus without changing that state. ListItemGroup supplies an optional heading inside the menu. Ordinary action rows can share the menu and keep `menuitem`.
 
-<!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices","exclude":{"reason":"The dt10-pinned profile uses @dialpad/dialtone 10.5.1, which lacks menuitemradio checked state and navigation. Re-enable after a published compatible release, a compatible fixture profile, and consumer build, API, keyboard and accessibility qualification.","owner":"DLT-3738"}} -->
+<!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices"} -->
 
 ```vue demo
 <dt-dropdown>

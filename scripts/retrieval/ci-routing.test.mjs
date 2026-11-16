@@ -93,3 +93,49 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
       `missing mandatory suite ${required}`,
     );
 });
+
+test('release qualification precedes publication and gates overall release success', () => {
+  const publish = readWorkflow('publish-web.yml');
+  const { qualify, publish: matrix, 'verify-release': verify } = publish.jobs;
+  const runs = job => job.steps.map(step => step.run ?? '').join('\n');
+  assert.match(runs(publish.jobs['filter-actions']), /release-archives\.mjs select/);
+  assert.match(runs(qualify), /qualify-release-examples\.mjs\s+--mode release/);
+  const qualifyStep = qualify.steps.find(step => /qualify-release-examples\.mjs/.test(step.run ?? ''));
+  assert.match(qualifyStep.env.QUALIFIED, /outputs\.qualified/, 'qualification must know the selected packages');
+  assert.match(qualifyStep.run, /--package/);
+  for (const [job, needs] of [[matrix, ['qualify']], [verify, ['qualify', 'publish']]]) {
+    assert.ok(needs.every(name => job.needs.includes(name)));
+    // `!cancelled()` drops the implicit success requirement on every upstream job.
+    for (const upstream of ['variables-setup', 'filter-actions']) assert.ok(job.if.includes(`needs.${upstream}.result == 'success'`), upstream);
+  }
+  // Qualified packages publish only after qualification passes; a failed qualification fails their
+  // matrix legs explicitly while unrelated packages keep publishing. Verification needs a qualified run.
+  assert.ok(matrix.if.includes('needs.check-dialpad-member.result == \'success\''));
+  const qualifiedSteps = matrix.steps.filter(step => step.if?.includes('outputs.qualified') && !step.if.startsWith('${{ !'));
+  const stop = qualifiedSteps.find(step => /exit 1/.test(step.run ?? ''));
+  assert.match(stop.if, /needs\.qualify\.result != 'success'/);
+  for (const step of qualifiedSteps.filter(step => step !== stop))
+    assert.match(step.if, /needs\.qualify\.result == 'success'/, step.name);
+  assert.ok(verify.if.includes('needs.qualify.result == \'success\''));
+  // No concurrency group: GitHub keeps one pending run per group and would silently cancel a
+  // queued publication. Overlapping runs instead fail loudly on the immutable-bytes check.
+  assert.equal(publish.concurrency, undefined);
+  // Qualified packages publish their archives; all others keep the rebuild step.
+  const qualified = matrix.steps.find(step => /release-archives\.mjs publish/.test(step.run ?? ''));
+  const rebuilt = matrix.steps.find(step => /:publish/.test(step.run ?? ''));
+  const selected = 'contains(fromJSON(needs.filter-actions.outputs.qualified), matrix.package)';
+  assert.ok(qualified.if.includes(selected) && rebuilt.if.includes('!' + selected));
+  const verifyStep = verify.steps.find(step => /release-archives\.mjs verify/.test(step.run ?? ''));
+  assert.match(verifyStep.env.QUALIFIED, /outputs\.qualified/, 'verify must receive every qualified package');
+  for (const [name, job] of Object.entries(publish.jobs)) {
+    assert.ok(!job['continue-on-error'] && job.steps.every(step => !step['continue-on-error']), `${name} hides a failed gate`);
+    for (const step of job.steps.filter(step => step.uses?.startsWith('actions/checkout')))
+      assert.equal(step.with?.ref, '${{ github.sha }}', `${name} is not pinned to the prepared commit`);
+    for (const step of job.steps.filter(step => /release-archives|qualify-release/.test(step.run ?? '')))
+      assert.doesNotMatch(step.run, /\$\{\{\s*needs\./, `${name} interpolates job outputs into the shell`);
+  }
+  assertRouted('release qualification', ['scripts/retrieval/qualify-release-examples.mjs', 'scripts/retrieval/release-archives.mjs', 'scripts/retrieval/release-profile.mjs', '.github/workflows/publish-web.yml',
+    'gulpfile.cjs', 'entry/vue3.js', 'packages/dialtone-emojis/package.json'],
+    [workflow.on.pull_request.paths, workflow.on.push.paths, filters.cli]);
+  assert.match(runs(workflow.jobs['qualify-lookup-candidate']), /qualify-release-examples\.mjs\s+--mode candidate/);
+});

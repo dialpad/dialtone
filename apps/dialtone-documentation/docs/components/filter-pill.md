@@ -8,9 +8,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 combinator: DtFilterPill
 ---
 
-Controlled selection, trailing slots and `opened` are unreleased. Dialtone 10.5.1 predates these APIs; use a compatible published release when available.
-
-<!-- @example {"exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+Controlled selection, trailing slots and `opened` require `@dialpad/dialtone` 10.12.0 or later.
 
 ```vue demo-only
 <dt-filter-pill
@@ -65,7 +63,7 @@ Set `neutral-value` to the choice that Clear restores. That choice stays checked
 
 Arrow keys move focus without changing selection. The filter’s label stays available to screen readers.
 
-<!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-single-selection"} -->
 
 ```vue demo
 <dt-filter-pill
@@ -105,7 +103,7 @@ Use an array of strings for `selected`. Changes apply immediately unless you set
 
 A different `selected` value replaces pending edits. Replacing it with the same selections, or changing the options, preserves them, including selections temporarily missing from the options.
 
-<!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection","exclude":{"reason":"Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+<!-- @example {"id":"examples/docs/components/filter-pill/controlled-multiple-selection"} -->
 
 ```vue demo
 <dt-filter-pill
@@ -151,7 +149,7 @@ Before removing an open or closing pill, close it and wait for `opened(false)`. 
 
 The example then moves focus to Reset. A pill that has never opened can be removed directly. The existing `v-model` API keeps its open-event timing.
 
-<!-- @example {"exclude":{"reason":"Terminal close/removal uses a named application handler and component refs beyond bounded lookup setup. The current Dialtone 10.5.1 consumer profile also lacks the controlled selection and opened notification APIs.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+<!-- @example {"exclude":{"reason":"Terminal close/removal uses a named application handler and component refs beyond bounded lookup setup.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo
 <dt-stack direction="row" gap="100">
@@ -216,7 +214,7 @@ function resetRemovalExample () {
 
 Use `anchorEnd` and `optionEnd` to add counts while keeping the built-in labels and selection behavior. Hide the decorative badge from screen readers and provide its meaning as text. Translate count text with your application’s plural rules.
 
-<!-- @example {"exclude":{"reason":"Named application handler, reactive options and computed count setup exceed bounded lookup extraction; the current Dialtone 10.5.1 consumer pin also predates options/selected.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
+<!-- @example {"exclude":{"reason":"Named application handler, reactive options and computed count setup exceed bounded lookup extraction.","owner":"DLT-3736 / Dialtone component and lookup maintainers"}} -->
 
 ```vue demo
 <dt-stack gap="200">

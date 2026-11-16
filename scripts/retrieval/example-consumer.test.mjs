@@ -57,3 +57,18 @@ test('documented native attributes cannot bypass declared prop restrictions', ()
     assert.throws(() => checkTemplateApi(baseParse('<dt-input placeholder="Hint" />'), [{ ...input, props: [prop] }], []), error);
   }
 });
+
+test('consumer fixture paths accept nested authored and encoded preset IDs only', async () => {
+  const { assertExampleId } = await import('./example-consumer.mjs');
+  for (const id of ['examples/button-default', 'examples/docs/components/filter-pill/controlled-single-selection', 'examples/presets/DtAvatar/with%20presence%2C%20no%20icon'])
+    assert.equal(assertExampleId(id), id);
+  for (const id of ['examples/../escape', 'examples/presets/DtAvatar/..', 'examples/Docs/Upper', 'other/button-default'])
+    assert.throws(() => assertExampleId(id), /Unsupported example ID path/);
+});
+
+test('consumer API checks parse delivered templates with HTML void elements', async () => {
+  const { parseTemplate } = await import('./example-consumer.mjs');
+  const compilerDom = createRequire(require.resolve('vue/package.json'))('@vue/compiler-dom');
+  const text = [{ displayName: 'DtText', props: [], slots: [{ name: 'default' }] }];
+  assert.deepEqual(checkTemplateApi(parseTemplate(compilerDom, '<dt-text>Line 1<br>Line 2</dt-text>'), text, []), []);
+});

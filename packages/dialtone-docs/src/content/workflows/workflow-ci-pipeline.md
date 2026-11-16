@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-05
+last_updated: 2026-11-13
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -52,6 +52,7 @@ Workflow triggers, path filters and job-level conditions determine which checks 
 | `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
 | `test-lint-plugins` | Lint packages, canonical migration guidance, its generator and this workflow | Guidance generation check and Stylelint package tests |
 | `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the component metadata generator suites, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
+| `qualify-lookup-candidate` | Same paths as `test-cli` | Pack the umbrella runtime closure and both adapters from the PR, build every delivered example against those archives and probe the installed CLI/stdio MCP bundles (`qualify-release-examples.mjs --mode candidate`); uploads the receipt and reports |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
@@ -190,11 +191,14 @@ The 5% threshold is set via `INCREASE_THRESHOLD` environment variable.
 **What it does:**
 Publishes each changed package to two registries: npm (public) and GitHub Packages (`@dialpad` scope).
 
-1. `filter-actions` — Detects which packages have changed `package.json` (indicating a new version from semantic-release)
-2. For each package × registry combination (matrix):
+1. `filter-actions` — Detects which packages have changed `package.json` (indicating a new version from semantic-release) and selects the qualified lookup packages: the umbrella, icons, emojis, tokens, CLI and MCP server
+2. `qualify` — When a qualified package is selected, packs those packages once (reusing any version a registry already holds), generates CLI/MCP examples for the exact versions, builds every delivered example against the archives and probes the installed CLI/MCP bundles. Publication waits for it; its archives and reports are uploaded as `release-qualification`
+3. For each package × registry combination (matrix):
    - Sets `NODE_AUTH_TOKEN` and registry URL
-   - Runs `pnpm nx run {package}:publish --publish-branch={branch} --tag={tag}`
-3. A 15-second delay is added before publishing `dialtone-vue` due to npm rate limiting
+   - Qualified packages: publishes the qualified archive (`release-archives.mjs publish`); an existing version is skipped only when its integrity matches (tags are left unchanged), otherwise the job fails. If qualification failed, these legs fail without publishing; other packages still publish
+   - Other packages: runs `pnpm nx run {package}:publish --publish-branch={branch} --tag={tag}`
+4. A 15-second delay is added before publishing `dialtone-vue` due to npm rate limiting
+5. `verify-release` — Confirms within one shared, bounded wait that both registries hold the qualified bytes and, for versions of that channel, the channel tag (a prerelease version must not be `latest`, and a prerelease of another channel is rejected), then runs installed CLI/MCP lookup and example smoke checks. The workflow succeeds only when this passes; nothing is unpublished or rolled back.
 
 **RELEASE_TAG:** `latest` on `production`, branch name on `alpha`/`beta`/`next`.
 

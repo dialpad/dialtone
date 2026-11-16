@@ -4,15 +4,20 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readPublicComponentExports, withComponentIdentity } from '../../../../scripts/lib/vue-component-identity.mjs';
 import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
-import { getProfile } from '../../../../scripts/retrieval/profiles.mjs';
+import { selectExampleProfile } from '../../../../scripts/retrieval/release-profile.mjs';
 import matter from 'gray-matter';
 import { readSourceExamples, directiveNames } from './source-examples.mjs';
 import { chunkSections } from './source-sections.mjs';
 import { assertTemplateBindings, assertStaticHtml, sourceSetupForTemplate, componentTags } from './example-template.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
-const profile = getProfile('dt10-pinned');
-const evidence = JSON.parse(readFileSync(new URL('./example-validation.json', import.meta.url), 'utf8'));
+// The release manifest (or the checked package versions) selects the target; run evidence overlays saved evidence.
+const { profile, evidence: runEvidence } = selectExampleProfile();
+const savedEvidence = JSON.parse(readFileSync(new URL('./example-validation.json', import.meta.url), 'utf8'));
+const evidence = {
+  runs: { ...savedEvidence.runs, ...runEvidence?.runs },
+  examples: { ...savedEvidence.examples, ...runEvidence?.examples },
+};
 const hash = value => createHash('sha256').update(value).digest('hex');
 let publicExports;
 
@@ -79,6 +84,7 @@ export function assembleExampleRecord({ id, template, definition, rawFile = '', 
   const run = evidence.runs[savedRun];
   const saved = run ? { ...perExample, ...run } : undefined;
   const artifact = profile.artifacts[saved?.artifact?.package];
+  // Same version string is not the same bytes: proof binds the profile, version and archive integrity.
   const matchesProfile = saved?.profile === profile.id && artifact &&
     saved.artifact.version === artifact.version && saved.artifact.integrity === artifact.integrity;
   const savedValidation = saved?.payloadHash === payload && matchesProfile ? saved : { payloadHash: payload, consumerBuild: 'unverified' };

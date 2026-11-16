@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [release, semantic-release, versioning, changelog, tags, tuesday, cron, staging, production, npm-publish]
 ai_summary: How Dialtone releases work, including package versioning, changelogs and the currently skipped production-promotion job.
-last_updated: 2026-10-27
+last_updated: 2026-11-13
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
@@ -96,6 +96,8 @@ Each package runs `pnpm nx run {packageName}:release`, which executes the plugin
 `npmPublish: false` in every `release-ci.config.cjs` means semantic-release only handles versioning and changelog — it does not publish to npm.
 
 Actual npm publishing is done by a separate `publish-web.yml` workflow, which triggers on pushes to `production`, `alpha`, `beta`, and `next` when `package.json` files change. It publishes to both the public npm registry and GitHub Packages under the `@dialpad` scope.
+
+When the umbrella, its workspace runtime packages (icons, emojis, tokens), the CLI or the MCP server publish, a `qualify` job runs first. It packs those packages once, generates the CLI/MCP examples for the exact released versions, builds every delivered example against the packed packages and probes the installed CLI and MCP bundles. A version npm or GitHub Packages already holds is reused, not repacked. The publish matrix then publishes those qualified archives with the existing tags; other packages keep their build-and-publish step. A `verify-release` job confirms that both registries hold the qualified bytes and tags, then runs bounded installed lookup and example smoke checks. The workflow reports success only after that verification. Publication is not atomic and is not rolled back: rerun the failed jobs of the same run to finish missing work (a new run stops at qualification if a selected CLI or MCP version is already published); an existing version with different bytes fails, a prerelease of another channel fails, and skipped versions keep their tags. A failed qualification blocks only the packages it covers, and the workflow still fails. Verification stays red, and needs a manual `npm dist-tag add`, if a stable version was first published under a prerelease tag or a channel tag has already moved to a newer version. See `scripts/retrieval/README.md` for the commands.
 
 ## Packages With Extended Release Rules
 

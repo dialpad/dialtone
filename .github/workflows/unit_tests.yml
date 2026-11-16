@@ -23,6 +23,10 @@ on:
       - 'scripts/tests/**'
       - 'scripts/lib/**'
       - 'lookup-release.config.cjs'
+      - '.github/workflows/publish-web.yml'
+      - 'gulpfile.cjs'
+      - 'entry/**'
+      - 'packages/dialtone-emojis/**'
       - 'common/utils/server.mjs'
       - '.github/workflows/unit_tests.yml'
       - 'packages/stylelint-plugin-dialtone/**'
@@ -59,6 +63,10 @@ on:
       - 'scripts/tests/**'
       - 'scripts/lib/**'
       - 'lookup-release.config.cjs'
+      - '.github/workflows/publish-web.yml'
+      - 'gulpfile.cjs'
+      - 'entry/**'
+      - 'packages/dialtone-emojis/**'
       - 'common/utils/server.mjs'
       - '.github/workflows/unit_tests.yml'
       - 'packages/stylelint-plugin-dialtone/**'
@@ -129,6 +137,10 @@ jobs:
               - 'scripts/tests/**'
               - 'scripts/lib/**'
               - 'lookup-release.config.cjs'
+              - '.github/workflows/publish-web.yml'
+              - 'gulpfile.cjs'
+              - 'entry/**'
+              - 'packages/dialtone-emojis/**'
               - 'common/utils/server.mjs'
               - '.github/workflows/unit_tests.yml'
               - 'scripts/generate-migration-guidance.mjs'
@@ -274,6 +286,41 @@ jobs:
 
       - name: Run existing documentation search scenarios
         run: node packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs
+
+  # Packs the runtime closure and both adapters from this commit, qualifies every delivered example
+  # against the exact candidate archives and probes the installed CLI/stdio MCP bundles.
+  qualify-lookup-candidate:
+    needs: changes
+    if: needs.changes.outputs.cli == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Qualify candidate archives, examples and lookup bundles
+        run: >
+          node scripts/retrieval/qualify-release-examples.mjs
+          --mode candidate
+          --out ${{ runner.temp }}/lookup-candidate
+
+      - name: Upload candidate qualification evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lookup-candidate-qualification
+          path: |
+            ${{ runner.temp }}/lookup-candidate/receipt.json
+            ${{ runner.temp }}/lookup-candidate/manifest*.json
+            ${{ runner.temp }}/lookup-candidate/consumer/example-consumer-report.json
+            ${{ runner.temp }}/lookup-candidate/delivery/packed-example-report.json
+          if-no-files-found: ignore
+          retention-days: 14
 
   test-lint-plugins:
     needs: changes
