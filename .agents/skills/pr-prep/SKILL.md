@@ -48,7 +48,7 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    git rev-parse HEAD; git diff --stat "$BASE"; git ls-files -o --exclude-standard
    ```
 
-   - Record base SHA, head SHA, file list and size. Staged, unstaged and untracked files are all in scope; untracked files are listed but not counted in the size.
+   - Record base SHA, head SHA, file list and size. Staged, unstaged and untracked files are all in scope. `git diff` leaves untracked files out, so add each one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size.
    - Propose the PR title per `.github/COMMIT_CONVENTION.md` and check it with `echo "<title>" | pnpm exec commitlint`.
    - Review mode (PR not checked out): take base, head and file list from `gh pr view <n> --json baseRefOid,headRefOid,files` and the diff from `gh pr diff <n>`; use that file list for step 2.
    - Empty scope: say "Nothing to review" and stop.
