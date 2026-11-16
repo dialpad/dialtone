@@ -115,7 +115,9 @@ for (const [name, path] of Object.entries(archives))
 // Same version string is not the same bytes: compare the installed archive with the profile binding.
 const archiveIntegrities = Object.fromEntries(Object.entries(archives)
   .map(([name, path]) => [name, archiveIntegrity(path)]));
-artifact.integrity = archiveIntegrities['@dialpad/dialtone'] ?? installed['node_modules/@dialpad/dialtone'].integrity;
+artifact.integrity = installed['node_modules/@dialpad/dialtone'].integrity;
+if (archives['@dialpad/dialtone'])
+  assert.equal(artifact.integrity, archiveIntegrities['@dialpad/dialtone'], 'Installed @dialpad/dialtone bytes differ from the supplied archive');
 assert.equal(artifact.integrity, primaryArtifact.integrity, 'Installed @dialpad/dialtone archive differs from the selected profile');
 const report = {
   fixture, profile: profile.id, artifact,

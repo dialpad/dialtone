@@ -57,7 +57,7 @@ try {
   }
   const coverage = JSON.parse(readFileSync(resolve(dirname(docsPath), 'preset-example-coverage.json')));
   const excluded = new Map(coverage.entries.filter(entry => entry.disposition !== 'delivered')
-    .map(entry => [entry.disposition, entry.id]));
+    .map(entry => [entry.id, entry.id]));
   // Owned source exclusions stay withheld through both installed transports.
   const sources = JSON.parse(readFileSync(resolve(dirname(docsPath), 'example-coverage.json')));
   const sourceExcluded = sources.pages.flatMap(page => page.candidates).filter(candidate => candidate.disposition === 'excluded').map(candidate => candidate.id);
