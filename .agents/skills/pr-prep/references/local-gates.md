@@ -30,17 +30,21 @@ Lint for `AGENTS.md` and `.agents/**`: ESLint covers `.js`, `.mjs` and `.cjs`; m
 : "${BASE:?set BASE to the recorded base SHA}"
 CHANGED=$({ git diff --name-only --diff-filter=d "$BASE" -- AGENTS.md .agents; git ls-files -o --exclude-standard -- AGENTS.md .agents; })
 echo "$CHANGED" | grep -E '\.(js|mjs|cjs)$' | xargs pnpm exec eslint
+{ pnpm exec prettier --version && pnpm exec markdownlint --version; } >/dev/null 2>&1 \
+  || echo "not run: prettier or markdownlint unavailable"
 echo "$CHANGED" | grep -E '\.md$' | while read -r f; do
   now=$(pnpm exec prettier --check --single-quote "$f" >/dev/null 2>&1; echo $?)
   was=$(git show "$BASE:$f" 2>/dev/null | pnpm exec prettier --check --single-quote --stdin-filepath "$f" >/dev/null 2>&1; echo $?)
   [ "$now" != 0 ] && [ "$was" = 0 ] && echo "new prettier failure: $f"
-  now=$(pnpm exec markdownlint "$f" 2>&1 | wc -l)
-  was=$(git show "$BASE:$f" 2>/dev/null | pnpm exec markdownlint --stdin 2>&1 | wc -l)
-  [ "$now" -gt "$was" ] && echo "new markdownlint findings: $f"
+  # Compare findings without file names and positions, so a moved line is not new.
+  norm() { sed -E 's/^[^ ]*:[0-9]+(:[0-9]+)? //' | sort; }
+  pnpm exec markdownlint "$f" 2>&1 | norm >"${TMPDIR:-/tmp}/mdl-now"
+  git show "$BASE:$f" 2>/dev/null | pnpm exec markdownlint --stdin 2>&1 | norm >"${TMPDIR:-/tmp}/mdl-was"
+  comm -23 "${TMPDIR:-/tmp}/mdl-now" "${TMPDIR:-/tmp}/mdl-was" | sed "s|^|new markdownlint finding in $f: |"
 done
 ```
 
-No output from the markdown loop and no ESLint errors means pass. Findings that already exist at `$BASE` are a note, not a failed gate.
+No output from the markdown loop and no ESLint errors means pass. A "not run" line means the gate was not run. Findings that already exist at `$BASE` are a note, not a failed gate.
 
 Notes:
 
