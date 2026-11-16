@@ -8,4 +8,4 @@ Run when the diff changes `.less`, `.css` or `<style>` content. Dialtone's speci
 - Repeated selector lists use Less variables.
 - Utility classes: no new class whose output duplicates an existing one.
 - Mechanical: no literal `&` in compiled CSS. If CSS was built from the reviewed head, `rg -n '&' <built css>`; any hit is a bug. Otherwise flag candidates in the scope diff (in review mode, the PR's diff, not the local checkout):
-  `<scope diff> -- '*.less' | rg -n '^\+.*:(not|is|where)\([^)]*&[^)]*,'`
+  `<scope diff> | awk '/^diff --git/{keep=/\.less$/} keep' | rg -n '^\+.*:(not|is|where)\([^)]*&[^)]*,'`

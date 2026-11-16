@@ -29,7 +29,8 @@ Lint for `AGENTS.md` and `.agents/**`: ESLint covers `.js`, `.mjs` and `.cjs`; m
 ```sh
 : "${BASE:?set BASE to the recorded base SHA}"
 CHANGED=$({ git diff --name-only --diff-filter=d "$BASE" -- AGENTS.md .agents; git ls-files -o --exclude-standard -- AGENTS.md .agents; })
-echo "$CHANGED" | grep -E '\.(js|mjs|cjs)$' | xargs pnpm exec eslint
+JS=$(echo "$CHANGED" | grep -E '\.(js|mjs|cjs)$')
+[ -n "$JS" ] && echo "$JS" | xargs pnpm exec eslint
 { pnpm exec prettier --version && pnpm exec markdownlint --version; } >/dev/null 2>&1 \
   || echo "not run: prettier or markdownlint unavailable"
 echo "$CHANGED" | grep -E '\.md$' | while read -r f; do
