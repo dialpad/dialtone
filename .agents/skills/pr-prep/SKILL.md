@@ -50,7 +50,7 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
    - Record base SHA, head SHA, file list and size. Staged, unstaged and untracked files are all in scope. `git diff` leaves untracked files out, so add each one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size.
    - Propose the PR title per `.github/COMMIT_CONVENTION.md` and check it with `echo "<title>" | pnpm exec commitlint`.
-   - Review mode (PR not checked out): take base, head and file list from `gh pr view <n> --json baseRefOid,headRefOid,files` and the diff from `gh pr diff <n>`; use that file list for step 2.
+   - Review mode (PR not checked out): take base, head and file list from `gh pr view <n> --json baseRefOid,headRefOid,files` and the diff from `gh pr diff <n>`; use that file list for step 2. The local checkout may hold other versions of unchanged files, so the reviewer reads surrounding code at the PR head: `git fetch origin pull/<n>/head`, then `git show <headRefOid>:<path>`. Neither changes the working tree.
    - Empty scope: say "Nothing to review" and stop.
    - Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs.
    - Any edit or commit makes the scope stale: recapture it before re-review.
