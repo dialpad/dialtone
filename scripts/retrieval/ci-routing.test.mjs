@@ -170,7 +170,7 @@ test('prerelease publication dispatches the complete prepared batch and preserve
 });
 
 test('release bounds select the whole Git batch and validate pinned prerelease ancestry', async () => {
-  const { mkdtempSync, writeFileSync, mkdirSync, rmSync } = await import('node:fs');
+  const { mkdtempSync, writeFileSync, mkdirSync, rmSync, chmodSync } = await import('node:fs');
   const { tmpdir } = await import('node:os');
   const { join } = await import('node:path');
   const { execFileSync } = await import('node:child_process');
@@ -184,8 +184,14 @@ test('release bounds select the whole Git batch and validate pinned prerelease a
   const versions = steps.map((step, index) => /:release\b/.test(step.run ?? '') ? index : -1).filter(index => index >= 0);
   assert.ok(steps.indexOf(before) < Math.min(...versions) && steps.indexOf(after) > Math.max(...versions));
   const output = join(dir, 'outputs');
+  const history = join(dir, 'history.json');
+  const bin = join(dir, 'bin');
+  mkdirSync(bin);
+  writeFileSync(join(bin, 'gh'), '#!/bin/sh\ncat "$FIXTURE_HISTORY"\n');
+  chmodSync(join(bin, 'gh'), 0o755);
+  writeFileSync(history, '[{"workflow_runs":[]}]');
   const shell = (run, env = {}) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', run],
-    { cwd: dir, env: { ...process.env, GITHUB_OUTPUT: output, ...env }, encoding: 'utf8', stdio: 'pipe' });
+    { cwd: dir, env: { ...process.env, PATH: bin + ':' + process.env.PATH, FIXTURE_HISTORY: history, RUNNER_TEMP: dir, GITHUB_RUN_ID: '30', RELEASE_BRANCH: 'alpha', GITHUB_OUTPUT: output, ...env }, encoding: 'utf8', stdio: 'pipe' });
   try {
     git('init', '-q'); git('config', 'user.email', 'fixture@example.invalid'); git('config', 'user.name', 'Fixture');
     writeFileSync(join(dir, 'package.json'), '{"version":"1.0.0"}'); git('add', 'package.json'); git('commit', '-qm', 'base');
@@ -196,6 +202,21 @@ test('release bounds select the whole Git batch and validate pinned prerelease a
       git('add', 'packages'); git('commit', '-qm', name);
     }
     const adapter = git('rev-parse', 'HEAD');
+    // A failed previous run prepared adapters but never dispatched publication.
+    const unfinished = { id: 25, status: 'completed', conclusion: 'failure', head_sha: adapter };
+    const previous = [
+      { workflow_runs: [unfinished, { id: 20, status: 'completed', conclusion: 'cancelled', head_sha: base }] },
+      { workflow_runs: [{ id: 10, status: 'completed', conclusion: 'success', head_sha: base }] },
+    ];
+    writeFileSync(history, JSON.stringify(previous));
+    shell(before.run);
+    const resumedBase = Object.fromEntries(readFileSync(output, 'utf8').trim().split('\n').map(line => line.split('='))).base_sha;
+    assert.equal(resumedBase, base, 'resume must include the already-prepared adapters');
+    writeFileSync(history, JSON.stringify([{ workflow_runs: [{ ...unfinished, status: 'in_progress' }] }]));
+    assert.throws(() => shell(before.run));
+    writeFileSync(history, JSON.stringify([{ workflow_runs: [unfinished] }]));
+    assert.throws(() => shell(before.run));
+    writeFileSync(history, JSON.stringify(previous));
     const cliBase = git('rev-parse', 'HEAD^');
     assert.deepEqual(git('diff', '--name-only', cliBase, adapter).split('\n'), ['packages/dialtone-cli/package.json']);
     writeFileSync(join(dir, 'package.json'), '{"version":"2.0.0-alpha.1"}'); git('add', 'package.json'); git('commit', '-qm', 'umbrella');

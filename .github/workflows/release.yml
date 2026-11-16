@@ -60,6 +60,7 @@ jobs:
       base_sha: ${{ steps.release-base.outputs.base_sha }}
       release_sha: ${{ steps.release-final.outputs.release_sha }}
     permissions:
+      actions: read
       contents: write
       packages: write
       issues: write
@@ -79,7 +80,41 @@ jobs:
 
       - name: Record release base
         id: release-base
-        run: echo "base_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_BRANCH: ${{ needs.get-branch-name.outputs.current_branch }}
+        run: |
+          base_sha=$(git rev-parse HEAD)
+          if [[ "$RELEASE_BRANCH" =~ ^(alpha|beta|next)$ ]]; then
+            gh api --method GET "repos/$GH_REPO/actions/workflows/release.yml/runs" \
+              -f "branch=$RELEASE_BRANCH" -F per_page=100 --paginate --slurp > "$RUNNER_TEMP/release-runs.json" || exit 1
+            base_sha=$(node <<'NODE'
+          const { readFileSync } = require('node:fs');
+          const { execFileSync } = require('node:child_process');
+          const runs = JSON.parse(readFileSync(process.env.RUNNER_TEMP + '/release-runs.json'))
+            .flatMap(page => page.workflow_runs).sort((a, b) => b.id - a.id);
+          const current = Number(process.env.GITHUB_RUN_ID);
+          let base = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+          let unfinished = false;
+          let boundary = false;
+          for (const run of runs) {
+            if (run.id === current) continue;
+            if (run.id > current || run.status !== 'completed')
+              throw new Error('Another preparation run exists; finish the latest run before preparing again');
+            if (run.conclusion === 'success') { boundary = true; break; }
+            unfinished = true;
+            base = run.head_sha;
+          }
+          if (unfinished && !boundary)
+            throw new Error('Preparation history has no successful boundary; inspect the unfinished release before retrying');
+          if (!/^[0-9a-f]{40}$/.test(base)) throw new Error('Invalid preparation base');
+          console.log(base);
+          NODE
+            ) || exit 1
+          fi
+          git merge-base --is-ancestor "$base_sha" HEAD || exit 1
+          echo "base_sha=$base_sha" >> "$GITHUB_OUTPUT"
 
       # Release to GitHub
       - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
