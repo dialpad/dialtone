@@ -73,6 +73,18 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 <dt-toggle>Unchecked</dt-toggle>
 <dt-toggle v-model="checked">Checked</dt-toggle>
 <dt-toggle v-model="mixed">Indeterminate</dt-toggle>
+<!-- @code -->
+
+<dt-toggle>Unchecked</dt-toggle>
+<dt-toggle v-model="checked">Checked</dt-toggle>
+<dt-toggle v-model="mixed">Indeterminate</dt-toggle>
+
+<script setup>
+import { ref } from 'vue'
+
+const checked = ref(true)
+const mixed = ref('mixed')
+</script>
 ```
 
 ## Accessibility
