@@ -151,8 +151,24 @@ test('documentation parser, profile and dependencies participate in the docs bui
     'apps/dialtone-documentation/package.json',
     'apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js',
     'scripts/retrieval/profiles.mjs',
+    'scripts/retrieval/release-profile.mjs',
   ];
   assert.deepEqual(covered(manifests, selfPatterns('dialtone-docs')), manifests);
+});
+test('the selected example release manifest participates by bytes, not only by path', () => {
+  const self = inputs('dialtone-docs').selfInputs;
+  assert.ok(self.some(input => input.env === 'DIALTONE_EXAMPLE_RELEASE_MANIFEST'));
+  const runtime = self.find(input => input.runtime)?.runtime;
+  assert.equal(runtime, 'node scripts/retrieval/release-profile.mjs --fingerprint');
+  const root = new URL('../../', import.meta.url);
+  const fingerprint = env => execFileSync(runtime.split(' ')[0], runtime.split(' ').slice(1), { cwd: root, env: { ...process.env, ...env }, encoding: 'utf8' });
+  assert.equal(fingerprint({ DIALTONE_EXAMPLE_RELEASE_MANIFEST: '' }).trim(), 'source-manifests');
+  // Nx and the docs build run from different directories; a relative selection must hash the same file.
+  const script = new URL('release-profile.mjs', import.meta.url).pathname;
+  const fromDocs = execFileSync('node', [script, '--fingerprint'], { cwd: new URL('../../packages/dialtone-docs/', import.meta.url), env: { ...process.env, DIALTONE_EXAMPLE_RELEASE_MANIFEST: 'scripts/retrieval/legacy-button.json' }, encoding: 'utf8' });
+  const absolute = fingerprint({ DIALTONE_EXAMPLE_RELEASE_MANIFEST: new URL('legacy-button.json', import.meta.url).pathname });
+  assert.match(absolute.trim(), /^[a-f0-9]{64}$/);
+  assert.equal(fromDocs, absolute);
 });
 test('core and adapters hash the generated data they consume through dependency outputs', () => {
   const consumed = [

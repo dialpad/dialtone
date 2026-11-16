@@ -67,12 +67,6 @@ export default {
   },
 
   'persistent choices': {
-    metadata: {
-      lookupExclude: {
-        reason: 'The 10.5.1 profile lacks menuitemradio. Re-enable after compatible package qualification.',
-        owner: 'DLT-3738',
-      },
-    },
     props: {
       navigationType: { initialValue: 'arrow-keys' },
       open: { initialValue: true },
@@ -94,7 +88,7 @@ export default {
 </dt-button>
 <dt-box block-size="200"><!-- holding space... delete me... --> </dt-box>` },
       list: {
-        initialValue: `<!-- Requires a Dialtone release with menuitemradio support; 10.5.1 does not support it.
+        initialValue: `<!-- Requires @dialpad/dialtone 10.12.0 or later for menuitemradio support.
 Bind selected to application state and update that state on click.
 append-to="root" keeps this preview in its host; choose the append target for your application. -->
 <dt-list-item-group heading="Sort order">

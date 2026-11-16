@@ -3,6 +3,18 @@ name: Publish Web
 on:
   workflow_dispatch:
     inputs:
+      release_sha:
+        description: 'Prepared batch final commit (automation; leave batch fields empty for one package)'
+        type: string
+        required: false
+      release_base:
+        description: 'Commit before batch version preparation'
+        type: string
+        required: false
+      release_branch:
+        description: 'Prepared batch channel: alpha, beta or next'
+        type: string
+        required: false
       package:
         description: 'Select the package you want to publish'
         required: true
@@ -23,9 +35,6 @@ on:
   push:
     branches:
       - production
-      - alpha
-      - beta
-      - next
     paths:
       - '**/package.json'
 
@@ -36,27 +45,73 @@ jobs:
   variables-setup:
     runs-on: ubuntu-latest
     outputs:
-      current_branch: ${{ steps.branch-name.outputs.current_branch }}
-      release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'latest' || steps.branch-name.outputs.current_branch }}
+      current_branch: ${{ steps.source.outputs.branch }}
+      release_tag: ${{ steps.source.outputs.tag }}
+      source_sha: ${{ steps.source.outputs.source_sha }}
     steps:
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v8
 
+      - name: Select immutable publication source
+        id: source
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          RELEASE_BASE: ${{ inputs.release_base }}
+          RELEASE_BRANCH: ${{ inputs.release_branch }}
+          EVENT_SHA: ${{ github.sha }}
+          EVENT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
+        run: |
+          if [[ -n "$RELEASE_SHA$RELEASE_BASE$RELEASE_BRANCH" ]]; then
+            [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ && "$RELEASE_BASE" =~ ^[0-9a-f]{40}$ ]] || exit 1
+            [[ "$RELEASE_BRANCH" =~ ^(alpha|beta|next)$ && "$RELEASE_BRANCH" == "$EVENT_BRANCH" ]] || exit 1
+          else
+            RELEASE_SHA="$EVENT_SHA"
+            RELEASE_BRANCH="$EVENT_BRANCH"
+          fi
+          echo "source_sha=$RELEASE_SHA" >> "$GITHUB_OUTPUT"
+          echo "branch=$RELEASE_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "tag=$([[ "$RELEASE_BRANCH" == production ]] && echo latest || echo "$RELEASE_BRANCH")" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout prepared release
+        if: ${{ inputs.release_sha != '' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.source.outputs.source_sha }}
+          fetch-depth: 0
+
+      - name: Validate prepared release range
+        if: ${{ inputs.release_sha != '' }}
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          RELEASE_BASE: ${{ inputs.release_base }}
+          RELEASE_BRANCH: ${{ inputs.release_branch }}
+        run: |
+          git cat-file -e "$RELEASE_BASE^{commit}" || exit 1
+          git cat-file -e "$RELEASE_SHA^{commit}" || exit 1
+          git merge-base --is-ancestor "$RELEASE_BASE" "$RELEASE_SHA" || exit 1
+          git merge-base --is-ancestor "$RELEASE_SHA" "origin/$RELEASE_BRANCH" || exit 1
+
   filter-actions:
+    needs: [variables-setup]
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+      packages: ${{ (inputs.release_sha != '' || github.event_name == 'push') && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+      qualified: ${{ steps.qualified.outputs.packages }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
+          fetch-depth: 0
 
       - name: Filter actions by path
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ inputs.release_sha != '' || github.event_name == 'push' }}
         uses: dorny/paths-filter@v3
         id: filter-path
         with:
-          base: ${{ github.ref }}
+          base: ${{ inputs.release_base || github.event.before }}
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
           list-files: 'json'
           filters: |
             dialtone:
@@ -83,10 +138,17 @@ jobs:
               - 'packages/dialtone-cli/package.json'
 
       - name: Filter actions by input
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ !inputs.release_sha && github.event_name == 'workflow_dispatch' }}
         id: filter-input
         run: |
           echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
+
+      # Runtime closure and lookup adapters publish the archives qualified below, not per-runner rebuilds.
+      - name: Select qualified lookup packages
+        id: qualified
+        env:
+          PACKAGES: ${{ (inputs.release_sha != '' || github.event_name == 'push') && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+        run: echo "packages=$(node scripts/retrieval/release-archives.mjs select)" >> $GITHUB_OUTPUT
 
   check-dialpad-member:
     runs-on: ubuntu-latest
@@ -99,9 +161,76 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
-  publish:
+  # Candidate qualification must pass before any affected package publishes.
+  qualify:
     needs: [ variables-setup, check-dialpad-member, filter-actions ]
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]') }}
+    if: ${{ needs.filter-actions.outputs.qualified != '[]' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      # Reads only: a retry adopts bytes either registry already holds instead of repacking.
+      - name: Authenticate GitHub Packages reads
+        env:
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm config set //npm.pkg.github.com/:_authToken "$GITHUB_PACKAGES_TOKEN"
+
+      - name: Qualify release archives, examples and lookup bundles
+        env:
+          QUALIFIED: ${{ needs.filter-actions.outputs.qualified }}
+          RELEASE_TAG: ${{ needs.variables-setup.outputs.release_tag }}
+        run: >
+          node scripts/retrieval/qualify-release-examples.mjs
+          --mode release
+          --channel "$RELEASE_TAG"
+          --registry https://registry.npmjs.org
+          --registry https://npm.pkg.github.com
+          --out ${{ runner.temp }}/release-qualification
+          $(node -e "for (const key of JSON.parse(process.env.QUALIFIED)) console.log('--package', key)")
+
+      # Only a passing run produces the archives publication may use.
+      - name: Upload qualified archives and reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-qualification
+          overwrite: true
+          path: |
+            ${{ runner.temp }}/release-qualification/receipt.json
+            ${{ runner.temp }}/release-qualification/manifest*.json
+            ${{ runner.temp }}/release-qualification/evidence.json
+            ${{ runner.temp }}/release-qualification/archives/
+            ${{ runner.temp }}/release-qualification/registry/
+            ${{ runner.temp }}/release-qualification/docs/
+            ${{ runner.temp }}/release-qualification/consumer/example-consumer-report.json
+            ${{ runner.temp }}/release-qualification/delivery/packed-example-report.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload qualification failure reports
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-qualification-failure-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/release-qualification/manifest*.json
+            ${{ runner.temp }}/release-qualification/consumer/example-consumer-report.json
+            ${{ runner.temp }}/release-qualification/delivery/packed-example-report.json
+          if-no-files-found: ignore
+          retention-days: 30
+
+  publish:
+    needs: [ variables-setup, check-dialpad-member, filter-actions, qualify ]
+    if: ${{ !cancelled() && needs.variables-setup.result == 'success' && needs.filter-actions.result == 'success' && needs.check-dialpad-member.result == 'success' && contains(fromJSON('["success", "skipped", "failure"]'), needs.qualify.result) && needs.filter-actions.outputs.packages != '[]' }}
     strategy:
       fail-fast: false
       matrix:
@@ -114,11 +243,14 @@ jobs:
             registry_url: //registry.npmjs.org/
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       packages: write
       id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
@@ -155,8 +287,36 @@ jobs:
         run: sleep 15s
         shell: bash
 
+      # A failed qualification blocks only the packages it covers; the workflow still fails.
+      - name: Stop when qualification failed
+        if: ${{ contains(fromJSON(needs.filter-actions.outputs.qualified), matrix.package) && needs.qualify.result != 'success' }}
+        run: |
+          echo "::error::Release qualification failed; ${{ matrix.package }} was not published."
+          exit 1
+
+      - name: Download qualified archives
+        if: ${{ contains(fromJSON(needs.filter-actions.outputs.qualified), matrix.package) && needs.qualify.result == 'success' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: release-qualification
+          path: ${{ runner.temp }}/release-qualification
+
+      # Publish the qualified bytes; an existing version is skipped only when its integrity matches.
+      - name: Publish qualified ${{ matrix.package }}@${{ env.RELEASE_TAG }}
+        if: ${{ contains(fromJSON(needs.filter-actions.outputs.qualified), matrix.package) && needs.qualify.result == 'success' }}
+        env:
+          RELEASE_TAG: ${{ needs.variables-setup.outputs.release_tag }}
+          NODE_AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && secrets.GITHUB_TOKEN || '' }}
+        run: >
+          node scripts/retrieval/release-archives.mjs publish
+          --receipt ${{ runner.temp }}/release-qualification/receipt.json
+          --package ${{ matrix.package }}
+          --registry ${{ matrix.registry == 'GitHub' && 'https://npm.pkg.github.com' || 'https://registry.npmjs.org' }}
+          --tag "$RELEASE_TAG"
+
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
+        if: ${{ !contains(fromJSON(needs.filter-actions.outputs.qualified), matrix.package) }}
         env:
           RELEASE_TAG: ${{ needs.variables-setup.outputs.release_tag }}
           NODE_AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && secrets.GITHUB_TOKEN || '' }}
@@ -164,3 +324,59 @@ jobs:
           pnpm nx run ${{ matrix.package }}:publish
           --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
           --tag=${{ env.RELEASE_TAG }}
+
+  # Overall release success waits for the registries to hold the qualified bytes and for bounded
+  # installed lookup/runtime smoke checks. Packages that already published are not rolled back.
+  verify-release:
+    needs: [ variables-setup, filter-actions, qualify, publish ]
+    if: ${{ !cancelled() && needs.variables-setup.result == 'success' && needs.filter-actions.result == 'success' && needs.qualify.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.variables-setup.outputs.source_sha }}
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Authenticate GitHub Packages reads
+        env:
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm config set //npm.pkg.github.com/:_authToken "$GITHUB_PACKAGES_TOKEN"
+
+      - name: Download qualified archives
+        uses: actions/download-artifact@v4
+        with:
+          name: release-qualification
+          path: ${{ runner.temp }}/release-qualification
+
+      - name: Verify published archives and installed lookup delivery
+        env:
+          QUALIFIED: ${{ needs.filter-actions.outputs.qualified }}
+          RELEASE_TAG: ${{ needs.variables-setup.outputs.release_tag }}
+          # A failed publish cannot complete by waiting; report the incomplete release promptly.
+          ATTEMPTS: ${{ needs.publish.result == 'success' && '10' || '1' }}
+        run: >
+          node scripts/retrieval/release-archives.mjs verify
+          --receipt ${{ runner.temp }}/release-qualification/receipt.json
+          --tag "$RELEASE_TAG"
+          --attempts "$ATTEMPTS"
+          --out ${{ runner.temp }}/release-verification
+          $(node -e "for (const key of JSON.parse(process.env.QUALIFIED)) console.log('--package', key)")
+
+      - name: Upload release verification
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-verification-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/release-verification/release-verification.json
+            ${{ runner.temp }}/release-verification/runtime/example-consumer-report.json
+            ${{ runner.temp }}/release-verification/delivery/packed-example-report.json
+          if-no-files-found: ignore
+          retention-days: 90

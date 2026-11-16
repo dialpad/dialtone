@@ -18,10 +18,6 @@ function controlledPreset (props = {}, slots = {}) {
   return {
     metadata: {
       copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection.`,
-      lookupExclude: {
-        reason: 'Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.',
-        owner: 'DLT-3736 / Dialtone component and lookup maintainers',
-      },
     },
     props: {
       options: { initialValue: single ? messageOptions : channelOptions },
