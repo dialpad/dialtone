@@ -36,7 +36,9 @@ JS=$(echo "$CHANGED" | grep -E '\.(js|mjs|cjs)$')
 echo "$CHANGED" | grep -E '\.md$' | while read -r f; do
   now=$(pnpm exec prettier --check --single-quote "$f" >/dev/null 2>&1; echo $?)
   was=$(git show "$BASE:$f" 2>/dev/null | pnpm exec prettier --check --single-quote --stdin-filepath "$f" >/dev/null 2>&1; echo $?)
-  [ "$now" != 0 ] && [ "$was" = 0 ] && echo "new prettier failure: $f"
+  # Exit 2 is a prettier error, not a formatting difference.
+  { [ "$now" = 2 ] || [ "$was" = 2 ]; } && echo "not run: prettier errored on $f"
+  [ "$now" = 1 ] && [ "$was" = 0 ] && echo "new prettier failure: $f"
   # Compare findings without file names and positions, so a moved line is not new.
   norm() { sed -E 's/^[^ ]*:[0-9]+(:[0-9]+)? //' | sort; }
   pnpm exec markdownlint "$f" 2>&1 | norm >"${TMPDIR:-/tmp}/mdl-now"
