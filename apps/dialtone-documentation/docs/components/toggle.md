@@ -83,7 +83,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 <script setup>
 import { ref } from 'vue'
-import { DtToggle } from '@dialpad/dialtone-vue'
+import { DtToggle } from '@dialpad/dialtone/vue'
 
 const checked = ref(true)
 const mixed = ref('mixed')
