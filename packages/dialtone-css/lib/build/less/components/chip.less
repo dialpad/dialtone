@@ -46,7 +46,7 @@
   --chip-gap: var(--dt-spacing-50);
   --chip-slot-gap: var(--chip-gap);
   --chip-content-gap: 0;
-  --chip-close-gap: var(--chip-gap);
+  --chip-close-gap: var(--dt-spacing-75);
   --chip-avatar-inset: calc(var(--dt-spacing-50) + var(--dt-size-border-100));
   --chip-avatar-gap: var(--dt-spacing-75);
   --chip-color-text: var(--dt-color-foreground-primary);
@@ -128,13 +128,6 @@
   //  When a close button is present the label reserves space for it, and the extra end padding is not needed.
   &:has(> .d-chip__close) {
     --chip-padding-inline-end: calc(var(--chip-padding-inline) + var(--chip-close-gap) + var(--chip-icon-size));
-  }
-
-  //  REMOVE BUTTON GAP: space between the label text and the remove button.
-  //  The selector decides which chips get the wider gap. Avatar chips only for
-  //  now; use `&:has(> .d-chip__close)` to give it to every chip with one.
-  &:has(.d-chip__avatar, .d-chip__leading > .d-avatar):has(> .d-chip__close) {
-    --chip-close-gap: var(--chip-avatar-gap);
   }
 
   //  A colour or photo reads at 12 to 14px; a letter does not.
