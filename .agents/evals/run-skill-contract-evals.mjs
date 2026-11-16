@@ -77,9 +77,9 @@ const skills = {
       '.agents/resources/pr-template.md',
     ],
     patterns: [
-      /\*\*Report-only\*\*/,
+      /Report-only/,
       /Flag unresolved ticket state/,
-      /lint and tests only for the touched packages/,
+      /\*\*Local gates\.\*\*/,
       /Verdict: Ready \| Ready with notes \| Needs fixes \| Needs decision/,
     ],
     references: [
@@ -394,7 +394,8 @@ for (const [skillName, config] of Object.entries(skills)) {
     const wrapper = read(wrapperPath);
     const frontmatter = (text) => text.match(/^---\n(.*?)\n---/s)?.[1];
     assert(
-      frontmatter(wrapper) === frontmatter(shared),
+      Boolean(frontmatter(shared)) &&
+        frontmatter(wrapper) === frontmatter(shared),
       `${wrapperPath} frontmatter must match .agents/skills/pr-prep/SKILL.md`,
       failures,
     );

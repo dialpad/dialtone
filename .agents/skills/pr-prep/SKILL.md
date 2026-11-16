@@ -39,42 +39,50 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
 ## Workflow
 
-1. **Scope.** Fix it once, before any review.
+1. **Scope.** Fix it once, before any review. Each shell call starts fresh, so write down the base SHA and reuse it as `BASE` in later snippets.
 
    ```sh
-   BASE=$(git merge-base origin/staging HEAD)   # or the PR's base
+   B=staging   # or the PR's base branch
+   git fetch origin "$B"
+   BASE=$(git merge-base "origin/$B" HEAD); echo "$BASE"
    git rev-parse HEAD; git diff --stat "$BASE"; git ls-files -o --exclude-standard
    ```
 
-   Record base SHA, head SHA, the file list and size. Staged, unstaged and untracked files are all in scope; untracked files are listed but not counted in the size. For a PR that is not checked out (review mode), take the scope from `gh pr view <n> --json baseRefOid,headRefOid,files` and `gh pr diff <n>`. Empty scope: say "Nothing to review" and stop. Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs. Any edit or commit makes the scope stale: recapture it before re-review.
+   - Record base SHA, head SHA, file list and size. Staged, unstaged and untracked files are all in scope; untracked files are listed but not counted in the size.
+   - Propose the PR title per `.github/COMMIT_CONVENTION.md` and check it with `echo "<title>" | pnpm exec commitlint`.
+   - Review mode (PR not checked out): take base, head and file list from `gh pr view <n> --json baseRefOid,headRefOid,files` and the diff from `gh pr diff <n>`; use that file list for step 2.
+   - Empty scope: say "Nothing to review" and stop.
+   - Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs.
+   - Any edit or commit makes the scope stale: recapture it before re-review.
 
 2. **Touched packages.**
 
    ```sh
+   : "${BASE:?set BASE to the recorded base SHA}"
    { git diff --name-only "$BASE"; git ls-files -o --exclude-standard; } \
      | awk -F/ '$1=="packages"||$1=="apps"{print $1"/"$2;next}{print $1}' | sort -u
    ```
 
    Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
 
-3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle, [adversarial-review.md](references/adversarial-review.md) and [reviewer-lens.md](references/reviewer-lens.md). Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
+3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle (base SHA, head SHA, file list and diff), [adversarial-review.md](references/adversarial-review.md) and [reviewer-lens.md](references/reviewer-lens.md). Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
 
-   | Trigger in the diff                                    | Specialist                                                  |
-   | ------------------------------------------------------ | ----------------------------------------------------------- |
-   | Vue templates, stories, `aria-*`, `role`, key handlers | [keyboard-aria.md](references/specialists/keyboard-aria.md) |
-   | `.less`, `.css`, `<style>`, class lists                | [css.md](references/specialists/css.md)                     |
-   | A codemod or migration script                          | [codemods.md](references/specialists/codemods.md)           |
-   | `packages/dialtone-icons/**`                           | [icons.md](references/specialists/icons.md)                 |
+   | Trigger in the diff                                                                                             | Specialist                                                  |
+   | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+   | Interactive elements, `role`, `aria-*`, `tabindex`, key or focus handlers, or stories of interactive components | [keyboard-aria.md](references/specialists/keyboard-aria.md) |
+   | `.less`, `.css` or `<style>` changes                                                                            | [css.md](references/specialists/css.md)                     |
+   | A codemod or migration script                                                                                   | [codemods.md](references/specialists/codemods.md)           |
+   | `packages/dialtone-icons/**`                                                                                    | [icons.md](references/specialists/icons.md)                 |
 
    If no subagent can start, run the same method yourself, section by section, and mark the review "not independent".
 
-4. **Adjudicate.** For every finding choose one: **keep** (real, in scope, left open), **fixed** (kept and changed now), or **reject** (say why; a reasoned "no" is fine). Merge duplicates. A finding with no file and line is not a finding.
-5. **Fix and re-review** (author mode). Apply the fixes, recapture scope, and re-review only what changed: rerun the reviewer on the new diff and any specialist whose area was touched. Stop after two rounds and report what is left.
-6. **Local gates.** Run lint and tests only for the touched packages; CI runs everything else. Commands in [local-gates.md](references/local-gates.md). Run after fixes, on the final head. A package with no lint or test target is "no gate".
+4. **Adjudicate.** For every finding choose one: **keep** (real, in scope, left open), **fixed** (kept and changed now), or **reject** (say why; a reasoned "no" is fine). Merge duplicates. A finding names a file and line; for missing work, name the line that creates the need (the new prop) or the file that should change.
+5. **Fix and re-review** (author mode). Apply the fixes, recapture scope, and re-review only what changed: rerun the reviewer on the new diff and any specialist whose area was touched. Stop after two rounds and report what is left. Author-mode `Ready` needs a clean working tree; otherwise list the uncommitted files as "not in the PR yet".
+6. **Local gates.** Run lint and tests for the touched packages only; CI runs most tests and almost no lint, so do not skip lint. Commands in [local-gates.md](references/local-gates.md). Run after fixes, on the final head. A package with no lint or test target is "no gate".
 7. **Tooling checks.** One line each, only when the diff touches them:
    - Changed behaviour, new props and new events have tests; no skipped or pending tests in changed test files.
    - New tests run in CI: a workflow path filter covers the package and a job runs that package's test command (`rg` the package name in `.github/workflows`).
-   - No fixed timing waits (`setTimeout(60)`, `sleep`); wait for the event or state.
+   - No fixed timing waits (`setTimeout(60)`, `sleep`) and no hard-coded package versions in fixtures; wait for the event or state.
    - Every dependency a new script imports is declared in that package's `package.json`.
    - A release trigger or build scope fires only for the package that changed.
    - Errors are not swallowed (empty `catch`, `.catch(() => {})`, ignored exit codes).
@@ -87,17 +95,25 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 ```text
 Verdict: Ready | Ready with notes | Needs fixes | Needs decision
 Mode: author | report-only | review      Base: <sha>  Head: <sha>  Size: <lines>
+Title: <proposed> (commitlint: pass | fail)
 Packages: <touched list> (downstream: <list>)
 Review: <independent | not independent>, specialists run: <list>
 Findings:
   <id> <Major|Minor|Nit> <keep|fixed|reject> <file:line> <what a reviewer would ask> (<why, if rejected>)
-Gates: <package: command: pass | fail | no gate | not run>
+Gates: <package: command: pass | fail | no gate | not run>   (list any "not run" first)
 Tooling: <one line per check run>
 Docs: <doc-sync result, artifacts>
 Do by hand: <keyboard pass in Storybook for any changed interactive story, if applicable>
 ```
 
-`Needs fixes` is for a failed gate or tooling check, or any kept, unfixed Major finding. `Needs decision` is for scope or API calls that belong to a person. Everything else is a note. Lead with what to fix.
+Precedence: `Needs decision` > `Needs fixes` > `Ready with notes` > `Ready`.
+
+- `Needs decision`: a scope or API call that belongs to a person, including an unmarked break or unresolved ticket state.
+- `Needs fixes`: a failed gate or tooling check, a commitlint failure on the title, a doc-sync item still needing review, or any kept, unfixed Major finding.
+- `Ready with notes`: any kept Minor or Nit, any gate "not run", a review that was not independent, or uncommitted files.
+- `Ready`: every touched package's gates passed or are "no gate", and nothing is kept.
+
+Lead with what to fix.
 
 ## Done When
 

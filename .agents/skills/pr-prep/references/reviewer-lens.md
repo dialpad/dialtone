@@ -1,14 +1,10 @@
 # Reviewer lens: what Dialtone reviewers raise
 
-Built from a review of human feedback on recent Dialtone PRs. Bots raised the same point only about one time in ten, so these checks need a reader.
+Built from a review of human feedback on recent Dialtone PRs. Bots rarely raise these, so they need a reader.
 
 Sections run from most to least common. Skip a section whose condition does not match the diff. For each finding, name the file and line.
 
-## How they review
-
-- The design-system reviewer works in Storybook with the keyboard first, then reads API, CSS and docs. They ask about consistency with sibling components, tokens, docs prose, and icons against Figma.
-- The runtime reviewer reads for behaviour: logic bugs, loops, stale measurements, unmount races, bad input, swallowed errors, dead code, duplication, dependants not updated. They check that tests run in CI and dependencies are declared.
-- Both accept a reasoned "no". Do not add code only to avoid a comment.
+Reviewers accept a reasoned "no". Do not add code only to avoid a comment.
 
 ## 1. Migration and deprecation (when anything public changes)
 
@@ -43,8 +39,6 @@ Sections run from most to least common. Skip a section whose condition does not 
 
 - Delete handlers, constants, rules and overrides nothing uses after the change. Merge near-identical helpers. Share one core between two paths.
 - Docs say each thing once. Cut an intro the excerpt already gives. Short, specific descriptions.
-- Comments say why, briefly.
-- Vue separation of concerns: no heavy template expressions, inline styles, or raw CSS values where a token exists.
 
 ## 5. Already exists, or matches a sibling
 
@@ -57,7 +51,7 @@ For each new function, composable, directive, constant map (`*_SIZES`, `*_ICON_S
 
 Examples of misses reviewers caught: `v-dt-mode` instead of hand-syncing `data-dt-contrast`; DtInput's IME handling; extending TipTapLink instead of a new ProseMirror plugin; `DtDropdown` for menu composition; `returnFirstEl` and `hasSlotContent`; query-core for search logic.
 
-Also ask: does the closest sibling solve this differently (icon size by component size: Button, then Badge, then Chip; Avatar owns its radius)? Is the same workaround now in more than one stylesheet, so it needs one layout hook or a shared fix? Is the logic in the right package? A match is a prompt for a reason, not a blocker.
+Also ask: does the closest sibling solve this differently (icon size by component size: Button, then Badge, then Chip; Avatar owns its radius)? Is the same workaround now in more than one stylesheet, so it needs one layout hook or a shared fix? Is the logic in the right package, with no circular imports? A match is a prompt for a reason, not a blocker.
 
 ## 6. API shape (new or redesigned components)
 
