@@ -185,23 +185,35 @@ test('release bounds select the whole Git batch and validate pinned prerelease a
   assert.ok(steps.indexOf(before) < Math.min(...versions) && steps.indexOf(after) > Math.max(...versions));
   const output = join(dir, 'outputs');
   const history = join(dir, 'history.json');
+  const jobs = join(dir, 'jobs');
+  mkdirSync(jobs);
   const bin = join(dir, 'bin');
   mkdirSync(bin);
-  writeFileSync(join(bin, 'gh'), '#!/bin/sh\ncat "$FIXTURE_HISTORY"\n');
+  writeFileSync(join(bin, 'gh'), `#!/bin/sh
+case "$4" in
+  */jobs) id=$(printf '%s' "$4" | cut -d/ -f6); cat "$FIXTURE_JOBS/$id.json" ;;
+  *) cat "$FIXTURE_HISTORY" ;;
+esac
+`);
   chmodSync(join(bin, 'gh'), 0o755);
   writeFileSync(history, '[{"workflow_runs":[]}]');
   const shell = (run, env = {}) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', run],
-    { cwd: dir, env: { ...process.env, PATH: bin + ':' + process.env.PATH, FIXTURE_HISTORY: history, RUNNER_TEMP: dir, GITHUB_RUN_ID: '30', RELEASE_BRANCH: 'alpha', GITHUB_OUTPUT: output, ...env }, encoding: 'utf8', stdio: 'pipe' });
+    { cwd: dir, env: { ...process.env, PATH: bin + ':' + process.env.PATH, FIXTURE_HISTORY: history, FIXTURE_JOBS: jobs, RUNNER_TEMP: dir, GITHUB_RUN_ID: '30', GH_REPO: 'fixture/repo', RELEASE_BRANCH: 'alpha', GITHUB_OUTPUT: output, ...env }, encoding: 'utf8', stdio: 'pipe' });
+  const prepared = (id, conclusions) => writeFileSync(join(jobs, `${id}.json`), JSON.stringify(
+    conclusions.map(conclusion => ({ jobs: [{ name: 'release', steps: [{ name: 'Record release base', conclusion }] }] }))));
   try {
     git('init', '-q'); git('config', 'user.email', 'fixture@example.invalid'); git('config', 'user.name', 'Fixture');
     writeFileSync(join(dir, 'package.json'), '{"version":"1.0.0"}'); git('add', 'package.json'); git('commit', '-qm', 'base');
-    const base = git('rev-parse', 'HEAD'); shell(before.run);
+    const base = git('rev-parse', 'HEAD');
+    git('update-ref', 'refs/remotes/origin/alpha', base);
+    shell(before.run);
     for (const name of ['dialtone-mcp-server', 'dialtone-cli']) {
       mkdirSync(join(dir, 'packages', name), { recursive: true });
       writeFileSync(join(dir, 'packages', name, 'package.json'), '{"version":"2.0.0-alpha.1"}');
       git('add', 'packages'); git('commit', '-qm', name);
     }
     const adapter = git('rev-parse', 'HEAD');
+    git('update-ref', 'refs/remotes/origin/alpha', adapter);
     // A failed previous run prepared adapters but never dispatched publication.
     const unfinished = { id: 25, status: 'completed', conclusion: 'failure', head_sha: adapter };
     const previous = [
@@ -209,6 +221,8 @@ test('release bounds select the whole Git batch and validate pinned prerelease a
       { workflow_runs: [{ id: 10, status: 'completed', conclusion: 'success', head_sha: base }] },
     ];
     writeFileSync(history, JSON.stringify(previous));
+    prepared(25, ['failure', 'success']); // All attempts: a rejected retry must not hide prior preparation.
+    prepared(20, ['success']);
     shell(before.run);
     const resumedBase = Object.fromEntries(readFileSync(output, 'utf8').trim().split('\n').map(line => line.split('='))).base_sha;
     assert.equal(resumedBase, base, 'resume must include the already-prepared adapters');
@@ -227,6 +241,22 @@ test('release bounds select the whole Git batch and validate pinned prerelease a
     assert.deepEqual(changed(adapter, final), ['package.json']); // Old last-push selection misses adapters.
     assert.deepEqual(changed(outputs.base_sha, outputs.release_sha), ['package.json', 'packages/dialtone-cli/package.json', 'packages/dialtone-mcp-server/package.json']);
     assert.deepEqual(changed(base, base), []); // No prepared release means no publication.
+    git('update-ref', 'refs/remotes/origin/alpha', final);
+    // A prepared and succeeded; B was rejected while A was active. B must not replay A's versions.
+    writeFileSync(history, JSON.stringify([{ workflow_runs: [
+      { id: 27, status: 'completed', conclusion: 'failure', head_sha: base },
+      { id: 26, status: 'completed', conclusion: 'success', head_sha: base },
+    ] }]));
+    prepared(27, ['failure']);
+    shell(before.run);
+    const nextBase = Object.fromEntries(readFileSync(output, 'utf8').trim().split('\n').map(line => line.split('='))).base_sha;
+    assert.equal(nextBase, final, 'a rejected overlap must not reselect already-prepared versions');
+    writeFileSync(join(jobs, '27.json'), JSON.stringify([{ jobs: [{ name: 'release', steps: [] }] }]));
+    assert.throws(() => shell(before.run), /./, 'missing preparation provenance must fail closed');
+    prepared(27, ['failure']);
+    git('checkout', '--detach', '-q', base);
+    assert.throws(() => shell(before.run), /./, 'an old rejected run cannot prepare from stale source');
+    git('checkout', '--detach', '-q', final);
     const validate = readWorkflow('publish-web.yml').jobs['variables-setup'].steps.find(step => step.name === 'Validate prepared release range');
     assert.ok(validate, 'validate the pinned range, not a moving branch');
     git('update-ref', 'refs/remotes/origin/alpha', final);

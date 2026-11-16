@@ -87,6 +87,10 @@ jobs:
         run: |
           base_sha=$(git rev-parse HEAD)
           if [[ "$RELEASE_BRANCH" =~ ^(alpha|beta|next)$ ]]; then
+            [[ "$base_sha" == "$(git rev-parse "origin/$RELEASE_BRANCH")" ]] || {
+              echo "::error::Preparation source is stale; start a new release run on the current branch."
+              exit 1
+            }
             gh api --method GET "repos/$GH_REPO/actions/workflows/release.yml/runs" \
               -f "branch=$RELEASE_BRANCH" -F per_page=100 --paginate --slurp > "$RUNNER_TEMP/release-runs.json" || exit 1
             base_sha=$(node <<'NODE'
@@ -103,6 +107,16 @@ jobs:
             if (run.id > current || run.status !== 'completed')
               throw new Error('Another preparation run exists; finish the latest run before preparing again');
             if (run.conclusion === 'success') { boundary = true; break; }
+            const jobs = JSON.parse(execFileSync('gh', ['api', '--method', 'GET',
+              `repos/${process.env.GH_REPO}/actions/runs/${run.id}/jobs`,
+              '-f', 'filter=all', '-F', 'per_page=100', '--paginate', '--slurp'], { encoding: 'utf8' }))
+              .flatMap(page => page.jobs);
+            if (!jobs.length) throw new Error('Preparation job history is unavailable; inspect the unfinished release before retrying');
+            const preparations = jobs.filter(job => job.name === 'release');
+            const guards = preparations.flatMap(job => job.steps ?? []).filter(step => step.name === 'Record release base');
+            if (preparations.length && !guards.length)
+              throw new Error('Preparation guard history is unavailable; inspect the unfinished release before retrying');
+            if (!guards.some(step => step.conclusion === 'success')) continue;
             unfinished = true;
             base = run.head_sha;
           }
