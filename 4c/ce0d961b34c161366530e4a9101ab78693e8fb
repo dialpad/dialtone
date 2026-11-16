@@ -1,0 +1,67 @@
+packages/dialtone-vue/components/CheckboxGroup/CheckboxGroupVariants.story.vue
+  s_dc39c57e850708::t_a54bbf47ebe7bd 37
+apps/dialtone-documentation/docs/components/banner.md
+  s_dc39c57e850708::t_759697389472dd 14
+apps/dialtone-documentation/docs/components/toast.md
+  s_dc39c57e850708::t_7a48688179d478 25,73,101
+apps/dialtone-documentation/docs/components/notice.md
+  s_dc39c57e850708::t_78b24b70e15884 34,56,79,102,125,163,186,210,234,258,291
+packages/dialtone-mcp-server/scripts/acceptance-scenarios.json
+  s_dc39c57e850708::t_b2e5369080c025 10,12
+apps/dialtone-documentation/docs/components/modal.md
+  s_dc39c57e850708::t_397680ed16d9f7 279
+apps/dialtone-documentation/docs/components/checkbox-group.md
+  s_dc39c57e850708::t_458ce2d7857b41 36
+  s_dc39c57e850708::t_345e4b6c073074 22
+packages/dialtone-vue/components/ComboboxWithPopover/ComboboxWithPopoverDefault.story.vue
+  s_dc39c57e850708::t_e1ff04d0bab90c 40
+packages/combinator/src/variants/variants_combobox_with_popover.js
+  s_dc39c57e850708::t_84d6a425b3f803 11
+  s_dc39c57e850708::t_1d9d7581218137 30
+packages/dialtone-vue/components/RichTextEditor/Extensions/Channels/ChannelComponent.vue
+  s_dc39c57e850708::t_460214a23a5513 7
+packages/dialtone-query-core/tests/tools/docs.test.ts
+  s_dc39c57e850708::t_d5c581c7db326f 30
+  s_dc39c57e850708::t_b2f4fab3201b6a 14
+  s_dc39c57e850708::t_bd202275be0622 246
+  s_dc39c57e850708::t_91ab5dacdc8d2e 178-179,181
+packages/dialtone-vue/components/RichTextEditor/Extensions/Mentions/MentionComponent.vue
+  s_dc39c57e850708::t_c41471084c0271 7
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleToast.vue
+  s_dc39c57e850708::t_245a2051e54d1e 4
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleNotice.vue
+  s_dc39c57e850708::t_1fa5a5d0afa65f 5
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.vue
+  s_dc39c57e850708::t_233b2af5445290 71
+packages/dialtone-vue/components/Breadcrumbs/BreadcrumbItem.vue
+  s_dc39c57e850708::t_469a490395a020 12
+  s_dc39c57e850708::t_4cb5ceded3fa66 78
+apps/dialtone-documentation/docs/components/checkbox.md
+  s_dc39c57e850708::t_54d3b501f2593e 111,133,158
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2022-12-9.md
+  h_9e2c5818b2d2f6 30
+  s_dc39c57e850708::t_59432436888c2a 37
+apps/dialtone-documentation/docs/components/button.md
+  s_dc39c57e850708::t_11bc9b62e69995 59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "4cce0d961b34c161366530e4a9101ab78693e8fb",
+  "prompts": {},
+  "humans": {
+    "h_9e2c5818b2d2f6": {
+      "author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_dc39c57e850708": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9e90272e-4aa7-4474-8d8c-5c351417045b",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
