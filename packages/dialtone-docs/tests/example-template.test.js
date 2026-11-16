@@ -38,7 +38,7 @@ it('rejects missing state while retaining source setup and lexical template scop
   expect(() => assertTemplateBindings('<div v-bind="$attrs" v-for="row in [1, 2]">{{ row }}</div>')).not.toThrow();
   expect(() => assertTemplateBindings('<dt-stack><template #default="{ row }">{{ row }}</template></dt-stack>')).not.toThrow();
   const example = buildRecords(resolve('../../apps/dialtone-documentation/docs/components/toggle.md')).find(record => record.id === 'examples/toggle-v-model');
-  expect(example.content).toContain('const checked = ref(false)');
+  expect(example.content).toContain('const checked = ref(true)');
   expect(example.content).toContain('v-model="checked"');
   expect(example.content).not.toContain('utilityClassDocs');
 });
