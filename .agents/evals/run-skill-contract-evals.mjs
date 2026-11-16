@@ -76,7 +76,21 @@ const skills = {
       '.agents/resources/doc-sync.md',
       '.agents/resources/pr-template.md',
     ],
-    patterns: [/Report only/, /Flag unresolved ticket state/],
+    patterns: [
+      /\*\*Report-only\*\*/,
+      /Flag unresolved ticket state/,
+      /lint and tests only for the touched packages/,
+      /Verdict: Ready \| Ready with notes \| Needs fixes \| Needs decision/,
+    ],
+    references: [
+      '.agents/skills/pr-prep/references/adversarial-review.md',
+      '.agents/skills/pr-prep/references/reviewer-lens.md',
+      '.agents/skills/pr-prep/references/local-gates.md',
+      '.agents/skills/pr-prep/references/specialists/keyboard-aria.md',
+      '.agents/skills/pr-prep/references/specialists/css.md',
+      '.agents/skills/pr-prep/references/specialists/codemods.md',
+      '.agents/skills/pr-prep/references/specialists/icons.md',
+    ],
   },
   'pr-create': {
     resources: [
@@ -349,6 +363,36 @@ for (const [skillName, config] of Object.entries(skills)) {
     assert(
       pattern.test(body),
       `${path} missing required pattern ${pattern}`,
+      failures,
+    );
+  }
+
+  for (const reference of config.references ?? []) {
+    assert(
+      existsSync(join(repoRoot, reference)),
+      `${path} references missing ${reference}`,
+      failures,
+    );
+  }
+}
+
+// The Claude pr-prep skill is a thin wrapper: same frontmatter, no rules.
+{
+  const shared = read('.agents/skills/pr-prep/SKILL.md');
+  const wrapperPath = '.claude/skills/pr-prep/SKILL.md';
+  assert(existsSync(join(repoRoot, wrapperPath)), `missing ${wrapperPath}`, failures);
+  if (existsSync(join(repoRoot, wrapperPath))) {
+    const wrapper = read(wrapperPath);
+    const frontmatter = (text) => text.match(/^---\n(.*?)\n---/s)?.[1];
+    assert(
+      frontmatter(wrapper) === frontmatter(shared),
+      `${wrapperPath} frontmatter must match .agents/skills/pr-prep/SKILL.md`,
+      failures,
+    );
+    assert(
+      wrapper.includes('.agents/skills/pr-prep/SKILL.md') &&
+        wrapper.split('\n').length < 12,
+      `${wrapperPath} must only load the shared skill`,
       failures,
     );
   }

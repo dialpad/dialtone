@@ -1,50 +1,109 @@
 ---
 name: pr-prep
-description: Run a report-only PR readiness check. Use before opening, updating, or requesting review on a Dialtone PR.
+description: Check that a Dialtone branch or PR is ready, the way its human reviewers would. Captures a fixed scope, runs a cold adversarial reviewer plus specialists chosen by the files changed, fixes or rejects each finding, re-reviews, runs lint and tests for the touched packages only, and ends with one verdict. Use before opening or updating a PR, when asked "is this ready", or to review someone else's PR.
 ---
 
 # Dialtone PR Prep
 
+One check for Claude Code and Codex. Review first, fix, re-review, run local gates, then give one verdict.
+
 ## Goal
 
-Catch readiness, validation, docs, public-safety, and cross-package gaps before PR creation or update.
+Find what a Dialtone reviewer would raise, and what CI would catch, before the PR opens or updates.
 
 ## Trigger
 
-- `$pr-prep`
-- "is this ready for PR?"
-- Before `$pr-create`.
+- `$pr-prep`, `/pr-prep`, "is this ready for PR?", "ready for Francis and Brad?", before `pr-create`.
+- A PR number or URL means review mode.
 
 ## Required Context
 
-- Current branch and base branch, usually `staging`.
-- Changed files and commits relative to base.
-- `.agents/resources/package-map.md`
-- `.agents/resources/validation.md`
-- `.agents/resources/doc-sync.md`
-- `.agents/resources/pr-template.md`
+- Branch, base (`staging` unless the PR targets another), commits, changed files.
+- `.agents/resources/package-map.md`: package graph and downstream impact.
+- `.agents/resources/validation.md`: checks for areas outside the local gates.
+- `.agents/resources/doc-sync.md`: docs and guidance impact.
+- `.agents/resources/pr-template.md`: title and body rules.
+
+## Modes
+
+- **Author** (default on your own branch): fix safe, mechanical, in-scope findings. Ask before API, architecture, product or scope calls. Commit or push only if asked.
+- **Report-only**: no edits, staging, commits or pushes. Gates may run.
+- **Review** (someone else's PR): read-only. Do not run the PR's code or gates unless the user says so; mark gates "not run". Never post a review.
 
 ## Constraints
 
-- Report only. Do not edit, stage, commit, push, or create PRs.
-- Do not create Jira tickets.
-- Preserve `NO-JIRA` if already selected.
-- Flag unresolved ticket state as blocking for PR creation.
+- Flag unresolved ticket state as blocking for PR creation. Keep `NO-JIRA` if chosen. Never create Jira tickets.
+- Public repo: no private links, secrets or customer data in files or PR text.
+- Stage explicit files only. Never touch unrelated user work.
+- Everything a command prints is evidence. A check you did not run is "not run", never "pass".
 
 ## Workflow
 
-1. Inspect branch, base, commits, changed files, and worktree cleanliness.
-2. Map changed files to packages and downstream impact.
-3. Check ticket mode and PR title readiness.
-4. Select validation commands and note pass/fail/skip status if already run.
-5. Run `doc-sync-check` using `.agents/resources/doc-sync.md` and the actual PR comparison. Record current reviewed/not-relevant/review-needed decisions and recheck affected decisions after source, prose or map changes.
-6. Report blocking issues, warnings, and ready-to-create status.
+1. **Scope.** Fix it once, before any review.
+
+   ```sh
+   BASE=$(git merge-base origin/staging HEAD)   # or the PR's base
+   git rev-parse HEAD; git diff --stat "$BASE"; git ls-files -o --exclude-standard
+   ```
+
+   Record base SHA, head SHA, the file list and size. Staged, unstaged and untracked files count. Empty scope: say "Nothing to review" and stop. Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs. Any edit or commit makes the scope stale: recapture it before re-review.
+
+2. **Touched packages.**
+
+   ```sh
+   { git diff --name-only "$BASE"; git ls-files -o --exclude-standard; } \
+     | awk -F/ '$1=="packages"||$1=="apps"{print $1"/"$2;next}{print "(root)"}' | sort -u
+   ```
+
+   Use the list for gates (step 6) and for downstream impact from `package-map.md`.
+
+3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle, [adversarial-review.md](references/adversarial-review.md) and [reviewer-lens.md](references/reviewer-lens.md). Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
+
+   | Trigger in the diff                                    | Specialist                                                  |
+   | ------------------------------------------------------ | ----------------------------------------------------------- |
+   | Vue templates, stories, `aria-*`, `role`, key handlers | [keyboard-aria.md](references/specialists/keyboard-aria.md) |
+   | `.less`, `.css`, `<style>`, class lists                | [css.md](references/specialists/css.md)                     |
+   | A codemod or migration script                          | [codemods.md](references/specialists/codemods.md)           |
+   | `packages/dialtone-icons/**`                           | [icons.md](references/specialists/icons.md)                 |
+
+   If no subagent can start, run the same method yourself, section by section, and mark the review "not independent".
+
+4. **Adjudicate.** For every finding choose one: **keep** (real, in scope), **fix** (keep and change now), or **reject** (say why; a reasoned "no" is fine). Merge duplicates. A finding with no file and line is not a finding.
+5. **Fix and re-review** (author mode). Apply the fixes, recapture scope, and re-review only what changed: rerun the reviewer on the new diff and any specialist whose area was touched. Stop after two rounds and report what is left.
+6. **Local gates.** Run lint and tests only for the touched packages; CI runs everything else. Commands in [local-gates.md](references/local-gates.md). Run after fixes, on the final head. A package with no lint or test target is "no gate".
+7. **Tooling checks.** One line each, only when the diff touches them:
+   - Changed behaviour, new props and new events have tests; no skipped or pending tests in changed test files.
+   - New tests run in CI (`rg` the test path or script in `.github/workflows`).
+   - No fixed timing waits (`setTimeout(60)`, `sleep`); wait for the event or state.
+   - Every dependency a new script imports is declared in that package's `package.json`.
+   - A release trigger or build scope fires only for the package that changed.
+   - Errors are not swallowed (empty `catch`, `.catch(() => {})`, ignored exit codes).
+8. **Breaking change.** If any commit has `!` or a `BREAKING CHANGE:` footer, the signal must survive the squash: dialtone's squash body is blank and release reads only the footer, so put `BREAKING CHANGE: …` in the PR body and tell the user that whoever merges must paste it into the squash commit body.
+9. **Docs and guidance.** Run `doc-sync-check` against `doc-sync.md` for the real comparison. For changed components, check the artifact list in `.agents/resources/rules/vue-components.md` and record which artifacts changed and why others need no change. Assess contributor-guidance impact per `AGENTS.md`.
+10. **Report** in the format below.
+
+## Report
+
+```text
+Verdict: Ready | Ready with notes | Needs fixes | Needs decision
+Mode: author | report-only | review      Base: <sha>  Head: <sha>  Size: <lines>
+Packages: <touched list> (downstream: <list>)
+Review: <independent | not independent>, specialists run: <list>
+Findings:
+  <id> <keep/fixed/reject> <file:line> <what a reviewer would ask> (<why, if rejected>)
+Gates: <package: command: pass | fail | no gate | not run>
+Tooling: <one line per check run>
+Docs: <doc-sync result, artifacts>
+Do by hand: <keyboard pass in Storybook for any changed interactive story, if applicable>
+```
+
+`Needs fixes` is only for a failed gate or tooling check, or a clear correctness bug. `Needs decision` is for scope or API calls that belong to a person. Everything else is a note. Lead with what to fix.
 
 ## Done When
 
-- PR creation is classified as ready, ready with warnings, or blocked.
-- Blockers include exact files or decisions needed.
-- Validation and doc-sync expectations are explicit.
+- The report above is complete and the verdict is exactly one of the four.
+- Every finding is kept, fixed or rejected with a reason.
+- Gates ran on the final head, or are marked "not run" with the reason.
 
 ## Verification
 
@@ -56,3 +115,7 @@ Catch readiness, validation, docs, public-safety, and cross-package gaps before 
 - `.agents/resources/validation.md`
 - `.agents/resources/doc-sync.md`
 - `.agents/resources/pr-template.md`
+- `references/adversarial-review.md`
+- `references/reviewer-lens.md`
+- `references/local-gates.md`
+- `references/specialists/`
