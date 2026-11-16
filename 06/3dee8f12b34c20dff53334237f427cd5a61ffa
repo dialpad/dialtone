@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/RichTextEditor/Extensions/LinkPhoneNumbers/LinkPhoneNumbers.js
+  s_c41cee8710b5c5::t_50b0eb135051df 1-46
+packages/dialtone-vue/components/RichTextEditor/Extensions/LinkPhoneNumbers/LinkPhoneNumbers.test.js
+  s_c41cee8710b5c5::t_50b0eb135051df 1,3-159
+  s_c41cee8710b5c5::t_a4237a3c1731b5 2
+pnpm-lock.yaml
+  s_c41cee8710b5c5::t_d75edc0002bc1d 1384,1394,14228-14229,18318,30606
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "063dee8f12b34c20dff53334237f427cd5a61ffa",
+  "prompts": {},
+  "sessions": {
+    "s_c41cee8710b5c5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32e69512-16da-4919-9cad-38aaaa0b7ca9",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
