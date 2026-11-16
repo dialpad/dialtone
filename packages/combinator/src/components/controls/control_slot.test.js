@@ -47,6 +47,16 @@ describe('control_slot.vue test', function () {
     });
   });
 
+  describe('When a starter value is provided', function () {
+    it('Should emit the starter value when the slot is added', async function () {
+      _mountWrapper({ starterValue: '<dt-avatar />' });
+
+      await wrapper.find(addButtonSelector).trigger('click');
+
+      expect(wrapper.emitted('update:value')[0][0]).toBe('<dt-avatar />');
+    });
+  });
+
   describe('When a value is not provided', function () {
     beforeEach(function () {
       _mountWrapper();

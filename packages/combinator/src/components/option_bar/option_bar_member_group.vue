@@ -27,6 +27,7 @@
           tags: member.tags,
           bindings: member.bindings,
           tokenCategory: member.tokenCategory,
+          starterValue: member.starterValue,
           propValues,
           disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues, props.slotValues),
           hiddenValues: getHiddenValues(key, props.exclusionRules, props.propValues, props.slotValues),

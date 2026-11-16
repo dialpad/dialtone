@@ -6,7 +6,7 @@
     :disabled="disabled"
     :required="required"
     :clearable="clearable"
-    @add="addValue"
+    @add="onAdd"
     @clear="clearValue"
   >
     <template #label>
@@ -69,12 +69,25 @@ const props = defineProps({
     type: undefined,
     default: () => null,
   },
+  /**
+   * Content inserted when the user adds the slot, so a slot that needs a
+   * component to be useful (such as an avatar) doesn't start as an empty field.
+   */
+  starterValue: {
+    type: String,
+    default: undefined,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
 const { expanded, inputRef, inputValue, isEmpty, updateValue, addValue, collapseIfEmpty, clearValue } =
   useClearableInput({ props, emit, parse: (e) => e || null });
+
+function onAdd () {
+  if (props.starterValue) updateValue(props.starterValue);
+  else addValue();
+}
 </script>
 
 <script>

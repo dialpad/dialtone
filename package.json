@@ -17,6 +17,7 @@
     "dialtone-migrate": "./dist/js/dialtone_migrate/index.mjs",
     "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs",
     "dialtone-migrate-badge-api": "./dist/js/dialtone_migrate_badge_api/index.mjs",
+    "dialtone-migrate-chip-api": "./dist/js/dialtone_migrate_chip_api/index.mjs",
     "dialtone-merge-migrate": "./dist/js/dialtone_merge_migrate/index.mjs"
   },
   "exports": {

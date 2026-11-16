@@ -1,10 +1,11 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtChip from './Chip.vue';
+import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 
 import DtChipDefaultTemplate from './ChipDefault.story.vue';
 import DtChipVariantsTemplate from './ChipVariants.story.vue';
-import { CHIP_SIZE_MODIFIERS } from './ChipConstants';
+import { CHIP_EMPHASIS_MODIFIERS, CHIP_SIZE_MODIFIERS, CHIP_VARIANT_MODIFIERS } from './ChipConstants';
 
 const iconsList = getIconNames();
 
@@ -12,6 +13,8 @@ export const argsData = {
   onClose: action('close'),
   onClick: action('click'),
   size: 300,
+  variant: 'default',
+  emphasis: 'base',
   avatarSeed: '',
 };
 
@@ -26,7 +29,7 @@ export const argTypesData = {
     },
   },
 
-  icon: {
+  startIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -39,16 +42,68 @@ export const argTypesData = {
     },
   },
 
-  avatar: {
-    control: 'text',
+  endIcon: {
+    options: iconsList,
     table: {
-      type: {
-        summary: 'VNode',
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
       },
     },
   },
 
+  icon: {
+    table: {
+      disable: true,
+    },
+  },
+
+  avatar: {
+    table: {
+      disable: true,
+    },
+  },
+
+  startAvatar: {
+    control: false,
+    description: 'Avatar at the start of the chip',
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
+  leading: {
+    control: false,
+    description: 'Freeform content at the start of the chip',
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
+  trailing: {
+    control: false,
+    description: 'Freeform content at the end of the chip',
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
   // Props
+  variant: {
+    options: Object.keys(CHIP_VARIANT_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
+  emphasis: {
+    options: Object.keys(CHIP_EMPHASIS_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
   disabled: {
     control: {
       type: 'boolean',
@@ -56,6 +111,29 @@ export const argTypesData = {
   },
   showClose: {
     control: 'boolean',
+  },
+  removeButtonAriaLabel: {
+    control: 'text',
+  },
+  leadingClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  trailingClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  startIconClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  startAvatarClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
+  endIconClass: {
+    control: 'text',
+    table: { category: 'props' },
   },
   interactive: {
     control: 'boolean',
@@ -69,6 +147,12 @@ export const argTypesData = {
   },
   size: {
     options: Object.keys(CHIP_SIZE_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
+  iconSize: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
     control: {
       type: 'select',
     },
