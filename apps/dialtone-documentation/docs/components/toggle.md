@@ -75,12 +75,15 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 <dt-toggle v-model="mixed">Indeterminate</dt-toggle>
 <!-- @code -->
 
-<dt-toggle>Unchecked</dt-toggle>
-<dt-toggle v-model="checked">Checked</dt-toggle>
-<dt-toggle v-model="mixed">Indeterminate</dt-toggle>
+<template>
+  <dt-toggle>Unchecked</dt-toggle>
+  <dt-toggle v-model="checked">Checked</dt-toggle>
+  <dt-toggle v-model="mixed">Indeterminate</dt-toggle>
+</template>
 
 <script setup>
 import { ref } from 'vue'
+import { DtToggle } from '@dialpad/dialtone-vue'
 
 const checked = ref(true)
 const mixed = ref('mixed')
