@@ -7,5 +7,5 @@ Run when the diff changes `.less`, `.css` or `<style>` content. Dialtone's speci
 - Layout: content after the component overlapping it, end labels clipped, `overflow-wrap: anywhere` inside flex or grid, `position: absolute` without a positioned parent, `line-height` used as a height without `white-space: nowrap`.
 - Repeated selector lists use Less variables.
 - Utility classes: no new class whose output duplicates an existing one.
-- Mechanical: no literal `&` in compiled CSS. If built CSS already exists, `rg -n '&' <built css>`; any hit is a bug. Otherwise flag candidates with:
-  `git diff "$BASE" -- '*.less' | rg -n '^\+.*:(not|is|where)\([^)]*&[^)]*,'`
+- Mechanical: no literal `&` in compiled CSS. If CSS was built from the reviewed head, `rg -n '&' <built css>`; any hit is a bug. Otherwise flag candidates in the scope diff (in review mode, the PR's diff, not the local checkout):
+  `<scope diff> -- '*.less' | rg -n '^\+.*:(not|is|where)\([^)]*&[^)]*,'`

@@ -59,11 +59,11 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
    ```sh
    : "${BASE:?set BASE to the recorded base SHA}"
-   { git diff --name-only "$BASE"; git ls-files -o --exclude-standard; } \
+   { git diff --name-only --no-renames "$BASE"; git ls-files -o --exclude-standard; } \
      | awk -F/ '$1=="packages"||$1=="apps"{print $1"/"$2;next}{print $1}' | sort -u
    ```
 
-   Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
+   `--no-renames` lists both sides of a move, so a package that loses files still gets its gates. Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
 
 3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle (base SHA, head SHA, file list and diff), [adversarial-review.md](references/adversarial-review.md) and [reviewer-lens.md](references/reviewer-lens.md). Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
 
