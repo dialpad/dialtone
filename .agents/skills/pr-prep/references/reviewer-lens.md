@@ -1,13 +1,13 @@
 # Reviewer lens: what Dialtone reviewers raise
 
-From two studies of human review on Dialtone PRs (Aug to Nov 2026): about 80 points on one author's PRs and 185 points on every PR. Bots raised the same point about 9% of the time.
+Built from a review of human feedback on recent Dialtone PRs. Bots raised the same point only about one time in ten, so these checks need a reader.
 
 Sections run from most to least common. Skip a section whose condition does not match the diff. For each finding, name the file and line.
 
 ## How they review
 
-- Francis reviews in Storybook with the keyboard first, then reads API, CSS and docs. He asks about consistency with sibling components, tokens, docs prose, and icons against Figma.
-- Brad reads for runtime behaviour: logic bugs, loops, stale measurements, unmount races, bad input, swallowed errors, dead code, duplication, dependants not updated. He checks that tests run in CI and dependencies are declared.
+- The design-system reviewer works in Storybook with the keyboard first, then reads API, CSS and docs. They ask about consistency with sibling components, tokens, docs prose, and icons against Figma.
+- The runtime reviewer reads for behaviour: logic bugs, loops, stale measurements, unmount races, bad input, swallowed errors, dead code, duplication, dependants not updated. They check that tests run in CI and dependencies are declared.
 - Both accept a reasoned "no". Do not add code only to avoid a comment.
 
 ## 1. Migration and deprecation (when anything public changes)
@@ -69,7 +69,7 @@ Also ask: does the closest sibling solve this differently (icon size by componen
 
 ## 7. Dead code and dependants
 
-Updated where relevant: constants elsewhere (for example `CHIP_SIZES` in ComboboxMultiSelect), Combinator variants for new props and slots, the codemod, docs and `_data/*.json` class lists, stories still showing a removed value.
+Updated where relevant: constants elsewhere (for example `CHIP_SIZES` in ComboboxMultiSelect), Combinator variants for new props and slots, the codemod, docs and `_data/*.json` class lists, stories still showing a removed value. A new token produces every platform output and has a docs page. Note effects on external consumers (Firespotter, web clients) when a public API changes.
 
 ## Not for a bot
 

@@ -373,6 +373,11 @@ for (const [skillName, config] of Object.entries(skills)) {
       `${path} references missing ${reference}`,
       failures,
     );
+    assert(
+      body.includes(reference.replace(`.agents/skills/${skillName}/`, '')),
+      `${path} does not link ${reference}`,
+      failures,
+    );
   }
 }
 
@@ -380,7 +385,11 @@ for (const [skillName, config] of Object.entries(skills)) {
 {
   const shared = read('.agents/skills/pr-prep/SKILL.md');
   const wrapperPath = '.claude/skills/pr-prep/SKILL.md';
-  assert(existsSync(join(repoRoot, wrapperPath)), `missing ${wrapperPath}`, failures);
+  assert(
+    existsSync(join(repoRoot, wrapperPath)),
+    `missing ${wrapperPath}`,
+    failures,
+  );
   if (existsSync(join(repoRoot, wrapperPath))) {
     const wrapper = read(wrapperPath);
     const frontmatter = (text) => text.match(/^---\n(.*?)\n---/s)?.[1];

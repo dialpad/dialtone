@@ -13,7 +13,7 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
 ## Trigger
 
-- `$pr-prep`, `/pr-prep`, "is this ready for PR?", "ready for Francis and Brad?", before `pr-create`.
+- `$pr-prep`, `/pr-prep`, "is this ready for PR?", "ready for review?", before `pr-create`.
 - A PR number or URL means review mode.
 
 ## Required Context
@@ -46,16 +46,16 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    git rev-parse HEAD; git diff --stat "$BASE"; git ls-files -o --exclude-standard
    ```
 
-   Record base SHA, head SHA, the file list and size. Staged, unstaged and untracked files count. Empty scope: say "Nothing to review" and stop. Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs. Any edit or commit makes the scope stale: recapture it before re-review.
+   Record base SHA, head SHA, the file list and size. Staged, unstaged and untracked files are all in scope; untracked files are listed but not counted in the size. For a PR that is not checked out (review mode), take the scope from `gh pr view <n> --json baseRefOid,headRefOid,files` and `gh pr diff <n>`. Empty scope: say "Nothing to review" and stop. Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs. Any edit or commit makes the scope stale: recapture it before re-review.
 
 2. **Touched packages.**
 
    ```sh
    { git diff --name-only "$BASE"; git ls-files -o --exclude-standard; } \
-     | awk -F/ '$1=="packages"||$1=="apps"{print $1"/"$2;next}{print "(root)"}' | sort -u
+     | awk -F/ '$1=="packages"||$1=="apps"{print $1"/"$2;next}{print $1}' | sort -u
    ```
 
-   Use the list for gates (step 6) and for downstream impact from `package-map.md`.
+   Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
 
 3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle, [adversarial-review.md](references/adversarial-review.md) and [reviewer-lens.md](references/reviewer-lens.md). Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
 
@@ -68,18 +68,18 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
    If no subagent can start, run the same method yourself, section by section, and mark the review "not independent".
 
-4. **Adjudicate.** For every finding choose one: **keep** (real, in scope), **fix** (keep and change now), or **reject** (say why; a reasoned "no" is fine). Merge duplicates. A finding with no file and line is not a finding.
+4. **Adjudicate.** For every finding choose one: **keep** (real, in scope, left open), **fixed** (kept and changed now), or **reject** (say why; a reasoned "no" is fine). Merge duplicates. A finding with no file and line is not a finding.
 5. **Fix and re-review** (author mode). Apply the fixes, recapture scope, and re-review only what changed: rerun the reviewer on the new diff and any specialist whose area was touched. Stop after two rounds and report what is left.
 6. **Local gates.** Run lint and tests only for the touched packages; CI runs everything else. Commands in [local-gates.md](references/local-gates.md). Run after fixes, on the final head. A package with no lint or test target is "no gate".
 7. **Tooling checks.** One line each, only when the diff touches them:
    - Changed behaviour, new props and new events have tests; no skipped or pending tests in changed test files.
-   - New tests run in CI (`rg` the test path or script in `.github/workflows`).
+   - New tests run in CI: a workflow path filter covers the package and a job runs that package's test command (`rg` the package name in `.github/workflows`).
    - No fixed timing waits (`setTimeout(60)`, `sleep`); wait for the event or state.
    - Every dependency a new script imports is declared in that package's `package.json`.
    - A release trigger or build scope fires only for the package that changed.
    - Errors are not swallowed (empty `catch`, `.catch(() => {})`, ignored exit codes).
-8. **Breaking change.** If any commit has `!` or a `BREAKING CHANGE:` footer, the signal must survive the squash: dialtone's squash body is blank and release reads only the footer, so put `BREAKING CHANGE: …` in the PR body and tell the user that whoever merges must paste it into the squash commit body.
-9. **Docs and guidance.** Run `doc-sync-check` against `doc-sync.md` for the real comparison. For changed components, check the artifact list in `.agents/resources/rules/vue-components.md` and record which artifacts changed and why others need no change. Assess contributor-guidance impact per `AGENTS.md`.
+8. **Breaking change.** If review finds an unmarked break (a prop, event, class, token or default removed, renamed or changed without a working old path), report it as `Needs decision`: mark it breaking (footer plus migration note) or keep the old path working. If any commit has `!` or a `BREAKING CHANGE:` footer, the signal must survive the squash: dialtone's squash body is blank and release reads only the footer, so put `BREAKING CHANGE: …` in the PR body and tell the user that whoever merges must paste it into the squash commit body.
+9. **Docs and guidance.** Run `doc-sync-check` (Codex) or `/doc-sync-enforcer` (Claude) against `doc-sync.md` for the real comparison. For changed components, check the artifact list in `.agents/resources/rules/vue-components.md` and record which artifacts changed and why others need no change. Assess contributor-guidance impact per `AGENTS.md`.
 10. **Report** in the format below.
 
 ## Report
@@ -90,14 +90,14 @@ Mode: author | report-only | review      Base: <sha>  Head: <sha>  Size: <lines>
 Packages: <touched list> (downstream: <list>)
 Review: <independent | not independent>, specialists run: <list>
 Findings:
-  <id> <keep/fixed/reject> <file:line> <what a reviewer would ask> (<why, if rejected>)
+  <id> <Major|Minor|Nit> <keep|fixed|reject> <file:line> <what a reviewer would ask> (<why, if rejected>)
 Gates: <package: command: pass | fail | no gate | not run>
 Tooling: <one line per check run>
 Docs: <doc-sync result, artifacts>
 Do by hand: <keyboard pass in Storybook for any changed interactive story, if applicable>
 ```
 
-`Needs fixes` is only for a failed gate or tooling check, or a clear correctness bug. `Needs decision` is for scope or API calls that belong to a person. Everything else is a note. Lead with what to fix.
+`Needs fixes` is for a failed gate or tooling check, or any kept, unfixed Major finding. `Needs decision` is for scope or API calls that belong to a person. Everything else is a note. Lead with what to fix.
 
 ## Done When
 
