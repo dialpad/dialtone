@@ -1,0 +1,19 @@
+.github/workflows/a11y_tests.yml
+  s_f920209ec821e1::t_63629445cde6fd 29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "566c23d21850ac5d2e76b66925f6eb0d18771cde",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
