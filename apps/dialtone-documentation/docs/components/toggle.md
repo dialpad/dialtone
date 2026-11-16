@@ -44,13 +44,13 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
-  <dt-toggle class="d-g-200">Unchecked Toggle</dt-toggle>
-  <dt-toggle :model-value="true" class="d-g-200">Checked Toggle</dt-toggle>
-  <dt-toggle disabled class="d-g-200">Unchecked Disabled</dt-toggle>
-  <dt-toggle :model-value="true" disabled class="d-g-200">Checked Disabled</dt-toggle>
-  <dt-toggle :model-value="'mixed'" class="d-g-200">Indeterminate Toggle</dt-toggle>
-  <dt-toggle :model-value="'mixed'" class="d-g-200" disabled>Indeterminate Disabled</dt-toggle>
-  <dt-toggle class="d-g-200" :show-icon="false">Without icon</dt-toggle>
+  <dt-toggle>Unchecked Toggle</dt-toggle>
+  <dt-toggle :model-value="true">Checked Toggle</dt-toggle>
+  <dt-toggle disabled>Unchecked Disabled</dt-toggle>
+  <dt-toggle :model-value="true" disabled>Checked Disabled</dt-toggle>
+  <dt-toggle :model-value="'mixed'">Indeterminate Toggle</dt-toggle>
+  <dt-toggle :model-value="'mixed'" disabled>Indeterminate Disabled</dt-toggle>
+  <dt-toggle :show-icon="false">Without icon</dt-toggle>
 </dt-stack>
 ```
 
@@ -60,8 +60,8 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
-  <dt-toggle :size="200" class="d-g-200">Small size</dt-toggle>
-  <dt-toggle class="d-g-200">Default size</dt-toggle>
+  <dt-toggle :size="200">Small</dt-toggle>
+  <dt-toggle>Default</dt-toggle>
 </dt-stack>
 ```
 
@@ -70,7 +70,9 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 <!-- @example {"id":"examples/toggle-v-model"} -->
 
 ```vue demo
-<dt-toggle v-model="checked" class="d-g-200">Toggle</dt-toggle>
+<dt-toggle>Unchecked</dt-toggle>
+<dt-toggle v-model="checked">Checked</dt-toggle>
+<dt-toggle v-model="mixed">Indeterminate</dt-toggle>
 ```
 
 ## Accessibility
@@ -101,7 +103,8 @@ emit an **update:modelValue** event with the current value of the toggle and wil
 <script setup>
 import { ref } from 'vue'
 
-const checked = ref(false)
+const checked = ref(true)
+const mixed = ref('mixed')
 </script>
 
 ## Vue API
