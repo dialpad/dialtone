@@ -69,3 +69,55 @@ describe('FilterPill controlled input normalization', () => {
   });
 
 });
+
+describe('FilterPill dropdown-only option fields', () => {
+  it('derives disabled, description and group for single-selection rows', () => {
+    const typeOptions = Object.freeze([
+      Object.freeze({ value: 'all', label: 'All types' }),
+      Object.freeze({ value: 'calls', label: 'Calls', disabled: false, description: null, group: null }),
+      Object.freeze({
+        value: 'archived', label: 'Archived', disabled: true, description: 'Choose All under Status', group: 'Other views',
+      }),
+    ]);
+    const state = getSelectionState(typeOptions, 'all', { useDropdown: true });
+    expect(state.rows).toEqual([
+      { option: typeOptions[0], disabled: false, description: null, group: null },
+      { option: typeOptions[1], disabled: false, description: null, group: null },
+      { option: typeOptions[2], disabled: true, description: 'Choose All under Status', group: 'Other views' },
+    ]);
+    expect(state.issues).toEqual([]);
+  });
+
+  it('treats an empty description or group as absent', () => {
+    const record = Object.freeze({ value: 'calls', label: 'Calls', description: '', group: '' });
+    const state = getSelectionState([record], null, { useDropdown: true });
+    expect(state.rows).toEqual([{ option: record, disabled: false, description: null, group: null }]);
+  });
+
+  it.each([
+    { field: { disabled: 'true' }, issue: 'option disabled must be a boolean or null; malformed values are ignored.' },
+    { field: { description: 12 }, issue: 'option description must be a string or null; malformed values are ignored.' },
+    { field: { group: ['Other views'] }, issue: 'option group must be a string or null; malformed values are ignored.' },
+  ])('ignores a malformed field without invalidating the options: $field', ({ field, issue }) => {
+    const record = Object.freeze({ value: 'calls', label: 'Calls', ...field });
+    const state = getSelectionState([record], 'calls', { useDropdown: true });
+    expect(state.valid).toBe(true);
+    expect(state.options).toEqual([record]);
+    expect(state.rows).toEqual([{ option: record, disabled: false, description: null, group: null }]);
+    expect(state.issues).toEqual([issue]);
+  });
+
+  it('ignores the fields in multiple selection and reports them once', () => {
+    const records = [
+      Object.freeze({ value: 'calls', label: 'Calls', disabled: true }),
+      Object.freeze({ value: 'archived', label: 'Archived', description: 'Unavailable', group: 'Other views' }),
+    ];
+    const state = getSelectionState(records, [], { useDropdown: false });
+    expect(state.valid).toBe(true);
+    expect(state.rows).toEqual([
+      { option: records[0], disabled: false, description: null, group: null },
+      { option: records[1], disabled: false, description: null, group: null },
+    ]);
+    expect(state.issues).toEqual(['option disabled, description and group are ignored in multiple selection.']);
+  });
+});

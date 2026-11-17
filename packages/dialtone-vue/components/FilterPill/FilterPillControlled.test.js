@@ -753,6 +753,20 @@ describe('DtFilterPill controlled selection', () => {
     expect(warn.mock.calls.filter(([message]) => message.includes('modelValue is ignored'))).toHaveLength(1);
   });
 
+  it.each([
+    { useDropdown: true, selected: null, issue: 'option disabled must be a boolean or null; malformed values are ignored.' },
+    { useDropdown: false, selected: [], issue: 'option disabled, description and group are ignored in multiple selection.' },
+  ])('warns once about option fields it ignores (dropdown=$useDropdown)', async ({ useDropdown, selected, issue }) => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    updateWrapper({
+      useDropdown,
+      selected,
+      options: [{ value: 'sales', label: 'Sales', disabled: 'yes' }, { value: 'support', label: 'Support', disabled: 'yes' }],
+    });
+    await open();
+    expect(warn.mock.calls).toEqual([[`[Dialtone FilterPill] ${issue}`]]);
+  });
+
   it('keeps controlled diagnostics quiet for a production consumer', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const previous = process.env.NODE_ENV;

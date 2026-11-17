@@ -466,6 +466,9 @@ import ControlledSelection from './FilterPillControlled';
  * @property {string} value Stable choice identity.
  * @property {string} label Required choice label.
  * @property {string | null} [shortLabel] Optional anchor summary; null uses label.
+ * @property {boolean | null} [disabled] Dropdown only. True keeps the row visible and focusable but refuses activation.
+ * @property {string | null} [description] Dropdown only. Visible secondary text and the row's accessible description.
+ * @property {string | null} [group] Dropdown only. Heading text; consecutive options with the same group share a section.
  */
 
 export default {
@@ -491,6 +494,9 @@ export default {
     /**
      * An array at creation (including []) opts into authoritative selection. Remount to change contract or controlled pattern.
      * Records require string value and label. Optional shortLabel accepts string or null; null is absent and empty string is meaningful.
+     * Single-selection dropdowns also read optional disabled (boolean or null) and description and group (string or
+     * null; an empty string is absent). A malformed value is ignored with a development warning and never invalidates
+     * the options. Multiple selection ignores these three fields and warns once.
      */
     options: {
       type: /** @type {import('vue').PropType<readonly FilterPillOption[] | null>} */ (Array),
