@@ -508,11 +508,15 @@ function blockedOverrideProps (attrStr, names) {
   }
   const style = /(?:^|\s)style\s*=\s*(?:"([^"]*)"|'([^']*)')/.exec(attrStr);
   if (!style) return new Set();
-  // Drop CSS comments, but not comment delimiters inside quoted strings (escapes respected).
-  // String contents are blanked so a `;` or `:` inside one never reads as a declaration.
+  // Drop CSS comments, but not comment delimiters inside quoted strings. An escape outside a
+  // string (`\'`) is consumed first so it never opens one. String contents are blanked so a
+  // `;` or `:` inside one never reads as a declaration.
   const declarations = (style[1] ?? style[2]).replace(
-    /("(?:[^"\\]|\\[\s\S])*"|'(?:[^'\\]|\\[\s\S])*')|\/\*[\s\S]*?\*\//g,
-    (_, string) => (string ? '\'\'' : ' '),
+    /\\[\s\S]|("(?:[^"\\]|\\[\s\S])*"|'(?:[^'\\]|\\[\s\S])*')|\/\*[\s\S]*?\*\//g,
+    (match, string) => {
+      if (string) return '\'\'';
+      return match.startsWith('/*') ? ' ' : match;
+    },
   );
   const declared = new Set(
     [...declarations.matchAll(/(?:^|;)\s*([\w-]+)\s*:/g)].map(m => m[1].toLowerCase()),

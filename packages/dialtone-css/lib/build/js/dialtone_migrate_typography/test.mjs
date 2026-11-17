@@ -1263,6 +1263,8 @@ describe('uncertain overrides keep their utility class with review', () => {
       `${CONFLICT}<dt-text class="d-fw-bold" style="--start: '/*'; font-weight: 400; --end: '*/'">A</dt-text>`],
     ['escaped quote inside a CSS string', String.raw`<dt-text class="d-fw-bold" style="--a: 'it\'s /*'; font-weight: 400; --b: '*/'">A</dt-text>`,
       CONFLICT + String.raw`<dt-text class="d-fw-bold" style="--a: 'it\'s /*'; font-weight: 400; --b: '*/'">A</dt-text>`],
+    ['escaped quote outside a CSS string', String.raw`<dt-text class="d-fw-bold" style="--a: \'; font-weight: 400; --b: 'tail'">A</dt-text>`,
+      CONFLICT + String.raw`<dt-text class="d-fw-bold" style="--a: \'; font-weight: 400; --b: 'tail'">A</dt-text>`],
   ];
   for (const [label, input, expected] of cases) {
     it(label, () => { assert.equal(run(input), expected); });
