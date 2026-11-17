@@ -34,14 +34,15 @@ let mockAttrs: Props = {};
 // DtInput isn't ported yet: this stands in for it as the Vue tests use it, binding `inputProps` the way DtInput
 // does (its own props, then the rest on the native input) and recording them.
 type TestInputProps = DtComboboxInputProps & Omit<ComponentPropsWithoutRef<'input'>, keyof DtComboboxInputProps>;
-function TestInput ({ label, showLabel, size: _size, description, ...attrs }: TestInputProps) {
-  MOCK_INPUT_PROPS_STUB({ label, showLabel, size: _size, description, ...attrs });
+function TestInput ({ label, showLabel, size, description, 'aria-label': ariaLabel, ...attrs }: TestInputProps) {
+  MOCK_INPUT_PROPS_STUB({ label, showLabel, size, description, 'aria-label': ariaLabel, ...attrs });
   return (
     <div data-qa="dt-input">
       <label>
         {showLabel && label ? <span>{label}</span> : null}
         {description ? <div>{description}</div> : null}
-        <input aria-label={!showLabel && label ? label : undefined} {...attrs} />
+        {/* As DtInput: its own aria-label when the label is hidden, which an aria-label attribute overrides. */}
+        <input aria-label={ariaLabel ?? (!showLabel && label ? label : undefined)} {...attrs} />
       </label>
     </div>
   );
