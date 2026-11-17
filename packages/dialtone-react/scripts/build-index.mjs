@@ -8,7 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const pkg = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const COMMON = ['common/constants', 'common/utils', 'common/slots'];
+const COMMON = ['common/constants', 'common/utils', 'common/slots', 'common/emoji'];
 
 const indexDirs = dir => (fs.existsSync(path.join(pkg, dir))
   ? fs.readdirSync(path.join(pkg, dir), { withFileTypes: true })
