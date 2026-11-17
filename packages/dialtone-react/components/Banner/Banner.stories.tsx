@@ -211,6 +211,10 @@ function BannerDefault ({
         backgroundImage={args.backgroundImage}
         backgroundSize={args.backgroundSize}
         dialogClass={args.dialogClass}
+        iconClass={args.iconClass}
+        headerClass={args.headerClass}
+        contentClass={args.contentClass}
+        actionClass={args.actionClass}
         onClose={() => {
           setDisplayBanner(false);
           onClose?.();
