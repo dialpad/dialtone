@@ -222,6 +222,19 @@ describe('DtBadge Tests', () => {
       expect(document.querySelector('.d-badge__icon-right')).not.toBeInTheDocument();
     });
 
+    it('should not render an icon wrapper for an empty Fragment slot', () => {
+      updateWrapper({ startIcon: <>{[]}</>, endIcon: <><>{null}</></> });
+
+      expect(document.querySelector('.d-badge__icon-left')).not.toBeInTheDocument();
+      expect(document.querySelector('.d-badge__icon-right')).not.toBeInTheDocument();
+    });
+
+    it('should render an icon wrapper for a Fragment with content', () => {
+      updateWrapper({ startIcon: <>{iconPlus}</> });
+
+      expect(document.querySelector('.d-badge__icon-left svg')).toBeInTheDocument();
+    });
+
     it('should apply the slot class props to their containers', () => {
       updateWrapper({
         startIcon: iconPlus, endIcon: iconPlus, startIconClass: 'start-x', endIconClass: 'end-x', labelClass: 'label-x',

@@ -1,4 +1,4 @@
-import { Children, useEffect, useRef, type ComponentPropsWithRef, type ReactNode } from 'react';
+import { Children, Fragment, isValidElement, useEffect, useRef, type ComponentPropsWithRef, type ReactNode } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
 import { hasContent, renderSlot, type SlotProp } from '../../common/slots';
 import type { IconSize } from '../../icons';
@@ -78,6 +78,14 @@ interface DtBadgeOwnProps {
 /** Attributes and handlers that Vue lets fall through to the root `<span>`, and the root's `ref`. */
 export interface DtBadgeProps extends DtBadgeOwnProps, Omit<ComponentPropsWithRef<'span'>, keyof DtBadgeOwnProps> {}
 
+// Children.toArray doesn't look inside a Fragment, as Vue's helper does with a vnode's children,
+// so an empty Fragment is unwrapped here and counts as empty.
+function hasSlotContent (node: ReactNode): boolean {
+  return Children.toArray(node).some(child => isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment
+    ? hasSlotContent(child.props.children)
+    : hasContent(child));
+}
+
 /**
  * A badge is a compact UI element that provides brief, descriptive information about an element.
  * It is terse, ideally one word.
@@ -103,8 +111,8 @@ export function DtBadge ({
   const scope: DtBadgeIconScope = { iconSize };
   const startNode = renderSlot(startIcon, scope);
   const endNode = renderSlot(endIcon, scope);
-  const hasStartIcon = hasContent(startNode);
-  const hasEndIcon = hasContent(endNode);
+  const hasStartIcon = hasSlotContent(startNode);
+  const hasEndIcon = hasSlotContent(endNode);
 
   // Vue validates in mounted() and updated(). Here the checks run on mount and when what they read changes,
   // and not again for an unrelated re-render or StrictMode's second mount.

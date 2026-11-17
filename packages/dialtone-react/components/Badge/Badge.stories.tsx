@@ -148,7 +148,10 @@ function BadgeDefault (args: BadgeStoryArgs) {
       type={args.type}
       kind={args.kind}
       decoration={args.decoration}
+      iconSize={args.iconSize}
       labelClass={args.labelClass}
+      startIconClass={args.startIconClass}
+      endIconClass={args.endIconClass}
       subtle={args.subtle}
       outlined={args.outlined}
       startIcon={args.startIcon
