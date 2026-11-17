@@ -494,9 +494,12 @@ export function DtBox<T extends DtBoxAs = 'div'> (props: DtBoxProps<T>) {
 
   const Component: ElementType = as;
   // The props of whichever element `as` names; TypeScript can't relate a generic `as` to one element's props.
-  const attrs = rest as HTMLAttributes<HTMLElement>;
+  const { dangerouslySetInnerHTML, ...attrs } = rest as HTMLAttributes<HTMLElement>;
   const boxClassName = cx(
     'd-box',
+    // useScrollbar adds this class once, when it creates the instance, and React's `className` would drop it on the
+    // next class change, so it's part of the rendered list while the scrollbar is on.
+    scrollbar && 'd-scrollbar',
     // Padding
     modifierClass('d-box--p', padding),
     modifierClass('d-box--pi', paddingInline),
@@ -546,12 +549,16 @@ export function DtBox<T extends DtBoxAs = 'div'> (props: DtBoxProps<T>) {
       {...attrs}
       ref={rootRef}
       className={boxClassName}
+      // With the scrollbar, the root holds the wrapper, so the HTML goes inside the wrapper: React throws for a root
+      // with both.
+      dangerouslySetInnerHTML={scrollbar ? undefined : dangerouslySetInnerHTML}
     >
       {scrollbar
         ? (
           <div
             data-qa="dt-box-scrollbar-content"
             className={cx('d-box__scrollbar-content', scrollbarContentClass)}
+            dangerouslySetInnerHTML={dangerouslySetInnerHTML}
           >
             {children}
           </div>

@@ -1,6 +1,0 @@
-{
-  "fixed height with scrollbar": {
-    "reason": "Not comparable in the harness yet. Vue's DOM parity run doesn't install the v-dt-scrollbar directive, so its golden has no scrollbar (no d-scrollbar class, no OverlayScrollbars elements). The port's useScrollbar does run, and in jsdom it throws, since jsdom's CSS has no registerProperty. The Box tests cover this case with that API stubbed. The harness needs to install the directive on the Vue side and stub CSS.registerProperty on both sides.",
-    "skip": true
-  }
-}

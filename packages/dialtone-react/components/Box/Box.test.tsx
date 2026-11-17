@@ -41,16 +41,6 @@ describe('DtBox', () => {
   const box = () => screen.getByTestId('dt-box');
   const classes = () => Array.from(box().classList);
 
-  // jsdom has `CSS` but not `CSS.registerProperty`, which the scrollbar calls when it sets up. Vue's test replaces the
-  // scrollbar directive with a no-op instead; here the real scrollbar runs, so give jsdom the browser API it lacks.
-  beforeAll(() => {
-    Object.defineProperty(CSS, 'registerProperty', { value: () => {}, configurable: true, writable: true });
-  });
-
-  afterAll(() => {
-    Reflect.deleteProperty(CSS, 'registerProperty');
-  });
-
   afterEach(() => {
     vi.restoreAllMocks();
   });
@@ -573,6 +563,31 @@ describe('DtBox', () => {
 
       expect(classes()).toContain('d-scrollbar');
       expect(box().getAttribute('data-overlayscrollbars-initialize')).toBe('true');
+    });
+
+    it('keeps the scrollbar class when a class-producing prop changes', () => {
+      const { rerender } = render(<DtBox scrollbar="always" padding="100">{slotContent}</DtBox>);
+      const before = box();
+
+      rerender(<DtBox scrollbar="always" padding="200" className="extra">{slotContent}</DtBox>);
+
+      expect(box()).toBe(before);
+      expect(classes()).toContain('d-box--p-200');
+      expect(classes()).toContain('d-scrollbar');
+    });
+
+    it('renders dangerouslySetInnerHTML inside the scrollbar content wrapper', () => {
+      render(<DtBox scrollbar="always" dangerouslySetInnerHTML={{ __html: '<p>Raw</p>' }} />);
+
+      const wrapper = screen.getByTestId('dt-box-scrollbar-content');
+      expect(wrapper.innerHTML).toBe('<p>Raw</p>');
+      expect(box().firstElementChild).toBe(wrapper);
+    });
+
+    it('renders dangerouslySetInnerHTML on the root without a scrollbar', () => {
+      render(<DtBox dangerouslySetInnerHTML={{ __html: '<p>Raw</p>' }} />);
+
+      expect(box().innerHTML).toBe('<p>Raw</p>');
     });
 
     it('replaces the root when the scrollbar is turned off, as Vue switches branches', () => {
