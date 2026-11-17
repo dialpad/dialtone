@@ -28,6 +28,7 @@ import {
   INPUT_SIZES,
   INPUT_STATE_CLASSES,
   INPUT_TYPES,
+  type InputIconSize,
   type InputSize,
   type InputType,
 } from './InputConstants';
@@ -52,7 +53,7 @@ export interface InputValidation {
 
 /** The scope of the startIcon slot. */
 export interface InputIconScope {
-  iconSize: string | undefined;
+  iconSize: InputIconSize | undefined;
 }
 
 /** The scope of the endIcon slot: `clear` empties the input, focuses it, and reports `onClear` and `onValueChange('')`. */
@@ -195,7 +196,7 @@ export interface DtInputProps extends DtInputOwnProps, Omit<NativeAttrs, keyof D
   ref?: Ref<HTMLInputElement | HTMLTextAreaElement | null>;
 }
 
-const ICON_SIZES: Readonly<Partial<Record<string, string>>> = INPUT_ICON_SIZES;
+const ICON_SIZES: Readonly<Partial<Record<string, InputIconSize>>> = INPUT_ICON_SIZES;
 const SIZE_CLASSES: Readonly<Record<'input' | 'textarea', Readonly<Partial<Record<string, string>>>>> =
   INPUT_SIZE_CLASSES;
 const STATE_CLASSES: Readonly<Partial<Record<string, string>>> = INPUT_STATE_CLASSES;
@@ -315,7 +316,7 @@ export function DtInput ({
     ? [...formattedMessages, { message: lengthMessage, type: inputLengthState }]
     : formattedMessages;
   const inputState = getValidationState(validationMessages);
-  const ariaInvalid = inputState === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
+  const ariaInvalid: 'true' | undefined = inputState === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
   const ariaDescribedBy = showMessages && validationMessages.length > 0 ? messagesId : undefined;
   const stateClass = showMessages && inputState ? STATE_CLASSES[inputState] : undefined;
 
@@ -341,10 +342,10 @@ export function DtInput ({
     inputRef.current = el;
   }, []);
   // `ref` is the native input, like the rest of the attributes; Vue's focus(), blur() and select() are its own.
+  // No dependency list: switching `type` to or from textarea swaps the element, so the handle follows each commit.
   useImperativeHandle<HTMLInputElement | HTMLTextAreaElement | null, HTMLInputElement | HTMLTextAreaElement | null>(
     ref,
     () => inputRef.current,
-    [isTextarea],
   );
 
   // An <input>: Vue's `:value` binding, which writes the value back on every render where the element's differs.

@@ -42,6 +42,9 @@ export const INPUT_ICON_SIZES = {
 /** A size `INPUT_ICON_SIZES` knows, as a string or a number (Vue's ordinalSizeValidator). */
 export type InputSize = keyof typeof INPUT_ICON_SIZES | `${keyof typeof INPUT_ICON_SIZES}`;
 
+/** The icon size an input size maps to, which the icon slots receive as `iconSize`. */
+export type InputIconSize = typeof INPUT_ICON_SIZES[keyof typeof INPUT_ICON_SIZES];
+
 export const INPUT_SIZE_CLASSES = {
   input: {
     // Numeric (preferred)
