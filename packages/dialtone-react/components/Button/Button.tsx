@@ -82,8 +82,8 @@ interface DtButtonOwnProps {
   linkUnderline?: boolean;
 
   /**
-   * HTML button disabled attribute. On a link (`href` or `to`), sets `aria-disabled` and `tabindex="-1"`, drops
-   * `href`, and cancels clicks instead.
+   * HTML button disabled attribute. On a link (`href` or `to`), sets `aria-disabled` and `tabindex="-1"` and cancels
+   * clicks instead. An `href` link also drops `href`; a `to` link keeps `to`, as in Vue.
    * @values true, false
    */
   disabled?: boolean;
