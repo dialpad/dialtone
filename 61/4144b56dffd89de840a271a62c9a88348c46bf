@@ -1,0 +1,25 @@
+apps/dialtone-documentation/docs/components/tooltip.md
+  s_50ca0bdecfb15a::t_a949a448564a61 101-104,107,201,206
+packages/dialtone-vue/localization/en-US.ftl
+  s_50ca0bdecfb15a::t_a949a448564a61 179-181
+packages/dialtone-vue/components/Tooltip/TooltipVariants.story.vue
+  s_50ca0bdecfb15a::t_a949a448564a61 111-112,116,206,224
+packages/dialtone-vue/components/Tooltip/Tooltip.test.js
+  s_50ca0bdecfb15a::t_a949a448564a61 113,117-122
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "614144b56dffd89de840a271a62c9a88348c46bf",
+  "prompts": {},
+  "sessions": {
+    "s_50ca0bdecfb15a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ed74-0cf1-7e93-95e3-9941d8424ccb",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}
