@@ -139,7 +139,13 @@ export function DtListItem ({
     : false;
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (['enter', 'space'].includes(event.code.toLowerCase())) {
+    const root = event.currentTarget;
+    const code = event.code.toLowerCase();
+    // A native button already turns Enter and Space into a click, and a link Enter, so synthesizing one would
+    // call onClick twice. Keys typed in a descendant (an input) don't activate the item.
+    const activatesNatively = root instanceof HTMLButtonElement ||
+      (root instanceof HTMLAnchorElement && root.hasAttribute('href') && code === 'enter');
+    if (['enter', 'space'].includes(code) && event.target === root && !activatesNatively) {
       onClick?.(event);
     }
     onKeyDown?.(event);

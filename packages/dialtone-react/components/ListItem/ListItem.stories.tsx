@@ -196,7 +196,7 @@ function useListNavigation () {
 // ListItemDefault.story.vue
 function ListItemDefault ({
   default: defaultSlot, start, end, subtitle, blockEnd, id, role, elementType, type, navigationType, selected,
-  wrapperClass,
+  wrapperClass, onClick,
 }: ListItemStoryArgs) {
   const { listWrapper, highlightIdContext } = useListNavigation();
   return (
@@ -210,6 +210,7 @@ function ListItemDefault ({
           navigationType={navigationType}
           selected={selected}
           wrapperClass={wrapperClass}
+          onClick={onClick}
           start={<DtIcon name={start as DtIconProps['name']} />}
           subtitle={htmlSpan(subtitle)}
           blockEnd={htmlSpan(blockEnd)}
@@ -281,12 +282,12 @@ function ListItemCustom ({ default: defaultSlot, onClick }: ListItemStoryArgs) {
         .custom-list-item--actions {
           opacity: 0;
         }
-        .dt-list-item:hover .custom-list-item--time,
-        .dt-list-item:focus-within .custom-list-item--time {
+        .d-list-item:hover .custom-list-item--time,
+        .d-list-item:focus-within .custom-list-item--time {
           opacity: 0.75;
         }
-        .dt-list-item:hover .custom-list-item--actions,
-        .dt-list-item:focus-within .custom-list-item--actions {
+        .d-list-item:hover .custom-list-item--actions,
+        .d-list-item:focus-within .custom-list-item--actions {
           opacity: 1;
         }
       `}
