@@ -1,0 +1,22 @@
+packages/dialtone-vue/components/modal/modal.test.js
+  s_7d0600d04711cd::t_31ef36e8a52464 176,183-189
+packages/dialtone-vue/components/modal/modal.vue
+  s_7d0600d04711cd::t_412ce38b085aee 376-381,383-386
+  s_7d0600d04711cd::t_ae9746bc013e63 462
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "4d5726b0ffd903c4bf7987820e90bc33c01f4f1f",
+  "prompts": {},
+  "sessions": {
+    "s_7d0600d04711cd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3f636a09-2757-4341-bc88-70279948e4fe",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "ninarepetto <nina.repetto@dialpad.com>"
+    }
+  }
+}
