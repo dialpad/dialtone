@@ -1,0 +1,26 @@
+packages/dialtone-tokens/vitest.config.js
+  s_1e7ac70dcc02f0::t_7a51c408e9350f 14
+packages/dialtone-tokens/sync-scripts/token_import.test.ts
+  s_1e7ac70dcc02f0::t_c9e3f56e441d42 1-2,10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3ac309f7d023d728674878647a4a6252d61b40ee",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_1e7ac70dcc02f0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7d5bbe17-690c-4901-a385-59ae7796698b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

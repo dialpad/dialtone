@@ -1,0 +1,29 @@
+packages/eslint-plugin-dialtone/lib/rules/deprecated-flex-gap-classes.js
+  s_c797e43c4ccb1f::t_9400186da6f707 32
+packages/eslint-plugin-dialtone/lib/rules/deprecated-base-color-classes.js
+  s_c797e43c4ccb1f::t_a5bfc080b3863d 36
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-grid-gap-classes.js
+  s_c797e43c4ccb1f::t_85ed5388da863c 32-33
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-flex-gap-classes.js
+  s_c797e43c4ccb1f::t_d69a828e2dd7ea 32-33
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-base-color-classes.js
+  s_c797e43c4ccb1f::t_9af8cb8da2b4d1 24
+packages/eslint-plugin-dialtone/lib/rules/deprecated-grid-gap-classes.js
+  s_c797e43c4ccb1f::t_d2fa861982cf88 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "047b53be43d9e7a3be1788337325fd6213bd9e61",
+  "prompts": {},
+  "sessions": {
+    "s_c797e43c4ccb1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "67d720f8-669e-4dce-8518-9136abaa28e9",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
