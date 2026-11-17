@@ -424,6 +424,10 @@ export function DtPopover ({
   const anchorElRef = useRef<Element | null | undefined>(null);
   const tipRef = useRef<Instance | null>(null);
   const isUnmountingRef = useRef(false);
+  // Anchors that had no aria-expanded until tippy added one. tippy only manages the attribute on an anchor that had none
+  // when the instance was created, so an unmount removes it again: a remount (StrictMode's included) then starts as the
+  // first mount did.
+  const [tippyAriaExpanded] = useState(() => new WeakSet<Element>());
 
   useImperativeHandle(ref, () => rootRef.current as HTMLDivElement, []);
 
@@ -533,7 +537,8 @@ export function DtPopover ({
   function resolveBodyScrimTarget (): Element {
     const anchorEl = anchorElRef.current;
     const root = anchorEl?.getRootNode();
-    return anchorEl?.closest('dialog') ?? (root && isParentNode(root) ? root.querySelector('body') : null) ?? document.body;
+    const rootBody = root && isParentNode(root) ? root.querySelector('body') : null;
+    return anchorEl?.closest('dialog') ?? rootBody ?? document.body;
   }
 
   // The scrim must land in the same top-layer context as the popover's own content (the nearest ancestor <dialog> when
@@ -594,9 +599,9 @@ export function DtPopover ({
     addEventListeners();
   });
 
-  const initTippyInstance = useEffectEvent(() => {
+  const initTippyInstance = useEffectEvent((): Instance | null => {
     const anchorEl = anchorElRef.current;
-    if (!anchorEl || !dialogEl) return;
+    if (!anchorEl || !dialogEl) return null;
     setScrimTarget(resolveScrimTarget());
 
     let internalAppendTo: TippyProps['appendTo'] | undefined;
@@ -606,7 +611,8 @@ export function DtPopover ({
       // When inside a native <dialog> (e.g. DtModal in Dialtone Next), append to the dialog so the popover stays in the
       // browser's top layer. Otherwise the anchor's own body: where it has none, tippy's default (document.body).
       const root = anchorEl.getRootNode();
-      internalAppendTo = anchorEl.closest('dialog') ?? ((isParentNode(root) && root.querySelector('body')) || undefined);
+      const rootBody = (isParentNode(root) && root.querySelector('body')) || undefined;
+      internalAppendTo = anchorEl.closest('dialog') ?? rootBody;
     } else if (appendTo === 'root') {
       // Try to attach the popover to root document, fallback to parent is fail
       try {
@@ -622,6 +628,7 @@ export function DtPopover ({
 
     tipRef.current?.destroy();
 
+    if (!anchorEl.hasAttribute('aria-expanded')) tippyAriaExpanded.add(anchorEl);
     tipRef.current = createTippyPopover(anchorEl, {
       popperOptions: popperOptions(),
       contentElement: dialogEl,
@@ -638,6 +645,7 @@ export function DtPopover ({
       onClickOutside: () => onClickOutside(),
       onShow: () => { onShow(); },
     });
+    return tipRef.current;
   });
 
   const updateAnchorEl = useEffectEvent(() => {
@@ -658,10 +666,7 @@ export function DtPopover ({
       return;
     }
 
-    if (isOpen) {
-      initTippyInstance();
-      tipRef.current?.show();
-    }
+    if (isOpen) initTippyInstance()?.show();
   });
 
   // Vue checks [modal, initialFocusElement] on creation and whenever either changes: once each, StrictMode or not.
@@ -712,6 +717,8 @@ export function DtPopover ({
       tipRef.current?.destroy();
       intersectionObserver.disconnect();
       mutationObserver.disconnect();
+      const anchorEl = anchorElRef.current;
+      if (anchorEl && tippyAriaExpanded.delete(anchorEl)) anchorEl.removeAttribute('aria-expanded');
       anchorElRef.current = null;
       tipRef.current = null;
       window.removeEventListener('dt-popover-close', closePopover);
@@ -786,8 +793,7 @@ export function DtPopover ({
     // Guard against isOpen turning true before an anchor element has been resolved: creating a tippy instance with no
     // anchor leaves a stale getReferenceClientRect wired up.
     if (!anchorElRef.current) return;
-    initTippyInstance();
-    tipRef.current?.show();
+    initTippyInstance()?.show();
   });
   const hideTip = useEffectEvent(() => {
     removeEventListeners();
@@ -899,24 +905,26 @@ export function DtPopover ({
     }
   }
 
-  // What follows an await reads the props then, as Vue's `this` does.
-  const finishEnter = useEffectEvent(() => {
-    if (isUnmountingRef.current) return;
+  // What follows an await reads the props of the latest render, as Vue's `this` does: these closures are refreshed
+  // after every commit.
+  const finishEnter = () => {
     preventScrolling();
     onOpened?.(true, contentRef.current ?? undefined);
     if (open !== null) onOpenChange?.(true);
-  });
+  };
 
-  const restoreScrolling = useEffectEvent(() => enableScrolling());
-
-  const finishLeave = useEffectEvent(() => {
-    if (isUnmountingRef.current) return;
+  const finishLeave = () => {
     // Focus has been moved off the dialog (or was never trapped in it) by this point, so it's now safe to hide it from
     // assistive technology without triggering a focused-descendant violation.
     setIsDialogAriaHidden(true);
     tipRef.current?.unmount();
     onOpened?.(false);
     if (open !== null) onOpenChange?.(false);
+  };
+
+  const latest = useRef({ finishEnter, finishLeave, enableScrolling });
+  useLayoutEffect(() => {
+    latest.current = { finishEnter, finishLeave, enableScrolling };
   });
 
   async function onEnterTransitionComplete () {
@@ -924,7 +932,8 @@ export function DtPopover ({
     focusInitialElement();
     // await next tick in case the user wants to change focus themselves.
     await nextTick();
-    finishEnter();
+    if (isUnmountingRef.current) return;
+    latest.current.finishEnter();
   }
 
   async function onLeaveTransitionComplete () {
@@ -935,9 +944,9 @@ export function DtPopover ({
       // await next tick in case the user wants to change focus themselves.
       await nextTick();
       if (isUnmountingRef.current) return;
-      restoreScrolling();
+      latest.current.enableScrolling();
     }
-    finishLeave();
+    latest.current.finishLeave();
   }
 
   function defaultToggleOpen (event: ReactMouseEvent<HTMLDivElement>) {
@@ -948,9 +957,8 @@ export function DtPopover ({
     if (open === null) {
       const anchorEl = anchorElRef.current;
       const target = event.target as Node;
-      if ((!anchorEl?.contains(target) && !anchorEl?.isEqualNode(target)) || (anchorEl as HTMLButtonElement)?.disabled) {
-        return;
-      }
+      const isAnchor = anchorEl?.contains(target) || anchorEl?.isEqualNode(target);
+      if (!isAnchor || (anchorEl as HTMLButtonElement | null | undefined)?.disabled) return;
       setIsOpen(current => !current);
     }
   }
