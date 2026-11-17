@@ -1,0 +1,30 @@
+{
+  "default": {
+    "reason": "Vue calls Math.random only to make the gradient id; the port uses useId.",
+    "noRandom": true
+  },
+  "critical at 99% progress": {
+    "reason": "Vue calls Math.random only to make the gradient id; the port uses useId.",
+    "noRandom": true
+  },
+  "positive": {
+    "reason": "Vue calls Math.random only to make the gradient id; the port uses useId.",
+    "noRandom": true
+  },
+  "ai": {
+    "reason": "Vue calls Math.random only to make the gradient id; the port uses useId.",
+    "noRandom": true
+  },
+  "info at 10% progress": {
+    "reason": "Vue calls Math.random only to make the gradient id; the port uses useId.",
+    "noRandom": true
+  },
+  "warning at 1% progress": {
+    "reason": "Vue calls Math.random only to make the gradient id; the port uses useId.",
+    "noRandom": true
+  },
+  "standard attrs": {
+    "reason": "Vue calls Math.random only to make the gradient id; the port uses useId.",
+    "noRandom": true
+  }
+}
