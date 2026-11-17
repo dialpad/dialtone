@@ -219,6 +219,28 @@ describe('DtHovercard Tests', () => {
     });
   });
 
+  describe('Timers (React port)', () => {
+    it('should not open from a pending enter timer once open is controlled', async () => {
+      fireEvent.mouseEnter(anchor);
+      result.rerender(<DtHovercard {...baseProps} open={false} />);
+      await runAllTimers();
+
+      expect(getHovercardContent()).toBeNull();
+    });
+
+    it('should cancel an earlier enter timer when show() is called twice and then hide()', async () => {
+      const ref = createRef<DtHovercardHandle>();
+      result.rerender(<DtHovercard {...baseProps} ref={ref} />);
+      act(() => ref.current?.show());
+      await act(async () => { vi.advanceTimersByTime(50); });
+      act(() => ref.current?.show());
+      act(() => ref.current?.hide());
+      await runAllTimers();
+
+      expect(getHovercardContent()).toBeNull();
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('When hovercard is open', () => {
       beforeEach(() => {

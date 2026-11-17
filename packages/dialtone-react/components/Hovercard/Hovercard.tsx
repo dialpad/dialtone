@@ -180,11 +180,27 @@ export function DtHovercard ({
     clearTimeout(outTimer.current);
     setHovercardOpen(false);
   });
+  // The anchor in use now: the supplied external element, else the popover's anchor wrapper (its root holds its
+  // container, whose first child is that wrapper). Resolved each time, as React may replace the element.
+  const currentAnchor = useEffectEvent(() => (
+    externalAnchorElement ?? popoverRef.current?.firstElementChild?.firstElementChild?.firstElementChild ?? null
+  ));
+  // A pending timer must not open the hovercard against a controlled `open`.
   useEffect(() => {
-    // The popover's root holds its container, whose first child is the anchor wrapper.
-    const anchorEl = popoverRef.current?.firstElementChild?.firstElementChild?.firstElementChild;
+    if (open !== null) {
+      clearTimeout(inTimer.current);
+      clearTimeout(outTimer.current);
+    }
+  }, [open]);
+  useEffect(() => {
+    let hadAnchor = !!currentAnchor()?.isConnected;
     const observer = new MutationObserver(() => {
-      if (anchorEl && !anchorEl.isConnected) closeWithoutAnchor();
+      const anchorEl = currentAnchor();
+      if (anchorEl?.isConnected) hadAnchor = true;
+      else if (hadAnchor) {
+        hadAnchor = false;
+        closeWithoutAnchor();
+      }
     });
     observer.observe(document.body, { childList: true, subtree: true });
     return () => {
@@ -197,6 +213,7 @@ export function DtHovercard ({
   function setInTimer () {
     if (open === null) {
       clearTimeout(outTimer.current);
+      clearTimeout(inTimer.current);
       inTimer.current = setTimeout(() => setHovercardOpen(true), enterDelay);
     }
   }
@@ -204,6 +221,7 @@ export function DtHovercard ({
   function setOutTimer () {
     if (open === null) {
       clearTimeout(inTimer.current);
+      clearTimeout(outTimer.current);
       outTimer.current = setTimeout(() => setHovercardOpen(false), leaveDelay);
     }
   }
@@ -268,6 +286,7 @@ export function DtHovercard ({
       appendTo={appendTo}
       anchorClass={anchorClass}
       externalAnchorElement={externalAnchorElement}
+      onOpenChange={setHovercardOpen}
       onOpened={opened => onOpened?.(opened)}
       onMouseenterPopover={onMouseEnter}
       onMouseleavePopover={onMouseLeave}
