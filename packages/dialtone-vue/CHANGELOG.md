@@ -1,3 +1,11 @@
+# [4.8.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.7.0...dialtone-vue/v4.8.0) (2026-11-17)
+
+
+### Features
+
+* **Phone:** DLT-3823 add formatPhoneNumber function ([#1576](https://github.com/dialpad/dialtone/issues/1576)) ([bdc36ea](https://github.com/dialpad/dialtone/commit/bdc36ea00add32b7fb0692e13017a48731211efb))
+* **Stack:** DLT-3826 add alignSelf prop ([#1581](https://github.com/dialpad/dialtone/issues/1581)) ([0fce80f](https://github.com/dialpad/dialtone/commit/0fce80f912d496f1f4ec5f81be81be6acef3acfa))
+
 # [4.7.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.6.1...dialtone-vue/v4.7.0) (2026-11-13)
 
 
