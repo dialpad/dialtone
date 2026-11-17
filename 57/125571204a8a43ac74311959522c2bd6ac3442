@@ -1,0 +1,33 @@
+lookup-release.config.cjs
+  s_7f1d1d64baa803::t_2119c2424ac9b6 49
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_c9fe9e33232194 40
+packages/dialtone-mcp-server/release-ci.config.cjs
+  s_7f1d1d64baa803::t_2119c2424ac9b6 4,15
+packages/dialtone-cli/release-ci.config.cjs
+  s_7f1d1d64baa803::t_2119c2424ac9b6 4,15
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_7f1d1d64baa803::t_c9fe9e33232194 66
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_2119c2424ac9b6 68
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_2119c2424ac9b6 24,58,119
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_7f1d1d64baa803::t_2119c2424ac9b6 56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "57125571204a8a43ac74311959522c2bd6ac3442",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

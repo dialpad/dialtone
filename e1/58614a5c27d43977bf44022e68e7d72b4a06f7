@@ -1,0 +1,78 @@
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiSearch.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 2-5
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiTabset.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 2-5
+packages/dialtone-vue/components/DescriptionList/DescriptionList.test.js
+  s_3008ff139913ef::t_50a0ac6184f3db 65,70,74-77,81-84,141,153
+packages/dialtone-vue/components/Datepicker/Modules/MonthYearPicker.vue
+  s_3008ff139913ef::t_2d5c4d946013b7 22,48,90,116
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 69
+packages/dialtone-vue/components/Codeblock/Codeblock.test.js
+  s_3008ff139913ef::t_50a0ac6184f3db 32,35,37,40,45,49-50,52-53,60,67,74
+packages/dialtone-vue/components/EmojiPicker/EmojiPicker.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 4,6-9,25-28,58-61,67
+packages/dialtone-vue/components/EmptyState/EmptyState.test.js
+  s_3008ff139913ef::t_eb19627118db93 8,46-48,74,110,120,224,235,246,249-250
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiSelector.vue
+  s_3008ff139913ef::t_2d5c4d946013b7 48,81
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 4,14,23,32
+packages/dialtone-vue/components/ButtonGroup/ButtonGroup.test.js
+  s_3008ff139913ef::t_50a0ac6184f3db 20,38,49
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiSkinSelector.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 6,12,37,49
+packages/dialtone-vue/components/ButtonGroup/ButtonGroup.vue
+  s_3008ff139913ef::t_8611d2f0ad75d1 8
+packages/dialtone-vue/components/Codeblock/Codeblock.vue
+  s_3008ff139913ef::t_8611d2f0ad75d1 5,9
+packages/dialtone-vue/components/Datepicker/Datepicker.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 5,8-11,24-27
+packages/dialtone-vue/components/LazyShow/LazyShow.test.js
+  s_3008ff139913ef::t_e127c0b2db26eb 1-17,19-101
+  s_3008ff139913ef::t_e59d7cb785427a 18
+packages/dialtone-vue/components/KeyboardShortcut/KeyboardShortcut.test.js
+  s_3008ff139913ef::t_eb19627118db93 33,47,58,73,83,93,103,113,123,136,146
+packages/dialtone-vue/components/ModeIsland/ModeIsland.test.js
+  s_3008ff139913ef::t_eb19627118db93 55
+packages/dialtone-vue/components/Emoji/Emoji.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 2-5,15
+packages/dialtone-vue/components/Skeleton/Skeleton.vue
+  s_3008ff139913ef::t_66c4751a3ae04e 3
+packages/dialtone-vue/components/EmojiPicker/EmojiPicker.test.js
+  s_3008ff139913ef::t_97e5f299c26585 103-105,118,122,126,130,138,142,149,156,163,170,176,187,244,274,289,300,312,319,325,338-339,351-352,363-365,380,386-387,396,398,400,402,404,406,408,410,412,414,454-455,463-464,472-473,485-486
+packages/dialtone-vue/components/KeyboardShortcut/KeyboardShortcut.vue
+  s_3008ff139913ef::t_66c4751a3ae04e 3,9-12,38
+packages/dialtone-vue/components/ModeIsland/ModeIsland.vue
+  s_3008ff139913ef::t_66c4751a3ae04e 5
+packages/dialtone-vue/components/Skeleton/Skeleton.test.js
+  s_3008ff139913ef::t_eb19627118db93 40
+packages/dialtone-vue/components/Emoji/Emoji.test.js
+  s_3008ff139913ef::t_97e5f299c26585 29,49
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiDescription.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 2-5
+packages/dialtone-vue/components/EmptyState/EmptyState.vue
+  s_3008ff139913ef::t_66c4751a3ae04e 4,9,18,38,52,61
+packages/dialtone-vue/components/Datepicker/Datepicker.test.js
+  s_3008ff139913ef::t_97e5f299c26585 47-53,66,75,79,83,87,101,107,113,119,125,158,174,182,194,202,214,226,277,287,296,307,318,327,338,348,357,371,382,398,407,416,425,435,467,476,485,494,504,513,520,529,543,550,568,575
+packages/dialtone-vue/components/LazyShow/LazyShow.vue
+  s_3008ff139913ef::t_1f43257d26bccc 10
+packages/dialtone-vue/components/Datepicker/Modules/Calendar.vue
+  s_3008ff139913ef::t_6b4fa4fdda6ceb 5,17,28,39
+packages/dialtone-vue/components/DescriptionList/DescriptionList.vue
+  s_3008ff139913ef::t_8611d2f0ad75d1 2-5,10-13,16-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e158614a5c27d43977bf44022e68e7d72b4a06f7",
+  "prompts": {},
+  "sessions": {
+    "s_3008ff139913ef": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a155eb-b80d-7863-812c-94a3c9cda4c9",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
