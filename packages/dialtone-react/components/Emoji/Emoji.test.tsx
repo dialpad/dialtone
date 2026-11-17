@@ -134,12 +134,15 @@ describe('DtEmoji Tests', () => {
     it('does not pollute Object.prototype or the emoji data through its keys', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       const hostile = JSON.parse(
-        '{"__proto__":{"polluted":"yes"},"constructor":{"custom":true},"1f604":{"__proto__":{"polluted":"yes"}}}',
+        '{"__proto__":{"custom":"yes","image":"yes","polluted":"yes"},"constructor":{"custom":true},'
+        + '"1f604":{"__proto__":{"custom":"yes","image":"yes"}}}',
       );
 
       setCustomEmojiJson(hostile);
 
       expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+      expect(({} as Record<string, unknown>).custom).toBeUndefined();
+      expect(({} as Record<string, unknown>).image).toBeUndefined();
       expect(Object.getPrototypeOf(getEmojiData())).toBe(Object.prototype);
       expect(Object.getPrototypeOf(getEmojiData()['1f604'])).toBe(Object.prototype);
       expect(Object.hasOwn(getEmojiData(), 'constructor')).toBe(false);
