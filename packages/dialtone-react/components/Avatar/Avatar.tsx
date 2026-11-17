@@ -5,11 +5,12 @@ import {
   useMemo,
   useRef,
   useState,
-  type ComponentPropsWithRef,
   type CSSProperties,
   type ElementType,
+  type HTMLAttributes,
   type MouseEvent,
   type ReactNode,
+  type Ref,
 } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
 import { hasContent } from '../../common/slots';
@@ -174,8 +175,11 @@ interface DtAvatarOwnProps {
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
 
+// The root is a <div>, or a <button> when interactive, so attributes and the ref are typed for either.
 // `color` is left out: Vue's deprecated `color` prop isn't ported, and the HTML attribute would take its place.
-export type DtAvatarProps = DtAvatarOwnProps & Omit<ComponentPropsWithRef<'div'>, keyof DtAvatarOwnProps | 'color'>;
+export type DtAvatarProps = DtAvatarOwnProps
+  & Omit<HTMLAttributes<HTMLElement>, keyof DtAvatarOwnProps | 'color'>
+  & { ref?: Ref<HTMLElement> };
 
 /**
  * Read the anchor hue from CSS custom property for fallback computation
@@ -231,6 +235,7 @@ export function DtAvatar ({
   onClick,
   className,
   style,
+  ref,
   ...rest
 }: DtAvatarProps) {
   const generatedId = useId();
@@ -340,6 +345,8 @@ export function DtAvatar ({
       data-qa="dt-avatar"
       type={interactive ? 'button' : undefined}
       {...rest}
+      // TypeScript checks a variable tag's ref against both elements; the ref gets whichever one renders.
+      ref={ref as Ref<HTMLDivElement & HTMLButtonElement>}
       className={avatarClasses}
       style={rootStyle}
       onClick={handleClick}
