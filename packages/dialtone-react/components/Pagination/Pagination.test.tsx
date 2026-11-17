@@ -148,7 +148,10 @@ describe('DtPagination Tests', () => {
         updateWrapper();
 
         expect(getPages()).toHaveLength(7);
-        expect(getPages()[6]).not.toHaveTextContent('15');
+        // Numbered pages only: the first and last buttons are prev/next.
+        const numbered = getPages().slice(1, -1).map(button => button.textContent);
+        expect(numbered).toHaveLength(5);
+        expect(numbered).not.toContain('15');
       });
 
       it('shouldn\'t render hidden pages which is the first page when at end', () => {
@@ -162,7 +165,9 @@ describe('DtPagination Tests', () => {
         updateWrapper();
 
         expect(getPages()).toHaveLength(7);
-        expect(getPages()[0]).not.toHaveTextContent('1');
+        const numbered = getPages().slice(1, -1).map(button => button.textContent);
+        expect(numbered).toHaveLength(5);
+        expect(numbered).not.toContain('1');
       });
     });
   });

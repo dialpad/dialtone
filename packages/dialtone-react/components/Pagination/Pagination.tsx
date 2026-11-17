@@ -174,7 +174,8 @@ export function DtPagination ({
       />
       {pages.map((page, index) => (
         <div
-          key={`page-${page}-${index}`}
+          // Page numbers are unique, so their key survives the window moving and keeps focus.
+          key={page === '...' ? `separator-${index}` : `page-${page}`}
           className={cx({ 'd-pagination__separator': page === '...' })}
         >
           {page === '...'
