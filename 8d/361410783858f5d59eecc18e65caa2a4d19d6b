@@ -1,0 +1,14 @@
+packages/dialtone-react/components/Button/Button.tsx
+  h_65afbd07a56b87 85-86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8d361410783858f5d59eecc18e65caa2a4d19d6b",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

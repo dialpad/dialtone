@@ -1,0 +1,50 @@
+packages/dialtone-mcp-server/scripts/query-tools.test.mjs
+  s_7f1d1d64baa803::t_ae8acb602cd1fa 465-496,498
+  s_7f1d1d64baa803::t_e23dbd584b996d 497
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_ae8acb602cd1fa 183-202
+.agents/resources/dialtone-lookup.md
+  s_100911eca16c78::t_aa23403bc57931 27,32
+.claude/rules/dialtone-cli.md
+  s_100911eca16c78::t_444066feaad356 42-43
+.claude/rules/dialtone-query-core.md
+  s_100911eca16c78::t_7b657091db0405 176-177
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_100911eca16c78::t_b1e693c3b18a5c 235-242
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_100911eca16c78::t_afc3c135a7f1ab 316-319
+packages/dialtone-cli/README.md
+  s_100911eca16c78::t_93a01e9b7d9d53 54-61
+packages/dialtone-cli/src/commands/docs.ts
+  s_100911eca16c78::t_2c6dcd66299ead 2-3,6-17,24-26,29-60,85,109
+packages/dialtone-docs/tests/source-links.test.js
+  s_100911eca16c78::t_6ec8522ca887c6 2,18,50-51,56,60
+packages/dialtone-mcp-server/RETRIEVAL.md
+  s_100911eca16c78::t_9869c5a2127cc0 15-18
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_100911eca16c78::t_08006582d94bb9 26,150-167,288,293-295,300,306,361-373,386-388
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d70ad8c006321c8c336fe6b46ee564f55f49356b",
+  "prompts": {},
+  "sessions": {
+    "s_100911eca16c78": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19cea-2746-77a1-bbff-fbfe3a3794d2",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
