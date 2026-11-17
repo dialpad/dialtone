@@ -1,0 +1,50 @@
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_a98638d5a5be6e::t_b0d7af9b8e3b95 259
+  s_a98638d5a5be6e::t_0a891e037b5e16 251
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_a98638d5a5be6e::t_b0d7af9b8e3b95 278
+  s_a98638d5a5be6e::t_0a891e037b5e16 272
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_a98638d5a5be6e::t_9346526d057f8d 343,395
+  s_a98638d5a5be6e::t_89a0dc944c2cfa 336-342,344-394,396-411
+  s_a98638d5a5be6e::t_c0ee1645f41560 433
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_a98638d5a5be6e::t_9346526d057f8d 468
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_a98638d5a5be6e::t_9346526d057f8d 184-192
+packages/dialtone-vue/components/Popover/PopoverHeaderFooter.vue
+  s_a98638d5a5be6e::t_a89ad7f1001ac8 33,83-90
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_a98638d5a5be6e::t_6b34f999fc6b37 222-227
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_a98638d5a5be6e::t_0a186213922090 61,84,127
+apps/dialtone-documentation/docs/components/popover.md
+  s_a98638d5a5be6e::t_2b4b50e13e5e84 313-316
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_a98638d5a5be6e::t_3c8e6265c19496 11-12,45,65,84,128
+  s_a98638d5a5be6e::t_b0d7af9b8e3b95 31-32,41
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_a98638d5a5be6e::t_766893a3e0108e 425-468
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_a98638d5a5be6e::t_0a891e037b5e16 108,110
+  s_a98638d5a5be6e::t_b0d7af9b8e3b95 106,109
+.agents/resources/documentation-examples.md
+  s_a98638d5a5be6e::t_0a891e037b5e16 15
+  s_a98638d5a5be6e::t_b0d7af9b8e3b95 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0743767ebf2476cf86711ac58ca6ba2475e1af6a",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
