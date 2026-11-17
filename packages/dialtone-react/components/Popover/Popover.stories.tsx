@@ -5,6 +5,7 @@ import { StandIn } from '../../.storybook/StandIn';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
 import { DtIconClose } from '../../icons';
 import { DtButton } from '../Button';
+import { DtDropdown } from '../Dropdown';
 import { DtIcon } from '../Icon';
 import { DtListItem } from '../ListItem';
 import { DtStack } from '../Stack';
@@ -281,38 +282,27 @@ const dropdownItems: [string, string][] = [
   ['pd-6', 'Item 6'],
 ];
 
-// Dropdown isn't ported: Vue's <dt-dropdown :open max-height="13rem">, which renders a DtPopover with its anchor and
-// a `.d-dropdown-list` of the list slot.
-function DropdownStandIn ({ open }: { open?: boolean | null }) {
+// Vue's <dt-dropdown :open max-height="13rem">.
+function DropdownExample ({ open }: { open?: boolean | null }) {
   return (
-    <StandIn for="dropdown">
-      <DtPopover
-        open={open ?? null}
-        placement="bottom"
-        initialFocusElement="dialog"
-        fallbackPlacements={['auto']}
-        padding="none"
-        role="menu"
-        modal
-        maxHeight="13rem"
-        openWithArrowKeys
-        transition="fade"
-        anchor={({ attrs }) => (
-          <DtButton {...attrs}>
-            Open dropdown
-          </DtButton>
-        )}
-        content={({ close }) => (
-          <ul className="d-dropdown-list d-py-0" data-qa="dt-dropdown-list-wrapper">
-            {dropdownItems.map(([key, label]) => (
-              <DtListItem key={key} navigationType="arrow-keys" role="menuitem" onClick={close}>
-                {label}
-              </DtListItem>
-            ))}
-          </ul>
-        )}
-      />
-    </StandIn>
+    <DtDropdown
+      open={open ?? null}
+      maxHeight="13rem"
+      anchor={attrs => (
+        <DtButton {...attrs}>
+          Open dropdown
+        </DtButton>
+      )}
+      list={({ close }) => (
+        <>
+          {dropdownItems.map(([key, label]) => (
+            <DtListItem key={key} navigationType="arrow-keys" role="menuitem" onClick={close}>
+              {label}
+            </DtListItem>
+          ))}
+        </>
+      )}
+    />
   );
 }
 
@@ -436,7 +426,7 @@ function PopoverVariants ({ open, modal, closeOnClick, transition }: PopoverStor
         content={(
           <DtStack gap="100">
             <p>{sampleText}</p>
-            <DropdownStandIn open={open} />
+            <DropdownExample open={open} />
           </DtStack>
         )}
       />
