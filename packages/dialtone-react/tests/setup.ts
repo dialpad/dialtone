@@ -44,6 +44,13 @@ beforeAll(() => {
   globalThis.ClipboardEvent = MockClipboardEvent as unknown as typeof ClipboardEvent;
   globalThis.DataTransfer = MockDataTransfer as unknown as typeof DataTransfer;
 
+  // jsdom's CSS has no registerProperty, which useScrollbar calls when it sets up. Vue's tests stub the
+  // v-dt-scrollbar directive instead, but a port's tests may not mock its own hook.
+  if (!globalThis.CSS) Object.defineProperty(globalThis, 'CSS', { value: {}, configurable: true, writable: true });
+  if (typeof globalThis.CSS.registerProperty !== 'function') {
+    Object.defineProperty(globalThis.CSS, 'registerProperty', { value: () => {}, configurable: true, writable: true });
+  }
+
   // :focus-visible isn't supported by jsdom (https://github.com/jsdom/jsdom/issues/3426).
   const matchesOriginal = HTMLElement.prototype.matches;
   HTMLElement.prototype.matches = function (query: string) {

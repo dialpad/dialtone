@@ -7,6 +7,7 @@ import path from 'node:path';
 import { getCurrentInstance, h, provide } from 'vue';
 import { mount, flushPromises } from '@vue/test-utils';
 import * as dialtone from '@/index.js';
+import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import * as icons from '@dialpad/dialtone-icons/vue';
 import { capture, capturedIdTokens, cleanHtml, idTokens, isGeneratedIn, maskedHtml, ROOT_ID, slotIdNamer } from '../normalize.mjs';
 import { canonicalScope, casesFrom, jsonSafe, keepIdsOf, pascal, scopeKey } from '../cases.mjs';
@@ -24,6 +25,9 @@ const components = Object.fromEntries([
   ...Object.entries(dialtone).filter(([name, value]) => /^Dt[A-Z]/.test(name) && isComponent(value)),
   ...Object.entries(icons).filter(([name, value]) => name.startsWith('DtIcon') && isComponent(value)),
 ]);
+// Directives a component's own template uses resolve only when the app installs them, as dialtone-vue's Storybook does.
+// DtBox's v-dt-scrollbar is the one so far; without it, Vue warns and renders the box with no scrollbar.
+const globalConfig = { components, plugins: [DtScrollbarDirective] };
 
 const variantFiles = import.meta.glob('../../../combinator/src/variants/variants_*.js', { import: 'default' });
 
@@ -92,7 +96,7 @@ async function renderCase (Component, c, calls, inspect, slotVNodes = new WeakSe
     root.id = ROOT_ID;
     document.body.appendChild(root);
     const wrapper = mount(recordingWrapper(Component, calls, slotVNodes), {
-      attrs: { ...c.attrs, ...c.props }, slots: c.slots, attachTo: root, global: { components },
+      attrs: { ...c.attrs, ...c.props }, slots: c.slots, attachTo: root, global: globalConfig,
     });
     await settle(ms => vi.advanceTimersByTimeAsync(ms));
     await flushPromises();
@@ -126,7 +130,7 @@ function mountSlot (template, scope, provides, inspect) {
     setup () { for (const [key, value] of provides) provide(key, value); },
     render () { return h('div', this.$slots.default?.(scope)); },
   };
-  const wrapper = mount(Host, { slots: { default: template }, global: { components } });
+  const wrapper = mount(Host, { slots: { default: template }, global: globalConfig });
   try {
     return inspect(wrapper.element);
   } finally {
