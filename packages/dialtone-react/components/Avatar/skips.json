@@ -1,0 +1,5 @@
+{
+  "DtAvatar Tests › Interactivity Tests › When deprecated clickable prop is true › When avatar is clicked › Should call listener": "Tests the deprecated `clickable` prop, which isn't ported: use `interactive`.",
+  "DtAvatar Tests › Interactivity Tests › When deprecated clickable prop is true › When avatar is clicked › Should emit click event": "Tests the deprecated `clickable` prop, which isn't ported: use `interactive`.",
+  "DtAvatar Tests › colorToFamilyVariant mapping › applies color prop correctly via the component": "Tests the deprecated `color` prop, which isn't ported: use `seed` or `family`/`variant`. colorToFamilyVariant itself is ported and tested."
+}

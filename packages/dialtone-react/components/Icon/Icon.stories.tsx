@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { categories } from '@dialpad/dialtone-icons/keywords-icons.json';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtButton } from '../Button';
 import { DtStack } from '../Stack';
 import { useTooltipDirective } from '../Tooltip/TooltipDirective';
 import { DtIcon, type DtIconProps } from './Icon';
@@ -54,25 +54,19 @@ function IconDefault ({ size, name, ariaLabel }: IconStoryArgs) {
   return <DtIcon size={size} name={name} ariaLabel={ariaLabel} />;
 }
 
-// Button isn't ported: Vue's <dt-button importance="clear" kind="muted" size="lg"> with only a startIcon, as it
-// renders, with v-dt-tooltip on its element. Its startIcon scope's iconSize for size lg is '400'.
+// Vue's <dt-button importance="clear" kind="muted" size="lg"> with only a startIcon, with v-dt-tooltip on it.
 function IconButton ({ icon, copiedIcon, onClick }: { icon: string; copiedIcon: string | null; onClick: () => void }) {
-  const [el, setEl] = useState<HTMLButtonElement | null>(null);
+  const [el, setEl] = useState<HTMLElement | null>(null);
   useTooltipDirective(el, { message: copiedIcon === icon ? '✅ Copied!' : icon, delay: false });
   return (
-    <StandIn for="button">
-      <button
-        ref={setEl}
-        className="base-button__button d-btn d-btn--muted d-btn--lg d-btn--icon-only"
-        data-qa="dt-button"
-        type="button"
-        onClick={onClick}
-      >
-        <span data-qa="dt-button-start-icon" className="base-button__icon d-btn__icon d-btn__icon--left">
-          <DtIcon name={icon as DtIconProps['name']} size="400" />
-        </span>
-      </button>
-    </StandIn>
+    <DtButton
+      ref={setEl}
+      importance="clear"
+      kind="muted"
+      size={400}
+      onClick={onClick}
+      startIcon={({ iconSize }) => <DtIcon name={icon as DtIconProps['name']} size={iconSize} />}
+    />
   );
 }
 
