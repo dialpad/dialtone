@@ -31,7 +31,9 @@ import {
 import { extractInitialsFromName } from './Utils';
 
 // Check if browser supports oklch() - only compute hex fallback if not
-const supportsOklch = typeof CSS !== 'undefined' && !!CSS.supports?.('background', 'oklch(0.5 0.1 0)');
+function supportsOklch (): boolean {
+  return typeof CSS !== 'undefined' && !!CSS.supports?.('background', 'oklch(0.5 0.1 0)');
+}
 
 interface DtAvatarOwnProps {
   /**
@@ -273,10 +275,15 @@ export function DtAvatar ({
   }
   const showImage = imageLoadedSuccessfully !== false && !!imageSrc;
 
-  // Only read anchor hue for fallback computation in browsers without oklch() support
+  // The hex fallback is for browsers without oklch() support. It's decided after mount, so the server render and the
+  // first client render agree: React doesn't patch a mismatched style attribute during hydration.
+  const [hexFallback, setHexFallback] = useState(false);
   const [anchorHue, setAnchorHue] = useState(0);
   useEffect(() => {
-    if (!supportsOklch) setAnchorHue(readAnchorHue());
+    if (!supportsOklch()) {
+      setHexFallback(true);
+      setAnchorHue(readAnchorHue());
+    }
   }, []);
 
   // Vue validates on mount and whenever imageSrc changes; the ref keeps StrictMode from repeating it.
@@ -323,7 +330,7 @@ export function DtAvatar ({
   );
 
   // Compute inline styles for fallback color in browsers that don't support oklch()
-  const avatarStyles = !supportsOklch && !isIconType && computedFamily && computedVariant !== undefined
+  const avatarStyles = hexFallback && !isIconType && computedFamily && computedVariant !== undefined
     ? { '--avatar-color-background': computeAvatarHex(computedFamily, computedVariant, anchorHue) } as CSSProperties
     : undefined;
   const rootStyle = avatarStyles || style ? { ...avatarStyles, ...style } : undefined;

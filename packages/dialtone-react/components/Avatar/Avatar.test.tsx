@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { renderToString } from 'react-dom/server';
 import { DtIconUser } from '../../icons';
 import type { DtPresenceProps } from '../Presence';
 import { DtAvatar, type DtAvatarProps } from './Avatar';
@@ -431,6 +432,13 @@ describe('DtAvatar Tests', () => {
       expect(style).toContain('color: red');
       expect(style).toContain('font-size: 14px');
       expect(root().style.getPropertyValue('--avatar-color-background')).toBe('#123456');
+    });
+
+    // The fallback color is decided after mount, so the server markup matches an oklch()-capable browser's first render.
+    it('should not render the fallback color in server markup', () => {
+      const html = renderToString(<DtAvatar seed="a" />);
+
+      expect(html).not.toContain('--avatar-color-background');
     });
   });
 
