@@ -1,0 +1,120 @@
+import {
+  Children,
+  Fragment,
+  cloneElement,
+  isValidElement,
+  type ComponentPropsWithRef,
+  type ElementType,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
+import { cx } from '../../common/cx';
+import { findEmojis, findShortCodes } from '../../common/emoji';
+import type { IconSize } from '../../icons';
+import { DtEmoji } from '../Emoji';
+
+interface DtEmojiTextWrapperOwnProps {
+  /**
+   * Element type (tag name) to use for the wrapper.
+   */
+  elementType?: string;
+
+  /**
+   * The icon size to render the emojis at.
+   * @values 100, 200, 300, 400, 500, 600, 700, 800
+   */
+  size?: IconSize;
+
+  /**
+   * Content to search for shortcodes like :smile: or unicode emojis such as 😄.
+   */
+  children?: ReactNode;
+}
+
+export type DtEmojiTextWrapperProps = DtEmojiTextWrapperOwnProps
+  & Omit<ComponentPropsWithRef<'div'>, keyof DtEmojiTextWrapperOwnProps>;
+
+/**
+ * Replaces the valid codes from the text content with a DtEmoji component.
+ */
+function replaceDtEmojis (replaceList: string[], textContent: string, size: IconSize, key: number): ReactNode {
+  // Escape the asterisk to avoid breaking the regex for the asterisk emoji
+  const escapedReplaceList = replaceList.map(item => item.replace(/\*/g, '\\*'));
+
+  const regexp = new RegExp(`(${escapedReplaceList.join('|')})`, 'g');
+  const items = textContent.split(regexp);
+
+  return (
+    <Fragment key={key}>
+      {items
+        .filter(item => item.trim() !== '')
+        .map((item, index) => {
+          if (replaceList.includes(item)) {
+            return <DtEmoji key={index} code={item} size={size} />;
+          }
+          return <span key={index} className="d-emoji-text-wrapper__text">{item}</span>;
+        })}
+    </Fragment>
+  );
+}
+
+/**
+ * Find codes in text.
+ */
+function searchCodes (textContent: string, size: IconSize, key: number): ReactNode {
+  const replaceList = [...findShortCodes(textContent), ...findEmojis(textContent)];
+  if (replaceList.length === 0) return textContent;
+  return replaceDtEmojis(replaceList, textContent, size, key);
+}
+
+/**
+ * Recursively search the React element tree to find text. Elements that are components (not DOM elements) are kept
+ * as they are, as Vue's TODO for crawling Vue components leaves them.
+ */
+function searchNodes (children: ReactNode, size: IconSize): ReactNode[] {
+  return Children.toArray(children).map((node, index) => searchNode(node, size, index));
+}
+
+function searchNode (node: ReactNode, size: IconSize, key: number): ReactNode {
+  if (typeof node === 'string') return searchCodes(node, size, key);
+  if (!isValidElement(node)) return node;
+
+  const element = node as ReactElement<{
+    children?: ReactNode;
+    dangerouslySetInnerHTML?: { __html: string };
+  }>;
+  if (element.type === Fragment) return <Fragment key={key}>{searchNodes(element.props.children, size)}</Fragment>;
+  if (typeof element.type !== 'string') return element;
+
+  // Vue replaces an element that has `innerHTML` (v-html) with the result of searching that string.
+  const innerHTML = element.props.dangerouslySetInnerHTML?.__html;
+  if (innerHTML) return searchCodes(innerHTML, size, key);
+
+  // Void elements (img, br) take no children.
+  if (element.props.children == null) return element;
+  return cloneElement(element, undefined, searchNodes(element.props.children, size));
+}
+
+/**
+ * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
+ * @see https://dialtone.dialpad.com/components/emoji_text_wrapper.html
+ */
+export function DtEmojiTextWrapper ({
+  elementType = 'div',
+  size = 500,
+  children,
+  className,
+  ...rest
+}: DtEmojiTextWrapperProps) {
+  const Tag = elementType as ElementType;
+
+  return (
+    <Tag
+      data-qa="emoji-text-wrapper"
+      className={cx('d-emoji-text-wrapper', className)}
+      {...rest}
+    >
+      {searchNodes(children, size)}
+    </Tag>
+  );
+}
