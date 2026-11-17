@@ -1277,6 +1277,16 @@ describe('uncertain overrides keep their utility class with review', () => {
   it('identical duplicates collapse to one prop', () => {
     assert.equal(run('<p class="d-body--md d-fw-bold d-fw-bold">x</p>'), '<dt-text as="p" variant="body-md" strength="bold">x</dt-text>');
   });
+  // Comments, quotes and escapes need a CSS tokenizer to read reliably, so any of them
+  // keeps every utility for review, whatever the style declares.
+  for (const style of ['margin: 0 /* note */', 'content: \'x\'', String.raw`--a: \31`]) {
+    it(`a style with a comment, quote or escape keeps every utility: ${style}`, () => {
+      assert.equal(
+        run(`<p class="d-body--md d-fw-bold" style="${style}">x</p>`),
+        `${CONFLICT}<dt-text as="p" variant="body-md" class="d-fw-bold" style="${style}">x</dt-text>`,
+      );
+    });
+  }
   it('inline style on another property does not block the lift', () => {
     assert.equal(
       run('<p class="d-body--md d-fw-bold" style="margin: 0">x</p>'),
