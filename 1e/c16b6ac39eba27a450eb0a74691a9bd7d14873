@@ -1,0 +1,41 @@
+packages/figma-styles-sync/src/tokens_env.ts
+  s_355402be618789::t_9ccde8aac601d3 1-23
+packages/figma-styles-sync/README.md
+  s_355402be618789::t_d6cfc85095e531 67-69
+  s_355402be618789::t_65a730e54deb8c 78-81,85-87
+  s_355402be618789::t_671c0ca4f223c1 95-104
+packages/figma-styles-sync/src/resolve_paint_styles.ts
+  s_355402be618789::t_f446bae7f4056e 27
+packages/figma-styles-sync/plugin/code.ts
+  s_355402be618789::t_896eda4921b73a 9-11
+  s_355402be618789::t_bc32ed81f5522c 443,446
+  s_355402be618789::t_93e2bc5f75ebcc 394-421
+  s_355402be618789::t_6c96bcbff36f0a 455
+  s_355402be618789::t_ef2e654db8728a 172-175
+  s_355402be618789::t_fba13d07c7cb65 481-484
+  s_355402be618789::t_3f1726bf96177c 319-322
+packages/figma-styles-sync/src/resolve_text_styles.ts
+  s_355402be618789::t_de0be8cc33a658 14
+packages/figma-styles-sync/src/resolve_effect_styles.ts
+  s_355402be618789::t_8b6e689d12767f 14
+packages/figma-styles-sync/package.json
+  s_355402be618789::t_a1479c6f460b51 6-7
+.github/workflows/unit_tests.yml
+  s_355402be618789::t_fe07bd0be2a182 99-101,104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1ec16b6ac39eba27a450eb0a74691a9bd7d14873",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

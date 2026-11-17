@@ -1,0 +1,19 @@
+packages/combinator/.github/documentation/internal/SETTINGS.md
+  s_cbd29f6a5140e8::t_9ba8580a72c0fb 66-67,84,88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "6faa2474328b2af59ac5f8976f4dbe21a365c08b",
+  "prompts": {},
+  "sessions": {
+    "s_cbd29f6a5140e8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
