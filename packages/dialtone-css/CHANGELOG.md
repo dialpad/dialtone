@@ -1,3 +1,10 @@
+## [9.6.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.6.0...dialtone-css/v9.6.1) (2026-11-17)
+
+
+### Bug Fixes
+
+* **Migration:** DLT-3838 emit DtText variant from the typography migration ([#1586](https://github.com/dialpad/dialtone/issues/1586)) ([9b2946b](https://github.com/dialpad/dialtone/commit/9b2946bd0af02dae0af84956951665da3d747f67))
+
 # [9.6.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.5.0...dialtone-css/v9.6.0) (2026-11-17)
 
 
