@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtButton } from '../Button/Button';
 import { DtLazyShow, type DtLazyShowProps } from './LazyShow';
 
 export const argTypesData = {
@@ -46,16 +46,7 @@ function LazyShowDefaultStory ({ show = false, appear, transition }: DtLazyShowP
 
   return (
     <div>
-      <StandIn for="button">
-        <button
-          type="button"
-          data-qa="dt-button"
-          className="base-button__button d-btn d-btn--primary"
-          onClick={() => setIsShown(!isShown)}
-        >
-          <span data-qa="dt-button-label" className="base-button__label d-btn__label">Toggle</span>
-        </button>
-      </StandIn>
+      <DtButton onClick={() => setIsShown(!isShown)}>Toggle</DtButton>
       <DtLazyShow show={isShown} appear={appear} transition={transition}>
         <iframe
           width="560"

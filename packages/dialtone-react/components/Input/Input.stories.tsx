@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtButton } from '../Button';
 import { DtIcon, ICON_NAMES, type IconName } from '../Icon';
 import { DtInput, type DtInputProps, type InputValidation } from './Input';
 import { INPUT_SIZES, INPUT_TYPES } from './InputConstants';
@@ -315,19 +315,15 @@ function InputSearchVariant (args: InputStoryArgs) {
       startIcon={({ iconSize }) => <DtIcon name="search" size={iconSize} />}
       endIcon={inputValue.length !== 0
         ? ({ clear }) => (
-          <StandIn for="button">
-            <button
-              type="button"
-              className="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-btn--icon-only"
-              data-qa="dt-button"
-              aria-label="Clear search"
-              onClick={clear}
-            >
-              <span data-qa="dt-button-start-icon" className="base-button__icon d-btn__icon d-btn__icon--left">
-                <DtIcon name="close" size="200" />
-              </span>
-            </button>
-          </StandIn>
+          <DtButton
+            importance="clear"
+            kind="muted"
+            size="xs"
+            circle
+            aria-label="Clear search"
+            onClick={clear}
+            startIcon={<DtIcon name="close" size="200" />}
+          />
         )
         : undefined}
     />
