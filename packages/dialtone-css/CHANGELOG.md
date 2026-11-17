@@ -1,3 +1,11 @@
+# [9.6.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.5.0...dialtone-css/v9.6.0) (2026-11-17)
+
+
+### Features
+
+* **Stack:** DLT-3826 add alignSelf prop ([#1581](https://github.com/dialpad/dialtone/issues/1581)) ([0fce80f](https://github.com/dialpad/dialtone/commit/0fce80f912d496f1f4ec5f81be81be6acef3acfa))
+* **Toggle:** NO-JIRA default gap ([#1583](https://github.com/dialpad/dialtone/issues/1583)) ([657a951](https://github.com/dialpad/dialtone/commit/657a951291a3b996072ad5083601b239097a8749))
+
 # [9.5.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.4.0...dialtone-css/v9.5.0) (2026-11-13)
 
 
