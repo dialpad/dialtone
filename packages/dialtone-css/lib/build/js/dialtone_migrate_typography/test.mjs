@@ -1277,6 +1277,8 @@ describe('raw font-size hints', () => {
       '<!-- dt-text-migrate: review d-fs-250 (raw font-size token; size="250" needs a variant, which font size alone does not determine) --><span class="d-fs-250">x</span>'],
     ['unknown token', '<span class="d-fs-900">x</span>',
       '<!-- dt-text-migrate: review d-fs-900 (no matching DtText size token; keep class) --><span class="d-fs-900">x</span>'],
+    ['token beside a helper marker', '<p class="d-helper--md d-fs-250">x</p>',
+      '<!-- dt-text-migrate: review helper --><!-- dt-text-migrate: review d-fs-250 (raw font-size token; size="250" can replace it alongside variant) --><dt-text as="p" variant="body-md" density="300" class="d-fs-250">x</dt-text>'],
   ];
   for (const [label, input, expected] of cases) {
     it(label, () => { assert.equal(run(input), expected); });
@@ -1295,7 +1297,9 @@ describe('reruns are byte-identical, including review markers', () => {
     ['protected composition', '<dt-text kind="body" size="100" class="d-headline--md">x</dt-text>'],
     ['multiple composed', '<p class="d-body--md d-label--sm">x</p>'],
     ['nested wrapper', '<p class="d-headline--md"><span class="d-body--sm"><dt-icon name="x" /></span></p>'],
-    ['own-line and inline markers', '<div>\n  <p :class="{ \'d-body--md\': c }" class="d-fs-250">x</p>\n</div>'],
+    ['helper with raw size', '<p class="d-helper--md d-fs-250">x</p>'],
+    ['flagged parent with a converted child', '<p class="d-headline--eyebrow">Step <span class="d-fw-bold">1</span></p>'],
+    ['own-line and inline markers', '<div>\n  <p :class="{ \'d-body--md\': c }">x</p><p class="d-code--sm">y</p>\n</div>'],
     ['unrelated comment', '<!-- keep -->\n<p class="d-code--sm">x</p>'],
   ];
   for (const [label, input] of inputs) {

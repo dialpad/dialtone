@@ -639,6 +639,13 @@ function rewriteComposedClasses (content) {
       continue;
     }
 
+    // Flagged classes are never rewritten. Check them before the wrapper test: a child this
+    // run converts to <dt-text> would make the element look like a wrapper on the next run.
+    if (entry.flag === 'eyebrow' || entry.flag === 'code-sm') {
+      mark(openStart, 'review');
+      continue;
+    }
+
     const isSelfClosing = selfClosing === '/';
     const closing = isSelfClosing ? null : findMatchingClosingTag(content, openEnd, tagName);
     const retainedClasses = classes.filter(cls => !COMPOSED_CLASS_MAP[cls]);
@@ -649,11 +656,6 @@ function rewriteComposedClasses (content) {
     const elementBody = closing ? content.slice(openEnd, closing.index) : '';
     if (!isDtText && (hasLayoutDisplaySignal(retainedClasses) || hasBlockOrComponentChild(elementBody))) {
       mark(openStart, 'review composed class on wrapper');
-      continue;
-    }
-
-    if (entry.flag === 'eyebrow' || entry.flag === 'code-sm') {
-      mark(openStart, 'review');
       continue;
     }
 
@@ -1052,10 +1054,11 @@ function flagFontSizeClasses (content) {
       attributeNames(`${attrsBefore} ${attrsAfter}`).some(name => boundProp(name) === 'variant');
     const hint = `<!-- dt-text-migrate: review d-fs-${fsN} (${fontSizeHint(fsN, hasVariant)}) -->`;
 
-    // Suppress when a dt-text-migrate comment ends immediately before this tag
-    // (legacy-heading hints share the same target position — don't double up).
+    // Suppress only when a legacy-heading hint ends immediately before this tag: it already
+    // describes the d-fs class. Other markers don't, and on a rerun they are masked, so
+    // suppressing on them would emit the hint only on the second run.
     const immediatelyBefore = content.slice(Math.max(0, tagStart - 500), tagStart);
-    const alreadyFlagged = /<!--\s*dt-text-migrate:[\s\S]*?-->\s*$/.test(immediatelyBefore);
+    const alreadyFlagged = /<!--\s*dt-text-migrate:\s*legacy heading[\s\S]*?-->\s*$/.test(immediatelyBefore);
     if (!alreadyFlagged) {
       replacements.push({ start: tagStart, end: tagStart, replacement: hint });
     }
