@@ -244,22 +244,39 @@ describe('--health-check', () => {
 
 
 describe('text-variant stage', () => {
-  it('detects real pairs, protects overrides, preserves dry-run and rescans after typography', () => {
+  it('typography emits variants alone, text-variant converts authored pairs, dry-run writes nothing', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-variant-'));
     const file = path.join(tmp, 'App.vue');
+    const page = path.join(tmp, 'page.html');
     const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8', env: gitEnv });
-    const source = '<template><p class="d-body--md">Copy</p><DtText :kind="\'label\'" :size="200">Label</DtText><dt-text kind="body" size="sm" variant="body-md" /></template>';
+    const read = () => [fs.readFileSync(file, 'utf8'), fs.readFileSync(page, 'utf8')];
+    // A composed class for typography (plus a marker and an import it would add), an
+    // authored legacy pair for text-variant, and an explicit variant beside a raw size.
+    const source = '<script setup>\n</script>\n<template><p class="d-body--md">Copy</p><p class="d-headline--eyebrow">Eyebrow</p><DtText :kind="\'label\'" :size="200">Label</DtText><dt-text kind="body" size="sm" variant="body-md" /></template>';
+    const html = '<p class="d-label--sm-plain">Label</p>\n';
     try {
       fs.writeFileSync(file, source);
+      fs.writeFileSync(page, html);
       assert.match(run('--health-check'), /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
-      assert.match(run('--only', 'text-variant', '--dry-run'), /1 eligible, 1 existing-variant elements unchanged, 0 manual review/);
-      assert.equal(fs.readFileSync(file, 'utf8'), source);
-      assert.deepEqual(fs.readdirSync(tmp), ['App.vue']);
+      assert.match(run('--only', 'typography,text-variant', '--dry-run'), /1 eligible, 1 existing-variant elements unchanged, 0 manual review/);
+      assert.deepEqual(read(), [source, html]);
+      assert.deepEqual(fs.readdirSync(tmp).sort(), ['App.vue', 'page.html']);
+
+      run('--only', 'typography', '--yes');
+      const [typography, typographyPage] = read();
+      assert.match(typography, /<dt-text as="p" variant="body-md">Copy<\/dt-text>/);
+      assert.match(typography, /<!-- dt-text-migrate: review --><p class="d-headline--eyebrow">/);
+      assert.match(typography, /import \{ DtText \} from/);
+      assert.match(typography, /<DtText :kind="'label'" :size="200">/, 'typography leaves authored pairs to text-variant');
+      assert.equal(typographyPage, '<dt-text as="p" variant="label-xs" strength="normal">Label</dt-text>\n');
+
+      // Fresh typography output and the explicit variant count as existing variants.
+      assert.match(run('--only', 'text-variant', '--yes'), /1 eligible, 3 existing-variant elements unchanged, 0 manual review/);
+      assert.deepEqual(read(), [typography.replace(`:kind="'label'" :size="200"`, 'variant="label-sm"'), typographyPage]);
+
+      const applied = read();
       run('--only', 'typography,text-variant', '--yes');
-      const output = fs.readFileSync(file, 'utf8');
-      assert.match(output, /as="p" variant="body-md"/);
-      assert.match(output, /variant="label-sm"/);
-      assert.match(output, /kind="body" size="sm" variant="body-md"/);
+      assert.deepEqual(read(), applied, 'reruns change nothing');
       assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });

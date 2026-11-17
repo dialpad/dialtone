@@ -1,6 +1,6 @@
 ---
 title: Typography Utilities to DtText
-description: Guide and migration tool for replacing legacy typography utility classes (d-headline--*, d-body--*, d-label--*, d-code--md, d-fw-*, d-fc-*, d-lh-*, d-truncate, d-ta-*) with the DtText component. Covers automatic migration, edge cases, and class-to-prop mapping.
+description: Guide and migration tool for replacing legacy typography utility classes (d-headline--*, d-body--*, d-label--*, d-code--md, d-fw-*, d-fc-*, d-lh-*, d-truncate, d-ta-*, d-ff-mono) with DtText variant and modifier props. Covers automatic migration, edge cases, and class-to-prop mapping.
 keywords: ["text utilities", "font", "type scale", "truncate", "d-headline", "d-body"]
 status: ready
 ---
@@ -11,16 +11,16 @@ status: ready
 > Legacy typography utility classes on text elements are deprecated in favor of the [`<dt-text>` component](/components/text.html). Use the migration tool to convert them automatically.
 
 - Replace `d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-helper--*` on `<p>`, `<span>`, `<div>`, `<h1>`–`<h6>`, and `<label>` with `<dt-text>`.
-- The migration tool currently emits legacy-compatible `kind="…" size="…"`. For new manual code, prefer `variant="…"` for complete text compositions.
-- Raw font-size utilities like `d-fs-200` can now be replaced with `variant="…" size="200"` when you need a composed style plus an exact font-size override.
-- Override utilities like `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, and `d-ta-*` map to `strength`, `tone`, `density`, `truncate`, and `align` props.
-- Run utility conversion with `npx dialtone-migrate --only typography`. The opt-in `text-variant` follow-up converts supported explicit `kind + size` pairs.
+- The migration tool emits `variant="…"` for composed classes, plus `strength` or `density` when the class carries them. It never emits `kind` or a composition `size`.
+- Raw font-size utilities like `d-fs-200` stay as classes with a review marker. Once the element has a variant, `size="200"` can replace the class.
+- Override utilities like `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`, and `d-ff-mono` map to `strength`, `tone`, `density`, `truncate`, `align`, and `family` props.
+- Run utility conversion with `npx dialtone-migrate --only typography`. The opt-in `text-variant` stage converts `kind + size` pairs already in your code.
 
 ## Overview
 
-[DtText](/components/text.html) is Dialtone's semantic text component. It exposes typography intent through props (`variant`, `size`, `density`, `strength`, `tone`, `truncate`, `align`) rather than utility classes, making typography decisions explicit and easier to validate at build time.
+[DtText](/components/text.html) is Dialtone's semantic text component. It exposes typography intent through props (`variant`, `size`, `family`, `density`, `strength`, `tone`, `truncate`, `align`) rather than utility classes, making typography decisions explicit and easier to validate at build time.
 
-For backward compatibility, `kind` remains supported and keeps the historical composed typography behavior when `variant` is not set. That means existing `<dt-text kind="body" size="300">` output from the migration tool is still valid. Prefer `variant` for new manual code and for cleanup you do after running the tool.
+For backward compatibility, `kind` remains supported and keeps the historical composed typography behavior when `variant` is not set. Earlier versions of the migration tool emitted `kind + size` pairs such as `<dt-text kind="body" size="300">`. That output is still valid, and the [`text-variant` stage](#convert-existing-kind-and-size-pairs) converts it to `variant`.
 
 A [migration tool](#migration-tool) is available to replace typography utility classes with `<dt-text>` automatically, or you may do so [manually](#manual-migration).
 
@@ -61,18 +61,6 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 **After:**
 
 ```html
-<!-- Current migration tool output -->
-<dt-text as="p" kind="headline" size="300">Welcome back</dt-text>
-
-<dt-text kind="body" size="100" tone="secondary" truncate>
-  you@example.com
-</dt-text>
-
-<dt-text as="label" kind="label" size="300" strength="bold">
-  Display name
-</dt-text>
-
-<!-- Preferred manual form for new code -->
 <dt-text as="p" variant="headline-md">Welcome back</dt-text>
 
 <dt-text variant="body-xs" tone="secondary" truncate>
@@ -111,21 +99,11 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 **After:**
 
 ```html
-<!-- Current migration tool output -->
-<dt-text as="h2" kind="headline" size="500" density="200">
-  Recent calls
-</dt-text>
-
-<dt-text as="div" kind="body" size="300" density="300" align="end" tone="muted">
-  Last updated just now
-</dt-text>
-
-<!-- Preferred manual form for new code -->
 <dt-text as="h2" variant="headline-xl" density="200">
   Recent calls
 </dt-text>
 
-<dt-text as="div" variant="body-md" density="300" align="end" tone="muted">
+<dt-text as="div" variant="body-md" density="300" tone="muted" align="end">
   Last updated just now
 </dt-text>
 ```
@@ -140,18 +118,20 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 
 `dialtone-migrate --only typography` scans `.vue` and `.html` files for legacy typography utility classes and converts them to `<dt-text>`. The runner is included with both `@dialpad/dialtone` and `@dialpad/dialtone-css`.
 
-> [!INFO] Tool output and the new DtText API
-> The current migration tool emits legacy-compatible `kind + size` props for composed typography classes. That output is intentionally still supported. If you are hand-authoring code or revisiting migrated output, prefer `variant` for composed text styles and use numeric `size` only with `variant` for raw font-size token overrides.
+> [!INFO] Why the tool never emits size
+> Beside `variant`, `size` is a raw font-size override, not a composition step. The tool emits only `variant` for a composed class so the rendered font size stays the one the class produced.
 
 ### What the Tool Migrates
 
-**Composed typography classes** on `<p>`, `<span>`, `<div>`, `<h1>`–`<h6>`, and `<label>` elements:
+**Composed typography classes** on `<p>`, `<span>`, `<div>`, `<h1>`–`<h6>`, and `<label>` elements, and on `<dt-text>` elements with no `kind`, `size`, `variant`, or `family` of their own:
 
-- `d-headline--*` (and legacy aliases like `d-headline-medium`) → `kind="headline"` + `size`
-- `d-body--*` / `d-body-*` → `kind="body"` + `size`
-- `d-label--*` / `d-label-*` → `kind="label"` + `size`
-- `d-code--md` / `d-code-base` → `kind="code" size="200"`
-- `d-helper--*` → approximated as `kind="body"` + `density` (flagged for review — see below)
+- `d-headline--*` (and legacy aliases like `d-headline-medium`) → `variant="headline-*"`, plus `strength` for soft and `density` for compact styles
+- `d-body--*` / `d-body-*` → `variant="body-md"` or `variant="body-xs"`, plus `density` for compact styles
+- `d-label--*` / `d-label-*` → `variant="label-md"` or `variant="label-xs"`, plus `strength` for plain and `density` for compact styles
+- `d-code--md` / `d-code-base` → `variant="code-sm"`
+- `d-helper--*` → approximated as `variant="body-md"` or `variant="body-xs"` plus `density` (flagged for review — see below)
+
+Each variant renders the same composition as the `kind + size` pair earlier versions emitted. See the [Class-to-Prop Reference](#class-to-prop-reference).
 
 **Override utility classes** on any element being migrated, or on existing `<dt-text>` elements carrying residual utilities:
 
@@ -160,7 +140,9 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 - `d-fc-*` (15 tone values) → `tone="…"`
 - `d-truncate` → `truncate` (boolean prop)
 - `d-ta-left/right/center/justify` → `align="start/end/center/justify"`
-- `d-ff-mono` → `kind="code"`
+- `d-ff-mono` → `family="mono"` (size, weight, and line height still come from the composition or the parent)
+
+Override utilities are `!important`, so they win over the defaults a composed class implies. The tool keeps that result: `d-headline--sm-soft d-fw-bold` becomes `variant="headline-xs" strength="bold"`, not `strength="medium"`.
 
 **Non-rewriteable tags** (`<a>`, `<button>`, `<li>`, `<td>`, custom Vue components, etc.) are never converted — they carry semantic behavior beyond text and have no clean DtText receiver. If such a tag carries **only override utilities** (`d-fw-*`, `d-fc-*`, etc.) it is left untouched silently. If it carries a **composed class**, the tool flags it with a `review composed class on wrapper tag` marker instead of rewriting it (see the markers table below).
 
@@ -173,42 +155,35 @@ Patterns the tool can't safely auto-migrate are surfaced with an inline `<!-- dt
 | Marker comment | What triggered it | What to do |
 | --- | --- | --- |
 | `<!-- dt-text-migrate: review -->` | `d-headline--eyebrow` / `d-headline-eyebrow` (uses `text-transform: uppercase` — no DtText prop); `d-code--sm` / `d-code-small` (below DtText minimum code size) | Check whether uppercase or small code is genuinely required; implement a custom solution or leave as-is |
-| `<!-- dt-text-migrate: review helper -->` | `d-helper--*` — approximated as `kind="body"` + appropriate `density`; element IS rewritten | Verify the approximation is visually correct; adjust `density` or `size` if needed |
-| `<!-- dt-text-migrate: review composed class on wrapper -->` | A rewriteable tag (`<div>`, `<p>`, etc.) carrying a composed class that is actually a **layout container** — it has a layout display class or block/component children, so it isn't a text leaf. Left unchanged. | Move the composed class onto the actual text element inside, or wrap the text in a `<dt-text>`; keep the container as plain layout |
-| `<!-- dt-text-migrate: review composed class on wrapper tag -->` | A composed class on a tag the tool never rewrites — `<a>`, `<button>`, `<dt-*>` components, custom Vue components, etc. Left unchanged. | Decide whether the text inside should become `<dt-text>`, or apply the equivalent `kind`/`size` to the component if it accepts them |
-| `<!-- dt-text-migrate: review nested span -->` | A child `<span>` with directives, events, or extra attributes that can't be safely collapsed into a nested `<dt-text>` | Migrate the child manually, or keep it as a plain `<span>` inside the parent `<dt-text>` |
+| `<!-- dt-text-migrate: review helper -->` | `d-helper--*` — approximated as `variant="body-md"` or `variant="body-xs"` plus `density`; element IS rewritten | Verify the approximation is visually correct; adjust `density` if needed |
+| `<!-- dt-text-migrate: review composed class on wrapper -->` | A rewriteable tag (`<div>`, `<p>`, `<span>`, etc.) carrying a composed class that is actually a **layout container** — it has a layout display class or block/component children, so it isn't a text leaf. Left unchanged, including when it's nested inside another `<dt-text>`. | Move the composed class onto the actual text element inside, or wrap the text in a `<dt-text>`; keep the container as plain layout |
+| `<!-- dt-text-migrate: review composed class on wrapper tag -->` | A composed class on a tag the tool never rewrites — `<a>`, `<button>`, `<dt-*>` components, custom Vue components, etc. Left unchanged. | Decide whether the text inside should become `<dt-text>`, or apply equivalent typography props to the component if it accepts them |
+| `<!-- dt-text-migrate: review composed class with authored composition -->` | A composed class on a `<dt-text>` that already has `kind`, `size`, `variant`, or `family` (static, bound, or shorthand), or a `v-bind` spread or dynamic prop name that could supply one. Left unchanged, utilities included. | Choose the composition you want, set `variant`, and remove the class. Run `text-variant` first if the element has a `kind + size` pair |
+| `<!-- dt-text-migrate: review multiple composed classes -->` | Two composed classes with different mappings on one element. Class order doesn't decide which renders, so there is no single safe variant. Left unchanged. Aliases with identical mappings (`d-body--md d-body-base`) collapse without a marker. | Remove the class you don't need and run the tool again |
+| `<!-- dt-text-migrate: review nested span -->` | A child `<span>` with directives, events, extra attributes, or block/component children that can't be safely collapsed into a nested `<dt-text>` | Migrate the child manually, or keep it as a plain `<span>` inside the parent `<dt-text>` |
 | `<!-- dt-text-migrate: review dynamic class -->` | `:class` / `v-bind:class` bindings containing typography utilities | Convert conditionally bound utilities to conditional props (e.g., `:strength="isBold ? 'bold' : 'normal'"`) |
-| `<!-- dt-text-migrate: review conflicting class -->` | A utility class clashes with an explicit prop already on the element (e.g., `<dt-text strength="bold" class="d-fw-normal">`) | Remove the redundant class; keep the explicit prop |
-| `<!-- dt-text-migrate: review d-fs-N (on-menu — maps to …) -->` | A raw `d-fs-N` font-size class whose size lines up with the tool's legacy `kind`/`size` mapping. The comment names the suggested legacy props. | Use the suggested legacy `kind + size` props, or combine `variant="…"` with `size="N"` when you need a composed style plus an exact font-size override |
-| `<!-- dt-text-migrate: review d-fs-N (off-menu — no clean DtText equivalent, keep class) -->` | A raw `d-fs-N` outside the tool's legacy composed-style mapping | If `N` is a Dialtone font-size token, choose a `variant` and pair it with `size="N"`. Keep the utility when there is no clear text composition, the value is unsupported, or the class must stay on a non-text wrapper |
-| `<!-- dt-text-migrate: legacy heading — as=… \| kind=… \| size: … \| strength=… \| tone=… -->` | The hand-rolled heading pattern: an element with both `d-fw-*` and `d-fs-N` (no composed class). The comment carries a full proposed migration; `kind` is `headline` for `<h1>`–`<h6>` and `kind=body\|label\|headline (VERIFY)` for ambiguous tags. | Apply the proposed props from the comment; for non-heading tags, confirm the right `kind` before applying |
+| `<!-- dt-text-migrate: review conflicting class -->` | A utility can't become a prop safely: the element already sets that prop (`<dt-text strength="bold" class="d-fw-normal">`), two utilities set it to different values, or an inline style, bound style, or `v-bind` spread may set the same CSS property. The tool keeps the prop **and** the class, because the `!important` utility may be what renders today. | Pick the value you want, then remove either the class or the prop |
+| `<!-- dt-text-migrate: review d-fs-N (raw font-size token; size="N" can replace it alongside variant) -->` | A `d-fs-N` class on an element that has a variant. | Replace the class with `size="N"`, or keep the class |
+| `<!-- dt-text-migrate: review d-fs-N (raw font-size token; size="N" needs a variant, which font size alone does not determine) -->` | A `d-fs-N` class on an element without a variant. Font size alone can't establish the text composition. | Choose a `variant` for the text, then use `size="N"`. Keep the utility on non-text wrappers |
+| `<!-- dt-text-migrate: review d-fs-N (no matching DtText size token; keep class) -->` | A `d-fs-N` class that isn't a Dialtone font-size token | Keep the utility |
+| `<!-- dt-text-migrate: legacy heading — as=… \| variant=… (VERIFY) \| d-fs-N … \| strength=… \| tone=… -->` | The hand-rolled heading pattern: an element with both `d-fw-*` and `d-fs-N` (no composed class). The comment suggests `variant=headline-?` for `<h1>`–`<h6>` and asks you to choose headline, body, or label for other tags. | Choose the variant, then apply `size`, `strength`, and `tone` from the comment |
 
 ### How the Tool Works
 
 #### Composed Class Rewriting
 
-The script matches the full composed class name (e.g., `d-headline--md`) to the mapping table and emits the correct `kind`, `size`, and optional `density`/`strength` props. Unrecognized classes are kept on the element's `class` attribute unchanged.
-
-The emitted `kind + size` form is legacy-compatible. You can leave it as-is, or convert it to the preferred `variant` form during manual cleanup:
-
-```html
-<!-- Tool output, still supported -->
-<dt-text as="p" kind="body" size="300">Body copy</dt-text>
-
-<!-- Preferred manual form -->
-<dt-text as="p" variant="body-md">Body copy</dt-text>
-```
+The script matches the full composed class name (e.g., `d-headline--md`) to the mapping table and emits its `variant` and optional `density`/`strength` props. Unrecognized classes are kept on the element's `class` attribute unchanged.
 
 **Non-span tags get an `as` prop:**
 
 ```html
 <!-- span: no as prop (DtText default) -->
 <span class="d-body--sm">Help text</span>
-→ <dt-text kind="body" size="100">Help text</dt-text>
+→ <dt-text variant="body-xs">Help text</dt-text>
 
 <!-- p: as="p" to preserve semantic element -->
 <p class="d-body--md">Body copy</p>
-→ <dt-text as="p" kind="body" size="300">Body copy</dt-text>
+→ <dt-text as="p" variant="body-md">Body copy</dt-text>
 ```
 
 #### Override Extraction
@@ -220,24 +195,26 @@ Override utilities are extracted from the class list and written as props on the
 <p class="d-body--md d-fc-tertiary d-truncate d-mb-300">...</p>
 
 <!-- After: typography→props, other class retained -->
-<dt-text as="p" kind="body" size="300" tone="tertiary" truncate class="d-mb-300">...</dt-text>
+<dt-text as="p" variant="body-md" tone="tertiary" truncate class="d-mb-300">...</dt-text>
 ```
 
 #### Nested Span Collapse
 
-When a direct child `<span>` of a migrated element carries only recognized typography classes (no extra attributes, directives, or events), the script collapses it into a nested `<dt-text>`:
+When a direct child `<span>` of a migrated element carries only recognized override classes (no extra attributes, directives, events, or block/component children), the script collapses it into a nested `<dt-text>` with only those props. It gets no variant, so it keeps inheriting the parent's typography:
 
 ```html
 <!-- Before -->
 <p class="d-headline--md">
-  <span class="d-fw-bold">Hello</span>
+  Run <span class="d-ff-mono">npm test</span> to <span class="d-fw-bold">check</span>
 </p>
 
-<!-- After: safe to collapse — span has only recognized classes -->
-<dt-text as="p" kind="headline" size="300">
-  <dt-text strength="bold">Hello</dt-text>
+<!-- After: safe to collapse — spans have only recognized classes -->
+<dt-text as="p" variant="headline-md">
+  Run <dt-text family="mono">npm test</dt-text> to <dt-text strength="bold">check</dt-text>
 </dt-text>
 ```
+
+A child span with its own composed class is converted like any other element. If the tool leaves one unchanged with a marker, it isn't retried as a nested span.
 
 #### Already-DtText Residual Lift
 
@@ -251,9 +228,11 @@ The script also scans `<dt-text>` elements that carry residual utility classes f
 <dt-text kind="body" strength="bold" tone="secondary">...</dt-text>
 ```
 
+A utility that conflicts with a prop the element already sets stays on the element next to that prop, with a `review conflicting class` marker.
+
 ### Convert Existing Kind and Size Pairs
 
-The opt-in `text-variant` stage converts supported explicit `kind + size` pairs to `variant`. Check `npx dialtone-migrate --help` in your installed version before using it; this source change does not establish npm release availability.
+The `typography` stage emits `variant` itself, so it creates no new `kind + size` pairs. The opt-in `text-variant` stage converts supported pairs already in your code, whether hand-written or emitted by earlier versions of the typography tool. Check `npx dialtone-migrate --help` in your installed version before using it; this source change does not establish npm release availability.
 
 ```sh
 npx dialtone-migrate --only text-variant --dry-run --cwd ./src
@@ -261,7 +240,7 @@ npx dialtone-migrate --only text-variant --dry-run --cwd ./src
 npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
 ```
 
-Remove `--dry-run` to apply changes; add `--yes` to skip confirmation. `--only` runs stages in the supplied order. During an applied combined run, each stage scans again, so `text-variant` sees elements created by `typography`. A combined dry-run previews each stage against the files currently on disk; it does not simulate earlier stages. After applying `typography`, preview `text-variant` separately to count its newly created eligible pairs. The `text-variant` preview reports aggregate eligible and existing-variant counts plus manual-review locations; it does not show individual eligible transformations. To inspect exact changes, create an isolated checkout with a clean Git working tree. Run `typography` there if needed and commit its changes locally; then apply `text-variant` and review the diff. Health-check reports pending pairs and manual-review cases; it does not gate stage execution.
+Remove `--dry-run` to apply changes; add `--yes` to skip confirmation. `--only` runs stages in the supplied order, and each stage scans again during an applied run. A combined dry-run previews each stage against the files currently on disk; it does not simulate earlier stages. The `text-variant` preview reports aggregate eligible and existing-variant counts plus manual-review locations; it does not show individual eligible transformations. To inspect exact changes, create an isolated checkout with a clean Git working tree. Run `typography` there if needed and commit its changes locally; then apply `text-variant` and review the diff. Health-check reports pending pairs and manual-review cases; it does not gate stage execution.
 
 Health-check and `text-variant` stop at nested Git repositories, including checked-out submodules. Target each repository explicitly with `--cwd` so its own ignore rules apply. Built-in exclusions still match the full path, including segments above `--cwd`; a repository under `dist` or `compiled` is not scanned.
 
@@ -276,9 +255,9 @@ The `typography` stage has a different scan scope: it does not consult Git ignor
 
 Numeric composition sizes `100`, `200`, `300`, `400`, `500`, `600`, `700` map to `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`. Headline supports all seven; body, label and code support `xs` through `lg`. Both tag casings, static attributes and statically bound string/numeric literals are supported in Vue HTML templates and HTML files. Other source regions are preserved.
 
-Within `text-variant`, any explicit `variant`, including a bound variant, protects the entire element. Other selected stages have their own behavior; this guarantee does not extend to them. An existing `variant + size` may be an intentional raw font-size override. Spreads, dynamic arguments, nonliteral expressions, conflicting props and unsupported mappings stay unchanged with file/line/column diagnostics and a manual-review action. Kind-only and size-only usages are outside this pair conversion. The reported existing-variant count includes every Text element with an explicit variant, including elements converted on an earlier run; it is not a count of size overrides. The stage inserts no review markers; a second run leaves converted output unchanged.
+Within `text-variant`, any explicit `variant`, including a bound variant, protects the entire element. Other selected stages have their own behavior; this guarantee does not extend to them. An existing `variant + size` may be an intentional raw font-size override. Spreads, dynamic arguments, nonliteral expressions, conflicting props and unsupported mappings stay unchanged with file/line/column diagnostics and a manual-review action. Kind-only and size-only usages are outside this pair conversion. The reported existing-variant count includes every Text element with an explicit variant, including elements converted on an earlier run and elements the `typography` stage created; it is not a count of size overrides. The stage inserts no review markers; a second run leaves converted output unchanged.
 
-The `typography` stage still produces the legacy-compatible output shown elsewhere in this guide. Its utility mappings are separate from composition sizes: `d-body--sm` produces `kind="body" size="100"`, then `text-variant` produces `variant="body-xs"`.
+The `typography` stage converts `d-body--sm` to `variant="body-xs"` in one step; `text-variant` then leaves it unchanged and counts it as an existing variant.
 
 ### Usage
 
@@ -347,7 +326,7 @@ When using `--file`, the `--cwd` option is ignored.
 node node_modules/@dialpad/dialtone/dist/js/dialtone_migrate_typography/index.mjs --validate --cwd ./src
 ```
 
-`--validate` runs read-only and scans existing `<dt-text>` elements for prop bugs: object syntax (`:kind="{ … }"`), invalid prop values, and mixed CSS classes. Useful as a post-migration audit.
+`--validate` runs read-only and scans existing `<dt-text>` elements for prop bugs: object syntax (`:variant="{ … }"`), invalid prop values (including `variant` and `family`), and mixed CSS classes. It checks `size` in context, as DtText does: beside a `variant` it must be a raw font-size token such as `250`; with `kind` alone it must be a composition size for that kind; with neither, it is reported because DtText ignores it. Bound values and `v-bind` spreads are not evaluated. Useful as a post-migration audit.
 
 #### Remove Review Markers
 
@@ -428,13 +407,13 @@ npx eslint --fix "./src/**/*.vue"
 1. Find elements with a `d-headline--*`, `d-body--*`, `d-label--*`, or `d-code--md` class
 2. Change the tag to `<dt-text>`
 3. Change the closing tag to `</dt-text>`
-4. Convert composed classes to `variant` when possible, or use the legacy-compatible `kind + size` mapping in the [Class-to-Prop Reference](#class-to-prop-reference) below
+4. Convert composed classes to `variant` (plus any `strength` or `density`) using the [Class-to-Prop Reference](#class-to-prop-reference) below
 5. Add `as="…"` if the original tag is not `<span>`
 6. Keep non-typography classes on the component's `class` attribute
 
 ### Raw Font-Size Utilities
 
-Use the `size` prop for raw font-size token replacement only when it is paired with `variant` for a complete text composition, or with legacy `kind` while migrating older code. Do not migrate a raw font-size utility to `<dt-text size="…">` by itself.
+Use the `size` prop for raw font-size token replacement only when it is paired with `variant` for a complete text composition. With legacy `kind` and no `variant`, `size` selects a composition step instead, so `kind="body" size="250"` is not valid. Do not migrate a raw font-size utility to `<dt-text size="…">` by itself; DtText ignores `size` without a `variant` or `kind`. Font size alone doesn't tell you which variant the text needs, so choose it from the design.
 
 ```html
 <!-- Before -->
@@ -461,14 +440,6 @@ Supported raw `size` values are `50`, `75`, `100`, `125`, `150`, `200`, `250`, `
 <my-component class="d-body--md d-fc-secondary" />
 
 <!-- After -->
-<dt-text kind="body" size="300" tone="secondary">
-  <my-component />
-</dt-text>
-```
-
-For new manual code, use `variant` instead:
-
-```html
 <dt-text variant="body-md" tone="secondary">
   <my-component />
 </dt-text>
@@ -499,41 +470,41 @@ If you own the component, apply the prop directly to the root text element.
 
 ### Composed Typography Classes
 
-The table below reflects the migration tool's current legacy-compatible output. For new manual code, prefer `variant` values such as `headline-md`, `body-md`, `label-md`, and `code-sm` when they match the intended composed style.
+The tool emits the `variant`, `density`, and `strength` values below. The last column shows the `kind + size` pair earlier versions emitted for the same class; each variant renders the same composition, and `text-variant` converts that pair to the same variant.
 
-| Old class | `kind` | `size` | `density` | `strength` | Notes |
+| Old class | `variant` | `density` | `strength` | Earlier `kind` `size` | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `d-headline--sm` / `d-headline-small` | `headline` | `100` | — | — | |
-| `d-headline--md` / `d-headline-medium` | `headline` | `300` | — | — | |
-| `d-headline--lg` / `d-headline-large` | `headline` | `500` | — | — | |
-| `d-headline--xl` / `d-headline-extra-large` | `headline` | `600` | — | — | |
-| `d-headline--xxl` / `d-headline-extra-extra-large` | `headline` | `700` | — | — | |
+| `d-headline--sm` / `d-headline-small` | `headline-xs` | — | — | `headline` `100` | |
+| `d-headline--md` / `d-headline-medium` | `headline-md` | — | — | `headline` `300` | |
+| `d-headline--lg` / `d-headline-large` | `headline-xl` | — | — | `headline` `500` | |
+| `d-headline--xl` / `d-headline-extra-large` | `headline-2xl` | — | — | `headline` `600` | |
+| `d-headline--xxl` / `d-headline-extra-extra-large` | `headline-3xl` | — | — | `headline` `700` | |
 | `d-headline--eyebrow` / `d-headline-eyebrow` | — | — | — | — | **Flagged** — no DtText prop for `text-transform: uppercase` |
-| `d-headline--sm-soft` / `d-headline-soft-small` | `headline` | `100` | — | `medium` | |
-| `d-headline--lg-soft` | `headline` | `500` | — | `medium` | |
-| `d-headline--sm-compact` / `d-headline-compact-small` | `headline` | `100` | `200` | — | |
-| `d-headline--md-compact` / `d-headline-compact-medium` | `headline` | `300` | `300` | — | |
-| `d-headline--lg-compact` / `d-headline-compact-large` | `headline` | `500` | `200` | — | |
-| `d-headline--xl-compact` | `headline` | `600` | `100` | — | |
-| `d-headline--xxl-compact` | `headline` | `700` | — | — | Same line-height as base |
-| `d-headline--sm-soft-compact` / `d-headline-compact-soft-small` | `headline` | `100` | `200` | `medium` | |
-| `d-headline--lg-soft-compact` | `headline` | `500` | `200` | `medium` | |
-| `d-body--md` / `d-body-base` | `body` | `300` | — | — | |
-| `d-body--sm` / `d-body-small` | `body` | `100` | — | — | |
-| `d-body--md-compact` / `d-body-compact` | `body` | `300` | `300` | — | |
-| `d-body--sm-compact` / `d-body-compact-small` | `body` | `100` | `200` | — | |
-| `d-label--md` / `d-label-base` | `label` | `300` | — | — | |
-| `d-label--sm` / `d-label-small` | `label` | `100` | — | — | |
-| `d-label--md-compact` / `d-label-compact` | `label` | `300` | `300` | — | |
-| `d-label--sm-compact` / `d-label-compact-small` | `label` | `100` | `200` | — | |
-| `d-label--md-plain` / `d-label-plain` | `label` | `300` | — | `normal` | |
-| `d-label--md-plain-compact` / `d-label-compact-plain` | `label` | `300` | `300` | `normal` | |
-| `d-label--sm-plain` / `d-label-plain-small` | `label` | `100` | — | `normal` | |
-| `d-label--sm-plain-compact` / `d-label-compact-plain-small` | `label` | `100` | `200` | `normal` | |
-| `d-code--md` / `d-code-base` | `code` | `200` | — | — | |
+| `d-headline--sm-soft` / `d-headline-soft-small` | `headline-xs` | — | `medium` | `headline` `100` | |
+| `d-headline--lg-soft` | `headline-xl` | — | `medium` | `headline` `500` | |
+| `d-headline--sm-compact` / `d-headline-compact-small` | `headline-xs` | `200` | — | `headline` `100` | |
+| `d-headline--md-compact` / `d-headline-compact-medium` | `headline-md` | `300` | — | `headline` `300` | |
+| `d-headline--lg-compact` / `d-headline-compact-large` | `headline-xl` | `200` | — | `headline` `500` | |
+| `d-headline--xl-compact` | `headline-2xl` | `100` | — | `headline` `600` | |
+| `d-headline--xxl-compact` | `headline-3xl` | — | — | `headline` `700` | Same line-height as base |
+| `d-headline--sm-soft-compact` / `d-headline-compact-soft-small` | `headline-xs` | `200` | `medium` | `headline` `100` | |
+| `d-headline--lg-soft-compact` | `headline-xl` | `200` | `medium` | `headline` `500` | |
+| `d-body--md` / `d-body-base` | `body-md` | — | — | `body` `300` | |
+| `d-body--sm` / `d-body-small` | `body-xs` | — | — | `body` `100` | |
+| `d-body--md-compact` / `d-body-compact` | `body-md` | `300` | — | `body` `300` | |
+| `d-body--sm-compact` / `d-body-compact-small` | `body-xs` | `200` | — | `body` `100` | |
+| `d-label--md` / `d-label-base` | `label-md` | — | — | `label` `300` | |
+| `d-label--sm` / `d-label-small` | `label-xs` | — | — | `label` `100` | |
+| `d-label--md-compact` / `d-label-compact` | `label-md` | `300` | — | `label` `300` | |
+| `d-label--sm-compact` / `d-label-compact-small` | `label-xs` | `200` | — | `label` `100` | |
+| `d-label--md-plain` / `d-label-plain` | `label-md` | — | `normal` | `label` `300` | |
+| `d-label--md-plain-compact` / `d-label-compact-plain` | `label-md` | `300` | `normal` | `label` `300` | |
+| `d-label--sm-plain` / `d-label-plain-small` | `label-xs` | — | `normal` | `label` `100` | |
+| `d-label--sm-plain-compact` / `d-label-compact-plain-small` | `label-xs` | `200` | `normal` | `label` `100` | |
+| `d-code--md` / `d-code-base` | `code-sm` | — | — | `code` `200` | |
 | `d-code--sm` / `d-code-small` | — | — | — | — | **Flagged** — below DtText minimum code size |
-| `d-helper--md` / `d-helper-base` | `body` | `300` | `300` | — | **Flagged for review** — approximated |
-| `d-helper--sm` / `d-helper-small` | `body` | `100` | `200` | — | **Flagged for review** — approximated |
+| `d-helper--md` / `d-helper-base` | `body-md` | `300` | — | `body` `300` | **Flagged for review** — approximated |
+| `d-helper--sm` / `d-helper-small` | `body-xs` | `200` | — | `body` `100` | **Flagged for review** — approximated |
 
 ### Override Utility Classes
 
@@ -569,4 +540,4 @@ The table below reflects the migration tool's current legacy-compatible output. 
 | `d-ta-right` | `align` | `"end"` |
 | `d-ta-center` | `align` | `"center"` |
 | `d-ta-justify` | `align` | `"justify"` |
-| `d-ff-mono` | `kind` | `"code"` |
+| `d-ff-mono` | `family` | `"mono"` |

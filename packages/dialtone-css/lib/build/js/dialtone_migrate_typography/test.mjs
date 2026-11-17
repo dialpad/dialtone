@@ -29,6 +29,17 @@ function warnings (input) {
   return transformContent(input, { filePath: 'test.vue' }).warnings;
 }
 
+// DtText's runtime constants are the authority for the mapping. Load them from source
+// as a data URL: the Vue package has no "type": "module", and the script itself must not
+// depend on Vue source at runtime.
+const TEXT_CONSTANTS_PATH = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../../../../../dialtone-vue/components/Text/TextConstants.js',
+);
+const TEXT = await import(
+  `data:text/javascript;base64,${fs.readFileSync(TEXT_CONSTANTS_PATH).toString('base64')}`
+);
+
 // ---------------------------------------------------------------------------
 // Task 1 — scaffold / no-op fast path
 // ---------------------------------------------------------------------------
@@ -53,83 +64,75 @@ describe('fast path — no typography classes', () => {
 // Task 2 — composed class transformation
 // ---------------------------------------------------------------------------
 
-describe('headline → dt-text', () => {
-  const cases = [
-    // basic sizes
-    ['d-headline--sm on p', '<p class="d-headline--sm">Hi</p>', '<dt-text as="p" kind="headline" size="100">Hi</dt-text>'],
-    ['d-headline-small alias', '<p class="d-headline-small">Hi</p>', '<dt-text as="p" kind="headline" size="100">Hi</dt-text>'],
-    ['d-headline--md on p', '<p class="d-headline--md">Hi</p>', '<dt-text as="p" kind="headline" size="300">Hi</dt-text>'],
-    ['d-headline-medium alias', '<p class="d-headline-medium">Hi</p>', '<dt-text as="p" kind="headline" size="300">Hi</dt-text>'],
-    ['d-headline--lg on p', '<p class="d-headline--lg">Hi</p>', '<dt-text as="p" kind="headline" size="500">Hi</dt-text>'],
-    ['d-headline-large alias', '<p class="d-headline-large">Hi</p>', '<dt-text as="p" kind="headline" size="500">Hi</dt-text>'],
-    ['d-headline--xl on p', '<p class="d-headline--xl">Hi</p>', '<dt-text as="p" kind="headline" size="600">Hi</dt-text>'],
-    ['d-headline-extra-large alias', '<p class="d-headline-extra-large">Hi</p>', '<dt-text as="p" kind="headline" size="600">Hi</dt-text>'],
-    ['d-headline--xxl on p', '<p class="d-headline--xxl">Hi</p>', '<dt-text as="p" kind="headline" size="700">Hi</dt-text>'],
-    ['d-headline-extra-extra-large alias', '<p class="d-headline-extra-extra-large">Hi</p>', '<dt-text as="p" kind="headline" size="700">Hi</dt-text>'],
-    // soft variants (strength=medium)
-    ['d-headline--sm-soft', '<p class="d-headline--sm-soft">Hi</p>', '<dt-text as="p" kind="headline" size="100" strength="medium">Hi</dt-text>'],
-    ['d-headline-soft-small alias', '<p class="d-headline-soft-small">Hi</p>', '<dt-text as="p" kind="headline" size="100" strength="medium">Hi</dt-text>'],
-    ['d-headline--lg-soft', '<p class="d-headline--lg-soft">Hi</p>', '<dt-text as="p" kind="headline" size="500" strength="medium">Hi</dt-text>'],
-    // compact variants
-    ['d-headline--sm-compact', '<p class="d-headline--sm-compact">Hi</p>', '<dt-text as="p" kind="headline" size="100" density="200">Hi</dt-text>'],
-    ['d-headline-compact-small alias', '<p class="d-headline-compact-small">Hi</p>', '<dt-text as="p" kind="headline" size="100" density="200">Hi</dt-text>'],
-    ['d-headline--md-compact', '<p class="d-headline--md-compact">Hi</p>', '<dt-text as="p" kind="headline" size="300" density="300">Hi</dt-text>'],
-    ['d-headline--lg-compact', '<p class="d-headline--lg-compact">Hi</p>', '<dt-text as="p" kind="headline" size="500" density="200">Hi</dt-text>'],
-    ['d-headline--xl-compact', '<p class="d-headline--xl-compact">Hi</p>', '<dt-text as="p" kind="headline" size="600" density="100">Hi</dt-text>'],
-    ['d-headline--xxl-compact (no density)', '<p class="d-headline--xxl-compact">Hi</p>', '<dt-text as="p" kind="headline" size="700">Hi</dt-text>'],
-    // soft-compact
-    ['d-headline--sm-soft-compact', '<p class="d-headline--sm-soft-compact">Hi</p>', '<dt-text as="p" kind="headline" size="100" strength="medium" density="200">Hi</dt-text>'],
-    ['d-headline--lg-soft-compact', '<p class="d-headline--lg-soft-compact">Hi</p>', '<dt-text as="p" kind="headline" size="500" strength="medium" density="200">Hi</dt-text>'],
+describe('composed class → DtText variant', () => {
+  // [class, legacy kind, legacy size, variant, extra props]. Legacy kind + size is what
+  // the previous output rendered; the variant must resolve to the same composition class.
+  const rows = [
+    ['d-headline--sm', 'headline', '100', 'headline-xs', ''],
+    ['d-headline-small', 'headline', '100', 'headline-xs', ''],
+    ['d-headline--md', 'headline', '300', 'headline-md', ''],
+    ['d-headline-medium', 'headline', '300', 'headline-md', ''],
+    ['d-headline--lg', 'headline', '500', 'headline-xl', ''],
+    ['d-headline-large', 'headline', '500', 'headline-xl', ''],
+    ['d-headline--xl', 'headline', '600', 'headline-2xl', ''],
+    ['d-headline-extra-large', 'headline', '600', 'headline-2xl', ''],
+    ['d-headline--xxl', 'headline', '700', 'headline-3xl', ''],
+    ['d-headline-extra-extra-large', 'headline', '700', 'headline-3xl', ''],
+    ['d-headline--sm-soft', 'headline', '100', 'headline-xs', ' strength="medium"'],
+    ['d-headline-soft-small', 'headline', '100', 'headline-xs', ' strength="medium"'],
+    ['d-headline--lg-soft', 'headline', '500', 'headline-xl', ' strength="medium"'],
+    ['d-headline--sm-compact', 'headline', '100', 'headline-xs', ' density="200"'],
+    ['d-headline-compact-small', 'headline', '100', 'headline-xs', ' density="200"'],
+    ['d-headline--md-compact', 'headline', '300', 'headline-md', ' density="300"'],
+    ['d-headline-compact-medium', 'headline', '300', 'headline-md', ' density="300"'],
+    ['d-headline--lg-compact', 'headline', '500', 'headline-xl', ' density="200"'],
+    ['d-headline-compact-large', 'headline', '500', 'headline-xl', ' density="200"'],
+    ['d-headline--xl-compact', 'headline', '600', 'headline-2xl', ' density="100"'],
+    ['d-headline--xxl-compact', 'headline', '700', 'headline-3xl', ''],
+    ['d-headline--sm-soft-compact', 'headline', '100', 'headline-xs', ' strength="medium" density="200"'],
+    ['d-headline-compact-soft-small', 'headline', '100', 'headline-xs', ' strength="medium" density="200"'],
+    ['d-headline--lg-soft-compact', 'headline', '500', 'headline-xl', ' strength="medium" density="200"'],
+    ['d-body--md', 'body', '300', 'body-md', ''],
+    ['d-body-base', 'body', '300', 'body-md', ''],
+    ['d-body--sm', 'body', '100', 'body-xs', ''],
+    ['d-body-small', 'body', '100', 'body-xs', ''],
+    ['d-body--md-compact', 'body', '300', 'body-md', ' density="300"'],
+    ['d-body-compact', 'body', '300', 'body-md', ' density="300"'],
+    ['d-body--sm-compact', 'body', '100', 'body-xs', ' density="200"'],
+    ['d-body-compact-small', 'body', '100', 'body-xs', ' density="200"'],
+    ['d-label--md', 'label', '300', 'label-md', ''],
+    ['d-label-base', 'label', '300', 'label-md', ''],
+    ['d-label--sm', 'label', '100', 'label-xs', ''],
+    ['d-label-small', 'label', '100', 'label-xs', ''],
+    ['d-label--md-compact', 'label', '300', 'label-md', ' density="300"'],
+    ['d-label-compact', 'label', '300', 'label-md', ' density="300"'],
+    ['d-label--sm-compact', 'label', '100', 'label-xs', ' density="200"'],
+    ['d-label-compact-small', 'label', '100', 'label-xs', ' density="200"'],
+    ['d-label--md-plain', 'label', '300', 'label-md', ' strength="normal"'],
+    ['d-label-plain', 'label', '300', 'label-md', ' strength="normal"'],
+    ['d-label--md-plain-compact', 'label', '300', 'label-md', ' strength="normal" density="300"'],
+    ['d-label-compact-plain', 'label', '300', 'label-md', ' strength="normal" density="300"'],
+    ['d-label--sm-plain', 'label', '100', 'label-xs', ' strength="normal"'],
+    ['d-label-plain-small', 'label', '100', 'label-xs', ' strength="normal"'],
+    ['d-label--sm-plain-compact', 'label', '100', 'label-xs', ' strength="normal" density="200"'],
+    ['d-label-compact-plain-small', 'label', '100', 'label-xs', ' strength="normal" density="200"'],
+    ['d-code--md', 'code', '200', 'code-sm', ''],
+    ['d-code-base', 'code', '200', 'code-sm', ''],
   ];
-  for (const [label, input, expected] of cases) {
-    it(label, () => { assert.equal(run(input), expected); });
-  }
-});
 
-describe('body → dt-text', () => {
-  const cases = [
-    ['d-body--md on p', '<p class="d-body--md">Hi</p>', '<dt-text as="p" kind="body" size="300">Hi</dt-text>'],
-    ['d-body-base alias', '<p class="d-body-base">Hi</p>', '<dt-text as="p" kind="body" size="300">Hi</dt-text>'],
-    ['d-body--sm on p', '<p class="d-body--sm">Hi</p>', '<dt-text as="p" kind="body" size="100">Hi</dt-text>'],
-    ['d-body-small alias', '<p class="d-body-small">Hi</p>', '<dt-text as="p" kind="body" size="100">Hi</dt-text>'],
-    ['d-body--md-compact', '<p class="d-body--md-compact">Hi</p>', '<dt-text as="p" kind="body" size="300" density="300">Hi</dt-text>'],
-    ['d-body-compact alias', '<p class="d-body-compact">Hi</p>', '<dt-text as="p" kind="body" size="300" density="300">Hi</dt-text>'],
-    ['d-body--sm-compact', '<p class="d-body--sm-compact">Hi</p>', '<dt-text as="p" kind="body" size="100" density="200">Hi</dt-text>'],
-    ['d-body-compact-small alias', '<p class="d-body-compact-small">Hi</p>', '<dt-text as="p" kind="body" size="100" density="200">Hi</dt-text>'],
-  ];
-  for (const [label, input, expected] of cases) {
-    it(label, () => { assert.equal(run(input), expected); });
+  for (const [cls, , , variant, extra] of rows) {
+    it(`${cls} emits variant="${variant}" with no kind or size`, () => {
+      assert.equal(run(`<p class="${cls}">Hi</p>`), `<dt-text as="p" variant="${variant}"${extra}>Hi</dt-text>`);
+    });
   }
-});
 
-describe('label → dt-text', () => {
-  const cases = [
-    ['d-label--md', '<p class="d-label--md">Hi</p>', '<dt-text as="p" kind="label" size="300">Hi</dt-text>'],
-    ['d-label-base alias', '<p class="d-label-base">Hi</p>', '<dt-text as="p" kind="label" size="300">Hi</dt-text>'],
-    ['d-label--sm', '<p class="d-label--sm">Hi</p>', '<dt-text as="p" kind="label" size="100">Hi</dt-text>'],
-    ['d-label-small alias', '<p class="d-label-small">Hi</p>', '<dt-text as="p" kind="label" size="100">Hi</dt-text>'],
-    ['d-label--md-compact', '<p class="d-label--md-compact">Hi</p>', '<dt-text as="p" kind="label" size="300" density="300">Hi</dt-text>'],
-    ['d-label--sm-compact', '<p class="d-label--sm-compact">Hi</p>', '<dt-text as="p" kind="label" size="100" density="200">Hi</dt-text>'],
-    ['d-label--md-plain', '<p class="d-label--md-plain">Hi</p>', '<dt-text as="p" kind="label" size="300" strength="normal">Hi</dt-text>'],
-    ['d-label-plain alias', '<p class="d-label-plain">Hi</p>', '<dt-text as="p" kind="label" size="300" strength="normal">Hi</dt-text>'],
-    ['d-label--md-plain-compact', '<p class="d-label--md-plain-compact">Hi</p>', '<dt-text as="p" kind="label" size="300" strength="normal" density="300">Hi</dt-text>'],
-    ['d-label--sm-plain', '<p class="d-label--sm-plain">Hi</p>', '<dt-text as="p" kind="label" size="100" strength="normal">Hi</dt-text>'],
-    ['d-label--sm-plain-compact', '<p class="d-label--sm-plain-compact">Hi</p>', '<dt-text as="p" kind="label" size="100" strength="normal" density="200">Hi</dt-text>'],
-  ];
-  for (const [label, input, expected] of cases) {
-    it(label, () => { assert.equal(run(input), expected); });
-  }
-});
-
-describe('code → dt-text', () => {
-  it('d-code--md maps to kind=code size=200', () => {
-    assert.equal(run('<p class="d-code--md">Hi</p>'), '<dt-text as="p" kind="code" size="200">Hi</dt-text>');
-  });
-  it('d-code-base alias maps to kind=code size=200', () => {
-    assert.equal(run('<p class="d-code-base">Hi</p>'), '<dt-text as="p" kind="code" size="200">Hi</dt-text>');
+  it('each variant renders the composition class of its legacy kind + size', () => {
+    for (const [cls, kind, size, variant] of rows) {
+      const legacy = `${TEXT.TEXT_KIND_MODIFIERS[kind]}--${TEXT.TEXT_SIZE_MAP[size]}`;
+      assert.equal(TEXT.TEXT_VARIANT_MODIFIERS[variant], legacy, cls);
+    }
   });
 });
-
 describe('flag rows — eyebrow and code-sm emit review comment, no rewrite', () => {
   it('d-headline--eyebrow emits review comment and leaves element unchanged', () => {
     const input = '<p class="d-headline--eyebrow">Hi</p>';
@@ -153,21 +156,21 @@ describe('flag rows — eyebrow and code-sm emit review comment, no rewrite', ()
   });
 });
 
-describe('helper rows — approximate as body+density with review marker', () => {
-  it('d-helper--md rewrites to body size=300 density=300 with helper comment', () => {
-    const input = '<p class="d-helper--md">Hi</p>';
-    const out = run(input);
-    assert.ok(out.includes('kind="body"'), 'should have kind=body');
-    assert.ok(out.includes('size="300"'), 'should have size=300');
-    assert.ok(out.includes('density="300"'), 'should have density=300');
-    assert.ok(out.includes('<!-- dt-text-migrate: review helper -->'), 'should have helper comment');
-  });
-  it('d-helper--sm rewrites to body size=100 density=200 with helper comment', () => {
-    const input = '<p class="d-helper--sm">Hi</p>';
-    const out = run(input);
-    assert.ok(out.includes('kind="body"') && out.includes('size="100"') && out.includes('density="200"'));
-    assert.ok(out.includes('<!-- dt-text-migrate: review helper -->'));
-  });
+describe('helper rows — approximate as body variant + density with review marker', () => {
+  const rows = [
+    ['d-helper--md', 'body-md', '300'],
+    ['d-helper-base', 'body-md', '300'],
+    ['d-helper--sm', 'body-xs', '200'],
+    ['d-helper-small', 'body-xs', '200'],
+  ];
+  for (const [cls, variant, density] of rows) {
+    it(`${cls} emits variant="${variant}" density="${density}" with helper marker`, () => {
+      assert.equal(
+        run(`<p class="${cls}">Hi</p>`),
+        `<!-- dt-text-migrate: review helper --><dt-text as="p" variant="${variant}" density="${density}">Hi</dt-text>`,
+      );
+    });
+  }
 });
 
 describe('element tags — only rewriteable tags are converted', () => {
@@ -181,7 +184,7 @@ describe('element tags — only rewriteable tags are converted', () => {
     });
   }
   it('<span> is rewritten without as prop (DtText default)', () => {
-    assert.equal(run('<span class="d-body--sm">x</span>'), '<dt-text kind="body" size="100">x</dt-text>');
+    assert.equal(run('<span class="d-body--sm">x</span>'), '<dt-text variant="body-xs">x</dt-text>');
   });
   // Non-rewriteable tags (a, button, li, dt-*) carrying composed typography
   // classes are NOT auto-converted, but they DO get a review marker so the
@@ -207,13 +210,13 @@ describe('mixed classes — composed class dropped, others retained', () => {
   it('retains non-typography class on output dt-text', () => {
     assert.equal(
       run('<p class="d-headline--md d-mb-200">Hi</p>'),
-      '<dt-text as="p" kind="headline" size="300" class="d-mb-200">Hi</dt-text>',
+      '<dt-text as="p" variant="headline-md" class="d-mb-200">Hi</dt-text>',
     );
   });
   it('retains multiple non-typography classes', () => {
     assert.equal(
       run('<p class="d-headline--md d-mb-200 d-p-100">Hi</p>'),
-      '<dt-text as="p" kind="headline" size="300" class="d-mb-200 d-p-100">Hi</dt-text>',
+      '<dt-text as="p" variant="headline-md" class="d-mb-200 d-p-100">Hi</dt-text>',
     );
   });
   it('drops only the composed class when mixed', () => {
@@ -230,8 +233,8 @@ describe('multi-element file — all matches rewritten', () => {
       '<p class="d-body--sm">Body</p>',
     ].join('\n');
     const expected = [
-      '<dt-text as="p" kind="headline" size="300">Title</dt-text>',
-      '<dt-text as="p" kind="body" size="100">Body</dt-text>',
+      '<dt-text as="p" variant="headline-md">Title</dt-text>',
+      '<dt-text as="p" variant="body-xs">Body</dt-text>',
     ].join('\n');
     assert.equal(run(input), expected);
   });
@@ -245,13 +248,13 @@ describe('override utilities on rewriteable elements', () => {
   it('d-fw-bold on p alongside composed class → strength prop', () => {
     assert.equal(
       run('<p class="d-headline--md d-fw-bold">x</p>'),
-      '<dt-text as="p" kind="headline" size="300" strength="bold">x</dt-text>',
+      '<dt-text as="p" variant="headline-md" strength="bold">x</dt-text>',
     );
   });
   it('d-fc-tertiary → tone prop', () => {
     assert.equal(
       run('<p class="d-headline--md d-fc-tertiary">x</p>'),
-      '<dt-text as="p" kind="headline" size="300" tone="tertiary">x</dt-text>',
+      '<dt-text as="p" variant="headline-md" tone="tertiary">x</dt-text>',
     );
   });
   it('d-fw-bold + d-fc-tertiary together on p', () => {
@@ -263,37 +266,37 @@ describe('override utilities on rewriteable elements', () => {
   it('d-lh-300 → density prop', () => {
     assert.equal(
       run('<p class="d-body--md d-lh-300">x</p>'),
-      '<dt-text as="p" kind="body" size="300" density="300">x</dt-text>',
+      '<dt-text as="p" variant="body-md" density="300">x</dt-text>',
     );
   });
   it('d-truncate → truncate boolean prop (no value)', () => {
     assert.equal(
       run('<p class="d-body--sm d-truncate">x</p>'),
-      '<dt-text as="p" kind="body" size="100" truncate>x</dt-text>',
+      '<dt-text as="p" variant="body-xs" truncate>x</dt-text>',
     );
   });
   it('d-ta-left → align="start" (logical naming)', () => {
     assert.equal(
       run('<p class="d-body--sm d-ta-left">x</p>'),
-      '<dt-text as="p" kind="body" size="100" align="start">x</dt-text>',
+      '<dt-text as="p" variant="body-xs" align="start">x</dt-text>',
     );
   });
   it('d-ta-right → align="end" (logical naming)', () => {
     assert.equal(
       run('<p class="d-body--sm d-ta-right">x</p>'),
-      '<dt-text as="p" kind="body" size="100" align="end">x</dt-text>',
+      '<dt-text as="p" variant="body-xs" align="end">x</dt-text>',
     );
   });
   it('d-ta-center → align="center"', () => {
     assert.equal(
       run('<p class="d-body--sm d-ta-center">x</p>'),
-      '<dt-text as="p" kind="body" size="100" align="center">x</dt-text>',
+      '<dt-text as="p" variant="body-xs" align="center">x</dt-text>',
     );
   });
   it('d-ta-justify → align="justify"', () => {
     assert.equal(
       run('<p class="d-body--sm d-ta-justify">x</p>'),
-      '<dt-text as="p" kind="body" size="100" align="justify">x</dt-text>',
+      '<dt-text as="p" variant="body-xs" align="justify">x</dt-text>',
     );
   });
   it('all 15 d-fc-* tones map correctly (spot-check)', () => {
@@ -354,15 +357,54 @@ describe('--validate — DtText prop bug detection', () => {
     const issues = validateDtTextProps('<dt-text kind="body" size="md" tone="primary">x</dt-text>');
     assert.equal(issues.length, 0);
   });
-  it('accepts both numeric and t-shirt size values', () => {
-    const a = validateDtTextProps('<dt-text size="300">x</dt-text>');
-    const b = validateDtTextProps('<dt-text size="md">x</dt-text>');
-    assert.equal(a.length, 0);
-    assert.equal(b.length, 0);
-  });
   it('non-typography classes on DtText do not flag', () => {
     const issues = validateDtTextProps('<dt-text class="my-custom d-mb-200">x</dt-text>');
     assert.equal(issues.length, 0);
+  });
+
+  // Variant makes size a raw font-size token; kind alone keeps composition sizes;
+  // neither means size has nothing to apply to. Bound values stay unknown.
+  const contexts = [
+    ['variant + raw token', '<dt-text variant="body-md" size="250">', []],
+    ['variant + t-shirt size', '<dt-text variant="body-md" size="md">', ['invalid-value']],
+    ['variant decides over kind', '<dt-text kind="label" variant="body-md" size="md">', ['invalid-value']],
+    ['kind + composition size', '<dt-text kind="headline" size="3xl">', []],
+    ['kind + headline-only size', '<dt-text kind="body" size="700">', ['invalid-value']],
+    ['kind + raw token', '<dt-text kind="body" size="250">', ['invalid-value']],
+    ['static size alone', '<dt-text size="300">', ['size-without-composition']],
+    ['bound size alone', '<dt-text :size="s">', ['size-without-composition']],
+    ['spread may supply composition', '<dt-text v-bind="attrs" size="300">', []],
+    ['bound variant', '<dt-text :variant="v" size="md">', []],
+    ['bound kind', '<dt-text :kind="k" size="250">', []],
+    ['bound size with variant', '<dt-text variant="body-md" :size="s">', []],
+    ['invalid variant', '<dt-text variant="title-md">', ['invalid-value']],
+    ['invalid family', '<dt-text family="serif">', ['invalid-value']],
+    ['invalid variant and family report separately', '<dt-text variant="title-md" family="serif">', ['invalid-value', 'invalid-value']],
+    ['family alone', '<dt-text family="mono">', []],
+    ['kind alone', '<dt-text kind="code">', []],
+    ['object syntax on variant', '<dt-text :variant="{ \'body-md\': c }">', ['object-syntax']],
+    ['object syntax on family', '<dt-text :family="{ mono: c }">', ['object-syntax']],
+  ];
+  for (const [label, tag, expected] of contexts) {
+    it(`size context: ${label}`, () => {
+      assert.deepEqual(validateDtTextProps(`${tag}x</dt-text>`).map(i => i.type), expected);
+    });
+  }
+
+  it('mirrors DtText variant, family, font-size and per-kind size values', () => {
+    const accepted = (tag) => validateDtTextProps(`${tag}x</dt-text>`).length === 0;
+    for (const variant of Object.keys(TEXT.TEXT_VARIANT_MODIFIERS)) {
+      assert.ok(accepted(`<dt-text variant="${variant}">`), variant);
+    }
+    for (const family of Object.keys(TEXT.TEXT_FAMILY_MODIFIERS)) {
+      assert.ok(accepted(`<dt-text family="${family}">`), family);
+    }
+    for (const size of Object.keys(TEXT.TEXT_FONT_SIZE_MODIFIERS)) {
+      assert.ok(accepted(`<dt-text variant="body-md" size="${size}">`), size);
+    }
+    for (const [kind, sizes] of Object.entries(TEXT.TEXT_SIZE_MODIFIERS)) {
+      for (const size of sizes) assert.ok(accepted(`<dt-text kind="${kind}" size="${size}">`), `${kind} ${size}`);
+    }
   });
 });
 
@@ -371,7 +413,9 @@ describe('P3 — legacy raw-utility heading hint comment', () => {
     const input = '<h2 class="d-ff-custom d-fw-bold d-fs-300 d-fc-primary">x</h2>';
     const out = run(input);
     assert.ok(out.includes('dt-text-migrate: legacy heading'), `should emit hint, got: ${out}`);
-    assert.ok(out.includes('kind=headline'), 'should propose kind=headline for h-tag');
+    assert.ok(out.includes('variant=headline-? (VERIFY)'), 'should leave the headline step to the reviewer');
+    assert.ok(out.includes('size="300"'), 'should describe d-fs-300 as a raw size token');
+    assert.ok(!/kind=|headline size/.test(out), 'should not infer a composition from font size');
     assert.ok(out.includes('strength=bold'), 'should propose strength=bold');
     assert.ok(out.includes('tone=primary'), 'should propose tone=primary');
     assert.ok(out.includes('<h2 class="d-ff-custom d-fw-bold d-fs-300 d-fc-primary">'), 'element unchanged');
@@ -399,19 +443,21 @@ describe('P3 — legacy raw-utility heading hint comment', () => {
   });
 });
 
-describe('d-ff-mono — establishes kind=code', () => {
-  it('<span class="d-ff-mono"> → kind="code"', () => {
-    assert.equal(
-      run('<span class="d-ff-mono">x</span>'),
-      '<dt-text kind="code">x</dt-text>',
-    );
-  });
-  it('combined with d-fw-bold', () => {
-    assert.equal(
-      run('<span class="d-ff-mono d-fw-bold">x</span>'),
-      '<dt-text kind="code" strength="bold">x</dt-text>',
-    );
-  });
+describe('d-ff-mono — family="mono" without inventing a composition', () => {
+  const cases = [
+    ['alone keeps inherited typography', '<span class="d-ff-mono">x</span>', '<dt-text family="mono">x</dt-text>'],
+    ['with d-fw-bold', '<span class="d-ff-mono d-fw-bold">x</span>', '<dt-text family="mono" strength="bold">x</dt-text>'],
+    ['with a composed class', '<p class="d-body--md d-ff-mono">x</p>', '<dt-text as="p" variant="body-md" family="mono">x</dt-text>'],
+    ['nested in a composed parent', '<p class="d-headline--md">Run <span class="d-ff-mono">cmd</span></p>',
+      '<dt-text as="p" variant="headline-md">Run <dt-text family="mono">cmd</dt-text></dt-text>'],
+    ['authored family keeps the utility', '<dt-text family="sans" class="d-ff-mono">x</dt-text>',
+      '<!-- dt-text-migrate: review conflicting class --><dt-text family="sans" class="d-ff-mono">x</dt-text>'],
+    ['inline font-family keeps the utility', '<p class="d-body--md d-ff-mono" style="font-family: serif">x</p>',
+      '<!-- dt-text-migrate: review conflicting class --><dt-text as="p" variant="body-md" class="d-ff-mono" style="font-family: serif">x</dt-text>'],
+  ];
+  for (const [label, input, expected] of cases) {
+    it(label, () => { assert.equal(run(input), expected); });
+  }
 });
 
 describe('P1 — override-only without composed class: only span/p/label converted', () => {
@@ -515,10 +561,10 @@ describe('C1 — nested span with flagged composed class stays unwrapped', () =>
 });
 
 describe('F4 — parseExistingProps does not false-match suffix attrs', () => {
-  it('font-kind= is not treated as kind=', () => {
+  it('font-family= is not treated as family=', () => {
     assert.equal(
-      run('<dt-text font-kind="foo" class="d-ff-mono">x</dt-text>'),
-      '<dt-text font-kind="foo" kind="code">x</dt-text>',
+      run('<dt-text font-family="foo" class="d-ff-mono">x</dt-text>'),
+      '<dt-text font-family="foo" family="mono">x</dt-text>',
     );
   });
   it('wrapper-truncate= is not treated as truncate', () => {
@@ -526,11 +572,6 @@ describe('F4 — parseExistingProps does not false-match suffix attrs', () => {
       run('<dt-text wrapper-truncate="yes" class="d-truncate">x</dt-text>'),
       '<dt-text wrapper-truncate="yes" truncate>x</dt-text>',
     );
-  });
-  it('legitimate conflict still flagged', () => {
-    const out = run('<dt-text strength="bold" class="d-fw-normal">x</dt-text>');
-    assert.ok(out.includes('<!-- dt-text-migrate: review conflicting class -->'));
-    assert.ok(out.includes('strength="bold"'));
   });
 });
 
@@ -556,13 +597,13 @@ describe('F1 — quote-aware opening-tag matching (> inside :prop binding)', () 
   it('<p class="d-headline--md" :title="a > b"> preserves the binding', () => {
     assert.equal(
       run('<p class="d-headline--md" :title="a > b">x</p>'),
-      '<dt-text as="p" kind="headline" size="300" :title="a > b">x</dt-text>',
+      '<dt-text as="p" variant="headline-md" :title="a > b">x</dt-text>',
     );
   });
   it('<p :disabled="i > total" class="d-body--sm"> preserves the binding', () => {
     assert.equal(
       run('<p :disabled="i > total" class="d-body--sm">x</p>'),
-      '<dt-text as="p" kind="body" size="100" :disabled="i > total">x</dt-text>',
+      '<dt-text as="p" variant="body-xs" :disabled="i > total">x</dt-text>',
     );
   });
 });
@@ -614,17 +655,20 @@ describe('already-dt-text residual lift', () => {
       '<dt-text kind="body" truncate>x</dt-text>',
     );
   });
-  it('preserves existing explicit prop when class would conflict', () => {
-    const input = '<dt-text strength="bold" class="d-fw-normal">x</dt-text>';
-    const out = run(input);
-    assert.ok(out.includes('strength="bold"'), 'should preserve strength=bold');
-    assert.ok(out.includes('<!-- dt-text-migrate: review conflicting class -->'), 'should emit conflict comment');
+  it('keeps the authored prop and the conflicting class, which may win in CSS today', () => {
+    assert.equal(
+      run('<dt-text strength="bold" class="d-fw-normal">x</dt-text>'),
+      '<!-- dt-text-migrate: review conflicting class --><dt-text strength="bold" class="d-fw-normal">x</dt-text>',
+    );
   });
   it('retains unrecognised classes after lifting', () => {
     const out = run('<dt-text kind="body" class="d-fw-bold d-mb-200">x</dt-text>');
     assert.ok(out.includes('strength="bold"'), 'should have strength');
     assert.ok(out.includes('d-mb-200'), 'should retain d-mb-200');
     assert.ok(!out.includes('d-fw-bold'), 'should drop d-fw-bold');
+  });
+  it('keeps a self-closing DtText self-closing', () => {
+    assert.equal(run('<dt-text class="d-fw-bold" />'), '<dt-text strength="bold" />');
   });
   it('PascalCase DtText is also lifted', () => {
     assert.equal(
@@ -642,13 +686,13 @@ describe('nested-span collapse — safe case', () => {
   it('collapses direct child span with only recognized classes', () => {
     assert.equal(
       run('<p class="d-headline--md"><span class="d-fw-bold">name</span></p>'),
-      '<dt-text as="p" kind="headline" size="300"><dt-text strength="bold">name</dt-text></dt-text>',
+      '<dt-text as="p" variant="headline-md"><dt-text strength="bold">name</dt-text></dt-text>',
     );
   });
   it('collapses span with composed class', () => {
     assert.equal(
       run('<p class="d-headline--md"><span class="d-body--sm">note</span></p>'),
-      '<dt-text as="p" kind="headline" size="300"><dt-text kind="body" size="100">note</dt-text></dt-text>',
+      '<dt-text as="p" variant="headline-md"><dt-text variant="body-xs">note</dt-text></dt-text>',
     );
   });
 });
@@ -695,7 +739,7 @@ describe('d-fs-* flagging', () => {
     const out = run('<p class="d-headline--md d-fs-150">x</p>');
     assert.ok(/dt-text-migrate: review d-fs-\d+/.test(out), 'should flag d-fs-N');
     assert.ok(out.includes('d-fs-150'), 'should retain d-fs-150 class');
-    assert.ok(out.includes('kind="headline"'), 'should still rewrite composed class');
+    assert.ok(out.includes('variant="headline-md"'), 'should still rewrite composed class');
   });
   it('d-fs-* emits one comment regardless of multiple fs classes', () => {
     const out = run('<p class="d-headline--md d-fs-100 d-fs-200">x</p>');
@@ -818,7 +862,7 @@ describe('--remove-markers', () => {
     const input = [
       '<!-- dt-text-migrate: review -->',
       '<p class="d-headline--eyebrow">Hi</p>',
-      '<!-- dt-text-migrate: review helper --><dt-text as="p" kind="body" size="300">note</dt-text>',
+      '<!-- dt-text-migrate: review helper --><dt-text as="p" variant="body-md">note</dt-text>',
       '<!-- dt-text-migrate: review nested span --><span class="d-fw-bold">x</span>',
     ].join('\n');
     const cleaned = removeMarkersForTest(input);
@@ -858,9 +902,9 @@ describe('end-to-end fixture', () => {
   it('transforms the fixture and produces expected shape', () => {
     const { transformed } = transformContent(input, { filePath: 'fixture.vue' });
     // (a) headline
-    assert.ok(transformed.includes('<dt-text as="p" kind="headline" size="300">Title</dt-text>'), '(a) headline');
+    assert.ok(transformed.includes('<dt-text as="p" variant="headline-md">Title</dt-text>'), '(a) headline');
     // (b) body with truncate+tone
-    assert.ok(transformed.includes('kind="body" size="100" tone="secondary" truncate'), '(b) body overrides');
+    assert.ok(transformed.includes('variant="body-xs" tone="secondary" truncate'), '(b) body overrides');
     // (c) residual lift
     assert.ok(transformed.includes('<dt-text kind="label" strength="bold">Label</dt-text>'), '(c) residual lift');
     // (d) nested-span collapse
@@ -1023,7 +1067,7 @@ describe('wrapper safety — positive cases still convert (no false positives)',
   it('<div class="d-body--md"> with text-only content still converts', () => {
     assert.equal(
       run('<div class="d-body--md">Hello</div>'),
-      '<dt-text as="div" kind="body" size="300">Hello</dt-text>',
+      '<dt-text as="div" variant="body-md">Hello</dt-text>',
     );
   });
   // Div with allowed inline children (span, em, strong) — should still convert
@@ -1036,14 +1080,14 @@ describe('wrapper safety — positive cases still convert (no false positives)',
   it('<p class="d-body--md">Hi</p> still converts', () => {
     assert.equal(
       run('<p class="d-body--md">Hi</p>'),
-      '<dt-text as="p" kind="body" size="300">Hi</dt-text>',
+      '<dt-text as="p" variant="body-md">Hi</dt-text>',
     );
   });
   // <span> with composed class still converts to plain dt-text
   it('<span class="d-body--sm">x</span> still converts', () => {
     assert.equal(
       run('<span class="d-body--sm">x</span>'),
-      '<dt-text kind="body" size="100">x</dt-text>',
+      '<dt-text variant="body-xs">x</dt-text>',
     );
   });
   // Empty body — no children at all
@@ -1119,6 +1163,150 @@ describe('wrapper safety — override path (d-fw-*, d-fc-*, etc.) with component
       run('<p class="d-fw-bold">Bold paragraph</p>'),
       '<dt-text as="p" strength="bold">Bold paragraph</dt-text>',
     );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Variant output contracts — authored props, precedence and uncertain inputs
+// ---------------------------------------------------------------------------
+
+describe('composed class on DtText with authored composition stays unchanged', () => {
+  const PROTECTED = '<!-- dt-text-migrate: review composed class with authored composition -->';
+  // A generated variant next to an authored size would turn that size into a raw
+  // font-size override; spreads and dynamic names may supply composition props.
+  const tags = [
+    '<dt-text kind="body" size="100" class="d-headline--md d-fw-bold">',
+    '<dt-text :size="s" class="d-body--md">',
+    '<dt-text :size class="d-body--md">',
+    '<dt-text v-bind:variant="v" class="d-body--md">',
+    '<dt-text variant="body-md" class="d-headline--md">',
+    '<dt-text family="sans" class="d-headline--md">',
+    '<dt-text v-bind="attrs" class="d-headline--md">',
+    '<dt-text :[prop]="v" class="d-headline--md">',
+  ];
+  for (const tag of tags) {
+    it(tag, () => {
+      const input = `${tag}x</dt-text>`;
+      assert.equal(run(input), PROTECTED + input);
+    });
+  }
+
+  it('converts a DtText without authored composition', () => {
+    assert.equal(run('<dt-text class="d-headline--md">x</dt-text>'), '<dt-text variant="headline-md">x</dt-text>');
+  });
+  it('authored strength replaces the generated default without review', () => {
+    assert.equal(
+      run('<dt-text strength="bold" class="d-headline--sm-soft">x</dt-text>'),
+      '<dt-text variant="headline-xs" strength="bold">x</dt-text>',
+    );
+  });
+});
+
+describe('override utilities beat generated composition defaults', () => {
+  const cases = [
+    ['soft + d-fw-bold', '<p class="d-headline--sm-soft d-fw-bold">x</p>', '<dt-text as="p" variant="headline-xs" strength="bold">x</dt-text>'],
+    ['plain + d-fw-semibold', '<p class="d-label--md-plain d-fw-semibold">x</p>', '<dt-text as="p" variant="label-md" strength="semibold">x</dt-text>'],
+    ['compact + d-lh-400', '<p class="d-body--md-compact d-lh-400">x</p>', '<dt-text as="p" variant="body-md" density="400">x</dt-text>'],
+  ];
+  for (const [label, input, expected] of cases) {
+    it(label, () => { assert.equal(run(input), expected); });
+  }
+});
+
+describe('uncertain overrides keep their utility class with review', () => {
+  const CONFLICT = '<!-- dt-text-migrate: review conflicting class -->';
+  const cases = [
+    ['different values for one prop', '<p class="d-body--md d-fw-bold d-fw-normal">x</p>',
+      `${CONFLICT}<dt-text as="p" variant="body-md" class="d-fw-bold d-fw-normal">x</dt-text>`],
+    ['authored tone on DtText', '<dt-text tone="primary" class="d-headline--md d-fc-secondary">x</dt-text>',
+      `${CONFLICT}<dt-text variant="headline-md" class="d-fc-secondary" tone="primary">x</dt-text>`],
+    ['inline style sets the same property', '<p class="d-body--md d-fw-bold" style="font-weight: 400">x</p>',
+      `${CONFLICT}<dt-text as="p" variant="body-md" class="d-fw-bold" style="font-weight: 400">x</dt-text>`],
+    ['bound style may set it', '<p class="d-body--md d-fw-bold" :style="s">x</p>',
+      `${CONFLICT}<dt-text as="p" variant="body-md" class="d-fw-bold" :style="s">x</dt-text>`],
+    ['spread may set style', '<dt-text v-bind="attrs" class="d-fw-bold">x</dt-text>',
+      `${CONFLICT}<dt-text v-bind="attrs" class="d-fw-bold">x</dt-text>`],
+  ];
+  for (const [label, input, expected] of cases) {
+    it(label, () => { assert.equal(run(input), expected); });
+  }
+
+  it('identical duplicates collapse to one prop', () => {
+    assert.equal(run('<p class="d-body--md d-fw-bold d-fw-bold">x</p>'), '<dt-text as="p" variant="body-md" strength="bold">x</dt-text>');
+  });
+  it('inline style on another property does not block the lift', () => {
+    assert.equal(
+      run('<p class="d-body--md d-fw-bold" style="margin: 0">x</p>'),
+      '<dt-text as="p" variant="body-md" strength="bold" style="margin: 0">x</dt-text>',
+    );
+  });
+});
+
+describe('multiple composed classes', () => {
+  const MULTIPLE = '<!-- dt-text-migrate: review multiple composed classes -->';
+  it('aliases with identical mappings collapse', () => {
+    assert.equal(run('<p class="d-body--md d-body-base">x</p>'), '<dt-text as="p" variant="body-md">x</dt-text>');
+  });
+  for (const classes of ['d-body--md d-label--sm', 'd-headline--sm d-headline--sm-soft']) {
+    it(`different mappings stay unchanged: ${classes}`, () => {
+      const input = `<p class="${classes}">x</p>`;
+      assert.equal(run(input), MULTIPLE + input);
+    });
+  }
+});
+
+describe('nested spans rejected by the composed pass are not retried', () => {
+  const cases = [
+    ['composed span wrapping a component', '<dt-text kind="body"><span class="d-body--sm"><dt-icon name="x" /></span></dt-text>',
+      '<dt-text kind="body"><!-- dt-text-migrate: review composed class on wrapper --><span class="d-body--sm"><dt-icon name="x" /></span></dt-text>'],
+    ['span with different compositions', '<dt-text kind="body"><span class="d-body--sm d-label--sm">x</span></dt-text>',
+      '<dt-text kind="body"><!-- dt-text-migrate: review multiple composed classes --><span class="d-body--sm d-label--sm">x</span></dt-text>'],
+    ['override span wrapping a component', '<dt-text kind="body"><span class="d-fw-bold"><dt-icon name="x" /></span></dt-text>',
+      '<dt-text kind="body"><!-- dt-text-migrate: review nested span --><span class="d-fw-bold"><dt-icon name="x" /></span></dt-text>'],
+  ];
+  for (const [label, input, expected] of cases) {
+    it(label, () => { assert.equal(run(input), expected); });
+  }
+});
+
+describe('raw font-size hints', () => {
+  const cases = [
+    ['token beside a generated variant', '<p class="d-headline--lg-compact d-fs-250">x</p>',
+      '<!-- dt-text-migrate: review d-fs-250 (raw font-size token; size="250" can replace it alongside variant) --><dt-text as="p" variant="headline-xl" density="200" class="d-fs-250">x</dt-text>'],
+    ['token without a composition', '<span class="d-fs-250">x</span>',
+      '<!-- dt-text-migrate: review d-fs-250 (raw font-size token; size="250" needs a variant, which font size alone does not determine) --><span class="d-fs-250">x</span>'],
+    ['unknown token', '<span class="d-fs-900">x</span>',
+      '<!-- dt-text-migrate: review d-fs-900 (no matching DtText size token; keep class) --><span class="d-fs-900">x</span>'],
+  ];
+  for (const [label, input, expected] of cases) {
+    it(label, () => { assert.equal(run(input), expected); });
+  }
+});
+
+describe('reruns are byte-identical, including review markers', () => {
+  const inputs = [
+    ['eyebrow', '<p class="d-headline--eyebrow">x</p>'],
+    ['code-small', '<p class="d-code--sm">x</p>'],
+    ['helper', '<p class="d-helper--md">x</p>'],
+    ['raw size', '<p class="d-headline--lg-compact d-fs-250">x</p>'],
+    ['legacy heading', '<h2 class="d-fw-bold d-fs-300">x</h2>'],
+    ['conflicting utilities', '<p class="d-body--md d-fw-bold d-fw-normal" id="a">x</p>'],
+    ['authored conflict', '<dt-text strength="bold" class="d-fw-normal" id="a">x</dt-text>'],
+    ['protected composition', '<dt-text kind="body" size="100" class="d-headline--md">x</dt-text>'],
+    ['multiple composed', '<p class="d-body--md d-label--sm">x</p>'],
+    ['nested wrapper', '<p class="d-headline--md"><span class="d-body--sm"><dt-icon name="x" /></span></p>'],
+    ['own-line and inline markers', '<div>\n  <p :class="{ \'d-body--md\': c }" class="d-fs-250">x</p>\n</div>'],
+    ['unrelated comment', '<!-- keep -->\n<p class="d-code--sm">x</p>'],
+  ];
+  for (const [label, input] of inputs) {
+    it(label, () => {
+      const once = run(input);
+      assert.equal(run(once), once);
+    });
+  }
+  it('keeps an unrelated comment once', () => {
+    const out = run(run('<!-- keep --><p class="d-code--sm">x</p>'));
+    assert.equal(out, '<!-- keep --><!-- dt-text-migrate: review --><p class="d-code--sm">x</p>');
   });
 });
 

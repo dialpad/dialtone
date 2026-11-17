@@ -4,9 +4,11 @@
 
 /**
  * @fileoverview Migration script to convert legacy typography utility classes to <dt-text> components.
+ * Composed classes become a DtText `variant`; override utilities become modifier props.
  *
- * Usage:
- *   npx dialtone-migrate-typography [options]
+ * Usage (no standalone bin; run the installed script or the dialtone-migrate runner):
+ *   node <dialtone>/lib/dist/js/dialtone_migrate_typography/index.mjs [options]
+ *   npx dialtone-migrate --only typography [options]
  *
  * Options:
  *   --cwd <path>        Working directory (default: current directory)
@@ -17,9 +19,9 @@
  *   --help              Show help
  *
  * Examples:
- *   npx dialtone-migrate-typography --dry-run --cwd ./src
- *   npx dialtone-migrate-typography --yes
- *   npx dialtone-migrate-typography --remove-markers --cwd ./src
+ *   node <script> --dry-run --cwd ./src
+ *   node <script> --yes
+ *   node <script> --remove-markers --cwd ./src
  */
 
 import fs from 'fs/promises';
@@ -31,11 +33,14 @@ import { fileURLToPath } from 'node:url';
 //------------------------------------------------------------------------------
 // Class-to-Prop Mapping Tables
 // Validated against packages/dialtone-tokens/tokens/theme/dp/default.json
-// and packages/dialtone-vue/components/Text/TextConstants.js (2026-05-19)
+// and packages/dialtone-vue/components/Text/TextConstants.js. Each variant renders
+// the composition class that the legacy kind + size pair rendered (tests assert this).
 //------------------------------------------------------------------------------
 
 /**
  * Composed typography class → DtText props.
+ * Never emit a composition `size` beside `variant`: with a variant, size is a raw
+ * font-size override.
  * `flag` marks classes that cannot be safely auto-migrated.
  *   - 'eyebrow' : uses text-transform:uppercase — no DtText prop
  *   - 'code-sm' : font-size below DtText minimum code size
@@ -43,80 +48,80 @@ import { fileURLToPath } from 'node:url';
  */
 const COMPOSED_CLASS_MAP = {
   // headline
-  'd-headline--sm':                   { kind: 'headline', size: '100' },
-  'd-headline-small':                 { kind: 'headline', size: '100' },
-  'd-headline--md':                   { kind: 'headline', size: '300' },
-  'd-headline-medium':                { kind: 'headline', size: '300' },
-  'd-headline--lg':                   { kind: 'headline', size: '500' },
-  'd-headline-large':                 { kind: 'headline', size: '500' },
-  'd-headline--xl':                   { kind: 'headline', size: '600' },
-  'd-headline-extra-large':           { kind: 'headline', size: '600' },
-  'd-headline--xxl':                  { kind: 'headline', size: '700' },
-  'd-headline-extra-extra-large':     { kind: 'headline', size: '700' },
+  'd-headline--sm':                   { variant: 'headline-xs' },
+  'd-headline-small':                 { variant: 'headline-xs' },
+  'd-headline--md':                   { variant: 'headline-md' },
+  'd-headline-medium':                { variant: 'headline-md' },
+  'd-headline--lg':                   { variant: 'headline-xl' },
+  'd-headline-large':                 { variant: 'headline-xl' },
+  'd-headline--xl':                   { variant: 'headline-2xl' },
+  'd-headline-extra-large':           { variant: 'headline-2xl' },
+  'd-headline--xxl':                  { variant: 'headline-3xl' },
+  'd-headline-extra-extra-large':     { variant: 'headline-3xl' },
 
   // headline — eyebrow (unmappable: text-transform:uppercase)
   'd-headline--eyebrow':              { flag: 'eyebrow' },
   'd-headline-eyebrow':               { flag: 'eyebrow' },
 
   // headline — soft variants (strength=medium per token)
-  'd-headline--sm-soft':              { kind: 'headline', size: '100', strength: 'medium' },
-  'd-headline-soft-small':            { kind: 'headline', size: '100', strength: 'medium' },
-  'd-headline--lg-soft':              { kind: 'headline', size: '500', strength: 'medium' },
+  'd-headline--sm-soft':              { variant: 'headline-xs', strength: 'medium' },
+  'd-headline-soft-small':            { variant: 'headline-xs', strength: 'medium' },
+  'd-headline--lg-soft':              { variant: 'headline-xl', strength: 'medium' },
 
   // headline — compact variants
-  'd-headline--sm-compact':           { kind: 'headline', size: '100', density: '200' },
-  'd-headline-compact-small':         { kind: 'headline', size: '100', density: '200' },
-  'd-headline--md-compact':           { kind: 'headline', size: '300', density: '300' },
-  'd-headline-compact-medium':        { kind: 'headline', size: '300', density: '300' },
-  'd-headline--lg-compact':           { kind: 'headline', size: '500', density: '200' },
-  'd-headline-compact-large':         { kind: 'headline', size: '500', density: '200' },
-  'd-headline--xl-compact':           { kind: 'headline', size: '600', density: '100' },
-  'd-headline--xxl-compact':          { kind: 'headline', size: '700' }, // same lh=200 as base, no density
+  'd-headline--sm-compact':           { variant: 'headline-xs', density: '200' },
+  'd-headline-compact-small':         { variant: 'headline-xs', density: '200' },
+  'd-headline--md-compact':           { variant: 'headline-md', density: '300' },
+  'd-headline-compact-medium':        { variant: 'headline-md', density: '300' },
+  'd-headline--lg-compact':           { variant: 'headline-xl', density: '200' },
+  'd-headline-compact-large':         { variant: 'headline-xl', density: '200' },
+  'd-headline--xl-compact':           { variant: 'headline-2xl', density: '100' },
+  'd-headline--xxl-compact':          { variant: 'headline-3xl' }, // same lh=200 as base, no density
 
   // headline — soft-compact
-  'd-headline--sm-soft-compact':      { kind: 'headline', size: '100', strength: 'medium', density: '200' },
-  'd-headline-compact-soft-small':    { kind: 'headline', size: '100', strength: 'medium', density: '200' },
-  'd-headline--lg-soft-compact':      { kind: 'headline', size: '500', strength: 'medium', density: '200' },
+  'd-headline--sm-soft-compact':      { variant: 'headline-xs', strength: 'medium', density: '200' },
+  'd-headline-compact-soft-small':    { variant: 'headline-xs', strength: 'medium', density: '200' },
+  'd-headline--lg-soft-compact':      { variant: 'headline-xl', strength: 'medium', density: '200' },
 
   // body
-  'd-body--md':                       { kind: 'body', size: '300' },
-  'd-body-base':                      { kind: 'body', size: '300' },
-  'd-body--sm':                       { kind: 'body', size: '100' },
-  'd-body-small':                     { kind: 'body', size: '100' },
-  'd-body--md-compact':               { kind: 'body', size: '300', density: '300' },
-  'd-body-compact':                   { kind: 'body', size: '300', density: '300' },
-  'd-body--sm-compact':               { kind: 'body', size: '100', density: '200' },
-  'd-body-compact-small':             { kind: 'body', size: '100', density: '200' },
+  'd-body--md':                       { variant: 'body-md' },
+  'd-body-base':                      { variant: 'body-md' },
+  'd-body--sm':                       { variant: 'body-xs' },
+  'd-body-small':                     { variant: 'body-xs' },
+  'd-body--md-compact':               { variant: 'body-md', density: '300' },
+  'd-body-compact':                   { variant: 'body-md', density: '300' },
+  'd-body--sm-compact':               { variant: 'body-xs', density: '200' },
+  'd-body-compact-small':             { variant: 'body-xs', density: '200' },
 
   // label
-  'd-label--md':                      { kind: 'label', size: '300' },
-  'd-label-base':                     { kind: 'label', size: '300' },
-  'd-label--sm':                      { kind: 'label', size: '100' },
-  'd-label-small':                    { kind: 'label', size: '100' },
-  'd-label--md-compact':              { kind: 'label', size: '300', density: '300' },
-  'd-label-compact':                  { kind: 'label', size: '300', density: '300' },
-  'd-label--sm-compact':              { kind: 'label', size: '100', density: '200' },
-  'd-label-compact-small':            { kind: 'label', size: '100', density: '200' },
-  'd-label--md-plain':                { kind: 'label', size: '300', strength: 'normal' },
-  'd-label-plain':                    { kind: 'label', size: '300', strength: 'normal' },
-  'd-label--md-plain-compact':        { kind: 'label', size: '300', strength: 'normal', density: '300' },
-  'd-label-compact-plain':            { kind: 'label', size: '300', strength: 'normal', density: '300' },
-  'd-label--sm-plain':                { kind: 'label', size: '100', strength: 'normal' },
-  'd-label-plain-small':              { kind: 'label', size: '100', strength: 'normal' },
-  'd-label--sm-plain-compact':        { kind: 'label', size: '100', strength: 'normal', density: '200' },
-  'd-label-compact-plain-small':      { kind: 'label', size: '100', strength: 'normal', density: '200' },
+  'd-label--md':                      { variant: 'label-md' },
+  'd-label-base':                     { variant: 'label-md' },
+  'd-label--sm':                      { variant: 'label-xs' },
+  'd-label-small':                    { variant: 'label-xs' },
+  'd-label--md-compact':              { variant: 'label-md', density: '300' },
+  'd-label-compact':                  { variant: 'label-md', density: '300' },
+  'd-label--sm-compact':              { variant: 'label-xs', density: '200' },
+  'd-label-compact-small':            { variant: 'label-xs', density: '200' },
+  'd-label--md-plain':                { variant: 'label-md', strength: 'normal' },
+  'd-label-plain':                    { variant: 'label-md', strength: 'normal' },
+  'd-label--md-plain-compact':        { variant: 'label-md', strength: 'normal', density: '300' },
+  'd-label-compact-plain':            { variant: 'label-md', strength: 'normal', density: '300' },
+  'd-label--sm-plain':                { variant: 'label-xs', strength: 'normal' },
+  'd-label-plain-small':              { variant: 'label-xs', strength: 'normal' },
+  'd-label--sm-plain-compact':        { variant: 'label-xs', strength: 'normal', density: '200' },
+  'd-label-compact-plain-small':      { variant: 'label-xs', strength: 'normal', density: '200' },
 
   // code
-  'd-code--md':                       { kind: 'code', size: '200' },
-  'd-code-base':                      { kind: 'code', size: '200' },
+  'd-code--md':                       { variant: 'code-sm' },
+  'd-code-base':                      { variant: 'code-sm' },
   'd-code--sm':                       { flag: 'code-sm' }, // font-size below DtText minimum
   'd-code-small':                     { flag: 'code-sm' },
 
   // helper — approximated as body+density, flagged for review
-  'd-helper--md':                     { kind: 'body', size: '300', density: '300', flag: 'helper' },
-  'd-helper-base':                    { kind: 'body', size: '300', density: '300', flag: 'helper' },
-  'd-helper--sm':                     { kind: 'body', size: '100', density: '200', flag: 'helper' },
-  'd-helper-small':                   { kind: 'body', size: '100', density: '200', flag: 'helper' },
+  'd-helper--md':                     { variant: 'body-md', density: '300', flag: 'helper' },
+  'd-helper-base':                    { variant: 'body-md', density: '300', flag: 'helper' },
+  'd-helper--sm':                     { variant: 'body-xs', density: '200', flag: 'helper' },
+  'd-helper-small':                   { variant: 'body-xs', density: '200', flag: 'helper' },
 };
 
 /**
@@ -164,8 +169,43 @@ const OVERRIDE_CLASS_MAP = {
   'd-ta-center':  { prop: 'align', value: 'center' },
   'd-ta-justify': { prop: 'align', value: 'justify' },
 
-  // font-family → kind (special: establishes monospace text kind)
-  'd-ff-mono':    { prop: 'kind', value: 'code' },
+  // font-family → family. Only the family changes; size, weight and line height still
+  // inherit, so it never implies a composition.
+  'd-ff-mono':    { prop: 'family', value: 'mono' },
+};
+
+// Lifting an override moves it from an !important utility to a normal DtText modifier.
+// Inline styles beat the modifier but not the utility, so a style that sets the same
+// CSS property makes the lift unsafe.
+const OVERRIDE_STYLE_PROPERTIES = {
+  strength: ['font-weight', 'font'],
+  density: ['line-height', 'font'],
+  family: ['font-family', 'font'],
+  tone: ['color'],
+  align: ['text-align'],
+  truncate: ['overflow', 'text-overflow', 'white-space'],
+};
+
+// DtText values mirrored from packages/dialtone-vue/components/Text/TextConstants.js for
+// --validate. The script must not import Vue source at runtime; tests assert parity.
+const TEXT_VARIANTS = new Set([
+  'headline-3xl', 'headline-2xl', 'headline-xl', 'headline-lg', 'headline-md', 'headline-sm', 'headline-xs',
+  'body-lg', 'body-md', 'body-sm', 'body-xs',
+  'label-lg', 'label-md', 'label-sm', 'label-xs',
+  'code-lg', 'code-md', 'code-sm', 'code-xs',
+]);
+const TEXT_FAMILIES = new Set(['inherit', 'custom', 'sans', 'mono', 'expressive']);
+// Raw font-size tokens: valid `size` values beside a variant, and the d-fs-* utility scale.
+const TEXT_FONT_SIZES = new Set([
+  '50', '75', '100', '125', '150', '200', '250', '300', '350',
+  '400', '450', '500', '550', '600', '650', '700', '750', '800',
+]);
+// Legacy composition sizes, valid only with kind and no variant.
+const TEXT_KIND_SIZES = {
+  headline: ['700', '600', '500', '400', '300', '200', '100', '3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'],
+  body: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
+  label: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
+  code: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
 };
 
 // Rewriteable element tags (only these get turned into <dt-text>)
@@ -303,26 +343,40 @@ export function transformContent (content, opts = {}) {
 
   const unmasked = unmaskInertContent(out, segments, token, endToken);
 
-  // Idempotency: collapse consecutive identical dt-text-migrate own-line markers.
-  // This handles the re-run case where a marker emitted by a prior run gets masked
-  // (since it's an HTML comment) and the same marker is re-emitted by flagDynamicClasses
-  // / flagLegacyHeadings on the same target line.
+  // Idempotency: a marker from a prior run is masked as a comment, so passes emit it
+  // again on rerun. Drop repeats within each run of adjacent markers, inline or own-line.
   const transformed = deduplicateAdjacentMarkers(unmasked);
 
   return { transformed, warnings, notes };
 }
 
+// Markers always precede the element they describe, so a marker repeated within one
+// whitespace-separated run of markers is a rerun duplicate: earlier markers are masked
+// as comments, so the passes cannot see them and emit them again. Drop the repeat, with
+// its line when it has a line to itself. Any other content, including an unrelated
+// comment, ends the run and is never touched.
 function deduplicateAdjacentMarkers (content) {
-  const lines = content.split('\n');
-  const out = [];
-  const markerRe = /^\s*<!--\s*dt-text-migrate:[\s\S]*?-->\s*$/;
-  for (const line of lines) {
-    const prev = out[out.length - 1];
-    // Drop this line if it's a dt-text-migrate marker identical (trimmed) to the previous emitted line
-    if (prev && markerRe.test(line) && markerRe.test(prev) && line.trim() === prev.trim()) continue;
-    out.push(line);
+  const removals = [];
+  let seen = new Set();
+  let previousEnd = -1;
+  for (const m of content.matchAll(/<!--\s*dt-text-migrate:[\s\S]*?-->/g)) {
+    const start = m.index;
+    const end = start + m[0].length;
+    if (previousEnd === -1 || /\S/.test(content.slice(previousEnd, start))) seen = new Set();
+    previousEnd = end;
+    if (!seen.has(m[0])) {
+      seen.add(m[0]);
+      continue;
+    }
+    const lineStart = content.lastIndexOf('\n', start - 1) + 1;
+    const lineEnd = content.indexOf('\n', end);
+    const ownLine = lineEnd !== -1 &&
+      !/\S/.test(content.slice(lineStart, start)) && !/\S/.test(content.slice(end, lineEnd));
+    removals.push(ownLine ? [lineStart, lineEnd + 1] : [start, end]);
   }
-  return out.join('\n');
+  let out = content;
+  for (const [start, end] of removals.reverse()) out = out.slice(0, start) + out.slice(end);
+  return out;
 }
 
 //------------------------------------------------------------------------------
@@ -392,65 +446,107 @@ function findMatchingClosingTag (content, startPos, tagName) {
   return null;
 }
 
-/**
- * Split a class list into override props + remaining classes.
- * Returns { overrideProps: [{prop, value}], remaining: string[], conflictClasses: string[] }
- * `conflictClasses` are override classes whose prop already exists in existingProps.
- */
-function extractOverrideProps (classes, existingProps = {}) {
-  const overrideProps = [];
-  const remaining = [];
-  const conflictClasses = [];
+const CONFLICT_MARKER = '<!-- dt-text-migrate: review conflicting class -->';
+const ALL_OVERRIDE_PROPS = new Set(Object.values(OVERRIDE_CLASS_MAP).map(override => override.prop));
 
-  for (const cls of classes) {
-    const override = OVERRIDE_CLASS_MAP[cls];
-    if (!override) {
-      remaining.push(cls);
-      continue;
-    }
-    const { prop, value } = override;
-    if (prop in existingProps) {
-      // Conflict — explicit prop takes precedence, flag the class
-      conflictClasses.push(cls);
-      continue;
-    }
-    // Avoid duplicates
-    if (!overrideProps.some(p => p.prop === prop)) {
-      overrideProps.push({ prop, value });
-    }
+// Attribute names in an opening tag's attribute text. Quoted values are blanked first so
+// text inside a value never reads as an attribute.
+function attributeNames (attrStr) {
+  const stripped = attrStr.replace(/"[^"]*"|'[^']*'/g, '""');
+  return [...stripped.matchAll(/(?:^|\s)([^\s=/>"']+)/g)].map(m => m[1]);
+}
+
+// The DtText prop an attribute binds: `size`, `:size`, `v-bind:size`, `.size`,
+// `:size.prop` and `v-model:size` all bind size.
+function boundProp (name) {
+  return name.replace(/^(?::|\.|v-bind:|v-model:)/, '').split('.')[0];
+}
+
+// Object spreads and dynamic argument names can supply any prop, or a style.
+function hasUncertainBinding (names) {
+  return names.some(name => name === 'v-bind' || name.startsWith('v-bind.') ||
+    /^(?::|\.|v-bind:|v-model:)\[/.test(name));
+}
+
+function hasAuthoredComposition (names) {
+  return names.some(name => ['kind', 'size', 'variant', 'family'].includes(boundProp(name)));
+}
+
+// Props the element already authors, in any binding form: { [prop]: true }.
+function parseExistingProps (names) {
+  const props = {};
+  for (const name of names) props[boundProp(name)] = true;
+  return props;
+}
+
+// Override props that cannot be lifted safely because an inline style may set the same
+// CSS property: all of them for a bound style or spread, otherwise the ones the static
+// style declares.
+function blockedOverrideProps (attrStr, names) {
+  if (hasUncertainBinding(names) || names.some(name => /^(?::|v-bind:)style$/.test(name))) {
+    return ALL_OVERRIDE_PROPS;
   }
-
-  return { overrideProps, remaining, conflictClasses };
+  const style = /(?:^|\s)style\s*=\s*(?:"([^"]*)"|'([^']*)')/.exec(attrStr);
+  if (!style) return new Set();
+  const declared = new Set(
+    [...(style[1] ?? style[2]).matchAll(/(?:^|;)\s*([\w-]+)\s*:/g)].map(m => m[1].toLowerCase()),
+  );
+  return new Set(Object.keys(OVERRIDE_STYLE_PROPERTIES)
+    .filter(prop => OVERRIDE_STYLE_PROPERTIES[prop].some(property => declared.has(property))));
 }
 
 /**
- * Build a <dt-text> opening tag from the resolved props + retained classes + other attrs.
- * Also extracts any override utility classes from retainedClasses and lifts them to props.
+ * Split a class list into liftable override props and the classes to keep.
+ * A prop stays as its utility class (and sets `conflict`) when the element already
+ * authors it, when `blocked` marks it unsafe, or when utilities disagree on its value.
+ * The class is kept because it may be what wins in CSS today.
+ * Returns { overrideProps: [{prop, value}], remaining: string[], conflict: boolean }.
+ */
+function extractOverrideProps (classes, authored = {}, blocked = new Set()) {
+  const byProp = new Map();
+  for (const cls of classes) {
+    const override = OVERRIDE_CLASS_MAP[cls];
+    if (!override) continue;
+    if (!byProp.has(override.prop)) byProp.set(override.prop, []);
+    byProp.get(override.prop).push(cls);
+  }
+
+  const overrideProps = [];
+  const kept = new Set();
+  for (const [prop, list] of byProp) {
+    const values = new Set(list.map(cls => OVERRIDE_CLASS_MAP[cls].value));
+    if (prop in authored || blocked.has(prop) || values.size > 1) {
+      list.forEach(cls => kept.add(cls));
+      continue;
+    }
+    overrideProps.push({ prop, value: OVERRIDE_CLASS_MAP[list[0]].value });
+  }
+
+  const remaining = classes.filter(cls => !OVERRIDE_CLASS_MAP[cls] || kept.has(cls));
+  return { overrideProps, remaining, conflict: kept.size > 0 };
+}
+
+// Canonical prop order: as → variant → family → strength → density → tone → align →
+// truncate → class. Directives, data attributes and events follow from the original tag.
+const PROP_ORDER = ['variant', 'family', 'strength', 'density', 'tone', 'align', 'truncate'];
+
+/**
+ * Build a <dt-text> opening tag from a composed-class mapping entry, the classes left
+ * after removing composed classes, and the element's other attributes.
  */
 function buildDtTextTag (opts) {
-  const { originalTag, kind, size, density, strength, retainedClasses, attrsBefore, attrsAfter, selfClosing } = opts;
+  const { originalTag, entry, retainedClasses, attrsBefore, attrsAfter, selfClosing, authored, blocked } = opts;
+  const { overrideProps, remaining, conflict } = extractOverrideProps(retainedClasses, authored, blocked);
 
-  // Extract the existing props so we can detect conflicts
-  const existingProps = {};
-  if (kind) existingProps.kind = kind;
-  if (size) existingProps.size = size;
-  if (strength) existingProps.strength = strength;
-  if (density) existingProps.density = density;
-
-  const { overrideProps, remaining, conflictClasses } = extractOverrideProps(retainedClasses, existingProps);
-
-  // Consolidate props into canonical order matching beacon's convention:
-  // as → kind → size → strength → density → tone → align → boolean (truncate, numeric) → class
-  // (directives/data-attrs/events flow through attrsBefore/attrsAfter from the original tag)
-  const finalProps = {};
-  if (kind) finalProps.kind = kind;
-  if (size) finalProps.size = size;
-  if (strength) finalProps.strength = strength;
-  if (density) finalProps.density = density;
-  for (const { prop, value } of overrideProps) {
-    // Override classes win over composed defaults if conflicting (e.g. d-fw-bold overrides headline-soft's medium)
-    finalProps[prop] = value;
+  const finalProps = { variant: entry.variant };
+  for (const prop of ['strength', 'density']) {
+    // Authored DtText props already beat the composed class in CSS (components layer
+    // over base), so the generated default yields to them.
+    if (entry[prop] && !(prop in authored)) finalProps[prop] = entry[prop];
   }
+  // Override utilities are !important, so they also beat the composition's defaults:
+  // d-fw-bold on a soft headline renders bold today.
+  for (const { prop, value } of overrideProps) finalProps[prop] = value;
 
   let tag = '<dt-text';
 
@@ -459,16 +555,10 @@ function buildDtTextTag (opts) {
     tag += ` as="${originalTag}"`;
   }
 
-  // Canonical order
-  const PROP_ORDER = ['kind', 'size', 'strength', 'density', 'tone', 'align', 'truncate', 'numeric'];
   for (const prop of PROP_ORDER) {
     if (!(prop in finalProps)) continue;
     const value = finalProps[prop];
-    if (value === null) {
-      tag += ` ${prop}`; // boolean prop (e.g. truncate)
-    } else {
-      tag += ` ${prop}="${value}"`;
-    }
+    tag += value === null ? ` ${prop}` : ` ${prop}="${value}"`; // null → boolean prop (truncate)
   }
 
   if (remaining.length > 0) {
@@ -478,12 +568,7 @@ function buildDtTextTag (opts) {
   if (attrsBefore) tag += ` ${attrsBefore}`;
   if (attrsAfter) tag += ` ${attrsAfter}`;
 
-  const openTag = tag + (selfClosing ? ' />' : '>');
-  const conflictComment = conflictClasses.length > 0
-    ? '<!-- dt-text-migrate: review conflicting class -->'
-    : '';
-
-  return conflictComment + openTag;
+  return (conflict ? CONFLICT_MARKER : '') + tag + (selfClosing ? ' />' : '>');
 }
 
 // True if any class signals layout intent (display utility).
@@ -508,9 +593,19 @@ function hasBlockOrComponentChild (body) {
   return false;
 }
 
+// Composed classes collapse only when every mapping field matches.
+function sameMapping (a, b) {
+  return ['variant', 'strength', 'density', 'flag'].every(key => a[key] === b[key]);
+}
+
 function rewriteComposedClasses (content) {
   const elementRe = new RegExp(ELEMENT_RE.source, 'g');
-  const matches = [];
+  const replacements = [];
+  const mark = (start, review) => replacements.push({
+    start,
+    end: start,
+    replacement: `<!-- dt-text-migrate: ${review} -->`,
+  });
 
   let m;
   while ((m = elementRe.exec(content)) !== null) {
@@ -520,158 +615,66 @@ function rewriteComposedClasses (content) {
     if (/(?:^|\s):class\b|(?:^|\s)v-bind:class\b/.test(attrsBefore + attrsAfter)) continue;
 
     const classes = classValue.split(/\s+/).filter(Boolean);
+    const composed = classes.filter(cls => COMPOSED_CLASS_MAP[cls]);
+    if (composed.length === 0) continue;
 
-    // Find the first composed class in the class list
-    const composedEntry = classes.reduce((found, cls) => {
-      return found || (COMPOSED_CLASS_MAP[cls] ? { cls, entry: COMPOSED_CLASS_MAP[cls] } : null);
-    }, null);
-
-    if (!composedEntry) continue;
-
-    const { cls: composedCls, entry } = composedEntry;
-
-    // Only rewrite native rewriteable tags; skip if already dt-text (handled in Task 3)
-    const isNativeRewriteable = REWRITEABLE_TAGS.has(tagName.toLowerCase());
     const isDtText = tagName === 'dt-text' || tagName === 'DtText';
-    if (!isNativeRewriteable && !isDtText) continue;
-
-    const retainedClasses = classes.filter(c => c !== composedCls);
-    const isSelfClosing = selfClosing === '/';
     const openStart = m.index;
     const openEnd = m.index + fullMatch.length;
+    const entry = COMPOSED_CLASS_MAP[composed[0]];
+    const attrs = `${attrsBefore} ${attrsAfter}`;
+    const names = attributeNames(attrs);
 
-    let closeStart = null;
-    let closeEnd = null;
-    let closeReplacement = null;
-
-    if (!isSelfClosing) {
-      const closing = findMatchingClosingTag(content, openEnd, tagName);
-      if (closing) {
-        closeStart = closing.index;
-        closeEnd = closing.index + closing.length;
-        closeReplacement = '</dt-text>';
-      }
-    }
-
-    // Wrapper safety: skip auto-convert when the element looks like a layout container
-    // or contains non-text children. Emit a review marker so the legacy class still
-    // surfaces in the migration diff. Only applies to native HTML rewriteable tags
-    // — dt-text residual lifts go through their own path in liftResidualOverrides.
-    const elementBody = (!isSelfClosing && closeStart !== null)
-      ? content.slice(openEnd, closeStart)
-      : '';
-    const isWrapper = isNativeRewriteable
-      && (hasLayoutDisplaySignal(retainedClasses) || hasBlockOrComponentChild(elementBody));
-
-    if (isWrapper) {
-      matches.push({
-        entry: { flag: 'wrapper' },
-        composedCls,
-        tagName,
-        attrsBefore: attrsBefore.trim(),
-        attrsAfter: attrsAfter.trim(),
-        retainedClasses,
-        isSelfClosing,
-        openStart,
-        openEnd,
-        closeStart: null,
-        closeEnd: null,
-        closeReplacement: null,
-      });
+    // Different compositions on one element: class order does not decide CSS precedence,
+    // so there is no safe single variant.
+    if (!composed.every(cls => sameMapping(COMPOSED_CLASS_MAP[cls], entry))) {
+      mark(openStart, 'review multiple composed classes');
       continue;
     }
 
-    matches.push({
-      entry,
-      composedCls,
-      tagName,
-      attrsBefore: attrsBefore.trim(),
-      attrsAfter: attrsAfter.trim(),
-      retainedClasses,
-      isSelfClosing,
-      openStart,
-      openEnd,
-      closeStart,
-      closeEnd,
-      closeReplacement,
-    });
-  }
+    // An authored composition, or a spread or dynamic name that may supply one, would sit
+    // beside the generated variant and turn its size into a raw font-size override.
+    if (isDtText && (hasAuthoredComposition(names) || hasUncertainBinding(names))) {
+      mark(openStart, 'review composed class with authored composition');
+      continue;
+    }
 
-  if (matches.length === 0) return content;
+    const isSelfClosing = selfClosing === '/';
+    const closing = isSelfClosing ? null : findMatchingClosingTag(content, openEnd, tagName);
+    const retainedClasses = classes.filter(cls => !COMPOSED_CLASS_MAP[cls]);
 
-  // Apply in reverse order to preserve positions
-  const replacements = [];
-
-  for (const match of matches) {
-    const {
-      entry, tagName, attrsBefore, attrsAfter, retainedClasses,
-      isSelfClosing, openStart, openEnd, closeStart, closeEnd,
-    } = match;
+    // Wrapper safety: skip auto-convert when a native element looks like a layout
+    // container or contains non-text children. The marker keeps the legacy class visible
+    // in the migration diff; the consumer migrates it manually.
+    const elementBody = closing ? content.slice(openEnd, closing.index) : '';
+    if (!isDtText && (hasLayoutDisplaySignal(retainedClasses) || hasBlockOrComponentChild(elementBody))) {
+      mark(openStart, 'review composed class on wrapper');
+      continue;
+    }
 
     if (entry.flag === 'eyebrow' || entry.flag === 'code-sm') {
-      // Prepend a review comment before the element — no rewrite
-      replacements.push({
-        start: openStart,
-        end: openStart,
-        replacement: '<!-- dt-text-migrate: review -->',
-      });
+      mark(openStart, 'review');
       continue;
     }
 
-    if (entry.flag === 'wrapper') {
-      // Layout container or wrapper with non-text children — emit a review
-      // marker so the legacy composed class surfaces in the diff. Tag and
-      // classes are left intact for the consumer to migrate manually.
-      replacements.push({
-        start: openStart,
-        end: openStart,
-        replacement: '<!-- dt-text-migrate: review composed class on wrapper -->',
-      });
-      continue;
-    }
-
-    if (entry.flag === 'helper') {
-      // Rewrite to body+density approximation AND prepend helper review comment (single replacement)
-      const newTag = buildDtTextTag({
-        originalTag: tagName,
-        kind: entry.kind,
-        size: entry.size,
-        density: entry.density,
-        strength: entry.strength,
-        retainedClasses,
-        attrsBefore,
-        attrsAfter,
-        selfClosing: isSelfClosing,
-      });
-      replacements.push({
-        start: openStart,
-        end: openEnd,
-        replacement: '<!-- dt-text-migrate: review helper -->' + newTag,
-      });
-      if (!isSelfClosing && closeStart !== null) {
-        replacements.push({ start: closeStart, end: closeEnd, replacement: '</dt-text>' });
-      }
-      continue;
-    }
-
-    // Normal rewrite
     const newTag = buildDtTextTag({
       originalTag: tagName,
-      kind: entry.kind,
-      size: entry.size,
-      density: entry.density,
-      strength: entry.strength,
+      entry,
       retainedClasses,
-      attrsBefore,
-      attrsAfter,
+      attrsBefore: attrsBefore.trim(),
+      attrsAfter: attrsAfter.trim(),
       selfClosing: isSelfClosing,
+      authored: parseExistingProps(names),
+      blocked: blockedOverrideProps(attrs, names),
     });
-
-    replacements.push({ start: openStart, end: openEnd, replacement: newTag });
-    if (!isSelfClosing && closeStart !== null) {
-      replacements.push({ start: closeStart, end: closeEnd, replacement: '</dt-text>' });
+    const helperMarker = entry.flag === 'helper' ? '<!-- dt-text-migrate: review helper -->' : '';
+    replacements.push({ start: openStart, end: openEnd, replacement: helperMarker + newTag });
+    if (closing) {
+      replacements.push({ start: closing.index, end: closing.index + closing.length, replacement: '</dt-text>' });
     }
   }
+
+  if (replacements.length === 0) return content;
 
   // Sort descending by start position, apply
   replacements.sort((a, b) => b.start - a.start);
@@ -689,53 +692,22 @@ function rewriteComposedClasses (content) {
 //------------------------------------------------------------------------------
 
 /**
- * Parse the known prop key-value pairs already present in an element's attribute string.
- * Returns { [propName]: value } for string props and { [propName]: true } for boolean props.
+ * Build the opening tag for a residual lift on an existing <dt-text>: lifted props are
+ * appended, the class attribute keeps only the remaining classes.
  */
-function parseExistingProps (attrStr) {
-  const props = {};
-  // Anchor on whitespace/start so we don't match suffix attrs like `font-kind=`,
-  // `wrapper-truncate=`, `label-size=` etc. — `\b` is a word boundary between `-` and `k`,
-  // so `\b(kind|...)` matches inside `font-kind=`. Requiring `\s` (or start of attrStr,
-  // which often begins with whitespace) anchors the prop as a real attribute name.
-  // Allow `:` or `v-bind:` prefix for bound props (e.g. `:size="…"` counts as an existing size).
-  const propRe = /(?:^|\s)(?::|v-bind:)?(kind|size|strength|density|tone|align|truncate|as)\s*=\s*"([^"]*)"/g;
-  const boolRe = /(?:^|\s)truncate\b(?!\s*[=:])/g;
-  let m;
-  while ((m = propRe.exec(attrStr)) !== null) {
-    props[m[1]] = m[2];
-  }
-  while ((m = boolRe.exec(attrStr)) !== null) {
-    props.truncate = true;
-  }
-  return props;
-}
-
-/**
- * Build the attr string for the lifted props + remaining classes + preserved other attrs.
- * Used for residual lift on existing <dt-text> elements.
- */
-function buildResidualTag (tagName, existingAttrs, overrideProps, remaining, conflictClasses) {
+function buildResidualTag (tagName, existingAttrs, overrideProps, remaining, selfClosing) {
   // Strip the original class attribute — we'll rebuild it if remaining is non-empty
   let attrs = existingAttrs.replace(/\sclass="[^"]*"/, '').trimEnd();
 
   for (const { prop, value } of overrideProps) {
-    if (value === null) {
-      attrs += ` ${prop}`;
-    } else {
-      attrs += ` ${prop}="${value}"`;
-    }
+    attrs += value === null ? ` ${prop}` : ` ${prop}="${value}"`;
   }
 
   if (remaining.length > 0) {
     attrs += ` class="${remaining.join(' ')}"`;
   }
 
-  const conflictComment = conflictClasses.length > 0
-    ? '<!-- dt-text-migrate: review conflicting class -->'
-    : '';
-
-  return conflictComment + `<${tagName}${attrs}>`;
+  return `<${tagName}${attrs}${selfClosing ? ' />' : '>'}`;
 }
 
 function liftResidualOverrides (content) {
@@ -766,35 +738,41 @@ function liftResidualOverrides (content) {
     const hasOverride = classes.some(c => OVERRIDE_CLASS_MAP[c]);
     if (!hasOverride) continue;
 
-    if (isDtText) {
-      // Residual lift: parse existing props to detect conflicts
-      const allAttrs = (attrsBefore + ' ' + attrsAfter).trim();
-      const existingProps = parseExistingProps(allAttrs);
-      const { overrideProps, remaining, conflictClasses } = extractOverrideProps(classes, existingProps);
+    // A composed class still present was rejected or protected by rewriteComposedClasses
+    // (or is on a native tag it handles); review must see that tag unchanged.
+    if (classes.some(c => COMPOSED_CLASS_MAP[c])) continue;
 
-      if (overrideProps.length === 0 && conflictClasses.length === 0) continue;
+    const attrs = `${attrsBefore} ${attrsAfter}`;
+    const names = attributeNames(attrs);
+    const lift = () => extractOverrideProps(classes, parseExistingProps(names), blockedOverrideProps(attrs, names));
+
+    if (isDtText) {
+      const { overrideProps, remaining, conflict } = lift();
+      if (overrideProps.length === 0) {
+        // Nothing to lift: leave the tag byte-for-byte so reruns stay identical.
+        if (conflict) replacements.push({ start: openStart, end: openStart, replacement: CONFLICT_MARKER });
+        continue;
+      }
 
       replacements.push({
         start: openStart,
         end: openEnd,
-        replacement: buildResidualTag(tagName, attrsBefore + attrsAfter, overrideProps, remaining, conflictClasses),
+        replacement: (conflict ? CONFLICT_MARKER : '') +
+          buildResidualTag(tagName, attrsBefore + attrsAfter, overrideProps, remaining, isSelfClosing),
       });
 
     } else if (isNative) {
-      // Override-only on rewriteable tag: check no composed class (Task 2 already handled those)
-      const hasComposed = classes.some(c => COMPOSED_CLASS_MAP[c]);
-      if (hasComposed) continue; // Already handled by rewriteComposedClasses
-
-      // ⚠️ Without a composed class, `kind`/`size` are not deducible. Converting <div>/<h*>
-      // to <dt-text> would attach the .d-text base class which changes baseline typography —
-      // problematic for layout wrappers (e.g. <div class="d-fc-neutral-white"> around a stack).
-      // Restrict override-only rewriting to <span>/<p>/<label> where text-as-default is safe.
+      // ⚠️ Without a composed class there is no composition to establish. Converting
+      // <div>/<h*> to <dt-text> would attach the .d-text base class which changes baseline
+      // typography — problematic for layout wrappers (e.g. <div class="d-fc-neutral-white">
+      // around a stack). Restrict override-only rewriting to <span>/<p>/<label>, where the
+      // result keeps inheriting typography and only the atomic props apply.
       const OVERRIDE_ONLY_REWRITEABLE = new Set(['span', 'p', 'label']);
       if (!OVERRIDE_ONLY_REWRITEABLE.has(tagName.toLowerCase())) continue;
 
       // Skip elements with behavioral attrs — directives, events, id, ref, data-*
       // mean the element has significance beyond typography (e.g. <span @click>, <span id="x">)
-      const allAttrs = (attrsBefore + ' ' + attrsAfter).trim();
+      const allAttrs = attrs.trim();
       if (/(?:v-|@\w|:(?!class)|\bid=|\bref=|\bdata-)/.test(allAttrs)) continue;
 
       // Skip if any class is unrecognised — custom CSS may target it, unsafe to auto-convert
@@ -803,27 +781,20 @@ function liftResidualOverrides (content) {
       // Wrapper safety: skip if element body contains block/component children.
       // <span class="d-fw-bold"><dt-button>x</dt-button></span> should NOT become
       // <dt-text strength="bold"><dt-button>…</dt-text>. (Mirrors the composed-path safety.)
-      if (!isSelfClosing) {
-        const closing = findMatchingClosingTag(content, openEnd, tagName);
-        if (closing) {
-          const body = content.slice(openEnd, closing.index);
-          if (hasBlockOrComponentChild(body)) continue;
-        }
+      const closing = isSelfClosing ? null : findMatchingClosingTag(content, openEnd, tagName);
+      if (closing && hasBlockOrComponentChild(content.slice(openEnd, closing.index))) continue;
+
+      const { overrideProps, remaining, conflict } = lift();
+      if (overrideProps.length === 0) {
+        if (conflict) replacements.push({ start: openStart, end: openStart, replacement: CONFLICT_MARKER });
+        continue;
       }
 
-      // Check no dynamic :class conflicts
-      const { overrideProps, remaining } = extractOverrideProps(classes, {});
-      if (overrideProps.length === 0) continue;
-
-      let newTag = '<dt-text';
+      let newTag = (conflict ? CONFLICT_MARKER : '') + '<dt-text';
       if (tagName !== 'span') newTag += ` as="${tagName}"`;
 
       for (const { prop, value } of overrideProps) {
-        if (value === null) {
-          newTag += ` ${prop}`;
-        } else {
-          newTag += ` ${prop}="${value}"`;
-        }
+        newTag += value === null ? ` ${prop}` : ` ${prop}="${value}"`;
       }
 
       if (remaining.length > 0) newTag += ` class="${remaining.join(' ')}"`;
@@ -833,15 +804,12 @@ function liftResidualOverrides (content) {
 
       replacements.push({ start: openStart, end: openEnd, replacement: newTag });
 
-      if (!isSelfClosing) {
-        const closing = findMatchingClosingTag(content, openEnd, tagName);
-        if (closing) {
-          replacements.push({
-            start: closing.index,
-            end: closing.index + closing.length,
-            replacement: '</dt-text>',
-          });
-        }
+      if (closing) {
+        replacements.push({
+          start: closing.index,
+          end: closing.index + closing.length,
+          replacement: '</dt-text>',
+        });
       }
     }
   }
@@ -883,35 +851,15 @@ function isSafeToCollapseSpan (fullTag) {
   if (withoutClass.length > 0) return false;
 
   const classes = classMatch[1].split(/\s+/).filter(Boolean);
-  if (classes.length === 0 || !classes.every(c => ALL_KNOWN_CLASSES.has(c))) return false;
-
-  // Reject if any composed class is flagged (eyebrow / code-sm / helper) — those are
-  // explicitly out-of-scope-for-auto-rewrite per the PRD and Task 2 already emits a
-  // review marker for them. Rewriting here would contradict the flag.
-  return !classes.some(c => COMPOSED_CLASS_MAP[c] && COMPOSED_CLASS_MAP[c].flag);
+  return classes.length > 0 && classes.every(c => ALL_KNOWN_CLASSES.has(c));
 }
 
 /**
- * Rewrite a safe child span tag (with only recognized classes) to <dt-text>.
+ * Rewrite a safe child span to <dt-text> carrying only its override props. Without a
+ * composition it keeps inheriting the parent's typography.
  */
-function rewriteChildSpan (spanTag) {
-  const classMatch = spanTag.match(/\sclass="([^"]*)"/);
-  if (!classMatch) return spanTag;
-
-  const classes = classMatch[1].split(/\s+/).filter(Boolean);
-  const existingProps = {};
-  const { overrideProps, remaining } = extractOverrideProps(classes, existingProps);
-  const composedEntry = classes.reduce(
-    (f, c) => f || (COMPOSED_CLASS_MAP[c] ? { cls: c, entry: COMPOSED_CLASS_MAP[c] } : null),
-    null,
-  );
-
+function rewriteChildSpan (overrideProps, remaining) {
   let tag = '<dt-text';
-  if (composedEntry && !composedEntry.entry.flag) {
-    const { kind, size } = composedEntry.entry;
-    if (kind) tag += ` kind="${kind}"`;
-    if (size) tag += ` size="${size}"`;
-  }
   for (const { prop, value } of overrideProps) {
     tag += value === null ? ` ${prop}` : ` ${prop}="${value}"`;
   }
@@ -944,14 +892,26 @@ function collapseNestedSpans (content) {
     while ((sm = childSpanRe.exec(body)) !== null) {
       const spanTag = sm[0];
       const spanOpenEnd = sm.index + spanTag.length;
-      if (isSafeToCollapseSpan(spanTag)) {
+      const classes = (spanTag.match(/\sclass="([^"]*)"/)?.[1] ?? '').split(/\s+/).filter(Boolean);
+
+      // rewriteComposedClasses already converted or reviewed every composed span. One
+      // still here was rejected there (wrapper, multiple compositions, flag) and must
+      // not be retried.
+      if (classes.some(c => COMPOSED_CLASS_MAP[c])) continue;
+
+      // Find the depth-matched </span> (handles nested <span>...<span>...</span>...</span>)
+      const closingSpan = findMatchingClosingTag(body, spanOpenEnd, 'span');
+      const spanBody = closingSpan ? body.slice(spanOpenEnd, closingSpan.index) : '';
+
+      if (isSafeToCollapseSpan(spanTag) && !hasBlockOrComponentChild(spanBody)) {
+        const { overrideProps, remaining, conflict } = extractOverrideProps(classes);
+        // liftResidualOverrides already marked conflicting spans for review.
+        if (conflict || overrideProps.length === 0) continue;
         spanReplacements.push({
           start: sm.index,
           end: spanOpenEnd,
-          replacement: rewriteChildSpan(spanTag),
+          replacement: rewriteChildSpan(overrideProps, remaining),
         });
-        // Find the depth-matched </span> (handles nested <span>...<span>...</span>...</span>)
-        const closingSpan = findMatchingClosingTag(body, spanOpenEnd, 'span');
         if (closingSpan) {
           spanReplacements.push({
             start: closingSpan.index,
@@ -959,19 +919,13 @@ function collapseNestedSpans (content) {
             replacement: '</dt-text>',
           });
         }
-      } else {
-        // Check if it has any typography classes — if so, flag it
-        const classM = spanTag.match(/\sclass="([^"]*)"/);
-        if (classM) {
-          const hasTypo = classM[1].split(/\s+/).some(c => ALL_KNOWN_CLASSES.has(c));
-          if (hasTypo) {
-            spanReplacements.push({
-              start: sm.index,
-              end: sm.index,
-              replacement: '<!-- dt-text-migrate: review nested span -->',
-            });
-          }
-        }
+      } else if (classes.some(c => ALL_KNOWN_CLASSES.has(c))) {
+        // Typography classes on a span we cannot convert safely — flag it
+        spanReplacements.push({
+          start: sm.index,
+          end: sm.index,
+          replacement: '<!-- dt-text-migrate: review nested span -->',
+        });
       }
     }
 
@@ -1066,38 +1020,37 @@ function flagComposedOnWrapperTags (content) {
   return out;
 }
 
-// On-menu d-fs-N → DtText size mapping hint (body/label size + headline size if applicable)
-// fs.N values that align with DtText's scale (matches dialtone-tokens font.size token stops)
-const ON_MENU_FS_HINTS = {
-  '100': 'body/label size="100"',
-  '200': 'body/label size="300" OR headline size="100"',
-  '300': 'headline size="300"',
-  '400': 'headline size="500"',
-  '500': 'headline size="600"',
-  '600': 'headline size="700"',
-};
+// Describe a d-fs-N class without inferring a composition from font size. Beside a
+// variant, size="N" is a raw font-size override; without one, it has nothing to apply to.
+function fontSizeHint (fsN, hasVariant) {
+  if (!TEXT_FONT_SIZES.has(fsN)) return 'no matching DtText size token; keep class';
+  return hasVariant
+    ? `raw font-size token; size="${fsN}" can replace it alongside variant`
+    : `raw font-size token; size="${fsN}" needs a variant, which font size alone does not determine`;
+}
 
 function flagFontSizeClasses (content) {
   // Iterate over real opening tags using a quote-aware regex so we never land
   // inside a quoted attribute value (e.g. `title="a < b"`). Walking back with
   // lastIndexOf('<') from a `class=` match is unsafe because `<` can appear
   // inside `v-if="rowCount < total"` style bindings.
-  const tagRe = new RegExp(`<[a-zA-Z][\\w-]*(${ATTR_BODY})\\sclass="([^"]*)"`, 'g');
+  const tagRe = new RegExp(`<([a-zA-Z][\\w-]*)(${ATTR_BODY})\\sclass="([^"]*)"(${ATTR_BODY})\\/?>`, 'g');
   const replacements = [];
   let m;
 
   while ((m = tagRe.exec(content)) !== null) {
+    const [, tagName, attrsBefore, classValue, attrsAfter] = m;
     const tagStart = m.index;
-    const classValue = m[2];
 
     // Only act on class attributes containing d-fs-N
     const fsMatch = classValue.match(/\bd-fs-(\d+)\b/);
     if (!fsMatch) continue;
 
     const fsN = fsMatch[1];
-    const hint = ON_MENU_FS_HINTS[fsN]
-      ? `<!-- dt-text-migrate: review d-fs-${fsN} (on-menu — maps to ${ON_MENU_FS_HINTS[fsN]}) -->`
-      : `<!-- dt-text-migrate: review d-fs-${fsN} (off-menu — no clean DtText equivalent, keep class) -->`;
+    const isDtText = tagName === 'dt-text' || tagName === 'DtText';
+    const hasVariant = isDtText &&
+      attributeNames(`${attrsBefore} ${attrsAfter}`).some(name => boundProp(name) === 'variant');
+    const hint = `<!-- dt-text-migrate: review d-fs-${fsN} (${fontSizeHint(fsN, hasVariant)}) -->`;
 
     // Suppress when a dt-text-migrate comment ends immediately before this tag
     // (legacy-heading hints share the same target position — don't double up).
@@ -1120,11 +1073,11 @@ function flagFontSizeClasses (content) {
 /**
  * Detect the legacy raw-utility heading pattern (no composed class, but d-fw-* +
  * d-fc-* + d-fs-N built up by hand on a rewriteable native tag) and emit a hint
- * comment with the proposed DtText migration. This is firespotter's dominant pattern
- * — most uc_client headings predate composed classes.
+ * comment for the DtText migration. Font size and weight alone cannot choose a
+ * variant, so the hint leaves that step to the reviewer.
  *
- * The hint comment includes the proposed `<dt-text>` form. The element is NOT rewritten;
- * the developer reviews and applies. Cleanly removed by --remove-markers.
+ * The element is NOT rewritten; the developer reviews and applies. Cleanly removed by
+ * --remove-markers.
  */
 function flagLegacyHeadings (content) {
   // Match rewriteable native elements with a static class attribute
@@ -1161,16 +1114,16 @@ function flagLegacyHeadings (content) {
     const fcMatch = classes.find(c => OVERRIDE_CLASS_MAP[c] && OVERRIDE_CLASS_MAP[c].prop === 'tone');
     const tone = fcMatch ? OVERRIDE_CLASS_MAP[fcMatch].value : null;
 
-    // Decide kind: explicit headings get headline; ambiguous tags get a "verify kind" note
+    // A heading tag suggests a headline variant; its size step still needs review.
     const isHeadingTag = /^h[1-6]$/.test(tagName);
-    const kindHint = isHeadingTag ? 'kind=headline' : 'kind=body|label|headline (VERIFY)';
-    const sizeHint = ON_MENU_FS_HINTS[fsN]
-      ? `size: ${ON_MENU_FS_HINTS[fsN]}`
-      : `size: d-fs-${fsN} is off-menu — keep class`;
+    const variantHint = isHeadingTag ? 'variant=headline-? (VERIFY)' : 'variant=? (VERIFY: headline, body or label)';
+    const sizeHint = TEXT_FONT_SIZES.has(fsN)
+      ? `d-fs-${fsN} is a raw font-size token (size="${fsN}" once a variant is set)`
+      : `d-fs-${fsN} has no matching DtText size token (keep class)`;
 
     const parts = [];
     if (!isHeadingTag) parts.push(`as=${tagName}`);
-    parts.push(kindHint, sizeHint, `strength=${strength}`);
+    parts.push(variantHint, sizeHint, `strength=${strength}`);
     if (tone) parts.push(`tone=${tone}`);
 
     const hint = `<!-- dt-text-migrate: legacy heading — ${parts.join(' | ')} -->`;
@@ -1359,20 +1312,54 @@ function printImportInstructions (filePath, importCheck) {
 // --validate mode: detect post-migration DtText prop bugs
 //------------------------------------------------------------------------------
 
-const VALID_KINDS = new Set(['headline', 'body', 'label', 'code']);
-const VALID_SIZES = new Set([
-  '100', '200', '300', '400', '500', '600', '700',
-  'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl',
-]);
 const VALID_STRENGTHS = new Set(['bold', 'semibold', 'medium', 'normal']);
 const VALID_DENSITIES = new Set(['100', '200', '300', '400', '500', '600']);
 const VALID_ALIGNS = new Set(['start', 'center', 'end', 'justify']);
+const VALID_STATIC_VALUES = {
+  kind: new Set(Object.keys(TEXT_KIND_SIZES)),
+  variant: TEXT_VARIANTS,
+  family: TEXT_FAMILIES,
+  strength: VALID_STRENGTHS,
+  density: VALID_DENSITIES,
+  align: VALID_ALIGNS,
+};
+
+// Size depends on context, as in DtText: beside a variant it is a raw font-size token;
+// with kind alone, a composition size; with neither, DtText ignores it. Bound values and
+// spreads stay unknown rather than guessed.
+function sizeIssue (names, values) {
+  const binds = prop => names.some(name => boundProp(name) === prop);
+  if (!binds('size') || hasUncertainBinding(names)) return null;
+
+  if (binds('variant')) {
+    if (!('variant' in values) || !('size' in values) || TEXT_FONT_SIZES.has(values.size)) return null;
+    return {
+      type: 'invalid-value',
+      message: `size="${values.size}" with variant must be a font-size token (expected one of: ${[...TEXT_FONT_SIZES].join(', ')}).`,
+    };
+  }
+
+  if (binds('kind')) {
+    const allowed = TEXT_KIND_SIZES[values.kind];
+    if (!allowed || !('size' in values) || allowed.includes(values.size)) return null;
+    return {
+      type: 'invalid-value',
+      message: `size="${values.size}" is not valid for kind="${values.kind}" (expected one of: ${allowed.join(', ')}).`,
+    };
+  }
+
+  return {
+    type: 'size-without-composition',
+    message: 'size needs a variant (or legacy kind); without one DtText ignores it.',
+  };
+}
 
 /**
  * Scan a file's content for DtText prop bugs. Returns array of issues with line numbers.
  * Issue types:
  *   - object-syntax — `:tone="{ muted: cond }"` style (CSS-class binding misapplied to prop)
- *   - invalid-value — `density="160"`, `kind="title"`, etc.
+ *   - invalid-value — `density="160"`, `variant="title-md"`, a size invalid in its context
+ *   - size-without-composition — size with no variant or kind to apply to
  *   - mixed-class — DtText with `class="d-fw-bold"` or another typography utility
  */
 export function validateDtTextProps (content) {
@@ -1399,6 +1386,7 @@ export function validateDtTextProps (content) {
     const attrStr = m[1];
     const lineNum = content.slice(0, m.index).split('\n').length;
     const tagSnippet = m[0].length > 120 ? m[0].slice(0, 117) + '...' : m[0];
+    const report = (type, message) => issues.push({ type, line: lineNum, message, snippet: tagSnippet });
 
     // Object syntax detection: any prop bound with `:prop="{...}"`
     const objectSyntaxRe = /:(\w[\w-]*)="\s*\{/g;
@@ -1406,46 +1394,34 @@ export function validateDtTextProps (content) {
     while ((osm = objectSyntaxRe.exec(attrStr)) !== null) {
       const propName = osm[1];
       // Only flag known string props (where object syntax is wrong)
-      if (['tone', 'kind', 'size', 'strength', 'density', 'align', 'as'].includes(propName)) {
-        issues.push({
-          type: 'object-syntax',
-          line: lineNum,
-          message: `:${propName}="{ ... }" uses CSS-class syntax — DtText expects a string. Use :${propName}="cond ? 'value' : undefined" instead.`,
-          snippet: tagSnippet,
-        });
+      if (['tone', 'kind', 'variant', 'family', 'size', 'strength', 'density', 'align', 'as'].includes(propName)) {
+        report('object-syntax',
+          `:${propName}="{ ... }" uses CSS-class syntax — DtText expects a string. Use :${propName}="cond ? 'value' : undefined" instead.`);
       }
     }
 
     // Static-value validation — anchor on whitespace so we don't match `:prop=` (bound)
-    const staticPropRe = /\s(kind|size|strength|density|align)\s*=\s*"([^"]+)"/g;
+    const values = {};
+    const staticPropRe = /\s(kind|variant|family|size|strength|density|align)\s*=\s*"([^"]+)"/g;
     let spm;
     while ((spm = staticPropRe.exec(attrStr)) !== null) {
       const [, propName, value] = spm;
-      const validSet = {
-        kind: VALID_KINDS, size: VALID_SIZES, strength: VALID_STRENGTHS,
-        density: VALID_DENSITIES, align: VALID_ALIGNS,
-      }[propName];
+      values[propName] = value;
+      const validSet = VALID_STATIC_VALUES[propName];
       if (validSet && !validSet.has(value)) {
-        issues.push({
-          type: 'invalid-value',
-          line: lineNum,
-          message: `${propName}="${value}" is not a valid value (expected one of: ${[...validSet].join(', ')}).`,
-          snippet: tagSnippet,
-        });
+        report('invalid-value', `${propName}="${value}" is not a valid value (expected one of: ${[...validSet].join(', ')}).`);
       }
     }
+
+    const size = sizeIssue(attributeNames(attrStr), values);
+    if (size) report(size.type, size.message);
 
     // Mixed class detection: DtText with class= containing typography utilities
     const classM = attrStr.match(/\sclass="([^"]*)"/);
     if (classM) {
       const offenders = classM[1].split(/\s+/).filter(c => ALL_KNOWN_CLASSES.has(c));
       if (offenders.length > 0) {
-        issues.push({
-          type: 'mixed-class',
-          line: lineNum,
-          message: `DtText carries typography utility classes [${offenders.join(', ')}] — lift to props instead.`,
-          snippet: tagSnippet,
-        });
+        report('mixed-class', `DtText carries typography utility classes [${offenders.join(', ')}] — lift to props instead.`);
       }
     }
   }
@@ -1597,9 +1573,13 @@ function parseArgs () {
 
     if (arg === '--help' || arg === '-h') {
       console.log(`
-Usage: npx dialtone-migrate-typography [options]
+Usage: node <path-to-this-script> [options]
+       npx dialtone-migrate --only typography [options]
 
-Migrates legacy typography utility classes to <dt-text> components.
+Migrates legacy typography utility classes to <dt-text> components. Composed classes
+(d-headline--*, d-body--*, d-label--*, d-code--md) become a variant prop; override
+utilities become strength, density, tone, align, truncate and family props.
+Existing DtText kind + size pairs are left for: npx dialtone-migrate --only text-variant
 
 Options:
   --cwd <path>        Working directory (default: current directory)
@@ -1608,18 +1588,20 @@ Options:
   --yes, -y           Apply all changes without prompting
   --remove-markers    Strip all <!-- dt-text-migrate: review ... --> comments
   --validate          Read-only mode: scan existing <dt-text> for prop bugs
-                      (object syntax, invalid values, mixed CSS classes)
+                      (object syntax, invalid values, size without a variant or kind,
+                      mixed CSS classes)
   --no-import         Skip import injection (use when DtText is globally registered)
   --package <name>    Package name for injected DtText imports
                       (default: @dialpad/dialtone-vue when a Dialtone import is detected).
                       Use when Dialtone runs under a custom alias, e.g. @dialpad/dialtone-next.
   --help, -h          Show help
 
-Examples:
-  npx dialtone-migrate-typography --dry-run --cwd ./src
-  npx dialtone-migrate-typography --yes
-  npx dialtone-migrate-typography --file src/Foo.vue --dry-run
-  npx dialtone-migrate-typography --remove-markers --cwd ./src
+Examples (installed script path: lib/dist/js/dialtone_migrate_typography/index.mjs in
+@dialpad/dialtone-css, or dist/js/dialtone_migrate_typography/index.mjs in @dialpad/dialtone):
+  node <script> --dry-run --cwd ./src
+  node <script> --yes
+  node <script> --file src/Foo.vue --dry-run
+  node <script> --remove-markers --cwd ./src
 
 Post-Migration Steps:
   1. Add DtText imports as instructed by the script (skipped with --no-import)

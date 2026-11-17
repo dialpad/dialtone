@@ -41,7 +41,7 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 15 | [DtChip interactive default](./chip-interactive/) | **Yes** | `dialtone-migrate-chip-interactive` | `interactive` prop default changed from `true` to `false`. Chips that need click/keyboard behavior must opt in with `:interactive="true"`. |
 | 16 | [Scrollbar :never → :always](./scrollbar-always/) | **Yes** | `dialtone-migrate-scrollbar-always` | `v-dt-scrollbar:never` renamed to `v-dt-scrollbar:always`; `DtBox` `scrollbar="never"` renamed to `scrollbar="always"`. |
 | 17 | [DtModal Native Dialog](./modal-native-dialog/) | No | — | `DtModal` now uses a native `<dialog>` element. Popovers and tooltips inside modals auto-append to the dialog. Only affects consumers targeting internal DOM structure. |
-| 18 | [Typography Utilities to DtText](./typography/) | Deprecation | `dialtone-migrate-typography` | Replace legacy typography utility classes (`d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`) on text elements with the `<dt-text>` component. |
+| 18 | [Typography Utilities to DtText](./typography/) | Deprecation | `dialtone-migrate --only typography` | Replace legacy typography utility classes (`d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`, `d-ff-mono`) on text elements with `<dt-text>` variant and modifier props. |
 
 ### Framework
 
@@ -143,7 +143,7 @@ npx dialtone-migrate-chip-interactive --cwd ./src
 npx dialtone-migrate-scrollbar-always --cwd ./src
 
 # 16. Typography utilities to DtText
-npx dialtone-migrate-typography --cwd ./src
+npx dialtone-migrate --only typography --cwd ./src
 
 # 17. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
