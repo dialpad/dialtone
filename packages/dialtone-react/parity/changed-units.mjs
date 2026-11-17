@@ -23,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { pascal } from './cases.mjs';
+import { pascal, rendered } from './cases.mjs';
 import { commonUnit, containsPath, reactDir, unitsOfPath, vueSources } from './vue-sources.mjs';
 
 const REACT = 'packages/dialtone-react/';
@@ -178,7 +178,7 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
         errors.push(`${id}: ${error.message}`);
       }
     }
-    const name = pascal(id);
+    const name = rendered(id); // whose presets are its cases: DtTabGroup's for tab (cases.mjs › RENDERS)
     const home = reactDir(id);
     if (reactPaths.some(f => containsPath([home], f))
       || presetsOf(name).some(f => combinatorPaths.includes(path.relative(combinatorRoot, f)))
