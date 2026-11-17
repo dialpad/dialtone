@@ -50,6 +50,12 @@
 
   color: color-mix(in oklch, oklch(from var(--dt-action-color-foreground-muted-default) l calc(c - .08) h) 50%, transparent);
   transition: none;
+
+  // Forced colors replace the muted text color, so the row would read as enabled.
+  // GrayText is the system color native disabled controls get automatically.
+  @media (forced-colors: active) {
+    color: GrayText;
+  }
 }
 
 .d-list-item__wrapper {
