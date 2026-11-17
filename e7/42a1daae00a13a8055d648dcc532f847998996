@@ -1,0 +1,41 @@
+apps/dialtone-documentation/docs/.vuepress/theme/utils/pageToc.js
+  s_037f149b31cf7b::t_738f8dc668ed86 65-72
+  s_037f149b31cf7b::t_2279c321a20999 28-31
+  s_037f149b31cf7b::t_c4b1bd08f87730 16-19
+  s_037f149b31cf7b::t_759e7755264dfc 73-89
+  s_037f149b31cf7b::t_455412a8cf5a59 90-102
+apps/dialtone-documentation/docs/.vuepress/theme/utils/pageToc.test.mjs
+  s_037f149b31cf7b::t_81511a07436489 9,28-31
+  s_037f149b31cf7b::t_f12fb8ff6755e9 15,74-81
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  s_037f149b31cf7b::t_05bb641aa65219 77-86
+apps/dialtone-documentation/docs/.vuepress/theme/utils/pageTocRouteHash.test.mjs
+  s_037f149b31cf7b::t_b295f5ed49e295 1-176
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageToc.vue
+  s_037f149b31cf7b::t_a6d43a8c70398b 92,159,163,215
+  s_037f149b31cf7b::t_69a677578b44d2 216-219
+  s_037f149b31cf7b::t_61707aa2c776f8 2-3,85,105-108,115
+  s_037f149b31cf7b::t_bd10a024a0f1cd 91,264,275-277
+  s_037f149b31cf7b::t_d98e72b8b80046 90,171
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "e742a1daae00a13a8055d648dcc532f847998996",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

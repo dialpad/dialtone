@@ -1,0 +1,45 @@
+packages/dialtone-react/components/Tab/Tab.parity.tsx
+  s_32ded55aeb4b6b::t_f5121fa9ec8b9c 1-4
+packages/dialtone-react/components/Tab/Tab.stories.tsx
+  s_32ded55aeb4b6b::t_de62e5e550e37c 1-56
+packages/dialtone-react/components/Tab/Tab.test.tsx
+  s_32ded55aeb4b6b::t_3f99f4975e2795 1-450
+packages/dialtone-react/components/Tab/Tab.tsx
+  s_32ded55aeb4b6b::t_57bbfc46cd2d63 1-186
+packages/dialtone-react/components/Tab/TabGroup.test.tsx
+  s_32ded55aeb4b6b::t_fd402ff776b875 1-951
+packages/dialtone-react/components/Tab/TabGroup.tsx
+  s_32ded55aeb4b6b::t_a9b7e362a740ea 1-382
+packages/dialtone-react/components/Tab/TabGroupContext.ts
+  s_32ded55aeb4b6b::t_de95f44573633c 1-49
+packages/dialtone-react/components/Tab/TabPanel.stories.tsx
+  s_32ded55aeb4b6b::t_0241d1e3f5bb2e 1-41
+packages/dialtone-react/components/Tab/TabPanel.test.tsx
+  s_32ded55aeb4b6b::t_7bf780fdfac105 1-158
+packages/dialtone-react/components/Tab/TabPanel.tsx
+  s_32ded55aeb4b6b::t_7fef7f4a5c15b0 1-120
+packages/dialtone-react/components/Tab/Tabs.stories.tsx
+  s_32ded55aeb4b6b::t_0bfdfd0dbec3e7 1-263
+packages/dialtone-react/components/Tab/TabsConstants.ts
+  s_32ded55aeb4b6b::t_2ab9c54651ad84 1-50
+packages/dialtone-react/components/Tab/index.ts
+  s_32ded55aeb4b6b::t_9bf4a790c1cab8 1-18
+packages/dialtone-react/components/Tab/skips.json
+  s_32ded55aeb4b6b::t_80a1719b3111b8 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0a6c14fbf51c22c2cef4165ec9e794b8dd853dab",
+  "prompts": {},
+  "sessions": {
+    "s_32ded55aeb4b6b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34a6baeb-91f4-43e2-be27-c8621bd52ce2",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

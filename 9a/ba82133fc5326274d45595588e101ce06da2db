@@ -1,0 +1,73 @@
+scripts/retrieval/preset-classifier.test.mjs
+  s_a98638d5a5be6e::t_172457208c32e1 64-78
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_719760d04fd6f6::t_8ee096c732ff55 184-193,620,781
+packages/combinator/src/variants/variants_dropdown.js
+  s_a98638d5a5be6e::t_cc6508823641ec 70-75,98-99
+packages/dialtone-vue/common/mixins/keyboard_list_navigation.test.js
+  s_a98638d5a5be6e::t_b715c57d6dd540 213
+  s_a98638d5a5be6e::t_f133490bc1399d 1,190-212
+packages/dialtone-vue/common/mixins/keyboard_list_navigation.js
+  s_719760d04fd6f6::t_a842f6a615b927 199,204,209
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 769,775-777
+  s_a98638d5a5be6e::t_d549bf669f53b8 709,714,717,720,754,759-768,770-771,773-774,778-780,782
+  s_a98638d5a5be6e::t_f133490bc1399d 1-3,613-621,623-644,647-658,661,667-668,693,772,781
+  s_a98638d5a5be6e::t_172457208c32e1 622,645-646
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_719760d04fd6f6::t_6686cdcb0a0427 9,120-129,344,468-472
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 203-205,211
+  s_a98638d5a5be6e::t_63a9c353973810 212
+  s_a98638d5a5be6e::t_39f704d025c663 227
+apps/dialtone-documentation/docs/components/popover.md
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 53,55-57
+packages/dialtone-vue/components/Combobox/Combobox.test.js
+  s_a98638d5a5be6e::t_2591aa42594551 77,79,90-91
+  s_a98638d5a5be6e::t_f133490bc1399d 1-3,73-76,78,80-83,85-89
+  s_a98638d5a5be6e::t_39f704d025c663 84
+packages/dialtone-vue/components/ComboboxWithPopover/ComboboxWithPopover.test.js
+  s_a98638d5a5be6e::t_0d91274ff28bd2 102,104,120-121
+  s_a98638d5a5be6e::t_f133490bc1399d 2,95-101,103,105-111,114,116-119
+  s_a98638d5a5be6e::t_172457208c32e1 112-113,115
+packages/dialtone-vue/components/Dropdown/DropdownMenuRoles.story.vue
+  s_719760d04fd6f6::t_4a62e05ac22e75 14
+packages/combinator/scripts/classify-preset-example.mjs
+  s_719760d04fd6f6::t_6153fe3fb1c693 11,14-22
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_719760d04fd6f6::t_1e174f257bc214 185,187,193,250,329
+packages/combinator/scripts/generate-preset-examples.mjs
+  s_719760d04fd6f6::t_3156ebd9d4e557 95
+.agents/resources/documentation-examples.md
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 31-32
+packages/dialtone-vue/components/Dropdown/Dropdown.stories.js
+  s_719760d04fd6f6::t_17d9022373a723 216,228
+.agents/resources/rules/combinator-variants.md
+  s_a98638d5a5be6e::t_4b7e7ad38ac0b5 160-161
+packages/dialtone-vue/components/Dropdown/DropdownControlledArrows.story.vue
+  s_a98638d5a5be6e::t_f400625a81fe80 17,81,83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9aba82133fc5326274d45595588e101ce06da2db",
+  "prompts": {},
+  "sessions": {
+    "s_719760d04fd6f6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c700-6bac-73c0-9094-ecaf8cb3314f",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
