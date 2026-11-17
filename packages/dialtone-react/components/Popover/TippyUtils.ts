@@ -1,6 +1,5 @@
-// The parts of dialtone-vue's components/Popover/TippyUtils.js that DtTooltip uses. Popover is its own unit; it ports
-// the rest (createTippyPopover, getContentWrapper) when it lands.
 import tippy, { sticky, type Instance, type Placement, type Props } from 'tippy.js';
+import type { PopoverBoundary } from './PopoverConstants';
 
 export const BASE_TIPPY_DIRECTIONS = [
   'bottom', 'bottom-start', 'bottom-end',
@@ -10,6 +9,17 @@ export const BASE_TIPPY_DIRECTIONS = [
 ] as const satisfies readonly Placement[];
 
 export const TIPPY_STICKY_VALUES = [true, false, 'reference', 'popper'] as const satisfies readonly Props['sticky'][];
+
+export const createTippyPopover = (
+  anchorElement: Element,
+  { contentElement, ...options }: Partial<Props> & { contentElement: HTMLElement },
+): Instance => {
+  return tippy(anchorElement, {
+    ...options,
+    plugins: [sticky],
+    render: () => getContentWrapper(contentElement),
+  });
+};
 
 export const createTippy = (anchorElement: Element, options: Partial<Props>): Instance => {
   return tippy(anchorElement, {
@@ -26,7 +36,8 @@ export const getPopperOptions = ({
   // if set to true it will never move from its position relative to the anchor and will clip instead.
   tether = true,
 }: {
-  boundary?: 'clippingParents' | Element | Element[];
+  // Vue's Popover passes 'viewport' and 'document' here too, though popper reads those from rootBoundary.
+  boundary?: PopoverBoundary | Element | Element[];
   fallbackPlacements?: Placement[];
   hasHideModifierEnabled?: boolean;
   tether?: boolean;
@@ -66,4 +77,18 @@ export const getAnchor = (anchorWrapper: Element | null | undefined): Element | 
     return undefined;
   }
   return anchorWrapper.firstElementChild ?? undefined;
+};
+
+/**
+ * tippy's popper for a popover: a `.tippy-box` that tippy moves into place, holding the content element. The content
+ * element isn't React's: DtPopover creates it, and portals its content into it.
+ */
+export const getContentWrapper = (content: HTMLElement): { popper: HTMLDivElement } => {
+  // The recommended structure is to use the popper as an outer wrapper
+  const popper = document.createElement('div');
+  popper.className = 'tippy-box d-ps-absolute';
+  popper.appendChild(content);
+  return {
+    popper,
+  };
 };
