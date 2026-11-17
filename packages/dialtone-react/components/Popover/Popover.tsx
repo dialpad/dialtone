@@ -48,7 +48,7 @@ const ZERO_RECT = { width: 0, height: 0, top: 0, left: 0, right: 0, bottom: 0, x
 
 /** What the anchor slot gets to bind on the element that opens the popover. */
 export interface DtPopoverAnchorAttrs {
-  'aria-expanded': string;
+  'aria-expanded': 'true' | 'false';
   'aria-controls': string;
   'aria-haspopup': PopoverRole;
 }
@@ -724,7 +724,7 @@ export function DtPopover ({
       window.removeEventListener('dt-popover-close', closePopover);
       window.removeEventListener('resize', closePopover);
     };
-  }, [dialogEl, closePopover]);
+  }, [dialogEl, closePopover, tippyAriaExpanded]);
 
   // Vue's watchers, which don't run on mount: each compares against what it last saw.
   const appliedModal = useRef(modal);
@@ -991,7 +991,7 @@ export function DtPopover ({
   const closeScope: DtPopoverCloseScope = { close: closePopover };
   const anchorScope: DtPopoverAnchorScope = {
     attrs: {
-      'aria-expanded': isOpen.toString(),
+      'aria-expanded': isOpen ? 'true' : 'false',
       'aria-controls': popoverId,
       'aria-haspopup': role,
     },
