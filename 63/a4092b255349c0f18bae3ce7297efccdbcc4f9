@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  s_8910b19a75b2ec::t_1c21a620b8d4d9 214
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "63a4092b255349c0f18bae3ce7297efccdbcc4f9",
+  "prompts": {},
+  "sessions": {
+    "s_8910b19a75b2ec": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13c95-4afd-76c3-bfa6-9ddba8b6f260",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

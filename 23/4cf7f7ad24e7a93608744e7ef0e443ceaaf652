@@ -1,0 +1,47 @@
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.vue
+  s_c36d8df9f9b2e4::t_07cb1052389a8e 1103,1113-1118,1120-1121
+  s_c36d8df9f9b2e4::t_3bb075bae7398a 1107-1110,1119
+  s_c36d8df9f9b2e4::t_74fe0d387ad343 72
+  s_c36d8df9f9b2e4::t_4ed23733c6595b 82
+  s_880677e87730d0::t_e4f49325c888e2 1104-1106,1111-1112
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.test.js
+  s_c36d8df9f9b2e4::t_1c2f521e59bb91 1817
+  s_c36d8df9f9b2e4::t_6d3039b767dd00 1807-1816,1818-1837,1838,1841-1844,1846-1848,1871-1873
+  s_c36d8df9f9b2e4::t_b24764c2baa68a 1856-1857,1871-1873
+  s_c36d8df9f9b2e4::t_7c0d51ce748f8f 1839-1840,1848,1850
+  s_c36d8df9f9b2e4::t_5f8bde28b046b9 1852-1860,1867-1869,1871
+packages/dialtone-vue/components/RichTextEditor/ForceLinkify.js
+  s_c36d8df9f9b2e4::t_db0ecdc726bb97 26-33
+  s_c36d8df9f9b2e4::t_52568a88731e07 83
+  s_c36d8df9f9b2e4::t_55db758e6b4554 24-25,35,43
+  s_c36d8df9f9b2e4::t_3acb5a5339f984 1-23,34,36-42,44-51,94-117,119-120,122-128,139,153-154,156-159,161-162,165,167-172
+  s_c36d8df9f9b2e4::t_d0fa98a0bd2ac5 52-82,84-93
+  s_c36d8df9f9b2e4::t_22672b80ae8034 118,121
+  s_c36d8df9f9b2e4::t_bc6dcb63a3faac 129-138,140-152,155,160,163-164,166
+apps/dialtone-documentation/docs/components/rich-text-editor.md
+  s_880677e87730d0::t_e4f49325c888e2 40-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "234cf7f7ad24e7a93608744e7ef0e443ceaaf652",
+  "prompts": {},
+  "sessions": {
+    "s_880677e87730d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "95a2b1bd-1453-4780-a9bc-7ba979f0a879",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    },
+    "s_c36d8df9f9b2e4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3adcdd3d-432d-430a-abbf-0295687cfa55",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
