@@ -125,3 +125,11 @@ export function bindScope (scope, golden, placeholder) {
 
 /** kebab-case unit id → Vue directory and component name: validation-messages → ValidationMessages. */
 export const pascal = id => id.replace(/(^|-)([a-z0-9])/g, (_, __, ch) => ch.toUpperCase());
+
+/**
+ * The Vue component a unit's DOM cases render (without the Dt prefix), when it isn't the unit's own: DtTab only renders
+ * inside a DtTabGroup, so the tab unit (DtTab, DtTabGroup and DtTabPanel, all in components/Tab) is compared through
+ * DtTabGroup's Combinator presets. The goldens (vue/goldens.test.js) and CI's preset lookup (changed-units.mjs) use it.
+ */
+export const RENDERS = { tab: 'TabGroup' };
+export const rendered = unit => RENDERS[unit] ?? pascal(unit);
