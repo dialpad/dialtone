@@ -1,0 +1,24 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs
+  s_aca1c1afe2554c::t_86a4a9f73aa055 190-191
+  s_aca1c1afe2554c::t_46b5686c6a8c2d 463
+  s_aca1c1afe2554c::t_17085cdd56fa16 503-505,507,509,514-515,519
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
+  s_aca1c1afe2554c::t_3235000c1f0458 2
+  s_aca1c1afe2554c::t_751c02928dbde4 1290-1305
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bcf046ff78841e790289d82dd3c2f567f6f157c0",
+  "prompts": {},
+  "sessions": {
+    "s_aca1c1afe2554c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a8e77c6a-d51d-4d85-bc59-17cbd4bd9064",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

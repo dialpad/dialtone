@@ -1,0 +1,47 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/test.mjs
+  s_edb6000ea1a4b6::t_c69a164b5b92dd 130-131,157-158
+  s_edb6000ea1a4b6::t_36fbd4f334f479 85-129,132-156,159-180
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_edb6000ea1a4b6::t_e97c74a450321c 140-149,151-159
+  s_edb6000ea1a4b6::t_849b0e0d715454 150
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_edb6000ea1a4b6::t_e97c74a450321c 241-247
+packages/dialtone-vue/components/Chip/Chip.stories.js
+  s_edb6000ea1a4b6::t_3ae51637fe86a8 75,114-136
+  s_edb6000ea1a4b6::t_90f5650cbf69d9 69-74,76
+packages/dialtone-vue/localization/sv-SE.ftl
+  s_edb6000ea1a4b6::t_02a181d1a71aec 3
+packages/dialtone-vue/components/Chip/ChipVariants.story.vue
+  s_edb6000ea1a4b6::t_a1cb74ea28cb8a 141,148
+  s_edb6000ea1a4b6::t_3ae51637fe86a8 5,45-84,89-90,92-96,99-100,102-132
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_edb6000ea1a4b6::t_35cb5f80aa4458 217-219,304,308
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.test.js
+  s_edb6000ea1a4b6::t_68641d247e05d1 150,153
+  s_edb6000ea1a4b6::t_b057601d458280 151-152
+packages/dialtone-vue/localization/ko-KR.ftl
+  s_edb6000ea1a4b6::t_02a181d1a71aec 3
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.vue
+  s_edb6000ea1a4b6::t_60855fe50acf1e 35
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/index.mjs
+  s_edb6000ea1a4b6::t_127009528646c7 153-154,157-159,167-168,176-177,205
+  s_edb6000ea1a4b6::t_a431a77d0cd73d 17-38,41-44,46,50-58,68-74,84,90,98,110-134,136-152,155-156,160-166,169-173,175,178-179
+apps/dialtone-documentation/docs/components/chip.md
+  s_edb6000ea1a4b6::t_2db45f76511d24 88-90,182-187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d3c324db5b3ce3ed660680958eb02ffc74035fe0",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
