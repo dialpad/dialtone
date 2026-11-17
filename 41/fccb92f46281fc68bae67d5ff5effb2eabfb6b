@@ -1,0 +1,27 @@
+packages/dialtone-icons/README.md
+  s_1010572a1b32d6::t_d91b5d21793533 5-6
+packages/dialtone-vue/README.md
+  s_1010572a1b32d6::t_df012b18567811 10-11
+README.md
+  s_1010572a1b32d6::t_6b4e998e4d7c83 5-6
+packages/dialtone-css/README.md
+  s_1010572a1b32d6::t_6066a8099796d9 6-7
+packages/dialtone-tokens/README.md
+  s_1010572a1b32d6::t_7219a5370bc48b 9-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "41fccb92f46281fc68bae67d5ff5effb2eabfb6b",
+  "prompts": {},
+  "sessions": {
+    "s_1010572a1b32d6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c48eddc6-005e-46cf-ad82-a7904686aab5",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

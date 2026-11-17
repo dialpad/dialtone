@@ -1,0 +1,21 @@
+packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md
+  s_f1b6a2e8befce4::t_979c74b768dad8 44
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_f1b6a2e8befce4::t_816ea49b8faf19 238
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ca29008d1cce4b273eca01386b1d5b0ba2a64d9c",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

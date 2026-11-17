@@ -1,0 +1,46 @@
+packages/dialtone-css/lib/build/less/components/button.less
+  s_65a25b0465c682::t_5750c701f4f3df 661-662,664-665
+packages/dialtone-css/lib/build/less/components/loader.less
+  s_65a25b0465c682::t_ab7b2a6216d35f 11-12,19-20,23,26-31,37-41,44,46-436,439-518,520
+  s_179e5bad29f60f::t_26e8c8e9d6f3ad 519,521-524
+  s_65a25b0465c682::t_d00eb4f7302a45 24-25
+  s_65a25b0465c682::t_82a3cc3cd3819d 42-43,45,437-438
+  s_65a25b0465c682::t_c7a64d9bc9e6ad 32-36
+packages/dialtone-vue/components/Loader/Loader.test.js
+  s_65a25b0465c682::t_8ebcc40b58cbee 44,46-47
+  s_65a25b0465c682::t_2f6cd1bc93773e 45
+packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md
+  s_65a25b0465c682::t_ef06163d27fb75 6,108
+  s_65a25b0465c682::t_ce3ad33106249c 109
+apps/dialtone-documentation/thumbs/loader.vue
+  s_65a25b0465c682::t_57c169673207e2 1-14
+packages/dialtone-vue/components/Loader/Loader.vue
+  s_65a25b0465c682::t_7907a97f16a1c1 14-15,17-22,24-29,31-36,38-40
+  s_65a25b0465c682::t_2f6cd1bc93773e 16,23,30,37
+apps/dialtone-documentation/docs/components/loader.md
+  s_65a25b0465c682::t_76c48ba784599a 7,59-62,67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d3f4c9164101aab2f14710e53e56d2e91ce00ad5",
+  "prompts": {},
+  "sessions": {
+    "s_179e5bad29f60f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "febf809e-180f-4ba2-8dfb-38a07a6a2c26",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    },
+    "s_65a25b0465c682": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a1effa2a-9c16-4a24-98c0-358c253363b7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    }
+  }
+}
