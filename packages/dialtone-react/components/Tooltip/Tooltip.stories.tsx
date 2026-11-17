@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
 import { cx, type ClassValue } from '../../common/cx';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
 import { DtIconDpPhone } from '../../icons';
+import { DtButton } from '../Button';
 import { useModeRegion } from '../ModeIsland/ModeDirective';
 import { DtStack } from '../Stack';
 import { DtTooltip, type DtTooltipProps } from './Tooltip';
@@ -166,7 +166,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<TooltipStoryArgs>;
 
-// Button isn't ported: Vue's <dt-button importance="outlined"> (kind default or inverted), as it renders.
+// Vue's <dt-button importance="outlined"> (kind default or inverted).
 function OutlinedButton ({ id, kind = 'default', className, onClick, children }: {
   id?: string;
   kind?: 'default' | 'inverted';
@@ -175,17 +175,15 @@ function OutlinedButton ({ id, kind = 'default', className, onClick, children }:
   children: ReactNode;
 }) {
   return (
-    <StandIn for="button">
-      <button
-        className={cx('base-button__button d-btn d-btn--outlined', { 'd-btn--inverted': kind === 'inverted' }, className)}
-        data-qa="dt-button"
-        type="button"
-        id={id}
-        onClick={onClick}
-      >
-        <span data-qa="dt-button-label" className="base-button__label d-btn__label">{children}</span>
-      </button>
-    </StandIn>
+    <DtButton
+      importance="outlined"
+      kind={kind}
+      className={cx(className)}
+      id={id}
+      onClick={onClick}
+    >
+      {children}
+    </DtButton>
   );
 }
 
@@ -339,14 +337,10 @@ const i18n = {
 const localMessage = `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`;
 
 function InvertedButton () {
-  const [el, setEl] = useState<HTMLButtonElement | null>(null);
+  const [el, setEl] = useState<HTMLElement | null>(null);
   useModeRegion(el, 'invert');
   return (
-    <StandIn for="button">
-      <button ref={setEl} className="base-button__button d-btn d-btn--outlined" data-qa="dt-button" type="button">
-        <span data-qa="dt-button-label" className="base-button__label d-btn__label">Inverted</span>
-      </button>
-    </StandIn>
+    <DtButton ref={setEl} importance="outlined">Inverted</DtButton>
   );
 }
 
@@ -400,13 +394,12 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
             message={localMessage}
             open={showTooltip}
             anchor={(
-              <StandIn for="button">
-                <button className="base-button__button d-btn d-btn--outlined d-btn--circle d-btn--icon-only" data-qa="dt-button" type="button" aria-labelledby="circle-button-tooltip-label">
-                  <span data-qa="dt-button-start-icon" className="base-button__icon d-btn__icon d-btn__icon--left">
-                    <DtIconDpPhone size="300" />
-                  </span>
-                </button>
-              </StandIn>
+              <DtButton
+                importance="outlined"
+                circle
+                aria-labelledby="circle-button-tooltip-label"
+                startIcon={<DtIconDpPhone size="300" />}
+              />
             )}
           />
       </DtStack>
@@ -418,11 +411,7 @@ function TooltipVariants ({ transition, showTooltip, customDirections }: Tooltip
             message={localMessage}
             open={showTooltip}
             anchor={(
-              <StandIn for="button">
-                <button className="base-button__button d-link" data-qa="dt-button" type="button">
-                  <span data-qa="dt-button-label" className="base-button__label d-btn__label">Link Tooltip</span>
-                </button>
-              </StandIn>
+              <DtButton link>Link Tooltip</DtButton>
             )}
           />
       </DtStack>

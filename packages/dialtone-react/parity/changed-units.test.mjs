@@ -381,6 +381,21 @@ describe('changedUnits', () => {
     deleted('packages/dialtone-vue/common/mixins/input.js', []);
   });
 
+  // cases.mjs › RENDERS: the tab unit's cases are DtTabGroup's presets, so those are what gate it.
+  test('a unit whose cases render another component is gated by that component\'s presets', () => {
+    const dir = path.join(root, 'renders');
+    const react = tree(path.join(dir, 'dialtone-react'), ['components/Tab/index.ts']);
+    const vue = tree(path.join(dir, 'dialtone-vue'), ['components/Tab/Tab.vue', 'components/Tab/TabGroup.vue']);
+    tree(path.join(dir, 'combinator/src'), [
+      ['variants/variants.js', "import DtTabGroup from './variants_tab_group.js';\n"],
+      ['variants/variants_tab_group.js', "import { hasValue } from '@/src/lib/exclusion_rules';"],
+      'lib/exclusion_rules.js',
+    ]);
+    const units = file => changedUnits([file], { pkg: react, vueRoot: vue });
+    assert.deepEqual(units('packages/combinator/src/variants/variants_tab_group.js'), { units: ['tab'], errors: [] });
+    assert.deepEqual(units('packages/combinator/src/lib/exclusion_rules.js'), { units: ['tab'], errors: [] });
+  });
+
   test('an import with a query (Vite\'s ?raw) gates on the file before it, changed or deleted', () => {
     const dir = path.join(root, 'query');
     const react = tree(path.join(dir, 'dialtone-react'), ['components/Pagination/index.ts']);
