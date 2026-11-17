@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
 import { StandIn } from '../../.storybook/StandIn';
@@ -207,9 +207,17 @@ const html = (value: string): ReactNode => <span dangerouslySetInnerHTML={{ __ht
 
 // The story templates' v-model, length and validation config: `validate` gets a message counting the characters
 // left, unless it brings its own.
-function useStoryInput ({ validate, onValueChange, onLengthChange }: InputStoryArgs) {
+function useStoryInput ({ value, validate, onValueChange, onLengthChange }: InputStoryArgs) {
   const [inputValue, setInputValue] = useState<string | string[]>('');
   const [inputLength, setInputLength] = useState(0);
+
+  // Vue's `watch: { modelValue }`: the value control feeds the story's state, but not on mount.
+  const syncedValue = useRef(value);
+  useEffect(() => {
+    if (Object.is(syncedValue.current, value)) return;
+    syncedValue.current = value;
+    setInputValue(value == null ? '' : String(value));
+  }, [value]);
 
   const remainingCharacters = (validate?.length?.max ?? NaN) - inputLength;
   const validationMessage = remainingCharacters < 0

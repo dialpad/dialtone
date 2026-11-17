@@ -1,5 +1,6 @@
 import { act, fireEvent, render, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { renderToString } from 'react-dom/server';
 import { INPUT_SIZES } from './InputConstants';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import { DtIcon } from '../Icon';
@@ -854,6 +855,29 @@ describe('DtInput tests', () => {
 
       expect(nativeInput()).toHaveValue('start!');
       expect(onValueChange).toHaveBeenLastCalledWith('start!');
+    });
+
+    it('leaves an input\'s unfinished IME composition alone when the parent re-renders', () => {
+      fireEvent.compositionStart(nativeInput()!);
+      fireEvent.input(nativeInput()!, { target: { value: 'composing...' } });
+
+      setProps({ value: 'external update' });
+
+      expect(nativeInput()).toHaveValue('composing...');
+    });
+
+    it('renders the initial value into server-rendered markup', () => {
+      const markup = renderToString(<DtInput label="label" defaultValue="Saved text" />);
+
+      expect(markup).toContain('value="Saved text"');
+    });
+
+    it('passes textarea-only attributes through to the textarea', () => {
+      updateWrapper({ type: 'textarea', rows: 5, cols: 20, wrap: 'hard' });
+
+      expect(nativeTextarea()).toHaveAttribute('rows', '5');
+      expect(nativeTextarea()).toHaveAttribute('cols', '20');
+      expect(nativeTextarea()).toHaveAttribute('wrap', 'hard');
     });
 
     it('passes the endIcon slot a clear function that empties and focuses the input', async () => {

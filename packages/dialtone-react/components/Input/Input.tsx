@@ -13,6 +13,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
   type Ref,
+  type TextareaHTMLAttributes,
 } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
 import { VALIDATION_MESSAGE_TYPES, type ValidationMessageType } from '../../common/constants';
@@ -61,7 +62,9 @@ export interface InputEndIconScope extends InputIconScope {
   clear: () => void;
 }
 
-type NativeAttrs = InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>;
+// Vue forwards every attribute to the native element, textarea-only ones included.
+type NativeAttrs = InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> &
+  Pick<TextareaHTMLAttributes<HTMLTextAreaElement>, 'rows' | 'cols' | 'wrap'>;
 
 interface DtInputOwnProps extends MessagesProps {
   /** Name property of the input element */
@@ -350,10 +353,12 @@ export function DtInput ({
 
   // An <input>: Vue's `:value` binding, which writes the value back on every render where the element's differs.
   // It isn't React's controlled `value`, which would undo each keystroke of an IME composition the moment it
-  // happens (the input reports nothing until the composition ends).
+  // happens (the input reports nothing until the composition ends). Like the textarea's below, it leaves a
+  // composition alone: a parent re-rendering mid-composition would otherwise overwrite the unfinished text, which
+  // Vue's component never re-renders for.
   useLayoutEffect(() => {
     const el = inputRef.current;
-    if (isTextarea || !el) return;
+    if (isTextarea || !el || isComposing.current) return;
     const next = domValue(currentValue);
     // A file input's value can only be cleared.
     if (el.value !== next && (type !== INPUT_TYPES.FILE || next === '')) el.value = next;
@@ -459,6 +464,9 @@ export function DtInput ({
     name,
     disabled,
     autoComplete: autoComplete ?? 'off',
+    // The initial native value, so server-rendered markup carries it (layout effects don't run there); the layout
+    // effects above keep the live value in sync. A file input's value can't be set.
+    defaultValue: type === INPUT_TYPES.FILE ? undefined : domValue(currentValue),
     className: cx(
       'd-input__input',
       isTextarea ? 'd-textarea' : 'd-input',
