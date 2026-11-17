@@ -297,6 +297,12 @@ describe('DtBadge Tests', () => {
         expect(consoleError).toHaveBeenCalledWith('DtBadge error: decoration prop cannot be used with startIcon or endIcon.');
       });
 
+      it('should log nothing for a decoration with empty Fragment icons', () => {
+        updateWrapper({ decoration: 'red-400', startIcon: <>{[]}</>, endIcon: <><>{null}</></> });
+
+        expect(consoleError).not.toHaveBeenCalled();
+      });
+
       it('should log nothing for a valid combination', () => {
         updateWrapper({ decoration: 'red-400', startIcon: undefined });
 
