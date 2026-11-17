@@ -14,6 +14,15 @@ export default {
   component: 'DtValidationMessages', label: '', page: 'ValidationMessages', family: 'Text fields',
   snapTokens: true,
 
+  // How the set reads in Dev Mode (see code-connect.mjs). The `type` axis writes the one-message array the
+  // component takes (`:validation-messages="[{ message, type }]"`); a second row is a second instance.
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/ValidationMessages/ValidationMessages.vue',
+    // The code has no default message, so the Figma default (critical) is not the component's own: written for all.
+    alwaysAxes: ['type'],
+    selfClosing: true,
+  },
+
   axes: {
     type: ['critical', 'warning', 'positive', 'info'],
   },

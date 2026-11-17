@@ -20,11 +20,10 @@ export default {
   // item spacing, so the audit sees a spacing binding with no declaration on the parent.
   foldedMargins: ['spacing/100'],
 
-  // How the set reads in Dev Mode (see code-connect.mjs).
-  codeConnect: {
-    source: 'packages/dialtone-vue/components/Skeleton/Skeleton.vue',
-    selfClosing: true,
-  },
+  // NO Code Connect template, on purpose. `kind` and `size` both change ONE nested option prop (`shapeOption`,
+  // `textOption`, `listItemOption`), and the generator writes each axis's attributes on its own, so a circle of
+  // any size would read `size: 100`. Needs a template that combines the two axes; until then Dev Mode shows the
+  // plain mapping.
 
   axes: {
     kind: ['text', 'heading', 'paragraph', 'circle', 'square', 'listItem'],
