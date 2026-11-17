@@ -158,12 +158,13 @@ test('pnpm publication attaches the release branch without moving the qualified 
   const dir = mkdtempSync(join(tmpdir(), 'publish-checkout-'));
   const run = (file, args, env = {}) => execFileSync(file, args, {
     cwd: dir, encoding: 'utf8', stdio: 'pipe', timeout: 30000,
-    env: { ...process.env, npm_config_cache: join(dir, 'cache'), npm_config_offline: 'true',
-      npm_config_update_notifier: 'false', ...env },
+    env: { ...process.env, pnpm_config_cache_dir: join(dir, 'cache'), pnpm_config_offline: 'true',
+      pnpm_config_update_notifier: 'false', ...env },
   }).trim();
   const git = (...args) => run('git', args);
   try {
     git('init', '-q'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
+    git('config', 'commit.gpgsign', 'false');
     const { packageManager } = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
     writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'publication-dry-run-fixture', version: '1.0.0', packageManager }));
     writeFileSync(join(dir, '.npmrc'), 'publish-branch=production\n');
@@ -173,9 +174,12 @@ test('pnpm publication attaches the release branch without moving the qualified 
     git('checkout', '--detach', '-q', sha);
     assert.throws(() => run('pnpm', ['publish', '--dry-run']), error => /ERR_PNPM_GIT_UNKNOWN_BRANCH/.test(error.stdout));
     // A named branch at a different commit is not an acceptable substitute for the pinned source.
+    git('commit', '--allow-empty', '-qm', 'another source');
+    const otherSha = git('rev-parse', 'HEAD');
+    git('checkout', '--detach', '-q', sha);
     const attachAt = (branch, source = sha) => run('bash', ['-e', '-o', 'pipefail', '-c', attach.run],
       { RELEASE_SHA: source, RELEASE_BRANCH: branch });
-    assert.throws(() => attachAt('production', '0'.repeat(40)));
+    assert.throws(() => attachAt('production', otherSha));
     for (const branch of ['production', 'next']) {
       attachAt(branch);
       assert.equal(git('branch', '--show-current'), branch);
