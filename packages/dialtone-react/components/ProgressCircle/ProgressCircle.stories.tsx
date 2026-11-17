@@ -10,7 +10,7 @@ import {
   type ProgressCircleSize,
 } from './ProgressCircleConstants';
 
-type ProgressCircleStoryArgs = DtProgressCircleProps;
+type ProgressCircleStoryArgs = Omit<DtProgressCircleProps, 'ariaLabel' | 'aria-label'> & { ariaLabel: string };
 
 export const argsData: Partial<ProgressCircleStoryArgs> = {
   ariaLabel: 'Upload progress',

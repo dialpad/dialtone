@@ -7,10 +7,20 @@ import {
   type ProgressCircleSize,
 } from './ProgressCircleConstants';
 
-interface DtProgressCircleOwnProps {
-  /** Accessible label read by screen readers. */
-  ariaLabel: string;
+// Vue reads a hyphenated `aria-label` as the `ariaLabel` prop, so either spelling satisfies the required label.
+type DtProgressCircleLabelProps =
+  | {
+    /** Accessible label read by screen readers. */
+    ariaLabel: string;
+    'aria-label'?: string;
+  }
+  | {
+    ariaLabel?: undefined;
+    /** Accessible label read by screen readers (same as `ariaLabel`). */
+    'aria-label': string;
+  };
 
+interface DtProgressCircleOwnProps {
   /** Current progress value (0–100). */
   progress?: number;
 
@@ -28,7 +38,9 @@ interface DtProgressCircleOwnProps {
 }
 
 export type DtProgressCircleProps =
-  DtProgressCircleOwnProps & Omit<ComponentPropsWithRef<'div'>, keyof DtProgressCircleOwnProps>;
+  DtProgressCircleOwnProps &
+  DtProgressCircleLabelProps &
+  Omit<ComponentPropsWithRef<'div'>, keyof DtProgressCircleOwnProps | 'aria-label'>;
 
 const STROKE_WIDTH = 3.25;
 const CIRCLE_RADIUS = 12 - (STROKE_WIDTH / 2);
