@@ -253,6 +253,10 @@ export default {
       return this.optionIds.get(value);
     },
 
+    controlledDescriptionId (value) {
+      return `${this.controlledOptionId(value)}-description`;
+    },
+
     controlledRowSelected (value) {
       if (!this.controlledState.valid) return false;
       return (this.controlledDraft ?? this.controlledState.values).includes(value);
@@ -281,7 +285,9 @@ export default {
       this.reconcileCheckboxes();
     },
 
+    /** Built-in row activation. Refuses an unavailable option itself rather than trusting the row to stay silent. */
     selectControlledOption (value) {
+      if (this.controlledState.rows.find(row => row.option.value === value)?.disabled) return;
       this.commitControlled(value, 'select', true);
     },
 

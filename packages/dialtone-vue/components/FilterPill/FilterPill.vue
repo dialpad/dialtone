@@ -339,24 +339,36 @@
             </dt-text>
           </li>
           <dt-list-item
-            v-for="option in controlledState.options"
-            :id="controlledOptionId(option.value)"
-            :key="option.value"
+            v-for="row in controlledState.rows"
+            :id="controlledOptionId(row.option.value)"
+            :key="row.option.value"
             role="menuitemradio"
             data-qa="dt-filter-pill__option"
             navigation-type="arrow-keys"
-            :selected="controlledRowSelected(option.value)"
-            :aria-disabled="!controlledCanSelect || undefined"
-            @click="selectControlledOption(option.value)"
+            :selected="controlledRowSelected(row.option.value)"
+            :disabled="!controlledCanSelect || row.disabled"
+            :aria-describedby="row.description ? controlledDescriptionId(row.option.value) : undefined"
+            @click="selectControlledOption(row.option.value)"
           >
-            {{ option.label }}
+            {{ row.option.label }}
             <template #selected>
               <dt-icon-check
                 size="200"
-                :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(option.value) }"
+                :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(row.option.value) }"
                 aria-hidden="true"
                 data-qa="dt-filter-pill__selection-indicator"
               />
+            </template>
+            <template
+              v-if="row.description"
+              #subtitle
+            >
+              <!-- Hidden from the row's name; aria-describedby still reads it as the description. -->
+              <span
+                :id="controlledDescriptionId(row.option.value)"
+                aria-hidden="true"
+                data-qa="dt-filter-pill__option-description"
+              >{{ row.description }}</span>
             </template>
             <template
               v-if="$slots.optionEnd"
@@ -370,8 +382,8 @@
                 -->
                 <slot
                   name="optionEnd"
-                  :option="option"
-                  :selected="controlledRowSelected(option.value)"
+                  :option="row.option"
+                  :selected="controlledRowSelected(row.option.value)"
                 />
               </span>
             </template>
