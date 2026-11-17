@@ -608,6 +608,31 @@ describe('DtCombobox Tests', () => {
       });
     });
 
+    describe('When listId and the item ids are not valid CSS identifiers', () => {
+      it('should find the list and the active item without throwing', () => {
+        mockSlots = {
+          ...inputSlot,
+          list: (
+            <ol id="123">
+              <li id="a:b" role="option">item1</li>
+              <li id="2" role="option">item2</li>
+            </ol>
+          ),
+        };
+        mockProps = { listId: '123', showList: false };
+        updateWrapper();
+
+        setProps({ showList: true });
+
+        expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledWith(0);
+        expect(queryInput()).toHaveAttribute('aria-activedescendant', 'a:b');
+
+        keyDown('ArrowDown');
+
+        expect(queryInput()).toHaveAttribute('aria-activedescendant', '2');
+      });
+    });
+
     describe('When the mouse moves over an item', () => {
       it('should highlight that item', () => {
         mockSlots = { ...inputSlot, list: items };

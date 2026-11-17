@@ -199,8 +199,15 @@ export function DtCombobox ({
   const outsideListRef = useRef<HTMLElement | null>(null);
   const [outsideList, setOutsideList] = useState<HTMLElement | null>(null);
 
+  // Ids come from consumers and may not be valid CSS identifiers (`123`, `a:b`), where `#${id}` throws a
+  // SyntaxError. Match the attribute instead, which finds the same element for any id.
+  const findById = (root: Element | null | undefined, id: string): HTMLElement | null => {
+    if (!root) return null;
+    return Array.from(root.querySelectorAll<HTMLElement>('[id]')).find(el => el.id === id) ?? null;
+  };
+
   const getListElement = (): HTMLElement | null | undefined => (
-    outsideListRef.current ?? listWrapperRef.current?.querySelector<HTMLElement>(`#${listId}`)
+    outsideListRef.current ?? findById(listWrapperRef.current, listId)
   );
 
   const nav: KeyboardListNavigationState = useKeyboardListNavigation({
@@ -216,7 +223,7 @@ export function DtCombobox ({
 
   function getActiveItem (highlightId: string | undefined): HTMLElement | null | undefined | '' {
     if (!highlightId) return '';
-    return getListElement()?.querySelector<HTMLElement>(`#${highlightId}`);
+    return findById(getListElement(), highlightId);
   }
 
   const activeItemId = (!showList || nav.highlightIndex < 0 || loading) ? undefined : nav.highlightId;
