@@ -132,6 +132,14 @@ export function DtImageViewer ({
     }
   }, [isOpen]);
 
+  // A parent can remove an open viewer, so `isOpen` never renders as false: give focus back on unmount too. Kept apart
+  // from `modalEl` so a portal relocation doesn't restore focus early.
+  const isOpenRef = useRef(isOpen);
+  isOpenRef.current = isOpen;
+  useEffect(() => () => {
+    if (isOpenRef.current) previousActiveElement.current?.focus();
+  }, []);
+
   // Focus the close button whenever the modal mounts open, from a click or a controlled `open`. It depends on `modalEl`
   // so it runs after the modal mounts in its resolved appendTo target (a moved portal re-mounts it).
   useEffect(() => {

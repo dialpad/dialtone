@@ -109,6 +109,20 @@ describe('DtImageViewer Tests', () => {
       // The focus trap intercepts Tab at the boundary so focus cannot escape the modal.
       expect(tabEvent.defaultPrevented).toBe(true);
     });
+
+    it('restores focus to the previously focused element when an open viewer unmounts', async () => {
+      const outside = document.createElement('button');
+      document.body.appendChild(outside);
+      outside.focus();
+      const result = render(<DtImageViewer {...baseProps} open={true} />);
+      await flushPromises();
+      expect(document.activeElement).not.toBe(outside);
+
+      result.unmount();
+
+      expect(document.activeElement).toBe(outside);
+      outside.remove();
+    });
   });
 
   describe('Interactivity Tests', () => {
