@@ -81,5 +81,40 @@ describe('DtNoticeContent tests', () => {
         expect(content).toBeNull();
       });
     });
+
+    describe('When the slots are Fragments', () => {
+      const renderWith = (extra: Partial<DtNoticeContentProps>) => {
+        cleanup();
+        result = render(<DtNoticeContent {...baseProps} message="Saved" {...extra} />);
+        _setChildWrappers();
+      };
+
+      it('falls back to the message for an empty Fragment', () => {
+        renderWith({ children: <>{false}</> });
+        expect(content?.textContent).toBe('Saved');
+      });
+
+      it('falls back to the header text for an empty Fragment', () => {
+        renderWith({ header: <>{null}</> });
+        expect(header?.textContent).toBe(baseProps.headerText);
+      });
+
+      it('renders a populated Fragment', () => {
+        renderWith({ children: <>populated</> });
+        expect(content?.textContent).toBe('populated');
+      });
+
+      it('renders a Fragment holding numeric zero', () => {
+        renderWith({ children: <>{0}</> });
+        expect(content?.textContent).toBe('0');
+      });
+
+      it('does not render the message element for an empty Fragment without a message', () => {
+        cleanup();
+        result = render(<DtNoticeContent {...baseProps} children={<>{false}</>} />);
+        _setChildWrappers();
+        expect(content).toBeNull();
+      });
+    });
   });
 });

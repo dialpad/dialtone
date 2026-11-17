@@ -78,5 +78,27 @@ describe('DtNoticeIcon tests', () => {
         expect(icon).toHaveClass('d-icon--accessibility');
       });
     });
+
+    describe('When the slot is a Fragment', () => {
+      it('Should render the default icon for an empty Fragment', () => {
+        props = { ...props, kind: 'base' };
+        slotsData = { children: <>{false}</> };
+        _setWrappers();
+        expect(icon).toHaveClass('d-icon--bell');
+      });
+
+      it('Should render the custom icon of a populated Fragment', () => {
+        slotsData = { children: <><DtIcon name="accessibility" /></> };
+        _setWrappers();
+        expect(icon).toHaveClass('d-icon--accessibility');
+      });
+
+      it('Should render numeric zero in a Fragment', () => {
+        props = { ...props, kind: 'base' };
+        slotsData = { children: <>{0}</> };
+        _setWrappers();
+        expect(root()?.textContent).toBe('0');
+      });
+    });
   });
 });

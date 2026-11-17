@@ -1,6 +1,5 @@
-import { Children, type HTMLAttributes, type ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
-import { hasContent } from '../../common/slots';
 import {
   DtIconAlertCircle,
   DtIconAlertTriangle,
@@ -9,6 +8,7 @@ import {
   DtIconInfo,
 } from '../../icons';
 import type { NoticeKind } from './NoticeConstants';
+import { hasSlotContent, withSlotFallback } from './slotFallback';
 
 const kindToIcon = new Map<string, ReactNode>([
   ['info', <DtIconInfo size="400" />],
@@ -35,7 +35,7 @@ export interface DtNoticeIconProps extends Omit<HTMLAttributes<HTMLDivElement>, 
 export function DtNoticeIcon ({ kind = 'base', iconClass = '', children, className, ...rest }: DtNoticeIconProps) {
   const defaultIcon = kindToIcon.get(kind);
 
-  if (!defaultIcon && !hasContent(children)) return null;
+  if (!defaultIcon && !hasSlotContent(children)) return null;
 
   return (
     <div
@@ -43,7 +43,7 @@ export function DtNoticeIcon ({ kind = 'base', iconClass = '', children, classNa
       className={cx('d-notice__icon', iconClass, className)}
       {...rest}
     >
-      {Children.toArray(children).length > 0 ? children : defaultIcon}
+      {withSlotFallback(children, defaultIcon)}
     </div>
   );
 }

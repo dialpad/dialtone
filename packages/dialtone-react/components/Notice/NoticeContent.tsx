@@ -1,7 +1,7 @@
-import { Children, type HTMLAttributes, type ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
-import { hasContent } from '../../common/slots';
 import { DtText } from '../Text';
+import { hasSlotContent, withSlotFallback } from './slotFallback';
 
 export interface DtNoticeContentProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /**
@@ -41,8 +41,6 @@ export interface DtNoticeContentProps extends Omit<HTMLAttributes<HTMLDivElement
   children?: ReactNode;
 }
 
-const withFallback = (slot: ReactNode, fallback: ReactNode) => (Children.toArray(slot).length > 0 ? slot : fallback);
-
 export function DtNoticeContent ({
   headerText,
   message,
@@ -61,7 +59,7 @@ export function DtNoticeContent ({
       data-qa="notice-content"
       {...rest}
     >
-      {(headerText || hasContent(header)) && (
+      {(headerText || hasSlotContent(header)) && (
         <DtText
           id={headerId}
           kind="headline"
@@ -72,10 +70,10 @@ export function DtNoticeContent ({
           className={cx('d-notice__title', headerClass)}
           data-qa="notice-content-title"
         >
-          {withFallback(header, headerText)}
+          {withSlotFallback(header, headerText)}
         </DtText>
       )}
-      {(message || hasContent(children)) && (
+      {(message || hasSlotContent(children)) && (
         <DtText
           id={contentId}
           kind="body"
@@ -85,7 +83,7 @@ export function DtNoticeContent ({
           className="d-notice__message"
           data-qa="notice-content-message"
         >
-          {withFallback(children, message)}
+          {withSlotFallback(children, message)}
         </DtText>
       )}
     </div>

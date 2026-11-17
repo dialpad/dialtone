@@ -156,6 +156,7 @@ function NoticeDefault ({
   return (
     <DtNotice
       kind={args.kind}
+      role={args.role}
       headerText={args.headerText}
       headerId={args.headerId}
       contentId={args.contentId}
