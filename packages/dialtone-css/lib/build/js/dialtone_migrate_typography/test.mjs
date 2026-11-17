@@ -1259,6 +1259,10 @@ describe('uncertain overrides keep their utility class with review', () => {
       `${CONFLICT}<dt-text variant="body-md"\n  :style.camel="{fontWeight: 400}"\n  class="d-fw-bold">A</dt-text>`],
     ['comment before a static declaration', '<dt-text variant="body-md"\n  style="/* note */font-weight: 400"\n  class="d-fw-bold">A</dt-text>',
       `${CONFLICT}<dt-text variant="body-md"\n  style="/* note */font-weight: 400"\n  class="d-fw-bold">A</dt-text>`],
+    ['comment delimiters inside CSS strings', `<dt-text class="d-fw-bold" style="--start: '/*'; font-weight: 400; --end: '*/'">A</dt-text>`,
+      `${CONFLICT}<dt-text class="d-fw-bold" style="--start: '/*'; font-weight: 400; --end: '*/'">A</dt-text>`],
+    ['escaped quote inside a CSS string', String.raw`<dt-text class="d-fw-bold" style="--a: 'it\'s /*'; font-weight: 400; --b: '*/'">A</dt-text>`,
+      CONFLICT + String.raw`<dt-text class="d-fw-bold" style="--a: 'it\'s /*'; font-weight: 400; --b: '*/'">A</dt-text>`],
   ];
   for (const [label, input, expected] of cases) {
     it(label, () => { assert.equal(run(input), expected); });
