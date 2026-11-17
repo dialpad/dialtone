@@ -1,7 +1,11 @@
+import type { ElementType } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { HighlightIdContext } from '../../common/keyboard-list-navigation';
-import { DtListItem, type DtListItemProps } from './ListItem';
+import { DtListItem, type DtListItemProps as ListItemProps } from './ListItem';
+
+// The tests switch elementType, so props are typed for any element.
+type DtListItemProps = ListItemProps<ElementType>;
 import { LIST_ITEM_NAVIGATION_TYPES } from './ListItemConstants';
 
 const MOCK_CLICK_STUB = vi.fn();

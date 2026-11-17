@@ -18,7 +18,10 @@ import {
   type ListItemType,
 } from './ListItemConstants';
 
-interface DtListItemOwnProps {
+interface DtListItemOwnProps<T extends ElementType = 'li'> {
+  /** Additional classes for the root element. */
+  className?: string;
+
   /** Id for the item. Defaults to a generated unique id. */
   id?: string;
 
@@ -29,7 +32,7 @@ interface DtListItemOwnProps {
   role?: 'listitem' | 'menuitem' | 'option';
 
   /** HTML element type (tag name) of the content wrapper element. */
-  elementType?: string;
+  elementType?: T;
 
   /**
    * The type of child list item to use.
@@ -93,16 +96,17 @@ interface DtListItemOwnProps {
 }
 
 /** Like Vue's `$attrs`, every other attribute goes on the root element, `ref` included. */
-export type DtListItemProps = DtListItemOwnProps & Omit<ComponentPropsWithRef<'li'>, keyof DtListItemOwnProps>;
+export type DtListItemProps<T extends ElementType = 'li'> =
+  DtListItemOwnProps<T> & Omit<ComponentPropsWithRef<T>, keyof DtListItemOwnProps<T>>;
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
  * @see https://dialtone.dialpad.com/components/list_item.html
  */
-export function DtListItem ({
+export function DtListItem<T extends ElementType = 'li'> ({
   id: idProp,
   role = 'listitem',
-  elementType = 'li',
+  elementType = 'li' as T, // the default is the T default
   type = LIST_ITEM_TYPES.DEFAULT,
   navigationType = LIST_ITEM_NAVIGATION_TYPES.NONE,
   selected = false,
@@ -121,7 +125,7 @@ export function DtListItem ({
   onMouseMove,
   onMouseLeave,
   ...rest
-}: DtListItemProps) {
+}: DtListItemProps<T>) {
   const generatedId = useId();
   const id = idProp ?? generatedId;
   const highlightId = useHighlightIdContext();
@@ -140,12 +144,16 @@ export function DtListItem ({
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     const root = event.currentTarget;
-    const code = event.code.toLowerCase();
+    // event.key, not event.code, so the keypad Enter activates too.
+    const isEnter = event.key === 'Enter';
+    const isSpace = event.key === ' ';
     // A native button already turns Enter and Space into a click, and a link Enter, so synthesizing one would
     // call onClick twice. Keys typed in a descendant (an input) don't activate the item.
     const activatesNatively = root instanceof HTMLButtonElement ||
-      (root instanceof HTMLAnchorElement && root.hasAttribute('href') && code === 'enter');
-    if (['enter', 'space'].includes(code) && event.target === root && !activatesNatively) {
+      (root instanceof HTMLAnchorElement && root.hasAttribute('href') && isEnter);
+    if ((isEnter || isSpace) && event.target === root && !activatesNatively) {
+      // Space would otherwise scroll the page.
+      if (isSpace) event.preventDefault();
       onClick?.(event);
     }
     onKeyDown?.(event);
@@ -161,8 +169,7 @@ export function DtListItem ({
     onMouseLeave?.(event);
   };
 
-  // Any tag name: a string outside React's intrinsic element names isn't assignable to ElementType without the cast.
-  const Component = elementType as ElementType;
+  const Component: ElementType = elementType;
   return (
     <Component
       id={id}
