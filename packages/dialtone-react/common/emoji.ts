@@ -129,10 +129,19 @@ export function validateCustomEmojiJson (json: unknown) {
       }
     } else {
       // new custom emoji
+      // Lookup and rendering read these fields, so a malformed entry is rejected before it joins the catalog.
       const _validateRequiredProps = () =>
+        !!customEmojiValue &&
+        typeof customEmojiValue === 'object' &&
         customEmojiRequiredProps.every((val) => {
-          return customEmojiValue[val] !== undefined;
-        });
+          return customEmojiValue[val] !== undefined && customEmojiValue[val] !== null;
+        }) &&
+        typeof customEmojiValue.shortname === 'string' &&
+        Array.isArray(customEmojiValue.shortname_alternates) &&
+        customEmojiValue.shortname_alternates.every((alt) => typeof alt === 'string') &&
+        typeof customEmojiValue.name === 'string' &&
+        typeof customEmojiValue.unicode_output === 'string' &&
+        typeof customEmojiValue.image === 'string';
 
       if (_validateRequiredProps()) {
         emojiJson[customEmojiKey] = customEmojiValue as unknown as EmojiData;
@@ -156,7 +165,8 @@ export function shortcodeToEmojiData (shortcode: string): EmojiData | undefined 
       return;
     }
     const data = o as EmojiData;
-    if ('shortname' in data) {
+    // An emoji entry has a string shortname; the catalog itself can hold an entry keyed `shortname`.
+    if (typeof data.shortname === 'string' && Array.isArray(data.shortname_alternates)) {
       if (data.shortname === shortcode || data.shortname_alternates.includes(shortcode)) {
         data.key = key;
         reference = data;

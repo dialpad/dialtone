@@ -146,6 +146,29 @@ describe('DtEmoji Tests', () => {
       expect(errorSpy).toHaveBeenCalled();
       errorSpy.mockRestore();
     });
+
+    it('rejects entries with malformed fields, so lookups keep working', () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const valid = {
+        name: 'x', unicode_output: 'x', image: 'x', custom: true, date_added: 1,
+        shortname: ':x:', shortname_alternates: [],
+      };
+
+      setCustomEmojiJson({
+        badalts: { ...valid, shortname: ':badalts:', shortname_alternates: null },
+        badname: { ...valid, shortname: 7 },
+        shortname: { ...valid, shortname: ':catalogkey:' },
+      });
+
+      expect(Object.hasOwn(getEmojiData(), 'badalts')).toBe(false);
+      expect(Object.hasOwn(getEmojiData(), 'badname')).toBe(false);
+
+      setProps({ code: ':invalidcode:' });
+      expect(emoji).toHaveAttribute('title', 'Invalid Emoji');
+
+      delete (getEmojiData() as Record<string, unknown>).shortname;
+      errorSpy.mockRestore();
+    });
   });
 
   describe('Accessibility Tests', () => {
