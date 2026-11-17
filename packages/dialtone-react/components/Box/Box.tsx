@@ -6,6 +6,7 @@ import {
   useState,
   type ComponentPropsWithRef,
   type ElementType,
+  type HTMLAttributes,
   type Ref,
 } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
@@ -492,6 +493,8 @@ export function DtBox<T extends DtBoxAs = 'div'> (props: DtBoxProps<T>) {
   const rootRef = useMemo(() => mergeRefs<HTMLElement>(setEl, forwardedRef), [forwardedRef]);
 
   const Component: ElementType = as;
+  // The props of whichever element `as` names; TypeScript can't relate a generic `as` to one element's props.
+  const attrs = rest as HTMLAttributes<HTMLElement>;
   const boxClassName = cx(
     'd-box',
     // Padding
@@ -540,7 +543,7 @@ export function DtBox<T extends DtBoxAs = 'div'> (props: DtBoxProps<T>) {
     <Component
       key={scrollbar ? 'scrollbar' : 'plain'}
       data-qa="dt-box"
-      {...rest}
+      {...attrs}
       ref={rootRef}
       className={boxClassName}
     >

@@ -41,6 +41,16 @@ describe('DtBox', () => {
   const box = () => screen.getByTestId('dt-box');
   const classes = () => Array.from(box().classList);
 
+  // jsdom has `CSS` but not `CSS.registerProperty`, which the scrollbar calls when it sets up. Vue's test replaces the
+  // scrollbar directive with a no-op instead; here the real scrollbar runs, so give jsdom the browser API it lacks.
+  beforeAll(() => {
+    Object.defineProperty(CSS, 'registerProperty', { value: () => {}, configurable: true, writable: true });
+  });
+
+  afterAll(() => {
+    Reflect.deleteProperty(CSS, 'registerProperty');
+  });
+
   afterEach(() => {
     vi.restoreAllMocks();
   });
