@@ -35,13 +35,7 @@ type Story = StoryObj<DtPresenceProps>;
 
 // PresenceDefault.story.vue
 function PresenceDefault (args: DtPresenceProps) {
-  return (
-    <DtPresence
-      presence={args.presence}
-      srText={args.srText}
-      showIcon={args.showIcon}
-    />
-  );
+  return <DtPresence {...args} />;
 }
 
 // PresenceVariants.story.vue
