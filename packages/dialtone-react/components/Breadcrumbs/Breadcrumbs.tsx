@@ -1,8 +1,9 @@
-import { Children, type HTMLAttributes, type ReactNode, type Ref } from 'react';
+import type { HTMLAttributes, ReactNode, Ref } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
 import { useI18n } from '../../common/localization';
 import { DtBreadcrumbItem, type DtBreadcrumbItemProps } from './BreadcrumbItem';
 import { BREADCRUMBS_INVERTED_MODIFIER } from './BreadcrumbsConstants';
+import { slotRendersContent } from './slotRendersContent';
 
 export interface DtBreadcrumbsProps extends Omit<HTMLAttributes<HTMLElement>, 'children' | 'aria-label'> {
   /**
@@ -56,7 +57,7 @@ export function DtBreadcrumbs ({
       ref={ref}
     >
       <ol className={cx(['d-breadcrumbs__list', listClass])}>
-        {Children.toArray(children).length > 0
+        {slotRendersContent(children)
           ? children
           : breadcrumbs.map((item, index) => (
             <DtBreadcrumbItem

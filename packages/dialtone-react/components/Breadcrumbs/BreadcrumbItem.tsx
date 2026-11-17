@@ -1,7 +1,8 @@
-import { Children, type ReactNode, type Ref } from 'react';
+import type { ReactNode, Ref } from 'react';
 import { cx } from '../../common/cx';
 import { DtLink, MUTED, type DtLinkProps } from '../Link';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './BreadcrumbsConstants';
+import { slotRendersContent } from './slotRendersContent';
 
 /**
  * Vue binds `class` and `style` to the `<li>` and every other attribute to the link, so the props are the link's
@@ -53,7 +54,7 @@ export function DtBreadcrumbItem ({
         {...rest}
         className="d-breadcrumbs__link"
       >
-        {Children.toArray(children).length > 0 ? children : label}
+        {slotRendersContent(children) ? children : label}
       </DtLink>
     </li>
   );

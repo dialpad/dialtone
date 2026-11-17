@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { createElement, type ReactNode } from 'react';
 import { DtBreadcrumbItem } from './BreadcrumbItem';
 import { DtBreadcrumbs, type DtBreadcrumbsProps } from './Breadcrumbs';
 
@@ -76,11 +77,35 @@ type Story = StoryObj<BreadcrumbsStoryArgs>;
 
 // Templates
 // BreadcrumbsDefault.story.vue
-function BreadcrumbsDefault ({ default: defaultSlot, breadcrumbs, inverted }: BreadcrumbsStoryArgs) {
+// Vue's html-fragment puts the HTML straight into the list, so turn the string into nodes instead of wrapping it.
+function htmlToNodes (html: string): ReactNode[] {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  const convert = (node: Node, key: number): ReactNode => {
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+    if (node.nodeType !== Node.ELEMENT_NODE) return null;
+    const el = node as Element;
+    const props: Record<string, unknown> = { key };
+    for (const { name, value } of Array.from(el.attributes)) {
+      if (name === 'class') props.className = value;
+      else if (name === 'for') props.htmlFor = value;
+      else if (name === 'style') {
+        props.style = Object.fromEntries(value.split(';').filter(d => d.includes(':')).map(d => {
+          const [prop, ...val] = d.split(':');
+          return [prop.trim().replace(/-([a-z])/g, (_, c: string) => c.toUpperCase()), val.join(':').trim()];
+        }));
+      } else props[name] = value;
+    }
+    return createElement(el.tagName.toLowerCase(), props, ...Array.from(el.childNodes).map(convert));
+  };
+  return Array.from(template.content.childNodes).map(convert);
+}
+
+function BreadcrumbsDefault ({ default: defaultSlot, ...args }: BreadcrumbsStoryArgs) {
   return (
-    <div className={inverted ? 'd-bgc-contrast' : undefined}>
-      <DtBreadcrumbs breadcrumbs={breadcrumbs} inverted={inverted}>
-        {defaultSlot ? <div dangerouslySetInnerHTML={{ __html: defaultSlot }} /> : undefined}
+    <div className={args.inverted ? 'd-bgc-contrast' : undefined}>
+      <DtBreadcrumbs {...args}>
+        {defaultSlot ? htmlToNodes(defaultSlot) : undefined}
       </DtBreadcrumbs>
     </div>
   );
