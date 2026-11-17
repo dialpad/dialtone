@@ -1,0 +1,22 @@
+packages/combinator/src/components/option_bar/option_bar_control.test.js
+  s_f1b6a2e8befce4::t_e0b729582c81ed 276-289
+packages/combinator/src/components/option_bar/option_bar_control.vue
+  s_f1b6a2e8befce4::t_40386d6d656384 322
+  s_f1b6a2e8befce4::t_5326208265322a 314-319
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9683dba6d4e08c3557134e735256e86fb7d41ca7",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

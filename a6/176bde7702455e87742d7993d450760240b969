@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/Scroller/Scroller.test.js
+  s_e077254e3067fe::t_ae8eee4b6707c8 201-202,212,216-217
+  s_e077254e3067fe::t_f89eb16ce1e447 1
+  s_e077254e3067fe::t_d4ad99d1ac1347 203-211,215
+  s_e077254e3067fe::t_39b0bee81a98e9 213-214
+packages/dialtone-vue/components/Scroller/Modules/CoreScroller.vue
+  s_e077254e3067fe::t_1e2a286872b6e8 333-336
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a6176bde7702455e87742d7993d450760240b969",
+  "prompts": {},
+  "sessions": {
+    "s_e077254e3067fe": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0966f2f0-0dfc-4abd-8728-c60cae8ba0ac",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
