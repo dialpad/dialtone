@@ -1,0 +1,82 @@
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_a98638d5a5be6e::t_29cf6b9a75b89d 11,16,31,36,38,45,50,65,70,84,128,514
+  s_a98638d5a5be6e::t_9e12312f418ddd 515
+packages/combinator/src/variants/variants_filter_pill.js
+  s_a98638d5a5be6e::t_0c0863ca4030a4 3,39-63,68
+  s_a98638d5a5be6e::t_dba7a37e03f3c3 20
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_a98638d5a5be6e::t_d26f284ffb449e 872
+  s_a98638d5a5be6e::t_03a5dc16cfab99 127,866-871
+packages/combinator/src/components/renderer/renderer.test.js
+  s_a98638d5a5be6e::t_225e44e23484ec 45-46
+  s_a98638d5a5be6e::t_c006060661a36a 2,10-11,13-16,18-44,47-51,56-88
+  s_a98638d5a5be6e::t_a5d98fc781eba2 12,17,52-55
+  s_a98638d5a5be6e::t_7d8e46972991f9 89
+packages/dialtone-css/lib/build/less/components/dropdown.less
+  s_a98638d5a5be6e::t_8987f4c90eb0b1 16-20,23-31
+  s_a98638d5a5be6e::t_0cabb67b6b9797 21-22
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_a98638d5a5be6e::t_8987f4c90eb0b1 21,371-380
+  s_a98638d5a5be6e::t_5e56093fce35ea 453,457,502-529,547,575,586,596,605
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_a98638d5a5be6e::t_29cf6b9a75b89d 272
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_a98638d5a5be6e::t_148abb5d0be1c0 71,77-80
+  s_a98638d5a5be6e::t_dba7a37e03f3c3 15,74-76,81-82
+  s_a98638d5a5be6e::t_458068db457bd7 247-248,325-326
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_a98638d5a5be6e::t_bac7d6b7bfe744 268-270,276-290,292-295,297-301,309-337
+  s_a98638d5a5be6e::t_a76d3bcc999415 291,296
+  s_a98638d5a5be6e::t_94a7dc634c1086 302-308
+packages/combinator/src/lib/code_copy.test.js
+  s_a98638d5a5be6e::t_bac7d6b7bfe744 51-54
+packages/dialtone-css/lib/build/less/components/filter-pill.less
+  s_a98638d5a5be6e::t_148abb5d0be1c0 95-98
+apps/dialtone-documentation/docs/components/popover.md
+  s_a98638d5a5be6e::t_87139fbdaeaaff 313
+packages/combinator/src/components/renderer/renderer.vue
+  s_a98638d5a5be6e::t_0c0863ca4030a4 9
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_a98638d5a5be6e::t_a5d98fc781eba2 160,164,195
+  s_a98638d5a5be6e::t_bdbcca2c51bffe 147,176,178,187
+  s_a98638d5a5be6e::t_0c0863ca4030a4 60-63,82-85,111-114,148,161-163,165-166,169,173,175,177,179-186,188-194,199
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_a98638d5a5be6e::t_dba7a37e03f3c3 83,86
+packages/combinator/src/components/renderer/renderer_spec_sheet_cell.vue
+  s_a98638d5a5be6e::t_0c0863ca4030a4 35
+packages/combinator/src/components/renderer/renderer_target.test.js
+  s_a98638d5a5be6e::t_225e44e23484ec 74
+  s_a98638d5a5be6e::t_97a756b368768a 15-18,26,35,38,46-48,63,79
+  s_a98638d5a5be6e::t_c006060661a36a 5,14,23-25,27-34,36-37,39-45,49-62,64-73,75-78,80-81
+  s_a98638d5a5be6e::t_c1f932fa0848ca 22
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_a98638d5a5be6e::t_8fc208b8e564c3 268
+  s_a98638d5a5be6e::t_8987f4c90eb0b1 270
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_a98638d5a5be6e::t_c419a90953ce3b 186,189,205,207-208,211,251-252,256-259,269,271-273,276-277,280-281,285-290,300-307,310-326,341-391
+  s_a98638d5a5be6e::t_cbce46b2514e8b 193,196,223-250,332
+  s_a98638d5a5be6e::t_87139fbdaeaaff 327-331,333-340,479-491
+  s_a98638d5a5be6e::t_42ac76948900c5 392
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_a98638d5a5be6e::t_29cf6b9a75b89d 104,106,108,110,112
+packages/combinator/.github/documentation/internal/SYSTEM.md
+  s_a98638d5a5be6e::t_a5d98fc781eba2 62-78
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_a98638d5a5be6e::t_29cf6b9a75b89d 251
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "72c32f5e107a2fb44b400746117d76f48c1d6891",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
