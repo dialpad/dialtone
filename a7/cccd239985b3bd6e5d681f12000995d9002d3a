@@ -1,0 +1,19 @@
+packages/dialtone-react/components/LazyShow/LazyShow.stories.tsx
+  s_6a8c1581cb5cd4::t_8c060a046f516f 3,49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a7cccd239985b3bd6e5d681f12000995d9002d3a",
+  "prompts": {},
+  "sessions": {
+    "s_6a8c1581cb5cd4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16692ebd-4afc-4f6b-9225-e1212ee2014c",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

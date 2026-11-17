@@ -1,0 +1,57 @@
+apps/dialtone-documentation/docs/.vuepress/theme/utils/pageToc.test.mjs
+  s_0d893beb12799f::t_47f248ee08d1cd 13-14,194-223,280-303,305
+  s_0d893beb12799f::t_1033cc26258715 304,306
+apps/dialtone-documentation/docs/.vuepress/theme/utils/sidebarSearch.test.mjs
+  s_0d893beb12799f::t_1214a987fe4015 1-233
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItem.vue
+  s_0d893beb12799f::t_ac3bc430b12c7e 188,269-271
+apps/dialtone-documentation/docs/.vuepress/theme/utils/sidebarSearch.js
+  s_0d893beb12799f::t_332a6d579a9a46 1-184
+apps/dialtone-documentation/docs/.vuepress/theme/utils/navRoutes.js
+  s_0d893beb12799f::t_4dddfed68578b6 1-47
+apps/dialtone-documentation/docs/.vuepress/theme/utils/navRoutes.test.mjs
+  s_0d893beb12799f::t_8b455f3e78728c 1-56
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  s_fb74aa28f644ee::t_bf35dece635e38 37-65,95-101
+  s_fb74aa28f644ee::t_06e8f94fb91632 36
+  s_fb74aa28f644ee::t_885bb7cf6b856b 102-104
+apps/dialtone-documentation/docs/.vuepress/theme/components/LayoutBody.vue
+  s_0d893beb12799f::t_aa583c6e74d3ec 9
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarFooter.vue
+  s_0d893beb12799f::t_369f5be5eeabc9 2
+  s_0d893beb12799f::t_382e7830bb88de 1,3-145
+apps/dialtone-documentation/docs/.vuepress/theme/utils/pageToc.js
+  s_0d893beb12799f::t_4c4ea0a5916ed2 139-145,161-167,177
+apps/dialtone-documentation/docs/.vuepress/theme/composables/usePageTocScrollSpy.js
+  s_0d893beb12799f::t_6c712b2144179e 1,6,9,29-31,46-48,77-78
+  s_0d893beb12799f::t_e03d3e7e92c976 98-99,101
+apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue
+  s_0d893beb12799f::t_382e7830bb88de 111,119
+  s_0d893beb12799f::t_79c66aca45ef27 127-133,182,191-192,230,235,246,259,266,269
+apps/dialtone-documentation/docs/.vuepress/theme/components/Navbar.vue
+  s_fb74aa28f644ee::t_2d2711277e5195 29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6fe97a815bcd016a0ad59c4d02a68cc04d8ccba6",
+  "prompts": {},
+  "sessions": {
+    "s_0d893beb12799f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "64640bf0-1c7e-4b94-89ea-f6741f346a31",
+        "model": "claude-opus-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
