@@ -1,0 +1,5 @@
+{
+  "DtBadge Tests › Presentation Tests › Backward compatibility › When leftIcon slot is provided (deprecated) › should render the left icon wrapper": "Tests the deprecated `leftIcon` slot, which isn't ported: no other dialtone-vue component uses it (use `startIcon`).",
+  "DtBadge Tests › Presentation Tests › Backward compatibility › When rightIcon slot is provided (deprecated) › should render the right icon wrapper": "Tests the deprecated `rightIcon` slot, which isn't ported: no other dialtone-vue component uses it (use `endIcon`).",
+  "DtBadge Tests › Presentation Tests › Backward compatibility › When both startIcon and leftIcon slots are provided › should render the new startIcon content and suppress the deprecated leftIcon": "Tests the deprecated `leftIcon` slot, which isn't ported: with no `leftIcon`, there is nothing for `startIcon` to suppress."
+}
