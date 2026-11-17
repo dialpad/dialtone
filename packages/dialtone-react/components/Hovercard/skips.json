@@ -1,0 +1,4 @@
+{
+  "DtHovercard Tests › Accessibility Tests › Focus trapping › passes focustrap=true to DtPopover when hovercard is open": "Reads DtPopover's `focustrap` prop with `findComponent(DtPopover).props(...)`, a Vue internal. The React-only test 'wraps Tab from the last focusable element to the first when the hovercard is open' checks the behaviour.",
+  "DtHovercard Tests › Accessibility Tests › Focus trapping › passes a falsy focustrap to DtPopover when hovercard is closed": "Reads DtPopover's `focustrap` prop with `findComponent(DtPopover).props(...)`, a Vue internal. The React-only test 'does not wrap Tab when the hovercard is closed' checks the behaviour."
+}
