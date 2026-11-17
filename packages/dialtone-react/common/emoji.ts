@@ -89,7 +89,10 @@ export function validateCustomEmojiJson (json: unknown) {
    * If not exists, will add the property to the emojiData object.
    */
   const _updateNativeEmojiData = (emojiData: EmojiData, propName: string, propValue: unknown) => {
-    if (emojiData[propName] === undefined) {
+    // Custom emoji json is external input: `__proto__` would set a prototype rather than a property.
+    if (propName === '__proto__') return;
+
+    if (!Object.hasOwn(emojiData, propName)) {
       if (!customEmojiProps.includes(propName)) {
         return;
       }
@@ -108,7 +111,14 @@ export function validateCustomEmojiJson (json: unknown) {
   Object.entries(json as Record<string, Record<string, unknown>>).forEach((item) => {
     const [customEmojiKey, customEmojiValue] = item;
 
-    if (customEmojiKey in emojiJson) {
+    // Own keys only, so inherited members (`constructor`, `toString`) aren't taken for native emoji, and
+    // `__proto__` never reaches the assignments below, where it would replace the data's prototype.
+    if (customEmojiKey === '__proto__') {
+      console.error('The following custom emoji key is not allowed:', customEmojiKey);
+      return;
+    }
+
+    if (Object.hasOwn(emojiJson, customEmojiKey)) {
       // custom emoji exists in emoji json which means to update some data in the native emoji
       const emojiData = emojiJson[customEmojiKey];
 

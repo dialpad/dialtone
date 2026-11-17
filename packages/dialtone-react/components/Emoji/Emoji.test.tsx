@@ -5,6 +5,7 @@ import {
   setEmojiAssetUrlLarge,
   setCustomEmojiUrl,
   setCustomEmojiJson,
+  getEmojiData,
 } from '../../common/emoji';
 import customEmojiJson from '../../common/custom-emoji.json';
 
@@ -126,6 +127,24 @@ describe('DtEmoji Tests', () => {
 
         expect(emoji).toHaveAttribute('src', MOCK_EXPECTED_POINT_UP_LIGHT);
       });
+    });
+  });
+
+  describe('Custom emoji json from outside (React-only)', () => {
+    it('does not pollute Object.prototype or the emoji data through its keys', () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const hostile = JSON.parse(
+        '{"__proto__":{"polluted":"yes"},"constructor":{"custom":true},"1f604":{"__proto__":{"polluted":"yes"}}}',
+      );
+
+      setCustomEmojiJson(hostile);
+
+      expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+      expect(Object.getPrototypeOf(getEmojiData())).toBe(Object.prototype);
+      expect(Object.getPrototypeOf(getEmojiData()['1f604'])).toBe(Object.prototype);
+      expect(Object.hasOwn(getEmojiData(), 'constructor')).toBe(false);
+      expect(errorSpy).toHaveBeenCalled();
+      errorSpy.mockRestore();
     });
   });
 
