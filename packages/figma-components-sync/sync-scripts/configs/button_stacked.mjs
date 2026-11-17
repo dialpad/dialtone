@@ -15,9 +15,17 @@
  * documented case. DtButton and DtButtonIcon cover loading.
  */
 export default {
-  component: 'DtButton', label: 'Button', page: 'ButtonStacked',
+  component: 'DtButton', label: 'Button', page: 'ButtonStacked', family: 'Buttons',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
+  // How the set reads in Dev Mode (see code-connect.mjs).
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Button/Button.vue',
+    icons: [
+      { vue: 'blockStartIcon', swap: 'Block Start Icon Choice', when: { 'Block Icon': 'blockStart' } },
+      { vue: 'blockEndIcon', swap: 'Block End Icon Choice', when: { 'Block Icon': 'blockEnd' } },
+    ],
+  },
   axes: {
     // No `inverted`: DtButton deprecates it in favour of the v-dt-mode directive.
     kind: ['default', 'muted', 'critical', 'positive'],

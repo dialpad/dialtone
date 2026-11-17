@@ -244,6 +244,17 @@ export function buildPage (cfg, merged) {
 }
 
 /**
+ * The Figma page a set is placed on: its FAMILY ("Buttons", "Feedback"), a group of related sets.
+ * The Assets panel lists a library by page, so a page per set put an extra click between the panel
+ * and every component. A set's NAME still comes from `buildPage` (`DtButtonLink`); the family only
+ * says where it lives. A config without a `family` keeps a page of its own, named as before, and a
+ * trial `--merged` build gets its own `<family> Merged` page so it cannot touch a verified set.
+ */
+export function buildFamilyPage (cfg, merged) {
+  return (cfg.family || cfg.page) + (merged && !cfg.merged ? ' Merged' : '');
+}
+
+/**
  * Does a pseudo-element actually PAINT a glyph?
  *
  * `content` is read as a literal string, so `content: ' '` — the idiom for "this

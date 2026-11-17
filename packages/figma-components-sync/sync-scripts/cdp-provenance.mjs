@@ -486,6 +486,13 @@ export function resolveDeclared (own, chain) {
   // shorthand: 400 on Banner, 200 on Notice, against a property that cannot exist
   // (B-106). The sides have already inherited from them, so nothing is lost.
   delete tokens.paddingV; delete tokens.paddingH;
+  // The same fan-out for a padding the CSS COMPUTES (`padding: var(--input-padding-y) var(--input-padding-x)`
+  // with `calc()` custom properties): it was recorded under the axis keys only, so the per-side padding the
+  // audit compares looked undeclared, and every snapped padding on a textarea read as bound-but-undeclared.
+  for (const [side, axis] of Object.entries(AXIS)) {
+    if (!computed[side] && computed[axis]) computed[side] = computed[axis];
+  }
+  delete computed.paddingV; delete computed.paddingH;
 
   return { tokens, computed, own, chain };
 }

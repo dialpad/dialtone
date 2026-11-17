@@ -14,20 +14,20 @@
  * that does, read from `.env` locally:
  *
  *   PREVIEW_FILE_KEY=…   the preview file (the one a `/sync-tokens` comment syncs the tokens into)
- *   MAIN_FILE_KEY=…      the main tokens file
+ *   MAIN_FILE_KEY=…      the main file ("Dialtone 2026")
  *
- * A personal copy of the tokens file works the same way. Add it to `targets.local.mjs`, which is
+ * A personal copy of the file works the same way. Add it to `targets.local.mjs`, which is
  * gitignored, with the same shape as the entries below.
  */
 export const TARGETS = {
   preview: {
-    label: 'Preview tokens file',
+    label: 'Preview file',
     fileKeyEnv: 'PREVIEW_FILE_KEY',
     // The preview sync names the base collection after itself (COLLECTION_NAME).
     homeCollection: 'Dialtone 2026 Preview',
   },
   main: {
-    label: 'Main tokens file',
+    label: 'Main file',
     fileKeyEnv: 'MAIN_FILE_KEY',
     homeCollection: 'Dialtone 2026',
     // The real file: a build needs `--yes`.

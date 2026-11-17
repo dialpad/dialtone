@@ -1,0 +1,36 @@
+/*
+ * The variable DtTab's selected underline is positioned with, for a tab mounted on its own.
+ *
+ * `.d-tab--is-selected::after` sits `calc(100% + var(--tablist-padding-bottom))` down, which is the gap
+ * between the tab and the list's bottom border. The variable is defined by the GROUP (`tabs.less`:
+ * `.d-tab-neux` and `.d-tab-neux > .d-tablist--xs`), so a lone tab has none and the underline has no place.
+ * When the harness container carries `dt-harness-tab` (see configs/tab.mjs) it plays both: the group
+ * element and its tab list, with the group's own values.
+ *
+ * COPIED from the component: if `tabs.less` changes these values, change them here.
+ */
+.dt-harness-tab {
+  --tablist-padding-bottom: var(--dt-spacing-100);
+}
+
+.dt-harness-tab.d-tablist--xs {
+  --tablist-padding-bottom: var(--dt-spacing-75);
+}
+
+/*
+ * A tab group that spreads its tabs (`spread` grow or equal) is as wide as the space it is given. The harness
+ * container shrinks to its content, so the equal-width tabs (`flex: 1 1 0`, `min-inline-size: 0`) collapsed and
+ * their labels wrapped; a real group sits in a column of some width, and this is one.
+ */
+#root.dt-harness-tab-spread {
+  /* `#root` is `max-content` in index.html, and an id outranks a class on its own. */
+  inline-size: 360px;
+}
+
+/*
+ * A vertical tab is `inline-size: 100%` of its list. In a group the list is a flex item that shrinks to its
+ * widest tab; as a block container it would be the page wide, and so would the tab.
+ */
+.dt-harness-tab.d-tablist--vertical {
+  display: inline-flex;
+}

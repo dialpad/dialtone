@@ -1,0 +1,11 @@
+/*
+ * Surfaces of a known width for components that fill the space they are given.
+ *
+ * The harness root is `inline-size: max-content` (index.html), so a component whose own width is a percentage
+ * (DtSkeleton's text bars are `width: 100%`, a DtDescriptionList row wraps at a share of its width) resolves
+ * against its own content and collapses. A real one sits in a column of some width, and this is one. An id
+ * outranks a class on its own, hence `#root.`.
+ */
+#root.dt-harness-width-240 {
+  inline-size: 240px;
+}

@@ -211,6 +211,8 @@ function splitByAxis (layers, ids) {
 }
 
 function slotLabel (key) {
+  // A config can name a slot (DtSegmentedControl's items are "Item 1" to "Item 3", not "Default.0").
+  if (typeof SLOT_LABELS === 'object' && SLOT_LABELS && SLOT_LABELS[key]) return SLOT_LABELS[key];
   // Title Case, like the variant properties ("Start Icon", "Link Kind"): these are the labels a
   // designer reads in the properties panel, and the panel mixed code-style and sentence-style
   // names before.

@@ -16,11 +16,19 @@
  * inside it is a DtButton, which sweeps all five states in its own set.
  */
 export default {
-  component: 'DtCollapsible', label: 'Content', page: 'Collapsible',
+  component: 'DtCollapsible', label: 'Content', page: 'Collapsible', family: 'Layout',
   // Computed spacing at the nearest token (token-snap.mjs).
   snapTokens: true,
   // Its `display: block` wrappers are vertical auto-layouts, not coordinates (see the builder).
   blockLayout: true,
+
+  // How the set reads in Dev Mode (see code-connect.mjs).
+
+  codeConnect: {
+    source: 'packages/dialtone-vue/components/Collapsible/Collapsible.vue',
+    label: false,
+    slots: [{ figma: 'Content (Slot)', vue: 'content', when: 'always' }],
+  },
 
   axes: {
     open: [false, true],

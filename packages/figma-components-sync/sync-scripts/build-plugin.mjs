@@ -99,8 +99,12 @@ for (const name of names) {
     const body = JSON.stringify(p);
     writeFileSync(`${SHARD_DIR}/${file}`, body);
     entry.page = p.page;
+    entry.family = p.family || p.page;
+    entry.slotLabels = p.slotLabels || {};
     if (p.defaultVariant) entry.defaultVariant = p.defaultVariant;
-    for (const n of p.nodes) { if (n.sl) slotKeys.add(n.sl); if (n.sw) slotKeys.add(n.sw); }
+    // A slot a config groups or names is described by that name ("Items"), not its key ("default.0").
+    const slotName = (k) => { const g = (p.slotGroups || {})[k]; return (p.slotLabels || {})[g || k] || g || k; };
+    for (const n of p.nodes) { if (n.sl) slotKeys.add(slotName(n.sl)); if (n.sw) slotKeys.add(slotName(n.sw)); }
     // A CONTENT FINGERPRINT per shard. The pipeline already refuses a spec older than
     // the code that produced it, but nothing said whether the Figma set on screen was
     // built from the payload now on disk — and after a long session that question came
@@ -114,7 +118,7 @@ for (const name of names) {
   entry.variants = offset;
   entry.description = describeSet(name, entry.page, slotKeys);
   manifest.push(entry);
-  console.log(`${name.padEnd(9)} page=${entry.page.padEnd(9)} ${offset} variants in ${shards} shard(s)`);
+  console.log(`${name.padEnd(9)} page=${entry.family.padEnd(11)} ${offset} variants in ${shards} shard(s)`);
 }
 // The BUILDER's own fingerprint, alongside the payloads'. What lands on the canvas is a
 // function of both, and the payload hash alone said "no rebuild needed" for three
@@ -132,13 +136,20 @@ const builderHash = createHash('sha256')
 let icons = null;
 if (WITH_ICONS) try { icons = JSON.parse(readFileSync(`${HERE}/build-data/icons-manifest.json`, 'utf8')); }
 catch { /* not generated; components build without it */ }
+// The name of the file this run builds into, passed by run-batch from Figma's own answer. The plugin
+// cannot be pointed at a file: it builds into whichever one is open, so it checks the name itself.
+// Absent (build-plugin run on its own), nothing is checked.
+const expectFile = process.env.FIGMA_SYNC_EXPECT_FILE || null;
+// `--rebuild`: delete and rebuild each set instead of updating it in place (see in-place.js).
+const rebuild = process.env.FIGMA_SYNC_REBUILD === '1';
 writeFileSync(`${SHARD_DIR}/index.json`,
-  JSON.stringify({ builder: builderHash, components: manifest, icons }, null, 2));
+  JSON.stringify({ builder: builderHash, expectFile, rebuild, components: manifest, icons }, null, 2));
 
 // ── generate code.js from the versioned builder ─────────────────────────────
 const builder = readFileSync(`${HERE}/generic-builder.js`, 'utf8');
 const iconBuilder = readFileSync(`${HERE}/icon-builder.js`, 'utf8');
 const slotProps = readFileSync(`${HERE}/slot-properties.js`, 'utf8');
+const inPlace = readFileSync(`${HERE}/in-place.js`, 'utf8');
 // Keep only the buildShard function; the trailing SHARDS loop is replaced by the
 // plugin's own fetch-driven orchestration.
 const fn = builder.slice(builder.indexOf('async function buildShard'), builder.lastIndexOf('const results = []'));
@@ -155,12 +166,15 @@ const BASE = 'http://localhost:8931';
 // A per-run secret baked in when this file is generated; the server requires it on every POST
 // and never serves it, so a page that can only read from localhost cannot learn it.
 const runToken = ${JSON.stringify(RUN_TOKEN)};
+// The names a config gives its slots (read by slotLabel), set for each component as it is built.
+var SLOT_LABELS = {};
 
 figma.showUI(__html__, { width: 360, height: 420 });
 
 ${fn}
 ${iconBuilder}
 ${slotProps}
+${inPlace}
 /**
  * DOES THIS RUNTIME KEEP AN EFFECT'S SPREAD?
  *
@@ -238,6 +252,12 @@ async function main () {
                     spreadProbe: await probeSpreadWrite() };
   runRuntime = runtime;
   const index = await (await fetch(BASE + '/shards/index.json')).json();
+  // A build clears and rebuilds the pages it owns, and the plugin builds into whichever file is
+  // open, so refuse before anything is written when that is not the file the run targets.
+  if (index.expectFile && figma.root.name !== index.expectFile) {
+    throw new Error('wrong file: this run builds into "' + index.expectFile + '" but the open file is "'
+      + figma.root.name + '". Nothing was built. Open the right file and run the command again.');
+  }
   const report = runReport;
 
   // Icons FIRST: a component that places an icon instance needs the icon component to
@@ -264,6 +284,7 @@ async function main () {
   }
 
   for (const comp of index.components) {
+    SLOT_LABELS = comp.slotLabels || {};
     let total = 0;
     const skipped = [];
     const traded = [];
@@ -278,8 +299,20 @@ async function main () {
     /** Fonts this Figma install does not have, so the text was written in the default. */
     const fontFallbacks = [];
     const iconFills = { total: 0, applied: 0, noVectors: 0, examples: [] };
+    /**
+     * UPDATE IN PLACE WHEN THE SET IS ALREADY THERE. A rebuild gives the set, its variants and its
+     * properties new ids and keys, which orphans every instance in a consumer file (see in-place.js).
+     * So a set that exists on its family page is kept, and the build's variants are swapped into it.
+     * The rebuild flag forces the old behaviour, and a set that is not on its family page yet (the move
+     * from a page of its own) is built new, as the first build of anything is.
+     */
+    const familyPage = figma.root.children.find(p => p.name === (comp.family || comp.page));
+    const keptSet = !index.rebuild && familyPage
+      ? (familyPage.children.find(c => c.type === 'COMPONENT_SET' && c.name === 'Dt' + comp.page) || null)
+      : null;
     for (const s of comp.shards) {
       const D = await (await fetch(BASE + '/shards/' + s.file)).json();
+      D.keepSet = !!keptSet;
       figma.notify(comp.component + ' ' + s.file, { timeout: 400 });
       const r = await buildShard({ D, CLEAR: s.clear, INDEX_OFFSET: s.indexOffset });
       total += r.built;
@@ -330,15 +363,52 @@ async function main () {
 
     // Combine into one variant set. Names come from the "prop=value, …" component
     // names the builder writes, so the axis names carry over untouched.
-    const page = figma.root.children.find(p => p.name === comp.page);
+    const page = figma.root.children.find(p => p.name === (comp.family || comp.page));
     await figma.setCurrentPageAsync(page);
     const loose = page.children.filter(c => c.type === 'COMPONENT');
+    /**
+     * THE DEFAULT VARIANT GOES TOP-LEFT; EVERYTHING ELSE KEEPS ITS LAYER ORDER.
+     *
+     * Figma's default variant is the top-left one on the canvas, while the order of a property's
+     * options in the dropdown is the layer order. The variants are built in their natural order
+     * (Size 100, 200, 300 … so the dropdown reads that way), which leaves the code's default
+     * wherever that falls. Re-laying the whole page out as one flow with the default first puts it
+     * top-left without touching the layer order. Done here, after every shard exists, because a
+     * shard only knows its own variants: the default can be in the second one. The flow is the
+     * builder's own (40px gap, 2600px rows, each row as tall as its tallest variant).
+     */
+    const wantDefault = loose.find(c => c.name === comp.defaultVariant);
+    {
+      const flow = wantDefault ? [wantDefault].concat(loose.filter(c => c !== wantDefault)) : loose;
+      let fx = 0, fy = 0, rh = 0;
+      for (const c of flow) {
+        const w = Math.ceil(c.width), h = Math.ceil(c.height);
+        if (fx > 0 && fx + w > 2600) { fx = 0; fy += rh + 40; rh = 0; }
+        c.x = fx; c.y = fy;
+        fx += w + 40;
+        if (h > rh) rh = h;
+      }
+    }
     // What a REAL built variant's effect holds, before anything is combined.
     const spreadBeforeCombine = spreadsOf(firstWithEffects(loose));
     let setId = null, variants = 0, properties = [], spreadAfterCombine = null, slotReport = null, textReport = null;
     let defaultVariantRead = null;
+    let inPlaceReport = null;
+    let propertyConflicts = [];
     if (loose.length) {
-      const set = figma.combineAsVariants(loose, page);
+      let set = null;
+      if (keptSet && inPlaceSameAxes(keptSet, loose)) {
+        const r = await updateSetInPlace(keptSet, loose);
+        set = keptSet;
+        inPlaceReport = { mode: 'in place', updated: r.updated, added: r.added, removed: r.removed, failed: r.failed };
+      } else {
+        // A new or removed axis renames every variant, so the old set cannot be updated: rebuild it.
+        if (keptSet) {
+          keptSet.remove();
+          inPlaceReport = { mode: 'rebuilt', reason: 'the variant properties changed' };
+        }
+        set = figma.combineAsVariants(loose, page);
+      }
       // Match the sets already built by hand: DtNotice, DtBanner, DtRadio, DtLink…
       // Naming it after the page instead would leave the file with two conventions.
       set.name = 'Dt' + comp.page;
@@ -346,16 +416,26 @@ async function main () {
       /**
        * READ BACK THE DEFAULT VARIANT. Figma's default is the TOP-LEFT variant on the canvas, not
        * the first layer (layer order was tried first and changed nothing: the set kept reporting
-       * the variant at the top-left). It is decided by where the builder laid the variants out,
-       * and build-spec puts the variant the code renders with no props first, so this only reports
-       * what Figma ended up with, for run-batch to compare against what was wanted.
+       * the variant at the top-left). It is decided by where the variants are laid out, which is
+       * the flow above (the code's default first), so this only reports what Figma ended up with,
+       * for run-batch to compare against what was wanted.
        */
       let defaultVariant = null;
       if (comp.defaultVariant) {
         try { defaultVariant = set.defaultVariant ? set.defaultVariant.name : null; } catch (e) { defaultVariant = null; }
         defaultVariantRead = defaultVariant;
       }
-      set.x = 0; set.y = 0;
+      /**
+       * SETS SHARE A PAGE, SO THEY ARE STACKED, in name order, one under the other. The page is
+       * re-stacked on every build, because a rebuilt set is a new node at the end of the page: the
+       * order is the same whatever order the sets were built in.
+       */
+      {
+        const sets = page.children.filter(c => c.type === 'COMPONENT_SET');
+        sets.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+        let sy = 0;
+        for (const st of sets) { st.x = 0; st.y = sy; sy += Math.ceil(st.height) + 200; }
+      }
       setId = set.id; variants = set.children.length;
       spreadAfterCombine = spreadsOf(firstWithEffects(set.children));
       // Reporting the property names is a nicety; it must never be able to end the run.
@@ -365,13 +445,35 @@ async function main () {
       try { properties = Object.keys(set.componentPropertyDefinitions || {}); }
       catch (e) { properties = ['<unreadable: ' + (e && e.message ? e.message : e) + '>']; }
 
-      const applied = await applySlotProperties(set, slotLayers, textLayers);
+      const props = inPlaceReport && inPlaceReport.mode === 'in place' ? reusingProperties(set) : set;
+      const applied = await applySlotProperties(props, slotLayers, textLayers);
+      if (inPlaceReport && props.used) {
+        // Properties the build no longer uses stay on the set (removing one would orphan an
+        // instance's override), and are reported so they are not forgotten.
+        const defs = set.componentPropertyDefinitions || {};
+        inPlaceReport.unused = Object.keys(defs).filter(k => defs[k].type !== 'VARIANT' && defs[k].type !== 'SLOT' && !props.used.has(k));
+      }
       slotReport = applied.slots;
       textReport = applied.texts;
+      /**
+       * TWO PROPERTIES WITH ONE NAME MAKE THE SET UNPUBLISHABLE. Figma accepts the duplicate while
+       * building and refuses it at publish ("Conflicting property names"): DtInput had a Description
+       * axis and a Description text. Checked after every property has been added, and reported so
+       * the run fails here instead of in the publish dialog.
+       */
+      try {
+        const defs2 = set.componentPropertyDefinitions || {};
+        const seen = {};
+        for (const k of Object.keys(defs2)) {
+          const n = k.split('#')[0].toLowerCase();
+          (seen[n] = seen[n] || []).push(defs2[k].type);
+        }
+        propertyConflicts = Object.keys(seen).filter(n => seen[n].length > 1).map(n => n + ' (' + seen[n].join(' and ') + ')');
+      } catch (e) { /* unreadable properties are reported above */ }
     }
     report.push({ component: comp.component, page: comp.page, built: total, setId, variants, properties,
                   defaultVariant: defaultVariantRead, defaultVariantWanted: comp.defaultVariant || null,
-                  fontFallbacks: fontFallbacks,
+                  fontFallbacks: fontFallbacks, inPlace: inPlaceReport, propertyConflicts,
                   skippedBindings: skipped, provenanceTraded: traded, derivedVars: derived,
                   spreadBeforeCombine, spreadAfterCombine, slots: slotReport, texts: textReport,
                   iconInstanceFailed: [...new Set(iconFailed)].slice(0, 10), iconFills });

@@ -4,3 +4,4 @@ plugin/code.js
 node_modules
 .impeccable/
 sync-scripts/targets.local.mjs
+code-connect/generated/

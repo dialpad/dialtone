@@ -1,0 +1,30 @@
+/*
+ * The divider DtSegmentedControl draws before every item but the first (`segmented-control.less`,
+ * "DIVIDERS"), for an item mounted on its own.
+ *
+ * The component's rule is `.d-segmented-control > :where(__item:not(:first-child))::before`, and a
+ * lone item is the first child of whatever it is mounted in, so the real rule can never match it and
+ * a set of items could not carry a divider. When the harness container carries `dt-harness-divider`
+ * (see configs/segmented_control_item.mjs) this applies the SAME declarations to every item, minus the
+ * `:not(:first-child)`. It uses the component's own variables, so it follows the size modifiers.
+ *
+ * COPIED from the component: if `segmented-control.less` changes its divider, change this with it.
+ * A divider the rule hides (an active, hovered or focused item) is hidden here the same way.
+ */
+.dt-harness-divider > .d-segmented-control__item::before {
+  position: absolute;
+  background-color: var(--dt-color-border-subtle);
+  border-radius: var(--radius-segmented-control-item);
+  opacity: var(--dt-opacity-1100);
+  content: '';
+  inline-size: var(--dt-size-border-100);
+  inset:
+    calc(var(--radius-segmented-control-item) / 2)
+    auto
+    calc(var(--radius-segmented-control-item) / 2)
+    calc(calc(calc(var(--padding-segmented-control) * .5) * -1) - 1.5px);
+}
+
+.dt-harness-divider > .d-segmented-control__item:is(.d-btn--active, :hover, :focus-visible)::before {
+  opacity: 0;
+}

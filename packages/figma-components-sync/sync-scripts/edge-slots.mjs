@@ -107,6 +107,39 @@ export function edgeSlotFindings (node, edgeSlots) {
     const got = num(wrapper[f]);
     if (got > gapAfter + 0.01 || got <= 0) add(`content ${f}`, `0 < x <= ${gapAfter}`, got);
   }
-  if (node.clipsContent !== true) add('clipsContent', true, node.clipsContent);
+  // The root clips to its corners, unless an absolute child sits outside its box (DtSegmentedControlItem's
+  // divider, in the gap before it): clipped, that child would never be painted. Same rule as the builder.
+  const box = node.absoluteBoundingBox;
+  const outside = !!box && kids.some((k) => {
+    const b = k.layoutPositioning === 'ABSOLUTE' ? k.absoluteBoundingBox : null;
+    return b && (b.x < box.x - 0.01 || b.y < box.y - 0.01
+      || b.x + b.width > box.x + box.width + 0.01 || b.y + b.height > box.y + box.height + 0.01);
+  });
+  if (node.clipsContent !== !outside) add('clipsContent', !outside, node.clipsContent);
   return out;
+}
+
+/**
+ * A slot that holds several children, as those children in its place (`slotGroups`).
+ *
+ * The browser's group has its items as children; the Figma set holds them in one slot so any number can
+ * be dropped in. The checks pair children one to one, and a slot with one child is already seen through
+ * (see `compareNode`), so a slot with several is replaced by them here.
+ */
+export function flattenGroupedSlots (node) {
+  const kids = [];
+  for (const c of node.children || []) {
+    const sub = flattenGroupedSlots(c);
+    if (sub.type === 'SLOT' && (sub.children || []).length >= 2) kids.push(...sub.children);
+    else kids.push(sub);
+  }
+  return { ...node, children: kids };
+}
+
+/** The reshaping of a set's Figma tree before it is compared with the render, or null when it needs none. */
+export function figmaTransformFor (cfg) {
+  const steps = [];
+  if (cfg.edgeSlots) steps.push(flattenEdgeSlots);
+  if (cfg.slotGroups) steps.push(flattenGroupedSlots);
+  return steps.length ? (node) => steps.reduce((n, f) => f(n), node) : null;
 }

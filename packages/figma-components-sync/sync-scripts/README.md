@@ -4,10 +4,10 @@ Builds Figma component sets from the real rendered Dialtone components, then pro
 matches. The codebase is the source of truth. Figma is the output.
 
 Each variant is measured in light and dark. Button (440 variants), ButtonIcon (360), ButtonStacked (550), ButtonLink (560), Notice,
-Banner, Collapsible and Loader are the components registered so far, built with the model
+Banner, Collapsible, Loader, Input (560), InputTextarea (140) and SplitButton (220) are the components registered so far, built with the model
 described here and checked clean. More are added in batches, each with its rebuild and check.
 
-Not in CI. It needs a browser, a Figma PAT, and a tokens file to build into. Credentials live in
+Not in CI. It needs a browser, a Figma PAT, and a Figma file to build into. Credentials live in
 `packages/figma-components-sync/.env` (`PERSONAL_ACCESS_TOKEN`, `PREVIEW_FILE_KEY`,
 `MAIN_FILE_KEY`), gitignored. Keep it private to your user. See the package README for what each
 one is and for how targets work.
@@ -25,11 +25,31 @@ node sync-scripts/run-batch.mjs button button_icon button_stacked button_link --
 node sync-scripts/run-batch.mjs notice banner --target preview           # their action is an instance of Button
 ```
 
-A component that is an INSTANCE of another carries that component's variant ids, and building the
-other clears its page, so a batch that holds both is refused. Build the target first, then what
-uses it, in a separate run. That is why Loader comes before the button sets (their spinner), and
-Button before Notice and Banner (their action). `button_stacked` has no `loading` axis, so it
-needs no Loader, but it belongs with the other button sets.
+### A set that exists is updated in place
+
+A rebuild deletes a set and builds a new one, which gives the set, every variant and every component
+property a new id and key. That orphans every instance in a file that uses the library. So when a
+set is already on its family page, a build keeps it and swaps the new variants in (`in-place.js`):
+each existing variant donates its children and its own settings from the freshly built one, a
+variant the build adds is moved into the set and one it no longer makes is removed, and a
+property the build still adds is reused rather than duplicated. Kept, measured on the real sets
+with overrides: the set, variant and property ids, an instance's link to its component, its
+property overrides (label, toggles, swaps) and what a designer dropped into a native slot. Lost: an
+override made directly on a layer (a colour set on a nested frame), because the layers are the
+new build's. `run-batch` prints `in place: N updated, M added, K removed` for each set, and anything
+that could not be copied.
+
+The set is rebuilt from scratch, with new ids, in three cases: `--rebuild` (the way to start a set
+over), a set that is not on its family page yet (the first build, or the move from a page of its
+own), and a change to the variant AXES, which renames every variant. The run prints `REBUILT` for
+the last one, and what swaps to that set has to be rebuilt after it.
+
+A set updated in place keeps its variant components, so a whole batch can go in one run. Only a
+`--rebuild` is refused when it holds an instance and its target: the target's new variants have new
+ids, and the dependent's payload would point at ones that no longer exist. Rebuild the target
+first, then what uses it, in a separate run. That is why Loader comes before the button sets (their
+spinner), and Button before Notice and Banner (their action). `button_stacked` has no `loading`
+axis, so it needs no Loader, but it belongs with the other button sets.
 
 Everything except one click:
 
@@ -213,6 +233,15 @@ text styles leave it unbound for the same reason. This covers:
 
 Measured: of 2,443 text layers across the six sets, 827 use a library style and 1,616 are bound to
 the font variables; none is a literal.
+
+**A native control's value** (DtInput's `<input>` and `<textarea>`) is painted by the browser from a
+property, not from a text node, so the walk saw a bare box. The harness adds a synthetic text child
+(`nativeValueNode` in `verify-harness/main.js`) at the position the browser draws the value, with the
+control's font and colour, and the config maps it to a TEXT property (`textProps: { Value: 'Value' }`).
+It has its own `selector` for the spec's style maps and a `cdpSelector` for browser lookups, and
+`tokenKeys` limits it to the text tokens, so the control's radius and padding tokens are not applied to
+a text node. Only the text-like types are read: a password shows bullets, and date, time, file and color
+draw widgets Figma cannot reproduce.
 
 ## The checks
 
@@ -458,8 +487,10 @@ otherwise (`default-variant.mjs`, with the defaults read from the Vue runtime by
 An axis that is not a plain prop default, such as slot presence or an initial state the component
 computes, is declared in the config as `effectiveDefaults` (Collapsible starts open although its
 `open` prop is `null`; Notice and Banner have no action or header until something fills them).
-`build-spec` lays that variant out first so it lands top-left, the plugin reads back
-`set.defaultVariant` and `run-batch` prints it, and the verifier compares each variant
+The variants keep their natural order, because the layer order is the order of a property's
+options in Figma's dropdown (Size 100 to 500, not 300 first). The plugin lays the whole page out
+as one flow with the default first, after every shard exists, so it lands top-left; it then reads
+back `set.defaultVariant`, `run-batch` prints it, and the verifier compares each variant
 property's default in the built set against the same function.
 
 ### Slot content is declared, not inferred
@@ -559,7 +590,10 @@ Each was added after the failure it prevents. The log has the evidence.
 | `writeSetId` distinguishes "already this id" from "nothing matched" | a second, idempotent write throwing. Not a hypothetical: incremental reporting calls it twice per component by design |
 | `bindNum` refuses a numeric binding whose variable disagrees with the measured literal | a bound variable overwriting the number underneath it |
 | `paint()` refuses a colour binding whose variable holds a different colour, but only when EVERY mode is a concrete colour | a misattributed token painting the wrong colour. The mode qualifier is not fussiness: without it, a variable that aliases in one mode was compared against the other mode's value, and 64 correct bindings became literals that were wrong in dark |
-| `run-batch` refuses a batch that rebuilds a swap target together with a component that swaps to it | the dependent's payload pointing at variant ids the rebuild just deleted. Build the target first, then the dependent in its own run |
+| `run-batch` refuses a `--rebuild` batch that holds a swap target together with a component that swaps to it | the dependent's payload pointing at variant ids the rebuild just deleted. Rebuild the target first, then the dependent in its own run. A set updated in place keeps its ids, so it is not refused |
+| an in-place update sizes the existing variant before the children arrive, then writes back each absolutely positioned child's position | a centre constraint shifting Button's spinner and icons when they moved into a component of another size (660 position findings) |
+| the build checks each set for two properties of one name and fails the run | a set Figma builds and then refuses to publish ("Conflicting property names"): DtInput's Description axis and Description text |
+| an in-place update reuses only the component properties the build adds, never a variant property | DtInput's `Description` text property matching its `Description` axis, and its layers being left unbound |
 | `run-batch` records a reported set id only for a component in the batch and only if it has the shape of a node id | the local server answers any origin, and the id is written into the target's `set-ids.json`, which every later run reads |
 | `run-batch`'s server answers only loopback hosts, a browser Origin of `null` (what a Figma plugin sends) and POSTs carrying a per-run token. The token is minted before the plugin is generated and baked into `plugin/code.js`; no response ever carries it | a web page the user has open, or a DNS-rebinding page, ending a run early or pointing a config at an unrelated set. Probed live: a web Origin, a wrong Host, a missing or wrong token, a malformed body and a forged id are all refused |
 | `preflight.mjs` refuses to run with no component names | "all payloads clean" printed for a run that checked nothing |

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { marginFoldable } from './figma-mapping.mjs';
+import { marginFoldable, buildFamilyPage } from './figma-mapping.mjs';
 
 // A margin on an unpainted box can be folded into its own padding; a painted box cannot.
 const box = (extra) => ({ marginTop: '4px', marginRight: '0px', marginBottom: '0px', marginLeft: '0px', ...extra });
@@ -24,4 +24,11 @@ test('a colour that cannot be parsed is treated as painted, the safe side', () =
 test('a negative margin never folds, and no background folds', () => {
   assert.equal(marginFoldable(box({ marginTop: '-2px', backgroundColor: 'transparent' })), false);
   assert.equal(marginFoldable(box({})), true);
+});
+
+test('a set is placed on its family page, a trial merged build on its own, and no family keeps the old page', () => {
+  assert.equal(buildFamilyPage({ page: 'ButtonLink', family: 'Buttons' }, false), 'Buttons');
+  assert.equal(buildFamilyPage({ page: 'ButtonLink', family: 'Buttons' }, true), 'Buttons Merged');
+  assert.equal(buildFamilyPage({ page: 'ButtonLink', family: 'Buttons', merged: true }, true), 'Buttons');
+  assert.equal(buildFamilyPage({ page: 'Avatar' }, false), 'Avatar');
 });

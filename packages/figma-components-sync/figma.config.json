@@ -1,0 +1,5 @@
+{
+  "codeConnect": {
+    "include": ["code-connect/**/*.figma.ts"]
+  }
+}
