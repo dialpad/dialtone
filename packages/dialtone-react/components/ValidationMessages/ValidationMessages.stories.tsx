@@ -8,6 +8,7 @@ import { DtCheckbox } from '../Checkbox/Checkbox';
 import { DtCheckboxGroup } from '../CheckboxGroup/CheckboxGroup';
 import { DtInput } from '../Input/Input';
 import { DtRadio } from '../Radio/Radio';
+import { DtRadioGroup } from '../RadioGroup/RadioGroup';
 import { DtIconBell } from '../../icons';
 import { DtStack } from '../Stack/Stack';
 import { DtValidationMessages, type DtValidationMessagesProps } from './ValidationMessages';
@@ -124,9 +125,9 @@ const INTEREST_OPTIONS = [
   { value: 'product', label: 'Product', messagesId: 'dt14' },
 ];
 
-// The select and radio-group fields are stand-ins: Vue's initial DOM, with the story's handlers on their native
-// elements and a real DtValidationMessages where each field renders its messages. What the real components change
-// with their messages (d-input--critical, aria-invalid, aria-describedby) doesn't happen here until they are ported.
+// The select field is a stand-in: Vue's initial DOM, with the story's handlers on its native elements and a real
+// DtValidationMessages where it renders its messages. What the real component changes with its messages
+// (d-input--critical, aria-invalid, aria-describedby) doesn't happen here until it is ported.
 function InteractiveFormTemplate () {
   const [nameValue, setNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -279,25 +280,21 @@ function InteractiveFormTemplate () {
             <DtValidationMessages data-qa="dt-select-messages" validationMessages={countryMessages} />
           </div>
         </StandIn>
-        <StandIn for="radio-group">
-          <fieldset className="d-input-group__fieldset" data-qa="radio-group">
-            <legend data-qa="radio-group-legend" className="d-text d-text-label--md d-text--tone-secondary d-input-group__legend-text">Preferred contact</legend>
-            {CONTACT_OPTIONS.map(option => (
-              <DtRadio
-                key={option.value}
-                name="contact"
-                value={option.value}
-                label={option.label}
-                checked={contactValue === option.value}
-                onChange={() => {
-                  setContactValue(option.value);
-                  validateContact(option.value);
-                }}
-              />
-            ))}
-            <DtValidationMessages data-qa="radio-group-messages" validationMessages={contactMessages} />
-          </fieldset>
-        </StandIn>
+        <DtRadioGroup
+          name="contact"
+          legend="Preferred contact"
+          value={contactValue}
+          messages={contactMessages}
+          onValueChange={(value) => {
+            const next = String(value);
+            setContactValue(next);
+            validateContact(next);
+          }}
+        >
+          {CONTACT_OPTIONS.map(option => (
+            <DtRadio key={option.value} value={option.value} label={option.label} />
+          ))}
+        </DtRadioGroup>
         <DtCheckboxGroup
           name="interests"
           legend="Interests"
