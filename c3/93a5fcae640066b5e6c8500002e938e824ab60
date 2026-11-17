@@ -1,0 +1,169 @@
+.agents/resources/rule-map.md
+  s_8e74aa9cd2d062::t_3c505efe513f63 7
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 8
+packages/combinator/.github/documentation/CONTRIBUTING.md
+  s_418f2231c885da::t_5fcc8d1f673517 55
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3-5,7,9-11,13-17,19,21,23-28,30-31,33-35,37,39-40,42,44,46,48-50,52-53,57-60,62,65-66,68,72,74
+  s_418f2231c885da::t_8e47ba460a20f5 1
+  s_418f2231c885da::t_4b5be9605ad561 41,43
+  s_418f2231c885da::t_4ad21670fddda1 64
+.agents/resources/agent-tooling-parity.md
+  s_8e74aa9cd2d062::t_3c505efe513f63 22-38
+.agents/resources/rules/logical-naming.md
+  s_8e74aa9cd2d062::t_3c505efe513f63 1-89
+.agents/resources/rules/vue-components.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 29
+  s_8e74aa9cd2d062::t_3c505efe513f63 18
+packages/combinator/.github/documentation/COMMIT_CONVENTION.md
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 1,3-4,6,9,12,15,18,20,22-32,34,36-37,40-41,44,49,51-53,55,57
+  s_418f2231c885da::t_5394513aad08f0 46-47
+  s_418f2231c885da::t_f0911e827e0b26 58
+.claude/rules/combinator-variants.md
+  s_418f2231c885da::t_986d8bdf7df289 87
+  s_418f2231c885da::t_98a9dc3c7fe887 24-25
+  s_418f2231c885da::t_609c1080b4a393 91,93,97,101,105,109
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 1-23,26-86,88-90,92,94-96,98-100,102-104,106-108,110-119
+.agents/README.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 20
+.agents/resources/rules/codex-tooling.md
+  s_8e74aa9cd2d062::t_3c505efe513f63 12,25
+.agents/resources/package-map.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 22,40
+packages/combinator/.github/documentation/internal/SYSTEM.md
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3-10,14,17-19,21-33,35-46,52,57,59,61-73,75,77,79-81,83,89,91,93,96-98,103,105,107-112,114
+  s_418f2231c885da::t_8b9d52bf92d971 15
+  s_418f2231c885da::t_c12882fb25e890 54-55
+  s_418f2231c885da::t_0877b0ac42c8ca 85-87
+  s_418f2231c885da::t_83ee11477c3aa2 94,100-101
+  s_418f2231c885da::t_ffea5bc73e4b3e 48-50
+  s_8e74aa9cd2d062::t_2e4c284ee34261 58
+.agents/skills/component-variant/SKILL.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 1-69
+packages/combinator/.github/documentation/USAGE.md
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3-4,6,8,10-11,14,20,22,27,31-34,36-40,42,44,46-48,53-54,60-70,76-85,89-90,93-106,111-112,116,118-119,123-125,131-132,136-138,141-143
+  s_418f2231c885da::t_c4f8f25ab1f00a 19
+  s_418f2231c885da::t_2bb661c55abac8 129
+packages/combinator/.github/documentation/internal/TESTING.md
+  s_418f2231c885da::t_b265d63ccaf5b1 1
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 2-46,48-53
+  s_418f2231c885da::t_5c590c41cee398 47
+packages/combinator/README.md
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3,7-11,15-19,21-22,24,26,28-30,32,35,38-40,43-45,48-49,52-53
+.agents/evals/run-skill-contract-evals.mjs
+  s_8e74aa9cd2d062::t_b93b3575ecb4fa 396-401,433-435
+  s_8e74aa9cd2d062::t_82169b8f93dcdb 132-148,461-462
+  s_418f2231c885da::t_89b80597e3871d 437,443-448,450,455,471
+  s_8e74aa9cd2d062::t_3c505efe513f63 2,115-123,395,438-442,449,451-454,456-460,463-470,472-475
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 97,101-111
+  s_8e74aa9cd2d062::t_53eb0181797378 112
+  s_8e74aa9cd2d062::t_31a8d2bfafdb2b 476
+.claude/rules/vue-components.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 72
+  s_418f2231c885da::t_920087c1043c47 62,64
+.claude/skills/component.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 56,75,86
+packages/combinator/.github/documentation/internal/EXCLUSIONS.md
+  s_418f2231c885da::t_dfe32215052e1b 69-70
+  s_418f2231c885da::t_4de8923034c9f3 115
+  s_418f2231c885da::t_d13ead44656e74 104-105
+  s_418f2231c885da::t_d4a6bd31cae0b4 142
+  s_418f2231c885da::t_3b98bb0c19c3fd 146-147
+  s_418f2231c885da::t_801512cc34ce19 103
+  s_418f2231c885da::t_94e9f6452e52df 45-46
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 1-38,40-44,47-68,71-102,106-114,116-141,143-145,148-151
+  s_418f2231c885da::t_467674ba977b9d 39
+.claude/skills/component-variant.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 1-60
+packages/combinator/.github/documentation/internal/RENDERER.md
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3,5,7-8,12-15,18-21,25-27,35-37,43-47
+  s_418f2231c885da::t_f3eb1f759c1400 31-33
+  s_418f2231c885da::t_380eb4ee3581ec 41-42
+  s_418f2231c885da::t_7148f6730fbd86 49-51
+  s_418f2231c885da::t_70b9ad39e6df76 16-17
+  s_418f2231c885da::t_77e5b2a5d1490d 10-11
+packages/combinator/.github/documentation/OVERVIEW.md
+  s_418f2231c885da::t_7986d6e2e92a16 84-86
+  s_418f2231c885da::t_5eb894fb26f1b3 111
+  s_418f2231c885da::t_281cfb556d319f 43,46
+  s_418f2231c885da::t_0a9f091c2df479 52,55-56
+  s_418f2231c885da::t_3d93f9bda3dcea 128
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3-5,7-9,11,13,15,17-22,24,26-33,35,37,41-42,44-45,47-51,53-54,57-82,88,90,92-96,98,100-102,104-105,107,109,112-113,115-117,121-122,125,129,131-136,138-139
+packages/combinator/.github/documentation/FUTURE_ADDITIONS.md
+  s_418f2231c885da::t_f859fb7d582dcb 29-30
+  s_418f2231c885da::t_b8c6c69c78223d 13-15
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 1,5,7-9,11,17-18,20,22-23,26,28,32,34,36,38,40,42-45,47,49-52,54,56,58-62
+  s_418f2231c885da::t_1263d558dcfaeb 37
+packages/combinator/.github/documentation/internal/CONTROLS.md
+  s_418f2231c885da::t_487b3fac15af32 4
+  s_418f2231c885da::t_358420f8885baa 51
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3,6,8,10,12-13,15-18,20,22,24-30,33,35,37-47,49,52,54-56,58-60,62-63,65,67-68,72-73,76,78
+  s_418f2231c885da::t_c7184218a7bd38 32
+  s_418f2231c885da::t_97f2409c7b296c 70
+  s_418f2231c885da::t_d34a3ff9695de0 74-75
+CLAUDE.md
+  h_c15b5755534093 141,161
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 96
+  s_418f2231c885da::t_a41a1bb2e64622 163
+  s_8e74aa9cd2d062::t_4524f53928e456 100-108
+packages/combinator/.github/documentation/KNOWN_ISSUES.md
+  s_418f2231c885da::t_e003a3e529f8af 27-28
+  s_418f2231c885da::t_c1d08add18f20f 21
+  s_418f2231c885da::t_bf6a01d8bce515 43,45-47
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 1-4,7-20,22-26,29-42,44
+  s_418f2231c885da::t_6ba34b5d2e7441 5-6
+packages/combinator/.github/documentation/internal/OPTION_BAR.md
+  s_418f2231c885da::t_f045a499e39bd6 64-66,68-69
+  s_418f2231c885da::t_8fcff3a53f6157 4
+  s_418f2231c885da::t_b722144a959ac2 15
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 1,3,6,8,10-12,14,17-19,21,27-28,30,32-33,35-40,42-44,46,48-49,51,53-54,56,58,60-62,71,73,75-77,79-80,82-90,92,94-96
+  s_418f2231c885da::t_5bfb6b94a74e91 23-25
+.agents/resources/rules/combinator-variants.md
+  h_c15b5755534093 38,44-45,51,55,58
+  s_418f2231c885da::t_224ff3fa8c9010 84
+  s_418f2231c885da::t_4a70ac27b8171c 88,90,94,98,102,106
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 1-37,39-43,46-50,52-54,56-57,59-83,85-87,89,91-93,95-97,99-101,103-105,107-116
+packages/combinator/.github/documentation/internal/CODE_PANEL.md
+  s_418f2231c885da::t_0c108627c2c5af 51-52
+  s_418f2231c885da::t_44e806a73990f2 8
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 1,3-5,7,10,12,14-20,22-23,25,27-28,30,32-36,38,40,42-45,47,49,54-55,57,59-61,63-64,66-71
+.agents/skills/component-work/SKILL.md
+  s_8e74aa9cd2d062::t_1ef4b123123fa4 20,34,42,50,66
+packages/combinator/.github/documentation/RELEASING.md
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 3-5,7,9,11-12,14-18,21-22,26,28-34,36-50
+  s_418f2231c885da::t_21b6ba34a3117c 24
+  s_418f2231c885da::t_647105fb5f32e4 1
+  s_418f2231c885da::t_6156b153d834fa 52-54
+packages/combinator/.github/documentation/internal/SETTINGS.md
+  s_8e74aa9cd2d062::t_a9f2ab09c9bdd2 1-2,4-56,58-59,61
+  s_418f2231c885da::t_8645109866e11e 3
+  s_418f2231c885da::t_259ad8ed25adad 57,60,62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "c393a5fcae640066b5e6c8500002e938e824ab60",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_418f2231c885da": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "674a407d-04a6-4f0f-905d-bbde844038bb",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_8e74aa9cd2d062": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f020a-e578-7193-8216-11d744c3fab7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
