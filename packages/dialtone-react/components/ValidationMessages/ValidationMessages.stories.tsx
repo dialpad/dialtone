@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
+import { DtButton } from '../Button/Button';
 import { DtCheckbox } from '../Checkbox/Checkbox';
 import { DtInput } from '../Input/Input';
 import { DtRadio } from '../Radio/Radio';
@@ -318,11 +319,7 @@ function InteractiveFormTemplate () {
             <DtValidationMessages data-qa="checkbox-group-messages" validationMessages={interestsMessages} />
           </fieldset>
         </StandIn>
-        <StandIn for="button">
-          <button className="base-button__button d-btn d-btn--outlined d-btn--muted" data-qa="dt-button" type="button" onClick={clearAll}>
-            <span data-qa="dt-button-label" className="base-button__label d-btn__label">Clear</span>
-          </button>
-        </StandIn>
+        <DtButton importance="outlined" kind="muted" onClick={clearAll}>Clear</DtButton>
     </DtStack>
   );
 }
