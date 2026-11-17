@@ -1,0 +1,20 @@
+scripts/retrieval/ci-routing.test.mjs
+  s_d57529ef63686e::t_8554ee8744a14d 161-162
+  s_d57529ef63686e::t_4ca4b87ec61809 167,177-179,182
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ef1da2697995e02871387c5662803e6d986025d7",
+  "prompts": {},
+  "sessions": {
+    "s_d57529ef63686e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e9f4-b545-7cc2-b22f-02680f00b760",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
