@@ -1,0 +1,36 @@
+packages/dialtone-tokens/tokens/$metadata.json
+  s_f920209ec821e1::t_798900afea5be4 49
+packages/dialtone-tokens/tokens/components/chip/default.json
+  s_f920209ec821e1::t_5095aa410dd438 1-90
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/test.mjs
+  s_f920209ec821e1::t_cbc21eae4c14df 80-92
+apps/dialtone-documentation/docs/guides/migration/chip-interactive/index.md
+  s_f920209ec821e1::t_c8f85ef5f8812e 56,59-60
+apps/dialtone-documentation/docs/guides/migration/badge-chip-api/index.md
+  s_f920209ec821e1::t_ed3dd9ed9a329e 71
+  s_f920209ec821e1::t_9217856ac40bfe 101-103
+packages/dialtone-tokens/tokens/$themes.json
+  s_f920209ec821e1::t_d57318b1d694eb 1402,2147,2821,3387,4288,4314,4337,4362,4385,4412,4435,4462,4485,4512,4535,4562,4585,4611,4634,4660,4683,4709,4732,4758,4781,4807,4830,4856,4879,4905,4928,4954,4977,5003,5026,5052,5075,5101,5124,5150,5173,5199,5222,5248,5271,5297,5320,5346,5369,5395,5418,5444,5467,5493,5516,5542,5565,5591,5614,5640,5663,5689,5712,5738,5761,5787,5810,5836,5859,5885,5908,5934,5957,5983,6006,6032,6055,6081,6104,6130,6153,6179,6202,6228,6251,6277,6300,6326,6349,6375,6398,6424,6447,6473,6496,6522,6545,6571,6595,6622,6645,6671
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/index.mjs
+  s_f920209ec821e1::t_f91a94377029f6 135-139
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_f920209ec821e1::t_96fc7eee84c84c 37-38,60-61,70-71,77-78,83-84,90-91,99-100,348
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_f920209ec821e1::t_a2544db6d4e7a9 61-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b81b6656d90d6da88971087f8b421a276ec2bf10",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
