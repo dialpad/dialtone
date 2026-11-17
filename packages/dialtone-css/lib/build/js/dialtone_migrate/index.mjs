@@ -350,7 +350,7 @@ const MIGRATIONS = [
   {
     id: 'typography',
     name: 'Typography Utilities to DtText',
-    description: 'Replace legacy typography utility classes (d-headline--*, d-body--*, d-label--*, d-code--md, d-fw-*, d-fc-*, d-lh-*, d-truncate, d-ta-*) with the <dt-text> component.',
+    description: 'Replace legacy typography utility classes (d-headline--*, d-body--*, d-label--*, d-code--md, d-fw-*, d-fc-*, d-lh-*, d-truncate, d-ta-*, d-ff-mono) with <dt-text> variant and modifier props.',
     category: 'opt-in',
     type: 'standalone',
     scriptDir: 'dialtone_migrate_typography',
@@ -499,7 +499,7 @@ Examples:
   npx dialtone-migrate --only typography,text-variant --dry-run --cwd ./src
 
 Combined dry-run stages inspect current files; they do not simulate earlier writes.
-After applying typography, preview text-variant separately for newly created pairs.
+Typography emits variant directly; text-variant converts existing DtText kind + size pairs.
 Health-check and text-variant skip nested Git repositories; target each explicitly with --cwd.
 `);
 }
