@@ -206,6 +206,7 @@ function DropdownDefault ({
   anchor,
   list,
   footer,
+  ...rest
 }: DropdownStoryArgs) {
   // v-model:open, starting from the `open` arg and following it.
   const [isOpen, setIsOpen] = useState(open);
@@ -215,6 +216,10 @@ function DropdownDefault ({
 
   return (
     <DtDropdown
+      // DropdownDefault.story.vue declares no props and its root is DtDropdown, so Vue's attribute fallthrough hands
+      // it every other arg (appendTo, listId, footerClass, contentMode…). Spread first, as the bindings below are the
+      // template's own.
+      {...rest}
       open={isOpen}
       onOpenChange={setIsOpen}
       placement={placement}
