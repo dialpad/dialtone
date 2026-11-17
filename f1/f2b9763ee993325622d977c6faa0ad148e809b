@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Hovercard/Hovercard.test.tsx
+  s_77528d1b28e8ff::t_f1f16f6d806db3 222-243
+packages/dialtone-react/components/Hovercard/Hovercard.tsx
+  s_77528d1b28e8ff::t_d4113fadd7cba9 183-188,190-196,198-203,216,224,289
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f1f2b9763ee993325622d977c6faa0ad148e809b",
+  "prompts": {},
+  "sessions": {
+    "s_77528d1b28e8ff": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f0048c49-12f3-4ebc-8b4d-b64254475f9f",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
