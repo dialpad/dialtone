@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_0a9611ea1eb760::t_ffb73c63fef109 113,697
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5cd8a0aec07c6a932ae04c7e3c48e07cc376c4b1",
+  "prompts": {},
+  "sessions": {
+    "s_0a9611ea1eb760": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d1c8-cd2d-7bd1-8634-bc390315ea5d",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_6e87615822f9a7::t_52791b549f5d4e 471-476,492-497
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "883aee8164db8f2f2532bbd6624575dba67e47dd",
+  "prompts": {},
+  "sessions": {
+    "s_6e87615822f9a7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8683e3d5-3e3e-42b1-836b-bb4af6f08d59",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Ted Goas <ted.goas@dialpad.com>"
+    }
+  }
+}
