@@ -384,6 +384,7 @@ describe('--validate — DtText prop bug detection', () => {
     ['kind alone', '<dt-text kind="code">', []],
     ['object syntax on variant', '<dt-text :variant="{ \'body-md\': c }">', ['object-syntax']],
     ['object syntax on family', '<dt-text :family="{ mono: c }">', ['object-syntax']],
+    ['inherited Object key as kind', '<dt-text kind="constructor" size="300">', ['invalid-value']],
   ];
   for (const [label, tag, expected] of contexts) {
     it(`size context: ${label}`, () => {
@@ -1226,11 +1227,17 @@ describe('uncertain overrides keep their utility class with review', () => {
       `${CONFLICT}<dt-text as="p" variant="body-md" class="d-fw-bold" :style="s">x</dt-text>`],
     ['spread may set style', '<dt-text v-bind="attrs" class="d-fw-bold">x</dt-text>',
       `${CONFLICT}<dt-text v-bind="attrs" class="d-fw-bold">x</dt-text>`],
+    ['inline all reset', '<dt-text class="d-fw-bold" style="all: initial">x</dt-text>',
+      `${CONFLICT}<dt-text class="d-fw-bold" style="all: initial">x</dt-text>`],
   ];
   for (const [label, input, expected] of cases) {
     it(label, () => { assert.equal(run(input), expected); });
   }
 
+  it('a class named like an Object prototype key stays an unknown class', () => {
+    const input = '<span class="toString d-fw-bold">x</span>';
+    assert.equal(run(input), input);
+  });
   it('identical duplicates collapse to one prop', () => {
     assert.equal(run('<p class="d-body--md d-fw-bold d-fw-bold">x</p>'), '<dt-text as="p" variant="body-md" strength="bold">x</dt-text>');
   });
@@ -1267,6 +1274,12 @@ describe('nested spans rejected by the composed pass are not retried', () => {
   for (const [label, input, expected] of cases) {
     it(label, () => { assert.equal(run(input), expected); });
   }
+  it('a span inside nested DtText bodies is edited once', () => {
+    assert.equal(
+      run('<dt-text><dt-text><span id="x" class="d-fw-bold">x</span></dt-text></dt-text>'),
+      '<dt-text><dt-text><!-- dt-text-migrate: review nested span --><span id="x" class="d-fw-bold">x</span></dt-text></dt-text>',
+    );
+  });
 });
 
 describe('raw font-size hints', () => {

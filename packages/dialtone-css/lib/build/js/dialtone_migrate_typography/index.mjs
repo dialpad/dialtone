@@ -37,6 +37,10 @@ import { fileURLToPath } from 'node:url';
 // the composition class that the legacy kind + size pair rendered (tests assert this).
 //------------------------------------------------------------------------------
 
+// Lookup tables are keyed by class names and attribute values read from the scanned file,
+// so they must not inherit Object.prototype keys such as `constructor` or `toString`.
+const lookupTable = entries => Object.assign(Object.create(null), entries);
+
 /**
  * Composed typography class → DtText props.
  * Never emit a composition `size` beside `variant`: with a variant, size is a raw
@@ -46,7 +50,7 @@ import { fileURLToPath } from 'node:url';
  *   - 'code-sm' : font-size below DtText minimum code size
  *   - 'helper'  : approximated as body+density — outputs review marker too
  */
-const COMPOSED_CLASS_MAP = {
+const COMPOSED_CLASS_MAP = lookupTable({
   // headline
   'd-headline--sm':                   { variant: 'headline-xs' },
   'd-headline-small':                 { variant: 'headline-xs' },
@@ -122,13 +126,13 @@ const COMPOSED_CLASS_MAP = {
   'd-helper-base':                    { variant: 'body-md', density: '300', flag: 'helper' },
   'd-helper--sm':                     { variant: 'body-xs', density: '200', flag: 'helper' },
   'd-helper-small':                   { variant: 'body-xs', density: '200', flag: 'helper' },
-};
+});
 
 /**
  * Override utility class → DtText prop name and value.
  * These apply on top of (or independently from) composed class rewrites.
  */
-const OVERRIDE_CLASS_MAP = {
+const OVERRIDE_CLASS_MAP = lookupTable({
   // font-weight → strength
   'd-fw-bold':     { prop: 'strength', value: 'bold' },
   'd-fw-semibold': { prop: 'strength', value: 'semibold' },
@@ -172,19 +176,19 @@ const OVERRIDE_CLASS_MAP = {
   // font-family → family. Only the family changes; size, weight and line height still
   // inherit, so it never implies a composition.
   'd-ff-mono':    { prop: 'family', value: 'mono' },
-};
+});
 
 // Lifting an override moves it from an !important utility to a normal DtText modifier.
 // Inline styles beat the modifier but not the utility, so a style that sets the same
 // CSS property makes the lift unsafe.
-const OVERRIDE_STYLE_PROPERTIES = {
+const OVERRIDE_STYLE_PROPERTIES = lookupTable({
   strength: ['font-weight', 'font'],
   density: ['line-height', 'font'],
   family: ['font-family', 'font'],
   tone: ['color'],
   align: ['text-align'],
   truncate: ['overflow', 'text-overflow', 'white-space'],
-};
+});
 
 // DtText values mirrored from packages/dialtone-vue/components/Text/TextConstants.js for
 // --validate. The script must not import Vue source at runtime; tests assert parity.
@@ -201,12 +205,12 @@ const TEXT_FONT_SIZES = new Set([
   '400', '450', '500', '550', '600', '650', '700', '750', '800',
 ]);
 // Legacy composition sizes, valid only with kind and no variant.
-const TEXT_KIND_SIZES = {
+const TEXT_KIND_SIZES = lookupTable({
   headline: ['700', '600', '500', '400', '300', '200', '100', '3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'],
   body: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
   label: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
   code: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
-};
+});
 
 // Rewriteable element tags (only these get turned into <dt-text>)
 const REWRITEABLE_TAGS = new Set(['p', 'span', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']);
@@ -474,7 +478,7 @@ function hasAuthoredComposition (names) {
 
 // Props the element already authors, in any binding form: { [prop]: true }.
 function parseExistingProps (names) {
-  const props = {};
+  const props = Object.create(null);
   for (const name of names) props[boundProp(name)] = true;
   return props;
 }
@@ -491,6 +495,7 @@ function blockedOverrideProps (attrStr, names) {
   const declared = new Set(
     [...(style[1] ?? style[2]).matchAll(/(?:^|;)\s*([\w-]+)\s*:/g)].map(m => m[1].toLowerCase()),
   );
+  if (declared.has('all')) return ALL_OVERRIDE_PROPS; // `all` resets every property
   return new Set(Object.keys(OVERRIDE_STYLE_PROPERTIES)
     .filter(prop => OVERRIDE_STYLE_PROPERTIES[prop].some(property => declared.has(property))));
 }
@@ -877,11 +882,17 @@ function collapseNestedSpans (content) {
   const dtTextRe = new RegExp(`<dt-text(${ATTR_BODY})>`, 'g');
   let m;
   const replacements = [];
+  // The span scan below covers the whole body, nested <dt-text> included, so edit each
+  // body once through its outermost ancestor: overlapping body replacements would apply
+  // the outer one with stale offsets and corrupt the template.
+  let coveredEnd = -1;
 
   while ((m = dtTextRe.exec(content)) !== null) {
+    if (m.index < coveredEnd) continue;
     const openEnd = m.index + m[0].length;
     const closing = findMatchingClosingTag(content, openEnd, 'dt-text');
     if (!closing) continue;
+    coveredEnd = closing.index;
     const bodyStart = openEnd;
     const bodyEnd = closing.index;
     const body = content.slice(bodyStart, bodyEnd);
