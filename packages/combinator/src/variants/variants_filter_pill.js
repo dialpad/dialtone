@@ -7,6 +7,13 @@ const messageOptions = [
   { value: 'unread', label: 'Unread' },
   { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
 ];
+const typeOptions = [
+  { value: 'all', label: 'All types' },
+  { value: 'calls', label: 'Calls' },
+  { value: 'messages', label: 'Messages', description: 'Includes texts and chats' },
+  { value: 'archived', label: 'Archived', disabled: true, description: 'Choose All under Status to view archived items', group: 'Other views' },
+  { value: 'spam', label: 'Spam', group: 'Other views' },
+];
 const channelOptions = [
   { value: 'email', label: 'Email' },
   { value: 'phone', label: 'Phone' },
@@ -122,6 +129,13 @@ export default {
   }),
 
   'controlled empty options': controlledPreset({ options: { initialValue: [] } }),
+
+  'controlled unavailable choices': {
+    ...controlledPreset({ options: { initialValue: typeOptions }, label: { initialValue: 'Type' } }),
+    metadata: {
+      copyNotice: 'Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#unavailable-choices-and-groups.',
+    },
+  },
 
   'controlled counts': controlledPreset({ selected: { initialValue: 'unread', types: ['string', 'null'] } }, {
     headerContent: { initialValue: 'Filter by' },

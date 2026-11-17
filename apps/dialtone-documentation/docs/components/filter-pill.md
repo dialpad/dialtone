@@ -97,6 +97,37 @@ const selectedMessage = ref('all');
 
 Use `null` when nothing is selected.
 
+### Unavailable choices and groups
+
+In a controlled single-selection dropdown, each option can also have:
+
+- `disabled: true` to keep a choice visible but unavailable. Activating it does nothing, and the menu stays open.
+- `description` for short text under the label, such as why the choice is unavailable. It's also the row's accessible description.
+- `group` for a section heading. Consecutive options with the same `group` share one section, in the order you supply. Ungrouped options stay at the top level, and `headerContent` stays the heading for the whole menu.
+
+Your application decides which choices are available and supplies translated descriptions and headings. A selected option that becomes unavailable stays checked and keeps the pill’s label; recovering from it is up to your application. Clear still restores `neutral-value`. Changing these fields while the menu is open keeps focus on the same choice.
+
+`null`, an omitted field or an empty string means the field is absent. A malformed value is ignored with a development warning and doesn’t disable the pill. Multiple-selection popovers ignore all three fields.
+
+```vue demo
+<dt-filter-pill
+  v-model:selected="selectedType"
+  :options="[
+    { value: 'all', label: 'All types' },
+    { value: 'calls', label: 'Calls' },
+    { value: 'messages', label: 'Messages', description: 'Includes texts and chats' },
+    { value: 'archived', label: 'Archived', disabled: true, description: 'Choose All under Status to view archived items', group: 'Other views' },
+    { value: 'spam', label: 'Spam', group: 'Other views' },
+  ]"
+  label="Type"
+  neutral-value="all"
+  end-tooltip-text="Clear"
+  use-dropdown
+/>
+```
+
+This example uses `const selectedType = ref('all');`.
+
 ### Controlled multiple selection
 
 Use an array of strings for `selected`. Changes apply immediately unless you set `defer-selection`. Apply saves deferred edits; Cancel, Escape and dismissal discard them. Clear resets `selected` to `[]`.
@@ -751,7 +782,7 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 | Key | Action |
 | ----- | -------- |
 | <kbd>Enter</kbd> / <kbd>Space</kbd> | Opens the popover or dropdown; toggles checkboxes inside |
-| <kbd>Arrow Up</kbd> / <kbd>Arrow Down</kbd> | Opens the popover; navigates list items in dropdown mode |
+| <kbd>Arrow Up</kbd> / <kbd>Arrow Down</kbd> | Opens the popover; navigates list items in dropdown mode, including unavailable ones and across groups |
 | <kbd>Escape</kbd> | Closes the popover or dropdown, discarding pending changes in deferred mode |
 | <kbd>Tab</kbd> | Moves focus between the primary button, checkboxes, footer actions, and the clear button |
 
@@ -760,6 +791,14 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 - The primary button uses `aria-disabled="true"` in read-only mode instead of `disabled`, preserving focusability while indicating the control is not interactive.
 - The checkbox group inside the popover receives `aria-label` set to the pill's `label` prop, giving screen readers context for the list of options.
 - The clear button uses `aria-label` set to `endTooltipText` (or a localized default), ensuring the icon-only button has an accessible name.
+
+### Unavailable choices and groups
+
+- An unavailable choice uses `aria-disabled="true"`. It stays focusable and reachable with the arrow keys, Home, End and typeahead, so keyboard and screen reader users can find it and hear why it's unavailable. This follows the WAI-ARIA Authoring Practices guidance on [focusability of disabled controls](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#focusabilityofdisabledcontrols), which keeps disabled menu items focusable.
+- Activating an unavailable choice with a pointer, <kbd>Enter</kbd> or <kbd>Space</kbd> does nothing; <kbd>Escape</kbd>, <kbd>Tab</kbd> and outside clicks still close the menu.
+- A `description` is the row's accessible description, read after its name, through `aria-describedby`. It isn't repeated in the name.
+- Group headings label their group and aren't focusable. Typeahead matches option labels, not descriptions or headings.
+- Explain unavailability in the `description` rather than a tooltip, so touch, keyboard and screen reader users get it too.
 
 ### Labelling guidelines
 
@@ -801,6 +840,7 @@ function resetRemovalExample () {
 
 const heroSelected = ref('all');
 const selectedMessage = ref('all');
+const selectedType = ref('all');
 const selectedChannels = ref([]);
 const currentMessage = ref('all');
 const unreadCount = ref(12);

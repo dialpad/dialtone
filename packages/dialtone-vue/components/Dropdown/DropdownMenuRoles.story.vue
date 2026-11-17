@@ -50,6 +50,21 @@
         >
           Refresh
         </dt-list-item>
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          disabled
+          aria-describedby="menu-roles-export-reason"
+          @click="refresh(close)"
+        >
+          Export
+          <template #subtitle>
+            <span
+              id="menu-roles-export-reason"
+              aria-hidden="true"
+            >Only owners can export</span>
+          </template>
+        </dt-list-item>
       </template>
     </dt-dropdown>
     <p role="status">

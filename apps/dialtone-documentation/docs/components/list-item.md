@@ -83,7 +83,7 @@ Use [Dropdown's persistent-choice example](dropdown.md#persistent-menu-choices) 
 
 ## Disabled
 
-Set `disabled` on a row that can't be activated right now. The row renders `aria-disabled="true"` and the disabled style, and it doesn't emit `click` for pointer, Enter or Space. It still emits `keydown`, `mousemove` and `mouseleave`, and stays focusable and reachable with the arrow keys, Home, End and typeahead, so keyboard and screen reader users can find it and learn why it's unavailable. Use it on interactive rows (`menuitem`, `menuitemradio` or `option`), where assistive technology announces the state.
+Set `disabled` on a row that can't be activated right now. The row renders `aria-disabled="true"` and the disabled style, and it doesn't emit `click` for pointer, Enter or Space. It still emits `keydown`, `mousemove` and `mouseleave`, and stays focusable and reachable with the arrow keys, Home, End and typeahead, so keyboard and screen reader users can find it and learn why it's unavailable. This follows the WAI-ARIA Authoring Practices guidance on [focusability of disabled controls](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#focusabilityofdisabledcontrols), which keeps disabled menu items focusable. Use it on interactive rows (`menuitem`, `menuitemradio` or `option`), where assistive technology announces the state.
 
 Put the reason in the `subtitle` slot and point `aria-describedby` at it, so it's read as the row's description rather than repeated in its name.
 
