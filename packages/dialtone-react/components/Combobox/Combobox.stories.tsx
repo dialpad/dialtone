@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtAvatar } from '../Avatar';
 import { DtInput } from '../Input';
 import { DtListItem } from '../ListItem';
 import { DtCombobox, type DtComboboxProps } from './Combobox';
@@ -202,21 +202,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<ComboboxStoryArgs>;
 
-// Avatar isn't ported: Vue's <dt-avatar :full-name :seed>, as it renders with initials.
-function StoryAvatar ({ initials }: { initials: string }) {
-  return (
-    <StandIn for="avatar">
-      <div className="d-avatar d-avatar--size-300" data-qa="dt-avatar">
-        <div className="d-avatar__canvas">
-          <div className="d-avatar__canvas-inner">
-            <span className="d-avatar__initials">{initials}</span>
-          </div>
-        </div>
-      </div>
-    </StandIn>
-  );
-}
-
 // ComboboxDefault.story.vue
 function ComboboxDefault ({
   input: _input,
@@ -270,7 +255,7 @@ function ComboboxDefault ({
               role="option"
               navigationType="arrow-keys"
               onClick={() => onListItemSelect(i)}
-              start={<StoryAvatar initials={(i + 1).toString()} />}
+              start={<DtAvatar fullName={(i + 1).toString()} seed={i.toString()} />}
             >
               {item.name}
             </DtListItem>
