@@ -254,6 +254,27 @@ describe('DtIllustration Tests', () => {
     });
   });
 
+  describe('Empty illustration fragment', () => {
+    it('Should fall back to the icon when the illustration is an empty fragment', () => {
+      mockProps = { size: 400 };
+      mockSlots = { illustration: <></>, icon: MOCK_ICON_SLOT };
+
+      updateWrapper();
+
+      expect(icon).toBeInTheDocument();
+    });
+
+    it('Should keep a non-empty fragment as the illustration', () => {
+      mockProps = { size: 400 };
+      mockSlots = { illustration: <>{MOCK_ILLUSTRATION_SLOT}</>, icon: MOCK_ICON_SLOT };
+
+      updateWrapper();
+
+      expect(illustration).toBeInTheDocument();
+      expect(icon).not.toBeInTheDocument();
+    });
+  });
+
   describe('Icon slot scope', () => {
     it('Should pass the icon size to a function icon slot', () => {
       mockProps = { size: 'sm' };

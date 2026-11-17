@@ -1,4 +1,7 @@
-import { useEffect, useEffectEvent, useRef, type HTMLAttributes, type ReactNode, type Ref } from 'react';
+import {
+  Children, Fragment, isValidElement, useEffect, useEffectEvent, useRef,
+  type HTMLAttributes, type ReactNode, type Ref,
+} from 'react';
 import { cx, type ClassValue } from '../../common/cx';
 import { hasContent, renderSlot, type SlotProp } from '../../common/slots';
 import { DtStack } from '../Stack';
@@ -48,6 +51,13 @@ export interface DtEmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   ref?: Ref<HTMLDivElement>;
 }
 
+/** hasContent that looks inside fragments, as Vue's hasSlotContent does: an empty fragment is no content. */
+function hasFragmentContent (node: ReactNode): boolean {
+  return Children.toArray(node).some(child => isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment
+    ? hasFragmentContent(child.props.children)
+    : hasContent(child));
+}
+
 /** The modifier's value for a size, or undefined for a size the maps don't know (Vue's object lookup). */
 function bySize<T> (map: Readonly<Record<string, T>>, sizeKey: string): T | undefined {
   return Object.hasOwn(map, sizeKey) ? map[sizeKey] : undefined;
@@ -76,7 +86,7 @@ export function DtEmptyState ({
 
   const iconContent = renderSlot(icon, { iconSize: '800' });
   const hasIcon = hasContent(iconContent);
-  const hasIllustration = hasContent(illustration);
+  const hasIllustration = hasFragmentContent(illustration);
   const hasBody = hasContent(body);
 
   // Icon is shown in lg and md size only if there is no illustration, and always in sm size.

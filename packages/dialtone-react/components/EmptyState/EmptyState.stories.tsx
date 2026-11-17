@@ -102,9 +102,7 @@ type Story = StoryObj<EmptyStateStoryArgs>;
 function EmptyStateDefault ({ icon, illustration, body, ...args }: EmptyStateStoryArgs) {
   return (
     <DtEmptyState
-      size={args.size}
-      headerText={args.headerText}
-      bodyText={args.bodyText}
+      {...args}
       icon={icon ? ({ iconSize }) => <DtIcon name={icon} size={iconSize as '800'} /> : undefined}
       illustration={illustration ? <DtIllustration name={illustration} /> : undefined}
       body={<div dangerouslySetInnerHTML={{ __html: body ?? '' }} />}
