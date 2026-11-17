@@ -1,0 +1,104 @@
+packages/dialtone-react/components/Chip/ChipConstants.ts
+  s_a4121f9acecc61::t_2530282cfbe6ff 1-40
+packages/dialtone-react/components/Chip/index.ts
+  s_a4121f9acecc61::t_fb707ccc43996f 1-7
+packages/dialtone-react/components/Chip/Chip.parity.tsx
+  s_ce88a72a8d1b16::t_a2a3585af173fd 1-5
+packages/dialtone-react/components/Chip/Chip.stories.tsx
+  s_ce88a72a8d1b16::t_5792822c2eb7ec 1,3-146,148-210
+  s_b0e50e1b80b5f1::t_9586df4a355c36 2,147
+packages/dialtone-react/components/Chip/Chip.test.tsx
+  s_ce88a72a8d1b16::t_92e86f7ef4c8f8 1-191
+packages/dialtone-react/components/Chip/Chip.tsx
+  s_ce88a72a8d1b16::t_a718c7ad6658f9 2-101,105-172,176-177,179-198,200-224
+  s_b0e50e1b80b5f1::t_fcbd2e504df258 1,102-104,173-175,178,199
+packages/dialtone-react/components/Tab/Tab.parity.tsx
+  s_32ded55aeb4b6b::t_f5121fa9ec8b9c 1,3
+  s_286250b714e3c8::t_a84873ad5f219c 2,4-5
+packages/dialtone-react/components/Tab/Tab.stories.tsx
+  s_32ded55aeb4b6b::t_de62e5e550e37c 1-56
+packages/dialtone-react/components/Tab/Tab.test.tsx
+  s_32ded55aeb4b6b::t_3f99f4975e2795 1,3-29,32-35,38-451
+  s_32ded55aeb4b6b::t_9c8f3e8da2848c 2,30-31,36-37
+packages/dialtone-react/components/Tab/Tab.tsx
+  s_32ded55aeb4b6b::t_57bbfc46cd2d63 1-128,131-135,137-186
+  s_32ded55aeb4b6b::t_7ddf10462f2d8b 129-130,136
+packages/dialtone-react/components/Tab/TabGroup.test.tsx
+  s_32ded55aeb4b6b::t_fd402ff776b875 1-3,5-109,112-148,151-952
+  s_32ded55aeb4b6b::t_b85e6b65389da9 4,110-111,149-150
+packages/dialtone-react/components/Tab/TabGroup.tsx
+  s_32ded55aeb4b6b::t_a9b7e362a740ea 1-122,125-383
+  s_2deb4b8cdeb331::t_e0f8b457636083 123-124
+packages/dialtone-react/components/Tab/TabGroupContext.ts
+  s_32ded55aeb4b6b::t_de95f44573633c 1-49
+packages/dialtone-react/components/Tab/TabPanel.stories.tsx
+  s_32ded55aeb4b6b::t_0241d1e3f5bb2e 1-41
+packages/dialtone-react/components/Tab/TabPanel.test.tsx
+  s_32ded55aeb4b6b::t_7bf780fdfac105 1-158
+packages/dialtone-react/components/Tab/TabPanel.tsx
+  s_32ded55aeb4b6b::t_7fef7f4a5c15b0 1-120
+packages/dialtone-react/components/Tab/Tabs.stories.tsx
+  s_32ded55aeb4b6b::t_0bfdfd0dbec3e7 1-263
+packages/dialtone-react/components/Tab/TabsConstants.ts
+  s_32ded55aeb4b6b::t_2ab9c54651ad84 1-50
+packages/dialtone-react/components/Tab/index.ts
+  s_32ded55aeb4b6b::t_9bf4a790c1cab8 1-18
+packages/dialtone-react/components/Tab/skips.json
+  s_32ded55aeb4b6b::t_80a1719b3111b8 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f0e7ce77d2ba5e50ff73ed2bd1cbdb0db4fc12b",
+  "prompts": {},
+  "sessions": {
+    "s_286250b714e3c8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02fc210e-e9c2-4acd-829e-1d0eb6ad4ad9",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2deb4b8cdeb331": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4fe38f51-e8ac-4f04-80c6-d67a8d5fb343",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_32ded55aeb4b6b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34a6baeb-91f4-43e2-be27-c8621bd52ce2",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_a4121f9acecc61": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4364d89-7341-46c4-a88e-879be4230f7b",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_b0e50e1b80b5f1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cdac9bf4-2d69-487f-8e66-ec83888fffa3",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_ce88a72a8d1b16": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a3668a1a-d8c9-4df9-9140-8b915d2c2dd7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
