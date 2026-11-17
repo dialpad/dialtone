@@ -18,6 +18,15 @@ const SELECTED = 1;
 export default {
   component: 'DtTabGroup', label: '', page: 'TabGroup', family: 'Navigation',
   snapTokens: true,
+  // Tabs are added and removed in Figma, so the group follows them: the root and the list hug their tabs (the
+  // root is `inline-size: 100%`, which a spread group fills at the width it is given, so only those keep it
+  // pinned), the root stacks its list above the panels, and the list's border, an absolute child along its edge,
+  // stretches or stays at the end edge with it.
+  percentIsFill: c => c.spread === 'none',
+  blockLayout: true,
+  stretchInside: true,
+  // The tabs' slot must not clip: the selected tab's line hangs below (or beside) its box.
+  unclipSlots: true,
 
   // How the set reads in Dev Mode (see code-connect.mjs). The tabs go in as the `tabs` slot's content, and the
   // selected one, which each tab's template reports, becomes `selected`.

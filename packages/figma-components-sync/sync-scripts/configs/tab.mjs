@@ -14,6 +14,9 @@
 export default {
   component: 'DtTab', label: 'Tab', page: 'Tab', family: 'Navigation',
   snapTokens: true,
+  // The selected line hangs outside the box and stays a measured distance from the tab's edge (the tab is a few px
+  // wider than the browser's, snapped paddings), so it keeps its OFFSETS rather than its position.
+  stretchInside: true,
   // Its icons are boolean properties and its edge slots are native slots, as on DtButton: it renders a
   // DtButton and takes the same `startIcon`, `endIcon`, `leading` and `trailing` slots.
   merged: true,

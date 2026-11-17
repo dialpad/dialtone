@@ -13,6 +13,10 @@ export default {
   component: 'DtInput', label: '', page: 'InputTextarea', family: 'Text fields',
   snapTokens: true,
   flexLayout: true,
+  // As DtInput (see input.mjs): the box snaps taller than the browser's, so the blocks around it hug.
+  alignNormalStretches: true,
+  hugBlocks: ['d-input__label'],
+  blockLayout: true,
   // `min-block-size` is 40 at size 100 (`calc(layout-75 - spacing-100)`, no token) and a spacing or
   // layout token elsewhere (80, 12, 14, 48), none of which belongs on the layout scale it would snap
   // to: snapping moved 40 to 48 and made the control 8px too tall. It is left exact.

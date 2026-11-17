@@ -33,6 +33,12 @@ export default {
   // The wrapper is `display: inline-flex; inline-size: 100%` with the control at `flex: 1`: it
   // fills the row instead of being pinned at the width the harness measured.
   flexLayout: true,
+  // The box's padding snaps to a token and comes out ~2px taller than the browser's: its icon columns stretch with
+  // it (`align-items: normal` is stretch), and the label block and the root hug instead of keeping the measured
+  // heights, which let the box overlap the message row and the icons sit a pixel above the text's centre.
+  alignNormalStretches: true,
+  hugBlocks: ['d-input__label'],
+  blockLayout: true,
 
   // How the set reads in Dev Mode (see code-connect.mjs).
 
