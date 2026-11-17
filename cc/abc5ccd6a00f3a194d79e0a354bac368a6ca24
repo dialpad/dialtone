@@ -1,0 +1,28 @@
+scripts/retrieval/ci-routing.test.mjs
+  s_afb4873e0f46eb::t_2a251b61c0e7b6 190,192
+  s_afb4873e0f46eb::t_66a633df14d742 173,187-189,191,194,205,212-214
+  s_afb4873e0f46eb::t_12aa9cb1d6e130 206-211,215-219
+.github/workflows/release.yml
+  s_afb4873e0f46eb::t_cc7157f76eb056 63,83-90,92-117
+  s_afb4873e0f46eb::t_12aa9cb1d6e130 91
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_afb4873e0f46eb::t_33d38fed4dcc11 100
+scripts/retrieval/README.md
+  s_afb4873e0f46eb::t_33d38fed4dcc11 85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ccabc5ccd6a00f3a194d79e0a354bac368a6ca24",
+  "prompts": {},
+  "sessions": {
+    "s_afb4873e0f46eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e4b7-d90c-76c2-88a2-0aa0487e4471",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
