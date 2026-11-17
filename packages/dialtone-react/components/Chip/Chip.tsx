@@ -1,4 +1,4 @@
-import { useId, type HTMLAttributes, type KeyboardEvent, type MouseEvent, type ReactNode, type Ref } from 'react';
+import { Fragment, isValidElement, useId, type HTMLAttributes, type KeyboardEvent, type MouseEvent, type ReactNode, type Ref } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
 import { useI18n } from '../../common/localization';
 import { hasContent } from '../../common/slots';
@@ -99,6 +99,9 @@ export type DtChipProps = DtChipOwnProps & RootAttributes;
 const modifierOf = (modifiers: Readonly<Record<string, string>>, key: string) =>
   (Object.hasOwn(modifiers, key) ? modifiers[key] : undefined);
 
+const isEmptyFragment = (node: ReactNode) =>
+  isValidElement<{ children?: ReactNode }>(node) && node.type === Fragment && !hasContent(node.props.children);
+
 /**
  * A chip is a compact UI element that provides brief, descriptive information about an element.
  * It is terse, ideally one word. It is important a button is identifiable, consistent, and
@@ -167,9 +170,12 @@ export function DtChip ({
     onKeyUp,
   };
 
+  // Vue rejects a fragment with no children as slot content, so an empty `<></>` icon falls back to the avatar.
+  const hasIcon = hasContent(icon) && !isEmptyFragment(icon);
+
   const chipContent = (
     <>
-      {hasContent(icon)
+      {hasIcon
         ? (
           <span className={cx('d-chip__icon', iconClass)} data-qa="dt-chip-icon">
             {icon}
@@ -190,7 +196,7 @@ export function DtChip ({
 
   return (
     <span
-      {...(groupedChip !== undefined && { 'grouped-chip': groupedChip })}
+      {...(groupedChip !== undefined && { 'grouped-chip': String(groupedChip) })}
       className={cx('d-chip', className)}
       {...rest}
     >

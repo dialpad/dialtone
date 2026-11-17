@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import parse from 'html-react-parser';
 import { action } from 'storybook/actions';
 import { DtAvatar } from '../Avatar';
 import { DtIcon, ICON_NAMES, type IconName } from '../Icon';
@@ -143,7 +144,7 @@ function ChipDefault (args: ChipStoryArgs) {
       icon={args.icon ? <DtIcon name={args.icon} size={iconSize} /> : undefined}
       avatar={!args.icon && args.avatar ? <DtAvatar fullName={args.avatar} seed={args.avatarSeed} /> : undefined}
     >
-      {args.default && <span dangerouslySetInnerHTML={{ __html: args.default }} />}
+      {args.default ? parse(args.default) : undefined}
     </DtChip>
   );
 }
