@@ -132,16 +132,18 @@ export function DtImageViewer ({
     }
   }, [isOpen]);
 
+  // Focus the close button whenever the modal mounts open, from a click or a controlled `open`. It depends on `modalEl`
+  // so it runs after the modal mounts in its resolved appendTo target (a moved portal re-mounts it).
+  useEffect(() => {
+    if (isOpen && modalEl) closeButtonRef.current?.focus();
+  }, [isOpen, modalEl]);
+
   const openModal = () => {
     // Has custom control passed in
     if (open !== null) return;
     setIsOpen(true);
     setShowCloseButton(true);
     onOpened?.(true);
-
-    setTimeout(() => {
-      closeButtonRef.current?.focus();
-    });
   };
 
   const close = () => {
