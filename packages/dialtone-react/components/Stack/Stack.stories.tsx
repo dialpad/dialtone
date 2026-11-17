@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtBox } from '../Box/Box';
 import { DtStack, type DtStackProps } from './Stack';
 import {
   DT_STACK_DIRECTION,
@@ -152,26 +152,28 @@ function StackDefault (args: StackStoryArgs) {
 // StackWrapping.story.vue
 function StackWrapping (args: StackStoryArgs) {
   return (
-    <StandIn for="box">
-      <div data-qa="dt-box" className="d-box d-box--is-500 d-box--max-is-100p">
-        <DtStack
-          direction={args.direction}
-          as={args.as}
-          gap={args.gap}
-          align={args.align}
-          justify={args.justify}
-          wrap={args.wrap}
-        >
-          {[1, 2, 3].map(item => (
-            <StandIn for="box" key={item}>
-              <div data-qa="dt-box" className="d-box d-box--p-100 d-box--surface-moderate-opaque d-box--br-300 d-box--is-200">
-                Stack item {item}
-              </div>
-            </StandIn>
-          ))}
-        </DtStack>
-      </div>
-    </StandIn>
+    <DtBox inlineSize="500" maxInlineSize="100p">
+      <DtStack
+        direction={args.direction}
+        as={args.as}
+        gap={args.gap}
+        align={args.align}
+        justify={args.justify}
+        wrap={args.wrap}
+      >
+        {[1, 2, 3].map(item => (
+          <DtBox
+            key={item}
+            padding="100"
+            surface="moderate-opaque"
+            borderRadius="300"
+            inlineSize="200"
+          >
+            Stack item {item}
+          </DtBox>
+        ))}
+      </DtStack>
+    </DtBox>
   );
 }
 
