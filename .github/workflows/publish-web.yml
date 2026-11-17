@@ -252,6 +252,16 @@ jobs:
         with:
           ref: ${{ needs.variables-setup.outputs.source_sha }}
 
+      # pnpm checks the branch name; attach it locally without fetching a moving branch tip.
+      - name: Attach publication branch at pinned source
+        if: ${{ !contains(fromJSON(needs.filter-actions.outputs.qualified), matrix.package) }}
+        env:
+          RELEASE_SHA: ${{ needs.variables-setup.outputs.source_sha }}
+          RELEASE_BRANCH: ${{ needs.variables-setup.outputs.current_branch }}
+        run: |
+          [[ "$(git rev-parse HEAD)" == "$RELEASE_SHA" ]] || exit 1
+          git switch --create "$RELEASE_BRANCH" "$RELEASE_SHA"
+
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
@@ -359,13 +369,10 @@ jobs:
         env:
           QUALIFIED: ${{ needs.filter-actions.outputs.qualified }}
           RELEASE_TAG: ${{ needs.variables-setup.outputs.release_tag }}
-          # A failed publish cannot complete by waiting; report the incomplete release promptly.
-          ATTEMPTS: ${{ needs.publish.result == 'success' && '10' || '1' }}
         run: >
           node scripts/retrieval/release-archives.mjs verify
           --receipt ${{ runner.temp }}/release-qualification/receipt.json
           --tag "$RELEASE_TAG"
-          --attempts "$ATTEMPTS"
           --out ${{ runner.temp }}/release-verification
           $(node -e "for (const key of JSON.parse(process.env.QUALIFIED)) console.log('--package', key)")
 

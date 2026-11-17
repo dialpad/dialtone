@@ -127,6 +127,8 @@ test('release qualification precedes publication and gates overall release succe
   assert.ok(qualified.if.includes(selected) && rebuilt.if.includes('!' + selected));
   const verifyStep = verify.steps.find(step => /release-archives\.mjs verify/.test(step.run ?? ''));
   assert.match(verifyStep.env.QUALIFIED, /outputs\.qualified/, 'verify must receive every qualified package');
+  assert.equal(verifyStep.env.ATTEMPTS, undefined, 'unrelated publish failures must not shorten registry availability polling');
+  assert.doesNotMatch(verifyStep.run, /--attempts/, 'use the verifier default shared availability budget');
   for (const [name, job] of Object.entries(publish.jobs)) {
     assert.ok(!job['continue-on-error'] && job.steps.every(step => !step['continue-on-error']), `${name} hides a failed gate`);
     for (const step of job.steps.filter(step => step.uses?.startsWith('actions/checkout')))
@@ -138,6 +140,54 @@ test('release qualification precedes publication and gates overall release succe
     'gulpfile.cjs', 'entry/vue3.js', 'packages/dialtone-emojis/package.json'],
     [workflow.on.pull_request.paths, workflow.on.push.paths, filters.cli]);
   assert.match(runs(workflow.jobs['qualify-lookup-candidate']), /qualify-release-examples\.mjs\s+--mode candidate/);
+});
+
+test('pnpm publication attaches the release branch without moving the qualified source', async () => {
+  const { mkdtempSync, writeFileSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { execFileSync } = await import('node:child_process');
+  const steps = readWorkflow('publish-web.yml').jobs.publish.steps;
+  const attach = steps.find(step => step.name === 'Attach publication branch at pinned source');
+  assert.ok(attach, 'pnpm requires a named branch even when source is pinned');
+  const rebuilt = steps.find(step => /:publish/.test(step.run ?? ''));
+  assert.equal(attach.if, rebuilt.if, 'only the Nx/pnpm publication path needs an attached branch');
+  assert.ok(steps.indexOf(attach) < steps.indexOf(rebuilt));
+  assert.equal(attach.env.RELEASE_SHA, '${{ needs.variables-setup.outputs.source_sha }}');
+  assert.equal(attach.env.RELEASE_BRANCH, '${{ needs.variables-setup.outputs.current_branch }}');
+  const dir = mkdtempSync(join(tmpdir(), 'publish-checkout-'));
+  const run = (file, args, env = {}) => execFileSync(file, args, {
+    cwd: dir, encoding: 'utf8', stdio: 'pipe', timeout: 30000,
+    env: { ...process.env, pnpm_config_cache_dir: join(dir, 'cache'), pnpm_config_offline: 'true',
+      pnpm_config_update_notifier: 'false', ...env },
+  }).trim();
+  const git = (...args) => run('git', args);
+  try {
+    git('init', '-q'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
+    git('config', 'commit.gpgsign', 'false');
+    const { packageManager } = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'publication-dry-run-fixture', version: '1.0.0', packageManager }));
+    writeFileSync(join(dir, '.npmrc'), 'publish-branch=production\n');
+    writeFileSync(join(dir, '.gitignore'), 'cache/\n*.tgz\n');
+    git('add', 'package.json', '.npmrc', '.gitignore'); git('commit', '-qm', 'release');
+    const sha = git('rev-parse', 'HEAD');
+    git('checkout', '--detach', '-q', sha);
+    assert.throws(() => run('pnpm', ['publish', '--dry-run']), error => /ERR_PNPM_GIT_UNKNOWN_BRANCH/.test(error.stdout));
+    // A named branch at a different commit is not an acceptable substitute for the pinned source.
+    git('commit', '--allow-empty', '-qm', 'another source');
+    const otherSha = git('rev-parse', 'HEAD');
+    git('checkout', '--detach', '-q', sha);
+    const attachAt = (branch, source = sha) => run('bash', ['-e', '-o', 'pipefail', '-c', attach.run],
+      { RELEASE_SHA: source, RELEASE_BRANCH: branch });
+    assert.throws(() => attachAt('production', otherSha));
+    for (const branch of ['production', 'next']) {
+      attachAt(branch);
+      assert.equal(git('branch', '--show-current'), branch);
+      assert.equal(git('rev-parse', 'HEAD'), sha);
+      run('pnpm', ['publish', '--dry-run', `--publish-branch=${branch}`]);
+      git('checkout', '--detach', '-q', sha);
+    }
+  } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
 test('prerelease publication dispatches the complete prepared batch and preserves manual/production entry points', () => {
