@@ -1,0 +1,37 @@
+packages/dialtone-react/.gitignore
+  s_2defdf83601f66::t_871bc79ef9bce8 5-8
+packages/dialtone-react/.lintstagedrc.cjs
+  s_2defdf83601f66::t_cc3bd58e046ab4 1-11
+packages/dialtone-react/project.json
+  s_2defdf83601f66::t_e1133e4cc2eacb 4-14
+packages/dialtone-react/scripts/build-index.mjs
+  s_2defdf83601f66::t_00b75d5f4aed42 1-35
+packages/dialtone-react/vite.build.config.ts
+  s_2defdf83601f66::t_85dd5495263577 1-54
+packages/dialtone-react/eslint.config.js
+  s_bdd40b63290c6d::t_6f62194d2d1d21 1-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cf51b320aa8c61af87cd6730c04b08250a6f33ef",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_bdd40b63290c6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a28d5ade260c2009b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

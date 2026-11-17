@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/components/text.md
+  h_c15b5755534093 89,144,152,189-190,192-194,196-198,200-202,204-206,208-210,297-298,302-303,306-307,310-311,358,360-361,384,480,494,497,531,535,539,541-542,545
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "14e5ac1d1ea73d76a7985c5a5770d35a41229dfb",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
