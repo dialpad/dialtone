@@ -2,9 +2,9 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
 import { StandIn } from '../../.storybook/StandIn';
+import { DtInput } from '../Input';
 import { DtListItem } from '../ListItem';
-import { DtText } from '../Text';
-import { DtCombobox, type DtComboboxInputProps, type DtComboboxProps } from './Combobox';
+import { DtCombobox, type DtComboboxProps } from './Combobox';
 import { COMBOBOX_LABEL_SIZES } from './ComboboxConstants';
 
 interface ComboboxItem {
@@ -202,55 +202,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<ComboboxStoryArgs>;
 
-// Input isn't ported: Vue's <dt-input v-model v-bind="inputProps" placeholder>, as it renders.
-function StoryInput ({
-  value,
-  onValueChange,
-  label,
-  showLabel,
-  size,
-  description,
-  ...attrs
-}: DtComboboxInputProps & { value: string; onValueChange: (value: string) => void }) {
-  const labelSize = size === 'xl' || size === '500' || size === 500 ? (size === 'xl' ? 'lg' : '400') : (size ?? 'md');
-  return (
-    <StandIn for="input">
-      <div className="d-input__root" data-qa="dt-input">
-        <label className="d-input__label" data-qa="dt-input-label-wrapper">
-          {showLabel && label
-            ? (
-              <DtText
-                data-qa="dt-input-label"
-                kind="label"
-                size={labelSize}
-                tone="secondary"
-                className="d-input__label-text"
-              >
-                {label}
-              </DtText>
-            )
-            : null}
-          {description ? <div className="d-input__description d-description">{description}</div> : null}
-          <div className="d-input__wrapper">
-            <span className="d-input-icon d-input-icon--left" data-qa="dt-input-left-icon-wrapper" />
-            <input
-              value={value}
-              type="text"
-              autoComplete="off"
-              className="d-input__input d-input"
-              data-qa="dt-input-input"
-              placeholder="Type to show the items"
-              {...attrs}
-              onChange={event => onValueChange(event.target.value)}
-            />
-            <span className="d-input-icon d-input-icon--right" data-qa="dt-input-right-icon-wrapper" />
-          </div>
-        </label>
-      </div>
-    </StandIn>
-  );
-}
-
 // Avatar isn't ported: Vue's <dt-avatar :full-name :seed>, as it renders with initials.
 function StoryAvatar ({ initials }: { initials: string }) {
   return (
@@ -302,7 +253,15 @@ function ComboboxDefault ({
       showList={!!value && showList}
       onEscape={onComboboxEscape}
       onSelect={onComboboxSelect}
-      input={({ inputProps }) => <StoryInput {...inputProps} value={value} onValueChange={setValue} />}
+      input={({ inputProps }) => (
+        <DtInput
+          {...inputProps}
+          size={inputProps.size ?? undefined}
+          value={value}
+          onValueChange={next => setValue(String(next))}
+          placeholder="Type to show the items"
+        />
+      )}
       list={({ listProps }) => (
         <ol {...listProps} className={`${listProps.className} d-p-0 d-mbs-100 d-hmx-500 d-of-y-auto`}>
           {items.map((item, i) => (
