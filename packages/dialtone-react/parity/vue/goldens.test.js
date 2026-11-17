@@ -10,7 +10,7 @@ import * as dialtone from '@/index.js';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import * as icons from '@dialpad/dialtone-icons/vue';
 import { capture, capturedIdTokens, cleanHtml, idTokens, isGeneratedIn, maskedHtml, ROOT_ID, slotIdNamer } from '../normalize.mjs';
-import { canonicalScope, casesFrom, jsonSafe, keepIdsOf, pascal, scopeKey } from '../cases.mjs';
+import { canonicalScope, casesFrom, jsonSafe, keepIdsOf, pascal, rendered, scopeKey } from '../cases.mjs';
 import { EXTRA_CASES } from '../extra-cases.mjs';
 import { FAKE_TIMERS, FIXED_RANDOM, settle } from '../settle.mjs';
 import registry from '../../../combinator/src/variants/variants.js?raw';
@@ -217,10 +217,13 @@ function slotsOf (c, calls, unstable) {
 }
 
 for (const unit of units) {
+  // The unit's folder in dialtone-react, where the React side finds its parity map: components/<name>/<name>.parity.tsx.
   const name = pascal(unit);
-  const Component = dialtone[`Dt${name}`];
-  const variants = await variantsOf(name);
-  const cases = variants ? [...casesFrom(variants), ...(EXTRA_CASES[unit] ?? [])] : [];
+  const renders = rendered(unit); // the Vue component its cases render (cases.mjs › RENDERS)
+  const Component = dialtone[`Dt${renders}`];
+  const variants = await variantsOf(renders);
+  // Harness cases count without Combinator presets too: DtCodeblock has none.
+  const cases = [...(variants ? casesFrom(variants) : []), ...(EXTRA_CASES[unit] ?? [])];
   const result = { unit, vueName: name, cases: [] };
 
   describe(unit, () => {
@@ -229,9 +232,10 @@ for (const unit of units) {
       fs.writeFileSync(path.join(outDir, `${unit}.json`), JSON.stringify(result, null, 2));
     });
 
-    it('has a Vue component and Combinator presets', () => {
-      expect(Component, `no Dt${name} export in dialtone-vue`).toBeTruthy();
-      expect(cases.length, `no Combinator variants for Dt${name}`).toBeGreaterThan(0);
+    it('has a Vue component and cases', () => {
+      expect(Component, `no Dt${renders} export in dialtone-vue`).toBeTruthy();
+      expect(cases.length, `no Combinator variants for Dt${renders}, and no EXTRA_CASES.${unit} in parity/extra-cases.mjs`)
+        .toBeGreaterThan(0);
     });
 
     for (const c of cases) {
