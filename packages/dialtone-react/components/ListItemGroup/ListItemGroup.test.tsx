@@ -40,5 +40,26 @@ describe('DtListItemGroup Tests', () => {
         expect(root?.getAttribute('aria-labelledby')).toBe(baseProps.id + '-heading');
       });
     });
+
+    describe('List Group has a node heading and no id', () => {
+      it('generates an id and the root is aria-labelledby the heading element', () => {
+        cleanup();
+        const { container } = render(<DtListItemGroup heading={<span>Node heading</span>} />);
+        const root = container.firstElementChild;
+        const nodeHeading = container.querySelector('[data-qa="dt-dropdown-list-heading"]');
+        expect(nodeHeading?.textContent).toBe('Node heading');
+        expect(nodeHeading?.id).toBeTruthy();
+        expect(root?.id).toBeTruthy();
+        expect(root?.getAttribute('aria-labelledby')).toBe(nodeHeading?.id);
+      });
+    });
+  });
+
+  describe('Heading omitted', () => {
+    it('does not render a heading element', () => {
+      cleanup();
+      const { container } = render(<DtListItemGroup id="no-heading" />);
+      expect(container.querySelector('[data-qa="dt-dropdown-list-heading"]')).toBeNull();
+    });
   });
 });
