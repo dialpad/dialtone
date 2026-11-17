@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
+import { DtStack } from '../Stack';
 import { DtCheckbox, type DtCheckboxProps } from './Checkbox';
 
 // Slots are args named as in Vue: `default` (the label) and `descriptionSlot` (the description). Vue's template
@@ -211,12 +211,10 @@ function CheckboxDefault ({ default: _default, descriptionSlot, ...args }: Check
 // CheckboxVariants.story.vue
 function CheckboxVariants () {
   return (
-    <StandIn for="stack">
-      <div
-        id="components-checkbox--variants-container"
-        data-qa="dt-stack"
-        className="d-stack d-stack--gap-100 d-stack--justify-start"
-      >
+    <DtStack
+      id="components-checkbox--variants-container"
+      gap="100"
+    >
         {/* Default */}
         <DtCheckbox
           name="default"
@@ -407,8 +405,7 @@ function CheckboxVariants () {
           messages={[{ message: 'Positive', type: VALIDATION_MESSAGE_TYPES.POSITIVE }]}
           defaultChecked
         />
-      </div>
-    </StandIn>
+    </DtStack>
   );
 }
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtStack } from '../Stack';
 import { DtText, type DtTextProps } from './Text';
 import {
   TEXT_KIND_MODIFIERS,
@@ -246,35 +246,30 @@ const kindRows = [
 function TextVariants () {
   return (
     <div>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--gap-500 d-stack--justify-start d-p-400">
+      <DtStack gap="500" className="d-p-400">
           {/* Kind Examples */}
           <section>
             <DtText as="h2" kind="headline" size={600}>
               Kind Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 {kindRows.map(row => (
                   <div key={row.kind}>
                     <DtText as="h3" kind="headline" size={500}>
                       {row.title}
                     </DtText>
                     <div className="d-ba d-bc-default d-p-200 d-bar-400">
-                      <StandIn for="stack">
-                        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-100 d-stack--align-baseline d-stack--justify-start">
+                      <DtStack direction="row" gap="100" align="baseline">
                           {row.sizes.map(size => (
                             <DtText key={`${row.kind}-${size}`} kind={row.kind} size={size}>
                               {row.title} {size}
                             </DtText>
                           ))}
-                        </div>
-                      </StandIn>
+                      </DtStack>
                     </div>
                   </div>
                 ))}
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Strength Examples */}
@@ -282,26 +277,22 @@ function TextVariants () {
             <DtText as="h2" kind="headline" size={600}>
               Strength Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 <div>
                   <DtText as="h3" kind="headline" size={500}>
                     Font Weight Modifiers
                   </DtText>
                   <div className="d-ba d-bc-default d-p-200 d-bar-400">
-                    <StandIn for="stack">
-                      <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-200 d-stack--align-baseline d-stack--justify-start">
+                    <DtStack direction="row" gap="200" align="baseline">
                         {strengthExamples.map(item => (
                           <DtText key={item.strength} kind="headline" size={600} strength={item.strength}>
                             {item.copy}
                           </DtText>
                         ))}
-                      </div>
-                    </StandIn>
+                    </DtStack>
                   </div>
                 </div>
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Density Examples */}
@@ -309,15 +300,13 @@ function TextVariants () {
             <DtText as="h2" kind="headline" size={600}>
               Density Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 <div>
                   <DtText as="h3" kind="headline" size={500}>
                     Line Height Modifiers
                   </DtText>
                   <div className="d-ba d-bc-default d-p-200 d-bar-400">
-                    <StandIn for="stack">
-                      <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-100 d-stack--align-baseline d-stack--justify-start">
+                    <DtStack direction="row" gap="100" align="baseline">
                         {densityExamples.map(item => (
                           <DtText
                             key={item.density}
@@ -330,12 +319,10 @@ function TextVariants () {
                             {item.density} — {item.copy}
                           </DtText>
                         ))}
-                      </div>
-                    </StandIn>
+                    </DtStack>
                   </div>
                 </div>
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Tone Examples */}
@@ -343,23 +330,19 @@ function TextVariants () {
             <DtText as="h2" kind="headline" size={600}>
               Tone Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 <div>
                   <div className="d-ba d-bc-default d-p-200 d-bar-400">
-                    <StandIn for="stack">
-                      <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-100 d-stack--justify-start d-fw-wrap">
+                    <DtStack direction="row" gap="100" className="d-fw-wrap">
                         {toneExamples.map(item => (
                           <DtText key={item.key} {...item.props}>
                             {item.copy}
                           </DtText>
                         ))}
-                      </div>
-                    </StandIn>
+                    </DtStack>
                   </div>
                 </div>
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Alignment Examples */}
@@ -367,8 +350,7 @@ function TextVariants () {
             <DtText as="h2" kind="headline" size={600}>
               Alignment Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 {alignExamples.map(item => (
                   <div key={item.align}>
                     <DtText as="h4" kind="headline" size={400}>
@@ -381,8 +363,7 @@ function TextVariants () {
                     </div>
                   </div>
                 ))}
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Truncation Examples */}
@@ -390,8 +371,7 @@ function TextVariants () {
             <DtText as="h2" kind="headline" size={600}>
               Truncation Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 <div>
                   <DtText as="h3" kind="headline" size={500}>
                     Single Line (truncate)
@@ -414,8 +394,7 @@ function TextVariants () {
                   <DtText as="h3" kind="headline" size={500}>
                     Multi Line (maxLines)
                   </DtText>
-                  <StandIn for="stack">
-                    <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start d-ba d-bc-default d-p-200 d-bar-400">
+                  <DtStack gap="200" className="d-ba d-bc-default d-p-200 d-bar-400">
                       {[4, 3, 2].map(lines => (
                         <DtText key={lines} as="div" maxLines={lines} className="d-w-400">
                           <strong>{lines} lines:</strong> Clamp multi-line content to three lines for summary views.
@@ -429,11 +408,9 @@ function TextVariants () {
                           perferendis repudiandae. Sit aut qui alias necessitatibus?
                         </DtText>
                       ))}
-                    </div>
-                  </StandIn>
+                  </DtStack>
                 </div>
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Wrap Examples */}
@@ -441,8 +418,7 @@ function TextVariants () {
             <DtText as="h2" kind="headline" size={600}>
               Wrap Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 {wrapExamples.map(item => (
                   <div key={item.wrap}>
                     <DtText as="h4" kind="headline" size={400}>
@@ -455,8 +431,7 @@ function TextVariants () {
                     </div>
                   </div>
                 ))}
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Trim Examples */}
@@ -467,8 +442,7 @@ function TextVariants () {
             <DtText as="p" kind="body" tone="muted">
               Text box trim removes extra space above/below text for tighter layouts
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-200 d-stack--justify-start d-ba d-bc-default d-p-200 d-bar-400">
+            <DtStack direction="row" gap="200" className="d-ba d-bc-default d-p-200 d-bar-400">
                 {textBoxTrimExamples.map(item => (
                   <DtText
                     key={item.textBoxTrim}
@@ -480,8 +454,7 @@ function TextVariants () {
                     {item.copy}
                   </DtText>
                 ))}
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
 
           {/* Numeric Examples */}
@@ -489,30 +462,25 @@ function TextVariants () {
             <DtText as="h2" kind="headline" size={600}>
               Numeric Examples
             </DtText>
-            <StandIn for="stack">
-              <div data-qa="dt-stack" className="d-stack d-stack--gap-200 d-stack--justify-start">
+            <DtStack gap="200">
                 <div>
                   <DtText as="h3" kind="headline" size={500}>
                     Tabular Figures
                   </DtText>
                   <div className="d-ba d-bc-default d-p-200 d-bar-400">
-                    <StandIn for="stack">
-                      <div data-qa="dt-stack" className="d-stack d-stack--gap-50 d-stack--justify-start">
+                    <DtStack gap="50">
                         <DtText numeric>
                           00123456789 (numeric)
                         </DtText>
                         <DtText>
                           00123456789 (default)
                         </DtText>
-                      </div>
-                    </StandIn>
+                    </DtStack>
                   </div>
                 </div>
-              </div>
-            </StandIn>
+            </DtStack>
           </section>
-        </div>
-      </StandIn>
+      </DtStack>
     </div>
   );
 }

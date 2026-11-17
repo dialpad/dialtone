@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import { DtIconPhoneHangUp } from '../../icons';
+import { DtStack } from '../Stack';
 import { DtTooltip } from './Tooltip';
 import {
   useTooltipDirective,
@@ -65,8 +66,7 @@ function TooltipDirectiveDefault () {
   };
 
   return (
-    <StandIn for="stack">
-      <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-400 d-m-800">
+    <DtStack direction="row" gap="400" className="d-m-800">
         <span ref={setSpan}>Span with tooltip</span>
         <DirectiveButton
           value="Tooltip on bottom"
@@ -87,8 +87,7 @@ function TooltipDirectiveDefault () {
         <DirectiveButton value={message} options={{ arg: 'top-end' }} onClick={changeOnClick}>
           <span data-qa="dt-button-label" className="base-button__label d-btn__label">Change content on click</span>
         </DirectiveButton>
-      </div>
-    </StandIn>
+    </DtStack>
   );
 }
 

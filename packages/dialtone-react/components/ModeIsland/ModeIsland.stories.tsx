@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StandIn } from '../../.storybook/StandIn';
+import { DtStack } from '../Stack/Stack';
 import { DtModeIsland, type DtModeIslandProps } from './ModeIsland';
 import { DT_MODE_ISLAND_TYPES } from './ModeIslandConstants';
 
@@ -74,26 +74,20 @@ type Story = StoryObj<typeof meta>;
 function ModeIslandDefaultStory ({ as, mode }: DtModeIslandProps) {
   return (
     <DtModeIsland as={as} mode={mode} className="d-p-200 d-ba d-bc-subtle d-bar-400">
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--column d-stack--gap-200">
-          <StandIn for="stack">
-            <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-100">
-              <span className="d-fc-primary">Primary Foreground</span>
-              <span className="d-fc-tertiary">Tertiary Foreground</span>
-              <span className="d-fc-positive">Positive Foreground</span>
-              <span className="d-fc-critical">Critical Foreground</span>
-            </div>
-          </StandIn>
-          <StandIn for="stack">
-            <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-100">
-              <div className="d-bgc-secondary d-p-200 d-py-100 d-ba d-bc-subtle">Secondary Surface</div>
-              <div className="d-bgc-moderate d-p-200 d-py-100 d-ba d-bc-subtle">Moderate Surface</div>
-              <div className="d-bgc-critical d-p-200 d-py-100 d-ba d-bc-subtle">Critical Surface</div>
-              <div className="d-bgc-positive d-p-200 d-py-100 d-ba d-bc-subtle">Positive Surface</div>
-            </div>
-          </StandIn>
-        </div>
-      </StandIn>
+      <DtStack gap="200">
+        <DtStack direction="row" gap="100">
+          <span className="d-fc-primary">Primary Foreground</span>
+          <span className="d-fc-tertiary">Tertiary Foreground</span>
+          <span className="d-fc-positive">Positive Foreground</span>
+          <span className="d-fc-critical">Critical Foreground</span>
+        </DtStack>
+        <DtStack direction="row" gap="100">
+          <div className="d-bgc-secondary d-p-200 d-py-100 d-ba d-bc-subtle">Secondary Surface</div>
+          <div className="d-bgc-moderate d-p-200 d-py-100 d-ba d-bc-subtle">Moderate Surface</div>
+          <div className="d-bgc-critical d-p-200 d-py-100 d-ba d-bc-subtle">Critical Surface</div>
+          <div className="d-bgc-positive d-p-200 d-py-100 d-ba d-bc-subtle">Positive Surface</div>
+        </DtStack>
+      </DtStack>
     </DtModeIsland>
   );
 }
@@ -109,8 +103,7 @@ export const NestedIslands: Story = {
   render: () => (
     <div>
       <h3 className="d-headline--md d-mbe-200">Nested Mode Islands</h3>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-200">
+      <DtStack direction="row" gap="200">
           <DtModeIsland className={`d-fl1 ${ISLAND}`}>
             <p className="d-body--lg d-fw-semibold d-mbe-200">Inverted Mode Island (Parent)</p>
             <DtModeIsland className={ISLAND}>
@@ -135,8 +128,7 @@ export const NestedIslands: Story = {
               <p className="d-body--md">Explicit Light Island (Always Light)</p>
             </DtModeIsland>
           </DtModeIsland>
-        </div>
-      </StandIn>
+      </DtStack>
     </div>
   ),
 };
@@ -147,8 +139,7 @@ export const WithCustomElement: Story = {
       <h3 className="d-headline--md d-mbe-200">
         Custom HTML Elements <span className="d-body--md">via <code className="d-fw-bold">as</code> prop</span>
       </h3>
-      <StandIn for="stack">
-        <div data-qa="dt-stack" className="d-stack d-stack--row d-stack--gap-100">
+      <DtStack direction="row" gap="100">
           <DtModeIsland as="section" className={ISLAND}>
             <p className="d-body--md">This is a <code>&lt;section&gt;</code> element</p>
           </DtModeIsland>
@@ -158,8 +149,7 @@ export const WithCustomElement: Story = {
           <DtModeIsland as="nav" className={ISLAND}>
             <p className="d-body--md">This is a <code>&lt;nav&gt;</code> element</p>
           </DtModeIsland>
-        </div>
-      </StandIn>
+      </DtStack>
     </div>
   ),
 };
