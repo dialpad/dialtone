@@ -135,7 +135,10 @@ export function DtImageViewer ({
   // A parent can remove an open viewer, so `isOpen` never renders as false: give focus back on unmount too. Kept apart
   // from `modalEl` so a portal relocation doesn't restore focus early.
   const isOpenRef = useRef(isOpen);
-  isOpenRef.current = isOpen;
+  // Written in an effect, not during render, so a discarded render can't leave a value the cleanup would read.
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
   useEffect(() => () => {
     if (isOpenRef.current) previousActiveElement.current?.focus();
   }, []);
