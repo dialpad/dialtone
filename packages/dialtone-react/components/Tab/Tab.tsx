@@ -126,14 +126,14 @@ export function DtTab ({
 
   const buttonActive = !groupContext.outlined && groupContext.kind === 'muted' && isSelected;
 
-  // Vue's mounted(): a tab mounted `selected` selects its panel, once per instance.
+  // Vue's mounted(): a tab mounted `selected` selects its panel, once per instance. The ref keeps it to the mount, as
+  // in Vue: a later change of `selected` or `panelId` doesn't select the panel.
   const mounted = useRef(false);
   useLayoutEffect(() => {
     if (mounted.current) return;
     mounted.current = true;
     if (selected) setSelected(panelId);
-  // Only on mount, as in Vue: a later change of `selected` or `panelId` doesn't select the panel.
-  }, []);
+  }, [selected, panelId, setSelected]);
 
   // Vue's beforeUnmount(): a removed tab hands back the roving focus.
   const onUnmount = useEffectEvent(() => {

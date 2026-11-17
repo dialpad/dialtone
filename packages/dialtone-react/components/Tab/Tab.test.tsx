@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import type { Mock } from 'vitest';
 import { DtTab, type DtTabProps } from './Tab';
 import { DEFAULT_TAB_GROUP_STATE, TabGroupContext, type TabGroupState } from './TabGroupContext';
 
@@ -26,14 +27,14 @@ let mockGroupContext: Partial<TabGroupState> = {};
 describe('DtTab Tests', () => {
   let unmount: (() => void) | null = null;
   let tab: HTMLElement;
-  let setFocus: ReturnType<typeof vi.fn>;
-  let setSelected: ReturnType<typeof vi.fn>;
+  let setFocus: Mock<(focusId: string | null) => void>;
+  let setSelected: Mock<(panelId: string) => void>;
 
   // Remounts, as Vue's mount does. Vue's test provides `groupContext` and `setFocus`; here they go through the context.
   const updateWrapper = () => {
     unmount?.();
-    setFocus = vi.fn();
-    setSelected = vi.fn();
+    setFocus = vi.fn<(focusId: string | null) => void>();
+    setSelected = vi.fn<(panelId: string) => void>();
     const groupContext = { ...MOCK_GROUP_CONTEXT, ...mockGroupContext };
     ({ unmount } = render(
       <TabGroupContext.Provider value={{ groupContext, setFocus, setSelected }}>

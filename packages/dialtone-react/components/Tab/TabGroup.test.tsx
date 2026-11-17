@@ -1,6 +1,7 @@
 import { act, render, screen, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
+import type { Mock } from 'vitest';
 import { DtTab } from './Tab';
 import { DtTabGroup, type DtTabGroupProps } from './TabGroup';
 import { DtTabPanel } from './TabPanel';
@@ -106,8 +107,8 @@ describe('DtTabGroup Tests', () => {
   let tabs: HTMLElement[];
   let tabPanels: HTMLElement[];
   let attrs: GroupProps;
-  let change: ReturnType<typeof vi.fn>;
-  let beforeChange: ReturnType<typeof vi.fn>;
+  let change: Mock<NonNullable<DtTabGroupProps['onChange']>>;
+  let beforeChange: Mock<NonNullable<DtTabGroupProps['onBeforeChange']>>;
   let tabsSlot: () => ReactNode;
 
   const props: GroupProps = {
@@ -145,8 +146,8 @@ describe('DtTabGroup Tests', () => {
   // Vue's mount; the previous wrapper is unmounted first, rather than left in the document.
   const _mountWrapper = (groupProps: GroupProps = { ...props, ...attrs }) => {
     rendered?.unmount();
-    change = vi.fn();
-    beforeChange = vi.fn();
+    change = vi.fn<NonNullable<DtTabGroupProps['onChange']>>();
+    beforeChange = vi.fn<NonNullable<DtTabGroupProps['onBeforeChange']>>();
     rendered = render(element(groupProps));
     _setWrappers();
   };
