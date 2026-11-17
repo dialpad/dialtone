@@ -5,6 +5,7 @@ import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
 import { DtButton } from '../Button/Button';
 import { DtCheckbox } from '../Checkbox/Checkbox';
+import { DtCheckboxGroup } from '../CheckboxGroup/CheckboxGroup';
 import { DtInput } from '../Input/Input';
 import { DtRadio } from '../Radio/Radio';
 import { DtIconBell } from '../../icons';
@@ -297,28 +298,21 @@ function InteractiveFormTemplate () {
             <DtValidationMessages data-qa="radio-group-messages" validationMessages={contactMessages} />
           </fieldset>
         </StandIn>
-        <StandIn for="checkbox-group">
-          <fieldset className="d-input-group__fieldset" data-qa="checkbox-group">
-            <legend data-qa="checkbox-group-legend" className="d-text d-text-label--md d-text--tone-secondary d-input-group__legend-text">Interests</legend>
-            {INTEREST_OPTIONS.map(option => (
-              <DtCheckbox
-                key={option.value}
-                name="interests"
-                value={option.value}
-                label={option.label}
-                checked={interestsValue.includes(option.value)}
-                onChange={(event) => {
-                  const next = event.target.checked
-                    ? [...interestsValue, option.value]
-                    : interestsValue.filter(value => value !== option.value);
-                  setInterestsValue(next);
-                  validateInterests(next);
-                }}
-              />
-            ))}
-            <DtValidationMessages data-qa="checkbox-group-messages" validationMessages={interestsMessages} />
-          </fieldset>
-        </StandIn>
+        <DtCheckboxGroup
+          name="interests"
+          legend="Interests"
+          value={interestsValue}
+          messages={interestsMessages}
+          onValueChange={(value) => {
+            const next = value as string[];
+            setInterestsValue(next);
+            validateInterests(next);
+          }}
+        >
+          {INTEREST_OPTIONS.map(option => (
+            <DtCheckbox key={option.value} value={option.value} label={option.label} />
+          ))}
+        </DtCheckboxGroup>
         <DtButton importance="outlined" kind="muted" onClick={clearAll}>Clear</DtButton>
     </DtStack>
   );

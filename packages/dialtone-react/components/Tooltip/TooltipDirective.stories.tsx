@@ -1,7 +1,7 @@
-import { useState, type ReactNode } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StandIn } from '../../.storybook/StandIn';
 import { DtIconPhoneHangUp } from '../../icons';
+import { DtButton, type DtButtonProps } from '../Button';
 import { DtStack } from '../Stack';
 import { DtTooltip } from './Tooltip';
 import {
@@ -25,31 +25,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Button isn't ported: Vue's <dt-button> as it renders, with the directive on its element.
-function DirectiveButton ({ value, options, className = '', onClick, children, ...rest }: {
+// Vue's <dt-button> with the directive on its element.
+function DirectiveButton ({ value, options, ...rest }: DtButtonProps & {
   value: DtTooltipDirectiveValue;
   options?: DtTooltipDirectiveOptions;
-  className?: string;
-  onClick?: () => void;
-  'aria-label'?: string;
-  children: ReactNode;
 }) {
-  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   useTooltipDirective(anchor, value, options);
-  return (
-    <StandIn for="button">
-      <button
-        ref={setAnchor}
-        className={`base-button__button d-btn ${className}`.trim()}
-        data-qa="dt-button"
-        type="button"
-        onClick={onClick}
-        {...rest}
-      >
-        {children}
-      </button>
-    </StandIn>
-  );
+  return <DtButton ref={setAnchor} {...rest} />;
 }
 
 // dialtone-vue's tooltip_directive_default.story.vue.
@@ -71,21 +54,20 @@ function TooltipDirectiveDefault () {
         <DirectiveButton
           value="Tooltip on bottom"
           options={{ arg: 'bottom' }}
-          className="d-btn--clear d-btn--critical d-btn--circle d-btn--icon-only"
+          importance="clear"
+          kind="critical"
+          circle
           aria-label="example button"
-        >
-          <span data-qa="dt-button-start-icon" className="base-button__icon d-btn__icon d-btn__icon--left">
-            <DtIconPhoneHangUp size="300" />
-          </span>
-        </DirectiveButton>
+          startIcon={<DtIconPhoneHangUp size="300" />}
+        />
         <DirectiveButton value="Tooltip on top end" options={{ arg: 'top-end' }}>
-          <span data-qa="dt-button-label" className="base-button__label d-btn__label">Button with tooltip</span>
+          Button with tooltip
         </DirectiveButton>
         <DirectiveButton value={undefined}>
-          <span data-qa="dt-button-label" className="base-button__label d-btn__label">Empty tooltip</span>
+          Empty tooltip
         </DirectiveButton>
         <DirectiveButton value={message} options={{ arg: 'top-end' }} onClick={changeOnClick}>
-          <span data-qa="dt-button-label" className="base-button__label d-btn__label">Change content on click</span>
+          Change content on click
         </DirectiveButton>
     </DtStack>
   );
