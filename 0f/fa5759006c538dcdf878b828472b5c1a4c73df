@@ -1,0 +1,31 @@
+packages/combinator/src/components/controls/control_selection.vue
+  s_edb6000ea1a4b6::t_fce4619bbc577d 247-250,279
+packages/combinator/src/variants/variants_badge.js
+  s_edb6000ea1a4b6::t_22376c7aeb4523 15,24
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_edb6000ea1a4b6::t_22376c7aeb4523 2,33-45,132-133,135-142
+packages/combinator/src/lib/exclusion_rules.js
+  s_edb6000ea1a4b6::t_fce4619bbc577d 123-143,146-147,149
+packages/combinator/.github/documentation/internal/EXCLUSIONS.md
+  s_edb6000ea1a4b6::t_fce4619bbc577d 92-106
+packages/combinator/src/components/controls/control_selection.test.js
+  s_edb6000ea1a4b6::t_fce4619bbc577d 72-85
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_edb6000ea1a4b6::t_22376c7aeb4523 32,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0ffa5759006c538dcdf878b828472b5c1a4c73df",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

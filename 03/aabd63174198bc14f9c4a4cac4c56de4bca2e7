@@ -1,0 +1,47 @@
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_afb4873e0f46eb::t_ca21487e4a5421 6,189
+  s_afb4873e0f46eb::t_8a4f261078c5d2 190,193
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_afb4873e0f46eb::t_8a4f261078c5d2 98,100
+  s_afb4873e0f46eb::t_ca21487e4a5421 6,99
+.github/workflows/unit_tests.yml
+  s_afb4873e0f46eb::t_0bf0d62ffd5e88 27,68,143
+scripts/retrieval/README.md
+  s_afb4873e0f46eb::t_8a4f261078c5d2 85
+  s_afb4873e0f46eb::t_ca21487e4a5421 86
+scripts/retrieval/ci-routing.test.mjs
+  s_afb4873e0f46eb::t_df93b48826a3c7 165,199-200,217-223
+  s_afb4873e0f46eb::t_2bebfbc2bdc5b0 154
+  s_afb4873e0f46eb::t_3147b1e45b2ff5 137,143,150-153,155,157,161,224
+  s_afb4873e0f46eb::t_bd1de2eb064eee 156
+  s_afb4873e0f46eb::t_ea4d5e4444a3fb 133,196
+  s_afb4873e0f46eb::t_e7bd86404c2473 142,144-149,158-160,162-164,166-195,197-198,201-216,225-226
+.github/workflows/publish-web.yml
+  s_afb4873e0f46eb::t_c64d0c49df8b43 66-67
+  s_afb4873e0f46eb::t_79b511da270d2e 90-93
+  s_afb4873e0f46eb::t_df93b48826a3c7 113
+  s_afb4873e0f46eb::t_894871f0c193aa 6,8,10,12,14,16,48-50,56-64,68-89,96,99,105-106,109,114,141,150,177,233,246,253,342
+  s_afb4873e0f46eb::t_5cccd4c2a9ab7d 7,9,11,13,15,17,65
+  s_afb4873e0f46eb::t_f621b5f6685a41 94
+.github/workflows/release.yml
+  s_afb4873e0f46eb::t_5cccd4c2a9ab7d 144-145,148-151,153-161
+  s_afb4873e0f46eb::t_bd1de2eb064eee 152
+  s_afb4873e0f46eb::t_2d660bfbb94086 59-61,80-83,137-143,146-147
+  s_afb4873e0f46eb::t_51f98259a747f3 162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "03aabd63174198bc14f9c4a4cac4c56de4bca2e7",
+  "prompts": {},
+  "sessions": {
+    "s_afb4873e0f46eb": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e4b7-d90c-76c2-88a2-0aa0487e4471",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
