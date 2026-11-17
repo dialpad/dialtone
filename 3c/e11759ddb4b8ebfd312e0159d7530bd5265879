@@ -1,0 +1,43 @@
+apps/dialtone-documentation/docs/components/slider.md
+  s_18547bca72b16a::t_3a012c3af2669f 43
+  s_18547bca72b16a::t_385598c1acc39a 107
+  s_18547bca72b16a::t_4af9c9231eb266 124,128-132
+  s_18547bca72b16a::t_7a39eb15693f8b 105-106,108-123,125-127,133-137
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_18547bca72b16a::t_3547ee6b31d0bc 567
+  s_18547bca72b16a::t_19bfb3749d0e2a 797
+  s_18547bca72b16a::t_b36f9a5d6013b7 564-566,568-573,580-584,586-589,593-602,607,611-616
+  s_18547bca72b16a::t_ade551ef831932 827
+  s_18547bca72b16a::t_e650408486c935 244
+  s_18547bca72b16a::t_f0b8c5eb1d0386 237-240
+  s_18547bca72b16a::t_5d8b045a89ef90 718,721
+  s_18547bca72b16a::t_b4c9f41fd1ce43 720
+  s_18547bca72b16a::t_d534fd74451769 819
+  s_18547bca72b16a::t_f20a0a60bef9d1 223-236,241-243,245-246
+  s_18547bca72b16a::t_3da8c50a978429 545-563,574-579,585,590-592,603-606,608-610,617-620
+packages/combinator/src/variants/variants_slider.js
+  s_18547bca72b16a::t_07a3c26764eea1 82-96
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_18547bca72b16a::t_21d92bfc14cbd4 512-523,528-598,620-632
+  s_18547bca72b16a::t_26e8d2d3fac0ac 611
+  s_18547bca72b16a::t_9138ece3e73a0e 524-527
+  s_18547bca72b16a::t_31203b085606a1 600
+  s_18547bca72b16a::t_605c3fae6d6cad 599,601-610,612-614,616,618-619
+  s_18547bca72b16a::t_af274939094320 615,617
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3ce11759ddb4b8ebfd312e0159d7530bd5265879",
+  "prompts": {},
+  "sessions": {
+    "s_18547bca72b16a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34090d3c-5c78-4979-93a5-69ff10aaa88a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

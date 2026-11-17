@@ -1,0 +1,23 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/showcaseCarouselMotion.test.mjs
+  s_b1bcf368feba80::t_b0791333ea9756 1-70
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_b1bcf368feba80::t_3b28ac1a3d5f76 75,239,309-312,316
+apps/dialtone-documentation/docs/.vuepress/baseComponents/showcaseCarouselMotion.js
+  s_b1bcf368feba80::t_3b28ac1a3d5f76 19-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "44d6a40321755d718abfa750c589a0dfe7348cd6",
+  "prompts": {},
+  "sessions": {
+    "s_b1bcf368feba80": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "03dd7842-595a-4d18-b8d3-e23a4c169fdb",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}

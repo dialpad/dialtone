@@ -1,0 +1,25 @@
+packages/figma-styles-sync/README.md
+  s_355402be618789::t_a6007f9cce69e4 105-114
+packages/figma-styles-sync/plugin/code.ts
+  s_355402be618789::t_f2ec2ff7ca3811 396-407
+  s_355402be618789::t_133684d1a1ff19 60-82
+  s_355402be618789::t_7e9f3e14199fc6 138,142-164,166,189
+  s_355402be618789::t_713571b58966f4 59
+  s_355402be618789::t_3be430db060775 127,315,346,485,520
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "64a12d165c6c5c721955f9bbc810cb5a64aeb66c",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}
