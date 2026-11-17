@@ -1,0 +1,5 @@
+{
+  "DtTab Tests › Extendability Tests › should render deprecated #icon through to DtButton start-icon slot": "Tests the deprecated `icon` slot (use startIcon), which isn't ported: no dialtone-vue component uses it.",
+  "DtTab Tests › Extendability Tests › should prefer #startIcon over deprecated #icon when both provided": "Tests the deprecated `icon` slot's fallback (use startIcon), which isn't ported: no dialtone-vue component uses it.",
+  "DtTabGroup Tests › Presentation Tests › Correct kind modifiers › should have correct kind modifier": "Tests the deprecated `inverted` prop (use v-dt-mode), which isn't ported: no dialtone-vue component uses it."
+}
