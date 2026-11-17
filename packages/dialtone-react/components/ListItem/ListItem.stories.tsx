@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
 import { HighlightIdContext, useKeyboardListNavigation } from '../../common/keyboard-list-navigation';
+import { DtButton } from '../Button';
 import { DtIcon, type DtIconProps } from '../Icon';
 import { ICON_NAMES } from '../Icon/IconConstants';
 import { DtStack } from '../Stack';
@@ -223,22 +223,15 @@ function ListItemDefault ({
   );
 }
 
-// Button isn't ported: Vue's <dt-button importance="clear"> with only a startIcon, as it renders.
 function ShareButton ({ title, className, icon }: { title: string; className: string; icon: DtIconProps['name'] }) {
   return (
-    <StandIn for="button">
-      <button
-        className={`base-button__button d-btn d-btn--icon-only ${className}`}
-        data-qa="dt-button"
-        title={title}
-        type="button"
-        onClick={event => event.stopPropagation()}
-      >
-        <span data-qa="dt-button-start-icon" className="base-button__icon d-btn__icon d-btn__icon--left">
-          <DtIcon name={icon} size={200} />
-        </span>
-      </button>
-    </StandIn>
+    <DtButton
+      importance="clear"
+      className={className}
+      title={title}
+      startIcon={<DtIcon name={icon} size={200} />}
+      onClick={event => event.stopPropagation()}
+    />
   );
 }
 
