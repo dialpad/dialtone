@@ -1,0 +1,21 @@
+package.json
+  s_b146811d1c9582::t_5d52640225f56f 107
+pnpm-lock.yaml
+  s_b146811d1c9582::t_4ef4f8b4a4ec51 149-151
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "63ed981e1b22baf256308297217aab89bb5deeee",
+  "prompts": {},
+  "sessions": {
+    "s_b146811d1c9582": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4135defe-32ea-45a2-8816-c9589280885d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

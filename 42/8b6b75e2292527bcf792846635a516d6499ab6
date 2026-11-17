@@ -1,0 +1,103 @@
+packages/dialtone-react/components/Avatar/Avatar.test.tsx
+  s_87d0f63b120eb7::t_c48d13a1412c7f 1-3,5-435,443-654
+  s_f6e7bf75b54994::t_50536815d7e219 4,436-442
+packages/dialtone-react/components/Avatar/AvatarConstants.ts
+  s_089c1fdbd7b6df::t_2b9333802b75eb 1-250
+packages/dialtone-react/components/Avatar/Utils.ts
+  s_089c1fdbd7b6df::t_ce3a00e040dc29 1-14
+packages/dialtone-react/components/Avatar/skips.json
+  s_87d0f63b120eb7::t_cb7cebca4bdb8b 1-5
+packages/dialtone-react/components/Avatar/Avatar.tsx
+  s_58881f4a553083::t_4d09f8a4cb087b 10,13,180,182-184,240,355-356
+  s_f6e7bf75b54994::t_1d9e55e8d9d3f6 34-36,278-280,283-286,333
+packages/dialtone-react/components/LazyShow/LazyShow.stories.tsx
+  s_6a8c1581cb5cd4::t_8c060a046f516f 3,49
+packages/dialtone-react/components/Icon/Icon.stories.tsx
+  s_4b3303382d12b4::t_8013b9679b66b0 4,57,59,62-69
+packages/dialtone-react/components/Input/Input.stories.tsx
+  s_4209c620012af6::t_ba1d653b649ced 4,318-326
+packages/dialtone-react/components/ValidationMessages/ValidationMessages.stories.tsx
+  s_87d0f63b120eb7::t_b49a1f07a0b7ca 6,316
+packages/dialtone-react/components/Popover/Popover.parity.tsx
+  s_4209c620012af6::t_3af8548cd3369e 1-5
+packages/dialtone-react/components/Popover/Popover.tsx
+  s_4209c620012af6::t_2bcd7a7a8da50f 1-50,52-426,431-539,542-601,603,605-613,616-630,632-647,649-668,670-719,722-726,728-795,797-907,911-913,915,917-922,928-934,937-946,948,950-959,962-993,995-1104
+  s_4209c620012af6::t_b2d14912c991a3 427-430,540-541,602,604,614-615,631,648,669,720-721,796,908-910,914,916,923-927,935-936,947,949,960-961
+  s_4209c620012af6::t_90919342b0dc1c 51,727,994
+packages/dialtone-react/components/Popover/PopoverConstants.ts
+  s_4209c620012af6::t_d3b03302c3e250 1,3-18,20-25,27-31,33-46
+packages/dialtone-react/components/Popover/PopoverHeaderFooter.tsx
+  s_4209c620012af6::t_b3e63321c76e12 1-87
+packages/dialtone-react/components/Popover/TippyUtils.ts
+  s_4209c620012af6::t_fe2cfce7ca5324 2,13-23,39-40,81-94
+packages/dialtone-react/components/Popover/index.ts
+  s_4209c620012af6::t_c88fd5aa75eb49 1-25
+packages/dialtone-react/components/Popover/Popover.test.tsx
+  s_4209c620012af6::t_6ef17436451725 1-947
+packages/dialtone-react/components/Popover/Popover.stories.tsx
+  s_4209c620012af6::t_5fd43779b7ebfd 1-709
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "428b6b75e2292527bcf792846635a516d6499ab6",
+  "prompts": {},
+  "sessions": {
+    "s_089c1fdbd7b6df": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "871218a9-7945-46c7-9505-4c9d80e341b8",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_4209c620012af6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "621d10b5-1328-4c2b-91ba-94f1b8e598d6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_4b3303382d12b4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3468dfbc-280c-48d7-a99c-1c4dda801f60",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_58881f4a553083": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c86b917-ca48-4b8f-81d3-35898419308a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_6a8c1581cb5cd4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16692ebd-4afc-4f6b-9225-e1212ee2014c",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_87d0f63b120eb7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "442e71ed-9091-44b6-b09c-e8116970a462",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_f6e7bf75b54994": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0904e225-7ab9-4804-a8af-aeecf0afc7e2",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

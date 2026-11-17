@@ -1,0 +1,23 @@
+packages/dialtone-tokens/sync-scripts/check_against_css.ts
+  s_355402be618789::t_3232f02b488eb7 145-147,149-150
+.github/workflows/sync-variables-to-figma.yml
+  s_355402be618789::t_f6671e66d1c0d0 37-42
+  s_355402be618789::t_afcc19f6090433 61-68,77,79,92-94,104,115-118,120-127
+  s_355402be618789::t_9d3bcf8a94a903 156-157
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c0e78e10b7848e9213d5b18f872c59dfcdf7bed6",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
