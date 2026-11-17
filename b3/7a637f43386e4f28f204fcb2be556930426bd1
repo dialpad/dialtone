@@ -1,0 +1,24 @@
+packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md
+  s_876ae9a32ded18::t_67c8f0054c4918 235,240-241,243
+apps/dialtone-documentation/docs/.vuepress/theme/client.js
+  s_876ae9a32ded18::t_97d0004f4aaa2c 23
+  s_876ae9a32ded18::t_1fd858258b392c 42-47,51
+README.md
+  s_876ae9a32ded18::t_d403bda438e4fc 76,78,83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b37a637f43386e4f28f204fcb2be556930426bd1",
+  "prompts": {},
+  "sessions": {
+    "s_876ae9a32ded18": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "35453216-46e7-4b31-87c8-ff5408087efb",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

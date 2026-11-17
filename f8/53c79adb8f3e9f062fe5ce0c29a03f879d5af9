@@ -1,0 +1,130 @@
+packages/combinator/src/lib/control.js
+  s_bf7dc52eb2ba4c::t_a7d4390761cc38 21,75-78
+  s_bf7dc52eb2ba4c::t_09cbc151814ee2 11
+  s_bda95360f3cca1::t_ac82d12c28abbe 122
+packages/combinator/src/lib/slider_control.test.js
+  s_bf7dc52eb2ba4c::t_56181cd5427948 1,3-6,9-10,13-14,22-23,29-30,32-34,35,36,37,52,62-63,68
+  s_bf7dc52eb2ba4c::t_b8d6ef709c8fd4 69
+  s_bda95360f3cca1::t_2ddbd6d7f72750 63
+  s_bf7dc52eb2ba4c::t_a8b4f2be373fca 36-37,43-44,51,52,62
+  s_bda95360f3cca1::t_fda1d84912d6b3 52,63,68-69
+  s_bda95360f3cca1::t_49a988727bb286 2,7-8,11-12,15-21,24-28,31,38-42,45-46,48-50,53-62,64-67
+packages/combinator/src/components/controls/control_slider.test.js
+  s_bf7dc52eb2ba4c::t_56181cd5427948 32-48,51-61,63
+  s_bf7dc52eb2ba4c::t_07a01c798d0f7a 1-3,5-9,11-17,19-20,24-31,109-110
+  s_bf7dc52eb2ba4c::t_a8b4f2be373fca 4,10,63-86
+  s_bda95360f3cca1::t_2ddbd6d7f72750 89-90,102,110
+  s_bda95360f3cca1::t_5c0d2b42fcac9e 87-88
+  s_bda95360f3cca1::t_bb3a3e4ce3b256 18
+  s_bda95360f3cca1::t_436b4e4a22cca8 21-23,49-50,102,110
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 91-101,103-109
+packages/combinator/src/lib/control.test.js
+  s_bda95360f3cca1::t_0d2c8d89e9fb36 52,58-59
+  s_bf7dc52eb2ba4c::t_c0937d58ecfc55 54-58
+  s_bda95360f3cca1::t_de78de82c79a0d 2
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 53
+packages/combinator/src/components/controls/control_slider.vue
+  s_bf7dc52eb2ba4c::t_fbff63f7e418a1 22,34-36,40-47,49-53,56-66,70-71,82-84,96-97
+  s_bda95360f3cca1::t_fd02af5e1528ca 16-19,21,23
+  s_bda95360f3cca1::t_a6f7554fd5cc61 20
+  s_bda95360f3cca1::t_d9123b653b2ae4 1-3,8,11,15,24-26,28-33,98-104
+  s_bda95360f3cca1::t_9b733bcd670316 4-7,9-10,12-14,27,54-55,67-69,72-75,78,85-94
+  s_bda95360f3cca1::t_b03438a47064fb 48,95
+  s_bda95360f3cca1::t_bb3a3e4ce3b256 37,39
+  s_bda95360f3cca1::t_996b2af13d5310 38
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 76-77,79-81
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_bda95360f3cca1::t_0d2c8d89e9fb36 438-440,442-448,453-454
+  s_bda95360f3cca1::t_9cafdb8c2dd3b5 441,451,452
+  s_bda95360f3cca1::t_2ddbd6d7f72750 455,456-460,462-471,473-476,478,482-485
+  s_bda95360f3cca1::t_26d1888e872bf7 449-450,461,472,477,479-481
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_bda95360f3cca1::t_0d2c8d89e9fb36 414,417-419,425-426,435-437
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 416-435
+  s_bda95360f3cca1::t_bc50bffee15954 415
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_bf7dc52eb2ba4c::t_a7d4390761cc38 34,48
+  s_bda95360f3cca1::t_0ba4aebe74bc8f 325
+packages/combinator/src/lib/slider_control.js
+  s_bda95360f3cca1::t_ada8ffbf9b7647 1-12,14-16,19-21,40,76-78,80-86
+  s_bf7dc52eb2ba4c::t_c0937d58ecfc55 26-33,35-38,58-59
+  s_bda95360f3cca1::t_ecb430812ed65e 13,18,39,41-54,60,66-75,79
+  s_bda95360f3cca1::t_996b2af13d5310 55,57
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 17,22-25,34,56,61-64
+  s_bf7dc52eb2ba4c::t_31a3ef665c8678 65
+packages/combinator/src/variants/variants_progress_circle.js
+  s_bda95360f3cca1::t_5a27be6a855260 4
+.claude/rules/combinator-variants.md
+  s_bf7dc52eb2ba4c::t_037f240b7b3e08 125-127
+  s_bda95360f3cca1::t_3ae0843b58fa87 113-124
+  s_bf7dc52eb2ba4c::t_018cffa730ce71 129
+  s_bda95360f3cca1::t_25f49fed6970df 128
+.agents/resources/rules/combinator-variants.md
+  s_bda95360f3cca1::t_3ae0843b58fa87 110-121
+  s_bf7dc52eb2ba4c::t_037f240b7b3e08 122-124
+  s_bf7dc52eb2ba4c::t_018cffa730ce71 126
+  s_bda95360f3cca1::t_25f49fed6970df 125
+packages/combinator/.github/documentation/internal/CONTROLS.md
+  s_bda95360f3cca1::t_707158844eb790 35-42,79,87-88,90
+  s_bf7dc52eb2ba4c::t_037f240b7b3e08 94
+  s_bda95360f3cca1::t_9b733bcd670316 85,89
+  s_bda95360f3cca1::t_6f95cc97650d00 60-74
+  s_bf7dc52eb2ba4c::t_018cffa730ce71 56-58,80-84,86,91
+  s_bda95360f3cca1::t_49fd4f0618c891 59
+  s_bda95360f3cca1::t_bb3a3e4ce3b256 106
+  s_bf7dc52eb2ba4c::t_72451c5dc2a171 43-55,75-79,92-93
+packages/combinator/.github/documentation/internal/OPTION_BAR.md
+  s_bf7dc52eb2ba4c::t_037f240b7b3e08 117-124
+  s_bda95360f3cca1::t_707158844eb790 114-116
+packages/combinator/src/components/option_bar/option_bar.vue
+  s_bda95360f3cca1::t_f01bd11090646b 208,394
+packages/combinator/src/components/renderer/renderer.test.js
+  s_bda95360f3cca1::t_84b631daa9f21d 1-28
+packages/combinator/src/components/renderer/renderer.vue
+  s_bda95360f3cca1::t_c95f1a84200ed4 3
+  s_bf7dc52eb2ba4c::t_1c1dfd8c16792c 30
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 79-83
+packages/combinator/src/variants/variants_avatar.js
+  s_bda95360f3cca1::t_46511262857a13 8,13-20
+packages/combinator/src/variants/variants_pagination.js
+  s_bda95360f3cca1::t_f3c95b9676a059 4-5,8-16
+  s_bda95360f3cca1::t_996b2af13d5310 6-7
+packages/combinator/src/variants/variants_text.js
+  s_bda95360f3cca1::t_13317c48f8fed3 36,165
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_bda95360f3cca1::t_6ea46fc64782d0 84,122
+  s_bf7dc52eb2ba4c::t_a795a2a40d6764 85-121
+packages/combinator/src/lib/utils.js
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 52-60
+  s_bf7dc52eb2ba4c::t_3375e78d6451ec 51
+packages/combinator/src/components/code_editor/code_editor.vue
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 97,203
+packages/combinator/src/components/code_editor/code_editor_tag_attributes.vue
+  s_bf7dc52eb2ba4c::t_204dedbd308e66 42,102
+packages/combinator/src/components/combinator.test.js
+  s_bda95360f3cca1::t_73a0aa0160acc5 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f853c79adb8f3e9f062fe5ce0c29a03f879d5af9",
+  "prompts": {},
+  "sessions": {
+    "s_bda95360f3cca1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16057-cde5-76a0-a857-9178e5a8799c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_bf7dc52eb2ba4c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09189915-dc49-412a-9fd6-f1205383ecd0",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
