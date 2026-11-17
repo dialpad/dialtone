@@ -4,5 +4,5 @@ import { DtCheckboxGroup } from './CheckboxGroup';
 // v-model → `value` / `onValueChange` (conventions › Vue → React: CheckboxGroup's value is an array).
 export default {
   component: DtCheckboxGroup,
-  props: { 'onUpdate:modelValue': 'onValueChange' },
+  props: { modelValue: 'value', 'onUpdate:modelValue': 'onValueChange' },
 } satisfies ParityMap;

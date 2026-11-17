@@ -163,7 +163,7 @@ const html = (value: string): ReactNode => <span dangerouslySetInnerHTML={{ __ht
 // CheckboxGroupDefault.story.vue. Vue's group follows the `modelValue` arg and keeps its own selection in between,
 // so the group is controlled here by state that follows the arg and what the group reports.
 function CheckboxGroupDefault ({
-  default: _default,
+  default: defaultSlot,
   legendSlot,
   options,
   value: valueArg,
@@ -191,14 +191,16 @@ function CheckboxGroupDefault ({
         onValueChange?.(newValue);
       }}
     >
-      {options?.map(option => (
-        <DtCheckbox
-          key={option.value}
-          value={option.value}
-        >
-          <span>{option.label}</span>
-        </DtCheckbox>
-      ))}
+      {defaultSlot
+        ? html(defaultSlot)
+        : options?.map(option => (
+          <DtCheckbox
+            key={option.value}
+            value={option.value}
+          >
+            <span>{option.label}</span>
+          </DtCheckbox>
+        ))}
     </DtCheckboxGroup>
   );
 }
