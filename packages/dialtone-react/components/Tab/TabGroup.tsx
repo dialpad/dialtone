@@ -120,7 +120,8 @@ interface DtTabGroupOwnProps {
   /**
    * Before change tab event, useful to perform validations and prevent changing tabs if necessary.
    * Receives the originating event (call `event.preventDefault()` to cancel the change) and the target tab's panel id
-   * as `selected`.
+   * as `selected`. Emitted only for a click or an Enter/Space selection. With `activationMode="auto"`, arrow, Home and
+   * End select the focused tab without emitting it, so those changes can't be cancelled (only `onChange` fires).
    */
   onBeforeChange?: (event: DtTabGroupChangeEvent, payload: { selected: string }) => void;
 
