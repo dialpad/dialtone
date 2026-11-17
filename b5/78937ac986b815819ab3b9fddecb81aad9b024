@@ -1,0 +1,30 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_9ffcf142ac84e2::t_d5387b97ccb17a 288-295
+  s_9ffcf142ac84e2::t_7348548935e42e 267-270
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_9ffcf142ac84e2::t_c92ee27eb6dd07 26
+apps/dialtone-documentation/docs/guides/migration/component-sizes/index.md
+  s_9ffcf142ac84e2::t_c92ee27eb6dd07 133
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_9ffcf142ac84e2::t_c94a3494d05176 536-537,543-545
+  s_9ffcf142ac84e2::t_0ceba016a2c75c 538
+packages/dialtone-css/lib/build/js/dialtone_migrate_text_variant/index.mjs
+  s_9ffcf142ac84e2::t_0ceba016a2c75c 163,167
+  s_9ffcf142ac84e2::t_c94a3494d05176 165-166,172-173
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b578937ac986b815819ab3b9fddecb81aad9b024",
+  "prompts": {},
+  "sessions": {
+    "s_9ffcf142ac84e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b2c0-d0f7-76a3-aa19-3b9b76f40d48",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

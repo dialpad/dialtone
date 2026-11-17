@@ -1,0 +1,19 @@
+packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md
+  s_355402be618789::t_2fb6e16a35d3ed 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "432a6f5b02ecd7fff71aa032eeabf6cd477b2c3a",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_8067572d90edd7::t_f92ce5345e7e5a 376,390-392,395-396,398
+  s_8067572d90edd7::t_bacdb565f197e1 377-389,393-394,397
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_8067572d90edd7::t_a24232dbe8f50a 1002-1004
+  s_8067572d90edd7::t_3bb2869c46c7dd 760
+  s_8067572d90edd7::t_6dfdb29d63b331 57
+  s_8067572d90edd7::t_79d213d959572e 643-645
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f8714962c60740f3eef58f9ab95c82f742ff404b",
+  "prompts": {},
+  "sessions": {
+    "s_8067572d90edd7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89ebc252-b89c-46fd-8c0e-016b1d72347d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}
