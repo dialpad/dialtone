@@ -187,7 +187,8 @@ const OVERRIDE_STYLE_PROPERTIES = lookupTable({
   family: ['font-family', 'font'],
   tone: ['color'],
   align: ['text-align'],
-  truncate: ['overflow', 'text-overflow', 'white-space'],
+  // No truncate: DtText's truncate prop adds the same !important d-truncate class, so an
+  // inline style cannot change what renders.
 });
 
 // DtText values mirrored from packages/dialtone-vue/components/Text/TextConstants.js for
@@ -459,6 +460,7 @@ function findMatchingClosingTag (content, startPos, tagName) {
 const CONFLICT_MARKER = '<!-- dt-text-migrate: review conflicting class -->';
 const NATIVE_PROP_MARKER = '<!-- dt-text-migrate: review attribute that may become a DtText prop -->';
 const ALL_OVERRIDE_PROPS = new Set(Object.values(OVERRIDE_CLASS_MAP).map(override => override.prop));
+const STYLE_OVERRIDE_PROPS = new Set(Object.keys(OVERRIDE_STYLE_PROPERTIES));
 
 // Attribute names in an opening tag's attribute text. Quoted values are blanked first so
 // text inside a value never reads as an attribute.
@@ -498,24 +500,23 @@ function parseExistingProps (names) {
   return props;
 }
 
-// Override props that cannot be lifted safely because an inline style may set the same
-// CSS property: all of them for a bound style or spread, otherwise the ones the static
-// style declares.
+// Override props that cannot be lifted safely: every one for a spread or dynamic name,
+// which may also supply the props themselves; every style-sensitive one for a bound style;
+// otherwise the ones the static style declares.
 function blockedOverrideProps (attrStr, names) {
+  if (hasUncertainBinding(names)) return ALL_OVERRIDE_PROPS;
   // Any bound form counts, modifiers included: Vue compiles `:style.camel` to a style binding.
-  if (hasUncertainBinding(names) || names.some(name => name !== 'style' && boundProp(name) === 'style')) {
-    return ALL_OVERRIDE_PROPS;
-  }
+  if (names.some(name => name !== 'style' && boundProp(name) === 'style')) return STYLE_OVERRIDE_PROPS;
   const style = /(?:^|\s)style\s*=\s*(?:"([^"]*)"|'([^']*)')/.exec(attrStr);
   if (!style) return new Set();
   const declarations = style[1] ?? style[2];
   // Comments, quoted strings and escapes need a CSS tokenizer to read reliably. They are
-  // rare in inline styles, so treat them like a bound style and keep every utility.
-  if (/\/\*|["'\\]/.test(declarations)) return ALL_OVERRIDE_PROPS;
+  // rare in inline styles, so treat them like a bound style.
+  if (/\/\*|["'\\]/.test(declarations)) return STYLE_OVERRIDE_PROPS;
   const declared = new Set(
     [...declarations.matchAll(/(?:^|;)\s*([\w-]+)\s*:/g)].map(m => m[1].toLowerCase()),
   );
-  if (declared.has('all')) return ALL_OVERRIDE_PROPS; // `all` resets every property
+  if (declared.has('all')) return STYLE_OVERRIDE_PROPS; // `all` resets every property
   return new Set(Object.keys(OVERRIDE_STYLE_PROPERTIES)
     .filter(prop => OVERRIDE_STYLE_PROPERTIES[prop].some(property => declared.has(property))));
 }

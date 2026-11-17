@@ -1,5 +1,5 @@
 /**
- * dialtone-migrate-typography tests.
+ * Typography migration (dialtone_migrate_typography) tests.
  *
  * One assertion per test; data-driven via for..of where multiple cases share a concept.
  * Run: node --test packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
@@ -1287,6 +1287,22 @@ describe('uncertain overrides keep their utility class with review', () => {
       );
     });
   }
+  // DtText's truncate prop adds the same !important d-truncate class, so no style changes
+  // what renders.
+  for (const style of ['white-space: normal', 'overflow: visible']) {
+    it(`d-truncate converts despite an inline style: ${style}`, () => {
+      assert.equal(
+        run(`<p class="d-body--md d-truncate" style="${style}">x</p>`),
+        `<dt-text as="p" variant="body-md" truncate style="${style}">x</dt-text>`,
+      );
+    });
+  }
+  it('d-truncate converts despite a bound style', () => {
+    assert.equal(
+      run('<p class="d-body--md d-truncate" :style="s">x</p>'),
+      '<dt-text as="p" variant="body-md" truncate :style="s">x</dt-text>',
+    );
+  });
   it('inline style on another property does not block the lift', () => {
     assert.equal(
       run('<p class="d-body--md d-fw-bold" style="margin: 0">x</p>'),
