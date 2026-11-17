@@ -1,11 +1,10 @@
-import { useEffect, useId, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
-import { cx } from '../../common/cx';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
 import { DtButton } from '../Button';
 import { DtListItem } from '../ListItem';
+import { DtListItemGroup } from '../ListItemGroup';
 import { LIST_ITEM_NAVIGATION_TYPES } from '../ListItem/ListItemConstants';
 import { POPOVER_CONTENT_WIDTHS } from '../Popover';
 import { POPOVER_DIRECTIONS } from '../Popover/PopoverConstants';
@@ -256,33 +255,6 @@ function DropdownDefault ({
   );
 }
 
-// ListItemGroup isn't ported: Vue's <dt-list-item-group :heading :heading-class :list-class> as it renders.
-function ListItemGroupStandIn ({ heading, headingClass, listClass, children }: {
-  heading?: string;
-  headingClass?: string;
-  listClass?: DtDropdownProps['listClass'];
-  children: ReactNode;
-}) {
-  const id = useId();
-  return (
-    <StandIn for="list-item-group">
-      <ul id={id} className={cx('d-list-item-group', listClass)} role="group" data-qa="dt-dropdown-list-wrapper" aria-labelledby={`${id}-heading`}>
-        {heading && (
-          <li
-            id={`${id}-heading`}
-            role="presentation"
-            data-qa="dt-dropdown-list-heading"
-            className={cx('dt-dropdown-list--header', headingClass)}
-          >
-            {heading}
-          </li>
-        )}
-        {children}
-      </ul>
-    </StandIn>
-  );
-}
-
 const PLACEMENT_VARIANTS = ['bottom-start', 'bottom', 'bottom-end'] as const;
 const HEADING_CLASS = 'd-py-50 d-px-100 d-fw-semibold d-c-default';
 
@@ -360,10 +332,10 @@ function DropdownVariants ({
               ))}
           list={({ close }) => (
             <>
-              <ListItemGroupStandIn listClass={listClass}>
+              <DtListItemGroup listClass={listClass}>
                 {menuItem('Menu item 1', close)}
                 {menuItem('Menu Item 2', close)}
-              </ListItemGroupStandIn>
+              </DtListItemGroup>
               <DtDropdownSeparator />
               {menuItem('Menu Item 3', close)}
             </>
@@ -391,7 +363,7 @@ function DropdownVariants ({
               ))}
           list={({ close }) => (
             <>
-              <ListItemGroupStandIn
+              <DtListItemGroup
                 headingClass={HEADING_CLASS}
                 listClass={listClass}
                 heading="Menu Heading A"
@@ -399,15 +371,15 @@ function DropdownVariants ({
                 {menuItem('Menu Item 1', close)}
                 <DtDropdownSeparator />
                 {menuItem('Menu Item 2', close)}
-              </ListItemGroupStandIn>
+              </DtListItemGroup>
               <DtDropdownSeparator />
-              <ListItemGroupStandIn
+              <DtListItemGroup
                 listClass={listClass}
                 headingClass={HEADING_CLASS}
                 heading="Menu Heading B"
               >
                 {menuItem('Menu Item 3', close)}
-              </ListItemGroupStandIn>
+              </DtListItemGroup>
             </>
           )}
         />
