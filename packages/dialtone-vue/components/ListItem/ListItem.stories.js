@@ -139,6 +139,15 @@ export const argTypesData = {
       options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
     },
   },
+  disabled: {
+    table: {
+      type: { summary: 'boolean' },
+      defaultValue: { summary: false },
+    },
+    control: {
+      type: 'boolean',
+    },
+  },
 
   // Action Event Handlers
   onClick: {

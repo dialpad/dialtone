@@ -183,6 +183,69 @@ describe('DtListItem tests', () => {
     });
   });
 
+  describe('Disabled Tests', () => {
+    describe('When disabled is not set', () => {
+      it('renders the same root attributes as before the prop existed', () => {
+        expect(wrapper.attributes()).toEqual({
+          id: 'dt-item',
+          class: 'd-list-item',
+          tabindex: '-1',
+          role: 'option',
+          'aria-selected': 'false',
+        });
+      });
+
+      it('passes a consumer aria-disabled through and still emits click', async () => {
+        mockAttrs = { 'aria-disabled': 'true' };
+        updateWrapper();
+
+        await wrapper.trigger('click');
+
+        expect(wrapper.attributes('aria-disabled')).toBe('true');
+        expect(wrapper.classes()).toEqual(['d-list-item']);
+        expect(wrapper.emitted('click')).toHaveLength(1);
+      });
+    });
+
+    describe('When disabled', () => {
+      beforeEach(() => {
+        mockProps = { disabled: true };
+        updateWrapper();
+      });
+
+      it('sets aria-disabled and the disabled modifier together', () => {
+        expect(wrapper.attributes('aria-disabled')).toBe('true');
+        expect(wrapper.classes()).toEqual(['d-list-item', 'd-list-item--disabled']);
+      });
+
+      it('does not emit click on pointer activation', async () => {
+        await wrapper.trigger('click');
+
+        expect(wrapper.emitted('click')).toBeUndefined();
+      });
+
+      it('still emits mousemove and mouseleave', async () => {
+        await wrapper.trigger('mousemove');
+        await wrapper.trigger('mouseleave');
+
+        expect(Object.keys(wrapper.emitted())).toEqual(['mousemove', 'mouseleave']);
+      });
+
+      it('keeps the keyboard highlight', async () => {
+        await wrapper.setProps({ id: 'dt-item2' });
+
+        expect(wrapper.classes()).toEqual(['d-list-item', 'd-list-item--highlighted', 'd-list-item--disabled']);
+        expect(wrapper.attributes('aria-selected')).toBe('true');
+      });
+
+      it('stays focusable for tab navigation', async () => {
+        await wrapper.setProps({ navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB });
+
+        expect(wrapper.attributes('tabindex')).toBe('0');
+      });
+    });
+  });
+
   describe('Extendability Tests', () => {
     describe('When type is "default" and "wrapperClass" prop is provided', () => {
       beforeEach(async () => {
@@ -300,6 +363,16 @@ describe('ListItem contextual roles', () => {
     await item.trigger('keydown', { key: code === 'Space' ? ' ' : code, code });
     expect(item.emitted('click')).toHaveLength(1);
     expect(item.emitted('click')[0][0].defaultPrevented).toBe(true);
+    item.unmount();
+  });
+
+  it.each(['Enter', 'Space'])('refuses %s on a disabled menu radio with the default action still prevented', async code => {
+    const item = mount(DtListItem, {
+      props: { id: 'radio', role: 'menuitemradio', navigationType: 'arrow-keys', disabled: true },
+    });
+    await item.trigger('keydown', { key: code === 'Space' ? ' ' : code, code });
+    expect(Object.keys(item.emitted())).toEqual(['keydown']);
+    expect(item.emitted('keydown')[0][0].defaultPrevented).toBe(true);
     item.unmount();
   });
 

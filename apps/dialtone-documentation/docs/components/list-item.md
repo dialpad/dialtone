@@ -81,6 +81,36 @@ Menu radios are menu choices, not native form radio inputs. Keep exactly one row
 
 Use [Dropdown's persistent-choice example](dropdown.md#persistent-menu-choices) for the menu parent, optional ListItemGroup heading, and selection handlers. Listbox choices remain `option`, even when only one value can be selected. See also the [Menu Roles story](https://dialtone.dialpad.com/vue/?path=/story/components-dropdown--menu-roles).
 
+## Disabled
+
+Set `disabled` on a row that can't be activated right now. The row renders `aria-disabled="true"` and the disabled style, and it doesn't emit `click` for pointer, Enter or Space. It still emits `keydown`, `mousemove` and `mouseleave`, and stays focusable and reachable with the arrow keys, Home, End and typeahead, so keyboard and screen reader users can find it and learn why it's unavailable. Use it on interactive rows (`menuitem`, `menuitemradio` or `option`), where assistive technology announces the state.
+
+Put the reason in the `subtitle` slot and point `aria-describedby` at it, so it's read as the row's description rather than repeated in its name.
+
+```vue demo
+<!-- @class d-d-block -->
+<ul>
+  <dt-list-item navigation-type="tab">
+    Rename
+  </dt-list-item>
+  <dt-list-item
+    navigation-type="tab"
+    disabled
+    aria-describedby="list-item-disabled-reason"
+  >
+    Delete
+    <template #subtitle>
+      <span id="list-item-disabled-reason">Only the owner can delete this file</span>
+    </template>
+  </dt-list-item>
+</ul>
+```
+
+The style comes from the `disabled` prop. A row that sets `aria-disabled` without the prop keeps its current look and still emits `click`.
+
+> [!WARNING] Parent-driven selection isn't gated
+> `disabled` stops only the row's own `click`. A parent that selects by highlighted index, such as DtCombobox on Enter, doesn't check it, so that parent must skip unavailable rows itself.
+
 ## Variants
 
 ### Custom List Item

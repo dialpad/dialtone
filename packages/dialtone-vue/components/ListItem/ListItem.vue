@@ -8,11 +8,13 @@
         'd-list-item--focusable': isFocusable,
         'd-list-item--highlighted': isHighlighted,
         'd-list-item--static': !isHoverable,
+        'd-list-item--disabled': disabled,
       }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
     :aria-selected="ariaSelected"
     :aria-checked="isMenuItemRadio ? selected : undefined"
+    :aria-disabled="disabled ? 'true' : undefined"
     v-on="listItemListeners"
   >
     <dt-item-layout
@@ -137,6 +139,18 @@ export default {
     },
 
     /**
+     * Marks the item unavailable. Sets aria-disabled="true" and the disabled style, and stops
+     * the item from emitting click for pointer, Enter or Space activation. The item stays
+     * focusable and reachable by keyboard navigation, and still emits keydown, mousemove and
+     * mouseleave. Only the item's own activation is gated: a parent that selects by
+     * highlighted index, such as Combobox on Enter, must check availability itself.
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Additional Classes to apply to the wrapper element,
      * note: it only applies on "default" type
      * Can accept all of: String, Object, and Array, i.e. has the
@@ -254,7 +268,7 @@ export default {
 
   methods: {
     onClick (e) {
-      // disabled as we do not want to override native click
+      if (this.disabled) return;
       this.$emit('click', e);
     },
 

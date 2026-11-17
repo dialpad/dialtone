@@ -1,21 +1,25 @@
 @layer dialtone.components {
 .d-list-item {
+  --list-item-color-background-hover: var(--dt-action-color-background-muted-hover);
+  --list-item-color-background-active: var(--dt-action-color-background-muted-active);
+  --list-item-cursor: pointer;
+
   list-style: none;
   background-color: var(--dt-action-color-background-muted-default);
 
   &:not(.d-list-item--static) {
     border-radius: var(--dt-size-radius-300);
-    cursor: pointer;
+    cursor: var(--list-item-cursor);
   }
 
   &--focusable:focus,
   &--focusable:focus-within,
   &--highlighted {
-    background-color: var(--dt-action-color-background-muted-hover);
+    background-color: var(--list-item-color-background-hover);
   }
 
   &--highlighted:active {
-    background-color: var(--dt-action-color-background-muted-active);
+    background-color: var(--list-item-color-background-active);
   }
 
   &[role="menuitem"] {
@@ -32,6 +36,20 @@
     outline: none;
     box-shadow: var(--dt-shadow-focus);
   }
+}
+
+// Mirrors the clear, muted, disabled DtButton text recipe in button.less
+// (`.d-btn:where(.d-btn--disabled, :disabled)` with `.d-btn--muted`); keep them in sync.
+// Hover, highlight and active keep the default background; the focus ring stays.
+// Keyed off the prop's modifier, never bare [aria-disabled], so rows that set
+// aria-disabled themselves keep their current styles.
+.d-list-item--disabled {
+  --list-item-color-background-hover: var(--dt-action-color-background-muted-default);
+  --list-item-color-background-active: var(--dt-action-color-background-muted-default);
+  --list-item-cursor: not-allowed;
+
+  color: color-mix(in oklch, oklch(from var(--dt-action-color-foreground-muted-default) l calc(c - .08) h) 50%, transparent);
+  transition: none;
 }
 
 .d-list-item__wrapper {
