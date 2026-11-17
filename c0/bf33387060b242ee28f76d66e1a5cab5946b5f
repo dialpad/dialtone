@@ -1,0 +1,19 @@
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_bade019f38acf7::t_193d39fa037013 206-207
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c0bf33387060b242ee28f76d66e1a5cab5946b5f",
+  "prompts": {},
+  "sessions": {
+    "s_bade019f38acf7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4ddb7b2-f62a-4d3c-9d59-f141d6ddfcc1",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
