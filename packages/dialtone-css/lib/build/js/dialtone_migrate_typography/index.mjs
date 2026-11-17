@@ -211,6 +211,11 @@ const TEXT_KIND_SIZES = lookupTable({
   label: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
   code: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
 });
+// DtText prop names mirrored from packages/dialtone-vue/components/Text/Text.vue.
+const TEXT_PROPS = new Set([
+  'as', 'kind', 'variant', 'size', 'family', 'italic', 'tone', 'align', 'truncate',
+  'maxLines', 'numeric', 'wrap', 'textBoxTrim', 'strength', 'density',
+]);
 
 // Rewriteable element tags (only these get turned into <dt-text>)
 const REWRITEABLE_TAGS = new Set(['p', 'span', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']);
@@ -291,10 +296,10 @@ function maskInertContent (content) {
 /**
  * Restore masked segments back to their original content.
  */
-function unmaskInertContent (content, segments, token, endToken) {
+function unmaskInertContent (content, segments, token, endToken, restore = () => true) {
   return content.replace(
     new RegExp(`${escapeRe(token)}(\\d+)${escapeRe(endToken)}`, 'g'),
-    (_, idx) => segments[Number(idx)],
+    (match, idx) => (restore(segments[Number(idx)]) ? segments[Number(idx)] : match),
   );
 }
 
@@ -345,11 +350,12 @@ export function transformContent (content, opts = {}) {
   out = flagLegacyHeadings(out, filePath, warnings, notes);
   out = flagFontSizeClasses(out, filePath, warnings, notes);
 
-  const unmasked = unmaskInertContent(out, segments, token, endToken);
-
   // Idempotency: a marker from a prior run is masked as a comment, so passes emit it
-  // again on rerun. Drop repeats within each run of adjacent markers, inline or own-line.
-  const transformed = deduplicateAdjacentMarkers(unmasked);
+  // again on rerun. Restore comments to drop repeats within each run of adjacent markers,
+  // inline or own-line, while <script> and <style> stay masked: a marker-like string there
+  // is application data.
+  const withComments = unmaskInertContent(out, segments, token, endToken, segment => segment.startsWith('<!--'));
+  const transformed = unmaskInertContent(deduplicateAdjacentMarkers(withComments), segments, token, endToken);
 
   return { transformed, warnings, notes };
 }
@@ -451,6 +457,7 @@ function findMatchingClosingTag (content, startPos, tagName) {
 }
 
 const CONFLICT_MARKER = '<!-- dt-text-migrate: review conflicting class -->';
+const NATIVE_PROP_MARKER = '<!-- dt-text-migrate: review attribute that may become a DtText prop -->';
 const ALL_OVERRIDE_PROPS = new Set(Object.values(OVERRIDE_CLASS_MAP).map(override => override.prop));
 
 // Attribute names in an opening tag's attribute text. Quoted values are blanked first so
@@ -476,6 +483,14 @@ function hasAuthoredComposition (names) {
   return names.some(name => ['kind', 'size', 'variant', 'family'].includes(boundProp(name)));
 }
 
+// A native element ignores attributes named like DtText props, but converting it makes
+// them props: a size becomes a raw font-size override, a second variant duplicates the
+// attribute and `as` changes the tag. A spread or dynamic name may supply any of them.
+function mayBecomeTextProp (names) {
+  return hasUncertainBinding(names) ||
+    names.some(name => TEXT_PROPS.has(boundProp(name).replace(/-(\w)/g, (_, c) => c.toUpperCase())));
+}
+
 // Props the element already authors, in any binding form: { [prop]: true }.
 function parseExistingProps (names) {
   const props = Object.create(null);
@@ -487,13 +502,15 @@ function parseExistingProps (names) {
 // CSS property: all of them for a bound style or spread, otherwise the ones the static
 // style declares.
 function blockedOverrideProps (attrStr, names) {
-  if (hasUncertainBinding(names) || names.some(name => /^(?::|v-bind:)style$/.test(name))) {
+  // Any bound form counts, modifiers included: Vue compiles `:style.camel` to a style binding.
+  if (hasUncertainBinding(names) || names.some(name => name !== 'style' && boundProp(name) === 'style')) {
     return ALL_OVERRIDE_PROPS;
   }
   const style = /(?:^|\s)style\s*=\s*(?:"([^"]*)"|'([^']*)')/.exec(attrStr);
   if (!style) return new Set();
+  const declarations = (style[1] ?? style[2]).replace(/\/\*[\s\S]*?\*\//g, ' '); // CSS comments
   const declared = new Set(
-    [...(style[1] ?? style[2]).matchAll(/(?:^|;)\s*([\w-]+)\s*:/g)].map(m => m[1].toLowerCase()),
+    [...declarations.matchAll(/(?:^|;)\s*([\w-]+)\s*:/g)].map(m => m[1].toLowerCase()),
   );
   if (declared.has('all')) return ALL_OVERRIDE_PROPS; // `all` resets every property
   return new Set(Object.keys(OVERRIDE_STYLE_PROPERTIES)
@@ -643,6 +660,10 @@ function rewriteComposedClasses (content) {
       mark(openStart, 'review composed class with authored composition');
       continue;
     }
+    if (!isDtText && mayBecomeTextProp(names)) {
+      replacements.push({ start: openStart, end: openStart, replacement: NATIVE_PROP_MARKER });
+      continue;
+    }
 
     // Flagged classes are never rewritten. Check them before the wrapper test: a child this
     // run converts to <dt-text> would make the element look like a wrapper on the next run.
@@ -776,6 +797,11 @@ function liftResidualOverrides (content) {
       // result keeps inheriting typography and only the atomic props apply.
       const OVERRIDE_ONLY_REWRITEABLE = new Set(['span', 'p', 'label']);
       if (!OVERRIDE_ONLY_REWRITEABLE.has(tagName.toLowerCase())) continue;
+
+      if (mayBecomeTextProp(names)) {
+        replacements.push({ start: openStart, end: openStart, replacement: NATIVE_PROP_MARKER });
+        continue;
+      }
 
       // Skip elements with behavioral attrs — directives, events, id, ref, data-*
       // mean the element has significance beyond typography (e.g. <span @click>, <span id="x">)
@@ -911,6 +937,8 @@ function collapseNestedSpans (content) {
       // still here was rejected there (wrapper, multiple compositions, flag) and must
       // not be retried.
       if (classes.some(c => COMPOSED_CLASS_MAP[c])) continue;
+      // liftResidualOverrides already kept this span for its attributes.
+      if (body.slice(0, sm.index).endsWith(NATIVE_PROP_MARKER)) continue;
 
       // Find the depth-matched </span> (handles nested <span>...<span>...</span>...</span>)
       const closingSpan = findMatchingClosingTag(body, spanOpenEnd, 'span');

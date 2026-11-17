@@ -1203,6 +1203,32 @@ describe('composed class on DtText with authored composition stays unchanged', (
   });
 });
 
+describe('native attributes that may become DtText props keep the element unchanged', () => {
+  const NATIVE = '<!-- dt-text-migrate: review attribute that may become a DtText prop -->';
+  // A native element ignores these today. After conversion they are DtText props: a spread
+  // size becomes a raw font-size override, a second variant duplicates the attribute and
+  // `as` changes the tag.
+  const inputs = [
+    '<span class="d-body--md" v-bind="{size:300}">A</span>',
+    '<span class="d-body--md" variant="headline-xl">A</span>',
+    '<span class="d-body--md" as="h1">A</span>',
+    '<p class="d-body--md" :size="s">A</p>',
+    '<p class="d-body--md" :[name]="v">A</p>',
+    '<p class="d-body--md" max-lines="2">A</p>',
+    '<span class="d-fw-bold" as="h1">A</span>',
+    '<span class="d-fw-bold" v-bind="attrs">A</span>',
+  ];
+  for (const input of inputs) {
+    it(input, () => { assert.equal(run(input), NATIVE + input); });
+  }
+
+  for (const span of ['<span class="d-body--sm" size="300">A</span>', '<span class="d-fw-bold" variant="headline-xl">A</span>']) {
+    it(`the nested pass keeps the decision: ${span}`, () => {
+      assert.equal(run(`<dt-text kind="body">${span}</dt-text>`), `<dt-text kind="body">${NATIVE}${span}</dt-text>`);
+    });
+  }
+});
+
 describe('override utilities beat generated composition defaults', () => {
   const cases = [
     ['soft + d-fw-bold', '<p class="d-headline--sm-soft d-fw-bold">x</p>', '<dt-text as="p" variant="headline-xs" strength="bold">x</dt-text>'],
@@ -1229,6 +1255,10 @@ describe('uncertain overrides keep their utility class with review', () => {
       `${CONFLICT}<dt-text v-bind="attrs" class="d-fw-bold">x</dt-text>`],
     ['inline all reset', '<dt-text class="d-fw-bold" style="all: initial">x</dt-text>',
       `${CONFLICT}<dt-text class="d-fw-bold" style="all: initial">x</dt-text>`],
+    ['bound style with a modifier', '<dt-text variant="body-md"\n  :style.camel="{fontWeight: 400}"\n  class="d-fw-bold">A</dt-text>',
+      `${CONFLICT}<dt-text variant="body-md"\n  :style.camel="{fontWeight: 400}"\n  class="d-fw-bold">A</dt-text>`],
+    ['comment before a static declaration', '<dt-text variant="body-md"\n  style="/* note */font-weight: 400"\n  class="d-fw-bold">A</dt-text>',
+      `${CONFLICT}<dt-text variant="body-md"\n  style="/* note */font-weight: 400"\n  class="d-fw-bold">A</dt-text>`],
   ];
   for (const [label, input, expected] of cases) {
     it(label, () => { assert.equal(run(input), expected); });
@@ -1314,6 +1344,8 @@ describe('reruns are byte-identical, including review markers', () => {
     ['flagged parent with a converted child', '<p class="d-headline--eyebrow">Step <span class="d-fw-bold">1</span></p>'],
     ['own-line and inline markers', '<div>\n  <p :class="{ \'d-body--md\': c }">x</p><p class="d-code--sm">y</p>\n</div>'],
     ['unrelated comment', '<!-- keep -->\n<p class="d-code--sm">x</p>'],
+    ['native attribute that may become a prop', '<span class="d-body--md" v-bind="{size:300}">A</span>'],
+    ['kept span inside DtText', '<dt-text kind="body"><span class="d-fw-bold" variant="headline-xl">A</span></dt-text>'],
   ];
   for (const [label, input] of inputs) {
     it(label, () => {
@@ -1325,6 +1357,19 @@ describe('reruns are byte-identical, including review markers', () => {
     const out = run(run('<!-- keep --><p class="d-code--sm">x</p>'));
     assert.equal(out, '<!-- keep --><!-- dt-text-migrate: review --><p class="d-code--sm">x</p>');
   });
+});
+
+describe('marker deduplication leaves script and style content unchanged', () => {
+  const PAIR = '<!-- dt-text-migrate: review --><!-- dt-text-migrate: review -->';
+  const cases = [
+    ['script string', `<script>\nconst example = \`${PAIR}\`;\n</script>`],
+    ['CSS content string', `<style>\n.x::after { content: "${PAIR}"; }\n</style>`],
+  ];
+  for (const [label, inert] of cases) {
+    it(label, () => {
+      assert.equal(run(`<p class="d-body--md">A</p>\n${inert}`), `<dt-text as="p" variant="body-md">A</dt-text>\n${inert}`);
+    });
+  }
 });
 
 // ---------------------------------------------------------------------------
