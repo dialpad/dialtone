@@ -4,6 +4,7 @@ import { StandIn } from '../../.storybook/StandIn';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
 import { DtCheckbox } from '../Checkbox/Checkbox';
+import { DtInput } from '../Input/Input';
 import { DtRadio } from '../Radio/Radio';
 import { DtIconBell } from '../../icons';
 import { DtStack } from '../Stack/Stack';
@@ -121,9 +122,9 @@ const INTEREST_OPTIONS = [
   { value: 'product', label: 'Product', messagesId: 'dt14' },
 ];
 
-// The form fields are stand-ins: Vue's initial DOM, with the story's handlers on their native elements and a real
-// DtValidationMessages where each field renders its messages. What the real components change with their messages
-// (d-input--critical, aria-invalid, aria-describedby) doesn't happen here until they are ported.
+// The select and radio-group fields are stand-ins: Vue's initial DOM, with the story's handlers on their native
+// elements and a real DtValidationMessages where each field renders its messages. What the real components change
+// with their messages (d-input--critical, aria-invalid, aria-describedby) doesn't happen here until they are ported.
 function InteractiveFormTemplate () {
   const [nameValue, setNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -223,7 +224,16 @@ function InteractiveFormTemplate () {
     setUsernameChecking(false);
   }
 
-  const inputs = [
+  const inputs: {
+    label: string;
+    placeholder: string;
+    type: 'text' | 'email';
+    value: string;
+    setValue: (value: string) => void;
+    messages: ValidationMessage[];
+    onBlur: () => void;
+    disabled: boolean;
+  }[] = [
     { label: 'Name', placeholder: 'Enter your name', type: 'text', value: nameValue, setValue: setNameValue, messages: nameMessages, onBlur: validateName, disabled: false },
     { label: 'Email', placeholder: 'Enter your email', type: 'email', value: emailValue, setValue: setEmailValue, messages: emailMessages, onBlur: validateEmail, disabled: false },
     { label: 'Username', placeholder: "Enter a username (try 'taken')", type: 'text', value: usernameValue, setValue: setUsernameValue, messages: usernameMessages, onBlur: validateUsername, disabled: usernameChecking },
@@ -232,30 +242,17 @@ function InteractiveFormTemplate () {
   return (
     <DtStack gap="500" style={{ maxWidth: '400px' }}>
         {inputs.map(input => (
-          <StandIn for="input" key={input.label}>
-            <div className="d-input__root" data-qa="dt-input">
-              <label className="d-input__label" data-qa="dt-input-label-wrapper">
-                <span data-qa="dt-input-label" className="d-text d-text-label--md d-text--tone-secondary d-input__label-text">{input.label}</span>
-                <div className="d-input__wrapper">
-                  <span className="d-input-icon d-input-icon--left" data-qa="dt-input-left-icon-wrapper"></span>
-                  <input
-                    name=""
-                    type={input.type}
-                    autoComplete="off"
-                    className="d-input__input d-input"
-                    data-qa="dt-input-input"
-                    placeholder={input.placeholder}
-                    value={input.value}
-                    disabled={input.disabled}
-                    onChange={event => input.setValue(event.target.value)}
-                    onBlur={input.onBlur}
-                  />
-                  <span className="d-input-icon d-input-icon--right" data-qa="dt-input-right-icon-wrapper"></span>
-                </div>
-              </label>
-              <DtValidationMessages data-qa="dt-input-messages" validationMessages={input.messages} />
-            </div>
-          </StandIn>
+          <DtInput
+            key={input.label}
+            label={input.label}
+            type={input.type}
+            placeholder={input.placeholder}
+            value={input.value}
+            disabled={input.disabled}
+            messages={input.messages}
+            onValueChange={value => input.setValue(String(value))}
+            onBlur={input.onBlur}
+          />
         ))}
         <StandIn for="select-menu">
           <div className="">
