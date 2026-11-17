@@ -1,0 +1,86 @@
+apps/dialtone-documentation/scripts/thumbs/generate.mjs
+  s_51be0be46a03b0::t_35efbd005a755e 5-7
+.husky/pre-commit
+  s_51be0be46a03b0::t_35efbd005a755e 26-29
+apps/dialtone-documentation/thumbs/README.md
+  s_6071117341a43e::t_07a0b3e1cbf1e6 72
+  s_6071117341a43e::t_98d59c93f6c813 76-77
+  s_51be0be46a03b0::t_35efbd005a755e 62,64,66-68,74-75,78,137-138,141
+  s_6071117341a43e::t_36cd44eedc6a43 71,73
+.agents/evals/run-skill-contract-evals.mjs
+  s_6071117341a43e::t_b46c8a59ec473f 35-36
+  s_51be0be46a03b0::t_35efbd005a755e 27-32,34,37-40
+  s_51be0be46a03b0::t_86f1e29981d7ae 184-191
+  s_6071117341a43e::t_5f7f4a31075fc2 33
+.claude/skills/merge-next/SKILL.md
+  s_51be0be46a03b0::t_35efbd005a755e 7,17-18,20,22,90-97,99-100,103-107,110,112-114,120,136,146,160,189
+  s_6071117341a43e::t_cc99665307553c 12,98,101-102,108-109,132,142,201-202
+  s_6071117341a43e::t_98d59c93f6c813 11
+  s_51be0be46a03b0::t_87eee176aa1e21 111
+  s_6071117341a43e::t_860271f4142a76 133
+  s_6071117341a43e::t_e144ee9ccaec2a 24
+.agents/skills/merge-next/evals/run-merge-next-evals.mjs
+  s_6071117341a43e::t_b46c8a59ec473f 49,65-68
+  s_6071117341a43e::t_5b0a7cdd82baff 1-46,48,51-64,69-78
+  s_6071117341a43e::t_5f7f4a31075fc2 47
+  s_6071117341a43e::t_12cdeeb3323e5c 50
+.agents/skills/merge-next/evals/merge-next-cases.json
+  s_6071117341a43e::t_5b0a7cdd82baff 1-65
+.agents/README.md
+  s_51be0be46a03b0::t_35efbd005a755e 10,38
+.agents/skills/merge-next/SKILL.md
+  s_6071117341a43e::t_9f341696ce2df0 81-83
+  s_6071117341a43e::t_98d59c93f6c813 12
+  s_6071117341a43e::t_102526161dfae7 66,78-79,85-86,96
+  s_6071117341a43e::t_92846d15834bd2 1-11,14-52,54-65,68-69,72,74-75,80,84,87-95,97-105,107-112,114-123
+  s_6071117341a43e::t_cc99665307553c 13,67,70-71,73,106,113
+  s_6071117341a43e::t_e144ee9ccaec2a 53
+  s_6071117341a43e::t_a6e474302bb668 76-77
+.agents/resources/agent-tooling-parity.md
+  s_6071117341a43e::t_cc99665307553c 15
+apps/dialtone-documentation/scripts/thumbs/cache.mjs
+  s_6071117341a43e::t_e144ee9ccaec2a 11,29-30,59-62,64,66-77,81-84,88
+  s_6071117341a43e::t_a6e474302bb668 17,55,63,65
+  s_6071117341a43e::t_136550d049085a 56-58
+  s_6071117341a43e::t_72f9db23ef8abb 78-80
+apps/dialtone-documentation/scripts/thumbs/cache.test.mjs
+  s_6071117341a43e::t_e144ee9ccaec2a 14,18
+  s_6071117341a43e::t_792ab1a55e764c 1,3-4,6-8,10-13,15-17,19,26,34,37,64
+  s_6071117341a43e::t_c3c337c4d4c971 5,9,20-25,27-33,35-36,38-40,61-63
+  s_6071117341a43e::t_4fb9c18c5dd6b9 45,54-60
+  s_6071117341a43e::t_12cdeeb3323e5c 2,41-43
+  s_6071117341a43e::t_1c48d42b89d27a 44
+  s_6071117341a43e::t_63926bace61070 49-53
+  s_6071117341a43e::t_1d45bd6f499c82 46-48
+apps/dialtone-documentation/project.json
+  s_6071117341a43e::t_72f9db23ef8abb 6,14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "11dbd9bdc2b875d101bfba51dedbebd6fa93597a",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_51be0be46a03b0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a6783a03-6736-42cc-814b-25aee88bd9e7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_6071117341a43e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4d8b-397b-7102-a4c6-dc4cb5f84ffd",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

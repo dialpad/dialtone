@@ -1,0 +1,19 @@
+packages/dialtone-docs/tests/example-template.test.js
+  s_4beae4ed914796::t_e3e1c7dcb708f0 41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dbdf8f629f59c1d2b89ef1895e0b9cee91a66972",
+  "prompts": {},
+  "sessions": {
+    "s_4beae4ed914796": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e4b8-5d08-7370-a0cd-4be98acdb358",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
