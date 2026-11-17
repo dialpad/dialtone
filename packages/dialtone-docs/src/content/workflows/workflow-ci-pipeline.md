@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-16
+last_updated: 2026-11-17
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -197,9 +197,9 @@ Publishes each changed package to two registries: npm (public) and GitHub Packag
 3. For each package × registry combination (matrix):
    - Sets `NODE_AUTH_TOKEN` and registry URL
    - Qualified packages: publishes the qualified archive (`release-archives.mjs publish`); an existing version is skipped only when its integrity matches (tags are left unchanged), otherwise the job fails. If qualification failed, these legs fail without publishing; other packages still publish
-   - Other packages: runs `pnpm nx run {package}:publish --publish-branch={branch} --tag={tag}`
+   - Other packages: attaches a local release branch at the pinned commit, then runs `pnpm nx run {package}:publish --publish-branch={branch} --tag={tag}`. This satisfies pnpm’s branch check without fetching a moving branch tip
 4. A 15-second delay is added before publishing `dialtone-vue` due to npm rate limiting
-5. `verify-release` — Confirms within one shared, bounded wait that both registries hold the qualified bytes and, for versions of that channel, the channel tag (a prerelease version must not be `latest`, and a prerelease of another channel is rejected), then runs installed CLI/MCP lookup and example smoke checks. The workflow succeeds only when this passes; nothing is unpublished or rolled back.
+5. `verify-release` — Confirms within one shared, bounded wait that both registries hold the qualified bytes and, for versions of that channel, the channel tag (a prerelease version must not be `latest`, and a prerelease of another channel is rejected), then runs installed CLI/MCP lookup and example smoke checks. The normal availability wait also applies when an unrelated package fails to publish; that failure still keeps the workflow red. The workflow succeeds only when this passes; nothing is unpublished or rolled back.
 
 **RELEASE_TAG:** `latest` on `production`, branch name on `alpha`/`beta`/`next`.
 
