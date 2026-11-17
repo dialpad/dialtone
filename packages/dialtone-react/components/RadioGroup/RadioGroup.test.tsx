@@ -287,6 +287,17 @@ describe('DtRadioGroup Tests', () => {
       expect(ref.current).toBe(getRadioGroup());
     });
 
+    it('provides the group context to radios in the legend', async () => {
+      const onValueChange = vi.fn();
+      renderGroup(
+        { value: 'apple', onValueChange, legend: <DtRadio value="apple">Apple</DtRadio> },
+        <DtRadio value="pear">Pear</DtRadio>,
+      );
+      expect(screen.getByRole('radio', { name: 'Apple' })).toBeChecked();
+      await userEvent.click(screen.getByRole('radio', { name: 'Pear' }));
+      expect(onValueChange).toHaveBeenCalledWith('pear');
+    });
+
     describe('QA Label Tests', () => {
       it('uses the data-qa overrides on the fieldset, legend and messages', () => {
         renderGroup({

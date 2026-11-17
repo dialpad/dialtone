@@ -1,6 +1,7 @@
 import { useMemo, type ReactNode } from 'react';
 import { useControllableState } from '../../common/hooks/useControllableState';
 import { InputGroupContext, useInputGroupContext, type SetGroupValue } from '../../common/input';
+import { hasContent } from '../../common/slots';
 import { DtInputGroup, type DtInputGroupProps } from '../InputGroup';
 
 type RadioGroupValue = string | number;
@@ -76,12 +77,24 @@ export function DtRadioGroup ({
   // Provided to the radios in the group, which change this value and report it up.
   const setGroupValue: SetGroupValue = newValue => setSelectedValue(newValue as RadioGroupValue);
 
+  // Vue's provider covers the whole component, legend slot included. DtInputGroup renders the legend inside its own
+  // context, so non-string legend content gets the radio group provider too (empty legends stay empty).
+  const { legend } = groupProps;
+  const legendContent = typeof legend !== 'string' && hasContent(legend)
+    ? (
+        <RadioGroupProvider selectedValue={selectedValue} setGroupValue={setGroupValue}>
+          {legend}
+        </RadioGroupProvider>
+      )
+    : legend;
+
   return (
     <DtInputGroup
       dataQaGroup={dataQaGroup}
       dataQaGroupLegend={dataQaGroupLegend}
       dataQaGroupMessages={dataQaGroupMessages}
       {...groupProps}
+      legend={legendContent}
     >
       <RadioGroupProvider
         selectedValue={selectedValue}
