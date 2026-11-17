@@ -1,3 +1,10 @@
+## [10.13.1](https://github.com/dialpad/dialtone/compare/dialtone/v10.13.0...dialtone/v10.13.1) (2026-11-17)
+
+
+### Bug Fixes
+
+* **Migration:** DLT-3838 emit DtText variant from the typography migration ([#1586](https://github.com/dialpad/dialtone/issues/1586)) ([9b2946b](https://github.com/dialpad/dialtone/commit/9b2946bd0af02dae0af84956951665da3d747f67))
+
 # [10.13.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.12.0...dialtone/v10.13.0) (2026-11-17)
 
 
