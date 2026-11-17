@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { EmptyComponentFixture } from '../../tests/helpers/fixtures';
 import { withRouterLink } from '../../tests/helpers/link';
-import { DtButton, type DtButtonProps } from './Button';
+import { DtButton, type DtButtonIconSlotScope, type DtButtonProps } from './Button';
 import { BUTTON_ICON_SIZES, INVALID_COMBINATION } from './ButtonConstants';
 import { SrOnlyCloseButton } from './sr_only_close_button';
 
@@ -761,17 +761,17 @@ describe('DtButton Tests', () => {
     });
 
     it('passes iconSize to the icon render props', () => {
-      const startIcon = vi.fn(({ iconSize }: { iconSize?: string }) => <i data-qa="start" data-size={iconSize} />);
+      const startIcon = vi.fn(({ iconSize }: DtButtonIconSlotScope) => <i data-qa="start" data-size={iconSize} />);
 
       renderButton({ size: 400, startIcon });
 
       expect(screen.getByTestId('start')).toHaveAttribute('data-size', BUTTON_ICON_SIZES[400]);
     });
 
-    it('labels a loading button "Loading" unless the consumer passes aria-label', () => {
+    it('labels a loading button "loading" unless the consumer passes aria-label', () => {
       const { rerender } = renderButton({ loading: true });
 
-      expect(button()).toHaveAttribute('aria-label', 'Loading');
+      expect(button()).toHaveAttribute('aria-label', 'loading');
 
       rerender(<DtButton loading aria-label="Saving" />);
 
@@ -835,7 +835,8 @@ describe('DtButton Tests', () => {
       rerender(<DtButton circle kind="default" importance="primary" />);
       expect(warn).toHaveBeenCalledTimes(1);
 
-      rerender(<DtButton circle link />);
+      rerender(<DtButton circle link kind="critical" importance="clear" />);
+      expect(warn).toHaveBeenCalledTimes(2);
       expect(warn).toHaveBeenLastCalledWith('You cannot enable circle and link at the same time');
     });
   });
@@ -844,13 +845,13 @@ describe('DtButton Tests', () => {
 describe('SrOnlyCloseButton', () => {
   const closeButton = () => screen.getByTestId('dt-sr-only-close-button');
 
-  it('renders a screen-reader-only close button labelled "Close"', () => {
+  it('renders a screen-reader-only close button labelled "Click to close"', () => {
     render(<SrOnlyCloseButton />);
 
     expect(closeButton()).toHaveAttribute('id', 'sr-only-close-button');
     expect(closeButton()).toHaveClass('d-vi-visible-sr', 'base-button__button');
-    expect(closeButton()).toHaveAttribute('aria-label', 'Close');
-    expect(closeButton()).toHaveAttribute('title', 'Close');
+    expect(closeButton()).toHaveAttribute('aria-label', 'Click to close');
+    expect(closeButton()).toHaveAttribute('title', 'Click to close');
     expect(closeButton().querySelector('svg')).toBeInTheDocument();
   });
 
