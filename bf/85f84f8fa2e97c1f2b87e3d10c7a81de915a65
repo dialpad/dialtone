@@ -1,0 +1,37 @@
+packages/dialtone-mcp-server/src/index.ts
+  s_7f1d1d64baa803::t_bcbc3d5d42e1e0 18-19,25,30-31,33-35,52,349-372
+packages/dialtone-cli/release-ci.config.cjs
+  s_7f1d1d64baa803::t_bcbc3d5d42e1e0 11-12
+packages/dialtone-mcp-server/package.json
+  s_7f1d1d64baa803::t_bcbc3d5d42e1e0 17-18
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_7f1d1d64baa803::t_fcebf57ed812d1 1-66
+packages/dialtone-mcp-server/README.md
+  s_7f1d1d64baa803::t_bcbc3d5d42e1e0 66
+packages/dialtone-mcp-server/release-ci.config.cjs
+  s_7f1d1d64baa803::t_bcbc3d5d42e1e0 11-12
+packages/dialtone-mcp-server/tests/fixtures/registry.mjs
+  s_7f1d1d64baa803::t_fcebf57ed812d1 1-37
+packages/dialtone-mcp-server/tests/startup.test.mjs
+  s_7f1d1d64baa803::t_fcebf57ed812d1 1-32,39-63,67-101,103-111
+  s_7f1d1d64baa803::t_b1a99b1a946b45 102
+  s_7f1d1d64baa803::t_cbc50a2510d91e 33-38,64-66
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_7f1d1d64baa803::t_6f41ec7f9442c1 6,56-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bf85f84f8fa2e97c1f2b87e3d10c7a81de915a65",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

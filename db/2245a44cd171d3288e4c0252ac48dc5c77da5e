@@ -1,0 +1,61 @@
+packages/dialtone-vue/directives/mode_directive/mode_directive_default.story.vue
+  s_7f1d1d64baa803::t_667bf779bf7e3d 161-163
+packages/dialtone-vue/components/Hovercard/HovercardDefault.story.vue
+  s_7f1d1d64baa803::t_986501b6133c63 127,137
+  s_7f1d1d64baa803::t_a87e38887ccea6 14,17,29,119,126,128-136,138
+  s_7f1d1d64baa803::t_55fb8018c6b662 23,26-27
+packages/dialtone-vue/components/Hovercard/HovercardMany.story.vue
+  s_7f1d1d64baa803::t_986501b6133c63 158,185
+  s_7f1d1d64baa803::t_a87e38887ccea6 11,24,35,149,159-161,167,173,177-184,186
+  s_7f1d1d64baa803::t_55fb8018c6b662 32-33
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_recipes.story.vue
+  s_7f1d1d64baa803::t_dbb158c5c95b67 40
+  s_7f1d1d64baa803::t_5197628f0b4ea0 35,38,63-64,66-68,71-73,86,136-137,139-141,144-146,159,667-673
+  s_7f1d1d64baa803::t_30523c07d7b0f3 65,76-81,83-85,87-93,96-99,138,149-154,156-158,160-166,169-172,634,659-660
+packages/dialtone-vue/components/Hovercard/HovercardWithInput.story.vue
+  s_7f1d1d64baa803::t_55fb8018c6b662 23,26-27
+  s_7f1d1d64baa803::t_986501b6133c63 134,145
+  s_7f1d1d64baa803::t_a87e38887ccea6 14,17,29,125,133,135-144,146
+packages/dialtone-vue/components/Prose/ProseDefault.story.vue
+  s_7f1d1d64baa803::t_667bf779bf7e3d 228,236,244,271-273
+  s_7f1d1d64baa803::t_f4398c2f17d3b4 224,229,233,237,241,245
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.stories.js
+  s_7f1d1d64baa803::t_fcb7701eabfa74 58-61
+packages/dialtone-vue/components/Icon/IconVariants.story.vue
+  s_7f1d1d64baa803::t_667bf779bf7e3d 19
+packages/dialtone-vue/components/SplitButton/SplitButtonVariants.story.vue
+  s_7f1d1d64baa803::t_667bf779bf7e3d 388-392
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar_directive_default.story.vue
+  s_7f1d1d64baa803::t_e39c7993f95efe 18,42,66,90,116
+  s_7f1d1d64baa803::t_fcb7701eabfa74 14-17,19,38-41,43,62-65,67,86-89,91,112-115,117
+packages/dialtone-vue/components/Text/TextVariants.story.vue
+  s_7f1d1d64baa803::t_667bf779bf7e3d 249,379
+packages/dialtone-vue/components/FilterPill/FilterPillVariants.story.vue
+  s_7f1d1d64baa803::t_667bf779bf7e3d 346-350
+packages/dialtone-vue/components/Pagination/PaginationVariants.story.vue
+  s_7f1d1d64baa803::t_667bf779bf7e3d 39
+packages/dialtone-vue/components/Box/Box.stories.js
+  s_7f1d1d64baa803::t_e2b0af5a323bc0 244
+  s_7f1d1d64baa803::t_f21e931b16d483 250
+  s_7f1d1d64baa803::t_fcb7701eabfa74 247-249
+packages/dialtone-vue/components/Popover/PopoverIframe.story.vue
+  s_7f1d1d64baa803::t_986501b6133c63 3-6
+  s_7f1d1d64baa803::t_55fb8018c6b662 7-9,38
+  s_7f1d1d64baa803::t_6c959f750daf18 52-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "db2245a44cd171d3288e4c0252ac48dc5c77da5e",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

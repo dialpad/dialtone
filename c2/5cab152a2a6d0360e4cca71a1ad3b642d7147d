@@ -1,0 +1,37 @@
+packages/combinator/src/variants/variants_chip.js
+  s_edb6000ea1a4b6::t_868b48480a5c4a 34-36
+  s_edb6000ea1a4b6::t_12c31e1c2807cd 23-33,37-44,55-96
+  s_edb6000ea1a4b6::t_107ed2f603da52 97
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_edb6000ea1a4b6::t_868b48480a5c4a 247
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_edb6000ea1a4b6::t_868b48480a5c4a 167
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelectConstants.js
+  s_edb6000ea1a4b6::t_046a687f6a27f3 8,11-13,15-17
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/index.mjs
+  s_edb6000ea1a4b6::t_2609670396363d 64-84,111-124
+  s_edb6000ea1a4b6::t_8ae2453b235fd0 85
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_edb6000ea1a4b6::t_8db47a040b9c72 24-29,123,156,225,231,235,239,252
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/test.mjs
+  s_edb6000ea1a4b6::t_8ae2453b235fd0 129-132
+  s_edb6000ea1a4b6::t_2609670396363d 114-128,133-181
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_edb6000ea1a4b6::t_287dc245641254 7,34-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c25cab152a2a6d0360e4cca71a1ad3b642d7147d",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
