@@ -1,0 +1,31 @@
+packages/eslint-plugin-dialtone/lib/rules/deprecated-class-props.js
+  s_7f1d1d64baa803::t_1dd6e6dbc40556 7,50,57,120-127,150,159
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props.js
+  s_7f1d1d64baa803::t_1dd6e6dbc40556 7-8,30,233
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props-consumer.js
+  s_7f1d1d64baa803::t_0b81debe368a39 1-6,8-10,12-53,55-59,62-91,93-157,159-173,181-199,206-223,255-256
+  s_7f1d1d64baa803::t_7b7c8283677142 7,11,92,233-254
+  s_7f1d1d64baa803::t_ced515c6949251 54,60-61,158,174-180,200-205,224-232
+packages/eslint-plugin-dialtone/docs/rules/deprecated-class-props.md
+  s_7f1d1d64baa803::t_bd1a2a05263da2 19,23-36
+  s_7f1d1d64baa803::t_f637677788e10a 37
+packages/eslint-plugin-dialtone/lib/util/consumer-component-data.js
+  s_7f1d1d64baa803::t_7b7c8283677142 27
+  s_7f1d1d64baa803::t_1dd6e6dbc40556 1-26,28-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f19dd0593752afe9b57d4e44fa047cda218138de",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
