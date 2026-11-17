@@ -338,56 +338,63 @@
               <slot name="headerContent" />
             </dt-text>
           </li>
-          <dt-list-item
-            v-for="row in controlledState.rows"
-            :id="controlledOptionId(row.option.value)"
-            :key="row.option.value"
-            role="menuitemradio"
-            data-qa="dt-filter-pill__option"
-            navigation-type="arrow-keys"
-            :selected="controlledRowSelected(row.option.value)"
-            :disabled="!controlledCanSelect || row.disabled"
-            :aria-describedby="row.description ? controlledDescriptionId(row.option.value) : undefined"
-            @click="selectControlledOption(row.option.value)"
+          <!-- Positional keys keep a plain list one stable section; rows inside reconcile by value. -->
+          <dt-filter-pill-option-group
+            v-for="(section, index) in controlledState.sections"
+            :key="index"
+            :heading="section.group"
           >
-            {{ row.option.label }}
-            <template #selected>
-              <dt-icon-check
-                size="200"
-                :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(row.option.value) }"
-                aria-hidden="true"
-                data-qa="dt-filter-pill__selection-indicator"
-              />
-            </template>
-            <template
-              v-if="row.description"
-              #subtitle
+            <dt-list-item
+              v-for="row in section.rows"
+              :id="controlledOptionId(row.option.value)"
+              :key="row.option.value"
+              role="menuitemradio"
+              data-qa="dt-filter-pill__option"
+              navigation-type="arrow-keys"
+              :selected="controlledRowSelected(row.option.value)"
+              :disabled="!controlledCanSelect || row.disabled"
+              :aria-describedby="row.description ? controlledDescriptionId(row.option.value) : undefined"
+              @click="selectControlledOption(row.option.value)"
             >
-              <!-- Hidden from the row's name; aria-describedby still reads it as the description. -->
-              <span
-                :id="controlledDescriptionId(row.option.value)"
-                aria-hidden="true"
-                data-qa="dt-filter-pill__option-description"
-              >{{ row.description }}</span>
-            </template>
-            <template
-              v-if="$slots.optionEnd"
-              #end
-            >
-              <span :class="['d-filter-pill__option-end', optionEndClass]">
-                <!--
-                  @slot Noninteractive trailing choice content, retaining its label and handler.
-                  @binding {Object} option Read-only option record.
-                  @binding {boolean} selected Whether this row is selected, using a deferred draft when open.
-                -->
-                <slot
-                  name="optionEnd"
-                  :option="row.option"
-                  :selected="controlledRowSelected(row.option.value)"
+              {{ row.option.label }}
+              <template #selected>
+                <dt-icon-check
+                  size="200"
+                  :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(row.option.value) }"
+                  aria-hidden="true"
+                  data-qa="dt-filter-pill__selection-indicator"
                 />
-              </span>
-            </template>
-          </dt-list-item>
+              </template>
+              <template
+                v-if="row.description"
+                #subtitle
+              >
+                <!-- Hidden from the row's name; aria-describedby still reads it as the description. -->
+                <span
+                  :id="controlledDescriptionId(row.option.value)"
+                  aria-hidden="true"
+                  data-qa="dt-filter-pill__option-description"
+                >{{ row.description }}</span>
+              </template>
+              <template
+                v-if="$slots.optionEnd"
+                #end
+              >
+                <span :class="['d-filter-pill__option-end', optionEndClass]">
+                  <!--
+                    @slot Noninteractive trailing choice content, retaining its label and handler.
+                    @binding {Object} option Read-only option record.
+                    @binding {boolean} selected Whether this row is selected, using a deferred draft when open.
+                  -->
+                  <slot
+                    name="optionEnd"
+                    :option="row.option"
+                    :selected="controlledRowSelected(row.option.value)"
+                  />
+                </span>
+              </template>
+            </dt-list-item>
+          </dt-filter-pill-option-group>
         </slot>
         <!--
           @slot Override overlay content. Bindings are conditional on the selection contract.
@@ -472,6 +479,7 @@ import { DtListItem } from '@/components/ListItem';
 import { DtStack } from '@/components/Stack';
 import { DtText } from '@/components/Text';
 import ControlledSelection from './FilterPillControlled';
+import DtFilterPillOptionGroup from './modules/FilterPillOptionGroup.vue';
 
 /**
  * @typedef {object} FilterPillOption
@@ -495,6 +503,7 @@ export default {
     DtIconCheck,
     DtIconChevronDown,
     DtDropdown,
+    DtFilterPillOptionGroup,
     DtListItem,
     DtStack,
     DtText,

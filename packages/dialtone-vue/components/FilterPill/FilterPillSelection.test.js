@@ -107,6 +107,42 @@ describe('FilterPill dropdown-only option fields', () => {
     expect(state.issues).toEqual([issue]);
   });
 
+  it('groups consecutive rows into sections in data order', () => {
+    const records = [
+      Object.freeze({ value: 'all', label: 'All types' }),
+      Object.freeze({ value: 'archived', label: 'Archived', group: 'Other views' }),
+      Object.freeze({ value: 'spam', label: 'Spam', group: 'Other views' }),
+      Object.freeze({ value: 'calls', label: 'Calls' }),
+    ];
+    const state = getSelectionState(records, 'all', { useDropdown: true });
+    const plain = { disabled: false, description: null };
+    expect(state.sections).toEqual([
+      { group: null, rows: [{ option: records[0], ...plain, group: null }] },
+      {
+        group: 'Other views',
+        rows: [
+          { option: records[1], ...plain, group: 'Other views' },
+          { option: records[2], ...plain, group: 'Other views' },
+        ],
+      },
+      { group: null, rows: [{ option: records[3], ...plain, group: null }] },
+    ]);
+    expect(state.issues).toEqual([]);
+  });
+
+  it('keeps a non-adjacent repeat of a group as its own section and reports it', () => {
+    const records = [
+      Object.freeze({ value: 'archived', label: 'Archived', group: 'Other views' }),
+      Object.freeze({ value: 'calls', label: 'Calls' }),
+      Object.freeze({ value: 'spam', label: 'Spam', group: 'Other views' }),
+    ];
+    const state = getSelectionState(records, null, { useDropdown: true });
+    expect(state.sections.map(section => section.group)).toEqual(['Other views', null, 'Other views']);
+    expect(state.issues).toEqual([
+      'option group "Other views" repeats after other options and renders as a separate group.',
+    ]);
+  });
+
   it('ignores the fields in multiple selection and reports them once', () => {
     const records = [
       Object.freeze({ value: 'calls', label: 'Calls', disabled: true }),

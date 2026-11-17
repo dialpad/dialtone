@@ -36,6 +36,23 @@ function getOptionRows (records, useDropdown, issues) {
   }));
 }
 
+/** Split rows into runs that share a group, in data order; options are never reordered. */
+function getOptionSections (rows, issues) {
+  const sections = [];
+  for (const row of rows) {
+    const current = sections.at(-1);
+    if (current && current.group === row.group) {
+      current.rows.push(row);
+      continue;
+    }
+    if (row.group && sections.some(section => section.group === row.group)) {
+      issues.push(`option group "${row.group}" repeats after other options and renders as a separate group.`);
+    }
+    sections.push({ group: row.group, rows: [row] });
+  }
+  return sections;
+}
+
 /** Normalize the controlled contract without reading or mutating the legacy model. */
 export function getSelectionState (options, selected, { useDropdown, neutralValue } = {}) {
   const issues = [];
@@ -56,6 +73,7 @@ export function getSelectionState (options, selected, { useDropdown, neutralValu
   if (!useDropdown && neutralValue != null) issues.push('neutralValue is ignored in multiple selection.');
   const records = validOptions ? options.map(option => Object.freeze({ ...option })) : [];
   const rows = getOptionRows(records, useDropdown, issues);
+  const sections = getOptionSections(rows, issues);
   const values = useDropdown ? (value === null ? [] : [value]) : value;
   const selectedOptions = records.filter(option => values.includes(option.value));
   const unknownValues = values.filter(value => !records.some(option => option.value === value));
@@ -64,6 +82,7 @@ export function getSelectionState (options, selected, { useDropdown, neutralValu
     valid: validOptions && validSelected && validNeutral,
     options: records,
     rows,
+    sections,
     value,
     values,
     selectedOptions,
