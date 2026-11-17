@@ -427,6 +427,15 @@ async function compare (variant, domNodeId, fig, path, domInfo) {
       const inherited = tokens.textColor ? toFigmaName(tokens.textColor) : null;
       if (COLOR_KEYS.has(key) && inherited && inherited === bound) { stats.currentColor++; continue; }
       if (isDerived(bound)) { stats.derived++; continue; }
+      // A gap that comes from a CHILD'S margin: the builder folds `margin-inline-end` on the shape into the
+      // parent's `itemSpacing` and binds the margin's token. The audit reads no margins, so the config names
+      // the tokens it folds (`foldedMargins`) and the binding is recorded as an allowance, not hidden.
+      if (key === 'itemSpacing' && (cfg.foldedMargins || []).includes(bound)) {
+        stats.compared++;
+        stats.agree++;
+        allowances.push({ variant, path, key, declared: '(a child\'s margin)', bound });
+        continue;
+      }
       findings.push({ variant, path, key, declared: '(none declared)', bound, kind: 'bound-but-undeclared' });
     }
   }
@@ -495,6 +504,12 @@ async function compare (variant, domNodeId, fig, path, domInfo) {
         if (declared && bound) {
           stats.compared++;
           if (declared === bound) stats.agree++;
+          // The same circle allowance as on a real node (see above): `size/radius/circle` is a percentage with
+          // no Figma variable, so the pill token is bound and Figma clamps it to half the size (DtToggle's knob).
+          else if (cfg.snapTokens && /Radius$/.test(key) && declared === 'size/radius/circle' && bound === 'size/radius/pill') {
+            stats.agree++;
+            allowances.push({ variant, path: `${path}/${kid.name}`, key, declared, bound });
+          }
           else findings.push({ variant, path: `${path}/${kid.name}`, key, declared, bound, kind: 'wrong-token' });
         } else if (declared && !bound) {
           stats.figmaUnbound++; unbound.push({ variant, path: `${path}/${kid.name}`, key, declared });

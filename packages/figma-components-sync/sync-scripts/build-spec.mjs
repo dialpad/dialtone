@@ -236,7 +236,9 @@ async function specForNode (cdp, cdpDoc, node, depth = 0, coordPlaced = true) {
    */
   // `percentIsFill`: a percentage width is "as wide as the list", which a lone item has no list to be wide as
   // (DtTab's vertical `inline-size: 100%`); the group's slot fills it, and alone it hugs its label.
-  const HUGGISH = cfg.percentIsFill ? /^(auto|fit-content|max-content|min-content|[\d.]+%)/ : /^(auto|fit-content|max-content|min-content)/;
+  // May be a function of the combo: a tab group hugs its tabs, except where it spreads them across a width.
+  const percentFill = typeof cfg.percentIsFill === 'function' ? cfg.percentIsFill(activeCombo) : cfg.percentIsFill;
+  const HUGGISH = percentFill ? /^(auto|fit-content|max-content|min-content|[\d.]+%)/ : /^(auto|fit-content|max-content|min-content)/;
   const pinnedAxis = (names) => names.some((p) => {
     const decl = prov.own[p];
     return !!decl && !HUGGISH.test(String(decl.value).trim());

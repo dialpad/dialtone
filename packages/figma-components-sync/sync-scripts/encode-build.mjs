@@ -342,7 +342,9 @@ function encodeNode (n) {
   // the property to whatever text happened to be there.
   else if (n.text && textPropsOf[n.text]) out.tp = textPropsOf[n.text];
   const icId = iconIdFor(n.iconName);
-  if (icId) out.ic = icId;
+  // `ig`: this instance is an ICON glyph (not an exemplar component), so a box that is not square is a glyph
+  // centred in a taller or wider box and is never stretched to it (see the builder).
+  if (icId) { out.ic = icId; out.ig = 1; }
   // A declared swap target wins: the node becomes an instance of that component rather than
   // a rebuilt copy of the anatomy that was measured.
   if (n.slotSwapTo) {
@@ -507,7 +509,8 @@ function encodeNode (n) {
     // `st`: a ROW that stretches its children on the cross axis (`align-items: stretch`, which
     // the `lay` slot above drops as a no-op). `ns`: a child that opts out with its own
     // `align-self` (centre is `sc`). The builder fills the row's height with the rest.
-    if (lay.align === 'stretch' && lay.direction !== 'VERTICAL') out.st = 1;
+    // `normal` is `stretch` for a flex item, so a config can ask for it to read as one (`alignNormalStretches`).
+    if ((lay.align === 'stretch' || (cfg.alignNormalStretches && lay.align === 'normal')) && lay.direction !== 'VERTICAL') out.st = 1;
     if (['flex-start', 'start', 'flex-end', 'end', 'baseline', 'self-start', 'self-end'].includes(lay.self)) out.ns = 1;
     if (p.maxWidth) out.mw = [p.maxWidth.value, ti(p.maxWidth.token)];
   }
@@ -606,6 +609,20 @@ const payload = { component: spec.component, page: spec.page, family: spec.famil
   blockLayout: !!cfg.blockLayout, snap: snapOn ? snapPayload(cfg.noSnap || []) : null, textTokens: textTokenPayload(),
   // `textStyles: false` keeps a config's text raw (ButtonLink: see its config).
   useTextStyles: cfg.textStyles !== false,
+  // `inlineLineBox`: centre a text taller than its no-layout inline frame (see the builder).
+  inlineLineBox: !!cfg.inlineLineBox,
+  // `hugTextHeight`: a text-only block hugs its line instead of keeping the measured height (see the builder).
+  hugTextHeight: !!cfg.hugTextHeight,
+  // `stretchInside`: an absolute child inside the box that spans an axis stretches with it (see the builder).
+  stretchInside: !!cfg.stretchInside,
+  // `unclipSlots`: native slots do not clip what they hold (see the builder).
+  unclipSlots: !!cfg.unclipSlots,
+  // `hugBlocks`: the names of block frames that hug their children's height instead of keeping the measured one
+  // (see the builder). Named, not all: a frame whose height comes from CSS, not its content (a textarea's rows),
+  // needs the measured one.
+  hugBlocks: cfg.hugBlocks || null,
+  // `alignNormalStretches`: the tallest child of a stretching row keeps its height (see the builder).
+  alignNormalStretches: !!cfg.alignNormalStretches,
   // Leading / trailing slots flush with the border (DtButton): `{ gap }` is the slot's own margin.
   edgeSlots: cfg.edgeSlots || null, cols, svgs, imgs, nodes, rows, rowNames, dvars };
 const shardSuffix = shardArg ? `-${shardArg.slice(8).replace('/', 'of')}` : '';

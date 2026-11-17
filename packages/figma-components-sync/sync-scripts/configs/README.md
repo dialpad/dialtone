@@ -79,6 +79,17 @@ exemplars would show ONE default across every variant.
 item's `value` from its label), `expose: [{ name, axis?, is? }]` (data handed to the parent's template in
 `metadata.props`) and `pick: { attr, from, when }` (the parent writes `attr` from the child whose `when` is
 true: a group's `model-value` from its selected item).
+`inlineLineBox: true` centres a text that is taller than its no-layout frame (an inline `<span>` measures its
+content area while the text sits in a taller line box): DtKeyboardShortcut's keys. Opt-in, since released sets
+(Banner, Notice) have frames of the same shape.
+`hugTextHeight: true` (with `flexLayout`) lets a text-only block hug its line instead of keeping the measured
+height, for an inline `<span>` root whose measured box is shorter than its line (DtText).
+`percentIsFill` may be a function of the combo (a group that hugs its items unless it spreads them), `blockLayout`
+makes the root stack its children, `stretchInside: true` lets an absolute child inside the box that spans an axis
+stretch with it, or stay at the end edge (a tab list's border), keeping its OFFSETS from the frame's edges, and
+`unclipSlots: true` stops native slots clipping what they hold (a tab's selected line hangs outside its box).
+`codeConnect.alwaysAxes: ['variant']` writes an axis's prop for every value, for a prop the code has no default
+for (DtText's `variant`), where the default variant in Figma would otherwise read as the code's own.
 `containerClass` (a string or a function of the combo) is the surface the component is mounted on,
 outside the measured tree, for variants that only make sense on one (links for dark backgrounds). A rule on
 `#root` (the harness's `max-content` surface) needs `#root.` in front of the class to outrank it.

@@ -108,7 +108,11 @@ function generate (key, cfg) {
       const parts = [];
       for (const prop of moves) {
         if ((hints.skipProps || []).includes(prop) || prop.startsWith('__')) continue;
-        const changed = JSON.stringify(props[prop]) !== JSON.stringify(baseProps[prop]);
+        // `alwaysAxes`: the code has no default for this prop (DtText's `variant` is null), so what Figma shows
+        // as the default is a choice, not the component's own, and it is written for every value.
+        const changed = (hints.alwaysAxes || []).includes(axis)
+          ? props[prop] !== null && props[prop] !== undefined && props[prop] !== ''
+          : JSON.stringify(props[prop]) !== JSON.stringify(baseProps[prop]);
         if (effective.has(axis)) {
           // The default is not the component's own: write what is on, never what is off.
           if (props[prop] === true || (changed && typeof props[prop] !== 'boolean')) parts.push(attr(prop, props[prop]));

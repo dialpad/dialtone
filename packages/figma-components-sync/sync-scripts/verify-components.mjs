@@ -379,6 +379,34 @@ function compareNode (...args) {
 
 /** Walk DOM node and Figma node in parallel; Figma nodes hidden by a component property are skipped. */
 function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParentBox) {
+  /**
+   * A CHILD PINNED TO ITS FRAME'S EDGES KEEPS ITS OFFSETS FROM THEM, not its measured size.
+   *
+   * DtTabGroup's border is an absolute child along the list's edge (`stretchInside`, see the builder): it stretches
+   * with the frame, which is 212px in Figma where the browser's is 199.5 (snapped paddings, wider tabs). What is
+   * checked is that the gaps to the frame's edges match the browser's, on the axis it is pinned on.
+   */
+  const keepsEdgeOffsets = (axis, edge) => {
+    const c = fig.constraints || {};
+    const horizontal = axis === 'x';
+    const pinned = horizontal
+      ? ['STRETCH', 'LEFT_RIGHT', ...(edge === 'end' ? ['MAX', 'RIGHT'] : [])]
+      : ['STRETCH', 'TOP_BOTTOM', ...(edge === 'end' ? ['MAX', 'BOTTOM'] : [])];
+    if (!cfg.stretchInside || !pinned.includes(horizontal ? c.horizontal : c.vertical)) return false;
+    const domParent = domParentBox && (horizontal ? domParentBox.w : domParentBox.h);
+    if (typeof domParent !== 'number' || !figParentBox || !fig.absoluteBoundingBox || !dom.box) return false;
+    const figParent = horizontal ? figParentBox.width : figParentBox.height;
+    const fb = fig.absoluteBoundingBox;
+    if (edge === 'size') {
+      const figSize = horizontal ? fb.width : fb.height;
+      const domSize = horizontal ? dom.box.w : dom.box.h;
+      return Math.abs(figSize - (figParent - (domParent - domSize))) <= 1.5;
+    }
+    // The distance from the frame's end edge to the child's start.
+    const figAt = horizontal ? fb.x - figParentBox.x : fb.y - figParentBox.y;
+    const domAt = dom.expectedRel && (horizontal ? dom.expectedRel.x : dom.expectedRel.y);
+    return typeof domAt === 'number' && Math.abs((figParent - figAt) - (domParent - domAt)) <= 1.5;
+  };
   // FIRST, before any comparison: a declared exemplar is not the measured render. Placed
   // last once already, which let the colour comparisons fire before it was reached.
   /**
@@ -961,13 +989,19 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
         // moves it by the growth (MAX constraint), which lands where the browser has it.
         allowed.push({ variant, path,
           reason: `end-pinned child of a frame the filled state grows (parent +${(halfGrowth * 2).toFixed(1)}px): REST reports the default size, Figma keeps it at the end edge (MAX constraint)` });
+      } else if (keepsEdgeOffsets('x', 'end')) {
+        allowed.push({ variant, path, reason: 'end-pinned child: keeps its distance from its frame\'s right edge (the frame is not the browser\'s width)' });
       } else {
         rec(variant, path, 'x', dom.expectedRel.x, +gotX.toFixed(2));
       }
     }
     if (!(cfg.snapTokens ? Math.abs(dom.expectedRel.y - (fb.y - figParentBox.y)) <= SNAP_POS_EPS
       : near(dom.expectedRel.y, fb.y - figParentBox.y))) {
-      rec(variant, path, 'y', dom.expectedRel.y, +(fb.y - figParentBox.y).toFixed(2));
+      if (keepsEdgeOffsets('y', 'end')) {
+        allowed.push({ variant, path, reason: 'end-pinned child: keeps its distance from its frame\'s bottom edge (the frame is not the browser\'s height)' });
+      } else {
+        rec(variant, path, 'y', dom.expectedRel.y, +(fb.y - figParentBox.y).toFixed(2));
+      }
     }
   }
 
@@ -1090,6 +1124,8 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       }
     } else if (cfg.snapTokens && hDiff > SIZE_EPS + FLOAT_SLOP && hDiff <= SNAP_SIZE_EPS) {
       allowed.push({ variant, path, reason: `token-snapped spacing: height ${dom.box.h} in the browser, ${fig.absoluteBoundingBox.height} in Figma` });
+    } else if (hDiff > (cfg.snapTokens ? SNAP_SIZE_EPS : SIZE_EPS) + FLOAT_SLOP && keepsEdgeOffsets('y', 'size')) {
+      allowed.push({ variant, path, reason: 'stretched child: keeps its offsets from its frame\'s top and bottom edges (the frame is not the browser\'s height)' });
     } else if (hDiff > (cfg.snapTokens ? SNAP_SIZE_EPS : SIZE_EPS) + FLOAT_SLOP) {
       rec(variant, path, 'height', dom.box.h + fm.top + fm.bottom, fig.absoluteBoundingBox.height);
     }
@@ -1121,7 +1157,9 @@ function compareNodeInner (variant, dom, fig, path, MODE, figParentBox, domParen
       // measured from it is off by that much: the child was measured against the browser's frame.
       const snapGap = figParentBox ? Math.max(0, figParentBox.width - fig.absoluteBoundingBox.width) : 0;
       // REST spells the plugin's STRETCH as LEFT_RIGHT.
-      if (SLOT_PASS && fig.constraints && ['STRETCH', 'LEFT_RIGHT'].includes(fig.constraints.horizontal) && growth > 0.25
+      if (keepsEdgeOffsets('x', 'size')) {
+        allowed.push({ variant, path, reason: 'stretched child: keeps its offsets from its frame\'s left and right edges (the frame is not the browser\'s width)' });
+      } else if (SLOT_PASS && fig.constraints && ['STRETCH', 'LEFT_RIGHT'].includes(fig.constraints.horizontal) && growth > 0.25
           && Math.abs(fig.absoluteBoundingBox.width + growth - (dom.box.w + fm.left + fm.right)) <= CENTRE_SHAPING_SLACK + snapGap) {
         // Pinned to both edges of a frame the filled state grows (DtTab's underline): REST reports the default
         // size, and Figma stretches it by the growth (STRETCH constraint).

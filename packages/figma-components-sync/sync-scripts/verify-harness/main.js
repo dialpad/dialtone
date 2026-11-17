@@ -27,6 +27,8 @@ import '../../../dialtone-css/lib/dist/dialtone.css';
 import './segmented-control-divider.css';
 // A tab's selected underline, for a tab mounted on its own (see the file).
 import './tab-list.css';
+// Surfaces of a known width for components that fill the space they are given (see the file).
+import './container-widths.css';
 
 const state = reactive({ component: 'DtButton', props: {}, label: 'Button', slots: [], rootClass: null, provideNames: [] });
 
@@ -314,7 +316,15 @@ window.__anatomy = () => {
     if (!iw || !ih) return { unrepresentable: 'svg declares no intrinsic width/height' };
     let w = iw, h = ih;
     const size = s.backgroundSize || 'auto';
-    if (size !== 'auto') {
+    if (size === 'cover' || size === 'contain') {
+      // Scaled uniformly to fill (cover) or fit (contain) the padding box: DtToggle's check and cross are
+      // 14x14 glyphs drawn `cover` in a 16x16 box.
+      const boxW0 = el.clientWidth || 0, boxH0 = el.clientHeight || 0;
+      if (!boxW0 || !boxH0) return { unrepresentable: `background-size: ${size} on an empty box` };
+      const pick = size === 'cover' ? Math.max : Math.min;
+      const k = pick(boxW0 / iw, boxH0 / ih);
+      w = iw * k; h = ih * k;
+    } else if (size !== 'auto') {
       const m = /^([\d.]+)px\s+([\d.]+)px$/.exec(size);
       if (!m) return { unrepresentable: `background-size: ${size}` };
       w = parseFloat(m[1]); h = parseFloat(m[2]);

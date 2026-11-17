@@ -525,7 +525,20 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       if (main && main.type === 'COMPONENT') {
         const inst = main.createInstance();
         inst.name = d.n || 'instance';
-        if (d.box && d.box[0] && d.box[1]) inst.resize(d.box[0], d.box[1]);
+        /**
+         * A GLYPH IS NEVER STRETCHED TO A BOX THAT IS NOT SQUARE.
+         *
+         * An icon's <svg> can be given a box taller than it is wide (`min-block-size: 1lh` makes DtKeyboardShortcut's
+         * 12px glyphs 16.8px tall); the browser draws the glyph at its natural size, centred, and the rest of the box
+         * is empty. Resizing the instance to the box stretched the vectors. So the instance takes the SHORTER side
+         * and sits centred in a transparent frame of the measured box, which keeps the box the layout sees.
+         * Only a box that is not square gets the frame: every other icon is built as before.
+         */
+        const bw = d.box && d.box[0], bh = d.box && d.box[1];
+        // Icons only (`ig`): an exemplar component (a Tab, a message row) is meant to take its box as measured.
+        const notSquare = !!d.ig && !!bw && !!bh && Math.abs(bw - bh) > 0.5;
+        if (notSquare) inst.resize(Math.min(bw, bh), Math.min(bw, bh));
+        else if (bw && bh) inst.resize(bw, bh);
         /**
          * An icon instance carries a size TOKEN too.
          *
@@ -536,8 +549,8 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
          * zero-denominator guard is the only reason that read as a failure rather than a
          * pass.
          */
-        if (d.width) bindNum(inst, 'width', d.width);
-        if (d.height) bindNum(inst, 'height', d.height);
+        if (d.width && !notSquare) bindNum(inst, 'width', d.width);
+        if (d.height && !notSquare) bindNum(inst, 'height', d.height);
         if (d.cc) {
           const p = paint(d.cc);
           const vecs = inst.findAll(n => n.type === 'VECTOR');
@@ -567,6 +580,17 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
           }
         }
         instanceMain[inst.id] = d.ic;
+        if (notSquare) {
+          const box = figma.createFrame();
+          box.name = inst.name;
+          box.fills = [];
+          box.clipsContent = false;
+          box.resize(bw, bh);
+          box.appendChild(inst);
+          inst.x = (bw - inst.width) / 2;
+          inst.y = (bh - inst.height) / 2;
+          return box;
+        }
         return inst;
       }
       iconInstanceFailed.push(d.ic);
@@ -907,7 +931,12 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       // harness happened to measure (CSS `inline-size: 100%`); a text-only block keeps its height.
       fixW = !!(d.box && d.box[0]) && (!!d.pw || (!hasTextKid && Math.abs((d.box[0] - padX) - contentW) > 1))
         && !(D.flexLayout && d.mw);
-      fixH = !!(d.box && d.box[1]) && (!!d.ph || textOnlyBlock || (!hasTextKid && Math.abs((d.box[1] - padY) - contentH) > 1));
+      // `hugTextHeight`: a text-only block keeps no measured height, it hugs its line (DtText: an inline <span>
+      // measures its content area, shorter than the line the text sits in, so a pinned height cut large text).
+      // `hugBlocks`: a block whose children are frames keeps no height from the measurement. Pinned there, a child
+      // that snaps taller (an input box, its padding moved up to a token) overflowed it and overlapped what follows.
+      fixH = !!(d.box && d.box[1]) && (!!d.ph || (textOnlyBlock && !D.hugTextHeight)
+        || (!hasTextKid && !(D.hugBlocks && D.hugBlocks.includes(d.n)) && Math.abs((d.box[1] - padY) - contentH) > 1));
 
       f.layoutMode = isRow ? 'HORIZONTAL' : 'VERTICAL';
       /**
@@ -1265,7 +1294,18 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
          * row's height, as the stretch does. Not a child with a height of its own (`ph`), its own
          * `align-self` (`ns`, `sc`) or an absolutely positioned one.
          */
-        if (d.st && !kd.sc && !kd.ns && !kd.ph) kid.layoutSizingVertical = 'FILL';
+        // `alignNormalStretches`: as in CSS, the TALLEST child sets the row's height and the others stretch to it. A
+        // row of FILL children has no height of its own (they contribute nothing), so the tallest keeps its own: the
+        // widest of the tallest, which is the text field beside two icon columns.
+        let holdsHeight = false;
+        if (D.alignNormalStretches) {
+          const h = (i) => ((D.nodes[i].box || [0, 0])[1] || 0);
+          const w = (i) => ((D.nodes[i].box || [0, 0])[0] || 0);
+          const flow = (d.kids || []).filter(i => !D.nodes[i].abs);
+          const top = flow.reduce((a, i) => (a === null || h(i) > h(a) + 0.01 || (Math.abs(h(i) - h(a)) <= 0.01 && w(i) > w(a)) ? i : a), null);
+          holdsHeight = top === kidIdx;
+        }
+        if (d.st && !kd.sc && !kd.ns && !kd.ph && !holdsHeight) kid.layoutSizingVertical = 'FILL';
         if (kd.sc) {
           kid.layoutSizingVertical = 'FILL';
           if (kid.layoutMode === 'VERTICAL') kid.primaryAxisAlignItems = 'CENTER';
@@ -1293,6 +1333,20 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         const rel = kd.rel || [0, 0];
         kid.x = rel[0];
         kid.y = rel[1];
+        /**
+         * A LINE TALLER THAN ITS INLINE BOX IS CENTRED ON IT (half-leading).
+         *
+         * An inline `<span>` measures its CONTENT area (17px for a 14px font), while the text sits in a 22.4px
+         * line box that extends half the difference above and below it. This frame has no auto-layout, so its
+         * text child was placed at the top and hung 2.7px low (DtKeyboardShortcut's keys). Only where the line
+         * is more than a pixel taller than the frame: a text that fills its frame is already where it belongs.
+         *
+         * OPT-IN (`inlineLineBox`): Banner and Notice have frames of this shape too and are already released, so
+         * a config asks for it rather than every set changing on its next update.
+         */
+        if (D.inlineLineBox && kid.type === 'TEXT' && !kd.rel && d.box && d.box[1] && kid.height - d.box[1] > 1) {
+          kid.y = (d.box[1] - kid.height) / 2;
+        }
         // anchored from the inline-end edge? keep it there when the parent resizes
         /**
          * A DECORATION OUTSIDE THE BOX FOLLOWS THE EDGE IT IS PINNED TO.
@@ -1317,17 +1371,37 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
         // anywhere from the parent's size less the borders (2px at most here) to its size plus the overhang.
         const spans = (start, size, whole) => start !== null && start <= 0
           && size >= whole - 2.5 && size <= whole - 2 * start + 0.5;
-        const stretchH = outside && spans(num(ins[0]), kb[0], pb[0]);
-        const stretchV = outside && spans(num(ins[2]), kb[1], pb[1]);
+        /**
+         * `stretchInside` (opt-in): the same for a child INSIDE the box. DtTabGroup's tab list draws its border as
+         * an absolute child along the bottom edge (`inset-inline: 0`), or along the end edge of a vertical list
+         * (`inset-block: 1px`): measured at the width or height of three tabs, it stayed that long when a fourth
+         * was added. Read from the geometry: inset from the start edge and a size that spans the rest of the
+         * axis (stretch), or a thin box flush with the end edge (stays there).
+         */
+        const inside = !!D.stretchInside && !outside;
+        const spansIn = (start, size, whole) => start !== null && start >= 0 && Math.abs(size - (whole - 2 * start)) <= 1;
+        const stretchH = (outside && spans(num(ins[0]), kb[0], pb[0])) || (inside && spansIn(num(ins[0]), kb[0], pb[0]));
+        const stretchV = (outside && spans(num(ins[2]), kb[1], pb[1])) || (inside && spansIn(num(ins[2]), kb[1], pb[1]));
         const startH = num(ins[0]);
-        const pinnedEnd = outside && !stretchH && startH !== null && startH >= pb[0] - 0.5;
-        if (stretchH || stretchV || pinnedEnd) {
+        const pinnedEnd = (outside && !stretchH && startH !== null && startH >= pb[0] - 0.5)
+          || (inside && !stretchH && kb[0] < pb[0] / 2 && rel[0] + kb[0] >= pb[0] - 1.5);
+        const pinnedEndV = inside && !stretchV && kb[1] < pb[1] / 2 && rel[1] + kb[1] >= pb[1] - 1.5;
+        if (stretchH || stretchV || pinnedEnd || pinnedEndV) {
           // After the frame's own resize (see centerConstraints): a STRETCH child follows its parent's resize,
           // and createFrame's 100x100 would shrink or grow it to the measured size.
-          centerConstraints.push({ kid, horizontal: stretchH ? 'STRETCH' : pinnedEnd ? 'MAX' : 'MIN', vertical: stretchV ? 'STRETCH' : 'MIN' });
+          centerConstraints.push({ kid,
+            horizontal: stretchH ? 'STRETCH' : pinnedEnd ? 'MAX' : 'MIN',
+            vertical: stretchV ? 'STRETCH' : pinnedEndV ? 'MAX' : 'MIN' });
           // The frame hugs and reflows after this (slots, snapped paddings), and a STRETCH child follows each
           // of those, so its measured box is written once more at the end (see the final pass).
-          stretchSizes.set(kid, { w: kb[0], h: kb[1], x: rel[0], y: rel[1] });
+          stretchSizes.set(kid, {
+            w: kb[0], h: kb[1], x: rel[0], y: rel[1],
+            // `stretchInside`: the box keeps its OFFSETS from the frame's edges, not its measured size, because the
+            // Figma frame is not the browser's size (snapped paddings, wider tabs): a border measured 199.5 long
+            // in a 212 list would stop short of its end.
+            inside, sh: stretchH, sv: stretchV, eh: pinnedEnd, ev: pinnedEndV,
+            dw: pb[0] - kb[0], dh: pb[1] - kb[1], rx: pb[0] - rel[0], ry: pb[1] - rel[1],
+          });
         } else if (kd.inset && kd.inset[1] && kd.inset[1] !== 'auto' && (!kd.inset[0] || kd.inset[0] === 'auto')) {
           kid.constraints = { horizontal: 'MAX', vertical: 'MIN' };
         } else if (kd.abs) {
@@ -1555,6 +1629,9 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       const sizeV = 'layoutSizingVertical' in inst ? inst.layoutSizingVertical : 'HUG';
       const slot = comp.createSlot();
       slot.name = slotLabel(group || L.slot) + ' (Slot)';
+      // `unclipSlots`: what a slot holds may reach past its box (DtTab's selected line hangs beside or below the
+      // tab), and a slot clips by default, which hid it.
+      if (D.unclipSlots) { try { slot.clipsContent = false; } catch (e) { skippedBindings.push(`${slot.name}: could not turn clipping off`); } }
       host.insertChild(host.children.indexOf(inst), slot);
       // A grouped slot lays its children out the way their parent did (a row or a column, with its gap).
       slot.layoutMode = group && host.layoutMode === 'VERTICAL' ? 'VERTICAL' : 'HORIZONTAL';
@@ -1703,10 +1780,20 @@ async function buildShard ({ D, CLEAR, INDEX_OFFSET = 0, SLICE_START = 0, SLICE_
       const want = stretchSizes.get(k);
       if (want) {
         const keep = k.constraints;
+        let [w, h, x, y] = [want.w, want.h, want.x, want.y];
+        // The offsets from the frame's edges are what was measured (see where it is recorded), not the size:
+        // the Figma frame is wider than the browser's (snapped paddings), so a line measured 5px beyond a tab's
+        // right edge would otherwise end up 2px beyond it.
+        if (D.stretchInside) {
+          if (want.sh) w = p.width - want.dw;
+          if (want.sv) h = p.height - want.dh;
+          if (want.eh) x = p.width - want.rx;
+          if (want.ev) y = p.height - want.ry;
+        }
         k.constraints = { horizontal: 'MIN', vertical: 'MIN' };
-        k.resize(Math.max(want.w, 0.01), Math.max(want.h, 0.01));
-        k.x = want.x;
-        k.y = want.y;
+        k.resize(Math.max(w, 0.01), Math.max(h, 0.01));
+        k.x = x;
+        k.y = y;
         k.constraints = keep;
       }
     }
