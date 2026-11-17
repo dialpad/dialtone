@@ -1,0 +1,23 @@
+packages/dialtone-react/components/Tab/Tab.test.tsx
+  s_32ded55aeb4b6b::t_9c8f3e8da2848c 2,30-31,36-37
+packages/dialtone-react/components/Tab/Tab.tsx
+  s_32ded55aeb4b6b::t_7ddf10462f2d8b 129-130,136
+packages/dialtone-react/components/Tab/TabGroup.test.tsx
+  s_32ded55aeb4b6b::t_b85e6b65389da9 4,110-111,149-150
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b56f9bf47ed312ded92310b34e520843d9a5fc34",
+  "prompts": {},
+  "sessions": {
+    "s_32ded55aeb4b6b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34a6baeb-91f4-43e2-be27-c8621bd52ce2",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

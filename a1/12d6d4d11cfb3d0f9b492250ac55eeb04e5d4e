@@ -1,0 +1,27 @@
+packages/dialtone-vue/components/Toast/Toast.vue
+  s_8067572d90edd7::t_c8755f8c656b0d 31
+packages/dialtone-vue/components/Notice/NoticeContent.vue
+  s_8067572d90edd7::t_bae2a7ab1b8b20 60-68
+  s_8067572d90edd7::t_55b0d1302ed8b4 23,33-35
+  s_8067572d90edd7::t_d8c297e919a1bb 59
+packages/dialtone-vue/components/Toast/Layouts/ToastLayoutDefault.vue
+  s_8067572d90edd7::t_1195a9407f3140 28,39
+packages/dialtone-vue/components/Toast/Toast.test.js
+  s_8067572d90edd7::t_a7642c7acb8147 42-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a112d6d4d11cfb3d0f9b492250ac55eeb04e5d4e",
+  "prompts": {},
+  "sessions": {
+    "s_8067572d90edd7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89ebc252-b89c-46fd-8c0e-016b1d72347d",
+        "model": "claude-opus-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}
