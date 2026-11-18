@@ -16,7 +16,10 @@ export function useSliderMarksAndTicks (
   const { showTicks, step, min, max, prefix, suffix, showMarks, readout } = props;
 
   // Memoized like Vue's computed, so a capped interval's notice logs once per change.
+  // Vue's computed is lazy and only read when showTicks is truthy, so nothing
+  // is generated (or logged) while ticks are off.
   const computedTickValues = useMemo(() => {
+    if (!showTicks) return [];
     const interval = typeof showTicks === 'number' ? showTicks : step;
     if (!interval || interval <= 0) return [];
     return generateInterval(min, max, interval, 'ticks');

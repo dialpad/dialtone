@@ -903,6 +903,20 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    describe('Dense generated points, ticks off', () => {
+      it('does not generate (or log the cap notice for) tick values while showTicks is false', () => {
+        const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+        try {
+          mockProps = { showTicks: false, step: 0.001, min: 0, max: 100 };
+          updateWrapper();
+          expect(w().findAll('dt-slider-tick')).toHaveLength(0);
+          expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('ticks'));
+        } finally {
+          infoSpy.mockRestore();
+        }
+      });
+    });
+
     describe('Dense generated points, production mode', () => {
       let warnSpy: MockInstance;
       let originalNodeEnv: string | undefined;
@@ -3049,6 +3063,30 @@ describe('DtSlider Tests', () => {
 
         expect(classes(marks()[0])).toContain(hidden);
         expect(classes(marks()[1])).not.toContain(hidden);
+      });
+
+      it('un-hides a mark when readout switches from "always" to "never" while a thumb stays focused', async () => {
+        mockProps = { readout: 'always', showMarks: [0, 100], value: 50 };
+        updateWrapper();
+        await nextTick();
+
+        stubRect(w().find('dt-slider-control')!, controlRect);
+        const found = marks();
+        const readouts = w().findAll('dt-slider-thumb-readout');
+        stubRect(found[0], nearReadoutRect);
+        stubRect(found[1], farRect);
+        stubRect(readouts[0], readoutSize);
+
+        thumbInputs = findThumbInputs();
+        act(() => thumbInputs[0].focus());
+        await setInputValue(thumbInputs[0], '51');
+        await settleCollisions();
+        expect(classes(marks()[0])).toContain(hidden);
+
+        // The focused thumb keeps its readout "open", so the visibility values don't change.
+        await w().setProps({ readout: 'never' });
+        await settleCollisions();
+        expect(classes(marks()[0])).not.toContain(hidden);
       });
 
       it('positions the analytical readout rect on the thumb\'s own inset band, not the flush track percentage, when --slider-edge-inset resolves non-zero', async () => {

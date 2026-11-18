@@ -245,7 +245,11 @@ export function useSliderCollisionAvoidance (props: ResolvedSliderProps, {
   // The values are part of the first key as Vue's deep watcher on
   // readoutVisibility re-fires whenever it recomputes, which a value change
   // makes it do. isVertical/isRtl change every rect without touching the rest.
-  const layoutKey = JSON.stringify([readoutVisibility, computedMarks, isVertical, isRtl, internalValues]);
+  // readout is part of it too: Vue's isReadoutOpen reads props.readout, so a
+  // mode change re-fires the watcher even when the visibility values don't move.
+  const layoutKey = JSON.stringify([
+    readoutVisibility, computedMarks, isVertical, isRtl, internalValues, props.readout,
+  ]);
   // The tooltip readout re-runs collisions itself once it has moved;
   // measuring here would read its old position.
   const contentKey = JSON.stringify([internalValues, formattedValues, readoutClass ?? null]);
