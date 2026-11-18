@@ -113,7 +113,13 @@ type Story = StoryObj<SegmentedControlStoryArgs>;
 
 // SegmentedControlDefault.story.vue
 function SegmentedControlDefault (args: SegmentedControlStoryArgs) {
-  const [selectedValue, setSelectedValue] = useState('all');
+  const [selectedValue, setSelectedValue] = useState(args.value ?? 'all');
+  // The `value` control sets the selection; clicks still update it.
+  const [lastArgValue, setLastArgValue] = useState(args.value);
+  if (args.value !== lastArgValue) {
+    setLastArgValue(args.value);
+    setSelectedValue(args.value ?? 'all');
+  }
   return (
     <DtSegmentedControl
       value={selectedValue}
@@ -131,20 +137,9 @@ function SegmentedControlDefault (args: SegmentedControlStoryArgs) {
       borderless={args.borderless}
       spread={args.spread}
       labelClass={args.labelClass}
-      ariaLabel="View filter"
+      ariaLabel={args.ariaLabel ?? 'View filter'}
     >
-      <DtSegmentedControlItem value="all">
-        All
-      </DtSegmentedControlItem>
-      <DtSegmentedControlItem value="favorites">
-        Favorites
-      </DtSegmentedControlItem>
-      <DtSegmentedControlItem value="recent">
-        Recent
-      </DtSegmentedControlItem>
-      <DtSegmentedControlItem value="groups">
-        Groups
-      </DtSegmentedControlItem>
+      {viewItems()}
     </DtSegmentedControl>
   );
 }

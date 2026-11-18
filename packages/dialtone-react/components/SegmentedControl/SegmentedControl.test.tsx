@@ -382,15 +382,22 @@ describe('DtSegmentedControl Tests', () => {
     });
 
     it('calls the consumer onKeyDown after handling the key', async () => {
-      const onKeyDown = vi.fn();
+      // What the consumer's handler sees when it runs: the group has already handled the key.
+      let focusedAtCall: Element | null = null;
+      let valueChangeCallsAtCall = -1;
+      const onKeyDown = vi.fn(() => {
+        focusedAtCall = document.activeElement;
+        valueChangeCallsAtCall = onValueChange.mock.calls.length;
+      });
       _setWrapper({ onKeyDown });
 
       act(() => items()[0].focus());
       await userEvent.keyboard('{End}');
 
-      expect(document.activeElement).toBe(items()[2]);
-      expect(onValueChange).toHaveBeenCalledWith('recent');
       expect(onKeyDown).toHaveBeenCalled();
+      expect(focusedAtCall).toBe(items()[2]);
+      expect(valueChangeCallsAtCall).toBe(1);
+      expect(onValueChange).toHaveBeenCalledWith('recent');
     });
 
     it('prefers the ariaLabel prop over an aria-label attribute, as Vue does', () => {
