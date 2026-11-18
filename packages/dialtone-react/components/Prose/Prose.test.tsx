@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { DtProse, type DtProseProps } from './Prose';
-import { PROSE_SIZE_MODIFIERS, PROSE_DENSITY_MODIFIERS } from './ProseConstants';
 
 const PROSE_TEST_ID = 'dt-prose';
 
@@ -205,19 +204,16 @@ describe('DtProse Tests', () => {
       expect(a.hasAttribute('href')).toBe(false);
     });
 
-    it('Should strip an unsafe scheme hidden by tabs or newlines in href', () => {
-      setWrapper({}, html(
-        '<a href="java&#x09;script:alert(1)">a</a>' +
-        '<a href="java&#x0A;script:alert(1)">b</a>' +
-        '<a href="java&#x0D;script:alert(1)">c</a>',
-      ));
+    it.each([
+      ['a tab', 'java&#x09;script:alert(1)'],
+      ['a line feed', 'java&#x0A;script:alert(1)'],
+      ['a carriage return', 'java&#x0D;script:alert(1)'],
+    ])('Should strip an unsafe scheme hidden by %s in href', (_name, badHref) => {
+      setWrapper({}, html(`<a href="${badHref}">link</a>`));
 
-      const links = Array.from(document.querySelectorAll('a'));
+      const a = queryIn('a');
 
-      expect(links).toHaveLength(3);
-      for (const a of links) {
-        expect(a.hasAttribute('href')).toBe(false);
-      }
+      expect(a.hasAttribute('href')).toBe(false);
     });
 
     it('Should preserve safe https href', () => {
@@ -251,13 +247,13 @@ describe('DtProse Tests', () => {
 
   describe('Size Prop', () => {
     it.each([
-      [100, PROSE_SIZE_MODIFIERS[100]],
-      ['100', PROSE_SIZE_MODIFIERS[100]],
-      [200, PROSE_SIZE_MODIFIERS[200]],
+      [100, 'd-prose--size-100'],
+      ['100', 'd-prose--size-100'],
+      [200, 'd-prose--size-200'],
     ] as const)('Should apply correct class when size is %s', (size, expectedClass) => {
       const { prose } = setWrapper({ size });
 
-      expect(classesOf(prose())).toContain(expectedClass);
+      expect(classesOf(prose()).filter(c => c.startsWith('d-prose--size-'))).toEqual([expectedClass]);
     });
 
     it('Should not render a size modifier class when size is not set', () => {
@@ -270,12 +266,12 @@ describe('DtProse Tests', () => {
 
   describe('Density Prop', () => {
     it.each([
-      [100, PROSE_DENSITY_MODIFIERS[100]],
-      [300, PROSE_DENSITY_MODIFIERS[300]],
+      [100, 'd-prose--density-100'],
+      [300, 'd-prose--density-300'],
     ] as const)('Should apply correct class when density is %s', (density, expectedClass) => {
       const { prose } = setWrapper({ density });
 
-      expect(classesOf(prose())).toContain(expectedClass);
+      expect(classesOf(prose()).filter(c => c.startsWith('d-prose--density-'))).toEqual([expectedClass]);
     });
 
     it('Should not render a density modifier class when density is not set', () => {
@@ -290,9 +286,7 @@ describe('DtProse Tests', () => {
     it('Should apply both size and density modifier classes', () => {
       const { prose } = setWrapper({ size: 100, density: 300 });
 
-      expect(classesOf(prose())).toContain('d-prose');
-      expect(classesOf(prose())).toContain(PROSE_SIZE_MODIFIERS[100]);
-      expect(classesOf(prose())).toContain(PROSE_DENSITY_MODIFIERS[300]);
+      expect(classesOf(prose()).sort()).toEqual(['d-prose', 'd-prose--density-300', 'd-prose--size-100']);
     });
   });
 });
