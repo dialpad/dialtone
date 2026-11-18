@@ -262,7 +262,7 @@ export default {
 
   'Sliding label': {
     attributes: {
-      class: { initialValue: 'd-w224' },
+      class: { initialValue: 'd-w-350' },
     },
     slots: {
       default: {

@@ -367,7 +367,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 `slide` shows cut-off text in full by sliding it sideways while the text, or the item around it (button, link, menu item), is hovered or has keyboard focus. Leaving or pressing Esc snaps it back. Text that fits never moves. The text renders as a block that can shrink inside a flex row, and `slide` replaces `truncate`, `maxLines` and `wrap`.
 
 ```vue demo
-<div class="d-w224">
+<div class="d-w-350">
   <button type="button" class="d-d-flex d-w100p">
     <dt-text variant="label-md" slide>Front desk reception phone, second floor east wing</dt-text>
   </button>

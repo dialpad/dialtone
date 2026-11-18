@@ -14,7 +14,7 @@
       v-for="group in groups"
       :key="group.qa"
       :dir="group.dir"
-      class="d-ba d-bc-default d-bar-300 d-p-100 d-w224"
+      class="d-ba d-bc-default d-bar-300 d-p-100 d-w-350"
       :data-qa="group.qa"
     >
       <button
@@ -36,7 +36,7 @@
 
 <script>
 import { DtText } from './index';
-import { DtStack } from '../stack';
+import { DtStack } from '../Stack';
 
 export default {
   name: 'DtTextSlide',
