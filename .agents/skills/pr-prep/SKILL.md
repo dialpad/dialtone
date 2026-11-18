@@ -1,11 +1,11 @@
 ---
 name: pr-prep
-description: Check that a Dialtone branch or PR is ready, the way its human reviewers would. Captures a fixed scope, runs a cold adversarial reviewer plus specialists chosen by the files changed, fixes or rejects each finding, re-reviews, runs lint and tests for the touched packages only, and ends with one verdict. Use before opening or updating a PR, when asked "is this ready", or to review someone else's PR.
+description: Check that a Dialtone branch or PR is ready, the way its human reviewers would. Captures a fixed scope, runs a cold adversarial reviewer plus specialists chosen by the files changed, runs the safe lint and tests for the touched packages, and ends with one verdict. Report-only by default; fixes findings only when asked. Use before opening or updating a PR, when asked "is this ready", or to review someone else's PR.
 ---
 
 # Dialtone PR Prep
 
-One check for Claude Code and Codex. Review first, fix, re-review, run local gates, then give one verdict.
+One check for Claude Code and Codex. Review, run local gates, then give one verdict. Fixing and re-review happen only when the user asks.
 
 ## Goal
 
@@ -20,14 +20,15 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
 - Branch, base (`staging` unless the PR targets another), commits, changed files.
 - `.agents/resources/package-map.md`: package graph and downstream impact.
-- `.agents/resources/validation.md`: checks for areas outside the local gates.
+- `.agents/resources/validation.md`: the one map of checks per path, and which of them write files.
+- `.agents/resources/rules/general.md` and the path rules `.agents/resources/rule-map.md` selects for the changed paths.
 - `.agents/resources/doc-sync.md`: docs and guidance impact.
 - `.agents/resources/pr-template.md`: title and body rules.
 
 ## Modes
 
-- **Author** (default on your own branch): fix safe, mechanical, in-scope findings. Ask before API, architecture, product or scope calls. Commit or push only if asked.
-- **Report-only**: no edits, staging, commits or pushes. Gates may run.
+- **Report-only** (default for readiness checks): report findings and validation status. Run only checks verified to leave the contributor's files unchanged.
+- **Author** (when the user asks to fix findings): fix safe, mechanical issues within the agreed scope. Ask before API, architecture, product or scope decisions. Commit or push only if asked.
 - **Review** (someone else's PR): read-only. Do not run the PR's code or gates unless the user says so; mark gates "not run". Never post a review.
 
 ## Constraints
@@ -48,7 +49,7 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    git rev-parse HEAD; git diff --stat "$BASE"; git ls-files -o --exclude-standard
    ```
 
-   - Record base SHA, head SHA, file list and size. Staged, unstaged and untracked files are all in scope. `git diff` leaves untracked files out, so add each one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size.
+   - Record base SHA, head SHA, size and the file list (`FILES`, one path per line, reused like `BASE`). Staged and unstaged changes are in scope. `git ls-files -o` only lists candidates: in a dirty checkout it can pick up unrelated work or scratch notes, so add only the untracked files that belong to this change, ask when unsure, and name the rest as excluded in the report. `git diff` leaves untracked files out, so add each in-scope one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size. Use this same scoped list for the review, package selection and any follow-on fixes.
    - Propose the PR title per `.github/COMMIT_CONVENTION.md` and check it with `echo "<title>" | pnpm exec commitlint`.
    - Review mode (PR not checked out): take base, head and title from `gh pr view <n> --json baseRefOid,headRefOid,title`, the file list from `gh api --paginate repos/dialpad/dialtone/pulls/<n>/files --jq '.[] | .filename, (.previous_filename // empty)'` (`--json files` stops at 100 files; this keeps both sides of a rename, as step 2 does) and the diff from `gh pr diff <n>`, then run the same `gh pr view` again and restart the capture if either SHA changed; use that file list for step 2. Check the PR's existing title with commitlint and report its result; give any proposed title separately. The local checkout may hold other versions of unchanged files, so the reviewer reads surrounding code at the PR head: `git fetch https://github.com/dialpad/dialtone.git pull/<n>/head` (not `origin`, which may be a fork), then `git show <headRefOid>:<path>`. Neither changes the working tree.
    - Empty scope: say "Nothing to review" and stop.
@@ -58,43 +59,43 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 2. **Touched packages.**
 
    ```sh
-   : "${BASE:?set BASE to the recorded base SHA}"
-   { git diff --name-only --no-renames "$BASE"; git ls-files -o --exclude-standard; } \
-     | awk -F/ '$1=="packages"||$1=="apps"{print $1"/"$2;next}{print $1}' | sort -u
+   : "${FILES:?set FILES to the scoped file list from step 1}"
+   printf '%s\n' "$FILES" | awk -F/ 'NF{if($1=="packages"||$1=="apps")print $1"/"$2;else print $1}' | sort -u
    ```
 
-   `--no-renames` lists both sides of a move, so a package that loses files still gets its gates. Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
+   Build `FILES` with `git diff --name-only --no-renames "$BASE"`, which lists both sides of a move, so a package that loses files still gets its gates. Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
 
-3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle (base SHA, head SHA, file list and diff), [adversarial-review.md](references/adversarial-review.md) and [reviewer-lens.md](references/reviewer-lens.md). Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
+3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle (base SHA, head SHA, file list and diff), [adversarial-review.md](references/adversarial-review.md), [reviewer-lens.md](references/reviewer-lens.md), `.agents/resources/rules/general.md` and the path rules `rule-map.md` selects for the changed paths. The lens adds judgment; the path rules still own things like the component artifact pipeline and internal authoring conventions. Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
 
    | Trigger in the diff                                                                                             | Specialist                                                  |
    | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
    | Interactive elements, `role`, `aria-*`, `tabindex`, key or focus handlers, or stories of interactive components | [keyboard-aria.md](references/specialists/keyboard-aria.md) |
-   | `.less`, `.css` or `<style>` changes                                                                            | [css.md](references/specialists/css.md)                     |
+   | Changes to styles, or to markup those styles depend on                                                          | [css.md](references/specialists/css.md)                     |
    | A codemod or migration script                                                                                   | [codemods.md](references/specialists/codemods.md)           |
    | `packages/dialtone-icons/**`                                                                                    | [icons.md](references/specialists/icons.md)                 |
 
    If no subagent can start, run the same method yourself, section by section, and mark the review "not independent".
 
 4. **Adjudicate.** For every finding choose one: **keep** (real, in scope, left open), **fixed** (kept and changed now), or **reject** (say why; a reasoned "no" is fine). Merge duplicates. A finding names a file and line; for missing work, name the line that creates the need (the new prop) or the file that should change.
-5. **Fix and re-review** (author mode). Apply the fixes, recapture scope, and re-review only what changed: rerun the reviewer on the new diff and any specialist whose area was touched. Stop after two rounds and report what is left. Author-mode `Ready` needs a clean working tree; otherwise list the uncommitted files as "not in the PR yet".
-6. **Local gates.** Run lint and tests for the touched packages only; CI runs most tests and almost no lint, so do not skip lint. Commands in [local-gates.md](references/local-gates.md). Run after fixes, on the final head. A package with no lint or test target is "no gate".
+5. **Fix and re-review** (author mode only; report-only edits nothing). Apply the fixes, recapture scope, and re-review only what changed: rerun the reviewer on the new diff and any specialist whose area was touched. Stop after two rounds and report what is left. Author-mode `Ready` needs a clean working tree; otherwise list the uncommitted files as "not in the PR yet".
+6. **Local gates.** Run lint and tests for the touched packages only; CI runs most tests and almost no lint, so do not skip lint. Pick checks from `.agents/resources/validation.md`; [local-gates.md](references/local-gates.md) says how to read the results. In report-only, run only checks the map marks `no` or `output` and report each other as "not run" with the reason. Run on the final head. A package with no lint or test target is "no gate".
 7. **Tooling checks.** One line each, only when the diff touches them:
    - Changed behaviour, new props and new events have tests; no skipped or pending tests in changed test files.
    - New tests run in CI: a workflow path filter covers the package and a job runs that package's test command (`rg` the package name in `.github/workflows`).
    - No fixed timing waits (`setTimeout(60)`, `sleep`) and no hard-coded package versions in fixtures; wait for the event or state.
    - Every dependency a new script imports is declared in that package's `package.json`.
-   - A release trigger or build scope fires only for the package that changed.
+   - Release and build scopes cover the owning package and any downstream packages affected under the maintained dependency and release rules.
    - Errors are not swallowed (empty `catch`, `.catch(() => {})`, ignored exit codes).
 8. **Breaking change.** If review finds an unmarked break (a prop, event, class, token or default removed, renamed or changed without a working old path), report it as `Needs decision`: mark it breaking (footer plus migration note) or keep the old path working. If any commit has `!` or a `BREAKING CHANGE:` footer, the signal must survive the squash: dialtone's squash body is blank and release reads only the footer, so put `BREAKING CHANGE: …` in the PR body and tell the user that whoever merges must paste it into the squash commit body.
 9. **Docs and guidance.** Run `doc-sync-check` (Codex) or `/doc-sync-enforcer` (Claude) against `doc-sync.md` for the real comparison. For changed components, check the artifact list in `.agents/resources/rules/vue-components.md` and record which artifacts changed and why others need no change. Assess contributor-guidance impact per `AGENTS.md`.
-10. **Report** in the format below.
+10. **Report** in the format below, then record the verdict.
 
 ## Report
 
 ```text
 Verdict: Ready | Ready with notes | Needs fixes | Needs decision
-Mode: author | report-only | review      Base: <sha>  Head: <sha>  Size: <lines>
+Mode: report-only | author | review      Base: <sha>  Head: <sha>  Size: <lines>
+Excluded: <untracked files left out of scope, or none>
 Title: <proposed> (commitlint: pass | fail)
 Packages: <touched list> (downstream: <list>)
 Review: <independent | not independent>, specialists run: <list>
@@ -115,11 +116,29 @@ Precedence: `Needs decision` > `Needs fixes` > `Ready with notes` > `Ready`.
 
 Lead with what to fix.
 
+## Verdict record
+
+So a later push makes a stale verdict visible, record the verdict against the commit it checked. In report-only and author modes, write it beside the repo's git data, outside the working tree (review mode writes nothing, since the checkout is not the PR). `tree=dirty` means a file in the scoped list was uncommitted, so the SHA does not cover it.
+
+```sh
+R=$(git rev-parse --git-path pr-prep-verdict)
+printf 'verdict=%s\nhead=%s\ntree=%s\n' "<verdict>" "$(git rev-parse HEAD)" "<clean|dirty>" > "$R"
+```
+
+`pr-create` and `/pr-fill` read it before their first PR write. The verdict is fresh only when `head` equals the current `HEAD` and `tree=clean`; a missing record, a different SHA or `tree=dirty` means prep is stale and must be rerun.
+
+```sh
+R=$(git rev-parse --git-path pr-prep-verdict)
+[ "$(sed -n 's/^head=//p' "$R" 2>/dev/null)" = "$(git rev-parse HEAD)" ] && grep -qx 'tree=clean' "$R" \
+  && sed -n 's/^verdict=//p' "$R" || echo "stale: rerun pr-prep"
+```
+
 ## Done When
 
 - The report above is complete and the verdict is exactly one of the four.
 - Every finding is kept, fixed or rejected with a reason.
 - Gates ran on the final head, or are marked "not run" with the reason.
+- The verdict is recorded (report-only and author modes).
 
 ## Verification
 

@@ -14,7 +14,6 @@ Reviewers accept a reasoned "no". Do not add code only to avoid a comment.
 - Validation uses the normalised value, not the raw legacy one.
 - Behaviour production depends on is kept. An option that does nothing is removed, and the removal is documented.
 - The migration guide lists every visible change, including class renames and removed config, and never says "looks the same" when it does not.
-- A release trigger or build scope change does not publish packages that did not change.
 
 ## 2. Docs and types
 
