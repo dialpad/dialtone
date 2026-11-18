@@ -10,6 +10,7 @@
       heading-class="d-filter-pill__menu-heading"
     >
       <template #heading>
+        <!-- Same DtText props as FilterPill's headerContent menu heading; keep them matched. -->
         <dt-text
           variant="label-xs"
           :size="100"
@@ -27,28 +28,22 @@
   <slot v-else />
 </template>
 
-<script>
-import { DtListItemGroup } from '@/components/ListItemGroup';
-import { DtText } from '@/components/Text';
-
+<script setup lang="ts">
+// @ts-nocheck
 /**
  * Internal FilterPill section: a labelled DtListItemGroup when a heading is supplied,
  * otherwise the rows themselves with no wrapper.
  */
-export default {
-  name: 'DtFilterPillOptionGroup',
+import { DtListItemGroup } from '@/components/ListItemGroup';
+import { DtText } from '@/components/Text';
 
-  components: {
-    DtListItemGroup,
-    DtText,
-  },
+defineOptions({ name: 'DtFilterPillOptionGroup' });
 
-  props: {
-    /** Group heading text; null renders the rows ungrouped. */
-    heading: {
-      type: String,
-      default: null,
-    },
+defineProps({
+  /** Group heading text; null renders the rows ungrouped. */
+  heading: {
+    type: String,
+    default: null,
   },
-};
+});
 </script>

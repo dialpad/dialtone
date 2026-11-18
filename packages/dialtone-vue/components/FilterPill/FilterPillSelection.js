@@ -16,11 +16,12 @@ const ROW_FIELD_TYPES = { disabled: 'boolean', description: 'string', group: 'st
  */
 function getOptionRows (records, useDropdown, issues) {
   const fields = Object.keys(ROW_FIELD_TYPES);
+  // Multiple selection renders checkboxes from the records, so it has no rows.
   if (!useDropdown) {
     if (records.some(option => fields.some(field => option[field] != null))) {
       issues.push('option disabled, description and group are ignored in multiple selection.');
     }
-    return records.map(option => ({ option, disabled: false, description: null, group: null }));
+    return [];
   }
   const read = (option, field) => typeof option[field] === ROW_FIELD_TYPES[field] ? option[field] : null;
   for (const field of fields) {

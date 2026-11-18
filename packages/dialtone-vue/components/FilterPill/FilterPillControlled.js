@@ -149,6 +149,8 @@ export default {
 
     options () { this.checkControlledConfiguration(); },
 
+    // Fires on every option change (the computed returns a new array), not only on removal:
+    // a row that moves into or out of a group remounts, and restoreRemovedOptionFocus refocuses it.
     controlledOptionValues (values, previous) {
       if (!this.controlledAtBirth) return;
       this.restoreRemovedOptionFocus(previous);

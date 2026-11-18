@@ -445,6 +445,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     ]);
     await flushPromises();
     const menu = popover.findComponent({ ref: 'content' });
+    // Start with focus on an enabled row, so hovering the disabled one must move it.
     await menu.get('#rename').trigger('mousemove');
     await menu.get('#export').trigger('mousemove');
     // Focusing the row would show the keyboard focus ring under the pointer.

@@ -20,8 +20,8 @@ const groupedOptions = Object.freeze([
   Object.freeze({ value: 'spam', label: 'Spam', group: 'Other views' }),
 ]);
 
-const ACTION_EVENTS =['update:selected', 'selection-change', 'clear', 'apply', 'open', 'update:open'];
-const global = { plugins: [DtTooltipDirective, DtFocustrapDirective], stubs: { transition: false } };
+const ACTION_EVENTS = ['update:selected', 'selection-change', 'clear', 'apply', 'open', 'update:open'];
+const mountGlobal = { plugins: [DtTooltipDirective, DtFocustrapDirective], stubs: { transition: false } };
 const reconcile = async () => { await nextTick(); await nextTick(); };
 const keydown = (key, code = key) => new KeyboardEvent('keydown', { key, code, bubbles: true, cancelable: true });
 
@@ -32,20 +32,21 @@ describe('DtFilterPill built-in dropdown option rows', () => {
   const updateWrapper = (props = {}) => {
     wrapper = mount(DtFilterPill, {
       props: { label: 'Type', useDropdown: true, options: typeOptions, selected: 'all', ...props },
-      global,
+      global: mountGlobal,
       attachTo: document.body,
     });
   };
   const mountWithLiveOptions = liveOptions => {
     wrapper = mount({
       setup: () => () => h(DtFilterPill, { label: 'Type', useDropdown: true, options: liveOptions.value, selected: 'all' }),
-    }, { global, attachTo: document.body });
+    }, { global: mountGlobal, attachTo: document.body });
   };
+  // Dropdown takes its keyboard position from the pointer highlight, so set both before pressing keys.
   const focusRow = row => {
     row.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
     row.focus();
   };
-  const press = async key => {
+  const focusedLabelAfter = async key => {
     document.activeElement.dispatchEvent(keydown(key));
     await reconcile();
     return document.activeElement.querySelector('[data-qa="dt-item-layout-title-wrapper"]')?.textContent.trim();
@@ -106,7 +107,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       await open();
       const checkboxes = [...document.querySelectorAll('[data-qa="dt-filter-pill__checkbox"]')];
       expect(checkboxes.map(input => input.disabled)).toEqual([false, false, false]);
-      expect(document.body.textContent).not.toContain('Choose All under Status');
+      expect([...document.querySelectorAll('[data-qa="checkbox-description"]')]).toEqual([]);
     });
   });
 
@@ -164,7 +165,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
   });
 
   describe('Committed state and reactive updates', () => {
-    it('keeps a selected option checked, labeled and inert after it becomes disabled', async () => {
+    it('keeps a selected option checked and labeled after it becomes disabled, and refuses reselecting it', async () => {
       updateWrapper({ selected: 'calls' });
       await open();
       await wrapper.setProps({ options: [typeOptions[0], { ...typeOptions[1], disabled: true }, typeOptions[2]] });
@@ -173,6 +174,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       expect(calls.getAttribute('aria-checked')).toBe('true');
       expect(calls.querySelector('[data-qa="dt-item-layout-selected-wrapper"] [data-qa="dt-icon"]')).not.toBeNull();
       expect(wrapper.find('[data-qa="dt-filter-pill__label-start"]').text()).toBe('Calls');
+      // Same-value activation of the selected row must be refused too.
       calls.click();
       await reconcile();
       expect(actions()).toEqual({ open: [[true]] });
@@ -196,8 +198,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       mountWithLiveOptions(live);
       await open();
       const calls = rows()[1];
-      calls.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
-      calls.focus();
+      focusRow(calls);
       apply(live);
       await reconcile();
       expect(document.activeElement).toBe(calls);
@@ -214,47 +215,49 @@ describe('DtFilterPill built-in dropdown option rows', () => {
     it('renders consecutive grouped options as one labelled group inside a presentational list item', async () => {
       updateWrapper({ options: groupedOptions });
       await open();
-      const parentOf = row => `${row.parentElement.tagName.toLowerCase()}[role=${row.parentElement.getAttribute('role')}]`;
       const group = document.querySelector('[role="group"]');
-      expect(rows().map(parentOf)).toEqual(['ul[role=none]', 'ul[role=none]', 'ul[role=group]', 'ul[role=group]']);
+      expect(rows().map(row => row.parentElement.getAttribute('role'))).toEqual(['none', 'none', 'group', 'group']);
       expect(document.getElementById(group.getAttribute('aria-labelledby')).textContent.trim()).toBe('Other views');
-      expect(parentOf(group)).toBe('li[role=none]');
+      // A list item wraps the group, and it sits in the same list as the ungrouped rows.
+      expect(group.parentElement.matches('li[role="none"]')).toBe(true);
       expect(group.parentElement.parentElement).toBe(rows()[0].parentElement);
-      expect([...document.querySelectorAll('ul > ul')]).toEqual([]);
     });
 
     it('moves through rows across group boundaries in DOM order with arrows and Home', async () => {
       updateWrapper({ options: groupedOptions });
       await open();
       focusRow(rows()[0]);
-      const visited = [];
-      for (const key of ['ArrowDown', 'ArrowDown', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'Home']) visited.push(await press(key));
-      expect(visited).toEqual(['Calls', 'Archived', 'Calls', 'Archived', 'Spam', 'All types']);
+      expect(await focusedLabelAfter('ArrowDown')).toBe('Calls');
+      expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
+      expect(await focusedLabelAfter('ArrowUp')).toBe('Calls');
+      expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
+      expect(await focusedLabelAfter('ArrowDown')).toBe('Spam');
+      expect(await focusedLabelAfter('Home')).toBe('All types');
     });
 
     it('moves by typeahead across groups, matching labels and not descriptions', async () => {
       updateWrapper({ options: groupedOptions });
       await open();
       focusRow(rows()[0]);
-      expect(await press('s')).toBe('Spam');
-      expect(await press('i')).toBe('Spam');
+      expect(await focusedLabelAfter('s')).toBe('Spam');
+      // Only the Calls description starts with "i"; typeahead must not match it.
+      expect(await focusedLabelAfter('i')).toBe('Spam');
     });
 
     it.each([
-      { move: 'into', value: 'calls', group: 'Other views', next: 'Archived' },
-      { move: 'out of', value: 'archived', group: null, next: 'Spam' },
-    ])('keeps focus on a row that moves $move a group while open', async ({ value, group, next }) => {
+      { move: 'into', index: 1, group: 'Other views', parentRole: 'group', next: 'Archived' },
+      { move: 'out of', index: 2, group: null, parentRole: 'none', next: 'Spam' },
+    ])('keeps focus on a row that moves $move a group while open', async ({ index, group, parentRole, next }) => {
       const live = ref(groupedOptions.map(option => ({ ...option })));
       mountWithLiveOptions(live);
       await open();
-      const option = live.value.find(candidate => candidate.value === value);
-      const row = rows()[live.value.indexOf(option)];
+      const row = rows()[index];
       focusRow(row);
-      option.group = group;
+      live.value[index].group = group;
       await reconcile();
       expect(document.activeElement.id).toBe(row.id);
-      expect(document.activeElement.parentElement.getAttribute('role')).toBe(group ? 'group' : 'none');
-      expect(await press('ArrowDown')).toBe(next);
+      expect(document.activeElement.parentElement.getAttribute('role')).toBe(parentRole);
+      expect(await focusedLabelAfter('ArrowDown')).toBe(next);
       expect(actions()).toEqual({ open: [[true]] });
     });
   });

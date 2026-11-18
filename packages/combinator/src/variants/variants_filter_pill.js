@@ -20,11 +20,12 @@ const channelOptions = [
   { value: 'chat', label: 'Chat' },
 ];
 
-function controlledPreset (props = {}, slots = {}) {
+function controlledPreset (props = {}, slots = {}, docsSection) {
   const single = props.useDropdown?.initialValue ?? true;
+  const section = docsSection ?? `controlled-${single ? 'single' : 'multiple'}-selection`;
   return {
     metadata: {
-      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection.`,
+      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#${section}.`,
     },
     props: {
       options: { initialValue: single ? messageOptions : channelOptions },
@@ -130,12 +131,11 @@ export default {
 
   'controlled empty options': controlledPreset({ options: { initialValue: [] } }),
 
-  'controlled unavailable choices': {
-    ...controlledPreset({ options: { initialValue: typeOptions }, label: { initialValue: 'Type' } }),
-    metadata: {
-      copyNotice: 'Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#unavailable-choices-and-groups.',
-    },
-  },
+  'controlled unavailable choices': controlledPreset(
+    { options: { initialValue: typeOptions }, label: { initialValue: 'Type' } },
+    {},
+    'unavailable-choices-and-groups',
+  ),
 
   'controlled counts': controlledPreset({ selected: { initialValue: 'unread', types: ['string', 'null'] } }, {
     headerContent: { initialValue: 'Filter by' },

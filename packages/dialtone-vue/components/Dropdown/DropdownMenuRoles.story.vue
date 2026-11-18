@@ -55,7 +55,6 @@
           navigation-type="arrow-keys"
           disabled
           aria-describedby="menu-roles-export-reason"
-          @click="refresh(close)"
         >
           Export
           <template #subtitle>

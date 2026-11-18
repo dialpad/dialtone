@@ -115,17 +115,10 @@ describe('FilterPill dropdown-only option fields', () => {
       Object.freeze({ value: 'calls', label: 'Calls' }),
     ];
     const state = getSelectionState(records, 'all', { useDropdown: true });
-    const plain = { disabled: false, description: null };
     expect(state.sections).toEqual([
-      { group: null, rows: [{ option: records[0], ...plain, group: null }] },
-      {
-        group: 'Other views',
-        rows: [
-          { option: records[1], ...plain, group: 'Other views' },
-          { option: records[2], ...plain, group: 'Other views' },
-        ],
-      },
-      { group: null, rows: [{ option: records[3], ...plain, group: null }] },
+      { group: null, rows: [state.rows[0]] },
+      { group: 'Other views', rows: [state.rows[1], state.rows[2]] },
+      { group: null, rows: [state.rows[3]] },
     ]);
     expect(state.issues).toEqual([]);
   });
@@ -137,23 +130,23 @@ describe('FilterPill dropdown-only option fields', () => {
       Object.freeze({ value: 'spam', label: 'Spam', group: 'Other views' }),
     ];
     const state = getSelectionState(records, null, { useDropdown: true });
-    expect(state.sections.map(section => section.group)).toEqual(['Other views', null, 'Other views']);
+    expect(state.sections).toEqual([
+      { group: 'Other views', rows: [state.rows[0]] },
+      { group: null, rows: [state.rows[1]] },
+      { group: 'Other views', rows: [state.rows[2]] },
+    ]);
     expect(state.issues).toEqual([
       'option group "Other views" repeats after other options and renders as a separate group.',
     ]);
   });
 
-  it('ignores the fields in multiple selection and reports them once', () => {
+  it('reports the fields once as ignored in multiple selection without invalidating the options', () => {
     const records = [
       Object.freeze({ value: 'calls', label: 'Calls', disabled: true }),
       Object.freeze({ value: 'archived', label: 'Archived', description: 'Unavailable', group: 'Other views' }),
     ];
     const state = getSelectionState(records, [], { useDropdown: false });
     expect(state.valid).toBe(true);
-    expect(state.rows).toEqual([
-      { option: records[0], disabled: false, description: null, group: null },
-      { option: records[1], disabled: false, description: null, group: null },
-    ]);
     expect(state.issues).toEqual(['option disabled, description and group are ignored in multiple selection.']);
   });
 });

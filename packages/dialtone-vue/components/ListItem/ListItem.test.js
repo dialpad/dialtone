@@ -232,6 +232,7 @@ describe('DtListItem tests', () => {
       });
 
       it('keeps the keyboard highlight', async () => {
+        // baseProvide highlights dt-item2.
         await wrapper.setProps({ id: 'dt-item2' });
 
         expect(wrapper.classes()).toEqual(['d-list-item', 'd-list-item--highlighted', 'd-list-item--disabled']);
