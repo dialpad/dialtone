@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { devWarn } from '../dev';
 import type { ClassValue } from '../cx';
 import type { ValidationMessageType } from '../constants';
 
@@ -50,7 +51,7 @@ export interface InputState {
 
 function validateInputLabels (hasLabelOrLabel: boolean | string, ariaLabel?: string | null) {
   if (!hasLabelOrLabel && !ariaLabel) {
-    console.warn('You must provide an aria-label when there is no label passed');
+    devWarn('You must provide an aria-label when there is no label passed');
   }
 }
 
