@@ -1,0 +1,18 @@
+packages/combinator/src/components/combinator.vue
+  h_c15b5755534093 36,38
+packages/combinator/src/components/option_bar/option_bar.vue
+  h_c15b5755534093 49,92,115
+packages/dialtone-vue/components/Stack/Stack.vue
+  h_c15b5755534093 58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "24cd34f03a7d52902d40085d205673197f834609",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
