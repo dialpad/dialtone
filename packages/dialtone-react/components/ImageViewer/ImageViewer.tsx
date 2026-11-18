@@ -149,6 +149,17 @@ export function DtImageViewer ({
     if (isOpen && modalEl) closeButtonRef.current?.focus();
   }, [isOpen, modalEl]);
 
+  // Focusing the sr-only close button shows the visible one and unmounts the sr-only one while it holds focus, which
+  // would drop focus out of the modal (and the focus trap). Hand focus to the visible button first. Intended departure
+  // from Vue, which has the same bug.
+  useEffect(() => {
+    if (!showCloseButton) return;
+    const active = document.activeElement;
+    if (active?.getAttribute('data-qa') === 'dt-sr-only-close-button' && modalEl?.contains(active)) {
+      closeButtonRef.current?.focus();
+    }
+  }, [showCloseButton, modalEl]);
+
   const openModal = () => {
     // Has custom control passed in
     if (open !== null) return;
