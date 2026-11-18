@@ -1,0 +1,127 @@
+apps/dialtone-documentation/docs/utilities/typography/font-size.md
+  s_5c2995026e6cb7::t_7fb541e957ec85 4
+  s_5c2995026e6cb7::t_359d9d48a53d9e 24,26-31
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-headline-sizes.js
+  s_5c2995026e6cb7::t_50a0782e4134bb 28,30,33,35,37,62,64-65,67-71,73-77,91-95,97-101
+  s_5c2995026e6cb7::t_447cafad018cc1 20-21,23
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 119-120
+packages/dialtone-tokens/tokens/base/default.json
+  s_5c2995026e6cb7::t_2fe44b32659b05 850,852,855,857-862,867-891,2442
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_5c2995026e6cb7::t_fe96159f7eb8df 12-13,20-22,63,73-81,83,113,121-129,142,144,191-200,387,391-392,394-398,401-406,425-428,430-431,458
+  s_5c2995026e6cb7::t_9ea94e016474ea 181-182
+  s_5c2995026e6cb7::t_45ccf669918c89 413,433,523
+  s_5c2995026e6cb7::t_d3b3d24231d469 14,143,393,399-400
+  s_5c2995026e6cb7::t_0541db8855b49b 43,60,95,110
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_5c2995026e6cb7::t_d3b3d24231d469 9,14
+  s_5c2995026e6cb7::t_ed1f708bed8146 3,7-8,13,16,37,46
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 54-61
+apps/dialtone-documentation/docs/components/text.md
+  s_5c2995026e6cb7::t_41057397f1d854 3,66,78-80,92-94,96,98,100-103,119-120,126-134
+  s_5c2995026e6cb7::t_7fb541e957ec85 7-8,11-21,34-36,40-42,49-50,52,57-59,72-76,111,169-173,205-209,266-269,423,438,443-444,535-537
+  s_5c2995026e6cb7::t_50eb64cebd858f 200-204,210-228
+  s_5c2995026e6cb7::t_08a78f68ac049c 87,114-116,552-555
+  s_5c2995026e6cb7::t_ca50c2c88e94e7 4,77,112-113,121-125,550
+  s_5c2995026e6cb7::t_d3b3d24231d469 43,51,68,81,104,135
+packages/dialtone-vue/components/Text/index.js
+  s_5c2995026e6cb7::t_1851bfbda18970 4,7-9
+apps/dialtone-documentation/docs/_data/type.json
+  s_5c2995026e6cb7::t_7fb541e957ec85 5,9,13,17,490-492,502,620
+  s_5c2995026e6cb7::t_ea4c930c5dda2d 254-255,260-267,275-310
+packages/combinator/src/lib/info.test.js
+  s_9f61fa9161643f::t_292a9d70dfae88 1-37
+packages/eslint-plugin-dialtone/lib/rules/deprecated-tshirt-sizes.js
+  s_5c2995026e6cb7::t_0e79cb7969ec82 131
+  s_5c2995026e6cb7::t_670e7631a28adc 73-76,137,139,145,148,151,154,162-163
+  s_5c2995026e6cb7::t_a3c6e260a9e663 3,35,40-41,53,55-56,59-60,70-72,117,138,140-141,143-144,146,149-150,152-153,164-168,173-174,176-183,237-238,240-247
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 52,57,83,91-100,106,109,147,155-161,192,210,212,215-216,225-227
+  s_5c2995026e6cb7::t_d3b3d24231d469 101-102,119-130
+packages/eslint-plugin-dialtone/docs/rules/deprecated-headline-sizes.md
+  s_5c2995026e6cb7::t_ed1f708bed8146 1-10,13-49
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 50-51
+apps/dialtone-documentation/docs/_data/text.json
+  s_5c2995026e6cb7::t_918cb7272580e9 103-222
+packages/dialtone-css/lib/build/less/utilities/typography.less
+  s_5c2995026e6cb7::t_7fb541e957ec85 31-49,53-64,66,70-78,81,83-84,86,88-89,91,93-94,96,98-99,101,103-104,106,108-109,111,113-114,116,118,120,122-123,125,127,129,131-132,134,136,138,140-141,143,145,147,149-157,159,161-162,164,166-167,169,171-172,174,176-184,186,188-189,191,193-194,196,198-199,201,203-204,206,208-209,211,213-214,216,218-219,221,223-231,233,235-236,238,240-248,250,252-253,255,259-264,266-268,270-272,274-276,278-280,282-284,286-288,290-544,550-552,554,556-558,560-562,564-566,568-599,601-612,616,618,622,624,627,629-631,633-638,640-642,644-646,648-658,661-665,667-669,671-673,675-677,679-681,683-685,687-689,691-693,695-697,699-712,714-716,718-896,900,902-939
+packages/dialtone-vue/components/Text/Text.stories.js
+  s_5c2995026e6cb7::t_d3b3d24231d469 34
+  s_5c2995026e6cb7::t_7fb541e957ec85 106-107,112-113,130,138-141
+  s_5c2995026e6cb7::t_1851bfbda18970 8-10,19-22,33,35-37,61-65,71-77
+  s_5c2995026e6cb7::t_02010963e9f31f 131
+packages/dialtone-css/lib/build/less/components/text.less
+  s_5c2995026e6cb7::t_7fb541e957ec85 15-16,18-21,23-25,27-28,30,32-34,37-39,42-44,47-49,52-54,57-59,62-65,67,69-71,74-76,79-81,84-87,89,91-93,96-98,101-103,106-109,111,113-115,118-120,123-125,128-131,133-135,137-139,142-144,147-149,152-154,157-160,162-165,167-170,172-175,177-180,182-185,187-189,192-194,197-199,202-204,207-210,212-214,217-219,222-224,227-229,231-234,236-241,243-246,248-251,253-255,257-260,262-264,266-269,271-273,275-277,279-282,284-286,288-469
+packages/combinator/src/variants/variants_text.js
+  s_30aae87b3e19ec::t_7a6842221144f4 6-7,16-31,46-47
+packages/combinator/src/lib/tokens.js
+  s_30aae87b3e19ec::t_7a6842221144f4 67,69,73,91-93,238,242,265-283
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_5c2995026e6cb7::t_ce755ccc8f2c2b 54-56,58,70-75
+  s_5c2995026e6cb7::t_52bd9e6d19a784 122,178,184,207
+  s_5c2995026e6cb7::t_d3b3d24231d469 21,57,59,76
+packages/dialtone-vue/components/Text/TextConstants.js
+  s_5c2995026e6cb7::t_2fe44b32659b05 8-29,73-102,164,167-169
+  s_5c2995026e6cb7::t_7fb541e957ec85 31-46,53-60,105-111,113,115-116
+packages/dialtone-vue/components/Text/Text.vue
+  s_5c2995026e6cb7::t_7fb541e957ec85 70-73,85-88,109-112,132-135,147-150,189-192,204-207,219-222,234-237,243,309,320,329,336,344,348,350-354,361-363,378,383-385,389-391,403,426-428,432,446,450,454,458-471,474-479,482-487
+  s_5c2995026e6cb7::t_9a9bdb30e5bc4a 328
+  s_5c2995026e6cb7::t_c2dc1270e756d6 413-415
+  s_5c2995026e6cb7::t_dcd2ee0e5ff134 16,20-22,79-82,84,89-92,94,101-108,113-122,250-262,324,337-343,345-347,349,355-356,417-425,429-430
+  s_5c2995026e6cb7::t_d3b3d24231d469 78,83,93,408-412
+packages/combinator/src/lib/info.js
+  s_9f61fa9161643f::t_6bcbcc0181f71d 177
+packages/dialtone-vue/components/Text/Text.test.js
+  s_5c2995026e6cb7::t_d3b3d24231d469 41,44,63,116-119,121-124,128-133
+  s_5c2995026e6cb7::t_7fb541e957ec85 88-95,159-164,179-181,234-236,251-253,274-290,320-322,339-341,356-358,390,434-436,450-452,475-477,491-493,516-518
+  s_5c2995026e6cb7::t_e282f794999ad9 134-135
+  s_5c2995026e6cb7::t_72f8a8bc684c39 13-15,104,113-115,136,138-142,144-158,165-173,175-176,178,189,270-271,383-386,391,497-510,512-513,515,526-542
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-tshirt-sizes.js
+  s_5c2995026e6cb7::t_d3b3d24231d469 85,88-95,133,136-137,187,191,206,210
+  s_5c2995026e6cb7::t_447cafad018cc1 20-21,23
+  s_5c2995026e6cb7::t_4d9430dd78bc80 38,46-49,96-100,102-106,127,129-130,138-142,144-148,186,188-189
+  s_5c2995026e6cb7::t_ca50c2c88e94e7 190,209
+packages/dialtone-vue/components/Text/TextDefault.story.vue
+  s_5c2995026e6cb7::t_1851bfbda18970 5,7-8
+packages/eslint-plugin-dialtone/lib/rules/deprecated-headline-sizes.js
+  s_5c2995026e6cb7::t_0a7122b776be2f 53-55,57,64-66,68-71,91-94
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 36-41,60,74-89,103-106
+  s_5c2995026e6cb7::t_747fe51d3454dd 72,90
+  s_5c2995026e6cb7::t_670e7631a28adc 73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "0c8f4c627bc51e5b53e0bde72c832361e38a6137",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_30aae87b3e19ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_5c2995026e6cb7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eef70-8249-79a3-8adc-6396d473def8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

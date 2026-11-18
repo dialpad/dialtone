@@ -1,0 +1,119 @@
+packages/dialtone-react/components/Tooltip/TooltipConstants.ts
+  s_2defdf83601f66::t_f7e331ba280e58 1-35
+packages/dialtone-react/components/Tooltip/Tooltip.parity.tsx
+  s_2defdf83601f66::t_2f2ca0f70fc772 1-4
+packages/dialtone-react/components/Popover/TippyUtils.ts
+  s_2defdf83601f66::t_63d7c211ea45aa 1-69
+packages/dialtone-react/components/Tooltip/index.ts
+  s_2defdf83601f66::t_f0998402e14b82 1-10
+  s_21c2370fc76542::t_bb182d756d2b9d 11-16
+packages/dialtone-react/components/Tooltip/Tooltip.test.tsx
+  s_2defdf83601f66::t_854ed78b94bfac 409-410
+  s_2defdf83601f66::t_130807c294106d 31-45
+  s_2defdf83601f66::t_ac7edd2af2fc70 53-54
+  s_2defdf83601f66::t_b2c171b06b77ee 503-505
+  s_2defdf83601f66::t_c58da7db2f6a0f 7
+  s_2defdf83601f66::t_41248f74c15760 1
+  s_2defdf83601f66::t_00a0d05eef0682 479-489
+  s_2defdf83601f66::t_7bd671e34bd321 418-419,421,423-424,426-428
+  s_2defdf83601f66::t_358a348bb94dcd 2-6,8-30,46-52,55-408,411-417,420,422,425,429-478,490-502,506-528
+packages/dialtone-react/common/mode_constants.ts
+  s_2defdf83601f66::t_b7f7215b25cc88 1-2
+  s_2defdf83601f66::t_2c4e9503c727da 3-10
+  s_21c2370fc76542::t_12996e676f014e 11-12
+packages/dialtone-react/components/Tooltip/Tooltip.tsx
+  s_2defdf83601f66::t_7022bca2af70d9 302
+  s_2defdf83601f66::t_f4fcd87ffd2043 257-258,262-268,271-274,279-283
+  s_2defdf83601f66::t_b7a63357454b4d 145-158
+  s_2defdf83601f66::t_60e30086826d06 210-212
+  s_2defdf83601f66::t_dc0fc8b192bbd1 1-4,6-144,159-209,214-216,220,224-225,227-228,230-231,233-234,238,240-256,260-261,275-278,284,301,330-340,344-346,350-351,356,359-366,368-372,383-410,415-417,422-430,438,446-475
+  s_2defdf83601f66::t_1c8cdd5fc40b51 269-270
+  s_2defdf83601f66::t_98593ffceb1d53 411-412
+  s_2defdf83601f66::t_5ebc10cf5a5aaa 432-437,439-445
+  s_2defdf83601f66::t_b7779b09619875 5,221,226,232,285-300,303-329,341-343,347-349,352-355,357-358,367,373-382,413-414,418,431
+  s_2defdf83601f66::t_5635eee707a86a 222-223
+  s_2defdf83601f66::t_77361d92d7a7fb 235-237,239
+  s_d68b87d7b866b0::t_78353b5b159215 213,229,259
+  s_33c4885cff212b::t_cb963ebfac190e 419-421
+  h_65afbd07a56b87 217-219
+packages/dialtone-react/components/ModeIsland/Utils.ts
+  s_2defdf83601f66::t_7f7551cb030828 1-31
+packages/dialtone-react/components/Popover/PopoverConstants.ts
+  s_2defdf83601f66::t_5f49fb6d215883 1-5
+packages/dialtone-react/common/hooks/useMode.ts
+  s_2defdf83601f66::t_835c65d2b46657 1
+  s_2defdf83601f66::t_cce3db9c821fec 44
+  s_2defdf83601f66::t_65112faaac8a59 2-16,19-22,24-27,30-41,45-46,49-56,58-66
+  s_2defdf83601f66::t_06f7e97fb1639f 28-29
+  s_d68b87d7b866b0::t_f938c94ba1d4c7 17-18,23,57
+  h_65afbd07a56b87 48
+  s_2defdf83601f66::t_85de17a0f8e0da 42-43,47
+packages/dialtone-react/components/Tooltip/Tooltip.stories.tsx
+  h_65afbd07a56b87 1-573
+packages/dialtone-react/components/Tooltip/TooltipDirective.tsx
+  s_21c2370fc76542::t_bb182d756d2b9d 105,147
+  s_21c2370fc76542::t_12996e676f014e 2-9,14-104,106-117,129-143,145-146,148-153,160-161,165-169,171-175,177
+  s_84e299411402c2::t_6e8c9a81edff39 1,10-13,118-128,144,154-159,162-164,170,176
+packages/dialtone-react/components/Tooltip/TooltipDirective.stories.tsx
+  s_21c2370fc76542::t_9a509d8c00b55a 1-101
+packages/dialtone-react/components/Tooltip/TooltipDirective.test.tsx
+  s_21c2370fc76542::t_5079b0b73f705b 285-286
+  s_21c2370fc76542::t_682aa1a088b5a1 67-68,336,344,352,368,375,379
+  s_21c2370fc76542::t_54e1715ade034c 57,366,372,374
+  s_21c2370fc76542::t_b7a022f2e2e70a 1,211-212,321-328
+  s_21c2370fc76542::t_2519dc6f04c590 2-56,58-66,69-210,213-240,284,287-320,329-335,337-343,345-351,353-365,367,369-371,373,376-378,380-420
+  s_84e299411402c2::t_6e8c9a81edff39 241-283
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dfbc87ae4f5bef44b634e2d5b1cd5550e0059ec5",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_21c2370fc76542": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3f77f7ca-ecc8-4f02-bb40-813cf7684ce4",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_33c4885cff212b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4839bf4-1dfc-49ed-8acc-83fc04c5847a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_84e299411402c2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1225a5f-0c64-4ac0-a6c4-ddfa3bec88d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_d68b87d7b866b0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "168e771e-3366-49a6-9ba7-cc557800eedc",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

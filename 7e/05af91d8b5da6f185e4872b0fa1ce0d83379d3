@@ -1,0 +1,33 @@
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_bade019f38acf7::t_b9f138641afedc 37-38
+packages/dialtone-vue/components/Chip/Chip.test.js
+  s_bade019f38acf7::t_1a6989ea176bf3 564-577
+  s_bade019f38acf7::t_19d6c49fb3cd14 267-281
+apps/dialtone-documentation/docs/components/chip.md
+  s_bade019f38acf7::t_d22e2eaf759856 48
+packages/dialtone-vue/components/Chip/Chip.vue
+  s_bade019f38acf7::t_7270989e973ee9 66
+  s_bade019f38acf7::t_cb92e24b19748a 29
+  s_bade019f38acf7::t_af32f6ff10398a 216-217
+  s_bade019f38acf7::t_809c6ebff35eb3 433-436,442-443
+  s_bade019f38acf7::t_34c048403048cc 412-416,418
+  s_bade019f38acf7::t_62ac100d67e101 477-478
+apps/dialtone-documentation/docs/_data/chip.json
+  s_bade019f38acf7::t_3244327055f927 55-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7e05af91d8b5da6f185e4872b0fa1ce0d83379d3",
+  "prompts": {},
+  "sessions": {
+    "s_bade019f38acf7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4ddb7b2-f62a-4d3c-9d59-f141d6ddfcc1",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
