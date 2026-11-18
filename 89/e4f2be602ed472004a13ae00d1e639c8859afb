@@ -1,0 +1,19 @@
+packages/dialtone-react/components/RootLayout/RootLayoutConstants.ts
+  s_31b78b2431aba0::t_199d01f7b2d604 10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "89e4f2be602ed472004a13ae00d1e639c8859afb",
+  "prompts": {},
+  "sessions": {
+    "s_31b78b2431aba0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "15505bc1-e5c9-4fa3-b811-bae30ff11356",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
