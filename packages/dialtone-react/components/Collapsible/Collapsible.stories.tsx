@@ -133,6 +133,9 @@ function CollapsibleDefault ({
       anchorClass={anchorClass}
       contentClass={contentClass}
       ariaLabel={ariaLabel}
+      // Vue's story declares no props, so every arg falls through to its single root `DtCollapsible` as well. That
+      // is how `ariaLabelledBy` reaches the prop there, alongside the `aria-labelledby` attribute its template binds.
+      ariaLabelledBy={ariaLabelledBy}
       aria-labelledby={ariaLabelledBy ?? undefined}
       onOpened={onOpened}
       anchor={anchor
