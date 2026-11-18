@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
 import { cx } from '../../common/cx';
@@ -214,6 +214,11 @@ function ModalDefault ({
 }: ModalStoryArgs) {
   const [isOpen, setIsOpen] = useState(args.open ?? false);
 
+  // Follow the `open` control: Vue's template watches `open` for this, though it never fires there.
+  useEffect(() => {
+    setIsOpen(args.open ?? false);
+  }, [args.open]);
+
   const secondaryButtonKind = args.kind === 'critical' ? 'muted' : 'default';
 
   const close = (open: boolean) => {
@@ -278,6 +283,12 @@ const comboboxItems = ['Apple', 'Banana', 'Cherry'];
 // ModalWithOverlays.story.vue
 function ModalWithOverlays ({ open }: ModalStoryArgs) {
   const [isOpen, setIsOpen] = useState(open ?? false);
+
+  // Follow the `open` control, as ModalDefault does.
+  useEffect(() => {
+    setIsOpen(open ?? false);
+  }, [open]);
+
   const [comboboxValue, setComboboxValue] = useState('');
 
   return (
