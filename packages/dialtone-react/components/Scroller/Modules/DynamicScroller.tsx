@@ -151,6 +151,11 @@ export function DynamicScroller<T> ({
         el.scrollTop = el.scrollHeight + 5000;
         // Item sizes are computed
         const cb = () => {
+          // The viewport unmounted while sizes were still unknown: stop, instead of queuing frames for ever.
+          if (!el.isConnected) {
+            scrollingToBottom.current = false;
+            return;
+          }
           el.scrollTop = el.scrollHeight + 5000;
           requestAnimationFrame(() => {
             el.scrollTop = el.scrollHeight + 5000;

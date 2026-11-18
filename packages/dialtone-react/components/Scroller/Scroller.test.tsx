@@ -224,12 +224,16 @@ describe('DtScroller Tests', () => {
     // every view and counted it as newly used again, firing scroll-start again (and passing an undefined index).
     describe('On `updateItems`', () => {
       it('keeps each item\'s index and does not report scroll-start again', () => {
+        // Render the slot's `index`, so a lost or wrong index shows ('undefined:User 0').
+        mockProps = { children: ({ item, index }) => <div>{`${index}:${item.name}`}</div> };
+        updateWrapper();
         const indexes = () => items().map(item => item.textContent?.trim());
-        const before = indexes();
+        const expected = Array.from({ length: 7 }, (_, i) => `${i}:User ${i}`);
+        expect(indexes()).toEqual(expected);
 
         act(() => scroller.current!.updateItems());
 
-        expect(indexes()).toEqual(before);
+        expect(indexes()).toEqual(expected);
         expect(onScrollStart).toHaveBeenCalledTimes(1);
       });
     });
@@ -253,14 +257,21 @@ describe('DtScroller Tests', () => {
 
     describe('When unmounted before the mounted nextTick callback fires', () => {
       it('does not throw reading scrollTop off a null root element', () => {
-        // Mount and unmount at once, then run whatever the mount left pending (the sort timer, a scroll frame).
+        // Queue the scroll frame instead of running it at once, unmount, then run it and whatever else the mount
+        // left pending (the sort timer).
         vi.useFakeTimers();
+        const frames: FrameRequestCallback[] = [];
+        vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => frames.push(cb));
         try {
           const fresh = render(<DtScroller {...(baseProps as DtScrollerProps<User>)} {...baseSlots} />);
           fireEvent.scroll(fresh.container.firstElementChild!);
+          expect(frames).toHaveLength(1);
           fresh.unmount();
 
-          expect(() => vi.runAllTimers()).not.toThrow();
+          expect(() => {
+            frames.forEach(cb => cb(0));
+            vi.runAllTimers();
+          }).not.toThrow();
         } finally {
           vi.useRealTimers();
         }

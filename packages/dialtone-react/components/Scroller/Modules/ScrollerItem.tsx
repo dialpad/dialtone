@@ -56,9 +56,10 @@ export function DtScrollerItem<T> ({
   const sizeObserved = useRef(false);
 
   // Declared before the effects below, so they and the ResizeObserver's callback read this render's values.
-  const latest = useRef({ id, finalActive });
+  const direction = vscrollParent.direction;
+  const latest = useRef({ id, finalActive, direction });
   useLayoutEffect(() => {
-    latest.current = { id, finalActive };
+    latest.current = { id, finalActive, direction };
   });
 
   const size = (itemKey: ScrollerItemId | undefined) => vscrollParent.getSize(itemKey) || 0;
@@ -73,7 +74,8 @@ export function DtScrollerItem<T> ({
   }
 
   function applyWidthHeight (width: number, height: number) {
-    const newSize = ~~(vscrollParent.direction === 'vertical' ? height : width);
+    // Vue reads the parent's direction live; the ResizeObserver's registered callback must too, not the render's.
+    const newSize = ~~(latest.current.direction === 'vertical' ? height : width);
     if (newSize && size(latest.current.id) !== newSize) applySize(newSize);
   }
 
