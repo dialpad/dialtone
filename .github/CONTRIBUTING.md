@@ -149,13 +149,14 @@ After you have discussed your change with the Dialtone team, follow these steps 
 3. Create a personal branch to make your change off of `staging` with `git checkout -b my-change-branch`. We use kebab-case for branch names.
 4. Make and commit your changes. Note our commit message conventions in [COMMIT_CONVENTION.md].
 5. Push your branch to remote. `git push -u origin my-change-branch`.
-6. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
-7. Set the label on your PR:
+6. Run the PR readiness check on the commit you pushed (`$pr-prep` in Codex, `/pr-prep` in Claude Code) before you create or edit the pull request. Run it again after any later push.
+7. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
+8. Set the label on your PR:
 
    - 'visual-test-ready' if your PR includes visual UI changes.
    - 'no-visual-test' if no UI changes.
 
-8. Once your changes have been approved, you may squash your branch into staging.
+9. Once your changes have been approved, you may squash your branch into staging.
 
 Once your change is in `staging` it will go live with the next Dialtone Vue release.
 Releases are done on demand by the Dialtone team, and are done fairly regularly.

@@ -24,6 +24,7 @@ Prepare a public-safe Dialtone PR title and body, then create or update a PR onl
 - `.github/pull_request_template.md`
 - `.agents/resources/pr-template.md`
 - `.agents/resources/package-map.md`
+- `.agents/skills/pr-prep/SKILL.md`, section "Verdict record".
 
 ## Constraints
 
@@ -31,25 +32,27 @@ Prepare a public-safe Dialtone PR title and body, then create or update a PR onl
 - Use `NO-JIRA` only when project-start, branch, or user chose it.
 - Do not include private Dialpad links, private screenshots, customer data, secrets, or internal-only notes.
 - Strip `Co-Authored-By` lines from generated PR text.
+- Check the prep verdict before the first PR write (create or edit). Stale or missing means rerun `pr-prep`.
 - Prefer drafting title/body before public writes.
 - Confirm public writes when ambiguity remains.
 
 ## Workflow
 
 1. Inspect current branch, base, commits, and changed files.
-2. Resolve title from actual changes and `.github/COMMIT_CONVENTION.md`.
-3. Build PR body from `.github/pull_request_template.md`.
-4. Remove irrelevant checklist sections.
-5. Add cross-package impact and documentation artifact status when relevant.
-6. Report validation gaps from `pr-prep` or focused checks.
-7. Create or update the PR only after the user asked for public PR action.
+2. Check prep before any PR write. Run the freshness check from the pr-prep "Verdict record" section: the recorded head SHA must equal the current `HEAD` and the tree must have been clean. A missing record, a different SHA or a dirty tree means prep is stale: run `pr-prep` again. For `Needs fixes` or `Needs decision`, report it and ask before writing.
+3. Resolve title from actual changes and `.github/COMMIT_CONVENTION.md`.
+4. Build PR body from `.github/pull_request_template.md`.
+5. Remove irrelevant checklist sections.
+6. Add cross-package impact and documentation artifact status when relevant.
+7. Report validation gaps from `pr-prep` or focused checks.
+8. Create or update the PR only after the user asked for public PR action.
 
 ## Done When
 
 - PR title follows Dialtone convention.
 - PR body is public-safe and template-based.
 - Ticket mode is explicit.
-- Public write happened only when requested or clearly in scope.
+- Public write happened only when requested or clearly in scope, and only after a fresh prep verdict.
 
 ## Verification
 

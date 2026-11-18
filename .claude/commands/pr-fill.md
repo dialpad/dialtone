@@ -42,30 +42,35 @@ When this command is used, Claude should:
    - Keep `NO-JIRA` only when explicitly chosen. This workflow does not create Jira tickets.
    - Use the plain ticket key in the public PR body.
 
-6. **Validate and set PR title:**
+6. **Check prep before any PR write:**
+   - Run the freshness check from the "Verdict record" section of `.agents/skills/pr-prep/SKILL.md`. The recorded head SHA must equal the current `HEAD` and the tree must have been clean.
+   - A missing record, a different SHA or a dirty tree means prep is stale: run `/pr-prep` again before the title or body edit.
+   - For `Needs fixes` or `Needs decision`, report it and ask before writing.
+
+7. **Validate and set PR title:**
    - Must follow commitlint format (see CLAUDE.md Commit Convention)
    - If the current PR title does not match, derive the correct title from the actual changes and resolved ticket
    - Update with `gh pr edit <PR_NUMBER> --title "<VALIDATED_TITLE>"`
 
-7. **Generate template with smart defaults:**
+8. **Generate template with smart defaults:**
    - Auto-check appropriate change type boxes
    - Include relevant checklist sections based on file changes
    - Pre-populate sections where possible
    - In the description section, describe the changes in a summarized way, no need to list every file changed
 
-8. **Detect cross-package impact:**
+9. **Detect cross-package impact:**
    When changes span multiple packages, add a "Cross-Package Impact" section noting affected packages and downstream effects per the dependency graph (`tokens --> CSS --> Vue --> docs / MCP / language-server`).
 
-9. **Suggest doc-janitor cleanup:**
+10. **Suggest doc-janitor cleanup:**
    Before generating the PR body, check for stale work artifacts (PLAN-*.md, SESSION_*.md, *.backup, etc.) in the working tree. If any are found, suggest running `/doc-janitor` to clean them up before opening the PR. Do not block — just inform the user and continue.
 
-10. **Flag documentation artifacts:**
+11. **Flag documentation artifacts:**
     Read `.agents/resources/rules/vue-components.md` and assess its complete Component Artifact Pipeline. Add a "Documentation Artifacts" section listing which are relevant to the changes. Mark artifacts already updated with a checkmark and those needing attention with a flag.
 
-11. **Strip Co-Authored-By lines:**
+12. **Strip Co-Authored-By lines:**
     Before writing the final PR body, remove any `Co-Authored-By:` lines from the generated content. These must never appear in PR descriptions.
 
-12. **Update the PR:**
+13. **Update the PR:**
     - Use `gh pr edit <PR_NUMBER> --body "<DESCRIPTION>"` to update
     - Confirm update: `gh pr view <PR_NUMBER> --json title,body,url`
     - Display success message with PR URL

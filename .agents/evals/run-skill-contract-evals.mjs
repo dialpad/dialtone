@@ -77,7 +77,7 @@ const skills = {
       '.agents/resources/pr-template.md',
     ],
     patterns: [
-      /Report-only/,
+      /\*\*Report-only\*\* \(default for readiness checks\)/,
       /Flag unresolved ticket state/,
       /\*\*Local gates\.\*\*/,
       /Verdict: Ready \| Ready with notes \| Needs fixes \| Needs decision/,
@@ -97,7 +97,11 @@ const skills = {
       '.agents/resources/pr-template.md',
       '.agents/resources/package-map.md',
     ],
-    patterns: [/Do not create Jira tickets/, /public-safe/],
+    patterns: [
+      /Do not create Jira tickets/,
+      /public-safe/,
+      /Check prep before any PR write/,
+    ],
   },
   'pr-comments': {
     resources: [
@@ -406,6 +410,18 @@ for (const [skillName, config] of Object.entries(skills)) {
       failures,
     );
   }
+}
+
+// /pr-fill must check the prep verdict before its first PR write.
+{
+  const prFill = read('.claude/commands/pr-fill.md');
+  const check = prFill.indexOf('Verdict record');
+  const firstWrite = prFill.indexOf('gh pr edit');
+  assert(
+    check !== -1 && firstWrite !== -1 && check < firstWrite,
+    '.claude/commands/pr-fill.md must check the pr-prep verdict before its first gh pr edit',
+    failures,
+  );
 }
 
 const ruleMap = read('.agents/resources/rule-map.md');
