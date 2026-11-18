@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { render, type RenderResult } from '@testing-library/react';
 import { vi } from 'vitest';
@@ -410,6 +410,53 @@ describe('DtTextList', () => {
       expect(marker()).not.toHaveTextContent('A');
       expect(marker()).not.toHaveTextContent('B');
       expect(marker().querySelector('[data-qa="icon"]')).toBeInTheDocument();
+    });
+
+    describe('portal and nested marker keys', () => {
+      const renderMarker = (marker: ReactNode) => (
+        <DtTextList><DtTextListItem marker={marker}>Item</DtTextListItem></DtTextList>
+      );
+      const setup = () => {
+        const target = document.createElement('div');
+        document.body.appendChild(target);
+        return target;
+      };
+
+      it('unmounts a keyless portal when an explicitly keyed "#0" portal remains', () => {
+        const target = setup();
+        const view = render(renderMarker(<>{createPortal('A', target)}{createPortal('B', target, '#0')}</>));
+        expect(target).toHaveTextContent('AB');
+        view.rerender(renderMarker(<>{createPortal('B', target, '#0')}</>));
+        expect(target).toHaveTextContent('B');
+        expect(target).not.toHaveTextContent('A');
+        view.unmount();
+        target.remove();
+      });
+
+      it('keeps portals in sibling arrays apart when they share a key', () => {
+        const target = setup();
+        const portal = (text: string) => createPortal(text, target, 'icon');
+        const view = render(renderMarker([<b key="lead" />, [portal('A')], [portal('B')]]));
+        expect(target).toHaveTextContent('AB');
+        view.rerender(renderMarker([<i key="other" />, [], [portal('B')]]));
+        expect(target).toHaveTextContent('B');
+        expect(target).not.toHaveTextContent('A');
+        view.unmount();
+        target.remove();
+      });
+
+      it('keeps a keyed fragment child apart from a direct child whose key contains a slash', () => {
+        const view = render(renderMarker([
+          <i key="first" data-qa="first" />,
+          <Fragment key="a"><i key="b" data-qa="nested" /></Fragment>,
+          <i key="a/.$b" data-qa="direct" />,
+        ]));
+        view.rerender(renderMarker([<i key="a/.$b" data-qa="direct" />]));
+        const marker = document.querySelector('[data-qa="dt-text-list-item-marker"]') as HTMLElement;
+        expect(marker.querySelector('[data-qa="nested"]')).not.toBeInTheDocument();
+        expect(marker.querySelector('[data-qa="first"]')).not.toBeInTheDocument();
+        expect(marker.querySelector('[data-qa="direct"]')).toBeInTheDocument();
+      });
     });
   });
 });
