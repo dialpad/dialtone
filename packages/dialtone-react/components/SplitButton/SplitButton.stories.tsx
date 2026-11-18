@@ -276,6 +276,11 @@ function SplitButtonDefault ({ default: defaultSlot, startIcon, endIcon, end, ..
 }
 
 const sizeNameMapping: Partial<Record<string, string>> = {
+  100: 'Extra small',
+  200: 'Small',
+  300: 'Medium',
+  400: 'Large',
+  500: 'Extra large',
   xs: 'Extra small',
   sm: 'Small',
   md: 'Medium',

@@ -1,6 +1,8 @@
 import { act, cleanup, fireEvent, render, type RenderResult } from '@testing-library/react';
 import { DtIconSend } from '../../icons';
 import { withRouterLink } from '../../tests/helpers/link';
+import { finishTransitions } from '../../tests/helpers/transition';
+import { DtListItem } from '../ListItem';
 import { TOOLTIP_DELAY_MS } from '../Tooltip/TooltipConstants';
 import { DtSplitButton, type DtSplitButtonIconSlotScope, type DtSplitButtonProps } from './SplitButton';
 
@@ -109,6 +111,45 @@ describe('DtSplitButton Tests', function () {
     MOCK_END_BUTTON_STUB.mockClear();
     MOCK_START_CLICKED.mockClear();
     MOCK_END_CLICKED.mockClear();
+  });
+
+  it('preserves dropdown active state through click opening and completed close', async () => {
+    // Vue stubs <transition>, so the file-wide rAF mock doesn't matter there; DtTransition's real one needs the real rAF.
+    const mockedRaf = globalThis.requestAnimationFrame;
+    const mockedCancelRaf = globalThis.cancelAnimationFrame;
+    globalThis.requestAnimationFrame = originalRequestAnimationFrame;
+    globalThis.cancelAnimationFrame = originalCancelAnimationFrame;
+    onTestFinished(() => {
+      globalThis.requestAnimationFrame = mockedRaf;
+      globalThis.cancelAnimationFrame = mockedCancelRaf;
+    });
+    result?.unmount();
+    const rendered = render(
+      withRouterLink(
+        <DtSplitButton
+          dropdownList={({ close }) => (
+            <DtListItem role="menuitem" navigationType="arrow-keys" onClick={close}>Send later</DtListItem>
+          )}
+        >
+          Send
+        </DtSplitButton>,
+      ),
+      { container: attachTo(document.body) },
+    );
+    result = rendered;
+    const trigger = rendered.container.querySelector<HTMLElement>('[data-qa="dt-split-button-end"]')!;
+    await click(trigger);
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    // Vue emits the content's after-enter by hand; here the real transition ends.
+    await finishTransitions();
+    await flushPromises();
+    expect(trigger).toHaveClass('d-btn--active');
+    await act(async () => { fireEvent.keyDown(trigger, { key: 'Escape', code: 'Escape' }); });
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    expect(trigger).toHaveClass('d-btn--active');
+    await finishTransitions();
+    await flushPromises();
+    expect(trigger).not.toHaveClass('d-btn--active');
   });
 
   describe('Presentation Tests', () => {
