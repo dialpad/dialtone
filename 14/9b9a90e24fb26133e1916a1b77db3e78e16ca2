@@ -1,0 +1,28 @@
+packages/dialtone-vue/components/Datepicker/Datepicker.test.js
+  s_0d7a64b3e66963::t_333f7e966fa3a8 50,53
+  s_0d7a64b3e66963::t_63f04a53ddac47 65
+  s_0d7a64b3e66963::t_cc6f06a1e8dcf0 54,112,118,124,157,173,181,193,201,213,225,276,286,295,306,317,326,337,370,397,406,415,424,434,466,475,484,493,503,512,519,528,542,549,567,574
+packages/dialtone-vue/components/EmojiPicker/EmojiPicker.test.js
+  s_0d7a64b3e66963::t_efdb1f190c9737 104
+  s_0d7a64b3e66963::t_b439b237241fa8 395-406
+packages/dialtone-vue/components/EmptyState/EmptyState.test.js
+  s_0d7a64b3e66963::t_d735c745615c56 112,115
+  s_0d7a64b3e66963::t_98761085be4f3d 46
+  s_0d7a64b3e66963::t_05a4f73af53dc5 104,107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "149b9a90e24fb26133e1916a1b77db3e78e16ca2",
+  "prompts": {},
+  "sessions": {
+    "s_0d7a64b3e66963": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e0e04e1b-b3f6-4b15-af95-796ffb0f2160",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

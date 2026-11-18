@@ -1,0 +1,45 @@
+packages/dialtone-vue/components/Slider/utils.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 7-10
+packages/combinator/src/variants/variants_slider.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 9-11,25-27,31,33-35,38-39,43,45-51,55,57-64,68,70-71,73-76,79-80,88-89,92,94-102
+  s_f1b6a2e8befce4::t_82518cbeff8720 8
+packages/dialtone-vue/components/Slider/Slider.stories.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 173,226-229,242-247
+packages/dialtone-vue/components/Slider/Composables/UseSliderDevWarnings.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 10,26-28
+packages/dialtone-vue/components/Slider/Composables/UseSliderCollisionAvoidance.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 245
+packages/dialtone-vue/components/Slider/Composables/UseSliderMagneticSnap.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 24,31-32
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 10,171-179
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 49-50,171,186,244,262,267,271,276,280,285,295,300,456-463,507-515,525,535,656-659,758
+packages/dialtone-vue/components/Slider/Composables/UseSliderMarksAndTicks.js
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 2,20-22
+packages/dialtone-vue/components/Slider/SliderDefault.story.vue
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 24,28
+packages/dialtone-vue/components/Slider/SliderVariants.story.vue
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 199-204,269-274,288-293,320-325,350-355,375-380,404-409,435-440,465-470,506,511
+apps/dialtone-documentation/docs/components/slider.md
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 124,130,133,291-292,420-421,425,439,442,445,495-496,501
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_f1b6a2e8befce4::t_58acf822383065 3106-3111
+  s_f1b6a2e8befce4::t_859dc737ae0ce8 328-344,1154-1171,1341-1357,1989-2012,3099-3105,3112-3119,3880-3882,3905-3913
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6febbb9609e6e2c2178717a2a137f29918da71f4",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

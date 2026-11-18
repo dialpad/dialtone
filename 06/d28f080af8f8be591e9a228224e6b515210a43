@@ -1,0 +1,23 @@
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_8716e901949c29::t_653229d2906427 494-498
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_8716e901949c29::t_8067399265fbf4 272
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_8716e901949c29::t_c4de079468096a 440-455
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "06d28f080af8f8be591e9a228224e6b515210a43",
+  "prompts": {},
+  "sessions": {
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
