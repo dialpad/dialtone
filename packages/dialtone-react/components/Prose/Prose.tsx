@@ -51,7 +51,7 @@ function isDisallowedElement (node: Element, tagName: string): boolean {
 }
 
 function allowedAttributesFor (tagName: string): readonly string[] {
-  const allowedGlobal = PROSE_ALLOWED_ATTRIBUTES._global ?? [];
+  const allowedGlobal = PROSE_ALLOWED_ATTRIBUTES._global;
   const allowedForTag = (Object.hasOwn(PROSE_ALLOWED_ATTRIBUTES, tagName) && PROSE_ALLOWED_ATTRIBUTES[tagName]) || [];
   return [...allowedGlobal, ...allowedForTag];
 }

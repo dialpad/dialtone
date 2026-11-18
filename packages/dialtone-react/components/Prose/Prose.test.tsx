@@ -191,6 +191,18 @@ describe('DtProse Tests', () => {
       expect(a.hasAttribute('href')).toBe(false);
     });
 
+    it('Should strip an unsafe url scheme from img src', () => {
+      setWrapper({}, html('<img src="javascript:alert(1)" alt="x">'));
+
+      expect(queryIn('img').hasAttribute('src')).toBe(false);
+    });
+
+    it('Should strip an unsafe url scheme from blockquote cite', () => {
+      setWrapper({}, html('<blockquote cite="javascript:alert(1)">q</blockquote>'));
+
+      expect(queryIn('blockquote').hasAttribute('cite')).toBe(false);
+    });
+
     it.each([
       ['a tab', 'java&#x09;script:alert(1)'],
       ['a line feed', 'java&#x0A;script:alert(1)'],

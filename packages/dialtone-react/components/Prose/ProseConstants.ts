@@ -41,7 +41,10 @@ export function _isSafeProseUrl (value: string | null | undefined): boolean {
   return !UNSAFE_URL_SCHEME.test(withoutIgnoredUrlChars(value ?? ''));
 }
 
-export const PROSE_ALLOWED_ATTRIBUTES: Readonly<Record<string, readonly string[]>> = {
+// Only `_global` is guaranteed; any other tag may have no entry, so lookups are `| undefined`.
+export const PROSE_ALLOWED_ATTRIBUTES: Readonly<
+  { _global: readonly string[] } & Record<string, readonly string[] | undefined>
+> = {
   _global: ['id', 'lang', 'dir', 'translate', 'title', 'role'],
   a: ['href', 'target', 'rel', 'hreflang'],
   img: ['src', 'alt', 'width', 'height', 'loading', 'decoding'],
