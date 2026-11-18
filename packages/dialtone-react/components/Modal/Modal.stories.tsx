@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
+import { useArgs } from 'storybook/preview-api';
 import { cx } from '../../common/cx';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
 import { DtButton } from '../Button';
@@ -281,13 +282,10 @@ const dropdownItems = ['First item', 'Second item', 'Third item'];
 const comboboxItems = ['Apple', 'Banana', 'Cherry'];
 
 // ModalWithOverlays.story.vue
-function ModalWithOverlays ({ open }: ModalStoryArgs) {
-  const [isOpen, setIsOpen] = useState(open ?? false);
-
-  // Follow the `open` control, as ModalDefault does.
-  useEffect(() => {
-    setIsOpen(open ?? false);
-  }, [open]);
+function ModalWithOverlays ({ open, onOpenChange }: { open?: boolean, onOpenChange: (open: boolean) => void }) {
+  // `open` is the Storybook arg itself, so the Controls panel always matches the dialog.
+  const isOpen = open ?? false;
+  const setIsOpen = onOpenChange;
 
   const [comboboxValue, setComboboxValue] = useState('');
 
@@ -508,7 +506,11 @@ export const WithTransparentBackdrop: Story = {
 };
 
 export const WithOverlays: Story = {
-  render: args => <ModalWithOverlays {...args} />,
+  // The hook has to run in the story function: Storybook's hooks don't work inside a component.
+  render: function Render (args) {
+    const [, updateArgs] = useArgs<ModalStoryArgs>();
+    return <ModalWithOverlays open={args.open} onOpenChange={open => updateArgs({ open })} />;
+  },
 
   args: {},
 
