@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useInsertionEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { devWarn } from '../dev';
 import type { ValidationMessageType } from '../constants';
 import type { ClassValue } from '../cx';
 import { useControllableState } from '../hooks/useControllableState';
@@ -106,7 +107,7 @@ export function useInputGroup (
     if (checked.current) return;
     checked.current = true;
     if ((legend == null || legend === '') && !ariaLabel) {
-      console.warn('It is expected that an aria-label is provided when there is no legend.');
+      devWarn('It is expected that an aria-label is provided when there is no legend.');
     }
   }, [legend, ariaLabel]);
 
