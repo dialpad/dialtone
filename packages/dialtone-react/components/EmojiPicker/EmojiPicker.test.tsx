@@ -511,6 +511,23 @@ describe('DtEmojiPicker Tests', () => {
       expect(results[0]).toHaveClass('hover-emoji');
     });
 
+    it('Should highlight the first result again when the previous search returns before the debounce', () => {
+      vi.useFakeTimers();
+      mockProps = { searchQuery: '' };
+      updateWrapper();
+
+      setProps({ searchQuery: 'tube' });
+      act(() => { vi.advanceTimersByTime(300); });
+      setProps({ searchQuery: '' });
+      setProps({ searchQuery: 'tube' });
+      act(() => { vi.advanceTimersByTime(300); });
+
+      fireEvent.keyDown(searchInput(), { key: 'Enter' });
+
+      expect(onSelectedEmoji).toHaveBeenCalledTimes(1);
+      expect(onSelectedEmoji.mock.calls[0][0]).not.toBeNull();
+    });
+
     it('Should select the tab clicked and clear the search', async () => {
       const user = userEvent.setup();
 

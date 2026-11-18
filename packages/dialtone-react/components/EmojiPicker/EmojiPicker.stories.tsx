@@ -159,7 +159,7 @@ function EmojiPickerDefault (args: EmojiPickerStoryArgs) {
 // EmojiPickerPopover.story.vue
 function EmojiPickerWithPopover (args: EmojiPickerStoryArgs) {
   const [skinTone, setSkinTone] = useState<EmojiPickerSkinTone>('Default');
-  const [emojiPickerOpened, setEmojiPickerOpened] = useState(false);
+  const [emojiPickerOpened, setEmojiPickerOpened] = useState(args.showPopover ?? false);
 
   const toggleEmojiPicker = () => {
     setEmojiPickerOpened(opened => !opened);

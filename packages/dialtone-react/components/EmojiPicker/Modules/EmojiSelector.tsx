@@ -83,6 +83,14 @@ function getImgSrc (emoji: EmojiPickerEmoji) {
 }
 
 /**
+ * Identifies an emoji of a tab, for React and for the buttons whose image failed. `shortname` is optional, so an
+ * emoji without one falls back to its position and can't hide another.
+ */
+function imageKey (indexTab: number, emoji: EmojiPickerEmoji, indexEmoji: number) {
+  return `${indexTab}:${emoji.shortname ?? `#${indexEmoji}`}`;
+}
+
+/**
  * Filters an array of emoji objects based on a search string that matches both the name and keywords.
  */
 function searchByNameAndKeywords (currentEmojis: readonly EmojiPickerEmoji[], filter: string) {
@@ -253,13 +261,15 @@ export function EmojiSelector ({
     prevFilter.current = emojiFilter;
     onFilterChange();
   }, [emojiFilter]);
-  // A search that already used the current filter (the timeout below, or a skin tone change) needs no other.
-  const searchedFilter = search.filter;
+  // Every change of the filter searches again after the debounce, even back to the filter the results already
+  // hold: the search hovers its first result, which clearing the filter had removed. Not on mount, as Vue's watcher.
+  const debouncedFilter = useRef(emojiFilter);
   useEffect(() => {
-    if (searchedFilter === emojiFilter) return;
+    if (debouncedFilter.current === emojiFilter) return;
+    debouncedFilter.current = emojiFilter;
     const timeout = setTimeout(() => setSearch({ filter: emojiFilter }), debounceDelay);
     return () => clearTimeout(timeout);
-  }, [emojiFilter, searchedFilter]);
+  }, [emojiFilter]);
 
   // Vue's nextTick after each search: hover the first result of a non-empty search.
   const onSearched = useEffectEvent(() => {
@@ -443,12 +453,12 @@ export function EmojiSelector ({
               <div className="d-emoji-picker__tab">
                 {tabEmojis.map((emoji, indexEmoji) => (
                   <button
-                    key={emoji.shortname}
+                    key={imageKey(indexTab, emoji, indexEmoji)}
                     ref={el => (el ? setEmojiRef(el, indexTab, indexEmoji) : undefined)}
                     data-qa="dt-emoji-picker-emoji"
                     type="button"
                     aria-label={emoji.name}
-                    style={brokenImages.has(`${indexTab}:${emoji.shortname}`) ? { display: 'none' } : undefined}
+                    style={brokenImages.has(imageKey(indexTab, emoji, indexEmoji)) ? { display: 'none' } : undefined}
                     onClick={event => selectEmoji(emoji, event)}
                     onFocus={() => highlightEmoji(emoji)}
                     onBlur={() => highlightEmoji(null)}
@@ -462,7 +472,7 @@ export function EmojiSelector ({
                       aria-label={emoji.name}
                       title={emoji.name}
                       src={getImgSrc(emoji)}
-                      onError={() => handleImageError(`${indexTab}:${emoji.shortname}`)}
+                      onError={() => handleImageError(imageKey(indexTab, emoji, indexEmoji))}
                     />
                   </button>
                 ))}
