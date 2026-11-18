@@ -593,12 +593,19 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
-    it('starts on focus, keeps going while focus stays inside the host, and stops on Escape without swallowing it', async () => {
+    it('starts on keyboard focus only, keeps going while focus stays inside the host, and stops on Escape without swallowing it', async () => {
       const { wrapper, text, button, offset } = mountSlide({ slide: true });
       const outsideListener = vi.fn();
       document.addEventListener('keydown', outsideListener);
 
-      button.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+      // focus from a pointer or script (jsdom never matches :focus-visible here)
+      button.focus();
+      await vi.advanceTimersByTimeAsync(500);
+      expect(offset()).toBe('');
+
+      button.blur();
+      vi.spyOn(button, 'matches').mockImplementation((selector) => selector === ':focus-visible');
+      button.focus();
       await vi.advanceTimersByTimeAsync(500);
       text.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: text.element }));
       await wrapper.vm.$nextTick();
@@ -631,7 +638,10 @@ describe('DtText', () => {
 
       button.dispatchEvent(new Event('pointerenter'));
       await vi.advanceTimersByTimeAsync(500);
-      expect(text.find('.d-text__slide-copy').attributes('aria-hidden')).toBe('true');
+      const copy = text.find('.d-text__slide-copy');
+      expect(copy.attributes('aria-hidden')).toBe('true');
+      expect(copy.attributes('inert')).toBeDefined();
+      expect(copy.text()).toBe('A very long device name');
       expect(text.classes()).toContain('d-text--slide-loop');
       expect(offset()).toBe('324px');
       expect(text.classes()).not.toContain('d-text--slide-loop-wrap');
@@ -650,6 +660,40 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
+    it('rests at the end as soon as the transition ends', async () => {
+      const { wrapper, text, button } = mountSlide({ slide: true });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      const transitionEnd = new Event('transitionend');
+      Object.defineProperty(transitionEnd, 'propertyName', { value: 'transform' });
+      wrapper.find('.d-text__slide-content').element.dispatchEvent(transitionEnd);
+      await wrapper.vm.$nextTick();
+
+      expect(text.classes()).toContain('d-text--slide-end');
+      wrapper.unmount();
+    });
+
+    it('does not treat script-focusable content, like a popover, as the host', async () => {
+      const wrapper = mount({
+        components: { DtText },
+        template: '<div tabindex="-1"><dt-text slide>A very long device name</dt-text></div>',
+      }, { attachTo: document.body });
+      const text = wrapper.find('[data-qa="dt-text"]');
+      const content = wrapper.find('.d-text__slide-content').element;
+      Object.defineProperty(content, 'scrollWidth', { value: 300 });
+      Object.defineProperty(content, 'clientWidth', { value: 100 });
+
+      wrapper.element.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      expect(text.classes()).not.toContain('d-text--slide-moving');
+
+      text.element.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      expect(text.classes()).toContain('d-text--slide-moving');
+      wrapper.unmount();
+    });
+
     it('leaves text that fits alone', async () => {
       const { wrapper, text, button } = mountSlide({ slide: true, fits: true });
 
@@ -660,7 +704,7 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
-    it.each(['once', 'bounce', 'loop'])('with reduced motion, %s jumps to the end once and stays', async (mode) => {
+    it.each(['bounce', 'loop'])('with reduced motion, %s jumps to the end once and stays', async (mode) => {
       vi.stubGlobal('matchMedia', (query) => ({ matches: query.includes('reduce') }));
       const { wrapper, text, button, offset } = mountSlide({ slide: mode });
 

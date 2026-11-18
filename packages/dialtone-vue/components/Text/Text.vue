@@ -13,14 +13,14 @@
     >
       <!-- @slot Default slot for text content -->
       <slot />
+      <!-- loop only: filled with a static clone of the text while it moves -->
       <span
         v-if="slideCopy"
         ref="slideCopyEl"
         aria-hidden="true"
+        inert
         class="d-text__slide-copy"
-      >
-        <slot />
-      </span>
+      />
     </span>
     <slot v-else />
   </component>
@@ -264,12 +264,10 @@ export default {
     },
 
     /**
-     * Slides overflowing single-line text into view while the text, or the closest focusable
-     * element around it (button, link, menu item), is hovered or focused. `true` is the same as
-     * `once`. Ignores `maxLines` and `wrap`. Tune with the CSS custom properties
-     * `--dt-text-slide-speed` (px per second), `--dt-text-slide-delay`, `--dt-text-slide-hold`,
-     * `--dt-text-slide-easing`, `--dt-text-slide-fade-size` and `--dt-text-slide-gap`.
-     * Requires block/inline-block context.
+     * Slides overflowing single-line text into view while the text, or the item around it
+     * (button, link, menu item), is hovered or has keyboard focus. `true` is the same as `once`.
+     * Renders as a block and replaces `truncate`, `maxLines` and `wrap`. Tune with the
+     * `--dt-text-slide-*` CSS custom properties listed in the DtText docs.
      * @values true, false, once, bounce, loop
      */
     slide: {
@@ -377,7 +375,10 @@ export default {
     },
 
     slideMode() {
-      return this.slide === true ? 'once' : (this.slide || null);
+      if (TEXT_SLIDE_MODES.includes(this.slide)) {
+        return this.slide;
+      }
+      return this.slide ? 'once' : null;
     },
 
     slideIsMoving() {
@@ -394,28 +395,30 @@ export default {
     },
   },
 
-  watch: {
-    slide: {
-      // after render, so the inner span exists when slide turns on
-      handler() {
-        this.setupSlide();
-      },
-
-      flush: 'post',
-    },
-  },
-
   created() {
     // non-reactive slide bookkeeping
     this.slideRuntime = { unbind: null, timers: [], distance: 0, restWidth: 0 };
+    // after render, so the inner span and a new root (`as`) exist
+    this.$watch(() => [this.slideMode, this.as], this.setupSlide, { flush: 'post' });
   },
 
   beforeUnmount() {
     this.teardownSlide();
   },
 
-  mounted() {
+  // inside KeepAlive the host can vanish without a pointerleave or focusout
+  activated() {
     this.setupSlide();
+  },
+
+  deactivated() {
+    this.teardownSlide();
+  },
+
+  mounted() {
+    if (this.slideMode) {
+      this.setupSlide();
+    }
 
     // Emit info once per session when headline is used without semantic heading element
     if (
@@ -439,6 +442,7 @@ export default {
       }
 
       if (!hasWarnedSlideConflict && (this.maxLines || this.wrap)) {
+        // eslint-disable-next-line no-console
         console.warn('[DtText] slide ignores maxLines and wrap.');
         hasWarnedSlideConflict = true;
       }
@@ -520,12 +524,17 @@ export default {
       if (!this.slideCopy) {
         return;
       }
+      const { slideContent: content, slideCopyEl: copy } = this.$refs;
+      // a static clone: slot components do not mount twice, and no ids or tab stops repeat
+      const original = [...content.childNodes].filter((node) => node !== copy);
+      copy.replaceChildren(...original.map((node) => node.cloneNode(true)));
+      copy.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
       const { restWidth } = this.slideRuntime;
-      const distance = this.$refs.slideContent.scrollWidth - restWidth;
+      const distance = content.scrollWidth - restWidth;
       const duration = this.slideMove('loop-moving', distance);
       // the start edge fades while the text slides out, then clears once the gap is
       // half past it, before the copy arrives (the scroll is linear, so time = distance)
-      const gap = parseFloat(getComputedStyle(this.$refs.slideCopyEl).paddingInlineStart) || 0;
+      const gap = parseFloat(getComputedStyle(copy).paddingInlineStart) || 0;
       this.slideAfter(duration * (restWidth + gap / 2) / distance, () => { this.slideLoopWrap = true; });
     },
 

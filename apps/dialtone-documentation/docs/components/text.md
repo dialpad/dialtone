@@ -364,12 +364,12 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 
 ## Slide
 
-`slide` shows cut-off text in full by sliding it sideways while the text, or the closest focusable element around it (button, link, menu item), is hovered or has keyboard focus. Leaving or pressing Esc snaps it back. Text that fits never moves. Like `truncate`, it needs block or inline-block context, and it replaces `truncate`, `maxLines` and `wrap`.
+`slide` shows cut-off text in full by sliding it sideways while the text, or the item around it (button, link, menu item), is hovered or has keyboard focus. Leaving or pressing Esc snaps it back. Text that fits never moves. The text renders as a block that can shrink inside a flex row, and `slide` replaces `truncate`, `maxLines` and `wrap`.
 
 ```vue demo
 <div class="d-w224">
-  <button type="button" class="d-w100p">
-    <dt-text as="div" variant="label-md" slide>Front desk reception phone, second floor east wing</dt-text>
+  <button type="button" class="d-d-flex d-w100p">
+    <dt-text variant="label-md" slide>Front desk reception phone, second floor east wing</dt-text>
   </button>
 </div>
 ```
@@ -380,9 +380,9 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 | `bounce` | Slides to the end and back, holding 1 s at each end. |
 | `loop` | Scrolls round like a ticker with a gap before the repeat, holds 5 s, then goes again. |
 
-Each movement takes at most 3 s (`loop`: 5 s), and every mode stops as soon as hover and focus leave, so moving content never runs on its own for more than 5 s (WCAG 2.2.2). With reduced motion on, the text jumps to its end and stays.
+Motion only runs while the user points at the item or it has keyboard focus, each movement takes at most 3 s (`loop`: 5 s), and Esc stops it (WCAG 2.2.2). With reduced motion on, the text jumps to its end and stays.
 
-`DtText` never adds a tab stop. Put the text inside something focusable so keyboard users can reveal it; plain text with nothing focusable around it slides on hover only, so give its full content another way too.
+`DtText` never adds a tab stop. Put the text inside an item (button, link, or an element with an item role such as `menuitem` or `option`) so keyboard users can reveal it; a container that is only focusable by script, such as popover content, does not count. Plain text with no item around it slides on hover only, so give its full content another way too.
 
 The defaults need no setup. To tune a menu, a sidebar or one element, set these CSS variables on it or any ancestor:
 

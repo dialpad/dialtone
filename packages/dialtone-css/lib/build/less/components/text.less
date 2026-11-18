@@ -354,18 +354,12 @@
     //  $   SLIDE
     //  ----------------------------------------------------------------------------
     //  Slides overflowing single-line text into view (DtText `slide`). The root clips
-    //  and fades; one inner span moves with transform (flipped for RTL).
-    //  Requires block/inline-block context, like truncate.
-    //
-    //  Public custom properties (set on the element or any ancestor):
-    //    --dt-text-slide-speed      px per second, read by JS (default 40)
-    //    --dt-text-slide-delay      time before the first move (default 500ms)
-    //    --dt-text-slide-hold       pause at each end; bounce 1000ms, loop 5000ms
-    //    --dt-text-slide-easing     easing for once/bounce
-    //    --dt-text-slide-fade-size  size of the edge fade
-    //    --dt-text-slide-gap        space before the second copy in loop mode
+    //  and fades; one inner span moves with transform (flipped for RTL). Tuned with
+    //  the --dt-text-slide-* custom properties documented on the DtText docs page.
 
     &--slide {
+      display: block;
+      min-inline-size: 0; // shrink inside flex rows so the text can overflow
       overflow: hidden;
       white-space: nowrap;
       mask-image: var(--_slide-mask, none);

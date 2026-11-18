@@ -260,7 +260,6 @@ export default {
     },
   },
 
-
   'Sliding label': {
     attributes: {
       class: { initialValue: 'd-w224' },
@@ -272,7 +271,6 @@ export default {
     },
     props: {
       variant: { initialValue: 'label-md' },
-      as: { initialValue: 'div' },
       slide: { initialValue: 'once' },
     },
   },

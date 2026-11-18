@@ -1,6 +1,11 @@
 // Private helpers for the DtText `slide` option. Framework-free: nothing here
 // touches Vue, so Text.vue only calls into it when `slide` is on.
-import { FOCUSABLE_SELECTOR } from '../../common/utils';
+
+// What a user points at or tabs to as one item. A container that is only focusable by
+// script (popover content with tabindex="-1") is not a host; a roving menu item with
+// tabindex="-1" still is, through its role.
+const HOST_ROLES = ['button', 'link', 'menuitem', 'menuitemcheckbox', 'menuitemradio', 'option', 'tab', 'treeitem', 'row', 'gridcell'];
+const HOST_SELECTOR = ['a[href]', 'button', 'summary', '[tabindex]:not([tabindex="-1"])', ...HOST_ROLES.map((role) => `[role="${role}"]`)].join(',');
 
 const DEFAULT_SPEED = 40; // px per second
 const DEFAULT_DELAY = 500; // ms
@@ -11,11 +16,21 @@ const DEFAULT_HOLD = { bounce: 1000, loop: 5000 }; // ms
 const MAX_MOVEMENT = { once: 3000, bounce: 3000, loop: 5000 };
 
 /**
- * The element whose hover/focus drives the slide: the closest focusable
- * ancestor (button, link, menu item...) or the text itself.
+ * The element whose hover/focus drives the slide: the closest item around
+ * the text (button, link, menu item...) or the text itself.
  */
 export function getSlideHost (el) {
-  return el.closest(FOCUSABLE_SELECTOR) || el;
+  return el.closest(HOST_SELECTOR) || el;
+}
+
+// Keyboard focus only: a menu that focuses the hovered row, or a clicked button that
+// keeps focus, must not keep the label moving after the pointer leaves.
+function isKeyboardFocus (target) {
+  try {
+    return target.matches(':focus-visible');
+  } catch {
+    return true;
+  }
 }
 
 /**
@@ -34,7 +49,7 @@ export function bindSlide ({ el, moveEl, onEnter, onLeave, onTransitionEnd }) {
   const handlers = {
     pointerenter: () => set('pointer', true),
     pointerleave: () => set('pointer', false),
-    focusin: () => set('focus', true),
+    focusin: (event) => isKeyboardFocus(event.target) && set('focus', true),
     focusout: (event) => host.contains(event.relatedTarget) || set('focus', false),
     keydown: (event) => event.key === 'Escape' && onLeave(),
   };

@@ -24,10 +24,8 @@
         class="slide-row d-d-flex d-w100p d-p-200 d-bar-200"
       >
         <dt-text
-          as="div"
           variant="label-md"
           :slide="$attrs.slide"
-          class="slide-label"
         >
           {{ label }}
         </dt-text>
@@ -68,10 +66,6 @@ export default {
 </script>
 
 <style scoped>
-.slide-label {
-  min-inline-size: 0;
-}
-
 .slide-row {
   border: 0;
   background: transparent;
