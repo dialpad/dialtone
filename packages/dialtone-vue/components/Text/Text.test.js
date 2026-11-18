@@ -540,4 +540,40 @@ describe('DtText', () => {
       expect(wrapper.classes()).not.toContain(TEXT_ITALIC_CLASS);
     });
   });
+
+
+  describe('slide', () => {
+    afterEach(() => {
+      vi.useRealTimers();
+      document.body.innerHTML = '';
+    });
+
+    it('slides cut text to its end while the button around it is hovered, and snaps back on leave', async () => {
+      vi.useFakeTimers();
+      const wrapper = mount({
+        components: { DtText },
+        template: '<button type="button"><dt-text as="div" slide>A very long device name</dt-text></button>',
+      }, { attachTo: document.body });
+      const button = wrapper.find('button').element;
+      const text = wrapper.find('[data-qa="dt-text"]');
+      const content = wrapper.find('.d-text__slide-content').element;
+      Object.defineProperty(content, 'scrollWidth', { value: 300 });
+      Object.defineProperty(content, 'clientWidth', { value: 100 });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(500);
+
+      expect(text.classes()).toContain('d-text--slide-moving');
+      expect(text.element.style.getPropertyValue('--_slide-offset')).toBe('200px');
+      expect(text.attributes('tabindex')).toBeUndefined();
+      expect(button.hasAttribute('tabindex')).toBe(false);
+
+      button.dispatchEvent(new Event('pointerleave'));
+      await wrapper.vm.$nextTick();
+
+      expect(text.classes()).not.toContain('d-text--slide-moving');
+      expect(text.element.style.getPropertyValue('--_slide-offset')).toBe('');
+      wrapper.unmount();
+    });
+  });
 });

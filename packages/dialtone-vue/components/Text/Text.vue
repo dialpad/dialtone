@@ -5,8 +5,23 @@
     :class="textClasses"
     :style="textStyles"
   >
-    <!-- @slot Default slot for text content -->
-    <slot />
+    <!-- the slide moves one inner span with transform; the root stays still and clips -->
+    <span
+      v-if="slideMode"
+      ref="slideContent"
+      class="d-text__slide-content"
+    >
+      <!-- @slot Default slot for text content -->
+      <slot />
+      <span
+        v-if="slideCopy"
+        aria-hidden="true"
+        class="d-text__slide-copy"
+      >
+        <slot />
+      </span>
+    </span>
+    <slot v-else />
   </component>
 </template>
 
@@ -29,13 +44,21 @@ import {
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
+  TEXT_SLIDE_MODES,
 } from './TextConstants';
+import {
+  bindSlide,
+  getSlideDuration,
+  prefersReducedMotion,
+  readSlideConfig,
+} from './slide';
 
 const DEFAULT_SIZE = '300';
 const SEMANTIC_HEADING_ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
 // Module-level flag to emit info only once per session
 let hasEmittedHeadlineSemanticInfo = false;
+let hasWarnedSlideConflict = false;
 
 // Exported for testing purposes only
 export const resetHeadlineSemanticInfoFlag = () => {
@@ -238,6 +261,33 @@ export default {
         );
       },
     },
+
+    /**
+     * Slides overflowing single-line text into view while the text, or the closest focusable
+     * element around it (button, link, menu item), is hovered or focused. `true` is the same as
+     * `once`. Ignores `maxLines` and `wrap`. Tune with the CSS custom properties
+     * `--dt-text-slide-speed` (px per second), `--dt-text-slide-delay`, `--dt-text-slide-hold`,
+     * `--dt-text-slide-easing`, `--dt-text-slide-fade-size` and `--dt-text-slide-gap`.
+     * Requires block/inline-block context.
+     * @values true, false, once, bounce, loop
+     */
+    slide: {
+      type: [Boolean, String],
+      default: false,
+      validator: (value) => {
+        return typeof value === 'boolean' || TEXT_SLIDE_MODES.includes(value);
+      },
+    },
+  },
+
+  data() {
+    return {
+      // rest | waiting | moving-forward | at-end | moving-back | at-start | loop-moving
+      slidePhase: 'rest',
+      slideOffset: 0,
+      slideDuration: 0,
+      slideCopy: false,
+    };
   },
 
   computed: {
@@ -272,7 +322,18 @@ export default {
         classes.push(toneClass);
       }
 
-      if (this.truncate) {
+      if (this.slideMode) {
+        classes.push('d-text--slide');
+        if (this.slideIsMoving) {
+          classes.push('d-text--slide-moving');
+        }
+        if (this.slidePhase === 'at-end') {
+          classes.push('d-text--slide-end');
+        }
+        if (this.slidePhase === 'loop-moving') {
+          classes.push('d-text--slide-loop');
+        }
+      } else if (this.truncate) {
         classes.push(TEXT_TRUNCATE_CLASS);
       }
 
@@ -280,11 +341,11 @@ export default {
         classes.push(TEXT_NUMERIC_CLASS);
       }
 
-      if (this.maxLines) {
+      if (this.maxLines && !this.slideMode) {
         classes.push(TEXT_LINE_CLAMP_CLASS);
       }
 
-      const wrapClass = this.getWrapClass();
+      const wrapClass = this.slideMode ? null : this.getWrapClass();
       if (wrapClass) {
         classes.push(wrapClass);
       }
@@ -308,17 +369,51 @@ export default {
     },
 
     textStyles() {
-      if (!this.maxLines) {
-        return undefined;
+      const styles = {};
+
+      if (this.maxLines && !this.slideMode) {
+        styles['--dt-text-line-clamp'] = this.maxLines;
       }
 
-      return {
-        '--dt-text-line-clamp': this.maxLines,
-      };
+      if (this.slideMode && this.slidePhase !== 'rest') {
+        styles['--_slide-offset'] = `${this.slideOffset}px`;
+        styles['--_slide-duration'] = `${this.slideDuration}ms`;
+      }
+
+      return Object.keys(styles).length ? styles : undefined;
+    },
+
+    slideMode() {
+      return this.slide === true ? 'once' : (this.slide || null);
+    },
+
+    slideIsMoving() {
+      return ['moving-forward', 'moving-back', 'loop-moving'].includes(this.slidePhase);
     },
   },
 
+  watch: {
+    slide: {
+      // after render, so the inner span exists when slide turns on
+      handler() {
+        this.setupSlide();
+      },
+      flush: 'post',
+    },
+  },
+
+  created() {
+    // non-reactive slide bookkeeping
+    this.slideRuntime = { unbind: null, timers: [], distance: 0, restWidth: 0 };
+  },
+
+  beforeUnmount() {
+    this.teardownSlide();
+  },
+
   mounted() {
+    this.setupSlide();
+
     // Emit info once per session when headline is used without semantic heading element
     if (
       !hasEmittedHeadlineSemanticInfo &&
@@ -334,6 +429,132 @@ export default {
   },
 
   methods: {
+    setupSlide() {
+      this.teardownSlide();
+      if (!this.slideMode) {
+        return;
+      }
+
+      if (!hasWarnedSlideConflict && (this.maxLines || this.wrap)) {
+        console.warn('[DtText] slide ignores maxLines and wrap.');
+        hasWarnedSlideConflict = true;
+      }
+
+      this.slideRuntime.unbind = bindSlide({
+        el: this.$el,
+        moveEl: this.$refs.slideContent,
+        onEnter: this.slideEnter,
+        onLeave: this.slideReset,
+        onEscape: this.slideReset,
+        onTransitionEnd: this.slideMoveDone,
+      });
+    },
+
+    teardownSlide() {
+      this.slideRuntime.unbind?.();
+      this.slideRuntime.unbind = null;
+      this.slideReset();
+    },
+
+    slideSetTimer(fn, ms) {
+      this.slideRuntime.timers.push(setTimeout(fn, ms));
+    },
+
+    slideClearTimers() {
+      this.slideRuntime.timers.forEach(clearTimeout);
+      this.slideRuntime.timers = [];
+    },
+
+    // snap to rest, no reverse animation
+    slideReset() {
+      this.slideClearTimers();
+      this.slidePhase = 'rest';
+      this.slideOffset = 0;
+      this.slideDuration = 0;
+      this.slideCopy = false;
+    },
+
+    slideEnter() {
+      const el = this.$refs.slideContent;
+      const distance = el.scrollWidth - el.clientWidth;
+      if (this.slidePhase !== 'rest' || distance <= 0) {
+        return;
+      }
+
+      this.slideRuntime.distance = distance;
+      this.slideRuntime.restWidth = el.scrollWidth;
+      this.slidePhase = 'waiting';
+      this.slideSetTimer(this.slideStart, readSlideConfig(this.$el, this.slideMode).delay);
+    },
+
+    slideStart() {
+      if (prefersReducedMotion()) {
+        this.slidePhase = 'at-end';
+        this.slideDuration = 0;
+        this.slideOffset = this.slideRuntime.distance;
+      } else if (this.slideMode === 'loop') {
+        this.slideLoop();
+      } else {
+        this.slideForward();
+      }
+    },
+
+    slideMove(phase, offset, distance) {
+      const { speed } = readSlideConfig(this.$el, this.slideMode);
+      const duration = getSlideDuration(distance, speed, this.slideMode);
+      this.slideClearTimers();
+      this.slidePhase = phase;
+      this.slideOffset = offset;
+      this.slideDuration = duration;
+      // in case transitionend does not fire
+      this.slideSetTimer(this.slideMoveDone, duration + 100);
+    },
+
+    slideForward() {
+      this.slideMove('moving-forward', this.slideRuntime.distance, this.slideRuntime.distance);
+    },
+
+    slideBack() {
+      this.slideMove('moving-back', 0, this.slideRuntime.distance);
+    },
+
+    async slideLoop() {
+      // the copy has to be in the DOM to measure the full wrap-around distance
+      this.slideCopy = true;
+      await this.$nextTick();
+      if (!this.slideCopy) {
+        return;
+      }
+      const distance = this.$refs.slideContent.scrollWidth - this.slideRuntime.restWidth;
+      this.slideMove('loop-moving', distance, distance);
+    },
+
+    slideMoveDone() {
+      const phase = this.slidePhase;
+      if (!this.slideIsMoving) {
+        return;
+      }
+      this.slideClearTimers();
+      const { hold } = readSlideConfig(this.$el, this.slideMode);
+
+      if (phase === 'moving-forward') {
+        this.slidePhase = 'at-end';
+        if (this.slideMode === 'bounce') {
+          this.slideSetTimer(this.slideBack, hold);
+        }
+      } else if (phase === 'moving-back') {
+        this.slidePhase = 'at-start';
+        this.slideSetTimer(this.slideForward, hold);
+      } else {
+        // loop: the copy now sits exactly where the text started, so snap back unseen
+        this.slidePhase = 'at-start';
+        this.slideOffset = 0;
+        this.slideDuration = 0;
+        this.slideCopy = false;
+        this.slideSetTimer(this.slideLoop, hold);
+      }
+    },
+
     usesHeadlineVisualStyle() {
       if (this.variant) {
         return this.variant.startsWith('headline-');

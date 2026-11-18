@@ -150,6 +150,8 @@ export const TEXT_STRENGTH_MODIFIERS = {
   normal: 'd-text--fw-normal',
 };
 
+export const TEXT_SLIDE_MODES = ['once', 'bounce', 'loop'];
+
 export const TEXT_DENSITY_MODIFIERS = {
   100: 'd-text--lh-100',
   200: 'd-text--lh-200',
@@ -176,4 +178,5 @@ export default {
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
+  TEXT_SLIDE_MODES,
 };

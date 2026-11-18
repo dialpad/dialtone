@@ -12,6 +12,7 @@
     :align="$attrs.align"
     :truncate="$attrs.truncate"
     :max-lines="$attrs.maxLines"
+    :slide="$attrs.slide"
     :numeric="$attrs.numeric"
     :wrap="$attrs.wrap"
     :text-box-trim="$attrs.textBoxTrim"

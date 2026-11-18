@@ -9,6 +9,7 @@
 //  • LINE CLAMP
 //  • WRAP
 //  • TRIM
+//  • SLIDE
 //  • FONT STYLE MODIFIERS
 //
 @layer dialtone.components {
@@ -347,6 +348,84 @@
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
       }
+    }
+
+    //  ============================================================================
+    //  $   SLIDE
+    //  ----------------------------------------------------------------------------
+    //  Slides overflowing single-line text into view (DtText `slide`). The root clips
+    //  and fades; one inner span moves with transform (flipped for RTL).
+    //  Requires block/inline-block context, like truncate.
+    //
+    //  Public custom properties (set on the element or any ancestor):
+    //    --dt-text-slide-speed      px per second, read by JS (default 40)
+    //    --dt-text-slide-delay      time before the first move (default 500ms)
+    //    --dt-text-slide-hold       pause at each end; bounce 1000ms, loop 5000ms
+    //    --dt-text-slide-easing     easing for once/bounce
+    //    --dt-text-slide-fade-size  size of the edge fade
+    //    --dt-text-slide-gap        space before the second copy in loop mode
+
+    &--slide {
+      overflow: hidden;
+      white-space: nowrap;
+      mask-image: var(--_slide-mask, none);
+
+      &:where(:dir(rtl)) {
+        --_slide-fade-direction: to left;
+        --_slide-sign: 1;
+      }
+    }
+
+    // the part that moves: carries the ellipsis at rest, slides with transform
+    // (text-indent was tried first; Chrome did not repaint it reliably)
+    &__slide-content {
+      display: block;
+      overflow: var(--_slide-content-overflow, hidden);
+      text-overflow: var(--_slide-overflow, ellipsis);
+      transform: translateX(calc(var(--_slide-sign, -1) * var(--_slide-offset, 0px)));
+      transition: transform var(--_slide-duration, 0ms) var(--_slide-easing, var(--dt-text-slide-easing, cubic-bezier(0.25, 0.46, 0.45, 0.94)));
+    }
+
+    // moving: no ellipsis, the text can leave the inner box, both edges fade
+    &--slide-moving {
+      --_slide-overflow: clip;
+      --_slide-content-overflow: visible;
+      --_slide-fade-size: var(--dt-text-slide-fade-size, var(--dt-layout-100));
+      --_slide-mask: linear-gradient(
+        var(--_slide-fade-direction, to right),
+        transparent,
+        #000 var(--_slide-fade-size),
+        #000 calc(100% - var(--_slide-fade-size)),
+        transparent
+      );
+    }
+
+    // resting at the end: only the start edge fades
+    &--slide-end {
+      --_slide-overflow: clip;
+      --_slide-content-overflow: visible;
+      --_slide-fade-size: var(--dt-text-slide-fade-size, var(--dt-layout-100));
+      --_slide-mask: linear-gradient(
+        var(--_slide-fade-direction, to right),
+        transparent,
+        #000 var(--_slide-fade-size)
+      );
+    }
+
+    // loop: steady scroll, and only the end edge fades so the gap and the copy
+    // come in clean at the start edge (the user asked for no start fade here)
+    &--slide-loop {
+      --_slide-easing: linear;
+      --_slide-mask: linear-gradient(
+        var(--_slide-fade-direction, to right),
+        #000 calc(100% - var(--_slide-fade-size)),
+        transparent
+      );
+    }
+
+    // second copy of the text, only rendered while a loop movement runs
+    &__slide-copy {
+      padding-inline-start: var(--dt-text-slide-gap, var(--dt-spacing-400));
     }
 
     //  ============================================================================
