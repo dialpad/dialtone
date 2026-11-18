@@ -44,7 +44,9 @@ interface DtTextListOwnProps {
 }
 
 /** Own props plus those of the list element (`ref` reaches the `ul` or `ol`). */
-export type DtTextListProps = DtTextListOwnProps & Omit<ComponentPropsWithRef<'ul'>, keyof DtTextListOwnProps>;
+export type DtTextListProps = DtTextListOwnProps
+  & Omit<ComponentPropsWithRef<'ul'>, keyof DtTextListOwnProps | 'ref'>
+  & { ref?: Ref<HTMLUListElement | HTMLOListElement> };
 
 const warn = (message: string) => console.warn(`[DtTextList] ${message}`);
 
@@ -62,6 +64,7 @@ export function DtTextList ({
   className,
   children,
   ref,
+  role: roleProp,
   ...rest
 }: DtTextListProps) {
   const listRef = useRef<HTMLElement | null>(null);
@@ -79,7 +82,8 @@ export function DtTextList ({
   const isOrdered = type === 'ordered';
   const ListElement: ElementType = isOrdered ? 'ol' : 'ul';
   // Safari drops list semantics when list-style is none; restore them explicitly.
-  const role = marker === 'none' ? 'list' : undefined;
+  // An explicit role wins; an undefined one keeps the fallback.
+  const role = roleProp ?? (marker === 'none' ? 'list' : undefined);
 
   // Vue's mounted() checks: once per instance, so neither prop changes nor StrictMode repeat them.
   const validated = useRef(false);

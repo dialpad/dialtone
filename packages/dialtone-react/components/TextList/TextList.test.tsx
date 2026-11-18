@@ -331,7 +331,7 @@ describe('DtTextList', () => {
         <DtTextListItem>
           Parent
           <DtTextList type="ordered">
-            <DtTextListItem>Nested ordered item</DtTextListItem>
+            <DtTextListItem value={5}>Nested ordered item</DtTextListItem>
           </DtTextList>
         </DtTextListItem>,
       );
@@ -342,6 +342,23 @@ describe('DtTextList', () => {
       expect(lists.some(item => item.tagName === 'UL')).toBe(true);
       expect(orderedList).toBeInTheDocument();
       expect(orderedList!.querySelectorAll('[data-qa="dt-text-list-item"]')).toHaveLength(1);
+      // The nested item reads the nearest (ordered) provider, not the outer unordered one.
+      expect(orderedList!.querySelector('li')).toHaveAttribute('value', '5');
+    });
+
+    it('keeps the list role fallback when role is undefined, and lets an explicit role win', () => {
+      updateWrapper({ marker: 'none', role: undefined });
+      expect(list()).toHaveAttribute('role', 'list');
+
+      updateWrapper({ marker: 'none', role: 'presentation' });
+      expect(list()).toHaveAttribute('role', 'presentation');
+    });
+
+    it('treats an empty fragment marker as no custom marker', () => {
+      updateWrapper({}, <DtTextListItem marker={<></>}>Empty marker</DtTextListItem>);
+
+      expect(document.querySelector('[data-qa="dt-text-list-item-marker"]')).not.toBeInTheDocument();
+      expect(textListItems()[0]).not.toHaveClass('d-text-list__item--custom-marker');
     });
   });
 });

@@ -1,4 +1,6 @@
-import { useEffect, useRef, type ComponentPropsWithRef, type ReactNode } from 'react';
+import {
+  Children, Fragment, isValidElement, useEffect, useRef, type ComponentPropsWithRef, type ReactNode,
+} from 'react';
 import { cx, type ClassValue } from '../../common/cx';
 import { hasContent } from '../../common/slots';
 import type { TextListMarkerTone } from './TextListConstants';
@@ -25,7 +27,18 @@ interface DtTextListItemOwnProps {
 }
 
 /** Own props plus those of the `li` element. */
-export type DtTextListItemProps = DtTextListItemOwnProps & Omit<ComponentPropsWithRef<'li'>, keyof DtTextListItemOwnProps>;
+export type DtTextListItemProps = DtTextListItemOwnProps
+  & Omit<ComponentPropsWithRef<'li'>, keyof DtTextListItemOwnProps | 'dangerouslySetInnerHTML'>;
+
+// An empty fragment has no content, though it is an element.
+function hasMarkerContent (node: ReactNode): boolean {
+  if (isValidElement<{ children?: ReactNode }>(node) && node.type === Fragment) {
+    return hasMarkerContent(node.props.children);
+  }
+  return Children.toArray(node).some(child => isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment
+    ? hasMarkerContent(child.props.children)
+    : hasContent(child));
+}
 
 const warn = (message: string) => console.warn(`[DtTextListItem] ${message}`);
 
@@ -45,7 +58,7 @@ export function DtTextListItem ({
 }: DtTextListItemProps) {
   const parentContext = useTextListContext();
   const parentType = parentContext ? parentContext.type : undefined;
-  const hasCustomMarker = hasContent(marker);
+  const hasCustomMarker = hasMarkerContent(marker);
   const orderedValue = parentType === 'ordered' ? value : undefined;
 
   // Vue's mounted() checks: once per instance, so neither prop changes nor StrictMode repeat them.
