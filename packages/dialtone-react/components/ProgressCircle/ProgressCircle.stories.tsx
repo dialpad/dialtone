@@ -46,8 +46,10 @@ const sizes = Object.keys(PROGRESS_CIRCLE_SIZES) as ProgressCircleSize[];
 const kinds = Object.keys(PROGRESS_CIRCLE_KINDS) as ProgressCircleKind[];
 
 // ProgressCircleDefault.story.vue
-function ProgressCircleDefault ({ ariaLabel, progress }: ProgressCircleStoryArgs) {
-  return <DtProgressCircle ariaLabel={ariaLabel} progress={progress} />;
+// Vue's template binds only aria-label and progress, but the rest of the args (size, kind) fall through
+// onto its single root DtProgressCircle as attributes, so every control reaches the component.
+function ProgressCircleDefault (args: ProgressCircleStoryArgs) {
+  return <DtProgressCircle {...args} />;
 }
 
 // ProgressCircleVariants.story.vue
