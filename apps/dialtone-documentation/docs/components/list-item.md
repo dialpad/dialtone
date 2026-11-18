@@ -81,6 +81,39 @@ Menu radios are menu choices, not native form radio inputs. Keep exactly one row
 
 Use [Dropdown's persistent-choice example](dropdown.md#persistent-menu-choices) for the menu parent, optional ListItemGroup heading, and selection handlers. Listbox choices remain `option`, even when only one value can be selected. See also the [Menu Roles story](https://dialtone.dialpad.com/vue/?path=/story/components-dropdown--menu-roles).
 
+## Disabled
+
+Set `disabled` on a row that can't be activated right now. The row renders `aria-disabled="true"` and the disabled style, and it doesn't emit `click` for pointer, Enter or Space, and cancels the native default, such as navigation for `element-type="a"`. It still emits `keydown`, `mousemove` and `mouseleave`, and stays focusable and reachable with the arrow keys, Home, End and typeahead, so keyboard and screen reader users can find it and learn why it's unavailable. This follows the WAI-ARIA Authoring Practices guidance on [focusability of disabled controls](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#focusabilityofdisabledcontrols), which keeps disabled menu items focusable. Use it on interactive rows (`menuitem`, `menuitemradio` or `option`), where assistive technology announces the state.
+
+Put the reason in the `subtitle` slot, hide that text from the row's name with `aria-hidden`, and point `aria-describedby` at it. Interactive rows take their name from their content, so without `aria-hidden` the reason would be repeated in the name; `aria-describedby` still reads it as the description.
+
+```vue demo
+<!-- @class d-d-block -->
+<ul>
+  <dt-list-item navigation-type="tab">
+    Rename
+  </dt-list-item>
+  <dt-list-item
+    navigation-type="tab"
+    disabled
+    aria-describedby="list-item-disabled-reason"
+  >
+    Delete
+    <template #subtitle>
+      <span
+        id="list-item-disabled-reason"
+        aria-hidden="true"
+      >Only the owner can delete this file</span>
+    </template>
+  </dt-list-item>
+</ul>
+```
+
+The style comes from the `disabled` prop. A row that sets `aria-disabled` without the prop keeps its current look and still emits `click`. Don't combine the two: an `aria-disabled` attribute overrides the announced state, while the prop still controls the style and activation.
+
+> [!WARNING] Parent-driven selection isn't gated
+> `disabled` stops only the row's own `click`. A parent that selects by highlighted index, such as DtCombobox on Enter, doesn't check it, so that parent must skip unavailable rows itself.
+
 ## Variants
 
 ### Custom List Item

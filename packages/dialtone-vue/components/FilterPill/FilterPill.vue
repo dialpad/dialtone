@@ -326,6 +326,7 @@
             role="presentation"
             :class="['d-filter-pill__menu-heading', headerContentClass]"
           >
+            <!-- modules/FilterPillOptionGroup.vue headings use these DtText props; keep them matched. -->
             <dt-text
               variant="label-xs"
               :size="100"
@@ -338,44 +339,63 @@
               <slot name="headerContent" />
             </dt-text>
           </li>
-          <dt-list-item
-            v-for="option in controlledState.options"
-            :id="controlledOptionId(option.value)"
-            :key="option.value"
-            role="menuitemradio"
-            data-qa="dt-filter-pill__option"
-            navigation-type="arrow-keys"
-            :selected="controlledRowSelected(option.value)"
-            :aria-disabled="!controlledCanSelect || undefined"
-            @click="selectControlledOption(option.value)"
+          <!-- Positional keys keep a plain list one stable section; rows inside reconcile by value. -->
+          <dt-filter-pill-option-group
+            v-for="(section, index) in controlledState.sections"
+            :key="index"
+            :heading="section.group"
           >
-            {{ option.label }}
-            <template #selected>
-              <dt-icon-check
-                size="200"
-                :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(option.value) }"
-                aria-hidden="true"
-                data-qa="dt-filter-pill__selection-indicator"
-              />
-            </template>
-            <template
-              v-if="$slots.optionEnd"
-              #end
+            <dt-list-item
+              v-for="row in section.rows"
+              :id="controlledOptionId(row.option.value)"
+              :key="row.option.value"
+              role="menuitemradio"
+              data-qa="dt-filter-pill__option"
+              navigation-type="arrow-keys"
+              :selected="controlledRowSelected(row.option.value)"
+              :disabled="!controlledCanSelect || row.disabled"
+              :aria-describedby="row.description ? controlledDescriptionId(row.option.value) : undefined"
+              @click="selectControlledOption(row.option.value)"
             >
-              <span :class="['d-filter-pill__option-end', optionEndClass]">
-                <!--
-                  @slot Noninteractive trailing choice content, retaining its label and handler.
-                  @binding {Object} option Read-only option record.
-                  @binding {boolean} selected Whether this row is selected, using a deferred draft when open.
-                -->
-                <slot
-                  name="optionEnd"
-                  :option="option"
-                  :selected="controlledRowSelected(option.value)"
+              {{ row.option.label }}
+              <template #selected>
+                <dt-icon-check
+                  size="200"
+                  :class="{ 'd-filter-pill__selection-indicator--hidden': !controlledRowSelected(row.option.value) }"
+                  aria-hidden="true"
+                  data-qa="dt-filter-pill__selection-indicator"
                 />
-              </span>
-            </template>
-          </dt-list-item>
+              </template>
+              <template
+                v-if="row.description"
+                #subtitle
+              >
+                <!-- Hidden from the row's name; aria-describedby still reads it as the description. -->
+                <span
+                  :id="controlledDescriptionId(row.option.value)"
+                  aria-hidden="true"
+                  data-qa="dt-filter-pill__option-description"
+                >{{ row.description }}</span>
+              </template>
+              <template
+                v-if="$slots.optionEnd"
+                #end
+              >
+                <span :class="['d-filter-pill__option-end', optionEndClass]">
+                  <!--
+                    @slot Noninteractive trailing choice content, retaining its label and handler.
+                    @binding {Object} option Read-only option record.
+                    @binding {boolean} selected Whether this row is selected, using a deferred draft when open.
+                  -->
+                  <slot
+                    name="optionEnd"
+                    :option="row.option"
+                    :selected="controlledRowSelected(row.option.value)"
+                  />
+                </span>
+              </template>
+            </dt-list-item>
+          </dt-filter-pill-option-group>
         </slot>
         <!--
           @slot Override overlay content. Bindings are conditional on the selection contract.
@@ -460,12 +480,16 @@ import { DtListItem } from '@/components/ListItem';
 import { DtStack } from '@/components/Stack';
 import { DtText } from '@/components/Text';
 import ControlledSelection from './FilterPillControlled';
+import DtFilterPillOptionGroup from './modules/FilterPillOptionGroup.vue';
 
 /**
  * @typedef {object} FilterPillOption
  * @property {string} value Stable choice identity.
  * @property {string} label Required choice label.
  * @property {string | null} [shortLabel] Optional anchor summary; null uses label.
+ * @property {boolean | null} [disabled] Dropdown only. True keeps the row visible and focusable but refuses activation.
+ * @property {string | null} [description] Dropdown only. Visible secondary text and the row's accessible description.
+ * @property {string | null} [group] Dropdown only. Heading text; consecutive options with the same group share a section.
  */
 
 export default {
@@ -480,6 +504,7 @@ export default {
     DtIconCheck,
     DtIconChevronDown,
     DtDropdown,
+    DtFilterPillOptionGroup,
     DtListItem,
     DtStack,
     DtText,
@@ -491,6 +516,9 @@ export default {
     /**
      * An array at creation (including []) opts into authoritative selection. Remount to change contract or controlled pattern.
      * Records require string value and label. Optional shortLabel accepts string or null; null is absent and empty string is meaningful.
+     * Single-selection dropdowns also read optional disabled (boolean or null) and description and group (string or
+     * null; an empty string is absent). A malformed value is ignored with a development warning and never invalidates
+     * the options. Multiple selection ignores these three fields and warns once.
      */
     options: {
       type: /** @type {import('vue').PropType<readonly FilterPillOption[] | null>} */ (Array),

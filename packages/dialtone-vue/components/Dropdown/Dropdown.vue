@@ -76,6 +76,9 @@ import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES, HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
+// DtListItem's `disabled` modifier. Hand-rolled aria-disabled rows don't carry it and keep the legacy behavior.
+const isDisabledRow = el => Boolean(el?.classList.contains('d-list-item--disabled'));
+
 export default {
   name: 'DtDropdown',
 
@@ -424,7 +427,7 @@ export default {
               break;
             case EVENT_KEYNAMES.space:
             case EVENT_KEYNAMES.spacebar:
-              this.onSpaceKey();
+              this.onSpaceKey(event);
               break;
             case EVENT_KEYNAMES.enter:
               this.onEnterKey();
@@ -491,8 +494,22 @@ export default {
 
       if (liElement?.role && liElement.id && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
-        if (this._getListItemNodes()?.includes(liElement)) liElement.focus();
+        if (this._getListItemNodes()?.includes(liElement)) this.focusHoveredRow(liElement);
       }
+    },
+
+    // A DtListItem disabled row takes the highlight but not focus, which would draw the keyboard
+    // focus ring under the pointer. The menu holds focus so Enter can't activate another row.
+    focusHoveredRow (row) {
+      if (isDisabledRow(row) && this.focusMenuContent()) return;
+      row.focus();
+    },
+
+    /** Focuses the menu container; false when it can't take focus (contentTabindex null). */
+    focusMenuContent () {
+      const content = this.$refs.popover?.popoverContentEl;
+      content?.focus();
+      return Boolean(content) && content.getRootNode().activeElement === content;
     },
 
     getListElement () {
@@ -545,6 +562,11 @@ export default {
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.isArrowKeyNav) {
           if (this._itemsLength() || !this.focusMenuClose()) this.setHighlightIndex(0);
+          // Popover's default first-element focus skips aria-disabled rows, but a DtListItem disabled row
+          // stays reachable: focus it so focus and keyboard position agree. A consumer focus target wins.
+          const consumerFocus = Object.entries(this.$attrs).some(([key, value]) =>
+            key.replace(/-/g, '').toLowerCase() === 'initialfocuselement' && value !== undefined);
+          if (!consumerFocus && isDisabledRow(this.activeItemEl)) this.activeItemEl.focus();
         }
         this.$emit('opened', true);
       } else {
@@ -554,9 +576,13 @@ export default {
       }
     },
 
-    onSpaceKey () {
+    onSpaceKey (event) {
       if (!this.open) {
         this.openedWithKeyboard = true;
+      }
+      // The menu holds focus while the pointer rests on a disabled row; keep Space from scrolling it.
+      if (isDisabledRow(this.activeItemEl) && event.target === this.$refs.popover?.popoverContentEl) {
+        event.preventDefault();
       }
     },
 
