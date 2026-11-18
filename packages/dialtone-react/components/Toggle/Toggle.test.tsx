@@ -299,6 +299,10 @@ describe('DtToggle Tests', () => {
     });
 
     describe('label info', () => {
+      afterEach(() => {
+        vi.restoreAllMocks();
+      });
+
       it('should log once when there is no label or aria-label, even under StrictMode', () => {
         const info = vi.spyOn(console, 'info').mockImplementation(() => {});
         const { rerender } = render(<StrictMode><DtToggle /></StrictMode>);

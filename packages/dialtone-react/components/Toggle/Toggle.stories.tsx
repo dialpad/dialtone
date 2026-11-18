@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
 import { DtToggle, type DtToggleProps } from './Toggle';
@@ -117,9 +117,13 @@ type Story = StoryObj<ToggleStoryArgs>;
 // renders nothing in Vue, and nothing here either. It also passes only some args on (not `onChange`, `id`...), and
 // `class` (`className` here) as the root class.
 function ToggleDefault (args: ToggleStoryArgs) {
+  // Vue's modelValue only seeds the toggle, so a click flips it. Keep the story's own value, synced with the Controls.
+  const [checked, setChecked] = useState(args.checked);
+  useEffect(() => setChecked(args.checked), [args.checked]);
+
   return (
     <DtToggle
-      checked={args.checked}
+      checked={checked}
       disabled={args.disabled}
       size={args.size}
       showIcon={args.showIcon}
@@ -127,7 +131,10 @@ function ToggleDefault (args: ToggleStoryArgs) {
       className={args.className}
       labelChildProps={args.labelChildProps}
       toggleOnClick={args.toggleOnClick}
-      onCheckedChange={args.onCheckedChange}
+      onCheckedChange={(next) => {
+        if (args.toggleOnClick !== false) setChecked(next);
+        args.onCheckedChange?.(next);
+      }}
     />
   );
 }
