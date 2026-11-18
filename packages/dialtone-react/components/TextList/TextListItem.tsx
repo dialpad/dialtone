@@ -31,9 +31,6 @@ interface DtTextListItemOwnProps {
 export type DtTextListItemProps = DtTextListItemOwnProps
   & Omit<ComponentPropsWithRef<'li'>, keyof DtTextListItemOwnProps | 'dangerouslySetInnerHTML'>;
 
-const isPortal = (node: unknown): boolean => typeof node === 'object' && node !== null
-  && (node as { $$typeof?: symbol }).$$typeof === Symbol.for('react.portal');
-
 // An empty fragment has no content, though it is an element.
 function hasMarkerContent (node: ReactNode): boolean {
   if (isValidElement<{ children?: ReactNode }>(node) && node.type === Fragment) {
@@ -43,37 +40,8 @@ function hasMarkerContent (node: ReactNode): boolean {
     if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment) {
       return hasMarkerContent(child.props.children);
     }
-    // A portal renders elsewhere, so it leaves the marker wrapper empty.
-    if (isPortal(child)) return false;
     return hasContent(child);
   });
-}
-
-// Separates portals from local marker content, looking through arrays and fragments. Each wrapper's key
-// encodes its whole tree path as JSON segments, so it can't collide: an explicit key (`k:`) never equals
-// a positional one (`i:`), sibling arrays and fragments keep their own scope, and no separator is joined.
-function splitMarker (node: ReactNode, path: string[] = []): { portals: ReactNode[]; local: ReactNode[] } {
-  const portals: ReactNode[] = [];
-  const local: ReactNode[] = [];
-  (Array.isArray(node) ? node : [node]).forEach((child: ReactNode, index: number) => {
-    if (child == null || typeof child === 'boolean') return;
-    const ownKey = isValidElement(child) || isPortal(child) ? (child as { key: string | null }).key : null;
-    const childPath = [...path, ownKey !== null ? `k:${ownKey}` : `i:${index}`];
-    if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment) {
-      const inner = splitMarker(child.props.children, childPath);
-      portals.push(...inner.portals);
-      local.push(...inner.local);
-    } else if (Array.isArray(child)) {
-      const inner = splitMarker(child, [...path, `i:${index}`]);
-      portals.push(...inner.portals);
-      local.push(...inner.local);
-    } else if (isPortal(child)) {
-      portals.push(<Fragment key={JSON.stringify(childPath)}>{child as ReactNode}</Fragment>);
-    } else {
-      local.push(<Fragment key={JSON.stringify(childPath)}>{child}</Fragment>);
-    }
-  });
-  return { portals, local };
 }
 
 const warn = (message: string) => console.warn(`[DtTextListItem] ${message}`);
@@ -98,8 +66,8 @@ export function DtTextListItem ({
   };
   const parentContext = useTextListContext();
   const parentType = parentContext ? parentContext.type : undefined;
-  const { portals, local } = splitMarker(marker);
-  const hasCustomMarker = hasMarkerContent(local);
+  // A portal counts as content, as in Vue's hasSlotContent: its wrapper renders and the portal mounts at its target.
+  const hasCustomMarker = hasMarkerContent(marker);
   const orderedValue = parentType === 'ordered' ? value : undefined;
 
   // Vue's mounted() checks: once per instance, so neither prop changes nor StrictMode repeat them.
@@ -130,15 +98,13 @@ export function DtTextListItem ({
         className,
       )}
     >
-      {/* Portals sit outside the wrapper so they keep their React position when local content comes or goes. */}
-      {portals}
       {hasCustomMarker && (
         <span
           data-qa="dt-text-list-item-marker"
           className={cx('d-text-list__item-marker', markerClass)}
           aria-hidden="true"
         >
-          {local}
+          {marker}
         </span>
       )}
       <div
