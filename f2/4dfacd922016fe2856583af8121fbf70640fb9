@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/components/tooltip.md
+  s_50ca0bdecfb15a::t_791e6225f62557 111-121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f24dfacd922016fe2856583af8121fbf70640fb9",
+  "prompts": {},
+  "sessions": {
+    "s_50ca0bdecfb15a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ed74-0cf1-7e93-95e3-9941d8424ccb",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}

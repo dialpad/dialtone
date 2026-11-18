@@ -1,0 +1,19 @@
+packages/dialtone-css/lib/build/less/components/rich-text-editor.less
+  s_d5e86a56d4f166::t_bbb13ba273c561 27-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "f85dfd8f01cfeee6cbea5b75d18de9594dcd33bf",
+  "prompts": {},
+  "sessions": {
+    "s_d5e86a56d4f166": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16963438-69cc-46fa-8f17-4832f0e334a0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
