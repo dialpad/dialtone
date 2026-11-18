@@ -110,9 +110,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<RootLayoutStoryArgs>;
 
+// Vue's html-fragment inserts the HTML with no wrapper. React can't set innerHTML without an element, so a
+// `display: contents` span keeps the layout the same.
 const html = (value: string | undefined) => (
   <span style={{ display: 'contents' }} dangerouslySetInnerHTML={{ __html: value ?? '' }} />
 );
+
+// Vue's `<span v-html>`.
+const span = (value: string | undefined) => <span dangerouslySetInnerHTML={{ __html: value ?? '' }} />;
 
 // RootLayoutDefault.story.vue
 function RootLayoutDefault ({ header, sidebar, footer, children, ...args }: RootLayoutStoryArgs) {
@@ -148,11 +153,11 @@ function RootLayoutSticky ({ header, sidebar, footer, children: _children, ...ar
       footerClass={args.footerClass}
       fixed={args.fixed}
       responsiveBreakpoint={args.responsiveBreakpoint}
-      header={html(header)}
-      sidebar={html(sidebar)}
-      footer={html(footer)}
+      header={span(header)}
+      sidebar={span(sidebar)}
+      footer={span(footer)}
     >
-      {html(undefined)}
+      {span(undefined)}
     </DtRootLayout>
   );
 }

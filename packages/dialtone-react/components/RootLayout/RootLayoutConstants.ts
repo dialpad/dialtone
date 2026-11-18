@@ -7,5 +7,6 @@ export const ROOT_LAYOUT_SIDEBAR_POSITIONS = {
 
 export const ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS = ['sm', 'md', 'lg', null] as const;
 
-export type RootLayoutSidebarPosition = typeof ROOT_LAYOUT_SIDEBAR_POSITIONS[keyof typeof ROOT_LAYOUT_SIDEBAR_POSITIONS];
+export type RootLayoutSidebarPosition =
+  typeof ROOT_LAYOUT_SIDEBAR_POSITIONS[keyof typeof ROOT_LAYOUT_SIDEBAR_POSITIONS];
 export type RootLayoutResponsiveBreakpoint = typeof ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS[number];
