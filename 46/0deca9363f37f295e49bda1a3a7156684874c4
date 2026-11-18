@@ -1,0 +1,26 @@
+packages/combinator/src/components/controls/control_selection.vue
+  s_c3b12373d86df3::t_8344376a64badd 83
+  s_c3b12373d86df3::t_eebfca1239f676 28,32,36-40
+  s_c3b12373d86df3::t_d1f713339e056b 210-211
+  s_c3b12373d86df3::t_af42a5c3a8be10 110
+  s_c3b12373d86df3::t_c3764399e068fd 182-185
+  s_c3b12373d86df3::t_03beed914d3d91 106-109,111
+packages/combinator/src/components/controls/control_icon_slot.vue
+  s_c3b12373d86df3::t_4309ade26debff 7,22,24,49-54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "460deca9363f37f295e49bda1a3a7156684874c4",
+  "prompts": {},
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

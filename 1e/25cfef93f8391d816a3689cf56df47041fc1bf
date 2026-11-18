@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_a98638d5a5be6e::t_eaa631d62282da 106,158-159,161,585,588,590-592,631
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1e25cfef93f8391d816a3689cf56df47041fc1bf",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
