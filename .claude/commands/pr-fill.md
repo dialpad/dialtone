@@ -42,10 +42,7 @@ When this command is used, Claude should:
    - Keep `NO-JIRA` only when explicitly chosen. This workflow does not create Jira tickets.
    - Use the plain ticket key in the public PR body.
 
-6. **Check prep before any PR write:**
-   - Run the freshness check from the "Verdict record" section of `.agents/skills/pr-prep/SKILL.md`. The recorded head SHA must equal the PR's head (`gh pr view <PR_NUMBER> --json headRefOid --jq .headRefOid`), not just the local `HEAD`, and the tree must have been clean.
-   - A missing record, a different SHA or a dirty tree means prep is stale: run `/pr-prep` again before the title or body edit.
-   - For `Needs fixes` or `Needs decision`, report it and ask before writing.
+6. **Check prep before any PR write:** run the gate in the "Verdict record" section of `.agents/skills/pr-prep/SKILL.md` with the PR's `headRefOid` and `baseRefName`, and follow its result before the title or body edit.
 
 7. **Validate and set PR title:**
    - Must follow commitlint format (see CLAUDE.md Commit Convention)

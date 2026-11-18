@@ -39,7 +39,7 @@ Prepare a public-safe Dialtone PR title and body, then create or update a PR onl
 ## Workflow
 
 1. Inspect current branch, base, commits, and changed files.
-2. Check prep before any PR write. Run the freshness check from the pr-prep "Verdict record" section: the recorded head SHA must equal the current `HEAD`, `HEAD` must equal `@{u}` once pushed, and the tree must have been clean. A missing record, a different SHA or a dirty tree means prep is stale: run `pr-prep` again. For `Needs fixes` or `Needs decision`, report it and ask before writing.
+2. Check prep before any PR write: run the gate in the pr-prep "Verdict record" section and follow its result.
 3. Resolve title from actual changes and `.github/COMMIT_CONVENTION.md`.
 4. Build PR body from `.github/pull_request_template.md`.
 5. Remove irrelevant checklist sections.

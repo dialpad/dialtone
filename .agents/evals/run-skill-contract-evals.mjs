@@ -413,7 +413,9 @@ for (const [skillName, config] of Object.entries(skills)) {
 }
 
 // /pr-fill must check the prep verdict before its first PR write.
-{
+if (!existsSync(join(repoRoot, '.claude/commands/pr-fill.md'))) {
+  failures.push('.claude/commands/pr-fill.md is missing');
+} else {
   const prFill = read('.claude/commands/pr-fill.md');
   const check = prFill.indexOf('Verdict record');
   const firstWrite = prFill.indexOf('gh pr edit');

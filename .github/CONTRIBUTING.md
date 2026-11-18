@@ -149,7 +149,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
 3. Create a personal branch to make your change off of `staging` with `git checkout -b my-change-branch`. We use kebab-case for branch names.
 4. Make and commit your changes. Note our commit message conventions in [COMMIT_CONVENTION.md].
 5. Push your branch to remote. `git push -u origin my-change-branch`.
-6. Run the PR readiness check on the commit you pushed (`$pr-prep` in Codex, `/pr-prep` in Claude Code) before you create or edit the pull request. Run it again after any later push; the PR tooling treats a verdict for a different commit than the PR's head as stale.
+6. If you use Codex or Claude Code, run the PR readiness check on the commit you pushed (`$pr-prep` in Codex, `/pr-prep` in Claude Code) before you create or edit the pull request, and again after any later push; the PR tooling treats a verdict for a different commit or base as stale. Without either tool, skip this step and check your change against the PR template checklist.
 7. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
 8. Set the label on your PR:
 

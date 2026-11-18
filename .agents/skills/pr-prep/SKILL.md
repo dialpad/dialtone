@@ -126,17 +126,26 @@ So a later push makes a stale verdict visible, record the verdict against the co
 
 ```sh
 R=$(git rev-parse --git-path pr-prep-verdict)
-printf 'verdict=%s\nhead=%s\ntree=%s\n' "<verdict>" "$(git rev-parse HEAD)" "<clean|dirty>" > "$R"
+printf 'verdict=%s\nhead=%s\nbase=%s\ntree=%s\n' "<verdict>" "$(git rev-parse HEAD)" "$B" "<clean|dirty>" > "$R"
 ```
 
-`pr-create` and `/pr-fill` read it before their first PR write. The verdict is fresh only when `head` equals the commit the PR shows and `tree=clean`; a missing record, a different SHA or `tree=dirty` means prep is stale and must be rerun. For `pr-create` that commit is `HEAD`, which must also equal `@{u}` once pushed. For `/pr-fill`, which edits an existing PR, it is the PR's `headRefOid` (`gh pr view <n> --json headRefOid --jq .headRefOid`).
+`base` is the base branch name from step 1, not its SHA: the branch tip moves with every merge, but a PR retargeted to another branch needs a new review.
+
+This is the one gate `pr-create` and `/pr-fill` run before their first PR write. Prep is fresh only when the record exists, `tree=clean`, `head` equals the commit the PR shows, and `base` equals the branch the PR targets. Get both from GitHub, not from local refs that may be out of date:
+
+- `pr-create`: run `git fetch origin <branch>` first. `head` must equal `HEAD` and `@{u}`; `base` must equal the base you will open the PR against. If a PR already exists for the branch, use its `headRefOid` and `baseRefName` instead.
+- `/pr-fill`: `gh pr view <n> --json headRefOid,baseRefName`.
 
 ```sh
 R=$(git rev-parse --git-path pr-prep-verdict)
-TARGET=$(git rev-parse HEAD)   # /pr-fill: the PR's headRefOid
-[ "$(sed -n 's/^head=//p' "$R" 2>/dev/null)" = "$TARGET" ] && grep -qx 'tree=clean' "$R" \
+TARGET=$(git rev-parse HEAD)   # or the PR's headRefOid
+TBASE=staging                  # or the PR's baseRefName
+[ "$(sed -n 's/^head=//p' "$R" 2>/dev/null)" = "$TARGET" ] \
+  && [ "$(sed -n 's/^base=//p' "$R")" = "$TBASE" ] && grep -qx 'tree=clean' "$R" \
   && sed -n 's/^verdict=//p' "$R" || echo "stale: rerun pr-prep"
 ```
+
+When prep is stale, check out the PR head on a clean tree and run pr-prep there without a PR number. Review mode (`pr-prep <n>`) writes no record, so it cannot refresh the verdict. For `Needs fixes` or `Needs decision`, report it and ask before writing.
 
 ## Done When
 
