@@ -1,4 +1,4 @@
-import { InputRule, mergeAttributes, Node, nodePasteRule } from '@tiptap/core';
+import { InputRule, mergeAttributes, Node, nodePasteRule, type InputRuleMatch } from '@tiptap/core';
 import { PluginKey } from '@tiptap/pm/state';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import Suggestion, { type SuggestionOptions } from '@tiptap/suggestion';
@@ -11,13 +11,14 @@ import suggestionOptions from './Suggestion';
 const inputShortCodeRegex = /(:\w+:)$/;
 const inputUnicodeRegex = new RegExp(emojiPattern + '$');
 
-const inputRuleMatch = (match: RegExpMatchArray) => {
+const inputRuleMatch = (match: RegExpMatchArray): InputRuleMatch | undefined => {
   if (match && codeToEmojiData(match[0])) {
     const text = match[2] || match[0];
     // needs to be a dict returned
     // ref type InputRuleMatch:
     // https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/InputRule.ts#L16
-    return { text };
+    // No index, as in Vue: tiptap's input rules only read the text to find the range to replace.
+    return { text } as InputRuleMatch;
   }
 };
 
