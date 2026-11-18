@@ -2,6 +2,6 @@
 
 Run when the diff adds or changes an icon.
 
-- The SVG comes from the Figma icon library and is centred.
-- Strokes are outlined in the SVG, though they stay strokes in Figma. See `.agents/resources/rules/icons.md`.
-- Keywords are singular and split into separate words. File name and category match the icon library.
+- Follow the SVG preparation guide (`packages/dialtone-icons/.github/CONTRIBUTING.md#svg-preparation`) for outlined strokes and the full-color exception.
+- Standard icons build to `currentColor`, intentional brand fills are preserved, and keywords are ones people will actually search for.
+- Ask the author to confirm Figma details if the source isn't available.

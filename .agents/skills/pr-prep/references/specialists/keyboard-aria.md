@@ -2,16 +2,10 @@
 
 Run when the diff changes interactive markup, stories or key handlers.
 
-- `aria-label` or `aria-labelledby` on an element whose role does not allow a name (plain `span` or `div`)? Use visible or visually hidden text, or name the interactive control.
-- Menus, menu buttons, toolbars, drawers and dialogs follow WAI APG:
-  - Down opens a menu at the first item, Up at the last.
-  - Right and Left move between menu levels.
-  - Tab and Shift+Tab close the menu and continue through the page.
-  - Escape closes and returns focus to the trigger.
-  - A drawer is a dialog with the background inert.
-- A disabled element is never the toolbar's tab stop. `defaultPrevented` is honoured before closing on a key.
-- Text cut with an ellipsis can be read on keyboard focus as well as hover. `title` alone is not enough.
-- `aria-pressed`, `tabindex` and similar reach the real control, not a wrapper. Only the control needs the 44px target.
-- Stories show the accessible composition consumers will copy.
+- Start with the widget's actual pattern in the WAI-ARIA Authoring Practices and the Dialtone accessibility checklist (`packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md`). Do not carry one widget's keys to another: menus, toolbars and modals differ. Enter and Space are the menu-button defaults, arrow-key opening is optional, and some `aria-disabled` items stay focusable.
+- Check the real control's accessible name and state, not a wrapper's.
+- Cover focus entry, movement, dismissal and return where they apply, including nested and portaled overlays.
+- For status changes, check what gets announced, even if the diff only changes logic.
+- Use the existing interaction tests, and call out what still needs a keyboard or screen-reader pass.
 
-The reviewer cannot press keys. Add to "Do by hand": Tab, Shift+Tab, arrows, Enter, Space and Escape on each changed interactive story.
+The reviewer cannot press keys. Add that pass to "Do by hand" for each changed interactive story.
