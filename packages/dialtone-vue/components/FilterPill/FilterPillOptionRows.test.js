@@ -107,7 +107,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       await open();
       const checkboxes = [...document.querySelectorAll('[data-qa="dt-filter-pill__checkbox"]')];
       expect(checkboxes.map(input => input.disabled)).toEqual([false, false, false]);
-      expect([...document.querySelectorAll('[data-qa="checkbox-description"]')]).toEqual([]);
+      expect(document.body.textContent).not.toContain(typeOptions[2].description);
     });
   });
 

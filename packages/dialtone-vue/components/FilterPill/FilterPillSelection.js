@@ -9,22 +9,15 @@ export function selectionSnapshot (value) {
 }
 
 const ROW_FIELD_TYPES = { disabled: 'boolean', description: 'string', group: 'string' };
+const ROW_FIELDS = Object.keys(ROW_FIELD_TYPES);
 
 /**
  * Derive dropdown row presentation apart from the records, which slots receive unchanged.
  * Malformed fields are reported and read as absent; they never invalidate the options.
  */
-function getOptionRows (records, useDropdown, issues) {
-  const fields = Object.keys(ROW_FIELD_TYPES);
-  // Multiple selection renders checkboxes from the records, so it has no rows.
-  if (!useDropdown) {
-    if (records.some(option => fields.some(field => option[field] != null))) {
-      issues.push('option disabled, description and group are ignored in multiple selection.');
-    }
-    return [];
-  }
+function getOptionRows (records, issues) {
   const read = (option, field) => typeof option[field] === ROW_FIELD_TYPES[field] ? option[field] : null;
-  for (const field of fields) {
+  for (const field of ROW_FIELDS) {
     if (records.some(option => option[field] != null && read(option, field) === null)) {
       issues.push(`option ${field} must be a ${ROW_FIELD_TYPES[field]} or null; malformed values are ignored.`);
     }
@@ -73,7 +66,11 @@ export function getSelectionState (options, selected, { useDropdown, neutralValu
   if (!useDropdown && validSelected && value.length !== resolved.length) issues.push('selected contains duplicate values.');
   if (!useDropdown && neutralValue != null) issues.push('neutralValue is ignored in multiple selection.');
   const records = validOptions ? options.map(option => Object.freeze({ ...option })) : [];
-  const rows = getOptionRows(records, useDropdown, issues);
+  if (!useDropdown && records.some(option => ROW_FIELDS.some(field => option[field] != null))) {
+    issues.push('option disabled, description and group are ignored in multiple selection.');
+  }
+  // Multiple selection renders checkboxes from the records, so only dropdowns have rows.
+  const rows = useDropdown ? getOptionRows(records, issues) : [];
   const sections = getOptionSections(rows, issues);
   const values = useDropdown ? (value === null ? [] : [value]) : value;
   const selectedOptions = records.filter(option => values.includes(option.value));

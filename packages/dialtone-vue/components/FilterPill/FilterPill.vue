@@ -326,6 +326,7 @@
             role="presentation"
             :class="['d-filter-pill__menu-heading', headerContentClass]"
           >
+            <!-- modules/FilterPillOptionGroup.vue headings use these DtText props; keep them matched. -->
             <dt-text
               variant="label-xs"
               :size="100"
