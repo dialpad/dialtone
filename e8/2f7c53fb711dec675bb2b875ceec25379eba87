@@ -1,0 +1,47 @@
+packages/combinator/src/variants/variants_tab_group.js
+  s_66758ca36d0eae::t_9d1adaa87a08d0 21,38,55,71,88,97,106,118,122,128,141,144,147,152,174
+packages/combinator/src/variants/variants_scroller.js
+  s_66758ca36d0eae::t_9d1adaa87a08d0 57
+packages/combinator/src/variants/variants_collapsible.js
+  s_66758ca36d0eae::t_9d1adaa87a08d0 16,35
+packages/combinator/src/variants/variants_card.js
+  s_66758ca36d0eae::t_9d1adaa87a08d0 26,41-43
+  s_66758ca36d0eae::t_84c7fd75667e3f 7,15
+packages/combinator/src/variants/variants_stack.js
+  s_66758ca36d0eae::t_9d1adaa87a08d0 23-25,38-40,77-79,98-100
+packages/combinator/src/variants/variants_box.js
+  s_66758ca36d0eae::t_9d1adaa87a08d0 184-185,199,215,218,221,238-247,316,333,336,343,346,349,352
+packages/combinator/.github/documentation/CONTRIBUTING.md
+  s_66758ca36d0eae::t_11e5e6b8e71608 19-24,29-31
+  s_66758ca36d0eae::t_5f2a6297d0eff2 25-28
+packages/combinator/.github/documentation/USAGE.md
+  s_66758ca36d0eae::t_3cec6de63f5d10 107-117
+packages/combinator/src/variants/variants_button.js
+  s_66758ca36d0eae::t_4e6738a09691ef 231,262,298
+packages/combinator/src/variants/variants_input.js
+  s_66758ca36d0eae::t_10d2543b965dab 160,165
+packages/combinator/src/variants/variants_item_layout.js
+  s_66758ca36d0eae::t_cee5227bd1fbc1 58,61-63
+packages/combinator/src/variants/variants_segmented_control.js
+  s_66758ca36d0eae::t_1d78098d5e55f4 20,24,28,43,46,49
+packages/combinator/src/variants/variants_split_button.js
+  s_66758ca36d0eae::t_868511f98175a0 211
+packages/combinator/src/variants/variants_text_list.js
+  s_66758ca36d0eae::t_87a4ff54943a58 98,105,112,119
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e82f7c53fb711dec675bb2b875ceec25379eba87",
+  "prompts": {},
+  "sessions": {
+    "s_66758ca36d0eae": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1af28-2a13-7103-bf45-2bae943aa9c5",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

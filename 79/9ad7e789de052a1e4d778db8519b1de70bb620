@@ -1,0 +1,46 @@
+packages/combinator/src/components/controls/control_dynamic.test.js
+  s_53fa132747c3c1::t_be066553c01485 40-43,48-49,51-52
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_9f61fa9161643f::t_0e49f1073f4b68 4,59-69
+packages/combinator/src/components/controls/control_selection.vue
+  s_53fa132747c3c1::t_ca6a44e67bef43 307
+  s_53fa132747c3c1::t_8977c02eeada20 269,276,279,282-283
+packages/combinator/src/components/controls/control_boolean.vue
+  s_53fa132747c3c1::t_f62dcafc932ce0 46
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  h_c15b5755534093 52-53
+packages/combinator/src/components/controls/control_clearable_shell.vue
+  s_53fa132747c3c1::t_e71104c1a996e2 92,94-96
+packages/combinator/src/variants/variants_text.js
+  s_9f61fa9161643f::t_a0b147250c834a 30,32
+  h_c15b5755534093 31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "799ad7e789de052a1e4d778db8519b1de70bb620",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_53fa132747c3c1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b9dd6578-4289-464c-8bc2-d50bd98834aa",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
