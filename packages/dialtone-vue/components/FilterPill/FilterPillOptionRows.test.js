@@ -59,8 +59,16 @@ describe('DtFilterPill built-in dropdown option rows', () => {
   const rows = () => [...document.querySelectorAll('[data-qa="dt-filter-pill__option"]')];
   const actions = () => Object.fromEntries(Object.entries(pill().emitted())
     .filter(([name]) => ACTION_EVENTS.includes(name)));
-  const describedBy = row => document.getElementById(row.getAttribute('aria-describedby'));
-  const descriptionOf = row => describedBy(row)?.textContent ?? null;
+  const descriptionOf = row => document.getElementById(row.getAttribute('aria-describedby'))?.textContent ?? null;
+  // A row's accessible name, in accname order: aria-labelledby, then aria-label, then its content minus aria-hidden subtrees.
+  const accessibleNameOf = row => {
+    const labelledBy = row.getAttribute('aria-labelledby');
+    if (labelledBy) return labelledBy.split(' ').map(id => document.getElementById(id)?.textContent.trim()).join(' ');
+    if (row.hasAttribute('aria-label')) return row.getAttribute('aria-label');
+    const content = row.cloneNode(true);
+    content.querySelectorAll('[aria-hidden="true"]').forEach(hidden => hidden.remove());
+    return content.textContent.replace(/\s+/g, ' ').trim();
+  };
 
   beforeEach(() => { hadScrollLock = document.documentElement.classList.contains('d-of-hidden'); });
 
@@ -82,7 +90,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       updateWrapper();
       await open();
       expect(rows().map(descriptionOf)).toEqual([null, 'Includes voicemail', 'Choose All under Status to view archived items']);
-      expect(rows().map(row => describedBy(row)?.getAttribute('aria-hidden') ?? null)).toEqual([null, 'true', 'true']);
+      expect(rows().map(accessibleNameOf)).toEqual(['All types', 'Calls', 'Archived']);
     });
 
     it('styles every built-in row disabled while the selection is unusable', async () => {
