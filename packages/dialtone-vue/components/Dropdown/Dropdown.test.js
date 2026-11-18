@@ -327,12 +327,13 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     });
 
   it.each([
-    { target: 'a consumer focus target', attrs: { initialFocusElement: '#rename' }, focused: 'rename' },
+    { target: 'a consumer focus target', attrs: { initialFocusElement: '#refresh' }, focused: 'refresh' },
     { target: 'an unset focus target', attrs: { 'initial-focus-element': undefined }, focused: 'export' },
   ])('opens a menu with a disabled first row by keyboard onto $target', async ({ attrs, focused }) => {
     mountMenu({ open: null }, undefined, () => [
       h(DtListItem, { id: 'export', role: 'menuitem', navigationType: 'arrow-keys', disabled: true }, () => 'Export'),
       h(DtListItem, { id: 'rename', role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Rename'),
+      h(DtListItem, { id: 'refresh', role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Refresh'),
     ], attrs);
     await wrapper.get('[data-qa="trigger"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
     await flushPromises();
