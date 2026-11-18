@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DtIcon } from '../Icon';
+import { DtIconCheck, DtIconClose } from '../../icons';
 import { DtStack } from '../Stack';
 import { DtText } from '../Text';
 import { DtTextList, type DtTextListProps } from './TextList';
@@ -139,10 +139,10 @@ function TextListVariants () {
           Custom Markers
         </DtText>
         <DtTextList markerTone="positive">
-          <DtTextListItem marker={<DtIcon name="check" size="200" />}>
+          <DtTextListItem marker={<DtIconCheck size="200" />}>
             Included in every plan.
           </DtTextListItem>
-          <DtTextListItem markerTone="critical" marker={<DtIcon name="close" size="200" />}>
+          <DtTextListItem markerTone="critical" marker={<DtIconClose size="200" />}>
             Requires admin approval.
           </DtTextListItem>
           <DtTextListItem marker={<span aria-hidden="true">+</span>}>
@@ -177,7 +177,7 @@ function TextListVariants () {
 }
 
 export const Default: Story = {
-  render: args => <TextListDefault {...args} />,
+  render: (args: TextListStoryArgs) => <TextListDefault {...args} />,
   args: {},
 };
 

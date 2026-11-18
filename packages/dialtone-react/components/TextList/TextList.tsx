@@ -43,10 +43,16 @@ interface DtTextListOwnProps {
   reversed?: boolean;
 }
 
-/** Own props plus those of the list element (`ref` reaches the `ul` or `ol`). */
-export type DtTextListProps = DtTextListOwnProps
-  & Omit<ComponentPropsWithRef<'ul'>, keyof DtTextListOwnProps | 'ref'>
-  & { ref?: Ref<HTMLUListElement | HTMLOListElement> };
+type ListNativeProps<E extends 'ul' | 'ol'> = Omit<ComponentPropsWithRef<E>, keyof DtTextListOwnProps>;
+
+/**
+ * Own props plus those of the list element: `type` picks `ul` or `ol` props, so `ref` and event
+ * targets are typed for the rendered element. A `type` that varies at runtime gets either.
+ */
+export type DtTextListProps = DtTextListOwnProps & (
+  | (ListNativeProps<'ul'> & { type?: 'unordered' })
+  | (ListNativeProps<'ol'> & { type: 'ordered' })
+);
 
 const warn = (message: string) => console.warn(`[DtTextList] ${message}`);
 

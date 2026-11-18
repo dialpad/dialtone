@@ -30,14 +30,22 @@ interface DtTextListItemOwnProps {
 export type DtTextListItemProps = DtTextListItemOwnProps
   & Omit<ComponentPropsWithRef<'li'>, keyof DtTextListItemOwnProps | 'dangerouslySetInnerHTML'>;
 
+const isPortal = (node: unknown): boolean => typeof node === 'object' && node !== null
+  && (node as { $$typeof?: symbol }).$$typeof === Symbol.for('react.portal');
+
 // An empty fragment has no content, though it is an element.
 function hasMarkerContent (node: ReactNode): boolean {
   if (isValidElement<{ children?: ReactNode }>(node) && node.type === Fragment) {
     return hasMarkerContent(node.props.children);
   }
-  return Children.toArray(node).some(child => isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment
-    ? hasMarkerContent(child.props.children)
-    : hasContent(child));
+  return Children.toArray(node).some(child => {
+    if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment) {
+      return hasMarkerContent(child.props.children);
+    }
+    // A portal renders elsewhere, so it leaves the marker wrapper empty.
+    if (isPortal(child)) return false;
+    return hasContent(child);
+  });
 }
 
 const warn = (message: string) => console.warn(`[DtTextListItem] ${message}`);
@@ -54,8 +62,12 @@ export function DtTextListItem ({
   marker,
   className,
   children,
-  ...rest
+  ...restWithHtml
 }: DtTextListItemProps) {
+  // Not in the types, but a JS caller could still pass it, and React throws with children present.
+  const { dangerouslySetInnerHTML: _html, ...rest } = restWithHtml as typeof restWithHtml & {
+    dangerouslySetInnerHTML?: unknown;
+  };
   const parentContext = useTextListContext();
   const parentType = parentContext ? parentContext.type : undefined;
   const hasCustomMarker = hasMarkerContent(marker);
