@@ -63,7 +63,7 @@ export interface DtFilterPillFooterScope extends DtPopoverCloseScope {
   cancel: () => void;
 }
 
-type NativeAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'content' | 'onClick'>;
+type NativeAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'content' | 'defaultValue'>;
 
 export interface DtFilterPillProps extends NativeAttributes {
   /** The root element. */
@@ -247,7 +247,8 @@ const withFallback = (node: ReactNode, fallback: ReactNode) => (Children.toArray
 /** The filter without its `active` key: Vue's `delete filter.active`. */
 const withoutActive = ({ active: _active, ...filter }: DtFilterPillFilter): DtFilterPillFilter => filter;
 
-const activeNames = (filters: DtFilterPillFilter[]) => filters.filter(filter => filter.active).map(filter => filter.name);
+const activeNames = (filters: DtFilterPillFilter[]) =>
+  filters.filter(filter => filter.active).map(filter => filter.name);
 
 /**
  * A filter pill is a button that opens a popover or dropdown of filters, and shows which of them are active.
@@ -375,7 +376,8 @@ export function DtFilterPill ({
 
   // Vue's `filter.active = $event` on whichever list is displayed: the pending one while deferring.
   const setFilterActive = (index: number, active: boolean) => {
-    const toggle = (list: DtFilterPillFilter[]) => list.map((filter, i) => (i === index ? { ...filter, active } : filter));
+    const toggle = (list: DtFilterPillFilter[]) =>
+      list.map((filter, i) => (i === index ? { ...filter, active } : filter));
     if (deferSelection && pendingFilters) setPendingFilters(toggle(pendingFilters));
     else setFilters(toggle(filters));
   };

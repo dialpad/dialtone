@@ -52,7 +52,7 @@ const click = async (element: Element | null | undefined) => {
 const lastValue = () => MOCK_VALUE_CHANGE_STUB.mock.lastCall?.[0] as DtFilterPillFilter[] | undefined;
 
 describe('DtFilterPill Tests', function () {
-  let result: RenderResult | undefined;
+  let result: Pick<RenderResult, 'container' | 'unmount'> | undefined;
   let button: HTMLElement | null;
   let label: HTMLElement | null;
   let icon: HTMLElement | null;
