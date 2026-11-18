@@ -1,0 +1,25 @@
+packages/dialtone-react/components/CheckboxGroup/CheckboxGroup.parity.tsx
+  s_089c1fdbd7b6df::t_32a616868c8605 1-8
+packages/dialtone-react/components/CheckboxGroup/CheckboxGroup.tsx
+  s_089c1fdbd7b6df::t_e378350a62c2d5 1-106
+packages/dialtone-react/components/CheckboxGroup/CheckboxesDecorator.tsx
+  s_089c1fdbd7b6df::t_ea41fde4ecb5d8 1-24
+packages/dialtone-react/components/CheckboxGroup/index.ts
+  s_089c1fdbd7b6df::t_7a8f25207243a8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8dbafa203028033dd49bace59ea29f46eedcf18b",
+  "prompts": {},
+  "sessions": {
+    "s_089c1fdbd7b6df": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "871218a9-7945-46c7-9505-4c9d80e341b8",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

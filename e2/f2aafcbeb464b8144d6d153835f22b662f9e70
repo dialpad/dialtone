@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Popover/Popover.stories.tsx
+  s_4209c620012af6::t_5fd43779b7ebfd 1-709
+packages/dialtone-react/components/Popover/Popover.tsx
+  s_4209c620012af6::t_90919342b0dc1c 51,727,994
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e2f2aafcbeb464b8144d6d153835f22b662f9e70",
+  "prompts": {},
+  "sessions": {
+    "s_4209c620012af6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "621d10b5-1328-4c2b-91ba-94f1b8e598d6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
