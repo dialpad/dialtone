@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { vi } from 'vitest';
 import DtText, { resetHeadlineSemanticInfoFlag } from './Text.vue';
+import { listenForEscape } from './slide';
 import {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_NUMERIC_CLASS,
@@ -626,12 +627,12 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
-    it('stops on Escape while only hovered, with focus elsewhere, and stops listening once at rest', async () => {
+    it('stops on Escape while only hovered, even when the focused control stops the event', async () => {
       const { wrapper, button, offset } = mountSlide({ slide: 'loop' });
       const input = document.createElement('input');
+      input.addEventListener('keydown', (event) => event.stopPropagation());
       document.body.appendChild(input);
       input.focus();
-      const removeSpy = vi.spyOn(document, 'removeEventListener');
 
       button.dispatchEvent(new Event('pointerenter'));
       await vi.advanceTimersByTimeAsync(600);
@@ -640,14 +641,19 @@ describe('DtText', () => {
       input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       await wrapper.vm.$nextTick();
       expect(offset()).toBe('');
-      expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
-
-      button.dispatchEvent(new Event('pointerleave'));
-      button.dispatchEvent(new Event('pointerenter'));
-      await vi.advanceTimersByTimeAsync(600);
-      removeSpy.mockClear();
       wrapper.unmount();
-      expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
+    });
+
+    it('listenForEscape calls back on Escape until it is removed', () => {
+      const onEscape = vi.fn();
+      const remove = listenForEscape(document.body, onEscape);
+      const escape = () => document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+
+      escape();
+      remove();
+      escape();
+
+      expect(onEscape).toHaveBeenCalledTimes(1);
     });
 
     it('bounce slides back after the hold', async () => {

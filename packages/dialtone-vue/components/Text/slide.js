@@ -67,13 +67,14 @@ export function bindSlide ({ el, moveEl, onEnter, onLeave, onTransitionEnd }) {
 
 /**
  * Calls onEscape when Escape is pressed anywhere on the page: a row moving under the
- * pointer may not have focus. The event is not stopped. Returns a remove function.
+ * pointer may not have focus. Listens in the capture phase so a focused control that
+ * stops Escape cannot hide it; the event is not stopped. Returns a remove function.
  */
 export function listenForEscape (el, onEscape) {
   const doc = el.ownerDocument;
   const keydown = (event) => event.key === 'Escape' && onEscape();
-  doc.addEventListener('keydown', keydown);
-  return () => doc.removeEventListener('keydown', keydown);
+  doc.addEventListener('keydown', keydown, true);
+  return () => doc.removeEventListener('keydown', keydown, true);
 }
 
 function parseTime (value, fallback) {
