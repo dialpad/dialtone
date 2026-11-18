@@ -1,0 +1,48 @@
+apps/dialtone-documentation/docs/components/scrollbar.md
+  s_7f1d1d64baa803::t_2e47b6e45ed46e 6
+apps/dialtone-documentation/docs/components/input.md
+  s_7f1d1d64baa803::t_2e47b6e45ed46e 8
+packages/dialtone-cli/src/commands/search.ts
+  s_7f1d1d64baa803::t_2e47b6e45ed46e 17-21,23-24,29-30,32
+  s_7f1d1d64baa803::t_682fb624d317a2 22,28
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_2e47b6e45ed46e 125-136
+packages/dialtone-query-core/tests/tools/search-ranking.test.ts
+  s_7f1d1d64baa803::t_3db0efe4ae4d43 151-190
+  s_7f1d1d64baa803::t_3e8d9267235e2e 218
+packages/dialtone-query-core/src/keyword-matching.ts
+  s_7f1d1d64baa803::t_200dc1c3d9c2f7 15-37,39,41-42,47,49-51
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_200dc1c3d9c2f7 6,153,159,162-164,166,170,189,192,195,198,214,222-233
+  s_7f1d1d64baa803::t_682fb624d317a2 255-256
+  s_7f1d1d64baa803::t_92fbf9b0dabe32 234
+packages/dialtone-query-core/src/tools/components.ts
+  s_7f1d1d64baa803::t_200dc1c3d9c2f7 6,165-167,175,217,250-251
+  s_7f1d1d64baa803::t_3e8d9267235e2e 302
+.agents/resources/rules/documentation-site.md
+  s_7f1d1d64baa803::t_c082cc0e574774 22
+.claude/rules/documentation-site.md
+  s_7f1d1d64baa803::t_473fa3306cdd5c 32
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_722a8a07ae541c 93,98-100
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_ee684b780e00c9 158-164
+packages/dialtone-query-core/README.md
+  s_7f1d1d64baa803::t_21a1f2c3f50b7b 39,43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8366a360d8995c905dc5ca4699042a222991e94f",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
