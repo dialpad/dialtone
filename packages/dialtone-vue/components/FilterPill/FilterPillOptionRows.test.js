@@ -59,7 +59,8 @@ describe('DtFilterPill built-in dropdown option rows', () => {
   const rows = () => [...document.querySelectorAll('[data-qa="dt-filter-pill__option"]')];
   const actions = () => Object.fromEntries(Object.entries(pill().emitted())
     .filter(([name]) => ACTION_EVENTS.includes(name)));
-  const descriptionOf = row => document.getElementById(row.getAttribute('aria-describedby'))?.textContent ?? null;
+  const describedBy = row => document.getElementById(row.getAttribute('aria-describedby'));
+  const descriptionOf = row => describedBy(row)?.textContent ?? null;
 
   beforeEach(() => { hadScrollLock = document.documentElement.classList.contains('d-of-hidden'); });
 
@@ -81,8 +82,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       updateWrapper();
       await open();
       expect(rows().map(descriptionOf)).toEqual([null, 'Includes voicemail', 'Choose All under Status to view archived items']);
-      const description = document.getElementById(rows()[2].getAttribute('aria-describedby'));
-      expect(description.getAttribute('aria-hidden')).toBe('true');
+      expect(rows().map(row => describedBy(row)?.getAttribute('aria-hidden') ?? null)).toEqual([null, 'true', 'true']);
     });
 
     it('styles every built-in row disabled while the selection is unusable', async () => {
@@ -187,11 +187,13 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       await open();
       const calls = rows()[1];
       focusRow(calls);
-      live.value = live.value.map(option => option.value === 'calls' ? { ...option, group: 'Other views' } : option);
+      // Calls also moves from index 1 to 2, so ArrowDown proves the keyboard position followed it.
+      const [all, callsOption, archived, spam] = groupedOptions;
+      live.value = [all, archived, { ...callsOption, group: 'Other views' }, spam];
       await reconcile();
       expect(document.activeElement.id).toBe(calls.id);
       expect(document.activeElement.parentElement.getAttribute('role')).toBe('group');
-      expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
+      expect(await focusedLabelAfter('ArrowDown')).toBe('Spam');
       expect(actions()).toEqual({ open: [[true]] });
     });
   });

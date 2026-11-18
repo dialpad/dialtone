@@ -223,7 +223,10 @@ describe('DtListItem tests', () => {
         await wrapper.trigger('mousemove');
         await wrapper.trigger('mouseleave');
 
-        expect(Object.keys(wrapper.emitted())).toEqual(['mousemove', 'mouseleave']);
+        expect(wrapper.emitted()).toEqual({
+          mousemove: [[expect.any(MouseEvent)]],
+          mouseleave: [[expect.any(MouseEvent)]],
+        });
       });
 
       it('cancels the native activation of a disabled link row', () => {
