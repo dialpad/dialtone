@@ -21,13 +21,11 @@ it.each([
   { pattern: 'controlled-single-selection',
     presets: ['controlled default', 'controlled active', 'controlled empty options', 'controlled counts'] },
   { pattern: 'controlled-multiple-selection', presets: ['controlled multiple', 'controlled deferred'] },
-])('links $pattern presets to their public pattern and owns their exclusions', ({ pattern, presets }) => {
+])('links $pattern presets to their public pattern', ({ pattern, presets }) => {
   const destination = `https://dialtone.dialpad.com/components/filter-pill.html#${pattern}`;
   for (const preset of presets) {
     const metadata = filterPillVariants[preset].metadata;
     expect(metadata.copyNotice).toContain(destination);
-    expect(metadata.lookupExclude.owner).toMatch(/\S/);
-    expect(metadata.lookupExclude.reason).toMatch(/\S/);
   }
   const template = serializeExampleTemplate({
     info: {

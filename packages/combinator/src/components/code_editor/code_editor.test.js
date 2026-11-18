@@ -100,7 +100,6 @@ describe('code_editor.vue test', function () {
       expect(preset.props).not.toHaveProperty('modelValue');
       expect(preset.props.selected).toEqual({ initialValue: 'all' });
       expect(preset.metadata.copyNotice).toContain('v-model:selected');
-      expect(preset.metadata.lookupExclude.owner).toMatch(/\S/);
       await vi.runAllTimersAsync();
     } finally {
       wrapper.unmount();

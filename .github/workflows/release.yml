@@ -56,7 +56,11 @@ jobs:
     needs: [get-branch-name]
     if: ${{ contains(fromJSON('["staging", "alpha", "beta", "next"]'), needs.get-branch-name.outputs.current_branch) }}
     runs-on: ubuntu-latest
+    outputs:
+      base_sha: ${{ steps.release-base.outputs.base_sha }}
+      release_sha: ${{ steps.release-final.outputs.release_sha }}
     permissions:
+      actions: read
       contents: write
       packages: write
       issues: write
@@ -73,6 +77,58 @@ jobs:
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
+
+      - name: Record release base
+        id: release-base
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_BRANCH: ${{ needs.get-branch-name.outputs.current_branch }}
+        run: |
+          base_sha=$(git rev-parse HEAD)
+          if [[ "$RELEASE_BRANCH" =~ ^(alpha|beta|next)$ ]]; then
+            [[ "$base_sha" == "$(git rev-parse "origin/$RELEASE_BRANCH")" ]] || {
+              echo "::error::Preparation source is stale; start a new release run on the current branch."
+              exit 1
+            }
+            gh api --method GET "repos/$GH_REPO/actions/workflows/release.yml/runs" \
+              -f "branch=$RELEASE_BRANCH" -F per_page=100 --paginate --slurp > "$RUNNER_TEMP/release-runs.json" || exit 1
+            base_sha=$(node <<'NODE'
+          const { readFileSync } = require('node:fs');
+          const { execFileSync } = require('node:child_process');
+          const runs = JSON.parse(readFileSync(process.env.RUNNER_TEMP + '/release-runs.json'))
+            .flatMap(page => page.workflow_runs).sort((a, b) => b.id - a.id);
+          const current = Number(process.env.GITHUB_RUN_ID);
+          let base = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+          let unfinished = false;
+          let boundary = false;
+          for (const run of runs) {
+            if (run.id === current) continue;
+            if (run.id > current || run.status !== 'completed')
+              throw new Error('Another preparation run exists; finish the latest run before preparing again');
+            if (run.conclusion === 'success') { boundary = true; break; }
+            const jobs = JSON.parse(execFileSync('gh', ['api', '--method', 'GET',
+              `repos/${process.env.GH_REPO}/actions/runs/${run.id}/jobs`,
+              '-f', 'filter=all', '-F', 'per_page=100', '--paginate', '--slurp'], { encoding: 'utf8' }))
+              .flatMap(page => page.jobs);
+            if (!jobs.length) throw new Error('Preparation job history is unavailable; inspect the unfinished release before retrying');
+            const preparations = jobs.filter(job => job.name === 'release');
+            const guards = preparations.flatMap(job => job.steps ?? []).filter(step => step.name === 'Record release base');
+            if (preparations.length && !guards.length)
+              throw new Error('Preparation guard history is unavailable; inspect the unfinished release before retrying');
+            if (!guards.some(step => step.conclusion === 'success')) continue;
+            unfinished = true;
+            base = run.head_sha;
+          }
+          if (unfinished && !boundary)
+            throw new Error('Preparation history has no successful boundary; inspect the unfinished release before retrying');
+          if (!/^[0-9a-f]{40}$/.test(base)) throw new Error('Invalid preparation base');
+          console.log(base);
+          NODE
+            ) || exit 1
+          fi
+          git merge-base --is-ancestor "$base_sha" HEAD || exit 1
+          echo "base_sha=$base_sha" >> "$GITHUB_OUTPUT"
 
       # Release to GitHub
       - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
@@ -126,6 +182,32 @@ jobs:
       - name: Release Dialtone ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
         run: pnpm nx run dialtone:release
+
+      - name: Record prepared release commit
+        id: release-final
+        run: echo "release_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  # Individual semantic-release pushes are incomplete version sets on prerelease branches.
+  publish-prerelease:
+    needs: [get-branch-name, release]
+    if: ${{ contains(fromJSON('["alpha", "beta", "next"]'), needs.get-branch-name.outputs.current_branch) && needs.release.outputs.base_sha != needs.release.outputs.release_sha }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # A top-level dispatch keeps publish-web.yml as the existing npm trusted-publisher identity.
+      - name: Dispatch prepared prerelease publication
+        env:
+          GH_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_SHA: ${{ needs.release.outputs.release_sha }}
+          RELEASE_BASE: ${{ needs.release.outputs.base_sha }}
+          RELEASE_BRANCH: ${{ needs.get-branch-name.outputs.current_branch }}
+        run: >
+          gh workflow run publish-web.yml --ref "$RELEASE_BRANCH"
+          --field "release_sha=$RELEASE_SHA"
+          --field "release_base=$RELEASE_BASE"
+          --field "release_branch=$RELEASE_BRANCH"
 
   update-production:
     needs: [ release ]

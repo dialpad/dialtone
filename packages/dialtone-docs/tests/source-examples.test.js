@@ -23,17 +23,17 @@ const produce = raw => buildExampleRecords(input(raw));
 const ordinary = `## Default\n${fence('<dt-button>Save</dt-button>')}`;
 
 describe('source-driven component examples', () => {
-  it('withholds all five controlled source sections while retaining legacy FilterPill IDs', () => {
+  it('delivers the controlled starters, withholds bounded-setup sections and retains legacy FilterPill IDs', () => {
     const filePath = resolve('../../apps/dialtone-documentation/docs/components/filter-pill.md');
     const records = buildRecords(filePath);
     const byId = new Map(records.filter(record => record.example).map(record => [record.id, record]));
     const options = input(readFileSync(filePath, 'utf8'));
     options.filePath = 'apps/dialtone-documentation/docs/components/filter-pill.md';
     const coverage = buildExampleCoverage({ ...options, records });
-    for (const section of [
-      'intro', 'controlled-single-selection', 'controlled-multiple-selection',
-      'usage-closing-before-removal', 'labels-and-counts',
-    ]) {
+    // The release profile replaced version-only exclusions; unsupported setup stays withheld.
+    for (const section of ['intro', 'controlled-single-selection', 'controlled-multiple-selection'])
+      expect(byId.has(`examples/docs/components/filter-pill/${section}`), section).toBe(true);
+    for (const section of ['usage-closing-before-removal', 'labels-and-counts']) {
       const id = `examples/docs/components/filter-pill/${section}`;
       expect(byId.has(id), id).toBe(false);
       const candidate = coverage.candidates.find(candidate => candidate.id === id);

@@ -75,3 +75,22 @@ test('rejects static evidence when the current CSS dependency differs from the t
   report.reports[0].payloadHash = html.example.validation.payloadHash;
   assert.throws(() => promoteExampleEvidence(report, [record, html], { runs: {}, examples: {} }));
 });
+
+test('promotes a run against the selected release profile, not a fixed profile with the same ID', async () => {
+  const { releaseProfile, sourceVersions } = await import('./release-profile.mjs');
+  const { record, report } = fixture();
+  const profile = releaseProfile(sourceVersions(), 'sha512-' + 'A'.repeat(86) + '==');
+  assert.throws(() => promoteExampleEvidence(report, [record], { runs: {}, examples: {} }, profile),
+    /Report and selected profile differ/);
+  // The same records and report, regenerated for the release profile and its exact archive.
+  const consumer = { ...report.consumer, dependencies: profile.dependencies };
+  const files = { 'package.json': JSON.stringify(consumer) + '\n', 'App.vue': '<template>Fixture</template>\n', 'main.js': '\n', 'index.html': '<div id="app"></div>\n', 'vite.config.js': '\n' };
+  const release = { ...record, content: Object.entries(files).map(([name, value]) => '## ' + name + '\n\n```text\n' + value + '```').join('\n\n'),
+    example: { ...record.example, profile: { id: profile.id, dependencies: profile.dependencies },
+      validation: { payloadHash: payloadHash({ files, dependencies: profile.dependencies }) } } };
+  const run = { ...report, profile: profile.id, consumer, artifact: { profile: profile.id, package: '@dialpad/dialtone', ...profile.artifacts['@dialpad/dialtone'] },
+    reports: [{ ...report.reports[0], payloadHash: release.example.validation.payloadHash }] };
+  const evidence = promoteExampleEvidence(run, [release], { runs: {}, examples: {} }, profile);
+  assert.equal(Object.values(evidence.runs)[0].artifact.integrity, profile.artifacts['@dialpad/dialtone'].integrity);
+  assert.equal(evidence.examples[release.id].consumerBuild, 'built');
+});

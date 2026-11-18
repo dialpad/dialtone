@@ -7,21 +7,25 @@ const messageOptions = [
   { value: 'unread', label: 'Unread' },
   { value: 'mentions', label: 'Mentions & Reactions', shortLabel: 'Mentions' },
 ];
+const typeOptions = [
+  { value: 'all', label: 'All types' },
+  { value: 'calls', label: 'Calls' },
+  { value: 'messages', label: 'Messages', description: 'Includes texts and chats' },
+  { value: 'archived', label: 'Archived', disabled: true, description: 'Choose All under Status to view archived items', group: 'Other views' },
+  { value: 'spam', label: 'Spam', group: 'Other views' },
+];
 const channelOptions = [
   { value: 'email', label: 'Email' },
   { value: 'phone', label: 'Phone' },
   { value: 'chat', label: 'Chat' },
 ];
 
-function controlledPreset (props = {}, slots = {}) {
+function controlledPreset (props = {}, slots = {}, docsSection) {
   const single = props.useDropdown?.initialValue ?? true;
+  const section = docsSection ?? `controlled-${single ? 'single' : 'multiple'}-selection`;
   return {
     metadata: {
-      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#controlled-${single ? 'single' : 'multiple'}-selection.`,
-      lookupExclude: {
-        reason: 'Controlled options/selected require the DLT-3736 feature release; the current Dialtone 10.5.1 lookup profile predates that API. Withhold until compatible publication and profile qualification.',
-        owner: 'DLT-3736 / Dialtone component and lookup maintainers',
-      },
+      copyNotice: `Configuration snapshot. Bind selected with v-model:selected for interaction; see https://dialtone.dialpad.com/components/filter-pill.html#${section}.`,
     },
     props: {
       options: { initialValue: single ? messageOptions : channelOptions },
@@ -126,6 +130,12 @@ export default {
   }),
 
   'controlled empty options': controlledPreset({ options: { initialValue: [] } }),
+
+  'controlled unavailable choices': controlledPreset(
+    { options: { initialValue: typeOptions }, label: { initialValue: 'Type' } },
+    {},
+    'unavailable-choices-and-groups',
+  ),
 
   'controlled counts': controlledPreset({ selected: { initialValue: 'unread', types: ['string', 'null'] } }, {
     headerContent: { initialValue: 'Filter by' },
