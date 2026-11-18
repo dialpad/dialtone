@@ -626,6 +626,30 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
+    it('stops on Escape while only hovered, with focus elsewhere, and stops listening once at rest', async () => {
+      const { wrapper, button, offset } = mountSlide({ slide: 'loop' });
+      const input = document.createElement('input');
+      document.body.appendChild(input);
+      input.focus();
+      const removeSpy = vi.spyOn(document, 'removeEventListener');
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      expect(offset()).not.toBe('');
+
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      await wrapper.vm.$nextTick();
+      expect(offset()).toBe('');
+      expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
+
+      button.dispatchEvent(new Event('pointerleave'));
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      removeSpy.mockClear();
+      wrapper.unmount();
+      expect(removeSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
+    });
+
     it('bounce slides back after the hold', async () => {
       const { wrapper, text, button, offset } = mountSlide({ slide: 'bounce' });
 

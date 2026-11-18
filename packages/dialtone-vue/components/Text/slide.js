@@ -35,7 +35,7 @@ function isKeyboardFocus (target) {
 
 /**
  * Listens on the host and calls onEnter when the first of pointer or focus
- * arrives, onLeave when both have left or Escape is pressed. Returns an unbind function.
+ * arrives, onLeave when both have left. Returns an unbind function.
  */
 export function bindSlide ({ el, moveEl, onEnter, onLeave, onTransitionEnd }) {
   const host = getSlideHost(el);
@@ -51,7 +51,6 @@ export function bindSlide ({ el, moveEl, onEnter, onLeave, onTransitionEnd }) {
     pointerleave: () => set('pointer', false),
     focusin: (event) => isKeyboardFocus(event.target) && set('focus', true),
     focusout: (event) => host.contains(event.relatedTarget) || set('focus', false),
-    keydown: (event) => event.key === 'Escape' && onLeave(),
   };
   const transitionEnd = (event) => {
     if (event.target === moveEl && event.propertyName === 'transform') onTransitionEnd();
@@ -64,6 +63,17 @@ export function bindSlide ({ el, moveEl, onEnter, onLeave, onTransitionEnd }) {
     Object.entries(handlers).forEach(([name, fn]) => host.removeEventListener(name, fn));
     moveEl.removeEventListener('transitionend', transitionEnd);
   };
+}
+
+/**
+ * Calls onEscape when Escape is pressed anywhere on the page: a row moving under the
+ * pointer may not have focus. The event is not stopped. Returns a remove function.
+ */
+export function listenForEscape (el, onEscape) {
+  const doc = el.ownerDocument;
+  const keydown = (event) => event.key === 'Escape' && onEscape();
+  doc.addEventListener('keydown', keydown);
+  return () => doc.removeEventListener('keydown', keydown);
 }
 
 function parseTime (value, fallback) {

@@ -50,6 +50,7 @@ import {
 import {
   bindSlide,
   getSlideDuration,
+  listenForEscape,
   prefersReducedMotion,
   readSlideConfig,
 } from './slide';
@@ -397,7 +398,7 @@ export default {
 
   created() {
     // non-reactive slide bookkeeping
-    this.slideRuntime = { unbind: null, timers: [], distance: 0, restWidth: 0 };
+    this.slideRuntime = { unbind: null, removeEscape: null, timers: [], distance: 0, restWidth: 0 };
     // after render, so the inner span and a new root (`as`) exist
     this.$watch(() => [this.slideMode, this.as], this.setupSlide, { flush: 'post' });
   },
@@ -474,6 +475,10 @@ export default {
     // snap to rest, no reverse animation
     slideReset(phase = 'rest') {
       this.slideClearTimers();
+      if (phase === 'rest') {
+        this.slideRuntime.removeEscape?.();
+        this.slideRuntime.removeEscape = null;
+      }
       this.slidePhase = phase;
       this.slideOffset = 0;
       this.slideDuration = 0;
@@ -494,6 +499,7 @@ export default {
         return;
       }
 
+      this.slideRuntime.removeEscape = listenForEscape(this.$el, () => this.slideReset());
       this.slidePhase = 'waiting';
       this.slideAfter(readSlideConfig(this.$el, this.slideMode).delay, this.slideStart);
     },
