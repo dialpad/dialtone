@@ -1,4 +1,4 @@
-import { StrictMode, type ReactNode } from 'react';
+import { Activity, StrictMode, type ReactNode } from 'react';
 import { act, render, type RenderResult } from '@testing-library/react';
 import { DtMotionText, type DtMotionTextHandle, type DtMotionTextProps } from './MotionText';
 import { MOTION_TEXT_ANIMATION_MODES, MOTION_TEXT_SPEEDS, MOTION_TEXT_TIMING_PRESETS } from './MotionTextConstants';
@@ -316,8 +316,9 @@ describe('DtMotionText Tests', () => {
         updateWrapper();
         await start();
 
-        // Shimmer renders the text whole, so it has no words at all
+        // Shimmer renders the text whole, so it has no words at all; fade and slide render a span per word
         expect(findContent()?.textContent).toBe(MOCK_GRADIENT_TEXT);
+        expect(findWords()).toHaveLength(mode === 'shimmer' ? 0 : MOCK_GRADIENT_TEXT.split(' ').length);
         findWords().forEach((_word, index) => {
           expect(getWordStyle(index, '--d-motion-text-gradient-size')).toBe('');
           expect(getWordStyle(index, '--d-motion-text-gradient-position')).toBe('');
@@ -543,6 +544,45 @@ describe('DtMotionText Tests', () => {
         expect(getEmittedCount('progress')).toBe(2);
         await advance(1);
         expect(getProgressPayloads()[2].wordsComplete).toBe(1);
+      });
+    });
+
+    describe('When the handle outlives the component', () => {
+      it('should ignore skipToEnd() and emit nothing', async () => {
+        await start();
+        const detached = vm();
+        wrapper!.unmount();
+        wrapper = null;
+        act(() => { detached.skipToEnd(); });
+        await advance(5000);
+
+        expect(getEmittedCount('complete')).toBe(0);
+      });
+    });
+
+    describe('When the component is hidden and shown again with <Activity>', () => {
+      it('should be startable again after being hidden mid-animation', async () => {
+        const activity = (mode: 'visible' | 'hidden') => (
+          <Activity mode={mode}>
+            <DtMotionText
+              ref={(instance) => { handle = instance; }}
+              {...baseProps}
+              onStart={record('start')}
+              onComplete={record('complete')}
+            />
+          </Activity>
+        );
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(activity('visible'));
+        await start();
+        wrapper.rerender(activity('hidden'));
+        wrapper.rerender(activity('visible'));
+        await start();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(getEmittedCount('start')).toBe(2);
+        expect(getEmittedCount('complete')).toBe(1);
       });
     });
 

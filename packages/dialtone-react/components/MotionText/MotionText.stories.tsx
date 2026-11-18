@@ -33,7 +33,8 @@ export const argTypesData = {
   // Props
   text: {
     control: 'text',
-    description: 'The text content to animate. Text is split into words and animated word by word.',
+    description: 'The text content to animate. Text is split into words and animated word by word, except in ' +
+      'shimmer, which animates the text as a whole.',
     table: {
       category: 'props',
       type: {
@@ -47,7 +48,8 @@ export const argTypesData = {
     },
     options: [...MOTION_TEXT_ANIMATION_MODES],
     description: 'The word-by-word animation to play. gradient-in, fade-in, slide-in and slide-in-gradient reveal ' +
-      'the text; gradient-sweep and shimmer play over text that is already visible.',
+      'the text; gradient-sweep and shimmer play over text that is already visible. shimmer animates the text as ' +
+      'a whole rather than word by word: it keeps slot markup and emits no per-word progress.',
     table: {
       category: 'props',
       type: {
@@ -90,7 +92,7 @@ export const argTypesData = {
   loop: {
     control: 'boolean',
     description: 'Whether to loop the animation. Each cycle holds briefly after the last word settles, ' +
-      'then every word restarts together.',
+      'then every word restarts together. shimmer has no hold: it restarts as soon as the band finishes.',
     table: {
       category: 'props',
       type: {
@@ -128,7 +130,8 @@ export const argTypesData = {
   // Slots
   children: {
     name: 'children',
-    description: 'Text content to animate when not using the text prop. Only the text is animated; markup is not preserved.',
+    description: 'Text content to animate when not using the text prop. Only the text is animated; markup is not preserved, except in shimmer, which ' +
+      'renders the children as they are.',
     control: 'text',
     table: {
       category: 'slots',
@@ -158,7 +161,8 @@ export const argTypesData = {
     },
   },
   onProgress: {
-    description: 'Called as each word finishes animating, with wordsComplete, totalWords, and progress (0 to 1)',
+    description: 'Called as each word finishes animating, with wordsComplete, totalWords, and progress (0 to 1). ' +
+      'Not called in shimmer, which animates the text as a whole.',
     table: {
       category: 'events',
       type: {

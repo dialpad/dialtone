@@ -50,7 +50,11 @@ export interface DtMotionTextHandle {
 }
 
 // onPause and onProgress are media events on HTMLAttributes; here they're the component's own events.
-type NativeAttributes = Omit<HTMLAttributes<HTMLSpanElement>, 'children' | 'onPause' | 'onProgress'>;
+// The component renders the root's children itself, and React throws when a root has both children and inner HTML.
+type NativeAttributes = Omit<
+  HTMLAttributes<HTMLSpanElement>,
+  'children' | 'dangerouslySetInnerHTML' | 'onPause' | 'onProgress'
+>;
 
 export interface DtMotionTextProps extends NativeAttributes {
   /** Vue's public methods (`start`, `pause`, `resume`, `reset`, `skipToEnd`) and the root element. */
@@ -370,6 +374,9 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
 
   /** Skip to the end of the animation */
   function skipToEnd () {
+    // A handle kept past unmount must not schedule events for a listener that's gone (Vue's emit is a no-op there)
+    if (m.isUnmounted) return;
+
     showAllContent();
   }
 
@@ -548,8 +555,10 @@ export function DtMotionText ({
   className,
   style,
   ref,
+  // Not in the props type; dropped so an untyped caller can't make React throw on the root
+  dangerouslySetInnerHTML: _dangerouslySetInnerHTML,
   ...rest
-}: DtMotionTextProps) {
+}: DtMotionTextProps & Pick<HTMLAttributes<HTMLSpanElement>, 'dangerouslySetInnerHTML'>) {
   const rootRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLSpanElement>(null);
   const slotRef = useRef<HTMLSpanElement>(null);
@@ -643,6 +652,10 @@ export function DtMotionText ({
       active = false;
       machine.isUnmounted = true;
       machine.mountGeneration++;
+      // React 19's <Activity> disconnects this effect without unmounting the component and reconnects it later. The
+      // timers go with the cleanup, so a playing animation can't carry on: leave it startable.
+      machine.isAnimating = false;
+      machine.isPaused = false;
       tickQueue.current = [];
       controller.clearTimeouts();
       stopWatchingReducedMotion?.();
