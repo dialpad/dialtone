@@ -326,6 +326,16 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
       expect(wrapper.emitted('highlight')).toBeUndefined();
     });
 
+  it('keeps a consumer initial focus target when a menu with a disabled first row opens by keyboard', async () => {
+    mountMenu({ open: null }, undefined, () => [
+      h(DtListItem, { id: 'export', role: 'menuitem', navigationType: 'arrow-keys', disabled: true }, () => 'Export'),
+      h(DtListItem, { id: 'rename', role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Rename'),
+    ], { initialFocusElement: '#rename' });
+    await wrapper.get('[data-qa="trigger"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+    await flushPromises();
+    expect(document.activeElement.id).toBe('rename');
+  });
+
   it.each(['dialog', 'listbox'])('preserves legacy row boundaries with popup role=%s', async role => {
     const popover = mountMenu({ role });
     await flushPromises();
