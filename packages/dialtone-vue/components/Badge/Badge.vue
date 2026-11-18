@@ -15,7 +15,7 @@
       class="d-badge__decorative"
     />
     <span
-      v-if="hasLeftIcon"
+      v-if="hasLeftIcon()"
       :class="['d-badge__icon-left', startIconClass]"
     >
       <!-- @slot Slot for start icon, icon-size slot prop defaults to '200' -->
@@ -38,7 +38,7 @@
       </slot>
     </span>
     <span
-      v-if="hasRightIcon"
+      v-if="hasRightIcon()"
       :class="['d-badge__icon-right', endIconClass]"
     >
       <!-- @slot Slot for end icon, icon-size slot prop defaults to '200' -->
@@ -173,20 +173,6 @@ export default {
     };
   },
 
-  computed: {
-    hasLeftIcon () {
-      return hasSlotContent(this.$slots.startIcon) || hasSlotContent(this.$slots.leftIcon);
-    },
-
-    hasRightIcon () {
-      return hasSlotContent(this.$slots.endIcon) || hasSlotContent(this.$slots.rightIcon);
-    },
-
-    hasIcons () {
-      return this.hasLeftIcon || this.hasRightIcon;
-    },
-  },
-
   mounted () {
     this.validateProps();
   },
@@ -196,6 +182,19 @@ export default {
   },
 
   methods: {
+    // These read $slots, which is not reactive, so they must not be cached as computeds.
+    hasLeftIcon () {
+      return hasSlotContent(this.$slots.startIcon) || hasSlotContent(this.$slots.leftIcon);
+    },
+
+    hasRightIcon () {
+      return hasSlotContent(this.$slots.endIcon) || hasSlotContent(this.$slots.rightIcon);
+    },
+
+    hasIcons () {
+      return this.hasLeftIcon() || this.hasRightIcon();
+    },
+
     validateProps () {
       this.validateTypePropCombination();
       this.validateDecorationPropCombination();
@@ -217,7 +216,7 @@ export default {
         console.error('DtBadge error: decoration prop can only be used with kind: \'label\' and type: \'default\'.');
       }
 
-      if (this.hasIcons) {
+      if (this.hasIcons()) {
         console.error('DtBadge error: decoration prop cannot be used with startIcon or endIcon.');
       }
     },

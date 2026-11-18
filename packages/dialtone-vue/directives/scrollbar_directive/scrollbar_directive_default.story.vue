@@ -11,7 +11,12 @@
         v-dt-scrollbar
         class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
-        <div class="d-p-200">
+        <div
+          tabindex="0"
+          role="region"
+          aria-label="Default scrollbar example"
+          class="d-p-200 fv:d-ol-focusring"
+        >
           <p
             v-for="i in 20"
             :key="i"
@@ -30,7 +35,12 @@
         v-dt-scrollbar:always
         class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
-        <div class="d-p-200">
+        <div
+          tabindex="0"
+          role="region"
+          aria-label="Always visible scrollbar example"
+          class="d-p-200 fv:d-ol-focusring"
+        >
           <p
             v-for="i in 20"
             :key="i"
@@ -49,7 +59,12 @@
         v-dt-scrollbar:scroll
         class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
-        <div class="d-p-200">
+        <div
+          tabindex="0"
+          role="region"
+          aria-label="Auto-hide on scroll example"
+          class="d-p-200 fv:d-ol-focusring"
+        >
           <p
             v-for="i in 20"
             :key="i"
@@ -68,7 +83,12 @@
         v-dt-scrollbar="{ showScrollbar: 'always', offset: { block: '2rem' } }"
         class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
-        <div class="d-p-200">
+        <div
+          tabindex="0"
+          role="region"
+          aria-label="Block offsets scrollbar example"
+          class="d-p-200 fv:d-ol-focusring"
+        >
           <p
             v-for="i in 20"
             :key="i"
@@ -89,7 +109,12 @@
         }"
         class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
-        <div class="d-p-200">
+        <div
+          tabindex="0"
+          role="region"
+          aria-label="Individual offsets scrollbar example"
+          class="d-p-200 fv:d-ol-focusring"
+        >
           <p
             v-for="i in 20"
             :key="i"

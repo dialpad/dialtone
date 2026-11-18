@@ -57,6 +57,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       ['packages/dialtone-docs/src/generators/build-public-docs.mjs', 'fix(docs): preserve literal markup', 'patch'],
       ['apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js', 'docs(examples): adjust authored fence parsing', 'patch'],
       ['scripts/retrieval/profiles.mjs', 'chore(examples): update the tested consumer profile', 'patch'],
+      ['scripts/retrieval/release-profile.mjs', 'fix(examples): select the release consumer target', 'patch'],
       ['packages/combinator/src/variants/variants_loader.js', 'fix(combinator): update a curated preset', 'patch'],
       ['scripts/retrieval/example-consumer.mjs', 'fix(examples): correct preset API validation', 'patch'],
       ['packages/dialtone-icons/src/IconTemplate.vue', 'fix(icons): correct generated icon props', 'patch'],
@@ -116,6 +117,8 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       'packages/dialtone-icons/android/build.gradle',
       'packages/dialtone-query-core-extra/src/data.ts',
       'scripts/unrelated.mjs',
+      // Release orchestration verifies bundles; it does not change their content.
+      'scripts/retrieval/release-archives.mjs',
     ]) commit(path, 'fix(test): coverage or unrelated source');
     commit('packages/dialtone-mcp-server/test-search.js', 'chore(test): exercise MCP search');
     const ignored = [

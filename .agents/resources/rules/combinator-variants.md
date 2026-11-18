@@ -31,9 +31,11 @@ Reserved top-level keys:
 
 - `defaults`: metadata applied before every preset.
 - `exclusions`: rules that hide, disable, clear, or disable specific values.
-- `default`: the initial preset and reset target.
+- `default`: the initial preset and reset target unless the bank declares `defaults.metadata.initialPreset`.
 
 Every other top-level key is a named preset shown in the Combinator preset dropdown.
+
+Set `defaults.metadata.initialPreset` to an existing preset name only when the UI should initially show and Reset to that preset. The preference also supplies the edit-comparison baseline; it does not rename the `default` preset or its lookup ID. Banks without this metadata keep their existing behavior.
 
 ```js
 export default {
@@ -88,6 +90,33 @@ defaults: {
 `tokenCategory` enables token-aware value previews in controls. Verify category
 strings against `packages/combinator/src/lib/tokens.js` and existing variant
 files before adding a new form.
+
+## Optional preview and copy metadata
+
+`defaults.metadata` holds bank policy separately from component members. A named
+preset may override individual metadata fields. Metadata is never bound as a
+component prop or exposed as a slot scope.
+
+Use `previewIdentity(bindings)` only when a component keeps state that ordinary
+prop patching cannot replace. Return an array of identity factors: primitives
+compare by value, while arrays and objects compare by reference. This policy
+opts the bank into owned clones of initial arrays/objects and into remounting on
+explicit preset selection or Reset. Existing slot and slider keys still apply.
+Banks without the policy retain their existing instance and initial-value behavior.
+
+Include only changes that require a new instance. For example, Filter Pill keys
+the legacy/controlled contract, controlled single/multiple pattern, and legacy
+model array reference. Controlled selected values, option replacements, labels
+and counts must remain ordinary updates so an open overlay keeps its focus.
+Keep pattern selectors locked where changing one alone would invalidate a
+selection's scalar/array shape; provide correctly shaped presets instead.
+
+An optional string `copyNotice` explains setup responsibilities for a copied
+configuration snapshot. It appears in the code panel, a template comment in
+copied/delivered markup, and the copied preset's metadata. Link the full public
+example when interaction requires state or handlers absent from the snapshot.
+Do not claim a static snapshot is an interactive example. Leave banks without
+a notice unchanged.
 
 ## Search keywords
 
@@ -157,3 +186,5 @@ when the component becomes viable, and keep the reason short and user-facing.
 - Token-numbered values stay strings.
 
 For generated lookup presets, follow the [shared materialization and delivery lifecycle](../documentation-examples.md#combinator-presets). Registry curation drives retrieval without another publishing list. Regenerate accounting after additions, edits, renames, removals or API/support changes; revalidate affected payloads. Source delivery does not imply consumer or full-portfolio qualification.
+
+A preset's optional `metadata.lookupExclude` contains a nonempty `reason` and `owner` for withholding generated lookup delivery while keeping its preview. Use it for sources that bounded lookup cannot deliver, not for an API newer than the last published package: release qualification targets the packages released with the tools. Remove it once the stated condition is met. See the shared lifecycle above. The generator validates the annotation and reports an owned `policy-excluded` disposition.

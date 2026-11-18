@@ -58,9 +58,9 @@ The primitive triad handles layout and spacing declaratively. For example:
 ```vue demo
 <dt-stack gap="400" align="center">
   <dt-stack direction="row" :gap="selectedGap">
-    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 1</dt-text></dt-box>
-    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 2</dt-text></dt-box>
-    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 3</dt-text></dt-box>
+    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" variant="body-sm" tone="tertiary" align="center">Box 1</dt-text></dt-box>
+    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" variant="body-sm" tone="tertiary" align="center">Box 2</dt-text></dt-box>
+    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" variant="body-sm" tone="tertiary" align="center">Box 3</dt-text></dt-box>
   </dt-stack>
   <dt-stack direction="row" gap="200">
     <dt-select-menu size="200" label="Box's Padding" :options="paddingOptions" v-model="selectedPadding" />
@@ -71,13 +71,13 @@ The primitive triad handles layout and spacing declaratively. For example:
 <!-- @code -->
 <dt-stack direction="row" gap="200">
   <dt-box min-inline-size="300" padding="200" surface="moderate" border-width="100" border-radius="300">
-    <dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 1</dt-text>
+    <dt-text as="p" variant="body-sm" tone="tertiary" align="center">Box 1</dt-text>
   </dt-box>
   <dt-box min-inline-size="300" padding="200" surface="moderate" border-width="100" border-radius="300">
-    <dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 2</dt-text>
+    <dt-text as="p" variant="body-sm" tone="tertiary" align="center">Box 2</dt-text>
   </dt-box>
   <dt-box min-inline-size="300" padding="200" surface="moderate" border-width="100" border-radius="300">
-    <dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 3</dt-text>
+    <dt-text as="p" variant="body-sm" tone="tertiary" align="center">Box 3</dt-text>
   </dt-box>
 </dt-stack>
 ```

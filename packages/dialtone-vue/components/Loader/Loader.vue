@@ -1,8 +1,10 @@
 <template>
   <div
     :class="['d-loader', loaderKindClass]"
-    :aria-label="ariaLabel || 'loading'"
+    :aria-label="accessibleLabel"
     data-qa="dt-loader"
+    v-bind="$attrs"
+    :role="$attrs.role ?? 'img'"
   >
     <template v-if="isSpinner">
       <svg
@@ -99,14 +101,17 @@
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 import { ordinalSizeValidator } from '@/common/validators';
 import { LOADER_KIND_MODIFIERS } from './LoaderConstants';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtLoader',
 
+  inheritAttrs: false,
+
   props: {
     /**
      * The label of the loader as read out by a screen reader.
-     * Default is "loading"
+     * Defaults to the localized loading message.
      */
     ariaLabel: {
       type: String,
@@ -134,7 +139,18 @@ export default {
     },
   },
 
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
+
   computed: {
+    accessibleLabel () {
+      if (['none', 'presentation'].includes(this.$attrs.role)) return undefined;
+      return this.ariaLabel || this.i18n.$t('DIALTONE_LOADING');
+    },
+
     isSpinner () {
       return this.kind === 'spinner';
     },

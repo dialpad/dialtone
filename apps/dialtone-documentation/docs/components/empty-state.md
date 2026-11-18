@@ -325,8 +325,8 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 Encourage and guide the user through product engagement.
 
 ```text
-Title: No Ai recaps yet
-Description: Enable Ai for calls and meetings and check back here!
+Title: No AI recaps yet
+Description: Enable AI for calls and meetings and check back here!
 Action: [Show me how]
 ```
 
@@ -344,8 +344,8 @@ Description: Try adjusting your search criteria or filters.
 Call out interesting new features or services, and entice the user to explore them.
 
 ```text
-Title: Discover Ai recaps
-Description: Enable Ai for calls and meetings to view and share a recap.
+Title: Discover AI recaps
+Description: Enable AI for calls and meetings to view and share a recap.
 Action: [Tell me more]
 ```
 

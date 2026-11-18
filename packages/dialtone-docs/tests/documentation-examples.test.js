@@ -1,9 +1,24 @@
 import { describe, it, expect, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+// Saved evidence below belongs to the frozen dt10-pinned fixture; select it before the generator loads.
+const { manifestFile } = await vi.hoisted(async () => {
+  const { mkdtempSync, writeFileSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const manifestFile = value => {
+    const path = join(mkdtempSync(join(tmpdir(), 'example-manifest-')), 'manifest.json');
+    writeFileSync(path, JSON.stringify(value));
+    return path;
+  };
+  process.env.DIALTONE_EXAMPLE_RELEASE_MANIFEST = manifestFile({ schemaVersion: 1, profile: 'dt10-pinned' });
+  return { manifestFile };
+});
 import { chunkSections } from '../src/generators/build-public-docs.mjs';
 import { buildExampleRecords } from '../src/generators/documentation-examples.mjs';
 import { getProfile } from '../../../scripts/retrieval/profiles.mjs';
+import { releaseProfile, sourceVersions } from '../../../scripts/retrieval/release-profile.mjs';
 
 const source = resolve('../../apps/dialtone-documentation/docs/components/button.md');
 const vuePackage = JSON.parse(readFileSync(resolve('../dialtone-vue/package.json')));
@@ -90,6 +105,36 @@ describe('authored documentation example evidence', () => {
       expect(record.example.manualReview).toBe('pending');
     } finally {
       vi.doUnmock('../../../scripts/retrieval/profiles.mjs');
+      vi.resetModules();
+    }
+  });
+
+  it('targets the checked release versions by default and binds proof to archive bytes, not version strings', async () => {
+    const legacy = process.env.DIALTONE_EXAMPLE_RELEASE_MANIFEST;
+    const load = async env => {
+      process.env.DIALTONE_EXAMPLE_RELEASE_MANIFEST = env;
+      vi.resetModules();
+      const { buildExampleRecords: build } = await import('../src/generators/documentation-examples.mjs');
+      return assemble(readFileSync(source, 'utf8'), build).find(record => record.id === 'examples/button-default');
+    };
+    try {
+      const unselected = await load('');
+      expect(unselected.example.validation.consumerBuild).toBe('unverified');
+      const integrity = name => 'sha512-' + name.repeat(86) + '==';
+      const profile = releaseProfile(sourceVersions(), integrity('A'));
+      const { payloadHash } = unselected.example.validation;
+      const evidence = archive => ({
+        runs: { run: { profile: profile.id, artifact: { package: '@dialpad/dialtone', version: profile.artifacts['@dialpad/dialtone'].version, integrity: integrity(archive) } } },
+        examples: { 'examples/button-default': { run: 'run', payloadHash, consumerBuild: 'built', api: 'passed', checked: [] } },
+      });
+      const matching = await load(manifestFile({ schemaVersion: 1, profile, evidence: evidence('A') }));
+      expect(matching.example.validation.payloadHash).toBe(payloadHash);
+      expect(matching.example.validation.consumerBuild).toBe('built');
+      expect(matching.content).not.toMatch(/\bfile:/);
+      const otherBytes = await load(manifestFile({ schemaVersion: 1, profile, evidence: evidence('B') }));
+      expect(otherBytes.example.validation.consumerBuild).toBe('unverified');
+    } finally {
+      process.env.DIALTONE_EXAMPLE_RELEASE_MANIFEST = legacy;
       vi.resetModules();
     }
   });

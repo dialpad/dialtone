@@ -15,8 +15,12 @@
         :open="$attrs.open"
         @highlight="$attrs.onHighlight"
       >
-        <template #anchor="{ attrs }">
-          <dt-button v-bind="attrs">
+        <template #anchor="anchorAttrs">
+          <dt-button
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
+          >
             {{ variant }} aligned dropdown
           </dt-button>
         </template>
@@ -46,14 +50,16 @@
         :transition="$attrs.transition"
         @opened="$attrs.onOpened"
       >
-        <template #anchor="{ attrs }">
+        <template #anchor="anchorAttrs">
           <div
             v-if="$attrs.anchor"
             v-html="$attrs.anchor"
           />
           <dt-button
             v-else
-            v-bind="attrs"
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
           >
             with sections
           </dt-button>
@@ -101,14 +107,16 @@
         :transition="$attrs.transition"
         @opened="$attrs.onOpened"
       >
-        <template #anchor="{ attrs }">
+        <template #anchor="anchorAttrs">
           <div
             v-if="$attrs.anchor"
             v-html="$attrs.anchor"
           />
           <dt-button
             v-else
-            v-bind="attrs"
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
           >
             with sections and headings
           </dt-button>
@@ -156,8 +164,12 @@
         class="d-mie-100"
         :open="$attrs.open"
       >
-        <template #anchor="{ attrs }">
-          <dt-button v-bind="attrs">
+        <template #anchor="anchorAttrs">
+          <dt-button
+            :aria-expanded="anchorAttrs['aria-expanded']"
+            :aria-controls="anchorAttrs['aria-controls']"
+            :aria-haspopup="anchorAttrs['aria-haspopup']"
+          >
             with footer
           </dt-button>
         </template>
@@ -199,9 +211,8 @@
           :open-on-context="true"
           :transition="$attrs.transition"
         >
-          <template #anchor="{ attrs }">
+          <template #anchor>
             <div
-              v-bind="attrs"
               class="d-ba d-bas-dashed d-w264 d-py-600 d-ta-center d-bgc-black-300"
             >
               Right click to open

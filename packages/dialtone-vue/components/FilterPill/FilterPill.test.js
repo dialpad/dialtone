@@ -1,5 +1,8 @@
 import { mount } from '@vue/test-utils';
-import { nextTick } from 'vue';
+import { h, nextTick, toRaw } from 'vue';
+import { LocaleManager, RawBundleSource, MemoryStorageWrapper } from '@dialpad/i18n';
+import { DialtoneLocalization } from '@/localization';
+import enUS from '@/localization/en-US.ftl?raw';
 import DtFilterPill from './FilterPill.vue';
 import { DtPopover } from '@/components/Popover';
 import { DtDropdown } from '@/components/Dropdown';
@@ -43,6 +46,7 @@ describe('DtFilterPill Tests', function () {
   let content;
 
   const updateWrapper = () => {
+    if (wrapper?.exists()) wrapper.unmount();
     wrapper = mount(DtFilterPill, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
@@ -300,12 +304,15 @@ describe('DtFilterPill Tests', function () {
         expect(wrapper.find('[data-qa="dt-filter-pill__button"]').exists()).toBe(true);
       });
 
-      it('Should render DtListItem elements when dropdown is open', async () => {
+      it('Should render dropdown rows with hidden reserved selection indicators', async () => {
         await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
 
         const listItems = wrapper.findAllComponents(DtListItem);
 
         expect(listItems).toHaveLength(MOCK_DROPDOWN_FILTERS.length);
+        expect(listItems.every(item => item.get('[data-qa="dt-item-layout-selected-wrapper"]')
+          .get('[data-qa="dt-filter-pill__selection-indicator"]')
+          .classes().includes('d-filter-pill__selection-indicator--hidden'))).toBe(true);
       });
     });
 
@@ -617,21 +624,108 @@ describe('DtFilterPill Tests', function () {
     });
   });
 
+  describe('Overlay minimum inline size', () => {
+    it.each([false, true])('matches the full pill including Clear with useDropdown=%s', async (useDropdown) => {
+      mockProps = { useDropdown, modelValue: [{ name: 'Email', active: true }, { name: 'Phone' }] };
+      updateWrapper();
+      vi.spyOn(wrapper.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 680, 32));
+      vi.spyOn(button.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 200, 32));
+      vi.spyOn(clearButton.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(200, 0, 40, 32));
+      expect(clearButton.exists()).toBe(true);
+      await button.trigger('click');
+
+      const dialog = document.getElementById(button.attributes('aria-controls'));
+      expect(dialog.style.minInlineSize).toBe('240px');
+    });
+
+    it('rejects percentage overlay minimums', () => {
+      expect(DtFilterPill.props.overlayMinInlineSize.validator('100p')).toBe(false);
+    });
+
+    it('updates custom and natural sizing while retaining the maximum width cap', async () => {
+      vi.spyOn(button.element, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 240, 32));
+      await button.trigger('click');
+      const dialog = document.getElementById(button.attributes('aria-controls'));
+      for (const [value, variable] of [['1px', '1px'], ['300', '300']]) {
+        await wrapper.setProps({ overlayMinInlineSize: value });
+        expect(dialog.style.minInlineSize).toBe(`var(--dt-layout-${variable})`);
+      }
+      await wrapper.setProps({ popoverMaxWidth: '12rem' });
+      expect(dialog.style.minInlineSize).toBe('min(var(--dt-layout-300), 12rem)');
+      await wrapper.setProps({ overlayMinInlineSize: '0', popoverMaxWidth: '' });
+      expect(dialog.style.minInlineSize).toBe('0px');
+      await wrapper.setProps({ overlayMinInlineSize: 'anchor', popoverMaxWidth: '' });
+      expect(dialog.style.minInlineSize).toBe('240px');
+    });
+
+    it('tracks pill resizing and disconnects without later changing the removed dialog', async () => {
+      const observers = [];
+      vi.stubGlobal('ResizeObserver', class {
+        constructor (callback) {
+          this.callback = callback;
+          this.observe = vi.fn();
+          this.disconnect = vi.fn();
+          observers.push(this);
+        }
+      });
+      try {
+        updateWrapper();
+        const bounds = vi.spyOn(button.element, 'getBoundingClientRect')
+          .mockReturnValue(new DOMRect(0, 0, 240, 32));
+        await button.trigger('click');
+        const dialog = document.getElementById(button.attributes('aria-controls'));
+        const observer = observers.find(item => item.observe.mock.calls.some(([target]) => target === button.element));
+        expect(observer).toBeDefined();
+        bounds.mockReturnValue(new DOMRect(0, 0, 320, 32));
+        observer.callback([]);
+        expect(dialog.style.minInlineSize).toBe('320px');
+        wrapper.unmount();
+        expect(observer.disconnect).toHaveBeenCalled();
+        bounds.mockReturnValue(new DOMRect(0, 0, 400, 32));
+        observer.callback([]);
+        expect(dialog.style.minInlineSize).toBe('320px');
+      } finally {
+        vi.unstubAllGlobals();
+      }
+    });
+  });
+
   describe('Overlay Class Props Tests', () => {
+    it.each([
+      [undefined, ['d-filter-pill__popover-content'], 'd-pis-200'],
+      ['large', ['d-p-200'], 'd-pis-200'],
+      ['none', [], null],
+    ])('Should render popover padding %s without changing header/footer defaults', async (padding, classes, edgeClass) => {
+      mockProps = { popoverPadding: padding };
+      mockSlots = { headerContent: 'Heading', footerContent: 'Footer' };
+      updateWrapper();
+      await button.trigger('click');
+
+      const contentClasses = [...document.querySelector('[data-qa="dt-popover-content"]').classList];
+      expect(contentClasses).toContain('d-popover__content');
+      const paddingClasses = contentClasses.filter(name =>
+        /^(d-p(?:[xy])?-\d+|d-filter-pill__popover-content)$/.test(name));
+      expect(new Set(paddingClasses)).toEqual(new Set(classes));
+      const edges = document.querySelectorAll('[data-qa="dt-popover-header-footer"]');
+      expect(edges).toHaveLength(2);
+      for (const edge of edges) {
+        expect(edge.classList.contains('d-pis-200')).toBe(edgeClass !== null);
+      }
+    });
+
     describe('When popover class props are set', () => {
       it.each([
-        ['popoverContentClass', 'contentClass', 'custom-content-class'],
-        ['popoverHeaderClass', 'headerWrapperClass', 'custom-header-class'],
-        ['popoverFooterClass', 'footerWrapperClass', 'custom-footer-class'],
-        ['popoverDialogClass', 'dialogClass', 'custom-dialog-class'],
-      ])('Should forward %s to DtPopover', (propName, popoverPropName, className) => {
+        ['popoverContentClass', '[data-qa="dt-popover-content"]', 0, 'custom-content-class'],
+        ['popoverHeaderClass', '[data-qa="dt-popover-header-footer"]', 0, 'custom-header-class'],
+        ['popoverFooterClass', '[data-qa="dt-popover-header-footer"]', 1, 'custom-footer-class'],
+        ['popoverDialogClass', '[data-qa="dt-popover"]', 0, 'custom-dialog-class'],
+      ])('Should apply %s to the popover element', async (propName, selector, index, className) => {
         mockProps = { [propName]: className };
-
+        mockSlots = { headerContent: 'Heading', footerContent: 'Footer' };
         updateWrapper();
+        await button.trigger('click');
 
-        const popover = wrapper.findComponent(DtPopover);
-
-        expect(popover.props(popoverPropName)).toBe(className);
+        expect(document.querySelectorAll(selector)[index].classList.contains(className)).toBe(true);
       });
     });
 
@@ -745,6 +839,141 @@ describe('DtFilterPill Tests', function () {
 
         expect(document.body.textContent).not.toContain('Should not appear');
       });
+    });
+  });
+});
+
+describe('DtFilterPill custom content and localized display', () => {
+  let wrapper;
+  let originalI18n;
+  const missingContentWarning = 'Please provide content through the v-model or the "content" slot.';
+  const updateWrapper = (props = {}, slots = {}, errorHandler) => {
+    wrapper = mount(DtFilterPill, {
+      props: { modelValue: [], label: 'Teams', ...props },
+      slots,
+      global: { plugins: [DtTooltipDirective], stubs: { transition: false }, config: { errorHandler } },
+      attachTo: document.body,
+    });
+  };
+
+  beforeEach(() => {
+    originalI18n = new DialtoneLocalization().i18n;
+  });
+
+  afterEach(() => {
+    wrapper?.unmount();
+    document.body.innerHTML = '';
+    new DialtoneLocalization().i18n = originalI18n;
+    vi.restoreAllMocks();
+  });
+
+  describe.each([false, true])('Custom content (useDropdown=%s)', useDropdown => {
+    it('mounts an empty model with a destructured scoped slot and closes the real overlay', async () => {
+      const errors = vi.fn();
+      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      const content = ({ close }) => h('button', {
+        'data-qa': 'custom-close', onClick: close,
+      }, 'Close custom content');
+      updateWrapper({ useDropdown }, { content }, errors);
+
+      expect(errors).not.toHaveBeenCalled();
+      expect(warn).not.toHaveBeenCalledWith(missingContentWarning);
+      await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
+      expect(document.querySelector('[data-qa="custom-close"]')).not.toBeNull();
+      document.querySelector('[data-qa="custom-close"]').click();
+      await nextTick();
+      expect(wrapper.find('[data-qa="dt-filter-pill__button"]').attributes('aria-expanded')).toBe('false');
+    });
+  });
+
+  it.each([
+    { content: 'an empty content slot', props: {}, slots: { content: () => undefined }, warns: false },
+    { content: 'a nonempty model', props: { modelValue: [{ name: 'Support' }] }, slots: {}, warns: false },
+    { content: 'no model and no content slot', props: {}, slots: {}, warns: true },
+  ])('warns about missing content only when absent ($content → $warns)', ({ props, slots, warns }) => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    updateWrapper(props, slots);
+    expect(warn.mock.calls.some(([message]) => message === missingContentWarning)).toBe(warns);
+  });
+
+  const useLocale = (locale, frenchResource = `DIALTONE_FILTER_PILL_ALL_LABEL = Tous
+DIALTONE_FILTER_PILL_OVERFLOW_TITLE =
+  { $count ->
+    [one] plus { $count } autre
+   *[other] plus { $count } autres
+  }`) => {
+    const manager = new LocaleManager({
+      bundleSource: new RawBundleSource({
+        resources: RawBundleSource.builtResources([
+          ['en-US', 'filter-pill-test', enUS],
+          ['fr-FR', 'filter-pill-test', frenchResource],
+        ]),
+      }),
+      allowedLocales: ['en-US', 'fr-FR'],
+      fallbackLocale: 'en-US',
+      preferredLocale: locale,
+      namespaces: ['filter-pill-test'],
+      storageWrapper: new MemoryStorageWrapper(),
+    });
+    new DialtoneLocalization().i18n = manager.useI18N('filter-pill-test');
+  };
+
+  it('uses English fallback when the locale resource lacks the new keys', () => {
+    useLocale('fr-FR', 'TEST_ONLY_MESSAGE = Fixture without FilterPill keys');
+    updateWrapper({ modelValue: [
+      { name: 'Support', active: true }, { name: 'Sales', active: true }, { name: 'Engineering' },
+    ] });
+    expect(wrapper.find('.d-filter-pill__label-end-overflow').attributes('title')).toBe('plus \u20681\u2069 other');
+  });
+
+  it('renders one selected option without an aggregate or overflow', () => {
+    updateWrapper({ modelValue: [{ name: 'Support', active: true }] });
+    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('Support');
+    expect(wrapper.find('.d-filter-pill__label-end-overflow').exists()).toBe(false);
+  });
+
+  it('preserves an option literally named All in a translated subset summary', () => {
+    useLocale('fr-FR');
+    updateWrapper({ modelValue: ['All', 'Support', 'Sales'].map((name, index) => ({
+      name, active: index < 2,
+    })) });
+    expect(wrapper.find('.d-filter-pill__label-end').text()).toBe('All');
+    expect(wrapper.find('.d-filter-pill__label-end').attributes('title')).toBe('All');
+  });
+
+  describe.each([
+    { locale: 'en-US', all: 'All', singular: 'plus \u20681\u2069 other', plural: 'plus \u20682\u2069 others' },
+    { locale: 'fr-FR', all: 'Tous', singular: 'plus \u20681\u2069 autre', plural: 'plus \u20682\u2069 autres' },
+  ])('Built-in display with real Fluent resources ($locale)', ({ locale, all, singular, plural }) => {
+    beforeEach(() => {
+      // French is a test-only translated resource, separate from the missing-key fallback case above.
+      useLocale(locale);
+    });
+
+    it('localizes aggregate display while preserving literal All and model references in slot bindings', () => {
+      const modelValue = [{ name: 'Support', active: true }, { name: 'Sales', active: true }];
+      updateWrapper({ modelValue });
+      expect(wrapper.find('.d-filter-pill__label-end').text()).toBe(all);
+      expect(wrapper.find('.d-filter-pill__label-end').attributes('title')).toBe(all);
+      wrapper.unmount();
+      let bindings;
+      updateWrapper({ modelValue }, { default: data => { bindings = data; return data.activeFilterList; } });
+      expect(bindings.activeFilterList).toBe('All');
+      expect(toRaw(bindings.filters)).toBe(modelValue);
+      expect(bindings.activeFilters).toEqual(['Support', 'Sales']);
+      expect(bindings.activeFilterOverflow).toBe('');
+    });
+
+    it.each([
+      { selected: 2, overflow: '+1', title: singular },
+      { selected: 3, overflow: '+2', title: plural },
+    ])('renders $selected selected options with Fluent plural and isolation', ({ selected, overflow, title }) => {
+      updateWrapper({ modelValue: ['Support', 'Sales', 'Engineering', 'Marketing'].map((name, index) => ({
+        name, active: index < selected,
+      })) });
+      const extra = wrapper.find('.d-filter-pill__label-end-overflow');
+      expect(extra.text()).toBe(overflow);
+      expect(extra.attributes('title')).toBe(title);
     });
   });
 });

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { classifyPresetExample } from '../../packages/combinator/scripts/classify-preset-example.mjs';
+import filterPillVariants from '../../packages/combinator/src/variants/variants_filter_pill.js';
 
 const metadata = [{ displayName: 'DtButton', props: [
   { name: 'kind', tags: { deprecated: true } }, { name: 'size', values: ['100', '200'] },
@@ -60,4 +61,32 @@ test('source classification admits a documented native attribute', () => {
     publicNames: new Set(['DtInput']), runtime: { DtInput: {} },
   });
   assert.equal(result.disposition, 'eligible/setup-needed');
+});
+
+test('an owned preset exclusion prevents materialization for an incompatible consumer profile', () => {
+  const result = classify(() => { throw new Error('Excluded source was materialized'); }, {
+    exclusion: { reason: 'Pinned package lacks this API', owner: 'DLT-3738' },
+  });
+  assert.equal(result.disposition, 'policy-excluded');
+  assert.match(result.reasons[0], /Pinned package lacks this API.*DLT-3738/);
+  assert.equal(result.template, undefined);
+});
+
+test('preset exclusions require a nonempty reason and owner', () => {
+  for (const exclusion of [{ reason: 'Incompatible' }, { reason: '', owner: 'DLT-3738' }]) {
+    assert.throws(() => classify(() => '<dt-button />', { exclusion }), /reason and owner/);
+  }
+});
+
+test('controlled count slots use the bounded component-template API', () => {
+  const badge = { displayName: 'DtBadge', props: [{ name: 'type' }, { name: 'kind' }],
+    slots: [{ name: 'default' }], events: [] };
+  for (const slot of ['anchorEnd', 'optionEnd']) {
+    const result = classifyPresetExample({
+      component: 'DtBadge', documentation: [badge], publicNames: new Set(['DtBadge']),
+      runtime: { DtBadge: {} }, icons: {},
+      materialize: () => filterPillVariants['controlled counts'].slots[slot].initialValue,
+    });
+    assert.equal(result.disposition, 'eligible/setup-needed', result.reasons.join('; '));
+  }
 });

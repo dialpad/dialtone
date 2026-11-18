@@ -13,7 +13,7 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 <ul>
   <dt-list-item navigation-type="tab">
     <template #start>
-      <dt-icon size="300" name="check" />
+      <dt-icon-check size="300" />
     </template>
     <span>Default List Item</span>
     <template #subtitle>
@@ -23,7 +23,7 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
       <dt-badge text="Label" />
     </template>
     <template #end>
-      <dt-icon size="300" name="external-link" />
+      <dt-icon-external-link size="300" />
     </template>
   </dt-list-item>
 </ul>
@@ -50,7 +50,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
 <ul>
   <dt-list-item navigation-type="tab">
     <template #start>
-      <dt-icon size="300" name="check" />
+      <dt-icon-check size="300" />
     </template>
     <span>Default List Item</span>
     <template #subtitle>
@@ -60,11 +60,59 @@ The **bottom** slot can be used to display content below the subtitle slot.
       <dt-badge text="Label" />
     </template>
     <template #end>
-      <dt-icon size="300" name="external-link" />
+      <dt-icon-external-link size="300" />
     </template>
   </dt-list-item>
 </ul>
 ```
+
+## Roles and selection
+
+Choose the role from the surrounding widget. A checkmark or `selected=true` never changes the role automatically.
+
+| Context | ListItem role | State ownership |
+| --- | --- | --- |
+| Ordinary `ul` or `ol` | `listitem` (default) | `selected` shows a visual checkmark. |
+| Action inside a Dropdown menu | `menuitem` | Activating performs an action. |
+| Persistent, mutually exclusive choice inside a Dropdown menu | `menuitemradio` | The consumer sets `selected`; it controls both the checkmark and `aria-checked`. |
+| Choice inside a listbox, such as Combobox | `option` | Preserve the parent widget's selection and keyboard contract. |
+
+Menu radios are menu choices, not native form radio inputs. Keep exactly one row selected when the menu represents one committed choice. Moving keyboard or mouse highlight does not change `aria-checked`; activation requests the consumer's update. The new role omits `aria-selected`; existing roles retain their current markup.
+
+Use [Dropdown's persistent-choice example](dropdown.md#persistent-menu-choices) for the menu parent, optional ListItemGroup heading, and selection handlers. Listbox choices remain `option`, even when only one value can be selected. See also the [Menu Roles story](https://dialtone.dialpad.com/vue/?path=/story/components-dropdown--menu-roles).
+
+## Disabled
+
+Set `disabled` on a row that can't be activated right now. The row renders `aria-disabled="true"` and the disabled style, and it doesn't emit `click` for pointer, Enter or Space, and cancels the native default, such as navigation for `element-type="a"`. It still emits `keydown`, `mousemove` and `mouseleave`, and stays focusable and reachable with the arrow keys, Home, End and typeahead, so keyboard and screen reader users can find it and learn why it's unavailable. This follows the WAI-ARIA Authoring Practices guidance on [focusability of disabled controls](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#focusabilityofdisabledcontrols), which keeps disabled menu items focusable. Use it on interactive rows (`menuitem`, `menuitemradio` or `option`), where assistive technology announces the state.
+
+Put the reason in the `subtitle` slot, hide that text from the row's name with `aria-hidden`, and point `aria-describedby` at it. Interactive rows take their name from their content, so without `aria-hidden` the reason would be repeated in the name; `aria-describedby` still reads it as the description.
+
+```vue demo
+<!-- @class d-d-block -->
+<ul>
+  <dt-list-item navigation-type="tab">
+    Rename
+  </dt-list-item>
+  <dt-list-item
+    navigation-type="tab"
+    disabled
+    aria-describedby="list-item-disabled-reason"
+  >
+    Delete
+    <template #subtitle>
+      <span
+        id="list-item-disabled-reason"
+        aria-hidden="true"
+      >Only the owner can delete this file</span>
+    </template>
+  </dt-list-item>
+</ul>
+```
+
+The style comes from the `disabled` prop. A row that sets `aria-disabled` without the prop keeps its current look and still emits `click`. Don't combine the two: an `aria-disabled` attribute overrides the announced state, while the prop still controls the style and activation.
+
+> [!WARNING] Parent-driven selection isn't gated
+> `disabled` stops only the row's own `click`. A parent that selects by highlighted index, such as DtCombobox on Enter, doesn't check it, so that parent must skip unavailable rows itself.
 
 ## Variants
 
@@ -82,14 +130,13 @@ When `type` is set to "custom" the list item will not render any styles or slots
     <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py-100 d-px-150 d-pie-100">
       <dt-stack align="baseline" direction="row" gap="400">
         <dt-text
-          kind="body"
+          variant="body-xs"
           tone="muted"
-          :size="100"
           datetime="10:00"
         >
           10:00
         </dt-text>
-        <dt-text :size="300" density="300" kind="body" tone="secondary">
+        <dt-text density="300" variant="body-md" tone="secondary">
           Custom list item example lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
         </dt-text>
       </dt-stack>
@@ -101,8 +148,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
           title="share"
         >
           <template #startIcon="{ iconSize }">
-            <dt-icon
-              name="share"
+            <dt-icon-share
               :size="iconSize"
             />
           </template>
@@ -114,8 +160,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
           title="star"
         >
           <template #startIcon="{ iconSize }">
-            <dt-icon
-              name="star"
+            <dt-icon-star
               :size="iconSize"
             />
           </template>
@@ -127,8 +172,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
           title="more"
         >
           <template #startIcon="{ iconSize }">
-            <dt-icon
-              name="more-vertical"
+            <dt-icon-more-vertical
               :size="iconSize"
             />
           </template>
@@ -142,3 +186,13 @@ When `type` is set to "custom" the list item will not render any styles or slots
 ## Vue API
 
 <component-vue-api component-name="listitem" />
+
+<script setup>
+import {
+  DtIconCheck,
+  DtIconExternalLink,
+  DtIconShare,
+  DtIconStar,
+  DtIconMoreVertical,
+} from '@dialpad/dialtone-icons/vue';
+</script>

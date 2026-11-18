@@ -2,6 +2,7 @@ import { parse } from 'vue-docgen-api';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import { preserveDeclaredSlotBindings } from './lib/vue-slot-bindings.mjs';
 import { getValidFileList } from '../common/utils/server.mjs';
 import { readPublicComponentExports, uniqueComponentFiles, withComponentIdentity } from './lib/vue-component-identity.mjs';
 
@@ -72,6 +73,7 @@ function extractDefineOptionsName (filePath) {
 async function parseDocumentation (fileList) {
   const config = {
     alias: { '@': join(__dirname, `../packages/dialtone-vue/`) },
+    addTemplateHandlers: [preserveDeclaredSlotBindings],
   };
   const parsedDocumentationPromises = [];
 

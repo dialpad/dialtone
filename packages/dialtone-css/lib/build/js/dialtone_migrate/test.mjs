@@ -16,6 +16,13 @@ import { fileURLToPath } from 'node:url';
 
 const cli = path.join(path.dirname(fileURLToPath(import.meta.url)), 'index.mjs');
 
+// Fixture subprocesses must never inherit a caller's repository/index overrides.
+const gitEnv = { ...process.env };
+for (const name of Object.keys(gitEnv)) {
+  if (name.toUpperCase().startsWith('GIT_')) delete gitEnv[name];
+}
+const runGit = args => execFileSync('git', args, { encoding: 'utf8', env: gitEnv });
+
 // Run the CLI in --dry-run against an empty temp dir and return stdout.
 function runDryRun (flags) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-master-'));
@@ -23,7 +30,7 @@ function runDryRun (flags) {
     return execFileSync(
       process.execPath,
       [cli, '--dry-run', '--cwd', tmp, ...flags],
-      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] },
+      { encoding: 'utf8', env: gitEnv, stdio: ['ignore', 'pipe', 'ignore'] },
     );
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
@@ -44,13 +51,13 @@ describe('migration selection', () => {
 
   it('--all --include-opt-in selects every migration', () => {
     const output = runDryRun(['--all', '--include-opt-in']);
-    assert.equal(selectedCount(output), 20);
+    assert.equal(selectedCount(output), 21);
     assert.ok(output.includes('[OPT-IN]'), 'opt-in migrations should be selected');
   });
 
   it('--include-opt-in on its own also selects every migration', () => {
     const output = runDryRun(['--include-opt-in']);
-    assert.equal(selectedCount(output), 20);
+    assert.equal(selectedCount(output), 21);
   });
 });
 
@@ -60,7 +67,7 @@ describe('--package validation', () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-master-'));
     try {
       execFileSync(process.execPath, [cli, '--dry-run', '--cwd', tmp, ...extraArgs],
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+        { encoding: 'utf8', env: gitEnv, stdio: ['ignore', 'pipe', 'pipe'] });
       return { status: 0, stderr: '' };
     } catch (err) {
       return { status: err.status, stderr: String(err.stderr ?? '') };
@@ -95,7 +102,7 @@ describe('--health-check', () => {
         fs.writeFileSync(path.join(tmp, name), contents);
       }
       return execFileSync(process.execPath, [cli, '--health-check', '--cwd', tmp],
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+        { encoding: 'utf8', env: gitEnv, stdio: ['ignore', 'pipe', 'ignore'] });
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });
     }
@@ -233,4 +240,125 @@ describe('--health-check', () => {
     });
     assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
   });
+});
+
+
+describe('text-variant stage', () => {
+  it('typography emits variants alone, text-variant converts authored pairs, dry-run writes nothing', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-variant-'));
+    const file = path.join(tmp, 'App.vue');
+    const page = path.join(tmp, 'page.html');
+    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8', env: gitEnv });
+    const read = () => [fs.readFileSync(file, 'utf8'), fs.readFileSync(page, 'utf8')];
+    // A composed class for typography (plus a marker and an import it would add), an
+    // authored legacy pair for text-variant, and an explicit variant beside a raw size.
+    const source = '<script setup>\n</script>\n<template><p class="d-body--md">Copy</p><p class="d-headline--eyebrow">Eyebrow</p><DtText :kind="\'label\'" :size="200">Label</DtText><dt-text kind="body" size="sm" variant="body-md" /></template>';
+    const html = '<p class="d-label--sm-plain">Label</p>\n';
+    try {
+      fs.writeFileSync(file, source);
+      fs.writeFileSync(page, html);
+      assert.match(run('--health-check'), /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
+      assert.match(run('--only', 'typography,text-variant', '--dry-run'), /1 eligible, 1 existing-variant elements unchanged, 0 manual review/);
+      assert.deepEqual(read(), [source, html]);
+      assert.deepEqual(fs.readdirSync(tmp).sort(), ['App.vue', 'page.html']);
+
+      run('--only', 'typography', '--yes');
+      const [typography, typographyPage] = read();
+      assert.match(typography, /<dt-text as="p" variant="body-md">Copy<\/dt-text>/);
+      assert.match(typography, /<!-- dt-text-migrate: review --><p class="d-headline--eyebrow">/);
+      assert.match(typography, /import \{ DtText \} from/);
+      assert.match(typography, /<DtText :kind="'label'" :size="200">/, 'typography leaves authored pairs to text-variant');
+      assert.equal(typographyPage, '<dt-text as="p" variant="label-xs" strength="normal">Label</dt-text>\n');
+
+      // Fresh typography output and the explicit variant count as existing variants.
+      assert.match(run('--only', 'text-variant', '--yes'), /1 eligible, 3 existing-variant elements unchanged, 0 manual review/);
+      assert.deepEqual(read(), [typography.replace(`:kind="'label'" :size="200"`, 'variant="label-sm"'), typographyPage]);
+
+      const applied = read();
+      run('--only', 'typography,text-variant', '--yes');
+      assert.deepEqual(read(), applied, 'reruns change nothing');
+      assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it('uses health-check scope for hidden source and Git-ignored generated files', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-text-scope-'));
+    const source = '<template><dt-text kind="body" size="300">Copy</dt-text></template>';
+    const included = ['.storybook/Story.vue', '.Hidden.vue', '.vuepress/components/Text.vue'];
+    const excluded = ['out/Generated.vue', 'out/café.vue', 'vendor/nested/Text.vue', 'vendor/nested/ignored/Generated.vue', 'dist/Bundle.vue', 'node_modules/Dependency.vue', 'compiled/Output.vue', 'storybook-static/Page.html', '.vuepress/public/Example.vue', '.vuepress/.temp/Example.vue', '.vuepress/.cache/Example.vue'];
+    // Exceed Git's default child-process output buffer without a separate stress suite.
+    const longDirectory = Array(8).fill('nested'.repeat(13)).join('/');
+    excluded.push(...Array.from({ length: 1700 }, (_, index) => `out/${longDirectory}/Ignored-${index}.vue`));
+    assert.ok(Buffer.byteLength(excluded.map(name => path.join(tmp, name)).join('\0')) > 1024 * 1024);
+    const scanEnv = { ...gitEnv };
+    const run = (...flags) => execFileSync(process.execPath, [cli, '--cwd', tmp, ...flags], { encoding: 'utf8', env: scanEnv });
+    try {
+      runGit(['init', '--quiet', tmp]);
+      assert.equal(fs.realpathSync(runGit(['-C', tmp, 'rev-parse', '--absolute-git-dir']).trim()), fs.realpathSync(path.join(tmp, '.git')));
+      runGit(['-C', tmp, 'config', 'core.quotePath', 'true']);
+      fs.writeFileSync(path.join(tmp, '.gitignore'), 'out/\n');
+      for (const name of [...included, ...excluded]) {
+        fs.mkdirSync(path.dirname(path.join(tmp, name)), { recursive: true });
+        fs.writeFileSync(path.join(tmp, name), source);
+      }
+      const nested = path.join(tmp, 'vendor/nested');
+      runGit(['init', '--quiet', nested]);
+      assert.equal(fs.realpathSync(runGit(['-C', nested, 'rev-parse', '--absolute-git-dir']).trim()), fs.realpathSync(path.join(nested, '.git')));
+      fs.writeFileSync(path.join(nested, '.gitignore'), 'ignored/\n');
+      runGit(['-C', nested, 'add', 'Text.vue', '.gitignore']);
+      const hooks = path.join(tmp, 'empty-hooks');
+      fs.mkdirSync(hooks);
+      runGit(['-C', nested, '-c', `core.hooksPath=${hooks}`, '-c', 'commit.gpgsign=false',
+        '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '--quiet', '-m', 'fixture']);
+      assert.equal(runGit(['-C', nested, 'status', '--porcelain']).trim(), '');
+      const nestedHead = runGit(['-C', nested, 'rev-parse', 'HEAD']).trim();
+      fs.writeFileSync(path.join(tmp, '.gitmodules'), '[submodule "vendor/nested"]\n  path = vendor/nested\n  url = ../nested-fixture\n');
+      runGit(['-C', tmp, 'update-index', '--add', '--cacheinfo', `160000,${nestedHead},vendor/nested`]);
+      const foreign = path.join(tmp, 'foreign-repository');
+      fs.mkdirSync(path.join(foreign, 'out'), { recursive: true });
+      fs.writeFileSync(path.join(foreign, 'out/Generated.vue'), source);
+      runGit(['init', '--quiet', foreign]);
+      assert.equal(fs.realpathSync(runGit(['-C', foreign, 'rev-parse', '--absolute-git-dir']).trim()), fs.realpathSync(path.join(foreign, '.git')));
+      runGit(['-C', foreign, 'add', 'out/Generated.vue']);
+      const foreignIndex = path.join(foreign, '.git/index');
+      const indexBefore = fs.readFileSync(foreignIndex);
+      Object.assign(scanEnv, { GIT_DIR: path.join(foreign, '.git'), GIT_WORK_TREE: tmp, GIT_INDEX_FILE: foreignIndex });
+      const health = run('--health-check');
+      assert.match(health, /\[PENDING\].*Text Kind and Size to Variant \(text-variant\)/);
+      assert.match(run('--only', 'text-variant', '--dry-run'), /3 eligible/);
+      for (const name of [...included, ...excluded]) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
+      scanEnv.GIT_WORK_TREE = foreign;
+      run('--only', 'text-variant', '--yes');
+      assert.equal(fs.existsSync(path.join(foreign, '.dialtone-migrations')), false);
+      assert.deepEqual(fs.readFileSync(foreignIndex), indexBefore);
+      for (const name of included) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), '<template><dt-text variant="body-md">Copy</dt-text></template>');
+      for (const name of excluded) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
+      assert.match(run('--health-check'), /\[DONE\].*Text Kind and Size to Variant \(text-variant\)/);
+      const nestedPreview = execFileSync(process.execPath,
+        [cli, '--cwd', nested, '--only', 'text-variant', '--dry-run'], { encoding: 'utf8', env: scanEnv });
+      assert.match(nestedPreview, /1 eligible/);
+      const ceilingEnv = { ...scanEnv, GIT_CEILING_DIRECTORIES: fs.realpathSync(nested) };
+      const ignoredDirectory = path.join(nested, 'ignored');
+      execFileSync(process.execPath,
+        [cli, '--cwd', ignoredDirectory, '--only', 'text-variant', '--yes'], { encoding: 'utf8', env: ceilingEnv });
+      assert.equal(fs.readFileSync(path.join(ignoredDirectory, 'Generated.vue'), 'utf8'), source);
+      assert.match(execFileSync(process.execPath,
+        [cli, '--cwd', ignoredDirectory, '--health-check'], { encoding: 'utf8', env: ceilingEnv }), /No scannable files found/);
+      const refusalConfig = path.join(tmp, 'refusal.gitconfig');
+      fs.writeFileSync(refusalConfig, '[safe]\n  directory =\n');
+      const refusedGit = { ...gitEnv, GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
+        GIT_CONFIG_GLOBAL: refusalConfig, GIT_CONFIG_NOSYSTEM: '1' };
+      const stage = path.resolve(path.dirname(cli), '../dialtone_migrate_text_variant/index.mjs');
+      for (const [script, flag] of [[cli, '--health-check'], [stage, '--yes']]) {
+        assert.throws(() => execFileSync(process.execPath, [script, '--cwd', tmp, flag],
+          { encoding: 'utf8', env: refusedGit, stdio: ['ignore', 'pipe', 'pipe'] }), /dubious ownership/);
+      }
+      for (const name of excluded) assert.equal(fs.readFileSync(path.join(tmp, name), 'utf8'), source);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
 });

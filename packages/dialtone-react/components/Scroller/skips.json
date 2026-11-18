@@ -1,0 +1,4 @@
+{
+  "DtScroller Tests › Interactivity Tests › Should emit › `top` deprecated event when scroll reach the block-start (aka top) of the component": "Tests the deprecated `top` user-position value, which isn't ported: use `blockStart`.",
+  "DtScroller Tests › Interactivity Tests › Should emit › `bottom` deprecated event when scroll reach the block-end (aka bottom) of the component": "Tests the deprecated `bottom` user-position value, which isn't ported: use `blockEnd`."
+}

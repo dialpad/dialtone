@@ -55,12 +55,12 @@ export default {
 
   full: {
     slots: {
-      start: { initialValue: '<dt-icon size="200" name="lock" />' },
+      start: { initialValue: '<dt-icon-lock size="200" />' },
       default: { initialValue: 'Layout title' },
       subtitle: { initialValue: 'Subtitle' },
-      bottom: { initialValue: '<dt-badge>Content</dt-badge>' },
-      end: { initialValue: '<dt-icon size="200" name="share" />' },
-      selected: { initialValue: '<dt-icon size="200" name="check" />' },
+      blockEnd: { initialValue: '<dt-badge>Content</dt-badge>' },
+      end: { initialValue: '<dt-icon-share size="200" />' },
+      selected: { initialValue: '<dt-icon-check size="200" />' },
     },
   },
 };

@@ -23,6 +23,10 @@ This rule does NOT flag:
 - Non-Dialtone components (`<my-button size="sm">`)
 - Icon sizes (`size="200"` on `dt-icon`)
 
+Static Text `size`-to-variant autofixes require one unambiguous kind/size pair. Spreads, dynamic arguments, composition conflicts and uncertain directives require manual review for this conversion. Any explicit variant prevents autofixing the Text `size` prop; the rule may report a deprecated size but does not autofix that override. Other size-related attributes keep their ordinary rule behavior. The opt-in `dialtone-migrate --only text-variant` stage also accepts numeric pairs and bound literals when available in the installed version.
+
+For Text with `kind` or `variant`, template-literal text such as ``:size="`sm`"`` is not reported. Review these bindings manually.
+
 ## Options
 
 No options.

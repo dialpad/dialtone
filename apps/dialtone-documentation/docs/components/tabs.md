@@ -279,22 +279,22 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
       <dt-tab id="1" panel-id="2" selected>
         First
         <template #startIcon="{ iconSize }">
-          <dt-icon name="box-select" :size="iconSize" />
+          <dt-icon-box-select :size="iconSize" />
         </template>
       </dt-tab>
       <dt-tab id="3" panel-id="4">
         Second
         <template #startIcon="{ iconSize }">
-          <dt-icon name="box-select" :size="iconSize" />
+          <dt-icon-box-select :size="iconSize" />
         </template>
         <template #endIcon="{ iconSize }">
-          <dt-icon name="box-select" :size="iconSize" />
+          <dt-icon-box-select :size="iconSize" />
         </template>
       </dt-tab>
       <dt-tab id="5" panel-id="6">
         Third
         <template #endIcon="{ iconSize }">
-          <dt-icon name="box-select" :size="iconSize" />
+          <dt-icon-box-select :size="iconSize" />
         </template>
       </dt-tab>
     </template>
@@ -396,6 +396,7 @@ To create accessible tabs, be sure to implement the <a class="d-link" href="http
 <component-accessible-table component-name="tabs" />
 
 <script setup>
+  import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue';
   import ExampleTabs from "@exampleComponents/ExampleTabs.vue";
 </script>
 
