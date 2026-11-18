@@ -2,7 +2,7 @@ import { act, cleanup, fireEvent, render, type RenderResult } from '@testing-lib
 import { DtIconSend } from '../../icons';
 import { withRouterLink } from '../../tests/helpers/link';
 import { TOOLTIP_DELAY_MS } from '../Tooltip/TooltipConstants';
-import { DtSplitButton, type DtSplitButtonProps } from './SplitButton';
+import { DtSplitButton, type DtSplitButtonIconSlotScope, type DtSplitButtonProps } from './SplitButton';
 
 const MOCK_START_BUTTON_STUB = vi.fn();
 const MOCK_END_BUTTON_STUB = vi.fn();
@@ -47,7 +47,7 @@ const originalRequestAnimationFrame = globalThis.requestAnimationFrame;
 const originalCancelAnimationFrame = globalThis.cancelAnimationFrame;
 
 describe('DtSplitButton Tests', function () {
-  let result: RenderResult | undefined;
+  let result: Pick<RenderResult, 'container' | 'unmount'> | undefined;
   let wrapper: HTMLElement;
   let startButton: HTMLElement;
   let endButton: HTMLElement | null;
@@ -56,7 +56,7 @@ describe('DtSplitButton Tests', function () {
 
   const updateWrapper = () => {
     result?.unmount();
-    result = render(
+    const rendered = render(
       withRouterLink(
         <DtSplitButton
           {...baseProps}
@@ -71,8 +71,9 @@ describe('DtSplitButton Tests', function () {
       ),
       { container: attachTo(document.body) },
     );
+    result = rendered;
 
-    wrapper = result.container.querySelector<HTMLElement>('[data-qa="dt-split-button"]')!;
+    wrapper = rendered.container.querySelector<HTMLElement>('[data-qa="dt-split-button"]')!;
     startButton = wrapper.querySelector<HTMLElement>('[data-qa="dt-split-button-start"]')!;
     startIconSlot = startButton.querySelector('[data-qa="dt-button-icon"]');
     endButton = wrapper.querySelector('[data-qa="dt-split-button-end"]');
@@ -656,7 +657,7 @@ describe('DtSplitButton Tests', function () {
 
     describe('When the startIcon slot is a render prop', () => {
       it('Should pass the icon size for the button size', () => {
-        const startIcon = vi.fn(({ size }: { size: string | undefined }) => <DtIconSend size={size} />);
+        const startIcon = vi.fn(({ size }: DtSplitButtonIconSlotScope) => <DtIconSend size={size} />);
         mockSlots = { startIcon };
         mockProps = { size: 100, startTooltipText: MOCK_START_TOOLTIP_TEXT };
 
@@ -669,7 +670,7 @@ describe('DtSplitButton Tests', function () {
 
     describe('When the endIcon slot is a render prop', () => {
       it('Should pass the split button icon size for the button size', () => {
-        const endIcon = vi.fn(({ size }: { size: string | undefined }) => <DtIconSend size={size} />);
+        const endIcon = vi.fn(({ size }: DtSplitButtonIconSlotScope) => <DtIconSend size={size} />);
         mockSlots = { endIcon };
         mockProps = { size: 100 };
 
