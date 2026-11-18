@@ -275,6 +275,16 @@ describe('DtEmojiTextWrapper Tests', () => {
       expect(screen.getByTestId('s').textContent).toBe('{"a":1}');
     });
 
+    it('keeps a nested script with innerHTML as an element', () => {
+      cleanup();
+      render(
+        <DtEmojiTextWrapper>
+          <script type="application/ld+json" data-qa="s" dangerouslySetInnerHTML={{ __html: '{"a":":smile:"}' }} />
+        </DtEmojiTextWrapper>,
+      );
+      expect(screen.getByTestId('s').textContent).toBe('{"a":":smile:"}');
+    });
+
     it('keeps a textarea root string as its value', () => {
       cleanup();
       render(<DtEmojiTextWrapper elementType="textarea">:smile:</DtEmojiTextWrapper>);

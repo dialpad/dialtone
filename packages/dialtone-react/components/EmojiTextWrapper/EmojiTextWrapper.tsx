@@ -99,14 +99,16 @@ function searchNode (node: ReactNode, size: IconSize, key: number): ReactNode {
   if (element.type === Fragment) return cloneElement(element, undefined, searchNodes(element.props.children, size));
   if (typeof element.type !== 'string') return element;
 
+  // A script's body must stay a single string for server rendering, so it's checked before innerHTML is replaced.
+  if (element.type === 'script') return element;
+
   // Vue replaces an element that has `innerHTML` (v-html) with the result of searching that string.
   // React also accepts a TrustedHTML object here, so it's turned into a string for the text search.
   const innerHTML = element.props.dangerouslySetInnerHTML?.__html;
   if (innerHTML != null && String(innerHTML) !== '') return searchCodes(String(innerHTML), size, key);
 
   // A textarea's string child is its initial value, so it can't become a Fragment.
-  // A script's body must stay a single string for server rendering.
-  if (element.type === 'textarea' || element.type === 'script') return element;
+  if (element.type === 'textarea') return element;
 
   // Void elements (img, br) take no children.
   if (element.props.children == null) return element;
