@@ -1,5 +1,6 @@
 import {
   useCallback,
+  useEffectEvent,
   useId,
   useLayoutEffect,
   useMemo,
@@ -179,6 +180,7 @@ export function DtSegmentedControl ({
   onBeforeChange,
   onKeyDown,
   ref,
+  'aria-label': ariaLabelAttr,
   ...attrs
 }: DtSegmentedControlProps) {
   const generatedId = useId();
@@ -213,22 +215,24 @@ export function DtSegmentedControl ({
   // Vue animates on nextTick, once the new selection is in the DOM. Keeping the pending animation in state makes
   // sure a commit follows, even when a controlling parent keeps the old value.
   const [pendingAnimation, setPendingAnimation] = useState<{ oldRect: DOMRect; value: string } | null>(null);
-  useLayoutEffect(() => {
-    if (!pendingAnimation || !container) return;
+  // Reads `container` and `orientation` as they are when it runs, as Vue's nextTick callback does.
+  const animateIndicator = useEffectEvent((pending: { oldRect: DOMRect; value: string }) => {
+    if (!container) return;
     const newEl = container.querySelector<HTMLElement>(
-      `[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${CSS.escape(pendingAnimation.value)}"]`,
+      `[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${CSS.escape(pending.value)}"]`,
     );
     if (!newEl) return;
     indicator.animate({
-      oldRect: pendingAnimation.oldRect,
+      oldRect: pending.oldRect,
       newEl,
       orientation,
       hideProps: { backgroundColor: 'transparent' },
       indicatorExtra: { backgroundColor: 'var(--button-color-background)' },
       pseudoElement: '::after',
     });
-    // Deliberately keyed on the pending animation alone: only a new selection animates. `container`, `indicator` and
-    // `orientation` are read as they are when it runs, as Vue's nextTick callback reads them.
+  });
+  useLayoutEffect(() => {
+    if (pendingAnimation) animateIndicator(pendingAnimation);
   }, [pendingAnimation]);
 
   const selectValue: SegmentedControlSelect = (newValue, { animate: shouldAnimate = true } = {}) => {
@@ -340,7 +344,8 @@ export function DtSegmentedControl ({
             )}
             direction={orientation === 'vertical' ? 'column' : 'row'}
             role="radiogroup"
-            aria-label={ariaLabel}
+            // Vue resolves an `aria-label` attribute to the `ariaLabel` prop, and the prop wins when both are set.
+            aria-label={ariaLabel ?? ariaLabelAttr}
             aria-orientation={orientation}
             data-qa="dt-segmented-control"
             {...attrs}

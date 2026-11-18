@@ -1,6 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
+import type { Mock } from 'vitest';
 import { DtSegmentedControl, type DtSegmentedControlProps } from './SegmentedControl';
 import { DtSegmentedControlItem, type DtSegmentedControlItemProps } from './SegmentedControlItem';
 import {
@@ -32,14 +33,14 @@ const baseProps = {
 };
 
 describe('DtSegmentedControl Tests', () => {
-  let onValueChange: ReturnType<typeof vi.fn>;
-  let onChange: ReturnType<typeof vi.fn>;
-  let onBeforeChange: ReturnType<typeof vi.fn>;
+  let onValueChange: Mock<(value: string) => void>;
+  let onChange: Mock<(value: string) => void>;
+  let onBeforeChange: Mock<(event: Event) => void>;
 
   const _setWrapper = (props: Partial<DtSegmentedControlProps> = {}, slot?: ReactNode) => {
-    onValueChange = vi.fn();
-    onChange = vi.fn();
-    onBeforeChange = vi.fn();
+    onValueChange = vi.fn<(value: string) => void>();
+    onChange = vi.fn<(value: string) => void>();
+    onBeforeChange = vi.fn<(event: Event) => void>();
     return render(
       <DtSegmentedControl
         {...baseProps}
@@ -360,6 +361,49 @@ describe('DtSegmentedControl Tests', () => {
         </DtSegmentedControl>,
       );
       expect(container()).not.toHaveClass('d-segmented-control--spread-evenly');
+    });
+  });
+
+  describe('React-only Tests', () => {
+    it('selects on click when uncontrolled', async () => {
+      render(
+        <DtSegmentedControl
+          defaultValue="all"
+          ariaLabel="Uncontrolled"
+        >
+          {defaultSlot()}
+        </DtSegmentedControl>,
+      );
+
+      await userEvent.click(items()[2]);
+
+      expect(items()[2]).toHaveAttribute('aria-checked', 'true');
+      expect(items()[0]).toHaveAttribute('aria-checked', 'false');
+    });
+
+    it('calls the consumer onKeyDown after handling the key', async () => {
+      const onKeyDown = vi.fn();
+      _setWrapper({ onKeyDown });
+
+      act(() => items()[0].focus());
+      await userEvent.keyboard('{End}');
+
+      expect(document.activeElement).toBe(items()[2]);
+      expect(onValueChange).toHaveBeenCalledWith('recent');
+      expect(onKeyDown).toHaveBeenCalled();
+    });
+
+    it('prefers the ariaLabel prop over an aria-label attribute, as Vue does', () => {
+      _setWrapper({ ariaLabel: 'Prop label', 'aria-label': 'Attribute label' });
+
+      expect(screen.getByRole('radiogroup')).toHaveAttribute('aria-label', 'Prop label');
+    });
+
+    it('passes the item attributes through to the button', () => {
+      _setWrapper({}, defaultSlot([{ trailingClass: 'custom-trailing', trailing: '3', className: 'custom-item' }]));
+
+      expect(items()[0]).toHaveClass('d-segmented-control__item', 'custom-item');
+      expect(items()[0].querySelector('.d-btn__trailing')).toHaveClass('custom-trailing');
     });
   });
 });

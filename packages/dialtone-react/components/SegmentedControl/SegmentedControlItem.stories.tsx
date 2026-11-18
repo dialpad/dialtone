@@ -6,6 +6,7 @@ import {
   SEGMENTED_CONTROL_SELECT_KEY,
   SEGMENTED_CONTROL_FOCUS_KEY,
   SEGMENTED_CONTROL_SIZE_DEFAULT,
+  type SegmentedControlGroupContext,
 } from './SegmentedControlConstants';
 
 export const argsData = {
@@ -41,7 +42,7 @@ export default meta;
 type Story = StoryObj<DtSegmentedControlItemProps>;
 
 // Vue's story provides the group's three injection keys; here they're the contexts of the same names.
-const groupContext = {
+const groupContext: SegmentedControlGroupContext = {
   selected: 'option1',
   disabled: false,
   size: SEGMENTED_CONTROL_SIZE_DEFAULT,
