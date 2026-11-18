@@ -49,6 +49,8 @@ type ListNativeProps<E extends 'ul' | 'ol'> = Omit<ComponentPropsWithRef<E>, key
 /**
  * Own props plus those of the list element: `type` picks `ul` or `ol` props, so `ref` and event
  * targets are typed for the rendered element. A `type` that varies at runtime gets either.
+ * For a `type` that changes at runtime, annotate handlers with the shared element type, e.g.
+ * `onClick={(event: React.MouseEvent<HTMLElement>) => ...}`.
  */
 export type DtTextListProps = DtTextListOwnProps & (
   | (ListNativeProps<'ul'> & { type?: 'unordered' })
