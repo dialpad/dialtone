@@ -1,3 +1,30 @@
+# [1.7.0](https://github.com/dialpad/dialtone/compare/combinator/v1.6.0...combinator/v1.7.0) (2026-11-17)
+
+
+### Features
+
+* **Stack:** DLT-3826 add alignSelf prop ([#1581](https://github.com/dialpad/dialtone/issues/1581)) ([0fce80f](https://github.com/dialpad/dialtone/commit/0fce80f912d496f1f4ec5f81be81be6acef3acfa))
+* **Toggle:** NO-JIRA default gap ([#1583](https://github.com/dialpad/dialtone/issues/1583)) ([657a951](https://github.com/dialpad/dialtone/commit/657a951291a3b996072ad5083601b239097a8749))
+
+# [1.6.0](https://github.com/dialpad/dialtone/compare/combinator/v1.5.1...combinator/v1.6.0) (2026-11-13)
+
+
+### Features
+
+* **Dropdown,popover,list Item:** DLT-3738 add menu choices and logical visibility ([#1542](https://github.com/dialpad/dialtone/issues/1542)) ([8492354](https://github.com/dialpad/dialtone/commit/84923549d4a37ea1239a38dab33b98193379f995))
+* **Filter Pill:** DLT-3736 add controlled selection ([#1577](https://github.com/dialpad/dialtone/issues/1577)) ([73afd3b](https://github.com/dialpad/dialtone/commit/73afd3b6a510d412ee04c0c74171af2f1121e025))
+
+## [1.5.1](https://github.com/dialpad/dialtone/compare/combinator/v1.5.0...combinator/v1.5.1) (2026-11-10)
+
+
+### Bug Fixes
+
+* **Combinator:** DLT-3669 correct split-button and text-list presets ([#1516](https://github.com/dialpad/dialtone/issues/1516)) ([815d9e9](https://github.com/dialpad/dialtone/commit/815d9e9c765bce529d2ee5170bdacf3628352815))
+* **Combinator:** DLT-3721 modernize preset APIs ([#1533](https://github.com/dialpad/dialtone/issues/1533)) ([e82f7c5](https://github.com/dialpad/dialtone/commit/e82f7c53fb711dec675bb2b875ceec25379eba87))
+* **Combinator:** DLT-3731 preserve default-slot copy scope ([#1532](https://github.com/dialpad/dialtone/issues/1532)) ([f3ee537](https://github.com/dialpad/dialtone/commit/f3ee537a64583f8a7dc8769bf25878d368668e0d))
+* **Dropdown,combinator:** DLT-3719 correct anchor bindings and presets ([#1514](https://github.com/dialpad/dialtone/issues/1514)) ([abb11d5](https://github.com/dialpad/dialtone/commit/abb11d54c96a8d500ad8391bbcd19d5fcc19c039))
+* **Vue,combinator:** DLT-3669 document supported preset APIs ([#1517](https://github.com/dialpad/dialtone/issues/1517)) ([1d764e6](https://github.com/dialpad/dialtone/commit/1d764e6870eb638c9dd1b1d61f0c576cd5f80423))
+
 # [1.5.0](https://github.com/dialpad/dialtone/compare/combinator/v1.4.0...combinator/v1.5.0) (2026-11-03)
 
 

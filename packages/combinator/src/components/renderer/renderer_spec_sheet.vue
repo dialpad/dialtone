@@ -9,6 +9,7 @@
         :name="cell.name"
         :info="cell.info"
         :options="cell.options"
+        :reset-generation="resetGeneration"
         @select="emit('select', $event)"
       />
     </div>
@@ -50,6 +51,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  resetGeneration: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const emit = defineEmits(['select']);
@@ -59,6 +64,7 @@ const variantNames = computed(() => listVariantNames(props.variants));
 // Each cell gets its own reactive options (and its own child component), so a
 // component interaction in one cell stays local and never re-renders the others.
 const cells = computed(() => {
+  props.resetGeneration;
   return variantNames.value.map((name) => {
     const { info, options } = buildVariantState(
       props.component,

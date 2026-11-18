@@ -20,7 +20,7 @@ When and where to provide help content largely depends on the kind of experience
 
 If you’re designing in an area that users are in regularly, such as the Dialpad inbox, prioritize for more experienced users. This is their space to get work done. We need to stay out of their way by offering clean, concise UI with minimal help content.
 
-If you’re designing in an area that users use irregularly, like creating a chatbot or optimize Ai responses, prioritize for users who are unfamiliar with these tasks or workflows. Offer more context and guidance to help users make the best decisions for their companies.
+If you’re designing in an area that users use irregularly, like creating a chatbot or optimize AI responses, prioritize for users who are unfamiliar with these tasks or workflows. Offer more context and guidance to help users make the best decisions for their companies.
 
 ## Where to Place It
 

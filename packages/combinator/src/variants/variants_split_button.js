@@ -208,7 +208,7 @@ export default {
     props: {
       importance: { initialValue: 'outlined' },
       endTooltipText: { initialValue: 'More options' },
-      alphaLeadingClass: { initialValue: 'd-pis-100' },
+      startLeadingClass: { initialValue: 'd-pis-100' },
     },
     slots: {
       default: { initialValue: 'Place Call' },

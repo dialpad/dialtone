@@ -96,7 +96,7 @@ When setting the color of an icon take these into consideration:
   <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar-600 d-py-100 d-px-200 d-w100p">
     <dt-stack direction="row" as="section" gap="300" class="d-fl1">
       <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-      <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
+      <dt-text kind="body" truncate class="d-w100p d-wmx102">AI Contact Center</dt-text>
     </dt-stack>
     <dt-stack direction="row" as="section" gap="300">
       <dt-icon class="d-fc-positive" name="bell" size="200" ariaLabel="Bell Icon" />
@@ -115,7 +115,7 @@ When setting the color of an icon take these into consideration:
   <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar-600 d-py-100 d-px-200 d-w100p">
   <dt-stack direction="row" as="section" gap="300" class="d-fl1">
     <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-    <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
+    <dt-text kind="body" truncate class="d-w100p d-wmx102">AI Contact Center</dt-text>
   </dt-stack>
   <dt-stack direction="row" as="section" gap="300">
     <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />

@@ -36,7 +36,7 @@
       <dt-pagination
         :total-pages="10"
         :active-page="5"
-        aria-label="pagination with separator on both sides"
+        aria-label="pagination with hidden edges"
         :show-edges="false"
       />
     </div>

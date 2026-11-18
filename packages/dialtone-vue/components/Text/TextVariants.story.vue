@@ -246,7 +246,7 @@
             :key="item.align"
           >
             <dt-text
-              as="h4"
+              as="h3"
               kind="headline"
               :size="400"
             >
@@ -376,7 +376,7 @@
             :key="item.wrap"
           >
             <dt-text
-              as="h4"
+              as="h3"
               kind="headline"
               :size="400"
             >

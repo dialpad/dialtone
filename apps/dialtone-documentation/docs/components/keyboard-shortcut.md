@@ -59,7 +59,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 ### Inline with Text and Screen Reader Text
 
 ```vue demo
-<dt-text kind="body" :size="300">
+<dt-text variant="body-md">
   Press
   <dt-keyboard-shortcut
     screen-reader-text="Control plus F5"

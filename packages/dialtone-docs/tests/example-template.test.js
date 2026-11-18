@@ -1,14 +1,44 @@
 import { expect, it } from 'vitest';
-import { assertTemplateBindings, assertStaticHtml } from '../src/generators/example-template.mjs';
+import { assertTemplateBindings, assertStaticHtml, sourceSetupForTemplate } from '../src/generators/example-template.mjs';
 import { buildRecords } from '../src/generators/build-public-docs.mjs';
 import { resolve } from 'node:path';
+import { sourceVersions } from '../../../scripts/retrieval/release-profile.mjs';
+
+it.each(['true', 'false', '\'all\'', '"unread"', 'null', '[]', '[\'unread\', \'needs-review\']'])(
+  'extracts only referenced literal ref setup: %s', value => {
+    const raw = `<script setup>
+import { ref, computed } from 'vue';
+const selected = ref(${value});
+const unrelated = computed(() => loadSettings());
+</script>`;
+    const template = '<dt-filter-pill v-model:selected="selected" :options="[]" />';
+    const setup = sourceSetupForTemplate(raw, template);
+    expect(setup).toBe(`import { ref } from 'vue';\nconst selected = ref(${value});\n`);
+    expect(() => assertTemplateBindings(template, setup)).not.toThrow();
+    expect(sourceSetupForTemplate(raw, '<dt-filter-pill :options="[]" />')).toBe('');
+  },
+);
+
+it.each([
+  'ref(loadSettings())', 'computed(() => "all")', 'ref({ value: "all" })',
+  'ref(1)', 'ref()', 'ref("all", "unread")',
+  'ref(["all", null])', 'ref(["all", 1])', 'ref(["all", true])',
+  'ref([["all"]])', 'ref([...values])', 'ref([, "all"])',
+  'ref(`all`)', 'ref(defaultValue)', 'ref(() => "all")', '() => {}',
+])('keeps arbitrary setup unsupported: %s', initializer => {
+  const raw = `<script setup>
+import { ref, computed } from 'vue';
+const selected = ${initializer};
+</script>`;
+  expect(() => sourceSetupForTemplate(raw, '<p>{{ selected }}</p>')).toThrow('Unsupported source setup for selected');
+});
 
 it('rejects missing state while retaining source setup and lexical template scopes', () => {
   expect(() => assertTemplateBindings('<dt-toggle v-model="checked" />')).toThrow('checked');
   expect(() => assertTemplateBindings('<div v-bind="$attrs" v-for="row in [1, 2]">{{ row }}</div>')).not.toThrow();
   expect(() => assertTemplateBindings('<dt-stack><template #default="{ row }">{{ row }}</template></dt-stack>')).not.toThrow();
   const example = buildRecords(resolve('../../apps/dialtone-documentation/docs/components/toggle.md')).find(record => record.id === 'examples/toggle-v-model');
-  expect(example.content).toContain('const checked = ref(false)');
+  expect(example.content).toContain('const checked = ref(true)');
   expect(example.content).toContain('v-model="checked"');
   expect(example.content).not.toContain('utilityClassDocs');
 });
@@ -37,7 +67,7 @@ it('delivers raw utility HTML without a Vue scaffold or unrelated table script',
   expect(example.example.representation).toBe('static-html');
   expect(example.example.utilities).toEqual(['d-ww-normal']);
   expect(example.example.components).toEqual([]);
-  expect(example.example.profile.dependencies).toEqual({ '@dialpad/dialtone': '10.5.1' });
+  expect(example.example.profile.dependencies).toEqual({ '@dialpad/dialtone': sourceVersions()['@dialpad/dialtone'] });
   expect(example.content).toContain('<p class="d-ww-normal">');
   expect(example.content).not.toContain('const wordWrap');
   expect(example.content).not.toContain('## App.vue');

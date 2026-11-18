@@ -8,10 +8,13 @@
         'd-list-item--focusable': isFocusable,
         'd-list-item--highlighted': isHighlighted,
         'd-list-item--static': !isHoverable,
+        'd-list-item--disabled': disabled,
       }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
-    :aria-selected="role === 'listitem' ? undefined : isHighlighted"
+    :aria-selected="ariaSelected"
+    :aria-checked="isMenuItemRadio ? selected : undefined"
+    :aria-disabled="disabled ? 'true' : undefined"
     v-on="listItemListeners"
   >
     <dt-item-layout
@@ -48,14 +51,13 @@
 
 <script>
 import {
+  LIST_ITEM_ROLES,
   LIST_ITEM_TYPES,
   LIST_ITEM_NAVIGATION_TYPES,
 } from './ListItemConstants';
 import utils from '@/common/utils';
 import { DtIconCheck } from '@dialpad/dialtone-icons/vue';
 import { DtItemLayout } from '@/components/ItemLayout';
-
-const ROLES = ['listitem', 'menuitem', 'option'];
 
 /**
  * A list item is an element that can be used to represent individual items in a list.
@@ -86,13 +88,15 @@ export default {
     },
 
     /**
-     * String to use for the item's role.
-     * @values listitem, menuitem, option
+     * Contextual role: listitem for ordinary lists, menuitem for menu actions,
+     * menuitemradio for persistent mutually exclusive menu choices, option for listboxes.
+     * selected never changes the role automatically.
+     * @values listitem, menuitem, option, menuitemradio
      */
     role: {
       type: String,
       default: 'listitem',
-      validator: (role) => (ROLES).includes(role),
+      validator: (role) => LIST_ITEM_ROLES.includes(role),
     },
 
     /**
@@ -127,9 +131,23 @@ export default {
     },
 
     /**
-     * Applies selected styles to the list item
+     * Shows a selected checkmark. For menuitemradio, also sets aria-checked independently of highlight.
      */
     selected: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Marks the item unavailable. Sets aria-disabled="true" and the disabled style, and stops
+     * the item from emitting click for pointer, Enter or Space activation. The item stays
+     * focusable and reachable by keyboard navigation, and still emits keydown, mousemove and
+     * mouseleave. Only the item's own activation is gated: a parent that selects by
+     * highlighted index, such as Combobox on Enter, must check availability itself.
+     * Don't also set an aria-disabled attribute: it overrides the announced state, while this prop
+     * still controls the style and activation.
+     */
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -188,6 +206,14 @@ export default {
   },
 
   computed: {
+    isMenuItemRadio () {
+      return this.role === 'menuitemradio';
+    },
+
+    ariaSelected () {
+      return this.role === 'listitem' || this.isMenuItemRadio ? undefined : this.isHighlighted;
+    },
+
     isDefaultType () {
       return this.type === LIST_ITEM_TYPES.DEFAULT;
     },
@@ -200,6 +226,7 @@ export default {
 
         keydown: event => {
           if (['enter', 'space'].includes(event.code.toLowerCase())) {
+            if (this.isMenuItemRadio) event.preventDefault();
             this.onClick(event);
           }
           this.$emit('keydown', event);
@@ -243,7 +270,11 @@ export default {
 
   methods: {
     onClick (e) {
-      // disabled as we do not want to override native click
+      if (this.disabled) {
+        // Also cancel the native default, such as navigation when element-type is "a".
+        e.preventDefault();
+        return;
+      }
       this.$emit('click', e);
     },
 

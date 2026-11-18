@@ -29,7 +29,8 @@
             <dtc-code-editor-slot
               v-if="value && !disabledMembers.has(slot)"
               :name="slot"
-              :bindings="slotBindingsMap[slot]"
+              :bindings="slotInfoMap[slot]?.bindings"
+              :scope-name="slotInfoMap[slot]?.scopeName"
               :content="value"
               @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
             >
@@ -50,6 +51,7 @@
         kind="muted"
         importance="clear"
         :size="100"
+        data-qa="dtc-code-copy-json"
         @click="copyJson"
       >
         <template #default>
@@ -68,6 +70,7 @@
         kind="muted"
         importance="clear"
         :size="100"
+        data-qa="dtc-code-copy"
         @click="copy"
       >
         <template #default>
@@ -162,14 +165,9 @@ provide(SETTINGS_INDENT_KEY, indent);
 
 const tagName = computed(() => paramCase(props.info.displayName));
 
-const slotBindingsMap = computed(() => {
-  if (!props.info.slots) return {};
-  return Object.fromEntries(
-    props.info.slots
-      .filter(slot => slot.bindings?.length)
-      .map(slot => [slot.name, slot.bindings]),
-  );
-});
+const slotInfoMap = computed(() => Object.fromEntries(
+  (props.info.slots || []).map(slot => [slot.name, slot]),
+));
 
 const hasSlotContent = computed(() => {
   return props.options.slots
@@ -194,6 +192,10 @@ const copyText = computed(() => serializeExampleTemplate({
 
 function serializeAsVariantPreset () {
   const preset = {};
+  const { copyNotice, lookupExclude } = props.info.metadata ?? {};
+  if (copyNotice || lookupExclude) {
+    preset.metadata = { ...(copyNotice ? { copyNotice } : {}), ...(lookupExclude ? { lookupExclude } : {}) };
+  }
   const memberGroups = ['props', 'slots', 'attributes'];
 
   for (const group of memberGroups) {
@@ -204,10 +206,16 @@ function serializeAsVariantPreset () {
     for (const member of infoMembers) {
       const value = optionValues[member.name];
       if (props.disabledMembers.has(member.name)) continue;
-      if (value === undefined || value === null || value === '') continue;
+      if (value === undefined || Number.isNaN(value)) continue;
+      if (group === 'slots' && !value) continue;
+      // Empty/null can be explicit identities; omit them only when already the default.
+      if ((value === '' || value === null) && value === member.defaultValue) continue;
 
       if (!preset[group]) preset[group] = {};
-      preset[group][member.name] = { initialValue: value };
+      preset[group][member.name] = {
+        initialValue: value,
+        ...(group === 'slots' && member.scopeName ? { scopeName: member.scopeName } : {}),
+      };
     }
   }
 
@@ -215,7 +223,10 @@ function serializeAsVariantPreset () {
 }
 
 function formatJsValue (value, indent) {
-  if (typeof value === 'string') return `'${value.replace(/'/g, '\\\'')}'`;
+  if (typeof value === 'string') {
+    const escaped = value.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/\r/g, '\\r').replace(/\n/g, '\\n');
+    return `'${escaped}'`;
+  }
   if (typeof value === 'boolean' || typeof value === 'number') return String(value);
   if (Array.isArray(value)) return JSON.stringify(value);
   if (typeof value === 'object' && value !== null) {
@@ -234,11 +245,16 @@ function formatPresetAsJs (preset) {
   const sections = [];
 
   for (const [group, members] of Object.entries(preset)) {
+    if (group === 'metadata') {
+      sections.push(`${pad}${pad}metadata: ${formatJsValue(members, pad + pad)}`);
+      continue;
+    }
     const indent = pad + pad + pad;
     const entries = Object.entries(members)
       .map(([name, obj]) => {
         const val = formatJsValue(obj.initialValue, indent);
-        return `${indent}${name}: { initialValue: ${val} }`;
+        const scope = obj.scopeName ? `, scopeName: ${formatJsValue(obj.scopeName, indent)}` : '';
+        return `${indent}${name}: { initialValue: ${val}${scope} }`;
       })
       .join(',\n');
     sections.push(`${pad}${pad}${group}: {\n${entries},\n${pad}${pad}}`);

@@ -5,6 +5,8 @@
     :content-width="contentWidth"
     :content-mode="contentMode"
     :open="open"
+    :forward-anchor-arrow-keys="forwardAnchorArrowKeys"
+    :visibility-change-callback="onVisibilityChange"
     :placement="placement"
     :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
     :fallback-placements="fallbackPlacements"
@@ -16,14 +18,20 @@
     :max-width="maxWidth"
     :open-with-arrow-keys="shouldOpenWithArrowKeys"
     :open-on-context="openOnContext"
-    v-bind="$attrs"
+    v-bind="popoverAttrs"
     :tether="tether"
     :transition="transition"
     :footer-class="footerClass"
     v-on="dropdownListeners"
   >
     <template #anchor="{ attrs }">
-      <!-- @slot Anchor element that activates the dropdown -->
+      <!--
+        @slot Dropdown trigger. Bind the three ARIA slot props individually to the trigger to preserve consumer refs.
+        @binding {string} ref Internal ref key. Do not forward it to the trigger.
+        @binding {string} aria-expanded Whether the dropdown is open, as "true" or "false".
+        @binding {string} aria-controls ID of the popup element with role="menu".
+        @binding {string} aria-haspopup Popup role, "menu".
+      -->
       <slot
         ref="anchor"
         name="anchor"
@@ -36,6 +44,7 @@
       <ul
         :id="listId"
         ref="listWrapper"
+        role="none"
         :class="listClasses"
         data-qa="dt-dropdown-list-wrapper"
         @mouseleave="clearHighlightIndex"
@@ -67,6 +76,9 @@ import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES, HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
+// DtListItem's `disabled` modifier. Hand-rolled aria-disabled rows don't carry it and keep the legacy behavior.
+const isDisabledRow = el => Boolean(el?.classList.contains('d-list-item--disabled'));
+
 export default {
   name: 'DtDropdown',
 
@@ -79,7 +91,7 @@ export default {
       indexKey: 'highlightIndex',
       idKey: 'highlightId',
       listElementKey: 'getListElement',
-      listItemRole: 'menuitem',
+      listItemRole: ['menuitem', 'menuitemradio'],
       afterHighlightMethod: 'afterHighlight',
       beginningOfListMethod: 'beginningOfListMethod',
       endOfListMethod: 'endOfListMethod',
@@ -106,6 +118,32 @@ export default {
     open: {
       type: [Boolean, null],
       default: null,
+    },
+
+    /**
+     * Optional callback receiving the open boolean synchronously on logical visibility changes.
+     * Includes initial true during creation, before mount, when open=true.
+     * Does not declare or emit an open-change event.
+     * For modal removal, keep modal=true, its anchor and scroll container unchanged until opened(false).
+     * Changing modal or the anchor's scroll context after opening can retain the original lock.
+     * opened(false) reports transition completion, not global scroll-lock ownership.
+     * A closed modal with no pending transition or retained scroll lock can be removed immediately.
+     * Defer direct app.unmount() until Vue's next tick.
+     */
+    visibilityChangeCallback: {
+      type: Function,
+      default: null,
+    },
+
+    /**
+     * Forwards anchor ArrowUp/ArrowDown with a boolean open prop without toggling.
+     * Closed anchor arrows retain their default action and propagation for consumer handling.
+     * Accept opening synchronously in the emitted keydown callback for first-row focus.
+     * @values true, false
+     */
+    forwardAnchorArrowKeys: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -311,12 +349,13 @@ export default {
     'update:open',
 
     /**
-     * Event fired when dropdown is shown or hidden
+     * Event fired after the current transition and initial focus work complete
      *
      * @event opened
      * @type {Boolean | Array}
      */
     'opened',
+
   ],
 
   data () {
@@ -325,11 +364,23 @@ export default {
       DROPDOWN_PADDING_CLASSES,
       EVENT_KEYNAMES,
       openedWithKeyboard: false,
+      pendingArrowOpening: null,
       isOpen: null,
+      isLogicallyOpen: false,
     };
   },
 
   computed: {
+    popoverAttrs () {
+      const { dialogClass, 'dialog-class': kebabDialogClass, ...attrs } = this.$attrs;
+      return {
+        ...attrs,
+        dialogClass: [dialogClass, kebabDialogClass, {
+          'd-dropdown__menu--arrow-keys': this.isArrowKeyNav && (!('role' in attrs) || attrs.role === 'menu'),
+        }],
+      };
+    },
+
     dropdownListeners () {
       return {
 
@@ -343,6 +394,23 @@ export default {
 
         keydown: event => {
           const eventCode = event.code;
+          const isArrow = [EVENT_KEYNAMES.up, EVENT_KEYNAMES.arrowup,
+            EVENT_KEYNAMES.down, EVENT_KEYNAMES.arrowdown].includes(eventCode);
+
+          if (this.forwardAnchorArrowKeys && this.open !== null && !this.isLogicallyOpen && isArrow &&
+            this.$refs.popover?.$refs.anchor?.contains(event.target)) {
+            const pending = Symbol('arrow-opening');
+            this.pendingArrowOpening = pending;
+            this.openedWithKeyboard = true;
+            this.$emit('keydown', event);
+            // Let synchronous acceptance in the emitted handler flush before discarding ignored modality.
+            this.$nextTick(() => {
+              if (this.pendingArrowOpening === pending && !this.isLogicallyOpen) {
+                this.openedWithKeyboard = false;
+              }
+            });
+            return;
+          }
 
           switch (eventCode) {
             case EVENT_KEYNAMES.up:
@@ -359,7 +427,7 @@ export default {
               break;
             case EVENT_KEYNAMES.space:
             case EVENT_KEYNAMES.spacebar:
-              this.onSpaceKey();
+              this.onSpaceKey(event);
               break;
             case EVENT_KEYNAMES.enter:
               this.onEnterKey();
@@ -385,15 +453,16 @@ export default {
     },
 
     beginningOfListMethod () {
-      return this.onBeginningOfList || this.jumpToEnd;
+      return this.onBeginningOfList || this.onBeginningOfMenu;
     },
 
     endOfListMethod () {
-      return this.onEndOfList || this.jumpToBeginning;
+      return this.onEndOfList || this.onEndOfMenu;
     },
 
     activeItemEl () {
-      return this.getListElement().querySelector('#' + this.highlightId);
+      if (!this.highlightId) return null;
+      return this._getListItemNodes()?.find(item => item.id === this.highlightId) || null;
     },
 
     isArrowKeyNav () {
@@ -415,17 +484,64 @@ export default {
   },
 
   methods: {
+    onVisibilityChange (isOpen) {
+      this.isLogicallyOpen = isOpen;
+      this.visibilityChangeCallback?.(isOpen);
+    },
+
     onMouseHighlight (e) {
       const liElement = e.target.closest('li');
 
-      if (liElement && liElement.role && this.highlightId !== liElement.id) {
+      if (liElement?.role && liElement.id && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
-        liElement.focus();
+        if (this._getListItemNodes()?.includes(liElement)) this.focusHoveredRow(liElement);
       }
+    },
+
+    // A DtListItem disabled row takes the highlight but not focus, which would draw the keyboard
+    // focus ring under the pointer. The menu holds focus so Enter can't activate another row.
+    focusHoveredRow (row) {
+      if (isDisabledRow(row) && this.focusMenuContent()) return;
+      row.focus();
+    },
+
+    /** Focuses the menu container; false when it can't take focus (contentTabindex null). */
+    focusMenuContent () {
+      const content = this.$refs.popover?.popoverContentEl;
+      content?.focus();
+      return Boolean(content) && content.getRootNode().activeElement === content;
     },
 
     getListElement () {
       return this.$refs.listWrapper;
+    },
+
+    getMenuCloseButton () {
+      const popover = this.$refs.popover;
+      return popover?.role === 'menu' ? popover.getCloseButtonElement() : null;
+    },
+
+    isMenuCloseFocused () {
+      const closeButton = this.getMenuCloseButton();
+      return closeButton && closeButton.getRootNode().activeElement === closeButton;
+    },
+
+    focusMenuClose () {
+      const closeButton = this.getMenuCloseButton();
+      if (!closeButton) return false;
+      // Close has no application row index and must not emit a choice highlight.
+      this.highlightIndex = -1;
+      this.highlightId = '';
+      closeButton.focus();
+      return true;
+    },
+
+    onBeginningOfMenu () {
+      if (!this.focusMenuClose()) this.jumpToEnd();
+    },
+
+    onEndOfMenu () {
+      if (!this.focusMenuClose()) this.jumpToBeginning();
     },
 
     clearHighlightIndex () {
@@ -445,7 +561,12 @@ export default {
 
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.isArrowKeyNav) {
-          this.setHighlightIndex(0);
+          if (this._itemsLength() || !this.focusMenuClose()) this.setHighlightIndex(0);
+          // Popover's default first-element focus skips aria-disabled rows, but a DtListItem disabled row
+          // stays reachable: focus it so focus and keyboard position agree. A consumer focus target wins.
+          const consumerFocus = Object.entries(this.$attrs).some(([key, value]) =>
+            key.replace(/-/g, '').toLowerCase() === 'initialfocuselement' && value !== undefined);
+          if (!consumerFocus && isDisabledRow(this.activeItemEl)) this.activeItemEl.focus();
         }
         this.$emit('opened', true);
       } else {
@@ -455,9 +576,13 @@ export default {
       }
     },
 
-    onSpaceKey () {
+    onSpaceKey (event) {
       if (!this.open) {
         this.openedWithKeyboard = true;
+      }
+      // The menu holds focus while the pointer rests on a disabled row; keep Space from scrolling it.
+      if (isDisabledRow(this.activeItemEl) && event.target === this.$refs.popover?.popoverContentEl) {
+        event.preventDefault();
       }
     },
 
@@ -473,6 +598,7 @@ export default {
         return;
       }
       if (this.isArrowKeyNav) {
+        if (this.isMenuCloseFocused()) return this.onEndKey();
         return this.onUpKey();
       }
     },
@@ -483,6 +609,7 @@ export default {
         return;
       }
       if (this.isArrowKeyNav) {
+        if (this.isMenuCloseFocused()) return this.onHomeKey();
         return this.onDownKey();
       }
     },
@@ -492,6 +619,7 @@ export default {
         return;
       }
 
+      if (!this._itemsLength() && this.focusMenuClose()) return;
       return this.onHomeKey();
     },
 
@@ -500,6 +628,7 @@ export default {
         return;
       }
 
+      if (this.focusMenuClose()) return;
       return this.onEndKey();
     },
 

@@ -6,7 +6,6 @@ export default {
       },
     },
     props: {
-      labelClass: { initialValue: 'd-pie-100' },
       modelValue: { initialValue: true },
     },
   },
@@ -17,6 +16,16 @@ export default {
     },
     slots: {
       default: { initialValue: 'Label' },
+    },
+  },
+
+  'indeterminate': {
+    props: {
+      modelValue: { initialValue: 'mixed' },
+      size: { initialValue: '200' },
+    },
+    slots: {
+      default: { initialValue: 'Indeterminate' },
     },
   },
 };

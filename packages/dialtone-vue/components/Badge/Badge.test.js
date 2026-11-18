@@ -34,6 +34,41 @@ describe('DtBadge Tests', () => {
   });
 
   describe('Presentation Tests', () => {
+    describe('When the startIcon slot content toggles without remounting', () => {
+      const ToggleHost = {
+        components: { DtBadge },
+        props: { showIcon: Boolean },
+        template: `
+          <dt-badge text="Badge">
+            <template v-if="showIcon" #startIcon><span data-qa="test-icon" /></template>
+          </dt-badge>
+        `,
+      };
+
+      const mountHost = (showIcon) => mount(ToggleHost, { props: { showIcon } });
+      const findIcon = (host) => host.find('[data-qa="test-icon"]');
+
+      it('should not render the icon initially when the slot is absent', () => {
+        expect(findIcon(mountHost(false)).exists()).toBe(false);
+      });
+
+      it('should render the icon after the slot is provided', async () => {
+        const host = mountHost(false);
+
+        await host.setProps({ showIcon: true });
+
+        expect(findIcon(host).exists()).toBe(true);
+      });
+
+      it('should not render the icon after the slot is removed again', async () => {
+        const host = mountHost(true);
+
+        await host.setProps({ showIcon: false });
+
+        expect(findIcon(host).exists()).toBe(false);
+      });
+    });
+
     describe('When the badge renders', () => {
       it('should exist', () => {
         expect(wrapper.exists()).toBeTruthy();

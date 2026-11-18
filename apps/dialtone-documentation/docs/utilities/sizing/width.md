@@ -15,7 +15,7 @@ Use `d-w-{stop}` to set a fixed width for an element using layout token stops. T
 <div v-dt-scrollbar:always class="d-bar-400 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
   <dt-stack gap="100" align="start">
     <div v-for="(i, index) in layout" v-dt-tooltip="{ message: `${i.px}px`, delay: false }">
-      <dt-text kind="code" size="100" class="d-w-100 d-us-all">d-w-{{i.stop}}</dt-text>
+      <dt-text variant="code-xs" class="d-w-100 d-us-all">d-w-{{i.stop}}</dt-text>
       <div class="d-h-100 d-bgc-moderate d-bar-300" :class="`d-w-${i.stop}`"></div>
     </div>
   </dt-stack>
@@ -36,7 +36,7 @@ Use `d-w{n}p` to set a percentage width for an element. No hyphen before the num
     <dt-stack as="div" gap="200" align="center" justify="center" class="d-w100p">
       <div v-for="i in percentage" v-dt-tooltip="{ message: `${i}%`, delay: false }" class="d-bgc-moderate d-w100p">
         <div class="d-bgc-moderate-opaque d-bar-300 d-p-100" :class="`d-w${i}p`">
-          <dt-text kind="code" size="100" class="d-us-all">d-w{{i}}p</dt-text>
+          <dt-text variant="code-xs" class="d-us-all">d-w{{i}}p</dt-text>
         </div>
       </div>
     </dt-stack>

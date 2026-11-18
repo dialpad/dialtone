@@ -89,13 +89,13 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
     d-bc-subtle
   "
   >
-  <dt-text as="p" kind="body" :size="200" align="center" tone="tertiary" wrap="balance">
+  <dt-text as="p" variant="body-sm" align="center" tone="tertiary" wrap="balance">
     The quick brown fox jumps over the lazy dog.
   </dt-text>
-  <dt-text as="p" kind="body" :size="200" align="center" tone="tertiary" wrap="balance">
+  <dt-text as="p" variant="body-sm" align="center" tone="tertiary" wrap="balance">
     The quick brown fox jumps over the lazy dog.
   </dt-text>
-  <dt-text as="p" kind="body" :size="200" align="center" tone="tertiary" wrap="balance">
+  <dt-text as="p" variant="body-sm" align="center" tone="tertiary" wrap="balance">
     The quick brown fox jumps over the lazy dog.
   </dt-text>
 </dt-stack>

@@ -55,8 +55,7 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
 ```vue demo
 <dt-chip :show-close="false">
   <template #icon>
-    <dt-icon
-      name="phone"
+    <dt-icon-phone
       size="200"
     />
   </template>
@@ -69,8 +68,7 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
 ```vue demo
 <dt-chip>
   <template #icon>
-    <dt-icon
-      name="phone"
+    <dt-icon-phone
       size="200"
     />
   </template>
@@ -126,3 +124,7 @@ To truncate text, use DtText's `truncate` prop, and set the width of the Chip's 
 
 [//]: # (## Accessibility)
 [//]: # (Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa ante, tempus vitae lacus id, luctus tristique lorem. Mauris feugiat massa ex, id aliquet mi tempor non. Curabitur non tristique lectus. Fusce ut nisl non diam dignissim viverra. In posuere dui arcu, sed eleifend massa faucibus sed. Phasellus quis leo vitae erat pellentesque venenatis id vitae lectus. Suspendisse convallis, metus a congue tincidunt, velit sem tincidunt dui, eget auctor ipsum ipsum in ex. Nullam lobortis, mauris vel vestibulum rutrum, lorem elit vehicula est, nec viverra ante erat nec dolor. Proin at placerat tortor. Nam ullamcorper metus et eros porta, at lacinia leo scelerisque. Curabitur finibus sollicitudin odio tempor finibus. Donec lobortis metus vitae mollis gravida.)
+
+<script setup>
+import { DtIconPhone } from '@dialpad/dialtone-icons/vue';
+</script>

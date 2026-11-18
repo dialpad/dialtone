@@ -254,6 +254,38 @@ describe('DtStack Tests', () => {
     });
   });
 
+  describe('When `alignSelf` prop is provided with', () => {
+    it.each(['start', 'center', 'end', 'stretch', 'baseline', 'auto'])(
+      'string "%s" it sets its class and leaves `align` alone',
+      async (value) => {
+        await wrapper.setProps({ alignSelf: value });
+
+        expect(wrapper.classes()).toContain(`d-stack--align-self-${value}`);
+        expect(wrapper.classes().some((c) => c.startsWith('d-stack--align-') && !c.includes('align-self'))).toBe(false);
+      },
+    );
+
+    it('an object it sets the default and one class per breakpoint', async () => {
+      await wrapper.setProps({
+        alignSelf: { default: 'start', sm: 'center', md: 'end', lg: 'stretch', xl: 'auto' },
+      });
+
+      expect(wrapper.classes()).toEqual(expect.arrayContaining([
+        'd-stack--align-self-start',
+        'd-stack--sm-align-self-center',
+        'd-stack--md-align-self-end',
+        'd-stack--lg-align-self-stretch',
+        'd-stack--xl-align-self-auto',
+      ]));
+    });
+
+    it('an invalid value it adds no class', async () => {
+      await wrapper.setProps({ alignSelf: { default: 'invalid', md: 'invalid' } });
+
+      expect(wrapper.classes().some((c) => c.includes('align-self'))).toBe(false);
+    });
+  });
+
   describe('When `justify` prop is provided with', () => {
     describe('valid string value', () => {
       it('should set proper justify class', async () => {

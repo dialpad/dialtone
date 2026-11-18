@@ -18,7 +18,7 @@ export default {
         initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab>\n<dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab>\n<dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>`,
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -35,7 +35,7 @@ export default {
         initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>Tab 1</dt-tab>\n<dt-tab id="tab-2" panel-id="panel-2">Tab 2</dt-tab>\n<dt-tab id="tab-3" panel-id="panel-3">Tab the third</dt-tab>',
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -52,7 +52,7 @@ export default {
         initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>Tab 1</dt-tab>\n<dt-tab id="tab-2" panel-id="panel-2">Tab the second</dt-tab>\n<dt-tab id="tab-3" panel-id="panel-3">Tab the third</dt-tab>',
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -68,7 +68,7 @@ export default {
         initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab>\n<dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab>\n<dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>`,
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -85,7 +85,7 @@ export default {
         initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab>\n<dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab>\n<dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>`,
       },
       default: {
-        initialValue: '<div>\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" class="d-py-100"> <strong>First</strong> content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" class="d-py-100"> <strong>Second</strong> content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" class="d-py-100"> <strong>Third</strong> content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div>\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" class="d-py-100"> <strong>First</strong> content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" class="d-py-100"> <strong>Second</strong> content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" class="d-py-100"> <strong>Third</strong> content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -94,7 +94,7 @@ export default {
     props: {
       orientation: { initialValue: 'vertical' },
       selected: { initialValue: 'panel-1' },
-      tabListClass: {
+      tabsClass: {
         initialValue: 'd-w-200',
       },
     },
@@ -103,7 +103,7 @@ export default {
         initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab>\n<dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab>\n<dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>`,
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -115,17 +115,17 @@ export default {
     slots: {
       tabs: {
         initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected>
-  <template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-box-select :size="iconSize" /></template>
   First
 </dt-tab>
 <dt-tab id="tab-2" panel-id="panel-2">
-  <template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-box-select :size="iconSize" /></template>
   Second
 </dt-tab>
 <dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>`,
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -138,18 +138,18 @@ export default {
       tabs: {
         initialValue: `
 <dt-tab id="tab-1" panel-id="panel-1" label="Inbox" selected>
-  <template #startIcon="{ iconSize }"><dt-icon name="inbox" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-inbox :size="iconSize" /></template>
 </dt-tab>
 <dt-tab id="tab-2" panel-id="panel-2" label="Send">
-  <template #startIcon="{ iconSize }"><dt-icon name="send" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-send :size="iconSize" /></template>
 </dt-tab>
 <dt-tab id="tab-3" panel-id="panel-3" label="Archive">
-  <template #startIcon="{ iconSize }"><dt-icon name="archive" :size="iconSize" /></template>
+  <template #startIcon="{ iconSize }"><dt-icon-archive :size="iconSize" /></template>
 </dt-tab>`
 ,
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },
@@ -171,7 +171,7 @@ export default {
 <dt-tab id="tab-3" panel-id="panel-3">Drafts</dt-tab>`,
       },
       default: {
-        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Inbox</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Archive</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200"> <strong>Drafts</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Inbox</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Archive</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Drafts</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
       },
     },
   },

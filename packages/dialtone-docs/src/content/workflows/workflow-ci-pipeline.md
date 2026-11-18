@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook, dialtone-react, parity-gate]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-11-12
+last_updated: 2026-11-17
 related_packages: [dialtone-vue, dialtone-react, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -15,17 +15,17 @@ Dialtone uses GitHub Actions for all CI. Workflows live in `.github/workflows/`.
 
 The setup action reads these from the repo:
 
-| Tool | Version | Source |
-|------|---------|--------|
-| Node.js | 24 | `.nvmrc` |
-| pnpm | 9.9.0 | `packageManager` in root `package.json` |
-| NX | 19.8.0 | `nx.json` |
+| Tool    | Version | Source                                |
+| ------- | ------- | ------------------------------------- |
+| Node.js | 24      | `.nvmrc`                              |
+| pnpm    | 11.9.0  | `packageManager` in root `package.json` |
+| NX      | 19.8.0  | `nx.json`                             |
 
 All workflows set `HUSKY: 0` to disable git hooks in CI.
 
 ## Required Checks (Must Pass Before Merge to `staging`)
 
-These checks are required on every PR:
+Workflow triggers, path filters and job-level conditions determine which checks run. Branch protection determines which checks must pass before merge.
 
 | Check | Workflow | Command |
 |-------|---------|---------|
@@ -51,7 +51,8 @@ These checks are required on every PR:
 | `test-tokens`     | `packages/dialtone-tokens/**`                                                                                       | `pnpm nx run dialtone-tokens:test`                                                                                                                                                                    |
 | `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
 | `test-lint-plugins` | Lint packages, canonical migration guidance, its generator and this workflow | Guidance generation check and Stylelint package tests |
-| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
+| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the component metadata generator suites, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
+| `qualify-lookup-candidate` | Same paths as `test-cli` | Pack the umbrella runtime closure and both adapters from the PR, build every delivered example against those archives and probe the installed CLI/stdio MCP bundles (`qualify-release-examples.mjs --mode candidate`); uploads the receipt and reports |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
@@ -121,14 +122,14 @@ Both jobs restore Nx's local cache (`.nx/cache`) with `actions/cache`, keyed on 
 
 ### `a11y_tests.yml`
 
-**Trigger:** Push to `staging` or `production` (paths: `packages/dialtone-vue/**`), PR (same paths)
+**Trigger:** Push to `staging` or `production`, and pull requests opened or synchronized. Both triggers use path filters for `packages/dialtone-vue/**`, root `package.json`/`pnpm-lock.yaml`/`pnpm-workspace.yaml`, `.nvmrc`, the shared setup action or this workflow.
 
 **What it does:**
-1. Setup environment
-2. `pnpm exec playwright install --with-deps` — installs Playwright browsers
-3. `pnpm nx run dialtone-vue:test:a11y`
+1. Set up the environment and report the runner OS and browser-tool versions.
+2. `pnpm exec playwright install --with-deps` installs the browsers matching the locked Playwright version.
+3. `pnpm nx run dialtone-vue:test:a11y` runs the existing Storybook accessibility suite and returns its exit status; the temporary server is stopped on exit.
 
-Uses Playwright to run accessibility checks in a real browser. Required check on all PRs touching dialtone-vue.
+Uses Playwright to run accessibility checks in a browser. Component stories retain their behavior and accessibility checks. Kitchen Sink assembles those demos for browsing and is excluded from the automated run with the `!test` tag. This removes automatic gallery assembly, loading/rendering and navigation checks; individual story coverage is unchanged. The runner waits for the parent story's completion and status before checking iframe stories; play assertion errors propagate as failures. Test failures keep their nonzero exit status. Branch protection determines which checks are required.
 
 ---
 
@@ -208,16 +209,20 @@ The 5% threshold is set via `INCREASE_THRESHOLD` environment variable.
 
 **Trigger:**
 - `workflow_dispatch` with package selector
-- Push to `production`, `alpha`, `beta`, `next` when `package.json` files change
+- Push to `production` when `package.json` files change
+- Automated dispatch from `release.yml` after successful prerelease version preparation (`alpha`, `beta`, `next`)
 
 **What it does:**
-Publishes each changed package to two registries: npm (public) and GitHub Packages (`@dialpad` scope).
+Publishes each changed package to two registries: npm (public) and GitHub Packages (`@dialpad` scope). Prerelease dispatches pass the final prepared commit and the full preparation range, so adapters and their runtime qualify together. Every package job uses that pinned commit; intermediate prerelease pushes do not publish. A failed preparation blocks the handoff and an unchanged batch publishes nothing. Dispatch success does not establish publication success; check the separate Publish Web run.
 
-1. `filter-actions` — Detects which packages have changed `package.json` (indicating a new version from semantic-release)
-2. For each package × registry combination (matrix):
+1. `filter-actions` — Detects which packages have changed `package.json` (indicating a new version from semantic-release) and selects the qualified lookup packages: the umbrella, icons, emojis, tokens, CLI and MCP server
+2. `qualify` — When a qualified package is selected, packs those packages once (reusing any version a registry already holds), generates CLI/MCP examples for the exact versions, builds every delivered example against the archives and probes the installed CLI/MCP bundles. Publication waits for it; its archives and reports are uploaded as `release-qualification`
+3. For each package × registry combination (matrix):
    - Sets `NODE_AUTH_TOKEN` and registry URL
-   - Runs `pnpm nx run {package}:publish --publish-branch={branch} --tag={tag}`
-3. A 15-second delay is added before publishing `dialtone-vue` due to npm rate limiting
+   - Qualified packages: publishes the qualified archive (`release-archives.mjs publish`); an existing version is skipped only when its integrity matches (tags are left unchanged), otherwise the job fails. If qualification failed, these legs fail without publishing; other packages still publish
+   - Other packages: attaches a local release branch at the pinned commit, then runs `pnpm nx run {package}:publish --publish-branch={branch} --tag={tag}`. This satisfies pnpm’s branch check without fetching a moving branch tip
+4. A 15-second delay is added before publishing `dialtone-vue` due to npm rate limiting
+5. `verify-release` — Confirms within one shared, bounded wait that both registries hold the qualified bytes and, for versions of that channel, the channel tag (a prerelease version must not be `latest`, and a prerelease of another channel is rejected), then runs installed CLI/MCP lookup and example smoke checks. The normal availability wait also applies when an unrelated package fails to publish; that failure still keeps the workflow red. The workflow succeeds only when this passes; nothing is unpublished or rolled back.
 
 **RELEASE_TAG:** `latest` on `production`, branch name on `alpha`/`beta`/`next`.
 
