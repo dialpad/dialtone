@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StandIn } from '../../.storybook/StandIn';
 import { VALIDATION_MESSAGE_TYPES } from '../../common/constants';
 import type { ValidationMessage } from '../../common/utils';
 import { DtButton } from '../Button/Button';
@@ -10,6 +9,7 @@ import { DtInput } from '../Input/Input';
 import { DtRadio } from '../Radio/Radio';
 import { DtRadioGroup } from '../RadioGroup/RadioGroup';
 import { DtIconBell } from '../../icons';
+import { DtSelectMenu } from '../SelectMenu/SelectMenu';
 import { DtStack } from '../Stack/Stack';
 import { DtValidationMessages, type DtValidationMessagesProps } from './ValidationMessages';
 
@@ -125,9 +125,6 @@ const INTEREST_OPTIONS = [
   { value: 'product', label: 'Product', messagesId: 'dt14' },
 ];
 
-// The select field is a stand-in: Vue's initial DOM, with the story's handlers on its native elements and a real
-// DtValidationMessages where it renders its messages. What the real component changes with its messages
-// (d-input--critical, aria-invalid, aria-describedby) doesn't happen here until it is ported.
 function InteractiveFormTemplate () {
   const [nameValue, setNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -257,29 +254,16 @@ function InteractiveFormTemplate () {
             onBlur={input.onBlur}
           />
         ))}
-        <StandIn for="select-menu">
-          <div className="">
-            <label>
-              <div data-qa="dt-select-label" className="d-text d-text-label--md d-text--tone-secondary d-select__label-text">Country</div>
-              <div className="d-select" data-qa="dt-select-wrapper">
-                <select
-                  className="d-select__input"
-                  data-qa="dt-select"
-                  value={countryValue}
-                  onChange={(event) => {
-                    setCountryValue(event.target.value);
-                    validateCountry(event.target.value);
-                  }}
-                >
-                  {COUNTRY_OPTIONS.map(option => (
-                    <option key={option.value} className="" value={option.value}>{option.label}</option>
-                  ))}
-                </select>
-              </div>
-            </label>
-            <DtValidationMessages data-qa="dt-select-messages" validationMessages={countryMessages} />
-          </div>
-        </StandIn>
+        <DtSelectMenu
+          label="Country"
+          options={COUNTRY_OPTIONS}
+          value={countryValue}
+          messages={countryMessages}
+          onValueChange={(value) => {
+            setCountryValue(value);
+            validateCountry(value);
+          }}
+        />
         <DtRadioGroup
           name="contact"
           legend="Preferred contact"
