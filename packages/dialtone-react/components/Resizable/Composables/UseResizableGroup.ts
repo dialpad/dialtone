@@ -99,7 +99,8 @@ function derive ({ registered, containerSize, savedState }: GroupSource): GroupD
     : computeLayout({ panels: registered, containerSize, savedState: savedState ?? undefined });
 
   const savedMap = new Map(savedState?.map(s => [s.id, s]) ?? []);
-  const syncedPanels = registered.map(config => buildPanelState(config, containerSize, layout, savedMap.get(config.id)));
+  const syncedPanels = registered.map(config =>
+    buildPanelState(config, containerSize, layout, savedMap.get(config.id)));
 
   const panelMap = new Map<string, ResizablePanelState>();
   for (const p of syncedPanels) panelMap.set(p.id, p);
