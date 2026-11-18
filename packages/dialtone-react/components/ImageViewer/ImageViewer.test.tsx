@@ -243,8 +243,18 @@ describe('DtImageViewer Tests', () => {
           </div>,
         );
 
-        fireEvent.keyDown(qa('dt-image-viewer-full')!, { code: 'Escape' });
+        // The outer beforeEach already opened a viewer, so this one's modal is the last in the document.
+        const fullEls = () => document.body.querySelectorAll<HTMLElement>('[data-qa="dt-image-viewer-full"]');
+        const mine = fullEls()[fullEls().length - 1];
 
+        // Positive control: an unhandled key does reach the ancestor through the portal.
+        fireEvent.keyDown(mine, { code: 'KeyA' });
+        expect(spy).toHaveBeenCalledTimes(1);
+        spy.mockClear();
+
+        fireEvent.keyDown(mine, { code: 'Escape' });
+
+        expect(mine.isConnected).toBe(false);
         expect(spy).not.toHaveBeenCalled();
         local.unmount();
       });

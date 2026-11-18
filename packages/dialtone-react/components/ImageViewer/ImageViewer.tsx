@@ -132,10 +132,10 @@ export function DtImageViewer ({
         dialog = node.closest('dialog');
         if (dialog) break;
         const root = node.getRootNode();
-        node = root instanceof ShadowRoot ? root.host : null;
+        // nodeType works across windows (an iframe); `instanceof ShadowRoot` does not.
+        node = root.nodeType === 11 ? (root as ShadowRoot).host ?? null : null;
       }
-      const root = previewButtonRef.current?.getRootNode() as Document | ShadowRoot | undefined;
-      resolved = dialog ?? root?.querySelector<HTMLElement>('body') ?? document.body;
+      resolved = dialog ?? previewButtonRef.current?.ownerDocument.body ?? document.body;
     }
     // Nothing renders for a selector that matches nothing.
     setTarget(typeof resolved === 'string' ? document.querySelector(resolved) : resolved);
@@ -153,7 +153,10 @@ export function DtImageViewer ({
       // later; an active portal that moves keeps the opener saved first.
       if (modalEl && !previousActiveElement.current) {
         const root = previewButtonRef.current?.getRootNode() as Document | ShadowRoot | undefined;
-        previousActiveElement.current = (root?.activeElement ?? document.activeElement) as HTMLElement | null;
+        // Follow open shadow roots down to the element that actually has focus, which the host alone doesn't.
+        let active = (root?.activeElement ?? document.activeElement) as Element | null;
+        while (active?.shadowRoot?.activeElement) active = active.shadowRoot.activeElement;
+        previousActiveElement.current = active as HTMLElement | null;
       }
     } else {
       previousActiveElement.current?.focus();
