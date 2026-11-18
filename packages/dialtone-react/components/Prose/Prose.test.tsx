@@ -52,6 +52,7 @@ describe('DtProse Tests', () => {
       const { unmount } = setWrapper({ ref });
 
       expect(ref).toHaveBeenCalledTimes(1);
+      expect(ref).toHaveBeenCalledWith(screen.getByTestId(PROSE_TEST_ID));
       expect(cleanup).not.toHaveBeenCalled();
 
       unmount();
@@ -206,6 +207,12 @@ describe('DtProse Tests', () => {
       setWrapper({}, html('<a href="data :notes.html">link</a>'));
 
       expect(queryIn('a').getAttribute('href')).toBe('data :notes.html');
+    });
+
+    it('Should preserve a relative href that starts with a nonbreaking space before a colon', () => {
+      setWrapper({}, html('<a href="&#160;data:notes.html">link</a>'));
+
+      expect(queryIn('a').getAttribute('href')).toBe(' data:notes.html');
     });
 
     it('Should preserve safe https href', () => {

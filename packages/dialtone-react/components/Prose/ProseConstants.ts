@@ -23,7 +23,7 @@ export const _PROSE_ALLOWED_ATTRIBUTE_PREFIXES: readonly string[] = ['aria-'];
 
 export const _PROSE_URL_ATTRIBUTES: readonly string[] = ['href', 'src', 'cite'];
 
-const UNSAFE_URL_SCHEME = /^\s*(javascript|vbscript|data|blob|file):/i;
+const UNSAFE_URL_SCHEME = /^(javascript|vbscript|data|blob|file):/i;
 
 // The URL parser trims leading and trailing C0 controls and spaces, and removes every tab, line feed and carriage
 // return, so `java&#x09;script:` runs as `javascript:`. A space inside stays, so `data :x` is a relative link.
