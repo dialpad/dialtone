@@ -127,7 +127,8 @@ function mergeRefs<T> (...refs: (Ref<T> | undefined)[]) {
 
 /**
  * Typography wrapper for raw HTML content. After every client commit it strips attributes prose content may not carry
- * (classes, styles, data-*, event handlers, unsafe URLs) and logs an error for form controls and custom elements.
+ * (classes, styles, data-*, inline event-handler attributes, unsafe URLs) and logs an error for form controls and custom elements.
+ * React callbacks such as `onClick` on descendant JSX elements are not DOM attributes and keep working.
  * This is client-side presentation cleanup: layout effects don't run on the server, so server-rendered content keeps
  * its attributes until a client commit, and callers must sanitize untrusted HTML before rendering it.
  * @see https://dialtone.dialpad.com/components/prose.html

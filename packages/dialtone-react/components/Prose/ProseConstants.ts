@@ -42,9 +42,10 @@ export function _isSafeProseUrl (value: string | null | undefined): boolean {
 }
 
 // Only `_global` is guaranteed; any other tag may have no entry, so lookups are `| undefined`.
+// Null prototype, so inherited keys such as `constructor` also look up as `undefined`.
 export const PROSE_ALLOWED_ATTRIBUTES: Readonly<
   { _global: readonly string[] } & Record<string, readonly string[] | undefined>
-> = {
+> = Object.assign(Object.create(null), {
   _global: ['id', 'lang', 'dir', 'translate', 'title', 'role'],
   a: ['href', 'target', 'rel', 'hreflang'],
   img: ['src', 'alt', 'width', 'height', 'loading', 'decoding'],
@@ -62,4 +63,4 @@ export const PROSE_ALLOWED_ATTRIBUTES: Readonly<
   table: ['summary'],
   col: ['span'],
   colgroup: ['span'],
-};
+});
