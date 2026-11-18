@@ -160,19 +160,19 @@ Use the item `marker` slot to replace an item's visual marker while preserving `
 >
   <dt-text-list-item>
     <template #marker>
-      <dt-icon name="check" size="200" />
+      <dt-icon-check size="200" />
     </template>
     Included in every plan.
   </dt-text-list-item>
   <dt-text-list-item>
     <template #marker>
-      <dt-icon name="check" size="200" />
+      <dt-icon-check size="200" />
     </template>
     Unlimited team members.
   </dt-text-list-item>
   <dt-text-list-item marker-tone="critical">
     <template #marker>
-      <dt-icon name="close" size="200" />
+      <dt-icon-close size="200" />
     </template>
     Requires admin approval.
   </dt-text-list-item>
@@ -219,3 +219,7 @@ Custom marker wrappers are considered decorative and will not be announced to as
 ### Text List Item
 
 <component-vue-api component-name="textlistitem" :show-import="false" />
+
+<script setup>
+import { DtIconCheck, DtIconClose } from '@dialpad/dialtone-icons/vue';
+</script>

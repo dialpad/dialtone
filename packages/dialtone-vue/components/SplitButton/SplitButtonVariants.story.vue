@@ -385,6 +385,11 @@ export default {
   data () {
     return {
       sizeNameMapping: {
+        100: 'Extra small',
+        200: 'Small',
+        300: 'Medium',
+        400: 'Large',
+        500: 'Extra large',
         xs: 'Extra small',
         sm: 'Small',
         md: 'Medium',

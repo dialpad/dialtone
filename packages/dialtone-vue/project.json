@@ -8,6 +8,7 @@
         "{projectRoot}/common/**/*",
         "{projectRoot}/components/**/*",
         "{projectRoot}/directives/**/*",
+        "{projectRoot}/localization/**/*",
         "{projectRoot}/prototypes/**/*",
         "{projectRoot}/index.js",
         "{projectRoot}/package.json",
@@ -43,6 +44,7 @@
         "{projectRoot}/directives/**/*",
         "{projectRoot}/docs/**/*",
         "{projectRoot}/functions/*.mdx",
+        "{projectRoot}/localization/**/*",
         "{projectRoot}/prototypes/**/*",
         "{projectRoot}/index.js",
         "{projectRoot}/package.json",
@@ -116,11 +118,7 @@
       "dependsOn": [ "build-storybook" ],
       "options": {
         "cwd": "{projectRoot}",
-        "commands": [
-          "pnpm exec http-server ./storybook-static --port 9011 --silent",
-          "pnpm exec wait-on tcp:9011 && pnpm exec test-storybook --url http://localhost:9011"
-        ],
-        "readyWhen": "Ran all test suites"
+        "command": "bash scripts/test-a11y.sh"
       }
     },
     "test:visual": {

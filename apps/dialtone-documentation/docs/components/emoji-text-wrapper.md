@@ -12,7 +12,7 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
 ### Text Only
 
 ```vue demo
-<dt-text kind="body" :size="300">
+<dt-text variant="body-md">
   <dt-emoji-text-wrapper>
     Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
   </dt-emoji-text-wrapper>
@@ -29,7 +29,7 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
       Button with shortcode :cry: emoji
     </dt-emoji-text-wrapper>
   </dt-button>
-  <dt-text kind="body" :size="300">
+  <dt-text variant="body-md">
     <dt-emoji-text-wrapper>
       Text only with unicode 😃 emoji
     </dt-emoji-text-wrapper>
@@ -39,12 +39,12 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
       Button wrapper :smile:
     </dt-emoji-text-wrapper>
   </dt-button>
-  <dt-text kind="body" :size="300">
+  <dt-text variant="body-md">
     <dt-emoji-text-wrapper size="800">
       Bigger emoji size :smile:
     </dt-emoji-text-wrapper>
   </dt-text>
-  <dt-text kind="body" :size="300">
+  <dt-text variant="body-md">
     <dt-emoji-text-wrapper size="300">
       Smaller emoji size :smile:
     </dt-emoji-text-wrapper>

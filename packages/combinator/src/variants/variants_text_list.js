@@ -95,28 +95,28 @@ export default {
       default: {
         initialValue: `<dt-text-list-item class="d-p-200 d-bar-400" marker-tone="secondary">
   <template #marker>
-    <dt-icon name="check-circle-filled" size="500" />
+    <dt-icon-check-circle-filled size="500" />
   </template>
   <dt-text as="p" variant="body-md" tone="secondary">Complete the form</dt-text>
   <dt-text as="p" variant="body-sm" tone="tertiary">Add contact and workspace details.</dt-text>
 </dt-text-list-item>
 <dt-text-list-item class="d-p-200 d-bar-400 d-bgc-moderate-opaque" marker-tone="primary">
   <template #marker>
-    <dt-icon name="circle-half-filled" size="500" />
+    <dt-icon-circle-half-filled size="500" />
   </template>
   <dt-text as="p" variant="body-md" tone="primary">Fix the errors</dt-text>
   <dt-text as="p" variant="body-sm" tone="secondary">Review required fields and warnings.</dt-text>
 </dt-text-list-item>
 <dt-text-list-item class="d-p-200 d-bar-400">
   <template #marker>
-    <dt-icon name="circle-dashed" size="500" />
+    <dt-icon-circle-dashed size="500" />
   </template>
   <dt-text as="p" variant="body-md" tone="tertiary">Submit for review</dt-text>
   <dt-text as="p" variant="body-sm" tone="tertiary">Send the request to workspace admins.</dt-text>
 </dt-text-list-item>
 <dt-text-list-item class="d-p-200 d-bar-400">
   <template #marker>
-    <dt-icon name="circle-dashed" size="500" />
+    <dt-icon-circle-dashed size="500" />
   </template>
   <dt-text as="p" variant="body-md" tone="tertiary">Wait for approval</dt-text>
   <dt-text as="p" variant="body-sm" tone="tertiary">Track status until the review is done.</dt-text>

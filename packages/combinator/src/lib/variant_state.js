@@ -1,4 +1,5 @@
 import { reactive } from 'vue';
+import clone from 'just-clone';
 import { getComponentInfo } from '@/src/lib/info';
 import { shouldDisable } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
@@ -33,6 +34,10 @@ export function mergeVariantData (info, variantData) {
   if (!variantData) return;
   Object.entries(variantData).forEach(([memberGroup, members]) => {
     if (memberGroup === 'exclusions') return;
+    if (memberGroup === 'metadata') {
+      info.metadata = { ...info.metadata, ...members };
+      return;
+    }
     Object.entries(members).forEach(([memberName, member]) => {
       const infoMember = info[memberGroup]?.find(m => m.name === memberName);
       if (infoMember) Object.assign(infoMember, member);
@@ -68,7 +73,7 @@ export function getInitialValues (info) {
   for (const group of MEMBER_GROUPS) {
     for (const member of (info[group] ?? [])) {
       values[group] = values[group] || {};
-      values[group][member.name] = member.initialValue;
+      values[group][member.name] = info.metadata?.previewIdentity ? clone(member.initialValue) : member.initialValue;
     }
   }
   return values;

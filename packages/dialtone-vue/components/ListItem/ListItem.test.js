@@ -183,6 +183,79 @@ describe('DtListItem tests', () => {
     });
   });
 
+  describe('Disabled Tests', () => {
+    describe('When disabled is not set', () => {
+      it('renders the same root attributes as before the prop existed', () => {
+        expect(wrapper.attributes()).toEqual({
+          id: 'dt-item',
+          class: 'd-list-item',
+          tabindex: '-1',
+          role: 'option',
+          'aria-selected': 'false',
+        });
+      });
+
+      it('passes a consumer aria-disabled through and still emits click', async () => {
+        mockAttrs = { 'aria-disabled': 'true' };
+        updateWrapper();
+
+        await wrapper.trigger('click');
+
+        expect(wrapper.attributes('aria-disabled')).toBe('true');
+        expect(wrapper.classes()).toEqual(['d-list-item']);
+        expect(wrapper.emitted('click')).toHaveLength(1);
+      });
+    });
+
+    describe('When disabled', () => {
+      beforeEach(() => {
+        mockProps = { disabled: true };
+        updateWrapper();
+      });
+
+      it('sets aria-disabled and the disabled modifier together', () => {
+        expect(wrapper.attributes('aria-disabled')).toBe('true');
+        expect(wrapper.classes()).toEqual(['d-list-item', 'd-list-item--disabled']);
+      });
+
+      it('emits pointer events except click', async () => {
+        await wrapper.trigger('click');
+        await wrapper.trigger('mousemove');
+        await wrapper.trigger('mouseleave');
+
+        expect(wrapper.emitted()).toEqual({
+          mousemove: [[expect.any(MouseEvent)]],
+          mouseleave: [[expect.any(MouseEvent)]],
+        });
+      });
+
+      it('cancels the native activation of a disabled link row', () => {
+        mockProps = { disabled: true, elementType: 'a' };
+        mockAttrs = { href: '/settings' };
+        updateWrapper();
+        const click = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+        wrapper.element.dispatchEvent(click);
+
+        expect(click.defaultPrevented).toBe(true);
+      });
+
+      it('keeps the keyboard highlight', async () => {
+        // baseProvide highlights dt-item2.
+        await wrapper.setProps({ id: 'dt-item2' });
+
+        expect(wrapper.classes()).toEqual(['d-list-item', 'd-list-item--highlighted', 'd-list-item--disabled']);
+        expect(wrapper.attributes('aria-selected')).toBe('true');
+      });
+
+      it('stays focusable for tab navigation', async () => {
+        await wrapper.setProps({ navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB });
+
+        expect(wrapper.attributes('tabindex')).toBe('0');
+      });
+    });
+  });
+
   describe('Extendability Tests', () => {
     describe('When type is "default" and "wrapperClass" prop is provided', () => {
       beforeEach(async () => {
@@ -267,5 +340,59 @@ describe('DtListItem tests', () => {
         expect(wrapper.text()).toContain('right content');
       });
     });
+  });
+});
+
+describe('ListItem contextual roles', () => {
+  it('keeps ordinary selected list content as listitem', () => {
+    const item = mount(DtListItem, { props: { selected: true } });
+    expect(item.attributes('role')).toBe('listitem');
+    expect(item.attributes('aria-selected')).toBeUndefined();
+    expect(item.attributes('aria-checked')).toBeUndefined();
+    item.unmount();
+  });
+
+  it('keeps checked state independent of menu radio highlight', async () => {
+    const item = mount(DtListItem, {
+      props: { id: 'radio', role: 'menuitemradio', selected: true, navigationType: 'arrow-keys' },
+    });
+    expect(item.attributes('aria-checked')).toBe('true');
+    expect(item.attributes('aria-selected')).toBeUndefined();
+    await item.trigger('mousemove');
+    expect(item.classes()).toContain('d-list-item--highlighted');
+    expect(item.attributes('aria-checked')).toBe('true');
+    await item.setProps({ selected: false });
+    expect(item.attributes('aria-checked')).toBe('false');
+    item.unmount();
+  });
+
+  it.each(['Enter', 'Space'])('activates a menu radio once on %s with the default action prevented', async code => {
+    const item = mount(DtListItem, {
+      props: { id: 'radio', role: 'menuitemradio', navigationType: 'arrow-keys' },
+    });
+    await item.trigger('keydown', { key: code === 'Space' ? ' ' : code, code });
+    expect(item.emitted('click')).toHaveLength(1);
+    expect(item.emitted('click')[0][0].defaultPrevented).toBe(true);
+    item.unmount();
+  });
+
+  it.each(['Enter', 'Space'])('refuses %s on a disabled menu radio with the default action still prevented', async code => {
+    const item = mount(DtListItem, {
+      props: { id: 'radio', role: 'menuitemradio', navigationType: 'arrow-keys', disabled: true },
+    });
+    await item.trigger('keydown', { key: code === 'Space' ? ' ' : code, code });
+    expect(Object.keys(item.emitted())).toEqual(['keydown']);
+    expect(item.emitted('keydown')[0][0].defaultPrevented).toBe(true);
+    item.unmount();
+  });
+
+  it.each(['menuitem', 'option'])('preserves %s highlight markup without inferring a radio', async role => {
+    const item = mount(DtListItem, { props: { role, selected: true, navigationType: 'arrow-keys' } });
+    expect(item.attributes('role')).toBe(role);
+    expect(item.attributes('aria-selected')).toBe('false');
+    expect(item.attributes('aria-checked')).toBeUndefined();
+    await item.trigger('mousemove');
+    expect(item.attributes('aria-selected')).toBe('true');
+    item.unmount();
   });
 });

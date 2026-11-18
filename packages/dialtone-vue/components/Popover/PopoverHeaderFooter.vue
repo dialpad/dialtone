@@ -30,6 +30,7 @@
       circle
       :aria-label="closeButtonTitle"
       :title="closeButtonTitle"
+      :role="closeRole"
       @click="$emit('close')"
     >
       <template #icon>
@@ -77,6 +78,14 @@ export default {
     contentClass: {
       type: [String, Array, Object],
       default: '',
+    },
+
+    /**
+     * Optional semantic role for the native close button.
+     */
+    closeRole: {
+      type: String,
+      default: undefined,
     },
 
     /**

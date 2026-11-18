@@ -20,7 +20,6 @@ The collapsible component consists of two parts: the anchor and the content. If 
     class="d-fc-primary"
     anchorText="Label 1"
     maxWidth="340px"
-    initial-focus-element="first"
     >
     <template #content>
       <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p-100 d-code--sm">(content slot)</div>
@@ -29,7 +28,6 @@ The collapsible component consists of two parts: the anchor and the content. If 
   <dt-collapsible
     anchorText="Label 2"
     maxWidth="340px"
-    initial-focus-element="first"
   >
     <template #content>
       <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p-100 d-code--sm">(content slot)</div>

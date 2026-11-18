@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "10.10.0",
+  "version": "10.13.1",
   "packageManager": "pnpm@11.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -104,6 +104,7 @@
     "globals": "16.3.0",
     "globby": "^13.1.4",
     "inquirer": "^9.1.5",
+    "libphonenumber-js": "1.13.15",
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
@@ -160,7 +161,7 @@
     "minimatch": "9.0.3",
     "npm-run-all": "^4.1.5",
     "nx": "19.8.0",
-    "playwright": "^1.60.0",
+    "playwright": "1.64.1",
     "semantic-release": "^21.0.6",
     "semantic-release-plus": "^20.0.0",
     "stylelint": "^16.25.0",

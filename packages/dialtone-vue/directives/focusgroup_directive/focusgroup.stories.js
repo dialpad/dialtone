@@ -55,10 +55,10 @@ export const Vertical = inline({ DtButton }, `\
 
 // ── No value (defaults: both axes, loop, memory) ────────────
 export const Defaults = inline({ DtButton }, `\
-<dt-stack v-dt-focusgroup direction="row" gap="100" role="radiogroup" aria-label="Options">
-  <dt-button role="radio" kind="muted" importance="outlined">A</dt-button>
-  <dt-button role="radio" kind="muted" importance="outlined">B</dt-button>
-  <dt-button role="radio" kind="muted" importance="outlined">C</dt-button>
+<dt-stack v-dt-focusgroup direction="row" gap="100" role="toolbar" aria-label="Actions">
+  <dt-button kind="muted" importance="outlined">Cut</dt-button>
+  <dt-button kind="muted" importance="outlined">Copy</dt-button>
+  <dt-button kind="muted" importance="outlined">Paste</dt-button>
 </dt-stack>`);
 
 // ── Noloop ──────────────────────────────────────────────────

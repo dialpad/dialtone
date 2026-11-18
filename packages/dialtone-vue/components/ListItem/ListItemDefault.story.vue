@@ -9,6 +9,7 @@
       :type="$attrs.type"
       :navigation-type="$attrs.navigationType"
       :selected="$attrs.selected"
+      :disabled="$attrs.disabled"
       :wrapper-class="$attrs.wrapperClass"
     >
       <template #start>

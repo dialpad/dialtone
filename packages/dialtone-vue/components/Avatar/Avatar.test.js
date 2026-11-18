@@ -110,6 +110,74 @@ describe('DtAvatar Tests', () => {
       });
     });
 
+    describe('When the icon slot content toggles without remounting', () => {
+      const ToggleHost = {
+        components: { DtAvatar, DtIconUser },
+        props: { showIcon: Boolean },
+        template: `
+          <dt-avatar full-name="Jaqueline Nackos">
+            <template v-if="showIcon" #icon><dt-icon-user /></template>
+          </dt-avatar>
+        `,
+      };
+
+      const mountHost = (showIcon) => mount(ToggleHost, { props: { showIcon } });
+      const findIcon = (host) => host.find('[data-qa="dt-avatar-icon"]');
+
+      it('should not render the icon initially when the slot is absent', () => {
+        expect(findIcon(mountHost(false)).exists()).toBe(false);
+      });
+
+      it('should render initials initially when the slot is absent', () => {
+        expect(mountHost(false).text()).toBe(MOCK_INITIALS);
+      });
+
+      it('should render the icon after the slot is provided', async () => {
+        const host = mountHost(false);
+
+        await host.setProps({ showIcon: true });
+
+        expect(findIcon(host).exists()).toBe(true);
+      });
+
+      it('should not render the icon after the slot is removed again', async () => {
+        const host = mountHost(true);
+
+        await host.setProps({ showIcon: false });
+
+        expect(findIcon(host).exists()).toBe(false);
+      });
+
+      it('should render initials again after the slot is removed again', async () => {
+        const host = mountHost(true);
+
+        await host.setProps({ showIcon: false });
+
+        expect(host.text()).toBe(MOCK_INITIALS);
+      });
+    });
+
+    describe('When no seed, family, variant or color is provided', () => {
+      it('should keep the same random color after every re-render', async () => {
+        const readColor = () => {
+          const el = wrapper.find('[data-qa="dt-avatar"]');
+          return {
+            family: el.attributes('data-avatar-family'),
+            variant: el.attributes('data-avatar-variant'),
+          };
+        };
+        const initialColor = readColor();
+        const colors = [];
+
+        for (let i = 0; i < 5; i++) {
+          await wrapper.setProps({ fullName: `Jaqueline Nackos ${i}`, size: i % 2 ? 'lg' : 'sm' });
+          colors.push(readColor());
+        }
+
+        expect(colors).toEqual(Array(5).fill(initialColor));
+      });
+    });
+
     describe('With no imageSrc or iconName is provided', () => {
       it('should display initials', () => {
         expect(wrapper.text()).toBe(MOCK_INITIALS);

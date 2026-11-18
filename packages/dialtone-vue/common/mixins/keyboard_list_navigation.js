@@ -29,7 +29,7 @@ const ERROR_INVALID_LIST_ELEMENT = (
  * @displayName Keyboard Navigation Mixin
  */
 export default ({
-  // Role of the list items in the component. This is used to identify the list items
+  // Role or array of roles of the list items. This is used to identify the list items
   // so you must update this if the role of your list items is anything other than 'option'
   listItemRole = 'option',
   // Key of the data prop that will be added to the component.
@@ -99,7 +99,11 @@ export default ({
         return null;
       }
 
-      return Array.from(listElement.querySelectorAll(`[role="${listItemRole}"], #sr-only-close-button`));
+      // Require IDs for the new radio navigation path; preserve ID-less rows for legacy roles.
+      const roles = Array.isArray(listItemRole) ? listItemRole : [listItemRole];
+      const selector = roles.map(role => `[role="${role}"]`).join(', ');
+      return Array.from(listElement.querySelectorAll(`${selector}, #sr-only-close-button`))
+        .filter(item => item.getAttribute('role') !== 'menuitemradio' || item.id);
     },
 
     onUpKey () {
@@ -143,7 +147,7 @@ export default ({
     onNavigationKey (key) {
       const listItems = this._getListItemNodes();
 
-      const matchingItems = listItems.filter(item => {
+      const matchingItems = (listItems || []).filter(item => {
         const content = item.textContent.trim().toLowerCase();
         return content.startsWith(key.toLowerCase());
       });
@@ -194,31 +198,21 @@ export default ({
 
     setHighlightId (id) {
       if (!id) return;
+      const index = this._getItemIndex(id);
       this[idKey] = id;
-      this[indexKey] = this._getItemIndex(id);
+      this[indexKey] = index;
 
-      if (this._itemsLength() && afterHighlightMethod) {
-        this[afterHighlightMethod](this._getItemIndex(id));
-      }
+      if (this._itemsLength() && afterHighlightMethod) this[afterHighlightMethod](index);
     },
 
     _getItemIndex (id) {
-      const listElement = this._getListElement();
-      if (!listElement) {
-        return;
-      }
-
-      const listItems = Array.from(listElement.querySelectorAll(`[role="${listItemRole}"], #sr-only-close-button`));
-      return listItems.indexOf(listElement.querySelector(`#${id}`));
+      if (!id) return -1;
+      if (!this._getListElement()) return;
+      return this._getListItemNodes()?.findIndex(item => item.id === id) ?? -1;
     },
 
     _getItemId (index) {
-      const listElement = this._getListElement();
-      if (!listElement) {
-        return;
-      }
-
-      return listElement.querySelectorAll(`[role="${listItemRole}"], #sr-only-close-button`)[index]?.id;
+      return this._getListItemNodes()?.[index]?.id;
     },
 
     scrollActiveItemIntoViewIfNeeded () {

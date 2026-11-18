@@ -17,20 +17,20 @@ By default, item layout includes custom styling, like paddings, sizes, colors, e
 <div class="d-d-block d-w-500">
   <dt-item-layout>
     <template #start>
-      <dt-icon size="300" name="lock" />
+      <dt-icon-lock size="300" />
     </template>
     Layout title
     <template #subtitle>
       Subtitle
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <dt-badge>Content</dt-badge>
     </template>
     <template #end>
-      <dt-icon size="300" name="share" />
+      <dt-icon-share size="300" />
     </template>
     <template #selected>
-      <dt-icon size="300" name="check" />
+      <dt-icon-check size="300" />
     </template>
   </dt-item-layout>
 </div>
@@ -47,20 +47,20 @@ This way you can utilize the layout and customize your own styling using utility
 <div class="d-d-block d-w-500">
   <dt-item-layout unstyled>
     <template #start>
-      <dt-icon size="300" name="lock" />
+      <dt-icon-lock size="300" />
     </template>
     Layout title
     <template #subtitle>
       Subtitle
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <dt-badge>Content</dt-badge>
     </template>
     <template #end>
-      <dt-icon size="300" name="share" />
+      <dt-icon-share size="300" />
     </template>
     <template #selected>
-      <dt-icon size="300" name="check" />
+      <dt-icon-check size="300" />
     </template>
   </dt-item-layout>
 </div>
@@ -69,3 +69,7 @@ This way you can utilize the layout and customize your own styling using utility
 ## Vue API
 
 <component-vue-api component-name="itemLayout" />
+
+<script setup>
+import { DtIconLock, DtIconShare, DtIconCheck } from '@dialpad/dialtone-icons/vue';
+</script>
