@@ -25,10 +25,16 @@ export const _PROSE_URL_ATTRIBUTES: readonly string[] = ['href', 'src', 'cite'];
 
 const UNSAFE_URL_SCHEME = /^\s*(javascript|vbscript|data|blob|file):/i;
 
-// Browsers drop tabs, newlines and other control characters from a URL before reading its scheme, so
-// `java&#x09;script:` runs as `javascript:`. Remove them first, as the URL parser does.
+// The URL parser trims leading and trailing C0 controls and spaces, and removes every tab, line feed and carriage
+// return, so `java&#x09;script:` runs as `javascript:`. A space inside stays, so `data :x` is a relative link.
 function withoutIgnoredUrlChars (value: string): string {
-  return Array.from(value).filter(char => char.charCodeAt(0) > 0x20).join('');
+  const isTrimmed = (char: string) => char.charCodeAt(0) <= 0x20;
+  const chars = Array.from(value);
+  let start = 0;
+  let end = chars.length;
+  while (start < end && isTrimmed(chars[start])) start++;
+  while (end > start && isTrimmed(chars[end - 1])) end--;
+  return chars.slice(start, end).filter(char => char !== '\t' && char !== '\n' && char !== '\r').join('');
 }
 
 export function _isSafeProseUrl (value: string | null | undefined): boolean {

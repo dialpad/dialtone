@@ -126,8 +126,10 @@ function mergeRefs<T> (...refs: (Ref<T> | undefined)[]) {
 }
 
 /**
- * Typography wrapper for raw HTML content. After every render it strips attributes prose content may not carry
+ * Typography wrapper for raw HTML content. After every client commit it strips attributes prose content may not carry
  * (classes, styles, data-*, event handlers, unsafe URLs) and logs an error for form controls and custom elements.
+ * This is client-side presentation cleanup: layout effects don't run on the server, so server-rendered content keeps
+ * its attributes until a client commit, and callers must sanitize untrusted HTML before rendering it.
  * @see https://dialtone.dialpad.com/components/prose.html
  */
 export function DtProse ({
@@ -147,11 +149,11 @@ export function DtProse ({
   const rootEl = useRef<HTMLDivElement | null>(null);
   const rootRef = useMemo(() => mergeRefs<HTMLDivElement>(rootEl, ref), [ref]);
 
-  // The commit that last rendered, and the one validated last: StrictMode re-runs effects without a new render, and
-  // Vue's onMounted/onUpdated hooks only ran once per patch, so a re-run of the same commit doesn't log again.
-  const renderedCommit = useRef(0);
-  const validatedCommit = useRef(0);
-  renderedCommit.current += 1;
+  // A fresh token per render, and the one validated last (written only in the effect): StrictMode re-runs effects
+  // with the same closure, so the same token, and Vue's onMounted/onUpdated hooks only ran once per patch, so a
+  // re-run of the same commit doesn't log again. A discarded render never reaches the effect.
+  const renderToken = {};
+  const validatedToken = useRef<object | null>(null);
 
   // No dependency list: like onMounted and onUpdated, this runs after every render, since the content is the
   // children, which can change without any prop changing. It's a layout effect so unsafe attributes are gone before
@@ -163,8 +165,8 @@ export function DtProse ({
     sanitizeContent(root);
 
     // Vue validates in development only; sanitizing above runs in every build.
-    if (isDevelopment() && validatedCommit.current !== renderedCommit.current) {
-      validatedCommit.current = renderedCommit.current;
+    if (isDevelopment() && validatedToken.current !== renderToken) {
+      validatedToken.current = renderToken;
       validateContent(root);
     }
   });

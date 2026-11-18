@@ -45,6 +45,21 @@ describe('DtProse Tests', () => {
       expect(ref.current).toBe(screen.getByTestId(PROSE_TEST_ID));
     });
 
+    it('Should run a callback ref cleanup once on unmount, without calling the ref with null', () => {
+      const cleanup = vi.fn();
+      const ref = vi.fn(() => cleanup);
+
+      const { unmount } = setWrapper({ ref });
+
+      expect(ref).toHaveBeenCalledTimes(1);
+      expect(cleanup).not.toHaveBeenCalled();
+
+      unmount();
+
+      expect(cleanup).toHaveBeenCalledTimes(1);
+      expect(ref).toHaveBeenCalledTimes(1);
+    });
+
     it('Should render slot content inside the wrapper', () => {
       const { prose } = setWrapper({}, <p>Hello world</p>);
 
@@ -185,6 +200,12 @@ describe('DtProse Tests', () => {
       const a = queryIn('a');
 
       expect(a.hasAttribute('href')).toBe(false);
+    });
+
+    it('Should preserve a relative href with a space before a colon', () => {
+      setWrapper({}, html('<a href="data :notes.html">link</a>'));
+
+      expect(queryIn('a').getAttribute('href')).toBe('data :notes.html');
     });
 
     it('Should preserve safe https href', () => {
