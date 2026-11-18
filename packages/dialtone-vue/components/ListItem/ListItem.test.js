@@ -218,10 +218,12 @@ describe('DtListItem tests', () => {
         expect(wrapper.classes()).toEqual(['d-list-item', 'd-list-item--disabled']);
       });
 
-      it('does not emit click on pointer activation', async () => {
+      it('emits pointer events except click', async () => {
         await wrapper.trigger('click');
+        await wrapper.trigger('mousemove');
+        await wrapper.trigger('mouseleave');
 
-        expect(wrapper.emitted('click')).toBeUndefined();
+        expect(Object.keys(wrapper.emitted())).toEqual(['mousemove', 'mouseleave']);
       });
 
       it('cancels the native activation of a disabled link row', () => {
@@ -233,13 +235,6 @@ describe('DtListItem tests', () => {
         wrapper.element.dispatchEvent(click);
 
         expect(click.defaultPrevented).toBe(true);
-      });
-
-      it('still emits mousemove and mouseleave', async () => {
-        await wrapper.trigger('mousemove');
-        await wrapper.trigger('mouseleave');
-
-        expect(Object.keys(wrapper.emitted())).toEqual(['mousemove', 'mouseleave']);
       });
 
       it('keeps the keyboard highlight', async () => {

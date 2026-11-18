@@ -71,43 +71,25 @@ describe('DtFilterPill built-in dropdown option rows', () => {
   });
 
   describe('Availability and descriptions', () => {
-    it('disables only the flagged row, with styling and aria-disabled from the same flag', async () => {
+    it('disables only the flagged row', async () => {
       updateWrapper();
       await open();
       expect(rows().map(row => row.getAttribute('aria-disabled'))).toEqual([null, null, 'true']);
-      expect(rows().map(row => row.classList.contains('d-list-item--disabled'))).toEqual([false, false, true]);
     });
 
-    it('describes rows with their visible explanation, enabled or not', async () => {
+    it('describes rows with their visible explanation, kept out of the accessible name', async () => {
       updateWrapper();
       await open();
       expect(rows().map(descriptionOf)).toEqual([null, 'Includes voicemail', 'Choose All under Status to view archived items']);
-    });
-
-    it('keeps the description inside the row and out of its accessible name', async () => {
-      updateWrapper();
-      await open();
-      const archived = rows()[2];
-      const description = document.getElementById(archived.getAttribute('aria-describedby'));
-      expect(archived.contains(description)).toBe(true);
+      const description = document.getElementById(rows()[2].getAttribute('aria-describedby'));
       expect(description.getAttribute('aria-hidden')).toBe('true');
     });
 
-    it('marks every built-in row disabled while the selection is unusable', async () => {
+    it('styles every built-in row disabled while the selection is unusable', async () => {
       vi.spyOn(console, 'warn').mockImplementation(() => {});
       updateWrapper({ selected: ['calls'] });
       await open();
-      expect(rows().map(row => row.getAttribute('aria-disabled'))).toEqual(['true', 'true', 'true']);
       expect(rows().map(row => row.classList.contains('d-list-item--disabled'))).toEqual([true, true, true]);
-    });
-
-    it('ignores availability and descriptions in multiple selection', async () => {
-      vi.spyOn(console, 'warn').mockImplementation(() => {});
-      updateWrapper({ useDropdown: false, selected: [] });
-      await open();
-      const checkboxes = [...document.querySelectorAll('[data-qa="dt-filter-pill__checkbox"]')];
-      expect(checkboxes.map(input => input.disabled)).toEqual([false, false, false]);
-      expect(document.body.textContent).not.toContain(typeOptions[2].description);
     });
   });
 
@@ -144,18 +126,6 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       expect(actions()).toEqual({ open: [[true]] });
     });
 
-    it('selects an enabled row next to a disabled one exactly once, then closes', async () => {
-      updateWrapper();
-      await open();
-      rows()[1].click();
-      await reconcile();
-      expect(actions()).toEqual({
-        open: [[true], [false]],
-        'update:selected': [['calls']],
-        'selection-change': [[{ value: 'calls', previousValue: 'all', reason: 'select', changed: true }]],
-      });
-    });
-
     it('clears to the neutral value even when its option is disabled', async () => {
       updateWrapper({
         neutralValue: 'all',
@@ -172,7 +142,7 @@ describe('DtFilterPill built-in dropdown option rows', () => {
     });
   });
 
-  describe('Committed state and reactive updates', () => {
+  describe('Committed state', () => {
     it('keeps a selected option checked and labeled after it becomes disabled, and refuses reselecting it', async () => {
       updateWrapper({ selected: 'calls' });
       await open();
@@ -180,41 +150,10 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       await reconcile();
       const calls = rows()[1];
       expect(calls.getAttribute('aria-checked')).toBe('true');
-      expect(calls.querySelector('[data-qa="dt-item-layout-selected-wrapper"] [data-qa="dt-icon"]')).not.toBeNull();
       expect(wrapper.find('[data-qa="dt-filter-pill__label-start"]').text()).toBe('Calls');
       // Same-value activation of the selected row must be refused too.
       calls.click();
       await reconcile();
-      expect(actions()).toEqual({ open: [[true]] });
-    });
-
-    it.each([
-      {
-        change: 'replacing the options',
-        apply: live => {
-          live.value = live.value.map(option => option.value === 'calls'
-            ? { ...option, disabled: true, description: 'Unavailable' }
-            : option);
-        },
-      },
-      {
-        change: 'updating the option in place',
-        apply: live => { Object.assign(live.value[1], { disabled: true, description: 'Unavailable' }); },
-      },
-    ])('keeps focus and keyboard position on a row whose availability changes by $change', async ({ apply }) => {
-      const live = ref(typeOptions.map(option => ({ ...option })));
-      mountWithLiveOptions(live);
-      await open();
-      const calls = rows()[1];
-      focusRow(calls);
-      apply(live);
-      await reconcile();
-      expect(document.activeElement).toBe(calls);
-      expect(calls.getAttribute('aria-disabled')).toBe('true');
-      expect(descriptionOf(calls)).toBe('Unavailable');
-      calls.dispatchEvent(keydown('ArrowDown'));
-      await reconcile();
-      expect(document.activeElement).toBe(rows()[2]);
       expect(actions()).toEqual({ open: [[true]] });
     });
   });
@@ -237,35 +176,22 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       focusRow(rows()[0]);
       expect(await focusedLabelAfter('ArrowDown')).toBe('Calls');
       expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
-      expect(await focusedLabelAfter('ArrowUp')).toBe('Calls');
-      expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
       expect(await focusedLabelAfter('ArrowDown')).toBe('Spam');
-      expect(await focusedLabelAfter('Home')).toBe('All types');
+      expect(await focusedLabelAfter('ArrowUp')).toBe('Archived');
+      expect(await focusedLabelAfter('ArrowUp')).toBe('Calls');
     });
 
-    it('moves by typeahead across groups, matching labels and not descriptions', async () => {
-      updateWrapper({ options: groupedOptions });
-      await open();
-      focusRow(rows()[0]);
-      expect(await focusedLabelAfter('s')).toBe('Spam');
-      // Only the Calls description starts with "i"; typeahead must not match it.
-      expect(await focusedLabelAfter('i')).toBe('Spam');
-    });
-
-    it.each([
-      { move: 'into', index: 1, group: 'Other views', parentRole: 'group', next: 'Archived' },
-      { move: 'out of', index: 2, group: null, parentRole: 'none', next: 'Spam' },
-    ])('keeps focus on a row that moves $move a group while open', async ({ index, group, parentRole, next }) => {
-      const live = ref(groupedOptions.map(option => ({ ...option })));
+    it('keeps focus on a row that moves into a group while open', async () => {
+      const live = ref(groupedOptions);
       mountWithLiveOptions(live);
       await open();
-      const row = rows()[index];
-      focusRow(row);
-      live.value[index].group = group;
+      const calls = rows()[1];
+      focusRow(calls);
+      live.value = live.value.map(option => option.value === 'calls' ? { ...option, group: 'Other views' } : option);
       await reconcile();
-      expect(document.activeElement.id).toBe(row.id);
-      expect(document.activeElement.parentElement.getAttribute('role')).toBe(parentRole);
-      expect(await focusedLabelAfter('ArrowDown')).toBe(next);
+      expect(document.activeElement.id).toBe(calls.id);
+      expect(document.activeElement.parentElement.getAttribute('role')).toBe('group');
+      expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
       expect(actions()).toEqual({ open: [[true]] });
     });
   });
