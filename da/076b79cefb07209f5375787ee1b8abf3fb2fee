@@ -1,0 +1,55 @@
+apps/dialtone-documentation/docs/components/badge.md
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 146
+packages/dialtone-vue/components/Badge/BadgeDefault.story.vue
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 8,17,22,29,34
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 132-139
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 216-217
+apps/dialtone-documentation/docs/components/stack.md
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 1150
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.js
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 1,75-76
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/test.mjs
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 192-239
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/index.mjs
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 70-88,92-100,104,108-119,123,127,131-141,163,169-172,176,181,193,207,209-210,217-227,271-280
+  s_edb6000ea1a4b6::t_18a7e251bd8a09 281
+packages/combinator/src/variants/variants_box.js
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 275-276
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 76,83,87-91
+  s_edb6000ea1a4b6::t_0c3ee5eb70b286 92
+  s_edb6000ea1a4b6::t_f28c707cdd7470 96-102
+  s_edb6000ea1a4b6::t_c78abc73d01f4f 93
+packages/combinator/src/variants/variants_tab_group.js
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 164
+apps/dialtone-documentation/docs/guides/migration/badge-chip-api/index.md
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 54
+apps/dialtone-documentation/docs/components/tabs.md
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 315
+apps/dialtone-documentation/docs/components/text.md
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 558
+packages/dialtone-vue/components/Badge/Badge.stories.js
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 112,122,129,147-150,152
+packages/dialtone-vue/components/Badge/Badge.test.js
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 243-260,336-344,459,482-486,488,490-491,503,515,528,540,553
+packages/dialtone-vue/components/Badge/Badge.vue
+  s_edb6000ea1a4b6::t_da36a8cfa7485e 32,34,40,280-285,287-288,391,393-394
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "da076b79cefb07209f5375787ee1b8abf3fb2fee",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

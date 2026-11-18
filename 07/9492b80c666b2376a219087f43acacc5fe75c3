@@ -1,0 +1,69 @@
+.github/CODEOWNERS
+  s_7f1d1d64baa803::t_632fe6cbeaa85a 1
+.github/workflows/unit_tests.yml
+  s_1b5266149b436d::t_0fdf046691dedd 182-187
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  s_7f1d1d64baa803::t_ba956d8b2b6be8 9,22,46,55,67,113,120,125,167,187,195,198-202,204,221-223,225,249-250
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointRenderer.js
+  s_7f1d1d64baa803::t_bb87ba406bda0f 1-351
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointShaders.js
+  s_7f1d1d64baa803::t_aa252376b3ce14 1-3,5,9,29,31-34,40,43,57,60-68,72-79,84-87,90-92,97-126,128-130,132,134-137,139,141-148,150
+apps/dialtone-documentation/docs/components/mode-island.md
+  s_7f1d1d64baa803::t_75c78e51fbdc83 120-141,235,287-297,302-331,391,602-605,607,609,628
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_74dac72e271d73 102,262
+packages/dialtone-cli/release-ci.config.cjs
+  s_7f1d1d64baa803::t_91491d0bdbd25c 11-12
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_1b5266149b436d::t_9b34f35a22a30d 6-7,53,61-62,69
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_7f1d1d64baa803::t_c1bbb1e7725836 6,56-57
+packages/dialtone-mcp-server/README.md
+  s_7f1d1d64baa803::t_9557f8302ab456 66,197-207
+packages/dialtone-mcp-server/package.json
+  s_7f1d1d64baa803::t_c6576f837f0e26 17-18
+packages/dialtone-mcp-server/project.json
+  s_7f1d1d64baa803::t_9c1e3de31d7278 21-28
+packages/dialtone-mcp-server/release-ci.config.cjs
+  s_7f1d1d64baa803::t_1055a980f85805 11-12
+packages/dialtone-mcp-server/src/index.ts
+  s_7f1d1d64baa803::t_3e44ad0ab051c8 18-19,25,30-31,33-35,52,349-381
+packages/dialtone-mcp-server/tests/fixtures/registry.mjs
+  s_7f1d1d64baa803::t_9be00acdd80e1e 1-52
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_7f1d1d64baa803::t_d7011adfd38bbf 1-67
+packages/dialtone-mcp-server/tests/startup.test.mjs
+  s_7f1d1d64baa803::t_e8ee1814d9adad 1-128
+packages/dialtone-vue/components/ModeIsland/ModeIsland.vue
+  s_7f1d1d64baa803::t_823fe82c7d8bcf 26-33
+packages/dialtone-vue/directives/mode_directive/mode.mdx
+  s_7f1d1d64baa803::t_54ebdd1f7124f4 17-27,105-106
+scripts/retrieval/README.md
+  s_1b5266149b436d::t_550712d481a78f 49
+scripts/retrieval/ci-routing.test.mjs
+  s_1b5266149b436d::t_e5989d8e86ae44 84-85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "079492b80c666b2376a219087f43acacc5fe75c3",
+  "prompts": {},
+  "sessions": {
+    "s_1b5266149b436d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

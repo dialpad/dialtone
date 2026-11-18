@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Presence/Presence.stories.tsx
+  s_84a000c39c5110::t_a12b6b1140425a 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a2c30fd0d69976d83558636834c9e43f9369f490",
+  "prompts": {},
+  "sessions": {
+    "s_84a000c39c5110": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "010bae7d-3744-4b05-a151-118383475985",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
