@@ -1,0 +1,19 @@
+packages/dialtone-react/components/ImageViewer/ImageViewer.test.tsx
+  s_b71a92ada97720::t_63c87be7f5e032 171
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "efd3b3b093b24d19682cc867a9398a2114c40b09",
+  "prompts": {},
+  "sessions": {
+    "s_b71a92ada97720": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1cb79598-8728-4927-9e57-164c1fcd053c",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

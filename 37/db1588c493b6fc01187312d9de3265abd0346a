@@ -1,0 +1,23 @@
+packages/dialtone-react/components/FilterPill/FilterPill.stories.tsx
+  s_b108d8be9dcece::t_4fae6d6c91808f 182-186
+packages/dialtone-react/components/FilterPill/FilterPill.test.tsx
+  s_b108d8be9dcece::t_9679204659cbe4 399,506-519,782,792,794
+packages/dialtone-react/components/FilterPill/FilterPill.tsx
+  s_b108d8be9dcece::t_ee559921f51900 231
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "37db1588c493b6fc01187312d9de3265abd0346a",
+  "prompts": {},
+  "sessions": {
+    "s_b108d8be9dcece": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "10b155fd-4b45-49f8-84f6-72a775a83cce",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

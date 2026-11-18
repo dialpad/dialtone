@@ -1,0 +1,88 @@
+packages/dialtone-react/parity/gate.mjs
+  s_2defdf83601f66::t_757c9bc7a0e9db 1-163
+  s_2defdf83601f66::t_00172a0893124e 164-178
+packages/dialtone-react/package.json
+  s_2defdf83601f66::t_20e60c63524828 1-34
+packages/dialtone-react/parity/normalize.mjs
+  s_2defdf83601f66::t_847269f0180795 1-107
+  s_2defdf83601f66::t_597d2e005d6fbc 108-118
+packages/dialtone-react/parity/vue/goldens.test.js
+  s_2defdf83601f66::t_9d5dc1236b5629 3-4
+  s_2defdf83601f66::t_3600f4b741679f 1-2,5-11,15-35,40-62,64-79,82-87
+  s_2defdf83601f66::t_a2e0d2bef1ef58 36-38
+  s_2defdf83601f66::t_5dc02f3d2f6039 80-81
+  s_cfda0fd8d1a291::t_ee0cb0e26324c4 12-14,39,63
+packages/dialtone-react/scripts/build-icons.mjs
+  s_2defdf83601f66::t_a60596077c018c 18
+  s_cfda0fd8d1a291::t_e54aa7505ed2fa 1-17,19-34
+packages/dialtone-react/parity/dom-setup.mjs
+  s_2defdf83601f66::t_1affbb9353f59d 3
+  s_cfda0fd8d1a291::t_9512961e705f83 1-2,4-11
+packages/dialtone-react/parity/settle.mjs
+  s_2defdf83601f66::t_618bf3e64fffd6 3
+  s_cfda0fd8d1a291::t_9019791ec12c09 1-2,4-21
+packages/dialtone-react/vite.config.ts
+  s_2defdf83601f66::t_e5c1b22ae8ef72 12-13
+  s_cfda0fd8d1a291::t_ff407339cb21a1 1-11,14-15
+packages/dialtone-react/parity/react/dom.test.tsx
+  s_2defdf83601f66::t_dbd7a7a565f1db 1-100
+  s_2defdf83601f66::t_5af6aaa35c7c1a 101
+packages/dialtone-react/.gitignore
+  s_2defdf83601f66::t_e1753736d15f54 1-2
+packages/dialtone-react/common/constants.ts
+  s_2defdf83601f66::t_7b06ac3576a7b2 1-10
+packages/dialtone-react/common/cx.ts
+  s_2defdf83601f66::t_6d70065ac5394c 1-18
+packages/dialtone-react/common/hooks/useControllableState.ts
+  s_2defdf83601f66::t_ec9966fce3e238 1-19
+packages/dialtone-react/common/slots.ts
+  s_2defdf83601f66::t_6583ca4aae17c0 1-13
+packages/dialtone-react/common/utils.ts
+  s_2defdf83601f66::t_99895ba4053e1f 1-33
+packages/dialtone-react/icons/createIcon.tsx
+  s_2defdf83601f66::t_8d4bb2419c33a7 1-57
+packages/dialtone-react/icons/index.ts
+  s_2defdf83601f66::t_04247541325de7 1-2
+packages/dialtone-react/parity/cases.mjs
+  s_2defdf83601f66::t_0ec3b7bfcce562 1-37
+packages/dialtone-react/parity/extra-cases.mjs
+  s_2defdf83601f66::t_8f50583aaf59f6 1-24
+packages/dialtone-react/parity/react/vitest.config.ts
+  s_2defdf83601f66::t_5cca5d2e06833a 1-14
+packages/dialtone-react/parity/types.ts
+  s_2defdf83601f66::t_f366c0b68011c1 1-20
+packages/dialtone-react/parity/vue/vitest.config.mjs
+  s_2defdf83601f66::t_c3d608f62c26b5 1-35
+packages/dialtone-react/project.json
+  s_2defdf83601f66::t_0a13592e887e2e 1-20
+packages/dialtone-react/tests/setup.ts
+  s_2defdf83601f66::t_8340aa2e930e1a 1-32
+packages/dialtone-react/tsconfig.json
+  s_2defdf83601f66::t_1aac3643b7f498 1-20
+pnpm-lock.yaml
+  s_2defdf83601f66::t_cc669b97944dbb 215,218,224,248,251,254,260,263,266,269,296,365,525,528,710,763-802,817,820,1057,1060,1475,1479,1484,1488,1494,4344-4358,4742-4746,8631-8633,8645-8653,8838-8840,12394-12396,13406-13411,15655-15659,15667,15683,16680,16683-16684,16686-16688,16690-16693,16697,16726,16729,16801-16802,17581,17583,17588,17590,17595-17596,17604,17606,17610,17616,17630,17635,17637,17639-17641,17650,17658,17662,17669,17677,17680,17686,17699,17701,17706,17708,17713,17715,17717-17720,17729,17731,17734,17737,17747,17749,17751,17757,17759,17767,17769,17776,17778,17785,17787,17790,17795,17802,17804,17808,17812,17814,17816-17818,17824,17831,17847,17852,17860,17862,17868-17870,17876,17878,17881,17884-17887,17891,17896,17898,17903,17905-17908,17911,17916,17972,17974,17979,18327-18328,18350-18351,18749-18758,19141-19144,19195-19211,19214,19216,19227-19239,19269-19281,19310-19320,19415,19427,21243,21246,21248,22490,22492-22493,22496,22498-22499,22501,22543,22545-22546,22552,22554-22555,22557-22558,22563,22568,22574,22576-22577,22582,22585,22587,22590,22592,22624,22627-22668,23967-23971,23982-23991,24037,24083,24187-24188,25511,25518-25519,27538-27539,28578-28579,29866-29873,31034,31058,31086,31114,31222-31233
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4b9d7651f5ab4d882ac8e34db6710a97a91fbe0c",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_cfda0fd8d1a291": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a1007d6-e12a-49b8-9261-a379c0c3d4fe",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
