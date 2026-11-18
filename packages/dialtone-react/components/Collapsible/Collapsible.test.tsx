@@ -259,6 +259,30 @@ describe('DtCollapsible Tests', () => {
       expect(onOpenChange.mock.calls).toEqual([[true]]);
     });
 
+    it('mounts collapsed with open false, without rendering its content', () => {
+      mockProps = { open: false };
+      updateWrapper();
+
+      expect(contentWrapperElement()).not.toBeVisible();
+      expect(anchorElement()).toHaveAttribute('aria-expanded', 'false');
+      expect(screen.queryByTestId('content-element')).toBeNull();
+    });
+
+    it('renders the default anchor when the anchor slot returns only empty fragments', () => {
+      mockSlots = { anchor: () => <><></></> };
+      updateWrapper();
+
+      expect(anchorElement()).toBeInTheDocument();
+    });
+
+    it('keeps a custom anchor inside a fragment', () => {
+      mockSlots = { anchor: ({ attrs }: DtCollapsibleAnchorSlotScope) => <><button data-qa="custom" {...attrs} /></> };
+      updateWrapper();
+
+      expect(screen.getByTestId('custom')).toBeInTheDocument();
+      expect(screen.queryByTestId('dt-button')).toBeNull();
+    });
+
     it('starts collapsed with defaultOpen false and keeps its content unrendered until first expanded', async () => {
       mockProps = { defaultOpen: false };
       updateWrapper();

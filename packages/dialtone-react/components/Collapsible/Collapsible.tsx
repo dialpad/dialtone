@@ -1,5 +1,7 @@
 import {
   Children,
+  Fragment,
+  isValidElement,
   useEffect,
   useId,
   useRef,
@@ -147,7 +149,10 @@ export function DtCollapsible ({
   };
   const anchorContent = renderSlot(anchor, scope);
 
-  useValidateProperAnchor(anchorText, anchorContent);
+  // Vue falls back when the slot renders nothing but comments, which an empty fragment does.
+  const useFallbackAnchor = Children.toArray(anchorContent).every(isEmptyFragment);
+
+  useValidateProperAnchor(anchorText, useFallbackAnchor ? null : anchorContent);
 
   const defaultToggleOpen = () => {
     if (open === null) setIsOpen(!isOpen);
@@ -170,7 +175,7 @@ export function DtCollapsible ({
     <Root {...attrs} ref={ref}>
       {/* Element for capturing keypress events */}
       <div id={anchorWrapperId} className={cx(anchorClass) || undefined}>
-        {Children.toArray(anchorContent).length > 0
+        {!useFallbackAnchor
           ? anchorContent
           : (
             <DtButton
@@ -209,6 +214,12 @@ export function DtCollapsible ({
       </DtCollapsibleLazyShow>
     </Root>
   );
+}
+
+/** A fragment that holds nothing but empty fragments: it renders no DOM, like a slot of only comments in Vue. */
+function isEmptyFragment (node: ReactNode): boolean {
+  return isValidElement<{ children?: ReactNode }>(node) && node.type === Fragment &&
+    Children.toArray(node.props.children).every(isEmptyFragment);
 }
 
 /** Vue's `validateProperAnchor`, from `created()`: once per instance. */

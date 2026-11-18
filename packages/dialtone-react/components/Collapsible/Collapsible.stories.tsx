@@ -106,8 +106,8 @@ type Story = StoryObj<CollapsibleStoryArgs>;
 
 // CollapsibleDefault.story.vue
 function CollapsibleDefault ({
-  id, anchorText, maxHeight, maxWidth, open, elementType, contentElementType, anchorClass, contentClass, ariaLabel,
-  ariaLabelledBy, onOpened, anchor, content,
+  id, anchorText, maxHeight, maxWidth, open, defaultOpen, elementType, contentElementType, anchorClass, contentClass,
+  ariaLabel, ariaLabelledBy, onOpened, anchor, content,
 }: CollapsibleStoryArgs) {
   // Vue's `isOpen` data, starting from the `open` arg and following it.
   const [isOpen, setIsOpen] = useState(open);
@@ -124,6 +124,8 @@ function CollapsibleDefault ({
       maxHeight={maxHeight}
       maxWidth={maxWidth}
       open={isOpen ?? null}
+      // React-only: the starting state while `open` is unset. Read on mount only.
+      defaultOpen={defaultOpen}
       // As in Vue's template, which passes these as attributes: they reach the root element.
       initial-focus-element="first"
       elementType={elementType}
