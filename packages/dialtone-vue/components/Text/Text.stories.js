@@ -3,7 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtText from './Text.vue';
 import DtTextDefault from './TextDefault.story.vue';
 import DtTextVariants from './TextVariants.story.vue';
-import DtTextSlidePlayground from './TextSlidePlayground.story.vue';
+import DtTextSlide from './TextSlide.story.vue';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_VARIANT_MODIFIERS,
@@ -147,8 +147,8 @@ export default {
 
 const DefaultTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTextDefault);
-const SlidePlaygroundTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, DtTextSlidePlayground);
+const SlideTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTextSlide);
 const VariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTextVariants);
 
@@ -166,12 +166,10 @@ export const Variants = {
   },
 };
 
-export const SlidePlayground = {
-  name: 'Slide playground',
-  render: SlidePlaygroundTemplate,
-  args: {},
+export const Slide = {
+  render: SlideTemplate,
+  args: { slide: 'once' },
   parameters: {
-    controls: { disable: true },
-    options: { showPanel: false },
+    controls: { include: ['slide'] },
   },
 };

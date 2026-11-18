@@ -543,37 +543,167 @@ describe('DtText', () => {
 
 
   describe('slide', () => {
+    // jsdom has no layout: the label is 300px wide in a 100px box, and the loop copy adds 324px
+    const mountSlide = ({ fits, ...props } = {}) => {
+      const wrapper = mount({
+        components: { DtText },
+        data: () => ({ props }),
+        template: '<button type="button"><dt-text as="div" v-bind="props">A very long device name</dt-text></button>',
+      }, { attachTo: document.body });
+      const content = wrapper.find('.d-text__slide-content').element;
+      const width = fits ? 100 : 300;
+      Object.defineProperty(content, 'scrollWidth', {
+        get: () => (content.querySelector('.d-text__slide-copy') ? width + 324 : width),
+      });
+      Object.defineProperty(content, 'clientWidth', { value: 100 });
+      const text = wrapper.find('[data-qa="dt-text"]');
+      return { wrapper, text, button: wrapper.find('button').element, offset: () => text.element.style.getPropertyValue('--_slide-offset') };
+    };
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+
     afterEach(() => {
       vi.useRealTimers();
+      vi.unstubAllGlobals();
       document.body.innerHTML = '';
     });
 
     it('slides cut text to its end while the button around it is hovered, and snaps back on leave', async () => {
-      vi.useFakeTimers();
-      const wrapper = mount({
-        components: { DtText },
-        template: '<button type="button"><dt-text as="div" slide>A very long device name</dt-text></button>',
-      }, { attachTo: document.body });
-      const button = wrapper.find('button').element;
-      const text = wrapper.find('[data-qa="dt-text"]');
-      const content = wrapper.find('.d-text__slide-content').element;
-      Object.defineProperty(content, 'scrollWidth', { value: 300 });
-      Object.defineProperty(content, 'clientWidth', { value: 100 });
+      const { wrapper, text, button, offset } = mountSlide({ slide: true });
 
       button.dispatchEvent(new Event('pointerenter'));
       await vi.advanceTimersByTimeAsync(500);
 
       expect(text.classes()).toContain('d-text--slide-moving');
-      expect(text.element.style.getPropertyValue('--_slide-offset')).toBe('200px');
+      expect(offset()).toBe('200px');
       expect(text.attributes('tabindex')).toBeUndefined();
       expect(button.hasAttribute('tabindex')).toBe(false);
+
+      await vi.advanceTimersByTimeAsync(10000);
+      expect(text.classes()).toContain('d-text--slide-end');
+      expect(offset()).toBe('200px');
 
       button.dispatchEvent(new Event('pointerleave'));
       await wrapper.vm.$nextTick();
 
-      expect(text.classes()).not.toContain('d-text--slide-moving');
-      expect(text.element.style.getPropertyValue('--_slide-offset')).toBe('');
+      expect(text.classes()).not.toContain('d-text--slide-end');
+      expect(offset()).toBe('');
       wrapper.unmount();
+    });
+
+    it('starts on focus, keeps going while focus stays inside the host, and stops on Escape without swallowing it', async () => {
+      const { wrapper, text, button, offset } = mountSlide({ slide: true });
+      const outsideListener = vi.fn();
+      document.addEventListener('keydown', outsideListener);
+
+      button.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+      await vi.advanceTimersByTimeAsync(500);
+      text.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: text.element }));
+      await wrapper.vm.$nextTick();
+      expect(offset()).toBe('200px');
+
+      button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      await wrapper.vm.$nextTick();
+      expect(offset()).toBe('');
+      expect(outsideListener).toHaveBeenCalled();
+
+      document.removeEventListener('keydown', outsideListener);
+      wrapper.unmount();
+    });
+
+    it('bounce slides back after the hold', async () => {
+      const { wrapper, text, button, offset } = mountSlide({ slide: 'bounce' });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(500 + 3100);
+      expect(text.classes()).toContain('d-text--slide-end');
+
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(text.classes()).toContain('d-text--slide-moving');
+      expect(offset()).toBe('0px');
+      wrapper.unmount();
+    });
+
+    it('loop scrolls round with a copy, clears the start fade once the gap arrives, then snaps back and waits', async () => {
+      const { wrapper, text, button, offset } = mountSlide({ slide: 'loop' });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(500);
+      expect(text.find('.d-text__slide-copy').attributes('aria-hidden')).toBe('true');
+      expect(text.classes()).toContain('d-text--slide-loop');
+      expect(offset()).toBe('324px');
+      expect(text.classes()).not.toContain('d-text--slide-loop-wrap');
+
+      // 5 s for 324px; the 300px label has fully left the start edge after about 4.6 s
+      await vi.advanceTimersByTimeAsync(4700);
+      expect(text.classes()).toContain('d-text--slide-loop-wrap');
+
+      await vi.advanceTimersByTimeAsync(500);
+      expect(text.find('.d-text__slide-copy').exists()).toBe(false);
+      expect(offset()).toBe('0px');
+      expect(text.classes()).not.toContain('d-text--slide-moving');
+
+      await vi.advanceTimersByTimeAsync(5000);
+      expect(text.classes()).toContain('d-text--slide-moving');
+      wrapper.unmount();
+    });
+
+    it('leaves text that fits alone', async () => {
+      const { wrapper, text, button } = mountSlide({ slide: true, fits: true });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(5000);
+
+      expect(text.classes()).toEqual(expect.not.arrayContaining(['d-text--slide-moving', 'd-text--slide-end']));
+      wrapper.unmount();
+    });
+
+    it.each(['once', 'bounce', 'loop'])('with reduced motion, %s jumps to the end once and stays', async (mode) => {
+      vi.stubGlobal('matchMedia', (query) => ({ matches: query.includes('reduce') }));
+      const { wrapper, text, button, offset } = mountSlide({ slide: mode });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      expect(text.classes()).toContain('d-text--slide-end');
+
+      await vi.advanceTimersByTimeAsync(20000);
+      expect(text.classes()).toContain('d-text--slide-end');
+      expect(offset()).toBe('200px');
+      expect(text.find('.d-text__slide-copy').exists()).toBe(false);
+      wrapper.unmount();
+    });
+
+    it('leaves no timers behind when unmounted mid-movement, and turning slide off removes it', async () => {
+      const { wrapper, text, button } = mountSlide({ slide: true });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      wrapper.vm.props.slide = false;
+      await wrapper.vm.$nextTick();
+
+      expect(text.find('.d-text__slide-content').exists()).toBe(false);
+      expect(text.classes()).not.toContain('d-text--slide');
+      expect(vi.getTimerCount()).toBe(0);
+
+      wrapper.vm.props.slide = true;
+      await wrapper.vm.$nextTick();
+      button.dispatchEvent(new Event('pointerenter'));
+      wrapper.unmount();
+      expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it('warns once that it ignores maxLines, and still slides', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      const first = mountSlide({ slide: true, maxLines: 2 });
+      const second = mountSlide({ slide: true, maxLines: 2 });
+
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      expect(first.text.classes()).toContain('d-text--slide');
+      expect(first.text.classes()).not.toContain(TEXT_LINE_CLAMP_CLASS);
+      first.wrapper.unmount();
+      second.wrapper.unmount();
     });
   });
 });
