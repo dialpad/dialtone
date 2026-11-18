@@ -1,9 +1,10 @@
-import { useId, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import type { ContentMode } from '../../common/mode_constants';
 import { DtStack } from '../Stack/Stack';
 import { DtText } from '../Text/Text';
+import { DtToggle } from '../Toggle/Toggle';
 import { DtValidationMessages } from '../ValidationMessages/ValidationMessages';
 import { useModeRegion } from './ModeDirective';
 
@@ -50,7 +51,6 @@ function Body ({ children }: { children: ReactNode }) {
 function ModeDirectiveDefault () {
   const [enabled, setEnabled] = useState(true);
   const [dynamicMode, setDynamicMode] = useState<ContentMode>('invert');
-  const toggleId = useId();
 
   return (
     <DtStack gap="200" className="d-p-100">
@@ -98,23 +98,11 @@ function ModeDirectiveDefault () {
             <Region mode={enabled ? 'dark' : false} className={`${REGION} d-fl1`}>
               <DtStack gap="400">
                   <Body>v-dt-mode:dark=&quot;{String(enabled)}&quot; — toggle to compare</Body>
-                  <StandIn for="toggle">
-                    <div className="d-toggle-wrapper">
-                      <button
-                        id={toggleId}
-                        role="switch"
-                        type="button"
-                        aria-checked={enabled}
-                        aria-disabled="false"
-                        className={enabled ? 'd-toggle d-toggle--checked' : 'd-toggle'}
-                        aria-label="Enable mode"
-                        {...{ label: 'Enable mode' }}
-                        onClick={() => setEnabled(!enabled)}
-                      >
-                        <span className="d-toggle__inner" />
-                      </button>
-                    </div>
-                  </StandIn>
+                  <DtToggle
+                    checked={enabled}
+                    aria-label="Enable mode"
+                    onCheckedChange={setEnabled}
+                  />
               </DtStack>
             </Region>
         </DtStack>
