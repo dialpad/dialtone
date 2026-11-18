@@ -687,7 +687,10 @@ export function DtRichTextEditor ({
     // others must still report the change that fired this.
     const output = getOutput(instance, outputFormat, extensionsRef.current);
     const jsonValue = instance.getJSON();
-    const htmlValue = instance.getHTML();
+    // HTML only when something reads it: a node from additionalExtensions can have a node view and no renderHTML,
+    // which getHTML() can't serialize, and that would break updates that never use HTML. (The html output format
+    // is captured by getOutput above.)
+    const htmlValue = onHtmlInput ? instance.getHTML() : undefined;
     const textValue = instance.getText({ blockSeparator: '\n' });
     // Markdown only when something reads it: the static renderer rejects nodes whose renderHTML returns a DOM
     // element (e.g. from additionalExtensions), which would otherwise break updates that never use markdown.
@@ -698,7 +701,7 @@ export function DtRichTextEditor ({
     setCurrentValue(output);
     // Always output JSON, HTML, text and markdown in separate events
     onJsonInput?.(jsonValue);
-    onHtmlInput?.(htmlValue);
+    if (htmlValue !== undefined) onHtmlInput?.(htmlValue);
     onTextInput?.(textValue);
     if (markdownValue !== undefined) onMarkdownInput?.(markdownValue);
   });

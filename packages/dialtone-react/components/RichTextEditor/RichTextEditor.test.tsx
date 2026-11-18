@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, type RenderResult } from '@testing-library/react';
 import { TextSelection } from '@tiptap/pm/state';
-import type { Editor } from '@tiptap/core';
+import { Node, type Editor } from '@tiptap/core';
 import { simulatePaste } from '../../tests/helpers/clipboard';
 import { findVariable, countVariables, type EditorNode } from '../../tests/helpers/node_traversal';
 import { DtRichTextEditor, type DtRichTextEditorHandle, type DtRichTextEditorProps } from './RichTextEditor';
@@ -1760,6 +1760,31 @@ describe('DtRichTextEditor tests', () => {
 
       it('should pass through the prop to the editor', function () {
         expect(editor).toHaveAttribute('contenteditable', 'false');
+      });
+    });
+
+    // React-only: Vue serializes HTML on every update; here it's skipped when nothing reads it.
+    describe('When an additional node has no renderHTML', function () {
+      const WidgetNode = Node.create({
+        name: 'widget',
+        group: 'block',
+        atom: true,
+        addNodeView () {
+          return () => ({ dom: document.createElement('div') });
+        },
+      });
+      const widgetContent = { type: 'doc', content: [{ type: 'widget' }] };
+
+      it('should still report json output without onHtmlInput', async function () {
+        await setProps({ additionalExtensions: [WidgetNode], outputFormat: 'json' });
+        await flush();
+        inputStub.mockClear();
+        await act(async () => {
+          getEditor().commands.setContent(widgetContent, { emitUpdate: true });
+        });
+
+        expect(inputStub).toHaveBeenCalled();
+        expect(inputStub.mock.calls.at(-1)?.[0]).toEqual(widgetContent);
       });
     });
   });
