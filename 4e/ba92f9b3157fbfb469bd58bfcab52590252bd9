@@ -1,0 +1,22 @@
+apps/dialtone-documentation/docs/components/slider.md
+  s_f1b6a2e8befce4::t_2f5d261f73103c 346-354
+  s_f1b6a2e8befce4::t_cb4234e81659a9 274-283,355
+  s_f1b6a2e8befce4::t_a98720123c6eaa 445-450
+  s_f1b6a2e8befce4::t_552310dc9919e6 356
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4eba92f9b3157fbfb469bd58bfcab52590252bd9",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

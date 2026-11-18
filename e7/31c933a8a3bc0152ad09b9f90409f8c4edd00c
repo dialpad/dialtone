@@ -1,0 +1,23 @@
+packages/dialtone-react/components/Pagination/Pagination.parity.tsx
+  s_12a8eaaeceaa91::t_1a4db811200070 1-9
+packages/dialtone-react/components/Pagination/Pagination.tsx
+  s_12a8eaaeceaa91::t_3445c7324a8bde 1-212
+packages/dialtone-react/components/Pagination/index.ts
+  s_12a8eaaeceaa91::t_48207af88ffa80 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e731c933a8a3bc0152ad09b9f90409f8c4edd00c",
+  "prompts": {},
+  "sessions": {
+    "s_12a8eaaeceaa91": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "26c9f0e9-896b-48da-b8e5-dcddc344de0f",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

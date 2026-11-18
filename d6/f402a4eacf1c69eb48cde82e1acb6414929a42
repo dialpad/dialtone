@@ -1,0 +1,14 @@
+pnpm-lock.yaml
+  h_c15b5755534093 569-571
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d6f402a4eacf1c69eb48cde82e1acb6414929a42",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
