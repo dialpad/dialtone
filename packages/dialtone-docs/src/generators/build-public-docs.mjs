@@ -171,6 +171,7 @@ async function build() {
     ignore: [
       'apps/dialtone-documentation/docs/_data/**',
       'apps/dialtone-documentation/docs/.vuepress/**',
+      'apps/dialtone-documentation/docs/scratch*.md',
     ],
   });
 

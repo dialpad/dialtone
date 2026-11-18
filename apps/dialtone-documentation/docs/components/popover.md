@@ -48,6 +48,18 @@ The content slot will be rendered lazily when the popover is open. By default, t
 
 </dialtone-usage>
 
+### Logical Visibility and Transition Events
+
+Set `:visibility-change-callback="handleVisibilityChange"` to receive the open boolean synchronously when logical visibility changes. With initial `open=true`, the callback runs during creation, before mount; the visible dialog starts with `aria-hidden="false"`. Without a callback, no logical notification is sent. Popover does not declare or emit `open-change`, so existing custom DOM listeners keep their fallthrough behavior.
+
+The callback runs inside a synchronous Vue watcher. An already-closed modal with no pending transition or retained scroll lock can be removed immediately. For an open or closing modal, keep `modal=true`, its anchor and its scroll container unchanged through the closing `opened(false)` notification: request closure if needed, then remove it after that notification. Changing `modal` or the anchor's scroll context after opening can leave the original lock active. `opened(false)` reports transition completion, not ownership of global scroll locks. Logical `open=false` alone does not establish that the leave transition has completed. Separately, defer a direct `app.unmount()` with `nextTick` to avoid interrupting Vue's render during prop delivery.
+
+`opened` and `update:open` run after the current transition completes. Opening now finishes initial focus before notifying listeners, so an `opened` listener can choose another focus target without it being overwritten. An `initialFocusElement` HTMLElement must be inside the popover. `open=null` keeps internal trigger ownership and emits no `update:open`. Canceled transitions and stale asynchronous completions do not emit terminal state or restore obsolete focus.
+
+A boolean `open` prop keeps default anchor toggling disabled. Anchor ArrowUp/ArrowDown are not forwarded by default. Set `forwardAnchorArrowKeys` to forward those keys through `keydown` without toggling; the consumer owns any resulting open request and default-key handling. [Dropdown](dropdown.md#logical-visibility-and-controlled-arrow-keys) preserves first-row keyboard focus when its own emitted `keydown` callback synchronously accepts an anchor-arrow opening request. With forwarding disabled, anchor-arrow handling retains its previous behavior.
+
+Vue batches prop updates: a same-flush rewrite back to the prior value is unchanged and does not request reopening. To reopen after dismissal while a leave transition runs, deliver `false`, let that update flush, then deliver `true` on a later tick.
+
 ### Best Practices
 
 - Popovers should be fairly small. If you are looking for more of a full size dialog solution see [Modal](modal.md)
@@ -287,7 +299,7 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
     <dt-button :size="200" kind="muted" importance="outlined">Inverted Popover</dt-button>
   </template>
   <template #content="{ close }">
-    <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+    <dt-text as="p">This Popover's content is in the <dt-text>inverted</dt-text> mode.</dt-text>
   </template>
 </dt-popover>
 <!-- @code -->
@@ -297,6 +309,12 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 ```
 
 ## Accessibility
+
+When `role="menu"`, Popover omits `aria-modal` and gives its built-in Close command `role="menuitem"`, for both the visually hidden button and `showCloseButton`. Close remains a native, tabbable button with the same label, placement, activation, dismissal timing and focus restoration. [Dropdown](dropdown.md) includes its owning Close command in arrow navigation, with `END` reaching Close, while preserving application-row indexes; typeahead still targets application rows. A standalone Popover with custom menu content does not automatically manage arrow navigation for that content.
+
+This menu-specific behavior does not establish complete ARIA menu-pattern conformance. Existing Tab and focus-trap behavior remains, and consumer-provided header, footer and content controls need their own appropriate semantics. Verify menu announcements, Close discovery and activation, cancellation and returned focus with assistive technology; automated checks alone do not establish accessibility. Other popup roles retain their existing behavior.
+
+Initially open Popovers expose their visible content to accessibility APIs. This also makes the options in opened ComboboxWithPopover and ComboboxMultiSelect lists reachable, because those components create an already-open Popover. Opened-state accessibility checks can now reveal existing outer-listbox role, naming, close-control and `aria-modal` issues that were previously hidden.
 
 If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal.md#accessibility). The same rules will apply here if your popover is modal.
 
@@ -326,6 +344,8 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 
 - Pass `aria-label`, which is the text label that will be applied to the dialog content.
 - Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
+
+When you supply `aria-label` without `aria-labelledby`, the dialog’s computed accessible name now comes from `aria-label`. Previously, an unintended `aria-labelledby="false"` could resolve to an anchor with `id="false"` and name the dialog from that anchor instead. Both generated attributes are now omitted in this case. An explicit `aria-labelledby` continues to use the supplied ID and takes precedence over `aria-label`. Dropdown shares this naming behavior through Popover.
 
 ### Keyboard Support
 

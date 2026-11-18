@@ -7,6 +7,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout-
 keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-layout"]
 ---
 
+<!-- @example {"exclude":{"reason":"Demo scaffolding uses deprecated base color utilities (d-bgc-purple-100, d-bgc-black-100, d-bgc-green-100, d-bgc-gold-100), which the consumer deprecation check rejects. Deliver after replacing them with supported background utilities.","owner":"Dialtone documentation maintainers"}} -->
+
 ```vue demo-only
 <!-- @class d-d-block -->
 <dt-root-layout
@@ -38,6 +40,8 @@ A root layout consists of a header, body, sidebar and footer. Content can option
 will be displayed in the respective area. The sidebar is designed to be responsive and will reposition above the
 body according to the `responsiveBreakpoint` prop.
 
+<!-- @example {"exclude":{"reason":"Demo scaffolding uses deprecated base color utilities (d-bgc-purple-100, d-bgc-black-100, d-bgc-green-100, d-bgc-gold-100), which the consumer deprecation check rejects. Deliver after replacing them with supported background utilities.","owner":"Dialtone documentation maintainers"}} -->
+
 ```vue demo
 <!-- @class d-d-block -->
 <dt-root-layout
@@ -66,6 +70,8 @@ class="d-w100p d-h-500"
 ## Variants and Examples
 
 ### Header Sticky
+
+<!-- @example {"exclude":{"reason":"Demo scaffolding uses deprecated base color utilities (d-bgc-purple-100, d-bgc-black-100, d-bgc-green-100, d-bgc-gold-100), which the consumer deprecation check rejects. Deliver after replacing them with supported background utilities.","owner":"Dialtone documentation maintainers"}} -->
 
 ```vue demo
 <!-- @class d-d-block -->

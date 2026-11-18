@@ -3,11 +3,20 @@ import { DEFAULT_SLOT_NAME } from './constants';
 import { stringifyDocValue } from './parse';
 import { isOmittedBindingValue } from './utils';
 
+export function getSlotScope (slot, content) {
+  if (slot?.scopeName && content.includes(slot.scopeName)) return slot.scopeName;
+  const usedBindings = (slot?.bindings || [])
+    .map(binding => camelCase(binding.name))
+    .filter(name => content.includes(name));
+  return usedBindings.length ? `{ ${usedBindings.join(', ')} }` : '';
+}
+
 /** Same markup used by the clipboard UI and build-time preset delivery. */
 export function serializeExampleTemplate ({ info, options, disabledMembers, verbose = false, indentSpaces = 2 }) {
   const pad = ' '.repeat(indentSpaces);
   const name = paramCase(info.displayName);
   const lines = [];
+  if (info.metadata?.copyNotice) lines.push(`<!-- ${info.metadata.copyNotice.replace(/--(!?)>/g, '--$1&gt;')} -->`);
 
   // Visible bindings (same filter logic as code_editor_tag_attributes)
   const infoBindings = info.bindings.get();
@@ -56,16 +65,12 @@ export function serializeExampleTemplate ({ info, options, disabledMembers, verb
   // Slot content
   if (hasContent) {
     for (const [slot, value] of slotEntries) {
-      if (slot === DEFAULT_SLOT_NAME) {
+      const slotInfo = info.slots?.find(s => s.name === slot);
+      const slotScope = getSlotScope(slotInfo, value);
+      if (slot === DEFAULT_SLOT_NAME && !slotScope) {
         lines.push(pad + value);
       } else {
-        const slotInfo = info.slots?.find(s => s.name === slot);
-        const usedBindings = (slotInfo?.bindings || [])
-          .map(b => camelCase(b.name))
-          .filter(n => value.includes(n));
-        const scope = usedBindings.length > 0
-          ? '="{ ' + usedBindings.join(', ') + ' }"'
-          : '';
+        const scope = slotScope ? `="${slotScope}"` : '';
         lines.push(pad + '<template #' + slot + scope + '>');
         lines.push(pad + pad + value);
         lines.push(pad + '</template>');

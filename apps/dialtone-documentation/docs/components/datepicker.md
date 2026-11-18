@@ -49,8 +49,7 @@ With this we accomplish the requirement to have the previous year button focused
       @click="toggleDatepicker"
     >
       <template #startIcon>
-        <dt-icon
-          name="calendar"
+        <dt-icon-calendar
           size="300"
         />
       </template>
@@ -264,6 +263,7 @@ Keyboard navigation with arrow and tab keys for datepicker component.
   ```
 
 <script setup>
+import { DtIconCalendar } from '@dialpad/dialtone-icons/vue';
 import { ref, inject } from 'vue';
 
 const dialtoneUtils = inject('dialtoneUtils');

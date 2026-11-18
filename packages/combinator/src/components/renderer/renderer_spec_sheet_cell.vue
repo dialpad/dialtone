@@ -31,6 +31,9 @@
           :bindings="bindings"
           :events="info.events"
           :disabled-members="disabledMembers"
+          :preview-identity="info.metadata?.previewIdentity"
+          :before-preview-remount="info.metadata?.beforePreviewRemount"
+          :reset-generation="resetGeneration"
           @event="onCellEvent"
         >
           <template
@@ -42,6 +45,7 @@
               :template="slot"
               :library="library"
               :scope="slotBindings"
+              :scope-name="info.slots?.find(member => member.name === slotName)?.scopeName"
             />
           </template>
         </dtc-renderer-target>
@@ -94,6 +98,10 @@ const props = defineProps({
   options: {
     type: Object,
     required: true,
+  },
+  resetGeneration: {
+    type: Number,
+    default: 0,
   },
 });
 

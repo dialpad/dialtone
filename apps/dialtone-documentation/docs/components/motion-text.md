@@ -9,7 +9,7 @@ combinator: DtMotionText
 ---
 
 ```vue demo
-<dt-text kind="headline" :size="600">
+<dt-text variant="headline-2xl">
   <dt-motion-text
     text="Welcome to Dialtone Motion Text"
     animation-mode="slide-in-gradient"
@@ -22,7 +22,7 @@ combinator: DtMotionText
 
 `DtMotionText` animates text word by word. Pass `text` and the effect plays as soon as the component mounts, using `gradient-in` unless you set `animation-mode`.
 
-Every effect except `shimmer` works on whole words, never individual characters. Words animate in reading order, each starting a moment after the one before it. `shimmer` instead sweeps one dimmed band left to right across the whole text, so it reads well even on a single word. The gradient effects place one continuous purple-to-orange gradient behind all of the words, so each word shows its own slice of the same sweep rather than a gradient of its own. The gradient is the `--dt-color-gradient-orange-red-magenta-purple` token, a horizontal span of the Ai gradient used by Ai surfaces and borders.
+Every effect except `shimmer` works on whole words, never individual characters. Words animate in reading order, each starting a moment after the one before it. `shimmer` instead sweeps one dimmed band left to right across the whole text, so it reads well even on a single word. The gradient effects place one continuous purple-to-orange gradient behind all of the words, so each word shows its own slice of the same sweep rather than a gradient of its own. The gradient is the `--dt-color-gradient-orange-red-magenta-purple` token, a horizontal span of the AI gradient used by AI surfaces and borders.
 
 ### Animation Modes
 
@@ -54,7 +54,7 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
     </dt-button>
   </dt-stack>
   <dt-toggle v-model="loopModes" :size="200" @update:model-value="playMode(activeMode)">Loop</dt-toggle>
-  <dt-text kind="headline" :size="600">
+  <dt-text variant="headline-2xl">
     <dt-motion-text
       :key="modeDemoKey"
       text="The AI platform for customer experience"
@@ -64,7 +64,7 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
   </dt-text>
 </dt-stack>
 <!-- @code -->
-<dt-text kind="headline" :size="600">
+<dt-text variant="headline-2xl">
   <dt-motion-text
     text="The AI platform for customer experience"
     animation-mode="{mode}"
@@ -79,13 +79,13 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
 ```vue demo
 <dt-stack gap="200">
   <dt-segmented-control :size="100" v-model="selected" aria-label="Speed Control">
-    <dt-segmented-control-item v-dt-tooltip="'Fastest (0.3×)'" value="100" :selected="selected === '100'">100</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Fast (0.6×)'" value="200" :selected="selected === '200'">200</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Designed timing (default)'" value="300" :selected="selected === '300'">300</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Slow (1.5×)'" value="400" :selected="selected === '400'">400</dt-segmented-control-item>
-    <dt-segmented-control-item v-dt-tooltip="'Slowest (2.1×)'" value="500" :selected="selected === '500'">500</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Fastest (0.3×)'" value="100">100</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Fast (0.6×)'" value="200">200</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Designed timing (default)'" value="300">300</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Slow (1.5×)'" value="400">400</dt-segmented-control-item>
+    <dt-segmented-control-item v-dt-tooltip="'Slowest (2.1×)'" value="500">500</dt-segmented-control-item>
   </dt-segmented-control>
-  <dt-text kind="headline" :size="600">
+  <dt-text variant="headline-2xl">
     <dt-motion-text
       :key="selected"
       text="Welcome to Dialtone Motion Text"
@@ -96,7 +96,7 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
   </dt-text>
 </dt-stack>
 <!-- @code -->
-<dt-text kind="headline" :size="600">
+<dt-text variant="headline-2xl">
   <dt-motion-text
     text="Welcome to Dialtone Motion Text"
     animation-mode="shimmer"
@@ -121,7 +121,7 @@ Until `start()` is called, the reveal modes (`gradient-in`, `fade-in`, `slide-in
     <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.reset()">Reset</dt-button>
     <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.skipToEnd()">Skip to End</dt-button>
   </dt-stack>
-  <dt-text kind="headline" :size="600">
+  <dt-text variant="headline-2xl">
     <dt-motion-text
       ref="manualDemoRef"
       text="Welcome to Dialtone Motion Text"

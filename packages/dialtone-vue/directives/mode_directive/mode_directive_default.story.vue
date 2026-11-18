@@ -158,11 +158,9 @@
           >
             v-dt-mode:dark="{{ enabled }}" — toggle to compare
           </dt-text>
-          <dt-toggle
-            :checked="enabled"
-            label="Enable mode"
-            @update:checked="enabled = $event"
-          />
+          <dt-toggle v-model="enabled">
+            Enable mode
+          </dt-toggle>
         </dt-stack>
       </section>
     </dt-stack>

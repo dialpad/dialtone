@@ -16,6 +16,7 @@
           v-for="icon in Object.keys(icons).slice(0, $attrs.limit)"
           :key="`${category}-${icon}`"
           v-dt-tooltip="{ message: copiedIcon === icon ? '✅ Copied!' : icon, delay: false }"
+          :aria-label="`Copy ${icon} icon name`"
           importance="clear"
           kind="muted"
           size="lg"

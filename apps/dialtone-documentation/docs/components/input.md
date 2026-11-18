@@ -201,7 +201,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
   model-value="Search Value"
 >
   <template #startIcon="{ iconSize }">
-    <dt-icon name="search" :size="iconSize" />
+    <dt-icon-search :size="iconSize" />
   </template>
   <template v-if="inputSearchValue.length !== 0" #endIcon="{ clear }">
     <dt-stack class="d-pie-25">
@@ -214,7 +214,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
         @click="clear"
       >
         <template #startIcon="{ iconSize }">
-          <dt-icon name="close" :size="iconSize" />
+          <dt-icon-close :size="iconSize" />
         </template>
       </dt-button>
     </dt-stack>
@@ -229,38 +229,38 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
 <div class="d-d-grid d-g-200 d-g-cols3">
   <dt-input label="Start icon" type="text" placeholder="Placeholder">
     <template #startIcon="{ iconSize }">
-      <dt-icon name="send" :size="iconSize" />
+      <dt-icon-send :size="iconSize" />
     </template>
   </dt-input>
   <dt-input label="End icon" type="text" placeholder="Placeholder">
     <template #endIcon="{ iconSize }">
-      <dt-icon name="lock" :size="iconSize" />
+      <dt-icon-lock :size="iconSize" />
     </template>
   </dt-input>
   <dt-input label="Start and End icon" type="text" placeholder="Placeholder">
     <template #startIcon="{ iconSize }">
-      <dt-icon name="send" :size="iconSize" />
+      <dt-icon-send :size="iconSize" />
     </template>
     <template #endIcon="{ iconSize }">
-      <dt-icon name="lock" :size="iconSize" />
+      <dt-icon-lock :size="iconSize" />
     </template>
   </dt-input>
   <dt-input label="Start icon" type="textarea" placeholder="Placeholder">
     <template #startIcon="{ iconSize }">
-      <dt-icon name="send" :size="iconSize" />
+      <dt-icon-send :size="iconSize" />
     </template>
   </dt-input>
   <dt-input label="End icon" type="textarea" placeholder="Placeholder">
     <template #endIcon="{ iconSize }">
-      <dt-icon name="lock" :size="iconSize" />
+      <dt-icon-lock :size="iconSize" />
     </template>
   </dt-input>
   <dt-input label="Start and End icon" type="textarea" placeholder="Placeholder">
     <template #startIcon="{ iconSize }">
-      <dt-icon name="send" :size="iconSize" />
+      <dt-icon-send :size="iconSize" />
     </template>
     <template #endIcon="{ iconSize }">
-      <dt-icon name="lock" :size="iconSize" />
+      <dt-icon-lock :size="iconSize" />
     </template>
   </dt-input>
 </div>
@@ -275,23 +275,23 @@ Each Text Input size has a default icon size, keeping it proportional. While rar
 <dt-stack gap="200" class="d-w100p">
   <dt-input label="Medium input with smallest icon" type="text" placeholder="Placeholder" :size="300">
     <template #startIcon>
-      <dt-icon name="box-select" size="100" />
+      <dt-icon-box-select size="100" />
     </template>
     <template #endIcon>
-      <dt-icon name="box-select" size="100" />
+      <dt-icon-box-select size="100" />
     </template>
   </dt-input>
   <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" :size="500">
     <template #startIcon>
-      <dt-icon name="box-select" size="200" />
+      <dt-icon-box-select size="200" />
     </template>
     <template #endIcon>
-      <dt-icon name="box-select" size="200" />
+      <dt-icon-box-select size="200" />
     </template>
   </dt-input>
-  <dt-input label="Medium textarea with large icon" type="textarea" placeholder="Placeholder" :icon-size="300" :size="400">
+  <dt-input label="Medium textarea with large icon" type="textarea" placeholder="Placeholder" :size="400">
     <template #startIcon>
-      <dt-icon name="box-select" size="500" />
+      <dt-icon-box-select size="500" />
     </template>
   </dt-input>
 </dt-stack>
@@ -339,6 +339,13 @@ Override the label font weight independently of the label size. Valid values are
 - Placeholder text should not include critical information. Use description text for any information that helps the user successfully interact with the input.
 
 <script setup>
+import {
+  DtIconSearch,
+  DtIconClose,
+  DtIconSend,
+  DtIconLock,
+  DtIconBoxSelect,
+} from '@dialpad/dialtone-icons/vue';
 import { ref } from 'vue';
 
 const inputValue = ref('');

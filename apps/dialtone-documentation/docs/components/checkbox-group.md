@@ -106,7 +106,6 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="fruits-checkbox-group"
   legend="Fruits"
-  validation-state="positive"
   :messages="[{ message: `Positive validation message.`, type: `positive` }]"
 >
   <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
@@ -116,7 +115,6 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="fruits-checkbox-group"
   legend="Fruits"
-  validation-state="warning"
   :messages="[{ message: `Warning validation message.`, type: `warning` }]"
 >
   <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
@@ -126,7 +124,6 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="fruits-checkbox-group"
   legend="Fruits"
-  validation-state="critical"
   :messages="[{ message: `Critical validation message.`, type: `critical` }]"
 >
   <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>

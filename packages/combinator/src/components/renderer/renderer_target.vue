@@ -7,7 +7,6 @@
 <script setup>
 import {
   capitalize,
-  computed,
   getCurrentInstance,
   h,
   nextTick,
@@ -54,6 +53,18 @@ const props = defineProps({
     type: Set,
     default: () => new Set(),
   },
+  previewIdentity: {
+    type: Function,
+    default: undefined,
+  },
+  beforePreviewRemount: {
+    type: Function,
+    default: undefined,
+  },
+  resetGeneration: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const emit = defineEmits([
@@ -67,24 +78,21 @@ const slots = useSlots();
 // resolve globally registered components, directives, and provides.
 const { appContext } = getCurrentInstance();
 
-/**
- * Map object containing events and their respective handlers.
- *
- * @returns {ComputedRef<object>} Event map.
- */
-const events = computed(() => {
-  if (!props.events) { return {}; }
-  return Object.fromEntries(
-    props.events.map(({ name }) => {
-      return [
-        `on${capitalize(name)}`,
-        e => emit('event', name, e),
-      ];
-    }),
-  );
-});
-
 let currentContainer = null;
+let currentVNode = null;
+let currentBeforeRemount;
+let pendingRemount = null;
+let disposed = false;
+const referenceKeys = new WeakMap();
+let nextReferenceKey = 0;
+
+function identityKey (value) {
+  if (value !== null && (typeof value === 'object' || typeof value === 'function')) {
+    if (!referenceKeys.has(value)) referenceKeys.set(value, ++nextReferenceKey);
+    return ['reference', referenceKeys.get(value)];
+  }
+  return [typeof value, value];
+}
 
 onMounted(() => {
   currentContainer = freshContainer();
@@ -100,6 +108,10 @@ onUpdated(renderTarget);
 // per cell and toggles via v-if, so without this each view switch orphans N
 // still-reactive component trees.
 onBeforeUnmount(() => {
+  disposed = true;
+  pendingRemount?.abort();
+  pendingRemount = null;
+  currentVNode = null;
   if (currentContainer) {
     render(null, currentContainer);
     currentContainer = null;
@@ -132,7 +144,8 @@ function freshContainer () {
  * instance (preserving DOM and Floating UI state) rather than
  * unmounting and remounting on every prop change.
  */
-function renderTarget () {
+function renderTarget (completedVNode) {
+  if (disposed || !wrapper.value || pendingRemount) return;
   if (!currentContainer) {
     currentContainer = freshContainer();
   }
@@ -144,15 +157,68 @@ function renderTarget () {
   const slotKey = Object.keys(slots).sort().join(',');
 
   try {
+    const beforeRemount = props.beforePreviewRemount;
+    const handlers = Object.fromEntries((props.events ?? []).map(({ name }) => [
+      `on${capitalize(name)}`,
+      e => {
+        if (!beforeRemount || (!disposed && !pendingRemount && currentVNode === vnode)) emit('event', name, e);
+      },
+    ]));
     const vnode = h(props.component, {
       ...filteredBindings,
-      ...events.value,
-      key: slotKey,
-    }, slots);
+      ...handlers,
+      key: props.previewIdentity
+        ? JSON.stringify([slotKey, props.resetGeneration, ...props.previewIdentity(filteredBindings).map(identityKey)])
+        : slotKey,
+    }, { ...slots });
     vnode.appContext = appContext;
+
+    if (currentVNode && currentVNode !== completedVNode && currentBeforeRemount &&
+      (currentVNode.key !== vnode.key || currentVNode.type !== vnode.type)) {
+      const outgoingVNode = currentVNode;
+      const controller = new AbortController();
+      pendingRemount = controller;
+      const settle = () => {
+        if (disposed || pendingRemount !== controller) return false;
+        pendingRemount = null;
+        return true;
+      };
+      // Failed cleanup is not completed cleanup: keep the outgoing target (and any
+      // overlay/lock it owns) mounted and live, so a later update retries the hook.
+      const fail = error => {
+        if (settle()) console.warn('Preview remount cleanup failed: \n', error);
+      };
+      try {
+        const completion = currentBeforeRemount(outgoingVNode.component.proxy, { signal: controller.signal });
+        if (completion) {
+          // Read current props after cleanup so repeated requests coalesce to the latest one.
+          completion.then(afterRemount => {
+            if (!settle()) return;
+            const replacement = renderTarget(outgoingVNode);
+            if (disposed || pendingRemount || currentVNode !== replacement ||
+              !replacement?.component?.proxy || typeof afterRemount !== 'function') return;
+            try {
+              afterRemount(replacement.component.proxy);
+            } catch (error) {
+              console.warn('Preview after-remount callback failed: \n', error);
+            }
+          }, fail);
+          return;
+        }
+      } catch (error) {
+        fail(error);
+        return;
+      }
+      pendingRemount = null;
+    }
+
+    currentVNode = vnode;
+    currentBeforeRemount = beforeRemount;
     render(vnode, currentContainer);
+    return vnode;
   } catch (e) {
     console.warn('Rendering warning: \n', e);
+    currentVNode = null;
     currentContainer = freshContainer();
     renderError(e, currentContainer);
   }

@@ -138,7 +138,7 @@ As such, Dialtone Vue components should be pure Vue components with no dependenc
 except when noted below. This in particular means:
 
 - **No access to the Vuex store:** Different projects will have different store structures, and so Dialtone Vue components cannot access the Vuex store. Dialtone Vue components should take data as props only.
-- **No I18n:** Each project will have its own i18n implementation. Any text needed in a Dialtone Vue component should be passed as props or slots.
+- **Localization:** Use `DialtoneLocalization` for built-in component text and add source strings to `localization/en-US.ftl`. Follow the [localization workflow](../localization/localization.mdx#development); untranslated keys use English fallback. Consumer-provided text remains configurable through props or slots.
 - **No custom directives:** Directives in Vue are installed globally and vary from project to project. Custom directives (such as `v-tooltip`) cannot be used in Dialtone Vue components, unless they exist in dialtone itself.
 - **No other custom global methods:** Some projects may implement custom global methods on the Vue object. Dialtone Vue components are limited to the built-in Vue methods.
 - **No imports outside the dialtone-vue directory**

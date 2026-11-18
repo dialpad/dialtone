@@ -25,17 +25,13 @@ Search all `.vue` files for `validate:` in prop definitions (should be `validato
 grep -rn "validate:" --include="*.vue" packages/dialtone-vue/components/ | grep -v "validator:"
 ```
 
-### 2. Missing `compatConfig`
+### 2. API Style Consistency
 
-Find Options API components missing `compatConfig: { MODE: 3 }`. Skip `<script setup>` components.
+Check component API style against `.agents/resources/rules/vue-components.md`:
 
-```bash
-for f in $(find packages/dialtone-vue/components -name "*.vue"); do
-  if grep -q "export default {" "$f" && ! grep -q "compatConfig" "$f"; then
-    echo "$f"
-  fi
-done
-```
+- New components use Composition API with `<script setup lang="ts">`.
+- Existing Options API components retain their style unless conversion is explicitly requested.
+- Compare the source diff and task scope before flagging an API-style change. Do not require `compatConfig`.
 
 ### 3. Prop Naming Consistency
 
@@ -75,7 +71,7 @@ Scan `.less` and `.css` files for:
 
 ## Area-Specific Analysis
 
-- **`/analyze components`** — Runs checks 1-5 (validate bug, compatConfig, naming, constants, doc drift)
+- **`/analyze components`** — Runs checks 1-5 (validate bug, API style, naming, constants, doc drift)
 - **`/analyze tokens`** — Token alias resolution, missing dark mode counterparts, naming consistency, unused tokens
 - **`/analyze utilities`** — Duplicate classes, missing token refs, naming violations, responsive variant gaps
 - **`/analyze docs`** — Check 5 (doc drift) plus missing pages, broken sidebar links, stale planned flags

@@ -18,7 +18,6 @@ combinator: DtImageViewer
   image-alt="Image Alt Text"
   image-button-class="d-wmn-100 d-hmn-100 d-wmx-500 d-hmx-500"
   aria-label="Click to open image"
-  close-aria-label="Close"
 />
 ```
 
@@ -30,7 +29,6 @@ combinator: DtImageViewer
   image-alt="Image Alt Text"
   image-button-class="d-wmn-100 d-hmn-100 d-wmx-500 d-hmx-500"
   aria-label="Click to open image"
-  close-aria-label="Close"
 />
 ```
 
