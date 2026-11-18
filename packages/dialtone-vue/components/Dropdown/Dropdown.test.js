@@ -437,6 +437,22 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(list.get('#newest').attributes('aria-checked')).toBe('true');
   });
 
+  it('moves the pointer highlight onto a disabled row while the menu keeps focus', async () => {
+    const popover = mountMenu({}, undefined, () => [
+      h(DtListItem, { id: 'rename', role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Rename'),
+      h(DtListItem, { id: 'export', role: 'menuitem', navigationType: 'arrow-keys', disabled: true }, () => 'Export'),
+      h(DtListItem, { id: 'refresh', role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Refresh'),
+    ]);
+    await flushPromises();
+    const menu = popover.findComponent({ ref: 'content' });
+    await menu.get('#rename').trigger('mousemove');
+    await menu.get('#export').trigger('mousemove');
+    // Focusing the row would show the keyboard focus ring under the pointer.
+    expect(document.activeElement).toBe(menu.element);
+    await menu.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(document.activeElement.id).toBe('refresh');
+  });
+
   it('keeps the menu context through a neutral wrapper and an explicitly labelled group', async () => {
     const popover = mountMenu({}, undefined, () => [
       h(DtListItemGroup, { id: 'sort-group', heading: 'Sort order' }, () => [

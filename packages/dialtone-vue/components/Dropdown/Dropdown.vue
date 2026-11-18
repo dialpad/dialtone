@@ -491,7 +491,11 @@ export default {
 
       if (liElement?.role && liElement.id && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
-        if (this._getListItemNodes()?.includes(liElement)) liElement.focus();
+        if (!this._getListItemNodes()?.includes(liElement)) return;
+        // A DtListItem disabled row takes the highlight but not focus, which would draw the keyboard
+        // focus ring under the pointer. The menu holds focus so Enter can't activate another row.
+        if (liElement.classList.contains('d-list-item--disabled')) liElement.closest('[role="menu"]')?.focus();
+        else liElement.focus();
       }
     },
 
