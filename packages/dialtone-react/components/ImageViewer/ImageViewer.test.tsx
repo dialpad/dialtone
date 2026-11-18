@@ -168,8 +168,7 @@ describe('DtImageViewer Tests', () => {
     });
 
     it('restores focus to the previously focused element when an open viewer unmounts', async () => {
-      const outside = document.createElement('button');
-      document.body.appendChild(outside);
+      const outside = addFixture(document.createElement('button'));
       outside.focus();
       const result = render(<DtImageViewer {...baseProps} open={true} />);
       await flushPromises();
@@ -178,7 +177,6 @@ describe('DtImageViewer Tests', () => {
       result.unmount();
 
       expect(document.activeElement).toBe(outside);
-      outside.remove();
     });
   });
 
