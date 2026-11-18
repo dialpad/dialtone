@@ -1,0 +1,25 @@
+packages/dialtone-react/package.json
+  s_2defdf83601f66::t_6eefbf4526cc7e 8-28,30,32-36,39,44,46-85,91,99,104-106,110-114
+packages/dialtone-react/tsconfig.json
+  s_2defdf83601f66::t_b8920decea18a4 18
+packages/dialtone-react/types/modules.d.ts
+  s_2defdf83601f66::t_d26d2b56d27c12 1-26
+pnpm-lock.yaml
+  s_2defdf83601f66::t_f266c9b9da8b9b 765-767,771-890,901-903,912,925-927,936,940-948,961-972,4726-4735,4844-4846,4990-4992,7802-7807,8084-8087,8835-8840,14245-14251,15223-15228,16686,16690,16922-16929,16949-16967,18530-18542,18547-18550,18564-18571,18581-18589,18935,18937,18939,18949,19287-19303,19420-19421,19565-19566,22947-22957,23389-23390,24356-24361,30977-30987,31403-31421,32323-32326
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "de79b6aec53c818a691ba50a7d14d764dc8b4754",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

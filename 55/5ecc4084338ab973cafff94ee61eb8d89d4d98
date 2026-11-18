@@ -1,0 +1,34 @@
+packages/dialtone-vue/components/ListItem/ListItem.test.js
+  s_8716e901949c29::t_86960be8a7450b 369-378
+  s_8716e901949c29::t_f75a833862261e 186-248
+apps/dialtone-documentation/docs/components/list-item.md
+  s_8716e901949c29::t_00d770dd4ab01d 84-113
+packages/dialtone-css/lib/build/less/components/list-item.less
+  s_8716e901949c29::t_71f8bc5bf4a011 41-54
+  s_8716e901949c29::t_db3a0d8b772bb4 3-6,12,18,22
+packages/dialtone-vue/components/ListItem/ListItemDefault.story.vue
+  s_8716e901949c29::t_e5ede16668e627 12
+packages/dialtone-vue/components/ListItem/ListItem.stories.js
+  s_8716e901949c29::t_225247977f4990 142-150
+packages/dialtone-vue/components/ListItem/ListItem.vue
+  s_8716e901949c29::t_24d528628647df 271
+  s_8716e901949c29::t_5ec797451aaf72 11,17
+  s_8716e901949c29::t_0759636297b9f1 142-152
+  s_8716e901949c29::t_0de6e586bd29cd 141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "555ecc4084338ab973cafff94ee61eb8d89d4d98",
+  "prompts": {},
+  "sessions": {
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointRenderer.js
+  s_b1bcf368feba80::t_d5ef869f8bd410 19-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "33ab8f1d01357238f2562814e2f864e9702c5afa",
+  "prompts": {},
+  "sessions": {
+    "s_b1bcf368feba80": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "03dd7842-595a-4d18-b8d3-e23a4c169fdb",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}
