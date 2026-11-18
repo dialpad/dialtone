@@ -125,9 +125,11 @@ function presetFiles (variantsDir) {
 const plainJson = (value) => {
   const plain = x => x === null || typeof x !== 'object' || [Object.prototype, Array.prototype, null].includes(Object.getPrototypeOf(x));
   try {
-    return JSON.stringify(value, (_, x) => {
-      if (['function', 'symbol', 'bigint', 'undefined'].includes(typeof x) || (typeof x === 'number' && !Number.isFinite(x))
-        || !plain(x)) throw new Error('not plain data');
+    // A replacer gets what toJSON returned (a Date's string), so the check reads the holder's own value.
+    return JSON.stringify(value, function (key, x) {
+      const own = this[key];
+      if (['function', 'symbol', 'bigint', 'undefined'].includes(typeof own) || (typeof own === 'number' && !Number.isFinite(own))
+        || !plain(own)) throw new Error('not plain data');
       return x;
     });
   } catch {

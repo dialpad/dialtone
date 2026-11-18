@@ -576,11 +576,16 @@ test('extraCasesDiff: the units whose cases differ, or all when another export d
   assert.equal(diff({ ...base, HELPER: 1 }, { ...base, HELPER: 2 }), 'all');
   assert.equal(diff({ ...base, HELPER: 1 }, base), 'all');
   assert.equal(diff({ ...base, helper: () => 1 }, { ...base, helper: () => 1 }), 'all');
-  // An entry plain JSON can't hold exactly always counts as changed: a function, a RegExp, a Set, undefined, NaN.
-  for (const value of [() => {}, /a/, new Set([1]), undefined, NaN]) {
+  // An entry plain JSON can't hold exactly always counts as changed: a function, a RegExp, a Set, undefined, NaN, or a
+  // Date (which serializes through toJSON to the string it would equal).
+  const when = '2026-11-18T00:00:00.000Z';
+  for (const value of [() => {}, /a/, new Set([1]), undefined, NaN, new Date(when)]) {
     const odd = { EXTRA_CASES: { tooltip: [{ name: 'x', props: { value } }] } };
     assert.deepEqual(diff(odd, odd), ['tooltip'], String(value));
   }
+  const at = value => ({ EXTRA_CASES: { tooltip: [{ name: 'x', props: { value } }] } });
+  assert.deepEqual(diff(at(when), at(new Date(when))), ['tooltip']);
+  assert.deepEqual(diff(at(when), at(when)), []);
   // A snapshot is taken when it's made: changing the module's objects afterwards doesn't change it.
   const live = { EXTRA_CASES: { tooltip: [{ name: 'x', attrs: { id: 'a' } }] } };
   const before = extraCasesSnapshot(live);
