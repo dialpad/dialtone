@@ -514,7 +514,8 @@ describe('DtModal Tests', () => {
         document.body.appendChild(target);
         target.id = 'custom-target';
 
-        result.unmount();
+        // Vue's wrapper.unmount(); cleanup() also lets Testing Library mount a new root in the same container.
+        cleanup();
         result = render(<DtModal {...baseProps} appendTo="#custom-target" />, { container: mountPoint });
 
         await act(async () => {});
