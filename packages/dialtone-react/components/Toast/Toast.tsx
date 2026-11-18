@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, useState, type ReactNode } from 'react';
+import { useEffect, useEffectEvent, useRef, useState, type ReactNode } from 'react';
 import type { ClassValue } from '../../common/cx';
 import { ToastLayoutAlternate } from './Layouts/ToastLayoutAlternate';
 import { ToastLayoutDefault } from './Layouts/ToastLayoutDefault';
@@ -181,13 +181,17 @@ export function DtToast ({
     return shouldSetTimeout ? setTimeout(() => expire(), duration) : undefined;
   });
 
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
   useEffect(() => {
     if (!open) return undefined;
-    const timer = startTimer();
-    return () => clearTimeout(timer);
+    timerRef.current = startTimer();
+    return () => clearTimeout(timerRef.current);
   }, [open]);
 
   const handleClose = () => {
+    // Vue lets the timer run on, so it reports the close a second time. A consumer's listener is called once.
+    clearTimeout(timerRef.current);
     setIsShown(false);
     onClose?.();
     onOpenChange?.(false);

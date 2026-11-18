@@ -1,4 +1,4 @@
-import { act, cleanup, render, type RenderResult } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DtToast, type DtToastProps } from './Toast';
@@ -48,6 +48,8 @@ describe('DtToast Tests', () => {
 
   afterEach(() => {
     cleanup();
+    // A failed assertion in a fake-timer test skips its own restore, so it's done here for all of them.
+    vi.useRealTimers();
     mockProps = {};
     mockSlots = {};
   });
@@ -206,8 +208,6 @@ describe('DtToast Tests', () => {
         setChildren();
 
         expect(toast).not.toBeInTheDocument();
-
-        vi.useRealTimers();
       });
 
       it('should close the toast with close method', () => {
@@ -318,8 +318,6 @@ describe('DtToast Tests', () => {
         vi.advanceTimersByTime(1);
       });
       expect(onOpenChange).toHaveBeenCalledExactlyOnceWith(false);
-
-      vi.useRealTimers();
     });
 
     it('stops the timer when open turns false', () => {
@@ -334,8 +332,22 @@ describe('DtToast Tests', () => {
       });
 
       expect(onOpenChange).not.toHaveBeenCalled();
+    });
 
-      vi.useRealTimers();
+    it('cancels the timer when the close button is clicked, so the close is reported once', () => {
+      vi.useFakeTimers();
+      const onClose = vi.fn();
+      const onOpenChange = vi.fn();
+      mockProps = { duration: 6500, onClose, onOpenChange };
+      updateWrapper();
+
+      fireEvent.click(qa('dt-notice-action-close-button')!);
+      act(() => {
+        vi.runAllTimers();
+      });
+
+      expect(onClose).toHaveBeenCalledTimes(1);
+      expect(onOpenChange).toHaveBeenCalledExactlyOnceWith(false);
     });
 
     it('shows the toast again when open turns true after it closed itself', async () => {
@@ -364,6 +376,7 @@ describe('DtToast Tests', () => {
 
       expect(toast).toHaveClass('d-toast', 'my-toast');
       expect(toast).not.toHaveAttribute('id');
+      expect(result.container.querySelector('[data-testid="toast"]')).toBeNull();
       expect(result.container.querySelector('#toast-id')).toBeNull();
     });
   });
