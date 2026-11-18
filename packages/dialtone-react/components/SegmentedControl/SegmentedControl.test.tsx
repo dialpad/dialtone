@@ -128,6 +128,7 @@ describe('DtSegmentedControl Tests', () => {
       act(() => items()[0].focus());
       await userEvent.keyboard('{ArrowRight}');
 
+      expect(items()[1]).toHaveFocus();
       expect(onValueChange).not.toHaveBeenCalled();
     });
   });
@@ -212,12 +213,16 @@ describe('DtSegmentedControl Tests', () => {
       const cancelChange = vi.fn((event: Event) => {
         event.preventDefault();
       });
-      _setWrapper({ onBeforeChange: cancelChange });
+      // Uncontrolled, so the selection itself shows whether the change went through.
+      _setWrapper({ value: undefined, defaultValue: 'all', onBeforeChange: cancelChange });
 
       await userEvent.click(items()[1]);
 
       expect(cancelChange).toHaveBeenCalled();
+      expect(items()[0]).toHaveAttribute('aria-checked', 'true');
+      expect(items()[1]).toHaveAttribute('aria-checked', 'false');
       expect(onValueChange).not.toHaveBeenCalled();
+      expect(onChange).not.toHaveBeenCalled();
     });
   });
 
@@ -394,7 +399,7 @@ describe('DtSegmentedControl Tests', () => {
       act(() => items()[0].focus());
       await userEvent.keyboard('{End}');
 
-      expect(onKeyDown).toHaveBeenCalled();
+      expect(onKeyDown).toHaveBeenCalledTimes(1);
       expect(focusedAtCall).toBe(items()[2]);
       expect(valueChangeCallsAtCall).toBe(1);
       expect(onValueChange).toHaveBeenCalledWith('recent');

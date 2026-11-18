@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useArgs } from 'storybook/preview-api';
 import { DtIconBoxSelect, DtIconLaptop2, DtIconListSpacingCompact, DtIconListSpacingExpanded, DtIconListSpacingRegular, DtIconMoon, DtIconSun } from '../../icons';
 import { DtBadge } from '../Badge';
 import { DtStack } from '../Stack';
@@ -113,18 +114,13 @@ type Story = StoryObj<SegmentedControlStoryArgs>;
 
 // SegmentedControlDefault.story.vue
 function SegmentedControlDefault (args: SegmentedControlStoryArgs) {
-  const [selectedValue, setSelectedValue] = useState(args.value ?? 'all');
-  // The `value` control sets the selection; clicks still update it.
-  const [lastArgValue, setLastArgValue] = useState(args.value);
-  if (args.value !== lastArgValue) {
-    setLastArgValue(args.value);
-    setSelectedValue(args.value ?? 'all');
-  }
+  // The `value` control sets the selection, and clicks write back to it so the control stays in sync.
+  const [, updateArgs] = useArgs<SegmentedControlStoryArgs>();
   return (
     <DtSegmentedControl
-      value={selectedValue}
+      value={args.value ?? 'all'}
       onValueChange={(value) => {
-        setSelectedValue(value);
+        updateArgs({ value });
         args.onValueChange?.(value);
       }}
       onChange={args.onChange}
