@@ -1,6 +1,7 @@
 import { act, cleanup, fireEvent, render, waitFor, within, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { finishTransitions } from '../../tests/helpers/transition';
 import { DtImageViewer, type DtImageViewerProps } from './ImageViewer';
 
 const baseProps: DtImageViewerProps = {
@@ -108,6 +109,24 @@ describe('DtImageViewer Tests', () => {
 
       // The focus trap intercepts Tab at the boundary so focus cannot escape the modal.
       expect(tabEvent.defaultPrevented).toBe(true);
+    });
+
+    it('moves focus to the visible close button when focusing the sr-only one swaps them', async () => {
+      await _openModal();
+      await flushPromises();
+
+      // Pointer leaving the modal swaps the visible close button for the sr-only one.
+      fireEvent.mouseLeave(qa('dt-modal')!);
+      await finishTransitions();
+      const srOnly = qa('dt-sr-only-close-button')!;
+      expect(srOnly).toBeTruthy();
+
+      // Focusing it brings the visible button back and unmounts the sr-only one.
+      act(() => { srOnly.focus(); });
+      await finishTransitions();
+
+      expect(qa('dt-sr-only-close-button')).toBeNull();
+      expect(document.activeElement).toBe(qa('dt-image-viewer-close-btn'));
     });
 
     it('restores focus to the previously focused element when an open viewer unmounts', async () => {
