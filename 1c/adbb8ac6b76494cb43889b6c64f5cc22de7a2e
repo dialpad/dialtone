@@ -1,0 +1,25 @@
+packages/combinator/src/components/combinator.test.js
+  s_c8bb1bc8e0154a::t_35cbb8fe995030 124,135
+  s_c8bb1bc8e0154a::t_7a36e79f4ab887 73
+  s_c8bb1bc8e0154a::t_d5795b6c12a404 88
+  s_c8bb1bc8e0154a::t_79604724f53843 98
+  s_c8bb1bc8e0154a::t_d541899befffdb 49
+  s_c8bb1bc8e0154a::t_75c502bc9355fa 110
+  s_c8bb1bc8e0154a::t_62ef71504d1913 14-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "1cadbb8ac6b76494cb43889b6c64f5cc22de7a2e",
+  "prompts": {},
+  "sessions": {
+    "s_c8bb1bc8e0154a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "26cc1112-ee2c-4d75-ad24-dac4c82f4710",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+packages/combinator/src/variants/variants_dropdown.js
+  s_a98638d5a5be6e::t_90ed1bd3e46ce9 74
+  s_a98638d5a5be6e::t_bdf5797b1d72d3 68-73,75-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "95b13b2f500887c66b002dc69e22ca0a76708376",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+packages/dialtone-react/components/Collapsible/Collapsible.stories.tsx
+  s_c078c477ce3335::t_90dc88732ca239 109-110,127-128
+packages/dialtone-react/components/Collapsible/Collapsible.test.tsx
+  s_c078c477ce3335::t_b3504396a21a28 262-285
+packages/dialtone-react/components/Collapsible/Collapsible.tsx
+  s_c078c477ce3335::t_e853e6a934c692 3-4,152-155,178,219-224
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "76280fe8a45059089044925eb0a3ae3856d49775",
+  "prompts": {},
+  "sessions": {
+    "s_c078c477ce3335": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "027e66f8-d415-4d9e-a4cf-c4f3abc9dbae",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

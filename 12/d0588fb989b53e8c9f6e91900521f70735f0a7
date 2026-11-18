@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Avatar/Avatar.tsx
+  s_58881f4a553083::t_4d09f8a4cb087b 10,13,178,180-182,238,348-349
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "12d0588fb989b53e8c9f6e91900521f70735f0a7",
+  "prompts": {},
+  "sessions": {
+    "s_58881f4a553083": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c86b917-ca48-4b8f-81d3-35898419308a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

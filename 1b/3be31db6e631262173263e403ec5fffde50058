@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Emoji/Emoji.test.tsx
+  s_c18ffe6cb18b35::t_e1d8c903bdaf39 137-138,144-145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1b3be31db6e631262173263e403ec5fffde50058",
+  "prompts": {},
+  "sessions": {
+    "s_c18ffe6cb18b35": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "125a5c2e-0c69-4812-8128-6f84a105e827",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
