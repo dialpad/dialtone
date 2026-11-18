@@ -1,0 +1,71 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
+  s_aca1c1afe2554c::t_127dbb53a0d548 446-454,457-460
+  s_aca1c1afe2554c::t_02d5fa15c960a7 455-456
+  s_aca1c1afe2554c::t_12c87e73f881fe 32-42
+  s_aca1c1afe2554c::t_5589f8cf200b79 742
+  s_aca1c1afe2554c::t_bf844e1fa9bb43 1180
+  s_aca1c1afe2554c::t_8b3f3a6812c81f 159-173
+  s_aca1c1afe2554c::t_43b900a011cb94 67-120,124-126,129-133
+  s_aca1c1afe2554c::t_9ef942d6f7b98d 187,213,219,236-237,251,257,269,275,281,287,293,299,600,606,689,695,865,905,907,1070,1083,1090
+  s_aca1c1afe2554c::t_754aadcab219a9 416-418
+  s_aca1c1afe2554c::t_b41fdfe1b60e6e 564,566-567
+  s_aca1c1afe2554c::t_1a3399765f8f05 670-672
+  s_aca1c1afe2554c::t_a8c18d3032042f 364-407
+  s_aca1c1afe2554c::t_c4c849c739ea72 408,1169-1179,1181-1312
+  s_aca1c1afe2554c::t_008406512b3bec 658-662
+  s_aca1c1afe2554c::t_ea85917edfb489 123
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_aca1c1afe2554c::t_14159fa0d89fad 247,250,252-256,259,261-277,279
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_aca1c1afe2554c::t_89897b7df669c5 353
+  s_aca1c1afe2554c::t_79f68cc5b78f78 502
+.claude/skills/dt-migrate.md
+  s_aca1c1afe2554c::t_926484b13ba9e9 20,23
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_aca1c1afe2554c::t_926484b13ba9e9 44,146
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_aca1c1afe2554c::t_4d71d903d239c3 21,23
+  s_aca1c1afe2554c::t_ea85917edfb489 477-481,483-488,490-504
+  s_aca1c1afe2554c::t_df8789613cb666 158-163,165-169
+  s_aca1c1afe2554c::t_861b674873d874 3
+  s_aca1c1afe2554c::t_285abfe85263f1 106
+  s_aca1c1afe2554c::t_eb1a95ca550ec3 175,182,186
+  s_aca1c1afe2554c::t_afbfed92b6cbee 329
+  s_aca1c1afe2554c::t_3a882a4ee063db 231-232,235
+  s_aca1c1afe2554c::t_ae8c34ee2f87cf 243
+  s_aca1c1afe2554c::t_6a9f3d107cd303 410
+  s_aca1c1afe2554c::t_46eabf2c148c3e 14-17
+  s_aca1c1afe2554c::t_dc29708f8a1212 473,475,489,506-507,543
+  s_aca1c1afe2554c::t_c309e1e57fdfcf 416
+  s_aca1c1afe2554c::t_b58bdeaac5d3bc 121-122,126-132,134
+  s_aca1c1afe2554c::t_4d05ca54b816d4 258,260
+  s_aca1c1afe2554c::t_12d2ef0499471d 198,203,208,211-213,217
+  s_aca1c1afe2554c::t_1390969eb6f0a5 143-145
+  s_aca1c1afe2554c::t_c5787e1279bb18 218
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs
+  s_aca1c1afe2554c::t_bc1b90b20e740b 346-347,353-357,359-375,377-379,449-497,499-503,505-506,509-519,522,525-526,529-532,534-535,538-545,547-549,561,571,596-600,603-608,618-619,624-631,635-638,642-651,655-656,662,664-665,667-668,670-673,677
+  s_aca1c1afe2554c::t_ad993d8ccacaff 1591-1592
+  s_aca1c1afe2554c::t_aacaae69799b7a 7,9-11,22-24
+  s_aca1c1afe2554c::t_7bc3c63d7d2a85 36-37,42-43,51-60,67-69,72-79,82-84,87-94,97-112,115-116,121-124,172-208
+  s_aca1c1afe2554c::t_9379aad67733e9 695-696,698,703,710,741-747,749-755,760-761,765-769,775,784-785,787-791,793,797,807-812,854,858-859,861,895-909,913,922-928
+  s_aca1c1afe2554c::t_fcd8b18de8dd6d 1023-1030,1037,1042,1050-1053,1076-1077,1079-1080,1117,1119-1122,1126,1318-1355,1361-1362,1389,1397-1399,1404-1405,1409-1410,1412,1416-1418,1424
+  s_aca1c1afe2554c::t_026aaa9241475b 1576-1577,1579-1582
+  s_aca1c1afe2554c::t_37994bc349eb4b 1599-1604
+  s_aca1c1afe2554c::t_fbe2650324c612 678
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cd07f85f5b89e25006495c17e99311a699e2a7d0",
+  "prompts": {},
+  "sessions": {
+    "s_aca1c1afe2554c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a8e77c6a-d51d-4d85-bc59-17cbd4bd9064",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

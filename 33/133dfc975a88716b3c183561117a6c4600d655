@@ -1,0 +1,55 @@
+packages/combinator/src/components/controls/control_string.vue
+  s_53fa132747c3c1::t_312a6469a09f1e 52-53
+  s_53fa132747c3c1::t_b76cfced4861c3 84-85
+packages/combinator/src/components/controls/control_slot.vue
+  s_53fa132747c3c1::t_f9f9e6aea32a23 71-72
+  s_53fa132747c3c1::t_72029f8ee91310 44
+packages/combinator/src/components/controls/control_number.test.js
+  s_53fa132747c3c1::t_48b0a6cbf3577d 4-8
+  s_53fa132747c3c1::t_7ac5ae7bbd57d0 21
+packages/combinator/src/components/controls/control_slot.test.js
+  s_53fa132747c3c1::t_b10b0cea109bf5 21
+  s_53fa132747c3c1::t_a4e450e8fc6423 4-8
+packages/combinator/src/components/controls/control_selection.test.js
+  s_53fa132747c3c1::t_77e7c253aea5c7 4,6-10
+  s_53fa132747c3c1::t_5e14a817039b05 146-149
+packages/combinator/src/components/controls/control_number.vue
+  s_53fa132747c3c1::t_008d018d117f02 66-67
+  s_53fa132747c3c1::t_fb78919bfea4d5 43
+packages/combinator/src/lib/utils_vue.js
+  s_53fa132747c3c1::t_947277e5fd8beb 1,3
+  s_53fa132747c3c1::t_c8402dee83aeff 88-164
+packages/combinator/src/components/controls/control_segmented.test.js
+  s_53fa132747c3c1::t_2083b3e355a2a8 5-9
+  s_53fa132747c3c1::t_34e8a33f2dd792 20-23
+packages/combinator/src/components/controls/control_clearable_shell.test.js
+  s_53fa132747c3c1::t_01571876b52098 5-8
+packages/combinator/src/components/controls/control_string.test.js
+  s_53fa132747c3c1::t_9882c9b88cc5d4 20
+  s_53fa132747c3c1::t_1616e5feefba9b 4-8
+packages/combinator/src/lib/test/utils_test.js
+  s_53fa132747c3c1::t_1f02bdeac73512 3-6
+  s_53fa132747c3c1::t_5fe76b9a6c0d76 19-35
+packages/combinator/src/components/controls/control_segmented.vue
+  s_53fa132747c3c1::t_46c9e6ee0a2452 51
+  s_53fa132747c3c1::t_57b374e33cab6b 114
+packages/combinator/src/components/controls/control_selection.vue
+  s_53fa132747c3c1::t_46e3a3562b40a7 195
+  s_53fa132747c3c1::t_2c65939aa3cd5f 293
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "33133dfc975a88716b3c183561117a6c4600d655",
+  "prompts": {},
+  "sessions": {
+    "s_53fa132747c3c1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b9dd6578-4289-464c-8bc2-d50bd98834aa",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
