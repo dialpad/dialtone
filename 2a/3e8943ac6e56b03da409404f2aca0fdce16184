@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Chip/Chip.stories.tsx
+  s_b0e50e1b80b5f1::t_9586df4a355c36 2,147
+packages/dialtone-react/components/Chip/Chip.tsx
+  s_b0e50e1b80b5f1::t_fcbd2e504df258 1,102-104,173-175,178,199
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2a3e8943ac6e56b03da409404f2aca0fdce16184",
+  "prompts": {},
+  "sessions": {
+    "s_b0e50e1b80b5f1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cdac9bf4-2d69-487f-8e66-ec83888fffa3",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

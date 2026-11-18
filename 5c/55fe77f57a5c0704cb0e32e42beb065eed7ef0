@@ -1,0 +1,19 @@
+packages/dialtone-query-core/README.md
+  s_100911eca16c78::t_a1463c550630a5 68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5c55fe77f57a5c0704cb0e32e42beb065eed7ef0",
+  "prompts": {},
+  "sessions": {
+    "s_100911eca16c78": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a19cea-2746-77a1-bbff-fbfe3a3794d2",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
