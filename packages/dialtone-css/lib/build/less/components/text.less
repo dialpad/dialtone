@@ -412,10 +412,14 @@
       );
     }
 
-    // loop: steady scroll, and only the end edge fades so the gap and the copy
-    // come in clean at the start edge (the user asked for no start fade here)
+    // loop: steady scroll
     &--slide-loop {
       --_slide-easing: linear;
+    }
+
+    // loop, once the gap reaches the start edge: only the end edge fades, so the
+    // gap and the incoming copy are not faded
+    &--slide-loop-wrap {
       --_slide-mask: linear-gradient(
         var(--_slide-fade-direction, to right),
         #000 calc(100% - var(--_slide-fade-size)),

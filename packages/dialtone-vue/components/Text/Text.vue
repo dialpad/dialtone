@@ -15,6 +15,7 @@
       <slot />
       <span
         v-if="slideCopy"
+        ref="slideCopyEl"
         aria-hidden="true"
         class="d-text__slide-copy"
       >
@@ -287,6 +288,7 @@ export default {
       slideOffset: 0,
       slideDuration: 0,
       slideCopy: false,
+      slideLoopWrap: false,
     };
   },
 
@@ -332,6 +334,9 @@ export default {
         }
         if (this.slidePhase === 'loop-moving') {
           classes.push('d-text--slide-loop');
+        }
+        if (this.slideLoopWrap) {
+          classes.push('d-text--slide-loop-wrap');
         }
       } else if (this.truncate) {
         classes.push(TEXT_TRUNCATE_CLASS);
@@ -472,6 +477,7 @@ export default {
       this.slideOffset = 0;
       this.slideDuration = 0;
       this.slideCopy = false;
+      this.slideLoopWrap = false;
     },
 
     slideEnter() {
@@ -508,6 +514,7 @@ export default {
       this.slideDuration = duration;
       // in case transitionend does not fire
       this.slideSetTimer(this.slideMoveDone, duration + 100);
+      return duration;
     },
 
     slideForward() {
@@ -525,8 +532,13 @@ export default {
       if (!this.slideCopy) {
         return;
       }
-      const distance = this.$refs.slideContent.scrollWidth - this.slideRuntime.restWidth;
-      this.slideMove('loop-moving', distance, distance);
+      const { restWidth } = this.slideRuntime;
+      const distance = this.$refs.slideContent.scrollWidth - restWidth;
+      const duration = this.slideMove('loop-moving', distance, distance);
+      // the start edge fades while the text slides out, then clears once the gap is
+      // half past it, before the copy arrives (the scroll is linear, so time = distance)
+      const gap = parseFloat(getComputedStyle(this.$refs.slideCopyEl).paddingInlineStart) || 0;
+      this.slideSetTimer(() => { this.slideLoopWrap = true; }, duration * (restWidth + gap / 2) / distance);
     },
 
     slideMoveDone() {
@@ -551,6 +563,7 @@ export default {
         this.slideOffset = 0;
         this.slideDuration = 0;
         this.slideCopy = false;
+        this.slideLoopWrap = false;
         this.slideSetTimer(this.slideLoop, hold);
       }
     },
