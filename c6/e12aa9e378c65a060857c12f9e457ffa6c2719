@@ -1,0 +1,94 @@
+apps/dialtone-documentation/docs/foundations/type/index.md
+  s_b1bcf368feba80::t_5d23c6ad30522b 23
+  s_b1bcf368feba80::t_5f13a09025993a 3,7,16-22,24-30,33-34,43-44
+  s_b1bcf368feba80::t_10b96693d8b794 37-38
+  s_b1bcf368feba80::t_edafd3cbf54c79 5
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-graphic.svg
+  s_b1bcf368feba80::t_6ce017acf395c9 1
+apps/dialtone-documentation/docs/foundations/halftone/index.md
+  s_b1bcf368feba80::t_cef518b11123c3 1-59,61-114
+  s_b1bcf368feba80::t_a6a3dd09391b53 60
+apps/dialtone-documentation/docs/foundations/graphic-system/index.md
+  s_b1bcf368feba80::t_c59761a89209eb 3,6-7,9-10,14,16,18,20-21,25,27,29-30,34,36,38-39,45-51
+apps/dialtone-documentation/docs/foundations/colors/index.md
+  s_b1bcf368feba80::t_7aac4f7dd3d15a 34,38,42
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_b1bcf368feba80::t_161ca6b81c73d2 193
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/graphic-system.svg
+  s_b1bcf368feba80::t_6ce017acf395c9 1
+apps/dialtone-documentation/docs/foundations/colors/marketing/index.md
+  s_b1bcf368feba80::t_bae1eb62e4923f 80-83
+  s_b1bcf368feba80::t_62a0e4968361e0 3-5,9-11,13,15-17,66,68,70,72-79,84,86,88,90,92-115,126-147,174-177,180-181,183-184
+  s_b1bcf368feba80::t_10b96693d8b794 37,178
+  s_b1bcf368feba80::t_edafd3cbf54c79 12,14,116-125,179,182
+apps/dialtone-documentation/docs/foundations/brand/index.md
+  s_b1bcf368feba80::t_346264a6013a74 24-25
+apps/dialtone-documentation/docs/foundations/graphic-system/glyphs.md
+  s_b1bcf368feba80::t_8e73fef6feeb64 1-51
+apps/dialtone-documentation/docs/foundations/graphic-system/transformation-grid.md
+  s_b1bcf368feba80::t_cc1e32b3c8c87d 1-38
+apps/dialtone-documentation/docs/foundations/graphic-system/schematic-line-art.md
+  s_b1bcf368feba80::t_2104c6881eb60c 1-62
+apps/dialtone-documentation/docs/foundations/gradient/product.md
+  s_b1bcf368feba80::t_161ca6b81c73d2 3-4,9-10,29,38-41
+apps/dialtone-documentation/docs/foundations/gradient/marketing.md
+  s_b1bcf368feba80::t_3a2c9fd7bac61b 3-4,7-9,11,13-17
+apps/dialtone-documentation/docs/foundations/graphic-system/abstract-graphics.md
+  s_b1bcf368feba80::t_b684eb9e2f8a97 3-4,7-9,11-17
+apps/dialtone-documentation/docs/_data/downloads.json
+  s_b1bcf368feba80::t_031c023f0382a9 69,73,98-99,103
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_b1bcf368feba80::t_b4d4757c4c2289 310-313
+  s_b1bcf368feba80::t_29e6fb4acef929 271-274
+  s_b1bcf368feba80::t_f7604565f2df49 256-274
+  s_b1bcf368feba80::t_baa098248dab65 308-309,316-317,320-321
+apps/dialtone-documentation/docs/foundations/brand/our-icon/index.md
+  s_b1bcf368feba80::t_346264a6013a74 28
+apps/dialtone-documentation/docs/foundations/product-storytelling/index.md
+  s_b1bcf368feba80::t_346264a6013a74 13,35-50
+apps/dialtone-documentation/docs/foundations/gradient/index.md
+  s_b1bcf368feba80::t_f2e0aaa6063b54 3,7,9-10,15-47
+apps/dialtone-documentation/docs/foundations/typography/marketing.md
+  s_b1bcf368feba80::t_05c3de73e4b8b5 3-5,7,10-11,13-33,35-42,44-55,57-67,69-72,75-76,78-87
+  s_b1bcf368feba80::t_55bb4aff633416 34
+  s_b1bcf368feba80::t_edafd3cbf54c79 12,43,68,73-74,77
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_b1bcf368feba80::t_f036e664ed462e 158-161,168-170,172-174,176-194,198,200-203,207
+  s_b1bcf368feba80::t_9c35c328258010 324
+  s_b1bcf368feba80::t_e8871c4429802a 459
+  s_b1bcf368feba80::t_53f846e278fcf0 432
+  s_b1bcf368feba80::t_effd2be5427bc3 17-30
+  s_b1bcf368feba80::t_03bfbb112ca741 90,93-99,108,111-113,115,117-119,121
+  s_b1bcf368feba80::t_664a2472026c24 195,204-206
+  s_b1bcf368feba80::t_98089dc2ff2405 507,512-522
+  s_b1bcf368feba80::t_868a1ecbf88a78 91-92,100-107,109-110
+  s_b1bcf368feba80::t_57f17c45fd7f0d 5-16,31-48
+  s_b1bcf368feba80::t_6a4d139daf5975 162-167,171
+  s_b1bcf368feba80::t_6e56c2da1528ea 460-463
+  s_b1bcf368feba80::t_5da0050c1112a4 523
+  s_b1bcf368feba80::t_71db1cebd80d75 175,196-197,199,443,473
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointRenderer.js
+  s_b1bcf368feba80::t_d5ef869f8bd410 19-21
+apps/dialtone-documentation/docs/components/illustration.md
+  s_b1bcf368feba80::t_212aad5d0503ac 12-13,22-24,29,36-46
+  s_b1bcf368feba80::t_add9418ad47482 14-21,30-34
+  s_b1bcf368feba80::t_85bcb7b63e2cd8 35
+apps/dialtone-documentation/docs/foundations/illustrations/index.md
+  s_b1bcf368feba80::t_212aad5d0503ac 3-4,7-9,11,14-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c6e12aa9e378c65a060857c12f9e457ffa6c2719",
+  "prompts": {},
+  "sessions": {
+    "s_b1bcf368feba80": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "03dd7842-595a-4d18-b8d3-e23a4c169fdb",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}

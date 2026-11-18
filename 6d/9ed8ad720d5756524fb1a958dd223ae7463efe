@@ -1,0 +1,45 @@
+packages/combinator/src/variants/variants_badge.js
+  s_f920209ec821e1::t_4606169a440e7d 93,109,120
+apps/dialtone-documentation/docs/components/badge.md
+  s_f920209ec821e1::t_2e5d1ba10d0a93 52-74,87-89,153,161,176-177,215,221-222,226-227,231-232
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.js
+  s_f920209ec821e1::t_000b8d74701715 19,65-75
+packages/dialtone-vue/components/Badge/Badge.vue
+  s_f920209ec821e1::t_6aa9d8a8b43754 10,31,36,42,56,60,66,94,96,117,144,160,165,205,335-338,399,408,413,424,435-436,440,449,454-458,471
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/index.mjs
+  s_f920209ec821e1::t_8bc7529adc3e40 252-254,305-313,320-330,332-343,346-353
+packages/dialtone-vue/components/Badge/BadgeConstants.js
+  s_f920209ec821e1::t_000b8d74701715 17-18,90-98
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/test.mjs
+  s_f920209ec821e1::t_ddef0330c5dfbf 77-87,382-416
+  s_f920209ec821e1::t_775835b6062625 417
+packages/dialtone-vue/components/Badge/badgeWarnings.js
+  s_f920209ec821e1::t_34e622ced00617 1-15
+apps/dialtone-documentation/docs/_data/badge.json
+  s_f920209ec821e1::t_5397728862b1a4 13-17,38-47
+packages/dialtone-vue/components/Badge/BadgeExamples.story.vue
+  s_f920209ec821e1::t_4606169a440e7d 24-25,33-34
+  s_f920209ec821e1::t_7a0911036f673c 115-116,176-177,192-193
+packages/dialtone-css/lib/build/less/components/badge.less
+  s_f920209ec821e1::t_b2e43e31b3c45d 30,32,55,66,73,80,87,94,156,174,182-187,191,196,200,204,209,221-224
+packages/dialtone-vue/components/Badge/Badge.test.js
+  s_f920209ec821e1::t_f4b37b2cfba6a0 10,12,39,678-791
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.test.js
+  s_f920209ec821e1::t_60c016ae7333fe 83,103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6d9ed8ad720d5756524fb1a958dd223ae7463efe",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
