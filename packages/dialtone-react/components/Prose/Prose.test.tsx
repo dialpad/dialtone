@@ -206,9 +206,16 @@ describe('DtProse Tests', () => {
     });
 
     it('Should strip an unsafe scheme hidden by tabs or newlines in href', () => {
-      setWrapper({}, html('<a href="java&#x09;script:alert(1)">a</a><a href="java&#x0A;script:alert(1)">b</a>'));
+      setWrapper({}, html(
+        '<a href="java&#x09;script:alert(1)">a</a>' +
+        '<a href="java&#x0A;script:alert(1)">b</a>' +
+        '<a href="java&#x0D;script:alert(1)">c</a>',
+      ));
 
-      for (const a of Array.from(document.querySelectorAll('a'))) {
+      const links = Array.from(document.querySelectorAll('a'));
+
+      expect(links).toHaveLength(3);
+      for (const a of links) {
         expect(a.hasAttribute('href')).toBe(false);
       }
     });
