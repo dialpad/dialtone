@@ -1,4 +1,4 @@
-import { useEffect, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { StandIn } from '../../.storybook/StandIn';
 import { DtAvatar } from '../../components/Avatar/Avatar';
@@ -121,10 +121,10 @@ export const Vertical: Story = {
 // ── No value (defaults: both axes, loop, memory) ────────────
 export const Defaults: Story = {
   render: () => (
-    <Group direction="row" gap="100" role="radiogroup" label="Options">
-      <Outlined role="radio">A</Outlined>
-      <Outlined role="radio">B</Outlined>
-      <Outlined role="radio">C</Outlined>
+    <Group direction="row" gap="100" role="toolbar" label="Actions">
+      <Outlined>Cut</Outlined>
+      <Outlined>Copy</Outlined>
+      <Outlined>Paste</Outlined>
     </Group>
   ),
   parameters,
@@ -439,26 +439,52 @@ interface TreeGroupProps {
   children: ReactNode;
 }
 
+// The collapsible itself is the treeitem (Vue's recipe); its anchor is plain content, not a button.
 function TreeGroup ({ id, label, open, setOpen, children }: TreeGroupProps) {
+  const labelId = useId();
+
+  // Vue's `toggleTreeGroup`: only clicks whose nearest treeitem is this group toggle it.
+  const onClick = (event: MouseEvent<HTMLElement>) => {
+    const item = event.currentTarget;
+    if ((event.target as HTMLElement).closest('[role="treeitem"]') !== item) return;
+    item.focus();
+    setOpen(item.getAttribute('aria-expanded') !== 'true');
+  };
+
+  // Vue's `@keydown.enter.self.prevent` and `@keydown.space.self.prevent`.
+  const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.target !== event.currentTarget) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setOpen(!open);
+    }
+  };
+
   return (
     <DtCollapsible
+      role="treeitem"
+      aria-expanded={open}
+      aria-labelledby={labelId}
+      data-tree-group={id}
+      tabIndex={-1}
+      className="d-bar-400"
       open={open}
       anchorClass="d-w100p"
       onOpenChange={setOpen}
-      anchor={({ attrs }) => (
-        <TreeItem
-          {...attrs}
-          role="treeitem"
-          data-tree-group={id}
-          className="d-w100p"
-          tabIndex={0}
-          onClick={() => setOpen(!open)}
-          endIcon={<DtIcon name={open ? 'chevron-down' : 'chevron-right'} size={200} />}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      anchor={(
+        <DtStack
+          direction="row"
+          justify="space-between"
+          align="center"
+          className="d-p-100 h:d-bgc-moderate-opaque d-bar-400"
         >
-          {label}
-        </TreeItem>
+          <DtText id={labelId} kind="body">{label}</DtText>
+          <DtIcon name={open ? 'chevron-down' : 'chevron-right'} size={200} />
+        </DtStack>
       )}
-      content={<DtStack className="d-pis-150">{children}</DtStack>}
+      content={<DtStack role="group" className="d-pis-150">{children}</DtStack>}
     />
   );
 }
@@ -527,12 +553,12 @@ function FocusgroupRecipes () {
         Up/Down cycles all visible items. Right expands a group, Left collapses or
         moves to parent. Hook owns vertical nav; consumer owns tree structure.
         Uses <code>DtCollapsible</code> for expand/collapse.
-        <code>useFocusGroup(el, &apos;vertical&apos;)</code>
+        <code>selector: &apos;[role=treeitem]&apos;</code> keeps the collapsible content wrapper out of navigation.
       </DtText>
       <Group
-        value="vertical"
+        value={{ axis: 'vertical', selector: '[role=treeitem]' }}
         role="tree"
-        tabIndex={0}
+        tabIndex={-1}
         label="Sidebar navigation"
         className="d-ba d-bc-subtle d-bar-400 d-w-500 d-p-50"
         onKeyDown={onTreeKeyDown}
