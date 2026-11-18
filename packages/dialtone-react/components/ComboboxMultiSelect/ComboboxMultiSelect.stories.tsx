@@ -6,13 +6,11 @@ import { DtComboboxMultiSelect, type DtComboboxMultiSelectProps } from './Combob
 import { CHIP_SIZES } from './ComboboxMultiSelectConstants';
 import { ITEMS_LIST_DATA } from './ComboboxMultiSelectStoryConstants';
 
-// The slots are string args, as in Vue: `header` and `footer` render through `v-html`. `onInput` is the story's action
-// for each change of the typed text, as Vue's template calls it from `update:modelValue`.
-type ComboboxMultiSelectStoryArgs = Omit<DtComboboxMultiSelectProps, 'header' | 'list' | 'footer' | 'onInput'> & {
+// The slots are string args, as in Vue: `header` and `footer` render through `v-html`.
+type ComboboxMultiSelectStoryArgs = Omit<DtComboboxMultiSelectProps, 'header' | 'list' | 'footer'> & {
   header?: string;
   list?: string;
   footer?: string;
-  onInput?: (value: string) => void;
 };
 
 const NUMERIC_SIZE_OPTIONS = Object.keys(CHIP_SIZES)
@@ -233,7 +231,6 @@ function ComboboxMultiSelectDefault ({
   list: _list,
   footer,
   selectedItems: selectedItemsArg = [],
-  onInput,
   onSelect,
   onRemove,
   ...args
@@ -248,11 +245,11 @@ function ComboboxMultiSelectDefault ({
     setSelectedItems(selectedItemsArg);
   }
 
+  // The `onInput` arg goes on to the input, so its action gets the input event, as Vue's gets from `update:modelValue`.
   const onComboboxInput = (value: string) => {
     // Filter list
     setQuery(value);
     setItems(ITEMS_LIST_DATA.filter(item => item.value.includes(value)));
-    onInput?.(value);
   };
 
   const onComboboxSelect = (i: number) => {

@@ -350,7 +350,7 @@ describe('DtComboboxMultiSelect Tests', () => {
 
     it('Should emit "enter" when NumpadEnter is pressed while input is focused', async () => {
       // event.key normalizes NumpadEnter to 'Enter'; using event.code would miss this.
-      await userEvent.keyboard('[NumpadEnter]');
+      await act(async () => { fireEvent.keyDown(getInput(), { key: 'Enter', code: 'NumpadEnter' }); });
       expect(enterStub).toHaveBeenCalledTimes(1);
     });
 
@@ -603,37 +603,55 @@ describe('DtComboboxMultiSelect Tests', () => {
   // React-only: what Vue's tests don't exercise.
   describe('React-only Tests', () => {
     describe('When showList is not set', () => {
+      // The input doesn't get the combobox's inputProps (as in Vue), so the popover's anchor shows whether it's open.
+      const isListOpen = () => document.querySelector('.d-popover__anchor--opened') !== null;
+
       beforeEach(() => {
         props = { label: 'Label Text', selectedItems: ['1'] };
         mountWrapper();
       });
 
       it('should open the list when the input is focused, and close it on Escape', async () => {
+        expect(isListOpen()).toBe(false);
         await act(async () => { getInput().focus(); });
-        expect(getInput()).toHaveAttribute('aria-expanded', 'true');
+        expect(isListOpen()).toBe(true);
+        // The combobox handles Escape once the popover has opened, and reported its list.
+        await finishTransitions();
+        await act(async () => {});
         await userEvent.keyboard('{Escape}');
-        expect(getInput()).toHaveAttribute('aria-expanded', 'false');
+        await finishTransitions();
+        expect(isListOpen()).toBe(false);
       });
 
       it('should reopen the list when the focused input is clicked', async () => {
         await act(async () => { getInput().focus(); });
+        await finishTransitions();
+        await act(async () => {});
         await userEvent.keyboard('{Escape}');
+        await finishTransitions();
+        expect(isListOpen()).toBe(false);
         await userEvent.click(getInput());
-        expect(getInput()).toHaveAttribute('aria-expanded', 'true');
+        expect(isListOpen()).toBe(true);
       });
 
       it('should close the list when focus moves to a chip, and reopen it when it moves back', async () => {
         await act(async () => { getInput().focus(); });
         await userEvent.keyboard('{ArrowLeft}');
-        expect(getInput()).toHaveAttribute('aria-expanded', 'false');
+        expect(isListOpen()).toBe(false);
         await userEvent.keyboard('{ArrowRight}');
-        expect(getInput()).toHaveAttribute('aria-expanded', 'true');
+        expect(isListOpen()).toBe(true);
       });
 
       it('should close the list on a mousedown outside it', async () => {
         await act(async () => { getInput().focus(); });
         await act(async () => { fireEvent.mouseDown(document.body); });
-        expect(getInput()).toHaveAttribute('aria-expanded', 'false');
+        expect(isListOpen()).toBe(false);
+      });
+
+      it('should keep the list open on a mousedown in the input', async () => {
+        await act(async () => { getInput().focus(); });
+        await act(async () => { fireEvent.mouseDown(getInput()); });
+        expect(isListOpen()).toBe(true);
       });
     });
 

@@ -7,7 +7,7 @@ import {
   useState,
   type DOMAttributes,
   type FocusEvent,
-  type FormEvent,
+  type InputEvent,
   type KeyboardEvent,
   type MouseEvent as ReactMouseEvent,
   type ReactNode,
@@ -307,14 +307,23 @@ export function DtComboboxMultiSelect ({
   // (mirrored back through onOpened, when the popover closes itself) and does what DtComboboxWithPopover would.
   const [listShown, setListShown] = useState(false);
 
+  // Applied in a microtask, so it renders at React's default priority. The popover reports each time it finishes
+  // opening or closing through onOpenChange, from a microtask, with the value DtComboboxWithPopover already holds, and
+  // React queues that update without rendering. A showList change rendered at a higher priority (in a keydown or click)
+  // skips the queued update, and the state DtComboboxWithPopover sets during that render to follow showList is then
+  // lost: the list closes and opens again at once. At default priority, both are rendered together.
+  const changeListShown = (shown: boolean) => {
+    queueMicrotask(() => setListShown(shown));
+  };
+
   const showComboboxList = () => {
     if (showList != null) return;
-    setListShown(true);
+    changeListShown(true);
   };
 
   const closeComboboxList = () => {
     if (showList != null) return;
-    setListShown(false);
+    changeListShown(false);
   };
 
   // Vue's showValidationMessages, which checkMaxSelected sets whenever selectedItems changes; derived here.
@@ -407,7 +416,12 @@ export function DtComboboxMultiSelect ({
   };
 
   // Distance from the first chip row to the row the caret belongs on.
-  const getCaretRowTop = (lastChip: HTMLElement, firstChip: HTMLElement | null, hasSpace: boolean, isWrapped: boolean) => {
+  const getCaretRowTop = (
+    lastChip: HTMLElement,
+    firstChip: HTMLElement | null,
+    hasSpace: boolean,
+    isWrapped: boolean,
+  ) => {
     // Chip fits beside the cursor on the first row; CSS centers it already.
     if ((hasSpace && !isWrapped) || !firstChip) return null;
     // Measured rather than offsetTop, which rounds to whole pixels and drifts
@@ -684,10 +698,11 @@ export function DtComboboxMultiSelect ({
     }
   };
 
-  const handleInput = (event: FormEvent<HTMLInputElement>) => {
+  const handleInput = (event: InputEvent<InputElement>) => {
     onValueChange?.(event.currentTarget.value);
     if (hasSuggestionList) showComboboxList();
-    onInput?.(event);
+    // DtInput is typed for a textarea too, but renders an <input> here: its type is never 'textarea'.
+    onInput?.(event as InputEvent<HTMLInputElement>);
   };
 
   const handleInputClick = (event: ReactMouseEvent<HTMLInputElement>) => {
