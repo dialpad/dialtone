@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { createRef, type ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { DtProse, type DtProseProps } from './Prose';
@@ -36,6 +36,15 @@ describe('DtProse Tests', () => {
       expect(classesOf(prose())).toContain('d-prose');
     });
 
+    it('Should forward root props and the caller ref to the same div', () => {
+      const ref = createRef<HTMLDivElement>();
+
+      setWrapper({ id: 'my-prose', ref });
+
+      expect(screen.getByTestId(PROSE_TEST_ID).id).toBe('my-prose');
+      expect(ref.current).toBe(screen.getByTestId(PROSE_TEST_ID));
+    });
+
     it('Should render slot content inside the wrapper', () => {
       const { prose } = setWrapper({}, <p>Hello world</p>);
 
@@ -44,53 +53,24 @@ describe('DtProse Tests', () => {
   });
 
   describe('Validation — Disallowed Elements', () => {
-    it('Should console.error when slot contains <form>', () => {
+    it.each([
+      ['Should console.error when slot contains <form>', '<form><div>form content</div></form>', 'form'],
+      ['Should console.error when slot contains <input>', '<div><input type="text"></div>', 'input'],
+      ['Should console.error when slot contains <select>', '<div><select><option>A</option></select></div>', 'select'],
+      ['Should console.error when slot contains <textarea>', '<div><textarea></textarea></div>', 'textarea'],
+      ['Should console.error when slot contains <button>', '<div><button>Click</button></div>', 'button'],
+      [
+        'Should console.error when slot contains a custom element',
+        '<div><my-component>content</my-component></div>',
+        'my-component',
+      ],
+    ])('%s', (_title, markup, tag) => {
       const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-      setWrapper({}, html('<form><div>form content</div></form>'));
+      setWrapper({}, html(markup));
 
       expect(consoleError).toHaveBeenCalledWith(
-        expect.stringContaining('<form> is not allowed'),
-      );
-    });
-
-    it('Should console.error when slot contains <input>', () => {
-      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      setWrapper({}, html('<div><input type="text"></div>'));
-
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringContaining('<input> is not allowed'),
-      );
-    });
-
-    it('Should console.error when slot contains <select>', () => {
-      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      setWrapper({}, html('<div><select><option>A</option></select></div>'));
-
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringContaining('<select> is not allowed'),
-      );
-    });
-
-    it('Should console.error when slot contains <textarea>', () => {
-      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      setWrapper({}, html('<div><textarea></textarea></div>'));
-
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringContaining('<textarea> is not allowed'),
-      );
-    });
-
-    it('Should console.error when slot contains <button>', () => {
-      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      setWrapper({}, html('<div><button>Click</button></div>'));
-
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringContaining('<button> is not allowed'),
+        expect.stringContaining(`<${tag}> is not allowed`),
       );
     });
 
@@ -102,27 +82,18 @@ describe('DtProse Tests', () => {
       expect(consoleError).not.toHaveBeenCalled();
     });
 
-    it('Should console.error when slot contains a custom element', () => {
-      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      setWrapper({}, html('<div><my-component>content</my-component></div>'));
-
-      expect(consoleError).toHaveBeenCalledWith(
-        expect.stringContaining('<my-component> is not allowed'),
-      );
-    });
-
     it('Should re-validate when content changes after mount', () => {
       const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       const { rerender } = render(<DtProse>{html('<p>Clean</p>')}</DtProse>);
       expect(consoleError).not.toHaveBeenCalled();
 
-      rerender(<DtProse>{html('<form>injected</form>')}</DtProse>);
+      rerender(<DtProse>{html('<form class="late">injected</form>')}</DtProse>);
 
       expect(consoleError).toHaveBeenCalledWith(
         expect.stringContaining('<form> is not allowed'),
       );
+      expect(queryIn('form').hasAttribute('class')).toBe(false);
     });
   });
 
