@@ -524,6 +524,27 @@ describe('DtSelectMenu Tests', () => {
 
           expect(consoleWarnSpy).toHaveBeenCalledWith('Invalid prop: custom validator check failed for prop "options".');
         });
+
+        it('should warn, not throw, when an entry is null', () => {
+          // @ts-expect-error a null entry is rejected
+          mockProps = { options: [null], children: SLOTTED_OPTIONS };
+
+          updateWrapper();
+
+          expect(consoleWarnSpy).toHaveBeenCalledWith('Invalid prop: custom validator check failed for prop "options".');
+          expect(select.querySelectorAll('option').length).toBe(2);
+        });
+      });
+
+      describe('When options is null', () => {
+        it('renders the slotted options without warning, as Vue does', () => {
+          mockProps = { options: null, children: SLOTTED_OPTIONS };
+
+          updateWrapper();
+
+          expect(consoleWarnSpy).not.toHaveBeenCalled();
+          expect(select.querySelectorAll('option').length).toBe(2);
+        });
       });
     });
 

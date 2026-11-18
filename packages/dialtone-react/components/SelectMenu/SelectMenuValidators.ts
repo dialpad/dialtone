@@ -19,6 +19,11 @@ export const optionsValidator = (options?: readonly OptionLike[] | null) => {
   }
 
   return options.every(option => {
+    // A null entry is invalid, not a crash: the validator runs in an effect, whatever the options render.
+    if (!option) {
+      return false;
+    }
+
     if (!hasValidOptionValue(option)) {
       return false;
     }

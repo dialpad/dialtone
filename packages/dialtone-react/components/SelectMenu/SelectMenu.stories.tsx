@@ -213,7 +213,14 @@ type Story = StoryObj<SelectMenuStoryArgs>;
 function htmlOptions (html: string): ReactNode {
   const parsed = new DOMParser().parseFromString(`<select>${html}</select>`, 'text/html');
   return Array.from(parsed.querySelectorAll('option'), (option, index) => (
-    <option key={index} value={option.value} disabled={option.disabled}>{option.textContent}</option>
+    <option
+      key={index}
+      value={option.value}
+      label={option.getAttribute('label') ?? undefined}
+      disabled={option.disabled}
+    >
+      {option.textContent}
+    </option>
   ));
 }
 

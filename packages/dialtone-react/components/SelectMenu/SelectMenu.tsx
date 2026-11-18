@@ -54,7 +54,7 @@ interface DtSelectMenuOwnProps extends MessagesProps {
    * Select Menu Options, overridden by `children`. Each option has the following structure:
    * `{ value: number || string (required), label: string (required) }`
    */
-  options?: SelectMenuOption[];
+  options?: SelectMenuOption[] | null;
 
   /**
    * Controls the size of the select
@@ -213,7 +213,8 @@ export function DtSelectMenu ({
 
   // Vue checks this in mounted() and beforeUpdate(), so on every render. The render's own token keeps StrictMode's
   // second run of the same render from warning twice.
-  const optionsMissing = options.length < 1 && children === undefined;
+  // A null `options` is Vue's absent list: it renders nothing and doesn't warn (`this.options?.length < 1`).
+  const optionsMissing = options !== null && options.length < 1 && children === undefined;
   const renderToken = {};
   const checkedRender = useRef<object | null>(null);
   useEffect(() => {
@@ -305,7 +306,7 @@ export function DtSelectMenu ({
           >
             {hasChildOptions
               ? children
-              : options.map(option => (
+              : options?.map(option => (
                 <option
                   key={`select-${selectKey}-option-${option.value}`}
                   value={option.value}
