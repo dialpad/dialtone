@@ -113,6 +113,8 @@ export default meta;
 type Story = StoryObj<SegmentedControlStoryArgs>;
 
 // SegmentedControlDefault.story.vue
+// Storybook calls `render` inside its preview-hook context, so `useArgs` has to be called here and not in a
+// child component, which React renders after that context is gone.
 function SegmentedControlDefault (args: SegmentedControlStoryArgs) {
   // The `value` control sets the selection, and clicks write back to it so the control stays in sync.
   const [, updateArgs] = useArgs<SegmentedControlStoryArgs>();
@@ -527,7 +529,7 @@ function SegmentedControlVariants () {
 }
 
 export const Default: Story = {
-  render: args => <SegmentedControlDefault {...args} />,
+  render: SegmentedControlDefault,
   args: {},
 };
 
