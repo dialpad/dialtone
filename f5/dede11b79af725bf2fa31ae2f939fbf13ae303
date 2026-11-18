@@ -1,0 +1,26 @@
+packages/dialtone-vue/components/FilterPill/FilterPillOptionRows.test.js
+  s_8716e901949c29::t_65b156ec290138 1-157,160-196
+  s_8716e901949c29::t_cc1fe07e9b41e6 158
+  s_8716e901949c29::t_c27f488a9e4717 159
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_8716e901949c29::t_b4ac6a471e50c1 342-344,348-351,353,357,362-372,385-386
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_8716e901949c29::t_42f7cf1481e844 256-259
+  s_8716e901949c29::t_2de31b3c813d42 288,290
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f5dede11b79af725bf2fa31ae2f939fbf13ae303",
+  "prompts": {},
+  "sessions": {
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

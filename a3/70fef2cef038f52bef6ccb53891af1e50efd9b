@@ -1,0 +1,29 @@
+packages/dialtone-react/components/TextList/TextList.test.tsx
+  s_a2f8f744215652::t_197f710d682cae 1,365,370-371
+packages/dialtone-react/components/TextList/TextListItem.tsx
+  s_b97c2b2fb9087a::t_b87b25dcd7fb46 69-70,107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a370fef2cef038f52bef6ccb53891af1e50efd9b",
+  "prompts": {},
+  "sessions": {
+    "s_a2f8f744215652": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1460f7ca-7c26-492a-9f35-9fd86425f481",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_b97c2b2fb9087a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ddb38b99-439f-4030-b0bc-d61995ce7735",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

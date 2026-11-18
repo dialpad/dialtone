@@ -1,0 +1,34 @@
+apps/dialtone-documentation/scripts/data/metadata.mjs
+  s_35758a979f0a53::t_ed1a0c4b38b8ff 52-53
+  s_35758a979f0a53::t_1f59755d0afd35 44-51,54-87,89,94,98-106
+  s_35758a979f0a53::t_fcb18afa4d8842 88,90-93,95-97
+apps/dialtone-documentation/docs/_data/spacing.json
+  s_35758a979f0a53::t_d9e76def41228e 241,253,259,265,271,283,289,295
+  s_35758a979f0a53::t_30c2cb61feb40f 3-27
+  s_35758a979f0a53::t_819b717c439bc0 242-245,254-258,260-264,266-270,272-275,284-288,290-294,296-299
+apps/dialtone-documentation/scripts/data/token-values.mjs
+  s_35758a979f0a53::t_efdc7291246c52 131-135
+apps/dialtone-documentation/scripts/data/emit-spacing.mjs
+  s_35758a979f0a53::t_68888ee07437e3 22-24
+  s_35758a979f0a53::t_b76a71f98fdceb 25-28,30,33,36
+  s_35758a979f0a53::t_ed260777c7dd69 1-4,8-9,11-21,29,31-32,34-35,37-47
+  s_35758a979f0a53::t_9e38a25b6b40ca 5-7,10
+apps/dialtone-documentation/scripts/generate-data.mjs
+  s_35758a979f0a53::t_f512607f4db139 21,24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "c2899aed5bb5b0851350a085c269ba8a1bfc3337",
+  "prompts": {},
+  "sessions": {
+    "s_35758a979f0a53": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e95815f4-bd6d-4938-b966-268ab186f0b7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

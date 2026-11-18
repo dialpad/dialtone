@@ -1,0 +1,49 @@
+packages/dialtone-react/components/EmojiPicker/Composables/UseKeyboardNavigation.ts
+  s_cfe4002585b875::t_4ce4b027b16f89 1-223
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.parity.tsx
+  s_cfe4002585b875::t_657e6415c124f2 1-4
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.stories.tsx
+  s_cfe4002585b875::t_13c415924b6324 1-218
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.test.tsx
+  s_76cf110705b3b9::t_f49593f1133f4e 1-525
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.tsx
+  s_cfe4002585b875::t_a6c2772bca6b86 1-244
+packages/dialtone-react/components/EmojiPicker/EmojiPickerConstants.ts
+  s_cfe4002585b875::t_dbe3be43ff00ee 1-41
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiDescription.tsx
+  s_cfe4002585b875::t_3c4ac5f58765b4 1-34
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiSearch.tsx
+  s_cfe4002585b875::t_32518817191279 1-96
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiSelector.tsx
+  s_cfe4002585b875::t_7c620aa01460f2 1-509
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiSkinSelector.tsx
+  s_76cf110705b3b9::t_679c1f0c78c58a 1-218
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiTabset.tsx
+  s_cfe4002585b875::t_39a992351cac4f 1-170
+packages/dialtone-react/components/EmojiPicker/index.ts
+  s_cfe4002585b875::t_5399b60676c9c5 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cb7c0bf738be3a1071cc01ed3f06fdc587c3cff5",
+  "prompts": {},
+  "sessions": {
+    "s_76cf110705b3b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4abf4a2e-b3a1-49c7-917e-47f1db667c04",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_cfe4002585b875": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "79ff25c5-8289-49a4-a045-2b128ed27f93",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

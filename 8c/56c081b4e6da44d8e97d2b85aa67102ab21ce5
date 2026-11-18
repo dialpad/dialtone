@@ -1,0 +1,23 @@
+packages/dialtone-react/components/MotionText/MotionText.stories.tsx
+  s_451ff8ec10048b::t_a8216a92d45304 36-37,51-52,95,133-134,164-165
+packages/dialtone-react/components/MotionText/MotionText.test.tsx
+  s_451ff8ec10048b::t_45e44d0fef60a2 1,319,321,550-588
+packages/dialtone-react/components/MotionText/MotionText.tsx
+  s_451ff8ec10048b::t_ba6cc94512a2e6 53-57,377-379,558-559,561,655-658
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8c56c081b4e6da44d8e97d2b85aa67102ab21ce5",
+  "prompts": {},
+  "sessions": {
+    "s_451ff8ec10048b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3bfff73b-d83e-43ba-8140-5ee241d54a6c",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
