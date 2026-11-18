@@ -1,5 +1,5 @@
 import { useEffect, useEffectEvent, useRef } from 'react';
-import { autoUpdate, computePosition, flip, hide, offset, shift, size } from '@floating-ui/dom';
+import { autoUpdate, computePosition, flip, hide, offset, shift, size, type Placement } from '@floating-ui/dom';
 import { sameValues } from '../utils';
 import type { ResolvedSliderProps } from './types';
 
@@ -35,40 +35,22 @@ interface Entry {
   cleanup: (() => void) | null;
 }
 
-// Each readout is a native manual popover kept in place in the DOM (so it
-// inherits local themes), positioned with Floating UI and shown only while
-// its thumb is hovered, dragged or focused.
-export function useSliderTooltipReadout (props: ResolvedSliderProps, {
-  thumbVisualEls,
-  tooltipEls,
-  isVertical,
-  isRtl,
-  readoutVisibility,
-  formattedValues,
-  onPosition,
-}: {
-  thumbVisualEls: { current: (HTMLElement | null)[] };
-  tooltipEls: { current: (HTMLElement | null)[] };
-  isVertical: boolean;
-  isRtl: boolean;
-  readoutVisibility: boolean[];
-  formattedValues: string[];
+/** What the open readouts read from the component, always its latest render. */
+interface ReadoutCallbacks {
+  shouldOpen: (index: number) => boolean;
+  placement: () => Placement;
   onPosition: () => void;
-}) {
-  const entries = useRef(new Map<number, Entry>());
+}
 
-  // Read by positioning code the effects set up (autoUpdate, animation
-  // frames), so they always see the latest props.
-  const shouldOpen = useEffectEvent((index: number) => (
-    props.readout === 'tooltip' && !props.disabled && !!readoutVisibility[index]
-  ));
-  const placement = useEffectEvent(() => (isVertical ? (isRtl ? 'left' : 'right') : 'top'));
-  const positioned = useEffectEvent(() => onPosition());
+// The open readouts and their positioning loops, outside React: Floating UI
+// and animation frames drive them between renders.
+function createTooltipReadouts ({ shouldOpen, placement, onPosition }: ReadoutCallbacks) {
+  const entries = new Map<number, Entry>();
 
   function close (index: number) {
-    const entry = entries.current.get(index);
+    const entry = entries.get(index);
     if (!entry) return;
-    entries.current.delete(index);
+    entries.delete(index);
     entry.cleanup?.();
     if (entry.tooltip.matches(':popover-open')) entry.tooltip.hidePopover();
   }
@@ -81,7 +63,7 @@ export function useSliderTooltipReadout (props: ResolvedSliderProps, {
     let geometry: unknown[] | null = null;
     let frame: number | undefined;
     const entry: Entry = { anchor, tooltip, update, cleanup: null };
-    const isLive = () => entries.current.get(index) === entry;
+    const isLive = () => entries.get(index) === entry;
 
     function currentVisibility () {
       return referenceHidden || !isAnchorVisible(anchor) ? 'hidden' : 'visible';
@@ -156,7 +138,7 @@ export function useSliderTooltipReadout (props: ResolvedSliderProps, {
       const next = [result.x, result.y, width, height, side, visibility];
       if (!geometry || !sameValues(next, geometry)) {
         geometry = next;
-        positioned();
+        onPosition();
       }
     }
 
@@ -173,7 +155,7 @@ export function useSliderTooltipReadout (props: ResolvedSliderProps, {
       if (isLive()) frame = requestAnimationFrame(checkFrame);
     }
 
-    entries.current.set(index, entry);
+    entries.set(index, entry);
     reveal();
     const stopPositioning = autoUpdate(anchor, tooltip, update, { layoutShift: false });
     checkFrame();
@@ -183,20 +165,76 @@ export function useSliderTooltipReadout (props: ResolvedSliderProps, {
     };
   }
 
+  return {
+    entries,
+    open,
+    close,
+    closeAll () {
+      for (const index of [...entries.keys()]) close(index);
+    },
+  };
+}
+
+// Each readout is a native manual popover kept in place in the DOM (so it
+// inherits local themes), positioned with Floating UI and shown only while
+// its thumb is hovered, dragged or focused.
+export function useSliderTooltipReadout (props: ResolvedSliderProps, {
+  thumbVisualEls,
+  tooltipEls,
+  isVertical,
+  isRtl,
+  readoutVisibility,
+  formattedValues,
+  onPosition,
+}: {
+  thumbVisualEls: { current: (HTMLElement | null)[] };
+  tooltipEls: { current: (HTMLElement | null)[] };
+  isVertical: boolean;
+  isRtl: boolean;
+  readoutVisibility: boolean[];
+  formattedValues: string[];
+  onPosition: () => void;
+}) {
+  const readouts = useRef<ReturnType<typeof createTooltipReadouts> | null>(null);
+
+  // Read by the positioning code the effects set up (autoUpdate, animation
+  // frames), so they always see the latest props.
+  const shouldOpen = useEffectEvent((index: number) => (
+    props.readout === 'tooltip' && !props.disabled && !!readoutVisibility[index]
+  ));
+  const placement = useEffectEvent((): Placement => (isVertical ? (isRtl ? 'left' : 'right') : 'top'));
+  const positioned = useEffectEvent(() => onPosition());
+
+  // Declared before the sync effect below, so the readouts exist when it first runs.
+  useEffect(() => {
+    const tracker = createTooltipReadouts({
+      shouldOpen: (index) => shouldOpen(index),
+      placement: () => placement(),
+      onPosition: () => positioned(),
+    });
+    readouts.current = tracker;
+    return () => {
+      tracker.closeAll();
+      readouts.current = null;
+    };
+  }, []);
+
   const sync = useEffectEvent(() => {
-    for (const [index, entry] of entries.current) {
+    const tracker = readouts.current;
+    if (!tracker) return;
+    for (const [index, entry] of tracker.entries) {
       if (!shouldOpen(index) ||
           thumbVisualEls.current[index] !== entry.anchor || tooltipEls.current[index] !== entry.tooltip) {
-        close(index);
+        tracker.close(index);
       }
     }
     readoutVisibility.forEach((_, index) => {
       const anchor = thumbVisualEls.current[index];
       const tooltip = tooltipEls.current[index];
       if (!anchor || !tooltip || !shouldOpen(index)) return;
-      const entry = entries.current.get(index);
+      const entry = tracker.entries.get(index);
       if (entry) entry.update();
-      else open(index, anchor, tooltip);
+      else tracker.open(index, anchor, tooltip);
     });
   });
 
@@ -204,17 +242,4 @@ export function useSliderTooltipReadout (props: ResolvedSliderProps, {
   // mount and whenever any of these change.
   const key = JSON.stringify([props.readout, props.disabled, isVertical, isRtl, formattedValues, readoutVisibility]);
   useEffect(() => sync(), [key]);
-
-  useEffect(() => {
-    const open = entries.current;
-    return () => {
-      for (const index of [...open.keys()]) {
-        const entry = open.get(index);
-        if (!entry) continue;
-        open.delete(index);
-        entry.cleanup?.();
-        if (entry.tooltip.matches(':popover-open')) entry.tooltip.hidePopover();
-      }
-    };
-  }, []);
 }

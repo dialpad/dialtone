@@ -263,11 +263,18 @@ export function useSliderCollisionAvoidance (props: ResolvedSliderProps, {
   }, [layoutKey, contentKey, updateRequests, props.readout]);
 
   useEffect(() => {
-    updateCollisions();
-    if (typeof ResizeObserver === 'undefined' || !controlEl) return undefined;
-    const observer = new ResizeObserver(() => requestUpdate());
-    observer.observe(controlEl);
-    return () => observer.disconnect();
+    // Vue measures once its own patch has settled (onMounted, then nextTick
+    // twice); the first frame is the React equivalent.
+    const frame = requestAnimationFrame(() => updateCollisions());
+    let observer: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined' && controlEl) {
+      observer = new ResizeObserver(() => requestUpdate());
+      observer.observe(controlEl);
+    }
+    return () => {
+      cancelAnimationFrame(frame);
+      observer?.disconnect();
+    };
   }, [controlEl]);
 
   return {

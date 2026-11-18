@@ -56,12 +56,6 @@ export interface DtSliderHandle {
   blur: () => void;
 }
 
-// These go to each native thumb <input> instead of the root — the wrapper
-// <div> isn't a form control, so leaving them there would duplicate the name
-// and strand the rest where assistive tech querying the input never sees them.
-type ThumbAriaKey = 'aria-label' | 'aria-labelledby' | 'aria-describedby' | 'aria-errormessage' | 'aria-details'
-  | 'aria-invalid';
-
 interface DtSliderOwnProps {
   /**
    * The current value (Vue's modelValue). A number enables single-thumb mode; an array of two numbers enables range

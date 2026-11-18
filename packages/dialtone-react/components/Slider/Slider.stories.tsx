@@ -281,7 +281,7 @@ export const argTypesData = {
   onBlur: {
     table: { disable: true },
   },
-};
+} satisfies Meta<SliderStoryArgs>['argTypes'];
 
 // Story Collection
 const meta = {
