@@ -1,3 +1,4 @@
+import { devWarn } from '../dev';
 import {
   CONFIG_KEYS,
   FOCUSABLE_SELECTOR,
@@ -33,7 +34,7 @@ function parseStringConfig (config: FocusgroupConfig, value: string, unknownToke
 
 /** Logs Vue's warning for a token parseConfig doesn't know. */
 export function warnUnknownToken (token: string) {
-  console.warn(
+  devWarn(
     `[DtFocusgroupDirective] Unknown token "${token}". ` +
     `Valid tokens: ${Object.keys(TOKEN_MAP).join(', ')}.`,
   );

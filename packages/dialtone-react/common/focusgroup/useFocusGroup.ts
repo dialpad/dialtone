@@ -1,4 +1,5 @@
 import { useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, type RefObject } from 'react';
+import { devWarn } from '../dev';
 import type { FocusgroupAxis, FocusgroupConfig } from './focusgroup_constants';
 import {
   configsEqual,
@@ -250,7 +251,7 @@ function attach (el: HTMLElement, config: FocusgroupConfig, warnIfEmpty: boolean
   const items = getItems(el, selector);
   if (!items.length && warnIfEmpty) {
     const role = el.getAttribute('role');
-    console.warn(
+    devWarn(
       `[DtFocusgroupDirective] No items found for selector "${selector}"` +
       (role ? ` (inferred from role="${role}")` : '') +
       '. Check that items match the selector, or provide an explicit selector via ' +
