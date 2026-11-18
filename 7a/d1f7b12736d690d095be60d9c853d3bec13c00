@@ -1,0 +1,76 @@
+packages/dialtone-react/components/DescriptionList/DescriptionList.stories.tsx
+  s_a4121f9acecc61::t_36223c786c3e77 1-152
+packages/dialtone-react/components/DescriptionList/DescriptionList.test.tsx
+  s_a4121f9acecc61::t_fe5737b947358d 1-192
+packages/dialtone-react/components/DescriptionList/DescriptionList.parity.tsx
+  s_1f32ad82c561e4::t_6c1862d5f17376 1-4
+packages/dialtone-react/components/DescriptionList/DescriptionList.tsx
+  s_5e4186e8a0001d::t_6a179e05ab3b09 1-86
+packages/dialtone-react/components/DescriptionList/DescriptionListConstants.ts
+  s_391fc9f13256b4::t_130f63823c43b9 1-3
+packages/dialtone-react/components/DescriptionList/index.ts
+  s_1f32ad82c561e4::t_3897568c7d4e84 1-2
+packages/dialtone-react/parity/vue/goldens.test.js
+  s_2defdf83601f66::t_b5bc6635b95730 235-238
+  s_2defdf83601f66::t_314024357a81d1 220,222-226
+  s_2defdf83601f66::t_6a137194014544 13
+packages/dialtone-react/parity/extra-cases.mjs
+  s_2defdf83601f66::t_656edbc3bfa060 27-28
+  s_2defdf83601f66::t_8ec27335e1820b 9
+  s_2defdf83601f66::t_3659e260287326 19-26,29-30
+  s_2defdf83601f66::t_b0a799c062fe2e 1-2
+packages/dialtone-react/parity/changed-units.test.mjs
+  s_2defdf83601f66::t_1725d1629a413f 384-398
+packages/dialtone-react/parity/cases.mjs
+  s_2defdf83601f66::t_1b76a1735b2d0c 128-135
+packages/dialtone-react/parity/changed-units.mjs
+  s_2defdf83601f66::t_a036160a6954c9 26,181
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7ad1f7b12736d690d095be60d9c853d3bec13c00",
+  "prompts": {},
+  "sessions": {
+    "s_1f32ad82c561e4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "365078ec-7b86-4249-bffa-43b62089c9ff",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_391fc9f13256b4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b2ae8902-91c9-4299-8d95-a570f55ec034",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_5e4186e8a0001d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4070e03c-441e-4b77-a093-49cf854f57bf",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_a4121f9acecc61": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4364d89-7341-46c4-a88e-879be4230f7b",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
