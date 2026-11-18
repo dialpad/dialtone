@@ -12,6 +12,7 @@ import {
   type Ref,
 } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
+import { devWarn } from '../../common/dev';
 import { DtRouterLink, type DtLinkTo } from '../../common/link';
 import { useI18n } from '../../common/localization';
 import { hasContent, renderSlot, type SlotProp } from '../../common/slots';
@@ -503,7 +504,8 @@ export function DtButton ({
 
 /**
  * Vue's `propCombination` watcher (immediate): warns about combinations the design system doesn't have, on mount and
- * whenever one of them changes. The ref keeps StrictMode's second effect run from warning twice.
+ * whenever one of them changes. Like Vue's, the warnings are development-only (common/dev.ts). The ref keeps
+ * StrictMode's second effect run from warning twice.
  */
 function useValidatePropCombination (circle: boolean, kind: string, importance: string, link: boolean) {
   const lastChecked = useRef<string | null>(null);
@@ -513,12 +515,12 @@ function useValidatePropCombination (circle: boolean, kind: string, importance: 
     lastChecked.current = combination;
 
     if (circle && link) {
-      console.warn('You cannot enable circle and link at the same time');
+      devWarn('You cannot enable circle and link at the same time');
     }
     // Unstyled buttons skip validation.
     if (kind === 'unstyled') return;
     const invalid = INVALID_COMBINATION.find(row =>
       row.circle === circle && row.kind === kind && row.importance === importance);
-    if (invalid) console.warn(invalid.message);
+    if (invalid) devWarn(invalid.message);
   }, [circle, kind, importance, link]);
 }
