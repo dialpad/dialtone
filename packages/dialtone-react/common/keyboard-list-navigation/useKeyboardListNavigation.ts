@@ -92,7 +92,7 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
     const itemSelector = () => {
       const role = opts().listItemRole ?? 'option';
       const roles = Array.isArray(role) ? role : [role];
-      return `${roles.map(r => `[role="${r}"]`).join(', ')}, #sr-only-close-button`;
+      return [...roles.map(r => `[role="${r}"]`), '#sr-only-close-button'].join(', ');
     };
 
     // Gets all the list item nodes within the list element, uses the listItemRole option to determine
