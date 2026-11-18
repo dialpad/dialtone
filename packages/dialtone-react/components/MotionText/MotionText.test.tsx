@@ -620,6 +620,100 @@ describe('DtMotionText Tests', () => {
         });
         expect(getEmittedCount('complete')).toBe(1);
       });
+
+      it('should publish the stopped state when it keeps slotted words', async () => {
+        const activity = (mode: 'visible' | 'hidden') => (
+          <Activity mode={mode}>
+            <DtMotionText ref={(instance) => { handle = instance; }} animationMode="gradient-in" autoStart={false}>
+              {MOCK_FIGMA_TEXT}
+            </DtMotionText>
+          </Activity>
+        );
+        wrapper!.unmount();
+        wrapper = render(activity('visible'));
+        await start();
+        await advance(100);
+        expect(getRoot().classList).toContain('d-motion-text--animating');
+        wrapper.rerender(activity('hidden'));
+        wrapper.rerender(activity('visible'));
+        await nextTick();
+
+        expect(getRoot().classList).not.toContain('d-motion-text--animating');
+        expect(getRoot().getAttribute('aria-live')).toBe('off');
+        expect(findWordTexts()).toEqual(MOCK_FIGMA_WORDS);
+      });
+
+      it('should read the new slot content when it changed while hidden', async () => {
+        const activity = (mode: 'visible' | 'hidden', children: string) => (
+          <Activity mode={mode}>
+            <DtMotionText ref={(instance) => { handle = instance; }} animationMode="gradient-in" autoStart={false}>
+              {children}
+            </DtMotionText>
+          </Activity>
+        );
+        wrapper!.unmount();
+        wrapper = render(activity('visible', 'Old status'));
+        await nextTick();
+        expect(findWordTexts()).toEqual(['Old', 'status']);
+        wrapper.rerender(activity('hidden', 'Old status'));
+        wrapper.rerender(activity('hidden', 'New status here'));
+        wrapper.rerender(activity('visible', 'New status here'));
+        await nextTick();
+
+        expect(findWordTexts()).toEqual(['New', 'status', 'here']);
+      });
+
+      it('should play the new slot words when start() is called as the text prop is removed', async () => {
+        let startOnAttach = false;
+        const activity = (mode: 'visible' | 'hidden', text: string | undefined, children?: string) => (
+          <Activity mode={mode}>
+            <DtMotionText
+              ref={(instance) => {
+                handle = instance;
+                if (startOnAttach) instance?.start();
+              }}
+              text={text}
+              animationMode="gradient-in"
+              autoStart={false}
+              onStart={record('start')}
+              onComplete={record('complete')}
+            >
+              {children}
+            </DtMotionText>
+          </Activity>
+        );
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(activity('visible', 'Some text'));
+        await nextTick();
+        wrapper.rerender(activity('hidden', 'Some text'));
+        startOnAttach = true;
+        wrapper.rerender(activity('visible', undefined, 'Slot words here'));
+        await nextTick();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(findWordTexts()).toEqual(['Slot', 'words', 'here']);
+        expect(getEmittedCount('start')).toBe(1);
+        expect(getEmittedCount('complete')).toBe(1);
+      });
+    });
+
+    describe('When a consumer passes dangerouslySetInnerHTML', () => {
+      it('should not accept it as a prop', () => {
+        // @ts-expect-error dangerouslySetInnerHTML is not part of DtMotionTextProps
+        const props: DtMotionTextProps = { dangerouslySetInnerHTML: { __html: '<b>x</b>' } };
+
+        expect(props).toBeDefined();
+      });
+
+      it('should ignore it from an untyped caller and render the text', () => {
+        const untyped = { text: MOCK_FIGMA_TEXT, autoStart: false, dangerouslySetInnerHTML: { __html: '<b>x</b>' } };
+        wrapper!.unmount();
+        wrapper = render(<DtMotionText {...untyped} />);
+
+        expect(getRoot().querySelector('b')).toBeNull();
+        expect(findWordTexts()).toEqual(MOCK_FIGMA_WORDS);
+      });
     });
 
     describe('When start() is called from a callback ref', () => {

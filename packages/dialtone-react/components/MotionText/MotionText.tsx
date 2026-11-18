@@ -120,7 +120,7 @@ export interface DtMotionTextProps extends NativeAttributes {
 
 type LatestProps = Required<Pick<DtMotionTextProps,
   'text' | 'animationMode' | 'speed' | 'autoStart' | 'loop' | 'respectsReducedMotion'>> &
-  Pick<DtMotionTextProps, 'onStart' | 'onComplete' | 'onProgress' | 'onPause' | 'onResume'>;
+  Pick<DtMotionTextProps, 'children' | 'onStart' | 'onComplete' | 'onProgress' | 'onPause' | 'onResume'>;
 
 /** Vue's `data`: the playback state the timeline reads and writes synchronously. */
 interface Machine {
@@ -139,6 +139,12 @@ interface Machine {
   prefersReducedMotion: boolean;
   animationKey: number;
   cssIterations: number;
+  /** The slot input (children) the words were last tokenized from, to tell whether retained words are still valid. */
+  slotSource: ReactNode;
+  /** The slot is waiting to be read after its words were cleared, so the words aren't there to play yet. */
+  slotReadPending: boolean;
+  /** start() was called while the slot read was pending; it plays once the words are read. */
+  startRequested: boolean;
 }
 
 /** The part of the machine that renders. */
@@ -305,6 +311,12 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
   function start () {
     if (m.isAnimating || m.isUnmounted) return;
 
+    // The words are being re-read from the slot: play them once they're there, rather than completing on none
+    if (m.slotReadPending) {
+      m.startRequested = true;
+      return;
+    }
+
     clearTimeouts();
     m.isAnimating = true;
     m.isPaused = false;
@@ -366,6 +378,7 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     m.isPaused = false;
     m.isComplete = false;
     m.timelineElapsed = 0;
+    m.startRequested = false;
     m.animationKey++;
     commit();
     // Whole-text modes animate the root, which re-keying the words doesn't reset
@@ -441,18 +454,37 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
 
   /** Initialize content based on text prop or slot content */
   function initializeContent () {
-    // Word mode renders slot text as words, so the slot isn't mounted on an <Activity> reconnect: the words already
-    // tokenized from it are still valid, and reading the missing slot would empty them.
+    m.slotReadPending = false;
+
     if (props().text || slot()) {
       m.words = splitWords(props().text || getSlotText());
       m.wordWidths = [];
-      commit();
+      m.slotSource = props().children;
+    } else if (m.words.length && m.slotSource !== props().children) {
+      // Word mode renders slot text as words, so the slot isn't mounted on an <Activity> reconnect. The words kept
+      // from it are stale when the slot changed meanwhile: render the slot again and read it once it's there.
+      readSlotNextTick();
+      return;
     }
+    // Otherwise the retained words are still valid (reading the missing slot would empty them). Either way the
+    // stopped flags are published, as a reconnect after <Activity> hid a playing instance has them out of date.
+    commit();
 
     // Whole-text modes start even while empty, e.g. a slot that streams its content in
-    if (props().autoStart && (isWholeText() || m.words.length > 0)) {
+    const startRequested = m.startRequested;
+    m.startRequested = false;
+    if ((props().autoStart || startRequested) && (isWholeText() || m.words.length > 0)) {
       nextTick(start);
     }
+  }
+
+  /** Clear the words so the slot renders, then read it on the next tick. start() waits for that read. */
+  function readSlotNextTick () {
+    m.words = [];
+    m.wordWidths = [];
+    commit();
+    m.slotReadPending = true;
+    nextTick(initializeContent);
   }
 
   // Vue's watchers
@@ -479,9 +511,7 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     }
 
     // Slot content only renders once the words are cleared, so read it on the next tick
-    m.words = [];
-    commit();
-    nextTick(initializeContent);
+    readSlotNextTick();
   }
 
   function onAnimationModeChange (oldMode: string) {
@@ -493,11 +523,16 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
       reset();
       m.words = [];
       commit();
+      m.slotReadPending = true;
       nextTick(() => {
+        m.slotReadPending = false;
         m.words = splitWords(getSlotText());
         m.wordWidths = [];
+        m.slotSource = props().children;
         commit();
-        if (wasAnimating) nextTick(start);
+        const startRequested = m.startRequested;
+        m.startRequested = false;
+        if (wasAnimating || startRequested) nextTick(start);
       });
       return;
     }
@@ -559,16 +594,17 @@ export function DtMotionText ({
   className,
   style,
   ref,
+  ...restWithHtml
+}: DtMotionTextProps) {
   // Not in the props type; dropped so an untyped caller can't make React throw on the root
-  dangerouslySetInnerHTML: _dangerouslySetInnerHTML,
-  ...rest
-}: DtMotionTextProps & Pick<HTMLAttributes<HTMLSpanElement>, 'dangerouslySetInnerHTML'>) {
+  const { dangerouslySetInnerHTML: _dangerouslySetInnerHTML, ...rest } =
+    restWithHtml as typeof restWithHtml & Pick<HTMLAttributes<HTMLSpanElement>, 'dangerouslySetInnerHTML'>;
   const rootRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLSpanElement>(null);
   const slotRef = useRef<HTMLSpanElement>(null);
 
   const current: LatestProps = {
-    text, animationMode, speed, autoStart, loop, respectsReducedMotion,
+    text, animationMode, speed, autoStart, loop, respectsReducedMotion, children,
     onStart, onComplete, onProgress, onPause, onResume,
   };
   // The props the timeline's timers and the handle's methods read. Updated after each commit, before the watchers run.
@@ -592,6 +628,9 @@ export function DtMotionText ({
       prefersReducedMotion: false,
       animationKey: 0,
       cssIterations: 1,
+      slotSource: children,
+      slotReadPending: false,
+      startRequested: false,
     };
   }
   const machine = machineRef.current;
@@ -649,6 +688,8 @@ export function DtMotionText ({
       // timers go with the cleanup, so a playing animation can't carry on: leave it startable.
       machine.isAnimating = false;
       machine.isPaused = false;
+      machine.slotReadPending = false;
+      machine.startRequested = false;
       tickQueue.current = [];
       controller.clearTimeouts();
       stopWatchingReducedMotion?.();
