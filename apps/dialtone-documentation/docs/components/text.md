@@ -362,6 +362,39 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 </div>
 ```
 
+## Slide
+
+`slide` shows cut-off text in full by sliding it sideways while the text, or the closest focusable element around it (button, link, menu item), is hovered or has keyboard focus. Leaving or pressing Esc snaps it back. Text that fits never moves. Like `truncate`, it needs block or inline-block context, and it replaces `truncate`, `maxLines` and `wrap`.
+
+```vue demo
+<div class="d-w224">
+  <button type="button" class="d-w100p">
+    <dt-text as="div" variant="label-md" slide>Front desk reception phone, second floor east wing</dt-text>
+  </button>
+</div>
+```
+
+| Value | Motion |
+| --- | --- |
+| `true` or `once` | Slides to the end and rests there. The default; use it unless you have a reason not to. |
+| `bounce` | Slides to the end and back, holding 1 s at each end. |
+| `loop` | Scrolls round like a ticker with a gap before the repeat, holds 5 s, then goes again. |
+
+Each movement takes at most 3 s (`loop`: 5 s), and every mode stops as soon as hover and focus leave, so moving content never runs on its own for more than 5 s (WCAG 2.2.2). With reduced motion on, the text jumps to its end and stays.
+
+`DtText` never adds a tab stop. Put the text inside something focusable so keyboard users can reveal it; plain text with nothing focusable around it slides on hover only, so give its full content another way too.
+
+The defaults need no setup. To tune a menu, a sidebar or one element, set these CSS variables on it or any ancestor:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `--dt-text-slide-speed` | `40` | Speed in px per second (a number, no unit). |
+| `--dt-text-slide-delay` | `500ms` | Wait before the first movement. |
+| `--dt-text-slide-hold` | `1000ms` (bounce), `5000ms` (loop) | Pause at each end. |
+| `--dt-text-slide-easing` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | Easing for `once` and `bounce`; `loop` always moves steadily. |
+| `--dt-text-slide-fade-size` | `var(--dt-layout-100)` | Width of the edge fade. |
+| `--dt-text-slide-gap` | `var(--dt-spacing-400)` | Space before the repeat in `loop`. |
+
 ## Max Lines
 
 ```vue demo-only
@@ -563,7 +596,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 ## Accessibility
 
 - Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
-- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in.
+- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in. Inside a focusable element, `slide` gives keyboard and pointer users the full text without a tooltip.
 - Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
 
 ## Vue API

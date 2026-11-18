@@ -226,6 +226,11 @@
       "description": "Truncates text with ellipsis."
     },
     {
+      "class": "d-text--slide",
+      "applies": ".d-text",
+      "description": "Set by the slide prop: clips single-line text and fades its edges while it slides. Tune with the --dt-text-slide-* CSS variables."
+    },
+    {
       "class": "d-text--line-clamp",
       "applies": ".d-text",
       "description": "Enables multi-line truncation. Use with --dt-text-line-clamp CSS variable."
