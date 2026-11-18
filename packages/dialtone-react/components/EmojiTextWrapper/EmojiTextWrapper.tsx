@@ -72,7 +72,12 @@ function searchCodes (textContent: string, size: IconSize, key: number): ReactNo
  * as they are, as Vue's TODO for crawling Vue components leaves them.
  */
 function searchNodes (children: ReactNode, size: IconSize): ReactNode[] {
-  return Children.toArray(children).map((node, index) => searchNode(node, size, index));
+  // Children.toArray flattens nested arrays into one key scope (and leaves portal keys as they are), so each nested
+  // array is wrapped in a keyed Fragment first; searchNode then recurses into it with its own scope.
+  const level = Array.isArray(children)
+    ? children.map((child, index) => (Array.isArray(child) ? <Fragment key={`list-${index}`}>{child}</Fragment> : child))
+    : children;
+  return Children.toArray(level).map((node, index) => searchNode(node, size, index));
 }
 
 function searchNode (node: ReactNode, size: IconSize, key: number): ReactNode {
@@ -90,7 +95,10 @@ function searchNode (node: ReactNode, size: IconSize, key: number): ReactNode {
   // Vue replaces an element that has `innerHTML` (v-html) with the result of searching that string.
   // React also accepts a TrustedHTML object here, so it's turned into a string for the text search.
   const innerHTML = element.props.dangerouslySetInnerHTML?.__html;
-  if (innerHTML) return searchCodes(String(innerHTML), size, key);
+  if (innerHTML != null && String(innerHTML) !== '') return searchCodes(String(innerHTML), size, key);
+
+  // A textarea's string child is its initial value, so it can't become a Fragment.
+  if (element.type === 'textarea') return element;
 
   // Void elements (img, br) take no children.
   if (element.props.children == null) return element;
@@ -116,8 +124,9 @@ export function DtEmojiTextWrapper ({
       className={cx('d-emoji-text-wrapper', className)}
       {...rest}
     >
-      {/* React throws when both children and dangerouslySetInnerHTML are set, so forward root HTML alone. */}
-      {children == null && rest.dangerouslySetInnerHTML ? undefined : searchNodes(children, size)}
+      {/* React throws when both children and dangerouslySetInnerHTML are set, and when a void element (br) gets
+        an empty children array, so only pass children when there are some. */}
+      {children == null ? undefined : searchNodes(children, size)}
     </Tag>
   );
 }

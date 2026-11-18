@@ -1,5 +1,6 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { Fragment, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { DtEmojiTextWrapper, type DtEmojiTextWrapperProps } from './EmojiTextWrapper';
 import { getEmojiData, setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '../../common/emoji';
 import customEmojiJson from '../../common/custom-emoji.json';
@@ -208,9 +209,49 @@ describe('DtEmojiTextWrapper Tests', () => {
 
     it('searches a nested TrustedHTML-like __html as text', () => {
       cleanup();
-      const trusted = { toString: () => 'Hi :smile:' } as unknown as string;
+      const trusted = { toString: () => '<b>Hi</b> :smile:' } as unknown as string;
       render(<DtEmojiTextWrapper><p dangerouslySetInnerHTML={{ __html: trusted }} /></DtEmojiTextWrapper>);
-      expect(screen.getByTestId('emoji-text-wrapper').querySelector('img')).toBeInTheDocument();
+      const root = screen.getByTestId('emoji-text-wrapper');
+      expect(root.querySelector('img')).toBeInTheDocument();
+      expect(root.querySelector('b')).not.toBeInTheDocument();
+      expect(root).toHaveTextContent('<b>Hi</b>');
+    });
+
+    it('keeps a nested element with empty __html, as a string or TrustedHTML-like', () => {
+      cleanup();
+      const empty = { toString: () => '' } as unknown as string;
+      render(
+        <DtEmojiTextWrapper>
+          <p data-qa="a" dangerouslySetInnerHTML={{ __html: '' }} />
+          <p data-qa="b" dangerouslySetInnerHTML={{ __html: empty }} />
+        </DtEmojiTextWrapper>,
+      );
+      expect(screen.getByTestId('a')).toBeInTheDocument();
+      expect(screen.getByTestId('b')).toBeInTheDocument();
+    });
+
+    it('renders a void root element without children', () => {
+      cleanup();
+      const { container } = render(<DtEmojiTextWrapper elementType="br" />);
+      expect(container.querySelector('br')).toBeInTheDocument();
+    });
+
+    it('keeps a textarea child as its value', () => {
+      cleanup();
+      render(<DtEmojiTextWrapper><textarea data-qa="t">:smile:</textarea></DtEmojiTextWrapper>);
+      expect(screen.getByTestId('t')).toHaveValue(':smile:');
+    });
+
+    it('keeps portal keys scoped to their nested array', () => {
+      cleanup();
+      const target = document.createElement('div');
+      document.body.appendChild(target);
+      const list = (name: string) => [createPortal(<input data-qa={name} />, target, '1')];
+      const { rerender } = render(<DtEmojiTextWrapper>{[list('a'), list('b')]}</DtEmojiTextWrapper>);
+      const inputB = screen.getByTestId('b');
+      rerender(<DtEmojiTextWrapper>{[[], list('b')]}</DtEmojiTextWrapper>);
+      expect(screen.getByTestId('b')).toBe(inputB);
+      target.remove();
     });
 
     it('renders root dangerouslySetInnerHTML without throwing', () => {
