@@ -1,13 +1,12 @@
-import { useEffect, useId, useState, type ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
-import { StandIn } from '../../.storybook/StandIn';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
-import { DtIconClose } from '../../icons';
 import { DtButton } from '../Button';
 import { DtDropdown } from '../Dropdown';
 import { DtIcon } from '../Icon';
 import { DtListItem } from '../ListItem';
+import { DtModal } from '../Modal';
 import { DtStack } from '../Stack';
 import { DtTooltip } from '../Tooltip';
 import { DtPopover, type DtPopoverProps } from './Popover';
@@ -504,51 +503,6 @@ function PopoverIframe ({ open, placement }: PopoverStoryArgs) {
   );
 }
 
-// Modal isn't ported: Vue's <dt-modal :open header-text> as it renders, a native <dialog> shown modally while open.
-function ModalStandIn ({ open, headerText, onOpenChange, children, footer }: {
-  open: boolean;
-  headerText: string;
-  onOpenChange: (open: boolean) => void;
-  children: ReactNode;
-  footer: ReactNode;
-}) {
-  const [dialog, setDialog] = useState<HTMLDialogElement | null>(null);
-  const titleId = useId();
-  useEffect(() => {
-    if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
-    if (!open && dialog.open) dialog.close();
-  }, [dialog, open]);
-
-  return (
-    <StandIn for="modal">
-      <dialog ref={setDialog} className="d-modal" data-qa="dt-modal" aria-modal="true" aria-labelledby={titleId} onCancel={(event) => { event.preventDefault(); onOpenChange(false); }}>
-        <div className="d-modal__dialog" style={open ? undefined : { display: 'none' }}>
-          <h2 id={titleId} className="d-modal__header d-text d-text--headline-lg" data-qa="dt-modal-title">
-            {headerText}
-          </h2>
-          <div className="d-modal__content" data-qa="dt-modal-copy">
-            {children}
-          </div>
-          <footer className="d-modal__footer">
-            {footer}
-          </footer>
-          <DtButton
-            className="d-modal__close"
-            data-qa="dt-modal-close-button"
-            importance="clear"
-            kind="muted"
-            circle
-            aria-label="Close"
-            onClick={() => onOpenChange(false)}
-            icon={<DtIconClose size="400" />}
-          />
-        </div>
-      </dialog>
-    </StandIn>
-  );
-}
-
 // PopoverInsideDialog.story.vue
 function PopoverInsideDialog ({ open, popoverOpen, tooltipOpen }: PopoverStoryArgs) {
   const [isModalOpen, setIsModalOpen] = useState(open ?? false);
@@ -560,7 +514,7 @@ function PopoverInsideDialog ({ open, popoverOpen, tooltipOpen }: PopoverStoryAr
 
   return (
     <div>
-      <ModalStandIn
+      <DtModal
         open={isModalOpen}
         headerText="Modal with Popover and Tooltip"
         onOpenChange={setIsModalOpen}
@@ -606,7 +560,7 @@ function PopoverInsideDialog ({ open, popoverOpen, tooltipOpen }: PopoverStoryAr
             )}
           />
         </div>
-      </ModalStandIn>
+      </DtModal>
       <DtButton onClick={() => setIsModalOpen(true)}>
         Open modal
       </DtButton>
