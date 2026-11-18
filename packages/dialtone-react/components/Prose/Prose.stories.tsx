@@ -44,7 +44,10 @@ export default meta;
 type Story = StoryObj<ProseStoryArgs>;
 
 // ProseDefault.story.vue
-function ProseDefault ({ size, density }: ProseStoryArgs) {
+function ProseDefault ({ size, density, default: content }: ProseStoryArgs) {
+  if (content !== undefined && content !== '') {
+    return <DtProse size={size} density={density}>{content}</DtProse>;
+  }
   return (
     <DtProse size={size} density={density}>
       {/* Headings */}

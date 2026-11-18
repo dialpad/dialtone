@@ -205,6 +205,14 @@ describe('DtProse Tests', () => {
       expect(a.hasAttribute('href')).toBe(false);
     });
 
+    it('Should strip an unsafe scheme hidden by tabs or newlines in href', () => {
+      setWrapper({}, html('<a href="java&#x09;script:alert(1)">a</a><a href="java&#x0A;script:alert(1)">b</a>'));
+
+      for (const a of Array.from(document.querySelectorAll('a'))) {
+        expect(a.hasAttribute('href')).toBe(false);
+      }
+    });
+
     it('Should preserve safe https href', () => {
       setWrapper({}, html('<a href="https://example.com/path">link</a>'));
 

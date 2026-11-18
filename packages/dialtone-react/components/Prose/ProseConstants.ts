@@ -25,8 +25,14 @@ export const _PROSE_URL_ATTRIBUTES: readonly string[] = ['href', 'src', 'cite'];
 
 const UNSAFE_URL_SCHEME = /^\s*(javascript|vbscript|data|blob|file):/i;
 
+// Browsers drop tabs, newlines and other control characters from a URL before reading its scheme, so
+// `java&#x09;script:` runs as `javascript:`. Remove them first, as the URL parser does.
+function withoutIgnoredUrlChars (value: string): string {
+  return Array.from(value).filter(char => char.charCodeAt(0) > 0x20).join('');
+}
+
 export function _isSafeProseUrl (value: string | null | undefined): boolean {
-  return !UNSAFE_URL_SCHEME.test(value ?? '');
+  return !UNSAFE_URL_SCHEME.test(withoutIgnoredUrlChars(value ?? ''));
 }
 
 export const PROSE_ALLOWED_ATTRIBUTES: Readonly<Record<string, readonly string[]>> = {
