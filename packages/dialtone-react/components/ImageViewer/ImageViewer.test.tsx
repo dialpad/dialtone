@@ -39,8 +39,17 @@ describe('DtImageViewer Tests', () => {
     updateWrapper();
   });
 
+  // Nodes appended straight to document.body, which cleanup() doesn't remove; removed even when a test fails.
+  const fixtures: HTMLElement[] = [];
+  const addFixture = <T extends HTMLElement>(el: T): T => {
+    document.body.appendChild(el);
+    fixtures.push(el);
+    return el;
+  };
+
   afterEach(() => {
     cleanup();
+    fixtures.splice(0).forEach(el => el.remove());
     mockProps = {};
   });
 
@@ -115,7 +124,8 @@ describe('DtImageViewer Tests', () => {
       await _openModal();
       await flushPromises();
 
-      // Pointer leaving the modal swaps the visible close button for the sr-only one.
+      // Focus leaving the visible close button swaps it for the sr-only one.
+      act(() => { (document.activeElement as HTMLElement).blur(); });
       fireEvent.mouseLeave(qa('dt-modal')!);
       await finishTransitions();
       const srOnly = qa('dt-sr-only-close-button')!;
@@ -127,6 +137,34 @@ describe('DtImageViewer Tests', () => {
 
       expect(qa('dt-sr-only-close-button')).toBeNull();
       expect(document.activeElement).toBe(qa('dt-image-viewer-close-btn'));
+    });
+
+    it('keeps focus inside the modal when the pointer leaves while the visible close button has focus', async () => {
+      await _openModal();
+      await flushPromises();
+      expect(document.activeElement).toBe(qa('dt-image-viewer-close-btn'));
+
+      fireEvent.mouseLeave(qa('dt-modal')!);
+      await finishTransitions();
+
+      expect(document.activeElement).toBe(qa('dt-image-viewer-close-btn'));
+      expect(overlay!.contains(document.activeElement)).toBe(true);
+    });
+
+    it('focuses the visible close button when a controlled viewer reopens after its button was hidden', async () => {
+      const local = render(<DtImageViewer {...baseProps} open={true} />);
+      await flushPromises();
+      act(() => { (document.activeElement as HTMLElement).blur(); });
+      await finishTransitions();
+      expect(qa('dt-image-viewer-close-btn')).toBeNull();
+
+      local.rerender(<DtImageViewer {...baseProps} open={false} />);
+      local.rerender(<DtImageViewer {...baseProps} open={true} />);
+      await flushPromises();
+      await finishTransitions();
+
+      expect(document.activeElement).toBe(qa('dt-image-viewer-close-btn'));
+      local.unmount();
     });
 
     it('restores focus to the previously focused element when an open viewer unmounts', async () => {
@@ -181,12 +219,22 @@ describe('DtImageViewer Tests', () => {
       it('Should close the image when I press esc', async () => {
         expect(imageViewerFull).toBeTruthy();
 
-        // user-event's Escape has code 'Escape'; Vue's test sends the legacy 'Esc', which the modal accepts too.
-        fireEvent.keyDown(imageViewerFull!, { code: 'Esc' });
+        // Vue's test sends the legacy 'Esc'.
+        const notCancelled = fireEvent.keyDown(imageViewerFull!, { code: 'Esc' });
 
         imageViewerFull = qa('dt-image-viewer-full');
 
         expect(imageViewerFull).toBeNull();
+        // The handled Escape is consumed so an ancestor <dialog> doesn't close with it.
+        expect(notCancelled).toBe(false);
+      });
+
+      it('Should close the image when I press esc with the standard Escape code', async () => {
+        expect(imageViewerFull).toBeTruthy();
+
+        fireEvent.keyDown(imageViewerFull!, { code: 'Escape' });
+
+        expect(qa('dt-image-viewer-full')).toBeNull();
       });
     });
   });
@@ -195,33 +243,25 @@ describe('DtImageViewer Tests', () => {
     // These tests render into their own containers to observe where the viewer actually lands in the DOM.
     describe('when anchor is inside a <dialog> element and appendTo is "body"', () => {
       it('resolves to the dialog element, not document.body', async () => {
-        const dialogEl = document.createElement('dialog');
-        document.body.appendChild(dialogEl);
+        const dialogEl = addFixture(document.createElement('dialog'));
 
-        const local = render(<DtImageViewer {...baseProps} />, { container: dialogEl });
+        render(<DtImageViewer {...baseProps} />, { container: dialogEl });
 
         // A closed <dialog> is inaccessible, so its button only shows up with `hidden`.
         await userEvent.click(within(dialogEl).getByRole('button', { hidden: true }));
 
         expect(dialogEl.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
         expect(document.body.querySelector('[data-qa="dt-modal"]')?.parentElement).toBe(dialogEl);
-
-        local.unmount();
-        document.body.removeChild(dialogEl);
       });
 
       it('resolves to the dialog even when open=true is already set on mount', () => {
         // Regression: the target must be resolved once the preview button is mounted, not while rendering, when
         // there is no button yet to find the dialog from.
-        const dialogEl = document.createElement('dialog');
-        document.body.appendChild(dialogEl);
+        const dialogEl = addFixture(document.createElement('dialog'));
 
-        const local = render(<DtImageViewer {...baseProps} open />, { container: dialogEl });
+        render(<DtImageViewer {...baseProps} open />, { container: dialogEl });
 
         expect(document.body.querySelector('[data-qa="dt-modal"]')?.parentElement).toBe(dialogEl);
-
-        local.unmount();
-        document.body.removeChild(dialogEl);
       });
     });
 
@@ -242,16 +282,13 @@ describe('DtImageViewer Tests', () => {
         const host = document.createElement('div');
         dialogEl.appendChild(customTarget);
         dialogEl.appendChild(host);
-        document.body.appendChild(dialogEl);
+        addFixture(dialogEl);
 
-        const local = render(<DtImageViewer {...baseProps} appendTo="#custom-target" />, { container: host });
+        render(<DtImageViewer {...baseProps} appendTo="#custom-target" />, { container: host });
 
         await userEvent.click(within(dialogEl).getByRole('button', { hidden: true }));
 
         expect(document.body.querySelector('[data-qa="dt-modal"]')?.parentElement).toBe(customTarget);
-
-        local.unmount();
-        document.body.removeChild(dialogEl);
       });
     });
 
@@ -268,17 +305,13 @@ describe('DtImageViewer Tests', () => {
       });
 
       it('teleports into the given DOM node', async () => {
-        const customTarget = document.createElement('div');
-        document.body.appendChild(customTarget);
+        const customTarget = addFixture(document.createElement('div'));
 
         const local = render(<DtImageViewer {...baseProps} appendTo={customTarget} />);
 
         await userEvent.click(within(local.container).getByRole('button'));
 
         expect(customTarget.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
-
-        local.unmount();
-        document.body.removeChild(customTarget);
       });
     });
 
@@ -292,14 +325,26 @@ describe('DtImageViewer Tests', () => {
       it('moves the viewer into the new target when appendTo changes', async () => {
         const customTarget = document.createElement('div');
         customTarget.id = 'custom-target-2';
-        document.body.appendChild(customTarget);
+        addFixture(customTarget);
 
         await userEvent.click(imageViewerPreview);
         result.rerender(<DtImageViewer {...baseProps} appendTo="#custom-target-2" />);
 
         await waitFor(() => expect(customTarget.querySelector('[data-qa="dt-modal"]')).not.toBeNull());
+      });
 
-        document.body.removeChild(customTarget);
+      it('resolves a selector for a target mounted in the same update that opens the viewer', () => {
+        const Parent = ({ open }: { open: boolean }) => (
+          <>
+            {open && <div id="late-target" />}
+            <DtImageViewer {...baseProps} open={open} appendTo="#late-target" />
+          </>
+        );
+        const local = render(<Parent open={false} />);
+
+        local.rerender(<Parent open={true} />);
+
+        expect(document.querySelector('#late-target [data-qa="dt-modal"]')).not.toBeNull();
       });
     });
   });

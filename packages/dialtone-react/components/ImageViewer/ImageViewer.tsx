@@ -100,32 +100,46 @@ export function DtImageViewer ({
   const [prevOpen, setPrevOpen] = useState(open);
   if (open !== prevOpen) {
     setPrevOpen(open);
-    if (open !== null) setIsOpen(open);
+    if (open !== null) {
+      setIsOpen(open);
+      // A controlled reopen must bring the visible close button back, or focus would have nowhere to go.
+      if (open) setShowCloseButton(true);
+    }
   }
 
   // Mirrors Tooltip/Popover's dialog-detection: without it, an image viewer nested in a native <dialog>-based DtModal
-  // would portal straight to document.body and render behind the ancestor dialog's top layer. 'body' until the layout
-  // effect resolves the real target, as in Vue (where it keeps the render SSR-safe).
-  const [resolvedAppendToTarget, setResolvedAppendToTarget] = useState<string | HTMLElement>('body');
+  // would portal straight to document.body and render behind the ancestor dialog's top layer. The target is resolved
+  // after the commit that opens the viewer, so a selector can match an element mounted in that same update, and the
+  // preview button exists to find its dialog from (as in Vue, where it also keeps the render SSR-safe).
+  const [target, setTarget] = useState<Element | null>(null);
 
   useLayoutEffect(() => {
-    if (appendTo !== 'body') {
-      setResolvedAppendToTarget(appendTo);
+    if (!isOpen) {
+      setTarget(null);
       return;
     }
-    const buttonEl = previewButtonRef.current;
-    const root = buttonEl?.getRootNode() as Document | ShadowRoot | undefined;
-    setResolvedAppendToTarget(buttonEl?.closest('dialog') ?? root?.querySelector<HTMLElement>('body') ?? document.body);
-  }, [appendTo]);
+    let resolved: string | HTMLElement;
+    if (appendTo !== 'body') {
+      resolved = appendTo;
+    } else {
+      const buttonEl = previewButtonRef.current;
+      const root = buttonEl?.getRootNode() as Document | ShadowRoot | undefined;
+      resolved = buttonEl?.closest('dialog') ?? root?.querySelector<HTMLElement>('body') ?? document.body;
+    }
+    // Nothing renders for a selector that matches nothing.
+    setTarget(typeof resolved === 'string' ? document.querySelector(resolved) : resolved);
+  }, [appendTo, isOpen]);
 
   const modeAttrs = useMode(contentMode, () => rootRef.current);
 
   useFocusTrap(modalEl, { active: isOpen, initialFocus: false, restoreFocus: false });
 
   // Vue's `isOpen` watcher: remember the active element when the modal opens, and give it focus back when it closes.
+  // Read from the opener's root: document.activeElement is the shadow host when the preview is inside a shadow root.
   useEffect(() => {
     if (isOpen) {
-      previousActiveElement.current = document.activeElement as HTMLElement | null;
+      const root = previewButtonRef.current?.getRootNode() as Document | ShadowRoot | undefined;
+      previousActiveElement.current = (root?.activeElement ?? document.activeElement) as HTMLElement | null;
     } else {
       previousActiveElement.current?.focus();
       previousActiveElement.current = null;
@@ -154,7 +168,7 @@ export function DtImageViewer ({
   // from Vue, which has the same bug.
   useEffect(() => {
     if (!showCloseButton) return;
-    const active = document.activeElement;
+    const active = (modalEl?.getRootNode() as Document | ShadowRoot | undefined)?.activeElement;
     if (active?.getAttribute('data-qa') === 'dt-sr-only-close-button' && modalEl?.contains(active)) {
       closeButtonRef.current?.focus();
     }
@@ -174,15 +188,6 @@ export function DtImageViewer ({
 
     if (open !== null) onOpenChange?.(false);
   };
-
-  // Vue's Teleport `to`: a selector is looked up when the modal renders. Nothing renders for a selector that matches
-  // nothing.
-  let target: Element | null = null;
-  if (isOpen && typeof document !== 'undefined') {
-    target = typeof resolvedAppendToTarget === 'string'
-      ? document.querySelector(resolvedAppendToTarget)
-      : resolvedAppendToTarget;
-  }
 
   return (
     <div {...rest} ref={rootRef}>
@@ -212,10 +217,20 @@ export function DtImageViewer ({
           }}
           onKeyDown={(event) => {
             // Tab focus trapping is handled by the focus trap on the modal.
-            if (ESCAPE_CODES.includes(event.code)) close();
+            if (ESCAPE_CODES.includes(event.code)) {
+              // Consumed here, so an ancestor <dialog> doesn't also close on the same Escape.
+              event.preventDefault();
+              event.stopPropagation();
+              close();
+            }
           }}
           onMouseOver={() => setShowCloseButton(true)}
-          onMouseLeave={() => setShowCloseButton(false)}
+          onMouseLeave={(event) => {
+            // Unmounting the visible close button while it has focus would drop focus out of the modal.
+            const active = (event.currentTarget.getRootNode() as Document | ShadowRoot).activeElement;
+            if (active && active === closeButtonRef.current) return;
+            setShowCloseButton(false);
+          }}
           onFocus={() => setShowCloseButton(true)}
           onBlur={() => setShowCloseButton(false)}
         >
