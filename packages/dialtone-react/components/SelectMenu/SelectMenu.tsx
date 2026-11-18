@@ -306,15 +306,19 @@ export function DtSelectMenu ({
           >
             {hasChildOptions
               ? children
-              : options?.map(option => (
-                <option
-                  key={`select-${selectKey}-option-${option.value}`}
-                  value={option.value}
-                  {...optionChildProps}
-                  className={cx(optionClass, optionChildProps.className)}
-                >
-                  {option.label}
-                </option>
+              : Array.isArray(options) && options.map(option => (
+                // A null entry renders nothing; the validation effect warns about it. The value's type keeps 1 and
+                // '1' apart in the key, which the DOM doesn't see.
+                option == null ? null : (
+                  <option
+                    key={`select-${selectKey}-option-${typeof option.value}-${option.value}`}
+                    value={option.value}
+                    {...optionChildProps}
+                    className={cx(optionClass, optionChildProps.className)}
+                  >
+                    {option.label}
+                  </option>
+                )
               ))}
           </select>
         </div>

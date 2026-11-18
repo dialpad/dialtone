@@ -210,58 +210,60 @@ export default meta;
 type Story = StoryObj<SelectMenuStoryArgs>;
 
 // Vue's html-fragment: the option elements of an HTML string.
+// Only option and optgroup, with their label and disabled attributes, are rebuilt; the rest is dropped.
+function htmlOptionNodes (parent: Element): ReactNode {
+  return Array.from(parent.children, (element, index) => {
+    if (element instanceof HTMLOptionElement) {
+      return (
+        <option
+          key={index}
+          value={element.value}
+          label={element.getAttribute('label') ?? undefined}
+          disabled={element.hasAttribute('disabled')}
+        >
+          {element.textContent}
+        </option>
+      );
+    }
+    if (element instanceof HTMLOptGroupElement) {
+      return (
+        <optgroup key={index} label={element.label} disabled={element.hasAttribute('disabled')}>
+          {htmlOptionNodes(element)}
+        </optgroup>
+      );
+    }
+    return null;
+  });
+}
+
 function htmlOptions (html: string): ReactNode {
   const parsed = new DOMParser().parseFromString(`<select>${html}</select>`, 'text/html');
-  return Array.from(parsed.querySelectorAll('option'), (option, index) => (
-    <option
-      key={index}
-      value={option.value}
-      label={option.getAttribute('label') ?? undefined}
-      disabled={option.disabled}
-    >
-      {option.textContent}
-    </option>
-  ));
+  const select = parsed.querySelector('select');
+  return select ? htmlOptionNodes(select) : null;
 }
 
 // SelectMenuDefault.story.vue. Vue's select keeps the user's choice when the story's value arg doesn't follow it; a
 // controlled React select would revert it, so the story keeps the value in state, and the value control feeds it.
-function SelectMenuDefault (args: SelectMenuStoryArgs) {
-  const [selected, setSelected] = useState(args.value);
-  const [syncedArg, setSyncedArg] = useState(args.value);
-  if (!Object.is(syncedArg, args.value)) {
-    setSyncedArg(args.value);
-    setSelected(args.value);
+// The Vue wrapper leaves inheritAttrs on, so every other arg (showLabel, labelSize…) falls through to the select menu
+// as well; the rest spread does the same.
+function SelectMenuDefault ({ children, onValueChange, ...props }: SelectMenuStoryArgs) {
+  const [selected, setSelected] = useState(props.value);
+  const [syncedArg, setSyncedArg] = useState(props.value);
+  if (!Object.is(syncedArg, props.value)) {
+    setSyncedArg(props.value);
+    setSelected(props.value);
   }
 
   return (
     <DtSelectMenu
-      label={args.label}
-      options={args.options}
-      size={args.size}
-      description={args.description}
-      showMessages={args.showMessages}
-      messages={args.messages}
-      name={args.name}
+      {...props}
       value={selected}
-      disabled={args.disabled}
-      labelClass={args.labelClass}
-      descriptionClass={args.descriptionClass}
-      selectClass={args.selectClass}
-      optionClass={args.optionClass}
-      messagesClass={args.messagesClass}
-      labelChildProps={args.labelChildProps}
-      descriptionChildProps={args.descriptionChildProps}
-      optionChildProps={args.optionChildProps}
-      messagesChildProps={args.messagesChildProps}
-      className={args.className}
       onValueChange={(value, event) => {
         setSelected(value);
-        args.onValueChange?.(value, event);
+        onValueChange?.(value, event);
       }}
-      onChange={args.onChange}
     >
-      {args.children ? htmlOptions(args.children) : undefined}
+      {children ? htmlOptions(children) : undefined}
     </DtSelectMenu>
   );
 }

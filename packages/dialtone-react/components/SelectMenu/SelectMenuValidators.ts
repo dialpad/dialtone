@@ -18,6 +18,11 @@ export const optionsValidator = (options?: readonly OptionLike[] | null) => {
     return true;
   }
 
+  // A caller outside the types can pass anything: a non-array is invalid, not a crash in the validating effect.
+  if (!Array.isArray(options)) {
+    return false;
+  }
+
   return options.every(option => {
     // A null entry is invalid, not a crash: the validator runs in an effect, whatever the options render.
     if (!option) {

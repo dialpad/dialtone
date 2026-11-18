@@ -534,6 +534,37 @@ describe('DtSelectMenu Tests', () => {
           expect(consoleWarnSpy).toHaveBeenCalledWith('Invalid prop: custom validator check failed for prop "options".');
           expect(select.querySelectorAll('option').length).toBe(2);
         });
+
+        it('should warn, not throw, when an entry is null and no options are slotted', () => {
+          // @ts-expect-error a null entry is rejected
+          mockProps = { options: [null, { value: 1, label: 'One' }] };
+
+          updateWrapper();
+
+          expect(consoleWarnSpy).toHaveBeenCalledWith('Invalid prop: custom validator check failed for prop "options".');
+          expect(select.querySelectorAll('option').length).toBe(1);
+        });
+
+        it('should warn, not throw, when options is not an array', () => {
+          // @ts-expect-error a non-array is rejected
+          mockProps = { options: {}, children: SLOTTED_OPTIONS };
+
+          updateWrapper();
+
+          expect(consoleWarnSpy).toHaveBeenCalledWith('Invalid prop: custom validator check failed for prop "options".');
+          expect(select.querySelectorAll('option').length).toBe(2);
+        });
+
+        it('should keep options 1 and "1" apart when they leave the list', () => {
+          mockProps = {
+            options: [{ value: 1, label: 'Number' }, { value: '1', label: 'String' }, { value: 2, label: 'Two' }],
+          };
+          updateWrapper();
+
+          rerender({ options: [{ value: 2, label: 'Two' }] });
+
+          expect(Array.from(select.querySelectorAll('option'), option => option.value)).toEqual(['2']);
+        });
       });
 
       describe('When options is null', () => {
