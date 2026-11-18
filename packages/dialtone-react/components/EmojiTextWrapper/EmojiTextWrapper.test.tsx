@@ -1,5 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react';
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import { DtEmojiTextWrapper, type DtEmojiTextWrapperProps } from './EmojiTextWrapper';
 import { setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '../../common/emoji';
 import customEmojiJson from '../../common/custom-emoji.json';
@@ -175,6 +175,33 @@ describe('DtEmojiTextWrapper Tests', () => {
       it('Is empty', () => {
         expect(wrapper.textContent).toBe('');
       });
+    });
+  });
+
+  // React-only: no Vue counterpart.
+  describe('React-specific Tests', () => {
+    it('keeps the key of a Fragment child', () => {
+      cleanup();
+      const { rerender } = render(
+        <DtEmojiTextWrapper>
+          <Fragment key="a"><input data-qa="a" /></Fragment>
+          <Fragment key="b"><input data-qa="b" /></Fragment>
+        </DtEmojiTextWrapper>,
+      );
+      const inputA = screen.getByTestId('a');
+      rerender(
+        <DtEmojiTextWrapper>
+          <Fragment key="b"><input data-qa="b" /></Fragment>
+          <Fragment key="a"><input data-qa="a" /></Fragment>
+        </DtEmojiTextWrapper>,
+      );
+      expect(screen.getByTestId('a')).toBe(inputA);
+    });
+
+    it('renders root dangerouslySetInnerHTML without throwing', () => {
+      cleanup();
+      render(<DtEmojiTextWrapper dangerouslySetInnerHTML={{ __html: 'hello' }} />);
+      expect(screen.getByTestId('emoji-text-wrapper').innerHTML).toBe('hello');
     });
   });
 });

@@ -83,7 +83,8 @@ function searchNode (node: ReactNode, size: IconSize, key: number): ReactNode {
     children?: ReactNode;
     dangerouslySetInnerHTML?: { __html: string };
   }>;
-  if (element.type === Fragment) return <Fragment key={key}>{searchNodes(element.props.children, size)}</Fragment>;
+  // Clone so the caller's key is kept and only the children are processed.
+  if (element.type === Fragment) return cloneElement(element, undefined, searchNodes(element.props.children, size));
   if (typeof element.type !== 'string') return element;
 
   // Vue replaces an element that has `innerHTML` (v-html) with the result of searching that string.
@@ -114,7 +115,8 @@ export function DtEmojiTextWrapper ({
       className={cx('d-emoji-text-wrapper', className)}
       {...rest}
     >
-      {searchNodes(children, size)}
+      {/* React throws when both children and dangerouslySetInnerHTML are set, so forward root HTML alone. */}
+      {children == null && rest.dangerouslySetInnerHTML ? undefined : searchNodes(children, size)}
     </Tag>
   );
 }
