@@ -50,7 +50,7 @@ export const argTypesData = {
     options: [...Object.values(RICH_TEXT_EDITOR_AUTOFOCUS_TYPES), false, true],
     table: {
       defaultValue: {
-        summary: false,
+        summary: 'false',
       },
     },
   },
@@ -139,7 +139,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-};
+} as const;
 
 // Story Collection
 const meta: Meta<DtRichTextEditorProps> = {

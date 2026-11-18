@@ -1252,7 +1252,11 @@ export function DtRichTextEditor ({
       element: bubbleMenuEl,
       options: FLOATING_OPTIONS,
       pluginKey: BUBBLE_MENU_PLUGIN_KEY,
-      appendTo: () => (editor.view.dom.getRootNode() as Document | ShadowRoot).querySelector('body') as HTMLElement,
+      // The plugin doesn't clear its update timer when the editor is destroyed, so this can run afterwards, when
+      // the editor has no view left: then there's nothing to show the menu over.
+      appendTo: () => (editor.isDestroyed
+        ? undefined
+        : (editor.view.dom.getRootNode() as Document | ShadowRoot).querySelector('body')) as HTMLElement,
       shouldShow: ({ editor: instance }) => bubbleMenuShouldShow(instance),
     }));
     return () => {
