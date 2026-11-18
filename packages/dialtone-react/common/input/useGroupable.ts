@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { devWarn } from '../dev';
 import type { ValidationMessageType } from '../constants';
 import { useInputGroupContext, type GroupContext, type SetGroupValue } from './InputGroupContext';
 import type { InputState, InputValidationState } from './useInput';
@@ -47,7 +48,7 @@ export function useGroupable (
     if (checkedName.current) return;
     checkedName.current = true;
     if (!!name && hasGroup && groupName !== name) {
-      console.warn(
+      devWarn(
         'Component is being used inside a Group. Did you mean to override the name prop value ' +
         `(${groupName}) with (${name})? It is recommended to only set name at the Group level.`,
       );
