@@ -299,6 +299,10 @@ describe('DtSlider Tests', () => {
       it('does not produce NaN positioning for the thumb', () => {
         thumbInputs = findThumbInputs();
         expect(thumbInputs[0].style.insetInlineStart).not.toContain('NaN');
+        // The native input takes no position; the visual thumb does, at the 0% anchor.
+        const visualStyle = attr(w().find('dt-slider-thumb-visual')!, 'style');
+        expect(visualStyle).not.toContain('NaN');
+        expect(visualStyle).toMatch(/\) \* 0\)/);
       });
 
       it('does not produce NaN positioning for default marks', () => {
@@ -883,7 +887,9 @@ describe('DtSlider Tests', () => {
         updateWrapper();
         const tickPositions = w().findAll('dt-slider-tick').map((t) => attr(t, 'style'));
         const lastTickStyle = tickPositions.at(-1);
-        expect(lastTickStyle).toMatch(/\) \* (0\.9\d+|1)\);/);
+        // Float accumulation can leave the last tick a hair under 1 (generateInterval's 1e-9 tolerance), as in Vue.
+        const lastPct = Number(/\) \* ([\d.]+)\);/.exec(lastTickStyle ?? '')?.[1]);
+        expect(lastPct).toBeCloseTo(1, 8);
       });
 
       it('caps snapPoints generation instead of hanging on a too-small interval', async () => {
@@ -1631,7 +1637,12 @@ describe('DtSlider Tests', () => {
           pointerId: 1, pointerType: 'mouse', button: 0, clientX: 20, buttons: 1,
         });
 
+        await trigger(control, 'pointermove', { pointerId: 2, clientX: 90, buttons: 1 });
+        thumbInputs = findThumbInputs();
+        expect(Number(thumbInputs[0].value)).toBe(20);
+
         await trigger(control, 'pointerup', { pointerId: 2 });
+        expect(w().emitted('change')).toBeFalsy();
 
         await trigger(control, 'pointermove', { pointerId: 1, clientX: 60, buttons: 1 });
         thumbInputs = findThumbInputs();
@@ -1639,7 +1650,23 @@ describe('DtSlider Tests', () => {
 
         await trigger(control, 'pointerup', { pointerId: 1 });
         const emitted = w().emitted('change');
-        expect(emitted).toBeTruthy();
+        expect(emitted).toHaveLength(1);
+        expect(emitted![0]).toEqual([60]);
+      });
+
+      it('uses defaultValue only to seed the slider, so a later defaultValue change keeps the user\'s selection', async () => {
+        const uncontrolled = mount({ ...baseProps, value: undefined, defaultValue: 25 });
+        try {
+          const input = () => uncontrolled.find<HTMLInputElement>('dt-slider-thumb')!;
+          expect(Number(input().value)).toBe(25);
+          await setInputValue(input(), '40');
+          expect(Number(input().value)).toBe(40);
+
+          await uncontrolled.setProps({ defaultValue: 60 });
+          expect(Number(input().value)).toBe(40);
+        } finally {
+          uncontrolled.unmount();
+        }
       });
 
       it('ignores a second pointer\'s pointerdown mid-drag, so it cannot hijack ownership and strand the real drag', async () => {

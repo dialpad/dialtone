@@ -316,7 +316,9 @@ export function DtSlider ({
   ...rootAttrs
 }: DtSliderProps) {
   // Vue's v-model value; without one, defaultValue seeds the slider's own value.
-  const modelValue = value === undefined ? defaultValue : value;
+  // defaultValue only seeds the slider: a later change to it must not overwrite the user's selection.
+  const initialDefaultValue = useRef(defaultValue);
+  const modelValue = value === undefined ? initialDefaultValue.current : value;
   const props: ResolvedSliderProps = {
     value: modelValue,
     min,

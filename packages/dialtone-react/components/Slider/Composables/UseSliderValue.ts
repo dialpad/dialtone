@@ -301,13 +301,13 @@ export function useSliderValue (
       const next = applyValueConstraints(cur, heldIndex === -1 ? null : heldIndex);
       if (differs(next, cur)) {
         internalValues.set(next);
-        const payload = isRange ? [...next] : next[0];
-        emit.valueChange(payload);
+        // Each callback gets its own array, so one mutating its argument can't change what the other sees.
+        emit.valueChange(isRange ? [...next] : next[0]);
         if (!alreadyUncommitted) {
           // Never something the parent asked for — a real, committed change
           // the parent needs to know about (e.g. to persist).
           lastCommittedValues.current = [...next];
-          emit.valueCommit(payload);
+          emit.valueCommit(isRange ? [...next] : next[0]);
         }
       }
     }
