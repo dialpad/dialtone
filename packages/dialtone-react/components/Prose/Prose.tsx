@@ -1,5 +1,6 @@
 import { useLayoutEffect, useMemo, useRef, type ComponentPropsWithRef, type Ref } from 'react';
 import { cx } from '../../common/cx';
+import { isDevelopment } from '../../common/dev';
 import {
   PROSE_DISALLOWED_ELEMENTS,
   PROSE_ALLOWED_ATTRIBUTES,
@@ -161,7 +162,8 @@ export function DtProse ({
 
     sanitizeContent(root);
 
-    if (validatedCommit.current !== renderedCommit.current) {
+    // Vue validates in development only; sanitizing above runs in every build.
+    if (isDevelopment() && validatedCommit.current !== renderedCommit.current) {
       validatedCommit.current = renderedCommit.current;
       validateContent(root);
     }
