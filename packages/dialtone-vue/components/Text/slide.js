@@ -20,43 +20,23 @@ export function getSlideHost (el) {
 
 /**
  * Listens on the host and calls onEnter when the first of pointer or focus
- * arrives, onLeave when both have left. Returns an unbind function.
+ * arrives, onLeave when both have left or Escape is pressed. Returns an unbind function.
  */
-export function bindSlide ({ el, moveEl, onEnter, onLeave, onEscape, onTransitionEnd }) {
+export function bindSlide ({ el, moveEl, onEnter, onLeave, onTransitionEnd }) {
   const host = getSlideHost(el);
-  let pointer = false;
-  let focus = false;
-
-  const update = (wasActive) => {
-    const active = pointer || focus;
-    if (active && !wasActive) onEnter();
-    if (!active && wasActive) onLeave();
+  const state = { pointer: false, focus: false };
+  const set = (key, value) => {
+    const was = state.pointer || state.focus;
+    state[key] = value;
+    const active = state.pointer || state.focus;
+    if (active !== was) (active ? onEnter : onLeave)();
   };
   const handlers = {
-    pointerenter: () => {
-      const was = pointer || focus;
-      pointer = true;
-      update(was);
-    },
-    pointerleave: () => {
-      const was = pointer || focus;
-      pointer = false;
-      update(was);
-    },
-    focusin: () => {
-      const was = pointer || focus;
-      focus = true;
-      update(was);
-    },
-    focusout: (event) => {
-      if (event.relatedTarget && host.contains(event.relatedTarget)) return;
-      const was = pointer || focus;
-      focus = false;
-      update(was);
-    },
-    keydown: (event) => {
-      if (event.key === 'Escape') onEscape();
-    },
+    pointerenter: () => set('pointer', true),
+    pointerleave: () => set('pointer', false),
+    focusin: () => set('focus', true),
+    focusout: (event) => host.contains(event.relatedTarget) || set('focus', false),
+    keydown: (event) => event.key === 'Escape' && onLeave(),
   };
   const transitionEnd = (event) => {
     if (event.target === moveEl && event.propertyName === 'transform') onTransitionEnd();

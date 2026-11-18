@@ -2,7 +2,7 @@
   <component
     :is="as"
     data-qa="dt-text"
-    :class="textClasses"
+    :class="[textClasses, slideClasses]"
     :style="textStyles"
   >
     <!-- the slide moves one inner span with transform; the root stays still and clips -->
@@ -326,18 +326,6 @@ export default {
 
       if (this.slideMode) {
         classes.push('d-text--slide');
-        if (this.slideIsMoving) {
-          classes.push('d-text--slide-moving');
-        }
-        if (this.slidePhase === 'at-end') {
-          classes.push('d-text--slide-end');
-        }
-        if (this.slidePhase === 'loop-moving') {
-          classes.push('d-text--slide-loop');
-        }
-        if (this.slideLoopWrap) {
-          classes.push('d-text--slide-loop-wrap');
-        }
       } else if (this.truncate) {
         classes.push(TEXT_TRUNCATE_CLASS);
       }
@@ -395,6 +383,15 @@ export default {
     slideIsMoving() {
       return ['moving-forward', 'moving-back', 'loop-moving'].includes(this.slidePhase);
     },
+
+    slideClasses() {
+      return this.slideMode && {
+        'd-text--slide-moving': this.slideIsMoving,
+        'd-text--slide-end': this.slidePhase === 'at-end',
+        'd-text--slide-loop': this.slidePhase === 'loop-moving',
+        'd-text--slide-loop-wrap': this.slideLoopWrap,
+      };
+    },
   },
 
   watch: {
@@ -403,6 +400,7 @@ export default {
       handler() {
         this.setupSlide();
       },
+
       flush: 'post',
     },
   },
@@ -450,7 +448,6 @@ export default {
         moveEl: this.$refs.slideContent,
         onEnter: this.slideEnter,
         onLeave: this.slideReset,
-        onEscape: this.slideReset,
         onTransitionEnd: this.slideMoveDone,
       });
     },
@@ -461,7 +458,7 @@ export default {
       this.slideReset();
     },
 
-    slideSetTimer(fn, ms) {
+    slideAfter(ms, fn) {
       this.slideRuntime.timers.push(setTimeout(fn, ms));
     },
 
@@ -471,9 +468,9 @@ export default {
     },
 
     // snap to rest, no reverse animation
-    slideReset() {
+    slideReset(phase = 'rest') {
       this.slideClearTimers();
-      this.slidePhase = 'rest';
+      this.slidePhase = phase;
       this.slideOffset = 0;
       this.slideDuration = 0;
       this.slideCopy = false;
@@ -490,39 +487,30 @@ export default {
       this.slideRuntime.distance = distance;
       this.slideRuntime.restWidth = el.scrollWidth;
       this.slidePhase = 'waiting';
-      this.slideSetTimer(this.slideStart, readSlideConfig(this.$el, this.slideMode).delay);
+      this.slideAfter(readSlideConfig(this.$el, this.slideMode).delay, this.slideStart);
     },
 
     slideStart() {
       if (prefersReducedMotion()) {
         this.slidePhase = 'at-end';
-        this.slideDuration = 0;
         this.slideOffset = this.slideRuntime.distance;
       } else if (this.slideMode === 'loop') {
         this.slideLoop();
       } else {
-        this.slideForward();
+        this.slideMove('moving-forward', this.slideRuntime.distance);
       }
     },
 
-    slideMove(phase, offset, distance) {
+    slideMove(phase, offset) {
       const { speed } = readSlideConfig(this.$el, this.slideMode);
-      const duration = getSlideDuration(distance, speed, this.slideMode);
+      const duration = getSlideDuration(Math.abs(offset - this.slideOffset), speed, this.slideMode);
       this.slideClearTimers();
       this.slidePhase = phase;
       this.slideOffset = offset;
       this.slideDuration = duration;
       // in case transitionend does not fire
-      this.slideSetTimer(this.slideMoveDone, duration + 100);
+      this.slideAfter(duration + 100, this.slideMoveDone);
       return duration;
-    },
-
-    slideForward() {
-      this.slideMove('moving-forward', this.slideRuntime.distance, this.slideRuntime.distance);
-    },
-
-    slideBack() {
-      this.slideMove('moving-back', 0, this.slideRuntime.distance);
     },
 
     async slideLoop() {
@@ -534,11 +522,11 @@ export default {
       }
       const { restWidth } = this.slideRuntime;
       const distance = this.$refs.slideContent.scrollWidth - restWidth;
-      const duration = this.slideMove('loop-moving', distance, distance);
+      const duration = this.slideMove('loop-moving', distance);
       // the start edge fades while the text slides out, then clears once the gap is
       // half past it, before the copy arrives (the scroll is linear, so time = distance)
       const gap = parseFloat(getComputedStyle(this.$refs.slideCopyEl).paddingInlineStart) || 0;
-      this.slideSetTimer(() => { this.slideLoopWrap = true; }, duration * (restWidth + gap / 2) / distance);
+      this.slideAfter(duration * (restWidth + gap / 2) / distance, () => { this.slideLoopWrap = true; });
     },
 
     slideMoveDone() {
@@ -546,25 +534,18 @@ export default {
       if (!this.slideIsMoving) {
         return;
       }
-      this.slideClearTimers();
       const { hold } = readSlideConfig(this.$el, this.slideMode);
 
       if (phase === 'moving-forward') {
+        this.slideClearTimers();
         this.slidePhase = 'at-end';
         if (this.slideMode === 'bounce') {
-          this.slideSetTimer(this.slideBack, hold);
+          this.slideAfter(hold, () => this.slideMove('moving-back', 0));
         }
-      } else if (phase === 'moving-back') {
-        this.slidePhase = 'at-start';
-        this.slideSetTimer(this.slideForward, hold);
       } else {
-        // loop: the copy now sits exactly where the text started, so snap back unseen
-        this.slidePhase = 'at-start';
-        this.slideOffset = 0;
-        this.slideDuration = 0;
-        this.slideCopy = false;
-        this.slideLoopWrap = false;
-        this.slideSetTimer(this.slideLoop, hold);
+        // back at the start; a loop's copy now sits exactly where the text began, so snap back unseen
+        this.slideReset('at-start');
+        this.slideAfter(hold, this.slideMode === 'loop' ? this.slideLoop : () => this.slideMove('moving-forward', this.slideRuntime.distance));
       }
     },
 

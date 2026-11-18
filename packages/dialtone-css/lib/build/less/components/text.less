@@ -381,16 +381,20 @@
     &__slide-content {
       display: block;
       overflow: var(--_slide-content-overflow, hidden);
-      text-overflow: var(--_slide-overflow, ellipsis);
+      text-overflow: ellipsis;
       transform: translateX(calc(var(--_slide-sign, -1) * var(--_slide-offset, 0px)));
       transition: transform var(--_slide-duration, 0ms) var(--_slide-easing, var(--dt-text-slide-easing, cubic-bezier(0.25, 0.46, 0.45, 0.94)));
     }
 
-    // moving: no ellipsis, the text can leave the inner box, both edges fade
-    &--slide-moving {
-      --_slide-overflow: clip;
+    // moving or resting at the end: no ellipsis, the text can leave the inner box
+    &--slide-moving,
+    &--slide-end {
       --_slide-content-overflow: visible;
       --_slide-fade-size: var(--dt-text-slide-fade-size, var(--dt-layout-100));
+    }
+
+    // moving: both edges fade
+    &--slide-moving {
       --_slide-mask: linear-gradient(
         var(--_slide-fade-direction, to right),
         transparent,
@@ -402,9 +406,6 @@
 
     // resting at the end: only the start edge fades
     &--slide-end {
-      --_slide-overflow: clip;
-      --_slide-content-overflow: visible;
-      --_slide-fade-size: var(--dt-text-slide-fade-size, var(--dt-layout-100));
       --_slide-mask: linear-gradient(
         var(--_slide-fade-direction, to right),
         transparent,
