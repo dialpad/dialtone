@@ -481,15 +481,19 @@ export default {
       this.slideLoopWrap = false;
     },
 
-    slideEnter() {
+    // measures the label before each cycle (it may change during a hold); false when it fits
+    slideMeasure() {
       const el = this.$refs.slideContent;
-      const distance = el.scrollWidth - el.clientWidth;
-      if (this.slidePhase !== 'rest' || distance <= 0) {
+      this.slideRuntime.distance = el.scrollWidth - el.clientWidth;
+      this.slideRuntime.restWidth = el.scrollWidth;
+      return this.slideRuntime.distance > 0;
+    },
+
+    slideEnter() {
+      if (this.slidePhase !== 'rest' || !this.slideMeasure()) {
         return;
       }
 
-      this.slideRuntime.distance = distance;
-      this.slideRuntime.restWidth = el.scrollWidth;
       this.slidePhase = 'waiting';
       this.slideAfter(readSlideConfig(this.$el, this.slideMode).delay, this.slideStart);
     },
@@ -518,6 +522,9 @@ export default {
     },
 
     async slideLoop() {
+      if (!this.slideMeasure()) {
+        return;
+      }
       // the copy has to be in the DOM to measure the full wrap-around distance
       this.slideCopy = true;
       await this.$nextTick();
@@ -554,7 +561,9 @@ export default {
       } else {
         // back at the start; a loop's copy now sits exactly where the text began, so snap back unseen
         this.slideReset('at-start');
-        this.slideAfter(hold, this.slideMode === 'loop' ? this.slideLoop : () => this.slideMove('moving-forward', this.slideRuntime.distance));
+        this.slideAfter(hold, this.slideMode === 'loop'
+          ? this.slideLoop
+          : () => this.slideMeasure() && this.slideMove('moving-forward', this.slideRuntime.distance));
       }
     },
 

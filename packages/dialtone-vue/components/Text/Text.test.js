@@ -551,13 +551,19 @@ describe('DtText', () => {
         template: '<button type="button"><dt-text as="div" v-bind="props">A very long device name</dt-text></button>',
       }, { attachTo: document.body });
       const content = wrapper.find('.d-text__slide-content').element;
-      const width = fits ? 100 : 300;
+      let width = fits ? 100 : 300;
       Object.defineProperty(content, 'scrollWidth', {
         get: () => (content.querySelector('.d-text__slide-copy') ? width + 324 : width),
       });
       Object.defineProperty(content, 'clientWidth', { value: 100 });
       const text = wrapper.find('[data-qa="dt-text"]');
-      return { wrapper, text, button: wrapper.find('button').element, offset: () => text.element.style.getPropertyValue('--_slide-offset') };
+      return {
+        wrapper,
+        text,
+        button: wrapper.find('button').element,
+        offset: () => text.element.style.getPropertyValue('--_slide-offset'),
+        setWidth: (value) => { width = value; },
+      };
     };
 
     beforeEach(() => {
@@ -657,6 +663,19 @@ describe('DtText', () => {
 
       await vi.advanceTimersByTimeAsync(5000);
       expect(text.classes()).toContain('d-text--slide-moving');
+      wrapper.unmount();
+    });
+
+    it.each(['bounce', 'loop'])('%s stops when the label changes to fit during a hold', async (mode) => {
+      const { wrapper, text, button, offset, setWidth } = mountSlide({ slide: mode });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(500 + 5200);
+      setWidth(100);
+      await vi.advanceTimersByTimeAsync(6000);
+
+      expect(text.classes()).not.toContain('d-text--slide-moving');
+      expect(offset()).toBe('0px');
       wrapper.unmount();
     });
 
