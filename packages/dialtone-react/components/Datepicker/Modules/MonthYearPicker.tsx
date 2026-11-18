@@ -108,7 +108,9 @@ export function MonthYearPicker ({
   const nextMonth = i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH');
   const nextYear = i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR');
 
-  const navButton = ({ id, index, message, ariaLabel, disabled, fallbackPlacements, icon, onClick }: NavButtonProps) => (
+  const navButton = ({
+    id, index, message, ariaLabel, disabled, fallbackPlacements, icon, onClick,
+  }: NavButtonProps) => (
     <DtTooltip
       fallbackPlacements={fallbackPlacements}
       message={message}
