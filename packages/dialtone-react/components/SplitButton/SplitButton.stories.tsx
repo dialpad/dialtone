@@ -230,6 +230,9 @@ function SplitButtonDefault ({ default: defaultSlot, startIcon, endIcon, end, ..
   return (
     <DtSplitButton
       startActive={args.startActive}
+      startDisabled={args.startDisabled}
+      endDisabled={args.endDisabled}
+      showDivider={args.showDivider}
       startAriaLabel={args.startAriaLabel}
       startButtonClass={args.startButtonClass}
       startIconPosition={args.startIconPosition}
