@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { render, type RenderResult } from '@testing-library/react';
+import { render, within, type RenderResult } from '@testing-library/react';
 import { vi } from 'vitest';
 import { DtTextList, type DtTextListProps } from './TextList';
 import { DtTextListItem } from './TextListItem';
@@ -137,6 +137,7 @@ describe('DtTextList', () => {
       const items = textListItems();
 
       expect(items).toHaveLength(2);
+      expect(within(list()).getAllByRole('listitem')).toHaveLength(2);
       expect(items[0]).toHaveTextContent(new RegExp(`^${ITEM_ONE}$`));
       expect(items[1]).toHaveTextContent(new RegExp(`^${ITEM_TWO}$`));
     });
@@ -370,6 +371,16 @@ describe('DtTextList', () => {
       expect(textListItems()[0]).toHaveClass('d-text-list__item--custom-marker');
       expect(document.querySelector('[data-qa="dt-text-list-item-marker"]')).toBeInTheDocument();
       expect(target.querySelector('[data-qa="portal-marker"]')).toBeInTheDocument();
+      target.remove();
+    });
+
+    it('treats an empty portal as no marker content, as Vue does for an empty Teleport', () => {
+      const target = document.createElement('div');
+      document.body.appendChild(target);
+      updateWrapper({}, <DtTextListItem marker={createPortal([], target)}>Empty portal</DtTextListItem>);
+
+      expect(textListItems()[0]).not.toHaveClass('d-text-list__item--custom-marker');
+      expect(markerWrappers()).toHaveLength(0);
       target.remove();
     });
   });

@@ -31,12 +31,20 @@ interface DtTextListItemOwnProps {
 export type DtTextListItemProps = DtTextListItemOwnProps
   & Omit<ComponentPropsWithRef<'li'>, keyof DtTextListItemOwnProps | 'dangerouslySetInnerHTML'>;
 
-// An empty fragment has no content, though it is an element.
+const PORTAL_TYPE = Symbol.for('react.portal');
+
+function isPortal (node: unknown): node is { children?: ReactNode } {
+  return typeof node === 'object' && node !== null && (node as { $$typeof?: symbol }).$$typeof === PORTAL_TYPE;
+}
+
+// An empty fragment or empty portal has no content, though it is an element, as in Vue's hasSlotContent.
 function hasMarkerContent (node: ReactNode): boolean {
+  if (isPortal(node)) return hasMarkerContent(node.children);
   if (isValidElement<{ children?: ReactNode }>(node) && node.type === Fragment) {
     return hasMarkerContent(node.props.children);
   }
   return Children.toArray(node).some(child => {
+    if (isPortal(child)) return hasMarkerContent(child.children);
     if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment) {
       return hasMarkerContent(child.props.children);
     }
