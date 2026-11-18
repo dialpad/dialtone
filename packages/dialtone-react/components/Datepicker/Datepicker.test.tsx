@@ -65,6 +65,10 @@ describe('DtDatepicker Tests', () => {
 
   const headingText = () => datepickerValue.textContent?.trim();
 
+  // The day button that has focus, if it's in the grid shown: its day of the month.
+  const focusedDayText = () =>
+    (findDays().includes(document.activeElement as HTMLElement) ? document.activeElement?.textContent?.trim() : null);
+
   beforeEach(() => {
     updateWrapper();
   });
@@ -293,6 +297,8 @@ describe('DtDatepicker Tests', () => {
 
       expect(headingText())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
+      // The last day of June.
+      expect(focusedDayText()).toBe('30');
     });
 
     it('should go to next month on right arrow press on last day', () => {
@@ -311,6 +317,8 @@ describe('DtDatepicker Tests', () => {
       // Should be July again
       expect(headingText())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
+      // The first day of July.
+      expect(focusedDayText()).toBe('1');
     });
 
     it('should go to prev month on up arrow press on some day of first week month', () => {
@@ -321,6 +329,8 @@ describe('DtDatepicker Tests', () => {
       // Should be June
       expect(headingText())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
+      // The same weekday (Saturday) in June's last week.
+      expect(focusedDayText()).toBe('24');
     });
 
     it('should go to next month on down arrow press on some day of last week month', () => {
@@ -339,6 +349,8 @@ describe('DtDatepicker Tests', () => {
       // Should be July again
       expect(headingText())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
+      // The same weekday (Saturday) in July's first week.
+      expect(focusedDayText()).toBe('1');
     });
 
     it('should emit selected-date event when a day is clicked', async () => {
