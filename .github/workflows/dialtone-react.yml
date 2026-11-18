@@ -94,7 +94,7 @@ jobs:
   gate:
     name: gate
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       # A PR is checked out as its merge commit, whose first parent is the base: depth 2 is enough to diff them.
       - uses: actions/checkout@v4
@@ -107,16 +107,17 @@ jobs:
           EVENT: ${{ github.event_name }}
           BEFORE: ${{ github.event.before }}
         run: |
-          # --no-renames: a rename lists only its new path, and its old one can belong to another unit.
-          list_units () { node packages/dialtone-react/parity/changed-units.mjs; }
+          # --no-renames: a rename lists only its new path, and its old one can belong to another unit. The base is
+          # what parity/extra-cases.mjs is compared with, so a change to it gates only the units whose cases changed.
+          list_units () { CHANGED_UNITS_BASE="$1" node packages/dialtone-react/parity/changed-units.mjs; }
           if [[ $EVENT == pull_request ]]; then
-            units=$(git diff --no-renames --name-only HEAD^1 HEAD | list_units)
+            units=$(git diff --no-renames --name-only HEAD^1 HEAD | list_units HEAD^1)
           elif [[ $BEFORE =~ ^0+$ ]] || ! git fetch --no-tags --depth=1 origin "$BEFORE"; then
             # A new branch, or a history rewrite: every ported unit, which a shared path selects (components/ and
             # common/ ones alike).
             units=$(echo packages/dialtone-react/package.json | list_units)
           else
-            units=$(git diff --no-renames --name-only "$BEFORE" HEAD | list_units)
+            units=$(git diff --no-renames --name-only "$BEFORE" HEAD | list_units "$BEFORE")
           fi
           echo "Units: ${units:-none}"
           # One line for GITHUB_OUTPUT. An empty list stays empty, so the steps below skip.
@@ -133,12 +134,14 @@ jobs:
           restore-keys: nx-dialtone-react-gate-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
 
       # One unit after another (15-50s each), every one reported even when an earlier one fails. On dialtone-react
-      # itself, stand-ins for a component that just merged don't fail: follow-up PRs swap the component in.
+      # itself, stand-ins for a component that just merged don't fail: follow-up PRs swap the component in. The check
+      # job typechecks the whole package, so no unit's gate repeats it.
       - name: Parity gate
         if: steps.units.outputs.list != ''
         env:
           UNITS: ${{ steps.units.outputs.list }}
           PARITY_SKIP_STAND_INS: ${{ github.event_name == 'push' && '1' || '0' }}
+          PARITY_SKIP_TYPECHECK: '1'
           PARITY_TMP: ${{ runner.temp }}
         run: |
           failed=0

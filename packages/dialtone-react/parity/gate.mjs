@@ -104,10 +104,15 @@ const reactFiles = fs.readdirSync(reactDir, { recursive: true, withFileTypes: tr
   .filter(d => d.isFile() && /\.[cm]?[jt]sx?$/.test(d.name)).map(d => path.join(d.parentPath, d.name));
 const sourceFiles = reactFiles.filter(f => !/\.(test|stories|parity)\.[cm]?[jt]sx?$/.test(f));
 
-// 1. Typecheck, the whole package (a unit can break its dependents' types).
-const tsc = run(pkg, ['tsc', '-p', 'tsconfig.json']);
-if (tsc.status === 0) ok('Typecheck', 'clean');
-else bad('Typecheck', plural((tsc.stdout.match(/error TS/g) ?? []).length, 'error'), block(tail(tsc.stdout)));
+// 1. Typecheck, the whole package (a unit can break its dependents' types). CI's check job runs this same tsc once per
+// run, so its gate job sets PARITY_SKIP_TYPECHECK=1 rather than repeat it for every unit it gates.
+if (process.env.PARITY_SKIP_TYPECHECK === '1') {
+  rows.push(['Typecheck', '⏭ skipped: CI\'s check job typechecks the package']);
+} else {
+  const tsc = run(pkg, ['tsc', '-p', 'tsconfig.json']);
+  if (tsc.status === 0) ok('Typecheck', 'clean');
+  else bad('Typecheck', plural((tsc.stdout.match(/error TS/g) ?? []).length, 'error'), block(tail(tsc.stdout)));
+}
 
 // Lint, the unit's directory (CI lints the whole package). Warnings are counted, not failed.
 {
