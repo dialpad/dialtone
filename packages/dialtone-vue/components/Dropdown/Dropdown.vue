@@ -494,12 +494,15 @@ export default {
 
       if (liElement?.role && liElement.id && this.highlightId !== liElement.id) {
         this.setHighlightId(liElement.id);
-        if (!this._getListItemNodes()?.includes(liElement)) return;
-        // A DtListItem disabled row takes the highlight but not focus, which would draw the keyboard
-        // focus ring under the pointer. The menu holds focus so Enter can't activate another row.
-        if (isDisabledRow(liElement) && this.focusMenuContent()) return;
-        liElement.focus();
+        if (this._getListItemNodes()?.includes(liElement)) this.focusHoveredRow(liElement);
       }
+    },
+
+    // A DtListItem disabled row takes the highlight but not focus, which would draw the keyboard
+    // focus ring under the pointer. The menu holds focus so Enter can't activate another row.
+    focusHoveredRow (row) {
+      if (isDisabledRow(row) && this.focusMenuContent()) return;
+      row.focus();
     },
 
     /** Focuses the menu container; false when it can't take focus (contentTabindex null). */
