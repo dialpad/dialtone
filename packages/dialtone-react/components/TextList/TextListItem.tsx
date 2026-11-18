@@ -49,6 +49,25 @@ function hasMarkerContent (node: ReactNode): boolean {
   });
 }
 
+// Separates portals from local marker content, looking through fragments. Keys follow the tree path.
+function splitMarker (node: ReactNode, prefix: string): { portals: ReactNode[]; local: ReactNode[] } {
+  const portals: ReactNode[] = [];
+  const local: ReactNode[] = [];
+  Children.toArray(node).forEach(child => {
+    const key = `${prefix}${isValidElement(child) || isPortal(child) ? (child as { key: string }).key : ''}`;
+    if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment) {
+      const inner = splitMarker(child.props.children, `${key}/`);
+      portals.push(...inner.portals);
+      local.push(...inner.local);
+    } else if (isPortal(child)) {
+      portals.push(<Fragment key={key}>{child as ReactNode}</Fragment>);
+    } else {
+      local.push(<Fragment key={key}>{child}</Fragment>);
+    }
+  });
+  return { portals, local };
+}
+
 const warn = (message: string) => console.warn(`[DtTextListItem] ${message}`);
 
 /**
@@ -71,7 +90,8 @@ export function DtTextListItem ({
   };
   const parentContext = useTextListContext();
   const parentType = parentContext ? parentContext.type : undefined;
-  const hasCustomMarker = hasMarkerContent(marker);
+  const { portals, local } = splitMarker(marker, '');
+  const hasCustomMarker = hasMarkerContent(local);
   const orderedValue = parentType === 'ordered' ? value : undefined;
 
   // Vue's mounted() checks: once per instance, so neither prop changes nor StrictMode repeat them.
@@ -102,17 +122,16 @@ export function DtTextListItem ({
         className,
       )}
     >
-      {hasCustomMarker ? (
+      {/* Portals sit outside the wrapper so they keep their React position when local content comes or goes. */}
+      {portals}
+      {hasCustomMarker && (
         <span
           data-qa="dt-text-list-item-marker"
           className={cx('d-text-list__item-marker', markerClass)}
           aria-hidden="true"
         >
-          {marker}
+          {local}
         </span>
-      ) : (
-        // No wrapper or class, but a portal-only marker still mounts at its target.
-        marker
       )}
       <div
         data-qa="dt-text-list-item-content"

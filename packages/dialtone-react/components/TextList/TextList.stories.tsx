@@ -85,8 +85,9 @@ type Story = StoryObj<TextListStoryArgs>;
 
 // TextListDefault.story.vue
 function TextListDefault (args: TextListStoryArgs) {
-  const items = args.items || [];
-  const itemValues = args.itemValues || [];
+  // A control can hold any JSON, so anything but an array of strings renders an empty list.
+  const items = Array.isArray(args.items) && args.items.every(item => typeof item === 'string') ? args.items : [];
+  const itemValues = Array.isArray(args.itemValues) ? args.itemValues : [];
 
   return (
     <DtTextList

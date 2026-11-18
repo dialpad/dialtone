@@ -372,5 +372,24 @@ describe('DtTextList', () => {
       expect(target.querySelector('[data-qa="portal-marker"]')).toBeInTheDocument();
       target.remove();
     });
+
+    it('keeps portal content mounted when a local marker is added beside it', () => {
+      const target = document.createElement('div');
+      document.body.appendChild(target);
+      const portal = createPortal(<input data-qa="portal-input" />, target);
+      const view = render(<DtTextList><DtTextListItem marker={<>{portal}</>}>Portal</DtTextListItem></DtTextList>);
+      const input = target.querySelector('input') as HTMLInputElement;
+      input.value = 'typed';
+
+      view.rerender(
+        <DtTextList><DtTextListItem marker={<>{portal}<i data-qa="local-icon" /></>}>Portal</DtTextListItem></DtTextList>,
+      );
+
+      expect(target.querySelector('input')).toBe(input);
+      expect(input.value).toBe('typed');
+      expect(document.querySelector('[data-qa="dt-text-list-item-marker"] [data-qa="local-icon"]')).toBeInTheDocument();
+      view.unmount();
+      target.remove();
+    });
   });
 });
