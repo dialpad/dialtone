@@ -270,7 +270,11 @@ export default {
 
   methods: {
     onClick (e) {
-      if (this.disabled) return;
+      if (this.disabled) {
+        // Also cancel the native default, such as navigation when element-type is "a".
+        e.preventDefault();
+        return;
+      }
       this.$emit('click', e);
     },
 

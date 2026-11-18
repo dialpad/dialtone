@@ -224,6 +224,17 @@ describe('DtListItem tests', () => {
         expect(wrapper.emitted('click')).toBeUndefined();
       });
 
+      it('cancels the native activation of a disabled link row', () => {
+        mockProps = { disabled: true, elementType: 'a' };
+        mockAttrs = { href: '/settings' };
+        updateWrapper();
+        const click = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+        wrapper.element.dispatchEvent(click);
+
+        expect(click.defaultPrevented).toBe(true);
+      });
+
       it('still emits mousemove and mouseleave', async () => {
         await wrapper.trigger('mousemove');
         await wrapper.trigger('mouseleave');

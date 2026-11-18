@@ -107,7 +107,7 @@ In a controlled single-selection dropdown, each option can also have:
 
 Your application decides which choices are available and supplies translated descriptions and headings. A selected option that becomes unavailable stays checked and keeps the pill’s label; recovering from it is up to your application. Clear still restores `neutral-value`. Changing these fields while the menu is open keeps focus on the same choice.
 
-`null`, an omitted field or an empty string means the field is absent. A malformed value is ignored with a development warning and doesn’t disable the pill. Multiple-selection popovers ignore all three fields.
+For `disabled`, `null` or an omitted field means the choice is available. For `description` and `group`, `null`, an omitted field or an empty string means the field is absent. A malformed value is ignored with a development warning and doesn’t disable the pill. Multiple-selection popovers ignore all three fields.
 
 ```vue demo
 <dt-filter-pill
@@ -124,9 +124,32 @@ Your application decides which choices are available and supplies translated des
   end-tooltip-text="Clear"
   use-dropdown
 />
-```
 
-This example uses `const selectedType = ref('all');`.
+<!-- @code -->
+<script setup>
+import { ref } from 'vue';
+import { DtFilterPill } from '@dialpad/dialtone/vue';
+
+const selectedType = ref('all');
+</script>
+
+<template>
+  <dt-filter-pill
+    v-model:selected="selectedType"
+    :options="[
+      { value: 'all', label: 'All types' },
+      { value: 'calls', label: 'Calls' },
+      { value: 'messages', label: 'Messages', description: 'Includes texts and chats' },
+      { value: 'archived', label: 'Archived', disabled: true, description: 'Choose All under Status to view archived items', group: 'Other views' },
+      { value: 'spam', label: 'Spam', group: 'Other views' },
+    ]"
+    label="Type"
+    neutral-value="all"
+    end-tooltip-text="Clear"
+    use-dropdown
+  />
+</template>
+```
 
 ### Controlled multiple selection
 

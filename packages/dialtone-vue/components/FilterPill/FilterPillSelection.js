@@ -34,7 +34,7 @@ function getOptionRows (records, issues) {
 function getOptionSections (rows, issues) {
   const sections = [];
   for (const row of rows) {
-    const current = sections.at(-1);
+    const current = sections[sections.length - 1];
     if (current && current.group === row.group) {
       current.rows.push(row);
       continue;
