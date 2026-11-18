@@ -6,10 +6,13 @@ import {
   type RootLayoutSidebarPosition,
 } from './RootLayoutConstants';
 
-export interface DtRootLayoutProps extends HTMLAttributes<HTMLDivElement> {
+// `dangerouslySetInnerHTML` is excluded: the root always renders its four regions, and React throws when a host
+// element has both children and an HTML payload. Pass HTML through a slot instead.
+export interface DtRootLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'dangerouslySetInnerHTML'> {
   /**
    * When true, the header, footer and sidebar will be locked in position and the content will
    * be scrollable. When false the header, footer and sidebar  will scroll out of view.
+   * Fixed mode applies at or above the selected `responsiveBreakpoint`; below it the layout is not locked.
    * @values true, false
    */
   fixed?: boolean;
@@ -18,7 +21,7 @@ export interface DtRootLayoutProps extends HTMLAttributes<HTMLDivElement> {
   headerClass?: ClassValue;
 
   /**
-   * Scroll the header with the page
+   * Pin the header to the top of the scroll container while the layout scrolls
    * @values true, false
    */
   headerSticky?: boolean;

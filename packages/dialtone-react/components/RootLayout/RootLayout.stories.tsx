@@ -178,4 +178,9 @@ export const StickyHeader: Story = {
     fixed: false,
     children: argsData.children.repeat(40),
   },
+
+  // The story's content is empty, as in Vue, so the children control would change nothing.
+  argTypes: {
+    children: { control: false },
+  },
 };

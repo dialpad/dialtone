@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { render, screen, type RenderResult } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { DtRootLayout, type DtRootLayoutProps } from './RootLayout';
@@ -139,6 +140,18 @@ describe('DtRootLayout Tests', () => {
 
         expect(wrapper).toHaveClass('d-root-layout--inverted');
       });
+    });
+  });
+
+  describe('React root props', () => {
+    it('forwards ref, data-qa, className and DOM props to the same root', () => {
+      const ref = createRef<HTMLDivElement>();
+      render(<DtRootLayout ref={ref} data-qa="custom-root" className="extra" id="my-root" />);
+      const root = screen.getByTestId('custom-root');
+
+      expect(ref.current).toBe(root);
+      expect(root).toHaveAttribute('id', 'my-root');
+      expect(root).toHaveClass('extra', 'root-layout', 'd-root-layout');
     });
   });
 
