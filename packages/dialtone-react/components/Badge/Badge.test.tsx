@@ -222,6 +222,12 @@ describe('DtBadge Tests', () => {
       expect(document.querySelector('.d-badge__icon-right')).not.toBeInTheDocument();
     });
 
+    it('should fall back to text for empty Fragment children', () => {
+      updateWrapper({ text: 'Fallback', children: <>{false}</> });
+
+      expect(document.querySelector('.d-badge__label')).toHaveTextContent('Fallback');
+    });
+
     it('should not render an icon wrapper for an empty Fragment slot', () => {
       updateWrapper({ startIcon: <>{[]}</>, endIcon: <><>{null}</></> });
 

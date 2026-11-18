@@ -86,6 +86,14 @@ function hasSlotContent (node: ReactNode): boolean {
     : hasContent(child));
 }
 
+// The default slot's fallback test: like Children.toArray(x).length > 0 (an empty string counts, as in Vue),
+// but an empty Fragment is unwrapped and counts as empty.
+function hasChildren (node: ReactNode): boolean {
+  return Children.toArray(node).some(child => isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment
+    ? hasChildren(child.props.children)
+    : true);
+}
+
 /**
  * A badge is a compact UI element that provides brief, descriptive information about an element.
  * It is terse, ideally one word.
@@ -154,7 +162,7 @@ export function DtBadge ({
       {decoration && <span className="d-badge__decorative" />}
       {hasStartIcon && <span className={cx('d-badge__icon-left', startIconClass)}>{startNode}</span>}
       <span className={cx('d-badge__label', labelClass)}>
-        {Children.toArray(children).length > 0 ? children : text}
+        {hasChildren(children) ? children : text}
       </span>
       {hasEndIcon && <span className={cx('d-badge__icon-right', endIconClass)}>{endNode}</span>}
     </span>
