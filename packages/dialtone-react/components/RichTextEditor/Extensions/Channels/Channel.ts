@@ -26,14 +26,17 @@ export const ChannelPlugin = Mention.extend({
       name: {
         default: '',
       },
+      // Parsed as strings: tiptap's default parser coerces numeric strings, dropping leading zeros.
       id: {
         default: '',
+        parseHTML: (element: HTMLElement) => element.getAttribute('id'),
       },
       locked: {
         default: false,
       },
       channelKey: {
         default: '',
+        parseHTML: (element: HTMLElement) => element.getAttribute('channelKey'),
       },
     };
   },

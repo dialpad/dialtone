@@ -683,22 +683,24 @@ export function DtRichTextEditor ({
   });
 
   const triggerInputChangeEvents = useEffectEvent((instance: Editor) => {
-    setCurrentValue(getOutput(instance, outputFormat, extensionsRef.current));
-
-    // Always output JSON in a separate event
+    // Capture every output before calling a consumer: a handler can replace the content synchronously, and the
+    // others must still report the change that fired this.
+    const output = getOutput(instance, outputFormat, extensionsRef.current);
     const jsonValue = instance.getJSON();
-    onJsonInput?.(jsonValue);
-    // Always output HTML in a separate event
     const htmlValue = instance.getHTML();
-    onHtmlInput?.(htmlValue);
-
-    // Always output text in a separate event
     const textValue = instance.getText({ blockSeparator: '\n' });
-    onTextInput?.(textValue);
+    // Markdown only when something reads it: the static renderer rejects nodes whose renderHTML returns a DOM
+    // element (e.g. from additionalExtensions), which would otherwise break updates that never use markdown.
+    const markdownValue = onMarkdownInput
+      ? renderEditorToMarkdown(jsonValue, extensionsRef.current)
+      : undefined;
 
-    // Always output markdown in a separate event
-    const markdownValue = renderEditorToMarkdown(jsonValue, extensionsRef.current);
-    onMarkdownInput?.(markdownValue);
+    setCurrentValue(output);
+    // Always output JSON, HTML, text and markdown in separate events
+    onJsonInput?.(jsonValue);
+    onHtmlInput?.(htmlValue);
+    onTextInput?.(textValue);
+    if (markdownValue !== undefined) onMarkdownInput?.(markdownValue);
   });
 
   const applyPhoneMarks = useEffectEvent((instance: Editor) => {
@@ -714,6 +716,8 @@ export function DtRichTextEditor ({
       doc.descendants((node, pos) => {
         if (!node.isText || !node.text) return;
         for (const number of linkPhoneNumbers) {
+          // An empty string matches at every index and the search would never advance.
+          if (!number) continue;
           let searchFrom = 0;
           let idx;
           while ((idx = node.text.indexOf(number, searchFrom)) !== -1) {
@@ -808,7 +812,8 @@ export function DtRichTextEditor ({
   const handleLinkClick = useEffectEvent((instance: Editor, event: MouseEvent) => {
     if (!link || event.button !== 0) return false;
     const anchor = (event.target as Element | null)?.closest?.('a');
-    if (!anchor) return false;
+    // Phone number anchors (LinkPhoneNumbers) have no href: they aren't the built-in link's.
+    if (!anchor || !anchor.hasAttribute('href')) return false;
     instance.emit('link-click', {
       href: anchor.href,
       text: anchor.textContent,
@@ -1135,6 +1140,8 @@ export function DtRichTextEditor ({
         handlePaste: (_view, event) => {
           const clipboardData = event.clipboardData ||
             (window as unknown as { clipboardData: DataTransfer }).clipboardData;
+          // ProseMirror can call this with its parsed slice and an event that has no clipboard data: let it insert.
+          if (!clipboardData) return false;
           const textData = clipboardData.getData('text/plain');
           const htmlData = clipboardData.getData('text/html');
 
@@ -1213,7 +1220,8 @@ export function DtRichTextEditor ({
     lastEditable.current = editable;
     const instance = editorRef.current;
     if (!instance) return;
-    instance.setEditable(editable);
+    // No update event: the content hasn't changed, so save and validation listeners shouldn't hear of it.
+    instance.setEditable(editable, false);
     updateEditorAttributes(instance, { 'aria-readonly': !editable });
   }, [editable]);
 
@@ -1278,7 +1286,8 @@ export function DtRichTextEditor ({
   const openLink = () => {
     editor?.chain()?.focus();
     const href = editor?.getAttributes('link').href;
-    window.open(href, '_blank');
+    // noopener: the destination can't reach this window through window.opener.
+    window.open(href, '_blank', 'noopener');
   };
 
   useImperativeHandle(ref, () => ({
@@ -1313,7 +1322,7 @@ export function DtRichTextEditor ({
 
       if (!prefix) {
         // If no matching pattern is found, prepend default prefix
-        linkInput = `${defaultPrefix}${linkInput}`;
+        linkInput = `${defaultPrefix ?? ''}${linkInput}`;
       }
 
       instance

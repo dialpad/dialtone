@@ -33,6 +33,46 @@ const attr = (node: NodeArgs['node'], name: string): string => {
   return value ? String(value) : '';
 };
 
+// A JSON string for the metadata in a markdown comment: quotes and backslashes are escaped, and `>` is encoded so
+// a value can't close the comment.
+const jsonString = (value: string): string => JSON.stringify(value).replace(/>/g, '\\u003e');
+
+// The shortest run of backticks that doesn't occur in the code, at least `min` long.
+const backtickFence = (code: string, min: number): string => {
+  const runs = code.match(/`+/g) || [];
+  let length = min;
+  while (runs.some(run => run.length === length)) length++;
+  return '`'.repeat(length);
+};
+
+const wrapCode = (code: string): string => {
+  const fence = backtickFence(code, 1);
+  // CommonMark strips one leading and trailing space, so pad when the code touches a backtick.
+  const pad = code.startsWith('`') || code.endsWith('`') ? ' ' : '';
+  return `${fence}${pad}${code}${pad}${fence}`;
+};
+
+// Collapse runs of blank lines between blocks, but not inside fenced code, where they are literal.
+const collapseBlankLines = (markdown: string): string => {
+  let fence = '';
+  const lines = markdown.split('\n');
+  const result: string[] = [];
+  for (const line of lines) {
+    if (!fence) {
+      const opening = /^(`{3,})/.exec(line);
+      if (opening) fence = opening[1];
+    } else if (new RegExp(`^\`{${fence.length},}\\s*$`).test(line)) {
+      fence = '';
+    }
+    result.push(line);
+    if (!fence && line === '' && result.length > 2 && result[result.length - 2] === '' &&
+      result[result.length - 3] === '') {
+      result.pop();
+    }
+  }
+  return result.join('\n');
+};
+
 /**
  * Renders a TipTap/ProseMirror JSON document to a markdown string.
  *
@@ -60,7 +100,9 @@ export function renderEditorToMarkdown (jsonContent: JSONContent, extensions: Ex
         // Override codeBlock: built-in passes null language through literally
         codeBlock ({ node, children }: NodeArgs) {
           const lang = attr(node, 'language');
-          return `\`\`\`${lang}\n${joinChildren(children)}\n\`\`\`\n`;
+          const code = joinChildren(children);
+          const fence = backtickFence(code, 3);
+          return `${fence}${lang}\n${code}\n${fence}\n`;
         },
 
         // Custom Dialtone node types
@@ -68,7 +110,8 @@ export function renderEditorToMarkdown (jsonContent: JSONContent, extensions: Ex
           const id = attr(node, 'id');
           const contactKey = attr(node, 'contactKey');
           const name = attr(node, 'name');
-          return `<!-- @mention: {"id": "${id}", "contactKey": "${contactKey}", "name": "${name}"} -->`;
+          return `<!-- @mention: {"id": ${jsonString(id)}, "contactKey": ${jsonString(contactKey)}, ` +
+            `"name": ${jsonString(name)}} -->`;
         },
 
         channel ({ node }: NodeArgs) {
@@ -76,7 +119,8 @@ export function renderEditorToMarkdown (jsonContent: JSONContent, extensions: Ex
           const channelKey = attr(node, 'channelKey');
           const name = attr(node, 'name');
           const locked = String(node.attrs?.locked ?? '');
-          return `<!-- @channel: {"id": "${id}", "channelKey": "${channelKey}", "name": "${name}", "locked": "${locked}"} -->`;
+          return `<!-- @channel: {"id": ${jsonString(id)}, "channelKey": ${jsonString(channelKey)}, ` +
+            `"name": ${jsonString(name)}, "locked": ${jsonString(locked)}} -->`;
         },
 
         'slash-commands' ({ node }: NodeArgs) {
@@ -114,7 +158,12 @@ export function renderEditorToMarkdown (jsonContent: JSONContent, extensions: Ex
         },
 
         code ({ children }: MarkArgs) {
-          return wrapMark(joinChildren(children), '`', '`');
+          const text = joinChildren(children);
+          const trimmed = text.trim();
+          if (!trimmed) return text;
+          const leading = text.slice(0, text.length - text.trimStart().length);
+          const trailing = text.slice(text.trimEnd().length);
+          return `${leading}${wrapCode(trimmed)}${trailing}`;
         },
 
         link ({ mark, children }: MarkArgs) {
@@ -123,7 +172,9 @@ export function renderEditorToMarkdown (jsonContent: JSONContent, extensions: Ex
           const trimmed = text.trim();
           const leading = text.slice(0, text.length - text.trimStart().length);
           const trailing = text.slice(text.trimEnd().length);
-          return `${leading}[${trimmed}](${href})${trailing}`;
+          // Parentheses and backslashes in the destination are escaped, so the first `)` doesn't end it.
+          const destination = href.replace(/[()\\]/g, '\\$&');
+          return `${leading}[${trimmed}](${destination})${trailing}`;
         },
 
         // Override underline: pass-through (no markdown equivalent, matches legacy no-op)
@@ -136,5 +187,5 @@ export function renderEditorToMarkdown (jsonContent: JSONContent, extensions: Ex
   // Collapse 3+ consecutive newlines to 2 (CommonMark ignores extra blank
   // lines between blocks), and strip the leading newline that the built-in
   // paragraph renderer always prepends to the first node.
-  return output.replace(/\n{3,}/g, '\n\n').replace(/^\n+|\n+$/g, '');
+  return collapseBlankLines(output).replace(/^\n+|\n+$/g, '');
 }

@@ -26,10 +26,11 @@ const shortCodePasteMatch = (text: string) => {
   const matches = [...text.matchAll(emojiShortCodeRegex)];
 
   return matches
-    .filter(match => codeToEmojiData(match[0]))
+    .filter(match => codeToEmojiData(match[2]))
     .map(match => ({
-      index: match.index,
-      text: match[0],
+      // The regex's first group is the leading space (or empty): keep it out of the replaced range.
+      index: match.index + match[1].length,
+      text: match[2],
       match,
     }));
 };

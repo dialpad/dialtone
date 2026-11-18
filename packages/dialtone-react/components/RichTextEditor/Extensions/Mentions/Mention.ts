@@ -28,11 +28,14 @@ export const MentionPlugin = Mention.extend({
       avatarSrc: {
         default: '',
       },
+      // Parsed as strings: tiptap's default parser coerces numeric strings, dropping leading zeros.
       id: {
         default: '',
+        parseHTML: (element: HTMLElement) => element.getAttribute('id'),
       },
       contactKey: {
         default: '',
+        parseHTML: (element: HTMLElement) => element.getAttribute('contactKey'),
       },
     };
   },

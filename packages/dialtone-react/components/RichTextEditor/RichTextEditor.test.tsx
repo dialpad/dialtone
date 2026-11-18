@@ -1288,16 +1288,19 @@ describe('DtRichTextEditor tests', () => {
         // A consumer that intercepts the link would preventDefault on the event;
         // the click handler then reports it as handled so the browser does not
         // follow the anchor's target="_blank".
+        listeners.onLinkClick.mockImplementation(({ event }: { event: MouseEvent }) => event.preventDefault());
         const view = getEditor().view;
         const anchor = result.container.querySelector('a.d-link') as Element;
         const event = new MouseEvent('click', { button: 0, cancelable: true });
         Object.defineProperty(event, 'target', { value: anchor });
-        event.preventDefault();
+        expect(event.defaultPrevented).toBe(false);
         let handled: boolean | void | undefined;
         await act(async () => {
           handled = view.someProp('handleDOMEvents', (handlers) => handlers.click?.(view, event as PointerEvent));
         });
 
+        expect(emitted('onLinkClick')).toBeTruthy();
+        expect(event.defaultPrevented).toBe(true);
         expect(handled).toBe(true);
       });
 

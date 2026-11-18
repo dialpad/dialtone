@@ -32,9 +32,24 @@ export const LinkPhoneNumbers = Mark.create({
         props: {
           handleClick (view, pos, event) {
             const { state } = view;
-            const $pos = state.doc.resolve(pos);
+            let $pos = state.doc.resolve(pos);
+            // A click on the first character of a number resolves to the position before it, whose marks are the
+            // preceding text's: use the clicked anchor, when there is one, to find the number's own marks.
+            const anchor = (event.target as Element | null)?.closest?.('a');
+            if (anchor && view.dom.contains(anchor)) {
+              try {
+                const start = view.posAtDOM(anchor, 0);
+                if (state.doc.resolve(start).nodeAfter?.marks.some(m => m.type === type)) {
+                  $pos = state.doc.resolve(start + 1);
+                }
+              } catch {
+                // The anchor isn't in the document: keep the click's own position.
+              }
+            }
             if (!$pos.marks().some(m => m.type === type)) return false;
-            const range = getMarkRange($pos, type);
+            // An explicit attribute filter: by default the range matches the first mark's attributes, which can
+            // be another mark's (e.g. a textStyle colour) and find no range.
+            const range = getMarkRange($pos, type, {});
             const phoneNumber = range ? state.doc.textBetween(range.from, range.to) : '';
             event.preventDefault();
             editor.emit('phone-click', { phoneNumber });

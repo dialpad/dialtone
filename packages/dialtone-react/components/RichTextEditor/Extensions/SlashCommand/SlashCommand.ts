@@ -4,7 +4,7 @@ import { PluginKey } from '@tiptap/pm/state';
 
 // Slash Command Mention component
 import SlashCommandComponent, { type SlashCommandsStorage } from './SlashCommandComponent';
-import { mergeAttributes, nodeInputRule, nodePasteRule } from '@tiptap/core';
+import { mergeAttributes, nodeInputRule, nodePasteRule, type Editor } from '@tiptap/core';
 
 interface SlashCommandItem {
   command: string;
@@ -29,11 +29,19 @@ const slashCommandPasteMatch = (text: string, slashCommandRegex: RegExp) => {
     });
 };
 
-// The command names the consumer's items() lists for an empty query. As in Vue, it's called with the query only, and
-// read synchronously.
-const getCommands = (options: SlashCommandOptions): string[] => {
-  const items = options.suggestion?.items as unknown as (props: { query: string }) => SlashCommandItem[];
-  return items({ query: '' }).map(suggestion => suggestion.command);
+const escapeRegExp = (text: string): string => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// The command names the consumer's items() lists for an empty query, read synchronously as in Vue.
+const getCommands = (options: SlashCommandOptions, editor: Editor): string[] => {
+  const items = options.suggestion?.items as unknown as
+    (props: { query: string; editor: Editor }) => SlashCommandItem[];
+  return items({ query: '', editor }).map(suggestion => suggestion.command);
+};
+
+// The alternatives of a regex matching the command names, or null when there are none.
+const commandsPattern = (commands: string[]): string | null => {
+  const names = commands.filter(Boolean).map(escapeRegExp);
+  return names.length ? names.join('|') : null;
 };
 
 export const SlashCommandPlugin = Mention.extend<SlashCommandOptions, SlashCommandsStorage>({
@@ -89,8 +97,9 @@ export const SlashCommandPlugin = Mention.extend<SlashCommandOptions, SlashComma
   },
 
   addInputRules () {
-    const suggestions = getCommands(this.options);
-    const slashCommandRegex = new RegExp(`^((?:\\/)(${suggestions.join('|')})) $`);
+    const pattern = commandsPattern(getCommands(this.options, this.editor));
+    if (!pattern) return [];
+    const slashCommandRegex = new RegExp(`^((?:\\/)(${pattern})) $`);
     return [
       nodeInputRule({
         find: slashCommandRegex,
@@ -103,8 +112,9 @@ export const SlashCommandPlugin = Mention.extend<SlashCommandOptions, SlashComma
   },
 
   addPasteRules () {
-    const suggestions = getCommands(this.options);
-    const slashCommandRegex = new RegExp(`^((?:\\/)(${suggestions.join('|')})) ?$`, 'g');
+    const pattern = commandsPattern(getCommands(this.options, this.editor));
+    if (!pattern) return [];
+    const slashCommandRegex = new RegExp(`^((?:\\/)(${pattern})) ?$`, 'g');
     return [
       nodePasteRule({
         find: (text) => slashCommandPasteMatch(text, slashCommandRegex),

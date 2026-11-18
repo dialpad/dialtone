@@ -111,8 +111,11 @@ export function SuggestionList ({ items, command, itemComponent: ItemComponent, 
 
   // Vue binds `@keydown.prevent="onKeyDown"`, which passes the KeyboardEvent where onKeyDown expects `{ event }`,
   // so Vue's throws on `event.key`. This wraps it, so a key pressed on an item navigates like one in the editor.
+  // DtListItem already activates a focused item on Enter (through onClick), so Enter is left out here: handling it
+  // too would select twice.
   const handleItemKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
     event.preventDefault();
+    if (event.key === 'Enter') return;
     onKeyDown({ event: event.nativeEvent });
   };
 

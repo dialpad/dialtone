@@ -200,7 +200,9 @@ export function createSuggestionRenderer (
     let escHandler: ((e: KeyboardEvent) => void) | null = null;
 
     function updatePosition () {
-      updateFloatingPosition(floatingEl, virtualEl, { placement });
+      updateFloatingPosition(floatingEl, virtualEl, { placement }).catch(() => {
+        // clientRect can return null when the decoration node is gone: the popup keeps its last position.
+      });
     }
 
     function show () {
@@ -265,6 +267,7 @@ export function createSuggestionRenderer (
         escHandler = null;
         floatingEl = null;
         component = null;
+        popupIsOpen = false;
       },
     };
   };
