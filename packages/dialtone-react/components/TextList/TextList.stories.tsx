@@ -87,7 +87,8 @@ type Story = StoryObj<TextListStoryArgs>;
 function TextListDefault (args: TextListStoryArgs) {
   // A control can hold any JSON, so anything but an array of strings renders an empty list.
   const items = Array.isArray(args.items) && args.items.every(item => typeof item === 'string') ? args.items : [];
-  const itemValues = Array.isArray(args.itemValues) ? args.itemValues : [];
+  // Non-integer entries stay unset, so they never shift the values of later items.
+  const itemValues: unknown[] = Array.isArray(args.itemValues) ? args.itemValues : [];
 
   return (
     <DtTextList
@@ -98,11 +99,14 @@ function TextListDefault (args: TextListStoryArgs) {
       start={args.start}
       reversed={args.reversed}
     >
-      {items.map((item, index) => (
-        <DtTextListItem key={index} value={itemValues[index]}>
-          {item}
-        </DtTextListItem>
-      ))}
+      {items.map((item, index) => {
+        const entry = itemValues[index];
+        return (
+          <DtTextListItem key={index} value={Number.isInteger(entry) ? (entry as number) : undefined}>
+            {item}
+          </DtTextListItem>
+        );
+      })}
     </DtTextList>
   );
 }

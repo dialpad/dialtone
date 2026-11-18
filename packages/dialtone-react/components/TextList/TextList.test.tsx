@@ -391,5 +391,25 @@ describe('DtTextList', () => {
       view.unmount();
       target.remove();
     });
+
+    it('removes keyless text siblings from the marker when only the keyed icon remains', () => {
+      const view = render(
+        <DtTextList>
+          <DtTextListItem marker={<>{'A'}{'B'}<i key="icon" data-qa="icon" /></>}>Item</DtTextListItem>
+        </DtTextList>,
+      );
+      const marker = () => document.querySelector('[data-qa="dt-text-list-item-marker"]') as HTMLElement;
+      expect(marker()).toHaveTextContent('AB');
+
+      view.rerender(
+        <DtTextList>
+          <DtTextListItem marker={<><i key="icon" data-qa="icon" /></>}>Item</DtTextListItem>
+        </DtTextList>,
+      );
+
+      expect(marker()).not.toHaveTextContent('A');
+      expect(marker()).not.toHaveTextContent('B');
+      expect(marker().querySelector('[data-qa="icon"]')).toBeInTheDocument();
+    });
   });
 });

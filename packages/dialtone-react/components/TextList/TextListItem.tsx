@@ -53,8 +53,10 @@ function hasMarkerContent (node: ReactNode): boolean {
 function splitMarker (node: ReactNode, prefix: string): { portals: ReactNode[]; local: ReactNode[] } {
   const portals: ReactNode[] = [];
   const local: ReactNode[] = [];
-  Children.toArray(node).forEach(child => {
-    const key = `${prefix}${isValidElement(child) || isPortal(child) ? (child as { key: string }).key : ''}`;
+  Children.toArray(node).forEach((child, index) => {
+    // Text nodes and keyless portals carry no key, so they fall back to their position among siblings.
+    const ownKey = isValidElement(child) || isPortal(child) ? (child as { key: string | null }).key : null;
+    const key = `${prefix}${ownKey ?? `#${index}`}`;
     if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment) {
       const inner = splitMarker(child.props.children, `${key}/`);
       portals.push(...inner.portals);
