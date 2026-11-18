@@ -382,7 +382,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 
 Motion only runs while the user points at the item or it has keyboard focus, each movement takes at most 3 s (`loop`: 5 s), and Esc stops it (WCAG 2.2.2). With reduced motion on, the text jumps to its end and stays.
 
-`DtText` never adds a tab stop. Put the text inside an item (button, link, or an element with an item role such as `menuitem` or `option`) so keyboard users can reveal it; a container that is only focusable by script, such as popover content, does not count. Plain text with no item around it slides on hover only, so give its full content another way too.
+`DtText` never adds a tab stop. Put the text inside a keyboard-focusable item (button, link, or an element with an item role such as `menuitem` or `option` that can take focus) so keyboard users can reveal it; a container that is only focusable by script, such as popover content, does not count. Plain text with no item around it slides on hover only, so give its full content another way too.
 
 The defaults need no setup. To tune a menu, a sidebar or one element, set these CSS variables on it or any ancestor:
 
@@ -596,7 +596,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 ## Accessibility
 
 - Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
-- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in. Inside an item (button, link, or an element with an item role), `slide` gives keyboard and pointer users the full text without a tooltip.
+- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in. Inside a keyboard-focusable item (button, link, or an element with an item role that can take focus), `slide` gives keyboard and pointer users the full text without a tooltip. With reduced motion on, the label jumps to its end and its start stays cut off, so keep another way to the full text (tooltip or `aria-label`) where the start matters.
 - Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
 
 ## Vue API
