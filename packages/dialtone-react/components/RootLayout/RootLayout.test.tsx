@@ -153,6 +153,28 @@ describe('DtRootLayout Tests', () => {
       expect(root).toHaveAttribute('id', 'my-root');
       expect(root).toHaveClass('extra', 'root-layout', 'd-root-layout');
     });
+
+    it('ignores dangerouslySetInnerHTML passed at runtime instead of throwing', () => {
+      const props = { 'data-qa': 'html-root', dangerouslySetInnerHTML: { __html: '<b>x</b>' } };
+      render(<DtRootLayout {...props}>content</DtRootLayout>);
+      const root = screen.getByTestId('html-root');
+
+      expect(root.querySelector('b')).toBeNull();
+      expect(root.querySelector('main')).toHaveTextContent('content');
+    });
+
+    it('updates the fixed and responsive classes when the props change', () => {
+      const { rerender } = render(<DtRootLayout data-qa="rerender-root" />);
+      const root = screen.getByTestId('rerender-root');
+
+      expect(root).toHaveClass('d-root-layout--fixed', 'd-root-layout__responsive--default');
+
+      rerender(<DtRootLayout data-qa="rerender-root" fixed={false} responsiveBreakpoint="sm" />);
+
+      expect(root).not.toHaveClass('d-root-layout--fixed');
+      expect(root).not.toHaveClass('d-root-layout__responsive--default');
+      expect(root).toHaveClass('d-root-layout__responsive--sm');
+    });
   });
 
   describe('Accessibility Tests', () => {

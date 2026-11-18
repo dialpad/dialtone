@@ -119,18 +119,23 @@ const html = (value: string | undefined) => (
 // Vue's `<span v-html>`.
 const span = (value: string | undefined) => <span dangerouslySetInnerHTML={{ __html: value ?? '' }} />;
 
+// The layout props both Vue story templates bind.
+const layoutProps = (args: RootLayoutStoryArgs) => ({
+  headerClass: args.headerClass,
+  headerSticky: args.headerSticky,
+  contentClass: args.contentClass,
+  sidebarClass: args.sidebarClass,
+  sidebarPosition: args.sidebarPosition,
+  footerClass: args.footerClass,
+  fixed: args.fixed,
+  responsiveBreakpoint: args.responsiveBreakpoint,
+});
+
 // RootLayoutDefault.story.vue
 function RootLayoutDefault ({ header, sidebar, footer, children, ...args }: RootLayoutStoryArgs) {
   return (
     <DtRootLayout
-      headerClass={args.headerClass}
-      headerSticky={args.headerSticky}
-      contentClass={args.contentClass}
-      sidebarClass={args.sidebarClass}
-      sidebarPosition={args.sidebarPosition}
-      footerClass={args.footerClass}
-      fixed={args.fixed}
-      responsiveBreakpoint={args.responsiveBreakpoint}
+      {...layoutProps(args)}
       header={html(header)}
       sidebar={html(sidebar)}
       footer={html(footer)}
@@ -145,14 +150,7 @@ function RootLayoutDefault ({ header, sidebar, footer, children, ...args }: Root
 function RootLayoutSticky ({ header, sidebar, footer, children: _children, ...args }: RootLayoutStoryArgs) {
   return (
     <DtRootLayout
-      headerClass={args.headerClass}
-      headerSticky={args.headerSticky}
-      contentClass={args.contentClass}
-      sidebarClass={args.sidebarClass}
-      sidebarPosition={args.sidebarPosition}
-      footerClass={args.footerClass}
-      fixed={args.fixed}
-      responsiveBreakpoint={args.responsiveBreakpoint}
+      {...layoutProps(args)}
       header={span(header)}
       sidebar={span(sidebar)}
       footer={span(footer)}

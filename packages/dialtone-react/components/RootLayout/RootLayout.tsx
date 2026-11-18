@@ -11,7 +11,8 @@ import {
 export interface DtRootLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'dangerouslySetInnerHTML'> {
   /**
    * When true, the header, footer and sidebar will be locked in position and the content will
-   * be scrollable. When false the header, footer and sidebar  will scroll out of view.
+   * be scrollable. When false the header, footer and sidebar  will scroll out of view
+   * (a header with `headerSticky` still pins to the top while the page scrolls).
    * Fixed mode applies at or above the selected `responsiveBreakpoint`; below it the layout is not locked.
    * @values true, false
    */
@@ -82,8 +83,13 @@ export function DtRootLayout ({
   children,
   className,
   ref,
-  ...attrs
+  ...allAttrs
 }: DtRootLayoutProps) {
+  // The type omits it, but a JS caller or a spread can still pass it, and React throws on a host element with both
+  // children and an HTML payload.
+  const { dangerouslySetInnerHTML: _html, ...attrs } = allAttrs as typeof allAttrs & {
+    dangerouslySetInnerHTML?: unknown;
+  };
   const isInverted = sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.END
     || sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT;
   const responsiveBreakpointClass = responsiveBreakpoint
