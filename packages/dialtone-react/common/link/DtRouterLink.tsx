@@ -1,4 +1,5 @@
 import { createElement, useEffect, type AnchorHTMLAttributes, type ReactNode, type Ref } from 'react';
+import { devWarn } from '../dev';
 import { useLinkComponent } from './DtLinkProvider';
 
 /** A vue-router location as Dialtone's `to` props take it: a path, or a location object for the app's router. */
@@ -16,13 +17,14 @@ export interface DtRouterLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorE
  * What a port renders where dialtone-vue renders `resolveComponent('RouterLink')` (DtLink, DtButton and
  * SplitButton when `to` is set): the DtLinkProvider's component with `to`, `replace` and everything else.
  * Without a provider, a string `to` renders `<a href={to}>` and an object `to` an `<a>` without `href`, with a
- * console warning, as DtButton warns and falls back to `<a>` without vue-router. `replace` isn't rendered then.
+ * development-only console warning, as DtButton warns and falls back to `<a>` without vue-router. `replace` isn't
+ * rendered then.
  */
 export function DtRouterLink ({ to, replace = false, ref, ...rest }: DtRouterLinkProps) {
   const LinkComponent = useLinkComponent();
   const missing = !LinkComponent;
   useEffect(() => {
-    if (missing) console.warn('DtRouterLink: "to" needs a link component from DtLinkProvider. Falling back to <a>.');
+    if (missing) devWarn('DtRouterLink: "to" needs a link component from DtLinkProvider. Falling back to <a>.');
   }, [missing]);
   // createElement: the component comes from context, so it's the same one every render, not created in render.
   if (LinkComponent) return createElement(LinkComponent, { ...rest, to, replace, ref });
