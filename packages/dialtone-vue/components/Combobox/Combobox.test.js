@@ -1,3 +1,6 @@
+import { h } from 'vue';
+import { DtListItem } from '@/components/ListItem';
+import { DtListItemGroup } from '@/components/ListItemGroup';
 import { mount } from '@vue/test-utils';
 import DtCombobox from './Combobox.vue';
 import DtInput from '@/components/Input/Input.vue';
@@ -65,6 +68,25 @@ describe('DtCombobox Tests', () => {
     mockSlots = {};
     vi.clearAllMocks();
     vi.restoreAllMocks();
+  });
+
+  it('clears the highlighted option when hovering a group heading before Enter', async () => {
+    mockSlots = {
+      input: ({ inputProps }) => h(DtInput, inputProps),
+      list: ({ listProps }) => h('ul', listProps, [
+        h('li', { role: 'presentation' }, h(DtListItemGroup, { id: 'team', heading: 'Teams' }, () => [
+          h(DtListItem, { id: 'sales', role: 'option', navigationType: 'arrow-keys' }, () => 'Sales'),
+        ])),
+      ]),
+    };
+    updateWrapper();
+    await wrapper.get('#sales').trigger('mousemove');
+    expect(wrapper.get('input').attributes('aria-activedescendant')).toBe('sales');
+    await wrapper.get('#team-heading').trigger('mousemove');
+    await wrapper.get('input').trigger('keydown', { key: 'Enter', code: 'Enter' });
+    expect(wrapper.emitted('select')).toBeUndefined();
+    expect(wrapper.get('input').attributes('aria-activedescendant')).toBeUndefined();
+    expect(wrapper.emitted('highlight').at(-1)).toEqual([-1]);
   });
 
   describe('Presentation Tests', () => {

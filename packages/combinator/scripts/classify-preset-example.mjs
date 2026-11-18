@@ -8,9 +8,18 @@ import {
 
 /** Classify one curated source; materialization remains owned by the UI serializer. */
 export function classifyPresetExample({
-  component, documentation, publicNames, runtime, icons, policyReason, materialize,
+  component, documentation, publicNames, runtime, icons, policyReason, exclusion, materialize,
 }) {
   const entry = { disposition: 'unresolved', reasons: [], requiredContext: [] };
+  if (exclusion !== undefined) {
+    if (!exclusion || typeof exclusion.reason !== 'string' || !exclusion.reason.trim()
+      || typeof exclusion.owner !== 'string' || !exclusion.owner.trim()) {
+      throw new Error('Preset lookup exclusions require a reason and owner.');
+    }
+    entry.disposition = 'policy-excluded';
+    entry.reasons.push(`Policy: ${exclusion.reason.trim()} (owner: ${exclusion.owner.trim()})`);
+    return entry;
+  }
   const components = new Map(documentation.map(record => [normalizeComponentName(record.displayName), record]));
   const doc = components.get(normalizeComponentName(component));
   if (!publicNames.has(component) || !runtime[component] || !doc) {

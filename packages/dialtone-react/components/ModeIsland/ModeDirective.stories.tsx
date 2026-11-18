@@ -1,11 +1,10 @@
 import { useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StandIn } from '../../.storybook/StandIn';
 import type { ContentMode } from '../../common/mode_constants';
+import { DtSelectMenu } from '../SelectMenu/SelectMenu';
 import { DtStack } from '../Stack/Stack';
 import { DtText } from '../Text/Text';
 import { DtToggle } from '../Toggle/Toggle';
-import { DtValidationMessages } from '../ValidationMessages/ValidationMessages';
 import { useModeRegion } from './ModeDirective';
 
 const MODE_OPTIONS: { value: ContentMode; label: string }[] = [
@@ -110,26 +109,12 @@ function ModeDirectiveDefault () {
         <Heading>Dynamic arg</Heading>
         <DtStack gap="400">
             <span className="d-w-200">
-              <StandIn for="select-menu">
-                <div className="">
-                  <label>
-                    <div data-qa="dt-select-label" className="d-text d-text-label--md d-text--tone-secondary d-select__label-text">Mode</div>
-                    <div className="d-select" data-qa="dt-select-wrapper">
-                      <select
-                        className="d-select__input"
-                        data-qa="dt-select"
-                        value={dynamicMode}
-                        onChange={event => setDynamicMode(event.target.value as ContentMode)}
-                      >
-                        {MODE_OPTIONS.map(option => (
-                          <option key={option.value} className="" value={option.value}>{option.label}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </label>
-                  <DtValidationMessages data-qa="dt-select-messages" validationMessages={[]} />
-                </div>
-              </StandIn>
+              <DtSelectMenu
+                label="Mode"
+                options={MODE_OPTIONS}
+                value={dynamicMode}
+                onValueChange={value => setDynamicMode(value as ContentMode)}
+              />
             </span>
             <Region mode={dynamicMode} className={`${REGION} d-w264`}>
               <Body>v-dt-mode:{dynamicMode}</Body>

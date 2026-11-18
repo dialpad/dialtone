@@ -6,7 +6,7 @@ Apply to `packages/dialtone-vue/components/**`. These are shared authoring rules
 
 - **New components**: Composition API with `<script setup lang="ts">`. Use `defineProps`, `defineEmits`, `defineSlots`.
 
-- **Existing components**: Options API with `compatConfig: { MODE: 3 }`. Do NOT convert unless explicitly asked.
+- **Existing components**: Retain their existing Options API style. Do NOT convert unless explicitly asked.
 
 ## Props
 
@@ -17,10 +17,15 @@ Apply to `packages/dialtone-vue/components/**`. These are shared authoring rules
 
 ## Events
 
-- Use `modelValue` / `update:modelValue` for the v-model prop and emitted event
-  contract. In Vue templates, follow the existing linted listener spelling,
+- Use `modelValue` / `update:modelValue` for the default v-model contract.
+  An explicit component contract may use a named model, such as controlled
+  FilterPill's `selected` / `update:selected`, without redefining its legacy model.
+  In Vue templates, follow the existing linted listener spelling,
   for example `@update:model-value`.
-- Use `update:open` for overlay visibility; verify each component's emitted events before changing its contract.
+- Use `open` / `update:open` for visibility where the component defines them;
+  distinguish logical visibility from a separate terminal `opened` notification.
+  Verify each component's timing and preserve existing contracts and DOM listener
+  fallthrough when adding events.
 
 ## Slots
 

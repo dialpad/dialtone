@@ -49,11 +49,34 @@ and `NaN` values and disabled members.
 
 ## Slots
 
-`DtcCodeEditor` reads slot content from `options.slots`. It renders the default
-slot as direct content and wraps named slots in `<template #name>`.
+`DtcCodeEditor` reads slot content from `options.slots`. It wraps named slots in
+`<template #name>`. Default-slot content that uses documented slot bindings gets
+`<template #default="...">` in both displayed and copied code; ordinary default
+content stays unwrapped.
 
 For scoped slots, `DtcCodeEditor` checks which documented bindings appear in the
-slot template string and writes the matching scope expression.
+slot template string and writes the matching scope expression. A variant can set
+`scopeName` on a named slot when its template needs the complete slot object, including
+keys such as `aria-expanded` that are not JavaScript identifiers:
+
+```js
+export default {
+  default: {
+    slots: {
+      anchor: {
+        scopeName: 'anchorAttrs',
+        initialValue: `<dt-button :aria-expanded="anchorAttrs['aria-expanded']">Actions</dt-button>`,
+      },
+    },
+  },
+};
+```
+
+Use the same slot metadata under `defaults.slots` to share it across presets.
+The single preview and spec sheet expose that name, and displayed/copied code
+uses `#anchor="anchorAttrs"`. Bind the needed fields explicitly; forwarding the
+whole object can also forward Vue-reserved fields such as `ref`. Slots without
+`scopeName` retain their existing destructured bindings.
 
 ## Copy behavior
 
@@ -61,8 +84,17 @@ The Copy button writes `copyText`, a plain-text template built from `info` and
 `options`. It does not read DOM text, so layout or flex indentation does not
 change clipboard output.
 
-The Copy JSON button writes a variant preset fragment from non-empty current
-options. It skips disabled members.
+The Copy JSON button writes a variant preset fragment from current options.
+It skips disabled members, undefined/NaN values, empty slots, and empty-string
+or null bindings already equal to their component default. Explicit nondefault
+empty strings and null values remain in the preset, including Filter Pill's
+`selected` and `neutralValue` identities. It retains each slot's `scopeName` so
+the preset keeps its binding when copied back into a variant bank.
+
+An optional bank `copyNotice` is copied as a template comment and retained in
+preset metadata; closing comment delimiters in the notice are escaped. The
+notice describes missing application setup. Its mention of `v-model:selected`
+does not add application state or an update handler to a configuration snapshot.
 
 ## Latent event console
 

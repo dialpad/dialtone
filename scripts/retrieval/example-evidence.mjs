@@ -28,8 +28,8 @@ export function extractExampleFiles(record) {
 }
 
 /** Machine proof is promoted explicitly; it never selects sources or creates human evidence. */
-export function promoteExampleEvidence(report, records, evidence) {
-  const profile = getProfile(report.profile);
+export function promoteExampleEvidence(report, records, evidence, profile = getProfile(report.profile)) {
+  assert.equal(report.profile, profile.id, 'Report and selected profile differ');
   const artifact = profile.artifacts[report.artifact?.package];
   assert.ok(artifact && report.artifact.profile === profile.id, 'Unknown consumer artifact/profile');
   assert.equal(report.artifact.version, artifact.version);

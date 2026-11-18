@@ -95,3 +95,14 @@ export function checkTemplateApi(ast, metadata, directives, icons = {}) {
   visit(ast);
   return [...new Set(checked)];
 }
+
+/** Example IDs become fixture paths: flat and nested authored IDs plus encoded preset IDs, no dot segments. */
+export function assertExampleId(id) {
+  const shape = /^examples\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*|presets\/Dt[A-Za-z0-9]+\/[^/\\]+)$/;
+  if (!shape.test(id) || id.split('/').some(segment => segment === '.' || segment === '..'))
+    throw new Error(`Unsupported example ID path: ${id}`);
+  return id;
+}
+
+/** Parse with the DOM compiler's HTML options so void elements such as <br> match the SFC build. */
+export const parseTemplate = (compilerDom, content) => compilerDom.parse(content);

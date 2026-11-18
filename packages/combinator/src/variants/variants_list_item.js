@@ -13,4 +13,20 @@ export default {
       },
     },
   },
+
+  disabled: {
+    props: {
+      navigationType: {
+        initialValue: 'tab',
+      },
+      disabled: {
+        initialValue: true,
+      },
+    },
+    slots: {
+      default: {
+        initialValue: 'Delete',
+      },
+    },
+  },
 };

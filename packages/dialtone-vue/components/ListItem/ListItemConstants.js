@@ -1,3 +1,5 @@
+export const LIST_ITEM_ROLES = ['listitem', 'menuitem', 'option', 'menuitemradio'];
+
 export const LIST_ITEM_TYPES = {
   DEFAULT: 'default',
   CUSTOM: 'custom',
@@ -10,6 +12,7 @@ export const LIST_ITEM_NAVIGATION_TYPES = {
 };
 
 export default {
+  LIST_ITEM_ROLES,
   LIST_ITEM_TYPES,
   LIST_ITEM_NAVIGATION_TYPES,
 };

@@ -106,8 +106,9 @@ function getAttributes (info) {
   return properties.filter(property => {
     return property.description === 'attribute';
   }).map(property => {
-    const type = property.type.name.toLowerCase();
-    const defaultValue = controlMap[type].default();
+    const types = (property.type.elements ?? [property.type]).map(type => type.name.toLowerCase());
+    const type = types.join('|');
+    const defaultValue = controlMap[types[0]].default();
     return {
       name: property.name,
       type: {

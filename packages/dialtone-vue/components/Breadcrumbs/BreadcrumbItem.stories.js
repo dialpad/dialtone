@@ -50,16 +50,4 @@ const DefaultTemplate = (args, { argTypes }) =>
 export const BreadcrumbItem = {
   render: DefaultTemplate,
   args: {},
-  parameters: {
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: 'listitem',
-            enabled: false,
-          },
-        ],
-      },
-    },
-  },
 };

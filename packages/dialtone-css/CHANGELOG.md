@@ -1,3 +1,38 @@
+## [9.6.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.6.0...dialtone-css/v9.6.1) (2026-11-17)
+
+
+### Bug Fixes
+
+* **Migration:** DLT-3838 emit DtText variant from the typography migration ([#1586](https://github.com/dialpad/dialtone/issues/1586)) ([9b2946b](https://github.com/dialpad/dialtone/commit/9b2946bd0af02dae0af84956951665da3d747f67))
+
+# [9.6.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.5.0...dialtone-css/v9.6.0) (2026-11-17)
+
+
+### Features
+
+* **Stack:** DLT-3826 add alignSelf prop ([#1581](https://github.com/dialpad/dialtone/issues/1581)) ([0fce80f](https://github.com/dialpad/dialtone/commit/0fce80f912d496f1f4ec5f81be81be6acef3acfa))
+* **Toggle:** NO-JIRA default gap ([#1583](https://github.com/dialpad/dialtone/issues/1583)) ([657a951](https://github.com/dialpad/dialtone/commit/657a951291a3b996072ad5083601b239097a8749))
+
+# [9.5.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.4.0...dialtone-css/v9.5.0) (2026-11-13)
+
+
+### Features
+
+* **Filter Pill:** DLT-3736 add controlled selection ([#1577](https://github.com/dialpad/dialtone/issues/1577)) ([73afd3b](https://github.com/dialpad/dialtone/commit/73afd3b6a510d412ee04c0c74171af2f1121e025))
+
+# [9.4.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.3.0...dialtone-css/v9.4.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* **Dialtone Css:** DLT-3718 retain grouped public utility selectors ([#1513](https://github.com/dialpad/dialtone/issues/1513)) ([a1246d5](https://github.com/dialpad/dialtone/commit/a1246d5f4845f5011adbf79ce3743c2149bc6327))
+* **Dialtone Css:** DLT-3723 show slider marks in Safari without overflow-clip-margin ([#1521](https://github.com/dialpad/dialtone/issues/1521)) ([f44f1f5](https://github.com/dialpad/dialtone/commit/f44f1f55235b1a020d8b7466f7140717c574ff60))
+
+
+### Features
+
+* **Migration:** DLT-3516 convert Text kind and size to variant ([#1539](https://github.com/dialpad/dialtone/issues/1539)) ([11b76f9](https://github.com/dialpad/dialtone/commit/11b76f95401735cf96735498543df35b5df260df))
+
 # [9.3.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.2.0...dialtone-css/v9.3.0) (2026-11-03)
 
 

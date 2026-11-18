@@ -217,12 +217,12 @@ As a fallback, positioning CSS utilities are available: [position](/utilities/la
     border-color="subtle"
   >
     <dt-stack direction="row" justify="space-between" align="center">
-      <dt-text as="h2" kind="headline" :size="300">Sticky header</dt-text>
+      <dt-text as="h2" variant="headline-md">Sticky header</dt-text>
     </dt-stack>
   </dt-box>
   <dt-box padding="100" padding-inline="200">
     <dt-stack gap="100">
-      <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }}</dt-text>
+      <dt-text v-for="i in 20" :key="i" variant="body-sm">Scrollable item {{ i }}</dt-text>
     </dt-stack>
   </dt-box>
 </dt-box>
@@ -318,7 +318,7 @@ The `z-index` prop maps to Dialtone's semantic z-index tokens. Stacking order de
   block-size="200"
   padding="200"
 >
-  Tall content clipped by <dt-text kind="code" size="200">overflow="hidden"</dt-text>. Nemo rem ullam culpa ut laudantium repellat unde. Consequuntur cupiditate voluptatem velit rerum doloremque voluptatum commodi vitae vel inventore iusto ducimus iure? Ex fugit quae iste perferendis eaque! Alias in reiciendis suscipit facere incidunt repellendus! Voluptatibus iste nesciunt numquam consectetur suscipit unde atque tempora saepe est illum quaerat sit natus mollitia excepturi? Repellendus explicabo deserunt ipsam sint esse ab delectus beatae eligendi velit libero quasi culpa ut tenetur sunt corrupti iure suscipit magni fuga blanditiis nihil incidunt! Mollitia voluptas sed temporibus quasi.
+  Tall content clipped by <dt-text variant="code-sm">overflow="hidden"</dt-text>. Nemo rem ullam culpa ut laudantium repellat unde. Consequuntur cupiditate voluptatem velit rerum doloremque voluptatum commodi vitae vel inventore iusto ducimus iure? Ex fugit quae iste perferendis eaque! Alias in reiciendis suscipit facere incidunt repellendus! Voluptatibus iste nesciunt numquam consectetur suscipit unde atque tempora saepe est illum quaerat sit natus mollitia excepturi? Repellendus explicabo deserunt ipsam sint esse ab delectus beatae eligendi velit libero quasi culpa ut tenetur sunt corrupti iure suscipit magni fuga blanditiis nihil incidunt! Mollitia voluptas sed temporibus quasi.
 </dt-box>
 ```
 
@@ -335,7 +335,7 @@ Integrates the `v-dt-scrollbar` directive. An inner viewport wrapper is inserted
   block-size="300"
 >
   <dt-stack gap="100">
-    <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }}</dt-text>
+    <dt-text v-for="i in 20" :key="i" variant="body-sm">Scrollable item {{ i }}</dt-text>
   </dt-stack>
 </dt-box>
 ```
@@ -366,8 +366,8 @@ Use the `as` prop to render semantic HTML elements for accessibility.
   shadow="card"
 >
   <dt-stack gap="200">
-    <dt-text as="h3" kind="headline" size="md">Card title</dt-text>
-    <dt-text kind="body" size="sm">Card body content with supporting text.</dt-text>
+    <dt-text as="h3" variant="headline-md">Card title</dt-text>
+    <dt-text variant="body-sm">Card body content with supporting text.</dt-text>
   </dt-stack>
 </dt-box>
 ```
@@ -383,7 +383,7 @@ Use the `as` prop to render semantic HTML elements for accessibility.
 >
   <dt-stack gap="200">
     <dt-stack direction="row" justify="space-between" align="baseline">
-      <dt-text as="h2" kind="headline" :size="400">Title</dt-text>
+      <dt-text as="h2" variant="headline-lg">Title</dt-text>
       <dt-button size="200">Action</dt-button>
     </dt-stack>
     <dt-stack direction="row" gap="200">

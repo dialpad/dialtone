@@ -76,6 +76,11 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
   ],
 
   invalid: [
+    ...['v-bind="props"', ':[key]="value"', 'v-model:kind="kind"', ':size="200"', 'v-custom="props"'].map(extra => ({
+      code: `<template><dt-text kind="body" size="sm" ${extra} /></template>`,
+      output: null,
+      errors: [{ messageId: 'deprecatedDtTextSizeManual' }],
+    })),
     // size="xs" on dt-button
     {
       code: '<template><dt-button size="xs" /></template>',
@@ -142,18 +147,17 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
       output: null,
       errors: [{ messageId: 'deprecatedDtTextSizeManual' }],
     },
-    // size t-shirt with a variant is treated as a raw-size override migration
+    // Explicit variants protect the entire Text element from autofixes
     {
       code: '<template><dt-text variant="body-md" size="lg" /></template>',
-      output: '<template><dt-text variant="body-md" :size="400" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      output: null,
+      errors: [{ messageId: 'deprecatedDtTextSizeManual' }],
     },
-    // size t-shirt with a dynamic variant can safely migrate to a numeric override
+    // A dynamic variant also protects the size override
     {
       code: '<template><dt-text :variant="textVariant" size="sm" /></template>',
-      output:
-        '<template><dt-text :variant="textVariant" :size="200" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      output: null,
+      errors: [{ messageId: 'deprecatedDtTextSizeManual' }],
     },
     // size t-shirt with a dynamic kind needs manual migration
     {
