@@ -2,6 +2,7 @@ import { expect, it } from 'vitest';
 import { assertTemplateBindings, assertStaticHtml, sourceSetupForTemplate } from '../src/generators/example-template.mjs';
 import { buildRecords } from '../src/generators/build-public-docs.mjs';
 import { resolve } from 'node:path';
+import { sourceVersions } from '../../../scripts/retrieval/release-profile.mjs';
 
 it.each(['true', 'false', '\'all\'', '"unread"', 'null', '[]', '[\'unread\', \'needs-review\']'])(
   'extracts only referenced literal ref setup: %s', value => {
@@ -37,7 +38,7 @@ it('rejects missing state while retaining source setup and lexical template scop
   expect(() => assertTemplateBindings('<div v-bind="$attrs" v-for="row in [1, 2]">{{ row }}</div>')).not.toThrow();
   expect(() => assertTemplateBindings('<dt-stack><template #default="{ row }">{{ row }}</template></dt-stack>')).not.toThrow();
   const example = buildRecords(resolve('../../apps/dialtone-documentation/docs/components/toggle.md')).find(record => record.id === 'examples/toggle-v-model');
-  expect(example.content).toContain('const checked = ref(false)');
+  expect(example.content).toContain('const checked = ref(true)');
   expect(example.content).toContain('v-model="checked"');
   expect(example.content).not.toContain('utilityClassDocs');
 });
@@ -66,7 +67,7 @@ it('delivers raw utility HTML without a Vue scaffold or unrelated table script',
   expect(example.example.representation).toBe('static-html');
   expect(example.example.utilities).toEqual(['d-ww-normal']);
   expect(example.example.components).toEqual([]);
-  expect(example.example.profile.dependencies).toEqual({ '@dialpad/dialtone': '10.5.1' });
+  expect(example.example.profile.dependencies).toEqual({ '@dialpad/dialtone': sourceVersions()['@dialpad/dialtone'] });
   expect(example.content).toContain('<p class="d-ww-normal">');
   expect(example.content).not.toContain('const wordWrap');
   expect(example.content).not.toContain('## App.vue');

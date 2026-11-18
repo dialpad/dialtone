@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.15.0...eslint-plugin-dialtone/v1.15.1) (2026-11-17)
+
+
+### Bug Fixes
+
+* **Eslint Plugin Dialtone:** NO-JIRA only flag old icon paths in deprecated-icons ([#1579](https://github.com/dialpad/dialtone/issues/1579)) ([ad9afb9](https://github.com/dialpad/dialtone/commit/ad9afb9ead7108468488314148811f15638ef673))
+
 # [1.15.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.3...eslint-plugin-dialtone/v1.15.0) (2026-11-10)
 
 

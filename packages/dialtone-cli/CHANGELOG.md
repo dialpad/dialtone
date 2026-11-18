@@ -1,3 +1,24 @@
+## [1.10.1](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.10.0...dialtone-cli/v1.10.1) (2026-11-17)
+
+
+### Bug Fixes
+
+* **Migration:** DLT-3838 emit DtText variant from the typography migration ([#1586](https://github.com/dialpad/dialtone/issues/1586)) ([9b2946b](https://github.com/dialpad/dialtone/commit/9b2946bd0af02dae0af84956951665da3d747f67))
+
+# [1.10.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.9.0...dialtone-cli/v1.10.0) (2026-11-17)
+
+
+### Documentation
+
+* **Content:** NO-JIRA use a valid French number in the phone number example ([#1578](https://github.com/dialpad/dialtone/issues/1578)) ([816050a](https://github.com/dialpad/dialtone/commit/816050aa5a78a9e87397eb1d1328244a85b666e0))
+
+
+### Features
+
+* **Phone:** DLT-3823 add formatPhoneNumber function ([#1576](https://github.com/dialpad/dialtone/issues/1576)) ([bdc36ea](https://github.com/dialpad/dialtone/commit/bdc36ea00add32b7fb0692e13017a48731211efb))
+* **Stack:** DLT-3826 add alignSelf prop ([#1581](https://github.com/dialpad/dialtone/issues/1581)) ([0fce80f](https://github.com/dialpad/dialtone/commit/0fce80f912d496f1f4ec5f81be81be6acef3acfa))
+* **Toggle:** NO-JIRA default gap ([#1583](https://github.com/dialpad/dialtone/issues/1583)) ([657a951](https://github.com/dialpad/dialtone/commit/657a951291a3b996072ad5083601b239097a8749))
+
 # [1.9.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.8.0...dialtone-cli/v1.9.0) (2026-11-13)
 
 

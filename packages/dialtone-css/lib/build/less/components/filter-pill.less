@@ -126,6 +126,12 @@
     padding: var(--dt-spacing-100);
   }
 
+  // Grouped rows sit inside a DtListItemGroup, so they miss the dropdown list's
+  // direct-child row spacing (dropdown.less); match it to keep one rhythm across groups.
+  &__menu-group :where(.d-list-item) {
+    margin-block-start: var(--dt-spacing-25);
+  }
+
   &__clear {
     --button-padding-x: var(--dt-spacing-75) !important;
     --button-padding-y: var(--dt-spacing-0) !important;

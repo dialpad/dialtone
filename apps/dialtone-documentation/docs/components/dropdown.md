@@ -160,11 +160,11 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 
 ## Persistent Menu Choices
 
-Menu radio choices require `menuitemradio` support in both ListItem and Dropdown. Older packages, including `@dialpad/dialtone` 10.5.1, do not include this API. Check the supported roles in your installed package before adopting this pattern.
+Menu radio choices require `menuitemradio` support in both ListItem and Dropdown, available in `@dialpad/dialtone` 10.12.0 and later.
 
 The parent owns the committed sort order. Each radio row uses `selected` for its checkmark and `aria-checked`; arrows and typeahead move focus without changing that state. ListItemGroup supplies an optional heading inside the menu. Ordinary action rows can share the menu and keep `menuitem`.
 
-<!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices","exclude":{"reason":"The dt10-pinned profile uses @dialpad/dialtone 10.5.1, which lacks menuitemradio checked state and navigation. Re-enable after a published compatible release, a compatible fixture profile, and consumer build, API, keyboard and accessibility qualification.","owner":"DLT-3738"}} -->
+<!-- @example {"id":"examples/docs/components/dropdown/persistent-menu-choices"} -->
 
 ```vue demo
 <dt-dropdown>
@@ -269,7 +269,7 @@ With `navigationType="arrow-keys"`, `UP` and `DOWN` move focus through the appli
 
 Keyboard opening starts on the first application row, or Close when there are no rows. The built-in visually hidden Close becomes visible while keyboard-focused in an arrow-key menu and hides again when focus leaves. `ESC` closes the menu and returns focus to the trigger. `ENTER` and `SPACE` activate the focused command. Focusing Close does not emit an application-row `highlight` index or activate a row; existing row indexes and checked choices stay unchanged. Dismissal still clears the highlight with `-1`.
 
-The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. Use `li` rows for pointer-driven Dropdown navigation. A hand-authored `menuitemradio` must have a nonempty unique ID to participate; id-less radio rows are excluded. Non-`li` rows retain their existing pointer behavior: hover does not transfer menu focus or emit `highlight`. Headings and separators stay outside the navigable collection. Hovering an ID-bearing group heading clears the navigation highlight and emits `highlight(-1)` without moving focus or changing the checked choice. Direct calls to the exported mixin's `setHighlightId` retain legacy behavior: a nonempty ID is stored even before its row renders; an unmatched ID in a rendered collection clears the highlighted index.
+The shared keyboard-navigation mixin accepts a string or array of roles through `listItemRole`; its default remains `option`. Dropdown collects `menuitem` and `menuitemradio` in document order. Built-in ListItem IDs are generated and remain stable. Use `li` rows for pointer-driven Dropdown navigation. A hand-authored `menuitemradio` must have a nonempty unique ID to participate; id-less radio rows are excluded. Non-`li` rows retain their existing pointer behavior: hover does not transfer menu focus or emit `highlight`. Headings and separators stay outside the navigable collection. Hovering an ID-bearing group heading clears the navigation highlight and emits `highlight(-1)` without moving focus or changing the checked choice. Hovering a ListItem with `disabled` moves the highlight to it but gives focus to the menu instead of the row, so no keyboard focus ring appears under the pointer and Enter can't activate a different row; the arrow keys continue from the hovered row. If the menu can't take focus (`content-tabindex` set to `null`), the hovered row takes focus instead, so its focus ring can appear. Opening with the keyboard focuses the first row even when it's a disabled ListItem, unless you set `initial-focus-element`. Direct calls to the exported mixin's `setHighlightId` retain legacy behavior: a nonempty ID is stored even before its row renders; an unmatched ID in a rendered collection clears the highlighted index.
 
 <script setup>
 import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';

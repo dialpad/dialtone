@@ -1,4 +1,4 @@
-import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from '@/components/Stack/StackConstants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_ALIGN_SELF, DT_STACK_JUSTIFY } from '@/components/Stack/StackConstants';
 
 function _isDefaultDirection (direction) {
   return direction === DT_STACK_DIRECTION.default;
@@ -72,6 +72,10 @@ function getResponsiveAlignClasses (align) {
   return _getResponsiveClasses(align, 'align', DT_STACK_ALIGN);
 }
 
+function getResponsiveAlignSelfClasses (alignSelf) {
+  return _getResponsiveClasses(alignSelf, 'align-self', DT_STACK_ALIGN_SELF);
+}
+
 function getResponsiveJustifyClasses (justify) {
   if (typeof justify !== 'object' || justify === null) return [];
 
@@ -86,12 +90,13 @@ function getResponsiveJustifyClasses (justify) {
   });
 }
 
-export function getResponsiveClasses (direction, gap, align, justify) {
+export function getResponsiveClasses (direction, gap, align, justify, alignSelf) {
   return [
     ...getResponsiveDirectionClasses(direction),
     ...getResponsiveGapClasses(gap),
     ...getResponsiveAlignClasses(align),
     ...getResponsiveJustifyClasses(justify),
+    ...getResponsiveAlignSelfClasses(alignSelf),
   ];
 }
 
@@ -103,6 +108,11 @@ export function getDefaultGapClass (gap) {
 export function getDefaultAlignClass (align) {
   const validAlign = _getDefaultValue(align);
   return DT_STACK_ALIGN.includes(validAlign) ? `d-stack--align-${validAlign}` : null;
+}
+
+export function getDefaultAlignSelfClass (alignSelf) {
+  const validAlignSelf = _getDefaultValue(alignSelf);
+  return DT_STACK_ALIGN_SELF.includes(validAlignSelf) ? `d-stack--align-self-${validAlignSelf}` : null;
 }
 
 /**

@@ -146,6 +146,9 @@ importers:
       inquirer:
         specifier: ^9.1.5
         version: 9.3.8(@types/node@20.19.39)
+      libphonenumber-js:
+        specifier: 1.13.15
+        version: 1.13.15
       linkifyjs:
         specifier: 4.3.2
         version: 4.3.2

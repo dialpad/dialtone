@@ -149,6 +149,8 @@ export default {
 
     options () { this.checkControlledConfiguration(); },
 
+    // Fires on every controlledState recompute (the computed returns a new array), not only on
+    // removal: a row that moves into or out of a group remounts, and restoreRemovedOptionFocus refocuses it.
     controlledOptionValues (values, previous) {
       if (!this.controlledAtBirth) return;
       this.restoreRemovedOptionFocus(previous);
@@ -253,6 +255,10 @@ export default {
       return this.optionIds.get(value);
     },
 
+    controlledDescriptionId (value) {
+      return `${this.controlledOptionId(value)}-description`;
+    },
+
     controlledRowSelected (value) {
       if (!this.controlledState.valid) return false;
       return (this.controlledDraft ?? this.controlledState.values).includes(value);
@@ -281,7 +287,9 @@ export default {
       this.reconcileCheckboxes();
     },
 
+    /** Built-in row activation. Refuses an unavailable option itself rather than trusting the row to stay silent. */
     selectControlledOption (value) {
+      if (this.controlledState.rows.find(row => row.option.value === value)?.disabled) return;
       this.commitControlled(value, 'select', true);
     },
 

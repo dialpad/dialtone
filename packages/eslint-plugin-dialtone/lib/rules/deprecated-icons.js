@@ -24,7 +24,8 @@ module.exports = {
         },
     },
     create(context) {
-        const iconRegex = /.*@dialpad\/dialtone\/(vue\/.*|.+\.svg)/gim;
+        // Old icon paths only. No /g flag: a global regex keeps lastIndex between exec calls and skips matches.
+        const iconRegex = /@dialpad\/dialtone\/(vue\/icons\/.+|.+\.svg)/i;
         const brandIconsList = [
             'IconAirtable',
             'IconAmex',

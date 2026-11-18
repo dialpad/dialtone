@@ -16,13 +16,18 @@ const metadataExports = {
 export const sha256 = (bytes) =>
   createHash('sha256').update(bytes).digest('hex');
 
+const resolveProfile = (value) =>
+  typeof value === 'string' ? getProfile(value) : structuredClone(value);
+
 // The caller supplies explicit JSON; this helper never discovers/resolves an installation.
+// `selection` is a fixed profile ID or an explicitly selected release profile.
 export async function createConsumerFixture(
   parent,
-  id,
+  selection,
   { packages = {} } = {},
 ) {
-  const profile = getProfile(id);
+  const profile = resolveProfile(selection);
+  const { id } = profile;
   await mkdir(parent, { recursive: true });
   const directory = await mkdtemp(join(parent, `${id}-`));
   const dependencyRoot = join(directory, profile.layout.dependencyRoot);
@@ -77,8 +82,9 @@ export async function createConsumerFixture(
 }
 
 // Evidence of a packed artifact is distinct from an installed/build/browser claim.
-export async function fingerprintArtifact(profileId, packageRoot, paths) {
-  const profile = getProfile(profileId);
+export async function fingerprintArtifact(selection, packageRoot, paths) {
+  const profile = resolveProfile(selection);
+  const profileId = profile.id;
   const pkg = JSON.parse(
     await readFile(join(packageRoot, 'package.json'), 'utf8'),
   );
