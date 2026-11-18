@@ -1,6 +1,7 @@
 import { cleanup, render, screen, within } from '@testing-library/react';
 import { Fragment, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { DtEmojiTextWrapper, type DtEmojiTextWrapperProps } from './EmojiTextWrapper';
 import { getEmojiData, setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '../../common/emoji';
 import customEmojiJson from '../../common/custom-emoji.json';
@@ -266,13 +267,13 @@ describe('DtEmojiTextWrapper Tests', () => {
     });
 
     it('keeps a nested script body as a string', () => {
-      cleanup();
-      render(
+      // The server renderer drops an array child from a script body, so check the emitted markup.
+      const html = renderToStaticMarkup(
         <DtEmojiTextWrapper>
           <script type="application/ld+json" data-qa="s">{'{"a":1}'}</script>
         </DtEmojiTextWrapper>,
       );
-      expect(screen.getByTestId('s').textContent).toBe('{"a":1}');
+      expect(html).toContain('>{"a":1}</script>');
     });
 
     it('keeps a nested script with innerHTML as an element', () => {

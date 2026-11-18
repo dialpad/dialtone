@@ -75,10 +75,13 @@ function searchNodes (children: ReactNode, size: IconSize): ReactNode[] {
   // Children.toArray flattens nested arrays into one key scope (and leaves portal keys as they are), so each nested
   // array is wrapped in a keyed Fragment first; searchNode then recurses into it with its own scope.
   // The generated key must not equal a sibling's own key, or Children.toArray gives both the same key.
+  // Sibling keys are collected once per level, and only when the level holds a nested array.
+  const taken = Array.isArray(children) && children.some(Array.isArray)
+    ? new Set(children.map(c => (isValidElement(c) ? c.key : null)))
+    : null;
   const level = Array.isArray(children)
     ? children.map((child, index) => {
-      if (!Array.isArray(child)) return child;
-      const taken = new Set(children.map(c => (isValidElement(c) ? c.key : null)));
+      if (!Array.isArray(child) || !taken) return child;
       let key = `list-${index}`;
       while (taken.has(key)) key += '_';
       return <Fragment key={key}>{child}</Fragment>;
