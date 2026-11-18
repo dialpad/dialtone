@@ -396,6 +396,7 @@ describe('DtFilterPill Tests', function () {
         await click(clearBtn);
 
         expect(MOCK_CLEAR_STUB).toHaveBeenCalled();
+        expect(MOCK_VALUE_CHANGE_STUB).toHaveBeenCalledWith([{ name: 'Option A' }, { name: 'Option B' }]);
         expect(lastValue()?.[0].active).toBeUndefined();
       });
     });
@@ -499,6 +500,20 @@ describe('DtFilterPill Tests', function () {
         await click(cancelBtn);
 
         expect(MOCK_OPEN_STUB.mock.lastCall?.[0]).toBe(false);
+        expect(MOCK_APPLY_STUB).not.toHaveBeenCalled();
+      });
+
+      // React-only: Vue's test cancels without editing, so it can't tell a discarded draft from a kept one.
+      it('Should discard an edited selection when Cancel is clicked', async () => {
+        await click(document.querySelector('input[type="checkbox"]'));
+        await click(document.querySelector('[data-qa="dt-filter-pill__cancel-button"]'));
+        await finishTransitions();
+        await click(button);
+
+        const checkbox = document.querySelector<HTMLInputElement>('input[type="checkbox"]');
+
+        expect(checkbox?.checked).toBe(false);
+        expect(MOCK_VALUE_CHANGE_STUB).not.toHaveBeenCalled();
         expect(MOCK_APPLY_STUB).not.toHaveBeenCalled();
       });
 
@@ -764,7 +779,7 @@ describe('DtFilterPill Tests', function () {
         expect(document.body.textContent).toContain('Custom header content');
       });
 
-      it('Should not render header in dropdown mode', () => {
+      it('Should not render header in dropdown mode', async () => {
         mockProps = {
           useDropdown: true,
           value: MOCK_TEST_FILTERS.map(f => ({ ...f })),
@@ -774,7 +789,9 @@ describe('DtFilterPill Tests', function () {
         };
 
         updateWrapper();
+        await click(button);
 
+        expect(document.querySelector('[data-qa="dt-dropdown-list-wrapper"]')).toBeInTheDocument();
         expect(document.body.textContent).not.toContain('Should not appear');
       });
     });

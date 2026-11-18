@@ -179,6 +179,11 @@ function FilterPillDefault ({ value, onValueChange, content, defaultSlot, ...res
 }
 
 const SIZE_NAMES: Record<string, string> = {
+  100: 'Extra small',
+  200: 'Small',
+  300: 'Medium',
+  400: 'Large',
+  500: 'Extra Large',
   xs: 'Extra small',
   sm: 'Small',
   md: 'Medium',

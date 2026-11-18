@@ -228,7 +228,7 @@ export interface DtFilterPillProps extends NativeAttributes {
   /** Allows you to customize the popover footer. Receives { close, apply, cancel } bindings. */
   footerContent?: SlotProp<DtFilterPillFooterScope>;
 
-  /** Called with the native click event when clicking the clear button */
+  /** Called with the React mouse event when clicking the clear button; `event.nativeEvent` is the browser's. */
   onClear?: (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 
   /** Called when the popover is shown or hidden */
