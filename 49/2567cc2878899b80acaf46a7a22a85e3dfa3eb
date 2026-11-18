@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Dropdown/Dropdown.stories.tsx
+  s_391fc9f13256b4::t_bd6b5d1856f322 1-514
+packages/dialtone-react/components/Dropdown/DropdownStoryConstants.ts
+  s_391fc9f13256b4::t_bc5c434fd345e9 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "492567cc2878899b80acaf46a7a22a85e3dfa3eb",
+  "prompts": {},
+  "sessions": {
+    "s_391fc9f13256b4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b2ae8902-91c9-4299-8d95-a570f55ec034",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

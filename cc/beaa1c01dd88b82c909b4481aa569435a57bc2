@@ -1,0 +1,59 @@
+apps/dialtone-documentation/docs/components/chip.md
+  s_bade019f38acf7::t_e845129d74483b 83,117,123-124,129-130
+apps/dialtone-documentation/docs/guides/migration/badge-chip-api/index.md
+  s_bade019f38acf7::t_eaf590eb4ba2b9 88-89,95
+packages/combinator/src/variants/variants_chip.js
+  s_7f48e5f6931395::t_347b205e2302ec 85,100
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_bade019f38acf7::t_b43324d6722ac8 242-244
+packages/dialtone-vue/components/Chip/Chip.stories.js
+  s_bade019f38acf7::t_5f0390e529d173 4,154-159
+packages/dialtone-vue/components/Chip/Chip.test.js
+  s_bade019f38acf7::t_47a7346d52f22f 5,403-416,439-472
+packages/dialtone-vue/components/Chip/Chip.vue
+  s_ef7de98bfdb7b8::t_e818d1c8e98000 2-5,31,35,41,74-78,101,111,196-206,361-363,387-394
+packages/dialtone-vue/components/Chip/ChipDefault.story.vue
+  s_7f48e5f6931395::t_b397347f3c40bd 11,25,35
+packages/dialtone-vue/components/Chip/ChipVariants.story.vue
+  s_87afb9dbc71274::t_7ada5574d71982 7,10,47,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ccbeaa1c01dd88b82c909b4481aa569435a57bc2",
+  "prompts": {},
+  "sessions": {
+    "s_7f48e5f6931395": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d668-b995-7211-9300-e5c41201c5ae",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_87afb9dbc71274": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d18c-a60e-7c53-82ec-1d3a864f23d0",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_bade019f38acf7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4ddb7b2-f62a-4d3c-9d59-f141d6ddfcc1",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_ef7de98bfdb7b8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d668-b909-7741-a946-e59825198b62",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+packages/combinator/.github/documentation/internal/CONTROLS.md
+  s_bda95360f3cca1::t_996b2af13d5310 75-79
+  s_bda95360f3cca1::t_bb3a3e4ce3b256 73,109
+packages/combinator/src/components/controls/control_slider.vue
+  s_bda95360f3cca1::t_bb3a3e4ce3b256 37,39
+  s_bda95360f3cca1::t_996b2af13d5310 38
+packages/combinator/src/components/controls/control_slider.test.js
+  s_bda95360f3cca1::t_bb3a3e4ce3b256 18
+  s_bda95360f3cca1::t_436b4e4a22cca8 21-23,49-50,101-108
+packages/combinator/src/variants/variants_pagination.js
+  s_bda95360f3cca1::t_996b2af13d5310 6-7
+packages/combinator/src/lib/slider_control.js
+  s_bda95360f3cca1::t_996b2af13d5310 52-54
+packages/combinator/src/lib/slider_control.test.js
+  s_bda95360f3cca1::t_fda1d84912d6b3 20-22,36,55,59,64-70,101,118,122-136
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a2c8570f21e37acf24457fb56f551c82bfb41ccc",
+  "prompts": {},
+  "sessions": {
+    "s_bda95360f3cca1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16057-cde5-76a0-a857-9178e5a8799c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
