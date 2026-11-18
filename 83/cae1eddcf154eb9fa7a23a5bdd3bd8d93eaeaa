@@ -1,0 +1,37 @@
+apps/dialtone-documentation/docs/guides/migration/badge-chip-api/index.md
+  s_f920209ec821e1::t_e75acbbadb983b 71,103
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_f920209ec821e1::t_e75acbbadb983b 41-42,140-143
+apps/dialtone-documentation/docs/components/chip.md
+  s_f920209ec821e1::t_5408eefd4683f6 94-99
+  s_f920209ec821e1::t_a43e7d650e3552 93
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_f920209ec821e1::t_44e9be25416b32 255-263
+packages/dialtone-vue/components/Chip/Chip.vue
+  s_f920209ec821e1::t_0e51be92b3ee9c 338-340
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_f920209ec821e1::t_44e9be25416b32 174-188
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/index.mjs
+  s_f920209ec821e1::t_cd8d83915937f1 55-56,58-60,64,83-84,89,117-120,145,147-148,151
+packages/dialtone-vue/components/Chip/Chip.test.js
+  s_f920209ec821e1::t_0e51be92b3ee9c 402-415
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_api/test.mjs
+  s_f920209ec821e1::t_0c3f1a38384986 122
+  s_f920209ec821e1::t_cd8d83915937f1 108-121,123-133,203,294
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "83cae1eddcf154eb9fa7a23a5bdd3bd8d93eaeaa",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

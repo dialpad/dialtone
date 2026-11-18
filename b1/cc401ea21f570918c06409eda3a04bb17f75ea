@@ -1,0 +1,21 @@
+scripts/retrieval/cache-inputs.test.mjs
+  s_41e22045807353::t_a27621fdc02d2d 72-80
+packages/dialtone-vue/project.json
+  s_41e22045807353::t_a225f393185628 11,47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b1cc401ea21f570918c06409eda3a04bb17f75ea",
+  "prompts": {},
+  "sessions": {
+    "s_41e22045807353": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ad41-e529-7781-9e6c-c66d2aa4c426",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

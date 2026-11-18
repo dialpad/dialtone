@@ -1,0 +1,43 @@
+.github/workflows/unit_tests.yml
+  s_e047833b0467d1::t_e1c7e737d2c72c 57,61-63
+  s_e047833b0467d1::t_96a4ad5a883443 9-10,21-22
+  s_e047833b0467d1::t_ffa42401db9096 58-60
+  s_e047833b0467d1::t_4262eb08407116 114-131
+  s_e047833b0467d1::t_d57366ad81fd5e 44
+  s_e047833b0467d1::t_920417baa6d43b 11-13
+  s_e047833b0467d1::t_9c3afe90624d18 23-25
+packages/dialtone-cli/README.md
+  s_e047833b0467d1::t_19b209a573c311 96
+packages/dialtone-query-core/project.json
+  s_e047833b0467d1::t_939bd7a2d1b792 20
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_e047833b0467d1::t_a4315f6f8a8ff3 110
+  s_e047833b0467d1::t_bbab596bb1f55c 261
+  s_e047833b0467d1::t_acbed7836cab6f 209,211-213,216-217
+  s_e047833b0467d1::t_79220f20d2d8fc 215
+  s_e047833b0467d1::t_62b78b554292ce 241
+  s_e047833b0467d1::t_374ceb9dfd10b2 35,38,41
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_e047833b0467d1::t_fce0847fb9fb97 6-7
+  s_e047833b0467d1::t_98dc59a832c0f2 44
+  s_e047833b0467d1::t_7e1073a57cba22 57
+  s_e047833b0467d1::t_567ce17355987a 46-52,54-55
+  s_e047833b0467d1::t_4c2dc3f67afeee 53
+  s_e047833b0467d1::t_1e2716ba1fc62d 33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ef0a0d1fe3d5fdb576e1d724f3ae65529e90de99",
+  "prompts": {},
+  "sessions": {
+    "s_e047833b0467d1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "90490e85-57d5-47c7-8023-19393fdb46f5",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
