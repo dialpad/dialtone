@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import { Fragment, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { DtEmojiTextWrapper, type DtEmojiTextWrapperProps } from './EmojiTextWrapper';
@@ -244,14 +244,41 @@ describe('DtEmojiTextWrapper Tests', () => {
 
     it('keeps portal keys scoped to their nested array', () => {
       cleanup();
+      // The target stays detached, so a failing assertion leaves nothing behind in document.body.
       const target = document.createElement('div');
-      document.body.appendChild(target);
       const list = (name: string) => [createPortal(<input data-qa={name} />, target, '1')];
       const { rerender } = render(<DtEmojiTextWrapper>{[list('a'), list('b')]}</DtEmojiTextWrapper>);
-      const inputB = screen.getByTestId('b');
+      const inputB = within(target).getByTestId('b');
       rerender(<DtEmojiTextWrapper>{[[], list('b')]}</DtEmojiTextWrapper>);
-      expect(screen.getByTestId('b')).toBe(inputB);
-      target.remove();
+      expect(within(target).getByTestId('b')).toBe(inputB);
+    });
+
+    it('keeps generated nested-array keys apart from caller keys', () => {
+      cleanup();
+      const target = document.createElement('div');
+      const portal = (name: string) => createPortal(<input data-qa={name} />, target, '1');
+      const { rerender } = render(
+        <DtEmojiTextWrapper>{[[portal('a')], <Fragment key="list-0">{portal('b')}</Fragment>]}</DtEmojiTextWrapper>,
+      );
+      const inputB = within(target).getByTestId('b');
+      rerender(<DtEmojiTextWrapper>{[<Fragment key="list-0">{portal('b')}</Fragment>]}</DtEmojiTextWrapper>);
+      expect(within(target).getByTestId('b')).toBe(inputB);
+    });
+
+    it('keeps a nested script body as a string', () => {
+      cleanup();
+      render(
+        <DtEmojiTextWrapper>
+          <script type="application/ld+json" data-qa="s">{'{"a":1}'}</script>
+        </DtEmojiTextWrapper>,
+      );
+      expect(screen.getByTestId('s').textContent).toBe('{"a":1}');
+    });
+
+    it('keeps a textarea root string as its value', () => {
+      cleanup();
+      render(<DtEmojiTextWrapper elementType="textarea">:smile:</DtEmojiTextWrapper>);
+      expect(screen.getByTestId('emoji-text-wrapper')).toHaveValue(':smile:');
     });
 
     it('renders root dangerouslySetInnerHTML without throwing', () => {

@@ -74,8 +74,15 @@ function searchCodes (textContent: string, size: IconSize, key: number): ReactNo
 function searchNodes (children: ReactNode, size: IconSize): ReactNode[] {
   // Children.toArray flattens nested arrays into one key scope (and leaves portal keys as they are), so each nested
   // array is wrapped in a keyed Fragment first; searchNode then recurses into it with its own scope.
+  // The generated key must not equal a sibling's own key, or Children.toArray gives both the same key.
   const level = Array.isArray(children)
-    ? children.map((child, index) => (Array.isArray(child) ? <Fragment key={`list-${index}`}>{child}</Fragment> : child))
+    ? children.map((child, index) => {
+      if (!Array.isArray(child)) return child;
+      const taken = new Set(children.map(c => (isValidElement(c) ? c.key : null)));
+      let key = `list-${index}`;
+      while (taken.has(key)) key += '_';
+      return <Fragment key={key}>{child}</Fragment>;
+    })
     : children;
   return Children.toArray(level).map((node, index) => searchNode(node, size, index));
 }
@@ -98,7 +105,8 @@ function searchNode (node: ReactNode, size: IconSize, key: number): ReactNode {
   if (innerHTML != null && String(innerHTML) !== '') return searchCodes(String(innerHTML), size, key);
 
   // A textarea's string child is its initial value, so it can't become a Fragment.
-  if (element.type === 'textarea') return element;
+  // A script's body must stay a single string for server rendering.
+  if (element.type === 'textarea' || element.type === 'script') return element;
 
   // Void elements (img, br) take no children.
   if (element.props.children == null) return element;
@@ -126,7 +134,9 @@ export function DtEmojiTextWrapper ({
     >
       {/* React throws when both children and dangerouslySetInnerHTML are set, and when a void element (br) gets
         an empty children array, so only pass children when there are some. */}
-      {children == null ? undefined : searchNodes(children, size)}
+      {children == null || elementType === 'textarea' || elementType === 'script'
+        ? children
+        : searchNodes(children, size)}
     </Tag>
   );
 }
