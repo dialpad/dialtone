@@ -128,6 +128,14 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       expect(document.activeElement).toBe(archived);
     });
 
+    it('opens by keyboard onto a disabled first row, so focus and keyboard position agree', async () => {
+      updateWrapper({ options: [typeOptions[2], typeOptions[0], typeOptions[1]] });
+      await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+      await flushPromises();
+      expect(document.activeElement).toBe(rows()[0]);
+      expect(await focusedLabelAfter('ArrowDown')).toBe('All types');
+    });
+
     it('refuses a disabled option even when its row emits click', async () => {
       updateWrapper();
       await open();

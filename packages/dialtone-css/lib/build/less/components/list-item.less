@@ -50,6 +50,9 @@
 
   color: color-mix(in oklch, oklch(from var(--dt-action-color-foreground-muted-default) l calc(c - .08) h) 50%, transparent);
 
+  // Static rows (navigation-type none) skip the variable-driven cursor rule above.
+  cursor: not-allowed;
+
   // Forced colors replace the muted text color, so the row would read as enabled.
   // GrayText is the system color native disabled controls get automatically.
   @media (forced-colors: active) {

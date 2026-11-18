@@ -106,7 +106,7 @@ Put the reason in the `subtitle` slot and point `aria-describedby` at it, so it'
 </ul>
 ```
 
-The style comes from the `disabled` prop. A row that sets `aria-disabled` without the prop keeps its current look and still emits `click`.
+The style comes from the `disabled` prop. A row that sets `aria-disabled` without the prop keeps its current look and still emits `click`. Don't combine the two: an `aria-disabled` attribute overrides the state the prop sets.
 
 > [!WARNING] Parent-driven selection isn't gated
 > `disabled` stops only the row's own `click`. A parent that selects by highlighted index, such as DtCombobox on Enter, doesn't check it, so that parent must skip unavailable rows itself.

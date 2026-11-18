@@ -144,6 +144,7 @@ export default {
      * focusable and reachable by keyboard navigation, and still emits keydown, mousemove and
      * mouseleave. Only the item's own activation is gated: a parent that selects by
      * highlighted index, such as Combobox on Enter, must check availability itself.
+     * Don't also set an aria-disabled attribute: an attribute overrides the state this prop sets.
      */
     disabled: {
       type: Boolean,

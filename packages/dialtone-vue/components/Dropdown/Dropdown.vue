@@ -424,7 +424,7 @@ export default {
               break;
             case EVENT_KEYNAMES.space:
             case EVENT_KEYNAMES.spacebar:
-              this.onSpaceKey();
+              this.onSpaceKey(event);
               break;
             case EVENT_KEYNAMES.enter:
               this.onEnterKey();
@@ -494,9 +494,16 @@ export default {
         if (!this._getListItemNodes()?.includes(liElement)) return;
         // A DtListItem disabled row takes the highlight but not focus, which would draw the keyboard
         // focus ring under the pointer. The menu holds focus so Enter can't activate another row.
-        if (liElement.classList.contains('d-list-item--disabled')) this.$refs.popover?.popoverContentEl?.focus();
-        else liElement.focus();
+        if (liElement.classList.contains('d-list-item--disabled') && this.focusMenuContent()) return;
+        liElement.focus();
       }
+    },
+
+    /** Focuses the menu container; false when it can't take focus (contentTabindex null). */
+    focusMenuContent () {
+      const content = this.$refs.popover?.popoverContentEl;
+      content?.focus();
+      return Boolean(content) && content.getRootNode().activeElement === content;
     },
 
     getListElement () {
@@ -549,6 +556,9 @@ export default {
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.isArrowKeyNav) {
           if (this._itemsLength() || !this.focusMenuClose()) this.setHighlightIndex(0);
+          // Popover's initial focus skips aria-disabled rows, but a DtListItem disabled row stays
+          // reachable: focus it so focus and keyboard position agree.
+          if (this.activeItemEl?.classList.contains('d-list-item--disabled')) this.activeItemEl.focus();
         }
         this.$emit('opened', true);
       } else {
@@ -558,10 +568,13 @@ export default {
       }
     },
 
-    onSpaceKey () {
+    onSpaceKey (event) {
       if (!this.open) {
         this.openedWithKeyboard = true;
       }
+      // The menu holds focus while the pointer rests on a disabled row; keep Space from scrolling it.
+      const onDisabledRow = this.activeItemEl?.classList.contains('d-list-item--disabled');
+      if (onDisabledRow && event.target === this.$refs.popover?.popoverContentEl) event.preventDefault();
     },
 
     onEnterKey () {

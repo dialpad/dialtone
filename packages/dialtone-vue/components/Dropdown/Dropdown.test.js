@@ -454,6 +454,32 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(document.activeElement.id).toBe('refresh');
   });
 
+  it('keeps Space from scrolling the menu while the pointer rests on a disabled row', async () => {
+    const popover = mountMenu({}, undefined, () => [
+      h(DtListItem, { id: 'newest', role: 'menuitemradio', navigationType: 'arrow-keys' }, () => 'Newest'),
+      h(DtListItem, { id: 'archived', role: 'menuitemradio', navigationType: 'arrow-keys', disabled: true }, () => 'Archived'),
+    ]);
+    await flushPromises();
+    const menu = popover.findComponent({ ref: 'content' });
+    await menu.get('#archived').trigger('mousemove');
+    const space = new KeyboardEvent('keydown', { key: ' ', code: 'Space', bubbles: true, cancelable: true });
+    menu.element.dispatchEvent(space);
+    expect(space.defaultPrevented).toBe(true);
+  });
+
+  it('focuses a hovered disabled row when the menu content cannot take focus', async () => {
+    const popover = mountMenu({}, undefined, () => [
+      h(DtListItem, { id: 'rename', role: 'menuitem', navigationType: 'arrow-keys' }, () => 'Rename'),
+      h(DtListItem, { id: 'export', role: 'menuitem', navigationType: 'arrow-keys', disabled: true }, () => 'Export'),
+    ], { contentTabindex: null });
+    await flushPromises();
+    const menu = popover.findComponent({ ref: 'content' });
+    await menu.get('#rename').trigger('mousemove');
+    await menu.get('#export').trigger('mousemove');
+    // Leaving focus on Rename would let Enter activate a row the pointer isn't on.
+    expect(document.activeElement.id).toBe('export');
+  });
+
   it('keeps the menu context through a neutral wrapper and an explicitly labelled group', async () => {
     const popover = mountMenu({}, undefined, () => [
       h(DtListItemGroup, { id: 'sort-group', heading: 'Sort order' }, () => [
