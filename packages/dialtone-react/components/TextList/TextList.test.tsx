@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { render, type RenderResult } from '@testing-library/react';
 import { vi } from 'vitest';
 import { DtTextList, type DtTextListProps } from './TextList';
@@ -359,6 +360,17 @@ describe('DtTextList', () => {
 
       expect(document.querySelector('[data-qa="dt-text-list-item-marker"]')).not.toBeInTheDocument();
       expect(textListItems()[0]).not.toHaveClass('d-text-list__item--custom-marker');
+    });
+
+    it('keeps the native marker and mounts a portal marker at its target', () => {
+      const target = document.createElement('div');
+      document.body.appendChild(target);
+      updateWrapper({}, <DtTextListItem marker={createPortal(<b data-qa="portal-marker">*</b>, target)}>Portal</DtTextListItem>);
+
+      expect(document.querySelector('[data-qa="dt-text-list-item-marker"]')).not.toBeInTheDocument();
+      expect(textListItems()[0]).not.toHaveClass('d-text-list__item--custom-marker');
+      expect(target.querySelector('[data-qa="portal-marker"]')).toBeInTheDocument();
+      target.remove();
     });
   });
 });

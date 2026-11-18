@@ -2,6 +2,7 @@ import {
   Children, Fragment, isValidElement, useEffect, useRef, type ComponentPropsWithRef, type ReactNode,
 } from 'react';
 import { cx, type ClassValue } from '../../common/cx';
+import { isDevelopment } from '../../common/dev';
 import { hasContent } from '../../common/slots';
 import type { TextListMarkerTone } from './TextListConstants';
 import { useTextListContext } from './TextListContext';
@@ -76,6 +77,7 @@ export function DtTextListItem ({
   // Vue's mounted() checks: once per instance, so neither prop changes nor StrictMode repeat them.
   const validated = useRef(false);
   useEffect(() => {
+    if (!isDevelopment()) return;
     if (validated.current) return;
     validated.current = true;
 
@@ -100,7 +102,7 @@ export function DtTextListItem ({
         className,
       )}
     >
-      {hasCustomMarker && (
+      {hasCustomMarker ? (
         <span
           data-qa="dt-text-list-item-marker"
           className={cx('d-text-list__item-marker', markerClass)}
@@ -108,6 +110,9 @@ export function DtTextListItem ({
         >
           {marker}
         </span>
+      ) : (
+        // No wrapper or class, but a portal-only marker still mounts at its target.
+        marker
       )}
       <div
         data-qa="dt-text-list-item-content"

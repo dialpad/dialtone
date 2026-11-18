@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, type ComponentPropsWithRef, type ElementType, type Ref } from 'react';
 import { cx } from '../../common/cx';
+import { isDevelopment } from '../../common/dev';
 import {
   DT_TEXT_LIST_DEFAULT_TYPE,
   DT_TEXT_LIST_ORDERED_MARKERS,
@@ -94,6 +95,7 @@ export function DtTextList ({
   // Vue's mounted() checks: once per instance, so neither prop changes nor StrictMode repeat them.
   const validated = useRef(false);
   useEffect(() => {
+    if (!isDevelopment()) return;
     if (validated.current) return;
     validated.current = true;
 
