@@ -1,5 +1,5 @@
 import { createRef, type ReactNode } from 'react';
-import { fireEvent, render, type RenderResult } from '@testing-library/react';
+import { act, fireEvent, render, type RenderResult } from '@testing-library/react';
 import type { Mock } from 'vitest';
 import { DtScroller, type DtScrollerHandle, type DtScrollerProps, type ScrollerUserPosition } from './Scroller';
 
@@ -217,6 +217,37 @@ describe('DtScroller Tests', () => {
         fireEvent.scroll(defaultContent);
 
         expect(defaultContent.scrollTop).toBe(450);
+      });
+    });
+
+    // React only: Vue's updateItems() looks item indexes up on a computed ref instead of its value, so it released
+    // every view and counted it as newly used again, firing scroll-start again (and passing an undefined index).
+    describe('On `updateItems`', () => {
+      it('keeps each item\'s index and does not report scroll-start again', () => {
+        const indexes = () => items().map(item => item.textContent?.trim());
+        const before = indexes();
+
+        act(() => scroller.current!.updateItems());
+
+        expect(indexes()).toEqual(before);
+        expect(onScrollStart).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('When the required size props are missing', () => {
+      it('logs an error once per change of props', () => {
+        const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+        try {
+          const { rerender } = render(<DtScroller items={MOCK_ITEMS} />);
+          expect(error).toHaveBeenCalledTimes(1);
+          expect(error).toHaveBeenCalledWith('scroller error: \'itemSize\' is required.');
+
+          rerender(<DtScroller items={MOCK_ITEMS} dynamic />);
+          expect(error).toHaveBeenCalledTimes(2);
+          expect(error).toHaveBeenLastCalledWith('scroller error: \'minItemSize\' is required on \'dynamic\' mode.');
+        } finally {
+          error.mockRestore();
+        }
       });
     });
 

@@ -153,17 +153,21 @@ export function CoreScroller<T> ({
   // Vue's `sizes` computed. In fixed size mode it reads only itemSize, so only an itemSize change makes a new one, and
   // only then does the watcher below update the views; in variable size mode, the items and their sizes do too.
   const variable = itemSize === null;
+  const sizedItems = variable ? items : null;
+  const sizedField = variable ? sizeField : null;
+  const sizedMin = variable ? minSize : null;
   const sizes = useMemo<Sizes>(() => {
-    if (!variable) return {};
+    if (!sizedItems || sizedField === null) return {};
     const result: Sizes = { [-1]: { accumulator: 0 } };
     let accumulator = 0;
-    for (let i = 0, l = items.length; i < l; i++) {
-      const current = Number(field(items[i], sizeField) || minSize) || 0;
+    for (let i = 0, l = sizedItems.length; i < l; i++) {
+      const current = Number(field(sizedItems[i], sizedField) || sizedMin) || 0;
       accumulator += current;
       result[i] = { accumulator, size: current };
     }
     return result;
-  }, [variable, variable ? items : null, variable ? sizeField : null, variable ? minSize : null]);
+    // itemSize too: a new itemSize makes new (empty) sizes in fixed size mode, as in Vue, so the watcher runs.
+  }, [itemSize, sizedItems, sizedField, sizedMin]);
 
   const simpleArray = items.length > 0 && typeof items[0] !== 'object';
 
@@ -279,7 +283,8 @@ export function CoreScroller<T> ({
         newTotalSize = sizes[count - 1]?.accumulator ?? 0;
 
         // Searching for the end index
-        for (newEndIndex = i; newEndIndex < count && (sizes[newEndIndex]?.accumulator ?? NaN) < scroll.end; newEndIndex++);
+        newEndIndex = i;
+        while (newEndIndex < count && (sizes[newEndIndex]?.accumulator ?? NaN) < scroll.end) newEndIndex++;
 
         if (newEndIndex === -1) {
           newEndIndex = items.length - 1;
