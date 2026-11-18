@@ -1,0 +1,44 @@
+packages/dialtone-vue/components/Slider/Slider.stories.js
+  s_18547bca72b16a::t_ff91b310f0d068 22,180
+packages/dialtone-vue/components/Slider/Slider.mdx
+  s_f1b6a2e8befce4::t_d7a14764004d83 130
+packages/dialtone-vue/components/Slider/SliderDefault.story.vue
+  s_18547bca72b16a::t_ff91b310f0d068 12
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_18547bca72b16a::t_ff91b310f0d068 1365,1367,2521-2522
+  s_18547bca72b16a::t_17251dc0453894 2532-2533
+  s_18547bca72b16a::t_1e256c25b7a9d8 1737-1738,1746,1749,1759
+  s_18547bca72b16a::t_08e5586618bd14 1382
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_f1b6a2e8befce4::t_5472510ae30693 332
+  s_18547bca72b16a::t_51fd0ce14d8527 579,582,588,604,607
+  s_f1b6a2e8befce4::t_717088c4a32858 331,333-335
+  s_18547bca72b16a::t_46c4db75c56289 715,723
+  s_18547bca72b16a::t_c95a8f4ada120f 758,764,773
+  s_18547bca72b16a::t_ff91b310f0d068 337,1066
+  s_18547bca72b16a::t_0c863786a87a28 1064
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "82c10c65fda10fedc22f8a16df9532d74cf6f5eb",
+  "prompts": {},
+  "sessions": {
+    "s_18547bca72b16a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34090d3c-5c78-4979-93a5-69ff10aaa88a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}

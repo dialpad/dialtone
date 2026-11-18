@@ -1,0 +1,217 @@
+packages/dialtone-vue/components/Badge/Badge.stories.js
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 115
+  s_edb6000ea1a4b6::t_59a87a48407e49 7-9,11,18-21,61-74,87-104,108-111,113-114,121,123,125,164-171,219-230
+  s_edb6000ea1a4b6::t_23fa451386c8eb 112,122,129,147-150,152
+packages/dialtone-css/lib/build/less/components/badge.less
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 62-99,103-107,110,113-116,120-123,147,151,155,157,166-169,175-176,179-186,190-198,202-204
+  s_edb6000ea1a4b6::t_4eb3fb540b4c18 27-36,39,54,61,208-210,213-220,266-267,277-278,292-319
+  s_edb6000ea1a4b6::t_f8ebe941d307e7 112,117-119,124-126,131-133,137-138,146,148-150,152,165,170-174,177-178,187-189,199-201,205-207,211-212
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_edb6000ea1a4b6::t_5840fa98d6f177 41,47,53
+  s_edb6000ea1a4b6::t_9514de23c3cc9c 132-139
+  s_edb6000ea1a4b6::t_e1c62f11fa6910 140-146
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.js
+  s_edb6000ea1a4b6::t_07ff5c78e911c6 5
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 2-4,6-13,15-18,20-21,24-33,35-71,73-74,77-90,92-96,103,106-108,111-113,116-119
+  s_edb6000ea1a4b6::t_58ac8deb4d38bb 14,19,22-23,34,91
+  s_edb6000ea1a4b6::t_23fa451386c8eb 1,75-76
+  s_f920209ec821e1::t_c3a8fd009f45f8 72,97-102,104-105,109-110,114-115
+packages/dialtone-css/package.json
+  s_edb6000ea1a4b6::t_5840fa98d6f177 49,51
+packages/dialtone-vue/components/Badge/Badge.test.js
+  s_edb6000ea1a4b6::t_07ff5c78e911c6 133,145
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 452-454
+  s_edb6000ea1a4b6::t_a9bdf48d28dffa 3-10,15-17,84-132,134-144,146-219,222-232,235-242,261-263,265-273,276-285,287-298,367-370,372-403,413-424,430-438,440,442-451,455-462,510-513,515-526,528-549,555,557
+  s_edb6000ea1a4b6::t_2d6a5fe5439926 220-221,233-234,264,274-275,286,371,425-429,439,441
+  s_edb6000ea1a4b6::t_23fa451386c8eb 527,550-554,556,558-559,571,583,596,608,621
+  s_edb6000ea1a4b6::t_2e1c595f14da11 243-260,404-411
+  s_edb6000ea1a4b6::t_2d145d360ca5d2 412
+  s_edb6000ea1a4b6::t_7f2a4715ef631a 299-351,365-366
+  s_f920209ec821e1::t_c3a8fd009f45f8 352-364
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_edb6000ea1a4b6::t_5840fa98d6f177 208-209,212-214,216,219-220,223-224,231-233
+  s_edb6000ea1a4b6::t_3bcd2142546fc3 207
+  s_edb6000ea1a4b6::t_99db20c14258b3 225-226,229-230
+  s_edb6000ea1a4b6::t_8c8a8edd079d03 210-211
+  s_edb6000ea1a4b6::t_f47ba756880809 221-222,227-228
+  s_edb6000ea1a4b6::t_15ea23072da185 215,217-218
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.test.js
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 1-36,38-40,42-45,47-48,50-58,80-82,84-85,87-95,97-102,104-105,107-109
+  s_edb6000ea1a4b6::t_58ac8deb4d38bb 37,46,49,83,86,96,103,106
+  s_edb6000ea1a4b6::t_2d6a5fe5439926 41
+  s_f920209ec821e1::t_c3a8fd009f45f8 59-79
+apps/dialtone-documentation/docs/guides/migration/badge-chip-api/index.md
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 1,4-8,10,12-21,32,34-43,47-50,52
+  s_edb6000ea1a4b6::t_07ff5c78e911c6 22-23,27-31,45-46,51,56-57
+  s_edb6000ea1a4b6::t_28dee5f2761805 2-3,11,33
+  s_edb6000ea1a4b6::t_ee3fee65ddca13 9,24-26,44,54-55
+  s_edb6000ea1a4b6::t_fce76b7ef6364c 53
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/index.mjs
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 1-16,20,23-24,28,33,56-57,89-91,101-103,105-107,120-122,124-126,128-130,142,146-147,160-162,164,178-180,182-192,194-201,208-209,247,249,255-256,261-262,274-275,287-288,289-291,299-303,305,314-322,324-472
+  s_edb6000ea1a4b6::t_07ff5c78e911c6 17-19,21-22,25-27,31-32,34-38,40-41,43-49,50-55,68-69,143-145,148-159,165-166,175,177,210-211,213,216-218,233-236,243-246,248,250-254,257-260,263-267,270-273,292-298,304,306-313,323
+  s_edb6000ea1a4b6::t_e171a2264bc507 268-269
+  s_edb6000ea1a4b6::t_fa7652ef8627ec 167-168,173-174
+  s_edb6000ea1a4b6::t_fb0ae7e912ee31 219-221,238-242
+  s_edb6000ea1a4b6::t_72bef7b7967543 29-30,39,42,58-67
+  s_edb6000ea1a4b6::t_bc9bd5979fc35b 237
+  s_edb6000ea1a4b6::t_80044293d52fd9 193,212,214-215,222-232,276-284
+  s_edb6000ea1a4b6::t_cf628271ee2d25 70-88,92-100,104,108-119,123,127,131-141,163,169-172,176,181,285
+  s_edb6000ea1a4b6::t_5e48101ded3cce 286
+  s_edb6000ea1a4b6::t_f47ba756880809 202-207
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/test.mjs
+  s_edb6000ea1a4b6::t_bbdbe5939169cf 1-13,18,21,24,28,63,96,116,120,137-138,143,147,285,289,326,370,373,376-377
+  s_edb6000ea1a4b6::t_07ff5c78e911c6 14-17,19-20,22-23,25-27,29-32,34-35,37-41,43-47,49-62,64-95,97-110,112-113,115,119,122-124,131-136,139,141-142,144-146,148,240-284,286-288,290-312,321-325,327-369,371-372,374-375
+  s_edb6000ea1a4b6::t_4a327d3f3dff2e 33,36,42,48,111,114,117-118,121,125-130,140,149-189
+  s_edb6000ea1a4b6::t_9ec6e7e1ca5661 190-191
+  s_edb6000ea1a4b6::t_9514de23c3cc9c 192-235,237-239
+  s_edb6000ea1a4b6::t_6a3c425a7c8055 236
+  s_edb6000ea1a4b6::t_e1c62f11fa6910 313-320
+package.json
+  s_edb6000ea1a4b6::t_5840fa98d6f177 19
+apps/dialtone-documentation/docs/_data/badge.json
+  s_edb6000ea1a4b6::t_79684f5c9296f9 11-13,15,17-18,20,27-36,83-92,96,101
+  s_edb6000ea1a4b6::t_76879139fd1bda 14,16,19,21-26,61
+apps/dialtone-documentation/docs/components/badge.md
+  s_edb6000ea1a4b6::t_9fc73185fb38ae 13-19,21-23,29-30,37-39,44,46-52,54,56-59,65,68-84,87,89,91,95-104,108-110,114-115,129-135,137-142,144-145,147-150,152,154-155,184-188,193-195,198-200,203-205,211,213,216-222,226,228,230-234,238,240-245
+  s_edb6000ea1a4b6::t_978cc38c1e8bd5 3,12,20,31-32,60-61,63,111,113,120-124,136,151,153,156-182
+  s_edb6000ea1a4b6::t_2509495155bc35 183
+  s_edb6000ea1a4b6::t_fce76b7ef6364c 146
+  s_f920209ec821e1::t_385a4fb490231d 128,143
+apps/dialtone-documentation/docs/components/item-layout.md
+  s_edb6000ea1a4b6::t_360fb89ac619b4 27,57
+apps/dialtone-documentation/docs/components/list-item.md
+  s_edb6000ea1a4b6::t_c984c0a3ecc13d 23,60
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_edb6000ea1a4b6::t_ca12836d318fa9 286,292,298
+apps/dialtone-documentation/docs/components/split-button.md
+  s_edb6000ea1a4b6::t_5a013edd72776f 347
+apps/dialtone-documentation/docs/components/tabs.md
+  s_edb6000ea1a4b6::t_d2a12a57d0ec92 321
+  s_edb6000ea1a4b6::t_23fa451386c8eb 315
+apps/dialtone-documentation/docs/components/text.md
+  s_edb6000ea1a4b6::t_10bc444f0ec38e 43
+  s_edb6000ea1a4b6::t_23fa451386c8eb 558
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_edb6000ea1a4b6::t_dc1525fbcddcfb 42-45,51-52,140-143,146,149,152
+  s_edb6000ea1a4b6::t_ee3fee65ddca13 41
+apps/dialtone-documentation/scripts/thumbs/harness/GalleryApp.vue
+  s_edb6000ea1a4b6::t_912b38ff2161e3 77,89
+apps/dialtone-documentation/thumbs/badge.vue
+  s_edb6000ea1a4b6::t_5ff8d9ead3e2f7 3-7
+apps/dialtone-documentation/thumbs/item-layout.vue
+  s_edb6000ea1a4b6::t_ca48cabeb14cdf 11-13
+packages/combinator/src/App.vue
+  s_edb6000ea1a4b6::t_ec3e69a01c888a 16-17,24-25
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_edb6000ea1a4b6::t_ed4bf50fc689db 127-131,134,143-152,167-184
+  s_edb6000ea1a4b6::t_22376c7aeb4523 2,33-45,132-133,135-142
+packages/combinator/src/variants/variants_badge.js
+  s_edb6000ea1a4b6::t_568c318a719005 6-8,14,16-18,21-23,25-27,29,33,39,43,58-59,62-63,66-68,71-74,88-90,93,97,103,109,116-117,120,125,127-128,134-146,149-154
+  s_edb6000ea1a4b6::t_b5e965a3c49840 19-20,37-38,99-100,147-148,155-163
+  s_edb6000ea1a4b6::t_f19f141b3cfc9c 164
+  s_edb6000ea1a4b6::t_22376c7aeb4523 15,24
+packages/combinator/src/variants/variants_box.js
+  s_edb6000ea1a4b6::t_debe2c899c2b4e 274
+  s_edb6000ea1a4b6::t_23fa451386c8eb 275-276
+packages/combinator/src/variants/variants_item_layout.js
+  s_edb6000ea1a4b6::t_5315f2efd3ae74 61
+packages/combinator/src/variants/variants_segmented_control.js
+  s_edb6000ea1a4b6::t_5acf0ce52ff24f 64,68,72
+packages/combinator/src/variants/variants_split_button.js
+  s_edb6000ea1a4b6::t_b1984d2fa5145b 215
+packages/combinator/src/variants/variants_tab_group.js
+  s_edb6000ea1a4b6::t_c1c520cc130f45 168
+  s_edb6000ea1a4b6::t_23fa451386c8eb 164
+packages/dialtone-tokens/tokens/components/badge/dark.json
+  s_edb6000ea1a4b6::t_be4380a8cacf35 16-19,35-38
+packages/dialtone-tokens/tokens/components/badge/default.json
+  s_edb6000ea1a4b6::t_9509f1d8ad85cc 9-12,17-20,25-28,38-41,43-55,63,76-83,98,112-113
+packages/dialtone-vue/components/Badge/Badge.vue
+  s_edb6000ea1a4b6::t_f6ebc9974a880e 5-7,9-10,19-27,29,46,48,52,54,69-76,81-85,89-94,109-112,116-124,127,129-156,167,171,175-176,182,188,193,198-201,219-234,254,258,263,267,273-275,278,283,292,297-298,303-304,307,310-337,340,345-375,377-379,383-384,387-397,412,414,416,419,421-451,459-460,463-464
+  s_edb6000ea1a4b6::t_aeab60fc8abab1 113-115,125-126,128,178
+  s_edb6000ea1a4b6::t_206102529a2615 32,34,40,284-289,293-294,415,417-418
+  s_edb6000ea1a4b6::t_ed0336eb87aa55 86,177,290-291,305-306,380,398,400-403,405-411
+  s_f920209ec821e1::t_c3a8fd009f45f8 87-88,183,299-300,399,404,413
+packages/dialtone-vue/components/Badge/BadgeConstants.js
+  s_edb6000ea1a4b6::t_1307dcb236ebaf 1-14,18,22-23,31-32,44-51,61-74,78-87,98-103,105,132-135,137-140,142-143,146-151
+  s_edb6000ea1a4b6::t_58ac8deb4d38bb 136,144
+  s_edb6000ea1a4b6::t_aeab60fc8abab1 15-17,19-21,24-30,52-60,75-77,104,141,145
+  s_edb6000ea1a4b6::t_032a383225e94c 33-38
+  s_f920209ec821e1::t_c3a8fd009f45f8 39-43
+packages/dialtone-vue/components/Badge/BadgeDefault.story.vue
+  s_edb6000ea1a4b6::t_4915c00b8d1bbc 3,5-7,11-14,20,32
+  s_edb6000ea1a4b6::t_23fa451386c8eb 8,17,22,29,34
+packages/dialtone-vue/components/Badge/BadgeExamples.story.vue
+  s_edb6000ea1a4b6::t_31a7acf5a16107 3,10-12,15-17,20-22,24-25,29-31,33-34,44-46,50-52,56-58,68-70,73-75,78-80,89-91,100-102,111-113,115-116,127,131-133,142-144,147-149,152-154,157-159,163,171-174,176-177,187-190,192-193,203-205,208-210,213-215
+  s_edb6000ea1a4b6::t_b5e965a3c49840 126,128
+packages/dialtone-vue/components/Badge/BadgeVariants.story.vue
+  s_edb6000ea1a4b6::t_6d7cff3d6d2989 4,6-44,51,60,65-68
+packages/dialtone-vue/components/Badge/index.js
+  s_edb6000ea1a4b6::t_cc7106df3eb905 2-15
+packages/dialtone-vue/components/RichTextEditor/Extensions/Variable/VariableComponent.vue
+  s_edb6000ea1a4b6::t_74adcf3af192d7 89-91,117-119
+packages/dialtone-vue/components/SegmentedControl/SegmentedControlVariants.story.vue
+  s_edb6000ea1a4b6::t_91ec6026ba0570 248-251,262-265,276-279
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.mdx
+  s_edb6000ea1a4b6::t_98fa0890fe85cf 338
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_recipes.story.vue
+  s_edb6000ea1a4b6::t_66d5a64b12ed46 468-471,608-611
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_edb6000ea1a4b6::t_21d6697d0e17de 120-143
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_edb6000ea1a4b6::t_10a1977ea74fbc 57
+  s_edb6000ea1a4b6::t_22376c7aeb4523 32,50
+packages/combinator/src/components/controls/control_selection.vue
+  s_edb6000ea1a4b6::t_fce4619bbc577d 247-250,279
+packages/combinator/src/lib/exclusion_rules.js
+  s_edb6000ea1a4b6::t_fce4619bbc577d 123-143,146-147,149
+packages/combinator/.github/documentation/internal/EXCLUSIONS.md
+  s_edb6000ea1a4b6::t_fce4619bbc577d 92-106
+packages/combinator/src/components/controls/control_selection.test.js
+  s_edb6000ea1a4b6::t_fce4619bbc577d 72-85
+apps/dialtone-documentation/docs/components/stack.md
+  s_edb6000ea1a4b6::t_23fa451386c8eb 1150
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_edb6000ea1a4b6::t_fce76b7ef6364c 76,83,87-91
+  s_edb6000ea1a4b6::t_35ba3cafff5748 92
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentVueApiTable.vue
+  s_edb6000ea1a4b6::t_803b9603998732 61-62
+apps/dialtone-documentation/docs/.vuepress/baseComponents/NewUtilityClassTable.vue
+  s_edb6000ea1a4b6::t_42ce66e037ceed 29
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenTable.vue
+  s_edb6000ea1a4b6::t_8f8f50ce37a7f3 62
+apps/dialtone-documentation/docs/.vuepress/theme/constants/statusBadges.js
+  s_edb6000ea1a4b6::t_a3bdcd1238f32d 6-8
+apps/dialtone-documentation/docs/utilities/borders/radius.md
+  s_edb6000ea1a4b6::t_07d7f807cfe459 137
+apps/dialtone-documentation/docs/utilities/spacing/margin.md
+  s_edb6000ea1a4b6::t_6f9d109e50eb88 86,116,142,166,191,218
+apps/dialtone-documentation/docs/utilities/spacing/padding.md
+  s_edb6000ea1a4b6::t_918c253cdecf40 66,96,123
+.github/workflows/a11y_tests.yml
+  s_f920209ec821e1::t_63629445cde6fd 29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5f32183d52faae070c744c812805084626652ef3",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
