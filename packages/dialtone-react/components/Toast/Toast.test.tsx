@@ -341,6 +341,9 @@ describe('DtToast Tests', () => {
       mockProps = { duration: 6500, onClose, onOpenChange };
       updateWrapper();
 
+      // Without a pending timer, running timers below would prove nothing about cancellation.
+      expect(vi.getTimerCount()).toBeGreaterThan(0);
+
       fireEvent.click(qa('dt-notice-action-close-button')!);
       act(() => {
         vi.runAllTimers();
