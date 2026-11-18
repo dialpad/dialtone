@@ -1,3 +1,4 @@
+import { devWarn } from '../../common/dev';
 import {
   DT_BOX_AS_VALUES,
   DT_BOX_SPACING_VALUES,
@@ -17,14 +18,14 @@ import {
 
 export type BoxValidator = (value: unknown) => boolean;
 
-// A validator that names the invalid value and the allowed list in its warning, as dialtone-vue's does. Vue's warns in
-// development only; component code can't branch on the environment, so this one always does.
+// A validator that names the invalid value and the allowed list in its warning, as dialtone-vue's does. Like Vue's, it
+// warns in development only (common/dev.ts).
 function listValidator (list: readonly string[], extras: readonly unknown[] = []): BoxValidator {
   return (value) => {
     if (extras.includes(value)) return true;
     if (list.includes(String(value))) return true;
     const allValid = [...extras.map(String), ...list].join(', ');
-    console.warn(
+    devWarn(
       `[DtBox] Invalid prop value: "${String(value)}". Valid values: ${allValid}`,
     );
     return false;
