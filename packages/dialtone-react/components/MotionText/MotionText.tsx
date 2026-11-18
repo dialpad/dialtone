@@ -352,6 +352,8 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
 
   /** Pause the animation */
   function pause () {
+    // A start() still waiting for the slot read doesn't start later on
+    m.startRequested = false;
     if (!m.isAnimating || m.isPaused) return;
 
     m.timelineElapsed = Date.now() - m.timelineStartedAt;
@@ -390,6 +392,8 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     // A handle kept past unmount must not schedule events for a listener that's gone (Vue's emit is a no-op there)
     if (m.isUnmounted) return;
 
+    // The text stays at rest, as Vue's does: a start() still waiting for the slot read doesn't start later on
+    m.startRequested = false;
     showAllContent();
   }
 
@@ -672,7 +676,10 @@ export function DtMotionText ({
   useLayoutEffect(() => {
     machine.isUnmounted = false;
     const stopWatchingReducedMotion = controller.initWatchReducedMotion();
-    controller.initializeContent();
+    // On an <Activity> reconnect, the watchers above may already be reading the slot (the text prop went, or the mode
+    // switched to or from word mode, while hidden): leave the content to that read, and have it apply autoStart too.
+    if (!machine.slotReadPending) controller.initializeContent();
+    else if (latest.current.autoStart) machine.startRequested = true;
 
     // Word widths change once web fonts load, which would misalign the gradient slices
     let active = true;
