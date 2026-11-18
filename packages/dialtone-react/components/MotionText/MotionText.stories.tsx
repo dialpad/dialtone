@@ -293,6 +293,7 @@ function MotionTextModes () {
               size={200}
               importance="outlined"
               kind="muted"
+              aria-label={`Restart ${mode.label}`}
               onClick={() => restart(modeRefs.current[mode.value])}
             >
               Restart
@@ -385,6 +386,7 @@ function MotionTextVariants () {
                   size={200}
                   importance="outlined"
                   kind="muted"
+                  aria-label={`Restart ${speed.label} speed`}
                   onClick={() => restart(speedRefs.current[speed.value])}
                 >
                   Restart
@@ -431,6 +433,7 @@ function MotionTextVariants () {
                   size={200}
                   importance="outlined"
                   kind="muted"
+                  aria-label={`Restart ${size.label}`}
                   onClick={() => restart(sizeRefs.current[size.class])}
                 >
                   Restart

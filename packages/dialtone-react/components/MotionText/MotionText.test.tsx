@@ -584,6 +584,74 @@ describe('DtMotionText Tests', () => {
         expect(getEmittedCount('start')).toBe(2);
         expect(getEmittedCount('complete')).toBe(1);
       });
+
+      it('should keep slotted words and play them again after being hidden mid-animation', async () => {
+        const activity = (mode: 'visible' | 'hidden') => (
+          <Activity mode={mode}>
+            <DtMotionText
+              ref={(instance) => { handle = instance; }}
+              animationMode="gradient-in"
+              autoStart={false}
+              onStart={record('start')}
+              onProgress={record('progress')}
+              onComplete={record('complete')}
+            >
+              {MOCK_FIGMA_TEXT}
+            </DtMotionText>
+          </Activity>
+        );
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(activity('visible'));
+        await start();
+        await advance(100);
+        wrapper.rerender(activity('hidden'));
+        wrapper.rerender(activity('visible'));
+        await nextTick();
+        emitted.progress = [];
+        await start();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(findWordTexts()).toEqual(MOCK_FIGMA_WORDS);
+        expect(getProgressPayloads().at(-1)).toEqual({
+          wordsComplete: 6,
+          totalWords: 6,
+          progress: 1,
+        });
+        expect(getEmittedCount('complete')).toBe(1);
+      });
+    });
+
+    describe('When start() is called from a callback ref', () => {
+      it('should play slotted words from the mount, as a call made later does', async () => {
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(
+          <DtMotionText
+            ref={(instance) => {
+              instance?.start();
+              handle = instance;
+            }}
+            animationMode="gradient-in"
+            autoStart={false}
+            onStart={record('start')}
+            onProgress={record('progress')}
+            onComplete={record('complete')}
+          >
+            {MOCK_FIGMA_TEXT}
+          </DtMotionText>,
+        );
+        await nextTick();
+
+        expect(findWordTexts()).toEqual(MOCK_FIGMA_WORDS);
+        expect(getRoot()).toHaveClass('d-motion-text--animating');
+
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(getEmittedCount('start')).toBe(1);
+        expect(getEmittedCount('progress')).toBe(MOCK_FIGMA_WORDS.length);
+        expect(getEmittedCount('complete')).toBe(1);
+      });
     });
 
     describe('Skip to end', () => {

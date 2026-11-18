@@ -441,9 +441,13 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
 
   /** Initialize content based on text prop or slot content */
   function initializeContent () {
-    m.words = splitWords(props().text || getSlotText());
-    m.wordWidths = [];
-    commit();
+    // Word mode renders slot text as words, so the slot isn't mounted on an <Activity> reconnect: the words already
+    // tokenized from it are still valid, and reading the missing slot would empty them.
+    if (props().text || slot()) {
+      m.words = splitWords(props().text || getSlotText());
+      m.wordWidths = [];
+      commit();
+    }
 
     // Whole-text modes start even while empty, e.g. a slot that streams its content in
     if (props().autoStart && (isWholeText() || m.words.length > 0)) {
@@ -609,17 +613,6 @@ export function DtMotionText ({
     },
   }));
 
-  useImperativeHandle(ref, () => ({
-    get element () {
-      return rootRef.current;
-    },
-    start: controller.start,
-    pause: controller.pause,
-    resume: controller.resume,
-    reset: controller.reset,
-    skipToEnd: controller.skipToEnd,
-  }), [controller]);
-
   useLayoutEffect(() => {
     latest.current = current;
   });
@@ -674,6 +667,20 @@ export function DtMotionText ({
       queued.forEach(callback => callback());
     });
   });
+
+  // Declared after the effects above, which read the slot and the motion preference, so a callback ref that calls
+  // start() on mount finds the content initialized and plays the same run as a call made later. React publishes the
+  // handle (and calls a callback ref) from this layout effect, in declaration order.
+  useImperativeHandle(ref, () => ({
+    get element () {
+      return rootRef.current;
+    },
+    start: controller.start,
+    pause: controller.pause,
+    resume: controller.resume,
+    reset: controller.reset,
+    skipToEnd: controller.skipToEnd,
+  }), [controller]);
 
   const modeSettings = getModeSettings(animationMode);
   const isWholeText = Boolean(modeSettings.wholeText);
