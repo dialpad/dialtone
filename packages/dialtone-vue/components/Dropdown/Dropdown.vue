@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { camelize } from 'vue';
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { DtPopover, POPOVER_APPEND_TO_VALUES } from '@/components/Popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/ListItem';
@@ -561,7 +562,8 @@ export default {
           if (this._itemsLength() || !this.focusMenuClose()) this.setHighlightIndex(0);
           // Popover's default first-element focus skips aria-disabled rows, but a DtListItem disabled row
           // stays reachable: focus it so focus and keyboard position agree. A consumer focus target wins.
-          const consumerFocus = 'initialFocusElement' in this.$attrs || 'initial-focus-element' in this.$attrs;
+          const consumerFocus = Object.entries(this.$attrs)
+            .some(([key, value]) => camelize(key) === 'initialFocusElement' && value != null);
           if (!consumerFocus && isDisabledRow(this.activeItemEl)) this.activeItemEl.focus();
         }
         this.$emit('opened', true);
