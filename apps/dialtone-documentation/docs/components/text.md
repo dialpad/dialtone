@@ -596,7 +596,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 ## Accessibility
 
 - Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
-- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in. Inside a keyboard-focusable item (button, link, or an element with an item role that can take focus), `slide` gives keyboard and pointer users the full text without a tooltip. With reduced motion on, the label jumps to its end and its start stays cut off, so keep another way to the full text (tooltip or `aria-label`) where the start matters.
+- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in. Inside a keyboard-focusable item (button, link, or an element with an item role that can take focus), `slide` gives keyboard and pointer users the full text without a tooltip. With reduced motion on, the label jumps to its end and its start stays cut off, so keep a visible way to the full text (a tooltip or detail view) where the start matters.
 - Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
 
 ## Vue API
