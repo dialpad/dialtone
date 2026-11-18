@@ -1,0 +1,41 @@
+.agents/evals/run-skill-contract-evals.mjs
+  s_7f1d1d64baa803::t_c00f97eaf36055 135,429-444
+.agents/README.md
+  s_7f1d1d64baa803::t_37e12f91ddeafc 3,42
+.agents/resources/agent-tooling-parity.md
+  s_7f1d1d64baa803::t_d4fe9761ca5977 3,11-17,35-58,69-72,78-95,112
+.agents/resources/rules/codex-tooling.md
+  s_7f1d1d64baa803::t_5459e8ff4a4ad2 8,12
+.agents/resources/rules/vue-components.md
+  s_7f1d1d64baa803::t_12e123c8d60ca1 3,7,9-18,23-119,121-130,132,134,136-144
+.claude/agents/component-orchestrator.md
+  s_7f1d1d64baa803::t_ea30cbdeb74082 2,17,63
+.claude/agents/pr-prep-coordinator.md
+  s_7f1d1d64baa803::t_ae80f492e74d0f 42-44
+.claude/commands/pr-fill.md
+  s_7f1d1d64baa803::t_b55768e338bbb7 40-43,47,63,82,98,124
+.claude/rules/slot-class-props.md
+  s_7f1d1d64baa803::t_7f97c7b4738e07 8,10
+.claude/rules/vue-components.md
+  s_7f1d1d64baa803::t_c098fd1ddebaa9 8,10
+AGENTS.md
+  s_7f1d1d64baa803::t_eab2362bf835f4 1,3,11,20-26
+CLAUDE.md
+  s_7f1d1d64baa803::t_c3af26275bf92e 1-2,53,67,69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e9dfc404d9f7a96cc3ca5f76ea11f9fbbf5b43c8",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

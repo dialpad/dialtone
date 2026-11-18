@@ -1,0 +1,16 @@
+packages/dialtone-react/components/Combobox/Combobox.test.tsx
+  h_65afbd07a56b87 611-635
+packages/dialtone-react/components/Combobox/Combobox.tsx
+  h_65afbd07a56b87 202-208,210,226
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a13014fc493645ed4e1e7151547a4b11826a4923",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

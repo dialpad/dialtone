@@ -1,0 +1,20 @@
+packages/dialtone-vue/components/Tooltip/Tooltip.vue
+  s_aa2f4287e4d553::t_d2df29f3ece59b 363
+  s_aa2f4287e4d553::t_2d6a946b6b1e5d 354-362,364-369
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fd560793b85b71cc1ae2062b920490cffabe0d7d",
+  "prompts": {},
+  "sessions": {
+    "s_aa2f4287e4d553": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8ba710d9-eb02-42a4-aa29-1fd53f908f8b",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

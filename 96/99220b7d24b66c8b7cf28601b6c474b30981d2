@@ -1,0 +1,70 @@
+packages/dialtone-mcp-server/src/index.ts
+  s_889479d5b1e8ed::t_b4cf6c05f7ae5b 63,162,168,189
+packages/dialtone-query-core/src/tools/tokens.ts
+  s_889479d5b1e8ed::t_b4cf6c05f7ae5b 115
+packages/dialtone-mcp-server/client-rules.json
+  s_889479d5b1e8ed::t_b4cf6c05f7ae5b 8-9,16-17,36-38,41-45,49,58,61
+packages/dialtone-query-core/src/tools/components.ts
+  s_889479d5b1e8ed::t_b4cf6c05f7ae5b 371
+apps/dialtone-documentation/docs/_data/stack.json
+  s_e485a78f32e0fd::t_a1ff87508dcdcc 24-27
+  s_e485a78f32e0fd::t_da40295a63fdea 23
+packages/dialtone-vue/components/Stack/StackWrapping.story.vue
+  s_e485a78f32e0fd::t_a1ff87508dcdcc 1-36
+apps/dialtone-documentation/docs/components/stack.md
+  s_e485a78f32e0fd::t_a1ff87508dcdcc 131-148
+  s_e485a78f32e0fd::t_de32117526f2e7 128-130
+  s_dc3f93801f56be::t_1e2eea99506e1d 127
+packages/dialtone-vue/components/Stack/StackDefault.story.vue
+  s_e485a78f32e0fd::t_a1ff87508dcdcc 6
+packages/dialtone-vue/components/Stack/Stack.test.js
+  s_e485a78f32e0fd::t_a1ff87508dcdcc 44,49,52
+  s_e485a78f32e0fd::t_c5773e6a3b583c 47-48,50-51,53-55
+  s_e485a78f32e0fd::t_868572cffc6a0a 42
+  s_e485a78f32e0fd::t_573bbe5ef14e0c 43,45-46
+packages/dialtone-css/lib/build/less/components/stack.less
+  s_e485a78f32e0fd::t_7c3f13b170662f 11,148-153
+  s_e485a78f32e0fd::t_94ae687c46a4de 154-155
+packages/dialtone-vue/components/Stack/Stack.stories.js
+  s_e485a78f32e0fd::t_a1ff87508dcdcc 5,18,59-61,116-122
+  s_e485a78f32e0fd::t_259d09607032e5 123-124
+packages/dialtone-vue/components/Stack/Stack.vue
+  s_e485a78f32e0fd::t_7c3f13b170662f 7,53-58
+  s_e485a78f32e0fd::t_565cdb66d9b786 59-60
+packages/combinator/src/variants/variants_stack.js
+  s_e485a78f32e0fd::t_a1ff87508dcdcc 45-62
+apps/dialtone-documentation/docs/guides/migration/flex-to-stack/index.md
+  s_e485a78f32e0fd::t_98b4232ef4eab1 14,224,409,415,418,524
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9699220b7d24b66c8b7cf28601b6c474b30981d2",
+  "prompts": {},
+  "sessions": {
+    "s_889479d5b1e8ed": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10dfe-ca70-7b53-bc83-c8ae8c4d692c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_dc3f93801f56be": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a11798-8213-7b60-8ed4-6436ce2f40fc",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_e485a78f32e0fd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a11798-8213-7b60-8ed4-6436ce2f40fc",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

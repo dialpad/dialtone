@@ -1,0 +1,37 @@
+apps/dialtone-documentation/docs/.vuepress/views/Overview.vue
+  s_f920209ec821e1::t_0a4ade887730a0 22-25,40,100-102
+apps/dialtone-documentation/docs/utilities/flex/align-content.md
+  s_f920209ec821e1::t_0a4ade887730a0 105
+apps/dialtone-documentation/docs/guides/migration/component-props/index.md
+  s_f920209ec821e1::t_0a4ade887730a0 133-135
+apps/dialtone-documentation/docs/utilities/flex/align-self.md
+  s_f920209ec821e1::t_0a4ade887730a0 68
+apps/dialtone-documentation/docs/utilities/grid/justify-items.md
+  s_f920209ec821e1::t_0a4ade887730a0 81
+apps/dialtone-documentation/docs/utilities/interactivity/resize.md
+  s_f920209ec821e1::t_0a4ade887730a0 29
+apps/dialtone-documentation/docs/utilities/typography/text-align.md
+  s_f920209ec821e1::t_0a4ade887730a0 42
+apps/dialtone-documentation/docs/utilities/flex/align-items.md
+  s_f920209ec821e1::t_0a4ade887730a0 68
+apps/dialtone-documentation/docs/utilities/flex/justify.md
+  s_f920209ec821e1::t_0a4ade887730a0 88
+apps/dialtone-documentation/docs/utilities/grid/justify-self.md
+  s_f920209ec821e1::t_0a4ade887730a0 77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8b99b13aeafdd2b21893a0163b1fa611225cd828",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
