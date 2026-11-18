@@ -1,0 +1,23 @@
+export { DtSegmentedControl, type DtSegmentedControlProps } from './SegmentedControl';
+export { DtSegmentedControlItem, type DtSegmentedControlItemProps } from './SegmentedControlItem';
+export {
+  SEGMENTED_CONTROL_SIZES,
+  SEGMENTED_CONTROL_SIZE_DEFAULT,
+  SEGMENTED_CONTROL_SIZE_MODIFIERS,
+  SEGMENTED_CONTROL_ORIENTATIONS,
+  SEGMENTED_CONTROL_ORIENTATION_DEFAULT,
+  SEGMENTED_CONTROL_ACTIVATION_MODES,
+  SEGMENTED_CONTROL_ACTIVATION_MODE_DEFAULT,
+  SEGMENTED_CONTROL_SPREADS,
+  SEGMENTED_CONTROL_SPREAD_DEFAULT,
+  SEGMENTED_CONTROL_CONTEXT_KEY,
+  SEGMENTED_CONTROL_SELECT_KEY,
+  SEGMENTED_CONTROL_FOCUS_KEY,
+  type SegmentedControlSize,
+  type SegmentedControlOrientation,
+  type SegmentedControlActivationMode,
+  type SegmentedControlSpread,
+  type SegmentedControlGroupContext,
+  type SegmentedControlSelect,
+  type SegmentedControlFocus,
+} from './SegmentedControlConstants';
