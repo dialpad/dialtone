@@ -43,6 +43,7 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 1. **Scope.** Fix it once, before any review. Each shell call starts fresh, so write down the base SHA and reuse it as `BASE` in later snippets.
 
    ```sh
+   export pnpm_config_verify_deps_before_run=false   # pnpm 11 otherwise installs first and can rewrite pnpm-lock.yaml; repeat in every shell call
    B=staging   # or the PR's base branch
    git fetch origin "$B"
    BASE=$(git merge-base "origin/$B" HEAD); echo "$BASE"
@@ -50,8 +51,11 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    ```
 
    - Record base SHA, head SHA, size and the file list (`FILES`, one path per line, reused like `BASE`). Staged and unstaged changes are in scope. `git ls-files -o` only lists candidates: in a dirty checkout it can pick up unrelated work or scratch notes, so add only the untracked files that belong to this change, ask when unsure, and name the rest as excluded in the report. `git diff` leaves untracked files out, so add each in-scope one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size. Use this same scoped list for the review, package selection and any follow-on fixes.
-   - Propose the PR title per `.github/COMMIT_CONVENTION.md` and check it with `echo "<title>" | pnpm exec commitlint`.
-   - Review mode (PR not checked out): take base, head and title from `gh pr view <n> --json baseRefOid,headRefOid,title`, the file list from `gh api --paginate repos/dialpad/dialtone/pulls/<n>/files --jq '.[] | .filename, (.previous_filename // empty)'` (`--json files` stops at 100 files; this keeps both sides of a rename, as step 2 does) and the diff from `gh pr diff <n>`, then run the same `gh pr view` again and restart the capture if either SHA changed; use that file list for step 2. Check the PR's existing title with commitlint and report its result; give any proposed title separately. The local checkout may hold other versions of unchanged files, so the reviewer reads surrounding code at the PR head: `git fetch https://github.com/dialpad/dialtone.git pull/<n>/head` (not `origin`, which may be a fork), then `git show <headRefOid>:<path>`. Neither changes the working tree.
+   - Propose the PR title per `.github/COMMIT_CONVENTION.md` and check it with `echo "<title>" | pnpm exec commitlint` (with the variable above set).
+   - Review mode (PR not checked out):
+     - Take base, head and title from `gh pr view <n> --json baseRefOid,headRefOid,title`, the file list from `gh api --paginate repos/dialpad/dialtone/pulls/<n>/files --jq '.[] | .filename, (.previous_filename // empty)'` (`--json files` stops at 100 files; this keeps both sides of a rename, as step 2 does) and the diff from `gh pr diff <n>`. Run the same `gh pr view` again and restart the capture if either SHA changed. Use that file list for step 2.
+     - Check the PR's existing title with commitlint and report its result; give any proposed title separately.
+     - The local checkout may hold other versions of unchanged files, so the reviewer reads surrounding code at the PR head: `git fetch https://github.com/dialpad/dialtone.git pull/<n>/head` (not `origin`, which may be a fork), then `git show <headRefOid>:<path>`. Neither changes the working tree.
    - Empty scope: say "Nothing to review" and stop.
    - Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs.
    - Any edit or commit makes the scope stale: recapture it before re-review.
@@ -63,7 +67,7 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    printf '%s\n' "$FILES" | awk -F/ 'NF{if($1=="packages"||$1=="apps")print $1"/"$2;else print $1}' | sort -u
    ```
 
-   Build `FILES` with `git diff --name-only --no-renames "$BASE"`, which lists both sides of a move, so a package that loses files still gets its gates. Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
+   Build `FILES` from `git diff --name-only --no-renames "$BASE"` (it lists both sides of a move, so a package that loses files still gets its gates) plus the in-scope untracked files from step 1. Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
 
 3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle (base SHA, head SHA, file list and diff), [adversarial-review.md](references/adversarial-review.md), [reviewer-lens.md](references/reviewer-lens.md), `.agents/resources/rules/general.md` and the path rules `rule-map.md` selects for the changed paths. The lens adds judgment; the path rules still own things like the component artifact pipeline and internal authoring conventions. Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
 
@@ -78,7 +82,7 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
 4. **Adjudicate.** For every finding choose one: **keep** (real, in scope, left open), **fixed** (kept and changed now), or **reject** (say why; a reasoned "no" is fine). Merge duplicates. A finding names a file and line; for missing work, name the line that creates the need (the new prop) or the file that should change.
 5. **Fix and re-review** (author mode only; report-only edits nothing). Apply the fixes, recapture scope, and re-review only what changed: rerun the reviewer on the new diff and any specialist whose area was touched. Stop after two rounds and report what is left. Author-mode `Ready` needs a clean working tree; otherwise list the uncommitted files as "not in the PR yet".
-6. **Local gates.** Run lint and tests for the touched packages only; CI runs most tests and almost no lint, so do not skip lint. Pick checks from `.agents/resources/validation.md`; [local-gates.md](references/local-gates.md) says how to read the results. In report-only, run only checks the map marks `no` or `output` and report each other as "not run" with the reason. Run on the final head. A package with no lint or test target is "no gate".
+6. **Local gates.** Run lint and tests for the touched packages only; CI runs most tests and almost no lint, so do not skip lint. Pick checks from `.agents/resources/validation.md`; [local-gates.md](references/local-gates.md) says how to read the results. In report-only, run only checks the map marks `no` or `output` and report each other as "not run" with the reason. Run on the final head. A package with no lint or test target is "no gate". Compare `git status --porcelain` before and after the checks; if it changed, report what changed and record `tree=dirty`.
 7. **Tooling checks.** One line each, only when the diff touches them:
    - Changed behaviour, new props and new events have tests; no skipped or pending tests in changed test files.
    - New tests run in CI: a workflow path filter covers the package and a job runs that package's test command (`rg` the package name in `.github/workflows`).
@@ -125,11 +129,12 @@ R=$(git rev-parse --git-path pr-prep-verdict)
 printf 'verdict=%s\nhead=%s\ntree=%s\n' "<verdict>" "$(git rev-parse HEAD)" "<clean|dirty>" > "$R"
 ```
 
-`pr-create` and `/pr-fill` read it before their first PR write. The verdict is fresh only when `head` equals the current `HEAD` and `tree=clean`; a missing record, a different SHA or `tree=dirty` means prep is stale and must be rerun.
+`pr-create` and `/pr-fill` read it before their first PR write. The verdict is fresh only when `head` equals the commit the PR shows and `tree=clean`; a missing record, a different SHA or `tree=dirty` means prep is stale and must be rerun. For `pr-create` that commit is `HEAD`, which must also equal `@{u}` once pushed. For `/pr-fill`, which edits an existing PR, it is the PR's `headRefOid` (`gh pr view <n> --json headRefOid --jq .headRefOid`).
 
 ```sh
 R=$(git rev-parse --git-path pr-prep-verdict)
-[ "$(sed -n 's/^head=//p' "$R" 2>/dev/null)" = "$(git rev-parse HEAD)" ] && grep -qx 'tree=clean' "$R" \
+TARGET=$(git rev-parse HEAD)   # /pr-fill: the PR's headRefOid
+[ "$(sed -n 's/^head=//p' "$R" 2>/dev/null)" = "$TARGET" ] && grep -qx 'tree=clean' "$R" \
   && sed -n 's/^verdict=//p' "$R" || echo "stale: rerun pr-prep"
 ```
 

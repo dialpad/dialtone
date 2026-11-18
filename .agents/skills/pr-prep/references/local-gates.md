@@ -7,7 +7,8 @@ Run the rows for the touched packages only (`SKILL.md` step 2) and never the ful
 ## Choosing what to run
 
 - Report-only: run only rows marked `no` or `output`. Mark any other row "not run" with the marker as the reason (for example "not run: may rewrite icon keywords"). Where a row has a read-only form and a CI form, use the read-only form; if its prerequisite build output is missing, that is "not run" too.
-- Author: any row may run. Compare `git status --porcelain` before and after each check. A tracked file that changed is a finding to keep or fix, not something to leave behind unnoticed.
+- Every run: compare `git status --porcelain` before and after; if it changed, report what changed and record `tree=dirty`.
+- Author: any row may run. A tracked file that changed is a finding to keep or fix, not something to leave behind unnoticed.
 - A package with no lint or test row is "no gate".
 - The CSS lint gate is the Stylelint command with fixing off. `nx run dialtone-css:lint` can pass with fixable violations still on disk.
 
@@ -27,6 +28,7 @@ Run the rows for the touched packages only (`SKILL.md` step 2) and never the ful
 Markdown is compared with its copy at `$BASE` and fails only on new findings; the rest of `.agents/` already has findings on `staging`. ESLint fails on errors only; existing warnings are notes. `FILES` is the scoped file list from `SKILL.md` step 1, one path per line.
 
 ```sh
+export pnpm_config_verify_deps_before_run=false   # pnpm 11 otherwise installs first and can rewrite pnpm-lock.yaml
 : "${BASE:?set BASE to the recorded base SHA}" "${FILES:?set FILES to the scoped file list}"
 CHANGED=$(echo "$FILES" | grep -E '^(AGENTS\.md|\.agents/)' | while read -r f; do [ -f "$f" ] && echo "$f"; done)
 JS=$(echo "$CHANGED" | grep -E '\.(js|mjs|cjs)$')

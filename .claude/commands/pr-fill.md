@@ -43,7 +43,7 @@ When this command is used, Claude should:
    - Use the plain ticket key in the public PR body.
 
 6. **Check prep before any PR write:**
-   - Run the freshness check from the "Verdict record" section of `.agents/skills/pr-prep/SKILL.md`. The recorded head SHA must equal the current `HEAD` and the tree must have been clean.
+   - Run the freshness check from the "Verdict record" section of `.agents/skills/pr-prep/SKILL.md`. The recorded head SHA must equal the PR's head (`gh pr view <PR_NUMBER> --json headRefOid --jq .headRefOid`), not just the local `HEAD`, and the tree must have been clean.
    - A missing record, a different SHA or a dirty tree means prep is stale: run `/pr-prep` again before the title or body edit.
    - For `Needs fixes` or `Needs decision`, report it and ask before writing.
 

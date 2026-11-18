@@ -11,8 +11,7 @@ Apply to `packages/dialtone-css/**`, especially `lib/build/less/utilities/**`.
 
 ## Selectors
 
-- Prefer a single flat selector when it preserves behavior and compatibility. Check whether the owning element or an existing component custom property can express the state more directly.
-- Use `:where()` when a necessary condition should add zero specificity. Count the selector parts outside it and verify what wins in the compiled CSS, including affected states and consumer overrides.
+- Keep selectors flat. Reach for `:where()` only for conditions that should add no specificity, and check the compiled CSS for what wins.
 
 ## Token Usage
 

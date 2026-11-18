@@ -12,6 +12,8 @@ memory:
 
 # PR Prep Coordinator Agent
 
+Readiness checks now use the `pr-prep` skill (`.agents/skills/pr-prep/SKILL.md`), which records the verdict that `pr-create` and `/pr-fill` check.
+
 Validates that a PR is ready before submission. Catches issues that CI doesn't cover, including cross-package impact, breaking changes, documentation completeness, and test coverage.
 
 ## Checks
