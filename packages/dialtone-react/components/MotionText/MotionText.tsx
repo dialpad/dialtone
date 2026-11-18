@@ -127,6 +127,8 @@ interface Machine {
   isPaused: boolean;
   isComplete: boolean;
   isUnmounted: boolean;
+  /** Bumped on unmount, so callbacks a microtask is still holding for the previous mount (StrictMode's) never run. */
+  mountGeneration: number;
   animationTimeouts: ReturnType<typeof setTimeout>[];
   timelineStartedAt: number;
   timelineElapsed: number;
@@ -553,7 +555,8 @@ export function DtMotionText ({
   const slotRef = useRef<HTMLSpanElement>(null);
 
   const current: LatestProps = {
-    text, animationMode, speed, autoStart, loop, respectsReducedMotion, onStart, onComplete, onProgress, onPause, onResume,
+    text, animationMode, speed, autoStart, loop, respectsReducedMotion,
+    onStart, onComplete, onProgress, onPause, onResume,
   };
   // The props the timeline's timers and the handle's methods read. Updated after each commit, before the watchers run.
   const latest = useRef(current);
@@ -569,6 +572,7 @@ export function DtMotionText ({
       isPaused: false,
       isComplete: false,
       isUnmounted: false,
+      mountGeneration: 0,
       animationTimeouts: [],
       timelineStartedAt: 0,
       timelineElapsed: 0,
@@ -638,6 +642,7 @@ export function DtMotionText ({
     return () => {
       active = false;
       machine.isUnmounted = true;
+      machine.mountGeneration++;
       tickQueue.current = [];
       controller.clearTimeouts();
       stopWatchingReducedMotion?.();
@@ -650,8 +655,9 @@ export function DtMotionText ({
     if (!tickQueue.current.length) return;
     const queued = tickQueue.current;
     tickQueue.current = [];
+    const generation = machine.mountGeneration;
     queueMicrotask(() => {
-      if (machine.isUnmounted) return;
+      if (machine.isUnmounted || generation !== machine.mountGeneration) return;
       queued.forEach(callback => callback());
     });
   });

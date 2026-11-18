@@ -97,8 +97,7 @@ let mockProps: DtMotionTextProps = {};
 let mockAttrs: DtMotionTextProps = {};
 let mockChildren: ReactNode;
 
-const EVENTS = ['start', 'complete', 'progress', 'pause', 'resume'] as const;
-type EventName = typeof EVENTS[number];
+type EventName = 'start' | 'complete' | 'progress' | 'pause' | 'resume';
 
 describe('DtMotionText Tests', () => {
   let wrapper: RenderResult | null = null;
