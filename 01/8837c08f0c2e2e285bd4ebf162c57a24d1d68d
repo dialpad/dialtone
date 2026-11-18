@@ -1,0 +1,41 @@
+.agents/README.md
+  s_7f1d1d64baa803::t_a63dcb7004523b 5-6
+.agents/resources/rule-map.md
+  s_7f1d1d64baa803::t_388d1181d29ade 31-51
+.agents/resources/rules/vue-components.md
+  s_7f1d1d64baa803::t_911a9fd7748a78 10,17,19
+.agents/resources/rules/vue-tests.md
+  s_7f1d1d64baa803::t_8dd24e65c6f329 20
+.claude/rules/general-rules.md
+  s_7f1d1d64baa803::t_01e5e52bac4880 16-19
+.claude/rules/vue-components.md
+  s_7f1d1d64baa803::t_f9be60ed986d3d 17,43,53-57,59-60,70
+.claude/rules/vue-tests.md
+  s_7f1d1d64baa803::t_5cc409b85480ef 62
+packages/dialtone-docs/src/content/architecture/architecture-monorepo-structure.md
+  s_7f1d1d64baa803::t_12732f386f904d 6,26
+packages/dialtone-docs/src/content/development/development-component-workflow.md
+  s_7f1d1d64baa803::t_76472da61ced06 5-6,12,16-26,29-30,34,36-37,57,64,67,69,71,121,124-126,132-133,178,180,184,202,206,221
+packages/dialtone-docs/src/content/development/development-icons.md
+  s_7f1d1d64baa803::t_577f1a870fa5a8 6,81,90,92
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_7f1d1d64baa803::t_dcdeace6c8fe55 23,29,33,35,41,43,81,147-149,203
+packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md
+  s_7f1d1d64baa803::t_7fbeb32b31f499 6,17-18,28,42,51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "018837c08f0c2e2e285bd4ebf162c57a24d1d68d",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

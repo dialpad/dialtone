@@ -1,0 +1,40 @@
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_a42916e93fe1f0::t_ef32a21718b2c2 244-245,247
+  s_a42916e93fe1f0::t_4b43d9d0344329 201,204
+  s_a42916e93fe1f0::t_834583e84b6af2 2
+packages/dialtone-vue/components/ListItem/ListItem.test.js
+  s_a42916e93fe1f0::t_7ee5adf2ee6a41 296-305
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_a42916e93fe1f0::t_946c23c3ee995e 1083
+  s_a42916e93fe1f0::t_1cb4a60145112e 781,784,788
+  s_a42916e93fe1f0::t_236bf6a71dea3b 958-960,964
+packages/dialtone-vue/common/mixins/keyboard_list_navigation.js
+  s_a42916e93fe1f0::t_1026dbc56ca53b 204
+packages/dialtone-vue/components/ComboboxWithPopover/ComboboxWithPopover.test.js
+  s_a42916e93fe1f0::t_247cd1283ab232 94
+packages/dialtone-vue/components/SplitButton/SplitButton.test.js
+  s_a42916e93fe1f0::t_a4c221528b01b6 86
+  s_a42916e93fe1f0::t_fde346f439a69a 100
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_a42916e93fe1f0::t_07756473f0aa3f 382-383
+  s_a42916e93fe1f0::t_c74fbac5d8c937 469
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_a42916e93fe1f0::t_8998d21b581ffa 743-744,746-747,750-766
+  s_a42916e93fe1f0::t_618732de284bc8 451-460,462-464
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1b1a0e02771e134fc3be517348d545cc75320e97",
+  "prompts": {},
+  "sessions": {
+    "s_a42916e93fe1f0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f052a1b-204f-4df8-b3dd-56a06a0fb509",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
