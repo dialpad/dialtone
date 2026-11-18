@@ -1,6 +1,6 @@
 import { act, cleanup, fireEvent, render, waitFor, within, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { finishTransitions } from '../../tests/helpers/transition';
 import { DtImageViewer, type DtImageViewerProps } from './ImageViewer';
 
@@ -233,6 +233,20 @@ describe('DtImageViewer Tests', () => {
         fireEvent.keyDown(imageViewerFull!, { code: 'Escape' });
 
         expect(qa('dt-image-viewer-full')).toBeNull();
+      });
+
+      it('does not let a handled Escape reach a React ancestor', () => {
+        const spy = vi.fn();
+        const local = render(
+          <div onKeyDown={spy}>
+            <DtImageViewer {...baseProps} open={true} />
+          </div>,
+        );
+
+        fireEvent.keyDown(qa('dt-image-viewer-full')!, { code: 'Escape' });
+
+        expect(spy).not.toHaveBeenCalled();
+        local.unmount();
       });
     });
   });

@@ -19,7 +19,7 @@ import { SrOnlyCloseButton } from '../Button/sr_only_close_button';
 // Vue's EVENT_KEYNAMES.esc and EVENT_KEYNAMES.escape, which the modal compares `event.code` with.
 const ESCAPE_CODES = ['Esc', 'Escape'];
 
-type NativeAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'aria-label'>;
+type NativeAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'aria-label' | 'dangerouslySetInnerHTML'>;
 
 export interface DtImageViewerProps extends ModeProps, NativeAttributes {
   /** The root element. */
@@ -56,7 +56,10 @@ export interface DtImageViewerProps extends ModeProps, NativeAttributes {
   /** Aria label */
   ariaLabel: string;
 
-  /** Emitted when the image modal is shown or hidden. */
+  /**
+   * Emitted when the user opens or closes the image modal through the preview, close button, backdrop, or Escape.
+   * Changes to `open` from the parent do not emit this event.
+   */
   onOpened?: (opened: boolean) => void;
 
   /** Syncs the open prop with the parent component: called with `false` when the modal closes and `open` is set. */
@@ -122,9 +125,17 @@ export function DtImageViewer ({
     if (appendTo !== 'body') {
       resolved = appendTo;
     } else {
-      const buttonEl = previewButtonRef.current;
-      const root = buttonEl?.getRootNode() as Document | ShadowRoot | undefined;
-      resolved = buttonEl?.closest('dialog') ?? root?.querySelector<HTMLElement>('body') ?? document.body;
+      // closest() stops at a shadow root, so continue through each shadow host.
+      let dialog: HTMLElement | null = null;
+      let node: Element | null = previewButtonRef.current;
+      while (node && !dialog) {
+        dialog = node.closest('dialog');
+        if (dialog) break;
+        const root = node.getRootNode();
+        node = root instanceof ShadowRoot ? root.host : null;
+      }
+      const root = previewButtonRef.current?.getRootNode() as Document | ShadowRoot | undefined;
+      resolved = dialog ?? root?.querySelector<HTMLElement>('body') ?? document.body;
     }
     // Nothing renders for a selector that matches nothing.
     setTarget(typeof resolved === 'string' ? document.querySelector(resolved) : resolved);
@@ -138,13 +149,17 @@ export function DtImageViewer ({
   // Read from the opener's root: document.activeElement is the shadow host when the preview is inside a shadow root.
   useEffect(() => {
     if (isOpen) {
-      const root = previewButtonRef.current?.getRootNode() as Document | ShadowRoot | undefined;
-      previousActiveElement.current = (root?.activeElement ?? document.activeElement) as HTMLElement | null;
+      // Only once a modal is mounted, so a viewer that never showed one (unmatched appendTo) doesn't take focus back
+      // later; an active portal that moves keeps the opener saved first.
+      if (modalEl && !previousActiveElement.current) {
+        const root = previewButtonRef.current?.getRootNode() as Document | ShadowRoot | undefined;
+        previousActiveElement.current = (root?.activeElement ?? document.activeElement) as HTMLElement | null;
+      }
     } else {
       previousActiveElement.current?.focus();
       previousActiveElement.current = null;
     }
-  }, [isOpen]);
+  }, [isOpen, modalEl]);
 
   // A parent can remove an open viewer, so `isOpen` never renders as false: give focus back on unmount too. Kept apart
   // from `modalEl` so a portal relocation doesn't restore focus early.
