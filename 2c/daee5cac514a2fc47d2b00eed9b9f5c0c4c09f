@@ -1,0 +1,53 @@
+apps/dialtone-documentation/docs/components/loader.md
+  s_7f1d1d64baa803::t_d6cd868778b463 78
+  s_7f1d1d64baa803::t_ccbdadc1a8d1ba 79
+  s_41e22045807353::t_9d6a532a8d47fd 77
+packages/dialtone-vue/components/Loader/Loader.test.js
+  s_7f1d1d64baa803::t_d0dc291be41847 10,23,39,142,144,148,155-158,161-169,171-174,181-182
+  s_7f1d1d64baa803::t_4b4b5547a44c15 170,175-180
+  s_7f1d1d64baa803::t_788294dfe106e1 183
+  s_41e22045807353::t_b67846fe55b142 149-154,159-160
+  s_41e22045807353::t_d1034f79aaf677 3,117-125,128-135,137-139
+  s_41e22045807353::t_ab896a2e0bd6e8 126-127,136
+packages/dialtone-vue/components/Loader/Loader.vue
+  s_7f1d1d64baa803::t_328315a354ebe7 4,149-150,152-153
+  s_41e22045807353::t_b67846fe55b142 6-7
+  s_41e22045807353::t_9d6a532a8d47fd 104,109-110,114,142-147,151
+packages/dialtone-vue/localization/index.js
+  s_41e22045807353::t_2bf5d0c3ff5fd6 95,99,113-122
+  s_41e22045807353::t_ae3e4cbbceffdc 1,71,77-84
+packages/dialtone-vue/localization/index.test.js
+  s_41e22045807353::t_ae3e4cbbceffdc 50-51,58
+  s_41e22045807353::t_7ac747332a5ad2 12-26,47,49,55-56,59,61-62
+  s_41e22045807353::t_3fcede899ee57e 48,52-54,60
+  s_41e22045807353::t_bf07bea2b6f4cd 63
+  s_41e22045807353::t_7d390aeecfadbe 57
+scripts/retrieval/cache-inputs.test.mjs
+  s_41e22045807353::t_a27621fdc02d2d 72-80
+packages/dialtone-vue/project.json
+  s_41e22045807353::t_a225f393185628 11,47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2cdaee5cac514a2fc47d2b00eed9b9f5c0c4c09f",
+  "prompts": {},
+  "sessions": {
+    "s_41e22045807353": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ad41-e529-7781-9e6c-c66d2aa4c426",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+.agents/resources/rules/documentation-site.md
+  s_7f1d1d64baa803::t_358513973e3f0b 19-28
+.agents/skills/component-work/SKILL.md
+  s_7f1d1d64baa803::t_939ba64a211147 43-46,55
+.claude/rules/documentation-site.md
+  s_7f1d1d64baa803::t_e63dc05216a6fd 9,13,17,21,25,29-38
+.claude/skills/component.md
+  s_7f1d1d64baa803::t_95e40156c669d7 55,64-65
+apps/dialtone-documentation/docs/components/checkbox.md
+  s_7f1d1d64baa803::t_c05bc6bcb85a72 8
+apps/dialtone-documentation/docs/components/combobox-with-popover.md
+  s_7f1d1d64baa803::t_f21f21946c896f 4
+apps/dialtone-documentation/docs/components/index.md
+  s_7f1d1d64baa803::t_2b6b566f0c7e37 4
+apps/dialtone-documentation/docs/components/scrollbar.md
+  s_7f1d1d64baa803::t_c03c09405a566b 6
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_7f1d1d64baa803::t_659f971a7e1555 7
+apps/dialtone-documentation/docs/components/status/index.md
+  s_7f1d1d64baa803::t_59718a27dd1786 4
+apps/dialtone-documentation/docs/components/table.md
+  s_7f1d1d64baa803::t_90f7ae60f44a45 7
+apps/dialtone-documentation/docs/components/tabs.md
+  s_7f1d1d64baa803::t_8356b11ab474db 8
+apps/dialtone-documentation/docs/components/text-list.md
+  s_7f1d1d64baa803::t_67c147082f30aa 18-19
+apps/dialtone-documentation/docs/components/toggle.md
+  s_7f1d1d64baa803::t_71462a245b8618 8
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_57089ac19b659d 90-101,121-126,274-275,308
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_0dbbdcb23aceb4 158-163,377
+apps/dialtone-documentation/docs/guides/migration/scrollbar-always/index.md
+  s_7f1d1d64baa803::t_fc95ebdfd99b60 4
+packages/dialtone-cli/src/commands/search.ts
+  s_7f1d1d64baa803::t_7cdd05adacb39b 3,14
+packages/dialtone-docs/src/generators/build-component-doc-links.mjs
+  s_7f1d1d64baa803::t_043f42b9bc6f43 6,138
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_7f1d1d64baa803::t_b4255c42fd3b3b 7,177
+packages/dialtone-docs/src/utils/keywords.mjs
+  s_7f1d1d64baa803::t_67eab81865d87e 1-10
+packages/dialtone-docs/tests/component-doc-links.test.js
+  s_7f1d1d64baa803::t_9245ae57c9abe6 6-7,91-116
+packages/dialtone-docs/tests/fixtures/public-docs/complete.md
+  s_7f1d1d64baa803::t_7ca42e91c5d298 7
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_7f1d1d64baa803::t_af0f3321d3d6cd 5,125-128,253-264
+packages/dialtone-mcp-server/interactive-search.ts
+  s_7f1d1d64baa803::t_893e210b4e13aa 11,170
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_7f1d1d64baa803::t_d4fb712d468f23 108
+packages/dialtone-query-core/README.md
+  s_7f1d1d64baa803::t_24241a76735b82 12,15-16,39,43
+packages/dialtone-query-core/src/component-documentation.ts
+  s_7f1d1d64baa803::t_4b9b75ef5758d6 5
+packages/dialtone-query-core/src/keyword-matching.ts
+  s_7f1d1d64baa803::t_3a4d68ae6d2e76 1-24
+packages/dialtone-query-core/src/tools/components.ts
+  s_7f1d1d64baa803::t_5b7ec43e530583 5-6,162-184,198,200,227-228,240,267,283-286
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_d55403375def9d 6,162-164,180-181,186,201-202,208,215-217
+packages/dialtone-query-core/src/types.ts
+  s_7f1d1d64baa803::t_2479d216c53727 123
+packages/dialtone-query-core/tests/tools/search-ranking.test.ts
+  s_7f1d1d64baa803::t_f83ca0ebb80565 5-9,110-183
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_6f1c03608e327f 11
+scripts/retrieval/cases.mjs
+  s_7f1d1d64baa803::t_72da411f505495 23-31
+scripts/retrieval/run.mjs
+  s_7f1d1d64baa803::t_75f4e378796778 27,102,112,143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7e6dac17e177c9f15a71dfaa17dd3e097ccc6d79",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

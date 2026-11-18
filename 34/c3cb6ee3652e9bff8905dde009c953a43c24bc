@@ -1,0 +1,16 @@
+packages/dialtone-react/common/hooks/useMode.ts
+  h_65afbd07a56b87 47-48
+packages/dialtone-react/components/Tooltip/Tooltip.tsx
+  h_65afbd07a56b87 217-219
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "34c3cb6ee3652e9bff8905dde009c953a43c24bc",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
