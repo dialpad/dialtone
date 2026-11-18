@@ -88,8 +88,9 @@ function searchNode (node: ReactNode, size: IconSize, key: number): ReactNode {
   if (typeof element.type !== 'string') return element;
 
   // Vue replaces an element that has `innerHTML` (v-html) with the result of searching that string.
+  // React also accepts a TrustedHTML object here, so it's turned into a string for the text search.
   const innerHTML = element.props.dangerouslySetInnerHTML?.__html;
-  if (innerHTML) return searchCodes(innerHTML, size, key);
+  if (innerHTML) return searchCodes(String(innerHTML), size, key);
 
   // Void elements (img, br) take no children.
   if (element.props.children == null) return element;

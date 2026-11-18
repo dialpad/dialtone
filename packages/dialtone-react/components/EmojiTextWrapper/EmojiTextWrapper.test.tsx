@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { Fragment, type ReactNode } from 'react';
 import { DtEmojiTextWrapper, type DtEmojiTextWrapperProps } from './EmojiTextWrapper';
-import { setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '../../common/emoji';
+import { getEmojiData, setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '../../common/emoji';
 import customEmojiJson from '../../common/custom-emoji.json';
 
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
@@ -73,15 +73,23 @@ describe('DtEmojiTextWrapper Tests', () => {
         });
 
         describe('When default slot contains valid custom shortcode', () => {
+          // setCustomEmojiJson only adds and overwrites, so the catalog is put back as it was.
+          let catalogBefore: Record<string, unknown>;
+
           beforeEach(() => {
+            catalogBefore = structuredClone(getEmojiData());
             setCustomEmojiJson(customEmojiJson);
 
             mockSlots = { default: 'Content with :baby_yoda: emoji.' };
 
             updateWrapper();
           });
-          afterAll(() => {
-            setCustomEmojiJson('');
+          afterEach(() => {
+            const catalog = getEmojiData() as Record<string, unknown>;
+            Object.keys(catalog).forEach(key => {
+              if (!Object.hasOwn(catalogBefore, key)) delete catalog[key];
+            });
+            Object.assign(catalog, structuredClone(catalogBefore));
           });
 
           it('Contains emoji component', () => {
@@ -196,6 +204,13 @@ describe('DtEmojiTextWrapper Tests', () => {
         </DtEmojiTextWrapper>,
       );
       expect(screen.getByTestId('a')).toBe(inputA);
+    });
+
+    it('searches a nested TrustedHTML-like __html as text', () => {
+      cleanup();
+      const trusted = { toString: () => 'Hi :smile:' } as unknown as string;
+      render(<DtEmojiTextWrapper><p dangerouslySetInnerHTML={{ __html: trusted }} /></DtEmojiTextWrapper>);
+      expect(screen.getByTestId('emoji-text-wrapper').querySelector('img')).toBeInTheDocument();
     });
 
     it('renders root dangerouslySetInnerHTML without throwing', () => {
