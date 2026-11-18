@@ -193,9 +193,9 @@ describe('DtSlider Tests', () => {
   const findThumbInputs = () => w().findAll<HTMLInputElement>('dt-slider-thumb');
   const findThumbVisuals = () => w().findAll('dt-slider-thumb-visual');
 
-  const updateWrapper = () => {
+  const updateWrapper = (attachTo?: HTMLElement) => {
     wrapper?.unmount();
-    wrapper = mount({ ...baseProps, ...baseAttrs, ...mockProps, ...mockAttrs });
+    wrapper = mount({ ...baseProps, ...baseAttrs, ...mockProps, ...mockAttrs }, { attachTo });
 
     root = w().find('dt-slider');
     track = w().find('dt-slider-track');
@@ -3067,7 +3067,8 @@ describe('DtSlider Tests', () => {
 
       it('un-hides a mark when readout switches from "always" to "never" while a thumb stays focused', async () => {
         mockProps = { readout: 'always', showMarks: [0, 100], value: 50 };
-        updateWrapper();
+        // Attached, so focus() really moves document.activeElement to the thumb.
+        updateWrapper(document.body);
         await nextTick();
 
         stubRect(w().find('dt-slider-control')!, controlRect);
@@ -3079,6 +3080,7 @@ describe('DtSlider Tests', () => {
 
         thumbInputs = findThumbInputs();
         act(() => thumbInputs[0].focus());
+        expect(document.activeElement).toBe(thumbInputs[0]);
         await setInputValue(thumbInputs[0], '51');
         await settleCollisions();
         expect(classes(marks()[0])).toContain(hidden);
