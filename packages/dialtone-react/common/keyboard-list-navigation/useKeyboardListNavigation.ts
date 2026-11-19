@@ -18,7 +18,7 @@ export interface KeyboardListNavigationOptions {
    * Role of the list items in the component. This is used to identify the list items
    * so you must update this if the role of your list items is anything other than 'option'.
    */
-  listItemRole?: string;
+  listItemRole?: string | string[];
   /** Returns the list element. */
   getListElement: () => HTMLElement | null | undefined;
   /**
@@ -41,7 +41,7 @@ export interface KeyboardListNavigationOptions {
 }
 
 export interface KeyboardListNavigationState {
-  /** The highlighted item's index in the list; -1 when none. */
+  /** The highlighted item's index in the list; -1 when none (Vue's undefined too, when set by id before the list rendered). */
   highlightIndex: number;
   /** The highlighted item's id; '' when none or when the highlighted item has no id attribute, undefined when no item exists at the index. */
   highlightId: string | undefined;
@@ -62,7 +62,8 @@ export interface KeyboardListNavigationState {
 }
 
 interface Highlight {
-  index: number;
+  // undefined after setHighlightId ran before the list element existed, as in Vue.
+  index: number | undefined;
   id: string | undefined;
 }
 
@@ -88,7 +89,11 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
 
     const getListElement = () => opts().getListElement();
 
-    const itemSelector = () => `[role="${opts().listItemRole ?? 'option'}"], #sr-only-close-button`;
+    const itemSelector = () => {
+      const role = opts().listItemRole ?? 'option';
+      const roles = Array.isArray(role) ? role : [role];
+      return [...roles.map(r => `[role="${r}"]`), '#sr-only-close-button'].join(', ');
+    };
 
     // Gets all the list item nodes within the list element, uses the listItemRole option to determine
     // whether an element is a list item.
@@ -100,7 +105,9 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
         return null;
       }
 
-      return Array.from(listElement.querySelectorAll<HTMLElement>(itemSelector()));
+      // Require IDs for the new radio navigation path; preserve ID-less rows for legacy roles.
+      return Array.from(listElement.querySelectorAll<HTMLElement>(itemSelector()))
+        .filter(item => item.getAttribute('role') !== 'menuitemradio' || item.id);
     };
 
     // Gets the length of all the items in the list.
@@ -114,31 +121,23 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
       return listItems.length;
     };
 
-    const getItemIndex = (id: string) => {
-      const listElement = getListElement();
-      if (!listElement) {
-        return -1;
-      }
-
-      const listItems = Array.from(listElement.querySelectorAll(itemSelector()));
-      return listItems.indexOf(listElement.querySelector(`#${id}`) as Element);
+    // Vue returns undefined (not -1) when there is no list element yet; kept, so a highlight requested before the
+    // list renders keeps its id and no key moves it.
+    const getItemIndex = (id: string): number | undefined => {
+      if (!id) return -1;
+      if (!getListElement()) return undefined;
+      return getListItemNodes()?.findIndex(item => item.id === id) ?? -1;
     };
 
-    const getItemId = (index: number) => {
-      const listElement = getListElement();
-      if (!listElement) {
-        return undefined;
-      }
-
-      return listElement.querySelectorAll(itemSelector())[index]?.id;
-    };
+    const getItemId = (index: number) => getListItemNodes()?.[index]?.id;
 
     const write = (next: Highlight) => {
       latestHighlight.current = next;
       setHighlight(next);
     };
 
-    const afterHighlight = (index: number) => {
+    const afterHighlight = (index: number | undefined) => {
+      if (index === undefined) return;
       if (itemsLength() && opts().afterHighlightMethod) {
         opts().afterHighlightMethod?.(index);
       }
@@ -153,7 +152,7 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
       if (!id) return;
       const index = getItemIndex(id);
       write({ index, id });
-      afterHighlight(getItemIndex(id));
+      afterHighlight(index);
     };
 
     const scrollActiveItemIntoViewIfNeeded = () => {
@@ -192,8 +191,9 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
 
     const onUpKey = () => {
       opts().openMethod?.(true);
-      if (latestHighlight.current.index > 0) {
-        setHighlightIndex(latestHighlight.current.index - 1);
+      const current = latestHighlight.current.index ?? NaN; // NaN compares false, as Vue's undefined does
+      if (current > 0) {
+        setHighlightIndex(current - 1);
       } else {
         opts().beginningOfListMethod?.();
       }
@@ -202,8 +202,9 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
 
     const onDownKey = () => {
       opts().openMethod?.(true);
-      if (latestHighlight.current.index < itemsLength() - 1) {
-        setHighlightIndex(latestHighlight.current.index + 1);
+      const current = latestHighlight.current.index ?? NaN; // NaN compares false, as Vue's undefined does
+      if (current < itemsLength() - 1) {
+        setHighlightIndex(current + 1);
       } else {
         opts().endOfListMethod?.();
       }
@@ -221,8 +222,7 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
     };
 
     const onNavigationKey = (key: string) => {
-      // Vue's getListItemNodes() can return null here, and its .filter() then throws; kept.
-      const listItems = getListItemNodes() as HTMLElement[];
+      const listItems = getListItemNodes() ?? [];
 
       const matchingItems = listItems.filter(item => {
         const content = (item.textContent ?? '').trim().toLowerCase();
@@ -273,5 +273,5 @@ export function useKeyboardListNavigation (options: KeyboardListNavigationOption
 
   const highlightIdContext = useMemo(() => () => highlight.id, [highlight.id]);
 
-  return { highlightIndex: highlight.index, highlightId: highlight.id, highlightIdContext, ...methods };
+  return { highlightIndex: highlight.index ?? -1,highlightId: highlight.id, highlightIdContext, ...methods };
 }
