@@ -90,7 +90,12 @@ function vitest (cwd, args, report, env = {}) {
   return { tests, broken: broken.filter(Boolean).join('\n'), error: tests.length ? '' : (messages || tail(output, 30) || 'The run produced no output.') };
 }
 const tail = (s, n = 40) => s.trim().split('\n').slice(-n).join('\n');
-const block = s => `\`\`\`\n${s}\n\`\`\``;
+// Fenced with more backticks than any run inside, so a fence in the text (a Markdown snippet in an error message)
+// can't close the block early, on GitHub or in new-failures.mjs.
+const block = s => {
+  const fence = '`'.repeat((s.match(/`+/g) ?? []).reduce((longest, run) => Math.max(longest, run.length), 2) + 1);
+  return `${fence}\n${s}\n${fence}`;
+};
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 // Vitest's JSON reporter: testResults[].assertionResults[] with ancestorTitles, title and status.
 const results = report => (report?.testResults ?? []).flatMap(f => f.assertionResults

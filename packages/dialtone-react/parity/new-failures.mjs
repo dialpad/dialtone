@@ -26,6 +26,9 @@ const END = /^\s*(?:\[?ELIFECYCLE\]?\s|ERR_PNPM_|>?\s*NX\s|artifacts: )/;
 const ANSI = /\x1b\[[0-9;]*m/g;
 // The gate's own temp directories (mkdtemp's six random characters).
 const TEMP = /(parity-[a-z0-9-]+-)[A-Za-z0-9]{6}\b/g;
+// A fenced block opens with three or more backticks (and maybe an info string), and closes only on a fence at least as
+// long with nothing after it, CommonMark's rule: an excerpt's own "```tsx" line stays inside it.
+const FENCE = /^ {0,3}(`{3,})(.*)$/;
 // gate.mjs's checks that run Vitest, whose fenced blocks are Vitest's output.
 const VITEST_CHECKS = new Set(['Unit tests', 'Test parity', 'DOM parity']);
 // Stands in for such a block when nothing names it: the Vue DOM side prints its failures outside any case right
@@ -57,24 +60,25 @@ export function gateFailures (log, root) {
   const results = new Map();
   let section = null;
   let block = null; // inside a fenced block: 'kept' (compared) or 'skipped'
+  let opened = 0; // the length of the fence that opened it
   let afterBlock = false; // the last non-blank thing in this section was a block
   const add = (line) => {
     const counts = failing.get(section);
     if (counts) counts.set(line, (counts.get(line) ?? 0) + 1);
   };
   for (const line of lines.slice(start + 1)) {
-    if (/^\s*```/.test(line)) {
-      if (block) {
+    const fence = FENCE.exec(line);
+    if (block) {
+      if (fence && fence[1].length >= opened && !fence[2].trim()) {
         block = null;
         afterBlock = true;
-      } else if (VITEST_CHECKS.has(section)) {
-        block = 'skipped';
-        if (afterBlock) add(UNNAMED);
-      } else block = 'kept';
+      } else if (block === 'kept' && line.trim()) add(line.trim());
       continue;
     }
-    if (block) {
-      if (block === 'kept' && line.trim()) add(line.trim());
+    if (fence) {
+      opened = fence[1].length;
+      block = VITEST_CHECKS.has(section) ? 'skipped' : 'kept';
+      if (block === 'skipped' && afterBlock) add(UNNAMED);
       continue;
     }
     if (END.test(line)) break;

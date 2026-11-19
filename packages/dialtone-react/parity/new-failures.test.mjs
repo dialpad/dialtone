@@ -120,6 +120,15 @@ test('under the checks that run Vitest, a fenced block isn\'t compared; what nam
   const lint = l => gateFailures(gateLog([['Lint', '❌ 1 error']], `### Lint\n\n\`\`\`\n${l}\n\`\`\``));
   assert.deepEqual(newFailures(lint('Stack.tsx:3:1 x (semi)'), lint('Stack.tsx:3:1 x (semi)')), []);
   assert.deepEqual(newFailures(lint('Stack.tsx:4:1 y (eqeqeq)'), lint('Stack.tsx:3:1 x (semi)')), ['Lint: Stack.tsx:4:1 y (eqeqeq)']);
+  // Only a fence at least as long as the one that opened the block, with nothing after it, closes it (CommonMark). So a
+  // Markdown snippet in a message stays inside the longer fence gate.mjs picks for text with backticks of its own, and
+  // a snippet's opening line ("```tsx") stays inside the 3 backticks an older gate always used.
+  const excerpt = (fence, text) => linesOf(gateFailures(gateLog([['Unit tests', '❌ 2 failed']],
+    `### Unit tests\n\n- DtStack › renders\n${fence}\n${text}\n${fence}\n- DtStack › gaps\n\`\`\`\nx\n\`\`\``)), 'Unit tests');
+  assert.deepEqual(excerpt('````', 'Error: expected\n```tsx\n<Stack gap="400" />\n```\n- not an item'), ['- DtStack › renders', '- DtStack › gaps']);
+  assert.deepEqual(excerpt('```', 'Error: expected\n```tsx\n<Stack gap="400" />\n- not an item'), ['- DtStack › renders', '- DtStack › gaps']);
+  assert.deepEqual(linesOf(gateFailures(gateLog([['Lint', '❌ 1 error']], '### Lint\n\n```\nx.tsx:1:1 a\n```tsx\nx.tsx:2:2 b\n```')), 'Lint'),
+    ['x.tsx:1:1 a', '```tsx', 'x.tsx:2:2 b']);
   // A block that never closes (a cut log) keeps everything after it out.
   assert.deepEqual(linesOf(gateFailures(gateLog([['Unit tests', '❌ 1']], '### Unit tests\n\n- a › b\n```\nmessage')), 'Unit tests'), ['- a › b']);
 });
