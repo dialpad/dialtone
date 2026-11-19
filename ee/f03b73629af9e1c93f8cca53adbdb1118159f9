@@ -1,0 +1,38 @@
+packages/dialtone-react/common/focusgroup/focusgroup.test.ts
+  s_68b3e7b4618566::t_113258932f1091 1-711
+packages/dialtone-react/common/focusgroup/focusgroup_constants.ts
+  s_68b3e7b4618566::t_5d309013250153 1-85
+packages/dialtone-react/common/focusgroup/focusgroup_utils.ts
+  s_68b3e7b4618566::t_f19d819e54994f 2-36,38-116
+  s_078ce05833907f::t_bebb2164207690 1,37
+packages/dialtone-react/common/focusgroup/index.ts
+  s_68b3e7b4618566::t_a65de75631a784 1-5
+packages/dialtone-react/common/focusgroup/useFocusGroup.ts
+  s_68b3e7b4618566::t_04c2d6dc643c41 1,3-253,255-394
+packages/dialtone-react/common/focusgroup/Focusgroup.stories.tsx
+  s_68b3e7b4618566::t_fe7c39b7b6083a 1-639
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eef03b73629af9e1c93f8cca53adbdb1118159f9",
+  "prompts": {},
+  "sessions": {
+    "s_078ce05833907f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db842ec-552b-44e8-9d02-a36441ea11f5",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_68b3e7b4618566": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ffab4e7d-223f-4454-bedd-0053b642e363",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

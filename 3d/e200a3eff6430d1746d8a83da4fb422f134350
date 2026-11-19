@@ -1,0 +1,60 @@
+packages/combinator/src/variants/variants_dropdown.js
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 3-7,16-18,44-46
+packages/dialtone-docs/src/content/development/development-component-workflow.md
+  s_7f1d1d64baa803::t_68d140ae31b015 167
+  s_7f1d1d64baa803::t_1bbacc149f1793 159-166,168-172
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_7f1d1d64baa803::t_9eea9a12a6436e 27-28
+packages/combinator/src/components/code_editor/code_editor.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 32-33,166-168,206-209,243-244
+  s_7f1d1d64baa803::t_b566d4c1610958 217-220
+packages/combinator/src/lib/code_copy.js
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 6-13,71-72
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_7f1d1d64baa803::t_5f0a35e9a133d5 107
+  s_7f1d1d64baa803::t_9eea9a12a6436e 18,28-32,55-59,103,135-142
+packages/dialtone-vue/components/Dropdown/DropdownVariants.story.vue
+  s_7f1d1d64baa803::t_9eea9a12a6436e 19-23,60-62,117-119,168-172
+  s_7f1d1d64baa803::t_5f0a35e9a133d5 214
+packages/combinator/src/components/renderer/renderer.test.js
+  s_7f1d1d64baa803::t_a57b0372b0381f 54-55
+  s_7f1d1d64baa803::t_bc5784e8690c63 1,3,5,30-53,56-84
+  s_7f1d1d64baa803::t_b61bf784b165cb 85
+packages/combinator/src/components/renderer/renderer.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 19
+packages/combinator/src/components/tools/node.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 19-22,27-29
+packages/combinator/.github/documentation/internal/RENDERER.md
+  s_7f1d1d64baa803::t_f39fd5b1de084d 44-47
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_7f1d1d64baa803::t_a3d324d0811d87 2,14-20,29,125,127-129
+packages/dialtone-vue/components/Dropdown/DropdownDefault.story.vue
+  s_7f1d1d64baa803::t_9eea9a12a6436e 26-28
+packages/combinator/src/components/code_editor/code_editor_slot.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 40,64-67,77
+packages/combinator/.github/documentation/internal/CODE_PANEL.md
+  s_7f1d1d64baa803::t_f39fd5b1de084d 56,58-77,86-87
+  s_7f1d1d64baa803::t_56dadfe3d53cb3 57
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_7f1d1d64baa803::t_bc5784e8690c63 141-153,159-164,170-172,185
+  s_7f1d1d64baa803::t_27b30d9e35fb7d 178-184,187-190,196
+  s_7f1d1d64baa803::t_71f9f29c8a8cb5 2,154-158,165-169,191-195
+packages/combinator/src/components/renderer/renderer_spec_sheet_cell.vue
+  s_7f1d1d64baa803::t_cfaeb3079c69e3 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3de200a3eff6430d1746d8a83da4fb422f134350",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
