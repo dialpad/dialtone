@@ -1,0 +1,31 @@
+packages/dialtone-react/components/Prose/Prose.stories.tsx
+  s_06925b426d7de7::t_c2e57e70d63515 47-50
+packages/dialtone-react/components/Prose/Prose.test.tsx
+  s_06925b426d7de7::t_9a6b2c90cb9c5f 208-215
+packages/dialtone-react/components/Prose/ProseConstants.ts
+  s_bdcb38a9ff3a35::t_8c4b0dee686d72 28-33,35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "33b2df901a819afde01c166c6dd6d5cd5d62d9b9",
+  "prompts": {},
+  "sessions": {
+    "s_06925b426d7de7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9bccba20-f4db-4eca-8939-3fbd76ff884a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_bdcb38a9ff3a35": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "81eb9682-01bc-4805-a74a-894beda302e7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

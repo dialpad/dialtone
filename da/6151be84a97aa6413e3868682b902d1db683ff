@@ -1,0 +1,84 @@
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_037f149b31cf7b::t_f50adffeb97754 429-431
+apps/dialtone-documentation/docs/components/avatar.md
+  s_037f149b31cf7b::t_f50adffeb97754 250-257
+apps/dialtone-documentation/docs/components/mode-island.md
+  s_037f149b31cf7b::t_f50adffeb97754 621-633
+apps/dialtone-documentation/docs/components/button.md
+  s_037f149b31cf7b::t_f50adffeb97754 845-847
+apps/dialtone-documentation/docs/components/toggle.md
+  s_037f149b31cf7b::t_f50adffeb97754 100-107
+apps/dialtone-documentation/docs/components/tooltip.md
+  s_037f149b31cf7b::t_f50adffeb97754 189-196
+apps/dialtone-documentation/docs/components/root-layout.md
+  s_037f149b31cf7b::t_f50adffeb97754 118-121
+apps/dialtone-documentation/docs/components/emoji-text-wrapper.md
+  s_037f149b31cf7b::t_f50adffeb97754 71-74
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_037f149b31cf7b::t_f50adffeb97754 172-175
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_037f149b31cf7b::t_f50adffeb97754 217-220
+apps/dialtone-documentation/docs/components/progress-circle.md
+  s_037f149b31cf7b::t_f50adffeb97754 99-106
+apps/dialtone-documentation/docs/components/toast.md
+  s_037f149b31cf7b::t_f50adffeb97754 162-169
+apps/dialtone-documentation/docs/components/tabs.md
+  s_037f149b31cf7b::t_f50adffeb97754 390-399
+apps/dialtone-documentation/docs/components/split-button.md
+  s_037f149b31cf7b::t_f50adffeb97754 360-362
+apps/dialtone-documentation/docs/components/notice.md
+  s_037f149b31cf7b::t_f50adffeb97754 307-314
+apps/dialtone-documentation/docs/components/popover.md
+  s_037f149b31cf7b::t_f50adffeb97754 350-359
+apps/dialtone-documentation/docs/components/input.md
+  s_037f149b31cf7b::t_f50adffeb97754 386-393
+apps/dialtone-documentation/docs/components/radio-group.md
+  s_037f149b31cf7b::t_f50adffeb97754 151-154
+apps/dialtone-documentation/docs/components/combobox-with-popover.md
+  s_037f149b31cf7b::t_f50adffeb97754 186-189
+apps/dialtone-documentation/docs/components/checkbox.md
+  s_037f149b31cf7b::t_f50adffeb97754 206-213
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_037f149b31cf7b::t_f50adffeb97754 210-213
+apps/dialtone-documentation/docs/components/radio.md
+  s_037f149b31cf7b::t_f50adffeb97754 144-147
+apps/dialtone-documentation/docs/components/emoji.md
+  s_037f149b31cf7b::t_f50adffeb97754 164-167
+apps/dialtone-documentation/docs/components/datepicker.md
+  s_037f149b31cf7b::t_f50adffeb97754 284-287
+apps/dialtone-documentation/docs/components/combobox-multi-select.md
+  s_037f149b31cf7b::t_f50adffeb97754 230-233
+apps/dialtone-documentation/docs/components/loader.md
+  s_037f149b31cf7b::t_f50adffeb97754 63-66
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_037f149b31cf7b::t_f50adffeb97754 398-411
+apps/dialtone-documentation/docs/components/presence.md
+  s_037f149b31cf7b::t_f50adffeb97754 112-119
+apps/dialtone-documentation/docs/components/breadcrumbs.md
+  s_037f149b31cf7b::t_f50adffeb97754 63-68
+apps/dialtone-documentation/docs/components/table.md
+  s_037f149b31cf7b::t_f50adffeb97754 78-81
+apps/dialtone-documentation/docs/components/banner.md
+  s_037f149b31cf7b::t_f50adffeb97754 145-152
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "da6151be84a97aa6413e3868682b902d1db683ff",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

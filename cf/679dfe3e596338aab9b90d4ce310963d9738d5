@@ -1,0 +1,21 @@
+packages/dialtone-docs/src/content/workflows/workflow-figma-sync.md
+  s_87d0f63b120eb7::t_3915377cf47f6d 49
+  s_87d0f63b120eb7::t_4e427321fdc09c 96
+  s_87d0f63b120eb7::t_f0ec4bca1fd20b 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cf679dfe3e596338aab9b90d4ce310963d9738d5",
+  "prompts": {},
+  "sessions": {
+    "s_87d0f63b120eb7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "442e71ed-9091-44b6-b09c-e8116970a462",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
