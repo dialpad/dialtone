@@ -1,0 +1,24 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_text_variant/index.mjs
+  s_e2bb702f8b5b02::t_ca324a492e5b46 109
+  s_e2bb702f8b5b02::t_33fef4a90debbb 125,127-131
+  s_e2bb702f8b5b02::t_1dd00c0dfc8577 12
+packages/eslint-plugin-dialtone/lib/rules/deprecated-tshirt-sizes.js
+  s_e2bb702f8b5b02::t_c85e24276ae641 68,70
+  s_e2bb702f8b5b02::t_2f6f671c5f3094 171-179
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "774ada930d42e5b9ba010bb72c2ba8f4e2ada3ed",
+  "prompts": {},
+  "sessions": {
+    "s_e2bb702f8b5b02": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4224e0b3-be98-4efd-b98b-fb7ca7f2fbaf",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

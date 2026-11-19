@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/SplitButton/SplitButton.test.js
+  s_4871532d82935f::t_b5e5e73493dd61 661,666-668
+  s_4871532d82935f::t_da7b29ea73294e 662
+packages/dialtone-vue/components/SplitButton/SplitButtonDefault.story.vue
+  s_4871532d82935f::t_60816d2b0341c6 5,17
+packages/dialtone-vue/components/SplitButton/SplitButton.vue
+  s_4871532d82935f::t_60816d2b0341c6 224-231,425-432,609,633
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8b12ff0b7a3f2d918c816fafb0bbd1049c42caa9",
+  "prompts": {},
+  "sessions": {
+    "s_4871532d82935f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cfee-52e8-7d91-8707-5dd5664333ba",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

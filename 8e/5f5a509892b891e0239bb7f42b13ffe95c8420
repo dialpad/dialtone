@@ -1,0 +1,33 @@
+packages/dialtone-react/components/SegmentedControl/SegmentedControl.parity.tsx
+  s_dd8d170c6225d6::t_d1798e4a9b9b0f 1-8
+packages/dialtone-react/components/SegmentedControl/SegmentedControl.stories.tsx
+  s_dd8d170c6225d6::t_e3adbd46495dfd 1-549
+packages/dialtone-react/components/SegmentedControl/SegmentedControl.test.tsx
+  s_dd8d170c6225d6::t_3ee1541b82d91a 1-365
+packages/dialtone-react/components/SegmentedControl/SegmentedControl.tsx
+  s_dd8d170c6225d6::t_51abc32787c561 1-359
+packages/dialtone-react/components/SegmentedControl/SegmentedControlConstants.ts
+  s_dd8d170c6225d6::t_5424474f66defc 1-87
+packages/dialtone-react/components/SegmentedControl/SegmentedControlItem.stories.tsx
+  s_dd8d170c6225d6::t_e809b36d28e6f9 1-61
+packages/dialtone-react/components/SegmentedControl/SegmentedControlItem.tsx
+  s_dd8d170c6225d6::t_33f6c5a08bc51f 1-127
+packages/dialtone-react/components/SegmentedControl/index.ts
+  s_dd8d170c6225d6::t_b0f4ac0b564bcc 1-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8e5f5a509892b891e0239bb7f42b13ffe95c8420",
+  "prompts": {},
+  "sessions": {
+    "s_dd8d170c6225d6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b8e238fb-1ec3-4e28-bc3e-347d8b9c058d",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

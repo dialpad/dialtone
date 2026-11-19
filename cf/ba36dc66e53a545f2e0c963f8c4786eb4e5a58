@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/MigrationBanner.vue
+  h_c15b5755534093 11-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "cfba36dc66e53a545f2e0c963f8c4786eb4e5a58",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
