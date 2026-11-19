@@ -61,6 +61,7 @@ function IconButton ({ icon, copiedIcon, onClick }: { icon: string; copiedIcon: 
   return (
     <DtButton
       ref={setEl}
+      aria-label={`Copy ${icon} icon name`}
       importance="clear"
       kind="muted"
       size={400}
