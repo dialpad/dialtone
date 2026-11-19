@@ -1,5 +1,6 @@
 ---
-description: 'Pre-PR validation agent. Runs the shared pr-prep skill before creating a pull request.'
+name: pr-prep-coordinator
+description: "Pre-PR validation agent. Runs the shared pr-prep skill before creating a pull request.\n\n<example>\nuser: 'is this branch ready for a PR?'\nassistant: 'I'll launch the pr-prep-coordinator agent, which runs the shared pr-prep skill and records the verdict.'\n</example>"
 tools:
   - Bash
   - Read

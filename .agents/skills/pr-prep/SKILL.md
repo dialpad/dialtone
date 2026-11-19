@@ -51,10 +51,10 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    ```
 
    - Record base SHA, head SHA, size and the file list (`FILES`, one path per line, reused like `BASE`). Staged and unstaged changes are in scope. `git ls-files -o` only lists candidates: in a dirty checkout it can pick up unrelated work or scratch notes, so add only the untracked files that belong to this change, ask when unsure, and name the rest as excluded in the report. `git diff` leaves untracked files out, so add each in-scope one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size. Use this same scoped list for the review, package selection and any follow-on fixes.
-   - Propose the PR title per `.github/COMMIT_CONVENTION.md` and check it with `echo "<title>" | pnpm exec commitlint` (with the variable above set).
+   - Propose the PR title per `.github/COMMIT_CONVENTION.md`. Put it in a variable, never inside a double-quoted command: `TITLE='<title>'` (write any `'` as `'\''`), or `TITLE=$(gh pr view <n> --json title --jq .title)` for an existing PR. If `TITLE` is empty (for example `gh pr view` failed), mark the title check "not run". Otherwise check it with `printf '%s' "$TITLE" | pnpm exec commitlint`, with `pnpm_config_verify_deps_before_run=false` exported as in the block above.
    - Review mode (PR not checked out):
      - Take base, head and title from `gh pr view <n> --json baseRefOid,headRefOid,title`, the file list from `gh api --paginate repos/dialpad/dialtone/pulls/<n>/files --jq '.[] | .filename, (.previous_filename // empty)'` (`--json files` stops at 100 files; this keeps both sides of a rename, as step 2 does) and the diff from `gh pr diff <n>`. Run the same `gh pr view` again and restart the capture if either SHA changed. Use that file list for step 2.
-     - Check the PR's existing title with commitlint and report its result; give any proposed title separately.
+     - Check the PR's existing title with commitlint (`TITLE` from `gh pr view`, as above) and report its result; give any proposed title separately.
      - The local checkout may hold other versions of unchanged files, so the reviewer reads surrounding code at the PR head: `git fetch https://github.com/dialpad/dialtone.git pull/<n>/head` (not `origin`, which may be a fork), then `git show <headRefOid>:<path>`. Neither changes the working tree.
    - Empty scope: say "Nothing to review" and stop.
    - Above about 1,000 changed lines (not tests or fixtures), say so and suggest a split: API, then behaviour, then docs.
@@ -142,11 +142,17 @@ This is the one gate `pr-create` and `/pr-fill` run before their first PR write.
 
 ```sh
 R=$(git rev-parse --git-path pr-prep-verdict)
-TARGET=$(git rev-parse HEAD)   # or the PR's headRefOid
-TBASE=staging                  # or the PR's baseRefName
-[ "$(sed -n 's/^head=//p' "$R" 2>/dev/null)" = "$TARGET" ] \
-  && [ "$(sed -n 's/^base=//p' "$R")" = "$TBASE" ] && grep -qx 'tree=clean' "$R" \
-  && sed -n 's/^verdict=//p' "$R" || echo "stale: rerun pr-prep"
+TARGET=$(git rev-parse HEAD)                   # or the PR's headRefOid
+TBASE=staging                                  # or the PR's baseRefName
+UPSTREAM=$(git rev-parse '@{u}' 2>/dev/null)   # pr-create; /pr-fill sets UPSTREAM=$TARGET and relies on headRefOid
+if [ "$UPSTREAM" != "$TARGET" ]; then
+  echo "not pushed: push the branch, then rerun this gate"
+elif [ "$(sed -n 's/^head=//p' "$R" 2>/dev/null)" = "$TARGET" ] \
+  && [ "$(sed -n 's/^base=//p' "$R")" = "$TBASE" ] && grep -qx 'tree=clean' "$R"; then
+  sed -n 's/^verdict=//p' "$R"
+else
+  echo "stale: rerun pr-prep"
+fi
 ```
 
 When prep is stale, check out the PR head on a clean tree and run pr-prep there without a PR number. Review mode (`pr-prep <n>`) writes no record, so it cannot refresh the verdict. For `Needs fixes` or `Needs decision`, report it and ask before writing.
