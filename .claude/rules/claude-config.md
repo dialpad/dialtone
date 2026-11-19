@@ -17,7 +17,6 @@ Per-project Claude Code configuration: agents, commands, hooks, rules, skills, a
 ├── rules/         # Path-scoped rule files (this directory)
 ├── skills/        # Native skills (<name>/SKILL.md) and legacy workflow references (<name>.md)
 ├── plans/         # Plan files (gitignored — local working state)
-├── tsc-cache/     # Session cache (gitignored)
 └── settings.json  # Project-level Claude Code settings
 ```
 
@@ -46,7 +45,7 @@ Rules:
 
 ## Commands (`.claude/commands/`)
 
-Slash command triggers as `.md` files. Filename = command name (`/review` → `review.md`).
+Slash command triggers as `.md` files. Filename = command name (`/doc-janitor` → `doc-janitor.md`).
 
 Rules:
 
@@ -126,7 +125,6 @@ Rules:
 ## Cache & Working State (gitignored)
 
 - `.claude/plans/` — local plan files
-- `.claude/tsc-cache/<session>/` — per-session edit tracking
 - `.claude/scheduled_tasks.lock` — runtime lock
 
 These MUST stay gitignored. If you find one tracked, remove it.
