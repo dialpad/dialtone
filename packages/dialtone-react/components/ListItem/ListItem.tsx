@@ -15,6 +15,7 @@ import {
   LIST_ITEM_NAVIGATION_TYPES,
   LIST_ITEM_TYPES,
   type ListItemNavigationType,
+  type ListItemRole,
   type ListItemType,
 } from './ListItemConstants';
 
@@ -26,10 +27,12 @@ interface DtListItemOwnProps<T extends ElementType = 'li'> {
   id?: string;
 
   /**
-   * String to use for the item's role.
-   * @values listitem, menuitem, option
+   * Contextual role: listitem for ordinary lists, menuitem for menu actions,
+   * menuitemradio for persistent mutually exclusive menu choices, option for listboxes.
+   * selected never changes the role automatically.
+   * @values listitem, menuitem, option, menuitemradio
    */
-  role?: 'listitem' | 'menuitem' | 'option';
+  role?: ListItemRole;
 
   /** HTML element type (tag name) of the content wrapper element. */
   elementType?: T;
@@ -49,8 +52,19 @@ interface DtListItemOwnProps<T extends ElementType = 'li'> {
    */
   navigationType?: ListItemNavigationType;
 
-  /** Applies selected styles to the list item. */
+  /** Shows a selected checkmark. For menuitemradio, also sets aria-checked independently of highlight. */
   selected?: boolean;
+
+  /**
+   * Marks the item unavailable. Sets aria-disabled="true" and the disabled style, and stops
+   * the item from calling onClick for pointer, Enter or Space activation. The item stays
+   * focusable and reachable by keyboard navigation, and still calls onKeyDown, onMouseMove and
+   * onMouseLeave. Only the item's own activation is gated: a parent that selects by
+   * highlighted index, such as Combobox on Enter, must check availability itself.
+   * Don't also set an aria-disabled attribute: it overrides the announced state, while this prop
+   * still controls the style and activation.
+   */
+  disabled?: boolean;
 
   /**
    * Additional classes to apply to the wrapper element, note: it only applies on "default" type.
@@ -110,6 +124,7 @@ export function DtListItem<T extends ElementType = 'li'> ({
   type = LIST_ITEM_TYPES.DEFAULT,
   navigationType = LIST_ITEM_NAVIGATION_TYPES.NONE,
   selected = false,
+  disabled = false,
   wrapperClass = '',
   start,
   left,
@@ -142,19 +157,31 @@ export function DtListItem<T extends ElementType = 'li'> ({
     ? (injectedHighlightId ? id === injectedHighlightId : mouseHighlighted)
     : false;
 
+  const isMenuItemRadio = role === 'menuitemradio';
+
+  const handleClick = (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => {
+    if (disabled) {
+      // Also cancel the native default, such as navigation when elementType is "a".
+      event.preventDefault();
+      return;
+    }
+    onClick?.(event);
+  };
+
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     const root = event.currentTarget;
     // event.key, not event.code, so the keypad Enter activates too.
     const isEnter = event.key === 'Enter';
     const isSpace = event.key === ' ';
     // A native button already turns Enter and Space into a click, and a link Enter, so synthesizing one would
-    // call onClick twice. Keys typed in a descendant (an input) don't activate the item.
-    const activatesNatively = root instanceof HTMLButtonElement ||
-      (root instanceof HTMLAnchorElement && root.hasAttribute('href') && isEnter);
+    // call onClick twice. A menu radio cancels the key's default, which also cancels that native click, so it
+    // synthesizes its own. Keys typed in a descendant (an input) don't activate the item.
+    const activatesNatively = !isMenuItemRadio && (root instanceof HTMLButtonElement ||
+      (root instanceof HTMLAnchorElement && root.hasAttribute('href') && isEnter));
     if ((isEnter || isSpace) && event.target === root && !activatesNatively) {
       // Space would otherwise scroll the page.
-      if (isSpace) event.preventDefault();
-      onClick?.(event);
+      if (isSpace || isMenuItemRadio) event.preventDefault();
+      handleClick(event);
     }
     onKeyDown?.(event);
   };
@@ -177,12 +204,15 @@ export function DtListItem<T extends ElementType = 'li'> ({
         'd-list-item--focusable': isFocusable,
         'd-list-item--highlighted': isHighlighted,
         'd-list-item--static': !isHoverable,
+        'd-list-item--disabled': disabled,
       }, className)}
       tabIndex={isFocusable ? 0 : -1}
       role={role}
-      aria-selected={role === 'listitem' ? undefined : isHighlighted}
+      aria-selected={role === 'listitem' || isMenuItemRadio ? undefined : isHighlighted}
+      aria-checked={isMenuItemRadio ? selected : undefined}
+      aria-disabled={disabled ? 'true' : undefined}
       {...rest}
-      onClick={onClick}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
