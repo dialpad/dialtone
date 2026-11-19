@@ -7,7 +7,7 @@ import { DtIcon, type DtIconProps } from '../Icon';
 import { ICON_NAMES } from '../Icon/IconConstants';
 import { DtStack } from '../Stack';
 import { DtListItem, type DtListItemProps } from './ListItem';
-import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './ListItemConstants';
+import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_ROLES, LIST_ITEM_TYPES } from './ListItemConstants';
 
 // The slots are string args, as in Vue (`default` is the default slot): the Vue templates render each through
 // `v-html`, and `start` and `end` name an icon.
@@ -117,12 +117,14 @@ export const argTypesData = {
     },
   },
   role: {
+    description: 'listitem: ordinary list content; menuitem: menu action; menuitemradio: persistent mutually exclusive menu choice with selected/aria-checked; option: listbox choice. See Dropdown Menu Roles for parent context.',
+    options: LIST_ITEM_ROLES,
     table: {
       type: { summary: 'string' },
       defaultValue: { summary: 'listitem' },
     },
     control: {
-      type: 'text',
+      type: 'select',
     },
   },
   elementType: {
@@ -152,6 +154,15 @@ export const argTypesData = {
     control: {
       type: 'select',
       options: Object.values(LIST_ITEM_NAVIGATION_TYPES),
+    },
+  },
+  disabled: {
+    table: {
+      type: { summary: 'boolean' },
+      defaultValue: { summary: 'false' },
+    },
+    control: {
+      type: 'boolean',
     },
   },
 
@@ -196,7 +207,7 @@ function useListNavigation () {
 // ListItemDefault.story.vue
 function ListItemDefault ({
   default: defaultSlot, start, end, subtitle, blockEnd, id, role, elementType, type, navigationType, selected,
-  wrapperClass, onClick,
+  disabled, wrapperClass, onClick,
 }: ListItemStoryArgs) {
   const { listWrapper, highlightIdContext } = useListNavigation();
   return (
@@ -209,6 +220,7 @@ function ListItemDefault ({
           type={type}
           navigationType={navigationType}
           selected={selected}
+          disabled={disabled}
           wrapperClass={wrapperClass}
           onClick={onClick}
           start={<DtIcon name={start as DtIconProps['name']} />}

@@ -194,6 +194,83 @@ describe('DtListItem tests', () => {
     });
   });
 
+  describe('Disabled Tests', () => {
+    describe('When disabled is not set', () => {
+      it('renders the same root attributes as before the prop existed', () => {
+        const item = getItem();
+        const attributes = Object.fromEntries(Array.from(item.attributes, a => [a.name, a.value]));
+        expect(attributes).toEqual({
+          id: 'dt-item',
+          class: 'd-list-item',
+          tabindex: '-1',
+          role: 'option',
+          'aria-selected': 'false',
+        });
+      });
+
+      it('passes a consumer aria-disabled through and still emits click', async () => {
+        setProps({ 'aria-disabled': 'true' });
+
+        await userEvent.click(getItem());
+
+        expect(getItem()).toHaveAttribute('aria-disabled', 'true');
+        expect(getItem().className).toBe('d-list-item');
+        expect(MOCK_CLICK_STUB).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('When disabled', () => {
+      beforeEach(() => {
+        mockProps = { disabled: true };
+        setProps({});
+      });
+
+      it('sets aria-disabled and the disabled modifier together', () => {
+        expect(getItem()).toHaveAttribute('aria-disabled', 'true');
+        expect(getItem().className).toBe('d-list-item d-list-item--disabled');
+      });
+
+      it('emits pointer events except click', async () => {
+        const onMouseMove = vi.fn();
+        const onMouseLeave = vi.fn();
+        setProps({ onMouseMove, onMouseLeave });
+
+        await userEvent.click(getItem());
+        await userEvent.hover(getItem());
+        await userEvent.unhover(getItem());
+
+        expect(MOCK_CLICK_STUB).not.toHaveBeenCalled();
+        expect(onMouseMove).toHaveBeenCalled();
+        expect(onMouseLeave).toHaveBeenCalledTimes(1);
+      });
+
+      it('cancels the native activation of a disabled link row', () => {
+        mockProps = { disabled: true, elementType: 'a', href: '/settings', role: 'menuitem' };
+        setProps({});
+        const link = screen.getByRole('menuitem');
+        const click = new MouseEvent('click', { bubbles: true, cancelable: true });
+
+        act(() => { link.dispatchEvent(click); });
+
+        expect(click.defaultPrevented).toBe(true);
+      });
+
+      it('keeps the keyboard highlight', () => {
+        // baseHighlightId highlights dt-item2.
+        setProps({ id: 'dt-item2' });
+
+        expect(getItem().className).toBe('d-list-item d-list-item--highlighted d-list-item--disabled');
+        expect(getItem()).toHaveAttribute('aria-selected', 'true');
+      });
+
+      it('stays focusable for tab navigation', () => {
+        setProps({ navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB });
+
+        expect(getItem()).toHaveAttribute('tabindex', '0');
+      });
+    });
+  });
+
   describe('Extendability Tests', () => {
     describe('When type is "default" and "wrapperClass" prop is provided', () => {
       beforeEach(() => {
@@ -250,5 +327,67 @@ describe('DtListItem tests', () => {
         expect(getItem()).toHaveTextContent('right content');
       });
     });
+  });
+});
+
+describe('ListItem contextual roles', () => {
+  it('keeps ordinary selected list content as listitem', () => {
+    render(<DtListItem selected />);
+    const item = screen.getByRole('listitem');
+    expect(item).not.toHaveAttribute('aria-selected');
+    expect(item).not.toHaveAttribute('aria-checked');
+  });
+
+  it('keeps checked state independent of menu radio highlight', async () => {
+    const tree = (selected: boolean) => (
+      <DtListItem id="radio" role="menuitemradio" selected={selected} navigationType="arrow-keys" />
+    );
+    const { rerender } = render(tree(true));
+    const item = screen.getByRole('menuitemradio');
+    expect(item).toHaveAttribute('aria-checked', 'true');
+    expect(item).not.toHaveAttribute('aria-selected');
+    await userEvent.hover(item);
+    expect(item).toHaveClass('d-list-item--highlighted');
+    expect(item).toHaveAttribute('aria-checked', 'true');
+    rerender(tree(false));
+    expect(item).toHaveAttribute('aria-checked', 'false');
+  });
+
+  it.each(['Enter', 'Space'])('activates a menu radio once on %s with the default action prevented', async code => {
+    const onClick = vi.fn();
+    render(<DtListItem id="radio" role="menuitemradio" navigationType="arrow-keys" onClick={onClick} />);
+    act(() => { screen.getByRole('menuitemradio').focus(); });
+    await userEvent.keyboard(`[${code}]`);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClick.mock.calls[0][0].defaultPrevented).toBe(true);
+  });
+
+  it.each(['Enter', 'Space'])('refuses %s on a disabled menu radio with the default action still prevented', async code => {
+    const onClick = vi.fn();
+    const onKeyDown = vi.fn();
+    render(
+      <DtListItem
+        id="radio"
+        role="menuitemradio"
+        navigationType="arrow-keys"
+        disabled
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+      />,
+    );
+    act(() => { screen.getByRole('menuitemradio').focus(); });
+    await userEvent.keyboard(`[${code}]`);
+    expect(onClick).not.toHaveBeenCalled();
+    expect(onKeyDown).toHaveBeenCalledTimes(1);
+    expect(onKeyDown.mock.calls[0][0].defaultPrevented).toBe(true);
+  });
+
+  it.each(['menuitem', 'option'] as const)('preserves %s highlight markup without inferring a radio', async role => {
+    render(<DtListItem role={role} selected navigationType="arrow-keys" />);
+    const item = screen.getByRole(role);
+    expect(item).toHaveAttribute('aria-selected', 'false');
+    expect(item).not.toHaveAttribute('aria-checked');
+    await userEvent.hover(item);
+    expect(item).toHaveAttribute('aria-selected', 'true');
   });
 });
