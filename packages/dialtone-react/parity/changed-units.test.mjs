@@ -8,7 +8,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { changedUnits } from './changed-units.mjs';
+import { changedUnits, extraCasesAgainst, extraCasesDiff, extraCasesSnapshot } from './changed-units.mjs';
 import { storyParity } from './story-parity.mjs';
 import { commonUnit, reactDir, testFiles, unitsOfPath, vueSources } from './vue-sources.mjs';
 
@@ -246,7 +246,7 @@ describe('changedUnits', () => {
   test('React paths in no unit\'s directory and imported by none', () => {
     expect(['packages/dialtone-react/components/Popover/PopoverConstants.ts'], []);
     expect(['packages/dialtone-react/components/Checkbox/Checkbox.tsx'], []);
-    expect(['packages/dialtone-react/README.md', 'packages/dialtone-react/project.json'], []);
+    expect(['packages/dialtone-react/README.md'], []);
     expect(['packages/dialtone-react/.storybook/preview.tsx', 'packages/dialtone-react/compare/ports.json'], []);
   });
 
@@ -326,8 +326,7 @@ describe('changedUnits', () => {
   test('a shared file gates every ported unit', () => {
     for (const file of [
       'packages/dialtone-react/parity/gate.mjs',
-      'packages/dialtone-react/common/localization/index.ts',
-      'packages/dialtone-react/common/input/useInput.ts',
+      'packages/dialtone-react/parity/cases.mjs',
       'packages/dialtone-react/tests/setup.ts',
       'packages/dialtone-react/scripts/build-index.mjs',
       'packages/dialtone-react/package.json',
@@ -339,6 +338,10 @@ describe('changedUnits', () => {
       '.github/workflows/dialtone-react.yml',
       'packages/dialtone-vue/vite.config.js',
       'packages/dialtone-vue/tests/setupTests.js',
+      'packages/dialtone-react/project.json',
+      'package.json',
+      'nx.json',
+      '.github/actions/setup-environment/action.yml',
     ]) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);
   });
 
@@ -415,6 +418,51 @@ describe('changedUnits', () => {
       'packages/dialtone-emojis/src/emojis.json']) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);
     expect(['packages/dialtone-icons/CHANGELOG.md', 'packages/dialtone-emojis/README.md',
       'packages/dialtone-tokens/tokens/base/color.json', 'packages/combinator/src/lib/option_bar.js'], []);
+  });
+
+  test('common/ isn\'t shared: a directive, mixin or composable, or a foundation, gates itself and what imports it', () => {
+    // Button imports the keyboard-list-navigation mixin and the link foundation; the mixin imports cx.
+    const own = tree(path.join(root, 'dialtone-react-common'), [
+      ...Object.keys(COMMON_UNITS).map(name => `common/${name}/index.ts`),
+      'common/link/index.ts',
+      'common/localization/index.ts',
+      'common/utils.ts',
+      ['common/cx.ts', 'export const cx = () => \'\';'],
+      ['common/keyboard-list-navigation/useKeyboardListNavigation.ts', "import { cx } from '../cx';"],
+      ['components/Button/index.ts', "export * from './Button';"],
+      ['components/Button/Button.tsx',
+        "import { useKeyboardListNavigation } from '../../common/keyboard-list-navigation/useKeyboardListNavigation';\n"
+        + "import { DtLinkProvider } from '../../common/link';"],
+      'components/Skeleton/index.ts',
+    ]);
+    const unitsIn = (...files) => changedUnits(files, { pkg: own, vueRoot });
+    const at = file => `packages/dialtone-react/common/${file}`;
+    assert.deepEqual(unitsIn(at('keyboard-list-navigation/useKeyboardListNavigation.ts')),
+      { units: ['button', 'mixin-keyboard-list-navigation'], errors: [] });
+    assert.deepEqual(unitsIn(at('cx.ts')), { units: ['button', 'mixin-keyboard-list-navigation'], errors: [] });
+    assert.deepEqual(unitsIn(at('link/index.ts')), { units: ['button'], errors: [] });
+    // Its own directory gates a unit even when nothing imports the file; a file nobody imports gates nothing.
+    assert.deepEqual(unitsIn(at('input/useInput.ts')), { units: ['mixin-input'], errors: [] });
+    assert.deepEqual(unitsIn(at('localization/index.ts'), at('utils.ts')), { units: [], errors: [] });
+    // The harness and the package's tests are still shared.
+    const every = ['button', 'skeleton', ...Object.values(COMMON_UNITS)].sort();
+    assert.deepEqual(unitsIn('packages/dialtone-react/parity/gate.mjs'), { units: every, errors: [] });
+    assert.deepEqual(unitsIn('packages/dialtone-react/tests/helpers/link.tsx'), { units: every, errors: [] });
+  });
+
+  test('extra-cases.mjs gates the ported units whose cases changed, and every one when that isn\'t known', () => {
+    const file = 'packages/dialtone-react/parity/extra-cases.mjs';
+    const cases = extraCases => changedUnits([file], { pkg, vueRoot, extraCases });
+    assert.deepEqual(cases(['tooltip', 'resizable']), { units: ['tooltip'], errors: [] }); // resizable isn't ported
+    assert.deepEqual(cases([]), { units: [], errors: [] });
+    assert.deepEqual(cases('all'), { units: ALL, errors: [] });
+    assert.deepEqual(cases(undefined), { units: ALL, errors: [] });
+    // With other paths, their units too.
+    assert.deepEqual(changedUnits([file, 'packages/dialtone-react/components/Text/Text.tsx'], { pkg, vueRoot, extraCases: ['button'] }),
+      { units: ['button', 'chip', 'text'], errors: [] });
+    // A look-alike is part of the harness, so shared.
+    assert.deepEqual(changedUnits(['packages/dialtone-react/parity/extra-cases.test.mjs'], { pkg, vueRoot, extraCases: [] }),
+      { units: ALL, errors: [] });
   });
 
   test('look-alikes of shared files don\'t', () => {
@@ -511,4 +559,54 @@ test('the CLI reads paths on stdin and prints this package\'s units, one per lin
   const proc = spawnSync(process.execPath, [script], { input, encoding: 'utf8' });
   assert.equal(proc.status, 0, proc.stderr);
   assert.equal(proc.stdout, units.map(id => `${id}\n`).join(''));
+});
+
+test('extraCasesDiff: the units whose cases differ, or all when another export does', () => {
+  const tip = [{ name: 'open (harness)', props: { open: true }, slots: {}, attrs: {} }];
+  const box = [{ name: 'checked (harness)', props: { modelValue: true }, slots: {}, attrs: {} }];
+  const diff = (a, b) => extraCasesDiff(extraCasesSnapshot(a), extraCasesSnapshot(b));
+  const base = { EXTRA_CASES: { tooltip: tip, checkbox: box } };
+  assert.deepEqual(diff(base, { EXTRA_CASES: { tooltip: tip, checkbox: box } }), []);
+  // Changed, added and removed entries.
+  assert.deepEqual(diff(base, { EXTRA_CASES: { tooltip: [{ ...tip[0], props: { open: false } }], checkbox: box } }), ['tooltip']);
+  assert.deepEqual(diff(base, { EXTRA_CASES: { tooltip: tip, checkbox: box, resizable: [] } }), ['resizable']);
+  assert.deepEqual(diff(base, { EXTRA_CASES: { checkbox: box } }), ['tooltip']);
+  // Another export, added, changed or removed, could reach any unit.
+  assert.equal(diff(base, { ...base, HELPER: 1 }), 'all');
+  assert.equal(diff({ ...base, HELPER: 1 }, { ...base, HELPER: 2 }), 'all');
+  assert.equal(diff({ ...base, HELPER: 1 }, base), 'all');
+  assert.equal(diff({ ...base, helper: () => 1 }, { ...base, helper: () => 1 }), 'all');
+  // An entry plain JSON can't hold exactly always counts as changed: a function, a RegExp, a Set, undefined, NaN, or a
+  // Date (which serializes through toJSON to the string it would equal).
+  const when = '2026-11-18T00:00:00.000Z';
+  for (const value of [() => {}, /a/, new Set([1]), undefined, NaN, new Date(when)]) {
+    const odd = { EXTRA_CASES: { tooltip: [{ name: 'x', props: { value } }] } };
+    assert.deepEqual(diff(odd, odd), ['tooltip'], String(value));
+  }
+  const at = value => ({ EXTRA_CASES: { tooltip: [{ name: 'x', props: { value } }] } });
+  assert.deepEqual(diff(at(when), at(new Date(when))), ['tooltip']);
+  assert.deepEqual(diff(at(when), at(when)), []);
+  // A snapshot is taken when it's made: changing the module's objects afterwards doesn't change it.
+  const live = { EXTRA_CASES: { tooltip: [{ name: 'x', attrs: { id: 'a' } }] } };
+  const before = extraCasesSnapshot(live);
+  live.EXTRA_CASES.tooltip[0].attrs.id = 'b';
+  assert.deepEqual(extraCasesDiff(before, extraCasesSnapshot(live)), ['tooltip']);
+});
+
+test('the CLI compares extra-cases.mjs with CHANGED_UNITS_BASE, and gates every unit without one it can read', async () => {
+  const script = fileURLToPath(new URL('./changed-units.mjs', import.meta.url));
+  const realPkg = path.resolve(path.dirname(script), '..');
+  const all = changedUnits(['pnpm-lock.yaml'], { pkg: realPkg, vueRoot: path.resolve(realPkg, '../dialtone-vue') }).units;
+  const input = 'packages/dialtone-react/parity/extra-cases.mjs\n';
+  const cli = env => spawnSync(process.execPath, [script], { input, encoding: 'utf8', env: { ...process.env, ...env } });
+  for (const env of [{ CHANGED_UNITS_BASE: '' }, { CHANGED_UNITS_BASE: 'no-such-ref' }]) {
+    const proc = cli(env);
+    assert.equal(proc.status, 0, proc.stderr);
+    assert.equal(proc.stdout, all.map(id => `${id}\n`).join(''), JSON.stringify(env));
+  }
+  assert.match(cli({ CHANGED_UNITS_BASE: 'no-such-ref' }).stderr, /can't compare extra-cases\.mjs with no-such-ref/);
+  // A readable base loads, its own imports and all, and leaves no copy behind.
+  const diff = await extraCasesAgainst('HEAD');
+  assert.ok(diff === 'all' || Array.isArray(diff), String(diff));
+  assert.equal(fs.existsSync(path.join(path.dirname(script), `.extra-cases.${process.pid}.base.mjs`)), false);
 });
