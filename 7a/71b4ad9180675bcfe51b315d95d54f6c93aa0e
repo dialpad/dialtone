@@ -1,0 +1,35 @@
+packages/dialtone-vue/scripts/test-a11y.sh
+  s_7f1d1d64baa803::t_bb82fee8229d10 1-10
+pnpm-workspace.yaml
+  s_7f1d1d64baa803::t_09f07ea86d82a2 24
+packages/dialtone-vue/.storybook/test-runner.cjs
+  s_7f1d1d64baa803::t_317243e63750f4 12
+package.json
+  s_7f1d1d64baa803::t_7bc90d0b21b6a0 163
+.github/workflows/a11y_tests.yml
+  s_7f1d1d64baa803::t_7bc90d0b21b6a0 11-16,25-30,41,51-57
+  s_7f1d1d64baa803::t_ec0c941a5c4527 58
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_bb82fee8229d10 106
+  s_7f1d1d64baa803::t_927e4f116e7d7f 6,18-22,101,104-105
+packages/dialtone-vue/project.json
+  s_7f1d1d64baa803::t_bb82fee8229d10 119
+pnpm-lock.yaml
+  s_7f1d1d64baa803::t_eef442e363604b 8,233,316-317,11702-11704,11707-11709,18506-18507,20269,20276,27676,27678,27680
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7a71b4ad9180675bcfe51b315d95d54f6c93aa0e",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
