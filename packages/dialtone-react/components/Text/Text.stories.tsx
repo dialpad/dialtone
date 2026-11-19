@@ -353,7 +353,7 @@ function TextVariants () {
             <DtStack gap="200">
                 {alignExamples.map(item => (
                   <div key={item.align}>
-                    <DtText as="h4" kind="headline" size={400}>
+                    <DtText as="h3" kind="headline" size={400}>
                       {capitalize(item.align)}
                     </DtText>
                     <div className="d-ba d-bc-default d-p-200 d-bar-400">
@@ -421,7 +421,7 @@ function TextVariants () {
             <DtStack gap="200">
                 {wrapExamples.map(item => (
                   <div key={item.wrap}>
-                    <DtText as="h4" kind="headline" size={400}>
+                    <DtText as="h3" kind="headline" size={400}>
                       {capitalize(item.wrap)}
                     </DtText>
                     <div className="d-ba d-bc-default d-of-hidden d-p-200 d-bar-400">
