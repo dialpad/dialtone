@@ -246,22 +246,13 @@ export function DtAvatar ({
   const hasOverlayIcon = hasContent(overlayIcon);
   const isIconType = hasContent(icon);
 
-  // Vue computes family and variant separately, each with its own random draw when there's no seed. They're memoized
-  // like Vue's computeds, so re-renders (an image loading) don't pick a new color.
-  const computedFamily = useMemo(() => {
-    // Icon-type avatars don't use color
-    if (isIconType) return undefined;
-    // Explicit family prop takes precedence
-    if (family !== undefined) return family;
-    // Random based on seed
-    return getRandomFamilyVariant(seed).family;
-  }, [isIconType, family, seed]);
+  // One random draw for family and variant, cached so an unseeded avatar keeps its color across re-renders (an image
+  // loading, new props) instead of re-rolling. It recomputes only when the seed changes, as Vue's computed does.
+  const randomFamilyVariant = useMemo(() => getRandomFamilyVariant(seed), [seed]);
 
-  const computedVariant = useMemo(() => {
-    if (isIconType) return undefined;
-    if (variant !== undefined) return variant;
-    return getRandomFamilyVariant(seed).variant;
-  }, [isIconType, variant, seed]);
+  // Icon-type avatars don't use color; an explicit family or variant prop takes precedence over the random one.
+  const computedFamily = isIconType ? undefined : (family ?? randomFamilyVariant.family);
+  const computedVariant = isIconType ? undefined : (variant ?? randomFamilyVariant.variant);
 
   // Vue resets its load state when imageSrc changes; this is that reset, made during render.
   const [imageState, setImageState] = useState<{ src: string; loaded: boolean | null }>({
