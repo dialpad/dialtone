@@ -1,0 +1,470 @@
+packages/dialtone-vue/components/ListItem/ListItem.test.js
+  s_8716e901949c29::t_86960be8a7450b 379-388
+  s_8716e901949c29::t_f75a833862261e 186-220,222,225,230-231,239,241-243,245-258
+  s_8716e901949c29::t_393fa2ffa861d8 244
+  s_8716e901949c29::t_6973bb6828ee73 232-242
+  s_8716e901949c29::t_fa450de63a86a3 221,223-224
+  s_8716e901949c29::t_7a7f25238b7959 226-229
+apps/dialtone-documentation/docs/components/list-item.md
+  s_8716e901949c29::t_00d770dd4ab01d 84-85,87,89-102,107-111,113-116
+  s_8716e901949c29::t_f3f929afe30a7a 112
+  s_8716e901949c29::t_0386a8f66557c6 86
+  s_8716e901949c29::t_2333efdc84fdf3 103-106
+  s_8716e901949c29::t_a4a4a7b6cc7dbe 88
+packages/dialtone-css/lib/build/less/components/list-item.less
+  s_8716e901949c29::t_71f8bc5bf4a011 43-51,61-62
+  s_8716e901949c29::t_db3a0d8b772bb4 3-6,12,18,22
+  s_8716e901949c29::t_a7c7bade5da812 55-60
+  s_8716e901949c29::t_ece4197d5d5169 41-42
+  s_8716e901949c29::t_f5f79f6593ab3b 53-55
+packages/dialtone-vue/components/ListItem/ListItemDefault.story.vue
+  s_8716e901949c29::t_e5ede16668e627 12
+packages/dialtone-vue/components/ListItem/ListItem.stories.js
+  s_8716e901949c29::t_225247977f4990 142-150
+packages/dialtone-vue/components/ListItem/ListItem.vue
+  s_8716e901949c29::t_5ec797451aaf72 11,17
+  s_8716e901949c29::t_0759636297b9f1 142-146,149-154
+  s_8716e901949c29::t_0de6e586bd29cd 141
+  s_8716e901949c29::t_598ea7c71ff548 147-148
+  s_8716e901949c29::t_561dd826d221f7 273-277
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_8716e901949c29::t_e4731fa13427b7 490-492
+  s_8716e901949c29::t_e188ed5f708b8e 519-520
+  s_8716e901949c29::t_6f8d90d48f913c 521
+  s_8716e901949c29::t_069bbfa49ece96 343,346,348-358,360-366,368-398
+  s_8716e901949c29::t_438d9ce5fff83d 507
+  s_8716e901949c29::t_f66e4fa798d4f4 342,344-345
+  s_8716e901949c29::t_43b914298fb1d8 483
+  s_8716e901949c29::t_ab17aca684f47d 329
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.test.js
+  s_8716e901949c29::t_8ea6e807dc5395 72-109,144-149,150-152
+  s_8716e901949c29::t_32c10770bc1518 110-117,118,122-132,138-142
+  s_8716e901949c29::t_431ad0ffa65346 119-121
+  s_8716e901949c29::t_0ad1c4bb364aa8 133-137
+  s_8716e901949c29::t_7139ce1abe393f 143
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.js
+  s_8716e901949c29::t_3405f6828b246b 11,13-17,19,21-32
+  s_8716e901949c29::t_a6876c2be1665f 82
+  s_8716e901949c29::t_493220c228d39b 83
+  s_8716e901949c29::t_d63e742053bc66 33-36,38-49
+  s_8716e901949c29::t_f80350a0a3289d 74
+  s_8716e901949c29::t_2ed28f0c2b8930 12,18,20
+  s_8716e901949c29::t_9b876a65c8a0b7 69-73
+  s_8716e901949c29::t_ef669b77c67000 37
+packages/dialtone-vue/components/FilterPill/FilterPillOptionRows.test.js
+  s_8716e901949c29::t_65b156ec290138 1-15,23,25-34,36-41,53-62,72-82,84-86,87-88,90-92,94-95,97-99,100-101,102-120,129-136,137-152,155-160,163-166,168,194-196,201,205-208
+  s_8716e901949c29::t_c27f488a9e4717 161
+  s_8716e901949c29::t_b0e3a8f436058c 45-48,50-53
+  s_8716e901949c29::t_74ad480b440c9f 168-172,173,175,179-180,182-184,190-191,194-195,201,205-207
+  s_8716e901949c29::t_ccbb7a3628d821 178
+  s_8716e901949c29::t_a8e56990273d86 181
+  s_8716e901949c29::t_2281325f850e6d 16-22
+  s_8716e901949c29::t_cc0576c34ac09a 35,42,44,49
+  s_8716e901949c29::t_df9a2ae4c8c45e 162
+  s_8716e901949c29::t_a2f7197bba25d1 174,176-177,185-186,187
+  s_8716e901949c29::t_c72c1e2111e5ff 23-24
+  s_8716e901949c29::t_e0b7d3bd8e16c2 154
+  s_8716e901949c29::t_7d5c1f6e010459 121-128
+  s_8716e901949c29::t_50e95a2f658033 153
+  s_8716e901949c29::t_d11bea406b188e 83,89,96
+  s_8716e901949c29::t_32d97da52661dc 188-189,192-193,196-197,202-203
+  s_8716e901949c29::t_1dfaee29279fef 198-200,204
+  s_8716e901949c29::t_92f00841591365 62-71
+  s_8716e901949c29::t_00f1479d17a428 93
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_8716e901949c29::t_42f7cf1481e844 258-261
+  s_8716e901949c29::t_2de31b3c813d42 290,292
+  s_8716e901949c29::t_c13bccb004dca6 152-153
+packages/dialtone-vue/components/FilterPill/modules/FilterPillOptionGroup.vue
+  s_8716e901949c29::t_0d22ee4e4d673f 8-11
+  s_8716e901949c29::t_8b14890d794f3b 1-7,12,14-30,33-36,39,41,47,49
+  s_8716e901949c29::t_6409f619a324f7 13
+  s_8716e901949c29::t_98471f17d34f5c 31-32,37-38,40,42-46,48
+packages/dialtone-css/lib/build/less/components/filter-pill.less
+  s_8716e901949c29::t_b7158ca950e9bd 129-134
+packages/combinator/src/variants/variants_filter_pill.js
+  s_8716e901949c29::t_1eb5bf6ce0c79f 139
+  s_8716e901949c29::t_7a0ba88d62abea 10-16
+  s_8716e901949c29::t_9c231163333523 134-138
+  s_8716e901949c29::t_e447a6bf32392f 23,25,28
+packages/dialtone-vue/components/Dropdown/DropdownMenuRoles.story.vue
+  s_8716e901949c29::t_3efeccbf0f2b61 53-57,58-66
+packages/dialtone-vue/components/FilterPill/FilterPillUnavailableChoices.story.vue
+  s_8716e901949c29::t_e801dca73fe392 47,53-54,56-60,68-69,72-73
+  s_8716e901949c29::t_3efeccbf0f2b61 1-46,48-52,55,61-67,70-71,74-76
+.agents/resources/documentation-examples.md
+  s_8716e901949c29::t_f6e06939a47e2f 15
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_8716e901949c29::t_6f5b91f2da9577 100-109,111-126,127,153
+  s_8716e901949c29::t_fe2f48813ee021 808
+  s_8716e901949c29::t_0ddb4f52b5761d 818-825
+  s_8716e901949c29::t_df79e909ad4152 866
+  s_8716e901949c29::t_21d1438e836c98 110,128-152
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_8716e901949c29::t_f6e06939a47e2f 23,112
+  s_8716e901949c29::t_d04afa22a31fd1 106
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_8716e901949c29::t_f6e06939a47e2f 251
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_8716e901949c29::t_f6e06939a47e2f 272
+packages/dialtone-vue/components/FilterPill/FilterPill.stories.js
+  s_8716e901949c29::t_3efeccbf0f2b61 10,212-226
+  s_8716e901949c29::t_8c1d91190e312e 227-228
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_8716e901949c29::t_c4de079468096a 454-455,468-470,474-479
+  s_8716e901949c29::t_4eea0a6d6c10c8 471
+  s_8716e901949c29::t_de87c1b5169f41 499-500,509-511,514-517
+  s_8716e901949c29::t_be7c717ee7f784 480-481,490-492,494-498
+  s_8716e901949c29::t_161978324ccd4b 333-335,338-339,341-342
+  s_8716e901949c29::t_315ca907ad6c88 329,331-332,337,340
+  s_8716e901949c29::t_343607b45e5f6a 330,336
+  s_8716e901949c29::t_442f5f352edbd8 456-467,472-473,482-489,493,501-508,512-513
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_8716e901949c29::t_7f17bd62bf2f15 430
+  s_8716e901949c29::t_e6137113587cd5 508-512
+  s_8716e901949c29::t_4b8ca54a06f414 513-514
+  s_8716e901949c29::t_0b3ad7130956f4 579,583
+  s_8716e901949c29::t_5c417c683681c2 79-81
+  s_8716e901949c29::t_6782c05afaa9bf 584-586
+  s_8716e901949c29::t_f97038f111585d 565-566,569
+  s_8716e901949c29::t_a6381b43dba7b0 568
+  s_8716e901949c29::t_a7a3b404bb725d 567
+  s_8716e901949c29::t_96d1ad0fe57785 497,501-505
+  s_8716e901949c29::t_db0c042d18edcc 506-507
+packages/combinator/src/variants/variants_list_item.js
+  s_8716e901949c29::t_c54daf376684b3 16-31
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_8716e901949c29::t_2b01f0c4a8664b 272
+packages/dialtone-react/components/Datepicker/Composables/UseCalendar.ts
+  s_58e0b369e1be3c::t_1e943c62aed38c 1-198
+packages/dialtone-react/components/Datepicker/Composables/UseMonthYearPicker.ts
+  s_58e0b369e1be3c::t_15e5677955582e 1-169
+packages/dialtone-react/components/Datepicker/Datepicker.parity.tsx
+  s_58e0b369e1be3c::t_f4a1f16972ed50 1-4
+packages/dialtone-react/components/Datepicker/Datepicker.stories.tsx
+  s_58e0b369e1be3c::t_da300c23e573d6 1-227
+packages/dialtone-react/components/Datepicker/Datepicker.test.tsx
+  s_58e0b369e1be3c::t_fda7a93866a46b 1-67,72-299,302-319,322-331,334-351,354-623
+  s_75755ea2dab54c::t_fe3f14860a9641 68-71,300-301,320-321,332-333,352-353
+packages/dialtone-react/components/Datepicker/Datepicker.tsx
+  s_58e0b369e1be3c::t_738b0b22c3a9ba 1-131
+packages/dialtone-react/components/Datepicker/DatepickerConstants.ts
+  s_58e0b369e1be3c::t_606f89b72fe26c 1-11
+packages/dialtone-react/components/Datepicker/FormatUtils.ts
+  s_58e0b369e1be3c::t_8bdb4522b1dede 1-81
+packages/dialtone-react/components/Datepicker/Modules/Calendar.tsx
+  s_58e0b369e1be3c::t_c4e30bd3b83d4c 1-100
+packages/dialtone-react/components/Datepicker/Modules/MonthYearPicker.tsx
+  s_58e0b369e1be3c::t_93504fd4d6d4f5 1-110,114-206
+  s_58e0b369e1be3c::t_3516b6c750167c 111-113
+packages/dialtone-react/components/Datepicker/Utils.ts
+  s_58e0b369e1be3c::t_5781fde69ab212 1-172
+packages/dialtone-react/components/Datepicker/index.ts
+  s_58e0b369e1be3c::t_a239c504f759ac 1-2
+packages/dialtone-react/components/ComboboxMultiSelect/ComboboxMultiSelect.tsx
+  s_2defdf83601f66::t_bd5e054ef354ad 1-9,11-292,297-313,323-324,326-329,331-422,429-594,597-705,707-708,711-835,837-853,855-858
+  s_397de2594f004a::t_7af4df661e8809 293-296,595-596,836,854
+packages/dialtone-react/components/ComboboxMultiSelect/ComboboxMultiSelectStoryConstants.ts
+  s_b6ac3d70cb055f::t_b55d626e8aa7d9 1-25
+packages/dialtone-react/components/ComboboxMultiSelect/ComboboxMultiSelect.stories.tsx
+  s_5af2881f05d989::t_ab0464c837eced 9-10,248
+  s_397de2594f004a::t_16f7777e812faf 265-266
+packages/dialtone-react/components/ValidationMessages/ValidationMessages.stories.tsx
+  s_34057b5dca973b::t_c1f45d9f979dbc 12,257-266
+packages/dialtone-react/components/EmojiPicker/Composables/UseKeyboardNavigation.ts
+  s_cfe4002585b875::t_4ce4b027b16f89 1-223
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.parity.tsx
+  s_cfe4002585b875::t_657e6415c124f2 1-4
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.stories.tsx
+  s_cfe4002585b875::t_13c415924b6324 1-161,163-218
+  s_aa421a82894e38::t_3084131d2a7a97 162
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.test.tsx
+  s_76cf110705b3b9::t_f49593f1133f4e 1-513,531-542
+  s_aa421a82894e38::t_eaa4b0837f85fa 514-530
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.tsx
+  s_cfe4002585b875::t_a6c2772bca6b86 1-244
+packages/dialtone-react/components/EmojiPicker/EmojiPickerConstants.ts
+  s_cfe4002585b875::t_dbe3be43ff00ee 1-41
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiDescription.tsx
+  s_cfe4002585b875::t_3c4ac5f58765b4 1-34
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiSearch.tsx
+  s_cfe4002585b875::t_32518817191279 1-96
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiSelector.tsx
+  s_cfe4002585b875::t_7c620aa01460f2 1-84,93-263,267,270-271,273-455,457-460,462-474,476-519
+  s_aa421a82894e38::t_6044ed566dbf68 85-92,264-266,268-269,272,456,461,475
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiSkinSelector.tsx
+  s_76cf110705b3b9::t_679c1f0c78c58a 1-218
+packages/dialtone-react/components/EmojiPicker/Modules/EmojiTabset.tsx
+  s_cfe4002585b875::t_39a992351cac4f 1-170
+packages/dialtone-react/components/EmojiPicker/index.ts
+  s_cfe4002585b875::t_5399b60676c9c5 1-2
+packages/dialtone-react/components/RichTextEditor/Extensions/Channels/Channel.ts
+  s_a4121f9acecc61::t_16da363ed0d052 1-28,30-31,33-38,40-57
+  s_33d6a7e5435eca::t_893e4b89a2e81b 29,32,39
+packages/dialtone-react/components/RichTextEditor/Extensions/Channels/ChannelComponent.tsx
+  s_2defdf83601f66::t_36993be6cbc5fd 1-42
+packages/dialtone-react/components/RichTextEditor/Extensions/Channels/ChannelSuggestion.tsx
+  s_2defdf83601f66::t_f568821b39c1fe 1-21
+packages/dialtone-react/components/RichTextEditor/Extensions/Channels/Suggestion.ts
+  s_a4121f9acecc61::t_a6549511a62b73 1-13
+packages/dialtone-react/components/RichTextEditor/Extensions/CustomLink/Autolink.ts
+  s_2defdf83601f66::t_740c60400d5c40 1-103
+packages/dialtone-react/components/RichTextEditor/Extensions/CustomLink/CustomLink.ts
+  s_2defdf83601f66::t_7f6cae90e0f00a 1-48
+packages/dialtone-react/components/RichTextEditor/Extensions/CustomLink/Regex.ts
+  s_2defdf83601f66::t_02d756aec21113 1-106
+packages/dialtone-react/components/RichTextEditor/Extensions/CustomLink/Utils.ts
+  s_2defdf83601f66::t_a9bd10d23a3bf8 1-217
+packages/dialtone-react/components/RichTextEditor/Extensions/CustomLink/index.ts
+  s_2defdf83601f66::t_eae7d7174d4f69 1-3
+packages/dialtone-react/components/RichTextEditor/Extensions/Div/Div.ts
+  s_a4121f9acecc61::t_e4d4ef3b5b36c2 1-39
+packages/dialtone-react/components/RichTextEditor/Extensions/Div/index.ts
+  s_a4121f9acecc61::t_0f59f929115fcd 1-3
+packages/dialtone-react/components/RichTextEditor/Extensions/Emoji/Emoji.ts
+  s_a4121f9acecc61::t_ff6d85afb9c6ae 2-13,15-19,22-28,30,34-160
+  s_1aad51ccd618ba::t_f1c243c6f669b6 1,14,20-21
+  s_2defdf83601f66::t_c6ce61dde35dcb 29,31-33
+packages/dialtone-react/components/RichTextEditor/Extensions/Emoji/Suggestion.ts
+  s_a4121f9acecc61::t_c1a1be641599d2 1-68
+packages/dialtone-react/components/RichTextEditor/Extensions/Image/Image.ts
+  s_a4121f9acecc61::t_96add0d10d9289 1-28
+packages/dialtone-react/components/RichTextEditor/Extensions/Image/index.ts
+  s_a4121f9acecc61::t_98752b173d98e7 1-3
+packages/dialtone-react/components/RichTextEditor/Extensions/LinkPhoneNumbers/LinkPhoneNumbers.ts
+  s_a4121f9acecc61::t_cf00e0b8b7f854 1-34,49,53-62
+  s_33d6a7e5435eca::t_be0827defe7cb9 35-48,50-52
+packages/dialtone-react/components/RichTextEditor/Extensions/Mentions/Mention.ts
+  s_2defdf83601f66::t_6366651e3afab0 1-30,32-33,35-37,39-56
+  s_33d6a7e5435eca::t_9ae30002605783 31,34,38
+packages/dialtone-react/components/RichTextEditor/Extensions/Mentions/MentionComponent.tsx
+  s_2defdf83601f66::t_09867fb68d1f71 1-45
+packages/dialtone-react/components/RichTextEditor/Extensions/Mentions/MentionSuggestion.tsx
+  s_a4121f9acecc61::t_778e3189e94855 1-90
+packages/dialtone-react/components/RichTextEditor/Extensions/Mentions/Suggestion.ts
+  s_a4121f9acecc61::t_9cf6fc2ba2f39e 1-13
+packages/dialtone-react/components/RichTextEditor/Extensions/SlashCommand/SlashCommand.ts
+  s_a4121f9acecc61::t_2d8eca52442437 1-6,8-31,45-99,103-114,118-133
+  s_33d6a7e5435eca::t_18939b532046cb 7,32-44,100-102,115-117
+packages/dialtone-react/components/RichTextEditor/Extensions/SlashCommand/SlashCommandComponent.tsx
+  s_a4121f9acecc61::t_968ea769a0e944 1-36
+packages/dialtone-react/components/RichTextEditor/Extensions/SlashCommand/SlashCommandSuggestion.tsx
+  s_a4121f9acecc61::t_8787d52c7031ac 1-31
+packages/dialtone-react/components/RichTextEditor/Extensions/SlashCommand/Suggestion.ts
+  s_a4121f9acecc61::t_63ec4e5ef1144b 1-14
+packages/dialtone-react/components/RichTextEditor/Extensions/Suggestion/SuggestionList.tsx
+  s_2defdf83601f66::t_4ecd27cdc43eb4 1-113,116-117,119-141
+  s_33d6a7e5435eca::t_024876f8b080b2 114-115,118
+packages/dialtone-react/components/RichTextEditor/Extensions/Table/Table.ts
+  s_a4121f9acecc61::t_e5127d9328a639 1-75
+packages/dialtone-react/components/RichTextEditor/Extensions/TextStyle/TextStyle.ts
+  s_a4121f9acecc61::t_fd4515fc0c3cd3 1-25
+packages/dialtone-react/components/RichTextEditor/Extensions/Utils/SuggestionUtils.ts
+  s_2defdf83601f66::t_af755efa56022b 1-202,206-269,271-274
+  s_33d6a7e5435eca::t_940b4bd3f5a816 203-205,270
+packages/dialtone-react/components/RichTextEditor/Extensions/Variable/Variable.ts
+  s_a4121f9acecc61::t_0623ea65756624 1-123
+packages/dialtone-react/components/RichTextEditor/Extensions/Variable/VariableComponent.tsx
+  s_a4121f9acecc61::t_2a490a5fdd22f0 1-81
+packages/dialtone-react/components/RichTextEditor/Extensions/Variable/index.ts
+  s_a4121f9acecc61::t_d0362c1ba5b643 1-3
+packages/dialtone-react/components/RichTextEditor/ForceLinkify.ts
+  s_a4121f9acecc61::t_060ea8d7d7a388 1-197
+packages/dialtone-react/components/RichTextEditor/RichTextEditor.tsx
+  s_a4121f9acecc61::t_00553a3778fc86 1-685,689,694,705,707-721,724-817,820-1145,1148-1225,1228-1265,1271-1291,1294-1327,1329-1405
+  s_1aad51ccd618ba::t_09957d42ee47f3 1266-1270
+  s_ba9402a73b4aef::t_e2b2a1e2b8ec84 690-693,704
+packages/dialtone-react/components/RichTextEditor/RichTextEditorConstants.ts
+  s_2defdf83601f66::t_4227de07e3a499 1-30
+packages/dialtone-react/components/RichTextEditor/editorEvents.ts
+  s_a4121f9acecc61::t_b05d36ce2998e9 1-42
+packages/dialtone-react/components/RichTextEditor/index.ts
+  s_2defdf83601f66::t_5a8c606a22fd91 1-7
+packages/dialtone-react/components/RichTextEditor/Extensions/Emoji/EmojiComponent.tsx
+  s_1aad51ccd618ba::t_d1b2bd4ea8c0e8 1-4,6-7,16-20
+  s_33d6a7e5435eca::t_adc8942366f1f3 5,8-15
+packages/dialtone-react/components/RichTextEditor/Extensions/Emoji/EmojiSuggestion.tsx
+  s_1aad51ccd618ba::t_2eba2c0b05494a 1-22
+packages/dialtone-react/components/RichTextEditor/Extensions/Emoji/index.ts
+  s_1aad51ccd618ba::t_2fe5a82ec81459 1-5
+packages/dialtone-react/components/RichTextEditor/MarkdownRenderer.ts
+  s_1aad51ccd618ba::t_3f2ed543038b8c 1-35,76-102,106-112,115-121,124-160,167-174,178-189,191
+  s_2defdf83601f66::t_53231ef2ddb4fc 36-75,103-105,113-114,122-123,161-166,175-177,190
+packages/dialtone-react/components/RichTextEditor/RichTextEditor.parity.tsx
+  s_1aad51ccd618ba::t_d53fcdb9b1546c 1-5
+packages/dialtone-react/components/RichTextEditor/RichTextEditor.test.tsx
+  s_1aad51ccd618ba::t_645d5300eac57d 1-2,4-11,13-189,1707-1708,1709-1710,1711-1764,1790-1855,1864
+  s_1aad51ccd618ba::t_a739a4a32f721c 12,190-1290,1292-1295,1297-1301,1304-1706,1856-1863,1865-2355
+  s_ba9402a73b4aef::t_ab83e334badd56 3,1765-1789
+packages/dialtone-react/components/RichTextEditor/RichTextEditor.stories.tsx
+  s_2defdf83601f66::t_056420c0a45f1c 1-52,54-141,143-239
+  s_1aad51ccd618ba::t_b42d5e1789eeaf 53,142
+packages/dialtone-react/components/RichTextEditor/ChannelSuggestion.ts
+  s_1aad51ccd618ba::t_12f4c1c0394002 1-32
+packages/dialtone-react/components/RichTextEditor/Extensions/CustomLink/CustomLink.test.tsx
+  s_59093d4da45ec1::t_c00021547baa0c 1-391
+packages/dialtone-react/components/RichTextEditor/Extensions/CustomLink/Utils.test.ts
+  s_1aad51ccd618ba::t_b431cea543206f 1-231
+packages/dialtone-react/components/RichTextEditor/Extensions/Div/Div.test.ts
+  s_800cb31390ef8e::t_ed49f6b7a7f2f1 1-105
+packages/dialtone-react/components/RichTextEditor/Extensions/Emoji/Emoji.test.tsx
+  s_59093d4da45ec1::t_4517d41fb44c6b 1-94
+packages/dialtone-react/components/RichTextEditor/Extensions/LinkPhoneNumbers/LinkPhoneNumbers.test.tsx
+  s_800cb31390ef8e::t_4bc82703830c02 1-180
+packages/dialtone-react/components/RichTextEditor/Extensions/SlashCommand/SlashCommandComponent.test.tsx
+  s_800cb31390ef8e::t_05ea0137d948bd 1-103
+packages/dialtone-react/components/RichTextEditor/Extensions/Utils/SuggestionUtils.test.ts
+  s_800cb31390ef8e::t_f7174a8c3ca7fe 1-326
+packages/dialtone-react/components/RichTextEditor/Extensions/Variable/Variable.test.tsx
+  s_59093d4da45ec1::t_c9a0fab9820c18 1-379
+packages/dialtone-react/components/RichTextEditor/MentionSuggestion.ts
+  s_1aad51ccd618ba::t_244859d0a6aff1 1-97
+packages/dialtone-react/components/RichTextEditor/SlashCommandSuggestion.ts
+  s_1aad51ccd618ba::t_efb361182478ee 1-28
+packages/dialtone-react/components/ComboboxMultiSelect/ComboboxMultiSelect.test.tsx
+  s_397de2594f004a::t_127248d0ae03c9 605-621
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7b9919fbc7b403c65b031f095e0d1f3be6419a39",
+  "prompts": {},
+  "sessions": {
+    "s_1aad51ccd618ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1927d91e-f924-442f-8d3c-8a29843b7a1b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_33d6a7e5435eca": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1fef3f55-bf56-4bf8-98fc-2d2fa4eadf69",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_34057b5dca973b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5a090bf4-4f77-43d6-b458-80a7363a6677",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_397de2594f004a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6daf8066-e439-4b59-b264-00c5bb4d5053",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_58e0b369e1be3c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "49ce2576-5837-4fb0-862e-02f89b95a8f4",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_59093d4da45ec1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a15009975b5489163",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_5af2881f05d989": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02f1c164-a8fa-4db7-b6b5-d0034987b86b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_75755ea2dab54c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c4222b2-7303-4b68-bd09-68bfcfb08a28",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_76cf110705b3b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4abf4a2e-b3a1-49c7-917e-47f1db667c04",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_800cb31390ef8e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-acf0065901ba61d57",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_a4121f9acecc61": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4364d89-7341-46c4-a88e-879be4230f7b",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_aa421a82894e38": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a0fc98c7-c56f-4d76-af19-20b298d8fe99",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_b6ac3d70cb055f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f812431-7d2d-4893-88e1-6eec429e845a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_ba9402a73b4aef": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1ecf5abf-4a25-4564-b5d7-aaeb3ce0214a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_cfe4002585b875": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "79ff25c5-8289-49a4-a045-2b128ed27f93",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

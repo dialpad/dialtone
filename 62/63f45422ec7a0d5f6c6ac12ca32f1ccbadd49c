@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Scroller/Modules/CoreScroller.tsx
+  s_2defdf83601f66::t_ccb2bcaaaef6aa 156-158,160,163-164,169-170,286-287
+packages/dialtone-react/components/Scroller/Scroller.test.tsx
+  s_2defdf83601f66::t_69e85960457e04 2,223-253
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6263f45422ec7a0d5f6c6ac12ca32f1ccbadd49c",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

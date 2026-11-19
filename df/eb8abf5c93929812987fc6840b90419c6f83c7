@@ -1,0 +1,19 @@
+packages/dialtone-mcp-server/scripts/query-tools.test.mjs
+  s_7f1d1d64baa803::t_b56900bda1b07f 269,330
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dfeb8abf5c93929812987fc6840b90419c6f83c7",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
