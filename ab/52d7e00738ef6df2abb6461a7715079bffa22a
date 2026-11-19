@@ -1,0 +1,34 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
+  s_aca1c1afe2554c::t_50e86cca38ae09 1347-1348
+  s_aca1c1afe2554c::t_2e09f0431a010a 1362-1374
+  s_aca1c1afe2554c::t_6c28a2ad4044d7 1206-1231
+  s_aca1c1afe2554c::t_17e06c73ba27ea 1258-1261
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs
+  s_aca1c1afe2554c::t_234bd45c2388b5 214-218
+  s_aca1c1afe2554c::t_fcf9c14858eb7b 505-506,511,513
+  s_aca1c1afe2554c::t_ba2b3c2faefd09 354-358
+  s_aca1c1afe2554c::t_184a6cced09550 663-666
+  s_aca1c1afe2554c::t_969c90e27e25a8 299,302
+  s_aca1c1afe2554c::t_6e2685fd76d7c0 486-493
+  s_aca1c1afe2554c::t_8e37adb5b67fbe 940-941
+  s_aca1c1afe2554c::t_b20f0b3d4c8ecb 801-805
+  s_aca1c1afe2554c::t_044c1174227d7d 460
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_aca1c1afe2554c::t_c2acda37f269ab 162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ab52d7e00738ef6df2abb6461a7715079bffa22a",
+  "prompts": {},
+  "sessions": {
+    "s_aca1c1afe2554c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a8e77c6a-d51d-4d85-bc59-17cbd4bd9064",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

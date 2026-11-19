@@ -1,0 +1,21 @@
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_6b2e89faa2f2c0 42
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_143185d10402d1 22,44,92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "464f830b88fb1a5ab00306512cf742f0cbd3f5f2",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
