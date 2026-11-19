@@ -1,0 +1,23 @@
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_bda95360f3cca1::t_c6afe719067adc 449,453,464
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_bda95360f3cca1::t_660f6aec0950d2 447,449,451
+packages/combinator/src/lib/control.test.js
+  s_bda95360f3cca1::t_de78de82c79a0d 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "de0f3a9dea1e3d46cf5928cb290c4ef7fb5e3421",
+  "prompts": {},
+  "sessions": {
+    "s_bda95360f3cca1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16057-cde5-76a0-a857-9178e5a8799c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
