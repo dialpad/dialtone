@@ -7,6 +7,7 @@ import {
   DT_STACK_GAP,
   DT_STACK_RESPONSIVE_BREAKPOINTS,
   DT_STACK_ALIGN,
+  DT_STACK_ALIGN_SELF,
   DT_STACK_JUSTIFY,
 } from './StackConstants';
 
@@ -95,6 +96,21 @@ Note: If not specified, alignment uses CSS implicit behavior (stretch for column
       },
     },
   },
+  alignSelf: {
+    control: 'object',
+    type: responsiveType,
+    table: {
+      type: {
+        summary: 'string | object',
+        detail: `
+        Align Self Values: "${DT_STACK_ALIGN_SELF}"
+Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
+String: "end"
+Object: { "default": "start", "md": "center", "lg": "auto" }
+Note: Places the stack itself in a flex parent. Use \`align\` to align the stack's children.`,
+      },
+    },
+  },
   justify: {
     control: 'object',
     type: responsiveType,
@@ -174,6 +190,32 @@ function StackWrapping (args: StackStoryArgs) {
         ))}
       </DtStack>
     </DtBox>
+  );
+}
+
+// StackAlignSelf.story.vue
+function StackAlignSelf (args: StackStoryArgs) {
+  return (
+    <DtStack direction="row" gap="200" align="stretch" className="d-h-400">
+      <DtStack
+        direction={args.direction}
+        as={args.as}
+        wrap={args.wrap}
+        gap={args.gap}
+        align={args.align}
+        justify={args.justify}
+        alignSelf={args.alignSelf}
+      >
+        {[1, 2].map(item => (
+          <DtBox key={item} surface="moderate-opaque" padding="100" borderRadius="300">
+            Stack item {item}
+          </DtBox>
+        ))}
+      </DtStack>
+      <DtBox surface="moderate-opaque" padding="100" borderRadius="300" className="d-fl1">
+        Sibling that sets the row height
+      </DtBox>
+    </DtStack>
   );
 }
 
@@ -361,6 +403,13 @@ export const Wrapping: Story = {
     direction: 'row',
     gap: '200',
     wrap: true,
+  },
+};
+
+export const AlignSelf: Story = {
+  render: args => <StackAlignSelf {...args} />,
+  args: {
+    alignSelf: 'end',
   },
 };
 

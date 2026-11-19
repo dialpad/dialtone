@@ -1,8 +1,16 @@
 import type { ComponentPropsWithRef, ElementType } from 'react';
 import { cx } from '../../common/cx';
-import type { StackAlign, StackDirection, StackGap, StackJustify, StackResponsive } from './StackConstants';
+import type {
+  StackAlign,
+  StackAlignSelf,
+  StackDirection,
+  StackGap,
+  StackJustify,
+  StackResponsive,
+} from './StackConstants';
 import {
   getDefaultAlignClass,
+  getDefaultAlignSelfClass,
   getDefaultDirectionClass,
   getDefaultGapClass,
   getDefaultJustifyClass,
@@ -55,6 +63,20 @@ interface DtStackOwnProps<T extends ElementType> {
   align?: StackResponsive<StackAlign>;
 
   /**
+   * The alignSelf property places the stack itself along the cross axis of its flex parent
+   * (`align-self`). It does not change how the stack aligns its own children; use `align` for that.
+   * The alignSelf can be set to a string, or object with breakpoints.
+   * You can set the base value with 'default' key.
+   * Each breakpoint value stays active until a later breakpoint value overrides it,
+   * so an undefined breakpoint keeps the previous value instead of resetting to 'default'.
+   * Use `auto` to reset.
+   * In case of string, it will be applied to all the breakpoints.
+   * If not specified, the parent's `align-items` applies.
+   * @values start, center, end, stretch, baseline, auto
+   */
+  alignSelf?: StackResponsive<StackAlignSelf>;
+
+  /**
    * The justify property controls the justification of items along the main axis.
    * The justify can be set to a string, or object with breakpoints.
    * All the undefined breakpoints will have the 'default' value.
@@ -82,6 +104,7 @@ export function DtStack<T extends ElementType = 'div'> ({
   wrap = false,
   gap = '0',
   align,
+  alignSelf,
   justify = 'start',
   className,
   children,
@@ -99,7 +122,8 @@ export function DtStack<T extends ElementType = 'div'> ({
         getDefaultGapClass(gap),
         getDefaultAlignClass(align),
         getDefaultJustifyClass(justify),
-        getResponsiveClasses(direction, gap, align, justify),
+        getDefaultAlignSelfClass(alignSelf),
+        getResponsiveClasses(direction, gap, align, justify, alignSelf),
         className,
       )}
     >

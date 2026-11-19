@@ -32,6 +32,12 @@ export const DT_STACK_GAP = [
 export const DT_STACK_ALIGN = ['start', 'center', 'end', 'stretch', 'baseline'] as const;
 
 /**
+ * Align-self values for the stack component (placement of the stack itself in a flex parent).
+ * Same as the align values, plus `auto` to reset the parent's `align-items` at a breakpoint.
+ */
+export const DT_STACK_ALIGN_SELF = [...DT_STACK_ALIGN, 'auto'] as const;
+
+/**
  * Justify values for the stack component (main-axis distribution).
  * Uses array format - simpler structure for newer props.
  * Primary values align with CSS justify-content values.
@@ -45,7 +51,8 @@ export type StackDirection = keyof typeof DT_STACK_DIRECTION;
 export type StackBreakpoint = typeof DT_STACK_RESPONSIVE_BREAKPOINTS[number];
 export type StackGap = typeof DT_STACK_GAP[number];
 export type StackAlign = typeof DT_STACK_ALIGN[number];
-export type StackJustify = typeof DT_STACK_JUSTIFY[number];
+export type StackAlignSelf = typeof DT_STACK_ALIGN_SELF[number];
+export type StackJustify =typeof DT_STACK_JUSTIFY[number];
 
 /**
  * A value for every breakpoint, or an object with a `default` value and per-breakpoint overrides.
@@ -58,5 +65,6 @@ export default {
   DT_STACK_RESPONSIVE_BREAKPOINTS,
   DT_STACK_GAP,
   DT_STACK_ALIGN,
+  DT_STACK_ALIGN_SELF,
   DT_STACK_JUSTIFY,
 };
