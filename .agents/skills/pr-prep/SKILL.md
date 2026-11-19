@@ -102,7 +102,7 @@ Mode: report-only | author | review      Base: <sha>  Head: <sha>  Size: <lines>
 Excluded: <untracked files left out of scope, or none>
 Title: <proposed> (commitlint: pass | fail)
 Packages: <touched list> (downstream: <list>)
-Review: <independent | not independent>, specialists run: <list>
+Review: <independent | not independent>, <complete | missing: what>, specialists run: <list>
 Findings:
   <id> <Major|Minor|Nit> <keep|fixed|reject> <file:line> <what a reviewer would ask> (<why, if rejected>)
 Gates: <package: command: pass | fail | no gate | not run>   (list any "not run" first)
@@ -115,8 +115,8 @@ Precedence: `Needs decision` > `Needs fixes` > `Ready with notes` > `Ready`.
 
 - `Needs decision`: a scope or API call that belongs to a person, including an unmarked break or unresolved ticket state.
 - `Needs fixes`: a failed gate or tooling check, a commitlint failure on the title, a doc-sync item still needing review, or any kept, unfixed Major finding.
-- `Ready with notes`: any kept Minor or Nit, any gate "not run", a review that was not independent, or uncommitted files.
-- `Ready`: every touched package's gates passed or are "no gate", and nothing is kept.
+- `Ready with notes`: any kept Minor or Nit, any gate "not run", a review that was not independent, a review that reported missing input (name what it could not see on the Review line), or uncommitted files.
+- `Ready`: every touched package's gates passed or are "no gate", the review saw everything it needed, and nothing is kept.
 
 Lead with what to fix.
 
