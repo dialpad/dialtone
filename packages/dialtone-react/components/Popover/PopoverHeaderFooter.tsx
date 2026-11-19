@@ -17,6 +17,8 @@ export interface PopoverHeaderFooterProps {
   wrapperClass?: ClassValue;
   /** Additional class name for the content wrapper element. */
   contentClass?: ClassValue;
+  /** Optional semantic role for the native close button. */
+  closeRole?: string;
   /** Determines visibility for close button */
   showCloseButton?: boolean;
   /** Vue's `class` on the component, which lands on its root. */
@@ -33,6 +35,7 @@ export function PopoverHeaderFooter ({
   type,
   wrapperClass,
   contentClass,
+  closeRole,
   showCloseButton = false,
   className,
   content,
@@ -78,6 +81,7 @@ export function PopoverHeaderFooter ({
           circle
           aria-label={closeButtonTitle}
           title={closeButtonTitle}
+          role={closeRole}
           onClick={() => onClose?.()}
           icon={<DtIconClose size="300" />}
         />

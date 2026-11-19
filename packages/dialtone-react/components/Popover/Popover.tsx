@@ -78,6 +78,22 @@ export interface DtPopoverProps extends ModeProps, NativeAttributes {
   /** Whether the popover starts open when `open` isn't set. Clicks on the anchor take it from there. */
   defaultOpen?: boolean;
 
+  /**
+   * Optional callback receiving the open boolean on logical visibility changes (the moment `open`, a click, Escape or
+   * the close button changes whether the popover is shown, not when its transition ends). Includes an initial `true`
+   * when the popover starts open, on the first commit. Not called once the component is unmounting.
+   * For modal removal, keep modal=true, its anchor and scroll container unchanged until onOpened(false).
+   * Changing modal or the anchor's scroll context after opening can retain the original lock.
+   * onOpened(false) reports transition completion, not global scroll-lock ownership.
+   */
+  visibilityChangeCallback?: (open: boolean) => void;
+
+  /**
+   * Forwards anchor ArrowUp/ArrowDown to `onKeyDown` with a boolean `open` prop, without toggling.
+   * Default false preserves controlled anchor keyboard behavior.
+   */
+  forwardAnchorArrowKeys?: boolean;
+
   /** Opens the popover on right click (context menu). If you set this value to `true`, the default trigger behavior will be disabled. */
   openOnContext?: boolean;
 
@@ -249,7 +265,10 @@ export interface DtPopoverProps extends ModeProps, NativeAttributes {
   /** Called alongside onOpened while `open` is set (controlled), with the same value: Vue's update:open. */
   onOpenChange?: (open: boolean) => void;
 
-  /** Called when the popover is shown (with the content element) or hidden, once its transition has finished. */
+  /**
+   * Called when the popover is shown (with the content element) or hidden, once its transition and the initial focus
+   * work have finished.
+   */
   onOpened?: (opened: boolean, contentElement?: HTMLElement) => void;
 
   /** Called when the mouse enters the anchor wrapper. (Vue's names for these four are swapped.) */
@@ -361,6 +380,8 @@ export function DtPopover ({
   ref,
   open = null,
   defaultOpen = false,
+  visibilityChangeCallback,
+  forwardAnchorArrowKeys = false,
   openOnContext = false,
   elementType: ElementTag = 'div',
   transition = 'fade',
@@ -451,9 +472,9 @@ export function DtPopover ({
     if (contentAppear !== null) setToAppear(contentAppear);
   }
   // Only true once the leave transition (and any focus restoration in onLeaveTransitionComplete) has finished, so
-  // aria-hidden is never applied while the dialog still holds focus or is still visible. As in Vue, it's cleared when
-  // isOpen turns true, which an initial `open` doesn't count as.
-  const [isDialogAriaHidden, setIsDialogAriaHidden] = useState(true);
+  // aria-hidden is never applied while the dialog still holds focus or is still visible. It's cleared when isOpen turns
+  // true, an initial `open` included.
+  const [isDialogAriaHidden, setIsDialogAriaHidden] = useState(!isOpen);
   const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
   if (isOpen !== prevIsOpen) {
     setPrevIsOpen(isOpen);
@@ -470,7 +491,7 @@ export function DtPopover ({
   const [contextPoint, setContextPoint] = useState<{ x: number; y: number } | null>(null);
 
   const modeAttrs = useMode(contentMode, () => anchorWrapperRef.current);
-  const { focusFirstElement, getFirstFocusableElement } = useModal();
+  const { getFirstFocusableElement } = useModal();
 
   useFocusTrap(dialogEl, {
     active: (modal || focustrap) && isOpen,
@@ -481,11 +502,28 @@ export function DtPopover ({
   const calculatedMaxHeight = isOutsideViewport && modal ? 'calc(100vh - var(--dt-spacing-50))' : maxHeight;
 
   // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if there is no aria-label and the
-  // labelledby should point to the anchor. Vue renders `false` as the string "false", on both attributes.
-  const labelledBy: string | false = ariaLabelledby || (!ariaLabel && anchorLabelId);
-  const anchorId = String(!ariaLabelledby && labelledBy);
+  // labelledby should point to the anchor.
+  const labelledBy: string | undefined = ariaLabelledby || (!ariaLabel && anchorLabelId) || undefined;
+  // The anchor's id is `!ariaLabelledby && labelledBy` in Vue, which renders `false` as the string "false".
+  const anchorId = ariaLabelledby ? 'false' : labelledBy;
 
   const closePopover = useCallback(() => setIsOpen(false), []);
+
+  // Vue's visibilityGeneration, and the isOpen its sync watcher last saw: every logical visibility change starts a new
+  // generation, and the async focus and transition work below stops once its generation is no longer the current one.
+  // Vue's watcher runs the moment isOpen changes; here it's the layout effect of the commit that shows the change.
+  const visibility = useRef({ generation: 0, isOpen: false });
+  const notifyVisibilityChange = useEffectEvent((nextIsOpen: boolean) => {
+    if (!isUnmountingRef.current) visibilityChangeCallback?.(nextIsOpen);
+  });
+  useLayoutEffect(() => {
+    if (visibility.current.isOpen === isOpen) return;
+    visibility.current = { generation: visibility.current.generation + 1, isOpen };
+    notifyVisibilityChange(isOpen);
+  }, [isOpen]);
+
+  const isCurrentVisibility = (generation: number, expectedIsOpen: boolean) => !isUnmountingRef.current &&
+    visibility.current.generation === generation && visibility.current.isOpen === expectedIsOpen;
 
   function calculateAnchorZindex (): number {
     // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
@@ -869,8 +907,9 @@ export function DtPopover ({
     }
   }
 
-  async function focusFirstElementIfNeeded (domEl: HTMLElement | null) {
+  async function focusFirstElementIfNeeded (domEl: HTMLElement | null, generation: number) {
     const firstFocusable = await getFirstFocusableElement(domEl);
+    if (!isCurrentVisibility(generation, true)) return;
     if (firstFocusable) {
       firstFocusable.focus({ preventScroll: true });
     } else if (showCloseButton) {
@@ -892,34 +931,39 @@ export function DtPopover ({
     }
   }
 
-  function focusInitialElement () {
-    if (initialFocusElement instanceof HTMLElement) {
-      initialFocusElement.focus();
-    } else if (initialFocusElement === 'dialog') {
+  async function focusInitialElement (generation: number) {
+    if (initialFocusElement === 'dialog') {
       dialogEl?.focus();
-    } else if (initialFocusElement.startsWith('#')) {
+    }
+    if (typeof initialFocusElement === 'string' && initialFocusElement.startsWith('#')) {
       // find by ID
       focusInitialElementById(initialFocusElement);
-    } else if (initialFocusElement === 'first') {
-      focusFirstElementIfNeeded(contentRef.current);
+    }
+    if (initialFocusElement === 'first') {
+      await focusFirstElementIfNeeded(contentRef.current, generation);
+    }
+    // A focus listener or the wait above can have closed the popover: the element is for the opening that asked.
+    if (!isCurrentVisibility(generation, true)) return;
+    if (initialFocusElement instanceof HTMLElement) {
+      initialFocusElement.focus();
     }
   }
 
   // What follows an await reads the props of the latest render, as Vue's `this` does: these closures are refreshed
   // after every commit.
-  const finishEnter = () => {
+  const finishEnter = (generation: number) => {
     preventScrolling();
     onOpened?.(true, contentRef.current ?? undefined);
-    if (open !== null) onOpenChange?.(true);
+    if (isCurrentVisibility(generation, true) && open !== null) onOpenChange?.(true);
   };
 
-  const finishLeave = () => {
+  const finishLeave = (generation: number) => {
     // Focus has been moved off the dialog (or was never trapped in it) by this point, so it's now safe to hide it from
     // assistive technology without triggering a focused-descendant violation.
     setIsDialogAriaHidden(true);
     tipRef.current?.unmount();
     onOpened?.(false);
-    if (open !== null) onOpenChange?.(false);
+    if (isCurrentVisibility(generation, false) && open !== null) onOpenChange?.(false);
   };
 
   const latest = useRef({ finishEnter, finishLeave, enableScrolling });
@@ -928,25 +972,28 @@ export function DtPopover ({
   });
 
   async function onEnterTransitionComplete () {
-    if (isUnmountingRef.current) return;
-    focusInitialElement();
+    const { generation } = visibility.current;
+    if (!isCurrentVisibility(generation, true)) return;
+    await focusInitialElement(generation);
     // await next tick in case the user wants to change focus themselves.
     await nextTick();
-    if (isUnmountingRef.current) return;
-    latest.current.finishEnter();
+    if (!isCurrentVisibility(generation, true)) return;
+    latest.current.finishEnter(generation);
   }
 
   async function onLeaveTransitionComplete () {
-    if (isUnmountingRef.current) return;
+    const { generation } = visibility.current;
+    if (!isCurrentVisibility(generation, false)) return;
     if (modal) {
-      await focusFirstElement(anchorWrapperRef.current);
-      if (isUnmountingRef.current) return;
-      // await next tick in case the user wants to change focus themselves.
+      const anchorEl = await getFirstFocusableElement(anchorWrapperRef.current);
+      if (!isCurrentVisibility(generation, false)) return;
+      anchorEl?.focus({ preventScroll: true });
+      // Allow consumers to choose their own focus destination.
       await nextTick();
-      if (isUnmountingRef.current) return;
+      if (!isCurrentVisibility(generation, false)) return;
       latest.current.enableScrolling();
     }
-    latest.current.finishLeave();
+    latest.current.finishLeave(generation);
   }
 
   function defaultToggleOpen (event: ReactMouseEvent<HTMLDivElement>) {
@@ -971,17 +1018,22 @@ export function DtPopover ({
   }
 
   function onArrowKeyPress (event: ReactKeyboardEvent<HTMLDivElement>) {
-    if (open !== null) return;
+    const isControlled = open !== null;
+    if (isControlled && forwardAnchorArrowKeys) {
+      onKeyDown?.(event.nativeEvent);
+      return;
+    }
+    event.preventDefault();
+    if (isControlled) return;
     if (openWithArrowKeys && anchorElRef.current?.contains(event.target as Node)) {
       if (!isOpen) setIsOpen(true);
     }
     onKeyDown?.(event.nativeEvent);
   }
 
-  // Vue's @keydown.up.prevent, @keydown.down.prevent, @keydown.enter and @keydown.space on the anchor wrapper.
+  // Vue's @keydown.up, @keydown.down, @keydown.enter and @keydown.space on the anchor wrapper.
   function onAnchorKeyDown (event: ReactKeyboardEvent<HTMLDivElement>) {
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.preventDefault();
       onArrowKeyPress(event);
     } else if (event.key === 'Enter' || event.key === ' ') {
       onKeyDown?.(event.nativeEvent);
@@ -1057,9 +1109,9 @@ export function DtPopover ({
                 role,
                 'data-qa': dataQa ? `${dataQa}__dialog` : 'dt-popover',
                 'aria-hidden': String(isDialogAriaHidden),
-                'aria-labelledby': String(labelledBy),
+                'aria-labelledby': labelledBy,
                 'aria-label': ariaLabel ?? undefined,
-                'aria-modal': String(!modal),
+                'aria-modal': role === 'menu' ? undefined : String(!modal),
                 tabindex: contentTabindex === null ? undefined : String(contentTabindex),
                 ...modeAttrs,
               }}
@@ -1073,6 +1125,7 @@ export function DtPopover ({
                       contentClass={headerClass}
                       type="header"
                       showCloseButton={showCloseButton}
+                      closeRole={role === 'menu' ? 'menuitem' : undefined}
                       onClose={closePopover}
                       content={headerNode}
                     />
@@ -1092,7 +1145,9 @@ export function DtPopover ({
                       content={footerNode}
                     />
                   )}
-                  {!showCloseButton && <SrOnlyCloseButton onClose={closePopover} />}
+                  {!showCloseButton && (
+                    <SrOnlyCloseButton role={role === 'menu' ? 'menuitem' : undefined} onClose={closePopover} />
+                  )}
                 </>
               )}
             </PopoverDialog>
