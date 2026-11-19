@@ -124,6 +124,74 @@ describe('DtAvatar Tests', () => {
       });
     });
 
+    describe('When the icon slot content toggles without remounting', () => {
+      const ToggleHost = ({ showIcon }: { showIcon: boolean }) => (
+        <DtAvatar fullName="Jaqueline Nackos" icon={showIcon ? <DtIconUser /> : undefined} />
+      );
+
+      const mountHost = (showIcon: boolean) => render(<ToggleHost showIcon={showIcon} />);
+      const findIcon = () => screen.queryByTestId('dt-avatar-icon');
+
+      it('should not render the icon initially when the slot is absent', () => {
+        unmount?.();
+        mountHost(false);
+
+        expect(findIcon()).not.toBeInTheDocument();
+      });
+
+      it('should render initials initially when the slot is absent', () => {
+        unmount?.();
+        mountHost(false);
+
+        expect(root()).toHaveTextContent(new RegExp(`^${MOCK_INITIALS}$`));
+      });
+
+      it('should render the icon after the slot is provided', () => {
+        unmount?.();
+        const host = mountHost(false);
+
+        host.rerender(<ToggleHost showIcon />);
+
+        expect(findIcon()).toBeInTheDocument();
+      });
+
+      it('should not render the icon after the slot is removed again', () => {
+        unmount?.();
+        const host = mountHost(true);
+
+        host.rerender(<ToggleHost showIcon={false} />);
+
+        expect(findIcon()).not.toBeInTheDocument();
+      });
+
+      it('should render initials again after the slot is removed again', () => {
+        unmount?.();
+        const host = mountHost(true);
+
+        host.rerender(<ToggleHost showIcon={false} />);
+
+        expect(root()).toHaveTextContent(new RegExp(`^${MOCK_INITIALS}$`));
+      });
+    });
+
+    describe('When no seed, family, variant or color is provided', () => {
+      it('should keep the same random color after every re-render', () => {
+        const readColor = () => ({
+          family: root().getAttribute('data-avatar-family'),
+          variant: root().getAttribute('data-avatar-variant'),
+        });
+        const initialColor = readColor();
+        const colors = [];
+
+        for (let i = 0; i < 5; i++) {
+          setProps({ fullName: `Jaqueline Nackos ${i}`, size: i % 2 ? 'lg' : 'sm' });
+          colors.push(readColor());
+        }
+
+        expect(colors).toEqual(Array(5).fill(initialColor));
+      });
+    });
+
     describe('With no imageSrc or iconName is provided', () => {
       it('should display initials', () => {
         expect(root()).toHaveTextContent(new RegExp(`^${MOCK_INITIALS}$`));
