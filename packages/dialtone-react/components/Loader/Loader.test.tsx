@@ -1,4 +1,5 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { act, cleanup, render, screen } from '@testing-library/react';
+import { DialtoneLocalization } from '../../common/localization';
 import { DtLoader, type DtLoaderProps } from './Loader';
 
 const MOCK_DEFAULT_ARIA_LABEL = 'loading';
@@ -108,10 +109,69 @@ describe('DtLoader Tests', function () {
   });
 
   describe('Accessibility Tests', () => {
+    it.each([undefined, null])('Uses image semantics when a forwarded role is %s', role => {
+      mockProps = { role: role as DtLoaderProps['role'] };
+      updateWrapper();
+
+      expect(root).toHaveAttribute('role', 'img');
+      expect(root).toHaveAttribute('aria-label', MOCK_DEFAULT_ARIA_LABEL);
+    });
+
+    it('Localizes the default label while preserving a custom label', () => {
+      try {
+        act(() => { new DialtoneLocalization().currentLocale = 'fr-FR'; });
+        expect(root).toHaveAttribute('aria-label', 'En cours de chargement');
+
+        rerender({ ariaLabel: 'Loading messages' });
+        expect(root).toHaveAttribute('aria-label', 'Loading messages');
+      } finally {
+        act(() => { new DialtoneLocalization().currentLocale = 'en-US'; });
+      }
+    });
+
     describe('When ariaLabel is not set', () => {
       it('Has default aria label', () => {
+        expect(root).toHaveAttribute('role', 'img');
         expect(root).toHaveAttribute('aria-label', MOCK_DEFAULT_ARIA_LABEL);
+        expect(root).not.toHaveAttribute('aria-live');
       });
+    });
+
+    it('Preserves a caller-provided role and label reference', () => {
+      mockProps = {
+        role: 'progressbar',
+        'aria-labelledby': 'loading-label',
+        'data-qa': 'caller-loader',
+        className: 'caller-loader',
+      } as Partial<DtLoaderProps>;
+      cleanup();
+      render(<DtLoader {...(mockProps as DtLoaderProps)} />);
+
+      const loader = screen.getByTestId('caller-loader');
+      expect(loader).toHaveAttribute('role', 'progressbar');
+      expect(loader).toHaveAttribute('aria-labelledby', 'loading-label');
+      expect(loader).toHaveClass('caller-loader');
+    });
+
+    it('Preserves a caller-hidden loader', () => {
+      mockProps = { 'aria-hidden': true };
+      updateWrapper();
+
+      expect(root).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it.each(['none', 'presentation'])('Omits the accessible label for role="%s"', role => {
+      mockProps = { role };
+      updateWrapper();
+
+      expect(root).toHaveAttribute('role', role);
+      expect(root).not.toHaveAttribute('aria-label');
+
+      rerender({ role: 'img' });
+      expect(root).toHaveAttribute('aria-label', MOCK_DEFAULT_ARIA_LABEL);
+
+      rerender({ role });
+      expect(root).not.toHaveAttribute('aria-label');
     });
 
     describe('When ariaLabel is set', () => {

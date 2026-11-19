@@ -1,12 +1,13 @@
 import type { ComponentPropsWithRef } from 'react';
 import { cx } from '../../common/cx';
+import { useI18n } from '../../common/localization';
 import type { IconSize } from '../../icons';
 import { LOADER_KIND_MODIFIERS, type LoaderKind } from './LoaderConstants';
 
 interface DtLoaderOwnProps {
   /**
    * The label of the loader as read out by a screen reader.
-   * Default is "loading"
+   * Defaults to the localized loading message.
    */
   ariaLabel?: string;
 
@@ -62,18 +63,24 @@ export function DtLoader ({
   size = 500,
   className,
   'aria-label': ariaLabelAttribute,
+  role,
   ...rest
 }: DtLoaderProps) {
+  const i18n = useI18n();
   const isSpinner = kind === 'spinner';
+  const isPresentational = role === 'none' || role === 'presentation';
+  // The ariaLabel prop wins over a forwarded aria-label, as in Vue's rendered output.
+  const accessibleLabel = isPresentational ? undefined : ariaLabel || ariaLabelAttribute || i18n.$t('DIALTONE_LOADING');
   const loaderKindClass = isSpinner ? LOADER_KIND_MODIFIERS.spinner : LOADER_KIND_MODIFIERS.dots;
   const iconClass = (name: string) => cx('d-icon', `d-icon--size-${size}`, name);
 
   return (
     <div
       className={cx('d-loader', loaderKindClass, className)}
-      aria-label={ariaLabel || ariaLabelAttribute || 'loading'}
+      aria-label={accessibleLabel}
       data-qa="dt-loader"
       {...rest}
+      role={role ?? 'img'}
     >
       {isSpinner ? (
         <>
