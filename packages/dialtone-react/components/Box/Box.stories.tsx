@@ -318,8 +318,13 @@ export const PaddingCascade: Story = {
 export const Positioning: Story = {
   render: () => (
     <DtBox
+      as="section"
       blockSize="600"
       overflow="auto"
+      tabIndex={0}
+      role="region"
+      aria-label="Sticky header example"
+      className="fv:d-ol-focusring"
       surface="secondary"
       borderWidth="100"
       borderRadius="300"
