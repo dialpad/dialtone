@@ -364,25 +364,39 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 
 ## Slide
 
-`slide` shows cut-off text in full by sliding it sideways while the text, or the item around it (button, link, menu item), is hovered or has keyboard focus. Leaving or pressing Esc snaps it back. Text that fits never moves. The text renders as a block that can shrink inside a flex row, and `slide` replaces `truncate`, `maxLines` and `wrap`.
+`slide` shows cut-off text in full by sliding it sideways while the item around it is hovered or has keyboard focus: a link, a button, or an element with an item role such as a `DtListItem` menu row. Leaving or pressing Esc snaps it back. Text that fits never moves. The text renders as a block that can shrink inside a flex row, and `slide` replaces `truncate`, `maxLines` and `wrap`.
 
 ```vue demo
-<div class="d-w-350">
-  <button type="button" class="d-d-flex d-w100p">
-    <dt-text variant="label-md" slide>Front desk reception phone, second floor east wing</dt-text>
-  </button>
-</div>
+<ul role="menu" aria-label="Devices" class="d-w-350">
+  <dt-list-item role="menuitem" navigation-type="tab">
+    <dt-text slide>Front desk reception phone, second floor east wing</dt-text>
+  </dt-list-item>
+  <dt-list-item role="menuitem" navigation-type="tab">
+    <dt-text slide>Conference room Aurora with ceiling microphone array</dt-text>
+  </dt-list-item>
+</ul>
 ```
 
 | Value | Motion |
 | --- | --- |
 | `true` or `once` | Slides to the end and rests there. The default; use it unless you have a reason not to. |
-| `bounce` | Slides to the end and back, holding 1 s at each end. |
-| `loop` | Scrolls round like a ticker with a gap before the repeat, holds 5 s, then goes again. |
+| `loop` | Scrolls round like a ticker with a gap before the repeat, pauses 5 s, and stops after three cycles. |
 
-Motion only runs while the user points at the item or it has keyboard focus, each movement takes at most 3 s (`loop`: 5 s), and Esc stops it (WCAG 2.2.2). With reduced motion on, the text jumps to its end and stays.
+Motion only runs while the item is hovered or has keyboard focus, and Esc stops it. A `once` movement takes at most 3 s; a `loop` cycle takes at most 5 s and the whole sequence ends after three cycles (WCAG 2.2.2). With reduced motion on, the text jumps to its end and stays.
 
-`DtText` never adds a tab stop. Put the text inside a keyboard-focusable item (button, link, or an element with an item role such as `menuitem` or `option` that can take focus) so keyboard users can reveal it; a container that is only focusable by script, such as popover content, does not count. Plain text with no item around it slides on hover only, so give its full content another way too.
+`DtText` never adds a tab stop, so put the text inside a keyboard-focusable item. A region that is only focusable as a whole, such as a scroll area or popover content, does not drive the slide; give the row an item role instead. With reduced motion the label jumps to its end and its start stays cut off, so where the start matters give the full label a visible way to be read without motion, such as a tooltip on the row:
+
+```vue demo
+<ul role="menu" aria-label="Devices" class="d-w-350">
+  <dt-list-item
+    v-dt-tooltip="`Front desk reception phone, second floor east wing`"
+    role="menuitem"
+    navigation-type="tab"
+  >
+    <dt-text slide>Front desk reception phone, second floor east wing</dt-text>
+  </dt-list-item>
+</ul>
+```
 
 The defaults need no setup. To tune a menu, a sidebar or one element, set these CSS variables on it or any ancestor:
 
@@ -390,10 +404,8 @@ The defaults need no setup. To tune a menu, a sidebar or one element, set these 
 | --- | --- | --- |
 | `--dt-text-slide-speed` | `40` | Speed in px per second (a number, no unit). |
 | `--dt-text-slide-delay` | `500ms` | Wait before the first movement. |
-| `--dt-text-slide-hold` | `1000ms` (bounce), `5000ms` (loop) | Pause at each end. |
-| `--dt-text-slide-easing` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | Easing for `once` and `bounce`; `loop` always moves steadily. |
-| `--dt-text-slide-fade-size` | `var(--dt-layout-100)` | Width of the edge fade. |
-| `--dt-text-slide-gap` | `var(--dt-spacing-400)` | Space before the repeat in `loop`. |
+| `--dt-text-slide-easing` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | Easing for `once`; `loop` always moves steadily. |
+| `--dt-text-slide-fade-size` | `var(--dt-layout-25)` | Width of the edge fade (16px). |
 
 ## Max Lines
 

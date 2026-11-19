@@ -2,26 +2,17 @@
   <component
     :is="as"
     data-qa="dt-text"
-    :class="[textClasses, slideClasses]"
+    :class="textClasses"
     :style="textStyles"
   >
-    <!-- the slide moves one inner span with transform; the root stays still and clips -->
-    <span
+    <!-- the slide state lives in this child, so plain text carries none -->
+    <dt-text-slide-viewport
       v-if="slideMode"
-      ref="slideContent"
-      class="d-text__slide-content"
+      :mode="slideMode"
     >
       <!-- @slot Default slot for text content -->
       <slot />
-      <!-- loop only: filled with a static clone of the text while it moves -->
-      <span
-        v-if="slideCopy"
-        ref="slideCopyEl"
-        aria-hidden="true"
-        inert
-        class="d-text__slide-copy"
-      />
-    </span>
+    </dt-text-slide-viewport>
     <slot v-else />
   </component>
 </template>
@@ -47,13 +38,7 @@ import {
   TEXT_DENSITY_MODIFIERS,
   TEXT_SLIDE_MODES,
 } from './TextConstants';
-import {
-  bindSlide,
-  getSlideDuration,
-  listenForEscape,
-  prefersReducedMotion,
-  readSlideConfig,
-} from './slide';
+import DtTextSlideViewport from './modules/SlideViewport.vue';
 
 const DEFAULT_SIZE = '300';
 const SEMANTIC_HEADING_ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
@@ -73,6 +58,8 @@ export const resetHeadlineSemanticInfoFlag = () => {
  */
 export default {
   name: 'DtText',
+
+  components: { DtTextSlideViewport },
 
   props: {
     /**
@@ -269,7 +256,7 @@ export default {
      * (button, link, menu item), is hovered or has keyboard focus. `true` is the same as `once`.
      * Renders as a block and replaces `truncate`, `maxLines` and `wrap`. Tune with the
      * `--dt-text-slide-*` CSS custom properties listed in the DtText docs.
-     * @values true, false, once, bounce, loop
+     * @values true, false, once, loop
      */
     slide: {
       type: [Boolean, String],
@@ -278,17 +265,6 @@ export default {
         return typeof value === 'boolean' || TEXT_SLIDE_MODES.includes(value);
       },
     },
-  },
-
-  data() {
-    return {
-      // rest | waiting | moving-forward | at-end | moving-back | at-start | loop-moving
-      slidePhase: 'rest',
-      slideOffset: 0,
-      slideDuration: 0,
-      slideCopy: false,
-      slideLoopWrap: false,
-    };
   },
 
   computed: {
@@ -361,18 +337,13 @@ export default {
     },
 
     textStyles() {
-      const styles = {};
-
-      if (this.maxLines && !this.slideMode) {
-        styles['--dt-text-line-clamp'] = this.maxLines;
+      if (!this.maxLines || this.slideMode) {
+        return undefined;
       }
 
-      if (this.slideMode && this.slidePhase !== 'rest') {
-        styles['--_slide-offset'] = `${this.slideOffset}px`;
-        styles['--_slide-duration'] = `${this.slideDuration}ms`;
-      }
-
-      return Object.keys(styles).length ? styles : undefined;
+      return {
+        '--dt-text-line-clamp': this.maxLines,
+      };
     },
 
     slideMode() {
@@ -381,44 +352,13 @@ export default {
       }
       return this.slide ? 'once' : null;
     },
-
-    slideIsMoving() {
-      return ['moving-forward', 'moving-back', 'loop-moving'].includes(this.slidePhase);
-    },
-
-    slideClasses() {
-      return this.slideMode && {
-        'd-text--slide-moving': this.slideIsMoving,
-        'd-text--slide-end': this.slidePhase === 'at-end',
-        'd-text--slide-loop': this.slidePhase === 'loop-moving',
-        'd-text--slide-loop-wrap': this.slideLoopWrap,
-      };
-    },
-  },
-
-  created() {
-    // non-reactive slide bookkeeping
-    this.slideRuntime = { unbind: null, removeEscape: null, timers: [], distance: 0, restWidth: 0 };
-    // after render, so the inner span and a new root (`as`) exist
-    this.$watch(() => [this.slideMode, this.as], this.setupSlide, { flush: 'post' });
-  },
-
-  beforeUnmount() {
-    this.teardownSlide();
-  },
-
-  // inside KeepAlive the host can vanish without a pointerleave or focusout
-  activated() {
-    this.setupSlide();
-  },
-
-  deactivated() {
-    this.teardownSlide();
   },
 
   mounted() {
-    if (this.slideMode) {
-      this.setupSlide();
+    if (this.slideMode && !hasWarnedSlideConflict && (this.maxLines || this.wrap)) {
+      // eslint-disable-next-line no-console
+      console.warn('[DtText] slide ignores maxLines and wrap.');
+      hasWarnedSlideConflict = true;
     }
 
     // Emit info once per session when headline is used without semantic heading element
@@ -436,143 +376,6 @@ export default {
   },
 
   methods: {
-    setupSlide() {
-      this.teardownSlide();
-      if (!this.slideMode) {
-        return;
-      }
-
-      if (!hasWarnedSlideConflict && (this.maxLines || this.wrap)) {
-        // eslint-disable-next-line no-console
-        console.warn('[DtText] slide ignores maxLines and wrap.');
-        hasWarnedSlideConflict = true;
-      }
-
-      this.slideRuntime.unbind = bindSlide({
-        el: this.$el,
-        moveEl: this.$refs.slideContent,
-        onEnter: this.slideEnter,
-        onLeave: this.slideReset,
-        onTransitionEnd: this.slideMoveDone,
-      });
-    },
-
-    teardownSlide() {
-      this.slideRuntime.unbind?.();
-      this.slideRuntime.unbind = null;
-      this.slideReset();
-    },
-
-    slideAfter(ms, fn) {
-      this.slideRuntime.timers.push(setTimeout(fn, ms));
-    },
-
-    slideClearTimers() {
-      this.slideRuntime.timers.forEach(clearTimeout);
-      this.slideRuntime.timers = [];
-    },
-
-    // snap to rest, no reverse animation
-    slideReset(phase = 'rest') {
-      this.slideClearTimers();
-      if (phase === 'rest') {
-        this.slideRuntime.removeEscape?.();
-        this.slideRuntime.removeEscape = null;
-      }
-      this.slidePhase = phase;
-      this.slideOffset = 0;
-      this.slideDuration = 0;
-      this.slideCopy = false;
-      this.slideLoopWrap = false;
-    },
-
-    // measures the label before each cycle (it may change during a hold); false when it fits
-    slideMeasure() {
-      const el = this.$refs.slideContent;
-      this.slideRuntime.distance = el.scrollWidth - el.clientWidth;
-      this.slideRuntime.restWidth = el.scrollWidth;
-      return this.slideRuntime.distance > 0;
-    },
-
-    slideEnter() {
-      if (this.slidePhase !== 'rest' || !this.slideMeasure()) {
-        return;
-      }
-
-      this.slideRuntime.removeEscape = listenForEscape(this.$el, () => this.slideReset());
-      this.slidePhase = 'waiting';
-      this.slideAfter(readSlideConfig(this.$el, this.slideMode).delay, this.slideStart);
-    },
-
-    slideStart() {
-      if (prefersReducedMotion()) {
-        this.slidePhase = 'at-end';
-        this.slideOffset = this.slideRuntime.distance;
-      } else if (this.slideMode === 'loop') {
-        this.slideLoop();
-      } else {
-        this.slideMove('moving-forward', this.slideRuntime.distance);
-      }
-    },
-
-    slideMove(phase, offset) {
-      const { speed } = readSlideConfig(this.$el, this.slideMode);
-      const duration = getSlideDuration(Math.abs(offset - this.slideOffset), speed, this.slideMode);
-      this.slideClearTimers();
-      this.slidePhase = phase;
-      this.slideOffset = offset;
-      this.slideDuration = duration;
-      // in case transitionend does not fire
-      this.slideAfter(duration + 100, this.slideMoveDone);
-      return duration;
-    },
-
-    async slideLoop() {
-      if (!this.slideMeasure()) {
-        return;
-      }
-      // the copy has to be in the DOM to measure the full wrap-around distance
-      this.slideCopy = true;
-      await this.$nextTick();
-      if (!this.slideCopy) {
-        return;
-      }
-      const { slideContent: content, slideCopyEl: copy } = this.$refs;
-      // a static clone: slot components do not mount twice, and no ids or tab stops repeat
-      const original = [...content.childNodes].filter((node) => node !== copy);
-      copy.replaceChildren(...original.map((node) => node.cloneNode(true)));
-      copy.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
-      const { restWidth } = this.slideRuntime;
-      const distance = content.scrollWidth - restWidth;
-      const duration = this.slideMove('loop-moving', distance);
-      // the start edge fades while the text slides out, then clears once the gap is
-      // half past it, before the copy arrives (the scroll is linear, so time = distance)
-      const gap = parseFloat(getComputedStyle(copy).paddingInlineStart) || 0;
-      this.slideAfter(duration * (restWidth + gap / 2) / distance, () => { this.slideLoopWrap = true; });
-    },
-
-    slideMoveDone() {
-      const phase = this.slidePhase;
-      if (!this.slideIsMoving) {
-        return;
-      }
-      const { hold } = readSlideConfig(this.$el, this.slideMode);
-
-      if (phase === 'moving-forward') {
-        this.slideClearTimers();
-        this.slidePhase = 'at-end';
-        if (this.slideMode === 'bounce') {
-          this.slideAfter(hold, () => this.slideMove('moving-back', 0));
-        }
-      } else {
-        // back at the start; a loop's copy now sits exactly where the text began, so snap back unseen
-        this.slideReset('at-start');
-        this.slideAfter(hold, this.slideMode === 'loop'
-          ? this.slideLoop
-          : () => this.slideMeasure() && this.slideMove('moving-forward', this.slideRuntime.distance));
-      }
-    },
-
     usesHeadlineVisualStyle() {
       if (this.variant) {
         return this.variant.startsWith('headline-');
