@@ -1,0 +1,23 @@
+packages/dialtone-react/components/RichTextEditor/RichTextEditor.stories.tsx
+  s_1aad51ccd618ba::t_b42d5e1789eeaf 53,142
+packages/dialtone-react/components/RichTextEditor/RichTextEditor.test.tsx
+  s_1aad51ccd618ba::t_a739a4a32f721c 12,190-1703,1828-1835,1837-2327
+packages/dialtone-react/components/RichTextEditor/RichTextEditor.tsx
+  s_1aad51ccd618ba::t_09957d42ee47f3 1255-1259
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6260e0e771d3a7928de4e6dd202ce9f40046fe40",
+  "prompts": {},
+  "sessions": {
+    "s_1aad51ccd618ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1927d91e-f924-442f-8d3c-8a29843b7a1b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
