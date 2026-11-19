@@ -1,0 +1,30 @@
+packages/combinator/src/variants/variants_filter_pill.js
+  s_0a9611ea1eb760::t_bbd7e5da00d5ab 45-50,55-57
+  s_0a9611ea1eb760::t_e4b76e59bade48 58-59
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_0a9611ea1eb760::t_41863059f7e664 81-100,122-140
+packages/combinator/.github/documentation/internal/SYSTEM.md
+  s_0a9611ea1eb760::t_563c1db85ab63e 77-78,82-85
+packages/combinator/src/components/renderer/renderer.test.js
+  s_0a9611ea1eb760::t_8f84ee56fdf2e1 15-18,20,23-24,27-30,66-70,91-92,102-103
+packages/combinator/src/components/renderer/renderer_target.test.js
+  s_0a9611ea1eb760::t_4dfacd0028cf07 4,23,44,46,117-118,120,124-174
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_0a9611ea1eb760::t_d45759e45a8833 195-205,218
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bb80814094c7dfcbab07984318d2569025e5c6fb",
+  "prompts": {},
+  "sessions": {
+    "s_0a9611ea1eb760": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d1c8-cd2d-7bd1-8634-bc390315ea5d",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

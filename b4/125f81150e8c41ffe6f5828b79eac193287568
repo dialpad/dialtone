@@ -1,0 +1,33 @@
+apps/dialtone-documentation/docs/components/slider.md
+  s_0d6a81bc191862::t_c497d08b258b09 291-292,495-496
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_0d6a81bc191862::t_54dfccffa6d1b9 10,171-179
+packages/combinator/src/variants/variants_slider.js
+  s_0d6a81bc191862::t_d92e4a14a0cf6c 8-11
+packages/dialtone-vue/components/Slider/Composables/UseSliderCollisionAvoidance.js
+  s_0d6a81bc191862::t_4dcab9263b520a 220
+packages/dialtone-vue/components/Slider/Slider.stories.js
+  s_0d6a81bc191862::t_1e5b1b50c526f3 226-229,242-247
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_0d6a81bc191862::t_7dd42a558e11ec 328-344,3538-3540,3563-3571
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_0d6a81bc191862::t_b597e43f758aff 49-50,171,186,450-457,501-509
+packages/dialtone-vue/components/Slider/SliderDefault.story.vue
+  s_0d6a81bc191862::t_45759211f7b07a 24,28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b4125f81150e8c41ffe6f5828b79eac193287568",
+  "prompts": {},
+  "sessions": {
+    "s_0d6a81bc191862": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1462f-99ab-7d80-940e-c2556bf66597",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

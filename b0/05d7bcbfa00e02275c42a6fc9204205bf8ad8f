@@ -1,0 +1,39 @@
+packages/dialtone-react/common/custom-emoji.json
+  s_87d0f63b120eb7::t_7a21cefd1fcc60 1-35
+packages/dialtone-react/common/emoji.ts
+  s_87d0f63b120eb7::t_a936a9a07c863c 1-237
+packages/dialtone-react/components/Emoji/Emoji.parity.tsx
+  s_81d51147cf49ec::t_2cec4ee68f1bb1 1-4
+packages/dialtone-react/components/Emoji/Emoji.stories.tsx
+  s_81d51147cf49ec::t_377c8a99bf4fab 1-81
+packages/dialtone-react/components/Emoji/Emoji.test.tsx
+  s_81d51147cf49ec::t_82b262487e77db 1-143
+packages/dialtone-react/components/Emoji/Emoji.tsx
+  s_81d51147cf49ec::t_d1979b4ece275e 1-123
+packages/dialtone-react/components/Emoji/index.ts
+  s_81d51147cf49ec::t_2aa5a639004fd2 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b005d7bcbfa00e02275c42a6fc9204205bf8ad8f",
+  "prompts": {},
+  "sessions": {
+    "s_81d51147cf49ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "12869bc0-ac01-4f34-9755-74c3188e5f36",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_87d0f63b120eb7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "442e71ed-9091-44b6-b09c-e8116970a462",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
