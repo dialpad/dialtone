@@ -1,0 +1,45 @@
+packages/dialtone-css/lib/build/less/utilities/interactivity.less
+  h_c15b5755534093 56-60
+packages/dialtone-tokens/tokens/base/default.json
+  h_c15b5755534093 1039,1045,1052-1056
+apps/dialtone-documentation/docs/utilities/interactivity/outline.md
+  s_be0c6411b4addc::t_97c0f4ad2dc0b1 9,26,32
+  s_be0c6411b4addc::t_f7ad12dcbb5e9e 27-31,33-34,41-42,44,49-50,57-60,62-63,70
+  h_c15b5755534093 17-18,35-40,43,45-48,51-56,61,64-69
+  s_be0c6411b4addc::t_ad7a342504b8be 4
+apps/dialtone-documentation/docs/_data/interactivity.json
+  h_c15b5755534093 87,91-96
+packages/dialtone-tokens/postcss/constants.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 15-17
+  h_c15b5755534093 27
+packages/dialtone-tokens/postcss/layered-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 4,53-64
+packages/dialtone-tokens/postcss/dialtone-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 7,96-108
+packages/dialtone-css/postcss/dialtone-generators.cjs
+  s_be0c6411b4addc::t_f7ad12dcbb5e9e 1173
+  s_be0c6411b4addc::t_97c0f4ad2dc0b1 1164
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenExample.vue
+  h_c15b5755534093 71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "bc7854353500ac56c75f486857ac6a9631b24dc6",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_be0c6411b4addc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f80b4-22bf-7f21-8386-5ab135d7ea3d",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

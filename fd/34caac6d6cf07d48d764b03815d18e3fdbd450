@@ -1,0 +1,56 @@
+packages/dialtone-docs/project.json
+  s_7f1d1d64baa803::t_6b8a93544ec03f 13
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_6b8a93544ec03f 21,24-25,57,60-61,126,129-130
+lookup-release.config.cjs
+  s_7f1d1d64baa803::t_6b8a93544ec03f 1-98
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 6,49-55,78,104
+packages/dialtone-mcp-server/tests/startup.test.mjs
+  s_7f1d1d64baa803::t_6b8a93544ec03f 118
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_6b8a93544ec03f 37,39,42,66
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_7f1d1d64baa803::t_6b8a93544ec03f 10,27-31,38,43-44,46-77,79-83,85-96,99-131,133-135
+packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 6,66-68,99,133
+  s_7f1d1d64baa803::t_652706e39f707f 134
+.claude/rules/documentation-site.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 38
+.github/workflows/dialtone-documentation-tests.yml
+  s_7f1d1d64baa803::t_6b8a93544ec03f 16,28
+scripts/retrieval/cache-inputs.test.mjs
+  s_7f1d1d64baa803::t_6b8a93544ec03f 135-143
+.github/COMMIT_CONVENTION.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 46-50,52
+.agents/resources/rules/documentation-site.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 28
+packages/dialtone-cli/release-ci.config.cjs
+  s_7f1d1d64baa803::t_6b8a93544ec03f 4,13,15
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 70
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 379-380,391
+packages/dialtone-mcp-server/src/index.ts
+  s_7f1d1d64baa803::t_6b8a93544ec03f 41
+packages/dialtone-mcp-server/release-ci.config.cjs
+  s_7f1d1d64baa803::t_6b8a93544ec03f 4,13,15
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_6b8a93544ec03f 49-54,327
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fd34caac6d6cf07d48d764b03815d18e3fdbd450",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

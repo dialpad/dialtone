@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Modal/Modal.stories.tsx
+  s_667d14b83b37ba::t_9329835990a3de 4,285-288,509-513
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4d9af28bc6ca5f499a7584d65c26bc0fa796500f",
+  "prompts": {},
+  "sessions": {
+    "s_667d14b83b37ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ca428abb-fb9e-4ad2-a435-752024f7272b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
