@@ -1,0 +1,28 @@
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_0b0c8b1c5d0f05::t_4a8a728526b238 92
+packages/combinator/.github/documentation/internal/SYSTEM.md
+  s_0b0c8b1c5d0f05::t_765be7b1544db8 68-73
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_0b0c8b1c5d0f05::t_82e72d38da5afc 354-357,359
+packages/combinator/src/components/renderer/renderer_target.test.js
+  s_0b0c8b1c5d0f05::t_4b82a196d519f8 57
+  s_0b0c8b1c5d0f05::t_ae547b2fc88059 58-95
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_0b0c8b1c5d0f05::t_d22cb2b0f91970 181-193,195-199
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "98a36830d89bf34fda64de0903031ee0f4262dc6",
+  "prompts": {},
+  "sessions": {
+    "s_0b0c8b1c5d0f05": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4fb0e89a-f5fb-4aea-a1ae-28850ce611db",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

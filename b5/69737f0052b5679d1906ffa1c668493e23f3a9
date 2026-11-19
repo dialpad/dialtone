@@ -1,0 +1,21 @@
+.agents/evals/run-skill-contract-evals.mjs
+  s_7f1d1d64baa803::t_d85dbeabcbaf39 552-557
+.agents/skills/doc-sync-check/evals/source-docs-map.json
+  s_7f1d1d64baa803::t_e7fa8d698c8207 11-12,76-78,88-89,99-100,110-111,120-121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b569737f0052b5679d1906ffa1c668493e23f3a9",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
