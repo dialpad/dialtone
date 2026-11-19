@@ -40,14 +40,14 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
 
 ## Workflow
 
-1. **Scope.** Fix it once, before any review. Each shell call starts fresh, so write down the base SHA and reuse it as `BASE` in later snippets.
+1. **Scope.** Fix it once, before any review. Each shell call starts fresh, so write down the base branch, base SHA and head SHA and reuse them as `B`, `BASE` and `HEAD_SHA` in later snippets.
 
    ```sh
    export pnpm_config_verify_deps_before_run=false   # pnpm 11 otherwise installs first and can rewrite pnpm-lock.yaml; repeat in every shell call
    B=staging   # or the PR's base branch
    git fetch origin "$B"
    BASE=$(git merge-base "origin/$B" HEAD); echo "$BASE"
-   git rev-parse HEAD; git diff --stat "$BASE"; git ls-files -o --exclude-standard
+   HEAD_SHA=$(git rev-parse HEAD); echo "$HEAD_SHA"; git diff --stat "$BASE"; git ls-files -o --exclude-standard
    ```
 
    - Record base SHA, head SHA, size and the file list (`FILES`, one path per line, reused like `BASE`). Staged and unstaged changes are in scope. `git ls-files -o` only lists candidates: in a dirty checkout it can pick up unrelated work or scratch notes, so add only the untracked files that belong to this change, ask when unsure, and name the rest as excluded in the report. `git diff` leaves untracked files out, so add each in-scope one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size. Use this same scoped list for the review, package selection and any follow-on fixes.
@@ -125,9 +125,13 @@ Lead with what to fix.
 So a later push makes a stale verdict visible, record the verdict against the commit it checked. In report-only and author modes, write it beside the repo's git data, outside the working tree (review mode writes nothing, since the checkout is not the PR). `tree=dirty` means a file in the scoped list was uncommitted, so the SHA does not cover it.
 
 ```sh
+B=<base branch from step 1>; HEAD_SHA=<head SHA from step 1>
+[ "$(git rev-parse HEAD)" = "$HEAD_SHA" ] || { echo "HEAD moved since step 1: recapture scope and rerun the checks"; exit 1; }
 R=$(git rev-parse --git-path pr-prep-verdict)
-printf 'verdict=%s\nhead=%s\nbase=%s\ntree=%s\n' "<verdict>" "$(git rev-parse HEAD)" "$B" "<clean|dirty>" > "$R"
+printf 'verdict=%s\nhead=%s\nbase=%s\ntree=%s\n' "<verdict>" "$HEAD_SHA" "$B" "<clean|dirty>" > "$R"
 ```
+
+`head` is the commit step 1 captured and the checks gated, not whatever `HEAD` is when the record is written.
 
 `base` is the base branch name from step 1, not its SHA: the branch tip moves with every merge, but a PR retargeted to another branch needs a new review.
 

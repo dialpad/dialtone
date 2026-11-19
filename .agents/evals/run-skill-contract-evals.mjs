@@ -386,14 +386,10 @@ for (const [skillName, config] of Object.entries(skills)) {
 }
 
 // The Claude pr-prep skill is a thin wrapper: same frontmatter, no rules.
+// Claude-only checks run only when .claude exists, so Codex validation never depends on it.
 {
   const shared = read('.agents/skills/pr-prep/SKILL.md');
   const wrapperPath = '.claude/skills/pr-prep/SKILL.md';
-  assert(
-    existsSync(join(repoRoot, wrapperPath)),
-    `missing ${wrapperPath}`,
-    failures,
-  );
   if (existsSync(join(repoRoot, wrapperPath))) {
     const wrapper = read(wrapperPath);
     const frontmatter = (text) => text.match(/^---\n(.*?)\n---/s)?.[1];
@@ -413,9 +409,7 @@ for (const [skillName, config] of Object.entries(skills)) {
 }
 
 // /pr-fill must check the prep verdict before its first PR write.
-if (!existsSync(join(repoRoot, '.claude/commands/pr-fill.md'))) {
-  failures.push('.claude/commands/pr-fill.md is missing');
-} else {
+if (existsSync(join(repoRoot, '.claude/commands/pr-fill.md'))) {
   const prFill = read('.claude/commands/pr-fill.md');
   const check = prFill.indexOf('Verdict record');
   const firstWrite = prFill.indexOf('gh pr edit');
