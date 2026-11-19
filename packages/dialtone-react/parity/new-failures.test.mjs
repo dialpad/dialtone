@@ -31,14 +31,15 @@ const OK = r => [r, '✅ clean'];
 const missingStory = '### Story parity\n\nVue stories with no React story of the same id (title plus export name):\n'
   + '- components-stack--align-self (export `AlignSelf`)';
 const stale = gateLog([OK('Typecheck'), OK('Lint'), ['Story parity', '❌ 1 story missing']], missingStory);
+const linesOf = (failures, check) => [...failures.failing.get(check).keys()];
 
 test('gateFailures: failing checks with their detail lines, or their row\'s result without any; Nx lines aren\'t details', () => {
   const { failing } = gateFailures(stale);
   assert.deepEqual([...failing.keys()], ['Story parity']);
-  assert.deepEqual([...failing.get('Story parity')],
+  assert.deepEqual(linesOf({ failing }, 'Story parity'),
     ['Vue stories with no React story of the same id (title plus export name):', '- components-stack--align-self (export `AlignSelf`)']);
   const bare = gateFailures(gateLog([['DOM parity', '❌ Vue side failed'], ['Typecheck', '⏭ skipped: CI\'s check job typechecks the package']]));
-  assert.deepEqual([...bare.failing.entries()].map(([c, l]) => [c, [...l]]), [['DOM parity', ['Vue side failed']]]);
+  assert.deepEqual([...bare.failing.keys()].map(c => [c, linesOf(bare, c)]), [['DOM parity', ['Vue side failed']]]);
   assert.equal(gateFailures('pnpm: command failed before the gate ran'), null);
   assert.equal(gateFailures(gateLog([OK('Lint')])).failing.size, 0);
 });
@@ -61,6 +62,15 @@ test('newFailures: only what the base doesn\'t show, line for line', () => {
   assert.equal(newFailures(base, null).length, 2);
 });
 
+test('a line the change shows more often than the base is new, once for each extra time', () => {
+  // it.each cases without a placeholder share a title, and gate.mjs lists each one that's missing.
+  const titles = n => gateFailures(gateLog([['Test parity', '❌ 1/3 Vue tests ported']],
+    `### Test parity\n\nVue tests with no React test of the same title:\n${'- DtX › keeps an empty header\n'.repeat(n)}`));
+  assert.deepEqual(newFailures(titles(2), titles(2)), []);
+  assert.deepEqual(newFailures(titles(1), titles(2)), []);
+  assert.deepEqual(newFailures(titles(3), titles(1)), ['Test parity: - DtX › keeps an empty header', 'Test parity: - DtX › keeps an empty header']);
+});
+
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'new-failures-'));
 after(() => fs.rmSync(dir, { recursive: true, force: true }));
 const cli = (change, base) => {
@@ -75,7 +85,7 @@ test('gateFailures ends at pnpm\'s and Nx\'s lines, and writes the checkout and 
   const change = gateFailures(trace('/home/runner/work/dialtone/dialtone'), '/home/runner/work/dialtone/dialtone');
   const base = gateFailures(trace('/home/runner/work/_temp/base'), '/home/runner/work/_temp/base');
   assert.deepEqual(newFailures(change, base), []);
-  assert.deepEqual([...change.failing.get('DOM parity')], ['TypeError: x is undefined',
+  assert.deepEqual(linesOf(change, 'DOM parity'), ['TypeError: x is undefined',
     'at <root>/packages/dialtone-react/parity/react/dom.test.tsx:151:30',
     'at file://<root>/node_modules/.pnpm/@vitest+runner@4.1.2/node_modules/@vitest/runner/dist/chunk.js:1893:20',
     'see /tmp/parity-stack-XXXXXX/react-dom.json']);
@@ -83,22 +93,35 @@ test('gateFailures ends at pnpm\'s and Nx\'s lines, and writes the checkout and 
   assert.equal(newFailures(gateFailures(trace('/a')), gateFailures(trace('/b'))).length, 2);
 });
 
-test('an excerpt under a listed item isn\'t compared; the item is, and so is a block that isn\'t an excerpt', () => {
-  const unit = (excerpt, outside = 'Error: boom') => gateLog([['Unit tests', '❌ 1 failed, 30 passed']],
-    `### Unit tests\n\n- DtStack › renders\n\`\`\`\n${excerpt}\n\`\`\`\nFailures outside any test:\n\`\`\`\n${outside}\n\`\`\``);
-  const base = gateFailures(unit('AssertionError: expected \'<div…\' to be \'<span…\'\n    at /base/x.test.tsx:3:4'));
-  assert.deepEqual([...base.failing.get('Unit tests')], ['- DtStack › renders', 'Failures outside any test:', 'Error: boom']);
-  // Another excerpt under the same item (a path, a cut message, another gate version's format): old.
-  assert.deepEqual(newFailures(gateFailures(unit('AssertionError: expected \'<p…\' to be \'<span…\'\n    at /head/x.test.tsx:9:9')), base), []);
-  // Another item, or another line in a block that isn't an excerpt: new.
-  assert.deepEqual(newFailures(gateFailures(unit('x').replace('DtStack › renders', 'DtStack › gaps')), base), ['Unit tests: - DtStack › gaps']);
-  assert.deepEqual(newFailures(gateFailures(unit('x', 'Error: another')), base), ['Unit tests: Error: another']);
-  // A lint block has no item before it, so it's compared line by line.
+test('under the checks that run Vitest, a fenced block isn\'t compared; what names it is', () => {
+  const unit = (excerpt, outside) => gateLog([['Unit tests', '❌ 1 failed, 30 passed']], `### Unit tests\n\n- DtStack › renders\n\`\`\`\n${excerpt}\n\`\`\``
+    + (outside ? `\nFailures outside any test:\n\`\`\`\n${outside}\n\`\`\`` : ''));
+  const base = gateFailures(unit('AssertionError: expected \'<div…\' to be \'<span…\'\n    at /base/x.test.tsx:3:4', 'Error: boom\n   Start at  11:06:21\n   Duration  142ms'));
+  assert.deepEqual(linesOf(base, 'Unit tests'), ['- DtStack › renders', 'Failures outside any test:']);
+  // Another excerpt under the same item, or other Vitest output outside any test (its timings, counts, the test it
+  // blames for an unhandled error): old.
+  assert.deepEqual(newFailures(gateFailures(unit('AssertionError: expected \'<p…\' to be \'<span…\'\n    at /head/x.test.tsx:9:9', 'Error: boom\n   Start at  11:07:40\n   Duration  139ms')), base), []);
+  assert.deepEqual(newFailures(gateFailures(unit('x', 'Error: another')), base), []);
+  // Another item, or a failure outside any test where the base has none: new.
+  assert.deepEqual(newFailures(gateFailures(unit('x', 'y').replace('DtStack › renders', 'DtStack › gaps')), base), ['Unit tests: - DtStack › gaps']);
+  assert.deepEqual(newFailures(base, gateFailures(unit('x'))), ['Unit tests: Failures outside any test:']);
+
+  // The Vue DOM side prints its failures outside any case right after the last case's excerpt, with nothing naming
+  // them: they count as one line of their own.
+  const vueDom = broken => gateFailures(gateLog([['DOM parity', '❌ Vue side failed']], `### DOM parity\n\n- stack › default\n\`\`\`\nTypeError: x\n\`\`\``
+    + (broken ? `\n\`\`\`\n${broken}\n\`\`\`` : '')));
+  assert.deepEqual(linesOf(vueDom('goldens.test.js: Cannot redefine property: ClipboardEvent'), 'DOM parity'), ['- stack › default', '(failures outside the listed items)']);
+  assert.deepEqual(newFailures(vueDom('goldens.test.js: ResizeObserver polyfill failed'), vueDom('goldens.test.js: Cannot redefine property: ClipboardEvent')), []);
+  assert.deepEqual(newFailures(vueDom('goldens.test.js: ResizeObserver polyfill failed'), vueDom()), ['DOM parity: (failures outside the listed items)']);
+  // A block that opens the section: the row's result says what it is.
+  assert.deepEqual(linesOf(gateFailures(gateLog([['Unit tests', '❌ none ran']], '### Unit tests\n\n```\nError: Cannot find module \'./x\'\n```')), 'Unit tests'), ['none ran']);
+
+  // Lint's and Typecheck's blocks are compared line by line.
   const lint = l => gateFailures(gateLog([['Lint', '❌ 1 error']], `### Lint\n\n\`\`\`\n${l}\n\`\`\``));
   assert.deepEqual(newFailures(lint('Stack.tsx:3:1 x (semi)'), lint('Stack.tsx:3:1 x (semi)')), []);
   assert.deepEqual(newFailures(lint('Stack.tsx:4:1 y (eqeqeq)'), lint('Stack.tsx:3:1 x (semi)')), ['Lint: Stack.tsx:4:1 y (eqeqeq)']);
-  // An excerpt that never closes (a cut log) keeps everything after it out.
-  assert.deepEqual([...gateFailures(gateLog([['Unit tests', '❌ 1']], '### Unit tests\n\n- a › b\n```\nmessage')).failing.get('Unit tests')], ['- a › b']);
+  // A block that never closes (a cut log) keeps everything after it out.
+  assert.deepEqual(linesOf(gateFailures(gateLog([['Unit tests', '❌ 1']], '### Unit tests\n\n- a › b\n```\nmessage')), 'Unit tests'), ['- a › b']);
 });
 
 test('the CLI: exit 0 only when every failure was on the base already, and lists what\'s new', () => {
@@ -112,4 +135,9 @@ test('the CLI: exit 0 only when every failure was on the base already, and lists
   assert.equal(cli(gateLog([OK('Lint')]), stale).status, 1);
   assert.equal(cli('crashed before the summary', stale).status, 1);
   assert.equal(cli(undefined, stale).status, 1);
+  // A list longer than a pipe takes at once comes through whole.
+  const many = Array.from({ length: 3000 }, (_, i) => `- components-stack--story-${i} (export \`Story${i}\`)`).join('\n');
+  const long = cli(gateLog([['Story parity', '❌ 3000']], `### Story parity\n\nVue stories with no React story of the same id (title plus export name):\n${many}`), gateLog([OK('Story parity')]));
+  assert.equal(long.status, 1);
+  assert.equal(long.stdout.trim().split('\n').length, 3001);
 });

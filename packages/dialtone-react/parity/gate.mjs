@@ -73,7 +73,9 @@ function vitest (cwd, args, report, env = {}) {
   const json = readJson(report);
   const tests = results(json);
   const files = json?.testResults ?? [];
-  const output = `${proc.stdout}\n${proc.stderr}`;
+  // Without its colours, which are on in CI: they sit inside the banners section() looks for.
+  // eslint-disable-next-line no-control-regex
+  const output = `${proc.stdout}\n${proc.stderr}`.replace(/\x1b\[[0-9;]*m/g, '');
   // The default reporter's section that starts with the banner `marker` (its first 30 lines), or ''.
   const section = marker => { const at = output.search(marker); return at < 0 ? '' : output.slice(at).trim().split('\n').slice(0, 30).join('\n'); };
   const outside = files.filter(f => f.status === 'failed' && !(f.assertionResults ?? []).some(a => a.status === 'failed'));
@@ -284,7 +286,7 @@ if (isComponent) {
 
 const sha = spawnSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: pkg, encoding: 'utf8' }).stdout?.trim() || 'unknown';
 const passed = rows.every(([, r]) => !r.startsWith('❌'));
-console.log([
+const summary = [
   `#### Parity gate: \`${unit}\` at ${sha} ${passed ? '✅' : '❌'}`,
   '',
   '| Check | Result |',
@@ -292,6 +294,9 @@ console.log([
   ...rows.map(([c, r]) => `| ${c} | ${r} |`),
   '',
   ...details,
-].join('\n'));
-console.error(`\nartifacts: ${tmp}`);
-process.exit(passed ? 0 : 1);
+].join('\n');
+// A pipe (CI's, through Nx) takes 64 KiB at once, and process.exit doesn't wait for the rest: exit once it's written.
+process.stdout.write(`${summary}\n`, () => {
+  console.error(`\nartifacts: ${tmp}`);
+  process.exit(passed ? 0 : 1);
+});

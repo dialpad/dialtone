@@ -2,12 +2,14 @@
 // Whether a unit's gate failures on a change are new, or were there on its base already: a staging sync leaves units
 // failing until their resyncs merge, and a PR that gates one of them shouldn't fail for it. CI's gate job re-runs a
 // unit that failed on the base, and asks this. Only failures the base shows too are old. Compared are the failing
-// checks, and under each what gate.mjs lists: test titles, case names, story ids, and the lines of a block that isn't
-// an excerpt (lint and typecheck output, failures outside any test). A failing check the base passes, an item it
-// doesn't list, or a base gate that passed or didn't run, are new. The excerpt under a listed item isn't compared:
-// its paths, timings and cut messages differ between runs, checkouts and gate versions. So a different failure in an
-// item that already fails reads as old here; CI counts every failure of a unit whose own files a change touches,
-// so that unit can't pass before its own fix does.
+// checks, and under each the lines gate.mjs prints outside its fenced blocks (test titles, case names, story ids, the
+// lines that introduce a list or a block), plus the lines of a Lint or Typecheck block, each as often as it appears. A
+// failing check the base passes, a line the base shows fewer times, or a base gate that passed or didn't run, are new.
+// Under the checks that run Vitest, a fenced block isn't compared: it's Vitest's own output (a failure's excerpt, a
+// window of its report), whose paths, timings, counts and attributions differ between runs and checkouts. So a
+// different failure in an item that already fails, or outside any test where the base fails outside one too, reads as
+// old here; CI counts every failure of a unit whose own files a change touches, so that unit can't pass before its
+// own fix does.
 //   node packages/dialtone-react/parity/new-failures.mjs <gate log on the change> <gate log on the base> \
 //     [<the change's checkout> <the base's checkout>]
 // Exit 0 when nothing is new; 1 when something is, printed as Markdown. Both logs are the gate's standard output only.
@@ -24,6 +26,11 @@ const END = /^\s*(?:\[?ELIFECYCLE\]?\s|ERR_PNPM_|>?\s*NX\s|artifacts: )/;
 const ANSI = /\x1b\[[0-9;]*m/g;
 // The gate's own temp directories (mkdtemp's six random characters).
 const TEMP = /(parity-[a-z0-9-]+-)[A-Za-z0-9]{6}\b/g;
+// gate.mjs's checks that run Vitest, whose fenced blocks are Vitest's output.
+const VITEST_CHECKS = new Set(['Unit tests', 'Test parity', 'DOM parity']);
+// Stands in for such a block when nothing names it: the Vue DOM side prints its failures outside any case right
+// after the last case's excerpt. A block that opens a section needs none: the check's result says what it is.
+const UNNAMED = '(failures outside the listed items)';
 
 // Every spelling of a checkout a log can hold: as given, and as the real path (macOS's /tmp is /private/tmp).
 const spellings = (root) => {
@@ -34,11 +41,11 @@ const spellings = (root) => {
 };
 
 /**
- * A gate log (gate.mjs' output, Nx's around it) as { failing: Map<check, Set<line>> }, or null when it holds no gate
- * summary (the gate didn't run, or crashed first). A failing check's lines are what gate.mjs printed under its
- * "### <check>" heading, less the excerpts (a fenced block right after a "- " item), or its row's result when that
- * leaves nothing. `root`, the checkout the gate ran in, is written as <root>, and the gate's temp directories lose
- * their random part.
+ * A gate log (gate.mjs' output, Nx's around it) as { failing: Map<check, Map<line, count>> }, or null when it holds
+ * no gate summary (the gate didn't run, or crashed first). A failing check's lines are what gate.mjs printed under
+ * its "### <check>" heading, with how often each appears, less the fenced blocks of the checks that run Vitest; or
+ * its row's result when that leaves nothing. `root`, the checkout the gate ran in, is written as <root>, and the
+ * gate's temp directories lose their random part.
  */
 export function gateFailures (log, root) {
   let text = log.replace(ANSI, '');
@@ -49,42 +56,55 @@ export function gateFailures (log, root) {
   const failing = new Map();
   const results = new Map();
   let section = null;
-  let block = null; // inside a fenced block: 'excerpt' or 'kept'
-  let previous = ''; // the last non-blank line outside a block, in this section
+  let block = null; // inside a fenced block: 'kept' (compared) or 'skipped'
+  let afterBlock = false; // the last non-blank thing in this section was a block
+  const add = (line) => {
+    const counts = failing.get(section);
+    if (counts) counts.set(line, (counts.get(line) ?? 0) + 1);
+  };
   for (const line of lines.slice(start + 1)) {
     if (/^\s*```/.test(line)) {
-      block = block ? null : (previous.startsWith('- ') ? 'excerpt' : 'kept');
+      if (block) {
+        block = null;
+        afterBlock = true;
+      } else if (VITEST_CHECKS.has(section)) {
+        block = 'skipped';
+        if (afterBlock) add(UNNAMED);
+      } else block = 'kept';
       continue;
     }
     if (block) {
-      if (block === 'kept' && section && failing.has(section) && line.trim()) failing.get(section).add(line.trim());
+      if (block === 'kept' && line.trim()) add(line.trim());
       continue;
     }
     if (END.test(line)) break;
     const row = !section && ROW.exec(line);
     if (row) {
-      if (row[2] === '❌') { failing.set(row[1], new Set()); results.set(row[1], row[3].trim()); }
+      if (row[2] === '❌') { failing.set(row[1], new Map()); results.set(row[1], row[3].trim()); }
       continue;
     }
     const heading = /^### (.+?)\s*$/.exec(line);
-    if (heading) { section = heading[1]; previous = ''; continue; }
+    if (heading) { section = heading[1]; afterBlock = false; continue; }
     if (!line.trim()) continue;
-    previous = line.trim();
-    if (section && failing.has(section)) failing.get(section).add(previous);
+    afterBlock = false;
+    add(line.trim());
   }
-  for (const [check, details] of failing) if (!details.size) details.add(results.get(check));
+  for (const [check, counts] of failing) if (!counts.size) counts.set(results.get(check), 1);
   return { failing };
 }
 
 /**
- * What fails on the change but not on the base: ["<check>: <line>", ...], [] when nothing is new. A base whose gate
- * didn't run (null) or passed (no failing checks) makes every failure on the change new.
+ * What fails on the change but not on the base: ["<check>: <line>", ...], a line once for each time the change shows
+ * it more often than the base; [] when nothing is new. A base whose gate didn't run (null) or passed (no failing
+ * checks) makes every failure on the change new.
  */
 export function newFailures (change, base) {
   const fresh = [];
-  for (const [check, lines] of change?.failing ?? []) {
+  for (const [check, counts] of change?.failing ?? []) {
     const before = base?.failing.get(check);
-    for (const line of lines) if (!before?.has(line)) fresh.push(`${check}: ${line}`);
+    for (const [line, count] of counts) {
+      for (let seen = before?.get(line) ?? 0; seen < count; seen++) fresh.push(`${check}: ${line}`);
+    }
   }
   return fresh;
 }
@@ -99,7 +119,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const fresh = !change ? ['the gate printed no summary']
     : !change.failing.size ? ['the run failed, though no check in its summary did']
       : newFailures(change, base);
-  if (!fresh.length) process.exit(0);
-  console.log(base ? fresh.map(l => `- ${l}`).join('\n') : `- the base's gate didn't run, so nothing could be compared\n${fresh.map(l => `- ${l}`).join('\n')}`);
-  process.exit(1);
+  if (fresh.length) {
+    console.log(base ? fresh.map(l => `- ${l}`).join('\n') : `- the base's gate didn't run, so nothing could be compared\n${fresh.map(l => `- ${l}`).join('\n')}`);
+    // Not process.exit: it would cut a long list at what the pipe took at once (64 KiB).
+    process.exitCode = 1;
+  }
 }
