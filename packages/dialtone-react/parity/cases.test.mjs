@@ -46,18 +46,18 @@ test('a slot string renders as in Combinator: its scope\'s names are locals, and
     '<div><button aria-expanded="true">Menu</button></div>');
 });
 
-test('a slot string that opens with <template v-if> compiles, and renders its content only when the condition holds', async () => {
-  const c = { slots: { optionEnd: `<template v-if="option.value === 'unread'">\n  <b>12</b>\n  <span>unread</span>\n</template>` } };
-  const template = slotTemplates(c).optionEnd;
-  assert.match(await renderSlot(template, { option: { value: 'unread' } }), /<b>12<\/b><span>unread<\/span>/);
-  assert.doesNotMatch(await renderSlot(template, { option: { value: 'all' } }), /12/);
+test('a slot without a scopeName is left as it is, whatever it opens with', () => {
+  const source = `<template v-if="option.value === 'unread'"><b>12</b></template>`;
+  const { optionEnd, icon } = slotTemplates({ slots: { optionEnd: source, icon: ' {{ label }} ' } });
+  assert.equal(optionEnd, source);
+  assert.equal(icon, ' {{ label }} ');
 });
 
-test('a slot string VTU could already compile renders as it did when VTU wrapped it', async () => {
+test('a slot string with a scopeName renders as it did when VTU wrapped it, apart from the scope\'s alias', async () => {
   const scope = { label: 'Label', iconSize: 300 };
   // Text at an edge too: VTU trims what it wraps (emoji-text-wrapper's default slot ends with a space).
   for (const source of ['\n  {{ label }} <i :data-size="iconSize" />\n', ' Text at both edges, {{ label }} ']) {
-    const { icon } = slotTemplates({ slots: { icon: source } });
+    const { icon } = slotTemplates({ slots: { icon: source }, scopeNames: { icon: 'iconScope' } });
     assert.equal(await renderSlot(icon, scope), await renderSlot(source, scope));
   }
 });

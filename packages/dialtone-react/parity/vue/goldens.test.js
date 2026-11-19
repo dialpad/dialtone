@@ -197,21 +197,12 @@ function slotsOf (c, calls, unstable) {
   const slotRenders = {};
   const slotContext = [];
   for (const [slot, tpl] of Object.entries(slotTemplates(c))) {
-    if (!scopes.has(slot)) {
-      // A slot the component never rendered still gets its content, rendered with no scope or context. Content that
-      // reads its scope can't render without one (variants_filter_pill.js' optionEnd, whose rows are in a closed
-      // overlay), so it gets no scope renders instead: Vue never rendered it with any scope, so a port that renders
-      // it gets the React side's unmatched-scope marker. Only rendering can fail here: VTU compiles every slot string
-      // when it mounts, so one that doesn't compile has already failed the real render.
-      const render = quietly(() => renderSlot(tpl, { scope: {}, provides: null, base: null }, ids));
-      if (render) slotHtml[slot] = render.html;
-      else slotRenders[slot] = [];
-      continue;
-    }
-    const renders = scopes.get(slot).map(call => {
+    // A slot the component never rendered still gets its content, rendered with no scope or context.
+    const seen = scopes.get(slot) ?? [{ scope: {}, provides: null, base: null }];
+    const renders = seen.map(call => {
       // The scope first, so an id the component passed in it is named before the slot's own ids.
       const scope = hasKeys(call.scope) ? canonicalScope(call.scope, generated, ids.namer) : null;
-      return { scope, ...renderSlot(tpl, call, ids) };
+      return { scope, ...renderSlot(String(tpl), call, ids) };
     });
     if (renders.some(r => r.context)) slotContext.push(slot);
     if (renders.some(r => r.scope)) {
