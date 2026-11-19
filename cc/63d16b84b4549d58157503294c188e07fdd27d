@@ -1,0 +1,174 @@
+packages/dialtone-react/components/Stack/Stack.parity.tsx
+  s_3f4329e338a6ec::t_63b6c4a1c206b0 1-4
+packages/dialtone-react/components/Stack/Stack.stories.tsx
+  s_3f4329e338a6ec::t_f55d17f832d8d4 1-371
+packages/dialtone-react/components/Stack/Stack.tsx
+  s_3f4329e338a6ec::t_3dc07df1c6ab3d 1-109
+packages/dialtone-react/components/Stack/StackConstants.ts
+  s_3f4329e338a6ec::t_97dba4c80170a1 1-62
+packages/dialtone-react/components/Stack/Utils.ts
+  s_3f4329e338a6ec::t_7a6fe518ca8c0d 1-160
+packages/dialtone-react/components/Stack/index.ts
+  s_3f4329e338a6ec::t_fcf2c1d349998d 1-12
+packages/dialtone-react/common/input-group/index.ts
+  s_dbd21b9d044745::t_ef205f8a6637cf 1-2
+packages/dialtone-react/common/input-group/input_group.test.ts
+  s_0e9625a5b97323::t_f9456ab15c1fb5 3-87,158-188
+  s_428d4b2b4c47a1::t_01e767363245f9 88-101
+  s_2defdf83601f66::t_4fec221b41eee5 2,102-104,106-122
+  h_65afbd07a56b87 1,105,123-157
+packages/dialtone-react/common/input-group/useInputGroup.ts
+  s_0e9625a5b97323::t_d5a2e3b327aa5f 2-76,86,89-121
+  s_59a290ab192a93::t_6b284fe9fd6ed6 77,82,84-85,87-88
+  h_65afbd07a56b87 1,78-81,83-85
+packages/dialtone-react/components/ValidationMessages/ValidationMessages.stories.tsx
+  s_2defdf83601f66::t_e40c259afbb626 9,233,329
+  h_65afbd07a56b87 7,114-116,234,287-297
+packages/dialtone-react/common/keyboard-list-navigation/HighlightIdContext.ts
+  h_65afbd07a56b87 1-13
+packages/dialtone-react/common/keyboard-list-navigation/dom.test.ts
+  h_65afbd07a56b87 1-138
+packages/dialtone-react/common/keyboard-list-navigation/dom.ts
+  h_65afbd07a56b87 1-153
+packages/dialtone-react/common/keyboard-list-navigation/index.ts
+  h_65afbd07a56b87 1-15
+packages/dialtone-react/common/keyboard-list-navigation/keyboard_list_navigation.test.tsx
+  h_65afbd07a56b87 1-152
+packages/dialtone-react/common/keyboard-list-navigation/keyboard_list_navigation_tester.tsx
+  h_65afbd07a56b87 1-48
+packages/dialtone-react/common/keyboard-list-navigation/useKeyboardListNavigation.test.tsx
+  h_65afbd07a56b87 1-195
+packages/dialtone-react/common/keyboard-list-navigation/useKeyboardListNavigation.ts
+  h_65afbd07a56b87 1-277
+packages/dialtone-react/common/scrollbar/Scrollbar.stories.tsx
+  h_65afbd07a56b87 1-68
+packages/dialtone-react/common/scrollbar/index.ts
+  h_65afbd07a56b87 1-10
+packages/dialtone-react/common/scrollbar/scrollbar.test.ts
+  h_65afbd07a56b87 1-518
+packages/dialtone-react/common/scrollbar/useScrollbar.ts
+  h_65afbd07a56b87 1-259
+packages/dialtone-react/common/use-indicator-animation/index.ts
+  h_65afbd07a56b87 1-8
+packages/dialtone-react/common/use-indicator-animation/useIndicatorAnimation.test.ts
+  h_65afbd07a56b87 1-255
+packages/dialtone-react/common/use-indicator-animation/useIndicatorAnimation.ts
+  h_65afbd07a56b87 1-169
+packages/dialtone-react/components/Checkbox/Checkbox.stories.tsx
+  h_65afbd07a56b87 5,214-217,408
+packages/dialtone-react/components/Link/Link.stories.tsx
+  h_65afbd07a56b87 3,173-186
+packages/dialtone-react/components/ModeIsland/ModeDirective.stories.tsx
+  h_65afbd07a56b87 5,32-37,56,58,60-63,66-69,71,80-90,94,99,118,120,123,149-150
+packages/dialtone-react/components/ModeIsland/ModeIsland.stories.tsx
+  h_65afbd07a56b87 2,77-90,106,131,142,152
+packages/dialtone-react/components/Radio/Radio.parity.tsx
+  h_65afbd07a56b87 1-9
+packages/dialtone-react/components/Radio/Radio.stories.tsx
+  h_65afbd07a56b87 1-345
+packages/dialtone-react/components/Radio/Radio.test.tsx
+  h_65afbd07a56b87 1-579
+packages/dialtone-react/components/Radio/Radio.tsx
+  h_65afbd07a56b87 1-212
+packages/dialtone-react/components/Radio/RadioConstants.ts
+  h_65afbd07a56b87 1-9
+packages/dialtone-react/components/Radio/index.ts
+  h_65afbd07a56b87 1-2
+packages/dialtone-react/components/Skeleton/Skeleton.parity.tsx
+  h_65afbd07a56b87 1-4
+packages/dialtone-react/components/Skeleton/Skeleton.stories.tsx
+  h_65afbd07a56b87 1-326
+packages/dialtone-react/components/Skeleton/Skeleton.test.tsx
+  h_65afbd07a56b87 1-245
+packages/dialtone-react/components/Skeleton/Skeleton.tsx
+  h_65afbd07a56b87 1-121
+packages/dialtone-react/components/Skeleton/SkeletonAnimation.ts
+  h_65afbd07a56b87 1-59
+packages/dialtone-react/components/Skeleton/SkeletonConstants.ts
+  h_65afbd07a56b87 1-53
+packages/dialtone-react/components/Skeleton/SkeletonListItem.tsx
+  h_65afbd07a56b87 1-85
+packages/dialtone-react/components/Skeleton/SkeletonParagraph.tsx
+  h_65afbd07a56b87 1-115
+packages/dialtone-react/components/Skeleton/SkeletonShape.tsx
+  h_65afbd07a56b87 1-71
+packages/dialtone-react/components/Skeleton/SkeletonText.tsx
+  h_65afbd07a56b87 1-87
+packages/dialtone-react/components/Skeleton/index.ts
+  h_65afbd07a56b87 1-16
+packages/dialtone-react/components/Text/Text.stories.tsx
+  h_65afbd07a56b87 3,249,255,262,268,272,280,286,292,295,303,309,322,325,333,336,342,345,353,366,374,397,411,413,421,434,445,457,465,471,478,481,483
+packages/dialtone-react/components/Tooltip/Tooltip.stories.tsx
+  h_65afbd07a56b87 9,366-370,373,391,393,412-413,428-429,469-470,483-484,498-499,513
+packages/dialtone-react/components/Tooltip/TooltipDirective.stories.tsx
+  h_65afbd07a56b87 5,69,90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cc63d16b84b4549d58157503294c188e07fdd27d",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_0e9625a5b97323": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8570125d-8e05-4afd-8107-91d87412fb51",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_3f4329e338a6ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f01ccb9-183a-423d-a4d0-04267594f938",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_428d4b2b4c47a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aa225b43-7baa-4392-8bc8-a325113705f5",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_59a290ab192a93": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6bcc3f8f-0caa-43e0-9e35-3440034d61c5",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_dbd21b9d044745": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4aa6f04-bfef-41da-81ad-ebcd64e10541",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_eca6346d1a5e77": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "490b4d0f-4c60-4867-af3c-d2c7acea6888",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
