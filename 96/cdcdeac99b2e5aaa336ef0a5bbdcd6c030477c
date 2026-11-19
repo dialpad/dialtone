@@ -1,0 +1,31 @@
+packages/dialtone-react/components/SelectMenu/SelectMenu.stories.tsx
+  s_109bd31a218e25::t_00a37b1c6954cc 213-238,241-242,247-254,259,263,266
+packages/dialtone-react/components/SelectMenu/SelectMenu.tsx
+  s_109bd31a218e25::t_9defe1a52a47b8 309-321
+packages/dialtone-react/components/SelectMenu/SelectMenuValidators.ts
+  s_3d2f00eb3c247a::t_b803315dd9296e 21-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "96cdcdeac99b2e5aaa336ef0a5bbdcd6c030477c",
+  "prompts": {},
+  "sessions": {
+    "s_109bd31a218e25": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "264554a3-266f-4684-b4a7-eb07b6dc5b0e",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_3d2f00eb3c247a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6e834fc6-6e29-4beb-a9e5-7e80883ce173",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

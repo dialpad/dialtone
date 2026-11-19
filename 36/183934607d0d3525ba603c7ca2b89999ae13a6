@@ -1,0 +1,21 @@
+packages/dialtone-react/components/EmojiTextWrapper/EmojiTextWrapper.test.tsx
+  s_66569f22eab2a5::t_f2276864f2c14f 3,212,214-254
+packages/dialtone-react/components/EmojiTextWrapper/EmojiTextWrapper.tsx
+  s_66569f22eab2a5::t_c1beafc7e51c4e 75-80,98-101,127-129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "36183934607d0d3525ba603c7ca2b89999ae13a6",
+  "prompts": {},
+  "sessions": {
+    "s_66569f22eab2a5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "71fa90d6-e8e3-4cc9-8f9b-32efb065b5aa",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

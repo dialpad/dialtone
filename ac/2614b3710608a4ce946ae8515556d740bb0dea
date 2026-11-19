@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Popover/Popover.test.tsx
+  s_4209c620012af6::t_6ef17436451725 1-947
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ac2614b3710608a4ce946ae8515556d740bb0dea",
+  "prompts": {},
+  "sessions": {
+    "s_4209c620012af6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "621d10b5-1328-4c2b-91ba-94f1b8e598d6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

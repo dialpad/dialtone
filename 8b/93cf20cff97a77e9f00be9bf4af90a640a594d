@@ -1,0 +1,19 @@
+packages/dialtone-react/common/focusgroup/Focusgroup.stories.tsx
+  s_0ceb79eaed39eb::t_ec1f1d9daa7735 1,124-127,442,444-462,465-470,474-481,483-485,487,556,559,561
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8b93cf20cff97a77e9f00be9bf4af90a640a594d",
+  "prompts": {},
+  "sessions": {
+    "s_0ceb79eaed39eb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4075cbb2-ae0b-4597-bf73-2f2449c72b38",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
