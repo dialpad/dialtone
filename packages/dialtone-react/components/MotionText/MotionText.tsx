@@ -145,6 +145,8 @@ interface Machine {
   slotReadPending: boolean;
   /** start() was called while the slot read was pending; it plays once the words are read. */
   startRequested: boolean;
+  /** pause() or skipToEnd() ran while the slot read was pending: the read still fills the words, but nothing plays. */
+  readCancelled: boolean;
 }
 
 /** The part of the machine that renders. */
@@ -314,6 +316,8 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     // The words are being re-read from the slot: play them once they're there, rather than completing on none
     if (m.slotReadPending) {
       m.startRequested = true;
+      // An explicit start() after a pause() or skipToEnd() in the same read plays: the cancellation was for the one before
+      m.readCancelled = false;
       return;
     }
 
@@ -352,6 +356,9 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
 
   /** Pause the animation */
   function pause () {
+    // A start() still waiting for the slot read doesn't start later on, nor does the autoStart or restart that read holds
+    m.startRequested = false;
+    if (m.slotReadPending) m.readCancelled = true;
     if (!m.isAnimating || m.isPaused) return;
 
     m.timelineElapsed = Date.now() - m.timelineStartedAt;
@@ -379,6 +386,7 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     m.isComplete = false;
     m.timelineElapsed = 0;
     m.startRequested = false;
+    m.readCancelled = false;
     m.animationKey++;
     commit();
     // Whole-text modes animate the root, which re-keying the words doesn't reset
@@ -390,6 +398,10 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     // A handle kept past unmount must not schedule events for a listener that's gone (Vue's emit is a no-op there)
     if (m.isUnmounted) return;
 
+    // The text stays at rest, as Vue's does: a start() still waiting for the slot read doesn't start later on, nor does
+    // the autoStart or restart that read holds
+    m.startRequested = false;
+    if (m.slotReadPending) m.readCancelled = true;
     showAllContent();
   }
 
@@ -463,7 +475,7 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     } else if (m.words.length && m.slotSource !== props().children) {
       // Word mode renders slot text as words, so the slot isn't mounted on an <Activity> reconnect. The words kept
       // from it are stale when the slot changed meanwhile: render the slot again and read it once it's there.
-      readSlotNextTick();
+      readSlotNextTick(true);
       return;
     }
     // Otherwise the retained words are still valid (reading the missing slot would empty them). Either way the
@@ -473,16 +485,22 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     // Whole-text modes start even while empty, e.g. a slot that streams its content in
     const startRequested = m.startRequested;
     m.startRequested = false;
-    if ((props().autoStart || startRequested) && (isWholeText() || m.words.length > 0)) {
+    const cancelled = m.readCancelled;
+    m.readCancelled = false;
+    if (!cancelled && (props().autoStart || startRequested) && (isWholeText() || m.words.length > 0)) {
       nextTick(start);
     }
   }
 
-  /** Clear the words so the slot renders, then read it on the next tick. start() waits for that read. */
-  function readSlotNextTick () {
+  /**
+   * Clear the words so the slot renders, then read it on the next tick. start() waits for that read. A new read drops
+   * an earlier cancellation, unless it only continues the read that was cancelled.
+   */
+  function readSlotNextTick (continuing = false) {
     m.words = [];
     m.wordWidths = [];
     commit();
+    if (!continuing) m.readCancelled = false;
     m.slotReadPending = true;
     nextTick(initializeContent);
   }
@@ -523,6 +541,7 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
       reset();
       m.words = [];
       commit();
+      m.readCancelled = false;
       m.slotReadPending = true;
       nextTick(() => {
         m.slotReadPending = false;
@@ -532,7 +551,9 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
         commit();
         const startRequested = m.startRequested;
         m.startRequested = false;
-        if (wasAnimating || startRequested) nextTick(start);
+        const cancelled = m.readCancelled;
+        m.readCancelled = false;
+        if (!cancelled && (wasAnimating || startRequested)) nextTick(start);
       });
       return;
     }
@@ -631,6 +652,7 @@ export function DtMotionText ({
       slotSource: children,
       slotReadPending: false,
       startRequested: false,
+      readCancelled: false,
     };
   }
   const machine = machineRef.current;
@@ -672,7 +694,10 @@ export function DtMotionText ({
   useLayoutEffect(() => {
     machine.isUnmounted = false;
     const stopWatchingReducedMotion = controller.initWatchReducedMotion();
-    controller.initializeContent();
+    // On an <Activity> reconnect, the watchers above may already be reading the slot (the text prop went, or the mode
+    // switched to or from word mode, while hidden): leave the content to that read, and have it apply autoStart too.
+    if (!machine.slotReadPending) controller.initializeContent();
+    else if (latest.current.autoStart) machine.startRequested = true;
 
     // Word widths change once web fonts load, which would misalign the gradient slices
     let active = true;
@@ -690,6 +715,7 @@ export function DtMotionText ({
       machine.isPaused = false;
       machine.slotReadPending = false;
       machine.startRequested = false;
+      machine.readCancelled = false;
       tickQueue.current = [];
       controller.clearTimeouts();
       stopWatchingReducedMotion?.();

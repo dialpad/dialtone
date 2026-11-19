@@ -1,4 +1,4 @@
-import { Activity, StrictMode, type ReactNode } from 'react';
+import { Activity, StrictMode, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { act, render, type RenderResult } from '@testing-library/react';
 import { DtMotionText, type DtMotionTextHandle, type DtMotionTextProps } from './MotionText';
 import { MOTION_TEXT_ANIMATION_MODES, MOTION_TEXT_SPEEDS, MOTION_TEXT_TIMING_PRESETS } from './MotionTextConstants';
@@ -677,6 +677,7 @@ describe('DtMotionText Tests', () => {
               autoStart={false}
               onStart={record('start')}
               onComplete={record('complete')}
+              onProgress={record('progress')}
             >
               {children}
             </DtMotionText>
@@ -690,10 +691,235 @@ describe('DtMotionText Tests', () => {
         startOnAttach = true;
         wrapper.rerender(activity('visible', undefined, 'Slot words here'));
         await nextTick();
+
+        // Playing the slot words, not completing on none
+        expect(getRoot().classList).toContain('d-motion-text--animating');
         await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
 
         expect(findWordTexts()).toEqual(['Slot', 'words', 'here']);
         expect(getEmittedCount('start')).toBe(1);
+        expect(getEmittedCount('progress')).toBe(3);
+        expect(getEmittedCount('complete')).toBe(1);
+      });
+
+      it('should play the slot words when start() is called as the mode switches from shimmer to a word mode', async () => {
+        let startOnAttach = false;
+        const activity = (mode: 'visible' | 'hidden', animationMode: 'shimmer' | 'gradient-in') => (
+          <Activity mode={mode}>
+            <DtMotionText
+              ref={(instance) => {
+                handle = instance;
+                if (startOnAttach) instance?.start();
+              }}
+              animationMode={animationMode}
+              autoStart={false}
+              onStart={record('start')}
+              onComplete={record('complete')}
+              onProgress={record('progress')}
+            >
+              Slot words here
+            </DtMotionText>
+          </Activity>
+        );
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(activity('visible', 'shimmer'));
+        await nextTick();
+        wrapper.rerender(activity('hidden', 'shimmer'));
+        startOnAttach = true;
+        wrapper.rerender(activity('visible', 'gradient-in'));
+        await nextTick();
+
+        expect(getRoot().classList).toContain('d-motion-text--animating');
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(findWordTexts()).toEqual(['Slot', 'words', 'here']);
+        expect(getEmittedCount('start')).toBe(1);
+        expect(getEmittedCount('progress')).toBe(3);
+        expect(getEmittedCount('complete')).toBe(1);
+      });
+
+      it.each([
+        ['a word mode to shimmer', 'gradient-in', 'shimmer'],
+        ['shimmer to a word mode', 'shimmer', 'gradient-in'],
+      ] as const)('should autoStart again on a reveal after the mode switched from %s while hidden', async (_, from, to) => {
+        const activity = (mode: 'visible' | 'hidden', animationMode: 'shimmer' | 'gradient-in') => (
+          <Activity mode={mode}>
+            <DtMotionText animationMode={animationMode} autoStart onStart={record('start')}>
+              Slot words here
+            </DtMotionText>
+          </Activity>
+        );
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(activity('visible', from));
+        await nextTick();
+        expect(getEmittedCount('start')).toBe(1);
+        wrapper.rerender(activity('hidden', from));
+        wrapper.rerender(activity('hidden', to));
+        wrapper.rerender(activity('visible', to));
+        await nextTick();
+        await nextTick();
+
+        expect(getEmittedCount('start')).toBe(2);
+        expect(getRoot().classList).toContain('d-motion-text--animating');
+      });
+    });
+
+    describe('When start() is called while the slot words are being read', () => {
+      // A parent's layout effect runs after the component's watchers, so the text prop's removal has started the read
+      const Parent = ({ text, then, autoStart = false, startFirst = true }: {
+        text?: string; then?: 'skipToEnd' | 'pause'; autoStart?: boolean; startFirst?: boolean;
+      }) => {
+        const ref = useRef<DtMotionTextHandle>(null);
+        useLayoutEffect(() => {
+          if (text !== undefined || !then) return;
+          if (startFirst) ref.current?.start();
+          ref.current?.[then]();
+        }, [text, then, startFirst]);
+        return (
+          <DtMotionText
+            ref={ref}
+            text={text}
+            animationMode="gradient-in"
+            autoStart={autoStart}
+            onStart={record('start')}
+            onComplete={record('complete')}
+            onProgress={record('progress')}
+          >
+            Slot words here
+          </DtMotionText>
+        );
+      };
+
+      it.each(['skipToEnd', 'pause'] as const)('should stay at rest when %s() follows', async (then) => {
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(<Parent text="Some text" />);
+        await nextTick();
+        wrapper.rerender(<Parent then={then} />);
+        await nextTick();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(findWordTexts()).toEqual(['Slot', 'words', 'here']);
+        expect(getRoot().classList).not.toContain('d-motion-text--animating');
+        expect(getEmittedCount('start')).toBe(0);
+        expect(getEmittedCount('progress')).toBe(0);
+      });
+
+      it.each(['skipToEnd', 'pause'] as const)('should not autoStart the words when %s() cancelled the read', async (then) => {
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(<Parent text="Some text" />);
+        await nextTick();
+        wrapper.rerender(<Parent autoStart startFirst={false} then={then} />);
+        await nextTick();
+        await nextTick();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(findWordTexts()).toEqual(['Slot', 'words', 'here']);
+        expect(getRoot().classList).not.toContain('d-motion-text--animating');
+        expect(getEmittedCount('start')).toBe(0);
+      });
+
+      it.each(['skipToEnd', 'pause'] as const)('should play the words when start() follows %s() during the read', async (first) => {
+        const Restarter = ({ text }: { text?: string }) => {
+          const ref = useRef<DtMotionTextHandle>(null);
+          useLayoutEffect(() => {
+            if (text !== undefined) return;
+            ref.current?.[first]();
+            ref.current?.start();
+          }, [text]);
+          return (
+            <DtMotionText ref={ref} text={text} animationMode="gradient-in" autoStart={false}
+              onStart={record('start')} onComplete={record('complete')} onProgress={record('progress')}>
+              Slot words here
+            </DtMotionText>
+          );
+        };
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(<Restarter text="Some text" />);
+        await nextTick();
+        wrapper.rerender(<Restarter />);
+        await nextTick();
+        await nextTick();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(findWordTexts()).toEqual(['Slot', 'words', 'here']);
+        expect(getEmittedCount('start')).toBe(1);
+        expect(getEmittedCount('complete')).toBe(1);
+      });
+
+      it('should autoStart again once the text changes after a cancelled read', async () => {
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(<Parent text="Some text" />);
+        await nextTick();
+        wrapper.rerender(<Parent autoStart startFirst={false} then="pause" />);
+        await nextTick();
+        await nextTick();
+        expect(getEmittedCount('start')).toBe(0);
+        wrapper.rerender(<Parent text="Other text" autoStart />);
+        await nextTick();
+        await nextTick();
+
+        expect(getEmittedCount('start')).toBe(1);
+        expect(getRoot().classList).toContain('d-motion-text--animating');
+      });
+
+      it.each(['skipToEnd', 'pause'] as const)('should not restart the words after a mode switch when %s() cancelled the read', async (then) => {
+        const ModeParent = ({ mode }: { mode: 'shimmer' | 'gradient-in' }) => {
+          const ref = useRef<DtMotionTextHandle>(null);
+          useLayoutEffect(() => {
+            if (mode === 'gradient-in') ref.current?.[then]();
+          }, [mode]);
+          return (
+            <DtMotionText ref={ref} animationMode={mode} autoStart onStart={record('start')} onProgress={record('progress')}>
+              Slot words here
+            </DtMotionText>
+          );
+        };
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        wrapper = render(<ModeParent mode="shimmer" />);
+        await nextTick();
+        await nextTick();
+        expect(getEmittedCount('start')).toBe(1);
+        wrapper.rerender(<ModeParent mode="gradient-in" />);
+        await nextTick();
+        await nextTick();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(findWordTexts()).toEqual(['Slot', 'words', 'here']);
+        expect(getRoot().classList).not.toContain('d-motion-text--animating');
+        expect(getEmittedCount('start')).toBe(1);
+      });
+
+      it('should play the slot words once they are read', async () => {
+        wrapper!.unmount();
+        emitted = { start: [], complete: [], progress: [], pause: [], resume: [] };
+        const Starter = () => {
+          const ref = useRef<DtMotionTextHandle>(null);
+          const [text, setText] = useState<string | undefined>('Some text');
+          useLayoutEffect(() => { if (text === undefined) ref.current?.start(); }, [text]);
+          starter = setText;
+          return (
+            <DtMotionText ref={ref} text={text} animationMode="gradient-in" autoStart={false}
+              onStart={record('start')} onComplete={record('complete')} onProgress={record('progress')}>
+              Slot words here
+            </DtMotionText>
+          );
+        };
+        let starter: (text: string | undefined) => void = () => {};
+        wrapper = render(<Starter />);
+        await nextTick();
+        await act(async () => { starter(undefined); });
+        await nextTick();
+        await advance(MOCK_REVEAL_WORD_ENDS.at(-1)!);
+
+        expect(getEmittedCount('start')).toBe(1);
+        expect(getEmittedCount('progress')).toBe(3);
         expect(getEmittedCount('complete')).toBe(1);
       });
     });
