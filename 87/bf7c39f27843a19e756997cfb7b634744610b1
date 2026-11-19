@@ -1,0 +1,47 @@
+packages/dialtone-react/components/Chip/ChipConstants.ts
+  s_a4121f9acecc61::t_2530282cfbe6ff 1-40
+packages/dialtone-react/components/Chip/index.ts
+  s_a4121f9acecc61::t_fb707ccc43996f 1-7
+packages/dialtone-react/components/Chip/Chip.parity.tsx
+  s_ce88a72a8d1b16::t_a2a3585af173fd 1-5
+packages/dialtone-react/components/Chip/Chip.stories.tsx
+  s_ce88a72a8d1b16::t_5792822c2eb7ec 1,3-146,148-210
+  s_b0e50e1b80b5f1::t_9586df4a355c36 2,147
+packages/dialtone-react/components/Chip/Chip.test.tsx
+  s_ce88a72a8d1b16::t_92e86f7ef4c8f8 1-191
+packages/dialtone-react/components/Chip/Chip.tsx
+  s_ce88a72a8d1b16::t_a718c7ad6658f9 2-101,105-172,176-177,179-198,200-224
+  s_b0e50e1b80b5f1::t_fcbd2e504df258 1,102-104,173-175,178,199
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "87bf7c39f27843a19e756997cfb7b634744610b1",
+  "prompts": {},
+  "sessions": {
+    "s_a4121f9acecc61": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4364d89-7341-46c4-a88e-879be4230f7b",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_b0e50e1b80b5f1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cdac9bf4-2d69-487f-8e66-ec83888fffa3",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_ce88a72a8d1b16": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a3668a1a-d8c9-4df9-9140-8b915d2c2dd7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

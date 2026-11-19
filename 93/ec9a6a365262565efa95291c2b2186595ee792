@@ -1,0 +1,55 @@
+packages/dialtone-react/components/Card/Card.parity.tsx
+  s_32ded55aeb4b6b::t_3ead3ecd1dff53 1-4
+packages/dialtone-react/components/Card/Card.stories.tsx
+  s_32ded55aeb4b6b::t_90968bd1afd443 1-211
+packages/dialtone-react/components/Card/Card.test.tsx
+  s_3daabbe7b09605::t_86e6fb1794cd52 1-47
+packages/dialtone-react/components/Card/Card.tsx
+  s_3daabbe7b09605::t_76cb27644b051c 1-78
+packages/dialtone-react/components/Card/index.ts
+  s_32ded55aeb4b6b::t_acf32704707da5 1
+packages/dialtone-react/components/Codeblock/Codeblock.parity.tsx
+  s_1f32ad82c561e4::t_759ff858beefe5 1-4
+packages/dialtone-react/components/Codeblock/Codeblock.stories.tsx
+  s_1f32ad82c561e4::t_c7d50cf07e5eff 1-86
+packages/dialtone-react/components/Codeblock/Codeblock.test.tsx
+  s_1f32ad82c561e4::t_d2dad95a9b4991 1-82
+packages/dialtone-react/components/Codeblock/Codeblock.tsx
+  s_1f32ad82c561e4::t_6545a607db092b 1-50
+packages/dialtone-react/components/Codeblock/CodeblockConstants.ts
+  s_1f32ad82c561e4::t_b6d8022abe86f9 1-12
+packages/dialtone-react/components/Codeblock/index.ts
+  s_1f32ad82c561e4::t_352a7ba44163b8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "93ec9a6a365262565efa95291c2b2186595ee792",
+  "prompts": {},
+  "sessions": {
+    "s_1f32ad82c561e4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "365078ec-7b86-4249-bffa-43b62089c9ff",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_32ded55aeb4b6b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34a6baeb-91f4-43e2-be27-c8621bd52ce2",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_3daabbe7b09605": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f9a5af2-a565-47dd-96b2-4883527d1722",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
