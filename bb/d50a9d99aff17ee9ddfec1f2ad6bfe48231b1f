@@ -1,0 +1,19 @@
+.claude/skills/dt-migrate.md
+  s_7f1d1d64baa803::t_ff0fd56d519363 9-10,13-20,33,37-42,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bbd50a9d99aff17ee9ddfec1f2ad6bfe48231b1f",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
