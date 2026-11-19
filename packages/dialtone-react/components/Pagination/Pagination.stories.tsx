@@ -111,7 +111,7 @@ function PaginationVariants () {
         <DtPagination
           totalPages={10}
           activePage={5}
-          ariaLabel="pagination with separator on both sides"
+          ariaLabel="pagination with hidden edges"
           showEdges={false}
         />
       </div>
