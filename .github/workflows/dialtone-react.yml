@@ -94,7 +94,7 @@ jobs:
   gate:
     name: gate
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       # A PR is checked out as its merge commit, whose first parent is the base: depth 2 is enough to diff them.
       - uses: actions/checkout@v4
@@ -107,16 +107,17 @@ jobs:
           EVENT: ${{ github.event_name }}
           BEFORE: ${{ github.event.before }}
         run: |
-          # --no-renames: a rename lists only its new path, and its old one can belong to another unit.
-          list_units () { node packages/dialtone-react/parity/changed-units.mjs; }
+          # --no-renames: a rename lists only its new path, and its old one can belong to another unit. The base is
+          # what parity/extra-cases.mjs is compared with, so a change to it gates only the units whose cases changed.
+          list_units () { CHANGED_UNITS_BASE="$1" node packages/dialtone-react/parity/changed-units.mjs; }
           if [[ $EVENT == pull_request ]]; then
-            units=$(git diff --no-renames --name-only HEAD^1 HEAD | list_units)
+            units=$(git diff --no-renames --name-only HEAD^1 HEAD | list_units HEAD^1)
           elif [[ $BEFORE =~ ^0+$ ]] || ! git fetch --no-tags --depth=1 origin "$BEFORE"; then
             # A new branch, or a history rewrite: every ported unit, which a shared path selects (components/ and
             # common/ ones alike).
             units=$(echo packages/dialtone-react/package.json | list_units)
           else
-            units=$(git diff --no-renames --name-only "$BEFORE" HEAD | list_units)
+            units=$(git diff --no-renames --name-only "$BEFORE" HEAD | list_units "$BEFORE")
           fi
           echo "Units: ${units:-none}"
           # One line for GITHUB_OUTPUT. An empty list stays empty, so the steps below skip.
@@ -133,18 +134,70 @@ jobs:
           restore-keys: nx-dialtone-react-gate-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
 
       # One unit after another (15-50s each), every one reported even when an earlier one fails. On dialtone-react
-      # itself, stand-ins for a component that just merged don't fail: follow-up PRs swap the component in.
+      # itself, stand-ins for a component that just merged don't fail: follow-up PRs swap the component in. The check
+      # job typechecks the whole package, so no unit's gate repeats it.
+      # A unit that fails is gated again on the base (the PR's base, or the commit before a push) in a second checkout.
+      # What fails there too, line for line (parity/new-failures.mjs), was failing already, like a unit a staging sync
+      # left stale until its resync merges: it's reported, and doesn't fail this run. Anything new does, and so does
+      # every failure when there's no base to compare with.
       - name: Parity gate
         if: steps.units.outputs.list != ''
         env:
           UNITS: ${{ steps.units.outputs.list }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
           PARITY_SKIP_STAND_INS: ${{ github.event_name == 'push' && '1' || '0' }}
+          PARITY_SKIP_TYPECHECK: '1'
           PARITY_TMP: ${{ runner.temp }}
         run: |
-          failed=0
+          failed=()
           for unit in $UNITS; do
             log="$RUNNER_TEMP/gate-$unit.log"
-            pnpm nx run dialtone-react:gate -- "$unit" | tee "$log" || failed=1
+            pnpm nx run dialtone-react:gate -- "$unit" | tee "$log" || failed+=("$unit")
             sed -n '/^#### Parity gate/,$p' "$log" >> "$GITHUB_STEP_SUMMARY"
           done
-          exit $failed
+          (( ${#failed[@]} )) || exit 0
+
+          if [[ $EVENT == pull_request ]]; then base=HEAD^1; else base=$BEFORE; fi
+          worktree="$RUNNER_TEMP/base"
+          if [[ -z $base || $base =~ ^0+$ ]] || ! git worktree add --detach "$worktree" "$base" \
+            || ! (cd "$worktree" && pnpm install --frozen-lockfile --prefer-offline); then
+            echo "::error::No base to compare with, so every failure counts: ${failed[*]}"
+            exit 1
+          fi
+          new=()
+          old=()
+          for unit in "${failed[@]}"; do
+            # A unit whose own files the change touches has to pass outright: its port, resync, swap or fix can't
+            # lean on the base, or a half-done one would pass and stay green from then on.
+            dir=$(node --input-type=module -e \
+              "const { reactDir } = await import('./packages/dialtone-react/parity/vue-sources.mjs'); console.log(reactDir(process.argv[1]))" "$unit")
+            if [[ -z $dir ]] || ! git diff --quiet "$base" HEAD -- "packages/dialtone-react/$dir"; then
+              new+=("$unit")
+              echo "$unit changes its own files here, so all its failures count" | tee -a "$GITHUB_STEP_SUMMARY"
+              continue
+            fi
+            # Standard output only, as tee keeps above, so both logs hold the same kind of lines.
+            (cd "$worktree" && pnpm nx run dialtone-react:gate -- "$unit") \
+              > "$RUNNER_TEMP/base-gate-$unit.log" 2> "$RUNNER_TEMP/base-gate-$unit.err" || true
+            echo "Compared with the base: $unit"
+            if node packages/dialtone-react/parity/new-failures.mjs "$RUNNER_TEMP/gate-$unit.log" \
+              "$RUNNER_TEMP/base-gate-$unit.log" "$PWD" "$worktree" | tee "$RUNNER_TEMP/new-$unit.md"; then
+              old+=("$unit")
+            else
+              new+=("$unit")
+              if ! grep -q '^#### Parity gate' "$RUNNER_TEMP/base-gate-$unit.log"; then
+                echo "The base's gate for $unit printed no summary. How it ended:"
+                tail -n 20 "$RUNNER_TEMP/base-gate-$unit.log" "$RUNNER_TEMP/base-gate-$unit.err"
+              fi
+              { echo "#### New in \`$unit\`, compared with the base"; echo; cat "$RUNNER_TEMP/new-$unit.md"; echo; } >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
+          if (( ${#old[@]} )); then
+            echo "#### Failing on the base already, not because of this change: ${old[*]}" >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::Failing on the base already, not because of this change: ${old[*]}"
+          fi
+          if (( ${#new[@]} )); then
+            echo "::error::New failures in: ${new[*]}"
+            exit 1
+          fi
