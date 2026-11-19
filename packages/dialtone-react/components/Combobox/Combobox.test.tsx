@@ -1,5 +1,7 @@
 import type { ComponentPropsWithoutRef, ReactElement } from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { DtListItem } from '../ListItem';
+import { DtListItemGroup } from '../ListItemGroup';
 import { DtCombobox, type DtComboboxInputProps, type DtComboboxProps } from './Combobox';
 
 const MOCK_SELECT_STUB = vi.fn();
@@ -95,6 +97,29 @@ describe('DtCombobox Tests', () => {
     mockSlots = {};
     vi.clearAllMocks();
     vi.restoreAllMocks();
+  });
+
+  it('clears the highlighted option when hovering a group heading before Enter', () => {
+    mockSlots = {
+      input: ({ inputProps }) => <TestInput {...inputProps} />,
+      list: ({ listProps }) => (
+        <ul {...listProps}>
+          <li role="presentation">
+            <DtListItemGroup id="team" heading="Teams">
+              <DtListItem id="sales" role="option" navigationType="arrow-keys">Sales</DtListItem>
+            </DtListItemGroup>
+          </li>
+        </ul>
+      ),
+    };
+    updateWrapper();
+    fireEvent.mouseMove(container.querySelector('#sales')!);
+    expect(queryInput()).toHaveAttribute('aria-activedescendant', 'sales');
+    fireEvent.mouseMove(container.querySelector('#team-heading')!);
+    fireEvent.keyDown(queryInput()!, { key: 'Enter', code: 'Enter' });
+    expect(MOCK_SELECT_STUB).not.toHaveBeenCalled();
+    expect(queryInput()).not.toHaveAttribute('aria-activedescendant');
+    expect(MOCK_HIGHLIGHT_STUB.mock.lastCall).toEqual([-1]);
   });
 
   describe('Presentation Tests', () => {
