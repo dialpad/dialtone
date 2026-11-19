@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DtProse, type DtProseProps } from './Prose';
 import {
@@ -45,6 +46,8 @@ type Story = StoryObj<ProseStoryArgs>;
 
 // ProseDefault.story.vue
 function ProseDefault ({ size, density, default: content }: ProseStoryArgs) {
+  const taskListId = useId();
+
   if (content !== undefined && content !== '') {
     return <DtProse size={size} density={density}>{content}</DtProse>;
   }
@@ -305,22 +308,28 @@ console.log(message);`}</code></pre>
       <ul>
         <li>
           <input
+            aria-labelledby={`${taskListId}-completed`}
             type="checkbox"
             defaultChecked
             disabled
-          /> Completed task
+          />
+          <span id={`${taskListId}-completed`}>Completed task</span>
         </li>
         <li>
           <input
+            aria-labelledby={`${taskListId}-incomplete`}
             type="checkbox"
             disabled
-          /> Incomplete task
+          />
+          <span id={`${taskListId}-incomplete`}>Incomplete task</span>
         </li>
         <li>
           <input
+            aria-labelledby={`${taskListId}-another`}
             type="checkbox"
             disabled
-          /> Another task to do
+          />
+          <span id={`${taskListId}-another`}>Another task to do</span>
         </li>
       </ul>
 
