@@ -1,0 +1,19 @@
+packages/combinator/.github/documentation/CONTRIBUTING.md
+  s_66758ca36d0eae::t_5f2a6297d0eff2 25-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7752004141f4c05aaa384e8f73f9c461a0bfdcf2",
+  "prompts": {},
+  "sessions": {
+    "s_66758ca36d0eae": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1af28-2a13-7103-bf45-2bae943aa9c5",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

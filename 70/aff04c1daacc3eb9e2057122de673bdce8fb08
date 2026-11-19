@@ -1,0 +1,21 @@
+packages/combinator/src/variants/variants_badge.js
+  s_f920209ec821e1::t_4be1396b4e956e 93,109,120
+packages/dialtone-vue/components/Badge/BadgeExamples.story.vue
+  s_f920209ec821e1::t_4be1396b4e956e 24-25,33-34,115-116,176-177,192-193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "70aff04c1daacc3eb9e2057122de673bdce8fb08",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
