@@ -47,25 +47,15 @@ type Story = StoryObj<DtBreadcrumbItemProps>;
 // BreadcrumbItemDefault.story.vue
 export const BreadcrumbItem: Story = {
   render: ({ inverted, selected, label, href, className }) => (
-    <DtBreadcrumbItem
-      inverted={inverted}
-      selected={selected}
-      label={label}
-      href={href}
-      className={className}
-    />
+    <ol className="d-breadcrumbs__list">
+      <DtBreadcrumbItem
+        inverted={inverted}
+        selected={selected}
+        label={label}
+        href={href}
+        className={className}
+      />
+    </ol>
   ),
   args: {},
-  parameters: {
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: 'listitem',
-            enabled: false,
-          },
-        ],
-      },
-    },
-  },
 };
