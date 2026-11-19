@@ -740,6 +740,47 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
+    it('keeps going when the label changes at the same width, and slides again when a fitting label grows', async () => {
+      const { wrapper, viewport, button, offset, setWidth } = mountSlide({ slide: true });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(4000);
+      wrapper.vm.label = 'A very long device name.';
+      await vi.advanceTimersByTimeAsync(100);
+      expect(viewport.classes()).toContain('d-text__slide--end');
+
+      setWidth(40);
+      wrapper.vm.label = 'Short';
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(offset()).toBe('');
+
+      setWidth(300);
+      wrapper.vm.label = 'A very long device name again';
+      await vi.advanceTimersByTimeAsync(600);
+      expect(viewport.classes()).toContain('d-text__slide--moving');
+      wrapper.unmount();
+    });
+
+    it('ignores a resize caused by the loop copy while it scrolls', async () => {
+      let onResize;
+      vi.stubGlobal('ResizeObserver', class {
+        constructor (callback) { onResize = callback; }
+        observe () {}
+        disconnect () {}
+      });
+      const { wrapper, viewport, button, offset, setRoom } = mountSlide({ slide: 'loop' });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+      setRoom(120);
+      onResize();
+      await vi.advanceTimersByTimeAsync(100);
+
+      expect(viewport.classes()).toContain('d-text__slide--moving');
+      expect(offset()).toBe('324px');
+      wrapper.unmount();
+    });
+
     it('starts again from rest when the viewport widens until the label fits', async () => {
       let onResize;
       vi.stubGlobal('ResizeObserver', class {

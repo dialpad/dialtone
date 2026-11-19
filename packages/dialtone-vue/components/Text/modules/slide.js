@@ -80,14 +80,19 @@ export function listenForEscape (el, onEscape) {
 }
 
 /**
- * Calls onChange when the label or the room for it changes while a slide is active:
- * the text is edited, or the viewport is resized. Changes made by the loop copy are
+ * Calls onChange while the item is active when the label's width or the room for it
+ * changes: the text is edited to a different width, or the viewport is resized. A label
+ * that changes at the same width (a running timer) is left alone, and the loop copy is
  * ignored. Returns a stop function.
  */
 export function watchSlideChanges (viewport, content, onChange) {
+  const copyOf = () => content.querySelector('.d-text__slide-copy');
+  const labelWidth = () => content.scrollWidth - (copyOf()?.offsetWidth ?? 0);
   let width = viewport.clientWidth;
+  let label = labelWidth();
   const resize = typeof ResizeObserver === 'function' && new ResizeObserver(() => {
-    if (viewport.clientWidth === width) return;
+    // the copy can widen a shrinkable flex row; loop remeasures before each cycle anyway
+    if (copyOf() || viewport.clientWidth === width) return;
     width = viewport.clientWidth;
     onChange();
   });
@@ -97,7 +102,9 @@ export function watchSlideChanges (viewport, content, onChange) {
   const mutation = new MutationObserver((records) => {
     const changed = records.some((record) => !ignored(record.target) &&
       (record.type === 'characterData' || [...record.addedNodes, ...record.removedNodes].some((node) => !ignored(node))));
-    if (changed) onChange();
+    if (!changed || labelWidth() === label) return;
+    label = labelWidth();
+    onChange();
   });
   resize?.observe(viewport);
   mutation.observe(content, { childList: true, characterData: true, subtree: true });

@@ -102,8 +102,8 @@ export default {
         // the DtText root: the host is the item around it, or the text itself
         el: this.$el.parentElement,
         moveEl: this.$refs.content,
-        onEnter: this.enter,
-        onLeave: () => this.reset(),
+        onEnter: this.activate,
+        onLeave: this.deactivate,
         onTransitionEnd: this.moveDone,
       });
     },
@@ -111,6 +111,26 @@ export default {
     unbind() {
       this.runtime.unbind?.();
       this.runtime.unbind = null;
+      this.deactivate();
+    },
+
+    // the item is hovered or keyboard-focused: watch for Escape and for changes until it is left
+    activate() {
+      this.runtime.stopActive = [
+        listenForEscape(this.$el, this.deactivate),
+        // a new label width or more room: start again from rest with fresh widths
+        watchSlideChanges(this.$el, this.$refs.content, () => {
+          this.reset();
+          this.enter();
+        }),
+      ];
+      this.enter();
+    },
+
+    // left, Escape or unmounted: stop watching and snap back
+    deactivate() {
+      this.runtime.stopActive.forEach((stop) => stop());
+      this.runtime.stopActive = [];
       this.reset();
     },
 
@@ -126,11 +146,6 @@ export default {
     // snap to rest, no reverse animation
     reset(phase = 'rest') {
       this.clearTimers();
-      if (phase === 'rest') {
-        this.runtime.stopActive.forEach((stop) => stop());
-        this.runtime.stopActive = [];
-        this.runtime.loops = 0;
-      }
       this.phase = phase;
       this.offset = 0;
       this.duration = 0;
@@ -151,14 +166,7 @@ export default {
         return;
       }
 
-      this.runtime.stopActive = [
-        listenForEscape(this.$el, () => this.reset()),
-        // a new label or more room while active: start again from rest with fresh widths
-        watchSlideChanges(this.$el, this.$refs.content, () => {
-          this.reset();
-          this.enter();
-        }),
-      ];
+      this.runtime.loops = 0;
       this.phase = 'waiting';
       this.after(readSlideConfig(this.$el).delay, this.start);
     },
