@@ -10,7 +10,7 @@ import * as dialtone from '@/index.js';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import * as icons from '@dialpad/dialtone-icons/vue';
 import { capture, capturedIdTokens, cleanHtml, idTokens, isGeneratedIn, maskedHtml, ROOT_ID, slotIdNamer } from '../normalize.mjs';
-import { canonicalScope, casesFrom, jsonSafe, keepIdsOf, pascal, rendered, scopeKey } from '../cases.mjs';
+import { canonicalScope, casesFrom, jsonSafe, keepIdsOf, pascal, rendered, scopeKey, slotTemplates } from '../cases.mjs';
 import { EXTRA_CASES } from '../extra-cases.mjs';
 import { FAKE_TIMERS, FIXED_RANDOM, settle } from '../settle.mjs';
 import registry from '../../../combinator/src/variants/variants.js?raw';
@@ -96,7 +96,7 @@ async function renderCase (Component, c, calls, inspect, slotVNodes = new WeakSe
     root.id = ROOT_ID;
     document.body.appendChild(root);
     const wrapper = mount(recordingWrapper(Component, calls, slotVNodes), {
-      attrs: { ...c.attrs, ...c.props }, slots: c.slots, attachTo: root, global: globalConfig,
+      attrs: { ...c.attrs, ...c.props }, slots: slotTemplates(c), attachTo: root, global: globalConfig,
     });
     await settle(ms => vi.advanceTimersByTimeAsync(ms));
     await flushPromises();
@@ -196,7 +196,7 @@ function slotsOf (c, calls, unstable) {
   const slotHtml = {};
   const slotRenders = {};
   const slotContext = [];
-  for (const [slot, tpl] of Object.entries(c.slots)) {
+  for (const [slot, tpl] of Object.entries(slotTemplates(c))) {
     // A slot the component never rendered still gets its content, rendered with no scope or context.
     const seen = scopes.get(slot) ?? [{ scope: {}, provides: null, base: null }];
     const renders = seen.map(call => {
