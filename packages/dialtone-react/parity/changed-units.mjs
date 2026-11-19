@@ -12,17 +12,22 @@
 //     unit of its own;
 //   - the unit's Combinator presets, which are DOM parity's cases: the variants file the registry maps it to
 //     (presetFiles), and what that file imports inside Combinator;
-//   - a shared file (SHARED): every ported unit, since the harness, foundations, configs and dependencies are
-//     under all of them, and so are the icons and emoji both sides render and dialtone-vue's test config and
-//     setup. dialtone-tokens gates no unit: no component, test or parity case reads it. The Storybook themes do,
-//     and the check job's typecheck catches a change to their types in the same run.
+//   - the unit's entry in parity/extra-cases.mjs, which holds the harness's own cases: only the units whose entries
+//     differ from the base's (extraCasesDiff; the CLI needs CHANGED_UNITS_BASE to compare), and every ported unit
+//     when it can't tell;
+//   - a shared file (SHARED): every ported unit, since the harness, configs and dependencies are under all of them,
+//     and so are the icons and emoji both sides render and dialtone-vue's test config and setup. common/ isn't
+//     shared: its directives, mixins and composables are units, and they and its foundations reach a unit through
+//     its imports like any other file. dialtone-tokens gates no unit: no component, test or parity case reads it.
+//     The Storybook themes do, and the check job's typecheck catches a change to their types in the same run.
 // The id is the one the gate takes: the kebab form of components/<Name>, the inverse of cases.mjs' pascal()
 // (ValidationMessages → validation-messages), or the directive, mixin or composable common/<name> is for
 // (common/input → mixin-input, commonUnit).
-//   git diff --no-renames --name-only <base> <head> | node packages/dialtone-react/parity/changed-units.mjs
+//   git diff --no-renames --name-only <base> <head> | CHANGED_UNITS_BASE=<base> node packages/dialtone-react/parity/changed-units.mjs
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { pascal, rendered } from './cases.mjs';
 import { commonUnit, containsPath, reactDir, unitsOfPath, vueSources } from './vue-sources.mjs';
 
@@ -30,11 +35,15 @@ const REACT = 'packages/dialtone-react/';
 const VUE = 'packages/dialtone-vue/';
 const COMBINATOR = 'packages/combinator/';
 const VARIANTS = `${COMBINATOR}src/variants/`;
+const EXTRA_CASES = `${REACT}parity/extra-cases.mjs`;
 const SHARED = new RegExp([
-  `^${REACT}(?:parity|common|tests|scripts|types)/`,
-  `^${REACT}(?:package\\.json|tsconfig[^/]*|vite[^/]*|eslint\\.config\\.[^/]+)$`,
+  `^${REACT}(?:parity/(?!extra-cases\\.mjs$)|(?:tests|scripts|types)/)`,
+  `^${REACT}(?:package\\.json|project\\.json|tsconfig[^/]*|vite[^/]*|eslint\\.config\\.[^/]+)$`,
+  // The repo's Nx and package setup, which runs every gate, and CI's.
+  '^(?:package|nx)\\.json$',
   '^pnpm-lock\\.yaml$',
   '^\\.github/workflows/dialtone-react[^/]*\\.yml$',
+  '^\\.github/actions/setup-environment/',
   // dialtone-vue's Vitest config and setup, under every unit's Vue tests and goldens.
   `^${VUE}(?:vite\\.config\\.js|tests/setupTests\\.js)$`,
   // React's icons are generated from dialtone-icons' SVGs and Vue's come from its build; emoji come from
@@ -111,12 +120,52 @@ function presetFiles (variantsDir) {
   return new Map([...text.matchAll(/import Dt(\w+) from '\.\/(variants_\w+\.js)'/g)].map(m => [m[1], m[2]]));
 }
 
+// JSON for plain data only, or null: a function, symbol, bigint, undefined, NaN or Infinity, or an object that isn't
+// a plain object or array (a RegExp, Set, Map), would serialize lossily or not at all.
+const plainJson = (value) => {
+  const plain = x => x === null || typeof x !== 'object' || [Object.prototype, Array.prototype, null].includes(Object.getPrototypeOf(x));
+  try {
+    // A replacer gets what toJSON returned (a Date's string), so the check reads the holder's own value.
+    return JSON.stringify(value, function (key, x) {
+      const own = this[key];
+      if (['function', 'symbol', 'bigint', 'undefined'].includes(typeof own) || (typeof own === 'number' && !Number.isFinite(own))
+        || !plain(own)) throw new Error('not plain data');
+      return x;
+    });
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * A version of parity/extra-cases.mjs (its module namespace) as JSON: { others: { export: json }, cases: { id: json } },
+ * null for what plainJson can't hold. Taken right after the import, so another version's import can't change it.
+ */
+export function extraCasesSnapshot (module) {
+  const others = Object.keys(module).filter(k => k !== 'EXTRA_CASES').sort().map(k => [k, plainJson(module[k])]);
+  const cases = Object.entries(module.EXTRA_CASES ?? {}).map(([id, entry]) => [id, plainJson(entry)]);
+  return { others: Object.fromEntries(others), cases: Object.fromEntries(cases) };
+}
+
+/**
+ * Which units' harness cases differ between two extraCasesSnapshots: the ids, sorted, or 'all' when any other export
+ * differs (or is added or removed). What a snapshot couldn't hold always counts as changed.
+ */
+export function extraCasesDiff (base, head) {
+  const same = (a, b) => typeof a === 'string' && a === b;
+  const names = s => Object.keys(s.others).join('\n');
+  if (names(base) !== names(head) || Object.keys(head.others).some(k => !same(base.others[k], head.others[k]))) return 'all';
+  return [...new Set([...Object.keys(base.cases), ...Object.keys(head.cases)])]
+    .filter(id => !same(base.cases[id], head.cases[id])).sort();
+}
+
 /**
  * The ported units `files` (repo-relative paths) touch: { units, errors }, units sorted by id.
  *   pkg: packages/dialtone-react; vueRoot: packages/dialtone-vue; variantsDir: Combinator's src/variants (all
- *   absolute; variantsDir defaults to the one next to pkg).
+ *   absolute; variantsDir defaults to the one next to pkg); extraCases: what extraCasesDiff found, when files include
+ *   parity/extra-cases.mjs. Without it (or with 'all'), that file gates every ported unit.
  */
-export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(pkg, '../combinator/src/variants') }) {
+export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(pkg, '../combinator/src/variants'), extraCases }) {
   const errors = [];
   const paths = files.map(f => f.trim()).filter(Boolean);
   const vuePaths = paths.filter(f => f.startsWith(VUE)).map(f => f.slice(VUE.length));
@@ -152,7 +201,10 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
       errors.push(error.message);
     }
   }
-  if (paths.some(f => SHARED.test(f))) return { units: [...ported].sort(), errors };
+  const casesChanged = paths.includes(EXTRA_CASES);
+  if (paths.some(f => SHARED.test(f)) || (casesChanged && !Array.isArray(extraCases))) {
+    return { units: [...ported].sort(), errors };
+  }
 
   const reactPaths = paths.filter(f => f.startsWith(REACT)).map(f => f.slice(REACT.length));
   const combinatorPaths = paths.filter(f => f.startsWith(COMBINATOR)).map(f => f.slice(COMBINATOR.length));
@@ -160,7 +212,8 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
   const presets = combinatorPaths.length ? presetFiles(variantsDir) : new Map();
   const presetsOf = name => (presets.has(name) ? [path.join(variantsDir, presets.get(name))] : []);
   const combinatorCache = new Map();
-  const units = new Set();
+  // A unit whose harness cases changed: what it renders in DOM parity changed, though none of its files did.
+  const units = new Set(casesChanged ? extraCases.filter(id => ported.has(id)) : []);
   const reactCache = new Map();
   const vueCache = new Map();
   // Whether `changed` holds a file the seeds import, directly or not. Walked only when a unit's own paths don't match.
@@ -192,10 +245,43 @@ export function changedUnits (files, { pkg, vueRoot, variantsDir = path.resolve(
   return { units: [...units].sort(), errors };
 }
 
+/**
+ * extraCasesDiff between parity/extra-cases.mjs at git ref `base` and the one checked out, or undefined when that
+ * can't be told: no base given, a ref git doesn't have, or a version that won't load. The base version is written
+ * next to the current one for the import, so its own imports resolve the same way.
+ */
+export async function extraCasesAgainst (base) {
+  if (!base) return undefined;
+  const here = path.dirname(fileURLToPath(import.meta.url));
+  const copy = path.join(here, `.extra-cases.${process.pid}.base.mjs`);
+  try {
+    const text = execFileSync('git', ['show', `${base}:./extra-cases.mjs`], { cwd: here, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    fs.writeFileSync(copy, text);
+    // Both versions share the harness modules they import (cases.mjs, as it is now). Top-level code in either could
+    // change the data every unit's cases are built from (STANDARD_ATTRS), which no entry would show: then every unit.
+    const harness = async () => plainJson(Object.fromEntries(Object.entries(await import('./cases.mjs'))
+      .filter(([, v]) => typeof v !== 'function')));
+    const before = await harness();
+    const was = extraCasesSnapshot(await import(pathToFileURL(copy).href));
+    const is = extraCasesSnapshot(await import('./extra-cases.mjs'));
+    if (before === null || before !== await harness()) return 'all';
+    return extraCasesDiff(was, is);
+  } catch (error) {
+    console.error(`changed-units: can't compare extra-cases.mjs with ${base} (${error.message.split('\n')[0]}), so it gates every unit`);
+    return undefined;
+  } finally {
+    fs.rmSync(copy, { force: true });
+  }
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const pkg = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-  const { units, errors } = changedUnits(fs.readFileSync(0, 'utf8').split('\n'), {
-    pkg, vueRoot: path.resolve(pkg, '../dialtone-vue'),
+  const files = fs.readFileSync(0, 'utf8').split('\n');
+  const extraCases = files.some(f => f.trim() === EXTRA_CASES)
+    ? await extraCasesAgainst(process.env.CHANGED_UNITS_BASE)
+    : undefined;
+  const { units, errors } = changedUnits(files, {
+    pkg, vueRoot: path.resolve(pkg, '../dialtone-vue'), extraCases,
   });
   for (const error of errors) console.error(`changed-units: ${error}`);
   for (const id of units) console.log(id);
