@@ -316,6 +316,8 @@ function createController ({ machine: m, props, root, content, slot, commit, nex
     // The words are being re-read from the slot: play them once they're there, rather than completing on none
     if (m.slotReadPending) {
       m.startRequested = true;
+      // An explicit start() after a pause() or skipToEnd() in the same read plays: the cancellation was for the one before
+      m.readCancelled = false;
       return;
     }
 
