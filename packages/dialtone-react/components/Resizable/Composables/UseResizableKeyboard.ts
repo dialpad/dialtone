@@ -205,20 +205,23 @@ export function useResizableKeyboard (options: ResizableKeyboardOptions) {
       }
     }
 
-    // Commit to state — mirrors drag's commitDrag discipline
-    onResize(
-      beforePanelId,
-      roundedBefore,
-      afterPanelId,
-      roundedAfter,
-    );
-
-    // Hand the DOM back to React. Vue clears these inline styles and re-applies every style on its next render; React
-    // only re-applies the values that change, so the ones it rendered are put back instead of cleared.
-    if (beforeEl && afterEl && snapshots) {
-      restoreStyle(beforeEl, snapshots[0]);
-      restoreStyle(afterEl, snapshots[1]);
-      if (hEl && snapshots[2]) restoreStyle(hEl, snapshots[2]);
+    try {
+      // Commit to state — mirrors drag's commitDrag discipline
+      onResize(
+        beforePanelId,
+        roundedBefore,
+        afterPanelId,
+        roundedAfter,
+      );
+    } finally {
+      // Hand the DOM back to React, even when onResize throws. Vue clears these inline styles and re-applies every
+      // style on its next render; React only re-applies the values that change, so the ones it rendered are put back
+      // instead of cleared.
+      if (beforeEl && afterEl && snapshots) {
+        restoreStyle(beforeEl, snapshots[0]);
+        restoreStyle(afterEl, snapshots[1]);
+        if (hEl && snapshots[2]) restoreStyle(hEl, snapshots[2]);
+      }
     }
   }
 
