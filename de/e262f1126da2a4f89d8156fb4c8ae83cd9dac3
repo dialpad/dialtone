@@ -1,0 +1,23 @@
+packages/dialtone-react/components/EmptyState/EmptyState.stories.tsx
+  s_4e06c074ff3a6c::t_4e396b33426785 105
+packages/dialtone-react/components/EmptyState/EmptyState.test.tsx
+  s_4e06c074ff3a6c::t_5bea329736106b 257-277
+packages/dialtone-react/components/EmptyState/EmptyState.tsx
+  s_4e06c074ff3a6c::t_baad2ee4a81de5 1-4,54-60,89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dee262f1126da2a4f89d8156fb4c8ae83cd9dac3",
+  "prompts": {},
+  "sessions": {
+    "s_4e06c074ff3a6c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0200836d-6ac6-4ed4-88d5-5400c98a70e4",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

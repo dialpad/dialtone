@@ -1,0 +1,21 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_f920209ec821e1::t_982b41a91bf39e 264
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_f920209ec821e1::t_982b41a91bf39e 180
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "89087fd764f2e44ca573fce962e22df96f6ba5d0",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
