@@ -10,7 +10,7 @@ import * as dialtone from '@/index.js';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import * as icons from '@dialpad/dialtone-icons/vue';
 import { capture, capturedIdTokens, cleanHtml, idTokens, isGeneratedIn, maskedHtml, ROOT_ID, slotIdNamer } from '../normalize.mjs';
-import { canonicalScope, casesFrom, jsonSafe, keepIdsOf, pascal, rendered, scopeKey } from '../cases.mjs';
+import { canonicalScope, casesFrom, jsonSafe, keepIdsOf, pascal, rendered, scopeKey, slotTemplates } from '../cases.mjs';
 import { EXTRA_CASES } from '../extra-cases.mjs';
 import { FAKE_TIMERS, FIXED_RANDOM, settle } from '../settle.mjs';
 import registry from '../../../combinator/src/variants/variants.js?raw';
@@ -96,7 +96,7 @@ async function renderCase (Component, c, calls, inspect, slotVNodes = new WeakSe
     root.id = ROOT_ID;
     document.body.appendChild(root);
     const wrapper = mount(recordingWrapper(Component, calls, slotVNodes), {
-      attrs: { ...c.attrs, ...c.props }, slots: c.slots, attachTo: root, global: globalConfig,
+      attrs: { ...c.attrs, ...c.props }, slots: slotTemplates(c), attachTo: root, global: globalConfig,
     });
     await settle(ms => vi.advanceTimersByTimeAsync(ms));
     await flushPromises();
@@ -196,13 +196,22 @@ function slotsOf (c, calls, unstable) {
   const slotHtml = {};
   const slotRenders = {};
   const slotContext = [];
-  for (const [slot, tpl] of Object.entries(c.slots)) {
-    // A slot the component never rendered still gets its content, rendered with no scope or context.
-    const seen = scopes.get(slot) ?? [{ scope: {}, provides: null, base: null }];
-    const renders = seen.map(call => {
+  for (const [slot, tpl] of Object.entries(slotTemplates(c))) {
+    if (!scopes.has(slot)) {
+      // A slot the component never rendered still gets its content, rendered with no scope or context. Content that
+      // reads its scope can't render without one (variants_filter_pill.js' optionEnd, whose rows are in a closed
+      // overlay), so it gets no scope renders instead: Vue never rendered it with any scope, so a port that renders
+      // it gets the React side's unmatched-scope marker. Only rendering can fail here: VTU compiles every slot string
+      // when it mounts, so one that doesn't compile has already failed the real render.
+      const render = quietly(() => renderSlot(tpl, { scope: {}, provides: null, base: null }, ids));
+      if (render) slotHtml[slot] = render.html;
+      else slotRenders[slot] = [];
+      continue;
+    }
+    const renders = scopes.get(slot).map(call => {
       // The scope first, so an id the component passed in it is named before the slot's own ids.
       const scope = hasKeys(call.scope) ? canonicalScope(call.scope, generated, ids.namer) : null;
-      return { scope, ...renderSlot(String(tpl), call, ids) };
+      return { scope, ...renderSlot(tpl, call, ids) };
     });
     if (renders.some(r => r.context)) slotContext.push(slot);
     if (renders.some(r => r.scope)) {
