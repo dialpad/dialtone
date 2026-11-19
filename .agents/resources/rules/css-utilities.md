@@ -9,6 +9,10 @@ Apply to `packages/dialtone-css/**`, especially `lib/build/less/utilities/**`.
 - Search existing utilities before adding a new one.
 - Prefer primitive component props before utilities when a primitive already covers the concern. For example, use DtBox for token-backed container surface, spacing, sizing, positioning, logical insets, and z-index; keep utilities for non-DtBox elements, responsive variants, calc coordinates, resets, arbitrary coordinates, and local escape hatches.
 
+## Selectors
+
+- Keep selectors flat. Reach for `:where()` only for conditions that should add no specificity, and check the compiled CSS for what wins.
+
 ## Token Usage
 
 - Use `var(--dt-*)` custom properties. Do not hardcode raw colors, spacing, radius, z-index, typography, or sizing values.
