@@ -1,0 +1,21 @@
+apps/dialtone-documentation/thumbs/README.md
+  s_e63122f46d819f::t_27a0224af74913 105-108
+.husky/pre-commit
+  s_e63122f46d819f::t_14bf66cfba4581 30-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2e74b43ed36311ea3a6074312a34762071b83e5b",
+  "prompts": {},
+  "sessions": {
+    "s_e63122f46d819f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cbbe41d3-b1cd-455c-a7b1-d92e1d514157",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

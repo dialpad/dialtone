@@ -1,0 +1,29 @@
+packages/combinator/src/variants/variants_slider.js
+  s_0d6a81bc191862::t_c8b1647b3436d7 64-72
+apps/dialtone-documentation/docs/components/slider.md
+  s_7f1d1d64baa803::t_5ca4f58c921028 425-428,442-445
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1d8588fd30015c44fded67b82145796441422d5d",
+  "prompts": {},
+  "sessions": {
+    "s_0d6a81bc191862": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1462f-99ab-7d80-940e-c2556bf66597",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

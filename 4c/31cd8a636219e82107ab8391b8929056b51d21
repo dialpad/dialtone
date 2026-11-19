@@ -1,0 +1,21 @@
+packages/figma-styles-sync/src/resolve_paint_styles.test.ts
+  s_355402be618789::t_721474d159a4d9 12,16
+packages/figma-styles-sync/src/resolve_paint_styles.ts
+  s_355402be618789::t_ce228c70234b1e 2,6-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4c31cd8a636219e82107ab8391b8929056b51d21",
+  "prompts": {},
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

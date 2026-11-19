@@ -1,0 +1,21 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_44623f05b0b8d3::t_ac18a0394322f0 303
+packages/dialtone-icons/src/svg/icons/brand-full-color/microsoft-sharepoint.svg
+  s_44623f05b0b8d3::t_51f6cc9e75a7d6 1-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "89b38f0037d935ae7bb6fba2697d41a5a7f3b88a",
+  "prompts": {},
+  "sessions": {
+    "s_44623f05b0b8d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "356b4fd9-5eac-4340-bfc7-094cbffdb9cd",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}
