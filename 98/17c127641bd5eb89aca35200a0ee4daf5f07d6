@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Box/BoxConstants.ts
+  s_268dc9682c5a41::t_8793dfb8b9f78f 1-146
+packages/dialtone-react/components/Box/Validators.ts
+  s_268dc9682c5a41::t_98e433e54cc4c7 1-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9817c127641bd5eb89aca35200a0ee4daf5f07d6",
+  "prompts": {},
+  "sessions": {
+    "s_268dc9682c5a41": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a97db40f-ca12-4737-b64c-7c0b9c70bbc9",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
