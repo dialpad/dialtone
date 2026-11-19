@@ -97,11 +97,9 @@ function ModeDirectiveDefault () {
             <Region mode={enabled ? 'dark' : false} className={`${REGION} d-fl1`}>
               <DtStack gap="400">
                   <Body>v-dt-mode:dark=&quot;{String(enabled)}&quot; — toggle to compare</Body>
-                  <DtToggle
-                    checked={enabled}
-                    aria-label="Enable mode"
-                    onCheckedChange={setEnabled}
-                  />
+                  <DtToggle checked={enabled} onCheckedChange={setEnabled}>
+                    Enable mode
+                  </DtToggle>
               </DtStack>
             </Region>
         </DtStack>
