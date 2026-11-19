@@ -35,6 +35,35 @@ describe('DtBadge Tests', () => {
   });
 
   describe('Presentation Tests', () => {
+    describe('When the startIcon slot content toggles without remounting', () => {
+      const icon = () => document.querySelector('[data-qa="test-icon"]');
+      const renderHost = (showIcon: boolean) => {
+        updateWrapper({ text: 'Badge', startIcon: showIcon ? <span data-qa="test-icon" /> : undefined });
+      };
+
+      it('should not render the icon initially when the slot is absent', () => {
+        renderHost(false);
+
+        expect(icon()).not.toBeInTheDocument();
+      });
+
+      it('should render the icon after the slot is provided', () => {
+        renderHost(false);
+
+        setProps({ startIcon: <span data-qa="test-icon" /> });
+
+        expect(icon()).toBeInTheDocument();
+      });
+
+      it('should not render the icon after the slot is removed again', () => {
+        renderHost(true);
+
+        setProps({ startIcon: undefined });
+
+        expect(icon()).not.toBeInTheDocument();
+      });
+    });
+
     describe('When the badge renders', () => {
       it('should exist', () => {
         expect(badge()).toBeInTheDocument();
