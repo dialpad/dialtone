@@ -73,7 +73,9 @@ function vitest (cwd, args, report, env = {}) {
   const json = readJson(report);
   const tests = results(json);
   const files = json?.testResults ?? [];
-  const output = `${proc.stdout}\n${proc.stderr}`;
+  // Without its colours, which are on in CI: they sit inside the banners section() looks for.
+  // eslint-disable-next-line no-control-regex
+  const output = `${proc.stdout}\n${proc.stderr}`.replace(/\x1b\[[0-9;]*m/g, '');
   // The default reporter's section that starts with the banner `marker` (its first 30 lines), or ''.
   const section = marker => { const at = output.search(marker); return at < 0 ? '' : output.slice(at).trim().split('\n').slice(0, 30).join('\n'); };
   const outside = files.filter(f => f.status === 'failed' && !(f.assertionResults ?? []).some(a => a.status === 'failed'));
@@ -88,7 +90,12 @@ function vitest (cwd, args, report, env = {}) {
   return { tests, broken: broken.filter(Boolean).join('\n'), error: tests.length ? '' : (messages || tail(output, 30) || 'The run produced no output.') };
 }
 const tail = (s, n = 40) => s.trim().split('\n').slice(-n).join('\n');
-const block = s => `\`\`\`\n${s}\n\`\`\``;
+// Fenced with more backticks than any run inside, so a fence in the text (a Markdown snippet in an error message)
+// can't close the block early, on GitHub or in new-failures.mjs.
+const block = s => {
+  const fence = '`'.repeat((s.match(/`+/g) ?? []).reduce((longest, run) => Math.max(longest, run.length), 2) + 1);
+  return `${fence}\n${s}\n${fence}`;
+};
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 // Vitest's JSON reporter: testResults[].assertionResults[] with ancestorTitles, title and status.
 const results = report => (report?.testResults ?? []).flatMap(f => f.assertionResults
@@ -104,10 +111,15 @@ const reactFiles = fs.readdirSync(reactDir, { recursive: true, withFileTypes: tr
   .filter(d => d.isFile() && /\.[cm]?[jt]sx?$/.test(d.name)).map(d => path.join(d.parentPath, d.name));
 const sourceFiles = reactFiles.filter(f => !/\.(test|stories|parity)\.[cm]?[jt]sx?$/.test(f));
 
-// 1. Typecheck, the whole package (a unit can break its dependents' types).
-const tsc = run(pkg, ['tsc', '-p', 'tsconfig.json']);
-if (tsc.status === 0) ok('Typecheck', 'clean');
-else bad('Typecheck', plural((tsc.stdout.match(/error TS/g) ?? []).length, 'error'), block(tail(tsc.stdout)));
+// 1. Typecheck, the whole package (a unit can break its dependents' types). CI's check job runs this same tsc once per
+// run, so its gate job sets PARITY_SKIP_TYPECHECK=1 rather than repeat it for every unit it gates.
+if (process.env.PARITY_SKIP_TYPECHECK === '1') {
+  rows.push(['Typecheck', '⏭ skipped: CI\'s check job typechecks the package']);
+} else {
+  const tsc = run(pkg, ['tsc', '-p', 'tsconfig.json']);
+  if (tsc.status === 0) ok('Typecheck', 'clean');
+  else bad('Typecheck', plural((tsc.stdout.match(/error TS/g) ?? []).length, 'error'), block(tail(tsc.stdout)));
+}
 
 // Lint, the unit's directory (CI lints the whole package). Warnings are counted, not failed.
 {
@@ -279,7 +291,7 @@ if (isComponent) {
 
 const sha = spawnSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: pkg, encoding: 'utf8' }).stdout?.trim() || 'unknown';
 const passed = rows.every(([, r]) => !r.startsWith('❌'));
-console.log([
+const summary = [
   `#### Parity gate: \`${unit}\` at ${sha} ${passed ? '✅' : '❌'}`,
   '',
   '| Check | Result |',
@@ -287,6 +299,9 @@ console.log([
   ...rows.map(([c, r]) => `| ${c} | ${r} |`),
   '',
   ...details,
-].join('\n'));
-console.error(`\nartifacts: ${tmp}`);
-process.exit(passed ? 0 : 1);
+].join('\n');
+// A pipe (CI's, through Nx) takes 64 KiB at once, and process.exit doesn't wait for the rest: exit once it's written.
+process.stdout.write(`${summary}\n`, () => {
+  console.error(`\nartifacts: ${tmp}`);
+  process.exit(passed ? 0 : 1);
+});
