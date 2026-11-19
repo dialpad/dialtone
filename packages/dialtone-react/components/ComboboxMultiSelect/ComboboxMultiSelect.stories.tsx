@@ -262,7 +262,8 @@ function ComboboxMultiSelectDefault ({
       }
       setSelectedItems([...selectedItems, item]);
 
-      // Clear input box and unfilter list
+      // Unfilter the list. Vue's story also clears the input through `$refs.comboboxMultiSelect.$data.value`, which
+      // React can't reach: the input clears itself on a keyboard select, but not on a click.
       setQuery('');
       setItems(ITEMS_LIST_DATA);
     } else if (query) {

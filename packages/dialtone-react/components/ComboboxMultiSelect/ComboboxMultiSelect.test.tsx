@@ -602,6 +602,23 @@ describe('DtComboboxMultiSelect Tests', () => {
 
   // React-only: what Vue's tests don't exercise.
   describe('React-only Tests', () => {
+    describe('When showList is not set and the list shows its empty state', () => {
+      it('should keep the list open on a mousedown in the footer', async () => {
+        props = {
+          label: 'Label Text',
+          selectedItems: ['1'],
+          emptyList: true,
+          emptyStateMessage: 'No results',
+          footer: <button type="button">Footer button</button>,
+        };
+        mountWrapper();
+        await act(async () => { getInput().focus(); });
+        expect(document.querySelector('.d-popover__anchor--opened')).not.toBeNull();
+        await act(async () => { fireEvent.mouseDown(screen.getByText('Footer button')); });
+        expect(document.querySelector('.d-popover__anchor--opened')).not.toBeNull();
+      });
+    });
+
     describe('When showList is not set', () => {
       // The input doesn't get the combobox's inputProps (as in Vue), so the popover's anchor shows whether it's open.
       const isListOpen = () => document.querySelector('.d-popover__anchor--opened') !== null;

@@ -290,6 +290,10 @@ export function DtComboboxMultiSelect ({
   const inputSlotWrapperRef = useRef<HTMLSpanElement>(null);
   const chipsWrapperRef = useRef<HTMLSpanElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  // DtComboboxWithPopover swaps the list slot for its empty state (listRef is then null), but keeps the header and
+  // footer, so any of the three finds the popover.
+  const headerRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
   // Each chip's button, by index in selectedItems, so lookups never depend on stale DOM order.
   const chipButtonsRef = useRef<(ChipElement | null)[]>([]);
   // Vue's initialInputHeight and inputVisibilityObserver data: only the measuring code reads them.
@@ -588,7 +592,8 @@ export function DtComboboxMultiSelect ({
   // DtComboboxWithPopover's window mousedown listener: closes the list on a mousedown outside the input and the
   // popover, while it's shown.
   const onWindowMouseDown = useEffectEvent((event: MouseEvent) => {
-    const popoverEl = listRef.current?.closest('[data-tippy-root]');
+    const popoverContent = listRef.current ?? headerRef.current ?? footerRef.current;
+    const popoverEl = popoverContent?.closest('[data-tippy-root]');
     const comboboxEl = inputSlotWrapperRef.current?.parentElement;
     if (event.composedPath().some(el => el === popoverEl || el === comboboxEl)) return;
     closeComboboxList();
@@ -828,7 +833,7 @@ export function DtComboboxMultiSelect ({
         </span>
       )}
       header={hasContent(header)
-        ? <div className={cx(headerClass) || undefined}>{header}</div>
+        ? <div ref={headerRef} className={cx(headerClass) || undefined}>{header}</div>
         : undefined}
       list={(
         <div
@@ -846,7 +851,7 @@ export function DtComboboxMultiSelect ({
         </div>
       )}
       footer={hasContent(footer)
-        ? <div className={cx(footerClass) || undefined}>{footer}</div>
+        ? <div ref={footerRef} className={cx(footerClass) || undefined}>{footer}</div>
         : undefined}
     />
   );
