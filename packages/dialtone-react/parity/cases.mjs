@@ -10,25 +10,47 @@ export const STANDARD_ATTRS = {
   'aria-label': 'Parity label',
 };
 
-const initialValues = group => Object.fromEntries(Object.entries(group ?? {})
-  .filter(([, member]) => member && typeof member === 'object' && 'initialValue' in member)
-  .map(([name, member]) => [name, member.initialValue]));
+// name → member[key], for every member of a variant group (props, slots, attributes) that sets `key`.
+const valuesOf = (group, key) => Object.fromEntries(Object.entries(group ?? {})
+  .filter(([, member]) => member && typeof member === 'object' && key in member)
+  .map(([name, member]) => [name, member[key]]));
+const initialValues = group => valuesOf(group, 'initialValue');
 
 /** Combinator variants (packages/combinator/src/variants/variants_*.js) → cases. */
 export function casesFrom (variants) {
   const defaults = variants.defaults ?? {};
   const cases = Object.entries(variants)
     .filter(([name]) => name !== 'defaults' && name !== 'exclusions')
-    .map(([name, preset]) => ({
-      name,
-      props: { ...initialValues(defaults.props), ...initialValues(preset.props) },
-      slots: { ...initialValues(defaults.slots), ...initialValues(preset.slots) },
-      attrs: { ...initialValues(defaults.attributes), ...initialValues(preset.attributes) },
-    }));
+    .map(([name, preset]) => {
+      // A preset's member overrides the defaults' one key by key, as Combinator merges them (mergeVariantData), so
+      // a preset that sets only a slot's initialValue keeps the scopeName its defaults give it.
+      const scopeNames = { ...valuesOf(defaults.slots, 'scopeName'), ...valuesOf(preset.slots, 'scopeName') };
+      return {
+        name,
+        props: { ...initialValues(defaults.props), ...initialValues(preset.props) },
+        slots: { ...initialValues(defaults.slots), ...initialValues(preset.slots) },
+        attrs: { ...initialValues(defaults.attributes), ...initialValues(preset.attributes) },
+        ...(Object.keys(scopeNames).length ? { scopeNames } : {}),
+      };
+    });
   const base = cases.find(c => c.name === 'default') ?? cases[0];
   if (base) cases.push({ ...base, name: 'standard attrs', attrs: { ...base.attrs, ...STANDARD_ATTRS } });
   return cases;
 }
+
+/**
+ * A case's slot strings as the templates Vue Test Utils compiles, for the real render and for each slot rendered on
+ * its own. A slot string means what it does in Combinator, which renders it with the names in the slot's scope as
+ * locals and, for a slot with a scopeName (variants_dropdown.js' anchorAttrs), the whole scope under that name too
+ * (components/tools/node.vue). VTU only binds the locals: it wraps a string in <template #default="params">. So a
+ * slot with a scopeName gets the wrapper here instead, with that name for the scope. VTU's `params` isn't bound
+ * there: Combinator doesn't bind it, and no preset or harness case uses it. Every other string stays as VTU takes it.
+ */
+export const slotTemplates = c => Object.fromEntries(Object.entries(c.slots).map(([slot, source]) => {
+  const scopeName = c.scopeNames?.[slot];
+  // VTU trims what it wraps, so the wrapped string renders as it did when VTU wrapped it.
+  return [slot, scopeName ? `<template #default="${scopeName}">${String(source).trim()}</template>` : source];
+}));
 
 /**
  * Values the case passes in stay literal wherever they turn up as an id or a reference (an id attr, a panelId
