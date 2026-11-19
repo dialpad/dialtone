@@ -3,6 +3,7 @@ import {
   DT_STACK_GAP,
   DT_STACK_RESPONSIVE_BREAKPOINTS,
   DT_STACK_ALIGN,
+  DT_STACK_ALIGN_SELF,
   DT_STACK_JUSTIFY,
 } from './StackConstants';
 
@@ -97,6 +98,10 @@ function getResponsiveAlignClasses (align: PropValue): ClassName[] {
   return _getResponsiveClasses(align, 'align', DT_STACK_ALIGN);
 }
 
+function getResponsiveAlignSelfClasses (alignSelf: PropValue): ClassName[] {
+  return _getResponsiveClasses(alignSelf, 'align-self', DT_STACK_ALIGN_SELF);
+}
+
 function getResponsiveJustifyClasses (justify: PropValue): ClassName[] {
   if (typeof justify !== 'object' || justify === null) return [];
 
@@ -116,12 +121,14 @@ export function getResponsiveClasses (
   gap: PropValue,
   align: PropValue,
   justify: PropValue,
+  alignSelf?: PropValue,
 ): ClassName[] {
   return [
     ...getResponsiveDirectionClasses(direction),
     ...getResponsiveGapClasses(gap),
     ...getResponsiveAlignClasses(align),
     ...getResponsiveJustifyClasses(justify),
+    ...getResponsiveAlignSelfClasses(alignSelf),
   ];
 }
 
@@ -133,6 +140,11 @@ export function getDefaultGapClass (gap: PropValue): ClassName {
 export function getDefaultAlignClass (align: PropValue): ClassName {
   const validAlign = _getDefaultValue(align);
   return _includes(DT_STACK_ALIGN, validAlign) ? `d-stack--align-${validAlign as string}` : null;
+}
+
+export function getDefaultAlignSelfClass (alignSelf: PropValue): ClassName {
+  const validAlignSelf = _getDefaultValue(alignSelf);
+  return _includes(DT_STACK_ALIGN_SELF, validAlignSelf) ? `d-stack--align-self-${validAlignSelf as string}` : null;
 }
 
 const JUSTIFY_NORMALIZE_MAP: Readonly<Record<string, string>> = {
