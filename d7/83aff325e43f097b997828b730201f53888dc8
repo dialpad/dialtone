@@ -1,0 +1,27 @@
+packages/dialtone-icons/src/svg/icons/os/file-text.svg
+  s_037f149b31cf7b::t_b987aaeab94b08 2
+  h_c15b5755534093 1,3
+packages/dialtone-icons/src/keywords-icons.json
+  h_c15b5755534093 2215-2218
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "d783aff325e43f097b997828b730201f53888dc8",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

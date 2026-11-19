@@ -1,0 +1,27 @@
+.claude/rules/documentation-writing.md
+  s_0a9611ea1eb760::t_c6570401472af8 144
+packages/dialtone-vue/components/FilterPill/FilterPill.test.js
+  s_0a9611ea1eb760::t_e84758fd8dae96 313-315
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_0a9611ea1eb760::t_4274dfe49e13a4 358,409
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_0a9611ea1eb760::t_9d3142bd8b101d 176
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_0a9611ea1eb760::t_4f4e9acfed5a57 262,275-279,817
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ac87d2ba86a33ad7e5ee42b26303d59f330df4ce",
+  "prompts": {},
+  "sessions": {
+    "s_0a9611ea1eb760": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d1c8-cd2d-7bd1-8634-bc390315ea5d",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
