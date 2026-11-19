@@ -1,0 +1,37 @@
+packages/dialtone-docs/tests/source-links.test.js
+  s_c8ad6feb7a7a00::t_f77d47e284bd15 59-64,70-73
+packages/dialtone-docs/src/generators/source-links.mjs
+  s_c8ad6feb7a7a00::t_47f526f4eb6051 50
+  s_c8ad6feb7a7a00::t_62ff42a370ca65 46
+  s_c8ad6feb7a7a00::t_a981ea039fe52b 31
+  s_c8ad6feb7a7a00::t_a06ec1e3f1f362 10-11
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_c8ad6feb7a7a00::t_d7f215ed575f27 199
+packages/dialtone-query-core/src/documentation-context.ts
+  s_c8ad6feb7a7a00::t_f9804861ded8f1 88-89
+  s_c8ad6feb7a7a00::t_ecc147a8f60140 74-75,79
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_c8ad6feb7a7a00::t_debb9f85f4ecef 366
+  s_c8ad6feb7a7a00::t_681cc42f66a709 375-376
+  s_c8ad6feb7a7a00::t_437211c928c131 161-163,165
+  s_c8ad6feb7a7a00::t_cd62784fe6aaf0 150-152
+packages/dialtone-cli/src/commands/docs.ts
+  s_c8ad6feb7a7a00::t_4814c0d493beb3 2
+  s_c8ad6feb7a7a00::t_d1aeede8ebfad1 30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8dca522ecc883e12bce93fde9ac367577811a62c",
+  "prompts": {},
+  "sessions": {
+    "s_c8ad6feb7a7a00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6f605576-f73f-414c-9125-c046a01ec7e1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

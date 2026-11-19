@@ -1,0 +1,189 @@
+.agents/README.md
+  s_7f1d1d64baa803::t_1fa0b5e6ebe0ca 3,9-23,36-39
+.agents/evals/run-skill-contract-evals.mjs
+  s_7f1d1d64baa803::t_86ced22ced0dbc 135,429-465
+.agents/resources/agent-tooling-parity.md
+  s_7f1d1d64baa803::t_4924c8713fd14b 3-95,105-112
+.agents/resources/dialtone-lookup.md
+  s_7f1d1d64baa803::t_0d5985b3c656db 7,22-23,25-27,32-35,41
+.agents/resources/rules/codex-tooling.md
+  s_7f1d1d64baa803::t_621ed5693d545f 8,12
+.agents/resources/rules/documentation-writing.md
+  s_7f1d1d64baa803::t_8feedc76b243b4 17-36
+.agents/resources/rules/query-core.md
+  s_7f1d1d64baa803::t_c2a323e53be248 24-27
+.agents/resources/rules/vue-components.md
+  s_7f1d1d64baa803::t_a2b4980aef0cd9 3,7,9-18,23-132,134,136,138,140-148
+.agents/resources/rules/vue-tests.md
+  s_7f1d1d64baa803::t_45ae7e9c14d2a6 20
+.claude/agents/component-orchestrator.md
+  s_7f1d1d64baa803::t_dd4aad4716b49d 2,17,63
+.claude/agents/pr-prep-coordinator.md
+  s_7f1d1d64baa803::t_083b7c485e9b59 42-45,50-53,76
+.claude/commands/pr-fill.md
+  s_7f1d1d64baa803::t_fb7695a0849635 40-43,47,63,82,98,124
+.claude/rules/claude-config.md
+  s_7f1d1d64baa803::t_1e134dc3898676 18,41,52,62,77,79,86-87,96-99,102-103,121-122,138,143-144
+.claude/rules/dialtone-query-core.md
+  s_7f1d1d64baa803::t_e8a0acc5bacfa1 170-173
+.claude/rules/slot-class-props.md
+  s_7f1d1d64baa803::t_687952c2cafbd7 8
+.claude/rules/stories.md
+  s_7f1d1d64baa803::t_c0a7cef2491051 12-14,54
+.claude/rules/vue-components.md
+  s_7f1d1d64baa803::t_e56f09b8315673 8
+.claude/rules/vue-tests.md
+  s_7f1d1d64baa803::t_62636083e60eed 62
+.claude/skills/analyze.md
+  s_7f1d1d64baa803::t_3057919eab9a1a 42,46
+.claude/skills/commit.md
+  s_7f1d1d64baa803::t_4bfaccef77c03a 2,42-44,46-47
+.claude/skills/component.md
+  s_7f1d1d64baa803::t_31851006f9a17a 19-25
+.claude/skills/vue-conventions.md
+  s_7f1d1d64baa803::t_d7d253333a2617 7,9
+.coderabbit.yaml
+  s_7f1d1d64baa803::t_df89890ed7ac24 78,88,93-95,103
+.codex/config.toml
+  s_7f1d1d64baa803::t_3620865511c878 14-15
+.github/CONTRIBUTING.md
+  s_7f1d1d64baa803::t_52cf0e4f5b3d2a 63-70,107
+.github/pull_request_template.md
+  s_7f1d1d64baa803::t_1e69a9f2ddbbc6 34
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_ef0111d87bc7f5 32,65,126
+AGENTS.md
+  s_7f1d1d64baa803::t_28e77c1459b06d 1,3,11,14-15,20-26
+CLAUDE.md
+  s_7f1d1d64baa803::t_d64d1f9532d383 1-2,53,65,67,69,80
+apps/dialtone-documentation/docs/components/button.md
+  s_7f1d1d64baa803::t_8cfc434b795b02 66-67,152-153
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_9025641bcd630a 75,151,213-227
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_3fbed8e258e742 217-232
+packages/dialtone-cli/README.md
+  s_7f1d1d64baa803::t_c150a4486f4e9b 38,45-46,49-52
+packages/dialtone-cli/src/commands/component.ts
+  s_7f1d1d64baa803::t_18a4e795fc8e63 2,92-95
+packages/dialtone-cli/src/commands/docs.ts
+  s_7f1d1d64baa803::t_15bb1b4d9287ea 2,9-10,21-45,63-64
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_ed2e014c7dedbf 125-146
+packages/dialtone-docs/package.json
+  s_7f1d1d64baa803::t_740cb0f8bd2502 15
+packages/dialtone-docs/project.json
+  s_7f1d1d64baa803::t_41f090963d0662 10-11,13-14
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_84179cb18d03f2 66-67
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_7f1d1d64baa803::t_ee2d9bdadac55a 5,207,225,253-258
+packages/dialtone-docs/src/generators/documentation-examples.mjs
+  s_7f1d1d64baa803::t_cb37dad8a7c423 1-146
+packages/dialtone-docs/src/generators/example-validation.json
+  s_7f1d1d64baa803::t_447bf300d8b210 1-87
+packages/dialtone-docs/tests/documentation-examples.test.js
+  s_7f1d1d64baa803::t_d593b6e3afc66e 1-105
+packages/dialtone-mcp-server/RETRIEVAL.md
+  s_7f1d1d64baa803::t_247d00a4b29e0f 13-15
+packages/dialtone-mcp-server/scripts/query-tools.test.mjs
+  s_7f1d1d64baa803::t_c2101c7cdae7e2 8-24,326-327
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_7f1d1d64baa803::t_16fce7afef1d15 29,46,107,127,274,318-321,342-343,353,355,358,361,419,482-491
+packages/dialtone-query-core/README.md
+  s_7f1d1d64baa803::t_290c3ee34b86ad 66-67,77-78,89
+packages/dialtone-query-core/src/index.ts
+  s_7f1d1d64baa803::t_a9241b28e7723e 73
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_5b812dad15a207 9,168,300-317
+packages/dialtone-query-core/src/types.ts
+  s_7f1d1d64baa803::t_c54cffccc32fd4 142-149
+packages/dialtone-query-core/tests/documentation-examples.test.ts
+  s_7f1d1d64baa803::t_33a1e3ac89ebb8 1-20
+packages/dialtone-vue/components/ButtonGroup/ButtonGroup.test.js
+  s_7f1d1d64baa803::t_b3dbd8535fe82a 20,38,49
+packages/dialtone-vue/components/ButtonGroup/ButtonGroup.vue
+  s_7f1d1d64baa803::t_7f82bc4ab85aaa 8
+packages/dialtone-vue/components/CLAUDE.md
+  s_7f1d1d64baa803::t_47f9ee7d5cf7f8 1
+packages/dialtone-vue/components/Codeblock/Codeblock.test.js
+  s_7f1d1d64baa803::t_0f3d6d9e078070 32,35,37,40,45,49-50,52-53,60,67,74
+packages/dialtone-vue/components/Codeblock/Codeblock.vue
+  s_7f1d1d64baa803::t_a190dc510ddb51 5,9
+packages/dialtone-vue/components/Datepicker/Datepicker.test.js
+  s_7f1d1d64baa803::t_7b354cb27425fa 47-50,53-54,65,74,78,82,86,100,106,112,118,124,157,173,181,193,201,213,225,276,286,295,306,317,326,337,347,356,370,381,397,406,415,424,434,466,475,484,493,503,512,519,528,542,549,567,574
+packages/dialtone-vue/components/Datepicker/Datepicker.vue
+  s_7f1d1d64baa803::t_4f8092d95db93f 7-10,23-26
+packages/dialtone-vue/components/Datepicker/Modules/Calendar.vue
+  s_7f1d1d64baa803::t_6affc1c101cc7c 5,17,28
+packages/dialtone-vue/components/Datepicker/Modules/MonthYearPicker.vue
+  s_7f1d1d64baa803::t_4796409a543c6e 67
+packages/dialtone-vue/components/DescriptionList/DescriptionList.test.js
+  s_7f1d1d64baa803::t_3aa527340cdf90 65,70,74-77,81-84,141,153
+packages/dialtone-vue/components/DescriptionList/DescriptionList.vue
+  s_7f1d1d64baa803::t_38d9cd06bbf52f 2-5,10-13,16-19
+packages/dialtone-vue/components/Emoji/Emoji.test.js
+  s_7f1d1d64baa803::t_8169624558d6f3 29,49
+packages/dialtone-vue/components/Emoji/Emoji.vue
+  s_7f1d1d64baa803::t_fa5e1e2b35c63e 2-5,15
+packages/dialtone-vue/components/EmojiPicker/EmojiPicker.test.js
+  s_7f1d1d64baa803::t_bf3104a2f54d43 103-105,118,122,126,130,138,142,149,156,163,170,176,187,244,274,289,300,312,319,325,338-339,351-352,363-365,380,386-387,395-406,446-447,455-456,464-465,477-478
+packages/dialtone-vue/components/EmojiPicker/EmojiPicker.vue
+  s_7f1d1d64baa803::t_bec1cf783bfcc9 4,6-9,25-28,58-61
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiDescription.vue
+  s_7f1d1d64baa803::t_dd409f3073a769 2-5
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiSearch.vue
+  s_7f1d1d64baa803::t_ac9ea6f46f9dd9 2-5
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiSelector.vue
+  s_7f1d1d64baa803::t_99a537e3ee150d 4,14,23,32,48,81
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiSkinSelector.vue
+  s_7f1d1d64baa803::t_d95dc0fcaf0d5b 6,12,37,49
+packages/dialtone-vue/components/EmojiPicker/Modules/EmojiTabset.vue
+  s_7f1d1d64baa803::t_b80e8450e1696b 2-5
+packages/dialtone-vue/components/EmptyState/EmptyState.test.js
+  s_7f1d1d64baa803::t_83cac589ac0edd 8,46-47,73,104,107,112,115,219,230,241,244-245
+packages/dialtone-vue/components/EmptyState/EmptyState.vue
+  s_7f1d1d64baa803::t_fdb5afe177e13f 8,17,58
+packages/dialtone-vue/components/KeyboardShortcut/KeyboardShortcut.test.js
+  s_7f1d1d64baa803::t_1e60b460e1a35f 33,47,58,73,83,93,103,113,123,136,146
+packages/dialtone-vue/components/KeyboardShortcut/KeyboardShortcut.vue
+  s_7f1d1d64baa803::t_fab840bde98f83 3,9-12
+packages/dialtone-vue/components/LazyShow/LazyShow.test.js
+  s_7f1d1d64baa803::t_eb001ed190070f 1-101
+packages/dialtone-vue/components/LazyShow/LazyShow.vue
+  s_7f1d1d64baa803::t_24f7e8ceed94fc 10
+packages/dialtone-vue/components/ModeIsland/ModeIsland.test.js
+  s_7f1d1d64baa803::t_5a9ef5901af9ad 55
+packages/dialtone-vue/components/ModeIsland/ModeIsland.vue
+  s_7f1d1d64baa803::t_43f8bd4ceb5d6f 5
+packages/dialtone-vue/components/Skeleton/Skeleton.test.js
+  s_7f1d1d64baa803::t_33e0d3b20ad185 40
+packages/dialtone-vue/components/Skeleton/Skeleton.vue
+  s_7f1d1d64baa803::t_217030cdd21ed4 3
+pnpm-lock.yaml
+  s_7f1d1d64baa803::t_ed547cc48dceba 654-656
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_3ebd90659cd07e 56-75
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_e484709f7d3685 37
+scripts/retrieval/probe-packed-examples.mjs
+  s_7f1d1d64baa803::t_905768be714417 1-82
+scripts/retrieval/validate-examples.mjs
+  s_7f1d1d64baa803::t_9543c10f6afc39 1-117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ea4c2ec48170ec4a5cd4440a4018f0692db66ce5",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
