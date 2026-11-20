@@ -481,7 +481,7 @@ export function DtModal ({
               </p>
             )}
           {footer !== undefined && (
-            <footer className={cx('d-modal__footer', footerClass)}>
+            <footer className={cx('d-modal__footer', footerClass)} data-qa="dt-modal-footer">
               {footer}
             </footer>
           )}
