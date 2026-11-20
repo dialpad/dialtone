@@ -21,6 +21,7 @@ For repository authoring or maintenance questions, read the [Contributor tasks t
 | `doc-sync-check`    | source changes that may affect contributor guidance             | Report review candidates and record current semantic decisions.                                      | `doc-sync.md`                                                      | fixture  |
 | `component-work`    | component creation/update, component API changes   | Check what exists first; keep component, tests, stories, docs, variants in sync. Thin Claude wrapper.   | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
 | `icon-work`         | icon add/update, icon SVG or keyword changes       | Add or update one icon from its Figma source; four review checks, build and docs. Thin Claude wrapper.  | `validation.md`, `rules/icons.md`, `dialtone-lookup.md`            | contract |
+| `style-work`        | CSS utility class or design token creation/change  | Check what exists first; build the class or token; check output, docs JSON, lookup. Thin Claude wrapper.| `validation.md`, `dialtone-lookup.md`                              | contract |
 
 ## Resources
 
