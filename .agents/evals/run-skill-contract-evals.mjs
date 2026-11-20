@@ -357,7 +357,9 @@ function wrapperProblems(sharedPath, wrapperPath) {
   const body = wrapper
     ? wrapperText.slice(wrapper[0].length).trim()
     : wrapperText;
-  if (!body.includes(sharedPath) || body.length > 400) {
+  const sharedDir = sharedPath.replace(/SKILL\.md$/, '');
+  const loadOnly = `Load \`${sharedPath}\` and follow it. It is the single source for this skill; this wrapper adds no rules. Relative links resolve from \`${sharedDir}\`; backticked paths are from the repo root.`;
+  if (body !== loadOnly) {
     problems.push(`${wrapperPath} must only load the shared skill`);
   }
   return problems;
@@ -419,20 +421,25 @@ for (const [skillName, config] of Object.entries(skills)) {
 
 // Every shared skill has a thin Claude wrapper: same frontmatter, no rules.
 // Claude-only checks run only when .claude exists, so Codex validation never depends on it.
+const sharedSkillNames = readdirSync(join(repoRoot, '.agents/skills'), {
+  withFileTypes: true,
+})
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name);
+for (const name of sharedSkillNames) {
+  assert(
+    existsSync(join(repoRoot, `.agents/skills/${name}/SKILL.md`)),
+    `.agents/skills/${name}/SKILL.md is missing`,
+    failures,
+  );
+}
+
 if (existsSync(join(repoRoot, '.claude'))) {
-  const sharedSkillNames = readdirSync(join(repoRoot, '.agents/skills'), {
-    withFileTypes: true,
-  })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name);
 
   for (const name of sharedSkillNames) {
     const sharedPath = `.agents/skills/${name}/SKILL.md`;
     const wrapperPath = `.claude/skills/${name}/SKILL.md`;
-    if (!existsSync(join(repoRoot, sharedPath))) {
-      assert(false, `${sharedPath} is missing`, failures);
-      continue;
-    }
+    if (!existsSync(join(repoRoot, sharedPath))) continue;
     const wrapperExists = existsSync(join(repoRoot, wrapperPath));
     const problems = wrapperExists
       ? wrapperProblems(sharedPath, wrapperPath)
