@@ -24,8 +24,8 @@ API shape, learned from review:
 
 - Paired props that only make sense together are one prop. Slider combined `showTicks` and `tickInterval`, as `inverted` and `fillOrigin` were before it.
 - Keep the old visual as an option instead of replacing it, and keep inherited defaults. The old spinner stayed as an option and kept its inherited colour default.
-- Removing an allowed value is a breaking change: keep it working (deprecated, still passing the validator), or add a `BREAKING CHANGE:` footer.
-- Changing a default is a breaking change too: keep the old default, or add a `BREAKING CHANGE:` footer.
+- Removing an allowed value is a breaking change: keep it working (deprecated, still passing the validator), or add a `BREAKING CHANGE:` footer (see [migration-work](../migration-work/SKILL.md)).
+- Changing a default is a breaking change too: keep the old default, or add a `BREAKING CHANGE:` footer (see [migration-work](../migration-work/SKILL.md)).
 
 ## Required Context
 
