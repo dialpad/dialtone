@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  s_ba49952ad44f26::t_bbe04bc857d37b 185
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e46a6179a2602fe1af9eb23c8a922ddbd50c8d93",
+  "prompts": {},
+  "sessions": {
+    "s_ba49952ad44f26": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a111ee-35c8-7ad3-bc36-25e45b697101",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "iropolo <ignacio.ropolo@dialpad.com>"
+    }
+  }
+}

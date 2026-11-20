@@ -1,0 +1,23 @@
+packages/dialtone-react/components/Badge/Badge.stories.tsx
+  s_80de0b76350023::t_86ff8c8ea8e758 151,153-154
+packages/dialtone-react/components/Badge/Badge.test.tsx
+  s_80de0b76350023::t_737c9a9c42c1bf 225-237
+packages/dialtone-react/components/Badge/Badge.tsx
+  s_80de0b76350023::t_7ad39c046f852a 1,81-88,114-115
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "16731a3a540b42b24c993d5a61529f3d64343fc0",
+  "prompts": {},
+  "sessions": {
+    "s_80de0b76350023": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c4b127a6-2bbc-446c-8900-200929a52dce",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

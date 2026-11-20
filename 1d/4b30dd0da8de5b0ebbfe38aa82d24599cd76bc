@@ -1,0 +1,44 @@
+packages/dialtone-react/components/Dropdown/Dropdown.tsx
+  s_f32c81af086a60::t_409db13da6e4b8 18,20,22-24,27,158
+  s_81589d955aa89e::t_9f874efe220ae7 1,19,25-26,28-32,51-67,140-143,168-169,187,202-207,210-212,216-231,234,236,238,244-245,249-299,307,309,318-324,334-344,356,367,376,384,399-401,404-419,435-436,438,470-471,484-486,497
+packages/dialtone-react/components/Dropdown/deviations.json
+  s_81589d955aa89e::t_d4350fd150b53a 4,8-12,16
+packages/dialtone-react/components/Dropdown/Dropdown.stories.tsx
+  s_81589d955aa89e::t_4a50c70c076d62 1,12,189-195,249,318,341,372,403,434,449-581,631-654
+packages/dialtone-react/components/Dropdown/Dropdown.test.tsx
+  s_81589d955aa89e::t_10f77b10369c1f 1-2,6-7,19-29,40,130-131,133-135,211-214,226-227,230-231,235,239,244,249-251,256,263,340-795
+packages/dialtone-react/components/SplitButton/deviations.json
+  s_4ab60f010c92e2::t_dc1881130e35e4 4,8,12,16,20,32,36,40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1d4b30dd0da8de5b0ebbfe38aa82d24599cd76bc",
+  "prompts": {},
+  "sessions": {
+    "s_4ab60f010c92e2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "854f6627-6bbd-4d43-b115-a056c4213668",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_81589d955aa89e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9d751991-8fd3-4041-a138-d84b0bb94598",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_f32c81af086a60": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "be2954c5-fbb3-4003-a8ce-0e811b9ec99b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

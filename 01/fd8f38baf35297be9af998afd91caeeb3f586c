@@ -1,0 +1,335 @@
+.claude/rules/css-utilities.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 14,50-51,54
+apps/dialtone-documentation/docs/guides/stylelint/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 54,62
+packages/dialtone-docs/src/content/development/development-css-utilities.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 18,28-34
+  s_f1b6a2e8befce4::t_cca8c6f5f40c1e 35
+packages/dialtone-css/project.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 16-17
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 18,20-25,30,95,97,158-165,213-214,246-258,354-355,359
+  s_f1b6a2e8befce4::t_94777c416450b7 360
+packages/dialtone-tokens/tests/build-docs.test.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-17
+apps/dialtone-documentation/docs/components/checkbox.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 8
+packages/dialtone-query-core/tests/tools/components.test.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 31-41
+packages/dialtone-icons/package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+apps/dialtone-documentation/docs/foundations/product-storytelling/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 13,35-50
+packages/stylelint-plugin-dialtone/CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-7
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 193
+.claude/skills/component.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 55,64-65
+packages/dialtone-docs/project.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 19-21
+apps/dialtone-documentation/docs/foundations/graphic-system/abstract-graphics.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3-4,7-9,11-17
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6,8,16-17,53-55,134-140,148-165,176,178-186,192,207,223,240-244
+  s_f1b6a2e8befce4::t_105463e6463597 245
+apps/dialtone-documentation/docs/components/scrollbar.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6
+apps/dialtone-documentation/scripts/lib/transform-vue-api.test.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 4,11,15,18,20-21,31,47,54-124
+packages/dialtone-css/package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+packages/dialtone-css/postcss/migration-guidance.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-166
+packages/dialtone-cli/package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+packages/dialtone-icons/src/svg/icons/controls/stop-stroke.svg
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-3
+packages/stylelint-plugin-dialtone/tests/lib/rules/no-deprecated-space-tokens.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 34,39,45-46,51-74
+apps/dialtone-documentation/docs/components/text-list.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 18-19
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-graphic.svg
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+packages/dialtone-docs/tests/fixtures/public-docs/complete.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 7
+packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6,143
+  s_f1b6a2e8befce4::t_aff3b75ed9cf62 144
+apps/dialtone-documentation/docs/foundations/illustrations/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3-4,7-9,11,14-16
+packages/dialtone-mcp-server/README.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6,53,60-62
+  s_f1b6a2e8befce4::t_45c9bc46c78bbb 63
+packages/dialtone-icons/android/gradle.properties
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 2
+packages/dialtone-query-core/tests/tools/docs.test.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 81-132,275-284
+  s_f1b6a2e8befce4::t_0e56f1f6bc5af6 285
+packages/eslint-plugin-dialtone/lib/generated/migration-guidance.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-103
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 100-119
+packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-space-tokens.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 2,10-11,14-17,21,38,42-44,50
+scripts/retrieval/cases.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 23-31,103,272
+apps/dialtone-documentation/docs/guides/migration/scrollbar-always/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 4
+apps/dialtone-documentation/docs/foundations/gradient/product.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3-4,9-10,29,38-41
+packages/stylelint-plugin-dialtone/lib/generated/migration-guidance.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-18
+apps/dialtone-documentation/docs/foundations/halftone/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-114
+packages/dialtone-query-core/src/directive-identifiers.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-8
+.agents/resources/rules/documentation-site.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 19-28
+apps/dialtone-documentation/docs/foundations/graphic-system/transformation-grid.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-38
+packages/dialtone-mcp-server/CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-12
+packages/dialtone-icons/CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+packages/dialtone-vue/directives/mode_directive/mode.mdx
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 17-23,61-65,107-108
+packages/dialtone-vue/directives/tooltip_directive/tooltip.mdx
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 14,18,21-22,29,39,49-73
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-flex-gap-classes.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 50-52,55
+  s_f1b6a2e8befce4::t_f97a51c09dcd30 49
+.agents/skills/component-work/SKILL.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 43-46,55
+apps/dialtone-documentation/docs/components/illustration.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 12-24,29-46
+CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-14
+package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+packages/dialtone-docs/src/utils/strip-markdown.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 13-59,77,86,90-92,106
+apps/dialtone-documentation/docs/foundations/brand/our-icon/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 28
+packages/dialtone-mcp-server/CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+.github/workflows/unit_tests.yml
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 25-28,57-60,85,116-118,126-132,219-224,236-256
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 7
+packages/dialtone-docs/tests/component-doc-links.test.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6-7,91-116
+packages/dialtone-docs/src/utils/keywords.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-10
+packages/dialtone-query-core/src/utils/filters.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 107-126
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3,17,71-72,89-100,120-125,128-130,150-151,161-172,195,205,210-211,258-259,262-263,292
+packages/dialtone-cli/src/commands/docs.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 20-21
+packages/dialtone-icons/src/keywords-icons.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1032-1036
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.mdx
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 17,24-30,130-133,234-237
+  s_f1b6a2e8befce4::t_b71e5bd9712e4b 238
+packages/dialtone-vue/directives/focustrap_directive/focustrap.mdx
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 19,26-30,155-157,164-165
+  s_f1b6a2e8befce4::t_3e0b3fa9de7c31 166
+apps/dialtone-documentation/docs/foundations/gradient/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3,7,9-10,15-47
+packages/eslint-plugin-dialtone/lib/rules/deprecated-grid-gap-classes.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6,23
+packages/dialtone-mcp-server/client-rules.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 57
+packages/stylelint-plugin-dialtone/CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+packages/dialtone-cli/src/select-component.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 20,33-36
+  s_f1b6a2e8befce4::t_6623d30d624266 37
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 257-258,262-263,266-267,272-277,281-282,285-286,289-290,308-309,312-313,316-321
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.mdx
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 13,17,20-22,26-27,39-45,48,65-77
+apps/dialtone-documentation/docs/components/combobox-with-popover.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 4
+packages/dialtone-cli/src/commands/token.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 10-11,18-22,26,29,33-36
+  s_f1b6a2e8befce4::t_dbe449836aef5c 37
+packages/dialtone-query-core/src/tools/utility-classes.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5,42,110-116,122-123,126,157,163,166-178,187-191,206-211
+packages/dialtone-tokens/gradle.properties
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 2
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5-7,9-10,14-41,44-48,90-113,115,117-119,121,158-207,324,432,443,459-463,473,507,512-522
+  s_f1b6a2e8befce4::t_c4f96da6097187 523
+packages/dialtone-query-core/src/component-documentation.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5
+packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3,13-15,19,39,42-43,46-48
+scripts/retrieval/run.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 27,102,112,143
+packages/dialtone-tokens/CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-7
+apps/dialtone-documentation/docs/foundations/gradient/marketing.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3-4,7-9,11,13-17
+packages/dialtone-query-core/src/keyword-matching.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-24
+packages/dialtone-tokens/package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+packages/eslint-plugin-dialtone/lib/rules/deprecated-radius-utility-classes.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 8,10,12-13
+.github/workflows/docs_tests.yml
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 7,13
+packages/dialtone-query-core/src/types.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 123,129-130
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-grid-gap-classes.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 57
+packages/dialtone-icons/CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-7
+packages/dialtone-mcp-server/interactive-search.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 11,20,27,38,106,170
+packages/dialtone-css/CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+apps/dialtone-documentation/scripts/generate-raw-markdown.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 208-218,665-666
+  s_f1b6a2e8befce4::t_79f0326c99bf89 667-668
+apps/dialtone-documentation/scripts/lib/component-handlers.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 65
+packages/stylelint-plugin-dialtone/package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+packages/eslint-plugin-dialtone/package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+packages/dialtone-css/postcss/dialtone-docs.test.cjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-63
+packages/dialtone-cli/CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-12
+apps/dialtone-documentation/docs/foundations/typography/marketing.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3-5,7,10-55,57-87
+packages/dialtone-css/CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-7
+packages/dialtone-cli/src/commands/search.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3,14
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5,9-31,125-128,190-199,253-264
+packages/dialtone-tokens/build-docs.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 24
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 204-205,211-214
+packages/dialtone-query-core/README.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 12,15-16,39,43-45,55
+apps/dialtone-documentation/scripts/lib/parse-source-markdown.test.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6-12
+apps/dialtone-documentation/docs/foundations/graphic-system/glyphs.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-51
+apps/dialtone-documentation/docs/.vuepress/baseComponents/halftonePointRenderer.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 19-21
+packages/eslint-plugin-dialtone/CHANGELOG.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-7
+apps/dialtone-documentation/docs/foundations/brand/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 24-25
+packages/dialtone-docs/tests/tests/strip-markdown.test.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 23-45,52-103
+apps/dialtone-documentation/docs/foundations/colors/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 34,38,42
+apps/dialtone-documentation/docs/foundations/graphic-system/schematic-line-art.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-62
+packages/dialtone-cli/tests/select-component.test.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 50-56
+packages/dialtone-query-core/src/tools/components.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5-6,8,162-184,198,200-208,227-228,240,267,283-286
+packages/eslint-plugin-dialtone/lib/rules/deprecated-flex-gap-classes.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6,23-24,35-37,40-41
+packages/dialtone-query-core/src/tools/icons.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5,14-15,62
+.agents/resources/rules/css-utilities.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 8
+apps/dialtone-documentation/scripts/lib/transform-vue-api.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 9,12,29,31,47-87,112-113,115-124,133,136-137,142-147,151-153,157-158,162-164
+.claude/skills/dt-migrate.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 9-10,13-20,33,37-42,45
+apps/dialtone-documentation/docs/foundations/graphic-system/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3,6-7,9-10,14,16,18,20-21,25,27,29-30,34,36,38-39,45-51
+apps/dialtone-documentation/docs/components/tabs.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 8
+packages/dialtone-query-core/src/tools/tokens.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 5,20-21,24,106-107,151,156
+scripts/retrieval/README.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 11,15
+packages/dialtone-mcp-server/package.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3
+packages/eslint-plugin-dialtone/lib/util/class-attribute-rule.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 12-16,54
+apps/dialtone-documentation/docs/components/toggle.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 8
+apps/dialtone-documentation/docs/components/table.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 7
+apps/dialtone-documentation/docs/foundations/colors/marketing/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3-5,9-17,37,66,68,70-78,80-84,86,88,90,92-147,174-184
+apps/dialtone-documentation/docs/foundations/type/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 3,5,7,16-30,33-34,37-38,43-44
+apps/dialtone-documentation/scripts/lib/parse-source-markdown.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 736
+scripts/tests/dialtone-recommendations.test.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-34
+apps/dialtone-documentation/docs/components/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 4
+packages/dialtone-mcp-server/src/query-tools.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 107
+CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+packages/dialtone-query-core/src/tools/docs.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6-8,11,15-30,90-91,106,135-141,162-164,167-180,182-183,185,200-201,207,211-212,214-216,237-241,264,267-269,276-279
+packages/dialtone-css/postcss/dialtone-docs.cjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 4,87,96-97,155-157,214,295-296
+packages/eslint-plugin-dialtone/lib/rules/deprecated-pixel-utility-classes.js
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 9,11-14,54
+packages/dialtone-cli/README.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 25,38,40-49,53,57,132-135
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/graphic-system.svg
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+apps/dialtone-documentation/docs/_data/downloads.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 69,73,98-99,103
+packages/dialtone-css/postcss/migration-metadata.cjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-67
+.claude/rules/documentation-site.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 9,13,17,21,25,29-38
+packages/eslint-plugin-dialtone/CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+apps/dialtone-documentation/scripts/lib/utils.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 15,19-23,37,44-45,48-52,57-66
+  s_f1b6a2e8befce4::t_93e7d28a4fffac 67
+scripts/generate-migration-guidance.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-76
+apps/dialtone-documentation/docs/components/status/index.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 4
+CLAUDE.md
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 108
+packages/dialtone-cli/CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+packages/dialtone-docs/src/generators/build-component-doc-links.mjs
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 6,138
+packages/dialtone-query-core/tests/tools/search-ranking.test.ts
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1-183
+packages/dialtone-tokens/CHANGELOG.json
+  s_f1b6a2e8befce4::t_8129dafe8e2fd9 1
+packages/dialtone-tokens/dist_ios/VERSION
+  s_f1b6a2e8befce4::t_3af22f4bde40c2 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "01fd8f38baf35297be9af998afd91caeeb3f586c",
+  "prompts": {},
+  "sessions": {
+    "s_f1b6a2e8befce4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1f7ba6f2-5402-4f82-907d-ec4b7e1bfa42",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

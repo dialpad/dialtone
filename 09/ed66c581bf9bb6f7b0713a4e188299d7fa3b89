@@ -1,0 +1,45 @@
+packages/dialtone-react/components/Popover/Popover.stories.tsx
+  s_c99b16455b46eb::t_01133f145c92bf 1,490-497,499-502,513
+packages/dialtone-react/components/Popover/Popover.test.tsx
+  s_c99b16455b46eb::t_d767be08a0d365 2-3,6-7,52-55,59-81,117,305-318,445-451,469-505,544-546,549-550,552,555,774-1052
+packages/dialtone-react/components/Popover/Popover.tsx
+  s_c99b16455b46eb::t_844407d592ab16 81-96,268-271,383-384,475-477,494,505-508,512-527,910,912,934-935,937-938,941-948,954,957,960,966,975-977,980-981,985-986,988-991,993,996,1021-1027,1034,1112,1114,1128,1148-1150
+packages/dialtone-react/components/Popover/PopoverHeaderFooter.tsx
+  s_2defdf83601f66::t_30537dcce34d24 20-21,38,84
+packages/dialtone-react/components/Popover/skips.json
+  s_c99b16455b46eb::t_23f599eca32de5 1-6
+packages/dialtone-react/components/SplitButton/deviations.json
+  s_e527299a1957a4::t_7dd753458a1db8 4,8,12,16,20,32,36,40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "09ed66c581bf9bb6f7b0713a4e188299d7fa3b89",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_c99b16455b46eb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "30c95363-419f-487e-8725-f973c4378898",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_e527299a1957a4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ea4f95bf-df3c-498e-b515-a8be96a02399",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

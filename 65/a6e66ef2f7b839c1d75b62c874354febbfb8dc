@@ -1,0 +1,19 @@
+packages/dialtone-react/components/ValidationMessages/ValidationMessages.stories.tsx
+  s_33c2dae364a30a::t_639809230eb4be 7,125-127,227-236,245-255
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "65a6e66ef2f7b839c1d75b62c874354febbfb8dc",
+  "prompts": {},
+  "sessions": {
+    "s_33c2dae364a30a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "03fccca4-ecba-4b82-bfb6-841be9c0b3f6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
