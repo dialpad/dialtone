@@ -988,7 +988,9 @@ export function DtFilterPill (props: DtFilterPillProps) {
     const current = root.activeElement ?? active.ownerDocument.activeElement;
     // Focus is lost when the row left the DOM: on the body, the shadow host, or the overlay that traps focus.
     const popup = live.current.primaryButton?.getAttribute('aria-controls');
-    const lostTo = [active, active.ownerDocument.body, (root as ShadowRoot).host, popup ? root.getElementById(popup) : null];
+    const lostTo = [
+      active, active.ownerDocument.body, (root as ShadowRoot).host, popup ? root.getElementById(popup) : null,
+    ];
     if (disposed.current || !isOpenRef.current || session !== draftSession.current ||
       !lostTo.includes(current as Element)) return;
     const { options: records } = live.current.state;
@@ -1100,8 +1102,10 @@ export function DtFilterPill (props: DtFilterPillProps) {
 
   // The overlay's dialog, where Vue reads popover.popoverContentEl. Its position isn't recomputed after a change
   // (Vue also calls popperInstance.update()): DtPopover exposes no handle to tippy.
+  // Vue's overlay has no content element to size until it has been shown, so a closed pill never writes a style.
+  const everOpened = useRef(false);
   const syncOverlayMinInlineSize = useEffectEvent(() => {
-    if (!rootElement) return;
+    if (!rootElement || !everOpened.current) return;
     const dialog = getOverlayDialog(getAnchorControls()[0]);
     if (!dialog) return;
     const minimum = resolveOverlayMinInlineSize();
@@ -1128,6 +1132,7 @@ export function DtFilterPill (props: DtFilterPillProps) {
   }, [rootElement, overlayMinInlineSize, overlayUseDropdown, hasClear, clearButton, primaryButton]);
 
   useEffect(() => {
+    if (isOpen) everOpened.current = true;
     syncOverlayMinInlineSize();
   }, [isOpen, popoverMaxWidth]);
 
