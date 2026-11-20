@@ -1,0 +1,19 @@
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-presence.vue
+  s_93aeca3805a6ee::t_eea2245ccbbbc9 18-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "5c70c19c5067f9e213e40b088f37a38da5c3ecd4",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

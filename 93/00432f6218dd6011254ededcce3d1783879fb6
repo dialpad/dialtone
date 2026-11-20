@@ -1,0 +1,23 @@
+packages/dialtone-react/components/Dropdown/DropdownConstants.ts
+  s_87d0f63b120eb7::t_10490909750598 1-11
+packages/dialtone-react/components/Dropdown/DropdownSeparator.tsx
+  s_87d0f63b120eb7::t_a8de1a5ae38ed9 1-16
+packages/dialtone-react/components/Dropdown/DropdownList.tsx
+  s_87d0f63b120eb7::t_4a8dc91344a22c 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9300432f6218dd6011254ededcce3d1783879fb6",
+  "prompts": {},
+  "sessions": {
+    "s_87d0f63b120eb7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "442e71ed-9091-44b6-b09c-e8116970a462",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+packages/dialtone-react/components/Slider/Composables/UseSliderCollisionAvoidance.ts
+  s_df8961542ce746::t_d569c41c139772 248-252
+packages/dialtone-react/components/Slider/Composables/UseSliderMarksAndTicks.ts
+  s_df8961542ce746::t_a2f3b7746713d6 19-20,22
+packages/dialtone-react/components/Slider/Slider.test.tsx
+  s_df8961542ce746::t_01f7021a0c759e 906-919,3068-3091
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "75ce6f9d520552a3eb12c7bdd42a9f7d299e4487",
+  "prompts": {},
+  "sessions": {
+    "s_df8961542ce746": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "eb3ecb99-a007-4804-a8eb-c927f4d33ab6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

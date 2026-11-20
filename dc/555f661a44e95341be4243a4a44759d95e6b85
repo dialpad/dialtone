@@ -1,0 +1,27 @@
+packages/dialtone-react/components/Stack/Stack.stories.tsx
+  s_f239d358994f5a::t_68f08638a6e918 10,99-113,196-221,409-415
+packages/dialtone-react/components/Stack/Stack.test.tsx
+  s_f239d358994f5a::t_41df5f5ef794ef 277-311
+packages/dialtone-react/components/Stack/Stack.tsx
+  s_f239d358994f5a::t_0cb1bc538d58c5 3-10,13,65-78,107,125-126
+packages/dialtone-react/components/Stack/StackConstants.ts
+  s_f239d358994f5a::t_1319a9619e8987 34-39,54-55,68
+packages/dialtone-react/components/Stack/Utils.ts
+  s_f239d358994f5a::t_81e1b78fa6c3f3 6,101-104,124,131,145-149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dc555f661a44e95341be4243a4a44759d95e6b85",
+  "prompts": {},
+  "sessions": {
+    "s_f239d358994f5a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3804e672-b6f3-4976-ad3c-5cedf2efb880",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
