@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
@@ -9,7 +9,7 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '../ListItem/ListItemConstants';
 import { POPOVER_CONTENT_WIDTHS } from '../Popover';
 import { POPOVER_DIRECTIONS } from '../Popover/PopoverConstants';
 import { DtStack } from '../Stack';
-import { DtDropdown, type DtDropdownProps } from './Dropdown';
+import { DtDropdown, type DtDropdownAnchorScope, type DtDropdownProps } from './Dropdown';
 import { DROPDOWN_PADDING_CLASSES } from './DropdownConstants';
 import { DtDropdownSeparator } from './DropdownSeparator';
 import { DROPDOWN_STORY_ITEMS } from './DropdownStoryConstants';
@@ -186,6 +186,13 @@ type Story = StoryObj<DropdownStoryArgs>;
 
 const Html = ({ html }: { html: string }) => <div dangerouslySetInnerHTML={{ __html: html }} />;
 
+// The .story.vue templates bind the three ARIA scope keys on the trigger one by one.
+const ariaOf = (attrs: DtDropdownAnchorScope) => ({
+  'aria-expanded': attrs['aria-expanded'],
+  'aria-controls': attrs['aria-controls'],
+  'aria-haspopup': attrs['aria-haspopup'],
+});
+
 // DropdownDefault.story.vue
 function DropdownDefault ({
   open,
@@ -239,7 +246,7 @@ function DropdownDefault ({
       anchor={attrs => (anchor
         ? <Html html={anchor} />
         : (
-          <DtButton {...attrs}>
+          <DtButton {...ariaOf(attrs)}>
             Click to open
           </DtButton>
           ))}
@@ -308,7 +315,7 @@ function DropdownVariants ({
             open={open}
             onHighlight={onHighlight}
             anchor={attrs => (
-              <DtButton {...attrs}>
+              <DtButton {...ariaOf(attrs)}>
                 {variant} aligned dropdown
               </DtButton>
             )}
@@ -331,7 +338,7 @@ function DropdownVariants ({
           anchor={attrs => (anchor
             ? <Html html={anchor} />
             : (
-              <DtButton {...attrs}>
+              <DtButton {...ariaOf(attrs)}>
                 with sections
               </DtButton>
               ))}
@@ -362,7 +369,7 @@ function DropdownVariants ({
           anchor={attrs => (anchor
             ? <Html html={anchor} />
             : (
-              <DtButton {...attrs}>
+              <DtButton {...ariaOf(attrs)}>
                 with sections and headings
               </DtButton>
               ))}
@@ -393,7 +400,7 @@ function DropdownVariants ({
           className="d-mie-100"
           open={open}
           anchor={attrs => (
-            <DtButton {...attrs}>
+            <DtButton {...ariaOf(attrs)}>
               with footer
             </DtButton>
           )}
@@ -424,9 +431,8 @@ function DropdownVariants ({
             open={open}
             openOnContext={true}
             transition={transition}
-            anchor={attrs => (
+            anchor={(
               <div
-                {...attrs}
                 className="d-ba d-bas-dashed d-w264 d-py-600 d-ta-center d-bgc-black-300"
               >
                 Right click to open
@@ -437,6 +443,139 @@ function DropdownVariants ({
         </DtStack>
       </DtStack>
     </div>
+  );
+}
+
+// DropdownMenuRoles.story.vue
+function DropdownMenuRoles ({ visibilityChangeCallback, onOpened }: DropdownStoryArgs) {
+  const [newestFirst, setNewestFirst] = useState(true);
+  const [actionStatus, setActionStatus] = useState('');
+
+  return (
+    <DtStack direction="row" gap="500" align="start">
+      <ul aria-label="Ordinary list">
+        <DtListItem>Ordinary list content</DtListItem>
+        <DtListItem selected>
+          A visual checkmark keeps the default listitem role
+        </DtListItem>
+      </ul>
+      <DtDropdown
+        visibilityChangeCallback={visibilityChangeCallback}
+        onOpened={onOpened}
+        anchor={attrs => (
+          <DtButton {...ariaOf(attrs)}>
+            Sort: {newestFirst ? 'Newest first' : 'Oldest first'}
+          </DtButton>
+        )}
+        list={({ close }) => (
+          <>
+            <DtListItemGroup heading="Sort order">
+              <DtListItem
+                role="menuitemradio"
+                navigationType="arrow-keys"
+                selected={newestFirst}
+                onClick={() => { setNewestFirst(true); close(); }}
+              >
+                Newest first
+              </DtListItem>
+              <DtListItem
+                role="menuitemradio"
+                navigationType="arrow-keys"
+                selected={!newestFirst}
+                onClick={() => { setNewestFirst(false); close(); }}
+              >
+                Oldest first
+              </DtListItem>
+            </DtListItemGroup>
+            <DtDropdownSeparator />
+            <DtListItem
+              role="menuitem"
+              navigationType="arrow-keys"
+              onClick={() => { setActionStatus('Refreshed'); close(); }}
+            >
+              Refresh
+            </DtListItem>
+            <DtListItem
+              role="menuitem"
+              navigationType="arrow-keys"
+              disabled
+              aria-describedby="menu-roles-export-reason"
+              subtitle={<span id="menu-roles-export-reason" aria-hidden="true">Only owners can export</span>}
+            >
+              Export
+            </DtListItem>
+          </>
+        )}
+      />
+      <p role="status">
+        {actionStatus}
+      </p>
+    </DtStack>
+  );
+}
+
+// DropdownControlledArrows.story.vue
+function DropdownControlledArrows ({ visibilityChangeCallback, onOpened }: DropdownStoryArgs) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [acceptArrows, setAcceptArrows] = useState(true);
+  const [arrowCount, setArrowCount] = useState(0);
+  const triggerRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+
+  const onKeyDown = (event: KeyboardEvent) => {
+    if (!triggerRef.current?.contains(event.target as Node) || !['ArrowUp', 'ArrowDown'].includes(event.key)) return;
+    setArrowCount(count => count + 1);
+    if (!acceptArrows) return;
+    event.preventDefault();
+    setIsOpen(true);
+  };
+
+  const onVisibilityChange = (open: boolean) => {
+    setIsOpen(open);
+    visibilityChangeCallback?.(open);
+  };
+
+  return (
+    <DtStack gap="500" align="start">
+      <label>
+        <input
+          type="checkbox"
+          data-qa="accept-arrow-opening"
+          checked={acceptArrows}
+          onChange={event => setAcceptArrows(event.target.checked)}
+        />
+        Accept anchor arrows synchronously
+      </label>
+      <DtDropdown
+        open={isOpen}
+        forwardAnchorArrowKeys
+        visibilityChangeCallback={onVisibilityChange}
+        onKeyDown={onKeyDown}
+        onOpened={onOpened}
+        anchor={attrs => (
+          <DtButton
+            ref={triggerRef}
+            data-qa="controlled-arrow-trigger"
+            {...ariaOf(attrs)}
+            onClick={() => setIsOpen(open => !open)}
+          >
+            Controlled menu
+          </DtButton>
+        )}
+        list={({ close }) => (
+          <>
+            <DtListItem role="menuitem" navigationType="arrow-keys" onClick={close}>
+              Alpha action
+            </DtListItem>
+            <DtListItem role="menuitem" navigationType="arrow-keys" onClick={close}>
+              Beta action
+            </DtListItem>
+          </>
+        )}
+      />
+      <p role="status" data-qa="controlled-arrow-status">
+        Forwarded anchor arrows: {arrowCount}. Opening is {acceptArrows ? 'accepted' : 'ignored'}.
+      </p>
+    </DtStack>
   );
 }
 
@@ -488,4 +627,28 @@ export const Variants: Story = {
       </DtStack>
     ),
   ],
+};
+
+export const MenuRoles: Story = {
+  render: args => <DropdownMenuRoles {...args} />,
+  args: { visibilityChangeCallback: action('logical-visibility') },
+  parameters: {
+    docs: {
+      description: {
+        story: 'ListItem defaults to ordinary list content. Menu actions explicitly use menuitem; persistent mutually exclusive menu choices explicitly use menuitemradio and consumer-owned selected state. Highlight moves focus without changing checked state. Listbox choices remain option.',
+      },
+    },
+  },
+};
+
+export const ControlledArrows: Story = {
+  render: args => <DropdownControlledArrows {...args} />,
+  args: { visibilityChangeCallback: action('logical-visibility') },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The boolean-open menu accepts anchor arrows synchronously in its own onKeyDown callback and checks the target. Turn acceptance off to ignore arrows, then click the trigger to verify pointer opening retains dialog focus.',
+      },
+    },
+  },
 };

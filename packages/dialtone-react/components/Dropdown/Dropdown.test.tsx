@@ -1,7 +1,10 @@
-import { act, cleanup, fireEvent, render, screen, type RenderResult } from '@testing-library/react';
+import { useLayoutEffect, useState, type ReactNode } from 'react';
+import { act, cleanup, fireEvent, render, screen, within, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { finishTransitions } from '../../tests/helpers/transition';
 import { DtListItem } from '../ListItem';
+import { DtListItemGroup } from '../ListItemGroup';
+import { DtPopover } from '../Popover';
 import { DtDropdown, type DtDropdownAnchorScope, type DtDropdownProps } from './Dropdown';
 
 const MOCK_HIGHLIGHT_STUB = vi.fn();
@@ -13,7 +16,17 @@ const baseProps: DtDropdownProps = {
 // Vue's list items have no ids. Here they do: an item without one can't be highlighted with the mouse (Vue's
 // setHighlightId ignores an empty id), and the highlight tests use the mouse where Vue's call setHighlightIndex(1).
 const baseSlots: Partial<DtDropdownProps> = {
-  anchor: (attrs: DtDropdownAnchorScope) => <a id="anchor" href="#" {...attrs}>Link</a>,
+  anchor: (attrs: DtDropdownAnchorScope) => (
+    <button
+      id="anchor"
+      ref={(element) => { consumerTrigger = element; }}
+      aria-expanded={attrs['aria-expanded']}
+      aria-controls={attrs['aria-controls']}
+      aria-haspopup={attrs['aria-haspopup']}
+    >
+      Open menu
+    </button>
+  ),
   list: (
     <ul id="list">
       <li id="item-1" role="menuitem">1</li>
@@ -24,6 +37,7 @@ const baseSlots: Partial<DtDropdownProps> = {
 };
 const baseAttrs: Partial<DtDropdownProps> = {};
 
+let consumerTrigger: HTMLButtonElement | null = null;
 let mockProps: Partial<DtDropdownProps> = {};
 let mockSlots: Partial<DtDropdownProps> = {};
 let mockAttrs: Partial<DtDropdownProps> = {};
@@ -113,8 +127,12 @@ describe('DtDropdown Tests', () => {
     });
 
     describe('When the dropdown is open', () => {
-      it('aria-expanded should be "true"', () => {
+      it('should forward popup attributes without overwriting the consumer ref', () => {
+        const popoverContent = screen.getByRole('menu', { hidden: true });
         expect(anchorElement).toHaveAttribute('aria-expanded', 'true');
+        expect(anchorElement).toHaveAttribute('aria-controls', popoverContent.id);
+        expect(anchorElement).toHaveAttribute('aria-haspopup', 'menu');
+        expect(consumerTrigger).toBe(anchorElement);
       });
     });
   });
@@ -190,7 +208,10 @@ describe('DtDropdown Tests', () => {
       updateWrapper();
     });
 
-    it('moves the highlight and focus with the arrow keys, wrapping at the ends', async () => {
+    // The menu's Close button is the stop between the last and the first row.
+    const close = () => screen.getByTestId('dt-sr-only-close-button');
+
+    it('moves the highlight and focus with the arrow keys, passing through Close at the ends', async () => {
       await opened();
 
       pressOnList('ArrowDown');
@@ -202,36 +223,44 @@ describe('DtDropdown Tests', () => {
       pressOnList('ArrowUp');
       expect(items()[0]).toHaveFocus();
       pressOnList('ArrowUp');
+      expect(close()).toHaveFocus();
+      fireEvent.keyDown(close(), { code: 'ArrowUp', key: 'ArrowUp' });
       expect(items()[2]).toHaveFocus();
       pressOnList('ArrowDown');
+      expect(close()).toHaveFocus();
+      fireEvent.keyDown(close(), { code: 'ArrowDown', key: 'ArrowDown' });
       expect(items()[0]).toHaveFocus();
     });
 
-    it('jumps with Home and End', async () => {
+    it('jumps with Home, and to Close with End', async () => {
       await opened();
 
       pressOnList('End');
-      expect(items()[2]).toHaveFocus();
+      expect(close()).toHaveFocus();
       pressOnList('Home');
       expect(items()[0]).toHaveFocus();
     });
 
-    it('does not report highlighting the last item, as Vue', async () => {
+    it('does not report highlighting the last item or Close, as Vue', async () => {
       await opened();
 
       pressOnList('End');
+      expect(MOCK_HIGHLIGHT_STUB).not.toHaveBeenCalled();
+      fireEvent.keyDown(close(), { code: 'ArrowUp', key: 'ArrowUp' });
+      expect(items()[2]).toHaveFocus();
       expect(MOCK_HIGHLIGHT_STUB).not.toHaveBeenCalled();
       pressOnList('Home');
       expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledWith(0);
     });
 
-    it('calls onEndOfList instead of wrapping when given', async () => {
+    it('calls onEndOfList instead of moving to Close when given', async () => {
       const onEndOfList = vi.fn();
       mockAttrs = { onEndOfList };
       updateWrapper();
       await opened();
 
       pressOnList('End');
+      fireEvent.keyDown(close(), { code: 'ArrowUp', key: 'ArrowUp' });
       pressOnList('ArrowDown');
 
       expect(onEndOfList).toHaveBeenCalledTimes(1);
@@ -306,5 +335,461 @@ describe('DtDropdown Tests', () => {
 
       expect(listWrapper).toHaveClass('d-dropdown-list', 'd-py-50', 'my-list', 'd-context-menu-list');
     });
+  });
+});
+
+describe('Dropdown menu roles and controlled arrow opt-in', () => {
+  let result: RenderResult;
+  let visibilityChanges: ReturnType<typeof vi.fn<(open: boolean) => void>>;
+  let highlight: ReturnType<typeof vi.fn<(index: number) => void>>;
+  let keydown: ReturnType<typeof vi.fn<(event: KeyboardEvent) => void>>;
+  let actions: string[];
+  // Vue's wrapper.setProps, which a test can also call from inside an event handler.
+  let setProps: (next: Partial<DtDropdownProps>) => void;
+
+  beforeEach(() => {
+    visibilityChanges = vi.fn();
+    highlight = vi.fn();
+    keydown = vi.fn();
+    actions = [];
+  });
+
+  const defaultList = () => [
+    <li key="heading" role="presentation" data-qa="heading">Choices</li>,
+    <DtListItem
+      key="radio-one"
+      role="menuitemradio"
+      id="radio:one"
+      data-qa="radio-one"
+      selected
+      navigationType="arrow-keys"
+      onClick={() => actions.push('Alpha')}
+    >
+      Alpha
+    </DtListItem>,
+    <li key="separator" role="separator" />,
+    <DtListItem
+      key="action"
+      role="menuitem"
+      id="action"
+      data-qa="action-row"
+      navigationType="arrow-keys"
+      onClick={() => actions.push('Beta')}
+    >
+      Beta
+    </DtListItem>,
+    <DtListItem
+      key="radio-two"
+      role="menuitemradio"
+      id="radio two"
+      data-qa="radio-two"
+      navigationType="arrow-keys"
+      onClick={() => actions.push('Bravo')}
+    >
+      <span role="img" aria-label="Bravo icon" data-qa="nested-role">Bravo</span>
+    </DtListItem>,
+    <li key="no-id" role="menuitemradio" tabIndex={-1}>No ID</li>,
+  ];
+
+  function Harness ({ initial }: { initial: DtDropdownProps }) {
+    const [props, setState] = useState(initial);
+    useLayoutEffect(() => {
+      setProps = next => setState(current => ({ ...current, ...next }));
+    }, []);
+    return <DtDropdown {...props} />;
+  }
+
+  const mountMenu = (
+    props: Partial<DtDropdownProps> = {},
+    onKeyDown?: (event: KeyboardEvent) => void,
+    list?: () => ReactNode,
+    attrs: Partial<DtDropdownProps> = {},
+  ) => {
+    keydown.mockImplementation(event => onKeyDown?.(event));
+    result = render(
+      <Harness
+        initial={{
+          open: true,
+          visibilityChangeCallback: visibilityChanges,
+          ...props,
+          onKeyDown: keydown,
+          onHighlight: highlight,
+          ...attrs,
+          anchor: anchorAttrs => (
+            <button data-qa="trigger" aria-expanded={anchorAttrs['aria-expanded']}>Choose</button>
+          ),
+          list: (list ?? defaultList)(),
+        }}
+      />,
+      { container: attachTo(document.body) },
+    );
+    // Vue's popover content ref: the dialog element that holds this dropdown's list (once it has opened).
+    const listWrapper = screen.queryAllByTestId('dt-dropdown-list-wrapper')[0];
+    return listWrapper?.closest<HTMLElement>('[data-qa="dt-popover"]') as HTMLElement;
+  };
+
+  // DtListItemGroup's list shares the dropdown list's data-qa; the dropdown's comes first.
+  const dropdownList = () => screen.getAllByTestId('dt-dropdown-list-wrapper')[0];
+
+  const update = (next: Partial<DtDropdownProps>) => act(() => { setProps(next); });
+  const trigger = () => screen.getByTestId('trigger');
+  const settle = async () => {
+    await finishTransitions();
+    await flushPromises();
+  };
+
+  afterEach(() => {
+    result.unmount();
+    cleanup();
+    vi.restoreAllMocks();
+  });
+
+  it('preserves consumer popup classes while scoping keyboard Close visibility', async () => {
+    // React has no kebab-case attribute alias: both of Vue's class bindings are one dialogClass.
+    const content = mountMenu({}, undefined, undefined, {
+      dialogClass: [['consumer-kebab', { 'consumer-active': true }], { 'consumer-camel': true, 'consumer-inactive': false }],
+    });
+    await settle();
+    expect(content).toHaveClass('consumer-kebab', 'consumer-active', 'consumer-camel', 'd-dropdown__menu--arrow-keys');
+    expect(content).not.toHaveClass('consumer-inactive');
+    for (const navigationType of ['tab', 'none'] as const) {
+      await update({ navigationType });
+      expect(content).not.toHaveClass('d-dropdown__menu--arrow-keys');
+      expect(content).toHaveClass('consumer-kebab', 'consumer-active', 'consumer-camel');
+    }
+    await update({ navigationType: 'arrow-keys' });
+    expect(content).toHaveClass('d-dropdown__menu--arrow-keys');
+    await update({ dialogClass: ['consumer-updated', ['consumer-kebab-updated']] });
+    expect(content).toHaveClass('consumer-updated', 'consumer-kebab-updated', 'd-dropdown__menu--arrow-keys');
+    expect(content).not.toHaveClass('consumer-camel');
+    expect(content).not.toHaveClass('consumer-kebab');
+  });
+
+  it.each([false, true])('navigates mixed menu roles and Close with showCloseButton=%s', async (showCloseButton) => {
+    const content = mountMenu({ showCloseButton });
+    await settle();
+    const list = dropdownList();
+    const close = screen.getByTestId(showCloseButton ? 'dt-popover-close' : 'dt-sr-only-close-button');
+    expect(close).toHaveAttribute('role', 'menuitem');
+    expect(content.contains(close)).toBe(true);
+    expect(list.contains(close)).toBe(false);
+    const send = (key: string, code = key) => fireEvent.keyDown(list, { key, code });
+    send('ArrowDown');
+    expect(document.activeElement?.id).toBe('radio:one');
+    send('ArrowDown');
+    expect(document.activeElement?.id).toBe('action');
+    send('b', 'KeyB');
+    expect(document.activeElement?.id).toBe('radio two');
+    expect(highlight.mock.calls).toEqual([[0], [1]]);
+    send('End');
+    expect(document.activeElement).toBe(close);
+    expect(highlight.mock.calls).toEqual([[0], [1]]);
+    fireEvent.keyDown(close, { key: 'ArrowUp', code: 'ArrowUp' });
+    expect(document.activeElement?.id).toBe('radio two');
+    send('ArrowDown');
+    expect(document.activeElement).toBe(close);
+    fireEvent.keyDown(close, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(document.activeElement?.id).toBe('radio:one');
+    send('ArrowUp');
+    expect(document.activeElement).toBe(close);
+    fireEvent.keyDown(close, { key: 'Home', code: 'Home' });
+    expect(document.activeElement?.id).toBe('radio:one');
+    expect(screen.getByTestId('radio-one')).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getByTestId('radio-two')).toHaveAttribute('aria-checked', 'false');
+    expect(highlight.mock.calls).toEqual([[0], [1], [0], [0]]);
+    expect(actions).toEqual([]);
+    fireEvent.keyDown(close, { key: 'Escape', code: 'Escape' });
+    await settle();
+    expect(trigger()).toHaveAttribute('aria-expanded', 'false');
+    expect(document.activeElement).toBe(trigger());
+  });
+
+  it('targets the owning menu row when hovering nested-role content', async () => {
+    const menu = mountMenu();
+    await settle();
+    menu.focus();
+    fireEvent.mouseMove(screen.getByTestId('nested-role'));
+    expect(document.activeElement?.id).toBe('radio two');
+    fireEvent.keyDown(screen.getByTestId('radio-two'), { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(document.activeElement).toBe(screen.getByTestId('dt-sr-only-close-button'));
+    fireEvent.mouseMove(screen.getByTestId('action-row'));
+    expect(document.activeElement?.id).toBe('action');
+    fireEvent.keyDown(screen.getByTestId('action-row'), { key: 'Enter', code: 'Enter' });
+    fireEvent.keyDown(screen.getByTestId('action-row'), { key: ' ', code: 'Space' });
+    expect(actions).toEqual(['Beta', 'Beta']);
+    expect(highlight.mock.calls).toEqual([[1]]);
+  });
+
+  it.each([false, true])('focuses only Close in an empty keyboard-opened menu with showCloseButton=%s',
+    async (showCloseButton) => {
+      mountMenu({ open: null, showCloseButton }, undefined, () => []);
+      fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
+      await settle();
+      const close = screen.getByTestId(showCloseButton ? 'dt-popover-close' : 'dt-sr-only-close-button');
+      expect(document.activeElement).toBe(close);
+      for (const key of ['ArrowUp', 'ArrowDown', 'Home', 'End']) {
+        fireEvent.keyDown(close, { key, code: key });
+        expect(document.activeElement).toBe(close);
+      }
+      expect(highlight).not.toHaveBeenCalled();
+    });
+
+  it.each([
+    { target: 'a consumer focus target', attrs: { initialFocusElement: '#refresh' }, focused: 'refresh' },
+    { target: 'an unset focus target', attrs: { initialFocusElement: undefined }, focused: 'export' },
+  ] as const)('opens a menu with a disabled first row by keyboard onto $target', async ({ attrs, focused }) => {
+    mountMenu({ open: null }, undefined, () => [
+      <DtListItem key="export" id="export" role="menuitem" navigationType="arrow-keys" disabled>Export</DtListItem>,
+      <DtListItem key="rename" id="rename" role="menuitem" navigationType="arrow-keys">Rename</DtListItem>,
+      <DtListItem key="refresh" id="refresh" role="menuitem" navigationType="arrow-keys">Refresh</DtListItem>,
+    ], attrs);
+    fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
+    await settle();
+    expect(document.activeElement?.id).toBe(focused);
+  });
+
+  it.each(['dialog', 'listbox'] as const)('preserves legacy row boundaries with popup role=%s', async (role) => {
+    const content = mountMenu({ role });
+    await settle();
+    expect(content).toHaveAttribute('role', role);
+    expect(content).not.toHaveClass('d-dropdown__menu--arrow-keys');
+    fireEvent.keyDown(content, { key: 'End', code: 'End' });
+    expect(document.activeElement?.id).toBe('radio two');
+    fireEvent.keyDown(content, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(document.activeElement?.id).toBe('radio:one');
+    fireEvent.keyDown(content, { key: 'ArrowUp', code: 'ArrowUp' });
+    expect(document.activeElement?.id).toBe('radio two');
+  });
+
+  it('preserves custom callbacks at the application row boundaries', async () => {
+    const beginning = vi.fn();
+    const end = vi.fn();
+    const content = mountMenu({ onBeginningOfList: beginning, onEndOfList: end });
+    await settle();
+    fireEvent.keyDown(content, { key: 'ArrowDown', code: 'ArrowDown' });
+    fireEvent.keyDown(content, { key: 'ArrowUp', code: 'ArrowUp' });
+    expect(beginning).toHaveBeenCalledExactlyOnceWith();
+    expect(document.activeElement?.id).toBe('radio:one');
+    fireEvent.keyDown(content, { key: 'End', code: 'End' });
+    const close = screen.getByTestId('dt-sr-only-close-button');
+    expect(document.activeElement).toBe(close);
+    fireEvent.keyDown(close, { key: 'ArrowUp', code: 'ArrowUp' });
+    expect(document.activeElement?.id).toBe('radio two');
+    fireEvent.keyDown(content, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(end).toHaveBeenCalledExactlyOnceWith();
+    expect(document.activeElement?.id).toBe('radio two');
+    expect(actions).toEqual([]);
+  });
+
+  it.each([false, true])('dismisses the owning Close without a choice event with showCloseButton=%s',
+    async (showCloseButton) => {
+      const foreign = render(
+        <DtPopover open modal={false} anchor={<button data-qa="foreign-trigger">Another popup</button>} />,
+        { container: attachTo(document.body) },
+      );
+      try {
+        const content = mountMenu({ showCloseButton });
+        await settle();
+        const close = within(content).getByTestId(showCloseButton ? 'dt-popover-close' : 'dt-sr-only-close-button');
+        fireEvent.keyDown(content, { key: 'End', code: 'End' });
+        expect(document.activeElement).toBe(close);
+        if (showCloseButton) fireEvent.click(close);
+        else fireEvent.keyDown(close, { key: ' ', code: 'Space' });
+        await settle();
+        expect(trigger()).toHaveAttribute('aria-expanded', 'false');
+        expect(document.activeElement).toBe(trigger());
+        expect(screen.getByTestId('foreign-trigger')).toHaveAttribute('aria-expanded', 'true');
+        expect(highlight.mock.calls).toEqual([[-1]]);
+        expect(actions).toEqual([]);
+        expect(visibilityChanges.mock.calls).toEqual([[true], [false]]);
+      } finally {
+        foreign.unmount();
+      }
+    });
+
+  it('preserves non-li rows without pointer-driven menu focus or highlight events', async () => {
+    const content = mountMenu({}, undefined, () => [
+      <DtListItem key="first" id="div-first" role="menuitem" elementType="div" navigationType="arrow-keys">
+        First
+      </DtListItem>,
+      <DtListItem key="second" id="div-second" role="menuitem" elementType="div" navigationType="arrow-keys">
+        Second
+      </DtListItem>,
+    ]);
+    await settle();
+    content.focus();
+    fireEvent.mouseMove(document.getElementById('div-second') as HTMLElement);
+    expect(document.activeElement).toBe(content);
+    expect(highlight).not.toHaveBeenCalled();
+  });
+
+  it('navigates anchor arrows when initially open with the opt-in', async () => {
+    mountMenu({ open: true, forwardAnchorArrowKeys: true });
+    await settle();
+    fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(visibilityChanges.mock.calls).toEqual([[true]]);
+    expect(keydown.mock.calls[0][0].defaultPrevented).toBe(true);
+    expect(document.activeElement?.id).toBe('radio:one');
+  });
+
+  it('preserves legacy highlight notifications when hovering a group heading', async () => {
+    mountMenu({}, undefined, () => (
+      <DtListItemGroup id="sort-options" heading="Sort order">
+        <DtListItem id="newest" role="menuitemradio" selected navigationType="arrow-keys">Newest</DtListItem>
+        <DtListItem id="oldest" role="menuitemradio" navigationType="arrow-keys">Oldest</DtListItem>
+        <DtListItem id="refresh" role="menuitem" navigationType="arrow-keys">Refresh</DtListItem>
+      </DtListItemGroup>
+    ));
+    await settle();
+    const byId = (id: string) => document.getElementById(id) as HTMLElement;
+    fireEvent.mouseMove(byId('oldest'));
+    expect(highlight.mock.calls).toEqual([[1]]);
+    fireEvent.mouseMove(byId('sort-options-heading'));
+    fireEvent.mouseMove(byId('sort-options-heading'));
+    expect(highlight.mock.calls).toEqual([[1], [-1]]);
+    expect(byId('oldest')).not.toHaveClass('d-list-item--highlighted');
+    expect(document.activeElement?.id).toBe('oldest');
+    expect(byId('newest')).toHaveAttribute('aria-checked', 'true');
+  });
+
+  it('moves the pointer highlight onto a disabled row while the menu keeps focus', async () => {
+    const menu = mountMenu({}, undefined, () => [
+      <DtListItem key="rename" id="rename" data-qa="rename-row" role="menuitem" navigationType="arrow-keys">
+        Rename
+      </DtListItem>,
+      <DtListItem key="export" id="export" data-qa="export-row" role="menuitem" navigationType="arrow-keys" disabled>
+        Export
+      </DtListItem>,
+      <DtListItem key="refresh" id="refresh" data-qa="refresh-row" role="menuitem" navigationType="arrow-keys">
+        Refresh
+      </DtListItem>,
+    ]);
+    await settle();
+    // Start with focus on an enabled row, so hovering the disabled one must move it.
+    fireEvent.mouseMove(screen.getByTestId('rename-row'));
+    fireEvent.mouseMove(screen.getByTestId('export-row'));
+    // Focusing the row would show the keyboard focus ring under the pointer.
+    expect(document.activeElement).toBe(menu);
+    fireEvent.keyDown(menu, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(document.activeElement?.id).toBe('refresh');
+  });
+
+  it('keeps Space from scrolling the menu while the pointer rests on a disabled row', async () => {
+    const menu = mountMenu({}, undefined, () => [
+      <DtListItem key="newest" id="newest" data-qa="newest-row" role="menuitemradio" navigationType="arrow-keys">
+        Newest
+      </DtListItem>,
+      <DtListItem
+        key="archived"
+        id="archived"
+        data-qa="archived-row"
+        role="menuitemradio"
+        navigationType="arrow-keys"
+        disabled
+      >
+        Archived
+      </DtListItem>,
+    ]);
+    await settle();
+    fireEvent.mouseMove(screen.getByTestId('archived-row'));
+    const space = new KeyboardEvent('keydown', { key: ' ', code: 'Space', bubbles: true, cancelable: true });
+    menu.dispatchEvent(space);
+    expect(space.defaultPrevented).toBe(true);
+  });
+
+  it('focuses a hovered disabled row when the menu content cannot take focus', async () => {
+    mountMenu({}, undefined, () => [
+      <DtListItem key="rename" id="rename" data-qa="rename-row" role="menuitem" navigationType="arrow-keys">
+        Rename
+      </DtListItem>,
+      <DtListItem key="export" id="export" data-qa="export-row" role="menuitem" navigationType="arrow-keys" disabled>
+        Export
+      </DtListItem>,
+    ], { contentTabindex: null });
+    await settle();
+    fireEvent.mouseMove(screen.getByTestId('rename-row'));
+    fireEvent.mouseMove(screen.getByTestId('export-row'));
+    // Leaving focus on Rename would let Enter activate a row the pointer isn't on.
+    expect(document.activeElement?.id).toBe('export');
+  });
+
+  it('keeps the menu context through a neutral wrapper and an explicitly labelled group', async () => {
+    const menu = mountMenu({}, undefined, () => [
+      <DtListItemGroup key="group" id="sort-group" heading="Sort order">
+        <DtListItem role="menuitemradio" selected navigationType="arrow-keys">Newest</DtListItem>
+      </DtListItemGroup>,
+      <DtListItem key="refresh" role="menuitem" navigationType="arrow-keys">Refresh</DtListItem>,
+    ]);
+    await settle();
+    const list = dropdownList();
+    const group = list.querySelector('[role="group"]') as HTMLElement;
+    expect(menu).toHaveAttribute('role', 'menu');
+    expect(list).toHaveAttribute('role', 'none');
+    expect(group.querySelector('[role="menuitemradio"]')?.parentElement).toBe(group);
+    expect(group.parentElement).toBe(list);
+    expect(group.parentElement?.closest('ul:not([role]), ol:not([role])')).toBeNull();
+    expect(list.querySelector('[role="menuitem"]')?.parentElement).toBe(list);
+  });
+
+  it('keeps closing-content arrows out of the closed-anchor opening path', async () => {
+    mountMenu({ open: true, forwardAnchorArrowKeys: true });
+    await settle();
+    const list = dropdownList();
+    // Vue holds the leave open by stubbing DtPopover's focus lookup; here the arrow arrives before the leave
+    // transition has run, while the dropdown is already logically closed.
+    await update({ open: false });
+    expect(visibilityChanges.mock.calls).toEqual([[true], [false]]);
+    fireEvent.keyDown(list, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(keydown).toHaveBeenCalledTimes(1);
+    expect(keydown.mock.calls[0][0].defaultPrevented).toBe(true);
+    expect(trigger()).toHaveAttribute('aria-expanded', 'false');
+    await settle();
+  });
+
+  it.each([
+    { code: 'ArrowUp', showCloseButton: false },
+    { code: 'ArrowDown', showCloseButton: true },
+  ])('preserves first-row keyboard focus on $code opening with showCloseButton=$showCloseButton',
+    async ({ code, showCloseButton }) => {
+      mountMenu({ open: null, showCloseButton });
+      fireEvent.keyDown(trigger(), { key: code, code });
+      await settle();
+      expect(keydown).toHaveBeenCalledTimes(1);
+      expect(document.activeElement?.id).toBe('radio:one');
+    });
+
+  it('forwards one closed controlled arrow without suppressing an ancestor and forgets ignored modality', async () => {
+    mountMenu({ open: false, forwardAnchorArrowKeys: true });
+    const ancestor = vi.fn();
+    // The dropdown's root element's parent, as Vue's wrapper.element.parentElement.
+    result.container.addEventListener('keydown', ancestor);
+    fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(keydown).toHaveBeenCalledTimes(1);
+    const event = keydown.mock.calls[0][0];
+    expect(ancestor).toHaveBeenCalledOnce();
+    expect(event.defaultPrevented).toBe(false);
+    await flushPromises();
+    await userEvent.click(trigger());
+    await update({ open: true });
+    await settle();
+    expect(document.activeElement?.getAttribute('role')).toBe('menu');
+    result.container.removeEventListener('keydown', ancestor);
+  });
+
+  it('records keyboard modality before the parent accepts opening', async () => {
+    mountMenu({ open: false, forwardAnchorArrowKeys: true }, () => {
+      setProps({ open: true });
+    });
+    fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
+    await settle();
+    expect(visibilityChanges.mock.calls).toEqual([[true]]);
+    expect(document.activeElement?.id).toBe('radio:one');
+  });
+
+  it('keeps controlled anchor arrows silent by default', async () => {
+    mountMenu({ open: false });
+    fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(keydown).not.toHaveBeenCalled();
+    expect(trigger()).toHaveAttribute('aria-expanded', 'false');
   });
 });
