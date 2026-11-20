@@ -35,7 +35,7 @@ or standalone as SVG files.
 
 [Learn more on How to craft an icon.](https://dialtone.dialpad.com/design/icons/#crafting-an-icon)
 
-> **Claude Code users:** The `/icon` skill automates SVG validation, normalization, and build verification. Run `/icon add <name>` or `/icon update <name>` to use it.
+> **Claude Code and Codex users:** The `icon-work` skill checks the SVG, keywords and build for you. Ask it to add or update an icon.
 
 ## SVG Preparation
 
