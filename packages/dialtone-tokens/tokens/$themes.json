@@ -3924,6 +3924,55 @@
     "group": "tmo"
   },
   {
+    "_comment": "Mobile-only theme, not included in regular release.",
+    "id": "mobile-tmo-light",
+    "name": "light",
+    "group": "mobile-tmo",
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled",
+      "components/button/default": "enabled",
+      "components/presence/default": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/tmo/default": "enabled",
+      "theme/mobile-tmo/default": "enabled"
+    }
+  },
+  {
+    "_comment": "Mobile-only theme, not included in regular release.",
+    "id": "mobile-tmo-dark",
+    "name": "dark",
+    "group": "mobile-tmo",
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "base/dark": "source",
+      "base/refs/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/tmo/default": "enabled",
+      "theme/tmo/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled",
+      "components/badge/dark": "enabled",
+      "components/button/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "theme/mobile-tmo/default": "enabled",
+      "theme/mobile-tmo/dark": "enabled"
+    }
+  },
+  {
     "id": "0372d8ab03e30b812857cd98434cdeb10d8db3a9",
     "name": "light",
     "$figmaStyleReferences": {

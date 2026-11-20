@@ -12,6 +12,7 @@ import path from 'path';
 
 import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
+import { isMobileExclusiveTheme } from './mobile-theme-utils.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
 
@@ -257,7 +258,7 @@ export async function runLayeredTokens() {
   // Group themes by brand
   const themesByBrand = {};
 
-  $themes.forEach(theme => {
+  $themes.filter(theme => !isMobileExclusiveTheme(theme)).forEach(theme => {
     const brand = theme.group || 'base';
     if (!themesByBrand[brand]) {
       themesByBrand[brand] = { light: null, dark: null };

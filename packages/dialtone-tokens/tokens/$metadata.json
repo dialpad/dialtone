@@ -121,6 +121,8 @@
     "theme/arctic/default",
     "theme/arctic/dark",
     "theme/mulberry/default",
-    "theme/mulberry/dark"
+    "theme/mulberry/dark",
+    "theme/mobile-tmo/default",
+    "theme/mobile-tmo/dark"
   ]
 }
