@@ -1,0 +1,31 @@
+.agents/README.md
+  s_803342048d1b5d::t_690455adff81c4 17
+.agents/skills/pr-prep/SKILL.md
+  s_811518e8041c51::t_13c22c06f6918b 3,8,23-24,30-31,52,62-63,66,68,73,80-81,87,91,97-98,119-135,141
+.claude/skills/pr-prep/SKILL.md
+  s_811518e8041c51::t_3c57d7ceb5eaf2 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "62fd6cd46119d49195c4df49c6a50f20b44a5161",
+  "prompts": {},
+  "sessions": {
+    "s_803342048d1b5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cdad6428-8c4b-493c-b221-db56ddbb456d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_811518e8041c51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "77c630b9-034b-4d86-952f-89e0c1322bbe",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
