@@ -1,0 +1,23 @@
+packages/dialtone-react/components/ComboboxMultiSelect/ComboboxMultiSelect.stories.tsx
+  s_397de2594f004a::t_16f7777e812faf 265-266
+packages/dialtone-react/components/ComboboxMultiSelect/ComboboxMultiSelect.test.tsx
+  s_397de2594f004a::t_127248d0ae03c9 605-621
+packages/dialtone-react/components/ComboboxMultiSelect/ComboboxMultiSelect.tsx
+  s_397de2594f004a::t_7af4df661e8809 293-296,595-596,836,854
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6a08f0e0952263d64ea5b16fcacbf2b5bcea9f16",
+  "prompts": {},
+  "sessions": {
+    "s_397de2594f004a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6daf8066-e439-4b59-b264-00c5bb4d5053",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

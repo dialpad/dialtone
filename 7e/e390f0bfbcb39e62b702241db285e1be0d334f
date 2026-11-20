@@ -1,0 +1,19 @@
+.agents/skills/pr-prep/references/local-gates.md
+  s_39e33a1a93c830::t_7336731ebee40c 5-25,27,31-33,37-39,43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7ee390f0bfbcb39e62b702241db285e1be0d334f",
+  "prompts": {},
+  "sessions": {
+    "s_39e33a1a93c830": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9805b8c3-2134-441e-9e9c-daf0c24296ae",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

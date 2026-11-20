@@ -1,0 +1,66 @@
+packages/dialtone-react/components/FilterPill/FilterPillConstants.ts
+  s_2defdf83601f66::t_9ae5668c6c1b9f 1-16
+packages/dialtone-react/components/FilterPill/FilterPillSelection.ts
+  s_2defdf83601f66::t_b5f96f7908dad3 1-154
+packages/dialtone-react/components/FilterPill/modules/FilterPillOptionGroup.tsx
+  s_2defdf83601f66::t_12a9fed81d223a 1-44
+packages/dialtone-react/components/FilterPill/FilterPill.stories.tsx
+  s_fcb16554a933ef::t_e1f0d43af86311 1,6-7,14-23,85-93,96,175-178,369,377,390-395,407,419,428,434,447-452,464,476,485,491-492,495,504-509,586-1080
+packages/dialtone-react/components/FilterPill/FilterPill.test.tsx
+  s_fcb16554a933ef::t_51e7e0e354c60e 2-3,11,58,331-341,673-749,751-771,775-779,781,785,938-981,984-1061
+  s_2defdf83601f66::t_6949c5e888c9d2 982-983
+packages/dialtone-react/components/FilterPill/FilterPill.tsx
+  s_fcb16554a933ef::t_dc61d170a76586 3,6-7,9-10,21,25-26,31,35,42,44-52,60,69-105,107-111,114-121,126,136-162,174,241-248,256-257,273,279,285,291,313-317,322-327,329-330,332,334-337,343-358,371-376,378-379,387-477,482-493,495-544,547-548,551-552,556-585,588-597,599,601-614,616,632-633,635-648,651-663,669-770,772-788,791-816,823-825,827-832,838-841,846-856,858-866,882-884,890,894-1003,1007-1117,1120,1122-1147,1149-1168,1173-1253,1267,1277-1283,1297-1304,1307-1355,1360-1375,1381-1389,1392-1436,1438,1442-1447,1478-1482,1485,1487,1494,1511-1536,1540-1541,1548-1557
+  s_fcb16554a933ef::t_24c4068ddfcee5 1004-1006,1118-1119,1121,1148
+  s_2defdf83601f66::t_24b2c3ea57cd85 634,649-650,664,667,789-790,817-822,1537-1539,1542-1547
+  s_2defdf83601f66::t_7780670b3f4109 8,665-666,668
+  s_2defdf83601f66::t_e49a0c58ea4d16 811
+packages/dialtone-react/components/FilterPill/FilterPillControlled.test.tsx
+  s_fcb16554a933ef::t_3539c83400609e 1,3-295,382-631,633-634,637-1138
+  s_2defdf83601f66::t_a379b2a66693e9 296-325,359-381,632,635-636
+  s_2defdf83601f66::t_ac3f07e5c42793 2,326-358
+  s_2defdf83601f66::t_d854fd47a14f22 289
+packages/dialtone-react/components/FilterPill/FilterPillOptionRows.test.tsx
+  s_fcb16554a933ef::t_f21b8300f346a8 1-214,230-269
+  s_2defdf83601f66::t_7b87323f2c0c7d 215-229
+packages/dialtone-react/components/FilterPill/FilterPillSelection.test.ts
+  s_fcb16554a933ef::t_cd18008adef78b 1-151
+packages/dialtone-react/components/FilterPill/index.ts
+  s_fcb16554a933ef::t_6e2db64176bbe4 6-7,10-11,13-14
+packages/dialtone-react/components/FilterPill/skips.json
+  s_fcb16554a933ef::t_edf82a22bb872c 1-3
+packages/dialtone-react/components/FilterPill/deviations.json
+  s_fcb16554a933ef::t_404e0e5f61d672 4,8,12,16,20,24,28,32,36-64
+packages/dialtone-react/parity/cases.mjs
+  s_2defdf83601f66::t_2ca6813d64f0e9 45-49,53,55
+packages/dialtone-react/parity/cases.test.mjs
+  s_2defdf83601f66::t_0a952321d89660 49-50,52-59
+packages/dialtone-react/parity/react/dom.test.tsx
+  s_2defdf83601f66::t_24d55745258c15 25-28
+packages/dialtone-react/parity/vue/goldens.test.js
+  s_2defdf83601f66::t_1bc5879a5af7c2 200-211
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "69f304c34730c930b4ea83ab16430bdef9600b18",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_fcb16554a933ef": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "202c46ee-67da-4bea-9a77-f10f11feba81",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

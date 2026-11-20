@@ -1,0 +1,37 @@
+packages/dialtone-react/components/Presence/Presence.parity.tsx
+  s_b27491d244fda4::t_83f6edea4684db 1-4
+packages/dialtone-react/components/Presence/Presence.stories.tsx
+  s_b27491d244fda4::t_b4158cf0c66b42 1-92
+packages/dialtone-react/components/Presence/Presence.test.tsx
+  s_b27491d244fda4::t_29ce26439ddd67 1-150
+packages/dialtone-react/components/Presence/Presence.tsx
+  s_b27491d244fda4::t_f4f9c97df23c9d 1-80
+packages/dialtone-react/components/Presence/PresenceConstants.ts
+  s_b27491d244fda4::t_3aed3ec0678265 1-17
+packages/dialtone-react/components/Presence/index.ts
+  s_b27491d244fda4::t_a727cff70c8f56 1-2
+packages/dialtone-react/components/Presence/modules/presence_active_icon.tsx
+  s_b27491d244fda4::t_e08abe0154f7a8 1-16
+packages/dialtone-react/components/Presence/modules/presence_away_icon.tsx
+  s_b27491d244fda4::t_db30dcdb3c5899 1-12
+packages/dialtone-react/components/Presence/modules/presence_busy_icon.tsx
+  s_b27491d244fda4::t_1ac7ee4d767ab9 1-16
+packages/dialtone-react/components/Presence/modules/presence_dnd_icon.tsx
+  s_b27491d244fda4::t_8672c31ab4658a 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ba918db7c9b89c0135f32abaffc5318fd534f958",
+  "prompts": {},
+  "sessions": {
+    "s_b27491d244fda4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9f6d0d6-e181-4989-a217-aa3db50cea65",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

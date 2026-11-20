@@ -1,0 +1,21 @@
+.agents/skills/pr-prep/SKILL.md
+  s_fa9a0a1ecaa266::t_1dd4f2397390ce 62,66
+.agents/skills/pr-prep/references/specialists/css.md
+  s_fa9a0a1ecaa266::t_71107528fdbbb6 10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d7c3a28a96ce24bc30719ec2ec7876b6db0d0d85",
+  "prompts": {},
+  "sessions": {
+    "s_fa9a0a1ecaa266": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a0ac161-bb7a-44bf-9300-2265b434ed1d",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
