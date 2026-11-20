@@ -1,0 +1,19 @@
+packages/dialtone-react/components/ListItemGroup/ListItemGroup.test.tsx
+  s_1943bdc58c629d::t_5ebc334b6d76f8 43-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9d60ffe12ec710ac5a799bc6669cc0c9fb13c2a0",
+  "prompts": {},
+  "sessions": {
+    "s_1943bdc58c629d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b13dbbb8-629d-4ddd-aa70-e3342e3ddc24",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

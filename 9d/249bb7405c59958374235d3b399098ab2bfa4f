@@ -1,0 +1,37 @@
+packages/dialtone-react/components/Resizable/Composables/ComputeLayout.ts
+  s_76cf110705b3b9::t_7c36f8ef04373f 1-532
+packages/dialtone-react/components/Resizable/Composables/ConstraintResolver.ts
+  s_76cf110705b3b9::t_36672d84b14531 1-173
+packages/dialtone-react/components/Resizable/Composables/UseResizableCalculations.ts
+  s_76cf110705b3b9::t_2388179290c070 1-144
+packages/dialtone-react/components/Resizable/Composables/UseResizableDrag.ts
+  s_76cf110705b3b9::t_4c3a4600881028 1-352
+packages/dialtone-react/components/Resizable/Composables/UseResizableGroup.ts
+  s_76cf110705b3b9::t_f7dc329c12f079 1-304
+packages/dialtone-react/components/Resizable/Composables/UseResizablePanelControls.ts
+  s_76cf110705b3b9::t_6e0e1fc08becf0 1-477
+packages/dialtone-react/components/Resizable/Composables/UseResizablePanelState.ts
+  s_76cf110705b3b9::t_e679396f2edefc 1-138
+packages/dialtone-react/components/Resizable/Composables/UseResizableStorage.ts
+  s_76cf110705b3b9::t_c54d59991657fe 1-216
+packages/dialtone-react/components/Resizable/ResizableConstants.ts
+  s_76cf110705b3b9::t_8f437d712e1a0c 1-257
+packages/dialtone-react/components/Resizable/ResizableUtils.ts
+  s_76cf110705b3b9::t_f5bbd698a11aae 1-262
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9d249bb7405c59958374235d3b399098ab2bfa4f",
+  "prompts": {},
+  "sessions": {
+    "s_76cf110705b3b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4abf4a2e-b3a1-49c7-917e-47f1db667c04",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
