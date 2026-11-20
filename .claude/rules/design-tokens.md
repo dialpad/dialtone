@@ -21,8 +21,8 @@ These produce CSS custom properties: `--dt-color-foreground-primary`, `--dt-spac
 
 ## Color Scale
 
-All base colors use a standard 12-stop scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000.
-Irregular stops (250, 350, 425, etc.) were removed in the Feb 2026 migration. Do not create tokens referencing irregular stops.
+Chromatic base colors use a standard 12-stop scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000. Irregular chromatic stops (250, 350, 425, etc.) were removed in the Feb 2026 migration.
+`color.black` keeps 50-step stops (50, 100, 150 … 1000); theme files reference them (for example `{color.black.750}`).
 
 ## Color Space
 

@@ -1,6 +1,6 @@
 ---
 name: style-work
-description: Add or change Dialtone CSS utility classes (d-* in Less) and design tokens (--dt-* variables). Use when the user asks for a new utility, a new or changed token, or a check that a style value already exists.
+description: Add or change Dialtone CSS utility classes (d-*, generated or Less) and design tokens (--dt-* variables). Use when the user asks for a new utility, a new or changed token, or a check that a style value already exists.
 ---
 
 # Dialtone Style Work
@@ -41,12 +41,12 @@ Add as little CSS as possible. Reuse an existing class or token first; build a n
 
 If the MCP and CLI are unavailable, grep `constants.cjs`, the Less and the token JSON instead, and say in the result which search ran. If something close exists, use it or ask whether to extend it.
 
-Prefer a semantic token over a base one. Review caught a component with literal heights where `--dt-layout-*` tokens and `calc()` already existed.
+Prefer a semantic token over a base one.
 
 ### 2. Naming
 
 - Logical names: `logical-naming.md`.
-- Match the numeric scale the neighbours use: read two or three siblings, for classes in `constants.cjs`, for tokens in the same JSON file (`space.400`, `--dt-space-400`). Do not add a new scale step when one is near.
+- Match the numeric scale the neighbours use: read two or three siblings, for classes in `constants.cjs`, for tokens in the same JSON file (`spacing.400`, `--dt-spacing-400`). Do not add a new scale step when one is near.
 
 ### 3. Build It
 
@@ -59,9 +59,9 @@ Utilities (`css-utilities.md`). Most are generated, not written in Less. Token-s
 
 Tokens (`design-tokens.md`):
 
-- Global values go in `tokens/base/default.json`. Semantic tokens live in `tokens/theme/dp/` (`default`, `dark`, `high-contrast`, `high-contrast-dark`); the other folders under `tokens/theme/` are further themes. Component tokens go in `tokens/components/<component>/`.
-- A new semantic token must exist in every theme. `.coderabbit.yaml` asks for all the themes it lists (Dialpad, T-Mobile, Expressive and Expressive Small, light and dark), and `tokens/theme/` holds more folders than that, so copy where a recent semantic token was added.
-- Colour and shadow tokens: add a value to `tokens/base/dark.json` where the dark value differs (it only holds `color` and `shadow`).
+- Base values go in `tokens/base/` (`default.json`, with palettes in `material/` and `refs/`; `spacing.base` is in `root.json`). Semantic tokens live in `tokens/theme/dp/` (`default`, `dark`, `high-contrast`, `high-contrast-dark`); the other folders under `tokens/theme/` are further themes. Component tokens go in `tokens/components/<component>/`.
+- A new semantic token goes in `tokens/theme/dp/default.json`, plus `dp/dark.json` and the high-contrast pair only where the value differs. The other theme folders are small brand overrides layered on dp: touch one only when that brand needs a different value. `.coderabbit.yaml` asks for "all 8 themes"; in the files, that means the dp set plus any brand override.
+- Dark values: palette and shadow tokens go in `tokens/base/dark.json` (it only holds `color` and `shadow`); semantic tokens go in `tokens/theme/<theme>/dark.json`.
 - References use the source keys: `{color.black.900}`, `{size.400}`, `{spacing.base}`. No circular or missing references.
 - Leave `tokens/$metadata.json` build order alone unless you have read the dependency chain.
 
@@ -70,7 +70,7 @@ Tokens (`design-tokens.md`):
 Take the commands from `validation.md`, and read its Writes section first. Builds write only git-ignored output unless noted below.
 
 - Utilities: `pnpm nx run dialtone-css:build` (writes `themes`, because it depends on `dialtone-tokens:build`, which runs `git clean -fx themes/`). The built CSS contains the class.
-- Tokens: `pnpm nx run dialtone-tokens:build` (also writes `themes`). The built CSS contains the token, and `[data-dt-mode="dark"]` has the dark value where you added one.
+- Tokens: `pnpm nx run dialtone-tokens:build` (also writes `themes`). `dist/css/tokens-dp-light.css` contains the token, and `tokens-dp-dark.css` (or `[data-dt-mode="dark"]` in the layered build) has the dark value where you added one.
 - Mobile outputs, all git-ignored: grep for the token in `packages/dialtone-tokens/dist/android/res/values/`, `dist/android/java/` and `dist/ios/tokens-*.swift`. `dist_ios/Sources` is written only by `pnpm nx run dialtone-tokens:build:ios`.
 - Docs JSON: `dialtone-css:build` writes `packages/dialtone-css/lib/dist/dialtone-docs.json` (utilities) and `tokens-docs.json` (the token data MCP and CLI read). `dialtone-tokens:build` alone does not refresh `tokens-docs.json`. `packages/dialtone-tokens/dist/doc.json` is the tokens package's own docs.
 - Lookup: `dialtone-query-core` bundles those JSON files at build time and the MCP server bundles query-core. Build with `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server`, which also writes `themes` and `keywords` (tracked `packages/dialtone-icons/src/keywords-*.json`; check `git status`). Restart the session, then `search_utility_classes` or `search_tokens` finds the name. The rebuilt `dialtone` CLI needs no restart; check its reported source, since it can read installed data instead of the fresh build.
