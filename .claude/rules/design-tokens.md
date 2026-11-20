@@ -37,7 +37,7 @@ Values in `dark.json` override `default.json`. When adding/editing a token, ensu
 Use curly-brace syntax to reference other tokens:
 
 ```json
-{ "dtColorForegroundPrimary": { "value": "{dtColor.neutral.900}", "type": "color" } }
+{ "dtColorForegroundPrimary": { "value": "{color.black.900}", "type": "color" } }
 ```
 
 Ensure: all references resolve, no circular references, dark mode references point to valid dark-mode base values.

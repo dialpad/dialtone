@@ -168,7 +168,8 @@ const skills = {
     patterns: [
       /## 1\. Does It Already Exist\?/,
       /Prefer a semantic token over a base one/,
-      /docs JSON/,
+      /tokens-docs\.json/,
+      /constants\.cjs/,
     ],
     references: ['.agents/skills/pr-prep/references/specialists/css.md'],
   },
