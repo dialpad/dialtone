@@ -254,6 +254,68 @@ describe('DtModal Tests', () => {
       });
     });
 
+    describe('When the footer slot content toggles without remounting', () => {
+      const toggleHost = (showFooter: boolean) => (
+        <DtModal
+          headerText="Header"
+          copy="Copy"
+          open
+          footer={showFooter ? <span data-qa="test-footer" /> : undefined}
+        />
+      );
+      const mountHost = async (showFooter: boolean) => {
+        // Drop the outer beforeEach's modal so only the host's footer is queried.
+        cleanup();
+        const host = render(toggleHost(showFooter), {
+          container: document.body.appendChild(document.createElement('div')),
+        });
+        await finishTransitions();
+        return host;
+      };
+      const setShowFooter = async (host: RenderResult, showFooter: boolean) => {
+        host.rerender(toggleHost(showFooter));
+        await finishTransitions();
+      };
+
+      it('should not render the footer initially when the slot is absent', async () => {
+        await mountHost(false);
+
+        expect(qa('test-footer')).toBeNull();
+      });
+
+      it('should render the footer after the slot is provided', async () => {
+        const host = await mountHost(false);
+
+        await setShowFooter(host, true);
+
+        expect(qa('test-footer')).not.toBeNull();
+      });
+
+      it('should render the footer wrapper after the slot is provided', async () => {
+        const host = await mountHost(false);
+
+        await setShowFooter(host, true);
+
+        expect(qa('dt-modal-footer')).not.toBeNull();
+      });
+
+      it('should not render the footer after the slot is removed again', async () => {
+        const host = await mountHost(true);
+
+        await setShowFooter(host, false);
+
+        expect(qa('test-footer')).toBeNull();
+      });
+
+      it('should not render the footer wrapper after the slot is removed again', async () => {
+        const host = await mountHost(true);
+
+        await setShowFooter(host, false);
+
+        expect(qa('dt-modal-footer')).toBeNull();
+      });
+    });
+
     describe('When slots are provided', () => {
       it('Should display slotted header instead of headerText', async () => {
         mockSlots = {
