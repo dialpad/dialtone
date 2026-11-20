@@ -271,19 +271,31 @@ function ProfileHeader () {
 
 // HovercardDefault.story.vue
 function HovercardDefault ({ open, headerContent, footerContent, ...args }: HovercardStoryArgs) {
+  const [activatedOpen, setActivatedOpen] = useState<boolean | null>(null);
+  const openCard = (event: MouseEvent) => {
+    if (event.detail === 0 && open == null) setActivatedOpen(prev => !prev);
+  };
+  const onOpened = (isOpen: boolean) => {
+    if (!isOpen) setActivatedOpen(null);
+    args.onOpened?.(isOpen);
+  };
+
   return (
     <DtHovercard
       {...sharedProps(args)}
-      open={open}
+      open={open ?? activatedOpen}
+      onOpened={onOpened}
       anchor={attrs => (
         <DtAvatar
           fullName="Jaqueline Nackos"
           imageSrc={defaultImage}
-          imageAlt="Avatar person"
+          imageAlt=""
           seed="JN"
           presence="busy"
-          avatarClass="d-c-pointer"
+          interactive
+          aria-label="Show Jaqueline Nackos profile"
           {...attrs}
+          onClick={openCard}
         />
       )}
       content={(
@@ -320,6 +332,15 @@ const cardData = [{
 
 // HovercardMany.story.vue
 function HovercardMany (args: HovercardStoryArgs) {
+  const [openByName, setOpenByName] = useState<Record<string, boolean | null>>({});
+  const openCard = (name: string, event: MouseEvent) => {
+    if (event.detail === 0 && args.open == null) setOpenByName(prev => ({ ...prev, [name]: !prev[name] }));
+  };
+  const onOpened = (name: string, isOpen: boolean) => {
+    if (!isOpen) setOpenByName(prev => ({ ...prev, [name]: null }));
+    args.onOpened?.(isOpen);
+  };
+
   return (
     <ul className="d-mbe-50">
       {cardData.map(data => (
@@ -327,14 +348,18 @@ function HovercardMany (args: HovercardStoryArgs) {
           <div>
             <DtHovercard
               {...sharedProps(args)}
+              open={args.open ?? openByName[data.name] ?? null}
+              onOpened={isOpen => onOpened(data.name, isOpen)}
               anchor={attrs => (
                 <DtAvatar
                   fullName={data.name}
                   imageSrc={data.src}
                   seed={data.name}
                   imageAlt=""
-                  avatarClass="d-c-pointer"
+                  interactive
+                  aria-label={`Show ${data.name} profile`}
                   {...attrs}
+                  onClick={(event: MouseEvent) => openCard(data.name, event)}
                 />
               )}
               content={(
@@ -391,20 +416,31 @@ function HovercardMany (args: HovercardStoryArgs) {
 // HovercardWithInput.story.vue
 function HovercardWithInput ({ open, headerContent, footerContent, ...args }: HovercardStoryArgs) {
   const [inputValue, setInputValue] = useState('');
+  const [activatedOpen, setActivatedOpen] = useState<boolean | null>(null);
+  const openCard = (event: MouseEvent) => {
+    if (event.detail === 0 && open == null) setActivatedOpen(prev => !prev);
+  };
+  const onOpened = (isOpen: boolean) => {
+    if (!isOpen) setActivatedOpen(null);
+    args.onOpened?.(isOpen);
+  };
 
   return (
     <DtHovercard
       {...sharedProps(args)}
-      open={open}
+      open={open ?? activatedOpen}
+      onOpened={onOpened}
       anchor={attrs => (
         <DtAvatar
           fullName="Jaqueline Nackos"
           imageSrc={defaultImage}
-          imageAlt="Avatar person"
+          imageAlt=""
           seed="JN"
           presence="busy"
-          avatarClass="d-c-pointer"
+          interactive
+          aria-label="Show Jaqueline Nackos profile"
           {...attrs}
+          onClick={openCard}
         />
       )}
       content={(

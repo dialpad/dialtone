@@ -64,6 +64,31 @@ describe('DtHovercard Tests', () => {
     vi.useRealTimers();
   });
 
+  it('forwards completed visibility while a canceled leave keeps the hovercard open', async () => {
+    result.unmount();
+    const onOpened = vi.fn();
+    const props = { ...baseProps, onOpened };
+    result = render(<DtHovercard {...props} open />, { container: attachTo(document.body) });
+    const trigger = screen.getByTestId('dt-button');
+    act(() => trigger.focus());
+    expect(onOpened).not.toHaveBeenCalled();
+    await finishTransitions();
+    await flushPromises();
+    expect(onOpened.mock.calls).toEqual([[true]]);
+    expect(document.activeElement).toBe(trigger);
+    result.rerender(<DtHovercard {...props} open={false} />);
+    result.rerender(<DtHovercard {...props} open />);
+    expect(onOpened.mock.calls).toEqual([[true]]);
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await finishTransitions();
+    await flushPromises();
+    expect(onOpened.mock.calls).toEqual([[true], [true]]);
+    result.rerender(<DtHovercard {...props} open={false} />);
+    await finishTransitions();
+    await flushPromises();
+    expect(onOpened.mock.calls).toEqual([[true], [true], [false]]);
+  });
+
   describe('Presentation Tests', () => {
     describe('When mouseenter on anchor', () => {
       beforeEach(async () => {
