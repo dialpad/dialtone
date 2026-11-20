@@ -174,6 +174,7 @@ function EmojiPickerWithPopover (args: EmojiPickerStoryArgs) {
       anchor={({ attrs }) => (
         <DtButton
           {...attrs}
+          aria-label="Choose an emoji"
           size={200}
           circle
           importance="clear"
