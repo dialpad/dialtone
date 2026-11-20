@@ -1,0 +1,38 @@
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_8716e901949c29::t_7f17bd62bf2f15 427
+  s_8716e901949c29::t_e6137113587cd5 497-498,502-506
+  s_8716e901949c29::t_4b8ca54a06f414 507-508
+  s_8716e901949c29::t_15141449900dbc 559-561
+  s_8716e901949c29::t_0b3ad7130956f4 571,575-577
+packages/dialtone-vue/components/ListItem/ListItem.vue
+  s_8716e901949c29::t_4aa75e1c5ef028 147
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_8716e901949c29::t_de87c1b5169f41 470-482
+  s_8716e901949c29::t_be7c717ee7f784 457-469
+packages/combinator/src/variants/variants_list_item.js
+  s_8716e901949c29::t_c54daf376684b3 16-31
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_8716e901949c29::t_ac64da04a97cc7 272
+apps/dialtone-documentation/docs/components/list-item.md
+  s_8716e901949c29::t_8fadab1e3879f4 109
+packages/dialtone-vue/components/FilterPill/FilterPillOptionRows.test.js
+  s_8716e901949c29::t_7d5c1f6e010459 131-138
+packages/dialtone-css/lib/build/less/components/list-item.less
+  s_8716e901949c29::t_f5f79f6593ab3b 53-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0424e0110fe9e1a290fd2d5076843316591e8924",
+  "prompts": {},
+  "sessions": {
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+packages/dialtone-vue/components/Box/BoxConstants.js
+  s_f6f28cb1cdc245::t_1bc8c67a7feb87 21
+apps/dialtone-documentation/docs/components/box.md
+  s_f6f28cb1cdc245::t_1bc8c67a7feb87 62
+packages/dialtone-vue/components/Box/Box.vue
+  s_f6f28cb1cdc245::t_1bc8c67a7feb87 64
+packages/dialtone-css/lib/build/less/components/box.less
+  s_f6f28cb1cdc245::t_1bc8c67a7feb87 114
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "0818a6f83ff2b7c8edb4760ff97cc7d0d6eff3af",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_f6f28cb1cdc245": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bed15dd5-10fd-4eec-b6ef-a2bf913c91f3",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
