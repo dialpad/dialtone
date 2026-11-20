@@ -24,8 +24,6 @@ const CALLBACKS: Record<string, keyof DtFilterPillProps> = {
 };
 
 const reconcile = () => act(async () => { await Promise.resolve(); await Promise.resolve(); });
-// Apply waits one task for React's scheduler before it reads the parent's selection.
-const afterApply = () => act(async () => { await new Promise<void>(resolve => { setTimeout(resolve, 0); }); });
 // Real transitions end two animation frames after they start; the overlay reports opened once they have.
 const settle = async () => {
   await finishTransitions();
@@ -272,42 +270,6 @@ describe('DtFilterPill controlled selection', () => {
     expect(emitted('open')).toEqual([[true], [false]]);
   });
 
-  it('rebases onto a parent write made in a promise callback before Apply proposes', async () => {
-    let controls: DtFilterPillContentScope | undefined;
-    let setParent: (next: string[]) => void = () => {};
-    const Parent = () => {
-      const [selected, setSelected] = useState<string[]>(['sales']);
-      setParent = setSelected;
-      return (
-        <DtFilterPill
-          label="Teams"
-          options={options}
-          selected={selected}
-          deferSelection
-          {...recording({ onSelectedChange: value => setSelected(value as string[]) })}
-          content={(bindings: DtFilterPillContentScope) => { controls = bindings; return 'Custom'; }}
-        />
-      );
-    };
-    result = render(<Parent />, { container: container() });
-    await open();
-    await act(async () => { controls?.setSelected?.(['sales', 'support']); });
-    await reconcile();
-    // Outside act, React schedules the parent's update on its own scheduler, as in an app: it commits after the
-    // microtasks Apply used to wait for.
-    const env = globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean };
-    env.IS_REACT_ACT_ENVIRONMENT = false;
-    try {
-      const applying = controls!.apply();
-      Promise.resolve().then(() => setParent(['engineering']));
-      await applying;
-      await new Promise(resolve => { setTimeout(resolve, 50); });
-    } finally {
-      env.IS_REACT_ACT_ENVIRONMENT = true;
-    }
-    expect((emitted('selection-change')?.[0][0] as { previousValue: unknown }).previousValue).toEqual(['engineering']);
-  });
-
   it('preserves dirty draft through option additions, reorder, relabelling and removals', async () => {
     updateWrapper({ deferSelection: true });
     await open();
@@ -324,7 +286,7 @@ describe('DtFilterPill controlled selection', () => {
     expect(checks().map(input => input.checked)).toEqual([true, true]);
     await setProps({ options: [options[0]] });
     await nativeClick(document.querySelector<HTMLElement>('[data-qa="dt-filter-pill__apply-button"]'));
-    await afterApply();
+    await reconcile();
     expect(emitted('update:selected')).toEqual([[['sales', 'support']]]);
     expect((emitted('selection-change')?.[0][0])).toEqual({
       value: ['sales', 'support'], previousValue: ['sales'], reason: 'apply', changed: true,

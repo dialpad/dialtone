@@ -378,12 +378,6 @@ const withFallback = (node: ReactNode, fallback: () => ReactNode) => (
 /** Vue's `$nextTick`: lets what the caller queued in the same turn commit first. */
 const nextTick = () => Promise.resolve();
 
-/**
- * Vue's `$nextTick` also waits for its scheduled flush. A parent's setState made in a promise callback is flushed by
- * React's own scheduler, a task after the microtasks `nextTick` drains, so Apply waits one task as well.
- */
-const nextTask = () => new Promise<void>(resolve => { setTimeout(resolve, 0); });
-
 /** The filter without its `active` key: Vue's `delete filter.active`. */
 const withoutActive = ({ active: _active, ...filter }: DtFilterPillFilter): DtFilterPillFilter => filter;
 
@@ -814,7 +808,7 @@ export function DtFilterPill (props: DtFilterPillProps) {
     const session = draftSession.current;
     // Let the caller finish same-turn parent writes before reading the committed selection.
     await nextTick();
-    await nextTask();
+    await nextTick();
     if (disposed.current || session !== draftSession.current || !stillValid()) {
       if (!disposed.current && session === draftSession.current) applying.current = false;
       return;
