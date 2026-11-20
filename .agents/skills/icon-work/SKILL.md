@@ -31,7 +31,7 @@ Add or update one icon from its Figma source, with the keywords, build output an
 Four checks reviewers keep raising that the bots miss:
 
 1. The SVG is a fresh export from the Figma icon library's 12px (size 100) component (`brand-full-color` icons may be 24px), and the glyph is centred in its viewBox: equal margins left and right, and top and bottom. Review caught an x-shaped glyph that sat off-centre. If it is off, ask for a new Figma export; do not nudge coordinates by hand.
-2. No `stroke`, `stroke-width` or `stroke-linecap` attributes on any element. Outline strokes in Figma first. The build only turns `fill` into `currentColor`, so a stroke keeps its hardcoded colour and ignores the text colour.
+2. Standard icons (every category except `brand-full-color`): no `stroke`, `stroke-width` or `stroke-linecap` attributes on any element. Outline strokes in Figma first. The build only turns `fill` into `currentColor`, so a stroke keeps its hardcoded colour and ignores the text colour.
 3. Name: the icon name (file name and keyword key) is the library's singular name unless the object itself is plural (`variable`, not `variables`; `scissors` and `headphones` stay plural). It also matches the prefixes of sibling icons in its category (`mail-*`, `message-*`): review renamed an `email-` icon to `mail-`.
 4. Keywords: the search terms people type. Do not repeat words already in the name or the category.
 
