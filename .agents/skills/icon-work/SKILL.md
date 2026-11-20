@@ -17,7 +17,7 @@ Add or update one icon from its Figma source, with the keywords, build output an
 ## Before You Build
 
 1. Does it already exist? Look it up with the Dialtone MCP server or the `dialtone` CLI (see `.agents/resources/dialtone-lookup.md`). If a close icon exists, ask whether to update it instead.
-2. Get the Figma source from the user. Do not redraw, trace or guess an SVG.
+2. For a new or changed SVG, get the Figma source from the user. Do not redraw, trace or guess an SVG. A keyword-only change needs no Figma source: edit the entry in `keywords-icons.json`, apply check 4, and run Workflow steps 5 and 8.
 3. Write only the SVG and its keyword entry. Everything else is generated.
 
 ## Required Context
@@ -30,7 +30,7 @@ Add or update one icon from its Figma source, with the keywords, build output an
 
 Four checks reviewers keep raising that the bots miss:
 
-1. The SVG is a fresh export from the Figma icon library's 12px (size 100) component, and the glyph is centred in its viewBox: equal margins left and right, and top and bottom. Review caught an x-shaped glyph that sat off-centre. If it is off, ask for a new Figma export; do not nudge coordinates by hand.
+1. The SVG is a fresh export from the Figma icon library's 12px (size 100) component (`brand-full-color` icons may be 24px), and the glyph is centred in its viewBox: equal margins left and right, and top and bottom. Review caught an x-shaped glyph that sat off-centre. If it is off, ask for a new Figma export; do not nudge coordinates by hand.
 2. No `stroke`, `stroke-width` or `stroke-linecap` attributes on any element. Outline strokes in Figma first. The build only turns `fill` into `currentColor`, so a stroke keeps its hardcoded colour and ignores the text colour.
 3. Name: the icon name (file name and keyword key) is the library's singular name unless the object itself is plural (`variable`, not `variables`; `scissors` and `headphones` stay plural). It also matches the prefixes of sibling icons in its category (`mail-*`, `message-*`): review renamed an `email-` icon to `mail-`.
 4. Keywords: the search terms people type. Do not repeat words already in the name or the category.
@@ -54,7 +54,7 @@ Also:
 
 ## Done When
 
-- The four checks pass and the SVG is the Figma source.
+- A new or changed SVG passes the four checks and is the Figma source; a keyword-only change passes check 4.
 - A new icon has keywords.
 - The build ran and only intended files changed.
 - The user has the docs page to check rendering.
