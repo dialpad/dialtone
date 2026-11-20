@@ -19,8 +19,7 @@ For repository authoring or maintenance questions, read the [Contributor tasks t
 | `pr-comments`       | `$pr-comments`, `$address-review`, review feedback | Fetch real inline review comments, plan fixes, validate, and reply safely.                              | `rule-map.md`                                                      | fixture  |
 | `pr-complete`       | after PR merge, branch closeout                    | Verify merge state, return to `staging`, and handle `NO-JIRA` closeout safely.                          | `package-map.md`                                                   | fixture  |
 | `doc-sync-check`    | source changes that may affect contributor guidance             | Report review candidates and record current semantic decisions.                                      | `doc-sync.md`                                                      | fixture  |
-| `component-work`    | component creation/update, component API changes   | Keep Vue component, tests, stories, docs, and downstream data in sync.                                  | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
-| `component-variant` | Combinator variant authoring for component changes | Keep `packages/combinator/src/variants/**` aligned with component props, slots, values, and thumbnails. | `rules/combinator-variants.md`, `package-map.md`, `rule-map.md`    | contract |
+| `component-work`    | component creation/update, component API changes   | Check what exists first; keep component, tests, stories, docs, variants in sync. Thin Claude wrapper.   | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
 
 ## Resources
 
