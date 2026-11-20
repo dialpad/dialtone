@@ -377,6 +377,12 @@ const withFallback = (node: ReactNode, fallback: () => ReactNode) => (
 /** Vue's `$nextTick`: lets what the caller queued in the same turn commit first. */
 const nextTick = () => Promise.resolve();
 
+/**
+ * Vue's `$nextTick` also waits for its scheduled flush. A parent's setState made in a promise callback is flushed by
+ * React's own scheduler, a task after the microtasks `nextTick` drains, so Apply waits one task as well.
+ */
+const nextTask = () => new Promise<void>(resolve => { setTimeout(resolve, 0); });
+
 /** The filter without its `active` key: Vue's `delete filter.active`. */
 const withoutActive = ({ active: _active, ...filter }: DtFilterPillFilter): DtFilterPillFilter => filter;
 
@@ -630,6 +636,7 @@ export function DtFilterPill (props: DtFilterPillProps) {
 
   // What the async and event code reads: the latest committed render, with Vue's synchronous data for what it writes.
   const live = useRef<{
+    options: unknown;
     state: typeof controlledState;
     base: string;
     canSelect: boolean;
@@ -644,7 +651,8 @@ export function DtFilterPill (props: DtFilterPillProps) {
       'onSelectedChange' | 'onSelectionChange' | 'onOpenChange' | 'onOpened' | 'onClear' | 'onOpen' | 'onApply'>;
     primaryButton: HTMLElement | null;
   }>(null as never);
-  live.current = {
+  const snapshot: NonNullable<typeof live.current> = {
+    options,
     state: controlledState,
     base: controlledBase,
     canSelect: controlledCanSelect,
@@ -658,6 +666,10 @@ export function DtFilterPill (props: DtFilterPillProps) {
     callbacks: { onSelectedChange, onSelectionChange, onOpenChange, onOpened, onClear, onOpen, onApply },
     primaryButton,
   };
+  // Written once the render commits, so a transition render that suspends or is dropped never reaches the handlers of
+  // the pill still on screen. The first render fills it for a child's layout effect, which runs before this one.
+  if (!live.current) live.current = snapshot;
+  useLayoutEffect(() => { live.current = snapshot; });
   const isOpenRef = useRef(isOpen);
   isOpenRef.current = isOpen;
   const draftRef = useRef(draft);
@@ -778,7 +790,8 @@ export function DtFilterPill (props: DtFilterPillProps) {
 
   const setControlledSelected = (next: DtFilterPillSelected) => {
     if (!live.current.canSelect) return;
-    const state = getSelectionState(options, next, { useDropdown: controlledDropdown });
+    // The options now, not the ones this render closed over: a setter a custom slot kept reads them live, as Vue's does.
+    const state = getSelectionState(live.current.options, next, { useDropdown: controlledDropdown });
     if (next === undefined || !state.valid) {
       warnControlled('setSelected requires the selected shape for this pattern.');
       return;
@@ -799,14 +812,18 @@ export function DtFilterPill (props: DtFilterPillProps) {
     const session = draftSession.current;
     // Let the caller finish same-turn parent writes before reading the committed selection.
     await nextTick();
-    await nextTick();
+    await nextTask();
     if (disposed.current || session !== draftSession.current || !stillValid()) {
       if (!disposed.current && session === draftSession.current) applying.current = false;
       return;
     }
     if (draftBase.current !== live.current.base) rebaseControlledDraft();
-    commitControlled([...(draftRef.current as string[])], 'apply', true);
-    if (!disposed.current && session === draftSession.current) applying.current = false;
+    try {
+      commitControlled([...(draftRef.current as string[])], 'apply', true);
+    } finally {
+      // Direct prop calls throw through here, where Vue's emit routes a listener's error to its handler.
+      if (!disposed.current && session === draftSession.current) applying.current = false;
+    }
   };
 
   // Legacy popover filters.
@@ -1521,12 +1538,17 @@ const DROPDOWN_ITEMS = '[role="menuitem"], [role="menuitemradio"], #sr-only-clos
 
 /**
  * Moves the dropdown's keyboard position to the row `target`, where Vue's FilterPill calls the dropdown's
- * `setHighlightId`. DtDropdown has no handle for it, so this presses the keys that move the position: Home, then
- * ArrowDown down to the row's index, which also leaves focus on it. (Vue's `clearHighlightIndex`, for a list with no
- * rows left, has no key; nothing is left to navigate to.)
+ * `setHighlightId`, or clears it with no target, where Vue calls `clearHighlightIndex`. DtDropdown has no handle for
+ * either, and its `ref` goes to the popover, so this goes through what it already listens to: Home, then ArrowDown
+ * down to the row's index, which also leaves focus on it; and the list's mouseleave, which is what clears the index.
  */
 function syncDropdownHighlight (popup: Element | null, target: HTMLElement | null) {
-  if (!popup || !target) return;
+  if (!popup) return;
+  if (!target) {
+    popup.querySelector('[data-qa="dt-dropdown-list-wrapper"]')
+      ?.dispatchEvent(new MouseEvent('mouseout', { bubbles: true, relatedTarget: null }));
+    return;
+  }
   const items = [...popup.querySelectorAll<HTMLElement>(DROPDOWN_ITEMS)]
     .filter(item => item.getAttribute('role') !== 'menuitemradio' || item.id);
   const index = items.indexOf(target);

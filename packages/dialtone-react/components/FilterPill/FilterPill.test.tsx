@@ -979,6 +979,8 @@ describe('DtFilterPill custom content and localized display', () => {
       expect(document.querySelector('[data-qa="custom-close"]')).not.toBeNull();
       await click(document.querySelector('[data-qa="custom-close"]'));
       expect(screen.getByTestId('dt-filter-pill__button')).toHaveAttribute('aria-expanded', 'false');
+      // The slot has rendered by now: an error it logged while rendering shows up here, not in the first check.
+      expect(errors).not.toHaveBeenCalled();
     });
   });
 

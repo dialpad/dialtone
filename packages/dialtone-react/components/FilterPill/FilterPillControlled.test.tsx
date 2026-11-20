@@ -1,5 +1,5 @@
 import { act, cleanup, fireEvent, render, screen, type RenderResult } from '@testing-library/react';
-import { useState, type ReactNode } from 'react';
+import { Suspense, startTransition, useState, type ReactNode } from 'react';
 import { flushSync } from 'react-dom';
 import { finishTransitions } from '../../tests/helpers/transition';
 import { DtFilterPill, type DtFilterPillContentScope, type DtFilterPillProps } from './FilterPill';
@@ -24,6 +24,8 @@ const CALLBACKS: Record<string, keyof DtFilterPillProps> = {
 };
 
 const reconcile = () => act(async () => { await Promise.resolve(); await Promise.resolve(); });
+// Apply waits one task for React's scheduler before it reads the parent's selection.
+const afterApply = () => act(async () => { await new Promise<void>(resolve => { setTimeout(resolve, 0); }); });
 // Real transitions end two animation frames after they start; the overlay reports opened once they have.
 const settle = async () => {
   await finishTransitions();
@@ -270,6 +272,42 @@ describe('DtFilterPill controlled selection', () => {
     expect(emitted('open')).toEqual([[true], [false]]);
   });
 
+  it('rebases onto a parent write made in a promise callback before Apply proposes', async () => {
+    let controls: DtFilterPillContentScope | undefined;
+    let setParent: (next: string[]) => void = () => {};
+    const Parent = () => {
+      const [selected, setSelected] = useState<string[]>(['sales']);
+      setParent = setSelected;
+      return (
+        <DtFilterPill
+          label="Teams"
+          options={options}
+          selected={selected}
+          deferSelection
+          {...recording({ onSelectedChange: value => setSelected(value as string[]) })}
+          content={(bindings: DtFilterPillContentScope) => { controls = bindings; return 'Custom'; }}
+        />
+      );
+    };
+    result = render(<Parent />, { container: container() });
+    await open();
+    await act(async () => { controls?.setSelected?.(['sales', 'support']); });
+    await reconcile();
+    // Outside act, React schedules the parent's update on its own scheduler, as in an app: it commits after the
+    // microtasks Apply used to wait for.
+    const env = globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean };
+    env.IS_REACT_ACT_ENVIRONMENT = false;
+    try {
+      const applying = controls!.apply();
+      Promise.resolve().then(() => setParent(['engineering']));
+      await applying;
+      await new Promise(resolve => { setTimeout(resolve, 50); });
+    } finally {
+      env.IS_REACT_ACT_ENVIRONMENT = true;
+    }
+    expect((emitted('selection-change')?.[0][0] as { previousValue: unknown }).previousValue).toEqual(['engineering']);
+  });
+
   it('preserves dirty draft through option additions, reorder, relabelling and removals', async () => {
     updateWrapper({ deferSelection: true });
     await open();
@@ -286,11 +324,64 @@ describe('DtFilterPill controlled selection', () => {
     expect(checks().map(input => input.checked)).toEqual([true, true]);
     await setProps({ options: [options[0]] });
     await nativeClick(document.querySelector<HTMLElement>('[data-qa="dt-filter-pill__apply-button"]'));
-    await reconcile();
+    await afterApply();
     expect(emitted('update:selected')).toEqual([[['sales', 'support']]]);
     expect((emitted('selection-change')?.[0][0])).toEqual({
       value: ['sales', 'support'], previousValue: ['sales'], reason: 'apply', changed: true,
     });
+  });
+
+  it('validates a retained setSelected against the current options', async () => {
+    let controls: DtFilterPillContentScope | undefined;
+    // Duplicate values make the options invalid, so nothing can be selected until the parent replaces them.
+    updateWrapper({
+      options: [options[0], options[0]],
+      content: (bindings: DtFilterPillContentScope) => { controls = bindings; return 'Custom'; },
+    });
+    await open();
+    const retained = controls!.setSelected!;
+    await setProps({ options });
+    await act(async () => { retained(['support']); });
+    expect(emitted('selection-change')).toHaveLength(1);
+    expect((emitted('selection-change')?.[0][0] as { value: unknown }).value).toEqual(['support']);
+  });
+
+  it('releases the Apply guard when a consumer callback throws', async () => {
+    let controls: DtFilterPillContentScope | undefined;
+    let fail = true;
+    updateWrapper({
+      deferSelection: true,
+      content: (bindings: DtFilterPillContentScope) => { controls = bindings; return 'Custom'; },
+    }, { onApply: () => { if (fail) throw new Error('boom'); } });
+    await open();
+    await act(async () => { controls?.setSelected?.(['support']); });
+    await act(async () => { await expect(controls!.apply()).rejects.toThrow('boom'); });
+    fail = false;
+    await act(async () => { await controls!.apply(); });
+    expect(emitted('apply')).toHaveLength(2);
+  });
+
+  it('acts on the committed props while a transition render is suspended', async () => {
+    const never = new Promise<void>(() => {});
+    const Suspender = ({ block }: { block: boolean }) => { if (block) throw never; return null; };
+    let start: (() => void) | undefined;
+    const Parent = () => {
+      const [disabled, setDisabled] = useState(false);
+      const [block, setBlock] = useState(false);
+      start = () => startTransition(() => { setDisabled(true); setBlock(true); });
+      return (
+        <Suspense fallback={null}>
+          <DtFilterPill label="Teams" options={options} selected={['sales']} disabled={disabled} {...recording()} />
+          <Suspender block={block} />
+        </Suspense>
+      );
+    };
+    result = render(<Parent />, { container: container() });
+    await act(async () => { start?.(); });
+    // The transition never commits: the pill on screen is still the enabled one, and Clear still works.
+    expect(anchorOf()).not.toHaveAttribute('disabled');
+    await nativeClick(screen.getByTestId('dt-filter-pill__clear-button'));
+    expect(emitted('selection-change')).toHaveLength(1);
   });
 
   it('coalesces repeated Apply requests for one deferred session', async () => {
@@ -543,10 +634,11 @@ describe('DtFilterPill controlled selection', () => {
   const legacyIgnoresCallbacks = async (keys: string[], extra: Partial<DtFilterPillProps> = {}) => {
     const trace: string[] = [];
     const listeners = Object.fromEntries(keys.map(key => [key, () => trace.push(key)]));
+    // recording() installs every callback after the props, so the spies go through its extra argument.
     updateWrapper({
       options: undefined, value: [{ name: 'Legacy' }], label: 'Legacy', popoverAppendTo: 'parent',
-      className: 'consumer-root', style: { color: 'red' }, 'data-qa': 'consumer-root', ...listeners, ...extra,
-    } as Partial<DtFilterPillProps>);
+      className: 'consumer-root', style: { color: 'red' }, 'data-qa': 'consumer-root', ...extra,
+    } as Partial<DtFilterPillProps>, listeners as Partial<DtFilterPillProps>);
     await open();
     await finishTransitions();
     await nativeClick(document.querySelector<HTMLElement>('[data-qa="dt-popover"]'));

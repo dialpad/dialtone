@@ -212,6 +212,21 @@ describe('DtFilterPill built-in dropdown option rows', () => {
     });
   });
 
+  describe('Keyboard position', () => {
+    it('starts again from the first row after every row disappeared and came back', async () => {
+      mountWithLiveOptions(typeOptions);
+      await open();
+      focusRow(rows()[1]);
+      await act(async () => { setLiveOptions?.([]); });
+      await reconcile();
+      await act(async () => { setLiveOptions?.(typeOptions); });
+      await reconcile();
+      // Vue clears the dropdown's index when no row is left, so the next ArrowDown lands on the first row.
+      const first = rows()[0].querySelector('[data-qa="dt-item-layout-title-wrapper"]')?.textContent?.trim();
+      expect(await focusedLabelAfter('ArrowDown')).toBe(first);
+    });
+  });
+
   describe('Grouping', () => {
     it('renders consecutive grouped options as one labelled group inside a presentational list item', async () => {
       updateWrapper({ options: groupedOptions });
