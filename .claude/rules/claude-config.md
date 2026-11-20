@@ -101,6 +101,7 @@ Reusable workflows. Two forms:
 Rules:
 
 - Use the directory form for new native skills, with or without supporting files
+- A skill that also exists under `.agents/skills/<name>/` is a thin wrapper: the shared frontmatter and one line that loads the shared file. Keep the rules in the shared file; the contract eval enforces this.
 - `SKILL.md` is the canonical entry — no `index.md`, no `README.md`
 - Skill body is written as procedural instructions for Claude, not as user-facing documentation
 
