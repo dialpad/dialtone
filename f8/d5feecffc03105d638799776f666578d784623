@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_b1bcf368feba80::t_96772ef0d99986 124-125,276-277
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f8d5feecffc03105d638799776f666578d784623",
+  "prompts": {},
+  "sessions": {
+    "s_b1bcf368feba80": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "03dd7842-595a-4d18-b8d3-e23a4c169fdb",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}

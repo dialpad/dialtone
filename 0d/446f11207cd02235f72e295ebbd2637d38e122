@@ -1,0 +1,29 @@
+packages/dialtone-react/common/keyboard-list-navigation/keyboard_list_navigation.test.tsx
+  s_2defdf83601f66::t_6a0341206e0fad 1-5,156-249
+packages/dialtone-react/common/keyboard-list-navigation/useKeyboardListNavigation.ts
+  s_0ceb79eaed39eb::t_9ef274c758b54e 21,44,65-66,92-96,108-110,124-129,132,139-140,155,194-196,205-207,225,276
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0d446f11207cd02235f72e295ebbd2637d38e122",
+  "prompts": {},
+  "sessions": {
+    "s_0ceb79eaed39eb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4075cbb2-ae0b-4597-bf73-2f2449c72b38",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

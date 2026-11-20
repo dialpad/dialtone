@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Combobox/Combobox.test.tsx
+  s_5bb7dbc73b0ab4::t_4a5c1437d3c68a 3-4,102-124
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8abc70c2ceb01eb58bffcd95dd5143d391dc7b21",
+  "prompts": {},
+  "sessions": {
+    "s_5bb7dbc73b0ab4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8831d5ed-ba45-4b04-b3f7-8b79b6f77840",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

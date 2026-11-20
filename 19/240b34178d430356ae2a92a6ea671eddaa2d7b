@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Resizable/Composables/UseResizableKeyboard.ts
+  s_5bab835682bf36::t_4448205e4fac1c 208-224
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "19240b34178d430356ae2a92a6ea671eddaa2d7b",
+  "prompts": {},
+  "sessions": {
+    "s_5bab835682bf36": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "876fc9ee-c5b5-43c7-9e65-b465e07538eb",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

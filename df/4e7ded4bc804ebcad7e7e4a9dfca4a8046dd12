@@ -1,0 +1,33 @@
+packages/dialtone-react/components/RadioGroup/RadioGroup.parity.tsx
+  s_7c3efdc736c461::t_2960dc3adc3175 1-8
+packages/dialtone-react/components/RadioGroup/RadioGroup.tsx
+  s_347968412be9ff::t_721f62dd7db9a3 1-94
+packages/dialtone-react/components/RadioGroup/RadiosDecorator.tsx
+  s_7c3efdc736c461::t_d3729e20be5feb 1-24
+packages/dialtone-react/components/RadioGroup/index.ts
+  s_7c3efdc736c461::t_ea24fb50deda58 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "df4e7ded4bc804ebcad7e7e4a9dfca4a8046dd12",
+  "prompts": {},
+  "sessions": {
+    "s_347968412be9ff": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "488b1a86-15e3-4ec3-874a-98b923796a25",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_7c3efdc736c461": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "73d1c8ac-daee-46f5-a76e-225699143e52",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

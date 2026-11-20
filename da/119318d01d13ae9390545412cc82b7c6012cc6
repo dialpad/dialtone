@@ -1,0 +1,38 @@
+packages/dialtone-react/components/Hovercard/Hovercard.parity.tsx
+  s_378edcad6962b0::t_3b34460077fec9 1-6
+packages/dialtone-react/components/Hovercard/Hovercard.stories.tsx
+  s_378edcad6962b0::t_984d4fae0e80ab 1-512
+packages/dialtone-react/components/Hovercard/Hovercard.tsx
+  s_378edcad6962b0::t_cffa74b10b94a8 1-182,189,197,204-215,217-223,225-288,290-305
+  s_77528d1b28e8ff::t_d4113fadd7cba9 183-188,190-196,198-203,216,224,289
+packages/dialtone-react/components/Hovercard/index.ts
+  s_378edcad6962b0::t_38149f1c68d7b1 1
+packages/dialtone-react/components/Hovercard/skips.json
+  s_378edcad6962b0::t_a1fc61bfd4391f 1-4
+packages/dialtone-react/components/Hovercard/Hovercard.test.tsx
+  s_77528d1b28e8ff::t_f1f16f6d806db3 222-243
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "da119318d01d13ae9390545412cc82b7c6012cc6",
+  "prompts": {},
+  "sessions": {
+    "s_378edcad6962b0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8fbd9300-5098-4b95-8636-203de3bf8f1b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_77528d1b28e8ff": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f0048c49-12f3-4ebc-8b4d-b64254475f9f",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
