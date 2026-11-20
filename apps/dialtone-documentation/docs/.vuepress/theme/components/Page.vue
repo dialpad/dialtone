@@ -222,7 +222,9 @@ const lastUpdated = computed(() => {
 });
 const { headers } = inject('headers');
 const viewport = useViewportBreakpoints();
-const { activeHash, handleNavigate } = usePageTocScrollSpy(headers);
+const { activeHash, handleNavigate } = usePageTocScrollSpy(headers, {
+  interceptAnchors: computed(() => Boolean(props.componentCombinatorName)),
+});
 const themeData = useThemeLocaleData();
 const route = useRoute();
 

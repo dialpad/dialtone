@@ -5,6 +5,58 @@ export const PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS = 'dialtone-doc-page-scroll-c
 export const PAGE_STICKY_HEADER_SELECTOR = '#page-sticky-header';
 export const TOC_SCROLL_OFFSET_GAP = 16;
 
+// Navigation objects are unique per router transition, including Back/Forward.
+// Query-only UI writes can synchronize a stale route hash without scrolling any TOC instance.
+const routesWithoutHashScroll = new WeakSet();
+
+export function suppressRouteHashScroll (route) {
+  routesWithoutHashScroll.add(route);
+}
+
+export function isRouteHashScrollSuppressed (route) {
+  return routesWithoutHashScroll.has(route);
+}
+
+export function getPageScrollPosition (to) {
+  return to.hash || isRouteHashScrollSuppressed(to) ? false : { top: 0 };
+}
+
+export function listenForPageAnchorNavigation (navigate, document = window.document, location = window.location) {
+  const onClick = event => {
+    const modified = ['metaKey', 'ctrlKey', 'shiftKey', 'altKey'].some(key => event[key]);
+    if (event.defaultPrevented || event.button !== 0 || modified) return;
+    const navigation = getSamePageAnchorNavigation(event.target?.closest?.('a[href]'), location);
+    if (!navigation) return;
+
+    // Native hash entries can reuse the router's history position, hiding Back/Forward.
+    // Route these clicks while a playground is mounted so every entry has a position.
+    event.preventDefault();
+    // Placeholder demos anywhere on a playground page must not create native history entries.
+    if (navigation.placeholder) return;
+    Promise.resolve(navigate(event, { link: navigation.hash })).catch(() => {});
+  };
+  document.addEventListener('click', onClick);
+  return () => document.removeEventListener('click', onClick);
+}
+
+function getSamePageAnchorNavigation (anchor, location) {
+  const target = getSamePageAnchorUrl(anchor, location);
+  if (!target) return null;
+  if (target.hash) return { hash: target.hash };
+  return target.href.endsWith('#') ? { placeholder: true } : null;
+}
+
+function getSamePageAnchorUrl (anchor, location) {
+  if (!anchor || anchor.hasAttribute('download')) return null;
+  if (anchor.target && anchor.target !== '_self') return null;
+  try {
+    const target = new URL(anchor.href, location.href);
+    return ['origin', 'pathname', 'search'].every(key => target[key] === location[key]) ? target : null;
+  } catch {
+    return null;
+  }
+}
+
 export function getRightRailTocViewportValues (hasCombinator = false) {
   return {
     default: false,
@@ -50,6 +102,10 @@ export function createRouteHashScrollGuard () {
       skippedHash = hash;
     },
 
+    clear () {
+      skippedHash = null;
+    },
+
     shouldSkip (hash) {
       if (skippedHash !== hash) return false;
 
@@ -68,14 +124,24 @@ export async function writeRouteHash (
 ) {
   if (currentHash === hash) return;
 
+  // The scroll spy may have changed the browser URL since this hash was routed.
+  // Synchronize that entry first so a repeated link creates a real history push.
+  let currentRoute = route;
+  if (route.hash === hash) {
+    routeHashScrollGuard.skip(currentHash);
+    const failure = await router.replace({ path: route.path, query: route.query, hash: currentHash });
+    if (failure) return failure;
+    currentRoute = router.currentRoute.value;
+  }
+
   const method = replace ? 'replace' : 'push';
   // Marks the hash as self-written so the composable's own route.hash watcher does not
   // scroll again on top of the scroll the caller is about to perform.
   routeHashScrollGuard.skip(hash);
 
-  await router[method]({
-    path: route.path,
-    query: route.query,
+  return router[method]({
+    path: currentRoute.path,
+    query: currentRoute.query,
     hash,
   });
 }

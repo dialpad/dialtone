@@ -9,6 +9,8 @@ import {
   getLinkedHeaders,
   getScrollOffset,
   getTargetScrollTop,
+  isRouteHashScrollSuppressed,
+  listenForPageAnchorNavigation,
   resolveHeaderTargets,
   hashToId,
   replaceBrowserHash,
@@ -22,7 +24,7 @@ const PROGRAMMATIC_SCROLL_MAX_MS = 2000;
 // Idle gap after the last scroll event before a programmatic scroll is considered settled.
 const SCROLL_IDLE_SETTLE_MS = 150;
 
-export function usePageTocScrollSpy (headers) {
+export function usePageTocScrollSpy (headers, { interceptAnchors = false } = {}) {
   const route = useRoute();
   const router = useRouter();
   const scrollContainer = ref(null);
@@ -37,6 +39,7 @@ export function usePageTocScrollSpy (headers) {
   const routeHashScrollGuard = createRouteHashScrollGuard();
 
   let removeScrollListener = null;
+  let removeAnchorListener = null;
   let scrollFrame = null;
   let isProgrammaticScrolling = false;
   let programmaticScrollTimer = null;
@@ -107,6 +110,7 @@ export function usePageTocScrollSpy (headers) {
       top: Math.max(0, getTargetScrollTop(scrollContainer.value, target, offset)),
       behavior,
     });
+    return target;
   }
 
   // Only smooth scrolls animate over time, so only they need scroll-spy paused until
@@ -137,7 +141,7 @@ export function usePageTocScrollSpy (headers) {
   }
 
   async function updateRouteHash (hash, options) {
-    await writeRouteHash(router, route, hash, routeHashScrollGuard, {
+    return writeRouteHash(router, route, hash, routeHashScrollGuard, {
       currentHash: window.location.hash,
       ...options,
     });
@@ -145,15 +149,35 @@ export function usePageTocScrollSpy (headers) {
 
   async function handleNavigate (event, item) {
     event.preventDefault();
-    activeHash.value = item.link;
-    await updateRouteHash(item.link);
-    scrollToHash(item.link);
+    try {
+      const failure = await updateRouteHash(item.link);
+      await nextTick();
+      if (failure) return;
+      activeHash.value = item.link;
+      const target = scrollToHash(item.link);
+      if (target) {
+        const isEditingHost = target.matches(
+          '[contenteditable=""], [contenteditable="true" i], [contenteditable="plaintext-only" i]',
+        );
+        // Preserve native Tab stops; headings only need to receive programmatic focus.
+        if (!target.hasAttribute('tabindex') && target.tabIndex < 0 && !isEditingHost) {
+          target.setAttribute('tabindex', '-1');
+        }
+        target.focus({ preventScroll: true });
+      }
+    } finally {
+      routeHashScrollGuard.clear();
+    }
   }
 
   // Client-only: runs the initial sync after mount. Must NOT be folded into the
   // watcher below via `immediate` -- that fires during SSR (flush:'post' still runs
   // on the server), where syncScrollContainer touches `document`.
   onMounted(async () => {
+    watch(() => unref(interceptAnchors), enabled => {
+      removeAnchorListener?.();
+      removeAnchorListener = enabled ? listenForPageAnchorNavigation(handleNavigate) : null;
+    }, { immediate: true });
     await nextTick();
     syncScrollContainer();
 
@@ -165,6 +189,7 @@ export function usePageTocScrollSpy (headers) {
   });
 
   onUnmounted(() => {
+    removeAnchorListener?.();
     removeScrollListener?.();
     if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
     stopProgrammaticScroll();
@@ -174,7 +199,7 @@ export function usePageTocScrollSpy (headers) {
     () => route.hash,
     async (hash) => {
       activeHash.value = hash;
-      if (routeHashScrollGuard.shouldSkip(hash)) return;
+      if (routeHashScrollGuard.shouldSkip(hash) || isRouteHashScrollSuppressed(router.currentRoute.value)) return;
 
       await nextTick();
       syncScrollContainer();
@@ -189,6 +214,7 @@ export function usePageTocScrollSpy (headers) {
       await nextTick();
       syncScrollContainer();
 
+      if (isRouteHashScrollSuppressed(router.currentRoute.value)) return;
       if (route.hash) {
         activeHash.value = route.hash;
         scrollToHash(route.hash);

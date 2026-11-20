@@ -50,10 +50,13 @@ The Combinator merges variant data into `info` by member name. It merges
 `info.exclusions`.
 
 The UI starts and resets to `default` unless the bank opts into
-`defaults.metadata.initialPreset` with a named preset. This preference also
+`defaults.metadata.initialPreset` with an existing named preset. An explicit
+`preset` prop takes precedence, including an explicit `default`. Missing or invalid
+requests use the preferred initial preset. This preference also
 sets the baseline for detecting edits; it does not rename the `default` preset
 or change its generated lookup identity. Filter Pill prefers `controlled default`
-while preserving its legacy `default` configuration.
+while preserving its legacy `default` configuration and `?preset=default` link.
+The docs omit the preset query for the preferred initial preset.
 
 Filter Pill preview identity uses the array shape of `options`. Editing an array
 to `null` (or the reverse) creates a new preview instance, matching its new
@@ -111,11 +114,20 @@ Format:
 }
 ```
 
-Initial option values come from each member's `initialValue`.
+Initial option values come from each member's `initialValue`. Plain objects and
+arrays are copied in every bank so live edits do not mutate preset defaults.
+Banks with `previewIdentity` also apply their opted-in cloning policy before
+the plain-value copy.
 
-Child components do not mutate `options` directly. They emit a function through
-`update:options`; the root applies that function inside a guarded setter. Manual
-edits clear the selected variant label.
+Option-bar controls and code-panel slot editors emit a function through
+`update:options`; the root applies it inside a guarded setter. Outside preset
+application, the setter switches a named preset to custom and emits
+`update:preset` with an empty string.
+
+Preview `update:<prop>` events use the same setter only when their value differs
+from the previous-value snapshot. Unchanged echoes preserve the selected preset;
+in-place changes to plain objects and arrays are detected by that snapshot.
+See [RENDERER](RENDERER.md#events) for event handling.
 
 ## Settings
 
