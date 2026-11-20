@@ -4,6 +4,8 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { finishTransitions } from '../../tests/helpers/transition';
 import type { DtComboboxInputProps } from '../Combobox';
 import { DtInput } from '../Input';
+import { DtListItem } from '../ListItem';
+import { DtListItemGroup } from '../ListItemGroup';
 import {
   DtComboboxWithPopover,
   type DtComboboxWithPopoverInputScope,
@@ -114,6 +116,53 @@ describe('DtComboboxWithPopover Tests', () => {
     unmount?.();
     unmount = undefined;
     vi.clearAllMocks();
+  });
+
+  it('clears a teleported option when hovering a group heading before Enter', async () => {
+    props = { label: 'Teams', showList: true, listId: 'teams' };
+    slots = {
+      input: ({ inputProps }) => <DtInput {...inputProps} size={inputProps.size ?? undefined} />,
+      list: ({ listProps }) => (
+        <ul {...listProps}>
+          <li role="presentation">
+            <DtListItemGroup id="team" heading="Teams">
+              <DtListItem id="sales" role="option" navigationType="arrow-keys">Sales</DtListItem>
+            </DtListItemGroup>
+          </li>
+        </ul>
+      ),
+    };
+    mountWrapper();
+    await finishTransitions();
+    await act(async () => {});
+    const input = screen.getByRole('combobox');
+    await act(async () => { fireEvent.mouseMove(getPopoverContent().querySelector('#sales') as Element); });
+    expect(input).toHaveAttribute('aria-activedescendant', 'sales');
+    await act(async () => { fireEvent.mouseMove(getPopoverContent().querySelector('#team-heading') as Element); });
+    await act(async () => { fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' }); });
+    expect(selectStub).not.toHaveBeenCalled();
+    expect(input).not.toHaveAttribute('aria-activedescendant');
+  });
+
+  it('retains input focus and option navigation when the listbox opens', async () => {
+    props = { label: 'Choose', showList: true, listId: 'focus-list' };
+    slots = {
+      input: ({ inputProps }) => <DtInput {...inputProps} size={inputProps.size ?? undefined} id="focus-input" />,
+      list: ({ listProps }) => (
+        <ul {...listProps}>
+          <DtListItem role="option" id="focus-option" navigationType="arrow-keys">Alpha</DtListItem>
+        </ul>
+      ),
+    };
+    mountWrapper();
+    const input = screen.getByRole('combobox');
+    act(() => { input.focus(); });
+    await finishTransitions();
+    await act(async () => {});
+    expect(document.activeElement).toBe(input);
+    await act(async () => { fireEvent.keyDown(input, { key: 'ArrowDown', code: 'ArrowDown' }); });
+    expect(document.activeElement).toBe(input);
+    expect(input).toHaveAttribute('aria-activedescendant', 'focus-option');
   });
 
   describe('Presentation Tests', () => {
