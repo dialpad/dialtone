@@ -5,6 +5,7 @@ import {
   useEffectEvent,
   useId,
   useImperativeHandle,
+  useInsertionEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -667,9 +668,10 @@ export function DtFilterPill (props: DtFilterPillProps) {
     primaryButton,
   };
   // Written once the render commits, so a transition render that suspends or is dropped never reaches the handlers of
-  // the pill still on screen. The first render fills it for a child's layout effect, which runs before this one.
+  // the pill still on screen. An insertion effect, because those run before every layout effect of the commit, a
+  // child's (a custom slot's) included. The first render fills it for what runs before the first commit.
   if (!live.current) live.current = snapshot;
-  useLayoutEffect(() => { live.current = snapshot; });
+  useInsertionEffect(() => { live.current = snapshot; });
   const isOpenRef = useRef(isOpen);
   isOpenRef.current = isOpen;
   const draftRef = useRef(draft);

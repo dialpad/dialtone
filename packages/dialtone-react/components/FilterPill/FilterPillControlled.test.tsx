@@ -1,5 +1,5 @@
 import { act, cleanup, fireEvent, render, screen, type RenderResult } from '@testing-library/react';
-import { Suspense, startTransition, useState, type ReactNode } from 'react';
+import { Suspense, startTransition, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { flushSync } from 'react-dom';
 import { finishTransitions } from '../../tests/helpers/transition';
 import { DtFilterPill, type DtFilterPillContentScope, type DtFilterPillProps } from './FilterPill';
@@ -359,6 +359,39 @@ describe('DtFilterPill controlled selection', () => {
     fail = false;
     await act(async () => { await controls!.apply(); });
     expect(emitted('apply')).toHaveLength(2);
+  });
+
+  it('lets a custom slot\'s layout effect act on the options of the commit that runs it', async () => {
+    const duplicates: readonly DtFilterPillOption[] = [options[0], options[0]];
+    const Probe = ({ valid, setSelected }: { valid: boolean; setSelected?: (next: string[]) => void }) => {
+      // A child's layout effect runs before its parent's, in the commit that made the options valid. It runs only then:
+      // setSelected is a new function every render, so listing it would let a later render hide a stale snapshot.
+      const latest = useRef(setSelected);
+      latest.current = setSelected;
+      useLayoutEffect(() => { if (valid) latest.current?.(['support']); }, [valid]);
+      return null;
+    };
+    let replace: (() => void) | undefined;
+    const Parent = () => {
+      const [current, setCurrent] = useState(duplicates);
+      replace = () => setCurrent(options);
+      return (
+        <DtFilterPill
+          label="Teams"
+          options={current}
+          selected={['sales']}
+          {...recording()}
+          content={(bindings: DtFilterPillContentScope) => (
+            <Probe valid={current === options} setSelected={bindings.setSelected} />
+          )}
+        />
+      );
+    };
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    result = render(<Parent />, { container: container() });
+    await open();
+    await act(async () => { replace?.(); });
+    expect(emitted('selection-change')).toHaveLength(1);
   });
 
   it('acts on the committed props while a transition render is suspended', async () => {
