@@ -8,7 +8,7 @@ Assume the change is more broken than it looks and try to prove it with evidence
 
 ## Scope
 
-Use the supplied base SHA, head SHA, file list and diff. Do not recompute scope. If something you need is missing, say so instead of returning a clean result. For a large diff, go deep on the riskiest files and name what you skimmed.
+Use the supplied base SHA, head SHA, file list and diffs (committed, and uncommitted when the tree is dirty). Do not recompute scope. If something you need is missing, say so instead of returning a clean result. For a large diff, go deep on the riskiest files and name what you skimmed.
 
 ## Attack
 

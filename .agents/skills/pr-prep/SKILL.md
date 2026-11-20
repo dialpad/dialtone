@@ -47,10 +47,14 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    B=staging   # or the PR's base branch
    git fetch origin "$B"
    BASE=$(git merge-base "origin/$B" HEAD); echo "$BASE"
-   HEAD_SHA=$(git rev-parse HEAD); echo "$HEAD_SHA"; git diff --stat "$BASE"; git ls-files -o --exclude-standard
+   HEAD_SHA=$(git rev-parse HEAD); echo "$HEAD_SHA"
+   git -c core.quotePath=false diff --stat "$BASE" "$HEAD_SHA"   # committed
+   git -c core.quotePath=false diff --stat --cached              # staged
+   git -c core.quotePath=false diff --stat                       # unstaged
+   git -c core.quotePath=false ls-files -o --exclude-standard
    ```
 
-   - Record base SHA, head SHA, size and the file list (`FILES`, one path per line, reused like `BASE`). Staged and unstaged changes are in scope. `git ls-files -o` only lists candidates: in a dirty checkout it can pick up unrelated work or scratch notes, so add only the untracked files that belong to this change, ask when unsure, and name the rest as excluded in the report. `git diff` leaves untracked files out, so add each in-scope one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size. Use this same scoped list for the review, package selection and any follow-on fixes.
+   - Record base SHA, head SHA, size and the file list (`FILES`, one path per line, reused like `BASE`). Staged and unstaged changes are in scope. List committed and uncommitted changes separately: one `git diff "$BASE"` compares the base with the working tree, so an uncommitted edit that undoes a committed change hides that file, although the commit still changes it. A file in either list is in scope. The reviewer gets both diffs, labelled: `git diff "$BASE" "$HEAD_SHA"` (committed), `git diff --cached` (staged) and `git diff` (unstaged). Size is the committed stat; note uncommitted lines separately. `core.quotePath=false` prints non-ASCII file names as they are; without it git quotes and escapes them, and they match no path in later checks. `git ls-files -o` only lists candidates: in a dirty checkout it can pick up unrelated work or scratch notes, so add only the untracked files that belong to this change, ask when unsure, and name the rest as excluded in the report. `git diff` leaves untracked files out, so add each in-scope one's full contents to the diff the reviewer gets (`git diff --no-index /dev/null <file>`); they do not count toward the size. Use this same scoped list for the review, package selection and any follow-on fixes.
    - Propose the PR title per `.github/COMMIT_CONVENTION.md`. Put it in a variable, never inside a double-quoted command: `TITLE='<title>'` (write any `'` as `'\''`), or `TITLE=$(gh pr view <n> --json title --jq .title)` for an existing PR. If `TITLE` is empty (for example `gh pr view` failed), mark the title check "not run". Otherwise check it with `printf '%s' "$TITLE" | pnpm exec commitlint`, with `pnpm_config_verify_deps_before_run=false` exported as in the block above.
    - Review mode (PR not checked out):
      - Take base, head and title from `gh pr view <n> --json baseRefOid,headRefOid,title`, the file list from `gh api --paginate repos/dialpad/dialtone/pulls/<n>/files --jq '.[] | .filename, (.previous_filename // empty)'` (`--json files` stops at 100 files; this keeps both sides of a rename, as step 2 does) and the diff from `gh pr diff <n>`. Run the same `gh pr view` again and restart the capture if either SHA changed. Use that file list for step 2.
@@ -67,9 +71,15 @@ Find what a Dialtone reviewer would raise, and what CI would catch, before the P
    printf '%s\n' "$FILES" | awk -F/ 'NF{if($1=="packages"||$1=="apps")print $1"/"$2;else print $1}' | sort -u
    ```
 
-   Build `FILES` from `git diff --name-only --no-renames "$BASE"` (it lists both sides of a move, so a package that loses files still gets its gates) plus the in-scope untracked files from step 1. Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
+   Build `FILES` with the line below, then append the in-scope untracked files from step 1. `--no-renames` lists both sides of a move, so a package that loses files still gets its gates.
 
-3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle (base SHA, head SHA, file list and diff), [adversarial-review.md](references/adversarial-review.md), [reviewer-lens.md](references/reviewer-lens.md), `.agents/resources/rules/general.md` and the path rules `rule-map.md` selects for the changed paths. The lens adds judgment; the path rules still own things like the component artifact pipeline and internal authoring conventions. Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
+   ```sh
+   FILES=$( { git -c core.quotePath=false diff --name-only --no-renames "$BASE" "$HEAD_SHA"; git -c core.quotePath=false diff --name-only --no-renames --cached; git -c core.quotePath=false diff --name-only --no-renames; } | sort -u)
+   ```
+
+   Root files print their first path segment (`AGENTS.md`, `.agents`, `.claude`, `.github`, `scripts`). Use the list for gates (step 6) and for downstream impact from `package-map.md`.
+
+3. **Review.** Start one cold reviewer (fresh context, strongest available model, never a fork of this session) with the scope bundle (base SHA, head SHA, file list, and the committed, staged and unstaged diffs), [adversarial-review.md](references/adversarial-review.md), [reviewer-lens.md](references/reviewer-lens.md), `.agents/resources/rules/general.md` and the path rules `rule-map.md` selects for the changed paths. The lens adds judgment; the path rules still own things like the component artifact pipeline and internal authoring conventions. Add the specialist file for each trigger the diff matches, in the same reviewer or in parallel ones if the diff is large:
 
    | Trigger in the diff                                                                                             | Specialist                                                  |
    | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |

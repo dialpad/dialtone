@@ -9,7 +9,7 @@ Run the rows for the touched packages only (`SKILL.md` step 2) and never the ful
 - Report-only: run only rows marked `no` or `output`. Mark any other row "not run" with the marker as the reason (for example "not run: may rewrite icon keywords"). Where a row has a read-only form and a CI form, use the read-only form; if its prerequisite build output is missing, or older than the changed sources it is built from, that is "not run" too.
 - Every run: compare `git status --porcelain` before and after; if it changed, report what changed and record `tree=dirty`.
 - Author: any row may run. A tracked file that changed is a finding to keep or fix, not something to leave behind unnoticed.
-- Author, before any row marked `themes`: list untracked and ignored files under `packages/dialtone-tokens/themes/` with `git ls-files -o -- packages/dialtone-tokens/themes/`, and copy them outside the repo or commit them first. That build runs `git clean -fx themes/`, and the status comparison only reports the loss after the files are gone.
+- Author, before any row marked `themes`: list untracked and ignored files under `packages/dialtone-tokens/themes/` with `git -c core.quotePath=false ls-files -o -- packages/dialtone-tokens/themes/`, and copy them outside the repo or commit them first. That build runs `git clean -fx themes/`, and the status comparison only reports the loss after the files are gone.
 - A package with no lint or test row is "no gate".
 - The CSS lint gate is the Stylelint command with fixing off. `nx run dialtone-css:lint` can pass with fixable violations still on disk.
 

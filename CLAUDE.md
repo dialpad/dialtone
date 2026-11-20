@@ -79,7 +79,7 @@ Before component work, read the [shared Vue conventions and complete artifact pi
 
 Use the shared workflow in [.agents/resources/doc-sync.md](.agents/resources/doc-sync.md) and its single source-to-reference map. The read-only command compares explicit Git boundaries; `/doc-sync-enforcer` records semantic review decisions. The existing push/PR PreToolUse adapter supplies advisory context without denying permission or treating touched docs as reviewed.
 
-The edit tracker remains for other workflows: `.claude/tsc-cache/<session>/edited-files.log` is tab-separated (`timestamp\tfilepath\trepo`), alongside affected repositories and Nx commands. Documentation review no longer uses that cache, `missing-docs.txt`, or push/PR completion markers. `/doc-janitor` remains separately available under its own scope; the documentation adapter does not invoke cleanup.
+Documentation review does not use a session cache, `missing-docs.txt`, or push/PR completion markers. `/doc-janitor` remains separately available under its own scope; the documentation adapter does not invoke cleanup.
 
 ### Standards freshness
 
