@@ -33,6 +33,7 @@ export default {
       },
       align: { searchKeywords: ['text align'] },
       truncate: { searchKeywords: ['ellipsis', 'single line'] },
+      slide: { searchKeywords: ['marquee', 'scroll', 'ticker', 'reveal truncated'] },
       maxLines: { searchKeywords: ['line clamp'], slider: { min: 1, max: 10, step: 1 } },
       strength: { searchKeywords: ['font weight'] },
       family: { searchKeywords: ['font family'] },
@@ -40,6 +41,11 @@ export default {
   },
 
   exclusions: [
+    {
+      when: { slide: v => !!v },
+      disable: { props: ['truncate', 'maxLines', 'wrap'] },
+      clear: { props: ['truncate', 'maxLines', 'wrap'] },
+    },
     {
       when: { variant: v => !!v },
       disable: { props: ['kind'] },
@@ -254,4 +260,18 @@ export default {
     },
   },
 
+  'Sliding label': {
+    attributes: {
+      class: { initialValue: 'd-w-350' },
+    },
+    slots: {
+      default: {
+        initialValue: 'Front desk reception phone, second floor east wing',
+      },
+    },
+    props: {
+      variant: { initialValue: 'label-md' },
+      slide: { initialValue: 'once' },
+    },
+  },
 };

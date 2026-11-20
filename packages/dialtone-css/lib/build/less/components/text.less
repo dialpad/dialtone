@@ -9,6 +9,7 @@
 //  • LINE CLAMP
 //  • WRAP
 //  • TRIM
+//  • SLIDE
 //  • FONT STYLE MODIFIERS
 //
 @layer dialtone.components {
@@ -347,6 +348,90 @@
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
       }
+    }
+
+    //  ============================================================================
+    //  $   SLIDE
+    //  ----------------------------------------------------------------------------
+    //  Slides overflowing single-line text into view (DtText `slide`). The root only
+    //  lets the text shrink; an inner viewport clips and fades, so the fade stays on
+    //  the text even when the root is a button, and one span inside it moves with
+    //  transform (flipped for RTL). Tuned with the --dt-text-slide-* custom properties
+    //  documented on the DtText docs page.
+
+    &--slide {
+      display: block;
+      min-inline-size: 0; // shrink inside flex rows so the text can overflow
+    }
+
+    &__slide {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      mask-image: var(--_slide-mask, none);
+
+      &:where(:dir(rtl)) {
+        --_slide-fade-direction: to left;
+        --_slide-sign: 1;
+      }
+    }
+
+    // the part that moves: carries the ellipsis at rest, slides with transform
+    // (text-indent was tried first; Chrome did not repaint it reliably)
+    &__slide-content {
+      display: block;
+      overflow: var(--_slide-content-overflow, hidden);
+      text-overflow: ellipsis;
+      transform: translateX(calc(var(--_slide-sign, -1) * var(--_slide-offset, 0px)));
+      transition: transform var(--_slide-duration, 0ms) var(--_slide-easing, var(--dt-text-slide-easing, cubic-bezier(0.25, 0.46, 0.45, 0.94)));
+    }
+
+    // moving or resting at the end: no ellipsis, the text can leave the inner box.
+    // The 16px default fade matches the call bar and sidebar rows.
+    &__slide--moving,
+    &__slide--end {
+      --_slide-content-overflow: visible;
+      --_slide-fade-size: var(--dt-text-slide-fade-size, var(--dt-layout-25));
+    }
+
+    // moving: both edges fade
+    &__slide--moving {
+      --_slide-mask: linear-gradient(
+        var(--_slide-fade-direction, to right),
+        transparent,
+        #000 var(--_slide-fade-size),
+        #000 calc(100% - var(--_slide-fade-size)),
+        transparent
+      );
+    }
+
+    // resting at the end: only the start edge fades
+    &__slide--end {
+      --_slide-mask: linear-gradient(
+        var(--_slide-fade-direction, to right),
+        transparent,
+        #000 var(--_slide-fade-size)
+      );
+    }
+
+    // loop: steady scroll
+    &__slide--loop {
+      --_slide-easing: linear;
+    }
+
+    // loop, once the gap reaches the start edge: only the end edge fades, so the
+    // gap and the incoming copy are not faded
+    &__slide--loop-wrap {
+      --_slide-mask: linear-gradient(
+        var(--_slide-fade-direction, to right),
+        #000 calc(100% - var(--_slide-fade-size)),
+        transparent
+      );
+    }
+
+    // second copy of the text, only rendered while a loop movement runs
+    &__slide-copy {
+      padding-inline-start: var(--dt-spacing-400);
     }
 
     //  ============================================================================

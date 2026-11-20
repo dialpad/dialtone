@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtText from './Text.vue';
 import DtTextDefault from './TextDefault.story.vue';
 import DtTextVariants from './TextVariants.story.vue';
+import DtTextSlide from './TextSlide.story.vue';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_VARIANT_MODIFIERS,
@@ -14,6 +15,7 @@ import {
   TEXT_DENSITY_MODIFIERS,
   TEXT_WRAP_MODIFIERS,
   TEXT_BOX_TRIM_MODIFIERS,
+  TEXT_SLIDE_MODES,
 } from './TextConstants';
 
 const kindOptions = [undefined, ...Object.keys(TEXT_KIND_MODIFIERS)];
@@ -25,6 +27,7 @@ const strengthOptions = [undefined, ...Object.keys(TEXT_STRENGTH_MODIFIERS)];
 const densityOptions = [undefined, ...Object.keys(TEXT_DENSITY_MODIFIERS)];
 const wrapOptions = [undefined, ...Object.keys(TEXT_WRAP_MODIFIERS)];
 const toneOptions = [undefined, ...Object.keys(TEXT_TONE_MODIFIERS)];
+const slideOptions = [false, true, ...TEXT_SLIDE_MODES];
 const textBoxTrimOptions = [undefined, ...Object.keys(TEXT_BOX_TRIM_MODIFIERS)];
 
 export const argsData = {
@@ -41,6 +44,7 @@ export const argsData = {
   align: undefined,
   truncate: false,
   maxLines: undefined,
+  slide: false,
   numeric: false,
   onClick: action('click'),
 };
@@ -97,6 +101,12 @@ export const argTypesData = {
   maxLines: {
     control: { type: 'number', min: 1 },
   },
+  slide: {
+    options: slideOptions,
+    control: { type: 'select' },
+    description:
+      'Slides overflowing single-line text into view on hover or focus. Needs a narrow block container to show.',
+  },
   numeric: {
     control: 'boolean',
   },
@@ -137,6 +147,8 @@ export default {
 
 const DefaultTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTextDefault);
+const SlideTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTextSlide);
 const VariantsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, DtTextVariants);
 
@@ -151,5 +163,13 @@ export const Variants = {
   parameters: {
     controls: { disable: true },
     options: { showPanel: false },
+  },
+};
+
+export const Slide = {
+  render: SlideTemplate,
+  args: { slide: 'once' },
+  parameters: {
+    controls: { include: ['slide'] },
   },
 };

@@ -5,8 +5,15 @@
     :class="textClasses"
     :style="textStyles"
   >
-    <!-- @slot Default slot for text content -->
-    <slot />
+    <!-- the slide state lives in this child, so plain text carries none -->
+    <dt-text-slide-viewport
+      v-if="slideMode"
+      :mode="slideMode"
+    >
+      <!-- @slot Default slot for text content -->
+      <slot />
+    </dt-text-slide-viewport>
+    <slot v-else />
   </component>
 </template>
 
@@ -29,13 +36,16 @@ import {
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
+  TEXT_SLIDE_MODES,
 } from './TextConstants';
+import DtTextSlideViewport from './modules/SlideViewport.vue';
 
 const DEFAULT_SIZE = '300';
 const SEMANTIC_HEADING_ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
 // Module-level flag to emit info only once per session
 let hasEmittedHeadlineSemanticInfo = false;
+let hasWarnedSlideConflict = false;
 
 // Exported for testing purposes only
 export const resetHeadlineSemanticInfoFlag = () => {
@@ -48,6 +58,8 @@ export const resetHeadlineSemanticInfoFlag = () => {
  */
 export default {
   name: 'DtText',
+
+  components: { DtTextSlideViewport },
 
   props: {
     /**
@@ -238,6 +250,21 @@ export default {
         );
       },
     },
+
+    /**
+     * Slides overflowing single-line text into view while the text, or the item around it
+     * (button, link, menu item), is hovered or has keyboard focus. `true` is the same as `once`.
+     * Renders as a block and replaces `truncate`, `maxLines` and `wrap`. Tune with the
+     * `--dt-text-slide-*` CSS custom properties listed in the DtText docs.
+     * @values true, false, once, loop
+     */
+    slide: {
+      type: [Boolean, String],
+      default: false,
+      validator: (value) => {
+        return typeof value === 'boolean' || TEXT_SLIDE_MODES.includes(value);
+      },
+    },
   },
 
   computed: {
@@ -272,7 +299,9 @@ export default {
         classes.push(toneClass);
       }
 
-      if (this.truncate) {
+      if (this.slideMode) {
+        classes.push('d-text--slide');
+      } else if (this.truncate) {
         classes.push(TEXT_TRUNCATE_CLASS);
       }
 
@@ -280,11 +309,11 @@ export default {
         classes.push(TEXT_NUMERIC_CLASS);
       }
 
-      if (this.maxLines) {
+      if (this.maxLines && !this.slideMode) {
         classes.push(TEXT_LINE_CLAMP_CLASS);
       }
 
-      const wrapClass = this.getWrapClass();
+      const wrapClass = this.slideMode ? null : this.getWrapClass();
       if (wrapClass) {
         classes.push(wrapClass);
       }
@@ -308,7 +337,7 @@ export default {
     },
 
     textStyles() {
-      if (!this.maxLines) {
+      if (!this.maxLines || this.slideMode) {
         return undefined;
       }
 
@@ -316,9 +345,22 @@ export default {
         '--dt-text-line-clamp': this.maxLines,
       };
     },
+
+    slideMode() {
+      if (TEXT_SLIDE_MODES.includes(this.slide)) {
+        return this.slide;
+      }
+      return this.slide ? 'once' : null;
+    },
   },
 
   mounted() {
+    if (this.slideMode && !hasWarnedSlideConflict && (this.maxLines || this.wrap)) {
+      // eslint-disable-next-line no-console
+      console.warn('[DtText] slide ignores maxLines and wrap.');
+      hasWarnedSlideConflict = true;
+    }
+
     // Emit info once per session when headline is used without semantic heading element
     if (
       !hasEmittedHeadlineSemanticInfo &&
