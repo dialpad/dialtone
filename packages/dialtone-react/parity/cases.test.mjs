@@ -46,11 +46,17 @@ test('a slot string renders as in Combinator: its scope\'s names are locals, and
     '<div><button aria-expanded="true">Menu</button></div>');
 });
 
-test('a slot without a scopeName is left as it is, whatever it opens with', () => {
-  const source = `<template v-if="option.value === 'unread'"><b>12</b></template>`;
-  const { optionEnd, icon } = slotTemplates({ slots: { optionEnd: source, icon: ' {{ label }} ' } });
-  assert.equal(optionEnd, source);
+test('a slot without a scopeName is left as it is, unless it opens with <template>', () => {
+  const { icon, optionEnd } = slotTemplates({ slots: { icon: ' {{ label }} ', optionEnd: '<template v-if="x"><b>12</b></template>' } });
   assert.equal(icon, ' {{ label }} ');
+  assert.equal(optionEnd, '<template #default><template v-if="x"><b>12</b></template></template>');
+});
+
+test('a slot string that opens with <template v-if> compiles, and renders its content only when the condition holds', async () => {
+  const c = { slots: { optionEnd: `<template v-if="option.value === 'unread'">\n  <b>12</b>\n  <span>unread</span>\n</template>` } };
+  const template = slotTemplates(c).optionEnd;
+  assert.match(await renderSlot(template, { option: { value: 'unread' } }), /<b>12<\/b><span>unread<\/span>/);
+  assert.doesNotMatch(await renderSlot(template, { option: { value: 'all' } }), /12/);
 });
 
 test('a slot string with a scopeName renders as it did when VTU wrapped it, apart from the scope\'s alias', async () => {

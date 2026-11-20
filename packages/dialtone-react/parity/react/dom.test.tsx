@@ -22,7 +22,10 @@ interface Case {
   html: string;
   /** Slots Vue rendered with no scope: their HTML. */
   slotHtml: Record<string, string>;
-  /** Slots Vue rendered with a scope: the scope and the HTML for each distinct one. */
+  /**
+   * Slots Vue rendered with a scope: the scope and the HTML for each distinct one. Empty for a slot Vue never rendered
+   * whose content reads its scope, so any scope the port renders it with is unmatched.
+   */
   slotRenders?: Record<string, { scope: unknown; html: string }[]>;
   /** Slots whose HTML has the component's injected context applied (counted by the gate). */
   slotContext?: string[];

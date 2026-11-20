@@ -42,14 +42,17 @@ export function casesFrom (variants) {
  * A case's slot strings as the templates Vue Test Utils compiles, for the real render and for each slot rendered on
  * its own. A slot string means what it does in Combinator, which renders it with the names in the slot's scope as
  * locals and, for a slot with a scopeName (variants_dropdown.js' anchorAttrs), the whole scope under that name too
- * (components/tools/node.vue). VTU only binds the locals: it wraps a string in <template #default="params">. So a
- * slot with a scopeName gets the wrapper here instead, with that name for the scope. VTU's `params` isn't bound
- * there: Combinator doesn't bind it, and no preset or harness case uses it. Every other string stays as VTU takes it.
+ * (components/tools/node.vue). VTU only binds the locals: it wraps a string in <template #default="params">, and takes a
+ * string that opens with <template> for that wrapper already, so a preset's <template v-if>
+ * (variants_filter_pill.js) fails to compile. So a slot with a scopeName, or whose string opens with <template>, gets
+ * the wrapper here instead, with the scopeName for the scope. VTU's `params` isn't bound there: Combinator doesn't
+ * bind it, and no preset or harness case uses it. Every other string stays as VTU takes it.
  */
 export const slotTemplates = c => Object.fromEntries(Object.entries(c.slots).map(([slot, source]) => {
   const scopeName = c.scopeNames?.[slot];
+  const text = String(source).trim();
   // VTU trims what it wraps, so the wrapped string renders as it did when VTU wrapped it.
-  return [slot, scopeName ? `<template #default="${scopeName}">${String(source).trim()}</template>` : source];
+  return [slot, scopeName || text.startsWith('<template') ? `<template #default${scopeName ? `="${scopeName}"` : ''}>${text}</template>` : source];
 }));
 
 /**
