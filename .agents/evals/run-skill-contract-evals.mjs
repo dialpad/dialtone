@@ -142,6 +142,21 @@ const skills = {
       '.agents/skills/pr-prep/references/specialists/css.md',
     ],
   },
+  'icon-work': {
+    resources: [
+      '.agents/resources/validation.md',
+      '.agents/resources/rules/icons.md',
+      '.agents/resources/dialtone-lookup.md',
+    ],
+    patterns: [
+      /## Before You Build/,
+      /centred in its viewBox/,
+      /no `stroke`, `stroke-width` or `stroke-linecap`/i,
+      /singular name unless the object itself is plural/,
+      /A category folder with no key in the JSON crashes the build/,
+    ],
+    references: ['.agents/skills/pr-prep/references/specialists/icons.md'],
+  },
 };
 
 const claudeRuleParityAllowlist = new Map([
