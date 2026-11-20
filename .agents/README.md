@@ -22,6 +22,7 @@ For repository authoring or maintenance questions, read the [Contributor tasks t
 | `component-work`    | component creation/update, component API changes   | Check what exists first; keep component, tests, stories, docs, variants in sync. Thin Claude wrapper.   | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
 | `icon-work`         | icon add/update, icon SVG or keyword changes       | Add or update one icon from its Figma source; four review checks, build and docs. Thin Claude wrapper.  | `validation.md`, `rules/icons.md`, `dialtone-lookup.md`            | contract |
 | `migration-work`    | public API change that may break consumers         | Keep old usage working; label and document a break; codemod rules. Thin Claude wrapper.                 | `validation.md`, `rules/logical-naming.md`                         | contract |
+| `migration-work`    | public API change that may break consumers         | Keep old usage working; label and document a break; codemod rules. Thin Claude wrapper.                 | `validation.md`, `rules/*.md`                                      | contract |
 
 ## Resources
 

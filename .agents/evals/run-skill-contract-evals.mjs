@@ -166,7 +166,7 @@ const skills = {
     patterns: [
       /### 1\. Is it breaking\?/,
       /BREAKING CHANGE:/,
-      /drops the body/,
+      /only the person merging can keep it/,
       /A second run changes nothing/,
     ],
     references: ['.agents/skills/pr-prep/references/specialists/codemods.md'],

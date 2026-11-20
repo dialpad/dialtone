@@ -2,6 +2,5 @@
 
 Run when a codemod or migration script is in the diff.
 
-- Preserve rendered behavior and authored values except where the migration documents an intentional change. Rewrite only markup owned by the target.
-- If ownership, bindings, spreads, or competing values make a rewrite unsafe, leave the affected input intact and give a useful diagnostic. Carry that decision through later passes and avoid overlapping edits.
-- Use representative fixtures for the risks the transform can hit. Check that a second run leaves the output and diagnostics unchanged. Where relevant, verify that stage order, dry-run behavior, and the supported entry points match the migration guide.
+- Check the diff against the codemod rules in `.agents/skills/migration-work/SKILL.md` (Codemod behaviour): owned markup only, authored values kept, unsafe input left intact with a diagnostic, spreads skipped, a no-op second run, a fixture per case.
+- Also check what the rules do not cover: an unsafe decision is carried through later passes, edits do not overlap, and stage order, dry-run behavior and the supported entry points match the migration guide.
