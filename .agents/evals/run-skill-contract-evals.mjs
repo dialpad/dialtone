@@ -151,7 +151,7 @@ const skills = {
     patterns: [
       /## Before You Build/,
       /centred in its viewBox/,
-      /No `stroke`, `stroke-width` or `stroke-linecap`/,
+      /no `stroke`, `stroke-width` or `stroke-linecap`/i,
       /singular name unless the object itself is plural/,
       /A category folder with no key in the JSON crashes the build/,
     ],
