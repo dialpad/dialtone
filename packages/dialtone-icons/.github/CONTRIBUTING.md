@@ -20,11 +20,13 @@ or standalone as SVG files.
 
 ```js
 {
-   "arrows": {
-     "arrow-left": ["arrow", "left", "direction"],
-   //   ...
-   }
-   // ...
+  "categories": {
+    "arrows": {
+      "arrow-left": ["arrow", "left", "direction"],
+      // ...
+    }
+    // ...
+  }
 }
 ```
 

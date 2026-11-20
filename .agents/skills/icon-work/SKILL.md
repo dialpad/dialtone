@@ -30,32 +30,32 @@ Add or update one icon from its Figma source, with the keywords, build output an
 
 Four checks reviewers keep raising that the bots miss:
 
-1. The SVG comes from the Figma icon library, exported from the 12px (size 100) component, and is centred in its viewBox. An off-centre `x` was caught in review, and the reviewer supplied the Figma source.
-2. Strokes are outlined in the SVG, so there are no live strokes. This was caught in review as well.
-3. Keywords are singular and split into single words (`notification`, not `notifications` or `notification-bell`).
-4. The file name and category match the library: kebab-case name, in the category folder Figma uses.
+1. The SVG is a fresh export from the Figma icon library's 12px (size 100) component, and the glyph is centred in its viewBox: equal margins left and right, and top and bottom. Review caught an x-shaped glyph that sat off-centre. If it is off, ask for a new Figma export; do not nudge coordinates by hand.
+2. No `stroke`, `stroke-width` or `stroke-linecap` attributes on any element. Outline strokes in Figma first. The build only turns `fill` into `currentColor`, so a stroke keeps its hardcoded colour and ignores the text colour.
+3. Name: the icon name (file name and keyword key) is the library's singular name unless the object itself is plural (`variable`, not `variables`; `scissors` and `headphones` stay plural). It also matches the prefixes of sibling icons in its category (`mail-*`, `message-*`): review renamed an `email-` icon to `mail-`.
+4. Keywords: the search terms people type. Do not repeat words already in the name or the category.
 
 Also:
 
 - Standard icons follow the preparation steps in CONTRIBUTING, including the `brand-full-color` exception. Near-black hex fills are not converted to `currentColor`, so normalize them.
-- Never hand-edit generated files (`src/icons/`, `dist/`, platform output).
+- Never hand-edit generated files (`packages/dialtone-icons/src/icons/`, `packages/dialtone-icons/dist/`, platform output).
 - Keep changes to the one icon.
 
 ## Workflow
 
 1. Run Before You Build.
 2. Check the SVG against the four checks and the CONTRIBUTING preparation steps.
-3. Add or replace `src/svg/icons/<category>/<name>.svg`. Categories are the folders under `src/svg/icons/`.
-4. For a new icon, add `categories.<category>.<name>` to `src/keywords-icons.json`, sorted with its neighbours. Propose keywords and let the user confirm them.
-5. Run `pnpm nx run dialtone-icons:build`. The build rewrites tracked `keywords-*.json` files when a source SVG has no entry, so check `git status` afterwards and keep only the intended changes.
-6. Check `dist/svg/icons/<name>.svg` has `currentColor` (standard icons) or the kept gradients (full-colour), and spot-check `src/icons/<name>.vue`.
-7. For an update, compare the old and new dist SVG to confirm only the intended change.
+3. Add or replace `packages/dialtone-icons/src/svg/icons/<category>/<name>.svg`. Categories are the folders under `packages/dialtone-icons/src/svg/icons/`.
+4. For a new icon, add `categories.<category>.<name>` to `packages/dialtone-icons/src/keywords-icons.json`, sorted with its neighbours. Propose keywords and let the user confirm them.
+5. Run `pnpm nx run dialtone-icons:build`. It rebuilds both keyword files from the SVG list: an SVG with no entry gets `[]`, an entry with no SVG is dropped, and keywords are looked up by folder name, so the category key must equal the folder name. A category folder with no key in the JSON crashes the build. Confirm the new entry still has its keywords.
+6. Check `packages/dialtone-icons/dist/svg/icons/<name>.svg` has `currentColor` (standard icons) or the kept gradients (full-colour), and spot-check `packages/dialtone-icons/src/icons/<name>.vue`. The build deletes `dist` first and it is gitignored, so it cannot be diffed.
+7. For an update, run `git diff` on the source SVG to confirm only the intended change.
 8. Ask the user to check rendering on the docs icon page (`/design/icons/`).
 
 ## Done When
 
 - The four checks pass and the SVG is the Figma source.
-- Keywords are present for a new icon.
+- A new icon has keywords.
 - The build ran and only intended files changed.
 - The user has the docs page to check rendering.
 
