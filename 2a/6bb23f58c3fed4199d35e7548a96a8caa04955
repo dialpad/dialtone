@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Pagination/Pagination.stories.tsx
+  s_c99b16455b46eb::t_c132114676125f 114
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2a6bb23f58c3fed4199d35e7548a96a8caa04955",
+  "prompts": {},
+  "sessions": {
+    "s_c99b16455b46eb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "30c95363-419f-487e-8725-f973c4378898",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

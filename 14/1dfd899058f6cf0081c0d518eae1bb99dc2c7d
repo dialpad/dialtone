@@ -1,0 +1,49 @@
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.test.js
+  s_8716e901949c29::t_a4ab5212e9fd9c 756,758,760-762
+packages/dialtone-css/lib/build/less/components/list-item.less
+  s_8716e901949c29::t_ece4197d5d5169 41-42
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_8716e901949c29::t_9dfa0ffd4b7cd0 497
+packages/dialtone-vue/components/FilterPill/FilterPillOptionRows.test.js
+  s_8716e901949c29::t_cc0576c34ac09a 35,42,44,49
+  s_8716e901949c29::t_4f3f7263c244fc 110
+  s_8716e901949c29::t_df9a2ae4c8c45e 177
+  s_8716e901949c29::t_bd74573f2c0e1a 201
+  s_8716e901949c29::t_a2f7197bba25d1 219,221-222,230-235,242-244,248-250,254,256,259-260
+  s_8716e901949c29::t_c72c1e2111e5ff 23-24
+  s_8716e901949c29::t_e0b7d3bd8e16c2 168
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_8716e901949c29::t_4eea0a6d6c10c8 448
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.test.js
+  s_8716e901949c29::t_431ad0ffa65346 119-121
+  s_8716e901949c29::t_0ad1c4bb364aa8 133-137
+  s_8716e901949c29::t_7139ce1abe393f 143
+packages/combinator/src/variants/variants_filter_pill.js
+  s_8716e901949c29::t_9c231163333523 134-138
+  s_8716e901949c29::t_e447a6bf32392f 23,25,28
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.js
+  s_8716e901949c29::t_48cc365df4ce7e 19,24
+packages/dialtone-vue/components/ListItem/ListItem.test.js
+  s_8716e901949c29::t_393fa2ffa861d8 235
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_8716e901949c29::t_e162b4074dac9f 152-153
+packages/dialtone-vue/components/FilterPill/modules/FilterPillOptionGroup.vue
+  s_8716e901949c29::t_6409f619a324f7 13
+  s_8716e901949c29::t_98471f17d34f5c 31-32,37-38,40,42-46,48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "141dfd899058f6cf0081c0d518eae1bb99dc2c7d",
+  "prompts": {},
+  "sessions": {
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

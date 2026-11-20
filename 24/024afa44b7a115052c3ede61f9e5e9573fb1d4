@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Badge/Badge.test.tsx
+  s_a4121f9acecc61::t_537a11c46120a4 300-305
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "24024afa44b7a115052c3ede61f9e5e9573fb1d4",
+  "prompts": {},
+  "sessions": {
+    "s_a4121f9acecc61": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e4364d89-7341-46c4-a88e-879be4230f7b",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

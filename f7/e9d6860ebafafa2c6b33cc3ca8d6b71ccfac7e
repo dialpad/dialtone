@@ -1,0 +1,29 @@
+packages/dialtone-react/components/ImageViewer/ImageViewer.test.tsx
+  s_2d8631898322ba::t_f13a27bf009b69 3,237-250
+packages/dialtone-react/components/ImageViewer/ImageViewer.tsx
+  s_20f27617a21674::t_da22d64abc5d70 22,59-62,128-138,152-157,162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f7e9d6860ebafafa2c6b33cc3ca8d6b71ccfac7e",
+  "prompts": {},
+  "sessions": {
+    "s_20f27617a21674": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b10720cf-ad99-436a-9044-c3a77a19a546",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2d8631898322ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c268081b-c712-4848-a04e-4cf8eb14d385",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

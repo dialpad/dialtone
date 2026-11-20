@@ -1,0 +1,19 @@
+packages/dialtone-react/components/SegmentedControl/SegmentedControl.stories.tsx
+  s_c490301f455537::t_4c1e6cb1162e05 116-117,532
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5182aa969426532020666d6fceea49005f1ed663",
+  "prompts": {},
+  "sessions": {
+    "s_c490301f455537": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9cc8676-c072-42bf-827a-a0c4ee0b99e1",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
