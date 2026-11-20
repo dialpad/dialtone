@@ -1,7 +1,10 @@
 import { act, cleanup, fireEvent, render, screen, within, type RenderResult } from '@testing-library/react';
-import type { ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
+import { flushSync } from 'react-dom';
 import type { Instance, ReferenceElement } from 'tippy.js';
 import { finishTransitions } from '../../tests/helpers/transition';
+import { DtDropdown } from '../Dropdown';
+import { DtListItem } from '../ListItem';
 import { DtPopover, type DtPopoverAnchorScope, type DtPopoverProps } from './Popover';
 import { getPopperOptions } from './TippyUtils';
 
@@ -46,8 +49,35 @@ const finishLeave = async () => {
   await flushPromises();
 };
 
+// Vue's tests stub the transition and emit its after-enter / after-leave by hand (completeTransition); here the
+// transition is the real one, which ends once the helper lets it.
+const completeTransition = finishLeave;
+
 // Vue Test Utils' attachTo: the component mounts in a new element inside the target.
 const attachTo = (target: Element) => target.appendChild(document.createElement('div'));
+
+// What the "open-change" tests wrap DtPopover and DtDropdown in: an existing wrapper that reports its `open` changes
+// (a non-immediate watcher in Vue).
+function OpenChangeWrapper ({ name, open, onOpenChange }: {
+  name: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const previous = useRef(open);
+  useEffect(() => {
+    if (previous.current === open) return;
+    previous.current = open;
+    onOpenChange(open);
+  }, [open, onOpenChange]);
+  return name === 'DtDropdown'
+    ? <DtDropdown open={open} anchor={<button>Open</button>} list={<li role="menuitem">Action</li>} />
+    : <DtPopover open={open} anchor={<button>Open</button>} content={<p>Action</p>} />;
+}
+
+const OVERLAYS = [
+  { name: 'DtPopover' },
+  { name: 'DtDropdown' },
+];
 
 afterEach(() => {
   cleanup();
@@ -84,6 +114,7 @@ describe('DtPopover Tests', () => {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
+    vi.restoreAllMocks();
     result.unmount();
   });
 
@@ -271,6 +302,20 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  it('completes real lazy-show enter and leave hooks', async () => {
+    const onOpened = vi.fn();
+    mockProps = { onOpened };
+    updateWrapper();
+
+    fireEvent.click(button);
+    await completeTransition();
+    expect(onOpened.mock.calls[0][0]).toBe(true);
+
+    fireEvent.click(button);
+    await completeTransition();
+    expect(onOpened.mock.calls[1]).toEqual([false]);
+  });
+
   describe('Popper Options Tests', () => {
     it('defaults the boundary to "clippingParents"', () => {
       fireEvent.click(button);
@@ -397,6 +442,13 @@ describe('DtPopover Tests', () => {
       it('aria-labelledby should be set correctly on the content window', () => {
         expect(popoverWindow).toHaveAttribute('aria-labelledby', anchor().id);
       });
+
+      it('uses an explicit accessible label without an automatic label reference', () => {
+        setProps({ ariaLabel: 'Filter by' });
+
+        expect(popoverWindow).toHaveAttribute('aria-label', 'Filter by');
+        expect(popoverWindow).not.toHaveAttribute('aria-labelledby');
+      });
     });
 
     describe('When popover is closed', () => {
@@ -412,6 +464,43 @@ describe('DtPopover Tests', () => {
         expect(popoverWindow).toHaveAttribute('aria-hidden', 'true');
       });
     });
+  });
+
+  describe('Built-in menu close semantics', () => {
+    it.each([
+      { showCloseButton: false, modal: false },
+      { showCloseButton: false, modal: true },
+      { showCloseButton: true, modal: false },
+      { showCloseButton: true, modal: true },
+    ])('updates popup and native Close semantics with showCloseButton=$showCloseButton, modal=$modal',
+      async ({ showCloseButton, modal }) => {
+        const onOpened = vi.fn();
+        mockProps = { role: 'dialog', showCloseButton, modal, onOpened };
+        updateWrapper();
+        fireEvent.click(button);
+        await completeTransition();
+        const closeTestId = showCloseButton ? 'dt-popover-close' : 'dt-sr-only-close-button';
+        const close = within(popoverWindow).getByTestId(closeTestId);
+        expect(close).not.toHaveAttribute('role');
+        expect(close.tagName).toBe('BUTTON');
+        expect(close.tabIndex).toBe(0);
+
+        setProps({ role: 'menu' });
+        expect(popoverWindow).not.toHaveAttribute('aria-modal');
+        expect(close).toHaveAttribute('role', 'menuitem');
+        expect(within(popoverWindow).getByTestId(closeTestId)).toBe(close);
+        setProps({ role: 'dialog' });
+        expect(close).not.toHaveAttribute('role');
+        setProps({ role: 'menu' });
+
+        close.focus();
+        fireEvent.click(close);
+        expect(button).toHaveAttribute('aria-expanded', 'false');
+        expect(onOpened.mock.calls.map(([open]) => open)).toEqual([true]);
+        await completeTransition();
+        expect(onOpened.mock.calls.map(([open]) => open)).toEqual([true, false]);
+        if (modal) expect(document.activeElement).toBe(button);
+      });
   });
 
   describe('Focus trapping', () => {
@@ -452,24 +541,18 @@ describe('DtPopover Tests', () => {
         expect(document.activeElement).toBe(last);
       });
 
-      it('does not mark the dialog aria-hidden merely because isOpen became false', () => {
+      it('keeps the dialog exposed until dismissal restores focus', async () => {
+        within(popoverWindow).getByTestId('trap-last').focus();
+
         // Closing flips isOpen at once; that alone must not hide the dialog from assistive technology, since a
         // descendant may still hold focus and the leave transition hasn't restored it yet. Only the end of the leave
-        // transition may do that, once focus has actually moved off the dialog.
+        // transition may do that, once focus has actually moved off the dialog. (Vue's test holds the focus lookup
+        // open to look at that moment; the hook's isn't reachable, so this looks before the transition ends.)
+        fireEvent.keyDown(popoverWindow, { key: 'Escape' });
+        expect(button).toHaveAttribute('aria-expanded', 'false');
         expect(popoverWindow).toHaveAttribute('aria-hidden', 'false');
 
-        fireEvent.keyDown(popoverWindow, { key: 'Escape' });
-
-        expect(popoverWindow).toHaveAttribute('aria-hidden', 'false');
-      });
-
-      it('marks the dialog aria-hidden only after onLeaveTransitionComplete restores focus', async () => {
-        const last = within(popoverWindow).getByTestId('trap-last');
-        last.focus();
-
-        fireEvent.keyDown(popoverWindow, { key: 'Escape' });
-        await finishTransitions();
-        await flushPromises();
+        await completeTransition();
 
         expect(document.activeElement).toBe(button);
         expect(popoverWindow).toHaveAttribute('aria-hidden', 'true');
@@ -685,6 +768,285 @@ describe('DtPopover Tests', () => {
       await flushPromises();
       expect(onOpenChange).toHaveBeenCalled();
       expect(onOpenChange.mock.calls[0]).toEqual([true]);
+    });
+  });
+
+  // Vue's tests listen for the event on the root through an `onOpenChange` attribute; React's `onOpenChange` is the
+  // component's own prop, so the listener is a native one on the element the component is rendered in.
+  it.each(OVERLAYS)('preserves bubbling open-change DOM events through $name', ({ name }) => {
+    const listener = vi.fn();
+    const dispatchOpenChange = (event: { currentTarget: HTMLElement }) => {
+      event.currentTarget.dispatchEvent(new CustomEvent('open-change', { bubbles: true, detail: 'consumer-state' }));
+    };
+    const container = attachTo(document.body);
+    container.addEventListener('open-change', listener);
+    const local = render(name === 'DtDropdown'
+      ? (
+        <DtDropdown
+          open
+          appendTo="parent"
+          modal={false}
+          anchor={<button>Open</button>}
+          list={<DtListItem role="menuitem" data-qa="custom-event" onClick={dispatchOpenChange}>Dispatch</DtListItem>}
+        />
+      )
+      : (
+        <DtPopover
+          open
+          appendTo="parent"
+          modal={false}
+          anchor={<button>Open</button>}
+          content={<button data-qa="custom-event" onClick={dispatchOpenChange}>Dispatch</button>}
+        />
+      ), { container });
+
+    expect(listener).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByTestId('custom-event'));
+
+    expect(listener.mock.calls).toEqual([[expect.objectContaining({ detail: 'consumer-state' })]]);
+    local.unmount();
+  });
+
+  it.each(OVERLAYS)('preserves an existing wrapper open-change around $name', ({ name }) => {
+    const listener = vi.fn();
+    const local = render(
+      <OpenChangeWrapper name={name} open={false} onOpenChange={listener} />,
+      { container: attachTo(document.body) },
+    );
+
+    local.rerender(<OpenChangeWrapper name={name} open onOpenChange={listener} />);
+    local.rerender(<OpenChangeWrapper name={name} open={false} onOpenChange={listener} />);
+
+    expect(listener.mock.calls).toEqual([[true], [false]]);
+    local.unmount();
+  });
+
+  describe('logical visibility and transition generations', () => {
+    let scrollWasLocked: boolean;
+    const visibilityChanges = vi.fn();
+    const onOpened = vi.fn();
+    const onOpenChange = vi.fn();
+
+    beforeEach(() => {
+      scrollWasLocked = document.documentElement.classList.contains('d-of-hidden');
+      document.documentElement.classList.remove('d-of-hidden');
+      visibilityChanges.mockClear();
+      onOpened.mockClear();
+      onOpenChange.mockClear();
+      mockProps = { visibilityChangeCallback: visibilityChanges, onOpened, onOpenChange };
+      mockSlots = {
+        content: ({ close }) => <button data-qa="inside" onClick={close}>Action</button>,
+      };
+      updateWrapper();
+    });
+
+    afterEach(() => {
+      document.documentElement.classList.toggle('d-of-hidden', scrollWasLocked);
+    });
+
+    // Vue's tests hold the focus lookup open (`getFirstFocusableElement`, a method of the component) and emit the
+    // transition's after-enter / after-leave through `.vm`. The hook's lookup isn't reachable from React, so the
+    // four tests that need it are skipped (skips.json); the focus listener tests below exercise the same generation
+    // checks.
+
+    it('reports an initially open state during creation before terminal notifications', async () => {
+      // Vue calls the callback during creation, before the anchor renders; React's first chance is the layout effect
+      // of the first commit, which still comes before any terminal notification.
+      const logicalChanges: boolean[] = [];
+      mockProps = {
+        open: true,
+        visibilityChangeCallback: value => { logicalChanges.push(value); },
+        onOpened,
+        onOpenChange,
+      };
+      updateWrapper();
+      await act(async () => { await Promise.resolve(); });
+
+      expect(logicalChanges).toEqual([true]);
+      expect(popoverWindow).toHaveAttribute('aria-hidden', 'false');
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      expect(onOpened).not.toHaveBeenCalled();
+      expect(onOpenChange).not.toHaveBeenCalled();
+
+      await completeTransition();
+
+      expect(onOpened.mock.calls[0][0]).toBe(true);
+      expect(onOpenChange.mock.calls).toEqual([[true]]);
+      expect(logicalChanges).toHaveLength(1);
+    });
+
+    it('notifies actual logical changes synchronously once per change', () => {
+      fireEvent.click(button);
+      expect(visibilityChanges.mock.calls).toEqual([[true]]);
+
+      fireEvent.keyDown(popoverWindow, { key: 'Escape' });
+      expect(visibilityChanges.mock.calls).toEqual([[true], [false]]);
+
+      fireEvent.keyDown(popoverWindow, { key: 'Escape' });
+      expect(visibilityChanges.mock.calls).toEqual([[true], [false]]);
+      expect(onOpened).not.toHaveBeenCalled();
+    });
+
+    it.each([null, false])('retains completed transition updates with open=%s', async (open) => {
+      setProps({ open });
+      if (open === null) fireEvent.click(button);
+      else setProps({ open: true });
+      expect(onOpened).not.toHaveBeenCalled();
+      await completeTransition();
+      expect(onOpened.mock.calls[0][0]).toBe(true);
+
+      fireEvent.click(within(popoverWindow).getByTestId('inside'));
+      expect(onOpened).toHaveBeenCalledTimes(1);
+      await completeTransition();
+
+      expect(onOpened.mock.calls[1]).toEqual([false]);
+      expect(onOpenChange.mock.calls).toEqual(open === null ? [] : [[true], [false]]);
+    });
+
+    it('does not treat a same-flush prop rewrite as a reopen request', () => {
+      setProps({ open: true });
+      fireEvent.keyDown(popoverWindow, { key: 'Escape' });
+
+      // Both props land in one render, as Vue's watcher sees only the last: `open` is still true, so nothing changed.
+      act(() => {
+        setProps({ open: false });
+        setProps({ open: true });
+      });
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+
+      setProps({ open: false });
+      setProps({ open: true });
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    it('ignores a canceled leave without requiring an after-leave callback', async () => {
+      setProps({ open: true });
+      await completeTransition();
+
+      setProps({ open: false });
+      setProps({ open: true });
+
+      expect(visibilityChanges.mock.calls).toEqual([[true], [false], [true]]);
+      expect(onOpened).toHaveBeenCalledTimes(1);
+      expect(popoverWindow).toHaveAttribute('aria-hidden', 'false');
+    });
+
+    it('finishes initial focus before notifying a consumer that chooses another target', async () => {
+      mockSlots = {
+        content: (
+          <>
+            <button data-qa="first-target">First</button>
+            <input data-qa="consumer-target" />
+          </>
+        ),
+      };
+      mockProps = {
+        ...mockProps,
+        onOpened: (opened) => {
+          if (opened) within(popoverWindow).getByTestId('consumer-target').focus();
+        },
+      };
+      updateWrapper();
+
+      setProps({ open: true });
+      await completeTransition();
+
+      expect(document.activeElement).toBe(within(popoverWindow).getByTestId('consumer-target'));
+    });
+
+    it('focuses a documented HTMLElement target inside the popover', async () => {
+      setProps({ open: true });
+      const target = within(popoverWindow).getByTestId('inside');
+
+      setProps({ initialFocusElement: target });
+      await completeTransition();
+
+      expect(document.activeElement).toBe(target);
+      expect(onOpened.mock.calls[0][0]).toBe(true);
+    });
+
+    it.skip('stops a running leave before stale focus and terminal effects after reopen', () => {});
+
+    it.skip('stops a running enter before stale focus and terminal effects after close', () => {});
+
+    it('keeps consumer focus when closing and replacing the initial target during enter', async () => {
+      mockProps = { ...mockProps, modal: false };
+      mockSlots = {
+        content: (
+          <>
+            <button
+              data-qa="inside"
+              onFocus={() => {
+                flushSync(() => {
+                  setProps({
+                    open: false,
+                    initialFocusElement: within(popoverWindow).getByTestId('replacement-target'),
+                  });
+                });
+                button.focus();
+              }}
+            >
+              First action
+            </button>
+            <button data-qa="replacement-target">Next opening target</button>
+          </>
+        ),
+      };
+      updateWrapper();
+
+      setProps({ open: true });
+      await completeTransition();
+
+      expect(document.activeElement).toBe(button);
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+      expect(onOpened).not.toHaveBeenCalled();
+    });
+
+    it('stops stale enter effects when a focus listener closes the popover', async () => {
+      setProps({ initialFocusElement: 'dialog' });
+      setProps({ open: true });
+      popoverWindow.addEventListener('focus', () => {
+        flushSync(() => setProps({ open: false }));
+      }, { once: true });
+
+      await completeTransition();
+
+      expect(onOpened).not.toHaveBeenCalled();
+      expect(document.documentElement).not.toHaveClass('d-of-hidden');
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('stops stale leave effects when a focus listener reopens the popover', async () => {
+      setProps({ open: true });
+      await completeTransition();
+      setProps({ open: false });
+      button.addEventListener('focus', () => {
+        flushSync(() => setProps({ open: true }));
+      }, { once: true });
+
+      await completeTransition();
+
+      expect(onOpened).toHaveBeenCalledTimes(1);
+      expect(document.documentElement).toHaveClass('d-of-hidden');
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    it.skip.each(['enter', 'leave'])('stops a suspended %s completion after disposal', () => {});
+
+    it('does not forward or toggle boolean anchor arrows without opt-in', () => {
+      const onKeyDown = vi.fn();
+      setProps({ open: false, onKeyDown });
+      let arrowEvent: Event | undefined;
+      button.addEventListener('keydown', (event) => { arrowEvent = event; }, { once: true });
+
+      fireEvent.keyDown(button, { key: 'ArrowDown', code: 'ArrowDown' });
+      expect(arrowEvent?.defaultPrevented).toBe(true);
+      expect(onKeyDown).not.toHaveBeenCalled();
+
+      setProps({ forwardAnchorArrowKeys: true });
+      fireEvent.keyDown(button, { key: 'ArrowDown', code: 'ArrowDown' });
+      expect(onKeyDown).toHaveBeenCalledTimes(1);
+      expect(button).toHaveAttribute('aria-expanded', 'false');
     });
   });
 

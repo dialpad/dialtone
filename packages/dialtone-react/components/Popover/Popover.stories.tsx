@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
 import { CONTENT_MODE_TYPES } from '../../common/mode_constants';
@@ -487,8 +487,19 @@ function PopoverVariants ({ open, modal, closeOnClick, transition }: PopoverStor
 
 // PopoverIframe.story.vue
 function PopoverIframe ({ open, placement }: PopoverStoryArgs) {
+  const headingId = useId();
+  // The heading is the iframe's title, unless it's Storybook's own frame.
+  const [heading] = useState(() => {
+    const frame = window.frameElement;
+    const title = frame?.hasAttribute('data-is-storybook') ? null : (frame as HTMLIFrameElement | null)?.title;
+    return title || 'Popover in an iframe';
+  });
+
   return (
-    <div className="d-mis-200">
+    <main aria-labelledby={headingId} className="d-mis-200">
+      <h1 id={headingId} className="d-headline--md d-mbe-100">
+        {heading}
+      </h1>
       <DtPopover
         open={open}
         modal={true}
@@ -499,7 +510,7 @@ function PopoverIframe ({ open, placement }: PopoverStoryArgs) {
         anchor={({ attrs }) => <DtButton {...attrs}>popover anchor</DtButton>}
         content={closeContent}
       />
-    </div>
+    </main>
   );
 }
 
