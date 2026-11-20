@@ -344,16 +344,23 @@ function prCompleteAction(caseData) {
   return 'switch-to-staging';
 }
 
-function isThinWrapper(sharedPath, wrapperPath) {
-  const frontmatter = (text) => text.match(/^---\n(.*?)\n---/s)?.[1];
-  const shared = read(sharedPath);
-  const wrapper = read(wrapperPath);
-  return (
-    Boolean(frontmatter(shared)) &&
-    frontmatter(wrapper) === frontmatter(shared) &&
-    wrapper.includes(sharedPath) &&
-    wrapper.split('\n').length < 12
-  );
+// Problems with a Claude wrapper: it must copy the shared frontmatter and only load the shared file.
+function wrapperProblems(sharedPath, wrapperPath) {
+  const frontmatter = (text) => text.match(/^---\n(.*?)\n---\n/s);
+  const shared = frontmatter(read(sharedPath));
+  const wrapperText = read(wrapperPath);
+  const wrapper = frontmatter(wrapperText);
+  const problems = [];
+  if (!shared || !wrapper || wrapper[1] !== shared[1]) {
+    problems.push(`${wrapperPath} frontmatter must match ${sharedPath}`);
+  }
+  const body = wrapper
+    ? wrapperText.slice(wrapper[0].length).trim()
+    : wrapperText;
+  if (!body.includes(sharedPath) || body.length > 400) {
+    problems.push(`${wrapperPath} must only load the shared skill`);
+  }
+  return problems;
 }
 
 const failures = [];
@@ -412,8 +419,7 @@ for (const [skillName, config] of Object.entries(skills)) {
 
 // Every shared skill has a thin Claude wrapper: same frontmatter, no rules.
 // Claude-only checks run only when .claude exists, so Codex validation never depends on it.
-if (existsSync(join(repoRoot, '.claude/skills'))) {
-  const frontmatter = (text) => text.match(/^---\n(.*?)\n---/s)?.[1];
+if (existsSync(join(repoRoot, '.claude'))) {
   const sharedSkillNames = readdirSync(join(repoRoot, '.agents/skills'), {
     withFileTypes: true,
   })
@@ -423,40 +429,29 @@ if (existsSync(join(repoRoot, '.claude/skills'))) {
   for (const name of sharedSkillNames) {
     const sharedPath = `.agents/skills/${name}/SKILL.md`;
     const wrapperPath = `.claude/skills/${name}/SKILL.md`;
+    if (!existsSync(join(repoRoot, sharedPath))) {
+      assert(false, `${sharedPath} is missing`, failures);
+      continue;
+    }
     const wrapperExists = existsSync(join(repoRoot, wrapperPath));
-    const pendingReason = claudeWrapperPendingAllowlist.get(name);
+    const problems = wrapperExists
+      ? wrapperProblems(sharedPath, wrapperPath)
+      : [];
 
-    if (pendingReason) {
+    if (claudeWrapperPendingAllowlist.has(name)) {
       assert(
-        !wrapperExists ||
-          !existsSync(join(repoRoot, sharedPath)) ||
-          !isThinWrapper(sharedPath, wrapperPath),
+        !wrapperExists || problems.length > 0,
         `${wrapperPath} is now a thin wrapper; remove ${name} from claudeWrapperPendingAllowlist`,
         failures,
       );
       continue;
     }
-
     assert(
       wrapperExists,
       `${wrapperPath} is missing and ${name} is not in claudeWrapperPendingAllowlist`,
       failures,
     );
-    if (!wrapperExists || !existsSync(join(repoRoot, sharedPath))) continue;
-
-    const shared = read(sharedPath);
-    const wrapper = read(wrapperPath);
-    assert(
-      Boolean(frontmatter(shared)) &&
-        frontmatter(wrapper) === frontmatter(shared),
-      `${wrapperPath} frontmatter must match ${sharedPath}`,
-      failures,
-    );
-    assert(
-      wrapper.includes(sharedPath) && wrapper.split('\n').length < 12,
-      `${wrapperPath} must only load the shared skill`,
-      failures,
-    );
+    for (const problem of problems) assert(false, problem, failures);
   }
 
   for (const name of claudeWrapperPendingAllowlist.keys()) {
@@ -465,6 +460,28 @@ if (existsSync(join(repoRoot, '.claude/skills'))) {
       `.agents/skills/${name}/SKILL.md no longer exists; remove ${name} from claudeWrapperPendingAllowlist`,
       failures,
     );
+  }
+
+  // A wrapper must not point at a shared skill that no longer exists.
+  const claudeSkillsDir = join(repoRoot, '.claude/skills');
+  const claudeSkillNames = existsSync(claudeSkillsDir)
+    ? readdirSync(claudeSkillsDir, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => entry.name)
+    : [];
+  for (const name of claudeSkillNames) {
+    const wrapperPath = `.claude/skills/${name}/SKILL.md`;
+    if (!existsSync(join(repoRoot, wrapperPath))) continue;
+    const loads = read(wrapperPath).matchAll(
+      /\.agents\/skills\/[\w-]+\/SKILL\.md/g,
+    );
+    for (const [sharedPath] of loads) {
+      assert(
+        existsSync(join(repoRoot, sharedPath)),
+        `${wrapperPath} loads ${sharedPath}, which does not exist`,
+        failures,
+      );
+    }
   }
 }
 
