@@ -1,4 +1,4 @@
-import { useCallback, useId, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
+import { useId, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
 import type { Placement } from 'tippy.js';
 import { cx, type ClassValue } from '../../common/cx';
 import { HighlightIdContext, useKeyboardListNavigation } from '../../common/keyboard-list-navigation';
@@ -16,15 +16,20 @@ import {
 import { DROPDOWN_PADDING_CLASSES, type DropdownPadding } from './DropdownConstants';
 
 const LIST_ITEM_ROLES = ['menuitem', 'menuitemradio'];
-// The close button sits outside the list, but keyboard navigation reaches it like a row.
+// The keyboard list navigation mixin's `_getListItemNodes` selector, which the hook doesn't expose.
 const LIST_ITEM_SELECTOR = [...LIST_ITEM_ROLES.map(role => `[role="${role}"]`), '#sr-only-close-button'].join(', ');
 const DEFAULT_FALLBACK_PLACEMENTS: Placement[] = ['auto'];
 const ARROW_CODES = ['Up', 'ArrowUp', 'Down', 'ArrowDown'];
 
 // DtListItem's `disabled` modifier. Hand-rolled aria-disabled rows don't carry it and keep the legacy behavior.
-const isDisabledRow = (element: Element | null | undefined) => Boolean(element?.classList.contains('d-list-item--disabled'));
+const isDisabledRow = (element: Element | null | undefined) =>
+  Boolean(element?.classList.contains('d-list-item--disabled'));
 
-const isFocused = (element: HTMLElement) => (element.getRootNode() as Document | ShadowRoot).activeElement === element;
+const isFocused = (element: Element | null | undefined) =>
+  element ? (element.getRootNode() as Document | ShadowRoot).activeElement === element : false;
+
+/** Vue's `$nextTick`: resolves once the render React has queued has been committed to the DOM. */
+const nextTick = () => Promise.resolve();
 
 /**
  * What the anchor slot gets to bind on the element that opens the dropdown: the popover's anchor attrs, spread into
@@ -42,6 +47,23 @@ export interface DtDropdownProps extends PopoverPassThrough {
    * false, the default trigger is disabled and the parent controls visibility, through `onOpenChange`.
    */
   open?: boolean | null;
+
+  /**
+   * Optional callback receiving the open boolean on logical visibility changes. Includes an initial `true` on the
+   * first commit when `open` is true. Does not declare or emit an open-change event. For modal removal, keep
+   * modal=true, its anchor and scroll container unchanged until onOpened(false). Changing modal or the anchor's scroll
+   * context after opening can retain the original lock. onOpened(false) reports transition completion, not global
+   * scroll-lock ownership. A closed modal with no pending transition or retained scroll lock can be removed
+   * immediately.
+   */
+  visibilityChangeCallback?: (open: boolean) => void;
+
+  /**
+   * Forwards anchor ArrowUp/ArrowDown through `onKeyDown` with a boolean `open` prop, without toggling. Closed anchor
+   * arrows keep their default action and propagation for the consumer. Accept opening synchronously in the `onKeyDown`
+   * callback for first-row focus.
+   */
+  forwardAnchorArrowKeys?: boolean;
 
   /** Opens the dropdown on right click (context menu). If you set this value to `true`, the default trigger behavior will be disabled. */
   openOnContext?: boolean;
@@ -115,7 +137,10 @@ export interface DtDropdownProps extends PopoverPassThrough {
   /** Named transition when the content display is toggled. See DtLazyShow. */
   transition?: string;
 
-  /** Anchor element that activates the dropdown. Spread the scope on it: `anchor={(attrs) => <DtButton {...attrs} />}`. */
+  /**
+   * Dropdown trigger. Bind the three ARIA scope keys on it: `aria-expanded` ("true" or "false"), `aria-controls` (the
+   * id of the popup element with role="menu") and `aria-haspopup` ("menu").
+   */
   anchor?: SlotProp<DtDropdownAnchorScope>;
 
   /** Slot for the list component. */
@@ -123,21 +148,6 @@ export interface DtDropdownProps extends PopoverPassThrough {
 
   /** Slot for the footer content. */
   footer?: SlotProp<DtPopoverCloseScope>;
-
-  /**
-   * Optional callback receiving the open boolean synchronously on logical visibility changes. Includes an initial
-   * `true` on the first commit when `open` is true. For modal removal, keep modal=true, its anchor and scroll
-   * container unchanged until onOpened(false). Changing modal or the anchor's scroll context after opening can retain
-   * the original lock. onOpened(false) reports transition completion, not global scroll-lock ownership.
-   */
-  visibilityChangeCallback?: (open: boolean) => void;
-
-  /**
-   * Forwards anchor ArrowUp/ArrowDown through `onKeyDown` with a boolean `open` prop, without toggling. Closed anchor
-   * arrows keep their default action and propagation for the consumer. Accept opening synchronously in the `onKeyDown`
-   * callback for first-row focus.
-   */
-  forwardAnchorArrowKeys?: boolean;
 
   /** Native keydown event, from the anchor (Enter, Space, ArrowUp, ArrowDown) and from the open dropdown (every key). */
   onKeyDown?: (event: KeyboardEvent) => void;
@@ -154,8 +164,9 @@ export interface DtDropdownProps extends PopoverPassThrough {
  * @see https://dialtone.dialpad.com/components/dropdown.html
  */
 export function DtDropdown ({
-  ref,
   open = null,
+  visibilityChangeCallback,
+  forwardAnchorArrowKeys = false,
   openOnContext = false,
   padding = 'small',
   modal = true,
@@ -173,6 +184,7 @@ export function DtDropdown ({
   appendTo = 'body',
   tether = true,
   transition = 'fade',
+  dialogClass,
   anchor,
   list,
   footer,
@@ -187,30 +199,103 @@ export function DtDropdown ({
   const [openedWithKeyboard, setOpenedWithKeyboard] = useState(false);
   // Vue's isOpen: what the popover last reported through `opened`. Only key handlers read it.
   const isOpenRef = useRef<boolean | null>(null);
+  // Vue's isLogicallyOpen: what the popover last reported through its visibility callback.
+  const isLogicallyOpenRef = useRef(false);
+  // Vue's pendingArrowOpening: the latest forwarded anchor arrow, until the parent accepts or ignores it.
+  const pendingArrowOpeningRef = useRef<object | null>(null);
+  // Set while the dropdown moves focus to Close, which has no row index and must not report a highlight.
+  const silentHighlightRef = useRef(false);
 
   const isArrowKeyNav = navigationType === LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS;
+  // Vue binds role="menu", then $attrs, so a consumer's role wins; an explicitly unset one falls to DtPopover's default.
+  const popoverRole = 'role' in rest ? (rest.role ?? 'dialog') : 'menu';
+  const showCloseButton = rest.showCloseButton ?? false;
 
   const getListElement = () => listRef.current;
 
-  const itemsLength = () =>
-    listRef.current?.querySelectorAll(`[role="${LIST_ITEM_ROLE}"], #sr-only-close-button`).length ?? 0;
+  // Vue's popover.popoverContentEl: the `.d-popover__dialog` element the list is rendered in.
+  const getPopoverContentEl = () => listRef.current?.closest<HTMLElement>('.d-popover__dialog') ?? null;
+
+  // The keyboard navigation mixin's _getListItemNodes.
+  const getListItemNodes = (): HTMLElement[] => {
+    const listElement = listRef.current;
+    if (!listElement) return [];
+    return Array.from(listElement.querySelectorAll<HTMLElement>(LIST_ITEM_SELECTOR))
+      .filter(item => item.getAttribute('role') !== 'menuitemradio' || item.id);
+  };
+
+  const itemsLength = () => getListItemNodes().length;
+
+  // Vue's activeItemEl, for a given highlighted id.
+  const getActiveItem = (highlightId: string | undefined) =>
+    (highlightId ? getListItemNodes().find(item => item.id === highlightId) ?? null : null);
 
   const nav = useKeyboardListNavigation({
-    listItemRole: LIST_ITEM_ROLE,
+    listItemRole: LIST_ITEM_ROLES,
     getListElement,
-    // An item without an id has no element to find; Vue's `querySelector('#')` throws there.
-    getActiveItem: highlightId => (highlightId ? listRef.current?.querySelector<HTMLElement>(`#${highlightId}`) : null),
+    getActiveItem,
     afterHighlightMethod: (index) => {
-      if (index === itemsLength() - 1) {
+      if (silentHighlightRef.current || index === itemsLength() - 1) {
         return;
       }
       onHighlight?.(index);
     },
     // Called from key handlers, by which time `nav` is set.
-    beginningOfListMethod: () => (onBeginningOfList ?? nav.jumpToEnd)(),
-    endOfListMethod: () => (onEndOfList ?? nav.jumpToBeginning)(),
+    beginningOfListMethod: () => (onBeginningOfList ?? onBeginningOfMenu)(),
+    endOfListMethod: () => (onEndOfList ?? onEndOfMenu)(),
     focusOnKeyboardNavigation: true,
   });
+
+  const onVisibilityChange = (isOpen: boolean) => {
+    isLogicallyOpenRef.current = isOpen;
+    visibilityChangeCallback?.(isOpen);
+  };
+
+  // Focuses the menu container; false when it can't take focus (contentTabindex null).
+  const focusMenuContent = () => {
+    const content = getPopoverContentEl();
+    content?.focus();
+    return isFocused(content);
+  };
+
+  // A DtListItem disabled row takes the highlight but not focus, which would draw the keyboard focus ring under the
+  // pointer. The menu holds focus so Enter can't activate another row.
+  const focusHoveredRow = (row: HTMLElement) => {
+    if (isDisabledRow(row) && focusMenuContent()) return;
+    row.focus();
+  };
+
+  // Vue's popover.getCloseButtonElement(), only while the popup is a menu.
+  const getMenuCloseButton = () => {
+    if (popoverRole !== 'menu') return null;
+    return getPopoverContentEl()?.querySelector<HTMLElement>(showCloseButton
+      ? ':scope > .d-popover__header > [data-qa="dt-popover-close"]'
+      : ':scope > #sr-only-close-button') ?? null;
+  };
+
+  const isMenuCloseFocused = () => isFocused(getMenuCloseButton());
+
+  const focusMenuClose = () => {
+    const closeButton = getMenuCloseButton();
+    if (!closeButton) return false;
+    // Close has no application row index and must not emit a choice highlight.
+    silentHighlightRef.current = true;
+    try {
+      nav.setHighlightIndex(-1);
+    } finally {
+      silentHighlightRef.current = false;
+    }
+    closeButton.focus();
+    return true;
+  };
+
+  function onBeginningOfMenu () {
+    if (!focusMenuClose()) nav.jumpToEnd();
+  }
+
+  function onEndOfMenu () {
+    if (!focusMenuClose()) nav.jumpToBeginning();
+  }
 
   const clearHighlightIndex = () => {
     nav.setHighlightIndex(-1);
@@ -219,9 +304,9 @@ export function DtDropdown ({
   const onMouseHighlight = (event: ReactMouseEvent<HTMLUListElement>) => {
     const liElement = (event.target as Element).closest('li');
 
-    if (liElement && liElement.getAttribute('role') && nav.highlightId !== liElement.id) {
+    if (liElement?.getAttribute('role') && liElement.id && nav.highlightId !== liElement.id) {
       nav.setHighlightId(liElement.id);
-      liElement.focus();
+      if (getListItemNodes().includes(liElement)) focusHoveredRow(liElement);
     }
   };
 
@@ -230,7 +315,13 @@ export function DtDropdown ({
 
     if (isPopoverOpen) {
       if (openedWithKeyboard && isArrowKeyNav) {
-        nav.setHighlightIndex(0);
+        const hasItems = itemsLength() > 0;
+        if (hasItems || !focusMenuClose()) nav.setHighlightIndex(0);
+        // DtPopover's default first-element focus skips aria-disabled rows, but a DtListItem disabled row stays
+        // reachable: focus it so focus and keyboard position agree. A consumer focus target wins.
+        const activeItemEl = hasItems ? getActiveItem(getListItemNodes()[0]?.id) : null;
+        const consumerFocus = rest.initialFocusElement !== undefined;
+        if (!consumerFocus && activeItemEl && isDisabledRow(activeItemEl)) activeItemEl.focus();
       }
       onOpened?.(true);
     } else {
@@ -240,7 +331,17 @@ export function DtDropdown ({
     }
   };
 
-  const onSpaceOrEnterKey = () => {
+  const onSpaceKey = (event: KeyboardEvent) => {
+    if (!open) {
+      setOpenedWithKeyboard(true);
+    }
+    // The menu holds focus while the pointer rests on a disabled row; keep Space from scrolling it.
+    if (isDisabledRow(getActiveItem(nav.highlightId)) && event.target === getPopoverContentEl()) {
+      event.preventDefault();
+    }
+  };
+
+  const onEnterKey = () => {
     if (!open) {
       setOpenedWithKeyboard(true);
     }
@@ -252,6 +353,7 @@ export function DtDropdown ({
       return;
     }
     if (isArrowKeyNav) {
+      if (isMenuCloseFocused()) return nav.onEndKey();
       nav.onUpKey();
     }
   };
@@ -262,6 +364,7 @@ export function DtDropdown ({
       return;
     }
     if (isArrowKeyNav) {
+      if (isMenuCloseFocused()) return nav.onHomeKey();
       nav.onDownKey();
     }
   };
@@ -270,6 +373,7 @@ export function DtDropdown ({
     if (!isOpenRef.current || !isArrowKeyNav) {
       return;
     }
+    if (!itemsLength() && focusMenuClose()) return;
     nav.onHomeKey();
   };
 
@@ -277,6 +381,7 @@ export function DtDropdown ({
     if (!isOpenRef.current || !isArrowKeyNav) {
       return;
     }
+    if (focusMenuClose()) return;
     nav.onEndKey();
   };
 
@@ -291,8 +396,27 @@ export function DtDropdown ({
     nav.onNavigationKey(event.key);
   };
 
+  // DtPopover reports keydown from its anchor wrapper and from its content element; the list is in the content.
+  const isFromAnchor = (event: KeyboardEvent) => !getPopoverContentEl()?.contains(event.target as Node);
+
   // The popover's keydown: from the anchor, and from the open content.
   const handleKeyDown = (event: KeyboardEvent) => {
+    const isArrow = ARROW_CODES.includes(event.code);
+
+    if (forwardAnchorArrowKeys && open !== null && !isLogicallyOpenRef.current && isArrow && isFromAnchor(event)) {
+      const pending = {};
+      pendingArrowOpeningRef.current = pending;
+      setOpenedWithKeyboard(true);
+      onKeyDown?.(event);
+      // Let synchronous acceptance in the handler above commit before discarding ignored modality.
+      nextTick().then(() => {
+        if (pendingArrowOpeningRef.current === pending && !isLogicallyOpenRef.current) {
+          setOpenedWithKeyboard(false);
+        }
+      });
+      return;
+    }
+
     switch (event.code) {
       case 'Up':
       case 'ArrowUp':
@@ -308,8 +432,10 @@ export function DtDropdown ({
         break;
       case 'Space':
       case 'Spacebar':
+        onSpaceKey(event);
+        break;
       case 'Enter':
-        onSpaceOrEnterKey();
+        onEnterKey();
         break;
       case 'Home':
         onHomeKeyPress();
@@ -341,6 +467,8 @@ export function DtDropdown ({
       <DtPopover
         contentWidth={contentWidth}
         open={open}
+        forwardAnchorArrowKeys={forwardAnchorArrowKeys}
+        visibilityChangeCallback={onVisibilityChange}
         placement={placement}
         initialFocusElement={openedWithKeyboard ? 'first' : 'dialog'}
         fallbackPlacements={fallbackPlacements}
@@ -353,6 +481,9 @@ export function DtDropdown ({
         openWithArrowKeys={!openOnContext}
         openOnContext={openOnContext}
         {...rest}
+        dialogClass={[dialogClass, {
+          'd-dropdown__menu--arrow-keys': isArrowKeyNav && (!('role' in rest) || rest.role === 'menu'),
+        }]}
         tether={tether}
         transition={transition}
         footerClass={footerClass}
@@ -363,6 +494,7 @@ export function DtDropdown ({
           <ul
             id={listId}
             ref={listRef}
+            role="none"
             className={listClasses}
             data-qa="dt-dropdown-list-wrapper"
             onMouseLeave={clearHighlightIndex}
