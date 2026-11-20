@@ -1,0 +1,3 @@
+{
+  "DtFilterPill built-in dropdown option rows › Activation › refuses a disabled option even when its row emits click": "Vue emits click from the DtListItem component instance (`.vm.$emit`), which a React element has no counterpart for; the disabled row's own refusal is covered by the pointer, Enter and Space activation tests."
+}
