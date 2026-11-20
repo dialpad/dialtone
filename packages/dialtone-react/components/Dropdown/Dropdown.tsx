@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
+import { useCallback, useId, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
 import type { Placement } from 'tippy.js';
 import { cx, type ClassValue } from '../../common/cx';
 import { HighlightIdContext, useKeyboardListNavigation } from '../../common/keyboard-list-navigation';
@@ -15,8 +15,16 @@ import {
 } from '../Popover';
 import { DROPDOWN_PADDING_CLASSES, type DropdownPadding } from './DropdownConstants';
 
-const LIST_ITEM_ROLE = 'menuitem';
+const LIST_ITEM_ROLES = ['menuitem', 'menuitemradio'];
+// The close button sits outside the list, but keyboard navigation reaches it like a row.
+const LIST_ITEM_SELECTOR = [...LIST_ITEM_ROLES.map(role => `[role="${role}"]`), '#sr-only-close-button'].join(', ');
 const DEFAULT_FALLBACK_PLACEMENTS: Placement[] = ['auto'];
+const ARROW_CODES = ['Up', 'ArrowUp', 'Down', 'ArrowDown'];
+
+// DtListItem's `disabled` modifier. Hand-rolled aria-disabled rows don't carry it and keep the legacy behavior.
+const isDisabledRow = (element: Element | null | undefined) => Boolean(element?.classList.contains('d-list-item--disabled'));
+
+const isFocused = (element: HTMLElement) => (element.getRootNode() as Document | ShadowRoot).activeElement === element;
 
 /**
  * What the anchor slot gets to bind on the element that opens the dropdown: the popover's anchor attrs, spread into
@@ -116,13 +124,28 @@ export interface DtDropdownProps extends PopoverPassThrough {
   /** Slot for the footer content. */
   footer?: SlotProp<DtPopoverCloseScope>;
 
+  /**
+   * Optional callback receiving the open boolean synchronously on logical visibility changes. Includes an initial
+   * `true` on the first commit when `open` is true. For modal removal, keep modal=true, its anchor and scroll
+   * container unchanged until onOpened(false). Changing modal or the anchor's scroll context after opening can retain
+   * the original lock. onOpened(false) reports transition completion, not global scroll-lock ownership.
+   */
+  visibilityChangeCallback?: (open: boolean) => void;
+
+  /**
+   * Forwards anchor ArrowUp/ArrowDown through `onKeyDown` with a boolean `open` prop, without toggling. Closed anchor
+   * arrows keep their default action and propagation for the consumer. Accept opening synchronously in the `onKeyDown`
+   * callback for first-row focus.
+   */
+  forwardAnchorArrowKeys?: boolean;
+
   /** Native keydown event, from the anchor (Enter, Space, ArrowUp, ArrowDown) and from the open dropdown (every key). */
   onKeyDown?: (event: KeyboardEvent) => void;
 
   /** Called with the highlighted item's index when the highlight changes. */
   onHighlight?: (index: number) => void;
 
-  /** Called when the dropdown is shown or hidden. */
+  /** Called after the current transition and initial focus work complete. */
   onOpened?: (opened: boolean) => void;
 }
 
@@ -131,6 +154,7 @@ export interface DtDropdownProps extends PopoverPassThrough {
  * @see https://dialtone.dialpad.com/components/dropdown.html
  */
 export function DtDropdown ({
+  ref,
   open = null,
   openOnContext = false,
   padding = 'small',
