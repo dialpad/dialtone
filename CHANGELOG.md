@@ -1,3 +1,10 @@
+# [10.14.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.13.1...dialtone/v10.14.0) (2026-11-23)
+
+
+### Features
+
+* **Filter Pill, List Item, Dropdown:** DLT-3842 add disabled, described and grouped options ([#1637](https://github.com/dialpad/dialtone/issues/1637)) ([46e948a](https://github.com/dialpad/dialtone/commit/46e948a707c808b258067e6cce521d5b6026a621))
+
 ## [10.13.1](https://github.com/dialpad/dialtone/compare/dialtone/v10.13.0...dialtone/v10.13.1) (2026-11-17)
 
 
