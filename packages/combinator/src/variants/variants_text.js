@@ -33,7 +33,14 @@ export default {
       },
       align: { searchKeywords: ['text align'] },
       truncate: { searchKeywords: ['ellipsis', 'single line'] },
-      slide: { searchKeywords: ['marquee', 'scroll', 'ticker', 'reveal truncated'] },
+      // offered as an optional choice: + adds it (once or loop), - removes it (off)
+      slide: {
+        searchKeywords: ['marquee', 'scroll', 'ticker', 'reveal truncated'],
+        types: ['string'],
+        values: ['once', 'loop'],
+        initialValue: null,
+        defaultValue: null,
+      },
       maxLines: { searchKeywords: ['line clamp'], slider: { min: 1, max: 10, step: 1 } },
       strength: { searchKeywords: ['font weight'] },
       family: { searchKeywords: ['font family'] },
