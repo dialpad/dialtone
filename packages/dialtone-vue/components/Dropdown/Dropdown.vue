@@ -544,11 +544,6 @@ export default {
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.isArrowKeyNav) {
           this.setHighlightIndex(0);
-          // An empty menu has no row to focus, so Popover's first-element focus lands on its
-          // screen-reader-only Close. Hold focus on the menu instead so sighted keyboard users keep a visible stop.
-          if (!this._itemsLength() && !this.$refs.popover?.showCloseButton && this.isMenuCloseFocused()) {
-            this.focusMenuContent();
-          }
           // Popover's default first-element focus skips aria-disabled rows, but a DtListItem disabled row
           // stays reachable: focus it so focus and keyboard position agree. A consumer focus target wins.
           const consumerFocus = Object.entries(this.$attrs).some(([key, value]) =>

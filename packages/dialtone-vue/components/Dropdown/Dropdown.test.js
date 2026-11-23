@@ -365,6 +365,20 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(wrapper.emitted('highlight')).toBeUndefined();
   });
 
+  // Popover's first-element search covers only the content slot, so the hidden Close is never the fallback.
+  it('keeps focus on the trigger in an empty keyboard-opened menu that cannot take focus', async () => {
+    const popover = mountMenu({ open: null }, undefined, () => [], { contentTabindex: null });
+    const trigger = wrapper.get('[data-qa="trigger"]');
+    trigger.element.focus();
+    await trigger.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
+    await flushPromises();
+    const content = popover.findComponent({ ref: 'content' });
+    expect(content.attributes('tabindex')).toBeUndefined();
+    expect(trigger.attributes('aria-expanded')).toBe('true');
+    expect(document.activeElement).not.toBe(content.get('[data-qa="dt-sr-only-close-button"]').element);
+    expect(document.activeElement).toBe(trigger.element);
+  });
+
   it('focuses the visible Close in an empty keyboard-opened menu with showCloseButton', async () => {
     const popover = mountMenu({ open: null, showCloseButton: true }, undefined, () => []);
     await wrapper.get('[data-qa="trigger"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
