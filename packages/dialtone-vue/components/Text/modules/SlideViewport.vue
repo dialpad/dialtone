@@ -202,13 +202,19 @@ async function loop () {
   if (!hasCopy.value || !copy) {
     return;
   }
-  // a static clone: slot components do not mount twice, and no ids, form values or tab stops repeat
+  // a static clone, cleaned while detached: slot components do not mount twice, and no ids,
+  // form values, radio groups, validation or tab stops repeat
   const original = [...el.childNodes].filter((node) => node !== copy);
-  copy.replaceChildren(...original.map((node) => node.cloneNode(true)));
-  copy.querySelectorAll('[id], [name]').forEach((node) => {
+  const clone = el.ownerDocument.createDocumentFragment();
+  clone.append(...original.map((node) => node.cloneNode(true)));
+  clone.querySelectorAll('[id], [name]').forEach((node) => {
     node.removeAttribute('id');
     node.removeAttribute('name');
   });
+  clone.querySelectorAll('input, select, textarea, button').forEach((node) => {
+    node.disabled = true;
+  });
+  copy.replaceChildren(clone);
   const { restWidth } = runtime;
   const distance = el.scrollWidth - restWidth;
   const time = move(distance);

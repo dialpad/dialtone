@@ -687,7 +687,7 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
-    it('starts again from rest when the mode changes mid-sequence, and stays at rest when inactive', async () => {
+    it('starts again from rest when the mode changes mid-sequence', async () => {
       const { wrapper, viewport, button, offset } = mountSlide({ slide: 'loop' });
 
       button.dispatchEvent(new Event('pointerenter'));
@@ -703,10 +703,15 @@ describe('DtText', () => {
       await vi.advanceTimersByTimeAsync(10500);
       expect(viewport.classes()).toContain('d-text__slide--end');
       expect(offset()).toBe('200px');
+      wrapper.unmount();
+    });
 
-      button.dispatchEvent(new Event('pointerleave'));
+    it('stays at rest when the mode changes while inactive', async () => {
+      const { wrapper, offset } = mountSlide({ slide: 'once' });
+
       wrapper.vm.props.slide = 'loop';
       await vi.advanceTimersByTimeAsync(1000);
+
       expect(offset()).toBe('');
       wrapper.unmount();
     });
@@ -730,8 +735,23 @@ describe('DtText', () => {
       button.dispatchEvent(new Event('pointerenter'));
       await vi.advanceTimersByTimeAsync(600);
 
-      expect(viewport.find('.d-text__slide-copy input').exists()).toBe(true);
+      expect(viewport.find('.d-text__slide-copy input').element.disabled).toBe(true);
       expect(new FormData(wrapper.element).getAll('choice')).toEqual(['a']);
+      wrapper.unmount();
+    });
+
+    it('loop copy leaves a checked radio in the label checked', async () => {
+      const { wrapper, viewport, button } = mountSlide({
+        slide: 'loop',
+        slot: 'Pick <input type="radio" name="choice" value="a" checked>',
+      });
+      const radio = wrapper.find('.d-text__slide-content > input').element;
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(600);
+
+      expect(viewport.find('.d-text__slide-copy input').exists()).toBe(true);
+      expect(radio.checked).toBe(true);
       wrapper.unmount();
     });
 
