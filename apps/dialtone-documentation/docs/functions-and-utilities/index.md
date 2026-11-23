@@ -25,7 +25,7 @@ Stateless helpers for formatting and transforming data.
 | Function | Description |
 | --- | --- |
 | [Date and Time](https://dialtone.dialpad.com/vue/?path=/docs/functions-date-and-time--docs) | Format dates, relative timestamps, and durations with i18n locale support |
-| [Phone Number](https://dialtone.dialpad.com/vue/?path=/docs/functions-phone-number--docs) | Format phone numbers for display, following the content guide |
+| [Phone Number](https://dialtone.dialpad.com/vue/?path=/docs/functions-phone-number--docs) | Format phone numbers for display, following the content guide. Import from `@dialpad/dialtone/vue3/phone` |
 
 ## Utilities
 

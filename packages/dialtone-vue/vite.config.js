@@ -33,6 +33,40 @@ function _getEntries (pathPrefix, globRegex) {
   }, {});
 }
 
+// Dependencies too heavy for the main entry. Apps that hold the whole main entry
+// (`import * as Dialtone`) ship every module it reaches, so these live in their
+// own subpath exports instead, e.g. `@dialpad/dialtone/vue3/phone`.
+const MAIN_ENTRY_FORBIDDEN_IMPORTS = [/^libphonenumber-js/];
+
+// Fails the build if the main entry reaches a forbidden dependency through any
+// chain of static imports. The entry file itself only imports local chunks, so
+// checking its own imports is not enough.
+function mainEntryImportGuard () {
+  return {
+    name: 'dialtone-main-entry-import-guard',
+    apply: 'build',
+    generateBundle (_options, bundle) {
+      const entry = Object.values(bundle).find((file) => file.type === 'chunk' && file.isEntry && file.name === 'dialtone-vue');
+      // Other builds that load this config, such as Storybook, have no main entry.
+      if (!entry) return;
+
+      const visited = new Set();
+      const queue = [entry];
+      while (queue.length) {
+        const chunk = queue.shift();
+        for (const id of chunk.imports) {
+          if (visited.has(id)) continue;
+          visited.add(id);
+          if (MAIN_ENTRY_FORBIDDEN_IMPORTS.some((pattern) => pattern.test(id))) {
+            this.error(`${entry.fileName} imports "${id}" (via ${chunk.fileName}). Export it from its own subpath instead of the main entry.`);
+          }
+          if (bundle[id]?.type === 'chunk') queue.push(bundle[id]);
+        }
+      }
+    },
+  };
+}
+
 const commonEntries = _getEntries('common', 'common/*/*.{js,vue}');
 const componentEntries = _getEntries('lib', 'components/*/*.{js,vue}');
 const directiveEntries = _getEntries('lib', 'directives/*/*.{js,vue}');
@@ -96,7 +130,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [vue(), dts({ vue: true, parallel: true, compilerOptions: { skipLibCheck: true } })],
+  plugins: [vue(), mainEntryImportGuard(), dts({ vue: true, parallel: true, compilerOptions: { skipLibCheck: true } })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
