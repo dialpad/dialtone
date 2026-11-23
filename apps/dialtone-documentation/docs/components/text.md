@@ -362,6 +362,52 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 </div>
 ```
 
+## Slide
+
+`slide` shows cut-off text in full by sliding it sideways while the item around it is hovered or has keyboard focus: a link, a button, or an element with an item role such as a `DtListItem` menu row. Leaving or pressing Esc snaps it back. Text that fits never moves. The text renders as a block that can shrink inside a flex row, and `slide` replaces `truncate`, `maxLines` and `wrap`.
+
+```vue demo
+<ul role="menu" aria-label="Devices" class="d-w-350">
+  <dt-list-item role="menuitem" navigation-type="tab">
+    <dt-text slide>Front desk reception phone, second floor east wing</dt-text>
+  </dt-list-item>
+  <dt-list-item role="menuitem" navigation-type="tab">
+    <dt-text slide>Conference room Aurora with ceiling microphone array</dt-text>
+  </dt-list-item>
+</ul>
+```
+
+| Value | Motion |
+| --- | --- |
+| `true` or `once` | Slides to the end and rests there. The default; use it unless you have a reason not to. |
+| `loop` | Scrolls round like a ticker with a gap before the repeat, pauses 5 s, and stops after three cycles. |
+
+Motion only runs while the item is hovered or has keyboard focus, and Esc stops it. A `once` movement takes at most 3 s; a `loop` cycle takes at most 5 s and the whole sequence ends after three cycles (WCAG 2.2.2). With reduced motion on, the text jumps to its end and stays.
+
+`DtText` never adds a tab stop, so put the text inside a keyboard-focusable item. A region that is only focusable as a whole, such as a scroll area or popover content, does not drive the slide; give the row an item role instead. With reduced motion the label jumps to its end and its start stays cut off, so where the start matters give the full label a visible way to be read without motion, such as a tooltip on the row:
+
+<!-- @example {"key":"slide-tooltip"} -->
+```vue demo
+<ul role="menu" aria-label="Devices" class="d-w-350">
+  <dt-list-item
+    v-dt-tooltip="`Front desk reception phone, second floor east wing`"
+    role="menuitem"
+    navigation-type="tab"
+  >
+    <dt-text slide>Front desk reception phone, second floor east wing</dt-text>
+  </dt-list-item>
+</ul>
+```
+
+The defaults need no setup. To tune a menu, a sidebar or one element, set these CSS variables on it or any ancestor:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `--dt-text-slide-speed` | `40` | Speed in px per second (a number, no unit). |
+| `--dt-text-slide-delay` | `500ms` | Wait before the first movement. |
+| `--dt-text-slide-easing` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | Easing for `once`; `loop` always moves steadily. |
+| `--dt-text-slide-fade-size` | `var(--dt-layout-25)` | Width of the edge fade (16px). |
+
 ## Max Lines
 
 ```vue demo-only
@@ -563,7 +609,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 ## Accessibility
 
 - Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
-- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in.
+- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in. Inside a keyboard-focusable item (button, link, or an element with an item role that can take focus), `slide` gives keyboard and pointer users the full text without a tooltip. With reduced motion on, the label jumps to its end and its start stays cut off, so keep a visible way to the full text (a tooltip or detail view) where the start matters.
 - Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
 
 ## Vue API
