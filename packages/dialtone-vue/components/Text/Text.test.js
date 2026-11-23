@@ -687,6 +687,30 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
+    it('starts again from rest when the mode changes mid-sequence, and stays at rest when inactive', async () => {
+      const { wrapper, viewport, button, offset } = mountSlide({ slide: 'loop' });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(500);
+      expect(offset()).toBe('324px');
+
+      wrapper.vm.props.slide = 'once';
+      await wrapper.vm.$nextTick();
+      expect(viewport.find('.d-text__slide-copy').exists()).toBe(false);
+      expect(viewport.classes()).not.toContain('d-text__slide--moving');
+      expect(offset()).toBe('');
+
+      await vi.advanceTimersByTimeAsync(10500);
+      expect(viewport.classes()).toContain('d-text__slide--end');
+      expect(offset()).toBe('200px');
+
+      button.dispatchEvent(new Event('pointerleave'));
+      wrapper.vm.props.slide = 'loop';
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(offset()).toBe('');
+      wrapper.unmount();
+    });
+
     it('loop stops after three cycles and rests at the start', async () => {
       const { wrapper, viewport, button, offset } = mountSlide({ slide: 'loop' });
 

@@ -171,5 +171,16 @@ export const Slide = {
   args: { slide: 'once' },
   parameters: {
     controls: { include: ['slide'] },
+    // DtListItem sets aria-selected on menuitem rows, as in the Dropdown stories
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
 };

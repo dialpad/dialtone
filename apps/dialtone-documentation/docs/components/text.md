@@ -386,6 +386,7 @@ Motion only runs while the item is hovered or has keyboard focus, and Esc stops 
 
 `DtText` never adds a tab stop, so put the text inside a keyboard-focusable item. A region that is only focusable as a whole, such as a scroll area or popover content, does not drive the slide; give the row an item role instead. With reduced motion the label jumps to its end and its start stays cut off, so where the start matters give the full label a visible way to be read without motion, such as a tooltip on the row:
 
+<!-- @example {"key":"slide-tooltip"} -->
 ```vue demo
 <ul role="menu" aria-label="Devices" class="d-w-350">
   <dt-list-item

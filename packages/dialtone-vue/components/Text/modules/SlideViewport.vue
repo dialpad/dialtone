@@ -73,6 +73,21 @@ export default {
     },
   },
 
+  watch: {
+    // a sequence started in the old mode can end on the loop copy: start again from rest
+    async mode() {
+      if (!this.runtime.stopActive.length) {
+        return;
+      }
+      this.reset();
+      // measure once the loop copy has left the DOM
+      await this.$nextTick();
+      if (this.runtime.stopActive.length) {
+        this.enter();
+      }
+    },
+  },
+
   created() {
     // non-reactive bookkeeping
     this.runtime = { unbind: null, stopActive: [], timers: [], distance: 0, restWidth: 0, loops: 0 };
