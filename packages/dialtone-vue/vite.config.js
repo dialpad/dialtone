@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { globSync } from 'glob';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import dts from 'vite-plugin-dts';
 
@@ -36,40 +37,91 @@ function _getEntries (pathPrefix, globRegex) {
 // Dependencies too heavy for the main entry. Apps that hold the whole main entry
 // (`import * as Dialtone`) ship every module it reaches, so these live in their
 // own subpath exports instead, e.g. `@dialpad/dialtone/vue3/phone`.
-const MAIN_ENTRY_FORBIDDEN_IMPORTS = [/^libphonenumber-js/];
+const MAIN_ENTRY_FORBIDDEN_DEPENDENCIES = ['libphonenumber-js'];
+const SUBPATH_EXPORTS = ['./phone'];
+
+// Matches a quoted module specifier such as `"libphonenumber-js/min"`. The code is
+// scanned because Rolldown lists a lazily imported external in neither
+// `chunk.imports` nor `chunk.dynamicImports`.
+const FORBIDDEN_SPECIFIER = new RegExp(`["'\`]((${MAIN_ENTRY_FORBIDDEN_DEPENDENCIES.join('|')})(/[^"'\`]*)?)["'\`]`);
+
+const packageExports = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8')).exports;
+
+function findMissingSubpathTarget (bundle, condition) {
+  for (const subpath of SUBPATH_EXPORTS) {
+    const target = packageExports[subpath]?.[condition];
+    if (bundle[target?.replace('./dist/', '')]?.type !== 'chunk') {
+      return `package.json exports "${subpath}" ${condition} points at ${target}, which this build did not emit.`;
+    }
+  }
+}
+
+// Walks every chunk the main entry reaches. The entry file itself only imports
+// local chunks, so checking its own imports is not enough.
+function findForbiddenImport (entry, bundle) {
+  const visited = new Set([entry.fileName]);
+  const queue = [entry];
+  while (queue.length) {
+    const chunk = queue.shift();
+    const forbidden = chunk.code.match(FORBIDDEN_SPECIFIER);
+    if (forbidden) {
+      return `${entry.fileName} imports "${forbidden[1]}" (via ${chunk.fileName}). ` +
+        'Export it from its own subpath instead of the main entry.';
+    }
+    for (const id of [...chunk.imports, ...chunk.dynamicImports]) {
+      if (visited.has(id) || bundle[id]?.type !== 'chunk') continue;
+      visited.add(id);
+      queue.push(bundle[id]);
+    }
+  }
+}
 
 // Fails the build if the main entry reaches a forbidden dependency through any
-// chain of static imports. The entry file itself only imports local chunks, so
-// checking its own imports is not enough.
-function mainEntryImportGuard () {
-  return {
+// chain of static or dynamic imports, or if a subpath export points at a file the
+// build did not emit.
+function mainEntryImportGuard (libraryEntryNames) {
+  let isLibraryBuild = false;
+
+  const plugin = {
     name: 'dialtone-main-entry-import-guard',
     apply: 'build',
-    generateBundle (_options, bundle) {
-      const entry = Object.values(bundle).find((file) => file.type === 'chunk' && file.isEntry && file.name === 'dialtone-vue');
-      // Other builds that load this config, such as Storybook, have no main entry.
-      if (!entry) return;
-
-      const visited = new Set();
-      const queue = [entry];
-      while (queue.length) {
-        const chunk = queue.shift();
-        for (const id of chunk.imports) {
-          if (visited.has(id)) continue;
-          visited.add(id);
-          if (MAIN_ENTRY_FORBIDDEN_IMPORTS.some((pattern) => pattern.test(id))) {
-            this.error(`${entry.fileName} imports "${id}" (via ${chunk.fileName}). Export it from its own subpath instead of the main entry.`);
-          }
-          if (bundle[id]?.type === 'chunk') queue.push(bundle[id]);
+    generateBundle (options, bundle) {
+      const entries = Object.values(bundle).filter((file) => file.type === 'chunk' && file.isEntry);
+      const entry = entries.find((chunk) => chunk.name === 'dialtone-vue');
+      if (!entry) {
+        // Other builds that load this config, such as Storybook, emit no library entries.
+        if (entries.some((chunk) => libraryEntryNames.includes(chunk.name))) {
+          this.error('No "dialtone-vue" entry chunk, so the main entry import guard cannot run. ' +
+            'Update the guard if the entry was renamed.');
         }
+        return;
       }
+      isLibraryBuild = true;
+
+      const condition = options.format === 'cjs' ? 'require' : 'import';
+      const problem = findMissingSubpathTarget(bundle, condition) ?? findForbiddenImport(entry, bundle);
+      if (problem) this.error(problem);
     },
   };
+
+  // Declarations come from vite-plugin-dts, which writes them after the bundle.
+  function checkSubpathTypes () {
+    if (!isLibraryBuild) return;
+    for (const subpath of SUBPATH_EXPORTS) {
+      const types = packageExports[subpath]?.types;
+      if (!types || !existsSync(fileURLToPath(new URL(types, import.meta.url)))) {
+        throw new Error(`package.json exports "${subpath}" types points at ${types}, which this build did not emit.`);
+      }
+    }
+  }
+
+  return { plugin, checkSubpathTypes };
 }
 
 const commonEntries = _getEntries('common', 'common/*/*.{js,vue}');
 const componentEntries = _getEntries('lib', 'components/*/*.{js,vue}');
 const directiveEntries = _getEntries('lib', 'directives/*/*.{js,vue}');
+const mainEntryGuard = mainEntryImportGuard(Object.keys(componentEntries));
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -130,7 +182,16 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [vue(), mainEntryImportGuard(), dts({ vue: true, parallel: true, compilerOptions: { skipLibCheck: true } })],
+  plugins: [
+    vue(),
+    mainEntryGuard.plugin,
+    dts({
+      vue: true,
+      parallel: true,
+      compilerOptions: { skipLibCheck: true },
+      afterBuild: mainEntryGuard.checkSubpathTypes,
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
