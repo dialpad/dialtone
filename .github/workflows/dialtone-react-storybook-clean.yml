@@ -1,10 +1,14 @@
 # Removes a PR's React Storybook preview (deploy-previews/react/pr-<number>/) when the PR closes, merged or not
 # (DLT-3862). Unlike clean-preview.yml, a failure to remove it fails the run: an orphaned preview stays public.
-# It runs from the base branch and checks nothing out, so it never runs the PR's code.
+# It uses pull_request, not pull_request_target: a closed-PR run of the latter was never registered or triggered for this
+# workflow. It checks nothing out, and the job skips fork PRs, which get no secrets (and publish no preview).
+# Known gap, accepted: GitHub doesn't run pull_request workflows for a PR with a merge conflict, so a PR that publishes a
+# preview, then conflicts with dialtone-react, and is closed without merging keeps its pr-<number>/ folder until someone
+# removes it by hand. The same gap exists for the Vue previews.
 name: dialtone-react-storybook-clean
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - dialtone-react
     types: [closed]
@@ -16,6 +20,7 @@ jobs:
   clean:
     name: clean
     runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
     # The publish job's group for this PR (dialtone-react-storybook.yml), and never cancelled: an upload that is already
     # running finishes first, so this removes what it uploaded, and a publish that starts later sees the PR closed and
     # removes the preview instead of uploading. A group keeps one pending job, so a publish queued behind a running one
@@ -27,19 +32,42 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      pull-requests: read
     env:
       FOLDER: gs://dialtone.dialpad.com/deploy-previews/react/pr-${{ github.event.pull_request.number }}/
     steps:
+      # Inside the lock, so a PR that closed and reopened before this got its turn keeps the preview its new publish
+      # made. Group dispatch order isn't guaranteed, and nothing would recreate a preview deleted here.
+      - id: state
+        name: Check that the PR is still closed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Its own command, so a failed lookup fails the step instead of reading as "not open" and deleting the preview.
+          state=$(gh api "repos/$REPO/pulls/$PR" --jq .state)
+          reopened=true
+          if [[ $state == closed ]]; then
+            reopened=false
+          else
+            echo "PR $PR is $state, not closed, so its preview stays."
+          fi
+          echo "reopened=$reopened" >> "$GITHUB_OUTPUT"
+
       - id: auth
         name: Authenticate to Google Cloud
+        if: ${{ steps.state.outputs.reopened != 'true' }}
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
       - uses: google-github-actions/setup-gcloud@v2
+        if: ${{ steps.state.outputs.reopened != 'true' }}
 
       - name: Remove the preview
+        if: ${{ steps.state.outputs.reopened != 'true' }}
         shell: bash
         run: |
           # No folder just means nothing was published for this PR (its changes didn't touch the Storybooks).

@@ -159,9 +159,13 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           skipped=false
-          if [[ -n $PR ]] && [[ $(gh api "repos/$REPO/pulls/$PR" --jq .state) != open ]]; then
-            skipped=true
-            echo "PR $PR is closed, so its preview is removed, not published."
+          if [[ -n $PR ]]; then
+            # Its own command, so a failed lookup fails the step instead of reading as "closed" and removing the preview.
+            state=$(gh api "repos/$REPO/pulls/$PR" --jq .state)
+            if [[ $state != open ]]; then
+              skipped=true
+              echo "PR $PR is $state, so its preview is removed, not published."
+            fi
           fi
           echo "skipped=$skipped" >> "$GITHUB_OUTPUT"
 
