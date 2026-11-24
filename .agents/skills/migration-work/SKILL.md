@@ -7,7 +7,7 @@ description: Change something public (a prop, value, default, class, token, even
 
 ## Goal
 
-When something public changes, existing consumers keep working. If that is not possible, the break is labelled, documented and, where a script can do it safely, automated.
+When something public changes, existing consumers keep working. If that is not possible, the break is labeled, documented and, where a script can do it safely, automated.
 
 ## Trigger
 
@@ -55,7 +55,7 @@ It is breaking if consumers who changed nothing see a difference:
 - Add a migration guide page under `apps/dialtone-documentation/docs/guides/migration/<slug>/index.md` that lists every visible change. Match the existing pages, such as `chip-interactive` and `theme-to-mode`: frontmatter (`title`, `description`, `keywords`), a `## TLDR` that opens with a `> [!CRITICAL]` or `> [!WARNING]` callout, a before/after table under `## What Changed`, then `## Migration` with the command and before/after snippets.
 - Register the page: a row in the checklist tables of `apps/dialtone-documentation/docs/guides/migration/index.md`, and an entry in `apps/dialtone-documentation/docs/_data/site-nav.json`. A guide that ships a script also gets its command listed in `index.md`; that is covered with script authoring.
 
-### 4. Codemod behaviour
+### 4. Codemod behavior
 
 This section is the home for the rules; the pr-prep codemods lens points here.
 
