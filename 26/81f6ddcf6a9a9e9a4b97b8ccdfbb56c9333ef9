@@ -1,0 +1,23 @@
+packages/dialtone-react/parity/changed-units.mjs
+  s_2defdf83601f66::t_2e76696525f2db 45-47
+packages/dialtone-react/parity/changed-units.test.mjs
+  s_2defdf83601f66::t_04d38c2ea8cd41 348-352
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_2defdf83601f66::t_baa3e99b36c297 98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2681f6ddcf6a9a9e9a4b97b8ccdfbb56c9333ef9",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
