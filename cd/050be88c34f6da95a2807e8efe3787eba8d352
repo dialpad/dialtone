@@ -1,0 +1,23 @@
+.agents/resources/doc-sync.md
+  s_3bb71b6b327c2f::t_0b55908b4b3adb 38
+.agents/skills/pr-prep/SKILL.md
+  s_3bb71b6b327c2f::t_2ad3e386a5b3d6 56,73,75-81
+.agents/skills/pr-prep/references/adversarial-review.md
+  s_3bb71b6b327c2f::t_e9665332acb215 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cd050be88c34f6da95a2807e8efe3787eba8d352",
+  "prompts": {},
+  "sessions": {
+    "s_3bb71b6b327c2f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c9555cff-575d-4161-8442-9e589ff47310",
+        "model": "unknown"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

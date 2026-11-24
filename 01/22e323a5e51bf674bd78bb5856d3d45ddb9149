@@ -1,0 +1,21 @@
+.agents/skills/pr-prep/SKILL.md
+  s_3e94066122bc70::t_d0c2ced068e0e0 53
+.agents/skills/pr-prep/references/local-gates.md
+  s_3e94066122bc70::t_caa45c07dd6bcf 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0122e323a5e51bf674bd78bb5856d3d45ddb9149",
+  "prompts": {},
+  "sessions": {
+    "s_3e94066122bc70": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e8668f84-f36c-4502-a3e7-8b6ef140f153",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

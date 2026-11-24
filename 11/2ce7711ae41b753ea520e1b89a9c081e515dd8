@@ -1,0 +1,35 @@
+packages/dialtone-react/components/Resizable/Composables/ComputeLayout.test.ts
+  s_76cf110705b3b9::t_5d1a04f680c324 1-364
+packages/dialtone-react/components/Resizable/Composables/ConstraintResolver.test.ts
+  s_76cf110705b3b9::t_0616956a34b39c 1-159
+packages/dialtone-react/components/Resizable/Resizable.test.tsx
+  s_76cf110705b3b9::t_9cf2d29173bc8f 1-392
+packages/dialtone-react/components/Resizable/ResizableBehavior.test.tsx
+  s_76cf110705b3b9::t_58385d2bc54471 1-167
+packages/dialtone-react/components/Resizable/ResizableDrag.test.tsx
+  s_76cf110705b3b9::t_61bc6e1d298386 1-131
+packages/dialtone-react/components/Resizable/ResizableKeyboard.test.tsx
+  s_76cf110705b3b9::t_e1dc96b02a6688 1-179
+packages/dialtone-react/components/Resizable/ResizableOffset.test.tsx
+  s_76cf110705b3b9::t_0312b9a087109e 1-97
+packages/dialtone-react/components/Resizable/ResizableV2.test.tsx
+  s_76cf110705b3b9::t_6a4664a4af205e 1-356
+packages/dialtone-react/components/Resizable/ResizableV3.test.tsx
+  s_76cf110705b3b9::t_fd5b8f3515d6de 1-264
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "112ce7711ae41b753ea520e1b89a9c081e515dd8",
+  "prompts": {},
+  "sessions": {
+    "s_76cf110705b3b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4abf4a2e-b3a1-49c7-917e-47f1db667c04",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
