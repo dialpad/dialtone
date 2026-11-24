@@ -26,7 +26,7 @@ Add as little CSS as possible. Reuse an existing class or token first; build a n
 ## Constraints
 
 - Search first; do not add a second class or token with the same output.
-- Values are `var(--dt-*)` tokens, never raw values. Prefer a semantic token; a base reference is valid when it is the true source (a specific palette stop).
+- CSS values are `var(--dt-*)` tokens, never raw values. Prefer a semantic token; a base reference is valid when it is the true source (a specific palette stop). In token JSON, base tokens hold literal values (colors in `oklch()`) and other tokens reference source keys (`{color.black.900}`).
 - A value that sets a component's height or size uses `--dt-layout-*` (or `--dt-size-*`), with `calc()` where there is no exact stop. Spacing tokens are for gaps and padding. Review lesson: a badge used `--dt-spacing-*` for line-height, and the maintainer asked for `--dt-layout-*` because line-height sets the overall height.
 - Keep the change scoped to the requested class or token.
 - Code is the source of truth for tokens. `pnpm sync:variables` in `packages/dialtone-tokens` pushes them to Figma and is a separate step the user asks for.
@@ -78,7 +78,7 @@ Take the commands from `validation.md`, and read its Writes section first. Build
 ## Done When
 
 - The search step found nothing close, or the reuse is recorded.
-- The new class or token is in the build output, `tokens-docs.json` or `dialtone-docs.json`, and the CLI or MCP lookup.
+- The new class or token is in the build output, `tokens-docs.json` or `dialtone-docs.json`, and the CLI or MCP lookup. When neither lookup is available, the build output and a grep of the docs JSON count, and the result says the lookup did not run.
 - A token has a dark value where it differs and shows up in the Android and iOS outputs.
 
 ## Verification
