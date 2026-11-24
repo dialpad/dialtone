@@ -1,10 +1,11 @@
 # Removes a PR's React Storybook preview (deploy-previews/react/pr-<number>/) when the PR closes, merged or not
 # (DLT-3862). Unlike clean-preview.yml, a failure to remove it fails the run: an orphaned preview stays public.
-# It runs from the base branch and checks nothing out, so it never runs the PR's code.
+# It uses pull_request, not pull_request_target: a closed-PR run of the latter was never registered or triggered for this
+# workflow. It checks nothing out, and the job skips fork PRs, which get no secrets (and publish no preview).
 name: dialtone-react-storybook-clean
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - dialtone-react
     types: [closed]
@@ -16,6 +17,7 @@ jobs:
   clean:
     name: clean
     runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
     # The publish job's group for this PR (dialtone-react-storybook.yml), and never cancelled: an upload that is already
     # running finishes first, so this removes what it uploaded, and a publish that starts later sees the PR closed and
     # removes the preview instead of uploading. A group keeps one pending job, so a publish queued behind a running one
