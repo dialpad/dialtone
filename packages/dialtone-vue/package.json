@@ -121,6 +121,11 @@
       "import": "./dist/lib/*/index.js",
       "require": "./dist/lib/*/index.cjs"
     },
+    "./phone": {
+      "types": "./dist/common/phone/index.d.ts",
+      "import": "./dist/common/phone/index.js",
+      "require": "./dist/common/phone/index.cjs"
+    },
     "./component-documentation.json": "./dist/component-documentation.json",
     "./*": "./dist/*"
   },
