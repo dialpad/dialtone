@@ -1,0 +1,19 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_65713884737ac4::t_b9d17e26e13ce1 1715-1719,1721-1724
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "9706844a0fdf4e903959dfd8ced979cb33f2bad0",
+  "prompts": {},
+  "sessions": {
+    "s_65713884737ac4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3e290ad0-61b8-4d1e-a025-3b72aa3eeeca",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "bhawkins-dialpad <bradley.hawkins@dialpad.com>"
+    }
+  }
+}

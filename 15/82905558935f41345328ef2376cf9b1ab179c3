@@ -1,0 +1,25 @@
+packages/dialtone-react/components/Slider/Composables/UseSliderCollisionAvoidance.ts
+  s_b6ac3d70cb055f::t_ea078e039d088d 266-277
+packages/dialtone-react/components/Slider/Composables/UseSliderTooltipReadout.ts
+  s_b6ac3d70cb055f::t_b6ce75d80ed6c9 2,38-41,43,45-48,51,53,66,141,158,168-221,223-225,228,235,237
+packages/dialtone-react/components/Slider/Slider.stories.tsx
+  s_b6ac3d70cb055f::t_2a9ff73b9e7077 284
+packages/dialtone-react/components/Slider/Slider.test.tsx
+  s_b6ac3d70cb055f::t_4fbd174cd19409 1-3764
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1582905558935f41345328ef2376cf9b1ab179c3",
+  "prompts": {},
+  "sessions": {
+    "s_b6ac3d70cb055f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f812431-7d2d-4893-88e1-6eec429e845a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

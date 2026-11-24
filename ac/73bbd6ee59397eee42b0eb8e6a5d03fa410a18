@@ -1,0 +1,33 @@
+packages/dialtone-vue/components/Text/TextSlide.story.vue
+  s_02253ccb5da2a1::t_416605a4f2b6ce 11-12,14,17-18,20,23,26-27,29,32-49,56,60,65
+apps/dialtone-documentation/docs/components/text.md
+  s_02253ccb5da2a1::t_05cb8077beb32c 367,370-377,383-385,387,389-399,407-408
+packages/dialtone-css/lib/build/less/components/text.less
+  s_02253ccb5da2a1::t_5181ab610b5dc9 356-360,365-368,389-392,394,398,409,418,424,434
+packages/dialtone-vue/components/Text/Text.test.js
+  s_02253ccb5da2a1::t_92b936680306dc 4,547-548,551-552,554,557,561-562,565-566,568,570,585,590,596,602,664,668,672,674,678,681,683,686-710,714-715,722,727-764,766,775,779,782,785,792,796,801,806,810,812,816,819,821,833,839
+packages/dialtone-vue/components/Text/Text.vue
+  s_02253ccb5da2a1::t_8d52d6044ec08c 5,8-9,11,15,41,62-63,259,340-341,344-346,358-361
+packages/dialtone-vue/components/Text/TextConstants.js
+  s_02253ccb5da2a1::t_fbdefd84fdc5ef 153
+packages/dialtone-vue/components/Text/modules/SlideViewport.vue
+  s_02253ccb5da2a1::t_c1429fd7a5a13f 1-233
+packages/dialtone-vue/components/Text/modules/slide.js
+  s_02253ccb5da2a1::t_8aaaa9c53c2cc9 2,4-8,12-18,82-109,120
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ac73bbd6ee59397eee42b0eb8e6a5d03fa410a18",
+  "prompts": {},
+  "sessions": {
+    "s_02253ccb5da2a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "514f0fc5-2753-4dc5-8c33-ef0e3d16ef02",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
