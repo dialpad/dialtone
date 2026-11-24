@@ -1,0 +1,20 @@
+packages/dialtone-vue/components/Text/modules/SlideViewport.vue
+  s_6ec1bf1a43afd0::t_01564b9aa698c5 3,8,14-15,24-36,48-49,52,54-59,61,63-65,67-72,74-79,81-86,88-90,92-93,95-105,107-111,113-124,126-131,133-135,137-140,142-151,153-159,161-164,166-169,171-180,182-191,193-220,222-236,238-243,245,248
+  s_6ec1bf1a43afd0::t_f582e59bd3c69e 244,246-247,249,251-255
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d876c33144cf0c2f694e7006d0b31b1e4d0a68c4",
+  "prompts": {},
+  "sessions": {
+    "s_6ec1bf1a43afd0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "73a1b573-f509-4129-8443-4fac54eef53f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+packages/dialtone-react/components/Collapsible/Collapsible.parity.tsx
+  s_cd8275750ed6fc::t_a31503184d77e6 1-5
+packages/dialtone-react/components/Collapsible/Collapsible.stories.tsx
+  s_cd8275750ed6fc::t_64d9e846fe6c9f 1-108,111-126,129-135,139-182
+  s_c078c477ce3335::t_90dc88732ca239 109-110,127-128
+  s_28b360ec9febd6::t_acb9e84e76366a 136-138
+packages/dialtone-react/components/Collapsible/Collapsible.test.tsx
+  s_cd8275750ed6fc::t_af17a9693d78d4 1-261,286-352
+  s_c078c477ce3335::t_b3504396a21a28 262-285
+packages/dialtone-react/components/Collapsible/Collapsible.tsx
+  s_cd8275750ed6fc::t_7889438c4bead1 1-2,5-151,156-177,179-218,225-234
+  s_c078c477ce3335::t_e853e6a934c692 3-4,152-155,178,219-224
+packages/dialtone-react/components/Collapsible/CollapsibleLazyShow.tsx
+  s_cd8275750ed6fc::t_8e39e2a80ccbb1 1-107
+packages/dialtone-react/components/Collapsible/index.ts
+  s_cd8275750ed6fc::t_efd0a780872a01 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0335a0da4f5669a749549cf44a518c009e725b4c",
+  "prompts": {},
+  "sessions": {
+    "s_28b360ec9febd6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "354c2833-b8fa-447d-a365-7138849addb6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_c078c477ce3335": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "027e66f8-d415-4d9e-a4cf-c4f3abc9dbae",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_cd8275750ed6fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "891eb9be-9489-45b0-b333-f9fb7c5105de",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

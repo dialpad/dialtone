@@ -1,0 +1,41 @@
+packages/dialtone-react/components/Datepicker/Composables/UseCalendar.ts
+  s_58e0b369e1be3c::t_1e943c62aed38c 1-198
+packages/dialtone-react/components/Datepicker/Composables/UseMonthYearPicker.ts
+  s_58e0b369e1be3c::t_15e5677955582e 1-169
+packages/dialtone-react/components/Datepicker/Datepicker.parity.tsx
+  s_58e0b369e1be3c::t_f4a1f16972ed50 1-4
+packages/dialtone-react/components/Datepicker/Datepicker.stories.tsx
+  s_58e0b369e1be3c::t_da300c23e573d6 1-227
+packages/dialtone-react/components/Datepicker/Datepicker.test.tsx
+  s_58e0b369e1be3c::t_fda7a93866a46b 1-611
+packages/dialtone-react/components/Datepicker/Datepicker.tsx
+  s_58e0b369e1be3c::t_738b0b22c3a9ba 1-131
+packages/dialtone-react/components/Datepicker/DatepickerConstants.ts
+  s_58e0b369e1be3c::t_606f89b72fe26c 1-11
+packages/dialtone-react/components/Datepicker/FormatUtils.ts
+  s_58e0b369e1be3c::t_8bdb4522b1dede 1-81
+packages/dialtone-react/components/Datepicker/Modules/Calendar.tsx
+  s_58e0b369e1be3c::t_c4e30bd3b83d4c 1-100
+packages/dialtone-react/components/Datepicker/Modules/MonthYearPicker.tsx
+  s_58e0b369e1be3c::t_93504fd4d6d4f5 1-204
+packages/dialtone-react/components/Datepicker/Utils.ts
+  s_58e0b369e1be3c::t_5781fde69ab212 1-172
+packages/dialtone-react/components/Datepicker/index.ts
+  s_58e0b369e1be3c::t_a239c504f759ac 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c881adbf84d7fae25ae404e78b9cfcac4fe12a84",
+  "prompts": {},
+  "sessions": {
+    "s_58e0b369e1be3c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "49ce2576-5837-4fb0-862e-02f89b95a8f4",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

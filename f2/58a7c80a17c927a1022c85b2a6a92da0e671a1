@@ -1,0 +1,33 @@
+packages/dialtone-react/components/ModeIsland/ModeDirective.stories.tsx
+  s_524e465f067396::t_8bf2c1be8b9e30 1,24-26
+packages/dialtone-react/components/ModeIsland/ModeDirective.test.tsx
+  s_27f267512a8d75::t_6e7b6b3268e97d 1,16-18,295,310
+packages/dialtone-react/components/ModeIsland/ModeDirective.ts
+  s_27f267512a8d75::t_11590ac8a4187d 1,103-104,106-108,110,117-118,120,122,124,130
+packages/dialtone-react/components/Tooltip/Tooltip.stories.tsx
+  s_27f267512a8d75::t_1442dfebd11e9d 341-342,345
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f258a7c80a17c927a1022c85b2a6a92da0e671a1",
+  "prompts": {},
+  "sessions": {
+    "s_27f267512a8d75": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e9487d3d-de0f-4448-9d3e-cc71acc836f6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_524e465f067396": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a9ac4b5a5f385892f",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
