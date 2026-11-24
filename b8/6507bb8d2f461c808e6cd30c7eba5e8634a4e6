@@ -1,0 +1,19 @@
+packages/dialtone-react/components/SelectMenu/deviations.json
+  s_edfd1332b9bce0::t_c1d7f4b8c9923f 3-4,7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b86507bb8d2f461c808e6cd30c7eba5e8634a4e6",
+  "prompts": {},
+  "sessions": {
+    "s_edfd1332b9bce0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13d4d6b5-7ef1-4b18-81fb-7f040ab57871",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

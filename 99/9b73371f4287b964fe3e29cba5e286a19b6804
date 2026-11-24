@@ -1,0 +1,336 @@
+.agents/skills/pr-prep/references/specialists/keyboard-aria.md
+  s_39e33a1a93c830::t_10d10ba8a486f2 1-4,10
+  s_803342048d1b5d::t_93b5af42ad0cda 5-9,11
+.agents/skills/pr-prep/SKILL.md
+  s_39e33a1a93c830::t_69193ec691d928 44,52,62,64,69,71,82,99
+  s_39e33a1a93c830::t_9ec185ee5a276d 87
+  s_39e33a1a93c830::t_15d3730887921a 9,12,17,21-22,25-29,32,36-39,45,51,63,65,68,73,80-81,86,90,92,96-98,100,104,106,109-113,162-164,177-180
+  s_39e33a1a93c830::t_9e6da3062d3e86 16,88,93-94,107
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 47-49,59-61,116-117
+  s_39e33a1a93c830::t_d9b25f9d2ec175 74-76,78-79,83,89,103,108,114-115,120-121
+  s_811518e8041c51::t_13c22c06f6918b 3,8,23-24,30-31,53,66-67,72,77,84,91,95,101-102,123-127,130,132-133,142-144,156-157,165
+  s_803342048d1b5d::t_2afce725321bb1 46,55-56,58,70,85
+  s_803342048d1b5d::t_8ef68964bcc212 136-141,158-159
+  s_803342048d1b5d::t_089c4c17bfb95a 43,50,128-129,131,134-135
+  s_321a7c5cc99061::t_9bdb5165e1a914 105,118-119
+  s_321a7c5cc99061::t_3725cd81564cfd 54,57,145-155
+.agents/skills/pr-prep/references/reviewer-lens.md
+  s_39e33a1a93c830::t_079c4e06fe9501 1-2,4-6,8-16,17-40,41-52,54-64,66-69
+  s_39e33a1a93c830::t_b2f959a470e708 65
+  s_39e33a1a93c830::t_d9b25f9d2ec175 3,53
+  s_39e33a1a93c830::t_6843d7c7ac87aa 7
+.agents/skills/pr-prep/references/specialists/css.md
+  s_39e33a1a93c830::t_53ef166d1f6b12 1-2,4,8-9,10
+  s_803342048d1b5d::t_39df1010ffc744 3,5-7
+.agents/skills/pr-prep/references/specialists/icons.md
+  s_39e33a1a93c830::t_940df146ffcaa5 1-4
+  s_803342048d1b5d::t_40ee21bf6eee74 5-7
+.agents/skills/pr-prep/references/adversarial-review.md
+  s_39e33a1a93c830::t_203ddc6f32adb6 1-39
+.agents/skills/pr-prep/references/local-gates.md
+  s_39e33a1a93c830::t_b1b225371d8555 1-2,23
+  s_39e33a1a93c830::t_9e6da3062d3e86 4
+  s_39e33a1a93c830::t_d9b25f9d2ec175 40-41,52
+  s_3e94066122bc70::t_9b07755d218850 37-38,45-48
+  s_3e94066122bc70::t_f785b4976914fa 42-44
+  s_803342048d1b5d::t_4a397bb3cc77e6 3-8,13-29,33,55
+  s_803342048d1b5d::t_069fbec18e5344 10-11,32
+  s_321a7c5cc99061::t_c6e0dfce13a650 9,12,34-36,39,49-51
+.agents/skills/pr-prep/references/specialists/codemods.md
+  s_39e33a1a93c830::t_c8f6e119c79af5 1-4
+  s_803342048d1b5d::t_289237853c1a74 5-7
+.claude/skills/pr-prep/SKILL.md
+  s_39e33a1a93c830::t_ade78fb35139bd 1-2,4-5
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 6
+  s_811518e8041c51::t_3c57d7ceb5eaf2 3
+.agents/evals/run-skill-contract-evals.mjs
+  s_39e33a1a93c830::t_34b10614e57ab1 79,81,83-93
+  s_39e33a1a93c830::t_bcf32b34273b43 373-379,385-388,390-392,393-396,399-408
+  s_39e33a1a93c830::t_6d9c65ff70ee0f 380-384
+  s_39e33a1a93c830::t_d9b25f9d2ec175 397-398
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 82
+  s_803342048d1b5d::t_7236c650190977 80,100-104,411,413-422
+  s_803342048d1b5d::t_fc284d4bcb4725 389,412
+.agents/resources/agent-tooling-parity.md
+  s_39e33a1a93c830::t_80a9f27addf43d 91
+.agents/README.md
+  s_803342048d1b5d::t_690455adff81c4 17
+.agents/resources/validation.md
+  s_803342048d1b5d::t_4cc1b436d0e5b7 3-21,67-76,80
+  s_02253ccb5da2a1::t_a38f054b563015 22-30,32-50,52-66
+  s_321a7c5cc99061::t_f6a970f44c0a18 51
+  s_321a7c5cc99061::t_85baceae94006b 31
+.agents/resources/rules/css-utilities.md
+  s_803342048d1b5d::t_eb83d8cb40b6d9 12-13,15
+  s_803342048d1b5d::t_cd980b373c7bb4 14
+.agents/skills/pr-create/SKILL.md
+  s_811518e8041c51::t_8db458a709c06e 27,35,43-48,55
+  s_803342048d1b5d::t_41b81a3530bc17 42
+.claude/commands/pr-fill.md
+  s_811518e8041c51::t_54a46fbac6a042 46-47,52,58,61,64,67,70
+  s_803342048d1b5d::t_7c47e345811baf 45
+.github/CONTRIBUTING.md
+  s_811518e8041c51::t_1bbb340c5c63b3 153-154,159
+  s_803342048d1b5d::t_7ecd6e40ab0ee6 152
+.agents/resources/documentation-examples.md
+  s_803342048d1b5d::t_b554d907b05e20 3,15,23,35
+.agents/resources/rules/combinator-variants.md
+  s_803342048d1b5d::t_1803f11b61f335 190
+.claude/skills/dt-migrate.md
+  s_803342048d1b5d::t_670da24a8b91ae 20,23
+.github/workflows/publish-web.yml
+  s_803342048d1b5d::t_6be8bba342758c 6-17,48-50,56-94,96,99-100,104-106,109,113-114,141,146-152,164-165,167-233,246,252-263,300-326,329,337-389
+.github/workflows/release.yml
+  s_803342048d1b5d::t_dedc720e0b47ba 59-61,63,81-132,186-211
+.github/workflows/unit_tests.yml
+  s_803342048d1b5d::t_48ec118cc0ad17 26-30,67-71,142-146,293-327
+CHANGELOG.json
+  s_803342048d1b5d::t_cab7215e9ea900 1
+CHANGELOG.md
+  s_803342048d1b5d::t_9d5d7d2b633f7d 1-27
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_803342048d1b5d::t_be778dc7fa1e43 163,167,272
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_803342048d1b5d::t_24f60f549d069c 11,66,100-153,160,206,271,808,818-825,866
+apps/dialtone-documentation/docs/components/list-item.md
+  s_803342048d1b5d::t_61a9249497b293 84-116
+apps/dialtone-documentation/docs/components/root-layout.md
+  s_803342048d1b5d::t_c60bf7c896ebc9 10-11,43-44,74-75
+apps/dialtone-documentation/docs/components/toggle.md
+  s_803342048d1b5d::t_fdeea122d3cd59 47-53,63-64,73-90,121-122
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_803342048d1b5d::t_71e56a1e3ddab8 251,253
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_803342048d1b5d::t_daf1af7b3013bf 272,274
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_803342048d1b5d::t_2e432c522d4dfa 44,146
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_803342048d1b5d::t_ca35dd002e3c47 3,14-17,21,23,106,121-122,126-132,134,143-145,158-164,166-170,176,183,187,199,204,209,212-214,218-219,232-233,236,244,259,261,330,411,417,474,476,478-482,484-505,507-508,544
+lookup-release.config.cjs
+  s_803342048d1b5d::t_e4c16dc15c6353 44
+package.json
+  s_803342048d1b5d::t_8c1568ad063730 3
+packages/combinator/CHANGELOG.json
+  s_803342048d1b5d::t_1d05d5ec6d94f4 1
+packages/combinator/CHANGELOG.md
+  s_803342048d1b5d::t_2f931bcf54c811 1-8
+packages/combinator/package.json
+  s_803342048d1b5d::t_c476ff585c97e8 3
+packages/combinator/src/lib/code_copy.test.js
+  s_803342048d1b5d::t_7c3585e26bec77 24
+packages/combinator/src/variants/variants_dropdown.js
+  s_803342048d1b5d::t_0f8c770f6d6489 91
+packages/combinator/src/variants/variants_filter_pill.js
+  s_803342048d1b5d::t_c67d5b83f10e56 10-16,23,25,28,134-139
+packages/combinator/src/variants/variants_list_item.js
+  s_803342048d1b5d::t_52c17024d13c2f 16-31
+packages/combinator/src/variants/variants_toggle.js
+  s_803342048d1b5d::t_05f8256e7ce13d 21-30
+packages/dialtone-cli/CHANGELOG.json
+  s_803342048d1b5d::t_1f8eebdca39901 1
+packages/dialtone-cli/CHANGELOG.md
+  s_803342048d1b5d::t_a75b70c06bd411 1-21
+packages/dialtone-cli/package.json
+  s_803342048d1b5d::t_ed8d105e3792c9 3
+packages/dialtone-css/CHANGELOG.json
+  s_803342048d1b5d::t_82b1c7779ec88c 1
+packages/dialtone-css/CHANGELOG.md
+  s_803342048d1b5d::t_3869bb5bca65d9 1-15
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_803342048d1b5d::t_f41bf7934031be 353,502
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_803342048d1b5d::t_4bfea3c924375f 247,250,252-256,259,261-277,279
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs
+  s_803342048d1b5d::t_81582ea7bcf38b 7,9-11,22-24,36-37,40-43,46-47,53,55-64,71-73,76-83,86-88,91-98,101-116,119-120,125-129,135,176-219,300,303,354-359,364-368,370-386,388-390,460-523,525-529,531-532,535-545,548,551-552,555-558,560-561,564-571,573-575,587,597,622-626,629-634,644-645,650-658,661-664,667-668,672-675,679-688,694,696-697,699-700,702-705,709-710,727-728,730,735,742,773-775,777-787,792-793,797-801,805-809,812,821-822,824-828,830,834,844-849,891,895-896,898,915-918,921,925,938-954,958,967-973,1068-1075,1082,1087,1095-1098,1100-1102,1104,1122-1123,1125-1126,1163,1165-1168,1172,1364-1401,1407-1408,1435,1443-1445,1450-1451,1455-1456,1458,1462-1464,1470,1622-1623,1625-1628,1637-1638,1645-1650
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
+  s_803342048d1b5d::t_3b53cb97feeef7 2,32-42,67-120,123-126,129-133,159-173,187,213,219,236-237,251,257,269,275,281,287,293,299,364-409,417-419,447-461,565,567-568,601,607,659-663,671-673,690,696,743,866,906,908,1071,1084,1091,1170-1406
+packages/dialtone-css/lib/build/less/components/filter-pill.less
+  s_803342048d1b5d::t_8d204d7fcccd4b 129-134
+packages/dialtone-css/lib/build/less/components/list-item.less
+  s_803342048d1b5d::t_2856c753412838 3-6,12,18,22,41-62
+packages/dialtone-css/lib/build/less/components/toggle.less
+  s_803342048d1b5d::t_3afbe0116cc088 184
+packages/dialtone-css/package.json
+  s_803342048d1b5d::t_e8fd7fd0f03f10 3
+packages/dialtone-docs/project.json
+  s_803342048d1b5d::t_5c454db8516663 22-24
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_803342048d1b5d::t_5453ddc54d3e05 23,106,112,114
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_803342048d1b5d::t_7f5025cb1d6ac2 6,55,189-190,193,195-197,199-202
+packages/dialtone-docs/src/content/workflows/workflow-release-process.md
+  s_803342048d1b5d::t_d5cbbec8b4c6ed 6,98-102
+packages/dialtone-docs/src/generators/documentation-examples.mjs
+  s_803342048d1b5d::t_3ca0662dbdc1a1 7,14-20,87
+packages/dialtone-docs/tests/documentation-examples.test.js
+  s_803342048d1b5d::t_f622976349f286 4-17,21,112-141
+packages/dialtone-docs/tests/example-template.test.js
+  s_803342048d1b5d::t_c38a2815712597 5,41,70
+packages/dialtone-docs/tests/source-examples.test.js
+  s_803342048d1b5d::t_80cc0facc3bd56 26,33-36
+packages/dialtone-mcp-server/CHANGELOG.json
+  s_803342048d1b5d::t_a4272cce7aad81 1
+packages/dialtone-mcp-server/CHANGELOG.md
+  s_803342048d1b5d::t_c25efce4030952 1-21
+packages/dialtone-mcp-server/RETRIEVAL.md
+  s_803342048d1b5d::t_f6803f4473b58c 21
+packages/dialtone-mcp-server/package.json
+  s_803342048d1b5d::t_8fad29a2c9e379 3
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_803342048d1b5d::t_5d63373b0a88bb 60,120-121
+packages/dialtone-vue/CHANGELOG.json
+  s_803342048d1b5d::t_fa3a1282d5dd0e 1
+packages/dialtone-vue/CHANGELOG.md
+  s_803342048d1b5d::t_32e194459c7c37 1-8
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_803342048d1b5d::t_2055acda6616eb 329-342,454-517
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_803342048d1b5d::t_1ddb97e66aadea 79-81,430,497,501-514,565-569,579,583-586
+packages/dialtone-vue/components/Dropdown/DropdownMenuRoles.story.vue
+  s_803342048d1b5d::t_ecd6de95c7f7b5 53-66
+packages/dialtone-vue/components/FilterPill/FilterPill.stories.js
+  s_803342048d1b5d::t_62ab85eb4837f3 10,212-228
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_803342048d1b5d::t_fe7547b935a191 329,342-346,348-358,360-366,368-398,483,490-492,507,519-521
+packages/dialtone-vue/components/FilterPill/FilterPillControlled.js
+  s_803342048d1b5d::t_9db8c6e71db7bf 152-153,258-261,290,292
+packages/dialtone-vue/components/FilterPill/FilterPillOptionRows.test.js
+  s_803342048d1b5d::t_3963fba9cf9a1e 1-208
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.js
+  s_803342048d1b5d::t_6aaba3c7716762 11-49,69-74,82-83
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.test.js
+  s_803342048d1b5d::t_49c57738b6379b 72-152
+packages/dialtone-vue/components/FilterPill/FilterPillUnavailableChoices.story.vue
+  s_803342048d1b5d::t_2bfd6069e1fe9f 1-76
+packages/dialtone-vue/components/FilterPill/modules/FilterPillOptionGroup.vue
+  s_803342048d1b5d::t_5402e1f2df279a 1-49
+packages/dialtone-vue/components/ListItem/ListItem.stories.js
+  s_803342048d1b5d::t_7c826905406a03 142-150
+packages/dialtone-vue/components/ListItem/ListItem.test.js
+  s_803342048d1b5d::t_a0dab6089afb70 186-258,379-388
+packages/dialtone-vue/components/ListItem/ListItem.vue
+  s_803342048d1b5d::t_155c8b80d18ffd 11,17,141-154,273-277
+packages/dialtone-vue/components/ListItem/ListItemDefault.story.vue
+  s_803342048d1b5d::t_a6945e7e328698 12
+packages/dialtone-vue/package.json
+  s_803342048d1b5d::t_712bf051db3a30 3
+packages/eslint-plugin-dialtone/CHANGELOG.json
+  s_803342048d1b5d::t_d2fda9f272ee93 1
+packages/eslint-plugin-dialtone/CHANGELOG.md
+  s_803342048d1b5d::t_e63a9f83b5918d 1-7
+packages/eslint-plugin-dialtone/package.json
+  s_803342048d1b5d::t_8f12bb08fe5159 3
+scripts/retrieval/README.md
+  s_803342048d1b5d::t_68b11ca78c0f37 41,61-63,66,69-71,75,78,81-93
+scripts/retrieval/cache-inputs.test.mjs
+  s_803342048d1b5d::t_905d89b339a247 154,158-172
+scripts/retrieval/ci-routing.test.mjs
+  s_803342048d1b5d::t_d02643d6f6e918 96-327
+scripts/retrieval/example-consumer.mjs
+  s_803342048d1b5d::t_2cd836103d9a71 98-108
+scripts/retrieval/example-consumer.test.mjs
+  s_803342048d1b5d::t_e2a69dbc7539d2 60-74
+scripts/retrieval/example-evidence.mjs
+  s_803342048d1b5d::t_192d116aaf0264 31-32
+scripts/retrieval/example-evidence.test.mjs
+  s_803342048d1b5d::t_947c81cbd278d7 78-96
+scripts/retrieval/fixtures.mjs
+  s_803342048d1b5d::t_efb88cb2bb5f48 19-21,23,26,29-30,85-87
+scripts/retrieval/probe-packed-examples.mjs
+  s_803342048d1b5d::t_02110da3efd69b 8,14-16,21-25,29,33-36,58,60-67,76,108,110
+scripts/retrieval/qualify-release-examples.mjs
+  s_803342048d1b5d::t_0dd019a9c0f0b1 1-163
+scripts/retrieval/release-archives.mjs
+  s_803342048d1b5d::t_c9bc70cc78bf14 1-218
+scripts/retrieval/release-archives.test.mjs
+  s_803342048d1b5d::t_b295a0d3e0891b 1-173
+scripts/retrieval/release-profile.mjs
+  s_803342048d1b5d::t_6b954158f06520 1-84
+scripts/retrieval/release-profile.test.mjs
+  s_803342048d1b5d::t_48ce42e25f6f9e 1-57
+scripts/retrieval/validate-examples.mjs
+  s_803342048d1b5d::t_3acebc0b9ff68e 2-4,13,16,18,22-25,28,32-43,47-57,60,67-68,71,75-103,107,110-117,119-128,130-137,140,144
+.claude/agents/pr-prep-coordinator.md
+  s_321a7c5cc99061::t_9a19100123b3b9 16
+  s_321a7c5cc99061::t_714a4e2632ad49 2-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "999b73371f4287b964fe3e29cba5e286a19b6804",
+  "prompts": {},
+  "sessions": {
+    "s_02253ccb5da2a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "514f0fc5-2753-4dc5-8c33-ef0e3d16ef02",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_14bae515e6d53a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b8d185fd-d734-4535-a5e1-86a41eb7b846",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_321a7c5cc99061": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "352d85fd-7a05-4b45-84bf-9a4bbfde9078",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_39e33a1a93c830": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9805b8c3-2134-441e-9e9c-daf0c24296ae",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_3e94066122bc70": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e8668f84-f36c-4502-a3e7-8b6ef140f153",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_803342048d1b5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cdad6428-8c4b-493c-b221-db56ddbb456d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_811518e8041c51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "77c630b9-034b-4d86-952f-89e0c1322bbe",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_924e47002af4af": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "873b8d12-c3a3-4f65-a7a3-ac2e06d94cb5",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_fa9a0a1ecaa266": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a0ac161-bb7a-44bf-9300-2265b434ed1d",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

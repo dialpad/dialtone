@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Datepicker/Modules/MonthYearPicker.tsx
+  s_58e0b369e1be3c::t_3516b6c750167c 111-113
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fcfff5e012af5263b9c9df4cd6b654876aee52bf",
+  "prompts": {},
+  "sessions": {
+    "s_58e0b369e1be3c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "49ce2576-5837-4fb0-862e-02f89b95a8f4",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Datepicker/Datepicker.test.tsx
+  s_75755ea2dab54c::t_fe3f14860a9641 68-71,300-301,320-321,332-333,352-353
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9a64c9b617bcbf51a4f20af9ad74cee5fdf8f946",
+  "prompts": {},
+  "sessions": {
+    "s_75755ea2dab54c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c4222b2-7303-4b68-bd09-68bfcfb08a28",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

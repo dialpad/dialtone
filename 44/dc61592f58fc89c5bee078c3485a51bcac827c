@@ -1,0 +1,32 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/index.mjs
+  s_f920209ec821e1::t_371da02af22301 363-364
+apps/dialtone-documentation/docs/components/badge.md
+  s_f920209ec821e1::t_371da02af22301 256
+apps/dialtone-documentation/docs/guides/migration/badge-chip-api/index.md
+  s_f920209ec821e1::t_371da02af22301 59
+packages/dialtone-css/lib/build/js/dialtone_migrate_badge_api/test.mjs
+  s_f920209ec821e1::t_371da02af22301 423-441
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.types.test.js
+  s_f920209ec821e1::t_371da02af22301 24,44-45
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.test.js
+  s_f920209ec821e1::t_371da02af22301 2,80-109
+  s_f920209ec821e1::t_84ee92814766ed 110
+packages/dialtone-vue/components/Badge/composables/useFeatureAwarenessBadge.js
+  s_f920209ec821e1::t_371da02af22301 45-46,48-57,72-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "44dc61592f58fc89c5bee078c3485a51bcac827c",
+  "prompts": {},
+  "sessions": {
+    "s_f920209ec821e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9106441-9875-473b-a763-9791537e2af7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
