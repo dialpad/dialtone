@@ -750,16 +750,12 @@
   &__start {
     flex-grow: 1;
     padding-inline-end: calc(var(--button-padding-x) + var(--dt-spacing-25));
-
-    &:not(.d-btn--outlined) {
-      border-inline-end: 0;
-    }
+    border-inline-end: 0;
 
     &:disabled:not(.d-btn--outlined),
     &:disabled:not(.d-btn--primary),
     &.d-btn--primary,
     &.d-btn--outlined {
-      border-inline-end: 0;
       border-start-end-radius: 0;
       border-end-end-radius: 0;
     }
