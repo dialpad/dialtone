@@ -1,0 +1,40 @@
+packages/dialtone-vue/components/FilterPill/FilterPillOptionRows.test.js
+  s_8716e901949c29::t_b0e3a8f436058c 44-52
+  s_8716e901949c29::t_74ad480b440c9f 212-221,223-225,227-230,233-260
+  s_8716e901949c29::t_ccbb7a3628d821 222
+  s_8716e901949c29::t_a8e56990273d86 226,231-232
+  s_8716e901949c29::t_2281325f850e6d 16-23
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.test.js
+  s_8716e901949c29::t_32c10770bc1518 110-117,119,129-145
+  s_8716e901949c29::t_1902c2ccc6cf76 118,120-128
+packages/dialtone-vue/components/FilterPill/modules/FilterPillOptionGroup.vue
+  s_8716e901949c29::t_0d22ee4e4d673f 8-11
+  s_8716e901949c29::t_8b14890d794f3b 1-7,12-54
+packages/dialtone-css/lib/build/less/components/filter-pill.less
+  s_8716e901949c29::t_b7158ca950e9bd 129-134
+packages/dialtone-vue/components/FilterPill/FilterPillSelection.js
+  s_8716e901949c29::t_493220c228d39b 85
+  s_8716e901949c29::t_d63e742053bc66 39-55
+  s_8716e901949c29::t_f80350a0a3289d 76
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_8716e901949c29::t_069bbfa49ece96 342,345,347-357,359-365,367-397
+  s_8716e901949c29::t_438d9ce5fff83d 506
+  s_8716e901949c29::t_f66e4fa798d4f4 341,343-344
+  s_8716e901949c29::t_43b914298fb1d8 482
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f6c3460778dea66120856ae470a8c9608c65eacf",
+  "prompts": {},
+  "sessions": {
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

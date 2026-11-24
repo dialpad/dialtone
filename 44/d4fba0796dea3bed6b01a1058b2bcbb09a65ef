@@ -1,0 +1,120 @@
+project.json
+  s_5c2995026e6cb7::t_3f405edb32310a 26
+packages/eslint-plugin-dialtone/lib/rules/deprecated-flex-gap-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 32
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/space-to-spacing.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 31-32,40-43
+packages/dialtone-vue/package.json
+  s_5c2995026e6cb7::t_3f405edb32310a 3
+packages/eslint-plugin-dialtone/lib/rules/deprecated-pixel-utility-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 67-68,70
+CHANGELOG.json
+  s_5c2995026e6cb7::t_3f405edb32310a 1-8842
+packages/dialtone-css/CHANGELOG.json
+  s_5c2995026e6cb7::t_3f405edb32310a 1
+.github/workflows/publish-web.yml
+  s_5c2995026e6cb7::t_3f405edb32310a 22,82-83
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/helpers.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 73-74,159-170
+packages/dialtone-vue/CHANGELOG.json
+  s_5c2995026e6cb7::t_3f405edb32310a 1-9072
+package.json
+  s_5c2995026e6cb7::t_3f405edb32310a 3,48,55-56,224
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-base-color-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 23-24
+packages/eslint-plugin-dialtone/tests/lib/rules/recommend-typography-style.js
+  s_5c2995026e6cb7::t_3f405edb32310a 28-31
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-grid-gap-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 28-33
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 366,746-747,761,782
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/utility-class-to-token-stops.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 39,80-81,137-143,152-158,167-173
+packages/dialtone-css/package.json
+  s_5c2995026e6cb7::t_3f405edb32310a 3,69-76
+packages/dialtone-css/README.md
+  s_5c2995026e6cb7::t_3f405edb32310a 28-35
+CHANGELOG.md
+  s_5c2995026e6cb7::t_3f405edb32310a 1-365
+packages/dialtone-cli/package.json
+  s_5c2995026e6cb7::t_3f405edb32310a 46
+packages/dialtone-css/lib/build/js/dialtone_migrate_flex_to_stack/index.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 1031-1040,1043-1047,1051-1052,1149-1212,1259,1287,1292,1334-1335,1432
+apps/dialtone-documentation/docs/guides/migration/css-cascade-layers/index.md
+  s_5c2995026e6cb7::t_3f405edb32310a 10,67,71,73,75,77-88,91,93-98,102-123,226,236-261,263-264
+packages/combinator/CHANGELOG.json
+  s_5c2995026e6cb7::t_3f405edb32310a 1
+packages/dialtone-css/postcss/postcss-layer-remover.cjs
+  s_5c2995026e6cb7::t_3f405edb32310a 1-26
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.vue
+  s_5c2995026e6cb7::t_3f405edb32310a 1002-1007
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/theme-to-mode.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 3-8,25-26,43-50,53,56-59,62-63,66,69-72,76,78,81,84-87,101-125,127,130,132-136,139,145
+packages/dialtone-css/CHANGELOG.md
+  s_5c2995026e6cb7::t_3f405edb32310a 1-19
+packages/dialtone-css/gulpfile.cjs
+  s_5c2995026e6cb7::t_3f405edb32310a 41,81,214-227,449
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/theme-to-mode.test.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 9,11-12,14-17,20,22-25,28-31,34-37,40-43,46-49,53-55,58,60-62,65-71,85,89-103,111,159-226,236,264-270,277-281
+packages/eslint-plugin-dialtone/CHANGELOG.json
+  s_5c2995026e6cb7::t_3f405edb32310a 1
+packages/eslint-plugin-dialtone/CHANGELOG.md
+  s_5c2995026e6cb7::t_3f405edb32310a 1-8
+packages/eslint-plugin-dialtone/lib/rules/deprecated-base-color-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 36
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 15,991-1010,1042-1190
+packages/dialtone-cli/CHANGELOG.json
+  s_5c2995026e6cb7::t_3f405edb32310a 1
+packages/eslint-plugin-dialtone/lib/rules/recommend-typography-style.js
+  s_5c2995026e6cb7::t_3f405edb32310a 43
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/stack-gap-to-spacing.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 38-40
+packages/dialtone-vue/CHANGELOG.md
+  s_5c2995026e6cb7::t_3f405edb32310a 1-229
+packages/eslint-plugin-dialtone/package.json
+  s_5c2995026e6cb7::t_3f405edb32310a 3
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-flex-gap-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 28-33
+packages/dialtone-cli/CHANGELOG.md
+  s_5c2995026e6cb7::t_3f405edb32310a 1-13
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/helpers.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 2,4,6,9-15
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_5c2995026e6cb7::t_3f405edb32310a 952
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 1005-1011,1013-1029,1262-1325,1538-1559,1565,1582,1602,1612,1631-1632
+packages/eslint-plugin-dialtone/lib/rules/deprecated-grid-gap-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 32
+packages/combinator/CHANGELOG.md
+  s_5c2995026e6cb7::t_3f405edb32310a 1-7
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/utility-class-to-token-stops.test.mjs
+  s_5c2995026e6cb7::t_3f405edb32310a 92-113
+packages/combinator/package.json
+  s_5c2995026e6cb7::t_3f405edb32310a 3
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-pixel-utility-classes.js
+  s_5c2995026e6cb7::t_3f405edb32310a 12,159-177
+README.md
+  s_5c2995026e6cb7::t_3f405edb32310a 21-36
+.github/workflows/release.yml
+  s_5c2995026e6cb7::t_3f405edb32310a 24,122-124
+  s_5c2995026e6cb7::t_1e15e80e145b72 125
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/space-to-spacing-test-examples.vue
+  s_5c2995026e6cb7::t_3f405edb32310a 152,155-157,161
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "44d4fba0796dea3bed6b01a1058b2bcbb09a65ef",
+  "prompts": {},
+  "sessions": {
+    "s_5c2995026e6cb7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eef70-8249-79a3-8adc-6396d473def8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

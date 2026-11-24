@@ -1,0 +1,45 @@
+packages/dialtone-vue/components/Loader/LoaderConstants.js
+  s_80c763736a2891::t_25c36460ed2b8e 1-4
+packages/dialtone-vue/components/Loader/Loader.test.js
+  s_80c763736a2891::t_81838d7a975676 63-99
+apps/dialtone-documentation/docs/components/loader.md
+  s_80c763736a2891::t_3d0296f68759f0 37-44
+  s_80c763736a2891::t_31bd1ae9aba297 69
+  s_80c763736a2891::t_531f3d41fb810f 75
+packages/dialtone-vue/components/Loader/LoaderVariants.story.vue
+  s_80c763736a2891::t_38a9ce1f562fa0 3-4,7-9,12-24
+  s_80c763736a2891::t_ca2e6ae2eaaa68 33,40
+packages/dialtone-vue/components/Loader/LoaderDefault.story.vue
+  s_80c763736a2891::t_5bcfc93b286c7c 4
+packages/dialtone-css/lib/build/less/components/button.less
+  s_80c763736a2891::t_8c8bd60114860f 661
+packages/dialtone-css/lib/build/less/components/loader.less
+  s_80c763736a2891::t_32a1e195694014 11,23-25
+  s_80c763736a2891::t_6e389047159bcb 47-75
+  s_80c763736a2891::t_d1f25342ad2ca1 46
+packages/dialtone-vue/components/Loader/Loader.stories.js
+  s_80c763736a2891::t_273bbe76832d2d 6,9-15
+packages/dialtone-vue/components/Loader/index.js
+  s_80c763736a2891::t_52aab5020c9aec 2
+packages/dialtone-vue/components/Loader/Loader.vue
+  s_80c763736a2891::t_954ecb6b3ca591 135
+  s_80c763736a2891::t_f8ff595add946d 3,7-51,53,95,110-119,130-134
+packages/combinator/src/variants/variants_loader.js
+  s_80c763736a2891::t_8409509553fe34 28-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "06bcfe96574f4a449339b99660a71eda5f0c23b4",
+  "prompts": {},
+  "sessions": {
+    "s_80c763736a2891": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a48a5b7b-bb2f-4fa5-ba27-72addd82f94a",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Zach Allott <zach.allott@dialpad.com>"
+    }
+  }
+}
