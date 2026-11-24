@@ -1,0 +1,54 @@
+# Removes a PR's React Storybook preview (deploy-previews/react/pr-<number>/) when the PR closes, merged or not
+# (DLT-3862). Unlike clean-preview.yml, a failure to remove it fails the run: an orphaned preview stays public.
+# It runs from the base branch and checks nothing out, so it never runs the PR's code.
+name: dialtone-react-storybook-clean
+
+on:
+  pull_request_target:
+    branches:
+      - dialtone-react
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  clean:
+    name: clean
+    runs-on: ubuntu-latest
+    # The publish job's group for this PR (dialtone-react-storybook.yml), and never cancelled: an upload that is already
+    # running finishes first, so this removes what it uploaded, and a publish that starts later sees the PR closed and
+    # removes the preview instead of uploading. A group keeps one pending job, so a publish queued behind a running one
+    # can replace this run, which is why the publish job cleans up too. Without any of it, a build still running at close
+    # could upload after this ran, and the preview would stay public with no later event to remove it.
+    concurrency:
+      group: dialtone-react-storybook-publish-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      FOLDER: gs://dialtone.dialpad.com/deploy-previews/react/pr-${{ github.event.pull_request.number }}/
+    steps:
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Remove the preview
+        shell: bash
+        run: |
+          # No folder just means nothing was published for this PR (its changes didn't touch the Storybooks).
+          # Any other failure to list it is a real one.
+          if out=$(gcloud storage ls "$FOLDER" 2>&1); then
+            gcloud storage rm --recursive "$FOLDER"
+          elif grep -q "matched no objects" <<< "$out"; then
+            echo "Nothing was published for this PR."
+          else
+            echo "::error::Couldn't list $FOLDER: $out"
+            exit 1
+          fi

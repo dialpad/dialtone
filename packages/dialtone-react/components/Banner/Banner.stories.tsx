@@ -8,6 +8,7 @@ import { ICON_NAMES, type IconName } from '../Icon/IconConstants';
 import { NOTICE_KINDS } from '../Notice';
 import { DtBanner, type DtBannerProps } from './Banner';
 
+import { asset } from '../../.storybook/asset';
 // Slots are args named as in Vue: `default` and `action` are HTML strings (Vue's template renders the default one
 // through v-html), and `icon` is an icon name. `onClick` is the action button's click, and `show` shows the banner
 // from the start and makes it sticky.
@@ -23,7 +24,7 @@ type BannerStoryArgs = Omit<DtBannerProps, 'icon' | 'action' | 'onClick'> & {
 const iconsList = [undefined, ...ICON_NAMES];
 
 // Vue imports the file; Storybook serves Vue's assets directory at the root.
-const backgroundImage = '/dialpad-gradient.png';
+const backgroundImage = asset('dialpad-gradient.png');
 
 export const argsData = {
   onClose: action('close'),

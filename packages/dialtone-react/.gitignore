@@ -9,3 +9,5 @@ compare/generated/
 # changed-units.mjs reads the base version of parity/extra-cases.mjs from a copy next to it; one an interrupted run
 # left behind is no source
 /parity/.extra-cases.*.base.mjs
+/storybook-static
+/storybook-static-compare

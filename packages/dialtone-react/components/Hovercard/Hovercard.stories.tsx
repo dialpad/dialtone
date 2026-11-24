@@ -10,6 +10,7 @@ import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '../Popover';
 import { DtStack } from '../Stack';
 import { DtHovercard, type DtHovercardHandle, type DtHovercardProps } from './Hovercard';
 
+import { asset } from '../../.storybook/asset';
 // Slots are args named as in Vue: `content`, `headerContent` and `footerContent` are HTML strings, as the .story.vue
 // templates render them with v-html.
 type HovercardStoryArgs = Omit<DtHovercardProps, 'content' | 'headerContent' | 'footerContent'> & {
@@ -33,7 +34,7 @@ const CONTENT_MODE_ARG_TYPE = {
   },
 };
 
-const defaultImage = '/avatar2.png';
+const defaultImage = asset('avatar2.png');
 
 export const argTypesData = {
   // Slots
@@ -312,13 +313,13 @@ function HovercardDefault ({ open, headerContent, footerContent, ...args }: Hove
 }
 
 const cardData = [{
-  name: 'Jaqueline Nackos', src: '/avatar2.png', time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  name: 'Jaqueline Nackos', src: asset('avatar2.png'), time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
 },
 {
-  name: 'Joseph Lumaban', src: '/avatar1.png', time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  name: 'Joseph Lumaban', src: asset('avatar1.png'), time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,

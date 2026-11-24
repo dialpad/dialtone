@@ -51,3 +51,16 @@ Run these from the repo root.
 - **No live sync.** Every change reloads both frames, so story state (an open tooltip, typed text) resets. Dark mode reaches a frame just after it renders, so a dark frame may flash light first.
 - **Ports.** They are fixed in `compare/ports.json` and in the Nx targets. React's and the comparison Storybook exit if their port is taken (`--exact-port`). Vue's own `start` target would move to another port instead, which is why `storybook:all` checks all three ports before it starts anything. Run on its own, `storybook:compare` frames whatever answers on 9011 and 9012.
 - **Vue's watcher loops.** Vue's `start` target (which `storybook:all` runs as is) watches dialtone-icons, whose `pre-build` rewrites `src/keywords-*.json`, which the watcher sees as a change. So under `storybook:all` it rebuilds dialtone-icons and dialtone-icons-vue over and over. The Storybooks keep working, but the log scrolls with builds. React's `storybook` target doesn't watch dialtone-icons (React's icons come from `scripts/build-icons.mjs`, not its build output), so it doesn't loop; restart it to pick up changed icons.
+
+### Published previews
+
+CI publishes all three Storybooks as a preview (`.github/workflows/dialtone-react-storybook.yml`) on a push to `dialtone-react`, and on a PR into it, that changes this package, Vue's sources, the css, icons, emojis or tokens packages, Combinator's sources, the lockfile, the setup action or the workflow itself. A change outside those paths gets no preview and no comment, and its PR keeps the one it had:
+
+| Where | Folder |
+| --- | --- |
+| A PR into `dialtone-react` | `https://dialtone.dialpad.com/deploy-previews/react/pr-<number>/` |
+| The `dialtone-react` branch | `https://dialtone.dialpad.com/deploy-previews/react/dialtone-react/` |
+
+Each folder holds `react/` (this package's Storybook), `vue/` (Vue's, built from the same commit) and `compare/` (the side-by-side one, whose frames are the `react/` and `vue/` folders next to it). `build.json` in the folder names the commit and the time of the build. A PR gets a comment with the links once the upload has finished. Only Dialpad members publish, and a PR from a fork doesn't. `dialtone-react-storybook-clean.yml` removes a PR's folder when it closes.
+
+To build the same bundle locally: `pnpm nx run dialtone-react:build-storybook:compare`, then serve `storybook-static/` (React), `../dialtone-vue/storybook-static/` (Vue) and `storybook-static-compare/` as `react/`, `vue/` and `compare/` of one folder.

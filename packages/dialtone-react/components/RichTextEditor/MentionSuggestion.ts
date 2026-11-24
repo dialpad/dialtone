@@ -1,5 +1,6 @@
+import { asset } from '../../.storybook/asset';
 // Story data: the mention suggestion the stories pass (dialtone-vue's MentionSuggestion.js).
-const defaultImage = '/avatar2.png';
+const defaultImage = asset('avatar2.png');
 
 const CONTACT_LIST = [
   {
