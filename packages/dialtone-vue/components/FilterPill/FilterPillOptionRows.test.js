@@ -178,13 +178,15 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       expect(group.parentElement.parentElement).toBe(rows()[0].parentElement);
     });
 
-    it('moves through rows across group boundaries in DOM order with arrows and Home', async () => {
+    it('moves through rows across group boundaries in DOM order, wrapping at the ends', async () => {
       updateWrapper({ options: groupedOptions });
       await open();
       focusRow(rows()[0]);
       expect(await focusedLabelAfter('ArrowDown')).toBe('Calls');
       expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
       expect(await focusedLabelAfter('ArrowDown')).toBe('Spam');
+      expect(await focusedLabelAfter('ArrowDown')).toBe('All types');
+      expect(await focusedLabelAfter('ArrowUp')).toBe('Spam');
       expect(await focusedLabelAfter('ArrowUp')).toBe('Archived');
       expect(await focusedLabelAfter('ArrowUp')).toBe('Calls');
     });

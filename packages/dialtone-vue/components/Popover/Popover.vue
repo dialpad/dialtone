@@ -126,6 +126,7 @@
           v-if="!showCloseButton"
           ref="popover__close-button"
           :role="role === 'menu' ? 'menuitem' : undefined"
+          :tabindex="role === 'menu' ? -1 : undefined"
           @close="closePopover"
         />
       </dt-lazy-show>
