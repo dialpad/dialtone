@@ -1,0 +1,21 @@
+packages/dialtone-vue/vite.config.js
+  s_fe80fcddbca945::t_4412768d9f2fce 4,40-49,80,83-85,88,91-92,97,99-101,106-118
+  s_fe80fcddbca945::t_b8521b388afbae 50-77,81,89-90,93-95,102-103,188-193
+  s_fe80fcddbca945::t_437db6541005c6 82,124,185-187,194
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2568b9e72539ce60ce447f57b55c8a48be9f05b9",
+  "prompts": {},
+  "sessions": {
+    "s_fe80fcddbca945": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7e46ad03-e7f5-4742-9e98-2109f2741701",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
