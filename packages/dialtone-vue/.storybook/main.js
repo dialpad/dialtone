@@ -36,6 +36,8 @@ const config = {
       plugins: [react({ include: /\.jsx$/, jsxRuntime: 'classic' })],
       build: {
         sourcemap: true,
+        // Preserve logical corners and OKLCH without dropping Safari prefixes (DLT-3867).
+        cssTarget: ['chrome111', 'edge111', 'firefox114', 'safari16.4', 'ios16.4'],
       },
       css: {
         devSourcemap: true,
