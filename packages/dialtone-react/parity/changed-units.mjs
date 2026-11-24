@@ -42,7 +42,9 @@ const SHARED = new RegExp([
   // The repo's Nx and package setup, which runs every gate, and CI's.
   '^(?:package|nx)\\.json$',
   '^pnpm-lock\\.yaml$',
-  '^\\.github/workflows/dialtone-react[^/]*\\.yml$',
+  // Not the Storybook workflows, which only publish previews and can't change a render. A new dialtone-react-*.yml
+  // gates every unit until it's listed here.
+  '^\\.github/workflows/dialtone-react(?!-storybook(?:-clean)?\\.yml$)[^/]*\\.yml$',
   '^\\.github/actions/setup-environment/',
   // dialtone-vue's Vitest config and setup, under every unit's Vue tests and goldens.
   `^${VUE}(?:vite\\.config\\.js|tests/setupTests\\.js)$`,

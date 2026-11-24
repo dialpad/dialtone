@@ -345,6 +345,11 @@ describe('changedUnits', () => {
     ]) assert.deepEqual(unitsFor(file), { units: ALL, errors: [] }, file);
   });
 
+  test('the Storybook preview workflows gate no unit, and any other dialtone-react workflow gates every one', () => {
+    expect(['.github/workflows/dialtone-react-storybook.yml', '.github/workflows/dialtone-react-storybook-clean.yml'], []);
+    assert.deepEqual(unitsFor('.github/workflows/dialtone-react-other.yml'), { units: ALL, errors: [] });
+  });
+
   test('a Combinator variants file gates the units whose presets it holds; the registry gates every unit', () => {
     const variants = file => `packages/combinator/src/variants/${file}`;
     expect([variants('variants_text.js')], ['text']);
