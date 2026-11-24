@@ -273,6 +273,23 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(list.find('[data-qa="radio-two"]').attributes('aria-checked')).toBe('false');
   });
 
+  // Assistive technology can move focus onto the hidden Close; arrows return to the rows from there.
+  it('returns arrows from a focused screen-reader Close to the first and last rows', async () => {
+    const popover = mountMenu();
+    await flushPromises();
+    const content = popover.findComponent({ ref: 'content' });
+    const close = content.get('[data-qa="dt-sr-only-close-button"]');
+    const send = (target, key) => target.trigger('keydown', { key, code: key });
+    // Start each press from the middle row so the result comes from Close, not from the row position.
+    for (const [key, row] of [['ArrowDown', 'radio:one'], ['ArrowUp', 'radio two']]) {
+      content.get('[data-qa="action-row"]').element.focus();
+      await content.get('[data-qa="action-row"]').trigger('mousemove');
+      close.element.focus();
+      await send(close, key);
+      expect(document.activeElement.id).toBe(row);
+    }
+  });
+
   it('targets the owning menu row when hovering nested-role content', async () => {
     const popover = mountMenu();
     await flushPromises();
