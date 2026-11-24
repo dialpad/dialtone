@@ -36,8 +36,6 @@ const config = {
       plugins: [react({ include: /\.jsx$/, jsxRuntime: 'classic' })],
       build: {
         sourcemap: true,
-        // Preserve logical corner resets and OKLCH during Storybook minification (DLT-3867).
-        // Safari text selection may differ without its prefix; accepted for Storybook.
         cssTarget: 'esnext',
       },
       css: {
