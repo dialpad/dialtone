@@ -1,0 +1,182 @@
+# Publishes the React Storybook, the Vue Storybook (built from the same commit) and the side-by-side one, as a preview
+# under https://dialtone.dialpad.com/deploy-previews/react/<ref>/{react,vue,compare}/ (DLT-3862):
+#   - <ref> is pr-<number> for a PR into dialtone-react, and the branch name for a push to it (dialtone-react).
+#   - deploy-previews/ is already kept out of the docs deploy's bucket cleanup, so deploy.yml needs no change while the
+#     work lives on dialtone-react. DLT-3864 is the move to /react/ when it merges to staging.
+#   - Everything is uploaded with Cache-Control: no-cache. The bucket's default (an hour) keeps stale and deleted files
+#     visible: a published preview has to show the latest push at once, and a closed PR's must be gone at once.
+#   - The PR comment with the links comes last, after the upload: a URL opened before its files exist gets a 404 that
+#     is itself cached for an hour.
+# dialtone-react-storybook-clean.yml removes a PR's folder when the PR closes.
+name: dialtone-react-storybook
+
+on:
+  push:
+    branches:
+      - dialtone-react
+    paths:
+      - 'packages/dialtone-react/**'
+      - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-emojis/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/src/**'
+      - 'pnpm-lock.yaml'
+      - '.github/actions/setup-environment/**'
+      - '.github/workflows/dialtone-react-storybook.yml'
+  pull_request:
+    branches:
+      - dialtone-react
+    paths:
+      - 'packages/dialtone-react/**'
+      - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-emojis/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/src/**'
+      - 'pnpm-lock.yaml'
+      - '.github/actions/setup-environment/**'
+      - '.github/workflows/dialtone-react-storybook.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  HUSKY: 0
+  # Both jobs restore .nx/cache from actions/cache, and another runner wrote it.
+  NX_REJECT_UNKNOWN_LOCAL_CACHE: '0'
+  BUCKET: gs://dialtone.dialpad.com/deploy-previews/react
+  SITE: https://dialtone.dialpad.com/deploy-previews/react
+  # A PR's folder, or the branch's own (a branch name's slashes can't be part of a path segment here).
+  REF_DIR: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || replace(github.ref_name, '/', '-') }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Only Dialpad members publish. A PR from a fork gets no secrets, so it can't, and it's skipped rather than failed.
+  member:
+    name: member
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check that ${{ github.actor }} is a Dialpad member
+        env:
+          TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          if [[ -z $TOKEN ]]; then echo "::error::DIALTONE_CI_TOKEN isn't available to this run, so membership can't be checked."; exit 1; fi
+          code=$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $TOKEN" "https://api.github.com/orgs/dialpad/members/$ACTOR")
+          # 204 is a member; 404 is not one; anything else means the check itself failed.
+          if [[ $code != 204 ]]; then echo "::error::$ACTOR isn't a Dialpad member (GitHub answered $code), so nothing is published."; exit 1; fi
+
+  build:
+    name: build
+    needs: member
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    # A newer push to a PR supersedes a build that hasn't published yet.
+    concurrency:
+      group: dialtone-react-storybook-build-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-environment
+
+      # Nx's local cache: the css, icons and tokens builds, and Vue's, which every Storybook here starts from.
+      - uses: actions/cache@v4
+        with:
+          path: .nx/cache
+          key: nx-dialtone-react-storybook-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: nx-dialtone-react-storybook-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+
+      # The React Storybook, Vue's, and the comparison one (which reads both built indexes) in one run.
+      - name: Build the three Storybooks
+        run: pnpm nx run dialtone-react:build-storybook:compare
+
+      - name: Assemble the bundle
+        run: |
+          mkdir -p bundle
+          cp -R packages/dialtone-react/storybook-static bundle/react
+          cp -R packages/dialtone-vue/storybook-static bundle/vue
+          cp -R packages/dialtone-react/storybook-static-compare bundle/compare
+          for dir in react vue compare; do test -f "bundle/$dir/index.html" || { echo "::error::bundle/$dir has no index.html"; exit 1; }; done
+          du -sh bundle/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storybook-bundle
+          path: bundle
+          retention-days: 1
+          if-no-files-found: error
+
+  publish:
+    name: publish
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
+    # One upload per ref at a time, and none cut short: a cancelled upload would leave half a bundle. A newer one waits.
+    concurrency:
+      group: dialtone-react-storybook-publish-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: storybook-bundle
+          path: bundle
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      # Replaces the folder in place: files that are the same stay, new and changed ones are uploaded, and ones this
+      # build no longer has (a story that was removed) are deleted. no-cache is the metadata, so a request after this
+      # sees the new files at once.
+      - name: Upload to ${{ env.BUCKET }}/${{ env.REF_DIR }}/
+        run: |
+          gcloud storage rsync bundle "$BUCKET/$REF_DIR" \
+            --recursive --checksums-only --delete-unmatched-destination-objects --cache-control=no-cache
+
+      - name: Summary
+        run: |
+          {
+            echo "### React Storybook previews for \`$REF_DIR\`"
+            echo "- React: $SITE/$REF_DIR/react/"
+            echo "- Vue, from the same commit: $SITE/$REF_DIR/vue/"
+            echo "- Side by side: $SITE/$REF_DIR/compare/"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # After the upload, never before: see the note at the top.
+  comment:
+    name: comment
+    needs: publish
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Add comment
+        uses: mshick/add-pr-comment@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            ✔️ React Storybook previews ready (${{ github.event.pull_request.head.sha }})
+            😎 React: ${{ env.SITE }}/${{ env.REF_DIR }}/react/
+            😎 Vue, from the same commit: ${{ env.SITE }}/${{ env.REF_DIR }}/vue/
+            😎 Side by side: ${{ env.SITE }}/${{ env.REF_DIR }}/compare/
+          message-id: 'dialtone-react-storybook-preview'
+          refresh-message-position: true
