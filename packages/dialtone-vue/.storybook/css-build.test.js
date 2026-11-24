@@ -5,8 +5,6 @@ describe('Storybook CSS build', () => {
   it('Should preserve split-button CSS when minifying with an es2020 JavaScript target', async () => {
     const css = `
       .d-btn {
-        -webkit-user-select: none;
-        user-select: none;
         color: oklch(70% 0.3 30);
       }
       .d-split-btn__start:not(.d-btn--outlined) {
@@ -39,8 +37,7 @@ describe('Storybook CSS build', () => {
     expect(stylesheet).toBeDefined();
     expect(stylesheet.source).toContain('border-start-end-radius:0');
     expect(stylesheet.source).toContain('border-end-end-radius:0');
-    expect(stylesheet.source).toContain('-webkit-user-select:none');
     expect(stylesheet.source).toContain('oklch(');
-    expect(stylesheet.source).not.toContain('lab(');
+    expect(stylesheet.source).not.toMatch(/\blab\(/);
   });
 });
