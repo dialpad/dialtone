@@ -32,19 +32,39 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      pull-requests: read
     env:
       FOLDER: gs://dialtone.dialpad.com/deploy-previews/react/pr-${{ github.event.pull_request.number }}/
     steps:
+      # Inside the lock, so a PR that closed and reopened before this got its turn keeps the preview its new publish
+      # made. Group dispatch order isn't guaranteed, and nothing would recreate a preview deleted here.
+      - id: state
+        name: Check that the PR is still closed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          reopened=false
+          if [[ $(gh api "repos/$REPO/pulls/$PR" --jq .state) == open ]]; then
+            reopened=true
+            echo "PR $PR was reopened, so its preview stays."
+          fi
+          echo "reopened=$reopened" >> "$GITHUB_OUTPUT"
+
       - id: auth
         name: Authenticate to Google Cloud
+        if: ${{ steps.state.outputs.reopened != 'true' }}
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
       - uses: google-github-actions/setup-gcloud@v2
+        if: ${{ steps.state.outputs.reopened != 'true' }}
 
       - name: Remove the preview
+        if: ${{ steps.state.outputs.reopened != 'true' }}
         shell: bash
         run: |
           # No folder just means nothing was published for this PR (its changes didn't touch the Storybooks).
