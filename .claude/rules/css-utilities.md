@@ -7,7 +7,7 @@ paths:
 
 ## File Location
 
-Utilities live in `packages/dialtone-css/lib/build/less/utilities/`. The 11 files: `backgrounds.less`, `borders.less`, `colors.less`, `effects.less`, `flex.less`, `grid.less`, `interactivity.less`, `layout.less`, `sizing.less`, `spacing.less`, `typography.less`.
+Token-stop utilities (such as `d-p-100`) are generated from `packages/dialtone-css/postcss/constants.cjs` through `dialtone-generators.cjs`; they are in no Less file. Hand-written utilities live in `packages/dialtone-css/lib/build/less/utilities/`. The 11 files: `backgrounds.less`, `borders.less`, `colors.less`, `effects.less`, `flex.less`, `grid.less`, `interactivity.less`, `layout.less`, `sizing.less`, `spacing.less`, `typography.less`.
 
 ## Naming Convention
 
@@ -47,11 +47,11 @@ ALWAYS use `var(--dt-*)` custom properties. Never hardcode raw values.
 
 ```less
 // CORRECT
-.d-p-100 {
+.d-example {
   padding: var(--dt-spacing-100);
 }
 // WRONG
-.d-p-100 {
+.d-example {
   padding: 8px;
 }
 ```

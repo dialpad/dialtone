@@ -46,7 +46,7 @@ Prefer a semantic token over a base one.
 ### 2. Naming
 
 - Logical names: `logical-naming.md`.
-- Match the numeric scale the neighbours use: read two or three siblings, for classes in `constants.cjs`, for tokens in the same JSON file (`spacing.400`, `--dt-spacing-400`). Do not add a new scale step when one is near.
+- Match the numeric scale the neighbors use: read two or three siblings, for classes in `constants.cjs`, for tokens in the same JSON file (`spacing.400`, `--dt-spacing-400`). Do not add a new scale step when one is near.
 
 ### 3. Build It
 
@@ -59,8 +59,8 @@ Utilities (`css-utilities.md`). Most are generated, not written in Less. Token-s
 
 Tokens (`design-tokens.md`):
 
-- Base values go in `tokens/base/` (`default.json`, with palettes in `material/` and `refs/`; `spacing.base` is in `root.json`). Semantic tokens live in `tokens/theme/dp/` (`default`, `dark`, `high-contrast`, `high-contrast-dark`); the other folders under `tokens/theme/` are further themes. Component tokens go in `tokens/components/<component>/`.
-- A new semantic token goes in `tokens/theme/dp/default.json`, plus `dp/dark.json` and the high-contrast pair only where the value differs. The other theme folders are small brand overrides layered on dp: touch one only when that brand needs a different value. `.coderabbit.yaml` asks for "all 8 themes"; in the files, that means the dp set plus any brand override.
+- Base values go in `tokens/base/` (`default.json`, with palettes in `material/` and `refs/`; `spacing.base` is in `tokens/root.json`). Semantic tokens live in `tokens/theme/dp/` (`default`, `dark`, `high-contrast`, `high-contrast-dark`); the other folders under `tokens/theme/` are further themes. Component tokens go in `tokens/components/<component>/`.
+- A new semantic token goes in `tokens/theme/dp/default.json`, then check dark mode and high contrast: add the `dp/dark.json` override and the high-contrast pair wherever the value differs. The other theme folders are small brand overrides layered on dp: touch one only when that brand needs a different value. `.coderabbit.yaml` asks for "all 8 themes"; in the files, that means the dp set plus any brand override.
 - Dark values: palette and shadow tokens go in `tokens/base/dark.json` (it only holds `color` and `shadow`); semantic tokens go in `tokens/theme/<theme>/dark.json`.
 - References use the source keys: `{color.black.900}`, `{size.400}`, `{spacing.base}`. No circular or missing references.
 - Leave `tokens/$metadata.json` build order alone unless you have read the dependency chain.
