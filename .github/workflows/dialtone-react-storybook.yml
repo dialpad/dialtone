@@ -116,7 +116,11 @@ jobs:
           cp -R packages/dialtone-vue/storybook-static bundle/vue
           cp -R packages/dialtone-react/storybook-static-compare bundle/compare
           for dir in react vue compare; do test -f "bundle/$dir/index.html" || { echo "::error::bundle/$dir has no index.html"; exit 1; }; done
+          # Which commit a preview shows. It changes on every build, so a new push is always visible in the folder.
+          printf '{"sha":"%s","ref":"%s","built":"%s"}\n' "$HEAD_SHA" "$GITHUB_REF" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > bundle/build.json
           du -sh bundle/*
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - uses: actions/upload-artifact@v4
         with:
