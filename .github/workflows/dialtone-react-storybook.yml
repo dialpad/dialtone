@@ -149,7 +149,7 @@ jobs:
       group: dialtone-react-storybook-publish-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
       cancel-in-progress: false
     steps:
-      # Inside the lock, so a PR that closed while this waited for its turn (or while it built) uploads nothing. A close
+      # Inside the lock, so a PR that closed while this waited for its turn (or while it built) uploads nothing, and is cleaned below. A close
       # that comes after this check queues the cleanup behind this job, which removes what it uploads.
       - id: state
         name: Check that the PR is still open
@@ -161,7 +161,7 @@ jobs:
           skipped=false
           if [[ -n $PR ]] && [[ $(gh api "repos/$REPO/pulls/$PR" --jq .state) != open ]]; then
             skipped=true
-            echo "PR $PR is closed, so nothing is published."
+            echo "PR $PR is closed, so its preview is removed, not published."
           fi
           echo "skipped=$skipped" >> "$GITHUB_OUTPUT"
 
@@ -171,16 +171,30 @@ jobs:
           name: storybook-bundle
           path: bundle
 
+      # Needed either way: to upload, or to remove a closed PR's preview below.
       - id: auth
         name: Authenticate to Google Cloud
-        if: ${{ steps.state.outputs.skipped != 'true' }}
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
-      - if: ${{ steps.state.outputs.skipped != 'true' }}
-        uses: google-github-actions/setup-gcloud@v2
+      - uses: google-github-actions/setup-gcloud@v2
+
+      # The PR is closed, so nothing is uploaded, and an upload that ran before this one is removed here, under the same
+      # lock. The clean workflow does that too, but a group holds one pending job: a publish that queues behind a running
+      # one can replace the cleanup that was waiting, and it would otherwise leave that upload public.
+      - name: Remove the closed PR's preview
+        if: ${{ steps.state.outputs.skipped == 'true' }}
+        run: |
+          if out=$(gcloud storage ls "$BUCKET/$REF_DIR/" 2>&1); then
+            gcloud storage rm --recursive "$BUCKET/$REF_DIR/"
+          elif grep -q "matched no objects" <<< "$out"; then
+            echo "Nothing was published for this PR."
+          else
+            echo "::error::Couldn't list $BUCKET/$REF_DIR/: $out"
+            exit 1
+          fi
 
       # Replaces the folder in place: files that are the same stay, new and changed ones are uploaded, and ones this
       # build no longer has (a story that was removed) are deleted. no-cache is the metadata, so a request after this
