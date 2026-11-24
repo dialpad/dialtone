@@ -45,10 +45,13 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
         run: |
-          reopened=false
-          if [[ $(gh api "repos/$REPO/pulls/$PR" --jq .state) == open ]]; then
-            reopened=true
-            echo "PR $PR was reopened, so its preview stays."
+          # Its own command, so a failed lookup fails the step instead of reading as "not open" and deleting the preview.
+          state=$(gh api "repos/$REPO/pulls/$PR" --jq .state)
+          reopened=true
+          if [[ $state == closed ]]; then
+            reopened=false
+          else
+            echo "PR $PR is $state, not closed, so its preview stays."
           fi
           echo "reopened=$reopened" >> "$GITHUB_OUTPUT"
 
