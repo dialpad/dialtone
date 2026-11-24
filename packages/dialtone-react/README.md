@@ -64,3 +64,5 @@ CI publishes all three Storybooks as a preview (`.github/workflows/dialtone-reac
 Each folder holds `react/` (this package's Storybook), `vue/` (Vue's, built from the same commit) and `compare/` (the side-by-side one, whose frames are the `react/` and `vue/` folders next to it). `build.json` in the folder names the commit and the time of the build. A PR gets a comment with the links once the upload has finished. Only Dialpad members publish, and a PR from a fork doesn't. `dialtone-react-storybook-clean.yml` removes a PR's folder when it closes.
 
 To build the same bundle locally: `pnpm nx run dialtone-react:build-storybook:compare`, then serve `storybook-static/` (React), `../dialtone-vue/storybook-static/` (Vue) and `storybook-static-compare/` as `react/`, `vue/` and `compare/` of one folder.
+
+The `dialtone-react` branch itself is published at `https://dialtone.dialpad.com/deploy-previews/react/dialtone-react/` after every push that touches those paths.
