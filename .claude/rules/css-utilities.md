@@ -47,11 +47,11 @@ ALWAYS use `var(--dt-*)` custom properties. Never hardcode raw values.
 
 ```less
 // CORRECT
-.d-example {
+.d-p-100 {
   padding: var(--dt-spacing-100);
 }
 // WRONG
-.d-example {
+.d-p-100 {
   padding: 8px;
 }
 ```
