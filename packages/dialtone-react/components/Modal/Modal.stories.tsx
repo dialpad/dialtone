@@ -17,8 +17,9 @@ import { DtTooltip } from '../Tooltip';
 import { DtModal, type DtModalProps } from './Modal';
 import { MODAL_KIND_MODIFIERS } from './ModalConstants';
 
+import { asset } from '../../.storybook/asset';
 // Vue imports this file; Storybook serves Vue's assets directory at the root.
-const imageSrc = '/test.jpg';
+const imageSrc = asset('test.jpg');
 
 // Slots are args named as in Vue: `default`, `banner`, `header` and `footer` are HTML strings, as ModalDefault.story.vue
 // renders them with v-html. `showFooter` and `onClose` are that template's own inputs.

@@ -5,7 +5,19 @@ import ports from './ports.json';
 export type Side = 'vue' | 'react';
 export type Args = Record<string, unknown>;
 
-export const origin = (side: Side) => `http://localhost:${ports[side]}`;
+// Where each Storybook is served. While developing, the localhost ports. In the published bundle
+// (STORYBOOK_COMPARE_PUBLISHED, set by the build), the folders next to this Storybook's own: compare/ sits beside
+// react/ and vue/, whatever the path the bundle is served under.
+const published = import.meta.env.STORYBOOK_COMPARE_PUBLISHED === 'true';
+
+export const origin = (side: Side) => (published
+  ? new URL(`../${side}`, document.baseURI).href
+  : `http://localhost:${ports[side]}`);
+
+/** Where a Storybook is, as shown to the reader. */
+export const where = (side: Side) => (published ? `../${side}/` : `:${ports[side]}`);
+
+export const isPublished = published;
 
 // Storybook's own URL encoding (the manager's), which drops values it deems
 // unsafe: strings other than letters, digits, spaces, `_` and `-`, numbers or

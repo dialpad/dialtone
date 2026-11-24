@@ -53,6 +53,24 @@
         "command": "node compare/check-ports.mjs"
       }
     },
+    "build-storybook": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build"],
+      "outputs": ["{projectRoot}/storybook-static"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node scripts/build-icons.mjs && STORYBOOK_ENV=production pnpm exec storybook build -o storybook-static"
+      }
+    },
+    "build-storybook:compare": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build-storybook", "dialtone-css:build", "dialtone-tokens:build", "dialtone-vue:build-storybook"],
+      "outputs": ["{projectRoot}/storybook-static-compare"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node compare/generate-stories.mjs --vue-index ../dialtone-vue/storybook-static/index.json --react-index storybook-static/index.json && STORYBOOK_COMPARE_PUBLISHED=true pnpm exec storybook build -c compare/.storybook -o storybook-static-compare"
+      }
+    },
     "storybook:all": {
       "executor": "nx:run-commands",
       "dependsOn": [{ "target": "storybook:ports" }, "dialtone-css:build", "dialtone-icons:build", "dialtone-tokens:build", "dialtone-vue:build-functions"],

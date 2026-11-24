@@ -16,6 +16,7 @@ import { DtStack } from '../Stack';
 import { DtAvatar, type DtAvatarProps } from './Avatar';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES, type AvatarSize } from './AvatarConstants';
 
+import { asset } from '../../.storybook/asset';
 // `iconName` and `overlayIcon` name an icon, as in Vue: the templates render it into the matching slot.
 type AvatarStoryArgs = Omit<DtAvatarProps, 'overlayIcon'> & {
   iconName?: IconName;
@@ -27,7 +28,7 @@ type AvatarStoryArgs = Omit<DtAvatarProps, 'overlayIcon'> & {
 const ICONS_LIST = [undefined, ...ICON_NAMES];
 
 // Served from dialtone-vue's assets (the Storybook's staticDirs), the file Vue's story imports.
-const defaultImage = '/avatar2.png';
+const defaultImage = asset('avatar2.png');
 
 export const argsData = {
   onClick: action('click'),

@@ -5,7 +5,9 @@
 // story renders <CompareFrame>, which shows Vue and React side by side.
 //
 // Waits for Vue's index.json first (the Vue Storybook can take minutes to come
-// up cold). Usage: node compare/generate-stories.mjs [--timeout <seconds>]
+// up cold). With --vue-index and --react-index, reads the indexes of built Storybooks from those files instead and
+// doesn't wait: CI builds both first.
+// Usage: node compare/generate-stories.mjs [--timeout <seconds>] [--vue-index <file>] [--react-index <file>]
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -16,6 +18,14 @@ const outDir = join(here, 'generated');
 const ports = JSON.parse(await readFile(join(here, 'ports.json'), 'utf8'));
 const indexUrl = `http://localhost:${ports.vue}/index.json`;
 const reactIndexUrl = `http://localhost:${ports.react}/index.json`;
+
+const option = name => {
+  const at = process.argv.indexOf(name);
+  return at === -1 ? null : process.argv[at + 1];
+};
+const vueIndexFile = option('--vue-index');
+const reactIndexFile = option('--react-index');
+const readIndexFile = async file => JSON.parse(await readFile(file, 'utf8'));
 
 const timeoutArg = process.argv.indexOf('--timeout');
 const timeoutSeconds = timeoutArg === -1 ? 600 : Number(process.argv[timeoutArg + 1]);
@@ -62,7 +72,7 @@ const fileNameFor = importPath => importPath
   .replace(/\.stories\.[cm]?[jt]sx?$/, '')
   .replace(/[^a-zA-Z0-9]+/g, '_') + '.stories.tsx';
 
-const index = await fetchVueIndex();
+const index = vueIndexFile ? await readIndexFile(vueIndexFile) : await fetchVueIndex();
 const stories = Object.values(index.entries).filter(entry => entry.type === 'story');
 
 // Group by CSF file, keeping Vue's order (export order within each file).
@@ -135,7 +145,7 @@ if (mismatches.length) {
 
 // React stories Vue doesn't have: most likely a ported story with the wrong
 // title or export name, which the comparison would show as "Not ported yet".
-const reactIndex = await fetchReactIndex();
+const reactIndex = reactIndexFile ? await readIndexFile(reactIndexFile) : await fetchReactIndex();
 if (!reactIndex) {
   console.log(`compare: React's story index didn't answer at ${reactIndexUrl}; skipped the check for React-only story ids.`);
 } else {

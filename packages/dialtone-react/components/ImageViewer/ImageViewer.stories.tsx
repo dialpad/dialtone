@@ -4,9 +4,10 @@ import { action } from 'storybook/actions';
 import { DtStack } from '../Stack';
 import { DtImageViewer, type DtImageViewerProps } from './ImageViewer';
 
+import { asset } from '../../.storybook/asset';
 // Vue imports these files; Storybook serves Vue's assets directory at the root.
-const defaultImage = '/test.jpg';
-const fryImage = '/fry.gif';
+const defaultImage = asset('test.jpg');
+const fryImage = asset('fry.gif');
 
 // Default Prop Values
 export const argsData = {

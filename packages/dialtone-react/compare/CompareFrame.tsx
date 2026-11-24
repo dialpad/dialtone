@@ -10,13 +10,14 @@ import type { ArgType } from './ArgControls';
 import {
   fetchStories,
   iframeUrl,
+  isPublished,
   overridesParam,
   parseChannelMessage,
   postChannelEvent,
   storybookUrl,
+  where,
 } from './frames';
 import type { Args, IndexedStory, Side } from './frames';
-import ports from './ports.json';
 import { readStoredDarkMode } from '../.storybook/shared';
 
 interface Prepared {
@@ -153,7 +154,7 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
       <div className="compare__pane-header">
         <strong>{label}</strong>
         <a href={storybookUrl(side, storyId, args, globals)} target="_blank" rel="noreferrer">
-          Open in {label} Storybook (:{ports[side]})
+          Open in {label} Storybook ({where(side)})
         </a>
       </div>
       {side === 'react' && reactStatus !== 'ported'
@@ -234,8 +235,12 @@ function NotPorted ({ status, storyId, lookalikes }: { status: ReactStatus; stor
           <>
             <strong>React Storybook not running</strong>
             <span>
-              Nothing answers on :{ports.react}. Start it with <code>pnpm nx run dialtone-react:storybook</code>;
-              {' '}this pane picks it up once it answers.
+              {isPublished
+                ? <>Nothing answers at <code>{where('react')}</code>, next to this Storybook. The published bundle should include it.</>
+                : <>
+                  Nothing answers on {where('react')}. Start it with <code>pnpm nx run dialtone-react:storybook</code>;
+                  {' '}this pane picks it up once it answers.
+                </>}
             </span>
           </>
         )}

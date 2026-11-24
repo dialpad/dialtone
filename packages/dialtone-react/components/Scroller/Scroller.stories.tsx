@@ -5,6 +5,7 @@ import { action } from 'storybook/actions';
 import { DtAvatar } from '../Avatar';
 import { DtScroller, type DtScrollerHandle, type DtScrollerProps, type ScrollerUserPosition } from './Scroller';
 
+import { asset } from '../../.storybook/asset';
 interface User {
   id: number;
   name: string;
@@ -299,7 +300,7 @@ function ScrollerDefault (args: ScrollerStoryArgs) {
 }
 
 // dialtone-vue's story imports its own person.png, which isn't in the Storybook's static files; this one is.
-const defaultAvatar = '/avatar1.png';
+const defaultAvatar = asset('avatar1.png');
 
 const messages = [
   'lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor,nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam',
