@@ -2,6 +2,9 @@
 # (DLT-3862). Unlike clean-preview.yml, a failure to remove it fails the run: an orphaned preview stays public.
 # It uses pull_request, not pull_request_target: a closed-PR run of the latter was never registered or triggered for this
 # workflow. It checks nothing out, and the job skips fork PRs, which get no secrets (and publish no preview).
+# Known gap, accepted: GitHub doesn't run pull_request workflows for a PR with a merge conflict, so a PR that publishes a
+# preview, then conflicts with dialtone-react, and is closed without merging keeps its pr-<number>/ folder until someone
+# removes it by hand. The same gap exists for the Vue previews.
 name: dialtone-react-storybook-clean
 
 on:
