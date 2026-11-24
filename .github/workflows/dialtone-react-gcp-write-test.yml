@@ -124,3 +124,28 @@ jobs:
             echo "GET /orgs/dialpad/members/$user -> $code"
           done
           echo "(204 = member, 404 = not a member, 302 = the token owner can't see membership)"
+
+      - name: Does no-cache hold? Upload, overwrite and delete, fetching the public URL after each
+        continue-on-error: true
+        run: |
+          set -u
+          dir="react/_cache-test/$RUN"
+          url="https://dialtone.dialpad.com/$dir/index.json"
+          tmp=$(mktemp -d)
+          show() {
+            code=$(curl -s -o "$tmp/body" -w '%{http_code}' "$url")
+            headers=$(curl -sI "$url" | grep -iE '^(cache-control|age|etag):' | tr -d '\r' | tr '\n' ' ')
+            echo "$1: $code body=$(head -c 30 "$tmp/body" | tr '\n' ' ') | $headers"
+          }
+          printf '{"version":1}' > "$tmp/index.json"
+          gcloud storage cp --cache-control=no-cache "$tmp/index.json" "$BUCKET/$dir/index.json" 2>&1 | tail -1
+          show "1  after upload      "
+          show "1b fetched again     "
+          printf '{"version":2}' > "$tmp/index.json"
+          gcloud storage cp --cache-control=no-cache "$tmp/index.json" "$BUCKET/$dir/index.json" 2>&1 | tail -1
+          show "2  after overwrite   "
+          gcloud storage rm "$BUCKET/$dir/index.json" 2>&1 | tail -1
+          show "3  right after delete"
+          sleep 5
+          show "3b 5s after delete   "
+          echo "(want: 1 and 1b version 1; 2 version 2; 3 and 3b 404)"
