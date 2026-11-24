@@ -84,3 +84,43 @@ jobs:
         run: |
           left=$(gcloud storage ls "$BUCKET/react/" 2>&1 || true)
           echo "react/ now holds: ${left:-nothing}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Is it served? Upload small files, fetch their public URLs, delete them
+        continue-on-error: true
+        run: |
+          set -u
+          dir="react/_serve-test/$RUN"
+          tmp=$(mktemp -d)
+          printf '<!doctype html><title>serve test</title><p>ok' > "$tmp/index.html"
+          printf '<!doctype html><title>iframe</title>' > "$tmp/iframe.html"
+          printf '{"v":5,"entries":{}}' > "$tmp/index.json"
+          printf 'export const x = 1;\n' > "$tmp/module.js"
+          printf 'body{color:red}\n' > "$tmp/style.css"
+          printf 'font' > "$tmp/font.woff2"
+          gcloud storage cp "$tmp"/* "$BUCKET/$dir/" 2>&1 | tail -2
+          echo "--- immediately after upload"
+          for path in "" index.html iframe.html index.json module.js style.css font.woff2 missing.html; do
+            url="https://dialtone.dialpad.com/$dir/$path"
+            out=$(curl -s -o /dev/null -w '%{http_code} type=%{content_type} redirect=%{redirect_url}' "$url")
+            echo "GET /$dir/$path -> $out"
+          done
+          echo "--- headers on index.json"
+          curl -sI "https://dialtone.dialpad.com/$dir/index.json" | grep -iE "^(HTTP|cache-control|content-type|access-control|x-goog|server|via|age)" || true
+          echo "--- cleanup"
+          gcloud storage rm --recursive "$BUCKET/$dir/" 2>&1 | tail -2
+          sleep 5
+          echo "after delete: $(curl -s -o /dev/null -w '%{http_code}' "https://dialtone.dialpad.com/$dir/index.html")"
+
+      - name: Member check as deploy.yml does it, with a non-member control
+        continue-on-error: true
+        env:
+          TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+        run: |
+          set -u
+          if [ -z "$TOKEN" ]; then echo "DIALTONE_CI_TOKEN is not available in this event: ${{ github.event_name }}"; exit 1; fi
+          for user in "${{ github.actor }}" octocat; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $TOKEN" \
+              "https://api.github.com/orgs/dialpad/members/$user")
+            echo "GET /orgs/dialpad/members/$user -> $code"
+          done
+          echo "(204 = member, 404 = not a member, 302 = the token owner can't see membership)"
