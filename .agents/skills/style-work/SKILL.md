@@ -52,7 +52,7 @@ Prefer a semantic token over a base one.
 
 Utilities (`css-utilities.md`). Most are generated, not written in Less. Token-stop padding, margin, gap, sizing, position, color, border and grid classes come from `constants.cjs` (for example `SPACING_STOPS`, `PADDING_SIZES_SPACING`) through `dialtone-generators.cjs`; `d-p-100` is in no Less file.
 
-- A new scale class means adding the stop to `constants.cjs`. A new spacing stop also needs its `spacing.<stop>` and `spacing.<stop>-negative` tokens in `tokens/base/default.json`: the margin, padding, gap and position generators emit `var(--dt-spacing-<stop>)` and `var(--dt-spacing-<stop>-negative)`, and without the tokens the class has no value. Write hand-made Less only for a one-off class, in the existing file for that CSS property.
+- A new scale class means adding the stop to `constants.cjs`. Each generated stop reads a token, and without it the class has no value: a `SPACING_STOPS` stop needs `spacing.<stop>` and `spacing.<stop>-negative`, a `LAYOUT_STOPS` stop needs `layout.<stop>`, and a `RADIUS_STOPS` stop needs `size.radius.<stop>`, all in `tokens/base/default.json`. For any other scale, grep `dialtone-generators.cjs` for the `var(--dt-*)` it emits and add that token. Write hand-made Less only for a one-off class, in the existing file for that CSS property.
 - Color utilities are generated as OKLCH relative colors; read `dialtone-generators.cjs` before debugging their output.
 - Responsive variants (`sm:`, `md:`, `lg:`, `xl:`) come from `postcss-responsive-variations`. Add one only for a clear use case.
 - Specificity: `.agents/skills/pr-prep/references/specialists/css.md`.
