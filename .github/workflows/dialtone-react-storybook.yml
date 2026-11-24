@@ -50,8 +50,6 @@ env:
   NX_REJECT_UNKNOWN_LOCAL_CACHE: '0'
   BUCKET: gs://dialtone.dialpad.com/deploy-previews/react
   SITE: https://dialtone.dialpad.com/deploy-previews/react
-  # A PR's folder, or the branch's own (a branch name's slashes can't be part of a path segment here).
-  REF_DIR: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || replace(github.ref_name, '/', '-') }}
 
 defaults:
   run:
@@ -63,7 +61,19 @@ jobs:
     name: member
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
+    outputs:
+      ref_dir: ${{ steps.ref.outputs.dir }}
     steps:
+      # The preview's folder: pr-<number> for a PR, else the branch's name with its slashes made dashes.
+      - id: ref
+        name: Name the folder
+        env:
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          if [[ -n $PR ]]; then dir="pr-$PR"; else dir="${GITHUB_REF_NAME//\//-}"; fi
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+          echo "Folder: $dir"
+
       - name: Check that ${{ github.actor }} is a Dialpad member
         env:
           TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
@@ -117,9 +127,11 @@ jobs:
 
   publish:
     name: publish
-    needs: build
+    needs: [member, build]
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      REF_DIR: ${{ needs.member.outputs.ref_dir }}
     permissions:
       contents: read
       id-token: write
@@ -162,9 +174,11 @@ jobs:
   # After the upload, never before: see the note at the top.
   comment:
     name: comment
-    needs: publish
+    needs: [member, publish]
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
+    env:
+      REF_DIR: ${{ needs.member.outputs.ref_dir }}
     permissions:
       pull-requests: write
     steps:
