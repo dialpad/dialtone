@@ -13,7 +13,7 @@ Add as little CSS as possible. Reuse an existing class or token first; build a n
 
 - Editing `packages/dialtone-css/lib/build/less/**`, `packages/dialtone-css/postcss/constants.cjs` or `dialtone-generators.cjs`.
 - Editing `packages/dialtone-tokens/tokens/**`.
-- A component needs a size, space, colour or radius value and no class or token is named yet.
+- A component needs a size, space, color or radius value and no class or token is named yet.
 
 ## Required Context
 
@@ -50,10 +50,10 @@ Prefer a semantic token over a base one.
 
 ### 3. Build It
 
-Utilities (`css-utilities.md`). Most are generated, not written in Less. Token-stop padding, margin, gap, sizing, position, colour, border and grid classes come from `constants.cjs` (for example `SPACING_STOPS`, `PADDING_SIZES_SPACING`) through `dialtone-generators.cjs`; `d-p-100` is in no Less file.
+Utilities (`css-utilities.md`). Most are generated, not written in Less. Token-stop padding, margin, gap, sizing, position, color, border and grid classes come from `constants.cjs` (for example `SPACING_STOPS`, `PADDING_SIZES_SPACING`) through `dialtone-generators.cjs`; `d-p-100` is in no Less file.
 
 - A new scale class means adding the stop to `constants.cjs`. Write hand-made Less only for a one-off class, in the existing file for that CSS property.
-- Colour utilities are generated as OKLCH relative colours; read `dialtone-generators.cjs` before debugging their output.
+- Color utilities are generated as OKLCH relative colors; read `dialtone-generators.cjs` before debugging their output.
 - Responsive variants (`sm:`, `md:`, `lg:`, `xl:`) come from `postcss-responsive-variations`. Add one only for a clear use case.
 - Specificity: `.agents/skills/pr-prep/references/specialists/css.md`.
 
