@@ -1,0 +1,86 @@
+# DLT-3861: can the Actions service account write what the React Storybook publish needs? Throwaway: delete it with
+# the spike. Each probe runs even when an earlier one fails, and the summary lists what each one got.
+name: dialtone-react-gcp-write-test
+
+on:
+  push:
+    branches:
+      - chore/DLT-3861-react-storybook-gcp-write-test
+    paths:
+      - '.github/workflows/dialtone-react-gcp-write-test.yml'
+  pull_request:
+    branches:
+      - dialtone-react
+    paths:
+      - '.github/workflows/dialtone-react-gcp-write-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  BUCKET: gs://dialtone.dialpad.com
+  RUN: ${{ github.run_id }}-${{ github.run_attempt }}
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Context
+        run: |
+          {
+            echo "### Context"
+            echo "event=${{ github.event_name }} ref=${{ github.ref }} actor=${{ github.actor }}"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Identity
+        run: gcloud auth list 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: List the bucket root
+        continue-on-error: true
+        run: |
+          if out=$(gcloud storage ls "$BUCKET/" 2>&1); then result=ok; else result=FAILED; fi
+          echo "$out" | head -30
+          echo "- list bucket root: $result" >> "$GITHUB_STEP_SUMMARY"
+          [ "$result" = ok ]
+
+      - name: Write, read back and delete under react/_write-test/
+        continue-on-error: true
+        run: |
+          set -u
+          obj="$BUCKET/react/_write-test/$RUN.txt"
+          result="FAILED"
+          if echo "write-test $RUN" | gcloud storage cp - "$obj" \
+            && [ "$(gcloud storage cat "$obj")" = "write-test $RUN" ] \
+            && gcloud storage rm "$obj"; then result="ok"; fi
+          echo "- write/read/delete react/_write-test/: $result" >> "$GITHUB_STEP_SUMMARY"
+          [ "$result" = ok ]
+
+      - name: Write and recursively delete under react/deploy-previews/pr-0/
+        continue-on-error: true
+        run: |
+          set -u
+          dir="$BUCKET/react/deploy-previews/pr-0/_write-test-$RUN"
+          result="FAILED"
+          if echo "a" | gcloud storage cp - "$dir/a.txt" \
+            && echo "b" | gcloud storage cp - "$dir/nested/b.txt" \
+            && gcloud storage ls --recursive "$dir/" \
+            && gcloud storage rm --recursive "$dir/"; then result="ok"; fi
+          echo "- write and rm --recursive react/deploy-previews/pr-0/: $result" >> "$GITHUB_STEP_SUMMARY"
+          [ "$result" = ok ]
+
+      - name: Nothing left behind
+        continue-on-error: true
+        run: |
+          left=$(gcloud storage ls "$BUCKET/react/" 2>&1 || true)
+          echo "react/ now holds: ${left:-nothing}" | tee -a "$GITHUB_STEP_SUMMARY"
