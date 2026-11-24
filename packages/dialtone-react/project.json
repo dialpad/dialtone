@@ -65,6 +65,7 @@
     "build-storybook:compare": {
       "executor": "nx:run-commands",
       "dependsOn": ["build-storybook", "dialtone-css:build", "dialtone-tokens:build", "dialtone-vue:build-storybook"],
+      "inputs": ["default", "^default", { "dependentTasksOutputFiles": "**/index.json" }],
       "outputs": ["{projectRoot}/storybook-static-compare"],
       "options": {
         "cwd": "{projectRoot}",

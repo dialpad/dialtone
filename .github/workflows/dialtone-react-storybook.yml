@@ -117,7 +117,8 @@ jobs:
           cp -R packages/dialtone-react/storybook-static-compare bundle/compare
           for dir in react vue compare; do test -f "bundle/$dir/index.html" || { echo "::error::bundle/$dir has no index.html"; exit 1; }; done
           # Which commit a preview shows. It changes on every build, so a new push is always visible in the folder.
-          printf '{"sha":"%s","ref":"%s","built":"%s"}\n' "$HEAD_SHA" "$GITHUB_REF" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > bundle/build.json
+          # sha is the commit that was built (for a PR, GitHub's merge of it into the base); head is the PR's own tip.
+          printf '{"sha":"%s","head":"%s","ref":"%s","built":"%s"}\n' "$GITHUB_SHA" "$HEAD_SHA" "$GITHUB_REF" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > bundle/build.json
           du -sh bundle/*
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -136,37 +137,62 @@ jobs:
     timeout-minutes: 20
     env:
       REF_DIR: ${{ needs.member.outputs.ref_dir }}
+    outputs:
+      skipped: ${{ steps.state.outputs.skipped }}
     permissions:
       contents: read
       id-token: write
+      pull-requests: read
     # One upload per ref at a time, and none cut short: a cancelled upload would leave half a bundle. A newer one waits.
+    # dialtone-react-storybook-clean.yml uses this group for the PR too, so a close waits for an upload that is running.
     concurrency:
       group: dialtone-react-storybook-publish-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
       cancel-in-progress: false
     steps:
-      - uses: actions/download-artifact@v4
+      # Inside the lock, so a PR that closed while this waited for its turn (or while it built) uploads nothing. A close
+      # that comes after this check queues the cleanup behind this job, which removes what it uploads.
+      - id: state
+        name: Check that the PR is still open
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          skipped=false
+          if [[ -n $PR ]] && [[ $(gh api "repos/$REPO/pulls/$PR" --jq .state) != open ]]; then
+            skipped=true
+            echo "PR $PR is closed, so nothing is published."
+          fi
+          echo "skipped=$skipped" >> "$GITHUB_OUTPUT"
+
+      - if: ${{ steps.state.outputs.skipped != 'true' }}
+        uses: actions/download-artifact@v4
         with:
           name: storybook-bundle
           path: bundle
 
       - id: auth
         name: Authenticate to Google Cloud
+        if: ${{ steps.state.outputs.skipped != 'true' }}
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
           service_account: ${{ secrets.DIALTONE_GCP_SA }}
 
-      - uses: google-github-actions/setup-gcloud@v2
+      - if: ${{ steps.state.outputs.skipped != 'true' }}
+        uses: google-github-actions/setup-gcloud@v2
 
       # Replaces the folder in place: files that are the same stay, new and changed ones are uploaded, and ones this
       # build no longer has (a story that was removed) are deleted. no-cache is the metadata, so a request after this
       # sees the new files at once.
       - name: Upload to ${{ env.BUCKET }}/${{ env.REF_DIR }}/
+        if: ${{ steps.state.outputs.skipped != 'true' }}
         run: |
           gcloud storage rsync bundle "$BUCKET/$REF_DIR" \
             --recursive --checksums-only --delete-unmatched-destination-objects --cache-control=no-cache
 
       - name: Summary
+        if: ${{ steps.state.outputs.skipped != 'true' }}
         run: |
           {
             echo "### React Storybook previews for \`$REF_DIR\`"
@@ -179,7 +205,7 @@ jobs:
   comment:
     name: comment
     needs: [member, publish]
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' && needs.publish.outputs.skipped != 'true' }}
     runs-on: ubuntu-latest
     env:
       REF_DIR: ${{ needs.member.outputs.ref_dir }}

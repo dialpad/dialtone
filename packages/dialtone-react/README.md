@@ -54,7 +54,7 @@ Run these from the repo root.
 
 ### Published previews
 
-CI publishes all three Storybooks as a preview, on every push to `dialtone-react` and on every PR into it (`.github/workflows/dialtone-react-storybook.yml`):
+CI publishes all three Storybooks as a preview (`.github/workflows/dialtone-react-storybook.yml`) on a push to `dialtone-react`, and on a PR into it, that changes this package, Vue's sources, the css, icons, emojis or tokens packages, Combinator's sources, the lockfile, the setup action or the workflow itself. A change outside those paths gets no preview and no comment, and its PR keeps the one it had:
 
 | Where | Folder |
 | --- | --- |
