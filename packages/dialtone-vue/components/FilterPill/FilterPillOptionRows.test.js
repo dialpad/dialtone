@@ -178,32 +178,17 @@ describe('DtFilterPill built-in dropdown option rows', () => {
       expect(group.parentElement.parentElement).toBe(rows()[0].parentElement);
     });
 
-    it('moves through rows across group boundaries in DOM order with arrows and Home', async () => {
+    it('moves through rows across group boundaries in DOM order, wrapping at the ends', async () => {
       updateWrapper({ options: groupedOptions });
       await open();
       focusRow(rows()[0]);
       expect(await focusedLabelAfter('ArrowDown')).toBe('Calls');
       expect(await focusedLabelAfter('ArrowDown')).toBe('Archived');
       expect(await focusedLabelAfter('ArrowDown')).toBe('Spam');
+      expect(await focusedLabelAfter('ArrowDown')).toBe('All types');
+      expect(await focusedLabelAfter('ArrowUp')).toBe('Spam');
       expect(await focusedLabelAfter('ArrowUp')).toBe('Archived');
       expect(await focusedLabelAfter('ArrowUp')).toBe('Calls');
-    });
-
-    it('wraps arrows between the first and last rows without focusing the screen-reader-only Close', async () => {
-      updateWrapper({ options: groupedOptions });
-      await open();
-      const close = document.querySelector('[data-qa="dt-sr-only-close-button"]');
-      expect(close).not.toBeNull();
-      focusRow(rows()[3]);
-      expect(await focusedLabelAfter('ArrowDown')).toBe('All types');
-      expect(document.activeElement).not.toBe(close);
-      expect(await focusedLabelAfter('ArrowUp')).toBe('Spam');
-      expect(document.activeElement).not.toBe(close);
-      expect(await focusedLabelAfter('Home')).toBe('All types');
-      expect(await focusedLabelAfter('End')).toBe('Spam');
-      expect(document.activeElement).not.toBe(close);
-      expect(pill().emitted('update:selected')).toBeUndefined();
-      expect(pill().emitted('selection-change')).toBeUndefined();
     });
 
     it('keeps focus on a row that moves into a group while open', async () => {

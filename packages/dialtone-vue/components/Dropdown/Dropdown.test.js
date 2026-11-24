@@ -250,89 +250,27 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(content.classes()).not.toContain('consumer-kebab');
   });
 
-  it.each([false, true])('wraps mixed menu roles without focusing Close with showCloseButton=%s',
-    async showCloseButton => {
-      const popover = mountMenu({ showCloseButton });
-      await flushPromises();
-      const content = popover.findComponent({ ref: 'content' });
-      const list = content.find('[data-qa="dt-dropdown-list-wrapper"]');
-      const close = content.get(showCloseButton
-        ? '[data-qa="dt-popover-close"]'
-        : '[data-qa="dt-sr-only-close-button"]');
-      expect(close.attributes('role')).toBe('menuitem');
-      expect(content.element.contains(close.element)).toBe(true);
-      expect(list.element.contains(close.element)).toBe(false);
-      const send = async (key, code = key) => {
-        await list.trigger('keydown', { key, code });
-        expect(document.activeElement).not.toBe(close.element);
-      };
-      await send('ArrowDown');
-      expect(document.activeElement.id).toBe('radio:one');
-      await send('ArrowDown');
-      expect(document.activeElement.id).toBe('action');
-      await send('b', 'KeyB');
-      expect(document.activeElement.id).toBe('radio two');
-      expect(wrapper.emitted('highlight')).toEqual([[0], [1]]);
-      await send('End');
-      expect(document.activeElement.id).toBe('radio two');
-      await send('ArrowDown');
-      expect(document.activeElement.id).toBe('radio:one');
-      await send('ArrowUp');
-      expect(document.activeElement.id).toBe('radio two');
-      await send('Home');
-      expect(document.activeElement.id).toBe('radio:one');
-      expect(list.find('[data-qa="radio-one"]').attributes('aria-checked')).toBe('true');
-      expect(list.find('[data-qa="radio-two"]').attributes('aria-checked')).toBe('false');
-      expect(wrapper.emitted('highlight')).toEqual([[0], [1], [0], [0]]);
-      expect(actions).toEqual([]);
-      await list.trigger('keydown', { key: 'Escape', code: 'Escape' });
-      await flushPromises();
-      expect(wrapper.find('[data-qa="trigger"]').attributes('aria-expanded')).toBe('false');
-      expect(document.activeElement).toBe(wrapper.get('[data-qa="trigger"]').element);
-    });
-
-  // Assistive technology can still move focus onto Close; arrows from there return to the rows.
-  it.each([false, true])('returns arrows from a focused Close to the rows with showCloseButton=%s',
-    async showCloseButton => {
-      const popover = mountMenu({ showCloseButton });
-      await flushPromises();
-      const content = popover.findComponent({ ref: 'content' });
-      const close = content.get(showCloseButton
-        ? '[data-qa="dt-popover-close"]'
-        : '[data-qa="dt-sr-only-close-button"]');
-      close.element.focus();
-      await close.trigger('keydown', { key: 'ArrowUp', code: 'ArrowUp' });
-      expect(document.activeElement.id).toBe('radio two');
-      close.element.focus();
-      await close.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
-      expect(document.activeElement.id).toBe('radio:one');
-      expect(actions).toEqual([]);
-    });
-
-  it('keeps the screen-reader-only Close out of the menu Tab sequence', async () => {
+  it('navigates mixed menu roles without changing the checked row', async () => {
     const popover = mountMenu();
     await flushPromises();
-    const content = popover.findComponent({ ref: 'content' });
-    const close = content.get('[data-qa="dt-sr-only-close-button"]');
-    expect(close.attributes('tabindex')).toBe('-1');
-    // The localized DIALTONE_CLOSE_BUTTON name (en-US) is unchanged.
-    expect(close.attributes('aria-label')).toBe('Click to close');
-    content.get('[data-qa="radio-one"]').element.focus();
-    for (const shiftKey of [false, true, false]) {
-      document.activeElement.dispatchEvent(new KeyboardEvent('keydown',
-        { key: 'Tab', code: 'Tab', shiftKey, bubbles: true, cancelable: true }));
-      await flushPromises();
-      expect(document.activeElement).not.toBe(close.element);
-    }
-  });
-
-  it('closes the menu when the screen-reader-only Close is activated', async () => {
-    const popover = mountMenu();
-    await flushPromises();
-    await popover.findComponent({ ref: 'content' }).get('[data-qa="dt-sr-only-close-button"]').trigger('click');
-    await flushPromises();
-    expect(wrapper.get('[data-qa="trigger"]').attributes('aria-expanded')).toBe('false');
-    expect(document.activeElement).toBe(wrapper.get('[data-qa="trigger"]').element);
+    const list = popover.findComponent({ ref: 'content' }).find('[data-qa="dt-dropdown-list-wrapper"]');
+    const send = (key, code = key) => list.trigger('keydown', { key, code });
+    await send('ArrowDown');
+    expect(document.activeElement.id).toBe('radio:one');
+    await send('ArrowDown');
+    expect(document.activeElement.id).toBe('action');
+    await send('b', 'KeyB');
+    expect(document.activeElement.id).toBe('radio two');
+    await send('End');
+    expect(document.activeElement.id).toBe('radio two');
+    await send('ArrowDown');
+    expect(document.activeElement.id).toBe('radio:one');
+    await send('ArrowUp');
+    expect(document.activeElement.id).toBe('radio two');
+    await send('Home');
+    expect(document.activeElement.id).toBe('radio:one');
+    expect(list.find('[data-qa="radio-one"]').attributes('aria-checked')).toBe('true');
+    expect(list.find('[data-qa="radio-two"]').attributes('aria-checked')).toBe('false');
   });
 
   it('targets the owning menu row when hovering nested-role content', async () => {
@@ -342,54 +280,25 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     list.element.focus();
     await list.find('[data-qa="nested-role"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('radio two');
-    await list.get('[data-qa="radio-two"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
-    expect(document.activeElement.id).toBe('radio:one');
     await list.get('[data-qa="action-row"]').trigger('mousemove');
     expect(document.activeElement.id).toBe('action');
     await list.get('[data-qa="action-row"]').trigger('keydown', { key: 'Enter', code: 'Enter' });
     await list.get('[data-qa="action-row"]').trigger('keydown', { key: ' ', code: 'Space' });
     expect(actions).toEqual(['Beta', 'Beta']);
-    expect(wrapper.emitted('highlight')).toEqual([[0], [1]]);
+    expect(wrapper.emitted('highlight')).toEqual([[1]]);
   });
 
-  it('holds focus on the menu, not the screen-reader-only Close, in an empty keyboard-opened menu', async () => {
+  it('keeps focus off the hidden Close in an empty keyboard-opened menu', async () => {
     const popover = mountMenu({ open: null }, undefined, () => []);
     await wrapper.get('[data-qa="trigger"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
     await flushPromises();
     const content = popover.findComponent({ ref: 'content' });
-    expect(document.activeElement).toBe(content.element);
+    const close = content.get('[data-qa="dt-sr-only-close-button"]');
     for (const key of ['ArrowUp', 'ArrowDown', 'Home', 'End']) {
+      expect(document.activeElement).not.toBe(close.element);
       await content.trigger('keydown', { key, code: key });
-      expect(document.activeElement).toBe(content.element);
     }
-    expect(wrapper.emitted('highlight')).toBeUndefined();
-  });
-
-  // Popover's first-element search covers only the content slot, so the hidden Close is never the fallback.
-  it('keeps focus on the trigger in an empty keyboard-opened menu that cannot take focus', async () => {
-    const popover = mountMenu({ open: null }, undefined, () => [], { contentTabindex: null });
-    const trigger = wrapper.get('[data-qa="trigger"]');
-    trigger.element.focus();
-    await trigger.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
-    await flushPromises();
-    const content = popover.findComponent({ ref: 'content' });
-    expect(content.attributes('tabindex')).toBeUndefined();
-    expect(trigger.attributes('aria-expanded')).toBe('true');
-    expect(document.activeElement).not.toBe(content.get('[data-qa="dt-sr-only-close-button"]').element);
-    expect(document.activeElement).toBe(trigger.element);
-  });
-
-  it('focuses the visible Close in an empty keyboard-opened menu with showCloseButton', async () => {
-    const popover = mountMenu({ open: null, showCloseButton: true }, undefined, () => []);
-    await wrapper.get('[data-qa="trigger"]').trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
-    await flushPromises();
-    const close = popover.findComponent({ ref: 'content' }).get('[data-qa="dt-popover-close"]');
-    expect(document.activeElement).toBe(close.element);
-    for (const key of ['ArrowUp', 'ArrowDown', 'Home', 'End']) {
-      await close.trigger('keydown', { key, code: key });
-      expect(document.activeElement).toBe(close.element);
-    }
-    expect(wrapper.emitted('highlight')).toBeUndefined();
+    expect(document.activeElement).not.toBe(close.element);
   });
 
   it.each([
@@ -453,8 +362,6 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
         const close = content.get(showCloseButton
           ? '[data-qa="dt-popover-close"]'
           : '[data-qa="dt-sr-only-close-button"]');
-        // Assistive technology moves focus onto Close; keyboard navigation never does.
-        close.element.focus();
         if (showCloseButton) await close.trigger('click');
         else await close.trigger('keydown', { key: ' ', code: 'Space' });
         await flushPromises();

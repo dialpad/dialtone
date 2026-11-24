@@ -449,6 +449,7 @@ describe('DtPopover Tests', () => {
         expect.soft(close.attributes('role')).toBe('menuitem');
         // Only the screen-reader-only Close leaves the menu Tab sequence; the visible Close stays tabbable.
         expect(nativeClose.tabIndex).toBe(showCloseButton ? 0 : -1);
+        expect(close.attributes('aria-label')).toBe('Click to close');
         expect(close.element).toBe(nativeClose);
         await wrapper.setProps({ role: 'dialog' });
         expect(close.attributes('role')).toBeUndefined();
