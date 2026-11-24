@@ -1,0 +1,19 @@
+packages/dialtone-react/common/keyboard-list-navigation/useKeyboardListNavigation.ts
+  s_428d4b2b4c47a1::t_ec54c1c5697768 1,46,81-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "949a90091aed52b23539a61e993312c2b78e6c47",
+  "prompts": {},
+  "sessions": {
+    "s_428d4b2b4c47a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aa225b43-7baa-4392-8bc8-a325113705f5",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

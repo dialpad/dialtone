@@ -1,0 +1,76 @@
+packages/dialtone-css/lib/build/less/utilities/interactivity.less
+  h_c15b5755534093 56-60
+packages/dialtone-tokens/tokens/base/default.json
+  h_c15b5755534093 1039,1045,1052-1056
+apps/dialtone-documentation/docs/utilities/interactivity/outline.md
+  s_be0c6411b4addc::t_97c0f4ad2dc0b1 9,26,32
+  s_be0c6411b4addc::t_f7ad12dcbb5e9e 27-31,33-34,41-42,44,49-50,57-60,62-63,70
+  h_c15b5755534093 17-18,35-40,43,45-48,51-56,61,64-69
+  s_be0c6411b4addc::t_ad7a342504b8be 4
+apps/dialtone-documentation/docs/_data/interactivity.json
+  h_c15b5755534093 87,91-96
+packages/dialtone-tokens/postcss/constants.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 15-17
+  h_c15b5755534093 27
+packages/dialtone-tokens/postcss/layered-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 4,53-64
+packages/dialtone-tokens/postcss/dialtone-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 7,96-108
+packages/dialtone-css/postcss/dialtone-generators.cjs
+  s_be0c6411b4addc::t_f7ad12dcbb5e9e 1173
+  s_be0c6411b4addc::t_97c0f4ad2dc0b1 1164
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenExample.vue
+  h_c15b5755534093 71
+package.json
+  s_beaa14e40bfe96::t_0165c84fabbe00 99,105-106,111-112
+  s_beaa14e40bfe96::t_38ecc06e35a0b8 18-19
+packages/dialtone-css/lib/build/js/dialtone_merge_migrate/index.mjs
+  s_beaa14e40bfe96::t_07b611e4695846 1-2,5-16,18-80,82,85-104
+packages/dialtone-css/lib/build/js/dialtone_merge_migrate/merge-migrate.mjs
+  s_beaa14e40bfe96::t_446ea515b531cf 86-88
+  s_beaa14e40bfe96::t_f16e7a0c128c8f 66-85,89-103,105-150
+  s_beaa14e40bfe96::t_e24bd151fe835c 207-209
+  s_beaa14e40bfe96::t_eb9c937df18b10 201,212
+  s_beaa14e40bfe96::t_f8948505993e94 2-10,16-17,23,28-32,34-38,44-65,151-184,186-200,202-206,210-211,213-215
+packages/dialtone-css/package.json
+  s_beaa14e40bfe96::t_606459feb0ebe8 55-56
+scripts/merge-migrate-color-stops.mjs
+  s_beaa14e40bfe96::t_b2e56701902e63 5-7,12,50-52,54-55,56,58-59
+scripts/merge-migrate-stack-gap.mjs
+  s_beaa14e40bfe96::t_823697c0fcac40 1-4,8-11,13-29
+  s_beaa14e40bfe96::t_571da1ce2f3742 5-7,12,50-52,54-55,56,58-60
+  s_beaa14e40bfe96::t_28e2ba41327b00 30,57
+pnpm-lock.yaml
+  s_beaa14e40bfe96::t_57dc4c6ca33aa0 125-127,143-148,167-169
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/color-stops.mjs
+  s_beaa14e40bfe96::t_544ad06919b676 13-18,26-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "a287572f29b59bdfedc2574c6a47ba0b409e85d6",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_be0c6411b4addc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f80b4-22bf-7f21-8386-5ab135d7ea3d",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_beaa14e40bfe96": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e33aab3c-0c6c-4342-864b-6c4e60ea7c9b",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_8716e901949c29::t_5c417c683681c2 79-81
+  s_8716e901949c29::t_ba134add949ed5 500
+  s_8716e901949c29::t_6782c05afaa9bf 580-582
+  s_8716e901949c29::t_f97038f111585d 562-565
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_8716e901949c29::t_2b01f0c4a8664b 272
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_8716e901949c29::t_161978324ccd4b 329-338
+packages/dialtone-vue/components/ListItem/ListItem.vue
+  s_8716e901949c29::t_598ea7c71ff548 147-148
+apps/dialtone-documentation/docs/components/list-item.md
+  s_8716e901949c29::t_f3f929afe30a7a 109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "69abe6914da5c7e5906bde9c260668ea3c13b967",
+  "prompts": {},
+  "sessions": {
+    "s_8716e901949c29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbe9e616-f1b6-4254-bc74-d4880f0c87f9",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

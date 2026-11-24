@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Tab/Tab.parity.tsx
+  s_286250b714e3c8::t_a84873ad5f219c 2,4-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a2f779591df2b357339516a4210d35a13c45adb6",
+  "prompts": {},
+  "sessions": {
+    "s_286250b714e3c8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02fc210e-e9c2-4acd-829e-1d0eb6ad4ad9",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

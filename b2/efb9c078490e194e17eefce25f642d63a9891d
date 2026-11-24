@@ -1,0 +1,19 @@
+packages/dialtone-react/components/Slider/Slider.test.tsx
+  s_205f82c427ce42::t_5bf9c92d507747 196,198,3070-3071,3083
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b2efb9c078490e194e17eefce25f642d63a9891d",
+  "prompts": {},
+  "sessions": {
+    "s_205f82c427ce42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cde12e1-8b37-44b8-92b1-3defd276a5a6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

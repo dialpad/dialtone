@@ -1,0 +1,75 @@
+packages/dialtone-react/parity/gate.mjs
+  s_2defdf83601f66::t_0a7dbb1e160c16 114-122
+  s_2defdf83601f66::t_c5d2be9ed4a17f 294,302-307
+  s_2defdf83601f66::t_25f8f7d9441fce 77-78
+  s_2defdf83601f66::t_1ac9b207d190fe 76
+  s_2defdf83601f66::t_81bd8d3515d412 96
+  s_2defdf83601f66::t_2592a01a2131cb 93-95,97-98
+.github/workflows/dialtone-react.yml
+  s_2defdf83601f66::t_d162c2d4c0d1a2 110-112,114,120
+  s_2defdf83601f66::t_0368716753c6cd 137-138,150
+  s_2defdf83601f66::t_d8e308024073c8 97
+  s_2defdf83601f66::t_6436a5273b5e39 139-142,147-148,153,156,159-170,186-188,193-203
+  s_2defdf83601f66::t_15174cc3b20f01 180-182,184
+  s_2defdf83601f66::t_f46fb78537077a 171-179,183,185,189-192
+packages/dialtone-react/parity/changed-units.mjs
+  s_2defdf83601f66::t_1402c2897943a0 41-43,46
+  s_2defdf83601f66::t_51f3c0eeda5273 253
+  s_2defdf83601f66::t_ac0cd9e9fd91ec 260-268
+  s_2defdf83601f66::t_5bbadba15780ed 15-22
+  s_2defdf83601f66::t_7b4db3b0405736 248-252,254-259,269-276,279,283-284
+  s_2defdf83601f66::t_b470549313bb4b 215-216
+  s_2defdf83601f66::t_fa1cd950831096 123-127,133-142,144-153,155-159
+  s_2defdf83601f66::t_c697705ae3d5d5 280-282
+  s_2defdf83601f66::t_cb30b280eb673c 26-27,30,38,40
+  s_2defdf83601f66::t_f74a2996ead809 204-207
+  s_2defdf83601f66::t_e293283a3c5c11 143,154,160-161,165-166,168
+  s_2defdf83601f66::t_7b8b62f2d0628f 128-132
+packages/dialtone-react/parity/changed-units.test.mjs
+  s_2defdf83601f66::t_11dfad4720b671 423-467
+  s_2defdf83601f66::t_7943b8837842ed 567-578,583-585,589-593,606
+  s_2defdf83601f66::t_503aa9234e70ff 611
+  s_2defdf83601f66::t_ed9cead39242dc 341-344
+  s_2defdf83601f66::t_14ed8ac3014e56 329
+  s_2defdf83601f66::t_f77cc889d839e0 11
+  s_2defdf83601f66::t_db78059427118e 249,563-566,594-605,607-610,612
+  s_2defdf83601f66::t_ef862a55690ae0 579-582,586-588
+packages/dialtone-react/.gitignore
+  s_2defdf83601f66::t_8c06525e314097 9-11
+packages/dialtone-react/parity/new-failures.mjs
+  s_2defdf83601f66::t_5714a05823aaa6 76-77,82-83,92
+  s_2defdf83601f66::t_9acbb85d358aa1 121-125
+  s_2defdf83601f66::t_fcb378b5de4d6f 4
+  s_2defdf83601f66::t_8c07b634e10b29 117,119-120
+  s_2defdf83601f66::t_22b32b09585927 1-3,17-22,25-26,37,46,52,57-61,69,84-86,88-90,95,97-100,104-106,108,112-116,118,131
+  s_2defdf83601f66::t_3729bf67cd3e74 13-16,23-24,27-28,38-45,53-56
+  s_2defdf83601f66::t_6572ba0e6557b8 126-130
+  s_2defdf83601f66::t_cf2bc02a77100a 5-12,32-36,47-51,62,64-68,73-74,87,91,93-94,96,101-103,107,109-111
+  s_2defdf83601f66::t_eb5c17bc8c5749 29-31
+  s_2defdf83601f66::t_d36750fa056dfd 63,70-72,75,78-81
+packages/dialtone-react/parity/new-failures.test.mjs
+  s_2defdf83601f66::t_693e22dc27708f 83-87,89-95
+  s_2defdf83601f66::t_70c4df58e387b9 120-122,134-135
+  s_2defdf83601f66::t_d7abea60b0b987 1-33,35-38,40-41,43-64,74-82,136-146,152
+  s_2defdf83601f66::t_fcb5fdf2046fed 34,39,42,65-73,88,96-119,132-133,147-151
+  s_2defdf83601f66::t_989c7d0cbc4c4f 123-129
+  s_2defdf83601f66::t_67c61dc3b1ee39 130-131
+packages/dialtone-react/README.md
+  s_2defdf83601f66::t_2befd0ab4adc94 16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "49037cfd8fa10624e4559359be32b3e17dbb20f3",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

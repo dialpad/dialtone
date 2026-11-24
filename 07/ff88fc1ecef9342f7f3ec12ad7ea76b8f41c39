@@ -1,0 +1,61 @@
+.agents/resources/documentation-examples.md
+  s_7f1d1d64baa803::t_1fce948c1389eb 17,19-21
+.agents/resources/rules/combinator-variants.md
+  s_7f1d1d64baa803::t_d589b9ec1dea5b 159
+.claude/rules/combinator-variants.md
+  s_7f1d1d64baa803::t_13f25bd75cbdcc 162
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_7f1d1d64baa803::t_6f9df2a639c122 231
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_38979b152a4d30 268
+packages/combinator/project.json
+  s_7f1d1d64baa803::t_031b1cc4cade74 71-72
+packages/combinator/scripts/generate-preset-examples.mjs
+  s_7f1d1d64baa803::t_d4d0c6995a4765 11-12,44-45,73-77,88-89,91,137-138,145,148
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_ceb95b543369a9 147-151
+packages/dialtone-docs/project.json
+  s_7f1d1d64baa803::t_721383b000f388 24
+packages/dialtone-docs/src/generators/example-validation.json
+  s_7f1d1d64baa803::t_9db3d28a720f1f 60-88,239-247
+packages/dialtone-docs/src/generators/preset-examples.mjs
+  s_7f1d1d64baa803::t_2b613970e6ca64 6,8,28-41,44,48,51-63,77,86-89
+packages/dialtone-docs/tests/preset-examples.test.js
+  s_7f1d1d64baa803::t_a43a3375cd8ded 22,33,35-42,59-86,90-91,96,100-102
+packages/dialtone-mcp-server/scripts/query-tools.test.mjs
+  s_7f1d1d64baa803::t_49913e911421e7 27,38-40
+packages/dialtone-query-core/tests/documentation-examples.test.ts
+  s_7f1d1d64baa803::t_ea65415a1f6207 11-12,15-18,25
+scripts/lib/preset-example-id.mjs
+  s_7f1d1d64baa803::t_4fc94d16e87ac4 1-6
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_201c61d49ef9ad 59,67
+scripts/retrieval/example-consumer.mjs
+  s_7f1d1d64baa803::t_003994bc36adc7 61-73
+scripts/retrieval/example-consumer.test.mjs
+  s_7f1d1d64baa803::t_6d2152f5ddfde9 26-33
+scripts/retrieval/example-evidence.mjs
+  s_7f1d1d64baa803::t_76d321877b25a6 1-86
+scripts/retrieval/example-evidence.test.mjs
+  s_7f1d1d64baa803::t_3a5863cdc94bb8 1-77
+scripts/retrieval/probe-packed-examples.mjs
+  s_7f1d1d64baa803::t_ca7ea27b8365c2 41,54-57,78
+scripts/retrieval/validate-examples.mjs
+  s_7f1d1d64baa803::t_c1f57fce2ebe06 3-4,11,17-19,21-23,27-28,94,96-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "07ff88fc1ecef9342f7f3ec12ad7ea76b8f41c39",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

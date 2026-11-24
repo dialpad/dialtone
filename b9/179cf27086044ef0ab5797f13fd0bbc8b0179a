@@ -1,0 +1,75 @@
+packages/dialtone-react/components/Slider/Slider.stories.tsx
+  s_2defdf83601f66::t_bda67e88602a7f 1-703
+packages/dialtone-react/components/Slider/Composables/UseSliderCollisionAvoidance.ts
+  s_b6ac3d70cb055f::t_f03c0b56550f72 1-284
+packages/dialtone-react/components/Slider/Composables/UseSliderDevWarnings.ts
+  s_b6ac3d70cb055f::t_8eef9201d3592f 1-50
+packages/dialtone-react/components/Slider/Composables/UseSliderDirection.ts
+  s_5af2881f05d989::t_3553632ea68381 1-37
+packages/dialtone-react/components/Slider/Composables/UseSliderGeometry.ts
+  s_b6ac3d70cb055f::t_2706dd58347e34 1-172
+packages/dialtone-react/components/Slider/Composables/UseSliderInteraction.ts
+  s_b6ac3d70cb055f::t_8dfb64723128ac 1-448
+packages/dialtone-react/components/Slider/Composables/UseSliderMagneticSnap.ts
+  s_b6ac3d70cb055f::t_ae4ad5941ac5eb 1-104
+packages/dialtone-react/components/Slider/Composables/UseSliderMarksAndTicks.ts
+  s_442675ed046ea4::t_5223978ed070ac 1-50
+packages/dialtone-react/components/Slider/Composables/UseSliderTooltipReadout.ts
+  s_442675ed046ea4::t_724a5cf8151b3f 1-220
+packages/dialtone-react/components/Slider/Composables/UseSliderValue.ts
+  s_b6ac3d70cb055f::t_8389e4fbca3e25 1-345
+packages/dialtone-react/components/Slider/Composables/types.ts
+  s_5af2881f05d989::t_6ca684e3ac9f29 1-43
+packages/dialtone-react/components/Slider/Composables/useSyncedState.ts
+  s_b6ac3d70cb055f::t_255caa1598353b 1-17
+packages/dialtone-react/components/Slider/Slider.parity.tsx
+  s_442675ed046ea4::t_8afc8eab724b3c 1-11
+packages/dialtone-react/components/Slider/Slider.tsx
+  s_442675ed046ea4::t_5939e268f70d7f 1-739
+packages/dialtone-react/components/Slider/SliderConstants.ts
+  s_b6ac3d70cb055f::t_a1251fec48977f 1-25
+packages/dialtone-react/components/Slider/index.ts
+  s_b6ac3d70cb055f::t_4ac9a80d090674 1-9
+packages/dialtone-react/components/Slider/utils.ts
+  s_b6ac3d70cb055f::t_bb691dc02941e0 1-105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b9179cf27086044ef0ab5797f13fd0bbc8b0179a",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_442675ed046ea4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87fac8e2-ab86-474e-beb9-e3f509c21278",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_5af2881f05d989": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02f1c164-a8fa-4db7-b6b5-d0034987b86b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_b6ac3d70cb055f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f812431-7d2d-4893-88e1-6eec429e845a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

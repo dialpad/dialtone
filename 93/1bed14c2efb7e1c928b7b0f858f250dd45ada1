@@ -1,0 +1,22 @@
+packages/dialtone-tokens/sync-scripts/token_import.ts
+  s_87d0f63b120eb7::t_87ec2d62dccd4b 321
+  s_87d0f63b120eb7::t_aa85246cbfab5d 302-313
+packages/dialtone-tokens/sync-scripts/token_import.test.ts
+  s_87d0f63b120eb7::t_f7a9910585ea93 692-741
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "931bed14c2efb7e1c928b7b0f858f250dd45ada1",
+  "prompts": {},
+  "sessions": {
+    "s_87d0f63b120eb7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "442e71ed-9091-44b6-b09c-e8116970a462",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    }
+  }
+}

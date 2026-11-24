@@ -1,0 +1,29 @@
+packages/dialtone-react/components/ProgressCircle/ProgressCircle.stories.tsx
+  s_0114abab449c11::t_ccdbb477f5e758 13
+packages/dialtone-react/components/ProgressCircle/ProgressCircle.tsx
+  s_dc85bdaf7c5dc1::t_ff254d296d0784 10-21,23,41-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "770e53d83616fe2a12849fd97943da98b902906f",
+  "prompts": {},
+  "sessions": {
+    "s_0114abab449c11": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c8d57ac-90b4-4345-9812-73330f37c452",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_dc85bdaf7c5dc1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0fef3e81-dea3-4063-9af8-92d3388e290c",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

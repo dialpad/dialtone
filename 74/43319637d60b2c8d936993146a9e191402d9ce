@@ -1,0 +1,25 @@
+packages/dialtone-react/parity/cases.mjs
+  s_2defdf83601f66::t_aa5827d9c04714 45-47,51-52
+packages/dialtone-react/parity/cases.test.mjs
+  s_2defdf83601f66::t_446e8b23c8031b 49-53,56,60
+packages/dialtone-react/parity/react/dom.test.tsx
+  s_2defdf83601f66::t_0e41ca692ab2ee 25
+packages/dialtone-react/parity/vue/goldens.test.js
+  s_2defdf83601f66::t_dd8449c2c54b51 200-202,205
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7443319637d60b2c8d936993146a9e191402d9ce",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
