@@ -131,7 +131,7 @@ The CLI selects data from its invocation directory; updating the CLI refreshes b
 
 A coding assistant can invoke the CLI through its shell tool when the command is available and permitted. For project-local installs, use the runner described above from the application directory.
 
-Merge the [shared lookup instruction](https://dialtone.dialpad.com/guides/getting-started/#ai-assisted-development) into a project file your client loads. It covers Codex and Claude Code loading routes, CLI-only access, selected-version checks and unavailable-tool behavior. Preserve existing project guidance and permission settings. A dependency README does not load itself into the assistant's context; confirm an actual CLI call and returned source/version in the consuming session.
+Add the [use-dialtone skill](https://dialtone.dialpad.com/guides/getting-started/#ai-assisted-development) to your project. The skill covers CLI-only access, selected-version checks and unavailable-tool behavior. Preserve existing project guidance and permission settings. A dependency README does not load itself into the assistant's context; confirm an actual CLI call and returned source/version in the consuming session.
 
 ### CLI vs MCP Server
 

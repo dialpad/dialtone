@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { test } from 'node:test';
@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const packageRoot = fileURLToPath(new URL('..', import.meta.url));
 // SKILLS_DIR lets a broken copy be checked without editing the shipped skill.
 const skillsRoot = process.env.SKILLS_DIR ? resolve(process.env.SKILLS_DIR) : join(packageRoot, 'skills');
-const skillNames = readdirSync(skillsRoot);
+const skillNames = readdirSync(skillsRoot, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 const read = (path) => readFileSync(path, 'utf8');
 
 function parseSkill (name) {
@@ -86,7 +86,7 @@ test('use-dialtone lists the reuse order of client-rules.json', () => {
 test('the package ships every skill file', () => {
   const [{ files }] = JSON.parse(execFileSync('npm', ['pack', '--dry-run', '--json', '--ignore-scripts'], { cwd: packageRoot, encoding: 'utf8' }));
   const shipped = new Set(files.map((f) => f.path));
-  for (const name of readdirSync(join(packageRoot, 'skills'))) {
+  for (const name of readdirSync(join(packageRoot, 'skills'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name)) {
     assert.ok(shipped.has(`skills/${name}/SKILL.md`), `skills/${name}/SKILL.md is not in the package`);
   }
 });
@@ -115,3 +115,12 @@ for (const layout of ['direct', 'hoisted']) {
     }
   });
 }
+
+test('README copy step changes nothing when the package is not installed', (t) => {
+  const app = mkdtempSync(join(tmpdir(), 'dialtone-skill-missing-'));
+  t.after(() => rmSync(app, { recursive: true, force: true }));
+  mkdirSync(join(app, '.claude/skills/use-dialtone'), { recursive: true });
+  writeFileSync(join(app, '.claude/skills/use-dialtone/SKILL.md'), 'existing copy');
+  assert.throws(() => execFileSync('sh', ['-c', copyCommand], { cwd: app, stdio: 'pipe' }));
+  assert.equal(read(join(app, '.claude/skills/use-dialtone/SKILL.md')), 'existing copy');
+});

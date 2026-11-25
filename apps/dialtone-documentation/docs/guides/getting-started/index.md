@@ -219,9 +219,9 @@ MCP uses bundled references unless you configure an absolute application data ro
 
 ### Add the use-dialtone skill
 
-The `use-dialtone` skill tells your assistant to look Dialtone up before choosing or changing components, tokens, CSS utilities, icons or usage patterns, to prefer what Dialtone already has over custom CSS, and to say when a lookup failed. It covers MCP and CLI-only access.
+When your assistant uses it, the `use-dialtone` skill tells it to look Dialtone up before choosing or changing components, tokens, CSS utilities, icons or usage patterns, to prefer what Dialtone already has over custom CSS, and to say when a lookup failed. It covers MCP and CLI-only access.
 
-The skill ships in `@dialpad/dialtone-mcp-server`; install that package as a project dev dependency even if you use only the CLI. Then copy the skill into the folders Claude Code (`.claude/skills/`) and Codex (`.agents/skills/`) read, using the command in the [MCP server README](https://www.npmjs.com/package/@dialpad/dialtone-mcp-server#skills). Commit the copies and start a new session.
+The skill ships in `@dialpad/dialtone-mcp-server`; install that package as a project dev dependency even if you use only the CLI. Then, from the directory where you start your assistant, copy the skill into the folders Claude Code (`.claude/skills/`) and Codex (`.agents/skills/`) read, using the command in the [MCP server README](https://www.npmjs.com/package/@dialpad/dialtone-mcp-server#skills). Commit the copies and start a new session. Unlike text in `CLAUDE.md` or `AGENTS.md`, a skill is loaded when the assistant judges it relevant, so ask for it by name if a session skips it.
 
 Copied skills do not update with the package. Run the copy command again after updating, and review the diff alongside your project's own guidance. Keep your project's existing `CLAUDE.md`, `AGENTS.md` and permission settings.
 

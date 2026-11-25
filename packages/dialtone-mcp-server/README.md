@@ -28,17 +28,18 @@ For ongoing assistant use, add the `use-dialtone` skill to the project (see [Ski
 
 The package ships the `use-dialtone` skill in `skills/use-dialtone/`. It tells an assistant to look Dialtone up before writing UI code, to prefer existing components, utilities and tokens, and to say when a lookup failed. Claude Code reads project skills from `.claude/skills/` and Codex from `.agents/skills/`.
 
-From the application directory, after installing the package:
+Run this from the directory where you start your assistant, after installing the package (macOS, Linux or WSL, with a `node_modules` install):
 
 ```bash
 skill="$(dirname "$(node -p "require.resolve('@dialpad/dialtone-mcp-server/package.json')")")/skills/use-dialtone"
-mkdir -p .claude/skills .agents/skills
-rm -rf .claude/skills/use-dialtone .agents/skills/use-dialtone
-cp -R "$skill" .claude/skills/
-cp -R "$skill" .agents/skills/
+[ -f "$skill/SKILL.md" ] &&
+  mkdir -p .claude/skills .agents/skills &&
+  rm -rf .claude/skills/use-dialtone .agents/skills/use-dialtone &&
+  cp -R "$skill" .claude/skills/ &&
+  cp -R "$skill" .agents/skills/
 ```
 
-The command finds the installed package even when a workspace hoists it. Commit the copies. They do not update with the package: run the command again after updating, and review the diff. Start a new assistant session to load the skill.
+The command finds the installed package even when a workspace hoists it, and changes nothing when it cannot find the package. Commit the copies. They do not update with the package: run the command again after updating, and review the diff. Start a new assistant session to load the skill.
 
 ## Updating
 
