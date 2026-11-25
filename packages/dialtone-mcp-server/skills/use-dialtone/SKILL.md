@@ -24,7 +24,7 @@ Pick the first of these that fits:
 1. A component made for the job, such as `DtButton` instead of a styled `<button>`.
 2. The primitives: `DtBox` for surface, padding, border, shadow and sizing; `DtStack` for direction, gap and alignment; `DtText` for typography.
 3. Utility classes, for what the primitives do not cover: display, grid, flex children, positioning outside `DtBox`, or one small adjustment.
-4. Custom CSS, only when none of the above fit, and then with design tokens (`var(--dt-*)`), never raw colors, sizes or spacing.
+4. Custom CSS, only when none of the above fit, and then with design tokens (`var(--dt-*)`), never raw colors, sizes or spacing. This order holds when you only restyle existing markup: add utility classes or swap in a primitive before writing a `<style>` block.
 
 - **Color:** use semantic tokens such as `--dt-color-foreground-tertiary` or `--dt-color-surface-positive`. Base color tokens such as `--dt-color-purple-600` are deprecated: they don't follow brand or contrast modes. If no semantic token fits, ask a product designer before using a base color.
 - **Text:** in Vue, use `DtText` with `variant` and `tone`, for example `<dt-text as="p" variant="body-sm" tone="tertiary">`. Outside Vue, use typography classes such as `d-text-body--md` or tokens such as `--dt-text-body-md`. Avoid pairing separate font-size and line-height classes.
