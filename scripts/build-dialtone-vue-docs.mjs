@@ -2,7 +2,7 @@ import { parse } from 'vue-docgen-api';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import { preserveDeclaredSlotBindings } from './lib/vue-slot-bindings.mjs';
+import { preserveDeclaredSlotBindings, tagDeprecatedSlots } from './lib/vue-slot-bindings.mjs';
 import { getValidFileList } from '../common/utils/server.mjs';
 import { readPublicComponentExports, uniqueComponentFiles, withComponentIdentity } from './lib/vue-component-identity.mjs';
 
@@ -92,7 +92,7 @@ async function parseDocumentation (fileList) {
       if (defineOptionsName) {
         doc.displayName = defineOptionsName;
       }
-      doc = withComponentIdentity(doc, filePath, publicExports, dialtoneVueRootFolder, manifest);
+      doc = withComponentIdentity(tagDeprecatedSlots(doc), filePath, publicExports, dialtoneVueRootFolder, manifest);
 
       // Add metadata to deprecated components
       const componentName = doc.displayName;

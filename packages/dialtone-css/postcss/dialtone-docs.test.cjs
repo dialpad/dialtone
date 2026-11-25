@@ -90,3 +90,37 @@ test('preserves grouped component exclusions and filters non-public and state se
     assert.equal(utilities[name], undefined);
   }
 });
+
+test('marks child-scoped stack and flow auto-spacing utilities as deprecated in favor of DtStack gap', async () => {
+  const outputs = await generateDocumentation(`
+      .d-stack8 > * + * { margin-block-start: var(--dt-spacing-100) !important; }
+      .d-flow8 > * + * { margin-inline-start: var(--dt-spacing-100) !important; }
+      .d-mis-100 { margin-inline-start: var(--dt-spacing-100) !important; }
+    `);
+  const utilities = outputs['dialtone-docs.json'];
+  for (const name of ['d-stack8', 'd-flow8']) {
+    assert.equal(utilities[name].metadata.deprecated, true);
+    assert.match(utilities[name].metadata.reason, /direct children/);
+    assert.match(utilities[name].metadata.reason, /DtStack/);
+    assert.match(utilities[name].metadata.docs, /components\/stack/);
+  }
+  assert.equal(utilities['d-mis-100'].metadata, undefined);
+});
+
+test('legacy side spacing and inset replacements point at the logical twin when it exists', async () => {
+  const outputs = await generateDocumentation(`
+      .d-ml8, .d-ml-100, .d-mis-100 { margin-inline-start: var(--dt-spacing-100) !important; }
+      .d-mrn8, .d-mr-n100, .d-mie-n100 { margin-inline-end: calc(var(--dt-spacing-100) * -1) !important; }
+      .d-pl8, .d-pl-100, .d-pis-100 { padding-inline-start: var(--dt-spacing-100) !important; }
+      .d-t8, .d-t-100, .d-ibs-100 { inset-block-start: var(--dt-spacing-100) !important; }
+      .d-mt8, .d-mt-100 { margin-block-start: var(--dt-spacing-100) !important; }
+    `);
+  const utilities = outputs['dialtone-docs.json'];
+  assert.deepEqual(utilities['d-ml8'].metadata.alternatives, ['d-mis-100']);
+  assert.deepEqual(utilities['d-mrn8'].metadata.alternatives, ['d-mie-n100']);
+  assert.deepEqual(utilities['d-pl8'].metadata.alternatives, ['d-pis-100']);
+  assert.deepEqual(utilities['d-t8'].metadata.alternatives, ['d-ibs-100']);
+  // No logical twin in the catalog: keep the physical replacement rather than name a missing class.
+  assert.deepEqual(utilities['d-mt8'].metadata.alternatives, ['d-mt-100']);
+  assert.equal(utilities['d-mis-100'].metadata, undefined);
+});

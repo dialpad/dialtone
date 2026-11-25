@@ -160,6 +160,24 @@ describe('component identity and import safety', () => {
     expect(formatComponentResults(result.results, 'ResizePane')).toContain("import { DtResizable } from '@dialpad/dialtone-vue'");
   });
 
+  test('bundled source-export results also name the umbrella package route', () => {
+    const output = formatComponentResults(searchComponents('ResizePane', [publicResizable]).results, 'ResizePane');
+    expect(output).toContain("import { DtResizable } from '@dialpad/dialtone-vue'");
+    expect(output).toContain('@dialpad/dialtone/vue');
+    expect(output).toContain('@dialpad/dialtone/vue3');
+    expect(output.match(/@dialpad\/dialtone\/vue\b/g)).toHaveLength(1);
+  });
+
+  test('installed-export results name only the installed route', () => {
+    const installed = normalizeComponents([publicResizable], {
+      package: '@dialpad/dialtone', version: '10.15.0', from: '@dialpad/dialtone/vue', names: ['DtResizable'],
+    });
+    const output = formatComponentResults(searchComponents('DtResizable', installed).results, 'DtResizable');
+    expect(output).toContain("import { DtResizable } from '@dialpad/dialtone/vue'");
+    expect(output).not.toContain('@dialpad/dialtone-vue');
+    expect(output).not.toContain('/vue3');
+  });
+
   test('a public name in context remains discovery without creating an exact alias', () => {
     const found = searchComponents('resizable pane', [publicResizable]);
     expect(found.results[0].name).toBe('DtResizable');
@@ -273,5 +291,33 @@ describe('component identity and import safety', () => {
     expect(ambiguous.displayName).toBe('emoji_picker');
     expect(ambiguous.identity).toMatchObject({ kind: 'unknown', imports: [] });
     expect(exact.identity).toMatchObject({ canonicalName: 'DtEmojiPicker', kind: 'public', imports: [{ name: 'DtEmojiPicker' }] });
+  });
+});
+
+describe('deprecated props and slots in the search sample', () => {
+  const badge = component('DtBadge', {
+    props: [
+      { name: 'iconPosition', type: { name: 'string' }, tags: { deprecated: [{ description: 'Use startIcon slots instead.\nMore detail.', title: 'deprecated' }] } },
+      { name: 'label', type: { name: 'string' } },
+      { name: 'oldFlag', type: { name: 'boolean' }, tags: { deprecated: [{ description: '', title: 'deprecated' }] } },
+    ],
+    slots: [
+      { name: 'leading' },
+      { name: 'leftIcon', tags: { deprecated: [{ description: 'Use startIcon', title: 'deprecated' }] } },
+      // Data built before the generator tagged slots only carries the description prefix.
+      { name: 'rightIcon', description: '@deprecated Use endIcon' },
+    ],
+  });
+  const output = formatComponentResults(searchComponents('DtBadge', [badge]).results, 'DtBadge');
+
+  test('marks deprecated props visibly instead of dropping them', () => {
+    expect(output).toContain('`iconPosition` (string) (deprecated: Use startIcon slots instead.)');
+    expect(output).toContain('`oldFlag` (boolean) (deprecated)');
+    expect(output).toContain('`label` (string)\n');
+    expect(output).not.toMatch(/`label` \(string\) \(deprecated/);
+  });
+
+  test('marks deprecated slots from tags or from the legacy description prefix', () => {
+    expect(output).toContain('**Slots:** leading, leftIcon (deprecated: Use startIcon), rightIcon (deprecated: Use endIcon)');
   });
 });

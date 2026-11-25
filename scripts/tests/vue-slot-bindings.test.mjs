@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseSource } from 'vue-docgen-api';
-import { preserveDeclaredSlotBindings } from '../lib/vue-slot-bindings.mjs';
+import { preserveDeclaredSlotBindings, tagDeprecatedSlots } from '../lib/vue-slot-bindings.mjs';
 
 const fixture = `<template>
   <div>
@@ -54,4 +54,30 @@ test('repeated FilterPill slots retain the declared legacy and controlled bindin
     assert.deepEqual(actual.map(binding => binding.name).sort(), [...bindings].sort());
     assert.equal(actual.find(binding => binding.name === bindings.at(-1)).description, `Conditional ${bindings.at(-1)}.`);
   }
+});
+
+test('slot descriptions that start with @deprecated gain a deprecated tag shaped like prop tags', async () => {
+  const source = `<template><div>
+    <!-- @slot Start icon. -->
+    <slot name="startIcon" />
+    <!-- @slot @deprecated Use startIcon -->
+    <slot name="leftIcon" />
+    <!-- @slot @deprecated -->
+    <slot name="bareIcon" />
+  </div></template><script>export default { name: 'DeprecatedSlotFixture' };</script>`;
+  const doc = tagDeprecatedSlots(await parseSource(source, 'DeprecatedSlotFixture.vue'));
+  const bySlot = Object.fromEntries(doc.slots.map(slot => [slot.name, slot]));
+  assert.equal(bySlot.startIcon.tags, undefined);
+  assert.deepEqual(bySlot.leftIcon.tags, { deprecated: [{ description: 'Use startIcon', title: 'deprecated' }] });
+  assert.deepEqual(bySlot.bareIcon.tags, { deprecated: [{ description: '', title: 'deprecated' }] });
+  assert.equal(bySlot.leftIcon.description, '@deprecated Use startIcon');
+});
+
+test('tagDeprecatedSlots keeps existing slot tags and leaves docs without slots untouched', () => {
+  const slot = { name: 'old', description: '@deprecated Use new', tags: { since: [{ title: 'since', description: '1.0' }] } };
+  const [tagged] = tagDeprecatedSlots({ slots: [slot] }).slots;
+  assert.deepEqual(Object.keys(tagged.tags), ['since', 'deprecated']);
+  assert.deepEqual(slot.tags, { since: [{ title: 'since', description: '1.0' }] });
+  const bare = { displayName: 'NoSlots' };
+  assert.equal(tagDeprecatedSlots(bare), bare);
 });

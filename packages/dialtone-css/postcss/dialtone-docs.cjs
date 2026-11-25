@@ -49,6 +49,9 @@ function generateExclusionRegex () {
 
 const documentation = {};
 const CSSVarRegex = /var\(([^),]+)\)/g;
+// Every plain class in the stylesheet, collected before rules are cataloged so a legacy class can
+// name its logical twin regardless of source order.
+const knownClasses = new Set();
 
 // Plain class selector (`.d-foo-bar`). Intentionally excludes pseudo-classes, escape sequences,
 // and :where/:is wrappers so pseudo/state variants (`.h\:d-fc-primary:hover`) are skipped.
@@ -84,7 +87,18 @@ const metadataRules = [
       docs: 'https://dialtone.dialpad.com/utilities/backgrounds/color.html',
     },
   },
-
+  // Child-scoped auto-spacing (`.d-stack16 > * + *`). Selector scope is dropped at generation, so
+  // the reason carries it; without this they match margin queries and outrank the logical utilities.
+  {
+    pattern: /^d-(stack|flow)\d+$/,
+    metadata: {
+      deprecated: true,
+      category: 'layout',
+      reason: 'The d-stack and d-flow utilities are deprecated. They apply margin only to direct children (> * + *), not to the element itself. Use the DtStack component with the equivalent gap prop instead',
+      alternatives: [],
+      docs: 'https://dialtone.dialpad.com/components/stack',
+    },
+  },
 ];
 
 /**
@@ -93,7 +107,7 @@ const metadataRules = [
  * @returns {object|null} Metadata object if a rule matches, null otherwise
  */
 function getMetadataForClass (className) {
-  const migration = utilityMetadata(className);
+  const migration = utilityMetadata(className, name => knownClasses.has(name));
   if (migration) return migration;
   for (const rule of metadataRules) {
     if (rule.pattern.test(className)) {
@@ -103,20 +117,24 @@ function getMetadataForClass (className) {
   return null;
 }
 
+function utilityClassNames (rule) {
+  // A rule may have multiple comma-separated class selectors (e.g. logical + legacy co-selection
+  // like `.d-bar-350, .d-bar6`). Catalog each plain class separately so deprecated metadata
+  // attaches to the legacy name while the canonical logical name stays clean.
+  return rule.selector
+    .split(',')
+    .map(sel => sel.trim().split(/\s+/)[0])
+    .filter(sel => /^\.(d-|\w{2}\\:)/.test(sel) && PLAIN_CLASS_SELECTOR.test(sel))
+    .map(sel => sel.slice(1));
+}
+
 /**
  * Generate dialtone-docs.json
  * @param docs
  * @param {import('postcss').Rule} rule
  */
 function generateUtilityClassDocumentation (docs, rule) {
-  // A rule may have multiple comma-separated class selectors (e.g. logical + legacy co-selection
-  // like `.d-bar-350, .d-bar6`). Catalog each plain class separately so deprecated metadata
-  // attaches to the legacy name while the canonical logical name stays clean.
-  const classNames = rule.selector
-    .split(',')
-    .map(sel => sel.trim().split(/\s+/)[0])
-    .filter(sel => /^\.(d-|\w{2}\\:)/.test(sel) && PLAIN_CLASS_SELECTOR.test(sel))
-    .map(sel => sel.slice(1));
+  const classNames = utilityClassNames(rule);
 
   if (classNames.length === 0) return;
 
@@ -270,6 +288,9 @@ module.exports = () => {
   return {
     postcssPlugin: 'postcss-dialtone-documentation',
     async Once (root) {
+      knownClasses.clear();
+      root.walkRules(rule => utilityClassNames(rule).forEach(name => knownClasses.add(name)));
+
       // There are many variables that exists only within dialtone-default-theme.css
       // (Should they be included on dialtone-tokens doc.json?)
       // So we need to walk such declaration and add them to the generated tokensDocs;

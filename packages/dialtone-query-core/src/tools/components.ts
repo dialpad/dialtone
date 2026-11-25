@@ -12,6 +12,7 @@ import type {
   ComponentProp,
   ComponentEvent,
   ComponentSlot,
+  ComponentImport,
   SearchResult,
   SearchPage,
   ValueObject
@@ -315,6 +316,16 @@ function deprecatedWarning(reason?: string): string {
   return reason ? `   ⚠️  **DEPRECATED:** ${reason}\n` : `   ⚠️  **DEPRECATED**\n`;
 }
 
+/** Deprecation note from the `@deprecated` tag, or from the description prefix that older slot data carries. */
+function deprecationSuffix(item: { description?: string; tags?: Record<string, unknown> }): string {
+  const tagged = Array.isArray(item.tags?.deprecated) ? item.tags.deprecated as Array<{ description?: string }> : [];
+  const legacy = /^@deprecated\b\s*(.*)/s.exec(item.description ?? '');
+  if (tagged.length === 0 && !legacy) return '';
+  const text = tagged.map(entry => entry?.description ?? '').find(Boolean) ?? legacy?.[1] ?? '';
+  const note = text.trim().split('\n')[0].trim();
+  return note ? ` (deprecated: ${note})` : ' (deprecated)';
+}
+
 /**
  * Format component search results
  */
@@ -327,6 +338,7 @@ export function formatComponentResults(results: SearchResult[], query: string, p
     ? `Showing ${results.length} of ${page.total} component${page.total === 1 ? '' : 's'} for "${query}" (results ${page.offset + 1}–${page.offset + results.length}):\n\n`
     : `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
+  let umbrellaRouteShown = false;
   results.forEach((result: SearchResult, index: number) => {
     output += `${(page?.offset ?? 0) + index + 1}. **${result.name}**\n`;
 
@@ -359,7 +371,7 @@ export function formatComponentResults(results: SearchResult[], query: string, p
       propsToShow.forEach((prop: ComponentProp) => {
         const typeName = prop.type?.name || 'unknown';
         const values = prop.values ? ` Options: ${prop.values.slice(0, 3).join(', ')}${prop.values.length > 3 ? '...' : ''}` : '';
-        output += `   • \`${prop.name}\` (${typeName})${values}\n`;
+        output += `   • \`${prop.name}\` (${typeName})${deprecationSuffix(prop)}${values}\n`;
         if (prop.description) {
           output += `     ${prop.description}\n`;
         }
@@ -382,7 +394,7 @@ export function formatComponentResults(results: SearchResult[], query: string, p
 
     // Show slots if any
     if (result.details.slots && result.details.slots.length > 0) {
-      output += `   **Slots:** ${result.details.slots.map((s: ComponentSlot) => s.name).slice(0, 3).join(', ')}`;
+      output += `   **Slots:** ${result.details.slots.map((s: ComponentSlot) => `${s.name}${deprecationSuffix(s)}`).slice(0, 3).join(', ')}`;
       if (result.details.slots.length > 3) {
         output += ` (${result.details.slots.length - 3} more)`;
       }
@@ -390,9 +402,18 @@ export function formatComponentResults(results: SearchResult[], query: string, p
     }
 
     const statement = componentImportStatement(result.details.identity);
-    output += statement
-      ? `   **Usage:**\n   \`\`\`vue\n   ${statement}\n   \`\`\`\n\n`
-      : `   ${componentImportNote(result.details.identity)}\n\n`;
+    if (!statement) {
+      output += `   ${componentImportNote(result.details.identity)}\n\n`;
+      return;
+    }
+    output += `   **Usage:**\n   \`\`\`vue\n   ${statement}\n   \`\`\`\n`;
+    // Bundled data is generated from the standalone package and cannot see the app's install, so
+    // name the umbrella route once. Installed-mode results already carry the verified route.
+    if (!umbrellaRouteShown && result.details.identity?.imports.some((route: ComponentImport) => route.verification === 'source-export')) {
+      output += `   Apps that install \`@dialpad/dialtone\` import from \`@dialpad/dialtone/vue\` instead (\`@dialpad/dialtone/vue3\` before 9.173).\n`;
+      umbrellaRouteShown = true;
+    }
+    output += `\n`;
   });
 
   return output;
