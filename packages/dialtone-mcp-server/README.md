@@ -22,7 +22,7 @@ A launcher's cwd or prefix does not select installed data. Check a detail respon
 
 Keep existing trust, approvals and tool allowlists. Connection, raw server inventory, client-filtered exposure and actual tool calls are separate checks. Other clients, including the Claude Desktop development recipe below, need their own verification; no all-client compatibility claim is made here.
 
-For ongoing assistant use, add the `use-dialtone` skill to the project (see [Skills](#skills)). The connected server supplies the MCP routing instructions during initialization; do not maintain a second routing sequence in project rules. Confirm actual lookup calls and selected source/version in the consuming session.
+For ongoing assistant use, add the `use-dialtone` skill to the project (see [Skills](#skills)). The connected server supplies the MCP routing instructions during initialization. The skill names the tools and defers to those instructions; do not copy them into project rules. Confirm actual lookup calls and selected source/version in the consuming session.
 
 ## Skills
 

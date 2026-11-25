@@ -55,6 +55,16 @@ for (const name of skillNames) {
     for (const uri of text.match(/dialtone:\/\/[a-z-]+/g) ?? []) assert.ok(serverResources.has(uri), `unknown MCP resource ${uri}`);
   });
 
+  test(`${name}: get_component examples use only the tool's parameters`, () => {
+    const { text } = parseSkill(name);
+    const schema = querySource.slice(querySource.indexOf('name: \'get_component\''), querySource.indexOf('name: \'get_documentation\''));
+    const params = new Set([...schema.slice(schema.indexOf('properties: {')).matchAll(/^ {10}([a-z]+):/gm)].map((m) => m[1]));
+    assert.ok(params.has('component') && params.has('field'), 'get_component schema not found in src/query-tools.ts');
+    for (const [example] of text.matchAll(/\{ "component"[^}]*\}/g)) {
+      for (const key of Object.keys(JSON.parse(example))) assert.ok(params.has(key), `get_component has no parameter ${key}`);
+    }
+  });
+
   test(`${name}: no Dialtone-repo paths or build steps`, () => {
     const { text } = parseSkill(name);
     const internal = /(^|[\s`(])(packages|apps|scripts|\.agents|\.github)\/|pnpm nx|nx run|run-skill-contract-evals/m;
