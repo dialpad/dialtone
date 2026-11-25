@@ -65,6 +65,8 @@ import { DtListItem } from '@/components/ListItem';
 
 export default {
   name: 'DtComboboxDefault',
+  // Args are bound explicitly from $attrs; don't also apply them to the root (DLT-3866).
+  inheritAttrs: false,
 
   components: {
     DtAvatar,
