@@ -327,6 +327,15 @@ function deprecationSuffix(item: { description?: string; tags?: Record<string, u
 }
 
 /**
+ * Bundled data is generated from the standalone package and cannot see the app's install, so its
+ * import routes name `@dialpad/dialtone-vue` only. Installed-mode routes are already verified.
+ */
+export function bundledImportRouteNote(identity?: { imports?: ComponentImport[] }): string | undefined {
+  if (!identity?.imports?.some((route: ComponentImport) => route.verification === 'source-export')) return undefined;
+  return 'Apps that install `@dialpad/dialtone` import from `@dialpad/dialtone/vue` instead (`@dialpad/dialtone/vue3` before 9.173).';
+}
+
+/**
  * Format component search results
  */
 export function formatComponentResults(results: SearchResult[], query: string, page?: SearchPage): string {
@@ -407,10 +416,10 @@ export function formatComponentResults(results: SearchResult[], query: string, p
       return;
     }
     output += `   **Usage:**\n   \`\`\`vue\n   ${statement}\n   \`\`\`\n`;
-    // Bundled data is generated from the standalone package and cannot see the app's install, so
-    // name the umbrella route once. Installed-mode results already carry the verified route.
-    if (!umbrellaRouteShown && result.details.identity?.imports.some((route: ComponentImport) => route.verification === 'source-export')) {
-      output += `   Apps that install \`@dialpad/dialtone\` import from \`@dialpad/dialtone/vue\` instead (\`@dialpad/dialtone/vue3\` before 9.173).\n`;
+    // Name the umbrella route once per response, not under every result.
+    const routeNote = umbrellaRouteShown ? undefined : bundledImportRouteNote(result.details.identity);
+    if (routeNote) {
+      output += `   ${routeNote}\n`;
       umbrellaRouteShown = true;
     }
     output += `\n`;

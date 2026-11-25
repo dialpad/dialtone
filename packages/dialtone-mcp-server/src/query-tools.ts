@@ -15,6 +15,7 @@ import {
   formatResults,
   formatTokenResults,
   formatComponentResults,
+  bundledImportRouteNote,
   formatIconResults,
   formatDocumentationResults,
   getComponentDetail,
@@ -435,6 +436,8 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
         'Absent metadata fields are unknown; an empty generated array reports no documented records.',
         'Import verification describes exports only; installed runtime, peer dependencies and compatibility are not checked.',
       ];
+      const routeNote = bundledImportRouteNote(component?.identity);
+      if (routeNote) notes.push(routeNote);
       if (selected.reason) notes.push(MISSING_COMPONENT_NOTES[selected.reason]);
       notes.push(...data.warnings);
       if (!component)
