@@ -31,7 +31,8 @@ The package ships the `use-dialtone` skill in `skills/use-dialtone/`. It tells a
 Run this from the directory where you start your assistant, after installing the package (macOS, Linux or WSL, with a `node_modules` install):
 
 ```bash
-pkg="$(node -p "require.resolve('@dialpad/dialtone-mcp-server/package.json')")" &&
+app=.
+pkg="$(CDPATH= cd "$app" >/dev/null && node -p "require.resolve('@dialpad/dialtone-mcp-server/package.json')")" &&
   skill="$(dirname "$pkg")/skills/use-dialtone" &&
   [ -f "$skill/SKILL.md" ] &&
   mkdir -p .claude/skills .agents/skills &&
@@ -40,7 +41,7 @@ pkg="$(node -p "require.resolve('@dialpad/dialtone-mcp-server/package.json')")" 
   cp -R "$skill" .agents/skills/
 ```
 
-The command finds the installed package even when a workspace hoists it, and changes nothing when it cannot find the package. Commit the copies. They do not update with the package: run the command again after updating, and review the diff. Start a new assistant session to load the skill.
+The command finds the installed package even when a workspace hoists it, and changes nothing when it cannot find the package. In a monorepo where only one app installs the package (pnpm does not hoist by default), set `app` to that folder, relative to where you run the command, for example `app=apps/web`; the copies still land where you run the command. Commit the copies. They do not update with the package: run the command again after updating, and review the diff. Start a new assistant session to load the skill.
 
 ## Updating
 

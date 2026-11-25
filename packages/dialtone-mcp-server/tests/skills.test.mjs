@@ -128,6 +128,20 @@ for (const layout of ['direct', 'hoisted']) {
   });
 }
 
+test('README copy step resolves the package from an unhoisted app folder', (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'dialtone-skill-unhoisted-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const scope = join(root, 'apps/web/node_modules/@dialpad');
+  mkdirSync(scope, { recursive: true });
+  symlinkSync(packageRoot, join(scope, 'dialtone-mcp-server'), 'dir');
+  const command = copyCommand.replace(/^app=\.(?=\s)/m, 'app=apps/web');
+  assert.notEqual(command, copyCommand, 'the README command must start with an app=. line');
+  execFileSync('sh', ['-c', command], { cwd: root });
+  assert.equal(read(join(root, '.claude/skills/use-dialtone/SKILL.md')), read(join(packageRoot, 'skills/use-dialtone/SKILL.md')));
+  assert.ok(existsSync(join(root, '.agents/skills/use-dialtone/SKILL.md')));
+  assert.ok(!existsSync(join(root, 'apps/web/.claude')), 'copies must land where the command runs');
+});
+
 test('README copy step changes nothing when the package is not installed', (t) => {
   const app = mkdtempSync(join(tmpdir(), 'dialtone-skill-missing-'));
   t.after(() => rmSync(app, { recursive: true, force: true }));
