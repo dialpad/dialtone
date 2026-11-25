@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { searchUtilityClasses } from '../../src/tools/utility-classes.js';
 import { searchTokens, formatTokenResults } from '../../src/tools/tokens.js';
 import { searchIcons } from '../../src/tools/icons.js';
-import { components, componentDocumentation, documentation, utilityClasses as builtUtilityClasses } from '../../src/data.js';
+import { components, componentDocumentation, documentation } from '../../src/data.js';
 import { searchComponents } from '../../src/tools/components.js';
 import { normalizeComponents, componentNames } from '../../src/component-identity.js';
 import { getComponentDetail } from '../../src/component-detail.js';
@@ -308,11 +308,19 @@ describe('curated public-page discovery', () => {
   });
 });
 
-describe('built utility data', () => {
-  // Child-scoped auto-spacing classes must not crowd the logical utility out of a property search.
+describe('deprecated auto-spacing utilities', () => {
+  // Same metadata shape the CSS docs generator now emits for d-stack/d-flow; the generator side is
+  // covered in packages/dialtone-css/postcss/dialtone-docs.test.cjs.
+  const autoSpacing: UtilityClassesData = {
+    'd-flow8': { values: [{ prop: 'margin-inline-start', value: 'var(--dt-spacing-100) !important' }], metadata: {
+      deprecated: true, category: 'layout', reason: 'Use the DtStack component with gap="100" instead', alternatives: [],
+      docs: 'https://dialtone.dialpad.com/components/stack',
+    } },
+    'd-mis-100': { values: [{ prop: 'margin-inline-start', value: 'var(--dt-spacing-100) !important' }] },
+  };
+
   test('margin-inline-start finds d-mis-100 without deprecated d-stack or d-flow results', () => {
-    const names = searchUtilityClasses('margin-inline-start', builtUtilityClasses).results.map(result => result.name);
-    expect(names.filter(name => /^d-(stack|flow)\d+$/.test(name))).toEqual([]);
-    expect(names).toContain('d-mis-100');
+    const names = searchUtilityClasses('margin-inline-start', autoSpacing).results.map(result => result.name);
+    expect(names).toEqual(['d-mis-100']);
   });
 });
