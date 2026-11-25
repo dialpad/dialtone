@@ -32,9 +32,14 @@ The renderer converts `info.events` into Vue listeners named
 `on${Capitalize(event)}`. When an event fires, the renderer emits `event` to
 `DtcCombinator`.
 
-`DtcCombinator` currently handles `update:<prop>` events by writing the emitted
-value back into `options.props` or `options.attributes` when the member exists.
-This keeps v-model style components in sync with the rendered preview.
+`DtcCombinator` compares `update:<prop>` events for existing prop or attribute
+members against a snapshot of their previous values. Unchanged echoes are ignored.
+Changed values are written back into `options.props` or `options.attributes`
+through the guarded options setter. Outside preset application, this switches a
+named preset to custom and emits `update:preset` with an empty string.
+
+See [USAGE](../USAGE.md#selecting-a-preset) for comparison semantics and
+[SYSTEM](SYSTEM.md#options) for the options update paths.
 
 ## Slots
 

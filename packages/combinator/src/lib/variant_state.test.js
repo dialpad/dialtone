@@ -1,13 +1,15 @@
 import { expect } from 'vitest';
-import { computed, reactive, shallowRef } from 'vue';
+import { computed, reactive, readonly, shallowRef } from 'vue';
 import {
+  areOptionValuesEqual,
+  captureComponentValues,
   computeDisabledMembers,
+  getInitialValues,
   listVariantNames,
   writeUpdateEvent,
   createVariantBindings,
   buildVariantInfo,
   buildVariantState,
-  getInitialValues,
 } from './variant_state';
 import { DtButton, DtFilterPill } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
@@ -52,6 +54,16 @@ const TEXT_LIST_ITEM_INFO = {
 };
 
 describe('variant_state', function () {
+  it('keeps live collections separate from preset defaults and other instances', () => {
+    const initialValue = { selected: ['apple'] };
+    const info = { props: [{ name: 'modelValue', initialValue }] };
+    const first = getInitialValues(info);
+    const second = getInitialValues(info);
+    first.props.modelValue.selected.push('banana');
+    expect(initialValue.selected).toEqual(['apple']);
+    expect(second.props.modelValue.selected).toEqual(['apple']);
+  });
+
   it('retains the legacy default lookup identity and configuration', () => {
     const preset = listVariantNames(filterPillVariants).find(name => name === 'default');
     expect(presetExampleId('DtFilterPill', preset)).toBe('examples/presets/DtFilterPill/default');
@@ -120,13 +132,15 @@ describe('variant_state', function () {
     expect(info.metadata).toEqual({ previewIdentity, copyNotice: 'Named notice' });
   });
 
-  it('restores owned initial arrays after mutation only for banks with a preview identity policy', () => {
+  it('restores isolated initial arrays with or without a preview identity policy', () => {
     const initialValue = [{ value: 'phone', active: true }];
     const info = { metadata: { previewIdentity: () => [] }, props: [{ name: 'items', initialValue }] };
     const first = getInitialValues(info);
     first.props.items[0].active = false;
     expect(getInitialValues(info).props.items).toEqual([{ value: 'phone', active: true }]);
-    expect(getInitialValues({ props: info.props }).props.items).toBe(initialValue);
+    const ordinary = getInitialValues({ props: info.props }).props.items;
+    expect(ordinary).toEqual(initialValue);
+    expect(ordinary).not.toBe(initialValue);
   });
 
   describe('computeDisabledMembers', function () {
@@ -223,6 +237,82 @@ describe('variant_state', function () {
 
     it('is a no-op when the target has neither props nor attributes', function () {
       expect(() => writeUpdateEvent({}, 'update:x', 1)).not.toThrow();
+    });
+  });
+
+  describe('model echo equality', () => {
+    it.each([['reactive', reactive], ['readonly', readonly]])(
+      'preserves instance identity through a %s proxy', (proxyType, createProxy) => {
+        class Choice {}
+        const value = new Choice();
+        const proxy = createProxy(value);
+        expect(areOptionValuesEqual(value, proxy)).toBe(true);
+        expect(areOptionValuesEqual(proxy, value)).toBe(true);
+        expect(areOptionValuesEqual(proxy, createProxy(new Choice()))).toBe(false);
+      },
+    );
+
+    it('preserves a nested instance echo while detecting a replacement instance', () => {
+      class Choice {}
+      const model = reactive({ props: { value: { choice: new Choice() } }, attributes: {} });
+      const baseline = captureComponentValues(model).props.value;
+      expect(areOptionValuesEqual(baseline, model.props.value)).toBe(true);
+      model.props.value.choice = new Choice();
+      expect(areOptionValuesEqual(baseline, model.props.value)).toBe(false);
+    });
+
+    it('keeps a detached baseline when a reactive prop is mutated before its event', () => {
+      const model = reactive({ props: { modelValue: ['apple'] }, attributes: {} });
+      let captures = 0;
+      const recorded = computed(() => { captures++; return captureComponentValues(model); });
+      const baseline = recorded.value;
+      model.props.modelValue.push('banana');
+      expect(recorded.value).toBe(baseline);
+      expect(captures).toBe(1);
+      expect(baseline.props.modelValue).toEqual(['apple']);
+      expect(areOptionValuesEqual(baseline.props.modelValue, model.props.modelValue)).toBe(false);
+      expect(captureComponentValues(model).props.modelValue).toEqual(['apple', 'banana']);
+    });
+
+    it('captures plain cycles and symbols while retaining callbacks and non-plain identities', () => {
+      const key = Symbol('choice');
+      const value = { callback: () => {}, date: new Date(0), [key]: [1] };
+      value.self = value;
+      const snapshot = captureComponentValues({ props: { value }, attributes: {} }).props.value;
+      expect(snapshot).not.toBe(value);
+      expect(snapshot.self).toBe(snapshot);
+      expect(snapshot[key]).not.toBe(value[key]);
+      expect(snapshot.callback).toBe(value.callback);
+      expect(snapshot.date).toBe(value.date);
+      expect(areOptionValuesEqual(snapshot, value)).toBe(true);
+      value[key].push(2);
+      expect(snapshot[key]).toEqual([1]);
+    });
+
+    it('recognizes cloned nested objects and arrays without depending on key order', () => {
+      expect(areOptionValuesEqual({ showIcon: false, values: [undefined, { size: 2 }] },
+        { values: [undefined, { size: 2 }], showIcon: false })).toBe(true);
+      expect(areOptionValuesEqual([1, 2], [2, 1])).toBe(false);
+      expect(areOptionValuesEqual({ value: undefined }, {})).toBe(false);
+    });
+
+    it('keeps callbacks, symbols and non-plain instances distinct', () => {
+      const callback = () => {};
+      const key = Symbol('option');
+      expect(areOptionValuesEqual({ callback, [key]: true }, { callback, [key]: true })).toBe(true);
+      expect(areOptionValuesEqual({ callback }, { callback: () => {} })).toBe(false);
+      expect(areOptionValuesEqual({ [key]: true }, { [key]: false })).toBe(false);
+      expect(areOptionValuesEqual(new Date(0), new Date(0))).toBe(false);
+    });
+
+    it('handles cyclic values and still detects a real change', () => {
+      const previous = { size: 2 };
+      previous.self = previous;
+      const next = { size: 2 };
+      next.self = next;
+      expect(areOptionValuesEqual(previous, next)).toBe(true);
+      next.size = 3;
+      expect(areOptionValuesEqual(previous, next)).toBe(false);
     });
   });
   it('keeps copied bindings reactive across value changes and reset replacements', () => {

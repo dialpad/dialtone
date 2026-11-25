@@ -208,7 +208,7 @@
           :dev-mode="devMode"
           :has-changes="hasChanges"
           :full-screen="isFullScreen"
-          @update:options="(e) => e(options)"
+          @update:options="(e) => options = e"
         />
       </div>
     </div>
@@ -232,6 +232,8 @@ import {
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
 import {
+  areOptionValuesEqual,
+  captureComponentValues,
   buildVariantInfo,
   createVariantBindings,
   computeDisabledMembers,
@@ -292,6 +294,14 @@ const props = defineProps({
     default: () => ({}),
   },
   /**
+   * Selected preset name. An empty string preserves custom edits after initialization.
+   * Missing, unknown, or initially empty names use the bank's preferred initial preset.
+   */
+  preset: {
+    type: String,
+    default: undefined,
+  },
+  /**
    * Activate 'blueprint' mode, to use a simple version of the combinator.
    * Used to display the component but provided limited options for interaction.
    */
@@ -312,9 +322,12 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const emit = defineEmits(['update:fullScreen']);
+const emit = defineEmits(['update:fullScreen', 'update:preset']);
 
-const initialPreset = computed(() => props.variants.defaults?.metadata?.initialPreset ?? 'default');
+const initialPreset = computed(() => {
+  const preferred = props.variants.defaults?.metadata?.initialPreset;
+  return preferred && listVariantNames(props.variants).includes(preferred) ? preferred : 'default';
+});
 const selectedVariant = ref(initialPreset.value);
 const activeVariant = ref(initialPreset.value);
 const internalFullScreen = ref(false);
@@ -322,6 +335,8 @@ const optionBarWidth = ref(null);
 const viewMode = ref('single');
 const viewToggleRef = ref(null);
 let _presetChanging = false;
+// Follow the prop while it still owns the selection; a different user selection or edit takes control.
+let followsPresetProp = true;
 const _forceReset = ref(0);
 
 const isFullScreen = computed({
@@ -366,6 +381,8 @@ const info = computed(() => {
   });
 });
 
+let componentValues;
+
 /**
  * The options data object is the main reactive object that allows interactivity with the target component.
  * Reactive.
@@ -375,10 +392,13 @@ const info = computed(() => {
 const options = computedModel(
   computed(() => {
     _forceReset.value; // force recompute on reset
-    return reactive({
+    const model = reactive({
       ...getInitialValues(info.value),
       bindings: optionBindings,
     });
+    // Record the baseline when this model is created/reset, before a child can mutate its values.
+    componentValues = captureComponentValues(model);
+    return model;
   }),
   /**
    * Catch errors when updating member values,
@@ -391,8 +411,11 @@ const options = computedModel(
   (e, model) => {
     try {
       e(model);
-      if (!_presetChanging) {
+      componentValues = captureComponentValues(model);
+      if (!_presetChanging && selectedVariant.value !== '') {
+        followsPresetProp = false;
         selectedVariant.value = '';
+        emit('update:preset', '');
       }
     } catch (exception) {
       console.warn('Update options warning: \n', exception);
@@ -479,22 +502,45 @@ function onComponentEvent(name, value) {
   // Guard before assigning options.value: a non-update event must not run the
   // computedModel setter (which would clear selectedVariant / mark "custom").
   if (!name?.startsWith('update:')) return;
+  const prop = name.slice('update:'.length);
+  const group = ['props', 'attributes'].find(groupName => options.value[groupName] && prop in options.value[groupName]);
+  // Components may echo their initial value asynchronously (for example, an editor's create event).
+  if (!group || areOptionValuesEqual(componentValues[group]?.[prop], value)) return;
   options.value = (model) => writeUpdateEvent(model, name, value);
 }
 
-function updateVariant(e) {
+function updateVariant(e, notify = true) {
+  if (notify) followsPresetProp = Boolean(e && e === (props.preset ?? initialPreset.value));
   _presetChanging = true;
   selectedVariant.value = e;
   if (e !== '') {
     activeVariant.value = e;
     _forceReset.value++;
   }
+  if (notify) emit('update:preset', e);
   nextTick(() => {
     _presetChanging = false;
   });
 }
 
-watch(() => props.component.name, resetOptions);
+watch(
+  [() => props.component.name, () => props.preset, () => listVariantNames(props.variants), initialPreset],
+  ([componentName, preset, names, preferred], [previousComponentName, previousPreset] = []) => {
+    const resolvedRequest = preset ?? preferred;
+    const componentChanged = componentName !== previousComponentName;
+    const requestChanged = componentChanged || preset !== previousPreset;
+    if (requestChanged) followsPresetProp = Boolean(resolvedRequest);
+    const requestedName = requestChanged || followsPresetProp ? resolvedRequest : selectedVariant.value;
+    const isCustom = requestedName === '' && !componentChanged;
+    const nextPreset = isCustom ? '' : names.includes(requestedName) ? requestedName : preferred;
+
+    if (componentChanged || nextPreset !== selectedVariant.value) {
+      updateVariant(nextPreset, false);
+      if (nextPreset && !componentChanged && requestChanged) viewMode.value = 'single';
+    }
+  },
+  { immediate: true },
+);
 
 function toggleViewMode() {
   viewMode.value = viewMode.value === 'grid' ? 'single' : 'grid';
@@ -555,7 +601,7 @@ const hasChanges = computed(() => {
       const value = options.value[group]?.[member.name];
       const differs = info.value.metadata?.previewIdentity
         ? JSON.stringify(value) !== JSON.stringify(member.initialValue)
-        : value !== member.initialValue;
+        : !areOptionValuesEqual(value, member.initialValue);
       if (differs)
         return true;
     }
