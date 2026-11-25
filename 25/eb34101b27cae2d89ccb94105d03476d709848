@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Resizable/Composables/UseResizableGroup.ts
+  s_76cf110705b3b9::t_68b400152c5f8f 102-103
+packages/dialtone-react/components/Resizable/Resizable.stories.tsx
+  s_76cf110705b3b9::t_8be132fb61e496 1-527
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "25eb34101b27cae2d89ccb94105d03476d709848",
+  "prompts": {},
+  "sessions": {
+    "s_76cf110705b3b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4abf4a2e-b3a1-49c7-917e-47f1db667c04",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

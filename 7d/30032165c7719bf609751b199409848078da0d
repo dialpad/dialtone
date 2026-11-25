@@ -1,0 +1,30 @@
+packages/dialtone-vue/components/SplitButton/SplitButton.test.js
+  s_4871532d82935f::t_b5e5e73493dd61 661,666-668
+  s_4871532d82935f::t_da7b29ea73294e 662
+  s_4871532d82935f::t_e22692482b790d 672-676,678,680-685
+  s_4871532d82935f::t_993e0432bf35ac 677,679,686-687
+packages/dialtone-vue/components/SplitButton/SplitButtonDefault.story.vue
+  s_4871532d82935f::t_60816d2b0341c6 5,17
+packages/dialtone-vue/components/SplitButton/SplitButton.vue
+  s_4871532d82935f::t_60816d2b0341c6 224,226-231,425,427-432,609,633
+  s_4871532d82935f::t_3d85be933c4bbe 225,426
+packages/dialtone-vue/components/SplitButton/SplitButton.stories.js
+  s_4871532d82935f::t_3d85be933c4bbe 116-119,141-143
+  s_4871532d82935f::t_98f8e7c65a7c2b 144
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7d30032165c7719bf609751b199409848078da0d",
+  "prompts": {},
+  "sessions": {
+    "s_4871532d82935f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cfee-52e8-7d91-8707-5dd5664333ba",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+packages/combinator/src/variants/variants_filter_pill.js
+  s_a98638d5a5be6e::t_4ddedd0315da5d 122-129
+scripts/retrieval/preset-classifier.test.mjs
+  s_a98638d5a5be6e::t_6f6c614b210e4b 4,80-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8d3e7210a558d25cadfadbd1fddc3e04555921d9",
+  "prompts": {},
+  "sessions": {
+    "s_a98638d5a5be6e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c236-0d2b-7d50-b741-40fa8d0b85fa",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

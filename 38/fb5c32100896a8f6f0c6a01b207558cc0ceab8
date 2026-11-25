@@ -1,0 +1,33 @@
+.agents/resources/rules/css-utilities.md
+  s_803342048d1b5d::t_cd980b373c7bb4 14
+.agents/resources/validation.md
+  s_803342048d1b5d::t_c1cd3e96fe0894 46,55
+.agents/skills/pr-create/SKILL.md
+  s_803342048d1b5d::t_0fd14c551204e0 42
+.agents/skills/pr-prep/SKILL.md
+  s_803342048d1b5d::t_2afce725321bb1 46,54-58,70,85,132,136-137
+.agents/skills/pr-prep/references/local-gates.md
+  s_803342048d1b5d::t_069fbec18e5344 10-11,31
+.claude/agents/pr-prep-coordinator.md
+  s_803342048d1b5d::t_5cb16c75552ad7 15-16
+.claude/commands/pr-fill.md
+  s_803342048d1b5d::t_570d34fc81dbad 46
+.github/CONTRIBUTING.md
+  s_803342048d1b5d::t_14ed4762337186 152
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "38fb5c32100896a8f6f0c6a01b207558cc0ceab8",
+  "prompts": {},
+  "sessions": {
+    "s_803342048d1b5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cdad6428-8c4b-493c-b221-db56ddbb456d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
