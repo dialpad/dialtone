@@ -95,6 +95,7 @@ test('marks child-scoped stack and flow auto-spacing utilities as deprecated in 
   const outputs = await generateDocumentation(`
       .d-stack8 > * + * { margin-block-start: var(--dt-spacing-100) !important; }
       .d-flow8 > * + * { margin-inline-start: var(--dt-spacing-100) !important; }
+      .d-stack16 > * + * { margin-block-start: var(--dt-spacing-200) !important; }
       .d-mis-100 { margin-inline-start: var(--dt-spacing-100) !important; }
     `);
   const utilities = outputs['dialtone-docs.json'];
@@ -104,6 +105,9 @@ test('marks child-scoped stack and flow auto-spacing utilities as deprecated in 
     assert.match(utilities[name].metadata.reason, /DtStack/);
     assert.match(utilities[name].metadata.docs, /components\/stack/);
   }
+  // The reason names the gap stop each class already declares.
+  assert.match(utilities['d-stack8'].metadata.reason, /gap="100"/);
+  assert.match(utilities['d-stack16'].metadata.reason, /gap="200"/);
   assert.equal(utilities['d-mis-100'].metadata, undefined);
 });
 

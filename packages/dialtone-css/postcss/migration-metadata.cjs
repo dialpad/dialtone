@@ -1,8 +1,8 @@
 // Consume the preferred migration-helper authority; do not maintain a second stop map.
 const { SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, RADIUS_MAP, RADIUS_PAIR_PREFIX_MAP, SPACE_TOKEN_MAP, SIZE_LAYOUT_MAP, RAW_FALLBACK, UTILITY_REVIEW_REQUIRED } = require('./migration-guidance.json');
 const LEGACY_GAP_PREFIXES = { flg: 'g', gg: 'g', grg: 'rg', gcg: 'cg' };
-// Physical side/inset prefix -> logical twin (logical-naming rule); the twin is co-selected with
-// the physical class in the generators, so it has identical declarations.
+// Physical side/inset prefix -> logical twin (logical-naming rule). The generators emit both names
+// in one rule, so the twin has identical declarations; the caller still checks that it exists.
 const LOGICAL_PREFIX = {
   mt: 'mbs', mr: 'mie', mb: 'mbe', ml: 'mis',
   pt: 'pbs', pr: 'pie', pb: 'pbe', pl: 'pis',
@@ -47,7 +47,7 @@ function utilityMetadata (name, hasClass = () => false) {
   return {
     deprecated: true,
     category: 'migration',
-    reason: `${scope} ${reviewReason || (replacement ? 'Use the corresponding token-stop name.' : 'No exact token-stop equivalent; manual review required.')}${layoutReview ? ' Legacy gap rules affect child margins and --fl-gap; manual layout review required before using native gap.' : ''}`,
+    reason: `${scope} ${reviewReason || (replacement ? 'Use the corresponding logical token-stop name.' : 'No exact token-stop equivalent; manual review required.')}${layoutReview ? ' Legacy gap rules affect child margins and --fl-gap; manual layout review required before using native gap.' : ''}`,
     alternatives: replacement ? [replacement] : [],
     docs: 'https://dialtone.dialpad.com/guides/migration/',
   };

@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { searchUtilityClasses } from '../../src/tools/utility-classes.js';
 import { searchTokens, formatTokenResults } from '../../src/tools/tokens.js';
 import { searchIcons } from '../../src/tools/icons.js';
-import { components, componentDocumentation, documentation } from '../../src/data.js';
+import { components, componentDocumentation, documentation, utilityClasses as builtUtilityClasses } from '../../src/data.js';
 import { searchComponents } from '../../src/tools/components.js';
 import { normalizeComponents, componentNames } from '../../src/component-identity.js';
 import { getComponentDetail } from '../../src/component-detail.js';
@@ -305,5 +305,14 @@ describe('curated public-page discovery', () => {
     for (const query of ['spinner', 'switch', 'DtTabs', 'dt-tabs', 'DtTable', 'dt-table', 'DtScrollbar', 'dt-scrollbar']) {
       expect(getComponentDetail({ component: query }, components).match).toBe('no-match');
     }
+  });
+});
+
+describe('built utility data', () => {
+  // Child-scoped auto-spacing classes must not crowd the logical utility out of a property search.
+  test('margin-inline-start finds d-mis-100 without deprecated d-stack or d-flow results', () => {
+    const names = searchUtilityClasses('margin-inline-start', builtUtilityClasses).results.map(result => result.name);
+    expect(names.filter(name => /^d-(stack|flow)\d+$/.test(name))).toEqual([]);
+    expect(names).toContain('d-mis-100');
   });
 });

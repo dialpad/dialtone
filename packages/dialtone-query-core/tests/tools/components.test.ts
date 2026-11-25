@@ -160,8 +160,11 @@ describe('component identity and import safety', () => {
     expect(formatComponentResults(result.results, 'ResizePane')).toContain("import { DtResizable } from '@dialpad/dialtone-vue'");
   });
 
-  test('bundled source-export results also name the umbrella package route', () => {
-    const output = formatComponentResults(searchComponents('ResizePane', [publicResizable]).results, 'ResizePane');
+  test('bundled source-export results also name the umbrella package route, once per response', () => {
+    const secondResizable = { ...publicResizable, displayName: 'DtResizableTwin', identity: { ...publicResizable.identity, canonicalName: 'DtResizableTwin', aliases: [] } };
+    const results = [...searchComponents('ResizePane', [publicResizable]).results, ...searchComponents('DtResizableTwin', [secondResizable]).results];
+    expect(results).toHaveLength(2);
+    const output = formatComponentResults(results, 'resizable');
     expect(output).toContain("import { DtResizable } from '@dialpad/dialtone-vue'");
     expect(output).toContain('@dialpad/dialtone/vue');
     expect(output).toContain('@dialpad/dialtone/vue3');

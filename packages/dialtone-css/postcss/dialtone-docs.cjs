@@ -89,14 +89,18 @@ const metadataRules = [
   },
   // Child-scoped auto-spacing (`.d-stack16 > * + *`). Selector scope is dropped at generation, so
   // the reason carries it; without this they match margin queries and outrank the logical utilities.
+  // The gap stop comes from the class's own spacing token, so no second px-to-gap table is kept here.
   {
     pattern: /^d-(stack|flow)\d+$/,
-    metadata: {
-      deprecated: true,
-      category: 'layout',
-      reason: 'The d-stack and d-flow utilities are deprecated. They apply margin only to direct children (> * + *), not to the element itself. Use the DtStack component with the equivalent gap prop instead',
-      alternatives: [],
-      docs: 'https://dialtone.dialpad.com/components/stack',
+    metadata: (values) => {
+      const stop = values.map(({ value }) => /var\(--dt-spacing-([\w-]+)\)/.exec(value)?.[1]).find(Boolean);
+      return {
+        deprecated: true,
+        category: 'layout',
+        reason: `The d-stack and d-flow utilities are deprecated. They apply margin only to direct children (> * + *), not to the element itself. Use the DtStack component with ${stop ? `gap="${stop}"` : 'the equivalent gap prop'} instead`,
+        alternatives: [],
+        docs: 'https://dialtone.dialpad.com/components/stack',
+      };
     },
   },
 ];
@@ -106,12 +110,12 @@ const metadataRules = [
  * @param {string} className - The utility class name to check
  * @returns {object|null} Metadata object if a rule matches, null otherwise
  */
-function getMetadataForClass (className) {
+function getMetadataForClass (className, values = []) {
   const migration = utilityMetadata(className, name => knownClasses.has(name));
   if (migration) return migration;
   for (const rule of metadataRules) {
     if (rule.pattern.test(className)) {
-      return rule.metadata;
+      return typeof rule.metadata === 'function' ? rule.metadata(values) : rule.metadata;
     }
   }
   return null;
@@ -157,7 +161,7 @@ function generateUtilityClassDocumentation (docs, rule) {
   });
 
   classNames.forEach(className => {
-    const metadata = getMetadataForClass(className);
+    const metadata = getMetadataForClass(className, values);
     documentation[className] = {
       values,
       ...(metadata && { metadata }),
