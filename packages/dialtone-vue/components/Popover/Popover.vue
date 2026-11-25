@@ -1251,8 +1251,11 @@ export default {
         case 'body':
           // When inside a native <dialog> (e.g. DtModal in Dialtone Next), append to the
           // dialog so the popover stays in the browser's top layer. Otherwise fall back to body.
+          // querySelector('body') is null for a detached anchor or shadow root, which makes
+          // tippy throw on `parentNode.contains(popper)`, so fall back to document.body.
           internalAppendTo = this.anchorEl?.closest('dialog') ??
-            this.anchorEl?.getRootNode()?.querySelector('body');
+            this.anchorEl?.getRootNode()?.querySelector?.('body') ??
+            document.body;
           break;
 
         case 'root':

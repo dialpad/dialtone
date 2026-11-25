@@ -524,7 +524,11 @@ export default {
     resolveAppendTo () {
       // When inside a native <dialog>, append there to stay in the browser's top layer.
       if (this.appendTo === 'body') {
-        return this.anchor?.closest('dialog') ?? this.anchor?.getRootNode()?.querySelector('body');
+        // querySelector('body') returns null when the anchor is detached or inside a shadow root,
+        // and tippy then throws on `parentNode.contains(popper)`, so fall back to document.body.
+        return this.anchor?.closest('dialog') ??
+          this.anchor?.getRootNode()?.querySelector?.('body') ??
+          document.body;
       }
       return this.appendTo;
     },
