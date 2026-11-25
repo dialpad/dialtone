@@ -96,6 +96,8 @@ test('marks child-scoped stack and flow auto-spacing utilities as deprecated in 
       .d-stack8 > * + * { margin-block-start: var(--dt-spacing-100) !important; }
       .d-flow8 > * + * { margin-inline-start: var(--dt-spacing-100) !important; }
       .d-stack16 > * + * { margin-block-start: var(--dt-spacing-200) !important; }
+      .d-stack72 > * + * { margin-block-start: calc(var(--dt-spacing-100) * 9) !important; }
+      .d-stack0 > * + * { margin-block-start: 0 !important; }
       .d-mis-100 { margin-inline-start: var(--dt-spacing-100) !important; }
     `);
   const utilities = outputs['dialtone-docs.json'];
@@ -108,6 +110,9 @@ test('marks child-scoped stack and flow auto-spacing utilities as deprecated in 
   // The reason names the gap stop each class already declares.
   assert.match(utilities['d-stack8'].metadata.reason, /gap="100"/);
   assert.match(utilities['d-stack16'].metadata.reason, /gap="200"/);
+  assert.match(utilities['d-stack0'].metadata.reason, /gap="0"/);
+  // A computed value has no single stop; it must not borrow the multiplied token's stop.
+  assert.doesNotMatch(utilities['d-stack72'].metadata.reason, /gap="/);
   assert.equal(utilities['d-mis-100'].metadata, undefined);
 });
 

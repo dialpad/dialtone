@@ -93,7 +93,11 @@ const metadataRules = [
   {
     pattern: /^d-(stack|flow)\d+$/,
     metadata: (values) => {
-      const stop = values.map(({ value }) => /var\(--dt-spacing-([\w-]+)\)/.exec(value)?.[1]).find(Boolean);
+      // Whole-value match only: a calc() multiple has no single stop, so it falls back to generic text.
+      const stop = values
+        .map(({ value }) => /^(?:var\(--dt-spacing-([\w-]+)\)|(0))(?: !important)?$/.exec(value.trim()))
+        .map(match => match && (match[1] ?? match[2]))
+        .find(Boolean);
       return {
         deprecated: true,
         category: 'layout',
