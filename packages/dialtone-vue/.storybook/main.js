@@ -36,7 +36,11 @@ const config = {
       plugins: [react({ include: /\.jsx$/, jsxRuntime: 'classic' })],
       build: {
         sourcemap: true,
-        target: 'baseline-widely-available',
+        // CSS only: the inherited es2020 target makes Vite's lightningcss lower oklch() to lab() (which loses the hue of
+        // near-neutral colours through oklch(from ...)) and drop the logical corner resets of Split Button. These are
+        // what 'baseline-widely-available' resolves to in Vite 8; cssTarget doesn't accept that keyword. The JS target
+        // stays the library's es2020.
+        cssTarget: ['chrome111', 'edge111', 'firefox114', 'safari16.4'],
       },
       css: {
         devSourcemap: true,
