@@ -60,7 +60,9 @@ for (const name of skillNames) {
     const schema = querySource.slice(querySource.indexOf('name: \'get_component\''), querySource.indexOf('name: \'get_documentation\''));
     const params = new Set([...schema.slice(schema.indexOf('properties: {')).matchAll(/^ {10}([a-z]+):/gm)].map((m) => m[1]));
     assert.ok(params.has('component') && params.has('field'), 'get_component schema not found in src/query-tools.ts');
-    for (const [example] of text.matchAll(/\{ "component"[^}]*\}/g)) {
+    const examples = [...text.matchAll(/\{\s*"component"[^}]*\}/g)].map((m) => m[0]);
+    assert.ok(examples.length > 0, 'expected a get_component example');
+    for (const example of examples) {
       for (const key of Object.keys(JSON.parse(example))) assert.ok(params.has(key), `get_component has no parameter ${key}`);
     }
   });

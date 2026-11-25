@@ -11,7 +11,7 @@ Before choosing or changing Dialtone components, tokens, CSS utilities, icons or
 
 With the Dialtone MCP server connected, use its tools this way (its connection instructions add detail):
 
-- **You know the component:** call `get_component` directly and ask for the one field you need, such as `{ "component": "DtBox", "field": "padding" }`. Fetch the full contract only when one field is not enough.
+- **You know the component:** call `get_component` directly and ask for the one field you need, such as `{ "component": "DtBox", "field": "padding" }`.
 - **You don't know the name:** search first. Use `search_components` for components, `search_tokens` for tokens, `search_utility_classes` for utility classes and `search_icons` for icons. For guides and longer examples, use `search_documentation`, then `get_documentation` for the section you pick. Search results are summaries; read the selected component or section before relying on details.
 - **Continuations:** follow one only when the item you need is not on the page you already have.
 
@@ -33,12 +33,12 @@ Pick the first of these that fits:
 ## Read results carefully
 
 - **No match** means Dialtone has no such name. Rephrase the search once; if it still finds nothing, say so and use the next option in the list above. Never use a near-miss name.
-- **Deprecated:** use the replacement the result names, in its logical form. If the replacement is a physical class such as `d-ml-100`, use the logical class `d-mis-100`.
-- **Bundled data:** when a result's source says `bundled`, say once in your summary that results come from bundled data and may differ from the installed version. Don't compare versions or hashes yourself.
+- **Deprecated:** use the replacement the result names, in its logical form. For example, if a result points to the physical class `d-ml-100`, use the logical `d-mis-100`.
+- **Bundled data:** when a result's source says `bundled`, say once in your summary that results come from bundled data and may differ from the installed version.
 
 ## Check your result
 
-- Imports match what the project installs (check `package.json`): `@dialpad/dialtone/vue` for an app on `@dialpad/dialtone`, `@dialpad/dialtone-vue` for an app on that package. Bundled lookup hints always name `@dialpad/dialtone-vue`.
+- Imports match what the project installs (check `package.json`): `@dialpad/dialtone/vue` for an app on `@dialpad/dialtone` (`/vue3` before 9.173), `@dialpad/dialtone-vue` for an app on that package. Bundled lookup hints always name `@dialpad/dialtone-vue`.
 - Any custom CSS uses tokens, and your summary says why no component, primitive or utility fit.
 - The project's own linters pass, including the Dialtone ESLint and Stylelint plugins where the project has them.
 
