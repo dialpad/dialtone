@@ -35,7 +35,7 @@ The Dialtone MCP server serves the reuse, color and typography rules, with more 
 
 - The source and version a lookup returned match the project's installed Dialtone packages. Bundled documentation does not prove the installed version behaves the same.
 - Every component, prop, token and class you used came from a lookup, not from memory.
-- Each import path matches a package the project installs: check `package.json` and that package's exports. A lookup's import hint names the package it was built from, which can differ from yours.
+- Each import matches what the project installs (check `package.json`): an app that installs `@dialpad/dialtone` imports components from `@dialpad/dialtone/vue`, and one that installs `@dialpad/dialtone-vue` imports from that package. Bundled lookup data gives `@dialpad/dialtone-vue` import hints, so a hint can name a package your app does not install.
 - Any custom CSS uses tokens, and your summary says why no component, primitive or utility fit.
 - The project's own linters pass, including the Dialtone ESLint and Stylelint plugins where the project has them.
 
