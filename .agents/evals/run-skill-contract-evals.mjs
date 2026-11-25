@@ -76,14 +76,32 @@ const skills = {
       '.agents/resources/doc-sync.md',
       '.agents/resources/pr-template.md',
     ],
-    patterns: [/Report only/, /Flag unresolved ticket state/],
+    patterns: [
+      /\*\*Report-only\*\* \(default for readiness checks\)/,
+      /Flag unresolved ticket state/,
+      /\*\*Local gates\.\*\*/,
+      /Verdict: Ready \| Ready with notes \| Needs fixes \| Needs decision/,
+    ],
+    references: [
+      '.agents/skills/pr-prep/references/adversarial-review.md',
+      '.agents/skills/pr-prep/references/reviewer-lens.md',
+      '.agents/skills/pr-prep/references/local-gates.md',
+      '.agents/skills/pr-prep/references/specialists/keyboard-aria.md',
+      '.agents/skills/pr-prep/references/specialists/css.md',
+      '.agents/skills/pr-prep/references/specialists/codemods.md',
+      '.agents/skills/pr-prep/references/specialists/icons.md',
+    ],
   },
   'pr-create': {
     resources: [
       '.agents/resources/pr-template.md',
       '.agents/resources/package-map.md',
     ],
-    patterns: [/Do not create Jira tickets/, /public-safe/],
+    patterns: [
+      /Do not create Jira tickets/,
+      /public-safe/,
+      /Check prep before any PR write/,
+    ],
   },
   'pr-comments': {
     resources: [
@@ -110,20 +128,34 @@ const skills = {
       '.agents/resources/doc-sync.md',
       '.agents/resources/package-map.md',
       '.agents/resources/rules/combinator-variants.md',
-    ],
-    patterns: [/Use `validator`, never `validate`/, /downstream data/],
-  },
-  'component-variant': {
-    resources: [
-      '.agents/resources/rules/combinator-variants.md',
-      '.agents/resources/rule-map.md',
-      '.agents/resources/package-map.md',
+      '.agents/resources/rules/vue-components.md',
     ],
     patterns: [
-      /variants_<component>\.js/,
-      /component-wall thumbnail/,
-      /Do not rely on repo-external personal variant skills/,
+      /Use `validator`, never `validate`/,
+      /downstream data/,
+      /## Before You Build/,
+      /breaking change/,
     ],
+    references: [
+      '.agents/skills/component-work/references/variants.md',
+      '.agents/skills/pr-prep/references/specialists/keyboard-aria.md',
+      '.agents/skills/pr-prep/references/specialists/css.md',
+    ],
+  },
+  'icon-work': {
+    resources: [
+      '.agents/resources/validation.md',
+      '.agents/resources/rules/icons.md',
+      '.agents/resources/dialtone-lookup.md',
+    ],
+    patterns: [
+      /## Before You Build/,
+      /centred in its viewBox/,
+      /no `stroke`, `stroke-width` or `stroke-linecap`/i,
+      /singular name unless the object itself is plural/,
+      /A category folder with no key in the JSON crashes the build/,
+    ],
+    references: ['.agents/skills/pr-prep/references/specialists/icons.md'],
   },
 };
 
@@ -134,6 +166,20 @@ const claudeRuleParityAllowlist = new Map([
   ['general-rules', 'Skip exact-name parity'],
   ['link-and-button-navigation', 'Defer'],
   ['slot-class-props', 'Skip exact-name parity'],
+]);
+
+// Shared skills with no thin Claude wrapper yet. Remove a name once its wrapper exists.
+const claudeWrapperPendingAllowlist = new Map([
+  ['commit', 'No Claude wrapper yet'],
+  ['dialtone-lookup', 'No Claude wrapper yet'],
+  ['doc-sync-check', 'No Claude wrapper yet'],
+  ['merge-next', 'Full Claude copy, not yet a thin wrapper'],
+  ['pr-comments', 'No Claude wrapper yet'],
+  ['pr-complete', 'No Claude wrapper yet'],
+  ['pr-create', 'No Claude wrapper yet'],
+  ['project-start', 'No Claude wrapper yet'],
+  ['review', 'Full Claude copy, not yet a thin wrapper'],
+  ['validate', 'No Claude wrapper yet'],
 ]);
 
 const agentRuleParityAllowlist = new Map([
@@ -313,6 +359,27 @@ function prCompleteAction(caseData) {
   return 'switch-to-staging';
 }
 
+// Problems with a Claude wrapper: it must copy the shared frontmatter and only load the shared file.
+function wrapperProblems(sharedPath, wrapperPath) {
+  const frontmatter = (text) => text.match(/^---\n(.*?)\n---\n/s);
+  const shared = frontmatter(read(sharedPath));
+  const wrapperText = read(wrapperPath);
+  const wrapper = frontmatter(wrapperText);
+  const problems = [];
+  if (!shared || !wrapper || wrapper[1] !== shared[1]) {
+    problems.push(`${wrapperPath} frontmatter must match ${sharedPath}`);
+  }
+  const body = wrapper
+    ? wrapperText.slice(wrapper[0].length).trim()
+    : wrapperText;
+  const sharedDir = sharedPath.replace(/SKILL\.md$/, '');
+  const loadOnly = `Load \`${sharedPath}\` and follow it. It is the single source for this skill; this wrapper adds no rules. Relative links resolve from \`${sharedDir}\`; backticked paths are from the repo root.`;
+  if (body !== loadOnly) {
+    problems.push(`${wrapperPath} must only load the shared skill`);
+  }
+  return problems;
+}
+
 const failures = [];
 
 for (const [skillName, config] of Object.entries(skills)) {
@@ -352,6 +419,104 @@ for (const [skillName, config] of Object.entries(skills)) {
       failures,
     );
   }
+
+  for (const reference of config.references ?? []) {
+    assert(
+      existsSync(join(repoRoot, reference)),
+      `${path} references missing ${reference}`,
+      failures,
+    );
+    assert(
+      body.includes(reference.replace(`.agents/skills/${skillName}/`, '')),
+      `${path} does not link ${reference}`,
+      failures,
+    );
+  }
+}
+
+// Every shared skill has a thin Claude wrapper: same frontmatter, no rules.
+// Claude-only checks run only when .claude exists, so Codex validation never depends on it.
+const sharedSkillNames = readdirSync(join(repoRoot, '.agents/skills'), {
+  withFileTypes: true,
+})
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name);
+for (const name of sharedSkillNames) {
+  assert(
+    existsSync(join(repoRoot, `.agents/skills/${name}/SKILL.md`)),
+    `.agents/skills/${name}/SKILL.md is missing`,
+    failures,
+  );
+}
+
+if (existsSync(join(repoRoot, '.claude'))) {
+
+  for (const name of sharedSkillNames) {
+    const sharedPath = `.agents/skills/${name}/SKILL.md`;
+    const wrapperPath = `.claude/skills/${name}/SKILL.md`;
+    if (!existsSync(join(repoRoot, sharedPath))) continue;
+    const wrapperExists = existsSync(join(repoRoot, wrapperPath));
+    const problems = wrapperExists
+      ? wrapperProblems(sharedPath, wrapperPath)
+      : [];
+
+    if (claudeWrapperPendingAllowlist.has(name)) {
+      assert(
+        !wrapperExists || problems.length > 0,
+        `${wrapperPath} is now a thin wrapper; remove ${name} from claudeWrapperPendingAllowlist`,
+        failures,
+      );
+      continue;
+    }
+    assert(
+      wrapperExists,
+      `${wrapperPath} is missing and ${name} is not in claudeWrapperPendingAllowlist`,
+      failures,
+    );
+    for (const problem of problems) assert(false, problem, failures);
+  }
+
+  for (const name of claudeWrapperPendingAllowlist.keys()) {
+    assert(
+      sharedSkillNames.includes(name),
+      `.agents/skills/${name}/SKILL.md no longer exists; remove ${name} from claudeWrapperPendingAllowlist`,
+      failures,
+    );
+  }
+
+  // A wrapper must not point at a shared skill that no longer exists.
+  const claudeSkillsDir = join(repoRoot, '.claude/skills');
+  const claudeSkillNames = existsSync(claudeSkillsDir)
+    ? readdirSync(claudeSkillsDir, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => entry.name)
+    : [];
+  for (const name of claudeSkillNames) {
+    const wrapperPath = `.claude/skills/${name}/SKILL.md`;
+    if (!existsSync(join(repoRoot, wrapperPath))) continue;
+    const loads = read(wrapperPath).matchAll(
+      /\.agents\/skills\/[\w-]+\/SKILL\.md/g,
+    );
+    for (const [sharedPath] of loads) {
+      assert(
+        existsSync(join(repoRoot, sharedPath)),
+        `${wrapperPath} loads ${sharedPath}, which does not exist`,
+        failures,
+      );
+    }
+  }
+}
+
+// /pr-fill must check the prep verdict before its first PR write.
+if (existsSync(join(repoRoot, '.claude/commands/pr-fill.md'))) {
+  const prFill = read('.claude/commands/pr-fill.md');
+  const check = prFill.indexOf('Verdict record');
+  const firstWrite = prFill.indexOf('gh pr edit');
+  assert(
+    check !== -1 && firstWrite !== -1 && check < firstWrite,
+    '.claude/commands/pr-fill.md must check the pr-prep verdict before its first gh pr edit',
+    failures,
+  );
 }
 
 const ruleMap = read('.agents/resources/rule-map.md');

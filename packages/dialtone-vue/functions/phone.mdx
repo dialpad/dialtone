@@ -4,3 +4,14 @@ import formatPhoneNumber from './generated/phone/functions/formatPhoneNumber.md?
 <Meta title="Functions/Phone Number" />
 
 <Markdown>{formatPhoneNumber}</Markdown>
+
+## Import
+
+`formatPhoneNumber` has its own import path and is not exported from the main entry, so apps that don't use it don't
+ship its phone number data.
+
+```js
+import { formatPhoneNumber } from '@dialpad/dialtone/vue3/phone';
+```
+
+With the standalone `@dialpad/dialtone-vue` package, import from `@dialpad/dialtone-vue/phone`.

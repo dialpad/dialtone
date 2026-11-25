@@ -17,7 +17,6 @@ Per-project Claude Code configuration: agents, commands, hooks, rules, skills, a
 ├── rules/         # Path-scoped rule files (this directory)
 ├── skills/        # Native skills (<name>/SKILL.md) and legacy workflow references (<name>.md)
 ├── plans/         # Plan files (gitignored — local working state)
-├── tsc-cache/     # Session cache (gitignored)
 └── settings.json  # Project-level Claude Code settings
 ```
 
@@ -46,7 +45,7 @@ Rules:
 
 ## Commands (`.claude/commands/`)
 
-Slash command triggers as `.md` files. Filename = command name (`/review` → `review.md`).
+Slash command triggers as `.md` files. Filename = command name (`/doc-janitor` → `doc-janitor.md`).
 
 Rules:
 
@@ -101,6 +100,7 @@ Reusable workflows. Two forms:
 Rules:
 
 - Use the directory form for new native skills, with or without supporting files
+- A skill that also exists under `.agents/skills/<name>/` is a thin wrapper: the shared frontmatter and one line that loads the shared file. Keep the rules in the shared file; the contract eval enforces this.
 - `SKILL.md` is the canonical entry — no `index.md`, no `README.md`
 - Skill body is written as procedural instructions for Claude, not as user-facing documentation
 
@@ -126,7 +126,6 @@ Rules:
 ## Cache & Working State (gitignored)
 
 - `.claude/plans/` — local plan files
-- `.claude/tsc-cache/<session>/` — per-session edit tracking
 - `.claude/scheduled_tasks.lock` — runtime lock
 
 These MUST stay gitignored. If you find one tracked, remove it.

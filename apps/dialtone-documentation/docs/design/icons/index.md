@@ -156,8 +156,8 @@ Go to the [Icon Builder page](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/
 
 ### Exporting
 
-> [!INFO] Claude Code
-> The `/icon` skill automates SVG validation, normalization, and build verification. Run `/icon add <name>` or `/icon update <name>`.
+> [!INFO] Agent skill
+> The `icon-work` skill checks the SVG, keywords and build. Ask it to add or update an icon.
 
 1. [Create a new branch](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-css/.github/CONTRIBUTING.md#making-a-pull-request) in [dialtone](https://github.com/dialpad/dialtone/tree/staging) repo starting with "dlt-xxxx-" in the name.
 2. Export the SVG from the **12px (size 100)** Figma component. For standard icons (all categories except `brand-full-color`), prepare the SVG before placing it:

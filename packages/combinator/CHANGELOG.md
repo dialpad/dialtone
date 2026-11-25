@@ -1,3 +1,17 @@
+# [1.9.0](https://github.com/dialpad/dialtone/compare/combinator/v1.8.0...combinator/v1.9.0) (2026-11-24)
+
+
+### Features
+
+* **Text:** DLT-3825 add slide option for truncated text ([#1660](https://github.com/dialpad/dialtone/issues/1660)) ([ca27995](https://github.com/dialpad/dialtone/commit/ca27995b8143588064be4b9b629305c181f02b4b))
+
+# [1.8.0](https://github.com/dialpad/dialtone/compare/combinator/v1.7.0...combinator/v1.8.0) (2026-11-23)
+
+
+### Features
+
+* **Filter Pill, List Item, Dropdown:** DLT-3842 add disabled, described and grouped options ([#1637](https://github.com/dialpad/dialtone/issues/1637)) ([46e948a](https://github.com/dialpad/dialtone/commit/46e948a707c808b258067e6cce521d5b6026a621))
+
 # [1.7.0](https://github.com/dialpad/dialtone/compare/combinator/v1.6.0...combinator/v1.7.0) (2026-11-17)
 
 

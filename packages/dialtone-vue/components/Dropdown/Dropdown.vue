@@ -453,11 +453,11 @@ export default {
     },
 
     beginningOfListMethod () {
-      return this.onBeginningOfList || this.onBeginningOfMenu;
+      return this.onBeginningOfList || this.jumpToEnd;
     },
 
     endOfListMethod () {
-      return this.onEndOfList || this.onEndOfMenu;
+      return this.onEndOfList || this.jumpToBeginning;
     },
 
     activeItemEl () {
@@ -526,24 +526,6 @@ export default {
       return closeButton && closeButton.getRootNode().activeElement === closeButton;
     },
 
-    focusMenuClose () {
-      const closeButton = this.getMenuCloseButton();
-      if (!closeButton) return false;
-      // Close has no application row index and must not emit a choice highlight.
-      this.highlightIndex = -1;
-      this.highlightId = '';
-      closeButton.focus();
-      return true;
-    },
-
-    onBeginningOfMenu () {
-      if (!this.focusMenuClose()) this.jumpToEnd();
-    },
-
-    onEndOfMenu () {
-      if (!this.focusMenuClose()) this.jumpToBeginning();
-    },
-
     clearHighlightIndex () {
       this.setHighlightIndex(-1);
     },
@@ -561,7 +543,7 @@ export default {
 
       if (isPopoverOpen) {
         if (this.openedWithKeyboard && this.isArrowKeyNav) {
-          if (this._itemsLength() || !this.focusMenuClose()) this.setHighlightIndex(0);
+          this.setHighlightIndex(0);
           // Popover's default first-element focus skips aria-disabled rows, but a DtListItem disabled row
           // stays reachable: focus it so focus and keyboard position agree. A consumer focus target wins.
           const consumerFocus = Object.entries(this.$attrs).some(([key, value]) =>
@@ -619,7 +601,6 @@ export default {
         return;
       }
 
-      if (!this._itemsLength() && this.focusMenuClose()) return;
       return this.onHomeKey();
     },
 
@@ -628,7 +609,6 @@ export default {
         return;
       }
 
-      if (this.focusMenuClose()) return;
       return this.onEndKey();
     },
 

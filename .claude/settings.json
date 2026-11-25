@@ -38,10 +38,6 @@
             "type": "command",
             "command": ".claude/hooks/shaping-ripple.sh",
             "timeout": 1000
-          },
-          {
-            "type": "command",
-            "command": ".claude/hooks/post-tool-use-tracker.sh"
           }
         ]
       }

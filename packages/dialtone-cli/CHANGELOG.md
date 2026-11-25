@@ -1,3 +1,23 @@
+# [1.12.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.11.0...dialtone-cli/v1.12.0) (2026-11-24)
+
+
+### Bug Fixes
+
+* **Dropdown, Popover:** DLT-3860 keep the screen-reader close button out of menu keyboard navigation ([#1694](https://github.com/dialpad/dialtone/issues/1694)) ([4bf7e36](https://github.com/dialpad/dialtone/commit/4bf7e36f19e7183ca6fbf4009c3d4ff0eb0f5a48))
+* **Phone:** DLT-3858 move formatPhoneNumber to the @dialpad/dialtone/vue3/phone subpath ([#1693](https://github.com/dialpad/dialtone/issues/1693)) ([81d4216](https://github.com/dialpad/dialtone/commit/81d42161af0ff23ee3182e09138f68c04c795849))
+
+
+### Features
+
+* **Text:** DLT-3825 add slide option for truncated text ([#1660](https://github.com/dialpad/dialtone/issues/1660)) ([ca27995](https://github.com/dialpad/dialtone/commit/ca27995b8143588064be4b9b629305c181f02b4b))
+
+# [1.11.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.10.1...dialtone-cli/v1.11.0) (2026-11-23)
+
+
+### Features
+
+* **Filter Pill, List Item, Dropdown:** DLT-3842 add disabled, described and grouped options ([#1637](https://github.com/dialpad/dialtone/issues/1637)) ([46e948a](https://github.com/dialpad/dialtone/commit/46e948a707c808b258067e6cce521d5b6026a621))
+
 ## [1.10.1](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.10.0...dialtone-cli/v1.10.1) (2026-11-17)
 
 

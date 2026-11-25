@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "10.13.1",
+  "version": "10.15.0",
   "packageManager": "pnpm@11.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -45,6 +45,11 @@
       "import": "./dist/vue3/lib/*/index.js",
       "require": "./dist/vue3/lib/*/index.cjs"
     },
+    "./vue/phone": {
+      "types": "./dist/vue3/common/phone/index.d.ts",
+      "import": "./dist/vue3/common/phone/index.js",
+      "require": "./dist/vue3/common/phone/index.cjs"
+    },
     "./vue3": {
       "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/dialtone-vue.js",
@@ -54,6 +59,11 @@
       "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/lib/*/index.js",
       "require": "./dist/vue3/lib/*/index.cjs"
+    },
+    "./vue3/phone": {
+      "types": "./dist/vue3/common/phone/index.d.ts",
+      "import": "./dist/vue3/common/phone/index.js",
+      "require": "./dist/vue3/common/phone/index.cjs"
     },
     "./themes/*": {
       "types": "./dist/tokens/types/themes/*.d.ts",
