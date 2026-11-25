@@ -36,7 +36,7 @@ const config = {
       plugins: [react({ include: /\.jsx$/, jsxRuntime: 'classic' })],
       build: {
         sourcemap: true,
-        cssTarget: 'esnext',
+        target: 'baseline-widely-available',
       },
       css: {
         devSourcemap: true,
