@@ -31,8 +31,9 @@ The package ships the `use-dialtone` skill in `skills/use-dialtone/`. It tells a
 Run this from the directory where you start your assistant, after installing the package (macOS, Linux or WSL, with a `node_modules` install):
 
 ```bash
-skill="$(dirname "$(node -p "require.resolve('@dialpad/dialtone-mcp-server/package.json')")")/skills/use-dialtone"
-[ -f "$skill/SKILL.md" ] &&
+pkg="$(node -p "require.resolve('@dialpad/dialtone-mcp-server/package.json')")" &&
+  skill="$(dirname "$pkg")/skills/use-dialtone" &&
+  [ -f "$skill/SKILL.md" ] &&
   mkdir -p .claude/skills .agents/skills &&
   rm -rf .claude/skills/use-dialtone .agents/skills/use-dialtone &&
   cp -R "$skill" .claude/skills/ &&

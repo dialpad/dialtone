@@ -133,6 +133,9 @@ test('README copy step changes nothing when the package is not installed', (t) =
   t.after(() => rmSync(app, { recursive: true, force: true }));
   mkdirSync(join(app, '.claude/skills/use-dialtone'), { recursive: true });
   writeFileSync(join(app, '.claude/skills/use-dialtone/SKILL.md'), 'existing copy');
+  // A local folder with the same name must not stand in for the missing package.
+  mkdirSync(join(app, 'skills/use-dialtone'), { recursive: true });
+  writeFileSync(join(app, 'skills/use-dialtone/SKILL.md'), 'decoy');
   assert.throws(() => execFileSync('sh', ['-c', copyCommand], { cwd: app, stdio: 'pipe' }));
   assert.equal(read(join(app, '.claude/skills/use-dialtone/SKILL.md')), 'existing copy');
 });
