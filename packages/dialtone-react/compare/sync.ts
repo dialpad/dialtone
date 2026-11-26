@@ -384,6 +384,11 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
   const hello = (side: Side) => post(side, { key: SYNC_KEY, type: 'connect' });
 
   const restart = (side: Side) => {
+    // The pointer mirrored from a frame that reloads is gone from the other one: its hover styles and hovered
+    // elements, which came from the old document, go with it.
+    if (cursor?.mirrors === side && isReady(otherSide(side))) {
+      post(otherSide(side), { key: SYNC_KEY, type: 'replay', events: [{ kind: 'leave' }] });
+    }
     since[side] = now();
     setHandshake(side, 'connecting');
     if (cursor && (cursor.over === side || cursor.mirrors === side)) setCursor(null);

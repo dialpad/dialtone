@@ -9,12 +9,15 @@
 //
 // It mirrors pointer movement, presses (so drags), clicks, page scroll and the scroll of elements inside the story,
 // named keys (Escape, the arrows, Enter in a text field), the values of text fields, selects and range inputs, and
-// where focus is.
+// where focus is. Hover styles too: the browser's :hover follows only the real pointer, so the elements under the
+// replayed pointer get an attribute that copies of the page's :hover rules apply to (compare-sync-hover.js).
 //
 // Real keyboard focus stays in the source: the frame the last real press, key or typing happened in. The other frame,
 // the mirror, never takes it: while it's the mirror, its `focus()` does nothing but show where focus would have gone,
 // as a ring the comparison page draws over the frame. So a component that focuses itself on a replayed click (Dropdown
 // opening its menu) can't take focus from the frame you're typing in.
+
+import { createHoverEmulation } from './compare-sync-hover.js';
 
 /** Marks this agent's messages, so neither side mistakes them for Storybook's channel (`storybook-channel`). */
 export const COMPARE_SYNC_KEY = 'dialtone-compare-sync';
@@ -251,17 +254,22 @@ const scrollerAbove = (node) => {
  * @param {(event: Event) => boolean} [options.isReal] Whether an event is real input: `isTrusted`, so replayed
  *   events never travel back. Tests stand in for it, since a script can't make a trusted event.
  * @param {(callback: () => void) => void} [options.requestFrame] Schedules the once-per-frame flush.
+ * @param {(callback: (deadline: IdleDeadline) => void) => () => void} [options.requestIdle] Schedules a slice of the
+ *   hover styles' build in idle time, returning a cancel function (see createHoverEmulation).
  * @returns {{ uninstall: () => void } | null}
  */
 export function installCompareSyncAgent ({
   win = window,
   isReal = event => event.isTrusted,
   requestFrame = callback => win.requestAnimationFrame(callback),
+  requestIdle,
 } = {}) {
   if (win.parent === win) return null;
   win[INSTANCE]?.uninstall();
 
   const doc = win.document;
+  // Hover styles for the replayed pointer, from the handshake to the goodbye.
+  const hoverStyles = createHoverEmulation({ win, requestIdle });
   // The comparison page's origin, from its handshake. Null while inert.
   let host = null;
   let queue = [];
@@ -385,6 +393,8 @@ export function installCompareSyncAgent ({
   const onPointer = (event) => {
     if (!isReal(event)) return;
     if (event.type === 'pointerdown') becomeSource();
+    // The real pointer is here, so the other frame's replayed one isn't: its hover styles go.
+    hoverStyles.clear();
     clickDue = event.type === 'pointerup';
     realPoint = { x: event.clientX, y: event.clientY };
     enqueue({ kind: POINTER_KINDS[event.type], x: event.clientX, y: event.clientY });
@@ -511,8 +521,10 @@ export function installCompareSyncAgent ({
   // What a browser fires when the pointer goes from one element to another: out on the one it left and over on the
   // one it reached, then leave on each element it left (innermost first) and enter on each it entered (outermost
   // first), stopping at the ancestors both share. Enter and leave don't bubble, and components listen for them on
-  // wrappers (Vue's tooltip listens for mouseenter on its anchor's wrapper), so each element gets its own.
+  // wrappers (Vue's tooltip listens for mouseenter on its anchor's wrapper), so each element gets its own. The hover
+  // styles move first, as :hover has by the time a browser fires these.
   const crossBoundary = (to) => {
+    hoverStyles.mark(to);
     const [previous = null] = hovered;
     const [next = null] = to;
     const left = hovered.filter(node => !to.includes(node));
@@ -533,6 +545,8 @@ export function installCompareSyncAgent ({
     lastPoint = { x, y };
     const target = doc.elementFromPoint(x, y) ?? doc.documentElement;
     if (target !== hovered[0]) crossBoundary(pathOf(target));
+    // Back after real input here took them off (onPointer).
+    else hoverStyles.mark(hovered);
     return target;
   };
 
@@ -854,6 +868,7 @@ export function installCompareSyncAgent ({
   const connect = (origin) => {
     if (!host) listen(true);
     emulateCapture(true);
+    hoverStyles.start();
     // An opaque origin (a sandboxed comparison) can only be reached with '*'.
     host = origin === 'null' ? '*' : origin;
     post({ type: 'ready', viewport: viewport() });
@@ -865,6 +880,7 @@ export function installCompareSyncAgent ({
     press = null;
     clickTarget = null;
     releasePointer();
+    hoverStyles.stop();
     emulateCapture(false);
     shimFocus(false);
     role = null;

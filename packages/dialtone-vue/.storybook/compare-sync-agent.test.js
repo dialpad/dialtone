@@ -1,3 +1,4 @@
+import { HOVER_ATTRIBUTE } from './compare-sync-hover.js';
 import {
   COMPARE_SYNC_KEY,
   MAX_TEXT,
@@ -34,10 +35,15 @@ function framedAgent (html = PAGE) {
   const listen = vi.spyOn(win, 'addEventListener');
   let pointAt = doc.body;
   doc.elementFromPoint = () => pointAt;
+  const idle = [];
   const agent = installCompareSyncAgent({
     win,
     isReal: event => real.has(event),
     requestFrame: callback => frames.push(callback),
+    requestIdle: (callback) => {
+      idle.push(callback);
+      return () => idle.includes(callback) && idle.splice(idle.indexOf(callback), 1);
+    },
   });
   const byId = id => doc.getElementById(id);
   const log = [];
@@ -59,6 +65,10 @@ function framedAgent (html = PAGE) {
     pointAt: (id) => { pointAt = byId(id); },
     runFrame: () => frames.splice(0).forEach(callback => callback()),
     pendingFrames: () => frames.length,
+    idle,
+    runIdle: () => {
+      while (idle.length) idle.shift()({ didTimeout: false, timeRemaining: () => 50 });
+    },
     host,
     fromHost: (data, source = host) => win.dispatchEvent(new win.MessageEvent('message', {
       data: { key: COMPARE_SYNC_KEY, ...data },
@@ -1122,6 +1132,93 @@ describe('Compare sync agent', () => {
       frame.runFrame();
 
       expect(frame.rings()).toEqual([]);
+    });
+  });
+
+  describe('Hover styles', () => {
+    const hovered = () => [...frame.doc.querySelectorAll(`[${HOVER_ATTRIBUTE}]`)].map(element => element.id || element.localName);
+
+    beforeEach(() => {
+      frame = framedAgent();
+      // Constructable sheets, which jsdom doesn't have: a sheet keeps the text it was given.
+      Object.defineProperty(frame.doc, 'adoptedStyleSheets', { configurable: true, writable: true, value: [] });
+      frame.win.CSSStyleSheet.prototype.replaceSync = function (text) {
+        this.text = text;
+      };
+      const style = frame.doc.createElement('style');
+      style.textContent = '#target:hover { color: red }';
+      frame.doc.head.append(style);
+    });
+
+    afterEach(() => {
+      delete frame.win.CSSStyleSheet.prototype.replaceSync;
+    });
+
+    it('copies the hover rules at the handshake, in idle time, and not before', () => {
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 6 }] });
+      expect(frame.idle).toEqual([]);
+
+      frame.fromHost({ type: 'connect' });
+      expect(frame.doc.adoptedStyleSheets).toEqual([]);
+      frame.runIdle();
+
+      expect(frame.doc.adoptedStyleSheets.map(sheet => sheet.text)).toEqual([`#target[${HOVER_ATTRIBUTE}]{color: red;}`]);
+    });
+
+    it('marks the replayed pointer\'s element and its ancestors as it enters, and unmarks what it leaves', () => {
+      frame.fromHost({ type: 'connect' });
+      frame.pointAt('target');
+      const marks = [];
+      frame.byId('target').addEventListener('mouseenter', () => marks.push(hovered()));
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 6 }] });
+      expect(hovered()).toEqual(['html', 'body', 'outer', 'wrap', 'target']);
+      // As :hover, already there when the enter events go.
+      expect(marks).toEqual([['html', 'body', 'outer', 'wrap', 'target']]);
+
+      frame.pointAt('other');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 60 }] });
+      expect(hovered()).toEqual(['html', 'body', 'other']);
+    });
+
+    it('unmarks everything when the pointer leaves, or the real pointer comes in, until the next replayed move', () => {
+      frame.fromHost({ type: 'connect' });
+      frame.pointAt('target');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 6 }] });
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'leave' }] });
+      expect(hovered()).toEqual([]);
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 6 }] });
+      frame.realEvent(frame.byId('other'), 'pointermove', { clientX: 1, clientY: 1 });
+      expect(hovered()).toEqual([]);
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 6, y: 6 }] });
+      expect(hovered()).toEqual(['html', 'body', 'outer', 'wrap', 'target']);
+    });
+
+    it('takes the sheet and every mark out on disconnect, leaving the page as it was', () => {
+      const html = frame.doc.documentElement.outerHTML;
+      frame.fromHost({ type: 'connect' });
+      frame.runIdle();
+      frame.pointAt('target');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 6 }] });
+
+      frame.fromHost({ type: 'disconnect' });
+
+      expect(frame.doc.documentElement.outerHTML).toBe(html);
+      expect(frame.doc.adoptedStyleSheets).toEqual([]);
+    });
+
+    it('sends nothing for the marks it sets', () => {
+      frame.fromHost({ type: 'connect' });
+      frame.runIdle();
+      frame.pointAt('target');
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 6 }, { kind: 'leave' }] });
+      frame.runFrame();
+
+      expect(frame.inputs()).toEqual([]);
     });
   });
 

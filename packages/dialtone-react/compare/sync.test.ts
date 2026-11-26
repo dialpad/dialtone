@@ -382,6 +382,27 @@ describe('Compare sync', () => {
       expect(posts).toEqual([['react', { key: SYNC_KEY, type: 'connect' }]]);
     });
 
+    it('takes the pointer out of the other frame when the frame it mirrors reloads, and only then', () => {
+      const { relay, posts, connectBoth } = relayWithFrames();
+      connectBoth();
+      relay.receive('vue', input([{ kind: 'move', x: 1, y: 1 }]));
+      posts.length = 0;
+
+      // The mirror reloading has a new document already.
+      relay.frameLoaded('react');
+      expect(posts).toEqual([['react', { key: SYNC_KEY, type: 'connect' }]]);
+      relay.receive('react', ready);
+      relay.receive('vue', input([{ kind: 'move', x: 1, y: 1 }]));
+      posts.length = 0;
+
+      relay.frameLoaded('vue');
+
+      expect(posts).toEqual([
+        ['react', { key: SYNC_KEY, type: 'replay', events: [{ kind: 'leave' }] }],
+        ['vue', { key: SYNC_KEY, type: 'connect' }],
+      ]);
+    });
+
     it('tells cursor subscribers about each change', () => {
       const { relay, connectBoth } = relayWithFrames();
       connectBoth();
