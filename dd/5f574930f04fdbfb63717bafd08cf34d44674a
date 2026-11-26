@@ -1,0 +1,47 @@
+packages/dialtone-react/components/FilterPill/FilterPillConstants.ts
+  s_2defdf83601f66::t_9ae5668c6c1b9f 1-16
+packages/dialtone-react/components/FilterPill/FilterPillSelection.ts
+  s_2defdf83601f66::t_b5f96f7908dad3 1-154
+packages/dialtone-react/components/FilterPill/modules/FilterPillOptionGroup.tsx
+  s_2defdf83601f66::t_12a9fed81d223a 1-44
+packages/dialtone-react/components/FilterPill/FilterPill.stories.tsx
+  s_fcb16554a933ef::t_e1f0d43af86311 1,6-7,14-23,85-93,96,175-178,369,377,390-395,407,419,428,434,447-452,464,476,485,491-492,495,504-509,586-1080
+packages/dialtone-react/components/FilterPill/FilterPill.test.tsx
+  s_fcb16554a933ef::t_51e7e0e354c60e 2-3,11,58,331-341,673-749,751-771,775-779,781,785,938-1059
+packages/dialtone-react/components/FilterPill/FilterPill.tsx
+  s_fcb16554a933ef::t_dc61d170a76586 3,6-9,20,24-25,30,34,41,43-51,59,68-104,106-110,113-120,125,135-161,173,240-247,255-256,272,278,284,290,312-316,321-326,328-329,331,333-336,342-357,370-375,377-378,386-476,481-492,494-543,546-547,550-551,555-584,587-596,598,600-613,615,631-762,764-812,814-819,825-828,833-843,845-853,869-871,877,881-1150,1155-1235,1249,1259-1265,1279-1286,1289-1337,1342-1357,1363-1371,1374-1418,1420,1424-1429,1460-1464,1467,1469,1476,1493-1534
+packages/dialtone-react/components/FilterPill/FilterPillControlled.test.tsx
+  s_fcb16554a933ef::t_3539c83400609e 1-1051
+packages/dialtone-react/components/FilterPill/FilterPillOptionRows.test.tsx
+  s_fcb16554a933ef::t_f21b8300f346a8 1-254
+packages/dialtone-react/components/FilterPill/FilterPillSelection.test.ts
+  s_fcb16554a933ef::t_cd18008adef78b 1-151
+packages/dialtone-react/components/FilterPill/index.ts
+  s_fcb16554a933ef::t_6e2db64176bbe4 6-7,10-11,13-14
+packages/dialtone-react/components/FilterPill/skips.json
+  s_fcb16554a933ef::t_edf82a22bb872c 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dd5f574930f04fdbfb63717bafd08cf34d44674a",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_fcb16554a933ef": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "202c46ee-67da-4bea-9a77-f10f11feba81",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.agents/evals/run-skill-contract-evals.mjs
+  s_3bb71b6b327c2f::t_bce44455447933 360-362,424-436,442
+.agents/skills/component-work/SKILL.md
+  s_3bb71b6b327c2f::t_b75d80710cc9f2 27-28
+.claude/skills/pr-prep/SKILL.md
+  s_3bb71b6b327c2f::t_d53a80924b35c5 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "24248688323a0d18d917a0d545b96c2e9d428e49",
+  "prompts": {},
+  "sessions": {
+    "s_3bb71b6b327c2f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c9555cff-575d-4161-8442-9e589ff47310",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

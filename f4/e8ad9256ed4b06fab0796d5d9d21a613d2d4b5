@@ -1,0 +1,38 @@
+apps/dialtone-documentation/.github/CONTRIBUTING.md
+  s_188f9ea26bd995::t_55679afb3a785b 65
+  s_d68b116eb64426::t_805a71f4c5cb1d 36,52-64,66
+.agents/resources/rules/documentation-site.md
+  s_188f9ea26bd995::t_072fc90b6d8caf 10
+.agents/resources/rules/documentation-writing.md
+  s_188f9ea26bd995::t_dda3f4567f0dfb 17-22
+.agents/skills/component-work/SKILL.md
+  s_188f9ea26bd995::t_49e552a1cf9e3f 39,60
+.claude/rules/documentation-site.md
+  s_188f9ea26bd995::t_fb61828ac92512 20-21
+.claude/rules/documentation-writing.md
+  s_188f9ea26bd995::t_00114d854dd6b0 15-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f4e8ad9256ed4b06fab0796d5d9d21a613d2d4b5",
+  "prompts": {},
+  "sessions": {
+    "s_188f9ea26bd995": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1fab5-6c3b-7f91-8668-fb15aae1bff7",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_d68b116eb64426": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a218bb-5cf8-74f3-b761-982def59b084",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

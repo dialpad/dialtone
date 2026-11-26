@@ -1,0 +1,25 @@
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_3e1738420eadfa 69-70
+scripts/retrieval/static-example.mjs
+  s_7f1d1d64baa803::t_cd38a03c1bf662 1-31
+scripts/retrieval/static-example.test.mjs
+  s_7f1d1d64baa803::t_73b057f962c9ff 1-37
+scripts/retrieval/validate-examples.mjs
+  s_7f1d1d64baa803::t_bf5a34461b5c5e 14,54-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2b5eb2f84299a20687f48e6f9a58a661a7ca503c",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
