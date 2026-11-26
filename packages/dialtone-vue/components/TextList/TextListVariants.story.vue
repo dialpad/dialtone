@@ -108,6 +108,8 @@ import { DtTextList, DtTextListItem } from './index';
 
 export default {
   name: 'DtTextListVariants',
+  // This story ignores its args; don't let them override the root's own gap (DLT-3866).
+  inheritAttrs: false,
   components: {
     DtStack,
     DtText,

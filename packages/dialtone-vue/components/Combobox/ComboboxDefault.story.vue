@@ -10,6 +10,10 @@
     :empty-list="$attrs.emptyList"
     :empty-state-class="$attrs.emptyStateClass"
     :click-on-select="$attrs.clickOnSelect"
+    :list-id="$attrs.listId"
+    :list-rendered-outside="$attrs.listRenderedOutside"
+    :on-beginning-of-list="$attrs.onBeginningOfList"
+    :on-end-of-list="$attrs.onEndOfList"
     @escape="onComboboxEscape"
     @highlight="$attrs.onHighlight"
     @select="onComboboxSelect"
@@ -65,6 +69,8 @@ import { DtListItem } from '@/components/ListItem';
 
 export default {
   name: 'DtComboboxDefault',
+  // Args are bound explicitly from $attrs; don't also apply them to the root (DLT-3866).
+  inheritAttrs: false,
 
   components: {
     DtAvatar,
