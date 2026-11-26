@@ -44,28 +44,28 @@ The component prioritizes different sources for content display, sequentially ch
                   </template>
                 </dt-avatar>
             </td>
-            <th class="d-ta-left"><a class="d-link" href="#icon">Icon</a></th>
+            <th class="d-ta-left"><dt-link href="#icon">Icon</dt-link></th>
             <td>When no username can be associated with the Avatar.</td>
         </tr>
         <tr>
             <td>
                 <dt-avatar full-name="Daniel Parker" seed="user-456" />
             </td>
-            <th class="d-ta-left"><a class="d-link" href="#initials">Initials</a></th>
+            <th class="d-ta-left"><dt-link href="#initials">Initials</dt-link></th>
             <td>When the user's name is known.</td>
         </tr>
         <tr>
             <td>
                 <dt-avatar image-alt="user avatar" image-src="/assets/images/person.png" />
             </td>
-            <th class="d-ta-left"><a class="d-link" href="#image">Image</a></th>
+            <th class="d-ta-left"><dt-link href="#image">Image</dt-link></th>
             <td>When a custom image has been uploaded.</td>
         </tr>
         <tr>
             <td>
                 <dt-avatar image-src="/assets/images/person.png" image-alt="person avatar" :group="3" />
             </td>
-            <th class="d-ta-left"><a class="d-link" href="#group">Group</a></th>
+            <th class="d-ta-left"><dt-link href="#group">Group</dt-link></th>
             <td>When reflecting more than 2 participants.</td>
         </tr>
     </tbody>
