@@ -2,18 +2,31 @@ import { parseChannelMessage } from './frames';
 import type { Side } from './frames';
 import {
   HANDSHAKE_TIMEOUT,
+  KEYS_MS,
+  MAX_KEYS,
   SYNC_KEY,
+  TYPING,
   createSyncRelay,
   frameOffset,
+  keyLabel,
   mapPoint,
   parseAgentMessage,
   syncChip,
 } from './sync';
-import type { Box, HostMessage, RelayStatus, SyncEvent } from './sync';
+import type { Box, HostMessage, KeyEvent, Locator, RelayStatus, SyncEvent } from './sync';
 
 const VIEWPORT = { width: 600, height: 700 };
 const ready = { key: SYNC_KEY, type: 'ready', viewport: VIEWPORT };
 const input = (events: SyncEvent[], viewport = VIEWPORT) => ({ key: SYNC_KEY, type: 'input', viewport, events });
+const ring = (rect: unknown) => ({ key: SYNC_KEY, type: 'ring', viewport: VIEWPORT, rect });
+const locator = (at = { x: 100, y: 200 }): Locator => ({
+  role: 'button', qa: 'dt-button', name: 'Open', at, ranks: [[0, 1], [0, 1], [0, 1]],
+});
+const key = (name: string, flags: Partial<KeyEvent> = {}): KeyEvent => ({
+  kind: 'keydown', key: name, code: name, keyCode: 0, alt: false, ctrl: false, meta: false, shift: false,
+  repeat: false, target: locator(), ...flags,
+});
+const text = (value: string): SyncEvent => ({ kind: 'value', value, selection: null, target: locator() });
 
 function relayWithFrames () {
   const posts: [Side, HostMessage][] = [];
@@ -69,6 +82,35 @@ describe('Compare sync', () => {
       ['more events than a frame holds', input(Array.from({ length: 65 }, () => ({ kind: 'leave' as const })))],
     ])('rejects a message with %s', (_name, data) => {
       expect(parseAgentMessage(data)).toBeNull();
+    });
+
+    it('reads keys, text, focus and the ring', () => {
+      const events: SyncEvent[] = [
+        key('Escape'), key('ArrowDown', { kind: 'keyup', target: null }), text('hello'),
+        { kind: 'focus', target: locator() }, { kind: 'blur' },
+      ];
+
+      expect(parseAgentMessage(input(events))).toEqual({ type: 'input', viewport: VIEWPORT, events });
+      expect(parseAgentMessage(ring({ x: 1, y: 2, width: 30, height: 40 })))
+        .toEqual({ type: 'ring', viewport: VIEWPORT, rect: { x: 1, y: 2, width: 30, height: 40 } });
+      expect(parseAgentMessage(ring(null))).toEqual({ type: 'ring', viewport: VIEWPORT, rect: null });
+    });
+
+    it.each([
+      ['a key that isn\'t a string', key(1 as unknown as string)],
+      ['a key without its modifiers', { ...key('Escape'), shift: undefined }],
+      ['a key whose locator has no point', key('Escape', { target: { ...locator(), at: null as unknown as Locator['at'] } })],
+      ['a locator without its ranks', { kind: 'focus', target: { ...locator(), ranks: [[0, 1]] } }],
+      ['a text that isn\'t a string', { ...text(''), value: 5 }],
+      ['a text that is too long', text('x'.repeat(10001))],
+      ['a text without a locator', { ...text('x'), target: null }],
+    ])('rejects %s', (_name, event) => {
+      expect(parseAgentMessage(input([event as SyncEvent]))).toBeNull();
+    });
+
+    it('rejects a ring that isn\'t a rect', () => {
+      expect(parseAgentMessage(ring({ x: 1, y: 2, width: -1, height: 4 }))).toBeNull();
+      expect(parseAgentMessage(ring(undefined))).toBeNull();
     });
 
     it('is invisible to the Storybook channel parser', () => {
@@ -351,6 +393,139 @@ describe('Compare sync', () => {
       relay.receive('vue', input([{ kind: 'move', x: 2, y: 2 }]));
 
       expect(listener).toHaveBeenCalledTimes(1);
+    });
+
+    it('replays keys, text and focus in the other frame, with their locators\' points mapped', () => {
+      const { relay, replays } = relayWithFrames();
+      relay.start();
+      relay.receive('vue', ready);
+      relay.receive('react', { ...ready, viewport: { width: 300, height: 350 } });
+
+      relay.receive('vue', input([key('Escape'), text('hi'), { kind: 'focus', target: locator() }, { kind: 'blur' }]));
+
+      const mapped = locator({ x: 50, y: 100 });
+      expect(replays('react')).toEqual([
+        key('Escape', { target: mapped }),
+        { kind: 'value', value: 'hi', selection: null, target: mapped },
+        { kind: 'focus', target: mapped },
+        { kind: 'blur' },
+      ]);
+    });
+
+    it('makes the frame a key or typing came from the source, but not where its focus went', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('react', input([{ kind: 'focus', target: locator() }]));
+      const afterFocus = relay.getStatus().source;
+      relay.receive('react', input([key('Escape')]));
+      const afterKey = relay.getStatus().source;
+      relay.receive('vue', input([text('x')]));
+
+      expect([afterFocus, afterKey, relay.getStatus().source]).toEqual([null, 'react', 'vue']);
+    });
+
+    it('lists the keys mirrored into a frame for the overlay, with their modifiers, counting repeats', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('vue', input([key('ArrowDown'), key('ArrowDown', { kind: 'keyup' })]));
+      relay.receive('vue', input([key('ArrowDown', { repeat: true })]));
+      relay.receive('vue', input([key('Escape', { shift: true, ctrl: true })]));
+
+      expect(relay.getKeys()).toMatchObject({
+        over: 'react',
+        mirrors: 'vue',
+        entries: [{ label: 'ArrowDown', count: 2 }, { label: 'Ctrl+Shift+Escape', count: 1 }],
+      });
+    });
+
+    it('shows typed text as one "typing…" line and never the text', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('vue', input([text('hunter2')]));
+      relay.receive('vue', input([text('hunter22')]));
+
+      expect(relay.getKeys()?.entries).toMatchObject([{ label: TYPING, count: 1 }]);
+      expect(JSON.stringify(relay.getKeys())).not.toContain('hunter');
+    });
+
+    it('relays a range\'s or a select\'s value without calling it typing', () => {
+      const { relay, replays, connectBoth } = relayWithFrames();
+      connectBoth();
+      const change = (role: string): SyncEvent => ({ kind: 'value', value: '7', selection: null, target: { ...locator(), role } });
+
+      relay.receive('vue', input([change('input:range'), change('select')]));
+
+      expect(replays('react')).toHaveLength(2);
+      expect(relay.getKeys()).toBeNull();
+    });
+
+    it('drops keys older than KEYS_MS, keeps MAX_KEYS, and starts over in the other frame', () => {
+      const { relay, connectBoth, advance } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('vue', input([key('Home')]));
+      advance(KEYS_MS);
+      relay.receive('vue', input([key('Home')]));
+      const restarted = relay.getKeys()?.entries;
+      ['End', 'PageUp', 'PageDown', 'Escape', 'Backspace'].forEach(name => relay.receive('vue', input([key(name)])));
+      const capped = relay.getKeys()?.entries.map(entry => entry.label);
+      relay.receive('react', input([key('Delete')]));
+
+      expect(restarted).toMatchObject([{ label: 'Home', count: 1 }]);
+      expect(capped).toHaveLength(MAX_KEYS);
+      expect(capped).toEqual(['PageUp', 'PageDown', 'Escape', 'Backspace']);
+      expect(relay.getKeys()).toMatchObject({ over: 'vue', mirrors: 'react', entries: [{ label: 'Delete' }] });
+    });
+
+    it('has no keys until one is mirrored, and none after stop or the frame reloading', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+      relay.receive('vue', input([{ kind: 'move', x: 1, y: 1 }, { kind: 'focus', target: locator() }]));
+      const before = relay.getKeys();
+
+      relay.receive('vue', input([key('Escape')]));
+      relay.frameLoaded('react');
+      const reloaded = relay.getKeys();
+      relay.receive('vue', ready);
+      relay.receive('react', ready);
+      relay.receive('vue', input([key('Escape')]));
+      relay.stop();
+
+      expect([before, reloaded, relay.getKeys()]).toEqual([null, null, null]);
+    });
+
+    it('keeps each frame\'s ring, drawn over it, until it says none, reloads or sync stops', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+      const listener = vi.fn();
+      relay.subscribeRings(listener);
+      const rect = { x: 1, y: 2, width: 3, height: 4 };
+
+      relay.receive('react', ring(rect));
+      const shown = relay.getRings();
+      relay.receive('react', ring(null));
+      const hidden = relay.getRings();
+      relay.receive('vue', ring(rect));
+      relay.frameLoaded('vue');
+      const reloaded = relay.getRings();
+      relay.receive('react', ring(rect));
+      relay.stop();
+
+      expect(shown).toEqual({ vue: null, react: { over: 'react', mirrors: 'vue', rect } });
+      expect(hidden).toEqual({ vue: null, react: null });
+      expect(reloaded.vue).toBeNull();
+      expect(relay.getRings()).toEqual({ vue: null, react: null });
+      expect(listener).toHaveBeenCalledTimes(6);
+    });
+  });
+
+  describe('keyLabel', () => {
+    it('puts the modifiers first, in a fixed order', () => {
+      expect(keyLabel(key('ArrowDown'))).toBe('ArrowDown');
+      expect(keyLabel(key('Home', { meta: true, shift: true, alt: true, ctrl: true }))).toBe('Ctrl+Alt+Shift+Meta+Home');
     });
   });
 

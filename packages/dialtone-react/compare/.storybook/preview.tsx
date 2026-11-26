@@ -22,11 +22,11 @@ addons.getChannel().on(DARK_MODE_EVENT_NAME, (isDark: boolean) => setMode(isDark
 const preview: Preview = {
   globalTypes: {
     ...globalTypes,
-    // Sync mode (../sync.ts): the pointer and page scroll in one frame are
-    // mirrored in the other. A global, so it stays in the URL; only this page
+    // Sync mode (../sync.ts): the pointer, scrolling and keyboard in one frame
+    // are mirrored in the other. A global, so it stays in the URL; only this page
     // reads it (iframeUrl forwards just theme and contrast).
     compareSync: {
-      description: 'Mirror the pointer, clicks and page scroll between the Vue and React frames',
+      description: 'Mirror the pointer, clicks, scrolling, keys and typed text between the Vue and React frames',
       defaultValue: 'off',
       toolbar: {
         title: 'Sync',

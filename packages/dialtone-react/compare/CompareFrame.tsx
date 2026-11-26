@@ -2,7 +2,8 @@
 // theme and contrast globals in both frames. Dark mode isn't a global in
 // either Storybook (it's the dark-mode addon's event), so it's posted into
 // each frame once it renders. With the compareSync global on, the pointer,
-// drags and scrolling in one frame are mirrored in the other (sync.ts).
+// drags, scrolling, keys, typed text and focus in one frame are mirrored in the
+// other (sync.ts).
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { RefObject } from 'react';
 import { addons } from 'storybook/preview-api';
@@ -25,6 +26,8 @@ import { IDLE_STATUS, boxOf, createSyncRelay, frameOffset, syncChip } from './sy
 import type { ReactStatus, RelayStatus, SyncChip, SyncRelay } from './sync';
 import { SyncCue } from './SyncCue';
 import { SyncCursor } from './SyncCursor';
+import { SyncFocusRing } from './SyncFocusRing';
+import { SyncKeys } from './SyncKeys';
 import { readStoredDarkMode } from '../.storybook/shared';
 
 interface Prepared {
@@ -212,6 +215,15 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
                 onLoad={() => relay.frameLoaded(side)}
               />
               {canSync && (
+                <MirroredFocus
+                  relay={relay}
+                  side={side}
+                  frame={frame}
+                  viewport={viewport}
+                  highContrast={globals.contrast === 'high'}
+                />
+              )}
+              {canSync && (
                 <MirroredCursor
                   relay={relay}
                   side={side}
@@ -221,6 +233,7 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
                 />
               )}
               {canSync && <ScrollCue relay={relay} side={side} />}
+              {canSync && <MirroredKeys relay={relay} side={side} />}
             </div>
           )}
       </div>
@@ -254,6 +267,32 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
 function ScrollCue ({ relay, side }: { relay: SyncRelay; side: Side }) {
   const cue = useSyncExternalStore(relay.subscribeCue, relay.getCue);
   return <SyncCue cue={cue} side={side} />;
+}
+
+// The keys mirrored into this side's frame.
+function MirroredKeys ({ relay, side }: { relay: SyncRelay; side: Side }) {
+  const keys = useSyncExternalStore(relay.subscribeKeys, relay.getKeys);
+  return <SyncKeys keys={keys} side={side} />;
+}
+
+// The fake focus ring over this side's frame, while it mirrors the other's focus.
+function MirroredFocus ({ relay, side, frame, viewport, highContrast }: {
+  relay: SyncRelay;
+  side: Side;
+  frame: RefObject<HTMLIFrameElement | null>;
+  viewport: RefObject<HTMLDivElement | null>;
+  highContrast: boolean;
+}) {
+  const ring = useSyncExternalStore(relay.subscribeRings, relay.getRings)[side];
+  if (!ring || !frame.current || !viewport.current) return null;
+  return (
+    <SyncFocusRing
+      mirrors={ring.mirrors}
+      rect={ring.rect}
+      offset={frameOffset(boxOf(frame.current), boxOf(viewport.current))}
+      highContrast={highContrast}
+    />
+  );
 }
 
 function SyncStatus ({ chip }: { chip: SyncChip }) {

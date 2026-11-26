@@ -1,8 +1,9 @@
-// Sync mode: the comparison relays the real pointer and page scroll from one frame to the other, through the agent
-// both previews install (dialtone-vue/.storybook/compare-sync-agent.js). Only postMessage, never the frames'
-// documents, so it works for the published previews (same origin) and the local dev servers (cross-origin) alike.
-// CompareFrame feeds the relay the frames' messages and posts what it sends; the relay itself has no DOM.
-import { COMPARE_SYNC_KEY } from '../../dialtone-vue/.storybook/compare-sync-agent.js';
+// Sync mode: the comparison relays the real pointer, scroll, keys, typed values and focus from one frame to the
+// other, through the agent both previews install (dialtone-vue/.storybook/compare-sync-agent.js). Only postMessage,
+// never the frames' documents, so it works for the published previews (same origin) and the local dev servers
+// (cross-origin) alike. CompareFrame feeds the relay the frames' messages and posts what it sends; the relay itself
+// has no DOM.
+import { COMPARE_SYNC_KEY, MAX_TEXT } from '../../dialtone-vue/.storybook/compare-sync-agent.js';
 import type { Side } from './frames';
 
 export const SYNC_KEY: string = COMPARE_SYNC_KEY;
@@ -18,17 +19,59 @@ export interface Point {
   y: number;
 }
 
+/**
+ * Where an element is, so the other frame can find its counterpart (the agent's locatorOf): its role, data-qa and
+ * approximate accessible name, its index and the count among the focusable elements sharing the first one, two and
+ * three of those, and its centre, which the relay maps into the other frame.
+ */
+export interface Locator {
+  role: string;
+  qa: string;
+  name: string;
+  at: Point;
+  ranks: [number, number][];
+}
+
+/** A named key (never a character), on the source's focused element, or null when nothing was focused. */
+export interface KeyEvent {
+  kind: 'keydown' | 'keyup';
+  key: string;
+  code: string;
+  keyCode: number;
+  alt: boolean;
+  ctrl: boolean;
+  meta: boolean;
+  shift: boolean;
+  repeat: boolean;
+  target: Locator | null;
+}
+
 /** What an agent reports, and what the relay replays in the other frame. Points are in the viewport's CSS pixels. */
 export type SyncEvent =
   | { kind: 'move' | 'down' | 'up' | 'click'; x: number; y: number }
   | { kind: 'scroll'; x: number; y: number }
   /** An element inside the page scrolled to (x, y); `at` is a point inside it, which finds it in the other frame. */
   | { kind: 'scroller'; x: number; y: number; at: Point }
-  | { kind: 'leave' };
+  | { kind: 'leave' }
+  | KeyEvent
+  /** A field's new value after real typing (or a range or select changing); the selection when it has one. */
+  | { kind: 'value'; value: string; selection: { start: number; end: number } | null; target: Locator }
+  /** Where the source's real focus went, or that it left the page. */
+  | { kind: 'focus'; target: Locator }
+  | { kind: 'blur' };
+
+/** The rect of the element the mirror's focus would be on, in its viewport, or null for no ring. */
+export interface Rect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
 
 export type AgentMessage =
   | { type: 'ready'; viewport: Size }
-  | { type: 'input'; viewport: Size; events: SyncEvent[] };
+  | { type: 'input'; viewport: Size; events: SyncEvent[] }
+  | { type: 'ring'; viewport: Size; rect: Rect | null };
 
 export type HostMessage =
   | { key: string; type: 'connect' | 'disconnect' }
@@ -42,6 +85,37 @@ export interface CursorState extends Point {
   /** Set on the state a click leaves, so the cursor can show it; the next event replaces the state without it. */
   click?: number;
 }
+
+/** The fake focus ring over `over`: where its focus would be, in its viewport, mirroring the other side's real focus. */
+export interface RingState {
+  over: Side;
+  mirrors: Side;
+  rect: Rect;
+}
+
+/** One line of the mirrored-keys overlay: a key, or "typing…" for typed text (never the text). */
+export interface KeyEntry {
+  /** Changes whenever the entry does (a repeat of the same key), so the overlay restarts its time. */
+  seq: number;
+  label: string;
+  /** How many times the key was pressed in a row. */
+  count: number;
+  /** When it was last pressed, by the relay's clock. */
+  time: number;
+}
+
+/** The keys mirrored into `over` lately, oldest first. */
+export interface KeysState {
+  over: Side;
+  mirrors: Side;
+  entries: KeyEntry[];
+}
+
+/** What the overlay shows for typed text: never the text itself, which may be a secret. */
+export const TYPING = 'typing…';
+/** How long the overlay shows a key, in ms, and how many it shows at most. */
+export const KEYS_MS = 1500;
+export const MAX_KEYS = 4;
 
 /** A scroll replayed in `over`, which the comparison shows for a moment at the frame's edge. */
 export interface CueState {
@@ -87,9 +161,49 @@ const POINT_KINDS = new Set(['move', 'down', 'up', 'click', 'scroll']);
 const isPoint = (value: unknown): value is Point =>
   isObject(value) && isFiniteNumber(value.x) && isFiniteNumber(value.y);
 
-const isSyncEvent = (value: unknown): value is SyncEvent =>
-  isObject(value) && (value.kind === 'leave' || (isPoint(value) &&
-    (POINT_KINDS.has(value.kind as string) || (value.kind === 'scroller' && isPoint(value.at)))));
+const isShortString = (value: unknown, max: number): value is string => typeof value === 'string' && value.length <= max;
+
+const isRank = (value: unknown) => Array.isArray(value) && value.length === 2 &&
+  value.every(number => Number.isInteger(number) && number >= -1);
+
+const isLocator = (value: unknown): value is Locator =>
+  isObject(value) && isShortString(value.role, 64) && isShortString(value.qa, 200) && isShortString(value.name, 80) &&
+  isPoint(value.at) && Array.isArray(value.ranks) && value.ranks.length === 3 && value.ranks.every(isRank);
+
+const KEY_FLAGS = ['alt', 'ctrl', 'meta', 'shift', 'repeat'];
+
+const isKeyEvent = (value: Record<string, unknown>) =>
+  isShortString(value.key, 32) && isShortString(value.code, 32) && isFiniteNumber(value.keyCode) &&
+  KEY_FLAGS.every(flag => typeof value[flag] === 'boolean') && (value.target === null || isLocator(value.target));
+
+const isSelection = (value: unknown) =>
+  value === null || (isObject(value) && Number.isInteger(value.start) && Number.isInteger(value.end));
+
+const isSyncEvent = (value: unknown): value is SyncEvent => {
+  if (!isObject(value)) return false;
+  switch (value.kind) {
+    case 'leave':
+    case 'blur':
+      return true;
+    case 'keydown':
+    case 'keyup':
+      return isKeyEvent(value);
+    case 'value':
+      return isShortString(value.value, MAX_TEXT) && isSelection(value.selection) && isLocator(value.target);
+    case 'focus':
+      return isLocator(value.target);
+    case 'scroller':
+      return isPoint(value) && isPoint(value.at);
+    default:
+      return isPoint(value) && POINT_KINDS.has(value.kind as string);
+  }
+};
+
+const isRect = (value: unknown): value is Rect => isObject(value) && isFiniteNumber(value.x) &&
+  isFiniteNumber(value.y) && isFiniteNumber(value.width) && isFiniteNumber(value.height) &&
+  value.width >= 0 && value.height >= 0;
+
+const isKey = (event: SyncEvent): event is KeyEvent => event.kind === 'keydown' || event.kind === 'keyup';
 
 /** Whether a posted message is the sync agent's, valid or not. Storybook's channel posts strings, never this. */
 export const isSyncMessage = (data: unknown): boolean => isObject(data) && data.key === SYNC_KEY;
@@ -100,10 +214,21 @@ export function parseAgentMessage (data: unknown): AgentMessage | null {
   const message = data as Record<string, unknown>;
   if (!isSize(message.viewport)) return null;
   if (message.type === 'ready') return { type: 'ready', viewport: message.viewport };
+  if (message.type === 'ring') {
+    return message.rect === null || isRect(message.rect)
+      ? { type: 'ring', viewport: message.viewport, rect: message.rect }
+      : null;
+  }
   if (message.type !== 'input' || !Array.isArray(message.events) || message.events.length > MAX_EVENTS) return null;
   if (!message.events.every(isSyncEvent)) return null;
   return { type: 'input', viewport: message.viewport, events: message.events };
 }
+
+const MODIFIERS = [['ctrl', 'Ctrl'], ['alt', 'Alt'], ['shift', 'Shift'], ['meta', 'Meta']] as const;
+
+/** A key as the overlay shows it, with its modifiers first: "Escape", "Shift+ArrowDown". */
+export const keyLabel = (event: KeyEvent): string =>
+  [...MODIFIERS.filter(([flag]) => event[flag]).map(([, name]) => name), event.key].join('+');
 
 /**
  * A point in one frame's viewport, in the other's: the same pixels when the two are the same size (as the two panes
@@ -171,6 +296,12 @@ export interface SyncRelay {
   /** The latest replayed scroll, for the cue. */
   getCue: () => CueState | null;
   subscribeCue: (listener: () => void) => () => void;
+  /** Each frame's fake focus ring, for useSyncExternalStore: a new object whenever one changes. */
+  getRings: () => Record<Side, RingState | null>;
+  subscribeRings: (listener: () => void) => () => void;
+  /** The keys mirrored lately, for the overlay. */
+  getKeys: () => KeysState | null;
+  subscribeKeys: (listener: () => void) => () => void;
 }
 
 interface RelayOptions {
@@ -179,19 +310,26 @@ interface RelayOptions {
   now?: () => number;
 }
 
+const NO_RINGS: Record<Side, RingState | null> = { vue: null, react: null };
+
 export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: RelayOptions): SyncRelay {
   let enabled = false;
   let status = IDLE_STATUS;
   let cursor: CursorState | null = null;
   let cue: CueState | null = null;
+  let rings = NO_RINGS;
+  let keys: KeysState | null = null;
   let clicks = 0;
   let scrolls = 0;
+  let keyPresses = 0;
   // The last offset seen per scroller, found by where it is, to tell which way it went.
   const offsets = new Map<string, number>();
   const since: Record<Side, number> = { vue: 0, react: 0 };
   const viewports: Partial<Record<Side, Size>> = {};
   const cursorListeners = new Set<() => void>();
   const cueListeners = new Set<() => void>();
+  const ringListeners = new Set<() => void>();
+  const keyListeners = new Set<() => void>();
 
   const setStatus = (next: Partial<RelayStatus>) => {
     const merged = { ...status, ...next };
@@ -210,6 +348,37 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     cue = next;
     cueListeners.forEach(listener => listener());
   };
+  const setRing = (side: Side, rect: Rect | null) => {
+    if (!rect && !rings[side]) return;
+    rings = { ...rings, [side]: rect && { over: side, mirrors: otherSide(side), rect } };
+    ringListeners.forEach(listener => listener());
+  };
+  const clearRings = () => {
+    if (rings === NO_RINGS) return;
+    rings = NO_RINGS;
+    ringListeners.forEach(listener => listener());
+  };
+  const setKeys = (next: KeysState | null) => {
+    if (next === keys) return;
+    keys = next;
+    keyListeners.forEach(listener => listener());
+  };
+
+  // A key mirrored into `over`, for the overlay: the same key again soon after is counted on its line, and lines older
+  // than KEYS_MS drop off. Typed text is one "typing…" line, however much is typed.
+  const keysWith = (over: Side, mirrors: Side, label: string, current: KeysState | null): KeysState => {
+    const time = now();
+    const entries = (current?.over === over ? current.entries : []).filter(entry => time - entry.time < KEYS_MS);
+    const last = entries[entries.length - 1];
+    const seq = ++keyPresses;
+    if (last?.label === label) {
+      entries[entries.length - 1] = { seq, label, count: label === TYPING ? 1 : last.count + 1, time };
+    } else {
+      entries.push({ seq, label, count: 1, time });
+    }
+    return { over, mirrors, entries: entries.slice(-MAX_KEYS) };
+  };
+
   const isReady = (side: Side) => status.frames[side] === 'ready';
 
   const hello = (side: Side) => post(side, { key: SYNC_KEY, type: 'connect' });
@@ -219,6 +388,8 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     setHandshake(side, 'connecting');
     if (cursor && (cursor.over === side || cursor.mirrors === side)) setCursor(null);
     if (cue) setCue(null);
+    setRing(side, null);
+    if (keys?.over === side) setKeys(null);
     hello(side);
   };
 
@@ -230,7 +401,11 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     const replay: SyncEvent[] = [];
     let next = cursor;
     let source = status.source;
+    let nextKeys = keys;
     const scrolled: CueState[] = [];
+    // A locator's point, in the other frame.
+    const mapTarget = <T extends Locator | null>(target: T): T =>
+      (target && { ...target, at: mapPoint(target.at, from, to) }) as T;
     // Which way a scroll went, from the last offset seen at the same place (a scroller is told apart by its point,
     // rounded to a 40px cell).
     const showScroll = (key: string, y: number) => {
@@ -252,9 +427,21 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
         // Pixels as they are, and the locating point mapped into the other frame.
         replay.push({ ...event, at: mapPoint(event.at, from, to) });
         showScroll(`${side}:${Math.round(event.at.x / 40)},${Math.round(event.at.y / 40)}`, event.y);
-      } else if (event.kind === 'leave') {
-        if (next?.mirrors === side) next = null;
+      } else if (event.kind === 'leave' || event.kind === 'blur') {
+        if (event.kind === 'leave' && next?.mirrors === side) next = null;
         replay.push(event);
+      } else if (isKey(event)) {
+        // Keys and typing make their frame the source, as the pointer does.
+        source = side;
+        replay.push({ ...event, target: mapTarget(event.target) });
+        if (event.kind === 'keydown') nextKeys = keysWith(target, side, keyLabel(event), nextKeys);
+      } else if (event.kind === 'value') {
+        source = side;
+        replay.push({ ...event, target: mapTarget(event.target) });
+        // A range's or a select's new value isn't typing: the key that changed it, if one did, already shows.
+        if (!/^(input:range|select)$/.test(event.target.role)) nextKeys = keysWith(target, side, TYPING, nextKeys);
+      } else if (event.kind === 'focus') {
+        replay.push({ ...event, target: mapTarget(event.target) });
       } else {
         source = side;
         const point = mapPoint(event, from, to);
@@ -267,6 +454,7 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     if (replay.length) post(target, { key: SYNC_KEY, type: 'replay', events: replay });
     setCursor(next);
     if (scrolled.length) setCue(scrolled[scrolled.length - 1]);
+    setKeys(nextKeys);
     setStatus({ source });
   };
 
@@ -281,6 +469,8 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
       SIDES.forEach(side => post(side, { key: SYNC_KEY, type: 'disconnect' }));
       setCursor(null);
       setCue(null);
+      clearRings();
+      setKeys(null);
       offsets.clear();
       status = IDLE_STATUS;
       onStatus(status);
@@ -305,6 +495,8 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
       if (!enabled || !message) return true;
       viewports[side] = message.viewport;
       setHandshake(side, 'ready');
+      // A frame's own ring, drawn over it.
+      if (message.type === 'ring') setRing(side, message.rect);
       // Nothing to mirror into a frame that hasn't answered.
       if (message.type === 'input' && isReady(otherSide(side))) relayInput(side, message.events);
       return true;
@@ -319,6 +511,16 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     subscribeCue (listener) {
       cueListeners.add(listener);
       return () => cueListeners.delete(listener);
+    },
+    getRings: () => rings,
+    subscribeRings (listener) {
+      ringListeners.add(listener);
+      return () => ringListeners.delete(listener);
+    },
+    getKeys: () => keys,
+    subscribeKeys (listener) {
+      keyListeners.add(listener);
+      return () => keyListeners.delete(listener);
     },
   };
 }
@@ -366,6 +568,6 @@ export function syncChip (reactStatus: ReactStatus, status: RelayStatus): SyncCh
   return {
     tone: 'on',
     text: `Mirroring ${from} → ${to}`,
-    title: `The pointer, drags, clicks and scrolling in ${from} are replayed in ${to}.`,
+    title: `The pointer, drags, clicks, scrolling, keys and typed text in ${from} are replayed in ${to}.`,
   };
 }

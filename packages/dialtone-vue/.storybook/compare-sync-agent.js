@@ -7,8 +7,14 @@
 // the DOM and attaches no input listeners. Everything goes through postMessage, so it works for the published
 // previews (one origin) and the local dev servers (one origin each) alike.
 //
-// It mirrors pointer movement, presses (so drags), clicks, page scroll and the scroll of elements inside the story.
-// No keyboard, and it never moves focus itself.
+// It mirrors pointer movement, presses (so drags), clicks, page scroll and the scroll of elements inside the story,
+// named keys (Escape, the arrows, Enter in a text field), the values of text fields, selects and range inputs, and
+// where focus is.
+//
+// Real keyboard focus stays in the source: the frame the last real press, key or typing happened in. The other frame,
+// the mirror, never takes it: while it's the mirror, its `focus()` does nothing but show where focus would have gone,
+// as a ring the comparison page draws over the frame. So a component that focuses itself on a replayed click (Dropdown
+// opening its menu) can't take focus from the frame you're typing in.
 
 /** Marks this agent's messages, so neither side mistakes them for Storybook's channel (`storybook-channel`). */
 export const COMPARE_SYNC_KEY = 'dialtone-compare-sync';
@@ -19,15 +25,188 @@ const INSTANCE = Symbol.for('dialtone.compareSyncAgent');
 const POINTER_KINDS = { pointermove: 'move', pointerdown: 'down', pointerup: 'up' };
 // Only the last position of a run of moves, or of scrolls, has to travel.
 const COALESCED = new Set(['move', 'scroll']);
-const REPLAYED_KINDS = new Set(['move', 'down', 'up', 'click', 'leave', 'scroll', 'scroller']);
+const POINT_KINDS = new Set(['move', 'down', 'up', 'click', 'scroll', 'scroller']);
+// What the user does, as opposed to where the pointer is: a frame replaying any of these is the mirror.
+const INTERACTIONS = new Set(['down', 'up', 'click', 'keydown', 'keyup', 'value']);
+
+// A text longer than this isn't copied: the comparison's stories don't hold one, and a message shouldn't carry it.
+export const MAX_TEXT = 10000;
 
 const isFiniteNumber = value => typeof value === 'number' && Number.isFinite(value);
+const isPoint = value => isFiniteNumber(value?.x) && isFiniteNumber(value?.y);
+const isShortString = (value, max) => typeof value === 'string' && value.length <= max;
+const isRank = value => Array.isArray(value) && value.length === 2 &&
+  value.every(number => Number.isInteger(number) && number >= -1);
 
-// A replayed event the agent can act on: one of its kinds, with finite coordinates where it has any. A scroller event
-// also locates its element by a point (`at`).
-const isReplayEvent = event => REPLAYED_KINDS.has(event?.kind) &&
-  (event.kind === 'leave' || (isFiniteNumber(event.x) && isFiniteNumber(event.y) &&
-    (event.kind !== 'scroller' || (isFiniteNumber(event.at?.x) && isFiniteNumber(event.at?.y)))));
+// Where an element is, in terms that survive the other framework's markup (see locatorOf).
+const isLocator = value => isShortString(value?.role, 64) && isShortString(value.qa, 200) &&
+  isShortString(value.name, 80) && isPoint(value.at) && Array.isArray(value.ranks) && value.ranks.length === 3 &&
+  value.ranks.every(isRank);
+
+const isKey = event => isShortString(event.key, 32) && isShortString(event.code, 32) &&
+  isFiniteNumber(event.keyCode) && ['alt', 'ctrl', 'meta', 'shift', 'repeat'].every(flag => typeof event[flag] === 'boolean') &&
+  (event.target === null || isLocator(event.target));
+
+const isSelection = value => value === null || (Number.isInteger(value?.start) && Number.isInteger(value?.end));
+
+// What each kind of replayed event needs, all of the expected types. Pointer kinds need a point.
+const VALID = {
+  leave: () => true,
+  blur: () => true,
+  keydown: isKey,
+  keyup: isKey,
+  value: event => isShortString(event.value, MAX_TEXT) && isSelection(event.selection) && isLocator(event.target),
+  focus: event => isLocator(event.target),
+  scroller: event => isPoint(event) && isPoint(event.at),
+};
+
+// A replayed event the agent can act on.
+const isReplayEvent = (event) => {
+  const kind = event?.kind;
+  if (Object.prototype.hasOwnProperty.call(VALID, kind)) return VALID[kind](event);
+  return POINT_KINDS.has(kind) && isPoint(event);
+};
+
+// Keys. A synthetic key event runs a component's key handlers, and nothing else: no typed character, no Tab moving
+// focus, no Enter or Space activating a button. So only named keys travel (Escape, ArrowDown, Home, Backspace…), never
+// a character, which arrives as the field's new value instead (see onInput). Not Tab, nor a modifier alone, nor an
+// IME's keys; Enter only in a text field, where a component handles it (Combobox selects), never on a button, whose
+// Enter is the browser's own activation. Nothing from a password field.
+const NAMED_KEY = /^[A-Z][A-Za-z0-9]+$/;
+const UNRELAYED_KEYS = new Set([
+  'Tab', 'Shift', 'Control', 'Alt', 'AltGraph', 'Meta', 'OS', 'Fn', 'FnLock', 'Hyper', 'Super', 'Symbol', 'SymbolLock',
+  'CapsLock', 'NumLock', 'ScrollLock', 'Process', 'Dead', 'Compose', 'Unidentified', 'Spacebar',
+]);
+// Input types a person types text into, and those whose value is copied: those but the password, and a range, whose
+// arrow keys change it natively, which a replayed key can't.
+const TEXT_TYPES = new Set(['text', 'search', 'email', 'url', 'tel', 'number', 'password']);
+const VALUE_TYPES = new Set(['text', 'search', 'email', 'url', 'tel', 'number', 'range']);
+
+const isEditable = element => element.isContentEditable === true ||
+  (element.isContentEditable === undefined && Boolean(element.closest?.('[contenteditable=""], [contenteditable="true"], [contenteditable="plaintext-only"]')));
+
+const isPassword = element => element?.localName === 'input' && element.type === 'password';
+
+const isTextField = element => Boolean(element) && ((element.localName === 'input' && TEXT_TYPES.has(element.type)) ||
+  element.localName === 'textarea' || isEditable(element));
+
+/** Whether a key on an element (null: nothing focused) is mirrored. The same test runs on both sides. */
+export function isRelayedKey (key, element) {
+  return NAMED_KEY.test(key) && !UNRELAYED_KEYS.has(key) && !isPassword(element) &&
+    (key !== 'Enter' || isTextField(element));
+}
+
+// Finding an element in the other frame. The two frameworks render different wrappers, ids and classes, but the same
+// focusable elements, with the same role, data-qa and accessible name, in the same order. So an element is told by
+// its place among the focusable elements like it: same role, then also the same data-qa, then also the same name. In
+// the other frame, the most specific of those lists that is as long as the source's gives the element by its index;
+// failing that, the one of them nearest the point where it was; failing that, the focusable element at that point.
+const FOCUSABLE = 'a[href], area[href], button, input, select, textarea, iframe, summary, [tabindex], ' +
+  '[contenteditable]:not([contenteditable="false"])';
+
+const clean = text => (text ?? '').replace(/\s+/g, ' ').trim().slice(0, 80);
+
+const roleOf = element => element.getAttribute('role') ||
+  (element.localName === 'input' ? `input:${element.type}` : element.localName);
+
+// The text of the elements that label one: aria-labelledby's, else a field's <label>s.
+const labelsOf = (element) => {
+  const ids = element.getAttribute('aria-labelledby');
+  const labels = ids
+    ? ids.split(/\s+/).map(id => element.ownerDocument.getElementById(id))
+    : [...(element.labels ?? [])];
+  return clean(labels.map(label => label?.textContent ?? '').join(' '));
+};
+
+const isField = element => /^(input|textarea|select)$/.test(element.localName) || isEditable(element);
+
+// An approximation of the accessible name, from the attributes and labels both frameworks set. Never a field's own
+// text, which is what a person typed.
+const nameOf = element => clean(element.getAttribute('aria-label') || labelsOf(element) ||
+  element.getAttribute('placeholder') || element.getAttribute('title') || (isField(element) ? '' : element.textContent));
+
+const SIGNATURE = [roleOf, element => element.getAttribute('data-qa') ?? '', nameOf];
+
+// checkVisibility leaves out what doesn't render (display: none, also an ancestor's): a closed menu one framework
+// keeps in the page and the other doesn't.
+const focusables = doc => [...doc.querySelectorAll(FOCUSABLE)]
+  .filter(element => (typeof element.checkVisibility === 'function' ? element.checkVisibility() : true));
+
+const sameRect = (a, b) => a === b ||
+  Boolean(a && b && ['x', 'y', 'width', 'height'].every(side => Math.abs(a[side] - b[side]) < 0.5));
+
+const centerOf = (element) => {
+  const rect = element.getBoundingClientRect();
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+};
+
+/** Where an element is, for the other frame to find its counterpart (findByLocator). */
+export function locatorOf (element) {
+  const keys = SIGNATURE.map(read => read(element));
+  let pool = focusables(element.ownerDocument);
+  const ranks = keys.map((key, level) => {
+    pool = pool.filter(candidate => SIGNATURE[level](candidate) === key);
+    return [pool.indexOf(element), pool.length];
+  });
+  const [role, qa, name] = keys;
+  return { role, qa, name, at: centerOf(element), ranks };
+}
+
+/** The counterpart of the other frame's element in this document, or null. */
+export function findByLocator (doc, { role, qa, name, at, ranks }) {
+  const keys = [role, qa, name];
+  let pool = focusables(doc);
+  const pools = keys.map((key, level) => (pool = pool.filter(candidate => SIGNATURE[level](candidate) === key)));
+  for (let level = pools.length - 1; level >= 0; level--) {
+    const [index, count] = ranks[level];
+    if (index >= 0 && pools[level].length === count) return pools[level][index];
+  }
+  const nearest = [...pools].reverse().find(candidates => candidates.length);
+  if (nearest) {
+    const distance = (element) => {
+      const center = centerOf(element);
+      return Math.hypot(center.x - at.x, center.y - at.y);
+    };
+    return nearest.reduce((best, element) => (distance(element) < distance(best) ? element : best));
+  }
+  return doc.elementFromPoint(at.x, at.y)?.closest(FOCUSABLE) ?? null;
+}
+
+// The value a field's change copies, or null for one that isn't copied: a password, a checkbox (whose click is
+// replayed instead), a multiple select, a rich text editor (an editable with markup, which a framework's editor owns).
+const valueOf = (element) => {
+  if (element.localName === 'input') return VALUE_TYPES.has(element.type) ? element.value : null;
+  if (element.localName === 'textarea') return element.value;
+  if (element.localName === 'select') return element.multiple ? null : element.value;
+  if (isEditable(element)) return element.childElementCount ? null : element.textContent;
+  return null;
+};
+
+// The prototype whose native value setter sets each kind of field. An editable has none: its text is set instead.
+const FIELDS = { input: 'HTMLInputElement', textarea: 'HTMLTextAreaElement', select: 'HTMLSelectElement' };
+
+// A real key, as it travels.
+const keyOf = (event, target) => ({
+  kind: event.type,
+  key: event.key,
+  code: event.code,
+  keyCode: event.keyCode,
+  alt: event.altKey,
+  ctrl: event.ctrlKey,
+  meta: event.metaKey,
+  shift: event.shiftKey,
+  repeat: event.repeat,
+  target,
+});
+
+const selectionOf = (element) => {
+  try {
+    const { selectionStart: start, selectionEnd: end } = element;
+    return Number.isInteger(start) && Number.isInteger(end) ? { start, end } : null;
+  } catch {
+    return null;
+  }
+};
 
 const clamp = (value, max) => Math.min(Math.max(value, 0), Math.max(max, 0));
 
@@ -110,6 +289,19 @@ export function installCompareSyncAgent ({
   // Whether a replayed event is being dispatched right now, which is the only time pointer capture is emulated.
   let replaying = false;
   let restoreCapture = null;
+  // 'source' after real input here (a press, a key, typing), 'mirror' after replaying the other frame's, null before
+  // either. Only the mirror's focus() is shimmed (see shimFocus).
+  let role = null;
+  let restoreFocus = null;
+  // Real focus moved since the last flush: where it is now goes out with the batch.
+  let focusMoved = false;
+  // The element whose value event is last in the queue, so a run of typing sends only its latest value.
+  let typedIn = null;
+  // The mirror's fake focus ring: the element it's on, and the rect last sent for it (undefined until measured).
+  let ring = null;
+  let ringScheduled = false;
+  // Whether the comparison page draws a ring for this frame now, from the last rect sent.
+  let ringShown = false;
 
   const post = message => win.parent.postMessage({ key: COMPARE_SYNC_KEY, ...message }, host);
   const viewport = () => ({ width: win.innerWidth, height: win.innerHeight });
@@ -139,6 +331,15 @@ export function installCompareSyncAgent ({
     return at ?? center;
   };
 
+  // Where real focus is now: the focused element, or nothing when the page doesn't have focus (it went to the other
+  // frame, or the comparison) or nothing in it is focused.
+  const focusNow = () => {
+    const element = doc.hasFocus() ? doc.activeElement : null;
+    return element && element !== doc.body && element !== doc.documentElement
+      ? { kind: 'focus', target: locatorOf(element) }
+      : { kind: 'blur' };
+  };
+
   const flush = () => {
     flushRequested = false;
     if (!host) return;
@@ -149,8 +350,11 @@ export function installCompareSyncAgent ({
       at: locate(element),
     }));
     scrolledInner.clear();
-    post({ type: 'input', viewport: viewport(), events: [...queue, ...scrollers] });
+    const focus = focusMoved ? [focusNow()] : [];
+    focusMoved = false;
+    post({ type: 'input', viewport: viewport(), events: [...queue, ...scrollers, ...focus] });
     queue = [];
+    typedIn = null;
   };
 
   const enqueue = (event) => {
@@ -163,16 +367,32 @@ export function installCompareSyncAgent ({
     }
   };
 
+  // Real input here: this frame is the source, and its own focus() works again.
+  const becomeSource = () => {
+    if (role === 'source') return;
+    role = 'source';
+    shimFocus(false);
+    hideRing();
+  };
+
+  // Replaying the other frame's input: this frame is the mirror, and its focus() is shimmed.
+  const becomeMirror = () => {
+    if (role === 'mirror') return;
+    role = 'mirror';
+    shimFocus(true);
+  };
+
   const onPointer = (event) => {
     if (!isReal(event)) return;
+    if (event.type === 'pointerdown') becomeSource();
     clickDue = event.type === 'pointerup';
     realPoint = { x: event.clientX, y: event.clientY };
     enqueue({ kind: POINTER_KINDS[event.type], x: event.clientX, y: event.clientY });
   };
 
   // One click per press. A label's click is followed by a trusted click on its control, which the replayed click on
-  // the label makes again in the other frame: sending both would toggle a checkbox twice. A keyboard's click has no
-  // press, and phase 1 mirrors no keyboard.
+  // the label makes again in the other frame: sending both would toggle a checkbox twice. A keyboard's click (Enter or
+  // Space on a button) has no press, and isn't sent: neither are those keys (isRelayedKey).
   const onClick = (event) => {
     if (!isReal(event) || !clickDue) return;
     clickDue = false;
@@ -211,6 +431,41 @@ export function installCompareSyncAgent ({
   // A new size goes out with an empty batch.
   const onResize = () => enqueue(null);
 
+  // The element a key event went to, or null for none (the body: nothing is focused).
+  const elementOf = ({ target }) =>
+    (target?.nodeType === 1 && target !== doc.body && target !== doc.documentElement ? target : null);
+
+  // A real key, on the focused element (or the body). Its target goes as a locator, read now: focus may move on.
+  const onKey = (event) => {
+    if (!isReal(event)) return;
+    if (event.type === 'keydown') becomeSource();
+    const element = elementOf(event);
+    if (!event.isComposing && isRelayedKey(event.key, element)) enqueue(keyOf(event, element && locatorOf(element)));
+  };
+
+  // A field's new value after real typing (or pasting, or picking an option). The value goes, not the keys, so the
+  // other frame's framework sees a change of value as it would from typing. A run of typing in one field sends only
+  // the latest value in each batch. A replayed input event is untrusted, so it never comes back.
+  const onInput = (event) => {
+    if (!isReal(event)) return;
+    becomeSource();
+    const element = elementOf(event);
+    const value = element && valueOf(element);
+    if (typeof value !== 'string' || value.length > MAX_TEXT) return;
+    const change = { kind: 'value', value, selection: selectionOf(element), target: locatorOf(element) };
+    if (typedIn === element && queue[queue.length - 1]?.kind === 'value') queue[queue.length - 1] = change;
+    else enqueue(change);
+    typedIn = element;
+  };
+
+  // Real focus moving here, as a person or a component moves it. Where it ended up goes out with the batch. The
+  // mirror's focus can only move on its own when the page lost it (focus() is shimmed), which isn't the source's.
+  const onFocusChange = (event) => {
+    if (!isReal(event) || role === 'mirror') return;
+    focusMoved = true;
+    enqueue(null);
+  };
+
   // Capture, so a story that stops propagation still reports.
   const listeners = [
     ['pointermove', onPointer, true],
@@ -220,6 +475,11 @@ export function installCompareSyncAgent ({
     ['pointerout', onPointerOut, true],
     ['scroll', onScroll, true],
     ['resize', onResize, false],
+    ['keydown', onKey, true],
+    ['keyup', onKey, true],
+    ['input', onInput, true],
+    ['focusin', onFocusChange, true],
+    ['focusout', onFocusChange, true],
   ];
 
   // Replaying: what the other frame reported. Dispatched events are untrusted, so none of them is sent back.
@@ -414,6 +674,159 @@ export function installCompareSyncAgent ({
     });
   };
 
+  // The fake focus ring. The comparison page draws it over this frame, from the rect this agent sends for the element:
+  // measured once per animation frame while the ring shows, since the element can move (a menu sliding open), and
+  // sent only when it changed. Nothing is added to the story's page.
+  const postRing = (rect) => {
+    ringShown = Boolean(rect);
+    post({ type: 'ring', viewport: viewport(), rect });
+  };
+
+  const measureRing = () => {
+    ringScheduled = false;
+    if (!ring || !host) return;
+    if (!ring.element.isConnected) {
+      hideRing();
+      return;
+    }
+    const box = ring.element.getBoundingClientRect();
+    // An element that doesn't render (a closed menu's item) has no ring, until it renders again.
+    const rect = box.width || box.height ? { x: box.left, y: box.top, width: box.width, height: box.height } : null;
+    if (ring.rect === undefined || !sameRect(rect, ring.rect)) postRing(rect);
+    ring.rect = rect;
+    ringScheduled = true;
+    requestFrame(measureRing);
+  };
+
+  function showRing (element) {
+    if (!element || element === doc.body || element === doc.documentElement) {
+      hideRing();
+      return;
+    }
+    if (ring?.element === element) return;
+    // A new element: its rect goes out at the next measure, even if it matches the last one's.
+    ring = { element, rect: undefined };
+    if (!ringScheduled) {
+      ringScheduled = true;
+      requestFrame(measureRing);
+    }
+  }
+
+  function hideRing () {
+    ring = null;
+    if (ringShown && host) postRing(null);
+  }
+
+  // The focus shim. While this frame is the mirror, focus() on its elements does nothing but move the fake ring there:
+  // a component reacting to a replayed event (Dropdown focusing its menu, Slider its thumb) would otherwise take real
+  // focus from the source, and the next key would land here. On every prototype that has its own focus() (HTML, SVG,
+  // MathML), put back when this frame becomes the source again or disconnects, except where a story has replaced the
+  // shim in between.
+  function shimFocus (on) {
+    if (!on) {
+      restoreFocus?.();
+      restoreFocus = null;
+      return;
+    }
+    if (restoreFocus) return;
+    const shimmed = ['HTMLElement', 'SVGElement', 'MathMLElement']
+      .map(name => win[name]?.prototype)
+      .filter(proto => proto && Object.prototype.hasOwnProperty.call(proto, 'focus'))
+      .map((proto) => {
+        const original = proto.focus;
+        const shim = function focus () {
+          // Only where real focus could have gone: not a disabled control or an element that can't take focus.
+          if (this.isConnected && this.matches(FOCUSABLE) && !this.disabled) showRing(this);
+        };
+        proto.focus = shim;
+        return { proto, original, shim };
+      });
+    restoreFocus = () => shimmed.forEach(({ proto, original, shim }) => {
+      if (proto.focus === shim) proto.focus = original;
+    });
+  }
+
+  // The element a replayed key goes to: the counterpart of the source's focused element, else the one under the fake
+  // ring, else whatever this page has focused, else the body.
+  const keyTarget = (locator) => {
+    const found = locator && findByLocator(doc, locator);
+    if (found) return found;
+    if (ring?.element.isConnected) return ring.element;
+    const active = doc.activeElement;
+    return active && active !== doc.documentElement ? active : doc.body;
+  };
+
+  // A key, as the source's element got it. The same test as the source's, against this frame's element: a key that
+  // isn't mirrored there isn't here.
+  const pressKey = (event) => {
+    const target = keyTarget(event.target);
+    if (!isRelayedKey(event.key, target === doc.body ? null : target)) return;
+    const wasReplaying = replaying;
+    replaying = true;
+    try {
+      target.dispatchEvent(new win.KeyboardEvent(event.kind, {
+        key: event.key,
+        code: event.code,
+        keyCode: event.keyCode,
+        which: event.keyCode,
+        altKey: event.alt,
+        ctrlKey: event.ctrl,
+        metaKey: event.meta,
+        shiftKey: event.shift,
+        repeat: event.repeat,
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        view: win,
+      }));
+    } finally {
+      replaying = wasReplaying;
+    }
+  };
+
+  // A field's value, set as typing sets it: through the native setter, so a framework that wraps the element's own
+  // value property (React's value tracker) sees a change, then an input event (and change, for a select, which fires
+  // both at once). A field the other frame doesn't have, or a password, is skipped.
+  const writeValue = (element, value, selection) => {
+    const field = FIELDS[element.localName];
+    if (!field) {
+      element.textContent = value;
+      return;
+    }
+    Object.getOwnPropertyDescriptor(win[field].prototype, 'value').set.call(element, value);
+    // Setting a selection doesn't move focus.
+    try {
+      if (selection && element.setSelectionRange) element.setSelectionRange(selection.start, selection.end);
+    } catch {
+      // An input type without a selection (number).
+    }
+  };
+
+  const setValue = ({ value, selection, target }) => {
+    const element = findByLocator(doc, target);
+    const current = element && !isPassword(element) ? valueOf(element) : null;
+    if (current === null || current === value) return;
+    writeValue(element, value, selection);
+    const wasReplaying = replaying;
+    replaying = true;
+    try {
+      const InputEvent = win.InputEvent ?? win.Event;
+      element.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, inputType: 'insertReplacementText' }));
+      if (element.localName === 'select') element.dispatchEvent(new win.Event('change', { bubbles: true }));
+    } finally {
+      replaying = wasReplaying;
+    }
+  };
+
+  // The source's focus moved: the ring goes to the counterpart. The source itself has no ring: its focus is real.
+  const showFocus = ({ target }) => {
+    if (role !== 'source') showRing(findByLocator(doc, target));
+  };
+
+  const hideFocus = () => {
+    if (role !== 'source') hideRing();
+  };
+
   const replayers = {
     move: movePointer,
     down: pressAt,
@@ -422,6 +835,11 @@ export function installCompareSyncAgent ({
     leave: releasePointer,
     scroll: applyScroll,
     scroller: applyScroller,
+    keydown: pressKey,
+    keyup: pressKey,
+    value: setValue,
+    focus: showFocus,
+    blur: hideFocus,
   };
 
   // The handshake.
@@ -448,6 +866,10 @@ export function installCompareSyncAgent ({
     clickTarget = null;
     releasePointer();
     emulateCapture(false);
+    shimFocus(false);
+    role = null;
+    ring = null;
+    ringShown = false;
     host = null;
     queue = [];
     applied = null;
@@ -455,10 +877,17 @@ export function installCompareSyncAgent ({
     scrolledInner.clear();
     realPoint = null;
     clickDue = false;
+    focusMoved = false;
+    typedIn = null;
   };
 
+  // The other frame's input: this frame becomes the mirror first, so its focus() is shimmed before any replayed event
+  // can make a component call it. Moves and scrolls don't count: the pointer resting over a frame isn't using it.
   const replay = (events) => {
-    if (host && Array.isArray(events)) events.filter(isReplayEvent).forEach(event => replayers[event.kind](event));
+    if (!host || !Array.isArray(events)) return;
+    const valid = events.filter(isReplayEvent);
+    if (valid.some(event => INTERACTIONS.has(event.kind))) becomeMirror();
+    valid.forEach(event => replayers[event.kind](event));
   };
 
   // Only the window framing this preview can switch the agent on, and only with this agent's key.

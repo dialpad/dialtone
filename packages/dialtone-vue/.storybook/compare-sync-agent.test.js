@@ -1,22 +1,31 @@
-import { COMPARE_SYNC_KEY, installCompareSyncAgent } from './compare-sync-agent.js';
+import {
+  COMPARE_SYNC_KEY,
+  MAX_TEXT,
+  findByLocator,
+  installCompareSyncAgent,
+  isRelayedKey,
+  locatorOf,
+} from './compare-sync-agent.js';
 
 const HOST = 'http://localhost:9013';
 const RECORDED = ['pointerover', 'pointerout', 'pointerenter', 'pointerleave', 'pointermove', 'pointerdown', 'pointerup',
   'mouseover', 'mouseout', 'mouseenter', 'mouseleave', 'mousemove', 'mousedown', 'mouseup', 'click'];
 
+const PAGE = `
+  <div id="outer"><span id="wrap"><button id="target">Target</button></span></div>
+  <p id="other">Other</p>
+  <div id="track"><div id="thumb"></div></div>
+  <div id="list" style="overflow-y: auto"><ol id="inner" style="overflow-y: auto"><li id="item">Item</li></ol></div>
+  <input id="field">`;
+
 // The agent in a framed preview: an iframe of this document, whose parent window plays the comparison page. A script
 // can't make a trusted event, so the events a test calls real stand in for isTrusted ones.
-function framedAgent () {
+function framedAgent (html = PAGE) {
   const iframe = document.createElement('iframe');
   document.body.append(iframe);
   const win = iframe.contentWindow;
   const doc = win.document;
-  doc.body.innerHTML = `
-    <div id="outer"><span id="wrap"><button id="target">Target</button></span></div>
-    <p id="other">Other</p>
-    <div id="track"><div id="thumb"></div></div>
-    <div id="list" style="overflow-y: auto"><ol id="inner" style="overflow-y: auto"><li id="item">Item</li></ol></div>
-    <input id="field">`;
+  doc.body.innerHTML = html;
   const real = new WeakSet();
   const frames = [];
   // jsdom's window proxy, which isn't the test's `window` object.
@@ -34,7 +43,7 @@ function framedAgent () {
   const log = [];
   for (const id of ['outer', 'wrap', 'target', 'other', 'track', 'thumb']) {
     for (const type of RECORDED) {
-      byId(id).addEventListener(type, (event) => {
+      byId(id)?.addEventListener(type, (event) => {
         if (event.target === event.currentTarget) log.push(`${type}@${id}`);
       });
     }
@@ -61,6 +70,26 @@ function framedAgent () {
       real.add(event);
       target.dispatchEvent(event);
     },
+    realKey: (target, type, init = {}, trusted = true) => {
+      const event = new win.KeyboardEvent(type, { bubbles: true, cancelable: true, composed: true, ...init });
+      if (trusted) real.add(event);
+      target.dispatchEvent(event);
+    },
+    // A field's value after typing: what the browser fires once it has changed it.
+    realInput: (target, value, trusted = true) => {
+      if (value !== undefined) target.value = value;
+      const event = new win.InputEvent('input', { bubbles: true, composed: true });
+      if (trusted) real.add(event);
+      target.dispatchEvent(event);
+    },
+    realFocus: (target, type = 'focusin') => {
+      const event = new win.FocusEvent(type, { bubbles: true });
+      real.add(event);
+      target.dispatchEvent(event);
+    },
+    // Messages for the comparison's ring, in order.
+    rings: () => sent.mock.calls.map(([message]) => message).filter(message => message.type === 'ring')
+      .map(message => message.rect),
     realScroll: () => {
       const event = new win.Event('scroll', { bubbles: true });
       real.add(event);
@@ -135,15 +164,21 @@ describe('Compare sync agent', () => {
     it('only listens for the handshake, adds nothing to the page and sends nothing', () => {
       frame = framedAgent();
       const html = frame.doc.documentElement.outerHTML;
+      const focus = frame.win.HTMLElement.prototype.focus;
 
       frame.realEvent(frame.byId('target'), 'pointermove', { clientX: 5, clientY: 5 });
       frame.realEvent(frame.byId('target'), 'click');
+      frame.realKey(frame.byId('field'), 'keydown', { key: 'Escape' });
+      frame.realInput(frame.byId('field'));
+      frame.realFocus(frame.byId('field'));
+      frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 1, y: 1 }] });
       frame.runFrame();
 
       expect(frame.listen.mock.calls.map(([type]) => type)).toEqual(['message']);
       expect(frame.sent()).toEqual([]);
       expect(frame.pendingFrames()).toBe(0);
       expect(frame.doc.documentElement.outerHTML).toBe(html);
+      expect(frame.win.HTMLElement.prototype.focus).toBe(focus);
     });
 
     it('ignores Storybook\'s channel, other keys and windows other than its parent', () => {
@@ -640,6 +675,456 @@ describe('Compare sync agent', () => {
     });
   });
 
+  describe('Locators', () => {
+    const page = (html) => {
+      const doc = document.implementation.createHTMLDocument('');
+      doc.body.innerHTML = html;
+      doc.elementFromPoint = () => null;
+      return doc;
+    };
+    const rect = (element, left, top) => {
+      element.getBoundingClientRect = () => ({ left, top, width: 20, height: 10, right: left + 20, bottom: top + 10 });
+    };
+
+    it('finds the counterpart by its place among the elements like it, whatever wraps them', () => {
+      const source = page(`
+        <button data-qa="dt-button">Save</button><button data-qa="dt-button">Cancel</button>
+        <input aria-label="Name"><a href="#x">Help</a>`);
+      const other = page(`
+        <div><span><button data-qa="dt-button">Save</button></span></div>
+        <p><button data-qa="dt-button">Cancel</button></p><label>Name <input></label><a href="#y">Help</a>`);
+
+      const cancel = locatorOf(source.querySelectorAll('button')[1]);
+
+      expect(cancel).toMatchObject({ role: 'button', qa: 'dt-button', name: 'Cancel', ranks: [[1, 2], [1, 2], [0, 1]] });
+      expect(findByLocator(other, cancel)).toBe(other.querySelectorAll('button')[1]);
+      expect(findByLocator(other, locatorOf(source.querySelector('input')))).toBe(other.querySelector('input'));
+      expect(findByLocator(other, locatorOf(source.querySelector('a')))).toBe(other.querySelector('a'));
+    });
+
+    it('falls back to the role and data-qa when the names differ, and to the nearest when the counts do', () => {
+      const source = page('<li role="menuitem" tabindex="-1">One</li><li role="menuitem" tabindex="-1">Two</li>');
+      const sameCount = page('<li role="menuitem" tabindex="-1">1 One</li><li role="menuitem" tabindex="-1">2 Two</li>');
+      const moreItems = page(['A', 'B', 'C'].map(name => `<li role="menuitem" tabindex="-1">${name}</li>`).join(''));
+      const items = moreItems.querySelectorAll('li');
+      [0, 30, 60].forEach((top, index) => rect(items[index], 0, top));
+      const second = source.querySelectorAll('li')[1];
+      rect(second, 0, 28);
+
+      expect(findByLocator(sameCount, locatorOf(second))).toBe(sameCount.querySelectorAll('li')[1]);
+      expect(findByLocator(moreItems, locatorOf(second))).toBe(items[1]);
+    });
+
+    it('takes the focusable element at the point when nothing like it is there', () => {
+      const source = page('<button>Go</button>');
+      const other = page('<div tabindex="0"><span id="hit">Go</span></div>');
+      other.elementFromPoint = () => other.getElementById('hit');
+
+      expect(findByLocator(other, locatorOf(source.querySelector('button')))).toBe(other.querySelector('div'));
+      other.elementFromPoint = () => null;
+      expect(findByLocator(other, locatorOf(source.querySelector('button')))).toBeNull();
+    });
+
+    it('never names a field by what was typed in it', () => {
+      const doc = page('<input id="a"><textarea id="b">secret</textarea><div id="c" contenteditable="true">secret</div>');
+      doc.getElementById('a').value = 'secret';
+
+      expect(['a', 'b', 'c'].map(id => locatorOf(doc.getElementById(id)).name)).toEqual(['', '', '']);
+    });
+  });
+
+  describe('Keys', () => {
+    beforeEach(() => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+    });
+
+    const events = () => frame.inputs().flatMap(message => message.events);
+
+    it('sends a named key with its modifiers and where the focused element is', () => {
+      const target = frame.byId('target');
+
+      frame.realKey(target, 'keydown', { key: 'ArrowDown', code: 'ArrowDown', shiftKey: true, repeat: true });
+      frame.realKey(target, 'keyup', { key: 'ArrowDown', code: 'ArrowDown' });
+      frame.runFrame();
+
+      expect(events()).toEqual([
+        {
+          kind: 'keydown',
+          key: 'ArrowDown',
+          code: 'ArrowDown',
+          keyCode: 0,
+          alt: false,
+          ctrl: false,
+          meta: false,
+          shift: true,
+          repeat: true,
+          target: locatorOf(target),
+        },
+        expect.objectContaining({ kind: 'keyup', key: 'ArrowDown', shift: false, target: locatorOf(target) }),
+      ]);
+    });
+
+    it('never sends Tab, a character, Space, a modifier alone, an IME key or Enter outside a text field', () => {
+      const target = frame.byId('target');
+      for (const key of ['Tab', 'a', 'A', ' ', 'é', 'Shift', 'Meta', 'Dead', 'Process', 'Enter']) {
+        frame.realKey(target, 'keydown', { key });
+      }
+      frame.realKey(frame.byId('field'), 'keydown', { key: 'a', ctrlKey: true });
+      frame.realKey(frame.byId('field'), 'keydown', { key: 'Escape', isComposing: true });
+      frame.realKey(frame.doc.body, 'keydown', { key: 'Enter' });
+      frame.runFrame();
+
+      expect(events()).toEqual([]);
+    });
+
+    it('sends Enter from a text field, which a component handles (Combobox selects)', () => {
+      frame.realKey(frame.byId('field'), 'keydown', { key: 'Enter', code: 'Enter' });
+      frame.realKey(frame.doc.body, 'keydown', { key: 'Escape' });
+      frame.runFrame();
+
+      expect(events()).toMatchObject([
+        { kind: 'keydown', key: 'Enter', target: { role: 'input:text' } },
+        { kind: 'keydown', key: 'Escape', target: null },
+      ]);
+    });
+
+    it('sends nothing from a password field', () => {
+      frame.byId('field').type = 'password';
+
+      frame.realKey(frame.byId('field'), 'keydown', { key: 'Backspace' });
+      frame.realKey(frame.byId('field'), 'keydown', { key: 'Enter' });
+      frame.runFrame();
+
+      expect(events()).toEqual([]);
+    });
+
+    it('never sends a key that isn\'t real, so a replayed one doesn\'t come back', () => {
+      frame.realKey(frame.byId('target'), 'keydown', { key: 'Escape' }, false);
+      frame.fromHost({ type: 'replay', events: [key('keydown', 'Escape', locatorOf(frame.byId('target')))] });
+      frame.runFrame();
+
+      expect(events()).toEqual([]);
+    });
+
+    function key (kind, name, target = null, flags = {}) {
+      return {
+        kind, key: name, code: name, keyCode: 0, alt: false, ctrl: false, meta: false, shift: false, repeat: false,
+        target, ...flags,
+      };
+    }
+
+    it('replays a key on the counterpart of the source\'s focused element, with its modifiers', () => {
+      const got = [];
+      frame.byId('target').addEventListener('keydown', event => got.push(event));
+      frame.doc.addEventListener('keyup', event => got.push(event));
+
+      frame.fromHost({
+        type: 'replay',
+        events: [
+          key('keydown', 'ArrowDown', locatorOf(frame.byId('target')), { shift: true, keyCode: 40 }),
+          key('keyup', 'ArrowDown', locatorOf(frame.byId('target'))),
+        ],
+      });
+
+      expect(got.map(event => [event.type, event.target, event.key, event.shiftKey, event.keyCode, event.bubbles]))
+        .toEqual([
+          ['keydown', frame.byId('target'), 'ArrowDown', true, 40, true],
+          ['keyup', frame.byId('target'), 'ArrowDown', false, 0, true],
+        ]);
+    });
+
+    it('sends a key with no counterpart to the element under the fake ring, else to what this page has focused', () => {
+      const targets = [];
+      frame.doc.addEventListener('keydown', event => targets.push(event.target.id || event.target.localName));
+      const missing = { ...locatorOf(frame.byId('target')), role: 'tab' };
+      frame.byId('target').focus();
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'focus', target: locatorOf(frame.byId('field')) }] });
+      frame.fromHost({ type: 'replay', events: [key('keydown', 'Escape', missing)] });
+      frame.fromHost({ type: 'replay', events: [{ kind: 'blur' }, key('keydown', 'Escape', null)] });
+      frame.byId('target').blur();
+      frame.fromHost({ type: 'replay', events: [key('keydown', 'Escape', null)] });
+
+      expect(targets).toEqual(['field', 'target', 'body']);
+    });
+
+    it('doesn\'t replay a key the source wouldn\'t have sent, whatever the message says', () => {
+      const got = [];
+      frame.doc.addEventListener('keydown', event => got.push(event.key));
+      const button = locatorOf(frame.byId('target'));
+
+      frame.fromHost({
+        type: 'replay',
+        events: ['Tab', 'a', ' ', 'Enter'].map(name => key('keydown', name, button)),
+      });
+      frame.fromHost({ type: 'replay', events: [key('keydown', 'Enter', locatorOf(frame.byId('field')))] });
+
+      expect(got).toEqual(['Enter']);
+      expect(isRelayedKey('Enter', frame.byId('field'))).toBe(true);
+      expect(isRelayedKey('Enter', frame.byId('target'))).toBe(false);
+    });
+  });
+
+  describe('Values', () => {
+    beforeEach(() => {
+      frame = framedAgent(`${PAGE}<textarea id="notes"></textarea>
+        <select id="pick"><option value="a">A</option><option value="b">B</option></select>
+        <input id="secret" type="password"><input id="check" type="checkbox">
+        <div id="rich" contenteditable="true"><p>Rich</p></div><input id="level" type="range">`);
+      frame.fromHost({ type: 'connect' });
+    });
+
+    const events = () => frame.inputs().flatMap(message => message.events);
+    const text = (id, value, selection = null) => ({
+      kind: 'value', value, selection, target: locatorOf(frame.byId(id)),
+    });
+
+    it('sends a field\'s new value and selection, only the latest of a run of typing', () => {
+      const field = frame.byId('field');
+
+      frame.realInput(field, 'a');
+      frame.realInput(field, 'ab');
+      frame.realInput(frame.byId('notes'), 'n');
+      frame.runFrame();
+
+      expect(events()).toEqual([text('field', 'ab', { start: 2, end: 2 }), text('notes', 'n', { start: 1, end: 1 })]);
+    });
+
+    it('sends a select\'s and a range\'s value, which their own keys change natively', () => {
+      frame.realInput(frame.byId('pick'), 'b');
+      frame.realInput(frame.byId('level'), '70');
+      frame.runFrame();
+
+      expect(events()).toEqual([text('pick', 'b'), text('level', '70')]);
+    });
+
+    it('never sends a password, a checkbox\'s input, a rich editor\'s, or an untrusted change', () => {
+      frame.realInput(frame.byId('secret'), 'hunter2');
+      frame.realInput(frame.byId('check'));
+      frame.realInput(frame.byId('rich'));
+      frame.realInput(frame.byId('field'), 'replayed', false);
+      frame.runFrame();
+
+      expect(events()).toEqual([]);
+      expect(JSON.stringify(frame.sent())).not.toContain('hunter2');
+    });
+
+    it('sets the value through the native setter, then fires input, and doesn\'t echo it', () => {
+      const field = frame.byId('field');
+      // A framework's own value property on the element, as React's value tracker is: a plain assignment would go
+      // through it, and React would see no change.
+      const tracked = [];
+      const native = Object.getOwnPropertyDescriptor(frame.win.HTMLInputElement.prototype, 'value');
+      Object.defineProperty(field, 'value', {
+        configurable: true,
+        get () { return native.get.call(this); },
+        set (value) { tracked.push(value); native.set.call(this, value); },
+      });
+      const inputs = [];
+      frame.doc.addEventListener('input', event => inputs.push([event.target, event.bubbles, field.value]));
+
+      frame.fromHost({ type: 'replay', events: [text('field', 'hello', { start: 1, end: 3 })] });
+      frame.runFrame();
+
+      expect(tracked).toEqual([]);
+      expect(field.value).toBe('hello');
+      expect([field.selectionStart, field.selectionEnd]).toEqual([1, 3]);
+      expect(inputs).toEqual([[field, true, 'hello']]);
+      expect(frame.inputs()).toEqual([]);
+    });
+
+    it('fires change after input for a select, as a browser does', () => {
+      const fired = [];
+      frame.byId('pick').addEventListener('input', () => fired.push('input'));
+      frame.byId('pick').addEventListener('change', () => fired.push('change'));
+
+      frame.fromHost({ type: 'replay', events: [text('pick', 'b')] });
+
+      expect(frame.byId('pick').value).toBe('b');
+      expect(fired).toEqual(['input', 'change']);
+    });
+
+    it('skips a field it can\'t find, a password, and a value it already has', () => {
+      const fired = [];
+      frame.doc.addEventListener('input', event => fired.push(event.target.id));
+      frame.byId('field').value = 'same';
+
+      frame.fromHost({
+        type: 'replay',
+        events: [
+          { ...text('field', 'x'), target: { ...locatorOf(frame.byId('field')), role: 'input:url' } },
+          text('secret', 'x'),
+          text('field', 'same'),
+        ],
+      });
+
+      expect(fired).toEqual([]);
+      expect(frame.byId('secret').value).toBe('');
+    });
+
+    it('ignores a text longer than MAX_TEXT', () => {
+      frame.fromHost({ type: 'replay', events: [text('field', 'x'.repeat(MAX_TEXT + 1))] });
+
+      expect(frame.byId('field').value).toBe('');
+    });
+  });
+
+  describe('Focus', () => {
+    let original;
+
+    beforeEach(() => {
+      frame = framedAgent(`${PAGE}<svg id="shape" tabindex="0"></svg><div id="plain">Plain</div>`);
+      original = { html: frame.win.HTMLElement.prototype.focus, svg: frame.win.SVGElement.prototype.focus };
+      frame.rect(frame.byId('target'), { left: 10, top: 20, width: 80, height: 30 });
+      frame.rect(frame.byId('field'), { left: 10, top: 60, width: 200, height: 30 });
+      frame.fromHost({ type: 'connect' });
+    });
+
+    const replayClick = () => frame.fromHost({
+      type: 'replay',
+      events: ['down', 'up', 'click'].map(kind => ({ kind, x: 5, y: 5 })),
+    });
+
+    it('becomes the mirror on a replayed press, where focus() takes no focus and moves the fake ring', () => {
+      frame.byId('field').focus();
+      replayClick();
+
+      frame.byId('target').focus();
+      frame.runFrame();
+
+      expect(frame.doc.activeElement).toBe(frame.byId('field'));
+      expect(frame.rings()).toEqual([{ x: 10, y: 20, width: 80, height: 30 }]);
+    });
+
+    it('shims SVG elements too, and rings only what could take focus', () => {
+      frame.rect(frame.byId('shape'), { left: 0, top: 100, width: 24, height: 24 });
+      replayClick();
+
+      frame.byId('plain').focus();
+      frame.runFrame();
+      expect(frame.rings()).toEqual([]);
+
+      frame.byId('shape').focus();
+      frame.runFrame();
+      expect(frame.rings()).toEqual([{ x: 0, y: 100, width: 24, height: 24 }]);
+      expect(frame.win.SVGElement.prototype.focus).not.toBe(original.svg);
+    });
+
+    it('takes focus as before while it is the source, and before it is either', () => {
+      frame.byId('target').focus();
+      expect(frame.doc.activeElement).toBe(frame.byId('target'));
+
+      replayClick();
+      frame.realEvent(frame.byId('field'), 'pointerdown');
+      frame.byId('field').focus();
+
+      expect(frame.doc.activeElement).toBe(frame.byId('field'));
+      expect(frame.win.HTMLElement.prototype.focus).toBe(original.html);
+      expect(frame.win.SVGElement.prototype.focus).toBe(original.svg);
+    });
+
+    it('doesn\'t become the mirror for the other frame\'s pointer resting over it, or its scroll', () => {
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 1, y: 1 }, { kind: 'scroll', x: 0, y: 0 }] });
+
+      expect(frame.win.HTMLElement.prototype.focus).toBe(original.html);
+    });
+
+    it('becomes the source again on a real key or real typing', () => {
+      replayClick();
+      frame.realKey(frame.byId('target'), 'keydown', { key: 'Tab' });
+      expect(frame.win.HTMLElement.prototype.focus).toBe(original.html);
+
+      replayClick();
+      frame.realInput(frame.byId('field'), 'x');
+      expect(frame.win.HTMLElement.prototype.focus).toBe(original.html);
+    });
+
+    it('puts focus() back on disconnect, but leaves one the story replaced in the meantime', () => {
+      replayClick();
+      frame.fromHost({ type: 'disconnect' });
+      expect(frame.win.HTMLElement.prototype.focus).toBe(original.html);
+
+      frame.fromHost({ type: 'connect' });
+      replayClick();
+      const story = vi.fn();
+      frame.win.HTMLElement.prototype.focus = story;
+      frame.fromHost({ type: 'disconnect' });
+
+      expect(frame.win.HTMLElement.prototype.focus).toBe(story);
+      expect(frame.win.SVGElement.prototype.focus).toBe(original.svg);
+      frame.win.HTMLElement.prototype.focus = original.html;
+    });
+
+    it('sends where real focus went, once per batch, and that it left the page', () => {
+      const field = frame.byId('field');
+      field.focus();
+      frame.realFocus(frame.byId('target'), 'focusout');
+      frame.realFocus(field);
+      frame.runFrame();
+      field.blur();
+      frame.realFocus(field, 'focusout');
+      frame.runFrame();
+
+      expect(frame.inputs().map(message => message.events)).toEqual([
+        [{ kind: 'focus', target: locatorOf(field) }],
+        [{ kind: 'blur' }],
+      ]);
+    });
+
+    it('doesn\'t send focus moving while it is the mirror: only the page losing it can, which isn\'t the source\'s', () => {
+      replayClick();
+      frame.realFocus(frame.byId('field'), 'focusout');
+      frame.runFrame();
+
+      expect(frame.inputs()).toEqual([]);
+    });
+
+    it('rings the counterpart of the source\'s focus, follows it as it moves, and hides it when focus leaves', () => {
+      frame.fromHost({ type: 'replay', events: [{ kind: 'focus', target: locatorOf(frame.byId('target')) }] });
+      frame.runFrame();
+      frame.runFrame();
+      frame.rect(frame.byId('target'), { left: 10, top: 120, width: 80, height: 30 });
+      frame.runFrame();
+      frame.fromHost({ type: 'replay', events: [{ kind: 'blur' }] });
+      frame.runFrame();
+
+      expect(frame.rings()).toEqual([
+        { x: 10, y: 20, width: 80, height: 30 },
+        { x: 10, y: 120, width: 80, height: 30 },
+        null,
+      ]);
+      expect(frame.pendingFrames()).toBe(0);
+    });
+
+    it('hides the ring when its element goes, or becomes the source', () => {
+      frame.fromHost({ type: 'replay', events: [{ kind: 'focus', target: locatorOf(frame.byId('target')) }] });
+      frame.runFrame();
+      frame.byId('target').remove();
+      frame.runFrame();
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'focus', target: locatorOf(frame.byId('field')) }] });
+      frame.runFrame();
+      frame.realEvent(frame.byId('field'), 'pointerdown');
+
+      expect(frame.rings()).toEqual([
+        { x: 10, y: 20, width: 80, height: 30 },
+        null,
+        { x: 10, y: 60, width: 200, height: 30 },
+        null,
+      ]);
+    });
+
+    it('draws no ring for the source\'s focus while it is the source itself', () => {
+      frame.realEvent(frame.byId('field'), 'pointerdown');
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'focus', target: locatorOf(frame.byId('target')) }] });
+      frame.runFrame();
+
+      expect(frame.rings()).toEqual([]);
+    });
+  });
+
   it('goes inert again on disconnect, releasing the replayed pointer', () => {
     frame = framedAgent();
     frame.fromHost({ type: 'connect' });
@@ -655,8 +1140,10 @@ describe('Compare sync agent', () => {
 
     expect(frame.log).toContain('mouseleave@outer');
     expect(frame.log).not.toContain('mouseenter@outer');
-    expect(removed.mock.calls.map(([type]) => type))
-      .toEqual(['pointermove', 'pointerdown', 'pointerup', 'click', 'pointerout', 'scroll', 'resize']);
+    expect(removed.mock.calls.map(([type]) => type)).toEqual([
+      'pointermove', 'pointerdown', 'pointerup', 'click', 'pointerout', 'scroll', 'resize',
+      'keydown', 'keyup', 'input', 'focusin', 'focusout',
+    ]);
     expect(removed.mock.calls.find(([type]) => type === 'scroll')[2]).toBe(true);
     expect(frame.inputs()).toEqual([]);
   });
