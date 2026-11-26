@@ -8,6 +8,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./tests/setup.ts'],
-    include: ['{common,components,icons,tests}/**/*.test.{ts,tsx}'],
+    // compare/: the comparison Storybook's sync relay and cursor.
+    include: ['{common,compare,components,icons,tests}/**/*.test.{ts,tsx}'],
   },
 });

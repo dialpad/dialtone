@@ -1,6 +1,7 @@
 // The comparison's own page only hosts the two frames, so it needs Dialtone's
 // CSS for its chrome and the toolbars it forwards to both frames: the same
-// theme and contrast globals as Vue's, and the same sidebar order.
+// theme and contrast globals as Vue's, and the same sidebar order. Plus its own
+// Sync toolbar, which stays here.
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
@@ -19,7 +20,25 @@ initDialtoneTheme(dp, readStoredDarkMode() ? 'dark' : 'light', root);
 addons.getChannel().on(DARK_MODE_EVENT_NAME, (isDark: boolean) => setMode(isDark ? 'dark' : 'light', root));
 
 const preview: Preview = {
-  globalTypes,
+  globalTypes: {
+    ...globalTypes,
+    // Sync mode (../sync.ts): the pointer and page scroll in one frame are
+    // mirrored in the other. A global, so it stays in the URL; only this page
+    // reads it (iframeUrl forwards just theme and contrast).
+    compareSync: {
+      description: 'Mirror the pointer, clicks and page scroll between the Vue and React frames',
+      defaultValue: 'off',
+      toolbar: {
+        title: 'Sync',
+        icon: 'transfer',
+        items: [
+          { value: 'off', icon: 'unlink', title: 'Sync off' },
+          { value: 'on', icon: 'link', title: 'Sync on' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     layout: 'fullscreen',
     // The args live in the comparison's own controls, under the frames.

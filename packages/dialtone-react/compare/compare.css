@@ -16,39 +16,218 @@ body {
 .compare__panes {
   display: grid;
   flex: 1;
-  grid-template-columns: 1fr 1fr;
+  /* Two equal columns whatever their content's minimum width. The divider is
+     the 1px gap, showing this background: a border on the second pane would
+     make its frame 1px narrower than the first. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
   min-block-size: 0;
+  background: var(--dt-color-border-default);
 }
 
 .compare__pane {
   display: flex;
   flex-direction: column;
   min-inline-size: 0;
+  background: var(--dt-color-surface-primary);
 }
 
-.compare__pane + .compare__pane {
-  border-inline-start: 1px solid var(--dt-color-border-default);
-}
-
+/* One line at a fixed height in both panes, whatever their links and the sync
+   chip say, so both frames start at the same height. */
 .compare__pane-header {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
   gap: 8px;
-  padding: 6px 12px;
+  box-sizing: border-box;
+  block-size: 32px;
+  padding: 0 12px;
   border-block-end: 1px solid var(--dt-color-border-subtle);
   background: var(--dt-color-surface-secondary);
   font-size: var(--dt-font-size-100, 12px);
+  white-space: nowrap;
+  overflow: hidden;
 }
 
+/* In a narrow pane, the link gives way before the sync chip. */
 .compare__pane-header a {
+  overflow: hidden;
+  min-inline-size: 0;
+  margin-inline-start: auto;
   color: var(--dt-color-foreground-secondary);
+  text-overflow: ellipsis;
+}
+
+/* The frame's box, which the phantom cursor is drawn in. */
+.compare__viewport {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-block-size: 0;
+  overflow: hidden;
 }
 
 .compare__frame {
   flex: 1;
   inline-size: 100%;
   border: 0;
+}
+
+/* Sync mode's status, in the Vue pane's header. */
+.compare__sync {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border: 1px solid var(--dt-color-border-default);
+  border-radius: 999px;
+  color: var(--dt-color-foreground-secondary);
+  line-height: 18px;
+}
+
+.compare__sync::before {
+  flex: none;
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  content: '';
+}
+
+.compare__sync[data-tone='on'] {
+  border-color: var(--dt-color-border-success);
+  color: var(--dt-color-foreground-success);
+}
+
+.compare__sync[data-tone='off'] {
+  border-color: var(--dt-color-border-warning);
+  color: var(--dt-color-foreground-warning);
+}
+
+/* The phantom cursor (SyncCursor.tsx): where the real pointer in the other
+   frame is. A 0×0 box whose position is the hotspot. Pointer coordinates are
+   physical (clientX, clientY), so it's placed from the top left. Its colours
+   don't follow the theme: a white outline and a shadow keep it readable on
+   light and dark stories alike, and the tints are dark enough for white
+   label text. */
+.compare-cursor {
+  --compare-cursor-tint: oklch(0.43 0.105 156); /* Vue's green */
+
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 1;
+  inline-size: 0;
+  block-size: 0;
+}
+
+.compare-cursor[data-side='react'] {
+  --compare-cursor-tint: oklch(0.49 0.205 261); /* React's blue */
+}
+
+.compare-cursor__pointer {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  overflow: visible;
+  filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / 55%));
+}
+
+.compare-cursor__arrow {
+  fill: var(--compare-cursor-tint);
+  stroke: white;
+  stroke-linejoin: round;
+  stroke-width: 1.5px;
+  paint-order: stroke;
+  transform-origin: 0 0;
+  transition: transform 80ms ease-out;
+}
+
+/* Pressed: the arrow shrinks a little and a ring shows around its tip. */
+.compare-cursor__press {
+  fill: none;
+  stroke: var(--compare-cursor-tint);
+  stroke-width: 2px;
+  opacity: 0;
+  transition: opacity 80ms ease-out;
+}
+
+.compare-cursor[data-pressed] .compare-cursor__arrow {
+  transform: scale(0.85);
+}
+
+.compare-cursor[data-pressed] .compare-cursor__press {
+  opacity: 1;
+}
+
+.compare-cursor__label {
+  position: absolute;
+  inset-block-start: 22px;
+  inset-inline-start: 10px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: var(--compare-cursor-tint);
+  box-shadow: 0 0 0 1px white, 0 1px 3px rgb(0 0 0 / 45%);
+  color: white;
+  font-family: var(--dt-font-family-body, system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+/* Near the frame's end edges, the label goes to the other side of the arrow. */
+.compare-cursor[data-flip-x] .compare-cursor__label {
+  inset-inline-end: 6px;
+  inset-inline-start: auto;
+}
+
+.compare-cursor[data-flip-y] .compare-cursor__label {
+  inset-block-start: auto;
+  inset-block-end: 6px;
+}
+
+/* High contrast (the Contrast toolbar): black and white, a thicker outline. */
+.compare-cursor[data-contrast='high'] {
+  --compare-cursor-tint: black;
+}
+
+.compare-cursor[data-contrast='high'] .compare-cursor__arrow {
+  stroke-width: 2.5px;
+}
+
+.compare-cursor[data-contrast='high'] .compare-cursor__press {
+  stroke: white;
+  stroke-width: 3px;
+}
+
+.compare-cursor[data-contrast='high'] .compare-cursor__label {
+  box-shadow: 0 0 0 2px white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compare-cursor__arrow,
+  .compare-cursor__press {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .compare-cursor__arrow {
+    fill: CanvasText;
+    stroke: Canvas;
+  }
+
+  .compare-cursor__press {
+    stroke: Highlight;
+  }
+
+  .compare-cursor__label {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
 }
 
 .compare__empty {

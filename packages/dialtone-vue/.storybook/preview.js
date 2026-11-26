@@ -8,6 +8,7 @@ import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 import { addons } from 'storybook/preview-api';
 import { setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 import { createThemeController } from './theme-controller.js';
+import { installCompareSyncAgent } from './compare-sync-agent.js';
 
 // Storybook shows a representative subset of the full Dialtone theme set, not
 // all of it. This list is the only place to edit when that subset changes — the
@@ -108,6 +109,10 @@ channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
 
 // Initialize theme on load with current dark mode state
 updateTheme(currentDarkMode, currentContrast === 'high', currentBrandTheme);
+
+// The sync mode of dialtone-react's comparison Storybook. Inert unless that page
+// frames this preview and turns sync on.
+installCompareSyncAgent();
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');

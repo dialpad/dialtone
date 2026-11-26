@@ -14,6 +14,9 @@ export const origin = (side: Side) => (published
   ? new URL(`../${side}`, document.baseURI).href
   : `http://localhost:${ports[side]}`);
 
+/** The origin a frame's preview is served from, to address a message to it alone. */
+export const frameOrigin = (side: Side) => new URL(origin(side), document.baseURI).origin;
+
 /** Where a Storybook is, as shown to the reader. */
 export const where = (side: Side) => (published ? `../${side}/` : `:${ports[side]}`);
 
