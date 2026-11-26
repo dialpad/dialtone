@@ -1,0 +1,153 @@
+packages/dialtone-react/components/Datepicker/Composables/UseCalendar.ts
+  s_58e0b369e1be3c::t_1e943c62aed38c 1-198
+packages/dialtone-react/components/Datepicker/Composables/UseMonthYearPicker.ts
+  s_58e0b369e1be3c::t_15e5677955582e 1-169
+packages/dialtone-react/components/Datepicker/Datepicker.parity.tsx
+  s_58e0b369e1be3c::t_f4a1f16972ed50 1-4
+packages/dialtone-react/components/Datepicker/Datepicker.stories.tsx
+  s_58e0b369e1be3c::t_da300c23e573d6 1-227
+packages/dialtone-react/components/Datepicker/Datepicker.test.tsx
+  s_58e0b369e1be3c::t_fda7a93866a46b 1-67,72-299,302-319,322-331,334-351,354-623
+  s_75755ea2dab54c::t_fe3f14860a9641 68-71,300-301,320-321,332-333,352-353
+packages/dialtone-react/components/Datepicker/Datepicker.tsx
+  s_58e0b369e1be3c::t_738b0b22c3a9ba 1-131
+packages/dialtone-react/components/Datepicker/DatepickerConstants.ts
+  s_58e0b369e1be3c::t_606f89b72fe26c 1-11
+packages/dialtone-react/components/Datepicker/FormatUtils.ts
+  s_58e0b369e1be3c::t_8bdb4522b1dede 1-81
+packages/dialtone-react/components/Datepicker/Modules/Calendar.tsx
+  s_58e0b369e1be3c::t_c4e30bd3b83d4c 1-100
+packages/dialtone-react/components/Datepicker/Modules/MonthYearPicker.tsx
+  s_58e0b369e1be3c::t_93504fd4d6d4f5 1-110,114-206
+  s_58e0b369e1be3c::t_3516b6c750167c 111-113
+packages/dialtone-react/components/Datepicker/Utils.ts
+  s_58e0b369e1be3c::t_5781fde69ab212 1-172
+packages/dialtone-react/components/Datepicker/index.ts
+  s_58e0b369e1be3c::t_a239c504f759ac 1-2
+packages/dialtone-react/components/Slider/Slider.stories.tsx
+  s_2defdf83601f66::t_bda67e88602a7f 1-283,285-703
+  s_b6ac3d70cb055f::t_2a9ff73b9e7077 284
+packages/dialtone-react/components/Slider/Composables/UseSliderCollisionAvoidance.ts
+  s_b6ac3d70cb055f::t_f03c0b56550f72 1-247,253-269,282-295
+  s_b6ac3d70cb055f::t_ea078e039d088d 270-281
+  s_df8961542ce746::t_d569c41c139772 248-252
+packages/dialtone-react/components/Slider/Composables/UseSliderDevWarnings.ts
+  s_b6ac3d70cb055f::t_8eef9201d3592f 1-50
+packages/dialtone-react/components/Slider/Composables/UseSliderDirection.ts
+  s_5af2881f05d989::t_3553632ea68381 1-37
+packages/dialtone-react/components/Slider/Composables/UseSliderGeometry.ts
+  s_b6ac3d70cb055f::t_2706dd58347e34 1-172
+packages/dialtone-react/components/Slider/Composables/UseSliderInteraction.ts
+  s_b6ac3d70cb055f::t_8dfb64723128ac 1-448
+packages/dialtone-react/components/Slider/Composables/UseSliderMagneticSnap.ts
+  s_b6ac3d70cb055f::t_ae4ad5941ac5eb 1-104
+packages/dialtone-react/components/Slider/Composables/UseSliderMarksAndTicks.ts
+  s_442675ed046ea4::t_5223978ed070ac 1-18,21,23-53
+  s_df8961542ce746::t_a2f3b7746713d6 19-20,22
+packages/dialtone-react/components/Slider/Composables/UseSliderTooltipReadout.ts
+  s_442675ed046ea4::t_724a5cf8151b3f 1,3-37,42,44,49-50,52,54-65,67-140,142-157,159-167,222,226-227,229-234,236,238-244,245
+  s_b6ac3d70cb055f::t_b6ce75d80ed6c9 2,38-41,43,45-48,51,53,66,141,158,168-221,223-225,228,235,237
+packages/dialtone-react/components/Slider/Composables/UseSliderValue.ts
+  s_b6ac3d70cb055f::t_8389e4fbca3e25 1-303,306-309,311-345
+  s_45bf1e72025f4a::t_71caa15d2887a9 304-305,310
+packages/dialtone-react/components/Slider/Composables/types.ts
+  s_5af2881f05d989::t_6ca684e3ac9f29 1-43
+packages/dialtone-react/components/Slider/Composables/useSyncedState.ts
+  s_b6ac3d70cb055f::t_255caa1598353b 1-17
+packages/dialtone-react/components/Slider/Slider.parity.tsx
+  s_442675ed046ea4::t_8afc8eab724b3c 1-11
+packages/dialtone-react/components/Slider/Slider.tsx
+  s_442675ed046ea4::t_5939e268f70d7f 1-58,59-318,322-735
+  s_45bf1e72025f4a::t_eadec4dc4410aa 319-321
+packages/dialtone-react/components/Slider/SliderConstants.ts
+  s_b6ac3d70cb055f::t_a1251fec48977f 1-25
+packages/dialtone-react/components/Slider/index.ts
+  s_b6ac3d70cb055f::t_4ac9a80d090674 1-9
+packages/dialtone-react/components/Slider/utils.ts
+  s_b6ac3d70cb055f::t_bb691dc02941e0 1-105
+packages/dialtone-react/components/Slider/Slider.test.tsx
+  s_b6ac3d70cb055f::t_4fbd174cd19409 1-195,197,199-301,306-889,893-905,920-1653,1658,1660-1666,1684-3067,3094-3831
+  s_45bf1e72025f4a::t_1297bb4bef5c4f 302-305,890-892,1654-1657,1659,1667-1683
+  s_df8961542ce746::t_01f7021a0c759e 906-919,3068-3069,3072-3082,3084-3093
+  s_205f82c427ce42::t_5bf9c92d507747 196,198,3070-3071,3083
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f1b8e77ac0c346da2581667ae13c2374330a82ae",
+  "prompts": {},
+  "sessions": {
+    "s_205f82c427ce42": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cde12e1-8b37-44b8-92b1-3defd276a5a6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_442675ed046ea4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "87fac8e2-ab86-474e-beb9-e3f509c21278",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_45bf1e72025f4a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "88fe85f3-5b6b-4cb8-b23e-0467a70fb20a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_58e0b369e1be3c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "49ce2576-5837-4fb0-862e-02f89b95a8f4",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_5af2881f05d989": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02f1c164-a8fa-4db7-b6b5-d0034987b86b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_75755ea2dab54c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c4222b2-7303-4b68-bd09-68bfcfb08a28",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_b6ac3d70cb055f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f812431-7d2d-4893-88e1-6eec429e845a",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_df8961542ce746": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "eb3ecb99-a007-4804-a8eb-c927f4d33ab6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

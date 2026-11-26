@@ -1,0 +1,19 @@
+packages/dialtone-vue/common/phone-main-entry.test.js
+  s_fe80fcddbca945::t_1c7429a4a398c4 5,8,18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e0df28a4b5df6f7f1d41c72f40fd341ff011849d",
+  "prompts": {},
+  "sessions": {
+    "s_fe80fcddbca945": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7e46ad03-e7f5-4742-9e98-2109f2741701",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

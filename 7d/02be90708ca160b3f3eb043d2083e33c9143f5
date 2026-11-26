@@ -1,0 +1,41 @@
+.agents/skills/pr-prep/references/specialists/keyboard-aria.md
+  s_39e33a1a93c830::t_10d10ba8a486f2 1-17
+.agents/skills/pr-prep/SKILL.md
+  s_39e33a1a93c830::t_69193ec691d928 43,48,50,52,57,59,62-67,70,87
+  s_39e33a1a93c830::t_9ec185ee5a276d 75
+  s_39e33a1a93c830::t_15d3730887921a 3,8-9,12,16-17,21-31,35-38,42,44-47,49,51,53-56,58,60-61,68-69,71-74,76-86,88-100,104-106,118-121
+.agents/skills/pr-prep/references/reviewer-lens.md
+  s_39e33a1a93c830::t_079c4e06fe9501 1-76
+.agents/skills/pr-prep/references/specialists/css.md
+  s_39e33a1a93c830::t_53ef166d1f6b12 1-11
+.agents/skills/pr-prep/references/specialists/icons.md
+  s_39e33a1a93c830::t_940df146ffcaa5 1-7
+.agents/skills/pr-prep/references/adversarial-review.md
+  s_39e33a1a93c830::t_203ddc6f32adb6 1-39
+.agents/skills/pr-prep/references/local-gates.md
+  s_39e33a1a93c830::t_69193ec691d928 5-23
+  s_39e33a1a93c830::t_b1b225371d8555 1-4,24-30
+.agents/skills/pr-prep/references/specialists/codemods.md
+  s_39e33a1a93c830::t_c8f6e119c79af5 1-9
+.claude/skills/pr-prep/SKILL.md
+  s_39e33a1a93c830::t_ade78fb35139bd 1-6
+.agents/evals/run-skill-contract-evals.mjs
+  s_39e33a1a93c830::t_34b10614e57ab1 79-93
+  s_39e33a1a93c830::t_bcf32b34273b43 369-398
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7d02be90708ca160b3f3eb043d2083e33c9143f5",
+  "prompts": {},
+  "sessions": {
+    "s_39e33a1a93c830": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9805b8c3-2134-441e-9e9c-daf0c24296ae",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+packages/dialtone-react/components/Modal/Modal.parity.tsx
+  s_40b29c1d4465c2::t_d6f1e45e6353c4 1-4
+packages/dialtone-react/components/Modal/Modal.test.tsx
+  s_40b29c1d4465c2::t_2b9dc19d0bd202 1-516,519-600
+  s_40b29c1d4465c2::t_87ea4ea913b7f4 517-518
+packages/dialtone-react/components/Modal/Modal.tsx
+  s_40b29c1d4465c2::t_e17631634436c8 1-511
+packages/dialtone-react/components/Modal/ModalConstants.ts
+  s_40b29c1d4465c2::t_d64d28c775f2ae 1-16
+packages/dialtone-react/components/Modal/index.ts
+  s_40b29c1d4465c2::t_ef32ce19a4323b 1-2
+packages/dialtone-react/components/Modal/Modal.stories.tsx
+  s_7a4972c27c9735::t_527b0aafda2fa0 1,218-222,289
+  s_667d14b83b37ba::t_9329835990a3de 4,285-288,509-513
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4922942d2de076b3359d136e4f7bced7b0ebe38e",
+  "prompts": {},
+  "sessions": {
+    "s_40b29c1d4465c2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17f6687b-2d8c-4e14-a3e5-cd3bc9b26a2d",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_667d14b83b37ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ca428abb-fb9e-4ad2-a435-752024f7272b",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_7a4972c27c9735": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "234509b9-74ae-48f0-a1a0-b0b19f3b22b6",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

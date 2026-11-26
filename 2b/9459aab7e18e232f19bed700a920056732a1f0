@@ -1,0 +1,36 @@
+.agents/skills/pr-prep/SKILL.md
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 42,45-47,51-56,61,111-112
+  s_39e33a1a93c830::t_d9b25f9d2ec175 68,70-75,79-81,85,98,103,109-110,113-116
+.claude/skills/pr-prep/SKILL.md
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 6
+.agents/evals/run-skill-contract-evals.mjs
+  s_39e33a1a93c830::t_d9b25f9d2ec175 80,397-398
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 82
+.agents/skills/pr-prep/references/local-gates.md
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 30-31,47-49
+  s_39e33a1a93c830::t_d9b25f9d2ec175 3,27,32-40,43
+  s_39e33a1a93c830::t_1b5a8df8144878 5-25
+  s_39e33a1a93c830::t_dd5f9ac0929e19 44
+.agents/skills/pr-prep/references/specialists/css.md
+  s_39e33a1a93c830::t_1b5a8df8144878 3
+  s_39e33a1a93c830::t_6ca14f1d00ce4a 10
+.agents/skills/pr-prep/references/reviewer-lens.md
+  s_39e33a1a93c830::t_d9b25f9d2ec175 3,54
+  s_39e33a1a93c830::t_6843d7c7ac87aa 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2b9459aab7e18e232f19bed700a920056732a1f0",
+  "prompts": {},
+  "sessions": {
+    "s_39e33a1a93c830": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9805b8c3-2134-441e-9e9c-daf0c24296ae",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    }
+  }
+}

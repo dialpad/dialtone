@@ -1,0 +1,19 @@
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_2defdf83601f66::t_baa3e99b36c297 98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "aaca3cbb0c6443f2b9bab21796412c60da89b745",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
