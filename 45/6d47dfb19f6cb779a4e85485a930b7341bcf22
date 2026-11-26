@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Dropdown/Dropdown.tsx
+  s_81589d955aa89e::t_9f874efe220ae7 1,19,25-26,28-32,51-67,140-143,168-169,187,202-207,210-212,216-231,234,236,238,244-245,249-299,307,309,318-324,334-344,356,367,376,384,399-401,404-419,435-436,438,470-471,484-486,497
+packages/dialtone-react/components/Dropdown/deviations.json
+  s_81589d955aa89e::t_d4350fd150b53a 4,8-12,16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "456d47dfb19f6cb779a4e85485a930b7341bcf22",
+  "prompts": {},
+  "sessions": {
+    "s_81589d955aa89e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9d751991-8fd3-4041-a138-d84b0bb94598",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

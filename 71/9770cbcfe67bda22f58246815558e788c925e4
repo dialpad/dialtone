@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/Combobox/ComboboxDefault.story.vue
+  s_6c5358701216a7::t_10b74821b64a2b 13-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "719770cbcfe67bda22f58246815558e788c925e4",
+  "prompts": {},
+  "sessions": {
+    "s_6c5358701216a7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b1ac4d81-80a0-46e3-9760-6cb23ff24527",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
