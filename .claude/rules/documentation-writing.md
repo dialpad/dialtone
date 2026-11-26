@@ -12,6 +12,10 @@ paths:
 - Tool names: VuePress, pnpm, Nx, vue-docgen-api, Vitest — never "our build tool" or "the test framework"
 - File paths: `packages/dialtone-vue/components/` — never "the components folder"
 
+## Component Page Descriptions
+
+Follow the [component page description guideline](../../apps/dialtone-documentation/.github/CONTRIBUTING.md#component-page-descriptions) for a VuePress component page’s `description` frontmatter.
+
 ## Code Examples Must Be Complete
 
 - Include imports, setup, and realistic variable names

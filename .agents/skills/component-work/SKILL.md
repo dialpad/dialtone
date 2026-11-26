@@ -36,6 +36,7 @@ API shape, learned from review:
 - `.agents/resources/validation.md`
 - `.agents/resources/doc-sync.md`
 - `.agents/resources/rules/vue-components.md`
+- [Component page descriptions](../../../apps/dialtone-documentation/.github/CONTRIBUTING.md#component-page-descriptions) when creating or editing a docs page's `description`.
 
 ## Constraints
 
@@ -56,7 +57,7 @@ API shape, learned from review:
 2. Run the Before You Build steps for a new component or public API.
 3. Load matched rules from `rule-map.md`.
 4. Update the smallest necessary set of artifacts: source, constants, tests, stories/MDX, VuePress docs, exports, docs JSON, MCP/query docs, and Combinator variants.
-5. For a public page, preserve its canonical export and live `<component-vue-api>` association. Add useful missing alternate names or interaction phrases in frontmatter `keywords`, following `.agents/resources/rules/documentation-site.md`; do not add export aliases, synonym-filled descriptions, or API inventories to skills.
+5. For a public page, preserve its canonical export and live `<component-vue-api>` association. Add useful missing alternate names or interaction phrases in frontmatter `keywords`, following `.agents/resources/rules/documentation-site.md`; do not add export aliases, synonym-filled descriptions, or API inventories to skills. Write the page `description` per the [component page description rule](../../../apps/dialtone-documentation/.github/CONTRIBUTING.md#component-page-descriptions).
 6. Run focused tests first, then broader builds when API or downstream data changed.
    For marked documentation examples, follow [source-example maintenance](../../resources/documentation-examples.md), regenerate coverage and recheck affected payload/API evidence.
 7. For a meaningful new keyword, rebuild both adapters, record an alternate-term lookup and arrange adapter publication as `.agents/resources/rules/documentation-site.md` describes.
