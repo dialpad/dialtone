@@ -1,0 +1,92 @@
+packages/dialtone-react/compare/sync.ts
+  s_2defdf83601f66::t_fba72e8161bbf6 49-56,59-63
+  s_2defdf83601f66::t_eff74e96a1fe6f 185-186,192-201
+  s_2defdf83601f66::t_a52f593e6b0052 421
+  s_2defdf83601f66::t_2ebbee825dda79 469-472
+  s_2defdf83601f66::t_3eaaaeabb11302 340-347
+  s_2defdf83601f66::t_9ae32af4a69367 420,427
+  s_2defdf83601f66::t_c6e10eef5396f0 210
+  s_2defdf83601f66::t_905856e1188b5b 223
+  s_2defdf83601f66::t_f5057c10897c55 491
+  s_2defdf83601f66::t_61cec9ce3720d3 202
+packages/dialtone-vue/.storybook/compare-sync-hover.test.js
+  s_2defdf83601f66::t_6163adfe846d1a 39-45,47-48
+  s_2defdf83601f66::t_b9aa4bf1cb0141 278-316
+  s_2defdf83601f66::t_b274e4531ff1e9 371-390
+packages/dialtone-vue/.storybook/compare-sync-hover.js
+  s_2defdf83601f66::t_620574a9d69ae3 25-26,28
+  s_2defdf83601f66::t_0a4e444448fe7f 140-141,143-154
+  s_2defdf83601f66::t_416e0d8f3b5149 181-184
+  s_2defdf83601f66::t_7c10ed8e7e9e7d 367-368
+  s_2defdf83601f66::t_96ff30d9b708a5 314-315
+  s_2defdf83601f66::t_6358c2943e73c6 391-404,417,420-422
+  s_2defdf83601f66::t_b1ceaec4b6d0aa 531-536
+packages/dialtone-vue/.storybook/compare-sync-agent.test.js
+  s_2defdf83601f66::t_c29f918c608cf7 714-718,722,724-730,732-734
+  s_2defdf83601f66::t_985c7476312918 9,13-14
+  s_2defdf83601f66::t_7c6712034207b1 129-131,133,136-139,141-145,147-154,158-162
+  s_2defdf83601f66::t_a849d1124e90b9 222-304
+  s_2defdf83601f66::t_a9c1b3f51856f3 26-27
+  s_2defdf83601f66::t_cfbb04eae5501f 822-825,828,835,841-849
+  s_2defdf83601f66::t_f8bb7b68da6c1c 909,914,919-926,929-935
+  s_2defdf83601f66::t_3d767eecd1710a 409,851,937,1262-1306
+  s_2defdf83601f66::t_3f970957649305 338-341,347-408
+  s_2defdf83601f66::t_eb0f056e5ceea5 927-928
+  s_2defdf83601f66::t_03cd0cc2185fda 77,79,82,84-85
+  s_2defdf83601f66::t_cdf77b6699a281 518-548
+  s_2defdf83601f66::t_20490a515d1d1d 684-685,691-713,719-721,723,731,735-753
+  s_2defdf83601f66::t_b15ac7b492668e 1567
+  s_2defdf83601f66::t_3b6f735b7f9754 410
+  s_2defdf83601f66::t_0c90eb9bf6a006 850
+  s_2defdf83601f66::t_102b1eee2bbd8f 852
+  s_2defdf83601f66::t_b4416fda225a6e 936
+  s_2defdf83601f66::t_60cd56b3e2ac22 938
+packages/dialtone-vue/.storybook/compare-sync-agent.js
+  s_2defdf83601f66::t_812d1ca7403158 8-9,11-15
+  s_2defdf83601f66::t_e951e1be54bc9f 256
+  s_2defdf83601f66::t_9a390a6dc9ea48 894-896
+  s_2defdf83601f66::t_d48f9e98d1a462 943
+  s_2defdf83601f66::t_9b32255694362d 208-217,221,225
+  s_2defdf83601f66::t_e71b0c3b853d44 454-457,463,465-479,488
+  s_2defdf83601f66::t_a5b863a6d39376 880
+  s_2defdf83601f66::t_8ff0bc7dd9a4c2 913,916
+  s_2defdf83601f66::t_fb0b8016b3e3b0 1006-1008,1010,1012
+  s_2defdf83601f66::t_e871c85eaee3a4 679,681
+  s_2defdf83601f66::t_b44f054126611d 337-338
+  s_2defdf83601f66::t_c4602cd07ab4e2 769-770,775-776
+  s_2defdf83601f66::t_4ca959ca31922c 99,107,120
+  s_2defdf83601f66::t_c399920b4b9f43 963,968,992
+  s_2defdf83601f66::t_1344ad65e101c9 563
+  s_2defdf83601f66::t_a021c95ef48ab2 699,701,711
+  s_2defdf83601f66::t_7dfa40e6ad7dd0 978
+  s_2defdf83601f66::t_145d916877a5be 313-314,322,328
+  s_2defdf83601f66::t_3434f2fe59d89a 30-64,78-89
+  s_2defdf83601f66::t_12376c3e6141f2 591
+  s_2defdf83601f66::t_563f42b8df56e3 729,736-752,757,759
+  s_2defdf83601f66::t_c83aa58f825e74 348,351
+packages/dialtone-react/compare/sync.test.ts
+  s_2defdf83601f66::t_92501c2407c84b 237-240,247-279,288
+  s_2defdf83601f66::t_824660965e94a2 314-316
+  s_2defdf83601f66::t_8473daa6cf0022 116-124
+  s_2defdf83601f66::t_5b2edf8b029bd1 1,4,9,22-23
+  s_2defdf83601f66::t_d2a5a8008228e5 620-623
+  s_2defdf83601f66::t_ed13ecf2263737 419,430,433-440,443,449,452-477
+packages/dialtone-react/README.md
+  s_2defdf83601f66::t_20d8e373c56a02 46-49,55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f72aa822c586ea4889433983965d1d8300d792e9",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

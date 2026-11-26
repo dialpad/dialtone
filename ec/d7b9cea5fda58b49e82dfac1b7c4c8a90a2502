@@ -1,0 +1,39 @@
+packages/dialtone-react/README.md
+  s_2defdf83601f66::t_fcd3609fdcf623 46,54
+packages/dialtone-react/compare/CompareFrame.tsx
+  s_2defdf83601f66::t_2eccb1a75ccd13 4-5,26,223,253-258,283
+packages/dialtone-react/compare/SyncCue.test.tsx
+  s_2defdf83601f66::t_31b484aa97db2e 1-50
+packages/dialtone-react/compare/SyncCue.tsx
+  s_2defdf83601f66::t_caab4cceb3cf56 1-44
+packages/dialtone-react/compare/SyncCursor.test.tsx
+  s_2defdf83601f66::t_ae38a4d8050825 1-2,56-95
+packages/dialtone-react/compare/SyncCursor.tsx
+  s_2defdf83601f66::t_007d7eb53b0c3f 3,13-15,27-28,35-47,53,63-64
+packages/dialtone-react/compare/compare.css
+  s_2defdf83601f66::t_28a926737de269 156-177,236-303,307-312
+packages/dialtone-react/compare/sync.test.ts
+  s_2defdf83601f66::t_86913947077511 53-60,188,242-328
+packages/dialtone-react/compare/sync.ts
+  s_2defdf83601f66::t_b4c8fc6397f7bd 25-26,42-53,87-89,91-92,171-173,186-190,194,209-212,221,233-245,250-254,263,269,283-284,318-322,369
+packages/dialtone-vue/.storybook/compare-sync-agent.js
+  s_2defdf83601f66::t_081b99f5a7045c 10-11,22,26-27,29-30,43-67,94-100,105-106,108-112,122-141,145-152,169,189-198,200-204,221,228,231-248,279-323,325-327,333,335,340-341,345-347,352-354,357-359,363-365,369-372,397-416,424,438,447-448,450,454-456
+packages/dialtone-vue/.storybook/compare-sync-agent.test.js
+  s_2defdf83601f66::t_05b4a709e85f31 17-18,35,69-78,103-120,352-593,660
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ecd7b9cea5fda58b49e82dfac1b7c4c8a90a2502",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
