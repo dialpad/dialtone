@@ -266,7 +266,7 @@ All tabs share the same width, regardless of label length.
 
 ### Icon
 
-Use `#startIcon` or `#endIcon` on `dt-tab` to place an icon alongside the label. Use `#blockStartIcon` above the label or `#blockEndIcon` below it. Each slot provides `iconSize` to match the tab's size.
+Use `#startIcon` or `#endIcon` on `dt-tab` to place an icon alongside the label. Use `#blockStartIcon` above the label or `#blockEndIcon` below it. When you combine inline and block slots, the icons and label stack vertically. Each slot provides `iconSize` to match the tab's size.
 
 > [!WARNING] Deprecated
 > The `#icon` slot has been deprecated. Use `#startIcon` or `#endIcon` instead.

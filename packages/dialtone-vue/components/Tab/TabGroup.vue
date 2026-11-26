@@ -435,6 +435,8 @@ export default {
       if (!old) return;
 
       this.$nextTick(() => {
+        if (!this.tabs?.contains(newContext)) return;
+
         let hideProps = { backgroundColor: 'transparent' };
         let indicatorExtra = {};
         let pseudoElement = '::after';
@@ -448,13 +450,11 @@ export default {
           pseudoElement = '::before';
         }
 
-        const alignToRowEnd = this.hasHorizontalUnderline && getComputedStyle(this.tabs).alignItems === 'flex-end';
-
         this.indicator.animate({
           oldRect: old.rect,
           newEl: newContext,
           orientation: this.orientation,
-          alignToRowEnd,
+          checkRowOverlap: this.orientation === 'horizontal',
           hideProps,
           indicatorExtra,
           pseudoElement,

@@ -200,7 +200,7 @@ Add `disabled` to an individual item.
 
 ### Icon
 
-Use `#startIcon` or `#endIcon` on `dt-segmented-control-item` to place an icon alongside the label. Use `#blockStartIcon` above the label or `#blockEndIcon` below it. Each slot provides `iconSize` to match the control's size.
+Use `#startIcon` or `#endIcon` on `dt-segmented-control-item` to place an icon alongside the label. Use `#blockStartIcon` above the label or `#blockEndIcon` below it. When you combine inline and block slots, the icons and label stack vertically. Each slot provides `iconSize` to match the control's size.
 
 ```vue demo
 <!-- @wrapper -->
