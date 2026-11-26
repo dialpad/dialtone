@@ -12,6 +12,7 @@
         TAB_ORIENTATION_MODIFIERS[orientation],
         orientation !== 'vertical' && TAB_SPREAD_MODIFIERS[spread],
         {
+          'd-tablist--horizontal-underline': hasHorizontalUnderline,
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
         },
@@ -268,6 +269,10 @@ export default {
   },
 
   computed: {
+    hasHorizontalUnderline () {
+      return this.orientation === 'horizontal' && !this.outlined && this.kind !== 'muted';
+    },
+
     resolvedTabsClass () {
       return this.tabListClass ?? this.tabsClass;
     },
@@ -443,10 +448,7 @@ export default {
           pseudoElement = '::before';
         }
 
-        const alignToRowEnd = pseudoElement === '::after'
-          && this.orientation === 'horizontal'
-          && !this.borderless
-          && getComputedStyle(this.tabs).alignItems === 'flex-end';
+        const alignToRowEnd = this.hasHorizontalUnderline && getComputedStyle(this.tabs).alignItems === 'flex-end';
 
         this.indicator.animate({
           oldRect: old.rect,

@@ -169,7 +169,7 @@
         }
     }
 
-    &:where(:not(.d-tablist--vertical, .d-tablist--no-border):has(> .d-tablist__item.d-btn--vertical):has(> .d-tab--is-selected)) {
+    &--horizontal-underline:where(:has(> .d-tablist__item.d-btn--vertical)) {
         align-items: flex-end;
     }
 
