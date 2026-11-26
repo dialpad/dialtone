@@ -1,0 +1,25 @@
+.agents/resources/agent-tooling-parity.md
+  s_3bb71b6b327c2f::t_3bcbaa19b57448 91
+.claude/rules/claude-config.md
+  s_3bb71b6b327c2f::t_3c412cb0843f17 48
+.claude/skills/doc-sync-enforcer.md
+  s_3bb71b6b327c2f::t_f871e1752c428b 12
+CLAUDE.md
+  s_3bb71b6b327c2f::t_94b143237e4573 82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "931ad6b6865649a019baa7ee40c7a17501b2b0d9",
+  "prompts": {},
+  "sessions": {
+    "s_3bb71b6b327c2f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c9555cff-575d-4161-8442-9e589ff47310",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

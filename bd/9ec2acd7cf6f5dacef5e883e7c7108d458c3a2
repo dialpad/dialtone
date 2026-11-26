@@ -1,0 +1,30 @@
+package.json
+  s_c1e54341997210::t_c462a52aa8fccb 48-52
+  s_c1e54341997210::t_6b4cdd40e3f8cb 63-67
+packages/dialtone-vue/functions/phone.mdx
+  s_c1e54341997210::t_2854757ab051ba 7-17
+packages/dialtone-vue/vite.config.js
+  s_c1e54341997210::t_fe496bdffce303 36-49,51-69
+  s_c1e54341997210::t_676f342a4cffd6 50
+  s_c1e54341997210::t_d2ee9773d183c4 133
+packages/dialtone-vue/package.json
+  s_c1e54341997210::t_ccdfdcf867d112 124-128
+apps/dialtone-documentation/docs/functions-and-utilities/index.md
+  s_c1e54341997210::t_2854757ab051ba 28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bd9ec2acd7cf6f5dacef5e883e7c7108d458c3a2",
+  "prompts": {},
+  "sessions": {
+    "s_c1e54341997210": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6717be19-ccc4-41f7-b3a7-d6edceedd93f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

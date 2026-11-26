@@ -1,0 +1,21 @@
+packages/dialtone-react/components/FilterPill/FilterPill.tsx
+  s_2defdf83601f66::t_7780670b3f4109 8,671-672,674
+packages/dialtone-react/components/FilterPill/FilterPillControlled.test.tsx
+  s_2defdf83601f66::t_ac3f07e5c42793 2,364-396
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9400453a274fdac69e6e705d55b27f6871c1e236",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

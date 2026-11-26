@@ -1,0 +1,19 @@
+.github/workflows/dialtone-react-storybook-clean.yml
+  s_2defdf83601f66::t_05e076f5a6a560 35,39-54,57,64,67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "43540dac833c1e5a09d87c0897bbd531ed5f69dd",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

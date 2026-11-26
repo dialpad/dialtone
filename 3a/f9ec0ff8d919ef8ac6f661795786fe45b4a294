@@ -1,0 +1,25 @@
+apps/dialtone-documentation/docs/components/card.md
+  s_6e04a9cabb5885::t_4489fe9ceebe51 78-105,138-139,169-170,172-204
+  s_6e04a9cabb5885::t_eb2b894974edad 171
+apps/dialtone-documentation/docs/components/button.md
+  s_6e04a9cabb5885::t_4489fe9ceebe51 320-340
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_6e04a9cabb5885::t_4489fe9ceebe51 22,24,27-48,51
+  s_6e04a9cabb5885::t_668f0094d14728 52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3af9ec0ff8d919ef8ac6f661795786fe45b4a294",
+  "prompts": {},
+  "sessions": {
+    "s_6e04a9cabb5885": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1b21c-b550-7b71-b4d1-c01bfb7909f7",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+.agents/skills/component-work/references/variants.md
+  s_3bb71b6b327c2f::t_c7b4421b17fdd7 1,71
+.claude/skills/component-work/SKILL.md
+  s_3bb71b6b327c2f::t_67e389b954f9e4 2-3
+  s_3bb71b6b327c2f::t_15ffccebed412f 6
+.agents/evals/run-skill-contract-evals.mjs
+  s_3bb71b6b327c2f::t_26fa343b708e14 131,134-142,171-184,381-382,437,453-456,458,462,464,466-470,471-475,478-485
+  s_3bb71b6b327c2f::t_1e06bcc3229e74 362-374,378-380,452,459-461,463,465,476,486-507
+  s_3bb71b6b327c2f::t_bce44455447933 375-377,439-451,457
+  s_3bb71b6b327c2f::t_cf908b892ea2e2 145-159
+.agents/skills/component-work/SKILL.md
+  s_3bb71b6b327c2f::t_dd6db63f65dac2 17-26,29,34,38,47-50,56,69,87-89
+  s_3bb71b6b327c2f::t_b75d80710cc9f2 27-28
+.agents/README.md
+  s_3bb71b6b327c2f::t_e1ab1246ce67d3 22
+  s_3bb71b6b327c2f::t_c6e78908bf7f17 23
+.claude/rules/claude-config.md
+  s_3bb71b6b327c2f::t_e4dee9193a779e 103
+.agents/resources/agent-tooling-parity.md
+  s_3bb71b6b327c2f::t_f8cf545c9f35a4 85
+  s_3bb71b6b327c2f::t_48b1677bf0d6b8 86,94
+.agents/resources/rules/codex-tooling.md
+  s_3bb71b6b327c2f::t_50ef71d983e280 12
+.claude/skills/utility.md
+  s_3bb71b6b327c2f::t_d41c70a706446b 74
+.claude/skills/pr-prep/SKILL.md
+  s_3bb71b6b327c2f::t_d53a80924b35c5 6
+apps/dialtone-documentation/docs/design/icons/index.md
+  s_3bb71b6b327c2f::t_e4290af8368c36 160
+.agents/skills/icon-work/SKILL.md
+  s_3bb71b6b327c2f::t_bb38554c9fe9b4 1-72
+packages/dialtone-icons/.github/CONTRIBUTING.md
+  s_3bb71b6b327c2f::t_21acb77732a626 38
+.claude/skills/icon-work/SKILL.md
+  s_3bb71b6b327c2f::t_810534b03e6768 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "76025afe725db0e6281aa2e76814b4aebc7ddc66",
+  "prompts": {},
+  "sessions": {
+    "s_3bb71b6b327c2f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c9555cff-575d-4161-8442-9e589ff47310",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

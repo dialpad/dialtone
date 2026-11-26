@@ -1,0 +1,30 @@
+packages/dialtone-tokens/sync-scripts/build_materials.ts
+  s_355402be618789::t_ff9cfb710d60cd 297-298
+  s_355402be618789::t_2cc64286407349 46
+packages/dialtone-tokens/sync-scripts/stale_overrides.ts
+  s_355402be618789::t_bb21b912986ae5 24-25
+  s_355402be618789::t_07ed2b19564a34 1-23,26-34
+packages/dialtone-tokens/sync-scripts/stale_overrides.test.ts
+  s_355402be618789::t_963630cb3163ed 1-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "323ebb1b962605122efdcbbb175ef1bd99ce19f3",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_355402be618789": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b31ad57d-69f2-4651-8047-35f4a46b739f",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
