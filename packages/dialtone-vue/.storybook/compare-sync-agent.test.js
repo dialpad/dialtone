@@ -390,6 +390,70 @@ describe('Compare sync agent', () => {
       expect(frame.inputs().flatMap(message => message.events).map(event => event.kind)).toEqual([...kinds, 'move']);
     });
 
+    it('sends the next primary press after a secondary one that never got a pointerup or pointercancel', () => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      const target = frame.byId('target');
+
+      // A right press that opens the context menu (macOS) can deliver only its pointerdown.
+      frame.realEvent(target, 'pointerdown', { button: 2, buttons: 2 });
+      frame.realEvent(target, 'pointerdown', {});
+      frame.realEvent(target, 'pointermove', {});
+      frame.realEvent(target, 'pointerup', {});
+      frame.realEvent(target, 'click', {});
+      frame.runFrame();
+
+      expect(frame.inputs().flatMap(message => message.events).map(event => event.kind))
+        .toEqual(['down', 'move', 'up', 'click']);
+    });
+
+    it('sends hover moves after a secondary press that never got a pointerup or pointercancel', () => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      const target = frame.byId('target');
+
+      frame.realEvent(target, 'pointerdown', { button: 2, buttons: 2 });
+      frame.realEvent(target, 'pointermove', { buttons: 0, clientX: 5 });
+      frame.realEvent(target, 'pointermove', { buttons: 0, clientX: 9 });
+      frame.runFrame();
+
+      expect(frame.inputs().flatMap(message => message.events).map(event => event.kind)).toEqual(['move']);
+    });
+
+    it('sends nothing for a secondary press and its own release, then sends the next primary press', () => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      const target = frame.byId('target');
+
+      frame.realEvent(target, 'pointerdown', { button: 2, buttons: 2 });
+      frame.realEvent(target, 'pointerup', { button: 2 });
+      frame.runFrame();
+      expect(frame.inputs()).toEqual([]);
+
+      frame.realEvent(target, 'pointerdown', {});
+      frame.realEvent(target, 'pointerup', {});
+      frame.realEvent(target, 'click', {});
+      frame.runFrame();
+      expect(frame.inputs().flatMap(message => message.events).map(event => event.kind)).toEqual(['down', 'up', 'click']);
+    });
+
+    it('lets a second finger\'s press leave the primary press\'s state alone', () => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      const target = frame.byId('target');
+
+      // A second finger touching down mid-press neither ends the primary press nor flags it as ignored.
+      frame.realEvent(target, 'pointerdown', {});
+      frame.realEvent(target, 'pointerdown', { isPrimary: false, button: 2 });
+      frame.realEvent(target, 'pointermove', {});
+      frame.realEvent(target, 'pointerup', {});
+      frame.realEvent(target, 'click', {});
+      frame.runFrame();
+
+      expect(frame.inputs().flatMap(message => message.events).map(event => event.kind))
+        .toEqual(['down', 'move', 'up', 'click']);
+    });
+
     it('sends a press the browser cancelled, which no click follows, and not one it wasn\'t sending', () => {
       frame = framedAgent();
       frame.fromHost({ type: 'connect' });

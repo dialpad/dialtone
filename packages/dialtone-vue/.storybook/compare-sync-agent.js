@@ -462,7 +462,11 @@ export function installCompareSyncAgent ({
     hoverStyles.clear();
     if (event.isPrimary === false) return;
     realPoint = { x: event.clientX, y: event.clientY };
-    if (event.type === 'pointerdown' && event.button !== 0) ignoredPress = true;
+    // A pointerdown only fires when the pointer leaves the no-buttons state, so each one starts a new press. Setting
+    // the flag from it, not only raising it, drops a stale one: a right press that opened the context menu (macOS) can
+    // end with neither a pointerup nor a pointercancel. A move with no button down can't belong to a press either.
+    if (event.type === 'pointermove' && event.buttons === 0) ignoredPress = false;
+    if (event.type === 'pointerdown') ignoredPress = event.button !== 0;
     const ignored = ignoredPress;
     // A press ends with its last button's release, whichever button that is.
     if (event.type === 'pointerup') ignoredPress = false;
