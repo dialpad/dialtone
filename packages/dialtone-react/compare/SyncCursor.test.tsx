@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-import { ARROW_PATH, SyncCursor } from './SyncCursor';
+import { act, render } from '@testing-library/react';
+import { ARROW_PATH, RIPPLE_MS, SyncCursor } from './SyncCursor';
 
 const BOUNDS = { width: 600, height: 700 };
 
@@ -52,5 +52,45 @@ describe('SyncCursor', () => {
     expect(middle).not.toHaveAttribute('data-flip-y');
     expect(corner).toHaveAttribute('data-flip-x');
     expect(corner).toHaveAttribute('data-flip-y');
+  });
+
+  describe('Click ripple', () => {
+    beforeEach(() => vi.useFakeTimers());
+    afterEach(() => vi.useRealTimers());
+
+    const ring = (cursor: HTMLElement) => cursor.querySelector('.compare-cursor__ripple');
+
+    it('shows a ring for a click and takes it away after RIPPLE_MS', () => {
+      const cursor = renderCursor({ click: 1 });
+
+      expect(ring(cursor)).not.toBeNull();
+      expect(cursor).toHaveAttribute('data-ripple');
+      act(() => { vi.advanceTimersByTime(RIPPLE_MS - 1); });
+      expect(ring(cursor)).not.toBeNull();
+      act(() => { vi.advanceTimersByTime(1); });
+      expect(ring(cursor)).toBeNull();
+      expect(cursor).not.toHaveAttribute('data-ripple');
+    });
+
+    it('shows no ring without a click', () => {
+      expect(ring(renderCursor())).toBeNull();
+    });
+
+    it('keeps the ring when the cursor moves on, and restarts it for another click', () => {
+      const { container, rerender } = render(
+        <SyncCursor mirrors="vue" x={1} y={1} pressed={false} click={1} bounds={BOUNDS} />,
+      );
+      const cursor = container.firstElementChild as HTMLElement;
+      const first = ring(cursor);
+
+      act(() => { vi.advanceTimersByTime(RIPPLE_MS - 100); });
+      rerender(<SyncCursor mirrors="vue" x={9} y={9} pressed={false} bounds={BOUNDS} />);
+      expect(ring(cursor)).toBe(first);
+
+      rerender(<SyncCursor mirrors="vue" x={9} y={9} pressed={false} click={2} bounds={BOUNDS} />);
+      act(() => { vi.advanceTimersByTime(RIPPLE_MS - 1); });
+      expect(ring(cursor)).not.toBeNull();
+      expect(ring(cursor)).not.toBe(first);
+    });
   });
 });

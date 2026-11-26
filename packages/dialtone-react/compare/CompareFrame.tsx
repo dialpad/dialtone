@@ -1,8 +1,8 @@
 // Vue and React side by side: one story id, the same URL args and the same
 // theme and contrast globals in both frames. Dark mode isn't a global in
 // either Storybook (it's the dark-mode addon's event), so it's posted into
-// each frame once it renders. With the compareSync global on, the pointer and
-// page scroll in one frame are mirrored in the other (sync.ts).
+// each frame once it renders. With the compareSync global on, the pointer,
+// drags and scrolling in one frame are mirrored in the other (sync.ts).
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { RefObject } from 'react';
 import { addons } from 'storybook/preview-api';
@@ -23,6 +23,7 @@ import {
 import type { Args, IndexedStory, Side } from './frames';
 import { IDLE_STATUS, boxOf, createSyncRelay, frameOffset, syncChip } from './sync';
 import type { ReactStatus, RelayStatus, SyncChip, SyncRelay } from './sync';
+import { SyncCue } from './SyncCue';
 import { SyncCursor } from './SyncCursor';
 import { readStoredDarkMode } from '../.storybook/shared';
 
@@ -219,6 +220,7 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
                   highContrast={globals.contrast === 'high'}
                 />
               )}
+              {canSync && <ScrollCue relay={relay} side={side} />}
             </div>
           )}
       </div>
@@ -248,6 +250,12 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
   );
 }
 
+// The scroll cue over this side's frame, subscribed to the relay like the cursor.
+function ScrollCue ({ relay, side }: { relay: SyncRelay; side: Side }) {
+  const cue = useSyncExternalStore(relay.subscribeCue, relay.getCue);
+  return <SyncCue cue={cue} side={side} />;
+}
+
 function SyncStatus ({ chip }: { chip: SyncChip }) {
   return (
     <span className="compare__sync" data-tone={chip.tone} title={chip.title}>{chip.text}</span>
@@ -272,6 +280,7 @@ function MirroredCursor ({ relay, side, frame, viewport, highContrast }: {
       x={offset.x + cursor.x}
       y={offset.y + cursor.y}
       pressed={cursor.pressed}
+      click={cursor.click}
       bounds={{ width: viewport.current.clientWidth, height: viewport.current.clientHeight }}
       highContrast={highContrast}
     />

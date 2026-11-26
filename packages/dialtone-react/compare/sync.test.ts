@@ -50,6 +50,14 @@ describe('Compare sync', () => {
       expect(parseAgentMessage(input(events))).toEqual({ type: 'input', viewport: VIEWPORT, events });
     });
 
+    it('reads a scroller event only with a point to find it by', () => {
+      const scroller = { kind: 'scroller', x: 0, y: 5, at: { x: 1, y: 2 } } as SyncEvent;
+
+      expect(parseAgentMessage(input([scroller]))).toMatchObject({ events: [scroller] });
+      expect(parseAgentMessage(input([{ kind: 'scroller', x: 0, y: 5 } as unknown as SyncEvent]))).toBeNull();
+      expect(parseAgentMessage(input([{ ...scroller, at: { x: 'a', y: 2 } } as unknown as SyncEvent]))).toBeNull();
+    });
+
     it.each([
       ['another key', { ...ready, key: 'storybook-channel' }],
       ['Storybook\'s channel', JSON.stringify({ key: 'storybook-channel', event: { type: 'storyRendered' } })],
@@ -177,7 +185,7 @@ describe('Compare sync', () => {
       ]);
       expect(replays('vue')).toEqual([]);
       expect(relay.getStatus().source).toBe('vue');
-      expect(relay.getCursor()).toEqual({ over: 'react', mirrors: 'vue', x: 10, y: 20, pressed: false });
+      expect(relay.getCursor()).toEqual({ over: 'react', mirrors: 'vue', x: 10, y: 20, pressed: false, click: 1 });
     });
 
     it('maps points into a frame of another size', () => {
@@ -229,6 +237,93 @@ describe('Compare sync', () => {
 
       expect(replays('vue')).toEqual([{ kind: 'scroll', x: 0, y: 480 }]);
       expect(relay.getStatus().source).toBe('vue');
+    });
+
+    it('relays a scroller\'s offset as it is and maps the point that finds it', () => {
+      const { relay, replays, connectBoth } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('react', input([{ kind: 'scroller', x: 0, y: 120, at: { x: 150, y: 175 } }], { width: 300, height: 350 }));
+
+      expect(replays('vue')).toEqual([{ kind: 'scroller', x: 0, y: 120, at: { x: 300, y: 350 } }]);
+    });
+
+    it('keeps a drag pressed across moves, and ends it with the release', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+      const pressed = () => relay.getCursor()?.pressed;
+
+      relay.receive('vue', input([{ kind: 'down', x: 5, y: 5 }]));
+      const down = pressed();
+      relay.receive('vue', input([{ kind: 'move', x: 50, y: 5 }]));
+      const dragging = pressed();
+      relay.receive('vue', input([{ kind: 'up', x: 50, y: 5 }]));
+
+      expect([down, dragging, pressed()]).toEqual([true, true, false]);
+    });
+
+    it('marks the state a click leaves with a new number for each click, and the next move clears it', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('vue', input([{ kind: 'click', x: 5, y: 5 }]));
+      const first = relay.getCursor()?.click;
+      relay.receive('vue', input([{ kind: 'click', x: 5, y: 5 }]));
+      const second = relay.getCursor()?.click;
+      relay.receive('vue', input([{ kind: 'move', x: 6, y: 5 }]));
+
+      expect(first).toBeDefined();
+      expect(second).not.toBe(first);
+      expect(relay.getCursor()?.click).toBeUndefined();
+    });
+
+    it('cues a replayed scroll in the frame it went to, with its direction once it has one', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+      const listener = vi.fn();
+      relay.subscribeCue(listener);
+
+      relay.receive('vue', input([{ kind: 'scroll', x: 0, y: 100 }]));
+      const first = relay.getCue();
+      relay.receive('vue', input([{ kind: 'scroll', x: 0, y: 300 }]));
+      const second = relay.getCue();
+      relay.receive('vue', input([{ kind: 'scroll', x: 0, y: 200 }]));
+
+      expect(first).toMatchObject({ over: 'react', mirrors: 'vue', direction: null });
+      expect(second).toMatchObject({ direction: 'down' });
+      expect(relay.getCue()).toMatchObject({ direction: 'up' });
+      expect(new Set([first?.seq, second?.seq, relay.getCue()?.seq]).size).toBe(3);
+      expect(listener).toHaveBeenCalledTimes(3);
+    });
+
+    it('cues a scroller by where it is, so two scrollers don\'t share a direction, and not a plain move', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+      const at = (x: number, y: number) => ({ x, y });
+
+      relay.receive('vue', input([{ kind: 'scroller', x: 0, y: 100, at: at(50, 50) }]));
+      relay.receive('vue', input([{ kind: 'scroller', x: 0, y: 10, at: at(400, 300) }]));
+      const other = relay.getCue();
+      relay.receive('vue', input([{ kind: 'move', x: 1, y: 1 }]));
+
+      expect(other?.direction).toBeNull();
+      expect(relay.getCue()).toBe(other);
+    });
+
+    it('clears the cue on stop and on a reload', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+      relay.receive('vue', input([{ kind: 'scroll', x: 0, y: 100 }]));
+
+      relay.frameLoaded('react');
+      const reloaded = relay.getCue();
+      relay.receive('vue', ready);
+      relay.receive('react', ready);
+      relay.receive('vue', input([{ kind: 'scroll', x: 0, y: 100 }]));
+      relay.stop();
+
+      expect(reloaded).toBeNull();
+      expect(relay.getCue()).toBeNull();
     });
 
     it('hides the cursor and waits for a new answer when a frame reloads', () => {

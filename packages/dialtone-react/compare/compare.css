@@ -153,6 +153,28 @@ body {
   transition: opacity 80ms ease-out;
 }
 
+/* A click: a ring that spreads from the tip and fades (SyncCursor keeps it for
+   RIPPLE_MS). Under reduced motion it doesn't move: a static ring, then gone. */
+.compare-cursor__ripple {
+  fill: none;
+  stroke: var(--compare-cursor-tint);
+  stroke-width: 2px;
+  transform-origin: 0 0;
+  animation: compare-cursor-ripple 600ms ease-out both;
+}
+
+@keyframes compare-cursor-ripple {
+  from {
+    opacity: 0.9;
+    transform: scale(0.3);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
 .compare-cursor[data-pressed] .compare-cursor__arrow {
   transform: scale(0.85);
 }
@@ -211,9 +233,83 @@ body {
   .compare-cursor__press {
     transition: none;
   }
+
+  .compare-cursor__ripple {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+/* The scroll cue (SyncCue.tsx): a thin bar down the frame's end edge, tinted for
+   the side whose scroll it replays, which fades out over its second. */
+.compare-cue {
+  --compare-cursor-tint: oklch(0.43 0.105 156);
+
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 6px;
+  background: var(--compare-cursor-tint);
+  box-shadow: 0 0 0 1px white;
+  animation: compare-cue-fade 1s ease-out both;
+}
+
+.compare-cue[data-side='react'] {
+  --compare-cursor-tint: oklch(0.49 0.205 261);
+}
+
+.compare-cue__chevron {
+  position: absolute;
+  inset-inline-end: 8px;
+  padding: 3px 4px;
+  border-radius: 4px;
+  background: var(--compare-cursor-tint);
+  box-sizing: content-box;
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8px;
+}
+
+.compare-cue[data-direction='up'] .compare-cue__chevron {
+  inset-block-start: 10px;
+}
+
+.compare-cue[data-direction='down'] .compare-cue__chevron {
+  inset-block-end: 10px;
+}
+
+@keyframes compare-cue-fade {
+  0%,
+  60% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Under reduced motion the cue doesn't fade: it stays as it is for its second. */
+@media (prefers-reduced-motion: reduce) {
+  .compare-cue {
+    animation: none;
+    opacity: 0.85;
+  }
 }
 
 @media (forced-colors: active) {
+  .compare-cue,
+  .compare-cue__chevron {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
   .compare-cursor__arrow {
     fill: CanvasText;
     stroke: Canvas;

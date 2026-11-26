@@ -22,6 +22,8 @@ export interface Point {
 export type SyncEvent =
   | { kind: 'move' | 'down' | 'up' | 'click'; x: number; y: number }
   | { kind: 'scroll'; x: number; y: number }
+  /** An element inside the page scrolled to (x, y); `at` is a point inside it, which finds it in the other frame. */
+  | { kind: 'scroller'; x: number; y: number; at: Point }
   | { kind: 'leave' };
 
 export type AgentMessage =
@@ -37,6 +39,18 @@ export interface CursorState extends Point {
   over: Side;
   mirrors: Side;
   pressed: boolean;
+  /** Set on the state a click leaves, so the cursor can show it; the next event replaces the state without it. */
+  click?: number;
+}
+
+/** A scroll replayed in `over`, which the comparison shows for a moment at the frame's edge. */
+export interface CueState {
+  over: Side;
+  mirrors: Side;
+  /** Changes with every scroll, so a new one restarts the cue. */
+  seq: number;
+  /** Which way the scroll went, when it can tell. */
+  direction: 'up' | 'down' | null;
 }
 
 /** Each frame's handshake: sent and not answered yet, answered, or not answered in HANDSHAKE_TIMEOUT. */
@@ -70,9 +84,12 @@ const isSize = (value: unknown): value is Size =>
 
 const POINT_KINDS = new Set(['move', 'down', 'up', 'click', 'scroll']);
 
+const isPoint = (value: unknown): value is Point =>
+  isObject(value) && isFiniteNumber(value.x) && isFiniteNumber(value.y);
+
 const isSyncEvent = (value: unknown): value is SyncEvent =>
-  isObject(value) && (value.kind === 'leave' ||
-    (POINT_KINDS.has(value.kind as string) && isFiniteNumber(value.x) && isFiniteNumber(value.y)));
+  isObject(value) && (value.kind === 'leave' || (isPoint(value) &&
+    (POINT_KINDS.has(value.kind as string) || (value.kind === 'scroller' && isPoint(value.at)))));
 
 /** Whether a posted message is the sync agent's, valid or not. Storybook's channel posts strings, never this. */
 export const isSyncMessage = (data: unknown): boolean => isObject(data) && data.key === SYNC_KEY;
@@ -151,6 +168,9 @@ export interface SyncRelay {
   /** The cursor, for useSyncExternalStore: it changes on every move, so it's kept out of React state. */
   getCursor: () => CursorState | null;
   subscribeCursor: (listener: () => void) => () => void;
+  /** The latest replayed scroll, for the cue. */
+  getCue: () => CueState | null;
+  subscribeCue: (listener: () => void) => () => void;
 }
 
 interface RelayOptions {
@@ -163,9 +183,15 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
   let enabled = false;
   let status = IDLE_STATUS;
   let cursor: CursorState | null = null;
+  let cue: CueState | null = null;
+  let clicks = 0;
+  let scrolls = 0;
+  // The last offset seen per scroller, found by where it is, to tell which way it went.
+  const offsets = new Map<string, number>();
   const since: Record<Side, number> = { vue: 0, react: 0 };
   const viewports: Partial<Record<Side, Size>> = {};
   const cursorListeners = new Set<() => void>();
+  const cueListeners = new Set<() => void>();
 
   const setStatus = (next: Partial<RelayStatus>) => {
     const merged = { ...status, ...next };
@@ -180,6 +206,10 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     cursor = next;
     cursorListeners.forEach(listener => listener());
   };
+  const setCue = (next: CueState | null) => {
+    cue = next;
+    cueListeners.forEach(listener => listener());
+  };
   const isReady = (side: Side) => status.frames[side] === 'ready';
 
   const hello = (side: Side) => post(side, { key: SYNC_KEY, type: 'connect' });
@@ -188,6 +218,7 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     since[side] = now();
     setHandshake(side, 'connecting');
     if (cursor && (cursor.over === side || cursor.mirrors === side)) setCursor(null);
+    if (cue) setCue(null);
     hello(side);
   };
 
@@ -199,10 +230,28 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     const replay: SyncEvent[] = [];
     let next = cursor;
     let source = status.source;
+    const scrolled: CueState[] = [];
+    // Which way a scroll went, from the last offset seen at the same place (a scroller is told apart by its point,
+    // rounded to a 40px cell).
+    const showScroll = (key: string, y: number) => {
+      const before = offsets.get(key);
+      offsets.set(key, y);
+      scrolled.push({
+        over: target,
+        mirrors: side,
+        seq: ++scrolls,
+        direction: before === undefined || before === y ? null : y > before ? 'down' : 'up',
+      });
+    };
     for (const event of events) {
       if (event.kind === 'scroll') {
         // Pixels, as they are: the other page clamps them.
         replay.push(event);
+        showScroll('page', event.y);
+      } else if (event.kind === 'scroller') {
+        // Pixels as they are, and the locating point mapped into the other frame.
+        replay.push({ ...event, at: mapPoint(event.at, from, to) });
+        showScroll(`${side}:${Math.round(event.at.x / 40)},${Math.round(event.at.y / 40)}`, event.y);
       } else if (event.kind === 'leave') {
         if (next?.mirrors === side) next = null;
         replay.push(event);
@@ -211,11 +260,13 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
         const point = mapPoint(event, from, to);
         const pressed = event.kind === 'down' || (event.kind === 'move' && next?.mirrors === side && next.pressed);
         next = { over: target, mirrors: side, ...point, pressed };
+        if (event.kind === 'click') next.click = ++clicks;
         replay.push({ kind: event.kind, ...point });
       }
     }
     if (replay.length) post(target, { key: SYNC_KEY, type: 'replay', events: replay });
     setCursor(next);
+    if (scrolled.length) setCue(scrolled[scrolled.length - 1]);
     setStatus({ source });
   };
 
@@ -229,6 +280,8 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
       enabled = false;
       SIDES.forEach(side => post(side, { key: SYNC_KEY, type: 'disconnect' }));
       setCursor(null);
+      setCue(null);
+      offsets.clear();
       status = IDLE_STATUS;
       onStatus(status);
     },
@@ -261,6 +314,11 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
     subscribeCursor (listener) {
       cursorListeners.add(listener);
       return () => cursorListeners.delete(listener);
+    },
+    getCue: () => cue,
+    subscribeCue (listener) {
+      cueListeners.add(listener);
+      return () => cueListeners.delete(listener);
     },
   };
 }
@@ -308,6 +366,6 @@ export function syncChip (reactStatus: ReactStatus, status: RelayStatus): SyncCh
   return {
     tone: 'on',
     text: `Mirroring ${from} → ${to}`,
-    title: `The pointer, clicks and page scroll in ${from} are replayed in ${to}.`,
+    title: `The pointer, drags, clicks and scrolling in ${from} are replayed in ${to}.`,
   };
 }

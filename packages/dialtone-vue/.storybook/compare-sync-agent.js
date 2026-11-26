@@ -7,7 +7,8 @@
 // the DOM and attaches no input listeners. Everything goes through postMessage, so it works for the published
 // previews (one origin) and the local dev servers (one origin each) alike.
 //
-// Phase 1 mirrors pointer movement, clicks and page scroll. No keyboard, and it never moves focus.
+// It mirrors pointer movement, presses (so drags), clicks, page scroll and the scroll of elements inside the story.
+// No keyboard, and it never moves focus itself.
 
 /** Marks this agent's messages, so neither side mistakes them for Storybook's channel (`storybook-channel`). */
 export const COMPARE_SYNC_KEY = 'dialtone-compare-sync';
@@ -18,13 +19,15 @@ const INSTANCE = Symbol.for('dialtone.compareSyncAgent');
 const POINTER_KINDS = { pointermove: 'move', pointerdown: 'down', pointerup: 'up' };
 // Only the last position of a run of moves, or of scrolls, has to travel.
 const COALESCED = new Set(['move', 'scroll']);
-const REPLAYED_KINDS = new Set(['move', 'down', 'up', 'click', 'leave', 'scroll']);
+const REPLAYED_KINDS = new Set(['move', 'down', 'up', 'click', 'leave', 'scroll', 'scroller']);
 
 const isFiniteNumber = value => typeof value === 'number' && Number.isFinite(value);
 
-// A replayed event the agent can act on: one of its kinds, with finite coordinates where it has any.
+// A replayed event the agent can act on: one of its kinds, with finite coordinates where it has any. A scroller event
+// also locates its element by a point (`at`).
 const isReplayEvent = event => REPLAYED_KINDS.has(event?.kind) &&
-  (event.kind === 'leave' || (isFiniteNumber(event.x) && isFiniteNumber(event.y)));
+  (event.kind === 'leave' || (isFiniteNumber(event.x) && isFiniteNumber(event.y) &&
+    (event.kind !== 'scroller' || (isFiniteNumber(event.at?.x) && isFiniteNumber(event.at?.y)))));
 
 const clamp = (value, max) => Math.min(Math.max(value, 0), Math.max(max, 0));
 
@@ -35,6 +38,31 @@ const pathOf = (element) => {
   const path = [];
   for (let node = element; node; node = node.parentElement) path.push(node);
   return path;
+};
+
+// The closest common ancestor of two elements, where a browser fires the click of a press that ended elsewhere.
+const commonAncestor = (a, b) => {
+  const inA = new Set(pathOf(a));
+  return pathOf(b).find(node => inA.has(node)) ?? a;
+};
+
+const SCROLLING = /auto|scroll|overlay/;
+
+// Whether an element scrolls on its own, which a script can't tell from its `overflow` alone: it has to have
+// something to scroll to.
+const isScrollable = (element) => {
+  const style = element.ownerDocument.defaultView.getComputedStyle(element);
+  return (SCROLLING.test(style.overflowY) && element.scrollHeight - element.clientHeight > 1) ||
+    (SCROLLING.test(style.overflowX) && element.scrollWidth - element.clientWidth > 1);
+};
+
+// The closest scrolling element at or above a node, short of the page itself (which has its own scroll event).
+const scrollerAbove = (node) => {
+  for (let element = node; element; element = element.parentElement) {
+    if (element === element.ownerDocument.documentElement || element === element.ownerDocument.body) return null;
+    if (isScrollable(element)) return element;
+  }
+  return null;
 };
 
 /**
@@ -63,12 +91,25 @@ export function installCompareSyncAgent ({
   let clickDue = false;
   // Where the last replayed scroll left the page, until its own scroll event has gone by (see applyScroll).
   let applied = null;
+  // The same for the elements inside the page: element -> the position a replayed scroll left it at.
+  const appliedInner = new Map();
+  // Elements that scrolled for real since the last flush; their position and locator are read when it goes out.
+  const scrolledInner = new Set();
+  // Where the real pointer last was, which is the best point to find a scrolled element by: wherever the user is
+  // scrolling, it's in there.
+  let realPoint = null;
   // The replayed pointer's element and its ancestors, innermost first, and where it was.
   let hovered = [];
   let lastPoint = { x: 0, y: 0 };
   // The replayed button, while it's down: whether its pointerdown was cancelled, which suppresses the mouse events of
-  // the press (not the click).
+  // the press (not the click), the element it went down on, and the element holding pointer capture (see
+  // capturePointer).
   let press = null;
+  // The element the click that follows a press goes to: where a browser fires it (see releaseAt).
+  let clickTarget = null;
+  // Whether a replayed event is being dispatched right now, which is the only time pointer capture is emulated.
+  let replaying = false;
+  let restoreCapture = null;
 
   const post = message => win.parent.postMessage({ key: COMPARE_SYNC_KEY, ...message }, host);
   const viewport = () => ({ width: win.innerWidth, height: win.innerHeight });
@@ -78,10 +119,37 @@ export function installCompareSyncAgent ({
   // Sending: real input, batched once per animation frame. Every batch carries the viewport's size, so the
   // comparison can map a point to the other frame.
 
+  // Where to find an element in the other frame: a point inside it that leads back to it, since the two frames hold
+  // different elements (Vue may wrap what React doesn't). The real pointer when it's in there, else the middle, then
+  // the corners; the first whose closest scroller is the element itself, so a scroller nested in it doesn't take
+  // the point.
+  const locate = (element) => {
+    const rect = element.getBoundingClientRect();
+    const inset = 4;
+    const center = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    const candidates = [
+      realPoint,
+      center,
+      { x: rect.left + inset, y: rect.top + inset },
+      { x: rect.right - inset, y: rect.top + inset },
+      { x: rect.left + inset, y: rect.bottom - inset },
+      { x: rect.right - inset, y: rect.bottom - inset },
+    ].filter(Boolean);
+    const at = candidates.find(point => scrollerAbove(doc.elementFromPoint(point.x, point.y)) === element);
+    return at ?? center;
+  };
+
   const flush = () => {
     flushRequested = false;
     if (!host) return;
-    post({ type: 'input', viewport: viewport(), events: queue });
+    const scrollers = [...scrolledInner].filter(element => element.isConnected).map(element => ({
+      kind: 'scroller',
+      x: element.scrollLeft,
+      y: element.scrollTop,
+      at: locate(element),
+    }));
+    scrolledInner.clear();
+    post({ type: 'input', viewport: viewport(), events: [...queue, ...scrollers] });
     queue = [];
   };
 
@@ -98,6 +166,7 @@ export function installCompareSyncAgent ({
   const onPointer = (event) => {
     if (!isReal(event)) return;
     clickDue = event.type === 'pointerup';
+    realPoint = { x: event.clientX, y: event.clientY };
     enqueue({ kind: POINTER_KINDS[event.type], x: event.clientX, y: event.clientY });
   };
 
@@ -117,8 +186,22 @@ export function installCompareSyncAgent ({
 
   // Scroll events are trusted even when a script scrolled, so a replayed scroll's own event is told apart by the
   // position it left, not by a flag: a flag would also swallow a real scroll when the replayed one moved nothing.
+  // Scroll doesn't bubble, so an element inside the page is heard in the capture phase.
+  const onInnerScroll = (element) => {
+    const mark = appliedInner.get(element);
+    const echo = mark && samePosition({ x: element.scrollLeft, y: element.scrollTop }, mark);
+    appliedInner.delete(element);
+    if (echo) return;
+    scrolledInner.add(element);
+    enqueue(null);
+  };
+
   const onScroll = (event) => {
-    if (event.target !== doc || !isReal(event)) return;
+    if (!isReal(event)) return;
+    if (event.target !== doc) {
+      if (event.target.nodeType === 1) onInnerScroll(event.target);
+      return;
+    }
     const position = scrollPosition();
     const echo = applied && samePosition(position, applied);
     applied = null;
@@ -135,28 +218,34 @@ export function installCompareSyncAgent ({
     ['pointerup', onPointer, true],
     ['click', onClick, true],
     ['pointerout', onPointerOut, true],
-    ['scroll', onScroll, false],
+    ['scroll', onScroll, true],
     ['resize', onResize, false],
   ];
 
   // Replaying: what the other frame reported. Dispatched events are untrusted, so none of them is sent back.
 
   const fire = (target, type, init) => {
-    const Constructor = type.startsWith('pointer') && win.PointerEvent ? win.PointerEvent : win.MouseEvent;
+    const Constructor = type.includes('pointer') && win.PointerEvent ? win.PointerEvent : win.MouseEvent;
     // Enter and leave neither bubble nor cancel; every other pointer and mouse event does both.
     const boundary = /enter|leave/.test(type);
-    return target.dispatchEvent(new Constructor(type, {
-      bubbles: !boundary,
-      cancelable: !boundary,
-      composed: true,
-      view: win,
-      clientX: lastPoint.x,
-      clientY: lastPoint.y,
-      pointerId: 1,
-      pointerType: 'mouse',
-      isPrimary: true,
-      ...init,
-    }));
+    const wasReplaying = replaying;
+    replaying = true;
+    try {
+      return target.dispatchEvent(new Constructor(type, {
+        bubbles: !boundary,
+        cancelable: !boundary,
+        composed: true,
+        view: win,
+        clientX: lastPoint.x,
+        clientY: lastPoint.y,
+        pointerId: 1,
+        pointerType: 'mouse',
+        isPrimary: true,
+        ...init,
+      }));
+    } finally {
+      replaying = wasReplaying;
+    }
   };
 
   // What a browser fires when the pointer goes from one element to another: out on the one it left and over on the
@@ -187,40 +276,100 @@ export function installCompareSyncAgent ({
     return target;
   };
 
+  // Pointer capture, as a real drag uses it (a slider's track takes it on pointerdown so the drag follows the pointer
+  // off the track). The replayed pointer isn't one the browser knows, so the real call throws, and the handler that made
+  // it stops half way. While an event is being replayed the call is taken as the capture instead: the element that asked
+  // gets the rest of the press, as it would. Outside a replayed event the browser's own methods run, so a story's real
+  // pointer is never touched; the wrappers go on at the handshake and come off at the goodbye.
+  const emulateCapture = (on) => {
+    const proto = win.Element?.prototype;
+    if (!proto) return;
+    if (!on) {
+      restoreCapture?.();
+      restoreCapture = null;
+      return;
+    }
+    if (restoreCapture) return;
+    const originals = {
+      setPointerCapture: proto.setPointerCapture,
+      releasePointerCapture: proto.releasePointerCapture,
+      hasPointerCapture: proto.hasPointerCapture,
+    };
+    const wrappers = {
+      setPointerCapture (...args) {
+        if (!replaying) return originals.setPointerCapture.apply(this, args);
+        if (press) press.captor = this;
+        return undefined;
+      },
+      releasePointerCapture (...args) {
+        if (!replaying) return originals.releasePointerCapture.apply(this, args);
+        if (press?.captor === this) press.captor = null;
+        return undefined;
+      },
+      hasPointerCapture (...args) {
+        if (!replaying) return originals.hasPointerCapture.apply(this, args);
+        return press?.captor === this;
+      },
+    };
+    Object.assign(proto, wrappers);
+    restoreCapture = () => {
+      // Only what is still ours: a story that replaced a method after this keeps its own.
+      for (const name of Object.keys(originals)) {
+        if (proto[name] === wrappers[name]) proto[name] = originals[name];
+      }
+    };
+  };
+
+  // While an element holds capture, the pointer's events go to it, wherever the pointer is, with no boundary events.
   const movePointer = (point) => {
-    const target = pointTo(point);
+    lastPoint = point;
+    const captor = press?.captor;
+    const target = captor ?? pointTo(point);
     const buttons = { buttons: press ? 1 : 0 };
     fire(target, 'pointermove', buttons);
     if (!press?.cancelled) fire(target, 'mousemove', buttons);
   };
 
+  // The pointer left the other frame's page. With a button down the press carries on: its release is still to come.
   const releasePointer = () => {
-    press = null;
-    if (hovered.length) crossBoundary([]);
+    if (!press && hovered.length) crossBoundary([]);
   };
 
   // A click replays as the other frame fired it: pointerdown and mousedown when the button goes down, pointerup and
   // mouseup when it comes up, then click. Each part replays when it happens, so a component that acts on the press
-  // alone (a popover closing on an outside pointerdown, with no click after it) acts in both frames. These events
-  // have no default action, so nothing takes focus.
+  // alone (a popover closing on an outside pointerdown, with no click after it) acts in both frames, and a drag
+  // (pointermove between the two) drags in both. These events have no default action, so nothing takes focus.
   const pressAt = (point) => {
     const target = pointTo(point);
     const init = { button: 0, buttons: 1 };
-    press = { cancelled: !fire(target, 'pointerdown', init) };
+    clickTarget = null;
+    press = { cancelled: false, target, captor: null };
+    press.cancelled = !fire(target, 'pointerdown', init);
     if (!press.cancelled) fire(target, 'mousedown', { ...init, detail: 1 });
   };
 
   const releaseAt = (point) => {
-    const target = pointTo(point);
+    lastPoint = point;
+    const captor = press?.captor;
+    const target = captor ?? pointTo(point);
     const init = { button: 0, buttons: 0 };
     const cancelled = press?.cancelled;
+    // A browser fires the click on the nearest element holding both the press and the release, or on the capturing
+    // element, which has both.
+    clickTarget = captor ?? (press?.target?.isConnected ? commonAncestor(press.target, target) : target);
     press = null;
     fire(target, 'pointerup', init);
     if (!cancelled) fire(target, 'mouseup', { ...init, detail: 1 });
+    if (captor) fire(captor, 'lostpointercapture', init);
+    // A capture ends with the press: the pointer's element is the one under it again.
+    if (captor) pointTo(point);
   };
 
   const clickAt = (point) => {
-    fire(pointTo(point), 'click', { button: 0, buttons: 0, detail: 1 });
+    const target = clickTarget?.isConnected ? clickTarget : pointTo(point);
+    clickTarget = null;
+    lastPoint = point;
+    fire(target, 'click', { button: 0, buttons: 0, detail: 1 });
   };
 
   // Scrolls the page to the other frame's position in pixels, clamped to this page. The position it leaves is
@@ -245,6 +394,26 @@ export function installCompareSyncAgent ({
     });
   };
 
+  // Scrolls the element inside the page found at a point (the closest scroller there) to the other frame's offset, with
+  // the same guard as the page's: the position it leaves is remembered until the browser has fired its scroll event.
+  const applyScroller = ({ x, y, at }) => {
+    const element = scrollerAbove(doc.elementFromPoint(at.x, at.y));
+    if (!element) return;
+    const before = { x: element.scrollLeft, y: element.scrollTop };
+    const goal = {
+      x: clamp(x, element.scrollWidth - element.clientWidth),
+      y: clamp(y, element.scrollHeight - element.clientHeight),
+    };
+    if (samePosition(before, goal)) return;
+    element.scrollTo({ left: goal.x, top: goal.y, behavior: 'instant' });
+    const after = { x: element.scrollLeft, y: element.scrollTop };
+    if (samePosition(after, before)) return;
+    appliedInner.set(element, after);
+    requestFrame(() => {
+      if (appliedInner.get(element) === after) appliedInner.delete(element);
+    });
+  };
+
   const replayers = {
     move: movePointer,
     down: pressAt,
@@ -252,6 +421,7 @@ export function installCompareSyncAgent ({
     click: clickAt,
     leave: releasePointer,
     scroll: applyScroll,
+    scroller: applyScroller,
   };
 
   // The handshake.
@@ -265,6 +435,7 @@ export function installCompareSyncAgent ({
 
   const connect = (origin) => {
     if (!host) listen(true);
+    emulateCapture(true);
     // An opaque origin (a sandboxed comparison) can only be reached with '*'.
     host = origin === 'null' ? '*' : origin;
     post({ type: 'ready', viewport: viewport() });
@@ -273,10 +444,16 @@ export function installCompareSyncAgent ({
   const disconnect = () => {
     if (!host) return;
     listen(false);
+    press = null;
+    clickTarget = null;
     releasePointer();
+    emulateCapture(false);
     host = null;
     queue = [];
     applied = null;
+    appliedInner.clear();
+    scrolledInner.clear();
+    realPoint = null;
     clickDue = false;
   };
 
