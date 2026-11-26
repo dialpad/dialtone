@@ -1,0 +1,63 @@
+packages/dialtone-react/components/Dropdown/Dropdown.test.tsx
+  s_2defdf83601f66::t_2f06deed89851b 211,214,231,235,240,250-261,451,472-473,488-489,493-497,499-507,524-535
+packages/dialtone-react/components/Dropdown/Dropdown.tsx
+  s_2defdf83601f66::t_67fbdc8458572d 236,242-243,295
+packages/dialtone-react/components/Dropdown/deviations.json
+  s_2defdf83601f66::t_0d9d6d7367a5cc 4,8,12,16
+packages/dialtone-react/components/FilterPill/FilterPillOptionRows.test.tsx
+  s_2defdf83601f66::t_1607d0f620fcd6 242,249-250
+packages/dialtone-react/components/Popover/Popover.test.tsx
+  s_2defdf83601f66::t_8a9a4a39c172fc 491-493,497
+packages/dialtone-react/components/Popover/Popover.tsx
+  s_2defdf83601f66::t_0c3237d690a80c 1149-1153
+packages/dialtone-react/components/Text/index.ts
+  s_2defdf83601f66::t_a74a492701b777 25
+  s_2defdf83601f66::t_6263fd9035e23a 19
+packages/dialtone-react/components/Text/modules/SlideViewport.tsx
+  s_2defdf83601f66::t_6b3b576027fc7a 1-259,261-297
+  s_2defdf83601f66::t_5aa1d1bb692f56 260
+packages/dialtone-react/components/Text/Text.stories.tsx
+  s_2defdf83601f66::t_38c6ec43fb812b 20
+  s_2defdf83601f66::t_61d32cec45e9ab 501-570
+  s_2defdf83601f66::t_1764680c6983e3 41
+  s_2defdf83601f66::t_df0245a88ff85f 58
+  s_2defdf83601f66::t_bce1d5d17e8541 127-132
+  s_2defdf83601f66::t_f8b57dce53c620 192
+  s_2defdf83601f66::t_773028372bce1b 584-602
+  s_2defdf83601f66::t_4af044f036edda 1,4,6
+packages/dialtone-react/components/Text/modules/slide.ts
+  s_2defdf83601f66::t_588de4fa9fe952 1-166
+packages/dialtone-react/components/Text/TextConstants.ts
+  s_2defdf83601f66::t_f25763468e3f47 153-154
+  s_2defdf83601f66::t_4f4954472ac927 174
+  s_2defdf83601f66::t_e0aa4ef860ace1 193
+packages/dialtone-react/components/Text/Text.tsx
+  s_2defdf83601f66::t_3b458db5d3b8f8 167-174
+  s_2defdf83601f66::t_9fc42fe7c94ed5 246-253
+  s_2defdf83601f66::t_f47bc8d2d70c59 353-354
+  s_2defdf83601f66::t_d1fd958024fd9a 40
+  s_2defdf83601f66::t_3920a815f41277 1,3
+  s_2defdf83601f66::t_d4b8a7d8e428c2 301,307,312,316,319-330
+  s_2defdf83601f66::t_e3352156d45f91 263,265-266
+  s_2defdf83601f66::t_54d752fa04b86c 126-134
+  s_2defdf83601f66::t_d0c1a2206ef9cd 22,28
+packages/dialtone-react/components/Text/Text.test.tsx
+  s_2defdf83601f66::t_210f7fc09f2c0f 552-967
+  s_2defdf83601f66::t_13bfaec98a11fc 1-2,5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ec63dd9a42e629e037b74573afdbe3633a9db1b4",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
