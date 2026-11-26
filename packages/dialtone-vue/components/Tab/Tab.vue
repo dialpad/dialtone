@@ -25,6 +25,19 @@
     v-bind="$attrs"
     v-on="tabListeners"
   >
+    <template
+      v-if="$slots.blockStartIcon"
+      #blockStartIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed above the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockStartIcon"
+        :icon-size="iconSize"
+      />
+    </template>
     <!-- @slot Icon displayed at the start (left in LTR) of the tab -->
     <template
       v-if="$slots.startIcon"
@@ -52,6 +65,19 @@
     >
       <slot
         name="endIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$slots.blockEndIcon"
+      #blockEndIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed below the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockEndIcon"
         :icon-size="iconSize"
       />
     </template>

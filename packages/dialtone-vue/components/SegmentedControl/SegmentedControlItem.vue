@@ -19,6 +19,19 @@
     @focus="handleFocus"
   >
     <template
+      v-if="$slots.blockStartIcon"
+      #blockStartIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed above the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockStartIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
       v-if="$slots.startIcon"
       #startIcon="{ iconSize }"
     >
@@ -35,6 +48,19 @@
       <!-- @slot Icon displayed at the inline-end of the label. Provides { iconSize } scoped binding. -->
       <slot
         name="endIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$slots.blockEndIcon"
+      #blockEndIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed below the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockEndIcon"
         :icon-size="iconSize"
       />
     </template>

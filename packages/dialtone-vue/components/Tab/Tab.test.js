@@ -62,6 +62,18 @@ describe('DtTab Tests', () => {
       expect(tab.text()).toBe(MOCK_DEFAULT_SLOT);
     });
 
+    it('renders block icon slots with the tab icon size', () => {
+      mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, size: 200 } };
+      mockSlots = {
+        blockStartIcon: ({ iconSize }) => `Start ${iconSize}`,
+        blockEndIcon: ({ iconSize }) => `End ${iconSize}`,
+      };
+      updateWrapper();
+
+      expect(tab.get('[data-qa="dt-button-block-start-icon"]').text()).toBe('Start 200');
+      expect(tab.get('[data-qa="dt-button-block-end-icon"]').text()).toBe('End 200');
+    });
+
     describe('Selected Tab by default', () => {
       it('Group context should have set selected tab', () => {
         mockProps = { selected: true };

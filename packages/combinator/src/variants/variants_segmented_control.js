@@ -36,6 +36,26 @@ export default {
     },
   },
 
+  'with block icons': {
+    slots: {
+      default: {
+        initialValue: `<dt-segmented-control-item value="system">System</dt-segmented-control-item>
+<dt-segmented-control-item value="light">
+  <template #blockStartIcon="{ iconSize }"><dt-icon-sun :size="iconSize" /></template>
+  Light
+</dt-segmented-control-item>
+<dt-segmented-control-item value="dark">
+  Dark
+  <template #blockEndIcon="{ iconSize }"><dt-icon-moon :size="iconSize" /></template>
+</dt-segmented-control-item>`,
+      },
+    },
+    props: {
+      modelValue: { initialValue: 'system' },
+      ariaLabel: { initialValue: 'Appearance mode' },
+    },
+  },
+
   'icon only': {
     slots: {
       default: {

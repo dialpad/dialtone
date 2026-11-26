@@ -130,6 +130,28 @@ export default {
     },
   },
 
+  'with block icons': {
+    props: {
+      selected: { initialValue: 'panel-1' },
+    },
+    slots: {
+      tabs: {
+        initialValue: `<dt-tab id="tab-1" panel-id="panel-1">First</dt-tab>
+<dt-tab id="tab-2" panel-id="panel-2">
+  <template #blockStartIcon="{ iconSize }"><dt-icon-inbox :size="iconSize" /></template>
+  Second
+</dt-tab>
+<dt-tab id="tab-3" panel-id="panel-3">
+  Third
+  <template #blockEndIcon="{ iconSize }"><dt-icon-box-select :size="iconSize" /></template>
+</dt-tab>`,
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py-600">\n<dt-tab-panel id="panel-1" tab-id="tab-1">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>First</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-2" tab-id="tab-2">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Second</strong> tab content panel </dt-text>\n</dt-tab-panel>\n<dt-tab-panel id="panel-3" tab-id="tab-3">\n<dt-text as="p" variant="code-xs" tone="muted" align="center" class="d-p-200"> <strong>Third</strong> tab content panel </dt-text>\n</dt-tab-panel>\n</div>',
+      },
+    },
+  },
+
   'icon only': {
     props: {
       selected: { initialValue: 'panel-1' },

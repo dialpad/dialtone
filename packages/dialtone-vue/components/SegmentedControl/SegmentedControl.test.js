@@ -51,6 +51,20 @@ describe('DtSegmentedControl Tests', () => {
       expect(items.length).toBe(ITEMS.length);
     });
 
+    it('renders block icon slots with the segmented control icon size', () => {
+      _setWrapper({ size: 200 }, {
+        default: () => h(DtSegmentedControlItem, { value: 'all' }, {
+          default: () => 'All',
+          blockStartIcon: ({ iconSize }) => `Start ${iconSize}`,
+          blockEndIcon: ({ iconSize }) => `End ${iconSize}`,
+        }),
+      });
+
+      const item = wrapper.get('[data-qa="dt-segmented-control-item"]');
+      expect(item.get('[data-qa="dt-button-block-start-icon"]').text()).toBe('Start 200');
+      expect(item.get('[data-qa="dt-button-block-end-icon"]').text()).toBe('End 200');
+    });
+
     it('applies active class to selected item', () => {
       _setWrapper({ modelValue: 'favorites' });
 
