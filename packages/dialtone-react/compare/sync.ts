@@ -46,9 +46,21 @@ export interface KeyEvent {
   target: Locator | null;
 }
 
+/** The modifier keys held with a pointer event. An agent from before they travelled leaves them out. */
+export interface Modifiers {
+  alt?: boolean;
+  ctrl?: boolean;
+  meta?: boolean;
+  shift?: boolean;
+}
+
 /** What an agent reports, and what the relay replays in the other frame. Points are in the viewport's CSS pixels. */
 export type SyncEvent =
-  | { kind: 'move' | 'down' | 'up' | 'click'; x: number; y: number }
+  /** The primary pointer, and the primary button's presses only: the other frame replays each as that button's. */
+  | ({ kind: 'move' | 'down' | 'up' | 'click'; x: number; y: number } & Modifiers)
+  /** A press ended without a release (pointercancel): no click follows. */
+  | { kind: 'cancel' }
+  /** Page scroll, signed: a right-to-left page's horizontal offsets are negative. */
   | { kind: 'scroll'; x: number; y: number }
   /** An element inside the page scrolled to (x, y); `at` is a point inside it, which finds it in the other frame. */
   | { kind: 'scroller'; x: number; y: number; at: Point }
@@ -170,11 +182,23 @@ const isLocator = (value: unknown): value is Locator =>
   isObject(value) && isShortString(value.role, 64) && isShortString(value.qa, 200) && isShortString(value.name, 80) &&
   isPoint(value.at) && Array.isArray(value.ranks) && value.ranks.length === 3 && value.ranks.every(isRank);
 
-const KEY_FLAGS = ['alt', 'ctrl', 'meta', 'shift', 'repeat'];
+const MODIFIER_FLAGS = ['alt', 'ctrl', 'meta', 'shift'] as const;
+const KEY_FLAGS = [...MODIFIER_FLAGS, 'repeat'];
 
 const isKeyEvent = (value: Record<string, unknown>) =>
   isShortString(value.key, 32) && isShortString(value.code, 32) && isFiniteNumber(value.keyCode) &&
   KEY_FLAGS.every(flag => typeof value[flag] === 'boolean') && (value.target === null || isLocator(value.target));
+
+const hasModifiers = (value: Record<string, unknown>) =>
+  MODIFIER_FLAGS.every(flag => value[flag] === undefined || typeof value[flag] === 'boolean');
+
+// A pointer event's modifiers as they go on: all four, so the other frame replays exactly these.
+const modifiersOf = (event: Modifiers): Required<Modifiers> => ({
+  alt: event.alt === true,
+  ctrl: event.ctrl === true,
+  meta: event.meta === true,
+  shift: event.shift === true,
+});
 
 const isSelection = (value: unknown) =>
   value === null || (isObject(value) && Number.isInteger(value.start) && Number.isInteger(value.end));
@@ -183,6 +207,7 @@ const isSyncEvent = (value: unknown): value is SyncEvent => {
   if (!isObject(value)) return false;
   switch (value.kind) {
     case 'leave':
+    case 'cancel':
     case 'blur':
       return true;
     case 'keydown':
@@ -195,7 +220,7 @@ const isSyncEvent = (value: unknown): value is SyncEvent => {
     case 'scroller':
       return isPoint(value) && isPoint(value.at);
     default:
-      return isPoint(value) && POINT_KINDS.has(value.kind as string);
+      return isPoint(value) && POINT_KINDS.has(value.kind as string) && hasModifiers(value);
   }
 };
 
@@ -312,6 +337,14 @@ interface RelayOptions {
 
 const NO_RINGS: Record<Side, RingState | null> = { vue: null, react: null };
 
+/**
+ * What a frame's reload sends the other frame. All it mirrored came from the old document and goes with it, whether or
+ * not the pointer is over either frame (focus can come from the keyboard alone): a press still down there ends without
+ * a click (cancel: a plain leave keeps a drag going, as it does when the pointer crosses out of the frame mid-drag),
+ * the hovered elements and their hover styles go (leave), and so does the ring of its focus (blur).
+ */
+export const RELOAD_RESET: SyncEvent[] = [{ kind: 'cancel' }, { kind: 'leave' }, { kind: 'blur' }];
+
 export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: RelayOptions): SyncRelay {
   let enabled = false;
   let status = IDLE_STATUS;
@@ -384,16 +417,14 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
   const hello = (side: Side) => post(side, { key: SYNC_KEY, type: 'connect' });
 
   const restart = (side: Side) => {
-    // The pointer mirrored from a frame that reloads is gone from the other one: its hover styles and hovered
-    // elements, which came from the old document, go with it.
-    if (cursor?.mirrors === side && isReady(otherSide(side))) {
-      post(otherSide(side), { key: SYNC_KEY, type: 'replay', events: [{ kind: 'leave' }] });
-    }
+    const peer = otherSide(side);
+    if (isReady(peer)) post(peer, { key: SYNC_KEY, type: 'replay', events: RELOAD_RESET });
     since[side] = now();
     setHandshake(side, 'connecting');
     if (cursor && (cursor.over === side || cursor.mirrors === side)) setCursor(null);
     if (cue) setCue(null);
     setRing(side, null);
+    setRing(peer, null);
     if (keys?.over === side) setKeys(null);
     hello(side);
   };
@@ -435,6 +466,10 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
       } else if (event.kind === 'leave' || event.kind === 'blur') {
         if (event.kind === 'leave' && next?.mirrors === side) next = null;
         replay.push(event);
+      } else if (event.kind === 'cancel') {
+        // The press ended without a release: the cursor stays where it is, no longer pressed.
+        if (next?.mirrors === side) next = { over: next.over, mirrors: side, x: next.x, y: next.y, pressed: false };
+        replay.push(event);
       } else if (isKey(event)) {
         // Keys and typing make their frame the source, as the pointer does.
         source = side;
@@ -453,7 +488,7 @@ export function createSyncRelay ({ post, onStatus, now = () => Date.now() }: Rel
         const pressed = event.kind === 'down' || (event.kind === 'move' && next?.mirrors === side && next.pressed);
         next = { over: target, mirrors: side, ...point, pressed };
         if (event.kind === 'click') next.click = ++clicks;
-        replay.push({ kind: event.kind, ...point });
+        replay.push({ kind: event.kind, ...point, ...modifiersOf(event) });
       }
     }
     if (replay.length) post(target, { key: SYNC_KEY, type: 'replay', events: replay });

@@ -1,9 +1,12 @@
+import { DEFAULT_COMPARE_HOSTS } from '../../dialtone-vue/.storybook/compare-sync-agent.js';
 import { parseChannelMessage } from './frames';
 import type { Side } from './frames';
+import ports from './ports.json';
 import {
   HANDSHAKE_TIMEOUT,
   KEYS_MS,
   MAX_KEYS,
+  RELOAD_RESET,
   SYNC_KEY,
   TYPING,
   createSyncRelay,
@@ -16,6 +19,8 @@ import {
 import type { Box, HostMessage, KeyEvent, Locator, RelayStatus, SyncEvent } from './sync';
 
 const VIEWPORT = { width: 600, height: 700 };
+// The modifier keys the relay sends with every pointer event, none of them held.
+const NO_KEYS = { alt: false, ctrl: false, meta: false, shift: false };
 const ready = { key: SYNC_KEY, type: 'ready', viewport: VIEWPORT };
 const input = (events: SyncEvent[], viewport = VIEWPORT) => ({ key: SYNC_KEY, type: 'input', viewport, events });
 const ring = (rect: unknown) => ({ key: SYNC_KEY, type: 'ring', viewport: VIEWPORT, rect });
@@ -106,6 +111,15 @@ describe('Compare sync', () => {
       ['a text without a locator', { ...text('x'), target: null }],
     ])('rejects %s', (_name, event) => {
       expect(parseAgentMessage(input([event as SyncEvent]))).toBeNull();
+    });
+
+    it('reads a pointer event\'s modifier keys, when it has them, and a cancel', () => {
+      const events: SyncEvent[] = [
+        { kind: 'down', x: 1, y: 2, ...NO_KEYS, shift: true }, { kind: 'cancel' }, { kind: 'move', x: 1, y: 2, ctrl: true },
+      ];
+
+      expect(parseAgentMessage(input(events))).toEqual({ type: 'input', viewport: VIEWPORT, events });
+      expect(parseAgentMessage(input([{ kind: 'click', x: 1, y: 2, shift: 1 } as unknown as SyncEvent]))).toBeNull();
     });
 
     it('rejects a ring that isn\'t a rect', () => {
@@ -220,14 +234,47 @@ describe('Compare sync', () => {
       ]));
 
       expect(replays('react')).toEqual([
-        { kind: 'move', x: 10, y: 20 },
-        { kind: 'down', x: 10, y: 20 },
-        { kind: 'up', x: 10, y: 20 },
-        { kind: 'click', x: 10, y: 20 },
+        { kind: 'move', x: 10, y: 20, ...NO_KEYS },
+        { kind: 'down', x: 10, y: 20, ...NO_KEYS },
+        { kind: 'up', x: 10, y: 20, ...NO_KEYS },
+        { kind: 'click', x: 10, y: 20, ...NO_KEYS },
       ]);
       expect(replays('vue')).toEqual([]);
       expect(relay.getStatus().source).toBe('vue');
       expect(relay.getCursor()).toEqual({ over: 'react', mirrors: 'vue', x: 10, y: 20, pressed: false, click: 1 });
+    });
+
+    it('replays the modifier keys held with each pointer event, all four', () => {
+      const { relay, replays, connectBoth } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('vue', input([
+        { kind: 'move', x: 1, y: 2, ...NO_KEYS, ctrl: true },
+        { kind: 'down', x: 1, y: 2, ...NO_KEYS, shift: true },
+        { kind: 'up', x: 1, y: 2, ...NO_KEYS, shift: true, meta: true },
+        { kind: 'click', x: 1, y: 2, shift: true, alt: true },
+      ]));
+
+      expect(replays('react')).toEqual([
+        { kind: 'move', x: 1, y: 2, ...NO_KEYS, ctrl: true },
+        { kind: 'down', x: 1, y: 2, ...NO_KEYS, shift: true },
+        { kind: 'up', x: 1, y: 2, ...NO_KEYS, shift: true, meta: true },
+        { kind: 'click', x: 1, y: 2, ...NO_KEYS, shift: true, alt: true },
+      ]);
+    });
+
+    it('relays a cancelled press, which leaves the cursor where it is, no longer pressed', () => {
+      const { relay, replays, connectBoth } = relayWithFrames();
+      connectBoth();
+
+      relay.receive('vue', input([{ kind: 'down', x: 10, y: 20 }, { kind: 'move', x: 30, y: 20 }]));
+      relay.receive('vue', input([{ kind: 'cancel' }]));
+      const cancelled = relay.getCursor();
+      relay.receive('vue', input([{ kind: 'move', x: 40, y: 20 }]));
+
+      expect(replays('react').map(event => event.kind)).toEqual(['down', 'move', 'cancel', 'move']);
+      expect(cancelled).toEqual({ over: 'react', mirrors: 'vue', x: 30, y: 20, pressed: false });
+      expect(relay.getCursor()).toMatchObject({ x: 40, pressed: false });
     });
 
     it('maps points into a frame of another size', () => {
@@ -238,7 +285,7 @@ describe('Compare sync', () => {
 
       relay.receive('vue', input([{ kind: 'move', x: 100, y: 200 }]));
 
-      expect(replays('react')).toEqual([{ kind: 'move', x: 50, y: 100 }]);
+      expect(replays('react')).toEqual([{ kind: 'move', x: 50, y: 100, ...NO_KEYS }]);
       expect(relay.getCursor()).toMatchObject({ x: 50, y: 100 });
     });
 
@@ -264,8 +311,9 @@ describe('Compare sync', () => {
       relay.receive('react', input([{ kind: 'move', x: 5, y: 20 }]));
 
       expect(between).toBeNull();
-      expect(replays('react')).toEqual([{ kind: 'move', x: 590, y: 20 }, { kind: 'leave' }]);
-      expect(replays('vue')).toEqual([{ kind: 'move', x: 5, y: 20 }]);
+      // A leave is only that, also mid-drag: the press can still end with its release.
+      expect(replays('react')).toEqual([{ kind: 'move', x: 590, y: 20, ...NO_KEYS }, { kind: 'leave' }]);
+      expect(replays('vue')).toEqual([{ kind: 'move', x: 5, y: 20, ...NO_KEYS }]);
       expect(relay.getStatus().source).toBe('react');
       expect(relay.getCursor()).toEqual({ over: 'vue', mirrors: 'react', x: 5, y: 20, pressed: false });
     });
@@ -368,7 +416,7 @@ describe('Compare sync', () => {
       expect(relay.getCue()).toBeNull();
     });
 
-    it('hides the cursor and waits for a new answer when a frame reloads', () => {
+    it('hides the cursor and waits for a new answer when a frame reloads, relaying nothing into it meanwhile', () => {
       const { relay, posts, connectBoth } = relayWithFrames();
       connectBoth();
       relay.receive('vue', input([{ kind: 'move', x: 1, y: 1 }]));
@@ -379,28 +427,54 @@ describe('Compare sync', () => {
 
       expect(relay.getCursor()).toBeNull();
       expect(relay.getStatus().frames.react).toBe('connecting');
-      expect(posts).toEqual([['react', { key: SYNC_KEY, type: 'connect' }]]);
+      expect(posts.filter(([side]) => side === 'react')).toEqual([['react', { key: SYNC_KEY, type: 'connect' }]]);
     });
 
-    it('takes the pointer out of the other frame when the frame it mirrors reloads, and only then', () => {
+    // All the other frame mirrored from the old document goes: a press still down there ends with no click (a plain
+    // leave would keep a drag going), the hovered elements and the ring of its focus go. Whatever the cursor: focus can
+    // come from the keyboard alone, and the pointer can have left mid-drag.
+    it.each([
+      ['mid-drag', [{ kind: 'down', x: 1, y: 1 }, { kind: 'move', x: 5, y: 1 }]],
+      ['after the pointer left mid-drag', [{ kind: 'down', x: 1, y: 1 }, { kind: 'leave' }]],
+      ['after keys alone', [key('ArrowDown'), { kind: 'focus', target: locator() }]],
+    ] as [string, SyncEvent[]][])('resets the other frame when a frame reloads %s', (_, events) => {
       const { relay, posts, connectBoth } = relayWithFrames();
       connectBoth();
-      relay.receive('vue', input([{ kind: 'move', x: 1, y: 1 }]));
-      posts.length = 0;
-
-      // The mirror reloading has a new document already.
-      relay.frameLoaded('react');
-      expect(posts).toEqual([['react', { key: SYNC_KEY, type: 'connect' }]]);
-      relay.receive('react', ready);
-      relay.receive('vue', input([{ kind: 'move', x: 1, y: 1 }]));
+      relay.receive('vue', input(events));
       posts.length = 0;
 
       relay.frameLoaded('vue');
 
       expect(posts).toEqual([
-        ['react', { key: SYNC_KEY, type: 'replay', events: [{ kind: 'leave' }] }],
+        ['react', { key: SYNC_KEY, type: 'replay', events: [{ kind: 'cancel' }, { kind: 'leave' }, { kind: 'blur' }] }],
         ['vue', { key: SYNC_KEY, type: 'connect' }],
       ]);
+      expect(RELOAD_RESET).toEqual([{ kind: 'cancel' }, { kind: 'leave' }, { kind: 'blur' }]);
+    });
+
+    it('sends no reset to a frame that hasn\'t answered', () => {
+      const { relay, posts } = relayWithFrames();
+      relay.start();
+      relay.receive('vue', ready);
+      posts.length = 0;
+
+      relay.frameLoaded('vue');
+
+      expect(posts).toEqual([['vue', { key: SYNC_KEY, type: 'connect' }]]);
+    });
+
+    it('clears the ring mirroring a frame that reloads, with no pointer about', () => {
+      const { relay, connectBoth } = relayWithFrames();
+      connectBoth();
+      const rect = { x: 1, y: 2, width: 3, height: 4 };
+      // React draws Vue's focus, from Vue's keys.
+      relay.receive('vue', input([key('ArrowDown')]));
+      relay.receive('react', ring(rect));
+
+      relay.frameLoaded('vue');
+
+      expect(relay.getCursor()).toBeNull();
+      expect(relay.getRings()).toEqual({ vue: null, react: null });
     });
 
     it('tells cursor subscribers about each change', () => {
@@ -541,6 +615,10 @@ describe('Compare sync', () => {
       expect(relay.getRings()).toEqual({ vue: null, react: null });
       expect(listener).toHaveBeenCalledTimes(6);
     });
+  });
+
+  it('has the agent trust the comparison on its port in ports.json by default', () => {
+    expect(DEFAULT_COMPARE_HOSTS).toEqual([`http://localhost:${ports.compare}`, `http://127.0.0.1:${ports.compare}`]);
   });
 
   describe('keyLabel', () => {

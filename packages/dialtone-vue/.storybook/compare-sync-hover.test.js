@@ -36,8 +36,16 @@ describe('Compare sync hover styles', () => {
       ['a :hover among :is() alternatives, which also requires the attribute',
         '.i:is(.active, :hover, :focus-visible)', [`.i:is(.active, ${M}, :focus-visible):where(${M})`], []],
       ['a :hover in :where()', ':where(.w:hover)', [`:where(.w${M}):where(${M})`], []],
-      ['a :hover in :is() on an ancestor, which can\'t require it', ':is(.a:hover .c, .b)', [`:is(.a${M} .c, .b)`], []],
+      // The attribute can't be required of an element whose ancestor is hovered: the alternatives without a hover
+      // can't match instead, and keep the list's specificity, its most specific alternative's (#b's here).
+      ['a :hover in :is() on an ancestor, whose other alternatives can\'t match',
+        ':is(.a:hover .c, .b)', [`:is(.a${M} .c, .b:not(*))`], []],
+      ['the same, keeping an alternative\'s specificity and spacing',
+        ':is(.a:hover .c , #b , .d:not(:hover))', [`:is(.a${M} .c , #b:not(*), .d:not(${M}):not(*))`], []],
+      ['a :hover in :where() on an ancestor', ':where(.a:hover .c, .b)', [`:where(.a${M} .c, .b:not(*))`], []],
       ['a :hover in :has()', '.a:has(> :hover)', [`.a:has(> ${M})`], []],
+      ['a :hover in :has(), whose other alternatives can\'t match', '.a:has(> :hover, .b)', [`.a:has(> ${M}, .b:not(*))`], []],
+      ['a :hover in a negated :is(), as it is', ':not(:is(.a:hover .c, .b))', [], [`:not(:is(.a${M} .c, .b))`]],
       ['a negated :hover, as the attribute\'s absence', '.i:not(:hover)', [], [`.i:not(${M})`]],
       ['a negated :hover in a list', ':not(.x:hover, .y)', [], [`:not(.x${M}, .y)`]],
       ['a negated :hover after a :hover', '.a:hover .b:not(:hover)', [`.a${M} .b:not(${M})`], []],
@@ -267,6 +275,45 @@ describe('Compare sync hover styles', () => {
       expect(page.copy()).toEqual([`@media print{.p${M}{color: black;}}`]);
     });
 
+    it('rebuilds for a sheet whose media changed, reusing the copy of its rules', async () => {
+      const page = emulated();
+      const element = page.addStyle('.p:hover { color: black }', { media: 'screen' });
+      // jsdom's sheets have no media list; a browser's follows the style element's media attribute.
+      Object.defineProperty(element.sheet, 'media', { get: () => ({ mediaText: element.getAttribute('media') }) });
+      page.emulation.start();
+      page.runIdle();
+      const read = vi.fn(() => '.p:hover');
+      Object.defineProperty(element.sheet.cssRules[0], 'selectorText', { get: read });
+
+      element.setAttribute('media', 'print');
+      await page.mutations();
+      page.runTimers();
+      page.runIdle();
+
+      expect(page.copy()).toEqual([`@media print{.p${M}{color: black;}}`]);
+      expect(read).not.toHaveBeenCalled();
+    });
+
+    it('copies a sheet again when rules are added to it between two slices of the copy', () => {
+      const page = emulated();
+      const rules = Array.from({ length: 100 }, (_, i) => `.r${i}:hover { color: red }`);
+      const { sheet } = page.addStyle(rules.join('\n'));
+      // Each look at the clock is 100ms later: a slice stops after its first CHECK_EVERY rules.
+      let time = 0;
+      vi.spyOn(page.win.performance, 'now').mockImplementation(() => (time += 100));
+      page.emulation.start();
+
+      page.idle.shift()({ didTimeout: false, timeRemaining: () => 50 });
+      sheet.insertRule('.ins:hover { color: blue }', 0);
+      page.runIdle();
+      const copied = page.copy()[0].match(/\.(r\d+|ins)/g);
+      // The copy stays current: a later look at the sheets finds nothing to do.
+      page.emulation.mark(page.chain('other'));
+
+      expect(copied).toEqual(['.ins', ...rules.map((_, i) => `.r${i}`)]);
+      expect(page.idle).toEqual([]);
+    });
+
     it('picks up a style element added, changed or removed later, once the page settles, reusing the others\' copies', async () => {
       const page = emulated();
       const first = page.addStyle('.a:hover { color: blue }');
@@ -319,6 +366,26 @@ describe('Compare sync hover styles', () => {
       page.runIdle();
 
       expect(page.copy()).toEqual([`.a${M}{color: blue;}.ins${M}{color: red;}`]);
+    });
+
+    it('picks up a rule added with insertRule while the pointer moves within the same element, rewriting no marks', () => {
+      const page = emulated();
+      const { sheet } = page.addStyle('.a:hover { color: blue }');
+      let time = 0;
+      vi.spyOn(page.win.performance, 'now').mockImplementation(() => time);
+      page.emulation.start();
+      page.runIdle();
+      const chain = page.chain('text');
+      page.emulation.mark(chain);
+
+      sheet.insertRule('.ins:hover { color: red }', sheet.cssRules.length);
+      const written = vi.spyOn(page.win.Element.prototype, 'setAttribute');
+      time += 1000;
+      page.emulation.mark(chain);
+      page.runIdle();
+
+      expect(page.copy()).toEqual([`.a${M}{color: blue;}.ins${M}{color: red;}`]);
+      expect(written).not.toHaveBeenCalled();
     });
 
     it('marks the element, its ancestors and a label\'s control, and moves the marks with the pointer', () => {

@@ -22,8 +22,10 @@ const SPACE = /\s/;
 const NAME = /[-\w\u0080-￿]/;
 // Pseudo-elements CSS 2 wrote with one colon.
 const LEGACY_ELEMENTS = new Set(['before', 'after', 'first-line', 'first-letter']);
-// Pseudo-classes whose arguments are alternatives, any of which matches.
+// Pseudo-classes whose arguments are alternatives, any of which matches the element itself, and those that also take
+// relative selectors (:has), any of which matches around it.
 const LISTS = new Set(['is', 'where', 'matches', '-webkit-any', '-moz-any']);
+const ANY_OF = new Set([...LISTS, 'has']);
 
 // Where an escape starting at `i` ends: a backslash and one character, or up to six hex digits and one space.
 const escapeEnd = (text, i) => {
@@ -131,17 +133,25 @@ function rewriteList (tokens, start, negated) {
       const isFunction = token.type === 'pseudo';
       const inner = rewriteList(tokens, i + (isFunction ? 2 : 1), negated !== (isFunction && token.name === 'not'));
       i = inner.end;
-      current.text += `${isFunction ? `${token.text}(` : '('}${inner.alternatives.map(each => each.text).join(',')})`;
       for (const flag of ['positive', 'negative', 'unsupported']) {
         current[flag] ||= inner.alternatives.some(each => each[flag]);
       }
       if (isFunction && token.element) pseudoElement = true;
-      if (!inner.alternatives.some(each => each.positive)) continue;
+      const hoverInside = inner.alternatives.some(each => each.positive);
+      const anyOf = hoverInside && !negated && !token.element && ANY_OF.has(token.name);
       // `:is(.active, :hover)`: its copy would match `.active` without the attribute, which the original rule already
-      // does, but later in the cascade. Requiring the attribute too leaves only what the hover adds. It can't when a
-      // hover isn't on the element itself (`:is(.a:hover .b)`).
-      if (!negated && !token.element && LISTS.has(token.name) &&
-        inner.alternatives.every(each => !each.positive || (each.subject && !each.deep))) {
+      // does, but later in the cascade. Requiring the attribute too leaves only what the hover adds.
+      const onSubject = anyOf && LISTS.has(token.name) &&
+        inner.alternatives.every(each => !each.positive || (each.subject && !each.deep));
+      // That can't be done when a hover isn't on the element itself (`:is(.a:hover .c, .b)`, `:has(> :hover, .b)`), so
+      // there the alternatives without a hover can't match instead (`.b:not(*)`). They stay in the list, as its
+      // specificity is that of its most specific alternative, and `:not(*)` adds none.
+      const texts = inner.alternatives.map(each => (anyOf && !onSubject && !each.positive
+        ? `${each.text.trimEnd()}:not(*)`
+        : each.text));
+      current.text += `${isFunction ? `${token.text}(` : '('}${texts.join(',')})`;
+      if (!hoverInside) continue;
+      if (onSubject) {
         current.text += `:where(${MARKER})`;
         hovered = true;
       } else {
@@ -168,8 +178,10 @@ function rewriteList (tokens, start, negated) {
 /**
  * A selector list's alternatives, each :hover rewritten to the hover attribute (`:not(:hover)` to its absence), in
  * two groups. `hovered`: those with a :hover that isn't negated, the only ones whose copy can match what the original
- * doesn't. `others`: the rest, which a copy needs only as the parent of a nested rule. An alternative with :hover on a
- * pseudo-element (`::-webkit-scrollbar-thumb:hover`) is in neither: the attribute can't stand for that.
+ * doesn't. Their copy matches only where the hover is: inside :is() or :has(), an alternative without one either
+ * requires the attribute too or can't match at all. `others`: the rest, which a copy needs only as the parent of a
+ * nested rule. An alternative with :hover on a pseudo-element (`::-webkit-scrollbar-thumb:hover`) is in neither: the
+ * attribute can't stand for that.
  * @param {string} selectorText
  * @returns {{ hovered: string[], others: string[] }}
  */
@@ -299,6 +311,8 @@ const CHECK_EVERY = 64;
 const SETTLE = 150;
 // How often marking checks for rules added without a new element (insertRule).
 const STALE_CHECK = 500;
+// How many times a sheet whose rules change while it's being copied is copied again before the build moves on.
+const MAX_COPIES = 3;
 
 const isSheetElement = node => node.nodeType === 1 &&
   (node.localName === 'style' || (node.localName === 'link' && /(^|\s)stylesheet(\s|$)/i.test(node.rel ?? '')));
@@ -350,7 +364,8 @@ export function createHoverEmulation ({
     typeof win.CSSStyleSheet?.prototype?.replaceSync === 'function';
   const now = () => win.performance?.now() ?? Date.now();
   // Each sheet's copy, kept while the sheet is the same object with as many rules: a style element whose text changes
-  // gets a new sheet; insertRule adds a rule.
+  // gets a new sheet; insertRule adds a rule. Without the sheet's media, which can change on its own (a `media`
+  // attribute) and is put around the copy each time it's used.
   const copies = new WeakMap();
   let running = false;
   let sheet = null;
@@ -373,6 +388,20 @@ export function createHoverEmulation ({
     }
   });
 
+  // A sheet's copy, made in slices: between two, the page can add or remove rules (insertRule), which shifts the live
+  // list being read. So the copy reads a snapshot of the list, and one whose list changed meanwhile is made again: a
+  // copy describes one version of the sheet. One still changing after MAX_COPIES is kept, but as stale (length -1), so
+  // the next look at the sheets (checkSheets) makes it again.
+  function * copySheet (rules) {
+    for (let attempt = 1; ; attempt++) {
+      const list = Array.from(rules);
+      const own = newStats();
+      const css = yield * copyList(list, false, own);
+      const unchanged = rules.length === list.length && list.every((rule, i) => rules[i] === rule);
+      if (unchanged || attempt === MAX_COPIES) return { length: unchanged ? list.length : -1, css, ...own };
+    }
+  }
+
   function * build () {
     const stats = { ...newStats(), sheets: 0 };
     const parts = [];
@@ -385,15 +414,12 @@ export function createHoverEmulation ({
       stats.sheets++;
       let copy = copies.get(each);
       if (!copy || copy.length !== rules.length) {
-        const own = newStats();
-        let css = yield * copyList(rules, false, own);
-        // A sheet for some media only (`<link media="print">`) is copied for that media only.
-        const media = each.media?.mediaText;
-        if (media && media !== 'all') css = wrap(`@media ${media}`, css);
-        copy = { length: rules.length, css, ...own };
+        copy = yield * copySheet(rules);
         copies.set(each, copy);
       }
-      parts.push(copy.css);
+      // A sheet for some media only (`<link media="print">`) is copied for that media only, the one it has now.
+      const media = each.media?.mediaText;
+      parts.push(media && media !== 'all' ? wrap(`@media ${media}`, copy.css) : copy.css);
       stats.rules += copy.rules;
       stats.scanned += copy.scanned;
       stats.skipped += copy.skipped;
@@ -502,7 +528,12 @@ export function createHoverEmulation ({
    * @param {Element[]} elements
    */
   const mark = (elements) => {
-    if (!running || elements === markedFrom) return;
+    if (!running) return;
+    // The same elements as last time (the pointer moved within one): their marks stand, but the page's rules may not.
+    if (elements === markedFrom) {
+      if (marked.size) checkSheets();
+      return;
+    }
     markedFrom = elements;
     const next = new Set();
     for (const element of elements) {

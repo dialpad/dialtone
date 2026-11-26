@@ -6,9 +6,12 @@ import {
   installCompareSyncAgent,
   isRelayedKey,
   locatorOf,
+  parseHosts,
 } from './compare-sync-agent.js';
 
 const HOST = 'http://localhost:9013';
+// The modifier keys a pointer event carries, none of them held.
+const NO_KEYS = { alt: false, ctrl: false, meta: false, shift: false };
 const RECORDED = ['pointerover', 'pointerout', 'pointerenter', 'pointerleave', 'pointermove', 'pointerdown', 'pointerup',
   'mouseover', 'mouseout', 'mouseenter', 'mouseleave', 'mousemove', 'mousedown', 'mouseup', 'click'];
 
@@ -20,7 +23,8 @@ const PAGE = `
   <input id="field">`;
 
 // The agent in a framed preview: an iframe of this document, whose parent window plays the comparison page. A script
-// can't make a trusted event, so the events a test calls real stand in for isTrusted ones.
+// can't make a trusted event, so the events a test calls real stand in for isTrusted ones. The frame's own origin is
+// this document's (an about:blank frame inherits it).
 function framedAgent (html = PAGE) {
   const iframe = document.createElement('iframe');
   document.body.append(iframe);
@@ -70,13 +74,15 @@ function framedAgent (html = PAGE) {
       while (idle.length) idle.shift()({ didTimeout: false, timeRemaining: () => 50 });
     },
     host,
-    fromHost: (data, source = host) => win.dispatchEvent(new win.MessageEvent('message', {
+    fromHost: (data, source = host, origin = HOST) => win.dispatchEvent(new win.MessageEvent('message', {
       data: { key: COMPARE_SYNC_KEY, ...data },
-      origin: HOST,
+      origin,
       source,
     })),
-    realEvent: (target, type, init = {}) => {
+    realEvent: (target, type, { isPrimary, ...init } = {}) => {
       const event = new win.MouseEvent(type, { bubbles: true, cancelable: true, composed: true, ...init });
+      // jsdom has no PointerEvent: a pointer event's own property, on the mouse event standing in for it.
+      if (isPrimary !== undefined) Object.defineProperty(event, 'isPrimary', { value: isPrimary });
       real.add(event);
       target.dispatchEvent(event);
     },
@@ -120,40 +126,40 @@ function framedAgent (html = PAGE) {
   };
 }
 
-// A page 1000px taller and 200px wider than its viewport, whose scrollTo jumps as `behavior: 'instant'` does.
-function scrollablePage ({ win, doc }) {
-  const position = { x: 0, y: 0 };
-  const root = doc.documentElement;
-  Object.defineProperties(root, {
-    scrollLeft: { configurable: true, get: () => position.x },
-    scrollTop: { configurable: true, get: () => position.y },
-    scrollWidth: { configurable: true, value: 1200 },
-    scrollHeight: { configurable: true, value: 1800 },
-    clientWidth: { configurable: true, value: 1000 },
-    clientHeight: { configurable: true, value: 800 },
-  });
-  win.scrollTo = vi.fn(({ left, top }) => {
-    position.x = left;
-    position.y = top;
-  });
-  return position;
-}
-
-// An element that scrolls 500px further than it shows, whose scrollTo jumps as `behavior: 'instant'` does.
-function scrollableElement (element) {
+// An element's scroll offsets and a scrollTo that jumps as `behavior: 'instant'` does, clamped as a browser clamps
+// them: from 0 to the overflow, and horizontally from minus the overflow to 0 when right to left.
+function scrollOffsets (element, { scrollWidth, scrollHeight, clientWidth, clientHeight }, { rtl = false } = {}) {
   const position = { x: 0, y: 0 };
   Object.defineProperties(element, {
     scrollLeft: { configurable: true, get: () => position.x },
     scrollTop: { configurable: true, get: () => position.y },
-    scrollWidth: { configurable: true, value: 100 },
-    scrollHeight: { configurable: true, value: 600 },
-    clientWidth: { configurable: true, value: 100 },
-    clientHeight: { configurable: true, value: 100 },
+    scrollWidth: { configurable: true, value: scrollWidth },
+    scrollHeight: { configurable: true, value: scrollHeight },
+    clientWidth: { configurable: true, value: clientWidth },
+    clientHeight: { configurable: true, value: clientHeight },
   });
-  element.scrollTo = vi.fn(({ left, top }) => {
-    position.x = left;
-    position.y = top;
+  const across = scrollWidth - clientWidth;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const scrollTo = vi.fn(({ left, top }) => {
+    position.x = rtl ? clamp(left, -across, 0) : clamp(left, 0, across);
+    position.y = clamp(top, 0, scrollHeight - clientHeight);
   });
+  return { position, scrollTo };
+}
+
+// A page 1000px taller and 200px wider than its viewport.
+function scrollablePage ({ win, doc }, options) {
+  const { position, scrollTo } = scrollOffsets(doc.documentElement,
+    { scrollWidth: 1200, scrollHeight: 1800, clientWidth: 1000, clientHeight: 800 }, options);
+  win.scrollTo = scrollTo;
+  return position;
+}
+
+// An element that scrolls 500px further down than it shows, and `across` further sideways.
+function scrollableElement (element, { across = 0, ...options } = {}) {
+  const { position, scrollTo } = scrollOffsets(element,
+    { scrollWidth: 100 + across, scrollHeight: 600, clientWidth: 100, clientHeight: 100 }, options);
+  element.scrollTo = scrollTo;
   return position;
 }
 
@@ -213,6 +219,89 @@ describe('Compare sync agent', () => {
     });
   });
 
+  describe('Who it trusts', () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+    });
+
+    // What a message from an origin did: whether the agent answered, and where; whether it started listening for
+    // input, or shimmed focus(); and whether it replayed a move.
+    const reaction = (frame) => {
+      const html = frame.win.HTMLElement.prototype.focus;
+      frame.pointAt('target');
+      return () => ({
+        replies: frame.sent().map(message => message.origin),
+        listening: frame.listen.mock.calls.some(([type]) => type === 'pointermove'),
+        replayed: frame.log.length > 0,
+        shimmed: frame.win.HTMLElement.prototype.focus !== html,
+      });
+    };
+    const handshake = (frame, origin) => {
+      frame.fromHost({ type: 'connect' }, frame.host, origin);
+      frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 5, y: 6 }] }, frame.host, origin);
+    };
+
+    it.each([
+      ['the local comparison', HOST],
+      ['the local comparison by address', 'http://127.0.0.1:9013'],
+      // The published bundle: the comparison and the previews share one origin.
+      ['its own origin', window.location.origin],
+    ])('answers %s, to that origin alone', (_, origin) => {
+      frame = framedAgent();
+      const after = reaction(frame);
+
+      handshake(frame, origin);
+
+      expect(after()).toEqual({ replies: [origin], listening: true, replayed: true, shimmed: true });
+    });
+
+    it.each([
+      ['another port', 'http://localhost:9099'],
+      ['another site', 'https://example.com'],
+      ['another scheme', 'https://localhost:9013'],
+      ['an opaque origin (a sandboxed page)', 'null'],
+      ['no origin', ''],
+    ])('ignores a handshake from %s: no answer, no listeners, no replay', (_, origin) => {
+      frame = framedAgent();
+      const after = reaction(frame);
+
+      handshake(frame, origin);
+
+      expect(after()).toEqual({ replies: [], listening: false, replayed: false, shimmed: false });
+    });
+
+    it('ignores an untrusted origin\'s replay and goodbye once connected', () => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      frame.pointAt('target');
+      const removed = vi.spyOn(frame.win, 'removeEventListener');
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 5, y: 6 }] }, frame.host, 'https://example.com');
+      frame.fromHost({ type: 'disconnect' }, frame.host, 'https://example.com');
+
+      expect(frame.log).toEqual([]);
+      expect(removed).not.toHaveBeenCalled();
+    });
+
+    it('trusts the origins STORYBOOK_COMPARE_SYNC_HOSTS lists instead of the default ones', () => {
+      vi.stubEnv('STORYBOOK_COMPARE_SYNC_HOSTS', ' http://localhost:9500/ , http://127.0.0.1:9500,not a url');
+      frame = framedAgent();
+
+      frame.fromHost({ type: 'connect' }, frame.host, HOST);
+      frame.fromHost({ type: 'connect' }, frame.host, 'http://localhost:9500');
+      frame.fromHost({ type: 'connect' }, frame.host, 'http://127.0.0.1:9500');
+      frame.fromHost({ type: 'connect' }, frame.host, window.location.origin);
+
+      expect(frame.sent().map(message => message.origin))
+        .toEqual(['http://localhost:9500', 'http://127.0.0.1:9500', window.location.origin]);
+    });
+
+    it('reads a list of hosts as origins, leaving out what isn\'t one', () => {
+      expect(parseHosts('http://localhost:9500/, https://a.example/path?q ,, data:text/plain,x, nope'))
+        .toEqual(['http://localhost:9500', 'https://a.example']);
+    });
+  });
+
   describe('Sending', () => {
     it('answers the handshake with its viewport, to the comparison\'s origin', () => {
       frame = framedAgent();
@@ -246,13 +335,77 @@ describe('Compare sync agent', () => {
         type: 'input',
         viewport: { width: frame.win.innerWidth, height: frame.win.innerHeight },
         events: [
-          { kind: 'move', x: 30, y: 40 },
-          { kind: 'down', x: 30, y: 40 },
-          { kind: 'up', x: 30, y: 40 },
-          { kind: 'click', x: 30, y: 40 },
+          { kind: 'move', x: 30, y: 40, ...NO_KEYS },
+          { kind: 'down', x: 30, y: 40, ...NO_KEYS },
+          { kind: 'up', x: 30, y: 40, ...NO_KEYS },
+          { kind: 'click', x: 30, y: 40, ...NO_KEYS },
           { kind: 'leave' },
         ],
       }]);
+    });
+
+    it('sends the modifier keys held with each pointer event', () => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      const target = frame.byId('target');
+
+      frame.realEvent(target, 'pointermove', { ctrlKey: true });
+      frame.realEvent(target, 'pointerdown', { shiftKey: true });
+      frame.realEvent(target, 'pointerup', { shiftKey: true, altKey: true });
+      frame.realEvent(target, 'click', { shiftKey: true, metaKey: true });
+      frame.runFrame();
+
+      expect(frame.inputs().flatMap(message => message.events)).toEqual([
+        { kind: 'move', x: 0, y: 0, ...NO_KEYS, ctrl: true },
+        { kind: 'down', x: 0, y: 0, ...NO_KEYS, shift: true },
+        { kind: 'up', x: 0, y: 0, ...NO_KEYS, shift: true, alt: true },
+        { kind: 'click', x: 0, y: 0, ...NO_KEYS, shift: true, meta: true },
+      ]);
+    });
+
+    // The other frame replays every press as the primary button's, so only those travel. A press ends with its last
+    // button's release, whichever that is (pressing the left button while the right is down fires no pointerdown).
+    it.each([
+      ['a right press, its moves and its release', [['pointerdown', { button: 2, buttons: 2 }],
+        ['pointermove', { buttons: 2 }], ['pointerup', { button: 2 }]], []],
+      ['a middle press', [['pointerdown', { button: 1, buttons: 4 }], ['pointerup', { button: 1 }]], []],
+      ['a right press ended by the left button', [['pointerdown', { button: 2, buttons: 2 }],
+        ['pointermove', { button: 0, buttons: 3 }], ['pointerup', { button: 0 }], ['click', {}]], []],
+      ['a second finger\'s touch', [['pointerdown', { isPrimary: false }], ['pointermove', { isPrimary: false }],
+        ['pointerup', { isPrimary: false }]], []],
+      ['a left press, while a second finger touches', [['pointerdown', {}], ['pointerdown', { isPrimary: false }],
+        ['pointerup', { isPrimary: false }], ['pointerup', {}], ['click', {}]], ['down', 'up', 'click']],
+      ['a left press, while the right button is pressed too', [['pointerdown', {}],
+        ['pointermove', { button: 2, buttons: 3 }], ['pointerup', {}], ['click', {}]], ['down', 'move', 'up', 'click']],
+    ])('sends %s as the other frame should see it', (_, sequence, kinds) => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      const target = frame.byId('target');
+
+      sequence.forEach(([type, init]) => frame.realEvent(target, type, init));
+      // The pointer moving on afterwards is sent as ever.
+      frame.realEvent(target, 'pointermove', {});
+      frame.runFrame();
+
+      expect(frame.inputs().flatMap(message => message.events).map(event => event.kind)).toEqual([...kinds, 'move']);
+    });
+
+    it('sends a press the browser cancelled, which no click follows, and not one it wasn\'t sending', () => {
+      frame = framedAgent();
+      frame.fromHost({ type: 'connect' });
+      const target = frame.byId('target');
+
+      frame.realEvent(target, 'pointerdown', {});
+      frame.realEvent(target, 'pointermove', {});
+      frame.realEvent(target, 'pointercancel', {});
+      frame.realEvent(target, 'click', {});
+      frame.realEvent(target, 'pointerdown', { button: 2 });
+      frame.realEvent(target, 'pointercancel', {});
+      frame.realEvent(target, 'pointerdown', {});
+      frame.runFrame();
+
+      expect(frame.inputs().flatMap(message => message.events).map(event => event.kind))
+        .toEqual(['down', 'move', 'cancel', 'down']);
     });
 
     it('sends one click per press: not a label\'s second click on its control, nor a click without a press', () => {
@@ -360,6 +513,37 @@ describe('Compare sync agent', () => {
       expect(pressed.filter(entry => /down|move/.test(entry)))
         .toEqual(['pointerdown@target', 'mousedown@target', 'pointermove@target', 'mousemove@target']);
       expect(moves).toEqual([1, 0]);
+    });
+
+    it('replays the modifier keys held with each pointer event, and on the boundary events of getting there', () => {
+      frame.pointAt('target');
+      const got = [];
+      const record = event => got.push(`${event.type}:${['shift', 'ctrl', 'alt', 'meta'].filter(flag => event[`${flag}Key`]).join('+')}`);
+      ['mouseenter', 'pointermove', 'pointerdown', 'mousedown', 'pointerup', 'click']
+        .forEach(type => frame.byId('target').addEventListener(type, record));
+
+      frame.fromHost({
+        type: 'replay',
+        events: [
+          { kind: 'move', x: 5, y: 6, ...NO_KEYS, ctrl: true },
+          { kind: 'down', x: 5, y: 6, ...NO_KEYS, shift: true },
+          { kind: 'up', x: 5, y: 6, ...NO_KEYS, shift: true, alt: true },
+          // From an agent from before the keys travelled.
+          { kind: 'click', x: 5, y: 6 },
+        ],
+      });
+
+      expect(got).toEqual([
+        'mouseenter:ctrl', 'pointermove:ctrl', 'pointerdown:shift', 'mousedown:shift', 'pointerup:shift+alt', 'click:',
+      ]);
+    });
+
+    it('ignores a pointer event whose modifier keys aren\'t true or false', () => {
+      frame.pointAt('target');
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 5, y: 6, shift: 'yes' }] });
+
+      expect(frame.log).toEqual([]);
     });
 
     it('skips the mouse events of a press whose pointerdown was cancelled, but not the click', () => {
@@ -497,13 +681,76 @@ describe('Compare sync agent', () => {
     });
 
     it('fires the click of a press that ended elsewhere on the element both share', () => {
+      const clicks = [];
+      frame.doc.body.addEventListener('click', event => clicks.push(event.target));
       frame.pointAt('target');
       frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 5, y: 6 }] });
       frame.pointAt('other');
       frame.fromHost({ type: 'replay', events: [{ kind: 'up', x: 5, y: 60 }, { kind: 'click', x: 5, y: 60 }] });
 
-      // Target and other meet at the body, which has no listener: neither gets a click.
-      expect(frame.log.filter(entry => entry.startsWith('click'))).toEqual([]);
+      // Target and other meet at the body.
+      expect(clicks).toEqual([frame.doc.body]);
+    });
+
+    it('ends a drag the other frame\'s browser cancelled: capture released, no release, no click', () => {
+      const log = captureOnDown(frame, frame.byId('track'));
+      frame.byId('track').addEventListener('pointercancel', event => log.push(`cancel:${event.button}`));
+      const clicks = [];
+      frame.doc.addEventListener('click', event => clicks.push(event.target));
+      const moves = [];
+      frame.byId('other').addEventListener('pointermove', event => moves.push(event.buttons));
+      frame.pointAt('track');
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 5, y: 60 }, { kind: 'move', x: 30, y: 60 }] });
+      frame.pointAt('other');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'cancel' }, { kind: 'move', x: 90, y: 400 }] });
+
+      expect(log).toEqual(['down:true', 'move:1', 'cancel:-1', 'lost']);
+      expect(clicks).toEqual([]);
+      // The pointer is over another element now, with no button down.
+      expect(moves).toEqual([0]);
+    });
+
+    it('fires an uncaptured press\'s cancel where the pointer is, with no release, and forgets its click\'s target', () => {
+      const cancels = [];
+      frame.doc.addEventListener('pointercancel', event => cancels.push(event.target.id));
+      const clicks = [];
+      frame.doc.addEventListener('click', event => clicks.push(event.target.id || event.target.localName));
+      frame.pointAt('target');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 5, y: 6 }] });
+      frame.log.length = 0;
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'cancel' }] });
+      const ended = [...frame.log];
+      // A press released elsewhere and cancelled before its click came: a click after all isn't the press's, so it
+      // doesn't go to the element the press and the release share (the body).
+      frame.pointAt('target');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 5, y: 6 }] });
+      frame.pointAt('other');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'up', x: 5, y: 60 }, { kind: 'cancel' }, { kind: 'click', x: 5, y: 60 }] });
+
+      expect(cancels).toEqual(['target']);
+      expect(ended).toEqual([]);
+      expect(clicks).toEqual(['other']);
+    });
+
+    it('takes a reload\'s cancel, leave and blur as the end of everything mirrored: press, capture, pointer and ring', () => {
+      const log = captureOnDown(frame, frame.byId('track'));
+      frame.rect(frame.byId('field'), { left: 10, top: 60, width: 200, height: 30 });
+      frame.pointAt('track');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'focus', target: locatorOf(frame.byId('field')) }] });
+      frame.fromHost({ type: 'replay', events: [{ kind: 'down', x: 5, y: 60 }] });
+      frame.runFrame();
+      frame.log.length = 0;
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'cancel' }, { kind: 'leave' }, { kind: 'blur' }] });
+      frame.runFrame();
+      frame.pointAt('track');
+      frame.fromHost({ type: 'replay', events: [{ kind: 'move', x: 30, y: 60 }] });
+
+      expect(log).toEqual(['down:true', 'lost', 'move:0']);
+      expect(frame.log).toEqual(expect.arrayContaining(['pointerleave@track', 'mouseleave@track']));
+      expect(frame.rings()).toEqual([{ x: 10, y: 60, width: 200, height: 30 }, null]);
     });
 
     it('fires the click of a captured press on the capturing element', () => {
@@ -572,20 +819,34 @@ describe('Compare sync agent', () => {
       frame.realElementScroll(inner);
       frame.runFrame();
 
-      expect(frame.inputs().flatMap(message => message.events))
-        .toEqual([{ kind: 'move', x: 50, y: 150 }, { kind: 'scroller', x: 0, y: 70, at: { x: 50, y: 150 } }]);
+      expect(frame.inputs().flatMap(message => message.events)).toEqual([
+        { kind: 'move', x: 50, y: 150, ...NO_KEYS },
+        { kind: 'scroller', x: 0, y: 70, at: { x: 50, y: 150 } },
+      ]);
     });
 
-    it('scrolls the closest scroller at the point, clamped, and doesn\'t echo it', () => {
+    it('scrolls the closest scroller at the point, which the browser clamps, and doesn\'t echo it', () => {
       frame.pointAt('item');
 
       frame.fromHost({ type: 'replay', events: [{ kind: 'scroller', x: 0, y: 5000, at: { x: 50, y: 150 } }] });
       frame.realElementScroll(inner);
       frame.runFrame();
 
-      expect(inner.scrollTo).toHaveBeenCalledWith({ left: 0, top: 500, behavior: 'instant' });
+      expect(inner.scrollTo).toHaveBeenCalledWith({ left: 0, top: 5000, behavior: 'instant' });
       expect(list.scrollTo).not.toHaveBeenCalled();
       expect(innerPosition.y).toBe(500);
+      expect(frame.inputs()).toEqual([]);
+    });
+
+    it('scrolls a right-to-left scroller to the other frame\'s negative offset, and doesn\'t echo it', () => {
+      const position = scrollableElement(inner, { across: 300, rtl: true });
+      frame.pointAt('item');
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'scroller', x: -80, y: 40, at: { x: 50, y: 150 } }] });
+      frame.realElementScroll(inner);
+      frame.runFrame();
+
+      expect(position).toEqual({ x: -80, y: 40 });
       expect(frame.inputs()).toEqual([]);
     });
 
@@ -645,13 +906,33 @@ describe('Compare sync agent', () => {
       frame.fromHost({ type: 'connect' });
     });
 
-    it('scrolls to the other frame\'s pixels, clamped to this page, and doesn\'t echo it', () => {
+    it('scrolls to the other frame\'s pixels as they are, which the browser clamps to this page, and doesn\'t echo it', () => {
       frame.fromHost({ type: 'replay', events: [{ kind: 'scroll', x: 50, y: 5000 }] });
       frame.realScroll();
       frame.runFrame();
 
-      expect(frame.win.scrollTo).toHaveBeenCalledWith({ left: 50, top: 1000, behavior: 'instant' });
+      expect(frame.win.scrollTo).toHaveBeenCalledWith({ left: 50, top: 5000, behavior: 'instant' });
       expect(position).toEqual({ x: 50, y: 1000 });
+      expect(frame.inputs()).toEqual([]);
+    });
+
+    it.each([
+      ['left to right', false, [{ x: 150, y: 300 }, { x: 0, y: 0 }]],
+      // Its horizontal offsets go from 0 at the start to minus the overflow.
+      ['right to left', true, [{ x: -150, y: 300 }, { x: -200, y: 0 }]],
+    ])('scrolls a %s page to each offset the other frame sends, signed, and echoes none', (_, rtl, expected) => {
+      const page = scrollablePage(frame, { rtl });
+      const at = [];
+
+      // The second is out of range on both sides: the browser clamps it.
+      for (const offset of [{ x: rtl ? -150 : 150, y: 300 }, { x: -900, y: -50 }]) {
+        frame.fromHost({ type: 'replay', events: [{ kind: 'scroll', ...offset }] });
+        frame.realScroll();
+        frame.runFrame();
+        at.push({ ...page });
+      }
+
+      expect(at).toEqual(expected);
       expect(frame.inputs()).toEqual([]);
     });
 
@@ -978,6 +1259,51 @@ describe('Compare sync agent', () => {
 
       expect(frame.byId('field').value).toBe('');
     });
+
+    it.each([
+      ['an option it has: selected, with input and change', 'b', 'b', ['input', 'change']],
+      // Setting it would clear the selection.
+      ['an option it doesn\'t have: left as it is, with no events', 'z', 'a', []],
+    ])('sets a select to %s', (_, value, selected, fired) => {
+      const got = [];
+      frame.byId('pick').addEventListener('input', () => got.push('input'));
+      frame.byId('pick').addEventListener('change', () => got.push('change'));
+
+      frame.fromHost({ type: 'replay', events: [text('pick', value)] });
+
+      expect([frame.byId('pick').value, got]).toEqual([selected, fired]);
+    });
+  });
+
+  describe('Values only into the same field', () => {
+    // The other frame's fields, in a document of their own, and this frame's.
+    const sourcePage = (html) => {
+      const doc = document.implementation.createHTMLDocument('');
+      doc.body.innerHTML = html;
+      return doc;
+    };
+
+    it.each([
+      ['the same field, in other wrappers', '<input aria-label="Billing" data-qa="dt-input">', 0,
+        '<div><label>Billing <span><input data-qa="dt-input"></span></label></div>', ['typed']],
+      ['the same of two unnamed fields, as many here', '<input><input>', 1, '<p><input></p><p><input></p>', ['', 'typed']],
+      ['not a field with another name, found by its role', '<input aria-label="Shipping"><input aria-label="Billing">', 0,
+        '<input aria-label="Billing">', ['']],
+      ['not one of two unnamed fields when this frame has one', '<input><input>', 0, '<input>', ['']],
+      ['not one whose data-qa differs', '<input data-qa="dt-input" aria-label="Name">', 0,
+        '<input data-qa="dt-other" aria-label="Name">', ['']],
+      ['not a field of another kind at the point', '<textarea aria-label="Notes"></textarea>', 0,
+        '<input aria-label="Notes">', ['']],
+    ])('writes %s', (_, source, index, mirror, values) => {
+      frame = framedAgent(mirror);
+      frame.doc.elementFromPoint = () => frame.doc.querySelector('input');
+      frame.fromHost({ type: 'connect' });
+      const target = locatorOf(sourcePage(source).querySelectorAll('input, textarea')[index]);
+
+      frame.fromHost({ type: 'replay', events: [{ kind: 'value', value: 'typed', selection: null, target }] });
+
+      expect([...frame.doc.querySelectorAll('input')].map(input => input.value)).toEqual(values);
+    });
   });
 
   describe('Focus', () => {
@@ -1238,7 +1564,7 @@ describe('Compare sync agent', () => {
     expect(frame.log).toContain('mouseleave@outer');
     expect(frame.log).not.toContain('mouseenter@outer');
     expect(removed.mock.calls.map(([type]) => type)).toEqual([
-      'pointermove', 'pointerdown', 'pointerup', 'click', 'pointerout', 'scroll', 'resize',
+      'pointermove', 'pointerdown', 'pointerup', 'pointercancel', 'click', 'pointerout', 'scroll', 'resize',
       'keydown', 'keyup', 'input', 'focusin', 'focusout',
     ]);
     expect(removed.mock.calls.find(([type]) => type === 'scroll')[2]).toBe(true);

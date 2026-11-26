@@ -5,12 +5,14 @@
 //
 // It stays inert until the comparison page's handshake: until then it only listens for that message, adds nothing to
 // the DOM and attaches no input listeners. Everything goes through postMessage, so it works for the published
-// previews (one origin) and the local dev servers (one origin each) alike.
+// previews (one origin) and the local dev servers (one origin each) alike. Only a page it trusts can switch it on:
+// one of its own origin (the published bundle) or a local comparison (see trustedOrigins).
 //
-// It mirrors pointer movement, presses (so drags), clicks, page scroll and the scroll of elements inside the story,
-// named keys (Escape, the arrows, Enter in a text field), the values of text fields, selects and range inputs, and
-// where focus is. Hover styles too: the browser's :hover follows only the real pointer, so the elements under the
-// replayed pointer get an attribute that copies of the page's :hover rules apply to (compare-sync-hover.js).
+// It mirrors pointer movement, presses of the primary button (so drags) with the modifier keys held, clicks, page
+// scroll and the scroll of elements inside the story, named keys (Escape, the arrows, Enter in a text field), the
+// values of text fields, selects and range inputs, and where focus is. Hover styles too: the browser's :hover follows
+// only the real pointer, so the elements under the replayed pointer get an attribute that copies of the page's :hover
+// rules apply to (compare-sync-hover.js).
 //
 // Real keyboard focus stays in the source: the frame the last real press, key or typing happened in. The other frame,
 // the mirror, never takes it: while it's the mirror, its `focus()` does nothing but show where focus would have gone,
@@ -25,6 +27,41 @@ export const COMPARE_SYNC_KEY = 'dialtone-compare-sync';
 // One agent per window, also when a hot update runs preview.js again.
 const INSTANCE = Symbol.for('dialtone.compareSyncAgent');
 
+// The comparison Storybook's local port (packages/dialtone-react/compare/ports.json, `compare`; a test there keeps the
+// two the same), which the local comparison page is served from under both names of this machine.
+export const COMPARE_PORT = 9013;
+export const DEFAULT_COMPARE_HOSTS = [`http://localhost:${COMPARE_PORT}`, `http://127.0.0.1:${COMPARE_PORT}`];
+
+/**
+ * The origins in a comma-separated list (STORYBOOK_COMPARE_SYNC_HOSTS), each as an origin: `http://localhost:9500/`
+ * is `http://localhost:9500`. An entry that isn't a URL, or whose origin is opaque, is left out.
+ * @param {string} text
+ * @returns {string[]}
+ */
+export function parseHosts (text) {
+  return text.split(',').map(entry => entry.trim()).filter(Boolean).map((entry) => {
+    try {
+      return new URL(entry).origin;
+    } catch {
+      return 'null';
+    }
+  }).filter(origin => origin !== 'null');
+}
+
+/**
+ * The origins whose page may frame this preview as the comparison: its own (the published bundle serves the
+ * comparison and the previews from one origin), and the local comparison's, which STORYBOOK_COMPARE_SYNC_HOSTS
+ * replaces for one on another port. Never an opaque origin ('null'), which any sandboxed page has.
+ * @param {Window} win
+ * @param {string} [hosts] STORYBOOK_COMPARE_SYNC_HOSTS, when it's set.
+ * @returns {Set<string>}
+ */
+export function trustedOrigins (win, hosts) {
+  const origins = new Set(hosts ? parseHosts(hosts) : DEFAULT_COMPARE_HOSTS);
+  if (win.origin && win.origin !== 'null') origins.add(win.origin);
+  return origins;
+}
+
 const POINTER_KINDS = { pointermove: 'move', pointerdown: 'down', pointerup: 'up' };
 // Only the last position of a run of moves, or of scrolls, has to travel.
 const COALESCED = new Set(['move', 'scroll']);
@@ -38,6 +75,18 @@ export const MAX_TEXT = 10000;
 const isFiniteNumber = value => typeof value === 'number' && Number.isFinite(value);
 const isPoint = value => isFiniteNumber(value?.x) && isFiniteNumber(value?.y);
 const isShortString = (value, max) => typeof value === 'string' && value.length <= max;
+
+// The modifier keys held, as they travel with a key or a pointer event, and as a replayed event's init takes them.
+const FLAGS = ['alt', 'ctrl', 'meta', 'shift'];
+const flagsOf = event => ({ alt: event.altKey, ctrl: event.ctrlKey, meta: event.metaKey, shift: event.shiftKey });
+const modifiersOf = event => ({
+  altKey: event.alt === true,
+  ctrlKey: event.ctrl === true,
+  metaKey: event.meta === true,
+  shiftKey: event.shift === true,
+});
+// A pointer event's flags may be missing (an agent from before they travelled), but not anything else.
+const hasFlags = event => FLAGS.every(flag => event[flag] === undefined || typeof event[flag] === 'boolean');
 const isRank = value => Array.isArray(value) && value.length === 2 &&
   value.every(number => Number.isInteger(number) && number >= -1);
 
@@ -47,7 +96,7 @@ const isLocator = value => isShortString(value?.role, 64) && isShortString(value
   value.ranks.every(isRank);
 
 const isKey = event => isShortString(event.key, 32) && isShortString(event.code, 32) &&
-  isFiniteNumber(event.keyCode) && ['alt', 'ctrl', 'meta', 'shift', 'repeat'].every(flag => typeof event[flag] === 'boolean') &&
+  isFiniteNumber(event.keyCode) && [...FLAGS, 'repeat'].every(flag => typeof event[flag] === 'boolean') &&
   (event.target === null || isLocator(event.target));
 
 const isSelection = value => value === null || (Number.isInteger(value?.start) && Number.isInteger(value?.end));
@@ -55,6 +104,7 @@ const isSelection = value => value === null || (Number.isInteger(value?.start) &
 // What each kind of replayed event needs, all of the expected types. Pointer kinds need a point.
 const VALID = {
   leave: () => true,
+  cancel: () => true,
   blur: () => true,
   keydown: isKey,
   keyup: isKey,
@@ -67,7 +117,7 @@ const VALID = {
 const isReplayEvent = (event) => {
   const kind = event?.kind;
   if (Object.prototype.hasOwnProperty.call(VALID, kind)) return VALID[kind](event);
-  return POINT_KINDS.has(kind) && isPoint(event);
+  return POINT_KINDS.has(kind) && isPoint(event) && hasFlags(event);
 };
 
 // Keys. A synthetic key event runs a component's key handlers, and nothing else: no typed character, no Tab moving
@@ -155,15 +205,24 @@ export function locatorOf (element) {
   return { role, qa, name, at: centerOf(element), ranks };
 }
 
-/** The counterpart of the other frame's element in this document, or null. */
-export function findByLocator (doc, { role, qa, name, at, ranks }) {
+/**
+ * The counterpart of the other frame's element in this document, or null.
+ * @param {Document} doc
+ * @param {object} locator The other frame's locatorOf.
+ * @param {object} [options]
+ * @param {boolean} [options.exact] Only the element with the same role, data-qa and name, at the same place among as
+ *   many like it: never one found by its role or position alone, which may be another field (a value written there
+ *   would overwrite it).
+ */
+export function findByLocator (doc, { role, qa, name, at, ranks }, { exact = false } = {}) {
   const keys = [role, qa, name];
   let pool = focusables(doc);
   const pools = keys.map((key, level) => (pool = pool.filter(candidate => SIGNATURE[level](candidate) === key)));
-  for (let level = pools.length - 1; level >= 0; level--) {
+  for (let level = pools.length - 1; level >= (exact ? pools.length - 1 : 0); level--) {
     const [index, count] = ranks[level];
     if (index >= 0 && pools[level].length === count) return pools[level][index];
   }
+  if (exact) return null;
   const nearest = [...pools].reverse().find(candidates => candidates.length);
   if (nearest) {
     const distance = (element) => {
@@ -194,10 +253,7 @@ const keyOf = (event, target) => ({
   key: event.key,
   code: event.code,
   keyCode: event.keyCode,
-  alt: event.altKey,
-  ctrl: event.ctrlKey,
-  meta: event.metaKey,
-  shift: event.shiftKey,
+  ...flagsOf(event),
   repeat: event.repeat,
   target,
 });
@@ -210,8 +266,6 @@ const selectionOf = (element) => {
     return null;
   }
 };
-
-const clamp = (value, max) => Math.min(Math.max(value, 0), Math.max(max, 0));
 
 // Scroll positions can be fractional; within half a pixel is the same position.
 const samePosition = (a, b) => Math.abs(a.x - b.x) < 0.5 && Math.abs(a.y - b.y) < 0.5;
@@ -256,6 +310,8 @@ const scrollerAbove = (node) => {
  * @param {(callback: () => void) => void} [options.requestFrame] Schedules the once-per-frame flush.
  * @param {(callback: (deadline: IdleDeadline) => void) => () => void} [options.requestIdle] Schedules a slice of the
  *   hover styles' build in idle time, returning a cancel function (see createHoverEmulation).
+ * @param {string} [options.hosts] The local comparison's origins, comma-separated, instead of DEFAULT_COMPARE_HOSTS:
+ *   STORYBOOK_COMPARE_SYNC_HOSTS, when the Storybook was started with it.
  * @returns {{ uninstall: () => void } | null}
  */
 export function installCompareSyncAgent ({
@@ -263,11 +319,13 @@ export function installCompareSyncAgent ({
   isReal = event => event.isTrusted,
   requestFrame = callback => win.requestAnimationFrame(callback),
   requestIdle,
+  hosts = import.meta.env.STORYBOOK_COMPARE_SYNC_HOSTS,
 } = {}) {
   if (win.parent === win) return null;
   win[INSTANCE]?.uninstall();
 
   const doc = win.document;
+  const trusted = trustedOrigins(win, hosts);
   // Hover styles for the replayed pointer, from the handshake to the goodbye.
   const hoverStyles = createHoverEmulation({ win, requestIdle });
   // The comparison page's origin, from its handshake. Null while inert.
@@ -276,6 +334,8 @@ export function installCompareSyncAgent ({
   let flushRequested = false;
   // A real press ended and its click hasn't gone yet (see onClick).
   let clickDue = false;
+  // A real press that isn't sent, from its pointerdown to its release (see onPointer).
+  let ignoredPress = false;
   // Where the last replayed scroll left the page, until its own scroll event has gone by (see applyScroll).
   let applied = null;
   // The same for the elements inside the page: element -> the position a replayed scroll left it at.
@@ -285,9 +345,10 @@ export function installCompareSyncAgent ({
   // Where the real pointer last was, which is the best point to find a scrolled element by: wherever the user is
   // scrolling, it's in there.
   let realPoint = null;
-  // The replayed pointer's element and its ancestors, innermost first, and where it was.
+  // The replayed pointer's element and its ancestors, innermost first, where it was, and the modifier keys held with it.
   let hovered = [];
   let lastPoint = { x: 0, y: 0 };
+  let held = modifiersOf({});
   // The replayed button, while it's down: whether its pointerdown was cancelled, which suppresses the mouse events of
   // the press (not the click), the element it went down on, and the element holding pointer capture (see
   // capturePointer).
@@ -390,14 +451,32 @@ export function installCompareSyncAgent ({
     shimFocus(true);
   };
 
+  // The real pointer, with the modifier keys held. Only the primary button's presses travel, and only the primary
+  // pointer's: the other frame replays every press as the primary button's, so a right or middle press (which a
+  // Slider ignores), or a second finger, would turn into a left one there. Nor do the moves and the release of such a
+  // press, or the click after it.
   const onPointer = (event) => {
     if (!isReal(event)) return;
     if (event.type === 'pointerdown') becomeSource();
     // The real pointer is here, so the other frame's replayed one isn't: its hover styles go.
     hoverStyles.clear();
-    clickDue = event.type === 'pointerup';
+    if (event.isPrimary === false) return;
     realPoint = { x: event.clientX, y: event.clientY };
-    enqueue({ kind: POINTER_KINDS[event.type], x: event.clientX, y: event.clientY });
+    if (event.type === 'pointerdown' && event.button !== 0) ignoredPress = true;
+    const ignored = ignoredPress;
+    // A press ends with its last button's release, whichever button that is.
+    if (event.type === 'pointerup') ignoredPress = false;
+    clickDue = !ignored && event.type === 'pointerup';
+    if (!ignored) enqueue({ kind: POINTER_KINDS[event.type], x: event.clientX, y: event.clientY, ...flagsOf(event) });
+  };
+
+  // The browser ended a press without a release (it took the pointer for a scroll or a native drag): no click follows.
+  const onPointerCancel = (event) => {
+    if (!isReal(event) || event.isPrimary === false) return;
+    const ignored = ignoredPress;
+    ignoredPress = false;
+    clickDue = false;
+    if (!ignored) enqueue({ kind: 'cancel' });
   };
 
   // One click per press. A label's click is followed by a trusted click on its control, which the replayed click on
@@ -406,7 +485,7 @@ export function installCompareSyncAgent ({
   const onClick = (event) => {
     if (!isReal(event) || !clickDue) return;
     clickDue = false;
-    enqueue({ kind: 'click', x: event.clientX, y: event.clientY });
+    enqueue({ kind: 'click', x: event.clientX, y: event.clientY, ...flagsOf(event) });
   };
 
   // A pointerout with no element to go to: the pointer left this document.
@@ -481,6 +560,7 @@ export function installCompareSyncAgent ({
     ['pointermove', onPointer, true],
     ['pointerdown', onPointer, true],
     ['pointerup', onPointer, true],
+    ['pointercancel', onPointerCancel, true],
     ['click', onClick, true],
     ['pointerout', onPointerOut, true],
     ['scroll', onScroll, true],
@@ -508,6 +588,7 @@ export function installCompareSyncAgent ({
         view: win,
         clientX: lastPoint.x,
         clientY: lastPoint.y,
+        ...held,
         pointerId: 1,
         pointerType: 'mouse',
         isPrimary: true,
@@ -595,7 +676,9 @@ export function installCompareSyncAgent ({
   };
 
   // While an element holds capture, the pointer's events go to it, wherever the pointer is, with no boundary events.
+  // Every pointer event, the boundary events of getting there too, carries the modifier keys held with it.
   const movePointer = (point) => {
+    held = modifiersOf(point);
     lastPoint = point;
     const captor = press?.captor;
     const target = captor ?? pointTo(point);
@@ -613,7 +696,9 @@ export function installCompareSyncAgent ({
   // mouseup when it comes up, then click. Each part replays when it happens, so a component that acts on the press
   // alone (a popover closing on an outside pointerdown, with no click after it) acts in both frames, and a drag
   // (pointermove between the two) drags in both. These events have no default action, so nothing takes focus.
+  // The source sends the primary button's presses only (onPointer), so each is the primary button's here.
   const pressAt = (point) => {
+    held = modifiersOf(point);
     const target = pointTo(point);
     const init = { button: 0, buttons: 1 };
     clickTarget = null;
@@ -623,6 +708,7 @@ export function installCompareSyncAgent ({
   };
 
   const releaseAt = (point) => {
+    held = modifiersOf(point);
     lastPoint = point;
     const captor = press?.captor;
     const target = captor ?? pointTo(point);
@@ -640,25 +726,37 @@ export function installCompareSyncAgent ({
   };
 
   const clickAt = (point) => {
+    held = modifiersOf(point);
     const target = clickTarget?.isConnected ? clickTarget : pointTo(point);
     clickTarget = null;
     lastPoint = point;
     fire(target, 'click', { button: 0, buttons: 0, detail: 1 });
   };
 
-  // Scrolls the page to the other frame's position in pixels, clamped to this page. The position it leaves is
+  // The other frame's press ended without a release: its browser cancelled it (pointercancel), or that frame reloaded
+  // mid-press. As a browser does: pointercancel where the press's events go, then the capture ends, and neither the
+  // mouse events of a release nor a click follow. The pointer stays where it is: a leave, which follows a cancel, takes
+  // it out.
+  const cancelPress = () => {
+    clickTarget = null;
+    if (!press) return;
+    const { captor, target } = press;
+    press = null;
+    const init = { button: -1, buttons: 0, cancelable: false };
+    const under = hovered[0]?.isConnected ? hovered[0] : null;
+    fire(captor ?? under ?? (target.isConnected ? target : doc.documentElement), 'pointercancel', init);
+    if (captor) fire(captor, 'lostpointercapture', init);
+  };
+
+  // Scrolls the page to the other frame's position in pixels. They go to scrollTo as they are, signed, and the browser
+  // clamps them to this page: a right-to-left scroller's horizontal offsets are negative. The position it leaves is
   // remembered until the next frame, by when the browser has fired the scroll event for it, so that event isn't sent
   // back (onScroll).
   const applyScroll = ({ x, y }) => {
-    const element = scroller();
     const before = scrollPosition();
-    const goal = {
-      x: clamp(x, element.scrollWidth - element.clientWidth),
-      y: clamp(y, element.scrollHeight - element.clientHeight),
-    };
-    if (samePosition(before, goal)) return;
+    if (samePosition(before, { x, y })) return;
     // Instant, even under `scroll-behavior: smooth`: an animated scroll's intermediate events would read as real.
-    win.scrollTo({ left: goal.x, top: goal.y, behavior: 'instant' });
+    win.scrollTo({ left: x, top: y, behavior: 'instant' });
     const after = scrollPosition();
     if (samePosition(after, before)) return;
     const mark = after;
@@ -668,18 +766,14 @@ export function installCompareSyncAgent ({
     });
   };
 
-  // Scrolls the element inside the page found at a point (the closest scroller there) to the other frame's offset, with
-  // the same guard as the page's: the position it leaves is remembered until the browser has fired its scroll event.
+  // Scrolls the element inside the page found at a point (the closest scroller there) to the other frame's offset, as
+  // the page's: signed, clamped by the browser, and the position it leaves remembered until its scroll event has gone.
   const applyScroller = ({ x, y, at }) => {
     const element = scrollerAbove(doc.elementFromPoint(at.x, at.y));
     if (!element) return;
     const before = { x: element.scrollLeft, y: element.scrollTop };
-    const goal = {
-      x: clamp(x, element.scrollWidth - element.clientWidth),
-      y: clamp(y, element.scrollHeight - element.clientHeight),
-    };
-    if (samePosition(before, goal)) return;
-    element.scrollTo({ left: goal.x, top: goal.y, behavior: 'instant' });
+    if (samePosition(before, { x, y })) return;
+    element.scrollTo({ left: x, top: y, behavior: 'instant' });
     const after = { x: element.scrollLeft, y: element.scrollTop };
     if (samePosition(after, before)) return;
     appliedInner.set(element, after);
@@ -783,10 +877,7 @@ export function installCompareSyncAgent ({
         code: event.code,
         keyCode: event.keyCode,
         which: event.keyCode,
-        altKey: event.alt,
-        ctrlKey: event.ctrl,
-        metaKey: event.meta,
-        shiftKey: event.shift,
+        ...modifiersOf(event),
         repeat: event.repeat,
         bubbles: true,
         cancelable: true,
@@ -800,7 +891,9 @@ export function installCompareSyncAgent ({
 
   // A field's value, set as typing sets it: through the native setter, so a framework that wraps the element's own
   // value property (React's value tracker) sees a change, then an input event (and change, for a select, which fires
-  // both at once). A field the other frame doesn't have, or a password, is skipped.
+  // both at once). Only into the same field: one with the same role, data-qa and name (findByLocator's exact match),
+  // never another found by its role or position, whose value it would overwrite. A field this frame doesn't have, a
+  // password, and a select without the option are skipped: setting a value a select doesn't offer clears it.
   const writeValue = (element, value, selection) => {
     const field = FIELDS[element.localName];
     if (!field) {
@@ -817,9 +910,10 @@ export function installCompareSyncAgent ({
   };
 
   const setValue = ({ value, selection, target }) => {
-    const element = findByLocator(doc, target);
+    const element = findByLocator(doc, target, { exact: true });
     const current = element && !isPassword(element) ? valueOf(element) : null;
     if (current === null || current === value) return;
+    if (element.localName === 'select' && ![...element.options].some(option => option.value === value)) return;
     writeValue(element, value, selection);
     const wasReplaying = replaying;
     replaying = true;
@@ -846,6 +940,7 @@ export function installCompareSyncAgent ({
     down: pressAt,
     up: releaseAt,
     click: clickAt,
+    cancel: cancelPress,
     leave: releasePointer,
     scroll: applyScroll,
     scroller: applyScroller,
@@ -865,12 +960,12 @@ export function installCompareSyncAgent ({
     }
   };
 
+  // `origin` is a trusted one (onMessage), never '*': everything this agent sends goes to that origin only.
   const connect = (origin) => {
     if (!host) listen(true);
     emulateCapture(true);
     hoverStyles.start();
-    // An opaque origin (a sandboxed comparison) can only be reached with '*'.
-    host = origin === 'null' ? '*' : origin;
+    host = origin;
     post({ type: 'ready', viewport: viewport() });
   };
 
@@ -880,6 +975,7 @@ export function installCompareSyncAgent ({
     press = null;
     clickTarget = null;
     releasePointer();
+    held = modifiersOf({});
     hoverStyles.stop();
     emulateCapture(false);
     shimFocus(false);
@@ -893,6 +989,7 @@ export function installCompareSyncAgent ({
     scrolledInner.clear();
     realPoint = null;
     clickDue = false;
+    ignoredPress = false;
     focusMoved = false;
     typedIn = null;
   };
@@ -906,10 +1003,13 @@ export function installCompareSyncAgent ({
     valid.forEach(event => replayers[event.kind](event));
   };
 
-  // Only the window framing this preview can switch the agent on, and only with this agent's key.
+  // Only the window framing this preview can switch the agent on, only from an origin it trusts, and only with this
+  // agent's key. Anything else is ignored before it's read, and never answered: a page that frames the preview from
+  // anywhere else would otherwise get what is typed in it and could replay input into it.
   const onMessage = (event) => {
+    if (event.source !== win.parent || !trusted.has(event.origin)) return;
     const { data } = event;
-    if (event.source !== win.parent || data?.key !== COMPARE_SYNC_KEY) return;
+    if (data?.key !== COMPARE_SYNC_KEY) return;
     if (data.type === 'connect') connect(event.origin);
     else if (data.type === 'disconnect') disconnect();
     else if (data.type === 'replay') replay(data.events);
