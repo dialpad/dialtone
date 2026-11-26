@@ -1,0 +1,21 @@
+packages/dialtone-css/lib/build/less/components/text.less
+  s_02253ccb5da2a1::t_79ebb212096b47 415,418-422
+packages/dialtone-vue/components/Text/Text.vue
+  s_02253ccb5da2a1::t_7ea89e0fbcb5db 18,291,338-340,480,517,535-541,566
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "df26417278798c30fbf3b8102287b9e628939904",
+  "prompts": {},
+  "sessions": {
+    "s_02253ccb5da2a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "514f0fc5-2753-4dc5-8c33-ef0e3d16ef02",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

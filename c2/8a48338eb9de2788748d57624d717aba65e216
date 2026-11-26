@@ -1,0 +1,19 @@
+.agents/skills/pr-prep/SKILL.md
+  s_14bae515e6d53a::t_7b56ccd2aba054 53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c28a48338eb9de2788748d57624d717aba65e216",
+  "prompts": {},
+  "sessions": {
+    "s_14bae515e6d53a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b8d185fd-d734-4535-a5e1-86a41eb7b846",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

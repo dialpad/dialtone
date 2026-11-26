@@ -1,0 +1,19 @@
+packages/dialtone-react/components/EmojiPicker/EmojiPicker.stories.tsx
+  s_32d9d9b9c7eb64::t_b74dfb6c532869 177
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e775419cf8dffc30c1ef07b93d70b10aaa614bb4",
+  "prompts": {},
+  "sessions": {
+    "s_32d9d9b9c7eb64": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b26495b-c9f5-4bbc-a626-669a14d97b10",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

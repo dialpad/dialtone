@@ -1,0 +1,19 @@
+packages/dialtone-react/components/SplitButton/SplitButton.stories.tsx
+  s_de87ac0dc888ff::t_23f215125b7096 233-235
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c0811a15e736af7358792ae14bd8fb9476126a59",
+  "prompts": {},
+  "sessions": {
+    "s_de87ac0dc888ff": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c9485c2c-acd9-4b6f-a5e9-1b5824e781ca",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
