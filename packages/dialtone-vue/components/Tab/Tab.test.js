@@ -65,8 +65,8 @@ describe('DtTab Tests', () => {
     it('renders block icon slots with the tab icon size', () => {
       mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, size: 200 } };
       mockSlots = {
-        blockStartIcon: ({ iconSize }) => `Start ${iconSize}`,
-        blockEndIcon: ({ iconSize }) => `End ${iconSize}`,
+        blockStartIcon: ({ iconSize }) => `Start ${iconSize.toString()}`,
+        blockEndIcon: ({ iconSize }) => `End ${iconSize.toString()}`,
       };
       updateWrapper();
 

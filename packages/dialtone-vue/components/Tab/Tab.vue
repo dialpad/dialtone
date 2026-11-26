@@ -18,6 +18,8 @@
     :aria-label="label"
     :aria-disabled="isDisabled ? 'true' : undefined"
     :label-class="labelClass"
+    :block-start-icon-class="blockStartIconClass"
+    :block-end-icon-class="blockEndIconClass"
     :leading-class="leadingClass"
     :trailing-class="trailingClass"
     data-qa="dt-tab"
@@ -170,6 +172,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Custom class for the icon container above the label.
+     */
+    blockStartIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Custom class for the icon container below the label.
+     */
+    blockEndIconClass: {
       type: [String, Array, Object],
       default: '',
     },

@@ -9,6 +9,8 @@
     :aria-disabled="isDisabled ? 'true' : undefined"
     :aria-label="label"
     :label-class="resolvedLabelClass"
+    :block-start-icon-class="blockStartIconClass"
+    :block-end-icon-class="blockEndIconClass"
     :data-value="value"
     kind="muted"
     importance="clear"
@@ -137,6 +139,22 @@ const props = defineProps({
   labelClass: {
     type: [String, Array, Object],
     default: undefined,
+  },
+
+  /**
+   * Custom class for the icon container above the label.
+   */
+  blockStartIconClass: {
+    type: [String, Array, Object],
+    default: '',
+  },
+
+  /**
+   * Custom class for the icon container below the label.
+   */
+  blockEndIconClass: {
+    type: [String, Array, Object],
+    default: '',
   },
 });
 

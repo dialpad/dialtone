@@ -443,10 +443,16 @@ export default {
           pseudoElement = '::before';
         }
 
+        const alignToRowEnd = pseudoElement === '::after'
+          && this.orientation === 'horizontal'
+          && !this.borderless
+          && getComputedStyle(this.tabs).alignItems === 'flex-end';
+
         this.indicator.animate({
           oldRect: old.rect,
           newEl: newContext,
           orientation: this.orientation,
+          alignToRowEnd,
           hideProps,
           indicatorExtra,
           pseudoElement,

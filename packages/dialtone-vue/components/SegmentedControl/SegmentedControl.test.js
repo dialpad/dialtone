@@ -55,8 +55,8 @@ describe('DtSegmentedControl Tests', () => {
       _setWrapper({ size: 200 }, {
         default: () => h(DtSegmentedControlItem, { value: 'all' }, {
           default: () => 'All',
-          blockStartIcon: ({ iconSize }) => `Start ${iconSize}`,
-          blockEndIcon: ({ iconSize }) => `End ${iconSize}`,
+          blockStartIcon: ({ iconSize }) => `Start ${iconSize.toString()}`,
+          blockEndIcon: ({ iconSize }) => `End ${iconSize.toString()}`,
         }),
       });
 
