@@ -635,7 +635,7 @@ export default {
   data () {
     return {
       editor: null,
-      appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
+      appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector?.('body'),
       floatingOptions: {
         placement: 'top-start',
       },
