@@ -1,5 +1,6 @@
-import { useEffect, useMemo, type ComponentPropsWithRef, type CSSProperties, type ElementType } from 'react';
+import { useEffect, useMemo, useRef, type ComponentPropsWithRef, type CSSProperties, type ElementType } from 'react';
 import { cx } from '../../common/cx';
+import { DtTextSlideViewport } from './modules/SlideViewport';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_VARIANT_MODIFIERS,
@@ -18,11 +19,13 @@ import {
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
+  TEXT_SLIDE_MODES,
   type TextAlign,
   type TextBoxTrim,
   type TextDensity,
   type TextFamily,
   type TextKind,
+  type TextSlideMode,
   type TextStrength,
   type TextTone,
   type TextVariant,
@@ -34,6 +37,7 @@ const SEMANTIC_HEADING_ELEMENTS: readonly unknown[] = ['h1', 'h2', 'h3', 'h4', '
 
 // Module-level flag to emit info only once per session
 let hasEmittedHeadlineSemanticInfo = false;
+let hasWarnedSlideConflict = false;
 
 // Exported for testing purposes only
 export const resetHeadlineSemanticInfoFlag = () => {
@@ -119,6 +123,15 @@ interface DtTextOwnProps<T extends ElementType> {
    * @values 100, 200, 300, 400, 500, 600
    */
   density?: TextDensity | null;
+
+  /**
+   * Slides overflowing single-line text into view while the text, or the item around it
+   * (button, link, menu item), is hovered or has keyboard focus. `true` is the same as `once`.
+   * Renders as a block and replaces `truncate`, `maxLines` and `wrap`. Tune with the
+   * `--dt-text-slide-*` CSS custom properties listed in the DtText docs.
+   * @values true, false, once, loop
+   */
+  slide?: boolean | TextSlideMode;
 }
 
 /** Own props plus those of the element or component named by `as` (e.g. `href` for `as="a"`). */
@@ -151,7 +164,14 @@ function getModifierClass (
   return className;
 }
 
-type ClassInputs = Required<Omit<DtTextOwnProps<ElementType>, 'as'>>;
+type ClassInputs = Required<Omit<DtTextOwnProps<ElementType>, 'as' | 'slide'>> & { slideMode: TextSlideMode | null };
+
+function getSlideMode (slide: DtTextOwnProps<ElementType>['slide']): TextSlideMode | null {
+  if ((TEXT_SLIDE_MODES as readonly unknown[]).includes(slide)) {
+    return slide as TextSlideMode;
+  }
+  return slide ? 'once' : null;
+}
 
 function getVariantClass ({ kind, variant, size }: ClassInputs): string | null {
   if (variant) {
@@ -223,6 +243,14 @@ function getFontSizeClass ({ kind, variant, size }: ClassInputs): string | null 
   return null;
 }
 
+// slide replaces truncate
+function getTruncateClass ({ slideMode, truncate }: ClassInputs): string | null {
+  if (slideMode) {
+    return 'd-text--slide';
+  }
+  return truncate ? TEXT_TRUNCATE_CLASS : null;
+}
+
 function getTextClasses (inputs: ClassInputs): string[] {
   const classes = ['d-text'];
   const candidates = [
@@ -232,10 +260,10 @@ function getTextClasses (inputs: ClassInputs): string[] {
     inputs.italic ? TEXT_ITALIC_CLASS : null,
     getModifierClass(inputs.align, TEXT_ALIGN_MODIFIERS, 'align'),
     getModifierClass(inputs.tone, TEXT_TONE_MODIFIERS, 'tone'),
-    inputs.truncate ? TEXT_TRUNCATE_CLASS : null,
+    getTruncateClass(inputs),
     inputs.numeric ? TEXT_NUMERIC_CLASS : null,
-    inputs.maxLines ? TEXT_LINE_CLAMP_CLASS : null,
-    getModifierClass(inputs.wrap, TEXT_WRAP_MODIFIERS, 'wrap'),
+    inputs.maxLines && !inputs.slideMode ? TEXT_LINE_CLAMP_CLASS : null,
+    inputs.slideMode ? null : getModifierClass(inputs.wrap, TEXT_WRAP_MODIFIERS, 'wrap'),
     getModifierClass(inputs.textBoxTrim, TEXT_BOX_TRIM_MODIFIERS, 'textBoxTrim'),
     getModifierClass(inputs.strength, TEXT_STRENGTH_MODIFIERS, 'strength'),
     getModifierClass(inputs.density, TEXT_DENSITY_MODIFIERS, 'density'),
@@ -270,23 +298,36 @@ export function DtText<T extends ElementType = 'span'> ({
   textBoxTrim = null,
   strength = null,
   density = null,
+  slide = false,
   className,
   style,
   children,
   ...rest
 }: DtTextProps<T>) {
+  const slideMode = getSlideMode(slide);
   // Memoized like Vue's computed: an unsupported value warns once per change, not on every render.
   const textClasses = useMemo(
     () => getTextClasses({
       kind, variant, size, family, italic, tone, align, truncate, maxLines, numeric, wrap, textBoxTrim, strength,
-      density,
+      density, slideMode,
     }),
     [
       kind, variant, size, family, italic, tone, align, truncate, maxLines, numeric, wrap, textBoxTrim, strength,
-      density,
+      density, slideMode,
     ],
   );
-  const textStyles: TextStyle | undefined = maxLines ? { '--dt-text-line-clamp': maxLines } : undefined;
+  const textStyles: TextStyle | undefined = maxLines && !slideMode ? { '--dt-text-line-clamp': maxLines } : undefined;
+
+  // Vue checks this in mounted() only, once per session
+  const checkedSlideConflict = useRef(false);
+  useEffect(() => {
+    if (checkedSlideConflict.current) return;
+    checkedSlideConflict.current = true;
+    if (slideMode && !hasWarnedSlideConflict && (maxLines || wrap)) {
+      console.warn('[DtText] slide ignores maxLines and wrap.');
+      hasWarnedSlideConflict = true;
+    }
+  }, [slideMode, maxLines, wrap]);
 
   const usesHeadlineVisualStyle = variant ? variant.startsWith('headline-') : kind === 'headline';
   const isSemanticHeading = SEMANTIC_HEADING_ELEMENTS.includes(as);
@@ -309,7 +350,8 @@ export function DtText<T extends ElementType = 'span'> ({
       className={cx(textClasses, className)}
       style={textStyles ? { ...textStyles, ...style } : style}
     >
-      {children}
+      {/* the slide state lives in this child, so plain text carries none */}
+      {slideMode ? <DtTextSlideViewport mode={slideMode}>{children}</DtTextSlideViewport> : children}
     </Component>
   );
 }

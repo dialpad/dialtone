@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { action } from 'storybook/actions';
+import { DtListItem } from '../ListItem';
 import { DtStack } from '../Stack';
+import { useTooltipDirective } from '../Tooltip';
 import { DtText, type DtTextProps } from './Text';
 import {
   TEXT_KIND_MODIFIERS,
@@ -14,6 +17,7 @@ import {
   TEXT_WRAP_MODIFIERS,
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
+  TEXT_SLIDE_MODES,
   type TextAlign,
   type TextBoxTrim,
   type TextDensity,
@@ -34,6 +38,7 @@ const strengthOptions = [undefined, ...Object.keys(TEXT_STRENGTH_MODIFIERS)];
 const densityOptions = [undefined, ...Object.keys(TEXT_DENSITY_MODIFIERS)];
 const wrapOptions = [undefined, ...Object.keys(TEXT_WRAP_MODIFIERS)];
 const toneOptions = [undefined, ...Object.keys(TEXT_TONE_MODIFIERS)];
+const slideOptions = [false, true, ...TEXT_SLIDE_MODES];
 const textBoxTrimOptions = [undefined, ...Object.keys(TEXT_BOX_TRIM_MODIFIERS)];
 
 export const argsData = {
@@ -50,6 +55,7 @@ export const argsData = {
   align: undefined,
   truncate: false,
   maxLines: undefined,
+  slide: false,
   numeric: false,
   onClick: action('click'),
 } satisfies Partial<TextStoryArgs>;
@@ -118,6 +124,12 @@ export const argTypesData = {
     control: { type: 'number', min: 1 },
     type: 'number',
   },
+  slide: {
+    options: slideOptions,
+    control: { type: 'select' },
+    description:
+      'Slides overflowing single-line text into view on hover or focus. Needs a narrow block container to show.',
+  },
   numeric: {
     control: 'boolean',
   },
@@ -177,6 +189,7 @@ function TextDefault ({ default: defaultSlot, ...args }: TextStoryArgs) {
       align={args.align}
       truncate={args.truncate}
       maxLines={args.maxLines}
+      slide={args.slide}
       numeric={args.numeric}
       wrap={args.wrap}
       textBoxTrim={args.textBoxTrim}
@@ -485,6 +498,76 @@ function TextVariants () {
   );
 }
 
+// TextSlide.story.vue
+const slideTooltipLabel = 'Warehouse dock handset shared between three shifts';
+
+const slideGroups: { qa: string; dir?: 'rtl'; labels: string[] }[] = [
+  {
+    qa: 'slide-menu',
+    labels: [
+      'Front desk reception phone, second floor east wing',
+      'Conference room Aurora with ceiling microphone array',
+      'Short label',
+    ],
+  },
+  {
+    qa: 'slide-rtl',
+    dir: 'rtl',
+    labels: ['قائمة انتظار دعم العملاء لمنطقة الشمال الغربي للمحيط الهادئ والمناطق المجاورة'],
+  },
+];
+
+// Vue's <dt-list-item v-dt-tooltip="tooltipLabel">
+function SlideTooltipItem ({ slide }: Pick<TextStoryArgs, 'slide'>) {
+  const [item, setItem] = useState<HTMLElement | null>(null);
+  useTooltipDirective(item, slideTooltipLabel);
+  return (
+    <DtListItem ref={setItem} role="menuitem" navigationType="tab">
+      <DtText slide={slide}>
+        {slideTooltipLabel}
+      </DtText>
+    </DtListItem>
+  );
+}
+
+function TextSlide ({ slide }: TextStoryArgs) {
+  return (
+    <DtStack gap="400" className="d-p-400">
+        <DtText as="p" tone="secondary">
+          Hover a row or Tab to it to slide its label; leave or press Esc to snap it back. Pick the mode in
+          the slide control. With reduced motion on, the label jumps to its end; the last row also shows
+          the full label in a tooltip, so it can be read without motion.
+        </DtText>
+        {slideGroups.map(group => (
+          <ul
+            key={group.qa}
+            role="menu"
+            aria-label={group.qa}
+            dir={group.dir}
+            className="d-w-350"
+            data-qa={group.qa}
+          >
+            {group.labels.map(label => (
+              <DtListItem key={label} role="menuitem" navigationType="tab">
+                <DtText slide={slide}>
+                  {label}
+                </DtText>
+              </DtListItem>
+            ))}
+          </ul>
+        ))}
+        <ul
+          role="menu"
+          aria-label="slide-tooltip"
+          className="d-w-350"
+          data-qa="slide-tooltip"
+        >
+          <SlideTooltipItem slide={slide} />
+        </ul>
+    </DtStack>
+  );
+}
+
 export const Default: Story = {
   render: args => <TextDefault {...args} />,
   args: {},
@@ -496,5 +579,24 @@ export const Variants: Story = {
   parameters: {
     controls: { disable: true },
     options: { showPanel: false },
+  },
+};
+
+export const Slide: Story = {
+  render: args => <TextSlide {...args} />,
+  args: { slide: 'once' },
+  parameters: {
+    controls: { include: ['slide'] },
+    // DtListItem sets aria-selected on menuitem rows, as in the Dropdown stories
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'aria-allowed-attr',
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
 };

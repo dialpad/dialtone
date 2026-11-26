@@ -1,7 +1,8 @@
-import type { ElementType } from 'react';
-import { render, screen } from '@testing-library/react';
+import type { ElementType, ReactNode } from 'react';
+import { act, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { DtText, resetHeadlineSemanticInfoFlag, type DtTextProps } from './Text';
+import { listenForEscape } from './modules/slide';
 import {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_NUMERIC_CLASS,
@@ -546,6 +547,422 @@ describe('DtText', () => {
       const wrapper = mountComponent();
 
       expect(wrapper.element()).not.toHaveClass(TEXT_ITALIC_CLASS);
+    });
+  });
+
+  describe('slide', () => {
+    // jsdom has no layout: the label is 300px wide in a 100px viewport, and the loop copy adds 324px
+    const mountSlide = ({ fits, slot, ...initialProps }: AnyTextProps & { fits?: boolean; slot?: ReactNode } = {}) => {
+      let props: AnyTextProps = initialProps;
+      let label = 'A very long device name';
+      const ui = () => (
+        <form>
+          <button type="button">
+            <DtText as="div" {...props}>{slot ?? label}</DtText>
+          </button>
+        </form>
+      );
+      const { container, rerender, unmount } = render(ui());
+      const viewport = container.querySelector<HTMLElement>('.d-text__slide')!;
+      const content = container.querySelector<HTMLElement>('.d-text__slide-content')!;
+      let width = fits ? 100 : 300;
+      let room = 100;
+      Object.defineProperty(content, 'scrollWidth', {
+        get: () => (content.querySelector('.d-text__slide-copy') ? width + 324 : width),
+      });
+      Object.defineProperty(content, 'clientWidth', { get: () => room });
+      Object.defineProperty(viewport, 'clientWidth', { get: () => room });
+      return {
+        form: container.querySelector('form')!,
+        text: container.querySelector<HTMLElement>('[data-qa="dt-text"]')!,
+        viewport,
+        button: container.querySelector('button')!,
+        offset: () => viewport.style.getPropertyValue('--_slide-offset'),
+        setWidth: (value: number) => { width = value; },
+        setRoom: (value: number) => { room = value; },
+        setProps: (next: AnyTextProps) => {
+          props = { ...props, ...next };
+          rerender(ui());
+        },
+        setLabel: (next: string) => {
+          label = next;
+          rerender(ui());
+        },
+        unmount,
+      };
+    };
+
+    const dispatch = (target: EventTarget, event: Event) => act(() => { target.dispatchEvent(event); });
+    const advance = (ms: number) => act(async () => { await vi.advanceTimersByTimeAsync(ms); });
+    const nextTick = () => act(async () => {});
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+      document.body.innerHTML = '';
+    });
+
+    it('slides cut text to its end while the button around it is hovered, and snaps back on leave', async () => {
+      const { text, viewport, button, offset, unmount } = mountSlide({ slide: true });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(500);
+
+      expect(viewport).toHaveClass('d-text__slide--moving');
+      expect(offset()).toBe('200px');
+      expect(text).not.toHaveAttribute('tabindex');
+      expect(button.hasAttribute('tabindex')).toBe(false);
+
+      await advance(10000);
+      expect(viewport).toHaveClass('d-text__slide--end');
+      expect(offset()).toBe('200px');
+
+      dispatch(button, new Event('pointerleave'));
+      await nextTick();
+
+      expect(viewport).not.toHaveClass('d-text__slide--end');
+      expect(offset()).toBe('');
+      unmount();
+    });
+
+    it('starts on keyboard focus only, keeps going while focus stays inside the host, and stops on Escape without swallowing it', async () => {
+      const { text, button, offset, unmount } = mountSlide({ slide: true });
+      const outsideListener = vi.fn();
+      document.addEventListener('keydown', outsideListener);
+
+      // focus from a pointer or script (jsdom never matches :focus-visible here)
+      act(() => button.focus());
+      await advance(500);
+      expect(offset()).toBe('');
+
+      act(() => button.blur());
+      vi.spyOn(button, 'matches').mockImplementation((selector: string) => selector === ':focus-visible');
+      act(() => button.focus());
+      await advance(500);
+      dispatch(text, new FocusEvent('focusout', { bubbles: true, relatedTarget: text }));
+      await nextTick();
+      expect(offset()).toBe('200px');
+
+      dispatch(button, new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      await nextTick();
+      expect(offset()).toBe('');
+      expect(outsideListener).toHaveBeenCalled();
+
+      document.removeEventListener('keydown', outsideListener);
+      unmount();
+    });
+
+    it('stops on Escape while only hovered, even when the focused control stops the event', async () => {
+      const { button, offset, unmount } = mountSlide({ slide: 'loop' });
+      const input = document.createElement('input');
+      input.addEventListener('keydown', (event) => event.stopPropagation());
+      document.body.appendChild(input);
+      input.focus();
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(600);
+      expect(offset()).not.toBe('');
+
+      dispatch(input, new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      await nextTick();
+      expect(offset()).toBe('');
+      unmount();
+    });
+
+    it('listenForEscape calls back on Escape until it is removed', () => {
+      const onEscape = vi.fn();
+      const remove = listenForEscape(document.body, onEscape);
+      const escape = () => document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+
+      escape();
+      remove();
+      escape();
+
+      expect(onEscape).toHaveBeenCalledTimes(1);
+    });
+
+    it('loop scrolls round with a copy, clears the start fade once the gap arrives, then snaps back and waits', async () => {
+      const { viewport, button, offset, unmount } = mountSlide({ slide: 'loop' });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(500);
+      const copy = viewport.querySelector('.d-text__slide-copy');
+      expect(copy).toHaveAttribute('aria-hidden', 'true');
+      expect(copy).toHaveAttribute('inert');
+      expect(copy?.textContent).toBe('A very long device name');
+      expect(viewport).toHaveClass('d-text__slide--loop');
+      expect(offset()).toBe('324px');
+      expect(viewport).not.toHaveClass('d-text__slide--loop-wrap');
+
+      // 5 s for 324px; the 300px label has fully left the start edge after about 4.6 s
+      await advance(4700);
+      expect(viewport).toHaveClass('d-text__slide--loop-wrap');
+
+      await advance(500);
+      expect(viewport.querySelector('.d-text__slide-copy')).toBeNull();
+      expect(offset()).toBe('0px');
+      expect(viewport).not.toHaveClass('d-text__slide--moving');
+
+      await advance(5000);
+      expect(viewport).toHaveClass('d-text__slide--moving');
+      unmount();
+    });
+
+    it('starts again from rest when the mode changes mid-sequence', async () => {
+      const { viewport, button, offset, setProps, unmount } = mountSlide({ slide: 'loop' });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(500);
+      expect(offset()).toBe('324px');
+
+      // Checked before the next microtask, where the restart measures again (Vue's nextTick)
+      setProps({ slide: 'once' });
+      expect(viewport.querySelector('.d-text__slide-copy')).toBeNull();
+      expect(viewport).not.toHaveClass('d-text__slide--moving');
+      expect(offset()).toBe('');
+
+      await advance(10500);
+      expect(viewport).toHaveClass('d-text__slide--end');
+      expect(offset()).toBe('200px');
+      unmount();
+    });
+
+    it('stays at rest when the mode changes while inactive', async () => {
+      const { offset, setProps, unmount } = mountSlide({ slide: 'once' });
+
+      setProps({ slide: 'loop' });
+      await advance(1000);
+
+      expect(offset()).toBe('');
+      unmount();
+    });
+
+    it('loop stops after three cycles and rests at the start', async () => {
+      const { viewport, button, offset, unmount } = mountSlide({ slide: 'loop' });
+
+      dispatch(button, new Event('pointerenter'));
+      // delay, then three cycles of a 5 s scroll (plus the fallback margin) and a 5 s hold
+      await advance(500 + 3 * 10100 + 6000);
+
+      expect(viewport).not.toHaveClass('d-text__slide--moving');
+      expect(offset()).toBe('0px');
+      expect(vi.getTimerCount()).toBe(0);
+      unmount();
+    });
+
+    it('loop copy adds no second form value for a named input in the label', async () => {
+      const { form, viewport, button, unmount } = mountSlide({
+        slide: 'loop',
+        slot: <>Pick <input name="choice" defaultValue="a" /></>,
+      });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(600);
+
+      expect(viewport.querySelector<HTMLInputElement>('.d-text__slide-copy input')?.disabled).toBe(true);
+      expect(new FormData(form).getAll('choice')).toEqual(['a']);
+      unmount();
+    });
+
+    it('loop copy leaves a checked radio in the label checked', async () => {
+      const { viewport, button, unmount } = mountSlide({
+        slide: 'loop',
+        slot: <>Pick <input type="radio" name="choice" value="a" defaultChecked /></>,
+      });
+      const radio = viewport.querySelector<HTMLInputElement>('.d-text__slide-content > input')!;
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(600);
+
+      expect(viewport.querySelector('.d-text__slide-copy input')).not.toBeNull();
+      expect(radio.checked).toBe(true);
+      unmount();
+    });
+
+    it('loop stops when the label changes to fit during a hold', async () => {
+      const { viewport, button, offset, setWidth, unmount } = mountSlide({ slide: 'loop' });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(500 + 5200);
+      setWidth(100);
+      await advance(6000);
+
+      expect(viewport).not.toHaveClass('d-text__slide--moving');
+      expect(offset()).toBe('0px');
+      unmount();
+    });
+
+    it('starts again from rest when the label changes while active', async () => {
+      const { viewport, button, offset, setWidth, setLabel, unmount } = mountSlide({ slide: true });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(4000);
+      expect(viewport).toHaveClass('d-text__slide--end');
+
+      setWidth(40);
+      setLabel('Short');
+      await advance(1000);
+
+      expect(viewport).not.toHaveClass('d-text__slide--end');
+      expect(offset()).toBe('');
+      unmount();
+    });
+
+    it('keeps going when the label changes at the same width, and slides again when a fitting label grows', async () => {
+      const { viewport, button, offset, setWidth, setLabel, unmount } = mountSlide({ slide: true });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(4000);
+      setLabel('A very long device name.');
+      await advance(100);
+      expect(viewport).toHaveClass('d-text__slide--end');
+
+      setWidth(40);
+      setLabel('Short');
+      await advance(1000);
+      expect(offset()).toBe('');
+
+      setWidth(300);
+      setLabel('A very long device name again');
+      await advance(600);
+      expect(viewport).toHaveClass('d-text__slide--moving');
+      unmount();
+    });
+
+    it('ignores a resize caused by the loop copy while it scrolls', async () => {
+      let onResize = () => {};
+      vi.stubGlobal('ResizeObserver', class {
+        constructor (callback: () => void) { onResize = callback; }
+        observe () {}
+        disconnect () {}
+      });
+      const { viewport, button, offset, setRoom, unmount } = mountSlide({ slide: 'loop' });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(600);
+      setRoom(120);
+      act(() => onResize());
+      await advance(100);
+
+      expect(viewport).toHaveClass('d-text__slide--moving');
+      expect(offset()).toBe('324px');
+      unmount();
+    });
+
+    it('starts again from rest when the viewport widens until the label fits', async () => {
+      let onResize = () => {};
+      vi.stubGlobal('ResizeObserver', class {
+        constructor (callback: () => void) { onResize = callback; }
+        observe () {}
+        disconnect () {}
+      });
+      const { viewport, button, offset, setRoom, unmount } = mountSlide({ slide: true });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(4000);
+      expect(viewport).toHaveClass('d-text__slide--end');
+
+      setRoom(400);
+      act(() => onResize());
+      await advance(1000);
+
+      expect(viewport).not.toHaveClass('d-text__slide--end');
+      expect(offset()).toBe('');
+      unmount();
+    });
+
+    it('rests at the end as soon as the transition ends', async () => {
+      const { viewport, button, unmount } = mountSlide({ slide: true });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(600);
+      const transitionEnd = new Event('transitionend');
+      Object.defineProperty(transitionEnd, 'propertyName', { value: 'transform' });
+      dispatch(viewport.querySelector('.d-text__slide-content')!, transitionEnd);
+      await nextTick();
+
+      expect(viewport).toHaveClass('d-text__slide--end');
+      unmount();
+    });
+
+    it.each(['-1', '0'])('does not treat a focusable region (tabindex="%s") as the host', async (tabindex) => {
+      const { container, unmount } = render(
+        <div tabIndex={Number(tabindex)}><DtText slide>A very long device name</DtText></div>,
+      );
+      const region = container.firstElementChild!;
+      const text = container.querySelector('[data-qa="dt-text"]')!;
+      const viewport = container.querySelector('.d-text__slide')!;
+      const content = container.querySelector('.d-text__slide-content')!;
+      Object.defineProperty(content, 'scrollWidth', { value: 300 });
+      Object.defineProperty(content, 'clientWidth', { value: 100 });
+
+      dispatch(region, new Event('pointerenter'));
+      await advance(600);
+      expect(viewport).not.toHaveClass('d-text__slide--moving');
+
+      dispatch(text, new Event('pointerenter'));
+      await advance(600);
+      expect(viewport).toHaveClass('d-text__slide--moving');
+      unmount();
+    });
+
+    it('leaves text that fits alone', async () => {
+      const { viewport, button, unmount } = mountSlide({ slide: true, fits: true });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(5000);
+
+      expect([...viewport.classList]).toEqual(['d-text__slide']);
+      unmount();
+    });
+
+    it.each(['once', 'loop'] as const)('with reduced motion, %s jumps to the end once and stays', async (mode) => {
+      vi.stubGlobal('matchMedia', (query: string) => ({ matches: query.includes('reduce') }));
+      const { viewport, button, offset, unmount } = mountSlide({ slide: mode });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(600);
+      expect(viewport).toHaveClass('d-text__slide--end');
+
+      await advance(20000);
+      expect(viewport).toHaveClass('d-text__slide--end');
+      expect(offset()).toBe('200px');
+      expect(viewport.querySelector('.d-text__slide-copy')).toBeNull();
+      unmount();
+    });
+
+    it('leaves no timers behind when unmounted mid-movement, and turning slide off removes it', async () => {
+      const { text, button, setProps, unmount } = mountSlide({ slide: true });
+
+      dispatch(button, new Event('pointerenter'));
+      await advance(600);
+      setProps({ slide: false });
+
+      expect(text.querySelector('.d-text__slide')).toBeNull();
+      expect(text).not.toHaveClass('d-text--slide');
+      expect(vi.getTimerCount()).toBe(0);
+
+      setProps({ slide: true });
+      expect(text.querySelector('.d-text__slide')).not.toBeNull();
+      dispatch(button, new Event('pointerenter'));
+      unmount();
+      expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it('warns once that it ignores maxLines, and still slides', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      const first = mountSlide({ slide: true, maxLines: 2 });
+      const second = mountSlide({ slide: true, maxLines: 2 });
+
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      expect(first.text).toHaveClass('d-text--slide');
+      expect(first.text).not.toHaveClass(TEXT_LINE_CLAMP_CLASS);
+      first.unmount();
+      second.unmount();
     });
   });
 });
