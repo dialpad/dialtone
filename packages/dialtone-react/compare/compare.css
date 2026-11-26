@@ -16,39 +16,409 @@ body {
 .compare__panes {
   display: grid;
   flex: 1;
-  grid-template-columns: 1fr 1fr;
+  /* Two equal columns whatever their content's minimum width. The divider is
+     the 1px gap, showing this background: a border on the second pane would
+     make its frame 1px narrower than the first. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
   min-block-size: 0;
+  background: var(--dt-color-border-default);
 }
 
 .compare__pane {
   display: flex;
   flex-direction: column;
   min-inline-size: 0;
+  background: var(--dt-color-surface-primary);
 }
 
-.compare__pane + .compare__pane {
-  border-inline-start: 1px solid var(--dt-color-border-default);
-}
-
+/* One line at a fixed height in both panes, whatever their links and the sync
+   chip say, so both frames start at the same height. */
 .compare__pane-header {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
   gap: 8px;
-  padding: 6px 12px;
+  box-sizing: border-box;
+  block-size: 32px;
+  padding: 0 12px;
   border-block-end: 1px solid var(--dt-color-border-subtle);
   background: var(--dt-color-surface-secondary);
   font-size: var(--dt-font-size-100, 12px);
+  white-space: nowrap;
+  overflow: hidden;
 }
 
+/* In a narrow pane, the link gives way before the sync chip. */
 .compare__pane-header a {
+  overflow: hidden;
+  min-inline-size: 0;
+  margin-inline-start: auto;
   color: var(--dt-color-foreground-secondary);
+  text-overflow: ellipsis;
+}
+
+/* The frame's box, which the phantom cursor is drawn in. */
+.compare__viewport {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-block-size: 0;
+  overflow: hidden;
 }
 
 .compare__frame {
   flex: 1;
   inline-size: 100%;
   border: 0;
+}
+
+/* Sync mode's status, in the Vue pane's header. */
+.compare__sync {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border: 1px solid var(--dt-color-border-default);
+  border-radius: 999px;
+  color: var(--dt-color-foreground-secondary);
+  line-height: 18px;
+}
+
+.compare__sync::before {
+  flex: none;
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  content: '';
+}
+
+.compare__sync[data-tone='on'] {
+  border-color: var(--dt-color-border-success);
+  color: var(--dt-color-foreground-success);
+}
+
+.compare__sync[data-tone='off'] {
+  border-color: var(--dt-color-border-warning);
+  color: var(--dt-color-foreground-warning);
+}
+
+/* The phantom cursor (SyncCursor.tsx): where the real pointer in the other
+   frame is. A 0×0 box whose position is the hotspot. Pointer coordinates are
+   physical (clientX, clientY), so it's placed from the top left. Its colours
+   don't follow the theme: a white outline and a shadow keep it readable on
+   light and dark stories alike, and the tints are dark enough for white
+   label text. */
+.compare-cursor {
+  --compare-cursor-tint: oklch(0.43 0.105 156); /* Vue's green */
+
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 1;
+  inline-size: 0;
+  block-size: 0;
+}
+
+.compare-cursor[data-side='react'] {
+  --compare-cursor-tint: oklch(0.49 0.205 261); /* React's blue */
+}
+
+.compare-cursor__pointer {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  overflow: visible;
+  filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / 55%));
+}
+
+.compare-cursor__arrow {
+  fill: var(--compare-cursor-tint);
+  stroke: white;
+  stroke-linejoin: round;
+  stroke-width: 1.5px;
+  paint-order: stroke;
+  transform-origin: 0 0;
+  transition: transform 80ms ease-out;
+}
+
+/* Pressed: the arrow shrinks a little and a ring shows around its tip. */
+.compare-cursor__press {
+  fill: none;
+  stroke: var(--compare-cursor-tint);
+  stroke-width: 2px;
+  opacity: 0;
+  transition: opacity 80ms ease-out;
+}
+
+/* A click: a ring that spreads from the tip and fades (SyncCursor keeps it for
+   RIPPLE_MS). Under reduced motion it doesn't move: a static ring, then gone. */
+.compare-cursor__ripple {
+  fill: none;
+  stroke: var(--compare-cursor-tint);
+  stroke-width: 2px;
+  transform-origin: 0 0;
+  animation: compare-cursor-ripple 600ms ease-out both;
+}
+
+@keyframes compare-cursor-ripple {
+  from {
+    opacity: 0.9;
+    transform: scale(0.3);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+.compare-cursor[data-pressed] .compare-cursor__arrow {
+  transform: scale(0.85);
+}
+
+.compare-cursor[data-pressed] .compare-cursor__press {
+  opacity: 1;
+}
+
+.compare-cursor__label {
+  position: absolute;
+  inset-block-start: 22px;
+  inset-inline-start: 10px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: var(--compare-cursor-tint);
+  box-shadow: 0 0 0 1px white, 0 1px 3px rgb(0 0 0 / 45%);
+  color: white;
+  font-family: var(--dt-font-family-body, system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+/* Near the frame's end edges, the label goes to the other side of the arrow. */
+.compare-cursor[data-flip-x] .compare-cursor__label {
+  inset-inline-end: 6px;
+  inset-inline-start: auto;
+}
+
+.compare-cursor[data-flip-y] .compare-cursor__label {
+  inset-block-start: auto;
+  inset-block-end: 6px;
+}
+
+/* High contrast (the Contrast toolbar): black and white, a thicker outline. */
+.compare-cursor[data-contrast='high'] {
+  --compare-cursor-tint: black;
+}
+
+.compare-cursor[data-contrast='high'] .compare-cursor__arrow {
+  stroke-width: 2.5px;
+}
+
+.compare-cursor[data-contrast='high'] .compare-cursor__press {
+  stroke: white;
+  stroke-width: 3px;
+}
+
+.compare-cursor[data-contrast='high'] .compare-cursor__label {
+  box-shadow: 0 0 0 2px white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compare-cursor__arrow,
+  .compare-cursor__press {
+    transition: none;
+  }
+
+  .compare-cursor__ripple {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+/* The scroll cue (SyncCue.tsx): a thin bar down the frame's end edge, tinted for
+   the side whose scroll it replays, which fades out over its second. */
+.compare-cue {
+  --compare-cursor-tint: oklch(0.43 0.105 156);
+
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 6px;
+  background: var(--compare-cursor-tint);
+  box-shadow: 0 0 0 1px white;
+  animation: compare-cue-fade 1s ease-out both;
+}
+
+.compare-cue[data-side='react'] {
+  --compare-cursor-tint: oklch(0.49 0.205 261);
+}
+
+.compare-cue__chevron {
+  position: absolute;
+  inset-inline-end: 8px;
+  padding: 3px 4px;
+  border-radius: 4px;
+  background: var(--compare-cursor-tint);
+  box-sizing: content-box;
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8px;
+}
+
+.compare-cue[data-direction='up'] .compare-cue__chevron {
+  inset-block-start: 10px;
+}
+
+.compare-cue[data-direction='down'] .compare-cue__chevron {
+  inset-block-end: 10px;
+}
+
+@keyframes compare-cue-fade {
+  0%,
+  60% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Under reduced motion the cue doesn't fade: it stays as it is for its second. */
+@media (prefers-reduced-motion: reduce) {
+  .compare-cue {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
+/* The fake focus ring (SyncFocusRing.tsx): where focus would be in the frame
+   that isn't the source. Dashed and magenta, so it isn't taken for a Dialtone
+   focus ring (solid, blue or orange), with a white line on both sides so it
+   reads on light and dark stories alike. Rects are physical, so it's placed
+   from the top left like the cursor. */
+.compare-ring {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  border: 2px dashed oklch(0.56 0.25 340);
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px white, inset 0 0 0 1px white;
+}
+
+.compare-ring[data-contrast='high'] {
+  border-color: black;
+  box-shadow: 0 0 0 2px white, inset 0 0 0 2px white;
+}
+
+/* The mirrored-keys overlay (SyncKeys.tsx): the keys replayed in this frame,
+   at its bottom start corner, each for 1.5s. Dark chips with a white outline
+   read on any story; the start edge is tinted for the side they came from. */
+.compare-keys {
+  --compare-cursor-tint: oklch(0.43 0.105 156);
+
+  position: absolute;
+  inset-block-end: 12px;
+  inset-inline-start: 12px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-inline-size: calc(100% - 24px);
+}
+
+.compare-keys[data-side='react'] {
+  --compare-cursor-tint: oklch(0.49 0.205 261);
+}
+
+.compare-keys__key {
+  padding: 2px 8px;
+  border-inline-start: 4px solid var(--compare-cursor-tint);
+  border-radius: 4px;
+  background: rgb(0 0 0 / 80%);
+  box-shadow: 0 0 0 1px white;
+  color: white;
+  font-family: var(--dt-font-family-mono, monospace);
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  animation: compare-keys-fade 1.5s ease-out both;
+}
+
+.compare-keys__key[data-typing] {
+  font-family: var(--dt-font-family-body, system-ui, sans-serif);
+  font-style: italic;
+}
+
+.compare-keys__count {
+  opacity: 0.75;
+}
+
+@keyframes compare-keys-fade {
+  0%,
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Under reduced motion a key doesn't fade: it stays as it is for its time. */
+@media (prefers-reduced-motion: reduce) {
+  .compare-keys__key {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .compare-cue,
+  .compare-cue__chevron {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
+  .compare-ring {
+    forced-color-adjust: none;
+    border-color: Highlight;
+    box-shadow: none;
+  }
+
+  .compare-keys__key {
+    forced-color-adjust: none;
+    border-color: Highlight;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .compare-cursor__arrow {
+    fill: CanvasText;
+    stroke: Canvas;
+  }
+
+  .compare-cursor__press {
+    stroke: Highlight;
+  }
+
+  .compare-cursor__label {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
 }
 
 .compare__empty {

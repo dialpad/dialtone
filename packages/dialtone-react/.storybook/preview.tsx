@@ -17,6 +17,7 @@ import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 import { setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 import type { BrandTheme, ContrastTheme, Mode } from '@dialpad/dialtone-tokens/themes/config';
 import { createThemeController } from '../../dialtone-vue/.storybook/theme-controller.js';
+import { installCompareSyncAgent } from '../../dialtone-vue/.storybook/compare-sync-agent.js';
 import { BRAND_IDS, globalTypes, readStoredDarkMode } from './shared';
 import type { BrandId } from './shared';
 
@@ -79,6 +80,10 @@ channel.on(DARK_MODE_EVENT_NAME, (isDark: boolean) => {
 
 // Initialize theme on load with current dark mode state
 updateTheme(currentDarkMode, currentContrast === 'high', currentBrandTheme);
+
+// The comparison's sync mode, as in Vue's preview: the same agent, inert unless
+// the comparison frames this preview and turns sync on.
+installCompareSyncAgent();
 
 const preview: Preview = {
   globalTypes,

@@ -1,14 +1,18 @@
 // Vue and React side by side: one story id, the same URL args and the same
 // theme and contrast globals in both frames. Dark mode isn't a global in
 // either Storybook (it's the dark-mode addon's event), so it's posted into
-// each frame once it renders.
-import { useEffect, useRef, useState } from 'react';
+// each frame once it renders. With the compareSync global on, the pointer,
+// drags, scrolling, keys, typed text and focus in one frame are mirrored in the
+// other (sync.ts).
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import type { RefObject } from 'react';
 import { addons } from 'storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 import { ArgControls } from './ArgControls';
 import type { ArgType } from './ArgControls';
 import {
   fetchStories,
+  frameOrigin,
   iframeUrl,
   isPublished,
   overridesParam,
@@ -18,6 +22,12 @@ import {
   where,
 } from './frames';
 import type { Args, IndexedStory, Side } from './frames';
+import { IDLE_STATUS, boxOf, createSyncRelay, frameOffset, syncChip } from './sync';
+import type { ReactStatus, RelayStatus, SyncChip, SyncRelay } from './sync';
+import { SyncCue } from './SyncCue';
+import { SyncCursor } from './SyncCursor';
+import { SyncFocusRing } from './SyncFocusRing';
+import { SyncKeys } from './SyncKeys';
 import { readStoredDarkMode } from '../.storybook/shared';
 
 interface Prepared {
@@ -26,8 +36,6 @@ interface Prepared {
   argTypes: Record<string, ArgType>;
   parameters?: { controls?: { disable?: boolean } };
 }
-
-type ReactStatus = 'checking' | 'ported' | 'missing' | 'unreachable';
 
 interface CompareFrameProps {
   storyId: string;
@@ -64,9 +72,21 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
   const isDark = useDarkMode();
   const vueFrame = useRef<HTMLIFrameElement>(null);
   const reactFrame = useRef<HTMLIFrameElement>(null);
+  // The boxes around the frames, which the phantom cursor is drawn in.
+  const vueViewport = useRef<HTMLDivElement>(null);
+  const reactViewport = useRef<HTMLDivElement>(null);
   // The message listener is registered once, so it reads the mode through a
   // ref; the dark-mode effect below keeps it current.
   const isDarkRef = useRef(isDark);
+  const syncOn = globals.compareSync === 'on';
+  const [relayStatus, setRelayStatus] = useState<RelayStatus>(IDLE_STATUS);
+  const [relay] = useState(() => createSyncRelay({
+    post: (side, message) => {
+      const frame = side === 'vue' ? vueFrame.current : reactFrame.current;
+      frame?.contentWindow?.postMessage(message, frameOrigin(side));
+    },
+    onStatus: setRelayStatus,
+  }));
 
   // React's Storybook can come up after this page, or restart, and a port adds
   // its story while this page is open: until the index answers with this story,
@@ -97,6 +117,21 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
     };
   }, [storyId, title, vueImportPath]);
 
+  // Sync needs the story on both sides. Off, or without React's story, the
+  // frames get nothing: their agents stay inert.
+  const canSync = syncOn && reactStatus === 'ported';
+  useEffect(() => {
+    if (!canSync) return;
+    relay.start();
+    // Until both answer, say hello again every second (a frame can load
+    // after this runs), and mark one that takes too long.
+    const timer = setInterval(relay.tick, 1000);
+    return () => {
+      clearInterval(timer);
+      relay.stop();
+    };
+  }, [canSync, relay]);
+
   useEffect(() => {
     const sideOf = (source: MessageEventSource | null): Side | null =>
       source === vueFrame.current?.contentWindow ? 'vue'
@@ -105,8 +140,11 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
 
     const onMessage = (message: MessageEvent) => {
       const side = sideOf(message.source);
-      const event = side && parseChannelMessage(message.data);
-      if (!side || !event) return;
+      // The sync agent's messages are objects with their own key, which
+      // parseChannelMessage ignores anyway; the relay takes them first.
+      if (!side || relay.receive(side, message.data)) return;
+      const event = parseChannelMessage(message.data);
+      if (!event) return;
       if (event.type === 'storyPrepared') {
         const prepared = event.args[0] as Prepared;
         // initialArgs and argTypes don't depend on URL args, so Vue's first
@@ -116,11 +154,13 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
       }
       if (event.type === 'storyRendered') {
         postChannelEvent(message.source as Window, DARK_MODE_EVENT_NAME, [isDarkRef.current]);
+        // The preview, and so its agent, is up: the surest time for a handshake.
+        relay.connect(side);
       }
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, []);
+  }, [relay]);
 
   useEffect(() => {
     isDarkRef.current = isDark;
@@ -148,27 +188,57 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
     if (overridesParam(next) !== args) setApplied({});
   };
   const showControls = vue && !vue.parameters?.controls?.disable;
+  const chip = syncOn ? syncChip(reactStatus, relayStatus) : null;
 
-  const pane = (side: Side, label: string) => (
-    <div className="compare__pane">
-      <div className="compare__pane-header">
-        <strong>{label}</strong>
-        <a href={storybookUrl(side, storyId, args, globals)} target="_blank" rel="noreferrer">
-          Open in {label} Storybook ({where(side)})
-        </a>
+  const pane = (side: Side, label: string) => {
+    const frame = side === 'vue' ? vueFrame : reactFrame;
+    const viewport = side === 'vue' ? vueViewport : reactViewport;
+    return (
+      <div className="compare__pane">
+        <div className="compare__pane-header">
+          <strong>{label}</strong>
+          {side === 'vue' && chip && <SyncStatus chip={chip} />}
+          <a href={storybookUrl(side, storyId, args, globals)} target="_blank" rel="noreferrer">
+            Open in {label} Storybook ({where(side)})
+          </a>
+        </div>
+        {side === 'react' && reactStatus !== 'ported'
+          ? <NotPorted status={reactStatus} storyId={storyId} lookalikes={lookalikes} />
+          : (
+            <div ref={viewport} className="compare__viewport">
+              <iframe
+                ref={frame}
+                className="compare__frame"
+                title={`${label}: ${storyId}`}
+                src={iframeUrl(side, storyId, args, globals)}
+                // A new document (args reload both frames) has a new, inert agent.
+                onLoad={() => relay.frameLoaded(side)}
+              />
+              {canSync && (
+                <MirroredFocus
+                  relay={relay}
+                  side={side}
+                  frame={frame}
+                  viewport={viewport}
+                  highContrast={globals.contrast === 'high'}
+                />
+              )}
+              {canSync && (
+                <MirroredCursor
+                  relay={relay}
+                  side={side}
+                  frame={frame}
+                  viewport={viewport}
+                  highContrast={globals.contrast === 'high'}
+                />
+              )}
+              {canSync && <ScrollCue relay={relay} side={side} />}
+              {canSync && <MirroredKeys relay={relay} side={side} />}
+            </div>
+          )}
       </div>
-      {side === 'react' && reactStatus !== 'ported'
-        ? <NotPorted status={reactStatus} storyId={storyId} lookalikes={lookalikes} />
-        : (
-          <iframe
-            ref={side === 'vue' ? vueFrame : reactFrame}
-            className="compare__frame"
-            title={`${label}: ${storyId}`}
-            src={iframeUrl(side, storyId, args, globals)}
-          />
-        )}
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="compare" data-story-id={storyId}>
@@ -190,6 +260,69 @@ function CompareHost ({ storyId, title, vueImportPath, globals }: CompareFramePr
         />
       )}
     </div>
+  );
+}
+
+// The scroll cue over this side's frame, subscribed to the relay like the cursor.
+function ScrollCue ({ relay, side }: { relay: SyncRelay; side: Side }) {
+  const cue = useSyncExternalStore(relay.subscribeCue, relay.getCue);
+  return <SyncCue cue={cue} side={side} />;
+}
+
+// The keys mirrored into this side's frame.
+function MirroredKeys ({ relay, side }: { relay: SyncRelay; side: Side }) {
+  const keys = useSyncExternalStore(relay.subscribeKeys, relay.getKeys);
+  return <SyncKeys keys={keys} side={side} />;
+}
+
+// The fake focus ring over this side's frame, while it mirrors the other's focus.
+function MirroredFocus ({ relay, side, frame, viewport, highContrast }: {
+  relay: SyncRelay;
+  side: Side;
+  frame: RefObject<HTMLIFrameElement | null>;
+  viewport: RefObject<HTMLDivElement | null>;
+  highContrast: boolean;
+}) {
+  const ring = useSyncExternalStore(relay.subscribeRings, relay.getRings)[side];
+  if (!ring || !frame.current || !viewport.current) return null;
+  return (
+    <SyncFocusRing
+      mirrors={ring.mirrors}
+      rect={ring.rect}
+      offset={frameOffset(boxOf(frame.current), boxOf(viewport.current))}
+      highContrast={highContrast}
+    />
+  );
+}
+
+function SyncStatus ({ chip }: { chip: SyncChip }) {
+  return (
+    <span className="compare__sync" data-tone={chip.tone} title={chip.title}>{chip.text}</span>
+  );
+}
+
+// The phantom cursor over this side's frame, when the real pointer is in the
+// other. It subscribes to the relay itself, so a move re-renders only it.
+function MirroredCursor ({ relay, side, frame, viewport, highContrast }: {
+  relay: SyncRelay;
+  side: Side;
+  frame: RefObject<HTMLIFrameElement | null>;
+  viewport: RefObject<HTMLDivElement | null>;
+  highContrast: boolean;
+}) {
+  const cursor = useSyncExternalStore(relay.subscribeCursor, relay.getCursor);
+  if (cursor?.over !== side || !frame.current || !viewport.current) return null;
+  const offset = frameOffset(boxOf(frame.current), boxOf(viewport.current));
+  return (
+    <SyncCursor
+      mirrors={cursor.mirrors}
+      x={offset.x + cursor.x}
+      y={offset.y + cursor.y}
+      pressed={cursor.pressed}
+      click={cursor.click}
+      bounds={{ width: viewport.current.clientWidth, height: viewport.current.clientHeight }}
+      highContrast={highContrast}
+    />
   );
 }
 
