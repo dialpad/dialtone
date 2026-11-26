@@ -33,7 +33,7 @@ Here's an overview of important properties and the values they need/can have:
 
 - title `(required)`: Used as the page title, and also as the component name for [Components overview page].
 - shortTitle `(optional)`: This property is used to fix linking issues on [Components overview page] when the title is different from the component name.
-- description `(optional)`: Used as the page subtitle and in the page metadata.
+- description `(optional)`: Used as the page subtitle and in the page metadata. For component pages, follow [Component page descriptions](#component-page-descriptions).
 - status `(optional)`: CSS Component status, used to display a badge on [Components overview page] and
 also to define the component status on [Components status page],
   - Status options available: `['wip', 'planned', 'new', 'ready', null]`
@@ -48,6 +48,21 @@ also to define the component status on [Components status page],
   - Status options available: `['wip', 'planned', null]`
   if figma is not defined, the component will have a "N/A" Figma status on [Components status page].
 - no_preview `(optional)`: If defined, the page will have no preview section at the top.
+
+### Component page descriptions
+
+This is the canonical rule for the `description` frontmatter of component pages. It applies only to that field: `ai_summary` in the AI docs and Storybook MDX descriptions keep their own rules.
+
+Write one short, consumer-facing statement of the component's role and primary purpose, preferably as "[kind of UI] for [primary task]."
+
+- Example: `Control for selecting a value or range along a scale.`
+- Describe the user's task, not the internal data representation. Do not imply numeric-only presentation or value types the component does not accept.
+- Use sentence case and end with a period.
+- Omit the component name (the page title already shows it), gesture instructions, usage recommendations, API details, and promotional language.
+- Add a brief qualifier only when it distinguishes similar components, and keep it when shortening. For example, Prose is "Typography for rendered native HTML…" and Text is "Semantic typography for individual text elements authored in Vue."
+- Put gestures, precision advice, and other guidance in the page's Usage section.
+
+**Length.** Aim for 6-12 words, roughly 40-80 characters, and stay under 90 characters where practical. Treat this as editorial guidance. Review longer descriptions on their merits.
 
 [Components overview page]: https://dialtone.dialpad.com/components/
 [Components status page]: https://dialtone.dialpad.com/components/status/

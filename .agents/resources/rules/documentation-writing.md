@@ -14,6 +14,12 @@ Apply to `packages/dialtone-docs/**` and user-facing documentation.
 - Avoid placeholders and invented APIs.
 - Keep public docs free of private Dialpad context.
 
+## Component Page Descriptions
+
+For the `description` frontmatter of a VuePress component page, follow the
+[component page description rule](../../../apps/dialtone-documentation/.github/CONTRIBUTING.md#component-page-descriptions).
+It is the single source for purpose, voice, and the advisory length target.
+
 ## Documentation Site Examples
 
 For live VuePress examples, use a `vue demo` fence:

@@ -7,6 +7,7 @@ Apply to `apps/dialtone-documentation/**`.
 - VuePress pages live under `apps/dialtone-documentation/docs/`.
 - Sidebar navigation lives in `_data/site-nav.json`.
 - Page links and frontmatter should follow existing local examples.
+- For a component page's `description`, follow the [component page description rule](../../../apps/dialtone-documentation/.github/CONTRIBUTING.md#component-page-descriptions).
 
 ## Updates
 

@@ -17,6 +17,8 @@ VuePress 2 site at `apps/dialtone-documentation/docs/`. Pages organized under `c
 
 Every page needs: `title`, `description`, `status` (ready | planned | deprecated | new | beta). `new` and `beta` render a badge (see `docs/.vuepress/theme/constants/statusBadges.js`) — use `new` for a recently-shipped component, `ready` once it's no longer newsworthy. Optional: `thumb`, `image`, `storybook`, `figma_url`.
 
+For a component page’s `description`, follow the [component page description guideline](../../apps/dialtone-documentation/.github/CONTRIBUTING.md#component-page-descriptions).
+
 ## Global Components
 
 Components registered in `docs/.vuepress/client.js` are available in all markdown pages without imports. Check that file for the current list.
