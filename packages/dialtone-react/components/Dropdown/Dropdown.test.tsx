@@ -208,10 +208,10 @@ describe('DtDropdown Tests', () => {
       updateWrapper();
     });
 
-    // The menu's Close button is the stop between the last and the first row.
+    // The built-in Close is not part of arrow, Home or End navigation.
     const close = () => screen.getByTestId('dt-sr-only-close-button');
 
-    it('moves the highlight and focus with the arrow keys, passing through Close at the ends', async () => {
+    it('moves the highlight and focus with the arrow keys, wrapping at the ends', async () => {
       await opened();
 
       pressOnList('ArrowDown');
@@ -223,44 +223,48 @@ describe('DtDropdown Tests', () => {
       pressOnList('ArrowUp');
       expect(items()[0]).toHaveFocus();
       pressOnList('ArrowUp');
-      expect(close()).toHaveFocus();
-      fireEvent.keyDown(close(), { code: 'ArrowUp', key: 'ArrowUp' });
       expect(items()[2]).toHaveFocus();
       pressOnList('ArrowDown');
-      expect(close()).toHaveFocus();
-      fireEvent.keyDown(close(), { code: 'ArrowDown', key: 'ArrowDown' });
       expect(items()[0]).toHaveFocus();
     });
 
-    it('jumps with Home, and to Close with End', async () => {
+    it('jumps with Home, and to the last item with End', async () => {
       await opened();
 
       pressOnList('End');
-      expect(close()).toHaveFocus();
+      expect(items()[2]).toHaveFocus();
       pressOnList('Home');
       expect(items()[0]).toHaveFocus();
     });
 
-    it('does not report highlighting the last item or Close, as Vue', async () => {
+    it('does not report highlighting the last item, as Vue', async () => {
       await opened();
 
       pressOnList('End');
-      expect(MOCK_HIGHLIGHT_STUB).not.toHaveBeenCalled();
-      fireEvent.keyDown(close(), { code: 'ArrowUp', key: 'ArrowUp' });
       expect(items()[2]).toHaveFocus();
       expect(MOCK_HIGHLIGHT_STUB).not.toHaveBeenCalled();
       pressOnList('Home');
       expect(MOCK_HIGHLIGHT_STUB).toHaveBeenCalledWith(0);
     });
 
-    it('calls onEndOfList instead of moving to Close when given', async () => {
+    it('returns arrows from a focused screen-reader Close to the rows', async () => {
+      await opened();
+
+      close().focus();
+      fireEvent.keyDown(close(), { code: 'ArrowDown', key: 'ArrowDown' });
+      expect(items()[0]).toHaveFocus();
+      close().focus();
+      fireEvent.keyDown(close(), { code: 'ArrowUp', key: 'ArrowUp' });
+      expect(items()[2]).toHaveFocus();
+    });
+
+    it('calls onEndOfList instead of wrapping to the first item when given', async () => {
       const onEndOfList = vi.fn();
       mockAttrs = { onEndOfList };
       updateWrapper();
       await opened();
 
       pressOnList('End');
-      fireEvent.keyDown(close(), { code: 'ArrowUp', key: 'ArrowUp' });
       pressOnList('ArrowDown');
 
       expect(onEndOfList).toHaveBeenCalledTimes(1);
@@ -444,7 +448,7 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     vi.restoreAllMocks();
   });
 
-  it('preserves consumer popup classes while scoping keyboard Close visibility', async () => {
+  it('preserves consumer popup classes alongside the arrow-key menu class', async () => {
     // React has no kebab-case attribute alias: both of Vue's class bindings are one dialogClass.
     const content = mountMenu({}, undefined, undefined, {
       dialogClass: [['consumer-kebab', { 'consumer-active': true }], { 'consumer-camel': true, 'consumer-inactive': false }],
@@ -465,14 +469,10 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(content).not.toHaveClass('consumer-kebab');
   });
 
-  it.each([false, true])('navigates mixed menu roles and Close with showCloseButton=%s', async (showCloseButton) => {
-    const content = mountMenu({ showCloseButton });
+  it('navigates mixed menu roles without changing the checked row', async () => {
+    mountMenu();
     await settle();
     const list = dropdownList();
-    const close = screen.getByTestId(showCloseButton ? 'dt-popover-close' : 'dt-sr-only-close-button');
-    expect(close).toHaveAttribute('role', 'menuitem');
-    expect(content.contains(close)).toBe(true);
-    expect(list.contains(close)).toBe(false);
     const send = (key: string, code = key) => fireEvent.keyDown(list, { key, code });
     send('ArrowDown');
     expect(document.activeElement?.id).toBe('radio:one');
@@ -480,28 +480,31 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(document.activeElement?.id).toBe('action');
     send('b', 'KeyB');
     expect(document.activeElement?.id).toBe('radio two');
-    expect(highlight.mock.calls).toEqual([[0], [1]]);
     send('End');
-    expect(document.activeElement).toBe(close);
-    expect(highlight.mock.calls).toEqual([[0], [1]]);
-    fireEvent.keyDown(close, { key: 'ArrowUp', code: 'ArrowUp' });
     expect(document.activeElement?.id).toBe('radio two');
     send('ArrowDown');
-    expect(document.activeElement).toBe(close);
-    fireEvent.keyDown(close, { key: 'ArrowDown', code: 'ArrowDown' });
     expect(document.activeElement?.id).toBe('radio:one');
     send('ArrowUp');
-    expect(document.activeElement).toBe(close);
-    fireEvent.keyDown(close, { key: 'Home', code: 'Home' });
+    expect(document.activeElement?.id).toBe('radio two');
+    send('Home');
     expect(document.activeElement?.id).toBe('radio:one');
     expect(screen.getByTestId('radio-one')).toHaveAttribute('aria-checked', 'true');
     expect(screen.getByTestId('radio-two')).toHaveAttribute('aria-checked', 'false');
-    expect(highlight.mock.calls).toEqual([[0], [1], [0], [0]]);
-    expect(actions).toEqual([]);
-    fireEvent.keyDown(close, { key: 'Escape', code: 'Escape' });
+  });
+
+  // Assistive technology can move focus onto the hidden Close; arrows return to the rows from there.
+  it('returns arrows from a focused screen-reader Close to the first and last rows', async () => {
+    const content = mountMenu();
     await settle();
-    expect(trigger()).toHaveAttribute('aria-expanded', 'false');
-    expect(document.activeElement).toBe(trigger());
+    const close = within(content).getByTestId('dt-sr-only-close-button');
+    // Start each press from the middle row so the result comes from Close, not from the row position.
+    for (const [key, row] of [['ArrowDown', 'radio:one'], ['ArrowUp', 'radio two']]) {
+      within(content).getByTestId('action-row').focus();
+      fireEvent.mouseMove(within(content).getByTestId('action-row'));
+      close.focus();
+      fireEvent.keyDown(close, { key, code: key });
+      expect(document.activeElement?.id).toBe(row);
+    }
   });
 
   it('targets the owning menu row when hovering nested-role content', async () => {
@@ -510,8 +513,6 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     menu.focus();
     fireEvent.mouseMove(screen.getByTestId('nested-role'));
     expect(document.activeElement?.id).toBe('radio two');
-    fireEvent.keyDown(screen.getByTestId('radio-two'), { key: 'ArrowDown', code: 'ArrowDown' });
-    expect(document.activeElement).toBe(screen.getByTestId('dt-sr-only-close-button'));
     fireEvent.mouseMove(screen.getByTestId('action-row'));
     expect(document.activeElement?.id).toBe('action');
     fireEvent.keyDown(screen.getByTestId('action-row'), { key: 'Enter', code: 'Enter' });
@@ -520,19 +521,18 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(highlight.mock.calls).toEqual([[1]]);
   });
 
-  it.each([false, true])('focuses only Close in an empty keyboard-opened menu with showCloseButton=%s',
-    async (showCloseButton) => {
-      mountMenu({ open: null, showCloseButton }, undefined, () => []);
-      fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
-      await settle();
-      const close = screen.getByTestId(showCloseButton ? 'dt-popover-close' : 'dt-sr-only-close-button');
-      expect(document.activeElement).toBe(close);
-      for (const key of ['ArrowUp', 'ArrowDown', 'Home', 'End']) {
-        fireEvent.keyDown(close, { key, code: key });
-        expect(document.activeElement).toBe(close);
-      }
-      expect(highlight).not.toHaveBeenCalled();
-    });
+  it('keeps focus off the hidden Close in an empty keyboard-opened menu', async () => {
+    mountMenu({ open: null }, undefined, () => []);
+    fireEvent.keyDown(trigger(), { key: 'ArrowDown', code: 'ArrowDown' });
+    await settle();
+    const content = screen.getByTestId('dt-popover');
+    const close = within(content).getByTestId('dt-sr-only-close-button');
+    for (const key of ['ArrowUp', 'ArrowDown', 'Home', 'End']) {
+      expect(document.activeElement).not.toBe(close);
+      fireEvent.keyDown(content, { key, code: key });
+    }
+    expect(document.activeElement).not.toBe(close);
+  });
 
   it.each([
     { target: 'a consumer focus target', attrs: { initialFocusElement: '#refresh' }, focused: 'refresh' },
@@ -571,9 +571,6 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
     expect(beginning).toHaveBeenCalledExactlyOnceWith();
     expect(document.activeElement?.id).toBe('radio:one');
     fireEvent.keyDown(content, { key: 'End', code: 'End' });
-    const close = screen.getByTestId('dt-sr-only-close-button');
-    expect(document.activeElement).toBe(close);
-    fireEvent.keyDown(close, { key: 'ArrowUp', code: 'ArrowUp' });
     expect(document.activeElement?.id).toBe('radio two');
     fireEvent.keyDown(content, { key: 'ArrowDown', code: 'ArrowDown' });
     expect(end).toHaveBeenCalledExactlyOnceWith();
@@ -591,8 +588,6 @@ describe('Dropdown menu roles and controlled arrow opt-in', () => {
         const content = mountMenu({ showCloseButton });
         await settle();
         const close = within(content).getByTestId(showCloseButton ? 'dt-popover-close' : 'dt-sr-only-close-button');
-        fireEvent.keyDown(content, { key: 'End', code: 'End' });
-        expect(document.activeElement).toBe(close);
         if (showCloseButton) fireEvent.click(close);
         else fireEvent.keyDown(close, { key: ' ', code: 'Space' });
         await settle();

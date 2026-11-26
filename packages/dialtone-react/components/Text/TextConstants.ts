@@ -150,6 +150,8 @@ export const TEXT_STRENGTH_MODIFIERS = {
   normal: 'd-text--fw-normal',
 } as const;
 
+export const TEXT_SLIDE_MODES = ['once', 'loop'] as const;
+
 export const TEXT_DENSITY_MODIFIERS = {
   100: 'd-text--lh-100',
   200: 'd-text--lh-200',
@@ -169,6 +171,7 @@ export type TextWrap = keyof typeof TEXT_WRAP_MODIFIERS;
 export type TextBoxTrim = keyof typeof TEXT_BOX_TRIM_MODIFIERS;
 export type TextStrength = keyof typeof TEXT_STRENGTH_MODIFIERS;
 export type TextDensity = keyof typeof TEXT_DENSITY_MODIFIERS | `${keyof typeof TEXT_DENSITY_MODIFIERS}`;
+export type TextSlideMode = typeof TEXT_SLIDE_MODES[number];
 
 export default {
   TEXT_KIND_MODIFIERS,
@@ -187,4 +190,5 @@ export default {
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
+  TEXT_SLIDE_MODES,
 };
