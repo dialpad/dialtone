@@ -117,11 +117,11 @@ Default sizes match the avatar size. Size is customizable when needed.
 <!-- @wrapper -->
 <dt-stack gap="100">
   <p>S (24x24px)</p>
-  <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
+  <dt-skeleton :shape-option="{ shape: 'circle', size: 200 }" :animate="false" />
   <p>M (32x32px)</p>
   <dt-skeleton :shape-option="{ shape: 'circle' }" :animate="false" />
   <p>L (48x48px)</p>
-  <dt-skeleton :shape-option="{ shape: 'circle', size: 'lg' }" :animate="false" />
+  <dt-skeleton :shape-option="{ shape: 'circle', size: 400 }" :animate="false" />
 </dt-stack>
 ```
 
@@ -131,11 +131,11 @@ Default sizes match the avatar size. Size is customizable when needed.
 <!-- @wrapper -->
 <dt-stack gap="100">
   <p>S (24x24px)</p>
-  <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
+  <dt-skeleton :shape-option="{ shape: 'square', size: 200 }" :animate="false" />
   <p>M (32x32px)</p>
   <dt-skeleton :shape-option="{ shape: 'square' }" :animate="false" />
   <p>L (48x48px)</p>
-  <dt-skeleton :shape-option="{ shape: 'square', size: 'lg' }" :animate="false" />
+  <dt-skeleton :shape-option="{ shape: 'square', size: 400 }" :animate="false" />
 </dt-stack>
 ```
 
@@ -145,11 +145,11 @@ Default sizes match the avatar size. Size is customizable when needed.
 <!-- @wrapper -->
 <dt-stack gap="100">
   <p>Small</p>
-  <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
+  <dt-skeleton :text-option="{ type: 'heading', headingHeight: '200', width: '160px' }" :animate="false" />
   <p>Medium</p>
   <dt-skeleton :text-option="{ type: 'heading', width: '240px' }" :animate="false" />
   <p>Large</p>
-  <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'lg', width: '320px' }" :animate="false" />
+  <dt-skeleton :text-option="{ type: 'heading', headingHeight: '400', width: '320px' }" :animate="false" />
 </dt-stack>
 ```
 
@@ -170,7 +170,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 <!-- @wrapper -->
 <div class="d-w-400">
   <dt-skeleton
-    :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
+    :list-item-option="{ shapeSize: 200, paragraphs: { rows: 1 } }"
   />
 </div>
 ```

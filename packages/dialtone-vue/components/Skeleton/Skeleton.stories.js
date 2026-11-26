@@ -32,7 +32,7 @@ export const argTypesData = {
       type: {
         detail: `{
           shape?: string<circle | square> | 'circle',
-          shapeSize?: string<sm | md | lg> | string <'{n}px|%|rem'>,
+          shapeSize?: 100 | 200 | 300 | 400 | 500 | string <'{n}px|%|rem'>,
           shapeClass?: string | '',
           animate?: boolean | false,
           paragraphs?: paragraphOption | { rows: 3, randomWidth: true }
@@ -48,7 +48,7 @@ export const argTypesData = {
       type: {
         detail: `null | {
           type?: string <body | heading> | 'body',
-          headingHeight?: string<sm | md | lg | xl> | 'md',
+          headingHeight?: '200' | '300' | '400', // defaults to 'md', an alias for '300'
           width?: string | '100%',
           contentClass?: string | '',
           offset?: number | 1,
@@ -63,7 +63,7 @@ export const argTypesData = {
       type: {
         detail: `{
           shape?: string<circle | square> | 'circle',
-          size?: string<sm | md | lg> | string <'{n}px|%|rem'>,
+          size?: 100 | 200 | 300 | 400 | 500 | string <'{n}px|%|rem'>,
           animate?: boolean | false,
           offset?: number | 1,
           animationDuration?: number| -1,

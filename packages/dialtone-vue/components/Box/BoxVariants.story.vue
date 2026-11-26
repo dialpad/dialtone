@@ -2,16 +2,14 @@
   <dt-stack gap="400">
     <dt-text
       as="h2"
-      kind="headline"
-      size="lg"
+      variant="headline-lg"
     >
       Surface
     </dt-text>
     <dt-stack gap="200">
       <dt-text
         as="h3"
-        kind="headline"
-        size="md"
+        variant="headline-md"
       >
         Neutral
       </dt-text>
@@ -36,8 +34,7 @@
       </dt-stack>
       <dt-text
         as="h3"
-        kind="headline"
-        size="md"
+        variant="headline-md"
       >
         Semantic
       </dt-text>
@@ -62,8 +59,7 @@
       </dt-stack>
       <dt-text
         as="h3"
-        kind="headline"
-        size="md"
+        variant="headline-md"
       >
         Subtle / Strong
       </dt-text>
@@ -88,8 +84,7 @@
       </dt-stack>
       <dt-text
         as="h3"
-        kind="headline"
-        size="md"
+        variant="headline-md"
       >
         Opaque
       </dt-text>
@@ -116,8 +111,7 @@
 
     <dt-text
       as="h2"
-      kind="headline"
-      size="lg"
+      variant="headline-lg"
     >
       Border Color
     </dt-text>
@@ -145,8 +139,7 @@
 
     <dt-text
       as="h2"
-      kind="headline"
-      size="lg"
+      variant="headline-lg"
     >
       Border Width
     </dt-text>
@@ -171,8 +164,7 @@
 
     <dt-text
       as="h2"
-      kind="headline"
-      size="lg"
+      variant="headline-lg"
     >
       Border Radius
     </dt-text>
@@ -200,8 +192,7 @@
 
     <dt-text
       as="h2"
-      kind="headline"
-      size="lg"
+      variant="headline-lg"
     >
       Shadow
     </dt-text>

@@ -17,7 +17,7 @@
         <p>S (24x24px)</p>
         <dt-skeleton
           :shape-option="{
-            size: 'sm',
+            size: 200,
             shape: 'circle',
           }"
           :animate="$attrs.animate"
@@ -36,7 +36,7 @@
         <p>L (48x48px)</p>
         <dt-skeleton
           :shape-option="{
-            size: 'lg',
+            size: 400,
             shape: 'circle',
           }"
           :animate="$attrs.animate"
@@ -79,7 +79,7 @@
           :text-option="{
             type: 'heading',
             width: '160px',
-            headingHeight: 'sm',
+            headingHeight: '200',
           }"
           :animate="$attrs.animate"
           class="d-mbe-300"
@@ -89,7 +89,7 @@
         <dt-skeleton
           :text-option="{
             type: 'heading',
-            headingHeight: 'md',
+            headingHeight: '300',
             width: '240px',
           }"
           :animate="$attrs.animate"
@@ -100,7 +100,7 @@
         <dt-skeleton
           :text-option="{
             type: 'heading',
-            headingHeight: 'lg',
+            headingHeight: '400',
             width: '320px',
           }"
           :animate="$attrs.animate"
@@ -164,7 +164,7 @@
         <dt-skeleton
           :offset="0.6"
           :list-item-option="{
-            shapeSize: 'sm',
+            shapeSize: 200,
             paragraphs: {
               rows: 1,
             },
