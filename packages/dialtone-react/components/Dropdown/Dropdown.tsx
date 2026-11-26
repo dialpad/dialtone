@@ -203,8 +203,6 @@ export function DtDropdown ({
   const isLogicallyOpenRef = useRef(false);
   // Vue's pendingArrowOpening: the latest forwarded anchor arrow, until the parent accepts or ignores it.
   const pendingArrowOpeningRef = useRef<object | null>(null);
-  // Set while the dropdown moves focus to Close, which has no row index and must not report a highlight.
-  const silentHighlightRef = useRef(false);
 
   const isArrowKeyNav = navigationType === LIST_ITEM_NAVIGATION_TYPES.ARROW_KEYS;
   // Vue binds role="menu", then $attrs, so a consumer's role wins; an explicitly unset one falls to DtPopover's default.
@@ -235,14 +233,14 @@ export function DtDropdown ({
     getListElement,
     getActiveItem,
     afterHighlightMethod: (index) => {
-      if (silentHighlightRef.current || index === itemsLength() - 1) {
+      if (index === itemsLength() - 1) {
         return;
       }
       onHighlight?.(index);
     },
     // Called from key handlers, by which time `nav` is set.
-    beginningOfListMethod: () => (onBeginningOfList ?? onBeginningOfMenu)(),
-    endOfListMethod: () => (onEndOfList ?? onEndOfMenu)(),
+    beginningOfListMethod: () => (onBeginningOfList ?? nav.jumpToEnd)(),
+    endOfListMethod: () => (onEndOfList ?? nav.jumpToBeginning)(),
     focusOnKeyboardNavigation: true,
   });
 
@@ -275,28 +273,6 @@ export function DtDropdown ({
 
   const isMenuCloseFocused = () => isFocused(getMenuCloseButton());
 
-  const focusMenuClose = () => {
-    const closeButton = getMenuCloseButton();
-    if (!closeButton) return false;
-    // Close has no application row index and must not emit a choice highlight.
-    silentHighlightRef.current = true;
-    try {
-      nav.setHighlightIndex(-1);
-    } finally {
-      silentHighlightRef.current = false;
-    }
-    closeButton.focus();
-    return true;
-  };
-
-  function onBeginningOfMenu () {
-    if (!focusMenuClose()) nav.jumpToEnd();
-  }
-
-  function onEndOfMenu () {
-    if (!focusMenuClose()) nav.jumpToBeginning();
-  }
-
   const clearHighlightIndex = () => {
     nav.setHighlightIndex(-1);
   };
@@ -316,7 +292,7 @@ export function DtDropdown ({
     if (isPopoverOpen) {
       if (openedWithKeyboard && isArrowKeyNav) {
         const hasItems = itemsLength() > 0;
-        if (hasItems || !focusMenuClose()) nav.setHighlightIndex(0);
+        nav.setHighlightIndex(0);
         // DtPopover's default first-element focus skips aria-disabled rows, but a DtListItem disabled row stays
         // reachable: focus it so focus and keyboard position agree. A consumer focus target wins.
         const activeItemEl = hasItems ? getActiveItem(getListItemNodes()[0]?.id) : null;
@@ -373,7 +349,6 @@ export function DtDropdown ({
     if (!isOpenRef.current || !isArrowKeyNav) {
       return;
     }
-    if (!itemsLength() && focusMenuClose()) return;
     nav.onHomeKey();
   };
 
@@ -381,7 +356,6 @@ export function DtDropdown ({
     if (!isOpenRef.current || !isArrowKeyNav) {
       return;
     }
-    if (focusMenuClose()) return;
     nav.onEndKey();
   };
 

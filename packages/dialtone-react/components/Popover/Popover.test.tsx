@@ -488,9 +488,13 @@ describe('DtPopover Tests', () => {
         setProps({ role: 'menu' });
         expect(popoverWindow).not.toHaveAttribute('aria-modal');
         expect(close).toHaveAttribute('role', 'menuitem');
+        // Only the screen-reader-only Close leaves the menu Tab sequence; the visible Close stays tabbable.
+        expect(close.tabIndex).toBe(showCloseButton ? 0 : -1);
+        expect(close).toHaveAttribute('aria-label', 'Click to close');
         expect(within(popoverWindow).getByTestId(closeTestId)).toBe(close);
         setProps({ role: 'dialog' });
         expect(close).not.toHaveAttribute('role');
+        expect(close.tabIndex).toBe(0);
         setProps({ role: 'menu' });
 
         close.focus();

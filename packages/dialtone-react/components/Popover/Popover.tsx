@@ -1146,7 +1146,11 @@ export function DtPopover ({
                     />
                   )}
                   {!showCloseButton && (
-                    <SrOnlyCloseButton role={role === 'menu' ? 'menuitem' : undefined} onClose={closePopover} />
+                    <SrOnlyCloseButton
+                      role={role === 'menu' ? 'menuitem' : undefined}
+                      tabIndex={role === 'menu' ? -1 : undefined}
+                      onClose={closePopover}
+                    />
                   )}
                 </>
               )}
