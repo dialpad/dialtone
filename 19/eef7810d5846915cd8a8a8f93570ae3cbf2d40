@@ -1,0 +1,50 @@
+packages/dialtone-docs/tests/tests/strip-markdown.test.js
+  s_7f1d1d64baa803::t_a2c4ab924eb202 23-29
+packages/dialtone-cli/src/commands/docs.ts
+  s_7f1d1d64baa803::t_f8a508b7da06d9 20-21
+packages/dialtone-docs/src/utils/strip-markdown.mjs
+  s_7f1d1d64baa803::t_f8a508b7da06d9 42,46,48-54
+  s_7f1d1d64baa803::t_4a340431e81578 71-73
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_7f1d1d64baa803::t_f8a508b7da06d9 7,136,181,190,205
+packages/dialtone-cli/src/select-component.ts
+  s_7f1d1d64baa803::t_4e156aae530131 33-36
+  s_7f1d1d64baa803::t_f8a508b7da06d9 20
+  s_7f1d1d64baa803::t_00a58d18955bd9 37
+packages/dialtone-query-core/tests/tools/docs.test.ts
+  s_7f1d1d64baa803::t_490007e7a02094 86
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_7f1d1d64baa803::t_a2c4ab924eb202 19
+CLAUDE.md
+  s_7f1d1d64baa803::t_62977c108c3c7d 108
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_3211be32e25143 113-119
+packages/dialtone-cli/tests/select-component.test.ts
+  s_7f1d1d64baa803::t_e3fcadfa8b12c0 50-56
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.mdx
+  s_7f1d1d64baa803::t_4f46ff5c01f8cb 17,24-30
+packages/dialtone-vue/directives/focustrap_directive/focustrap.mdx
+  s_7f1d1d64baa803::t_e7d218f3d9be87 19,26-30
+packages/dialtone-vue/directives/mode_directive/mode.mdx
+  s_7f1d1d64baa803::t_691a87c1c910fe 17-22
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.mdx
+  s_7f1d1d64baa803::t_6c8c26f8259f23 13,20-23,45
+packages/dialtone-vue/directives/tooltip_directive/tooltip.mdx
+  s_7f1d1d64baa803::t_0498c2d0772d09 14,21-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "19eef7810d5846915cd8a8a8f93570ae3cbf2d40",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+apps/dialtone-documentation/docs/guides/content/writing-approach/index.md
+  s_8529c05b1210f5::t_02fff062c73653 17
+apps/dialtone-documentation/docs/guides/content/data-formats/index.md
+  s_8529c05b1210f5::t_02fff062c73653 21,23
+apps/dialtone-documentation/docs/guides/content/forms-and-validation/index.md
+  s_8529c05b1210f5::t_02fff062c73653 22,24
+apps/dialtone-documentation/docs/.vuepress/views/Overview.vue
+  s_8529c05b1210f5::t_02fff062c73653 14
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_8529c05b1210f5::t_21ac231a21ee20 1038-1040
+  s_8529c05b1210f5::t_02fff062c73653 1025-1028,1037,1052-1055
+apps/dialtone-documentation/docs/guides/content/product-and-feature-names-and-word-list/index.md
+  s_8529c05b1210f5::t_02fff062c73653 18
+apps/dialtone-documentation/docs/guides/content/voice-and-tone/index.md
+  s_8529c05b1210f5::t_02fff062c73653 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "b31755d4d8c751ca691ae0fab241febd92febd5b",
+  "prompts": {},
+  "sessions": {
+    "s_8529c05b1210f5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0454-7b64-7423-a0b2-a3b838dc6e19",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

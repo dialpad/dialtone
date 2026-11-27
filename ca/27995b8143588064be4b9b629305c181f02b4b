@@ -1,0 +1,146 @@
+packages/dialtone-vue/common/phone/index.js
+  s_83c35bface8049::t_0e45155efd4ff6 1-6,21-22,26,28-30,36-38,41-46,52-56,57-62
+  s_83c35bface8049::t_3097a90c7ce75d 24,27,35,39-40,47-51
+  s_83c35bface8049::t_1660dc6b00340b 31-33
+  s_83c35bface8049::t_bd2e1b8ba89f56 7-9,18-20
+  s_83c35bface8049::t_22268125b4520c 10-13
+  s_83c35bface8049::t_7f14e64e88b7ef 34
+  s_83c35bface8049::t_9dd9cb675505e2 15-18,23,25
+packages/dialtone-vue/common/phone.test.js
+  s_83c35bface8049::t_adab37b6f49c12 1-8,10-17,20-30,41-44,46,49-52,56
+  s_83c35bface8049::t_ef7f1d173b93f3 31-40,53-55
+  s_83c35bface8049::t_cd8924ef8668df 45,47-48
+  s_83c35bface8049::t_3d836a9488ccf6 18-19
+  s_83c35bface8049::t_a29996e583878e 9
+pnpm-lock.yaml
+  s_9d59e43fb30b75::t_ae24efaf411d64 925-927,9799-9801,25479-25480
+apps/dialtone-documentation/docs/functions-and-utilities/index.md
+  s_83c35bface8049::t_639a3279a556b4 6,28
+packages/dialtone-vue/package.json
+  s_83c35bface8049::t_3273ce3dc73cd7 55
+packages/dialtone-vue/index.js
+  s_83c35bface8049::t_b8dedba390c463 7
+packages/dialtone-vue/vite.config.js
+  s_83c35bface8049::t_e03d41e00cf784 52
+packages/dialtone-vue/functions/phone.mdx
+  s_83c35bface8049::t_bcb2439ae1beb3 1-6
+packages/dialtone-vue/typedoc.config.js
+  s_83c35bface8049::t_adc09bd7e4d68e 18
+packages/dialtone-css/lib/build/less/components/text.less
+  s_8b67d51a8e8f47::t_b838292f5d292a 12,353-355,361-362,369-383,385-388,393,399-408,410-416,419,425-433,435-436
+  s_02253ccb5da2a1::t_79ebb212096b47 417,420-423
+  s_02253ccb5da2a1::t_ba823027d82517 384,395-397
+  s_02253ccb5da2a1::t_a1cae822089c45 363-364
+  s_02253ccb5da2a1::t_5181ab610b5dc9 356-360,365-368,389-392,394,398,409,418,424,434
+packages/dialtone-vue/components/Text/Text.stories.js
+  s_8b67d51a8e8f47::t_97ed7e09aff7ae 18,30,47,104-109,168,172,185-186
+  s_02253ccb5da2a1::t_9ebbdfefdaf871 6,150-151,169-171,173
+  s_6ec1bf1a43afd0::t_5cbe9a64722474 174-184
+packages/dialtone-vue/components/Text/Text.test.js
+  s_8b67d51a8e8f47::t_83b37aa6a8e6ba 544-546,578-579,581-584,865-866,868,869,871-874,888,890,894,916-917,926,940-941
+  s_02253ccb5da2a1::t_58ad76128eef22 549-550,553,555,558-560,572-577,580,591,595,597-598,603-606,608-611,620-633,640-641,644,648-650,663,665-667,673,675-677,679-680,682,684-685,884-885,887-890,892-894,896,898-900,902-903,905,907-917,919-923,925-940
+  s_02253ccb5da2a1::t_799e5d771b01db 607,612-619,669-671,850,852-859,861-863,865-866,868-869,871-876,878-880,882-884
+  s_811518e8041c51::t_388c36b1ccb7e3 556,563-564,567,569,571,760-765,767-770
+  s_02253ccb5da2a1::t_67938a6b464ec3 635-636,638-639,640-647,648,649-650
+  s_02253ccb5da2a1::t_0e51f19318fc78 634,637,649-660
+  s_02253ccb5da2a1::t_92b936680306dc 4,547-548,551-552,554,557,561-562,565-566,568,570,585,590,596,602,664,668,672,674,678,681,683,686-689,719-737,739,758-759,766,771-786,828-849,851,860,864,867,870,877,881,886,891,895,897,901,904,906,918,924
+  s_02253ccb5da2a1::t_2cad16aeb80cdc 787-827
+  s_6ec1bf1a43afd0::t_7efee01ee53748 691-705,711,712-713,715-718
+  s_6ec1bf1a43afd0::t_7e3ed27896cd28 690,706-710,714,738,743-757
+packages/dialtone-vue/components/Text/Text.vue
+  s_8b67d51a8e8f47::t_8b7e17fb3b124d 10,12-14,16,39,48,253-254,260-269,302-303,304,312,316,342-343,347-349,354-356,363
+  s_02253ccb5da2a1::t_3a020f5b6b5e85 346-347
+  s_02253ccb5da2a1::t_122be8224e727f 255-258,350-353,355-357,362
+  s_02253ccb5da2a1::t_8d52d6044ec08c 5,8-9,11,15,41,62-63,259,340-341,344-346,358-361
+packages/dialtone-vue/components/Text/TextConstants.js
+  s_8b67d51a8e8f47::t_c4754f6dc7095a 154,181
+  s_02253ccb5da2a1::t_fbdefd84fdc5ef 153
+packages/dialtone-vue/components/Text/TextDefault.story.vue
+  s_8b67d51a8e8f47::t_9cd58db15ccdaa 15
+packages/dialtone-vue/components/Text/index.js
+  s_8b67d51a8e8f47::t_899ceb649b81c1 19
+packages/dialtone-vue/components/Text/TextSlide.story.vue
+  s_02253ccb5da2a1::t_c8b2e715bc407f 2-3,6-10,13,15-16,19,21-22,24-25,30,50,59,61,66-79
+  s_02253ccb5da2a1::t_1cd8b02703bd7d 55
+  s_02253ccb5da2a1::t_416605a4f2b6ce 11-12,14,17-18,20,23,26-27,29,32-49,56,60,65
+apps/dialtone-documentation/docs/_data/text.json
+  s_02253ccb5da2a1::t_d1e54d0268e575 228-232
+apps/dialtone-documentation/docs/components/text.md
+  s_02253ccb5da2a1::t_911fd68df030e7 365-366,368-369,378-382,386,388,401-407,410
+  s_02253ccb5da2a1::t_4677df8fbf2c80 612
+  s_02253ccb5da2a1::t_05cb8077beb32c 367,370-377,383-385,387,390-400,408-409
+  s_6ec1bf1a43afd0::t_d2c5ee1001b744 389
+packages/combinator/src/variants/variants_text.js
+  s_02253ccb5da2a1::t_895cc2ef9c3d91 51-55,270-271,273-280,281-283
+  s_02253ccb5da2a1::t_d44bdba24b2506 272
+  s_6ec1bf1a43afd0::t_6fade409abad4f 36-43
+packages/dialtone-vue/common/utils/index.js
+  s_02253ccb5da2a1::t_f46f80d0f9f8ef 22
+packages/dialtone-vue/components/Text/modules/slide.js
+  s_02253ccb5da2a1::t_1a30054f519c15 40,70-71,74-77,115-116
+  s_02253ccb5da2a1::t_f55e0c1c35b5cc 72-73,78-79
+  s_02253ccb5da2a1::t_8aaaa9c53c2cc9 2,4-8,12-18,82,86-88,91,93,96-104,108-116,127
+  s_02253ccb5da2a1::t_09b8cffb7ce2f8 83-85,89-90,92,94-95,105-107
+packages/dialtone-vue/components/Text/modules/SlideViewport.vue
+  s_02253ccb5da2a1::t_c1429fd7a5a13f 1-2,4-7,9-13,16-23,37-47,50-51,53,60,62,66,73,80,87,91,94,262
+  s_6ec1bf1a43afd0::t_1b4a264428879f 80
+  s_6ec1bf1a43afd0::t_01564b9aa698c5 3,8,14-15,24-36,48-49,52,54-59,61,63-65,67-72,74-79,81-86,88-90,92-93,95-105,107-111,113-124,126-131,133-135,137-140,142-151,153-159,161-164,166-169,171-180,182-191,193-204,207,211-213,218-226,228-242,244-249,251,254
+  s_6ec1bf1a43afd0::t_f582e59bd3c69e 250,252-253,255,257-261
+  s_6ec1bf1a43afd0::t_c171e526b3a212 205-206,208-210,214-217
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ca27995b8143588064be4b9b629305c181f02b4b",
+  "prompts": {},
+  "sessions": {
+    "s_02253ccb5da2a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "514f0fc5-2753-4dc5-8c33-ef0e3d16ef02",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_6ec1bf1a43afd0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "73a1b573-f509-4129-8443-4fac54eef53f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_811518e8041c51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "77c630b9-034b-4d86-952f-89e0c1322bbe",
+        "model": "unknown"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_83c35bface8049": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89e37830-2938-411b-a52c-8c6f6458ff51",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_8b67d51a8e8f47": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "972f64f5-e1bd-4a1a-b48e-fe3929fee6c3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_9d59e43fb30b75": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "52622a81-028f-4182-9f83-1395422ffe09",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

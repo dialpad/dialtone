@@ -1,0 +1,55 @@
+packages/dialtone-vue/common/utils.test.js
+  s_bc9e9d379965b5::t_2f59b0913712d7 17-18,513-552
+  s_bc9e9d379965b5::t_68ac2a935c01d0 553
+apps/dialtone-documentation/docs/components/popover.md
+  s_bc9e9d379965b5::t_6aea858b03450e 55
+packages/dialtone-vue/components/Modal/Modal.vue
+  s_bc9e9d379965b5::t_b1d355ec531c24 473,499-501,505
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_bc9e9d379965b5::t_b1d355ec531c24 158-160,738,900-902,916,1038-1039,1057-1059
+  s_bc9e9d379965b5::t_feab31e0c8f05a 739,853-854,1029-1037,1040-1041,1046-1047,1050-1054
+  s_bc9e9d379965b5::t_6aea858b03450e 195-196
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_bc9e9d379965b5::t_6aea858b03450e 114,128
+packages/dialtone-vue/common/utils/index.js
+  s_bc9e9d379965b5::t_51fe2504cb144e 472-480,483,485,487-491,493-496,500-501,503,505-510,512-515
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_bc9e9d379965b5::t_6aea858b03450e 248
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_bc9e9d379965b5::t_6aea858b03450e 127-128
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_bc9e9d379965b5::t_6aea858b03450e 818-819
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_bc9e9d379965b5::t_6aea858b03450e 194,200,202
+packages/dialtone-vue/components/Modal/Modal.test.js
+  s_bc9e9d379965b5::t_fd400b50822526 59-60
+  s_bc9e9d379965b5::t_b1d355ec531c24 580
+  s_bc9e9d379965b5::t_8af8cac51742b2 2-3
+  s_bc9e9d379965b5::t_eed168e4db2bd7 7,425,428,430
+  s_bc9e9d379965b5::t_8e909ff8dc3e4e 383-388,390-424,426-427,429,431-434
+  s_bc9e9d379965b5::t_bef2dfb8f08e5e 389
+packages/dialtone-vue/components/FilterPill/FilterPillCloseBeforeRemoval.story.vue
+  s_bc9e9d379965b5::t_53a800f6f7a03a 26-32,79-82
+  s_bc9e9d379965b5::t_bef2dfb8f08e5e 42-45
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_bc9e9d379965b5::t_9b8c861b1bff3f 944-946,950-962,965-966,971-974,978-979,1023,1025,1031,1040,1043,1045
+  s_bc9e9d379965b5::t_f6e8c512e53d11 1009,1013-1022,1024,1038,1044
+  s_bc9e9d379965b5::t_97a7645d8ec819 941-943,947-949,963-964,967-970,975-977,980-982,987-993,995-997,999-1008,1010-1012,1026-1030,1032-1037,1039,1041-1042,1046-1048
+  s_bc9e9d379965b5::t_eed168e4db2bd7 983-986,994,998
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "403f86b563c4689efc44e5ab441d82836d13e402",
+  "prompts": {},
+  "sessions": {
+    "s_bc9e9d379965b5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9ea35bbd-42bd-4af0-948f-44f0e26552df",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

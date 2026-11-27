@@ -1,0 +1,44 @@
+packages/dialtone-react/project.json
+  s_2defdf83601f66::t_b445092f8fd87f 56-73
+packages/dialtone-react/.storybook/asset.ts
+  s_2defdf83601f66::t_18ecb4dd277609 1-5
+packages/dialtone-react/compare/CompareFrame.tsx
+  s_2defdf83601f66::t_3c48c12ab01169 13,18
+  s_2defdf83601f66::t_30491b56f85358 157,238-243
+packages/dialtone-react/.gitignore
+  s_2defdf83601f66::t_707ba45b14d8d2 12-13
+packages/dialtone-react/compare/frames.ts
+  s_2defdf83601f66::t_a10091374dcb6f 8-20
+packages/dialtone-react/compare/generate-stories.mjs
+  s_2defdf83601f66::t_4ae948ea32bf0b 8-10,22-29,75,148
+packages/dialtone-react/components/Avatar/Avatar.stories.tsx
+  s_2defdf83601f66::t_b5766f1aa33d6e 19,31
+packages/dialtone-react/components/Banner/Banner.stories.tsx
+  s_2defdf83601f66::t_64d7904c58b442 11,27
+packages/dialtone-react/components/Hovercard/Hovercard.stories.tsx
+  s_2defdf83601f66::t_5d389726bc3dde 13,37,316,322
+packages/dialtone-react/components/ImageViewer/ImageViewer.stories.tsx
+  s_2defdf83601f66::t_e76075932ed12c 7,9-10
+packages/dialtone-react/components/Modal/Modal.stories.tsx
+  s_2defdf83601f66::t_946513250cbca3 20,22
+packages/dialtone-react/components/RichTextEditor/MentionSuggestion.ts
+  s_2defdf83601f66::t_01eed1def94e92 1,3
+packages/dialtone-react/components/Scroller/Scroller.stories.tsx
+  s_2defdf83601f66::t_7dc1b5b5567da0 8,303
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "914bcd06387ec00bbcbd33d449181841f8e9f398",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

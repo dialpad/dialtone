@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/Slider/SliderVariants.story.vue
+  s_0d6a81bc191862::t_7fbfa55da46f77 197,199-204,206-218,281,283-288,290-302,314,316-321,323-335,360,362-367,369-381,404,406-411,413-425,443,445-450,452-464,486,488-493,495-507,531,533-538,540-552,575,577-582,584-596,632,638
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "470f83915940141fa34444f90f0522358b53be92",
+  "prompts": {},
+  "sessions": {
+    "s_0d6a81bc191862": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1462f-99ab-7d80-940e-c2556bf66597",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
