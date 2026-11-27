@@ -157,6 +157,20 @@ const skills = {
     ],
     references: ['.agents/skills/pr-prep/references/specialists/icons.md'],
   },
+  'migration-work': {
+    resources: [
+      '.agents/resources/validation.md',
+      '.agents/resources/rules/logical-naming.md',
+      '.agents/resources/rules/vue-components.md',
+    ],
+    patterns: [
+      /### 1\. Is it breaking\?/,
+      /BREAKING CHANGE:/,
+      /only the person merging can keep it/,
+      /A second run changes nothing/,
+    ],
+    references: ['.agents/skills/pr-prep/references/specialists/codemods.md'],
+  },
 };
 
 const claudeRuleParityAllowlist = new Map([
