@@ -1,8 +1,10 @@
 import { DtModal, MODAL_BANNER_KINDS } from '@/components/Modal';
+import { DtPopover } from '@/components/Popover';
+import { defineComponent, h } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import { getTabbableElements } from '@/directives/focustrap_directive/focustrap_utils';
-import { flushPromises } from '@/common/utils';
+import { enableRootScrolling, flushPromises } from '@/common/utils';
 
 const SYNC_EVENT_NAME = 'update:open';
 
@@ -54,6 +56,8 @@ describe('DtModal Tests', () => {
   let banner;
 
   const updateWrapper = () => {
+    // An open modal left mounted would keep holding its scroll lock.
+    wrapper?.unmount();
     wrapper = mount(DtModal, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
@@ -376,6 +380,58 @@ describe('DtModal Tests', () => {
     });
   });
 
+  describe('Scroll lock shared with DtPopover', () => {
+    const isLocked = () => document.documentElement.classList.contains('d-of-hidden');
+
+    const mountWithPopover = popoverInside => {
+      wrapper.unmount();
+      wrapper = mount(defineComponent({
+        name: 'ModalWithPopover',
+        props: { modalOpen: Boolean, popoverOpen: Boolean },
+        setup: props => () => {
+          const popover = h(DtPopover, { id: 'shared-lock-popover', open: props.popoverOpen }, {
+            anchor: ({ attrs }) => h('button', attrs, 'Anchor'),
+            content: () => 'Popover content',
+          });
+          const modal = h(DtModal, { open: props.modalOpen, headerText: MOCK_MODAL_HEADER_TEXT }, {
+            default: () => (popoverInside ? popover : null),
+          });
+          return popoverInside ? modal : [modal, popover];
+        },
+      }), {
+        global: { plugins: [DtFocustrapDirective], stubs: { transition: true } },
+        attachTo: document.body,
+      });
+    };
+
+    const openPopover = async () => {
+      await wrapper.setProps({ popoverOpen: true });
+      wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).vm.$emit('after-enter');
+      await flushPromises();
+    };
+
+    it('keeps the modal locked when a popover inside it closes', async () => {
+      mountWithPopover(true);
+      await wrapper.setProps({ modalOpen: true });
+      await openPopover();
+      await wrapper.setProps({ popoverOpen: false });
+      wrapper.findComponent(DtPopover).findComponent({ ref: 'content' }).vm.$emit('after-leave');
+      await flushPromises();
+      expect(isLocked()).toBe(true);
+      await wrapper.setProps({ modalOpen: false });
+      expect(isLocked()).toBe(false);
+    });
+
+    it('keeps an open modal locked when an ownerless caller releases scrolling', async () => {
+      mountWithPopover(false);
+      await wrapper.setProps({ modalOpen: true });
+      enableRootScrolling();
+      expect(isLocked()).toBe(true);
+      await wrapper.setProps({ modalOpen: false });
+      expect(isLocked()).toBe(false);
+    });
+  });
+
   describe('Focus trapping', () => {
     beforeEach(() => {
       mockSlots = {
@@ -521,6 +577,7 @@ describe('DtModal Tests', () => {
         mountPoint = document.createElement('div');
         shadowRoot.appendChild(mountPoint);
 
+        wrapper.unmount();
         wrapper = mount(DtModal, {
           props: { ...baseProps, ...mockProps },
           global: {

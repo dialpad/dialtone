@@ -124,10 +124,8 @@ export default {
      * Optional callback receiving the open boolean synchronously on logical visibility changes.
      * Includes initial true during creation, before mount, when open=true.
      * Does not declare or emit an open-change event.
-     * For modal removal, keep modal=true, its anchor and scroll container unchanged until opened(false).
-     * Changing modal or the anchor's scroll context after opening can retain the original lock.
-     * opened(false) reports transition completion, not global scroll-lock ownership.
-     * A closed modal with no pending transition or retained scroll lock can be removed immediately.
+     * Removing it while open or closing releases its scroll lock; other open overlays keep theirs.
+     * Removal skips the close transition and focus restoration. To close visibly first, remove after opened(false).
      * Defer direct app.unmount() until Vue's next tick.
      */
     visibilityChangeCallback: {

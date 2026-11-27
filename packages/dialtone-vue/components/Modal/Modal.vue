@@ -470,7 +470,7 @@ export default {
     const dialogEl = this.$refs.dialogEl;
     if (dialogEl?.open) {
       dialogEl.close();
-      enableRootScrolling(this.getScrollRoot());
+      enableRootScrolling(this._scrollLockRoot, this);
     }
     this.previousActiveElement = null;
   },
@@ -496,11 +496,13 @@ export default {
           // top layer, where the z-index scale still applies.
           if (this.modal) dialogEl.showModal(); else dialogEl.show();
         }
-        disableRootScrolling(this.getScrollRoot());
+        // Release from the root locked here, even if the dialog has since been teleported elsewhere.
+        this._scrollLockRoot = this.getScrollRoot();
+        disableRootScrolling(this._scrollLockRoot, this);
       } else if (dialogEl.open) {
         // Leave transition plays via v-show on inner content.
         // close() is called in onAfterLeave when transition completes.
-        enableRootScrolling(this.getScrollRoot());
+        enableRootScrolling(this._scrollLockRoot, this);
       }
     },
 

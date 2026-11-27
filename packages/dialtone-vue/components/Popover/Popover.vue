@@ -155,6 +155,9 @@ import { createTippyPopover, getPopperOptions } from './TippyUtils';
 import PopoverHeaderFooter from './PopoverHeaderFooter.vue';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
+// Parent .tippy-box -> nested modal popovers holding its d-zi-popover class.
+const parentPopoverBoxOwners = new WeakMap();
+
 /**
  * A Popover displays a content overlay when its anchor element is activated.
  * @see https://dialtone.dialpad.com/components/popover.html
@@ -189,10 +192,8 @@ export default {
      * Optional callback receiving the open boolean synchronously on logical visibility changes.
      * Includes initial true during creation, before mount, when open=true.
      * Does not declare or emit an open-change event.
-     * For modal removal, keep modal=true, its anchor and scroll container unchanged until opened(false).
-     * Changing modal or the anchor's scroll context after opening can retain the original lock.
-     * opened(false) reports transition completion, not global scroll-lock ownership.
-     * A closed modal with no pending transition or retained scroll lock can be removed immediately.
+     * Removing it while open or closing releases its scroll lock; other open overlays keep theirs.
+     * Removal skips the close transition and focus restoration. To close visibly first, remove after opened(false).
      * Defer direct app.unmount() until Vue's next tick.
      */
     visibilityChangeCallback: {
@@ -734,6 +735,8 @@ export default {
         this.tip?.setProps({
           zIndex: modal ? 650 : this.calculateAnchorZindex(),
         });
+        if (modal && this.isOpen) this.preventScrolling();
+        if (!modal) this.enableScrolling();
       },
     },
 
@@ -847,6 +850,8 @@ export default {
 
   beforeUnmount () {
     this._isUnmounting = true;
+    // Release synchronously: the leave transition that normally releases the lock will not run.
+    this.enableScrolling();
     // Cancel any in-progress CSS transitions so transitionend cannot fire
     // after this component is torn down and call into dead lifecycle methods.
     if (this.popoverContentEl) {
@@ -892,6 +897,9 @@ export default {
         return;
       }
       this.anchorEl = anchorEl;
+      // The held lock belongs to the previous anchor's context; move it to the new anchor's.
+      const hadScrollLock = Boolean(this._scrollLock);
+      this.enableScrolling();
 
       this.tip?.destroy();
       delete this.tip;
@@ -905,6 +913,7 @@ export default {
         this.initTippyInstance();
         this.tip?.show();
       }
+      if (hadScrollLock) this.preventScrolling();
     },
 
     popperOptions () {
@@ -1017,29 +1026,37 @@ export default {
     *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
     **/
     preventScrolling () {
-      if (this.modal) {
-        const element = this.anchorEl?.closest('body, .tippy-box');
-        if (!element) return;
-        if (element.tagName?.toLowerCase() === 'body') {
-          disableRootScrolling(this.anchorEl.getRootNode().host);
-          this.tip?.setProps({ offset: this.offset });
-        } else {
-          element.classList.add('d-zi-popover');
-        }
+      if (!this.modal || this._scrollLock) return;
+      const element = this.anchorEl?.closest('body, .tippy-box');
+      if (!element) return;
+      if (element.tagName?.toLowerCase() === 'body') {
+        const rootElement = this.anchorEl.getRootNode().host ?? document.documentElement;
+        disableRootScrolling(rootElement, this);
+        this._scrollLock = { rootElement };
+        this.tip?.setProps({ offset: this.offset });
+      } else {
+        if (!parentPopoverBoxOwners.has(element)) parentPopoverBoxOwners.set(element, new Set());
+        parentPopoverBoxOwners.get(element).add(this);
+        element.classList.add('d-zi-popover');
+        this._scrollLock = { parentPopoverBox: element };
       }
     },
 
     /*
-    * Resets the prevent scrolling properties set in preventScrolling() back to normal.
+    * Releases the lock recorded by preventScrolling(). It does not look the target up again from the
+    * current anchor, which may since have been detached, replaced or cleared.
     **/
     enableScrolling () {
-      const element = this.anchorEl?.closest('body, .tippy-box');
-      if (!element) return;
-      if (element.tagName?.toLowerCase() === 'body') {
-        enableRootScrolling(this.anchorEl.getRootNode().host);
+      const lock = this._scrollLock;
+      if (!lock) return;
+      this._scrollLock = null;
+      if (lock.rootElement) {
+        enableRootScrolling(lock.rootElement, this);
         this.tip?.setProps({ offset: this.offset });
       } else {
-        element.classList.remove('d-zi-popover');
+        const owners = parentPopoverBoxOwners.get(lock.parentPopoverBox);
+        owners?.delete(this);
+        if (!owners?.size) lock.parentPopoverBox.classList.remove('d-zi-popover');
       }
     },
 

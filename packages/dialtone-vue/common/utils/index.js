@@ -469,28 +469,50 @@ function isDtScrollbarInUse (rootElement = document.documentElement) {
   return false;
 }
 
-/**
- * This will disable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
- * @param rootElement {HTMLElement}
- */
-export function disableRootScrolling (rootElement = document.documentElement) {
-  if (isDtScrollbarInUse(rootElement)) {
-    rootElement.classList.add('d-scrollbar-disabled');
-  } else {
-    rootElement.classList.add('d-of-hidden');
-  }
+// Root element -> Map(owner -> scroll lock class that owner added).
+const rootScrollLockOwners = new WeakMap();
+// Shared by ownerless callers, so a legacy disable/enable pair still acts as one owner.
+const LEGACY_SCROLL_LOCK_OWNER = Symbol('legacyScrollLockOwner');
+
+function getRootScrollLockClass (rootElement) {
+  return isDtScrollbarInUse(rootElement) ? 'd-scrollbar-disabled' : 'd-of-hidden';
 }
 
 /**
- * This will enable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * This will disable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * Each owner holds its own lock; scrolling stays disabled until every owner has called enableRootScrolling.
  * @param rootElement {HTMLElement}
+ * @param owner {*} identifies the caller's lock. Ownerless callers share a single owner.
  */
-export function enableRootScrolling (rootElement = document.documentElement) {
-  if (isDtScrollbarInUse(rootElement)) {
-    rootElement.classList.remove('d-scrollbar-disabled');
-  } else {
-    rootElement.classList.remove('d-of-hidden');
+export function disableRootScrolling (rootElement = document.documentElement, owner = LEGACY_SCROLL_LOCK_OWNER) {
+  let owners = rootScrollLockOwners.get(rootElement);
+  if (!owners) {
+    owners = new Map();
+    rootScrollLockOwners.set(rootElement, owners);
   }
+  if (owners.has(owner)) return;
+  const lockClass = getRootScrollLockClass(rootElement);
+  owners.set(owner, lockClass);
+  rootElement.classList.add(lockClass);
+}
+
+/**
+ * This will release the owner's scroll lock on the root element regardless of whether you are using dt-scrollbar
+ * or not. The class that owner added is removed only when no other owner still holds it.
+ * @param rootElement {HTMLElement}
+ * @param owner {*} the owner passed to disableRootScrolling. Ownerless callers share a single owner.
+ */
+export function enableRootScrolling (rootElement = document.documentElement, owner = LEGACY_SCROLL_LOCK_OWNER) {
+  const owners = rootScrollLockOwners.get(rootElement);
+  if (!owners?.size) {
+    // No tracked lock: keep the previous unconditional behavior for ownerless callers.
+    if (owner === LEGACY_SCROLL_LOCK_OWNER) rootElement.classList.remove(getRootScrollLockClass(rootElement));
+    return;
+  }
+  if (!owners.has(owner)) return;
+  const lockClass = owners.get(owner);
+  owners.delete(owner);
+  if (![...owners.values()].includes(lockClass)) rootElement.classList.remove(lockClass);
 }
 
 /**

@@ -14,6 +14,8 @@ import {
   isURL,
   isEmailAddress,
   capitalizeFirstLetter,
+  disableRootScrolling,
+  enableRootScrolling,
 } from './utils';
 
 describe('Util Tests', () => {
@@ -506,6 +508,47 @@ describe('Util Tests', () => {
     });
     it('should not change japanese since it does not have capitals', () => {
       expect(capitalizeFirstLetter('送り仮名', 'ja')).toBe('送り仮名');
+    });
+  });
+
+  describe('root scroll lock owners', () => {
+    const root = document.documentElement;
+    const firstOwner = {};
+    const secondOwner = {};
+
+    afterEach(() => {
+      [firstOwner, secondOwner].forEach(owner => enableRootScrolling(root, owner));
+      enableRootScrolling(root);
+      root.removeAttribute('data-overlayscrollbars');
+    });
+
+    it('does not let an ownerless release remove a lock an owner still holds', () => {
+      disableRootScrolling(root, firstOwner);
+      disableRootScrolling();
+      enableRootScrolling();
+      expect(root.classList.contains('d-of-hidden')).toBe(true);
+      enableRootScrolling(root, firstOwner);
+      expect(root.classList.contains('d-of-hidden')).toBe(false);
+    });
+
+    it('removes the class each owner added when the root changes scrollbar mode mid-lock', () => {
+      disableRootScrolling(root, firstOwner);
+      root.setAttribute('data-overlayscrollbars', '');
+      disableRootScrolling(root, secondOwner);
+      enableRootScrolling(root, firstOwner);
+      expect(root.classList.contains('d-of-hidden')).toBe(false);
+      expect(root.classList.contains('d-scrollbar-disabled')).toBe(true);
+      enableRootScrolling(root, secondOwner);
+      expect(root.classList.contains('d-scrollbar-disabled')).toBe(false);
+    });
+
+    it('tracks a shadow host separately from the document root', () => {
+      const host = document.createElement('div');
+      disableRootScrolling(host, firstOwner);
+      disableRootScrolling(root, secondOwner);
+      enableRootScrolling(host, firstOwner);
+      expect(host.classList.contains('d-of-hidden')).toBe(false);
+      expect(root.classList.contains('d-of-hidden')).toBe(true);
     });
   });
 });
