@@ -815,8 +815,8 @@ export default {
 
     /**
      * Controlled-only completed overlay visibility, after focus and scroll cleanup.
-     * For removal, keep the modal, anchor and scroll container unchanged until opened(false).
-     * Completion does not establish global scroll-lock ownership.
+     * Removing the pill while open or closing releases its scroll lock.
+     * To let it close visibly first, remove it after opened(false).
      * @type {boolean}
      */
     'opened',

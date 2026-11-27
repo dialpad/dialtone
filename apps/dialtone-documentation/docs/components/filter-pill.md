@@ -191,15 +191,15 @@ The `content` slot provides `pendingSelected`, `apply` and `cancel`; the existin
 
 In a custom footer, call `apply()` alone. It saves and closes on success. Calling `apply(); close()` cancels the pending Apply. Changes to `selected` in the same handler, before or after `apply()`, take priority. If you need to change `selected` after asynchronous work, finish `await apply()` first. Otherwise Apply may overwrite that change.
 
-Await `apply()` before work that depends on it. This does not wait for closing; use `opened(false)` before removal. Outside an open deferred-selection session, `apply()` does nothing.
+Await `apply()` before work that depends on it. This does not wait for closing; `opened(false)` reports that closing has finished. Outside an open deferred-selection session, `apply()` does nothing.
 
 ### Closing before removal
 
 Use `v-model:open` to keep your application’s open state in sync with the pill. People can still open it when `open` is `false`. If you handle `update:open` yourself, accept those updates; setting an unchanged `false` again cannot close it. Disabling the pill or making it read-only closes it.
 
-Before removing an open or closing pill, close it and wait for `opened(false)`. Keep its modal setting, anchor and scroll container unchanged until then. Removing it sooner can leave scrolling locked. Use the same sequence before navigation or replacing a header.
+You can remove an open or closing pill, for example during navigation or when replacing a header: removal releases its scroll lock, and other open overlays keep theirs. Removal skips the closing transition and focus restoration, so move focus to an element that remains. For a controlled pill, to let the menu close visibly first, close it and wait for `opened(false)` before removing it. A pill using the existing `v-model` API does not emit `opened`; remove it directly.
 
-`open(false)` and `update:open(false)` report that closing has started. `opened(false)` follows the completed transition and focus restoration. A cancelled close does not emit `opened(false)`. This event does not manage locks from other overlays.
+`open(false)` and `update:open(false)` report that closing has started. `opened(false)` follows the completed transition and focus restoration. A cancelled close does not emit `opened(false)`.
 
 The example then moves focus to Reset. A pill that has never opened can be removed directly. The existing `v-model` API keeps its open-event timing.
 

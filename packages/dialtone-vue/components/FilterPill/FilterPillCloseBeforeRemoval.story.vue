@@ -23,6 +23,13 @@
         >
           Close then remove
         </dt-button>
+        <dt-button
+          :role="useDropdown ? 'menuitem' : undefined"
+          data-qa="close-before-removal-remove-now"
+          @click="removeNow"
+        >
+          Remove now
+        </dt-button>
       </template>
     </dt-filter-pill>
     <dt-button
@@ -32,7 +39,10 @@
     >
       Reset removable filter
     </dt-button>
-    <p>Keep the filter mounted until opened(false) completes focus and scroll cleanup.</p>
+    <p>
+      Close then remove waits for opened(false) so the menu closes visibly first.
+      Remove now unmounts the open menu. Page scrolling stays available either way.
+    </p>
     <pre data-qa="close-before-removal-trace">{{ JSON.stringify(events) }}</pre>
   </dt-stack>
 </template>
@@ -66,6 +76,10 @@ export default {
     onOpened (value) {
       this.events.push(value);
       if (value || !this.removing) return;
+      this.removeNow();
+    },
+
+    removeNow () {
       this.visible = false;
       this.removing = false;
       this.$nextTick(() => this.$refs.resetButton?.$el?.focus());

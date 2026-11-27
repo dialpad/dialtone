@@ -1,6 +1,6 @@
 import { DtDropdown } from '@/components/Dropdown';
 import { DtListItem } from '@/components/ListItem';
-import { defineComponent, h, nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/Popover';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
@@ -935,6 +935,130 @@ describe('DtPopover Tests', () => {
       await button.trigger('keydown', { key: 'ArrowDown', code: 'ArrowDown' });
       expect(wrapper.emitted('keydown')).toHaveLength(1);
       expect(button.attributes('aria-expanded')).toBe('false');
+    });
+  });
+
+  describe('scroll lock release', () => {
+    const root = document.documentElement;
+    const isLocked = (lockClass = 'd-of-hidden') => root.classList.contains(lockClass);
+    let otherPopovers;
+    let parentBox;
+
+    const openPopover = async () => {
+      await wrapper.setProps({ open: true });
+      await completeTransition('enter');
+    };
+
+    const mountOpenedPopover = async (id, attachTo = document.body) => {
+      const popover = mount(DtPopover, {
+        props: { ...baseProps, id, open: true },
+        slots: baseSlots,
+        global: { plugins: [DtFocustrapDirective], stubs: { transition: true } },
+        attachTo,
+      });
+      otherPopovers.push(popover);
+      popover.findComponent({ ref: 'content' }).vm.$emit('after-enter');
+      await flushPromises();
+      return popover;
+    };
+
+    const isParentBoxLowered = () => parentBox.classList.contains('d-zi-popover');
+
+    beforeEach(() => {
+      wrapper.unmount();
+      manualTransitions = true;
+      updateWrapper();
+      otherPopovers = [];
+      parentBox = document.createElement('div');
+      parentBox.className = 'tippy-box';
+      document.body.appendChild(parentBox);
+    });
+
+    afterEach(() => {
+      otherPopovers.forEach(popover => popover.unmount());
+      parentBox.remove();
+      root.removeAttribute('data-overlayscrollbars');
+    });
+
+    it.each([
+      ['d-of-hidden', false],
+      ['d-scrollbar-disabled', true],
+    ])('releases %s when unmounted while open', async (lockClass, overlayScrollbars) => {
+      if (overlayScrollbars) root.setAttribute('data-overlayscrollbars', '');
+      await openPopover();
+      expect(isLocked(lockClass)).toBe(true);
+      wrapper.unmount();
+      expect(isLocked(lockClass)).toBe(false);
+    });
+
+    it('releases the lock when unmounted during the close transition', async () => {
+      await openPopover();
+      await wrapper.setProps({ open: false });
+      wrapper.unmount();
+      expect(isLocked()).toBe(false);
+    });
+
+    it('releases the lock it acquired after its anchor is detached', async () => {
+      await openPopover();
+      wrapper.element.remove();
+      await wrapper.setProps({ open: false });
+      await completeTransition('leave');
+      expect(isLocked()).toBe(false);
+    });
+
+    it('releases the lock when modal is switched off while open and retakes it when switched back on', async () => {
+      await openPopover();
+      await wrapper.setProps({ modal: false });
+      expect(isLocked()).toBe(false);
+      await wrapper.setProps({ modal: true });
+      expect(isLocked()).toBe(true);
+    });
+
+    it('moves the lock to the new anchor\'s context when the anchor is replaced while open', async () => {
+      const nestedAnchor = document.createElement('button');
+      parentBox.appendChild(nestedAnchor);
+      await openPopover();
+      await wrapper.setProps({ externalAnchorElement: nestedAnchor });
+      expect(isLocked()).toBe(false);
+      expect(isParentBoxLowered()).toBe(true);
+      wrapper.unmount();
+      expect(isParentBoxLowered()).toBe(false);
+    });
+
+    it('keeps the lock while the anchor is briefly missing', async () => {
+      vi.spyOn(console, 'warn').mockImplementation(() => {});
+      const showAnchor = ref(true);
+      wrapper.unmount();
+      mockSlots.anchor = ({ attrs }) => (showAnchor.value ? h('button', attrs, 'Open') : null);
+      updateWrapper();
+      await openPopover();
+      showAnchor.value = false;
+      await flushPromises();
+      showAnchor.value = true;
+      await flushPromises();
+      expect(isLocked()).toBe(true);
+      wrapper.unmount();
+      expect(isLocked()).toBe(false);
+    });
+
+    it('keeps a successor popover locked when the previous one finishes closing', async () => {
+      await openPopover();
+      await wrapper.setProps({ open: false });
+      const successor = await mountOpenedPopover('successor-popover');
+      await completeTransition('leave');
+      expect(isLocked()).toBe(true);
+      successor.unmount();
+      expect(isLocked()).toBe(false);
+    });
+
+    it('keeps the parent popover z-index until the last open nested popover unmounts', async () => {
+      parentBox.appendChild(wrapper.element);
+      const sibling = await mountOpenedPopover('sibling-popover', parentBox);
+      await openPopover();
+      wrapper.unmount();
+      expect(isParentBoxLowered()).toBe(true);
+      sibling.unmount();
+      expect(isParentBoxLowered()).toBe(false);
     });
   });
 
