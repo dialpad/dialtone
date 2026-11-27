@@ -1,0 +1,43 @@
+apps/dialtone-documentation/docs/components/skeleton.md
+  s_d8733dc797300a::t_6ec703a26302d8 120,124,134,138,148,152,173
+apps/dialtone-documentation/docs/components/stack.md
+  s_d8733dc797300a::t_a00c3779527e97 297
+apps/dialtone-documentation/docs/foundations/colors/palette/index.md
+  s_d8733dc797300a::t_42cb6acba73f11 117,155
+apps/dialtone-documentation/docs/utilities/layout/coordinates.md
+  s_d8733dc797300a::t_01994e9a4c0e6b 50,115
+packages/dialtone-vue/components/Box/BoxVariants.story.vue
+  s_d8733dc797300a::t_168add151fb2ea 5,12,37,62,87,114,142,167,195
+packages/dialtone-vue/components/Button/ButtonVariants.story.vue
+  s_aa53d8b4bfe0ed::t_da5abf622ab02e 282
+packages/dialtone-vue/components/Icon/IconVariants.story.vue
+  s_d8733dc797300a::t_bb5f6364b94704 22
+packages/dialtone-vue/components/Skeleton/Skeleton.stories.js
+  s_d8733dc797300a::t_34d169778574c1 35,51,66
+packages/dialtone-vue/components/Skeleton/SkeletonVariants.story.vue
+  s_d8733dc797300a::t_3eef4ea253af3b 20,39,82,92,103,167
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4d33b2a6c39a3242ab2b062b7abab9d09c6e7b27",
+  "prompts": {},
+  "sessions": {
+    "s_aa53d8b4bfe0ed": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a218b4-849c-7270-8c06-0abf90f12c5a",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_d8733dc797300a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a218b5-a209-79c1-af63-1a84627fb829",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
