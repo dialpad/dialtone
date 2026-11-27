@@ -11,7 +11,7 @@ keywords: ["scrollable", "d-scrollbar", "v-dt-scrollbar", "DtScrollbarDirective"
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar>
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -59,7 +59,7 @@ To customize the behavior of the scrollbar, you can use different show modes wit
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no configuration is needed.
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar>
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -73,7 +73,7 @@ Show the scrollbar when the mouse enters the scrollable area. This is the defaul
 Always show the scrollbar if the region is overflowing the available space.
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:always>
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar:always>
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -95,7 +95,7 @@ The object syntax is also supported:
 Show the scrollbar on scroll.
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:scroll>
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar:scroll>
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -109,7 +109,7 @@ Show the scrollbar on scroll.
 Show the scrollbar when the mouse moves inside the scrollable area.
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:move>
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar:move>
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -148,7 +148,7 @@ In addition to using directive arguments for scrollbar visibility (`:always`, `:
 The `offset` option allows you to adjust the positioning of scrollbars to accommodate fixed headers, footers, or other UI elements that overlap with the scrollable region. This eliminates the need for manual CSS overrides.
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar="{ offset: { blockStart: 20, blockEnd: 20 }, showScrollbar: 'always' }">
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar="{ offset: { blockStart: 20, blockEnd: 20 }, showScrollbar: 'always' }">
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -205,7 +205,7 @@ The directive supports applying custom CSS classes to scrollbar elements, allowi
 #### Block Axis (Vertical) Scrollbar Classes
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar="{ blockClasses: 'd-w12 d-bgc-purple-300', showScrollbar: 'always' }">
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar="{ blockClasses: 'd-w12 d-bgc-purple-300', showScrollbar: 'always' }">
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -236,7 +236,7 @@ The directive supports applying custom CSS classes to scrollbar elements, allowi
 #### Combined with Offset
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar="{ offset: { blockStart: 20, blockEnd: 20 }, blockClasses: 'd-w12 d-bgc-magenta-300', showScrollbar: 'always' }">
+<div class="d-hmx164 d-w30p d-bar-400 d-ba" v-dt-scrollbar="{ offset: { blockStart: 20, blockEnd: 20 }, blockClasses: 'd-w12 d-bgc-magenta-300', showScrollbar: 'always' }">
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
