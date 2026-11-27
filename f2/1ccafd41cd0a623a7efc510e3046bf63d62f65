@@ -1,0 +1,26 @@
+.github/workflows/dialtone-react-storybook-clean.yml
+  s_2defdf83601f66::t_4a28d805602c5c 3-4,11,23
+  s_2defdf83601f66::t_b87c12f3ec5184 5-7
+  s_2defdf83601f66::t_05e076f5a6a560 35,39-47,55-57,60,67,70
+  s_2defdf83601f66::t_cc2c682e471416 48-54
+packages/dialtone-react/README.md
+  s_2defdf83601f66::t_2aecdea7b6fa89 64
+.github/workflows/dialtone-react-storybook.yml
+  s_2defdf83601f66::t_75b9428e6ea719 162-168
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f21ccafd41cd0a623a7efc510e3046bf63d62f65",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

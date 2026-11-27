@@ -1,0 +1,27 @@
+packages/combinator/src/components/controls/control_slot.vue
+  s_edb6000ea1a4b6::t_4c148879ac5159 9,72-79,86-90
+packages/combinator/src/components/controls/control_slot.test.js
+  s_edb6000ea1a4b6::t_4c148879ac5159 50-59
+packages/combinator/src/variants/variants_chip.js
+  s_edb6000ea1a4b6::t_4c148879ac5159 4-10
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_edb6000ea1a4b6::t_4c148879ac5159 30
+packages/combinator/.github/documentation/internal/CONTROLS.md
+  s_edb6000ea1a4b6::t_8fbd4fc15f1e48 42-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4d9543c62801eb29ed24b126bd0da92c633c8fb7",
+  "prompts": {},
+  "sessions": {
+    "s_edb6000ea1a4b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b7d36c7-1e60-4854-b9ac-eeec949ede5e",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

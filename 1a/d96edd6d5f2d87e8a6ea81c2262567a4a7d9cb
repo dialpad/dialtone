@@ -1,0 +1,21 @@
+packages/dialtone-react/components/Toast/Toast.test.tsx
+  s_19b8765c22275f::t_9df74ddcb4627d 1,51-52,335,337-350,379
+packages/dialtone-react/components/Toast/Toast.tsx
+  s_19b8765c22275f::t_b9fbf60f854257 1,184-185,188-189,193-194
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1ad96edd6d5f2d87e8a6ea81c2262567a4a7d9cb",
+  "prompts": {},
+  "sessions": {
+    "s_19b8765c22275f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fdb7a835-64e6-4be5-8f64-35fc0f9cebd2",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

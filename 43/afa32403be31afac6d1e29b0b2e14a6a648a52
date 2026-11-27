@@ -1,0 +1,63 @@
+packages/combinator/src/lib/tokens.test.js
+  s_0deedfec899a67::t_94a13ac3da7b3e 7-8,17-27
+  s_0deedfec899a67::t_113810e4de0a36 1-6,9-16,28-29
+packages/combinator/src/lib/exclusion_rules.js
+  s_50f595e0683d05::t_fe67605bdd9a48 24-26
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_50f595e0683d05::t_9000c4c3492680 68
+  h_c15b5755534093 66-67
+packages/combinator/src/variants/variants_box.js
+  s_50f595e0683d05::t_0c5618d0f3db67 7
+  s_0deedfec899a67::t_ad87a23bd77cd6 134-137
+  h_c15b5755534093 2,264,267-269,272-279,284-304
+  s_0deedfec899a67::t_fff999817257ec 3-4,6,8-15,143-145
+  s_0deedfec899a67::t_57aa3783ee9698 105-106,108-110,112-114,116-118,121-122,125-126,129-130,133,265-266,270-271,280-281,305
+  s_50f595e0683d05::t_96f309e160c0ba 120,124,128,132
+  s_0deedfec899a67::t_d41e8cc50d51d0 107,111,115,119,123,127,131
+  s_50f595e0683d05::t_7a57d3fd8bd19a 142,282-283,306-307
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_50f595e0683d05::t_d74affbd1f3727 169-176
+  s_50f595e0683d05::t_400b6cbf88e8e9 5
+  s_50f595e0683d05::t_09eacfda5108db 177-179
+packages/combinator/src/lib/tokens.js
+  s_50f595e0683d05::t_3e392c06f80829 49-50
+  s_0deedfec899a67::t_029e76ea0abed5 42,45-47,118-120,225-226,235-238
+  s_0deedfec899a67::t_b62eca0bdeba03 121-123,241,248,250-251
+  s_0deedfec899a67::t_da8acd1f58d6f5 51,63
+  s_50f595e0683d05::t_3e399e57c4d184 62
+  s_50f595e0683d05::t_9d67e9f5e6ede9 227-234
+  s_50f595e0683d05::t_340285ff6f942d 239,242-247,249,252
+  s_0deedfec899a67::t_ab75e4fd3e2f8c 35-36,39
+  s_50f595e0683d05::t_4dfef9d22f7bea 272
+  s_50f595e0683d05::t_d389bac4ca44cd 253
+  s_50f595e0683d05::t_ffd7c2cb7007c5 240
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "43afa32403be31afac6d1e29b0b2e14a6a648a52",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_0deedfec899a67": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f24dc-c4e6-7560-9f4a-625c9c8673a7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_50f595e0683d05": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b7af80f7-b71b-47c3-910a-00a197657a6e",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

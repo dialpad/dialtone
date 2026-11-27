@@ -1,0 +1,111 @@
+packages/dialtone-react/README.md
+  s_2defdf83601f66::t_4dd62c06ff8da1 47-48
+  s_2defdf83601f66::t_d5379796b3bb67 55
+  s_2defdf83601f66::t_2b853c63ce2add 46
+packages/dialtone-react/compare/SyncFocusRing.test.tsx
+  s_2defdf83601f66::t_cfc05875125a35 1-30
+packages/dialtone-react/compare/sync.ts
+  s_2defdf83601f66::t_4fedc1be2bc1ef 457
+  s_2defdf83601f66::t_4d7405cf0cc29a 202-206
+  s_2defdf83601f66::t_04835b58b538cd 313-314,320-321,324,331-332
+  s_2defdf83601f66::t_aa4d1cfa9cbd60 1-6
+  s_2defdf83601f66::t_0fce8f47fafd4b 472-473
+  s_2defdf83601f66::t_f77e8d2bf2095c 571
+  s_2defdf83601f66::t_0f0f3b03792655 430-431,434-437,439-440,443-444
+  s_2defdf83601f66::t_c1fa7ffd8ef295 164-190,192-201,217-221,227-231
+  s_2defdf83601f66::t_cc0902c69d624b 57
+  s_2defdf83601f66::t_db4d597b92eb3b 498-499,515-524
+  s_2defdf83601f66::t_de1ba9d96cead4 89-119
+  s_2defdf83601f66::t_deaa5c1270644d 351-381,391-392
+  s_2defdf83601f66::t_291ed762fe838f 299-304
+  s_2defdf83601f66::t_9d00818d5e6c03 441-442
+  s_2defdf83601f66::t_049d48603c9849 433
+  s_2defdf83601f66::t_dce46f0e4ec1bb 22-48,55-56,59-69,73-74
+  s_2defdf83601f66::t_62c2ac80335483 404,406-408
+  s_4ef285b4822171::t_6a663893e05271 58,191,232,438
+packages/dialtone-react/compare/CompareFrame.tsx
+  s_2defdf83601f66::t_002ad393311b28 218-225,236
+  s_2defdf83601f66::t_1511694bfbfb3a 29-30
+  s_2defdf83601f66::t_d5a33a0a99946f 272-297
+  s_2defdf83601f66::t_0937e187ae980a 5-6
+  s_2defdf83601f66::t_651864be8b04d9 217
+packages/dialtone-react/compare/.storybook/preview.tsx
+  s_2defdf83601f66::t_55a43eaccb988f 29
+  s_2defdf83601f66::t_e5c505dba0153b 25-26
+packages/dialtone-react/compare/compare.css
+  s_2defdf83601f66::t_fe8b8e83dcc69e 306-387,395-406
+  s_2defdf83601f66::t_3ba1338ebab72d 407
+packages/dialtone-react/compare/sync.test.ts
+  s_2defdf83601f66::t_12bdbc64f5dd0e 454-464
+  s_2defdf83601f66::t_b8a1a0ece0c53c 87-115
+  s_2defdf83601f66::t_7b45577b25354e 397-408,410-453,465-529
+  s_2defdf83601f66::t_d1874abd7f8698 5-6,8,11,16,21-28
+  s_4ef285b4822171::t_f9b659431edabd 29,409
+packages/dialtone-vue/.storybook/compare-sync-agent.test.js
+  s_2defdf83601f66::t_051c7050ca1003 46
+  s_2defdf83601f66::t_d96cf7344f07e0 678-840,842-845,847-848,850-873,875-879,881-891,900-1000,1002-1008,1012-1127
+  s_2defdf83601f66::t_ee7d7667c28bf8 1143-1146
+  s_2defdf83601f66::t_760cdd987bd670 1-8,14-20,23,28
+  s_2defdf83601f66::t_22ba54081b36e9 171,173
+  s_2defdf83601f66::t_55a4a7bda5c7fd 1001,1009-1011
+  s_2defdf83601f66::t_c122b54f7bf621 73-92
+  s_2defdf83601f66::t_e8aa66c2d1e2df 841,846,849
+  s_2defdf83601f66::t_718b90207c2fa6 167,172,174,181
+  s_2defdf83601f66::t_f454d78e0ec529 874,892-899
+  s_2defdf83601f66::t_bd03ddffac5d32 880
+packages/dialtone-react/compare/SyncKeys.test.tsx
+  s_2defdf83601f66::t_712d8b9253eac6 1-60
+packages/dialtone-react/compare/SyncFocusRing.tsx
+  s_2defdf83601f66::t_0953d66276318c 1-38
+packages/dialtone-react/compare/SyncKeys.tsx
+  s_2defdf83601f66::t_38447ac83c6ce8 4,17-18,20,24-28,30-33
+  s_2defdf83601f66::t_0165cd487b4091 1-3,5-16,19,21-23,29,34-48
+packages/dialtone-vue/.storybook/compare-sync-agent.js
+  s_2defdf83601f66::t_95eb57bd31765b 52-57,59-63,66-67
+  s_2defdf83601f66::t_027bd98bc91847 677-679,684-692,694,696-716,718-789,793,802,810-814,816-829,838-839,841-842
+  s_2defdf83601f66::t_53a087f39d3e4a 680-683,693,695
+  s_2defdf83601f66::t_37353e5432a6e7 790-792,794-801,803-804,806-809,815
+  s_2defdf83601f66::t_db9e30a07fc3c7 94-97
+  s_2defdf83601f66::t_3e26d41a5e9454 298
+  s_2defdf83601f66::t_28774c0338a912 869-872,880-881,884-885,887-890
+  s_2defdf83601f66::t_14cc1bfbec0f77 11-12
+  s_2defdf83601f66::t_ded60759228ece 717
+  s_2defdf83601f66::t_b1b3a322421c30 80-81,83
+  s_2defdf83601f66::t_42dc3b60426821 185-187
+  s_2defdf83601f66::t_65f4967620545a 394-395
+  s_2defdf83601f66::t_fc676d7fa1f0dc 292-297,299-302
+  s_2defdf83601f66::t_f6ae27ac090eea 303-304
+  s_2defdf83601f66::t_e10b8ea08b1ae2 10,13-17,28-29,32-33,36-51,64-65,68-79,82,84-93,98-111,114,119,127-128,130-134,138-183,202-209
+  s_2defdf83601f66::t_a645125a8fe788 434-437,442-443,450,452-454
+  s_2defdf83601f66::t_b76a635b05270c 112-113,115-117,120-126
+  s_2defdf83601f66::t_568d3a6c6e6866 118
+  s_2defdf83601f66::t_715eb7721d10bd 188-201
+  s_2defdf83601f66::t_2baf7394f54556 334-342,353-355,357,370-384,387
+  s_2defdf83601f66::t_cef94ce73a60c7 135-137
+  s_2defdf83601f66::t_1811a90aecb150 438-441,444-449,451,458-468,478-482
+  s_2defdf83601f66::t_551b5a9db2adae 30-31,58,184,455-457,805,840
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ebfe8958ba345612a51044c55e6fe8b9ef0120d4",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_4ef285b4822171": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2138f4a0-ae85-4560-89ce-440d0cc0ad36",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
