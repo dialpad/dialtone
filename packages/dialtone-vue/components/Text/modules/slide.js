@@ -90,12 +90,13 @@ export function watchSlideChanges (viewport, content, onChange) {
   const labelWidth = () => content.scrollWidth - (copyOf()?.offsetWidth ?? 0);
   let width = viewport.clientWidth;
   let label = labelWidth();
-  const resize = typeof ResizeObserver === 'function' && new ResizeObserver(() => {
+  // consumer jsdom tests may lack ResizeObserver; ?. below skips null but not false
+  const resize = typeof ResizeObserver === 'function' ? new ResizeObserver(() => {
     // the copy can widen a shrinkable flex row; loop remeasures before each cycle anyway
     if (copyOf() || viewport.clientWidth === width) return;
     width = viewport.clientWidth;
     onChange();
-  });
+  }) : null;
   // Vue swaps a comment placeholder for the copy; neither is the label changing
   const ignored = (node) => node.nodeType === Node.COMMENT_NODE ||
     Boolean((node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement)?.closest('.d-text__slide-copy'));

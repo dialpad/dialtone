@@ -847,6 +847,22 @@ describe('DtText', () => {
       wrapper.unmount();
     });
 
+    it('still slides where ResizeObserver does not exist', async () => {
+      vi.stubGlobal('ResizeObserver', undefined);
+      const { wrapper, viewport, button, offset } = mountSlide({ slide: true });
+
+      button.dispatchEvent(new Event('pointerenter'));
+      await vi.advanceTimersByTimeAsync(500);
+
+      expect(viewport.classes()).toContain('d-text__slide--moving');
+      expect(offset()).toBe('200px');
+
+      button.dispatchEvent(new Event('pointerleave'));
+      await wrapper.vm.$nextTick();
+      expect(offset()).toBe('');
+      wrapper.unmount();
+    });
+
     it('rests at the end as soon as the transition ends', async () => {
       const { wrapper, viewport, button } = mountSlide({ slide: true });
 
