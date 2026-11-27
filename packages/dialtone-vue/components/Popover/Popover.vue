@@ -1031,8 +1031,10 @@ export default {
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
         const rootElement = this.anchorEl.getRootNode().host;
-        // A dialog (such as DtModal) closing around this popover hides it, so release with the dialog.
-        const dialog = this.anchorEl.closest('dialog');
+        // A dialog (such as DtModal) that contains the popover hides it on close, so release with the dialog.
+        // Content appended outside the dialog stays visible, so it keeps its lock.
+        const anchorDialog = this.anchorEl.closest('dialog');
+        const dialog = anchorDialog?.contains(this.tip?.popper) ? anchorDialog : null;
         dialog?.addEventListener('close', this.onContainingDialogClose);
         disableRootScrolling(rootElement, this);
         this._scrollLock = { rootElement, dialog };
