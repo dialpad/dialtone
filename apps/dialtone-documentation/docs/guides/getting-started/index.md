@@ -217,33 +217,15 @@ Use the [Dialtone CLI](/guides/cli/) for explicit terminal lookups, or connect t
 
 MCP uses bundled references unless you configure an absolute application data root. Check the selected source/version after connecting, and restart the server after configuration or dependency changes. Keep your project's existing assistant guidance and permission controls.
 
-### Add the lookup instruction
+### Add the use-dialtone skill
 
-Merge this instruction into a file your assistant loads in the consuming project:
+When your assistant uses it, the `use-dialtone` skill tells it to look Dialtone up before choosing or changing components, tokens, CSS utilities, icons or usage patterns, to prefer what Dialtone already has over custom CSS, and to say when a lookup failed. It covers MCP and CLI-only access.
 
-```text
-Before choosing or changing Dialtone components, tokens, CSS utilities, icons,
-or usage patterns, consult the available Dialtone lookup tools.
+The skill ships in `@dialpad/dialtone-mcp-server`; install that package as a project dev dependency even if you use only the CLI. Then, from the directory where you start your assistant, copy the skill into the folders Claude Code (`.claude/skills/`) and Codex (`.agents/skills/`) read, using the command in the [MCP server README](https://www.npmjs.com/package/@dialpad/dialtone-mcp-server#skills). In a monorepo where only one app installs the package, set the command's `app` line to that app's folder. Commit the copies and start a new session. Unlike text in `CLAUDE.md` or `AGENTS.md`, a skill is loaded when the assistant judges it relevant, so ask for it by name if a session skips it.
 
-With MCP, follow the connected Dialtone server's routing instructions. With
-CLI-only access, use the installed CLI from the application directory. For a
-project-local install, start with `npm exec --no -- dialtone --help`, then use
-the relevant command. Retrieve the selected component API and documentation;
-search summaries alone may omit details.
+Copied skills do not update with the package. Run the copy command again after updating, and review the diff alongside your project's own guidance. Keep your project's existing `CLAUDE.md`, `AGENTS.md` and permission settings.
 
-Check the returned source and version against the project's installed packages.
-Bundled documentation and example validation do not prove project compatibility.
-
-If lookup tools are unavailable or fail, say so. Use existing project guidance
-and public Dialtone documentation, identify unverified details, and do not
-invent Dialtone APIs or claim a lookup succeeded.
-```
-
-For **Codex**, merge it into the project instruction file Codex loads: use an existing `AGENTS.override.md` in that directory if it has content; otherwise use `AGENTS.md`. Codex selects at most one instruction file per directory, so when the override is selected, its sibling `AGENTS.md` is not loaded. Nested instructions can also change the effective guidance. Start a new session in the intended project or application. See [Codex instruction discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
-
-For **Claude Code**, add it to the project's existing `CLAUDE.md`, or create that file if none exists. If you keep shared guidance in a sibling `AGENTS.md`, import it from `CLAUDE.md` with `@AGENTS.md`; a prose link alone does not load it. Native `AGENTS.md` loading depends on the client version, settings and existing `CLAUDE.md` files. Preserve those files and settings; see [Claude Code instruction loading](https://code.claude.com/docs/en/memory). In a fresh session, use `/context` to inspect loaded memory files.
-
-Installing a package or reading its README does not load this instruction into another project. After setup, confirm an actual lookup call and its returned source/version in your assistant's session. A connection or visible tool list alone does not prove the assistant used it. When updating this copied instruction, review it alongside your project's own guidance.
+Installing a package or reading its README does not load the skill into another project. After setup, confirm in a fresh session that the assistant lists the skill, then confirm an actual lookup call and its returned source/version. A connection or visible tool list alone does not prove the assistant used it.
 
 ## Build Dialtone Locally
 

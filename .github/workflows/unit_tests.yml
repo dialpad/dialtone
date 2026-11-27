@@ -287,6 +287,9 @@ jobs:
       - name: Test shared-core release selection
         run: pnpm --dir packages/dialtone-mcp-server test:release-paths
 
+      - name: Test the shipped assistant skills
+        run: pnpm --dir packages/dialtone-mcp-server test:skills
+
       - name: Run existing documentation search scenarios
         run: node packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs
 

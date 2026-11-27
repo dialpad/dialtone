@@ -8,7 +8,8 @@
   },
   "files": [
     "build",
-    "RETRIEVAL.md"
+    "RETRIEVAL.md",
+    "skills"
   ],
   "scripts": {
     "build": "rollup -c",
@@ -17,6 +18,7 @@
     "test": "node test-search.js",
     "test:startup": "node --test tests/startup.test.mjs",
     "test:release-paths": "node --test tests/release-paths.test.mjs",
+    "test:skills": "node --test tests/skills.test.mjs",
     "test:acceptance": "node scripts/run-acceptance-scenarios.mjs",
     "interactive": "tsx interactive-search.ts",
     "inspect": "npx @modelcontextprotocol/inspector npm run start",

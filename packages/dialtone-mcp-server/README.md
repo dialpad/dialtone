@@ -22,7 +22,26 @@ A launcher's cwd or prefix does not select installed data. Check a detail respon
 
 Keep existing trust, approvals and tool allowlists. Connection, raw server inventory, client-filtered exposure and actual tool calls are separate checks. Other clients, including the Claude Desktop development recipe below, need their own verification; no all-client compatibility claim is made here.
 
-For ongoing assistant use, merge the [shared lookup instruction](https://dialtone.dialpad.com/guides/getting-started/#ai-assisted-development) into a project file your client loads. It covers Claude Code/Codex loading routes and unavailable-tool behavior. The connected server supplies the MCP routing instructions during initialization; do not maintain a second routing sequence in project rules. Confirm actual lookup calls and selected source/version in the consuming session.
+For ongoing assistant use, add the `use-dialtone` skill to the project (see [Skills](#skills)). The connected server supplies the MCP routing instructions during initialization. The skill names the tools and refines a few steps; keep the routing instructions with the server rather than copying them into project rules. Confirm actual lookup calls and selected source/version in the consuming session.
+
+## Skills
+
+The package ships the `use-dialtone` skill in `skills/use-dialtone/`. It tells an assistant to look Dialtone up before writing UI code, to prefer existing components, utilities and tokens, and to say when a lookup failed. Claude Code reads project skills from `.claude/skills/` and Codex from `.agents/skills/`.
+
+Run this from the directory where you start your assistant, after installing the package (macOS, Linux or WSL, with a `node_modules` install):
+
+```bash
+app=.
+pkg="$(CDPATH= cd "$app" >/dev/null && node -p "require.resolve('@dialpad/dialtone-mcp-server/package.json')")" &&
+  skill="$(dirname "$pkg")/skills/use-dialtone" &&
+  [ -f "$skill/SKILL.md" ] &&
+  mkdir -p .claude/skills .agents/skills &&
+  rm -rf .claude/skills/use-dialtone .agents/skills/use-dialtone &&
+  cp -R "$skill" .claude/skills/ &&
+  cp -R "$skill" .agents/skills/
+```
+
+The command finds the installed package even when a workspace hoists it, and changes nothing when it cannot find the package. In a monorepo where only one app installs the package (pnpm does not hoist by default), set `app` to that folder, relative to where you run the command, for example `app=apps/web`; the copies still land where you run the command. Commit the copies. They do not update with the package: run the command again after updating, and review the diff. Start a new assistant session to load the skill.
 
 ## Updating
 
