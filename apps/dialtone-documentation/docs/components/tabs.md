@@ -266,7 +266,7 @@ All tabs share the same width, regardless of label length.
 
 ### Icon
 
-Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
+Use `#startIcon` or `#endIcon` on `dt-tab` to place an icon alongside the label. Use `#blockStartIcon` above the label or `#blockEndIcon` below it. When you combine inline and block slots, the icons and label stack vertically. Each slot provides `iconSize` to match the tab's size.
 
 > [!WARNING] Deprecated
 > The `#icon` slot has been deprecated. Use `#startIcon` or `#endIcon` instead.
@@ -298,6 +298,38 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
         </template>
       </dt-tab>
     </template>
+  </dt-tab-group>
+</div>
+```
+
+### Block icons
+
+This example places the Overview icon above its label and the Activity icon below its label.
+
+```vue demo
+<!-- @wrapper -->
+<div class="d-w100p">
+  <dt-tab-group label="Vertical icon placement">
+    <template #tabs>
+      <dt-tab id="vertical-icon-overview-tab" panel-id="vertical-icon-overview-panel" selected>
+        Overview
+        <template #blockStartIcon="{ iconSize }">
+          <dt-icon-box-select :size="iconSize" />
+        </template>
+      </dt-tab>
+      <dt-tab id="vertical-icon-activity-tab" panel-id="vertical-icon-activity-panel">
+        Activity
+        <template #blockEndIcon="{ iconSize }">
+          <dt-icon-inbox :size="iconSize" />
+        </template>
+      </dt-tab>
+    </template>
+    <dt-tab-panel id="vertical-icon-overview-panel" tab-id="vertical-icon-overview-tab">
+      Overview content
+    </dt-tab-panel>
+    <dt-tab-panel id="vertical-icon-activity-panel" tab-id="vertical-icon-activity-tab">
+      Activity content
+    </dt-tab-panel>
   </dt-tab-group>
 </div>
 ```
@@ -396,7 +428,7 @@ To create accessible tabs, be sure to implement the <a class="d-link" href="http
 <component-accessible-table component-name="tabs" />
 
 <script setup>
-  import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue';
+  import { DtIconBoxSelect, DtIconInbox } from '@dialpad/dialtone-icons/vue';
   import ExampleTabs from "@exampleComponents/ExampleTabs.vue";
 </script>
 

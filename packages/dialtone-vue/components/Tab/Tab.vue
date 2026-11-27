@@ -18,6 +18,8 @@
     :aria-label="label"
     :aria-disabled="isDisabled ? 'true' : undefined"
     :label-class="labelClass"
+    :block-start-icon-class="blockStartIconClass"
+    :block-end-icon-class="blockEndIconClass"
     :leading-class="leadingClass"
     :trailing-class="trailingClass"
     data-qa="dt-tab"
@@ -25,6 +27,19 @@
     v-bind="$attrs"
     v-on="tabListeners"
   >
+    <template
+      v-if="$slots.blockStartIcon"
+      #blockStartIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed above the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockStartIcon"
+        :icon-size="iconSize"
+      />
+    </template>
     <!-- @slot Icon displayed at the start (left in LTR) of the tab -->
     <template
       v-if="$slots.startIcon"
@@ -52,6 +67,19 @@
     >
       <slot
         name="endIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$slots.blockEndIcon"
+      #blockEndIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed below the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockEndIcon"
         :icon-size="iconSize"
       />
     </template>
@@ -144,6 +172,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Custom class for the icon container above the label.
+     */
+    blockStartIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Custom class for the icon container below the label.
+     */
+    blockEndIconClass: {
       type: [String, Array, Object],
       default: '',
     },

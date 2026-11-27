@@ -9,6 +9,8 @@
     :aria-disabled="isDisabled ? 'true' : undefined"
     :aria-label="label"
     :label-class="resolvedLabelClass"
+    :block-start-icon-class="blockStartIconClass"
+    :block-end-icon-class="blockEndIconClass"
     :data-value="value"
     kind="muted"
     importance="clear"
@@ -18,6 +20,19 @@
     @click="handleClick"
     @focus="handleFocus"
   >
+    <template
+      v-if="$slots.blockStartIcon"
+      #blockStartIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed above the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockStartIcon"
+        :icon-size="iconSize"
+      />
+    </template>
     <template
       v-if="$slots.startIcon"
       #startIcon="{ iconSize }"
@@ -35,6 +50,19 @@
       <!-- @slot Icon displayed at the inline-end of the label. Provides { iconSize } scoped binding. -->
       <slot
         name="endIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$slots.blockEndIcon"
+      #blockEndIcon="{ iconSize }"
+    >
+      <!--
+        @slot Icon displayed below the label.
+        @binding {string} iconSize Icon size matching the button size.
+      -->
+      <slot
+        name="blockEndIcon"
         :icon-size="iconSize"
       />
     </template>
@@ -111,6 +139,22 @@ const props = defineProps({
   labelClass: {
     type: [String, Array, Object],
     default: undefined,
+  },
+
+  /**
+   * Custom class for the icon container above the label.
+   */
+  blockStartIconClass: {
+    type: [String, Array, Object],
+    default: '',
+  },
+
+  /**
+   * Custom class for the icon container below the label.
+   */
+  blockEndIconClass: {
+    type: [String, Array, Object],
+    default: '',
   },
 });
 

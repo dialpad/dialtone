@@ -12,6 +12,7 @@
         TAB_ORIENTATION_MODIFIERS[orientation],
         orientation !== 'vertical' && TAB_SPREAD_MODIFIERS[spread],
         {
+          'd-tablist--horizontal-underline': hasHorizontalUnderline,
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
         },
@@ -268,6 +269,10 @@ export default {
   },
 
   computed: {
+    hasHorizontalUnderline () {
+      return this.orientation === 'horizontal' && !this.outlined && this.kind !== 'muted';
+    },
+
     resolvedTabsClass () {
       return this.tabListClass ?? this.tabsClass;
     },
@@ -430,6 +435,8 @@ export default {
       if (!old) return;
 
       this.$nextTick(() => {
+        if (!this.tabs?.contains(newContext)) return;
+
         let hideProps = { backgroundColor: 'transparent' };
         let indicatorExtra = {};
         let pseudoElement = '::after';
@@ -447,6 +454,7 @@ export default {
           oldRect: old.rect,
           newEl: newContext,
           orientation: this.orientation,
+          checkRowOverlap: this.orientation === 'horizontal',
           hideProps,
           indicatorExtra,
           pseudoElement,

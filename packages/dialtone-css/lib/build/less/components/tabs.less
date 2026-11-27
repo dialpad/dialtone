@@ -169,6 +169,10 @@
         }
     }
 
+    &--horizontal-underline:where(:has(> .d-tablist__item.d-btn--vertical)) {
+        align-items: flex-end;
+    }
+
     //  Spread — shared
     &--spread-grow,
     &--spread-equal {

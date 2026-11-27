@@ -58,11 +58,12 @@ export function useIndicatorAnimation (containerRef, durationVar, easingVar) {
    * @param {DOMRect} options.oldRect - bounding rect of the previously selected element
    * @param {HTMLElement} options.newEl - the newly selected element
    * @param {string} options.orientation - 'horizontal' or 'vertical'
+   * @param {boolean} [options.checkRowOverlap] - require vertical overlap for horizontal tab rows
    * @param {object} options.hideProps - properties to suppress on newEl during animation
    * @param {object} [options.indicatorExtra] - additional CSS properties for the indicator pseudo
    * @param {string} options.pseudoElement - '::before' or '::after'
    */
-  function animate ({ oldRect, newEl, orientation, hideProps, indicatorExtra = {}, pseudoElement }) {
+  function animate ({ oldRect, newEl, orientation, checkRowOverlap, hideProps, indicatorExtra = {}, pseudoElement }) {
     if (!supported) return;
     cancel();
 
@@ -76,7 +77,10 @@ export function useIndicatorAnimation (containerRef, durationVar, easingVar) {
     const crossAxisDelta = isVertical
       ? Math.abs(oldRect.left - newRect.left)
       : Math.abs(oldRect.top - newRect.top);
-    if (crossAxisDelta > crossAxisSize / 2) return;
+    const spansRows = checkRowOverlap
+      ? Math.max(oldRect.top, newRect.top) >= Math.min(oldRect.bottom, newRect.bottom)
+      : crossAxisDelta > crossAxisSize / 2;
+    if (spansRows) return;
 
     // Center-to-center delta so scale from center aligns both edges
     const delta = isVertical

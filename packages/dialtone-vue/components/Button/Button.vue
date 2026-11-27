@@ -27,7 +27,7 @@
     </span>
     <!-- NEW: Block-start icon slot (above label) -->
     <span
-      v-if="hasSlotContent($slots.blockStartIcon)"
+      v-if="hasBlockStartIcon()"
       data-qa="dt-button-block-start-icon"
       :class="[
         'base-button__icon',
@@ -115,7 +115,7 @@
     </span>
     <!-- NEW: Block-end icon slot (below label) -->
     <span
-      v-if="hasSlotContent($slots.blockEndIcon)"
+      v-if="hasBlockEndIcon()"
       data-qa="dt-button-block-end-icon"
       :class="[
         'base-button__icon',
@@ -642,11 +642,11 @@ export default {
     },
 
     hasBlockStartIcon () {
-      return hasSlotContent(this.$slots.blockStartIcon);
+      return hasSlotContent(this.$slots.blockStartIcon, { iconSize: this.iconSize });
     },
 
     hasBlockEndIcon () {
-      return hasSlotContent(this.$slots.blockEndIcon);
+      return hasSlotContent(this.$slots.blockEndIcon, { iconSize: this.iconSize });
     },
 
     hasNewIconSlots () {
