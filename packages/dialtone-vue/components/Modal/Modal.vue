@@ -468,10 +468,8 @@ export default {
 
   beforeUnmount () {
     const dialogEl = this.$refs.dialogEl;
-    if (dialogEl?.open) {
-      dialogEl.close();
-      enableRootScrolling(this._scrollLockRoot, this);
-    }
+    if (dialogEl?.open) dialogEl.close();
+    enableRootScrolling(this._scrollLockRoot, this);
     this.previousActiveElement = null;
   },
 

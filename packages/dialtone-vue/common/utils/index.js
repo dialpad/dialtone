@@ -8,6 +8,7 @@ import {
   Comment,
   Text,
 } from 'vue';
+import { addOwnedClass, hasClassOwners, removeOwnedClass } from './owned_classes.js';
 
 let UNIQUE_ID_COUNTER = 0;
 let TIMER;
@@ -469,8 +470,6 @@ function isDtScrollbarInUse (rootElement = document.documentElement) {
   return false;
 }
 
-// Root element -> Map(owner -> scroll lock class that owner added).
-const rootScrollLockOwners = new WeakMap();
 // Shared by ownerless callers, so a legacy disable/enable pair still acts as one owner.
 const LEGACY_SCROLL_LOCK_OWNER = Symbol('legacyScrollLockOwner');
 
@@ -485,15 +484,7 @@ function getRootScrollLockClass (rootElement) {
  * @param owner {*} identifies the caller's lock. Ownerless callers share a single owner.
  */
 export function disableRootScrolling (rootElement = document.documentElement, owner = LEGACY_SCROLL_LOCK_OWNER) {
-  let owners = rootScrollLockOwners.get(rootElement);
-  if (!owners) {
-    owners = new Map();
-    rootScrollLockOwners.set(rootElement, owners);
-  }
-  if (owners.has(owner)) return;
-  const lockClass = getRootScrollLockClass(rootElement);
-  owners.set(owner, lockClass);
-  rootElement.classList.add(lockClass);
+  addOwnedClass(rootElement, getRootScrollLockClass(rootElement), owner);
 }
 
 /**
@@ -503,16 +494,12 @@ export function disableRootScrolling (rootElement = document.documentElement, ow
  * @param owner {*} the owner passed to disableRootScrolling. Ownerless callers share a single owner.
  */
 export function enableRootScrolling (rootElement = document.documentElement, owner = LEGACY_SCROLL_LOCK_OWNER) {
-  const owners = rootScrollLockOwners.get(rootElement);
-  if (!owners?.size) {
+  if (hasClassOwners(rootElement)) {
+    removeOwnedClass(rootElement, owner);
+  } else if (owner === LEGACY_SCROLL_LOCK_OWNER) {
     // No tracked lock: keep the previous unconditional behavior for ownerless callers.
-    if (owner === LEGACY_SCROLL_LOCK_OWNER) rootElement.classList.remove(getRootScrollLockClass(rootElement));
-    return;
+    rootElement.classList.remove(getRootScrollLockClass(rootElement));
   }
-  if (!owners.has(owner)) return;
-  const lockClass = owners.get(owner);
-  owners.delete(owner);
-  if (![...owners.values()].includes(lockClass)) rootElement.classList.remove(lockClass);
 }
 
 /**

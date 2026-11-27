@@ -154,9 +154,7 @@ import ModeMixin from '@/common/mixins/mode';
 import { createTippyPopover, getPopperOptions } from './TippyUtils';
 import PopoverHeaderFooter from './PopoverHeaderFooter.vue';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
-
-// Parent .tippy-box -> nested modal popovers holding its d-zi-popover class.
-const parentPopoverBoxOwners = new WeakMap();
+import { addOwnedClass, removeOwnedClass } from '@/common/utils/owned_classes';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -735,8 +733,8 @@ export default {
         this.tip?.setProps({
           zIndex: modal ? 650 : this.calculateAnchorZindex(),
         });
-        if (modal && this.isOpen) this.preventScrolling();
         if (!modal) this.enableScrolling();
+        else if (this.isOpen) this.preventScrolling();
       },
     },
 
@@ -1030,14 +1028,12 @@ export default {
       const element = this.anchorEl?.closest('body, .tippy-box');
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
-        const rootElement = this.anchorEl.getRootNode().host ?? document.documentElement;
+        const rootElement = this.anchorEl.getRootNode().host;
         disableRootScrolling(rootElement, this);
         this._scrollLock = { rootElement };
         this.tip?.setProps({ offset: this.offset });
       } else {
-        if (!parentPopoverBoxOwners.has(element)) parentPopoverBoxOwners.set(element, new Set());
-        parentPopoverBoxOwners.get(element).add(this);
-        element.classList.add('d-zi-popover');
+        addOwnedClass(element, 'd-zi-popover', this);
         this._scrollLock = { parentPopoverBox: element };
       }
     },
@@ -1050,14 +1046,13 @@ export default {
       const lock = this._scrollLock;
       if (!lock) return;
       this._scrollLock = null;
-      if (lock.rootElement) {
-        enableRootScrolling(lock.rootElement, this);
-        this.tip?.setProps({ offset: this.offset });
-      } else {
-        const owners = parentPopoverBoxOwners.get(lock.parentPopoverBox);
-        owners?.delete(this);
-        if (!owners?.size) lock.parentPopoverBox.classList.remove('d-zi-popover');
+      if (lock.parentPopoverBox) {
+        removeOwnedClass(lock.parentPopoverBox, this);
+        return;
       }
+      enableRootScrolling(lock.rootElement, this);
+      // Skip repositioning a tip that beforeUnmount is about to destroy.
+      if (!this._isUnmounting) this.tip?.setProps({ offset: this.offset });
     },
 
     removeReferences () {
