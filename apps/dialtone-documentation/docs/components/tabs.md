@@ -302,6 +302,8 @@ Use `#startIcon` or `#endIcon` on `dt-tab` to place an icon alongside the label.
 </div>
 ```
 
+### Block icons
+
 This example places the Overview icon above its label and the Activity icon below its label.
 
 ```vue demo
