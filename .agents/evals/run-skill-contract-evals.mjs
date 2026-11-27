@@ -157,6 +157,22 @@ const skills = {
     ],
     references: ['.agents/skills/pr-prep/references/specialists/icons.md'],
   },
+  'style-work': {
+    resources: [
+      '.agents/resources/validation.md',
+      '.agents/resources/dialtone-lookup.md',
+      '.agents/resources/rules/css-utilities.md',
+      '.agents/resources/rules/design-tokens.md',
+      '.agents/resources/rules/logical-naming.md',
+    ],
+    patterns: [
+      /## 1\. Does It Already Exist\?/,
+      /Prefer a semantic token over a base one/,
+      /tokens-docs\.json/,
+      /constants\.cjs/,
+    ],
+    references: ['.agents/skills/pr-prep/references/specialists/css.md'],
+  },
 };
 
 const claudeRuleParityAllowlist = new Map([
