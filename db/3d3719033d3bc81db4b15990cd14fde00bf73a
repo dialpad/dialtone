@@ -1,0 +1,31 @@
+packages/dialtone-react/common/input-group/input_group.test.ts
+  s_2defdf83601f66::t_4fec221b41eee5 1-2,102-122
+packages/dialtone-react/common/input-group/useInputGroup.ts
+  s_eca6346d1a5e77::t_556d61f70859f9 78-80,82
+packages/dialtone-react/components/ValidationMessages/ValidationMessages.stories.tsx
+  s_2defdf83601f66::t_e40c259afbb626 8,232-233,340
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "db3d3719033d3bc81db4b15990cd14fde00bf73a",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_eca6346d1a5e77": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "490b4d0f-4c60-4867-af3c-d2c7acea6888",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

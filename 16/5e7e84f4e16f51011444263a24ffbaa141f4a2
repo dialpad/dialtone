@@ -1,0 +1,51 @@
+packages/dialtone-react/components/Notice/Notice.parity.tsx
+  s_fd1a915fbec790::t_0d7a5e29762868 1-4
+packages/dialtone-react/components/Notice/Notice.stories.tsx
+  s_fd1a915fbec790::t_d969d570b96a64 1-158,160-269
+packages/dialtone-react/components/Notice/Notice.test.tsx
+  s_fd1a915fbec790::t_476416f017c38a 1-131
+packages/dialtone-react/components/Notice/Notice.tsx
+  s_fd1a915fbec790::t_699dbe58a6b7bc 1-178
+packages/dialtone-react/components/Notice/NoticeAction.test.tsx
+  s_fd1a915fbec790::t_6ddd761349b3c8 1-149
+packages/dialtone-react/components/Notice/NoticeAction.tsx
+  s_fd1a915fbec790::t_0c8d4a8c4fe725 1-91
+packages/dialtone-react/components/Notice/NoticeConstants.ts
+  s_fd1a915fbec790::t_b2720809f4bf54 1-10
+packages/dialtone-react/components/Notice/NoticeContent.test.tsx
+  s_fd1a915fbec790::t_ed3b034db996df 1-83,119-120
+  s_2defdf83601f66::t_91f6e3a8c124ae 84-118
+packages/dialtone-react/components/Notice/NoticeContent.tsx
+  s_fd1a915fbec790::t_f16379385bd7e7 2,3,5-43,44-61,63-72,74-75,77-85,87-91
+packages/dialtone-react/components/Notice/NoticeIcon.test.tsx
+  s_fd1a915fbec790::t_f770e6ae8d11b3 1-80,103-104
+packages/dialtone-react/components/Notice/NoticeIcon.tsx
+  s_fd1a915fbec790::t_738ffa3433a782 2,3-10,12,19-35,37,39-45,47-49
+  s_fd1a915fbec790::t_282d0fc4b8d45c 13-18,36
+packages/dialtone-react/components/Notice/index.ts
+  s_fd1a915fbec790::t_89d457ecf421e5 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "165e7e84f4e16f51011444263a24ffbaa141f4a2",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_fd1a915fbec790": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "82cbc6d0-b1c1-48a8-81a7-f1d3a61f0bb3",
+        "model": "unknown"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

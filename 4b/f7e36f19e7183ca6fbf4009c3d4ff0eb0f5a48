@@ -1,0 +1,37 @@
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_db01799c29ca23::t_bc00c7c545782a 129
+apps/dialtone-documentation/docs/components/popover.md
+  s_db01799c29ca23::t_f6d4ee0595b116 313
+packages/dialtone-vue/components/Dropdown/Dropdown.test.js
+  s_db01799c29ca23::t_512c316fd3717b 254,274-275,278,309-312,314,316,317,319
+  s_db01799c29ca23::t_9e066ce5e866a4 225
+  s_db01799c29ca23::t_2545150efe059c 253,256-273,305,308,313,315,318
+  s_db01799c29ca23::t_4ce7e110ebc088 276-279,291-292
+  s_db01799c29ca23::t_7c34be997ce3c0 280-290
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_db01799c29ca23::t_2f8f73ba8e9cad 456,460,546
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_db01799c29ca23::t_1dae2ba2255b06 450-451,456
+  s_db01799c29ca23::t_28779b0003ba7f 452
+packages/dialtone-vue/components/FilterPill/FilterPillOptionRows.test.js
+  s_db01799c29ca23::t_1dae2ba2255b06 188,189,192-193
+  s_db01799c29ca23::t_28779b0003ba7f 181,190-191
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_db01799c29ca23::t_f6d4ee0595b116 268,270-272
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4bf7e36f19e7183ca6fbf4009c3d4ff0eb0f5a48",
+  "prompts": {},
+  "sessions": {
+    "s_db01799c29ca23": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b586d0b-1130-49cf-b496-58eaae71f11a",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

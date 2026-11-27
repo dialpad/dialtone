@@ -1,0 +1,22 @@
+packages/dialtone-vue/.storybook/main.js
+  s_640fae46ad7b01::t_786c80155c7e9a 40
+  s_640fae46ad7b01::t_f7bdb9851b2f62 39,41
+packages/dialtone-vue/.storybook/css-build.test.js
+  s_640fae46ad7b01::t_f7bdb9851b2f62 41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "64932fbc2ad2b0838788bf2371e149004cffb572",
+  "prompts": {},
+  "sessions": {
+    "s_640fae46ad7b01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20e02-4442-77d3-8c06-116ad7a27bc1",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}

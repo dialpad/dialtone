@@ -1,0 +1,31 @@
+scripts/check-doc-review.test.mjs
+  s_7f1d1d64baa803::t_4d50d069de2c25 99-101,107-109
+.claude/hooks/pre-push-pr-guard.sh
+  s_d08888161e2de3::t_b8559e4131eee8 2
+scripts/check-doc-review.mjs
+  s_d08888161e2de3::t_a98ceb6d23058d 185,188
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b00016dd73cfd55fedb096bd4ca6ce4e07de6bfa",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_d08888161e2de3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17be6-339b-7320-92db-dedd47f4b80e",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

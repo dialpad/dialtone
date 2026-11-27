@@ -1,0 +1,35 @@
+packages/dialtone-vue/.storybook/compare-sync-hover.js
+  s_2defdf83601f66::t_0c9c6e00fb4dfc 1-528
+  s_2defdf83601f66::t_0b02364572cb88 529-546
+packages/dialtone-vue/.storybook/compare-sync-hover.test.js
+  s_2defdf83601f66::t_94b883675bae48 1-374
+  s_2defdf83601f66::t_8df60d3fff7c6a 375-382
+packages/dialtone-react/compare/sync.ts
+  s_2defdf83601f66::t_ce7cc80c80a81c 387-391
+packages/dialtone-react/compare/sync.test.ts
+  s_2defdf83601f66::t_4f1bc620227d77 385-390,399-405
+  s_2defdf83601f66::t_e3250beb8389c6 392
+  s_2defdf83601f66::t_3e1229dd9dd8c5 391,393-398
+packages/dialtone-react/README.md
+  s_2defdf83601f66::t_9c20a3eb383bb3 48-49,56-57
+packages/dialtone-vue/.storybook/compare-sync-agent.js
+  s_2defdf83601f66::t_2a1eebc58cc6af 12-13,20-21,257-258,265,271-272,396-397,524-525,527,548-549,871,883
+packages/dialtone-vue/.storybook/compare-sync-agent.test.js
+  s_2defdf83601f66::t_3a5112d2ee8556 1,38,43-46,68-71,1138-1224
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "208e1e67be861b3291eefaa0fcf8a8e9c945648f",
+  "prompts": {},
+  "sessions": {
+    "s_2defdf83601f66": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0ffd7770-3953-4534-958d-a197ca8e45d7",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
