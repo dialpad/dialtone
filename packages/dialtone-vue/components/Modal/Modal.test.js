@@ -383,13 +383,13 @@ describe('DtModal Tests', () => {
   describe('Scroll lock', () => {
     const isLocked = () => document.documentElement.classList.contains('d-of-hidden');
 
-    const mountWithPopover = popoverInside => {
+    const mountWithPopover = (popoverInside, popoverProps = {}) => {
       wrapper.unmount();
       wrapper = mount(defineComponent({
         name: 'ModalWithPopover',
         props: { modalOpen: Boolean, popoverOpen: Boolean },
         setup: props => () => {
-          const popover = h(DtPopover, { id: 'shared-lock-popover', open: props.popoverOpen }, {
+          const popover = h(DtPopover, { id: 'shared-lock-popover', open: props.popoverOpen, ...popoverProps }, {
             anchor: ({ attrs }) => h('button', attrs, 'Anchor'),
             content: () => 'Popover content',
           });
@@ -451,6 +451,19 @@ describe('DtModal Tests', () => {
       // Transitions are stubbed, so close the dialog the way the modal's leave transition would.
       dialog.close();
       dialog.dispatchEvent(new Event('close'));
+      expect(isLocked()).toBe(false);
+    });
+
+    it('keeps the lock of a popover rendered outside the modal when the modal closes', async () => {
+      mountWithPopover(true, { appendTo: document.body });
+      await wrapper.setProps({ modalOpen: true });
+      await openPopover();
+      await wrapper.setProps({ modalOpen: false });
+      const dialog = wrapper.find('[data-qa="dt-modal"]').element;
+      dialog.close();
+      dialog.dispatchEvent(new Event('close'));
+      expect(isLocked()).toBe(true);
+      wrapper.unmount();
       expect(isLocked()).toBe(false);
     });
   });
