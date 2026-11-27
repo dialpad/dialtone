@@ -16,6 +16,8 @@ test('failed project selection keeps bundled discovery and honest exact/no-match
   assert.equal(button.source.selection, 'bundled');
   assert.ok(button.canonicalIdentity.imports.length > 0);
   assert.ok(button.canonicalIdentity.imports.every(route => route.verification === 'source-export'));
+  // Bundled routes name the standalone package; detail must also name the umbrella route apps install.
+  assert.ok(button.notes.some(note => note.includes('`@dialpad/dialtone/vue`')), 'bundled detail names the @dialpad/dialtone/vue route');
   const unknown = module.executeQueryTool('get_component', { component: 'DtMadeUp' }, context).structuredContent;
   assert.equal(unknown.match, 'no-match');
   assert.equal(unknown.continuation.tool, 'search_components');

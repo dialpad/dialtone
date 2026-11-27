@@ -1,9 +1,24 @@
 // Consume the preferred migration-helper authority; do not maintain a second stop map.
 const { SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, RADIUS_MAP, RADIUS_PAIR_PREFIX_MAP, SPACE_TOKEN_MAP, SIZE_LAYOUT_MAP, RAW_FALLBACK, UTILITY_REVIEW_REQUIRED } = require('./migration-guidance.json');
 const LEGACY_GAP_PREFIXES = { flg: 'g', gg: 'g', grg: 'rg', gcg: 'cg' };
+// Physical side/inset prefix -> logical twin (logical-naming rule). The generators emit both names
+// in one rule, so the twin has identical declarations; the caller still checks that it exists.
+const LOGICAL_PREFIX = {
+  mt: 'mbs', mr: 'mie', mb: 'mbe', ml: 'mis',
+  pt: 'pbs', pr: 'pie', pb: 'pbe', pl: 'pis',
+  t: 'ibs', r: 'iie', b: 'ibe', l: 'iis',
+};
+const PHYSICAL_SIDE_CLASS = /^d-(mt|mr|mb|ml|pt|pr|pb|pl|t|r|b|l)-(.+)$/;
 const scope = 'Legacy Dialtone 9 naming. For Dialtone 10, verify the installed target supports the replacement.';
 
-function utilityMetadata (name) {
+// Names the logical twin only when the catalog has it, so the hint never points at a missing class.
+function preferLogicalReplacement (replacement, hasClass) {
+  const match = PHYSICAL_SIDE_CLASS.exec(replacement);
+  const twin = match && `d-${LOGICAL_PREFIX[match[1]]}-${match[2]}`;
+  return twin && hasClass(twin) ? twin : replacement;
+}
+
+function utilityMetadata (name, hasClass = () => false) {
   let match;
   let replacement;
   let layoutReview = false;
@@ -26,12 +41,13 @@ function utilityMetadata (name) {
     return null;
   }
   if (replacement === name) return null;
+  if (replacement) replacement = preferLogicalReplacement(replacement, hasClass);
   const reviewReason = UTILITY_REVIEW_REQUIRED[name];
   if (reviewReason) replacement = undefined;
   return {
     deprecated: true,
     category: 'migration',
-    reason: `${scope} ${reviewReason || (replacement ? 'Use the corresponding token-stop name.' : 'No exact token-stop equivalent; manual review required.')}${layoutReview ? ' Legacy gap rules affect child margins and --fl-gap; manual layout review required before using native gap.' : ''}`,
+    reason: `${scope} ${reviewReason || (replacement ? 'Use the corresponding logical token-stop name.' : 'No exact token-stop equivalent; manual review required.')}${layoutReview ? ' Legacy gap rules affect child margins and --fl-gap; manual layout review required before using native gap.' : ''}`,
     alternatives: replacement ? [replacement] : [],
     docs: 'https://dialtone.dialpad.com/guides/migration/',
   };

@@ -28,3 +28,17 @@ export function preserveDeclaredSlotBindings (documentation, node, siblings) {
     ...declared.map(binding => [binding.name, binding]),
   ]).values()];
 }
+
+// vue-docgen-api keeps a slot's `@deprecated` in its description, while props get a real tag.
+// Add the prop-shaped tag so consumers read one structure; the description is left as authored.
+export function tagDeprecatedSlots (doc) {
+  if (!doc.slots?.some(slot => /^@deprecated\b/.test(slot.description || ''))) return doc;
+  return {
+    ...doc,
+    slots: doc.slots.map(slot => {
+      const note = /^@deprecated\b\s*([\s\S]*)$/.exec(slot.description || '');
+      if (!note) return slot;
+      return { ...slot, tags: { ...slot.tags, deprecated: [{ description: note[1].trim(), title: 'deprecated' }] } };
+    }),
+  };
+}

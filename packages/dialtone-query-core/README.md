@@ -50,7 +50,8 @@ Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` return no c
 | ---------- | ------------- |
 | `formatResults(results, query, page?: SearchPage)` | Format utility class results as markdown |
 | `formatTokenResults(results, query, page?: SearchPage)` | Format token results as markdown |
-| `formatComponentResults(results, query, page?: SearchPage)` | Format component results as markdown |
+| `formatComponentResults(results, query, page?: SearchPage)` | Format component results as markdown; marks deprecated props and slots, and names the `@dialpad/dialtone/vue` route once for bundled results |
+| `bundledImportRouteNote(identity)` | The umbrella import-route sentence for a bundled (`source-export`) identity, or `undefined` for installed routes |
 | `formatIconResults(results, query, page?: SearchPage)` | Format icon results as markdown |
 | `formatDocumentationResults(results, query)` | Format reference excerpts and links as markdown; directive records include source package/version and an installed-compatibility qualifier |
 

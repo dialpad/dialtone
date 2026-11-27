@@ -307,3 +307,20 @@ describe('curated public-page discovery', () => {
     }
   });
 });
+
+describe('deprecated auto-spacing utilities', () => {
+  // Same metadata shape the CSS docs generator now emits for d-stack/d-flow; the generator side is
+  // covered in packages/dialtone-css/postcss/dialtone-docs.test.cjs.
+  const autoSpacing: UtilityClassesData = {
+    'd-flow8': { values: [{ prop: 'margin-inline-start', value: 'var(--dt-spacing-100) !important' }], metadata: {
+      deprecated: true, category: 'layout', reason: 'Use the DtStack component with gap="100" instead', alternatives: [],
+      docs: 'https://dialtone.dialpad.com/components/stack',
+    } },
+    'd-mis-100': { values: [{ prop: 'margin-inline-start', value: 'var(--dt-spacing-100) !important' }] },
+  };
+
+  test('margin-inline-start finds d-mis-100 without deprecated d-stack or d-flow results', () => {
+    const names = searchUtilityClasses('margin-inline-start', autoSpacing).results.map(result => result.name);
+    expect(names).toEqual(['d-mis-100']);
+  });
+});

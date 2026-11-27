@@ -50,6 +50,7 @@ export { searchTokens, formatTokenResults } from './tools/tokens.js';
 export {
   searchComponents,
   formatComponentResults,
+  bundledImportRouteNote,
   sortUnifiedResults,
   formatUnifiedResults,
   formatSingleResult
