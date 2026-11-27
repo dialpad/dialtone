@@ -1033,7 +1033,7 @@ export default {
         const rootElement = this.anchorEl.getRootNode().host;
         // A dialog (such as DtModal) closing around this popover hides it, so release with the dialog.
         const dialog = this.anchorEl.closest('dialog');
-        dialog?.addEventListener('close', this.enableScrolling);
+        dialog?.addEventListener('close', this.onContainingDialogClose);
         disableRootScrolling(rootElement, this);
         this._scrollLock = { rootElement, dialog };
         this.tip?.setProps({ offset: this.offset });
@@ -1055,10 +1055,16 @@ export default {
         removeOwnedClass(lock.parentPopoverBox, this);
         return;
       }
-      lock.dialog?.removeEventListener('close', this.enableScrolling);
+      lock.dialog?.removeEventListener('close', this.onContainingDialogClose);
       enableRootScrolling(lock.rootElement, this);
       // Skip repositioning a tip that beforeUnmount is about to destroy.
       if (!this._isUnmounting) this.tip?.setProps({ offset: this.offset });
+    },
+
+    onContainingDialogClose () {
+      // The browser queues close events, so the dialog may have reopened before this one arrives.
+      if (this._scrollLock?.dialog?.open) return;
+      this.enableScrolling();
     },
 
     removeReferences () {

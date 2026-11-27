@@ -197,7 +197,7 @@ Await `apply()` before work that depends on it. This does not wait for closing; 
 
 Use `v-model:open` to keep your application’s open state in sync with the pill. People can still open it when `open` is `false`. If you handle `update:open` yourself, accept those updates; setting an unchanged `false` again cannot close it. Disabling the pill or making it read-only closes it.
 
-You can remove an open or closing pill, for example during navigation or when replacing a header: removal releases its scroll lock, and other open overlays keep theirs. Removal skips the closing transition and focus restoration, so move focus to an element that remains. To let the menu close visibly first, close it and wait for `opened(false)` before removing it.
+You can remove an open or closing pill, for example during navigation or when replacing a header: removal releases its scroll lock, and other open overlays keep theirs. Removal skips the closing transition and focus restoration, so move focus to an element that remains. For a controlled pill, to let the menu close visibly first, close it and wait for `opened(false)` before removing it. A pill using the existing `v-model` API does not emit `opened`; remove it directly.
 
 `open(false)` and `update:open(false)` report that closing has started. `opened(false)` follows the completed transition and focus restoration. A cancelled close does not emit `opened(false)`.
 

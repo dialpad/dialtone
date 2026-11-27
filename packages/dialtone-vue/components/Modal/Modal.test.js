@@ -444,8 +444,11 @@ describe('DtModal Tests', () => {
       await wrapper.setProps({ modalOpen: true });
       await openPopover();
       await wrapper.setProps({ modalOpen: false });
-      // Transitions are stubbed, so close the dialog the way the modal's leave transition would.
       const dialog = wrapper.find('[data-qa="dt-modal"]').element;
+      // The browser queues close events, so one can arrive after the dialog has reopened.
+      dialog.dispatchEvent(new Event('close'));
+      expect(isLocked()).toBe(true);
+      // Transitions are stubbed, so close the dialog the way the modal's leave transition would.
       dialog.close();
       dialog.dispatchEvent(new Event('close'));
       expect(isLocked()).toBe(false);
