@@ -114,7 +114,7 @@ All semantic design tokens reference to these base colors, and base colors are n
               </template>
             </dt-tab>
           </dt-box>
-          <dt-toggle size="sm" class="d-g-100" v-model="showBaseDetails">
+          <dt-toggle :size="200" class="d-g-100" v-model="showBaseDetails">
             <dt-text kind="label" size="100" strength="normal">Show details</dt-text>
           </dt-toggle>
         </dt-stack>
@@ -152,7 +152,7 @@ Materials are the reference colors used for the "black" ramp, depending on the "
               </template>
             </dt-tab>
           </dt-box>
-          <dt-toggle size="sm" class="d-g-100" v-model="showMaterialDetails">
+          <dt-toggle :size="200" class="d-g-100" v-model="showMaterialDetails">
             <dt-text kind="label" size="100" strength="normal">Show details</dt-text>
           </dt-toggle>
         </dt-stack>

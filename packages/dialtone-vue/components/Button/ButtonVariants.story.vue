@@ -279,7 +279,7 @@ export default {
 
   data () {
     return {
-      sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
+      sizes: Object.keys(BUTTON_SIZE_MODIFIERS).map(Number).filter(Number.isInteger),
       importanceList: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
       iconPositions: Object.keys(ICON_POSITION_MODIFIERS),
       variantKinds: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'unstyled' && k !== 'inverted'),

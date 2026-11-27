@@ -19,7 +19,7 @@
           :aria-label="`Copy ${icon} icon name`"
           importance="clear"
           kind="muted"
-          size="lg"
+          :size="400"
           @click="copyIconName(icon)"
         >
           <template #startIcon="{ iconSize }">

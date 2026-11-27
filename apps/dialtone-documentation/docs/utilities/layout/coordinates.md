@@ -47,7 +47,7 @@ Use coordinate utilities when you need positioning on non-DtBox elements, respon
       <tbody>
         <tr v-for="{coordinate, suffix, combo, value } in coordinates">
           <th scope="row">
-            <dt-text kind="code" size="xs" strength="bold">
+            <dt-text variant="code-xs" strength="bold">
               <dt-text v-if="value.endsWith('rem')">
                 {{ value }}
                 <br>
@@ -112,7 +112,7 @@ Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{
       <tbody>
         <tr v-for="{coordinate, suffix, combo, negative, value } in coordinates">
           <th v-if="negative === 'yes'" scope="row">
-            <dt-text kind="code" size="xs" strength="bold">
+            <dt-text variant="code-xs" strength="bold">
               <dt-text v-if="value.endsWith('rem')">
                 {{ value }}
                 <br>

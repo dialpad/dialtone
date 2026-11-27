@@ -294,7 +294,7 @@ Use `as="span"` when you need an inline container.
       <tbody>
         <tr v-for="{ value: stop, output } in spacingValues" :key="stop" valign="baseline">
           <th scope="row" class="d-code--sm d-docsite-code">{{ stop }}</th>
-          <td><dt-text kind="code" size="xs">var(--dt-spacing-{{ stop }})</dt-text></td>
+          <td><dt-text variant="code-xs">var(--dt-spacing-{{ stop }})</dt-text></td>
           <td class="d-code--sm d-docsite-code d-ta-right">{{ output }}</td>
           <td class="d-code--sm d-docsite-code d-ta-right">{{ (parseFloat(output) * 10) }}px</td>
         </tr>
