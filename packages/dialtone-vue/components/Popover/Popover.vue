@@ -154,7 +154,7 @@ import ModeMixin from '@/common/mixins/mode';
 import { createTippyPopover, getPopperOptions } from './TippyUtils';
 import PopoverHeaderFooter from './PopoverHeaderFooter.vue';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
-import { addOwnedClass, removeOwnedClass } from '@/common/utils/owned_classes';
+import { addOwnedClass, removeOwnedClass } from '@/common/owned_classes';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -895,14 +895,12 @@ export default {
         return;
       }
       this.anchorEl = anchorEl;
-      // The held lock belongs to the previous anchor's context; move it to the new anchor's.
-      const hadScrollLock = Boolean(this._scrollLock);
-      this.enableScrolling();
 
       this.tip?.destroy();
       delete this.tip;
 
       if (!this.anchorEl) {
+        // Any held lock stays recorded and is released on close or unmount.
         console.warn('No anchor found for popover');
         return;
       }
@@ -911,7 +909,11 @@ export default {
         this.initTippyInstance();
         this.tip?.show();
       }
-      if (hadScrollLock) this.preventScrolling();
+      // A held lock belongs to the previous anchor's context; while open, move it to the new anchor's.
+      if (this._scrollLock) {
+        this.enableScrolling();
+        if (this.isOpen) this.preventScrolling();
+      }
     },
 
     popperOptions () {
@@ -1029,8 +1031,11 @@ export default {
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
         const rootElement = this.anchorEl.getRootNode().host;
+        // A dialog (such as DtModal) closing around this popover hides it, so release with the dialog.
+        const dialog = this.anchorEl.closest('dialog');
+        dialog?.addEventListener('close', this.enableScrolling);
         disableRootScrolling(rootElement, this);
-        this._scrollLock = { rootElement };
+        this._scrollLock = { rootElement, dialog };
         this.tip?.setProps({ offset: this.offset });
       } else {
         addOwnedClass(element, 'd-zi-popover', this);
@@ -1050,6 +1055,7 @@ export default {
         removeOwnedClass(lock.parentPopoverBox, this);
         return;
       }
+      lock.dialog?.removeEventListener('close', this.enableScrolling);
       enableRootScrolling(lock.rootElement, this);
       // Skip repositioning a tip that beforeUnmount is about to destroy.
       if (!this._isUnmounting) this.tip?.setProps({ offset: this.offset });

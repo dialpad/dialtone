@@ -497,9 +497,10 @@ export default {
         // Release from the root locked here, even if the dialog has since been teleported elsewhere.
         this._scrollLockRoot = this.getScrollRoot();
         disableRootScrolling(this._scrollLockRoot, this);
-      } else if (dialogEl.open) {
+      } else {
         // Leave transition plays via v-show on inner content.
         // close() is called in onAfterLeave when transition completes.
+        // Release even if the dialog was already closed natively (e.g. a method="dialog" form).
         enableRootScrolling(this._scrollLockRoot, this);
       }
     },

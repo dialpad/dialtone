@@ -8,7 +8,7 @@ import {
   Comment,
   Text,
 } from 'vue';
-import { addOwnedClass, hasClassOwners, removeOwnedClass } from './owned_classes.js';
+import { addOwnedClass, hasClassOwners, removeOwnedClass } from '../owned_classes.js';
 
 let UNIQUE_ID_COUNTER = 0;
 let TIMER;

@@ -1,6 +1,6 @@
 import { DtDropdown } from '@/components/Dropdown';
 import { DtListItem } from '@/components/ListItem';
-import { defineComponent, h, nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/Popover';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
@@ -1023,6 +1023,22 @@ describe('DtPopover Tests', () => {
       expect(isParentBoxLowered()).toBe(true);
       wrapper.unmount();
       expect(isParentBoxLowered()).toBe(false);
+    });
+
+    it('keeps the lock while the anchor is briefly missing', async () => {
+      vi.spyOn(console, 'warn').mockImplementation(() => {});
+      const showAnchor = ref(true);
+      wrapper.unmount();
+      mockSlots.anchor = ({ attrs }) => (showAnchor.value ? h('button', attrs, 'Open') : null);
+      updateWrapper();
+      await openPopover();
+      showAnchor.value = false;
+      await flushPromises();
+      showAnchor.value = true;
+      await flushPromises();
+      expect(isLocked()).toBe(true);
+      wrapper.unmount();
+      expect(isLocked()).toBe(false);
     });
 
     it('keeps a successor popover locked when the previous one finishes closing', async () => {

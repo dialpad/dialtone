@@ -380,7 +380,7 @@ describe('DtModal Tests', () => {
     });
   });
 
-  describe('Scroll lock shared with DtPopover', () => {
+  describe('Scroll lock', () => {
     const isLocked = () => document.documentElement.classList.contains('d-of-hidden');
 
     const mountWithPopover = popoverInside => {
@@ -428,6 +428,26 @@ describe('DtModal Tests', () => {
       enableRootScrolling();
       expect(isLocked()).toBe(true);
       await wrapper.setProps({ modalOpen: false });
+      expect(isLocked()).toBe(false);
+    });
+
+    it('releases the lock when the dialog was already closed natively', async () => {
+      mountWithPopover(false);
+      await wrapper.setProps({ modalOpen: true });
+      wrapper.find('[data-qa="dt-modal"]').element.close();
+      await wrapper.setProps({ modalOpen: false });
+      expect(isLocked()).toBe(false);
+    });
+
+    it('releases an open popover\'s lock when the modal around it closes', async () => {
+      mountWithPopover(true);
+      await wrapper.setProps({ modalOpen: true });
+      await openPopover();
+      await wrapper.setProps({ modalOpen: false });
+      // Transitions are stubbed, so close the dialog the way the modal's leave transition would.
+      const dialog = wrapper.find('[data-qa="dt-modal"]').element;
+      dialog.close();
+      dialog.dispatchEvent(new Event('close'));
       expect(isLocked()).toBe(false);
     });
   });
